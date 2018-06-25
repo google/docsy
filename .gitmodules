@@ -1,0 +1,6 @@
+[submodule "themes/tech-doc-hugo-theme/assets/vendor/bootstrap"]
+	path = themes/tech-doc-hugo-theme/assets/vendor/bootstrap
+	url = https://github.com/twbs/bootstrap.git
+[submodule "themes/tech-doc-hugo-theme/assets/vendor/Font-Awesome"]
+	path = themes/tech-doc-hugo-theme/assets/vendor/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome.git
