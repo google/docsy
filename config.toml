@@ -5,7 +5,6 @@ enableRobotsTXT = true
 
 # Hugo allows theme composition (and inheritance). The precedence is from left to right.
 theme = ["tech-doc-hugo-theme"]
-themesDir = ".."
 
 # Will give values to .Lastmod etc.
 enableGitInfo = true

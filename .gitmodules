@@ -1,0 +1,3 @@
+[submodule "themes/tech-doc-hugo-theme"]
+	path = themes/tech-doc-hugo-theme
+	url = https://github.com/bep/tech-doc-hugo-theme.git
