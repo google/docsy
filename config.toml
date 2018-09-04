@@ -1,0 +1,119 @@
+baseURL = "https://temp.bep.is/td/"
+title = "Tech OS"
+
+enableRobotsTXT = true
+
+# Hugo allows theme composition (and inheritance). The precedence is from left to right.
+theme = ["tech-doc-hugo-theme"]
+themesDir = ".."
+
+# Will give values to .Lastmod etc.
+enableGitInfo = true
+
+# Language settings
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+# Useful when translating.
+enableMissingTranslationPlaceholders = true
+
+disableKinds = ["taxonomy", "taxonomyTerm"]
+
+# Highlighting config
+pygmentsCodeFences = true
+pygmentsUseClasses = false
+# Use the new Chroma Go highlighter in Hugo.
+pygmentsUseClassic = false
+#pygmentsOptions = "linenos=table"
+# See https://help.farbox.com/pygments.html
+pygmentsStyle = "tango"
+
+ # First one is picked as the Twitter card image if not set on page.
+ #images = ["images/project-illustration.png"]
+
+# Configure how URLs look like per section.
+[permalinks]
+blog = "/:section/:year/:month/:day/:slug/"
+
+## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+angledQuotes = false
+latexDashes = true
+
+# Image processing configuration.
+[imaging]
+resampleFilter = "CatmullRom"
+quality = 75
+anchor = "smart"
+
+[services]
+[services.googleAnalytics]
+# Uncomment and insert your GA tracking ID to enable.
+# id = "INSERT ID"
+
+# Language configuration
+
+[languages]
+[languages.en]
+title = "TechOS"
+description = "TechOS is containers revisited"
+languageName ="English"
+# Weight used for sorting.
+weight = 1
+[languages.no]
+title = "TechOS"
+description = "TecOS er operativsystem for skyen"
+languageName ="Norsk"
+contentDir = "content/no"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
+
+
+# Everything below this are Site Params
+
+[params]
+copyright = "Global Inc"
+privacy_policy = "https://policies.google.com/privacy"
+github_repo = "https://github.com/bep/tech-doc-hugo"
+
+# Google Custom Search Engine ID. Remove or comment out to disable search.
+gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+
+# User interface configuration
+[params.ui]
+# Enable to show the side bar menu in its compact state.
+sidebar_menu_compact = false
+#  Set to true to disable breadcrumb navigation.
+breadcrumb_disable = false
+
+[params.links]
+# End user relevant links. These will show up on left side of footer.
+[[params.links.user]]
+	name = "Mailing List"
+	url = "https://example.org/mail"
+	icon = "fa fa-envelope"
+[[params.links.user]]
+	name ="Twitter"
+	url = "https://example.org/twitter"
+	icon = "fab fa-twitter"
+[[params.links.user]]
+	name = "Stack Overflow"
+	url = "https://example.org/stack"
+	icon = "fab fa-stack-overflow"
+# Developer relevant links. These will show up on right side of footer.
+[[params.links.developer]]
+	name = "GitHub"
+	url = "https://example.org/github"
+	icon = "fab fa-github"
+[[params.links.developer]]
+	name = "Slack"
+	url = "https://example.org/slack"
+	icon = "fab fa-slack"
+[[params.links.developer]]
+	name = "Mailing List"
+	url = "https://example.org/mail"
+	icon = "fa fa-envelope"
+
+
