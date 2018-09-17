@@ -1,4 +1,4 @@
-baseURL = "https://temp.bep.is/td/"
+baseURL = ""
 title = "Tech OS"
 
 enableRobotsTXT = true
