@@ -11,7 +11,7 @@
                     }
 
                     var query = $(this).val();
-                    var searchPage = "https://temp.bep.is/td/search/?q=" + query;
+                    var searchPage = "search/?q=" + query;
                     document.location = searchPage;
 
                     return false;
