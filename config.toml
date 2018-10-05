@@ -1,5 +1,5 @@
 baseURL = ""
-title = "Tech OS"
+title = "Docsy Example"
 
 enableRobotsTXT = true
 
@@ -56,14 +56,14 @@ anchor = "smart"
 
 [languages]
 [languages.en]
-title = "TechOS"
-description = "TechOS is containers revisited"
+title = "Docsy"
+description = "Docsy does docs"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
 [languages.no]
-title = "TechOS"
-description = "TecOS er operativsystem for skyen"
+title = "Docsy"
+description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
 time_format_default = "02.01.2006"
@@ -75,7 +75,7 @@ time_format_blog = "02.01.2006"
 [params]
 copyright = "Global Inc"
 privacy_policy = "https://policies.google.com/privacy"
-github_repo = "https://github.com/bep/tech-doc-hugo"
+github_repo = "https://github.com/google/docsy-example"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
@@ -88,31 +88,37 @@ sidebar_menu_compact = false
 breadcrumb_disable = false
 
 [params.links]
-# End user relevant links. These will show up on left side of footer.
+# End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
-	name = "Mailing List"
+	name = "User mailing list"
 	url = "https://example.org/mail"
 	icon = "fa fa-envelope"
+        desc = "Discussion and help from your fellow users"
 [[params.links.user]]
 	name ="Twitter"
 	url = "https://example.org/twitter"
 	icon = "fab fa-twitter"
+        desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
 	name = "Stack Overflow"
 	url = "https://example.org/stack"
 	icon = "fab fa-stack-overflow"
-# Developer relevant links. These will show up on right side of footer.
+        desc = "Practical questions and curated answers"
+# Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
 	url = "https://example.org/github"
 	icon = "fab fa-github"
+        desc = "Development takes place here!"
 [[params.links.developer]]
 	name = "Slack"
 	url = "https://example.org/slack"
 	icon = "fab fa-slack"
+        desc = "Chat with other project developers"
 [[params.links.developer]]
-	name = "Mailing List"
+	name = "Developer mailing list"
 	url = "https://example.org/mail"
 	icon = "fa fa-envelope"
+        desc = "Discuss development issues around the project"
 
 
