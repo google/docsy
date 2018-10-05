@@ -1,8 +1,8 @@
 
 ---
-title: "Another Great Release"
-linkTitle: "Release Maintainance"
-date: 2017-03-03
+title: "The second blog post"
+linkTitle: "Second blog post"
+date: 2018-10-06
 description: >
   A short lead descripton about this content page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
 ---
