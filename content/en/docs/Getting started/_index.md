@@ -12,9 +12,11 @@ resources:
     byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
 ---
 
-## Installing theme tools
+Welcome to the Docsy theme user guide! This guide shows you how to get started creating technical documentation sites using Docsy, including site customization and how to use Docsy's blocks and templates.
 
-You need a [recent version](https://github.com/gohugoio/hugo/releases) of Hugo to run this project locally (if you install from the release page, make sure to get the `extended` Hugo version). Hugo can be installed via Brew if you're running MacOs.
+## Installation and prerequisites 
+
+You need a [recent version](https://github.com/gohugoio/hugo/releases) of Hugo to build and run sites (like this one) that use Docsy locally. If you install from the release page, make sure to get the `extended` Hugo version, which supports SCSS. Hugo can be installed via Brew if you're running MacOs.
 
 ```bash
 cd <your-hugo-project>/themes
@@ -36,6 +38,12 @@ npm install -g postcss-cli
 npm install -g autoprefixer
 ```
 
+To use a local version of the theme files during site development, clone the repo using:
+
+```
+git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
+```
+
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/)
 
 ## Using the theme
@@ -51,7 +59,7 @@ See the examples with comments in `config.toml` in this project for how to add y
 
 ## Content sections
 
-The theme comes with templates for the top level sections `docs`, `blog`, and `community`, and a default landing page type of template used for any other section. The `community` landing page template has boilerplate content that's automatically filled in with your community links.
+The theme comes with templates for the top level sections `docs`, `blog`, and `community`, and a default landing page type of template used for any other section. The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`.
 
 ### RSS feeds
 
@@ -417,7 +425,7 @@ Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deplo
 At the moment due to Netlify system limitations, Netlify does not support the "extended" version of Hugo needed to use SCSS, which is used by our theme. This is a known issue and the fix will be rolled out in future versions of Netlify. A workaround until then is to build the site on your local machine with "extended" Hugo, and then commit the generated `resources/` folder to your site repo on GitHub.  To do this:
 
 1.  Ensure you have an up to date local copy of your site files cloned from your repo.
-1.  Ensure you have the tools described in Installing Theme Tools installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources).
+1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources).
 1.  Run the `hugo` command in your site root.
 1.  Add the generated `resources/` directory and commit back to the repo.
 
