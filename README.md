@@ -6,7 +6,9 @@ You can find an example site project that uses Docsy in [Docsy-Example](https://
 
 * Copy and edit the example site’s repo, which will also give you a skeleton structure for your top-level and documentation sections.
 * Specify the Docsy theme like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
- when creating or updating your site. This gives you all the theme-y goodness but you’ll need to specify your own site   structure.
+ when creating or updating your site. This gives you all the theme-y goodness but you’ll need to specify your own site structure.
+
+This is not an officially supported Google product.
 
 ## Installation and prerequisites
 
