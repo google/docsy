@@ -2,6 +2,7 @@ Docsy is a Hugo theme for technical documentation sites, providing easy site nav
 
 You can find detailed theme instructions in the example project under **Documentation - Getting Started**.
 
+This is not an officially supported Google product.
 
 ## Cloning the Example Project
 
