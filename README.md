@@ -1,6 +1,11 @@
-## In Example Project
+Docsy is a Hugo theme for technical documentation sites, providing easy site navigation, structure, and more. This Docsy example site project uses the Docsy theme, as well as providing a skeleton documentation structure for you to use. You can either copy this project and edit it with your own content (which you can do from the example or theme project), or use the theme in your projects like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
 
-The below will give you project that is set up and ready to use.
+You can find detailed theme instructions in the example project under **Documentation - Getting Started**.
+
+
+## Cloning the Example Project
+
+The following will give you a project that is set up and ready to use.
 
 ```bash
 git clone --recurse-submodules --depth 1 https://github.com/bep/tech-doc-hugo-example.git
@@ -21,7 +26,7 @@ If you want to do SCSS edits and want to publish these, you need to install `Pos
 npm install
 ```
 
-## In Theme Project
+### Cloning the Example from the Theme Project
 
 
 ```bash
@@ -38,3 +43,13 @@ git subtree add --prefix exampleSite https://github.com/bep/tech-doc-hugo-exampl
 ```
 
 To pull in changes, see `pull-deps.sh` script in the theme.
+
+## Running the website locally
+
+Once you've cloned the site repo, from the repo root folder, run:
+
+```
+hugo server
+```
+
+Navigate to http://localhost:1313/td/docs/getting-started/ to read the theme documentaton.
