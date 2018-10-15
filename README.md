@@ -27,7 +27,7 @@ If you want to do SCSS edits and want to publish these, you need to install `Pos
 npm install
 ```
 
-### Cloning the Example from the Theme Project
+<!--### Cloning the Example from the Theme Project
 
 
 ```bash
@@ -43,7 +43,7 @@ Note that the Hugo Theme Site requires the `exampleSite` to live in a subfolder 
 git subtree add --prefix exampleSite https://github.com/google/docsy.git  master --squash
 ```
 
-To pull in changes, see `pull-deps.sh` script in the theme.
+To pull in changes, see `pull-deps.sh` script in the theme.-->
 
 ## Running the website locally
 
