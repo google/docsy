@@ -16,7 +16,7 @@ Welcome to the Docsy theme user guide! This guide shows you how to get started c
 
 ## Installation and prerequisites 
 
-You need a [recent version](https://github.com/gohugoio/hugo/releases) of Hugo to build and run sites (like this one) that use Docsy locally. If you install from the release page, make sure to get the `extended` Hugo version, which supports SCSS. Hugo can be installed via Brew if you're running MacOs.
+You need a [recent version](https://github.com/gohugoio/hugo/releases) of Hugo to build and run sites (like this one) that use Docsy locally. If you install from the release page, make sure to get the `extended` Hugo version, which supports SCSS: you may need to scroll down the list of releases. Hugo can be installed via Brew if you're running MacOs. If you're a Linux user, do not use `sudo apt-get install hugo`, as it currently doesn't get you the `extended` version.
 
 If you want to do stylesheet changes, you will also need `PostCSS` to create the final assets:
 
