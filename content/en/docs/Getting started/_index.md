@@ -418,13 +418,31 @@ Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deplo
 {{% alert title="Warning" color="warning" %}}
 At the moment due to Netlify system limitations, Netlify does not support the "extended" version of Hugo needed to use SCSS, which is used by our theme. This is a known issue and the fix will be rolled out in future versions of Netlify. A workaround until then is to build the site on your local machine with "extended" Hugo, and then commit the generated `resources/` folder to your site repo on GitHub.  To do this:
 
-1.  Ensure you have an up to date local copy of your site files cloned from your repo.
-1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources).
+1.  Ensure you have an up to date local copy of your site files cloned from your repo. Don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site.
+
+    ```
+    git clone --recurse-submodules --depth 1 https://github.com/my/example.git
+    ```
+
+1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli`: you'll need it to generate the site resources.
 1.  Run the `hugo` command in your site root.
-1.  Add the generated `resources/` directory and commit back to the repo.
+1.  Add the generated `resources/` directory using `git add -f resources`, and commit back to the repo.
 
 You should now be able to serve the complete site from GitHub using Netlify. Please check our docs for updates on when you will no longer need this workaround.
 {{% /alert %}}
+
+### Serving your site locally
+
+Depending on your deployment choice you may want to serve your site locally during development to preview content changes. To serve your site locally:
+
+1.  Ensure you have an up to date local copy of your site files cloned from your repo. Don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site.
+
+    ```
+    git clone --recurse-submodules --depth 1 https://github.com/my/example.git
+    ```
+
+1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
+1.  Run the `hugo server` command in your site root.
 
 ## Images used on this site
 
