@@ -413,7 +413,7 @@ There are multiple possible options for deploying a Hugo site; you can read abou
 
 We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from GitHub, with continuous deployment from GitHub, previews, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
 
-Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to deploy your site.
+Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to deploy your site. Specify at least the 0.47 version of Hugo when configuring your deployment as earlier versions won't work with this theme.
 
 {{% alert title="Warning" color="warning" %}}
 At the moment due to Netlify system limitations, Netlify does not support the "extended" version of Hugo needed to use SCSS, which is used by our theme. This is a known issue and the fix will be rolled out in future versions of Netlify. A workaround until then is to build the site on your local machine with "extended" Hugo, and then commit the generated `resources/` folder to your site repo on GitHub.  To do this:
