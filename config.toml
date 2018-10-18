@@ -107,7 +107,7 @@ breadcrumb_disable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
-	url = "https://example.org/github"
+	url = "https://github.com/google/docsy"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
 [[params.links.developer]]
