@@ -460,9 +460,7 @@ Depending on your deployment choice you may want to serve your site locally duri
     {{% alert title="Note" color="primary" %}}
 If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
     
-    ```
     git submodule update --init --recursive
-    ```
     {{% /alert %}}
 
 1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
