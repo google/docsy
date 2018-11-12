@@ -456,9 +456,42 @@ Depending on your deployment choice you may want to serve your site locally duri
     ```
     git clone --recurse-submodules --depth 1 https://github.com/my/example.git
     ```
+   
+    {{% alert title="Note" color="warning" %}}
+    If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
+    
+    ```
+    git submodule update --init --recursive
+    ```
+    {{% /alert %}}
 
 1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
 1.  Run the `hugo server` command in your site root.
+
+## Keeping the theme up to date
+
+We hope to continue to make improvements to the theme along with the Docsy community. If you have cloned the example site (or are otherwise using the theme as a submodule), you can update the theme submodule yourself as follows:
+
+1. In your local copy of your project, run:
+
+    ```
+    git submodule update --remote
+    ```
+    
+1. Then add and commit your change:
+
+    ```
+    git add themes/
+    git commit -m "Updating theme submodule"
+    ```
+
+1. Finally, push the change back to the project repo.
+
+    ```
+    git push origin master
+    ```
+    
+If you've cloned the theme yourself, use `git pull origin master` in the theme root directory to get the latest version.
 
 ## Images used on this site
 
