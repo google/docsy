@@ -340,7 +340,7 @@ resources:
 | 3 | Processing options, e.g. `400x450`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-methods).
 
 
-## CSS utilitiies
+## CSS utilities
 
 For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some some color state CSS classes that can be useful in a dynamic context (when you don't know if the `primary` color is dark or light or you receive the color code as a shortcode parameter):
 
@@ -372,7 +372,7 @@ For `.-bg-<color>`, the text colors will be adjusted to get proper contrast:
 
 ### Navigation
 
-If you configure more than one language in `config.toml, a language selector will be added to the top-level menu. It will take you to the translated version of the current page, or the home page for the given language.
+If you configure more than one language in `config.toml`, a language selector will be added to the top-level menu. It will take you to the translated version of the current page, or the home page for the given language.
 
 ### i18n bundles
 
@@ -401,7 +401,7 @@ If you have special favicon requirements, you can create your own `layouts/parti
 ## Configure search
 
 1. Add your Google Custom Search Engine ID to the site params in `config.toml`. You can add different values per language if needed.
-2. Add a content file in `content/en/search.md` (and one per other languages if needed). It only needs a title and `layout: search.
+2. Add a content file in `content/en/search.md` (and one per other languages if needed). It only needs a title and `layout: search`.
 
 ## Customizing templates
 
