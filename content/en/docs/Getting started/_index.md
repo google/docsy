@@ -457,8 +457,8 @@ Depending on your deployment choice you may want to serve your site locally duri
     git clone --recurse-submodules --depth 1 https://github.com/my/example.git
     ```
    
-    {{% alert title="Note" color="warning" %}}
-    If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
+    {{% alert title="Note" color="primary %}}
+If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
     
     ```
     git submodule update --init --recursive
