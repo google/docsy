@@ -49,11 +49,17 @@ To use the Docsy Hugo theme, you can either:
 
 ## Configuring your site
 
-See the examples with comments in `config.toml` in this project for how to add your project name, community links, configure Google Analytics, and so on.
+See the examples with comments in `config.toml` in this project for how to add your project name, community links, configure Google Analytics, and so on. We recommend copying this `config.toml` and editing it even if you're just using the theme and not copying the entire Docsy example site.
 
 ## Content sections
 
-The theme comes with templates for the top level sections `docs`, `blog`, and `community`, and a default landing page type of template used for any other section. The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`.
+The theme comes with templates for the top level sections `docs`, `blog`, and `community`, and a default landing page type of template used for any other section (in our example site it's used for the site landing page and the About page). See the pages in this site for examples of how to use the templates. For example, this page is in the `docs` folder so Hugo automatically applies the `docs` layout, which includes a left nav, page contents, and GitHub links (populated from your site config) for readers to edit the page or create issues.
+
+Both the example site landing page and About page use Docsy's provided Hugo shortcode [page blocks](#shortcode-blocks) to quickly build the page. You can find out more about configuring your landing pages in [customizing landing pages](#customizing_landing_pages).
+
+The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`.
+
+You can find out much more about how Hugo page layouts work in [Hugo Templates](https://gohugo.io/templates/).
 
 ### RSS feeds
 
@@ -62,6 +68,15 @@ Hugo will, by default, create an RSS feed for the home page and any section. For
 ```toml
 rss_sections = ["blog"]
 ```
+## Customizing landing pages.
+
+If you've copied this example site, you already have a simple site landing page made up of Docsy's provided Hugo shortcode [page blocks](#shortcode-blocks) in `content/en/_index.html`. To customize the large landing image, which is in a [cover](#blocks-cover) block, replace the `content/en/featured-background.jpg` file in your project with your own image (it can be called whatever you like as long as it has `background` in the file name). You can remove or add as many blocks as you like, as well as adding your own custom content. 
+
+The example site also has an About page in `content/en/about/_index.html` using the same Docsy landing page template. Again, this is made up of [page blocks](#shortcode-blocks), including another background image in `content/en/about/featured-background.jpg`. As with the site landing page, you can replace the image, remove or add blocks, or just add your own content.
+
+If you've just used the theme, you can still use all the provided page blocks (or any other content you want) to build your own landing pages in the same file locations.
+
+Find out more about using Docsy's page blocks in [Shortcode Blocks](#shortcode-blocks) below.
 
 ## Configuring navigation
 
@@ -387,7 +402,6 @@ If you have special favicon requirements, you can create your own `layouts/parti
 
 1. Add your Google Custom Search Engine ID to the site params in `config.toml`. You can add different values per language if needed.
 2. Add a content file in `content/en/search.md` (and one per other languages if needed). It only needs a title and `layout: search.
-
 
 ## Customizing templates
 
