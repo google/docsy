@@ -2,7 +2,7 @@
 
 You can find detailed theme instructions in the example project under **Documentation - Getting Started**.
 
-This is not an officially supported Google product.
+This is not an officially supported Google product. This project is currently maintained.
 
 ## Cloning the Example Project
 
