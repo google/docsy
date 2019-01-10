@@ -2,10 +2,12 @@
 
 Docsy is a Hugo theme for technical documentation sets, providing simple navigation, site structure, and more.
 
-You can find an example site project that uses Docsy in [Docsy-Example](https://github.com/google/docsy-example). To use the Docsy Hugo theme, you can either:
+You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example). The Docsy Example Project is hosted at [https://testydocsy.netlify.com/](https://testydocsy.netlify.com/), where you can find detailed theme instructions under **Documentation -> Getting Started**.
 
-* Copy and edit the example site’s repo, which will also give you a skeleton structure for your top-level and documentation sections.
-* Specify the Docsy theme like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
+To use the Docsy theme, you can either:
+
+* Copy and edit the example site’s repo, which will also give you a skeleton structure for your top-level and documentation sections, or
+* Specify the Docsy theme like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/)
  when creating or updating your site. This gives you all the theme-y goodness but you’ll need to specify your own site structure.
 
 This is not an officially supported Google product. This project is currently maintained.
@@ -28,4 +30,5 @@ git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
 
 ## Theme documentation
 
-Detailed documentation for this theme is in the [Docsy example site](https://github.com/google/docsy-example) under **Documentation - Getting Started**.
+Detailed documentation for this theme is in the Docsy Example Project under **Documentation -> Getting Started**.
+The Docsy Example Project is on [GitHub](https://github.com/google/docsy-example) and is hosted at [https://testydocsy.netlify.com/](https://testydocsy.netlify.com/).
