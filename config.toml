@@ -47,6 +47,17 @@ resampleFilter = "CatmullRom"
 quality = 75
 anchor = "smart"
 
+# Additional menu items
+
+[[menu.main]]
+    name = "Example Site"
+    weight = 40
+    url = "https://testydocsy.netlify.com"
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/google/docsy/"
+
 [services]
 [services.googleAnalytics]
 # Comment out the next line to disable GA tracking. Also disables the feature described in [params.ui.feedback].
@@ -61,14 +72,6 @@ description = "Docsy does docs"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
-[languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
-languageName ="Norsk"
-contentDir = "content/no"
-time_format_default = "02.01.2006"
-time_format_blog = "02.01.2006"
-
 
 # Everything below this are Site Params
 
@@ -78,7 +81,7 @@ privacy_policy = "https://policies.google.com/privacy"
 github_repo = "https://github.com/google/docsy-example"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+# gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 
 # User interface configuration
 [params.ui]

@@ -3,11 +3,7 @@ title: "Overview"
 linkTitle: "Overview"
 weight: 1
 description: >
-  A short lead descripton about this section page. Text here can also be **bold** or _italic_ and can even be split over multiple paragraphs.
+  Overviewy overviewy
 ---
 
-This is the section landing page.
-
-* Summarize
-* Your section
-* Here
+Do we need to put an overview here or can we do it in the Documentation landing page? Decisions, decisions....
