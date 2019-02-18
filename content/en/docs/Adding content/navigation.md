@@ -3,20 +3,26 @@ title: "Navigation and Search"
 date: 2017-01-05
 weight: 3
 description: >
-  This page describes how site navigation works in Docsy, and how to customize it for your site.
+   Customize site navigation and search for your Docsy site.
 ---
 
 ## Top-level menu
 
-Add a page or section to the top level menu (the one that appears in the top navigation bar for the entire site) by adding it to the site's `main` menu in either `config.toml` or in page front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). The menu is ordered from left to right by page `weight`:
+The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`. 
+
+To add a page or section to this menu, add it to the site's `main` menu in either `config.toml` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
 ```yaml
+---
+title: "Docsy Documentation"
+linkTitle: "Documentation"
 menu:
   main:
     weight: 20
+---
 ```
 
-So, for example, a section index or page with `weight: 30` would appear after this page in the menu, while one with `weight: 10` would appear before it.
+The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
 
 If you want to add a link to an external site to this menu, add it in `config.toml`, specifying the `weight`.
 
@@ -29,7 +35,7 @@ If you want to add a link to an external site to this menu, add it in `config.to
 
 ## Section menu
 
-The section menu, as shown in the left side of the `docs` section, is automatically built from the content tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title` or `linkTitle` (if different) as its link title in the menu. If a section subfolder has other pages besides its `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
+The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title` or `linkTitle` (if different) as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
 
 ```yaml
 ---
@@ -38,7 +44,7 @@ linkTitle: "Navigation and Search"
 date: 2017-01-05
 weight: 3
 description: >
-  This page describes how site navigation works in Docsy, and how to customize it for your site.
+  Customize site navigation and search for your Docsy site.
 ---
 ```
 
@@ -52,16 +58,31 @@ Breadcrumb navigation is enabled by default. To disable breadcrumb navigation, s
 
 ## Configure search
 
-By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) to search your site. If you want to use this feature, you'll first need to set up the search engine and ensure your site is indexed.
+By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) to search your site. To enable this feature, you'll first need to make sure that you have built a public production version of your site, as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
 
-1. Deploy your site and ensure that it's built with `HUGO_ENV="production"`, as Google will only crawl and index Docsy sites built with this setting (you probably don't want your not-ready-for-prime-time site to be searchable!). You can specify this variable either as a command line flag to Hugo, or if you're using Netlify, as a Netlify deployment setting along with the Hugo version. It may take a day or so before your site has actual search results available.
-2. Create a Google Custom Search Engine for your deployed site by clicking **New Search Engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
+1.  Deploy your site and ensure that it's built with `HUGO_ENV="production"`, as Google will only crawl and index Docsy sites built with this setting (you probably don't want your not-ready-for-prime-time site to be searchable!). You can specify this variable as a command line flag to Hugo: 
+
+    ```
+    $ env HUGO_ENV="production" hugo
+    ```
+
+    Alternatively, if you're using Netlify, you can specify it as a Netlify [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) in `netlify.toml` or the Netlify UI, along with the Hugo version. It may take a day or so before your site has actual search results available.
+2.  Create a Google Custom Search Engine for your deployed site by clicking **New Search Engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
 
 ### Adding the search page
 
 Once you have your search engine, you can add the feature to your site:
+
+1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
+
+    ```
+    ---
+    title: Search Results
+    layout: search
+    ---
+    ```
 
 1. Add your Google Custom Search Engine ID to the site params in `config.toml`. You can add different values per language if needed.
 
@@ -69,8 +90,6 @@ Once you have your search engine, you can add the feature to your site:
     # Google Custom Search Engine ID. Remove or comment out to disable search.
     gcs_engine_id = "011737558837375720776:fsdu1nryfng"
     ```
-
-2. Ensure you have a content file in `content/en/search.md` (and one per other languages if needed). It only needs a title and `layout: search`.
 
 ### Disabling search
 

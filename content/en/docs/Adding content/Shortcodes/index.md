@@ -4,17 +4,18 @@ linkTitle: "Docsy Shortcodes"
 date: 2017-01-05
 weight: 5
 description: >
-  This page describes how to use Docsy's Hugo shortcodes to quickly build site pages.
+  Use Docsy's Hugo shortcodes to quickly build site pages.
 resources:
 - src: "**spruce*.jpg"
   params:
     byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
 ---
 
+Rather than writing all your site pages from scratch, Hugo lets you define and use [shortcodes](https://gohugo.io/content-management/shortcodes/). These are reusable snippets of content that you can include in your pages, often using HTML to create effects that are difficult or impossible to do in simple Markdown. Shortcodes can also have parameters that let you, for example, add your own text to a fancy shortcode text box. As well as Hugo's [built-in shortcodes](https://gohugo.io/content-management/shortcodes/), Docsy provides some shortcodes of its own to help you build your pages.
 
 ## Shortcode blocks
 
-The theme comes with a set of custom  **Page Blocks** as [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/) that can be used to compose landing pages, about pages and similar.
+The theme comes with a set of custom  **Page Block** shortcodes that can be used to compose landing pages, about pages, and similar.
 
 These blocks share some common parameters:
 
@@ -26,7 +27,7 @@ color
 
 ### blocks/cover
 
-The **blocks/cover** shortcode is meant to create a landing page type of block that fills the top of the page.
+The **blocks/cover** shortcode creates a landing page type of block that fills the top of the page.
 
 ```html
 {{</* blocks/cover title="Welcome!" image_anchor="center" height="full" color="primary" */>}}
@@ -48,7 +49,7 @@ The **blocks/cover** shortcode is meant to create a landing page type of block t
 Note that the relevant shortcode parameters above will have sensible defaults, but is included here for completeness.
 
 {{% alert title="Hugo Tip" %}}
-> Using the bracket styled shortcode delimiter, `>}}`, tells Hugo that the inner content is HTML/plain text and needs no further processing. Changing it to `%}}` will treat it as Markdown. These can be mixed.
+> Using the bracket styled shortcode delimiter, `>}}`, tells Hugo that the inner content is HTML/plain text and needs no further processing. Changing the delimiter to `%}}` means Hugo will treat the content as Markdown. You can use both styles in your pages.
 {{% /alert %}}
 
 
@@ -60,7 +61,7 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 | color | | See above. 
 
 
-To set the background image, place an image with the word "background" in the name inside the [Page Bundle](https://gohugo.io/content-management/page-bundles/).
+To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/master/content/en), in the same directory.
 
 {{% alert title="Tip" %}}
 If you also include the word **featured** in the image name, e.g. `my-featured-background.jpg`, it will also be used as the Twitter Card image when shared.
@@ -169,7 +170,7 @@ This is a warning.
 
 ###  imgproc
 
-The **imgproc** shortcode finds an image in the current [Page Bundle](https://gohugo.io/content-management/page-bundles/) and scales it given a set of processing instructions.
+The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a set of processing instructions.
 
 
 ```go-html-template

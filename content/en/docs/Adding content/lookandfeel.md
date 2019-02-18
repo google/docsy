@@ -54,14 +54,16 @@ Note that if you decide to go with a font with different weights (in the built-i
 
 ## CSS utilities
 
-For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some some color state CSS classes that can be useful in a dynamic context (when you don't know if the `primary` color is dark or light or you receive the color code as a shortcode parameter):
+For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some some color state CSS classes that can be useful in a dynamic context:
 
 * `.-bg-<color>`
 * `.-text-<color>`
 
+You can use these classes, for example, to style your text in an appropriate color when you don't know if the `primary` color is dark or light, to ensure proper color contrast. They are also useful when you receive the color code as a [shortcode](/docs/shortcodes/) parameter.
+
 The value of `<color>` can be any of the color names, `primary`, `white`, `dark`, `warning`, `light`, `success`, `300`, `blue`, `orange` etc.
 
-For `.-bg-<color>`, the text colors will be adjusted to get proper contrast:
+When you use `.-bg-<color>`, the text colors will be adjusted to get proper contrast:
 
 ```html
 <div class="-bg-primary p-3 display-4">Background: Primary</div>
@@ -89,11 +91,37 @@ If you need to add some code (CSS import or similar) to the `head` section on ev
 layouts/partials/hooks/head-end.html
 ```
 
-And add the code you need in that file.
+And add the code you need in that file. Your partial code is automatically included at the end of the theme partial [head.html](https://github.com/google/docsy/blob/master/layouts/partials/head.html) (the [theme version](https://github.com/google/docsy/blob/master/layouts/partials/head.html) of `head-end.html` is empty):
 
-Similar, if you want to add some code right before the `body` end:
+
+Similar, if you want to add some code right before the `body` end, create your own version of the following file:
 
 ```
 layouts/partials/hooks/body-end.html
+```
+
+Any code in this file is included automatically at the end of the theme partial [`scripts.html`](https://github.com/google/docsy/blob/master/layouts/partials/head.html).
+
+Both `head.html` and `scripts.html` are then used to build Docsy's [base page layout](https://github.com/google/docsy/blob/master/layouts/_default/baseof.html), which is used by all the other page templates:
+
+```html
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}" class="no-js">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body class="td-{{ .Kind }}">
+    <header>
+      {{ partial "navbar.html" . }}
+    </header>
+    <div class="container-fluid td-default td-outer">
+      <main role="main" class="td-main">
+        {{ block "main" . }}{{ end }}
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+    {{ partialCached "scripts.html" . }}
+  </body>
+</html>
 ```
 

@@ -3,7 +3,7 @@ title: "Organizing Your Content"
 linkTitle: "Organizing Your Content"
 weight: 9
 description: >
-  This section provides some optional guidance and recommendations on how to organize your documentation site.
+  Optional guidance and recommendations on how to organize your documentation site.
 ---
 
 If you have a look at our example site, you'll see that we've organized the Documentation section into a number of subsections, each with some recommendations about what you might put in that section.
