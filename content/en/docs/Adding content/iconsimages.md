@@ -4,12 +4,12 @@ linkTitle: "Logos and Images"
 date: 2017-01-05
 weight: 6
 description: >
-  This page describes how to add and customize logos, icons, and images in your project.
+  Add and customize logos, icons, and images in your project.
 ---
 
 ## Add your logo
 
-Add your project logo to `assets/icons/logo.svg` in your project. This overrides the default Docsy logo in the theme.
+Add your project logo as `assets/icons/logo.svg` in your project. This overrides the default Docsy logo in the theme.
 
 ## Add your favicons
 
