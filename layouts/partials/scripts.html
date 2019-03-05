@@ -11,3 +11,7 @@
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 {{ end }}
 {{ partial "hooks/body-end.html" . }}
+
+{{ if (.Site.GoogleAnalytics) }}
+    {{ partial "google-analytics.html" . }}
+{{ end }}

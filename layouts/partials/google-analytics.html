@@ -1,0 +1,17 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://www.googletagmanager.com/gtag/js?id=' + {{ .Site.GoogleAnalytics }};
+s.setAttribute('async', '');
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', {{ .Site.GoogleAnalytics }});
+</script>
+
