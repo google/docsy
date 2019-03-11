@@ -9,7 +9,7 @@ other = "Previous"
 other = "Next"
 
 [ui_read_more]
-other = "Read More"
+other = "Read more"
 
 [ui_search]
 other = "Search this site…"
