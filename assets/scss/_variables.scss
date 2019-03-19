@@ -61,8 +61,8 @@ $link-hover-decoration: none !default;
 
 // Fonts
 
-$google_font_name: "Open Sans";
-$google_font_family: "Open+Sans:300,300i,400,400i,700,700i";
+$google_font_name: "Open Sans" !default;
+$google_font_family: "Open+Sans:300,300i,400,400i,700,700i" !default;
 $web-font-path: "https://fonts.googleapis.com/css?family=#{$google_font_family}";
 
 $td-fonts-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
