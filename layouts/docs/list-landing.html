@@ -20,8 +20,7 @@
             {{ if eq .Parent $parent }}
                 <div class="entry">
                     <h5>
-                        <a href="{{ .Permalink }}">{{- if .Params.icon -}}<i class="page-icon">
-                                {{- partial "icon.html" .Params.icon -}}</i>{{- end -}}{{- .Title -}}</a>
+                        <a href="{{ .Permalink }}">{{- .Title -}}</a>
                     </h5>
                     <p>{{ .Description }}</p>
                 </div>
