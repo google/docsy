@@ -1,0 +1,32 @@
+.section-index {
+    display: grid;
+    grid-template-columns: [entry] 1fr;
+
+    @media (min-width: sm) {
+        grid-template-columns: [entry] 1fr [entry] 1fr;
+    }
+
+    @media (min-width: xl) {
+        grid-template-columns: [entry] 1fr [entry] 1fr [entry] 1fr;
+    }
+
+    .entry {
+        padding: 1rem 1rem;
+
+        @media (min-width: md) {
+            padding: 1rem 4rem;
+        }
+    }
+
+    h5 {
+        margin-bottom: 0;
+
+        a {
+            font-weight: 700;
+        }
+    }
+
+    p {
+        margin-top: 0;
+    }
+}
