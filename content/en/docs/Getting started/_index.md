@@ -13,7 +13,9 @@ description: >
 
 ### Install Hugo 
 
-You need a [recent version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.54.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
+You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.53 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
+
+For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
 #### Linux
 
@@ -24,14 +26,12 @@ If you've already installed Hugo, check your version:
 ```
 hugo version
 ```
-If the result is `v0.5` or earlier, or if you don't see `Extended`, you'll need to install the latest version.
+If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version.
     
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
-3.  Download
-    [hugo_extended_0.52_Linux-64bit.tar.gz](https://github.com/gohugoio/hugo/releases/download/v0.52/hugo_extended_0.52_Linux-64bit.tar.gz)
-    (or the latest version).
+3.  Download the latest extended version (`hugo_extended_0.5X_Linux-64bit.tar.gz`).
 4.  Create a new directory:
 
         mkdir hugo
@@ -46,15 +46,13 @@ If the result is `v0.5` or earlier, or if you don't see `Extended`, you'll need 
 
         sudo install hugo /usr/bin    
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
-
 #### macOS
 
 Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
 
 ### Install PostCSS
 
-If you plan to make any stylesheet changes, you will also need `PostCSS` to create the final assets:
+To build or update your site's CSS resources, you also need `PostCSS` to create the final assets:
 
 ```
 $ npm install -D --save autoprefixer
@@ -77,7 +75,7 @@ To use the Docsy Hugo theme, you have a couple of options:
 
 ## Option 1: Clone the Docsy example site
 
-You can clone the Docsy site using the command line or the Github UI.
+You can clone the Docsy site using the command line or the GitHub UI.
 
 ### Using the command line
 
@@ -88,7 +86,7 @@ To copy the example site:
     ```bash
     git clone https://github.com/google/docsy-example.git
     ```
-1. In Github, create a [new empty repo](https://help.github.com/en/articles/create-a-repo) for your site. 
+1. In GitHub, create a [new empty repo](https://help.github.com/en/articles/create-a-repo) for your site. 
 
 1. Change your local copy's `origin` to your new repo (otherwise you'll be trying to push changes to the Docsy example site rather than to your own site):
 
@@ -112,7 +110,7 @@ To copy the example site:
     
 
     {{% alert title="Tip" %}}
-If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed with the next step as normal. You can remove the `old` remote once you've pushed to your repo.
+If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed to set the new origin. You can remove the `old` remote once you've pushed to your repo.
 
     $ git remote add old https://github.com/google/docsy-example.git
     $ git fetch unshallow old
@@ -123,7 +121,7 @@ If you've already cloned the example site with `--recurse-submodules --depth 1` 
 
 Note that the following approach will create a link in GitHub between your project and the Docsy example site project):
 
-1.  In the [the Docsy example site's Github repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
+1.  In the [the Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
 1.  Rename your new fork:
     1.  Click **Settings**, and type a new name in the **Repository name** field.
 1.  Make your own local working copy of your repo using `git clone`, recursing into the submodules:
@@ -138,6 +136,8 @@ You can now edit your local versions of the site's source files. To preview your
 
 Specify the [Docsy theme](https://github.com/google/docsy) like any other Hugo theme when creating or updating your site. This gives you all the theme-y goodness but you'll need to specify your own site structure.  You can either use the theme as a submodule (our recommended approach for easy updates), or just clone the theme into your project's `themes` subdirectory.
 
+Whichever approach you use, for simplicity we recommend copying and editing our [example site configuration](#configuring-your-site) for your project, or you may get Hugo errors for missing parameters and values when you try to build your site.
+
 ### Using the Docsy theme as a submodule
 
     $ hugo new site myproject
@@ -146,9 +146,6 @@ Specify the [Docsy theme](https://github.com/google/docsy) like any other Hugo t
     $ git submodule add https://github.com/google/docsy.git themes/docsy
     $ echo 'theme = "docsy"' >> config.toml
     $ git submodule update --init --recursive
-
-
-You can either use the theme as a submodule like the example site, as shown above (our recommended approach for easy updates), or can just [clone the theme](https://gohugo.io/themes/installing-and-using-themes/#install-a-single-theme) into your project's `themes` subdirectory. For simplicity we recommend copying and editing our [example site configuration](#configuring-your-site) for your project, or you may get Hugo errors for missing parameters and values when you try to build your site.
 
 ### Cloning the Docsy theme to your projects `themes` subdirectory
 
@@ -174,7 +171,9 @@ The Docsy example site comes with some defaults you may want to remove or custom
 
 ### Internationalization
 
-By default, the Docsy example site supports Norwegian content. If you don't intend to translate your site to Norwegian, you can remove the language switcher by removing the following lines from `config.toml`:
+The Docsy example site supports content in English and Norwegian. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/_index.md).
+
+If you don't intend to translate your site to Norwegian, you can remove the language switcher by removing the following lines from `config.toml`:
 
 ```
 [languages.no]
