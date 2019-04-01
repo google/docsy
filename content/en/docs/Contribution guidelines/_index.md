@@ -40,9 +40,24 @@ This project follows
 
 Alternatively, if there's something you'd like to see in Docsy (or if you've found something that isn't working the way you'd expect), but you're not sure how to fix it yourself, please create an [issue](https://github.com/google/docsy/issues).
 
-## Contributing to the docs
+## Contributing to these docs
 
-[borrowing heavily from Sarah's Kubeflow doc contribution guidelines, for they are awesome]
+This user guide is, like our example site, a Docsy site that uses the Hugo static site generator. 
+We use [Netlify](https://www.netlify.com/) to manage the deployment of the site. This guide assumes you're familiar with basic GitHub workflows.
+
+### Quick start with Netlify
+
+
+### Previewing your changes locally
+
+If you want to run your own local Hugo server to preview your changes as you work:
+
+1. Follow the instructions in [Getting started](/docs/getting-started) to install Hugo and any other tools you need.
+1. Fork the [wherever this goes] repo into your own project, then create a local copy using
+1. Run `hugo server` in the site root directory
+
+###
+
 
 
 
