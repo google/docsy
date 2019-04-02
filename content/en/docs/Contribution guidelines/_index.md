@@ -31,6 +31,10 @@ use GitHub pull requests for this purpose. Consult
 [GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
 information on using pull requests.
 
+### Previewing your changes
+
+As Docsy is a theme rather than a site, you can't serve the theme directly to check your changes work. Instead use your updated local theme in a local copy of the Docsy example site (copy or make your changes in the `themes/docsy` directory) and [preview](/docs/deployment/) from there.
+
 ### Community guidelines
 
 This project follows
@@ -63,6 +67,15 @@ We use [Netlify](https://www.netlify.com/) to manage the deployment of the site 
 1. When you're ready for a review, add a comment to the PR, and remove any
   "WIP" markers.
 
+### Updating a single page
+
+If you've just spotted something you'd like to change while using the docs, Docsy has a shortcut for you:
+
+1. Click **Edit this page** in the top right hand corner of the page.
+1. If you don't already have an up to date fork of the project repo, you are prompted to get one - click **Fork this repository and propose changes** or **Update your Fork** to get an up to date version of the project to edit. The appropriate page in your fork is displayed in edit mode.
+1. Follow the rest of the [Quick start with Netlify](#quick-start-with-netlify) process above to make and preview your changes.
+
+
 ### Previewing your changes locally
 
 If you want to run your own local Hugo server to preview your changes as you work:
@@ -77,5 +90,9 @@ If you want to run your own local Hugo server to preview your changes as you wor
 1. Run `hugo server` in the site root directory. By default your site will be available at http://localhost:1313/. Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.
 1. Continue with the usual GitHub workflow to edit files, commit them, push the
   changes up to your fork, and create a pull request.
+
+### Creating an issue
+
+If there's something you'd like to see in the docs, but you're not sure how to fix it yourself, please create an issue in [this repository](wherever it goes). You can also create an issue about a specific page by clicking the **Create Issue** button in the top right hand corner of the page.
 
 
