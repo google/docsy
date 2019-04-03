@@ -19,6 +19,7 @@
         </ul>
     {{ else }}
     {{/* Otherwise we show a nice formatted list of subpages with page descriptions */}}
+	<hr class="panel-line">
         {{ range $pages }}
             {{ if eq .Parent $parent }}
                 <div class="entry">
