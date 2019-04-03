@@ -24,6 +24,7 @@
 @import "search";
 @import "main-container";
 @import "blocks/blocks";
+@import "section-index";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
