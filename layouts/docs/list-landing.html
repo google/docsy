@@ -6,8 +6,10 @@
 <div class="section-index">
     {{ $pages := (where .Site.Pages "Section" .Section).ByWeight }}
     {{ $parent := .Page }}
-
-    {{ if $parent.Params.simple_list }}
+    {{ if $parent.Params.no_list }}
+    {{/* If no_list is true we don't show a list of subpages */}}
+    {{ else if $parent.Params.simple_list }}
+    {{/* If simple_list is true we show a bulleted list of subpages */}}
         <ul>
             {{ range $pages }}
                 {{ if eq .Parent $parent }}
@@ -16,6 +18,8 @@
             {{ end }}
         </ul>
     {{ else }}
+    {{/* Otherwise we show a nice formatted list of subpages with page descriptions */}}
+    <hr class="panel-line">
         {{ range $pages }}
             {{ if eq .Parent $parent }}
                 <div class="entry">
@@ -38,6 +42,4 @@
 	{{ end }}
 	<div class="text-muted mt-5 pt-3 border-top">{{ partial "page-meta-lastmod.html" . }}</div>
 </div>
-
 {{ end }}
-
