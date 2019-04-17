@@ -1,21 +1,7 @@
 .section-index {
-    display: grid;
-    grid-template-columns: [entry] 1fr;
-
-    @media (min-width: sm) {
-        grid-template-columns: [entry] 1fr [entry] 1fr;
-    }
-
-    @media (min-width: xl) {
-        grid-template-columns: [entry] 1fr [entry] 1fr [entry] 1fr;
-    }
 
     .entry {
-        padding: 1rem 1rem;
-
-        @media (min-width: md) {
-            padding: 1rem 4rem;
-        }
+        padding: .5rem;
     }
 
     h5 {

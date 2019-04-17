@@ -148,7 +148,7 @@ The **blocks/link-down** shortcode creates a navigation link down to the next se
 
 ###  alert
 
-THe **alert** shortcode creates an alert block that can be used to display notices or warnings.
+The **alert** shortcode creates an alert block that can be used to display notices or warnings.
 
 ```go-html-template
 {{%/* alert title="Warning" color="warning" */%}}
@@ -162,6 +162,27 @@ Renders to:
 {{% alert title="Warning" color="warning" %}}
 This is a warning.
 {{% /alert %}}
+
+| Parameter        | Default    | Description  |
+| ---------------- |------------| ------------|
+| color | primary | One of the theme colors, eg `primary`, `info`, `warning` etc.
+
+###  pageinfo
+
+The **pageinfo** shortcode creates a text box that you can use to add banner information for a page: for example, letting users know that the page contains placeholder content, that the content is deprecated, or that it documents a beta feature.
+
+```go-html-template
+{{%/* pageinfo color="primary" */%}}
+This is placeholder content.
+{{%/* /pageinfo */%}}
+
+```
+
+Renders to:
+
+{{% pageinfo color="primary" %}}
+This is placeholder content
+{{% /pageinfo %}}
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|

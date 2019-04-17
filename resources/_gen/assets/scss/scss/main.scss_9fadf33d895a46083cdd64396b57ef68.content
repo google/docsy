@@ -12288,26 +12288,49 @@ readers do not read off random characters that represent icons */
 .td-bg-arrow-wrapper {
   position: relative; }
 
-.section-index {
-  display: grid;
-  grid-template-columns: [entry] 1fr; }
-  @media (min-width: sm) {
-    .section-index {
-      grid-template-columns: [entry] 1fr [entry] 1fr; } }
-  @media (min-width: xl) {
-    .section-index {
-      grid-template-columns: [entry] 1fr [entry] 1fr [entry] 1fr; } }
-  .section-index .entry {
-    padding: 1rem 1rem; }
-    @media (min-width: md) {
-      .section-index .entry {
-        padding: 1rem 4rem; } }
-  .section-index h5 {
-    margin-bottom: 0; }
-    .section-index h5 a {
-      font-weight: 700; }
-  .section-index p {
-    margin-top: 0; }
+.section-index .entry {
+  padding: .5rem; }
+
+.section-index h5 {
+  margin-bottom: 0; }
+  .section-index h5 a {
+    font-weight: 700; }
+
+.section-index p {
+  margin-top: 0; }
+
+.pageinfo {
+  font-weight: 500;
+  background: #f8f9fa;
+  color: inherit;
+  border-radius: 0;
+  margin: 2rem;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem; }
+  .pageinfo-primary {
+    border-style: solid;
+    border-color: #30638E; }
+  .pageinfo-secondary {
+    border-style: solid;
+    border-color: #D95040; }
+  .pageinfo-success {
+    border-style: solid;
+    border-color: #3772FF; }
+  .pageinfo-info {
+    border-style: solid;
+    border-color: #C0E0DE; }
+  .pageinfo-warning {
+    border-style: solid;
+    border-color: #ED6A5A; }
+  .pageinfo-danger {
+    border-style: solid;
+    border-color: #ED6A5A; }
+  .pageinfo-light {
+    border-style: solid;
+    border-color: #D3F3EE; }
+  .pageinfo-dark {
+    border-style: solid;
+    border-color: #403F4C; }
 
 footer {
   min-height: 150px; }
