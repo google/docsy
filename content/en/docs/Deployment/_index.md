@@ -33,23 +33,11 @@ Now that you're serving your site locally, Hugo will watch for changes to the co
 
 We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from GitHub, with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/) from GitHub, previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
 
-Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to deploy your site. Specify at least the 0.53 version of Hugo when configuring your deployment as earlier versions won't work with this theme.
+Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to deploy your site, with the following deployment settings:
 
-{{% alert title="Warning" color="warning" %}}
-At the moment due to Netlify system limitations, Netlify does not support the "extended" version of Hugo needed to use SCSS, which is used by our theme. This is a known issue and the fix will be rolled out in future versions of Netlify. A workaround until then is to build the site on your local machine with "extended" Hugo, and then commit the generated `resources/` folder to your site repo on GitHub.  To do this:
-
-1.  Ensure you have an up to date local copy of your site files cloned from your repo. Don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site.
-
-    ```
-    git clone --recurse-submodules --depth 1 https://github.com/my/example.git
-    ```
-
-1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli`: you'll need it to generate the site resources.
-1.  Run the `hugo` command in your site root.
-1.  Add the generated `resources/` directory using `git add -f resources`, and commit back to the repo.
-
-You should now be able to serve the complete site from GitHub using Netlify. Please check our docs for updates on when you will no longer need this workaround.
-{{% /alert %}}
+* For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules.
+* In your **Build environment variables**, specify `HUGO_VERSION` as `0.53` or later.
+* In the **Build image selection** section, ensure that **Ubuntu Xenial 16.04** is selected. You need to use this image to run the extended version of Hugo.
 
 ## RSS feeds
 
