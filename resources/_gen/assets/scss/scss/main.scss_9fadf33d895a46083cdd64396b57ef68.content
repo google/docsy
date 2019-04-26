@@ -1046,22 +1046,23 @@ pre {
   .offset-xl-11 {
     margin-left: 91.66666667%; } }
 
-.table, .td-content > table {
+.table, .td-box .row > table, .td-content > table {
   width: 100%;
   margin-bottom: 1rem;
   background-color: transparent; }
-  .table th, .td-content > table th,
+  .table th, .td-box .row > table th, .td-content > table th,
   .table td,
+  .td-box .row > table td,
   .td-content > table td {
     padding: 0.75rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6; }
-  .table thead th, .td-content > table thead th {
+  .table thead th, .td-box .row > table thead th, .td-content > table thead th {
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6; }
-  .table tbody + tbody, .td-content > table tbody + tbody {
+  .table tbody + tbody, .td-box .row > table tbody + tbody, .td-content > table tbody + tbody {
     border-top: 2px solid #dee2e6; }
-  .table .table, .td-content > table .table, .table .td-content > table, .td-content > table .td-content > table {
+  .table .table, .td-box .row > table .table, .td-content > table .table, .table .td-box .row > table, .td-box .table .row > table, .td-box .row > table .row > table, .td-content > table .td-box .row > table, .td-box .td-content > table .row > table, .table .td-content > table, .td-box .row > table .td-content > table, .td-content > table .td-content > table {
     background-color: #fff; }
 
 .table-sm th,
@@ -1083,7 +1084,7 @@ pre {
 .table-borderless tbody + tbody {
   border: 0; }
 
-.table-striped tbody tr:nth-of-type(odd), .td-content > table tbody tr:nth-of-type(odd) {
+.table-striped tbody tr:nth-of-type(odd), .td-box .row > table tbody tr:nth-of-type(odd), .td-content > table tbody tr:nth-of-type(odd) {
   background-color: rgba(0, 0, 0, 0.05); }
 
 .table-hover tbody tr:hover {
@@ -1188,12 +1189,12 @@ pre {
   .table-hover .table-active:hover > th {
     background-color: rgba(0, 0, 0, 0.075); }
 
-.table .thead-dark th, .td-content > table .thead-dark th {
+.table .thead-dark th, .td-box .row > table .thead-dark th, .td-content > table .thead-dark th {
   color: #fff;
   background-color: #222;
   border-color: #353535; }
 
-.table .thead-light th, .td-content > table .thead-light th {
+.table .thead-light th, .td-box .row > table .thead-light th, .td-content > table .thead-light th {
   color: #495057;
   background-color: #eee;
   border-color: #dee2e6; }
@@ -1207,7 +1208,7 @@ pre {
     border-color: #353535; }
   .table-dark.table-bordered {
     border: 0; }
-  .table-dark.table-striped tbody tr:nth-of-type(odd), .td-content > table.table-dark tbody tr:nth-of-type(odd) {
+  .table-dark.table-striped tbody tr:nth-of-type(odd), .td-box .row > table.table-dark tbody tr:nth-of-type(odd), .td-content > table.table-dark tbody tr:nth-of-type(odd) {
     background-color: rgba(255, 255, 255, 0.05); }
   .table-dark.table-hover tbody tr:hover {
     background-color: rgba(255, 255, 255, 0.075); }
@@ -1252,13 +1253,13 @@ pre {
     .table-responsive-xl > .table-bordered {
       border: 0; } }
 
-.table-responsive, .td-content > table {
+.table-responsive, .td-box .row > table, .td-content > table {
   display: block;
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; }
-  .table-responsive > .table-bordered, .td-content > table > .table-bordered {
+  .table-responsive > .table-bordered, .td-box .row > table > .table-bordered, .td-content > table > .table-bordered {
     border: 0; }
 
 .form-control {
@@ -6786,11 +6787,12 @@ a.text-dark:hover, a.text-dark:focus {
     display: none; }
   .badge {
     border: 1px solid #000; }
-  .table, .td-content > table {
+  .table, .td-box .row > table, .td-content > table {
     border-collapse: collapse !important; }
     
     .table td,
-    .td-content > table td, .table th, .td-content > table th {
+    .td-box .row > table td,
+    .td-content > table td, .table th, .td-box .row > table th, .td-content > table th {
       background-color: #fff !important; }
   .table-bordered th,
   .table-bordered td {
@@ -6802,7 +6804,7 @@ a.text-dark:hover, a.text-dark:focus {
     .table-dark thead th,
     .table-dark tbody + tbody {
       border-color: #dee2e6; }
-  .table .thead-dark th, .td-content > table .thead-dark th {
+  .table .thead-dark th, .td-box .row > table .thead-dark th, .td-content > table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
 
@@ -10923,6 +10925,17 @@ readers do not read off random characters that represent icons */
 
 .-text-13 {
   color: #C0E0DE; }
+
+.td-box .row {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  flex-direction: column; }
+
+.td-box .row.features {
+  flex-direction: row; }
+
+.td-box.linkbox {
+  padding: 5rem; }
 
 .td-box--height-min {
   min-height: 300px; }

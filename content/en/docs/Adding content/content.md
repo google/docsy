@@ -106,6 +106,30 @@ To add docs to a subsection, just add your page files to the relevant subdirecto
 
 If you've copied the example site, you'll already have some suggested subdirectories in your `docs` directory, with guidance for what types of content to put in them and some example Markdown pages. You can find out more about organizing your content with Docsy in [Organizing Your Content](/docs/organizing/).
 
+#### Docs section landing pages
+
+By default a docs section landing page (the `_index.md` or `_index.html` in the section directory) uses a layout that adds a formatted list of links to the pages in the section, with their frontmatter descriptions. The [Content and Customization](/docs/adding-content/) landing page in this site is a good example.
+
+To display a simple bulleted list of links to the section's pages instead, specify `simple_list: true` in the landing page's frontmatter:
+
+```
+---
+title: "Simple List Page"
+simple_list: true
+weight: 20
+---
+```
+
+To display no links at all, specify `no_list: true` in the landing page's frontmatter:
+
+```
+---
+title: "No List Page"
+no_list: true
+weight: 20
+---
+```
+
 ### Organizing your blog posts
 
 Docsy's `blog` layout also gives you a left nav menu (like the `docs` layout), and a list-type index page for your blog that's applied to `/blog/_index.md` and automatically displays snippets of all your recent posts in reverse chronological order. 
