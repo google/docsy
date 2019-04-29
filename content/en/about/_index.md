@@ -34,7 +34,7 @@ Once you have your content, you use a technical documentation site to publish yo
 ## How does Docsy help?
 
 Particularly when working with open source projects, it can be difficult to figure out how to turn all your product knowledge into a website that helps and engages your users. **Enter Docsy!**
-)
+
 Docsy gives you a theme for the [Hugo](https://gohugo.io/) static site generator, an established open source tool that builds ready-to-serve websites from a set of theme and content files. The Docsy theme provides you with useful stuff for a technical documentation site that *isn’t* your own content:
 
 <table>
