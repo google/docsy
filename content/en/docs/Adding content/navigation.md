@@ -95,3 +95,11 @@ Once you have your search engine, you can add the feature to your site:
 
 If you don't specify a Google Custom Search Engine ID for your project, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
+### Disabling the sidebar search box
+
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
+
+```
+sidebar_search_disable = true
+```
+
