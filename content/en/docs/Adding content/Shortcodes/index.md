@@ -88,11 +88,13 @@ Runs on **bare metal** in the **cloud**!
 
 ### blocks/section
 
-The **blocks/section** shortcode is meant as a general-purpose content container. The example below shows it wrapping 3 feature sections.
+The **blocks/section** shortcode is meant as a general-purpose content container. It comes in two "flavors", one for general content and one with styling more suitable for wrapping a horizontal row of feature sections.
+
+The example below shows a section wrapping 3 feature sections.
 
 
 ```go-html-template
-{{</* blocks/section color="dark" */>}}
+{{</* blocks/section color="dark" type="features" */>}}
 {{%/* blocks/feature icon="fa-lightbulb" title="Fastest OS **on the planet**!" */%}}
 The new **TechOS** operating system is an open source project. It is a new project, but with grand ambitions.
 Please follow this space for updates!
@@ -110,7 +112,7 @@ For announcement of latest features etc.
 | ---------------- |------------| ------------|
 | height | | See above.
 | color | | See above. 
-
+| type  | | Specify "features" if you want this section to contain a horizontal row of features, otherwise omit this parameter.
 
 ### blocks/feature
 
