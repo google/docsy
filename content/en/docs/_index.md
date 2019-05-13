@@ -11,7 +11,10 @@ Welcome to the Docsy theme user guide! This guide shows you how to get started c
 
 ## What is Docsy?
 
-Docsy is a theme for the Hugo static site generator that's specifically designed for technical documentation sets, providing features like site navigation, simple look and feel configuration, multi-language support, easy ways for users to contribute and file doc issues, and more. Our aim is to help you get a working documentation site up and running as easily as possible, so you can concentrate on creating great content for your users.
+Docsy is a theme for the [Hugo](https://gohugo.io/) static site generator that's specifically designed for technical 
+documentation sets and has a lot of the best practices built in. Use Docsy to get a working and reliable documentation 
+site up and running fast, and then get back to focusing on great content for your users. 
+[Learn more about Docsy](/about).
 
 In addition to the theme itself, we provide an [example site](https://github.com/google/docsy-example) that uses lots of Docsy features and has a useful skeleton site structure (with advice for what to put in it!) for a large technical documentation set. You can copy the entire site and edit it for your own projects, or just explore the site and its source to see what Docsy can do. The site you're currently reading also uses Docsy and is a useful example of a smaller Docsy docset: feel free to copy it or borrow from it if it suits your needs better than the "big" example.
 
