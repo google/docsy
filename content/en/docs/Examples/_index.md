@@ -9,7 +9,7 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 
 ## Docsy theme examples
 
-Example sites that have low to no custimzation:
+Example sites that have low to no customization:
 
 | Site  | Repo (if public)  |
 |---|---|
