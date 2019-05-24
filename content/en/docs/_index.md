@@ -1,6 +1,6 @@
 
 ---
-title: "Docsy Documentation"
+title: "Welcome to Docsy"
 linkTitle: "Documentation"
 menu:
   main:
@@ -17,7 +17,7 @@ In addition to the theme itself, we provide an [example site](https://github.com
 
 Docsy itself does **not** provide:
 
-* **Source hosting and management**: Our theme and site source files live on [GitHub](https://github.com/), which is the simplest approach for most projects. However, you can also keep your project files in [BitBucket](https://bitbucket.org/product), locally, or wherever you like. Be aware that where your source files live may affect the Docsy features you can use (such as letting users file documentation issues) and site deployment options.
+* **Source hosting and management**: Our theme and site source files live on [GitHub](https://github.com/), which is the simplest approach for most projects. However, you can also keep your project files in [GitLab](https://about.gitlab.com/), [BitBucket](https://bitbucket.org/product), locally, or wherever you like. Be aware that where your source files live may affect the Docsy features you can use (such as letting users file documentation issues) and site deployment options.
 * **Site deployment**: You can find out about deployment options in [Previews and Deployment](./deployment/). This site uses [Netlify](https://www.netlify.com/). 
 
 Docsy also doesn't actually generate your site's HTML files: that's Hugo's job! Hugo takes your Markdown or HTML doc source files and Docsy's theme files and builds them into a static site for deployment. You can find out more about Hugo and how it works in the [Hugo documentation](https://gohugo.io/documentation/).

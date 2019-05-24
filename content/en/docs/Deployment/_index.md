@@ -31,18 +31,19 @@ Now that you're serving your site locally, Hugo will watch for changes to the co
 
 ## Deployment with Netlify
 
-We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from GitHub, with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/) from GitHub, previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
+We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from your Git provider (GitHub, GitLab, or BitBucket), with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/), previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
 
-Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to deploy your site, with the following deployment settings:
+Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to set up a Netlify account (if you don't have one already) and authorize access to your GitHub or other Git provider account. Once you're logged in:
 
-* For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules.
-* In your **Build environment variables**, specify `HUGO_VERSION` as `0.53` or later.
-* In the **Build image selection** section, ensure that **Ubuntu Xenial 16.04** is selected. You need to use this image to run the extended version of Hugo.
+1. Click **New site from Git**.
+1. Click your chosen Git provider, then choose your site repo from your list of repos.
+1. In the **Deploy settings** page:
+   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules.
+   1. Click **Show advanced**. 
+   1. In the **Advanced build settings** section, click **New variable**. 
+   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.53` or later as its **Value**. 
+1. Click **Deploy site**.
 
-## RSS feeds
+If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
-Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`. This is the default configuration:
 
-```toml
-rss_sections = ["blog"]
-```
