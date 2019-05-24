@@ -38,9 +38,28 @@ Alternatively, create your own page template for your new section in your projec
 
 You can find out much more about how Hugo page layouts work in [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you about how to add content and use each of Docsy's templates.
 
+## Page frontmatter
+
+Each page file in a Hugo site has metadata frontmatter that tells Hugo about the page. You specify page frontmatter in TOML, YAML, or JSON (our example site and this site use YAML). Use the frontmatter to specify the page title, description, creation date, link title, template, menu weighting, and even any resources such as images used by the page. You can see a complete list of possible page frontmatter in [Front Matter](https://gohugo.io/content-management/front-matter/).
+
+For example, here's the frontmatter for this page:
+
+```
+---
+title: "Adding Content"
+linkTitle: "Adding Content"
+weight: 1
+description: >
+  How to add content to your Docsy site.
+---
+```
+
+The minimum frontmatter you need to provide is a title: everything else is up to you! (though if you leave out the page weight your [navigation](/docs/adding-content/navigation) may get a little disorganized).
+
+
 ## Page contents and markup
 
-By default you create pages in a Docsy site as simple [Markdown or HTML files](https://gohugo.io/content-management/formats/) with some metadata frontmatter that tells Hugo about the page. Hugo currently uses [BlackFriday](https://github.com/russross/blackfriday) as its default Markdown parser.
+By default you create pages in a Docsy site as simple [Markdown or HTML files](https://gohugo.io/content-management/formats/) with [page frontmatter](#page-frontmatter), as described above. Hugo currently uses [BlackFriday](https://github.com/russross/blackfriday) as its default Markdown parser.
 
 In addition to your marked-up text, you can also use Hugo and Docsy's [shortcodes](/docs/adding-content/shortcodes): reusable chunks of HTML that you can use to quickly build your pages. Find out more about shortcodes in [Docsy Shortcodes](/docs/adding-content/shortcodes).
 
@@ -59,24 +78,6 @@ Alternatively you can use Hugo's helper [`ref` and `relref` shortcodes](https://
 ### Content style
 
 We don't mandate any particular style for your page contents. However, if you'd like some guidance on how to write and format clear, concise technical documentation, we recommend the [Google Developer Documentation Style Guide](https://developers.google.com/style/), particularly the [Style Guide Highlights](https://developers.google.com/style/highlights).
-
-## Page frontmatter
-
-You specify page frontmatter for Hugo in TOML, YAML, or JSON (our example site and this site use YAML). Use the frontmatter to specify the page title, description, creation date, link title, template, menu weighting, and even any resources such as images used by the page. You can see a complete list of possible page frontmatter in [Front Matter](https://gohugo.io/content-management/front-matter/).
-
-For example, here's the frontmatter for this page:
-
-```
----
-title: "Adding Content"
-linkTitle: "Adding Content"
-weight: 1
-description: >
-  How to add content to your Docsy site.
----
-```
-
-The minimum frontmatter you need to provide is a title: everything else is up to you! (though if you leave out the page weight your [navigation](/docs/adding-content/navigation) may get a little disorganized).
 
 ## Page bundles
 
