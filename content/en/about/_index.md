@@ -77,7 +77,7 @@ Docsy gives you a theme for the [Hugo](https://gohugo.io/) static site generator
   <tr>
    <td><strong>Simple previews and deployment</strong>
    </td>
-   <td>Because Docsy is a Hugo theme, you get all the advantages of building with Hugo - simple, fast local previews, and, depending on your deployment options, continuous deployment from Github.
+   <td>Because Docsy is a Hugo theme, you get all the advantages of building with Hugo - simple, fast local previews, and, depending on your deployment options, continuous deployment from Github or other Git providers.
    </td>
   </tr>
 </table>

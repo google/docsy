@@ -222,4 +222,12 @@ The `community` landing page template has boilerplate content that's automatical
 
 If you're creating your own site and want to add a page using this template, add a `/community/_index.md` file in your content root directory. If you've copied the example site and *don't* want a community page, just delete the `/content/en/community/` directory in your project repo.
 
+## RSS feeds
+
+Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`. This is the default configuration:
+
+```toml
+rss_sections = ["blog"]
+```
+
 
