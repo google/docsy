@@ -1,4 +1,4 @@
-baseURL = ""
+baseURL = "/"
 title = "Docsy Example"
 
 enableRobotsTXT = true
@@ -52,7 +52,7 @@ anchor = "smart"
 [[menu.main]]
     name = "Example Site"
     weight = 40
-    url = "https://testydocsy.netlify.com"
+    url = "https://goldydocs.netlify.com"
 [[menu.main]]
     name = "GitHub"
     weight = 50
