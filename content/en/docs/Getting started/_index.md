@@ -204,32 +204,6 @@ gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine.
 
 
-## Keeping the theme up to date
-
-We hope to continue to make improvements to the theme along with the Docsy community. If you have cloned the example site (or are otherwise using the theme as a submodule), you can update the theme submodule yourself as follows:
-
-1. In your local copy of your project, run:
-
-    ```
-    $ git submodule update --remote
-    ```
-    
-1. Then add and commit your change:
-
-    ```
-    $ git add themes/
-    $ git commit -m "Updating theme submodule"
-    ```
-
-1. Finally, push the change back to the project repo.
-
-    ```
-    $ git push origin master
-    ```
-    
-If you've cloned the theme yourself, use `git pull origin master` in the theme root directory to get the latest version.
-
-
 ## What's next?
 
 * [Add content and customize your site](/docs/adding-content/).
