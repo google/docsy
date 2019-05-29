@@ -20,7 +20,7 @@
     }
 
     // Inline code
-    p code, li > code {
+    p code, li > code, td > code, th > code {
         color: inherit;
         padding: 0.2em 0.4em;
         margin: 0;
