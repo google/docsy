@@ -52,7 +52,7 @@ Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew
 
 ### Install PostCSS
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. By default `npm` installs tools under the directory where you run `npm install`:
+To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run `npm install`:
 
 ```
 $ sudo npm install -D --save autoprefixer
