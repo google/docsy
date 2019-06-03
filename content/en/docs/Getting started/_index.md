@@ -114,8 +114,8 @@ To copy the example site:
 
     Tip: Use `Ctrl + c` to stop the Hugo server.
 
-1. Now that you have a local copy of the site running, you can push it to your repository and then set 
-   Docsy as your `upstream`. For example:
+1. Now that you have a local copy of the site running, you can set your `origin` remote and then 
+   push the site to your repository. For example:
 
    1. If you need to create a remote repository, go to GitHub and create a 
       [new empty repo](https://help.github.com/en/articles/create-a-repo) 
@@ -138,8 +138,13 @@ To copy the example site:
            ```shell
            git remote remove origin
            git remote add origin https://github.com/MY-SITE/EXAMPLE.git
-           git push -u origin master
            ```
+	   
+       1. Push your local copy to your remote repository:
+       
+           ```shell
+           git push -u origin master
+	   ```
 
     {{% alert title="Tip" %}}
 If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed to set the new origin. You can remove the `old` remote once you've pushed to your repo.
