@@ -1,6 +1,6 @@
 ---
-title: "Organizing Your Content"
-linkTitle: "Organizing Your Content"
+title: "Best Practices: Organizing Your Content"
+linkTitle: "Best Practices"
 weight: 9
 description: >
   Optional guidance and recommendations on how to organize your documentation site.
@@ -10,7 +10,7 @@ If you have a look at our example site, you'll see that we've organized the Docu
 
 ## Do I need to use this structure?
 
-Absolutely not! The site structure in the Example Site was created to meet the needs of large docsets for large products with lots of features, potential tasks, and reference elements. For a simpler docset (like this one!), it's fine to just structure your docs around specific features that your users need to know about.  Even for larger documentation sets, you may find that the structure isn't useful "as is", or that you don't need to use all the section types.
+Absolutely not! The site structure in the Example Site was created to meet the needs of large docsets for large products with lots of features, potential tasks, and reference elements. For a simpler docset (like this one!), it's fine to just structure your docs around specific features that your users need to know about.  Even for larger documentation sets, you may find that the structure isn't useful "as is", or that you don't need to use all the section types. 
 
 We do recommend that (as we've done here) you provide at least:
 
@@ -18,7 +18,9 @@ We do recommend that (as we've done here) you provide at least:
 * A **Getting Started** page.
 * Some **Examples**.
 
-You may also want to create some tasks/how-tos for your project's features. Feel free to copy the [Docsy user guide site](/link/to/eventual/repo) or docs section instead if you like this simpler structure better.
+You may also want to create some tasks/how-tos for your project's features. Feel free to copy the [Docsy user guide site](/link/to/eventual/repo) or docs section instead if you like this simpler structure better. 
+
+[Learn more about how Hugo and Docsy use folders and other files to organize your site](/docs/adding-content/content/#organizing-your-documentation).
 
 ## Why this structure?
 
