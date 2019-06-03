@@ -18,7 +18,10 @@ changes will remain in your project. For details about what has changed, see the
 
 ## Update a Docsy clone
 
-If you have a local clone of the Docsy theme, you `git pull` all the new changes. For example, if `upstream`
+If you have a local clone of the Docsy theme, you `git pull` all the new changes. For any modifications that you
+made to the theme, you must manually resolve any merge conflicts. 
+
+For example, if `upstream`
 is your `remote` that is set to `https://github.com/google/docsy.git`, then from the root 
 directory where you cloned the Docsy theme, you run:
 
