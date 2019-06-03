@@ -88,31 +88,58 @@ To copy the example site:
 
 1.  Make a local working copy of the example site directly using `git clone`:
 
-    ```bash
-    git clone https://github.com/google/docsy-example.git
+     ```shell
+     git clone https://github.com/google/docsy-example.git
+     ```
+    
+1. Switch to the root of the cloned directory, for example:
+
+    ```shell
+    cd docsy-example
     ```
-1. In GitHub, create a [new empty repo](https://help.github.com/en/articles/create-a-repo) for your site with your chosen repo name. For clarity you may also want to rename the root directory (`docsy-example`) of your local working copy to match, though everything will still work even if you don't.
-
-1. In your site root directory, change your local copy's `origin` to your new repo (otherwise you'll be trying to push changes to the Docsy example site rather than to your own site):
-
-    ```bash
-    $ git remote remove origin
-    $ git remote add origin https://github.com/my/example.git
-    $ git push -u origin master
-    ``` 
 
 1. Get local copies of the project submodules so you can build and run your site locally:
 
-    ```bash
-    $ git submodule update --init --recursive
+    ```shell
+    git submodule update --init --recursive
     ```
-1.  Switch to your site root directory, and build your site:
     
-    ```
-    $ hugo server
-    ```
-1.  Preview your site: http://localhost:1313/.
+1. Build your site:
     
+    ```shell
+    hugo server
+    ```
+    
+1. Preview your site in your browser at: http://localhost:1313/
+
+    Tip: Use `Ctrl + c` to stop the Hugo server.
+
+1. Now that you have a local copy of the site running, you can push it to your repository and then set 
+   Docsy as your `upstream`. For example:
+
+   1. If you need to create a remote repository, go to GitHub and create a 
+      [new empty repo](https://help.github.com/en/articles/create-a-repo) 
+      for your site with your chosen repo name. For clarity you may also want to rename the root 
+      directory (`docsy-example`) of your local working copy to match, though everything will still 
+      work even if you don't.
+
+   1. Ensure that your 
+      [remote (`origin`) is configured](https://help.github.com/en/articles/configuring-a-remote-for-a-fork):
+   
+       1. If you are not sure if you have a remote configured, run:
+      
+           ```shell
+           git remote
+           ```
+      
+       1. From your site's root directory, change your local copy's `origin` to your new repo (otherwise 
+          you'll be trying to push changes to the Docsy example site rather than to your own site):
+
+           ```shell
+           git remote remove origin
+           git remote add origin https://github.com/MY-SITE/EXAMPLE.git
+           git push -u origin master
+           ```
 
     {{% alert title="Tip" %}}
 If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed to set the new origin. You can remove the `old` remote once you've pushed to your repo.
