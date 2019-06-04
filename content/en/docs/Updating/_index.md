@@ -11,23 +11,13 @@ If you have cloned the example site (or are otherwise using the theme as a submo
 yourself. 
 
 Updating Docsy means that your site will build using the latest version of Docsy at `HEAD` and include 
-all the new commits or changes that have been merged since the time when you first added the Docsy submodule, 
-or last updated. If you have any modified content like a Docsy [customiztion](/docs/adding-content/lookandfeel/), those 
-changes will remain in your project. For details about what has changed, see the list of 
+all the new commits or changes that have been merged since the point in time that you initially added the Docsy 
+submodule, or last updated. Updating won't affect any modifications that you made in your own project to 
+[override the Docsy look and feel](/docs/adding-content/lookandfeel/), as your overrides 
+don't modify the theme itself. For details about what has changed in the theme, see the list of 
 [Docsy commits](https://github.com/google/docsy/commits/master).
 
-## Update a Docsy clone
-
-If you have a local clone of the Docsy theme, you `git pull` all the new changes. For any modifications that you
-made to the theme, you must manually resolve any merge conflicts. 
-
-For example, if `upstream`
-is your `remote` that is set to `https://github.com/google/docsy.git`, then from the root 
-directory where you cloned the Docsy theme, you run:
-
-```
-git pull upstream master
-```
+Depending on how you chose to use Docsy, follow the corresponding steps to update the theme:
 
 ## Update a Docsy submodule
 
@@ -52,3 +42,14 @@ If you are using the Docsy theme as a submodule in your project, you update the 
     $ git push origin master
     ```
 
+## Update a Docsy clone
+
+If you have a local clone of the Docsy theme, you `git pull` all the new changes. For any modifications that you
+made in the cloned theme, you must manually resolve any merge conflicts. 
+
+For example, if you've set https://github.com/google/docsy.git as your `upstream` remote, you run the following
+command from the root directory of the cloned Docsy theme:
+
+```
+git pull upstream master
+```
