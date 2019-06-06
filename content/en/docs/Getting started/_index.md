@@ -115,7 +115,7 @@ To copy the example site:
     Tip: Use `Ctrl + c` to stop the Hugo server.
 
 1. Now that you have a local copy of the site running, you can set your `origin` remote and then 
-   push the site to your repository. For example:
+   push the site to that repository. For example:
 
    1. If you need to create a remote repository, go to GitHub and create a 
       [new empty repo](https://help.github.com/en/articles/create-a-repo) 
