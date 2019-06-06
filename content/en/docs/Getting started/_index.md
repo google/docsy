@@ -92,7 +92,7 @@ To copy the example site:
      git clone https://github.com/google/docsy-example.git
      ```
     
-1. Switch to the root of the cloned directory, for example:
+1. Switch to the root of the cloned project, for example:
 
     ```shell
     cd docsy-example
