@@ -129,7 +129,7 @@ To copy the example site:
        1. If you are not sure if you have a remote configured, run:
       
            ```shell
-           git remote
+           git remote -v
            ```
       
        1. From your site's root directory, change your local copy's `origin` to your new repo (otherwise 
