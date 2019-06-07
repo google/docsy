@@ -21,6 +21,20 @@ If you decide at a later stage that you'd like to add a logo to your navbar, you
 navbar_logo = true
 ```
 
+{{% alert title="Tip" %}}
+Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/master/assets/scss/_nav.scss)):
+
+```
+svg {
+    display: inline-block;
+    margin: 0 10px;
+    height: 30px;
+}
+```
+
+To ensure your logo displays correctly, you may want to resize it, ensure it doesn't have height and width attributes so that its size is fully responsive, or override the default styling with your own CSS.
+{{% /alert %}}
+
 ## Add your favicons
 
 The easiest way to do this is to create a set of favicons via http://cthedot.de/icongen (which lets you create a huge range of icon sizes and options from a single image) and/or https://favicon.io/, and put them in your site project's `static/favicons` directory. This will override the default favicons from the theme.
