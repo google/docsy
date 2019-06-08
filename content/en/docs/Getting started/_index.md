@@ -116,7 +116,7 @@ To copy the example site:
 
 1. Now that you have a local copy running, you can a create a new repository and then `git push` your Docsy site:
 
-   1. [Create a new remote repository in GitHub](https://help.github.com/en/articles/create-a-repo) 
+   1. [Create a new repository in GitHub](https://help.github.com/en/articles/create-a-repo) 
       for your site with your chosen repo name. For clarity you may also want to rename the root 
       directory (`docsy-example`) of your local working copy to match, though everything will still 
       work even if you don't.
