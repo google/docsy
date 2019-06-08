@@ -114,32 +114,30 @@ To copy the example site:
 
     Tip: Use `Ctrl + c` to stop the Hugo server.
 
-1. Now that you have a local copy running, you can a create a new repository and then `git push` your Docsy site:
+1. Now that you have a site running, you can push it to a new repository:
 
    1. [Create a new repository in GitHub](https://help.github.com/en/articles/create-a-repo) 
       for your site with your chosen repo name. For clarity you may also want to rename the root 
-      directory (`docsy-example`) of your local working copy to match, though everything will still 
+      directory (`docsy-example`) of your working copy to match, though everything will still 
       work even if you don't.
 
-   1. Configure your 
-      [remote (`origin`)](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
-      in your project:
-      
-       1. From your site's root directory, change your local copy's `origin` to your new repo (otherwise 
-          you'll be trying to push changes to the Docsy example site rather than to your own site):
+   1. Reconfigure 
+      [`origin`](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
+      in your project. From your site's root directory, change `origin` to your new repo (otherwise 
+      you'll be trying to push changes to google/docsy rather than to your repo):
 
-           ```shell
-           git remote remove origin
-           git remote add origin https://github.com/MY-SITE/EXAMPLE.git
-           ```
+       ```shell
+       git remote remove origin
+       git remote add origin https://github.com/MY-SITE/EXAMPLE.git
+       ```
 	   
-       1. Verify that your remote is configured by running:
+   1. Verify that your remote is configured by running:
       
-           ```shell
-           git remote -v
-           ```
+       ```shell
+       git remote -v
+       ```
 	   
-   1. Push your local Docsy site to your repository:
+   1. Push your Docsy site to your repository:
 
       ```shell
       git push -u origin master
