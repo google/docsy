@@ -6,8 +6,11 @@ description: >
   Optional guidance about authoring Docsy and Hugo based website content.
 ---
 
-The following include some of the differences you should be aware of when authoring content for 
-your Docsy and Hugo base website.
+As mentioned in the [About](/about') page, Docsy is a pre-configured theme for the [Hugo](https://gohugo.io/) site 
+generator. Therefore, you will eventually reach a point where you need to know a bit more about Hugo. 
+
+Use the following information to learn about some of the differences, as well as 
+how to optimize your content when authoring for a Docsy and Hugo based website.
 
 ### Content nested within nested lists
 
