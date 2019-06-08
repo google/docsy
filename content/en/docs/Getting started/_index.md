@@ -139,7 +139,7 @@ To copy the example site:
            git remote -v
            ```
 	   
-   1. Push your local Docsy site to your remote repository:
+   1. Push your local Docsy site to your repository:
 
       ```shell
       git push -u origin master
