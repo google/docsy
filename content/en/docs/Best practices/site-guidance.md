@@ -1,6 +1,6 @@
 ---
 title: "Guidance and tips for authoring in Docsy"
-linkTitle: "Docsy guidance and tips"
+linkTitle: "Creating content for Hugo"
 weight: 9
 description: >
   Optional guidance about authoring Docsy and Hugo based website content.
