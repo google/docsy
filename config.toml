@@ -89,7 +89,7 @@ github_repo = "https://github.com/google/docsy-example"
 sidebar_menu_compact = false
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
-#  Set to false if you don't want to display a logo in the top nav bar
+#  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
