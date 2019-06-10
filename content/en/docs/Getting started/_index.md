@@ -24,7 +24,7 @@ Do **not** use `sudo apt-get install hugo`, as it currently doesn't get you the 
 If you've already installed Hugo, check your version:
 
 ```
-$ hugo version
+hugo version
 ```
 If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version.
     
@@ -34,17 +34,17 @@ If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need
 3.  Download the latest extended version (`hugo_extended_0.5X_Linux-64bit.tar.gz`).
 4.  Create a new directory:
 
-        $ mkdir hugo
+        mkdir hugo
 
 5.  Extract the files you downloaded to `hugo`.
 
 6.  Switch to your new directory:
 
-        $ cd hugo
+        cd hugo
 
 7.  Install Hugo:
 
-        $ sudo install hugo /usr/bin    
+        sudo install hugo /usr/bin    
 
 #### macOS
 
@@ -55,15 +55,15 @@ Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew
 To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run `npm install`:
 
 ```
-$ sudo npm install -D --save autoprefixer
-$ sudo npm install -D --save postcss-cli
+sudo npm install -D --save autoprefixer
+sudo npm install -D --save postcss-cli
 ```
 
 You can also install these tools globally on your computer:
 
 ```bash
-$ sudo npm install -g postcss-cli
-$ sudo npm install -g autoprefixer
+sudo npm install -g postcss-cli
+sudo npm install -g autoprefixer
 ```
 
 You can find out more about the pros and cons of local and global package installation in [npm Global or Local Packages](https://flaviocopes.com/npm-packages-local-global/).
@@ -88,37 +88,66 @@ To copy the example site:
 
 1.  Make a local working copy of the example site directly using `git clone`:
 
-    ```bash
-    git clone https://github.com/google/docsy-example.git
+     ```shell
+     git clone https://github.com/google/docsy-example.git
+     ```
+    
+1. Switch to the root of the cloned project, for example:
+
+    ```shell
+    cd docsy-example
     ```
-1. In GitHub, create a [new empty repo](https://help.github.com/en/articles/create-a-repo) for your site with your chosen repo name. For clarity you may also want to rename the root directory (`docsy-example`) of your local working copy to match, though everything will still work even if you don't.
-
-1. In your site root directory, change your local copy's `origin` to your new repo (otherwise you'll be trying to push changes to the Docsy example site rather than to your own site):
-
-    ```bash
-    $ git remote remove origin
-    $ git remote add origin https://github.com/my/example.git
-    $ git push -u origin master
-    ``` 
 
 1. Get local copies of the project submodules so you can build and run your site locally:
 
-    ```bash
-    $ git submodule update --init --recursive
+    ```shell
+    git submodule update --init --recursive
     ```
-1.  Switch to your site root directory, and build your site:
     
-    ```
-    $ hugo server
-    ```
-1.  Preview your site: http://localhost:1313/.
+1. Build your site:
     
+    ```shell
+    hugo server
+    ```
+    
+1. Preview your site in your browser at: http://localhost:1313/
+
+    Tip: Use `Ctrl + c` to stop the Hugo server.
+
+1. Now that you have a site running, you can push it to a new repository:
+
+   1. [Create a new repository in GitHub](https://help.github.com/en/articles/create-a-repo) 
+      for your site with your chosen repo name. For clarity you may also want to rename the root 
+      directory (`docsy-example`) of your working copy to match, though everything will still 
+      work even if you don't.
+
+   1. Reconfigure 
+      [`origin`](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
+      in your project. From your site's root directory, change `origin` to your new repo (otherwise 
+      you'll be trying to push changes to google/docsy rather than to your repo):
+
+       ```shell
+       git remote remove origin
+       git remote add origin https://github.com/MY-SITE/EXAMPLE.git
+       ```
+	   
+   1. Verify that your remote is configured by running:
+      
+       ```shell
+       git remote -v
+       ```
+	   
+   1. Push your Docsy site to your repository:
+
+      ```shell
+      git push -u origin master
+      ```
 
     {{% alert title="Tip" %}}
 If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed to set the new origin. You can remove the `old` remote once you've pushed to your repo.
 
-    $ git remote add old https://github.com/google/docsy-example.git
-    $ git fetch unshallow old
+    git remote add old https://github.com/google/docsy-example.git
+    git fetch unshallow old
 
     {{% /alert %}}
 
@@ -134,7 +163,7 @@ Note that the following approach [forks](https://help.github.com/en/articles/for
 1.  Make your own local working copy of your repo using `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL:
 
     <pre>
-    $ git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
+    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
 You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
@@ -147,17 +176,17 @@ Whichever approach you use, for simplicity we recommend copying and editing our 
 
 ### Using the Docsy theme as a submodule
 
-    $ hugo new site myproject
-    $ cd myproject
-    $ git init
-    $ git submodule add https://github.com/google/docsy.git themes/docsy
-    $ echo 'theme = "docsy"' >> config.toml
-    $ git submodule update --init --recursive
+    hugo new site myproject
+    cd myproject
+    git init
+    git submodule add https://github.com/google/docsy.git themes/docsy
+    echo 'theme = "docsy"' >> config.toml
+    git submodule update --init --recursive
 
 ### Cloning the Docsy theme to your projects `themes` subdirectory
 
-    $ cd themes
-    $ git clone https://github.com/google/docsy
+    cd themes
+    git clone https://github.com/google/docsy
 
 For more information, see [Install and Use Themes](https://gohugo.io/themes/installing-and-using-themes/#install-a-single-theme) on the [Hugo](https://gohugo.io) site.
 
@@ -165,8 +194,8 @@ For more information, see [Install and Use Themes](https://gohugo.io/themes/inst
 
 To build and preview your site locally:
 
-    $ cd myproject
-    $ hugo server
+    cd myproject
+    hugo server
     
  By default, your site will be available at http://localhost:1313/.
 
