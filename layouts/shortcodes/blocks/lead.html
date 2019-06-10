@@ -5,7 +5,7 @@
 <section class="row td-box td-box--{{ $col_id }} position-relative td-box--gradient td-box--height-{{ $height }}">
 	<div class="container text-center td-arrow-down">
 		<span class="h4 mb-0">
-			{{ .Inner }}
+			{{ .Inner | markdownify }}
 		</span>
 	</div>
 </section>
