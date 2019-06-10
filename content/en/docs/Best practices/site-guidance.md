@@ -3,7 +3,7 @@ title: "Guidance and tips for authoring in Docsy"
 linkTitle: "Creating content for Hugo"
 weight: 9
 description: >
-  Optional guidance about authoring Docsy and Hugo based website content.
+  Tips for authoring website content for Hugo sites with Docsy.
 ---
 
 As mentioned in the [About](/about') page, Docsy is a pre-configured theme for the [Hugo](https://gohugo.io/) static site 
