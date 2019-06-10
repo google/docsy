@@ -6,29 +6,29 @@ description: >
   Optional guidance about authoring Docsy and Hugo based website content.
 ---
 
-As mentioned in the [About](/about') page, Docsy is a pre-configured theme for the [Hugo](https://gohugo.io/) site 
-generator. Therefore, you will eventually reach a point where you need to know a bit more about Hugo. 
+As mentioned in the [About](/about') page, Docsy is a pre-configured theme for the [Hugo](https://gohugo.io/) static site 
+generator. If you're not already familiar with working with Hugo and, in particular, its version of Markdown, this page provides some useful tips and potential gotchas for adding and editing content for your site.
 
-Use the following information to learn about some of the differences, as well as 
-how to optimize your content when authoring for a Docsy and Hugo based website.
+### Nested lists
 
-### Content nested within nested lists
+Hugo currently uses the [Blackfriday](https://github.com/russross/blackfriday) Markdown processor, which can be 
+sensitive when it come to content that's deeply nested in a list. In particular be aware that
+[this known issue](https://github.com/russross/blackfriday/issues/329) can surface if or when you have multiple authors and
+other contributors who might mix 'tabs' and 'spaces' when indenting lists, or fail to indent properly.
 
-Hugo currently uses the [Blackfriday](https://github.com/russross/blackfriday) markdown processor, which can be 
-sensitive when it come to content that's deeply nested in a list. If you stick to good markdown practices and 
-syntax, you might not come across any of your content that unexpectedly renders poorly. 
+An additional factor here is that because GitHub uses a different Markdown processor, GitHub markdown and the editor UI may
+render some nested lists as expected, while Blackfriday might render that same content poorly. For example, the count in a
+numbered list might restart, or your nested content within a list is not indented 
+(shows as a peer element instead of a nested child element). You may want to recommend in your contribution guidelines
+([as we do](/docs/contribution-guidelines/#contributing-to-these-docs)) that contributors preview their content with Hugo
+(or use Netlify's preview feature for PRs if that's your chosen deployment tool) to ensure their content renders correctly
+with Blackfriday.
 
-Although, you should be aware that [this known issue](https://github.com/russross/blackfriday/issues/329) can surface 
-if or when you have multiple authors and other contributors who might mix 'tabs' and 'spaces', or fail to indent properly.
-Blackfriday is particularly sentsitive about the markdown syntax for content that is nested within lists (and sub lists).
-Another factor might be how GitHub markdown and the editor UI renders list and nested lists as expected, while Blackfriday 
-acutaly processes it differently and might render that same content poorly. For example, the count in a numbered list 
-might restart, or your nested content within a list is not indented 
-(shows as a peer element instead of a nested child element).
-
-**Tip**: [Per the known issue](https://github.com/russross/blackfriday/issues/329#issuecomment-277602856), some
-have found that using 4 spaces instead of a 'tab' results in consistent behavior. For example, consider
+{{% alert title="Tip" %}}
+[Per comments on the known issue](https://github.com/russross/blackfriday/issues/329#issuecomment-277602856), some
+users have found that using 4 spaces instead of a 'tab' results in consistent behavior. For example, consider
 configuring your local editor to use 4 spaces when the **Tab** key is pressed.
+{{% /alert %}}
 
 ### Linking
 
