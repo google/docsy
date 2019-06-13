@@ -67,7 +67,7 @@ For a shorter image, as in the example site's About page, use one of `min`, `med
 
 ### Other pages
 
-To add inline images to other pages, use the [`imgproc` shortcode](/docs/adding-content/shortcodes/#imgproc).
+To add inline images to other pages, use the [`imgproc` shortcode](/docs/adding-content/shortcodes/#imgproc). Alternatively, if you prefer, just use regular Markdown or HTML images and add your image files to your project's `static` directory. You can find out more about using this directory in [Adding static content](/docs/adding-content/content/#adding-static-content).
 
 ## Images used on this site
 
