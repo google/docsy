@@ -229,7 +229,7 @@ You may want to serve some non-Hugo-built content along with your site: for exam
 
 To add static content to be served "as-is", just add the content as a folder and/or files in your site's `static` directory. When your site is deployed, content in this directory is served at the site root path. So, for example, if you have added content at `/static/reference/cpp/`, users can access that content at `http://{server-url}/reference/cpp/` and you can link to pages in this directory from other pages at `/reference/cpp/{file name}`.
 
-You can find out more about serving static files, including configuring multiple directories for static content, in [Static Files](https://gohugo.io/content-management/static-files/).
+You can also use this directory for other files used by your project, including image files. You can find out more about serving static files, including configuring multiple directories for static content, in [Static Files](https://gohugo.io/content-management/static-files/).
 
 ## RSS feeds
 
