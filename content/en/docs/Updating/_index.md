@@ -44,7 +44,7 @@ If you are using the Docsy theme as a submodule in your project, you update the 
 
 ## Update a Docsy clone
 
-If you have a local clone of the Docsy theme, you `git pull` all the new changes. For any modifications that you
+To update a local clone of the Docsy theme, `git pull` all the new changes.
 made in the cloned theme, you must manually resolve any merge conflicts. 
 
 For example, if you've set https://github.com/google/docsy.git as your `upstream` remote, you run the following
