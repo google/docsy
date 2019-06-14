@@ -36,7 +36,7 @@ If you are using the Docsy theme as a submodule in your project, you update the 
     $ git commit -m "Updating theme submodule"
     ```
 
-1. Push the commit to your project repo (by default this is your `origin` remote):
+1. Push the commit to your project repo. For example, run:
 
     ```
     $ git push origin master
