@@ -12,9 +12,7 @@
 <a href="{{ $issuesURL }}" target="_blank"><i class="fas fa-book fa-fw"></i> {{ T "post_create_issue" }}</a>
 {{ if $gh_project_repo }}
 {{ $project_issueURL := printf "%s/issues/new" $gh_project_repo }}
-{{ if $project_issueURL }}
 <a href="{{ $project_issueURL }}" target="_blank"><i class="fas fa-tasks fa-fw"></i> {{ T "post_create_project_issue" }}</a>
-{{ end }}
 {{ end }}
 </div>
 {{ end }}
