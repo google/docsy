@@ -129,13 +129,12 @@ To copy the example site:
       directory (`docsy-example`) of your working copy to match, though everything will still 
       work even if you don't.
 
-   1. Reconfigure 
+   1. Configure 
       [`origin`](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
-      in your project. From your site's root directory, change `origin` to your new repo (otherwise 
-      you'll be trying to push changes to `google/docsy` rather than to your repo):
+      in your project. From your site's root directory, set the URL for `origin` to your new 
+      repo (otherwise you'll be trying to push changes to `google/docsy` rather than to your repo):
 
-            git remote remove origin
-            git remote add origin https://github.com/MY-SITE/EXAMPLE.git
+            git remote set-url origin https://github.com/MY-SITE/EXAMPLE.git
 
 
    1. Verify that your remote is configured correctly by running:
