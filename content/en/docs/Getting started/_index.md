@@ -75,44 +75,52 @@ To use the Docsy Hugo theme, you have a couple of options:
 *   **Copy and edit the source for the [Docsy example site](https://github.com/google/docsy-example).** This approach gives you a skeleton structure for your site, with top-level and documentation sections and templates that you can modify as necessary. The example site uses Docsy as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so it's easy to [keep up to date](#keeping-the-theme-up-to-date).
 *   **Build your own site using the Docsy theme.** Specify the [Docsy theme](https://github.com/google/docsy) like any other [Hugo theme](https://gohugo.io/themes/) when creating or updating your site. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
 
-## Option 1: Clone the Docsy example site
+### Option 1: Clone the Docsy example site
 
 You can clone the Docsy site either by:
 
-*  [Using the command line](#using-the-command-line)
 *  [Using the GitHub UI](#using-the-github-ui)
+*  [Using the command line](#using-the-command-line)
 
-### Using the command line
+#### Using the GitHub UI
+
+This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
+
+1. Go to the [repo page](https://github.com/google/docsy-example) and click **Use this template**.
+
+1. Type your chosen name for your new repository in the **Repository name** field. You can also add an optional **Description**.
+
+1. Click **Create repository from template** to create your new repository. Congratulations, you now have a Docsy site repo!
+
+1. To test your copied site locally with Hugo, or make local edits, you'll also need to make a local copy of your new repository. To do this, use `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL (don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site):
+
+    <pre>
+    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
+    </pre>
+
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
+
+#### Using the command line
 
 To copy the example site:
 
 1.  Make a local working copy of the example site directly using `git clone`:
 
-     ```shell
-     git clone https://github.com/google/docsy-example.git
-     ```
+        git clone https://github.com/google/docsy-example.git
     
 1. Switch to the root of the cloned project, for example:
 
-    ```shell
-    cd docsy-example
-    ```
+        cd docsy-example
 
 1. Get local copies of the project submodules so you can build and run your site locally:
 
-    ```shell
-    git submodule update --init --recursive
-    ```
+        git submodule update --init --recursive
     
 1. Build your site:
     
-    ```shell
-    hugo server
-    ```
+        hugo server
     
-1. Preview your site in your browser at: http://localhost:1313/
-
-    Tip: Use `Ctrl + c` to stop the Hugo server.
+1. Preview your site in your browser at: http://localhost:1313/. You can use `Ctrl + c` to stop the Hugo server whenever you like.
 
 1. Now that you have a site running, you can push it to a new repository:
 
@@ -124,80 +132,61 @@ To copy the example site:
    1. Reconfigure 
       [`origin`](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
       in your project. From your site's root directory, change `origin` to your new repo (otherwise 
-      you'll be trying to push changes to google/docsy rather than to your repo):
+      you'll be trying to push changes to `google/docsy` rather than to your repo):
 
-       ```shell
-       git remote remove origin
-       git remote add origin https://github.com/MY-SITE/EXAMPLE.git
-       ```
-	   
-   1. Verify that your remote is configured by running:
+            git remote remove origin
+            git remote add origin https://github.com/MY-SITE/EXAMPLE.git
+
+
+   1. Verify that your remote is configured correctly by running:
       
-       ```shell
-       git remote -v
-       ```
+            git remote -v
+ 
 	   
    1. Push your Docsy site to your repository:
 
-      ```shell
-      git push -u origin master
-      ```
+            git push -u origin master
 
-    {{% alert title="Tip" %}}
-If you've already cloned the example site with `--recurse-submodules --depth 1` and want to set a new origin repo, worry not! The following is one way to un-confuse Git and you can then proceed to set the new origin. You can remove the `old` remote once you've pushed to your repo.
-
-    git remote add old https://github.com/google/docsy-example.git
-    git fetch unshallow old
-
-    {{% /alert %}}
-
-### Using the GitHub UI
-
-Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
-
-1.  In the [the Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
-1.  Rename your new fork:
-    1.  Click **Settings**, and type a new name in the **Repository name** field.
-    1.  Click **Rename** to save your changes.
-1.  Get the web URL for cloning your site repo by clicking **Clone or download** on its main repo page.
-1.  Make your own local working copy of your repo using `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL:
-
-    <pre>
-    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
-    </pre>
-
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
-
-## Option 2: Use the Docsy theme in your own site
+### Option 2: Use the Docsy theme in your own site
 
 Specify the [Docsy theme](https://github.com/google/docsy) like any other Hugo theme when creating or updating your site. This gives you all the theme-y goodness but you'll need to specify your own site structure.  You can either use the theme as a submodule (our recommended approach for easy updates), or just clone the theme into your project's `themes` subdirectory.
 
 Whichever approach you use, for simplicity we recommend copying and editing our [example site configuration](#configuring-your-site) for your project, or you may get Hugo errors for missing parameters and values when you try to build your site.
 
-### Using the Docsy theme as a submodule
+#### Using the Docsy theme as a submodule
 
-    hugo new site myproject
-    cd myproject
-    git init
-    git submodule add https://github.com/google/docsy.git themes/docsy
-    echo 'theme = "docsy"' >> config.toml
-    git submodule update --init --recursive
+The following example shows creating a new Hugo site project then adding the Docsy theme as a submodule, though you can also use `git submodule add` to add the theme to an existing site:
 
-### Cloning the Docsy theme to your projects `themes` subdirectory
+```shell
+hugo new site myproject
+cd myproject
+git init
+git submodule add https://github.com/google/docsy.git themes/docsy
+echo 'theme = "docsy"' >> config.toml
+git submodule update --init --recursive
+```
 
-    cd themes
-    git clone https://github.com/google/docsy
+#### Cloning the Docsy theme to your projects `themes` subdirectory
+
+To just clone the theme into your project, from your project root directory run:
+
+```
+cd themes
+git clone https://github.com/google/docsy
+```
 
 For more information, see [Install and Use Themes](https://gohugo.io/themes/installing-and-using-themes/#install-a-single-theme) on the [Hugo](https://gohugo.io) site.
 
-### Preview your site
+#### Preview your site
 
 To build and preview your site locally:
 
-    cd myproject
-    hugo server
+```
+cd myproject
+hugo server
+```
     
- By default, your site will be available at http://localhost:1313/.
+By default, your site will be available at http://localhost:1313/.
 
 ## Basic site configuration
 
