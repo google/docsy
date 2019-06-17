@@ -47,7 +47,11 @@ If you are using the Docsy theme as a submodule in your project, you update the 
 To update a local clone of the Docsy theme, `git pull` all the new changes.
 made in the cloned theme, you must manually resolve any merge conflicts. 
 
-For example, if you've set https://github.com/google/docsy.git as your `upstream` remote, you run the following
+To do this, go to your theme root directory and run:
+
+    git pull origin master
+
+If you have made any local changes to the cloned theme, you must manually resolve any merge conflicts.
 command from the root directory of the cloned Docsy theme:
 
 ```
