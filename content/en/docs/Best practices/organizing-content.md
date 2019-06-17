@@ -6,7 +6,7 @@ description: >
   Optional guidance and recommendations on how to organize your documentation site.
 ---
 
-If you have a look at our [example site](https://goldydocs.netlify.com/about/), you'll see that we've organized 
+If you have a look at our [Example Site](https://goldydocs.netlify.com/about/), you'll see that we've organized 
 the Documentation section into a number of subsections, each with some recommendations about what you might put 
 in that section.
 
@@ -39,7 +39,7 @@ users cared most about and immediately looked for a Get Started or Getting Start
 sections in our site. Users also wanted to find "recipes" that they could easily look up to perform specific tasks and 
 put together to create their own applications or projects, so we suggest that you add this kind of content as Tasks. 
 Other content types such as conceptual docs, reference docs, and end-to-end tutorials are less important for all doc sets, 
-particularly for smaller projects. We emphasize in our example site that these sections are optional.
+particularly for smaller projects. We emphasize in our Example Site that these sections are optional.
 
 We hope to improve the Example Site structure further as we learn more about how users interact with technical 
 documentation, particularly for Open Source projects.
