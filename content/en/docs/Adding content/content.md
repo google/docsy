@@ -22,7 +22,9 @@ It also provides a default "landing page" type of template with the site header 
 
 Each top-level section in your site corresponds to a directory in your site content root (typically `content/` or `content/en/`). Hugo automatically applies the appropriate template depending on which section folder the content is in, though you can override this by explicitly specifying a template or content type for a particular page. For example, this page is in the `docs` subdirectory of the site's content root directory `content/en/`, so Hugo automatically applies the `docs` template. If you've copied the example site, you already have appropriately named top-level section directories for using Docsy's templates, each with an index page ( `_index.md` or `index.html`) page for users to land on. These top-level sections also appear in the example site's [top-level menu](/docs/adding-content/navigation/#top-level-menu). 
 
-If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in each page if you want to use any existing Docsy template other than the default one:
+### Custom sections
+
+If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/`**`amazing`** and want one or more pages in that custom section to use Docsy's `docs` template, you add `layout: docs` to the frontmatter of each page:
 
 ```yaml
 ---
