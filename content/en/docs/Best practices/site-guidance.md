@@ -37,4 +37,4 @@ Hugo has its own conventions for linking between your files and depending on you
 links like `[relative cross-link](../../peer-folder/sub-file.md)` might behave differently. However, switching to a Hugo
 supported option might make things easier for you. For example a `{< ref "filename.md" >}` link in Hugo will actually
 find and automatically link to your file named `filename.md`. 
-[Learn more about linking](https://gohugo.io/content-management/cross-references/). 
+[Learn more about linking](/docs/adding-content/content/#working-with-links). 
