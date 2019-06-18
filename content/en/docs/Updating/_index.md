@@ -25,35 +25,45 @@ If you are using the Docsy theme as a submodule in your project, you update the 
 
 1. Navigate to the root of your local project, then run:
 
-    ```
-    $ git submodule update --remote
+    ```bash
+    git submodule update --remote
     ```
     
 1. Add and then commit the change to your project:
 
-    ```
-    $ git add themes/
-    $ git commit -m "Updating theme submodule"
+    ```bash
+    git add themes/
+    git commit -m "Updating theme submodule"
     ```
 
 1. Push the commit to your project repo. For example, run:
 
+    ```bash
+    git push origin master
     ```
-    $ git push origin master
+    
+## Update your Docsy clone
+
+If you [cloned the Docsy theme](/docs/getting-started/#cloning-the-docsy-theme-to-your-projects-themes-subdirectory) into
+the `theme` folder in your project, then you use the `git pull` command:
+
+1. Navigate to the `themes` directory in your local project:
+
+    ```bash
+    cd themes
     ```
 
-## Update a Docsy clone
+1. Ensure that `origin` is set to `https://github.com/google/docsy.git`:
 
-To update a local clone of the Docsy theme, `git pull` all the new changes.
-made in the cloned theme, you must manually resolve any merge conflicts. 
+    ```bash
+    git remote -v
+    ```
 
-To do this, go to your theme root directory and run:
+1. Update your local clone:
 
+    ```bash
     git pull origin master
+    ```
 
 If you have made any local changes to the cloned theme, you must manually resolve any merge conflicts.
-command from the root directory of the cloned Docsy theme:
 
-```
-git pull upstream master
-```
