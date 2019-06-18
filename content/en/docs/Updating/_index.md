@@ -45,7 +45,7 @@ If you are using the Docsy theme as a submodule in your project, you update the 
 ## Update your Docsy clone
 
 If you [cloned the Docsy theme](/docs/getting-started/#cloning-the-docsy-theme-to-your-projects-themes-subdirectory) into
-the `theme` folder in your project, then you use the `git pull` command:
+the `themes` folder in your project, then you use the `git pull` command:
 
 1. Navigate to the `themes` directory in your local project:
 
