@@ -240,5 +240,9 @@ Hugo will, by default, create an RSS feed for the home page and any section. For
 ```toml
 rss_sections = ["blog"]
 ```
+To disable all RSS feeds, add the following to your `config.toml`:
 
+```toml
+disableKinds = ["RSS"]
+```
 
