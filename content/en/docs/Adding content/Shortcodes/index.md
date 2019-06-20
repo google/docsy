@@ -94,7 +94,7 @@ The example below shows a section wrapping 3 feature sections.
 
 
 ```go-html-template
-{{</* blocks/section color="dark" type="features" */>}}
+{{</* blocks/section color="dark" */>}}
 {{%/* blocks/feature icon="fa-lightbulb" title="Fastest OS **on the planet**!" */%}}
 The new **TechOS** operating system is an open source project. It is a new project, but with grand ambitions.
 Please follow this space for updates!
@@ -112,7 +112,7 @@ For announcement of latest features etc.
 | ---------------- |------------| ------------|
 | height | | See above.
 | color | | See above. 
-| type  | | Specify "features" if you want this section to contain a horizontal row of features, otherwise omit this parameter.
+| type  | | Specify "section" if you want a general container,  omit this parameter if you want this section to contain a horizontal row of features.
 
 ### blocks/feature
 
