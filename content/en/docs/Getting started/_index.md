@@ -85,7 +85,7 @@ as a Git submodule. You can clone the Example Site either by:
 
 #### Using the GitHub UI
 
-This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
+<!--This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
 
 1. Go to the [repo page](https://github.com/google/docsy-example) and click **Use this template**.
 
@@ -99,7 +99,23 @@ This is the simplest approach, as the Docsy example site repo is a [template rep
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.-->
+
+Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
+
+1.  In the [the Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
+1.  Rename your new fork:
+    1.  Click **Settings**, and type a new name in the **Repository name** field.
+    1.  Click **Rename** to save your changes.
+1.  Get the web URL for cloning your site repo by clicking **Clone or download** on its main repo page.
+1.  Make your own local working copy of your repo using `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL:
+
+    <pre>
+    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
+    </pre>
+
 You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
+
 
 #### Using the command line
 
@@ -190,7 +206,7 @@ By default, your site will be available at http://localhost:1313/.
 
 ## Basic site configuration
 
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. We recommend copying this `config.toml` and editing it even if you're just using the theme and not copying the entire Docsy example site.
+Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this `config.toml` and editing it even if you're just using the theme and not copying the entire Docsy example site**.
 
 The Docsy example site comes with some defaults you may want to remove or customize straight away:
 
@@ -224,7 +240,7 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 
 ## What's next?
 
-* [Add content and customize your site](/docs/adding-content/).
+* [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
 
