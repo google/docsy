@@ -4,7 +4,7 @@ linkTitle: "Look and Feel"
 date: 2017-01-05
 weight: 2
 description: >
-  This page tells you how to customize colors, fonts, and more for your site.
+  Customize colors, fonts, and more for your site.
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. Also because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values in its special SCSS project variables file, or do more serious customization by creating your own versions of entire SCSS files.

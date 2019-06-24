@@ -1,13 +1,36 @@
 ---
-title: "User Feedback"
+title: "Analytics and User Feedback"
 date: 2019-06-05
-weight: 3
+weight: 7
 description: >
-  How to access and use the "was this page helpful?" widget data, disable the widget on a single
+  Add Google Analytics tracking to your site, use the "was this page helpful?" widget data, disable the widget on a single
   page or all pages, and change the response text.
 ---
 
-## Overview
+## Adding Analytics
+
+The Docsy theme contains built-in support for [Google Analytics](https://analytics.google.com/analytics/web/) via Hugo's [internal template](https://gohugo.io/templates/internal/#google-analytics), which is included in the theme. Once you set Analytics up as described below, usage information for your site (such as page views) is sent to your Google Analytics account.
+
+### Setup
+
+1. Ensure you have [set up a Google Analytics property](https://support.google.com/analytics/answer/1042508) for your site: this gives you an Analytics ID to add to your config, which Docsy in turn adds to all your site's pages.
+1. Open `config.toml`.
+1. Enable Google Analytics by setting the Tracking ID property to your site's Analytics ID.
+
+        [services.googleAnalytics]
+        id = "UA-00000000-0"
+
+1. Save and close `config.toml`.
+1. Ensure that your site is built with `HUGO_ENV="production"`, as Docsy only adds Analytics tracking to production-ready sites. You can specify this variable as a command line flag to Hugo: 
+
+    ```
+    $ env HUGO_ENV="production" hugo
+    ```
+
+    Alternatively, if you're using Netlify, you can specify it as a Netlify [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) in `netlify.toml` or the Netlify UI, along with the Hugo version.
+
+
+## User Feedback
 
 By default Docsy puts a "was this page helpful?" feedback widget at the bottom of every
 documentation page, as shown in Figure 1.
@@ -53,14 +76,10 @@ this was the only change you introduced on each page, it's more reasonable to be
 your users find code samples at the top of pages helpful. The scientific method, applied to
 technical writing, in other words!
 
-## Setup
+### Setup
 
 1. Open `config.toml`.
-1. Set the Google Analytics Tracking ID property to your site's ID.
-
-        [services.googleAnalytics]
-        id = "UA-00000000-0"
-
+1. Ensure that Google Analytics is enabled, as described [above](#setup).
 1. Set the response text that users see after clicking **Yes** or **No**.
 
         [params.ui.feedback]
@@ -69,7 +88,7 @@ technical writing, in other words!
         no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 1. Save and close `config.toml`.
 
-## Access the feedback data
+### Access the feedback data
 
 This section assumes basic familiarity with Google Analytics. For example, you should know how
 to check pageviews over a certain time range and navigate between accounts if you have access to
@@ -102,11 +121,11 @@ what happens when a user clicks **Yes** or **No**. It's just a `click` event lis
 fires the Google Analytics JavaScript function for logging an Event, disables the **Yes** and
 **No** buttons, and shows the response text.
 
-## Disable feedback on a single page
+### Disable feedback on a single page
 
 Add `hide_feedback: true` to the page's front matter.
 
-## Disable feedback on all pages
+### Disable feedback on all pages
 
 Set `params.ui.feedback.enable` to `false` in `config.toml`:
 
