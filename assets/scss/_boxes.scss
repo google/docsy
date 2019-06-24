@@ -79,7 +79,7 @@
 
 // Styling for section boxes
 .td-box {
-  .row {
+  .row.section {
        padding-left: 5rem;
        padding-right: 5rem;
        flex-direction: column;
@@ -93,11 +93,12 @@
        }
    }
 
-  .row.features {
-   flex-direction: row;
+  .row {
+       padding-left: 5rem;
+       padding-right: 5rem;
+       flex-direction: row;
   }
 }
-
 // Styling for community page link boxes
 
 .td-box.linkbox {
