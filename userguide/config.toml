@@ -79,6 +79,10 @@ weight = 1
 copyright = "Global Inc"
 privacy_policy = "https://policies.google.com/privacy"
 github_repo = "https://github.com/google/docsy-example"
+time_format_blog = "Monday, January 02, 2006"
+time_format_default = "January 2, 2006"
+# Sections to publish in the main RSS feed.
+rss_sections = ["blog"]
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 # gcs_engine_id = "011737558837375720776:fsdu1nryfng"
