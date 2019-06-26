@@ -1,0 +1,7 @@
+[build]
+  publish = "userguide/public"
+  command = "git submodule update -f --init && cd userguide && hugo --themesDir ../.."
+
+[build.environment]
+  HUGO_VERSION = "0.53"
+  HUGO_THEME = "repo"
