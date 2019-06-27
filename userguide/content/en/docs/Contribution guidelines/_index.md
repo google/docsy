@@ -33,7 +33,7 @@ information on using pull requests.
 
 ### Previewing your changes
 
-As Docsy is a theme rather than a site, you can't serve the theme directly to check your changes work. Instead use your updated local theme in a local copy of the Docsy example site (copy or make your changes in the `themes/docsy` directory) and [preview](/docs/deployment/) from there.
+As Docsy is a theme rather than a site, you can't serve the theme directly to check your changes work. Instead use your updated local theme in a local copy of the Docsy example site (copy or make your changes in the `themes/docsy` directory) and [preview](/docs/deployment/) from there. Alternatively, clone the [Docsy theme repo](https://github.com/google/docsy) and test your changes in a local copy of this site, as described [below](#previewing-your-changes-locally).
 
 ### Community guidelines
 
@@ -52,7 +52,7 @@ We use [Netlify](https://www.netlify.com/) to manage the deployment of the site 
 
 ### Quick start with Netlify
 
-1. Fork the [Docsy website repo](wherever it goes) on GitHub.
+1. Fork the [Docsy repo](https://github.com/google/docsy) on GitHub: this site's files live in the `userguide` subdirectory.
 1. Make your changes and send a pull request (PR).
 1. If you're not yet ready for a review, add "WIP" to the PR name to indicate 
   it's a work in progress. (**Don't** add the Hugo property 
@@ -81,13 +81,21 @@ If you've just spotted something you'd like to change while using the docs, Docs
 If you want to run your own local Hugo server to preview your changes as you work:
 
 1. Follow the instructions in [Getting started](/docs/getting-started) to install Hugo and any other tools you need.
-1. Fork the [Docsy website repo](wherever it goes) repo into your own project, then create a local copy using `git clone`. Don’t forget to use `--recurse-submodules` or you won’t pull down some of the code you need to generate a working site.
+1. Fork the [Docsy](https://github.com/google/docsy) repo into your own project, then create a local copy using `git clone`. Don’t forget to use `--recurse-submodules` or you won’t pull down some of the code you need to generate a working site.
 
     ```
     git clone --recurse-submodules --depth 1 https://github.com/google/docsy-site.git
     ```
 
-1. Run `hugo server` in the site root directory. By default your site will be available at http://localhost:1313/. Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.
+1. Change to the `userguide` directory and run the following Hugo command to build the site and start the Hugo server.
+   Note that you need the `themesDir` flag because the site files are inside the theme repo.
+
+    ```
+    cd userguide
+    hugo server --themesDir ../..
+    ```
+    
+   By default your site will be available at http://localhost:1313/. Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.
 1. Continue with the usual GitHub workflow to edit files, commit them, push the
   changes up to your fork, and create a pull request.
 
