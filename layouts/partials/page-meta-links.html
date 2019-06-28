@@ -1,6 +1,7 @@
 {{ if .Path }}
 {{ $gh_repo := ($.Param "github_repo") }}
 {{ $gh_subdir := ($.Param "github_subdir") }}
+{{ $gh_project_repo := ($.Param "github_project_repo") }}
 {{ if $gh_repo }}
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 {{ $editURL := printf "%s/edit/master/content/%s" $gh_repo .Path }}
