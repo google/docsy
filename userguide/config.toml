@@ -78,7 +78,19 @@ weight = 1
 [params]
 copyright = "Global Inc"
 privacy_policy = "https://policies.google.com/privacy"
-github_repo = "https://github.com/google/docsy-example"
+
+# Menu title if your navbar has a versions selector to access old versions of your site.
+# This menu appears only if you have at least one [params.versions] set.
+version_menu = "Releases"
+
+# Repository configuration (URLs for in-page links to opening issues and suggesting changes)
+github_repo = "https://github.com/google/docsy"
+# An optional link to a related project repo. For example, the sibling repository where your product code lives.
+# github_project_repo = "https://github.com/google/docsy"
+
+# Specify a value here if your content directory is not in your repo's root directory
+github_subdir = "userguide"
+
 time_format_blog = "Monday, January 02, 2006"
 time_format_default = "January 2, 2006"
 # Sections to publish in the main RSS feed.
