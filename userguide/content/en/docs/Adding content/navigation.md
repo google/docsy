@@ -33,6 +33,42 @@ If you want to add a link to an external site to this menu, add it in `config.to
     url = "https://github.com/google/docsy/"
 ```
 
+### Adding a version drop-down
+
+Depending on your project's releases and versioning, you may want to let your users access "old" versions of your site (how you deploy your archived sites is up to you) to read about previous versions of your project.
+
+If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a version selector drop down to the top-level menu. You specify a URL and a name for each version you would like to add to the menu, as in the following example:
+
+```
+# Add your release versions here
+[[params.versions]]
+  version = "master"
+  url = "https://master.kubeflow.org"
+
+[[params.versions]]
+  version = "v0.2"
+  url = "https://v0-2.kubeflow.org"
+
+[[params.versions]]
+  version = "v0.3"
+  url = "https://v0-3.kubeflow.org"
+```
+
+(don't forget to add your current version so users can navigate back!)
+
+The default version drop-down menu title is `Releases`. To change this, change the `version_menu` parameter in `config.toml`:
+
+```
+version_menu = "Releases"
+```
+
+
+### Adding a language drop-down
+
+If you configure more than one language in `config.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
+
+You can find out more in [Multi-language support](/docs/language/).
+
 ## Section menu
 
 The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title`, or `linkTitle` if different, as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
