@@ -171,7 +171,9 @@ Whichever approach you use, for simplicity we recommend copying and editing our 
 
 #### Using the Docsy theme as a submodule
 
-The following example shows creating a new Hugo site project then adding the Docsy theme as a submodule, though you can also use `git submodule add` to add the theme to an existing site:
+Use a submodule to avoid cloning a copy of the Docsy theme to your project's repository.
+
+To create a new Hugo site project and then add the Docsy theme as a submodule, run the following commands from your project's root directory. 
 
 ```shell
 hugo new site myproject
@@ -182,9 +184,26 @@ echo 'theme = "docsy"' >> config.toml
 git submodule update --init --recursive
 ```
 
-#### Cloning the Docsy theme to your projects `themes` subdirectory
+If you want to add the Docay theme to an existing site, you can skip down to the `git submodule add` command. For example, 
+you run the following commands from your project's root directory:
 
-To just clone the theme into your project, from your project root directory run:
+```
+git submodule add https://github.com/google/docsy.git themes/docsy
+echo 'theme = "docsy"' >> config.toml
+git submodule update --init --recursive
+```
+
+#### Cloning the Docsy theme to your project's `themes` subdirectory
+
+Depending on how you host and run Hugo builds for your site, if you choose to clone the Docsy theme into your project
+you might also need to include a copy of the Docsy theme in your project's repository. For example, you migth need to 
+copy and maintain a complete copy of Docsy in your GitHub repo.
+
+By default, Hugo looks in the `themes` subdirectory. If you choose to clone the Docsy theme to a different folder, you must 
+configure the [`themesDir`](https://gohugo.io/getting-started/configuration/#all-configuration-settings) setting in your 
+`config.toml`.
+
+To clone Docsy into your project's `theme` folder, run the following commands from your project's root directory:
 
 ```
 cd themes
