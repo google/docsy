@@ -3,6 +3,8 @@
 # params (global and per language)
 # menu (global and per language)
 # outputformats and mediatypes
+# For a full list of parameters used in Docsy sites, see:
+# https://github.com/google/docsy-example/blob/master/config.toml
 
 
 [params]
