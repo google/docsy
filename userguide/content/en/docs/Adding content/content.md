@@ -248,3 +248,32 @@ To disable all RSS feeds, add the following to your `config.toml`:
 disableKinds = ["RSS"]
 ```
 
+## Sitemap
+
+Hugo creates a `sitemap.xml` file for your generated site by default: for example, [here's the sitemap](/sitemap.xml) for this site.
+
+You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `config.toml`:
+
+```toml
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+```
+
+To override any of these values for a given page, specify it in page frontmatter:
+
+```yaml
+---
+title: "Adding Content"
+linkTitle: "Adding Content"
+weight: 1
+description: >
+  Add different types of content to your Docsy site.
+sitemap:
+  priority: 1.0
+---
+```
+
+To learn more about configuring sitemaps, see [Sitemap Template](https://gohugo.io/templates/sitemap-template/).
+
