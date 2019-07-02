@@ -10,7 +10,7 @@ If you have a look at our [Example Site](https://goldydocs.netlify.com/about/), 
 the Documentation section into a number of subsections, each with some recommendations about what you might put 
 in that section.
 
-### Do I need to use this structure?
+## Do I need to use this structure?
 
 Absolutely not! The site structure in the Example Site was created to meet the needs of large docsets for large
 products with lots of features, potential tasks, and reference elements. For a simpler docset (like this one!),
@@ -28,9 +28,13 @@ We do recommend that (as we've done here) you provide at least:
 You may also want to create some tasks/how-tos for your project's features. Feel free to copy this Docsy user guide 
 site or even just the docs section instead if you like this simpler structure better. 
 
+{{% alert title="Tip" %}}
+If you want to copy this guide, be aware that its [source files](https://github.com/google/docsy/tree/master/userguide) are *inside* the Docsy theme repo, and so it doesn't have its own `themes/` directory: instead, we run `hugo server --themesDir ../..` to use Docsy from its parent directory. You may want to either copy the site and [add a `themes/` directory with Docsy](/docs/getting-started/#option-2-use-the-docsy-theme-in-your-own-site), or just copy the `docs/` folder into your existing site's content root.
+{{% /alert %}}
+
 [Learn more about how Hugo and Docsy use folders and other files to organize your site](/docs/adding-content/content/#organizing-your-documentation).
 
-### Why this structure?
+## Why this structure?
 
 We based the Example Site structure on our own experiences creating (and using) large documentation sets for
 different types of project and on user research carried out on some of our bigger sites. In user studies we saw that 
