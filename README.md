@@ -5,7 +5,7 @@ Docsy is a [Hugo](https://gohugo.io/) theme for technical documentation sets, pr
 This is not an officially supported Google product. This project is actively being maintained.
 
 
-## Prerequisites and installation overview
+## Prerequisites and installation
 
 The following high-level list includes the basic prerequisites for using Docsy in your site. 
 
