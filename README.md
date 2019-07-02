@@ -17,7 +17,7 @@ prerequisites and details about the various installation options.
 To use the Docsy theme in your site:
 
 - Install a recent release of the Hugo "extended" version (we recommend version 0.53 or later). If you install from the 
-  [release page](https://github.com/gohugoio/hugo/releases), you must ensure to download the `hugo_extended` version 
+  [release page](https://github.com/gohugoio/hugo/releases), make sure you download the `_extended` version 
   which supports SCSS.
 
 - Get the Docsy theme:
