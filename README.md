@@ -7,7 +7,7 @@ This is not an officially supported Google product. This project is actively bei
 
 ## Prerequisites and installation
 
-The following high-level list includes the basic prerequisites for using Docsy in your site. 
+The following are basic prerequisites for using Docsy in your site:
 
 <!-- TODO: Update to docsy.dev URL -->
 See the 
