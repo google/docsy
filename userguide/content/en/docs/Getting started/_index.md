@@ -171,9 +171,13 @@ Whichever approach you use, for simplicity we recommend copying and editing our 
 
 #### Using the Docsy theme as a submodule
 
-Use a submodule to avoid cloning a copy of the Docsy theme to your project's repository.
+Adding Docsy as a Git submodule is our recommended approach for using the theme, as it means your project
+always refers to the Docsy repo version at your chosen revision, rather than you having your own copy in 
+your repo that may result in merge conflicts when you try to update it. This is the approach used by our
+[example project](https://github.com/google/docsy-example).
 
-To create a new Hugo site project and then add the Docsy theme as a submodule, run the following commands from your project's root directory. 
+
+To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory. 
 
 ```shell
 hugo new site myproject
