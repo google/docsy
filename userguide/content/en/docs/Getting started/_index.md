@@ -184,7 +184,7 @@ echo 'theme = "docsy"' >> config.toml
 git submodule update --init --recursive
 ```
 
-If you want to add the Docay theme to an existing site, you can skip down to the `git submodule add` command. For example, 
+To add the Docsy theme to an existing site, run the following commands from your project's root directory:
 you run the following commands from your project's root directory:
 
 ```
