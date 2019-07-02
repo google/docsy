@@ -14,7 +14,7 @@ See the
 [Docsy Getting Started Guide](https://docsydocs.netlify.com/docs/getting-started/) for a complete list of the
 prerequisites and details about the various installation options.
 
-To use the Docsy theme in your site, you must meet the following prerequisites:
+To use the Docsy theme in your site:
 
 - Install a recent release of the Hugo "extended" version (we recommend version 0.53 or later). If you install from the 
   [release page](https://github.com/gohugoio/hugo/releases), you must ensure to download the `hugo_extended` version 
