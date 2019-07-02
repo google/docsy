@@ -203,9 +203,9 @@ Depending on how you host and run Hugo builds for your site, if you choose to cl
 you might also need to include a copy of the Docsy theme in your project's repository. For example, you migth need to 
 copy and maintain a complete copy of Docsy in your GitHub repo.
 
-By default, Hugo looks in the `themes` subdirectory. If you choose to clone the Docsy theme to a different folder, you must 
-configure the [`themesDir`](https://gohugo.io/getting-started/configuration/#all-configuration-settings) setting in your 
-`config.toml`.
+
+
+
 
 To clone Docsy into your project's `theme` folder, run the following commands from your project's root directory:
 
