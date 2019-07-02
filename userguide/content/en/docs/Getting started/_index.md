@@ -199,10 +199,7 @@ git submodule update --init --recursive
 
 #### Cloning the Docsy theme to your project's `themes` subdirectory
 
-Depending on how you host and run Hugo builds for your site, if you choose to clone the Docsy theme into your project
-you might also need to include a copy of the Docsy theme in your project's repository. For example, you migth need to 
-copy and maintain a complete copy of Docsy in your GitHub repo.
-
+If you don't want to use a submodules (for example, if you want to customize and maintain your  own copy of the theme directly, or your deployment choice requires you to include a copy of the theme in your repository), you can clone the theme into your project.
 
 
 
