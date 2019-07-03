@@ -27,7 +27,7 @@ To use the Docsy theme in your site:
     You can customize this pre-configured basic site into your own Docsy themed site. 
     [Learn more...](https://github.com/google/docsy-example)
   
-  - Add docsy to your exsiting site. You can either add Docsy as a submodule, or clone the Docsy repo into your site.
+  - Add Docsy to your existing Hugo site repo's `themes` directory. You can either add Docsy as a Git submodule, or clone the Docsy theme into your project.
     See the complete list of [Docsy installation options](https://docsydocs.netlify.com/docs/getting-started/) .
   
     For example, to clone Docsy into the `theme` directory of your project, you run the following command from 
