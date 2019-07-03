@@ -24,7 +24,7 @@ To use the Docsy theme in your site:
 
   - (Recommended) Copy the [Docsy Example](https://github.com/google/docsy-example)
 ￼	 project, which has the Docsy theme as a submodule.
-    you can modify and customize a pre-configured site, into your own Docsy themed site. 
+    You can customize this pre-configured basic site into your own Docsy themed site. 
     [Learn more...](https://github.com/google/docsy-example)
   
   - Add docsy to your exsiting site. You can either add Docsy as a submodule, or clone the Docsy repo into your site.
