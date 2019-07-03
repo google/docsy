@@ -11,8 +11,8 @@ The following are basic prerequisites for using Docsy in your site:
 
 <!-- TODO: Update to docsy.dev URL -->
 See the 
-[Docsy Getting Started Guide](https://docsydocs.netlify.com/docs/getting-started/) for a complete list of the
-prerequisites and details about the various installation options.
+[Docsy Getting Started Guide](https://docsydocs.netlify.com/docs/getting-started/) for 
+details about the various installation options.
 
 To use the Docsy theme in your site:
 
@@ -23,19 +23,13 @@ To use the Docsy theme in your site:
 - Get the Docsy theme:
 
   - (Recommended) Copy the [Docsy Example](https://github.com/google/docsy-example)
-￼	 project, which has the Docsy theme as a submodule.
+￼	   project, which includes the Docsy theme as a submodule.
     You can customize this pre-configured basic site into your own Docsy themed site. 
     [Learn more...](https://github.com/google/docsy-example)
   
-  - Add Docsy to your existing Hugo site repo's `themes` directory. You can either add Docsy as a Git submodule, or clone the Docsy theme into your project.
-    See the complete list of [Docsy installation options](https://docsydocs.netlify.com/docs/getting-started/) .
-  
-    For example, to clone Docsy into the `theme` directory of your project, you run the following command from 
-    your project's root directory:
-    
-    ```
-    git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git themes/docsy
-    ```
+  - Add Docsy to your existing Hugo site repo's `themes` directory. You can either add Docsy as a Git submodule, or 
+    clone the Docsy theme into your project. See the complete list of 
+    [Docsy installation options](https://docsydocs.netlify.com/docs/getting-started/).
 
 - Install `PostCSS` so that the site build can create the final CSS assets. You can install it locally by running 
   the following commands from the root directory of your project:
@@ -47,7 +41,6 @@ To use the Docsy theme in your site:
 
 ## Usage and documentation
 
-
 <!-- TODO: Update to docsy.dev URL -->
 You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example). The Docsy Example Project is hosted at [https://goldydocs.netlify.com/](https://goldydocs.netlify.com/).
 
@@ -56,7 +49,6 @@ To use the Docsy theme, you can either:
 * Copy and edit the example project’s repo, which will also give you a skeleton structure for your top-level and documentation sections, or
 * Specify the Docsy theme like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/)
  when creating or updating your site. This gives you all the theme-y goodness but you’ll need to specify your own site structure.
-
 
 <!-- TODO: Update to docsy.dev URL -->
 Docsy also has its own user guide (using Docsy, of course!), which you can find at [https://docsydocs.netlify.com/](https://docsydocs.netlify.com/). Alternatively you can use Hugo to generate and serve a local copy (also useful for testing local theme changes), making sure you have installed all the prerequisites listed below:
