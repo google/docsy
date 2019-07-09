@@ -77,8 +77,8 @@ To use the Docsy Hugo theme, you have a couple of options:
 
 ### Option 1: Clone the Docsy example site
 
-The Example Site gives you a good starting point for building your docs site and is pre-configured to use the Docsy theme
-as a Git submodule. You can clone the Example Site either by:
+The [Example Site](https://example.docsy.dev) gives you a good starting point for building your docs site and is
+pre-configured to use the Docsy theme as a Git submodule. You can clone the Example Site either by:
 
 *  [Using the GitHub UI](#using-the-github-ui)
 *  [Using the command line](#using-the-command-line)
