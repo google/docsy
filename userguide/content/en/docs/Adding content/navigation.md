@@ -105,11 +105,12 @@ By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse
     ```
 
     Alternatively, if you're using Netlify, you can specify it as a Netlify [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) in `netlify.toml` or the Netlify UI, along with the Hugo version. It may take a day or so before your site has actual search results available.
-2.  Create a Google Custom Search Engine for your deployed site by clicking **New Search Engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
+2.  Create a Google Custom Search Engine for your deployed site by clicking **New search engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
+3.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
 
 ### Adding the search page
 
-Once you have your search engine, you can add the feature to your site:
+Once you have your search engine set up, you can add the feature to your site:
 
 1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
 
