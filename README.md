@@ -22,8 +22,7 @@ The following are basic prerequisites for using Docsy in your site:
 
 ## Example and usage
 
-<!-- TODO: Update to docsy.dev URL -->
-You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example). The Docsy Example Project is hosted at [https://goldydocs.netlify.com/](https://goldydocs.netlify.com/).
+You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example). The Docsy Example Project is hosted at [https://example.docsy.dev/](https://example.docsy.dev/).
 
 To use the Docsy theme for your own site:
 
@@ -35,14 +34,12 @@ To use the Docsy theme for your own site:
   - Add Docsy to your existing Hugo site repo's `themes` directory. You can either add Docsy as a Git submodule, or 
     clone the Docsy theme into your project.
 
-<!-- TODO: Update to docsy.dev URL -->
-See the [Docsy Getting Started Guide](https://docsydocs.netlify.com/docs/getting-started/) for 
+See the [Docsy Getting Started Guide](https://docsy.dev/docs/getting-started/) for 
 details about the various usage options.
 
 ## Documentation
 
-<!-- TODO: Update to docsy.dev URL -->
-Docsy has its own user guide (using Docsy, of course!) with lots more information about using the theme, which you can find at [https://docsydocs.netlify.com/](https://docsydocs.netlify.com/). Alternatively you can use Hugo to generate and serve a local copy of the guide (also useful for testing local theme changes), making sure you have installed all the prerequisites listed above:
+Docsy has its own user guide (using Docsy, of course!) with lots more information about using the theme, which you can find at [https://docsy.dev/](https://docsy.dev/). Alternatively you can use Hugo to generate and serve a local copy of the guide (also useful for testing local theme changes), making sure you have installed all the prerequisites listed above:
 
 ```
 git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
@@ -50,4 +47,4 @@ cd docsy/userguide/
 hugo server --themesDir ../..
 ```
 
-Note that you need the `themesDir` flag because the site files are inside the theme repo.
+Note that you need the `themesDir` flag when running Hugo because the site files are inside the theme repo.
