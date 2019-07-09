@@ -38,6 +38,6 @@ If you have a very large documentation project, our example site structure may n
 
 ## Ready to get started?
 
-Find out how to build and serve your first site in [Getting Started](./getting-started/). Or visit the example site and [its repo](https://github.com/google/docsy-example) and start exploring!
+Find out how to build and serve your first site in [Getting Started](./getting-started/). Or visit the [example site](https://example.docsy.dev) and [its repo](https://github.com/google/docsy-example) and start exploring!
 
 
