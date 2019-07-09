@@ -14,7 +14,7 @@ Example sites that have low to no customization:
 | Site  | Repo (if public)  |
 |---|---|
 | [This Docsy documentation site](/docs) | https://github.com/google/docsy |
-| "Goldydocs" - a Docsy example site | https://github.com/google/docsy-example  |
+| ["Goldydocs" - a Docsy example site](https://example.docsy.dev) | https://github.com/google/docsy-example  |
 | https://www.kubeflow.org/  | https://github.com/kubeflow/website  |
 | https://agones.dev/site/ | https://github.com/GoogleCloudPlatform/agones/tree/master/site |
 
