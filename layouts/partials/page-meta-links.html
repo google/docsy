@@ -5,10 +5,10 @@
 {{ if $gh_repo }}
 <div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
 {{ $editURL := printf "%s/edit/master/content/%s" $gh_repo .Path }}
-{{ if and ($gh_subdir) (.Site.IsMultiLingual) }}
+{{ if and ($gh_subdir) (.Site.Language.Lang) }}
 {{ $editURL = printf "%s/edit/master/%s/content/%s/%s" $gh_repo $gh_subdir ($.Site.Language.Lang) $.Path }}
 {{ end }}
-{{ if .Site.IsMultiLingual }}
+{{ if .Site.Language.Lang }}
 {{ $editURL = printf "%s/edit/master/content/%s/%s" $gh_repo ($.Site.Language.Lang) .Path }}
 {{ end }}
 {{ if $gh_subdir }}
