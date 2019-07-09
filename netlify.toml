@@ -1,6 +1,6 @@
 [build]
   publish = "userguide/public"
-  command = "git submodule update -f --init && cd userguide && npm install postcss-cli && hugo --baseURL="https://www.docsy.dev" --themesDir ../.."
+  command = "git submodule update -f --init && cd userguide && npm install postcss-cli && hugo --themesDir ../.."
 
 [build.environment]
   HUGO_VERSION = "0.55.6"
