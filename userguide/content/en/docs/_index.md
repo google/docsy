@@ -12,7 +12,7 @@ Welcome to the Docsy theme user guide! This guide shows you how to get started c
 ## What is Docsy?
 
 Docsy is a theme for the [Hugo](https://gohugo.io/) static site generator that's specifically designed for technical 
-documentation sets and has a lot of the best practices built in. Use Docsy to get a working and reliable documentation 
+documentation sets and has a lot of best practices built in. Use Docsy to get a working and reliable documentation 
 site up and running fast, and then get back to focusing on great content for your users. 
 [Learn more about Docsy](/about).
 
