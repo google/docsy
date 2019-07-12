@@ -189,7 +189,6 @@ git submodule update --init --recursive
 ```
 
 To add the Docsy theme to an existing site, run the following commands from your project's root directory:
-you run the following commands from your project's root directory:
 
 ```
 git submodule add https://github.com/google/docsy.git themes/docsy
