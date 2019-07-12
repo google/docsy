@@ -8,7 +8,7 @@
         <ul>
             {{ range $pages }}
                 {{ if eq .Parent $parent }}
-                    <li><a href="{{ .Permalink }}">{{- .Title -}}</a></li>
+                    <li><a href="{{ .RelPermalink }}">{{- .Title -}}</a></li>
                 {{ end }}
             {{ end }}
         </ul>
@@ -19,7 +19,7 @@
             {{ if eq .Parent $parent }}
                 <div class="entry">
                     <h5>
-                        <a href="{{ .Permalink }}">{{- .Title -}}</a>
+                        <a href="{{ .RelPermalink }}">{{- .Title -}}</a>
                     </h5>
                     <p>{{ .Description }}</p>
                 </div>
