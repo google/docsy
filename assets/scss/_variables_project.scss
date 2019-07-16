@@ -5,3 +5,38 @@ Nothing defined here. The Hugo project that uses this theme can override theme v
 assets/scss/_variables_project.scss
 
 */
+
+$google_font_name: "Nunito" !default;
+$google_font_family: "Nunito:300,300i,400,400i,700,700i" !default;
+$web-font-path: "https://fonts.googleapis.com/css?family=#{$google_font_family}";
+
+$primary: #6B8D73;
+$secondary: #a7b796;
+$enable-gradients: true;
+$enable-rounded: true;
+$enable-shadows: true;
+
+$primary: #30638E !default;
+$primary-light: lighten($primary, 75%) !default;
+$secondary: #FFA630 !default;
+$success: #3772FF !default;
+$info: #C0E0DE !default;
+$warning: #ED6A5A !default;
+$danger: #ED6A5A !default;
+$white: #fff !default;
+$light: #D3F3EE !default;
+
+$color-primary: #89bf04 !default;
+$color-secondary: #9012fe !default;
+$color-info: #a7b796 !default;
+$color-warning: #ff6060 !default;
+$color-danger: #f00 !default;
+
+$_color-post: #6B8D73 !default;
+$_color-get: #3E5D58 !default;
+$_color-put: #97AD96 !default;
+$_color-delete: #AD6433 !default;
+$_color-head: #ECA760 !default;
+$_color-patch: #9D9C9C !default;
+$_color-disabled: #ebebeb !default;
+$_color-options: #BAC8B9 !default;
