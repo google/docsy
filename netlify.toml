@@ -1,7 +1,9 @@
+# Commannd to start build process of Hugo
 [build]
   publish = "userguide/public"
   command = "git submodule update -f --init && cd userguide && npm install postcss-cli && hugo --themesDir ../.."
 
+# Specifying the Build Environment of the Hugo Tool  
 [build.environment]
   HUGO_VERSION = "0.55.6"
   HUGO_THEME = "repo"
