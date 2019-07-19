@@ -223,4 +223,10 @@ resources:
 | 2 | Command. One of `Fit`, `Resize` or `Fill`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-processing-methods).
 | 3 | Processing options, e.g. `400x450`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-methods).
 
+### swaggerui
 
+The `swaggerui` shortcode can be placed anywhere inside a `swagger` layout; it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source, which can be hosted anywhere (for example, the root `/static` folder of Hugo).
+
+{{< swaggerui src="/openapi/openapi.yaml" >}}
+
+You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
