@@ -106,7 +106,11 @@ By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse
 
     Alternatively, if you're using Netlify, you can specify it as a Netlify [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) in `netlify.toml` or the Netlify UI, along with the Hugo version. It may take a day or so before your site has actual search results available.
 2.  Create a Google Custom Search Engine for your deployed site by clicking **New search engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
-3.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
+3.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to do the following:
+
+    * Select **Look and feel**. Change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
+    * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
+    
 
 ### Adding the search page
 
