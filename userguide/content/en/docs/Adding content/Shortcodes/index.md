@@ -227,6 +227,8 @@ resources:
 
 The `swaggerui` shortcode can be placed anywhere inside a `swagger` layout; it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source, which can be hosted anywhere (for example, the root `/static` folder of Hugo).
 
-{{< swaggerui src="/openapi/openapi.yaml" >}}
+```go-html-template
+{{</* swaggerui src="/openapi/openapi.yaml" */>}}
+```
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
