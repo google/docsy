@@ -92,7 +92,7 @@ By default, the section menu will show the current section fully expanded all th
 
 Breadcrumb navigation is enabled by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
 
-## Configure search
+## Configure GCSE search
 
 By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) to search your site. To enable this feature, you'll first need to make sure that you have built a public production version of your site, as otherwise your site won't be crawled and indexed.
 
@@ -132,7 +132,7 @@ Once you have your search engine set up, you can add the feature to your site:
     gcs_engine_id = "011737558837375720776:fsdu1nryfng"
     ```
 
-### Disabling search
+### Disabling GCSE search
 
 If you don't specify a Google Custom Search Engine ID for your project, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
@@ -143,3 +143,32 @@ By default, the search box appears in both the top navigation bar and at the top
 ```
 sidebar_search_disable = true
 ```
+
+## Configure Algolia DocSearch
+
+As an alternative to GCSE, you can use [Algolia DocSearch](https://community.algolia.com/docsearch/) with this theme. Algolia DocSearch is free for public documentation sites.
+
+### Sign up for Algolia DocSearch
+
+Complete the form at [https://community.algolia.com/docsearch/#join-docsearch-program](https://community.algolia.com/docsearch/#join-docsearch-program).
+
+If you are accepted to the program, you will receive the JavaScript code to add to your documentation site from Algolia by email.
+
+### Adding Algolia DocSearch
+
+1. Enable Algolia DocSearch in `config.toml`.
+
+    ```
+    # Enable Algolia DocSearch
+    algolia_docsearch = true
+    ```
+
+2. Remove or comment out any GCSE ID in `config.toml` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+
+3. Disable the sidebar search in `config.toml` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+
+3. Add the JavaScript code provided to you by Algolia to the head and body of every page on your site. See [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end) for details.
+
+4. Update the `inputSelector` field in the body end Javascript with the appropriate CSS selector (e.g. `.td-search-input` to use the default CSS from this theme).
+
+When you've completed these steps the Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.

@@ -97,7 +97,10 @@ time_format_default = "January 2, 2006"
 rss_sections = ["blog"]
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011217106833237091527:la2vtv2emlw"
+#gcs_engine_id = "011217106833237091527:la2vtv2emlw"
+
+# Enable Algolia DocSearch
+algolia_docsearch = true
 
 # User interface configuration
 [params.ui]
@@ -105,6 +108,8 @@ gcs_engine_id = "011217106833237091527:la2vtv2emlw"
 sidebar_menu_compact = false
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
+#  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
+sidebar_search_disable = true
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 
