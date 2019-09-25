@@ -21,7 +21,7 @@
                     <h5>
                         <a href="{{ .RelPermalink }}">{{- .Title -}}</a>
                     </h5>
-                    <p>{{ .Description }}</p>
+                    <p>{{ .Description | markdownify }}</p>
                 </div>
             {{ end }}
         {{ end }}
