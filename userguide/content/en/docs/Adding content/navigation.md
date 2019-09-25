@@ -111,7 +111,9 @@ By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse
     * Select **Look and feel**. Change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
     * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
     
-Please note: to have some search result in GCSE your website must be indexed by Google. To do it you must submit the sitemap for indexing through Google Search Console (<https://support.google.com/webmasters/answer/183668?hl=en>).
+{{% alert title="Tip" %}}
+Your site search results should show up within a couple of days. If it takes longer than that, you can manually request that your site is indexed by [submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
+{{% /alert %}}
 
 ### Adding the search page
 
