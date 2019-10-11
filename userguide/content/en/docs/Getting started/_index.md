@@ -59,7 +59,7 @@ sudo npm install -D --save autoprefixer
 sudo npm install -D --save postcss-cli
 ```
 
-Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally]((https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
+Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
 
 ## Using the theme
 
