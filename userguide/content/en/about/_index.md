@@ -98,6 +98,7 @@ The Docsy template currently includes built-in integration with the following to
    site.
 * [**Google Custom Search**](https://cse.google.com/cse/): Use Google Custom Search for in-site search queries, or 
   configure your site to search the web.
+* [**Algolia Docsearch**](https://community.algolia.com/docsearch/): Let your users search your site with Algolia Docsearch.
 
 ### Make it your own
 
