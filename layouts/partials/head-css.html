@@ -9,3 +9,6 @@
 <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
 <link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
 {{ end }}
+{{ if and (.Site.Params.offlineSearch) (not .Site.Params.gcs_engine_id) }}
+<link href="/css/offline-search.css" rel="stylesheet">
+{{ end }}
