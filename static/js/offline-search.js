@@ -19,7 +19,7 @@ $(window).on('load', function() {
     request.open("GET", "/index.json", true); // Request the JSON file created during build
     request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
-        // Success response received in requesting the index.json file
+        // Success response received in requesting the search-index file
         var searchDocuments = JSON.parse(request.responseText);
 
         // Build the index so Lunr can search it.  The `ref` field will hold the URL
@@ -27,7 +27,6 @@ $(window).on('load', function() {
         idx = lunr(function lunrIndex() {
         this.ref('ref');
         this.field('title');
-        this.field('excerpt');
         this.field('body');
 
           // Loop through all the items in the JSON file and add them to the index
@@ -78,7 +77,7 @@ function renderSearchResults(results) {
     results.forEach(function(result) {
         // Create result item
         var li = document.createElement('li');
-        li.innerHTML = '<a href="' + result.ref + '">' + resultDetails[result.ref].title + '</a><br>' + resultDetails[result.ref].excerpt.substring(0,100) + '...';
+        li.innerHTML = '<a href="' + result.ref + '">' + resultDetails[result.ref].title + '</a><br>' + resultDetails[result.ref].excerpt + '...';
         ul.appendChild(li);
     });
 
