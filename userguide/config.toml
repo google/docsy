@@ -34,6 +34,10 @@ pygmentsStyle = "tango"
 [permalinks]
 blog = "/:section/:year/:month/:day/:slug/"
 
+[outputs]
+	home = [ "HTML", "JSON" ]
+	page = [ "HTML" ]
+
 ## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
 [blackfriday]
 plainIDAnchors = true
@@ -102,7 +106,7 @@ gcs_engine_id = "011217106833237091527:la2vtv2emlw"
 # Enable Algolia DocSearch
 algolia_docsearch = false
 
-# Enable Lunr.js offline search
+#Enable offline search with Lunr.js
 offlineSearch = false
 
 # User interface configuration
