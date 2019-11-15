@@ -92,9 +92,29 @@ By default, the section menu will show the current section fully expanded all th
 
 Breadcrumb navigation is enabled by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
 
-## Configure GCSE search
+## Site search options
 
-By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) to search your site. To enable this feature, you'll first need to make sure that you have built a public production version of your site, as otherwise your site won't be crawled and indexed.
+Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs. You can choose from:
+
+* [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine) (GCSE), the default option, which uses Google's index of your public site to generate a search results page.
+* [Algolia DocSearch](#configure-algolia-docsearch), which uses Algolia's indexing and search mechanism, and provides an organized dropdown of search results when your readers use the search box. Algolia DocSearch is free for public documentation sites.
+* [Local search with Lunr](#configure-local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
+
+If you enable any of these search options in your `config.toml`, a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
+
+Be aware that if you accidentally enable more than one search option in your `config.toml` you may get unexpected results (for example, if you have added the `.js` for Algolia DocSearch, you'll get Algolia results if you enable GCSE search but forget to disable Algolia search).
+
+### Disabling the sidebar search box
+
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
+
+```
+sidebar_search_disable = true
+```
+
+## Configure search with a Google Custom Search Engine
+
+By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) (GCSE) to search your site. To enable this feature, you'll first need to make sure that you have built a public production version of your site, as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
 
@@ -137,15 +157,7 @@ Once you have your search engine set up, you can add the feature to your site:
 
 ### Disabling GCSE search
 
-If you don't specify a Google Custom Search Engine ID for your project, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
-
-### Disabling the sidebar search box
-
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
-
-```
-sidebar_search_disable = true
-```
+If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
 ## Configure Algolia DocSearch
 
@@ -166,7 +178,7 @@ If you are accepted to the program, you will receive the JavaScript code to add 
     algolia_docsearch = true
     ```
 
-2. Remove or comment out any GCSE ID in `config.toml` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `config.toml` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 3. Disable the sidebar search in `config.toml` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
@@ -175,3 +187,37 @@ If you are accepted to the program, you will receive the JavaScript code to add 
 4. Update the `inputSelector` field in the body end Javascript with the appropriate CSS selector (e.g. `.td-search-input` to use the default CSS from this theme).
 
 When you've completed these steps the Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
+
+## Configure local search with Lunr
+
+[Lunr](https://lunrjs.com/) is a Javascript-based search option that lets you index your site and make it searchable without the need for external, server-side search services. This is a good option particularly for smaller or non-public sites.
+
+To add Lunr search to your Docsy site:
+
+1. Enable local search in `config.toml`.
+
+    ```
+    # Enable local search
+    offlineSearch = true
+    ```
+
+2. Remove or comment out any GCSE ID in `config.toml` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+
+3. Disable the sidebar search in `config.toml` as this is not currently supported for local search. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+
+4. Ensure you have a Markdown file in `content/en/search-index.md` (and one per other languages if needed) for your search index. It only needs the following frontmatter:
+
+    ```
+    ---
+    type: "search-index"
+    url: "index.json"
+    ---
+    ```
+
+Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
+
+
+
+
+
+
