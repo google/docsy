@@ -58,7 +58,7 @@ $(window).on('load', function() {
 function registerSearchHandler() {
     $searchInput.oninput = function(event) {
     var query = event.target.value;
-      var results = search(query);  // Perform the search
+      var results = search(query).slice(0, 10);  // Perform the search
 
       // Render search results
     renderSearchResults(results);
