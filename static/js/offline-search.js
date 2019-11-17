@@ -3,17 +3,37 @@
 var idx = null;         // Lunr index
 var resultDetails = []; // Will hold the data for the search results (titles and summaries)
 var $searchInput;       // The search box element in the navbar
-var $searchResults;     // Results shown in the navbar
 
 $(window).on('load', function() {
+
+    'use strict';
+
+    $searchInput = $('.td-search-input');
+
+    //
+    // Options for popover
+    //
+
+    $searchInput.data('html', true);
+    $searchInput.data('placement', 'bottom');
+
+    //
+    // Register handler
+    //
+
+    // Disable keydown event handler on `search.js`.
+    $(document).ready(function() {
+        $(document).off('keypress', '.td-search-input')
+    });
+
+    // Prevent showing `/search` page by enter key.
+    $searchInput.closest('form').on('submit', () => {
+        return false;
+    });
+
     // Set up for an Ajax call to request the JSON data file that is created by
     // Hugo's build process, with the template we added above
     var request = new XMLHttpRequest();
-    var query = '';
-
-    // Get dom objects for the elements we'll be interacting with
-    $searchResults = document.getElementById('search-results');
-    $searchInput   = document.getElementById('search-input');
 
     request.overrideMimeType("application/json");
     request.open("GET", "/index.json", true); // Request the JSON file created during build
@@ -39,13 +59,7 @@ $(window).on('load', function() {
             };
         }, this);
         });
-    } else {
-        $searchResults.innerHTML = '<ul><li>Error loading search results</li></ul>';
     }
-    };
-
-    request.onerror = function() {
-    $searchResults.innerHTML = '<ul><li>Error loading search results</li></ul>';
     };
 
     // Send the request to load the JSON
@@ -56,48 +70,89 @@ $(window).on('load', function() {
 });
 
 function registerSearchHandler() {
-    $searchInput.oninput = function(event) {
+    $searchInput.on('change', function(event) {
     var query = event.target.value;
       var results = search(query);  // Perform the search
 
       // Render search results
-    renderSearchResults(results);
-
-    // Remove search results if the user empties the search phrase input field
-    if ($searchInput.value == '') {
-        $searchResults.innerHTML = '';
-    }
-    }
+    renderSearchResults(results, $(event.target));
+    });
 }
 
-function renderSearchResults(results) {
-    // Create a list of results
-    if (results.length > 0) {
-    var ul = document.createElement('ul');
-    results.forEach(function(result) {
-        // Create result item
-        var li = document.createElement('li');
-        li.innerHTML = '<a href="' + result.ref + '">' + resultDetails[result.ref].title + '</a><br>' + resultDetails[result.ref].excerpt + '...';
-        ul.appendChild(li);
+function renderSearchResults(results, $targetSearchInput) {
+    $targetSearchInput.popover('dispose');
+    if ($targetSearchInput.val() === '') {
+        return;
+    }
+
+    const $html = $('<div>');
+
+    $html.append(
+        $('<div>')
+            .css({
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginBottom: '1em'
+            })
+            .append(
+                $('<span>')
+                    .text('Search results')
+                    .css({ fontWeight: 'bold' })
+            )
+            .append(
+                $('<i>')
+                    .addClass('fas fa-times search-result-close-button')
+                    .css({
+                        cursor: 'pointer'
+                    })
+            )
+    );
+
+    const $searchResultBody = $('<div>').css({
+        maxHeight: `calc(100vh - ${$targetSearchInput.offset().top + 180}px)`,
+        overflowY: 'auto'
+    });
+    $html.append($searchResultBody);
+
+    if (results.length === 0) {
+        $searchResultBody.append(
+            $('<p>').text(`No results found for query "${$targetSearchInput.val()}"`)
+        );
+    } else {
+        results.forEach(r => {
+            const $cardHeader = $('<div>').addClass('card-header');
+            const doc = resultDetails[r.ref];
+
+            $cardHeader.append(
+                $('<a>')
+                    .attr('href', r.ref)
+                    .text(doc.title)
+            );
+
+            const $cardBody = $('<div>').addClass('card-body');
+            $cardBody.append(
+                $('<p>')
+                    .addClass('card-text text-muted')
+                    .text(doc.excerpt)
+            );
+
+            const $card = $('<div>').addClass('card');
+            $card.append($cardHeader).append($cardBody);
+
+            $searchResultBody.append($card);
+        });
+    }
+
+    $targetSearchInput.on('shown.bs.popover', () => {
+        $('.search-result-close-button').on('click', () => {
+            $targetSearchInput.val('');
+            $targetSearchInput.trigger('change');
+        });
     });
 
-      // Remove any existing content so results aren't continually added as the user types
-    while ($searchResults.hasChildNodes()) {
-        $searchResults.removeChild(
-        $searchResults.lastChild
-        );
-    }
-    } else {
-        $searchResults.innerHTML = '<ul><li>No results found</li></ul>';
-        }
-    // Render the list
-    $searchResults.appendChild(ul);
+    $targetSearchInput.data('content', $html[0].outerHTML).popover('show');
 }
 
 function search(query) {
     return idx.search(query);
 }
-// Disables enter key on input fields except textarea
-$(document).on("keydown", ":input:not(textarea)", function(event) {
-    return event.key != "Enter";
-});
