@@ -95,7 +95,23 @@ function renderSearchResults(results) {
 }
 
 function search(query) {
-    return idx.search(query);
+    return idx.query(q => {
+        const tokens = lunr.tokenizer(query);
+        tokens.forEach(token => {
+            const tokenString = token.toString();
+            q.term(tokenString, {
+                boost: 100
+            });
+            q.term(tokenString, {
+                wildcard:
+                    lunr.Query.wildcard.LEADING | lunr.Query.wildcard.TRAILING,
+                boost: 10
+            });
+            q.term(tokenString, {
+                editDistance: 2
+            });
+        });
+    });
 }
 // Disables enter key on input fields except textarea
 $(document).on("keydown", ":input:not(textarea)", function(event) {
