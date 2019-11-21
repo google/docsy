@@ -25,6 +25,6 @@
   crossorigin="anonymous"></script>
 {{ if and (.Site.Params.offlineSearch) (not .Site.Params.gcs_engine_id) }}
 <script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
-<script src="/js/offline-search.js"></script>
+<script src="{{ "js/offline-search.js"| relURL }}"></script>
 {{end}}
 {{ partial "hooks/head-end.html" . }}

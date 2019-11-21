@@ -203,9 +203,7 @@ To add Lunr search to your Docsy site:
 
 2. Remove or comment out any GCSE ID in `config.toml` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
-3. Disable the sidebar search in `config.toml` as this is not currently supported for local search. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
-
-4. Ensure you have a Markdown file in `content/en/search-index.md` (and one per other languages if needed) for your search index. It only needs the following frontmatter:
+3. Ensure you have a Markdown file in `content/en/search-index.md` (and one per other languages if needed) for your search index. It only needs the following frontmatter:
 
     ```
     ---
