@@ -36,7 +36,7 @@ $(window).on('load', function() {
     var request = new XMLHttpRequest();
 
     request.overrideMimeType("application/json");
-    request.open("GET", "/index.json", true); // Request the JSON file created during build
+    request.open("GET", $searchInput.data('offline-search-index-json-url'), true); // Request the JSON file created during build
     request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
         // Success response received in requesting the search-index file
