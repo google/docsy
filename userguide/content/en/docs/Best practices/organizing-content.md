@@ -50,7 +50,6 @@ documentation, particularly for Open Source projects.
 
 ## Writing style guide
 
-This guide and the example site just address how to organize your documentation content into pages and sections. For some g
-uidance on how to organize and write the content in each page, we recommend the 
+This guide and the example site just address how to organize your documentation content into pages and sections. For some guidance on how to organize and write the content in each page, we recommend the 
 [Google Developer Documentation Style Guide](https://developers.google.com/style/), particularly the 
 [Style Guide Highlights](https://developers.google.com/style/highlights).
