@@ -21,11 +21,6 @@ $(window).on('load', function() {
     // Register handler
     //
 
-    // Disable keydown event handler on `search.js`.
-    $(document).ready(function() {
-        $(document).off('keypress', '.td-search-input')
-    });
-
     // Prevent showing `/search` page by enter key.
     $searchInput.closest('form').on('submit', () => {
         return false;
