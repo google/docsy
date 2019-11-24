@@ -203,17 +203,8 @@ To add Lunr search to your Docsy site:
 
 2. Remove or comment out any GCSE ID in `config.toml` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
-3. Ensure you have a Markdown file in `content/en/search-index.md` (and one per other languages if needed) for your search index. It only needs the following frontmatter:
-
-    ```
-    ---
-    type: "search-index"
-    url: "index.json"
-    ---
-    ```
-
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
 {{% alert title="Tip" %}}
-If you're [testing this locally](/docs/deployment/#serving-your-site-locally) using Hugo’s local server functionality, you need to build your `index.json` file first by running `hugo`. If you have the Hugo server running while you build `index.json`, you may need to stop the server and restart it in order to see your search results.
+If you're [testing this locally](/docs/deployment/#serving-your-site-locally) using Hugo’s local server functionality, you need to build your `offline-search-index.xxx.json` file first by running `hugo`. If you have the Hugo server running while you build `offline-search-index.xxx.json`, you may need to stop the server and restart it in order to see your search results.
 {{% /alert %}}

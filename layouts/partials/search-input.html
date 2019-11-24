@@ -1,12 +1,14 @@
 {{ if or .Site.Params.gcs_engine_id .Site.Params.algolia_docsearch }}
 <input type="search" class="form-control td-search-input" placeholder="&#xf002 {{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
 {{ else if .Site.Params.offlineSearch }}
+{{ $offlineSearchIndex := resources.Get "json/offline-search-index.json" | resources.ExecuteAsTemplate "/offline-search-index.json" . }}
+{{ $offlineSearchIndexFingerprint := $offlineSearchIndex | resources.Fingerprint "sha512" }}
 <input
   type="search"
   class="form-control td-search-input"
   placeholder="&#xf002; {{ T "ui_search" }}"
   aria-label="{{ T "ui_search" }}"
   autocomplete="off"
-  data-offline-search-index-json-url="{{ "index.json"| relURL }}"
+  data-offline-search-index-json-url="{{ $offlineSearchIndexFingerprint.Permalink }}"
 >
 {{ end }}
