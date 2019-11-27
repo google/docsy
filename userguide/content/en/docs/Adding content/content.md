@@ -32,7 +32,7 @@ If you've copied the example site, you already have appropriately named top-leve
 
 ### Custom sections
 
-If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/`**`amazing`** and want one or more pages in that custom section to use Docsy's `docs` template, you add `layout: docs` to the frontmatter of each page:
+If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/amazing` and want one or more pages in that custom section to use Docsy's `docs` template, you add `layout: docs` to the frontmatter of each page:
 
 ```yaml
 ---
