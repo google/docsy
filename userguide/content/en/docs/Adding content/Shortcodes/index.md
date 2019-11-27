@@ -229,11 +229,10 @@ The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagge
 
 ```yaml
 ---
-title: "Pet Store Reference"
+title: "Pet Store API"
 type: swagger
 weight: 1
-description: >
-  Reference docs for the Pet Store API
+description: Reference for the Pet Store API
 ---
 
 {{</* swaggerui src="/openapi/petstore.yaml" */>}}
