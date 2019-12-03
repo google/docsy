@@ -23,8 +23,10 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-{{ if and (.Site.Params.offlineSearch) (not .Site.Params.gcs_engine_id) }}
-<script src="https://unpkg.com/lunr@2.1.6/lunr.js"></script>
-<script src="{{ "js/offline-search.js"| relURL }}"></script>
+{{ if .Site.Params.offlineSearch }}
+<script
+  src="https://unpkg.com/lunr@2.3.8/lunr.min.js"
+  integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
+  crossorigin="anonymous"></script>
 {{end}}
 {{ partial "hooks/head-end.html" . }}
