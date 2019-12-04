@@ -28,6 +28,8 @@ The URL for your site's source repository. This is used to generate the **Edit t
 github_repo = "https://github.com/google/docsy"
 ```
 
+> Note: If you're repo is not _public_, the **Edit this page** and **Create documentation issue** links will not be displayed.
+
 ### `github_subdir` (optional)
 
 Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the `userguide` subdirectory of its repo. Setting this value means that your edit links will go to the right page.
