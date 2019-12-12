@@ -69,7 +69,20 @@ The minimum frontmatter you need to provide is a title: everything else is up to
 
 ## Page contents and markup
 
-By default you create pages in a Docsy site as simple [Markdown or HTML files](https://gohugo.io/content-management/formats/) with [page frontmatter](#page-frontmatter), as described above. Hugo currently uses [BlackFriday](https://github.com/russross/blackfriday) as its default Markdown parser.
+By default you create pages in a Docsy site as simple [Markdown or HTML files](https://gohugo.io/content-management/formats/) with [page frontmatter](#page-frontmatter), as described above. Versions of Hugo before 0.60 use [BlackFriday](https://github.com/russross/blackfriday) as its Markdown parser. From 0.60, Hugo uses [Goldmark](https://github.com/yuin/goldmark/) as its Markdown parser by default.
+
+{{% alert title="Tip" %}}
+If you've been using earlier versions of Hugo, you may need to make some small changes to your site to work with the current Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `config.toml` to allow Goldmark to render raw HTML as well as Markdown:
+
+```
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+```
+
+Alternatively, if you want to continue using Blackfriday, you can follow the instructions in the [Hugo documentation](https://gohugo.io/getting-started/configuration-markup#blackfriday) to change the Markdown parser.
+{{% /alert %}}
 
 In addition to your marked-up text, you can also use Hugo and Docsy's [shortcodes](/docs/adding-content/shortcodes): reusable chunks of HTML that you can use to quickly build your pages. Find out more about shortcodes in [Docsy Shortcodes](/docs/adding-content/shortcodes).
 
@@ -81,7 +94,7 @@ External parsers may not be suitable for use with all deployment options, as you
 
 ### Working with links
 
-Hugo and Blackfriday let you specify links using normal Markdown syntax, though remember that you need to specify links relative to your site's root URL, and that relative URLs are left unchanged by Hugo in your site's generated HTML.
+Hugo lets you specify links using normal Markdown syntax, though remember that you need to specify links relative to your site's root URL, and that relative URLs are left unchanged by Hugo in your site's generated HTML.
 
 Alternatively you can use Hugo's helper [`ref` and `relref` shortcodes](https://gohugo.io/content-management/cross-references/) for creating internal links that resolve to the correct URL. However, be aware this means your links will not appear as links at all if a user views your page outside your generated site, for example using the rendered Markdown feature in GitHub's web UI.
 
