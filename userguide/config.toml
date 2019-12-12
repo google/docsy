@@ -77,6 +77,11 @@ languageName ="English"
 # Weight used for sorting.
 weight = 1
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 # Everything below this are Site Params
 
 [params]
