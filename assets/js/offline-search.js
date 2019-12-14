@@ -38,7 +38,7 @@
             data => {
                 idx = lunr(function() {
                     this.ref('ref');
-                    this.field('title');
+                    this.field('title', { boost: 2 });
                     this.field('body');
 
                     data.forEach(doc => {
