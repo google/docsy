@@ -224,7 +224,7 @@ The Docsy example site comes with some defaults you may want to remove or custom
 
 ### Internationalization
 
-The Docsy example site supports content in English and Norwegian. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/_index.md).
+The Docsy example site supports content in English and Norwegian. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
 
 If you don't intend to translate your site to Norwegian, you can remove the language switcher by removing the following lines from `config.toml`:
 
