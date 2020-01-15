@@ -102,6 +102,6 @@ If you want to run your own local Hugo server to preview your changes as you wor
 
 ### Creating an issue
 
-If there's something you'd like to see in the docs, but you're not sure how to fix it yourself, please create an issue in [this repository](wherever it goes). You can also create an issue about a specific page by clicking the **Create Issue** button in the top right hand corner of the page.
+If there's something you'd like to see in the docs, but you're not sure how to fix it yourself, please create an issue in [this repository](https://github.com/google/docsy). You can also create an issue about a specific page by clicking the **Create Issue** button in the top right hand corner of the page.
 
 
