@@ -41,3 +41,12 @@ other = "Create documentation issue"
 other = "Create project issue"
 [post_posts_in]
 other = "Posts in"
+
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "Was this page helpful?"
+[feedback_answer_yes]
+other = "Yes"
+[feedback_answer_no]
+other = "No"

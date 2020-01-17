@@ -41,3 +41,12 @@ other = "Problem zu dieser Seite melden"
 other = "Problem melden"
 [post_posts_in]
 other = "Einträge in"
+
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "War diese Seite hilfreich?"
+[feedback_answer_yes]
+other = "Ja"
+[feedback_answer_no]
+other = "Nein"
