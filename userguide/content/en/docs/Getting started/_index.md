@@ -11,7 +11,7 @@ description: >
 
 ## Prerequisites and installation
 
-### Install Hugo 
+### Install Hugo (Stupendo!)
 
 You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.53 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
 
