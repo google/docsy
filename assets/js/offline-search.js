@@ -34,7 +34,7 @@
         const resultDetails = new Map(); // Will hold the data for the search results (titles and summaries)
 
         // Set up for an Ajax call to request the JSON data file that is created by Hugo's build process
-        $.ajax($searchInput.data('offline-search-index-json-url')).then(
+        $.ajax($searchInput.data('offline-search-index-json-src')).then(
             data => {
                 idx = lunr(function() {
                     this.ref('ref');
@@ -135,10 +135,11 @@
                 results.forEach(r => {
                     const $cardHeader = $('<div>').addClass('card-header');
                     const doc = resultDetails.get(r.ref);
+                    const href = $searchInput.data('offline-search-base-href') + r.ref.replace(/^\//, '')
 
                     $cardHeader.append(
                         $('<a>')
-                            .attr('href', r.ref)
+                            .attr('href', href)
                             .text(doc.title)
                     );
 
