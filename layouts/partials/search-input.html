@@ -10,9 +10,9 @@
   aria-label="{{ T "ui_search" }}"
   autocomplete="off"
   {{/* 
-    The data attribute name of json file URL have to be ended with `src` since
+    The data attribute name of the json file URL must end with `src` since
     Hugo's absurlreplacer requires `src`, `href`, `action` or `srcset` suffix for the attribute name.
-    If the absurlreplacer is not applied, URL will be started with `/`.
+    If the absurlreplacer is not applied, the URL will start with `/`.
     It causes the json file loading error when when relativeURLs is enabled.
     https://github.com/google/docsy/issues/181
   */}}
