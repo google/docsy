@@ -96,7 +96,7 @@ You can now edit your local versions of the site's source files. To preview your
 
 Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
 
-1.  In the [the Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
+1.  In the [Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
 1.  Rename your new fork:
     1.  Click **Settings**, and type a new name in the **Repository name** field.
     1.  Click **Rename** to save your changes.
