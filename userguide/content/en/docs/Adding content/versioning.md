@@ -59,7 +59,8 @@ For example, see the archived docs for
   <img src="/images/version-banner.png"
        alt="A text box explaining that this is an unmaintained snapshot of the docs."
        class="mt-3 mb-3 border border-info rounded" />
-  <figcaption>The banner on the archived docs for Kubeflow v0.6</figcaption>
+  <figcaption>Figure 1. The banner on the archived docs for Kubeflow v0.6
+  </figcaption>
 </figure>
 
 To add the banner to your doc site, make the following changes in your
