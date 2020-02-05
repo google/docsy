@@ -35,33 +35,11 @@ If you want to add a link to an external site to this menu, add it in `config.to
 
 ### Adding a version drop-down
 
-Depending on your project's releases and versioning, you may want to let your users access "old" versions of your site (how you deploy your archived sites is up to you) to read about previous versions of your project.
+If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a
+version selector drop down to the top-level menu.
 
-If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a version selector drop down to the top-level menu. You specify a URL and a name for each version you would like to add to the menu, as in the following example:
-
-```
-# Add your release versions here
-[[params.versions]]
-  version = "master"
-  url = "https://master.kubeflow.org"
-
-[[params.versions]]
-  version = "v0.2"
-  url = "https://v0-2.kubeflow.org"
-
-[[params.versions]]
-  version = "v0.3"
-  url = "https://v0-3.kubeflow.org"
-```
-
-(don't forget to add your current version so users can navigate back!)
-
-The default version drop-down menu title is `Releases`. To change this, change the `version_menu` parameter in `config.toml`:
-
-```
-version_menu = "Releases"
-```
-
+You can find out more in the guide to 
+[versioning your docs](/docs/adding-content/versioning/).
 
 ### Adding a language drop-down
 
