@@ -33,7 +33,13 @@ Now that you're serving your site locally, Hugo will watch for changes to the co
 
 We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from your Git provider (GitHub, GitLab, or BitBucket), with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/), previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
 
-Follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to set up a Netlify account (if you don't have one already) and authorize access to your GitHub or other Git provider account. Once you're logged in:
+Before deploying with Netlify be sure to have set your repo as origin:
+
+```
+git remote set-url origin https://github.com/MY-SITE/EXAMPLE.git
+```
+
+Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to set up a Netlify account (if you don't have one already) and authorize access to your GitHub or other Git provider account. Once you're logged in:
 
 1. Click **New site from Git**.
 1. Click your chosen Git provider, then choose your site repo from your list of repos.
