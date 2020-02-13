@@ -35,10 +35,6 @@ We recommend using [Netlify](https://www.netlify.com/) as a particularly simple 
 
 Before deploying with Netlify, make sure that you've pushed your site source to your chosen GitHub (or other provider) repo, following any setup instructions in [Using the theme](/docs/getting-started/#using-the-theme).
 
-```
-git remote set-url origin https://github.com/MY-SITE/EXAMPLE.git
-```
-
 Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-deployment/hosting-on-netlify/) to set up a Netlify account (if you don't have one already) and authorize access to your GitHub or other Git provider account. Once you're logged in:
 
 1. Click **New site from Git**.
