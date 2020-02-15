@@ -19,6 +19,9 @@
 
         $searchInput.on('change', event => {
             render($(event.target));
+
+            // Hide keyboard on mobile browser
+            $searchInput.blur();
         });
 
         // Prevent reloading page by enter key on sidebar search.
@@ -135,7 +138,9 @@
                 results.forEach(r => {
                     const $cardHeader = $('<div>').addClass('card-header');
                     const doc = resultDetails.get(r.ref);
-                    const href = $searchInput.data('offline-search-base-href') + r.ref.replace(/^\//, '')
+                    const href =
+                        $searchInput.data('offline-search-base-href') +
+                        r.ref.replace(/^\//, '');
 
                     $cardHeader.append(
                         $('<a>')
