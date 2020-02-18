@@ -201,6 +201,11 @@ To clone Docsy into your project's `theme` folder, run the following commands fr
 ```
 cd themes
 git clone https://github.com/google/docsy
+```
+
+If you want to build and/or serve your site [locally](/docs/deployment/#serving-your-site-locally), you also need to get local copies of the theme’s own submodules:
+
+```
 git submodule update --init --recursive
 ```
 
