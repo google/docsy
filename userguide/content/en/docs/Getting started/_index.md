@@ -203,6 +203,12 @@ cd themes
 git clone https://github.com/google/docsy
 ```
 
+If you want to build and/or serve your site [locally](/docs/deployment/#serving-your-site-locally), you also need to get local copies of the theme’s own submodules:
+
+```
+git submodule update --init --recursive
+```
+
 For more information, see [Install and Use Themes](https://gohugo.io/themes/installing-and-using-themes/#install-a-single-theme) on the [Hugo](https://gohugo.io) site.
 
 #### Preview your site
