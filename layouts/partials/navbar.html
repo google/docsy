@@ -10,7 +10,7 @@
 			<li class="nav-item mr-4 mb-2 mb-lg-0">
 				{{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) }}
 				{{ with .Page }}
-				{{ $active = or $active ( $.IsDescendant .)  }}
+				{{ $active = or $active ( $p.IsDescendant .)  }}
 				{{ end }}
 				{{ $url := urls.Parse .URL }}
 				{{ $baseurl := urls.Parse $.Site.Params.Baseurl }}
