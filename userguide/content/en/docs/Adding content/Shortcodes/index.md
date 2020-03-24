@@ -59,6 +59,7 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 | image_anchor | |
 | height | | See above.
 | color | | See above. 
+| byline | Byline text on featured image. |
 
 
 To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/master/content/en), in the same directory.
