@@ -1,9 +1,9 @@
 // Adapted from code by Matt Walters https://www.mattwalters.net/posts/hugo-and-lunr/
 
-(function($) {
+(function ($) {
     'use strict';
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         const $searchInput = $('.td-search-input');
 
         //
@@ -17,7 +17,7 @@
         // Register handler
         //
 
-        $searchInput.on('change', event => {
+        $searchInput.on('change', (event) => {
             render($(event.target));
 
             // Hide keyboard on mobile browser
@@ -38,18 +38,18 @@
 
         // Set up for an Ajax call to request the JSON data file that is created by Hugo's build process
         $.ajax($searchInput.data('offline-search-index-json-src')).then(
-            data => {
-                idx = lunr(function() {
+            (data) => {
+                idx = lunr(function () {
                     this.ref('ref');
                     this.field('title', { boost: 2 });
                     this.field('body');
 
-                    data.forEach(doc => {
+                    data.forEach((doc) => {
                         this.add(doc);
 
                         resultDetails.set(doc.ref, {
                             title: doc.title,
-                            excerpt: doc.excerpt
+                            excerpt: doc.excerpt,
                         });
                     });
                 });
@@ -58,7 +58,7 @@
             }
         );
 
-        const render = $targetSearchInput => {
+        const render = ($targetSearchInput) => {
             // Dispose the previous result
             $targetSearchInput.popover('dispose');
 
@@ -76,21 +76,21 @@
             }
 
             const results = idx
-                .query(q => {
+                .query((q) => {
                     const tokens = lunr.tokenizer(searchQuery.toLowerCase());
-                    tokens.forEach(token => {
+                    tokens.forEach((token) => {
                         const queryString = token.toString();
                         q.term(queryString, {
-                            boost: 100
+                            boost: 100,
                         });
                         q.term(queryString, {
                             wildcard:
                                 lunr.Query.wildcard.LEADING |
                                 lunr.Query.wildcard.TRAILING,
-                            boost: 10
+                            boost: 10,
                         });
                         q.term(queryString, {
-                            editDistance: 2
+                            editDistance: 2,
                         });
                     });
                 })
@@ -107,7 +107,7 @@
                     .css({
                         display: 'flex',
                         justifyContent: 'space-between',
-                        marginBottom: '1em'
+                        marginBottom: '1em',
                     })
                     .append(
                         $('<span>')
@@ -118,15 +118,16 @@
                         $('<i>')
                             .addClass('fas fa-times search-result-close-button')
                             .css({
-                                cursor: 'pointer'
+                                cursor: 'pointer',
                             })
                     )
             );
 
             const $searchResultBody = $('<div>').css({
-                maxHeight: `calc(100vh - ${$targetSearchInput.offset().top +
-                    180}px)`,
-                overflowY: 'auto'
+                maxHeight: `calc(100vh - ${
+                    $targetSearchInput.offset().top + 180
+                }px)`,
+                overflowY: 'auto',
             });
             $html.append($searchResultBody);
 
@@ -135,7 +136,7 @@
                     $('<p>').text(`No results found for query "${searchQuery}"`)
                 );
             } else {
-                results.forEach(r => {
+                results.forEach((r) => {
                     const $cardHeader = $('<div>').addClass('card-header');
                     const doc = resultDetails.get(r.ref);
                     const href =
@@ -143,9 +144,7 @@
                         r.ref.replace(/^\//, '');
 
                     $cardHeader.append(
-                        $('<a>')
-                            .attr('href', href)
-                            .text(doc.title)
+                        $('<a>').attr('href', href).text(doc.title)
                     );
 
                     const $cardBody = $('<div>').addClass('card-body');
