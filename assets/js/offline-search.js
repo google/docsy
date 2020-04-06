@@ -129,7 +129,9 @@
 
             const $searchResultBody = $('<div>').css({
                 maxHeight: `calc(100vh - ${
-                    $targetSearchInput.offset().top + 180
+                    $targetSearchInput.offset().top -
+                    $(window).scrollTop() +
+                    180
                 }px)`,
                 overflowY: 'auto',
             });
