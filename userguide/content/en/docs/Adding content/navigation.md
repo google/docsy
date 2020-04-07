@@ -186,3 +186,29 @@ Once you've completed these steps, local search is enabled for your site and res
 {{% alert title="Tip" %}}
 If you're [testing this locally](/docs/deployment/#serving-your-site-locally) using Hugo’s local server functionality, you need to build your `offline-search-index.xxx.json` file first by running `hugo`. If you have the Hugo server running while you build `offline-search-index.xxx.json`, you may need to stop the server and restart it in order to see your search results.
 {{% /alert %}}
+
+### Changing the width of the local search results popover
+
+The width of the search results popover will automatically widen according to the content.
+
+If you want to limit the width, add the following scss into `assets/scss/_variables_project.scss`.
+
+```scss
+body {
+    .popover.offline-search-result {
+        max-width: 460px;
+    }
+}
+```
+
+### Excluding pages from local search results
+
+To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
+
+```yaml
+---
+title: "Index"
+weight: 10
+exclude_search: true
+---
+```
