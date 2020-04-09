@@ -20,8 +20,8 @@
 {{ end }}
 {{ partialCached "head-css.html" . "asdf" }}
 <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  src="{{ $.Site.Params.jquery.src }}"
+  integrity="{{ $.Site.Params.jquery.hash }}"
   crossorigin="anonymous"></script>
 {{ if .Site.Params.offlineSearch }}
 <script
