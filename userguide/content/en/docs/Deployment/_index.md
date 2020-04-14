@@ -45,9 +45,9 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
    1. In the **Advanced build settings** section, click **New variable**. 
    1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.53` or later as its **Value**. 
    1. (Optional) Click **New variable** again, and this time set `HUGO_ENV` to `production`. Do this if you want your site to be indexed by search engines. You must do this if you want to use a [Google Custom Search Engine](/docs/adding-content/navigation/#configure-search-with-a-google-custom-search-engine).
-
-   Alternatively, you can specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/master/netlify.toml).
 1. Click **Deploy site**.
+
+Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/master/netlify.toml).
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
