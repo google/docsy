@@ -45,6 +45,7 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
    1. In the **Advanced build settings** section, click **New variable**. 
    1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.53` or later as its **Value**. 
    1. (Optional) Click **New variable** again, and this time set `HUGO_ENV` to `production`. Do this if you want your site to be indexed by search engines. You must do this if you want to use a [Google Custom Search Engine](/docs/adding-content/navigation/#configure-search-with-a-google-custom-search-engine).
+
    Alternatively, you can specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/master/netlify.toml).
 1. Click **Deploy site**.
 
