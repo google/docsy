@@ -9,7 +9,7 @@
 		{{ partial "feedback.html" .Site.Params.ui.feedback }}
 		<br />
 	{{ end }}
-	{{ if (.Site.DisqusShortname) }}
+	{{ if (.Site.Params.DisqusShortname) }}
 		<br />
 		{{ partial "disqus-comment.html" . }}
 	{{ end }}
