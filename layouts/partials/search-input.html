@@ -18,5 +18,6 @@
   */}}
   data-offline-search-index-json-src="{{ $offlineSearchIndexFingerprint.RelPermalink }}"
   data-offline-search-base-href="/"
+  data-offlnie-search-max-results="{{ .Site.Params.offlineSearchMaxResults | default 10 }}"
 >
 {{ end }}

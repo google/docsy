@@ -197,6 +197,16 @@ offlineSearch = true
 offlineSearchSummaryLength = 200
 ```
 
+### Changing the maximum result count of the local search
+
+You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`.
+
+```
+#Enable offline search with Lunr.js
+offlineSearch = true
+offlineSearchMaxResults = 25
+```
+
 ### Changing the width of the local search results popover
 
 The width of the search results popover will automatically widen according to the content.
