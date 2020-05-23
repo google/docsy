@@ -143,27 +143,30 @@
                 );
             } else {
                 results.forEach((r) => {
-                    const $cardHeader = $('<div>').addClass('card-header');
                     const doc = resultDetails.get(r.ref);
                     const href =
                         $searchInput.data('offline-search-base-href') +
                         r.ref.replace(/^\//, '');
 
-                    $cardHeader.append(
-                        $('<a>').attr('href', href).text(doc.title)
+                    const $entry = $('<div>').addClass('mt-4');
+
+                    $entry.append(
+                        $('<small>').addClass('d-block text-muted').text(r.ref)
                     );
 
-                    const $cardBody = $('<div>').addClass('card-body');
-                    $cardBody.append(
-                        $('<p>')
-                            .addClass('card-text text-muted')
-                            .text(doc.excerpt)
+                    $entry.append(
+                        $('<a>')
+                            .addClass('d-block')
+                            .css({
+                                fontSize: '1.2rem',
+                            })
+                            .attr('href', href)
+                            .text(doc.title)
                     );
 
-                    const $card = $('<div>').addClass('card');
-                    $card.append($cardHeader).append($cardBody);
+                    $entry.append($('<p>').text(doc.excerpt));
 
-                    $searchResultBody.append($card);
+                    $searchResultBody.append($entry);
                 });
             }
 
