@@ -127,6 +127,7 @@ algolia_docsearch = false
 
 #Enable offline search with Lunr.js
 offlineSearch = false
+offlineSearchSummaryLength = 70
 
 # User interface configuration
 [params.ui]
@@ -188,5 +189,3 @@ enable = false
 	# url = "https://example.org/mail"
 	# icon = "fa fa-envelope"
         # desc = "Discuss development issues around the project"
-
-
