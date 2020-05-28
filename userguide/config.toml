@@ -57,10 +57,10 @@ anchor = "smart"
 
 # Additional menu items
 
-[[menu.main]]
-    name = "Example Site"
-    weight = 40
-    url = "https://example.docsy.dev"
+# [[menu.main]]
+#     name = "Example Site"
+#     weight = 40
+#     url = "https://example.docsy.dev"
 [[menu.main]]
     name = "GitHub"
     weight = 50
