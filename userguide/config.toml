@@ -1,5 +1,5 @@
 baseURL = "/"
-title = "Docsy Example"
+title = "Ctrl-Z Project"
 
 enableRobotsTXT = true
 
@@ -10,8 +10,8 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
+contentDir = "content/no"
+defaultContentLanguage = "no"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
