@@ -1,15 +1,20 @@
 ---
 new_page_extension: md
 auto_deploy: false
-admin_path: 
+admin_path: ''
 webhook_url: 
 sections:
+- type: directory
+  path: userguide/en
+  label: en
+  create: all
+  match: "**/*"
 - type: directory
   path: content
   label: Pages
   create: all
   match: "*"
-upload_dir: static/uploads
+upload_dir: content
 public_path: "/uploads"
 front_matter_path: ''
 use_front_matter_path: false
