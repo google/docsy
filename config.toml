@@ -14,6 +14,19 @@ rss_sections = ["blog"]
 # For a full list of parameters used in Docsy sites, see:
 # https://github.com/google/docsy-example/blob/master/config.toml
 
-
-
-
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+...
+[languages]
+[languages.en]
+title = "Docsy"
+description = "Docsy does docs"
+languageName ="English"
+# Weight used for sorting.
+weight = 1
+[languages.no]
+title = "Docsy"
+description = "Docsy er operativsystem for skyen"
+languageName ="Norsk"
+contentDir = "content/no"
