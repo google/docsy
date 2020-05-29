@@ -23,8 +23,7 @@ The project is addressing students from [Cloud Services, Big data e IoT](https:/
 
 *   **identification and analysis**
 *   **Design and Development of a solution**
-*   **prototyping and deliver to the "client" (optional based on the clients themselves)
-e**
+*   **prototyping and deliver to the "client" (optional based on the clients themselves)**
 
 <table>
   <tr>
@@ -39,7 +38,7 @@ Weekly updates are made with the teachers.
 
 Our mission is to identify the problem, rather than finding a possible solution to it. Each problem will be pitched in a slide with sources and datasets used. Picture.
 
-→ [Mozilla Connected Home Design Sprint](https://github.com/openiotstudio/general/blob/master/publications/research/20160417_Mozilla_Connected%20Homes_Design%20Sprint%20Scenarios_V1.pdf) is a good example of a case study analysis made by [Quicksand](http://quicksand.co.in/).
+→ [Mozilla Connected Home Design Sprint](https://github.com/openiotstudio/general/blob/master/publications/research/20160417_Mozilla_Connected%20Homes_Design%20Sprint%20Scenarios_V1.pdf/) is a good example of a case study analysis made by [Quicksand](http://quicksand.co.in/).
 
 Each theme presents and push the information on our repository > site
 
@@ -49,18 +48,14 @@ Each theme presents and push the information on our repository > site
   <tr>
    <td><strong>Design and Prototyping of a Solution</strong>
    </td>
-   <td>Groups are created based on the knowledge of the class (Buzzi/Fasano)
+   <td>
 
-Each group starts from the case studies. Hopefully the list will be integrated and enlarged.
-Group and case study are paired, and a field research starts (phone calls, online forms).
-A slack / discord Channel is devoted to each group / case study.
-Weekly updates are made with the teachers.
+   The teams are asked to confront and develop several solutions (using Miro? G Slides?). It’s important to be realistic and confront / look on what is there on the market, as well as understanding the legal aspects of several solution affecting privacy, economics etc..
 
-Our mission is to identify the problem, rather than finding a possible solution to it. Each problem will be pitched in a slide with sources and datasets used. Picture.
+This step is not about creating a physical prototype, rajer sketch it on paper. We should also take down a list of stakeholder, and costs to produce and deliver.
 
-→ [Mozilla Connected Home Design Sprint](https://github.com/openiotstudio/general/blob/master/publications/research/20160417_Mozilla_Connected%20Homes_Design%20Sprint%20Scenarios_V1.pdf) is a good example of a case study analysis made by [Quicksand](http://quicksand.co.in/).
+Again. The ending deliverable of this step is a slide / resources dataset to be pitched.  
 
-Each theme presents and push the information on our repository > site
 
    </td>
   </tr>
