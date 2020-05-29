@@ -10,8 +10,8 @@ theme = ["docsy"]
 enableGitInfo = true
 
 # Language settings
-contentDir = "content/no"
-defaultContentLanguage = "no"
+contentDir = "content/it"
+defaultContentLanguage = "it"
 defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
@@ -75,17 +75,17 @@ id = "UA-00000000-0"
 
 [languages]
 [languages.en]
-title = "Docsy"
-description = "Docsy does docs"
+title = "Ctrl-z"
+description = "A project about studying problems and solutions created by the COVID Pandemic in Italy, Spring 2020"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
 
-[languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
-languageName ="Norsk"
-contentDir = "content/no"
+[languages.it]
+title = "Ctrl-z"
+description = "Un progetto di studio sulle problematiche e le possibili soluzioni legate alla pandemia Covid della Primavera 2020"
+languageName ="Italiano"
+contentDir = "content/it"
 
 [markup]
   [markup.goldmark]
