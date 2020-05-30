@@ -3,7 +3,7 @@ title: "Gruppi e Scenari"
 linkTitle: "Gruppi e Scenari"
 weight: 8
 description: >
- Keeping the theme up to date.
+ il match-making tra i gruppi degli studenti e l'elenco degli scenari di studio.
 ---
 
 ## Gruppi e Scenari
