@@ -1,6 +1,6 @@
 ---
 title: "Strumenti"
-weight: 9
+weight: 2
 description: >
   Gli strumenti che adotteremo durante il percorso.
 ---
