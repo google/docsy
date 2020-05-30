@@ -1,17 +1,8 @@
 ---
-title: "Strumemnti"
+title: "Best Practices"
 weight: 9
 description: >
-Gli strumenti che adotteremo durante il percorso.
+  Optional guidance and recommendations about organizing, authoring, and managing your technical documentation.
 ---
 
-|                 Cosa                 |             Come            |
-|:------------------------------------:|:---------------------------:|
-| Analisi delle esigenze ed empatia    |      Triple Diamnod Process |
-| Time Tracking                        |                       Toggl |
-| Pitch, Presentazioni, Collaborazioni | Google Suite (della scuola) |
-| Comunicazione                        |             Slack / Discord |
-| Narrazione                           |               Sito / Social |
-|  Design Thiking e confronto (online) |                gDocs o Miro |
-| Sito Documentale                     |                      Github |
-| Codice                               |                      Github |
+Use this section to learn about some of the best practices around creating technical documentation with Docsy.
