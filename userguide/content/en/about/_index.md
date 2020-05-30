@@ -1,12 +1,12 @@
 ---
-title: About Docsy
+title: About Ctrl-z
 linkTitle: About
 menu:
   main:
     weight: 10
 layout: docs
 ---
-{{% blocks/cover title="About Docsy" height="auto" %}}
+{{% blocks/cover title="What is this Research Project About" height="auto" %}}
 
 The aim of the project is to analyze how COVID-19’s Lockdown of March-May 2020 changed and reshaped little shops, micro-companies and services. The nerve of the neighborhood. The research, declined on different product category, would later be the cornerstone and base to design some solutions (step 2) that later could be some action to develop / deliver late in September.
 

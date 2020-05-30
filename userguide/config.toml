@@ -98,7 +98,7 @@ weight = 1
 # Everything below this are Site Params
 
 [params]
-copyright = "The Docsy Authors"
+copyright = "ITS - ICT Torino"
 privacy_policy = "https://policies.google.com/privacy"
 
 # Menu title if your navbar has a versions selector to access old versions of your site.
@@ -150,7 +150,7 @@ breadcrumb_disable = false
 #  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
 sidebar_search_disable = false
 #  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
-navbar_logo = true
+navbar_logo = false
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
 # This feature depends on [services.googleAnalytics] and will be disabled if "services.googleAnalytics.id" is not set.
@@ -170,14 +170,14 @@ enable = false
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
- [[params.links.user]]
-	name = "User mailing list"
-	url = "https://groups.google.com/forum/#!forum/docsy-users"
-	icon = "fa fa-envelope"
-        desc = "Discussion and help from your fellow users"
+# [[params.links.user]]
+#	name = "User mailing list"
+#	url = "https://groups.google.com/forum/#!forum/docsy-users"
+#	icon = "fa fa-envelope"
+#        desc = "Discussion and help from your fellow users"
 [[params.links.user]]
 	name ="Twitter"
-	url = "https://twitter.com/docsydocs"
+	url = ""
 	icon = "fab fa-twitter"
         desc = "Follow us on Twitter to get the latest news!"
 # [[params.links.user]]
@@ -188,7 +188,7 @@ enable = false
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
-	url = "https://github.com/google/docsy"
+	url = "https://github.com/vongomben/docsy"
 	icon = "fab fa-github"
         desc = "Development takes place here!"
 # [[params.links.developer]]
