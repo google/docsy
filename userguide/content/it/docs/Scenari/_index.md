@@ -3,7 +3,7 @@ title: "Gruppi e Scenari"
 linkTitle: "Gruppi e Scenari"
 weight: 8
 description: >
- Keeping the theme up to date.
+ il match-making tra i gruppi degli studenti e l'elenco degli scenari di studio.
 ---
 
 ## Gruppi e Scenari
@@ -11,7 +11,7 @@ description: >
 Qui di seguito gruppi e scenari. IL Match-making é ancora in fare si definizione.
 
 | Titolo                                    | Settore merceologico di riferimento e  Tema                                                                               | Ipotetico servizio e necessità                                                                                      | Gruppo ##   |
-|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|-----------|
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------|
 | Mercato /i / Gastronomia / Fruttivendolo? | distribuzione del cibo, acquisto                                                                                          | Piccolai negozi vs grande distribuzione durante il covid e possibili soluzioni per bilanciare                       |           |
 | Piccolo produttore agricolo               | distribuzione del cibo, acquisto                                                                                          |                                                                                                                     |           |
 | Turismo - montagna (sportivo)             | Posizionamento, garanzie di igiene, accesso                                                                               |                                                                                                                     |           |
