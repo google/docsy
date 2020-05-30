@@ -7,13 +7,14 @@ menu:
 layout: docs
 ---
 
-{{% blocks/cover title="What is this Research Project About" height="auto" %}}
+{{% blocks/cover title="Quali sono le finalità del progetto?" height="auto" %}}
 
 Il progetto ha il duplice obiettivo di analizzare come il lockdown da COVID-19 del Marzo e Aprile (e Maggio) in Italia ha modificato il mondo dei piccoli negozi, micro-imprese e servizi e di sviluppare alcuni concept e soluzioni che permettano di dinamizzare, digitalizzare, innovare il modo in cui queste realtà si propongono nei confronti dei loro clienti.
 {{% /blocks/cover %}}
 
 {{% blocks/section type="section" color="primary" %}}
-## What's this project about?
+
+## Perché Ctrl-Z?
 
 Il progetto porta il nome di uno combinazione di tastiera che permette di tornare indietro ad una versione precedente del lavoro che si sta svolgendo. Il tema metaforicamente é come tornare ad una normalità, ovvero ad una società totalmente uscita dalla fase di contagio, che però ne porta gli inevitabili segni. Obiettivo del progetto é sviluppare  strumenti per controbattere e rispondere ad ipotetiche situazioni di lockdown future ed impreviste.
 
