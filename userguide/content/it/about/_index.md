@@ -1,5 +1,5 @@
 ---
-title: About Docsy
+title: About Ctrl-Z
 linkTitle: About
 menu:
   main:
@@ -7,133 +7,71 @@ menu:
 layout: docs
 ---
 
-{{% blocks/cover title="About Docsy" height="auto" %}}
+{{% blocks/cover title="What is this Research Project About" height="auto" %}}
 
-Docsy is a pre-configured Hugo theme that provides the core features and behaviors needed to create a technical documentation site. Use Docsy to set up your documentation website, including an optional Blog section, and then spend your time focusing on authoring technical content. Depending on how you choose to configure Docsy and whether you use a hosting service that supports continuous builds, you can even just add your Markdown or HTML content file into a folder on your source repository, and then sit back while it automatically gets added to your site - complete with updated menus.
-
-Read on to find out more, or visit our [documentation](/docs/) to get started!
+Il progetto ha il duplice obiettivo di analizzare come il lockdown da COVID-19 del Marzo e Aprile (e Maggio) in Italia ha modificato il mondo dei piccoli negozi, micro-imprese e servizi e di sviluppare alcuni concept e soluzioni che permettano di dinamizzare, digitalizzare, innovare il modo in cui queste realtà si propongono nei confronti dei loro clienti.
 {{% /blocks/cover %}}
 
 {{% blocks/section type="section" color="primary" %}}
-## So what’s a technical documentation site?
+## What's this project about?
 
-A technical documentation site is a website that your users can visit to find the documentation for your technical project.  Your documentation set contains all the information you think your users might need to engage with your project, from overviews that help them understand what the project is for, to instructions for specific tasks. Depending on the size of the project, a documentation set can be a page or two or an entire “book” with different types of information.
+Il progetto porta il nome di uno combinazione di tastiera che permette di tornare indietro ad una versione precedente del lavoro che si sta svolgendo. Il tema metaforicamente é come tornare ad una normalità, ovvero ad una società totalmente uscita dalla fase di contagio, che però ne porta gli inevitabili segni. Obiettivo del progetto é sviluppare  strumenti per controbattere e rispondere ad ipotetiche situazioni di lockdown future ed impreviste.
 
-**Most users don’t want to have to spend much time looking at docs - they want to try your great project!** So how do you make sure your technical documentation set gives users what they need to easily understand your project and get things done? We think a good technical documentation set should be:
+Con Ctrl-z cerchiamo (nel nostro piccolo, limitatamente ad un progetto scolastico) di definire strumenti che agiscano da anticorpi sociali e tecnologici ad un disagio commerciale che colpisce (e tutto fa presupporre, colpirà) diversi settori dell’economia piemontese nei prossimi anni.
 
-*   **Reliable**: Is it true?
-*   **Comprehensive**: Does it have all the information your target users might need?
-*   **Well-organized and navigable**: Can the user find the information they need? Are similar types of information (all the information about a feature, all your reference information) grouped together?
+Il progetto interdisciplinare è rivolto limitatamente agli studenti del corso di [Cloud Services, Big data e IoT](https://www.its-ictpiemonte.it/courses/cloud-services-big-data-iot/) dell’[ITS-ICT](https://www.its-ictpiemonte.it/), ed é strutturato in tre parti:
 
-If you have users around the world, you might also want to provide your content in multiple languages, and if you have an open source project, you’ll probably want your users to be able to contribute to the docs.
-
-Once you have your content, you use a technical documentation site to publish your technical documentation set online for your users. In addition to your documentation, your site might also contain material like contact information, a blog, or information about how to contribute to the project.
-{{% /blocks/section %}}
-
-{{% blocks/section type="section" color="white" %}}
-## How does Docsy help?
-
-Particularly when working with open source projects, it can be difficult to figure out how to turn all your product knowledge into a website that helps and engages your users. **Enter Docsy!**
-
-Docsy gives you a theme for the [Hugo](https://gohugo.io/) static site generator, an established open source tool that builds ready-to-serve websites from a set of theme and content files. The Docsy theme provides you with useful stuff for a technical documentation site that *isn’t* your own content:
+*   **Identificazione, Analisi e Racconto del Problema**
+*   **Progettazione e Sviluppo di una Soluzione**
+*   **Prototipazione e sviluppo prodotto minimo (possibile installazione presso il cliente)**
 
 <table>
   <tr>
-   <td><strong>Page layouts optimized for different content types</strong>
+   <td><strong> Identificazione, Analisi e Racconto del problema</strong>
    </td>
-   <td>Navigation, page menus, headers, landing pages, blog snippets, feedback links - you just provide the content.
+   <td>
+
+Vengono creati i gruppi partendo da una analisi del gruppo classe (fatta da Buzzi/Fasano)
+Ogni gruppo parte dall’elenco di scenari (che nel frattempo amplieremo, e verosimilmente allargheremo con ulteriori negozianti / player interessati a partecipare all’esperimento) per identificare l’ambito di analisi di ogni gruppo.
+Il gruppo quindi si attiva per la parte di ricerca sul campo, attraverso l’uso di form online, telefonate, ricerche. Ogni gruppo avrà un canale slack / discord in cui traccerà l'evolversi della ricerca, e riporterà settimanalmente allo staff docenti.
+L’obiettivo finale di questa parte é l’analisi e l’identificazione del problema, non di una sua possibile soluzione. E’ un lavoro molto importante e ha come finalità la realizzazione di un corpus (Slide? Documento di testo? Magari anche corredato da fotografie)che sia in grado di raccontare il problema. Non é detto che sia il racconto di una specifica realtà in particolare, ma di un contesto.
+E’ quindi possibile raccontare (per esempio) le problematiche della Macelleria riportando ipotetiche soluzione operate da intervistato A, e maggiori problematiche riportate da intervistato B. Ovviamente se uno scenario ha solamente un intervistato sarà molto più focalizzato e verticale, ma la presunzione di questa ricerca é fornire elementi di compromesso tra esigenze di generalizzazione di contesti produttivi partendo da elementi individuali.
+
+→ [Mozilla Connected Home Design Sprint](https://github.com/openiotstudio/general/blob/master/publications/research/20160417_Mozilla_Connected%20Homes_Design%20Sprint%20Scenarios_V1.pdf/) é un esempio molto buono di reporto e storytelling di un problema o tema, fatto da [Quicksand](http://quicksand.co.in/).
+
+Ogni gruppo dovra mantenere aggiornata la sua pagina nella documentazione
+
    </td>
   </tr>
+
   <tr>
-   <td><strong>Autogenerated navigation</strong>
+   <td><strong> Ideazione e Prototipazione di una Soluzione</strong>
    </td>
-   <td>Organize your docs in logical folders and get instantly updated navigation to help your users find them.
+   <td>
+
+		 I team, confrontandosi di fronte a pareti virtuali di post-it (Miro? G Slides?) cercherà di analizzare le possibili soluzione del problema, anche sondandone la fattibilità tecnica.
+	 Questa fase non presuppone la realizzazione del prototipo ma solo la fattibilità dei costi, degli stakeholder coinvolgibili, delle risorse da mettere in campo.
+
+	 Oltre a riunioni settimanale con i docenti e stand-up meeting per le giornate di confronto, in questa fase l’attenzione dello staff dei docenti é essenziale a produrre dei concept reali, realistici, e sperabilmente fattibili. Anche attraverso il coinvolgimento di realtà esterne alla scuola.
+
+	 Come la parte 1, anche la parte 2 deve terminare con un corpus (slide) che sintetizzi il progetto del team, la sua pubblicazione del sito, la sua presentazione.
+
+
    </td>
   </tr>
+
   <tr>
-   <td><strong>Language switchers</strong>
+   <td><strong>Implementazione e Sviluppo</strong>
    </td>
-   <td>Builds on Hugo’s multi-language support to make it easy to create a site in multiple languages.
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Feedback, contribution, and contact links</strong>
-   </td>
-   <td>Let your users file issues and edit docs with a single click, or follow contact links to join you on Slack, Twitter, or mailing lists.
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Custom shortcodes</strong>
-   </td>
-   <td>Reusable snippets of HTML you can use to create alerts, image boxes, landing page blocks, and more.
+   <td>
+
+I team sondano con lo staff docenti e la direzione scolastica della scuola la possibilità o meno di realizzare un prototipo.
+In caso positivo, bisognerà realizzare una BOM (Bill of Material) da acquistare per lo sviluppo del progetto, che avrà comunque bisogno di expertise esterne al team. Si sonderà anche la possibilità di installare effettivamente presso uno dei clienti il dispositivo, magari per un breve periodo e capirne la sua reale utilità.
+Sarà premura dello staff dei docenti di produrre uno o più prototipi per garantirne la loro divulgazione presso eventi fieristici, ma é evidente che la cosa più importante é la documentazione online, e possibilmente anche l’integrazione del sito (che é e sarà hostato su github) attraverso i dns, nel sito di ITS nella descrizione del percorso di IoT Data Cloud 2019-2021.
+
    </td>
   </tr>
-  <tr>
-   <td><strong>Easy customization</strong>
-   </td>
-   <td>Use the theme as-is for a basic, clean design, or update a file or two to get your own look.
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Simple previews and deployment</strong>
-   </td>
-   <td>Because Docsy is a Hugo theme, you get all the advantages of building with Hugo - simple, fast local previews, and, depending on your deployment options, continuous deployment from Github or other Git providers.
-   </td>
-  </tr>
+
 </table>
 
-### Simple authoring and publishing
-
-Author your content in the Markdown or HTML and then immediately test it with Hugo's local server. Once you are ready to
-publish, add that content to your project and deploy it to your site using any of Hugo’s supported options. 
-[Learn more...](/docs/deployment/)
-
-### Built-in integration with common tools
-
-The Docsy template currently includes built-in integration with the following tools:
-
-* [**GitHub**](https://github.com): Get in-page links directly to your GitHub repo and provide your users with a
-   convenient pathway to providing feedback, opening issues, and even suggesting changes through Pull Requests.
-* [**Google Analytics**](https://analytics.google.com/analytics/web/): Easily connect your Google Analytics account to your 
-   site.
-* [**Google Custom Search**](https://cse.google.com/cse/): Use Google Custom Search for in-site search queries, or 
-  configure your site to search the web.
-* [**Algolia DocSearch**](https://community.algolia.com/docsearch/): Let your users search your site with Algolia DocSearch.
-* [**Lunr**](https://lunrjs.com/): Local indexing and search for your site without the need for external search services.
-
-### Make it your own
-
-You can configure the Docsy theme as much or as little as you like, anything from changing the colours and images to adding your own type of page layout. [Learn more...](docs/adding-content/lookandfeel/)
-
-### Get organized
-
-We believe a well-organized documentation set can really help your users find the information they need, when they need it - whether it’s a “Hello World” tutorial when they’re starting out or a single core task they need to do to finish a complicated app. We also believe that having well-organized docs help you create comprehensive docs, as it’s easier to see when you’re missing something important. [Learn more...](/docs/best-practices/organizing-content/)
-
-Docsy also provides autogenerated site navigation based on how you organize your source files, so once you’ve organized your docs in folders in Github or other source control, you’ve got menus for your users to quickly reach the doc they need. [Learn more...](/docs/adding-content/navigation/)
-
-
-### Keep up to date
-
-Spend time setting up your technical documentation site once, and then focus on what you do best. We work closely with 
-the Hugo team and have individuals actively maintaining the Docsy theme. You can easily get and 
-apply Docsy updates to your site, as well as open feature requests to improve the 
-template, or even add new behaviors. [Learn more...](/docs/updating/)
-
-
-### Focus on great content
-
-Because Docsy helps you create and serve a well-organized, navigable technical documentation set, it frees you up to create and maintain great reliable, comprehensive content that your users can enjoy and trust.
 {{% /blocks/section %}}
-{{% blocks/section type="section" color="primary" %}}
-## What's next for Docsy?
-
-Docsy is an open source project and we love getting patches and contributions to make Docsy and its docs even better. We hope to continue to make improvements to the theme along with the Docsy community.
-
-Visit our [Issues](https://github.com/google/docsy/issues) to see what we're currently working on. If there's something you'd like to see in Docsy, please create an issue yourself - or assign yourself an issue if you'd like to fix or add something! See our [contribution guidelines](/docs/contribution-guidelines/) for more information.
-
-You can find out how to update your site to the latest version of Docsy in [Keeping the theme up to date](/docs/updating/).
-{{% /blocks/section %}}
-
-
-
-
