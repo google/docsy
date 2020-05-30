@@ -1,7 +1,7 @@
 ---
 title: "Gruppi e Scenari"
 linkTitle: "Gruppi e Scenari"
-weight: 8
+weight: 1
 description: >
  il match-making tra i gruppi degli studenti e l'elenco degli scenari di studio.
 ---
