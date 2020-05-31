@@ -12,6 +12,6 @@ description: >
 
 ## Qui sto visualizzando un'immagine che ho caricato nella cartella del gruppo.  
 
-![](riders.jpg)
+![](../riders.jpg)
 
 Rimando a [questo articolo](https://www.markdownguide.org/basic-syntax/) per avere maggiori infor su come funziona markdown.
