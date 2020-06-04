@@ -2,7 +2,7 @@
 title: "Gruppo 4"
 weight: 4
 description: >
-   Il gruppo # lavorerà sul incremento di natalità e divorzi durante il lockdown
+   Il gruppo 4 lavorerà sul commercio di pizzerie, commercio e gastronomie
 ---
 
 Questo é un gruppo di esempio, ogni gruppo é tenuto a duplicare questa cartella e rinominare title e description.
@@ -12,13 +12,13 @@ Dati obbligatori
 
 ## Il Team
 
-Il gruppo 1 é composto da:
+Il gruppo 4 é composto da:
 
-* nome 1  
-* nome 2  
-* nome x  
+* Marco Girardelli  
+* Junior Sielinou 
+* Alessio Paradisi 
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
+La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [https://docs.google.com/document/d/1s9GVQ5Ec2FwZLzwS-QTGZL630YdmnYximdFJs3nvQpk/edit](url)
 
 ultimo aggiornamento in data
 tradotto in inglese?
