@@ -14,9 +14,10 @@ Dati obbligatori
 
 Il gruppo 1 é composto da:
 
-* nome 1  
-* nome 2  
-* nome x  
+* Andrea Pierri  
+* Matilde Migliorin
+* Davide Di Giovanni
+* Davide Forchino
 
 La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
 
