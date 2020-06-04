@@ -2,23 +2,19 @@
 title: "Gruppo 7"
 weight: 7
 description: >
-   Il gruppo # lavorerà sul incremento di natalità e divorzi durante il lockdown
+   Il gruppo # lavorerà sull'attuale stato della piccola ristorazione durante il periodo covid-19 e sulle possibili modalità da attuare per fare fronte ai problemi da esso derivati.
 ---
 
-Questo é un gruppo di esempio, ogni gruppo é tenuto a duplicare questa cartella e rinominare title e description.
-IL weight é l'ordine con cui apparirà sulla colonna di sinistra.
-
-Dati obbligatori
 
 ## Il Team
 
-Il gruppo 1 é composto da:
+Il gruppo 7 é composto da:
 
-* nome 1  
-* nome 2  
-* nome x  
+* Alessandro Canu
+* Riccardo Beltramo
+* Gabriele Tallarita
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
+La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing](url)
 
-ultimo aggiornamento in data
-tradotto in inglese?
+ultimo aggiornamento in data 04/06/20
+La traduzione in inglese sarà effettuata più avanti una volta definita una documentazione definitiva.
