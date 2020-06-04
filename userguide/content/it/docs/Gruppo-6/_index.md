@@ -2,23 +2,18 @@
 title: "Gruppo 6"
 weight: 6
 description: >
-   Il gruppo # lavorerà sul incremento di natalità e divorzi durante il lockdown
+   Il gruppo 6 lavorerà sulle problematiche e sulle possibili soluzioni per la gestione delle farmacie
 ---
-
-Questo é un gruppo di esempio, ogni gruppo é tenuto a duplicare questa cartella e rinominare title e description.
-IL weight é l'ordine con cui apparirà sulla colonna di sinistra.
-
-Dati obbligatori
 
 ## Il Team
 
-Il gruppo 1 é composto da:
+Il gruppo 6 é composto da:
 
-* nome 1  
-* nome 2  
-* nome x  
+* Alessio Di Vincenzo
+* Andrea Franzero  
+* Filippo Savarese 
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
+La prima parte di ricerca ed analisi la stiamo portando avanti [in questo google doc ](https://docs.google.com/document/d/1YS3iC8_Tz6rzYUb6J9JhKVoxNO8BcyLcItImz9uy5Pk/edit)
 
-ultimo aggiornamento in data
-tradotto in inglese?
+ultimo aggiornamento in data 04/06/2020
+tradotto in inglese? WIP
