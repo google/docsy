@@ -1,24 +1,17 @@
 ---
-title: "Gruppo 1"
+title: "Gruppo DPI"
 weight: 1
 description: >
-   Il gruppo # lavorerà sul incremento di natalità e divorzi durante il lockdown
+   Il gruppo DPI si occupa di svolgere una ricerca fine a risolvere i problemi dovuti ai Dispositivi di Protezione Individuale
 ---
 
-Questo é un gruppo di esempio, ogni gruppo é tenuto a duplicare questa cartella e rinominare title e description.
-IL weight é l'ordine con cui apparirà sulla colonna di sinistra.
+## Ecco il nostro Team!
 
-Dati obbligatori
+* Monssef Fidah
+* Davide Fusco 
+* Pietro Garbolino
+* Mattia Morritti
 
-## Il Team
+La prima parte di ricerca e analisi la stiamo portando avanti [QUI!](https://docs.google.com/presentation/d/18RxxflILKe6Hd1KKLPOOjiQAYauPZnTPTjp2voCpWwk/edit?usp=sharing)
 
-Il gruppo 1 é composto da:
-
-* nome 1  
-* nome 2  
-* nome x  
-
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
-
-ultimo aggiornamento in data
-tradotto in inglese?
+04/06/2020
