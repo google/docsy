@@ -20,6 +20,3 @@ In questa settimana ogni gruppo dovrà:
 * prendere dimestichezza con il sistema (tralasciando per ora la sezione in inglese) ed eventualmente porre domande sul canale discord.
 
 ![](https://methods.co.uk/wp-content/uploads/2018/01/The-triple-diamond-approach..jpeg)
-
-
-<iframe src="https://discordapp.com/widget?id=711947824019013724&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
