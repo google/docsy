@@ -2,23 +2,37 @@
 title: "Gruppo 5"
 weight: 5
 description: >
-   Il gruppo # lavorerà sul incremento di natalità e divorzi durante il lockdown
+   Il gruppo 5 svolge una ricerca sulle problematiche dei parrucchieri, centri estetichi, ecc col fine di risolverli
 ---
 
-Questo é un gruppo di esempio, ogni gruppo é tenuto a duplicare questa cartella e rinominare title e description.
-IL weight é l'ordine con cui apparirà sulla colonna di sinistra.
+## Il Team !
 
-Dati obbligatori
+Il gruppo 5 é composto da:
 
-## Il Team
+* Gianpaolo Grandis
+* Andrea Samuele Battaglia
+* Alessio Milazzotto
+* Alessio Battista
 
-Il gruppo 1 é composto da:
-
-* nome 1  
-* nome 2  
-* nome x  
-
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [nome link](url)
+La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [QUI!](https://docs.google.com/presentation/d/1vCh-we4hOVtDE-11NBP55lUK2T9aCTVTLhW3kRHJPTU/edit?usp=sharing)
 
 ultimo aggiornamento in data
-tradotto in inglese?
+10/06/2020
+
+
+<br>
+
+## Our Team !
+
+Group 5 is composed of:
+
+* Gianpaolo Grandis
+* Andrea Samuele Battaglia
+* Alessio Milazzotto
+* Alessio Battista
+
+We are carrying out the first part of research and analysis in this google doc [Here!](https://docs.google.com/presentation/d/1vCh-we4hOVtDE-11NBP55lUK2T9aCTVTLhW3kRHJPTU/edit?usp=sharing)
+
+last update on
+10/06/2020
+
