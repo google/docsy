@@ -8,7 +8,7 @@ description: >
 ## Ecco il nostro Team!
 
 * Monssef Fidah
-* Davide Fusco 
+* Davide Fusco
 * Pietro Garbolino
 * Mattia Morritti
 
