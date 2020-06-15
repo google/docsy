@@ -98,7 +98,10 @@
                         });
                     });
                 })
-                .slice(0, 10);
+                .slice(
+                    0,
+                    $targetSearchInput.data('offlnie-search-max-results')
+                );
 
             //
             // Make result html
