@@ -54,7 +54,7 @@ Note that if you decide to go with a font with different weights (in the built-i
 
 ## CSS utilities
 
-For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some some color state CSS classes that can be useful in a dynamic context:
+For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some color state CSS classes that can be useful in a dynamic context:
 
 * `.-bg-<color>`
 * `.-text-<color>`
