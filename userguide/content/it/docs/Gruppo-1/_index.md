@@ -7,8 +7,11 @@ description: >
 
 ## Ecco il nostro Team!
 
-![](https://github.com/mmorritti/docsy/blob/master/userguide/content/it/docs/Gruppo-Template/logo_gruppo1.jpg)
+* Monseff Fidah
+* Fusco Davide
+* Garbolino Pietro
+* Morritti Mattia
 
 La prima parte di ricerca e analisi la stiamo portando avanti [QUI!](https://docs.google.com/presentation/d/18RxxflILKe6Hd1KKLPOOjiQAYauPZnTPTjp2voCpWwk/edit?usp=sharing)
 
-04/06/2020
+18/06/2020
