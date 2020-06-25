@@ -19,9 +19,9 @@ description: >
 
 ### Categorie
 Esistono tre categorie di DPI eccoli qui:
-> * ***Prima categoria:*** Sono dispositivi di protezione per attività che hanno rischio minimo e che procurano danni di lieve entità e sono autocertificati dal produttore.
-> * ***Seconda categoria:*** Definiti come DPI atti a proteggere dai rischi medi e che non rientrano né alla *prima* e ne alla *terza categoria.* Per questi è richiesto un attestato di certificazione rilasciato da un organismo di controllo autorizzato.
-> * ***Terza categoria:*** Sono dispositivi atti a proteggere da danni gravi o permanenti per la salute, o dal **rischio di morte!** È previsto un addestramento specifico ed obbligatorio per poter utilizzare in modo corretto questi dispositivi.
+> * **Prima categoria:** Sono dispositivi di protezione per attività che hanno rischio minimo e che procurano danni di lieve entità e sono autocertificati dal produttore. <br>
+> * **Seconda categoria:** Definiti come DPI atti a proteggere dai rischi medi e che non rientrano né alla *prima* e ne alla *terza categoria.* Per questi è richiesto un attestato di certificazione rilasciato da un organismo di controllo autorizzato. <br>
+> * **Terza categoria:** Sono dispositivi atti a proteggere da danni gravi o permanenti per la salute, o dal **rischio di morte!** È previsto un addestramento specifico ed obbligatorio per poter utilizzare in modo corretto questi dispositivi. <br>
 
 
 
