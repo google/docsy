@@ -14,4 +14,9 @@ description: >
 
 La prima parte di ricerca e analisi la stiamo portando avanti [QUI!](https://docs.google.com/presentation/d/18RxxflILKe6Hd1KKLPOOjiQAYauPZnTPTjp2voCpWwk/edit?usp=sharing)
 
-18/06/2020
+## Questionari 
+Brevi questionari per l'analisi del problema!
+ * Sei un utilizzatore come tutti noi, [Clicca Qui](https://forms.gle/EJoazGx6mBv1rZiy9) per rispondere a un breve questionario! <br>
+ * Sei un esercente? Ecco un questionario per te [Clicca Qui](https://forms.gle/zXH3fCwTGBo66oJm7)
+
+25/06/2020
