@@ -14,7 +14,7 @@ Il gruppo 7 é composto da:
 * Riccardo Beltramo
 * Gabriele Tallarita
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing](url)
+La prima parte di ricerca ed analisi la stiamo portando avanti in questo [google doc](https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing)
 
 ultimo aggiornamento in data 04/06/20
 La traduzione in inglese sarà effettuata più avanti una volta definita una documentazione definitiva.
