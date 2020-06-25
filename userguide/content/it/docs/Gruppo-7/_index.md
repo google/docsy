@@ -1,20 +1,22 @@
 ---
-title: "Gruppo 7"
+title: "Gruppo Piccola Ristorazione"
 weight: 7
 description: >
-   Il gruppo # lavorerà sull'attuale stato della piccola ristorazione durante il periodo covid-19 e sulle possibili modalità da attuare per fare fronte ai problemi da esso derivati.
+   Il Team studierà lo stato della Piccola Ristorazione durante il periodo di lockdown dovuto al Covid-19 e sulle possibili soluzioni tecnologiche da utilizzare per fare fronte ai problemi da esso derivati.
 ---
 
 
-## Il Team
+## Il Team!
 
-Il gruppo 7 é composto da:
+I membri del Gruppo 7 sono:
 
 * Alessandro Canu
 * Riccardo Beltramo
 * Gabriele Tallarita
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo [google doc](https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing)
+La prima parte di ricerca ed analisi è stata portata avanti in questo [Google Doc](https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing) .
 
-ultimo aggiornamento in data 04/06/20
-La traduzione in inglese sarà effettuata più avanti una volta definita una documentazione definitiva.
+Il questionario che condividiamo con gli esercenti dei locali è consultabile in questo [FORM](https://docs.google.com/forms/d/1AaPuF2DRiSaMuZ4pGb5e8KV4RCKYevPl2UfJiuTLGmM) .
+
+
+Ultimo aggiornamento effettuato in data 25/06/20

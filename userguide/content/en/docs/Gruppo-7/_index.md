@@ -1,20 +1,21 @@
 ---
-title: "Gruppo 7"
+title: "Small Restaurant Business"
 weight: 7
 description: >
-   Il gruppo # lavorerà sull'attuale stato della piccola ristorazione durante il periodo covid-19 e sulle possibili modalità da attuare per fare fronte ai problemi da esso derivati.
+   The Team will study the state of the Small Restaurant Business during the lockdown period caused by Covid-19 and the possible technological solutions that could be adopted to tackle the problems derived from it.
 ---
 
 
-## Il Team
+# The Team!
 
-Il gruppo 7 é composto da:
+The members of Team 7 are:
 
 * Alessandro Canu
 * Riccardo Beltramo
 * Gabriele Tallarita
 
-La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharing](url)
+The first part of analysis and research is documented on this [Google Doc](https://docs.google.com/presentation/d/17G51bELCH-WeXcZ8c5X4E5Ol6JiuJVCCFysc-2gJRB0/edit?usp=sharin) .
 
-ultimo aggiornamento in data 04/06/20
-La traduzione in inglese sarà effettuata più avanti una volta definita una documentazione definitiva.
+The survey we submit to the owners of the restaurants is available on this [FORM](https://docs.google.com/forms/d/1AaPuF2DRiSaMuZ4pGb5e8KV4RCKYevPl2UfJiuTLGmM) .
+
+Last update made on 06/25/20
