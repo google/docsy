@@ -18,3 +18,5 @@ Con L’esplosione della Pandemia di Covid-19 è diventato lo strumento fondamen
 3. Annodala bene, i lacci superiori devono essere annodati alla sommità della testa e quelli inferiori vanno annodati dietro il collo.
 4. Se utilizzi una mascherina di tipo chirurgico ricordati che è monouso.
 5. Mi raccomando tocca il meno possibile la mascherina, non abbassarla sotto il naso o sotto la bocca!
+
+Proteggiamo noi stessi per proteggere gli altri
