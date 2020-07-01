@@ -134,4 +134,13 @@
             width: 100%;
         }
     }
+
+    #content-desktop {display: block;}
+    #content-mobile {display: none;}
+
+    @include media-breakpoint-down(md) {
+
+    #content-desktop {display: none;}
+    #content-mobile {display: block;}
+    }
 }
