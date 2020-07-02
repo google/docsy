@@ -3,10 +3,7 @@ title: "La Mascherina"
 linkTitle: "Ecco come si indossa La Mascherina"
 weight: 9
 description: >
-  Qui approffondiamo meglio il DPI più utilizzato LA MASCHERINA
 ---
-
-## MASCHERINA
 
 È Sicuramente il **DPI** più utilizzato in assoluto e può considerarsi un indumento per la protezione della bocca e del naso. Viene utilizzata soprattutto in ambito lavorativo(antincendio, chirurgiche, antigas, ecc..).
 Con L’esplosione della Pandemia di Covid-19 è diventato lo strumento fondamentale per evitare la diffusione del contagio.
