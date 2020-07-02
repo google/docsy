@@ -7,7 +7,7 @@ description: >
 
 ## Our Team !
 
--The Self-Care Group is composed by:
+The Self-Care Group is composed by:
 
 * Gianpaolo Grandis
 * Andrea Samuele Battaglia
@@ -27,7 +27,7 @@ President: <b>Giuseppe Sciarrino</b>
 The hairdressers sector protects and represents hairdressers for women and men. About 25,000 business owners are members throughout the country, 800 of which are in the Metropolitan City of Turin.
 
 
-<h3>Settore estetica</h3>
+<h3>Aesthetic sector</h3>
 
 President:<b> Monica Percelsi</b>
 
