@@ -1,13 +1,13 @@
 ---
-title: "Gruppo 5"
+title: "Gruppo Cura di sé"
 weight: 5
 description: >
-   Il gruppo 5 svolge una ricerca sulle problematiche dei parrucchieri, centri estetichi, ecc col fine di risolverli
+   Il Gruppo Cura di sé svolge una ricerca sulle problematiche dei parrucchieri, centri estetichi, ecc col fine di risolverli
 ---
 
 ## Il Team !
 
-Il gruppo 5 é composto da:
+Il Gruppo Cura di sé é composto da:
 
 * Gianpaolo Grandis
 * Andrea Samuele Battaglia
@@ -35,7 +35,7 @@ Il Settore estetica tutela e rappresenta gli imprenditori e le imprese che opera
 Fonte: [QUI!](https://www.cna-to.it/it/Mestieri/CNA%20Benessere%20e%20Sanit%C3%A0#)
 
 <i>ultimo aggiornamento in data
-18/06/2020</i>
+02/07/2020</i>
 
 
 
