@@ -15,7 +15,7 @@ Dati obbligatori
 Il gruppo 4 é composto da:
 
 * Marco Girardelli  
-* Junior Sielinou 
+* Sylvain Junior Sielinou Gameni
 * Alessio Paradisi 
 
 La prima parte di ricerca ed analisi la stiamo portando avanti in questo google doc [https://docs.google.com/document/d/1s9GVQ5Ec2FwZLzwS-QTGZL630YdmnYximdFJs3nvQpk/edit](url)
@@ -32,7 +32,7 @@ description: >
 Group 4 is composed by:
 
 * Marco Girardelli
-* Junior Sielinou
+* Sylvain Junior Sielinou Gameni
 * Alessio Paradisi
 
 The first part of research and analysis can be found here:
