@@ -16,7 +16,7 @@ Il progetto ha il duplice obiettivo di analizzare come il lockdown da COVID-19 d
 
 ## Perché Ctrl-Z?
 
-Il progetto porta il nome di uno combinazione di tastiera che permette di tornare indietro ad una versione precedente del lavoro che si sta svolgendo. Il tema metaforicamente é come tornare ad una normalità, ovvero ad una società totalmente uscita dalla fase di contagio, che però ne porta gli inevitabili segni. Obiettivo del progetto é sviluppare  strumenti per controbattere e rispondere ad ipotetiche situazioni di lockdown future ed impreviste.
+Il progetto porta il nome di una combinazione di tastiera che permette di tornare indietro ad una versione precedente del lavoro che si sta svolgendo. Il tema metaforicamente é come tornare ad una normalità, ovvero ad una società totalmente uscita dalla fase di contagio, che però ne porta gli inevitabili segni. Obiettivo del progetto é sviluppare  strumenti per controbattere e rispondere ad ipotetiche situazioni di lockdown future ed impreviste.
 
 Con Ctrl-z cerchiamo (nel nostro piccolo, limitatamente ad un progetto scolastico) di definire strumenti che agiscano da anticorpi sociali e tecnologici ad un disagio commerciale che colpisce (e tutto fa presupporre, colpirà) diversi settori dell’economia piemontese nei prossimi anni.
 
