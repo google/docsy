@@ -1,19 +1,23 @@
 ---
-title: "Gruppo 6"
+title: "Gruppo Farmacie"
 weight: 6
 description: >
-   Il gruppo 6 lavorerà sulle problematiche e sulle possibili soluzioni per la gestione delle farmacie
+   Il nostro gruppo lavorerà sulle problematiche e sulle possibili soluzioni per la gestione delle farmacie dopo la quarantena.
 ---
 
-## Il Team
-
-Il gruppo 6 é composto da:
+## Team
 
 * Alessio Di Vincenzo
 * Andrea Franzero  
 * Filippo Savarese 
 
-La prima parte di ricerca ed analisi la stiamo portando avanti [in questo google doc ](https://docs.google.com/document/d/1YS3iC8_Tz6rzYUb6J9JhKVoxNO8BcyLcItImz9uy5Pk/edit)
 
-ultimo aggiornamento in data 04/06/2020
-tradotto in inglese? WIP
+## Questionari
+Per aiutarci a capire meglio le difficolà riscontrate e permetterci di trovare la soluzione giusta puoi rispondere ad un breve questionario:
+
+* Se gestisci una farmacia [clicca qui](https://docs.google.com/forms/d/e/1FAIpQLSd65YNugSFhi36_33nzGfxAph71Dwg_Tmfwm0G_dox_5r_Okw/viewform)
+* Se hai acquistato dei prodotti durante la quarantena [clicca qui](https://docs.google.com/forms/d/e/1FAIpQLSfpVNuLTK8PHMfA-VWxVdHG4pY19tiyl3IqFPPwcTbbOs49QQ/viewform)
+* Se sei un medico privato [clicca qui](https://docs.google.com/forms/d/1LLdM3RFRwSZfRb1OnF8MUAToD-XdvhpGZB4I6THJjDM/viewform)
+
+Ultimo aggiornamento in data 06/07/2020
+
