@@ -1,5 +1,6 @@
 # Docsy
 ![GitHub](https://img.shields.io/github/license/google/docsy)
+
 Docsy is a [Hugo](https://gohugo.io/) theme for technical documentation sets, providing simple navigation, site structure, and more.
 
 This is not an officially supported Google product. This project is actively being maintained.
