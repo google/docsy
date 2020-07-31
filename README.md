@@ -1,4 +1,4 @@
-# Docsy
+# Docsy 
 
 Docsy is a [Hugo](https://gohugo.io/) theme for technical documentation sets, providing simple navigation, site structure, and more.
 
@@ -22,12 +22,12 @@ The following are basic prerequisites for using Docsy in your site:
 
 ## Example and usage
 
-You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example). The Docsy Example Project is hosted at [https://example.docsy.dev/](https://example.docsy.dev/).
+You can find an example project that uses Docsy in the [Docsy Example Project repo](https://github.com/google/docsy-example).The Docsy Example Project is hosted at [https://example.docsy.dev/](https://example.docsy.dev/).
 
 To use the Docsy theme for your own site:
 
   - (Recommended) Copy the [example project](https://github.com/google/docsy-example),
-￼	   which includes the Docsy theme as a submodule.
+     which includes the Docsy theme as a submodule.
     You can customize this pre-configured basic site into your own Docsy themed site. 
     [Learn more...](https://github.com/google/docsy-example)
   
@@ -47,7 +47,7 @@ cd docsy/userguide/
 hugo server --themesDir ../..
 ```
 
-Note that you need the `themesDir` flag when running Hugo because the site files are inside the theme repo.
+Note: you need the `themesDir` flag when running Hugo because the site files are inside the theme repo.
 
 ## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
 
