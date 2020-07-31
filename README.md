@@ -1,5 +1,4 @@
 # Docsy
-![GitHub](https://img.shields.io/github/license/google/docsy)
 
 Docsy is a [Hugo](https://gohugo.io/) theme for technical documentation sets, providing simple navigation, site structure, and more.
 
@@ -49,3 +48,12 @@ hugo server --themesDir ../..
 ```
 
 Note that you need the `themesDir` flag when running Hugo because the site files are inside the theme repo.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/google/docsy/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+See also the list of [contributors](https://github.com/google/docsy/graphs/contributors) who participated in this project.
+
+## License ![GitHub](https://img.shields.io/github/license/google/docsy)
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE.md](https://github.com/google/docsy/blob/master/LICENSE) file for details
