@@ -49,7 +49,7 @@ hugo server --themesDir ../..
 
 Note that you need the `themesDir` flag when running Hugo because the site files are inside the theme repo.
 
-## Contributing
+## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
 
 Please read [CONTRIBUTING.md](https://github.com/google/docsy/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 See also the list of [contributors](https://github.com/google/docsy/graphs/contributors) who participated in this project.
