@@ -135,6 +135,10 @@ offlineSearch = false
 offlineSearchSummaryLength = 70
 offlineSearchMaxResults = 10
 
+# Enable syntax highlighting with Prism
+# Prism supports copy buttons on code samples and many other features
+prism_syntax_highlighting = true
+
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.

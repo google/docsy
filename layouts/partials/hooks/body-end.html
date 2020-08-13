@@ -1,3 +1,7 @@
 {{ with .Site.Params.algolia_docsearch }}
 <!-- scripts for algolia docsearch -->
 {{ end }}
+{{ with .Site.Params.prism_syntax_highlighting }}
+<!-- scripts for prism -->
+<script src='/js/prism.js'></script>
+{{ end }}
