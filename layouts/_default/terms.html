@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section>
+  <header>
+  <h4>List of article {{ .Section }}</h4>
+  </header>
+</section>
+  {{ range $key, $value := .Data.Terms }}
+  {{ $postCount := len $value.Pages  }}
+  <a href="{{ "/" | relLangURL }}{{ $.Data.Plural | urlize }}/{{ $key | urlize }}">
+  <h5>{{ $key }} : 
+  <span class="badge badge-light">{{ $postCount }}</span></h5></a>
+  {{ end }}
+{{ end }}
