@@ -1,0 +1,10 @@
+<div class="md:flex-grow-0 font-light">
+  {{ if isset .Params "tags" }}
+    {{ $count := len .Params.tags }}
+    {{ if gt $count 0 }}
+      {{ range $k, $v := .Params.tags }}
+      <a class="post-taxonomy-tag text-eucalyptus-500" href='{{"/tags/"| relURL}}{{ . | urlize }}'>{{ . }}</a>{{ if lt $k (sub $count 1) }}&nbsp;&#47;{{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>

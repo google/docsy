@@ -1,0 +1,9 @@
+{{ if isset .Params "tags" }}
+{{ if not (eq (len .Params.tags) 0) }}
+<div class="article-tags">
+  {{ range .Params.tags }}
+  <span class="badge badge-light"><a class="article-tags-link" href="{{ $.Site.BaseURL }}/tags/{{ . | urlize }}">{{ . }}</a></span>
+  {{ end }}
+</div>
+{{ end }}
+{{ end }}
