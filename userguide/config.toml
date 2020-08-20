@@ -135,9 +135,7 @@ offlineSearch = false
 offlineSearchSummaryLength = 70
 offlineSearchMaxResults = 10
 
-# Enable syntax highlighting with Prism
-# To use this feature you must download your own Prism CSS/JS files from https://prismjs.com/download.html,
-# copy the files to your static folder, and add links to them in your head-end.html and body-end.html
+# Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 
 # User interface configuration

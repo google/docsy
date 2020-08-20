@@ -21,7 +21,7 @@ $secondary: #A23B72;
 * See `assets/scss/_variables.scss` in the theme for color variables etc. that can be set to change the look and feel.
 * Also see available variables in Bootstrap 4: https://getbootstrap.com/docs/4.0/getting-started/theming/ and https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
 
-The theme has features suchs as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
+The theme has features such as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
 
 ```scss
 $enable-gradients: true;
@@ -81,7 +81,7 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper cont
 
 <div class="-text-blue pt-3 display-4">Text: Blue</div>
 
-## Code highlighting
+## Code highlighting with Chroma
 
 With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `config.toml`:
 
@@ -98,12 +98,47 @@ With Hugo version 0.60 and higher, you can choose from a range of code block hig
 By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `config.toml`.
 
 ```toml
-      # Uncomment if you want your chosen highlight style used for code blocks without a specified language
-      guessSyntax = "true"
+# Uncomment if you want your chosen highlight style used for code blocks without a specified language
+guessSyntax = "true"
 ```
 
 You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
- 
+
+## Code highlighting with Prism
+
+Optionally, you can enable Prism syntax highlighting in your `config.toml`:
+
+```toml
+# Enable syntax highlighting and copy buttons on code blocks with Prism
+prism_syntax_highlighting = true
+```
+
+When this option is enabled your site uses [Prism](https://prismjs.com/index.html) instead of Chroma for code block highlighting.
+
+Prism is a popular open source syntax highlighter which supports over 200 [languages](https://prismjs.com/index.html#supported-languages) and various [plugins](https://prismjs.com/index.html#plugins).
+
+Docsy includes JavaScript and CSS files for a basic Prism configuration, which supports:
+
+* Code blocks styled with the Prism `Default` theme
+* Copy to clipboard buttons on code blocks
+* Syntax highlighting for a number of common languages, as specified in the following Prism download link:
+
+    ```none
+    https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
+    ```
+
+### Code blocks with no language
+
+By default Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
+
+### Extending Prism for additional languages or plugins
+
+If the included Prism configuration is not sufficient for your requirements, and you want to use additional languages or plugins you can replace the included files with your own.
+
+1. Download your own Prism JS and CSS files from <https://prismjs.com/download.html>
+2. Replace the included Prism JS and CSS with the files you downloaded:
+    * Copy the Javascript file to `static/js/prism.js`
+    * Copy the CSS file to `static/css/prism.css`
 
 ## Customizing templates
 
