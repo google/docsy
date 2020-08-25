@@ -19,6 +19,7 @@ Example sites that have low to no customization:
 | https://agones.dev/site/ | https://github.com/GoogleCloudPlatform/agones/tree/master/site |
 | https://googlecontainertools.github.io/kpt/ | https://github.com/GoogleContainerTools/kpt/tree/master/docs | 
 | [Navidrome Music Server](https://www.navidrome.org) | https://github.com/navidrome/website | 
+| https://docs.agilebase.co.uk/ | https://github.com/okohll/abdocs | 
 
 ## Customized Docsy examples
 
