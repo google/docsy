@@ -1,8 +1,10 @@
+# Guide to Docsy
+
 [Docsy](https://github.com/google/docsy) is a Hugo theme for technical documentation sites, providing easy site navigation, structure, and more. This **Docsy Example Project** uses the Docsy theme, as well as providing a skeleton documentation structure for you to use. You can either copy this project and edit it with your own content, or use the theme in your projects like any other [Hugo theme](https://gohugo.io/themes/installing-and-using-themes/).
 
-This Docsy Example Project is hosted at [https://testydocsy.netlify.com/](https://testydocsy.netlify.com/).
+Take a look at [Goldydocs, the example project](https://example.docsy.dev) to see what it looks like
 
-You can find detailed theme instructions in the example project under **Documentation -> Getting Started**.
+You can find [detailed theme instructions](https://www.docsy.dev/docs/getting-started/) in the example project.
 
 This is not an officially supported Google product. This project is currently maintained.
 
@@ -10,7 +12,7 @@ This is not an officially supported Google product. This project is currently ma
 
 The following will give you a project that is set up and ready to use (don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site). The `hugo server` command builds and serves the site. If you just want to build the site, run `hugo` instead.
 
-```bash
+```shell
 git clone --recurse-submodules --depth 1 https://github.com/google/docsy-example.git
 cd docsy-example
 hugo server
@@ -18,21 +20,21 @@ hugo server
 
 The theme is included as a Git submodule:
 
-```bash
+```shell
 ▶ git submodule
  a053131a4ebf6a59e4e8834a42368e248d98c01d themes/docsy (heads/master)
 ```
 
 If you want to do SCSS edits and want to publish these, you need to install `PostCSS` (not needed for `hugo server`):
 
-```bash
+```shell
 npm install
 ```
 
 <!--### Cloning the Example from the Theme Project
 
 
-```bash
+```shell
 git clone --recurse-submodules --depth 1 https://github.com/docsy.git
 cd tech-doc-hugo-theme/exampleSite
 HUGO_THEMESDIR="../.." hugo server
@@ -41,17 +43,17 @@ HUGO_THEMESDIR="../.." hugo server
 
 Note that the Hugo Theme Site requires the `exampleSite` to live in a subfolder of the theme itself. To avoid recursive duplication, the example site is added as a Git subtree:
 
-```bash
+```shell
 git subtree add --prefix exampleSite https://github.com/google/docsy.git  master --squash
 ```
 
 To pull in changes, see `pull-deps.sh` script in the theme.-->
 
-## Running the website locally
+## Running the Website Locally
 
 Once you've cloned the site repo, from the repo root folder, run:
 
-```
+```shell
 hugo server
 ```
 
