@@ -125,6 +125,7 @@ Docsy includes JavaScript and CSS files for a basic Prism configuration, which s
 
     ```none
     https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
+    
     ```
 
 ### Code blocks with no language
