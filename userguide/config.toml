@@ -135,6 +135,9 @@ offlineSearch = false
 offlineSearchSummaryLength = 70
 offlineSearchMaxResults = 10
 
+# Enable syntax highlighting and copy buttons on code blocks with Prism
+prism_syntax_highlighting = true
+
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
