@@ -136,7 +136,7 @@ offlineSearchSummaryLength = 70
 offlineSearchMaxResults = 10
 
 # Enable syntax highlighting and copy buttons on code blocks with Prism
-prism_syntax_highlighting = true
+prism_syntax_highlighting = false
 
 # User interface configuration
 [params.ui]
