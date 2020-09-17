@@ -160,7 +160,7 @@ To copy the example site:
 
 Specify the [Docsy theme](https://github.com/google/docsy) like any other Hugo theme when creating or updating your site. This gives you all the theme-y goodness but you'll need to specify your own site structure.  You can either use the theme as a submodule (our recommended approach for easy updates), or just clone the theme into your project's `themes` subdirectory.
 
-Whichever approach you use, for simplicity we recommend copying and editing our [example site configuration](#configuring-your-site) for your project, or you may get Hugo errors for missing parameters and values when you try to build your site.
+Whichever approach you use, for simplicity we recommend copying and editing our [example site configuration](#basic-site-configuration) for your project, or you may get Hugo errors for missing parameters and values when you try to build your site.
 
 #### Using the Docsy theme as a submodule
 
@@ -209,7 +209,7 @@ If you want to build and/or serve your site [locally](/docs/deployment/#serving-
 git submodule update --init --recursive
 ```
 
-For more information, see [Install and Use Themes](https://gohugo.io/themes/installing-and-using-themes/#install-a-single-theme) on the [Hugo](https://gohugo.io) site.
+For more information, see [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the [Hugo](https://gohugo.io) site.
 
 #### Preview your site
 
