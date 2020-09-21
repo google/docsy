@@ -24,7 +24,7 @@ If you've just added the theme as a submodule in a local version of your site an
     git submodule update --init --recursive
     {{% /alert %}}
 
-1.  Ensure you have the tools described in [Installation and Prerequisites](#installation-and-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
+1.  Ensure you have the tools described in [Prerequisites and installation](/docs/getting-started/#prerequisites-and-installation) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
 1.  Run the `hugo server` command in your site root. By default your site will be available at http://localhost:1313/.
 
 Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site. If you have more than one local git branch, when you switch between git branches the local website reflects the files in the current branch.

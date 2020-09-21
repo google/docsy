@@ -103,7 +103,7 @@ The Docsy template currently includes built-in integration with the following to
 
 ### Make it your own
 
-You can configure the Docsy theme as much or as little as you like, anything from changing the colours and images to adding your own type of page layout. [Learn more...](docs/adding-content/lookandfeel/)
+You can configure the Docsy theme as much or as little as you like, anything from changing the colours and images to adding your own type of page layout. [Learn more...](/docs/adding-content/lookandfeel/)
 
 ### Get organized
 
