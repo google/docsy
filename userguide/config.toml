@@ -199,3 +199,7 @@ enable = false
 	# url = "https://example.org/mail"
 	# icon = "fa fa-envelope"
         # desc = "Discuss development issues around the project"
+
+[params.mermaid]
+enable = true
+theme = "default"
