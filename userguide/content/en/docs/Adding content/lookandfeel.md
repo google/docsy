@@ -189,6 +189,8 @@ diagramPadding = 6
 
 See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/getting-started/Setup.html#mermaidapi-configuration-defaults) for a list of defaults that can be overriden.
 
+Settings can also be overridden on a per-diagram basis by making use of the `%%init%%` header at the start of the diagram definition.  See the [Mermaid theming documentation](https://mermaid-js.github.io/mermaid/getting-started/theming.html#themes-at-the-local-or-current-level).
+
 ## Customizing templates
 
 ### Add code to head or before body end

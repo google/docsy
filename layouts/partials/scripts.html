@@ -27,10 +27,14 @@
 (function() {
     var needMermaid = false;
     $('.language-mermaid').parent().replaceWith(function() {
-        needsMermaid = true;
+        needMermaid = true;
         return $('<pre class="mermaid">').text($(this).text());
     });
-    if (!needsMermaid)  return;
+
+    if (!needMermaid)  {
+        mermaid.initialize({startOnLoad: false});
+        return;
+    }
 
     var params = {{ . | jsonify | safeJS }};
 
@@ -50,6 +54,17 @@
         }
         return result;
     };
+    // Mermaid 8.8.0 doesn't yet expose this in defaultConfig; next release will.
+    // See https://github.com/mermaid-js/mermaid/issues/1490
+    mermaid.mermaidAPI.defaultConfig.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.flowchart.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.sequence.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.gantt.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.journey.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.git.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.state.useMaxWidth = true;
+    mermaid.mermaidAPI.defaultConfig.er.useMaxWidth = true;
+
     var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
     settings.startOnLoad = true;
     mermaid.initialize(settings);
