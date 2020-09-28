@@ -140,6 +140,57 @@ If the included Prism configuration is not sufficient for your requirements, and
     * Copy the Javascript file to `static/js/prism.js`
     * Copy the CSS file to `static/css/prism.css`
 
+## Diagrams with Mermaid
+
+[Mermaid](https://mermaid-js.github.io) is a Javascript library for rendering simple text definitions to useful diagrams in the browser.  It can generate a variety of different diagram types, including flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, user journey diagrams, Gantt charts and pie charts.
+
+With Mermaid support enabled in Docsy, you can include the text definition of a Mermaid diagram inside a code block, and it will automatically be rendered by the browser as soon as the page loads.
+
+The great advantage of this is anyone who can edit the page can now edit the diagram - no more hunting for the original tools and version to make a new edit.
+
+For example, the following defines a simple flowchart:
+
+````
+```mermaid
+graph LR
+  Start --> Need{"Do I need diagrams"}
+  Need -- No --> Off["Set params.mermaid.enable = false"]
+  Need -- Yes --> HaveFun["Great!  Enjoy!"]
+```
+````
+
+Automatically renders to:
+
+```mermaid
+graph LR
+  Start --> Need{"Do I need diagrams"}
+  Need -- No --> Off["Set params.mermaid.enable = false"]
+  Need -- Yes --> HaveFun["Great!  Enjoy!"]
+
+```
+
+To enable/disable Mermaid, update `config.toml`:
+
+```toml
+[params.mermaid]
+enable = true
+```
+
+You can also update settings for Mermaid, such as themes, padding, etc:
+
+```toml
+[params.mermaid]
+enable = true
+theme = "neutral"
+
+[params.mermaid.flowchart]
+diagramPadding = 6
+```
+
+See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/getting-started/Setup.html#mermaidapi-configuration-defaults) for a list of defaults that can be overriden.
+
+Settings can also be overridden on a per-diagram basis by making use of the `%%init%%` header at the start of the diagram definition.  See the [Mermaid theming documentation](https://mermaid-js.github.io/mermaid/getting-started/theming.html#themes-at-the-local-or-current-level).
+
 ## Customizing templates
 
 ### Add code to head or before body end
