@@ -144,9 +144,9 @@ If the included Prism configuration is not sufficient for your requirements, and
 
 [Mermaid](https://mermaid-js.github.io) is a Javascript library for rendering simple text definitions to useful diagrams in the browser.  It can generate a variety of different diagram types, including flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, user journey diagrams, Gantt charts and pie charts.
 
-With Mermaid support enabled in Docsy, you can include the text definition of a Mermaid diagram inside a code block, and it will automatically be rendered by the browser, as soon as the page loads.
+With Mermaid support enabled in Docsy, you can include the text definition of a Mermaid diagram inside a code block, and it will automatically be rendered by the browser as soon as the page loads.
 
-The great advantage of this is anyone who can edit the page, can now edit the diagram - No more hunting for the original tools and version to make a new edit.
+The great advantage of this is anyone who can edit the page can now edit the diagram - no more hunting for the original tools and version to make a new edit.
 
 For example, the following defines a simple flowchart:
 
