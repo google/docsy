@@ -20,4 +20,4 @@ Il chatbot è stato creato utilizzando Node-red, uno strumento di sviluppo visiv
 ![](../SmartPCounter_bot.png)
 
 
-<i> Ultima modifica 29/09/2020
+<i>  Ultima modifica 29/09/2020.  
