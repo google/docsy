@@ -80,8 +80,8 @@
 // Styling for section boxes
 .td-box {
   .row.section {
-       padding-left: 5rem;
-       padding-right: 5rem;
+       padding-left: 5vw;
+       padding-right: 5vw;
        flex-direction: column;
 
        > table {
@@ -94,15 +94,15 @@
    }
 
   .row {
-       padding-left: 5rem;
-       padding-right: 5rem;
+       padding-left: 5vw;
+       padding-right: 5vw;
        flex-direction: row;
   }
 }
 // Styling for community page link boxes
 
 .td-box.linkbox {
-   padding: 5rem;
+   padding: 5vh 5vw;
 }
 
 // This allows "painting by numbers"
