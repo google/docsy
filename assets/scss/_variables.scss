@@ -7,9 +7,9 @@ See https://github.com/twbs/bootstrap/pull/23260
 @fa-font-path :        "../webfonts";
 
 // Bootstrap flags. For more, see https://getbootstrap.com/docs/4.0/getting-started/theming/
-$enable-gradients: true;
-$enable-rounded: true;
-$enable-shadows: true;
+$enable-gradients: true !default;
+$enable-rounded: true !default;
+$enable-shadows: true !default;
 
 // Theme flags.
 
