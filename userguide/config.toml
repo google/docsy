@@ -35,8 +35,9 @@ pygmentsStyle = "tango"
 blog = "/:section/:year/:month/:day/:slug/"
 
 [outputs]
-	home = [ "HTML", "JSON" ]
-	page = [ "HTML" ]
+home = [ "HTML", "JSON" ]
+page = [ "HTML" ]
+section = [ "HTML", "RSS", "print"]
 
 ## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
 [blackfriday]
@@ -203,3 +204,6 @@ enable = false
 [params.mermaid]
 enable = true
 theme = "default"
+
+[params.print]
+disable_toc = false
