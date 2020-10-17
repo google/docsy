@@ -35,6 +35,8 @@ other = "Opprettet"
 other = "Sist endret"
 [post_edit_this]
 other = "Endre denne siden"
+[post_create_child_page]
+other = "Create child page"
 [post_create_issue]
 other = "Opprett dokumentasjon sak"
 [post_create_project_issue]

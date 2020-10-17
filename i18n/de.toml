@@ -35,6 +35,8 @@ other = "Erstellt"
 other = "Zuletzt geändert"
 [post_edit_this]
 other = "Diese Seite bearbeiten"
+[post_create_child_page]
+other = "Create child page"
 [post_create_issue]
 other = "Problem zu dieser Seite melden"
 [post_create_project_issue]
