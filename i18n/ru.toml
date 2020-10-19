@@ -35,6 +35,8 @@ other = "Создано"
 other = "Изменено"
 [post_edit_this]
 other = "Отредактировать страницу"
+[post_create_child_page]
+other = "Create child page"
 [post_create_issue]
 other = "Предложить изменения документации"
 [post_create_project_issue]

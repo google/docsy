@@ -35,6 +35,8 @@ other = "创建"
 other = "最后修改"
 [post_edit_this]
 other = "编辑此页"
+[post_create_child_page]
+other = "添加子页面"
 [post_create_issue]
 other = "提交文档问题"
 [post_create_project_issue]

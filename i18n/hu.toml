@@ -37,6 +37,8 @@ other = "Elkészítve"
 other = "Utolsó módosítás"
 [post_edit_this]
 other = "Oldal szerkesztése"
+[post_create_child_page]
+other = "Create child page"
 [post_create_issue]
 other = "Dokumentáció issue létrehozása"
 [post_create_project_issue]

@@ -35,6 +35,8 @@ other = "作成"
 other = "最終更新"
 [post_edit_this]
 other = "ページの編集"
+[post_create_child_page]
+other = "Create child page"
 [post_create_issue]
 other = "ドキュメントのissueを作成"
 [post_create_project_issue]
