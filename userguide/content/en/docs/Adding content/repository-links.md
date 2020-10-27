@@ -50,7 +50,7 @@ github_project_repo = "https://github.com/google/docsy"
 Specify a value here if you have would like to reference a different branch for the other github settings like **Edit this page** or **Create project isssue**.
 
 ```toml
-github_brach = "release"
+github_branch = "release"
 ```
 
 
