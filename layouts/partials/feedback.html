@@ -13,10 +13,10 @@
     display: block;
   }
 </style>
-<h2 class="feedback--title">Feedback</h2>
-<p class="feedback--question">Was this page helpful?</p>
-<button class="feedback--answer feedback--answer-yes">Yes</button>
-<button class="feedback--answer feedback--answer-no">No</button>
+<h2 class="feedback--title">{{ i18n "feedback_title" }}</h2>
+<p class="feedback--question">{{ i18n "feedback_question" }}</p>
+<button class="feedback--answer feedback--answer-yes">{{ i18n "feedback_answer_yes" }}</button>
+<button class="feedback--answer feedback--answer-no">{{ i18n "feedback_answer_no" }}</button>
 <p class="feedback--response feedback--response-yes">
   {{ .yes | safeHTML }}
 </p>
