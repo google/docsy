@@ -16,7 +16,9 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+# Delete the line below to enable Tag Index Pages
+# disableKinds = ["taxonomy", "taxonomyTerm"]
+
 
 # Highlighting config
 pygmentsCodeFences = true
