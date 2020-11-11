@@ -17,7 +17,8 @@ defaultContentLanguageInSubdir = false
 enableMissingTranslationPlaceholders = true
 
 disableKinds = ["taxonomyTerm"]
-
+[taxonomies]
+tags = "tags"
 
 # Highlighting config
 pygmentsCodeFences = true
