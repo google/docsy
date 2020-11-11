@@ -42,7 +42,8 @@ Note, however, that `ref` and `relref` links don't work with `_index` or `index`
 
 ## Tagging
 
-To enable tagging on articles, remove the line `disableKinds = ["taxonomy", "taxonomyTerm"]` in config.toml.  Then on each article add a 'tags:' line to the front matter.
+Tagging is enabled on articles, it can be disabled by adding `taxonomy` to the line: `disableKinds = ["taxonomyTerm"]` in config.toml.  
+To add tags to an article, add a 'tags:' line to the front matter on each article.
 Example: `tags: ["tag1]` 
 Multiple tags can be added separated by commas: `tags: ["tag1","tag2","tag3"]`
 
