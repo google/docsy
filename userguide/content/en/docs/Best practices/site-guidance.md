@@ -42,10 +42,19 @@ Note, however, that `ref` and `relref` links don't work with `_index` or `index`
 
 ## Tagging
 
-Tagging is enabled on articles, it can be disabled by adding `taxonomy` to the line: `disableKinds = ["taxonomyTerm"]` in config.toml.  
+An example of Tagging on a live site can be seen at the [TrueNAS Docs Site](https://www.truenas.com/docs/hub/).
+
+Tagging is enabled on articles, but can be disabled by adding `taxonomy` to the line: `disableKinds = ["taxonomyTerm"]` in config.toml.  
 To add tags to an article, add a 'tags:' line to the front matter on each article.
 Example: `tags: ["tag1]` 
 Multiple tags can be added separated by commas: `tags: ["tag1","tag2","tag3"]`
 
+This will enable a list that will show ever article with that tag when someone clicks on it.
+
+<img src="/images/tag-demo-2.PNG" width='700px'>
+<br>
 
 A Tag Cloud is available that will display all tags and numbers of each tag in the right sidebar.  To enable the tag cloud, uncomment line 8 of toc.html in the partials subdirectory.
+
+<img src="/images/tag-demo-1.PNG" width='700px'>
+<br>
