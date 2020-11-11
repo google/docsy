@@ -16,8 +16,7 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-# Delete the line below to enable Tag Index Pages
-# disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds = ["taxonomyTerm"]
 
 
 # Highlighting config
