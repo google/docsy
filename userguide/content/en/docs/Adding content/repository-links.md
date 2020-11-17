@@ -1,7 +1,7 @@
 ---
 title: "Repository Links"
 linkTitle: "Repository Links"
-weight: 8
+weight: 9
 description: >
   Help your users interact with your source repository.
 ---
