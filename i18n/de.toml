@@ -43,3 +43,13 @@ other = "Problem zu dieser Seite melden"
 other = "Problem melden"
 [post_posts_in]
 other = "Einträge in"
+
+# Print support
+[print_printable_section]
+other = "This the multi-page printable view of this section."
+[print_click_to_print]
+other = "Click here to print"
+[print_show_regular]
+other = "Return to the regular view of this page"
+[print_entire_section]
+other = "Print entire section"

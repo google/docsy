@@ -28,6 +28,12 @@
 {{ $project_issueURL := printf "%s/issues/new" $gh_project_repo }}
 <a href="{{ $project_issueURL }}" target="_blank"><i class="fas fa-tasks fa-fw"></i> {{ T "post_create_project_issue" }}</a>
 {{ end }}
+
+{{ with .CurrentSection.AlternativeOutputFormats.Get "print" }}
+<a id="print" href="{{ .Permalink | safeURL }}"><i class="fa fa-print fa-fw"></i> {{ T "print_entire_section" }}</a>
+{{ end }}
+
+
 </div>
 {{ end }}
 {{ end }}
