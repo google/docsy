@@ -8,9 +8,9 @@ description: >
 
 Individual documentation pages print well from most browsers as the layouts have been styled to omit navigational chrome from the printed output.
 
-On some sites, it can be useful enable a "print entire section" feature (as seen in this user guide).  This will cause an entire section, with all of its child pages and sections, to be rendered in the browser in a format suited to printing, complete with a table of contents for that section.
+On some sites, it can be useful to enable a "print entire section" feature (as seen in this user guide).  Selecting this option renders the entire current top-level section (such as Documentation for this page) with all of its child pages and sections in a format suited to printing, complete with a table of contents for the section.
 
-To enable, add the "print" output format in your site's `config.toml` file for the "section" type:
+To enable this feature, add the "print" output format in your site's `config.toml` file for the "section" type:
 
 ```toml
 [outputs]
@@ -23,7 +23,7 @@ The site should then show a "Print entire section" link in the right hand naviga
 
 ### Disabling the ToC
 
-To disable the table of contents, set the `disable_toc` param to `true`, either in the page front matter, or in `config.toml`:
+To disable showing the the table of contents in the printable view, set the `disable_toc` param to `true`, either in the page front matter, or in `config.toml`:
 
 ```toml
 [params.print]
