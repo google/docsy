@@ -20,8 +20,8 @@
 {{ $js := $js | minify | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end }}
-{{ with .Site.Params.prism_syntax_highlighting }}
+{{ if .Site.Params.prism_syntax_highlighting }}
 <!-- scripts for prism -->
-<script src='/js/prism.js'></script>
+<script src='{{ .Site.BaseURL }}/js/prism.js'></script>
 {{ end }}
 {{ partial "hooks/body-end.html" . }}
