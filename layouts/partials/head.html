@@ -33,8 +33,8 @@
   integrity="sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY"
   crossorigin="anonymous"></script>
 {{end}}
-{{ with .Site.Params.prism_syntax_highlighting }}
+{{ if .Site.Params.prism_syntax_highlighting }}
 <!-- stylesheet for Prism -->
-<link rel="stylesheet" href="/css/prism.css" />
+<link rel="stylesheet" href="{{ "/css/prism.css" | relURL }}"/>
 {{ end }}
 {{ partial "hooks/head-end.html" . }}
