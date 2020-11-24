@@ -19,14 +19,14 @@ For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
 #### Linux
 
-Do **not** use `sudo apt-get install hugo`, as it currently doesn't get you the `extended` version. 
+Be careful using `sudo apt-get install hugo`, as it [doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/getting-started/installing/#debian-and-ubuntu), and may not be up-to-date with the most recent Hugo version.
 
 If you've already installed Hugo, check your version:
 
 ```
 hugo version
 ```
-If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version.
+If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
     
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
