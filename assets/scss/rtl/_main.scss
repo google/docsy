@@ -1,0 +1,27 @@
+body:lang(fa) {
+    @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v27.0.1/dist/font-face.css');
+    @import 'spacing';
+
+    font-family: 'Vazir', "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+    direction: rtl;
+    text-align: right;
+
+    .dropdown-menu {
+        text-align: right;
+    }
+
+    .text-right {
+        text-align: left !important;
+    }
+
+    pre {
+        text-align: left;
+        direction: ltr;
+    }
+
+    .td-rss-button {
+        left: 1rem !important;
+        right: auto !important;
+    }
+}
