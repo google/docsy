@@ -36,7 +36,7 @@ other = "Zuletzt geändert"
 [post_edit_this]
 other = "Diese Seite bearbeiten"
 [post_create_child_page]
-other = "Create child page"
+other = "Unterseite anlegen"
 [post_create_issue]
 other = "Problem zu dieser Seite melden"
 [post_create_project_issue]
@@ -46,10 +46,10 @@ other = "Einträge in"
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "Das ist eine für den Ausdruck optimierte Ansicht des gesamten Kapitels inkl. Unterseiten."
 [print_click_to_print]
-other = "Click here to print"
+other = "Druckvorgang starten"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "Zur Standardansicht zurückkehren"
 [print_entire_section]
-other = "Print entire section"
+other = "Kapitel inkl. Unterseiten drucken"
