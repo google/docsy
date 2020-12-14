@@ -1,7 +1,7 @@
 ---
 title: "Analytics and User Feedback"
 date: 2019-06-05
-weight: 7
+weight: 8
 description: >
   Add Google Analytics tracking to your site, use the "was this page helpful?" widget data, disable the widget on a single
   page or all pages, and change the response text.

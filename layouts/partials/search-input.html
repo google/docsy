@@ -2,7 +2,8 @@
 <input type="search" class="form-control td-search-input" placeholder="&#xf002 {{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
 {{ else if .Site.Params.offlineSearch }}
 {{ $offlineSearchIndex := resources.Get "json/offline-search-index.json" | resources.ExecuteAsTemplate "offline-search-index.json" . }}
-{{ $offlineSearchIndexFingerprint := $offlineSearchIndex | resources.Fingerprint "sha512" }}
+{{/* Use `md5` as finger print hash function to shorten file name to avoid `file name too long` error. */}}
+{{ $offlineSearchIndexFingerprint := $offlineSearchIndex | resources.Fingerprint "md5" }}
 <input
   type="search"
   class="form-control td-search-input"

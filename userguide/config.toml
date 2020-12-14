@@ -36,8 +36,9 @@ pygmentsStyle = "tango"
 blog = "/:section/:year/:month/:day/:slug/"
 
 [outputs]
-	home = [ "HTML", "JSON" ]
-	page = [ "HTML" ]
+home = [ "HTML", "JSON" ]
+page = [ "HTML" ]
+section = [ "HTML", "RSS", "print"]
 
 ## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
 [blackfriday]
@@ -136,6 +137,9 @@ offlineSearch = false
 offlineSearchSummaryLength = 70
 offlineSearchMaxResults = 10
 
+# Enable syntax highlighting and copy buttons on code blocks with Prism
+prism_syntax_highlighting = false
+
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
@@ -197,3 +201,10 @@ enable = false
 	# url = "https://example.org/mail"
 	# icon = "fa fa-envelope"
         # desc = "Discuss development issues around the project"
+
+[params.mermaid]
+enable = true
+theme = "default"
+
+[params.print]
+disable_toc = false
