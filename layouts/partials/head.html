@@ -7,7 +7,7 @@
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
 
-{{ if and (eq (getenv "HUGO_ENV") "production") (ne $outputFormat "print") -}}
+{{ if and hugo.IsProduction (ne $outputFormat "print") -}}
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 {{ else -}}
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -19,7 +19,7 @@
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
-{{ if eq (getenv "HUGO_ENV") "production" }}
+{{ if hugo.IsProduction }}
 {{ template "_internal/google_analytics_async.html" . }}
 {{ end }}
 {{ partialCached "head-css.html" . "asdf" }}
