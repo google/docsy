@@ -36,7 +36,7 @@ other = "Última modificação"
 [post_edit_this]
 other = "Editar essa página"
 [post_create_child_page]
-other = "Create child page"
+other = "Criar uma subpágina"
 [post_create_issue]
 other = "Relatar um problema de documentação"
 [post_create_project_issue]
