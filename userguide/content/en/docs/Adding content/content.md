@@ -104,7 +104,7 @@ title: "Adding Content"
 linkTitle: "Adding Content"
 weight: 1
 description: >
-  How to add content to your Docsy site.
+  Add different types of content to your Docsy site.
 ---
 ```
 
