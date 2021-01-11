@@ -59,7 +59,7 @@ sudo npm install -D autoprefixer
 sudo npm install -D postcss-cli
 ```
 
-Starting in version 8 of `postcss-cli`, you must also separately install `postcss`:
+Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md), you must also separately install `postcss`:
 
 ```
 sudo npm install -D postcss
