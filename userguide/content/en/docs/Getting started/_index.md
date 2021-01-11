@@ -52,11 +52,17 @@ Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew
 
 ### Install PostCSS
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run `npm install`:
+To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
 
 ```
-sudo npm install -D --save autoprefixer
-sudo npm install -D --save postcss-cli
+sudo npm install -D autoprefixer
+sudo npm install -D postcss-cli
+```
+
+Starting in version 8 of `postcss-cli`, you must also separately install `postcss`:
+
+```
+sudo npm install -D postcss
 ```
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
@@ -255,6 +261,30 @@ gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 
 To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine.
 
+## Known issues
+
+### MacOS
+
+#### `too many open files` - File Descriptors for "hugo server"
+
+By default, MacOS permits a very small number of open File Descriptors which can cause the following error:
+
+```
+ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
+```
+
+You can temporarily allow more open files by running the following commands:
+
+Note that you might need to set these limits for each new shell. Also, depending on the number of files that you want to
+open on your localhost with Hugo, `65535` max files might be more than what you need. You can run `sudo launchctl limit`
+to view your current settings.
+
+```shell
+sudo launchctl limit maxfiles 65535 200000
+ulimit -n 65535
+sudo sysctl -w kern.maxfiles=100000
+sudo sysctl -w kern.maxfilesperproc=65535
+```
 
 ## What's next?
 
