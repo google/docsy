@@ -266,26 +266,44 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 
 ### MacOS
 
-#### `too many open files` - File Descriptors for "hugo server"
+#### Errors: `too many open files` or `fatal error: pipe failed`
 
-By default, MacOS permits a very small number of open File Descriptors which can cause the following error:
+By default, MacOS permits a small number of open File Descriptors. For larger sites or when you're similtaneously running multiple applications,
+you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
 
-```
-ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
-```
+* POSTCSS v7 and earlier:
 
-You can temporarily allow more open files by running the following commands:
+  ```
+  ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
+  ```
+* POSTCSS v8 and later:
 
-Note that you might need to set these limits for each new shell. Also, depending on the number of files that you want to
-open on your localhost with Hugo, `65535` max files might be more than what you need. You can run `sudo launchctl limit`
-to view your current settings.
+  ```
+  fatal error: pipe failed
+  ```
 
-```shell
-sudo launchctl limit maxfiles 65535 200000
-ulimit -n 65535
-sudo sysctl -w kern.maxfiles=100000
-sudo sysctl -w kern.maxfilesperproc=65535
-```
+##### Workaround
+
+To temporarily allow more open files:
+
+1. View your current settings by running:
+
+   ```
+   sudo launchctl limit maxfiles
+   ```
+
+2. Increase the limit to `65535` files by running the following commands. If your site has fewer files, you can set choose to set lower soft (`65535`) and 
+   hard (`200000`) limits. 
+   
+   ```shell
+   sudo launchctl limit maxfiles 65535 200000
+   ulimit -n 65535
+   sudo sysctl -w kern.maxfiles=200000
+   sudo sysctl -w kern.maxfilesperproc=65535
+   ```
+
+Note that you might need to set these limits for each new shell. 
+[Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
 
 ## What's next?
 
@@ -293,5 +311,3 @@ sudo sysctl -w kern.maxfilesperproc=65535
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
 
-
-	
