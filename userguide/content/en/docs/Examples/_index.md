@@ -20,6 +20,7 @@ Example sites that have low to no customization:
 | https://googlecontainertools.github.io/kpt/ | https://github.com/GoogleContainerTools/kpt/tree/master/docs | 
 | [Navidrome Music Server](https://www.navidrome.org) | https://github.com/navidrome/website | 
 | https://docs.agilebase.co.uk/ | https://github.com/okohll/abdocs | 
+| https://jvmperf.net/ | https://github.com/cchesser/java-perf-workshop | 
 
 ## Customized Docsy examples
 
