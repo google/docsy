@@ -1,0 +1,12 @@
+<div class="pageinfo pageinfo-primary">
+  <div class = 'summary'>
+    <div class = 'summary_header'>
+      <h3 class = 'post_link'>
+        <a href='{{ .Permalink }}'>{{ .Title  }}</a>
+      </h3>
+      {{ partial "article_meta.html" . }}
+    </div>
+    <p class = 'summary_section'>{{ .Summary | truncate 320 }}</p>
+    <a href='{{ .Permalink }}' class='excerpt_more button'>Read More</a>
+    </div>
+</div>

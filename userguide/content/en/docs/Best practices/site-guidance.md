@@ -39,3 +39,22 @@ find and automatically link to your file named `filename.md`.
 Note, however, that `ref` and `relref` links don't work with `_index` or `index` files (for example, this site's [content landing page](/docs/adding-content/)): you'll need to use regular Markdown links to section landing or other index pages. Specify these links relative to the site's root URL, for example: `/docs/adding-content/`.
 
 [Learn more about linking](/docs/adding-content/content/#working-with-links). 
+
+## Tagging
+
+An example of Tagging on a live site can be seen at the [TrueNAS Docs Site](https://www.truenas.com/docs/hub/).
+
+Tagging is enabled on articles, but can be disabled by adding the line: `disableKinds = ["taxonomy", "taxonomyTerm"]` in config.toml.  
+To add tags to an article, add a 'tags:' line to the front matter on each article.
+Example: `tags: ["tag1"]` 
+Multiple tags can be added separated by commas: `tags: ["tag1","tag2","tag3"]`
+
+This will enable a list that will show ever article with that tag when someone clicks on it.
+
+<img src="/images/tag-demo-2.PNG" width='700px'>
+<br>
+
+A Tag Cloud is available that will display all tags and numbers of each tag in the right sidebar.  To enable the tag cloud, uncomment line 8 of toc.html in the partials subdirectory.
+
+<img src="/images/tag-demo-1.PNG" width='700px'>
+<br>

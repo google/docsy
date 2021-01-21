@@ -1,8 +1,10 @@
 ---
 title: "Examples"
 weight: 8
+tags: ["examples"]
 description: >
   Some examples of Docsy in action!
+
 ---
 
 One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you've got a production site up and running with Docsy!
@@ -20,6 +22,7 @@ Example sites that have low to no customization:
 | https://googlecontainertools.github.io/kpt/ | https://github.com/GoogleContainerTools/kpt/tree/master/docs | 
 | [Navidrome Music Server](https://www.navidrome.org) | https://github.com/navidrome/website | 
 | https://docs.agilebase.co.uk/ | https://github.com/okohll/abdocs | 
+| [TrueNAS Docs](https://docs.truenas.com/) | https://github.com/freenas/documentation |
 
 ## Customized Docsy examples
 

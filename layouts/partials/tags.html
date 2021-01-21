@@ -1,0 +1,14 @@
+<hr>
+{{ if isset .Site.Taxonomies "tags" }}
+{{ if not (eq (len .Site.Taxonomies.tags) 0) }}
+<div class="tagslist">
+    <p class="asidetitle">{{ .Site.Params.Strings.Tags | default "Tag Cloud" }}</p>
+    <ul class="clearfix">
+        {{ range $name, $items := .Site.Taxonomies.tags }}
+        <li><a href="{{ .Page.Permalink }}" title="{{ $name }}">{{ .Page.Title }}<sup>{{ len $items }}</sup></a></li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}
+{{ end }}
+<hr>
