@@ -52,11 +52,17 @@ Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew
 
 ### Install PostCSS
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run `npm install`:
+To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
 
 ```
-sudo npm install -D --save autoprefixer
-sudo npm install -D --save postcss-cli
+sudo npm install -D autoprefixer
+sudo npm install -D postcss-cli
+```
+
+Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md), you must also separately install `postcss`:
+
+```
+sudo npm install -D postcss
 ```
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
@@ -92,7 +98,7 @@ pre-configured to use the Docsy theme as a Git submodule. You can clone the Exam
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.-->
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.-->
 
 Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
 
@@ -107,7 +113,7 @@ Note that the following approach [forks](https://help.github.com/en/articles/for
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
 
 
 #### Using the command line
@@ -131,6 +137,7 @@ To copy the example site:
         hugo server
     
 1. Preview your site in your browser at: http://localhost:1313/. You can use `Ctrl + c` to stop the Hugo server whenever you like.
+   [See the known issues on MacOS](#known-issues).
 
 1. Now that you have a site running, you can push it to a new repository:
 
@@ -220,7 +227,7 @@ cd myproject
 hugo server
 ```
     
-By default, your site will be available at http://localhost:1313/.
+By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](#known-issues).
 
 ## Basic site configuration
 
@@ -255,6 +262,48 @@ gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 
 To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine.
 
+## Known issues
+
+### MacOS
+
+#### Errors: `too many open files` or `fatal error: pipe failed`
+
+By default, MacOS permits a small number of open File Descriptors. For larger sites or when you're similtaneously running multiple applications,
+you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
+
+* POSTCSS v7 and earlier:
+
+  ```
+  ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
+  ```
+* POSTCSS v8 and later:
+
+  ```
+  fatal error: pipe failed
+  ```
+
+##### Workaround
+
+To temporarily allow more open files:
+
+1. View your current settings by running:
+
+   ```
+   sudo launchctl limit maxfiles
+   ```
+
+2. Increase the limit to `65535` files by running the following commands. If your site has fewer files, you can set choose to set lower soft (`65535`) and 
+   hard (`200000`) limits. 
+   
+   ```shell
+   sudo launchctl limit maxfiles 65535 200000
+   ulimit -n 65535
+   sudo sysctl -w kern.maxfiles=200000
+   sudo sysctl -w kern.maxfilesperproc=65535
+   ```
+
+Note that you might need to set these limits for each new shell. 
+[Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
 
 ## What's next?
 
@@ -262,5 +311,3 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
 
-
-	
