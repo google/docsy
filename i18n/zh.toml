@@ -46,10 +46,10 @@ other = "Posts in"
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "这是本节的多页打印视图。"
 [print_click_to_print]
-other = "Click here to print"
+other = "点击此处打印"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "返回本页常规视图"
 [print_entire_section]
-other = "Print entire section"
+other = "整节打印"
