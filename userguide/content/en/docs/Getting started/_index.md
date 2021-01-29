@@ -50,6 +50,16 @@ If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need
 
 Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
 
+#### As an `npm` module
+
+You can install Hugo as an `npm` module using [`hugo-bin`](https://www.npmjs.com/package/hugo-bin). This adds `hugo-bin` to your `node_modules` folder and adds the dependency to your `package.json` file.  To install the extended version of Hugo:
+
+```
+npm install hugo-extended --save-dev
+```
+
+See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for usage details.
+
 ### Install PostCSS
 
 To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
