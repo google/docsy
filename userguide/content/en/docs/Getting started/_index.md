@@ -247,14 +247,14 @@ To remove the translated source files, delete the `docsy-example/content/no` dir
 
 ### Search
 
-By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable site search, delete or comment out the following lines:
+By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable this site search, delete or comment out the following lines:
 
 ```
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 ```
 
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine.
+To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
 
 ## Known issues
 
