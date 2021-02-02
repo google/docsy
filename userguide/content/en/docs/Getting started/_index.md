@@ -26,7 +26,7 @@ If you've already installed Hugo, check your version:
 ```
 hugo version
 ```
-If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.75` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
     
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -262,7 +262,7 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 
 #### Errors: `too many open files` or `fatal error: pipe failed`
 
-By default, MacOS permits a small number of open File Descriptors. For larger sites or when you're similtaneously running multiple applications,
+By default, MacOS permits a small number of open File Descriptors. For larger sites, or when you're simultaneously running multiple applications,
 you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
 
 * POSTCSS v7 and earlier:
