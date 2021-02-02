@@ -26,7 +26,7 @@ If you've already installed Hugo, check your version:
 ```
 hugo version
 ```
-If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.75` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
     
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -84,17 +84,17 @@ To use the Docsy Hugo theme, you have a couple of options:
 *   **Copy and edit the source for the [Docsy example site](https://github.com/google/docsy-example).** This approach gives you a skeleton structure for your site, with top-level and documentation sections and templates that you can modify as necessary. The example site uses Docsy as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so it's easy to [keep up to date](/docs/updating/).
 *   **Build your own site using the Docsy theme.** Specify the [Docsy theme](https://github.com/google/docsy) like any other [Hugo theme](https://gohugo.io/themes/) when creating or updating your site. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
 
-### Option 1: Clone the Docsy example site
+### Option 1: Copy the Docsy example site
 
 The [Example Site](https://example.docsy.dev) gives you a good starting point for building your docs site and is
-pre-configured to use the Docsy theme as a Git submodule. You can clone the Example Site either by:
+pre-configured to use the Docsy theme as a Git submodule. You can copy the Example Site either by:
 
 *  [Using the GitHub UI](#using-the-github-ui)
 *  [Using the command line](#using-the-command-line)
 
 #### Using the GitHub UI
 
-<!--This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
+This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
 
 1. Go to the [repo page](https://github.com/google/docsy-example) and click **Use this template**.
 
@@ -108,23 +108,7 @@ pre-configured to use the Docsy theme as a Git submodule. You can clone the Exam
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.-->
-
-Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
-
-1.  In the [Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
-1.  Rename your new fork:
-    1.  Click **Settings**, and type a new name in the **Repository name** field.
-    1.  Click **Rename** to save your changes.
-1.  Get the web URL for cloning your site repo by clicking **Clone or download** on its main repo page.
-1.  Make your own local working copy of your repo using `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL:
-
-    <pre>
-    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
-    </pre>
-
 You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
-
 
 #### Using the command line
 
@@ -278,7 +262,7 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 
 #### Errors: `too many open files` or `fatal error: pipe failed`
 
-By default, MacOS permits a small number of open File Descriptors. For larger sites or when you're similtaneously running multiple applications,
+By default, MacOS permits a small number of open File Descriptors. For larger sites, or when you're simultaneously running multiple applications,
 you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
 
 * POSTCSS v7 and earlier:
