@@ -13,7 +13,7 @@ description: >
 
 ### Install Hugo 
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.53 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
+You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.75.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
 
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
@@ -26,7 +26,7 @@ If you've already installed Hugo, check your version:
 ```
 hugo version
 ```
-If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.75` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
     
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -50,13 +50,29 @@ If the result is `v0.52` or earlier, or if you don't see `Extended`, you'll need
 
 Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
 
-### Install PostCSS
+#### As an `npm` module
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run `npm install`:
+You can install Hugo as an `npm` module using [`hugo-bin`](https://www.npmjs.com/package/hugo-bin). This adds `hugo-bin` to your `node_modules` folder and adds the dependency to your `package.json` file.  To install the extended version of Hugo:
 
 ```
-sudo npm install -D --save autoprefixer
-sudo npm install -D --save postcss-cli
+npm install hugo-extended --save-dev
+```
+
+See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for usage details.
+
+### Install PostCSS
+
+To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
+
+```
+sudo npm install -D autoprefixer
+sudo npm install -D postcss-cli
+```
+
+Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md), you must also separately install `postcss`:
+
+```
+sudo npm install -D postcss
 ```
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
@@ -68,17 +84,17 @@ To use the Docsy Hugo theme, you have a couple of options:
 *   **Copy and edit the source for the [Docsy example site](https://github.com/google/docsy-example).** This approach gives you a skeleton structure for your site, with top-level and documentation sections and templates that you can modify as necessary. The example site uses Docsy as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules), so it's easy to [keep up to date](/docs/updating/).
 *   **Build your own site using the Docsy theme.** Specify the [Docsy theme](https://github.com/google/docsy) like any other [Hugo theme](https://gohugo.io/themes/) when creating or updating your site. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
 
-### Option 1: Clone the Docsy example site
+### Option 1: Copy the Docsy example site
 
 The [Example Site](https://example.docsy.dev) gives you a good starting point for building your docs site and is
-pre-configured to use the Docsy theme as a Git submodule. You can clone the Example Site either by:
+pre-configured to use the Docsy theme as a Git submodule. You can copy the Example Site either by:
 
 *  [Using the GitHub UI](#using-the-github-ui)
 *  [Using the command line](#using-the-command-line)
 
 #### Using the GitHub UI
 
-<!--This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
+This is the simplest approach, as the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/). To create your own copy of the Docsy example site repo:
 
 1. Go to the [repo page](https://github.com/google/docsy-example) and click **Use this template**.
 
@@ -92,23 +108,7 @@ pre-configured to use the Docsy theme as a Git submodule. You can clone the Exam
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.-->
-
-Note that the following approach [forks](https://help.github.com/en/articles/fork-a-repo) our repo and so creates a connection in GitHub between your project repo and the Docsy example site project repo - our project will be the "upstream" version of your site project:
-
-1.  In the [Docsy example site's GitHub repo](https://github.com/google/docsy-example), click **Fork** and follow the prompts.
-1.  Rename your new fork:
-    1.  Click **Settings**, and type a new name in the **Repository name** field.
-    1.  Click **Rename** to save your changes.
-1.  Get the web URL for cloning your site repo by clicking **Clone or download** on its main repo page.
-1.  Make your own local working copy of your repo using `git clone`, replacing `https://github.com/my/example.git` with your repo's web URL:
-
-    <pre>
-    git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
-    </pre>
-
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server`. By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
-
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
 
 #### Using the command line
 
@@ -131,6 +131,7 @@ To copy the example site:
         hugo server
     
 1. Preview your site in your browser at: http://localhost:1313/. You can use `Ctrl + c` to stop the Hugo server whenever you like.
+   [See the known issues on MacOS](#known-issues).
 
 1. Now that you have a site running, you can push it to a new repository:
 
@@ -220,7 +221,7 @@ cd myproject
 hugo server
 ```
     
-By default, your site will be available at http://localhost:1313/.
+By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](#known-issues).
 
 ## Basic site configuration
 
@@ -246,15 +247,57 @@ To remove the translated source files, delete the `docsy-example/content/no` dir
 
 ### Search
 
-By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable site search, delete or comment out the following lines:
+By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable this site search, delete or comment out the following lines:
 
 ```
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 ```
 
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine.
+To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
 
+## Known issues
+
+### MacOS
+
+#### Errors: `too many open files` or `fatal error: pipe failed`
+
+By default, MacOS permits a small number of open File Descriptors. For larger sites, or when you're simultaneously running multiple applications,
+you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
+
+* POSTCSS v7 and earlier:
+
+  ```
+  ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
+  ```
+* POSTCSS v8 and later:
+
+  ```
+  fatal error: pipe failed
+  ```
+
+##### Workaround
+
+To temporarily allow more open files:
+
+1. View your current settings by running:
+
+   ```
+   sudo launchctl limit maxfiles
+   ```
+
+2. Increase the limit to `65535` files by running the following commands. If your site has fewer files, you can set choose to set lower soft (`65535`) and 
+   hard (`200000`) limits. 
+   
+   ```shell
+   sudo launchctl limit maxfiles 65535 200000
+   ulimit -n 65535
+   sudo sysctl -w kern.maxfiles=200000
+   sudo sysctl -w kern.maxfilesperproc=65535
+   ```
+
+Note that you might need to set these limits for each new shell. 
+[Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
 
 ## What's next?
 
@@ -262,5 +305,3 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
 
-
-	

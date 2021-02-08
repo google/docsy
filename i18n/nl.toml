@@ -3,16 +3,16 @@
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
-other = "上一页"
+other = "Vorige"
 
 [ui_pager_next]
-other = "下一页"
+other = "Volgende"
 
 [ui_read_more]
-other = "更多"
+other = "Lees meer"
 
 [ui_search]
-other = "站内搜索…"
+other = "Doorzoek deze site"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
@@ -23,33 +23,33 @@ other = "in"
 other = "All Rights Reserved"
 
 [footer_privacy_policy]
-other = "隐私政策"
+other = "Privacy Policy"
 
 
 # Post (blog, articles etc.)
 [post_byline_by]
-other = "By"
+other = "Door"
 [post_created]
-other = "创建"
+other = "Created"
 [post_last_mod]
-other = "最后修改"
+other = "Laatst gewijzigd"
 [post_edit_this]
-other = "编辑此页"
+other = "Bewerk deze pagina"
 [post_create_child_page]
-other = "添加子页面"
+other = "Maak sub pagina"
 [post_create_issue]
-other = "提交文档问题"
+other = "Maak documentatie issue"
 [post_create_project_issue]
-other = "提交项目问题"
+other = "Maak project issue"
 [post_posts_in]
 other = "Posts in"
 
 # Print support
 [print_printable_section]
-other = "这是本节的多页打印视图。"
+other = "Dit is de multi-page printable view van deze sectie."
 [print_click_to_print]
-other = "点击此处打印"
+other = "Click hier om te printen"
 [print_show_regular]
-other = "返回本页常规视图"
+other = "Terug naar normale view van deze pagina"
 [print_entire_section]
-other = "整节打印"
+other = "Print complete sectie"
