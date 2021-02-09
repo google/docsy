@@ -20,17 +20,17 @@ description: >
 
 1. [Install git](https://github.com/git-guides/install-git).
 
-## Clone the docsy-example repository
+## Create your repository from the docsy-example template
 
-The [docsy-example](https://github.com/google/docsy-example/) repository
-provides a basic site that you can use as starting point to create your own
-documentation.
+The docsy-example repository provides a basic site structure that you can use
+as starting point to create your own documentation.
 
-1. Download a copy to your computer:
+1. Use the [docsy-example template](https://github.com/google/docsy-example)
+   as template to [crate your own
+   repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
-   ```bash
-   git clone --recurse-submodules --depth 1 https://github.com/google/docsy-example.git
-   ```
+1. Download the code to your local machine by [cloning your newly created
+   repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
 
 1. Change your working directory to the newly crated folder:
 
