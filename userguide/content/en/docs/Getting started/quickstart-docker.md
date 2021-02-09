@@ -26,8 +26,7 @@ The docsy-example repository provides a basic site structure that you can use
 as starting point to create your own documentation.
 
 1. Use the [docsy-example template](https://github.com/google/docsy-example)
-   as template to [crate your own
-   repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+   to [crate your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
 1. Download the code to your local machine by [cloning your newly created
    repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
