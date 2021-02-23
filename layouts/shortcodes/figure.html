@@ -1,3 +1,7 @@
+{{/*
+  docsy file override of Hugo shortcode, see
+  https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates.autogen.gohugoio
+ */ -}}
 {{ $src := (.Page.Resources.GetMatch (printf "**%s*" (.Get "src"))) }}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
     {{- if .Get "link" -}}
