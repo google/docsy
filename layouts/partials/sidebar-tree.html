@@ -36,7 +36,13 @@
 {{ $sid := $s.RelPermalink | anchorize }}
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="{{ $s.RelPermalink }}" class="align-left pl-0 pr-2{{ if not $show }} collapsed{{ end }}{{ if $active}} active{{ end }} td-sidebar-link td-sidebar-link__section">{{ $s.LinkTitle }}</a>
+    <a  href="{{ $s.RelPermalink }}" class="align-left pl-0 pr-2{{ if not $show }} collapsed{{ end }}{{ if $active}} active{{ end }} td-sidebar-link td-sidebar-link__section">
+      {{ if isset $s.Params "short_title" }}
+        {{ $s.Params.short_title }}
+      {{ else }}
+        {{ $s.LinkTitle }}
+      {{ end }}
+    </a>
   </li>
   <ul>
     <li class="collapse {{ if $show }}show{{ end }}" id="{{ $sid }}">
@@ -47,7 +53,18 @@
         {{ if .IsPage }}
           {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
           {{ $active := eq . $p }}
-          <a class="td-sidebar-link td-sidebar-link__page {{ if and (not $shouldDelayActive) $active }} active{{ end }}" id="{{ $mid }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{ $isRedirected :=  findRE "^/docs/(languages|platforms)/.+?/(api|daily-builds)(/.*)?$" .RelPermalink -}}
+          {{ $isExternal := or (hasPrefix .RelPermalink "http") $isRedirected -}}
+          <a class="td-sidebar-link td-sidebar-link__page {{ if and (not $shouldDelayActive) $active }} active{{ end }}" id="{{ $mid }}" href="{{ .RelPermalink }}" {{- if $isExternal }} target="_blank" rel="noopener"{{ end -}}>
+            {{ if isset .Params "short_title" }}
+              {{ .Params.short_title }}
+            {{ else }}
+              {{ .LinkTitle }}
+            {{ end }}
+            {{ if $isExternal -}}
+              <i class="fas fa-external-link-alt"></i>
+            {{- end -}}
+          </a>
         {{ else }}
           {{ template "section-tree-nav-section" (dict "page" $p "section" .) }}
         {{ end }}

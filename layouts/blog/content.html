@@ -1,12 +1,54 @@
+{{/* grpc-docsy file override */ -}}
+{{ $auth  := .Params.author -}}
+{{ $authors := .Params.authors -}}
 <div class="td-content">
 	<h1>{{ .Title }}</h1>
+	{{ with .Params.attribution -}}
+		<p>{{ . }}</p>
+	{{ end -}}
 	{{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
 	<div class="td-byline mb-4">
-		{{ with .Params.author }}{{ T "post_byline_by" }} <b>{{ . | markdownify }}</b> |{{ end}}
+    {{ with $auth -}}
+			{{ T "post_byline_by" }}
+			{{ if .link -}}
+				<a href="{{ .link }}"><b>{{ .name | markdownify }}</b></a>
+			{{ else -}}
+				<b>{{ .name | markdownify }}</b>
+			{{ end -}}
+			{{ with .position }} ({{ . | markdownify }}){{ end }} |
+			{{ with .blurb -}}
+				<span> {{ . }}</span>
+				<br/>
+			{{ end -}}
+			{{ with .guest -}}
+      <span class="badge badge-secondary font-weight-bold">
+        <span class="icon"><i class="fas fa-sm fa-pen"></i></span>
+        <span>Guest post</span>
+			</span>
+			<br/>
+      {{ end -}}
+    {{ end -}}
+
+    {{ with $authors -}}
+      {{ T "post_byline_by" }}
+			{{ range $idx, $auth := $authors }}
+				{{ if .link -}}
+					<a href="{{ .link }}"><b>{{ .name | markdownify }}</b></a>
+				{{ else -}}
+					<b>{{ .name | markdownify }}</b>
+				{{ end -}}
+			{{ with .position }} ({{ . | markdownify }}){{ end }}{{ if not (eq (len $authors) (add $idx 1)) }}, {{ end -}}
+      {{ end }}
+       |
+    {{ end -}}
+
 		<time datetime="{{  $.Date.Format "2006-01-02" }}" class="text-muted">{{ $.Date.Format $.Site.Params.time_format_blog  }}</time>
 	</div>
+	<div class="d-xl-none td-toc td-toc--inline d-print-none">
+		{{ partial "docs/toc-inline.html" . }}
+	</div>
 	{{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) }}
-	    {{ partial "reading-time.html" . }}
+		{{ partial "reading-time.html" . }}
 	{{ end }}
 	{{ .Content }}
 	{{ if (.Site.Params.DisqusShortname) }}
@@ -16,4 +58,7 @@
 	{{ end }}
 
 	{{ partial "pager.html" . }}
+	<div class="c-global-meta-links">
+		{{ partial "page-meta-links" .}}
+	</div>
 </div>

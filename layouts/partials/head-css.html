@@ -1,11 +1,17 @@
+{{/* grpc-docsy file override */ -}}
+{{ $inServerMode := site.IsServer -}}
+{{ $includePaths := (slice "node_modules") -}}
+{{ $scssMain := "scss/main.scss" -}}
+{{ $cssOutput    := "css/style.css" -}}
+{{ $devOpts      := (dict "targetPath" $cssOutput "includePaths" $includePaths "enableSourceMap" true) -}}
+{{ $prodOpts     := (dict "targetPath" $cssOutput "includePaths" $includePaths "outputStyle" "compressed") -}}
+{{ $cssOpts      := cond $inServerMode $devOpts $prodOpts -}}
+{{ $css := resources.Get $scssMain | toCSS $cssOpts -}}
 
-{{ $scssMain := "scss/main.scss"}}
-{{ if .Site.IsServer }}
-{{/* Note the missing postCSS. This makes it snappier to develop in Chrome, but makes it look sub-optimal in other browsers. */}}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" true) }}
+{{ if $inServerMode -}}
 <link href="{{ $css.RelPermalink }}" rel="stylesheet">
-{{ else }}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" false) | postCSS | minify | fingerprint }}
-<link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
-{{ end }}
+{{ else -}}
+{{ $prodCss := $css | postCSS | minify | fingerprint -}}
+<link rel="preload" href="{{ $prodCss.RelPermalink }}" as="style">
+<link href="{{ $prodCss.RelPermalink }}" rel="stylesheet" integrity="{{ $prodCss.Data.integrity }}">
+{{ end -}}

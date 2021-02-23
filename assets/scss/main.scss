@@ -1,6 +1,7 @@
+/* grpc-docsy custom file */
 @import "support/functions";
-@import "variables_project";
 @import "variables";
+@import "variables_project";
 @import "support/mixins";
 
 @import "../vendor/bootstrap/scss/bootstrap";
@@ -26,6 +27,7 @@
 @import "blocks/blocks";
 @import "section-index";
 @import "pageinfo";
+@import "grpc";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
@@ -60,5 +62,4 @@ footer {
     }
 }
 
-@import "rtl/main";
 @import "styles_project";
