@@ -11,6 +11,15 @@ description: >
 
 ## Prerequisites and installation
 
+### Use our Docker image
+
+We provide a Docker image that you can use to run and test your Docsy site
+locally, without having to install all Docsy's dependencies.
+
+You can see how to get started with this approach by following our [Docker
+Quickstart tutorial](quickstart-docker). If you don't want to use Docker,
+follow the instructions below to install Hugo and PostCSS.
+
 ### Install Hugo 
 
 You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.75.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
