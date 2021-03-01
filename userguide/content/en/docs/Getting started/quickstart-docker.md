@@ -26,12 +26,12 @@ The docsy-example repository provides a basic site structure that you can use
 as starting point to create your own documentation.
 
 1. Use the [docsy-example template](https://github.com/google/docsy-example)
-   to [crate your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+   to [create your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
 1. Download the code to your local machine by [cloning your newly created
    repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
 
-1. Change your working directory to the newly crated folder:
+1. Change your working directory to the newly created folder:
 
    ```bash
    cd docsy-example
@@ -56,7 +56,7 @@ use to run your site.
    ```
 
 1. Open the address `http://localhost:1313` in your web browser to load the
-   docy-example homepage. You can now make changes to the source files, those
+   docsy-example homepage. You can now make changes to the source files, those
    changes will be live-reloaded in your browser.
 
 ## Cleanup
@@ -73,7 +73,7 @@ To cleanup your system and delete the container image follow the next steps.
 
 ## What's next?
 
-* Learn about [basic setup and configurations for docsy](/docs/getting-started/).
+* Learn about [basic setup and configurations for Docsy](/docs/getting-started/).
 * [Add content and customize your site](/docs/adding-content/)
 * [Publish your site](/docs/deployment/).
 
