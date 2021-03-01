@@ -5,6 +5,11 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@8.8.1/dist/mermaid.min.js" integrity="sha384-to2w0I1OqmbJ9J6yTnIX+KYU8grNpZoD1dKPLjgEJvMe5L5+/7qvuNa2sQo8WAWj" crossorigin="anonymous"></script>
 {{ end }}
 
+<!-- load the deflate.js for plantuml support -->
+{{ if .Site.Params.plantuml.enable }}
+<script src='{{ "/js/deflate.js" | relURL }}'></script>
+{{ end }}
+
 {{ $jsBase := resources.Get "js/base.js" }}
 {{ $jsAnchor := resources.Get "js/anchor.js" }}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
