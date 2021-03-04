@@ -6,7 +6,7 @@
 /* Interface:
 * data = deflate(src);
 */
-const Deflate = (function () {
+const deflate = (function () {
     /* constant parameters */
     var zip_WSIZE = 32768;		// Sliding Window size
     var zip_STORED_BLOCK = 0;
