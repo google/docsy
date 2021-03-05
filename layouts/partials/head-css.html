@@ -1,17 +1,17 @@
 {{/* grpc-docsy file override */ -}}
-{{ $inServerMode := site.IsServer -}}
+{{ $inProd := hugo.IsProduction -}}
 {{ $includePaths := (slice "node_modules") -}}
 {{ $scssMain := "scss/main.scss" -}}
 {{ $cssOutput    := "css/style.css" -}}
 {{ $devOpts      := (dict "targetPath" $cssOutput "includePaths" $includePaths "enableSourceMap" true) -}}
 {{ $prodOpts     := (dict "targetPath" $cssOutput "includePaths" $includePaths "outputStyle" "compressed") -}}
-{{ $cssOpts      := cond $inServerMode $devOpts $prodOpts -}}
+{{ $cssOpts      := cond $inProd $prodOpts $devOpts -}}
 {{ $css := resources.Get $scssMain | toCSS $cssOpts -}}
 
-{{ if $inServerMode -}}
-<link href="{{ $css.RelPermalink }}" rel="stylesheet">
-{{ else -}}
+{{ if $inProd -}}
 {{ $prodCss := $css | postCSS | minify | fingerprint -}}
 <link rel="preload" href="{{ $prodCss.RelPermalink }}" as="style">
 <link href="{{ $prodCss.RelPermalink }}" rel="stylesheet" integrity="{{ $prodCss.Data.integrity }}">
+{{ else -}}
+<link href="{{ $css.RelPermalink }}" rel="stylesheet">
 {{ end -}}
