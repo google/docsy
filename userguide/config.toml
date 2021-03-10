@@ -205,5 +205,10 @@ enable = false
 enable = true
 theme = "default"
 
+[params.plantuml]
+enable = true
+theme = "default"
+svg_image_url = "https://www.plantuml.com/plantuml/svg/"
+
 [params.print]
 disable_toc = false
