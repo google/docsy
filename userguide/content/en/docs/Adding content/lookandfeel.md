@@ -193,10 +193,9 @@ Settings can also be overridden on a per-diagram basis by making use of the `%%i
 
 ## UML Diagrams with Plantuml
 
-[plantuml](https://plantuml.com/en/) is a component that allows to quickly write : Sequence diagram, Usecase diagram
-Class diagram, Object diagram, Activity diagram (here is the legacy syntax), Component diagram, Deployment diagram, State diagram, Timing diagram.
+[PlantUML](https://plantuml.com/en/) is an alternative to Mermaid that lets you quickly create UML diagrams, including sequence diagrams, use case diagrams, and state diagrams. Unlike Mermaid diagrams, which are entirely rendered in the browser, PlantUML uses a PlantUML server to create diagrams. You can use the provided default demo server (not recommended for production use), or run a server yourself. Plantuml offers a wider range of image types than Mermaid, so may be a better choice for some use cases.
 
-Diagrams are defined using a simple and intuitive language. ([see PlantUML Language Reference Guide](https://plantuml.com/en/guide)). As is the case with mermaid, plantuml support in docsy provide the added advantage of editting UML diagrams using text only.
+Diagrams are defined using a simple and intuitive language. ([see PlantUML Language Reference Guide](https://plantuml.com/en/guide)).
 
 The following example shows a use case diagram:
 
