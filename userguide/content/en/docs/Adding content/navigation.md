@@ -66,6 +66,10 @@ To hide a page or section from the menu, set `toc_hide: true` in front matter.
 
 By default, the section menu will show the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site param `ui.sidebar_menu_compact = true` in `config.toml`.
 
+With the compact menu (`.ui.sidebar_menu_compact = true`) only all ancestors, siblings and direct descendants are shown. In addition, the optional parameter `.ui.ul_show` can be used to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the 1st menu level can always be displayed.
+
+On large sites (default: > 2000 pages) the section menu will not get generated for each page, but cached for the whole scection. The HTML classes for marking the active menu item (and menu path) are then set using JS. The limit for activating the cached section menu can be adjusted with the optional parameter `.ui.sidebar_cache_limit`.
+
 ## Breadcrumb navigation
 
 Breadcrumb navigation is enabled by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
