@@ -191,6 +191,73 @@ See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=
 
 Settings can also be overridden on a per-diagram basis by making use of the `%%init%%` header at the start of the diagram definition.  See the [Mermaid theming documentation](https://mermaid-js.github.io/mermaid/#/theming?id=themes-at-the-local-or-current-level).
 
+## UML Diagrams with PlantUML
+
+[PlantUML](https://plantuml.com/en/) is an alternative to Mermaid that lets you quickly create UML diagrams, including sequence diagrams, use case diagrams, and state diagrams. Unlike Mermaid diagrams, which are entirely rendered in the browser, PlantUML uses a PlantUML server to create diagrams. You can use the provided default demo server (not recommended for production use), or run a server yourself. PlantUML offers a wider range of image types than Mermaid, so may be a better choice for some use cases.
+
+Diagrams are defined using a simple and intuitive language. ([see PlantUML Language Reference Guide](https://plantuml.com/en/guide)).
+
+The following example shows a use case diagram:
+
+````
+```plantuml
+participant participant as Foo
+actor       actor       as Foo1
+boundary    boundary    as Foo2
+control     control     as Foo3
+entity      entity      as Foo4
+database    database    as Foo5
+collections collections as Foo6
+queue       queue       as Foo7
+Foo -> Foo1 : To actor 
+Foo -> Foo2 : To boundary
+Foo -> Foo3 : To control
+Foo -> Foo4 : To entity
+Foo -> Foo5 : To database
+Foo -> Foo6 : To collections
+Foo -> Foo7: To queue
+```
+````
+
+Automatically renders to:
+
+```plantuml
+participant participant as Foo
+actor       actor       as Foo1
+boundary    boundary    as Foo2
+control     control     as Foo3
+entity      entity      as Foo4
+database    database    as Foo5
+collections collections as Foo6
+queue       queue       as Foo7
+Foo -> Foo1 : To actor 
+Foo -> Foo2 : To boundary
+Foo -> Foo3 : To control
+Foo -> Foo4 : To entity
+Foo -> Foo5 : To database
+Foo -> Foo6 : To collections
+Foo -> Foo7: To queue
+```
+
+To enable/disable PlantUML, update `config.toml`:
+
+```
+[params.plantuml]
+enable = true
+```
+
+Other optional settings are:
+```
+[params.plantuml]
+enable = true
+theme = "default"
+
+#Set url to plantuml server 
+#default is http://www.plantuml.com/plantuml/svg/
+svg_image_url = "https://www.plantuml.com/plantuml/svg/"
+
+```
+
 ## Customizing templates
 
 ### Add code to head or before body end
