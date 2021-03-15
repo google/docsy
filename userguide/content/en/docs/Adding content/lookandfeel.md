@@ -191,7 +191,7 @@ See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=
 
 Settings can also be overridden on a per-diagram basis by making use of the `%%init%%` header at the start of the diagram definition.  See the [Mermaid theming documentation](https://mermaid-js.github.io/mermaid/#/theming?id=themes-at-the-local-or-current-level).
 
-## UML Diagrams with Plantuml
+## UML Diagrams with PlantUML
 
 [PlantUML](https://plantuml.com/en/) is an alternative to Mermaid that lets you quickly create UML diagrams, including sequence diagrams, use case diagrams, and state diagrams. Unlike Mermaid diagrams, which are entirely rendered in the browser, PlantUML uses a PlantUML server to create diagrams. You can use the provided default demo server (not recommended for production use), or run a server yourself. PlantUML offers a wider range of image types than Mermaid, so may be a better choice for some use cases.
 
@@ -239,7 +239,7 @@ Foo -> Foo6 : To collections
 Foo -> Foo7: To queue
 ```
 
-To enable/disable Plantuml, update `config.toml`:
+To enable/disable PlantUML, update `config.toml`:
 
 ```
 [params.plantuml]
