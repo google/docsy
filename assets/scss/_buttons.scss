@@ -15,6 +15,7 @@
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     &-link {
         background-color: transparent;
+        color: #008E5A;
     }
     &-primary {
         background: #0FCC7D;
@@ -22,7 +23,9 @@
         box-shadow: none;
         border: none;
         &:hover {
-            
+            background: #0FCC7D;
+            color: #fff;
+            opacity: .7;
         }
     }
     &-secondary {
@@ -30,19 +33,42 @@
         color: #008E5A;
         box-shadow: none;
         border: none;
+        &:hover {
+            background: #A3F5CC;
+            color: #008E5A;
+            opacity: .7;
+        }
+        &:focus {
+            background: #A3F5CC;
+            color: #008E5A;
+            opacity: .7;
+        }
+        &:disabled {
+            background-color: #d2f1e4;
+            color: #8dd6ba;
+            cursor: not-allowed;
+            &:hover {
+                background: #d2f1e4;
+                color: #8dd6ba;
+            }
+            &:focus {
+                background: #d2f1e4;
+                color: #8dd6ba;
+            }
+        }
     }
 }
 
 @if $enable-rounded {
     .btn {
-        border-radius: 1rem;
+        border-radius: 8px;
 
         &-lg {
-            border-radius: 2rem;
+            border-radius: 8px;
         }
 
         &-sm {
-            border-radius: 1rem;
+            border-radius: 8px;
         }
     }
 }
