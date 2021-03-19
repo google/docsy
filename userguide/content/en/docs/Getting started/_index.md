@@ -240,9 +240,9 @@ The Docsy example site comes with some defaults you may want to remove or custom
 
 ### Internationalization
 
-The Docsy example site supports content in English and Norwegian. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
+The Docsy example site supports content in English, Norwegian and Farsi. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
 
-If you don't intend to translate your site to Norwegian, you can remove the language switcher by removing the following lines from `config.toml`:
+If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `config.toml`:
 
 ```
 [languages.no]
@@ -250,9 +250,19 @@ title = "Docsy"
 description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
+
+[languages.fa]
+title = "اسناد گلدی"
+description = "یک نمونه برای پوسته داکسی"
+languageName ="فارسی"
+contentDir = "content/fa"
+time_format_default = "2006.01.02"
+time_format_blog = "2006.01.02"
 ```
 
-To remove the translated source files, delete the `docsy-example/content/no` directory.
+To remove the translated source files, delete both the `docsy-example/content/no` and the  `docsy-example/content/fa` directory.
 
 ### Search
 
