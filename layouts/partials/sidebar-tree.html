@@ -49,8 +49,7 @@
   {{ $pages := $pages_tmp | first $sidebarMenuTruncate }}
   {{ $withChild := gt (len $pages) 0 }}
   <li class="td-sidebar-nav__section-title td-sidebar-nav__section{{ if $withChild }} with-child{{ else }} without-child{{ end }}{{ if $activePath }} active-path{{ end }}{{ if not $show }} collapse{{ end }}" id="{{ $mid }}-li">
-    <a href="{{ $s.RelPermalink }}" class="align-left pl-0 pr-2{{ if $active}} active{{ end }} td-sidebar-link{{ if $s.IsPage }} td-sidebar-link__page{{ else }} td-sidebar-link__section{{ end }}{{ if $treeRoot }} tree-root{{ end }}" id="{{ $mid }}"><span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
-      {{ $s.LinkTitle }}</span></a>
+    <a href="{{ $s.RelPermalink }}" class="align-left pl-0 pr-2{{ if $active}} active{{ end }} td-sidebar-link{{ if $s.IsPage }} td-sidebar-link__page{{ else }} td-sidebar-link__section{{ end }}{{ if $treeRoot }} tree-root{{ end }}" id="{{ $mid }}"><span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">{{ $s.LinkTitle }}</span></a>
     {{if $withChild }}
       {{ $ulNr := add $ulNr 1 }}
       <ul class="pr-md-3 ul-{{ $ulNr }}">
