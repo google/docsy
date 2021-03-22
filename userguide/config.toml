@@ -58,10 +58,13 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
+    pre = "<i class='fas fa-laptop-code'></i>"
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
+    pre = "<i class='fab fa-github'></i>"
+    post = "<span class='alert'>New!</span>" 
 
 [services]
 [services.googleAnalytics]
