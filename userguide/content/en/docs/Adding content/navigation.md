@@ -32,13 +32,22 @@ If you want to add a link to an external site to this menu, add it in `config.to
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
+```
+
+### Adding icons to the top-level menu
+
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+
+```yaml
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/google/docsy/"
     pre = "<i class='fab fa-github'></i>"
     post = "<span class='alert'>New!</span>" 
 ```
 
-### Adding icons top-level menu
-
-As described in the [official Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu) it's possible to add icons by using the pre and/or post parameter for main menu items definied in your site's `config.toml` or via page front matter (see also above examples).
+You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 
 ### Adding a version drop-down
 
