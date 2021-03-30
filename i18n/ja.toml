@@ -36,7 +36,7 @@ other = "最終更新"
 [post_edit_this]
 other = "ページの編集"
 [post_create_child_page]
-other = "Create child page"
+other = "子ページを作成"
 [post_create_issue]
 other = "ドキュメントのissueを作成"
 [post_create_project_issue]
@@ -46,10 +46,10 @@ other = "記事一覧"
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "これは、このセクションの複数ページの印刷可能なビューです。"
 [print_click_to_print]
-other = "Click here to print"
+other = "印刷するには、ここをクリックしてください"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "このページの通常のビューに戻る"
 [print_entire_section]
-other = "Print entire section"
+other = "セクション全体を印刷"
