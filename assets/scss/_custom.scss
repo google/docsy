@@ -61,3 +61,20 @@ a {
     text-decoration: none;
     font-weight: 600;
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+.bold-title {
+    font-weight: 600;
+    color: #181D25;
+}
+
+.td-box--light {
+    color : #7F8C9F;
+    background-color: #fff;
+    h1, h2, h3, h4, h5, h6 {
+        color: #181D25;
+    }
+}
