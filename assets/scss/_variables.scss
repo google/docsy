@@ -17,7 +17,7 @@ $td-enable-google-fonts: true !default;
 
 // Theme colors
 
-$primary: #30638E !default;
+$primary: #004033 !default;
 $primary-light: lighten($primary, 75%) !default;
 $secondary: #FFA630 !default;
 $success: #3772FF !default;
@@ -46,7 +46,7 @@ $code-color: darken($secondary, 20%) !default;
 // UI element colors
 
 $border-color: $gray-300 !default;
-$td-sidebar-bg-color: rgba($primary, 0.03) !default;
+$td-sidebar-bg-color: $primary !default;
 $td-sidebar-border-color: $border-color !default;
 
 // Background colors for the sections on home page etc. It is a paint by number system, starting at 0, where the number is taken from the shortcode's ordinal

@@ -49,6 +49,12 @@
 
         a {
             color: $gray-900;
+            color: #fff;
+            font-weight: 400;
+            &:hover {
+                color: #fff;
+                opacity: .7;
+            }
         }
     }
 
@@ -64,7 +70,7 @@
 
     a {
         &:hover {
-            color: $blue;
+            color: #fff;
             text-decoration: none;
         }
 
