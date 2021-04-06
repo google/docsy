@@ -188,8 +188,13 @@
                 });
             });
 
+            // Enable inline styles in popover.
+            const whiteList = $.fn.tooltip.Constructor.Default.whiteList;
+            whiteList['*'].push('style');
+
             $targetSearchInput
                 .data('content', $html[0].outerHTML)
+                .popover({ whiteList: whiteList })
                 .popover('show');
         };
     });
