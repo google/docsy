@@ -174,35 +174,54 @@ This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-de
 
 ### Enabling and configuring \\(\LaTeX\\) support
 
-To enable/disable \\(\KaTeX\\) support inside the Docsy theme, update `data/config/katex.toml`:
+To enable/disable \\(\KaTeX\\) support inside the Docsy theme, update `config.toml`:
 
 ```toml
-# enabled/disable KaTeX support
+[params.katex]
 enable = true
 ```
 
-The file `data/config/katex.toml` can also be used to customize various \\(\KaTeX\\) options:
+Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`, if needed:
 
 ```toml
-[options]
-# render invalid LaTeX as its source code with hover text
-# in color 'IndianRed'
+[params.katex]
+# enable/disable KaTeX support
+enable = true
+# Element(s) scanned by auto render extension. Default: document.body
+html_dom_element = "document.body"
+
+[params.katex.options]
+# If true (the default), KaTeX will throw a ParseError when it encounters an
+# unsupported command or invalid LaTeX. If false, KaTeX will render unsupported
+# commands as text, and render invalid LaTeX as its source code with hover text
+# giving the error, in the color given by errorColor.
 throwOnError = false
-errorColor: "#CD5C5C"
+errorColor = "#CD5C5C"
 
-# customized list of delimiters to look for math
-
-# single $ sign for inline math
-[[options.delimiters]]
+# This is a list of delimiters to look for math, processed in the same order as
+# the list. Each delimiter has three properties:
+#   left:    A string which starts the math expression (i.e. the left delimiter).
+#   right:   A string which ends the math expression (i.e. the right delimiter).
+#   display: Whether math in the expression should be rendered in display mode.
+[[params.katex.options.delimiters]]
+  left = "$$"
+  right = "$$"
+  display = true
+[[params.katex.options.delimiters]]
   left = "$"
   right = "$"
   display = false
-
-# more delimiters for math in display mode
-# …
+[[params.katex.options.delimiters]]
+  left = "\\("
+  right = "\\)"
+  display = false
+[[params.katex.options.delimiters]]
+  left = "\\["
+  right = '\\]'
+  display = true
 ```
 
-For details, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
+For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
 
 ## Diagrams with Mermaid
 

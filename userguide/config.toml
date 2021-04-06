@@ -218,5 +218,9 @@ enable = true
 theme = "default"
 svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
+[params.katex]
+enable = true
+html_dom_element = "document.body"
+
 [params.print]
 disable_toc = false
