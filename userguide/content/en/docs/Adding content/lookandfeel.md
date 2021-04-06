@@ -140,6 +140,89 @@ If the included Prism configuration is not sufficient for your requirements, and
     * Copy the Javascript file to `static/js/prism.js`
     * Copy the CSS file to `static/css/prism.css`
 
+## \\(\LaTeX\\) support with \\(\KaTeX\\)
+
+[\\(\LaTeX\\)](https://www.latex-project.org/) is a high-quality typesetting system for the production of technical and scientific documentation. Due to its excellent math typesetting capabilities, \\(\TeX\\) became the de facto standard for the communication and publication of scientific documents, especially if these documents contain a lot of mathematical formulae. Designed and mostly written by Donald Knuth, the initial version was released in 1978. Dating back that far, \\(\LaTeX\\) has `pdf` as its primary output target and is not particularly well suited for producing HTML output for the Web. Fortunately, with [\\(\KaTeX\\)](https://katex.org/) there exists a fast and easy-to-use JavaScript library for \\(\TeX\\) math rendering on the web, which was integrated into the Docsy theme.
+
+With \\(\KaTeX\\) support enabled in Docsy, you can include complex mathematical formulae into your web page, either inline or centred on its own line. Since \\(\KaTeX\\) relies on server side rendering, it produces the same output regardless of your browser or your environment. Formulae can be shown either inline or in display mode:
+
+### Inline formulae
+
+The following code sample produces a text line with three inline formulae:
+
+```tex
+When \\(a \ne 0\\), there are two solutions to \\(ax2 + bx + c= 0\\) and they are \\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\\)
+```
+
+When \\(a \ne 0\\), there are two solutions to \\(ax2 + bx + c= 0\\) and they are \\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\\)
+
+### Formulae in display mode
+
+The following code sample produces an introductory text line followed by a formula residing on her own line:
+
+```tex
+The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
+$$P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+```
+
+The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
+$$P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+
+{{% alert title="Tip" %}}
+This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth information about typesetting mathematical formulae using the \\(\LaTeX\\) typesetting system.
+{{% /alert %}}
+
+### Enabling and configuring \\(\LaTeX\\) support
+
+To enable/disable \\(\KaTeX\\) support inside the Docsy theme, update `config.toml`:
+
+```toml
+[params.katex]
+enable = true
+```
+
+Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`, if needed:
+
+```toml
+[params.katex]
+# enable/disable KaTeX support
+enable = true
+# Element(s) scanned by auto render extension. Default: document.body
+html_dom_element = "document.body"
+
+[params.katex.options]
+# If true (the default), KaTeX will throw a ParseError when it encounters an
+# unsupported command or invalid LaTeX. If false, KaTeX will render unsupported
+# commands as text, and render invalid LaTeX as its source code with hover text
+# giving the error, in the color given by errorColor.
+throwOnError = false
+errorColor = "#CD5C5C"
+
+# This is a list of delimiters to look for math, processed in the same order as
+# the list. Each delimiter has three properties:
+#   left:    A string which starts the math expression (i.e. the left delimiter).
+#   right:   A string which ends the math expression (i.e. the right delimiter).
+#   display: Whether math in the expression should be rendered in display mode.
+[[params.katex.options.delimiters]]
+  left = "$$"
+  right = "$$"
+  display = true
+[[params.katex.options.delimiters]]
+  left = "$"
+  right = "$"
+  display = false
+[[params.katex.options.delimiters]]
+  left = "\\("
+  right = "\\)"
+  display = false
+[[params.katex.options.delimiters]]
+  left = "\\["
+  right = '\\]'
+  display = true
+```
+
+For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
+
 ## Diagrams with Mermaid
 
 [Mermaid](https://mermaid-js.github.io) is a Javascript library for rendering simple text definitions to useful diagrams in the browser.  It can generate a variety of different diagram types, including flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, user journey diagrams, Gantt charts and pie charts.
