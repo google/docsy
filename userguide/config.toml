@@ -222,5 +222,9 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 enable = true
 html_dom_element = "document.body"
 
+# enable display of chemical equations and physical units via mhchem extension
+[params.katex.mhchem]
+enable = true
+
 [params.print]
 disable_toc = false

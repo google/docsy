@@ -158,15 +158,15 @@ When \\(a \ne 0\\), there are two solutions to \\(ax2 + bx + c= 0\\) and they ar
 
 ### Formulae in display mode
 
-The following code sample produces an introductory text line followed by a formula residing on her own line:
+The following code sample produces an introductory text line followed by a formula numbered as `(1)` residing on her own line:
 
 ```tex
 The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
-$$P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+$$\tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}$$
 ```
 
 The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
-$$P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+$$\tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}$$
 
 {{% alert title="Tip" %}}
 This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth information about typesetting mathematical formulae using the \\(\LaTeX\\) typesetting system.
@@ -222,6 +222,50 @@ errorColor = "#CD5C5C"
 ```
 
 For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
+
+### Display of Chemical Equations and Physical Units
+
+[mhchem](https://www.ctan.org/pkg/mhchem) is a \\(\LaTeX\\) package for typesetting chemical molecular formulae and equations. Fortunately, \\(\KaTeX\\) provides the `mhchem` [extension](https://github.com/KaTeX/KaTeX/tree/master/contrib/mhchem) that makes the `mhchem` package accessible when authoring content for the web. Since this extension was integrated into the Docsy theme, you can write beautiful chemical equations easily once `mhchem` support is enabled inside your `config.toml`:
+
+```toml
+[params.katex]
+enable = true
+
+[params.katex.mhchem]
+enable = true
+```
+
+With `mhchem` extension enabled, you can easily include chemical equations into your page. The equations can be shown either inline or can reside on its own line. The following code sample produces a text line including a chemical equation:
+
+```mhchem
+*Precipitation of barium sulfate:* \\(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\\)
+```
+
+*Precipitation of barium sulfate:* \\(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\\)
+
+More complex equations, like the one shown in the code sample below, should be displayed on their own line:
+
+```mhchem
+$$\tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}$$
+```
+
+$$\tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}$$
+
+{{% alert title="Tip" %}}
+The [manual](https://mhchem.github.io/MathJax-mhchem/) for mchem’s input syntax provides in-depth information about typesetting chemical formulae and physical units using the `mhchem` tool.
+{{% /alert %}}
+
+Use of `mhchem` is not limited to the authoring of chemical equations, using the included `\pu` command, pretty looking physical units can be written with ease, too. The following code sample produces two text lines with four numbers plus their corresponding physical units:
+
+```mhchem
+* Scientific number notation: \\(\pu{1.2e3 kJ}\\) or \\(\pu{1.2E3 kJ}\\) \\
+* Divisions: \\(\pu{123 kJ/mol}\\) or \\(\pu{123 kJ//mol}\\)
+```
+
+* Scientific number notation: \\(\pu{1.2e3 kJ}\\) or \\(\pu{1.2E3 kJ}\\)
+* Divisions: \\(\pu{123 kJ/mol}\\) or \\(\pu{123 kJ//mol}\\)
+
+For a complete list of options when authoring physical units, have a look at the [section](https://mhchem.github.io/MathJax-mhchem/#pu) on physical units in the `mhchem` documentation.
 
 ## Diagrams with Mermaid
 
