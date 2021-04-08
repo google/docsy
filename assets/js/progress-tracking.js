@@ -19,10 +19,8 @@
  * under the License.
  */
 
- import throttle from "lodash/debounce";
-
  const runProgressTracking = () => {
-   const sideNavRoot = document.querySelector(".wy-nav-side-toc");
+   const sideNavRoot = document.querySelector("#TableOfContents");
    if (!sideNavRoot) {
      return;
    }
