@@ -240,3 +240,150 @@ description: Reference for the Pet Store API
 ```
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
+
+## Tabbed panes
+
+Sometimes its very useful to have tabbed panes at hand when authoring content, especially when documenting software libraries that are targeting different programming languages or different environments. As an example, the table below shows how to code `Hello world!` in different programming languages. Certainly most of you will know the famous `Hello world` program one usually writes when learning a new programming language:
+
+{{< tabpane  paneID="1" tabCount="10" headerTab1="C" headerTab2="C++" headerTab3="Go" headerTab4="Java" headerTab5="Kotlin" headerTab6="Lua" headerTab7="PHP" headerTab8="Python" headerTab9="Rust" headerTab10="Scala" content="code" >}}
+  {{< tab ID="1" >}}
+```C
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+  puts("Hello World!");
+  return EXIT_SUCCESS;
+}
+```
+{{< /tab >}}
+{{< tab ID="2" >}}
+```C++
+#include <iostream>
+
+int main()
+{
+  std::cout << "Hello World!" << std::endl;
+}
+```
+{{< /tab >}}
+{{< tab ID="3" >}}
+```Go
+package main
+import "fmt"
+func main() {
+  fmt.Printf("Hello World!\n")
+}
+```
+{{< /tab >}}
+{{< tab ID="4" >}}
+```Java
+class HelloWorld {
+  static public void main( String args[] ) {
+    System.out.println( "Hello World!" );
+  }
+}
+```
+{{< /tab >}}
+{{< tab ID="5" >}}
+```Kotlin
+fun main(args : Array<String>) {
+    println("Hello, world!")
+}
+```
+{{< /tab >}}
+{{< tab ID="6" >}}
+```Lua
+fun main(args : Array<String>) {
+    println("Hello, world!")
+}
+```
+{{< /tab >}}
+{{< tab ID="7" >}}
+```PHP
+<?php
+  // Hello world in PHP
+  echo 'Hello World!';
+?>
+```
+{{< /tab >}}
+{{< tab ID="8" >}}
+```Python
+print("Hello World!")
+```
+{{< /tab >}}
+{{< tab ID="9" >}}
+```Ruby
+puts "Hello World!"
+```
+{{< /tab >}}
+{{< tab ID="10" >}}
+```Scala
+object HelloWorld extends App {
+  println("Hello world!")
+}
+```
+{{< /tab >}}
+{{< /tabpane >}}
+
+Fortunately, the Docsy template provides two shortcodes to author such tabbed panes with ease. To get familiar with these shortcodes, have a look at the following code block, which renders to a pane with three tabs:
+
+```go-html-template
+{{</* tabpane  paneID="2" tabCount="3" headerTab1="English" headerTab2="German" headerTab3="Swahili" */>}}
+  {{</* tab ID="1" */>}}
+    Welcome!
+  {{</* /tab */>}}
+  {{</* tab ID="2" */>}}
+    Herzlich willkommen!
+  {{</* /tab */>}}
+  {{</* tab ID="3" */>}}
+    Karibu sana!
+  {{</* /tab */>}}
+{{</* /tabpane */>}}
+```
+
+This code translates to the following tabbed pane, showing a `Welcome!` greeting in English, German or Swahili:
+
+{{< tabpane  paneID="2" tabCount="3" headerTab1="English" headerTab2="German" headerTab3="Swahili" >}}
+  {{< tab ID="1" >}}
+Welcome!
+  {{< /tab >}}
+{{< tab ID="2" >}}
+Herzlich willkommen!
+{{< /tab >}}
+{{< tab ID="3" >}}
+Karibu sana!
+{{< /tab >}}
+{{< /tabpane >}}
+
+### Shortcodes explanation
+
+Tabbed panes are implemented using two shortcodes: the `tabpane` shortcode, which is the container element for the tabs, whereby each of the nested tabs it represented by a single `tab` shortcode.
+
+#### Shortcode `tabpane`
+
+The `tabpane` shortcode is the container element of the tabbed pane. This shortcode helds various attributes, listed in the table below:
+
+| Attribute  | Type       | mandatory  | Description |
+| ---------- | ---------- | ---------- | ----------- |
+| paneID     | Integer    | yes        | This attribute is used to assign a **unique** number to the tab pane, allowing you to have multiple tabbed panes on the same page. Please observe that on a given page **all paneIDs must be different**, otherwise you will run into trouble. |
+| tabCount   | Integer    | yes        | Set this attribute to the **amount of tabs** you would like to place on the tabbed pane. In the above example with tabs for English, German and Swahili, this attribute needs to be set to **3**. |
+| headerTab1 <br /> … <br /> headerTabN | String     | yes | The *headerTab1* to *headerTabN* attributes hold the **header titles** for the tabs to be placed on the tabbed pane. Make sure that you start with *headerTab1* and that the number of *headerTabX* attributes specified equals the number given as *tabCount*. In the above example, there are **three** nested tabs, so **headerTab1**, **headerTab2** and **headerTab3** were specified. |
+| content    | String     | no         | This optional attribute is needed only if you want to place **code blocks** on your tabs. In this case, specify `content="code"` in order to assure the proper alignment of the gray rectangle representing the background of the code block. If you omit this attribute, unwanted margin space is applied to the code block. |
+
+#### Shortcode `tab`
+
+The various `tab` shortcodes inside the container element `tabpane` represent the tabs you would like to show. Each `tab` shortcode has to carry its own numerical `ID` attribute. The first `tab` shortcode should carry the numerical ID **1**, the ID has to be incremented by one for each subsequent `tab` shortcode.  Please observe that on a given page **all IDs** assigned to `tab` shortcodes **must be different**, otherwise you will run into trouble.
+
+### Troubleshooting 
+
+#### One or multiple tabs are not being displayed properly
+
+- Make sure **tabCount** is equal to the total amount of `tab` shortcodes you have. 
+- Make sure **headerTabX** exists for each `tab` shortcode in the `tabpane` shortcode. 
+- Make sure that the **headerTabX** of your nested `tab` shortcodes are in sequential order. 
+
+#### Multiple tabbed panes are changing with a single click
+
+- Make sure each tabbed pane group has a unique **paneID**. 

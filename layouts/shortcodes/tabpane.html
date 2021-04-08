@@ -1,0 +1,19 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    {{ range $i, $sequence := (seq (.Get "tabCount")) }}
+      {{ $paneID := $.Get "paneID" }}
+      {{ $headerTab := (print "headerTab" $sequence) }}
+      {{ $tabHREF := (print "tab" $paneID $sequence) }}
+      {{ if eq $sequence 1 }}
+        <a class="nav-item nav-link active" id="nav-{{ $paneID }}" data-toggle="tab" href="#{{ $tabHREF | urlize }}" role="tab"
+        aria-controls="nav-home" aria-selected="true">{{ $.Get $headerTab }}</a>
+      {{ else }}
+        <a class="nav-item nav-link" id="nav-{{ $paneID }}" data-toggle="tab" href="#{{ $tabHREF | urlize }}" role="tab"
+        aria-controls="nav-home" aria-selected="false">{{ $.Get $headerTab }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+</nav>
+<div class="tab-content {{ .Get "content" }}" id="{{ $.Get "paneID" }}">
+  {{ .Inner }}
+</div>
