@@ -26,6 +26,8 @@
 
 {{ $jsBase := resources.Get "js/base.js" }}
 {{ $jsAnchor := resources.Get "js/anchor.js" }}
+{{ $jsLodashDebouncd := resources.Get "js/lodash-debounce.js" }}
+{{ $jsLodashThrottle := resources.Get "js/lodash-throttle.js" }}
 {{ $jsProgressTracking := resources.Get "js/progress-tracking.js" }}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
 {{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . }}
@@ -33,7 +35,7 @@
 {{ if .Site.Params.offlineSearch }}
 {{ $jsSearch = resources.Get "js/offline-search.js" }}
 {{ end }}
-{{ $js := (slice $jsBase $jsAnchor $jsProgressTracking $jsSearch $jsMermaid $jsPlantuml) | resources.Concat "js/main.js" }}
+{{ $js := (slice $jsBase $jsAnchor $jsLodashDebouncd $jsLodashThrottle $jsProgressTracking $jsSearch $jsMermaid $jsPlantuml) | resources.Concat "js/main.js" }}
 {{ if .Site.IsServer }}
 <script src="{{ $js.RelPermalink }}"></script>
 {{ else }}
