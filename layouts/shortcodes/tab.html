@@ -1,12 +1,21 @@
-{{ $tabID := .Get "ID" }}
-{{ $paneID := print (.Parent.Get "paneID") $tabID }}
-{{ $tab := (print "tab" $tabID) }}
-{{ if eq $tabID "1" }}
-  <div class="tab-pane fade show active" id="tab{{ $paneID }}" role="tabpanel" aria-labelledby="nav-{{ $tab }}">
-    {{ $.Inner | markdownify }}
-  </div>
-{{ else }}
-  <div class="tab-pane fade" id="tab{{ $paneID }}" role="tabpanel" aria-labelledby="nav-{{ $tab }}">
-    {{ $.Inner | markdownify }}
-  </div>
-{{ end }}
+<!-- Make sure that we are enclosed within a tabpane shortcode block -->
+{{- if ne .Parent.Name "tabpane" -}}
+{{- errorf "tab must be used within a tabpane block" -}}
+{{- end -}}
+
+<!-- Trim any leading and trailing newlines from .Inner, this avoids
+     spurious lines during syntax highlighting -->
+{{- $code := trim .Inner "\n" -}}
+
+{{- $entry := .Parent.Get .Ordinal -}}
+{{- $entry := lower $entry -}}
+{{- $lang := default $entry (.Get "lang") -}}
+{{- $hloptions := default "" (.Get "highlight") -}}
+
+{{- $tabid := printf "tabs-%v-%v-tab" .Parent.Ordinal $.Ordinal | anchorize -}}
+{{- $entryid := printf "tabs-%v-%v" .Parent.Ordinal $.Ordinal | anchorize -}}
+
+<div class="tab-pane fade{{ if eq $.Ordinal 0 }} show active{{ end }}"
+    id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
+{{- highlight $code $lang $hloptions -}}
+</div>

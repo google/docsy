@@ -1,11 +1,8 @@
 .td-content .highlight {
-	margin: 0rem 0 2rem 0;
+  margin: 0rem 0 2rem 0;
 }
 
 .tab-content {
-	margin: 2rem 0 2rem 1rem;
-}
-
-.code.tab-content {
-	margin: 0rem;
+  margin: 0rem;
+  max-width: 80%;
 }
