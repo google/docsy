@@ -245,8 +245,8 @@ You can customize Swagger UI's look and feel by overriding Swagger's CSS or by e
 
 Sometimes its very useful to have tabbed panes at hand when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the table below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language from scratch:
 
-{{< tabpane  C "C++" Go Java Kotlin Lua PHP Python Ruby Scala >}}
-  {{< tab lang="C" >}}
+{{< tabpane langEqualsHeader=true >}}
+  {{< tab header="C" >}}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -256,7 +256,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 {{< /tab >}}
-{{< tab lang="C++" >}}
+{{< tab header="C++" >}}
 #include <iostream>
 
 int main()
@@ -264,40 +264,40 @@ int main()
   std::cout << "Hello World!" << std::endl;
 }
 {{< /tab >}}
-{{< tab lang="Go" >}}
+{{< tab header="Go" >}}
 package main
 import "fmt"
 func main() {
   fmt.Printf("Hello World!\n")
 }
 {{< /tab >}}
-{{< tab lang="Java" >}}
+{{< tab header="Java" >}}
 class HelloWorld {
   static public void main( String args[] ) {
     System.out.println( "Hello World!" );
   }
 }
 {{< /tab >}}
-{{< tab lang="Kotlin" >}}
+{{< tab header="Kotlin" >}}
 fun main(args : Array<String>) {
     println("Hello, world!")
 }
 {{< /tab >}}
-{{< tab lang="Lua" >}}
+{{< tab header="Lua" >}}
 print "Hello world"
 {{< /tab >}}
-{{< tab lang="PHP" >}}
+{{< tab header="PHP" >}}
 <?php
 echo 'Hello World!';
 ?>
 {{< /tab >}}
-{{< tab lang="Python" >}}
+{{< tab header="Python" >}}
 print("Hello World!")
 {{< /tab >}}
-{{< tab lang="Ruby" >}}
+{{< tab header="Ruby" >}}
 puts "Hello World!"
 {{< /tab >}}
-{{< tab lang="Scala" >}}
+{{< tab header="Scala" >}}
 object HelloWorld extends App {
   println("Hello world!")
 }
@@ -307,29 +307,29 @@ object HelloWorld extends App {
 Fortunately, the Docsy template provides two shortcodes `tabpane` and `tab` to author such tabbed panes with ease. To get familiar with these shortcodes, have a look at the following code block, which renders to a pane with three tabs:
 
 ```go-html-template
-{{</* tabpane English German Swahili */>}}
-  {{</* tab */>}}
+{{</* tabpane */>}}
+  {{</* tab header="English" */>}}
     Welcome!
   {{</* /tab */>}}
-  {{</* tab */>}}
+  {{</* tab header="German" */>}}
     Herzlich willkommen!
   {{</* /tab */>}}
-  {{</* tab */>}}
+  {{</* tab header="Swahili" */>}}
     Karibu sana!
   {{</* /tab */>}}
 {{</* /tabpane */>}}
 ```
 
-This code translates to the following tabbed pane, showing a `Welcome!` greeting in English, German or Swahili:
+This code translates to the tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
 
-{{< tabpane English German Swahili >}}
-{{< tab >}}
+{{< tabpane >}}
+{{< tab header="English" >}}
 Welcome!
 {{< /tab >}}
-{{< tab >}}
+{{< tab  header="German" lang="de" >}}
 Herzlich willkommen!
 {{< /tab >}}
-{{< tab >}}
+{{< tab  header="Swahili" >}}
 Karibu sana!
 {{< /tab >}}
 {{< /tabpane >}}
@@ -338,5 +338,5 @@ Karibu sana!
 
 Tabbed panes are implemented using two shortcodes:
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode helds **header titles** of the nested tabs as unnamed, **mandatory parameters**.
-* The various `tab` shortcodes which actually represent the tabs you would like to show. If needed, you can specify the named parameters `lang` and `highlight` inside this shortcode. These parameter values are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. If you don't specify the `lang`parameter, the header title of the corresponding tab is passed onto the `highlight` function as the second `LANG` argument by default.
+* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally held the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the `language` used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `language` parameter of the respective tab.
+* The various `tab` shortcodes which actually represent the tabs you would like to show. You are advised to specify the named parameter `header` for each text in order to set the header text of each tab. If needed, you can additionally specify the named parameters `lang` and `highlight` for each tab. This allows you to overwrite the settings given in the parent `tabpane` shortcode. If the language is neither specified in the `tabpane` nor in the `tab`shortcode, it defaults to Hugo's site variable `.Site.Language.Lang`.

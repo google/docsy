@@ -3,19 +3,24 @@
 {{- errorf "tab must be used within a tabpane block" -}}
 {{- end -}}
 
+<!-- Prefill header if not given as parameter -->
+{{ $header := default (printf "Tab %v" ( add $.Ordinal 1)) (.Get "header") }}
+
+<!-- store all tab info in dict tab -->
+{{ $tab := dict "header" $header }}
+{{ with $.Get "lang" }}
+{{ $tab = merge $tab (dict "language" ($.Get "lang")) }}
+{{ end }}
+{{ with $.Get "highlight" }}
+{{ $tab = merge $tab (dict "highlight" ($.Get "highlight")) }}
+{{ end }}
+{{ with $.Inner }}
 <!-- Trim any leading and trailing newlines from .Inner, this avoids
      spurious lines during syntax highlighting -->
-{{- $code := trim .Inner "\n" -}}
+{{ $tab = merge $tab (dict "content" (trim $.Inner "\n")) }}
+{{ end }}
 
-{{- $entry := .Parent.Get .Ordinal -}}
-{{- $entry := lower $entry -}}
-{{- $lang := default $entry (.Get "lang") -}}
-{{- $hloptions := default "" (.Get "highlight") -}}
-
-{{- $tabid := printf "tabs-%v-%v-tab" .Parent.Ordinal $.Ordinal | anchorize -}}
-{{- $entryid := printf "tabs-%v-%v" .Parent.Ordinal $.Ordinal | anchorize -}}
-
-<div class="tab-pane fade{{ if eq $.Ordinal 0 }} show active{{ end }}"
-    id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
-{{- highlight $code $lang $hloptions -}}
-</div>
+<!-- add dict tab to parent's scratchpad -->
+{{ with .Parent }}
+{{- $.Parent.Scratch.SetInMap "tabs" (printf "%v" $.Ordinal) $tab -}}
+{{ end }}
