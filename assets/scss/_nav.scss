@@ -129,3 +129,124 @@
         }
     }  
 }
+
+// Foldable sidebar menu
+nav.foldable-nav {
+
+    &#td-section-nav {
+        position: relative;
+    }
+    
+    &#td-section-nav label {
+        margin-bottom: 0;
+        width: 100%;
+    }
+    
+    /* (A) LIST TO MENU */
+    .td-sidebar-nav__section, .with-child ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .ul-1 > li {
+        padding-left: 1.5em;
+    }
+    // .td-sidebar-nav__section {
+    //   background: #fbfbfb;
+    //   border: 1px solid #d2d2d2;
+    // }
+    // .td-sidebar-nav__section li {
+    //   border-bottom: 1px solid #d2d2d2;
+        // padding: 15px 10px;
+    // }
+    // .td-sidebar-nav__section li:last-child {
+    //   border: 0;
+    // }
+    
+    
+    /* (B) SUB-SECTIONS */
+    /* (B1) TOGGLE SHOW/HIDE */
+    .with-child ul { 
+        // display: none; 
+        max-height: 0;
+        // overflow-x: visible;
+        // overflow-y: hidden;
+        overflow: hidden;
+        // opacity: 0;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+    .with-child input:checked ~ ul { 
+        // display: block; 
+        max-height: 100vmax;
+        // opacity: 1;
+        transition: max-height 1s ease-in-out;
+    }
+    
+    /* (B2) HIDE CHECKBOX */
+    .with-child input[type=checkbox] { display: none; }
+    
+    /* (B3) ADD EXPAND/COLLAPSE ICON  */
+    .with-child, .without-child { 
+        position: relative; 
+        padding-left: 1.5em;
+    }
+    // .ul-1 .with-child label {
+    //   display: inline !important;
+    // }
+    // .without-child span:after,
+    .ul-1 .with-child > label:before {
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0da";
+        // content: "\25B3";
+        // transform: rotate(90deg);
+        position: absolute;
+        // top: -0.8em; 
+        left: 0.1em;
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+        // text-align: center;
+        font-size: 1em;
+        color: $gray-900;
+        transition: all 0.5s;
+        &:hover{
+        transform: rotate(90deg);
+        }
+    }
+    .ul-1 .with-child > label:hover:before { 
+        color: $primary;
+        transform: rotate(30deg);
+        // content: "\f13a";
+        transition: transform 0.5s; 
+    }
+    .ul-1 .with-child > input:checked ~ label:before { 
+        color: $primary;
+        transform: rotate(90deg);
+        // content: "\f13a";
+        transition: transform 0.5s; 
+    }
+    .ul-1 .with-child > input:checked ~ label:hover:before { 
+        color: $primary;
+        transform: rotate(60deg) !important;
+        // content: "\f13a";
+        transition: transform 0.5s; 
+    }
+    // .ul-1 > li.with-child > label:before {
+    //     left: 0.1;
+    // }
+    
+    /* (B4) SUB-SECTION ITEMS */
+    .with-child ul { margin-top: 0.1em; }
+    // .with-child ul li { color: $primary; }
+    
+    /* DOES NOT MATTER */
+    // .tree {
+    //   font-family: arial, sans-serif;
+    //   font-size: 18px;
+    // }
+    
+}    
