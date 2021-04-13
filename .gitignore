@@ -7,3 +7,6 @@ tech-doc-hugo
 # vim temporary files
 *~
 *.sw?
+
+# Exclude MacOS Desktop Services Store file
+.DS_Store
