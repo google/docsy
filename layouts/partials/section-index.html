@@ -10,7 +10,6 @@
             {{ range $pages }}
                 {{ if eq .Parent $parent }}
                     {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
-                    {{ $manualLinkTitle := cond (isset .Params "manuallinktitle") .Params.manualLinkTitle .Title }}
                     <li><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></li>
                 {{ end }}
             {{ end }}
@@ -21,7 +20,6 @@
         {{ range $pages }}
             {{ if eq .Parent $parent }}
                 {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
-                {{ $manualLinkTitle := cond (isset .Params "manuallinktitle") .Params.manualLinkTitle .Title }}
                 <div class="entry">
                     <h5>
                         <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
