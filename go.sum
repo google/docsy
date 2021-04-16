@@ -1,0 +1,8 @@
+github.com/FortAwesome/Font-Awesome v0.0.0-20210316185733-d79d85c3fad8 h1:3h1ZlZmKNqZtiTD6FF7GijnIB/PU9/jR+dclHF80pFE=
+github.com/FortAwesome/Font-Awesome v0.0.0-20210316185733-d79d85c3fad8/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
+github.com/deining/hugo-mod-font-awesome-scss v0.0.0-20210415150057-c3ffa1501924 h1:X8/yaitCpv2jrZR/NyH8Lsu4n9byqJrni72tcfgxMEM=
+github.com/deining/hugo-mod-font-awesome-scss v0.0.0-20210415150057-c3ffa1501924/go.mod h1:Xg+5zZzZpuh3Bua72PlygSwF2jpk9m8lN/ZyEdKNM/0=
+github.com/gohugoio/hugo-mod-bootstrap-scss-v4 v0.0.0-20200902213320-c9cb5e39d8c6 h1:Neo6xDvmZMV41d4kmbjv9ZCYuqzbITl8R/4t6Aeng5A=
+github.com/gohugoio/hugo-mod-bootstrap-scss-v4 v0.0.0-20200902213320-c9cb5e39d8c6/go.mod h1:dAcE2kCmCarbiwNTV4xxlDFShQHiok9kDjw1VoN2J8g=
+github.com/twbs/bootstrap v4.5.2+incompatible h1:QR6UOtm1+LCDK53CzEp8U0NPIYeRUktVgNhq0gaAGP0=
+github.com/twbs/bootstrap v4.5.2+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
