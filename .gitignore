@@ -3,6 +3,7 @@ public/
 resources/
 node_modules/
 tech-doc-hugo
+_vendor/
 
 # vim temporary files
 *~
