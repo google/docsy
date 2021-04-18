@@ -103,7 +103,7 @@ multiple documentation sites.
 Here's what the 4 columns represent:
 
 * **Total Events** is the total number of times that users clicked *either* **Yes** or **No**.
-* **Unique Events** provides a rough indication of how frequenly users are rating your pages per
+* **Unique Events** provides a rough indication of how frequently users are rating your pages per
   session. For example, suppose your **Total Events** is 5000, and **Unique Events** is 2500.
   This means that you have 2500 users who are rating 2 pages per session.
 * **Event Value** isn't that useful.

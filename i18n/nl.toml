@@ -3,16 +3,16 @@
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
-other = "이전"
+other = "Vorige"
 
 [ui_pager_next]
-other = "다음"
+other = "Volgende"
 
 [ui_read_more]
-other = "더 읽기"
+other = "Lees meer"
 
 [ui_search]
-other = "사이트에서 검색…"
+other = "Doorzoek deze site"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
@@ -23,33 +23,33 @@ other = "in"
 other = "All Rights Reserved"
 
 [footer_privacy_policy]
-other = "개인정보 보호 정책"
+other = "Privacy Policy"
 
 
 # Post (blog, articles etc.)
 [post_byline_by]
-other = "By"
+other = "Door"
 [post_created]
-other = "작성"
+other = "Created"
 [post_last_mod]
-other = "최종 수정"
+other = "Laatst gewijzigd"
 [post_edit_this]
-other = "페이지 편집"
+other = "Bewerk deze pagina"
 [post_create_child_page]
-other = "하부 페이지 생성"
+other = "Maak sub pagina"
 [post_create_issue]
-other = "문서에 이슈 생성"
+other = "Maak documentatie issue"
 [post_create_project_issue]
-other = "프로젝트에 이슈 생성"
+other = "Maak project issue"
 [post_posts_in]
 other = "Posts in"
 
 # Print support
 [print_printable_section]
-other = "이 섹션의 다중 페이지 출력 화면임."
+other = "Dit is de multi-page printable view van deze sectie."
 [print_click_to_print]
-other = "여기를 클릭하여 프린트"
+other = "Click hier om te printen"
 [print_show_regular]
-other = "이 페이지의 일반 화면으로 돌아가기"
+other = "Terug naar normale view van deze pagina"
 [print_entire_section]
-other = "전체 섹션 프린트"
+other = "Print complete sectie"

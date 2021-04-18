@@ -3,10 +3,10 @@
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
-other = "Weiter"
+other = "Zurück"
 
 [ui_pager_next]
-other = "Zurück"
+other = "Weiter"
 
 [ui_read_more]
 other = "Weiterlesen"

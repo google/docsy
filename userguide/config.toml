@@ -59,10 +59,13 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
+    pre = "<i class='fas fa-laptop-code'></i>"
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
+    pre = "<i class='fab fa-github'></i>"
+    post = "<span class='alert'>New!</span>" 
 
 [services]
 [services.googleAnalytics]
@@ -170,21 +173,26 @@ enable = false
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
- [[params.links.user]]
+[[params.links.user]]
+	name ="GitHub Discussions"
+	url = "https://twitter.com/docsydocs"
+	icon = "fab fa-github"
+        desc = "Discussion and help from your fellow users"
+[[params.links.user]]
 	name = "User mailing list"
 	url = "https://groups.google.com/forum/#!forum/docsy-users"
 	icon = "fa fa-envelope"
-        desc = "Discussion and help from your fellow users"
+        desc = "Sign up for Docsy announcements"
 [[params.links.user]]
 	name ="Twitter"
 	url = "https://twitter.com/docsydocs"
 	icon = "fab fa-twitter"
         desc = "Follow us on Twitter to get the latest news!"
-# [[params.links.user]]
-	# name = "Stack Overflow"
-	# url = "https://example.org/stack"
-	# icon = "fab fa-stack-overflow"
-        # desc = "Practical questions and curated answers"
+[[params.links.user]]
+	name = "Stack Overflow"
+	url = "https://stackoverflow.com/questions/tagged/docsy"
+	icon = "fab fa-stack-overflow"
+        desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
 	name = "GitHub"
@@ -205,6 +213,19 @@ enable = false
 [params.mermaid]
 enable = true
 theme = "default"
+
+[params.plantuml]
+enable = true
+theme = "default"
+svg_image_url = "https://www.plantuml.com/plantuml/svg/"
+
+[params.katex]
+enable = true
+html_dom_element = "document.body"
+
+# enable display of chemical equations and physical units via mhchem extension
+[params.katex.mhchem]
+enable = true
 
 [params.print]
 disable_toc = false
