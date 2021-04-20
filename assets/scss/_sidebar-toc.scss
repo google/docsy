@@ -25,6 +25,16 @@
     li {
         list-style: none;
         display: block;
+
+        &.current {
+            border-left: $blue 0.25rem solid;
+            margin-left: -0.6rem;
+            padding-left: 0.3rem;
+
+            & a {
+                color: $blue;
+            }
+        }
     }
 
     li li {
