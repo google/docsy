@@ -26,13 +26,14 @@
 @import "blocks/blocks";
 @import "section-index";
 @import "pageinfo";
+@import "custom";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
 }
 
 footer {
-    min-height: 150px;
+    min-height: auto;
 
     @include media-breakpoint-down(md) {
         min-height: 200px;

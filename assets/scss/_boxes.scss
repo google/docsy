@@ -61,15 +61,15 @@
 
         @include media-breakpoint-up(md) {
             &--height-min {
-                min-height: 450px;
+                min-height: auto;
             }
 
             &--height-med {
-                min-height: 500px;
+                min-height: auto;
             }
 
             &--height-max {
-                min-height: 650px;
+                min-height: auto;
             }
         }
     }

@@ -8,7 +8,7 @@
 
 @mixin link-variant($parent, $color, $hover-color, $underline: false) {
     #{$parent} {
-        color: $color;
+        // color: $color;
 
         &:hover {
             color: $hover-color;
