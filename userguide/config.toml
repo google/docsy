@@ -35,7 +35,7 @@ pygmentsStyle = "tango"
 blog = "/:section/:year/:month/:day/:slug/"
 
 [outputs]
-home = [ "HTML", "JSON" ]
+home = [ "HTML" ]
 page = [ "HTML" ]
 section = [ "HTML", "RSS", "print"]
 
