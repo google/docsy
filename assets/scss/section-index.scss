@@ -2,6 +2,9 @@
 
     .entry {
         padding: .75rem;
+        background-color: #fff;
+        border-radius: 8px;
+        margin-bottom: 16px;
     }
 
     h5 {
@@ -15,4 +18,10 @@
     p {
         margin-top: 0;
     }
+}
+
+.entry-title {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
 }
