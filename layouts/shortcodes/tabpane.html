@@ -37,8 +37,7 @@
     {{- $entryid := printf "tabs-%v-%v" $.Ordinal $index | anchorize -}}
     <div class="tab-pane fade{{ if eq $index "0" }} show active{{ end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
-    {{- highlight (index . "content") $lang $hloptions -}}
-
-     </div>
+      {{- highlight (index . "content") $lang $hloptions -}}
+    </div>
   {{ end }}
 </div>
