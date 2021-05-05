@@ -389,16 +389,16 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
 ### Add code to head or before body end
 
-If you need to add some code (CSS import or similar) to the `head` section on every page, add a partial to your project:
+If you need to add some code (CSS import, cookie consent, or similar) to the `head` section on every page, add the `head-end.html` partial to your project:
 
 ```
 layouts/partials/hooks/head-end.html
 ```
 
-And add the code you need in that file. Your partial code is automatically included at the end of the theme partial [head.html](https://github.com/google/docsy/blob/master/layouts/partials/head.html) (the [theme version](https://github.com/google/docsy/blob/master/layouts/partials/head.html) of `head-end.html` is empty):
+And add the code you need in that file. Your partial code is automatically included just before the end of the theme partial [`head.html`](https://github.com/google/docsy/blob/master/layouts/partials/head.html). The theme version of [`head-end.html`](https://github.com/google/docsy/blob/master/layouts/partials/hooks/head-end.html) is empty.
 
 
-Similar, if you want to add some code right before the `body` end, create your own version of the following file:
+Similarly, if you want to add some code right before the `body` end, create your own version of the following file:
 
 ```
 layouts/partials/hooks/body-end.html
