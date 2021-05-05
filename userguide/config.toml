@@ -16,8 +16,15 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
+# disableKinds = ["taxonomy"]
 [taxonomies]
-tags = "tags"
+tag = "tags"
+category = "categories"
+project = "projects"
+
+[params.taxonomy]
+taxonomyCloud = ["tags"]
+taxonomyPageHeader = ["tags", "categories", "projects"]
 
 # Highlighting config
 pygmentsCodeFences = true

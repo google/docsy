@@ -1,5 +1,35 @@
 {{ define "main" }}
+<!-- <script>console.log({{ .Params }});</script>
+<script>console.log({{ .Site.Taxonomies }});</script> -->
+
+<section>
+	<ul id="all-taxonomies">
+			{{ range $taxonomy_term, $taxonomy := .Site.Taxonomies }}
+					{{ with $.Site.GetPage (printf "/%s" $taxonomy_term) }}
+							<li><a href="{{ .Permalink }}">{{ $taxonomy_term }}</a>
+									<ul>
+											{{ range $key, $value := $taxonomy }}
+													<li>{{ $key }}
+
+<!-- <script>console.log({{ $taxonomy.Plural }});</script> -->
+														<ul>
+																{{ range $value.Pages }}
+																		<li hugo-nav="{{ .RelPermalink}}">
+																				<a href="{{ .Permalink}}">{{ .LinkTitle }}</a>
+																		</li>
+																{{ end }}
+														</ul>
+													</li>
+											{{ end }}
+									</ul>
+							</li>
+					{{ end }}
+			{{ end }}
+	</ul>
+</section>
+
 <div class="td-content">
+	{{ partial "article_meta.html" . }}
 	<h1>{{ .Title }}</h1>
         {{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
 	{{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) }}

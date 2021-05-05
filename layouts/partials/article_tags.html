@@ -1,7 +1,7 @@
 {{ with (.GetTerms "tags")}}
 <div class="article-tags">
     {{ range . }}
-    <span class="badge badge-light"><a class="article-tags-link" href="{{ .Permalink }}">{{ .Name }}</a></span>
+    <span class="badge badge-light fas fa-tag"><a class="article-tags-link" href="{{ .Permalink }}">{{ .Name }}</a></span>
     {{ end }}
 </div>
 {{end}}

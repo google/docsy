@@ -1,7 +1,40 @@
 <hr>
+{{ $taxo := "projects" }} <!-- Use the plural form here -->
+<ul>
+    {{ range (.GetTerms $taxo) }}
+        <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
+    {{ end }}
+</ul>
+
+<hr>
+
+<hr>
+{{ $taxo := "tags" }} <!-- Use the plural form here -->
+{{ with .Param $taxo }}
+<p>Tags: {{ delimit . ", " }}</p>
+{{ end }}
+
+<hr>
+{{ $taxo := "tags" }} <!-- Use the plural form here -->
+{{ with .Param $taxo }}
+    <strong>Tag{{ if gt (len .) 1 }}s{{ end }}:</strong>
+    {{ range $index, $director := . }}
+        {{- if gt $index 0 }}, {{ end -}}
+        {{ with $.Site.GetPage (printf "/%s/%s" $taxo $director) -}}
+            <a href="{{ .Permalink }}">{{ $director }}</a>
+        {{- end -}}
+    {{- end -}}
+{{ end }}
+
+<hr>
 {{ if isset .Site.Taxonomies "tags" }}
 {{ if not (eq (len .Site.Taxonomies.tags) 0) }}
 <div class="tagslist">
+    
+    <!-- <pre>{{ printf "%#v" .Site.Taxonomies.tags | jsonify }}</pre>
+    <pre> {{ .Site.Taxonomies.tags }} </pre>
+    <script>console.log({{ .Site.Taxonomies.Tags }});</script> -->
+
     <p class="asidetitle">{{ .Site.Params.Strings.Tags | default "Tag Cloud" }}</p>
     <ul class="clearfix">
         {{ range $name, $items := .Site.Taxonomies.tags }}
