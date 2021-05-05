@@ -1,8 +1,8 @@
 {{ $src := .Get "src" | default "/" }}
 {{ $width := .Get "width" | default "100%" }}
 {{ $tryautoheight := .Get "tryautoheight" | default true }}
-{{ $style := .Get "style" | default "min-height:98vh" }}
-{{ $name := .Get "name" | default "External content" }}
+{{ $style := .Get "style" | default "min-height:98vh; border:none;" }}
+{{ $name := .Get "name" | default "iframe-name" }}
 {{ $id := .Get "id" | default "iframe-id" }}
 {{ $class := .Get "class" }}
 {{ $sub := .Get "sub" | default "Your browser can not display embedded frames. You can access the embedded page via the following link:" }}
@@ -15,6 +15,6 @@
   </script>  
 {{ end }}
 <iframe id="{{ $id }}"{{ with $class }} class="{{ $class }}"{{ end }} src="{{ $src }}" width="{{ $width }}" name="{{ $name }}"{{ with $style }} style="{{ $style | safeCSS }}"{{ end }}{{ if $tryautoheight }} onload="resizeIframe(this)"{{ end }} >
-  <p>{{ $sub }} <a href="{{ $src }}">{{ $name }}</a></p>
+  <p>{{ $sub }} <a href="{{ $src }}">{{ $src }}</a></p>
 </iframe>
 {{ end }}
