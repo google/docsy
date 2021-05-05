@@ -1,6 +1,7 @@
 {{ $src := .Get "src" | default "/" }}
 {{ $width := .Get "width" | default "100%" }}
 {{ $tryautoheight := .Get "tryautoheight" | default true }}
+{{ $sandbox := .Get "sandbox" | default false }}
 {{ $style := .Get "style" | default "min-height:98vh; border:none;" }}
 {{ $name := .Get "name" | default "iframe-name" }}
 {{ $id := .Get "id" | default "iframe-id" }}
@@ -14,7 +15,7 @@
     }
   </script>  
 {{ end }}
-<iframe id="{{ $id }}"{{ with $class }} class="{{ $class }}"{{ end }} src="{{ $src }}" width="{{ $width }}" name="{{ $name }}"{{ with $style }} style="{{ $style | safeCSS }}"{{ end }}{{ if $tryautoheight }} onload="resizeIframe(this)"{{ end }} >
+<iframe id="{{ $id }}"{{ with $class }} class="{{ $class }}"{{ end }} src="{{ $src }}" width="{{ $width }}" name="{{ $name }}"{{ with $style }} style="{{ $style | safeCSS }}"{{ end }}{{ if $tryautoheight }} onload="resizeIframe(this)"{{ end }} referrerpolicy="no-referrer"{{ if (eq $sandbox false)}}{{ else if (eq $sandbox true) }} sandbox{{ else }} sandbox="{{ $sandbox }}"{{ end }}>
   <p>{{ $sub }} <a href="{{ $src }}">{{ $src }}</a></p>
 </iframe>
 {{ end }}
