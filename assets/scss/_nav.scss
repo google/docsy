@@ -9,6 +9,9 @@
         background: transparent !important;
 
         .nav-link {
+            &:hover{
+                transition: all 0.5s ease;
+            }
             text-shadow: 1px 1px 2px $dark;
         }
 
@@ -26,6 +29,7 @@
 
 .td-navbar {
     background: $primary;
+    transition: all 0.5s ease;
     min-height: 4rem;
     margin: 0;
     z-index: 32;
@@ -58,9 +62,10 @@
         font-weight: $font-weight-bold;
     }
 
-    .td-search-input {
-        border: none;
+    .td-search-input {//         border: none;
+63
 
+        transition: all 0.5s ease;
         @include placeholder {
             color: $navbar-dark-color;
         }
