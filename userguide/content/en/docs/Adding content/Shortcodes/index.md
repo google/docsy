@@ -241,6 +241,26 @@ description: Reference for the Pet Store API
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
 
+### iframe
+
+With the `iframe` shortcode you can embedd external content into a Docsy page.
+
+| Parameter        | Default    | Description  |
+| ---------------- |------------| ------------|
+| src | / | URL of externals content
+| width | 100% | Width of iframe
+| tryautoheight | true | If true the shortcode tries to calculate the needed height for the embedded content by JS (https://stackoverflow.com/a/14618068). But this is only possible, if the embedded content is on the same domain (https://stackoverflow.com/questions/22086722/resize-cross-domain-iframe-height). Also when the embedded content is on the same domain, it debends on the structuer of content, if the needed height can be calculated correctly.
+| style | min-height:98vh; border:none; | CSS styles for the iframe. `min-height:98vh;` is a backup if `tryautoheight` doesn't work and `border:none;` removes the border from the iframe, that it looks a little bit more like internal content.
+| sandbox | false | You can switch the sandbox completly on by setting `sandbox = true` or allow specifc functionality with the common values for the iframe parameter `sandbox` defined in the HTML standard (https://www.w3schools.com/tags/att_iframe_sandbox.asp).
+| name | iframe-name | Specify the name of the iframe (https://www.w3schools.com/tags/att_iframe_name.asp).
+| id | iframe-id | Setting the ID of the iframe.
+| class |  | Optional parameter to setting the classes of the iframe.
+| sub | Your browser can not display embedded frames. You can access the embedded page via the following link: | Shown text (as addition to the embedded URL) if the browser can't display embedded frames.
+
+{{% alert title="Warning" color="warning" %}}
+It is only possible to embedd external content from a server, when it's X-Frame-Options is set correctly. - see: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+{{% /alert %}}
+
 ## Tabbed panes
 
 Sometimes it's very useful to have tabbed panes when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the table below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language from scratch:
