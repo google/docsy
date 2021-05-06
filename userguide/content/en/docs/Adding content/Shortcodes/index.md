@@ -243,11 +243,11 @@ You can customize Swagger UI's look and feel by overriding Swagger's CSS or by e
 
 ### iframe
 
-With the `iframe` shortcode you can embedd external content into a Docsy page.
+With this shortcode you can embedd external content into a Docsy page as an so called `iframe` - see: https://www.w3schools.com/tags/tag_iframe.asp
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| src | / | URL of externals content
+| src | | URL of external content
 | width | 100% | Width of iframe
 | tryautoheight | true | If true the shortcode tries to calculate the needed height for the embedded content by JS (https://stackoverflow.com/a/14618068). But this is only possible, if the embedded content is on the same domain (https://stackoverflow.com/questions/22086722/resize-cross-domain-iframe-height). Also when the embedded content is on the same domain, it debends on the structuer of content, if the needed height can be calculated correctly.
 | style | min-height:98vh; border:none; | CSS styles for the iframe. `min-height:98vh;` is a backup if `tryautoheight` doesn't work and `border:none;` removes the border from the iframe, that it looks a little bit more like internal content.
@@ -258,7 +258,10 @@ With the `iframe` shortcode you can embedd external content into a Docsy page.
 | sub | Your browser can not display embedded frames. You can access the embedded page via the following link: | Shown text (as addition to the embedded URL) if the browser can't display embedded frames.
 
 {{% alert title="Warning" color="warning" %}}
-It is only possible to embedd external content from a server, when it's X-Frame-Options is set correctly. - see: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+It is only possible to embed external content from a server, when it's X-Frame-Options is not set or allows the embedding espcially for your site. - see: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+
+There are serveral tools to check, if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test (Attention: When this test say "Couldn’t find the X-Frame-Options header 
+in the response headers." you __CAN__ embed it, but when the test say "Great! X-Frame-Options header was found in the HTTP response headers as highlight below.", you __CANNOT__ - except it is allowed explicit for you site.)
 {{% /alert %}}
 
 ## Tabbed panes
