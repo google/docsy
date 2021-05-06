@@ -260,7 +260,7 @@ With this shortcode you can embedd external content into a Docsy page as an so c
 {{% alert title="Warning" color="warning" %}}
 It is only possible to embed external content from a server, when it's X-Frame-Options is not set or allows the embedding espcially for your site. - see: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 
-There are serveral tools to check, if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test (Attention: When this test say "Couldn’t find the X-Frame-Options header 
+There are serveral tools to check, if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test (__Attention:__ When this test say "Couldn’t find the X-Frame-Options header 
 in the response headers." you __CAN__ embed it, but when the test say "Great! X-Frame-Options header was found in the HTTP response headers as highlight below.", you __CANNOT__ - except it is allowed explicit for you site.)
 {{% /alert %}}
 
