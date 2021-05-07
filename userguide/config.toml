@@ -174,7 +174,7 @@ enable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
 	name ="GitHub Discussions"
-	url = "https://https://github.com/google/docsy/discussions"
+	url = "https://github.com/google/docsy/discussions"
 	icon = "fab fa-github"
         desc = "Discussion and help from your fellow users"
 [[params.links.user]]
