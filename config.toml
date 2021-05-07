@@ -10,6 +10,9 @@ time_format_default = "January 2, 2006"
 # Sections to publish in the main RSS feed.
 rss_sections = ["blog"]
 
+[params.drawio]
+enable = true
+#drawio_server = "https://example.com/"
 
 # For a full list of parameters used in Docsy sites, see:
 # https://github.com/google/docsy-example/blob/master/config.toml

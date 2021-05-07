@@ -1,0 +1,15 @@
+div.drawio {
+    display: inline-block;
+    position: relative;
+
+    a.drawiobtn {
+        position: absolute;
+        font-size: 0.8em;
+        bottom: 5px;
+        right: 5px;
+        background-color: rgba($secondary, .8);
+        color: $primary-light;
+        padding: 0.4em 0.5em;
+        display: none;
+    }
+} 

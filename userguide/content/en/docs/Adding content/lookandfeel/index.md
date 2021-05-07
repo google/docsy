@@ -385,6 +385,38 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
 ```
 
+## Diagrams with diagrams.net
+
+[Diagrams.net](https://diagrams.net/) (aka draw.io) provides a free and open source diagram editor that can generate a wider range of diagrams than Mermaid or PlantUML using a web or desktop editor.
+
+SVG files exported with the tool contain a copy of the original diagram by default.  Docsy can detect this and automatically add an "edit" button over any image that can be edited using the online site.
+
+Hover over the image below and click edit to instantly start working with it.  Users can then save their changes to the updated image as  new svg file and check it back into the repo alongside the markdown which makes keeping images up to date easy.
+
+As the diagram data is transported via the editor URL, the diagrams.net site does not need any privileges to access your repo.
+
+{{%alert title="Note"  color="primary" %}}
+Only SVG files are supported, and they must of been saved with the "include a copy of my diagram" option checked.
+{{%/alert %}}
+
+
+{{< figure src="docsy-aws.svg" >}}
+
+To disable detection of diagrams, update `config.toml`:
+
+```toml
+[params.drawio]
+enable = false
+```
+
+You can also [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md) for editing diagrams, in which case update the configuration to point to that server:
+
+```toml
+[params.drawio]
+drawio_server = "https://app.mydrawioserver.example.com"
+```
+
+
 ## Customizing templates
 
 ### Add code to head or before body end
