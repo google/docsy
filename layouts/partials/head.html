@@ -20,9 +20,7 @@
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
-{{ if eq (getenv "HUGO_ENV") "production" }}
-{{ template "_internal/google_analytics_async.html" . }}
-{{ end }}
+
 {{ partialCached "head-css.html" . "asdf" }}
 <script
   src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -39,3 +37,7 @@
 <link rel="stylesheet" href="{{ "/css/prism.css" | relURL }}"/>
 {{ end }}
 {{ partial "hooks/head-end.html" . }}
+<!--To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled -->
+{{ if eq (getenv "HUGO_ENV") "production" }}
+{{ template "_internal/google_analytics_async.html" . }}
+{{ end }}
