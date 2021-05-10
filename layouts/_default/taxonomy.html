@@ -1,0 +1,40 @@
+{{ define "main" }}
+
+  <div class="w-100 ph4 pb5 pb6-ns pt1 mt4 pt3-ns">
+
+    <div class="flex">
+  
+      <div class="w-100 w-80-l ph0 ph4-l">
+        <article class="w-100 nested-copy-line-height nested-links nested-img">
+          <h1 class="primary-color-dark f2">
+            {{ with .Data.Singular }}{{ . | humanize }}: {{ end }}{{ .Title }}
+          </h1>
+          <div class="mid-gray f5 f4-l">
+            {{ .Content }}
+          </div>
+        </article>
+  
+        <div class="flex flex-wrap">
+          <section class="flex-ns flex-wrap justify-between w-100">
+            {{ range .Pages }}
+            
+            {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
+            
+              <div class="entry">
+                <h5>
+                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+                </h5>
+                <p>{{ .Description | markdownify }}</p>
+              </div>
+
+            {{ end }}
+          </section>
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>
+
+  {{ end }}
