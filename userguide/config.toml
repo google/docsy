@@ -232,7 +232,7 @@ disable_toc = false
 [params.taxonomy]
 taxonomyCloud = ["tags"]
 taxonomyCloudTitle = ["Tag Cloud"]
-taxonomyPageHeader = ["tags", "categories", "projects"]
+taxonomyPageHeader = ["projects", "tags"]
 
 [taxonomies]
 tag = "tags"
