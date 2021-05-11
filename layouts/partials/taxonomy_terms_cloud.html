@@ -1,0 +1,19 @@
+{{ $context := .context  }}
+{{ $taxo := .taxo  }} <!-- Use the plural form here -->
+<!-- <script>console.log({{ $context.Site.Params }});</script>
+<script>console.log({{ $context.Site.Taxonomies }});</script> -->
+<!-- {{ if isset $context.Site.Taxonomies ( lower $taxo ) }} {{ index $context.Site.Taxonomies ( lower $taxo ) }}{{ end }} -->
+
+{{ if isset $context.Site.Taxonomies ( lower $taxo ) }}
+  {{ $taxonomy := index $context.Site.Taxonomies ( lower $taxo ) }}
+  {{ if (gt (len $taxonomy) 0)}}
+    <div class="taxonomy taxonomy-terms-cloud taxo-{{ lower $taxo }}">
+      <h5 class="taxonomy-title">{{ humanize $taxo }}</h5>
+      <ul class="taxonomy-terms">
+        {{ range $taxonomy }}
+          <li><a class="taxonomy-term" href="{{ .Page.Permalink }}">{{ .Page.Title }}<span class="taxonomy-count">{{ .Count }}</span></a></li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+{{ end }}

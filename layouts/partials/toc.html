@@ -6,3 +6,14 @@
 {{ end }}
 {{ end }}
 {{ end }}
+
+{{ $context := . }}
+{{ if isset .Site.Params.Taxonomy "taxonomycloud" }}
+	{{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyCloud }}
+		{{ partial "taxonomy_terms_cloud.html" (dict "context" $context "taxo" $taxo ) }}
+	{{ end }}
+{{ else }}
+	{{ range $taxo, $taxo_map := .Site.Taxonomies }}
+		{{ partial "taxonomy_terms_cloud.html" (dict "context" $context "taxo" $taxo ) }}
+	{{ end }}
+{{ end }}
