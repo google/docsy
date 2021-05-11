@@ -230,9 +230,9 @@ enable = true
 disable_toc = false
 
 [params.taxonomy]
-taxonomyCloud = ["tags"]
-taxonomyCloudTitle = ["Tag Cloud"]
-taxonomyPageHeader = ["projects", "tags"]
+taxonomyCloud = ["tags"] # set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloudTitle = ["Tag Cloud"] 
+taxonomyPageHeader = ["projects", "tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [taxonomies]
 tag = "tags"
