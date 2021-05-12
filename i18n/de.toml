@@ -18,6 +18,10 @@ other = "Diese Seite durchsuchen…"
 [ui_in]
 other = "in"
 
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "alle"
+
 # Footer text
 [footer_all_rights_reserved]
 other = "Alle Rechte vorbehalten"
