@@ -18,7 +18,7 @@
   }
 }
 
-.taxonomy-terms-cloud {
+.td-toc .taxonomy-terms-cloud {
   width: 100%;
   // max-width: 100%;
   // overflow: hidden;
@@ -41,6 +41,16 @@
     border-bottom: 1px #30638E solid;
     margin-bottom: 1rem;
     padding-bottom: 0.375rem;
+  }
+}
+
+.taxonomy-terms-page {
+
+  .taxonomy-terms {
+
+    li {
+      display: block;
+    }
   }
 }
 
@@ -75,7 +85,8 @@
 
 .taxonomy-term {
   background: #eee;
-  border-radius: 3px;
+  border-width: 0;
+  border-radius: 0 3px 3px 0;
   // border-width: 0;
   color: #999;
   display: inline-block !important;
@@ -106,14 +117,15 @@
       content: '';
       position: absolute;
       display: block;
-      left: -0.7em;
+      left: -0.8em;
       top: 0;
       bottom: 0;
-      width: 0.8em;
+      width: 0.81em;
       height: 100%;
       background: #eee;
       -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
       clip-path: polygon(100% 0, 100% 100%, 0 50%);
+      border-width: 0;
     }
   // }
   
@@ -139,6 +151,18 @@
   
   &:hover::before {
     background: $primary; 
+  }
+}
+
+.taxonomy-taxonomy-page {
+
+  .taxonomy-term {
+    background-color: $primary;
+    color: white;
+    
+    &::before {
+      background: $primary; 
+    }
   }
 }
 
