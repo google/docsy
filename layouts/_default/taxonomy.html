@@ -1,21 +1,24 @@
 {{ define "main" }}
+<div class="td-content">
+  <main class="taxonomy-taxonomy-page">
 
-  <div class="w-100 ph4 pb5 pb6-ns pt1 mt4 pt3-ns">
 
+
+  <!-- <div class="w-100 ph4 pb5 pb6-ns pt1 mt4 pt3-ns">
     <div class="flex">
-  
-      <div class="w-100 w-80-l ph0 ph4-l">
-        <article class="w-100 nested-copy-line-height nested-links nested-img">
-          <h1 class="primary-color-dark f2">
-            {{ with .Data.Singular }}{{ . | humanize }}: {{ end }}{{ .Title }}
+      <div class="w-100 w-80-l ph0 ph4-l"> -->
+        <!-- <article class="w-100 nested-copy-line-height nested-links nested-img"> -->
+          <h1>
+            <!-- {{ with .Data.Singular }}{{ . | humanize }}: {{ end }} -->
+            <span class="taxonomy-term">{{ .Title }}</span>
           </h1>
-          <div class="mid-gray f5 f4-l">
+          <div>
             {{ .Content }}
           </div>
-        </article>
+        <!-- </article> -->
   
-        <div class="flex flex-wrap">
-          <section class="flex-ns flex-wrap justify-between w-100">
+        <div>
+          <!-- <section class="flex-ns flex-wrap justify-between w-100"> -->
             {{ range .Pages }}
             
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
@@ -28,13 +31,14 @@
               </div>
 
             {{ end }}
-          </section>
+          <!-- </section> -->
         </div>
   
-      </div>
-  
+      <!-- </div>
     </div>
-  
-  </div>
+  </div> -->
+  <a href="{{ with .Site.GetPage (printf "/%s" ( lower .Data.Plural )) }}{{ .Permalink }}{{ end }}">{{ humanize ( T "ui_all" ) }} {{ with .Data.Plural }}{{ . | humanize }}{{ end }}</a>
 
-  {{ end }}
+</main>
+</div>
+{{ end }}
