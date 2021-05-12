@@ -6,7 +6,7 @@ tags: ["tag 1","tag 2","tag 3","a very long tag","atagwithaveryverylongword","at
 projects: ["project 1","project 2","project 3"]
 categories: ["category 1","category 2","category 3"]
 description: >
-  Some examples of Docsy in action!
+  Some examples of Docsy in action! - I need a little bit more lead text: One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you’ve got a production site up and running with Docsy!
 ---
 
 One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you've got a production site up and running with Docsy!
