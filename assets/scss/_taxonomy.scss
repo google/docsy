@@ -18,7 +18,8 @@
   }
 }
 
-.td-toc .taxonomy-terms-cloud {
+// .td-toc 
+.taxonomy-terms-cloud {
   width: 100%;
   // max-width: 100%;
   // overflow: hidden;
@@ -45,6 +46,12 @@
 }
 
 .taxonomy-terms-page {
+  max-width: 800px;
+  margin: auto;
+
+  h1 {
+    margin-bottom: 1em;
+  }
 
   .taxonomy-terms {
 
@@ -155,15 +162,22 @@
 }
 
 .taxonomy-taxonomy-page {
+  max-width: 800px;
+  margin: auto;
 
-  .taxonomy-term {
-    background-color: $primary;
-    color: white;
-    
-    &::before {
-      background: $primary; 
-    }
+  h1 {
+    margin-bottom: 1em;
   }
+
+
+//   .taxonomy-term {
+//     background-color: $primary;
+//     color: white;
+    
+//     &::before {
+//       background: $primary; 
+//     }
+//   }
 }
 
 .taxonomy-count {
@@ -181,4 +195,8 @@
   border-radius: 1em;
   // color: #fff!important;
   background-color: #fff;
+}
+
+.article-meta {
+  margin-bottom: 1.5rem;
 }
