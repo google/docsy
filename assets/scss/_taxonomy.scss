@@ -7,12 +7,12 @@
 
   .taxonomy-title {
     // font-weight: bold;
-    display: inline-block; 
+    display: inline; 
     font-size: 1.25em;
     height: 1em; // 26px;
     line-height: 1em; // 26px;
-    float: left; 
-    margin-right: 1em;
+    // float: left; 
+    margin-right: 0.5em;
     padding: 0;
     // display: none; // to remove taxonomy title
   }
@@ -20,12 +20,14 @@
 
 .taxonomy-terms-cloud {
   width: 100%;
+  // max-width: 100%;
+  // overflow: hidden;
   clear: both;
-  // font-size: 0.8rem;
+  font-size: 0.8rem;
 
   .taxonomy-title {
     // font-weight: bold;
-    display: block; 
+    display: inline-block; 
     width: 100%;
     font-size: 1rem;
     // height: 1em; // 26px;
@@ -47,49 +49,84 @@
   margin: 0;
   overflow: hidden; 
   padding: 0;
-  display: inline-block; 
+  display: inline;
 
   li {
-    float: left; 
+    display: inline;
+
+    // https://stackoverflow.com/questions/3247358/how-do-i-wrap-text-with-no-whitespace-inside-a-td
+    /* These are technically the same, but use both */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+  
+    /* Adds a hyphen where the word breaks, if supported (No Blink) */
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
   }
 }
 
 .taxonomy-term {
   background: #eee;
-  border-radius: 3px 0 0 3px;
+  border-radius: 3px;
+  // border-width: 0;
   color: #999;
-  display: inline-block;
+  display: inline-block !important;
   font-size: 1em;
-  height: 1.5em; //  26px;
   line-height: 1.5em; //  26px;
-  padding: 0 1.4em 0 1.4em; // 0 20px 0 23px;
+  min-height: 1.5em; //  26px;
+  max-width: 100%;
+  padding: 0 0.5em 0 0.2em; // 0 20px 0 23px;
   position: relative;
-  margin: 0 0.5em 0.1em 0; // 0 10px 10px 0;
+  margin: 0 0.5em 0.2em 0.8em; // 0 10px 10px 0;
   text-decoration: none;
   -webkit-transition: color 0.2s;
-
-  &::before {
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-    content: '';
-    height: 0.5em; // 6px;
-    left: 0.5em; // 10px;
-    position: absolute;
-    width: 0.5em; // 6px;
-    top: 0.5em; // 10px;
-  }
   
-  &::after {
-    background: #fff;
-    border-bottom: 0.75em solid transparent; // 13px solid transparent;
-    border-left: 0.75em solid #eee; // 13px solid #eee;
-    border-top: 0.75em solid transparent; // 13px solid transparent;
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
+
+  // &::before {
+  //   background: #fff;
+  //   border-radius: 10px;
+  //   box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  //   content: '';
+  //   height: 0.5em; // 6px;
+  //   left: 0.5em; // 10px;
+  //   position: absolute;
+  //   width: 0.5em; // 6px;
+  //   top: 0.5em; // 10px;
+
+  // https://stackoverflow.com/questions/30753216/how-to-create-a-triangle-with-css-that-scales-to-parent-div-height?rq=1
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      left: -0.7em;
+      top: 0;
+      bottom: 0;
+      width: 0.8em;
+      height: 100%;
+      background: #eee;
+      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+      clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    }
+  // }
+  
+  // &::after {
+  //   background: #fff;
+  //   border-bottom: 0.75em solid transparent; // 13px solid transparent;
+  //   border-left: 0.75em solid #eee; // 13px solid #eee;
+  //   border-top: 0.75em solid transparent; // 13px solid transparent;
+  //   content: '';
+  //   position: absolute;
+  //   right: 0;
+  //   top: 0;
+  // }
   
   &:hover {
     background-color: $primary;
@@ -100,8 +137,8 @@
     }
   }
   
-  &:hover::after {
-     border-left-color: $primary; 
+  &:hover::before {
+    background: $primary; 
   }
 }
 
@@ -117,7 +154,7 @@
   margin-left: 0.6em;
   // margin-right: 0.6em;
   text-align: center;
-  border-radius: 50%;
+  border-radius: 1em;
   // color: #fff!important;
   background-color: #fff;
 }
