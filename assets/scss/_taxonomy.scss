@@ -1,6 +1,6 @@
 // Taxonomies - e.g. Tags, Categories, ...
 
-.taxonomy-terms-article {
+.td-content .taxonomy-terms-article {
   width: 100%;
   clear: both;
   font-size: 0.8rem;
@@ -53,7 +53,8 @@
     margin-bottom: 1em;
   }
 
-  .taxonomy-terms {
+  .taxonomy-terms-cloud {
+    font-size: 1em;
 
     li {
       display: block;
