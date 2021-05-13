@@ -201,3 +201,48 @@
 .article-meta {
   margin-bottom: 1.5rem;
 }
+
+article.article-teaser.article-type-docs h3 a:before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free"; 
+  // font-weight: 900; 
+  content: "\f02d";
+  padding-right: 0.5em;
+}
+
+article.article-teaser.article-type-blog h3 a:before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free"; 
+  // font-weight: 900; 
+  content: "\f781";
+  padding-right: 0.5em;
+}
+
+.all-taxonomy-terms {
+  // text-align: right;
+  // width: 100%;
+  // display: block;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.5rem;
+
+  &:before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free"; 
+    // font-weight: 900; 
+    content: "\f122";
+    padding-right: 0.5em;
+  }
+}
