@@ -217,24 +217,24 @@ nav.foldable-nav {
         transform: rotate(90deg);
         }
     }
-    .ul-1 .with-child > label:hover:before { 
-        color: $primary;
-        transform: rotate(30deg);
-        // content: "\f13a";
-        transition: transform 0.5s; 
-    }
+    // .ul-1 .with-child > label:hover:before { 
+    //     color: $primary;
+    //     transform: rotate(30deg);
+    //     // content: "\f13a";
+    //     transition: transform 0.5s; 
+    // }
     .ul-1 .with-child > input:checked ~ label:before { 
         color: $primary;
         transform: rotate(90deg);
         // content: "\f13a";
         transition: transform 0.5s; 
     }
-    .ul-1 .with-child > input:checked ~ label:hover:before { 
-        color: $primary;
-        transform: rotate(60deg) !important;
-        // content: "\f13a";
-        transition: transform 0.5s; 
-    }
+    // .ul-1 .with-child > input:checked ~ label:hover:before { 
+    //     color: $primary;
+    //     transform: rotate(60deg) !important;
+    //     // content: "\f13a";
+    //     transition: transform 0.5s; 
+    // }
     // .ul-1 > li.with-child > label:before {
     //     left: 0.1;
     // }
@@ -250,3 +250,22 @@ nav.foldable-nav {
     // }
     
 }    
+
+@media (hover: hover) and (pointer: fine) {
+    nav.foldable-nav {
+        .ul-1 .with-child > label:hover:before { 
+            color: $primary;
+            transform: rotate(30deg);
+            // content: "\f13a";
+            transition: transform 0.5s; 
+        }
+        .ul-1 .with-child > input:checked ~ label:hover:before { 
+            color: $primary;
+            transform: rotate(60deg) !important;
+            // content: "\f13a";
+            transition: transform 0.5s; 
+        }
+
+    }
+
+}
