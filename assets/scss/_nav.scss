@@ -167,7 +167,7 @@ nav.foldable-nav {
     
     /* (B) SUB-SECTIONS */
     /* (B1) TOGGLE SHOW/HIDE */
-    .with-child ul { 
+    ul.foldable { 
         // display: none; 
         max-height: 0;
         // overflow-x: visible;
@@ -176,7 +176,7 @@ nav.foldable-nav {
         // opacity: 0;
         transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
     }
-    .with-child input:checked ~ ul { 
+    input:checked ~ ul.foldable { 
         // display: block; 
         max-height: 100vmax;
         // opacity: 1;
@@ -184,7 +184,7 @@ nav.foldable-nav {
     }
     
     /* (B2) HIDE CHECKBOX */
-    .with-child input[type=checkbox] { display: none; }
+    input[type=checkbox] { display: none; }
     
     /* (B3) ADD EXPAND/COLLAPSE ICON  */
     .with-child, .without-child { 
