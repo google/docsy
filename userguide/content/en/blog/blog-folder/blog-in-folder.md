@@ -1,7 +1,7 @@
 ---
 title: "Blog post in folder"
 linkTitle: "Blog post in folder"
-date: 2018-10-06
+date: 2019-10-06
 author: "narrenfrei"
 tags: ["tag-1","blog"]
 description: >
