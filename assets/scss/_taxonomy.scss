@@ -102,11 +102,13 @@
   line-height: 1.5em; //  26px;
   min-height: 1.5em; //  26px;
   max-width: 100%;
-  padding: 0 0.5em 0 0.2em; // 0 20px 0 23px;
+  padding: 0 0.5em 0 1em; // 0 20px 0 23px;
   position: relative;
-  margin: 0 0.5em 0.2em 0.8em; // 0 10px 10px 0;
+  margin: 0 0.5em 0.2em 0; // 0 10px 10px 0;
   text-decoration: none;
   -webkit-transition: color 0.2s;
+  -webkit-clip-path: polygon(100% 0,100% 100%,0.8em 100%,0 50%,0.8em 0);
+  clip-path: polygon(100% 0,100% 100%,0.8em 100%,0 50%,0.8em 0);
   
 
   // &::before {
@@ -121,20 +123,20 @@
   //   top: 0.5em; // 10px;
 
   // https://stackoverflow.com/questions/30753216/how-to-create-a-triangle-with-css-that-scales-to-parent-div-height?rq=1
-    &::before {
-      content: '';
-      position: absolute;
-      display: block;
-      left: -0.8em;
-      top: 0;
-      bottom: 0;
-      width: 0.81em;
-      height: 100%;
-      background: #eee;
-      -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
-      clip-path: polygon(100% 0, 100% 100%, 0 50%);
-      border-width: 0;
-    }
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   display: block;
+    //   left: -0.8em;
+    //   top: 0;
+    //   bottom: 0;
+    //   width: 0.81em;
+    //   height: 100%;
+    //   background: #eee;
+    //   -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    //   clip-path: polygon(100% 0, 100% 100%, 0 50%);
+    //   border-width: 0;
+    // }
   // }
   
   // &::after {
