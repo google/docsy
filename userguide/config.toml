@@ -80,6 +80,17 @@ description = "Docsy does docs"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
+[languages.no]
+title = "Docsy"
+description = "Docsy er operativsystem for skyen"
+languageName ="Norsk"
+contentDir = "content/no"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
+[languages.no.params.taxonomy]
+taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyPageHeader = ["projects", "tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [markup]
   [markup.goldmark]
