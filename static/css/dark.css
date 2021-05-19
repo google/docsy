@@ -1,0 +1,22 @@
+/*
+
+Try out dark mode as mentioned in:
+https://github.com/google/docsy/issues/331
+https://github.com/GoogleContainerTools/skaffold/commit/ccdffd1e27785b203f953dd9b8b8735972ca5d99
+
+*/
+html {
+  background-color: #171717 !important;
+  }
+ 
+  body {
+  filter: invert(100%) hue-rotate(180deg) brightness(105%) contrast(85%);
+  -webkit-filter: invert(100%) hue-rotate(180deg) brightness(105%) contrast(85%);
+  }
+ 
+  img,
+  video,
+  iframe {
+  filter: hue-rotate(180deg) contrast(100%) invert(100%);
+  -webkit-filter: hue-rotate(180deg) contrast(100%) invert(100%);
+  } 
