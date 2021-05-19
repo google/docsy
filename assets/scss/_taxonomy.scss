@@ -1,6 +1,7 @@
 // Taxonomies - e.g. Tags, Categories, ...
 
-.td-content .taxonomy-terms-article {
+//.td-content 
+.taxonomy-terms-article {
   width: 100%;
   clear: both;
   font-size: 0.8rem;
@@ -204,7 +205,7 @@
   margin-bottom: 1.5rem;
 }
 
-article.article-teaser.article-type-docs h3 a:before {
+.article-teaser.article-type-docs h3 a:before {
   display: inline-block;
   font-style: normal;
   font-variant: normal;
@@ -216,7 +217,7 @@ article.article-teaser.article-type-docs h3 a:before {
   padding-right: 0.5em;
 }
 
-article.article-teaser.article-type-blog h3 a:before {
+.article-teaser.article-type-blog h3 a:before {
   display: inline-block;
   font-style: normal;
   font-variant: normal;
