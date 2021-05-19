@@ -87,10 +87,15 @@ languageName ="Norsk"
 contentDir = "content/no"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
+[languages.no.taxonomies]
+tag = "tags"
+category = "categories"
+project = "projects"
+norsktag = "norsk tags"
 [languages.no.params.taxonomy]
 taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
 taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
-taxonomyPageHeader = ["projects", "tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+taxonomyPageHeader = ["projects", "tags", "norsk tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [markup]
   [markup.goldmark]
