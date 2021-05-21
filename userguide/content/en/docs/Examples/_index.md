@@ -34,3 +34,4 @@ Example sites that include a moderate to high amount of customization:
 | [Docsy Just Docs](https://docsyjustdocs.netlify.com/) | https://github.com/LisaFC/justdocs |
 | [Thunderhead Engineering Product Support](https://support.thunderheadeng.com/) | https://gitlab.com/tecidev/support (private) |
 | [Kubernetes](https://kubernetes.io) | https://github.com/kubernetes/website |
+| [XLT](https://xltdoc.xceptance.com/) | https://github.com/Xceptance/xlt-documentation |
