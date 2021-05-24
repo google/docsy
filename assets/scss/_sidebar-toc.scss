@@ -1,7 +1,7 @@
 //
 // Right side toc
 //
-.td-toc {
+.td-sidebar-toc {
     border-left: 1px solid $border-color;
 
     @supports (position: sticky) {
@@ -15,6 +15,10 @@
     padding-top: 0.75rem;
     padding-bottom: 1.5rem;
     vertical-align: top;
+
+}
+
+.td-toc {
 
     a {
         display: block;
