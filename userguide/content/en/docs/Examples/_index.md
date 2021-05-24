@@ -21,7 +21,8 @@ Example sites that have low to no customization:
 | [Navidrome Music Server](https://www.navidrome.org) | https://github.com/navidrome/website | 
 | https://docs.agilebase.co.uk/ | https://github.com/okohll/abdocs | 
 | https://jvmperf.net/ | https://github.com/cchesser/java-perf-workshop | 
-| [gRPC](https://www.grpc.io/) | https://github.com/grpc/grpc.io 
+| [gRPC](https://www.grpc.io/) | https://github.com/grpc/grpc.io |
+| [tekton.dev](https://tekton.dev/) | https://github.com/tektoncd |
 
 ## Customized Docsy examples
 
