@@ -23,6 +23,7 @@ Example sites that have low to no customization:
 | https://jvmperf.net/ | https://github.com/cchesser/java-perf-workshop | 
 | [gRPC](https://www.grpc.io/) | https://github.com/grpc/grpc.io |
 | [tekton.dev](https://tekton.dev/) | https://github.com/tektoncd |
+| [fluxcd.io](https://fluxcd.io) | https://github.com/fluxcd/website |
 
 ## Customized Docsy examples
 
