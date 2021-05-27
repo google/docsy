@@ -5,6 +5,8 @@ icon: fas fa-tools
 tags: ["tag 1","tag 2","tag 3","a very long tag","atagwithaveryverylongword","atagwithaveryveryveryveryveryverylongword","one more long tag existing of more words","And another long tag existing of much more words, to see if the screen will explode, wenn it's really very very long","Testtag"]
 projects: ["project 1","project 2","project 3"]
 categories: ["category 1","category 2","category 3"]
+text tags: ["simple text tag","another text tag","one more text tag"]
+fruits: ["Apple","Carrot","Lemon"]
 description: >
   Some examples of Docsy in action! - I need a little bit more lead text: One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you’ve got a production site up and running with Docsy!
 ---
