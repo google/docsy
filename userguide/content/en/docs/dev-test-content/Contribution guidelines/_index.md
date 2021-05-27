@@ -5,6 +5,8 @@ weight: 9
 icon: fas fa-indent
 tags: ["tag 1","tag 2","tag 4"]
 projects: ["project 1","project 2","project 4"]
+text tags: ["simple text tag","text tag","one more text tag"]
+fruits: ["Apple", "Pepper"]
 description: >
   How to contribute to Docsy
 ---
