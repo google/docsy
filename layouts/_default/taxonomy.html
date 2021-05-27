@@ -23,7 +23,7 @@
             
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
             
-              <article class="article-teaser article-type-{{ with .Type }}{{ ( lower . ) }}{{ end }}">
+              <article class="article-teaser article-type-{{ with .Type }}{{ ( urlize . ) }}{{ end }}">
 
                 <h3>
                     <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>

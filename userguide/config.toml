@@ -91,7 +91,7 @@ time_format_blog = "02.01.2006"
 tag = "tags"
 category = "categories"
 project = "projects"
-norsktag = "norsk tags"
+"norsk tag" = "norsk tags"
 [languages.no.params.taxonomy]
 taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
 taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
@@ -246,11 +246,13 @@ enable = true
 disable_toc = false
 
 [params.taxonomy]
-taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
-taxonomyCloudTitle = ["Tag Cloud", "Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
-taxonomyPageHeader = ["projects", "tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+taxonomyCloud = ["fruits", "text tags", "tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloudTitle = ["Fruits are healthy", "Simple Tags Layout", "Tag Cloud", "Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyPageHeader = ["fruits", "text tags", "projects", "tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [taxonomies]
 tag = "tags"
 category = "categories"
 project = "projects"
+"text tag" = "text tags"
+fruit = "fruits"
