@@ -1,46 +1,32 @@
 // Taxonomies - e.g. Tags, Categories, ...
 
-//.td-content 
 .taxonomy-terms-article {
   width: 100%;
   clear: both;
   font-size: 0.8rem;
 
   .taxonomy-title {
-    // font-weight: bold;
     display: inline; 
     font-size: 1.25em;
-    height: 1em; // 26px;
-    line-height: 1em; // 26px;
-    // float: left; 
+    height: 1em;
+    line-height: 1em;
     margin-right: 0.5em;
     padding: 0;
-    // display: none; // to remove taxonomy title
   }
 }
 
-// .td-toc 
 .taxonomy-terms-cloud {
   width: 100%;
-  // max-width: 100%;
-  // overflow: hidden;
   clear: both;
   font-size: 0.8rem;
 
   .taxonomy-title {
-    // font-weight: bold;
     display: inline-block; 
     width: 100%;
     font-size: 1rem;
-    // height: 1em; // 26px;
-    // line-height: 1em; // 26px;
-    // float: left; 
-    // margin-right: 1em;
-    // padding: 0;
-    // display: none; // to remove taxonomy title
     font-weight: 700;
-    color: #30638E;
-    border-bottom: 1px #30638E solid;
+    color: $primary;
+    border-bottom: 1px $primary solid;
     margin-bottom: 1em;
     padding-bottom: 0.375rem;
     margin-top: 1em;
@@ -98,20 +84,13 @@
   display: inline;
 
   li {
-    display: inline;
-
     // https://stackoverflow.com/questions/3247358/how-do-i-wrap-text-with-no-whitespace-inside-a-td
-    /* These are technically the same, but use both */
+    display: inline;
     overflow-wrap: break-word;
     word-wrap: break-word;
-  
     -ms-word-break: break-all;
-    /* This is the dangerous one in WebKit, as it breaks things wherever */
     word-break: break-all;
-    /* Instead use this non-standard one: */
     word-break: break-word;
-  
-    /* Adds a hyphen where the word breaks, if supported (No Blink) */
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -121,18 +100,13 @@
 
 .taxonomy-count {
   font-size: 0.8em;
-  // height: 1.25em; // 26px;
-  line-height: 1.25em; // 26px;
-
-  // from W3.CSS https://www.w3schools.com/w3css/w3css_badges.asp
+  line-height: 1.25em;
   display: inline-block;
   padding-left: 0.6em;
   padding-right: 0.6em;
   margin-left: 0.6em;
-  // margin-right: 0.6em;
   text-align: center;
   border-radius: 1em;
-  // color: #fff!important;
   background-color: $white;
 }
 
@@ -140,16 +114,15 @@
   background: $gray-200;
   border-width: 0;
   border-radius: 0 3px 3px 0;
-  // border-width: 0;
   color: $gray-600;
   display: inline-block;
   font-size: 1em;
-  line-height: 1.5em; //  26px;
-  min-height: 1.5em; //  26px;
+  line-height: 1.5em;
+  min-height: 1.5em;
   max-width: 100%;
-  padding: 0 0.5em 0 1em; // 0 20px 0 23px;
+  padding: 0 0.5em 0 1em;
   position: relative;
-  margin: 0 0.5em 0.2em 0; // 0 10px 10px 0;
+  margin: 0 0.5em 0.2em 0;
   text-decoration: none;
   -webkit-transition: color 0.2s;
   -webkit-clip-path: polygon(100% 0,100% 100%,0.8em 100%,0 50%,0.8em 0);
@@ -177,14 +150,13 @@
     border-width: 0;
     border-radius: 0;
     color: $gray-600;
-    // display: inline-block !important;
     font-size: 1em;
-    line-height: 1.5em; //  26px;
-    min-height: 1.5em; //  26px;
+    line-height: 1.5em;
+    min-height: 1.5em;
     max-width: 100%;
-    padding: 0; // 0 20px 0 23px;
+    padding: 0;
     position: relative;
-    margin: 0; // 0 10px 10px 0;
+    margin: 0;
     text-decoration: none;
     -webkit-clip-path: none;
     clip-path: none;
@@ -211,7 +183,7 @@
 
   .taxonomy-count {
     font-size: 1em;
-    line-height: 1.25em; // 26px;
+    line-height: 1.25em;
     display: inline-block;
     padding: 0;
     margin: 0;
@@ -264,20 +236,16 @@
   }
 
   .taxonomy-term {
-    // padding: 4px 16px;
-    // right: 9999px;
     background: none;
     border-width: 0;
     border-radius: 0;
     color: $gray-600;
-    // display: inline-block !important;
     font-size: 1em;
-    line-height: 2.5em; //  26px;
+    line-height: 2.5em;
     max-width: 100%;
-    padding: 0; // 0 20px 0 23px;
+    padding: 0;
     position: relative;
-    margin: 0; // 0 10px 10px 0;
-    // margin-right: 1em;
+    margin: 0;
     text-decoration: none;
     -webkit-clip-path: none;
     clip-path: none;
@@ -330,7 +298,6 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font-family: "Font Awesome 5 Free"; 
-  // font-weight: 900; 
   content: "\f02d";
   padding-right: 0.5em;
 }
@@ -342,15 +309,11 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font-family: "Font Awesome 5 Free"; 
-  // font-weight: 900; 
   content: "\f781";
   padding-right: 0.5em;
 }
 
 .all-taxonomy-terms {
-  // text-align: right;
-  // width: 100%;
-  // display: block;
   font-weight: 500;
   line-height: 1.2;
   font-size: 1.5rem;
@@ -362,7 +325,6 @@
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     font-family: "Font Awesome 5 Free"; 
-    // font-weight: 900; 
     content: "\f122";
     padding-right: 0.5em;
   }
