@@ -18,6 +18,13 @@
 
 }
 
+.td-page-meta {
+    a {
+        display: block;
+        font-weight: $font-weight-medium;
+    }
+}
+
 .td-toc {
 
     a {
@@ -33,12 +40,6 @@
 
     li li {
         margin-left: 0.5rem;
-    }
-
-    .td-page-meta {
-        a {
-            font-weight: $font-weight-medium;
-        }
     }
 
     #TableOfContents {
