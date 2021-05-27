@@ -1,10 +1,6 @@
 {{ $context := .context  }}
-{{ $taxo := .taxo  }} <!-- Use the plural form here -->
+{{ $taxo := .taxo  }}
 {{ $title := .title  }}
-<!-- <script>console.log({{ $context.Site.Params }});</script>
-<script>console.log({{ $context.Site.Taxonomies }});</script> -->
-<!-- {{ if isset $context.Site.Taxonomies ( lower $taxo ) }} {{ index $context.Site.Taxonomies ( lower $taxo ) }}{{ end }} -->
-
 {{ if isset $context.Site.Taxonomies ( lower $taxo ) }}
   {{ $taxonomy := index $context.Site.Taxonomies ( lower $taxo ) }}
   {{ if (gt (len $taxonomy) 0)}}

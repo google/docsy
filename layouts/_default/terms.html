@@ -1,48 +1,8 @@
 {{ define "main" }}
 <div class="td-content">
   <main class="taxonomy-terms-page">
-<!-- {{ $section_to_display := .Pages }} -->
-<!-- <div class="w-100 ph4 pb5 pb6-ns pt1 pt3-ns"> -->
-  <!-- <div class="flex"> -->
-    <!-- <div class="w-100 w-80-l ph0 ph4-l"> -->
-      <!-- <article class="w-100 nested-copy-line-height nested-links nested-img"> -->
-        <h1>
-          {{ .Title }}
-        </h1>
-        <!-- Testing some options for terms.html
-        <h2>
-          Option 1: Use the partial taxonomy_terms_cloud.html
-        </h2> -->
-
-        {{ partial "taxonomy_terms_cloud.html" (dict "context" . "taxo" ( lower .Title ) ) }}
-        <!-- <h2>
-          Option 2: Layouting a seperate list for the terms.html
-        </h2> -->
-
-      <!-- </article> -->
-      <!-- <div class="pa3 pa4-ns w-100 v-top column-count-3-l column-gap-1-l"> -->
-          <!-- <ul>
-            {{ range $key, $value := .Data.Terms }}
-              <div class="break-inside-avoid-l nested-copy-line-height mb5"> -->
-                <!-- <li>
-                  <a href="{{ "/" | relLangURL }}{{ $.Data.Plural | urlize }}/{{ $key | urlize }}" class="link black hover-blue">{{ $key }}</a>
-                </li> -->
-                <!-- {{ range $value.Pages }}
-                  <h3>
-                    <a href="{{ .Permalink }}" class="link blue">
-                      {{ .Title }}
-                    </a>
-                  </h3>
-                {{ end }} -->
-              <!-- </div> -->
-
-          <!-- {{ end }} -->
-
-          <!-- </ul> -->
-      <!-- </div> -->
-    <!-- </div> -->
-  <!-- </div> -->
-<!-- </div> -->
+    <h1>{{ .Title }}</h1>
+    {{ partial "taxonomy_terms_cloud.html" (dict "context" . "taxo" ( lower .Title ) ) }}
   </main>
 </div>
 {{ end }}
