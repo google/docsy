@@ -261,6 +261,7 @@
     
     &:hover::before {
       background: none;
+      text-shadow: 0 0 3px $gray-900;
     }
   }
 
