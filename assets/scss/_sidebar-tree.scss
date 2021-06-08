@@ -99,8 +99,8 @@
 
     .td-sidebar-link.tree-root{
         font-weight: $font-weight-bold;
-        color: $primary;
-        border-bottom: 1px $primary solid;
+        color: $td-sidebar-tree-root-color;
+        border-bottom: 1px $td-sidebar-tree-root-color solid;
         margin-bottom: 1rem;
     }
 }
