@@ -16,7 +16,7 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+# disableKinds = ["taxonomy", "taxonomyTerm"]
 
 # Highlighting config
 pygmentsCodeFences = true
@@ -80,6 +80,22 @@ description = "Docsy does docs"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
+[languages.no]
+title = "Docsy"
+description = "Docsy er operativsystem for skyen"
+languageName ="Norsk"
+contentDir = "content/no"
+time_format_default = "02.01.2006"
+time_format_blog = "02.01.2006"
+[languages.no.taxonomies]
+tag = "tags"
+category = "categories"
+project = "projects"
+"norsk tag" = "norsk tags"
+[languages.no.params.taxonomy]
+taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyPageHeader = ["projects", "tags", "norsk tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [markup]
   [markup.goldmark]
@@ -170,7 +186,7 @@ no = 'Sorry to hear that. Please <a href="https://github.com/google/docsy/issues
 # If you want this feature, but occasionally need to remove the Reading time from a single page, 
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
-enable = false
+enable = true
 
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
@@ -230,3 +246,15 @@ enable = true
 
 [params.print]
 disable_toc = false
+
+[params.taxonomy]
+taxonomyCloud = ["fruits", "text tags", "tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
+taxonomyCloudTitle = ["Fruits are healthy", "Simple Tags Layout", "Tag Cloud", "Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyPageHeader = ["fruits", "text tags", "projects", "tags", "categories"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+
+[taxonomies]
+tag = "tags"
+category = "categories"
+project = "projects"
+"text tag" = "text tags"
+fruit = "fruits"
