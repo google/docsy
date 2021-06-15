@@ -15,19 +15,19 @@ Docsy supports Hugo's Taxonomies (see: https://gohugo.io/content-management/taxo
 To understand the usage of taxonomies you should understand the following terminology:
 
 Taxonomy
-: a categorization that can be used to classify content - e.g.: Tags, Catagories, Projects, People
+: a categorization that can be used to classify content - e.g.: Tags, Categories, Projects, People
 
 Term
 : a key within the taxonomy - e.g. within projects: Project A, Project B
 
 Value
-: a piece of content assigned to a term - e.g. a page of your site, that belongs to a specifc project
+: a piece of content assigned to a term - e.g. a page of your site, that belongs to a specific project
 
 A example taxonomy for a movie website you can find in the official Hugo docs: https://gohugo.io/content-management/taxonomies/#example-taxonomy-movie-website
 
 ## Parameters
 
-There are various parameter to control the functionalty of taxonomies in the `config.toml`.
+There are various parameter to control the functionality of taxonomies in the `config.toml`.
 
 By default taxonomies for `tags` and `categories` are enabled in Hugo (see: https://gohugo.io/content-management/taxonomies/#default-taxonomies). In Docsy taxonomies are __disabled__ by default in the `config.toml`:
 
@@ -46,7 +46,7 @@ category = "categories"
 project = "projects"
 ```
 
-You can use the following paramters in your projects `config.toml` to control the output of the assigned taxonomy terms for each article resp. page of your docs and/or blog section in Docsy or a "tag cloud" in Docsy's right sidebar:
+You can use the following parameters in your projects `config.toml` to control the output of the assigned taxonomy terms for each article resp. page of your docs and/or blog section in Docsy or a "tag cloud" in Docsy's right sidebar:
 
 ```toml
 [params.taxonomy]
@@ -59,16 +59,16 @@ The settings above would only show a taxonomy cloud for `projects` and `tags` (w
 
 To disable any taxonomy cloud you have to set the Parameter `taxonomyCloud = []` resp. if you doesn't want to show the assigned terms you have to set `taxonomyPageHeader = []`. 
 
-As default the plural label of a taxonomy is used as it cloud title. You can overwrite the default cloud title with `taxonomyCloudTitle`. But if you do so, you have to define a manual title for each enabled taxonomy cloud (`taxonomyCloud` and `taxonomyCloudTitle` must have the sam length!). 
+As default the plural label of a taxonomy is used as it cloud title. You can overwrite the default cloud title with `taxonomyCloudTitle`. But if you do so, you have to define a manual title for each enabled taxonomy cloud (`taxonomyCloud` and `taxonomyCloudTitle` must have the same length!). 
 
-If you doesn't set the parameters `taxonomyCloud` resp. `taxonomyPageHeader` the taxonomy clouds resp. assigned terms for all definied taxonomies will be generated.
+If you doesn't set the parameters `taxonomyCloud` resp. `taxonomyPageHeader` the taxonomy clouds resp. assigned terms for all defined taxonomies will be generated.
 ## Partials
 
-The by default used partials for displaying taxonomies are so definied, that you should be able to use them also easily in your own layouts.
+The by default used partials for displaying taxonomies are so defined, that you should be able to use them also easily in your own layouts.
 
 ### taxonomy_terms_article
 
-The partial `taxonomy_terms_article` shows all asigned terms of an given taxonomy (partial parameter `taxo`) of an article respectively page (partial parameter `context`, most of the time the current page or context `.`).
+The partial `taxonomy_terms_article` shows all assigned terms of an given taxonomy (partial parameter `taxo`) of an article respectively page (partial parameter `context`, most of the time the current page or context `.`).
 
 Example usage in `layouts/docs/list.html` for the header of each page in the docs section:
 
@@ -79,7 +79,7 @@ Example usage in `layouts/docs/list.html` for the header of each page in the doc
 {{ end }}
 ```
 
-This will gave you for each in the current page (resp. context) definied taxonomy a list with all assigned terms:
+This will gave you for each in the current page (resp. context) defined taxonomy a list with all assigned terms:
 ```html
 <div class="taxonomy taxonomy-terms-article taxo-categories">
   <h5 class="taxonomy-title">Categories:</h5>
@@ -101,7 +101,7 @@ This will gave you for each in the current page (resp. context) definied taxonom
 
 The partial `taxonomy_terms_cloud` shows all used terms of an given taxonomy (partial parameter `taxo`) for your site (partial parameter `context`, most of the time the current page or context `.`) and with the parameter `title` as headline.
 
-Example usage in partial `taxonomy_terms_clouds` for showing all definied taxonomies and its terms:
+Example usage in partial `taxonomy_terms_clouds` for showing all defined taxonomies and its terms:
 
 ```go-html-template
 {{ $context := . }}
@@ -110,10 +110,10 @@ Example usage in partial `taxonomy_terms_clouds` for showing all definied taxono
 {{ end }}
 ```
 
-Es an example this will gave you for following HTML markup for the taxonomy `categories`:
+As an example this will gave you for following HTML markup for the taxonomy `categories`:
 ```html
 <div class="taxonomy taxonomy-terms-cloud taxo-categories">
-  <h5 class="taxonomy-title">Cloud of Catagories</h5>
+  <h5 class="taxonomy-title">Cloud of Categories</h5>
   <ul class="taxonomy-terms">
     <li><a class="taxonomy-term" href="//localhost:1313/categories/category-1/" data-taxonomy-term="category-1"><span class="taxonomy-label">category 1</span><span class="taxonomy-count">3</span></a></li>
     <li><a class="taxonomy-term" href="//localhost:1313/categories/category-2/" data-taxonomy-term="category-2"><span class="taxonomy-label">category 2</span><span class="taxonomy-count">1</span></a></li>
@@ -125,7 +125,7 @@ Es an example this will gave you for following HTML markup for the taxonomy `cat
 
 ### taxonomy_terms_clouds
 
-The partial `taxonomy_terms_clouds` is a wrapper for the partial `taxonomy_terms_cloud` with the only parameter `context` (most of the time the current page or context `.`) and checks the taxonomy parameters of you projects `config.toml` to loop threw all listed taxonomies in the parameter `taxonomyCloud` resp. all definied taxonomies of your page, if `taxonomyCloud` isn't set.
+The partial `taxonomy_terms_clouds` is a wrapper for the partial `taxonomy_terms_cloud` with the only parameter `context` (most of the time the current page or context `.`) and checks the taxonomy parameters of you projects `config.toml` to loop threw all listed taxonomies in the parameter `taxonomyCloud` resp. all defined taxonomies of your page, if `taxonomyCloud` isn't set.
 
 ## Multi language support for taxonomies
 
