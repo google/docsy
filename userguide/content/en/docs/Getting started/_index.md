@@ -318,6 +318,10 @@ To temporarily allow more open files:
 Note that you might need to set these limits for each new shell. 
 [Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
 
+### Windows Subsystem for Linux (WSL)
+
+If you're using WSL, ensure that you're running `hugo` on a Linux mount of the filesystem, rather than a Windows one, otherwise you may get unexpected errors.
+
 ## What's next?
 
 * [Add content and customize your site](/docs/adding-content/)
