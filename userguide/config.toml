@@ -94,7 +94,7 @@ project = "projects"
 "norsk tag" = "norsk tags"
 [languages.no.params.taxonomy]
 taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
-taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyCloudTitle = ["Norsk Tag Cloud", "Norsk Cloud of Categories"] # if used, must have same lang as taxonomyCloud
 taxonomyPageHeader = ["projects", "tags", "norsk tags"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [markup]
@@ -249,7 +249,7 @@ disable_toc = false
 
 [params.taxonomy]
 taxonomyCloud = ["fruits", "text tags", "tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
-taxonomyCloudTitle = ["Fruits are healthy", "Simple Tags Layout", "Tag Cloud", "Cloud of Catagories"] # if used, must have same lang as taxonomyCloud
+taxonomyCloudTitle = ["Fruits are healthy", "Simple Tags Layout", "Tag Cloud", "Cloud of Categories"] # if used, must have same lang as taxonomyCloud
 taxonomyPageHeader = ["fruits", "text tags", "projects", "tags", "categories"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [taxonomies]
