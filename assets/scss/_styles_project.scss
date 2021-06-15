@@ -103,13 +103,20 @@ assets/scss/_styles_project.scss
   overflow: hidden;
 }
 .orange-bar {
-  background-color: #ffad00;
+  top: 1945px;
+  left: 0px;
+  width: auto;
   height: 10px;
+  background: #FFAD00 0% 0% no-repeat padding-box;
+  opacity: 1;
 }
 .rounded-cor {
   border-radius: 5% !important;
 }
+.link {
+  color: $tertiary;
 
+}
 
 .card {
   position: relative;
