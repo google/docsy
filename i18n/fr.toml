@@ -43,6 +43,8 @@ other = "Créer un problème dans la documentation"
 other = "Créer un problème dans le projet"
 [post_posts_in]
 other = "Messages dans"
+[post_reading_time]
+other = "minutes à lire"
 
 # Print support
 [print_printable_section]
