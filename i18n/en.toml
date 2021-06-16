@@ -47,6 +47,8 @@ other = "Create documentation issue"
 other = "Create project issue"
 [post_posts_in]
 other = "Posts in"
+[post_reading_time]
+other = "minute read"
 
 # Print support
 [print_printable_section]

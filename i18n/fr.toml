@@ -38,18 +38,21 @@ other = "Modifier cette page"
 [post_create_child_page]
 other = "Create child page"
 [post_create_issue]
-other = "Créer un problème dans la documentation"
+other = "Signaler un problème dans la documentation"
 [post_create_project_issue]
-other = "Créer un problème dans le projet"
+other = "Signler un problème dans le projet"
 [post_posts_in]
 other = "Messages dans"
+[post_reading_time]
+other = "minutes à lire"
+
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "Version imprimable multipages."
 [print_click_to_print]
-other = "Click here to print"
+other = "Cliquer ici pour imprimer"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "Retour à la version régulière"
 [print_entire_section]
-other = "Print entire section"
+other = "Imprimer la section entière"
