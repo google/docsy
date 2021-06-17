@@ -19,7 +19,7 @@
     {{ end }}
     {{ $editURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
     {{ $createURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
-    {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (htmlEscape $.Title )}}
+    {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title )}}
     {{ $newPageStub := resources.Get "stubs/new-page-template.md" }}
     {{ $newPageQS := querify "value" $newPageStub.Content "filename" "change-me.md" | safeURL }}
     {{ $newPageURL := printf "%s/new/%s?%s"  $gh_repo $gh_repo_path $newPageQS }}
