@@ -1,6 +1,14 @@
 {{ $links := .Site.Params.links }}
 <footer class="bg-dark py-5 row d-print-none">
-  <div class="container-fluid mx-sm-5">
+  <div class="footer__links">
+    <nav>
+      {{ with site.GetPage "page"}} <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ $sections := slice "docs" "showcase" "community" "dev_tools" "get-started"}} {{
+      range $sections }} {{ with site.GetPage "section" . }}<a class="text-white" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>  {{ end }} {{ end }}
+
+
+    </nav>
+  </div>
+  <div class="container-fluid">
     <div class="row">
       <div class="col-6 col-sm-4 text-xs-center order-sm-2">
         {{ with $links }}
