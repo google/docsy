@@ -86,6 +86,26 @@ assets/scss/_styles_project.scss
     margin-top: 7rem;
   }
 }
+.footer__links {
+  width: 40%;
+  margin: auto;
+  padding-bottom: .5rem;
+
+  nav a {
+    display: block;
+    text-align: center;
+  }
+
+
+
+  @media only screen and (min-width: 768px) {
+    nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+}
 
 .atsign-video {
   max-width: 1200px;
