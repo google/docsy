@@ -57,7 +57,7 @@ github_branch = "release"
 
 Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
 
-```toml
+```yaml
 ---
 title: "Example Page"
 linkTitle: "Example Page"
