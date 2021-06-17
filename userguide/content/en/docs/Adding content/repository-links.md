@@ -19,7 +19,7 @@ Currently Docsy supports only GitHub repository links "out of the box". If you a
 
 ## Link configuration
 
-There are three variables you can configure in `config.toml` to set up links:
+There are four variables you can configure in `config.toml` to set up links, as well as one in your page metadata.
 
 ### `github_repo`
 
@@ -53,4 +53,20 @@ Specify a value here if you have would like to reference a different branch for 
 github_branch = "release"
 ```
 
+### `github_url` (optional)
+
+Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
+
+```yaml
+---
+title: "Example Page"
+linkTitle: "Example Page"
+date: 2017-01-05
+github_url: "https://github.com/MyUsername/myrepo/edit/main/README.md"
+description: >
+  An example page.
+---
+```
+
+This can be useful if you have page source files in multiple Git repositories, or require a non-GitHub URL.  Pages using this value have **Edit this page** links only.
 

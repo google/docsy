@@ -46,7 +46,6 @@ other = "Messages dans"
 [post_reading_time]
 other = "minutes à lire"
 
-
 # Print support
 [print_printable_section]
 other = "Version imprimable multipages."
