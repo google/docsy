@@ -8,7 +8,7 @@ description: >
   Structure the content using taxonomies like tags, categories, labels.
 ---
 
-Docsy supports Hugo's Taxonomies (see: https://gohugo.io/content-management/taxonomies/) in its docs and blog section. 
+Docsy supports Hugo's Taxonomies (see: https://gohugo.io/content-management/taxonomies/) in its docs and blog section. You can see the default layout and can test the behavior of the generated links on this page. 
 
 ## Terminology
 
