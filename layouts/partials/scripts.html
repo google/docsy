@@ -5,6 +5,21 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" integrity="sha384-uQikAXnCAqsMb3ygtdqBYvcwvHUkzGIpjdGyy9owhURXHUxLC5LgTcSxJQH/RzjK" crossorigin="anonymous"></script>
 {{ end }}
 
+{{ if .Site.Params.markmap.enable }}
+<style>
+.markmap > svg {
+  width: 100%;
+  height: 300px;
+}
+</style>
+<script>
+window.markmap = {
+  autoLoader: { manual: true },
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
+{{ end }}
+
 <!-- load the deflate.js for plantuml support -->
 {{ if .Site.Params.plantuml.enable }}
 <script src='{{ "/js/deflate.js" | relURL }}'></script>
@@ -28,11 +43,12 @@
 {{ $jsAnchor := resources.Get "js/anchor.js" }}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
 {{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . }}
+{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . }}
 {{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . }}
 {{ if .Site.Params.offlineSearch }}
 {{ $jsSearch = resources.Get "js/offline-search.js" }}
 {{ end }}
-{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml) | resources.Concat "js/main.js" }}
+{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap) | resources.Concat "js/main.js" }}
 {{ if .Site.IsServer }}
 <script src="{{ $js.RelPermalink }}"></script>
 {{ else }}

@@ -385,6 +385,77 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
 ```
 
+## MindMap support with MarkMap
+
+[MarkMap](https://markmap.js.org/) is a Javascript library for rendering simple text definitions to MindMap in the browser.
+
+For example, the following defines a simple MindMap:
+
+````
+```markmap
+# markmap
+
+## Links
+
+- <https://markmap.js.org/>
+- [GitHub](https://github.com/gera2ld/markmap)
+
+## Related
+
+- [coc-markmap](https://github.com/gera2ld/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+
+## Features
+
+- links
+- **inline** ~~text~~ *styles*
+- multiline
+  text
+- `inline code`
+-
+    ```js
+    console.log('code block');
+    ```
+- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+```
+````
+
+Automatically renders to:
+
+```markmap
+# markmap
+
+## Links
+
+- <https://markmap.js.org/>
+- [GitHub](https://github.com/gera2ld/markmap)
+
+## Related
+
+- [coc-markmap](https://github.com/gera2ld/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+
+## Features
+
+- links
+- **inline** ~~text~~ *styles*
+- multiline
+  text
+- `inline code`
+-
+    ```js
+    console.log('code block');
+    ```
+- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+```
+
+To enable/disable MarkMap, update `config.toml`:
+
+```toml
+[params.markmap]
+enable = true
+```
+
 ## Customizing templates
 
 ### Add code to head or before body end
