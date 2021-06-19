@@ -17,4 +17,9 @@
         {{- highlight $.Inner $lang $highlight -}}
       {{ end }}
   </div>
+  {{ with $.Get "footer" }}
+    <div class="card-footer">
+      {{ $.Get "footer" | markdownify }}
+    </div>
+  {{ end }}
 </div>
