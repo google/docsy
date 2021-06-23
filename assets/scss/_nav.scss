@@ -2,9 +2,9 @@
 // Main navbar
 //
 .td-navbar-cover {
-    background: gray;
+    background: #565656;
     @include media-breakpoint-up(md) {
-        background: gray !important;
+        background: #565656 !important;
         .nav-link {
             text-shadow: 1px 1px 2px gray;
         }
@@ -15,12 +15,12 @@
 }
 
 .navbar-bg-onscroll {
-    background: gray !important;
+    background: #565656 !important;
     opacity: inherit;
 }
 
 .td-navbar {
-    background: gray;
+    background: #565656;
     min-height: 4rem;
     margin: 0;
     z-index: 32;
@@ -100,7 +100,7 @@
             font-variant: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
-            font-family: "Times New Roman";
+            font-family: "Font Awesome 5 Free";
             font-weight: 900;
             content: "\f0d9";
             padding-left: 0.5em;
