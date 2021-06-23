@@ -12,33 +12,7 @@ Welcome to the Docsy theme user guide! This guide shows you how to get started c
 
 ## What is Docsy?
 
-Docsy is a theme for the [Hugo](https://gohugo.io/) static site generator that's specifically designed for technical
-documentation sets and has a lot of best practices built in. Use Docsy to get a working and reliable documentation
-site up and running fast, and then get back to focusing on great content for your users.
-[Learn more about Docsy](/about).
 
-In addition to the theme itself, we provide an [example site](https://github.com/google/docsy-example) that uses lots of Docsy features and has a useful skeleton site structure (with advice for what to put in it!) for a large technical documentation set. You can copy the entire site and edit it for your own projects, or just explore the site and its source to see what Docsy can do. The site you're currently reading also uses Docsy and is a useful example of a smaller Docsy docset: feel free to copy it or borrow from it if it suits your needs better than the "big" example.
-
-Docsy itself does **not** provide:
-
-* **Source hosting and management**: Our theme and site source files live on [GitHub](https://github.com/), which is the simplest approach for most projects. However, you can also keep your project files in [GitLab](https://about.gitlab.com/), [BitBucket](https://bitbucket.org/product), locally, or wherever you like. Be aware that where your source files live may affect the Docsy features you can use (such as letting users file documentation issues) and site deployment options.
-* **Site deployment**: You can find out about deployment options in [Previews and Deployment](./deployment/). This site uses [Netlify](https://www.netlify.com/).
-
-Docsy also doesn't actually generate your site's HTML files: that's Hugo's job! Hugo takes your Markdown or HTML doc source files and Docsy's theme files and builds them into a static site for deployment. You can find out more about Hugo and how it works in the [Hugo documentation](https://gohugo.io/documentation/).
-
-## Is Docsy for me?
-
-Docsy is particularly useful for medium to large technical documentation sets with 20+ pages of docs and/or multiple types of docs and pages: tutorials, reference documentation, blog posts, community pages, and so on.
-
-If you have a smaller project with only a couple of pages of documentation and hence simpler navigation needs, Docsy may be too heavyweight a solution for you. Instead, consider:
-
-* A simpler Hugo or Jekyll theme: find out what's available in Github Pages' [built-in Jekyll options](https://pages.github.com/themes/) and the [Hugo theme gallery](https://themes.gohugo.io/).
-* A good README file that tells users what your project does and links to some examples.
-
-If you have a very large documentation project, our example site structure may not be sufficient either, though you can still use our theme, possibly with heavier customization.
-
-If you'd like to use Docsy's layouts but prefer to use Jekyll, [vsoch](https://github.com/vsoch) has created a [Docsy Jekyll port](https://github.com/vsoch/docsy-jekyll) that includes many of Docsy's features (though as this is a separate project it won't be automatically updated along with Docsy).
-
-## Ready to get started?
-
-Find out how to build and serve your first site in [Getting Started](./getting-started/). Or visit the [example site](https://example.docsy.dev) and [its repo](https://github.com/google/docsy-example) and start exploring!
+This is a latest
+<div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;highlight&quot;:&quot;#0000ff&quot;,&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2021-06-23T10:31:37.138Z\&quot; agent=\&quot;5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36\&quot; etag=\&quot;trvg9oGp7NAiLQcnnAL3\&quot; version=\&quot;14.8.0\&quot; type=\&quot;device\&quot;&gt;&lt;diagram id=\&quot;i4wLShF9v3QbwrTYTBgo\&quot; name=\&quot;Page-1\&quot;&gt;7Vzdd6I4FP9rfGyPEEB9rLa7fZg9Z057dtc+zYkSMbNA3BBH7V+/CQT5SFqxI4bZ0j4ULpCS3733dz8SHYBZtP+dws36D+KjcGAP/f0A3A9s2/JGgP8RkkMmmQAnEwQU+/KmQvCMX5EUDqV0i32UVG5khIQMb6rCJYljtGQVGaSU7Kq3rUhY/a8bGCBF8LyEoSr9G/tsnUnH9qiQPyIcrPP/bHmT7EoE85vlTJI19MmuJAIPAzCjhLDsKNrPUCjAy3HJnvvtjavHF6MoZk0egJN5MPcp/RbezL88xa8omv91I0f5AcOtnLB8WXbIEaBkG/tIDDIcgOlujRl63sCluLrjOueyNYtCfmbxwxUOwxkJCU2fBStX/HJ5wij5B5WueOmPeILErCTPfrhcvhiiDO3fnLF1xJEbICIRYvTAb8kfGEldSNvzpCZ2hSKdkZStS0p0cuOD0niC49AFvvxAQnwG3Ha7cPsQjVdLLdzLMVqsLgOrC4anYLVsDaygLVSBguojSRiOA8ELfFJUeHMdZz5/VgWTogS/wkV6g8AebhlJMkISl2GIg5gfixERh3UqQMScKe7khQj7vnh4uiE4Zukk3enAva/pKSYxUlQkhVXlX0JXTk1XrqqroUZXdmse4CqaQD5nXHlKKFuTgMQwfCikNViKe74QspHa+Y4YO8jwIRRXVS3aYzYvHb+IoW5deXa/lyOnJ4f8hBvOYV4+KT0lTovH0rNDRWtiUu/rjGNAtnSJ3gFLBhkGaYDYO/dN9DZAUQgZ/lF9j4trdHSa0/goPF6j03x2AYs/Zg55wqGy01hj8F5bBj9W4PlKCVcnN1HbCwUFLSg/CsTRDC85HeDVNsDkkxKWbbkV9VlDlbF0Mbu14GIBk4RVkNRL6copwio46qVCUa0T1qQhYVm2ScaadIuxgOtUTH7cMJ8at2byQw1noZgw+IqF23NjUbmLV0Iw4jP+rMQFvKoWdcSlTbXaYy7PKHN9JNWyjKValt2UulyT1HWcTx+NLqlTowm0Lvz0Ov1ZnZZ6bCZ02meNbfjp2KRO89cspUUzinwUv2KesagZ0Z8Joqr0K0ySHaG+5gqO1Yhd2IRlJBm1mmajrRXQeUH4XrqerOFGHPqQwYQReqVWAxjd1qrVsZr05R2vMlhua2Cp3Zh7jskCJp+1A1pvKHALV1Skayi01gEFfbg/IzSMm4Z7z2hoULt89zBZTwlMiR5GgnziRbJJ0dG2/Z6ytp8mvzfYPAWuhv11RWxr7A/6ROoMb2naf8uWr415i9qA+6C3GG7c1Vo+HfAWp/eWxt6SR/jT3mK07LDVbuwHvUVDpVf0FtfuWmyxHQXZuy1/lZOgZpVdWsopkJ61f+MSJFQr2GxX03e+6nYM21Ng/TmUurWpaFIv+lxtiayp+qzWagq7wSL8rws5cK3OAa4m/P8jwN1hF21czRqfYLI5XBb462yhc2qxUAev66notteUUJOMFFy1HO0+uMd2znvg2rca420PXnWfbQqvmpF1H94jnN2B1+lbas3Lnrz/ebLsAUZXRYHa9n/kQ98lCU4Y5JM2nXjXG8uepfrBRJN3t+cFfavsDC/wGnqBY3QdGai1VLe8AOSfd+mMF/QtsDO8oOkOc+cNK7iSF6jlbbe8wLU7FguAWizdcaONuLJIbL5ppcROTS/wuqyh1j9dwkthWeN4qQVNl/BS/NE4Xmb34lai0vBDUcm6XlRymlYoZpcxnUmv0xZ0anQjR84TvU4vqlOjC6iObgNhtqQneuhipvnXDnj/bsXH8aegOMzX/LJkU+x8E0OR9BsCbPFBmGESQcpucLzZsiQfmL9oNnb2sPGAaOcLFjIgjjQf2gYjS42IH1h85afFtxqk10rfDQEe/gM=&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+<script type="text/javascript" src="https://viewer.diagrams.net/js/viewer-static.min.js"></script>
