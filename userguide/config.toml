@@ -81,6 +81,12 @@ languageName ="Italiano"
 # Weight used for sorting.
 weight = 1
 
+[languages.en]
+title = "BikeStay"
+description = "Ciclorifugio in Inglesen"
+languageName ="English"
+contentDir = "content/en"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
