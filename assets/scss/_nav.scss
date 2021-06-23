@@ -2,11 +2,11 @@
 // Main navbar
 //
 .td-navbar-cover {
-    background: black;
+    background: gray;
     @include media-breakpoint-up(md) {
-        background: black !important;
+        background: gray !important;
         .nav-link {
-            text-shadow: 1px 1px 2px $dark;
+            text-shadow: 1px 1px 2px gray;
         }
     }
     &.navbar-bg-onscroll .nav-link {
@@ -15,12 +15,12 @@
 }
 
 .navbar-bg-onscroll {
-    background: black !important;
+    background: gray !important;
     opacity: inherit;
 }
 
 .td-navbar {
-    background: black;
+    background: gray;
     min-height: 4rem;
     margin: 0;
     z-index: 32;
@@ -100,7 +100,7 @@
             font-variant: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
-            font-family: "Font Awesome 5 Free";
+            font-family: "Times New Roman";
             font-weight: 900;
             content: "\f0d9";
             padding-left: 0.5em;
