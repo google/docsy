@@ -20,23 +20,23 @@ menu:
 ### Dispositivi IoT per domotizzazione
 
 #### Potenziali prodotti per la domotizzazione del ciclorifugio
-[Home assistant](https://www.home-assistant.io/) 
-[Savant](https://www.savant.com/)
-[Control4](http://www.control4.it/wordpress/)
-[openHAB](https://www.openhab.org/)
+*[Home assistant](https://www.home-assistant.io/) 
+*[Savant](https://www.savant.com/)
+*[Control4](http://www.control4.it/wordpress/)
+*[openHAB](https://www.openhab.org/)  
 [Home automation software + spiegazione](https://24-7-home-security.com/open-source-home-automation-software/)
 
 <em>E' stato selezionato Home assistant</em>
 
 #### Dispositivi IoT necessari nel ciclorifugio (MQTT)
-Luci led (RGBIC?)
-Interruttori wireless
-Scuri (?)
-Serratura elettronica
-Sensori di contatto alle finestre
-Sensori di fumo
-Allarme(?)
-Termostato
-Prese MQTT
-Assistente vocale (google home o amazon echo).
-Prevista ricarica e-bike, necessaria una normale presa elettrica (accesso esterno senza prenotazione?)
+*Luci led (RGBIC?)
+*Interruttori wireless
+*Scuri (?)
+*Serratura elettronica
+*Sensori di contatto alle finestre
+*Sensori di fumo
+*Allarme(?)
+*Termostato
+*Prese MQTT
+*Assistente vocale (google home o amazon echo).
+*Prevista ricarica e-bike, necessaria una normale presa elettrica (accesso esterno senza prenotazione?)
