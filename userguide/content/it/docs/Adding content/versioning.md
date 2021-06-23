@@ -5,7 +5,7 @@ weight: 4
 description: >
    Customize navigation and banners for multiple versions of your docs.
 ---
-
+lll
 Depending on your project's releases and versioning, you may want to let your
 users access previous versions of your documentation. How you deploy the
 previous versions is up to you. This page describes the Docsy features that you
@@ -14,8 +14,8 @@ to display an information banner on the archived sites.
 
 ## Adding a version drop-down menu
 
-If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a 
-version selector drop down to the top-level menu. You specify a URL and a name 
+If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a
+version selector drop down to the top-level menu. You specify a URL and a name
 for each version you would like to add to the menu, as in the following example:
 
 ```
@@ -47,12 +47,12 @@ You can read more about Docsy menus in the guide to
 
 ## Displaying a banner on archived doc sites
 
-If you create archived snapshots for older versions of your docs, you can add a 
+If you create archived snapshots for older versions of your docs, you can add a
 note at the top of every page in the archived docs to let readers know that
-they’re seeing an unmaintained snapshot and give them a link to the latest 
+they’re seeing an unmaintained snapshot and give them a link to the latest
 version.
 
-For example, see the archived docs for 
+For example, see the archived docs for
 [Kubeflow v0.6](https://v0-6.kubeflow.org/docs/):
 
 <figure>
@@ -80,7 +80,7 @@ To add the banner to your doc site, make the following changes in your
     ```
 
 1. Make sure that `url_latest_version` contains the URL of the website that you
-  want to point readers to. In most cases, this should be the URL of the latest 
+  want to point readers to. In most cases, this should be the URL of the latest
   version of your docs:
 
     ```
