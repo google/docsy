@@ -2,9 +2,6 @@
 // Main navbar
 //
 .td-navbar-cover {
-    background: gray;
-    @include media-breakpoint-up(md) {
-        background: gray;
 
     }
     &.navbar-bg-onscroll .nav-link {
@@ -13,12 +10,12 @@
 }
 
 .navbar-bg-onscroll {
-    background:gray!important;
+
     opacity: inherit;
 }
 
 .td-navbar {
-    background:gray;
+
     min-height: 4rem;
     margin: 0;
     z-index: 32;
