@@ -13,7 +13,9 @@ La *C.E.* utilizzerà una politica di sostegno massivo verso la Green Economy, u
 ## Italia e la bici, un mercato acerbo che può solo aumentare
 Con associazioni d'appassionati e poche infrastutture di livello il mercato pre pandemico era valutato dal report [**ISNART-Legambiente 2019**](https://mybikeway.it/wp-content/uploads/2019/03/1%C2%B0-rapporto-sul-Cicloturismo-in-Italia-2019-Unioncamere-Legambiente.pdf)  **12 miliardi d'euro**
 
-## 4 GOALS SU 17
+## 5 GOALS SU 17
+![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/collapsed.PNG)
+
 Le varie fasi del Ciclorifugio 4.0 rispettano diversi [**obiettivi (SDGS)che l'ONU**](https://sdgs.un.org/goals) si è preposta da raggiungere entro 2030
 * **Goal  Istruzione di qualità** 4.7 Entro il 2030, assicurarsi che tutti gli studenti acquisiscono le conoscenze e le competenze necessarie per promuovere lo sviluppo sostenibile attraverso, tra l’altro, l'educazione per lo sviluppo sostenibile e stili di vita sostenibili, i diritti umani, l'uguaglianza di genere, la promozione di una cultura di pace e di non violenza, la cittadinanza globale e la valorizzazione della diversità culturale e del contributo della cultura allo sviluppo sostenibile
 * **Goal Acqua pulita .** 6.2: Entro il 2030, raggiungere un adeguato ed equo accesso ai servizi igienicosanitari e di igiene per tutti ed eliminare la defecazione all'aperto, con particolare attenzione ai bisogni delle donne e delle ragazze e di coloro che si trovano in situazioni vulnerabili 
@@ -23,7 +25,7 @@ Le varie fasi del Ciclorifugio 4.0 rispettano diversi [**obiettivi (SDGS)che l'O
  12.2 Entro il 2030, raggiungere la gestione sostenibile e l'uso efficiente delle risorse naturali
  12.7 Promuovere pratiche in materia di appalti pubblici che siano sostenibili, in accordo con le politiche e le priorità nazionali 
  12.8 Entro il 2030, fare in modo che le persone abbiano in tutto il mondo le informazioni rilevanti e la consapevolezza in tema di sviluppo sostenibile e stili di vita in armonia con la natura
-**Goal Lotta contro il cambiamento climatico** 
+* **Goal Lotta contro il cambiamento climatico** 
 13.3 Migliorare l'istruzione, la sensibilizzazione e la capacità umana e istituzionale riguardo ai cambiamenti climatici in materia di mitigazione, adattamento, riduzione dell’impatto e di allerta precoce
 
 
@@ -45,12 +47,13 @@ Territorio e Green Tech.
 
 # Ciclo di vita di un Ciclorifugio
 
-|REFFITTTING          |PROMOZIONE          |MANTENIMENTO          |
+|RETROFITTING          |PROMOZIONE          |MANTENIMENTO          |
 |---------------------|--------------------|----------------------|
 |Ciclorifugio : Accessibile, Servizi Base|Inserimento in ROUTE internazionali e in reti turistiche esisstenti|GAMIFICATION|
-|CicloB&B:Un servizio di alto livello di pernottamento, camere con porte, possibilità di ristorazione di livello|Cycle.Travel moot|RISTORAZIONE|
-|||VENDITA di beni locali/dedicati alla bici|
-|||GITE SCOLASTICHE NATURA + GREEN TECH|
-|||PRENOTAZIONE PERNOTTAMENTO|
-
+|CicloB&B:Un servizio di alto livello di pernottamento, camere con porte, possibilità di ristorazione di livello|[Cycle.Travel](https://cycle.travel/)|RISTORAZIONE|
+||[Komoot](https://www.komoot.com/)|VENDITA di beni locali/dedicati alla bici|
+||[Garden Connnect](http://www.its40.it/wp/portfolio_page/garden-connected-2/)|GITE SCOLASTICHE NATURA + GREEN TECH|
+||[Starbox](https://www.starsbox.it/)|PRENOTAZIONE PERNOTTAMENTO|
+||[Italy bike hotels](https://www.italybikehotels.com/)||
+ 
  
