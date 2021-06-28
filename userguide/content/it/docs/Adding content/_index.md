@@ -48,9 +48,9 @@ Territorio e Green Tech.
 |REFFITTTING          |PROMOZIONE          |MANTENIMENTO          |
 |---------------------|--------------------|----------------------|
 |Ciclorifugio : Accessibile, Servizi Base|Inserimento in ROUTE internazionali e in reti turistiche esisstenti|GAMIFICATION|
-|CicloB&B:Un servizio di alto livello di pernottamento, camere con porte, possibilità di ristorazione di livello|Cycle.Travel moot|RISTORAZIONE|
-|||VENDITA di beni locali/dedicati alla bici|
-|||GITE SCOLASTICHE NATURA + GREEN TECH|
+|CicloB&B:Un servizio di alto livello di pernottamento, camere con porte, possibilità di ristorazione di livello|Cycle.Travel Kmoot|RISTORAZIONE|
+||[Garden Connnect](http://www.its40.it/wp/portfolio_page/garden-connected-2/)|VENDITA di beni locali/dedicati alla bici|
+||[Starbox](https://www.starsbox.it/)|GITE SCOLASTICHE NATURA + GREEN TECH|
 |||PRENOTAZIONE PERNOTTAMENTO|
 
  
