@@ -1,5 +1,4 @@
 ---
----
 title: "Ricerca"
 linkTitle: "Ricerca"
 weight: 3
