@@ -20,7 +20,7 @@ menu:
 ### Dispositivi IoT per domotizzazione
 
 #### Potenziali prodotti per la domotizzazione del ciclorifugio
-*[Home assistant](https://www.home-assistant.io/) 
+*[Home assistant](https://www.home-assistant.io/)
 *[Savant](https://www.savant.com/)
 *[Control4](http://www.control4.it/wordpress/)
 *[openHAB](https://www.openhab.org/)  
@@ -29,7 +29,8 @@ menu:
 <em>E' stato selezionato Home assistant</em>
 
 #### Dispositivi IoT necessari nel ciclorifugio (MQTT)
-*Luci led (RGBIC?)
+
+* Luci led (RGBIC?)  
 *Interruttori wireless
 *Scuri (?)
 *Serratura elettronica
