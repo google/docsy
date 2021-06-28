@@ -1,7 +1,6 @@
-
 ---
 title: "Benvenut* nella documentazione del Progetto Ciclorifugio"
-linkTitle: "Documentation"
+linkTitle: "Documentazione"
 menu:
   main:
     weight: 20

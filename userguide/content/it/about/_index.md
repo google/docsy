@@ -1,6 +1,6 @@
 ---
 title: Ciclorifugio
-linkTitle: About
+linkTitle: Chi siamo
 menu:
   main:
     weight: 10
