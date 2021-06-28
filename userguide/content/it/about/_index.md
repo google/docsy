@@ -23,4 +23,7 @@ Nonostante le infrastutture e le associazioni legate al "ciclo turismo" in Itali
 *   **Ciclorifugio e CicloB&B**: Due offerte commerciali, due diverse offerte per il territorio.
 *   **Inserire l'Immobile in una rete EUROVELO turistica internazionale**: Portale principale per le realtà Europea, fornisce ai percorsi certificazione di STANDARD chiamata ECS in base segnaletica, attratività, sicurezza.
 *  **Far vivere il ciclorifugio** Tramite Gamification, gite formative, inserire in eventi locali(sagre) o nazionali (Giro d'Italia) 
+*  **Fase 1 - Empatia**:[Clicca qui](https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%231-EMPATIA_Ciclorifugio_2021.pdf)
+*  **Fase 2 - Definizione**:[Clicca qui](https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%232-DEFINIZIONE_Ciclorifugio_2021.pdf)
+*  **Fase 3 - Ideazione**:[Clicca qui](https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%233-IDEAZIONE_Ciclorifugio_2021.pdf)
 {{% /blocks/section %}}
