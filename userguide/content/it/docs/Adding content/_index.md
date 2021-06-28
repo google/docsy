@@ -52,5 +52,6 @@ Territorio e Green Tech.
 ||[Komoot](https://www.komoot.com/)|VENDITA di beni locali/dedicati alla bici|
 ||[Garden Connnect](http://www.its40.it/wp/portfolio_page/garden-connected-2/)|GITE SCOLASTICHE NATURA + GREEN TECH|
 ||[Starbox](https://www.starsbox.it/)|PRENOTAZIONE PERNOTTAMENTO|
+||[https://www.italybikehotels.com/](https://www.italybikehotels.com/)||
 
  
