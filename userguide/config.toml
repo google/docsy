@@ -76,14 +76,14 @@ id = "UA-00000000-0"
 [languages]
 [languages.it]
 title = "Ciclorifugio"
-description = "il Ciclorifugio 4.0"
+description = "Ciclorifugio 4.0"
 languageName ="Italiano"
 # Weight used for sorting.
 weight = 1
 
 [languages.en]
 title = "BikeStay"
-description = "Ciclorifugio in Inglesen"
+description = "BikeStay 4.0"
 languageName ="English"
 contentDir = "content/en"
 
@@ -100,7 +100,7 @@ contentDir = "content/en"
 # Everything below this are Site Params
 
 [params]
-copyright = "The Docsy Authors"
+copyright = "Ciclorifugio 4.0"
 privacy_policy = "https://policies.google.com/privacy"
 
 # Menu title if your navbar has a versions selector to access old versions of your site.
