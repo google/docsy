@@ -13,7 +13,7 @@ La *C.E.* utilizzerà una politica di sostegno massivo verso la Green Economy, u
 ## Italia e la bici, un mercato acerbo che può solo aumentare
 Con associazioni d'appassionati e poche infrastutture di livello il mercato pre pandemico era valutato dal report [**ISNART-Legambiente 2019**](https://mybikeway.it/wp-content/uploads/2019/03/1%C2%B0-rapporto-sul-Cicloturismo-in-Italia-2019-Unioncamere-Legambiente.pdf)  **12 miliardi d'euro**
 
-## 4 GOALS SU 17
+## 5 GOALS SU 17
 ![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS1.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS2.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS3.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS4.PNG)
 
 Le varie fasi del Ciclorifugio 4.0 rispettano diversi [**obiettivi (SDGS)che l'ONU**](https://sdgs.un.org/goals) si è preposta da raggiungere entro 2030
@@ -25,7 +25,7 @@ Le varie fasi del Ciclorifugio 4.0 rispettano diversi [**obiettivi (SDGS)che l'O
  12.2 Entro il 2030, raggiungere la gestione sostenibile e l'uso efficiente delle risorse naturali
  12.7 Promuovere pratiche in materia di appalti pubblici che siano sostenibili, in accordo con le politiche e le priorità nazionali 
  12.8 Entro il 2030, fare in modo che le persone abbiano in tutto il mondo le informazioni rilevanti e la consapevolezza in tema di sviluppo sostenibile e stili di vita in armonia con la natura
-**Goal Lotta contro il cambiamento climatico** 
+* **Goal Lotta contro il cambiamento climatico** 
 13.3 Migliorare l'istruzione, la sensibilizzazione e la capacità umana e istituzionale riguardo ai cambiamenti climatici in materia di mitigazione, adattamento, riduzione dell’impatto e di allerta precoce
 
 
