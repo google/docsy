@@ -24,8 +24,8 @@ Nonostante le infrastutture e le associazioni legate al "ciclo turismo" in Itali
 *   **Inserire l'Immobile in una rete EUROVELO turistica internazionale**: Portale principale per le realtà Europea, fornisce ai percorsi certificazione di STANDARD chiamata ECS in base segnaletica, attratività, sicurezza.
 *  **Far vivere il ciclorifugio** Tramite Gamification, gite formative, inserire in eventi locali(sagre) o nazionali (Giro d'Italia) 
 *  **Fase 1 - Empatia**:<a href="https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%231-EMPATIA_Ciclorifugio_2021.pdf" style="color: white; text-decoration: underline;text-decoration-style: dotted;">Clicca qui</a>
-*  **Fase 2 - Definizione**: [Clicca qui](https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%232-DEFINIZIONE_Ciclorifugio_2021.pdf)
-*  **Fase 3 - Ideazione**: [Clicca qui](https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%233-IDEAZIONE_Ciclorifugio_2021.pdf) 
+*  **Fase 2 - Definizione**: <a href="https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%232-DEFINIZIONE_Ciclorifugio_2021.pdf" style="color: white; text-decoration: underline;text-decoration-style: dotted;">Clicca qui</a>
+*  **Fase 3 - Ideazione**: <a href="https://github.com/OfficineArduinoTorino/docsy/blob/master/upskill-4.0/%233-IDEAZIONE_Ciclorifugio_2021.pdf" style="color: white; text-decoration: underline;text-decoration-style: dotted;">Clicca qui</a>
 
 
 {{% /blocks/section %}}
