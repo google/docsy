@@ -47,16 +47,18 @@ facile e intuitiva.
 ### Dispositivi IoT per domotizzazione
 
 #### Potenziali prodotti per la domotizzazione del ciclorifugio
+
 * [Home assistant](https://www.home-assistant.io/) 
 * [Savant](https://www.savant.com/)
 * [Control4](http://www.control4.it/wordpress/)
 * [openHAB](https://www.openhab.org/)  
+
 [Home automation software + spiegazione](https://24-7-home-security.com/open-source-home-automation-software/)
 
 <em>E' stato selezionato Home assistant</em>
 
 #### Dispositivi IoT necessari nel ciclorifugio (MQTT)
-* 
+
 * Interruttori wireless
 * Scuri (?)
 * Serratura elettronica
@@ -69,6 +71,7 @@ facile e intuitiva.
 * Prevista ricarica e-bike, necessaria una normale presa elettrica (accesso esterno senza prenotazione?)
 
 #### Tabella di prova
+
 | funzione | prodotto (link) | marca | prezzo |
 |---|---|---|---|
 | Luci led (RGBIC?) | [mini-door-window-sensor](https://goabode.com/security-devices/door-alarms/mini-door-window-sensor) | abode | - |
@@ -82,4 +85,5 @@ facile e intuitiva.
 |  | []() |  |  |
 |  | []() |  |  |
 |  | []() |  |  |
+
 
