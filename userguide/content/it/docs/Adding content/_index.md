@@ -14,7 +14,7 @@ La *C.E.* utilizzerà una politica di sostegno massivo verso la Green Economy, u
 Con associazioni d'appassionati e poche infrastutture di livello il mercato pre pandemico era valutato dal report [**ISNART-Legambiente 2019**](https://mybikeway.it/wp-content/uploads/2019/03/1%C2%B0-rapporto-sul-Cicloturismo-in-Italia-2019-Unioncamere-Legambiente.pdf)  **12 miliardi d'euro**
 
 ## 5 GOALS SU 17
-![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS1.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS2.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS3.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS4.PNG)
+![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS1.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS2.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS3.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS4.PNG)![alt](https://github.com/H-AlessioMurta/docsy/blob/master/images/SDGS5.PNG)
 
 Le varie fasi del Ciclorifugio 4.0 rispettano diversi [**obiettivi (SDGS)che l'ONU**](https://sdgs.un.org/goals) si è preposta da raggiungere entro 2030
 * **Goal  Istruzione di qualità** 4.7 Entro il 2030, assicurarsi che tutti gli studenti acquisiscono le conoscenze e le competenze necessarie per promuovere lo sviluppo sostenibile attraverso, tra l’altro, l'educazione per lo sviluppo sostenibile e stili di vita sostenibili, i diritti umani, l'uguaglianza di genere, la promozione di una cultura di pace e di non violenza, la cittadinanza globale e la valorizzazione della diversità culturale e del contributo della cultura allo sviluppo sostenibile
