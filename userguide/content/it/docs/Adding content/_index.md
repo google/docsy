@@ -45,7 +45,7 @@ Territorio e Green Tech.
 
 # Ciclo di vita di un Ciclorifugio
 
-|REFFITTTING          |PROMOZIONE          |MANTENIMENTO          |
+|REFITTING          |PROMOZIONE          |MANTENIMENTO          |
 |---------------------|--------------------|----------------------|
 |Ciclorifugio : Accessibile, Servizi Base|Inserimento in ROUTE internazionali e in reti turistiche esisstenti|GAMIFICATION|
 |CicloB&B:Un servizio di alto livello di pernottamento, camere con porte, possibilità di ristorazione di livello|Cycle.Travel Kmoot|RISTORAZIONE|
