@@ -3,6 +3,11 @@
 //
 .td-navbar-cover {
 
+    background: #3e3e3e;
+    @include media-breakpoint-up(md) {
+        background: #3e3e3e;
+
+
     }
     &.navbar-bg-onscroll .nav-link {
         text-shadow: none;
@@ -11,10 +16,18 @@
 
 .navbar-bg-onscroll {
 
+    background:#3e3e3e!important;
+
+
+
     opacity: inherit;
 }
 
 .td-navbar {
+
+    background:#3e3e3e;
+
+
 
     min-height: 4rem;
     margin: 0;
