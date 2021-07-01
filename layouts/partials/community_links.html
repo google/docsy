@@ -2,19 +2,21 @@
 
 <section class="row td-box td-box--4 td-box--gradient td-box--height-auto linkbox">
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h2>Learn and Connect</h2>		
-<p>Using or want to use {{ .Site.Title }}? Find out more here:
-{{ with index $links "user"}}
-{{ template "community-links-list"  . }}
+<h1>Learn and Connect</h1>		<br>
+<p><h2>Using or want to use the @platform,follow us along:</h2><br>
+<h3>{{ with index $links "user"}}
+{{ template "community-links-list"  . }}</h3>
 {{ end }}
 </div>
+
+
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h2>Develop and Contribute</h2>
-<p>If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
-{{ with index $links "developer"}}
-{{ template "community-links-list"  . }}
+<h1>Develop and Contribute</h1><br>
+<p><h2>Get more involved by contributing to the @platform, join us :</h2><br>
+  <h3>{{ with index $links "developer"}}
+{{ template "community-links-list"  . }}</h3>
 {{ end }}
-<p>You can find out how to contribute to these docs in our <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>.
+<p><h4>You can find out how to contribute to these docs in our <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>.</h4>
 </div>
 </section>
 
@@ -22,8 +24,9 @@
 <ul>
  {{ range . }}
  <li title="{{ .name }}">
-   <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }}
+   <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }} 
  </li>
+ <div><br></div>
   {{ end }}
 </ul>
 {{ end }}
