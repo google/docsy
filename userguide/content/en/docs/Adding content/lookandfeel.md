@@ -303,6 +303,14 @@ To enable/disable Mermaid, update `config.toml`:
 enable = true
 ```
 
+You also need to disable the `guessSyntax` from markup highlighting in `config.toml`  for Mermaid to work:
+
+```toml
+[markup]
+  [markup.highlight]
+      guessSyntax = "false"
+```
+
 You can also update settings for Mermaid, such as themes, padding, etc:
 
 ```toml
