@@ -159,7 +159,7 @@ nav.foldable-nav {
     }
 
     input:checked ~ ul.foldable {
-        max-height: 100vmax;
+        max-height: 100000vmax;
         transition: max-height 1s ease-in-out;
     }
 
