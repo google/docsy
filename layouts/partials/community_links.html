@@ -1,32 +1,88 @@
-{{ $links := .Site.Params.links }}
+<style>
+  .github_title{
+      background-image: url(https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png);
+  }
+  .discord_title{
+      background-image: url(https://discord.com/assets/ff41b628a47ef3141164bfedb04fb220.png);
+  }
+  .title{
+      background-repeat: no-repeat;
+      background-size: contain;
+      height:38px;
+  }
+  h6{
+      margin-top: 2rem;
+  }
+  p{
+      margin-bottom: 10px;
+  }
+  .visit_label {
+      color: #f05f3e;
+  }
+  .visit_link {
+      text-decoration: none;
+      color: inherit;
+  }
+  .div_boxes_position {
+      border-radius: 10px;
+      border: 1px solid #707070;
+      padding: 45px;
+      margin: 23px 45px;
+  }
+  .div_boxes_logo {
+      position: relative;
+      width: 1137px;
+      top: 0px;
+      left: 0px;
+      color: black;
+  }
+</style>
 
-<section class="row td-box td-box--4 td-box--gradient td-box--height-auto linkbox">
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h1>Learn and Connect</h1>		<br>
-<p><h2>Using or want to use the @platform,follow us along:</h2><br>
-<h3>{{ with index $links "user"}}
-{{ template "community-links-list"  . }}</h3>
-{{ end }}
+
+<div>
+  <div class="div_boxes_position">
+      <div class="div_boxes_logo">
+          <div class="github_title title">
+
+          </div>
+          <h6>
+          Start contributing
+          </h6>
+          <p>
+          This is where the code hits the fan.
+          </p>
+          <span class="visit_label">
+              <a
+                  class="visit_link"
+                  href="https://github.com/atsign-foundation"
+              >
+                  Visit
+                  <span class="fas fa-external-link-alt"></span>
+              </a>
+          </span>
+      </div>
+  </div>
+
+  <div class="div_boxes_position">
+      <div class="div_boxes_logo">
+          <div class="discord_title title">
+
+          </div>
+          <h6>
+          Learn how it works
+          </h6>
+          <p>
+          Hangout with the core team and other developers.
+          </p>
+          <span class="visit_label">
+              <a
+                  class="visit_link"
+                  href="https://discord.gg/55sHTQFxfz"
+              >
+                  Visit
+                  <span class="fas fa-external-link-alt"></span>
+              </a>
+          </span>
+      </div>
+  </div>
 </div>
-
-
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h1>Develop and Contribute</h1><br>
-<p><h2>Get more involved by contributing to the @platform, join us :</h2><br>
-  <h3>{{ with index $links "developer"}}
-{{ template "community-links-list"  . }}</h3>
-{{ end }}
-<p><h4>You can find out how to contribute to these docs in our <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>.</h4>
-</div>
-</section>
-
-{{ define "community-links-list" }}
-<ul>
- {{ range . }}
- <li title="{{ .name }}">
-   <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }} 
- </li>
- <div><br></div>
-  {{ end }}
-</ul>
-{{ end }}
