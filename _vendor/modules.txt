@@ -1,0 +1,4 @@
+# github.com/gohugoio/hugo-mod-bootstrap-scss-v4 v0.0.0-20200902213320-c9cb5e39d8c6
+# github.com/twbs/bootstrap v4.5.2+incompatible
+# github.com/deining/hugo-mod-font-awesome-scss v0.0.0-20210415150057-c3ffa1501924
+# github.com/FortAwesome/Font-Awesome v0.0.0-20210316185733-d79d85c3fad8
