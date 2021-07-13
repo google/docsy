@@ -33,6 +33,28 @@
     {{ end }}
 
   {{ end }}
+
+  {{ if $.Param "link_data" }}
+    {{ $link_data := index .Site.Data ($.Param "link_data") }}
+    {{ if $link_data }}
+      {{ $page_link_data := index $link_data .Path }}
+      {{ if $page_link_data }}
+        {{ if $page_link_data.editPageURL }}
+          <a href="{{ $page_link_data.editPageURL }}" target="_blank"><i class="fa fa-edit fa-fw"></i> {{ T "post_edit_this" }}</a>
+        {{ end }}
+        {{ if $page_link_data.newPageURL }}
+        <a href="{{ $page_link_data.newPageURL }}" target="_blank"><i class="fa fa-edit fa-fw"></i> {{ T "post_create_child_page" }}</a>
+        {{ end }}
+        {{ if $page_link_data.issuesURL }}
+        <a href="{{ $page_link_data.issuesURL }}" target="_blank"><i class="fa fa-exclamation-circle fa-fw"></i> {{ T "post_create_issue" }}</a>
+        {{ end }}
+        {{ if $page_link_data.projectIssuesURL }}
+        <a href="{{ $page_link_data.projectIssuesURL }}" target="_blank"><i class="fas fa-tasks fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
   {{ with .CurrentSection.AlternativeOutputFormats.Get "print" }}
     <a id="print" href="{{ .Permalink | safeURL }}"><i class="fa fa-print fa-fw"></i> {{ T "print_entire_section" }}</a>
   {{ end }}
