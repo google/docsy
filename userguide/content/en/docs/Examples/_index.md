@@ -25,6 +25,7 @@ Example sites that have low to no customization:
 | [tekton.dev](https://tekton.dev/) | https://github.com/tektoncd |
 | [fluxcd.io](https://fluxcd.io) | https://github.com/fluxcd/website |
 | [Graphviz](https://graphviz.org) | https://gitlab.com/graphviz/graphviz.gitlab.io |
+| [Cloudpods](https://www.cloudpods.org) | https://github.com/yunionio/docs |
 
 ## Customized Docsy examples
 
