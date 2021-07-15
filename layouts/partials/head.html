@@ -15,8 +15,9 @@
 
 {{ partialCached "favicons.html" . }}
 
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ .Site.Params.Description }}">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} {{ end }}{{ end }}</title>
+<meta name="description" content="{{ .Page.Params.Content }}">
+<meta name="”og:image" content="{{ .Site.Params.social_logo_path }}">
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/schema.html" . -}}
