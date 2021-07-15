@@ -27,6 +27,7 @@
 @import "section-index";
 @import "pageinfo";
 @import "taxonomy";
+@import "shortcodes";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);

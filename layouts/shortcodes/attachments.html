@@ -7,7 +7,7 @@
 {{ $icon := .Get "icon" | default "fas fa-paperclip"}}
 {{ $num_fmt := .Get "num-fmt" | default "- , ."}}
 {{ $num_fmt_del := .Get "num-fmt-del" | default " "}}
-{{ $empty_list := .Get "empty_list" | default "Keine Anhänge gefunden." }}
+{{ $empty_list := .Get "empty_list" | default "No attachments found." }}
 <section class="card attachments{{ with $class }} {{.}}{{ end }}">
 	<label>
     {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
