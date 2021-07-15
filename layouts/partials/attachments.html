@@ -1,0 +1,105 @@
+{{ $title := .Get "title" | default (T "attachments")}}
+{{ $folder := .Get "folder"}}
+{{ $recursive := .Get "recursive" | default true}}
+{{ $filter := .Get "filter" | default "." }}
+{{ $match := .Get "match" | default "**" }}
+{{ $class := .Get "class" }}
+{{ $icon := .Get "icon" | default "fas fa-paperclip"}}
+{{ $num_fmt := .Get "num-fmt" | default "- , ."}}
+{{ $num_fmt_del := .Get "num-fmt-del" | default " "}}
+{{ $empty_list := .Get "empty_list" | default "Keine Anhänge gefunden." }}
+<section class="card attachments{{ with $class }} {{.}}{{ end }}">
+	<label>
+    {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
+		{{ with $title }}{{- . -}}{{ end }}
+	</label>
+  <!-- <p>
+    {{ with $title }}title: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $folder }}folder: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $filter }}filter: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $match }}match: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $class }}class: {{ . | default "NONE"}}<br>{{ end }}
+    {{ with $icon }}icon: {{ . | default "NONE"}}<br>{{ end }}
+  </p> -->
+	<div class="attachments-files">
+    <!-- {{ with $title }}{{- . -}}{{ end }} -->
+      {{ with $folder }}
+      <!-- {{ $path := replace (printf "./content/%s/%s%s" $.Page.File.Lang $.Page.File.Dir .) "\\" "/" }} -->
+      {{ $path := path.Join "content/" $.Page.File.Lang $.Page.File.Dir . }}
+      {{ $file_list := newScratch }}
+        {{ range ( readDir $path ) }}
+          {{ if .IsDir }}
+            {{ template "recursive-files" (dict "path" (path.Join $path .Name) "folder" (path.Join $folder .Name) "recursive" true "file_list" $file_list "filter" $filter)}}
+          {{ else }}
+            {{ if (findRE $filter .Name) }}
+              {{ $file_list.SetInMap "files" .Name ( (path.Join $folder .Name) ) }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        {{ with ($file_list.Get "files") }}
+          <ul>
+            {{ range sort . }}
+              {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir .) }}
+              {{ $filesize := newScratch }}
+              {{ if (ge $filestat.Size (math.Pow 1024 3))}}
+                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
+              {{ else if (ge $filestat.Size (math.Pow 1024 2))}}
+                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
+              {{ else if (ge $filestat.Size 1024)}}
+                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size 1024.0) $num_fmt $num_fmt_del) "kB")}}
+              {{ else }}
+                {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 $filestat.Size $num_fmt $num_fmt_del) "Byte")}}
+              {{ end }}
+              <li><a href="{{ . }}" >{{$filestat.Name}} ({{ $filesize.Get "size" }})</a></li>
+            {{ end }}
+          </ul>
+        {{ else }}
+          <p>Keine Anhänge gefunden.</p>
+        {{ end }}
+      {{ else }}
+      {{ with (.Page.Resources.Match $match) }}
+    <ul>
+        {{ range sort . "Title"}}
+          {{ $filestat := os.Stat .RelPermalink }}
+          {{ $filesize := newScratch }}
+          {{ if (ge $filestat.Size (math.Pow 1024 3))}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
+          {{ else if (ge $filestat.Size (math.Pow 1024 2))}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
+          {{ else if (ge $filestat.Size 1024)}}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 (div $filestat.Size 1024.0) $num_fmt $num_fmt_del) "kB")}}
+          {{ else }}
+            {{ $filesize.Set "size" (printf "%s %s" ( lang.NumFmt 3 $filestat.Size $num_fmt $num_fmt_del) "Byte")}}
+          {{ end }}
+            <li>
+              <a href="{{ .RelPermalink }}" >{{$filestat.Name}} ({{ $filesize.Get "size" }})</a>
+            </li>
+        {{end}}
+    </ul>
+      {{else}}
+        <p>Keine Anhänge gefunden.</p>
+      {{end}}
+      {{end}}
+	</div>
+  {{ with .Inner }}
+    <div class="attachments-inner">
+      {{- . -}}
+    </div>
+  {{ end }}
+</section>
+{{ define "recursive-files" }}
+  {{ $path := .path }}
+  {{ $folder := .folder }}
+  {{ $recursive := .recursive }}
+  {{ $file_list := .file_list }}
+  {{ $filter := .filter }}
+  {{range (readDir $path) }}
+    {{ if .IsDir }}
+      {{ template "recursive-files" (dict "path" (path.Join $path .Name) "folder" (path.Join $folder .Name) "recursive" true "file_list" $file_list "filter" $filter)}}
+    {{ else }}
+      {{ if (findRE $filter .Name) }}
+        {{ $file_list.SetInMap "files" .Name ( (path.Join $folder .Name) ) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
