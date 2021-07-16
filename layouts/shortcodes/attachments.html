@@ -1,4 +1,4 @@
-{{ $title := .Get "title" | default (T "attachments")}}
+{{ $title := .Get "title" | default (T "shortcode_attachments")}}
 {{ $folder := .Get "folder"}}
 {{ $recursive := .Get "recursive" | default true}}
 {{ $filter := .Get "filter" | default "." }}

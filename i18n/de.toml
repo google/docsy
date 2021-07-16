@@ -57,3 +57,8 @@ other = "Druckvorgang starten"
 other = "Zur Standardansicht zurückkehren"
 [print_entire_section]
 other = "Kapitel inkl. Unterseiten drucken"
+
+
+# Shortcodes
+[shortcode_attachments]
+other = "Anhänge"
