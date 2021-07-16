@@ -8,7 +8,7 @@
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark {{ if $cover}} td-navbar-cover {{ end }}flex-column flex-md-row td-navbar">
 
     <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
-        <span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span><span class="text-uppercase font-weight-bold">{{ .Site.Title }}</span>
+        <span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span>
     </a>
     <div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
         <ul class="navbar-nav mt-2 mt-lg-0">
@@ -26,7 +26,7 @@
 
                 <a class="nav-item nav-link nav-item mr-2mb-2 mb-lg-0" href="https://github.com/atsign-foundation/" aria-label="Github"><i class="fab fa-github fa-primary"></i></a>
                 <a class="nav-item nav-link nav-item mr-2 mb-2 mb-lg-0" href="https://discord.gg/55sHTQFxfz" aria-label="Discord"><i class="fab fa-discord fa-primary"></i></a>
-
+                
             </div>
 
         </ul>
