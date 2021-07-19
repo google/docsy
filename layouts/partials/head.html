@@ -12,19 +12,23 @@
 {{ else -}}
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 {{ end -}}
-
 {{ partialCached "favicons.html" . }}
-
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} {{ end }}{{ end }}</title>
-
+<!--new HTML title added for SEO purposes - By @anthony-->
+<!--<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Page.Params.HTMLtitle }}{{ . }} {{ end }}{{ end }}</title>-->
+<title>{{ if .IsHome }}{{ .Page.Params.HTMLtitle  }}{{ else }}{{ with .Page.Params.SEOtitle }}{{ . }}{{ end }}{{ end }}</title>
 <meta name="description" content="{{ .Page.Params.Content }}">
 <meta name="”og:image" content="{{ .Site.Params.social_logo_path }}">
+
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/google_news.html" . -}}
-{{- template "_internal/schema.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
+<meta name="twitter:image" content="{{ .Site.Params.twitter_logo_path }}">
 {{ partialCached "head-css.html" . "asdf" }}
-<!--UNIVERSAL FONT CHANGE TO POPPINS-->
+
+
+<!--commenting the line below  for SEO purposes - By @anthony -->
+
+<!--UNIVERSAL FONT CHANGE TO POPPINS-- - By @anthony-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" >
