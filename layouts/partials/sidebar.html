@@ -1,8 +1,8 @@
-{{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */}}
-{{ $sidebarCacheLimit := cond (isset .Site.Params.ui "sidebar_cache_limit") .Site.Params.ui.sidebar_cache_limit 2000 }}
-{{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit }}
-{{ $sidebarCacheTypeRoot := cond (isset .Site.Params.ui "sidebar_cache_type_root") .Site.Params.ui.sidebar_cache_type_root false }}
-{{ if $shouldCache }}
+{{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites.
+*/}}{{ $sidebarCacheLimit := cond (isset .Site.Params.ui "sidebar_cache_limit") .Site.Params.ui.sidebar_cache_limit 2000 -}}
+{{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
+{{ $sidebarCacheTypeRoot := cond (isset .Site.Params.ui "sidebar_cache_type_root") .Site.Params.ui.sidebar_cache_type_root false -}}
+{{ if $shouldCache -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
     $(function() {
@@ -18,6 +18,6 @@
     });
   </script>
   {{ partialCached "sidebar-tree.html" . .FirstSection.RelPermalink }}
-{{ else }}
+{{ else -}}
   {{ partial "sidebar-tree.html" . }}
-{{ end }}
+{{- end }}
