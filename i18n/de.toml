@@ -60,5 +60,5 @@ other = "Kapitel inkl. Unterseiten drucken"
 
 
 # Shortcodes
-[shortcode_attachments]
+[sc_attachments]
 other = "Anhänge"

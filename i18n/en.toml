@@ -62,5 +62,5 @@ other = "Print entire section"
 
 
 # Shortcodes
-[shortcode_attachments]
+[sc_attachments]
 other = "Attachments"
