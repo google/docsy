@@ -12,11 +12,11 @@
 {{ $empty_list := .Get "empty_list" | default "No attachments found." }}
 {{ $show_folder := .Get "show_folder" | default false}}
 <section class="card attachments{{ with $class }} {{.}}{{ end }}">
-	<label class="attachments-label">
+	<label class="card-header attachments-label">
     {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
 		{{ with $title }}{{- . -}}{{ end }}
 	</label>
-	<div class="attachments-files">
+	<div class="card-body attachments-files">
     <!-- {{ with $title }}{{- . -}}{{ end }} -->
       {{ with $folder }}
         <!-- {{ $path := replace (printf "./content/%s/%s%s" $.Page.File.Lang $.Page.File.Dir .) "\\" "/" }} -->
@@ -59,7 +59,7 @@
       {{end}}
 	</div>
   {{ with .Inner }}
-    <div class="attachments-inner">
+    <div class="card-footer attachments-inner">
       {{- .  | markdownify -}}
     </div>
   {{ end }}

@@ -1,11 +1,13 @@
 // Attachments
 section.attachments {
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-  border-style: solid;
-  border-color: $primary;
+  // margin-top: 1rem;
+  // margin-bottom: 1.5rem;
+  // border-style: solid;
+  // border-color: $primary;
+  // padding: 0;
+
+
   // border-width: 0 0 0 2px;
-  padding: 0;
   // margin-left: 3em;
 
   // .attachments-icon{
@@ -15,19 +17,24 @@ section.attachments {
   // }
 
   .attachments-label {
-    margin-bottom: 0;
-    font-family: $headings-font-family;
-    font-weight: $headings-font-weight;
-    line-height: $headings-line-height;
-    color: $headings-color;
-    @include font-size($h5-font-size);
-    display: block;
-    background-color: $td-sidebar-bg-color;
-    padding: 0.5em;
-    border-style: solid;
-    border-color: $primary;
-    border-width: 0 0 1px 0;
+    // margin-bottom: 0;
+    // font-family: $headings-font-family;
+    // font-weight: $headings-font-weight;
+    // line-height: $headings-line-height;
+    // color: $headings-color;
+    // @include font-size($h5-font-size);
+    // display: block;
+    // background-color: $td-sidebar-bg-color;
+    // padding: 0.5em;
+    // border-style: solid;
+    // border-color: $primary;
+    // border-width: 0 0 1px 0;
     // font-size: 3em;
+  }
+
+  .attachments-icon {
+    font-size: 1.2em;
+    margin-right: 0.2em;
   }
 
   .attachments-description {
@@ -37,11 +44,11 @@ section.attachments {
   }
 
   .attachments-inner {
-    padding: 1em;
+    // padding: 1em;
   }
 
   .attachments-files {
-    padding: 1em;
+    // padding: 1em;
 
     ul {
       list-style-type: none;
