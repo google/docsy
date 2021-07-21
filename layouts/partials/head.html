@@ -17,14 +17,14 @@
 <!--<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Page.Params.HTMLtitle }}{{ . }} {{ end }}{{ end }}</title>-->
 <title>{{ if .IsHome }}{{ .Page.Params.HTMLtitle  }}{{ else }}{{ with .Page.Params.SEOtitle }}{{ . }}{{ end }}{{ end }}</title>
 <meta name="description" content="{{ .Page.Params.Content }}">
-<meta name="”og:image" content="{{ .Site.Params.social_logo_path }}">
-<meta property="og:image" content="{{ .Site.Params.social_logo_path }}">
+<meta name="”og:image" content="{{ .Site.Params.social_logo_path | absURL  }}">
+<meta property="og:image" content="{{ .Site.Params.social_logo_path | absURL }}">
 
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
-<meta name="twitter:image" content="{{ .Site.Params.twitter_logo_path }}">
-{{ partialCached "head-css.html" . "asdf" }}
+<meta name="twitter:image" content="{{ .Site.Params.twitter_logo_path | absURL }}">
+{{ partialCached "head-css.html" . "asdf" }} 
 
 
 <!--commenting the line below  for SEO purposes - By @anthony -->
