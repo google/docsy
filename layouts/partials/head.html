@@ -18,6 +18,7 @@
 <title>{{ if .IsHome }}{{ .Page.Params.HTMLtitle  }}{{ else }}{{ with .Page.Params.SEOtitle }}{{ . }}{{ end }}{{ end }}</title>
 <meta name="description" content="{{ .Page.Params.Content }}">
 <meta name="”og:image" content="{{ .Site.Params.social_logo_path }}">
+<meta property="og:image" content="{{ .Site.Params.social_logo_path }}">
 
 {{- template "_internal/opengraph.html" . -}}
 {{- template "_internal/google_news.html" . -}}
