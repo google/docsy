@@ -78,7 +78,7 @@ description: >
 ---
 ```
 
-To hide a page or section from the menu, set `toc_hide: true` in front matter.
+To hide a page or section from the menu, set `toc_hide: true` in front matter. When set to true in a page, that page is not displayed in the section index page's list of pages. 
 
 ### Section menu options
 
