@@ -78,7 +78,20 @@ description: >
 ---
 ```
 
-To hide a page or section from the menu, set `toc_hide: true` in front matter. When set to true in a page, that page is not displayed in the section index page's list of pages. 
+To hide a page or section from the menu, set `toc_hide: true` in the front matter. 
+
+To hide a page on the section summary, set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summery` to `true` in the front matter.
+
+```yaml
+---
+title: "My Hidden Page"
+weight: 99
+toc_hide: true
+hide_summary: true
+description: >
+  Page hidden from both the TOC menu and the section summary list.
+---
+```
 
 ### Section menu options
 
