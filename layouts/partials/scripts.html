@@ -5,6 +5,8 @@
 <script src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" integrity="sha384-uQikAXnCAqsMb3ygtdqBYvcwvHUkzGIpjdGyy9owhURXHUxLC5LgTcSxJQH/RzjK" crossorigin="anonymous"></script>
 {{ end }}
 
+<script src='{{ "/js/tabpane-persist.js" | relURL }}'></script>
+
 <!-- load the deflate.js for plantuml support -->
 {{ if .Site.Params.plantuml.enable }}
 <script src='{{ "/js/deflate.js" | relURL }}'></script>
