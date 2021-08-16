@@ -80,7 +80,7 @@ description: >
 
 To hide a page or section from the menu, set `toc_hide: true` in the front matter. 
 
-To hide a page on the section summary, set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summery` to `true` in the front matter.
+To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
 
 ```yaml
 ---
