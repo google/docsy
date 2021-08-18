@@ -20,6 +20,8 @@ window.markmap = {
 <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
 {{ end }}
 
+<script src='{{ "/js/tabpane-persist.js" | relURL }}'></script>
+
 <!-- load the deflate.js for plantuml support -->
 {{ if .Site.Params.plantuml.enable }}
 <script src='{{ "/js/deflate.js" | relURL }}'></script>

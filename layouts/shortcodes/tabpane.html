@@ -7,8 +7,11 @@
       <!-- Generate the IDs for the <a> and the <div> elements -->
       {{- $tabid := printf "tabs-%v-%v-tab" $.Ordinal $index | anchorize -}}
       {{- $entryid := printf "tabs-%v-%v" $.Ordinal $index | anchorize -}}
-      <a class="nav-link{{ if eq $index "0" }} active{{ end }}"
-        id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
+      <!-- Replace space and + from tabname to set class -->
+      {{- $tabname := replaceRE "(\\s)" "-" $element.header -}}
+      {{- $tabname := replaceRE "(\\+)" "-" $tabname -}}
+      <a class="nav-link{{ if eq $index "0" }} active{{ end }} tab-{{ $tabname }}"
+        id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab" onclick="handleClick({{ $tabname }});"
         aria-controls="{{ $entryid }}" aria-selected="{{- cond (eq $index "0") "true" "false" -}}">
         {{ index . "header" }}
       </a>
