@@ -7,7 +7,7 @@
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
 
-{{ if and (eq (getenv "HUGO_ENV") "production") (ne $outputFormat "print") -}}
+{{ if and hugo.IsProduction (ne $outputFormat "print") -}}
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 {{ else -}}
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -45,7 +45,7 @@
 {{ end }}
 {{ partial "hooks/head-end.html" . }}
 <!--To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled -->
-{{ if eq (getenv "HUGO_ENV") "production" }}
+{{ if hugo.IsProduction }}
 {{ if hasPrefix .Site.GoogleAnalytics "G-"}}
 {{ template "_internal/google_analytics.html" . }}
 {{ else }}
