@@ -38,7 +38,7 @@ If you do not want your deployed site to be indexed by search engines (for examp
 The simplest way to set this is by using the `-e` flag when specifying or running your `hugo` command, as in the following example:
 
 ```
-hugo -e myenvironment
+hugo -e development
 ```
 
 
