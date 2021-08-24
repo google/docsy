@@ -313,6 +313,15 @@ To disable all RSS feeds, add the following to your `config.toml`:
 disableKinds = ["RSS"]
 ```
 
+{{% alert title="Note" color="info" %}}
+If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
+
+```toml
+[outputs]
+section = [ "HTML", "RSS", "print" ]
+```
+{{% /alert %}}
+
 ## Sitemap
 
 Hugo creates a `sitemap.xml` file for your generated site by default: for example, [here's the sitemap](/sitemap.xml) for this site.
