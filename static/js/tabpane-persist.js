@@ -4,15 +4,16 @@ if (typeof Storage !== 'undefined') {
         document
             .querySelectorAll('.tab-' + activeLanguage)
             .forEach((element) => {
-                element.click();
+              $('#' + element.id).tab('show');
             });
     }
 }
 function handleClick(language) {
     if (typeof Storage !== 'undefined') {
         localStorage.setItem('active_language', language);
-        document.querySelectorAll('.tab-' + language).forEach((element) => {
-            element.click();
+        document.querySelectorAll('.tab-' + language)
+          .forEach((element) => {
+            $('#' + element.id).tab('show');
         });
     }
 }
