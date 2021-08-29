@@ -42,3 +42,7 @@ other = "Tõstata dokumentatsiooni kohta ülesanne" # perhaps there is a better 
 other = "Tõstata projekti kohta ülesanne"
 [post_posts_in]
 other = "Postitused" # in Estonian this "in" should be the suffix of the next word, cannot include it to that phrase.
+[post_reading_time]
+other = "minute read"
+[post_less_than_a_minute_read]
+other = "less than a minute"

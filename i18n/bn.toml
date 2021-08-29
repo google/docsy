@@ -41,6 +41,10 @@ other = "ডকুমেন্টেশন ইস্যু তৈরি কর�
 other = "প্রকল্পের সমস্যা তৈরি করুন"
 [post_posts_in]
 other = "পোস্ট"
+[post_reading_time]
+other = "minute read"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # মুদ্রণ সমর্থন
 [print_printable_section]
