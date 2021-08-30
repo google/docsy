@@ -43,6 +43,11 @@ other = "ساخت ایشو"
 other = "ساخت ایشو برای پوسته"
 [post_posts_in]
 other = "نوشته ها در"
+[post_reading_time]
+other = "دقیقه برای خواندن"
+[post_less_than_a_minute_read]
+other = "کمتر از یک دقیقه"
+
 
 # Print support
 [print_printable_section]

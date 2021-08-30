@@ -47,6 +47,10 @@ other = "Problem zu dieser Seite melden"
 other = "Problem melden"
 [post_posts_in]
 other = "Einträge in"
+[post_reading_time]
+other = "minute read"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # Print support
 [print_printable_section]

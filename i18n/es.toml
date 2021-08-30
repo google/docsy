@@ -49,6 +49,8 @@ other = "Notificar una incidencia en un proyecto"
 other = "Añadir entrada"
 [post_reading_time]
 other = "minutos de lectura"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # Print support
 [print_printable_section]

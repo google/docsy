@@ -45,6 +45,8 @@ other = "Signler un problème dans le projet"
 other = "Messages dans"
 [post_reading_time]
 other = "minutes à lire"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # Print support
 [print_printable_section]
