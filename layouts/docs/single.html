@@ -1,3 +1,13 @@
+{{/* grpc-docsy file override */}}
+
 {{ define "main" }}
+<h1 class="mb-4 font-weight-bold">{{ .Title }}</h1>
+<p class="lead pb-2">{{ .Description }}</p>
+<div class="d-xl-none td-toc td-toc--inline d-print-none">
+  {{ partial "docs/toc-inline.html" . }}
+</div>
 {{ .Render "content" }}
+<div class="c-global-meta-links">
+  {{ partial "page-meta-links" .}}
+</div>
 {{ end }}

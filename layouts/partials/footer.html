@@ -1,3 +1,4 @@
+{{/* grpc-docsy file override */ -}}
 {{ $links := .Site.Params.links }}
 <footer class="bg-dark py-5 row d-print-none">
   <div class="container-fluid mx-sm-5">
@@ -17,11 +18,27 @@
         {{ end }}
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>{{ end }}
+        {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ .}}
+          <!-- {{ T "footer_all_rights_reserved" }} -->
+        </small>{{ end }}
         {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></small>{{ end }}
-	{{ if not .Site.Params.ui.footer_about_disable }}
-		{{ with .Site.GetPage "about" }}<p class="mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
-	{{ end }}
+        {{ if not .Site.Params.ui.footer_about_disable }}
+          {{ with .Site.GetPage "about" -}}
+            <p class="mt-2 text-white"><a href="{{ .RelPermalink }}">{{ .Title }}</a> |
+              <a href="#">Trademarks</a> |
+              <a href="#">Terms</a>
+            </p>
+          {{- end }}
+        {{ end }}
+      </div>
+    </div>
+    <div class="row text-center text-white small">
+      <div class="col-12 text-center py-2 order-sm-2">
+        <a href="https://www.linuxfoundation.org/terms" target="_blank" rel="noopener">Terms</a> |
+        <a href="https://www.linuxfoundation.org/privacy" target="_blank" rel="noopener">Privacy</a> |
+        <a href="https://www.linuxfoundation.org/trademark-usage" target="_blank" rel="noopener">Trademarks</a> |
+        <a href="https://github.com/grpc/grpc.io/blob/main/LICENSE" target="_blank" rel="noopener">License</a> |
+        <a href="/about/">About</a>
       </div>
     </div>
   </div>

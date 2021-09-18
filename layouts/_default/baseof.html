@@ -1,3 +1,4 @@
+{{/* grpc-docsy file override */ -}}
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
   <head>
@@ -8,6 +9,7 @@
       {{ partial "navbar.html" . }}
     </header>
     <div class="container-fluid td-default td-outer">
+      {{ partial "banner.html" . }}
       <main role="main" class="td-main">
         {{ block "main" . }}{{ end }}
       </main>

@@ -1,8 +1,14 @@
-<nav aria-label="breadcrumb" class="d-none d-md-block d-print-none">
+{{/* grpc-docsy file override */ -}}
+{{ if .Parent.IsHome -}}
+<div class="l-no-breadcrumb"></div>
+{{ else -}}
+<nav aria-label="breadcrumb" class="d-print-none">
 	<ol class="breadcrumb spb-1">
 		{{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
 	</ol>
 </nav	>
+{{ end -}}
+
 {{ define "breadcrumbnav" }}
 {{ if .p1.Parent }}
 {{ if not .p1.Parent.IsHome }}

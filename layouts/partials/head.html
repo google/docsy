@@ -1,11 +1,14 @@
+{{/* grpc-docsy file override */ -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 {{ hugo.Generator }}
 {{- $outputFormat := partial "outputformat.html" . -}}
 
+{{/*
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
+*/}}
 
 {{ if and hugo.IsProduction (ne $outputFormat "print") -}}
 <META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
@@ -14,7 +17,15 @@
 {{ end -}}
 
 {{ partialCached "favicons.html" . }}
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
+<title>
+  {{- if not .IsHome -}}
+    {{ with .Title }}{{ . }} | {{ end -}}
+    {{ if findRE "^docs/(languages|platforms)/.+?/[^_]" .File.Path -}}
+      {{ with .Parent.Title }}{{ . }} | {{ end -}}
+    {{ end -}}
+  {{ end -}}
+  {{ .Site.Title -}}
+</title>
 <!-- for search engine optimization and third-party search engines like Elastic App Search-->
 {{ if .Page.Description }}
   <meta name="description" content="{{ .Page.Description }}">
@@ -22,8 +33,7 @@
   {{ $desc := (.Page.Content | safeHTML | truncate 150) }}
   <meta name="description" content="{{ $desc }}">
 {{ end }}
-
-{{- template "_internal/opengraph.html" . -}}
+{{ template "_internal/opengraph.html" . -}}
 {{- template "_internal/google_news.html" . -}}
 {{- template "_internal/schema.html" . -}}
 {{- template "_internal/twitter_cards.html" . -}}
