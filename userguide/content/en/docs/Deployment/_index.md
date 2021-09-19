@@ -29,6 +29,19 @@ If you've just added the theme as a submodule in a local version of your site an
 
 Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site. If you have more than one local git branch, when you switch between git branches the local website reflects the files in the current branch.
 
+## Build environments and indexing
+
+By default, Hugo sites built with `hugo` (rather than served locally with `hugo server`) have the Hugo build environment `production`. Deployed Docsy sites with `production` builds can be indexed by search engines, including [Google Custom Search Engines](/docs/adding-content/navigation/#configure-search-with-a-google-custom-search-engine). Production builds also have optimized JavaScript and CSS for live deployment (for example, minified JS rather than the more legible original source).
+
+If you do not want your deployed site to be indexed by search engines (for example if you are still developing your live site), or if you want to build a development version of your site for offline analysis, you can set your Hugo build environment to something else such as `development` (the default for local deploys with `hugo server`), `test`, or another environment name of your choice.
+
+The simplest way to set this is by using the `-e` flag when specifying or running your `hugo` command, as in the following example:
+
+```
+hugo -e development
+```
+
+
 ## Deployment with Netlify
 
 We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from your Git provider (GitHub, GitLab, or BitBucket), with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/), previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
@@ -40,11 +53,10 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
 1. Click **New site from Git**.
 1. Click your chosen Git provider, then choose your site repo from your list of repos.
 1. In the **Deploy settings** page:
-   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules.
+   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules. If you don't want your site to be indexed by search engines, you can add an environment flag to specify a non-`production` environment, as described in [Build environments and indexing](/#build-environments-and-indexing).
    1. Click **Show advanced**. 
    1. In the **Advanced build settings** section, click **New variable**. 
    1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.53` or later as its **Value**. 
-   1. (Optional) Click **New variable** again, and this time set `HUGO_ENV` to `production`. Do this if you want your site to be indexed by search engines. You must do this if you want to use a [Google Custom Search Engine](/docs/adding-content/navigation/#configure-search-with-a-google-custom-search-engine).
 1. Click **Deploy site**.
 
 {{% alert title="Note" color="primary" %}}

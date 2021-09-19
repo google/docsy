@@ -1,7 +1,7 @@
 //
 // Right side toc
 //
-.td-toc {
+.td-sidebar-toc {
     border-left: 1px solid $border-color;
 
     @supports (position: sticky) {
@@ -16,6 +16,17 @@
     padding-bottom: 1.5rem;
     vertical-align: top;
 
+}
+
+.td-page-meta {
+    a {
+        display: block;
+        font-weight: $font-weight-medium;
+    }
+}
+
+.td-toc {
+
     a {
         display: block;
         font-weight: $font-weight-light;
@@ -29,12 +40,6 @@
 
     li li {
         margin-left: 0.5rem;
-    }
-
-    .td-page-meta {
-        a {
-            font-weight: $font-weight-medium;
-        }
     }
 
     #TableOfContents {

@@ -14,7 +14,7 @@
 {{ with index $links "developer"}}
 {{ template "community-links-list"  . }}
 {{ end }}
-<p>You can find out how to contribute to these docs in our <a href="/docs/contribution-guidelines/">Contribution Guidelines</a>.
+<p>You can find out how to contribute to these docs in our <a href="../docs/contribution-guidelines/">Contribution Guidelines</a>.
 </div>
 </section>
 
@@ -22,7 +22,7 @@
 <ul>
  {{ range . }}
  <li title="{{ .name }}">
-   <a target="_blank" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }}
+   <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}:</a> {{ .desc }}
  </li>
   {{ end }}
 </ul>

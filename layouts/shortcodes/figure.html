@@ -1,19 +1,19 @@
 {{/*
   docsy file override of Hugo shortcode, see
-  https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates.autogen.gohugoio
+  https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates.autogen.go
  */ -}}
 {{ $src := (.Page.Resources.GetMatch (printf "**%s*" (.Get "src"))) }}
 <figure{{ with .Get "class" }} class="{{ . }}"{{ end }}>
     {{- if .Get "link" -}}
         <a href="{{ .Get "link" }}"{{ with .Get "target" }} target="{{ . }}"{{ end }}{{ with .Get "rel" }} rel="{{ . }}"{{ end }}>
-    {{- end }}
-    <img src="{{ if $src }}{{ $src.RelPermalink }}{{ else }}{{ .Get "src" }}{{ end }}" 
+    {{- end -}}
+    <img src="{{ .Get "src" }}"
          {{- if or (.Get "alt") (.Get "caption") }}
          alt="{{ with .Get "alt" }}{{ . }}{{ else }}{{ .Get "caption" | markdownify| plainify }}{{ end }}"
          {{- end -}}
          {{- with .Get "width" }} width="{{ . }}"{{ end -}}
          {{- with .Get "height" }} height="{{ . }}"{{ end -}}
-    /> <!-- Closing img tag -->
+    /><!-- Closing img tag -->
     {{- if .Get "link" }}</a>{{ end -}}
     {{- if or (or (.Get "title") (.Get "caption")) (.Get "attr") -}}
         <figcaption>

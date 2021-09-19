@@ -1,30 +1,41 @@
 {{/* grpc-docsy file override */}}
 
-{{ define "main" -}}
-	<div class="td-content list-page">
-		<h1>{{ .Title }}</h1>
-		{{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
+{{ define "main" }}
+<div class="td-content list-page">
+	<h1>{{ .Title }}</h1>
+  {{ with .Params.description }}<div class="lead">{{ . | markdownify }}</div>{{ end }}
+	<header class="article-meta">
+		{{ $context := . }}
+		{{ if .Site.Params.Taxonomy.taxonomyPageHeader }}
+			{{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyPageHeader }}
+				{{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo ) }}
+			{{ end }}
+		{{ else }}
+			{{ range $taxo, $taxo_map := .Site.Taxonomies }}
+				{{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo ) }}
+			{{ end }}
+		{{ end }}
 		{{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) }}
 			{{ partial "reading-time.html" . }}
 		{{ end }}
-
-    {{ if .Params.prog_lang_home }}
-      {{ partial "docs/prog-lang-home.html" . }}
-		{{ else }}
-			{{ .Content }}
-			{{ partial "section-index.html" . }}
-		{{ end }}
-		{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable) (.Site.GoogleAnalytics)) }}
-			{{ partial "feedback.html" .Site.Params.ui.feedback }}
-			<br />
-		{{ end }}
-		{{ if (.Site.DisqusShortname) }}
-			<br />
-			{{ partial "disqus-comment.html" . }}
-		{{ end }}
-		<div class="text-muted mt-5 pt-3 border-top">{{ partial "page-meta-lastmod.html" . }}</div>
-		<div class="c-global-meta-links">
-			{{ partial "page-meta-links" .}}
-		</div>
+	</header>
+	{{ if .Params.prog_lang_home }}
+		{{ partial "docs/prog-lang-home.html" . }}
+	{{ else }}
+	{{ .Content }}
+        {{ partial "section-index.html" . }}
+	{{ end }}
+	{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable) (.Site.GoogleAnalytics)) }}
+		{{ partial "feedback.html" .Site.Params.ui.feedback }}
+		<br />
+	{{ end }}
+	{{ if (.Site.DisqusShortname) }}
+		<br />
+		{{ partial "disqus-comment.html" . }}
+	{{ end }}
+	{{ partial "page-meta-lastmod.html" . }}
+	<div class="c-global-meta-links">
+		{{ partial "page-meta-links" .}}
 	</div>
+</div>
 {{ end }}

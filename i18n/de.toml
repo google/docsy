@@ -3,10 +3,10 @@
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
-other = "Weiter"
+other = "Zurück"
 
 [ui_pager_next]
-other = "Zurück"
+other = "Weiter"
 
 [ui_read_more]
 other = "Weiterlesen"
@@ -17,6 +17,10 @@ other = "Diese Seite durchsuchen…"
 # Used in sentences such as "Posted in News"
 [ui_in]
 other = "in"
+
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "alle"
 
 # Footer text
 [footer_all_rights_reserved]
@@ -43,6 +47,10 @@ other = "Problem zu dieser Seite melden"
 other = "Problem melden"
 [post_posts_in]
 other = "Einträge in"
+[post_reading_time]
+other = "Minuten Lesezeit"
+[post_less_than_a_minute_read]
+other = "weniger als eine Minute"
 
 # Print support
 [print_printable_section]

@@ -11,7 +11,7 @@ description: >
 ## Install the prerequisites
 
 1. On Mac and Windows, download and install [Docker
-   Desktop](ihttps://www.docker.com/get-started).  On Linux, install [Docker
+   Desktop](https://www.docker.com/get-started).  On Linux, install [Docker
    engine](https://docs.docker.com/engine/install/#server) and [Docker
    compose](https://docs.docker.com/compose/install/).
    
@@ -76,6 +76,3 @@ To cleanup your system and delete the container image follow the next steps.
 * Learn about [basic setup and configurations for Docsy](/docs/getting-started/).
 * [Add content and customize your site](/docs/adding-content/)
 * [Publish your site](/docs/deployment/).
-
-
-	

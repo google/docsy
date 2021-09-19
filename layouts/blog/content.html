@@ -47,9 +47,21 @@
 	<div class="d-xl-none td-toc td-toc--inline d-print-none">
 		{{ partial "docs/toc-inline.html" . }}
 	</div>
-	{{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) }}
-		{{ partial "reading-time.html" . }}
-	{{ end }}
+	<header class="article-meta">
+		{{ $context := . }}
+		{{ if .Site.Params.Taxonomy.taxonomyPageHeader }}
+			{{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyPageHeader }}
+				{{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo ) }}
+			{{ end }}
+		{{ else }}
+			{{ range $taxo, $taxo_map := .Site.Taxonomies }}
+				{{ partial "taxonomy_terms_article.html" (dict "context" $context "taxo" $taxo ) }}
+			{{ end }}
+		{{ end }}
+		{{ if (and (not .Params.hide_readingtime) (.Site.Params.ui.readingtime.enable)) }}
+			{{ partial "reading-time.html" . }}
+		{{ end }}
+	</header>
 	{{ .Content }}
 	{{ if (.Site.Params.DisqusShortname) }}
 		<br />

@@ -16,7 +16,7 @@ defaultContentLanguageInSubdir = false
 # Useful when translating.
 enableMissingTranslationPlaceholders = true
 
-disableKinds = ["taxonomy", "taxonomyTerm"]
+# disableKinds = ["taxonomy", "taxonomyTerm"]
 
 # Highlighting config
 pygmentsCodeFences = true
@@ -35,9 +35,9 @@ pygmentsStyle = "tango"
 blog = "/:section/:year/:month/:day/:slug/"
 
 [outputs]
-home = [ "HTML", "JSON" ]
+home = [ "HTML" ]
 page = [ "HTML" ]
-section = [ "HTML", "RSS", "print"]
+#section = [ "HTML", "RSS", "print"]
 
 ## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
 [blackfriday]
@@ -58,10 +58,13 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
+    pre = "<i class='fas fa-laptop-code'></i>"
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
+    pre = "<i class='fab fa-github'></i>"
+    post = "<span class='alert'>New!</span>" 
 
 [services]
 [services.googleAnalytics]
@@ -143,6 +146,8 @@ prism_syntax_highlighting = false
 [params.ui]
 # Enable to show the side bar menu in its compact state.
 sidebar_menu_compact = false
+sidebar_menu_foldable = false
+sidebar_cache_limit = 10
 #  Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
 #  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
@@ -171,7 +176,7 @@ enable = false
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
 	name ="GitHub Discussions"
-	url = "https://twitter.com/docsydocs"
+	url = "https://github.com/google/docsy/discussions"
 	icon = "fab fa-github"
         desc = "Discussion and help from your fellow users"
 [[params.links.user]]
@@ -210,5 +215,30 @@ enable = false
 enable = true
 theme = "default"
 
+[params.plantuml]
+enable = true
+theme = "default"
+svg_image_url = "https://www.plantuml.com/plantuml/svg/"
+
+[params.katex]
+enable = true
+html_dom_element = "document.body"
+
+# enable display of chemical equations and physical units via mhchem extension
+[params.katex.mhchem]
+enable = true
+
 [params.print]
 disable_toc = false
+
+[params.markmap]
+enable = true
+
+# [params.taxonomy]
+# taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
+# taxonomyCloudTitle = ["Tag Cloud", "Cloud of Categories"] # if used, must have same lang as taxonomyCloud
+# taxonomyPageHeader = ["tags", "categories"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+
+[taxonomies]
+tag = "tags"
+category = "categories"

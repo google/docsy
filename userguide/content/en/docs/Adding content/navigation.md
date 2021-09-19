@@ -14,11 +14,12 @@ To add a page or section to this menu, add it to the site's `main` menu in eithe
 
 ```yaml
 ---
-title: "Docsy Documentation"
+title: "Welcome to Docsy"
 linkTitle: "Documentation"
 menu:
   main:
     weight: 20
+    pre: <i class='fas fa-book'></i>
 ---
 ```
 
@@ -32,6 +33,21 @@ If you want to add a link to an external site to this menu, add it in `config.to
     weight = 50
     url = "https://github.com/google/docsy/"
 ```
+
+### Adding icons to the top-level menu
+
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+
+```yaml
+[[menu.main]]
+    name = "GitHub"
+    weight = 50
+    url = "https://github.com/google/docsy/"
+    pre = "<i class='fab fa-github'></i>"
+    post = "<span class='alert'>New!</span>" 
+```
+
+You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 
 ### Adding a version drop-down
 
@@ -62,9 +78,50 @@ description: >
 ---
 ```
 
-To hide a page or section from the menu, set `toc_hide: true` in front matter.
+To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter. 
 
-By default, the section menu will show the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site param `ui.sidebar_menu_compact = true` in `config.toml`.
+To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
+
+```yaml
+---
+title: "My Hidden Page"
+weight: 99
+toc_hide: true
+hide_summary: true
+description: >
+  Page hidden from both the TOC menu and the section summary list.
+---
+```
+
+### Section menu options
+
+By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `config.toml`.
+
+With the compact menu (`.ui.sidebar_menu_compact = true`), only the current page's ancestors, siblings and direct descendants are shown. You can use the optional parameter `.ui.ul_show` to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the first menu level is always displayed.
+
+As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `config.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
+
+On large sites (default: > 2000 pages) the section menu is not generated for each page, but cached for the whole section. The HTML classes for marking the active menu item (and menu path) are then set using JS. You can adjust the limit for activating the cached section menu with the optional parameter `.ui.sidebar_cache_limit`.
+
+### Add icons to the section menu
+
+You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fas fa-tools`). 
+
+You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
+
+Out of the box, if you want to use icons, you should define icons for all items on the same menu level in order to ensure an appropriate look. If the icons are used in a different way, individual CSS adjustments are likely necessary.
+
+### Add manual links to the section menu
+
+By default the section menu is entirely generated from your section's pages. If you want to add a manual link to this menu, such as a link to an external site or a page in a different section of your site, you can do this by creating a *placeholder page file* in the doc hierarchy with the appropriate weight and some special parameters in its metadata (frontmatter) to specify the link details. 
+
+To create a placeholder page, create a page file as usual in the directory where you want the link to show up in the menu, and add a `manualLink` parameter to its metadata. If a page has `manualLink` in its metadata, Docsy generates a link for it in the section menu for this page and in the section index (the list of the child pages of a section on a landing page - see [description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)), but the link destination is replaced by the value of `manualLink`. The link text is the `title` (or `linkTitle` if set) of your placeholder page. You can optionally also set the `title` attribute of the link with the parameter `manualLinkTitle` and a link target with `manualLinkTarget` - for example if you want an external link to open in a new tab you can set the link target to `_blank`. Docsy automatically adds `rel=noopener` to links that open new tabs as a security best practice.
+
+ You can also use `manualLink` to add an additional cross reference to another existing page of your site. For internal links you can choose to use the parameter `manualLinkRelref` instead of `manualLink` to use the built-in Hugo function [relref](https://gohugo.io/functions/relref/ "External link to official Hugo Docs"). If `relref` can't find a unique page in your site, Hugo throws a error message.
+
+ {{% alert title="Note" %}}
+ Although all generated menu and landing page links based on your placeholder file are set according to the parameters `manualLink` or `manualLinkRelref`, Hugo still generates a regular HTML site page for the file, albeit one with no generated links to it. To avoid confusion if users accidentally land on a generated placeholder page, we recommend specifying the URL for the external link in the normal content and / or page description of the page.
+ {{% /alert %}}
 
 ## Breadcrumb navigation
 
@@ -92,19 +149,12 @@ sidebar_search_disable = true
 
 ## Configure search with a Google Custom Search Engine
 
-By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) (GCSE) to search your site. To enable this feature, you'll first need to make sure that you have built a public production version of your site, as otherwise your site won't be crawled and indexed.
+By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) (GCSE) to search your site. To enable this feature, you'll first need to make sure that you have built and deployed [a production version of your site](/docs/deployment#build-environments-and-indexing), as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
 
-1.  Deploy your site and ensure that it's built with `HUGO_ENV="production"`, as Google will only crawl and index Docsy sites built with this setting (you probably don't want your not-ready-for-prime-time site to be searchable!). You can specify this variable as a command line flag to Hugo: 
-
-    ```
-    $ env HUGO_ENV="production" hugo
-    ```
-
-    Alternatively, if you're using Netlify, you can specify it as a Netlify [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) in `netlify.toml` or the Netlify UI, along with the Hugo version. It may take a day or so before your site has actual search results available.
-2.  Create a Google Custom Search Engine for your deployed site by clicking **New search engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
-3.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to do the following:
+1.  Create a Google Custom Search Engine for your deployed site by clicking **New search engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
+1.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to do the following:
 
     * Select **Look and feel**. Change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
     * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
