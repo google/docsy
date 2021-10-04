@@ -27,6 +27,7 @@ Example sites that have low to no customization:
 | [Graphviz](https://graphviz.org) | https://gitlab.com/graphviz/graphviz.gitlab.io |
 | [Cloudpods](https://www.cloudpods.org) | https://github.com/yunionio/docs |
 | [Selenium](https://www.selenium.dev/) | https://github.com/SeleniumHQ/seleniumhq.github.io |
+| [fission.io](https://fission.io/) | https://github.com/fission/fission.io |
 
 ## Customized Docsy examples
 
