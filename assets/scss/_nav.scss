@@ -64,6 +64,16 @@
         @include placeholder {
             color: $navbar-dark-color;
         }
+
+        &.offline-search-input {
+            // Set the search field background color to active color when offline search is enabled.
+            // https://github.com/google/docsy/issues/718
+            background: $navbar-dark-active-color;
+
+            @include placeholder {
+                color: inherit;
+            }
+        }
     }
 
     .dropdown {
@@ -122,12 +132,12 @@
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
             font-family: "Font Awesome 5 Free";
-            font-weight: 900; 
+            font-weight: 900;
             content: "\f0d9";
             padding-left: 0.5em;
             padding-right: 0.5em;
         }
-    }  
+    }
 }
 
 // Foldable sidebar menu
@@ -136,18 +146,18 @@ nav.foldable-nav {
     &#td-section-nav {
         position: relative;
     }
-    
+
     &#td-section-nav label {
         margin-bottom: 0;
         width: 100%;
     }
-    
+
     .td-sidebar-nav__section, .with-child ul {
         list-style: none;
         padding: 0;
         margin: 0;
     }
-    
+
     .ul-1 > li {
         padding-left: 1.5em;
     }
@@ -165,8 +175,8 @@ nav.foldable-nav {
 
     input[type=checkbox] { display: none; }
 
-    .with-child, .without-child { 
-        position: relative; 
+    .with-child, .without-child {
+        position: relative;
         padding-left: 1.5em;
     }
 
@@ -189,30 +199,30 @@ nav.foldable-nav {
         }
     }
 
-    .ul-1 .with-child > input:checked ~ label:before { 
+    .ul-1 .with-child > input:checked ~ label:before {
         color: $primary;
         transform: rotate(90deg);
-        transition: transform 0.5s; 
+        transition: transform 0.5s;
     }
 
     .with-child ul { margin-top: 0.1em; }
-    
-}    
+
+}
 
 @media (hover: hover) and (pointer: fine) {
-    
+
     nav.foldable-nav {
 
-        .ul-1 .with-child > label:hover:before { 
+        .ul-1 .with-child > label:hover:before {
             color: $primary;
             transform: rotate(30deg);
-            transition: transform 0.5s; 
+            transition: transform 0.5s;
         }
 
-        .ul-1 .with-child > input:checked ~ label:hover:before { 
+        .ul-1 .with-child > input:checked ~ label:hover:before {
             color: $primary;
             transform: rotate(60deg) !important;
-            transition: transform 0.5s; 
+            transition: transform 0.5s;
         }
     }
 }
