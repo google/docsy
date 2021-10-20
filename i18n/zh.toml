@@ -20,7 +20,7 @@ other = "in"
 
 # Footer text
 [footer_all_rights_reserved]
-other = "All Rights Reserved"
+other = "版权所有"
 
 [footer_privacy_policy]
 other = "隐私政策"
@@ -44,9 +44,9 @@ other = "提交项目问题"
 [post_posts_in]
 other = "Posts in"
 [post_reading_time]
-other = "minute read"
+other = "分钟阅读"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "少于1分钟"
 
 # Print support
 [print_printable_section]
