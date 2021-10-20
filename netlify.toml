@@ -3,7 +3,7 @@
 
 [build]
 publish = "userguide/public"
-command = "npm run build:preview"
+command = "npm install && npm run build:preview"
 
 [build.environment]
 HUGO_VERSION = "0.88.1"
