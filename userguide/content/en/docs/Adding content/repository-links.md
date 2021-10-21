@@ -1,6 +1,5 @@
 ---
-title: "Repository Links"
-linkTitle: "Repository Links"
+title: Repository Links
 weight: 9
 description: >
   Help your users interact with your source repository.
@@ -53,20 +52,51 @@ Specify a value here if you have would like to reference a different branch for 
 github_branch = "release"
 ```
 
-### `github_url` (optional)
+### `path_base_for_github_subdir` (optional)
 
-Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
+Suppose that the source files for all of the pages under `content/mysection`
+come from another repo, such as a [git submodule][]. Add settings like these to
+the section's index page so that the repository links refer to the originating
+repo:
 
 ```yaml
 ---
-title: "Example Page"
-linkTitle: "Example Page"
-date: 2017-01-05
-github_url: "https://github.com/MyUsername/myrepo/edit/main/README.md"
-description: >
-  An example page.
+title: My awesome section
+cascade:
+  github_repo: https://github.com/MyUsername/myrepo/
+  github_subdir: docs
+  path_base_for_github_subdir: content/mysection
+description: An example page.
 ---
 ```
 
-This can be useful if you have page source files in multiple Git repositories, or require a non-GitHub URL.  Pages using this value have **Edit this page** links only.
+If you only have a single page originating from another repo, then drop the
+`cascade` key and write, at the top-level, the same settings as illustrated
+above.
 
+If you'd like users to create project issues over the originating repo as well,
+then also set `github_project_repo`, something like this:
+
+```yaml
+---
+...
+cascade:
+  github_repo: &repo https://github.com/MyUsername/myrepo/
+  github_project_repo: *repo
+...
+---
+```
+
+Using a [Yaml anchor][] is optional, but it helps keep the settings [DRY][].
+
+The `path_base_for_github_subdir` setting is a regular expression, so you can
+cope with [multiple languages][] for example:
+
+```yaml
+path_base_for_github_subdir: content/\w+/mysection
+```
+
+[DRY]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
+[git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
+[multiple languages]: {{< relref "/docs/language/" >}}
+[Yaml anchor]: https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/
