@@ -144,6 +144,9 @@ nav.foldable-nav {
     &#td-section-nav label {
         margin-bottom: 0;
         width: 100%;
+        // max-width: 110%;
+
+        text-overflow: ellipsis;
     }
     
     .td-sidebar-nav__section, .with-child ul {
@@ -151,9 +154,16 @@ nav.foldable-nav {
         padding: 0;
         margin: 0;
     }
+
+    // .td-sidebar-nav__section {
+    //     &.ul-0, &.ul-1 {
+    //         padding: 0.25rem !important;
+    //         max-width: 100%;
+    //     }
+    // }
     
     .ul-1 > li {
-        padding-left: 1.5em;
+        padding-left: 0.5em;
     }
 
     ul.foldable {
@@ -171,32 +181,37 @@ nav.foldable-nav {
 
     .with-child, .without-child { 
         position: relative; 
-        padding-left: 1.5em;
+        padding-left: 1em;
     }
 
-    .ul-1 .with-child > label:before {
+    .ul-1 .with-child > label > * > span:after {
+        @extend .fal;
+
         display: inline-block;
         font-style: normal;
         font-variant: normal;
         text-rendering: auto;
         -webkit-font-smoothing: antialiased;
-        font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0da";
+        font-family: "Font Awesome 5 Pro"; content: "\f105";
         position: absolute;
-        left: 0.1em;
+        right: -1.25em;
+        top: 0.1em;
         padding-left: 0.4em;
         padding-right: 0.4em;
         font-size: 1em;
-        color: $gray-900;
-        transition: all 0.5s;
+        color: scale-color($blue, $lightness: -10%);
+        transition: all 0.05s;
+        line-height: unset;
+
         &:hover{
-        transform: rotate(90deg);
+            transform: rotate(90deg);
         }
     }
 
-    .ul-1 .with-child > input:checked ~ label:before { 
-        color: $primary;
+    .ul-1 .with-child > input:checked ~ label:after {
+        color: scale-color($blue, $lightness: -10%);
         transform: rotate(90deg);
-        transition: transform 0.5s; 
+        transition: transform 0.05s;
     }
 
     .with-child ul { margin-top: 0.1em; }
@@ -207,16 +222,16 @@ nav.foldable-nav {
     
     nav.foldable-nav {
 
-        .ul-1 .with-child > label:hover:before { 
-            color: $primary;
+        .ul-1 .with-child > label:hover:after {
+            color: scale-color($blue, $lightness: -10%);
             transform: rotate(30deg);
-            transition: transform 0.5s; 
+            transition: transform 0.1s;
         }
 
-        .ul-1 .with-child > input:checked ~ label:hover:before { 
-            color: $primary;
+        .ul-1 .with-child > input:checked ~ label:hover:after {
+            color: scale-color($blue, $lightness: -10%);
             transform: rotate(60deg) !important;
-            transition: transform 0.5s; 
+            transition: transform 0.1s;
         }
     }
 }

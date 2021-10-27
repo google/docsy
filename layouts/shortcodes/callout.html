@@ -47,7 +47,7 @@
     </div>
     <div class="callout-body">
         {{ if eq .Page.File.Ext "md" -}}
-            {{ .Inner | markdownify }}
+        {{ .Inner | markdownify }}
         {{ else -}}
             {{ .Inner | htmlUnescape | safeHTML }}
         {{- end }}
