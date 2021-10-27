@@ -17,18 +17,14 @@ $td-enable-google-fonts: true !default;
 
 // Theme colors
 
-$primary: #30638E !default;
+$primary: #000 !default;  // was originally #30638E
 $primary-light: lighten($primary, 75%) !default;
 $secondary: #FFA630 !default;
-$success: #3772FF !default;
-$info: #C0E0DE !default;
-$warning: #ED6A5A !default;
-$danger: #ED6A5A !default;
 $white: #fff !default;
 $light: #D3F3EE !default;
 
 $dark: #403F4C !default;
-$blue: #72A1E5 !default;
+$blue: #0099FF !default;
 $orange: #BA5A31 !default;
 $gray-100: #f8f9fa !default;
 $gray-200: #eee !default;
@@ -40,6 +36,18 @@ $gray-700: #495057 !default;
 $gray-800: #333 !default;
 $gray-900: #222 !default;
 $black: #000 !default;
+
+$success: $blue !default;
+$info: #C0E0DE !default;
+$notice: #3772FF !default;
+$warning: #F06F1F !default;
+$danger: #E74926 !default;
+$destructive: darken($danger, 15%) !default;
+
+$theme-colors: (
+  "notice": $notice,
+  "destructive": $destructive
+);
 
 $code-color: darken($secondary, 20%) !default;
 

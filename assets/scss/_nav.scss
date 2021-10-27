@@ -24,6 +24,10 @@
     opacity: inherit;
 }
 
+.navbar-logo {
+    max-height: 3rem;
+}
+
 .td-navbar {
     background: $primary;
     min-height: 4rem;
@@ -121,8 +125,8 @@
             font-variant: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900; 
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 900;
             content: "\f0d9";
             padding-left: 0.5em;
             padding-right: 0.5em;

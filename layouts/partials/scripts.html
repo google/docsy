@@ -27,12 +27,12 @@ window.markmap = {
 <script src='{{ "/js/deflate.js" | relURL }}'></script>
 {{ end }}
 
-<!-- load stylesheet and scripts for KaTeX support --> 
+<!-- load stylesheet and scripts for KaTeX support -->
 {{ if .Site.Params.katex.enable }}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css" integrity="sha384-Cqd8ihRLum0CCg8rz0hYKPoLZ3uw+gES2rXQXycqnL5pgVQIflxAUDS7ZSjITLb5" crossorigin="anonymous">
 <!-- The loading of KaTeX is deferred to speed up page rendering -->
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.js" integrity="sha384-1Or6BdeNQb0ezrmtGeqQHFpppNd7a/gw29xeiSikBbsb44xu3uAo8c7FwbF5jhbd" crossorigin="anonymous"></script>
-<!-- check whether support of mhchem is enabled in config.toml --> 
+<!-- check whether support of mhchem is enabled in config.toml -->
 {{ if .Site.Params.katex.mhchem.enable }}
 <!-- To add support for displaying chemical equations and physical units, load the mhchem extension: -->
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/contrib/mhchem.min.js" integrity="sha384-LIgAiYlGSAdpNC9+YDjDPF6JeS/RRIumtNo0CmyQERZ/+g0h9MbuYQwf/5pQ4Y4M"  crossorigin="anonymous"></script>
@@ -42,6 +42,8 @@ window.markmap = {
 {{ end }}
 
 {{ $jsBase := resources.Get "js/base.js" }}
+{{ $jsMenu := resources.Get "js/menu.js" }}
+{{ $jsApi := resources.Get "js/api_docs.js" }}
 {{ $jsAnchor := resources.Get "js/anchor.js" }}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
 {{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . }}
@@ -50,7 +52,7 @@ window.markmap = {
 {{ if .Site.Params.offlineSearch }}
 {{ $jsSearch = resources.Get "js/offline-search.js" }}
 {{ end }}
-{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap) | resources.Concat "js/main.js" }}
+{{ $js := (slice $jsBase $jsMenu $jsApi $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap) | resources.Concat "js/main.js" }}
 {{ if not hugo.IsProduction }}
 <script src="{{ $js.RelPermalink }}"></script>
 {{ else }}

@@ -5,9 +5,12 @@
 
 @import "../vendor/bootstrap/scss/bootstrap";
 
-@import "../vendor/Font-Awesome/scss/fontawesome.scss";
-@import "../vendor/Font-Awesome/scss/solid.scss";
-@import "../vendor/Font-Awesome/scss/brands.scss";
+@import "../fontawesome/scss/fontawesome.scss";
+@import "../fontawesome/scss/solid.scss";
+@import "../fontawesome/scss/light.scss";
+@import "../fontawesome/scss/regular.scss";
+@import "../fontawesome/scss/duotone.scss";
+@import "../fontawesome/scss/brands.scss";
 
 @import "support/utilities";
 @import "colors";
@@ -27,6 +30,9 @@
 @import "section-index";
 @import "pageinfo";
 @import "taxonomy";
+@import "api";
+@import "callouts";
+@import "resource-links";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);

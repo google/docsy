@@ -22,3 +22,13 @@ isHTML = true
 mediaType = "text/html"
 path = "_print"
 permalinkable = false
+
+# offlineSearch = true
+
+
+# User interface configuration
+[params.ui]
+# Enable to show the side bar menu in its compact state.
+sidebar_menu_compact = true
+ul_show = 2
+

@@ -1,0 +1,91 @@
+// Style callout boxes
+
+@mixin callout-heading-bg($bgcolor) {
+
+  @if lightness($bgcolor) > 75 {
+    background-color: scale-color($bgcolor, $lightness: -25%);
+  } @else {
+    background-color: $bgcolor;
+  }
+}
+
+@mixin callout-body-bg($bgcolor) {
+    $background: scale-color($bgcolor, $saturation: 75%);
+    $background: change-color($background, $alpha: 0.25);
+
+    background-color: $background;
+}
+
+.callout {
+    font-weight: $font-weight-medium;
+    background: scale-color($notice, $alpha: -75%);
+    color: inherit;
+    border-radius: 0.25rem;
+
+    padding: 0rem;
+    margin: 2rem auto;
+
+    max-width: 95%;
+
+    .callout-heading {
+        border-radius: 0.25rem;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        font-weight: bold;
+        color: $white;
+
+        margin: 0;
+        padding: 0.5em 1rem;
+    }
+
+    .callout-body {
+        padding: 1rem;
+    }
+
+    .callout-footer {
+        border-radius: 0.25rem;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+
+        margin: 0;
+        padding: 0.5em 1rem;
+
+    }
+
+    .callout-icon {
+        margin: 0.25rem 0 0.25rem 0;
+    }
+
+    .callout-title {
+        margin: 0.25rem 0.5rem;
+    }
+
+    @each $color, $value in $theme-colors {
+        &-#{$color} {
+            & .callout-heading {
+                @include callout-heading-bg($bgcolor: scale-color($value, $saturation: 25%));
+            }
+
+            @include callout-body-bg($bgcolor: $value);
+        }
+    }
+}
+
+.callout-destructive {
+
+    .callout-heading {
+        text-align: center;
+        display: block;
+
+        padding: 0.75rem 1rem;
+
+        .callout-title {
+            padding: 0.25rem 5%;
+        }
+    }
+
+    .callout-body {
+        padding: 2rem 1rem;
+    }
+}

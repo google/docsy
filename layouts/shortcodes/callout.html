@@ -1,0 +1,64 @@
+{{ $_hugo_config := `{ "version": 1 }` -}}
+{{ $level := "info" -}}
+{{ $box_title := "" -}}
+{{ $heading_classes := slice -}}
+{{ if .IsNamedParams -}}
+    {{ $level = .Get "level" | default "info" -}}
+    {{ $box_title = .Get "title" | default "" -}}
+{{ else -}}
+    {{ $level = .Get 0 | default "info" -}}
+    {{ $box_title = .Get 1 | default "" -}}
+{{ end -}}
+
+{{ $box_icon := "file-alt" -}}
+{{ if eq $level "info" -}}
+    {{ $box_icon = "info-circle"}}
+{{ else if eq $level "success" -}}
+    {{ $box_icon = "check-circle"}}
+{{ else if eq $level "notice" -}}
+    {{ $box_icon = "flag" -}}
+{{ else if eq $level "warning" -}}
+    {{ $box_icon = "exclamation-triangle"}}
+{{ else if eq "danger" $level -}}
+    {{ $box_icon = "times-octagon"}}
+{{ else if eq "destructive" $level -}}
+    {{ $box_icon = "do-not-enter"}}
+    {{ $box_title = "DESTRUCTIVE ACTION"}}
+    {{ $heading_classes = $heading_classes | append "text-center" }}
+{{ end -}}
+
+{{ if eq $box_title "" -}}
+    {{ if or (eq $box_icon "file-alt") (eq $level "") -}}
+        {{ $box_title = "Info" -}}
+    {{ else -}}
+        {{ $box_title = title $level -}}
+    {{ end -}}
+{{ end -}}
+
+{{ $heading_classes = delimit $heading_classes " " -}}
+
+<div class="callout callout-{{ $level }}">
+    <div class="callout-heading">
+        <i class="callout-icon fas fa-{{ $box_icon }}"></i>
+        <span class="callout-title">{{ $box_title | markdownify }}</span>
+        {{ if eq $level "destructive" -}}
+        <i class="callout-icon fas fa-{{ $box_icon }}"></i>
+        {{ end }}
+    </div>
+    <div class="callout-body">
+        {{ if eq .Page.File.Ext "md" -}}
+            {{ .Inner | markdownify }}
+        {{ else -}}
+            {{ .Inner | htmlUnescape | safeHTML }}
+        {{- end }}
+    </div>
+    {{ if eq "destructive" $level }}
+    <div class="callout-heading callout-footer">
+        <i class="callout-icon fas fa-{{ $box_icon }}"></i>
+        <span class="callout-title">{{ $box_title | markdownify }}</span>
+        {{ if eq $level "destructive" -}}
+        <i class="callout-icon fas fa-{{ $box_icon }}"></i>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
