@@ -78,11 +78,11 @@ As an example, consider a page at the path
 https://github.com/some-username/another-repo/edit/main/docs/subpath/some-page.md
 ```
 
-If you only have a single page originating from another repo, then drop the
+If you only have a single page originating from another repo, then omit the
 `cascade` key and write, at the top-level, the same settings as illustrated
 above.
 
-If you'd like users to create project issues over the originating repo as well,
+If you'd like users to create project issues in the originating repo as well,
 then also set `github_project_repo`, something like this:
 
 ```yaml
@@ -98,7 +98,7 @@ cascade:
 Using a [Yaml anchor][] is optional, but it helps keep the settings [DRY][].
 
 The `path_base_for_github_subdir` setting is a regular expression, so you can
-cope with [multiple languages][] for example:
+use it even if you have a site with [multiple languages][] for example:
 
 ```yaml
 path_base_for_github_subdir: content/\w+/some-section
