@@ -16,8 +16,19 @@
       {{ $gh_repo_path = printf "%s/content/%s/%s" $gh_branch ($.Site.Language.Lang) $pathFormatted }}
     {{ else if $gh_subdir }}
       {{ $gh_repo_path = printf "%s/%s/content/%s" $gh_branch $gh_subdir $pathFormatted }}
-    {{ end }}
-    {{ $gh_repo_path = replaceRE ($.Param "path_base_for_github_subdir") "" $gh_repo_path -}}
+    {{ end -}}
+
+    {{/* Adjust $gh_repo_path based on path_base_for_github_subdir */ -}}
+    {{ $ghs_base := $.Param "path_base_for_github_subdir" -}}
+    {{ $ghs_rename := "" -}}
+    {{ if reflect.IsMap $ghs_base -}}
+      {{ $ghs_rename = $ghs_base.to -}}
+      {{ $ghs_base = $ghs_base.from -}}
+    {{ end -}}
+    {{ with $ghs_base -}}
+      {{ $gh_repo_path = replaceRE . $ghs_rename $gh_repo_path -}}
+    {{ end -}}
+
     {{ $editURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
     {{ $createURL := printf "%s/edit/%s" $gh_repo $gh_repo_path }}
     {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title )}}

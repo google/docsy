@@ -104,6 +104,22 @@ cope with [multiple languages][] for example:
 path_base_for_github_subdir: content/\w+/some-section
 ```
 
+In situations where a page originates from a file under a different name, you
+can specify `from` and `to` path-rename settings. Here's an example where an
+index file is named `README.md` in the originating repo:
+
+```yaml
+---
+...
+github_repo: https://github.com/some-username/another-repo/
+github_subdir: docs
+path_base_for_github_subdir:
+  from: content/some-section/(.*?)/_index.md
+  to: $1/README.md
+...
+---
+```
+
 ### `github_url` (optional)
 
 {{% alert title="Deprecation note" color="warning" %}}
