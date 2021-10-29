@@ -96,6 +96,26 @@ cope with [multiple languages][] for example:
 path_base_for_github_subdir: content/\w+/mysection
 ```
 
+### `github_url` (optional)
+
+{{% alert title="Deprecation note" color="warning" %}}
+  This setting is deprecated. Use [path_base_for_github_subdir][] instead.
+
+  [path_base_for_github_subdir]: #path_base_for_github_subdir-optional
+{{% /alert %}}
+
+Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
+
+```yaml
+---
+title: Example Page
+github_url: https://github.com/MyUsername/myrepo/edit/main/README.md
+description: An example page.
+---
+```
+
+This can be useful if you have page source files in multiple Git repositories, or require a non-GitHub URL.  Pages using this value have **Edit this page** links only.
+
 [DRY]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [multiple languages]: {{< relref "/docs/language/" >}}
