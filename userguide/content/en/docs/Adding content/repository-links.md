@@ -1,8 +1,7 @@
 ---
 title: Repository Links
 weight: 9
-description: >
-  Help your users interact with your source repository.
+description: Help your users interact with your source repository.
 ---
 
 The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-blog-posts) include links for readers to edit the page or create issues for your docs or project via your site's source repository. The current generated links for each docs or blog page are:
@@ -54,20 +53,29 @@ github_branch = "release"
 
 ### `path_base_for_github_subdir` (optional)
 
-Suppose that the source files for all of the pages under `content/mysection`
+Suppose that the source files for all of the pages under `content/some-section`
 come from another repo, such as a [git submodule][]. Add settings like these to
-the section's index page so that the repository links refer to the originating
-repo:
+the **section's index page** so that the repository links for all pages in that
+section refer to the originating repo:
 
 ```yaml
 ---
-title: My awesome section
+title: Some super section
 cascade:
-  github_repo: https://github.com/MyUsername/myrepo/
+  github_repo: https://github.com/some-username/another-repo/
   github_subdir: docs
-  path_base_for_github_subdir: content/mysection
-description: An example page.
+  path_base_for_github_subdir: content/some-section
+...
 ---
+```
+
+As an example, consider a page at the path
+`content/some-section/subpath/some-page.md` with `github_branch` globally set to
+`main`. The index page settings above will generate the following edit link for
+`some-page.md`:
+
+```nocode
+https://github.com/some-username/another-repo/edit/main/docs/subpath/some-page.md
 ```
 
 If you only have a single page originating from another repo, then drop the
@@ -81,7 +89,7 @@ then also set `github_project_repo`, something like this:
 ---
 ...
 cascade:
-  github_repo: &repo https://github.com/MyUsername/myrepo/
+  github_repo: &repo https://github.com/some-username/another-repo/
   github_project_repo: *repo
 ...
 ---
@@ -93,7 +101,7 @@ The `path_base_for_github_subdir` setting is a regular expression, so you can
 cope with [multiple languages][] for example:
 
 ```yaml
-path_base_for_github_subdir: content/\w+/mysection
+path_base_for_github_subdir: content/\w+/some-section
 ```
 
 ### `github_url` (optional)
@@ -108,9 +116,9 @@ Specify a value for this **in your page metadata** to set a specific edit URL fo
 
 ```yaml
 ---
-title: Example Page
-github_url: https://github.com/MyUsername/myrepo/edit/main/README.md
-description: An example page.
+title: Some page
+github_url: https://github.com/some-username/another-repo/edit/main/README.md
+...
 ---
 ```
 
