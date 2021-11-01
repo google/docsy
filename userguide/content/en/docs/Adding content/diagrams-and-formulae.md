@@ -1,7 +1,7 @@
 ---
 title: "Diagrams and Formulae"
 linkTitle: "Diagrams and Formulae"
-weight:
+weight: 11
 description: >
   Add generated diagrams and scientific formulae to your site.
 ---
