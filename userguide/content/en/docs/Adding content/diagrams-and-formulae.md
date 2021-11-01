@@ -6,7 +6,7 @@ description: >
   Add generated diagrams and scientific formulae to your site.
 ---
 
-NDocsy has built-in support for a number of diagram creation and typesetting tools you can use to add rich content to your site, including \\(\KaTeX\\), Mermaid, PlantUML, and MarkMap.
+Docsy has built-in support for a number of diagram creation and typesetting tools you can use to add rich content to your site, including \\(\KaTeX\\), Mermaid, PlantUML, and MarkMap.
 
 ## \\(\LaTeX\\) support with \\(\KaTeX\\)
 
