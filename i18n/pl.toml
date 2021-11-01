@@ -44,9 +44,9 @@ other = "Zgłoś błąd na stronie"
 [post_posts_in]
 other = "Posty"
 [post_reading_time]
-other = "minute read"
+other = "min."
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "mniej niż minutę"
 
 
 # Print support
