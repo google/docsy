@@ -2,7 +2,7 @@
   "scripts": {
     "_build": "hugo --cleanDestinationDir -e dev -DFE --themesDir ../..",
     "_serve": "hugo serve -DFE --themesDir ../..",
-    "build:preview": "hugo --cleanDestinationDir -DFE --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\" --themesDir ../..",
+    "build:preview": "hugo --cleanDestinationDir -e dev -DFE --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\" --themesDir ../..",
     "build:production": "hugo --cleanDestinationDir --minify --themesDir ../..",
     "build": "npm run _build",
     "prebuild:preview": "npm run submodule:get",
