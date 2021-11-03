@@ -4,13 +4,18 @@
         border-radius: .4rem;
     }
 </style>
-<!--If there is an announcement, uncomment the below line, add proper link and add 
-    style="margin-top: 35px;" into the <nav> element that exists directly below the <a> element
-    This way, it will force the navbar down and you will have room for your announcement.
+<!--
+    ! ANNOUNCEMENT HERE !
+    If there is an announcement:
+    - Uncomment the <a id="announcement-bar"...></a> on the line below
+        - The announcement will be visible only on the home page
+        - The announcement will also automatically format itself
+    - Update the announcement information
+        - Set the correct link
+        - Set the correct text
 -->
-<a href="https://www.youtube.com/watch?v=QfvuHrtacHs" target="_blank" class="fixed-top py-2 text-center text-bold text-white" style="background-color: #ffad00;">Check out our latest episode of Runtime Live from Oct 20, 2021</a>
+<a id="announcement-bar" href="https://www.youtube.com/watch?v=QfvuHrtacHs" target="_blank" class="fixed-top py-2 text-center text-bold text-white" style="background-color: #ffad00;">Check out our latest episode of Runtime Live from Oct 20, 2021</a>
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark {{ if $cover}} td-navbar-cover {{ end }}flex-column flex-md-row td-navbar">
-
     <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
         <span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span>
     </a>

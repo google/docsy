@@ -2,12 +2,9 @@
 // Main navbar
 //
 .td-navbar-cover {
-
     background: #3e3e3e;
     @include media-breakpoint-up(md) {
         background: #3e3e3e;
-
-
     }
     &.navbar-bg-onscroll .nav-link {
         text-shadow: none;
@@ -15,19 +12,13 @@
 }
 
 .navbar-bg-onscroll {
-
-    background:#3e3e3e!important;
-
-
+    background: #3e3e3e !important;
 
     opacity: inherit;
 }
 
 .td-navbar {
-
-    background:#3e3e3e;
-
-
+    background: #3e3e3e;
 
     min-height: 4rem;
     margin: 0;
@@ -64,16 +55,16 @@
         min-width: 100px;
     }
     @include media-breakpoint-down(md) {
-        padding-right: .5rem;
-        padding-left: .75rem;
+        padding-right: 0.5rem;
+        padding-left: 0.75rem;
         .td-navbar-nav-scroll {
             max-width: 100%;
             height: 2.5rem;
-            margin-top: .25rem;
+            margin-top: 0.25rem;
             overflow: hidden;
-            font-size: .875rem;
+            font-size: 0.875rem;
             .nav-link {
-                padding-right: .25rem;
+                padding-right: 0.25rem;
                 padding-left: 0;
             }
             .navbar-nav {
@@ -84,6 +75,11 @@
             }
         }
     }
+}
+
+// Make the announcement-bar invisible on all pages by default
+#announcement-bar {
+    display: none;
 }
 
 // Icons
@@ -108,9 +104,9 @@
             font-variant: normal;
             text-rendering: auto;
             -webkit-font-smoothing: antialiased;
-            font-family: "poppins";
+            font-family: 'poppins';
             font-weight: 900;
-            content: "\f0d9";
+            content: '\f0d9';
             padding-left: 0.5em;
             padding-right: 0.5em;
         }
