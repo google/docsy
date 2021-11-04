@@ -129,3 +129,90 @@
         }
     }  
 }
+
+// Foldable sidebar menu
+nav.foldable-nav {
+
+    &#td-section-nav {
+        position: relative;
+    }
+    
+    &#td-section-nav label {
+        margin-bottom: 0;
+        width: 100%;
+    }
+    
+    .td-sidebar-nav__section, .with-child ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .ul-1 > li {
+        padding-left: 1.5em;
+    }
+
+    ul.foldable {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+
+    input:checked ~ ul.foldable {
+        max-height: 100000vmax;
+        transition: max-height 1s ease-in-out;
+    }
+
+    input[type=checkbox] { display: none; }
+
+    .with-child, .without-child { 
+        position: relative; 
+        padding-left: 1.5em;
+    }
+
+    .ul-1 .with-child > label:before {
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f0da";
+        position: absolute;
+        left: 0.1em;
+        padding-left: 0.4em;
+        padding-right: 0.4em;
+        font-size: 1em;
+        color: $gray-900;
+        transition: all 0.5s;
+        &:hover{
+        transform: rotate(90deg);
+        }
+    }
+
+    .ul-1 .with-child > input:checked ~ label:before { 
+        color: $primary;
+        transform: rotate(90deg);
+        transition: transform 0.5s; 
+    }
+
+    .with-child ul { margin-top: 0.1em; }
+    
+}    
+
+@media (hover: hover) and (pointer: fine) {
+    
+    nav.foldable-nav {
+
+        .ul-1 .with-child > label:hover:before { 
+            color: $primary;
+            transform: rotate(30deg);
+            transition: transform 0.5s; 
+        }
+
+        .ul-1 .with-child > input:checked ~ label:hover:before { 
+            color: $primary;
+            transform: rotate(60deg) !important;
+            transition: transform 0.5s; 
+        }
+    }
+}

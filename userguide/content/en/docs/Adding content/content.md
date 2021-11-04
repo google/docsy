@@ -108,7 +108,7 @@ description: >
 ---
 ```
 
-The minimum frontmatter you need to provide is a title: everything else is up to you! (though if you leave out the page weight your [navigation](/docs/adding-content/navigation) may get a little disorganized).
+The minimum frontmatter you need to provide is a title: everything else is up to you! However, if you leave out the page weight, your [navigation](/docs/adding-content/navigation) may get a little disorganized. You may also want to include `description` since Docsy uses that to generate the meta `description` tag used by search engines. See [Search Engine Optimization (SEO) meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for details.
 
 
 ## Page contents and markup
@@ -312,6 +312,15 @@ To disable all RSS feeds, add the following to your `config.toml`:
 ```toml
 disableKinds = ["RSS"]
 ```
+
+{{% alert title="Note" color="info" %}}
+If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
+
+```toml
+[outputs]
+section = [ "HTML", "RSS", "print" ]
+```
+{{% /alert %}}
 
 ## Sitemap
 

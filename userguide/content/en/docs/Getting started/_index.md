@@ -74,14 +74,14 @@ See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for u
 To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
 
 ```
-sudo npm install -D autoprefixer
-sudo npm install -D postcss-cli
+npm install -D autoprefixer
+npm install -D postcss-cli
 ```
 
 Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md), you must also separately install `postcss`:
 
 ```
-sudo npm install -D postcss
+npm install -D postcss
 ```
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
@@ -317,6 +317,10 @@ To temporarily allow more open files:
 
 Note that you might need to set these limits for each new shell. 
 [Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
+
+### Windows Subsystem for Linux (WSL)
+
+If you're using WSL, ensure that you're running `hugo` on a Linux mount of the filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 
 ## What's next?
 

@@ -43,6 +43,10 @@ other = "문서에 이슈 생성"
 other = "프로젝트에 이슈 생성"
 [post_posts_in]
 other = "Posts in"
+[post_reading_time]
+other = "minute read"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # Print support
 [print_printable_section]
