@@ -54,7 +54,7 @@ other = "less than a minute"
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "This is the multi-page printable view of this section."
 [print_click_to_print]
 other = "Click here to print"
 [print_show_regular]
