@@ -1,455 +1,483 @@
 <style>
-  .github_title {
-    background-image: url(https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png);
-  }
-
-  .discord_title {
-    background-image: url(https://discord.com/assets/ff41b628a47ef3141164bfedb04fb220.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 35px;
-  }
-
-  .hashnode_title {
-    background-image: url(https://cdn.hashnode.com/res/hashnode/image/upload/v1592751328987/VzrtgcQNF.jpeg?auto=compress);
-  }
-
-  .reddit_title {
-    background-image: url(https://mllj2j8xvfl0.i.optimole.com/KWneUgA.kTyM~36eab/w:221/h:76/q:auto/dpr:2.0/https://s15158.pcdn.co/wp-content/uploads/2021/02/Reddit_Lockup_OnWhite.png);
-    height: 35px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-
-  .mail_title {
-    background-image: url(https://atsign.com/wp-content/uploads/2021/01/1-invite-code-2.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-top: -9px;
-    width: 140px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-  }
-
-  .meetup_title {
-    background-image: url(https://secure.meetup.com/s/img/0/logo/svg/logo--script.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 35px;
-  }
-
-  .youtube_title {
-    background-image: url(https://developers.google.com/site-assets/logo-youtube.svg);
-  }
-
-  .linkedin_title {
-    background-image: url(https://content.linkedin.com/content/dam/me/brand/en-us/brand-home/illustrations/dsk-e6.svg.original.svg);
-  }
-
-  .medium_title {
-    background-image: url(https://miro.medium.com/max/8978/1*s986xIGqhfsN8U--09_AdA.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 40px;
-    margin-left: -10px;
-    margin-top: -9px;
-  }
-
-  .twitter_title {
-    background-image: url(https://upload.wikimedia.org/wikipedia/sco/thumb/9/9f/Twitter_bird_logo_2012.svg/1200px-Twitter_bird_logo_2012.svg.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 30px;
-    margin-top: -9px;
-  }
-
-  .facebook_title {
-    background-image: url(https://www.logo.wine/a/logo/Facebook/Facebook-Logo.wine.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 70px;
-  }
-
-  .title {
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 25px;
-  }
-
-  h6 {
-    margin-top: 2rem;
-  }
-
-  h7 {
-    font-size: 17px;
-  }
-
-  p {
-    margin-bottom: 10px;
-  }
-
-  .visit_label {
-    color: #f05f3e;
-  }
-
-  .visit_link {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .div_boxes_position {
-    border-radius: 10px;
-    border: 1px solid #707070;
-    padding: 45px;
-    margin: 23px 45px;
-  }
-
-  .div_contr_boxes {
-    border-radius: 10px;
-    border: 1px solid #707070;
-    padding: 45px;
-    background-color: white;
-    width: 300px;
-    height: 247px;
-    background-size: contain;
-    font-size: 22px;
-    margin: 20px 20px;
-  }
-
-  .div_top_boxes {
-    border-radius: 10px;
-    border: 1px solid #707070;
-    padding: 45px;
-    background-color: white;
-    width: 500px;
-    height: 247px;
-    background-size: contain;
-    font-size: 22px;
-    margin: 20px 20px;
-  }
-
-  .div_boxes_logo {
-    position: relative;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-    color: black;
-  }
-
-  .dev_contr_div {
-    background-color: #f2f2f2;
-    font-size: 22px;
-    display: block;
-    width: 100vw;
-    position: absolute;
-    left: 0;
-    height: 398px;
-    padding: 1rem;
-  }
-
-  .description_sec{
-    padding: 0 3rem;
-  }
-
-  .dev_contr_wrapper {
-    width: 100%;
-    height: 398px;
-    left: 0;
-  }
-
-  @media only screen and (max-width: 1360px) {
-    .dev_contr_div{
-      height: 710px;
+    h6 {
+        margin-top: 2rem;
     }
-    .dev_contr_wrapper{
-      height: 710px;
+
+    h7 {
+        font-size: 17px;
     }
-  }
 
-  @media only screen and (max-width: 680px) {
-    .dev_contr_div{
-      height: 1360px;
+    p {
+        margin-bottom: 10px;
     }
-    .dev_contr_wrapper{
-      height: 1360px;
+
+    .visit_label {
+        color: #f05f3e;
     }
-  }
 
-  .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+    .visit_link {
+        text-decoration: none;
+        color: inherit;
+    }
 
-  .Column {
-    flex: 1 1 0px;
-  }
+    .div_boxes_position {
+        border-radius: 10px;
+        border: 1px solid #707070;
+        padding: 45px;
+        margin: 23px 45px;
+    }
 
-  .center_divs {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 70px;
-  }
+    .div_contr_boxes {
+        border-radius: 10px;
+        border: 1px solid #707070;
+        padding: 45px;
+        background-color: white;
+        width: 300px;
+        height: 247px;
+        background-size: contain;
+        font-size: 22px;
+        margin: 20px 20px;
+    }
+
+    .div_top_boxes {
+        border-radius: 10px;
+        border: 1px solid #707070;
+        padding: 45px;
+        background-color: white;
+        width: 500px;
+        height: 247px;
+        background-size: contain;
+        font-size: 22px;
+        margin: 20px 20px;
+    }
+
+    .div_boxes_logo {
+        position: relative;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+        color: black;
+    }
+
+    .dev_contr_div {
+        background-color: #f2f2f2;
+        font-size: 22px;
+        display: block;
+        width: 100vw;
+        position: absolute;
+        left: 0;
+        height: 398px;
+        padding: 1rem;
+    }
+
+    .description_sec {
+        padding: 0 3rem;
+    }
+
+    .dev_contr_wrapper {
+        width: 100%;
+        height: 398px;
+        left: 0;
+    }
+
+    @media only screen and (max-width: 1360px) {
+        .dev_contr_div {
+            height: 710px;
+        }
+        .dev_contr_wrapper {
+            height: 710px;
+        }
+    }
+
+    @media only screen and (max-width: 680px) {
+        .dev_contr_div {
+            height: 1360px;
+        }
+        .dev_contr_wrapper {
+            height: 1360px;
+        }
+    }
+
+    @media only screen and (max-width: 400px) {
+        .div_top_boxes {
+            width: 300px;
+            font-size: 22px;
+        }
+        .dev_contr_div {
+            height: 1380px;
+        }
+        .dev_contr_wrapper {
+            height: 1380px;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .Column {
+        flex: 1 1 0px;
+    }
+
+    .center_divs {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 70px;
+    }
 </style>
 
 <section style="margin: 0; padding: 0">
-  <div>
-    <div class="center_divs">
-      <div class="column">
-        <div class="div_top_boxes">
-          <div class="div_boxes_logo">
-            <div class="github_title title"></div>
-            <p style="margin-top: 35px"></p>
-            <h6>Start contributing</h6>
-            <p style="margin-top: 8px">
-              This is where the code hits the fan.
-            </p>
-            <p style="margin-top: 32px"></p>
-            <span class="visit_label">
-              <a class="visit_link" href="https://github.com/atsign-foundation">
-                Visit
-                <span class="fas fa-external-link-alt"></span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="div_top_boxes">
-          <div class="div_boxes_logo">
-            <div class="discord_title" style="margin-top: -1rem"></div>
-            <br />
-            <h7> Learn how it works </h7>
-            <p style="font-size: 20px">
-              Hangout with the core team and other developers.
-            </p>
-            <span class="visit_label">
-              <a class="visit_link" href="https://discord.gg/55sHTQFxfz">
-                Visit
-                <span class="fas fa-external-link-alt"></span>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="dev_contr_wrapper">
-    <!--grey outer div-->
-    <div class="dev_contr_div dev_contr_div_position">
-      <div class="description_sec">
-        <p>Develop and Contribute</p>
-        <p>
-          <h7>
-            You can find out how to contriubte to these docs in our
-            <a href="" title="To be implemented">Contribution Guidelines</a>.
-          </h7>
-        </p>
-      </div>
-
-      <div class="row">
-
-        <!--Hashnode-->
-        <div class="column">
-          <div class="div_contr_boxes ">
-            <div class="div_boxes_logo">
-              <p>
-              <div class="hashnode_title title">
-              </div>
-              </p>
-              <p></p>
-              <h7>
-                Short technical articles about
-                specific topics.
-              </h7>
-              <p></p>
-
-              <span class="visit_label">
-                <a class="visit_link" href="https://blog.atsign.dev">
-                  Visit
-                  <span class="fas fa-external-link-alt"></span>
-                </a>
-              </span>
+    <div>
+        <div class="center_divs">
+            <div class="column">
+                <div class="div_top_boxes">
+                    <div class="div_boxes_logo">
+                        <img
+                            src="/community/GitHubLogo.png"
+                            alt="Github"
+                            width="50%"
+                        />
+                        <p></p>
+                        <b>
+                            <h5>Start contributing</h5>
+                        </b>
+                        <h7>
+                            <p>This is where the code hits the fan.</p>
+                        </h7>
+                        <p style="margin-top: 10px"></p>
+                        <span class="visit_label">
+                            <a
+                                class="visit_link"
+                                href="https://github.com/atsign-foundation"
+                            >
+                                Visit
+                                <span class="fas fa-external-link-alt"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <!--/hashnode-->
 
-
-        <!--Reddit-->
-        <div class="column">
-          <div class="div_contr_boxes">
-            <div class="div_boxes_logo">
-              <div class="reddit_title"></div>
-              <p></p>
-              <p>
-                <h7> Join the conversation on our subreddit </h7>
-              </p>
-              <span class="visit_label">
-                <a class="visit_link" href="https://www.reddit.com/r/EctoGammat/">
-                  Visit
-                  <span class="fas fa-external-link-alt"></span>
-                </a>
-              </span>
+            <div class="column">
+                <div class="div_top_boxes">
+                    <div class="div_boxes_logo">
+                        <img
+                            src="/community/DiscordLogo.png"
+                            alt="Discord Community"
+                            width="50%"
+                        />
+                        <br />
+                        <b>
+                            <h5>Learn how it works</h5>
+                        </b>
+                        <h7>
+                            <p>
+                                Hangout with the core team and other developers.
+                            </p>
+                        </h7>
+                        <span class="visit_label">
+                            <a
+                                class="visit_link"
+                                href="https://discord.gg/55sHTQFxfz"
+                            >
+                                Visit
+                                <span class="fas fa-external-link-alt"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <!--/reddit-->
-
-        <!--Mail-->
-        <div class="column">
-          <div class="div_contr_boxes">
-            <div class="div_boxes_logo">
-              <div class="mail_title"><h3>Support</h3></div>
-
-              <p>
-                <h7> Get updates and discuss issues around the project </h7>
-              </p>
-              <span class="visit_label">
-                <address>
-                  <a class="visit_link" href="mailto:Support@atsign.com">
-                    Visit
-                    <span class="fas fa-external-link-alt"></span>
-                  </a>
-                </address>
-              </span>
-            </div>
-          </div>
-        </div>
-        <!--/mail-->
-
-        <!--Meetup-->
-        <div class="column">
-          <div class="div_contr_boxes">
-            <div class="div_boxes_logo">
-              <div class="meetup_title"></div>
-              <p></p>
-              <p>
-                <h7>Open Source Developers for Internet Optimism. </h7>
-              </p>
-              <span class="visit_label">
-                <a class="visit_link"
-                  href="https://www.meetup.com/Ektogamant-Open-Source-Developers-for-Internet-Optimism/">
-                  Visit
-                  <span class="fas fa-external-link-alt"></span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </div>
-        <!--/Meetup-->
-
-
-      </div>
-
-    </div>
-  </div>
-
-  <div class="dev_contr_wrapper">
-    <div class="dev_contr_div dev_contr_div_position">
-        <div class="description_sec">
-        <p>Learn and Connect</p>
-        <p>
-          <h7>
-            Go through our many tutorials, talks, and articles that
-            document how we're taking a step towards a
-            privacy-focused Internet.
-          </h7>
-        </p>
-      </div>
-        <div class="row">
-
-          <!--YouTube-->
-          <div class="column">
-            <div class="div_contr_boxes">
-              <div class="div_boxes_logo">
-                <div class="youtube_title title"></div>
-                <p></p>
-                <p>
-                  <h7> Lots of good stuff on our YouTube video channel </h7>
-                </p>
-                <span class="visit_label">
-                  <a class="visit_link" href="https://www.youtube.com/channel/UCzjSJbPmIEDXFbHb2RIj9Gg">
-                    Visit
-                    <span class="fas fa-external-link-alt"></span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <!--/YouTube-->
-
-
-          <!--LinkedIn-->
-          <div class="column">
-            <div class="div_contr_boxes">
-              <div class="div_boxes_logo">
-                <div class="linkedin_title title"></div>
-                <p></p>
-                <p>
-                  <h7> Follow our interesting posts on LinkedIn! </h7>
-                </p>
-                <span class="visit_label">
-                  <a class="visit_link" href="https://www.linkedin.com/company/atsigncompany/mycompany/">
-                    Visit
-                    <span class="fas fa-external-link-alt"></span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <!--/LinkedIn-->
-
-
-          <!--Medium-->
-          <div class="column">
-            <div class="div_contr_boxes">
-              <div class="div_boxes_logo">
-                <div class="medium_title"></div>
-                <p>
-                  <h7> Read our more in depth articles on Medium </h7>
-                </p>
-                <span class="visit_label">
-                  <a class="visit_link" href="https://atsigncompany.medium.com">
-                    Visit
-                    <span class="fas fa-external-link-alt"></span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <!--/Medium-->
-
-
-          <!--Twitter-->
-          <div class="column">
-            <div class="div_contr_boxes">
-              <div class="div_boxes_logo">
-                <div class="twitter_title"></div>
-                <p></p>
-                <p>
-                  <h7> Follow us on Twitter to get the latest news! </h7>
-                </p>
-                <span class="visit_label">
-                  <a class="visit_link" href="https://twitter.com/atsigncompany">
-                    Visit
-                    <span class="fas fa-external-link-alt"></span>
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div>
-          <!--/Twitter-->
-
-
-
         </div>
     </div>
-  </div>
+
+    <div class="dev_contr_wrapper">
+        <!--grey outer div-->
+        <div class="dev_contr_div dev_contr_div_position">
+            <div class="description_sec">
+                <p>Develop and Contribute</p>
+                <p>
+                    <h7>
+                        You can find out how to contriubte to these docs in our
+                        <a href="" title="To be implemented"
+                            >Contribution Guidelines</a
+                        >.
+                    </h7>
+                </p>
+            </div>
+
+            <div class="row">
+                <!--Hashnode-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <p>
+                                <img
+                                    src="/community/HNLogo.jpeg"
+                                    alt="Hashnode"
+                                    width="70%"
+                                />
+                                <br />
+                            </p>
+                            <p></p>
+                            <h7>
+                                Short technical articles about specific topics.
+                            </h7>
+                            <p></p>
+
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://blog.atsign.dev"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/hashnode-->
+
+                <!--Reddit-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/RedditLogo.png"
+                                alt="Reddit"
+                                width="60%"
+                            />
+                            <br />
+                            <p>
+                                <h7>
+                                    Join the conversation on our subreddit
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://www.reddit.com/r/EctoGammat/"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/reddit-->
+
+                <!--Mail-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <h3>Email Support</h3>
+                            <p>
+                                <h7>
+                                    Get updates and discuss issues around the
+                                    project
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <address>
+                                    <a
+                                        class="visit_link"
+                                        href="mailto:Support@atsign.com"
+                                    >
+                                        Visit
+                                        <span
+                                            class="fas fa-external-link-alt"
+                                        ></span>
+                                    </a>
+                                </address>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/mail-->
+
+                <!--Meetup-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/Meetuplogo.png"
+                                alt="Meetup"
+                                width="50%"
+                            />
+                            <br />
+                            <p>
+                                <h7
+                                    >Open Source Developers for Internet
+                                    Optimism.
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://www.meetup.com/Ektogamant-Open-Source-Developers-for-Internet-Optimism/"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/Meetup-->
+            </div>
+        </div>
+    </div>
+
+    <div class="dev_contr_wrapper">
+        <div class="dev_contr_div dev_contr_div_position">
+            <div class="description_sec">
+                <p>Learn and Connect</p>
+                <p>
+                    <h7>
+                        Go through our many tutorials, talks, and articles that
+                        document how we're taking a step towards a
+                        privacy-focused Internet.
+                    </h7>
+                </p>
+            </div>
+            <div class="row">
+                <!--YouTube-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/YouTubeLogo.png"
+                                alt="YouTube"
+                                width="65%"
+                            />
+                            <br />
+                            <p>
+                                <h7>
+                                    Lots of good stuff on our YouTube video
+                                    channel
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://www.youtube.com/channel/UCzjSJbPmIEDXFbHb2RIj9Gg"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/YouTube-->
+
+                <!--LinkedIn-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/LinkedinLogo.png"
+                                alt="LinkedIn"
+                                width="60%"
+                            />
+                            <br />
+                            <p>
+                                <h7>
+                                    Follow our interesting posts on LinkedIn!
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://www.linkedin.com/company/atsigncompany/mycompany/"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/LinkedIn-->
+
+                <!--Medium-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/mediumlogo.png"
+                                alt="Medium"
+                                width="60%"
+                            />
+                            <br />
+                            <p>
+                                <h7>
+                                    Read our more in depth articles on Medium
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://atsigncompany.medium.com"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/Medium-->
+
+                <!--Twitter-->
+                <div class="column">
+                    <div class="div_contr_boxes">
+                        <div class="div_boxes_logo">
+                            <img
+                                src="/community/TwitterLogo.png"
+                                alt="Twitter"
+                                width="30%"
+                            />
+                            <br />
+                            <p>
+                                <h7>
+                                    Follow us on Twitter to get the latest news!
+                                </h7>
+                            </p>
+                            <span class="visit_label">
+                                <a
+                                    class="visit_link"
+                                    href="https://twitter.com/atsigncompany"
+                                >
+                                    Visit
+                                    <span
+                                        class="fas fa-external-link-alt"
+                                    ></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <!--/Twitter-->
+            </div>
+        </div>
+    </div>
 </section>
