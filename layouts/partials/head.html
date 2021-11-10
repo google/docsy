@@ -20,7 +20,9 @@
 <title>
   {{- if not .IsHome -}}
     {{ with .Title }}{{ . }} | {{ end -}}
-    {{ if findRE "^docs/(languages|platforms)/.+?/[^_]" .File.Path -}}
+    {{ $path := "" -}}
+    {{ with .File }}{{ $path = .Path }}{{ end -}}
+    {{ if findRE "^docs/(languages|platforms)/.+?/[^_]" $path -}}
       {{ with .Parent.Title }}{{ . }} | {{ end -}}
     {{ end -}}
   {{ end -}}
