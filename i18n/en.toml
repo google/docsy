@@ -39,6 +39,8 @@ other = "Created"
 other = "Last modified"
 [post_edit_this]
 other = "Edit this page"
+[post_view_this]
+other = "View page source"
 [post_create_child_page]
 other = "Create child page"
 [post_create_issue]
@@ -54,7 +56,7 @@ other = "less than a minute"
 
 # Print support
 [print_printable_section]
-other = "This the multi-page printable view of this section."
+other = "This is the multi-page printable view of this section."
 [print_click_to_print]
 other = "Click here to print"
 [print_show_regular]
