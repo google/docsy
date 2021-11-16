@@ -19,9 +19,9 @@ Docsy placeholder files (note the **`_project.scss`** suffixes):
 Add project-specific variables definitions to your project's
 `_variables_project.scss` file, such as [site colors](#site-colors).
 
-You'll find Docsy-specific variables and Docsy-Bootstrap overrides, in
+You'll find Docsy-specific variables and Docsy-Bootstrap overrides in
 [<code>assets/scss/<strong>_variables.scss</strong></code>][_variables]. For
-information about Bootstrap 4 variables see [Variable defaults][] and
+information about Bootstrap 4 variables, see [Variable defaults][] and
 Bootstrap's [v4-dev/scss/_variables.scss][] file.
 
 [_styles_project]: https://github.com/google/docsy/blob/master/assets/scss/_styles_project.scss
@@ -32,7 +32,7 @@ Bootstrap's [v4-dev/scss/_variables.scss][] file.
 
 ### Site colors
 
-To easily customize your site's colors, add SCSS variable project overrides to
+To easily customize your site's colors, add SCSS variable overrides to
 `assets/scss/_variables_project.scss`. A simple example changing the primary and
 secondary color to two shades of purple:
 
