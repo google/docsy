@@ -1,25 +1,45 @@
 ---
-title: "Look and Feel"
-linkTitle: "Look and Feel"
+title: Look and Feel
 date: 2017-01-05
 weight: 2
-description: >
-  Customize colors, fonts, and more for your site.
+description: Customize colors, fonts, and more for your site.
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. Also because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values in its special SCSS project variables file, or do more serious customization by creating your own versions of entire SCSS files.
+## Styles
 
-## Color palette and other styles
+### Project style files
 
-To quickly change your site's colors, add SCSS variable project overrides to `assets/scss/_variables_project.scss`. A simple example changing the primary and secondary color to two shades of purple:
+To customize your project's styles, override either or both of the following
+Docsy placeholder files (note the **`_project.scss`** suffixes):
+
+- [`assets/scss/`**`_variables_project.scss`**][_variables_project]
+- [`assets/scss/`**`_styles_project.scss`**][_styles_project]
+
+Add project-specific variables definitions to your project's
+`_variables_project.scss` file, such as [site colors](#site-colors).
+
+You'll find Docsy-specific variables and Docsy-Bootstrap overrides, in
+[<code>assets/scss/<strong>_variables.scss</strong></code>][_variables]. For
+information about Bootstrap 4 variables see [Variable defaults][] and
+Bootstrap's [v4-dev/scss/_variables.scss][] file.
+
+[_styles_project]: https://github.com/google/docsy/blob/master/assets/scss/_styles_project.scss
+[_variables_project]: https://github.com/google/docsy/blob/master/assets/scss/_variables_project.scss
+[_variables]: https://github.com/google/docsy/blob/master/assets/scss/_variables.scss
+[v4-dev/scss/_variables.scss]: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
+[Variable defaults]: https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
+
+### Site colors
+
+To easily customize your site's colors, add SCSS variable project overrides to
+`assets/scss/_variables_project.scss`. A simple example changing the primary and
+secondary color to two shades of purple:
 
 ```scss
 $primary: #390040;
 $secondary: #A23B72;
 ```
-
-* See `assets/scss/_variables.scss` in the theme for color variables etc. that can be set to change the look and feel.
-* Also see available variables in Bootstrap 4: https://getbootstrap.com/docs/4.0/getting-started/theming/ and https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
 
 The theme has features such as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
 
@@ -32,8 +52,6 @@ $enable-shadows: true;
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
 {{% /alert %}}
-
-Also note that any SCSS import will try the project before the theme, so you can -- as one example -- create your own `_assets/scss/_content.scss` and get full control over how your Markdown content is styled.
 
 ## Fonts
 
