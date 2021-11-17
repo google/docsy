@@ -164,7 +164,8 @@ Create child page | `.td-page-meta--child`
 Create documentation issue | `.td-page-meta--issue`
 Create project issue | `.td-page-meta--project-issue`
 
-Of course, you can also use these classes to unique style links.
+Of course, you can also use these classes to give repository links unique styles
+for your project.
 
 [DRY]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
