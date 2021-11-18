@@ -7,6 +7,7 @@
     &.form-control:focus {
         border-color: lighten($primary, 60%);
         box-shadow: 0 0 0 2px lighten($primary, 30%);
+        color: inherit;
     }
 
     @if $enable-rounded {
