@@ -59,7 +59,7 @@
     }
 
     .td-search-input {
-        border: none;
+        border-color: $navbar-dark-color;
 
         @include placeholder {
             color: $navbar-dark-color;
