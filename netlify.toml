@@ -6,7 +6,7 @@ publish = "userguide/public"
 command = "npm install && npm run build:preview"
 
 [build.environment]
-HUGO_VERSION = "0.88.1"
+HUGO_VERSION = "0.89.4"
 HUGO_THEME = "repo"
 
 [context.production]
