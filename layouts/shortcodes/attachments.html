@@ -1,0 +1,102 @@
+{{ $title := .Get "title" | default (T "sc_attachments")}}
+{{ $icon := .Get "icon" | default "fas fa-paperclip"}}
+{{ $folder := .Get "folder"}}
+{{ $recursive := .Get "recursive" | default true}}
+{{ $exclude := .Get "exclude" | default ".md,.markdown" }}
+{{ $filter := .Get "filter" | default "." }}
+{{ $match := .Get "match" | default "**" }}
+{{ $class := .Get "class" | default "td-max-width-on-larger-screens" }}
+{{ $num_prec := .Get "num_prec" | default 1 }}
+{{ $num_fmt := .Get "num-fmt" | default "- . ,"}}
+{{ $num_fmt_del := .Get "num-fmt-del" | default " "}}
+{{ $empty_list := .Get "empty_list" | default "No attachments found." }}
+{{ $show_folder := .Get "show_folder" | default false}}
+<section class="card attachments{{ with $class }} {{.}}{{ end }}">
+	<label class="card-header attachments-label">
+    {{ with $icon }}<i class="attachments-icon {{ . }}" aria-hidden="true"></i>{{ end }}
+		{{ with $title }}{{- . -}}{{ end }}
+	</label>
+	<div class="card-body attachments-files">
+    <!-- {{ with $title }}{{- . -}}{{ end }} -->
+      {{ with $folder }}
+        <!-- {{ $path := replace (printf "./content/%s/%s%s" $.Page.File.Lang $.Page.File.Dir .) "\\" "/" }} -->
+        {{ $path := path.Join "content/" $.Page.File.Lang $.Page.File.Dir . }}
+        {{ $file_list := newScratch }}
+        {{ template "recursive-files" (dict "path" $path "folder" . "recursive" true "exclude" $exclude "filter" $filter "show_folder" $show_folder "file_list" $file_list)}}
+          {{ with ($file_list.Get "files") }}
+            <ul>
+              {{ range sort . }}
+                {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir .) }}
+                {{ $dirFile := path.Split . }}
+                {{ $filepath := printf "%s%s" ($dirFile.Dir | urlize) $dirFile.File }}
+                <li>
+                  <a href="{{ $filepath }}" >{{ with $show_folder }}{{- ($dirFile.Dir | urlize) -}}{{ end }}{{$filestat.Name}} {{ template "format-file-size" (dict "file_size" $filestat.Size "num_prec" $num_prec "num_fmt" $num_fmt "num_fmt_del" $num_fmt_del) }}</a>
+                </li>
+              {{ end }}
+            </ul>
+          {{ else }}
+            <p>{{- $empty_list -}}</p>
+          {{ end }}
+      {{ else }}
+        {{ with (.Page.Resources.Match $match) }}
+          <ul>
+              {{ $.Scratch.Set "counter" 0 }}
+              {{ range sort . "Title" }}
+                {{ if (findRE $filter ( replace .RelPermalink $.Page.RelPermalink "" 1 )) }}
+                  {{ $.Scratch.Set "counter" (add ($.Scratch.Get "counter") 1) }}
+                  {{ $filestat := os.Stat (path.Join "content/" $.Page.File.Lang $.Page.File.Dir ( replace .RelPermalink $.Page.RelPermalink "" 1 )) }}
+                  <li>
+                    <a href="{{ .RelPermalink }}" >{{.Title}} {{ template "format-file-size" (dict "file_size" $filestat.Size "num_prec" $num_prec "num_fmt" $num_fmt "num_fmt_del" $num_fmt_del) }}</a>
+                    {{ with .Params.description }}<label class="attachments-description">{{- . -}}</label>{{ end }}
+                  </li>
+                {{ end }}
+              {{end}}
+              {{ if (eq ($.Scratch.Get "counter") 0 )}}<li>{{- $empty_list -}}</li>{{ end }}
+          </ul>
+        {{else}}
+          <p>{{- $empty_list -}}</p>
+        {{end}}
+      {{end}}
+	</div>
+  {{ with .Inner }}
+    <div class="card-footer attachments-inner">
+      {{- .  | markdownify -}}
+    </div>
+  {{ end }}
+</section>
+{{ define "recursive-files" }}
+  {{ $path := .path }}
+  {{ $folder := .folder }}
+  {{ $recursive := .recursive }}
+  {{ $exclude := .exclude }}
+  {{ $filter := .filter }}
+  {{ $file_list := .file_list }}
+  {{ $show_folder := .show_folder }}
+  {{range (readDir ($path)) }}
+    {{ if .IsDir }}
+      {{ template "recursive-files" (dict "path" (path.Join $path .Name) "folder" (path.Join $folder .Name) "recursive" true "exclude" $exclude "filter" $filter "show_folder" $show_folder "file_list" $file_list)}}
+    {{ else }}
+      {{ if (and (not (in $exclude (lower (path.Ext .Name)) )) (findRE $filter .Name)) }}
+        {{ $sort_key := (cond $show_folder (path.Join $folder .Name) .Name)}}
+        {{ $file_list.SetInMap "files" $sort_key ( (path.Join $folder .Name) ) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ define "format-file-size" }}
+  {{ $file_size := .file_size }}
+  {{ $num_prec := .num_prec }}
+  {{ $num_fmt := .num_fmt }}
+  {{ $num_fmt_del := .num_fmt_del }}
+  {{ $file_size_string := newScratch }}
+  {{ if (ge $file_size (math.Pow 1024 3))}}
+    {{ $file_size_string.Set "size" (printf "%s %s" ( lang.NumFmt $num_prec (div $file_size (math.Pow 1024.0 3)) $num_fmt $num_fmt_del) "GB")}}
+  {{ else if (ge $file_size (math.Pow 1024 2))}}
+    {{ $file_size_string.Set "size" (printf "%s %s" ( lang.NumFmt $num_prec (div $file_size (math.Pow 1024.0 2)) $num_fmt $num_fmt_del) "MB")}}
+  {{ else if (ge $file_size 1024)}}
+    {{ $file_size_string.Set "size" (printf "%s %s" ( lang.NumFmt $num_prec (div $file_size 1024.0) $num_fmt $num_fmt_del) "kB")}}
+  {{ else }}
+    {{ $file_size_string.Set "size" (printf "%s %s" ( lang.NumFmt $num_prec $file_size $num_fmt $num_fmt_del) "Byte")}}
+  {{ end }}
+  ({{ $file_size_string.Get "size" }})
+{{ end }}

@@ -1,0 +1,248 @@
+// Attachments
+section.attachments {
+  // margin-top: 1rem;
+  // margin-bottom: 1.5rem;
+  // border-style: solid;
+  // border-color: $primary;
+  // padding: 0;
+
+
+  // border-width: 0 0 0 2px;
+  // margin-left: 3em;
+
+  // .attachments-icon{
+  //   // position: absolute;
+  //   left: -1.5em;
+  //   font-size: 1.5em;
+  // }
+
+  .attachments-label {
+    // margin-bottom: 0;
+    // font-family: $headings-font-family;
+    // font-weight: $headings-font-weight;
+    // line-height: $headings-line-height;
+    // color: $headings-color;
+    // @include font-size($h5-font-size);
+    // display: block;
+    // background-color: $td-sidebar-bg-color;
+    // padding: 0.5em;
+    // border-style: solid;
+    // border-color: $primary;
+    // border-width: 0 0 1px 0;
+    // font-size: 3em;
+  }
+
+  .attachments-icon {
+    font-size: 1.2em;
+    margin-right: 0.2em;
+  }
+
+  .attachments-description {
+    display: block;
+    width: 100%;
+    margin-left: 1.8em;
+  }
+
+  .attachments-inner {
+    // padding: 1em;
+  }
+
+  .attachments-files {
+    // padding: 1em;
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      font-weight: normal;
+    }
+
+    a:before {
+      font-family: "Font Awesome\ 5 Free";
+      font-weight:400;
+      font-size: 1.2em;
+      margin-right: 0.2em;
+      content: "\f15b"; /* generic file icon */
+      display: inline-block;
+      min-width: 1.3em;
+      text-align: center;
+    }
+
+    // List of file endings from https://gschoppe.com/uncategorized/add-auto-sensing-file-type-icons-to-lists-of-downloads-with-fontawesome-and-css/
+    a[href$=".txt" i]:before,
+    a.link-text[href]:before {
+        content: "\f15c"; /*Text*/
+    }
+    a[href$=".pdf" i]:before,
+    a.link-pdf[href]:before {
+        content: "\f1c1"; /*PDF*/
+    }
+    a[href$=".doc" i]:before,
+    a[href$=".docx" i]:before,
+    a[href$=".odt" i]:before,
+    a.link-word[href]:before {
+        content: "\f1c2"; /*Word*/
+    }
+    a[href$=".xls" i]:before,
+    a[href$=".xlsx" i]:before,
+    a[href$=".ods" i]:before,
+    a.link-excel[href]:before {
+        content: "\f1c3"; /*Excel*/
+    }
+    a[href$=".csv" i]:before,
+    a.link-csv[href]:before {
+        content: "\f6dd"; /*Excel*/
+    }
+    a[href$=".ppt" i]:before,
+    a[href$=".pptx" i]:before,
+    a[href$=".odp" i]:before,
+    a.link-powerpoint[href]:before {
+        content: "\f1c4"; /*Powerpoint*/
+    }
+    a[href$=".gif" i]:before,
+    a[href$=".jpg" i]:before,
+    a[href$=".jpeg" i]:before,
+    a[href$=".png" i]:before,
+    a[href$=".bmp" i]:before,
+    a[href$=".tif" i]:before,
+    a[href$=".odg" i]:before,
+    a.link-image[href]:before {
+        content: "\f1c5"; /*Image*/
+    }
+    a[href$=".zip" i]:before,
+    a[href$=".zipx" i]:before,
+    a[href$=".rar" i]:before,
+    a[href$=".tar" i]:before,
+    a[href$=".gz" i]:before,
+    a[href$=".dmg" i]:before,
+    a[href$=".iso" i]:before,
+    a[href$=".7z" i]:before,
+    a.link-archive[href]:before {
+        content: "\f1c6"; /*Archive*/
+    }
+    a[href$=".wav" i]:before,
+    a[href$=".mp3" i]:before,
+    a[href$=".fla" i]:before,
+    a[href$=".flac" i]:before,
+    a[href$=".ra" i]:before,
+    a[href$=".rma" i]:before,
+    a[href$=".aif" i]:before,
+    a[href$=".aiff" i]:before,
+    a[href$=".aa" i]:before,
+    a[href$=".aac" i]:before,
+    a[href$=".aax" i]:before,
+    a[href$=".ac3" i]:before,
+    a[href$=".au" i]:before,
+    a[href$=".ogg" i]:before,
+    a[href$=".avr" i]:before,
+    a[href$=".3ga" i]:before,
+    a[href$=".flac" i]:before,
+    a[href$=".mid" i]:before,
+    a[href$=".midi" i]:before,
+    a[href$=".m4a" i]:before,
+    a[href$=".mp4a" i]:before,
+    a[href$=".amz" i]:before,
+    a[href$=".mka" i]:before,
+    a[href$=".asx" i]:before,
+    a[href$=".pcm" i]:before,
+    a[href$=".m3u" i]:before,
+    a[href$=".wma" i]:before,
+    a[href$=".xwma" i]:before,
+    a.link-audio[href]:before {
+        content: "\f1c7"; /*Audio*/
+    }
+    a[href$=".avi" i]:before,
+    a[href$=".mpg" i]:before,
+    a[href$=".mp4" i]:before,
+    a[href$=".mkv" i]:before,
+    a[href$=".mov" i]:before,
+    a[href$=".wmv" i]:before,
+    a[href$=".vp6" i]:before,
+    a[href$=".264" i]:before,
+    a[href$=".vid" i]:before,
+    a[href$=".rv" i]:before,
+    a[href$=".webm" i]:before,
+    a[href$=".swf" i]:before,
+    a[href$=".h264" i]:before,
+    a[href$=".flv" i]:before,
+    a[href$=".mk3d" i]:before,
+    a[href$=".gifv" i]:before,
+    a[href$=".oggv" i]:before,
+    a[href$=".3gp" i]:before,
+    a[href$=".m4v" i]:before,
+    a[href$=".movie" i]:before,
+    a[href$=".divx" i]:before,
+    a.link-video[href]:before {
+        content: "\f1c8"; /*Video*/
+    }
+    a[href$=".css" i]:before,
+    a[href$=".less" i]:before,
+    a[href$=".sass" i]:before,
+    a[href$=".scss" i]:before,
+    a[href$=".js" i]:before,
+    a[href$=".py" i]:before,
+    a[href$=".git" i]:before,
+    a[href$=".py" i]:before,
+    a[href$=".cpp" i]:before,
+    a[href$=".h" i]:before,
+    a[href$=".ini" i]:before,
+    a[href$=".config" i]:before,
+    a[href$=".json" i]:before,
+    a[href$=".yaml" i]:before,
+    a[href$=".sql" i]:before,
+    a[href$=".pkb" i]:before,
+    a[href$=".pks" i]:before,
+    a[href$=".R" i]:before,
+    a.link-code[href]:before {
+        content: "\f1c9"; /*code*/
+    }
+    a[href$=".exe" i]:before,
+    a[href$=".jar" i]:before,
+    a[href$=".dll" i]:before,
+    a[href$=".bat" i]:before,
+    a[href$=".pl" i]:before,
+    a[href$=".scr" i]:before,
+    a[href$=".msi" i]:before,
+    a[href$=".app" i]:before,
+    a[href$=".deb" i]:before,
+    a[href$=".apk" i]:before,
+    a[href$=".jar" i]:before,
+    a[href$=".vb" i]:before,
+    a[href$=".prg" i]:before,
+    a[href$=".sh" i]:before,
+    a.link-exe[href]:before {
+        content: "\f570"; /*Executable*/
+    }
+    
+    // a[href$=".com" i]:before,
+    // a[href$=".net" i]:before,
+    // a[href$=".org" i]:before,
+    // a[href$=".edu" i]:before,
+    // a[href$=".gov" i]:before,
+    // a[href$=".mil" i]:before,
+    // a[href$="/" i]:before,
+    // a[href$=".html" i]:before,
+    // a[href$=".htm" i]:before,
+    // a[href$=".xhtml" i]:before,
+    // a[href$=".jhtml" i]:before,
+    // a[href$=".php" i]:before,
+    // a[href$=".php3" i]:before,
+    // a[href$=".php4" i]:before,
+    // a[href$=".php5" i]:before,
+    // a[href$=".phtml" i]:before,
+    // a[href$=".asp" i]:before,
+    // a[href$=".aspx" i]:before,
+    // a[href$=".cfm" i]:before,
+    // a[href*="?" i]:before,
+    // a[href*="#" i]:before,
+    // a:not([href*='.']):before,
+    // a.link[href]:before {
+    //     content: "\f0c1"; /*link*/
+    // }
+
+  }
+
+}

@@ -63,3 +63,8 @@ other = "Click here to print"
 other = "Return to the regular view of this page"
 [print_entire_section]
 other = "Print entire section"
+
+
+# Shortcodes
+[sc_attachments]
+other = "Attachments"
