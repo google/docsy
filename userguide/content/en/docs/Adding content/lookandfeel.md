@@ -172,6 +172,8 @@ site's [configuration file][].
 [configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #color-palette-and-other-styles
 
+
+
 ## Customizing templates
 
 ### Add code to head or before body end
