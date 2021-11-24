@@ -43,6 +43,10 @@ other = "ドキュメントのissueを作成"
 other = "プロジェクトのissueを作成"
 [post_posts_in]
 other = "記事一覧"
+[post_reading_time]
+other = "minute read"
+[post_less_than_a_minute_read]
+other = "less than a minute"
 
 # Print support
 [print_printable_section]
