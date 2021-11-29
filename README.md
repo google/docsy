@@ -39,7 +39,7 @@ details about the various usage options.
 
 ## Documentation
 
-Docsy has its own user guide (using Docsy, of course!) with lots more information about using the theme, which you can find at [https://docsy.dev/](https://docsy.dev/). Alternatively you can use Hugo to generate and serve a local copy of the guide (also useful for testing local theme changes), making sure you have installed all the prerequisites listed above:
+Docsy has its own user guide (using Docsy, of course!) with lots more information about using the theme, which you can find published at [https://docsy.dev/](https://docsy.dev/). The sources of this site can be found in the folder [`userguide`](userguide/) of this repo. Inside this directory, you can use Hugo to generate and serve a local copy of the guide (also useful for testing local theme changes), making sure you have installed all the prerequisites listed above:
 
 ```
 git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
