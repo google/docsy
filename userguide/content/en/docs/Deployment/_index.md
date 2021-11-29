@@ -77,3 +77,60 @@ Alternatively, you can follow the same instructions but specify your **Deploy se
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
+## Deployment with Amazon S3 + Amazon Cloudfront
+
+There are several options for publishing your web site using [Amazon Web Services](https://aws.amazon.com), as described in this [blog post](https://adrianhall.github.io/cloud/2019/01/31/which-aws-service-for-hosting/). This section describes the most basic option, deploying your site using an S3 bucket and activating the CloudFront CDN (content delivery network) to speed up the delivery of your deployed contents.
+
+1. After your [registration](https://portal.aws.amazon.com/billing/signup#/start) at AWS, create your S3 bucket, connect it with your domain and add it to the CloudFront CDN. This [blog post](https://www.noorix.com.au/blog/how-to/hosting-static-website-with-aws-s3-cloudfront/) has all the details and provides easy to follow step-by-step instructions for the whole procedure.
+1. Download and install the latest version 2 of the AWS [Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (CLI). Afterwards, configure your CLI instance by issuing the command `aws configure` (make sure you have your AWS Access Key ID and your AWS Secret Access Key at hand):
+
+```
+$ aws configure
+AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+Default region name [None]: eu-central-1
+Default output format [None]: 
+```
+
+3. Check the proper configuration of your AWS CLI by issuing the command `aws s3 ls`, this should output a list of your S3 bucket(s).
+1. Inside your `config.toml`, add a `[deployment]`section like this one:
+
+```
+[deployment] 
+[[deployment.targets]]
+name = "aws"
+URL = "s3://www.your-domain.tld"
+cloudFrontDistributionID = "E9RZ8T1EXAMPLEID"
+```
+
+5. Run command `hugo --gc --minify` to render the sites assets into the `public/` directory of your hugo build environment.
+1. Use hugo's built-in `deploy` command to deploy the site to S3:
+
+```
+hugo deploy
+Deploying to target "aws" (www.your-domain.tld)
+Identified 77 file(s) to upload, totaling 5.3 MB, and 0 file(s) to delete.
+Success!
+Invalidating CloudFront CDN...
+Success!
+```
+
+As you can see, issuing the `hugo deploy` command will automatically invalidate your CloudFront CDN.
+
+7. That's all to do! From now on, you can easily deploy to your S3 bucket using hugo's built-in `deploy`command! 
+
+
+{{% alert title="Deploy command, options" color="primary" %}}
+You may have a look at the [synopsis](https://gohugo.io/commands/hugo_deploy) of hugo's `deploy` command. E.g. the `--maxDeletes int` option or the `--force` option, which forces upload of all files, might be of interest for you.
+{{% /alert %}}
+
+{{% alert title="Automated deployment with GitHub actions" color="primary" %}}
+If the sources of your site reside inside a GitHub repository, you may make use of [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
+{{% /alert %}}
+
+
+{{% alert title="Proper handling of aliases" color="primary" %}}
+In case you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
+{{% /alert %}}
+
+In case S3 does not meet your expectations, you may have a look at AWS [Amplify Console](https://aws.amazon.com/amplify/console/) which is a more advanced continuous deployment (CD) platform with built-in support for Hugo static site generator. A [starter](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/) can be found in  Hugo's official docs.
