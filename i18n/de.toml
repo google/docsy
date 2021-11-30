@@ -39,6 +39,8 @@ other = "Erstellt"
 other = "Zuletzt geändert"
 [post_edit_this]
 other = "Diese Seite bearbeiten"
+[post_view_this]
+other = "Quellcode dieser Seite ansehen"
 [post_create_child_page]
 other = "Unterseite anlegen"
 [post_create_issue]
