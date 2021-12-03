@@ -130,4 +130,4 @@ If the source of your site lives in a GitHub repository, you can use [GitHub Act
 If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
 {{% /alert %}}
 
-If S3 does not meet your expectations, consider AWS [Amplify Console](https://aws.amazon.com/amplify/console/). This is a more advanced continuous deployment (CD) platform with built-in support for the Hugo static site generator. A [starter](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/) can be found in Hugo's official docs.
+If S3 does not meet your needs, consider AWS [Amplify Console](https://aws.amazon.com/amplify/console/). This is a more advanced continuous deployment (CD) platform with built-in support for the Hugo static site generator. A [starter](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/) can be found in Hugo's official docs.
