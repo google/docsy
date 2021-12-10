@@ -1,9 +1,9 @@
 ---
-title: "Updating Docsy"
-linkTitle: "Updating Docsy"
+title: "Update of Docsy Theme of conversion of existing site to hugo modules"
+linkTitle: "Update or Conversion of Docsy Theme"
 weight: 8
 description: >
- Keeping the theme up to date.
+ Keeping the Docsy theme up to date.
 ---
 
 We hope to continue to make improvements to the theme [along with the Docsy community](/docs/contribution-guidelines/). 
@@ -16,44 +16,3 @@ submodule, or last updated. Updating won't affect any modifications that you mad
 [override the Docsy look and feel](/docs/adding-content/lookandfeel/), as your overrides 
 don't modify the theme itself. For details about what has changed in the theme, see the list of 
 [Docsy commits](https://github.com/google/docsy/commits/main).
-
-Depending on how you chose to use Docsy, follow the corresponding steps to update the theme:
-
-## Update a Docsy submodule
-
-If you are using the Docsy theme as a submodule in your project (for example, if you've copied our example site), you update the submodule:
-
-1. Navigate to the root of your local project, then run:
-
-        git submodule update --remote
-
-    
-1. Add and then commit the change to your project:
-
-        git add themes/
-        git commit -m "Updating theme submodule"
-
-
-1. Push the commit to your project repo. For example, run:
-
-        git push origin main
-
-    
-## Update your Docsy clone
-
-If you [cloned the Docsy theme](/docs/getting-started/#cloning-the-docsy-theme-to-your-projects-themes-subdirectory) into
-the `themes` folder in your project, then you use the `git pull` command:
-
-1. Navigate to the `themes` directory in your local project:
-
-        cd themes
-
-1. Ensure that `origin` is set to `https://github.com/google/docsy.git`:
-
-        git remote -v
-
-1. Update your local clone:
-
-        git pull origin main
-
-If you have made any local changes to the cloned theme, you must manually resolve any merge conflicts.

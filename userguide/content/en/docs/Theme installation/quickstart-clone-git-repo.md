@@ -1,24 +1,15 @@
-
 ---
-title: "Getting Started"
-linkTitle: "Getting Started"
+title: "Option 2: Cloning the Docsy Theme from a GitHub Repo (Traditional)"
+linkTitle: "Cloning GitHub Repo (Traditional)"
+date: 2021-12-08T09:22:27+01:00
 weight: 2
-date: 2018-07-30
 description: >
-  This page tells you how to get started with the Docsy theme, including installation and basic configuration.
+  Instructions on traditional installation and basic configuration of the Docsy theme by cloning the Docsy GitHub repo.
 ---
 
+Traditionally, Docsy theme is installed by cloning either the repo of the Docsy example site or by cloning the docsy repo for usage a local theme of your site. Below, you can find step-by-step instructions on how to install Docsy this way.
 
 ## Prerequisites and installation
-
-### Use our Docker image
-
-We provide a Docker image that you can use to run and test your Docsy site
-locally, without having to install all Docsy's dependencies.
-
-You can see how to get started with this approach by following our [Docker
-Quickstart tutorial](quickstart-docker). If you don't want to use Docker,
-follow the instructions below to install Hugo and PostCSS.
 
 ### Install Hugo 
 
@@ -117,7 +108,7 @@ This is the simplest approach, as the Docsy example site repo is a [template rep
     git clone --recurse-submodules --depth 1 <em>https://github.com/my/example.git</em>
     </pre>
 
-You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](#known-issues)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
+You can now edit your local versions of the site's source files. To preview your site, go to your site root directory and run `hugo server` ([see the known issues on MacOS](/docs/getting-started/known_issues/#macos)). By default, your site will be available at http://localhost:1313/. To push changes to your new repo, go to your site root directory and use `git push`.
 
 #### Using the command line
 
@@ -180,7 +171,7 @@ your repo that may result in merge conflicts when you try to update it. This is 
 [example project](https://github.com/google/docsy-example).
 
 
-To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory. 
+To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory.
 
 ```shell
 hugo new site myproject
@@ -275,56 +266,9 @@ gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 
 To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
 
-## Known issues
-
-### MacOS
-
-#### Errors: `too many open files` or `fatal error: pipe failed`
-
-By default, MacOS permits a small number of open File Descriptors. For larger sites, or when you're simultaneously running multiple applications,
-you might receive one of the following errors when you run [`hugo server`](https://gohugo.io/commands/hugo_server/) to preview your site locally:
-
-* POSTCSS v7 and earlier:
-
-  ```
-  ERROR 2020/04/14 12:37:16 Error: listen tcp 127.0.0.1:1313: socket: too many open files
-  ```
-* POSTCSS v8 and later:
-
-  ```
-  fatal error: pipe failed
-  ```
-
-##### Workaround
-
-To temporarily allow more open files:
-
-1. View your current settings by running:
-
-   ```
-   sudo launchctl limit maxfiles
-   ```
-
-2. Increase the limit to `65535` files by running the following commands. If your site has fewer files, you can set choose to set lower soft (`65535`) and 
-   hard (`200000`) limits. 
-   
-   ```shell
-   sudo launchctl limit maxfiles 65535 200000
-   ulimit -n 65535
-   sudo sysctl -w kern.maxfiles=200000
-   sudo sysctl -w kern.maxfilesperproc=65535
-   ```
-
-Note that you might need to set these limits for each new shell. 
-[Learn more about these limits and how to make them permanent](https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com).
-
-### Windows Subsystem for Linux (WSL)
-
-If you're using WSL, ensure that you're running `hugo` on a Linux mount of the filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 
 ## What's next?
 
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
-
