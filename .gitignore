@@ -1,4 +1,10 @@
 node_modules/
+package-lock.json
+
+# Hugo
+.hugo_build.lock
+/public
+resources/
 
 # vim temporary files
 *~

@@ -1,22 +1,19 @@
 {
-  "name": "Docsy",
-  "version": "0.0.1",
-  "description": "Hugo theme for technical documentation.",
-  "main": "none.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "_build": "hugo --cleanDestinationDir -e dev -DFE --themesDir ../..",
+    "_serve": "hugo serve -DFE --themesDir ../..",
+    "build:preview": "hugo --cleanDestinationDir -e dev -DFE --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\" --themesDir ../..",
+    "build:production": "hugo --cleanDestinationDir --minify --themesDir ../..",
+    "build": "npm run _build",
+    "prebuild:preview": "npm run submodule:get",
+    "prebuild:production": "npm run submodule:get",
+    "prebuild": "npm run submodule:get",
+    "preinstall": "npm run submodule:get",
+    "preserve": "npm run submodule:get",
+    "serve": "npm run _serve",
+    "submodule:get": "cd .. && npm run submodule:get",
+    "submodule:update": "cd .. && npm run submodule:update"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/google/docsy.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/google/docsy/issues"
-  },
-  "homepage": "https://github.com/google#readme",
-  "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^9.5.0",
     "postcss-cli": "^5.0.1"

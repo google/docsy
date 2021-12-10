@@ -1,4 +1,6 @@
-
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "所有"
 
 # UI strings. Buttons and similar.
 
@@ -20,7 +22,7 @@ other = "in"
 
 # Footer text
 [footer_all_rights_reserved]
-other = "All Rights Reserved"
+other = "保留所有权利"
 
 [footer_privacy_policy]
 other = "隐私政策"
@@ -44,9 +46,9 @@ other = "提交项目问题"
 [post_posts_in]
 other = "Posts in"
 [post_reading_time]
-other = "minute read"
+other = "分钟阅读"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "少于1分钟"
 
 # Print support
 [print_printable_section]
