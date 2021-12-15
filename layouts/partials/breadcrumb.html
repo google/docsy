@@ -1,5 +1,9 @@
+{{ $isSingle := true -}}
+{{ with .Parent -}}
+  {{ $isSingle = .IsHome -}}
+{{ end -}}
 <nav aria-label="breadcrumb" class="td-breadcrumbs
-    {{- if .Parent.IsHome }} td-breadcrumbs__single {{- end }}">
+    {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
   <ol class="breadcrumb">
     {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
   </ol>
