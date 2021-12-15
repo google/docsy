@@ -1,5 +1,6 @@
-<nav aria-label="breadcrumb" class="td-breadcrumbs">
-  <ol class="breadcrumb spb-1">
+<nav aria-label="breadcrumb" class="td-breadcrumbs
+    {{- if .Parent.IsHome }} td-breadcrumbs__single {{- end }}">
+  <ol class="breadcrumb">
     {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
   </ol>
 </nav>

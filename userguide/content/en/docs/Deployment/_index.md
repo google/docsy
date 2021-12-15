@@ -77,3 +77,57 @@ Alternatively, you can follow the same instructions but specify your **Deploy se
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
+## Deployment with Amazon S3 + Amazon CloudFront
+
+There are several options for publishing your web site using [Amazon Web Services](https://aws.amazon.com), as described in this [blog post](https://adrianhall.github.io/cloud/2019/01/31/which-aws-service-for-hosting/). This section describes the most basic option, deploying your site using an S3 bucket and activating the CloudFront CDN (content delivery network) to speed up the delivery of your deployed contents.
+
+1. After your [registration](https://portal.aws.amazon.com/billing/signup#/start) at AWS, create your S3 bucket, connect it with your domain, and add it to the CloudFront CDN. This [blog post](https://www.noorix.com.au/blog/how-to/hosting-static-website-with-aws-s3-cloudfront/) has all the details and provides easy to follow step-by-step instructions for the whole procedure.
+1. Download and install the latest version 2 of the AWS [Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (CLI). Then configure your CLI instance by issuing the command `aws configure` (make sure you have your AWS Access Key ID and your AWS Secret Access Key at hand):
+
+   ```
+   $ aws configure
+   AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+   AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+   Default region name [None]: eu-central-1
+   Default output format [None]: 
+   ```
+
+1. Check the proper configuration of your AWS CLI by issuing the command `aws s3 ls`, this should output a list of your S3 bucket(s).
+1. Inside your `config.toml`, add a `[deployment]` section like this one:
+
+   ```
+   [deployment] 
+   [[deployment.targets]]
+   name = "aws"
+   URL = "s3://www.your-domain.tld"
+   cloudFrontDistributionID = "E9RZ8T1EXAMPLEID"
+   ```
+
+1. Run the command `hugo --gc --minify` to render the site's assets into the `public/` directory of your Hugo build environment.
+1. Use Hugo's built-in `deploy` command to deploy the site to S3:
+
+   ```
+   hugo deploy
+   Deploying to target "aws" (www.your-domain.tld)
+   Identified 77 file(s) to upload, totaling 5.3 MB, and 0 file(s) to delete.
+   Success!
+   Invalidating CloudFront CDN...
+   Success!
+   ```
+
+   As you can see, issuing the `hugo deploy` command automatically [invalidates](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) your CloudFront CDN cache.
+
+1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy`command! 
+
+For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
+
+{{% alert title="Automated deployment with GitHub actions" color="primary" %}}
+If the source of your site lives in a GitHub repository, you can use [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
+{{% /alert %}}
+
+
+{{% alert title="Handling aliases" color="primary" %}}
+If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
+{{% /alert %}}
+
+If S3 does not meet your needs, consider AWS [Amplify Console](https://aws.amazon.com/amplify/console/). This is a more advanced continuous deployment (CD) platform with built-in support for the Hugo static site generator. A [starter](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/) can be found in Hugo's official docs.

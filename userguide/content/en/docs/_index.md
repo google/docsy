@@ -32,7 +32,7 @@ Docsy is particularly useful for medium to large technical documentation sets wi
 
 If you have a smaller project with only a couple of pages of documentation and hence simpler navigation needs, Docsy may be too heavyweight a solution for you. Instead, consider:
 
-* A simpler Hugo or Jekyll theme: find out what's available in Github Pages' [built-in Jekyll options](https://pages.github.com/themes/) and the [Hugo theme gallery](https://themes.gohugo.io/).
+* A simpler Hugo or Jekyll theme: find out what's available in GitHub Pages' [built-in Jekyll options](https://pages.github.com/themes/) and the [Hugo theme gallery](https://themes.gohugo.io/).
 * A good README file that tells users what your project does and links to some examples.
 
 If you have a very large documentation project, our example site structure may not be sufficient either, though you can still use our theme, possibly with heavier customization.
