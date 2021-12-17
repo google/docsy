@@ -4,7 +4,7 @@ title = "Docsy Example"
 enableRobotsTXT = true
 
 # Hugo allows theme composition (and inheritance). The precedence is from left to right.
-theme = ["docsy"]
+# theme = ["docsy"]
 
 # Will give values to .Lastmod etc.
 enableGitInfo = true
@@ -245,25 +245,10 @@ category = "categories"
 
 [module]
   # uncomment line below for temporary local development of module
-  # replacements = "github.com/google/docsy -> ../../docsy"
+  # replacements = "github.com/google/docsy -> ../../../docsy"
   [module.hugoVersion]
     extended = true
     min = "0.75.0"
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
-  [[module.imports.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.imports.mounts]]
-    source = "assets/bootstrap/scss/vendor"
-    target = "assets/vendor/bootstrap/scss/vendor"
-  [[module.imports.mounts]]
-    source = "i18n"
-    target = "i18n"
-  [[module.imports.mounts]]
-    source = "layouts"
-    target = "layouts"
-  [[module.imports.mounts]]
-    source = "static"
-    target = "static"
