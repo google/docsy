@@ -19,22 +19,9 @@ cat >> config.toml <<EOL
 [module]
 [[module.imports]]
 path = "github.com/google/docsy"
-[[module.imports.mounts]]
-source = "assets"
-target = "assets"
-[[module.imports.mounts]]
-source = "assets/bootstrap/scss/vendor"
-target = "assets/vendor/bootstrap/scss/vendor"
-[[module.imports.mounts]]
-source = "i18n"
-target = "i18n"
-[[module.imports.mounts]]
-source = "layouts"
-target = "layouts"
-[[module.imports.mounts]]
-source = "static"
-target = "static"
 EOL
+mkdir -p assets/vendor/bootstrap/scss/vendor
+wget -P assets/vendor/bootstrap/scss/vendor https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
 hugo server
 {{< /tab >}}
 {{< tab header="Windows command line" >}}
@@ -45,37 +32,12 @@ hugo mod get github.com/google/docsy
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"^
-
-[[module.imports.mounts]]^
-
-source = "assets"^
-
-target = "assets"^
-
-[[module.imports.mounts]]^
-
-source = "assets/bootstrap/scss/vendor"^
-
-target = "assets/vendor/bootstrap/scss/vendor"^
-
-[[module.imports.mounts]]^
-
-source = "i18n"^
-
-target = "i18n"^
-
-[[module.imports.mounts]]^
-
-source = "layouts"^
-
-target = "layouts"^
-
-[[module.imports.mounts]]^
-
-source = "static"^
-
-target = "static")>config.toml
+path = "github.com/google/docsy"^)>config.toml
+md assets\vendor\bootstrap\scss\vendor
+cd assets\vendor\bootstrap\scss\vendor
+REM Windows 10 only
+curl.exe -O --url https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
+cd ..\..\..\..
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -122,21 +84,6 @@ Next, add the settings given in the code box below at the end of your site confi
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
-  [[module.imports.mounts]]
-    source = "assets"
-    target = "assets"
-  [[module.imports.mounts]]
-    source = "assets/bootstrap/scss/vendor"
-    target = "assets/vendor/bootstrap/scss/vendor"
-  [[module.imports.mounts]]
-    source = "i18n"
-    target = "i18n"
-  [[module.imports.mounts]]
-    source = "layouts"
-    target = "layouts"
-  [[module.imports.mounts]]
-    source = "static"
-    target = "static"
 {{< /tab >}}
 {{< tab header="config.yaml" >}}
 module:
@@ -146,17 +93,6 @@ module:
   imports:
     - path: github.com/google/docsy
       disable: false
-      mounts:
-        - source: assets
-          target: assets
-        - source: assets/bootstrap/scss/vendor
-          target: assets/vendor/bootstrap/scss/vendor
-        - source: i18n
-          target: i18n
-        - source: layouts
-          target: layouts
-        - source: static
-          target: static
 {{< /tab >}}
 {{< tab header="config.json" >}}
 {
@@ -168,29 +104,7 @@ module:
     "imports": [
       {
         "path": "github.com/google/docsy",
-        "disable": false,
-        "mounts": [
-          {
-            "source": "assets",
-            "target": "assets"
-          },
-          {
-            "source": "assets/bootstrap/scss/vendor",
-            "target": "assets/vendor/bootstrap/scss/vendor"
-          },
-          {
-            "source": "i18n",
-            "target": "i18n"
-          },
-          {
-            "source": "layouts",
-            "target": "layouts"
-          },
-          {
-            "source": "static",
-            "target": "static"
-          }
-        ]
+        "disable": false
       }
     ]
   }
@@ -198,25 +112,68 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
- Store the file, and you conversion is done.
 
-### Remove theme and submodule leftovers
+### Work around a known bug in Go's module management
+
+When using `bootstrap` dependency as module, we are affected by a [known](https://github.com/golang/go/issues/37397) bug in Go's core module library. This bug won't be fixed, fortunately we can work around it:
+
+All we have to do is to place a file `_rfs.scss` at the bottom of a new directory structure inside our site:
+
+```
+my-existing-site
+│
+└───assets
+    │
+    └───vendor
+        │
+        └───bootstrap
+            │
+            └───scss
+                │
+                └───vendor
+                    │
+                    └───_rfs.scss
+
+```
+
+First we create the needed directory structure using the `mkdir` command:
+
+```shell
+mkdir -p assets/vendor/bootstrap/scss/vendor
+```
+
+Then we download the file `_rfs.scss` using the `wget` command line utility:
+
+```shell
+wget -P assets/vendor/bootstrap/scss/vendor https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
+```
+
+
+### Remove theme and submodule incl. leftovers
 
 Since your site makes now use of hugo modules, your previous used themes directory can be removed: 
 
 ```
-rm -rf /path/to/your/theme/*
+rm -rf /path/to/your/theme
 ```
 
-If your docsy theme was installed as submodule, you may delete the hidden submodule definition file `.gitmodules`, too.
+If your docsy theme was installed as submodule, you may remove the themes submodule:
+
+```
+git rm --cached /path/to/your/submodule/theme
+git add .
+```
+
+With your submodule deleted, now delete the relevant line form the hidden submodule definition file `.gitmodules`, too. If this is the only line, you can delete the file altogether.
 
 ```
 rm .gitmodules
 ```
 
-Finally, you may clean up the internal directory that git used to store your git submodules:
+Finally, you can delete the now untracked submodule files and also clean up the internal directory that git used to store your git submodules:
 
 ```
+rm -rf /path/to/your/submodule/theme
 rm -rf .git/modules
 ```
 
