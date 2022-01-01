@@ -42,7 +42,7 @@ other = "Signaler un problème dans la documentation"
 [post_create_project_issue]
 other = "Signaler un problème dans le projet"
 [post_posts_in]
-other = "Messages dans"
+other = "Articles dans"
 [post_reading_time]
 other = "minutes à lire"
 [post_less_than_a_minute_read]
