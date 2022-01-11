@@ -37,6 +37,8 @@ other = "创建"
 other = "最后修改"
 [post_edit_this]
 other = "编辑此页"
+[post_view_this]
+other = "查看页面源码"
 [post_create_child_page]
 other = "添加子页面"
 [post_create_issue]
