@@ -242,3 +242,14 @@ enable = true
 [taxonomies]
 tag = "tags"
 category = "categories"
+
+[module]
+  # uncomment line below for temporary local development of module
+  # replacements = "github.com/google/docsy -> ../../docsy"
+  [module.hugoVersion]
+    extended = true
+    min = "0.75.0"
+  [[module.imports]]
+    path = "github.com/google/docsy"
+    # set disable to false to use theme as module 
+    disable = true
