@@ -1,4 +1,4 @@
-// Adapted from code by Matt Walters https://www.mattwalters.net/posts/hugo-and-lunr/
+// Adapted from code by Matt Walters https://www.mattwalters.net/posts/2018-03-28-hugo-and-lunr/
 
 (function ($) {
     'use strict';
