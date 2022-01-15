@@ -38,12 +38,12 @@ hugo mod get github.com/google/docsy
 
 [[module.imports]]^
 
-path = "github.com/google/docsy")>config.toml
+path = "github.com/google/docsy")>>config.toml
 md assets\vendor\bootstrap\scss\vendor
 cd assets\vendor\bootstrap\scss\vendor
 REM Windows 10 only
 curl.exe -O --url https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
-cd ..\..\..\..
+cd ..\..\..\..\..
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -66,7 +66,7 @@ cd  my-new-site
 
 This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file, `config.toml.
 
-### Add the Docsy theme module to your site
+### Import the Docsy theme module as a dependency of your site
 
 Only sites that are hugo modules themselves can import other hugo modules. So turn your site into a Hugo Module by executing the following commands from within your newly created site directory:
 
