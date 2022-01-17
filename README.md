@@ -8,7 +8,7 @@ This is not an officially supported Google product. This project is actively bei
 
 The following are basic prerequisites for using Docsy in your site:
 
-- Install a recent release of the Hugo "extended" version (we recommend version 0.53 or later). If you install from the 
+- Install a recent release of the Hugo "extended" version (we recommend version 0.77 or later). If you install from the 
   [release page](https://github.com/gohugoio/hugo/releases), make sure you download the `_extended` version 
   which supports SCSS.
 
