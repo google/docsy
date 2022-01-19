@@ -39,6 +39,8 @@ other = "Creado"
 other = "Última modificación"
 [post_edit_this]
 other = "Editar esta página"
+[post_view_this]
+other = "Ver código de la página"
 [post_create_child_page]
 other = "Create child page"
 [post_create_issue]
@@ -50,7 +52,7 @@ other = "Añadir entrada"
 [post_reading_time]
 other = "minutos de lectura"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "menos de un minuto"
 
 # Print support
 [print_printable_section]
