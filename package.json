@@ -7,5 +7,8 @@
     "serve": "cd userguide && npm run serve",
     "submodule:get": "git submodule update --init --recursive --depth 1",
     "submodule:update": "git submodule update --remote --recursive --depth 1"
+  },
+  "devDependencies": {
+    "hugo-extended": "0.92.0"
   }
 }
