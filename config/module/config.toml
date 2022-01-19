@@ -1,0 +1,15 @@
+# Dependencies are brought in as modules
+# and mount points are declared
+[[module.imports]]
+  path = "github.com/twbs/bootstrap"
+  disable = false
+[[module.imports.mounts]]
+  source = "scss"
+  target = "assets/vendor/bootstrap/scss"
+
+[[module.imports]]
+  path = "github.com/FortAwesome/Font-Awesome"
+  disable = false
+[[module.imports.mounts]]
+  source = "scss"
+  target = "assets/vendor/Font-Awesome/scss"
