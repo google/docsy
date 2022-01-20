@@ -15,7 +15,7 @@
 				{{ range .Pages }}
 				<li class="media mb-4">
 					<div class="media-body">
-						<h5 class="mt-0 mb-1"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h5>
+						<h5 class="mt-0 mb-1"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h5>
 						<p class="mb-2 mb-md-3"><small class="text-muted">{{ .Date.Format ($.Param "time_format_blog") }} {{ T "ui_in"}} {{ .CurrentSection.LinkTitle }}</small></p>
 						<header class="article-meta">
 							{{ $context := . }}

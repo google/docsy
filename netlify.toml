@@ -3,12 +3,11 @@
 
 [build]
 publish = "userguide/public"
-command = "npm install && npm run build:preview"
+command = "npm run build:preview"
 
 [build.environment]
-HUGO_VERSION = "0.92.0"
 GO_VERSION = "1.17.6"
 HUGO_THEME = "repo"
 
 [context.production]
-command = "npm install && npm run build:production"
+command = "npm run build:production"
