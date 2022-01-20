@@ -1,3 +1,8 @@
+[module]
+_merge = "none"
+[[module.mounts]]
+  source = "assets/bootstrap/scss/vendor"
+  target = "assets/vendor/bootstrap/scss/vendor"
 # Dependencies are brought in as modules
 # and mount points are declared
 [[module.imports]]
