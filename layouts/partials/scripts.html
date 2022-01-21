@@ -32,7 +32,8 @@
 {{ if .Site.Params.offlineSearch }}
 {{ $jsSearch = resources.Get "js/offline-search.js" }}
 {{ end }}
-{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml) | resources.Concat "js/main.js" }}
+{{ $jsShortcodes := resources.Get "js/shortcodes.js" | resources.ExecuteAsTemplate "js/shortcodes.js" . }}
+{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsShortcodes) | resources.Concat "js/main.js" }}
 {{ if .Site.IsServer }}
 <script src="{{ $js.RelPermalink }}"></script>
 {{ else }}

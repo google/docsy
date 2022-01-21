@@ -1,32 +1,32 @@
-@import "support/functions";
-@import "variables_project";
-@import "variables";
-@import "support/mixins";
+@import 'support/functions';
+@import 'variables_project';
+@import 'variables';
+@import 'support/mixins';
 
-@import "../vendor/bootstrap/scss/bootstrap";
+@import '../vendor/bootstrap/scss/bootstrap';
 
-@import "../vendor/Font-Awesome/scss/fontawesome.scss";
-@import "../vendor/Font-Awesome/scss/solid.scss";
-@import "../vendor/Font-Awesome/scss/brands.scss";
+@import '../vendor/Font-Awesome/scss/fontawesome.scss';
+@import '../vendor/Font-Awesome/scss/solid.scss';
+@import '../vendor/Font-Awesome/scss/brands.scss';
 
-@import "support/utilities";
-@import "colors";
-@import "boxes";
-@import "blog";
-@import "code";
-@import "nav";
-@import "sidebar-tree";
-@import "sidebar-toc";
-@import "buttons";
-@import "breadcrumb";
-@import "alerts";
-@import "content";
-@import "search";
-@import "main-container";
-@import "blocks/blocks";
-@import "section-index";
-@import "pageinfo";
-@import "shortcodes";
+@import 'support/utilities';
+@import 'colors';
+@import 'boxes';
+@import 'blog';
+@import 'code';
+@import 'nav';
+@import 'sidebar-tree';
+@import 'sidebar-toc';
+@import 'buttons';
+@import 'breadcrumb';
+@import 'alerts';
+@import 'content';
+@import 'search';
+@import 'main-container';
+@import 'blocks/blocks';
+@import 'section-index';
+@import 'pageinfo';
+@import 'shortcodes';
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
@@ -38,6 +38,13 @@ footer {
     @include media-breakpoint-down(md) {
         min-height: 200px;
     }
+}
+
+/* hide content overflow when overriding .container-fluid padding */
+/* this will disable the horizontal scrollbar */
+html,
+body {
+    overflow-x: hidden;
 }
 
 // Adjust anchors vs the fixed menu.
@@ -54,12 +61,12 @@ footer {
     h4[id]:before,
     h5[id]:before {
         display: block;
-        content: " ";
+        content: ' ';
         margin-top: -5rem;
         height: 5rem;
         visibility: hidden;
     }
 }
 
-@import "rtl/main";
-@import "styles_project";
+@import 'rtl/main';
+@import 'styles_project';
