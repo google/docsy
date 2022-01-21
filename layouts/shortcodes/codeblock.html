@@ -1,0 +1,6 @@
+<div id="code-{{ .Get "id" }}" class="codeblock">
+  <pre>
+    <code>{{ delimit (split .Inner "\n") "<br/>" "" }} </code>
+    <i class="fas fa-copy" id="code-{{ .Get "id" }}-icon" onclick="copyCodeblock('{{ .Inner }}', 'code-{{ .Get "id" }}-icon')"></i>
+  </pre>
+</div>
