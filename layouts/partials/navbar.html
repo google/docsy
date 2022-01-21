@@ -14,7 +14,7 @@
         - Set the correct link
         - Set the correct text
 -->
-<a id="announcement-bar" href="https://www.youtube.com/watch?v=L3L86vtEa8M" target="_blank" class="fixed-top py-2 text-center text-bold text-white" style="background-color: #ffad00;">Happy Holidays from all of us at The @ Company</a>
+<!-- <a id="announcement-bar" href="https://www.youtube.com/watch?v=L3L86vtEa8M" target="_blank" class="fixed-top py-2 text-center text-bold text-white" style="background-color: #ffad00;">Happy Holidays from all of us at The @ Company</a> -->
 <nav class="js-navbar-scroll navbar navbar-expand navbar-dark {{ if $cover}} td-navbar-cover {{ end }}flex-column flex-md-row td-navbar">
     <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
         <span class="navbar-logo">{{ if .Site.Params.ui.navbar_logo }}{{ with resources.Get "icons/logo.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}{{ end }}</span>
