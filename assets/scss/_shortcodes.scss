@@ -1,0 +1,25 @@
+.link-card {
+    text-align: center;
+    padding: 1rem;
+    border: 1px solid #808080;
+    border-radius: 5px;
+
+    min-width: fit-content;
+    height: 100%;
+    h5 {
+        font-weight: bold;
+        min-width: fit-content;
+        white-space: nowrap;
+    }
+
+    p {
+        color: black;
+    }
+}
+
+.card-grid {
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1em;
+}
