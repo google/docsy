@@ -64,7 +64,7 @@ anchor = "smart"
     weight = 50
     url = "https://github.com/google/docsy/"
     pre = "<i class='fab fa-github'></i>"
-    post = "<span class='alert'>New!</span>" 
+    post = "<span class='alert'>New!</span>"
 
 [services]
 [services.googleAnalytics]
@@ -101,13 +101,13 @@ privacy_policy = "https://policies.google.com/privacy"
 # This menu appears only if you have at least one [params.versions] set.
 version_menu = "Releases"
 
-# Flag used in the "version-banner" partial to decide whether to display a 
+# Flag used in the "version-banner" partial to decide whether to display a
 # banner on every page indicating that this is an archived version of the docs.
 # Set this flag to "true" if you want to display the banner.
 archived_version = false
 
 # The version number for the version of the docs represented in this doc set.
-# Used in the "version-banner" partial to display a version number for the 
+# Used in the "version-banner" partial to display a version number for the
 # current doc set.
 version = "0.0"
 
@@ -167,7 +167,7 @@ yes = 'Glad to hear it! Please <a href="https://github.com/google/docsy/issues/n
 no = 'Sorry to hear that. Please <a href="https://github.com/google/docsy/issues/new">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
-# If you want this feature, but occasionally need to remove the Reading time from a single page, 
+# If you want this feature, but occasionally need to remove the Reading time from a single page,
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
@@ -242,14 +242,3 @@ enable = true
 [taxonomies]
 tag = "tags"
 category = "categories"
-
-[module]
-  # uncomment line below for temporary local development of module
-  # replacements = "github.com/google/docsy -> ../../docsy"
-  [module.hugoVersion]
-    extended = true
-    min = "0.75.0"
-  [[module.imports]]
-    path = "github.com/google/docsy"
-    # set disable to false to use theme as module 
-    disable = true
