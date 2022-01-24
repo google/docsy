@@ -37,8 +37,8 @@ pygmentsUseClassic = false
 # See https://help.farbox.com/pygments.html
 pygmentsStyle = "tango"
 
- # First one is picked as the Twitter card image if not set on page.
- #images = ["images/project-illustration.png"]
+# First one is picked as the Twitter card image if not set on page.
+#images = ["images/project-illustration.png"]
 
 # Configure how URLs look like per section.
 [permalinks]
@@ -158,11 +158,11 @@ prism_syntax_highlighting = false
 sidebar_menu_compact = false
 sidebar_menu_foldable = false
 sidebar_cache_limit = 10
-#  Set to true to disable breadcrumb navigation.
+# Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
-#  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
+# Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
 sidebar_search_disable = false
-#  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
+# Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
@@ -185,41 +185,41 @@ enable = false
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
-	name ="GitHub Discussions"
-	url = "https://github.com/google/docsy/discussions"
-	icon = "fab fa-github"
-        desc = "Discussion and help from your fellow users"
+  name ="GitHub Discussions"
+  url = "https://github.com/google/docsy/discussions"
+  icon = "fab fa-github"
+  desc = "Discussion and help from your fellow users"
 [[params.links.user]]
-	name = "User mailing list"
-	url = "https://groups.google.com/forum/#!forum/docsy-users"
-	icon = "fa fa-envelope"
-        desc = "Sign up for Docsy announcements"
+  name = "User mailing list"
+  url = "https://groups.google.com/forum/#!forum/docsy-users"
+  icon = "fa fa-envelope"
+  desc = "Sign up for Docsy announcements"
 [[params.links.user]]
-	name ="Twitter"
-	url = "https://twitter.com/docsydocs"
-	icon = "fab fa-twitter"
-        desc = "Follow us on Twitter to get the latest news!"
+  name ="Twitter"
+  url = "https://twitter.com/docsydocs"
+  icon = "fab fa-twitter"
+  desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
-	name = "Stack Overflow"
-	url = "https://stackoverflow.com/questions/tagged/docsy"
-	icon = "fab fa-stack-overflow"
-        desc = "Practical questions and curated answers"
+  name = "Stack Overflow"
+  url = "https://stackoverflow.com/questions/tagged/docsy"
+  icon = "fab fa-stack-overflow"
+  desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
-	name = "GitHub"
-	url = "https://github.com/google/docsy"
-	icon = "fab fa-github"
-        desc = "Development takes place here!"
+  name = "GitHub"
+  url = "https://github.com/google/docsy"
+  icon = "fab fa-github"
+  desc = "Development takes place here!"
 # [[params.links.developer]]
-	# name = "Slack"
-	# url = "https://example.org/slack"
-	# icon = "fab fa-slack"
-        # desc = "Chat with other project developers"
+  # name = "Slack"
+  # url = "https://example.org/slack"
+  # icon = "fab fa-slack"
+  # desc = "Chat with other project developers"
 # [[params.links.developer]]
-	# name = "Developer mailing list"
-	# url = "https://example.org/mail"
-	# icon = "fa fa-envelope"
-        # desc = "Discuss development issues around the project"
+  # name = "Developer mailing list"
+  # url = "https://example.org/mail"
+  # icon = "fa fa-envelope"
+  # desc = "Discuss development issues around the project"
 
 [params.mermaid]
 enable = true
