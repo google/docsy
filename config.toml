@@ -27,6 +27,7 @@ path = "_print"
 permalinkable = false
 
 [module]
+_merge = "deep"
 [module.hugoVersion]
 extended = true
 min = "0.73.0"
