@@ -25,3 +25,8 @@ isHTML = true
 mediaType = "text/html"
 path = "_print"
 permalinkable = false
+
+[module]
+[module.hugoVersion]
+extended = true
+min = "0.73.0"
