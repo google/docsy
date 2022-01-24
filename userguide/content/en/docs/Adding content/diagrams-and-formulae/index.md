@@ -211,7 +211,7 @@ entity      entity      as Foo4
 database    database    as Foo5
 collections collections as Foo6
 queue       queue       as Foo7
-Foo -> Foo1 : To actor 
+Foo -> Foo1 : To actor
 Foo -> Foo2 : To boundary
 Foo -> Foo3 : To control
 Foo -> Foo4 : To entity
@@ -232,7 +232,7 @@ entity      entity      as Foo4
 database    database    as Foo5
 collections collections as Foo6
 queue       queue       as Foo7
-Foo -> Foo1 : To actor 
+Foo -> Foo1 : To actor
 Foo -> Foo2 : To boundary
 Foo -> Foo3 : To control
 Foo -> Foo4 : To entity
@@ -254,10 +254,14 @@ Other optional settings are:
 enable = true
 theme = "default"
 
-#Set url to plantuml server 
+#Set url to plantuml server
 #default is http://www.plantuml.com/plantuml/svg/
 svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
+#By default the plantuml implementation uses <img /> tags to display UML diagrams.
+#When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.d.
+#default = false
+svg = true
 ```
 
 ## MindMap support with MarkMap
