@@ -58,3 +58,27 @@ other = "برای پرینت کلیک کنید."
 other = "بازگشت به حالت نمایش عادی این قسمت"
 [print_entire_section]
 other = "پرینت کامل قسمت"
+
+# Community
+[community]
+other = "community"
+[community_join]
+other = "Join the"
+[community_introduce]
+other = "is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+[community_learn]
+other = "Learn and Connect"
+[community_using]
+other = "Using or want to use"
+[community_find_out]
+other = "Find out more here"
+[community_develop]
+other = "Develop and Contribute"
+[community_contribute]
+other = "If you want to get more involved by contributing to"
+[community_join_us]
+other = "join us here"
+[community_how_to]
+other = "You can find out how to contribute to these docs in our"
+[community_guideline]
+other = "Contribution Guidelines"
