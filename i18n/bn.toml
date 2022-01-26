@@ -1,4 +1,4 @@
-# ইউআই স্ট্রিং বাটন এবং অনুরূপ। 
+# ইউআই স্ট্রিং বাটন এবং অনুরূপ।
 
 [ui_pager_prev]
 other = "পূর্ববর্তী"
@@ -55,3 +55,27 @@ other = "মুদ্রণ করতে এখানে ক্লিক কর�
 other = "এই পৃষ্ঠার নিয়মিত দৃশ্যে ফিরে আসুন"
 [print_entire_section]
 other = "পুরো বিভাগ মুদ্রণ করুন"
+
+# Community
+[community]
+other = "community"
+[community_join]
+other = "Join the"
+[community_introduce]
+other = "is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+[community_learn]
+other = "Learn and Connect"
+[community_using]
+other = "Using or want to use"
+[community_find_out]
+other = "Find out more here"
+[community_develop]
+other = "Develop and Contribute"
+[community_contribute]
+other = "If you want to get more involved by contributing to"
+[community_join_us]
+other = "join us here"
+[community_how_to]
+other = "You can find out how to contribute to these docs in our"
+[community_guideline]
+other = "Contribution Guidelines"
