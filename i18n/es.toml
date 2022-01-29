@@ -66,24 +66,20 @@ other = "Imprimir la sección entera"
 
 # Community
 [community]
-other = "community"
+other = "comunidad"
 [community_join]
-other = "Join the"
+other = "Únete a la {{ .Site.Title }} comunidad"
 [community_introduce]
-other = "is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} es un proyecto de código abierto que cualquiera en la comunidad puede usar, mejorar y disfrutar. ¡Nos encantaría que te unas a nosotros! Aquí hay algunas maneras de averiguar lo que está sucediendo y participar."
 [community_learn]
-other = "Learn and Connect"
+other = "Aprende y Conéctate"
 [community_using]
-other = "Using or want to use"
-[community_find_out]
-other = "Find out more here"
+other = "¿Usas o quieres usar {{ .Site.Title }}, Encuentre más información aquí:"
 [community_develop]
-other = "Develop and Contribute"
+other = "Desarrollar y Contribuir"
 [community_contribute]
-other = "If you want to get more involved by contributing to"
-[community_join_us]
-other = "join us here"
+other = "Si desea involucrarse más contribuyendo a {{ .Site.Title }}, únase a nosotros aquí:"
 [community_how_to]
-other = "You can find out how to contribute to these docs in our"
+other = "Puede averiguar cómo contribuir a estos documentos en nuestras"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "Guias de Contribución"

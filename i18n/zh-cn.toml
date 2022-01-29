@@ -66,21 +66,17 @@ other = "整节打印"
 [community]
 other = "社区"
 [community_join]
-other = "加入"
+other = "加入 {{ .Site.Title }} 社区"
 [community_introduce]
-other = "是一个开源项目，社区中的任何人都可以使用、改善和尽情使用它。我们很期待你能加入我们！下面是如何查看最近更新以及参与我们的一些方式。"
+other = "{{ .Site.Title }} 是一个开源项目，社区中的任何人都可以使用、改善和尽情使用它。我们很期待你能加入我们！下面是如何查看最近更新以及参与我们的一些方式。"
 [community_learn]
 other = "学习和沟通"
 [community_using]
-other = "正在或打算使用"
-[community_find_out]
-other = "获取更多"
+other = "正在或打算使用 {{ .Site.Title }}，获取更多信息："
 [community_develop]
 other = "开发和贡献"
 [community_contribute]
-other = "如果你想参与更多通过贡献"
-[community_join_us]
-other = "在这里加入我们"
+other = "如果你想参与更多通过贡献 {{ .Site.Title }}，在这里加入我们："
 [community_how_to]
 other = "获取如何参与贡献这些文档，请参考我们的"
 [community_guideline]
