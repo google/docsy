@@ -4,17 +4,25 @@ title = "Docsy Example"
 enableRobotsTXT = true
 
 # set docsy as theme, either locally or as module
-[module]
-  # uncomment line below for temporary local development of module
-  # replacements = "github.com/google/docsy -> ../../docsy"
-  [module.hugoVersion]
-    extended = true
-    min = "0.73.0"
-  [[module.imports]]
-    # either get theme from local themes folder
-    path = "docsy"
-    # or pull it in as hugo module
-    # path = "github.com/google/docsy"
+theme = ["docsy"]
+# theme = ["github.com/google/docsy", "github.com/google/docsy/module"]
+
+# when using docsy as module, instead of using
+# theme = ["github.com/google/docsy", "github.com/google/docsy/module"]
+# you may alternatively use the declaration given below:
+#[module]
+#  # uncomment lines below for temporary local development of module
+#  # replacements = "github.com/google/docsy -> ../../docsy"
+#  # replacements = "github.com/google/docsy/module -> ../../docsy"
+#  [module.hugoVersion]
+#    extended = true
+#    min = "0.73.0"
+#  [[module.imports]]
+#  # pull in docsy as hugo module
+#    path = "github.com/google/docsy"
+#  [[module.imports]]
+#  # pull in workaround and dependencies
+#    path = "github.com/google/docsy/module"
 
 # Will give values to .Lastmod etc.
 enableGitInfo = true
