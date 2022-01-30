@@ -57,8 +57,6 @@ other = "العودة للعرض العادي"
 other = "اطبع القسم كاملا"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

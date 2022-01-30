@@ -65,8 +65,6 @@ other = "Volver a la vista normal de esta página"
 other = "Imprimir la sección entera"
 
 # Community
-[community]
-other = "comunidad"
 [community_join]
 other = "Únete a la {{ .Site.Title }} comunidad"
 [community_introduce]

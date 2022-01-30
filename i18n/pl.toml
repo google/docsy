@@ -60,8 +60,6 @@ other = "Wróć do zwykłego widoku tej strony"
 other = "Wydrukuj całą sekcję"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

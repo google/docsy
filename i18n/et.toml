@@ -48,8 +48,6 @@ other = "minute read"
 other = "less than a minute"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

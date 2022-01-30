@@ -60,8 +60,6 @@ other = "بازگشت به حالت نمایش عادی این قسمت"
 other = "پرینت کامل قسمت"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

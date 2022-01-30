@@ -59,8 +59,6 @@ other = "이 페이지의 일반 화면으로 돌아가기"
 other = "전체 섹션 프린트"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

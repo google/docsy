@@ -59,8 +59,6 @@ other = "Bu sayfanın normal görüntüsüne dönün"
 other = "Bütün bölümü yazıdırın"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

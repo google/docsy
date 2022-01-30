@@ -59,8 +59,6 @@ other = "Retour à la version par défaut"
 other = "Imprimer la section entière"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

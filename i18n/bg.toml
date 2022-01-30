@@ -59,8 +59,6 @@ other = "Върнете се към обичайния изглед на таз�
 other = "Отпечатайте цялата секция"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

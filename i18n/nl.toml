@@ -59,8 +59,6 @@ other = "Terug naar normale view van deze pagina"
 other = "Print complete sectie"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

@@ -63,8 +63,6 @@ other = "返回本页常规视图"
 other = "整节打印"
 
 # Community
-[community]
-other = "社区"
 [community_join]
 other = "加入 {{ .Site.Title }} 社区"
 [community_introduce]

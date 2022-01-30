@@ -65,8 +65,6 @@ other = "Zur Standardansicht zurückkehren"
 other = "Kapitel inkl. Unterseiten drucken"
 
 # Community
-[community]
-other = "Community"
 [community_join]
 other = "Werde Teil der {{ .Site.Title }} Community"
 [community_introduce]

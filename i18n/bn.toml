@@ -57,8 +57,6 @@ other = "এই পৃষ্ঠার নিয়মিত দৃশ্যে �
 other = "পুরো বিভাগ মুদ্রণ করুন"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

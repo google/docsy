@@ -63,8 +63,6 @@ other = "Return to the regular view of this page"
 other = "Print entire section"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]

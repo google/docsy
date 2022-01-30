@@ -59,8 +59,6 @@ other = "このページの通常のビューに戻る"
 other = "セクション全体を印刷"
 
 # Community
-[community]
-other = "community"
 [community_join]
 other = "Join the {{ .Site.Title }} Community"
 [community_introduce]
