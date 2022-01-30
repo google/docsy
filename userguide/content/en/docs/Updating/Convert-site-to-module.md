@@ -14,33 +14,34 @@ At your command prompt, issue:
 {{< tab header="Unix shell" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy
+hugo mod get github.com/google/docsy@v0.2.0-pre
+hugo mod get github.com/google/docsy/module@v0.2.0-pre
 sed -i '/theme = \["docsy"\]/d' config.toml
 cat >> config.toml <<EOL
 [module]
 [[module.imports]]
 path = "github.com/google/docsy"
+[[module.imports]]
+path = "github.com/google/docsy"
 EOL
-mkdir -p assets/vendor/bootstrap/scss/vendor
-wget -P assets/vendor/bootstrap/scss/vendor https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
 hugo server
 {{< /tab >}}
 {{< tab header="Windows command line" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy
+hugo mod get github.com/google/docsy@v0.2.0-pre
+hugo mod get github.com/google/docsy/module@v0.2.0-pre
 findstr /v /c:"theme = [\"docsy\"]" config.toml > config.toml.temp
 move /Y config.toml.temp config.toml
 (echo [module]^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"^)>>config.toml
-md assets\vendor\bootstrap\scss\vendor
-cd assets\vendor\bootstrap\scss\vendor
-REM Windows 10 only
-curl.exe -O --url https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
-cd ..\..\..\..\..
+path = "github.com/google/docsy"^
+
+[[module.imports]]^
+
+path = "github.com/google/docsy")>>config.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -62,12 +63,13 @@ Only sites that are hugo modules themselves can import other hugo modules. So tu
 hugo mod init github.com/me/my-existing-site
 ```
 
-This will create two new files, `go.mod` for the module definitions and `go.sum` which helds the checksums for module verification.
+This will create two new files, `go.mod` for the module definitions and `go.sum` which holds the checksums for module verification.
 
-Afterwards, declare the docsy module as a dependency for your site:
+Afterwards, declare the docsy theme module as a dependency for your site. Also declare the submodule `module` as a second dependency. The submodule will pull in both a workaround for a bug in Go's module management and the dependencies `bootstrap` and `Font-Awesome`.
 
 ```
-hugo mod get github.com/google/docsy
+hugo mod get github.com/google/docsy@v0.2.0-pre
+hugo mod get github.com/google/docsy/module@v0.2.0-pre
 ```
 
 This will add the docsy theme module to your definition file `go.mod`.
@@ -80,7 +82,13 @@ Inside your `config.toml, identify the following line:
 theme = ["docsy"]
 ```
 
-Remove this line and replace it with the settings given in the code box below:
+Change this line to:
+
+```
+theme = ["github.com/google/docsy", "github.com/google/docsy/module"]
+```
+
+Alternatively, you may this line altogether and replace it with the settings given in the code box below:
 
 {{< tabpane >}}
 {{< tab header="config.toml" >}}
@@ -89,18 +97,24 @@ Remove this line and replace it with the settings given in the code box below:
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
     extended = true
-    min = "0.75.0"
+    min = "0.73.0"
   [[module.imports]]
     path = "github.com/google/docsy"
+    disable = false
+  [[module.imports]]
+    path = "github.com/google/docsy/module"
     disable = false
 {{< /tab >}}
 {{< tab header="config.yaml" >}}
 module:
   hugoVersion:
     extended: true
-    min: 0.75.0
+    min: 0.73.0
   imports:
     - path: github.com/google/docsy
+      disable: false
+  imports:
+    - path: github.com/google/docsy/module
       disable: false
 {{< /tab >}}
 {{< tab header="config.json" >}}
@@ -108,11 +122,15 @@ module:
   "module": {
     "hugoVersion": {
       "extended": true,
-      "min": "0.75.0"
+      "min": "0.73.0"
     },
     "imports": [
       {
         "path": "github.com/google/docsy",
+        "disable": false
+      },
+      {
+        "path": "github.com/google/docsy/module",
         "disable": false
       }
     ]
@@ -128,9 +146,10 @@ To make sure that your configuration settings are correct, issue the command `hu
 ```
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/deining/docsy@v0.0.0-20220114173756-13dd72fd59ba
-github.com/google/docsy@v0.0.0-20220114173756-13dd72fd59ba github.com/twbs/bootstrap@v4.6.1+incompatible
-github.com/google/docsy@v0.0.0-20220114173756-13dd72fd59ba github.com/FortAwesome/Font-Awesome@v0.0.0-20210804190922-7d3d774145ac
+github.com/me/my-existing-site github.com/google/docsy@v0.2.0-pre
+github.com/me/my-existing-site github.com/google/docsy/module@v0.2.0-pre
+github.com/google/docsy/module@v0.2.0-pre github.com/twbs/bootstrap@v4.6.1+incompatible
+github.com/google/docsy/module@v0.2.0-pre github.com/FortAwesome/Font-Awesome@v0.0.0-20210804190922-7d3d774145ac
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
@@ -143,45 +162,10 @@ hugo mod clean
 hugo: collected modules in 995 ms
 hugo: cleaned module cache for "github.com/FortAwesome/Font-Awesome"
 hugo: cleaned module cache for "github.com/google/docsy"
+hugo: cleaned module cache for "github.com/google/docsy/module"
 hugo: cleaned module cache for "github.com/twbs/bootstrap"
 ```
 {{% /alert %}}
-
-### Work around a known bug in Go's module management
-
-When using `bootstrap` dependency as module, we are affected by a [known](https://github.com/golang/go/issues/37397) bug in Go's core module library. This bug won't be fixed, fortunately we can work around it:
-
-All we have to do is to place a file `_rfs.scss` at the bottom of a new directory structure inside our site:
-
-```
-my-existing-site
-│
-└───assets
-    │
-    └───vendor
-        │
-        └───bootstrap
-            │
-            └───scss
-                │
-                └───vendor
-                    │
-                    └───_rfs.scss
-
-```
-
-First we create the needed directory structure using the `mkdir` command:
-
-```shell
-mkdir -p assets/vendor/bootstrap/scss/vendor
-```
-
-Then we download the file `_rfs.scss` using the `wget` command line utility:
-
-```shell
-wget -P assets/vendor/bootstrap/scss/vendor https://raw.githubusercontent.com/twbs/bootstrap/v4.6.1/scss/vendor/_rfs.scss
-```
-
 
 ### Remove theme and submodule incl. leftovers
 
