@@ -62,7 +62,7 @@ other = "セクション全体を印刷"
 [community]
 other = "community"
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "Join the {{ .Site.Title }} Community"
 [community_introduce]
 other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
 [community_learn]

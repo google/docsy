@@ -68,7 +68,7 @@ other = "Kapitel inkl. Unterseiten drucken"
 [community]
 other = "Community"
 [community_join]
-other = "Werde Teil der {{ .Site.Title }} community"
+other = "Werde Teil der {{ .Site.Title }} Community"
 [community_introduce]
 other = "{{ .Site.Title }} ist ein Open Source Projekt das jedes Mitglied der Community nutzen, verbessern und genießen kann. Wir würden uns freuen, wenn Du Dich an unserem Projekt beteiligst! Nachfolgend werden einige Wege beschrieben um herauszufinden, was gerade in unserem Projekt los ist und wie Du dich aktiv beteiligen kannst."
 [community_learn]
