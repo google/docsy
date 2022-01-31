@@ -60,7 +60,7 @@ other = "전체 섹션 프린트"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} Community"
+other = "Join the {{ .Site.Title }} community"
 [community_introduce]
 other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
 [community_learn]
