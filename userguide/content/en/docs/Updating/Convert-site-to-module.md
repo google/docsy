@@ -139,6 +139,10 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
+{{% alert title="Attention" color="warning" %}}
+If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
+{{% /alert %}}
+
 ### Check validity of your configuration settings
 
 To make sure that your configuration settings are correct, issue the command `hugo mod graph` which prints a module dependency graph:

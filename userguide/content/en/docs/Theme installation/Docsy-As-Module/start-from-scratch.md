@@ -155,7 +155,7 @@ You may get Hugo errors for missing parameters and values when you try to build 
 
 ## Basic site configuration
 
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this `config.toml` and editing it.**. Pleas note that this file is not bound to the Docsy example site, it will be useful for your project, too.
+Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this `config.toml` and editing it.**. Please note that this file is not bound to the Docsy example site, it will be useful for your project, too.
 
 You may want to remove or customize some defaults of the copied `config.toml` file straight away:
 
