@@ -34,7 +34,7 @@
     @include link-variant("#{$parent}--#{$color-name} p > a", $link-color, $link-hover-color, false);
 
     @if $enable-gradients {
-        @include bg-gradient-variant("#{$parent}--1#{$color-name}#{$parent}--gradient", $color-value,true);
+        @include bg-gradient-variant("#{$parent}--1#{$color-name}#{$parent}--gradient", $color-value);
     }
 }
 
