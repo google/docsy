@@ -72,12 +72,12 @@ other = "{{ .Site.Title }} es un proyecto de código abierto que cualquiera en l
 [community_learn]
 other = "Aprende y Conéctate"
 [community_using]
-other = "¿Usas o quieres usar {{ .Site.Title }}, Encuentre más información aquí:"
+other = "¿Usas o quieres usar {{ .Site.Title }}? Encuentra más información aquí:"
 [community_develop]
 other = "Desarrollar y Contribuir"
 [community_contribute]
-other = "Si desea involucrarse más contribuyendo a {{ .Site.Title }}, únase a nosotros aquí:"
+other = "Si desea involucrarte más contribuyendo a {{ .Site.Title }}, únete a nosotros aquí:"
 [community_how_to]
-other = "Puede averiguar cómo contribuir a estos documentos en nuestras"
+other = "Puedes averiguar cómo contribuir a estos documentos en nuestras"
 [community_guideline]
 other = "Guias de Contribución"
