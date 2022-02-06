@@ -20,13 +20,13 @@ hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0-pre
-hugo mod get github.com/google/docsy/module@v0.2.0-pre
+hugo mod get github.com/google/docsy/dependencies@v0.2.0-pre
 cat >> config.toml <<EOL
 [module]
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
-path = "github.com/google/docsy/module"
+path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
@@ -35,7 +35,7 @@ hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0-pre
-hugo mod get github.com/google/docsy/module@v0.2.0-pre
+hugo mod get github.com/google/docsy/dependencies@v0.2.0-pre
 (echo [module]^
 
 [[module.imports]]^
@@ -44,7 +44,7 @@ path = "github.com/google/docsy"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy/module")>>config.toml
+path = "github.com/google/docsy/dependencies")>>config.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -77,14 +77,14 @@ hugo mod init github.com/me/my-new-site
 
 This will create two new files, `go.mod` for the module definitions and `go.sum` which holds the checksums for module verification.
 
-Afterwards, declare the docsy theme module as a dependency for your site. Also declare the submodule `module` as a second dependency. The submodule will pull in both a workaround for a bug in Go's module management and the dependencies `bootstrap` and `Font-Awesome`.
+Afterwards, declare the docsy theme module as a dependency for your site. Also declare the submodule `dependencies` as a second dependency. The submodule will pull in both a workaround for a bug in Go's module management and the dependencies `bootstrap` and `Font-Awesome`.
 
 ```
 hugo mod get github.com/google/docsy@v0.2.0-pre
-hugo mod get github.com/google/docsy/module@v0.2.0-pre
+hugo mod get github.com/google/docsy/dependencies@v0.2.0-pre
 ```
 
-These commands will add both the docsy theme module and the submodule to your definition file `go.mod`.
+These commands will add both the `docsy` theme module and the `dependencies` submodule to your definition file `go.mod`.
 
 ### Add theme module configuration settings
 
@@ -102,7 +102,7 @@ Next, add the settings given in the code box below at the end of your site confi
     path = "github.com/google/docsy"
     disable = false
   [[module.imports]]
-    path = "github.com/google/docsy/module"
+    path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
 {{< tab header="config.yaml" >}}
@@ -114,7 +114,7 @@ module:
     - path: github.com/google/docsy
       disable: false
   imports:
-    - path: github.com/google/docsy/module
+    - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
 {{< tab header="config.json" >}}
@@ -130,7 +130,7 @@ module:
         "disable": false
       },
       {
-        "path": "github.com/google/docsy/module",
+        "path": "github.com/google/docsy/dependencies",
         "disable": false
       }
     ]
