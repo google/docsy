@@ -4,10 +4,6 @@ _merge = "deep"
 [[module.mounts]]
   source = "assets/bootstrap/scss/_vendor"
   target = "assets/vendor/bootstrap/scss/vendor"
-# mount user guide so that we can copy it to skeleton site
-[[module.mounts]]
-  source = "userguide"
-  target = "assets/userguide"
 # mount asserts directory
 [[module.mounts]]
   source = "assets"
