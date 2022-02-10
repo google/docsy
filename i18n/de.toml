@@ -65,25 +65,19 @@ other = "Zur Standardansicht zurückkehren"
 other = "Kapitel inkl. Unterseiten drucken"
 
 # Community
-[community]
-other = "community"
 [community_join]
-other = "Join the"
+other = "Werde Teil der {{ .Site.Title }} Community"
 [community_introduce]
-other = "is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} ist ein Open Source Projekt das jedes Mitglied der Community nutzen, verbessern und genießen kann. Wir würden uns freuen, wenn Du Dich an unserem Projekt beteiligst! Nachfolgend werden einige Wege beschrieben um herauszufinden, was gerade in unserem Projekt los ist und wie Du dich aktiv beteiligen kannst."
 [community_learn]
-other = "Learn and Connect"
+other = "Lerne und verbinde"
 [community_using]
-other = "Using or want to use"
-[community_find_out]
-other = "Find out more here"
+other = "Anwenden oder Anwendung eruieren {{ .Site.Title }}, Weitere Infos findest Du hier:"
 [community_develop]
-other = "Develop and Contribute"
+other = "Entwickeln und einen Beitrag leisten"
 [community_contribute]
-other = "If you want to get more involved by contributing to"
-[community_join_us]
-other = "join us here"
+other = "Wenn Du aktiv beteiligen und einen Beitrag zu {{ .Site.Title }} leisten möchtest, kannst Du hier mitmachen:"
 [community_how_to]
-other = "You can find out how to contribute to these docs in our"
+other = "Wie Du selbst zu diesen Dokumenten beitragen kannst, kannst Du nachlesen in unseren"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "Richtlinien für Beiträge"
