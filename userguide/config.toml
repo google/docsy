@@ -10,9 +10,8 @@ enableMissingTranslationPlaceholders = true
 
 enableRobotsTXT = true
 
-# set docsy as theme, either locally or as hugo module
+# Hugo allows theme composition (and inheritance). The precedence is from left to right.
 theme = ["docsy"]
-# theme = ["github.com/google/docsy", "github.com/google/docsy/dependencies"]
 
 # Will give values to .Lastmod etc.
 enableGitInfo = true
