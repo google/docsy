@@ -10,18 +10,17 @@ being maintained.
 
 The following are basic prerequisites for using Docsy in your site:
 
-- Install a recent release of the Hugo "extended" version (we recommend version
-  0.53 or later). If you install from the [release
-  page](https://github.com/gohugoio/hugo/releases), make sure you download the
-  `_extended` version which supports SCSS.
+- Install a recent release of the Hugo "extended" version. If you install from
+  the [Hugo release page](https://github.com/gohugoio/hugo/releases), make sure
+  you download the `_extended` version which supports SCSS.
 
 - Install `PostCSS` so that the site build can create the final CSS assets. You
   can install it locally by running the following commands from the root
   directory of your project:
 
   ```console
-  $ sudo npm install -D --save autoprefixer
-  $ sudo npm install -D --save postcss-cli
+  $ npm install --save-dev autoprefixer
+  $ npm install --save-dev postcss-cli
   ```
 
 ## Example and usage
@@ -59,11 +58,9 @@ above:
 ```console
 $ git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
 $ cd docsy/userguide/
-$ hugo server --themesDir ../..
+$ npm install
+$ npm run serve
 ```
-
-Note: you need the `themesDir` flag when running Hugo because the site files are
-inside the theme repo.
 
 ## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
 
