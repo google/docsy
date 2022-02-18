@@ -5,7 +5,7 @@
 {{$.Scratch.Set "blog-pages" .Pages }}
 {{ end }}
 
-<div class="row">BLOG/LIST
+<div class="row">
 	<div class="col-12">
 		{{- if .Pages -}}
 		{{ $pag := .Paginate (( $.Scratch.Get "blog-pages").GroupByDate "2006")}}
