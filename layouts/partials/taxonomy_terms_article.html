@@ -1,5 +1,5 @@
-{{ $context := .context  }}
-{{ $taxo := .taxo  }}
+{{ $context := .context }}
+{{ $taxo := .taxo }}
 {{ if (gt (len ($context.GetTerms $taxo)) 0)}}
 <div class="taxonomy taxonomy-terms-article taxo-{{ urlize $taxo }}">
   <h5 class="taxonomy-title">{{ humanize $taxo }}:</h5>
