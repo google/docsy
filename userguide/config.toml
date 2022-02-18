@@ -1,13 +1,6 @@
 baseURL = "/"
 title = "Docsy Example"
 
-# Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
-# Useful when translating.
-enableMissingTranslationPlaceholders = true
-
 enableRobotsTXT = true
 
 # Hugo allows theme composition (and inheritance). The precedence is from left to right.
@@ -243,3 +236,8 @@ enable = true
 [taxonomies]
 tag = "tags"
 category = "categories"
+
+[module]
+[[module.mounts]]
+  source = 'content/en'
+  target = 'content'
