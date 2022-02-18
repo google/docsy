@@ -97,6 +97,10 @@ This will gave you for each in the current page (resp. context) defined taxonomy
 </div>
 ```
 
+### taxonomy_terms_article_wrapper
+
+The partial `taxonomy_terms_article_wrapper` is a wrapper for the partial `taxonomy_terms_article` with the only parameter `context` (most of the time the current page or context `.`) and checks the taxonomy parameters of you projects `config.toml` to loop threw all listed taxonomies in the parameter `taxonomyPageHeader` resp. all defined taxonomies of your page, if `taxonomyPageHeader` isn't set.
+
 ### taxonomy_terms_cloud
 
 The partial `taxonomy_terms_cloud` shows all used terms of an given taxonomy (partial parameter `taxo`) for your site (partial parameter `context`, most of the time the current page or context `.`) and with the parameter `title` as headline.
