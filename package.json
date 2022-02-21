@@ -4,10 +4,11 @@
   "repository": "github:google/docsy",
   "scripts": {
     "_docs": "cd userguide && npm run",
-    "docs-install": "cd userguide && npm install",
     "build:preview": "npm run _docs build:preview",
     "build:production": "npm run _docs build:production",
     "build": "npm run _docs build",
+    "docs-install": "cd userguide && npm install",
+    "predocs-install": "npm install",
     "serve": "npm run _docs serve",
     "submodule:get": "git submodule update --init --recursive --depth 1",
     "submodule:update": "git submodule update --remote --recursive --depth 1"
