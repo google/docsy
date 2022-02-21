@@ -1,7 +1,7 @@
 {
   "scripts": {
     "_build": "npm run _hugo-dev",
-    "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_hugo": "rm -Rf ../assets/vendor && hugo --cleanDestinationDir --themesDir ../..",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_serve": "npm run _hugo-dev -- serve",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
