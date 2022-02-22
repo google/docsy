@@ -8,7 +8,6 @@
     "build:production": "npm run _docs build:production",
     "build": "npm run _docs build",
     "docs-install": "cd userguide && npm install",
-    "predocs-install": "npm install",
     "serve": "npm run _docs serve"
   },
   "dependencies": {

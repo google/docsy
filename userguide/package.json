@@ -7,6 +7,7 @@
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build",
+    "prepare": "cd .. && npm install",
     "serve": "npm run _serve"
   },
   "devDependencies": {
