@@ -1,20 +1,14 @@
 {
   "scripts": {
     "_build": "npm run _hugo-dev",
-    "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_hugo": "rm -Rf ../assets/vendor && hugo --cleanDestinationDir --themesDir ../..",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_serve": "npm run _hugo-dev -- serve",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build",
-    "prebuild:preview": "npm run submodule:get",
-    "prebuild:production": "npm run submodule:get",
-    "prebuild": "npm run submodule:get",
-    "preinstall": "npm run submodule:get",
-    "preserve": "npm run submodule:get",
-    "serve": "npm run _serve",
-    "submodule:get": "cd .. && npm run submodule:get",
-    "submodule:update": "cd .. && npm run submodule:update"
+    "prepare": "cd .. && npm install",
+    "serve": "npm run _serve"
   },
   "devDependencies": {
     "autoprefixer": "^9.5.0",
