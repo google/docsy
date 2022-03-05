@@ -12,7 +12,7 @@ other = "Suivant"
 other = "Lire plus"
 
 [ui_search]
-other = "Rechercher ce site…"
+other = "Rechercher dans ce site…"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
@@ -20,7 +20,7 @@ other = "dans"
 
 # Footer text
 [footer_all_rights_reserved]
-other = "Tous droits résérvés"
+other = "Tous droits réservés"
 
 [footer_privacy_policy]
 other = "Politique de confidentialité"
@@ -30,7 +30,7 @@ other = "Politique de confidentialité"
 [post_byline_by]
 other = "Par"
 [post_created]
-other = "Crée"
+other = "Créé"
 [post_last_mod]
 other = "Dernière modification"
 [post_edit_this]
@@ -60,18 +60,18 @@ other = "Imprimer la section entière"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "Rejoindre la communauté {{ .Site.Title }}"
 [community_introduce]
-other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} est un projet en source ouverte. Toute la communauté peut l'utiliser, l'améliorer et en bénéficier. Rejoignez nous ! Voilà quelques moyens d'être au courant de ce qui se passe et de contribuer."
 [community_learn]
-other = "Learn and Connect"
+other = "Apprendre et se connecter"
 [community_using]
-other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+other = "Vous utilisez ou voulez utiliser {{ .Site.Title }} ? En savoir plus:"
 [community_develop]
-other = "Develop and Contribute"
+other = "Développer et Contribuer"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "Si vous voulez vous impliquer davantage en contribuant à {{ .Site.Title }}, joignez-nous sur:"
 [community_how_to]
-other = "You can find out how to contribute to these docs in our"
+other = "Vous pouvez trouver comment contribuer à cette documentation dans nos"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "Règles de contribution"
