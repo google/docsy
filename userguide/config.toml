@@ -37,7 +37,7 @@ blog = "/:section/:year/:month/:day/:slug/"
 [outputs]
 home = [ "HTML" ]
 page = [ "HTML" ]
-#section = [ "HTML", "RSS", "print"]
+section = [ "HTML", "RSS", "print"]
 
 ## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
 [blackfriday]
