@@ -1,4 +1,6 @@
-
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "所有"
 
 # UI strings. Buttons and similar.
 
