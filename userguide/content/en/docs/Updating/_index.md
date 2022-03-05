@@ -15,7 +15,7 @@ all the new commits or changes that have been merged since the point in time tha
 submodule, or last updated. Updating won't affect any modifications that you made in your own project to 
 [override the Docsy look and feel](/docs/adding-content/lookandfeel/), as your overrides 
 don't modify the theme itself. For details about what has changed in the theme, see the list of 
-[Docsy commits](https://github.com/google/docsy/commits/master).
+[Docsy commits](https://github.com/google/docsy/commits/main).
 
 Depending on how you chose to use Docsy, follow the corresponding steps to update the theme:
 
@@ -36,7 +36,7 @@ If you are using the Docsy theme as a submodule in your project (for example, if
 
 1. Push the commit to your project repo. For example, run:
 
-        git push origin master
+        git push origin main
 
     
 ## Update your Docsy clone
@@ -54,7 +54,6 @@ the `themes` folder in your project, then you use the `git pull` command:
 
 1. Update your local clone:
 
-        git pull origin master
+        git pull origin main
 
 If you have made any local changes to the cloned theme, you must manually resolve any merge conflicts.
-
