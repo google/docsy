@@ -28,6 +28,7 @@
 @import "section-index";
 @import "pageinfo";
 @import "taxonomy";
+@import "drawio";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
