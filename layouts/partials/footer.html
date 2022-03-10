@@ -15,10 +15,19 @@
         {{ template "footer-links-block"  . }}
         {{ end }}
         {{ end }}
+        {{ with .Site.Params.netlify_oss.badge_color }}<a href="https://www.netlify.com">
+          <img src="{{ . }}" alt="Deploys by Netlify" />
+        </a> {{end}}
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
         {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>{{ end }}
-        {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></small>{{ end }}
+        {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></small>{{end}}
+        {{ if .Site.Params.netlify_oss.link_only }}
+        <br><small class="ml-1"><a href="https://www.netlify.com">
+          This site is powered by Netlify
+        </a></small>{{ end }}
+        
+
 	{{ if not .Site.Params.ui.footer_about_disable }}
 		{{ with .Site.GetPage "about" }}<p class="mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
 	{{ end }}

@@ -90,6 +90,7 @@ weight = 1
 copyright = "The Docsy Authors"
 privacy_policy = "https://policies.google.com/privacy"
 
+
 # Menu title if your navbar has a versions selector to access old versions of your site.
 # This menu appears only if you have at least one [params.versions] set.
 version_menu = "Releases"
@@ -207,6 +208,13 @@ enable = false
 [params.mermaid]
 enable = true
 theme = "default"
+
+# this will add the "This site is powered by Netlify" link in the footer required for the Netlify OSS program (only use one of these two parameters)
+[params.netlify_oss]
+## use link_only for a plain-text link, centered
+ link_only = true
+## use badge_color to select a badge from https://www.netlify.com/press/#badges, on lower right
+# badge_color = "https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
 
 [params.plantuml]
 enable = true
