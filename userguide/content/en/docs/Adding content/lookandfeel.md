@@ -170,7 +170,7 @@ site's [configuration file][].
 [About Docsy]: https://www.docsy.dev/about/
 [blocks/cover]: /docs/adding-content/shortcodes/#blockscover
 [configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
-[primary color]: #color-palette-and-other-styles
+[primary color]: #site-colors
 
 
 
