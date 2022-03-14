@@ -22,7 +22,7 @@ navbar_logo = true
 ```
 
 {{% alert title="Tip" %}}
-Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/master/assets/scss/_nav.scss)):
+Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/main/assets/scss/_nav.scss)):
 
 ```
 svg {

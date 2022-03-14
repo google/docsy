@@ -17,9 +17,9 @@ Docsy placeholder files (note the **`_project.scss`** suffixes):
 - [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you add project-specific definitions of theme variables such as [site colors](#site-colors), as well as any additional Bootstrap variable values you want to set. You can find a list of Docsy's theme variables and their default values in [<code>assets/scss/<strong>_variables.scss</strong></code>][_variables].  For information about other Bootstrap 4 variables, see [Variable defaults][] and Bootstrap's [v4-dev/scss/_variables.scss][] file.
 - [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can add your own custom SCSS styles, including overriding any of the styles in Docsy's theme SCSS files.
 
-[_styles_project]: https://github.com/google/docsy/blob/master/assets/scss/_styles_project.scss
-[_variables_project]: https://github.com/google/docsy/blob/master/assets/scss/_variables_project.scss
-[_variables]: https://github.com/google/docsy/blob/master/assets/scss/_variables.scss
+[_styles_project]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+[_variables_project]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+[_variables]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
 [v4-dev/scss/_variables.scss]: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
 [Variable defaults]: https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
 
@@ -184,7 +184,7 @@ If you need to add some code (CSS import, cookie consent, or similar) to the `he
 layouts/partials/hooks/head-end.html
 ```
 
-And add the code you need in that file. Your partial code is automatically included just before the end of the theme partial [`head.html`](https://github.com/google/docsy/blob/master/layouts/partials/head.html). The theme version of [`head-end.html`](https://github.com/google/docsy/blob/master/layouts/partials/hooks/head-end.html) is empty.
+And add the code you need in that file. Your partial code is automatically included just before the end of the theme partial [`head.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html). The theme version of [`head-end.html`](https://github.com/google/docsy/blob/main/layouts/partials/hooks/head-end.html) is empty.
 
 
 Similarly, if you want to add some code right before the `body` end, create your own version of the following file:
@@ -193,9 +193,9 @@ Similarly, if you want to add some code right before the `body` end, create your
 layouts/partials/hooks/body-end.html
 ```
 
-Any code in this file is included automatically at the end of the theme partial [`scripts.html`](https://github.com/google/docsy/blob/master/layouts/partials/head.html).
+Any code in this file is included automatically at the end of the theme partial [`scripts.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
 
-Both `head.html` and `scripts.html` are then used to build Docsy's [base page layout](https://github.com/google/docsy/blob/master/layouts/_default/baseof.html), which is used by all the other page templates:
+Both `head.html` and `scripts.html` are then used to build Docsy's [base page layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html), which is used by all the other page templates:
 
 ```html
 <!doctype html>

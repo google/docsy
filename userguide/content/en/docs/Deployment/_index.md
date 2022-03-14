@@ -66,14 +66,14 @@ For example, if you want to use a version of `postcss-cli` later than version 8.
 
 ```
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^9.8.8",
     "postcss-cli": "^8.0.0",
     "postcss": "^8.0.0"
   }
 ```
 {{% /alert %}}
 
-Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/master/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
+Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
