@@ -16,5 +16,9 @@
       border-color: $value;
       border-width: 0 0 0 4px;
     }
+
+    :last-child {
+        margin-bottom: 0;
+    }
   }
 }
