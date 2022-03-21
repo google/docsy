@@ -3,12 +3,14 @@
   "version": "0.2.0-dev",
   "repository": "github:google/docsy",
   "scripts": {
-    "_docs": "cd userguide && npm run",
-    "build:preview": "npm run _docs build:preview",
-    "build:production": "npm run _docs build:production",
-    "build": "npm run _docs build",
-    "docs-install": "cd userguide && npm install",
-    "serve": "npm run _docs serve"
+    "_cd:docs": "cd userguide &&",
+    "build:preview": "npm run cd:docs build:preview",
+    "build:production": "npm run cd:docs build:production",
+    "build": "npm run cd:docs build",
+    "cd:docs": "npm run _cd:docs -- npm run",
+    "docs-install": "npm run _cd:docs -- npm install",
+    "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
+    "serve": "npm run cd:docs serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
