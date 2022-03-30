@@ -1,6 +1,6 @@
 ---
 title: "Create a new site: Start a new site from scratch"
-linkTitle: "Start site from scratch"
+linkTitle: "Start a site from scratch"
 date: 2021-12-08T09:21:54+01:00
 weight: 3
 description: >
