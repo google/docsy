@@ -1,12 +1,16 @@
 ---
-title: "Option 1: Making use of Docsy Theme as Hugo Module (Modern)"
-linkTitle: "Docsy as Hugo Module"
+title: "Use Docsy as a Hugo Module"
+linkTitle: "Use Docsy as a Hugo Module"
 weight: 1
 date: 2021-12-08T10:33:16+01:00
 description: >
-  Instructions on modern installation of the Docsy theme as hugo module which is automatically pulled in.
+  Learn how to get started with Docsy by using the theme as a Hugo Module.
 ---
 
-### Two Routes To Built Your Site
+[Hugo modules](https://gohugo.io/hugo-modules/) are the simplest and latest way to use Hugo themes like Docsy when building a website. Hugo uses the modules mechanism to pull in the theme files from the main Docsy repo at your chosen revision, and it’s easy to keep the theme up to date in your site. Our example site uses Docsy as a Hugo module.
 
-You have to choose between two different routes procedure when building your site. As beginner, you are advised to choose the first route. Experts will choose the second route which gives you maximum flexibility at the cost of higher implementation effort.
+To find out about other setup approaches, see our [Get started](/docs/get-started/) overview. If you want to migrate an existing Docsy site to use Hugo Modules, see our [migration guide]().
+
+## Setup options with Hugo Modules
+
+If you're a beginner, we recommend that you get started by copying our example site. If you're already familiar with Hugo or want a very different site structure, you can follow our guide to start a site from scratch, which gives you maximum flexibility at the cost of higher implementation effort. In both cases you need to follow our prerequisites guide to make sure that you have installed Hugo and all necessary dependencies.
