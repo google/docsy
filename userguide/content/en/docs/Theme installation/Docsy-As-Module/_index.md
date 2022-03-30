@@ -13,4 +13,9 @@ To find out about other setup approaches, see our [Get started](/docs/get-starte
 
 ## Setup options with Hugo Modules
 
+To use Docsy as a Hugo Module, you have a couple of options:
+
+*   **Copy and edit the source for the [Docsy example site](https://github.com/google/docsy-example).** This approach gives you a skeleton structure for your site, with top-level and documentation sections and templates that you can modify as necessary. The example site uses Docsy as a Hugo Module.
+*   **Build your own site using the Docsy theme.** Specify the [Docsy theme](https://github.com/google/docsy) like any other [Hugo theme](https://gohugo.io/themes/) when creating or updating your site. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
+
 If you're a beginner, we recommend that you get started by copying our example site. If you're already familiar with Hugo or want a very different site structure, you can follow our guide to start a site from scratch, which gives you maximum flexibility at the cost of higher implementation effort. In both cases you need to follow our prerequisites guide to make sure that you have installed Hugo and all necessary dependencies.
