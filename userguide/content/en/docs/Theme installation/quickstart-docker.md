@@ -1,6 +1,6 @@
 
 ---
-title: "Option 3: Deploy Docsy inside a Docker container"
+title: "Deploy Docsy inside a Docker container"
 linkTitle: "Deploy Docsy inside a Docker container"
 weight: 3
 date: 2018-07-30
