@@ -81,7 +81,7 @@ npm install -D postcss
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
 
-## Use the theme as a submodule
+## Other option 1: Use the theme as a submodule
 
 To create a new Hugo site project and then add the Docsy theme as a submodule, run the following commands from your project's root directory.
 
@@ -102,12 +102,9 @@ echo 'theme = "docsy"' >> config.toml
 git submodule update --init --recursive
 ```
 
-## Clone the Docsy theme to your project's `themes` subdirectory
+## Other option 2: Clone the Docsy theme
 
-If you don't want to use a submodules (for example, if you want to customize and maintain your  own copy of the theme directly, or your deployment choice requires you to include a copy of the theme in your repository), you can clone the theme into your project.
-
-
-
+If you don't want to use a submodules (for example, if you want to customize and maintain your  own copy of the theme directly, or your deployment choice requires you to include a copy of the theme in your repository), you can clone the theme into your project's `themes` subdirectory.
 
 To clone Docsy into your project's `theme` folder, run the following commands from your project's root directory:
 
@@ -135,52 +132,12 @@ hugo server
     
 By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](#known-issues).
 
-## Basic site configuration
-
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this `config.toml` and editing it even if you're just using the theme and not copying the entire Docsy example site**.
-
-The Docsy example site comes with some defaults you may want to remove or customize straight away:
-
-### Internationalization
-
-The Docsy example site supports content in English, Norwegian and Farsi. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
-
-If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `config.toml`:
-
-```
-[languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
-languageName ="Norsk"
-contentDir = "content/no"
-time_format_default = "02.01.2006"
-time_format_blog = "02.01.2006"
-
-[languages.fa]
-title = "اسناد گلدی"
-description = "یک نمونه برای پوسته داکسی"
-languageName ="فارسی"
-contentDir = "content/fa"
-time_format_default = "2006.01.02"
-time_format_blog = "2006.01.02"
-```
-
-To remove the translated source files, delete both the `docsy-example/content/no` and the  `docsy-example/content/fa` directory.
-
-### Search
-
-By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable this site search, delete or comment out the following lines:
-
-```
-# Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
-```
-
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
+You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you’re missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/theme-installation/basic-configuration/) - we recommend copying the example site configuration even if you’re creating a site from scratch as it provides defaults for many required configuration parameters.
 
 
 ## What's next?
 
+* Add some [basic site configuration](/docs/theme-installation/basic-configuration/)
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
