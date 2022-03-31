@@ -1,20 +1,20 @@
 ---
-title: "Update of Docsy theme if used traditionally (no hugo module)"
-linkTitle: "Update of Docsy (no module)"
+title: "Update Docsy without Hugo Modules
+linkTitle: "Update Docsy without Hugo Modules"
 weight: 2
 description: >
-  Updating Docsy theme to latest version (for traditional installations **not** using hugo as module).
+  Update the Docsy theme to the latest version using submodules or `git pull`
 ---
 
+If you aren't using Hugo Modules, depending on how you chose to install Docsy on your existing site, use one of the following two procedures to update your theme.
+
 {{% alert title="Tip" %}}
-If you intend to update your site, you might consider [converting your site to hugo modules](http://localhost:1313/docs/updating/convert-site-to-module/). After conversion, the update of your site is as simple as never before.
+If you intend to update your site, consider [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/). After conversion, it's even simpler to update Docsy!
 {{% /alert %}}
 
-Depending on how you chose to install Docsy on your existing traditional site, use one of the following two routes to update your theme:
+## Update your Docsy submodule
 
-## Route 1: Update your Docsy submodule
-
-If you are using the Docsy theme as a submodule in your project (for example, if you've copied our example site), that's how you update the submodule:
+If you are using the [Docsy theme as a submodule](/docs/theme-installation/other-options/#other-option-1-use-the-theme-as-a-submodule) in your project, here's how you update the submodule:
 
 1. Navigate to the root of your local project, then run:
 
@@ -34,7 +34,7 @@ If you are using the Docsy theme as a submodule in your project (for example, if
 
 ## Route 2: Update your Docsy clone
 
-If you [cloned the Docsy theme](/docs/getting-started/#cloning-the-docsy-theme-to-your-projects-themes-subdirectory) into
+If you [cloned the Docsy theme](/docs/theme-installation/other-options/#other-option-2-clone-the-docsy-theme) into
 the `themes` folder in your project, then you use the `git pull` command:
 
 1. Navigate to the `themes` directory in your local project:
@@ -49,4 +49,4 @@ the `themes` folder in your project, then you use the `git pull` command:
 
         git pull origin master
 
-If you have made any local changes to the cloned theme, you must manually resolve any merge conflicts.
+If you have made any local changes to the cloned theme, **you must manually resolve any merge conflicts**.
