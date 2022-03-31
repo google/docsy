@@ -150,52 +150,11 @@ hugo server
 
 By default, your site will be available at [http://localhost:1313](http://localhost:1313/). When encountering problems, have a look at the [known issues](/docs/getting-started/known_issues/#macos) on MacOS.
 
-You may get Hugo errors for missing parameters and values when you try to build your site. These errors will go away once you complete basic site configuration as described in the next section.
-
-## Basic site configuration
-
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this `config.toml` and editing it.**. Please note that this file is not bound to the Docsy example site, it will be useful for your project, too.
-
-You may want to remove or customize some defaults of the copied `config.toml` file straight away:
-
-### Internationalization
-
-The copied `config.toml` file defines content in English, Norwegian and Farsi. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
-
-If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `config.toml`:
-
-```
-[languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
-languageName ="Norsk"
-contentDir = "content/no"
-time_format_default = "02.01.2006"
-time_format_blog = "02.01.2006"
-
-[languages.fa]
-title = "اسناد گلدی"
-description = "یک نمونه برای پوسته داکسی"
-languageName ="فارسی"
-contentDir = "content/fa"
-time_format_default = "2006.01.02"
-time_format_blog = "2006.01.02"
-```
-
-### Search
-
-By default, the Docsy example site uses its own [Google Custom Search Engine](https://cse.google.com/cse/all). To disable this site search, delete or comment out the following lines:
-
-```
-# Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
-```
-
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
-
+You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you're missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/theme-installation/basic-configuration/) - we recommend copying the example site configuration even if you're creating a site from scratch as it provides defaults for many required configuration parameters.
 
 ## What's next?
 
+* Add some [basic configuration](/docs/theme-installation/basic-configuration/)
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
