@@ -76,6 +76,7 @@ Use `Ctrl + c` to stop the Hugo server whenever you like.
 
 ## What's next?
 
+* Add some [basic configuration](/docs/theme-installation/basic-configuration/)
 * [Edit existing content and add more pages](/docs/adding-content/)
 * [Customize your site](/docs/adding-content/lookandfeel/)
 * [Publish your site](/docs/deployment/).
