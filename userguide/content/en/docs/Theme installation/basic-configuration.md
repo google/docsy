@@ -1,6 +1,6 @@
 ---
-title: "Basic configuration"
-linkTitle: "Basic configuration"
+title: "Basic site configuration"
+linkTitle: "Basic site configuration"
 date: 2021-12-08T09:22:27+01:00
 weight: 4
 description: >
