@@ -1,12 +1,12 @@
 ---
-title: "Update of Docsy theme if used as hugo module"
-linkTitle: "Update of Docsy (hugo module)"
+title: "Update the Docsy Hugo Module"
+linkTitle: "Update the Docsy Hugo Module"
 weight: 1
 description: >
-  Updating Docsy theme to latest version (for installations that use Docsy theme as **hugo module**).
+  Update the Docsy theme to the latest version using Hugo Modules.
 ---
 
-When making use of Dosy theme as hugo module, updating your theme is really easy:
+When using the Docsy theme as a Hugo Module, updating your theme is really easy.
 
 At the command prompt, change to the root directory of your existing site.
 
@@ -20,7 +20,7 @@ Then invoke hugo's module `get` subcommand with the update flag:
 hugo mod get -u github.com/google/docsy
 ```
 
-Hugo will automatically pull in the latest theme version. That's it, your update is done!
+Hugo automatically pulls in the latest theme version. That's it, your update is done!
 
 
 {{% alert title="Tip" %}}
