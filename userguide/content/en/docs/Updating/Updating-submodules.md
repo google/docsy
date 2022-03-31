@@ -1,9 +1,9 @@
 ---
-title: "Update Docsy without Hugo Modules
+title: "Update Docsy without Hugo Modules"
 linkTitle: "Update Docsy without Hugo Modules"
 weight: 2
 description: >
-  Update the Docsy theme to the latest version using submodules or a cloned theme.
+  Update the Docsy theme to the latest version using submodules or `git pull`.
 ---
 
 If you aren't using Hugo Modules, depending on how you chose to install Docsy on your existing site, use one of the following two procedures to update your theme.
