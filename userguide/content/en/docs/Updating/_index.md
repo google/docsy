@@ -1,6 +1,6 @@
 ---
-title: "Updating Docsy"
-linkTitle: "Updating Docsy"
+title: "Update Docsy"
+linkTitle: "Update Docsy"
 weight: 8
 description: >
  Keeping the Docsy theme up to date.
