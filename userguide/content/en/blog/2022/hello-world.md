@@ -1,9 +1,7 @@
 ---
-title: "Hello World"
-linkTitle: "Short Nav Title"
-weight: 100
-description: >-
-     Welcome to the Docsy blog!
+title: Hello World
+date: 2022-04-02
+description: Welcome to the Docsy blog!
 ---
 
 ## Hello World!
