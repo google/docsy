@@ -1,0 +1,10 @@
+// For settings, see https://www.streetsidesoftware.com/vscode-spell-checker/docs/configuration/
+{
+    "version": "0.2",
+    "caseSensitive": true,
+    "words": [
+        "Docsy",
+        "shortcode",
+        "shortcodes"
+    ]
+}
