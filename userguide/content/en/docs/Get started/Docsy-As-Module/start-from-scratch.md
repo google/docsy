@@ -20,8 +20,8 @@ At your command prompt, run the following:
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 cat >> config.toml <<EOL
 [module]
 [[module.imports]]
@@ -35,8 +35,8 @@ hugo server
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 (echo [module]^
 
 [[module.imports]]^
@@ -81,8 +81,8 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site. You must also declare the submodule `dependencies` as a second dependency. This submodule pulls in both a workaround for a bug in Go's module management and the dependencies `bootstrap` and `Font-Awesome`.
 
 ```
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 ```
 
 These commands add both the `docsy` theme module and the `dependencies` submodule to your definition file `go.mod`.

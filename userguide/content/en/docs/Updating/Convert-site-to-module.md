@@ -14,8 +14,8 @@ Run the following from the command line:
 {{< tab header="Unix shell" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 sed -i '/theme = \["docsy"\]/d' config.toml
 cat >> config.toml <<EOL
 [module]
@@ -29,8 +29,8 @@ hugo server
 {{< tab header="Windows command line" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 findstr /v /c:"theme = [\"docsy\"]" config.toml > config.toml.temp
 move /Y config.toml.temp config.toml
 (echo [module]^
@@ -68,8 +68,8 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site. You must also declare the submodule `dependencies` as a second dependency. This submodule pulls in both a workaround for a bug in Go’s module management and the dependencies `bootstrap` and `Font-Awesome`.
 
 ```
-hugo mod get github.com/google/docsy@0.2.0-pre
-hugo mod get github.com/google/docsy/dependencies@0.2.0-pre
+hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy/dependencies@v0.2.0
 ```
 
 These commands add both the `docsy` theme module and the `dependencies` submodule to your definition file `go.mod`.
@@ -150,10 +150,10 @@ To make sure that your configuration settings are correct, run the command `hugo
 ```
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/google/docsy@0.2.0-pre
-github.com/me/my-existing-site github.com/google/docsy/dependencies@0.2.0-pre
-github.com/google/docsy/dependencies@0.2.0-pre github.com/twbs/bootstrap@v4.6.1+incompatible
-github.com/google/docsy/dependencies@0.2.0-pre github.com/FortAwesome/Font-Awesome@v0.0.0-20210804190922-7d3d774145ac
+github.com/me/my-existing-site github.com/google/docsy@v0.2.0
+github.com/me/my-existing-site github.com/google/docsy/dependencies@v0.2.0
+github.com/google/docsy/dependencies@v0.2.0 github.com/twbs/bootstrap@v4.6.1+incompatible
+github.com/google/docsy/dependencies@v0.2.0 github.com/FortAwesome/Font-Awesome@v0.0.0-20210804190922-7d3d774145ac
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
