@@ -37,6 +37,10 @@ Any setting not defined in a `[languages]` block will fall back to the global va
 
 Once you've updated your site config, you create a content root directory for each language version in your source repo, such as  `content/en` for English text, and add your [content](/docs/adding-content/content/) as usual. See the [Hugo Docs](https://gohugo.io/content-management/multilingual) on multi-language support for more information.
 
+{{% alert title="Attention (only when using docsy as hugo module)" color="warning" %}}
+If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
+{{% /alert %}}
+
 {{% alert title="Tip" %}}
 If there's any possibility your site might be translated into other languages, consider creating your site with your content in a language-specific subdirectory, as it means you don't need to move it if you add another language.
 {{% /alert %}}

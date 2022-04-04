@@ -38,6 +38,6 @@ If you'd like to use Docsy's layouts but prefer to use Jekyll, [vsoch](https://g
 
 ## Ready to get started?
 
-Find out how to build and serve your first site in [Getting Started](./getting-started/). Or visit the [example site](https://example.docsy.dev) and [its repo](https://github.com/google/docsy-example) and start exploring!
+Find out how to build and serve your first site in [Get Started](/docs/theme-installation/). Or visit the [example site](https://example.docsy.dev) and [its repo](https://github.com/google/docsy-example) and start exploring!
 
 
