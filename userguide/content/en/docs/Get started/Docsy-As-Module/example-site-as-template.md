@@ -16,7 +16,7 @@ If you prefer to create a site from scratch, follow the instructions in Start a 
 At your Unix shell or Windows command line, run the following command:
 
 ```
-git clone -b sandbox https://github.com/google/docsy-example.git my-new-site
+git clone https://github.com/google/docsy-example.git my-new-site
 cd  my-new-site
 hugo server
 ```
@@ -39,14 +39,14 @@ There are two different routes to get a local clone of the example site:
 If you want  to use a remote repository other than GitHub (such as [GitLab](https://gitlab.com), [BitBucket](https://bitbucket.org/), [AWS CodeCommit](https://aws.amazon.com/codecommit/), [Gitea](https://gitea.io/)) or if you don't want a remote repo at all, simply make a local working copy of the example site directly using `git clone`. As last parameter, give your chosen local repo name (here: `my-new-site`):
 
 ```
-git clone -b sandbox https://github.com/google/docsy-example.git my-new-site
+git clone https://github.com/google/docsy-example.git my-new-site
 ```
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
 
 As the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/), creating your own remote GitHub clone of this Docsy example site repo is quite easy:
 
-1. Go to the [Docsy example site repo](https://github.com/google/docsy-example/tree/sandbox) and click **Use this template**.
+1. Go to the [Docsy example site repo](https://github.com/google/docsy-example) and click **Use this template**.
 
 1. Chose a name for your new repository (e.g. `my-new-site`) and type it in the **Repository name** field. You can also add an optional **Description**.
 
