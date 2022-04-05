@@ -36,7 +36,7 @@ other = "Изменено"
 [post_edit_this]
 other = "Отредактировать страницу"
 [post_create_child_page]
-other = "Create child page"
+other = "Создать дополнительную страницу"
 [post_create_issue]
 other = "Предложить изменения документации"
 [post_create_project_issue]
@@ -44,19 +44,19 @@ other = "Предложить доработки по проекту"
 [post_posts_in]
 other = "Публикации в"
 [post_reading_time]
-other = "minute read"
+other = "минутное чтение"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "меньше минуты"
 
 # Print support
 [print_printable_section]
-other = "This is the multi-page printable view of this section."
+other = "Это многостраничный печатный вид этого раздела."
 [print_click_to_print]
-other = "Click here to print"
+other = "Нажмите что бы печатать"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "Вернуться к обычному просмотру страницы"
 [print_entire_section]
-other = "Print entire section"
+other = "Печатать весь раздел"
 
 # Community
 [community_join]
