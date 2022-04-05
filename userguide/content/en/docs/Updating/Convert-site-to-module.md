@@ -15,7 +15,6 @@ Run the following from the command line:
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy@v0.2.0
-hugo mod get github.com/google/docsy/dependencies@v0.2.0
 sed -i '/theme = \["docsy"\]/d' config.toml
 cat >> config.toml <<EOL
 [module]
@@ -30,7 +29,6 @@ hugo server
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy@v0.2.0
-hugo mod get github.com/google/docsy/dependencies@v0.2.0
 findstr /v /c:"theme = [\"docsy\"]" config.toml > config.toml.temp
 move /Y config.toml.temp config.toml
 (echo [module]^
@@ -65,14 +63,13 @@ hugo mod init github.com/me/my-existing-site
 
 This creates two new files, `go.mod` for the module definitions and `go.sum` which holds the checksums for module verification.
 
-Next declare the Docsy theme module as a dependency for your site. You must also declare the submodule `dependencies` as a second dependency. This submodule pulls in both a workaround for a bug in Go’s module management and the dependencies `bootstrap` and `Font-Awesome`.
+Next declare the Docsy theme module as a dependency for your site.
 
 ```
 hugo mod get github.com/google/docsy@v0.2.0
-hugo mod get github.com/google/docsy/dependencies@v0.2.0
 ```
 
-These commands add both the `docsy` theme module and the `dependencies` submodule to your definition file `go.mod`.
+These command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Update your config file
 
@@ -171,32 +168,47 @@ hugo: cleaned module cache for "github.com/twbs/bootstrap"
 ```
 {{% /alert %}}
 
-### Clean up your repository
+## Clean up of your repository
 
-Since your site now uses Hugo Modules, your previously used `themes` directory can be removed: 
-
-```
-rm -rf /path/to/your/theme
-```
-
-If your Docsy theme was installed as submodule, you can remove the theme submodule:
+Since your site now uses Hugo Modules, you can clean up your repo now.
+At the command prompt, change to the root directory of your existing site first.
 
 ```
-git rm --cached /path/to/your/submodule/theme
-git add .
+cd /path/to/my-existing-site
 ```
 
-With your submodule deleted, now delete the relevant line from the hidden submodule definition file `.gitmodules`, too. If this is the only line, you can delete the file altogether.
+### Previous use of Docsy theme as git clone
+
+Simply remove the subdirectory ´docsy` inside your `themes` directory: 
 
 ```
-rm .gitmodules
+rm -rf themes/docsy
 ```
 
-Finally, delete the now untracked submodule files and also clean up the internal directory that git used to store your git submodules:
+### Previous use of Docsy theme as git submodule
+
+If your Docsy theme was installed as submodule, you need to unregister the `docsy` submodule from your repo first:
 
 ```
-rm -rf /path/to/your/submodule/theme
-rm -rf .git/modules
+git submodule deinit themes/docsy/
+```
+
+With your submodule unregistered, you can now remove the subdirectory ´docsy` inside your `themes` directory: 
+
+```
+git rm -rf themes/docsy
+```
+
+You are now ready to commit your changes to your repository: 
+
+```
+git commit -m "Removed docsy git submodule"
+```
+
+Finally, clean up the internal directory that git used to store your `docsy` submodule:
+
+```
+rm -rf .git/modules/themes/docsy/
 ```
 
 
