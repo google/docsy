@@ -69,7 +69,7 @@ Next declare the Docsy theme module as a dependency for your site.
 hugo mod get github.com/google/docsy@v0.2.0
 ```
 
-These command adds the `docsy` theme module to your definition file `go.mod`.
+This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Update your config file
 
@@ -168,10 +168,10 @@ hugo: cleaned module cache for "github.com/twbs/bootstrap"
 ```
 {{% /alert %}}
 
-## Clean up of your repository
+## Clean up your repository
 
-Since your site now uses Hugo Modules, you can clean up your repo now.
-At the command prompt, change to the root directory of your existing site first.
+Since your site now uses Hugo Modules, you can remove `docsy` from the `themes` directory, as instructed below.
+First, change to the root directory of your site:
 
 ```
 cd /path/to/my-existing-site
@@ -179,7 +179,7 @@ cd /path/to/my-existing-site
 
 ### Previous use of Docsy theme as git clone
 
-Simply remove the subdirectory ´docsy` inside your `themes` directory: 
+Simply remove the subdirectory `docsy` inside your `themes` directory: 
 
 ```
 rm -rf themes/docsy
@@ -193,7 +193,7 @@ If your Docsy theme was installed as submodule, you need to unregister the `docs
 git submodule deinit themes/docsy/
 ```
 
-With your submodule unregistered, you can now remove the subdirectory ´docsy` inside your `themes` directory: 
+With your submodule unregistered, you can now remove the subdirectory `docsy` inside your `themes` directory: 
 
 ```
 git rm -rf themes/docsy
