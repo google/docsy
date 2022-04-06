@@ -187,13 +187,7 @@ rm -rf themes/docsy
 
 ### Previous use of Docsy theme as git submodule
 
-If your Docsy theme was installed as submodule, you need to unregister the `docsy` submodule from your repo first:
-
-```
-git submodule deinit themes/docsy/
-```
-
-With your submodule unregistered, you can now remove the subdirectory `docsy` inside your `themes` directory: 
+If your Docsy theme was installed as submodule, use git's `rm` subcommand to remove the subdirectory `docsy` inside your `themes` directory: 
 
 ```
 git rm -rf themes/docsy
