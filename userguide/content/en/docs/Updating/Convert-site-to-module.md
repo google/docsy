@@ -205,13 +205,6 @@ You are now ready to commit your changes to your repository:
 git commit -m "Removed docsy git submodule"
 ```
 
-Finally, clean up the internal directory that git used to store your `docsy` submodule:
-
-```
-rm -rf .git/modules/themes/docsy/
-```
-
-
 {{% alert title="Attention" color="warning" %}}
 Be careful when using the `rm -rf` command, make sure that you don't inadvertently delete any productive data files!
 {{% /alert %}}
