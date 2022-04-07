@@ -35,7 +35,7 @@ To use the Docsy theme for your own site:
 
 - (Recommended) Use the [example
   project](https://github.com/google/docsy-example), which includes the Docsy
-  theme as a submodule, as a template to create your project. You can customize
+  theme as a Hugo module, as a template to create your project. You can customize
   this pre-configured basic site into your own Docsy themed site. [Learn
   more...](https://github.com/google/docsy-example)
 
@@ -56,7 +56,7 @@ theme changes), making sure you have installed all the prerequisites listed
 above:
 
 ```console
-$ git clone --recurse-submodules --depth 1 https://github.com/google/docsy.git
+$ git clone --depth 1 https://github.com/google/docsy.git
 $ cd docsy/userguide/
 $ npm install
 $ npm run serve
