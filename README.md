@@ -27,7 +27,7 @@ The following are basic prerequisites for using Docsy in your site:
 
 You can find an example project that uses Docsy in the [Docsy Example Project
 repo](https://github.com/google/docsy-example).The Docsy Example Project is
-hosted at [https://example.docsy.dev](https://example.docsy.dev). For
+hosted at [example.docsy.dev](https://example.docsy.dev). For
 real-life examples of sites that use Docsy (and their source repos), see our
 [Examples](https://www.docsy.dev/docs/examples/) page.
 
@@ -50,7 +50,7 @@ for details about the various usage options.
 
 Docsy has its own user guide (using Docsy, of course!) with lots more
 information about using the theme, which you can find at
-[https://docsy.dev](https://docsy.dev). Alternatively you can use Hugo to
+[docsy.dev](https://docsy.dev). Alternatively you can use Hugo to
 generate and serve a local copy of the guide (also useful for testing local
 theme changes), making sure you have installed all the prerequisites listed
 above:
