@@ -5,13 +5,13 @@ date: 2022-04-07
 description: Welcome to the Docsy blog!
 ---
 
-## Hello!
+## Hello
 
 It may seem strange to see a "Hello" post from a project that's several years old, but as Docsy matures as a community-driven project, we thought it was time to (re)introduce ourselves and talk about what's new with your favorite (we hope) Hugo documentation theme!
 
 ### Discuss amongst yourselves
 
-Our [Discussions](https://github.com/google/docsy/discussions) are really hopping lately! Don't miss our notice of the [upcoming deprecation of the Font-Awesome and Bootstrap git submodules](https://github.com/google/docsy/discussions/9500) or our announcement of our [new governance model](https://github.com/google/docsy/discussions/798)!
+Our [Discussions](https://github.com/google/docsy/discussions) are really hopping lately! Don't miss our notice of the [upcoming deprecation of the Font-Awesome and Bootstrap git submodules](https://github.com/google/docsy/discussions/950) or our announcement of our [new governance model](https://github.com/google/docsy/discussions/798)!
 
 ### Milestones, releases, and roadmaps
 
