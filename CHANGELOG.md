@@ -2,7 +2,7 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-## Next release
+## 0.X.Y - next release
 
 For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
