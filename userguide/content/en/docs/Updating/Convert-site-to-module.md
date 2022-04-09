@@ -21,7 +21,7 @@ cat >> config.toml <<EOL
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
-path = "github.com/google/docsy"
+path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
@@ -39,7 +39,7 @@ path = "github.com/google/docsy"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy")>>config.toml
+path = "github.com/google/docsy/dependencies")>>config.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
