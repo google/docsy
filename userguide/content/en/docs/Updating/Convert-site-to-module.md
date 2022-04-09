@@ -39,7 +39,7 @@ path = "github.com/google/docsy"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy")>>config.toml
+path = "github.com/google/docsy/dependencies")>>config.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
