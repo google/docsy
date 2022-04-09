@@ -7,7 +7,7 @@ description: >
   Create a new Docsy site with Docsy as a Git submodule or cloned theme
 ---
 
-If you don't want to use [Docsy as a Hugo Module](docs/theme-installation/docsy-as-module/) (for example if you do not want to install Go) but still don't want to copy the theme files into your own repo, you can **use Docsy as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)**. Using submodules also lets Hugo use the theme files from Docsy repo, though is more complicated to maintain than the Hugo Modules approach. This is the approach used in older versions of the Docsy example site, and is still supported. If you are using Docsy as a submodule but would like to migrate to Hugo Modules, see our [migration guide]().
+If you don't want to use [Docsy as a Hugo Module](/docs/get-started/docsy-as-module/) (for example if you do not want to install Go) but still don't want to copy the theme files into your own repo, you can **use Docsy as a [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)**. Using submodules also lets Hugo use the theme files from Docsy repo, though is more complicated to maintain than the Hugo Modules approach. This is the approach used in older versions of the Docsy example site, and is still supported. If you are using Docsy as a submodule but would like to migrate to Hugo Modules, see our [migration guide]().
 
 Alternatively if you don’t want Hugo to have to get the theme files from an external repo (for example, if you want to customize and maintain your own copy of the theme directly, or your deployment choice requires you to include a copy of the theme in your repository), you can **clone the files directly into your site source**.
 
@@ -130,14 +130,14 @@ cd myproject
 hugo server
 ```
     
-By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](#known-issues).
+By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 
-You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you’re missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/theme-installation/basic-configuration/) - we recommend copying the example site configuration even if you’re creating a site from scratch as it provides defaults for many required configuration parameters.
+You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you’re missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/get-started/basic-configuration/) - we recommend copying the example site configuration even if you’re creating a site from scratch as it provides defaults for many required configuration parameters.
 
 
 ## What's next?
 
-* Add some [basic site configuration](/docs/theme-installation/basic-configuration/)
+* Add some [basic site configuration](/docs/get-started/basic-configuration/)
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).

@@ -72,11 +72,11 @@ hugo server
 Preview your site in your browser at: [http://localhost:1313](http://localhost:1313/).
 Thanks to Hugo's live preview, you can immediately see the effect of changes that you are making to the source files of your local repo.
 Use `Ctrl + c` to stop the Hugo server whenever you like.
-[See the known issues on MacOS](/docs/getting-started/known_issues/#macos).
+[See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 
 ## What's next?
 
-* Add some [basic configuration](/docs/theme-installation/basic-configuration/)
+* Add some [basic configuration](/docs/get-started/basic-configuration/)
 * [Edit existing content and add more pages](/docs/adding-content/)
 * [Customize your site](/docs/adding-content/lookandfeel/)
 * [Publish your site](/docs/deployment/).
