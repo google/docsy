@@ -1,5 +1,7 @@
-{{ if or .Site.Params.gcs_engine_id .Site.Params.algolia_docsearch -}}
+{{ if .Site.Params.gcs_engine_id -}}
 <input type="search" class="form-control td-search-input" placeholder="&#xf002; {{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
+{{ else if .Site.Params.algolia_docsearch -}}
+<div id="docsearch"/>
 {{ else if .Site.Params.offlineSearch -}}
 {{ $offlineSearchIndex := resources.Get "json/offline-search-index.json" | resources.ExecuteAsTemplate "offline-search-index.json" . -}}
 {{ if hugo.IsProduction -}}
