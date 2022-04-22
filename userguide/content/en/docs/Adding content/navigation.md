@@ -189,11 +189,11 @@ If you don't specify a Google Custom Search Engine ID for your project and haven
 
 ## Configure Algolia DocSearch
 
-As an alternative to GCSE, you can use [Algolia DocSearch](https://community.algolia.com/docsearch/) with this theme. Algolia DocSearch is free for public documentation sites.
+As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.
 
 ### Sign up for Algolia DocSearch
 
-Complete the form at [https://community.algolia.com/docsearch/#join-docsearch-program](https://community.algolia.com/docsearch/#join-docsearch-program).
+Complete the form at [https://docsearch.algolia.com/apply/](https://docsearch.algolia.com/apply/).
 
 If you are accepted to the program, you will receive the JavaScript code to add to your documentation site from Algolia by email.
 

@@ -104,6 +104,6 @@ Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if
 
 With all prerequisites installed, choose how to start off with your new Hugo site
 
-* [Start with a prepopulated site (for beginners)](/docs/getting-started/docsy-as-module/example-site-as-template/)
-* [Start site from scratch (for experts)](/docs/getting-started/docsy-as-module/start-from-scratch/)
+* [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
+* [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
 

@@ -10,7 +10,7 @@ description: >
   Learn how to get started with Docsy, including the available options for installing and using the Docsy theme.
 ---
 
-As you saw in our introduction, Docsy is a [Hugo](gohugo.io) theme, which means that if you want to use Docsy, you need to set up your website source so that the Hugo static site generator can find and use the Docsy theme files when building your site. The simplest way to do this is to copy and edit our example site, though we also provide instructions for adding the Docsy theme manually to new or existing sites.
+As you saw in our introduction, Docsy is a [Hugo](https://gohugo.io) theme, which means that if you want to use Docsy, you need to set up your website source so that the Hugo static site generator can find and use the Docsy theme files when building your site. The simplest way to do this is to copy and edit our example site, though we also provide instructions for adding the Docsy theme manually to new or existing sites.
 
 If you want to build and test your site locally you also need to be able to run Hugo itself, either by installing it and any other required dependencies, or by using our provided Docker container.
 
@@ -26,7 +26,7 @@ Hugo offers multiple options for using themes, all of which are supported by Doc
 
 ## Migration and backward compatibility
 
-If you have an existing site that uses Docsy as a Git submodule, and you would like to update it to use Hugo Modules, follow our [migration guide](). If you're not ready to migrate yet, don't worry! Your site will continue to work as usual.
+If you have an existing site that uses Docsy as a Git submodule, and you would like to update it to use Hugo Modules, follow our [migration guide](https://www.docsy.dev/docs/updating/convert-site-to-module/). If you're not ready to migrate yet, don't worry! Your site will continue to work as usual.
 
 ## Setup guides
 
