@@ -191,6 +191,10 @@ If you don't specify a Google Custom Search Engine ID for your project and haven
 
 As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.  Docsy supports Algolia DocSearch V3.
 
+{{% alert title="Note" %}}
+Docsy previously supported Algolia DocSearch V2, which is now deprecated. If you are an existing Algolia DocSearch V2 user and want to use the latest Docsy version, [follow the migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the DocSearch documentation to update your DocSearch code snippet.
+{{% /alert %}}
+
 ### Sign up for Algolia DocSearch
 
 Complete the form at [https://docsearch.algolia.com/apply/](https://docsearch.algolia.com/apply/).
@@ -233,7 +237,7 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 You can find out more about how to configure DocSearch in the Algolia DocSearch V3 [Getting started](https://docsearch.algolia.com/docs/DocSearch-v3) guide.
 
-When you've completed these steps the Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
+When you've completed these steps, Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
 
 ## Configure local search with Lunr
 
