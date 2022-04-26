@@ -2,10 +2,9 @@
 {{ if .enable }}
 (function($) {
     var needMermaid = false;
-    $('.language-mermaid').parent().replaceWith(function() {
+    if ($('.mermaid').length > 0) {
         needMermaid = true;
-        return $('<pre class="mermaid">').text($(this).text());
-    });
+    };
 
     if (!needMermaid)  {
         mermaid.initialize({startOnLoad: false});
