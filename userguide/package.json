@@ -1,4 +1,6 @@
 {
+  "name": "docsy-user-guide",
+  "version": "0.2.0",
   "scripts": {
     "_build": "npm run _hugo-dev",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
