@@ -189,10 +189,10 @@ If you don't specify a Google Custom Search Engine ID for your project and haven
 
 ## Configure Algolia DocSearch
 
-As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.  Docsy supports Algolia DocSearch V3.
+As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.  Docsy supports Algolia DocSearch v3.
 
 {{% alert title="Note" %}}
-Docsy previously supported Algolia DocSearch V2, which is now deprecated. If you are an existing Algolia DocSearch V2 user and want to use the latest Docsy version, [follow the migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the DocSearch documentation to update your DocSearch code snippet.
+Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you are an existing Algolia DocSearch v2 user and want to use the latest Docsy version, [follow the migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the DocSearch documentation to update your DocSearch code snippet.
 {{% /alert %}}
 
 ### Sign up for Algolia DocSearch
