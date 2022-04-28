@@ -23,6 +23,7 @@ hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0
 cat >> config.toml <<EOL
 [module]
+proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
@@ -36,6 +37,8 @@ cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0
 (echo [module]^
+
+proxy = "direct"^
 
 [[module.imports]]^
 
@@ -91,6 +94,7 @@ Add the settings in the following snippet at the end of your site configuration 
 {{< tabpane >}}
 {{< tab header="config.toml" >}}
 [module]
+  proxy = "direct"
   # uncomment line below for temporary local development of module
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
@@ -105,6 +109,7 @@ Add the settings in the following snippet at the end of your site configuration 
 {{< /tab >}}
 {{< tab header="config.yaml" >}}
 module:
+  proxy: direct
   hugoVersion:
     extended: true
     min: 0.73.0
@@ -118,6 +123,7 @@ module:
 {{< tab header="config.json" >}}
 {
   "module": {
+    "proxy": "direct",
     "hugoVersion": {
       "extended": true,
       "min": "0.73.0"
