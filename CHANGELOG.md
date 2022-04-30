@@ -23,6 +23,8 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 - Add official Docsy support for [Hugo modules][]. Many thanks to the dedicated and
   patient efforts of [@deining][], who researched, experimented, and implemented
   this feature. Thanks to [@deining][] and [@LisaFC][] for the doc updates.
+  
+  For details, see [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
 
 **Details**:
 
