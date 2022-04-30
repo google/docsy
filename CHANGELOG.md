@@ -2,19 +2,17 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-## 0.X.Y - next release
-
 For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
-## [0.3.0][]
+## [0.3.0][] - next release (unpublished yet)
 
-**New**:
+**Breaking changes**:
 
-- Docsy now supports [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3).
-  If your site uses the deprecated DocSearch v2, you must [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2)
-  when updating to this version of Docsy.
+- Upgrade to [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3).
+  If your site uses the deprecated DocSearch v2, you must 
+  [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
 
-**Changes**:
+**Details**:
 
 - See the [release notes][0.3.0]
 
@@ -22,11 +20,11 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 **New**:
 
-- Official Docsy support for [Hugo modules][]. Many thanks to the dedicated and
+- Add official Docsy support for [Hugo modules][]. Many thanks to the dedicated and
   patient efforts of [@deining][], who researched, experimented, and implemented
   this feature. Thanks to [@deining][] and [@LisaFC][] for the doc updates.
 
-**Changes**:
+**Details**:
 
 - See the [release notes][0.2.0]
 
