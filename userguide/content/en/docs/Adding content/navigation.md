@@ -191,13 +191,17 @@ If you don't specify a Google Custom Search Engine ID for your project and haven
 
 ## Configure Algolia DocSearch
 
-As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.
+As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.  Docsy supports Algolia DocSearch v3.
+
+{{% alert title="Note" %}}
+Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you are an existing Algolia DocSearch v2 user and want to use the latest Docsy version, [follow the migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the DocSearch documentation to update your DocSearch code snippet.
+{{% /alert %}}
 
 ### Sign up for Algolia DocSearch
 
 Complete the form at [https://docsearch.algolia.com/apply/](https://docsearch.algolia.com/apply/).
 
-If you are accepted to the program, you will receive the JavaScript code to add to your documentation site from Algolia by email.
+If you are accepted to the program, you will receive the code to add to your documentation site from Algolia by email.
 
 ### Adding Algolia DocSearch
 
@@ -213,11 +217,30 @@ If you are accepted to the program, you will receive the JavaScript code to add 
 
 3. Disable the sidebar search in `config.toml` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
-3. Add the JavaScript code provided to you by Algolia to the head and body of every page on your site. See [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end) for details.
+3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
+   
+   * In `head-end.html` add the DocSearch CSS:
 
-4. Update the `inputSelector` field in the body end Javascript with the appropriate CSS selector (e.g. `.td-search-input` to use the default CSS from this theme).
+      ```html
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+      ```
+   
 
-When you've completed these steps the Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
+   * In `body-end.html` add the DocSearch script, replacing the `docsearch` details with the snippet you get from Algolia (the example below is Algolia's own site index!). You must provide `#docsearch` as your `container` value as that's the ID of the `div` we provide in Docsy's layout:
+
+      ```html
+      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+      <script type="text/javascript">docsearch({
+        container: '#docsearch',
+        appId: 'R2IYF7ETH7',
+        apiKey: '599cec31baffa4868cae4e79f180729b',
+        indexName: 'docsearch',
+        });</script>
+     ```
+
+You can find out more about how to configure DocSearch in the Algolia DocSearch V3 [Getting started](https://docsearch.algolia.com/docs/DocSearch-v3) guide.
+
+When you've completed these steps, Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
 
 ## Configure local search with Lunr
 
