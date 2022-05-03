@@ -144,7 +144,7 @@ Be aware that if you accidentally enable more than one search option in your `co
 By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
 
 ```toml
-[params]
+[params.ui]
 sidebar_search_disable = true
 ```
 
