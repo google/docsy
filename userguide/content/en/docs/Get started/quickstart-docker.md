@@ -1,12 +1,15 @@
 
 ---
-title: "Docker Quickstart"
-linkTitle: "Docker Quickstart"
+title: "Deploy Docsy inside a Docker container"
+linkTitle: "Deploy Docsy inside a Docker container"
 weight: 3
 date: 2018-07-30
 description: >
-  This page helps you to setup and run a local Docsy site with Docker in 5 minutes. 
+  Instructions on how to setup and run a local Docsy site with Docker.
 ---
+
+We provide a Docker image that you can use to run and test your Docsy site
+locally, without having to install all Docsy's dependencies.
 
 ## Install the prerequisites
 
@@ -73,6 +76,6 @@ To cleanup your system and delete the container image follow the next steps.
 
 ## What's next?
 
-* Learn about [basic setup and configurations for Docsy](/docs/getting-started/).
+* Learn about [basic setup and configurations for Docsy](/docs/get-started/basic-configuration/).
 * [Add content and customize your site](/docs/adding-content/)
 * [Publish your site](/docs/deployment/).

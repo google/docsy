@@ -18,13 +18,13 @@ You can find out more about Hugo directory structure in [Directory Structure Exp
 
 Hugo builds your site pages using the content files you provide plus any templates provided by your site's theme. These templates (or *"layouts"* in Hugo terminology) include things like your page's headers, footers, navigation, and links to stylesheets: essentially, everything except your page's specific content. The templates in turn can be made up of *partials*: little reusable snippets of HTML for page elements like headers, search boxes, and more.
 
-Because most technical documentation sites have different sections for different types of content, the Docsy theme comes with the [following templates](https://github.com/google/docsy/tree/master/layouts) for top-level site sections that you might need:
+Because most technical documentation sites have different sections for different types of content, the Docsy theme comes with the [following templates](https://github.com/google/docsy/tree/main/layouts) for top-level site sections that you might need:
 
-* [`docs`](https://github.com/google/docsy/tree/master/layouts/docs) is for pages in your site's Documentation section.
-* [`blog`](https://github.com/google/docsy/tree/master/layouts/blog) is for pages in your site's Blog.
-* [`community`](https://github.com/google/docsy/tree/master/layouts/community) is for your site's Community page.
+* [`docs`](https://github.com/google/docsy/tree/main/layouts/docs) is for pages in your site's Documentation section.
+* [`blog`](https://github.com/google/docsy/tree/main/layouts/blog) is for pages in your site's Blog.
+* [`community`](https://github.com/google/docsy/tree/main/layouts/community) is for your site's Community page.
 
-It also provides a [default "landing page" type of template](https://github.com/google/docsy/tree/master/layouts/_default) with the site header and footer, but no left nav, that you can use for any other section. In this site and our example site it's used for the site [home page](/) and the [About](/about/) page.
+It also provides a [default "landing page" type of template](https://github.com/google/docsy/tree/main/layouts/_default) with the site header and footer, but no left nav, that you can use for any other section. In this site and our example site it's used for the site [home page](/) and the [About](/about/) page.
 
 Each top-level **section** in your site corresponds to a **directory** in your site content root. Hugo automatically applies the appropriate **template** for that section, depending on which folder the content is in. For example, this page is in the `docs` subdirectory of the site's content root directory `content/en/`, so Hugo automatically applies the `docs` template. You can override this by explicitly specifying a template or content type for a particular page.
 
@@ -158,7 +158,7 @@ You can find out much more about managing resources with Hugo bundles in [Page B
 
 ## Adding docs and blog posts
 
-The template you'll probably use most often is the [`docs` template](https://github.com/google/docsy/blob/master/layouts/docs/baseof.html) (as used in this page) or the very similar [`blog` template](https://github.com/google/docsy/blob/master/layouts/blog/baseof.html). Both these templates include:
+The template you'll probably use most often is the [`docs` template](https://github.com/google/docsy/blob/main/layouts/docs/baseof.html) (as used in this page) or the very similar [`blog` template](https://github.com/google/docsy/blob/main/layouts/blog/baseof.html). Both these templates include:
 
 * a left nav
 * GitHub links (populated from your site config) for readers to edit the page or create issues
@@ -236,7 +236,7 @@ If you've copied the example site and you don't want a blog section, or want to 
 
 ## Working with top-level landing pages.
 
-Docsy's [default page template](https://github.com/google/docsy/blob/master/layouts/docs/baseof.html) has no left nav and is useful for creating a home page for your site or other "landing" type pages.
+Docsy's [default page template](https://github.com/google/docsy/blob/main/layouts/docs/baseof.html) has no left nav and is useful for creating a home page for your site or other "landing" type pages.
 
 ### Customizing the example site pages
 

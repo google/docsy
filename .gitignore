@@ -15,4 +15,7 @@ resources/
 
 # IDE files
 .idea
-.vscode
+
+# VS Code
+/.vscode/**
+!/.vscode/cspell.json

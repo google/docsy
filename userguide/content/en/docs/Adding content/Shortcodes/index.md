@@ -226,7 +226,7 @@ resources:
 
 ### swaggerui
 
-The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/master/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
 ```yaml
 ---
@@ -361,7 +361,7 @@ Karibu sana!
 
 Tabbed panes are implemented using two shortcodes:
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally held the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the `language` used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `language` parameter of the respective tab.
+* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the `language` used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `language` parameter of the respective tab.
 * The various `tab` shortcodes which actually represent the tabs you would like to show. We recommend specifying the named parameter `header` for each text in order to set the header text of each tab. If needed, you can additionally specify the named parameters `lang` and `highlight` for each tab. This allows you to overwrite the settings given in the parent `tabpane` shortcode. If the language is neither specified in the `tabpane` nor in the `tab`shortcode, it defaults to Hugo's site variable `.Site.Language.Lang`.
 
 ## Card panes
@@ -386,7 +386,7 @@ When authoring content, it's sometimes very useful to put similar text blocks or
 Docsy supports creating such card panes via different shortcodes:
 
 * The `cardpane` shortcode which is the container element for the various cards to be presented.
-* The `card` shortcodes, with each shortcode representing an individual card. While cards are often presented inside a card group, a single card may stand on its own, too. A `card` shortcode can held text, images or any other arbitrary kind of markdown or HTML markup as content. If your content is programming code, you are advised to make use of the `card-code` shortcode, a special kind of card with code-highlighting and other optional features like line numbers, highlighting of certain lines, ….
+* The `card` shortcodes, with each shortcode representing an individual card. While cards are often presented inside a card group, a single card may stand on its own, too. A `card` shortcode can hold text, images or any other arbitrary kind of markdown or HTML markup as content. If your content is programming code, you are advised to make use of the `card-code` shortcode, a special kind of card with code-highlighting and other optional features like line numbers, highlighting of certain lines, ….
 
 ### Shortcode `card` (for text, images, …)
 
@@ -459,7 +459,7 @@ int main(void)
 }
 {{< /card-code >}}
 
-<br/>The `card-code` shortcode can optionally held the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code block presented on the card.
+<br/>The `card-code` shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code block presented on the card.
 
 ### Card groups
 
