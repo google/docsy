@@ -28,13 +28,13 @@
 {{ template "_internal/twitter_cards.html" . -}}
 {{ partialCached "head-css.html" . "asdf" -}}
 <script
-  src="https://code.jquery.com/jquery-3.6.0.min.js"
-  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+  src="{{ .Site.Params.assets.jquery.src }}"
+  integrity="{{ .Site.Params.assets.jquery.integrity }}"
   crossorigin="anonymous"></script>
 {{ if .Site.Params.offlineSearch -}}
 <script
-  src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
-  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
+  src="{{ .Site.Params.assets.lunr.src }}"
+  integrity="{{ .Site.Params.assets.lunr.integrity }}"
   crossorigin="anonymous"></script>
 {{ end -}}
 
