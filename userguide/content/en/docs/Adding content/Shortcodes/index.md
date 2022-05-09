@@ -497,3 +497,107 @@ File[] hiddenFiles = new File("directory_name")
 {{< /card-code >}}
 {{< /cardpane >}}
 
+## Include external files
+
+Sometimes there's content that is relevant for several documents, or that is
+maintained in a file that is not necessarily a document. For situations like
+these, the `readfile` shortcode allows you to import the contents of an external
+file into a document.
+
+### Reuse documentation
+
+In case you want to reuse some content in several documents, you can write said
+content in a separate file and include it wherever you need it.
+
+For example, suppose you have a file called `installation.md` with the following
+contents:
+
+```go-html-template
+## Installation
+
+1.  Download the installation files.
+
+1.  Run the installation script
+    
+    `sudo sh install.sh`
+
+1.  Test that your installation was successfully completed.
+
+```
+
+You can import this section into another document:
+
+```go-html-template
+The following section explains how to install the database:
+
+{{%/* readfile "installation.md" */%}}
+
+```
+
+This will be rendered as if the instructions were in the parent document:
+
+---
+
+The following section explains how to install the database:
+
+{{% readfile "includes/installation.md" %}}
+
+---
+
+The parameter is the relative path to the file. Only relative paths
+under the parent file's working directory are supported.
+
+For files outside the current working directory you can use an absolute path
+starting with `/`. The root directory is the `/content` folder.
+
+### Include code files
+
+Suppose you have an `includes` folder containing several code samples you want
+to use as part of your documentation. You can use `readfile` with some
+additional parameters:
+
+```go-html-template
+To create a new pipeline, follow the next steps:
+
+1.  Create a configuration file `config.yaml`:
+
+    {{</* readfile file="includes/config.yaml" code="true" lang="yaml" */>}}
+
+1.  Apply the file to your cluster `kubectl apply config.yaml`
+
+```
+
+This code automatically reads the content of `import/config.yaml` and inserts it
+into the document. The rendered text looks like this:
+
+---
+
+To create a new pipeline, follow the next steps:
+
+1.  Create a configuration file `config.yaml`:
+
+    {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
+
+1.  Apply the file to your cluster `kubectl apply config.yaml`
+
+---
+
+{{% alert title="Warning" color="warning" %}}
+You must use `{{</* */>}}` delimiters for the code highlighting to work
+correctly.
+{{% /alert %}}
+
+The "file" parameter is the relative path to the file. Only relative paths
+under the parent file's working directory are supported.
+
+For files outside the current working directory you can use an absolute path
+starting with `/`. The root directory is the `/content` folder.
+
+
+
+| Parameter        | Default    | Description  |
+| ---------------- |------------| ------------|
+| file | | Path of external file|
+| code | false | Boolean value. If `true` the contents is treated as code|
+| lang | plain text | Programming language |
+
