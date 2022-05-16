@@ -142,6 +142,9 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
+
 {{% alert title="Attention" color="warning" %}}
 If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
 {{% /alert %}}

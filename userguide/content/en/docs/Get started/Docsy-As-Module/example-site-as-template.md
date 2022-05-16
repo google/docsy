@@ -59,6 +59,12 @@ As the Docsy example site repo is a [template repository](https://github.blog/20
     </pre>
 
 Now you can make local edits and test your copied site locally with Hugo.
+{{% alert title="Note" color="primary" %}}
+Depending on your environment you may need to tweak the [module top level settings](https://github.com/google/docsy-example/blob/1c7f7e300c90cd690ca5be66b43fe58713bb21c9/config.toml#L221-L228) inside your `config.toml` slightly, for example by adding a proxy to use when downloading remote modules.
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level). 
+{{% /alert %}}
+
+Once your site is up and running, you can edit your own versions of the site’s source files.
 
 ### Preview your site
 
