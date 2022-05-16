@@ -42,9 +42,9 @@ other = "প্রকল্পের সমস্যা তৈরি করু�
 [post_posts_in]
 other = "পোস্ট"
 [post_reading_time]
-other = "minute read"
+other = "পড়তে এক মিনিট"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "পড়তে এক মিনিটেরও কম সময় লাগবে"
 
 # মুদ্রণ সমর্থন
 [print_printable_section]
