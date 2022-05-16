@@ -16,6 +16,10 @@ other = "এই সাইটে খোঁজ করুন…"
 [ui_in]
 other = "মধ্যে"
 
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "all"
+
 # পাদচরণ
 [footer_all_rights_reserved]
 other = "সমস্ত অধিকার সংরক্ষিত"
@@ -33,6 +37,8 @@ other = "তৈরি"
 other = "সর্বশেষ পরিবর্তিত"
 [post_edit_this]
 other = "এই পৃষ্ঠাটি সম্পাদনা করুন"
+[post_view_this]
+other = "View page source"
 [post_create_child_page]
 other = "শাখা পৃষ্ঠা তৈরি করুন"
 [post_create_issue]
