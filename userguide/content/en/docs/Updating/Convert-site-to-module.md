@@ -18,6 +18,7 @@ hugo mod get github.com/google/docsy@v0.2.0
 sed -i '/theme = \["docsy"\]/d' config.toml
 cat >> config.toml <<EOL
 [module]
+proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
@@ -32,6 +33,8 @@ hugo mod get github.com/google/docsy@v0.2.0
 findstr /v /c:"theme = [\"docsy\"]" config.toml > config.toml.temp
 move /Y config.toml.temp config.toml
 (echo [module]^
+
+proxy = "direct"^
 
 [[module.imports]]^
 
@@ -90,6 +93,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
 {{< tabpane >}}
 {{< tab header="config.toml" >}}
 [module]
+  proxy = "direct"
   # uncomment line below for temporary local development of module
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
@@ -104,6 +108,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
 {{< /tab >}}
 {{< tab header="config.yaml" >}}
 module:
+  proxy: direct
   hugoVersion:
     extended: true
     min: 0.73.0
@@ -117,6 +122,7 @@ module:
 {{< tab header="config.json" >}}
 {
   "module": {
+    "proxy": "direct",
     "hugoVersion": {
       "extended": true,
       "min": "0.73.0"
@@ -135,6 +141,9 @@ module:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
 
 {{% alert title="Attention" color="warning" %}}
 If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
