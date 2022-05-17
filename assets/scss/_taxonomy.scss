@@ -6,7 +6,7 @@
   font-size: 0.8rem;
 
   .taxonomy-title {
-    display: inline; 
+    display: inline;
     font-size: 1.25em;
     height: 1em;
     line-height: 1em;
@@ -21,7 +21,7 @@
   font-size: 0.8rem;
 
   .taxonomy-title {
-    display: inline-block; 
+    display: inline-block;
     width: 100%;
     font-size: 1rem;
     font-weight: 700;
@@ -79,7 +79,7 @@
 .taxonomy-terms {
   list-style: none;
   margin: 0;
-  overflow: hidden; 
+  overflow: hidden;
   padding: 0;
   display: inline;
 
@@ -127,7 +127,7 @@
   -webkit-transition: color 0.2s;
   -webkit-clip-path: polygon(100% 0,100% 100%,0.8em 100%,0 50%,0.8em 0);
   clip-path: polygon(100% 0,100% 100%,0.8em 100%,0 50%,0.8em 0);
-  
+
   &:hover {
     background-color: $primary;
     color: $white;
@@ -136,9 +136,9 @@
       color: $dark!important;
     }
   }
-  
+
   &:hover::before {
-    background: $primary; 
+    background: $primary;
   }
 }
 
@@ -160,7 +160,7 @@
     text-decoration: none;
     -webkit-clip-path: none;
     clip-path: none;
-    
+
     &:hover {
       background: none;
       color: $link-color;
@@ -169,7 +169,7 @@
         color: $dark!important;
       }
     }
-    
+
     &:hover::before {
       background: none;
     }
@@ -207,8 +207,8 @@
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free"; 
-    // font-weight: 900; 
+    font-family: "Font Awesome 5 Free";
+    // font-weight: 900;
     padding-right: 0.5em;
     font-size: 2em;
     min-width: 1.5em;
@@ -249,7 +249,7 @@
     text-decoration: none;
     -webkit-clip-path: none;
     clip-path: none;
-    
+
     &:hover {
       background: none;
       color: $link-color;
@@ -258,7 +258,7 @@
         color: $dark!important;
       }
     }
-    
+
     &:hover::before {
       background: none;
       text-shadow: 0 0 3px $gray-900;
@@ -276,7 +276,7 @@
     .taxonomy-title {
       display: none;
     }
-  } 
+  }
 }
 
 .taxonomy-taxonomy-page {
@@ -298,7 +298,7 @@
   font-variant: normal;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Free"; 
+  font-family: "Font Awesome 5 Free";
   content: "\f02d";
   padding-right: 0.5em;
 }
@@ -309,7 +309,7 @@
   font-variant: normal;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  font-family: "Font Awesome 5 Free"; 
+  font-family: "Font Awesome 5 Free";
   content: "\f781";
   padding-right: 0.5em;
 }
@@ -325,8 +325,24 @@
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free"; 
+    font-family: "Font Awesome 5 Free";
     content: "\f122";
     padding-right: 0.5em;
+  }
+}
+
+.article-teaser {
+  &.card {
+      padding: 1.0em;
+      margin-bottom:1.5em;
+  }
+
+  .breadcrumb {
+      margin-bottom:0em;
+      font-size: 0.85rem;
+  }
+
+  .article-meta {
+      margin-bottom:0em;
   }
 }
