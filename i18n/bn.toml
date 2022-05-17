@@ -18,7 +18,7 @@ other = "মধ্যে"
 
 # Used in sentences such as "All Tags"
 [ui_all]
-other = "all"
+other = "সব"
 
 # পাদচরণ
 [footer_all_rights_reserved]
@@ -38,7 +38,7 @@ other = "সর্বশেষ পরিবর্তিত"
 [post_edit_this]
 other = "এই পৃষ্ঠাটি সম্পাদনা করুন"
 [post_view_this]
-other = "View page source"
+other = "পৃষ্ঠার উৎস দেখুন"
 [post_create_child_page]
 other = "শাখা পৃষ্ঠা তৈরি করুন"
 [post_create_issue]
@@ -64,18 +64,18 @@ other = "পুরো বিভাগ মুদ্রণ করুন"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "যোগদান করুন {{ .Site.Title }} সম্প্রদায়ে"
 [community_introduce]
-other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} হল একটি ওপেন সোর্স প্রকল্প যা সম্প্রদায়ের যে কেউ ব্যবহার করতে, উন্নতি করতে এবং উপভোগ করতে পারে৷ আমরা আপনাকে আমাদের সাথে দেখতে আনন্দিত হবে! এখানে আমাদের সাথে যোগ দেওয়ার কিছু উপায় রয়েছে, কী ঘটছে তা জানুন এবং জড়িত হন৷"
 [community_learn]
-other = "Learn and Connect"
+other = "শিখুন এবং যোগদান করুন"
 [community_using]
-other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+other = "ইতিমধ্যে {{ .Site.Title }} ব্যবহার করছেন বা ব্যবহার করতে চান? ? এখানে আরো জানুন:"
 [community_develop]
-other = "Develop and Contribute"
+other = "বিকাশ এবং অবদান"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "আপনি যদি {{ .Site.Title }} এ অবদান রেখে আরও জড়িত হতে চান, তবে এখানে আমাদের সাথে যোগ দিন:"
 [community_how_to]
-other = "You can find out how to contribute to these docs in our"
+other = "আপনি আমাদের এ এই নথিগুলিতে কীভাবে অবদান রাখবেন তা খুঁজে পেতে পারেন"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "অবদান নির্দেশিকা"
