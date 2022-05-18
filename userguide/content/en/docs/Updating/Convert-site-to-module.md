@@ -11,7 +11,7 @@ description: >
 Run the following from the command line:
 
 {{< tabpane >}}
-{{< tab header="Unix shell" >}}
+{{< tab header="Unix shell" lang="Bash" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy@v0.2.0
@@ -26,7 +26,7 @@ path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
-{{< tab header="Windows command line" >}}
+{{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy@v0.2.0
@@ -54,13 +54,13 @@ hugo server
 
 At the command prompt, change to the root directory of your existing site.
 
-```
+```bash
 cd /path/to/my-existing-site
 ```
 
 Only sites that are Hugo Modules themselves can import other Hugo Modules. Turn your existing site into a Hugo Module by running the following command from your site directory, replacing `github.com/me/my-existing-site` with your site repository:
 
-```
+```bash
 hugo mod init github.com/me/my-existing-site
 ```
 
@@ -68,7 +68,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 
 Next declare the Docsy theme module as a dependency for your site.
 
-```
+```bash
 hugo mod get github.com/google/docsy@v0.2.0
 ```
 
@@ -76,22 +76,43 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Update your config file
 
-In your `config.toml` file, update the theme setting to use Hugo Modules. Find the following line:
+In your `config.toml`/`config.yaml`/`config.json` file, update the theme setting to use Hugo Modules. Find the following line:
 
-```
+{{< tabpane >}}
+{{< tab header="toml" lang="toml" >}}
 theme = ["docsy"]
-```
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+theme: docsy
+{{< /tab >}}
+{{< tab header="json"  lang="json" >}}
+"theme": "docsy"
+{{< /tab >}}
+{{< /tabpane >}}
 
 Change this line to:
 
-```
+{{< tabpane >}}
+{{< tab header="toml" lang="toml" >}}
 theme = ["github.com/google/docsy", "github.com/google/docsy/dependencies"]
-```
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+theme:
+  - github.com/google/docsy
+  - github.com/google/docsy/dependencies
+{{< /tab >}}
+{{< tab header="json"  lang="json" >}}
+"theme": [
+  "github.com/google/docsy",
+  "github.com/google/docsy/dependencies"
+]
+{{< /tab >}}
+{{< /tabpane >}}
 
 Alternatively, you can omit this line altogether and replace it with the settings given in the following snippet:
 
 {{< tabpane >}}
-{{< tab header="config.toml" >}}
+{{< tab header="toml" lang="toml" >}}
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module
@@ -106,7 +127,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
     path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
-{{< tab header="config.yaml" >}}
+{{< tab header="yaml" lang="yaml" >}}
 module:
   proxy: direct
   hugoVersion:
@@ -119,7 +140,7 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="config.json" >}}
+{{< tab header="json" lang="json" >}}
 {
   "module": {
     "proxy": "direct",
@@ -153,7 +174,7 @@ If you have a multi language installation, please make sure that the section `[l
 
 To make sure that your configuration settings are correct, run the command `hugo mod graph` which prints a module dependency graph:
 
-```
+```bash
 hugo mod graph
 hugo: collected modules in 1092 ms
 github.com/me/my-existing-site github.com/google/docsy@v0.2.0
@@ -167,7 +188,7 @@ Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awes
 {{% alert title="Tip" %}}
 In order to clean up your module cache, issue the command `hugo mod clean`
 
-```
+```bash
 hugo mod clean
 hugo: collected modules in 995 ms
 hugo: cleaned module cache for "github.com/FortAwesome/Font-Awesome"
@@ -182,7 +203,7 @@ hugo: cleaned module cache for "github.com/twbs/bootstrap"
 Since your site now uses Hugo Modules, you can remove `docsy` from the `themes` directory, as instructed below.
 First, change to the root directory of your site:
 
-```
+```bash
 cd /path/to/my-existing-site
 ```
 
@@ -190,7 +211,7 @@ cd /path/to/my-existing-site
 
 Simply remove the subdirectory `docsy` inside your `themes` directory: 
 
-```
+```bash
 rm -rf themes/docsy
 ```
 
@@ -198,13 +219,13 @@ rm -rf themes/docsy
 
 If your Docsy theme was installed as submodule, use git's `rm` subcommand to remove the subdirectory `docsy` inside your `themes` directory: 
 
-```
+```bash
 git rm -rf themes/docsy
 ```
 
 You are now ready to commit your changes to your repository: 
 
-```
+```bash
 git commit -m "Removed docsy git submodule"
 ```
 
