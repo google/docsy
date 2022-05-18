@@ -1,0 +1,38 @@
+<!--
+{{/*
+Short code to add SQL shell input/output
+Usage:
+sql-shell [prompt]
+
+Prefix lines with '(con)' and it will render them as output lines
+Prefix lines with '(out)' and it will render them as output lines
+If prompt is not supplied it defaults to 'SQL>'
+
+See https://prismjs.com/plugins/command-line/
+
+e.g.:
+{{< sql-shell >}}
+select sysdate from dual;
+(out)SYSDATE
+(out)---------
+(out)05-OCT-21
+{{< /sql-shell >}}
+
+*/}}
+-->
+{{ $prompt := .Get 0 | default "SQL>" }}
+
+<div class="highlight">
+  <div class="code-toolbar">
+    <pre
+      class="command-line language-sql"
+      data-prompt="{{ $prompt }}"
+      data-filter-output="(out)"
+      data-continuation-prompt="->"
+      data-filter-continuation="(con)">
+      {{- with (.Inner | default "" ) -}}
+        <code class="language-sql">{{- trim . " \n" -}}</code>
+      {{- end -}}
+    </pre>
+  </div>
+</div>

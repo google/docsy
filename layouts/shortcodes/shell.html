@@ -1,0 +1,53 @@
+<!--
+{{/*
+Short code to add a bash command line input/output block
+Usage:
+command-line [username] [hostname] [language]
+username - The username to appear in the prompt, defaults to 'user'
+hostname - The hostname to appear in the prompt, defaults to 'localhost'
+language - The language of the content, defaults to bash
+If user or host are provided then the prompt will be '[<user>@<host>] $'
+else it will just be '$'.
+Suffix lines with ' \' and the next line will be treated as a continuation
+Prefix lines with '(out)' and it will render them as output lines
+See https://prismjs.com/plugins/command-line/
+
+e.g.:
+{{% shell "jdoe" "bigserver" %}}
+echo hello \
+and \
+goodbye
+(out)hello and goodbye
+{{% /shell %}}
+*/}}
+-->
+
+{{ $language := .Get 2 | default "bash" }}
+{{ $user := "" }}
+{{ $host := "" }}
+{{ $prompt := "" }}
+
+{{ if or ((.Get 0)) ((.Get 1)) }}
+  {{ $user = printf "data-user=\"%s\"" ( .Get 0 | default "user" ) }}
+  {{ $host = printf "data-host=\"%s\"" ( .Get 1 | default "localhost" ) }}
+  {{ $prompt = "" }}
+{{ else }}
+  {{ $user = "" }}
+  {{ $host = "" }}
+  {{ $prompt = "data-prompt=\"$\"" }}
+{{ end }}
+<div class="highlight">
+  <div class="code-toolbar">
+    <pre
+      class="command-line language-{{ $language }}"
+      {{ safeHTMLAttr $prompt }}
+      {{ safeHTMLAttr $user }}
+      {{ safeHTMLAttr $host }}
+      data-continuation-str="\"
+      data-filter-output="(out)">
+    {{- with (.Inner | default "" ) -}}
+      <code class="language-{{ $language }}">{{- trim . " \n" -}}</code>
+    {{- end -}}
+    </pre>
+  </div>
+</div>
