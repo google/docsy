@@ -18,19 +18,22 @@ If you are using the [Docsy theme as a submodule](/docs/get-started/other-option
 
 1. Navigate to the root of your local project, then run:
 
-        git submodule update --remote
-
+    ```bash
+    git submodule update --remote
+    ```
     
 1. Add and then commit the change to your project:
 
-        git add themes/
-        git commit -m "Updating theme submodule"
-
+    ```bash
+    git add themes/
+    git commit -m "Updating theme submodule"
+    ```
 
 1. Push the commit to your project repo. For example, run:
 
-        git push origin master
-
+    ```bash
+    git push origin master
+    ```
 
 ## Route 2: Update your Docsy clone
 
@@ -39,14 +42,18 @@ the `themes` folder in your project, then you use the `git pull` command:
 
 1. Navigate to the `themes` directory in your local project:
 
-        cd themes
+    ```bash
+    cd themes
 
 1. Ensure that `origin` is set to `https://github.com/google/docsy.git`:
 
-        git remote -v
+    ```bash
+    git remote -v
+
 
 1. Update your local clone:
-
-        git pull origin master
+    ```bash
+    git pull origin master
+    ```
 
 If you have made any local changes to the cloned theme, **you must manually resolve any merge conflicts**.
