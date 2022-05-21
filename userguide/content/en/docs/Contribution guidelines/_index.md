@@ -100,6 +100,51 @@ If you want to run your own local Hugo server to preview your changes as you wor
 1. Continue with the usual GitHub workflow to edit files, commit them, push the
   changes up to your fork, and create a pull request.
 
+#### Preview your changes using a Docker container
+
+Docsy comes with `Dockerfile` and `docker-compose` files to run the server
+locally with Docker, without installing any additional dependencies.
+
+- Using [Docker]:
+
+  1.  Build the Docker container:
+
+      ```bash
+      docker build -t docsy/user-guide
+      ``` 
+
+  1.  Run the container, mounting the repository as a shared volume:
+
+      ```bash
+      docker run -it --user=$(id -u):$(id -g) -p 1313:1313 \
+        -v $(pwd):/app/docsy -v /app/docsy/userguide/node_modules \
+        docsy/user-guide
+      ```
+
+- Using [Docker Compose][docker-compose]:
+
+  1.  Build the container:
+
+      ```bash
+      docker-compose build
+      ```
+
+  1.  Run the container:
+
+      ```bash
+      DOCSY_USER=$(id -u):$(id -g) docker-compose up
+      ```
+
+Open `http://localhost:1313` in your web browser to load the docsy user guide.
+In most cases, docsy will automatically reload the site to reflect any changes
+to the documentation or the code. Changes to some parts of the docsy code may
+require manually reloading the page or re-starting the container.
+
+Press **Ctrl + C** to stop the container.
+
+[docker]: https://docs.docker.com/get-docker/
+[docker-compose]: https://docs.docker.com/compose/install/
+
 ### Creating an issue
 
 If there's something you'd like to see in the docs, but you're not sure how to fix it yourself, please create an issue in [this repository](https://github.com/google/docsy). You can also create an issue about a specific page by clicking the **Create Issue** button in the top right hand corner of the page.
