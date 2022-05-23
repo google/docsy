@@ -72,7 +72,7 @@ repo.
 
     - From the release/tag dropdown: Select the new release tag that you just
       pushed, v0.X.Y.
-    - Set the release title to the tag name.
+    - Set the release title to the release number (without the "v").
     - Click "auto-generate release notes" to get the release details.
     - Replace the auto-generated "## What's Changed" heading by the following:
 
