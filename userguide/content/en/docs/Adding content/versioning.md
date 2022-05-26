@@ -42,6 +42,11 @@ title, change the `version_menu` parameter in `config.toml`:
 version_menu = "Releases"
 ```
 
+If you set the `version_menu_pagelinks` parameter to `true`, then links in the version drop-dow menu 
+point to the current page in the other version, instead of the main page.
+This can be useful if the document doesn't change much between the different versions.
+Note that if the current page doesn't exist in the other version, the link will be broken.
+
 You can read more about Docsy menus in the guide to
 [navigation and search](/docs/adding-content/navigation/).
 
