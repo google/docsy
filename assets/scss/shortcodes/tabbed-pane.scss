@@ -1,0 +1,39 @@
+.td-content {
+  .highlight {
+    margin: 0rem 0 2rem 0;
+  }
+}
+.tab-content {
+  .tab-pane {
+    .highlight {
+      border: none;
+      max-width: 100%;
+    }
+    pre {
+      border-left: 1px solid rgba(0, 0, 0, 0.125);
+      border-right: 1px solid rgba(0, 0, 0, 0.125);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    margin: 0rem;
+    max-width: 80%;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.tab-body {
+  font-weight: $font-weight-medium;
+  background: $gray-100;
+  color: inherit;
+  border-radius: 0;
+  padding: 1.5rem;
+
+  @each $color, $value in $theme-colors {
+      &-#{$color} {
+
+          border-style: solid;
+          border-color: $value;
+      }
+  }
+}
