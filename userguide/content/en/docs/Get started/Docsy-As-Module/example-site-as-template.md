@@ -15,7 +15,7 @@ If you prefer to create a site from scratch, follow the instructions in Start a 
 
 At your Unix shell or Windows command line, run the following command:
 
-```
+```bash
 git clone https://github.com/google/docsy-example.git my-new-site
 cd  my-new-site
 hugo server
@@ -38,7 +38,7 @@ There are two different routes to get a local clone of the example site:
 
 If you want  to use a remote repository other than GitHub (such as [GitLab](https://gitlab.com), [BitBucket](https://bitbucket.org/), [AWS CodeCommit](https://aws.amazon.com/codecommit/), [Gitea](https://gitea.io/)) or if you don't want a remote repo at all, simply make a local working copy of the example site directly using `git clone`. As last parameter, give your chosen local repo name (here: `my-new-site`):
 
-```
+```bash
 git clone https://github.com/google/docsy-example.git my-new-site
 ```
 
@@ -54,9 +54,14 @@ As the Docsy example site repo is a [template repository](https://github.blog/20
 
 1. Make a local copy of your newly created GitHub repository by using `git clone`, giving your repo's web URL as last parameter.
 
-    <pre>
-    git clone <em>https://github.com/me-at-github/my-new-site.git</em>
-    </pre>
+    ```bash
+    git clone https://github.com/me-at-github/my-new-site.git
+    ```
+
+{{% alert title="Note" color="primary" %}}
+Depending on your environment you may need to tweak the [module top level settings](https://github.com/google/docsy-example/blob/1c7f7e300c90cd690ca5be66b43fe58713bb21c9/config.toml#L221-L228) inside your `config.toml` slightly, for example by adding a proxy to use when downloading remote modules.
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level). 
+{{% /alert %}}
 
 Now you can make local edits and test your copied site locally with Hugo.
 
@@ -64,7 +69,7 @@ Now you can make local edits and test your copied site locally with Hugo.
 
 To build and preview your site locally, switch to the root of your cloned project and use hugo's `server` command:
 
-```
+```bash
 cd my-new-site
 hugo server
 ```

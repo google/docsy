@@ -16,13 +16,14 @@ These instructions give you a minimum file structure for your site project only,
 At your command prompt, run the following:
 
 {{< tabpane >}}
-{{< tab header="Unix shell" >}}
+{{< tab header="Unix shell"  lang="Bash" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0
 cat >> config.toml <<EOL
 [module]
+proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
@@ -30,12 +31,14 @@ path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
-{{< tab header="Windows command line" >}}
+{{< tab header="Windows command line" lang="Batchfile" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v0.2.0
 (echo [module]^
+
+proxy = "direct"^
 
 [[module.imports]]^
 
@@ -59,7 +62,7 @@ Specifying the [Docsy theme](https://github.com/google/docsy) as Hugo Module for
 
 To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory.
 
-```shell
+```bash
 hugo new site my-new-site
 cd  my-new-site
 ```
@@ -70,7 +73,7 @@ This will create a minimal site structure, containing the folders `archetypes`, 
 
 Only sites that are Hugo Modules themselves can import other modules. To turn your site into a Hugo Module, run the following commands in your newly created site directory:
 
-```
+```bash
 hugo mod init github.com/me/my-new-site
 ```
 
@@ -78,7 +81,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 
 Next declare the Docsy theme module as a dependency for your site.
 
-```
+```bash
 hugo mod get github.com/google/docsy@v0.2.0
 ```
 
@@ -89,8 +92,9 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
-{{< tab header="config.toml" >}}
+{{< tab header="config.toml"  lang="toml" >}}
 [module]
+  proxy = "direct"
   # uncomment line below for temporary local development of module
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
@@ -103,8 +107,9 @@ Add the settings in the following snippet at the end of your site configuration 
     path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
-{{< tab header="config.yaml" >}}
+{{< tab header="config.yaml" lang="yaml" >}}
 module:
+  proxy: direct
   hugoVersion:
     extended: true
     min: 0.73.0
@@ -115,9 +120,10 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="config.json" >}}
+{{< tab header="config.json"  lang="yaml" >}}
 {
   "module": {
+    "proxy": "direct",
     "hugoVersion": {
       "extended": true,
       "min": "0.73.0"
@@ -137,11 +143,14 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
+
 ### Preview your site
 
 To build and preview your site locally:
 
-```
+```bash
 hugo server
 ```
 
