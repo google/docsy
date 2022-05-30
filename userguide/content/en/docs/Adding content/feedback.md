@@ -57,20 +57,6 @@ response text in `config.toml`.
 </figure>
 
 
-## [Add hugo contact form](https://fabform.io/a/hugo-contact-form)
-
-You can create a contact form and collect your form submissions at [fabform.io](https://fabform.io)
-
-
-```
-<form action="https://fabform.io/f/{form-id}" method="post">
- <label for="email">Your Email</label>
- <input name="email" type="email">
- <button type="submit">Submit</button> 
-</form>
-```
-
-
 ### How is this data useful?
 
 When you have a lot of documentation, and not enough time to update it all, you can use the
@@ -146,6 +132,20 @@ Set `params.ui.feedback.enable` to `false` in `config.toml`:
 
     [params.ui.feedback]
     enable = false
+    
+## Add a contact form with Fabform
+
+You can create a contact form for your site and collect your form submissions at [fabform.io](https://fabform.io). To use this feature, you first need to sign up for an account with Fabform. The following example shows how to add a simple form that collects the user's email address to your site source:
+
+```
+<form action="https://fabform.io/f/{form-id}" method="post">
+ <label for="email">Your Email</label>
+ <input name="email" type="email">
+ <button type="submit">Submit</button> 
+</form>
+```
+
+For more details, see [Add a Hugo contact form](https://fabform.io/a/hugo-contact-form) in the Fabform documentation.
 
 ## Search Engine Optimization meta tags
 
