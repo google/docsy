@@ -56,6 +56,21 @@ response text in `config.toml`.
   </figcaption>
 </figure>
 
+
+## [Add hugo contact form](https://fabform.io/a/hugo-contact-form)
+
+You can create a contact form and collect your form submissions at [fabform.io](https://fabform.io)
+
+
+```
+<form action="https://fabform.io/f/{form-id}" method="post">
+ <label for="email">Your Email</label>
+ <input name="email" type="email">
+ <button type="submit">Submit</button> 
+</form>
+```
+
+
 ### How is this data useful?
 
 When you have a lot of documentation, and not enough time to update it all, you can use the
