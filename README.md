@@ -64,6 +64,18 @@ $ npm install
 $ npm run serve
 ```
 
+
+## [Add hugo contact form](https://fabform.io/a/hugo-contact-form)
+
+```
+<form action="https://fabform.io/f/{form-id}" method="post">
+ <label for="email">Your Email</label>
+ <input name="email" type="email">
+ <button type="submit">Submit</button> 
+</form>
+```
+
+
 ## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
 
 Please read
