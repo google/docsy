@@ -27,7 +27,7 @@ The menu is ordered from left to right by page `weight`. So, for example, a sect
 
 If you want to add a link to an external site to this menu, add it in `config.toml`, specifying the `weight`.
 
-```yaml
+```toml
 [[menu.main]]
     name = "GitHub"
     weight = 50
@@ -38,7 +38,7 @@ If you want to add a link to an external site to this menu, add it in `config.to
 
 As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
-```yaml
+```toml
 [[menu.main]]
     name = "GitHub"
     weight = 50
@@ -143,7 +143,8 @@ Be aware that if you accidentally enable more than one search option in your `co
 
 By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
 
-```
+```toml
+[params.ui]
 sidebar_search_disable = true
 ```
 
@@ -169,7 +170,7 @@ Once you have your search engine set up, you can add the feature to your site:
 
 1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
 
-    ```
+    ```yaml
     ---
     title: Search Results
     layout: search
@@ -178,7 +179,8 @@ Once you have your search engine set up, you can add the feature to your site:
 
 1. Add your Google Custom Search Engine ID to the site params in `config.toml`. You can add different values per language if needed.
 
-    ```
+    ```toml
+	[params]
     # Google Custom Search Engine ID. Remove or comment out to disable search.
     gcs_engine_id = "011737558837375720776:fsdu1nryfng"
     ```
@@ -205,7 +207,8 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 1. Enable Algolia DocSearch in `config.toml`.
 
-    ```
+    ```toml
+	[params]
     # Enable Algolia DocSearch
     algolia_docsearch = true
     ```
@@ -247,7 +250,8 @@ To add Lunr search to your Docsy site:
 
 1. Enable local search in `config.toml`.
 
-    ```
+    ```toml
+	[params]
     # Enable local search
     offlineSearch = true
     ```
@@ -264,7 +268,8 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`.
 
-```
+```toml
+[params]
 #Enable offline search with Lunr.js
 offlineSearch = true
 offlineSearchSummaryLength = 200
@@ -274,7 +279,8 @@ offlineSearchSummaryLength = 200
 
 You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`.
 
-```
+```toml
+[params]
 #Enable offline search with Lunr.js
 offlineSearch = true
 offlineSearchMaxResults = 25
