@@ -12,7 +12,9 @@ If you'd like to provide site content in multiple languages, the Docsy theme and
 
 To add content in multiple languages, you first need to define the available languages in a `languages` section in your site configuration. Each language can have its own language-specific configuration. For example, the Docsy Example Site config specifies that it provides content in English and Norwegian, and that the language version visitors will see by default is English:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 contentDir = "content/en"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
@@ -31,7 +33,50 @@ languageName ="Norsk"
 contentDir = "content/no"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+contentDir: content/en
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+…
+languages:
+  en:
+    title: Docsy
+    description: Docsy does docs
+    languageName: English
+    weight: 1 # used for sorting
+  'no':
+    title: Docsy
+    description: Docsy er operativsystem for skyen
+    languageName: Norsk
+    contentDir: content/no
+    time_format_default: 02.01.2006
+    time_format_blog: 02.01.2006
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "contentDir": "content/en",
+  "defaultContentLanguage": "en",
+  "defaultContentLanguageInSubdir": false,
+  "languages": {
+    "en": {
+      "title": "Docsy",
+      "description": "Docsy does docs",
+      "languageName": "English",
+      "weight": 1
+    },
+    "no": {
+      "title": "Docsy",
+      "description": "Docsy er operativsystem for skyen",
+      "languageName": "Norsk",
+      "contentDir": "content/no",
+      "time_format_default": "02.01.2006",
+      "time_format_blog": "02.01.2006"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Any setting not defined in a `[languages]` block will fall back to the global value for that setting: so, for example, the content directory used for the site above will be `content/en` unless the user selects the Norwegian language option.
 
@@ -60,5 +105,3 @@ If your chosen language isn't currently in the theme and you create your own `.t
 {{% alert title="Hugo Tip" %}}
 Run `hugo server --i18n-warnings` when doing translation work, as it will give you warnings on what strings are missing.
 {{% /alert %}}
-
-
