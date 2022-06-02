@@ -5,9 +5,9 @@
 {{ end }}
 {{ end }}
 
-{{ with .Get "code"  }}
+{{ with .Get "text"  }}
 {{ if ne ( printf "%T" . ) "bool" }}
-{{- errorf "shortcode tabpane: parameter 'code' must be either true or false" -}}
+{{- errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
 {{ end }}
 {{ end }}
 
@@ -17,19 +17,27 @@
 {{ end }}
 {{ end }}
 
+{{ with .Get "right"  }}
+{{ if ne ( printf "%T" . ) "bool" }}
+{{- errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
+{{ end }}
+{{ end }}
+
 <!-- Set values given defined within tabpane -->
 {{- $langPane := default "" ($.Get "lang") -}}
 {{- $hloptionsPane := default "" ($.Get "highlight") -}}
-{{- $codePane := default true ($.Get "code") -}}
+{{- $textPane := default false ($.Get "text") -}}
 {{- $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
 {{- $persistLang := default true ($.Get "persistLang") -}}
+{{- $rightPane := default false ($.Get "right") -}}
 {{- $disabled := false -}}
+{{- $rightpush := false -}}
 {{- $activeSet := false -}}
 
 <!-- Scratchpad gets populated through call to .Inner -->
 {{- .Inner -}}
 
-<ul class="nav nav-tabs" id="tabs-{{- $.Ordinal -}}" role="tablist">
+<ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $.Ordinal -}}" role="tablist">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
     {{- $lang := $langPane -}}
@@ -42,21 +50,23 @@
 
     {{- $disabled := false -}}
     {{- with $element.disabled -}}
-      {{ if ne ( printf "%T" . ) "bool" }}
-        {{- errorf "shortcode tab: parameter 'disabled' must be either true or false" -}}
-      {{ end }}
       {{- $disabled = . }}
+    {{- end -}}
+
+    {{- $rightpush := false -}}
+    {{- with $element.rightpush -}}
+      {{- $rightpush = . }}
     {{- end -}}
 
     <!-- Replace space and +, not valid for css selectors -->
     {{- $lang := replaceRE "[\\s+]" "-" $lang -}}
 
-    <li class="nav-item">
+    <li class="nav-item{{ if $rightpush }} ml-auto{{ end }}">
       <!-- Generate the IDs for the <a> and the <div> elements -->
-      {{- $tabid := printf "tabs-%v-%v-tab" $.Ordinal $index | anchorize -}}
-      {{- $entryid := printf "tabs-%v-%v" $.Ordinal $index | anchorize -}}
+      {{- $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
+      {{- $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
 
-      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if eq $disabled true }} disabled{{ end }}{{ if ne $lang "" }}{{ if $persistLang }} persistLang-{{- $lang -}}{{ end }}{{ end }}" 
+      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if $persistLang }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
           id="{{- $tabid -}}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
           {{ if ne $lang "" }}{{- if $persistLang -}}onclick="persistLang({{- $lang -}});"{{end}}{{end}}
         aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
@@ -95,23 +105,20 @@
       {{- $hloptions = $element.highlight -}}
     {{- end -}}
 
-    {{- $code := $codePane -}}
-    {{- with $element.code -}}
-      {{ if ne ( printf "%T" . ) "bool" }}
-        {{- errorf "shortcode tab: parameter 'code' must be either true or false" -}}
-      {{ end }}
-      {{- $code = . }}
+    {{- $text := $textPane -}}
+    {{- with $element.text -}}
+      {{- $text = . }}
     {{- end -}}
 
-    {{- $tabid := printf "tabs-%v-%v-tab" $.Ordinal $index | anchorize -}}
-    {{- $entryid := printf "tabs-%v-%v" $.Ordinal $index | anchorize -}}
+    {{- $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
+    {{- $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
 
-    <div class="{{ if not $code }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
+    <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
-        {{ if $code }}
-          {{- highlight (trim (index . "content") "\n") $lang $hloptions -}}
+        {{ if $text }}
+          {{- index . "content" -}}
         {{- else -}}
-            {{- index . "content" -}}
+          {{- highlight (trim (index . "content") "\n") $lang $hloptions -}}
         {{- end -}}
     </div>
 

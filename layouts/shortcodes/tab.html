@@ -21,12 +21,25 @@
 {{ with $.Get "highlight" }}
   {{ $tab = merge $tab (dict "highlight" ($.Get "highlight")) }}
 {{ end }}
-{{ with $.Get "code" }}
-  {{ $tab = merge $tab (dict "code" ($.Get "code")) }}
+{{ with $.Get "text" }}
+  {{ if ne ( printf "%T" . ) "bool" }}
+  {{- errorf "shortcode tab: parameter 'text' must be either true or false" -}}
+  {{ end }}
+  {{ $tab = merge $tab (dict "text" ($.Get "text")) }}
+{{ end }}
+{{ with $.Get "right" }}
+  {{ if ne ( printf "%T" . ) "bool" }}
+  {{- errorf "shortcode tab: parameter 'right' must be either true or false" -}}
+  {{ end }}
+  {{ $tab = merge $tab (dict "rightpush" ($.Get "right")) }}
 {{ end }}
 {{ with $.Get "disabled" }}
+  {{ if ne ( printf "%T" . ) "bool" }}
+  {{- errorf "shortcode tab: parameter 'disabled' must be either true or false" -}}
+  {{ end }}
   {{ $tab = merge $tab (dict "disabled" ($.Get "disabled")) }}
 {{ end }}
+
 {{ with $.Inner }}
   <!-- Trim any leading and trailing newlines from .Inner, this avoids
        spurious lines during syntax highlighting -->
@@ -35,5 +48,5 @@
 
 <!-- add dict tab to parent's scratchpad -->
 {{ with .Parent }}
-  {{- $.Parent.Scratch.SetInMap "tabs" (printf "%v" $.Ordinal) $tab -}}
+  {{- $.Parent.Scratch.SetInMap "tabs" (printf "%02v" $.Ordinal) $tab -}}
 {{ end }}

@@ -322,7 +322,7 @@ With this shortcode you can embed external content into a Docsy page as an inlin
 {{% alert title="Warning" color="warning" %}}
 You can only embed external content from a server when its `X-Frame-Options` is not set or if it specifically allows embedding for your site. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options for details.
 
-There are several tools you can use to check if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test. Be aware that when this test says "Couldn’t find the X-Frame-Options header 
+There are several tools you can use to check if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test. Be aware that when this test says "Couldn’t find the X-Frame-Options header
 in the response headers." you __CAN__ embed it, but when the test says "Great! X-Frame-Options header was found in the HTTP response headers as highlighted below.", you __CANNOT__ - unless it has been explicitly enabled for your site.
 {{% /alert %}}
 
@@ -382,17 +382,20 @@ print("Hello World!")
 {{< tab "Ruby" >}}
 puts "Hello World!"
 {{< /tab >}}
-{{< tab "Scala" >}}
+{{< tab header="Scala" >}}
 object HelloWorld extends App {
   println("Hello world!")
 }
 {{< /tab >}}
+{{< tab header="Reference" right=true text=true >}}
+{{< iframe src="https://www.mycplus.com/featured-articles/hello-world-programs-in-300-programming-languages" >}}
+{{< /tab >}}
 {{< /tabpane >}}
 
-The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a pane with one disabled and three active tabs:
+The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a right aligned pane with one disabled and three active tabs:
 
 ```go-html-template
-{{</* tabpane code=false */>}}
+{{</* tabpane text=true right=true */>}}
   {{%/* tab header="**Languages**:" disabled=true /*/%}}
   {{%/* tab header="English" lang="en" */%}}
   ![Flag United Kingdom](flags/uk.png)
@@ -404,14 +407,14 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
   ![Flag Tanzania](flags/tz.png)
-  **Karibu sana!** 
+  **Karibu sana!**
   {{%/* /tab */%}}
 {{%/* /tabpane */%}}
 ```
 
-This code translates to the tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
+This code translates to the right aligned tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
 
-{{< tabpane code=false >}}
+{{< tabpane text=true right=true >}}
   {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
   ![Flag United Kingdom](flags/uk.png)
@@ -423,7 +426,7 @@ This code translates to the tabbed pane below, showing a `Welcome!` greeting in 
   {{< /tab >}}
   {{% tab  header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
-  **Karibu sana!** 
+  **Karibu sana!**
   {{% /tab %}}
 {{< /tabpane >}}
 
@@ -431,13 +434,13 @@ This code translates to the tabbed pane below, showing a `Welcome!` greeting in 
 
 Tabbed panes are implemented using two shortcodes:
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
-* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{ tab "My header" }} … {{ /tab }}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
+* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can hold the optional named parameters `lang`, `highlight` and `right`. The value of the optional parameters `lang` and `highlight` are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. Specify `right=true` if you want to right align your tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
+* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{ tab "My header" }} … {{ /tab }}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. To split the panes into a left aligned and a right aligned tab group, specify `right=true` in the dividing tab. By giving `right=true` several times, you can even render multiple tab groups. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
   * By default, the tab's content is rendered as `code block`. In order to get proper syntax highlighting, specify the named parameter `lang` --and optionally the parameter `highlight`-- for each tab. Parameters set in the parent `tabpane` shortcode will be overwritten.
-  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `code=false` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
+  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `text=true` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
 
 {{% alert title="Info" %}}
-By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode. 
+By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode.
 {{% /alert %}}
 
 ## Card panes
