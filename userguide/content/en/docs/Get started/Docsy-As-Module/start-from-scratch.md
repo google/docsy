@@ -16,6 +16,7 @@ These instructions give you a minimum file structure for your site project only,
 At your command prompt, run the following:
 
 {{< tabpane >}}
+{{< tab header="CLI:" disabled=true />}}
 {{< tab header="Unix shell"  lang="Bash" >}}
 hugo new site my-new-site
 cd  my-new-site
@@ -92,6 +93,7 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml"  lang="toml" >}}
 [module]
   proxy = "direct"

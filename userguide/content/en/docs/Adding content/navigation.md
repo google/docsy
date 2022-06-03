@@ -8,11 +8,23 @@ description: >
 
 ## Top-level menu
 
-The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`. 
+The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`/`config.yaml`/`config.json`. 
 
-To add a page or section to this menu, add it to the site's `main` menu in either `config.toml` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
+To add a page or section to this menu, add it to the site's `main` menu in either `config.toml`/`config.yaml`/`config.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Welcome to Docsy"
+linkTitle = "Documentation"
+
+[menu.main]
+weight = 20
+pre = "<i class='fas fa-book'></i>"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Welcome to Docsy"
 linkTitle: "Documentation"
@@ -21,31 +33,94 @@ menu:
     weight: 20
     pre: <i class='fas fa-book'></i>
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Welcome to Docsy",
+  "linkTitle": "Documentation",
+  "menu": {
+    "main": {
+      "weight": 20,
+      "pre": "<i class='fas fa-book'></i>"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
 
-If you want to add a link to an external site to this menu, add it in `config.toml`, specifying the `weight`.
+If you want to add a link to an external site to this menu, add it in `config.toml`/`config.yaml`/`config.json`, specifying the `weight`.
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+menu:
+  main:
+    - name: GitHub
+      weight: 50
+      url: 'https://github.com/google/docsy/'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "menu": {
+    "main": [
+      {
+        "name": "GitHub",
+        "weight": 50,
+        "url": "https://github.com/google/docsy/"
+      }
+    ]
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Adding icons to the top-level menu
 
-As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml`/`config.yaml`/`config.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
     pre = "<i class='fab fa-github'></i>"
-    post = "<span class='alert'>New!</span>" 
-```
+    post = "<span class='alert'>New!</span>"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+menu:
+  main:
+    - name: GitHub
+      weight: 50
+      url: 'https://github.com/google/docsy/'
+      pre: <i class='fab fa-github'></i>
+      post: <span class='alert'>New!</span>
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "menu": {
+    "main": [
+      {
+        "name": "GitHub",
+        "weight": 50,
+        "url": "https://github.com/google/docsy/",
+        "pre": "<i class='fab fa-github'></i>",
+        "post": "<span class='alert'>New!</span>"
+      }
+    ]
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 
@@ -67,7 +142,21 @@ You can find out more in [Multi-language support](/docs/language/).
 
 The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title`, or `linkTitle` if different, as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
 
-```yaml
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Navigation and Search"
+linkTitle = "Navigation and Search"
+date = 2017-01-05T00:00:00.000Z
+weight = 3
+description = '''
+Customize site navigation and search for your Docsy site.
+'''
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Navigation and Search"
 linkTitle: "Navigation and Search"
@@ -76,13 +165,36 @@ weight: 3
 description: >
   Customize site navigation and search for your Docsy site.
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Navigation and Search",
+  "linkTitle": "Navigation and Search",
+  "date": "2017-01-05T00:00:00.000Z",
+  "weight": 3,
+  "description": "Customize site navigation and search for your Docsy site.\n"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter. 
 
 To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "My Hidden Page"
+weight = 99
+toc_hide = true
+hide_summary = true
+description = '''
+Page hidden from both the TOC menu and the section summary list.
+'''
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "My Hidden Page"
 weight: 99
@@ -91,7 +203,17 @@ hide_summary: true
 description: >
   Page hidden from both the TOC menu and the section summary list.
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "My Hidden Page",
+  "weight": 99,
+  "toc_hide": true,
+  "hide_summary": true,
+  "description": "Page hidden from both the TOC menu and the section summary list.\n"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Section menu options
 
@@ -141,12 +263,20 @@ Be aware that if you accidentally enable more than one search option in your `co
 
 ### Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`:
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`/`config.yaml`/`config.json`:
 
-```toml
-[params.ui]
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 sidebar_search_disable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+sidebar_search_disable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+"sidebar_search_disable": true
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Configure search with a Google Custom Search Engine
 
@@ -170,20 +300,45 @@ Once you have your search engine set up, you can add the feature to your site:
 
 1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
 
-    ```yaml
-    ---
-    title: Search Results
-    layout: search
-    ---
-    ```
+    {{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Search Results"
+layout = "search"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+title: Search Results
+layout: search
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+    "title": "Search Results",
+    "layout": "search"
+}
+{{< /tab >}}
+    {{< /tabpane >}}
 
-1. Add your Google Custom Search Engine ID to the site params in `config.toml`. You can add different values per language if needed.
+1. Add your Google Custom Search Engine ID to the site params in `config.toml`/`config.yaml`/`config.json`. You can add different values per language if needed.
 
-    ```toml
-	[params]
-    # Google Custom Search Engine ID. Remove or comment out to disable search.
-    gcs_engine_id = "011737558837375720776:fsdu1nryfng"
-    ```
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+gcs_engine_id: '011737558837375720776:fsdu1nryfng'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
+}
+{{< /tab >}}
+    {{< /tabpane >}}
+
 
 ### Disabling GCSE search
 
@@ -205,17 +360,26 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 ### Adding Algolia DocSearch
 
-1. Enable Algolia DocSearch in `config.toml`.
+1. Enable Algolia DocSearch in `config.toml`/`config.yaml`/`config.json`.
 
-    ```toml
-	[params]
-    # Enable Algolia DocSearch
-    algolia_docsearch = true
-    ```
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+algolia_docsearch = true
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+algolia_docsearch: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "algolia_docsearch": true
+}
+{{< /tab >}}
+    {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
-3. Disable the sidebar search in `config.toml` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+3. Disable the sidebar search in `config.toml`/`config.yaml`/`config.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
 3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
    
@@ -248,15 +412,24 @@ When you've completed these steps, Algolia search should be enabled on your site
 
 To add Lunr search to your Docsy site:
 
-1. Enable local search in `config.toml`.
+1. Enable local search in `config.toml`/`config.yaml`/`config.json`.
 
-    ```toml
-	[params]
-    # Enable local search
-    offlineSearch = true
-    ```
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+offlineSearch = true
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+offlineSearch: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "offlineSearch": true
+}
+{{< /tab >}}
+    {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
@@ -266,25 +439,48 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 ### Changing the summary length of the local search results
 
-You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`.
+You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`/`config.yaml`/`config.json`.
 
-```toml
-[params]
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
 offlineSearch = true
 offlineSearchSummaryLength = 200
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+offlineSearch: true
+offlineSearchSummaryLength: 200
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "offlineSearch": true,
+  "offlineSearchSummaryLength": 200
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Changing the maximum result count of the local search
 
-You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`.
+You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`/`config.yaml`/`config.json`.
 
-```toml
-[params]
-#Enable offline search with Lunr.js
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 offlineSearch = true
 offlineSearchMaxResults = 25
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+offlineSearch: true
+offlineSearchMaxResults: 25
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "offlineSearch": true,
+  "offlineSearchMaxResults": 25
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Changing the width of the local search results popover
 
@@ -304,10 +500,27 @@ body {
 
 To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Index"
+weight = 10
+exclude_search = true
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Index"
 weight: 10
 exclude_search: true
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Index",
+  "weight": 10,
+  "exclude_search": true
+}
+{{< /tab >}}
+{{< /tabpane >}}

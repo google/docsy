@@ -34,7 +34,19 @@ If you've copied the example site, you already have appropriately named top-leve
 
 If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/amazing` and want one or more pages in that custom section to use Docsy's `docs` template, you add `type: docs` to the frontmatter of each page:
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "My amazing new section"
+weight = 1
+type = "docs"
+description = '''
+A special section with a docs layout.
+'''
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "My amazing new section"
 weight: 1
@@ -42,7 +54,16 @@ type: docs
 description: >
   A special section with a docs layout.
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "My amazing new section",
+  "weight": 1,
+  "type": "docs",
+  "description": "A special section with a docs layout.\n"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Alternatively, create your own page template for your new section in your project's `layouts` directory based on one of the existing templates.
 
@@ -58,7 +79,21 @@ Since Hugo 0.76, this has become practical without copying layouts to your site,
 
 For example, for the `/news/` section, you can specify the following front matter in the index page which will change the type of the section and everything below it to "blog":
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Latest News"
+linkTitle = "News"
+
+[menu.main]
+weight = 30
+
+[[cascade]]
+type = "blog"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Latest News"
 linkTitle: "News"
@@ -69,11 +104,49 @@ menu:
 cascade:
 - type: "blog"
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Latest News",
+  "linkTitle": "News",
+  "menu": {
+    "main": {
+      "weight": 30
+    }
+  },
+  "cascade": [
+    {
+      "type": "blog"
+    }
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 If you want to create a "docs" site, specifying something like the following in the top level `_index.md` will set all top level sections to be treated as "docs", except for "news":
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "My Wonderful Site"
+
+[[cascade]]
+type = "blog"
+toc_root = true
+
+  [cascade._target]
+  path = "/news/**"
+
+[[cascade]]
+type = "docs"
+
+  [cascade._target]
+  path = "/**"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "My Wonderful Site"
 
@@ -86,7 +159,28 @@ cascade:
   _target:
     path: "/**"
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "My Wonderful Site",
+  "cascade": [
+    {
+      "type": "blog",
+      "toc_root": true,
+      "_target": {
+        "path": "/news/**"
+      }
+    },
+    {
+      "type": "docs",
+      "_target": {
+        "path": "/**"
+      }
+    }
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Note the addition of `toc_root` here.  Setting that to true for a section causes it to be treated as a separate part of the site, with its own left hand navigation menu.
 
@@ -98,7 +192,19 @@ Each page file in a Hugo site has metadata frontmatter that tells Hugo about the
 
 For example, here's the frontmatter for this page:
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Adding Content"
+linkTitle = "Adding Content"
+weight = 1
+description = '''
+Add different types of content to your Docsy site.
+'''
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Adding Content"
 linkTitle: "Adding Content"
@@ -106,7 +212,16 @@ weight: 1
 description: >
   Add different types of content to your Docsy site.
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Adding Content",
+  "linkTitle": "Adding Content",
+  "weight": 1,
+  "description": "Add different types of content to your Docsy site.\n"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 The minimum frontmatter you need to provide is a title: everything else is up to you! However, if you leave out the page weight, your [navigation](/docs/adding-content/navigation) may get a little disorganized. You may also want to include `description` since Docsy uses that to generate the meta `description` tag used by search engines. See [Search Engine Optimization (SEO) meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for details.
 
@@ -115,18 +230,42 @@ The minimum frontmatter you need to provide is a title: everything else is up to
 
 By default you create pages in a Docsy site as simple [Markdown or HTML files](https://gohugo.io/content-management/formats/) with [page frontmatter](#page-frontmatter), as described above. Versions of Hugo before 0.60 use [BlackFriday](https://github.com/russross/blackfriday) as its Markdown parser. From 0.60, Hugo uses [Goldmark](https://github.com/yuin/goldmark/) as its Markdown parser by default.
 
-{{% alert title="Tip" %}}
-If you've been using earlier versions of Hugo, you may need to make some small changes to your site to work with the current Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `config.toml` to allow Goldmark to render raw HTML as well as Markdown:
+<div class="alert alert-primary" role="alert">
 
-```
+<h4 class="alert-heading">Tip</h4>
+
+If you've been using earlier versions of Hugo, you may need to make some small changes to your site to work with the current Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `config.toml`/`config.yaml`/`config.json` to allow Goldmark to render raw HTML as well as Markdown:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Alternatively, if you want to continue using Blackfriday, you can follow the instructions in the [Hugo documentation](https://gohugo.io/getting-started/configuration-markup#blackfriday) to change the Markdown parser.
-{{% /alert %}}
+
+</div>
 
 In addition to your marked-up text, you can also use Hugo and Docsy's [shortcodes](/docs/adding-content/shortcodes): reusable chunks of HTML that you can use to quickly build your pages. Find out more about shortcodes in [Docsy Shortcodes](/docs/adding-content/shortcodes).
 
@@ -182,23 +321,57 @@ By default a docs section landing page (the `_index.md` or `_index.html` in the 
 
 To display a simple bulleted list of links to the section's pages instead, specify `simple_list: true` in the landing page's frontmatter:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Simple List Page"
+simple_list = true
+weight = 20
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Simple List Page"
 simple_list: true
 weight: 20
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Simple List Page",
+  "simple_list": true,
+  "weight": 20
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 To display no links at all, specify `no_list: true` in the landing page's frontmatter:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "No List Page"
+no_list = true
+weight = 20
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "No List Page"
 no_list: true
 weight: 20
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "No List Page",
+  "no_list": true,
+  "weight": 20
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Organizing your blog posts
 
@@ -206,17 +379,52 @@ Docsy's `blog` layout also gives you a left nav menu (like the `docs` layout), a
 
 To create different blog categories to organize your posts, create subfolders in `blog/`. For instance, in our [example site](https://github.com/google/docsy-example/tree/master/content/en/blog) we have `news` and `releases`. Each category needs to have its own `_index.md` or `_index.html` landing page file specifying the category title for it to appear properly in the left nav and top-level blog landing page. Here's the index page for `releases`:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "New Releases"
+linkTitle = "Releases"
+weight = 20
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "New Releases"
 linkTitle: "Releases"
 weight: 20
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "New Releases",
+  "linkTitle": "Releases",
+  "weight": 20
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 To add author and date information to blog posts, add them to the page frontmatter:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+date = 2018-10-06T00:00:00.000Z
+title = "Easy documentation with Docsy"
+linkTitle = "Announcing Docsy"
+description = "The Docsy Hugo theme lets project maintainers and contributors focus on content, not on reinventing a website infrastructure from scratch"
+author = "Riona MacNamara"
+
+[[resources]]
+src = "**.{png,jpg}"
+title = "Image #:counter"
+
+  [resources.params]
+  byline = "Photo: Riona MacNamara / CC-BY-CA"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 date: 2018-10-06
 title: "Easy documentation with Docsy"
@@ -229,7 +437,26 @@ resources:
   params:
     byline: "Photo: Riona MacNamara / CC-BY-CA"
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "date": "2018-10-06T00:00:00.000Z",
+  "title": "Easy documentation with Docsy",
+  "linkTitle": "Announcing Docsy",
+  "description": "The Docsy Hugo theme lets project maintainers and contributors focus on content, not on reinventing a website infrastructure from scratch",
+  "author": "Riona MacNamara",
+  "resources": [
+    {
+      "src": "**.{png,jpg}",
+      "title": "Image #:counter",
+      "params": {
+        "byline": "Photo: Riona MacNamara / CC-BY-CA"
+      }
+    }
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 If you've copied the example site and you don't want a blog section, or want to link to an external blog instead, just delete the `blog` subdirectory.
 
@@ -252,9 +479,11 @@ If you've just used the theme, you can still use all Docsy's provided [page bloc
 
 ## Adding a community page
 
-The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
+The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`/`config.yaml`/`config.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
@@ -288,7 +517,86 @@ The `community` landing page template has boilerplate content that's automatical
 	url = "https://example.org/mail"
 	icon = "fa fa-envelope"
         desc = "Discuss development issues around the project"
-``` 
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  links:
+    user:
+      - name: User mailing list
+        url: 'https://example.org/mail'
+        icon: fa fa-envelope
+        desc: Discussion and help from your fellow users
+      - name: Twitter
+        url: 'https://example.org/twitter'
+        icon: fab fa-twitter
+        desc: Follow us on Twitter to get the latest news!
+      - name: Stack Overflow
+        url: 'https://example.org/stack'
+        icon: fab fa-stack-overflow
+        desc: Practical questions and curated answers
+    developer:
+      - name: GitHub
+        url: 'https://github.com/google/docsy'
+        icon: fab fa-github
+        desc: Development takes place here!
+      - name: Slack
+        url: 'https://example.org/slack'
+        icon: fab fa-slack
+        desc: Chat with other project developers
+      - name: Developer mailing list
+        url: 'https://example.org/mail'
+        icon: fa fa-envelope
+        desc: Discuss development issues around the project
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "links": {
+      "user": [
+        {
+          "name": "User mailing list",
+          "url": "https://example.org/mail",
+          "icon": "fa fa-envelope",
+          "desc": "Discussion and help from your fellow users"
+        },
+        {
+          "name": "Twitter",
+          "url": "https://example.org/twitter",
+          "icon": "fab fa-twitter",
+          "desc": "Follow us on Twitter to get the latest news!"
+        },
+        {
+          "name": "Stack Overflow",
+          "url": "https://example.org/stack",
+          "icon": "fab fa-stack-overflow",
+          "desc": "Practical questions and curated answers"
+        }
+      ],
+      "developer": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/google/docsy",
+          "icon": "fab fa-github",
+          "desc": "Development takes place here!"
+        },
+        {
+          "name": "Slack",
+          "url": "https://example.org/slack",
+          "icon": "fab fa-slack",
+          "desc": "Chat with other project developers"
+        },
+        {
+          "name": "Developer mailing list",
+          "url": "https://example.org/mail",
+          "icon": "fa fa-envelope",
+          "desc": "Discuss development issues around the project"
+        }
+      ]
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 If you're creating your own site and want to add a page using this template, add a `/community/_index.md` file in your content root directory. If you've copied the example site and *don't* want a community page, just delete the `/content/en/community/` directory in your project repo.
 
@@ -302,42 +610,128 @@ You can also use this directory for other files used by your project, including 
 
 ## RSS feeds
 
-Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`. This is the default configuration:
+Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`/`config.yaml`/`config.json`. This is the default configuration:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 rss_sections = ["blog"]
-```
-To disable all RSS feeds, add the following to your `config.toml`:
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+rss_sections:
+  - blog
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "rss_sections": [
+    "blog"
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
-```toml
+To disable all RSS feeds, add the following to your `config.toml`/`config.yaml`/`config.json`:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 disableKinds = ["RSS"]
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+disableKinds:
+  - RSS
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "disableKinds": [
+    "RSS"
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
-{{% alert title="Note" color="info" %}}
-If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
 
-```toml
+<div class="alert alert-info" role="alert">
+
+<h4 class="alert-heading">Note</h4>
+
+If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`/`config.yaml`/`config.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml`/`config.yaml`/`config.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.  
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [outputs]
 section = [ "HTML", "RSS", "print" ]
-```
-{{% /alert %}}
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+outputs:
+  section:
+    - HTML
+    - RSS
+    - print
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "outputs": {
+    "section": [
+      "HTML",
+      "RSS",
+      "print"
+    ]
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+</div>
 
 ## Sitemap
 
 Hugo creates a `sitemap.xml` file for your generated site by default: for example, [here's the sitemap](/sitemap.xml) for this site.
 
-You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `config.toml`:
+You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [sitemap]
   changefreq = "monthly"
   filename = "sitemap.xml"
   priority = 0.5
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+sitemap:
+  changefreq: monthly
+  filename: sitemap.xml
+  priority: 0.5
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "sitemap": {
+    "changefreq": "monthly",
+    "filename": "sitemap.xml",
+    "priority": 0.5
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 To override any of these values for a given page, specify it in page frontmatter:
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Adding Content"
+linkTitle = "Adding Content"
+weight = 1
+description = '''
+Add different types of content to your Docsy site.
+'''
+[sitemap]
+priority = 1
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Adding Content"
 linkTitle: "Adding Content"
@@ -347,7 +741,18 @@ description: >
 sitemap:
   priority: 1.0
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Adding Content",
+  "linkTitle": "Adding Content",
+  "weight": 1,
+  "description": "Add different types of content to your Docsy site.\n",
+  "sitemap": {
+    "priority": 1
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 To learn more about configuring sitemaps, see [Sitemap Template](https://gohugo.io/templates/sitemap-template/).
-
