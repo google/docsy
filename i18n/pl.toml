@@ -73,6 +73,6 @@ other = "Develop and Contribute"
 [community_contribute]
 other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
 [community_how_to]
-other = "You can find out how to contribute to these docs in our"
+other = "You can find out how to contribute to {{ .Site.Title }} in our"
 [community_guideline]
 other = "Contribution Guidelines"
