@@ -9,17 +9,38 @@ description: >
 
 ## Add your logo
 
-Add your project logo as `assets/icons/logo.svg` in your project. This overrides the default Docsy logo in the theme. If you don't want a project logo, set `navbar_logo` to `false` (or delete the variable) in your `config.toml`:
+Add your project logo as `assets/icons/logo.svg` in your project. This overrides the default Docsy logo in the theme. If you don't want a project logo, set `navbar_logo` to `false` (or delete the variable) in your `config.toml`/`config.yaml`/`config.json`:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 navbar_logo = false
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+navbar_logo: false
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "navbar_logo": false
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 If you decide at a later stage that you'd like to add a logo to your navbar, you can set the parameter to `true`:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="config.toml" lang="toml" >}}
 navbar_logo = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+navbar_logo: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "navbar_logo": true
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% alert title="Tip" %}}
 Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/main/assets/scss/_nav.scss)):

@@ -10,12 +10,33 @@ Individual documentation pages print well from most browsers as the layouts have
 
 On some sites, it can be useful to enable a "print entire section" feature (as seen in this user guide).  Selecting this option renders the entire current top-level section (such as Content and Customization for this page) with all of its child pages and sections in a format suited to printing, complete with a table of contents for the section.
 
-To enable this feature, add the "print" output format in your site's `config.toml` file for the "section" type:
+To enable this feature, add the "print" output format in your site's `config.toml`/`config.yaml`/`config.json` file for the "section" type:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [outputs]
 section = [ "HTML", "RSS", "print" ]
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+outputs:
+  section:
+    - HTML
+    - RSS
+    - print
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "outputs": {
+    "section": [
+      "HTML",
+      "RSS",
+      "print"
+    ]
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 The site should then show a "Print entire section" link in the right hand navigation.
 
@@ -23,13 +44,51 @@ The site should then show a "Print entire section" link in the right hand naviga
 
 ### Disabling the ToC
 
-To disable showing the the table of contents in the printable view, set the `disable_toc` param to `true`, either in the page front matter, or in `config.toml`:
+To disable showing the the table of contents in the printable view, set the `disable_toc` param to `true`, either in the page front matter, or in `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+…
+disable_toc = true
+…
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+…
+disable_toc: true
+…
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  …,
+  "disable_toc": true,
+  …
+}
+{{< /tab >}}
+{{< tab header="or config file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.print]
 disable_toc = true
-```
-
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  print:
+    disable_toc: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "print": {
+      "disable_toc": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Layout hooks
 
