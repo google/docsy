@@ -11,6 +11,7 @@ description: >
 Run the following from the command line:
 
 {{< tabpane >}}
+{{< tab header="CLI:" disabled=true />}}
 {{< tab header="Unix shell" lang="Bash" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
@@ -79,13 +80,14 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 In your `config.toml`/`config.yaml`/`config.json` file, update the theme setting to use Hugo Modules. Find the following line:
 
 {{< tabpane >}}
-{{< tab header="toml" lang="toml" >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 theme = ["docsy"]
 {{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
+{{< tab header="config.yaml" lang="yaml" >}}
 theme: docsy
 {{< /tab >}}
-{{< tab header="json"  lang="json" >}}
+{{< tab header="config.json" lang="json" >}}
 "theme": "docsy"
 {{< /tab >}}
 {{< /tabpane >}}
@@ -93,15 +95,16 @@ theme: docsy
 Change this line to:
 
 {{< tabpane >}}
-{{< tab header="toml" lang="toml" >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 theme = ["github.com/google/docsy", "github.com/google/docsy/dependencies"]
 {{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
+{{< tab header="config.yaml" lang="yaml" >}}
 theme:
   - github.com/google/docsy
   - github.com/google/docsy/dependencies
 {{< /tab >}}
-{{< tab header="json"  lang="json" >}}
+{{< tab header="config.json" lang="json" >}}
 "theme": [
   "github.com/google/docsy",
   "github.com/google/docsy/dependencies"
@@ -112,7 +115,8 @@ theme:
 Alternatively, you can omit this line altogether and replace it with the settings given in the following snippet:
 
 {{< tabpane >}}
-{{< tab header="toml" lang="toml" >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module
@@ -127,7 +131,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
     path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
+{{< tab header="config.yaml" lang="yaml" >}}
 module:
   proxy: direct
   hugoVersion:
@@ -140,7 +144,7 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="json" lang="json" >}}
+{{< tab header="config.json" lang="json" >}}
 {
   "module": {
     "proxy": "direct",
