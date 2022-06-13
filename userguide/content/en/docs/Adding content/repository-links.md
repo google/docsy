@@ -14,7 +14,7 @@ The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-
 
 This page shows you how to configure these links.
 
-Currently, Docsy supports only GitHub repository links "out of the box". If you are using another repository such as Bitbucket and would like generated repository links, feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
+Currently, Docsy supports only GitHub repository links "out of the box". Since GitLab can handle the same link scheme, it should work as well. If you are using another repository such as Bitbucket and would like generated repository links, feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
 
 ## Link configuration
 
