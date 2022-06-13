@@ -55,10 +55,10 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| title | | The main display title for the block. | 
+| title | | The main display title for the block. |
 | image_anchor | |
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 | byline | Byline text on featured image. |
 
 
@@ -76,7 +76,7 @@ The **blocks/lead** block shortcode is a simple lead/title block with centred te
 
 ```go-html-template
 {{%/* blocks/lead color="dark" */%}}
-TechOS is the OS of the future. 
+TechOS is the OS of the future.
 
 Runs on **bare metal** in the **cloud**!
 {{%/* /blocks/lead */%}}
@@ -85,7 +85,7 @@ Runs on **bare metal** in the **cloud**!
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 
 ### blocks/section
 
@@ -112,7 +112,7 @@ For announcement of latest features etc.
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 | type  | | Specify "section" if you want a general container,  omit this parameter if you want this section to contain a horizontal row of features.
 
 ### blocks/feature
@@ -145,11 +145,11 @@ The **blocks/link-down** shortcode creates a navigation link down to the next se
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| color | info | See above. 
+| color | info | See above.
 
 ## Shortcode helpers
 
-###  alert
+### alert
 
 The **alert** shortcode creates an alert block that can be used to display notices or warnings.
 
@@ -170,7 +170,7 @@ This is a warning.
 | ---------------- |------------| ------------|
 | color | primary | One of the theme colors, eg `primary`, `info`, `warning` etc.
 
-###  pageinfo
+### pageinfo
 
 The **pageinfo** shortcode creates a text box that you can use to add banner information for a page: for example, letting users know that the page contains placeholder content, that the content is deprecated, or that it documents a beta feature.
 
@@ -192,7 +192,7 @@ This is placeholder content
 | color | primary | One of the theme colors, eg `primary`, `info`, `warning` etc.
 
 
-###  imgproc
+### imgproc
 
 The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a set of processing instructions.
 
@@ -209,14 +209,38 @@ Norway Spruce Picea abies shoot with foliage buds.
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
 
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+[[resources]]
+src = "**spruce*.jpg"
 
-```yaml
+  [resources.params]
+  byline = "Photo: Bjørn Erik Pedersen / CC-BY-SA"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
 resources:
 - src: "**spruce*.jpg"
   params:
     byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
-```
-
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "resources": [
+    {
+      "src": "**spruce*.jpg",
+      "params": {
+        "byline": "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+      }
+    }
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 | Parameter        | Description  |
 | ----------------: |------------|
@@ -226,9 +250,21 @@ resources:
 
 ### swaggerui
 
-The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Pet Store API"
+type = "swagger"
+weight = 1
+description = "Reference for the Pet Store API"
++++
+
+{{</* swaggerui src="/openapi/petstore.yaml" */>}}
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Pet Store API"
 type: swagger
@@ -237,7 +273,18 @@ description: Reference for the Pet Store API
 ---
 
 {{</* swaggerui src="/openapi/petstore.yaml" */>}}
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Pet Store API",
+  "type": "swagger",
+  "weight": 1,
+  "description": "Reference for the Pet Store API"
+}
+
+{{</* swaggerui src="/openapi/petstore.yaml" */>}}
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
 
@@ -266,10 +313,10 @@ in the response headers." you __CAN__ embed it, but when the test says "Great! X
 
 ## Tabbed panes
 
-Sometimes it's very useful to have tabbed panes when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the table below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language from scratch:
+Sometimes it's very useful to have tabbed panes when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the tabbed pane below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language:
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab header="C" >}}
+  {{< tab "C" >}}
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -279,7 +326,7 @@ int main(void)
   return EXIT_SUCCESS;
 }
 {{< /tab >}}
-{{< tab header="C++" >}}
+{{< tab "C++" >}}
 #include <iostream>
 
 int main()
@@ -287,82 +334,96 @@ int main()
   std::cout << "Hello World!" << std::endl;
 }
 {{< /tab >}}
-{{< tab header="Go" >}}
+{{< tab "Go" >}}
 package main
 import "fmt"
 func main() {
   fmt.Printf("Hello World!\n")
 }
 {{< /tab >}}
-{{< tab header="Java" >}}
+{{< tab "Java" >}}
 class HelloWorld {
   static public void main( String args[] ) {
     System.out.println( "Hello World!" );
   }
 }
 {{< /tab >}}
-{{< tab header="Kotlin" >}}
+{{< tab "Kotlin" >}}
 fun main(args : Array<String>) {
     println("Hello, world!")
 }
 {{< /tab >}}
-{{< tab header="Lua" >}}
+{{< tab "Lua" >}}
 print "Hello world"
 {{< /tab >}}
-{{< tab header="PHP" >}}
+{{< tab PHP >}}
 <?php
 echo 'Hello World!';
 ?>
 {{< /tab >}}
-{{< tab header="Python" >}}
+{{< tab "Python" >}}
 print("Hello World!")
 {{< /tab >}}
-{{< tab header="Ruby" >}}
+{{< tab "Ruby" >}}
 puts "Hello World!"
 {{< /tab >}}
-{{< tab header="Scala" >}}
+{{< tab "Scala" >}}
 object HelloWorld extends App {
   println("Hello world!")
 }
 {{< /tab >}}
 {{< /tabpane >}}
 
-The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a pane with three tabs:
+The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a pane with one disabled and three active tabs:
 
 ```go-html-template
-{{</* tabpane */>}}
-  {{</* tab header="English" */>}}
-    Welcome!
+{{</* tabpane code=false */>}}
+  {{%/* tab header="**Languages**:" disabled=true /*/%}}
+  {{%/* tab header="English" lang="en" */%}}
+  ![Flag United Kingdom](flags/uk.png)
+  Welcome!
+  {{%/* /tab */%}}
+  {{</* tab header="German" lang="de" */>}}
+    <b>Herzlich willkommen!</b>
+    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
   {{</* /tab */>}}
-  {{</* tab header="German" */>}}
-    Herzlich willkommen!
-  {{</* /tab */>}}
-  {{</* tab header="Swahili" */>}}
-    Karibu sana!
-  {{</* /tab */>}}
-{{</* /tabpane */>}}
+  {{%/* tab header="Swahili" lang="sw" */%}}
+  ![Flag Tanzania](flags/tz.png)
+  **Karibu sana!** 
+  {{%/* /tab */%}}
+{{%/* /tabpane */%}}
 ```
 
 This code translates to the tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
 
-{{< tabpane >}}
-{{< tab header="English" >}}
-Welcome!
-{{< /tab >}}
-{{< tab  header="German" lang="de" >}}
-Herzlich willkommen!
-{{< /tab >}}
-{{< tab  header="Swahili" >}}
-Karibu sana!
-{{< /tab >}}
+{{< tabpane code=false >}}
+  {{% tab header="**Languages**:" disabled=true /%}}
+  {{% tab header="English" lang="en" %}}
+  ![Flag United Kingdom](flags/uk.png)
+  **Welcome!**
+  {{% /tab %}}
+  {{< tab header="German" lang="de" >}}
+    <b>Herzlich willkommen!</b>
+    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
+  {{< /tab >}}
+  {{% tab  header="Swahili" lang="sw" %}}
+  ![Flag Tanzania](flags/tz.png)
+  **Karibu sana!** 
+  {{% /tab %}}
 {{< /tabpane >}}
 
 ### Shortcode details
 
 Tabbed panes are implemented using two shortcodes:
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the `language` used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `language` parameter of the respective tab.
-* The various `tab` shortcodes which actually represent the tabs you would like to show. We recommend specifying the named parameter `header` for each text in order to set the header text of each tab. If needed, you can additionally specify the named parameters `lang` and `highlight` for each tab. This allows you to overwrite the settings given in the parent `tabpane` shortcode. If the language is neither specified in the `tabpane` nor in the `tab`shortcode, it defaults to Hugo's site variable `.Site.Language.Lang`.
+* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
+* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{ tab "My header" }} … {{ /tab }}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
+  * By default, the tab's content is rendered as `code block`. In order to get proper syntax highlighting, specify the named parameter `lang` --and optionally the parameter `highlight`-- for each tab. Parameters set in the parent `tabpane` shortcode will be overwritten.
+  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `code=false` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
+
+{{% alert title="Info" %}}
+By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode. 
+{{% /alert %}}
 
 ## Card panes
 
@@ -417,7 +478,7 @@ Imagine all the people living life in peace…
 
 Imagine no possessions, I wonder if you can<br/>
 No need for greed or hunger - a brotherhood of man<br/>
-Imagine all the people sharing all the world… 
+Imagine all the people sharing all the world…
 
 You may say I'm a dreamer, but I'm not the only one<br/>
 I hope someday you'll join us and the world will live as one
@@ -518,7 +579,7 @@ contents:
 1.  Download the installation files.
 
 1.  Run the installation script
-    
+
     `sudo sh install.sh`
 
 1.  Test that your installation was successfully completed.
@@ -574,11 +635,11 @@ into the document. The rendered text looks like this:
 
 To create a new pipeline, follow the next steps:
 
-1.  Create a configuration file `config.yaml`:
+1. Create a configuration file `config.yaml`:
 
     {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
 
-1.  Apply the file to your cluster `kubectl apply config.yaml`
+1. Apply the file to your cluster `kubectl apply config.yaml`
 
 ---
 

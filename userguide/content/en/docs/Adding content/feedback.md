@@ -14,13 +14,32 @@ The Docsy theme contains built-in support for [Google Analytics](https://analyti
 ### Setup
 
 1. Ensure you have [set up a Google Analytics property](https://support.google.com/analytics/answer/1042508) for your site: this gives you an Analytics ID to add to your config, which Docsy in turn adds to all your site's pages.
-1. Open `config.toml`.
+1. Open `config.toml`/`config.yaml`/`config.json`.
 1. Enable Google Analytics by setting the Tracking ID property to your site's Analytics ID.
 
-        [services.googleAnalytics]
-        id = "UA-00000000-0"
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+[services.googleAnalytics]
+id = "UA-00000000-0"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+services:
+  googleAnalytics:
+    id: UA-00000000-0
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "services": {
+    "googleAnalytics": {
+      "id": "UA-00000000-0"
+    }
+  }
+}
+{{< /tab >}}
+    {{< /tabpane >}}
 
-1. Save and close `config.toml`.
+1. Save and close `config.toml`/`config.yaml`/`config.json`.
 1. Ensure that your site is built with `HUGO_ENV="production"`, as Docsy only adds Analytics tracking to production-ready sites. You can specify this variable as a command line flag to Hugo: 
 
     ```
@@ -56,6 +75,7 @@ response text in `config.toml`.
   </figcaption>
 </figure>
 
+
 ### How is this data useful?
 
 When you have a lot of documentation, and not enough time to update it all, you can use the
@@ -78,15 +98,46 @@ technical writing, in other words!
 
 ### Setup
 
-1. Open `config.toml`.
+1. Open `config.toml`/`config.yaml`/`config.json`.
 1. Ensure that Google Analytics is enabled, as described [above](#setup).
 1. Set the response text that users see after clicking **Yes** or **No**.
 
-        [params.ui.feedback]
-        enable = true
-        yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-        no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-1. Save and close `config.toml`.
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+[params.ui.feedback]
+enable = true
+yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
+no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  ui:
+    feedback:
+      enable: true
+      'yes': >-
+        Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">
+        tell us how we can improve</a>.
+      'no': >-
+        Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">
+        tell us how we can improve</a>.
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "feedback": {
+        "enable": true,
+        "yes": "Glad to hear it! Please <a href=\"https://github.com/USERNAME/REPOSITORY/issues/new\"> tell us how we can improve</a>.",
+        "no": "Sorry to hear that. Please <a href=\"https://github.com/USERNAME/REPOSITORY/issues/new\"> tell us how we can improve</a>."
+      }
+    }
+  }
+}
+{{< /tab >}}
+    {{< /tabpane >}}
+
+1. Save and close `config.toml`/`config.yaml`/`config.json`.
 
 ### Access the feedback data
 
@@ -123,14 +174,71 @@ fires the Google Analytics JavaScript function for logging an Event, disables th
 
 ### Disable feedback on a single page
 
-Add `hide_feedback: true` to the page's front matter.
+Add the parameter `hide_feedback` to the page's front matter and set it to `true`.
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+hide_feedback = true
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+hide_feedback: true
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+    "hide_feedback": true
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Disable feedback on all pages
 
-Set `params.ui.feedback.enable` to `false` in `config.toml`:
+Set `params.ui.feedback.enable` to `false` in `config.toml`/`config.yaml`/`config.json`:
 
-    [params.ui.feedback]
-    enable = false
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+[params.ui.feedback]
+enable = false
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  ui:
+    feedback:
+      enable: false
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "feedback": {
+        "enable": false
+      }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+
+## Add a contact form with Fabform
+
+You can create a contact form for your site and collect your form submissions at [fabform.io](https://fabform.io). To use this feature, you first need to sign up for an account with Fabform. The following example shows how to add a simple form that collects the user's email address to your site source:
+
+```html
+<form action="https://fabform.io/f/{form-id}" method="post">
+ <label for="email">Your Email</label>
+ <input name="email" type="email">
+ <button type="submit">Submit</button> 
+</form>
+```
+
+For more details, see [Add a Hugo contact form](https://fabform.io/a/hugo-contact-form) in the Fabform documentation.
+
 
 ## Search Engine Optimization meta tags
 
@@ -151,12 +259,27 @@ Google [recommends](https://developers.google.com/search/docs/beginner/seo-start
 
 For example, if your front matter `description` is:
 
-```markdown
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+description = '''
+Add Google Analytics tracking to your site.
+'''
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 description: >
   Add Google Analytics tracking to your site.
 ---
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "description": "Add Google Analytics tracking to your site.\n"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Then the meta `description` tag on the rendered page is:
 
