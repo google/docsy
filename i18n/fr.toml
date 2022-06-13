@@ -72,6 +72,6 @@ other = "Développer et Contribuer"
 [community_contribute]
 other = "Si vous voulez vous impliquer davantage en contribuant à {{ .Site.Title }}, joignez-nous sur:"
 [community_how_to]
-other = "Vous pouvez trouver comment contribuer à cette documentation dans nos"
+other = "Vous pouvez trouver comment contribuer à {{ .Site.Title }} dans nos"
 [community_guideline]
 other = "Règles de contribution"
