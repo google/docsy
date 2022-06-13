@@ -23,8 +23,9 @@ goodbye
 */}}
 -->
 {{ if not (.Site.Params.prism_syntax_highlighting) }}
-    {{ warnf "Warning: This shortcode requires the PrismJS highlighter, it doesn't work with Chroma. For details, see https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-prism , %s" .Position -}}
+    {{ errorf "Error: Shortcode 'shell' requires the PrismJS highlighter, it doesn't work with Chroma. For details, see https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-prism , %s" .Position -}}
 {{ end }}
+
 {{ $language := .Get 2 | default "bash" }}
 {{ $user := "" }}
 {{ $host := "" }}

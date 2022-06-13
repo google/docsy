@@ -21,6 +21,10 @@ select sysdate from dual;
 
 */}}
 -->
+{{ if not (.Site.Params.prism_syntax_highlighting) }}
+    {{ errorf "Error: Shortcode 'sql-shell' requires the PrismJS highlighter, it doesn't work with Chroma. For details, see https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-prism , %s" .Position -}}
+{{ end }}
+
 {{ $prompt := .Get 0 | default "SQL>" }}
 
 <div class="highlight">
