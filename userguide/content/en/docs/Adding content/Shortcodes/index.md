@@ -243,7 +243,7 @@ You can customize Swagger UI's look and feel by overriding Swagger's CSS or by e
 
 ### redoc
 
-The `redoc` shortcode uses the open-source [Redoc](https://github.com/Redocly/redoc) tool to render reference API documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+The `redoc` shortcode uses the open-source [Redoc](https://github.com/Redocly/redoc) tool to render reference API documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content), but you can use a URL as well, for example:
 
 ```yaml
 ---
@@ -253,7 +253,7 @@ weight: 1
 description: Reference for the Pet Store API
 ---
 
-{{</* redoc "/petstore.yaml" */>}}
+{{</* redoc "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v2.0/yaml/petstore.yaml" */>}}
 ```
 
 ### iframe
