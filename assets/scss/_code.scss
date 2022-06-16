@@ -1,8 +1,9 @@
 // Code formatting.
 
 .td-content {
-	// Highlighted code.
-    .highlight {
+    // Highlighted code.
+    // .highlight is added to divs by chroma, .code-toolbar is added by prismjs
+    .highlight,.code-toolbar {
         @extend .card;
 
         margin: 2rem 0;

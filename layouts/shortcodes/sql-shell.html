@@ -27,17 +27,15 @@ select sysdate from dual;
 
 {{ $prompt := .Get 0 | default "SQL>" }}
 
-<div class="highlight">
-  <div class="code-toolbar">
-    <pre
-      class="command-line language-sql"
-      data-prompt="{{ $prompt }}"
-      data-filter-output="(out)"
-      data-continuation-prompt="->"
-      data-filter-continuation="(con)">
-      {{- with (.Inner | default "" ) -}}
-        <code class="language-sql">{{- trim . " \n" -}}</code>
-      {{- end -}}
-    </pre>
-  </div>
+<div class="code-toolbar">
+  <pre
+    class="command-line language-sql"
+    data-prompt="{{ $prompt }}"
+    data-filter-output="(out)"
+    data-continuation-prompt="->"
+    data-filter-continuation="(con)">
+    {{- with (.Inner | default "" ) -}}
+      <code class="language-sql">{{- trim . " \n" -}}</code>
+    {{- end -}}
+  </pre>
 </div>

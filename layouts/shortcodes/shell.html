@@ -40,18 +40,16 @@ goodbye
   {{ $host = "" }}
   {{ $prompt = "data-prompt=\"$\"" }}
 {{ end }}
-<div class="highlight">
-  <div class="code-toolbar">
-    <pre
-      class="command-line language-{{ $language }}"
-      {{ safeHTMLAttr $prompt }}
-      {{ safeHTMLAttr $user }}
-      {{ safeHTMLAttr $host }}
-      data-continuation-str="\"
-      data-filter-output="(out)">
-    {{- with (.Inner | default "" ) -}}
-      <code class="language-{{ $language }}">{{- trim . " \n" -}}</code>
-    {{- end -}}
-    </pre>
-  </div>
+<div class="code-toolbar">
+  <pre
+    class="command-line language-{{ $language }}"
+    {{ safeHTMLAttr $prompt }}
+    {{ safeHTMLAttr $user }}
+    {{ safeHTMLAttr $host }}
+    data-continuation-str="\"
+    data-filter-output="(out)">
+  {{- with (.Inner | default "" ) -}}
+    <code class="language-{{ $language }}">{{- trim . " \n" -}}</code>
+  {{- end -}}
+  </pre>
 </div>
