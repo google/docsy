@@ -55,10 +55,6 @@
     }
 
     pre.command-line {
-        // Code blocks made from markdown fenced blocks seem to get an element style on the pre
-        // from somewhere. Adding this for consistency
-        background-color: #f8f8f8 !important;
-
         // Stop user selection of command line output lines
         span.token.output {
             user-select: none;
