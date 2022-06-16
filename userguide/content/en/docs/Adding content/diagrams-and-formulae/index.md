@@ -41,16 +41,35 @@ This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-de
 
 ### Enabling and configuring \\(\LaTeX\\) support
 
-To enable/disable \\(\KaTeX\\) support inside the Docsy theme, update `config.toml`:
+To enable/disable \\(\KaTeX\\) support inside the Docsy theme, update `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.katex]
 enable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  katex:
+    enable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "katex": {
+      "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
-Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`, if needed:
+Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`/`config.yaml`/`config.json`, if needed:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.katex]
 # enable/disable KaTeX support
 enable = true
@@ -86,21 +105,114 @@ errorColor = "#CD5C5C"
   left = "\\["
   right = '\\]'
   display = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  katex:
+    enable: true  # enable/disable KaTeX support
+    html_dom_element: document.body  # Element(s) scanned by auto render extension. Default: document.body
+    options:
+
+      # If true (the default), KaTeX will throw a ParseError when it encounters an
+      # unsupported command or invalid LaTeX. If false, KaTeX will render unsupported
+      # commands as text, and render invalid LaTeX as its source code with hover text
+      # giving the error, in the color given by errorColor.
+      throwOnError: false
+      errorColor: '#CD5C5C'
+
+      # This is a list of delimiters to look for math, processed in the same order as
+      # the list. Each delimiter has three properties:
+      #   left:    A string which starts the math expression (i.e. the left delimiter).
+      #   right:   A string which ends the math expression (i.e. the right delimiter).
+      #   display: Whether math in the expression should be rendered in display mode.
+      delimiters:
+        - left: $$
+          right: $$
+          display: true
+        - left: $
+          right: $
+          display: false
+        - left: \(
+          right: \)
+          display: false
+        - left: '\['
+          right: '\\]'
+          display: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "katex": {
+      "enable": true,
+      "html_dom_element": "document.body",
+      "options": {
+        "throwOnError": false,
+        "errorColor": "#CD5C5C",
+        "delimiters": [
+          {
+            "left": "$$",
+            "right": "$$",
+            "display": true
+          },
+          {
+            "left": "$",
+            "right": "$",
+            "display": false
+          },
+          {
+            "left": "\\(",
+            "right": "\\)",
+            "display": false
+          },
+          {
+            "left": "\\[",
+            "right": "\\\\]",
+            "display": true
+          }
+        ]
+      }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
 
 ### Display of Chemical Equations and Physical Units
 
-[mhchem](https://www.ctan.org/pkg/mhchem) is a \\(\LaTeX\\) package for typesetting chemical molecular formulae and equations. Fortunately, \\(\KaTeX\\) provides the `mhchem` [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes the `mhchem` package accessible when authoring content for the web. Since this extension was integrated into the Docsy theme, you can write beautiful chemical equations easily once `mhchem` support is enabled inside your `config.toml`:
+[mhchem](https://www.ctan.org/pkg/mhchem) is a \\(\LaTeX\\) package for typesetting chemical molecular formulae and equations. Fortunately, \\(\KaTeX\\) provides the `mhchem` [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes the `mhchem` package accessible when authoring content for the web. Since this extension was integrated into the Docsy theme, you can write beautiful chemical equations easily once `mhchem` support is enabled inside your `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.katex]
 enable = true
 
 [params.katex.mhchem]
 enable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  katex:
+    enable: true
+    mhchem:
+      enable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "katex": {
+      "enable": true,
+      "mhchem": {
+        "enable": true
+      }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 With `mhchem` extension enabled, you can easily include chemical equations into your page. The equations can be shown either inline or can reside on its own line. The following code sample produces a text line including a chemical equation:
 
@@ -163,31 +275,89 @@ graph LR
 
 ```
 
-To enable/disable Mermaid, update `config.toml`:
+To enable/disable Mermaid, update `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.mermaid]
 enable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  mermaid:
+    enable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "mermaid": {
+      "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
-You also need to disable the `guessSyntax` from markup highlighting in `config.toml`  for Mermaid to work:
+You also need to disable the `guessSyntax` from markup highlighting in `config.toml`/`config.yaml`/`config.json` for Mermaid to work:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [markup]
   [markup.highlight]
-      guessSyntax = "false"
-```
+      guessSyntax = false
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+markup:
+  highlight:
+    guessSyntax: false
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "markup": {
+    "highlight": {
+      "guessSyntax": false
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can also update settings for Mermaid, such as themes, padding, etc:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.mermaid]
 enable = true
 theme = "neutral"
 
 [params.mermaid.flowchart]
 diagramPadding = 6
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  mermaid:
+    enable: true
+    theme: neutral
+    flowchart:
+      diagramPadding: 6
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "mermaid": {
+      "enable": true,
+      "theme": "neutral",
+      "flowchart": {
+        "diagramPadding": 6
+      }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults) for a list of defaults that can be overridden.
 
@@ -241,28 +411,74 @@ Foo -> Foo6 : To collections
 Foo -> Foo7: To queue
 ```
 
-To enable/disable PlantUML, update `config.toml`:
+To enable/disable PlantUML, update `config.toml`/`config.yaml`/`config.json`:
 
-```
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  plantuml:
+    enable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "plantuml": {
+      "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Other optional settings are:
-```
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
 theme = "default"
 
-#Set url to plantuml server
-#default is http://www.plantuml.com/plantuml/svg/
+# Set url to plantuml server
+# default is http://www.plantuml.com/plantuml/svg/
 svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 
-#By default the plantuml implementation uses <img /> tags to display UML diagrams.
-#When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.d.
-#default = false
+# By default the plantuml implementation uses <img /> tags to display UML diagrams.
+# When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.g.
+# default = false
 svg = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  plantuml:
+    enable: true
+    theme: default
+    # Set url to plantuml server
+    # default is http://www.plantuml.com/plantuml/svg/
+    svg_image_url: 'https://www.plantuml.com/plantuml/svg/'
+    # By default the plantuml implementation uses <img /> tags to display UML diagrams.
+    # When svg is set to true, diagrams are displayed using <svg /> tags, maintaining functionality like links e.g.
+    # default = false
+    svg: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "plantuml": {
+      "enable": true,
+      "theme": "default",
+      "svg_image_url": "https://www.plantuml.com/plantuml/svg/",
+      "svg": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## MindMap support with MarkMap
 
@@ -328,18 +544,35 @@ Automatically renders to:
 - Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 
-To enable/disable MarkMap, update `config.toml`:
+To enable/disable MarkMap, update `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.markmap]
 enable = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  markmap:
+    enable: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "markmap": {
+      "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Diagrams with Diagrams.net
 
 [Diagrams.net](https://diagrams.net/) (aka draw.io) provides a free and open source diagram editor that can generate a wider range of diagrams than Mermaid or PlantUML using a web or desktop editor.
 
-SVG and PNG files exported with the tool contain the source code of the original diagram by default, which allows  the diagrams.net site to import those images again for edit in the future.  Docsy can detect this and automatically add an "edit" button over any image that can be edited using the online site.
+SVG and PNG files exported with the tool contain the source code of the original diagram by default, which allows the diagrams.net site to import those images again for edit in the future.  Docsy can detect this and automatically add an "edit" button over any image that can be edited using the online site.
 
 Hover over the image below and click edit to instantly start working with it.  Clicking the "Save" button will cause the edited diagram to be exported using the same filename and filetype, and downloaded to your browser.
 
@@ -352,16 +585,50 @@ As the diagram data is transported via the browser, the diagrams.net server does
 
 {{< figure src="docsy-diagrams.svg" caption="Mouse over the above image and click the edit button!">}}
 
-To disable detection of diagrams, update `config.toml`:
+To disable detection of diagrams, update `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.drawio]
 enable = false
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  drawio:
+    enable: false
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "drawio": {
+      "enable": false
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can also [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md) for editing diagrams, in which case update the configuration to point to that server:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [params.drawio]
 drawio_server = "https://app.mydrawioserver.example.com"
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+params:
+  drawio:
+    drawio_server: 'https://app.mydrawioserver.example.com'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "params": {
+    "drawio": {
+      "drawio_server": "https://app.mydrawioserver.example.com"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
