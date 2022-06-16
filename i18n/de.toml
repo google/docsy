@@ -76,6 +76,6 @@ other = "Entwickeln und einen Beitrag leisten"
 [community_contribute]
 other = "Wenn Du aktiv beteiligen und einen Beitrag zu {{ .Site.Title }} leisten möchtest, kannst Du hier mitmachen:"
 [community_how_to]
-other = "Wie Du selbst zu diesen Dokumenten beitragen kannst, kannst Du nachlesen in unseren"
+other = "Wie Du selbst zu {{ .Site.Title }} beitragen kannst, kannst Du nachlesen in unseren"
 [community_guideline]
 other = "Richtlinien für Beiträge"
