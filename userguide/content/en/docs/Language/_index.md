@@ -103,5 +103,5 @@ All UI strings (text for buttons etc.) are bundled inside `/i18n` in the theme, 
 If your chosen language isn't currently in the theme and you create your own `.toml` file for all the common UI strings (for example, if you translate the UI text into Japanese and create a copy of `en.toml` called `jp.toml`), we recommend you do this **in the theme** rather than in your own project, so it can be reused by others. Any additional strings or overridden values can be added to your project's `/i18n` folder.
 
 {{% alert title="Hugo Tip" %}}
-Run `hugo server --i18n-warnings` when doing translation work, as it will give you warnings on what strings are missing.
+Run `hugo server --printI18nWarnings` when doing translation work, as it will give you warnings on what strings are missing.
 {{% /alert %}}
