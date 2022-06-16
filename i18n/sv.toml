@@ -76,6 +76,6 @@ other = "Utveckla och Medverka"
 [community_contribute]
 other = "Om du vill engagera dig mer genom att medverka till {{ .Site.Title }}, gå med oss här:"
 [community_how_to]
-other = "Du kan ta reda på hur du medverkar till dessa dokument i våra"
+other = "Du kan ta reda på hur du medverkar till {{ .Site.Title }} i våra"
 [community_guideline]
 other = "Riktlinjer för att Medverka"
