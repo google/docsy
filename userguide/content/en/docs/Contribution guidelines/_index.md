@@ -110,7 +110,7 @@ locally with Docker, without installing any additional dependencies.
   1.  Build the Docker container:
 
       ```bash
-      docker build -t docsy/user-guide
+      docker build -t docsy/user-guide .
       ``` 
 
   1.  Run the container, mounting the repository as a shared volume:
