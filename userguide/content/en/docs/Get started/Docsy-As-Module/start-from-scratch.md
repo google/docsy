@@ -16,11 +16,12 @@ These instructions give you a minimum file structure for your site project only,
 At your command prompt, run the following:
 
 {{< tabpane >}}
+{{< tab header="CLI:" disabled=true />}}
 {{< tab header="Unix shell"  lang="Bash" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.3.0
 cat >> config.toml <<EOL
 [module]
 proxy = "direct"
@@ -35,7 +36,7 @@ hugo server
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.3.0
 (echo [module]^
 
 proxy = "direct"^
@@ -82,7 +83,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.3.0
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -92,6 +93,7 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml"  lang="toml" >}}
 [module]
   proxy = "direct"
