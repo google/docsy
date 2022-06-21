@@ -2,6 +2,8 @@
 	path = assets/vendor/bootstrap
 	url = https://github.com/twbs/bootstrap.git
 	branch = v4-dev
+	shallow = true
 [submodule "assets/vendor/Font-Awesome"]
 	path = assets/vendor/Font-Awesome
 	url = https://github.com/FortAwesome/Font-Awesome.git
+	shallow = true
