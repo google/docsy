@@ -11,7 +11,7 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 - Docsy no longer uses git submodules for Bootstrap and FontAwesome. If your
   project uses [Hugo Modules][], then this change doesn't impact you.
 
-  For projects with [other Docsy setups][], uses the NPM packages of Bootstrap
+  For projects with [other Docsy setups][], use the NPM packages of Bootstrap
   and FontAwesome. Migrate your site by following these steps (execute commands
   from your project's root directory):
 
