@@ -10,17 +10,7 @@ There are multiple possible options for deploying a Hugo site, including Netlify
 
 Depending on your deployment choice you may want to serve your site locally during development to preview content changes. To serve your site locally:
 
-1. Ensure you have an up to date local copy of your site files cloned from your repo. Don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site.
-
-    ```
-    git clone --recurse-submodules --depth 1 https://github.com/my/example.git
-    ```
-
-    {{% alert title="Note" color="primary" %}}
-If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
-
-    git submodule update --init
-    {{% /alert %}}
+1. Ensure you have an up to date local copy of your site files cloned from your repo.
 
 1. Ensure you have the tools described in [Prerequisites and installation](/docs/get-started/docsy-as-module/installation-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
 1. Run the `hugo server` command in your site root. By default your site will be available at <http://localhost:1313>.
