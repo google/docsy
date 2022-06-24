@@ -1,9 +1,7 @@
 ---
-title: "Previews and Deployment"
-linkTitle: "Previews and Deployment"
+title: Previews and Deployment
 weight: 7
-description: >
-  Deploying your Docsy site.
+description: Deploying your Docsy site.
 ---
 
 There are multiple possible options for deploying a Hugo site, including Netlify, Firebase Hosting, Bitbucket with Aerobatic, and more; you can read about them all in [Hosting and Deployment](https://gohugo.io/hosting-and-deployment/). Hugo also makes it easy to deploy your site locally for quick previews of your content.
@@ -21,11 +19,11 @@ Depending on your deployment choice you may want to serve your site locally duri
     {{% alert title="Note" color="primary" %}}
 If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
 
-    git submodule update --init --recursive
+    git submodule update --init
     {{% /alert %}}
 
 1. Ensure you have the tools described in [Prerequisites and installation](/docs/get-started/docsy-as-module/installation-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
-1. Run the `hugo server` command in your site root. By default your site will be available at http://localhost:1313/.
+1. Run the `hugo server` command in your site root. By default your site will be available at <http://localhost:1313>.
 
 Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site. If you have more than one local git branch, when you switch between git branches the local website reflects the files in the current branch.
 
