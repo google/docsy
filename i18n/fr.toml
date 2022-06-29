@@ -12,7 +12,7 @@ other = "Suivant"
 other = "Lire plus"
 
 [ui_search]
-other = "Rechercher dans ce site…"
+other = "Rechercher"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
