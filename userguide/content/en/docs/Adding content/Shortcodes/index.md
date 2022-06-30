@@ -288,6 +288,21 @@ description: Reference for the Pet Store API
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
 
+### redoc
+
+The `redoc` shortcode uses the open-source [Redoc](https://github.com/Redocly/redoc) tool to render reference API documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content), but you can use a URL as well, for example:
+
+```yaml
+---
+title: "Pet Store API"
+type: docs
+weight: 1
+description: Reference for the Pet Store API
+---
+
+{{</* redoc "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v2.0/yaml/petstore.yaml" */>}}
+```
+
 ### iframe
 
 With this shortcode you can embed external content into a Docsy page as an inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
