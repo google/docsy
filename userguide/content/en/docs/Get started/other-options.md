@@ -1,9 +1,8 @@
 ---
-title: "Other setup options"
-linkTitle: "Other setup options"
+title: Other setup options
 date: 2021-12-08T09:22:27+01:00
 weight: 2
-description: >
+description:
   Create a new Docsy site with Docsy as a Git submodule or cloned theme
 ---
 
@@ -15,9 +14,9 @@ This guide provides instructions for both these options, along with common prere
 
 ## Prerequisites and installation
 
-### Install Hugo 
+### Install Hugo
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
+You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
 
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
@@ -30,8 +29,9 @@ If you've already installed Hugo, check your version:
 ```
 hugo version
 ```
+
 If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
-    
+
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
@@ -48,7 +48,7 @@ If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need
 
 7.  Install Hugo:
 
-        sudo install hugo /usr/bin    
+        sudo install hugo /usr/bin
 
 #### On macOS
 
@@ -81,42 +81,64 @@ npm install -D postcss
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
 
-## Other option 1: Use the theme as a submodule
+## Option 1: Docsy as a Git submodule
 
-To create a new Hugo site project and then add the Docsy theme as a submodule, run the following commands from your project's root directory.
+To create a **new site** and add the Docsy theme as a Git submodule, run the
+following commands:
 
-```shell
-hugo new site myproject
-cd myproject
-git init
-git submodule add https://github.com/google/docsy.git themes/docsy
+ 1. Create the site:
+
+    ```shell
+    hugo new site myproject
+    cd myproject
+    git init
+    ```
+
+ 2. Add Docsy as a theme via a Git submodule:
+
+    ```shell
+    git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
+    echo 'theme = "docsy"' >> config.toml
+    ```
+
+ 3. Install postCSS as [instructed earlier](install-postcss).
+
+ 4. Get Docsy dependencies:
+
+    ```shell
+    (cd themes/docsy && npm install)
+    ```
+
+ 5. Build or serve your new site using the usual Hugo commands, for example:
+
+    ```shell
+    hugo serve
+    ```
+
+To add the Docsy theme to an **existing site**, run the following commands from your
+project's root directory:
+
+```sh
+git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
 echo 'theme = "docsy"' >> config.toml
-git submodule update --init --recursive
+(cd themes/docsy && npm install)
 ```
 
-To add the Docsy theme to an existing site, run the following commands from your project's root directory:
+## Option 2: Clone the Docsy theme
 
-```
-git submodule add https://github.com/google/docsy.git themes/docsy
-echo 'theme = "docsy"' >> config.toml
-git submodule update --init --recursive
-```
+If you don't want to use a submodules (for example, if you want to customize and
+maintain your own copy of the theme directly, or your deployment choice requires
+you to include a copy of the theme in your repository), you can clone the theme
+into your project's `themes` subdirectory.
 
-## Other option 2: Clone the Docsy theme
+To clone Docsy into your project's `theme` folder, run the following commands
+from your project's root directory:
 
-If you don't want to use a submodules (for example, if you want to customize and maintain your  own copy of the theme directly, or your deployment choice requires you to include a copy of the theme in your repository), you can clone the theme into your project's `themes` subdirectory.
-
-To clone Docsy into your project's `theme` folder, run the following commands from your project's root directory:
-
-```
+```sh
 cd themes
 git clone https://github.com/google/docsy
-```
-
-If you want to build and/or serve your site [locally](/docs/deployment/#serving-your-site-locally), you also need to get local copies of the theme’s own submodules:
-
-```
-git submodule update --init --recursive
+cd docsy
+npm install
 ```
 
 For more information, see [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the [Hugo](https://gohugo.io) site.
@@ -129,8 +151,8 @@ To build and preview your site locally:
 cd myproject
 hugo server
 ```
-    
-By default, your site will be available at http://localhost:1313/. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
+
+By default, your site will be available at <http://localhost:1313>. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 
 You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you’re missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/get-started/basic-configuration/) - we recommend copying the example site configuration even if you’re creating a site from scratch as it provides defaults for many required configuration parameters.
 

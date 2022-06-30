@@ -12,7 +12,7 @@ other = "Suivant"
 other = "Lire plus"
 
 [ui_search]
-other = "Rechercher dans ce site…"
+other = "Rechercher"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
@@ -35,6 +35,8 @@ other = "Créé"
 other = "Dernière modification"
 [post_edit_this]
 other = "Modifier cette page"
+[post_view_this]
+other = "Afficher la source de la page"
 [post_create_child_page]
 other = "Créer une page dans cette section"
 [post_create_issue]

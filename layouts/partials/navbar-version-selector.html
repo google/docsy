@@ -2,7 +2,11 @@
 	{{ .Site.Params.version_menu }}
 </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+	{{ $path := "" }}
+	{{ if .Site.Params.version_menu_pagelinks }}
+		{{ $path = .Page.RelPermalink }}
+	{{ end }}
 	{{ range .Site.Params.versions }}
-	<a class="dropdown-item" href="{{ .url }}">{{ .version }}</a>
+	<a class="dropdown-item" href="{{ .url }}{{ $path }}">{{ .version }}</a>
 	{{ end }}
 </div>
