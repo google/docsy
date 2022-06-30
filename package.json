@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.3.0",
+  "version": "0.4.0-dev",
   "repository": "github:google/docsy",
   "scripts": {
     "_cd:docs": "cd userguide &&",
@@ -10,13 +10,14 @@
     "cd:docs": "npm run _cd:docs -- npm run",
     "docs-install": "npm run _cd:docs -- npm install",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
-    "serve": "npm run cd:docs serve"
+    "serve": "npm run cd:docs serve",
+    "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "bootstrap": "^4.6.1"
   },
   "devDependencies": {
-    "hugo-extended": "0.100.2"
+    "hugo-extended": "0.101.0"
   }
 }
