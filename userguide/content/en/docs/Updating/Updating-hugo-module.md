@@ -24,10 +24,10 @@ Hugo automatically pulls in the latest theme version. That's it, your update is 
 
 
 {{% alert title="Tip" %}}
-If you want to set your module to a certain version inside the docsy theme repo, simply specific the name of the tag representing this version (here: _v0.3.0_) when updating your theme:
+If you want to set your module to a certain version inside the docsy theme repo, simply specific the name of the tag representing this version (here: _v0.4.0_) when updating your theme:
 
 ```bash
-hugo mod get -u github.com/google/docsy@v0.3.0
+hugo mod get -u github.com/google/docsy@v0.4.0
 ```
 
 Instead of a version tag, you can also specify a commit hash inside the repo (here: _c7b9901e_) when updating your theme:
