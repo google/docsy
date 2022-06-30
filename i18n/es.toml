@@ -1,5 +1,3 @@
-
-
 # UI strings. Botones y similares.
 
 [ui_pager_prev]
@@ -42,13 +40,13 @@ other = "Editar esta página"
 [post_view_this]
 other = "Ver código de la página"
 [post_create_child_page]
-other = "Create child page"
+other = "Crear página nueva"
 [post_create_issue]
 other = "Notificar una incidencia con la documentanción"
 [post_create_project_issue]
 other = "Notificar una incidencia en un proyecto"
 [post_posts_in]
-other = "Añadir entrada"
+other = "Publicaciones en"
 [post_reading_time]
 other = "minutos de lectura"
 [post_less_than_a_minute_read]
@@ -76,8 +74,8 @@ other = "¿Usas o quieres usar {{ .Site.Title }}? Encuentra más información aq
 [community_develop]
 other = "Desarrollar y Contribuir"
 [community_contribute]
-other = "Si desea involucrarte más contribuyendo a {{ .Site.Title }}, únete a nosotros aquí:"
+other = "Si deseas involucrarte más contribuyendo a {{ .Site.Title }}, únete a nosotros aquí:"
 [community_how_to]
-other = "Puedes averiguar cómo contribuir a estos documentos en nuestras"
+other = "Puedes averiguar cómo contribuir a {{ .Site.Title }} en nuestras"
 [community_guideline]
 other = "Guias de Contribución"

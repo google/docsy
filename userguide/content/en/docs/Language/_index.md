@@ -12,7 +12,9 @@ If you'd like to provide site content in multiple languages, the Docsy theme and
 
 To add content in multiple languages, you first need to define the available languages in a `languages` section in your site configuration. Each language can have its own language-specific configuration. For example, the Docsy Example Site config specifies that it provides content in English and Norwegian, and that the language version visitors will see by default is English:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 contentDir = "content/en"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
@@ -31,7 +33,50 @@ languageName ="Norsk"
 contentDir = "content/no"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+contentDir: content/en
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+…
+languages:
+  en:
+    title: Docsy
+    description: Docsy does docs
+    languageName: English
+    weight: 1 # used for sorting
+  'no':
+    title: Docsy
+    description: Docsy er operativsystem for skyen
+    languageName: Norsk
+    contentDir: content/no
+    time_format_default: 02.01.2006
+    time_format_blog: 02.01.2006
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "contentDir": "content/en",
+  "defaultContentLanguage": "en",
+  "defaultContentLanguageInSubdir": false,
+  "languages": {
+    "en": {
+      "title": "Docsy",
+      "description": "Docsy does docs",
+      "languageName": "English",
+      "weight": 1
+    },
+    "no": {
+      "title": "Docsy",
+      "description": "Docsy er operativsystem for skyen",
+      "languageName": "Norsk",
+      "contentDir": "content/no",
+      "time_format_default": "02.01.2006",
+      "time_format_blog": "02.01.2006"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 Any setting not defined in a `[languages]` block will fall back to the global value for that setting: so, for example, the content directory used for the site above will be `content/en` unless the user selects the Norwegian language option.
 
@@ -58,7 +103,5 @@ All UI strings (text for buttons etc.) are bundled inside `/i18n` in the theme, 
 If your chosen language isn't currently in the theme and you create your own `.toml` file for all the common UI strings (for example, if you translate the UI text into Japanese and create a copy of `en.toml` called `jp.toml`), we recommend you do this **in the theme** rather than in your own project, so it can be reused by others. Any additional strings or overridden values can be added to your project's `/i18n` folder.
 
 {{% alert title="Hugo Tip" %}}
-Run `hugo server --i18n-warnings` when doing translation work, as it will give you warnings on what strings are missing.
+Run `hugo server --printI18nWarnings` when doing translation work, as it will give you warnings on what strings are missing.
 {{% /alert %}}
-
-

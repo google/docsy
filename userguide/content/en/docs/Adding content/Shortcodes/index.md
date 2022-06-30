@@ -55,10 +55,10 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| title | | The main display title for the block. | 
+| title | | The main display title for the block. |
 | image_anchor | |
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 | byline | Byline text on featured image. |
 
 
@@ -76,7 +76,7 @@ The **blocks/lead** block shortcode is a simple lead/title block with centred te
 
 ```go-html-template
 {{%/* blocks/lead color="dark" */%}}
-TechOS is the OS of the future. 
+TechOS is the OS of the future.
 
 Runs on **bare metal** in the **cloud**!
 {{%/* /blocks/lead */%}}
@@ -85,7 +85,7 @@ Runs on **bare metal** in the **cloud**!
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 
 ### blocks/section
 
@@ -112,7 +112,7 @@ For announcement of latest features etc.
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | height | | See above.
-| color | | See above. 
+| color | | See above.
 | type  | | Specify "section" if you want a general container,  omit this parameter if you want this section to contain a horizontal row of features.
 
 ### blocks/feature
@@ -145,11 +145,11 @@ The **blocks/link-down** shortcode creates a navigation link down to the next se
 
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
-| color | info | See above. 
+| color | info | See above.
 
 ## Shortcode helpers
 
-###  alert
+### alert
 
 The **alert** shortcode creates an alert block that can be used to display notices or warnings.
 
@@ -170,7 +170,7 @@ This is a warning.
 | ---------------- |------------| ------------|
 | color | primary | One of the theme colors, eg `primary`, `info`, `warning` etc.
 
-###  pageinfo
+### pageinfo
 
 The **pageinfo** shortcode creates a text box that you can use to add banner information for a page: for example, letting users know that the page contains placeholder content, that the content is deprecated, or that it documents a beta feature.
 
@@ -192,7 +192,7 @@ This is placeholder content
 | color | primary | One of the theme colors, eg `primary`, `info`, `warning` etc.
 
 
-###  imgproc
+### imgproc
 
 The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a set of processing instructions.
 
@@ -209,14 +209,38 @@ Norway Spruce Picea abies shoot with foliage buds.
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
 
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+[[resources]]
+src = "**spruce*.jpg"
 
-```yaml
+  [resources.params]
+  byline = "Photo: Bjørn Erik Pedersen / CC-BY-SA"
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
 resources:
 - src: "**spruce*.jpg"
   params:
     byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
-```
-
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "resources": [
+    {
+      "src": "**spruce*.jpg",
+      "params": {
+        "byline": "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+      }
+    }
+  ]
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 | Parameter        | Description  |
 | ----------------: |------------|
@@ -226,9 +250,21 @@ resources:
 
 ### swaggerui
 
-The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
-```yaml
+{{< tabpane persistLang=false >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Pet Store API"
+type = "swagger"
+weight = 1
+description = "Reference for the Pet Store API"
++++
+
+{{</* swaggerui src="/openapi/petstore.yaml" */>}}
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
 ---
 title: "Pet Store API"
 type: swagger
@@ -237,7 +273,18 @@ description: Reference for the Pet Store API
 ---
 
 {{</* swaggerui src="/openapi/petstore.yaml" */>}}
-```
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Pet Store API",
+  "type": "swagger",
+  "weight": 1,
+  "description": "Reference for the Pet Store API"
+}
+
+{{</* swaggerui src="/openapi/petstore.yaml" */>}}
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
 
@@ -331,8 +378,7 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
 
 ```go-html-template
 {{</* tabpane code=false */>}}
-  {{</* tab header="**Languages**:" disabled=true */>}}
-  {{</* /tab */>}}
+  {{%/* tab header="**Languages**:" disabled=true /*/%}}
   {{%/* tab header="English" lang="en" */%}}
   ![Flag United Kingdom](flags/uk.png)
   Welcome!
@@ -351,8 +397,7 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
 This code translates to the tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
 
 {{< tabpane code=false >}}
-  {{% tab header="**Languages**:" disabled=true %}}
-  {{% /tab %}}
+  {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
   ![Flag United Kingdom](flags/uk.png)
   **Welcome!**
@@ -433,7 +478,7 @@ Imagine all the people living life in peace…
 
 Imagine no possessions, I wonder if you can<br/>
 No need for greed or hunger - a brotherhood of man<br/>
-Imagine all the people sharing all the world… 
+Imagine all the people sharing all the world…
 
 You may say I'm a dreamer, but I'm not the only one<br/>
 I hope someday you'll join us and the world will live as one
@@ -534,7 +579,7 @@ contents:
 1.  Download the installation files.
 
 1.  Run the installation script
-    
+
     `sudo sh install.sh`
 
 1.  Test that your installation was successfully completed.
@@ -590,11 +635,11 @@ into the document. The rendered text looks like this:
 
 To create a new pipeline, follow the next steps:
 
-1.  Create a configuration file `config.yaml`:
+1. Create a configuration file `config.yaml`:
 
     {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
 
-1.  Apply the file to your cluster `kubectl apply config.yaml`
+1. Apply the file to your cluster `kubectl apply config.yaml`
 
 ---
 

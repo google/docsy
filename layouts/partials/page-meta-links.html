@@ -40,7 +40,7 @@
   <a href="{{ $viewURL }}" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa fa-file-alt fa-fw"></i> {{ T "post_view_this" }}</a>
   <a href="{{ $editURL }}" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> {{ T "post_edit_this" }}</a>
   <a href="{{ $newPageURL }}" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa fa-edit fa-fw"></i> {{ T "post_create_child_page" }}</a>
-  <a href="{{ $issuesURL }}" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fab fa-github fa-fw"></i> {{ T "post_create_issue" }}</a>
+  <a href="{{ $issuesURL }}" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> {{ T "post_create_issue" }}</a>
   {{ with $gh_project_repo -}}
     {{ $project_issueURL := printf "%s/issues/new" . -}}
     <a href="{{ $project_issueURL }}" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fas fa-tasks fa-fw"></i> {{ T "post_create_project_issue" }}</a>

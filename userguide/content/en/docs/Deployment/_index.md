@@ -1,9 +1,7 @@
 ---
-title: "Previews and Deployment"
-linkTitle: "Previews and Deployment"
+title: Previews and Deployment
 weight: 7
-description: >
-  Deploying your Docsy site.
+description: Deploying your Docsy site.
 ---
 
 There are multiple possible options for deploying a Hugo site, including Netlify, Firebase Hosting, Bitbucket with Aerobatic, and more; you can read about them all in [Hosting and Deployment](https://gohugo.io/hosting-and-deployment/). Hugo also makes it easy to deploy your site locally for quick previews of your content.
@@ -12,20 +10,10 @@ There are multiple possible options for deploying a Hugo site, including Netlify
 
 Depending on your deployment choice you may want to serve your site locally during development to preview content changes. To serve your site locally:
 
-1.  Ensure you have an up to date local copy of your site files cloned from your repo. Don't forget to use `--recurse-submodules` or you won't pull down some of the code you need to generate a working site.
+1. Ensure you have an up to date local copy of your site files cloned from your repo.
 
-    ```
-    git clone --recurse-submodules --depth 1 https://github.com/my/example.git
-    ```
-   
-    {{% alert title="Note" color="primary" %}}
-If you've just added the theme as a submodule in a local version of your site and haven't committed it to a repo yet,  you must get local copies of the theme's own submodules before serving your site.
-    
-    git submodule update --init --recursive
-    {{% /alert %}}
-
-1.  Ensure you have the tools described in [Prerequisites and installation](/docs/get-started/docsy-as-module/installation-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
-1.  Run the `hugo server` command in your site root. By default your site will be available at http://localhost:1313/.
+1. Ensure you have the tools described in [Prerequisites and installation](/docs/get-started/docsy-as-module/installation-prerequisites) installed on your local machine, including `postcss-cli` (you'll need it to generate the site resources the first time you run the server).
+1. Run the `hugo server` command in your site root. By default your site will be available at <http://localhost:1313>.
 
 Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site. If you have more than one local git branch, when you switch between git branches the local website reflects the files in the current branch.
 
@@ -41,7 +29,6 @@ The simplest way to set this is by using the `-e` flag when specifying or runnin
 hugo -e development
 ```
 
-
 ## Deployment with Netlify
 
 We recommend using [Netlify](https://www.netlify.com/) as a particularly simple way to serve your site from your Git provider (GitHub, GitLab, or BitBucket), with [continuous deployment](https://www.netlify.com/docs/continuous-deployment/), previews of the generated site when you or your users create pull requests against the doc repo, and more. Netlify is free to use for Open Source projects, with premium tiers if you require greater support.
@@ -54,11 +41,11 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
 1. Click your chosen Git provider, then choose your site repo from your list of repos.
 1. In the **Deploy settings** page:
    1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules. If you don't want your site to be indexed by search engines, you can add an environment flag to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
-   1. Click **Show advanced**. 
+   1. Click **Show advanced**.
    1. In the **Advanced build settings** section, click **New variable**.
-   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.73` or later as its **Value**. 
+   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.73` or later as its **Value**.
    1. In the **Advanced build settings** section, click **New variable** again.
-   1. Specify `GO_VERSION` as the **Key** for the new variable, and `1.18` or later as its **Value**. 
+   1. Specify `GO_VERSION` as the **Key** for the new variable, and `1.18` or later as its **Value**.
 1. Click **Deploy site**.
 
 {{% alert title="Note" color="primary" %}}
@@ -73,6 +60,7 @@ For example, if you want to use a version of `postcss-cli` later than version 8.
     "postcss": "^8.0.0"
   }
 ```
+
 {{% /alert %}}
 
 Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
@@ -91,19 +79,42 @@ There are several options for publishing your web site using [Amazon Web Service
    AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
    AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
    Default region name [None]: eu-central-1
-   Default output format [None]: 
+   Default output format [None]:
    ```
 
 1. Check the proper configuration of your AWS CLI by issuing the command `aws s3 ls`, this should output a list of your S3 bucket(s).
-1. Inside your `config.toml`, add a `[deployment]` section like this one:
 
-   ```
-   [deployment] 
-   [[deployment.targets]]
-   name = "aws"
-   URL = "s3://www.your-domain.tld"
-   cloudFrontDistributionID = "E9RZ8T1EXAMPLEID"
-   ```
+1. Inside your `config.toml`/`config.yaml`/`config.json`, add a `[deployment]` section like this one:
+
+    {{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+[deployment]
+[[deployment.targets]]
+name = "aws"
+URL = "s3://www.your-domain.tld"
+cloudFrontDistributionID = "E9RZ8T1EXAMPLEID"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+deployment:
+  targets:
+    - name: aws
+      URL: 's3://www.your-domain.tld'
+      cloudFrontDistributionID: E9RZ8T1EXAMPLEID
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "deployment": {
+    "targets": [
+      {
+        "name": "aws",
+        "URL": "s3://www.your-domain.tld",
+        "cloudFrontDistributionID": "E9RZ8T1EXAMPLEID"
+      }
+    ]
+  }
+}{{< /tab >}}
+    {{< /tabpane >}}
 
 1. Run the command `hugo --gc --minify` to render the site's assets into the `public/` directory of your Hugo build environment.
 1. Use Hugo's built-in `deploy` command to deploy the site to S3:
@@ -119,14 +130,13 @@ There are several options for publishing your web site using [Amazon Web Service
 
    As you can see, issuing the `hugo deploy` command automatically [invalidates](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) your CloudFront CDN cache.
 
-1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy`command! 
+1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy`command!
 
 For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
 
 {{% alert title="Automated deployment with GitHub actions" color="primary" %}}
 If the source of your site lives in a GitHub repository, you can use [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
 {{% /alert %}}
-
 
 {{% alert title="Handling aliases" color="primary" %}}
 If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.

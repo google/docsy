@@ -7,7 +7,7 @@ description: >
   Create a new Hugo site from scratch with Docsy as a Hugo Module
 ---
 
-The simplest approach to creating a Docsy site is [copying our example site](/docs/get-started/docsy-as-module/example-site-as-template/). However, if you're an experienced Hugo user or the site structure of our example site doesn't meet your needs, you may prefer to create a new site from scratch. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
+The simplest approach to creating a Docsy site is [copying our example site](/docs/get-started/docsy-as-module/example-site-as-template/). However, if you're an experienced Hugo user or the site structure of our example site doesn't meet your needs, you may prefer to create a new site from scratch. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure.
 
 These instructions give you a minimum file structure for your site project only, so that you build and extend your actual site step by step. The first step is adding the Docsy theme as a [Hugo Module](https://gohugo.io/hugo-modules/) to your site. If needed, you can easily [update](/docs/updating/) the module to the latest revision from the Docsy GitHub repo.
 
@@ -16,11 +16,12 @@ These instructions give you a minimum file structure for your site project only,
 At your command prompt, run the following:
 
 {{< tabpane >}}
+{{< tab header="CLI:" disabled=true />}}
 {{< tab header="Unix shell"  lang="Bash" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.4.0
 cat >> config.toml <<EOL
 [module]
 proxy = "direct"
@@ -35,7 +36,7 @@ hugo server
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.4.0
 (echo [module]^
 
 proxy = "direct"^
@@ -82,7 +83,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.4.0
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -92,6 +93,7 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml"  lang="toml" >}}
 [module]
   proxy = "direct"
