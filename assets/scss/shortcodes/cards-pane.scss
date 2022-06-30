@@ -1,8 +1,8 @@
 .card-deck {
-	max-width: 83%;
+	@extend .td-max-width-on-larger-screens;
 }
 .card {
-	max-width: 80%;
+	@extend .td-max-width-on-larger-screens;
 	.highlight {
 		border: none;
 	}
