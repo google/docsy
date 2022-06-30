@@ -40,7 +40,7 @@ other = "Editar esta página"
 [post_view_this]
 other = "Ver código de la página"
 [post_create_child_page]
-other = "Create child page"
+other = "Crear página nueva"
 [post_create_issue]
 other = "Notificar una incidencia con la documentanción"
 [post_create_project_issue]
