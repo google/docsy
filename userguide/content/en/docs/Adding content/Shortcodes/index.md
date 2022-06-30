@@ -662,3 +662,17 @@ starting with `/`. The root directory is the `/content` folder.
 | code | false | Boolean value. If `true` the contents is treated as code|
 | lang | plain text | Programming language |
 
+## Conditional text
+
+The `conditional-text` shortcode allows you to show or hide parts of your content depending on the value of the `buildCondition` parameter set in your configuration file. This can be useful if you are generating different builds from the same source, for example, using a different product name. This shortcode helps you handle the minor differences between these builds.
+
+```text
+{{%/* conditional-text include-if="foo" */%}}
+This text appears in the output only if `buildCondition = "foo" is set in your config file`.
+{{%/* /conditional-text */%}}
+{{%/* conditional-text exclude-if="bar" */%}}
+This text does not appear in the output if `buildCondition = "bar" is set in your config file`.
+{{%/* /conditional-text */%}}
+```
+
+If you are using this shortcode, note that when evaluating the conditions, substring matches are matches as well. That means, if you set `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!
