@@ -153,14 +153,11 @@ nav.foldable-nav {
     }
 
     ul.foldable {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        display: none;
     }
 
     input:checked ~ ul.foldable {
-        max-height: 100000vmax;
-        transition: max-height 1s ease-in-out;
+        display: block;
     }
 
     input[type=checkbox] { display: none; }
