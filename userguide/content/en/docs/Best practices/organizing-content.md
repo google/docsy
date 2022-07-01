@@ -29,7 +29,7 @@ You may also want to create some tasks/how-tos for your project's features. Feel
 site or even just the docs section instead if you like this simpler structure better. 
 
 {{% alert title="Tip" %}}
-If you want to copy this guide, be aware that its [source files](https://github.com/google/docsy/tree/main/userguide) are *inside* the Docsy theme repo, and so it doesn't have its own `themes/` directory: instead, we run `hugo server --themesDir ../..` to use Docsy from its parent directory. You may want to either copy the site and [add a `themes/` directory with Docsy](/docs/get-started/other-options/#other-option-2-clone-the-docsy-theme), or just copy the `docs/` folder into your existing site's content root.
+If you want to copy this guide, be aware that its [source files](https://github.com/google/docsy/tree/main/userguide) are *inside* the Docsy theme repo, and so it doesn't have its own `themes/` directory: instead, we run `hugo server --themesDir ../..` to use Docsy from its parent directory. You may want to either copy the site and [add a `themes/` directory with Docsy](/docs/get-started/other-options/#option-2-clone-the-docsy-theme), or just copy the `docs/` folder into your existing site's content root.
 {{% /alert %}}
 
 [Learn more about how Hugo and Docsy use folders and other files to organize your site](/docs/adding-content/content/#organizing-your-documentation).

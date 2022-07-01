@@ -131,7 +131,7 @@ following commands:
     echo 'theme = "docsy"' >> config.toml
     ```
 
- 3. Install postCSS as [instructed earlier](install-postcss).
+ 3. Install postCSS as [instructed earlier](#install-postcss).
 
  4. Get Docsy dependencies:
 
