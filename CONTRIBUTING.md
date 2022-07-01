@@ -60,25 +60,11 @@ repo.
 7.  Push the new tags to the main repo (which is named `upstream` in my setup):
 
     ```console
-    $ git push upstream $REL
+    $ git push upstream $REL && git push upstream dependencies/$REL
     ...
     * [new tag]         v0.X.Y -> v0.X.Y
-    $ git push upstream dependencies/$REL
-    ...
     * [new tag]         dependencies/v0.X.Y -> dependencies/v0.X.Y
     ```
-
-    You can also push both up together provided you have no other new tags
-    defined. The following illustrates the latter, and does a dry run first:
-
-    ```console
-    $ git push --dry-run --tags upstream
-    To https://github.com/google/docsy.git
-    * [new tag]         dependencies/v0.X.Y -> dependencies/v0.X.Y
-    * [new tag]         v0.X.Y -> v0.X.Y
-    ```
-
-    If only the two new tags are listed, drop the dry-run flag to push the tags.
 
 8.  Use the GitHub [Draft a new release][] feature, filling in the fields as
     follows:
