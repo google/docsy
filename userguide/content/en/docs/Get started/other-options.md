@@ -64,9 +64,39 @@ npm install hugo-extended --save-dev
 
 See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for usage details.
 
+### Node: Get the latest LTS release
+
+Install or upgrade your version of Node to the active [LTS release][]. We
+recommend using **[nvm][]** to manage your Node installation (Linux command
+shown):
+
+```console
+$ nvm install --lts
+```
+
+[lts release]: https://nodejs.org/en/about/releases/
+[nvm]:
+  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+
+
 ### Install PostCSS
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
+{{% alert title="IMPORTANT: Check your Node version" color="warning" %}}
+
+  Docsy only supports the **active [LTS release][]** of Node. Check your version
+  of Node (using `node -v` for example) against the active LTS release and
+  upgrade, if necessary, by following the instructions in the previous step.
+
+  [lts release]: https://nodejs.org/en/about/releases/
+
+{{% /alert %}}
+
+To build or update your site's CSS resources, you also need
+[`PostCSS`](https://postcss.org/) to create the final assets. If you need to
+install it, you must have a recent version of [NodeJS](https://nodejs.org/en/)
+installed on your machine so you can use `npm`, the Node package manager. By
+default `npm` installs tools under the directory where you run [`npm
+install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
 
 ```
 npm install -D autoprefixer
@@ -101,7 +131,7 @@ following commands:
     echo 'theme = "docsy"' >> config.toml
     ```
 
- 3. Install postCSS as [instructed earlier](install-postcss).
+ 3. Install postCSS as [instructed earlier](#install-postcss).
 
  4. Get Docsy dependencies:
 
