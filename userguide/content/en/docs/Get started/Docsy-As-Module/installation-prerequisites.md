@@ -107,11 +107,9 @@ npm install -D postcss
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
 
 
-## Install/Upgrade Node LTS
+## Install/Upgrade Node.js
 
-> Nodejs will be referenced or named as just 'node' in these instructions.
-
-To ensure you can properly build your site beyond executing a ```hugo server```, you **will** need to ensure you have the latest version of Node/NodeJS LTS. **If you do not have the latest LTS version of nodjs, you may see the one of following errors:**
+To ensure you can properly build your site beyond executing `hugo server`, you must have the [latest long term support (LTS) Version](https://nodejs.org/en/about/releases/) of Node.js. If you do not have the latest LTS version, you may see the one of following errors:
 
 ```
 Error: Error building site: POSTCSS: failed to transform "scss/main.css" (text/css): Unexpected identifier
@@ -132,34 +130,33 @@ SyntaxError: Unexpected identifier
 
 ```
 
-### Install
+You can check your current Node.js version by running `node -v`.  If you need to install a new version, see the following instructions:
 
-> Ensure you have the [latest LTS Version](https://nodejs.org/en/about/releases/)
+* [Debian and Ubuntu based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
 
-[Debian and Ubuntu based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
+   tl;dr:
 
-tl;dr
+   ```
+   # Using Ubuntu
+   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   sudo apt-get install -y nodejs
 
-```
-# Using Ubuntu
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+   # Using Debian, as root
+   curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+   apt-get install -y nodejs
+   ```
 
-# Using Debian, as root
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-apt-get install -y nodejs
-```
+* [Enterprise Linux based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions-1)
 
-[Enterprise Linux based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions-1)
+   tl;dr:
+   
+   ```
+   # As root
+   curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
 
-tl;dr
-```
-# As root
-curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
-
-# No root privileges
-curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-```
+   # No root privileges
+   curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+   ```
 
 
 ## What's next?
