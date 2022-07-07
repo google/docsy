@@ -22,6 +22,19 @@ The following are basic prerequisites for using Docsy in your site:
   $ npm install --save-dev autoprefixer
   $ npm install --save-dev postcss-cli
   ```
+  
+  Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md),
+  you must also separately install `postcss`:
+
+  ```bash
+  npm install -D postcss
+  ```
+  
+Any additional prerequisites depend on the [installation option](https://www.docsy.dev/docs/get-started/#installation-options)
+you choose. We recommend using Docsy as a Hugo module, which requires that
+you have the `go` language installed in addition to Hugo and PostCSS.
+
+For complete prerequisites and instructions, see our [Get started guides](https://www.docsy.dev/docs/get-started/).
 
 ## Example and usage
 
@@ -39,11 +52,11 @@ To use the Docsy theme for your own site:
   this pre-configured basic site into your own Docsy themed site. [Learn
   more...](https://github.com/google/docsy-example)
 
-- Add Docsy to your existing Hugo site repo's `themes` directory. You can
-  either add Docsy as a Git submodule, or clone the Docsy theme into your
+- Add Docsy to your existing Hugo site. You can
+  add Docsy as a Hugo module, as a Git submodule, or clone the Docsy theme into your
   project.
 
-See the [Docsy Getting Started Guide](https://docsy.dev/docs/getting-started/)
+See the [Get started guides](https://www.docsy.dev/docs/get-started/)
 for details about the various usage options.
 
 ## Documentation
