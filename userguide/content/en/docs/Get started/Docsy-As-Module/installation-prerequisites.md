@@ -9,9 +9,9 @@ description: >
 
 This page describes the prerequisites for building a site that uses Docsy as a Hugo Module.
 
-## Install Hugo 
+## Install Hugo
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it. 
+You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
 
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
@@ -25,7 +25,7 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
-    
+
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
@@ -105,6 +105,59 @@ npm install -D postcss
 ```
 
 Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
+
+
+## Install/Upgrade Node.js
+
+To ensure you can properly build your site beyond executing `hugo server`, you must have the [latest long term support (LTS) Version](https://nodejs.org/en/about/releases/) of Node.js. If you do not have the latest LTS version, you may see the one of following errors:
+
+```
+Error: Error building site: POSTCSS: failed to transform "scss/main.css" (text/css): Unexpected identifier
+#OR
+/home/user/repos/my-new-site/themes/docsy/node_modules/hugo-extended/postinstall.js:1
+import install from "./lib/install.js";
+       ^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:723:23)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
+    at startup (internal/bootstrap/node.js:283:19)
+    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
+
+```
+
+You can check your current Node.js version by running `node -v`.  If you need to install a new version, see the following instructions:
+
+* [Debian and Ubuntu based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
+
+   tl;dr:
+
+   ```
+   # Using Ubuntu
+   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   sudo apt-get install -y nodejs
+
+   # Using Debian, as root
+   curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+   apt-get install -y nodejs
+   ```
+
+* [Enterprise Linux based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions-1)
+
+   tl;dr:
+   
+   ```
+   # As root
+   curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+
+   # No root privileges
+   curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+   ```
+
 
 ## What's next?
 
