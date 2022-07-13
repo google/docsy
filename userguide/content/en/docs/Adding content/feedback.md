@@ -35,25 +35,43 @@ Add the following site parameter to your project's configuration file:
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
+
 googleAnalytics = "PUT-YOUR-ANALYTICS-ID-HERE"
-{{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+
+{{< /tab >}} {{< tab header="config.yaml" lang="yaml" >}}
+
 googleAnalytics: PUT-YOUR-ANALYTICS-ID-HERE
-{{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+
+{{< /tab >}} {{< tab header="config.json" lang="json" >}}
 {
   "googleAnalytics": "PUT-YOUR-ANALYTICS-ID-HERE"
 }
+
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% alert title="Important" color="warning" %}}
+{{% alert title="Production-only feature!" color="warning" %}}
 
   Analytics are enabled _only_ for **production** builds (called "environments"
   in Hugo terminology). For the information Hugo environments and how to set
   them, see the following [discussion][].
 
   [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2?u=chalin
+
+{{% /alert %}}
+
+{{% alert title="Upgrade warning" color="warning" %}}
+
+  Earlier versions of Docsy recommended setting the
+  `services.googleAnalytics.id` config parameter to enable analytics. Upgrade
+  your configuration as outlined above. **Do not** set both this parameter _and_
+  the top-level `googleAnalytics`, otherwise this will likely result in
+  [unexpected behavior][]. For more details about how these two parameters are
+  related, see [Is `services.googleAnalytics.id` an alias for
+  `googleAnalytics`][alias-discussion].
+
+  [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469?u=chalin
+  [unexpected behavior]: https://github.com/google/docsy/issues/921
 
 {{% /alert %}}
 
