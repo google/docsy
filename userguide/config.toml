@@ -20,9 +20,6 @@ pygmentsUseClassic = false
 # See https://help.farbox.com/pygments.html
 pygmentsStyle = "tango"
 
-# FIXME: https://github.com/google/docsy/issues/1097
-googleAnalytics = "UA-00000000-0"
-
 # First one is picked as the Twitter card image if not set on page.
 #images = ["images/project-illustration.png"]
 
@@ -44,6 +41,10 @@ anchor = "smart"
     weight = 40
     url = "https://example.docsy.dev"
     post = '<sup><i class="pl-1 fas fa-external-link-alt fa-xs" aria-hidden="true"></i></sup>'
+
+[services]
+[services.googleAnalytics]
+id = "UA-00000000-0" # FIXME: https://github.com/google/docsy/issues/1097
 
 # Language configuration
 

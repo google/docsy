@@ -9,10 +9,10 @@ description: >-
 
 ## Adding Analytics
 
-The Docsy theme builds upon Hugo's support for [Google Analytics][], which Hugo
-provides through [internal templates][]. Once you set up analytics as described
-below, usage information for your site (such as page views) is sent to your
-Google Analytics account.
+The Docsy theme builds upon [Hugo's support for Google Analytics][hugo-ga],
+which Hugo provides through [internal templates][]. Once you set up analytics as
+described below, usage information for your site (such as page views) is sent to
+your [Google Analytics][] account.
 
 ### Prerequisites
 
@@ -30,48 +30,30 @@ started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
 
 ### Setup
 
-Add the following site parameter to your project's configuration file:
+Enable Google Analytics by adding your project's analytics ID to the site
+configuration file. For details, see [Configure Google Analytics][].
 
-{{< tabpane persistLang=false >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{% alert title="Warning" color="warning" %}}
+  <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-googleAnalytics = "PUT-YOUR-ANALYTICS-ID-HERE"
+  You can configure your project's analytics ID by setting either the top-level
+  `googleAnalytics` config parameter or `services.googleAnalytics.id`. **Do not
+  define both** otherwise this will likely result in [unexpected behavior][].
+  For details, see [Is `services.googleAnalytics.id` an alias for
+  `googleAnalytics`][alias-discussion].
 
-{{< /tab >}} {{< tab header="config.yaml" lang="yaml" >}}
+  [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
+  [unexpected behavior]: https://github.com/google/docsy/issues/921
 
-googleAnalytics: PUT-YOUR-ANALYTICS-ID-HERE
+{{% /alert %}}
 
-{{< /tab >}} {{< tab header="config.json" lang="json" >}}
-{
-  "googleAnalytics": "PUT-YOUR-ANALYTICS-ID-HERE"
-}
-
-{{< /tab >}}
-{{< /tabpane >}}
-
-{{% alert title="Production-only feature!" color="warning" %}}
+{{% alert title="Production-only feature!" color="primary" %}}
 
   Analytics are enabled _only_ for **production** builds (called "environments"
   in Hugo terminology). For the information Hugo environments and how to set
   them, see the following [discussion][].
 
-  [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2?u=chalin
-
-{{% /alert %}}
-
-{{% alert title="Upgrade warning" color="warning" %}}
-
-  Earlier versions of Docsy recommended setting the
-  `services.googleAnalytics.id` config parameter to enable analytics. Upgrade
-  your configuration as outlined above. **Do not** set both this parameter _and_
-  the top-level `googleAnalytics`, otherwise this will likely result in
-  [unexpected behavior][]. For more details about how these two parameters are
-  related, see [Is `services.googleAnalytics.id` an alias for
-  `googleAnalytics`][alias-discussion].
-
-  [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469?u=chalin
-  [unexpected behavior]: https://github.com/google/docsy/issues/921
+  [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
 
 {{% /alert %}}
 
@@ -315,6 +297,8 @@ Then the meta `description` tag on the rendered page is:
 
 You can add additional meta tags to your own copy of the `head-end.html` partial. See [Customizing templates]({{< ref "lookandfeel#customizing-templates" >}}) for more information.
 
+[Configure Google Analytics]: https://gohugo.io/templates/internal/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
-[internal templates]: https://gohugo.io/templates/internal/#google-analytics
+[hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
+[internal templates]: https://gohugo.io/templates/internal/
