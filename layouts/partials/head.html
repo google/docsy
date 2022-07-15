@@ -46,7 +46,8 @@
 
 {{/* To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled */ -}}
 {{ if hugo.IsProduction -}}
-  {{ if hasPrefix .Site.GoogleAnalytics "G-" -}}
+  {{ if (or (hasPrefix .Site.GoogleAnalytics "G-")
+            (in .Site.GoogleAnalytics ",")) -}}
     {{ template "_internal/google_analytics.html" . -}}
   {{ else -}}
     {{ template "_internal/google_analytics_async.html" . -}}

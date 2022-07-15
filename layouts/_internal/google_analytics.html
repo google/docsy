@@ -1,14 +1,25 @@
+{{/* Override of https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/google_analytics.html
+    At commit https://github.com/gohugoio/hugo/commit/ba16a14c6e884e309380610331aff78213f84751 */ -}}
 {{- $pc := .Site.Config.Privacy.GoogleAnalytics -}}
 {{- if not $pc.Disable }}{{ with .Site.GoogleAnalytics -}}
-{{ if hasPrefix . "G-"}}
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+{{ $ga_ids := split . "," -}}
+{{ if (or (hasPrefix . "G-") (gt (len $ga_ids) 1)) -}}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ index $ga_ids 0 }}"></script>
 <script>
 {{ template "__ga_js_set_doNotTrack" $ }}
 if (!doNotTrack) {
 	window.dataLayer = window.dataLayer || [];
 	function gtag(){dataLayer.push(arguments);}
 	gtag('js', new Date());
-	gtag('config', '{{ . }}', { 'anonymize_ip': {{- $pc.AnonymizeIP -}} });
+	{{ range $ga_ids }}
+	{{ with trim . " " -}}
+	gtag('config', '{{ . }}'
+	  {{- if and $pc.AnonymizeIP (hasPrefix . "UA-") -}}
+	  , { 'anonymize_ip': {{- $pc.AnonymizeIP -}} }
+	  {{- end -}}
+	);
+	{{- end }}
+	{{- end }}
 }
 </script>
 {{ else if hasPrefix . "UA-" }}
