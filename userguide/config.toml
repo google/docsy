@@ -40,7 +40,7 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
-    post = '<sup><i class="pl-1 fas fa-external-link-alt fa-xs" aria-hidden="true"></i></sup>'
+    post = '<sup><i class="pl-1 fa-solid fa-external-link-alt fa-xs" aria-hidden="true"></i></sup>'
 
 [services]
 [services.googleAnalytics]
@@ -150,38 +150,38 @@ enable = false
 [[params.links.user]]
   name ="GitHub Discussions"
   url = "https://github.com/google/docsy/discussions"
-  icon = "fab fa-github"
+  icon = "fa-brands fa-github"
   desc = "Discussion and help from your fellow users"
 [[params.links.user]]
   name = "User mailing list"
   url = "https://groups.google.com/forum/#!forum/docsy-users"
-  icon = "fa fa-envelope"
+  icon = "fa-solid fa-envelope"
   desc = "Sign up for Docsy announcements"
 [[params.links.user]]
   name ="Twitter"
   url = "https://twitter.com/docsydocs"
-  icon = "fab fa-twitter"
+  icon = "fa-brands fa-twitter"
   desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
   name = "Stack Overflow"
   url = "https://stackoverflow.com/questions/tagged/docsy"
-  icon = "fab fa-stack-overflow"
+  icon = "fa-brands fa-stack-overflow"
   desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
   name = "GitHub"
   url = "https://github.com/google/docsy"
-  icon = "fab fa-github"
+  icon = "fa-brands fa-github"
   desc = "Development takes place here!"
 # [[params.links.developer]]
   # name = "Slack"
   # url = "https://example.org/slack"
-  # icon = "fab fa-slack"
+  # icon = "fa-brands fa-slack"
   # desc = "Chat with other project developers"
 # [[params.links.developer]]
   # name = "Developer mailing list"
   # url = "https://example.org/mail"
-  # icon = "fa fa-envelope"
+  # icon = "fa-solid fa-envelope"
   # desc = "Discuss development issues around the project"
 
 [params.mermaid]
