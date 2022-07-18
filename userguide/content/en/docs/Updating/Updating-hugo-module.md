@@ -30,10 +30,10 @@ If you want to set your module to a certain version inside the docsy theme repo,
 hugo mod get -u github.com/google/docsy@v0.4.0
 ```
 
-Instead of a version tag, you can also specify a commit hash inside the repo (here: _c7b9901e_) when updating your theme:
+Instead of a version tag, you can also specify a commit hash inside the repo (here: _6c8a3afe_) when updating your theme:
 
 
 ```bash
-hugo mod get -u github.com/google/docsy@c7b9901e
+hugo mod get -u github.com/google/docsy@6c8a3afe
 ```
 {{% /alert %}}

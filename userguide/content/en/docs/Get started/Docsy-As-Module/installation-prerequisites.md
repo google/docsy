@@ -29,7 +29,7 @@ If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
-3.  Download the latest extended version (`hugo_extended_0.9X_Linux-64bit.tar.gz`).
+3.  Download the latest extended version (`hugo_extended_0.1XX_Linux-64bit.tar.gz`).
 4.  Create a new directory:
 
     ```bash
@@ -70,7 +70,7 @@ Hugo's commands for module management require that the Go programming language i
 
 ```bash
 $ go version
-go version go1.17.6 windows/amd64
+go version go1.18.4 windows/amd64
 ```
 
 Ensure that you are using version 1.12 or higher.
@@ -84,7 +84,7 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```bash
 git version
-git version 2.35.1.windows.1
+git version 2.37.1.windows.1
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.
@@ -149,7 +149,7 @@ You can check your current Node.js version by running `node -v`.  If you need to
 * [Enterprise Linux based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions-1)
 
    tl;dr:
-   
+
    ```
    # As root
    curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -

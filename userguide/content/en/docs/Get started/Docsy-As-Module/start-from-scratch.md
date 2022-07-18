@@ -122,7 +122,7 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="config.json"  lang="yaml" >}}
+{{< tab header="config.json"  lang="json" >}}
 {
   "module": {
     "proxy": "direct",
