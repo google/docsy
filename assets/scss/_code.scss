@@ -1,13 +1,14 @@
 // Code formatting.
 
 .td-content {
-	// Highlighted code.
-    .highlight {
+    // Highlighted code.
+    // .highlight is added to divs by chroma, .code-toolbar is added by prismjs
+    .highlight,.code-toolbar {
         @extend .card;
-	
+
         margin: 2rem 0;
         padding: 0;
-	    
+
         pre {
             margin: 0;
             padding: 1rem;
@@ -35,16 +36,29 @@
         word-wrap: normal;
         background-color: $gray-100;
         padding: $spacer;
-     
+
 
         > code {
-	    background-color: inherit !important;
-            padding: 0;
-            margin: 0;
-            font-size: 100%;
-            word-break: normal;
-            white-space: pre;
-            border: 0;
+          background-color: inherit !important;
+          padding: 0;
+          margin: 0;
+          font-size: 100%;
+          word-break: normal;
+          white-space: pre;
+          border: 0;
+
+          // Fixes operators having a different background colour in syntax highlighted code blocks
+          // when using prism.js. See https://github.com/PrismJS/prism/issues/3274
+          .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+              background: unset !important;
+          }
+        }
+    }
+
+    pre.command-line {
+        // Stop user selection of command line output lines
+        span.token.output {
+            user-select: none;
         }
     }
 

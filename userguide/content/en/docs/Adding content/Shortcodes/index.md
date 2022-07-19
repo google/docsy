@@ -576,6 +576,118 @@ File[] hiddenFiles = new File("directory_name")
 {{< /card-code >}}
 {{< /cardpane >}}
 
+## Command line
+
+Sometimes you need to included examples of command line (shell) input and output to demonstrate commands being executed.
+This can be achieved with the `shell` and `sql-shell` shortcodes.
+
+{{% alert title="Warning" color="warning" %}}
+These shortcodes require Prism syntax highlighting to be enabled.
+If Prism is not enabled you will get an error when you build/serve the site.
+See [Code highlighting with Prism]({{< relref "lookandfeel#code-highlighting-with-prism" >}}).
+
+Prism is not enabled in the Docsy documentation so we cannot provide examples of how the shortcodes look.
+{{% /alert %}}
+
+Both shortcodes provide the following features:
+
+* Command line input (with syntax highlighting).
+* Command line output that looks distinct from the input.
+* A configurable prompt for input lines.
+* Support for line continuation with a different prompt for continued lines.
+* User selection of only the input lines for easy copying.
+
+### shell
+
+The `shell` shortcode is designed for showing a linux type command line shell, e.g. `bash`.
+
+The shortcode takes the following **positional** arguments:
+
+| Parameter | Default   | Description                           |
+| ----------|-----------| --------------------------------------|
+| username  | user      | The username to appear in the prompt. |
+| hostname  | localhost | The hostname to appear in the prompt. |
+| language  | bash      | The language of the content (a valid and installed prism language name, see [Code highlighting with Prism]({{< relref "lookandfeel#code-highlighting-with-prism" >}})). |
+
+If no arguments are supplied then the prompt will just be `$` with no user or host.
+If only the user argument is supplied then the default hostname will prompt will be used, e.g. `[someuser@localhost] $`.
+
+If you want to display shell output then prefix each output line with `(out)`.
+It will then be displayed without a prompt.
+To display a blank line with no prompt then have a line with just `(out)` in it.
+
+If your shell command is very long then you can split it into multiple lines using the shell line continuation character `\` which must be the last character on the line.
+If this character is present then it will be rendered with a different prompt to indicate it is a continuation.
+Readers can then copy/paste the multi-line command into a shell and run it.
+
+{{< cardpane >}}
+  {{< card-code header="With Defaults" language="text" >}}
+{{</* shell */>}}
+date
+(out)Tue 14 Jun 10:41:40 BST 2022
+{{</* shell */>}}
+  {{< /card >}}
+  {{< card-code header="With explicit values" language="text">}}
+{{</* shell "david" "wopr" "bash"*/>}}
+echo Hello \
+Joshua
+(out)Hello Joshua
+id
+(out)uid=1000(david) gid=1000(david)
+{{</* shell */>}}
+  {{< /card >}}
+{{< /cardpane >}}
+
+In the above example, the first input line of each command will be displayed with a prompt of `[david@wopr] $`.
+Continuation lines will have a prompt of `>`.
+
+### sql-shell
+
+To demonstrate commands being run in a database SQL shell, (e.g. MySQL shell, Oracle sqlplus, etc.) you can use the `sql-shell` shortcode.
+This shortcode has only one **positional** argument:
+
+| Parameter  | Default     | Description                            |
+| ---------- | ----------- | -------------------------------------- |
+| prompt     | SQL>        | The prompt to display.                 |
+
+The Prism language used for syntax highlighting is `sql`.
+
+If you want to display shell output then prefix each output line with `(out)`.
+It will then be displayed without a prompt.
+
+If your sql statement is multi-line, prefix all lines except the first with `(con)` (for continuation).
+Continuation lines will be rendered with a continuation prompt (`->`).
+
+To display a blank line with no prompt then have a line with just `(out)` in it.
+
+```text
+{{</* sql-shell "mysql>" */>}}
+select database();
+(out)+---------------+
+(out)| database()    |
+(out)+---------------+
+(out)| classicmodels |
+(out)+---------------+
+(out)1 row in set (0.00 sec)
+(out)
+SELECT *
+(con)FROM `Order Subtotals`
+(con)LIMIT 5;
+(out)+---------+----------+
+(out)| OrderID | Subtotal |
+(out)+---------+----------+
+(out)|   10248 |      440 |
+(out)|   10249 |     1863 |
+(out)|   10250 |     1813 |
+(out)|   10251 |      671 |
+(out)|   10252 |     3730 |
+(out)+---------+----------+
+(out)5 rows in set (0.00 sec)
+{{</* sql-shell */>}}
+```
+
+In the above example, the first line of each SQL statement will have the prompt `mysql>` and subsequent continued lines will have the prompt `->`.
+
 ## Include external files
 
 Sometimes there's content that is relevant for several documents, or that is

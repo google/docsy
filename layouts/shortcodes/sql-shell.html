@@ -1,0 +1,41 @@
+<!--
+{{/*
+NOTE: Requires PrismJS to be enabled via prism_syntax_highlighting
+Short code to add SQL shell input/output
+Usage:
+sql-shell [prompt]
+
+Prefix lines with '(con)' and it will render them as output lines
+Prefix lines with '(out)' and it will render them as output lines
+If prompt is not supplied it defaults to 'SQL>'
+
+See https://prismjs.com/plugins/command-line/
+
+e.g.:
+{{< sql-shell >}}
+select sysdate from dual;
+(out)SYSDATE
+(out)---------
+(out)05-OCT-21
+{{< /sql-shell >}}
+
+*/}}
+-->
+{{ if not (.Site.Params.prism_syntax_highlighting) }}
+    {{ errorf "Error: Shortcode 'sql-shell' requires the PrismJS highlighter, it doesn't work with Chroma. For details, see https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-prism , %s" .Position -}}
+{{ end }}
+
+{{ $prompt := .Get 0 | default "SQL>" }}
+
+<div class="code-toolbar">
+  <pre
+    class="command-line language-sql"
+    data-prompt="{{ $prompt }}"
+    data-filter-output="(out)"
+    data-continuation-prompt="->"
+    data-filter-continuation="(con)">
+    {{- with (.Inner | default "" ) -}}
+      <code class="language-sql">{{- trim . " \n" -}}</code>
+    {{- end -}}
+  </pre>
+</div>
