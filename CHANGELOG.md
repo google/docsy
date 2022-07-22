@@ -4,6 +4,14 @@ Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
 For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
+## [0.5.0][] - next planned release (unpublished yet)
+
+For a full list of the changes to this release, see the [release notes][0.5.0].
+
+**Breaking changes**:
+
+- ...
+
 ## [0.4.0][]
 
 For a full list of the changes to this release, see the [release notes][0.4.0].
@@ -83,6 +91,7 @@ For a full list of the changes to this release, see the [release notes][0.X.Y].
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.4.0]: https://github.com/google/docsy/releases/v0.4.0
+[0.5.0]: https://github.com/google/docsy/releases/v0.5.0
 [0.X.Y]: #
 [22q2]: https://github.com/google/docsy/milestone/3
 [hugo modules]: https://gohugo.io/hugo-modules/

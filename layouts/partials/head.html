@@ -21,8 +21,7 @@
     {{ .Site.Title -}}
   {{ end -}}
 </title>
-{{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
-<meta name="description" content="{{ $desc }}">
+<meta name="description" content="{{ template "partials/page-description.html" . }}">
 {{ template "_internal/opengraph.html" . -}}
 {{ template "_internal/schema.html" . -}}
 {{ template "_internal/twitter_cards.html" . -}}
