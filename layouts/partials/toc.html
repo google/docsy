@@ -1,6 +1,10 @@
+{{ $tocLength := 200 }}
+{{ if .Site.Params.toc_length }}
+{{ $tocLength = .Site.Params.toc_length }}
+{{ end }}
 {{ if not .Params.notoc }}
 {{ with .TableOfContents }}
-{{ if ge (len .) 200 }}
+{{ if ge (len .) $tocLength }}
 <div class="td-toc">{{ . }}</div>
 {{ end }}
 {{ end }}
