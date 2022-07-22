@@ -1,5 +1,5 @@
 {{ $tocLength := 200 }}
-{{ if .Site.Params.toc_length }}
+{{ if ge .Site.Params.toc_length 0 }}
 {{ $tocLength = .Site.Params.toc_length }}
 {{ end }}
 {{ if not .Params.notoc }}
