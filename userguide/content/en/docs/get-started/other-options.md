@@ -238,6 +238,17 @@ You can use Docsy as an NPM module as follows.
     echo 'themesDir = "node_modules"' >> config.toml
     ```
 
+As an alternative to specifying a `themesDir`, on some platforms, you can
+instead create a symbolic link to the Docsy theme directory as follows (Linux
+commands shown, executed from the site root folder):
+
+```sh
+mkdir -p theme
+pushd theme
+ln -s ../node_modules/docsy
+popd
+```
+
 ## Preview your site
 
 To preview your site locally:
