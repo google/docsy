@@ -48,3 +48,11 @@ min = "0.73.0"
   [[module.mounts]]
     source = 'static'
     target = 'static'
+  # Mounts for projects using Docsy as an NPM package. The source path prefix
+  # "../.." moves out of themes/docsy so that Docsy can find its dependencies.
+  [[module.mounts]]
+    source = '../../node_modules/bootstrap'
+    target = 'assets/vendor/bootstrap'
+  [[module.mounts]]
+    source = '../../node_modules/@fortawesome/fontawesome-free'
+    target = 'assets/vendor/Font-Awesome'
