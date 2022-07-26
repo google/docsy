@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{ if .Parent.IsHome }}
+{{ if (and .Parent .Parent.IsHome) }}
 {{ $.Scratch.Set "blog-pages" (where .Site.RegularPages "Section" .Section) }}
 {{ else }}
 {{$.Scratch.Set "blog-pages" .Pages }}
