@@ -13,6 +13,9 @@
     "serve": "npm run cd:docs serve",
     "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
   },
+  "prettier": {
+    "proseWrap": "always"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "bootstrap": "^4.6.1"
