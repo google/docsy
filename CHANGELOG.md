@@ -8,9 +8,15 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 For a full list of the changes to this release, see the [release notes][0.5.0].
 
+**New**:
+
+- Projects can now install and use [Docsy as an NPM package][].
+
 **Breaking changes**:
 
 - ...
+
+[Docsy as an NPM package]: https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 
 ## [0.4.0][]
 
@@ -34,15 +40,13 @@ For a full list of the changes to this release, see the [release notes][0.4.0].
       ```console
       $ (cd themes/docsy && npm install)
       ```
-   4. (Optional) If your site project uses NPM, consider getting Docsy
-      dependencies via a `prepare` script, for example:
+   4. (Optional) If your site uses NPM, consider getting Docsy dependencies via
+      a [prepare][] script as follows:
       ```json
       {
         "name": "my-website",
         "scripts": {
-          "get:submodule": "git submodule update --init --depth 1",
-          "_prepare:docsy": "cd themes/docsy && npm install",
-          "prepare": "npm run get:submodule && npm run _prepare:docsy",
+          "prepare": "cd themes/docsy && npm install",
           "...": "..."
         },
         "...": "..."
@@ -50,8 +54,10 @@ For a full list of the changes to this release, see the [release notes][0.4.0].
       ```
    5. Proceed as usual to build or serve your site.
 
+
 [Hugo Modules]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other Docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
+[prepare]: https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
 
 ## [0.3.0][]
 
