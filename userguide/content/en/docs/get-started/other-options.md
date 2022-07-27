@@ -164,19 +164,19 @@ your project's root directory:
     git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
     ```
 
-1.  Add Docsy as a theme, for example:
+2.  Add Docsy as a theme, for example:
 
     ```sh
     echo 'theme = "docsy"' >> config.toml
     ```
 
-1.  Get Docsy dependencies:
+3.  Get Docsy dependencies:
 
     ```sh
     (cd themes/docsy && npm install)
     ```
 
-1.  (Optional but recommended) To avoid having to repeat the previous step every
+4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
     your project's `package.json` file:
 
@@ -219,6 +219,8 @@ git clone https://github.com/google/docsy
 cd docsy
 npm install
 ```
+
+Consider setting up an NPM [prepare][] script, as documented in Option 1.
 
 For more information, see
 [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the
@@ -303,3 +305,5 @@ from scratch as it provides defaults for many required configuration parameters.
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v8/using-npm/scripts
+[prepare]:
+  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
