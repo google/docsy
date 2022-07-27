@@ -96,50 +96,47 @@ npm install hugo-extended --save-dev
 
 ### Node: Get the latest LTS release
 
-Install or upgrade your version of Node to the active [LTS release][]. We
+If you have Node installed already, check your version of Node. For example:
+
+```sh
+node -v
+```
+
+Install or upgrade your version of Node to the **active [LTS release][]**. We
 recommend using **[nvm][]** to manage your Node installation (Linux command
 shown):
 
-```console
-$ nvm install --lts
+```sh
+nvm install --lts
 ```
 
 ### Install PostCSS
 
+To build or update your site's CSS resources, you'll also need
+[PostCSS](https://postcss.org/). Install it using the Node package manager,
+`npm`.
+
 {{% alert title="IMPORTANT: Check your Node version" color="warning" %}}
 
-Docsy only supports the **active [LTS release][]** of Node. Check your version
-of Node (using `node -v` for example) against the active LTS release and
-upgrade, if necessary, by following the instructions in the previous step.
+The PostCSS package installed by some older versions of Node is incompatible
+with Docsy. Check your version of Node against the **active [LTS release][]**
+and upgrade, if necessary. For details, see [Node: Get the latest LTS
+release][latest-lts].
 
 [lts release]: https://nodejs.org/en/about/releases/
+[latest-lts]: #node-get-the-latest-lts-release
 
 {{% /alert %}}
 
-To build or update your site's CSS resources, you also need
-[`PostCSS`](https://postcss.org/) to create the final assets. If you need to
-install it, you must have a recent version of [NodeJS](https://nodejs.org/en/)
-installed on your machine so you can use `npm`, the Node package manager. By
-default `npm` installs tools under the directory where you run
-[`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
+From your project root, run this command:
 
 ```
-npm install -D autoprefixer postcss-cli
+npm install --save-dev autoprefixer postcss-cli postcss
 ```
-
-Starting in
-[version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md),
-you must also separately install `postcss`:
-
-```
-npm install -D postcss
-```
-
-Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if
-installed [globally](https://flaviocopes.com/npm-packages-local-global/), you
-must use a local install.
 
 ## Option 1: Docsy as a Git submodule
+
+### For a new site
 
 To create a **new site** and add the Docsy theme as a Git submodule, run the
 following commands:
@@ -152,34 +149,58 @@ following commands:
     git init
     ```
 
-2.  Add Docsy as a theme via a Git submodule:
+2.  Install postCSS as [instructed earlier](#install-postcss).
 
-    ```shell
-    git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
-    echo 'theme = "docsy"' >> config.toml
-    ```
+3.  Follow the instructions below for an existing site.
 
-3.  Install postCSS as [instructed earlier](#install-postcss).
-
-4.  Get Docsy dependencies:
-
-    ```shell
-    (cd themes/docsy && npm install)
-    ```
-
-5.  Build or serve your new site using the usual Hugo commands, for example:
-
-    ```shell
-    hugo serve
-    ```
+### For an existing site
 
 To add the Docsy theme to an **existing site**, run the following commands from
 your project's root directory:
 
+1.  Install Docsy as a Git submodule:
+
+    ```sh
+    git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
+    ```
+
+2.  Add Docsy as a theme, for example:
+
+    ```sh
+    echo 'theme = "docsy"' >> config.toml
+    ```
+
+3.  Get Docsy dependencies:
+
+    ```sh
+    (cd themes/docsy && npm install)
+    ```
+
+4.  (Optional but recommended) To avoid having to repeat the previous step every
+    time you update Docsy, consider adding [NPM scripts][] like the following to
+    your project's `package.json` file:
+
+    ```json
+    {
+      "...": "...",
+      "scripts": {
+        "get:submodule": "git submodule update --init --depth 1",
+        "_prepare:docsy": "cd themes/docsy && npm install",
+        "prepare": "npm run get:submodule && npm run _prepare:docsy",
+        "...": "..."
+      },
+      "...": "..."
+    }
+    ```
+
+    Every time you run `npm install` from your project root, the `prepare`
+    script will fetch the latest version of Docsy and its dependencies.
+
+From this point on, build and serve your site using the usual Hugo commands, for
+example:
+
 ```sh
-git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
-echo 'theme = "docsy"' >> config.toml
-(cd themes/docsy && npm install)
+hugo serve
 ```
 
 ## Option 2: Clone the Docsy theme
@@ -198,6 +219,8 @@ git clone https://github.com/google/docsy
 cd docsy
 npm install
 ```
+
+Consider setting up an NPM [prepare][] script, as documented in Option 1.
 
 For more information, see
 [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the
@@ -281,3 +304,6 @@ from scratch as it provides defaults for many required configuration parameters.
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+[npm scripts]: https://docs.npmjs.com/cli/v8/using-npm/scripts
+[prepare]:
+  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
