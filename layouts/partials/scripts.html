@@ -24,11 +24,11 @@ window.markmap = {
 <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
 {{ end }}
 
-<script src='{{ "/js/tabpane-persist.js" | relURL }}'></script>
+<script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 
 <!-- load the deflate.js for plantuml support -->
 {{ if .Site.Params.plantuml.enable }}
-<script src='{{ "/js/deflate.js" | relURL }}'></script>
+<script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end }}
 
 <!-- load stylesheet and scripts for KaTeX support -->
@@ -48,7 +48,7 @@ window.markmap = {
 {{ end }}
 <!-- To automatically render math in text elements, include the auto-render extension: -->
 <script defer src='https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js'
-    integrity='sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==' crossorigin='anonymous' 
+    integrity='sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==' crossorigin='anonymous'
     {{ printf "onload='renderMathInElement(%s, %s);'" (( .Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}></script>
 {{ end }}
 
@@ -71,6 +71,6 @@ window.markmap = {
 {{ end }}
 {{ if .Site.Params.prism_syntax_highlighting }}
 <!-- scripts for prism -->
-<script src='{{ "/js/prism.js" | relURL }}'></script>
+<script src='{{ "js/prism.js" | relURL }}'></script>
 {{ end }}
 {{ partial "hooks/body-end.html" . }}
