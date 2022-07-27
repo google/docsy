@@ -2,10 +2,8 @@
 title: Analytics, User Feedback, SEO
 date: 2019-06-05
 description: >-
-  Add Google Analytics tracking to your site, use the "was this page helpful?"
-  widget data, disable the widget on a single page or all pages, and change the
-  response text. See what data is used to create the `meta description` tag for
-  SEO.
+  Add Google Analytics tracking to your site, collect user feedback and learn
+  about the page description meta tag.
 weight: 8
 ---
 
@@ -277,61 +275,27 @@ documentation.
 
 ## Search Engine Optimization meta tags
 
-Check out Google's
-[Search Engine Optimization (SEO) Starter Guide](https://developers.google.com/search/docs/beginner/seo-starter-guide)
-for how to optimize your site for SEO.
+To learn how to optimize your site for SEO see,
+[Search Engine Optimization (SEO) Starter Guide](https://developers.google.com/search/docs/beginner/seo-starter-guide).
 
 Google
 [recommends](https://developers.google.com/search/docs/beginner/seo-starter-guide?hl=en%2F#descriptionmeta)
 using the `description` meta tag to tell search engines what your page is about.
-The Docsy theme creates and populates this meta tag for you in the
-`layouts/partials/head.html` file:
+For each generated page, Docsy will set the content of the meta `description` by
+using the first of the following that is defined:
 
-```html
-{{ if .Page.Description }}
-  <meta name="description" content="{{ .Page.Description }}">
-{{ else }}
-  {{ $desc := (.Page.Content | safeHTML | truncate 150) }}
-  <meta name="description" content="{{ $desc }}">
-{{ end }}
-```
+- The page `description` [frontmatter field]({{< ref
+"content#page-frontmatter" >}})
+- For non-index pages, the page [summary][], as computed by Hugo
+- The site description taken from the [site `params`][]
 
-`.Page.Description` is the text from the `description` [frontmatter
-field]({{< ref "content#page-frontmatter" >}}). If the page's frontmatter does
-not have a `description`, the first 150 characters of the page content is used
-instead.
+For the template code used to perform this computation, see
+[layouts/partials/page-description.html][].
 
-For example, if your front matter `description` is:
+Add more meta tags as needed to your project's copy of the `head-end.html`
+partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizing-templates"
+>}}).
 
-{{< tabpane persistLang=false >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
-description = '''
-Add Google Analytics tracking to your site.
-'''
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-description: >
-  Add Google Analytics tracking to your site.
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
-{
-  "description": "Add Google Analytics tracking to your site.\n"
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
-Then the meta `description` tag on the rendered page is:
-
-```html
-<meta name="description" content="Add Google Analytics tracking to your site.">
-```
-
-You can add additional meta tags to your own copy of the `head-end.html`
-partial. See [Customizing
-templates]({{< ref "lookandfeel#customizing-templates" >}}) for more
-information.
+[layouts/partials/page-description.html]: https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
+[site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
+[summary]: https://gohugo.io/content-management/summaries/
