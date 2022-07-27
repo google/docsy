@@ -1,9 +1,9 @@
 ---
 title: Other setup options
+description: Create a new Docsy site with Docsy using Git or NPM
 date: 2021-12-08T09:22:27+01:00
+spelling: cSpell:ignore docsy gohugo hugo myproject
 weight: 2
-description:
-  Create a new Docsy site with Docsy as a Git submodule or cloned theme
 ---
 
 If you don't want to use
@@ -23,10 +23,13 @@ of the theme directly, or your deployment choice requires you to include a copy
 of the theme in your repository), you can **clone the files directly into your
 site source**.
 
-This guide provides instructions for both these options, along with common
+Finally, you can **install
+[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)**.
+
+This guide provides instructions for all of these options, along with common
 prerequisites.
 
-## Prerequisites and installation
+## Prerequisites
 
 ### Install Hugo
 
@@ -81,19 +84,15 @@ The following shows you how to install Hugo from the release page:
 Install Hugo using
 [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
 
-#### As an `npm` module
+#### As an NPM module
 
-You can install Hugo as an `npm` module using
-[`hugo-bin`](https://www.npmjs.com/package/hugo-bin). This adds `hugo-bin` to
-your `node_modules` folder and adds the dependency to your `package.json` file.
-To install the extended version of Hugo:
+You can install Hugo as an NPM module using
+[hugo-extended](https://www.npmjs.com/package/hugo-extended). To install the
+extended version of Hugo:
 
 ```
 npm install hugo-extended --save-dev
 ```
-
-See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for
-usage details.
 
 ### Node: Get the latest LTS release
 
@@ -104,10 +103,6 @@ shown):
 ```console
 $ nvm install --lts
 ```
-
-[lts release]: https://nodejs.org/en/about/releases/
-[nvm]:
-  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 
 ### Install PostCSS
 
@@ -129,8 +124,7 @@ default `npm` installs tools under the directory where you run
 [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
 
 ```
-npm install -D autoprefixer
-npm install -D postcss-cli
+npm install -D autoprefixer postcss-cli
 ```
 
 Starting in
@@ -209,11 +203,57 @@ For more information, see
 [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the
 [Hugo](https://gohugo.io) site.
 
+## Option 3: Docsy as an NPM package
+
+You can use Docsy as an NPM module as follows:
+
+1.  Create your site and specify Docsy as the site theme:
+
+    ```sh
+    hugo new site myproject
+    cd myproject
+    echo 'theme = "docsy"' >> config.toml
+    ```
+
+2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
+
+    ```sh
+    npm install --save-dev google/docsy autoprefixer postcss-cli postcss
+    ```
+
+3.  Build or serve your new site using the usual Hugo commands, specifying the
+    path to the Docsy theme files. For example, build your site as follows:
+
+    ```console
+    $ hugo --themesDir node_modules
+    Start building sites …
+    ...
+    Total in 1890 ms
+    ```
+
+    You can drop the `--themesDir ...` flag by adding the themes directory to
+    your site's configuration file:
+
+    ```sh
+    echo 'themesDir = "node_modules"' >> config.toml
+    ```
+
+As an alternative to specifying a `themesDir`, on some platforms, you can
+instead create a symbolic link to the Docsy theme directory as follows (Linux
+commands shown, executed from the site root folder):
+
+```sh
+mkdir -p theme
+pushd theme
+ln -s ../node_modules/docsy
+popd
+```
+
 ## Preview your site
 
-To build and preview your site locally:
+To preview your site locally:
 
-```
+```sh
 cd myproject
 hugo server
 ```
@@ -237,3 +277,7 @@ from scratch as it provides defaults for many required configuration parameters.
   [Example Site](https://github.com/google/docsy-example) and other
   [Examples](/docs/examples/).
 - [Publish your site](/docs/deployment/).
+
+[lts release]: https://nodejs.org/en/about/releases/
+[nvm]:
+  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
