@@ -23,8 +23,8 @@ of the theme directly, or your deployment choice requires you to include a copy
 of the theme in your repository), you can **clone the files directly into your
 site source**.
 
-Finally, you can install
-[Docsy as an NPM package](#option-3-docsy-as-an-npm-package).
+Finally, you can **install
+[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)**.
 
 This guide provides instructions for all of these options, along with common
 prerequisites.
@@ -205,7 +205,7 @@ For more information, see
 
 ## Option 3: Docsy as an NPM package
 
-You can use Docsy as an NPM module as follows.
+You can use Docsy as an NPM module as follows:
 
 1.  Create your site and specify Docsy as the site theme:
 
