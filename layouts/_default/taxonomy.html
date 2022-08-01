@@ -11,6 +11,7 @@
         <article class="card article-teaser article-type-{{ with .Type }}{{ ( urlize . ) }}{{ end }}">
           <h3><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></h3>
           {{ if not .Site.Params.ui.taxonomy_breadcrumb_disable -}}
+            {{/* Use breadcrumb partial, but remove attributes that are invalid or inappropriate in this page-summary context. */ -}}
             {{ partial "breadcrumb.html" .
               | replaceRE ` aria-\w+=\".*?\"|(breadcrumb-item) active|(btn-link) disabled` "$1" | safeHTML
             -}}
