@@ -38,8 +38,8 @@ configuration file. For details, see [Configure Google Analytics][].
 
   You can configure your project's analytics ID by setting either the top-level
   `googleAnalytics` config parameter or `services.googleAnalytics.id`. **Do not
-  define both** otherwise can result in [unexpected behavior][]. For details,
-  see [Is services.googleAnalytics.id an alias for
+  define both,** otherwise this can result in [unexpected behavior][]. For
+  details, see [Is services.googleAnalytics.id an alias for
   googleAnalytics][alias-discussion].
 
   [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
@@ -50,7 +50,7 @@ configuration file. For details, see [Configure Google Analytics][].
 {{% alert title="Production-only feature!" color="primary" %}}
 
   Analytics are enabled _only_ for **production** builds (called "environments"
-  in Hugo terminology). For the information Hugo environments and how to set
+  in Hugo terminology). For information about Hugo environments and how to set
   them, see the following [discussion][].
 
   [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
