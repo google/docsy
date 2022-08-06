@@ -1,5 +1,5 @@
 ---
-title: Analytics, User Feedback, SEO
+title: Analytics, User Feedback, and SEO
 date: 2019-06-05
 description: >-
   Add Google Analytics tracking to your site, collect user feedback and learn
@@ -9,63 +9,53 @@ weight: 8
 
 ## Adding Analytics
 
-The Docsy theme contains built-in support for
-[Google Analytics](https://analytics.google.com/analytics/web/) via Hugo's
-[internal template](https://gohugo.io/templates/internal/#google-analytics),
-which is included in the theme. Once you set Analytics up as described below,
-usage information for your site (such as page views) is sent to your Google
-Analytics account.
+The Docsy theme builds upon [Hugo's support for Google Analytics][hugo-ga],
+which Hugo provides through [internal templates][]. Once you set up analytics as
+described below, usage information for your site (such as page views) is sent to
+your [Google Analytics][] account.
+
+### Prerequisites
+
+You will need an **analytics ID** for your website before proceeding
+(technically it's called a measurement ID or property ID but we'll use the term
+"analytics ID" in this guide). If you don't have one, see the **How to get
+started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
+
+{{% alert title="Tip" %}}
+
+  Your project's **analytics ID** is a string that starts with `G-` (a GA4
+  measurement ID) or `UA-` (a universal analytics property ID).
+
+{{% /alert %}}
 
 ### Setup
 
-1.  Ensure you have
-    [set up a Google Analytics property](https://support.google.com/analytics/answer/1042508)
-    for your site: this gives you an Analytics ID to add to your config, which
-    Docsy in turn adds to all your site's pages.
-2.  Open `config.toml`/`config.yaml`/`config.json`.
-3.  Enable Google Analytics by setting the Tracking ID property to your site's
-    Analytics ID.
+Enable Google Analytics by adding your project's analytics ID to the site
+configuration file. For details, see [Configure Google Analytics][].
 
-    {{< tabpane persistLang=false >}}
+{{% alert title="Warning" color="warning" %}}
+  <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-{{< tab header="Configuration file:" disabled=true />}}
+  You can configure your project's analytics ID by setting either the top-level
+  `googleAnalytics` config parameter or `services.googleAnalytics.id`. **Do not
+  define both,** otherwise this can result in [unexpected behavior][]. For
+  details, see [Is services.googleAnalytics.id an alias for
+  googleAnalytics][alias-discussion].
 
-{{< tab header="config.toml" lang="toml" >}}
+  [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
+  [unexpected behavior]: https://github.com/google/docsy/issues/921
 
-[services.googleAnalytics]
-id = "UA-00000000-0"
+{{% /alert %}}
 
-{{< /tab >}} {{< tab header="config.yaml" lang="yaml" >}}
+{{% alert title="Production-only feature!" color="primary" %}}
 
-services:
-  googleAnalytics:
-    id: UA-00000000-0
+  Analytics are enabled _only_ for **production** builds (called "environments"
+  in Hugo terminology). For information about Hugo environments and how to set
+  them, see the following [discussion][].
 
-{{< /tab >}} {{< tab header="config.json" lang="json" >}}
+  [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
 
-{
-  "services": {
-    "googleAnalytics": {
-      "id": "UA-00000000-0"
-    }
-  }
-}
-
-{{< /tab >}}
-{{< /tabpane >}}
-
-4.  Save and close `config.toml`/`config.yaml`/`config.json`.
-5.  Ensure that your site is built with `HUGO_ENV="production"`, as Docsy only
-    adds Analytics tracking to production-ready sites. You can specify this
-    variable as a command line flag to Hugo:
-
-    ```console
-    $ env HUGO_ENV="production" hugo
-    ```
-
-    Alternatively, if you're using Netlify, you can specify it as a Netlify
-    [deployment setting](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables)
-    in `netlify.toml` or the Netlify UI, along with the Hugo version.
+{{% /alert %}}
 
 ## User Feedback
 
@@ -296,6 +286,11 @@ Add more meta tags as needed to your project's copy of the `head-end.html`
 partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizing-templates"
 >}}).
 
+[Configure Google Analytics]: https://gohugo.io/templates/internal/#configure-google-analytics
+[ga4-intro]: https://support.google.com/analytics/answer/1042508
+[Google Analytics]: https://analytics.google.com/analytics/web/
+[hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
+[internal templates]: https://gohugo.io/templates/internal/
 [layouts/partials/page-description.html]: https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
 [summary]: https://gohugo.io/content-management/summaries/
