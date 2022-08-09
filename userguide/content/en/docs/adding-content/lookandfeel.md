@@ -176,14 +176,11 @@ Docsy includes JavaScript and CSS files for a basic Prism configuration, which s
 * Code blocks styled with the Prism `Default` theme
 * Copy to clipboard buttons on code blocks
 * Syntax highlighting for a number of common languages, as specified in the following Prism download link:
-
-```none
-    https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
-```
+  https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
 
 ### Code blocks with no language
 
-By default Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
+By default, Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
 
 ### Extending Prism for additional languages or plugins
 
