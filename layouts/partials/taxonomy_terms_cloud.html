@@ -1,8 +1,8 @@
-{{ $context := .context  }}
-{{ $taxo := .taxo  }}
-{{ $title := .title  }}
-{{ if isset $context.Site.Taxonomies ( lower $taxo ) }}
-  {{ $taxonomy := index $context.Site.Taxonomies ( lower $taxo ) }}
+{{ $context := .context }}
+{{ $taxo := .taxo }}
+{{ $title := .title }}
+{{ if isset $context.Site.Taxonomies (lower $taxo) }}
+  {{ $taxonomy := index $context.Site.Taxonomies (lower $taxo) }}
   {{ if (gt (len $taxonomy) 0)}}
     <div class="taxonomy taxonomy-terms-cloud taxo-{{ urlize $taxo }}">
       {{ with $title }}

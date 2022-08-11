@@ -1,11 +1,22 @@
 {
+  "name": "docsy",
+  "version": "0.2.0",
+  "repository": "github:google/docsy",
   "scripts": {
-    "build:preview": "cd userguide && npm run build:preview",
-    "build:production": "cd userguide && npm run build:production",
-    "build": "cd userguide && npm run build",
-    "install": "cd userguide && npm install",
-    "serve": "cd userguide && npm run serve",
-    "submodule:get": "git submodule update --init --recursive --depth 1",
-    "submodule:update": "git submodule update --remote --recursive --depth 1"
+    "_cd:docs": "cd userguide &&",
+    "build:preview": "npm run cd:docs build:preview",
+    "build:production": "npm run cd:docs build:production",
+    "build": "npm run cd:docs build",
+    "cd:docs": "npm run _cd:docs -- npm run",
+    "docs-install": "npm run _cd:docs -- npm install",
+    "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
+    "serve": "npm run cd:docs serve"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "bootstrap": "^4.6.1"
+  },
+  "devDependencies": {
+    "hugo-extended": "0.96.0"
   }
 }

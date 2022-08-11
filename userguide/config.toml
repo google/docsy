@@ -9,13 +9,6 @@ theme = ["docsy"]
 # Will give values to .Lastmod etc.
 enableGitInfo = true
 
-# Language settings
-contentDir = "content/en"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
-# Useful when translating.
-enableMissingTranslationPlaceholders = true
-
 # disableKinds = ["taxonomy", "taxonomyTerm"]
 
 # Highlighting config
@@ -27,12 +20,8 @@ pygmentsUseClassic = false
 # See https://help.farbox.com/pygments.html
 pygmentsStyle = "tango"
 
- # First one is picked as the Twitter card image if not set on page.
- #images = ["images/project-illustration.png"]
-
-# Configure how URLs look like per section.
-[permalinks]
-blog = "/:section/:year/:month/:day/:slug/"
+# First one is picked as the Twitter card image if not set on page.
+#images = ["images/project-illustration.png"]
 
 [outputs]
 home = [ "HTML" ]
@@ -58,13 +47,7 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
-    pre = "<i class='fas fa-laptop-code'></i>"
-[[menu.main]]
-    name = "GitHub"
-    weight = 50
-    url = "https://github.com/google/docsy/"
-    pre = "<i class='fab fa-github'></i>"
-    post = "<span class='alert'>New!</span>" 
+    post = '<sup><i class="pl-1 fas fa-external-link-alt fa-xs" aria-hidden="true"></i></sup>'
 
 [services]
 [services.googleAnalytics]
@@ -101,13 +84,13 @@ privacy_policy = "https://policies.google.com/privacy"
 # This menu appears only if you have at least one [params.versions] set.
 version_menu = "Releases"
 
-# Flag used in the "version-banner" partial to decide whether to display a 
+# Flag used in the "version-banner" partial to decide whether to display a
 # banner on every page indicating that this is an archived version of the docs.
 # Set this flag to "true" if you want to display the banner.
 archived_version = false
 
 # The version number for the version of the docs represented in this doc set.
-# Used in the "version-banner" partial to display a version number for the 
+# Used in the "version-banner" partial to display a version number for the
 # current doc set.
 version = "0.0"
 
@@ -145,14 +128,14 @@ prism_syntax_highlighting = false
 # User interface configuration
 [params.ui]
 # Enable to show the side bar menu in its compact state.
-sidebar_menu_compact = false
+sidebar_menu_compact = true
 sidebar_menu_foldable = false
 sidebar_cache_limit = 10
-#  Set to true to disable breadcrumb navigation.
+# Set to true to disable breadcrumb navigation.
 breadcrumb_disable = false
-#  Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
+# Set to true to hide the sidebar search box (the top nav search box will still be displayed if search is enabled)
 sidebar_search_disable = false
-#  Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
+# Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
 
 # Adds a H2 section titled "Feedback" to the bottom of each doc. The responses are sent to Google Analytics as events.
@@ -167,7 +150,7 @@ yes = 'Glad to hear it! Please <a href="https://github.com/google/docsy/issues/n
 no = 'Sorry to hear that. Please <a href="https://github.com/google/docsy/issues/new">tell us how we can improve</a>.'
 
 # Adds a reading time to the top of each doc.
-# If you want this feature, but occasionally need to remove the Reading time from a single page, 
+# If you want this feature, but occasionally need to remove the Reading time from a single page,
 # add "hide_readingtime: true" to the page's front matter
 [params.ui.readingtime]
 enable = false
@@ -175,41 +158,41 @@ enable = false
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
-	name ="GitHub Discussions"
-	url = "https://github.com/google/docsy/discussions"
-	icon = "fab fa-github"
-        desc = "Discussion and help from your fellow users"
+  name ="GitHub Discussions"
+  url = "https://github.com/google/docsy/discussions"
+  icon = "fab fa-github"
+  desc = "Discussion and help from your fellow users"
 [[params.links.user]]
-	name = "User mailing list"
-	url = "https://groups.google.com/forum/#!forum/docsy-users"
-	icon = "fa fa-envelope"
-        desc = "Sign up for Docsy announcements"
+  name = "User mailing list"
+  url = "https://groups.google.com/forum/#!forum/docsy-users"
+  icon = "fa fa-envelope"
+  desc = "Sign up for Docsy announcements"
 [[params.links.user]]
-	name ="Twitter"
-	url = "https://twitter.com/docsydocs"
-	icon = "fab fa-twitter"
-        desc = "Follow us on Twitter to get the latest news!"
+  name ="Twitter"
+  url = "https://twitter.com/docsydocs"
+  icon = "fab fa-twitter"
+  desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
-	name = "Stack Overflow"
-	url = "https://stackoverflow.com/questions/tagged/docsy"
-	icon = "fab fa-stack-overflow"
-        desc = "Practical questions and curated answers"
+  name = "Stack Overflow"
+  url = "https://stackoverflow.com/questions/tagged/docsy"
+  icon = "fab fa-stack-overflow"
+  desc = "Practical questions and curated answers"
 # Developer relevant links. These will show up on right side of footer and in the community page if you have one.
 [[params.links.developer]]
-	name = "GitHub"
-	url = "https://github.com/google/docsy"
-	icon = "fab fa-github"
-        desc = "Development takes place here!"
+  name = "GitHub"
+  url = "https://github.com/google/docsy"
+  icon = "fab fa-github"
+  desc = "Development takes place here!"
 # [[params.links.developer]]
-	# name = "Slack"
-	# url = "https://example.org/slack"
-	# icon = "fab fa-slack"
-        # desc = "Chat with other project developers"
+  # name = "Slack"
+  # url = "https://example.org/slack"
+  # icon = "fab fa-slack"
+  # desc = "Chat with other project developers"
 # [[params.links.developer]]
-	# name = "Developer mailing list"
-	# url = "https://example.org/mail"
-	# icon = "fa fa-envelope"
-        # desc = "Discuss development issues around the project"
+  # name = "Developer mailing list"
+  # url = "https://example.org/mail"
+  # icon = "fa fa-envelope"
+  # desc = "Discuss development issues around the project"
 
 [params.mermaid]
 enable = true
@@ -219,6 +202,7 @@ theme = "default"
 enable = true
 theme = "default"
 svg_image_url = "https://www.plantuml.com/plantuml/svg/"
+svg = false
 
 [params.katex]
 enable = true
@@ -236,9 +220,14 @@ enable = true
 
 # [params.taxonomy]
 # taxonomyCloud = ["tags", "categories"] # set taxonomyCloud = [] to hide taxonomy clouds
-# taxonomyCloudTitle = ["Tag Cloud", "Cloud of Categories"] # if used, must have same lang as taxonomyCloud
+# taxonomyCloudTitle = ["Tag Cloud", "Cloud of Categories"] # if used, must have same length as taxonomyCloud
 # taxonomyPageHeader = ["tags", "categories"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
 
 [taxonomies]
 tag = "tags"
 category = "categories"
+
+[module]
+[[module.mounts]]
+  source = 'content/en'
+  target = 'content'

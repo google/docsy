@@ -53,10 +53,10 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
 1. Click **New site from Git**.
 1. Click your chosen Git provider, then choose your site repo from your list of repos.
 1. In the **Deploy settings** page:
-   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules. If you don't want your site to be indexed by search engines, you can add an environment flag to specify a non-`production` environment, as described in [Build environments and indexing](/#build-environments-and-indexing).
+   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules. If you don't want your site to be indexed by search engines, you can add an environment flag to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
    1. Click **Show advanced**. 
    1. In the **Advanced build settings** section, click **New variable**. 
-   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.53` or later as its **Value**. 
+   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.73` or later as its **Value**. 
 1. Click **Deploy site**.
 
 {{% alert title="Note" color="primary" %}}
@@ -66,14 +66,14 @@ For example, if you want to use a version of `postcss-cli` later than version 8.
 
 ```
   "devDependencies": {
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^9.8.8",
     "postcss-cli": "^8.0.0",
     "postcss": "^8.0.0"
   }
 ```
 {{% /alert %}}
 
-Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/master/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
+Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Xenial 16.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 

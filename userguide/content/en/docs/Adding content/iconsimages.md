@@ -22,7 +22,7 @@ navbar_logo = true
 ```
 
 {{% alert title="Tip" %}}
-Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/master/assets/scss/_nav.scss)):
+Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/main/assets/scss/_nav.scss)):
 
 ```
 svg {
@@ -47,7 +47,7 @@ If you have special favicon requirements, you can create your own `layouts/parti
 
 ### Landing pages
 
-Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blocks-cover) make it easy to add large cover images to your landing pages. The shortcode looks for an image with the word "background" in the name inside the landing page's [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for example, if you've copied the example site, the landing page image in `content/en/_index.html` is `content/en/featured-background.jpg`.
+Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover) make it easy to add large cover images to your landing pages. The shortcode looks for an image with the word "background" in the name inside the landing page's [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for example, if you've copied the example site, the landing page image in `content/en/_index.html` is `content/en/featured-background.jpg`.
 
 You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`: 
 

@@ -36,7 +36,7 @@ other = "Изменено"
 [post_edit_this]
 other = "Отредактировать страницу"
 [post_create_child_page]
-other = "Create child page"
+other = "Создать дополнительную страницу"
 [post_create_issue]
 other = "Предложить изменения документации"
 [post_create_project_issue]
@@ -44,16 +44,34 @@ other = "Предложить доработки по проекту"
 [post_posts_in]
 other = "Публикации в"
 [post_reading_time]
-other = "minute read"
+other = "минутное чтение"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "меньше минуты"
 
 # Print support
 [print_printable_section]
-other = "This is the multi-page printable view of this section."
+other = "Это многостраничный печатный вид этого раздела."
 [print_click_to_print]
-other = "Click here to print"
+other = "Нажмите что бы печатать"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "Вернуться к обычному просмотру страницы"
 [print_entire_section]
-other = "Print entire section"
+other = "Печатать весь раздел"
+
+# Community
+[community_join]
+other = "Join the {{ .Site.Title }} community"
+[community_introduce]
+other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+[community_learn]
+other = "Learn and Connect"
+[community_using]
+other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+[community_develop]
+other = "Develop and Contribute"
+[community_contribute]
+other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+[community_how_to]
+other = "You can find out how to contribute to these docs in our"
+[community_guideline]
+other = "Contribution Guidelines"

@@ -1,18 +1,19 @@
 {
   "scripts": {
-    "_build": "hugo --cleanDestinationDir -e dev -DFE --themesDir ../..",
-    "_serve": "hugo serve -DFE --themesDir ../..",
-    "build:preview": "hugo --cleanDestinationDir -e dev -DFE --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\" --themesDir ../..",
-    "build:production": "hugo --cleanDestinationDir --minify --themesDir ../..",
+    "_build": "npm run _hugo-dev",
+    "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_hugo-dev": "npm run _hugo -- -e dev -DFE",
+    "_serve": "npm run _hugo-dev -- serve",
+    "build:preview": "DOCSY_VENDOR=clean npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
+    "build:production": "DOCSY_VENDOR=clean npm run _hugo -- --minify",
     "build": "npm run _build",
-    "prebuild:preview": "npm run submodule:get",
-    "prebuild:production": "npm run submodule:get",
-    "prebuild": "npm run submodule:get",
-    "preinstall": "npm run submodule:get",
-    "preserve": "npm run submodule:get",
-    "serve": "npm run _serve",
-    "submodule:get": "cd .. && npm run submodule:get",
-    "submodule:update": "cd .. && npm run submodule:update"
+    "clean": "rm -Rf public",
+    "clean:vendor": "rm -Rf ../assets/vendor",
+    "keep:vendor": "echo Keeping ../assets/vendor",
+    "make:public": "git init -b main public",
+    "pre_hugo": "set -x && npm run ${DOCSY_VENDOR:-keep}:vendor",
+    "prepare": "cd .. && npm install",
+    "serve": "npm run _serve"
   },
   "devDependencies": {
     "autoprefixer": "^9.5.0",

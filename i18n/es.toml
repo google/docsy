@@ -39,6 +39,8 @@ other = "Creado"
 other = "Última modificación"
 [post_edit_this]
 other = "Editar esta página"
+[post_view_this]
+other = "Ver código de la página"
 [post_create_child_page]
 other = "Create child page"
 [post_create_issue]
@@ -50,7 +52,7 @@ other = "Añadir entrada"
 [post_reading_time]
 other = "minutos de lectura"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "menos de un minuto"
 
 # Print support
 [print_printable_section]
@@ -61,3 +63,21 @@ other = "Haga click aquí para imprimir"
 other = "Volver a la vista normal de esta página"
 [print_entire_section]
 other = "Imprimir la sección entera"
+
+# Community
+[community_join]
+other = "Únete a la comunidad {{ .Site.Title }}"
+[community_introduce]
+other = "{{ .Site.Title }} es un proyecto de código abierto que cualquiera en la comunidad puede usar, mejorar y disfrutar. ¡Nos encantaría que te unas a nosotros! Aquí hay algunas maneras de averiguar lo que está sucediendo y participar."
+[community_learn]
+other = "Aprende y Conéctate"
+[community_using]
+other = "¿Usas o quieres usar {{ .Site.Title }}? Encuentra más información aquí:"
+[community_develop]
+other = "Desarrollar y Contribuir"
+[community_contribute]
+other = "Si desea involucrarte más contribuyendo a {{ .Site.Title }}, únete a nosotros aquí:"
+[community_how_to]
+other = "Puedes averiguar cómo contribuir a estos documentos en nuestras"
+[community_guideline]
+other = "Guias de Contribución"
