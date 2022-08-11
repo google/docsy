@@ -7,8 +7,8 @@ description: >
 ---
 
 Docsy is a theme for the [Hugo](https://gohugo.io/) static site generator.
-If you're not already familiar with Hugo and, in particular, its version of Markdown, this page provides some
-useful tips and potential gotchas for adding and editing content for your site. Feel free to add your own!
+If you're not already familiar with Hugo this page provides some useful tips and
+potential gotchas for adding and editing content for your site. Feel free to add your own!
 
 ## Linking
 
@@ -19,24 +19,3 @@ Note, however, that `ref` and `relref` links don't work with `_index` or `index`
 
 [Learn more about linking](/docs/adding-content/content/#working-with-links).
 
-## Nested lists (Blackfriday only)
-
-As of version 0.60.0, Hugo uses the [Goldmark](https://github.com/yuin/goldmark) Markdown processor.
-Prior to that version, [Blackfriday](https://github.com/russross/blackfriday) was Hugo's default Markdown processor.
-This processor can be sensitive when it come to content that's deeply nested in a list. In particular, be aware that
-[this known issue](https://github.com/russross/blackfriday/issues/329) can surface if or when you have multiple authors and
-other contributors who might mix `tabs` and `spaces` when indenting lists, or fail to indent properly.
-
-An additional factor here is that because GitHub uses a different Markdown processor, GitHub markdown and the editor UI may
-render some nested lists properly, while Blackfriday might render that same content poorly. For example, the count in a
-numbered list might restart, or your nested content within a list is not indented
-(shows as a peer element instead of a nested child element). You may want to recommend in your contribution guidelines
-([as we do](/docs/contribution-guidelines/#contributing-to-these-docs)) that contributors preview their content with Hugo
-(or use Netlify's preview feature for PRs if that's your chosen deployment tool) to ensure their content renders correctly
-with Blackfriday.
-
-{{% alert title="Tip" %}}
-[Per comments on the known issue](https://github.com/russross/blackfriday/issues/329#issuecomment-277602856),
-users still using Blackfriday as markup processor will achieve consistent behavior when using tabs for indentation. If you don't like tabs and want to use spaces for indentation, make sure you use 4 spaces for one indentation level, other you might run into trouble. Therefore, when using spaces for indentation,
-consider configuring your local editor to use 4 spaces when the **Tab** key is pressed.
-{{% /alert %}}

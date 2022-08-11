@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": "github:google/docsy",
   "scripts": {
     "_cd:docs": "cd userguide &&",
@@ -17,6 +17,6 @@
     "bootstrap": "^4.6.1"
   },
   "devDependencies": {
-    "hugo-extended": "0.96.0"
+    "hugo-extended": "0.100.2"
   }
 }

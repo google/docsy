@@ -8,8 +8,11 @@
     <div>
       {{ range .Pages }}
         {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
-        <article class="article-teaser article-type-{{ with .Type }}{{ ( urlize . ) }}{{ end }}">
+        <article class="card article-teaser article-type-{{ with .Type }}{{ ( urlize . ) }}{{ end }}">
           <h3><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></h3>
+          {{ if not .Site.Params.ui.taxonomy_breadcrumb_disable }}
+            {{- partial "breadcrumb.html" . -}}
+          {{ end }}
           <p>{{ .Description | markdownify }}</p>
           <header class="article-meta">
             {{ partial "taxonomy_terms_article_wrapper.html" . }}

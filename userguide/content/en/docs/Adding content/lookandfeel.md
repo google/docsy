@@ -94,9 +94,11 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper cont
 
 ## Code highlighting with Chroma
 
-With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `config.toml`:
+With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -104,25 +106,66 @@ With Hugo version 0.60 and higher, you can choose from a range of code block hig
   [markup.highlight]
       # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
       style = "tango"
- ```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: tango
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "markup": {
+    "goldmark": {
+      "renderer": {
+        "unsafe": true
+      }
+    },
+    "highlight": {
+      "style": "tango"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
-By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `config.toml`.
+By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `config.toml`/`config.yaml`/`config.json`.
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 # Uncomment if you want your chosen highlight style used for code blocks without a specified language
-guessSyntax = "true"
-```
+guessSyntax = true
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+guessSyntax: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+"guessSyntax": true
+{{< /tab >}}
+{{< /tabpane >}}
 
 You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
 
-Optionally, you can enable Prism syntax highlighting in your `config.toml`:
+Optionally, you can enable Prism syntax highlighting in your `config.toml`/`config.yaml`/`config.json`:
 
-```toml
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
-```
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+prism_syntax_highlighting: true
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+"prism_syntax_highlighting": true
+{{< /tab >}}
+{{< /tabpane >}}
 
 When this option is enabled your site uses [Prism](https://prismjs.com/index.html) instead of Chroma for code block highlighting.
 

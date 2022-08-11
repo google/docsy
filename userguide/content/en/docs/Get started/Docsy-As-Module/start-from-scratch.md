@@ -7,7 +7,7 @@ description: >
   Create a new Hugo site from scratch with Docsy as a Hugo Module
 ---
 
-The simplest approach to creating a Docsy site is [copying our example site](/docs/theme-installation/docsy-as-module/example-site-as-template/). However, if you're an experienced Hugo user or the site structure of our example site doesn't meet your needs, you may prefer to create a new site from scratch. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
+The simplest approach to creating a Docsy site is [copying our example site](/docs/get-started/docsy-as-module/example-site-as-template/). However, if you're an experienced Hugo user or the site structure of our example site doesn't meet your needs, you may prefer to create a new site from scratch. With this option, you'll get Docsy look and feel, navigation, and other features, but you'll need to specify your own site structure. 
 
 These instructions give you a minimum file structure for your site project only, so that you build and extend your actual site step by step. The first step is adding the Docsy theme as a [Hugo Module](https://gohugo.io/hugo-modules/) to your site. If needed, you can easily [update](/docs/updating/) the module to the latest revision from the Docsy GitHub repo.
 
@@ -16,13 +16,15 @@ These instructions give you a minimum file structure for your site project only,
 At your command prompt, run the following:
 
 {{< tabpane >}}
-{{< tab header="Unix shell" >}}
+{{< tab header="CLI:" disabled=true />}}
+{{< tab header="Unix shell"  lang="Bash" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.3.0
 cat >> config.toml <<EOL
 [module]
+proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
 [[module.imports]]
@@ -30,12 +32,14 @@ path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
-{{< tab header="Windows command line" >}}
+{{< tab header="Windows command line" lang="Batchfile" >}}
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v0.2.0
+hugo mod get github.com/google/docsy@v0.3.0
 (echo [module]^
+
+proxy = "direct"^
 
 [[module.imports]]^
 
@@ -59,7 +63,7 @@ Specifying the [Docsy theme](https://github.com/google/docsy) as Hugo Module for
 
 To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory.
 
-```shell
+```bash
 hugo new site my-new-site
 cd  my-new-site
 ```
@@ -70,7 +74,7 @@ This will create a minimal site structure, containing the folders `archetypes`, 
 
 Only sites that are Hugo Modules themselves can import other modules. To turn your site into a Hugo Module, run the following commands in your newly created site directory:
 
-```
+```bash
 hugo mod init github.com/me/my-new-site
 ```
 
@@ -78,8 +82,8 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 
 Next declare the Docsy theme module as a dependency for your site.
 
-```
-hugo mod get github.com/google/docsy@v0.2.0
+```bash
+hugo mod get github.com/google/docsy@v0.3.0
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -89,8 +93,10 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
-{{< tab header="config.toml" >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml"  lang="toml" >}}
 [module]
+  proxy = "direct"
   # uncomment line below for temporary local development of module
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
@@ -103,8 +109,9 @@ Add the settings in the following snippet at the end of your site configuration 
     path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
-{{< tab header="config.yaml" >}}
+{{< tab header="config.yaml" lang="yaml" >}}
 module:
+  proxy: direct
   hugoVersion:
     extended: true
     min: 0.73.0
@@ -115,9 +122,10 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="config.json" >}}
+{{< tab header="config.json"  lang="yaml" >}}
 {
   "module": {
+    "proxy": "direct",
     "hugoVersion": {
       "extended": true,
       "min": "0.73.0"
@@ -137,21 +145,24 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
+
 ### Preview your site
 
 To build and preview your site locally:
 
-```
+```bash
 hugo server
 ```
 
-By default, your site will be available at [http://localhost:1313](http://localhost:1313/). When encountering problems, have a look at the [known issues](/docs/getting-started/known_issues/#macos) on MacOS.
+By default, your site will be available at [http://localhost:1313](http://localhost:1313/). When encountering problems, have a look at the [known issues](/docs/get-started/known_issues/#macos) on MacOS.
 
-You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you're missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/theme-installation/basic-configuration/) - we recommend copying the example site configuration even if you're creating a site from scratch as it provides defaults for many required configuration parameters.
+You may get Hugo errors for missing parameters and values when you try to build your site. This is usually because you're missing default values for some configuration settings that Docsy uses - once you add them your site should build correctly. You can find out how to add configuration in [Basic site configuration](/docs/get-started/basic-configuration/) - we recommend copying the example site configuration even if you're creating a site from scratch as it provides defaults for many required configuration parameters.
 
 ## What's next?
 
-* Add some [basic configuration](/docs/theme-installation/basic-configuration/)
+* Add some [basic configuration](/docs/get-started/basic-configuration/)
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
