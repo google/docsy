@@ -1,3 +1,7 @@
+/* grpc-docsy file override */
+// Override until we can pickup the fix to:
+// https://github.com/google/docsy/issues/1154
+.grpc-disable {
 .card-deck {
 	max-width: 83%;
 }
@@ -16,4 +20,5 @@
 		margin: 0;
 		padding: 0 1rem 1rem 1rem;
 	}
+}
 }
