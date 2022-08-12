@@ -1,4 +1,7 @@
-.td-content {
+/* grpc-docsy file override */
+// Override until we can pickup the fix to:
+// https://github.com/google/docsy/issues/1154
+.grpc-disable .td-content {
   .highlight {
     margin: 0rem 0 2rem 0;
   }
