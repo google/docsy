@@ -12,17 +12,19 @@
         <ul>
             {{ range $pages }}
                 {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
-                <li><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></li>
+                {{ $title := (partial "funcs/pagetitle" .) }}
+                <li><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- $title -}}</a></li>
             {{ end }}
         </ul>
     {{ else }}
     {{/* Otherwise we show a nice formatted list of subpages with page descriptions */}}
     <hr class="panel-line">
-        {{ range $pages }}
+        {{ range $pages }}    
             {{ $manualLink := cond (isset .Params "manuallink") .Params.manualLink ( cond (isset .Params "manuallinkrelref") (relref . .Params.manualLinkRelref) .RelPermalink) }}
+            {{ $title := (partial "funcs/pagetitle" .) }}
             <div class="entry">
                 <h5>
-                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+                    <a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- $title -}}</a>
                 </h5>
                 <p>{{ .Description | markdownify }}</p>
             </div>
