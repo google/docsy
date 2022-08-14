@@ -1,0 +1,12 @@
+{{/* Get all child Sections recursively */}}
+{{ $sections := slice }}
+{{- if . -}}
+  {{ $s := . }}
+  {{ $all := where $s.Site.Pages "Kind" "section" }}
+  {{ range $all }}
+    {{ if eq .Parent $s }}
+      {{ $sections = $sections | append . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- return $sections -}}
