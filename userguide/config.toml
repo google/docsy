@@ -129,6 +129,8 @@ breadcrumb_disable = false
 sidebar_search_disable = false
 # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top nav bar
 navbar_logo = true
+# Set to false if you don't want to display your site's title in the top navbar (useful if you have a typographic logo)
+navbar_title = true
 
 # For details concerning the page feedback widget, see
 # https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
