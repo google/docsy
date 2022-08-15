@@ -227,7 +227,7 @@ On large sites (default: > 2000 pages) the section menu is not generated for eac
 
 ### Add icons to the section menu
 
-You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fa-solid fa-tools`).
+You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
 
 You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 

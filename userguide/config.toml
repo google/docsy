@@ -40,7 +40,7 @@ anchor = "smart"
     name = "Example Site"
     weight = 40
     url = "https://example.docsy.dev"
-    post = '<sup><i class="pl-1 fa-solid fa-external-link-alt fa-xs" aria-hidden="true"></i></sup>'
+    post = '<sup><i class="pl-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>'
 
 [services]
 [services.googleAnalytics]

@@ -561,13 +561,13 @@ params:
         {
           "name": "Twitter",
           "url": "https://example.org/twitter",
-          "icon": "fab fa-twitter",
+          "icon": "fa-brands fa-twitter",
           "desc": "Follow us on Twitter to get the latest news!"
         },
         {
           "name": "Stack Overflow",
           "url": "https://example.org/stack",
-          "icon": "fab fa-stack-overflow",
+          "icon": "fa-brands fa-stack-overflow",
           "desc": "Practical questions and curated answers"
         }
       ],
@@ -575,13 +575,13 @@ params:
         {
           "name": "GitHub",
           "url": "https://github.com/google/docsy",
-          "icon": "fab fa-github",
+          "icon": "fa-brands fa-github",
           "desc": "Development takes place here!"
         },
         {
           "name": "Slack",
           "url": "https://example.org/slack",
-          "icon": "fab fa-slack",
+          "icon": "fa-brands fa-slack",
           "desc": "Chat with other project developers"
         },
         {
