@@ -13,6 +13,8 @@
     "check-links": "npm run _check-links",
     "clean": "rm -Rf public",
     "make:public": "git init -b main public",
+    "precheck-links:all": "npm run build",
+    "precheck-links": "npm run build",
     "postbuild:preview": "npm run _check-links",
     "postbuild:production": "npm run _check-links",
     "prepare": "cd .. && npm install",
