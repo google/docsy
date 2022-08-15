@@ -33,10 +33,10 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 {{</* blocks/cover title="Welcome!" image_anchor="center" height="full" color="primary" */>}}
 <div class="mx-auto">
 	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{</* relref "/docs" */>}}">
-		Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+		Learn More <i class="fa-solid fa-circle-right ml-2"></i>
 	</a>
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://example.org">
-		Download <i class="fab fa-github ml-2 "></i>
+		Download <i class="fa-brands fa-github ml-2 "></i>
 	</a>
 	<p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p>
 	<div class="mx-auto mt-5">
@@ -100,10 +100,10 @@ The example below shows a section wrapping 3 feature sections.
 The new **TechOS** operating system is an open source project. It is a new project, but with grand ambitions.
 Please follow this space for updates!
 {{%/* /blocks/feature */%}}
-{{%/* blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
+{{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
-{{%/* blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
+{{%/* blocks/feature icon="fa-brands fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
 For announcement of latest features etc.
 {{%/* /blocks/feature */%}}
 {{</* /blocks/section */>}}
@@ -119,7 +119,7 @@ For announcement of latest features etc.
 
 ```go-html-template
 
-{{%/* blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
+{{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
 
