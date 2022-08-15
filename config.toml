@@ -48,6 +48,9 @@ min = "0.73.0"
   [[module.mounts]]
     source = 'static'
     target = 'static'
+  [[module.mounts]]
+    source = 'node_modules/@fortawesome/fontawesome-free/webfonts'
+    target = 'static/webfonts'
   # Mounts for projects using Docsy as an NPM package. The source path prefix
   # "../.." moves out of themes/docsy so that Docsy can find its dependencies.
   [[module.mounts]]
@@ -56,3 +59,6 @@ min = "0.73.0"
   [[module.mounts]]
     source = '../../node_modules/@fortawesome/fontawesome-free'
     target = 'assets/vendor/Font-Awesome'
+  [[module.mounts]]
+    source = '../../node_modules/@fortawesome/fontawesome-free/webfonts'
+    target = 'static/webfonts'
