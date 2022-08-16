@@ -18,7 +18,13 @@
 </style>
 <script>
 window.markmap = {
-  autoLoader: { manual: true },
+  autoLoader: { 
+      manual: true,
+      onReady() {
+        const { autoLoader, builtInPlugins } = window.markmap;
+        autoLoader.transformPlugins = builtInPlugins.filter(plugin => plugin.name !== 'prism');
+      },
+  },
 };
 </script>
 <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
