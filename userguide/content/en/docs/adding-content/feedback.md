@@ -33,6 +33,11 @@ started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
 Enable Google Analytics by adding your project's analytics ID to the site
 configuration file. For details, see [Configure Google Analytics][].
 
+By default, Docsy uses the [gtag.js][] analytics library for both GA4 (which
+_requires_ `gtag.js`) and Universal Analytics (UA) site tags. If you prefer using
+the older `analytics.js` library for your UA site tag, then set
+`params.disableGtagForUniversalAnalytics` to true in your project's config.
+
 {{% alert title="Warning" color="warning" %}}
   <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
@@ -289,6 +294,7 @@ partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizi
 [Configure Google Analytics]: https://gohugo.io/templates/internal/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
+[gtag.js]: https://support.google.com/analytics/answer/10220869
 [hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
 [internal templates]: https://gohugo.io/templates/internal/
 [layouts/partials/page-description.html]: https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
