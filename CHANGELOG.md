@@ -14,7 +14,7 @@ For a full list of the changes to this release, see the [release notes][0.5.0].
 
 **Breaking changes**:
 
-- Upgrade to [FontAwesome v6](https://fontawesome.com/docs/web/setup/upgrade/) from FontAwesome v5. Lots of icons got renamed, but the v5 names will still work.
+- [Upgrade FontAwesome to v6](https://fontawesome.com/docs/web/setup/upgrade/) from v5. Lots of icons got renamed, but the v5 names will still work.
 
   Please review the [Backward compatibility](https://fontawesome.com/docs/web/setup/upgrade/whats-changed#backward-compatibility) information for the complete details.
 
