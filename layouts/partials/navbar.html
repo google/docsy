@@ -3,11 +3,11 @@
     (not .Site.Params.ui.navbar_translucent_over_cover_disable)
 -}}
 
-<nav
-  class="js-navbar-scroll navbar navbar-expand navbar-dark {{ if $cover }}td-navbar-cover{{ end }} flex-column flex-md-row td-navbar">
+<nav class="js-navbar-scroll navbar navbar-expand navbar-dark
+            {{- if $cover }} td-navbar-cover {{- end }} flex-column flex-md-row td-navbar">
   <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
     {{- /**/ -}}
-    <span class="navbar-logo">
+    <span class="navbar-brand__logo navbar-logo">
       {{- if .Site.Params.ui.navbar_logo -}}
         {{ with resources.Get "icons/logo.svg" -}}
           {{ ( . | minify).Content | safeHTML -}}
@@ -15,7 +15,7 @@
       {{ end -}}
     </span>
     {{- /**/ -}}
-    <span class="font-weight-bold">
+    <span class="navbar-brand__name">
       {{- .Site.Title -}}
     </span>
     {{- /**/ -}}

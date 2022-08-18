@@ -41,9 +41,8 @@
         text-transform: none;
         text-align: middle;
 
-        .nav-link {
-            display: inline-block;
-            margin-right: -30px;
+        &__name {
+          font-weight: $font-weight-bold;
         }
 
         svg {

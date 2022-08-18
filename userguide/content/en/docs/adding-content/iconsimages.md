@@ -1,15 +1,15 @@
 ---
-title: "Logos and Images"
-linkTitle: "Logos and Images"
+title: Logos and Images
 date: 2017-01-05
 weight: 6
-description: >
-  Add and customize logos, icons, and images in your project.
+description: Add and customize logos, icons, and images in your project.
 ---
 
 ## Add your logo
 
-Add your project logo as `assets/icons/logo.svg` in your project. This overrides the default Docsy logo in the theme. If you don't want a project logo, set `navbar_logo` to `false` (or delete the variable) in your `config.toml`/`config.yaml`/`config.json`:
+Place your project logo in `assets/icons/logo.svg`. This overrides the default
+Docsy logo in the theme. If you don't want a project logo, set `navbar_logo` to
+`false` in your project's config:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -26,35 +26,10 @@ navbar_logo: false
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you decide at a later stage that you'd like to add a logo to your navbar, you can set the parameter to `true`:
+For information about styling your logo, see [Styling your brand logo and
+name][]
 
-{{< tabpane persistLang=false >}}
-{{< tab header="config.toml" lang="toml" >}}
-navbar_logo = true
-{{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-navbar_logo: true
-{{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
-{
-  "navbar_logo": true
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
-{{% alert title="Tip" %}}
-Your logo is included in the default Docsy navbar as an inline SVG with the following CSS styling (from [`_nav.scss`](https://github.com/google/docsy/blob/main/assets/scss/_nav.scss)):
-
-```
-svg {
-    display: inline-block;
-    margin: 0 10px;
-    height: 30px;
-}
-```
-
-To ensure your logo displays correctly, you may want to resize it, ensure it doesn't have height and width attributes so that its size is fully responsive, or override the default styling with your own CSS.
-{{% /alert %}}
+[Styling your brand logo and name]: /docs/adding-content/lookandfeel/#styling-your-brand-logo-and-name
 
 ## Add your favicons
 
@@ -70,7 +45,7 @@ If you have special favicon requirements, you can create your own `layouts/parti
 
 Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover) make it easy to add large cover images to your landing pages. The shortcode looks for an image with the word "background" in the name inside the landing page's [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for example, if you've copied the example site, the landing page image in `content/en/_index.html` is `content/en/featured-background.jpg`.
 
-You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`: 
+You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`:
 
 ```html
 {{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" color="orange" */>}}
