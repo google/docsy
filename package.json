@@ -13,14 +13,16 @@
     "docs-install": "npm run _cd:docs -- npm install",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "serve": "npm run cd:docs serve",
-    "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
+    "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
+    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@4"
   },
+  "cspell": "cSpell:ignore docsy userguide fortawesome fontawesome ",
   "prettier": {
     "proseWrap": "always"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1",
-    "bootstrap": "^4.6.1"
+    "@fortawesome/fontawesome-free": "6.1.1",
+    "bootstrap": "4.6.1"
   },
   "devDependencies": {
     "hugo-extended": "0.101.0"
