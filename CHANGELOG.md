@@ -14,12 +14,16 @@ For a full list of the changes to this release, see the [release notes][0.5.0].
 
 **Breaking changes**:
 
-- [Upgrade FontAwesome to v6](https://fontawesome.com/docs/web/setup/upgrade/) from v5. Lots of icons got renamed, but the v5 names will still work.
+- **Upgraded Bootstrap** to v4.6.2, resulting in some style changes. For
+  details, see [v4.6.2 release notes][].
+- **[Upgraded FontAwesome][]** to v6.1.2 from v5. While many icons were renamed,
+  the v5 names will still work. For all the details, see [What's changed][].
 
-  Please review the [Backward compatibility](https://fontawesome.com/docs/web/setup/upgrade/whats-changed#backward-compatibility) information for the complete details.
-
+[v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
   https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
+[what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
 ## [0.4.0][]
 
