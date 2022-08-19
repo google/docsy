@@ -27,7 +27,11 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 - **Upgraded Bootstrap** to v4.6.2, resulting in some style changes. For
   details, see [v4.6.2 release notes][].
 - **[Upgraded FontAwesome][]** to v6.1.2 from v5. While many icons were renamed,
-  the v5 names will still work. For all the details, see [What's changed][].
+  the v5 names will still work. For details about icon renames and more, see
+  [What's changed][].
+- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
+  upgrade. You might notice other width changes of elements using FA icons and
+  the FA font.
 
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
