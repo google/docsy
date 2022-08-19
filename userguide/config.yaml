@@ -70,7 +70,6 @@ params:
     sidebar_cache_limit: 10
     breadcrumb_disable: false
     sidebar_search_disable: false
-    navbar_logo: true
     feedback:
       enable: true
       'yes': >-
