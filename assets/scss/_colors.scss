@@ -1,6 +1,6 @@
 // Add some local palette classes so you can do -bg-warning -text-warning etc. Even -bg-1 if you want to paint by numbers.
 @mixin palette-variant($color-name, $color-value) {
-    $text-color: color-yiq($color-value);
+    $text-color: color-contrast($color-value);
     $link-color: mix($blue, $text-color, lightness($color-value));
    
     $link-hover-color: rgba($link-color, .5) !default;
