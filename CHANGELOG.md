@@ -1,3 +1,7 @@
+<!--
+  cSpell:ignore docsy
+-->
+
 # Changelog
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
@@ -6,7 +10,13 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 ## [0.5.0][] - next planned release (unpublished yet)
 
-For a full list of the changes to this release, see the [release notes][0.5.0].
+For the full list of the changes found in this release, see the [release
+notes][0.5.0]. **BREAKING CHANGES** are documented below.
+
+**After you update** your project's Docsy:
+
+- Update your project setup (see [0.4.0][]) if you haven't already.
+- Run `npm install`.
 
 **New**:
 
@@ -28,27 +38,32 @@ For a full list of the changes to this release, see the [release notes][0.5.0].
 ## [0.4.0][]
 
 For a full list of the changes to this release, see the [release notes][0.4.0].
+Potential **BREAKING CHANGES** are documented below.
 
-**Breaking changes**:
+**After you update** your project's Docsy, run `npm install`.
 
-- Docsy no longer uses git submodules for Bootstrap and FontAwesome. If your
-  project uses [Hugo Modules][], then this change doesn't impact you.
+### Update your project setup
 
-  For projects with [other Docsy setups][], use the NPM packages of Bootstrap
-  and FontAwesome. Migrate your site by following these steps (execute commands
-  from your project's root directory):
+If your project uses Docsy as follows:
 
-  1.  Update Docsy to 0.4.0.
-  2.  Delete obsolete Docsy Git submodules:
+- [Hugo Module][], then this change doesn't impact you.
+- For [other Docsy setups][], this is a **BREAKING CHANGE** -- read on.
+
+Docsy now fetches Bootstrap and FontAwesome as NPM packages rather than git
+submodules. This has an impact on your project-build setup. To migrate your
+site, follow these steps (execute commands from your project's root directory):
+
+  1.  Delete obsolete Docsy Git submodules:
       ```console
       $ rm -Rf themes/docsy/assets/vendor
       ```
-  3.  Get Docsy dependencies:
+  2.  Get Docsy dependencies:
       ```console
       $ (cd themes/docsy && npm install)
       ```
-  4.  (Optional) If your site uses NPM, consider getting Docsy dependencies via
-      a [prepare][] script as follows:
+  3.  Update your build scripts to fetch Docsy dependencies automatically. For
+      example, if your site build uses NPM scripts, consider getting Docsy
+      dependencies via a [prepare][] script as follows:
       ```json
       {
         "name": "my-website",
@@ -59,9 +74,14 @@ For a full list of the changes to this release, see the [release notes][0.4.0].
         "...": "..."
       }
       ```
-  5.  Proceed as usual to build or serve your site.
+  4.  (Optional) Build script cleanup. If your project uses Docsy as a git
+      submodule, Docsy updates no longer require the `--recursive` flag when
+      running `git submodule update`. Consider dropping the flag if you have no
+      other recursive git submodules.
 
-[hugo modules]: https://www.docsy.dev/docs/get-started/docsy-as-module/
+Proceed as usual to build or serve your site.
+
+[hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
 [prepare]:
   https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
