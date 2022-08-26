@@ -9,7 +9,7 @@
         return $('<div class="markmap">').text($(this).text());
     });
 
-    const { markmap } = window;
+    let { markmap } = window;
     if(needMarkmap) {
         markmap = {
             autoLoader : {
