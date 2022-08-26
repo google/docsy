@@ -9,8 +9,9 @@
         return $('<div class="markmap">').text($(this).text());
     });
 
+    const { markmap } = window;
     if(needMarkmap) {
-       window.markmap = {
+        markmap = {
             autoLoader : {
                 manual: true,
                 onReady() {
@@ -19,7 +20,7 @@
                 }
             }
         }
-        window.markmap.autoLoader.renderAll();
+        markmap.autoLoader.renderAll();
     }
 
 })(jQuery);
