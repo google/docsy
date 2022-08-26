@@ -9,9 +9,17 @@
         return $('<div class="markmap">').text($(this).text());
     });
 
-    const { markmap } = window;
     if(needMarkmap) {
-        markmap.autoLoader.renderAll();
+       window.markmap = {
+            autoLoader : {
+                manual: true,
+                onReady() {
+                    const { autoLoader, builtInPlugins } = window.markmap;
+                    autoLoader.transformPlugins = builtInPlugins.filter(plugin => plugin.name !== 'prism');
+                }
+            }
+        }
+        window.markmap.autoLoader.renderAll();
     }
 
 })(jQuery);
