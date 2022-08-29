@@ -617,7 +617,9 @@ The following section explains how to install the database:
 
 ```
 
-This will be rendered as if the instructions were in the parent document:
+This is rendered as if the instructions were in the parent document. Hugo
+v0.101.0+ is required for imported files containing shortcodes to be rendered
+correctly.
 
 ---
 
