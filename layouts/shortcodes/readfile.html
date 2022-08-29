@@ -27,7 +27,7 @@ if the file is not found */}}
     {{- highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape | 
     safeHTML ) (.Get "lang") "" -}}
   {{ else }}
-    {{- $.Scratch.Get "filepath" | readFile | htmlUnescape | safeHTML -}}
+    {{- $.Scratch.Get "filepath" | readFile | .Page.RenderString | htmlUnescape | safeHTML -}}
   {{ end }}
 {{ else }}
 
