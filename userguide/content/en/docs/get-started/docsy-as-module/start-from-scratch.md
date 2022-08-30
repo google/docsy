@@ -118,7 +118,6 @@ module:
   imports:
     - path: github.com/google/docsy
       disable: false
-  imports:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
