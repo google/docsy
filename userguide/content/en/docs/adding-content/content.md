@@ -102,7 +102,7 @@ menu:
     weight: 30
 
 cascade:
-- type: "blog"
+  - type: "blog"
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
@@ -151,12 +151,12 @@ type = "docs"
 title: "My Wonderful Site"
 
 cascade:
-- type: "blog"
-  toc_root: true
-  _target:
+  - type: "blog"
+    toc_root: true
+    _target:
     path: "/news/**"
-- type: "docs"
-  _target:
+  - type: "docs"
+    _target:
     path: "/**"
 ---
 {{< /tab >}}
@@ -431,9 +431,9 @@ linkTitle: "Announcing Docsy"
 description: "The Docsy Hugo theme lets project maintainers and contributors focus on content, not on reinventing a website infrastructure from scratch"
 author: Riona MacNamara
 resources:
-- src: "**.{png,jpg}"
-  title: "Image #:counter"
-  params:
+  - src: "**.{png,jpg}"
+    title: "Image #:counter"
+    params:
     byline: "Photo: Riona MacNamara / CC-BY-CA"
 ---
 {{< /tab >}}
