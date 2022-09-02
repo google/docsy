@@ -1,7 +1,3 @@
-# Used in sentences such as "All Tags"
-[ui_all]
-other = "所有"
-
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
@@ -18,7 +14,11 @@ other = "站内搜索…"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
-other = "in"
+other = "在"
+
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "所有"
 
 # Footer text
 [footer_all_rights_reserved]
@@ -30,7 +30,7 @@ other = "隐私政策"
 
 # Post (blog, articles etc.)
 [post_byline_by]
-other = "By"
+other = "借由"
 [post_created]
 other = "创建"
 [post_last_mod]
@@ -46,7 +46,7 @@ other = "提交文档问题"
 [post_create_project_issue]
 other = "提交项目问题"
 [post_posts_in]
-other = "Posts in"
+other = "张贴在"
 [post_reading_time]
 other = "分钟阅读"
 [post_less_than_a_minute_read]
@@ -70,12 +70,12 @@ other = "{{ .Site.Title }} 是一个开源项目，社区中的任何人都可�
 [community_learn]
 other = "学习和沟通"
 [community_using]
-other = "正在或打算使用 {{ .Site.Title }}，获取更多信息："
+other = "正在或打算使用 {{ .Site.Title }} ？获取更多信息："
 [community_develop]
 other = "开发和贡献"
 [community_contribute]
-other = "如果你想参与更多通过贡献 {{ .Site.Title }}，在这里加入我们："
+other = "如果你想通过为 {{ .Site.Title }} 贡献更多参与，请在此处加入我们："
 [community_how_to]
-other = "获取如何参与贡献这些文档，请参考我们的"
+other = "你可以了解如何为 {{ .Site.Title }} 做出贡献，请参考我们的"
 [community_guideline]
 other = "贡献指南"

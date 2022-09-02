@@ -76,6 +76,6 @@ other = "開發和貢獻"
 [community_contribute]
 other = "如果你想通過為 {{ .Site.Title }} 貢獻更多參與，請在此處加入我們："
 [community_how_to]
-other = "獲取如何參與貢獻這個文檔，請參考我們的"
+other = "你可以了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的"
 [community_guideline]
 other = "貢獻指南"
