@@ -42,3 +42,22 @@ module:
       target: assets/vendor/Font-Awesome
     - source: ../../node_modules/@fortawesome/fontawesome-free/webfonts
       target: static/webfonts
+    # Mounts for module installations,
+    # needed to work around a known bug in Go’s module management.
+    - source: assets/bootstrap/scss/_vendor
+      target: assets/vendor/bootstrap/scss/vendor
+  imports:
+    - path: github.com/twbs/bootstrap
+      disable: false
+      mounts:
+        - source: scss
+          target: assets/vendor/bootstrap/scss
+        - source: dist/js
+          target: assets/vendor/bootstrap/dist/js
+    - path: github.com/FortAwesome/Font-Awesome
+      disable: false
+      mounts:
+        - source: scss
+          target: assets/vendor/Font-Awesome/scss
+        - source: webfonts
+          target: static/webfonts
