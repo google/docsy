@@ -23,7 +23,6 @@ window.markmap = {
 <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
 {{ end -}}
 
-<script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 {{ if .Site.Params.plantuml.enable -}}
   <script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end -}}
@@ -72,5 +71,7 @@ window.markmap = {
 {{ if .Site.Params.prism_syntax_highlighting -}}
   <script src='{{ "js/prism.js" | relURL }}'></script>
 {{ end -}}
+
+<script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 
 {{ partial "hooks/body-end.html" . -}}
