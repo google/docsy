@@ -14,7 +14,7 @@ If you intend to update your site, consider [converting your site to Hugo Module
 
 ## Update your Docsy submodule
 
-If you are using the [Docsy theme as a submodule](/docs/get-started/other-options/#other-option-1-use-the-theme-as-a-submodule) in your project, here's how you update the submodule:
+If you are using the [Docsy theme as a submodule](/docs/get-started/other-options/#option-1-docsy-as-a-git-submodule) in your project, here's how you update the submodule:
 
 1. Navigate to the root of your local project, then run:
 
@@ -37,7 +37,7 @@ If you are using the [Docsy theme as a submodule](/docs/get-started/other-option
 
 ## Route 2: Update your Docsy clone
 
-If you [cloned the Docsy theme](/docs/get-started/other-options/#other-option-2-clone-the-docsy-theme) into
+If you [cloned the Docsy theme](/docs/get-started/other-options/#option-2-clone-the-docsy-theme) into
 the `themes` folder in your project, then you use the `git pull` command:
 
 1. Navigate to the `themes` directory in your local project:

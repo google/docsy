@@ -4,8 +4,6 @@ Bootstrap variables overrides for theme.
 See https://github.com/twbs/bootstrap/pull/23260
 */
 
-@fa-font-path :        "../webfonts";
-
 // Bootstrap flags. For more, see https://getbootstrap.com/docs/4.0/getting-started/theming/
 $enable-gradients: true !default;
 $enable-rounded: true !default;
@@ -65,6 +63,7 @@ $link-hover-decoration: none !default;
 $google_font_name: "Open Sans" !default;
 $google_font_family: "Open+Sans:300,300i,400,400i,700,700i" !default;
 $web-font-path: "https://fonts.googleapis.com/css?family=#{$google_font_family}&display=swap";
+$font-awesome-font-name: "Font Awesome 6 Free" !default;
 
 $td-fonts-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 

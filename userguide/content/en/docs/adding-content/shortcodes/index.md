@@ -33,10 +33,10 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 {{</* blocks/cover title="Welcome!" image_anchor="center" height="full" color="primary" */>}}
 <div class="mx-auto">
 	<a class="btn btn-lg btn-primary mr-3 mb-4" href="{{</* relref "/docs" */>}}">
-		Learn More <i class="fas fa-arrow-alt-circle-right ml-2"></i>
+		Learn More <i class="fa-solid fa-circle-right ml-2"></i>
 	</a>
 	<a class="btn btn-lg btn-secondary mr-3 mb-4" href="https://example.org">
-		Download <i class="fab fa-github ml-2 "></i>
+		Download <i class="fa-brands fa-github ml-2 "></i>
 	</a>
 	<p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p>
 	<div class="mx-auto mt-5">
@@ -100,10 +100,10 @@ The example below shows a section wrapping 3 feature sections.
 The new **TechOS** operating system is an open source project. It is a new project, but with grand ambitions.
 Please follow this space for updates!
 {{%/* /blocks/feature */%}}
-{{%/* blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
+{{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
-{{%/* blocks/feature icon="fab fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
+{{%/* blocks/feature icon="fa-brands fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
 For announcement of latest features etc.
 {{%/* /blocks/feature */%}}
 {{</* /blocks/section */>}}
@@ -119,7 +119,7 @@ For announcement of latest features etc.
 
 ```go-html-template
 
-{{%/* blocks/feature icon="fab fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
+{{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
 
@@ -288,6 +288,21 @@ description: Reference for the Pet Store API
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
 
+### redoc
+
+The `redoc` shortcode uses the open-source [Redoc](https://github.com/Redocly/redoc) tool to render reference API documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content), but you can use a URL as well, for example:
+
+```yaml
+---
+title: "Pet Store API"
+type: docs
+weight: 1
+description: Reference for the Pet Store API
+---
+
+{{</* redoc "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v2.0/yaml/petstore.yaml" */>}}
+```
+
 ### iframe
 
 With this shortcode you can embed external content into a Docsy page as an inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
@@ -307,7 +322,7 @@ With this shortcode you can embed external content into a Docsy page as an inlin
 {{% alert title="Warning" color="warning" %}}
 You can only embed external content from a server when its `X-Frame-Options` is not set or if it specifically allows embedding for your site. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options for details.
 
-There are several tools you can use to check if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test. Be aware that when this test says "Couldn’t find the X-Frame-Options header 
+There are several tools you can use to check if a website can be embedded via iframe - e.g.: https://gf.dev/x-frame-options-test. Be aware that when this test says "Couldn’t find the X-Frame-Options header
 in the response headers." you __CAN__ embed it, but when the test says "Great! X-Frame-Options header was found in the HTTP response headers as highlighted below.", you __CANNOT__ - unless it has been explicitly enabled for your site.
 {{% /alert %}}
 
@@ -367,17 +382,20 @@ print("Hello World!")
 {{< tab "Ruby" >}}
 puts "Hello World!"
 {{< /tab >}}
-{{< tab "Scala" >}}
+{{< tab header="Scala" >}}
 object HelloWorld extends App {
   println("Hello world!")
 }
 {{< /tab >}}
+{{< tab header="Reference" right=true text=true >}}
+{{< iframe src="https://www.mycplus.com/featured-articles/hello-world-programs-in-300-programming-languages" >}}
+{{< /tab >}}
 {{< /tabpane >}}
 
-The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a pane with one disabled and three active tabs:
+The Docsy template provides two shortcodes `tabpane` and `tab` that let you easily create tabbed panes. To see how to use them, have a look at the following code block, which renders to a right aligned pane with one disabled and three active tabs:
 
 ```go-html-template
-{{</* tabpane code=false */>}}
+{{</* tabpane text=true right=true */>}}
   {{%/* tab header="**Languages**:" disabled=true /*/%}}
   {{%/* tab header="English" lang="en" */%}}
   ![Flag United Kingdom](flags/uk.png)
@@ -389,14 +407,14 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
   ![Flag Tanzania](flags/tz.png)
-  **Karibu sana!** 
+  **Karibu sana!**
   {{%/* /tab */%}}
 {{%/* /tabpane */%}}
 ```
 
-This code translates to the tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
+This code translates to the right aligned tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
 
-{{< tabpane code=false >}}
+{{< tabpane text=true right=true >}}
   {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
   ![Flag United Kingdom](flags/uk.png)
@@ -408,7 +426,7 @@ This code translates to the tabbed pane below, showing a `Welcome!` greeting in 
   {{< /tab >}}
   {{% tab  header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
-  **Karibu sana!** 
+  **Karibu sana!**
   {{% /tab %}}
 {{< /tabpane >}}
 
@@ -416,13 +434,13 @@ This code translates to the tabbed pane below, showing a `Welcome!` greeting in 
 
 Tabbed panes are implemented using two shortcodes:
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can optionally hold the named parameters `lang` and/or `highlight`. The values of these optional parameters are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
-* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{ tab "My header" }} … {{ /tab }}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
+* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can hold the optional named parameters `lang`, `highlight` and `right`. The value of the optional parameters `lang` and `highlight` are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. Specify `right=true` if you want to right align your tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
+* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{ tab "My header" }} … {{ /tab }}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. To split the panes into a left aligned and a right aligned tab group, specify `right=true` in the dividing tab. By giving `right=true` several times, you can even render multiple tab groups. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
   * By default, the tab's content is rendered as `code block`. In order to get proper syntax highlighting, specify the named parameter `lang` --and optionally the parameter `highlight`-- for each tab. Parameters set in the parent `tabpane` shortcode will be overwritten.
-  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `code=false` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
+  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `text=true` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
 
 {{% alert title="Info" %}}
-By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode. 
+By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode.
 {{% /alert %}}
 
 ## Card panes
@@ -430,16 +448,16 @@ By default, the language of the selected tab is stored and preserved between dif
 When authoring content, it's sometimes very useful to put similar text blocks or code fragments on card like elements, which can be optionally presented side by side. Let's showcase this feature with the following sample card group which shows the first four Presidents of the United States:
 
 {{< cardpane >}}
-{{< card header="**George Washington**" title="\*1732 &nbsp;&nbsp;&nbsp; †1799" subtitle="**President:** 1789 – 1797" footer="![SignatureGeorgeWashington](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/George_Washington_signature.svg/320px-George_Washington_signature.svg.png \"Signature George Washington\")">}}
+{{< card header="**George Washington**" title="\*1732 &nbsp;&nbsp;&nbsp; †1799" subtitle="**President:** 1789 – 1797" footer="![SignatureGeorgeWashington](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/George_Washington_signature.svg/320px-George_Washington_signature.svg.png 'Signature George Washington')">}}
 ![PortraitGeorgeWashington](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/633px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg "Portrait George Washington")
 {{< /card >}}
-{{< card header="**John Adams**" title="\* 1735 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1797 – 1801" footer="![SignatureJohnAdams](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/John_Adams_Sig_2.svg/320px-John_Adams_Sig_2.svg.png \"Signature John Adams\")" >}}
+{{< card header="**John Adams**" title="\* 1735 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1797 – 1801" footer="![SignatureJohnAdams](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/John_Adams_Sig_2.svg/320px-John_Adams_Sig_2.svg.png 'Signature John Adams')" >}}
 ![PortraitJohnAdams](https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gilbert_Stuart%2C_John_Adams%2C_c._1800-1815%2C_NGA_42933.jpg/633px-Gilbert_Stuart%2C_John_Adams%2C_c._1800-1815%2C_NGA_42933.jpg "Portrait John Adams")
 {{< /card >}}
-{{< card header="**Thomas Jefferson**" title="\* 1743 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1801 – 1809" footer="![SignatureThomasJefferson](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Thomas_Jefferson_Signature.svg/320px-Thomas_Jefferson_Signature.svg.png \"Signature Thomas Jefferson\")" >}}
+{{< card header="**Thomas Jefferson**" title="\* 1743 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1801 – 1809" footer="![SignatureThomasJefferson](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Thomas_Jefferson_Signature.svg/320px-Thomas_Jefferson_Signature.svg.png 'Signature Thomas Jefferson')" >}}
 ![PortraitThomasJefferson](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29%28cropped%29.jpg/390px-Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29%28cropped%29.jpg "Portrait Thomas Jefferson")
 {{< /card >}}
-{{< card header="**James Madison**" title="\* 1751 &nbsp;&nbsp;&nbsp; † 1836" subtitle="**President:** 1809 – 1817" footer="![SignatureJamesMadison](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/James_Madison_sig.svg/320px-James_Madison_sig.svg.png \"Signature James Madison\")" >}}
+{{< card header="**James Madison**" title="\* 1751 &nbsp;&nbsp;&nbsp; † 1836" subtitle="**President:** 1809 – 1817" footer="![SignatureJamesMadison](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/James_Madison_sig.svg/320px-James_Madison_sig.svg.png 'Signature James Madison')" >}}
 ![PortraitJamesMadison](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/James_Madison%28cropped%29%28c%29.jpg/393px-James_Madison%28cropped%29%28c%29.jpg "Portrait James Madison")
 {{< /card >}}
 {{< /cardpane >}}
@@ -456,7 +474,7 @@ If your content is any kind of text other than programming code, use the univers
 
 ```go-html-template
 {{</* card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono"
-          footer="![SignatureJohnLennon](https://server.tld/…/signature.png \"Signature John Lennon\")">*/>}}
+          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')">*/>}}
 Imagine there's no heaven, It's easy if you try<br/>
 No hell below us, above us only sky<br/>
 Imagine all the people living for today…
@@ -467,7 +485,7 @@ Imagine all the people living for today…
 This code translates to the left card shown below, showing the lyrics of John Lennon's famous song `Imagine`. A second explanatory card element to the right indicates and explains the individual components of a card:
 
 {{< cardpane >}}
-{{< card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono" footer="![SignatureJohnLennon](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Firma_de_John_Lennon.svg/320px-Firma_de_John_Lennon.svg.png \"Signature John Lennon\")">}}
+{{< card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono" footer="![SignatureJohnLennon](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Firma_de_John_Lennon.svg/320px-Firma_de_John_Lennon.svg.png 'Signature John Lennon')">}}
 Imagine there's no heaven, It's easy if you try<br/>
 No hell below us, above us only sky<br/>
 Imagine all the people living for today…
@@ -576,6 +594,10 @@ contents:
 ```go-html-template
 ## Installation
 
+{{%/* alert title="Note" color="primary" */%}}
+Check system compatibility before proceeding.
+{{%/* /alert */%}}
+
 1.  Download the installation files.
 
 1.  Run the installation script
@@ -595,7 +617,9 @@ The following section explains how to install the database:
 
 ```
 
-This will be rendered as if the instructions were in the parent document:
+This is rendered as if the instructions were in the parent document. Hugo
+v0.101.0+ is required for imported files containing shortcodes to be rendered
+correctly.
 
 ---
 
@@ -662,3 +686,17 @@ starting with `/`. The root directory is the `/content` folder.
 | code | false | Boolean value. If `true` the contents is treated as code|
 | lang | plain text | Programming language |
 
+## Conditional text
+
+The `conditional-text` shortcode allows you to show or hide parts of your content depending on the value of the `buildCondition` parameter set in your configuration file. This can be useful if you are generating different builds from the same source, for example, using a different product name. This shortcode helps you handle the minor differences between these builds.
+
+```text
+{{%/* conditional-text include-if="foo" */%}}
+This text appears in the output only if `buildCondition = "foo" is set in your config file`.
+{{%/* /conditional-text */%}}
+{{%/* conditional-text exclude-if="bar" */%}}
+This text does not appear in the output if `buildCondition = "bar" is set in your config file`.
+{{%/* /conditional-text */%}}
+```
+
+If you are using this shortcode, note that when evaluating the conditions, substring matches are matches as well. That means, if you set `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!

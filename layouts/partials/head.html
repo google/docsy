@@ -21,8 +21,7 @@
     {{ .Site.Title -}}
   {{ end -}}
 </title>
-{{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
-<meta name="description" content="{{ $desc }}">
+<meta name="description" content="{{ template "partials/page-description.html" . }}">
 {{ template "_internal/opengraph.html" . -}}
 {{ template "_internal/schema.html" . -}}
 {{ template "_internal/twitter_cards.html" . -}}
@@ -32,14 +31,14 @@
   integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
   crossorigin="anonymous"></script>
 {{ if .Site.Params.offlineSearch -}}
-<script
+<script defer
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
 {{ end -}}
 
 {{ if .Site.Params.prism_syntax_highlighting -}}
-<link rel="stylesheet" href="{{ "/css/prism.css" | relURL }}"/>
+<link rel="stylesheet" href="{{ "css/prism.css" | relURL }}"/>
 {{ end -}}
 
 {{ partial "hooks/head-end.html" . -}}

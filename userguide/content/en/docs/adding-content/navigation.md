@@ -8,7 +8,7 @@ description: >
 
 ## Top-level menu
 
-The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`/`config.yaml`/`config.json`. 
+The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`/`config.yaml`/`config.json`.
 
 To add a page or section to this menu, add it to the site's `main` menu in either `config.toml`/`config.yaml`/`config.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
@@ -21,7 +21,7 @@ linkTitle = "Documentation"
 
 [menu.main]
 weight = 20
-pre = "<i class='fas fa-book'></i>"
+pre = "<i class='fa-solid fa-book'></i>"
 +++
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
@@ -31,7 +31,7 @@ linkTitle: "Documentation"
 menu:
   main:
     weight: 20
-    pre: <i class='fas fa-book'></i>
+    pre: <i class='fa-solid fa-book'></i>
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
@@ -41,7 +41,7 @@ menu:
   "menu": {
     "main": {
       "weight": 20,
-      "pre": "<i class='fas fa-book'></i>"
+      "pre": "<i class='fa-solid fa-book'></i>"
     }
   }
 }
@@ -93,7 +93,7 @@ As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
-    pre = "<i class='fab fa-github'></i>"
+    pre = "<i class="fa-brands fa-github"></i>"
     post = "<span class='alert'>New!</span>"
 {{< /tab >}}
 {{< tab header="config.yaml" lang="yaml" >}}
@@ -102,7 +102,7 @@ menu:
     - name: GitHub
       weight: 50
       url: 'https://github.com/google/docsy/'
-      pre: <i class='fab fa-github'></i>
+      pre: <i class="fa-brands fa-github"></i>
       post: <span class='alert'>New!</span>
 {{< /tab >}}
 {{< tab header="config.json" lang="json" >}}
@@ -113,7 +113,7 @@ menu:
         "name": "GitHub",
         "weight": 50,
         "url": "https://github.com/google/docsy/",
-        "pre": "<i class='fab fa-github'></i>",
+        "pre": "<i class="fa-brands fa-github"></i>",
         "post": "<span class='alert'>New!</span>"
       }
     ]
@@ -129,7 +129,7 @@ You can find a complete list of icons to use in the [FontAwesome documentation](
 If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a
 version selector drop down to the top-level menu.
 
-You can find out more in the guide to 
+You can find out more in the guide to
 [versioning your docs](/docs/adding-content/versioning/).
 
 ### Adding a language drop-down
@@ -177,7 +177,7 @@ description: >
 {{< /tab >}}
 {{< /tabpane >}}
 
-To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter. 
+To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter.
 
 To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
 
@@ -227,7 +227,7 @@ On large sites (default: > 2000 pages) the section menu is not generated for eac
 
 ### Add icons to the section menu
 
-You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fas fa-tools`). 
+You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
 
 You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 
@@ -235,7 +235,7 @@ Out of the box, if you want to use icons, you should define icons for all items 
 
 ### Add manual links to the section menu
 
-By default the section menu is entirely generated from your section's pages. If you want to add a manual link to this menu, such as a link to an external site or a page in a different section of your site, you can do this by creating a *placeholder page file* in the doc hierarchy with the appropriate weight and some special parameters in its metadata (frontmatter) to specify the link details. 
+By default the section menu is entirely generated from your section's pages. If you want to add a manual link to this menu, such as a link to an external site or a page in a different section of your site, you can do this by creating a *placeholder page file* in the doc hierarchy with the appropriate weight and some special parameters in its metadata (frontmatter) to specify the link details.
 
 To create a placeholder page, create a page file as usual in the directory where you want the link to show up in the menu, and add a `manualLink` parameter to its metadata. If a page has `manualLink` in its metadata, Docsy generates a link for it in the section menu for this page and in the section index (the list of the child pages of a section on a landing page - see [description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)), but the link destination is replaced by the value of `manualLink`. The link text is the `title` (or `linkTitle` if set) of your placeholder page. You can optionally also set the `title` attribute of the link with the parameter `manualLinkTitle` and a link target with `manualLinkTarget` - for example if you want an external link to open in a new tab you can set the link target to `_blank`. Docsy automatically adds `rel=noopener` to links that open new tabs as a security best practice.
 
@@ -247,7 +247,9 @@ To create a placeholder page, create a page file as usual in the directory where
 
 ## Breadcrumb navigation
 
-Breadcrumb navigation is enabled by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
+Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
+
+Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `config.toml` by setting site param `taxonomy_breadcrumb_disable = true`.
 
 ## Site search options
 
@@ -289,7 +291,7 @@ By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse
 
     * Select **Look and feel**. Change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
     * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
-    
+
 {{% alert title="Tip" %}}
 Your site search results should show up within a couple of days. If it takes longer than that, you can manually request that your site is indexed by [submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
 {{% /alert %}}
@@ -382,13 +384,13 @@ algolia_docsearch: true
 3. Disable the sidebar search in `config.toml`/`config.yaml`/`config.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
 3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
-   
+
    * In `head-end.html` add the DocSearch CSS:
 
       ```html
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
       ```
-   
+
 
    * In `body-end.html` add the DocSearch script, replacing the `docsearch` details with the snippet you get from Algolia (the example below is Algolia's own site index!). You must provide `#docsearch` as your `container` value as that's the ID of the `div` we provide in Docsy's layout:
 
