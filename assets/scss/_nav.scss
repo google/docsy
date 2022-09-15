@@ -202,14 +202,12 @@ nav.foldable-nav {
 
         .ul-1 .with-child > label:hover:before {
             color: $primary;
-            transform: rotate(30deg);
-            transition: transform 0.5s;
+            transition: color 0.3s;
         }
 
         .ul-1 .with-child > input:checked ~ label:hover:before {
             color: $primary;
-            transform: rotate(60deg) !important;
-            transition: transform 0.5s;
+            transition: color 0.3s;
         }
     }
 }
