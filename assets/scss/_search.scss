@@ -1,8 +1,13 @@
 // Search
-
-.td-search-input {
+.td-search-wrapper {
+    position: relative;
     background: transparent;
     max-width: 90%;
+}
+
+.td-search-wrapper .td-search-input {
+    width: 100%;
+    text-indent: 1.25em;
 
     &.form-control:focus {
         border-color: lighten($primary, 60%);
@@ -14,7 +19,25 @@
         border-radius: 1rem;
     }
 
-    font-family: $font-family-base, $font-awesome-font-name;
+    font-family: $font-family-base;
+}
+
+.td-search-wrapper .fa {
+    // Make this consistent with placeholder formatting.
+    color: $input-placeholder-color;
+
+    // Vertically center the content.
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    height: 100%;
+
+    // Position this on the left of the input.
+    position: absolute;
+    left: 0.75em;
+
+    // Click-through to the underlying input.
+    pointer-events: none;
 }
 
 .popover.offline-search-result {
