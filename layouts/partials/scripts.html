@@ -48,7 +48,7 @@ window.markmap = {
     {{ printf "onload='renderMathInElement(%s, %s);'" (( .Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}></script>
 {{ end -}}
 
-{{ $jsPopper := resources.GetRemote "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" -}}
+{{ $jsPopper := resources.GetRemote "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" -}}
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsAnchor := resources.Get "js/anchor.js" -}}
@@ -70,6 +70,9 @@ window.markmap = {
 
 {{ if .Site.Params.prism_syntax_highlighting -}}
   <script src='{{ "js/prism.js" | relURL }}'></script>
+{{ else -}}
+  {{ $c2cJS := resources.Get "js/click-to-copy.js" | minify |  fingerprint }}
+  <script defer src="{{ $c2cJS.RelPermalink }}" integrity="{{ $c2cJS.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end -}}
 
 <script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
