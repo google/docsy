@@ -29,11 +29,15 @@ The following code sample produces an introductory text line followed by a formu
 
 ```tex
 The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
-$$\tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+$$
+\tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}
+$$
 ```
 
 The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
-$$\tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}$$
+$$
+\tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
+$$
 
 You can also use [GLFM's math blocks](https://docs.gitlab.com/ee/user/markdown.html#math) (requires hugo 0.93 or newer):
 ````markdown
