@@ -31,11 +31,13 @@
   {{ $refpage := .refpage }}
   {{ range .links }}
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="{{ .name }}" aria-label="{{ .name }}">
+    {{ $target := "_blank" }}
+    {{ $url := .url }}
     {{ if not (urls.Parse .url).Host }}
-    <a class="text-white" target="_self" rel="noopener" href="{{ relref $refpage .url }}" aria-label="{{ .name }}">
-    {{ else }}
-    <a class="text-white" target="_blank" rel="noopener" href="{{ .url }}" aria-label="{{ .name }}">
+        {{ $target = "_self" }}
+        {{ $url = (relref $refpage .url) }}
     {{ end }}
+    <a class="text-white" target="{{ $target }}" rel="noopener" href="{{ $url }}" aria-label="{{ .name }}">
       <i class="{{ .icon }}"></i>
     </a>
   </li>
