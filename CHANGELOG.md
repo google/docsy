@@ -27,7 +27,11 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 - **Upgraded Bootstrap** to v4.6.2, resulting in some style changes. For
   details, see [v4.6.2 release notes][].
 - **[Upgraded FontAwesome][]** to v6.1.2 from v5. While many icons were renamed,
-  the v5 names will still work. For all the details, see [What's changed][].
+  the v5 names will still work. For details about icon renames and more, see
+  [What's changed][].
+- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
+  upgrade. You might notice other width changes of elements using FA icons and
+  the FA font.
 
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
@@ -96,6 +100,13 @@ For a full list of the changes to this release, see the [release notes][0.3.0].
   [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3). If
   your site uses the deprecated DocSearch v2, you must
   [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
+- (**Edit**) [PR #1009][] inadvertently changed the base [Bootstrap styles for
+  cards][bs4cards], as well as the Docsy `highlight` style. For details, see
+  [issue #1154][]. Release [0.5.0][] includes a fix.
+
+[bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
+[pr #1009]: https://github.com/google/docsy/pull/1009
+[issue #1154]: https://github.com/google/docsy/issues/1154
 
 ## [0.2.0][]
 
