@@ -96,6 +96,13 @@ For a full list of the changes to this release, see the [release notes][0.3.0].
   [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3). If
   your site uses the deprecated DocSearch v2, you must
   [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
+- (**Edit**) [PR #1009][] inadvertently changed the base [Bootstrap styles for
+  cards][bs4cards], as well as the Docsy `highlight` style. For details, see
+  [issue #1154][]. Release [0.5.0][] includes a fix.
+
+[bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
+[pr #1009]: https://github.com/google/docsy/pull/1009
+[issue #1154]: https://github.com/google/docsy/issues/1154
 
 ## [0.2.0][]
 
