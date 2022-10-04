@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore docsy
+  cSpell:ignore deining docsy gtag
 -->
 
 # Changelog
@@ -33,9 +33,16 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
   upgrade. You might notice other width changes of elements using FA icons and
   the FA font.
 
+**Other changes**:
+
+- By default, Docsy now uses the [gtag.js][] analytics library for all site
+  tags. For details, see [Adding Analytics > Setup][].
+
+[Adding Analytics > Setup]: https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
   https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[gtag.js]: https://support.google.com/analytics/answer/10220869
 [upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
 [what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
