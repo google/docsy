@@ -125,6 +125,38 @@ params:
   markmap:
     enable: true
 
+  cdn:
+    jquery:
+      url: https://code.jquery.com/jquery-3.6.0.min.js
+      checksum: sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK
+    lunrjs:
+      url: https://unpkg.com/lunr@2.3.9/lunr.min.js
+      checksum: sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli
+    mermaidjs:
+      url: https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js
+      checksum: sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==
+    markmap:
+      url: https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.1/dist/index.min.js
+      checksum: sha256-Yllbe19RIsDlnBmUHGLiUUrFdvAv5yQcq1oVsEWC1Zs=
+    katexjs:
+      url: https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js
+      checksum: sha512-5ufNcHqOYgilGEHPfuRIQ5B/vDS1M8+UC+DESZ5CwVgGTg+b2Ol/15rYL/GiCWJ/Sx8oVo0FPFok1dPk8U9INQ==
+    katexcss:
+      url: https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css
+      checksum: sha512-vJqxkZ+Sugf/6WRlpcxN01qVfX/29hF6qc33eHF1va3NgoV+U+wCi+uTAsQ10sDoGyBxHLdaHvGwDlV3yVYboA==
+    katex_mhchem:
+      url: https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js
+      checksum: sha512-HWb6LyQhO6UkmYLjdSblpgiOvvbdkoMRjln0POPhOVbZu3l4QdqwZnMJ/cuwKScU5pWARejB495TAAAz0WNsXQ==
+    katex_auto_render:
+      url: https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js
+      checksum: sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==
+    popperjs:
+      url: https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js
+      checksum:
+    redocjs:
+      url: https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.76/bundles/redoc.standalone.js
+      checksum: sha256-4byV6ohraqjCjVpsPoK6wRuZks6zGUq4cj8+0X89APs=
+
 taxonomies:
   tag: tags
   category: categories

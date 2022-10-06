@@ -22,7 +22,7 @@
             }
           #redoc h2 { margin-top: 0px;}
       </style>
-  
+
     <!-- Back to top button start -->
     <style>
       #myBtn {
@@ -40,7 +40,7 @@
         padding: 15px;
         border-radius: 4px;
       }
-      
+
       #myBtn:hover {
         background-color: #555;
       }
@@ -49,10 +49,10 @@
   <script>
       //Get the button
       var mybutton = document.getElementById("myBtn");
-      
+
       // When the user scrolls down 20px from the top of the document, show the button
       window.onscroll = function() {scrollFunction()};
-      
+
       function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
           mybutton.style.display = "block";
@@ -60,7 +60,7 @@
           mybutton.style.display = "none";
         }
       }
-      
+
       // When the user clicks on the button, scroll to the top of the document
       function topFunction() {
         document.body.scrollTop = 0;
@@ -83,9 +83,13 @@
     Redoc element with link to your OpenAPI definition
     -->
    <div id="redoc-container">
-   <redoc spec-url='{{ $url }}' hide-hostname="true" suppress-warnings="true" lazy-rendering  native-scrollbars scroll-y-offset=".js-navbar-scroll" {{ $otheroptions }}></redoc>
+   <redoc spec-url='{{ $url }}" hide-hostname="true" suppress-warnings="true" lazy-rendering  native-scrollbars scroll-y-offset=".js-navbar-scroll" {{ $otheroptions }}></redoc>
    </div>
     <!--
     Link to Redoc JavaScript on CDN for rendering standalone element
     -->
-    <script src="https://cdn.jsdelivr.net/npm/redoc@latest/bundles/redoc.standalone.js"></script>
+    <script
+      src="{{ .Site.Params.cdn.redocjs.url | default `https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.76/bundles/redoc.standalone.js` }}"
+      integrity="{{ .Site.Params.cdn.redocjs.checksum | default `sha256-4byV6ohraqjCjVpsPoK6wRuZks6zGUq4cj8+0X89APs=` }}"
+      crossorigin="anonymous"></script>
+
