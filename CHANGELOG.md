@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore deining docsy gtag
+  cSpell:ignore deining docsy gtag lookandfeel
 -->
 
 # Changelog
@@ -29,6 +29,10 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 - **[Upgraded FontAwesome][]** to v6.1.2 from v5. While many icons were renamed,
   the v5 names will still work. For details about icon renames and more, see
   [What's changed][].
+- **Display logo by default**. Most projects show their logo in the navbar. In
+  support of this majority, Docsy now displays a logo by default. For details on
+  how to hide the logo (or your brand name), see [Styling your project logo and
+  name][].
 - **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
   upgrade. You might notice other width changes of elements using FA icons and
   the FA font.
@@ -43,6 +47,8 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 [docsy as an npm package]:
   https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [gtag.js]: https://support.google.com/analytics/answer/10220869
+[styling your project logo and name]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
 [upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
 [what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
