@@ -2,7 +2,7 @@
 .td-search-wrapper {
     position: relative;
     background: transparent;
-    max-width: 90%;
+    width: 90%;
 }
 
 .td-search-wrapper .td-search-input {
@@ -38,6 +38,15 @@
 
     // Click-through to the underlying input.
     pointer-events: none;
+}
+
+# Hide the icon on focus.
+.td-search-wrapper:focus-within .fa {
+    display: none;
+}
+
+.td-search-wrapper:focus-within .td-search-input {
+   text-indent: 0px;
 }
 
 .popover.offline-search-result {
