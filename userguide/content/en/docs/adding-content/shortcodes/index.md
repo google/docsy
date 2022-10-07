@@ -409,7 +409,7 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
   ![Flag Tanzania](flags/tz.png)
   **Karibu sana!**
   {{%/* /tab */%}}
-{{%/* /tabpane */%}}
+{{</* /tabpane */>}}
 ```
 
 This code translates to the right aligned tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
