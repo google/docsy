@@ -40,7 +40,7 @@
     pointer-events: none;
 }
 
-# Hide the icon on focus.
+// Hide the icon on focus.
 .td-search-wrapper:focus-within .fa {
     display: none;
 }
