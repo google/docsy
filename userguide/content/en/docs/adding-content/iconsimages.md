@@ -29,10 +29,10 @@ navbar_logo: false
 {{< /tab >}}
 {{< /tabpane >}}
 
-For information about styling your logo, see [Styling your brand logo and
-name][]
+For information about styling your logo, see [Styling your project logo and
+name][].
 
-[Styling your brand logo and name]: /docs/adding-content/lookandfeel/#styling-your-brand-logo-and-name
+[Styling your project logo and name]: /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
 
 ## Add your favicons
 

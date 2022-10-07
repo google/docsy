@@ -214,9 +214,9 @@ site's [configuration file][].
 [configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #site-colors
 
-### Styling your brand logo and name
+### Styling your project logo and name
 
-The default Docsy navbar (`.td-navbar`) contains your navbar-brand, consisting
+The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
 of the following:
 
 1.  [Your logo][], which is included in the navbar as an inline SVG, styled by
@@ -227,9 +227,10 @@ of the following:
     responsive. [Override the default styling][project-styles] of `.td-navbar
     .navbar-brand svg` or (equivalently) `.td-navbar .navbar-brand__logo` as
     needed.
-2.  Your brand name, which is the site `title`. If you don't want the brand name
-    to show (for example, because your logo is or contains a [wordmark][]), then
-    add the following custom styling to your [project's styles][project-styles]:
+2.  Your project name, which is the site `title`. If you don't want your project
+    name to appear (for example, because your logo is or contains a
+    [wordmark][]), then add the following custom styling to your [project's
+    styles][project-styles]:
 
     ```css
     .td-navbar .navbar-brand__name {
