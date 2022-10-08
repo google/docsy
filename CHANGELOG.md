@@ -24,11 +24,12 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 
 **Breaking changes**:
 
-- **Upgraded Bootstrap** to v4.6.2, resulting in some style changes. For
-  details, see [v4.6.2 release notes][].
-- **[Upgraded FontAwesome][]** to v6.1.2 from v5. While many icons were renamed,
-  the v5 names will still work. For details about icon renames and more, see
-  [What's changed][].
+- **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
+  (such as an adjustment in the size of `small`). For details, see [v4.6.2
+  release notes][].
+- **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
+  v5 names still work. For details about icon renames and more, see [What's
+  changed][].
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
   how to hide the logo (or your brand name), see [Styling your project logo and
