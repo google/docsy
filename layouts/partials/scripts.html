@@ -71,8 +71,13 @@ window.markmap = {
 {{ if .Site.Params.prism_syntax_highlighting -}}
   <script src='{{ "js/prism.js" | relURL }}'></script>
 {{ else -}}
-  {{ $c2cJS := resources.Get "js/click-to-copy.js" | minify |  fingerprint }}
-  <script defer src="{{ $c2cJS.RelPermalink }}" integrity="{{ $c2cJS.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{ $c2cJS := resources.Get "js/click-to-copy.js" -}}
+  {{ if hugo.IsProduction -}}
+    {{ $c2cJS = $c2cJS | minify | fingerprint -}}
+  {{ end -}}
+  <script defer src="{{ $c2cJS.RelPermalink }}" {{ with $c2cJS.Data.Integrity -}}
+    integrity="{{ . }}" {{ end -}}
+    crossorigin="anonymous"></script>
 {{ end -}}
 
 <script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
