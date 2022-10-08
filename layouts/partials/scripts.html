@@ -48,8 +48,7 @@ window.markmap = {
     {{ printf "onload='renderMathInElement(%s, %s);'" (( .Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}></script>
 {{ end -}}
 
-{{ $jsPopper := resources.GetRemote "https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.js" -}}
-{{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.js" -}}
+{{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsAnchor := resources.Get "js/anchor.js" -}}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
@@ -60,7 +59,7 @@ window.markmap = {
 {{ if .Site.Params.offlineSearch -}}
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
-{{ $js := (slice $jsPopper $jsBs $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap $jsDrawio) | resources.Concat "js/main.js" -}}
+{{ $js := (slice $jsBs $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap $jsDrawio) | resources.Concat "js/main.js" -}}
 {{ if hugo.IsProduction -}}
   {{ $js := $js | minify | fingerprint -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
