@@ -24,24 +24,23 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 
 **Breaking changes**:
 
+- **Display logo by default**. Most projects show their logo in the navbar. In
+  support of this majority, Docsy now displays a logo by default. For details on
+  how to hide the logo (or your brand name), see [Styling your project logo and
+  name][].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
   release notes][].
 - **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
   changed][].
-- **Display logo by default**. Most projects show their logo in the navbar. In
-  support of this majority, Docsy now displays a logo by default. For details on
-  how to hide the logo (or your brand name), see [Styling your project logo and
-  name][].
-- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
-  upgrade. You might notice other width changes of elements using FA icons and
-  the FA font.
 
 **Other changes**:
 
 - By default, Docsy now uses the [gtag.js][] analytics library for all site
   tags. For details, see [Adding Analytics > Setup][].
+- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
+  upgrade. In any case, the search-box styling has also been updated.
 
 [Adding Analytics > Setup]: https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
