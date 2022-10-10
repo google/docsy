@@ -14,7 +14,7 @@
         border-radius: 1rem;
     }
 
-    font-family: "Font Awesome 5 Free", $font-family-base;
+    font-family: $font-family-base, $font-awesome-font-name;
 }
 
 .popover.offline-search-result {

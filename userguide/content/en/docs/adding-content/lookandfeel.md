@@ -3,6 +3,7 @@ title: Look and Feel
 date: 2017-01-05
 weight: 2
 description: Customize colors, fonts, code highlighting, and more for your site.
+spelling: cSpell:ignore wordmark docsy
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. And because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values (such as project colors and fonts) in its special SCSS project variables file, or do more serious customization by creating your own styles.
@@ -175,15 +176,13 @@ Docsy includes JavaScript and CSS files for a basic Prism configuration, which s
 
 * Code blocks styled with the Prism `Default` theme
 * Copy to clipboard buttons on code blocks
-* Syntax highlighting for a number of common languages, as specified in the following Prism download link:
+* Syntax highlighting for a number of common languages, as specified in the following Prism download link, [Customize your download][prismjs-download+].
 
-```none
-    https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
-```
+[prismjs-download+]: https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
 
 ### Code blocks with no language
 
-By default Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
+By default, Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
 
 ### Extending Prism for additional languages or plugins
 
@@ -215,7 +214,34 @@ site's [configuration file][].
 [configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #site-colors
 
+### Styling your project logo and name
 
+The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
+of the following:
+
+1.  [Your logo][], which is included in the navbar as an inline SVG, styled by
+    `.td-navbar .navbar-brand svg`. For the style details, see [_nav.scss][].
+
+    To ensure your logo displays correctly, you may want to resize it and ensure
+    that it doesn't have height and width attributes so that its size is fully
+    responsive. [Override the default styling][project-styles] of `.td-navbar
+    .navbar-brand svg` or (equivalently) `.td-navbar .navbar-brand__logo` as
+    needed.
+2.  Your project name, which is the site `title`. If you don't want your project
+    name to appear (for example, because your logo is or contains a
+    [wordmark][]), then add the following custom styling to your [project's
+    styles][project-styles]:
+
+    ```css
+    .td-navbar .navbar-brand__name {
+      display: none;
+    }
+    ```
+
+[_nav.scss]: https://github.com/google/docsy/blob/main/assets/scss/_nav.scss
+[project-styles]: /docs/adding-content/lookandfeel/#project-style-files
+[wordmark]: https://en.wikipedia.org/wiki/Wordmark
+[your logo]: /docs/adding-content/iconsimages/#add-your-logo
 
 ## Customizing templates
 

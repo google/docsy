@@ -102,7 +102,7 @@ menu:
     weight: 30
 
 cascade:
-- type: "blog"
+  - type: "blog"
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
@@ -151,12 +151,12 @@ type = "docs"
 title: "My Wonderful Site"
 
 cascade:
-- type: "blog"
-  toc_root: true
-  _target:
+  - type: "blog"
+    toc_root: true
+    _target:
     path: "/news/**"
-- type: "docs"
-  _target:
+  - type: "docs"
+    _target:
     path: "/**"
 ---
 {{< /tab >}}
@@ -431,9 +431,9 @@ linkTitle: "Announcing Docsy"
 description: "The Docsy Hugo theme lets project maintainers and contributors focus on content, not on reinventing a website infrastructure from scratch"
 author: Riona MacNamara
 resources:
-- src: "**.{png,jpg}"
-  title: "Image #:counter"
-  params:
+  - src: "**.{png,jpg}"
+    title: "Image #:counter"
+    params:
     byline: "Photo: Riona MacNamara / CC-BY-CA"
 ---
 {{< /tab >}}
@@ -561,13 +561,13 @@ params:
         {
           "name": "Twitter",
           "url": "https://example.org/twitter",
-          "icon": "fab fa-twitter",
+          "icon": "fa-brands fa-twitter",
           "desc": "Follow us on Twitter to get the latest news!"
         },
         {
           "name": "Stack Overflow",
           "url": "https://example.org/stack",
-          "icon": "fab fa-stack-overflow",
+          "icon": "fa-brands fa-stack-overflow",
           "desc": "Practical questions and curated answers"
         }
       ],
@@ -575,13 +575,13 @@ params:
         {
           "name": "GitHub",
           "url": "https://github.com/google/docsy",
-          "icon": "fab fa-github",
+          "icon": "fa-brands fa-github",
           "desc": "Development takes place here!"
         },
         {
           "name": "Slack",
           "url": "https://example.org/slack",
-          "icon": "fab fa-slack",
+          "icon": "fa-brands fa-slack",
           "desc": "Chat with other project developers"
         },
         {
