@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.5.0-dev",
+  "version": "0.5.0",
   "repository": "github:google/docsy",
   "scripts": {
     "_cd:docs": "cd userguide &&",
@@ -8,19 +8,23 @@
     "build:production": "npm run cd:docs build:production",
     "build": "npm run cd:docs build",
     "cd:docs": "npm run _cd:docs -- npm run",
+    "check-links:all": "npm run cd:docs check-links:all",
+    "check-links": "npm run cd:docs check-links",
     "docs-install": "npm run _cd:docs -- npm install",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "serve": "npm run cd:docs serve",
-    "update:pkg:hugo": "npm install --save-dev --save-exact hugo-extended@latest"
+    "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
+    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@6 bootstrap@4"
   },
+  "cspell": "cSpell:ignore docsy userguide fortawesome fontawesome ",
   "prettier": {
     "proseWrap": "always"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "bootstrap": "^4.6.1"
+    "@fortawesome/fontawesome-free": "6.2.0",
+    "bootstrap": "4.6.2"
   },
   "devDependencies": {
-    "hugo-extended": "0.101.0"
+    "hugo-extended": "0.104.3"
   }
 }

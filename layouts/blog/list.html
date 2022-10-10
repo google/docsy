@@ -8,7 +8,7 @@
 <div class="row">
 	<div class="col-12">
 		{{- if .Pages -}}
-		{{ $pag := .Paginate (( $.Scratch.Get "blog-pages").GroupByDate "2006")}}
+		{{ $pag := .Paginate (( $.Scratch.Get "blog-pages").GroupByDate "2006" )}}
 			{{ range $pag.PageGroups }}
 			<h2>{{ T "post_posts_in" }} {{ .Key }}</h2>
 			<ul class="list-unstyled mt-4">

@@ -1,7 +1,7 @@
 {{- $.Scratch.Add "offline-search-index" slice -}}
 {{- range where .Site.AllPages ".Params.exclude_search" "!=" true -}}
 {{- /* We have to apply `htmlUnescape` again after `truncate` because `truncate` applies `html.EscapeString` if the argument is not HTML. */ -}}
-{{- /* Indvidual taxonomies can be added in the next line by add '"taxonomy-name" (.Params.taxonomy-name | default "")' to the dict (as seen for categories and tags). */ -}}
+{{- /* Individual taxonomies can be added in the next line by add '"taxonomy-name" (.Params.taxonomy-name | default "")' to the dict (as seen for categories and tags). */ -}}
 {{- $.Scratch.Add
     "offline-search-index"
     (dict
