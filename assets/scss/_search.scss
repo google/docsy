@@ -18,8 +18,10 @@
     @if $enable-rounded {
         border-radius: 1rem;
     }
+}
 
-    font-family: $font-family-base;
+.td-search-wrapper .td-search-input::placeholder {
+    color: $input-placeholder-color;
 }
 
 .td-search-wrapper .fa {
