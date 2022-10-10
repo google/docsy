@@ -103,7 +103,7 @@ errorColor = "#CD5C5C"
   display = false
 [[params.katex.options.delimiters]]
   left = "\\["
-  right = '\\]'
+  right = "\\]"
   display = true
 {{< /tab >}}
 {{< tab header="config.yaml" lang="yaml" >}}
@@ -135,8 +135,8 @@ params:
         - left: \(
           right: \)
           display: false
-        - left: '\['
-          right: '\\]'
+        - left: \[
+          right: \]
           display: true
 {{< /tab >}}
 {{< tab header="config.json" lang="json" >}}
@@ -166,7 +166,7 @@ params:
           },
           {
             "left": "\\[",
-            "right": "\\\\]",
+            "right": "\\]",
             "display": true
           }
         ]

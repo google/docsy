@@ -21,7 +21,7 @@ linkTitle = "Documentation"
 
 [menu.main]
 weight = 20
-pre = "<i class='fas fa-book'></i>"
+pre = "<i class='fa-solid fa-book'></i>"
 +++
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
@@ -31,7 +31,7 @@ linkTitle: "Documentation"
 menu:
   main:
     weight: 20
-    pre: <i class='fas fa-book'></i>
+    pre: <i class='fa-solid fa-book'></i>
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
@@ -41,7 +41,7 @@ menu:
   "menu": {
     "main": {
       "weight": 20,
-      "pre": "<i class='fas fa-book'></i>"
+      "pre": "<i class='fa-solid fa-book'></i>"
     }
   }
 }
@@ -93,7 +93,7 @@ As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
-    pre = "<i class='fab fa-github'></i>"
+    pre = "<i class="fa-brands fa-github"></i>"
     post = "<span class='alert'>New!</span>"
 {{< /tab >}}
 {{< tab header="config.yaml" lang="yaml" >}}
@@ -102,7 +102,7 @@ menu:
     - name: GitHub
       weight: 50
       url: 'https://github.com/google/docsy/'
-      pre: <i class='fab fa-github'></i>
+      pre: <i class="fa-brands fa-github"></i>
       post: <span class='alert'>New!</span>
 {{< /tab >}}
 {{< tab header="config.json" lang="json" >}}
@@ -113,7 +113,7 @@ menu:
         "name": "GitHub",
         "weight": 50,
         "url": "https://github.com/google/docsy/",
-        "pre": "<i class='fab fa-github'></i>",
+        "pre": "<i class="fa-brands fa-github"></i>",
         "post": "<span class='alert'>New!</span>"
       }
     ]
@@ -227,7 +227,7 @@ On large sites (default: > 2000 pages) the section menu is not generated for eac
 
 ### Add icons to the section menu
 
-You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fas fa-tools`).
+You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
 
 You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 

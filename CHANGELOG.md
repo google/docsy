@@ -1,3 +1,7 @@
+<!--
+  cSpell:ignore deining docsy gtag lookandfeel
+-->
+
 # Changelog
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
@@ -6,7 +10,13 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 ## [0.5.0][] - next planned release (unpublished yet)
 
-For a full list of the changes to this release, see the [release notes][0.5.0].
+For the full list of the changes found in this release, see the [release
+notes][0.5.0]. **BREAKING CHANGES** are documented below.
+
+**After you update** your project's Docsy:
+
+- Update your project setup (see [0.4.0][]) if you haven't already.
+- Run `npm install`.
 
 **New**:
 
@@ -14,35 +24,63 @@ For a full list of the changes to this release, see the [release notes][0.5.0].
 
 **Breaking changes**:
 
-- ...
+- **Display logo by default**. Most projects show their logo in the navbar. In
+  support of this majority, Docsy now displays a logo by default. For details on
+  how to hide the logo (or your brand name), see [Styling your project logo and
+  name][].
+- **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
+  (such as an adjustment in the size of `small`). For details, see [v4.6.2
+  release notes][].
+- **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
+  v5 names still work. For details about icon renames and more, see [What's
+  changed][].
 
+**Other changes**:
+
+- By default, Docsy now uses the [gtag.js][] analytics library for all site
+  tags. For details, see [Adding Analytics > Setup][].
+- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
+  upgrade. In any case, the search-box styling has also been updated.
+
+[Adding Analytics > Setup]: https://www.docsy.dev/docs/adding-content/feedback/#setup
+[v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
   https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[gtag.js]: https://support.google.com/analytics/answer/10220869
+[styling your project logo and name]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
+[upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
+[what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
 ## [0.4.0][]
 
 For a full list of the changes to this release, see the [release notes][0.4.0].
+Potential **BREAKING CHANGES** are documented below.
 
-**Breaking changes**:
+**After you update** your project's Docsy, run `npm install`.
 
-- Docsy no longer uses git submodules for Bootstrap and FontAwesome. If your
-  project uses [Hugo Modules][], then this change doesn't impact you.
+### Update your project setup
 
-  For projects with [other Docsy setups][], use the NPM packages of Bootstrap
-  and FontAwesome. Migrate your site by following these steps (execute commands
-  from your project's root directory):
+If your project uses Docsy as follows:
 
-  1.  Update Docsy to 0.4.0.
-  2.  Delete obsolete Docsy Git submodules:
+- [Hugo Module][], then this change doesn't impact you.
+- For [other Docsy setups][], this is a **BREAKING CHANGE** -- read on.
+
+Docsy now fetches Bootstrap and FontAwesome as NPM packages rather than git
+submodules. This has an impact on your project-build setup. To migrate your
+site, follow these steps (execute commands from your project's root directory):
+
+  1.  Delete obsolete Docsy Git submodules:
       ```console
       $ rm -Rf themes/docsy/assets/vendor
       ```
-  3.  Get Docsy dependencies:
+  2.  Get Docsy dependencies:
       ```console
       $ (cd themes/docsy && npm install)
       ```
-  4.  (Optional) If your site uses NPM, consider getting Docsy dependencies via
-      a [prepare][] script as follows:
+  3.  Update your build scripts to fetch Docsy dependencies automatically. For
+      example, if your site build uses NPM scripts, consider getting Docsy
+      dependencies via a [prepare][] script as follows:
       ```json
       {
         "name": "my-website",
@@ -53,9 +91,14 @@ For a full list of the changes to this release, see the [release notes][0.4.0].
         "...": "..."
       }
       ```
-  5.  Proceed as usual to build or serve your site.
+  4.  (Optional) Build script cleanup. If your project uses Docsy as a git
+      submodule, Docsy updates no longer require the `--recursive` flag when
+      running `git submodule update`. Consider dropping the flag if you have no
+      other recursive git submodules.
 
-[hugo modules]: https://www.docsy.dev/docs/get-started/docsy-as-module/
+Proceed as usual to build or serve your site.
+
+[hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
 [prepare]:
   https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
@@ -70,6 +113,13 @@ For a full list of the changes to this release, see the [release notes][0.3.0].
   [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3). If
   your site uses the deprecated DocSearch v2, you must
   [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
+- (**Edit**) [PR #1009][] inadvertently changed the base [Bootstrap styles for
+  cards][bs4cards], as well as the Docsy `highlight` style. For details, see
+  [issue #1154][]. Release [0.5.0][] includes a fix.
+
+[bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
+[pr #1009]: https://github.com/google/docsy/pull/1009
+[issue #1154]: https://github.com/google/docsy/issues/1154
 
 ## [0.2.0][]
 
