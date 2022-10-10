@@ -8,6 +8,7 @@
 .td-search-wrapper .td-search-input {
     width: 100%;
     text-indent: 1.25em;
+    background: transparent;
 
     &.form-control:focus {
         border-color: lighten($primary, 60%);
@@ -18,10 +19,6 @@
     @if $enable-rounded {
         border-radius: 1rem;
     }
-}
-
-.td-search-wrapper .td-search-input::placeholder {
-    color: $input-placeholder-color;
 }
 
 .td-search-wrapper .fa {
