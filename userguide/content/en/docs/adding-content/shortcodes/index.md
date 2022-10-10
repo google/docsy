@@ -199,12 +199,12 @@ The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/addi
 
 ```go-html-template
 {{</* imgproc spruce Fill "400x450" */>}}
-Norway Spruce Picea abies shoot with foliage buds.
+Norway Spruce <i>Picea abies</i> shoot with foliage buds.
 {{</* /imgproc */>}}
 ```
 
 {{< imgproc spruce Fill "400x450" >}}
-Norway Spruce Picea abies shoot with foliage buds.
+Norway Spruce <i>Picea abies</i> shoot with foliage buds.
 {{< /imgproc >}}
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
@@ -245,8 +245,8 @@ resources:
 | Parameter        | Description  |
 | ----------------: |------------|
 | 1 | The image filename or enough of it to identify it (we do Glob matching)
-| 2 | Command. One of `Fit`, `Resize` or `Fill`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-processing-methods).
-| 3 | Processing options, e.g. `400x450`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-methods).
+| 2 | Command. One of `Fit`, `Resize`, `Fill` or `Crop`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-processing-methods).
+| 3 | Processing options, e.g. `400x450 r180`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-options).
 
 ### swaggerui
 
