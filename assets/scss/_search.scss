@@ -5,6 +5,10 @@
     width: 90%;
 }
 
+.td-search-wrapper:not(:focus-within) {
+    color: $input-placeholder-color;
+}
+
 .td-search-wrapper .td-search-input:not(:focus) {
     background: transparent;
 }
@@ -25,9 +29,6 @@
 }
 
 .td-search-wrapper .fa {
-    // Make this consistent with placeholder formatting.
-    color: $input-placeholder-color;
-
     // Vertically center the content.
     display: flex;
     justify-content: center;
