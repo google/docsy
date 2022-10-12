@@ -1,13 +1,13 @@
 <!-- Check the variable that indicates whether this is an archived doc set.
   If yes, display a banner. -->
-  {{ if .Site.Params.archived_version }}
+{{ if .Site.Params.archived_version }}
   {{ $color := "primary" }}
   {{ $latest_version := .Site.Params.url_latest_version }}
   {{ $current_version := .Site.Params.version }}
-	{{ $path := "" }}
-	{{ if .Site.Params.version_menu_pagelinks }}
-		{{ $path = .Page.RelPermalink }}
-	{{ end }}
+  {{ $path := "" }}
+  {{ if .Site.Params.version_menu_pagelinks }}
+    {{ $path = .Page.RelPermalink }}
+  {{ end }}
   <div class="pageinfo pageinfo-{{ $color }}">
     {{ with $current_version }}<p>Version {{ . | markdownify }} of the
       documentation is no longer actively maintained. The site that you are
