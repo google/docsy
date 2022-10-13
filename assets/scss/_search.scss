@@ -1,38 +1,15 @@
 // Search
+
 .td-search-wrapper {
-    position: relative;
-    background: transparent;
-    width: 90%;
-}
+  position: relative;
+  background: transparent;
+  width: 90%;
 
-.td-search-wrapper:not(:focus-within) {
-    color: $input-placeholder-color;
-}
-
-.td-search-wrapper .td-search-input:not(:focus) {
-    background: transparent;
-}
-
-.td-search-wrapper .td-search-input {
-    width: 100%;
-    text-indent: 1.25em;
-
-    &.form-control:focus {
-        border-color: lighten($primary, 60%);
-        box-shadow: 0 0 0 2px lighten($primary, 30%);
-        color: inherit;
-    }
-
-    @if $enable-rounded {
-        border-radius: 1rem;
-    }
-}
-
-.td-search-wrapper .fa {
+  .fa {
     // Vertically center the content.
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     height: 100%;
 
     // Position this on the left of the input.
@@ -41,26 +18,55 @@
 
     // Click-through to the underlying input.
     pointer-events: none;
-}
+  }
 
-// Hide the icon on focus.
-.td-search-wrapper:focus-within .fa {
-    display: none;
-}
+  .td-search-input {
+    width: 100%;
+    text-indent: 1.25em;
 
-.td-search-wrapper:focus-within .td-search-input {
-   text-indent: 0px;
+    @if $enable-rounded {
+      border-radius: 1rem;
+    }
+
+    &:not(:focus) {
+      background: transparent;
+    }
+
+    &.form-control:focus {
+      border-color: lighten($primary, 60%);
+      box-shadow: 0 0 0 2px lighten($primary, 30%);
+      color: inherit;
+    }
+
+  }
+
+  &:focus-within {
+    // Hide icon on focus
+
+    .fa {
+      display: none;
+    }
+
+    .td-search-input {
+      text-indent: 0px;
+    }
+  }
+
+  &:not(:focus-within) {
+    color: $input-placeholder-color;
+  }
+
 }
 
 .popover.offline-search-result {
-    // Override bootstrap default style (max-width: $popover-max-width;)
-    max-width: 90%;
+  // Override bootstrap default style (max-width: $popover-max-width;)
+  max-width: 90%;
 
-    .card {
-        margin-bottom: $spacer * .5;
+  .card {
+    margin-bottom: $spacer * .5;
 
-        .card-header {
-            font-weight: bold;
-        }
+    .card-header {
+      font-weight: bold;
     }
+  }
 }

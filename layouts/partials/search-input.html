@@ -1,7 +1,7 @@
 {{ if .Site.Params.gcs_engine_id -}}
 <div class="td-search-wrapper">
-<i class="fa fa-search"></i>
-<input type="search" class="form-control td-search-input" placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
+  <i class="fa fa-search"></i>
+  <input type="search" class="form-control td-search-input" placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
 </div>
 {{ else if .Site.Params.algolia_docsearch -}}
 <div id="docsearch"></div>
