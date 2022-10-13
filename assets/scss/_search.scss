@@ -82,8 +82,20 @@
   }
 }
 
-.popover.offline-search-result {
-  // Override bootstrap default style (max-width: $popover-max-width;)
+// Offline search
+
+.td-search--offline {
+  &:focus-within {
+    // Don't hide the search icon on focus: this gives better UX when user
+    // explores content of search-results popup and focus is lost.
+    .td-search__icon {
+      display: flex;
+      color: $input-placeholder-color;
+    }
+  }
+}
+
+.td-offline-search-results {
   max-width: 90%;
 
   .card {
@@ -91,6 +103,15 @@
 
     .card-header {
       font-weight: bold;
+    }
+  }
+
+  &__close-button {
+    // cursor: pointer;
+    float: right;
+    &:after {
+      @extend .fas;
+      content: fa-content($fa-var-times);
     }
   }
 }
