@@ -4,7 +4,7 @@
     'use strict';
 
     $(document).ready(function () {
-        const $searchInput = $('.td-search-input');
+        const $searchInput = $('.td-search input');
 
         //
         // Options for popover

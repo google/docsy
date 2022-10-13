@@ -36,7 +36,6 @@
         width: 100%;
     }
 
-
     .navbar-brand {
         text-transform: none;
         text-align: middle;
@@ -57,17 +56,7 @@
         font-weight: $font-weight-bold;
     }
 
-    .td-search-wrapper .fa {
-        color: $navbar-dark-color;
-    }
-
-    .td-search-input {
-        border: none;
-        color: $navbar-dark-color;
-        @include placeholder {
-            color: $navbar-dark-color;
-        }
-    }
+    // For .td-search__input styling, see _search.scss
 
     .dropdown {
         min-width: 100px;

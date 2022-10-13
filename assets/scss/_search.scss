@@ -1,14 +1,14 @@
 // Search
 
-.td-search-wrapper {
-  position: relative;
+.td-search {
   background: transparent;
+  position: relative;
   width: 90%;
 
-  .fa {
+  // Search icon
+  &__icon {
     // Vertically center the content.
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 100%;
 
@@ -18,9 +18,22 @@
 
     // Click-through to the underlying input.
     pointer-events: none;
+
+    &:before {
+      @extend .fa;
+      content: fa-content($fa-var-search);
+    }
+
+    // Styling adjustments for the navbar
+    @at-root {
+      .td-navbar & {
+        color: $navbar-dark-color;
+      }
+    }
   }
 
-  .td-search-input {
+  // Search input element
+  &__input {
     width: 100%;
     text-indent: 1.25em;
 
@@ -38,12 +51,24 @@
       color: inherit;
     }
 
+    // Styling adjustments for the navbar
+    @at-root {
+      .td-navbar & {
+        border: none;
+        color: $navbar-dark-color;
+
+        @include placeholder {
+          color: $navbar-dark-color;
+        }
+      }
+    }
+
   }
 
+  // Hide icon on focus
   &:focus-within {
-    // Hide icon on focus
 
-    .fa {
+    .td-search__icon {
       display: none;
     }
 
@@ -55,7 +80,6 @@
   &:not(:focus-within) {
     color: $input-placeholder-color;
   }
-
 }
 
 .popover.offline-search-result {
