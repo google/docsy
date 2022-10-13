@@ -21,7 +21,7 @@ limitations under the License.
     var Search = {
         init: function() {
             $(document).ready(function() {
-               $(document).on('keypress', '.td-search-input', function(e) {
+               $(document).on('keypress', '.td-search input', function(e) {
                     if (e.keyCode !== 13) {
                         return
                     }

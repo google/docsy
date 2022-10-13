@@ -491,10 +491,8 @@ The width of the search results popover will automatically widen according to th
 If you want to limit the width, add the following scss into `assets/scss/_variables_project.scss`.
 
 ```scss
-body {
-    .popover.offline-search-result {
-        max-width: 460px;
-    }
+.td-offline-search-results {
+  max-width: 460px;
 }
 ```
 
