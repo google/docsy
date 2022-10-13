@@ -34,13 +34,14 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 - **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
   changed][].
+- **Search-box**: the HTML structure and class names have changed, due to the
+  Font Awesome upgrade, for both online and offline search. This may affect your
+  project if you have overridden search styling or scripts.
 
 **Other changes**:
 
 - By default, Docsy now uses the [gtag.js][] analytics library for all site
   tags. For details, see [Adding Analytics > Setup][].
-- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
-  upgrade. In any case, the search-box styling has also been updated.
 
 [Adding Analytics > Setup]: https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
