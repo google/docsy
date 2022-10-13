@@ -1,130 +1,127 @@
-<!-- Check parameter types -->
-{{ with .Get "langEqualsHeader"  }}
-{{ if ne ( printf "%T" . ) "bool" }}
-{{- errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
-{{ end }}
-{{ end }}
+{{/* Check parameter types */ -}}
+{{ with .Get "langEqualsHeader" -}}
+{{ if ne ( printf "%T" . ) "bool" -}}
+{{ errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
+{{ end -}}
+{{ end -}}
 
-{{ with .Get "text"  }}
-{{ if ne ( printf "%T" . ) "bool" }}
-{{- errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
-{{ end }}
-{{ end }}
+{{ with .Get "text" -}}
+{{ if ne ( printf "%T" . ) "bool" -}}
+{{ errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
+{{ end -}}
+{{ end -}}
 
-{{ with .Get "persistLang"  }}
-{{ if ne ( printf "%T" . ) "bool" }}
-{{- errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
-{{ end }}
-{{ end }}
+{{ with .Get "persistLang" -}}
+{{ if ne ( printf "%T" . ) "bool" -}}
+{{ errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
+{{ end -}}
+{{ end -}}
 
-{{ with .Get "right"  }}
-{{ if ne ( printf "%T" . ) "bool" }}
-{{- errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
-{{ end }}
-{{ end }}
+{{ with .Get "right" -}}
+{{ if ne ( printf "%T" . ) "bool" -}}
+{{ errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
+{{ end -}}
+{{ end -}}
 
-<!-- Set values given defined within tabpane -->
-{{- $langPane := default "" ($.Get "lang") -}}
-{{- $hloptionsPane := default "" ($.Get "highlight") -}}
-{{- $textPane := default false ($.Get "text") -}}
-{{- $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
-{{- $persistLang := default true ($.Get "persistLang") -}}
-{{- $rightPane := default false ($.Get "right") -}}
-{{- $disabled := false -}}
-{{- $rightpush := false -}}
-{{- $activeSet := false -}}
-
-<!-- Scratchpad gets populated through call to .Inner -->
+{{/* Set values given defined within tabpane */ -}}
+{{ $langPane := default "" ($.Get "lang") -}}
+{{ $hloptionsPane := default "" ($.Get "highlight") -}}
+{{ $textPane := default false ($.Get "text") -}}
+{{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
+{{ $persistLang := default true ($.Get "persistLang") -}}
+{{ $rightPane := default false ($.Get "right") -}}
+{{ $disabled := false -}}
+{{ $rightpush := false -}}
+{{ $activeSet := false -}}
+{{- /* Scratchpad gets populated through call to .Inner */ -}}
 {{- .Inner -}}
 
 <ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $.Ordinal -}}" role="tablist">
-  {{- range $index, $element := $.Scratch.Get "tabs" -}}
+  {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
-    {{- $lang := $langPane -}}
-    {{- if $langEqualsHeader -}}
-      {{- $lang = $element.header -}}
-    {{end}}
-    {{- with $element.language -}}
-      {{- $lang = $element.language -}}
-    {{- end -}}
+    {{ $lang := $langPane -}}
+    {{ if $langEqualsHeader -}}
+      {{ $lang = $element.header -}}
+    {{ end -}}
+    {{ with $element.language -}}
+      {{ $lang = $element.language -}}
+    {{ end -}}
 
-    {{- $disabled := false -}}
-    {{- with $element.disabled -}}
-      {{- $disabled = . }}
-    {{- end -}}
+    {{ $disabled := false -}}
+    {{ with $element.disabled -}}
+      {{ $disabled = . -}}
+    {{ end -}}
 
-    {{- $rightpush := false -}}
-    {{- with $element.rightpush -}}
-      {{- $rightpush = . }}
-    {{- end -}}
+    {{ $rightpush := false -}}
+    {{ with $element.rightpush -}}
+      {{ $rightpush = . -}}
+    {{ end -}}
 
-    <!-- Replace space and +, not valid for css selectors -->
-    {{- $lang := replaceRE "[\\s+]" "-" $lang -}}
-
-    <li class="nav-item{{ if $rightpush }} ml-auto{{ end }}">
-      <!-- Generate the IDs for the <a> and the <div> elements -->
-      {{- $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
-      {{- $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
+    {{/* Replace space and +, not valid for css selectors */ -}}
+    {{ $lang := replaceRE "[\\s+]" "-" $lang -}}
+    <li class="nav-item{{ if $rightpush }} ml-auto{{ end -}}">
+      {{/* Generate the IDs for the <a> and the <div> elements */ -}}
+      {{ $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
+      {{ $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
 
       <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if $persistLang }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
-          id="{{- $tabid -}}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
-          {{ if ne $lang "" }}{{- if $persistLang -}}onclick="persistLang({{- $lang -}});"{{end}}{{end}}
-        aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
-        {{- index . "header" | markdownify -}}
+          id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
+          {{ if ne $lang "" }}{{ if $persistLang }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
+          aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
+        {{ index . "header" | markdownify }}
       </a>
     </li>
 
-    {{ if not $disabled }}
-      {{ $activeSet = true }}
-    {{ end }}
+    {{- if not $disabled -}}
+      {{ $activeSet = true -}}
+    {{ end -}}
 
-  {{- end -}}
+  {{- end }}
 </ul>
 
-{{ $activeSet = false }}
+{{ $activeSet = false -}}
 
-<!-- Inner content -->
-<div class="tab-content" id="tabs-{{- $.Ordinal -}}-content">
+{{/* Inner content */ -}}
+<div class="tab-content" id="tabs-{{ $.Ordinal }}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
-    {{- $lang := $langPane -}}
-    {{- if $langEqualsHeader -}}
-      {{- $lang = $element.header -}}
-    {{end}}
-    {{- with $element.language -}}
-      {{- $lang = $element.language -}}
-    {{- end -}}
+    {{ $lang := $langPane -}}
+    {{ if $langEqualsHeader -}}
+      {{ $lang = $element.header -}}
+    {{ end -}}
+    {{ with $element.language -}}
+      {{ $lang = $element.language -}}
+    {{ end -}}
 
-    {{- $disabled := false -}}
-    {{- with $element.disabled -}}
-      {{- $disabled = . }}
-    {{- end -}}
+    {{ $disabled := false -}}
+    {{ with $element.disabled -}}
+      {{ $disabled = . -}}
+    {{ end -}}
 
-    {{- $hloptions := $hloptionsPane -}}
-    {{- with $element.highlight -}}
-      {{- $hloptions = $element.highlight -}}
-    {{- end -}}
+    {{ $hloptions := $hloptionsPane -}}
+    {{ with $element.highlight -}}
+      {{ $hloptions = $element.highlight -}}
+    {{ end -}}
 
-    {{- $text := $textPane -}}
-    {{- with $element.text -}}
-      {{- $text = . }}
-    {{- end -}}
+    {{ $text := $textPane -}}
+    {{ with $element.text -}}
+      {{ $text = . }}
+    {{ end -}}
 
-    {{- $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
-    {{- $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
-
+    {{ $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
+    {{ $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize }}
     <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
-        {{ if $text }}
-          {{- index . "content" -}}
-        {{- else -}}
-          {{- highlight (trim (index . "content") "\n") $lang $hloptions -}}
-        {{- end -}}
+        {{ if $text -}}
+          {{ index . "content" -}}
+        {{ else -}}
+          {{ highlight (trim (index . "content") "\n") $lang $hloptions -}}
+        {{ end }}
     </div>
 
-    {{ if not $disabled }}
-      {{ $activeSet = true }}
-    {{ end }}
+    {{- if not $disabled -}}
+      {{ $activeSet = true -}}
+    {{ end -}}
 
-  {{ end }}
+  {{- end }}
 </div>
