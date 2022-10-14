@@ -1,26 +1,26 @@
 {{/* Check parameter types */ -}}
 {{ with .Get "langEqualsHeader" -}}
-{{ if ne ( printf "%T" . ) "bool" -}}
-{{ errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
-{{ end -}}
+  {{ if ne ( printf "%T" . ) "bool" -}}
+    {{ errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
+  {{ end -}}
 {{ end -}}
 
 {{ with .Get "text" -}}
-{{ if ne ( printf "%T" . ) "bool" -}}
-{{ errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
-{{ end -}}
+  {{ if ne ( printf "%T" . ) "bool" -}}
+    {{ errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
+  {{ end -}}
 {{ end -}}
 
 {{ with .Get "persistLang" -}}
-{{ if ne ( printf "%T" . ) "bool" -}}
-{{ errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
-{{ end -}}
+  {{ if ne ( printf "%T" . ) "bool" -}}
+    {{ errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
+  {{ end -}}
 {{ end -}}
 
 {{ with .Get "right" -}}
-{{ if ne ( printf "%T" . ) "bool" -}}
-{{ errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
-{{ end -}}
+  {{ if ne ( printf "%T" . ) "bool" -}}
+    {{ errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
+  {{ end -}}
 {{ end -}}
 
 {{/* Set values given defined within tabpane */ -}}
@@ -30,14 +30,21 @@
 {{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
 {{ $persistLang := default true ($.Get "persistLang") -}}
 {{ $rightPane := default false ($.Get "right") -}}
-{{ $disabled := false -}}
-{{ $rightpush := false -}}
 {{ $activeSet := false -}}
 {{- /* Scratchpad gets populated through call to .Inner */ -}}
 {{- .Inner -}}
 
+{{ $langs := slice -}}
+{{ $duplicate := false -}}
+{{ $duplicateLang := "" -}}
+
 <ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $.Ordinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
+
+    {{ $disabled := false -}}
+    {{ with $element.disabled -}}
+      {{ $disabled = . -}}
+    {{ end -}}
 
     {{ $lang := $langPane -}}
     {{ if $langEqualsHeader -}}
@@ -47,9 +54,15 @@
       {{ $lang = $element.language -}}
     {{ end -}}
 
-    {{ $disabled := false -}}
-    {{ with $element.disabled -}}
-      {{ $disabled = . -}}
+    {{/* Check for duplicate languages */ -}}
+    {{ if and $persistLang (not $duplicate) -}}
+      {{ if and (not $disabled) (ne $lang "") -}}
+        {{ $langs = $langs | append $lang -}}
+      {{ end -}}
+      {{ if ne $langs (uniq $langs) -}}
+        {{ $duplicate = true -}}
+        {{ $duplicateLang = $lang -}}
+      {{ end -}}
     {{ end -}}
 
     {{ $rightpush := false -}}
@@ -64,9 +77,9 @@
       {{ $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
 
-      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if $persistLang }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
+      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
           id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
-          {{ if ne $lang "" }}{{ if $persistLang }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
+          {{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
       </a>
@@ -79,6 +92,11 @@
   {{- end }}
 </ul>
 
+{{ if $duplicate -}}
+  {{ warnf "Tabpane on page '%s': duplicate language '%s' detected, disabling persistance of language to avoid multiple tab display." .Page.Title $duplicateLang  -}}
+{{ end -}}
+{{ $duplicate = false -}}
+{{ $langs = slice -}}
 {{ $activeSet = false -}}
 
 {{/* Inner content */ -}}
