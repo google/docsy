@@ -14,8 +14,8 @@ to display an information banner on the archived sites.
 
 ## Adding a version drop-down menu
 
-If you add some `[params.versions]` in `config.toml`/`config.yaml`/`config.json`, the Docsy theme adds a 
-version selector drop down to the top-level menu. You specify a URL and a name 
+If you add some `[params.versions]` in `config.toml`/`config.yaml`/`config.json`, the Docsy theme adds a
+version selector drop down to the top-level menu. You specify a URL and a name
 for each version you would like to add to the menu, as in the following example:
 
 {{< tabpane persistLang=false >}}
@@ -84,7 +84,7 @@ version_menu: 'Releases'
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you set the `version_menu_pagelinks` parameter to `true`, then links in the version drop-down menu 
+If you set the `version_menu_pagelinks` parameter to `true`, then links in the version drop-down menu
 point to the current page in the other version, instead of the main page.
 This can be useful if the document doesn't change much between the different versions.
 Note that if the current page doesn't exist in the other version, the link will be broken.
@@ -94,12 +94,12 @@ You can read more about Docsy menus in the guide to
 
 ## Displaying a banner on archived doc sites
 
-If you create archived snapshots for older versions of your docs, you can add a 
+If you create archived snapshots for older versions of your docs, you can add a
 note at the top of every page in the archived docs to let readers know that
-they’re seeing an unmaintained snapshot and give them a link to the latest 
+they’re seeing an unmaintained snapshot and give them a link to the latest
 version.
 
-For example, see the archived docs for 
+For example, see the archived docs for
 [Kubeflow v0.6](https://v0-6.kubeflow.org/docs/):
 
 <figure>
@@ -145,7 +145,7 @@ version: '0.1'
     {{< /tabpane >}}
 
 1. Make sure that `url_latest_version` contains the URL of the website that you
-  want to point readers to. In most cases, this should be the URL of the latest 
+  want to point readers to. In most cases, this should be the URL of the latest
   version of your docs:
 
     {{< tabpane persistLang=false >}}
