@@ -98,7 +98,7 @@ If you configure more than one language in `config.toml`, the Docsy theme adds a
 
 ## Internationalization bundles
 
-All UI strings (text for buttons etc.) are bundled inside `/i18n` in the theme, with a `.toml` file for each language. 
+All UI strings (text for buttons etc.) are bundled inside `/i18n` in the theme, with a `.toml` file for each language.
 
 If your chosen language isn't currently in the theme and you create your own `.toml` file for all the common UI strings (for example, if you translate the UI text into Japanese and create a copy of `en.toml` called `jp.toml`), we recommend you do this **in the theme** rather than in your own project, so it can be reused by others. Any additional strings or overridden values can be added to your project's `/i18n` folder.
 
