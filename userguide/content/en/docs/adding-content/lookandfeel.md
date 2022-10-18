@@ -287,3 +287,28 @@ Both `head.html` and `scripts.html` are then used to build Docsy's [base page la
 </html>
 ```
 
+## Sidebar table of contents
+
+By default, Docsy shows the table of contents for the current page in the right sidebar using the built-in function of Hugo. You can replace that with a JavaScript-based ToC that uses the [https://tscanlin.github.io/tocbot/](Tocbot library) by setting the following in your `config.toml` file:
+
+```toml
+[params.jstoc]
+enable = true
+```
+
+By default, h2-h4 headings are included in the sidebar, which includes tips and warnings if you are using the [alert shortcode of Docsy](/docs/adding-content/shortcodes/#alert). To change that,
+provide a comma-separated list of the headings to include in the `custom_headings` parameter, for example:
+
+```toml
+[params.jstoc]
+enable = true
+custom_headings = "h2, h3"
+```
+
+Compared to the default sidebar ToC, this solution:
+
+- has a marker that shows the current location of the screen (useful for long pages)
+- shows the correct title even if the title contains a shortcode
+- shows the title in the toc even if it was included from another file
+
+![Screenshot of JavaScript-based sidebar table of contents](/images/sidebar-toc-with-tocbot.png)
