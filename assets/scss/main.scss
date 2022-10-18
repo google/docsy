@@ -37,6 +37,7 @@
 @import "tocbot";
 @import "swagger";
 @import "support/rtl";
+@import "tocbot";
 
 @if $td-enable-google-fonts {
   @import url($web-font-path);

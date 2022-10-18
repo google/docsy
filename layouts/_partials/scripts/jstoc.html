@@ -1,0 +1,14 @@
+<!-- Initialize tocbot -->
+<script src="{{ "/js/tocbot.min.js" | relURL }}"></script>
+<script type="text/javascript">
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.td-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.td-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: '{{ with .Site.Params.jstoc.custom_headings }}{{ . }}{{ else }}h2, h3, h4{{ end }}',
+        // ignore headings that are hidden in DOM
+        ignoreHiddenElements: true
+    });
+</script>
