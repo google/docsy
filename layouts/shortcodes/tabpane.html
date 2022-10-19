@@ -38,7 +38,14 @@
 {{ $duplicate := false -}}
 {{ $duplicateLang := "" -}}
 
-<ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $.Ordinal -}}" role="tablist">
+{{ $Ordinal := $.Ordinal -}}
+{{ if ge hugo.Version "0.93.0" -}}
+  {{ if .Page.Store.Get "Ordinal" -}}
+    {{ $Ordinal = .Page.Store.Get "Ordinal" -}}
+  {{end -}}
+{{ end -}}
+
+<ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $Ordinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
     {{ $disabled := false -}}
@@ -74,8 +81,8 @@
     {{ $lang := replaceRE "[\\s+]" "-" $lang -}}
     <li class="nav-item{{ if $rightpush }} ml-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
-      {{ $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
-      {{ $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize -}}
+      {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
+      {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
 
       <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
           id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
@@ -100,7 +107,7 @@
 {{ $activeSet = false -}}
 
 {{/* Inner content */ -}}
-<div class="tab-content" id="tabs-{{ $.Ordinal }}-content">
+<div class="tab-content" id="tabs-{{ $Ordinal }}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
     {{ $lang := $langPane -}}
@@ -126,8 +133,8 @@
       {{ $text = . }}
     {{ end -}}
 
-    {{ $tabid := printf "tabs-%02v-%v-tab" $.Ordinal $index | anchorize -}}
-    {{ $entryid := printf "tabs-%02v-%v" $.Ordinal $index | anchorize }}
+    {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
+    {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize }}
     <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
         {{ if $text -}}
