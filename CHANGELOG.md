@@ -13,6 +13,10 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 **New**:
 
+- **Simplified use of mermaid diagrams**: when using a `mermaid` code block on
+  your page, mermaid is now automatically enabled (needs hugo version >= 0.93.0).
+  For existing sites build with hugo 0.93.0+, parameter `mermaid.enable`
+  can be removed from site config.
 
 **Breaking changes**:
 

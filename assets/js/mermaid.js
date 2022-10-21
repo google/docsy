@@ -1,4 +1,4 @@
-{{ $needmermaid := or .Site.Params.mermaid.enable -}}
+{{ $needmermaid := .Site.Params.mermaid.enable -}}
 {{ if ge hugo.Version "0.93.0" -}}
     {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
 {{ end }}
