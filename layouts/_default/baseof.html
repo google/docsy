@@ -8,9 +8,11 @@
       {{ partial "navbar.html" . }}
     </header>
     <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        {{ block "main" . }}{{ end }}
-      </main>
+      <div class="td-main">
+        <main role="main" class="td-main">
+          {{ block "main" . }}{{ end }}
+        </main>
+      </div>
       {{ partial "footer.html" . }}
     </div>
     {{ partialCached "scripts.html" . }}
