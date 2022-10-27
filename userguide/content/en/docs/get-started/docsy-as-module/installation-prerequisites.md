@@ -70,7 +70,7 @@ Hugo's commands for module management require that the Go programming language i
 
 ```bash
 $ go version
-go version go1.18.4 windows/amd64
+go version go1.19.2 windows/amd64
 ```
 
 Ensure that you are using version 1.12 or higher.
@@ -84,7 +84,7 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```bash
 git version
-git version 2.37.1.windows.1
+git version 2.38.1.windows.1
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.

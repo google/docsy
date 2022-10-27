@@ -269,27 +269,30 @@ For example, the following defines a simple flowchart:
 
 ````
 ```mermaid
-graph LR
-  Start --> Need{"Do I need diagrams"}
-  Need -- No --> Off["Set params.mermaid.enable = false"]
-  Need -- Yes --> HaveFun["Great!  Enjoy!"]
+graph TD
+  Start --> Need{"Hugo version >= 0.93.0"}
+  Need -- No --> Off["Set params.mermaid.enable = true"]
+  Off --> Author
+  Need -- Yes --> Author[Insert mermaid codeblock]
 ```
 ````
 
 Automatically renders to:
 
 ```mermaid
-graph LR
-  Start --> Need{"Do I need diagrams"}
-  Need -- No --> Off["Set params.mermaid.enable = false"]
-  Need -- Yes --> HaveFun["Great!  Enjoy!"]
-
+graph TD
+  Start --> Need{"Hugo version >= 0.93.0"}
+  Need -- No --> Off["Set params.mermaid.enable = true"]
+  Off --> Author
+  Need -- Yes --> Author[Insert mermaid codeblock]
 ```
 
-To enable/disable Mermaid, update `config.toml`/`config.yaml`/`config.json`:
+With hugo version 0.93 or higher, support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
+
+If you are using hugo version 0.92 or lower, you need to enable Mermaid manually by updating your `config.toml`/`config.yaml`/`config.json`:
 
 {{< tabpane persistLang=false >}}
-{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="Hugo version <= 0.92 only:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 [params.mermaid]
 enable = true
@@ -310,38 +313,12 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-You also need to disable the `guessSyntax` from markup highlighting in `config.toml`/`config.yaml`/`config.json` for Mermaid to work:
-
-{{< tabpane persistLang=false >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
-[markup]
-  [markup.highlight]
-      guessSyntax = false
-{{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-markup:
-  highlight:
-    guessSyntax: false
-{{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
-{
-  "markup": {
-    "highlight": {
-      "guessSyntax": false
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
-You can also update settings for Mermaid, such as themes, padding, etc:
+If needed, you can define custom settings for your diagrams, such as themes, padding in your `config.toml`/`config.yaml`/`config.json`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 [params.mermaid]
-enable = true
 theme = "neutral"
 
 [params.mermaid.flowchart]
@@ -350,7 +327,6 @@ diagramPadding = 6
 {{< tab header="config.yaml" lang="yaml" >}}
 params:
   mermaid:
-    enable: true
     theme: neutral
     flowchart:
       diagramPadding: 6
@@ -359,7 +335,6 @@ params:
 {
   "params": {
     "mermaid": {
-      "enable": true,
       "theme": "neutral",
       "flowchart": {
         "diagramPadding": 6

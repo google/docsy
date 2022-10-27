@@ -1,5 +1,10 @@
-{{ if .Site.Params.mermaid.enable -}}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous"></script>
+{{ $needmermaid := .Site.Params.mermaid.enable -}}
+{{ if ge hugo.Version "0.93.0" -}}
+    {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
+{{ end }}
+
+{{ if $needmermaid -}}
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.7/dist/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous"></script>
 {{ end -}}
 
 {{ if .Site.Params.markmap.enable -}}

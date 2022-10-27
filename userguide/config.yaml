@@ -106,9 +106,6 @@ params:
         icon: fa-brands fa-github
         desc: Development takes place here!
 
-  mermaid:
-    enable: true
-    theme: default
   plantuml:
     enable: true
     theme: default

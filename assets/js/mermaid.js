@@ -1,11 +1,22 @@
-{{ with .Site.Params.mermaid }}
-{{ if .enable }}
+{{ $needmermaid := .Site.Params.mermaid.enable -}}
+{{ if ge hugo.Version "0.93.0" -}}
+    {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
+{{ end }}
+
+{{ if $needmermaid }}
 (function($) {
     var needMermaid = false;
+
+{{ if ge hugo.Version "0.93.0" -}}
+    if ($('.mermaid').length > 0) {
+        needMermaid = true;
+    };
+{{ else -}}
     $('.language-mermaid').parent().replaceWith(function() {
         needMermaid = true;
         return $('<pre class="mermaid">').text($(this).text());
     });
+{{ end -}}
 
     if (!needMermaid)  {
         mermaid.initialize({startOnLoad: false});
@@ -34,5 +45,4 @@
     settings.startOnLoad = true;
     mermaid.initialize(settings);
 })(jQuery);
-{{ end }}
 {{ end }}
