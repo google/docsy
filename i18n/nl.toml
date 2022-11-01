@@ -18,6 +18,9 @@ other = "Doorzoek deze site"
 [ui_in]
 other = "in"
 
+[ui_all]
+other = "alle"
+
 # Footer text
 [footer_all_rights_reserved]
 other = "Alle rechten voorbehouden"
@@ -35,6 +38,8 @@ other = "Aangemaakt"
 other = "Laatst gewijzigd"
 [post_edit_this]
 other = "Bewerk deze pagina"
+[post_view_this]
+other = "Bekijk paginabron"
 [post_create_child_page]
 other = "Maak sub pagina"
 [post_create_issue]
