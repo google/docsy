@@ -1,8 +1,13 @@
-{{ if and .GitInfo .Site.Params.github_repo -}}
+{{ $repo := .Site.Params.github_repo }}
+{{ if .Site.Params.azure_repo -}}
+  {{ $repo = .Site.Params.azure_repo }}
+{{ end -}}
+
+{{ if and (.GitInfo) (or (.Site.Params.github_repo) (.Site.Params.azure_repo)) -}}
 <div class="td-page-meta__lastmod">
   {{ T "post_last_mod" }} {{ .Lastmod.Format .Site.Params.time_format_default -}}
   {{ with .GitInfo }}: {{/* Trim WS */ -}}
-    <a href="{{ $.Site.Params.github_repo }}/commit/{{ .Hash }}">
+    <a href="{{ $repo }}/commit/{{ .Hash }}">
       {{- .Subject }} ({{ .AbbreviatedHash }}) {{- /* Trim WS */ -}}
     </a>
   {{- end }}
