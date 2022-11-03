@@ -406,7 +406,7 @@ algolia_docsearch: true
 
 You can find out more about how to configure DocSearch in the Algolia DocSearch V3 [Getting started](https://docsearch.algolia.com/docs/DocSearch-v3) guide.
 
-When you've completed these steps, Algolia search should be enabled on your site. Search results are displayed as a drop-down under the search box, so you don't need to add any search results page.
+When you've completed these steps, Algolia search should be enabled on your site. Search results are displayed as a pop-up, so you don't need to add any search results page.
 
 ## Configure local search with Lunr
 
