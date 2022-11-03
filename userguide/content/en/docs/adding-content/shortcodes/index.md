@@ -403,7 +403,7 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
   {{%/* /tab */%}}
   {{</* tab header="German" lang="de" */>}}
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
+    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
   ![Flag Tanzania](flags/tz.png)
@@ -422,7 +422,7 @@ This code translates to the right aligned tabbed pane below, showing a `Welcome!
   {{% /tab %}}
   {{< tab header="German" lang="de" >}}
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
+    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{< /tab >}}
   {{% tab  header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)

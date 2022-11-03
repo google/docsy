@@ -35,7 +35,7 @@
         @extend .img-fluid;
     }
 
-    > table {
+    table {
         @extend .table-striped;
 
         @extend .table-responsive;
@@ -43,14 +43,14 @@
         @extend .table;
     }
 
-    > blockquote {
+    blockquote {
         padding: 0 0 0 1rem;
         margin-bottom: $spacer;
         color: $gray-600;
         border-left: 6px solid $secondary;
     }
 
-    > ul li, > ol li {
+    ul li, ol li {
         margin-bottom: .25rem;
     }
 

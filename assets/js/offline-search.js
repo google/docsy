@@ -4,7 +4,7 @@
     'use strict';
 
     $(document).ready(function () {
-        const $searchInput = $('.td-search-input');
+        const $searchInput = $('.td-search input');
 
         //
         // Options for popover
@@ -14,7 +14,7 @@
         $searchInput.data('placement', 'bottom');
         $searchInput.data(
             'template',
-            '<div class="popover offline-search-result" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            '<div class="td-offline-search-results popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
         );
 
         //
@@ -130,11 +130,8 @@
                             .css({ fontWeight: 'bold' })
                     )
                     .append(
-                        $('<i>')
-                            .addClass('fas fa-times search-result-close-button')
-                            .css({
-                                cursor: 'pointer',
-                            })
+                        $('<span>')
+                            .addClass('td-offline-search-results__close-button')
                     )
             );
 
@@ -182,7 +179,7 @@
             }
 
             $targetSearchInput.on('shown.bs.popover', () => {
-                $('.search-result-close-button').on('click', () => {
+                $('.td-offline-search-results__close-button').on('click', () => {
                     $targetSearchInput.val('');
                     $targetSearchInput.trigger('change');
                 });

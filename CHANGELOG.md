@@ -8,10 +8,26 @@ Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
 For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
-## [0.5.0][] - next planned release (unpublished yet)
+## 0.6.0 - next planned release (unpublished yet)
+
+
+**New**:
+
+- **Simplified use of mermaid diagrams**: when using a `mermaid` code block on
+  your page, mermaid is now automatically enabled (needs hugo version >= 0.93.0).
+  For existing sites build with hugo 0.93.0+, parameter `mermaid.enable`
+  can be removed from site config.
+
+**Breaking changes**:
+
+
+**Other changes**:
+
+
+## [0.5.1][]
 
 For the full list of the changes found in this release, see the [release
-notes][0.5.0]. **BREAKING CHANGES** are documented below.
+notes][0.5.1]. **BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy:
 
@@ -24,19 +40,24 @@ notes][0.5.0]. **BREAKING CHANGES** are documented below.
 
 **Breaking changes**:
 
+- **Tabbed panes, text display**. By default, the content of a tab inside a tabbed
+  pane is shown as code. As of version 0.4 of the shortcode, you can add the
+  parameter `code=false` to your `tabpane` or `tab` shortcode  in order to render
+  tab content(s) as text (markdown or html). As of version 0.5 the name of this
+  parameter was changed, we now use `text=true` in order to mark content as text.
+- **Display logo by default**. Most projects show their logo in the navbar. In
+  support of this majority, Docsy now displays a logo by default. For details on
+  how to hide the logo (or your brand name), see [Styling your project logo and
+  name][].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
   release notes][].
 - **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
   changed][].
-- **Display logo by default**. Most projects show their logo in the navbar. In
-  support of this majority, Docsy now displays a logo by default. For details on
-  how to hide the logo (or your brand name), see [Styling your project logo and
-  name][].
-- **Navbar search-box** width is narrower, as a result of the FontAwesome (FA)
-  upgrade. You might notice other width changes of elements using FA icons and
-  the FA font.
+- **Search-box**: the HTML structure and class names have changed, due to the
+  Font Awesome upgrade, for both online and offline search. This may affect your
+  project if you have overridden search styling or scripts.
 
 **Other changes**:
 
@@ -151,7 +172,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.4.0]: https://github.com/google/docsy/releases/v0.4.0
-[0.5.0]: https://github.com/google/docsy/releases/v0.5.0
+[0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [0.x.y]: #
 [22q2]: https://github.com/google/docsy/milestone/3
 [hugo modules]: https://gohugo.io/hugo-modules/

@@ -1,24 +1,103 @@
 // Search
 
-.td-search-input {
+.td-search {
     background: transparent;
-    max-width: 90%;
+    position: relative;
+    width: 90%;
 
-    &.form-control:focus {
-        border-color: lighten($primary, 60%);
-        box-shadow: 0 0 0 2px lighten($primary, 30%);
-        color: inherit;
+    // Search icon
+    &__icon {
+        // Vertically center the content.
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        // Position this on the left of the input.
+        position: absolute;
+        left: 0.75em;
+
+        // Click-through to the underlying input.
+        pointer-events: none;
+
+        &:before {
+            @extend .fa;
+            content: fa-content($fa-var-search);
+        }
+
+        // Styling adjustments for the navbar
+        @at-root {
+            .td-navbar & {
+                color: $navbar-dark-color;
+            }
+        }
     }
 
-    @if $enable-rounded {
-        border-radius: 1rem;
+    // Search input element
+    &__input {
+        width: 100%;
+        text-indent: 1.25em;
+
+        @if $enable-rounded {
+            border-radius: 1rem;
+        }
+
+        &:not(:focus) {
+            background: transparent;
+        }
+
+        &.form-control:focus {
+            border-color: lighten($primary, 60%);
+            box-shadow: 0 0 0 2px lighten($primary, 30%);
+            color: inherit;
+        }
+
+        // Styling adjustments for the navbar
+        @at-root {
+            .td-navbar & {
+                border: none;
+                color: $navbar-dark-color;
+
+                @include placeholder {
+                    color: $navbar-dark-color;
+                }
+            }
+        }
+
     }
 
-    font-family: $font-family-base, $font-awesome-font-name;
+    // Hide icon on focus
+    &:focus-within {
+
+        .td-search__icon {
+            display: none;
+        }
+
+        .td-search-input {
+            text-indent: 0px;
+        }
+    }
+
+    &:not(:focus-within) {
+        color: $input-placeholder-color;
+    }
 }
 
-.popover.offline-search-result {
-    // Override bootstrap default style (max-width: $popover-max-width;)
+// Offline search
+
+.td-search--offline {
+
+    &:focus-within {
+        // Don't hide the search icon on focus: this gives better UX when user
+        // explores content of search-results popup and focus is lost.
+
+        .td-search__icon {
+            display: flex;
+            color: $input-placeholder-color;
+        }
+    }
+}
+
+.td-offline-search-results {
     max-width: 90%;
 
     .card {
@@ -26,6 +105,16 @@
 
         .card-header {
             font-weight: bold;
+        }
+    }
+
+    &__close-button {
+        // cursor: pointer;
+        float: right;
+
+        &:after {
+            @extend .fas;
+            content: fa-content($fa-var-times);
         }
     }
 }
