@@ -186,7 +186,7 @@
             });
 
             $targetSearchInput
-                .data('content', $html[0].outerHTML)
+                .data('content', $html[0])
                 .popover('show');
         };
     });
