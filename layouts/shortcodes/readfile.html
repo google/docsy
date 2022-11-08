@@ -32,7 +32,7 @@ if the file is not found */}}
     {{- highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape |
     safeHTML ) (.Get "lang") "" -}}
   {{ else }}
-    {{- $.Scratch.Get "filepath" | os.ReadFile | .Page.RenderString | htmlUnescape | safeHTML -}}
+    {{- $.Scratch.Get "filepath" | os.ReadFile | .Page.RenderString | safeHTML -}}
   {{ end }}
 {{ else }}
 
