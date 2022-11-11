@@ -74,6 +74,10 @@ notes][0.5.1]. **BREAKING CHANGES** are documented below.
 [upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
 [what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
+## [0.5.0][]
+
+Unpublished.
+
 ## [0.4.0][]
 
 For a full list of the changes to this release, see the [release notes][0.4.0].
@@ -169,10 +173,11 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC
-[0.2.0]: https://github.com/google/docsy/releases/v0.2.0
-[0.3.0]: https://github.com/google/docsy/releases/v0.3.0
-[0.4.0]: https://github.com/google/docsy/releases/v0.4.0
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
+[0.5.0]: https://github.com/google/docsy/releases/v0.5.0
+[0.4.0]: https://github.com/google/docsy/releases/v0.4.0
+[0.3.0]: https://github.com/google/docsy/releases/v0.3.0
+[0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #
 [22q2]: https://github.com/google/docsy/milestone/3
 [hugo modules]: https://gohugo.io/hugo-modules/
