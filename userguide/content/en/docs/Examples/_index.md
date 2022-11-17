@@ -29,6 +29,7 @@ Example sites that have low to no customization:
 | [Selenium](https://www.selenium.dev/) | https://github.com/SeleniumHQ/seleniumhq.github.io |
 | [fission.io](https://fission.io/) | https://github.com/fission/fission.io |
 | [Stroom](https://gchq.github.io/stroom-docs) | https://github.com/gchq/stroom-docs |
+| [OpenTelemetry](https://opentelemetry.io) | https://github.com/open-telemetry/opentelemetry.io |
 
 ## Customized Docsy examples
 
