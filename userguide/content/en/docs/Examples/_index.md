@@ -30,6 +30,8 @@ Example sites that have low to no customization:
 | [fission.io](https://fission.io/) | https://github.com/fission/fission.io |
 | [Stroom](https://gchq.github.io/stroom-docs) | https://github.com/gchq/stroom-docs |
 | [OpenTelemetry](https://opentelemetry.io) | https://github.com/open-telemetry/opentelemetry.io |
+| [CloudWeGo](https://www.cloudwego.io/) | https://github.com/cloudwego/cloudwego.github.io |
+| [etcd](https://etcd.io/) | https://github.com/etcd-io/website |
 
 ## Customized Docsy examples
 
@@ -43,3 +45,4 @@ Example sites that include a moderate to high amount of customization:
 | [Thunderhead Engineering Product Support](https://support.thunderheadeng.com/) | https://gitlab.com/tecidev/support (private) |
 | [Kubernetes](https://kubernetes.io) | https://github.com/kubernetes/website |
 | [XLT](https://xltdoc.xceptance.com/) | https://github.com/Xceptance/xlt-documentation |
+| [Dapr](https://docs.dapr.io/) | https://github.com/dapr/docs |
