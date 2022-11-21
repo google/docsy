@@ -34,6 +34,12 @@ name][].
 
 [Styling your project logo and name]: /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
 
+## Use icons
+
+Docsy includes the free FontAwesome icons by default, including logos for sites like GitHub and Stack Overflow. You can view all available icons in the [FontAwesome documentation](https://fontawesome.com/icons/), including the FontAwesome version when the icon was added and whether it is available for free tier users. Check Docsy's [`package.json`](https://github.com/google/docsy/blob/main/package.json) and release notes for Docsy's currently included version of FontAwesome.
+
+You can add FontAwesome icons to your [top-level menu](/docs/adding-content/navigation/#adding-icons-to-the-top-level-menu), [section menu](/docs/adding-content/navigation/#add-icons-to-the-section-menu), or anywhere in your text.
+
 ## Add your favicons
 
 The easiest way to do this is to create a set of favicons via http://cthedot.de/icongen (which lets you create a huge range of icon sizes and options from a single image) and/or [https://favicon.io](https://favicon.io), and put them in your site project's `static/favicons` directory. This will override the default favicons from the theme.
