@@ -1,9 +1,3 @@
-{{ $needmermaid := .Site.Params.mermaid.enable -}}
-{{ if ge hugo.Version "0.93.0" -}}
-    {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
-{{ end }}
-
-{{ if $needmermaid }}
 (function($) {
     var needMermaid = false;
 
@@ -23,7 +17,7 @@
         return;
     }
 
-    var params = {{ . | jsonify | safeJS }};
+    var params = {{ .Site.Params.mermaid | jsonify | safeJS }};
 
     // site params are stored with lowercase keys; lookup correct casing
     // from Mermaid default config.
@@ -45,4 +39,3 @@
     settings.startOnLoad = true;
     mermaid.initialize(settings);
 })(jQuery);
-{{ end }}

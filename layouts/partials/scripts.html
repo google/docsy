@@ -1,11 +1,10 @@
 {{ $needmermaid := .Site.Params.mermaid.enable -}}
 {{ if ge hugo.Version "0.93.0" -}}
+    {{ with .Site.Params.mermaid }}
+        {{ $needmermaid = true }}
+    {{ end }}
     {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
 {{ end }}
-
-{{ if $needmermaid -}}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.7/dist/mermaid.min.js" integrity="sha512-1ypa9tdUrJAWv5g28Mb5x0zXaUuI4SBofKff88OGyk5D/oOd4x1IPxYHsx3K81bwBKt8NVUvGgw7TgNZ6PJX2A==" crossorigin="anonymous"></script>
-{{ end -}}
 
 {{ if .Site.Params.markmap.enable -}}
 <style>
@@ -64,7 +63,15 @@ window.markmap = {
 {{ if .Site.Params.offlineSearch -}}
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
-{{ $js := (slice $jsBs $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap $jsDrawio) | resources.Concat "js/main.js" -}}
+
+{{ $jsArray := slice $jsBs $jsBase $jsAnchor $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
+
+{{ if $needmermaid -}}
+{{ $jsArray = $jsArray | append $jsMermaid -}}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9.2.2/dist/mermaid.min.js" integrity="sha512-IX+bU+wShHqfqaMHLMrtwi4nK6W/Z+QdZoL4kPNtRxI2wCLyHPMAdl3a43Fv1Foqv4AP+aiW6hg1dcrTt3xc+Q==" crossorigin="anonymous"></script>
+{{ end -}}
+
+{{ $js := $jsArray | resources.Concat "js/main.js" -}}
 {{ if hugo.IsProduction -}}
   {{ $js := $js | minify | fingerprint -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
