@@ -56,6 +56,10 @@
         font-weight: $font-weight-bold;
     }
 
+    .navbar-nav {
+        white-space: nowrap;
+    }
+
     // For .td-search__input styling, see _search.scss
 
     .dropdown {
@@ -81,9 +85,7 @@
             .navbar-nav {
                 padding-bottom: 2rem;
                 overflow-x: auto;
-                white-space: nowrap;
                 -webkit-overflow-scrolling: touch;
-
             }
         }
     }
