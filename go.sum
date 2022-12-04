@@ -1,9 +1,12 @@
 github.com/FortAwesome/Font-Awesome v0.0.0-20220831210243-d3a7818c253f h1:bvkUptSRPZBr3Kxuk+bnWCEmQ5MtEJX5fjezyV0bC3g=
 github.com/FortAwesome/Font-Awesome v0.0.0-20220831210243-d3a7818c253f/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
+github.com/FortAwesome/Font-Awesome v0.0.0-20221115183454-96cafbd73ec4 h1:xfr9SidRCMEh4A8fdkLhFPcHAVbrdv3Ua0Jp/nSmhhQ=
+github.com/FortAwesome/Font-Awesome v0.0.0-20221115183454-96cafbd73ec4/go.mod h1:IUgezN/MFpCDIlFezw3L8j83oeiIuYoj28Miwr/KUYo=
 github.com/google/docsy/dependencies v0.4.0/go.mod h1:2zZxHF+2qvkyXhLZtsbnqMotxMukJXLaf8fAZER48oo=
 github.com/google/docsy/dependencies v0.4.1-0.20220905171817-ae8b8117ed16 h1:6Ju+wn/ReUk9qmvKU68JlYhnWe48Tq+2HZ4vyeSpNMk=
 github.com/google/docsy/dependencies v0.4.1-0.20220905171817-ae8b8117ed16/go.mod h1:2zZxHF+2qvkyXhLZtsbnqMotxMukJXLaf8fAZER48oo=
 github.com/google/docsy/dependencies v0.5.1-0.20221014161617-be5da07ecff1 h1:DH0NbaXJjODFImfRJGCSXDhnRO/IaD2VTGVlRjULUtc=
 github.com/google/docsy/dependencies v0.5.1-0.20221014161617-be5da07ecff1/go.mod h1:EDGc2znMbGUw0RW5kWwy2oGgLt0iVXBmoq4UOqstuNE=
+github.com/google/docsy/dependencies v0.5.1/go.mod h1:EDGc2znMbGUw0RW5kWwy2oGgLt0iVXBmoq4UOqstuNE=
 github.com/twbs/bootstrap v4.6.2+incompatible h1:TDa+R51BTiy1wEHSYjmqDb8LxNl/zaEjAOpRE9Hwh/o=
 github.com/twbs/bootstrap v4.6.2+incompatible/go.mod h1:fZTSrkpSf0/HkL0IIJzvVspTt1r9zuf7XlZau8kpcY0=
