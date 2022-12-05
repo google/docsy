@@ -18,6 +18,10 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
   For existing sites build with hugo 0.93.0+, parameter `mermaid.enable`
   can be removed from site config.
 
+- **Add render hook for chem code blocks**: add auto-activation of `math` and
+  `chem` blocks via KateX and mhchem. Support for formula rendering activation
+  on individual pages only. Hugo version >= 0.93.0 required.
+
 **Breaking changes**:
 
 
