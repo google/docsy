@@ -8,6 +8,11 @@ params:
   rss_sections: [blog]
   drawio:
     enable: true
+  features:
+    analytics:
+      enabled: true
+      goatCounter:
+        code: lna-dev
 
 outputFormats:
   PRINT:

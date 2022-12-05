@@ -2,4 +2,8 @@
 {{ with .Content }}
 {{ . }}
 {{ end }}
+
+<!--================= add analytics if enabled =========================-->
+{{- partial "analytics.html" . -}}
+
 {{ end }}

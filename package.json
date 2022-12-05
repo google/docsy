@@ -25,6 +25,8 @@
     "bootstrap": "4.6.2"
   },
   "devDependencies": {
-    "hugo-extended": "0.104.3"
+    "autoprefixer": "^10.4.13",
+    "hugo-extended": "0.104.3",
+    "postcss-cli": "^10.1.0"
   }
 }
