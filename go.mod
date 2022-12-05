@@ -1,4 +1,4 @@
-module github.com/google/docsy
+module github.com/LNA-DEV/PrivateDocsy
 
 go 1.12
 
