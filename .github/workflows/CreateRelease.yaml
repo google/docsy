@@ -1,0 +1,27 @@
+name: CreateRelease
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [main]
+
+env:
+  VERSION: v0.0.${{ github.run_number }}
+
+jobs:
+  ReleaseToGithub:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: release
+        uses: actions/create-release@v1
+        id: private_docsy_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          body_path: ./.github/Changelog.md
