@@ -1,14 +1,13 @@
 <!-- Add Analytics if enabled in configuration -->
-{{ with site.Params.features.analytics }} 
+{{ with site.Params.features.analytics }}
     {{ if .enabled }}
         <!-- GoatCounter -->
         {{ with .goatCounter }}
-            <h1>lol</h1>
             <script
             data-goatcounter="https://{{ .code }}.goatcounter.com/count"
             async
             src="/js/goat-counter.js"
             ></script>
-        {{ end }} 
-    {{ end }} 
+        {{ end }}
+    {{ end }}
 {{ end }}
