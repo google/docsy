@@ -2,6 +2,9 @@
 <html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Lang }}" class="no-js">
   <head>
     {{ partial "head.html" . }}
+
+    <!--================= add analytics if enabled =========================-->
+    {{- partial "analytics.html" . -}}
   </head>
   <body class="td-{{ .Kind }} td-blog {{- with .Page.Params.body_class }} {{ . }}{{ end }}">
     <header>
