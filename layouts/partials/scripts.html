@@ -68,7 +68,7 @@ window.markmap = {
 
 {{ if $needmermaid -}}
 {{ $jsArray = $jsArray | append $jsMermaid -}}
-<script src="https://cdn.jsdelivr.net/npm/mermaid@9.2.2/dist/mermaid.min.js" integrity="sha512-IX+bU+wShHqfqaMHLMrtwi4nK6W/Z+QdZoL4kPNtRxI2wCLyHPMAdl3a43Fv1Foqv4AP+aiW6hg1dcrTt3xc+Q==" crossorigin="anonymous"></script>
+<script src="/js/mermaid.min.js"></script>
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
