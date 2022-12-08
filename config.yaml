@@ -3,38 +3,16 @@
 # cSpell:ignore docsy fortawesome fontawesome webfonts
 
 params:
+  time_format_blog: Monday, January 02, 2006
+  time_format_default: January 2, 2006
+  rss_sections: [blog]
+  drawio:
+    enable: true
   features:
     analytics:
       enabled: true
       goatCounter:
-        code: code
-  ui:
-    readingTime:
-      enable: true
-
-  offlineSearch: true
-  algolia_docsearch: false
-  offlineSearchSummaryLength: 70
-  offlineSearchMaxResults: 10
-  prism_syntax_highlighting: false
-
-  mermaid:
-    enable: false
-    theme: default
-  plantuml:
-    enable: false
-    theme: default
-    svg_image_url: https://www.plantuml.com/plantuml/svg/
-    svg: false
-  katex:
-    enable: false
-    html_dom_element: document.body
-    mhchem:
-      enable: true
-  print:
-    disable_toc: false
-  markmap:
-    enable: false
+        code: lna-dev
 
 outputFormats:
   PRINT:
