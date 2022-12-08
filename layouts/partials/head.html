@@ -26,13 +26,9 @@
 {{ template "_internal/schema.html" . -}}
 {{ template "_internal/twitter_cards.html" . -}}
 {{ partialCached "head-css.html" . "asdf" -}}
-<script
-  src="/js/jquery-3.6.0.min.js"
-  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"></script>
+<script src="/js/jquery-3.6.0.min.js"></script>
 {{ if .Site.Params.offlineSearch -}}
-<script defer
-  src="/js/lunr.min.js"
-  integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"></script>
+<script defer src="/js/lunr.min.js"></script>
 {{ end -}}
 
 {{ if .Site.Params.prism_syntax_highlighting -}}
