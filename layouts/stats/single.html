@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{ .Render "content" }}
+
+{{ with site.Params.features.analytics }}
+{{ if .enabled }}
+{{ with .goatCounter }}
+
+<iframe src="https://{{ .code }}.goatcounter.com"></iframe>
+
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{ end }}
