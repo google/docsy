@@ -1,8 +1,7 @@
 ---
-title: "Examples"
+title: Examples
 weight: 8
-description: >
-  Some examples of Docsy in action!
+description: Some examples of Docsy in action!
 ---
 
 One of the best ways to see what Docsy can do, and learn how to configure a site with it, is to see some real projects. In addition to our provided Docsy Example Project, there are several live sites already using the theme. Please add your own examples once you've got a production site up and running with Docsy!
@@ -11,7 +10,7 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 
 Example sites that have low to no customization:
 
-| Site  | Repo (if public)  |
+| Site  | Repo |
 |---|---|
 | [This Docsy documentation site](/docs) | https://github.com/google/docsy |
 | ["Goldydocs" - a Docsy example site](https://example.docsy.dev) | https://github.com/google/docsy-example  |
@@ -37,12 +36,11 @@ Example sites that have low to no customization:
 
 Example sites that include a moderate to high amount of customization:
 
-| Site  | Repo (if public)  |
+| Site  | Repo |
 |---|---|
 | [Knative](https://knative.dev) | https://github.com/knative/docs and https://github.com/knative/website |
 | [Apache Airflow](https://airflow.apache.org/) | https://github.com/apache/airflow-site/ |
 | [Docsy Mostly Docs](https://mostlydocs.netlify.app/) | https://github.com/gwatts/mostlydocs/ |
-| [Thunderhead Engineering Product Support](https://support.thunderheadeng.com/) | https://gitlab.com/tecidev/support (private) |
 | [Kubernetes](https://kubernetes.io) | https://github.com/kubernetes/website |
 | [XLT](https://xltdoc.xceptance.com/) | https://github.com/Xceptance/xlt-documentation |
 | [Dapr](https://docs.dapr.io/) | https://github.com/dapr/docs |
