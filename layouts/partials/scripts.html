@@ -1,5 +1,5 @@
-{{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
-{{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
+{{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
+{{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem (.Page.Store.Get "hasmhchem") -}}
 {{ $needmermaid := .Site.Params.mermaid.enable -}}
 {{ if ge hugo.Version "0.93.0" -}}
     {{ with .Site.Params.mermaid }}
