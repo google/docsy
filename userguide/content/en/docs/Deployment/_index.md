@@ -40,12 +40,16 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
 1. Click **New site from Git**.
 1. Click your chosen Git provider, then choose your site repo from your list of repos.
 1. In the **Deploy settings** page:
-   1. For your **Build command**, specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules. If you don't want your site to be indexed by search engines, you can add an environment flag to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
-   1. Click **Show advanced**.
-   1. In the **Advanced build settings** section, click **New variable**.
-   1. Specify `HUGO_VERSION` as the **Key** for the new variable, and `0.73` or later as its **Value**.
-   1. In the **Advanced build settings** section, click **New variable** again.
-   1. Specify `GO_VERSION` as the **Key** for the new variable, and `1.18` or later as its **Value**.
+   1. Specify your **Build command**. The exact build command depends on how you have chosen to use Docsy:
+      * If you are using Docsy as a [Git submodule](/docs/get-started/other-options/#option-1-docsy-as-a-git-submodule), specify `cd themes/docsy && git submodule update -f --init && cd ../.. && hugo`. You need to specify this rather than just `hugo` so that Netlify can use the theme's submodules.
+      * If you are using Docsy as a [Hugo module](/docs/get-started/docsy-as-module/) or NPM package, you can just specify `hugo`.   
+   3. Click **Show advanced**.
+   4. In the **Advanced build settings** section, click **New variable**.
+   5. Specify `HUGO_VERSION` as the **Key** for the new variable, and set its **Value** to the latest version of Hugo (minimum recommended version: `0.73`).
+   6. In the **Advanced build settings** section, click **New variable** again.
+   7. Specify `GO_VERSION` as the **Key** for the new variable, and set its **Value** to the latest version of Go (minimum recommended version: `1.18`).
+
+   If you don't want your site to be indexed by search engines, you can add an environment flag to your build command to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
 1. Click **Deploy site**.
 
 {{% alert title="Note" color="primary" %}}
