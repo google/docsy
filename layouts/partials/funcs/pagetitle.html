@@ -1,0 +1,14 @@
+{{/* Set $title from: .LinkTitle, .Title, first h1 in .Content, or filename */}}
+{{- $title := "" -}}
+{{- if . -}}
+  {{- $title = or .LinkTitle .Title -}}
+  {{- if not $title -}}
+    {{- range ($h1s := findRE "<h1.*?>(.|\n)*?</h1>" .Content 1) -}}
+      {{- $title = . | plainify | htmlUnescape -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $title -}}
+    {{- $title = .File.ContentBaseName | humanize -}}
+  {{- end -}}
+{{- end -}}
+{{- return $title -}}
