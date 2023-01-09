@@ -572,12 +572,12 @@ For example, the following defines a simple MindMap:
 ## Links
 
 - <https://markmap.js.org/>
-- [GitHub](https://github.com/gera2ld/markmap)
+- [GitHub](https://github.com/markmap/markmap)
 
 ## Related
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap)
-- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+- [coc-markmap](https://github.com/markmap/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/markmap/gatsby-remark-markmap)
 
 ## Features
 
@@ -590,7 +590,7 @@ For example, the following defines a simple MindMap:
     ```js
     console.log('code block');
     ```
-- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+- KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 ````
 
@@ -602,12 +602,12 @@ Automatically renders to:
 ## Links
 
 - <https://markmap.js.org/>
-- [GitHub](https://github.com/gera2ld/markmap)
+- [GitHub](https://github.com/markmap/markmap)
 
 ## Related
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap)
-- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+- [coc-markmap](https://github.com/markmap/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/markmap/gatsby-remark-markmap)
 
 ## Features
 
@@ -620,10 +620,41 @@ Automatically renders to:
     ```js
     console.log('code block');
     ```
-- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+- KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 
-To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
+If needed, you can define the desired width and/or height of an individual mindmap via code block attributes:
+
+````
+```markmap { height="300px" width="700px" }
+# ...
+```
+````
+
+With hugo version 0.93 or higher, support of Markmap mindmaps is automatically enabled as soon as you use a `markmap` code block on your page.
+
+If you are using hugo version 0.92 or lower, you need to manually activate rendering support for Markmap mindmaps. The easiest way to do so is to add a `markmap` attribute to the frontmatter of your page and set it to `true`:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Page front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+markmap = true
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+markmap: true
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "markmap": true
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+You can also enable sitewide rendering support for Markmap mindmaps inside the Docsy theme. To do so, update your `config.toml`/`config.yaml`/`config.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}

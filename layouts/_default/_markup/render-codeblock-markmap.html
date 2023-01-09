@@ -1,0 +1,28 @@
+{{ .Page.Store.Set "hasmarkmap" true -}}
+
+{{ $customStyle := false -}}
+{{ $width := "100%" -}}
+{{ $height := "300px" -}}
+
+{{ with .Attributes.width -}}
+  {{ $customStyle = true -}}  
+  {{ $width = $.Attributes.width -}}
+{{ end -}}
+
+{{ with .Attributes.height -}}
+  {{ $customStyle = true -}}  
+  {{ $height = $.Attributes.height -}}
+{{ end -}}
+
+<div class="markmap {{ cond $customStyle ( printf "markmap%d" $.Ordinal ) "" }}" >
+{{ .Inner | safeHTML }}
+</div>
+
+{{ if $customStyle }}
+<style>
+  div.markmap.markmap{{- $.Ordinal }} svg.markmap  {
+    width: {{ $width }};
+    height: {{ $height }};
+  }
+</style>
+{{ end }}

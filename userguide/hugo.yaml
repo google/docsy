@@ -116,8 +116,6 @@ params:
     svg: false
   print:
     disable_toc: false
-  markmap:
-    enable: true
   drawio:
     enable: true
 
