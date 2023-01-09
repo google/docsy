@@ -111,11 +111,6 @@ params:
     theme: default
     svg_image_url: https://www.plantuml.com/plantuml/svg/
     svg: false
-  katex:
-    enable: true
-    html_dom_element: document.body
-    mhchem:
-      enable: true
   print:
     disable_toc: false
   markmap:

@@ -1,10 +1,12 @@
-{{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
-{{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem (.Page.Store.Get "hasmhchem") -}}
+{{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
+{{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
 {{ $needmermaid := .Site.Params.mermaid.enable -}}
 {{ if ge hugo.Version "0.93.0" -}}
     {{ with .Site.Params.mermaid }}
         {{ $needmermaid = true }}
     {{ end }}
+  {{ $needKaTeX = or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
+  {{ $needmhchem = or $needmhchem (.Page.Store.Get "hasmhchem") -}}
   {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
 {{ else -}}
   {{ if or $needKaTeX $needmhchem $needmermaid -}}
