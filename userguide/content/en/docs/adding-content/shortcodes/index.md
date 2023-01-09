@@ -474,7 +474,7 @@ If your content is any kind of text other than programming code, use the univers
 
 ```go-html-template
 {{</* card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono"
-          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')">*/>}}
+          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')"*/>}}
 Imagine there's no heaven, It's easy if you try<br/>
 No hell below us, above us only sky<br/>
 Imagine all the people living for today…
