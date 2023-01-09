@@ -100,7 +100,7 @@ If you configure more than one language in `config.toml`, the Docsy theme adds a
 
 All UI strings (text for buttons, repository links, etc.) are bundled inside `/i18n` in the theme, with a `.toml` file for each language.
 
-If your chosen language isn't currently in the theme and you create your own `.toml` file for all the common UI strings (for example, if you translate the UI text into Japanese and create a copy of `en.toml` called `jp.toml`), we recommend you do this **in the theme** rather than in your own project, so it can be reused by others. 
+If your chosen language isn't currently in the theme and you create your own `.toml` file for all the common UI strings (for example, if you translate the UI text into Esperanto and create a copy of `en.toml` called `eo.toml`), we recommend you do this **in the theme** rather than in your own project. You can then open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to contribute your translation to the Docsy community.
 
 {{% alert title="Hugo Tip" %}}
 Run `hugo server --printI18nWarnings` when doing translation work, as it will give you warnings on what strings are missing.
