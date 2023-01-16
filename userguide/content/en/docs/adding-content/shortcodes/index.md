@@ -403,13 +403,13 @@ The Docsy template provides two shortcodes `tabpane` and `tab` that let you easi
   {{%/* /tab */%}}
   {{</* tab header="German" lang="de" */>}}
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
+    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
   ![Flag Tanzania](flags/tz.png)
   **Karibu sana!**
   {{%/* /tab */%}}
-{{%/* /tabpane */%}}
+{{</* /tabpane */>}}
 ```
 
 This code translates to the right aligned tabbed pane below, showing a `Welcome!` greeting in English, German or Swahili:
@@ -422,7 +422,7 @@ This code translates to the right aligned tabbed pane below, showing a `Welcome!
   {{% /tab %}}
   {{< tab header="German" lang="de" >}}
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" style="float: right; padding: 0 0 0 0px">
+    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{< /tab >}}
   {{% tab  header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
@@ -474,7 +474,7 @@ If your content is any kind of text other than programming code, use the univers
 
 ```go-html-template
 {{</* card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono"
-          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')">*/>}}
+          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')"*/>}}
 Imagine there's no heaven, It's easy if you try<br/>
 No hell below us, above us only sky<br/>
 Imagine all the people living for today…

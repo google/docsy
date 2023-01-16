@@ -8,7 +8,7 @@ description: >
   Structure the content using taxonomies like tags, categories, labels.
 ---
 
-Docsy supports Hugo's Taxonomies (see: https://gohugo.io/content-management/taxonomies/) in its docs and blog section. You can see the default layout and can test the behavior of the generated links on this page. 
+Docsy supports Hugo's Taxonomies (see: https://gohugo.io/content-management/taxonomies/) in its docs and blog section. You can see the default layout and can test the behavior of the generated links on this page.
 
 ## Terminology
 
@@ -125,11 +125,11 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-The settings above would only show a taxonomy cloud for `projects` and `tags` (with the headlines "Our Projects" and "Tag Cloud") in Docsy's right sidebar and the assigned terms for the taxonomies `tags` and `categories` for each page. 
+The settings above would only show a taxonomy cloud for `projects` and `tags` (with the headlines "Our Projects" and "Tag Cloud") in Docsy's right sidebar and the assigned terms for the taxonomies `tags` and `categories` for each page.
 
-To disable any taxonomy cloud you have to set the Parameter `taxonomyCloud = []` resp. if you don't want to show the assigned terms you have to set `taxonomyPageHeader = []`. 
+To disable any taxonomy cloud you have to set the Parameter `taxonomyCloud = []` resp. if you don't want to show the assigned terms you have to set `taxonomyPageHeader = []`.
 
-As default the plural label of a taxonomy is used as it cloud title. You can overwrite the default cloud title with `taxonomyCloudTitle`. But if you do so, you have to define a manual title for each enabled taxonomy cloud (`taxonomyCloud` and `taxonomyCloudTitle` must have the same length!). 
+As default the plural label of a taxonomy is used as it cloud title. You can overwrite the default cloud title with `taxonomyCloudTitle`. But if you do so, you have to define a manual title for each enabled taxonomy cloud (`taxonomyCloud` and `taxonomyCloudTitle` must have the same length!).
 
 If you don't set the parameters `taxonomyCloud` resp. `taxonomyPageHeader` the taxonomy clouds resp. assigned terms for all defined taxonomies will be generated.
 ## Partials

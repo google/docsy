@@ -15,6 +15,9 @@ other = "ابحث في هذا الموقع"
 # Used in sentences such as "Posted in News"
 [ui_in]
 other = "في"
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "كل"
 
 # Footer text
 [footer_all_rights_reserved]
@@ -33,6 +36,8 @@ other = "منشئة"
 other = "اخر تعديل"
 [post_edit_this]
 other = "عدل هذه الصفحة"
+[post_view_this]
+other = "أنظر مصدر الصفحة"
 [post_create_child_page]
 other = " أنشئ صفحة فرعية"
 [post_create_issue]
@@ -42,9 +47,9 @@ other = "أنشئ مسألة حول المشروع"
 [post_posts_in]
 other = "منشور في"
 [post_reading_time]
-other = "minute read"
+other = "دقيقة للقراءة"
 [post_less_than_a_minute_read]
-other = "less than a minute"
+other = "أقل من دقيقة"
 
 # Print support
 [print_printable_section]
@@ -58,18 +63,18 @@ other = "اطبع القسم كاملا"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "انضم الي مجتمع {{ .Site.Title }}"
 [community_introduce]
-other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} هو مشروع مفتوح المصدر يمكن لأي شخص في المجتمع استخدامه وتحسينه والاستمتاع به. يسعدنا أن تنضم إلينا! إليك بعض الطرق للمشاركة و معرفة ما يحدث."
 [community_learn]
-other = "Learn and Connect"
+other = "تعلم وتواصل"
 [community_using]
-other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+other = "تستخدام أو تريد استخدام {{ .Site.Title }}؟ اكتشف المزيد هنا:"
 [community_develop]
-other = "Develop and Contribute"
+other = "طور و ساهم"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "إذا كنت ترغب في المشاركة بشكل أكبر من خلال المساهمة في {{ .Site.Title }}, انضم إلينا هنا:"
 [community_how_to]
-other = "You can find out how to contribute to {{ .Site.Title }} in our"
+other = "يمكنك معرفة كيفية المساهمة في {{ .Site.Title }} من خلال"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "إرشادات المساهمة"

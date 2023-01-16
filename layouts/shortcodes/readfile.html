@@ -1,3 +1,8 @@
+{{/* Store ordinal, to be retrieved by parent element */}}
+{{ if ge hugo.Version "0.93.0" }}
+  {{ .Page.Store.Add "Ordinal" 1 }}
+{{ end }}
+
 {{/* Handle the "file" named parameter or a single unnamed parameter as the file
 path */}}
 {{ if .IsNamedParams }}
@@ -24,10 +29,10 @@ if the file is not found */}}
 
 {{ if fileExists ($.Scratch.Get "filepath") }}
   {{ if eq (.Get "code") "true" }}
-    {{- highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape | 
+    {{- highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape |
     safeHTML ) (.Get "lang") "" -}}
   {{ else }}
-    {{- $.Scratch.Get "filepath" | readFile | .Page.RenderString | htmlUnescape | safeHTML -}}
+    {{- $.Scratch.Get "filepath" | os.ReadFile | .Page.RenderString | safeHTML -}}
   {{ end }}
 {{ else }}
 

@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.5.0-dev",
+  "version": "0.6.0",
   "repository": "github:google/docsy",
   "scripts": {
     "_cd:docs": "cd userguide &&",
@@ -21,10 +21,10 @@
     "proseWrap": "always"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.1.2",
+    "@fortawesome/fontawesome-free": "6.2.1",
     "bootstrap": "4.6.2"
   },
   "devDependencies": {
-    "hugo-extended": "0.102.2"
+    "hugo-extended": "0.107.0"
   }
 }

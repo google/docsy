@@ -266,8 +266,8 @@ instead create a symbolic link to the Docsy theme directory as follows (Linux
 commands shown, executed from the site root folder):
 
 ```sh
-mkdir -p theme
-pushd theme
+mkdir -p themes
+pushd themes
 ln -s ../node_modules/docsy
 popd
 ```
