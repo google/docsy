@@ -31,6 +31,7 @@ Example sites that have low to no customization:
 | [OpenTelemetry](https://opentelemetry.io) | https://github.com/open-telemetry/opentelemetry.io |
 | [CloudWeGo](https://www.cloudwego.io/) | https://github.com/cloudwego/cloudwego.github.io |
 | [etcd](https://etcd.io/) | https://github.com/etcd-io/website |
+| [protobuf.dev](https://protobuf.dev) | https://github.com/protocolbuffers/protocolbuffers.github.io |
 
 ## Customized Docsy examples
 
