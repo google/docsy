@@ -6,7 +6,7 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-For a list of issues targeted for the next release, see the [22Q2][] milestone.
+For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 ## 0.7.0 - next planned release (unpublished yet)
 
@@ -14,7 +14,11 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 **Breaking changes**:
 
+- **[Upgraded Bootstrap (#470)][470]** to v5. Details TBC.
+
 **Other changes**:
+
+[470]: https://github.com/google/docsy/issues/470
 
 ## [0.6.0][]
 
@@ -34,12 +38,6 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
   `chem` blocks via KateX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
-
-**Breaking changes**:
-
-
-**Other changes**:
-
 
 ## [0.5.1][]
 
@@ -197,7 +195,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #
-[22q2]: https://github.com/google/docsy/milestone/3
+[23q1]: https://github.com/google/docsy/milestone/6
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
