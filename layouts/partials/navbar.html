@@ -20,11 +20,11 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+  <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav mt-2 mt-lg-0">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
-      <li class="nav-item mr-4 mb-2 mb-lg-0">
+      <li class="nav-item me-4 mb-2 mb-lg-0">
         {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
         {{ with .Page }}{{ $active = or $active ( $.IsDescendant .) }}{{ end -}}
         {{ $pre := .Pre -}}
@@ -45,12 +45,12 @@
       </li>
       {{ end -}}
       {{ if .Site.Params.versions -}}
-      <li class="nav-item dropdown mr-4 d-none d-lg-block">
+      <li class="nav-item dropdown me-4 d-none d-lg-block">
         {{ partial "navbar-version-selector.html" . -}}
       </li>
       {{ end -}}
       {{ if (gt (len .Site.Home.Translations) 0) -}}
-      <li class="nav-item dropdown mr-4 d-none d-lg-block">
+      <li class="nav-item dropdown me-4 d-none d-lg-block">
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}

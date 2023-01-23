@@ -23,7 +23,7 @@
 								{{ partial "reading-time.html" . }}
 							{{ end }}
 						</header>
-						{{ partial "featured-image.html" (dict "p" . "w" 250 "h" 125 "class" "float-left mr-3 pt-1 d-none d-md-block") }}
+						{{ partial "featured-image.html" (dict "p" . "w" 250 "h" 125 "class" "float-left me-3 pt-1 d-none d-md-block") }}
 						<p class="pt-0 mt-0">{{ .Plain | safeHTML | truncate 250 }}</p>
 						<p class="pt-0"><a href="{{ .RelPermalink }}" aria-label="{{ T "ui_read_more"}} - {{ .LinkTitle }}">{{ T "ui_read_more"}}</a></p>
 					</div>
