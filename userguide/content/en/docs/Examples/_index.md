@@ -39,7 +39,6 @@ Example sites that include a moderate to high amount of customization:
 
 | Site  | Repo |
 |---|---|
-| [Knative](https://knative.dev) | https://github.com/knative/docs and https://github.com/knative/website |
 | [Apache Airflow](https://airflow.apache.org/) | https://github.com/apache/airflow-site/ |
 | [Docsy Mostly Docs](https://mostlydocs.netlify.app/) | https://github.com/gwatts/mostlydocs/ |
 | [Kubernetes](https://kubernetes.io) | https://github.com/kubernetes/website |
