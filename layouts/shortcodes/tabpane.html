@@ -87,7 +87,7 @@
       <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
           id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
           {{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
-          aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
+          aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
       </a>
     </li>
