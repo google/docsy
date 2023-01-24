@@ -154,7 +154,7 @@
     #content-desktop {display: block;}
     #content-mobile {display: none;}
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(lg) {
 
     #content-desktop {display: none;}
     #content-mobile {display: block;}
