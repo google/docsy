@@ -79,7 +79,7 @@
 
     {{/* Replace space and +, not valid for css selectors */ -}}
     {{ $lang := replaceRE "[\\s+]" "-" $lang -}}
-    <li class="nav-item{{ if $rightpush }} ml-auto{{ end -}}">
+    <li class="nav-item{{ if $rightpush }} ms-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
       {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
