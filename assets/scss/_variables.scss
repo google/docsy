@@ -126,6 +126,3 @@ $navbar-dark-color: rgba($white, 0.75) !default;
 $navbar-dark-hover-color: rgba($white, 0.5) !default;
 $navbar-dark-active-color: $white !default;
 $navbar-dark-disabled-color: rgba($white, 0.25) !default;
-
-// The yiq lightness value that determines when the lightness of color changes from "dark" to "light".
-$yiq-contrasted-threshold: 200 !default;

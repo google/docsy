@@ -2,7 +2,7 @@
 @mixin palette-variant($color-name, $color-value) {
     $text-color: color-contrast($color-value);
     $link-color: mix($blue, $text-color, lightness($color-value));
-   
+
     $link-hover-color: rgba($link-color, .5) !default;
 
     .-bg-#{$color-name} {
@@ -12,7 +12,7 @@
 
     // Make links in paragraphs stand out more.
     @include link-variant(".-bg-#{$color-name} p > a", $link-color, $link-hover-color, false);
-   
+
 
     .-text-#{$color-name} {
         color: $color-value;
@@ -35,7 +35,7 @@
 @for $i from 1 through length($td-box-colors) {
     $value: nth($td-box-colors, $i);
     $name: $i - 1;
-    $text-color: color-yiq($value);
+    $text-color: color-contrast($value);
 
     @include palette-variant($name, $value);
 }
