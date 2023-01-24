@@ -9,6 +9,7 @@
     $("#td-section-nav a").removeClass("active");
     $("#td-section-nav #{{ $mid }}").addClass("active"); 
     $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item"); 
+    $("#td-section-nav #{{ $mid }}-li span").attr("id", "td-sidebar-nav-active-item");
     $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path"); 
     $("#td-section-nav li.active-path").addClass("show"); 
     $("#td-section-nav li.active-path").children("input").prop('checked', true);
