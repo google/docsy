@@ -45,6 +45,7 @@
   {{end -}}
 {{ end -}}
 
+{{/* Nav tabs */ -}}
 <ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $Ordinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
@@ -84,12 +85,12 @@
       {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
 
-      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
-          id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
+      <button class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
+          id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
           {{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
-      </a>
+      </button>
     </li>
 
     {{- if not $disabled -}}
@@ -106,7 +107,7 @@
 {{ $langs = slice -}}
 {{ $activeSet = false -}}
 
-{{/* Inner content */ -}}
+{{/* Tab panes */ -}}
 <div class="tab-content" id="tabs-{{ $Ordinal }}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
@@ -136,7 +137,7 @@
     {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
     {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize }}
     <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
-        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
+        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}" tabindex="{{ $Ordinal }}">
         {{ if $text -}}
           {{ index . "content" -}}
         {{ else -}}
