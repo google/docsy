@@ -1,4 +1,4 @@
-<div class="td-card card mb-4">
+<div class="td-card card border me-4">
   {{ with $.Get "header" }}
     <div class="card-header">
       {{ if eq $.Page.File.Ext "md" }}
@@ -19,7 +19,7 @@
       </h5>
     {{ end }}
     {{ with $.Get "subtitle" }}
-      <h6 class="card-title mb-2 text-muted">
+      <h6 class="card-title ms-2 text-muted">
         {{ if eq $.Page.File.Ext "md" }}
           {{ $.Get "subtitle" | markdownify }}
         {{ else }}

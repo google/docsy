@@ -30,6 +30,9 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - `blocks/section`: **default** and accepted values of the `type` argument
     have changed! For details see [blocks/section] ([#1472]).
 
+- **[Adaptation of shortcode 'cardpane'][1376]. renamed CSS class `td-card-deck`
+  to `td-card-group`.
+
 **Other changes**:
 
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
