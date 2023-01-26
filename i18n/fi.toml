@@ -66,7 +66,7 @@ other = "Tulosta koko osio"
 [community_join]
 other = "Liity {{ .Site.Title }}-yhteisöön"
 [community_introduce]
-other = "{{ .Site.Title }} on avoimen lähdekoodin projekti, josta jokainen yhteisön jäsen saa nauttia käyttämällä ja kehittämällä sitä. Olisi mahtavaa jos tulisit mukaan! Tässä pari tapaa osallistua."
+other = "{{ .Site.Title }} on avoimen lähdekoodin projekti, josta jokainen saa nauttia käyttämällä ja kehittämällä sitä. Olisi mahtavaa jos tulisit mukaan! Tässä pari tapaa osallistua."
 [community_learn]
 other = "Opi ja kohtaa muita"
 [community_using]
