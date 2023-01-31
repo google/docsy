@@ -3,20 +3,20 @@ div.drawio {
     position: relative;
 
     button {
+        @extend .btn;
+        @extend .btn-outline-primary;
         position: absolute;
-        font-size: 0.8em;
         bottom: 5px;
         right: 5px;
-        background-color: rgba($secondary, .8);
-        color: $primary-light;
         padding: 0.4em 0.5em;
+        font-size: 0.8em;
         display: none;
     }
 
     &:hover button {
         display: inline;
     }
-} 
+}
 
 div.drawioframe {
     position: fixed;
