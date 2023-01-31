@@ -14,11 +14,20 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes**:
 
-- **[Upgraded Bootstrap (#470)][470]** to v5. Details TBC.
+- **[Upgraded Bootstrap (#470)][470]** to v5. For a list of Bootstrap breaking
+  changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
+  changes are listed below:
+  - Clean up of unused, or rarely used, variables and functions:
+    - Dropped `$primary-light`.
+    - Dropped `color-diff()`.
 
 **Other changes**:
 
+- Non-breaking changes that result from the Bootstrap v5 upgrade:
+  - Draw.io diagram edit button: replace custom colors by BS's outline primary.
+
 [470]: https://github.com/google/docsy/issues/470
+[bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 
 ## [0.6.0][]
 
