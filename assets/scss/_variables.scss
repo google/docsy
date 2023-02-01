@@ -38,7 +38,7 @@ $gray-800: #333 !default;
 $gray-900: #222 !default;
 $black: #000 !default;
 
-$code-color: darken($secondary, 20%) !default;
+$code-color: shade-color($secondary, 40%) !default;
 
 // UI element colors
 
@@ -52,9 +52,9 @@ $td-sidebar-border-color: $border-color !default;
 // These colors are all part of the theme palette, but the mix is fairly random to create variation. This can be overridden by the project if needed.
 $td-box-colors: $dark, $primary, $secondary, $info, $gray-600, $success, $warning, $dark, $danger, $primary, $secondary, $info !default;
 
-$link-color: darken($blue, 15%) !default;
+$link-color: adjust-color($blue, $lightness: -15%) !default;
 $link-decoration: none !default;
-$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-color: shade-color($link-color, 30%) !default;
 $link-hover-decoration: none !default;
 
 // Fonts
@@ -116,7 +116,7 @@ $td-block-space-bottom-base: 4 * $spacer !default;
 
 $pagination-color: $gray-600 !default;
 $pagination-border-color: rgba($black, 0.1) !default;
-$pagination-active-border-color: darken($primary, 5%) !default;
+$pagination-active-border-color: adjust-color($primary, $lightness: -5%) !default;
 $pagination-disabled-color: $gray-300 !default;
 
 // Navbar
