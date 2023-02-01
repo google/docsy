@@ -59,7 +59,7 @@
       {{ $lang = $element.header -}}
     {{ end -}}
     {{ with $element.language -}}
-      {{ $lang = $element.language -}}
+      {{ $lang = . -}}
     {{ end -}}
 
     {{/* Check for duplicate languages */ -}}
@@ -116,7 +116,7 @@
       {{ $lang = $element.header -}}
     {{ end -}}
     {{ with $element.language -}}
-      {{ $lang = $element.language -}}
+      {{ $lang = . -}}
     {{ end -}}
 
     {{ $disabled := false -}}
@@ -126,7 +126,7 @@
 
     {{ $hloptions := $hloptionsPane -}}
     {{ with $element.highlight -}}
-      {{ $hloptions = $element.highlight -}}
+      {{ $hloptions = . -}}
     {{ end -}}
 
     {{ $text := $textPane -}}
