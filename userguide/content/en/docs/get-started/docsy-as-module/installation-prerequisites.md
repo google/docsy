@@ -84,7 +84,7 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```console
 $ git version
-git version 2.38.1.windows.1
+git version 2.39.1
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.
