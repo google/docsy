@@ -1,6 +1,5 @@
 ---
-title: "Before you begin"
-linkTitle: "Before you begin"
+title: Before you begin
 date: 2021-12-08T11:12:59+01:00
 weight: 1
 description: >
@@ -13,7 +12,7 @@ This page describes the prerequisites for building a site that uses Docsy as a H
 
 You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
+For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
 ### On Linux
 
@@ -24,6 +23,7 @@ If you've already installed Hugo, check your version:
 ```bash
 hugo version
 ```
+
 If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
@@ -68,7 +68,7 @@ See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for u
 
 Hugo's commands for module management require that the Go programming language is installed on your system. Check whether `go` is already installed:
 
-```bash
+```console
 $ go version
 go version go1.19.2 windows/amd64
 ```
@@ -82,8 +82,8 @@ If the `go` language is not installed on your system yet or if you need to upgra
 
 Hugo's commands for module management require that the `git` client is installed on your system. Check whether `git` is already present in your system:
 
-```bash
-git version
+```console
+$ git version
 git version 2.38.1.windows.1
 ```
 
@@ -136,7 +136,7 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    tl;dr:
 
-   ```
+   ```bash
    # Using Ubuntu
    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
    sudo apt-get install -y nodejs
@@ -150,7 +150,7 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    tl;dr:
 
-   ```
+   ```bash
    # As root
    curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
 
