@@ -8,7 +8,7 @@ description: >
 resources:
 - src: "**spruce*.jpg"
   params:
-    byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+    byline: "*Photo*: Bjørn Erik Pedersen / CC-BY-SA"
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and use [shortcodes](https://gohugo.io/content-management/shortcodes/). These are reusable snippets of content that you can include in your pages, often using HTML to create effects that are difficult or impossible to do in simple Markdown. Shortcodes can also have parameters that let you, for example, add your own text to a fancy shortcode text box. As well as Hugo's [built-in shortcodes](https://gohugo.io/content-management/shortcodes/), Docsy provides some shortcodes of its own to help you build your pages.
@@ -194,14 +194,16 @@ This is placeholder content
 The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a set of processing instructions.
 
 ```go-html-template
-{{</* imgproc spruce Fill "400x450" */>}}
-Norway Spruce <i>Picea abies</i> shoot with foliage buds.
-{{</* /imgproc */>}}
+{{%/* imgproc spruce Fill "400x450" */%}}
+Norway Spruce *Picea abies* shoot with foliage buds.
+{{%/* /imgproc */%}}
 ```
 
-{{< imgproc spruce Fill "400x450" >}}
-Norway Spruce <i>Picea abies</i> shoot with foliage buds.
-{{< /imgproc >}}
+Use the syntax printed above if the inner content and/or the `byline` parameter of your shortcode is authored in markdown. In case of HTML content, use square brackets `<>` as innermost delimiters: `{{</* imgproc >}}<b>HTML</b> content{{< /imgproc */>}}`.
+
+{{% imgproc spruce Fill "400x450" %}}
+Norway Spruce *Picea abies* shoot with foliage buds.
+{{% /imgproc %}}
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
 
@@ -213,7 +215,7 @@ The example above has also a byline with photo attribution added. When using ill
 src = "**spruce*.jpg"
 
   [resources.params]
-  byline = "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+  byline = "*Photo*: Bjørn Erik Pedersen / CC-BY-SA"
 +++
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
@@ -221,7 +223,7 @@ src = "**spruce*.jpg"
 resources:
 - src: "**spruce*.jpg"
   params:
-    byline: "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+    byline: "*Photo*: Bjørn Erik Pedersen / CC-BY-SA"
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
@@ -230,7 +232,7 @@ resources:
     {
       "src": "**spruce*.jpg",
       "params": {
-        "byline": "Photo: Bjørn Erik Pedersen / CC-BY-SA"
+        "byline": "*Photo*: Bjørn Erik Pedersen / CC-BY-SA"
       }
     }
   ]
@@ -430,7 +432,7 @@ Tabbed panes are implemented using two shortcodes:
 * The `tabpane` shortcode, which is the container element for the tabs. This shortcode can hold the optional named parameters `lang`, `highlight` and `right`. The value of the optional parameters `lang` and `highlight` are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. Specify `right=true` if you want to right align your tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
 * The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{{</* tab "My header" */>}} … {{</* /tab */>}}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. To split the panes into a left aligned and a right aligned tab group, specify `right=true` in the dividing tab. By giving `right=true` several times, you can even render multiple tab groups. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
   * By default, the tab's content is rendered as `code block`. In order to get proper syntax highlighting, specify the named parameter `lang` --and optionally the parameter `highlight`-- for each tab. Parameters set in the parent `tabpane` shortcode will be overwritten.
-  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `text=true` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}Your **markdown** content{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* tab */>}}Your <b>HTML</b> content{{</* /tab */>}}`.
+  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `text=true` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use square brackets `<>` as innermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
 
 {{% alert title="Info" %}}
 By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode.
