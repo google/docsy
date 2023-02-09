@@ -36,8 +36,8 @@ color
 
 The **blocks/cover** shortcode creates a landing page type of block that fills the top of the page.
 
-```html
-{{</* blocks/cover title="Welcome!" image_anchor="center" height="full" color="primary" */>}}
+```go-html-template
+{{</* blocks/cover title="Welcome!" subtitle="Explore our site!" byline="Image attribution" image_anchor="center" height="full" color="primary" */>}}
 <div class="mx-auto">
 	<a class="btn btn-lg btn-primary me-3 mb-4" href="{{</* relref "/docs" */>}}">
 		Learn More <i class="fa-solid fa-circle-right ms-2"></i>
@@ -53,18 +53,19 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 {{</* /blocks/cover */>}}
 ```
 
-Note that the relevant shortcode parameters above will have sensible defaults, but is included here for completeness.
+Note that the relevant shortcode parameters will have sensible defaults, but are included above for completeness.
 
-| Parameter        | Default    | Description  |
-| ---------------- |------------| ------------|
-| title | | The main display title for the block. |
-| image_anchor | |
-| height | | See above.
-| color | | See above.
-| byline | Byline text on featured image. |
+| Parameter    | Default    | Description                           |
+| ------------ |----------- | ------------------------------------- |
+| title        | n/a        | The main display title for the block. |
+| subtitle     | n/a        | The subtitle for the block.           |
+| image_anchor | `smart`    | Crop box placement for images, see also [`anchor`](https://gohugo.io/content-management/image-processing/#anchor) |                                    |
+| height       | `max`      | [See above](#shortcode-blocks).       |
+| color        | .Ordinal   | [See above](#shortcode-blocks).       |
+| byline       | n/a        | Byline text on featured image.        |
 
 
-To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en), in the same directory.
+To set the background image, place an image with the word `background` as part of the file name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/master/content/en), in the same directory.
 
 {{% alert title="Tip" %}}
 If you also include the word **featured** in the image name, e.g. `my-featured-background.jpg`, it will also be used as the Twitter Card image when shared.
