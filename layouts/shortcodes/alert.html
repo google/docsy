@@ -5,9 +5,6 @@
     {{- . | safeHTML -}}
   </h4>
 {{ end -}}
-{{ if .Get "markdownify" -}}
-  {{ .Inner | markdownify }}
-{{ else -}}
-  {{ .Inner }}
-{{ end -}}
+{{/* Do **not** remove this comment! It ends above html block! See https://spec.commonmark.org/0.30/#html-blocks, 7. */}}
+{{ .Inner }}
 </div>
