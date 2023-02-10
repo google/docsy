@@ -55,16 +55,6 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 
 Note that the relevant shortcode parameters above will have sensible defaults, but is included here for completeness.
 
-{{% alert title="Hugo Tip" %}}
-
-Using the bracket styled shortcode delimiter, `>}}`, tells Hugo that the inner
-content is HTML/plain text and needs no further processing. Changing the
-delimiter to `%}}` means Hugo will treat the content as Markdown. You can use
-both styles in your pages.
-
-{{% /alert %}}
-
-
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | title | | The main display title for the block. |
