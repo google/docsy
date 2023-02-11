@@ -14,14 +14,14 @@
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "serve": "npm run cd:docs serve",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@6 bootstrap@5"
+    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },
   "cspell": "cSpell:ignore docsy userguide fortawesome fontawesome ",
   "prettier": {
     "proseWrap": "always"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.2.1",
+    "@fortawesome/fontawesome-free": "6.3.0",
     "bootstrap": "5.2.3"
   },
   "devDependencies": {
