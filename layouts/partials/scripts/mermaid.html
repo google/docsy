@@ -1,0 +1,21 @@
+{{ $version := "9.3.0" -}}
+{{ with .Site.Params.mermaid.version -}}
+{{ $version = . -}}
+{{ end -}}
+
+{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.min.js" $version -}}
+
+{{ if ge hugo.Version "0.90.0" -}}
+{{ warnf "Mermaid version %s" $version -}}
+{{ $mermaidjs := resources.GetRemote $cdnurl -}}
+{{ if eq $mermaidjs nil -}}
+{{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN" $version -}}
+{{ else -}}
+{{ $mermaidsecure := $mermaidjs | resources.Fingerprint "sha512" -}}
+<script type="text/javascript" src="{{ $mermaidsecure.Permalink }}" integrity="{{ $mermaidsecure.Data.Integrity -}}">
+</script>
+{{ end }}
+{{ else -}}
+<script src="{{- $cdnurl -}}" integrity="sha512-IX+bU+wShHqfqaMHLMrtwi4nK6W/Z+QdZoL4kPNtRxI2wCLyHPMAdl3a43Fv1Foqv4AP+aiW6hg1dcrTt3xc+Q==" crossorigin="anonymous"></script>
+{{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version -}}
+{{ end -}}

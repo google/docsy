@@ -119,6 +119,7 @@ params:
     disable_toc: false
   markmap:
     enable: true
+    version: latest
   drawio:
     enable: true
 
