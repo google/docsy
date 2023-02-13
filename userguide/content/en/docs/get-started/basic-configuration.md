@@ -7,7 +7,7 @@ description: >
   Basic configuration for new Docsy sites.
 ---
 
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this config.toml and editing it even if you’re just using the theme and not copying the entire Docsy example site**, as it includes default values for many parameters that you need to set for your site to build correctly.
+Site-wide configuration details and parameters are defined in your project's [configuration file] (`config.toml` or `hugo.toml`). These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this config.toml and editing it even if you’re just using the theme and not copying the entire Docsy example site**, as it includes default values for many parameters that you need to set for your site to build correctly.
 
 You may want to remove or customize some defaults of the copied `config.toml` file straight away:
 
@@ -52,3 +52,5 @@ To use your own Custom Search Engine, replace the value in the `gcs_engine_id` w
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file

@@ -170,6 +170,11 @@ your project's root directory:
     echo 'theme = "docsy"' >> config.toml
     ```
 
+    {{% alert title="Tip" %}}
+In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
+If you are using hugo 0.110 or above, consider renaming your `config.toml` to `hugo.toml`!
+    {{% /alert %}}
+
 3.  Get Docsy dependencies:
 
     ```sh

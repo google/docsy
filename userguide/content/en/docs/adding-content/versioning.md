@@ -14,13 +14,13 @@ to display an information banner on the archived sites.
 
 ## Adding a version drop-down menu
 
-If you add some `[params.versions]` in `config.toml`/`config.yaml`/`config.json`, the Docsy theme adds a
+If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the Docsy theme adds a
 version selector drop down to the top-level menu. You specify a URL and a name
 for each version you would like to add to the menu, as in the following example:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 # Add your release versions here
 [[params.versions]]
   version = "master"
@@ -34,7 +34,7 @@ for each version you would like to add to the menu, as in the following example:
   version = "v0.3"
   url = "https://v0-3.kubeflow.org"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   versions:
     - version: master
@@ -44,7 +44,7 @@ params:
     - version: v0.3
       url: 'https://v0-3.kubeflow.org'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "versions": [
@@ -69,17 +69,17 @@ params:
 Remember to add your current version so that users can navigate back!
 
 The default title for the version drop-down menu is **Releases**. To change the
-title, change the `version_menu` parameter in `config.toml`/`config.yaml`/`config.json`:
+title, change the `version_menu` parameter in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 version_menu = "Releases"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 version_menu: 'Releases'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "version_menu": "Releases"
 {{< /tab >}}
 {{< /tabpane >}}
@@ -111,19 +111,19 @@ For example, see the archived docs for
 </figure>
 
 To add the banner to your doc site, make the following changes in your
-`config.toml`/`config.yaml`/`config.json` file:
+`hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
 1. Set the `archived_version` parameter to `true`:
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 archived_version = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 archived_version: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "archived_version": true
 {{< /tab >}}
     {{< /tabpane >}}
@@ -133,13 +133,13 @@ archived_version: true
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 version = "0.1"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 version: '0.1'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "version": "0.1"
 {{< /tab >}}
     {{< /tabpane >}}
@@ -150,13 +150,13 @@ version: '0.1'
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 url_latest_version = "https://your-latest-doc-site.com"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 url_latest_version: 'https://your-latest-doc-site.com'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "url_latest_version": "https://your-latest-doc-site.com"
 {{< /tab >}}
     {{< /tabpane >}}

@@ -235,23 +235,23 @@ As of version 0.100, [Goldmark](https://github.com/yuin/goldmark/) is the only M
 
 <h4 class="alert-heading">Tip</h4>
 
-If you've been using versions of Hugo before 0.60 that use [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser, you may need to make some small changes to your site to work with the current `Goldmark` Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `config.toml`/`config.yaml`/`config.json` to allow Goldmark to render raw HTML as well as Markdown:
+If you've been using versions of Hugo before 0.60 that use [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser, you may need to make some small changes to your site to work with the current `Goldmark` Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json` to allow Goldmark to render raw HTML as well as Markdown:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 markup:
   goldmark:
     renderer:
       unsafe: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "markup": {
     "goldmark": {
@@ -478,11 +478,11 @@ If you've just used the theme, you can still use all Docsy's provided [page bloc
 
 ## Adding a community page
 
-The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`/`config.yaml`/`config.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
+The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `hugo.toml`/`hugo.yaml`/`hugo.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
@@ -517,7 +517,7 @@ The `community` landing page template has boilerplate content that's automatical
 	icon = "fa fa-envelope"
         desc = "Discuss development issues around the project"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   links:
     user:
@@ -547,7 +547,7 @@ params:
         icon: fa fa-envelope
         desc: Discuss development issues around the project
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "links": {
@@ -609,18 +609,18 @@ You can also use this directory for other files used by your project, including 
 
 ## RSS feeds
 
-Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`/`config.yaml`/`config.json`. This is the default configuration:
+Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `hugo.toml`/`hugo.yaml`/`hugo.json`. This is the default configuration:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 rss_sections = ["blog"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 rss_sections:
   - blog
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "rss_sections": [
     "blog"
@@ -629,18 +629,18 @@ rss_sections:
 {{< /tab >}}
 {{< /tabpane >}}
 
-To disable all RSS feeds, add the following to your `config.toml`/`config.yaml`/`config.json`:
+To disable all RSS feeds, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 disableKinds = ["RSS"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 disableKinds:
   - RSS
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "disableKinds": [
     "RSS"
@@ -654,22 +654,22 @@ disableKinds:
 
 <h4 class="alert-heading">Note</h4>
 
-If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`/`config.yaml`/`config.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml`/`config.yaml`/`config.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
+If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `hugo.toml`/`hugo.yaml`/`hugo.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [outputs]
 section = [ "HTML", "RSS", "print" ]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 outputs:
   section:
     - HTML
     - RSS
     - print
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "outputs": {
     "section": [
@@ -687,23 +687,23 @@ outputs:
 
 Hugo creates a `sitemap.xml` file for your generated site by default: for example, [here's the sitemap](/sitemap.xml) for this site.
 
-You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `config.toml`/`config.yaml`/`config.json`:
+You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [sitemap]
   changefreq = "monthly"
   filename = "sitemap.xml"
   priority = 0.5
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 sitemap:
   changefreq: monthly
   filename: sitemap.xml
   priority: 0.5
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "sitemap": {
     "changefreq": "monthly",

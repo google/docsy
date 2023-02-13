@@ -652,7 +652,7 @@ To create a new pipeline, follow the next steps:
 
 ```
 
-This code automatically reads the content of `import/config.yaml` and inserts it
+This code automatically reads the content of `includes/config.yaml` and inserts it
 into the document. The rendered text looks like this:
 
 ---

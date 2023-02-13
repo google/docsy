@@ -8,9 +8,9 @@ description: >
 
 ## Top-level menu
 
-The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`/`config.yaml`/`config.json`.
+The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-To add a page or section to this menu, add it to the site's `main` menu in either `config.toml`/`config.yaml`/`config.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
+To add a page or section to this menu, add it to the site's `main` menu in either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -50,24 +50,24 @@ menu:
 
 The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
 
-If you want to add a link to an external site to this menu, add it in `config.toml`/`config.yaml`/`config.json`, specifying the `weight`.
+If you want to add a link to an external site to this menu, add it in `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 menu:
   main:
     - name: GitHub
       weight: 50
       url: 'https://github.com/google/docsy/'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "menu": {
     "main": [
@@ -84,11 +84,11 @@ menu:
 
 ### Adding icons to the top-level menu
 
-As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml`/`config.yaml`/`config.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
@@ -96,7 +96,7 @@ As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-
     pre = "<i class="fa-brands fa-github"></i>"
     post = "<span class='alert'>New!</span>"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 menu:
   main:
     - name: GitHub
@@ -105,7 +105,7 @@ menu:
       pre: <i class="fa-brands fa-github"></i>
       post: <span class='alert'>New!</span>
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "menu": {
     "main": [
@@ -126,7 +126,7 @@ You can find a complete list of icons to use in the [FontAwesome documentation](
 
 ### Adding a version drop-down
 
-If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a
+If you add some `[params.versions]` in `hugo.toml`, the Docsy theme adds a
 version selector drop down to the top-level menu.
 
 You can find out more in the guide to
@@ -134,7 +134,7 @@ You can find out more in the guide to
 
 ### Adding a language drop-down
 
-If you configure more than one language in `config.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
+If you configure more than one language in `hugo.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
 
 You can find out more in [Multi-language support](/docs/language/).
 
@@ -217,13 +217,46 @@ description: >
 
 ### Section menu options
 
-By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `config.toml`.
+By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `hugo.toml`.
 
 With the compact menu (`.ui.sidebar_menu_compact = true`), only the current page's ancestors, siblings and direct descendants are shown. You can use the optional parameter `.ui.ul_show` to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the first menu level is always displayed.
 
-As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `config.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
+As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `hugo.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
 
 On large sites (default: > 2000 pages) the section menu is not generated for each page, but cached for the whole section. The HTML classes for marking the active menu item (and menu path) are then set using JS. You can adjust the limit for activating the cached section menu with the optional parameter `.ui.sidebar_cache_limit`.
+
+The tabbed pane below lists the menu section options you can define in your project [configuration file].
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
+sidebar_menu_compact = true
+ul_show = 1
+sidebar_menu_foldable = true
+sidebar_cache_limit = 1000
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    sidebar_menu_compact: true
+    ul_show: 1
+    sidebar_menu_foldable: true
+    sidebar_cache_limit: 1000
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "sidebar_menu_compact": true,
+      "ul_show": 1,
+      "sidebar_menu_foldable": true,
+      "sidebar_cache_limit": 1000,
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 ### Add icons to the section menu
 
@@ -247,9 +280,35 @@ To create a placeholder page, create a page file as usual in the directory where
 
 ## Breadcrumb navigation
 
-Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
+Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `hugo.toml`.
 
-Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `config.toml` by setting site param `taxonomy_breadcrumb_disable = true`.
+Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `hugo.toml` by setting site param `ui.taxonomy_breadcrumb_disable = true`.
+
+The tabbed pane below lists the breadcrumb navigation options you can define in your project [configuration file].
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
+breadcrumb_disable = true
+taxonomy_breadcrumb_disable = true
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    breadcrumb_disable: true
+    taxonomy_breadcrumb_disable: true
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "breadcrumb_disable": true,
+      "taxonomy_breadcrumb_disable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ## Site search options
 
@@ -259,23 +318,23 @@ Docsy offers multiple options that let your readers search your site content, so
 * [Algolia DocSearch](#configure-algolia-docsearch), which uses Algolia's indexing and search mechanism, and provides an organized dropdown of search results when your readers use the search box. Algolia DocSearch is free for public documentation sites.
 * [Local search with Lunr](#configure-local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
 
-If you enable any of these search options in your `config.toml`, a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
+If you enable any of these search options in your project [configuration file], a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
 
-Be aware that if you accidentally enable more than one search option in your `config.toml` you may get unexpected results (for example, if you have added the `.js` for Algolia DocSearch, you'll get Algolia results if you enable GCSE search but forget to disable Algolia search).
+Be aware that if you accidentally enable more than one search option in your project [configuration file], you may get unexpected results (for example, if you have added the `.js` for Algolia DocSearch, you'll get Algolia results if you enable GCSE search but forget to disable Algolia search).
 
 ### Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`/`config.yaml`/`config.json`:
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 sidebar_search_disable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 sidebar_search_disable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "sidebar_search_disable": true
 {{< /tab >}}
 {{< /tabpane >}}
@@ -324,17 +383,17 @@ layout: search
 {{< /tab >}}
     {{< /tabpane >}}
 
-1. Add your Google Custom Search Engine ID to the site params in `config.toml`/`config.yaml`/`config.json`. You can add different values per language if needed.
+1. Add your Google Custom Search Engine ID to the site params in `hugo.toml`/`hugo.yaml`/`hugo.json`. You can add different values per language if needed.
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 gcs_engine_id: '011737558837375720776:fsdu1nryfng'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
 }
@@ -362,26 +421,26 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 ### Adding Algolia DocSearch
 
-1. Enable Algolia DocSearch in `config.toml`/`config.yaml`/`config.json`.
+1. Enable Algolia DocSearch in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 algolia_docsearch = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 algolia_docsearch: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "algolia_docsearch": true
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
-3. Disable the sidebar search in `config.toml`/`config.yaml`/`config.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+3. Disable the sidebar search in `hugo.toml`/`hugo.yaml`/`hugo.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
 3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
 
@@ -414,24 +473,24 @@ When you've completed these steps, Algolia search should be enabled on your site
 
 To add Lunr search to your Docsy site:
 
-1. Enable local search in `config.toml`/`config.yaml`/`config.json`.
+1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
@@ -441,20 +500,20 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 ### Changing the summary length of the local search results
 
-You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`/`config.yaml`/`config.json`.
+You can customize the summary length by setting `offlineSearchSummaryLength` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
 offlineSearch = true
 offlineSearchSummaryLength = 200
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 offlineSearchSummaryLength: 200
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true,
   "offlineSearchSummaryLength": 200
@@ -464,19 +523,19 @@ offlineSearchSummaryLength: 200
 
 ### Changing the maximum result count of the local search
 
-You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`/`config.yaml`/`config.json`.
+You can customize the maximum result count by setting `offlineSearchMaxResults` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
 offlineSearchMaxResults = 25
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 offlineSearchMaxResults: 25
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true,
   "offlineSearchMaxResults": 25
@@ -524,3 +583,5 @@ exclude_search: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file

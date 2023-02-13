@@ -68,7 +68,12 @@ hugo new site my-new-site
 cd  my-new-site
 ```
 
-This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file, `config.toml.
+This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file (default: `config.toml`).
+
+{{% alert title="Tip" %}}
+In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
+If you are using hugo 0.110 or above, consider renaming your `config.toml` to `hugo.toml`!
+{{% /alert %}}
 
 ### Import the Docsy theme module as a dependency of your site
 
@@ -90,11 +95,11 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Add theme module configuration settings
 
-Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
+Add the settings in the following snippet at the end of your site's [configuration file] (default: `config.toml`) and save the file.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml"  lang="toml" >}}
+{{< tab header="hugo.toml"  lang="toml" >}}
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module
@@ -109,7 +114,7 @@ Add the settings in the following snippet at the end of your site configuration 
     path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 module:
   proxy: direct
   hugoVersion:
@@ -121,7 +126,7 @@ module:
     - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
-{{< tab header="config.json"  lang="json" >}}
+{{< tab header="hugo.json"  lang="json" >}}
 {
   "module": {
     "proxy": "direct",
@@ -165,3 +170,5 @@ You may get Hugo errors for missing parameters and values when you try to build 
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
