@@ -87,20 +87,20 @@ math: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `config.toml`/`config.yaml`/`config.json`:
+If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -111,11 +111,11 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`/`config.yaml`/`config.json`, if needed:
+Additionally, you can customize various \\(\KaTeX\\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 # enable/disable KaTeX support
 enable = true
@@ -152,7 +152,7 @@ errorColor = "#CD5C5C"
   right = "\\]"
   display = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true  # enable/disable KaTeX support
@@ -185,7 +185,7 @@ params:
           right: \]
           display: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -303,25 +303,25 @@ chem: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `config.toml`/`config.yaml`/`config.json`:
+If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 enable = true
 
 [params.katex.mhchem]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true
     mhchem:
       enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -367,20 +367,20 @@ graph TD
 
 With hugo version 0.93 or higher, support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
 
-If you are using hugo version 0.92 or lower, you need to enable Mermaid manually by updating your `config.toml`/`config.yaml`/`config.json`:
+If you are using hugo version 0.92 or lower, you need to enable Mermaid manually by updating your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Hugo version <= 0.92 only:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
@@ -391,25 +391,25 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-If needed, you can define custom settings for your diagrams, such as themes, padding in your `config.toml`/`config.yaml`/`config.json`.
+If needed, you can define custom settings for your diagrams, such as themes, padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
 theme = "neutral"
 
 [params.mermaid.flowchart]
 diagramPadding = 6
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
     theme: neutral
     flowchart:
       diagramPadding: 6
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
@@ -475,20 +475,20 @@ Foo -> Foo6 : To collections
 Foo -> Foo7: To queue
 ```
 
-To enable/disable PlantUML, update `config.toml`/`config.yaml`/`config.json`:
+To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   plantuml:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "plantuml": {
@@ -503,7 +503,7 @@ Other optional settings are:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
 theme = "default"
@@ -517,7 +517,7 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 # default = false
 svg = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   plantuml:
     enable: true
@@ -530,7 +530,7 @@ params:
     # default = false
     svg: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "plantuml": {
@@ -608,20 +608,20 @@ Automatically renders to:
 - Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 
-To enable/disable MarkMap, update `config.toml`/`config.yaml`/`config.json`:
+To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.markmap]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   markmap:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "markmap": {
@@ -649,20 +649,20 @@ As the diagram data is transported via the browser, the diagrams.net server does
 
 {{< figure src="docsy-diagrams.svg" caption="Mouse over the above image and click the edit button!">}}
 
-To disable detection of diagrams, update `config.toml`/`config.yaml`/`config.json`:
+To disable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
 enable = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   drawio:
     enable: false
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "drawio": {
@@ -677,16 +677,16 @@ You can also [deploy and use your own server](https://github.com/jgraph/docker-d
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
 drawio_server = "https://app.mydrawioserver.example.com"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   drawio:
     drawio_server: 'https://app.mydrawioserver.example.com'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "drawio": {

@@ -88,25 +88,25 @@ There are several options for publishing your web site using [Amazon Web Service
 
 1. Check the proper configuration of your AWS CLI by issuing the command `aws s3 ls`, this should output a list of your S3 bucket(s).
 
-1. Inside your `config.toml`/`config.yaml`/`config.json`, add a `[deployment]` section like this one:
+1. Inside your `hugo.toml`/`hugo.yaml`/`hugo.json`, add a `[deployment]` section like this one:
 
     {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [deployment]
 [[deployment.targets]]
 name = "aws"
 URL = "s3://www.your-domain.tld"
 cloudFrontDistributionID = "E9RZ8T1EXAMPLEID"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 deployment:
   targets:
     - name: aws
       URL: 's3://www.your-domain.tld'
       cloudFrontDistributionID: E9RZ8T1EXAMPLEID
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "deployment": {
     "targets": [
