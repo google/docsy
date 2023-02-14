@@ -331,7 +331,7 @@ in the response headers." you __CAN__ embed it, but when the test says "Great! X
 Sometimes it's very useful to have tabbed panes when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the tabbed pane below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language:
 
 {{< tabpane langEqualsHeader=true >}}
-  {{< tab "C" >}}
+{{< tab "C" >}}
 #include <stdio.h>
 #include <stdlib.h>
 

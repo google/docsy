@@ -141,7 +141,7 @@
         {{ if $text -}}
           {{ index . "content" -}}
         {{ else -}}
-          {{ highlight (trim (index . "content") "\n") $lang $hloptions -}}
+          {{ highlight (trim (index . "content") "\r\n") $lang $hloptions -}}
         {{ end }}
     </div>
 
