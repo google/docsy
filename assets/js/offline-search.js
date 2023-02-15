@@ -14,7 +14,7 @@
         $searchInput.data('placement', 'bottom');
         $searchInput.data(
             'template',
-            '<div class="td-offline-search-results popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+            '<div class="td-offline-search-results popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
         );
 
         //
