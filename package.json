@@ -1,6 +1,8 @@
 {
   "name": "docsy",
   "version": "0.6.0",
+  "homepage": "https://docsy.dev",
+  "license": "Apache-2.0",
   "repository": "github:google/docsy",
   "scripts": {
     "_cd:docs": "cd userguide &&",
