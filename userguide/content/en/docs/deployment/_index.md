@@ -45,9 +45,11 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
       * If you are using Docsy as a [Hugo module](/docs/get-started/docsy-as-module/) or NPM package, you can just specify `hugo`.
    3. Click **Show advanced**.
    4. In the **Advanced build settings** section, click **New variable**.
-   5. Specify `HUGO_VERSION` as the **Key** for the new variable, and set its **Value** to the latest version of Hugo (minimum required version: `0.110.0`).
-   6. In the **Advanced build settings** section, click **New variable** again.
-   7. Specify `GO_VERSION` as the **Key** for the new variable, and set its **Value** to the latest version of Go (minimum recommended version: `1.18`).
+   5. Specify `NODE_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest LTS version](https://nodejs.org/en/download/) of node.js (minimum recommended version: `v18.x`).
+   6. In the **Advanced build settings** section, click **New variable**.
+   7. Specify `HUGO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://github.com/gohugoio/hugo/releases) of Hugo (minimum recommended version: `0.110.0`).
+   8. In the **Advanced build settings** section, click **New variable** again.
+   9. Specify `GO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://go.dev/dl/) of Go (minimum recommended version: `1.18`).
 
    If you don't want your site to be indexed by search engines, you can add an environment flag to your build command to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
 1. Click **Deploy site**.
@@ -59,9 +61,9 @@ For example, if you want to use a version of `postcss-cli` later than version 8.
 
 ```
   "devDependencies": {
-    "autoprefixer": "^9.8.8",
-    "postcss-cli": "^8.0.0",
-    "postcss": "^8.0.0"
+    "autoprefixer": "^10.4.14",
+    "postcss-cli": "^10.1.0",
+    "postcss": "^8.4.24"
   }
 ```
 
@@ -70,6 +72,142 @@ For example, if you want to use a version of `postcss-cli` later than version 8.
 Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Focal 20.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
+
+## Deployment on GitHub Pages
+
+If your repo is hosted on [GitHub](https://github.com), the simplest option to serve your site is deployment on [GitHub pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages). There are project, user and organization sites; for a project site, your site URL will be `http(s)://<username>.github.io/<repository_name>`, custom domains are also supported. GitHub pages come with [continuous deployment](https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment) via GitHub actions and the [marketplace for actions](https://github.com/marketplace/actions) has a lot of useful tools for spell and link checking, deploy preview and more. Using your existing GitHub account, you can start with the free plan of GitHub Pages for publicly available repositories, with premium tiers available for business use cases.
+
+Before deploying on GitHub Pages, make sure that you've pushed your site source to your chosen GitHub repo, following any setup instructions in [Using the theme](/docs/get-started/docsy-as-module).
+
+1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. Therefore, you have to create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
+    
+    ```console
+    $ git checkout -b gh-pages
+    Switched to a new branch 'gh-pages'
+    ```
+    
+1. Then push this local branch to your repo:
+    
+    ```console
+    $ git push --set-upstream origin gh-pages
+     details omitted …
+     * [new branch]      new -> new
+    branch 'gh-pages' set up to track 'origin/gh-pages'.
+    ```
+    
+1. Now switch back to the `main` (or `work`) branch of your repo:
+    
+    ```console
+    $ git checkout main
+    Switched to branch 'main'
+    
+    ```
+    
+1. At the root of your local repo, create a new empty workflow file `.github/workflows/deploy-github-pages.yml`:
+    
+    ```console
+    $ mkdir -p .github/workflows
+    $ touch .github/workflows/deploy-github-pages.yml
+    ```
+    
+    {{% alert title="Workflow setup with docsy example site" color="primary" %}}
+Please note that a such a deployment [workflow file](https://github.com/google/docsy-example/blob/master/.github/workflows/deploy-github-pages.yml) was added to the docsy-example site recently. If you used the example site as template for your new site as described [here](https://www.docsy.dev/docs/get-started/docsy-as-module/example-site-as-template/), please check your repo for this file, it might be part of your site repo already.
+    {{% /alert %}}
+    
+1. Open the newly created, empty workflow file in an editor of your choice, paste in the code below and save the file:
+    
+    ```yaml
+    name: Deployment to GitHub Pages
+
+    on:
+      workflow_dispatch:
+      push:
+        branches:
+          - main  # <-- specify the branch you want to deploy from
+      pull_request:
+
+    env:
+      REPO_NAME: ${{ github.event.repository.name }}
+      REPO_OWNER: ${{ github.repository_owner }}
+
+    jobs:
+      deploy:
+        runs-on: ubuntu-22.04
+        concurrency:
+          group: ${{ github.workflow }}-${{ github.ref }}
+        steps:
+          - uses: actions/checkout@v3
+            with:
+              fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+    
+          - name: Setup Hugo
+            uses: peaceiris/actions-hugo@v2
+            with:
+              hugo-version: '0.110.0'
+              extended: true
+    
+          - name: Setup Node
+            uses: actions/setup-node@v3
+            with:
+              node-version: '18'
+              cache: 'npm'
+              cache-dependency-path: '**/package-lock.json'
+    
+          - run: npm ci
+          - run: hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME} --minify
+    
+          - name: Deploy
+            uses: peaceiris/actions-gh-pages@v3
+            if: ${{ github.ref == 'refs/heads/main' }} # <-- specify same branch as above here
+            with:
+              github_token: ${{ secrets.GITHUB_TOKEN }}
+    ```
+    
+1. Afterwards, add the file to the staging area, commit your change and push the change to your remote GitHub repo:
+    
+    ```console
+    $ git add .github/workflows/deploy-github-pages.yml
+    $ git commit -m "Adding workflow file for site deployment"
+    $ git push origin 
+    ```
+    
+1. In your browser, make sure you are logged into your GitHub account. Then visit the subsection `Pages` in your repo `Settings`. You may use the URL below to directly jump to this subsection:
+
+    ```
+    URL Repo Page settings: https://github.com/<username>/<repository_name>/settings/pages
+    ```
+    
+    1. Under `Build and deployment`, select `Deploy from a branch` in the **source** dropdown.
+    
+    2. From the **branch** dropdown, select `gh-pages` as branch where the site is built from.
+    
+    3. From the **folder** dropdown, select `/(root)` as root directory.
+    
+1. That's it! Your deployment workflow for your site is configured!
+
+Any future push to the branch specified in your workflow file will now trigger the action workflow defined in this file. Additionally, you are able to trigger the deployment manually inside your web browser via the GitHub web UI.
+
+Once you pushed to your repo, you can see the progress of the triggered workflow in the `Actions` tab of the the GitHub web UI:
+
+```
+URL 'Repo actions': https://github.com/<username>/<repository_name>/actions
+```
+
+After the first successful deployment, a new environment `github-pages` is added to your repo, you will find it at the right of your repo main view (below `Releases` and `Packages`). When clicking on the newly created environment, a list of deployments is presented to you:  
+
+```
+URL 'Repo deployments': https://github.com/<username>/<repository_name>/deployments/
+```
+
+{{% alert title="Correct baseURL setting" color="primary" %}}
+Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
+{{% /alert %}}
+
+{{% alert title="Further reading" color="primary" %}}
+In the hugo docs, you can find a chapter [Hosting on GitHub]( https://gohugo.io/hosting-and-deployment/hosting-on-github/).
+
+For advanced use cases, the [`hugo-action`](https://github.com/peaceiris/actions-hugo) used inside the workflow file has more configuration options, which are well [documented](https://github.com/marketplace/actions/hugo-setup).
+{{% /alert %}}
 
 ## Deployment with Amazon S3 + Amazon CloudFront
 
@@ -117,7 +255,8 @@ deployment:
       }
     ]
   }
-}{{< /tab >}}
+}
+{{< /tab >}}
     {{< /tabpane >}}
 
 1. Run the command `hugo --gc --minify` to render the site's assets into the `public/` directory of your Hugo build environment.
