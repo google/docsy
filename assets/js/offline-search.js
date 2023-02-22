@@ -7,17 +7,6 @@
         const $searchInput = $('.td-search input');
 
         //
-        // Options for popover
-        //
-
-        $searchInput.data('html', true);
-        $searchInput.data('placement', 'bottom');
-        $searchInput.data(
-            'template',
-            '<div class="td-offline-search-results popover" role="tooltip"><div class="popover-arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
-        );
-
-        //
         // Register handler
         //
 
@@ -71,8 +60,18 @@
         );
 
         const render = ($targetSearchInput) => {
-            // Dispose the previous result
-            $targetSearchInput.popover('dispose');
+            //
+            // Dispose existing popover
+            //
+
+            {
+                let popover = bootstrap.Popover.getInstance(
+                    $targetSearchInput[0]
+                );
+                if (popover !== null) {
+                    popover.dispose();
+                }
+            }
 
             //
             // Search
@@ -130,8 +129,9 @@
                             .css({ fontWeight: 'bold' })
                     )
                     .append(
-                        $('<span>')
-                            .addClass('td-offline-search-results__close-button')
+                        $('<span>').addClass(
+                            'td-offline-search-results__close-button'
+                        )
                     )
             );
 
@@ -178,16 +178,23 @@
                 });
             }
 
-            $targetSearchInput.on('shown.bs.popover', () => {
-                $('.td-offline-search-results__close-button').on('click', () => {
-                    $targetSearchInput.val('');
-                    $targetSearchInput.trigger('change');
-                });
+            $targetSearchInput.one('shown.bs.popover', () => {
+                $('.td-offline-search-results__close-button').on(
+                    'click',
+                    () => {
+                        $targetSearchInput.val('');
+                        $targetSearchInput.trigger('change');
+                    }
+                );
             });
 
-            $targetSearchInput
-                .data('content', $html[0])
-                .popover('show');
+            const popover = new bootstrap.Popover($targetSearchInput, {
+                content: $html[0],
+                html: true,
+                customClass: 'td-offline-search-results',
+                placement: 'bottom',
+            });
+            popover.show();
         };
     });
 })(jQuery);
