@@ -1,9 +1,8 @@
 ---
-title: "Navigation and Search"
+title: Navigation and Search
 date: 2017-01-05
 weight: 3
-description: >
-   Customize site navigation and search for your Docsy site.
+description: Customize site navigation and search for your Docsy site.
 ---
 
 ## Top-level menu
@@ -403,7 +402,7 @@ gcs_engine_id: '011737558837375720776:fsdu1nryfng'
 
 ### Disabling GCSE search
 
-If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
+If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `hugo.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
 ## Configure Algolia DocSearch
 
