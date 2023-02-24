@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "hugo-extended": "0.110.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
