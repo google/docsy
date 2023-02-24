@@ -1,9 +1,9 @@
 {
   "name": "docsy",
-  "version": "0.6.0",
-  "homepage": "https://docsy.dev",
-  "license": "Apache-2.0",
+  "version": "0.7.0-dev",
   "repository": "github:google/docsy",
+  "homepage": "https://www.docsy.dev",
+  "license": "Apache-2.0",
   "scripts": {
     "_cd:docs": "cd userguide &&",
     "build:preview": "npm run cd:docs build:preview",
