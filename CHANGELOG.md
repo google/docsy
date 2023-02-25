@@ -20,6 +20,10 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - Clean up of unused, or rarely used, variables and functions:
     - Dropped `$primary-light`.
     - Dropped `color-diff()`.
+  - BSv4 RTL support, being incompatible with BSv5, has been removed. For
+    progress in RTL support, see [#1442][1442].
+
+[1442]: https://github.com/google/docsy/issues/1442
 
 **Other changes**:
 
