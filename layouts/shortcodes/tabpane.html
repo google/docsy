@@ -101,7 +101,7 @@
 </ul>
 
 {{ if $duplicate -}}
-  {{ warnf "Tabpane on page '%s': duplicate language '%s' detected, disabling persistance of language to avoid multiple tab display." .Page.Title $duplicateLang  -}}
+  {{ warnf "Tabpane on page '%s': duplicate language '%s' detected, disabling persistance of language to avoid multiple tab display." .Page.RelPermalink $duplicateLang  -}}
 {{ end -}}
 {{ $duplicate = false -}}
 {{ $langs = slice -}}
