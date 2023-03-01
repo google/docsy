@@ -1,19 +1,60 @@
-{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "9.3.0" -}}
+{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "10.0.2" -}}
 {{ with .Site.Params.mermaid.version -}}
 {{ $version = . -}}
 {{ end -}}
 
-{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.min.js" $version -}}
+{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.esm.min.mjs" $version -}}
 {{ if ge hugo.Version "0.90.0" -}}
-{{ $mermaidjs := resources.GetRemote $cdnurl -}}
-{{ if eq $mermaidjs nil -}}
+{{ if eq (resources.GetRemote $cdnurl) nil -}}
 {{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN" $version -}}
+{{ end -}}
 {{ else -}}
-{{ $mermaidsecure := $mermaidjs | resources.Fingerprint "sha512" -}}
-<script type="text/javascript" src="{{ $mermaidsecure.Permalink }}" integrity="{{ $mermaidsecure.Data.Integrity -}}">
-</script>
-{{ end }}
-{{ else -}}
-<script src="{{- $cdnurl -}}" integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin="anonymous"></script>
 {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version -}}
 {{ end -}}
+
+<script type="module" async>
+import mermaid from "{{- $cdnurl -}}";
+
+(function($) {
+    var needMermaid = false;
+
+{{ if ge hugo.Version "0.93.0" -}}
+    if ($('.mermaid').length > 0) {
+        needMermaid = true;
+    };
+{{ else -}}
+    $('.language-mermaid').parent().replaceWith(function() {
+        needMermaid = true;
+        return $('<pre class="mermaid">').text($(this).text());
+    });
+{{ end -}}
+
+    if (!needMermaid)  {
+        mermaid.initialize({startOnLoad: false});
+        return;
+    }
+
+    var params = {{ .Site.Params.mermaid | jsonify | safeJS }};
+
+    // site params are stored with lowercase keys; lookup correct casing
+    // from Mermaid default config.
+    var norm = function(defaultConfig, params) {
+        var result = {};
+        for (const key in defaultConfig) {
+            const keyLower = key.toLowerCase();
+            if (defaultConfig.hasOwnProperty(key) && params.hasOwnProperty(keyLower)) {
+                if (typeof defaultConfig[key] === "object") {
+                    result[key] = norm(defaultConfig[key], params[keyLower]);
+                } else {
+                    result[key] = params[keyLower];
+                }
+            }
+        }
+        return result;
+    };
+    //var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
+    //settings.startOnLoad = true;
+    mermaid.initialize(params);
+})(jQuery);
+
+</script>

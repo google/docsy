@@ -366,30 +366,7 @@ graph TD
 
 With hugo version 0.93 or higher, support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
 
-By default, docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your `hugo.toml`:
-
-{{< tabpane persistLang=false >}}
-{{< tab header="Hugo version >= 0.90 only:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.mermaid]
-version = "9.3.0"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  mermaid:
-    version: 9.3.0
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "mermaid": {
-      "version": "9.3.0"
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
+In case of hugo version 0.92 or lower you have to enable mermaid manually inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Hugo version <= 0.92 only:" disabled=true />}}
@@ -407,6 +384,30 @@ params:
   "params": {
     "mermaid": {
       "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+By default, docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your `hugo.toml`:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Hugo version >= 0.90 only:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.mermaid]
+version = "10.0.2"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  mermaid:
+    version: 10.0.2
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "mermaid": {
+      "version": "10.0.2"
     }
   }
 }
