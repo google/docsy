@@ -14,7 +14,7 @@
   {{ $height = $.Attributes.height -}}
 {{ end -}}
 
-<div class="markmap {{ cond $customStyle ( printf "markmap%d" $.Ordinal ) "" }}" >
+<div class="markmap {{- cond $customStyle ( printf " markmap%d" $.Ordinal ) "" -}}" >
 {{ .Inner | safeHTML }}
 </div>
 

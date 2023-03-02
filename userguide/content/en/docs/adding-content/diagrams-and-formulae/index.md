@@ -631,6 +631,30 @@ If needed, you can define the desired width and/or height of an individual mindm
 ```
 ````
 
+By default, docsy pulls in the latest officially released version of Markmap at build time. If that doesn't fit your needs, you can specify the wanted markmap version inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Hugo version >= 0.90 only:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.markmap]
+version = "0.14.4"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  markmap:
+    version: 0.14.4
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "markmap": {
+      "version": "0.14.4"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 With hugo version 0.93 or higher, support of Markmap mindmaps is automatically enabled as soon as you use a `markmap` code block on your page.
 
 If you are using hugo version 0.92 or lower, you need to manually activate rendering support for Markmap mindmaps. The easiest way to do so is to add a `markmap` attribute to the frontmatter of your page and set it to `true`:
@@ -654,7 +678,7 @@ markmap: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-You can also enable sitewide rendering support for Markmap mindmaps inside the Docsy theme. To do so, update your `config.toml`/`config.yaml`/`config.json`:
+You can also enable site-wide rendering support for Markmap mindmaps inside the Docsy theme. To do so, update your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
