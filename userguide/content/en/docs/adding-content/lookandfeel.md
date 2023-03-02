@@ -39,12 +39,9 @@ $primary: #390040;
 $secondary: #A23B72;
 ```
 
-The theme has features such as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
-
-```scss
-$enable-gradients: true;
-$enable-shadows: true;
-```
+The theme has features such as gradient backgrounds (`$enable-gradients`) and
+shadows (`$enable-shadows`) enabled by default. These can also be toggled in
+your project variables file by setting the variables to `false`.
 
 ## Fonts
 

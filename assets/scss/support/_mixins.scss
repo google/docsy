@@ -1,12 +1,5 @@
 // Some simple mixins.
 
-@mixin bg-gradient-variant($parent, $color, $ignore-warning: false) {
-  #{$parent} {
-    background: $color
-      linear-gradient(180deg, mix($body-bg, $color, 15%), $color) repeat-x !important;
-  }
-}
-
 @mixin link-variant($parent, $color, $hover-color, $underline: false) {
   #{$parent} {
     color: $color;
