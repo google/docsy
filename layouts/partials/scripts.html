@@ -59,7 +59,7 @@
 {{ if $needmarkmap -}}
 {{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
 {{ $jsArray = $jsArray | append $jsMarkmap -}}
-<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.3" integrity="sha512-TLaMJmYnKrLoDVFAaWZUtZBshdO4G4MGJMNH5wCg25RD7nQfbz9Uor9ONF+YLdsEP4EI3wiVg30rSz7RMvKKFg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.4" integrity="sha512-j5qMN3ohGV3fA+DM3B1O6BDoZGdpXggU37x++RsTTWkwcEcRxdI5wvND0cPGj96AQTON5pQEF0HRJjjS4+EJlA==" crossorigin="anonymous"></script>
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
