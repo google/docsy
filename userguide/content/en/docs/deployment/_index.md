@@ -75,18 +75,24 @@ If you have an existing deployment you can view and update the relevant informat
 
 ## Deployment on GitHub Pages
 
-If your repo is hosted on [GitHub](https://github.com), the simplest option to serve your site is deployment on [GitHub pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages). There are project, user and organization sites; for a project site, your site URL will be `http(s)://<username>.github.io/<repository_name>`, custom domains are also supported. GitHub pages come with [continuous deployment](https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment) via GitHub actions and the [marketplace for actions](https://github.com/marketplace/actions) has a lot of useful tools for spell and link checking, deploy preview and more. Using your existing GitHub account, you can start with the free plan of GitHub Pages for publicly available repositories, with premium tiers available for business use cases.
+If your repo is hosted on [GitHub](https://github.com), a simple option is to serve your site with [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages). GitHub Pages lets you create project, user, and organization sites; for a project site, your site URL will be `http(s)://<username>.github.io/<repository_name>`, custom domains are also supported. GitHub Pages come with [continuous deployment](https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment) using GitHub actions, while the [marketplace for actions](https://github.com/marketplace/actions) has useful tools for spell and link checking, deploy previews, and more. Using your existing GitHub account, you can start by using the free plan for publicly available repositories, with premium tiers available for business use cases.
+
+The Docsy example site repo provides a [workflow file](https://github.com/google/docsy-example/blob/master/.github/workflows/deploy-github-pages.yml) that you can use when deploying to GitHub Pages. If you used the example site as template for your new site as described [here](https://www.docsy.dev/docs/get-started/docsy-as-module/example-site-as-template/), you may already have this file in your repo, if not the instructions below show you how to create your own workflow file.
 
 Before deploying on GitHub Pages, make sure that you've pushed your site source to your chosen GitHub repo, following any setup instructions in [Using the theme](/docs/get-started/docsy-as-module).
 
-1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. Therefore, you have to create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
+{{% alert title="Correct baseURL setting" color="primary" %}}
+Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
+{{% /alert %}}
+
+1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. You must create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
     
     ```console
     $ git checkout -b gh-pages
     Switched to a new branch 'gh-pages'
     ```
     
-1. Then push this local branch to your repo:
+1. Push this local branch to your repo:
     
     ```console
     $ git push --set-upstream origin gh-pages
@@ -95,7 +101,7 @@ Before deploying on GitHub Pages, make sure that you've pushed your site source 
     branch 'gh-pages' set up to track 'origin/gh-pages'.
     ```
     
-1. Now switch back to the `main` (or `work`) branch of your repo:
+1. Switch back to the `main` (or `work`) branch of your repo:
     
     ```console
     $ git checkout main
@@ -103,111 +109,101 @@ Before deploying on GitHub Pages, make sure that you've pushed your site source 
     
     ```
     
-1. At the root of your local repo, create a new empty workflow file `.github/workflows/deploy-github-pages.yml`:
-    
-    ```console
-    $ mkdir -p .github/workflows
-    $ touch .github/workflows/deploy-github-pages.yml
-    ```
-    
-    {{% alert title="Workflow setup with docsy example site" color="primary" %}}
-Please note that a such a deployment [workflow file](https://github.com/google/docsy-example/blob/master/.github/workflows/deploy-github-pages.yml) was added to the docsy-example site recently. If you used the example site as template for your new site as described [here](https://www.docsy.dev/docs/get-started/docsy-as-module/example-site-as-template/), please check your repo for this file, it might be part of your site repo already.
-    {{% /alert %}}
-    
-1. Open the newly created, empty workflow file in an editor of your choice, paste in the code below and save the file:
-    
-    ```yaml
-    name: Deployment to GitHub Pages
+1. Check if you already have the workflow file `.github/workflows/deploy-github-pages.yml` in your repo. If this file doesn't exist, do the following:
 
-    on:
-      workflow_dispatch:
-      push:
-        branches:
-          - main  # <-- specify the branch you want to deploy from
-      pull_request:
+    1. Create a new empty workflow file from the root of your repo, as follows:
+    
+       ```console
+       $ mkdir -p .github/workflows
+       $ touch .github/workflows/deploy-github-pages.yml
+       ```
 
-    env:
-      REPO_NAME: ${{ github.event.repository.name }}
-      REPO_OWNER: ${{ github.repository_owner }}
+    
+    1. Open the file in an editor of your choice, paste in the code below, and save the file:
+    
+       ```yaml
+       name: Deployment to GitHub Pages
 
-    jobs:
-      deploy:
-        runs-on: ubuntu-22.04
-        concurrency:
-          group: ${{ github.workflow }}-${{ github.ref }}
-        steps:
-          - uses: actions/checkout@v3
-            with:
-              fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
-    
-          - name: Setup Hugo
-            uses: peaceiris/actions-hugo@v2
-            with:
-              hugo-version: '0.110.0'
-              extended: true
-    
-          - name: Setup Node
-            uses: actions/setup-node@v3
-            with:
-              node-version: '18'
-              cache: 'npm'
-              cache-dependency-path: '**/package-lock.json'
-    
-          - run: npm ci
-          - run: hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME} --minify
-    
-          - name: Deploy
-            uses: peaceiris/actions-gh-pages@v3
-            if: ${{ github.ref == 'refs/heads/main' }} # <-- specify same branch as above here
-            with:
-              github_token: ${{ secrets.GITHUB_TOKEN }}
-    ```
-    
-1. Afterwards, add the file to the staging area, commit your change and push the change to your remote GitHub repo:
-    
-    ```console
-    $ git add .github/workflows/deploy-github-pages.yml
-    $ git commit -m "Adding workflow file for site deployment"
-    $ git push origin 
-    ```
-    
-1. In your browser, make sure you are logged into your GitHub account. Then visit the subsection `Pages` in your repo `Settings`. You may use the URL below to directly jump to this subsection:
+       on:
+         workflow_dispatch:
+         push:
+           branches:
+             - main  # <-- specify the branch you want to deploy from
+         pull_request:
 
-    ```
-    URL Repo Page settings: https://github.com/<username>/<repository_name>/settings/pages
-    ```
-    
-    1. Under `Build and deployment`, select `Deploy from a branch` in the **source** dropdown.
-    
-    2. From the **branch** dropdown, select `gh-pages` as branch where the site is built from.
-    
-    3. From the **folder** dropdown, select `/(root)` as root directory.
-    
-1. That's it! Your deployment workflow for your site is configured!
+       env:
+         REPO_NAME: ${{ github.event.repository.name }}
+         REPO_OWNER: ${{ github.repository_owner }}
 
-Any future push to the branch specified in your workflow file will now trigger the action workflow defined in this file. Additionally, you are able to trigger the deployment manually inside your web browser via the GitHub web UI.
+       jobs:
+         deploy:
+           runs-on: ubuntu-22.04
+           concurrency:
+             group: ${{ github.workflow }}-${{ github.ref }}
+           steps:
+             - uses: actions/checkout@v3
+               with:
+                 fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
+    
+             - name: Setup Hugo
+               uses: peaceiris/actions-hugo@v2
+               with:
+                 hugo-version: '0.110.0'
+                 extended: true
+    
+             - name: Setup Node
+               uses: actions/setup-node@v3
+               with:
+                 node-version: '18'
+                 cache: 'npm'
+                 cache-dependency-path: '**/package-lock.json'
+    
+             - run: npm ci
+             - run: hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME} --minify
+    
+             - name: Deploy
+               uses: peaceiris/actions-gh-pages@v3
+               if: ${{ github.ref == 'refs/heads/main' }} # <-- specify same branch as above here
+               with:
+                 github_token: ${{ secrets.GITHUB_TOKEN }}
+       ```
+    
+   1. Add the file to the staging area, commit your change and push the change to your remote GitHub repo:
+    
+       ```console
+       $ git add .github/workflows/deploy-github-pages.yml
+       $ git commit -m "Adding workflow file for site deployment"
+       $ git push origin 
+       ```
+    
+1. In your browser, make sure you are logged into your GitHub account. In your repo  **Settings**, select **Pages**.
+    
+    1. Under **Build and deployment**, select **Deploy from a branch** in the **source** dropdown.
+    
+    2. From the **branch** dropdown, select **gh-page** as branch where the site is built from.
+    
+    3. From the **folder** dropdown, select **/(root)** as root directory.
+    
+That's it! Your deployment workflow for your site is configured.
 
-Once you pushed to your repo, you can see the progress of the triggered workflow in the `Actions` tab of the the GitHub web UI:
+Any future push to the branch specified in your workflow file will now trigger the action workflow defined in the workflow file. Additionally, you can trigger the deployment manually by using GitHub web UI.
+
+Once you push to your repo, you can see the progress of the triggered workflow in the **Actions** tab of the the GitHub web UI:
 
 ```
 URL 'Repo actions': https://github.com/<username>/<repository_name>/actions
 ```
 
-After the first successful deployment, a new environment `github-pages` is added to your repo, you will find it at the right of your repo main view (below `Releases` and `Packages`). When clicking on the newly created environment, a list of deployments is presented to you:  
+After the first successful deployment, a new environment `github-pages` is added to your repo. This is shown at the right of your repo main view (below **Releases** and **Packages**). When you click on this environment, a list of deployments is displayed:  
 
 ```
 URL 'Repo deployments': https://github.com/<username>/<repository_name>/deployments/
 ```
 
-{{% alert title="Correct baseURL setting" color="primary" %}}
-Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
-{{% /alert %}}
-
-{{% alert title="Further reading" color="primary" %}}
-In the hugo docs, you can find a chapter [Hosting on GitHub]( https://gohugo.io/hosting-and-deployment/hosting-on-github/).
+You can find out more in [Hosting on GitHub]( https://gohugo.io/hosting-and-deployment/hosting-on-github/) in the Hugo documentation.
 
 For advanced use cases, the [`hugo-action`](https://github.com/peaceiris/actions-hugo) used inside the workflow file has more configuration options, which are well [documented](https://github.com/marketplace/actions/hugo-setup).
-{{% /alert %}}
+
 
 ## Deployment with Amazon S3 + Amazon CloudFront
 
