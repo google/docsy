@@ -86,41 +86,41 @@ Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '
 {{% /alert %}}
 
 1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. You must create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
-    
+
     ```console
     $ git checkout -b gh-pages
     Switched to a new branch 'gh-pages'
     ```
-    
+
 1. Push this local branch to your repo:
-    
+
     ```console
     $ git push --set-upstream origin gh-pages
      details omitted …
      * [new branch]      new -> new
     branch 'gh-pages' set up to track 'origin/gh-pages'.
     ```
-    
+
 1. Switch back to the `main` (or `work`) branch of your repo:
-    
+
     ```console
     $ git checkout main
     Switched to branch 'main'
-    
+
     ```
-    
+
 1. Check if you already have the workflow file `.github/workflows/deploy-github-pages.yml` in your repo. If this file doesn't exist, do the following:
 
     1. Create a new empty workflow file from the root of your repo, as follows:
-    
+
        ```console
        $ mkdir -p .github/workflows
        $ touch .github/workflows/deploy-github-pages.yml
        ```
 
-    
+
     1. Open the file in an editor of your choice, paste in the code below, and save the file:
-    
+
        ```yaml
        name: Deployment to GitHub Pages
 
@@ -144,46 +144,46 @@ Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '
              - uses: actions/checkout@v3
                with:
                  fetch-depth: 0         # Fetch all history for .GitInfo and .Lastmod
-    
+
              - name: Setup Hugo
                uses: peaceiris/actions-hugo@v2
                with:
-                 hugo-version: '0.110.0'
+                 hugo-version: '0.120.4'
                  extended: true
-    
+
              - name: Setup Node
-               uses: actions/setup-node@v3
+               uses: actions/setup-node@v4
                with:
-                 node-version: '18'
+                 node-version: '20'
                  cache: 'npm'
                  cache-dependency-path: '**/package-lock.json'
-    
+
              - run: npm ci
              - run: hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME} --minify
-    
+
              - name: Deploy
                uses: peaceiris/actions-gh-pages@v3
                if: ${{ github.ref == 'refs/heads/main' }} # <-- specify same branch as above here
                with:
                  github_token: ${{ secrets.GITHUB_TOKEN }}
        ```
-    
+
    1. Add the file to the staging area, commit your change and push the change to your remote GitHub repo:
-    
+
        ```console
        $ git add .github/workflows/deploy-github-pages.yml
        $ git commit -m "Adding workflow file for site deployment"
-       $ git push origin 
+       $ git push origin
        ```
-    
+
 1. In your browser, make sure you are logged into your GitHub account. In your repo  **Settings**, select **Pages**.
-    
+
     1. Under **Build and deployment**, select **Deploy from a branch** in the **source** dropdown.
-    
+
     2. From the **branch** dropdown, select **gh-page** as branch where the site is built from.
-    
+
     3. From the **folder** dropdown, select **/(root)** as root directory.
-    
+
 That's it! Your deployment workflow for your site is configured.
 
 Any future push to the branch specified in your workflow file will now trigger the action workflow defined in the workflow file. Additionally, you can trigger the deployment manually by using GitHub web UI.
@@ -194,7 +194,7 @@ Once you push to your repo, you can see the progress of the triggered workflow i
 URL 'Repo actions': https://github.com/<username>/<repository_name>/actions
 ```
 
-After the first successful deployment, a new environment `github-pages` is added to your repo. This is shown at the right of your repo main view (below **Releases** and **Packages**). When you click on this environment, a list of deployments is displayed:  
+After the first successful deployment, a new environment `github-pages` is added to your repo. This is shown at the right of your repo main view (below **Releases** and **Packages**). When you click on this environment, a list of deployments is displayed:
 
 ```
 URL 'Repo deployments': https://github.com/<username>/<repository_name>/deployments/
