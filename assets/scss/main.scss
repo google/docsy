@@ -1,11 +1,17 @@
 @import "../vendor/bootstrap/scss/functions";
 
 @import "support/functions";
+@import "_variables_forward";
 @import "variables_project";
 @import "variables";
 @import "support/mixins";
 
 @import "../vendor/bootstrap/scss/bootstrap";
+
+$display1-size: null !default;
+@if $display1-size {
+  @error "Docsy requires Bootstrap v5, but v4 was detected. Did you forget to update Docsy dependencies?";
+}
 
 @import "../vendor/Font-Awesome/scss/fontawesome.scss";
 @import "../vendor/Font-Awesome/scss/solid.scss";
