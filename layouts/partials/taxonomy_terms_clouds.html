@@ -1,8 +1,8 @@
 {{ $context := . }}
-{{ if isset .Site.Params "taxonomy" }}
-	{{ if isset .Site.Params.Taxonomy "taxonomycloud" }}
+{{ if .Site.Params.taxonomy }}
+	{{ if .Site.Params.Taxonomy.taxonomyCloud }}
 		{{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyCloud }}
-			{{ if isset $.Site.Params.Taxonomy "taxonomycloudtitle" }}
+			{{ if $.Site.Params.Taxonomy.taxonomyCloudTitle }}
 				{{ $.Scratch.Set "title" (index $.Site.Params.Taxonomy.taxonomyCloudTitle $index) }}
 			{{ else }}
 				{{ $.Scratch.Set "title" (humanize $taxo) }}
