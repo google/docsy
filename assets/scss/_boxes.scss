@@ -77,26 +77,17 @@
 
 // Styling for section boxes
 .td-box {
-  .row.section {
-    padding-left: 5vw;
-    padding-right: 5vw;
-    flex-direction: column;
-
-    > table {
-      @extend .table-striped;
-
-      @extend .table-responsive;
-
-      @extend .table;
-    }
-  }
-
   .row {
     padding-left: 5vw;
     padding-right: 5vw;
-    flex-direction: row;
+  }
+  table {
+    @extend .table;
+    @extend .table-striped;
+    @extend .table-responsive;
   }
 }
+
 // Styling for community page link boxes
 
 .td-box.linkbox {

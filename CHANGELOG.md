@@ -14,24 +14,28 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes**:
 
-- **[Upgraded Bootstrap ([#470][])** to v5. For a list of Bootstrap breaking
-  changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
+- **Upgraded Bootstrap ([#470][])** to v5.2. For a list of Bootstrap's breaking
+  changes, see the [Bootstrap migration guide][bsv5mig]. Other Docsy-specific
   changes are listed below:
-  - Clean up of unused, or rarely used, variables and functions:
-    - Dropped `$primary-light`.
-    - Dropped `color-diff()`.
-  - BSv4 RTL support, being incompatible with BSv5, has been removed. For
-    progress in RTL support, see [#1442][].
-  - Dropped the `bg-gradient-variant()` mixin. [#1369][].
+  - Clean up of unused, or rarely used, variables, functions, and mixins:
+    - Dropped `$primary-light`
+    - Dropped `color-diff()`
+    - Dropped `bg-gradient-variant()` mixin ([#1369][])
+  - Docsy's RTL support has been removed because it is incompatible with BSv5.
+    For progress on the reintroduction of RTL support, see [#1442][].
+- `blocks/section` shortcode `type` argument: the **default** and accepted
+  values have changed! For details see [blocks/section][] ([#1472][]).
 
 **Other changes**:
 
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
-  - Draw.io diagram edit button: replace custom colors by BS's outline primary.
+  - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
 [#470]: https://github.com/google/docsy/issues/470
 [#1369]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
+[#1472]: https://github.com/google/docsy/issues/1472
+[blocks/section]: https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 
 ## [0.6.0][]

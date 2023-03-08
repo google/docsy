@@ -27,7 +27,8 @@ on creating great content for your users.
 </a>
 {{% /blocks/lead %}}
 
-{{% blocks/section color="dark" type="features"%}}
+{{% blocks/section color="dark" type="row" %}}
+
 {{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/docs/examples/" %}}
 As well as our example site, there's a growing number of projects using Docsy for their doc sites.
 {{% /blocks/feature %}}
