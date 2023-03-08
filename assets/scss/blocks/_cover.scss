@@ -17,6 +17,7 @@
   }
 
   & > .byline {
+    @extend .small;
     position: absolute;
     bottom: 2px;
     right: 4px;
