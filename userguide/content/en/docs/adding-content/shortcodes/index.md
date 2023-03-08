@@ -82,10 +82,12 @@ Runs on **bare metal** in the **cloud**!
 {{%/* /blocks/lead */%}}
 ```
 
-| Parameter        | Default    | Description  |
-| ---------------- |------------| ------------|
-| height | | See above.
-| color | | See above.
+Use the syntax printed above if the inner content of your `/blocks/lead` shortcode is authored in markdown. In case of HTML content, use square brackets `<>` as innermost delimiters: `{{</* blocks/lead >}}<b>HTML</b> content{{< /blocks/lead */>}}`.
+
+| Parameter | Default  | Description                     |
+| --------- |--------- | ------------------------------- |
+| height    | `auto`   | [See above.](#shortcode-blocks) |
+| color     | .Ordinal | [See above.](#shortcode-blocks) |
 
 ### blocks/section
 
