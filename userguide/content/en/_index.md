@@ -2,18 +2,19 @@
 title: Docsy
 ---
 
-{{< blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full" >}}
-<div class="mx-auto">
-	<a class="btn btn-lg btn-primary me-3 mb-4" href="{{< relref "/about" >}}">
-		Learn More <i class="fa-solid fa-circle-right ms-2"></i>
-	</a>
-	<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/google/docsy">
-		Download <i class="fa-brands fa-github ms-2 "></i>
-	</a>
-	<p class="lead mt-5">A Hugo theme for creating great technical documentation sites</p>
-	{{< blocks/link-down color="info" >}}
-</div>
-{{< /blocks/cover >}}
+{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full" %}}
+<a class="btn btn-lg btn-primary me-3 mb-4" href="{{% relref "/about" %}}">
+  Learn More <i class="fa-solid fa-circle-right ms-2"></i>
+</a>
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://github.com/google/docsy">
+  Download <i class="fa-brands fa-github ms-2 "></i>
+</a>
+
+A Hugo theme for creating great technical documentation sites
+{.lead .mt-5}
+
+{{% blocks/link-down color="info" %}}
+{{% /blocks/cover %}}
 
 {{% blocks/lead color="primary" %}}
 Docsy is a theme for the Hugo static site generator that's specifically designed
@@ -26,7 +27,7 @@ on creating great content for your users.
 </a>
 {{% /blocks/lead %}}
 
-{{< blocks/section color="dark" type="features">}}
+{{% blocks/section color="dark" type="features"%}}
 {{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/docs/examples/" %}}
 As well as our example site, there's a growing number of projects using Docsy for their doc sites.
 {{% /blocks/feature %}}
@@ -41,4 +42,4 @@ We do a [Pull Request](https://github.com/google/docsy/pulls) contributions work
 Find out about new features and how our users are using Docsy.
 {{% /blocks/feature %}}
 
-{{< /blocks/section >}}
+{{% /blocks/section %}}
