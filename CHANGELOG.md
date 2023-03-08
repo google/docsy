@@ -6,7 +6,7 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-For a list of issues targeted for the next release, see the [22Q2][] milestone.
+For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 ## 0.7.0 - next planned release (unpublished yet)
 
@@ -14,7 +14,25 @@ For a list of issues targeted for the next release, see the [22Q2][] milestone.
 
 **Breaking changes**:
 
+- **[Upgraded Bootstrap ([#470][])** to v5. For a list of Bootstrap breaking
+  changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
+  changes are listed below:
+  - Clean up of unused, or rarely used, variables and functions:
+    - Dropped `$primary-light`.
+    - Dropped `color-diff()`.
+  - BSv4 RTL support, being incompatible with BSv5, has been removed. For
+    progress in RTL support, see [#1442][].
+  - Dropped the `bg-gradient-variant()` mixin. [#1369][].
+
 **Other changes**:
+
+- Non-breaking changes that result from the Bootstrap v5 upgrade:
+  - Draw.io diagram edit button: replace custom colors by BS's outline primary.
+
+[#470]: https://github.com/google/docsy/issues/470
+[#1369]: https://github.com/google/docsy/issues/1369
+[#1442]: https://github.com/google/docsy/issues/1442
+[bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 
 ## [0.6.0][]
 
@@ -34,12 +52,6 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
   `chem` blocks via KateX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
-
-**Breaking changes**:
-
-
-**Other changes**:
-
 
 ## [0.5.1][]
 
@@ -197,7 +209,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #
-[22q2]: https://github.com/google/docsy/milestone/3
+[23q1]: https://github.com/google/docsy/milestone/6
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases

@@ -46,7 +46,7 @@ repo.
 3.  Update module and package versions:
     - Update the version of `docsy/dependencies` in [go.mod](go.mod) to v0.X.Y.
     - Update the NPM package version in [package.json](package.json) to 0.X.Y.
-4.  Update the Docsy `version` in [userguide/config.toml][] to 0.X.Y.
+4.  Update the Docsy `version` in [userguide/hugo.toml][] to 0.X.Y.
 5.  Commit your changes, usually as a PR entitled "Release v0.X.Y preparation".
     Once the PR is approved and merged, proceed with the remaining steps.
 6.  Ensure that you're:
@@ -96,4 +96,4 @@ repo.
 
 [contribution guidelines]: https://www.docsy.dev/docs/contribution-guidelines/
 [Draft a new release]: https://github.com/google/docsy/releases/new
-[userguide/config.toml]: userguide/config.toml
+[userguide/hugo.toml]: userguide/hugo.toml

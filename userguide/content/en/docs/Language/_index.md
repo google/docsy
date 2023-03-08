@@ -14,7 +14,7 @@ To add content in multiple languages, you first need to define the available lan
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 contentDir = "content/en"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
@@ -34,7 +34,7 @@ contentDir = "content/no"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 contentDir: content/en
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
@@ -53,7 +53,7 @@ languages:
     time_format_default: 02.01.2006
     time_format_blog: 02.01.2006
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "contentDir": "content/en",
   "defaultContentLanguage": "en",
@@ -83,7 +83,7 @@ Any setting not defined in a `[languages]` block will fall back to the global va
 Once you've updated your site config, you create a content root directory for each language version in your source repo, such as  `content/en` for English text, and add your [content](/docs/adding-content/content/) as usual. See the [Hugo Docs](https://gohugo.io/content-management/multilingual) on multi-language support for more information.
 
 {{% alert title="Attention (only when using docsy as hugo module)" color="warning" %}}
-If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
+If you have a multi language installation, please make sure that the section `[languages]` inside your [configuration file](https://gohugo.io/getting-started/configuration/#configuration-file) is declared **before** the section `[module]` with the module imports. Otherwise you will run into trouble!
 {{% /alert %}}
 
 {{% alert title="Tip" %}}
@@ -94,7 +94,7 @@ For adding multiple language versions of other site elements such as button text
 
 ## Selecting a language
 
-If you configure more than one language in `config.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
+If you configure more than one language in your [configuration file](https://gohugo.io/getting-started/configuration/#configuration-file), the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
 
 ## Internationalization bundles
 

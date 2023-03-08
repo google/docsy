@@ -6,13 +6,13 @@ description: >
    Customize site navigation for your Docsy site.
 ---
 
-Docsy provides multiple built-in navigation featurs for your sites, including site menus, section menus, and page menus. This page shows you how they work and how to configure and customize them to meet your needs.
+Docsy provides multiple built-in navigation features for your sites, including site menus, section menus, and page menus. This page shows you how they work and how to configure and customize them to meet your needs.
 
 ## Top-level menu
 
-The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `config.toml`/`config.yaml`/`config.json`.
+The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-To add a page or section to this menu, add it to the site's `main` menu in either `config.toml`/`config.yaml`/`config.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
+To add a page or section to this menu, add it to the site's `main` menu in either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -52,24 +52,24 @@ menu:
 
 The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
 
-If you want to add a link to an external site to this menu, add it in `config.toml`/`config.yaml`/`config.json`, specifying the `weight`.
+If you want to add a link to an external site to this menu, add it in `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 menu:
   main:
     - name: GitHub
       weight: 50
       url: 'https://github.com/google/docsy/'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "menu": {
     "main": [
@@ -86,11 +86,11 @@ menu:
 
 ### Adding icons to the top-level menu
 
-As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `config.toml`/`config.yaml`/`config.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
     name = "GitHub"
     weight = 50
@@ -98,7 +98,7 @@ As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-
     pre = "<i class="fa-brands fa-github"></i>"
     post = "<span class='alert'>New!</span>"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 menu:
   main:
     - name: GitHub
@@ -107,7 +107,7 @@ menu:
       pre: <i class="fa-brands fa-github"></i>
       post: <span class='alert'>New!</span>
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "menu": {
     "main": [
@@ -128,7 +128,7 @@ You can find a complete list of icons to use in the [FontAwesome documentation](
 
 ### Adding a version drop-down
 
-If you add some `[params.versions]` in `config.toml`, the Docsy theme adds a
+If you add some `[params.versions]` in `hugo.toml`, the Docsy theme adds a
 version selector drop down to the top-level menu.
 
 You can find out more in the guide to
@@ -136,7 +136,7 @@ You can find out more in the guide to
 
 ### Adding a language drop-down
 
-If you configure more than one language in `config.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
+If you configure more than one language in `hugo.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
 
 You can find out more in [Multi-language support](/docs/language/).
 
@@ -219,13 +219,46 @@ description: >
 
 ### Section menu options
 
-By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `config.toml`.
+By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `hugo.toml`.
 
 With the compact menu (`.ui.sidebar_menu_compact = true`), only the current page's ancestors, siblings and direct descendants are shown. You can use the optional parameter `.ui.ul_show` to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the first menu level is always displayed.
 
-As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `config.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
+As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `hugo.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
 
 On large sites (default: > 2000 pages) the section menu is not generated for each page, but cached for the whole section. The HTML classes for marking the active menu item (and menu path) are then set using JS. You can adjust the limit for activating the cached section menu with the optional parameter `.ui.sidebar_cache_limit`.
+
+The tabbed pane below lists the menu section options you can define in your project [configuration file].
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
+sidebar_menu_compact = true
+ul_show = 1
+sidebar_menu_foldable = true
+sidebar_cache_limit = 1000
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    sidebar_menu_compact: true
+    ul_show: 1
+    sidebar_menu_foldable: true
+    sidebar_cache_limit: 1000
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "sidebar_menu_compact": true,
+      "ul_show": 1,
+      "sidebar_menu_foldable": true,
+      "sidebar_cache_limit": 1000,
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 ### Add icons to the section menu
 
@@ -249,6 +282,32 @@ To create a placeholder page, create a page file as usual in the directory where
 
 ## Breadcrumb navigation
 
-Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `config.toml`.
+Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `hugo.toml`.
 
-Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `config.toml` by setting site param `taxonomy_breadcrumb_disable = true`.
+Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `hugo.toml` by setting site param `ui.taxonomy_breadcrumb_disable = true`.
+
+The tabbed pane below lists the breadcrumb navigation options you can define in your project [configuration file].
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
+breadcrumb_disable = true
+taxonomy_breadcrumb_disable = true
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    breadcrumb_disable: true
+    taxonomy_breadcrumb_disable: true
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "breadcrumb_disable": true,
+      "taxonomy_breadcrumb_disable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
