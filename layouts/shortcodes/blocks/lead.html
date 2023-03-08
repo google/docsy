@@ -7,10 +7,12 @@
 {{ end -}}
 <div><a id="td-block-{{ .Ordinal }}" class="td-offset-anchor"></a></div>
 <section class="row td-box td-box--{{ $col_id }} position-relative td-box--height-{{ $height }}">
+<div class="col-12 px-0">
 <div class="container text-center td-arrow-down">
 <div class="h4 mb-0">
 {{/* Do NOT remove this comment! It ends above HTML block. See https://spec.commonmark.org/0.30/#html-blocks, 7. */}}
 {{ .Inner }}
+</div>
 </div>
 </div>
 </section>
