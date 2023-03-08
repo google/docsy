@@ -123,6 +123,9 @@ params:
     theme: default
     flowchart:
       diagramPadding: 20
+  drawio:
+    enable: true
+
 
 taxonomies:
   tag: tags

@@ -18,8 +18,10 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes:**
 
-- **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
-  changes, see the [Bootstrap migration guide][bsv5mig]. Other Docsy-specific
+- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
+
+- **[Upgraded Bootstrap ([#470][])** to v5.2. For a list of Bootstrap breaking
+  changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
   changes are listed below:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
     - Dropped `$primary-light`
@@ -52,6 +54,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
 [#470]: https://github.com/google/docsy/issues/470
+[#1185]: https://github.com/google/docsy/issues/1185
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [#1369]: https://github.com/google/docsy/issues/1369
