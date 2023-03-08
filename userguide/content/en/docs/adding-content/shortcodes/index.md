@@ -1,6 +1,6 @@
 ---
-title: "Docsy Shortcodes"
-linkTitle: "Docsy Shortcodes"
+title: Docsy Shortcodes
+linkTitle: Shortcodes
 date: 2017-01-05
 weight: 5
 description: >
@@ -12,6 +12,13 @@ resources:
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and use [shortcodes](https://gohugo.io/content-management/shortcodes/). These are reusable snippets of content that you can include in your pages, often using HTML to create effects that are difficult or impossible to do in simple Markdown. Shortcodes can also have parameters that let you, for example, add your own text to a fancy shortcode text box. As well as Hugo's [built-in shortcodes](https://gohugo.io/content-management/shortcodes/), Docsy provides some shortcodes of its own to help you build your pages.
+
+## Shortcode delimiters
+
+As illustrated below, using the bracket styled [shortcode delimiter][],
+`{{</*...*/>}}`, tells Hugo that the inner content is HTML/plain text and needs
+no further processing. By using the delimiter `{{%/*...*/%}}`, Hugo will treat
+the shortcode body as Markdown. You can use both styles in your pages.
 
 ## Shortcode blocks
 
@@ -48,11 +55,6 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 
 Note that the relevant shortcode parameters above will have sensible defaults, but is included here for completeness.
 
-{{% alert title="Hugo Tip" %}}
-> Using the bracket styled shortcode delimiter, `>}}`, tells Hugo that the inner content is HTML/plain text and needs no further processing. Changing the delimiter to `%}}` means Hugo will treat the content as Markdown. You can use both styles in your pages.
-{{% /alert %}}
-
-
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | title | | The main display title for the block. |
@@ -82,12 +84,10 @@ Runs on **bare metal** in the **cloud**!
 {{%/* /blocks/lead */%}}
 ```
 
-Use the syntax printed above if the inner content of your `/blocks/lead` shortcode is authored in markdown. In case of HTML content, use square brackets `<>` as innermost delimiters: `{{</* blocks/lead >}}<b>HTML</b> content{{< /blocks/lead */>}}`.
-
-| Parameter | Default  | Description                     |
-| --------- |--------- | ------------------------------- |
-| height    | `auto`   | [See above.](#shortcode-blocks) |
-| color     | .Ordinal | [See above.](#shortcode-blocks) |
+| Parameter | Default  | Description                               |
+| --------- |--------- | ----------------------------------------- |
+| height    | `auto`   | See [Shortcode blocks](#shortcode-blocks) |
+| color     | .Ordinal | See [Shortcode blocks](#shortcode-blocks) |
 
 ### blocks/section
 
@@ -159,7 +159,6 @@ The **alert** shortcode creates an alert block that can be used to display notic
 {{%/* alert title="Warning" color="warning" */%}}
 This is a warning.
 {{%/* /alert */%}}
-
 ```
 
 Renders to:
@@ -702,3 +701,5 @@ This text does not appear in the output if `buildCondition = "bar" is set in you
 ```
 
 If you are using this shortcode, note that when evaluating the conditions, substring matches are matches as well. That means, if you set `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!
+
+[shortcode delimiter]: https://gohugo.io/content-management/shortcodes/#use-shortcodes
