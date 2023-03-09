@@ -1,0 +1,5 @@
+.td-table {
+  @extend .table;
+  @extend .table-responsive;
+  @extend .table-striped;
+}

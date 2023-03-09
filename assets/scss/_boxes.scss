@@ -82,9 +82,7 @@
     padding-right: 5vw;
   }
   table {
-    @extend .table;
-    @extend .table-striped;
-    @extend .table-responsive;
+    @extend .td-table;
   }
 }
 
