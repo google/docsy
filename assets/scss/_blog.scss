@@ -4,9 +4,7 @@
     @extend .btn-lg;
     @extend .-bg-orange;
 
-    position: absolute;
-    right: 1rem;
-    z-index: 22;
+    float: right;
 
     display: none;
     @extend .d-lg-block;
