@@ -241,8 +241,7 @@ of the following:
 
 ## Tables
 
-By default, Docsy applies the following styles (through the class `.td-table`)
-to all tables:
+By default, Docsy applies the following styles to all tables, through the class `.td-table`:
 
 - [Bootstrap table][] styles:
   - `.table`
@@ -250,16 +249,20 @@ to all tables:
   - `.table-responsive`
 - `display: block`, which is necessary for tables to be responsive.
 
-This particular styling configuration goes against the [Bootstrap recommendation
-of _wrapping_ tables][wrap-tables] with `.table-responsive`, but it is more
-convenient for content writers who get responsive tables using table Markdown
-only, without the need for a wrapping `<div>`. The price to pay is that `display`
-is set to `block`.
+This styling configuration gives you responsive tables using Markdown only,
+without the need to wrap the table in a `<div>`. It does, however, mean that all your tables have `display`
+set to `block`. If you don't want this, you can create your own custom styles for tables.
 
-To render a table without Docsy styles, apply the `.td-initial` class to the
+{{% alert title="Note" %}}
+Our default table styling goes against the [Bootstrap recommendation
+to _wrap_ tables][wrap-tables] with `.table-responsive` - however, we think letting 
+users create responsive tables with just Markdown table syntax is more convenient.
+{{% /alert %}}
+
+To render a table without default Docsy styling, apply the `.td-initial` class to the
 table. From the resulting `<table>` style base, it is easier to apply your own
-custom styles (rather than trying to undo Docsy table styling), as is
-illustrated next:
+custom styles (rather than trying to undo default Docsy table styling), as is
+illustrated in the following example:
 
 ```markdown
 | Shape    | Number of sides |
