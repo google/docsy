@@ -1,4 +1,4 @@
-// Some simple mixins.
+// Mixins
 
 @mixin link-variant($parent, $color, $hover-color, $underline: false) {
   #{$parent} {

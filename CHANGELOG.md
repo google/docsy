@@ -14,24 +14,35 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes**:
 
-- **[Upgraded Bootstrap ([#470][])** to v5. For a list of Bootstrap breaking
-  changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
+- **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
+  changes, see the [Bootstrap migration guide][bsv5mig]. Other Docsy-specific
   changes are listed below:
-  - Clean up of unused, or rarely used, variables and functions:
-    - Dropped `$primary-light`.
-    - Dropped `color-diff()`.
-  - BSv4 RTL support, being incompatible with BSv5, has been removed. For
-    progress in RTL support, see [#1442][].
-  - Dropped the `bg-gradient-variant()` mixin. [#1369][].
+  - Clean up of unused, or rarely used, variables, functions, and mixins:
+    - Dropped `$primary-light`
+    - Dropped `color-diff()`
+    - Dropped `bg-gradient-variant()` mixin ([#1369])
+  - Docsy's RTL support has been removed because it is incompatible with BSv5.
+    For progress on the reintroduction of RTL support, see [#1442].
+- **Shortcodes**:
+  - Now using Hugo's native support for processing HTML & markdown, not file
+    extension testing. ([#906])
+  - Dropped support for pre-Hugo-0.54.x behavior of `{{% %}}`. ([#939])
+  - `blocks/section`: **default** and accepted values of the `type` argument
+    have changed! For details see [blocks/section] ([#1472]).
 
 **Other changes**:
 
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
-  - Draw.io diagram edit button: replace custom colors by BS's outline primary.
+  - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
 [#470]: https://github.com/google/docsy/issues/470
+[#906]: https://github.com/google/docsy/issues/906
+[#939]: https://github.com/google/docsy/issues/939
 [#1369]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
+[#1472]: https://github.com/google/docsy/issues/1472
+[blocks/section]:
+  https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 
 ## [0.6.0][]
@@ -45,9 +56,9 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 **New**:
 
 - **Simplified use of mermaid diagrams**: when using a `mermaid` code block on
-  your page, mermaid is now automatically enabled (needs hugo version >= 0.93.0).
-  For existing sites build with hugo 0.93.0+, parameter `mermaid.enable`
-  can be removed from site config.
+  your page, mermaid is now automatically enabled (needs hugo version >=
+  0.93.0). For existing sites build with hugo 0.93.0+, parameter
+  `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
   `chem` blocks via KateX and mhchem. Support for formula rendering activation
@@ -69,11 +80,12 @@ notes][0.5.1]. **BREAKING CHANGES** are documented below.
 
 **Breaking changes**:
 
-- **Tabbed panes, text display**. By default, the content of a tab inside a tabbed
-  pane is shown as code. As of version 0.4 of the shortcode, you can add the
-  parameter `code=false` to your `tabpane` or `tab` shortcode  in order to render
-  tab content(s) as text (markdown or html). As of version 0.5 the name of this
-  parameter was changed, we now use `text=true` in order to mark content as text.
+- **Tabbed panes, text display**. By default, the content of a tab inside a
+  tabbed pane is shown as code. As of version 0.4 of the shortcode, you can add
+  the parameter `code=false` to your `tabpane` or `tab` shortcode in order to
+  render tab content(s) as text (markdown or html). As of version 0.5 the name
+  of this parameter was changed, we now use `text=true` in order to mark content
+  as text.
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
   how to hide the logo (or your brand name), see [Styling your project logo and
@@ -93,7 +105,8 @@ notes][0.5.1]. **BREAKING CHANGES** are documented below.
 - By default, Docsy now uses the [gtag.js][] analytics library for all site
   tags. For details, see [Adding Analytics > Setup][].
 
-[Adding Analytics > Setup]: https://www.docsy.dev/docs/adding-content/feedback/#setup
+[adding analytics > setup]:
+  https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [docsy as an npm package]:
   https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
@@ -125,31 +138,31 @@ Docsy now fetches Bootstrap and FontAwesome as NPM packages rather than git
 submodules. This has an impact on your project-build setup. To migrate your
 site, follow these steps (execute commands from your project's root directory):
 
-  1.  Delete obsolete Docsy Git submodules:
-      ```console
-      $ rm -Rf themes/docsy/assets/vendor
-      ```
-  2.  Get Docsy dependencies:
-      ```console
-      $ (cd themes/docsy && npm install)
-      ```
-  3.  Update your build scripts to fetch Docsy dependencies automatically. For
-      example, if your site build uses NPM scripts, consider getting Docsy
-      dependencies via a [prepare][] script as follows:
-      ```json
-      {
-        "name": "my-website",
-        "scripts": {
-          "prepare": "cd themes/docsy && npm install",
-          "...": "..."
-        },
+1.  Delete obsolete Docsy Git submodules:
+    ```console
+    $ rm -Rf themes/docsy/assets/vendor
+    ```
+2.  Get Docsy dependencies:
+    ```console
+    $ (cd themes/docsy && npm install)
+    ```
+3.  Update your build scripts to fetch Docsy dependencies automatically. For
+    example, if your site build uses NPM scripts, consider getting Docsy
+    dependencies via a [prepare][] script as follows:
+    ```json
+    {
+      "name": "my-website",
+      "scripts": {
+        "prepare": "cd themes/docsy && npm install",
         "...": "..."
-      }
-      ```
-  4.  (Optional) Build script cleanup. If your project uses Docsy as a git
-      submodule, Docsy updates no longer require the `--recursive` flag when
-      running `git submodule update`. Consider dropping the flag if you have no
-      other recursive git submodules.
+      },
+      "...": "..."
+    }
+    ```
+4.  (Optional) Build script cleanup. If your project uses Docsy as a git
+    submodule, Docsy updates no longer require the `--recursive` flag when
+    running `git submodule update`. Consider dropping the flag if you have no
+    other recursive git submodules.
 
 Proceed as usual to build or serve your site.
 

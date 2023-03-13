@@ -1,5 +1,5 @@
-{{/* We cache this partial for bigger sites and set the active class client side. */}}
-{{ $sidebarCacheLimit := cond (isset .Site.Params.ui "sidebar_cache_limit") .Site.Params.ui.sidebar_cache_limit 2000 -}}
+{{/* We cache this partial for bigger sites and set the active class client side. */ -}}
+{{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
 <div id="td-sidebar-menu" class="td-sidebar__inner{{ if $shouldDelayActive }} d-none{{ end }}">
   {{ if not .Site.Params.ui.sidebar_search_disable -}}
@@ -26,8 +26,8 @@
     {{ end -}}
     {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
     {{ $ulNr := 0 -}}
-    {{ $ulShow := cond (isset .Site.Params.ui "ul_show") .Site.Params.ui.ul_show 1 -}}
-    {{ $sidebarMenuTruncate := cond (isset .Site.Params.ui "sidebar_menu_truncate") .Site.Params.ui.sidebar_menu_truncate 50 -}}
+    {{ $ulShow := .Site.Params.ui.ul_show | default 1 -}}
+    {{ $sidebarMenuTruncate := .Site.Params.ui.sidebar_menu_truncate | default 50 -}}
     <ul class="td-sidebar-nav__section pe-md-3 ul-{{ $ulNr }}">
       {{ template "section-tree-nav-section" (dict "page" . "section" $navRoot "shouldDelayActive" $shouldDelayActive "sidebarMenuTruncate" $sidebarMenuTruncate "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
     </ul>
