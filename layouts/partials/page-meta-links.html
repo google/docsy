@@ -11,9 +11,9 @@
   <a href="{{ $gh_url }}" target="_blank"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
 {{ else if $gh_repo -}}
   {{ $gh_repo_path := printf "%s/content/%s" $gh_branch $pathFormatted -}}
-  {{ if and ($gh_subdir) (.Site.Language.Lang) -}}
+  {{ if and (.Site.IsMultiLingual) ($gh_subdir) (.Site.Language.Lang) -}}
     {{ $gh_repo_path = printf "%s/%s/content/%s/%s" $gh_branch $gh_subdir ($.Site.Language.Lang) $pathFormatted -}}
-  {{ else if .Site.Language.Lang -}}
+  {{ else if and (.Site.IsMultiLingual) (.Site.Language.Lang) -}}
     {{ $gh_repo_path = printf "%s/content/%s/%s" $gh_branch ($.Site.Language.Lang) $pathFormatted -}}
   {{ else if $gh_subdir -}}
     {{ $gh_repo_path = printf "%s/%s/content/%s" $gh_branch $gh_subdir $pathFormatted -}}

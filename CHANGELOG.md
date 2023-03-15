@@ -34,7 +34,9 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
   - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
+- Fix page meta links for single language pages ([#138])
 
+[#138]: https://github.com/google/docsy/issues/138
 [#470]: https://github.com/google/docsy/issues/470
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
