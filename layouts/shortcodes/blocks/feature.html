@@ -2,12 +2,17 @@
 {{ $url_text := .Get "url_text" -}}
 <div class="col-lg-4 mb-5 mb-lg-0 text-center">
 <div class="mb-4 h1">
-{{ with .Get "url" }}<a class="text-white" target="_blank" href="{{ . }}">{{ end }}
+{{ with .Get "url" }}<a class="text-white" target="_blank" href="{{ . }}">
+{{ end }}
   <i class="{{ if not (or (hasPrefix $icon "fas ") (hasPrefix $icon "fab ")) }}fas {{ end }}{{ $icon }}"></i>
-</a>
+{{ if .Get "url" }}</a>{{ end }}
 </div>
 <h4 class="h3">
-  <p>{{ with .Get "url" }}<a target="_blank" href="{{ .  }}">{{ end }}{{- .Get "title" | markdownify -}}</a></p>
+{{ if .Get "url" }}
+  <p><a target="_blank" href="{{ .Get "url" }}">{{ .Get "title" | markdownify }}</a></p>
+{{ else }}
+  <p>{{ .Get "title" | markdownify }}</p>
+{{ end }}
 </h4>
 <div class="mb-0">
 {{ .Inner }}
