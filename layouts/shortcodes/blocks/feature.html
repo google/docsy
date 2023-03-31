@@ -1,25 +1,17 @@
 {{ $icon := .Get "icon" | default "fa-lightbulb" -}}
 {{ $url_text := .Get "url_text" -}}
 {{ $title := .Get "title" | markdownify }}
-{{ $link := "" }}
 <div class="col-lg-4 mb-5 mb-lg-0 text-center">
 <div class="mb-4 h1">
-{{ with .Get "url" }}
-  {{ $link = "<a class=\"text-white\" target=\"_blank\" href=\"" . "\">" }}
+{{ with .Get "url" }}<a class="text-white" target="_blank" href="{{ . }}">
 {{ end }}
-
-{{ $iconClass := "fas " }}
-{{ if not (or (hasPrefix $icon "fas ") (hasPrefix $icon "fab ")) }}
-  {{ $iconClass = "fas " }}
-{{ end }}
-{{ $iconClass = print $iconClass $icon }}
-
-{{ $link }}<i class="{{ $iconClass }}"></i>{{ if $link }}</a>{{ end }}
+  <i class="{{ if not (or (hasPrefix $icon "fas ") (hasPrefix $icon "fab ")) }}fas {{ end }}{{ $icon }}"></i>
+{{ if .Get "url" }}</a>{{ end }} 
 </div>
 
 <h4 class="h3">
 {{ with .Get "url" }}
-  <a target="_blank" href="{{ .  }}"><p>{{ $title }}</p></a>
+  <a target="_blank" href="{{ . }}"><p>{{ $title }}</p></a>
 {{ else }}
   <p>{{ $title }}</p>
 {{ end }}
