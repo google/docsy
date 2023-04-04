@@ -26,15 +26,25 @@
 {{ template "_internal/schema.html" . -}}
 {{ template "_internal/twitter_cards.html" . -}}
 {{ partialCached "head-css.html" . "asdf" -}}
+
+{{ if .Site.Params.jquery -}}
+<script src="{{ .Site.Params.jquery }}"></script>
+{{ end -}}
 <script
   src="https://code.jquery.com/jquery-3.6.3.min.js"
   integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
   crossorigin="anonymous"></script>
+{{ end -}}
+
 {{ if .Site.Params.offlineSearch -}}
+{{ if .Site.Params.lunr -}}
+<script defer src="{{ .Site.Params.lunr }}"></script>
+{{ else -}}
 <script defer
   src="https://unpkg.com/lunr@2.3.9/lunr.min.js"
   integrity="sha384-203J0SNzyqHby3iU6hzvzltrWi/M41wOP5Gu+BiJMz5nwKykbkUx8Kp7iti0Lpli"
   crossorigin="anonymous"></script>
+{{ end -}}
 {{ end -}}
 
 {{ if .Site.Params.prism_syntax_highlighting -}}
