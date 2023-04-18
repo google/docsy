@@ -679,13 +679,27 @@ under the parent file's working directory are supported.
 For files outside the current working directory you can use an absolute path
 starting with `/`. The root directory is the `/content` folder.
 
-
-
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | file | | Path of external file|
 | code | false | Boolean value. If `true` the contents is treated as code|
 | lang | plain text | Programming language |
+
+### Error reporting
+
+If the shortcode can't find the specified file, the shortcode throws a compile error.
+
+In the following example, Hugo throws a compile error if it can't find `includes/deploy.yml`:
+
+```go-html-template
+{{</* readfile file="includes/deploy.yaml" code="true" lang="yaml" */>}}
+```
+
+Alternately, Hugo you can display a message on the rendered page instead of throwing a compile error. Add `draft="true"` as a parameter. For example:
+
+```go-html-template
+{{</* readfile file="includes/deploy.yaml" code="true" lang="yaml" draft="true" */>}}
+```
 
 ## Conditional text
 
