@@ -129,6 +129,7 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 | ---------------- |------------| ------------|
 | title | | The title to use.
 | url | | The URL to link to.
+| url_text | The value of the `ui_read_more` parameter in the language file. For English, that's "Read more" | The link text to use.
 | icon | | The icon class to use.
 
 
