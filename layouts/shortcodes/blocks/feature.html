@@ -9,5 +9,5 @@
 <div class="mb-0">
 {{ .Inner }}
 </div>
-{{ with .Get "url" }}<p><a href="{{ . }}">{{ with .Get "url_text" }}{{ . }}{{ else }}{{ T "ui_read_more" }} …{{ end }}</a></p>{{ end }}
+{{ with .Get "url" }}<p><a href="{{ . }}">{{ with $.Get "url_text" }}{{ . }}{{ else }}{{ T "ui_read_more" }} …{{ end }}</a></p>{{ end }}
 </div>
