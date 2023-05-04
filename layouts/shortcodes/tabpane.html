@@ -1,25 +1,25 @@
 {{/* Check parameter types */ -}}
 {{ with .Get "langEqualsHeader" -}}
-  {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
+  {{ if ne ( printf "%T" . )  "bool" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "langEqualsHeader" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "text" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "text" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "persistLang" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "persistLang" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "right" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "right" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
@@ -101,7 +101,7 @@
 </ul>
 
 {{ if $duplicate -}}
-  {{ warnf "Tabpane on page '%s': duplicate language '%s' detected, disabling persistance of language to avoid multiple tab display." .Page.RelPermalink $duplicateLang  -}}
+  {{ warnf "Shortcode %q: duplicate language %q detected, disabling persistance of language to avoid multiple tab display. Position: %s" $.Name $duplicateLang $.Position -}}
 {{ end -}}
 {{ $duplicate = false -}}
 {{ $langs = slice -}}
