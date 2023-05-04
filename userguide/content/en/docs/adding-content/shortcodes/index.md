@@ -120,11 +120,9 @@ For announcement of latest features etc.
 ### blocks/feature
 
 ```go-html-template
-
 {{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
-
 ```
 
 | Parameter        | Default    | Description  |
@@ -139,7 +137,6 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 The **blocks/link-down** shortcode creates a navigation link down to the next section. It's meant to be used in combination with the other blocks shortcodes.
 
 ```go-html-template
-
 <div class="mx-auto mt-5">
 	{{</* blocks/link-down color="info" */>}}
 </div>
@@ -179,7 +176,6 @@ The **pageinfo** shortcode creates a text box that you can use to add banner inf
 {{%/* pageinfo color="primary" */%}}
 This is placeholder content.
 {{%/* /pageinfo */%}}
-
 ```
 
 Renders to:
@@ -196,7 +192,6 @@ This is placeholder content
 ### imgproc
 
 The **imgproc** shortcode finds an image in the current [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a set of processing instructions.
-
 
 ```go-html-template
 {{</* imgproc spruce Fill "400x450" */>}}
@@ -387,9 +382,6 @@ puts "Hello World!"
 object HelloWorld extends App {
   println("Hello world!")
 }
-{{< /tab >}}
-{{< tab header="Reference" right=true text=true >}}
-{{< iframe src="https://www.mycplus.com/featured-articles/hello-world-programs-in-300-programming-languages" >}}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -606,7 +598,6 @@ Check system compatibility before proceeding.
     `sudo sh install.sh`
 
 1.  Test that your installation was successfully completed.
-
 ```
 
 You can import this section into another document:
@@ -615,7 +606,6 @@ You can import this section into another document:
 The following section explains how to install the database:
 
 {{%/* readfile "installation.md" */%}}
-
 ```
 
 This is rendered as if the instructions were in the parent document. Hugo
@@ -650,7 +640,6 @@ To create a new pipeline, follow the next steps:
     {{</* readfile file="includes/config.yaml" code="true" lang="yaml" */>}}
 
 1.  Apply the file to your cluster `kubectl apply config.yaml`
-
 ```
 
 This code automatically reads the content of `includes/config.yaml` and inserts it
@@ -660,11 +649,11 @@ into the document. The rendered text looks like this:
 
 To create a new pipeline, follow the next steps:
 
-1. Create a configuration file `config.yaml`:
+1.  Create a configuration file `config.yaml`:
 
     {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
 
-1. Apply the file to your cluster `kubectl apply config.yaml`
+1.  Apply the file to your cluster `kubectl apply config.yaml`
 
 ---
 
