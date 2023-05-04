@@ -30,6 +30,14 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - `blocks/section`: **default** and accepted values of the `type` argument
     have changed! For details see [blocks/section] ([#1472]).
 
+- **[Adaptation of shortcodes for diplay of cards (#1376)][1376]:
+  - shortcode `cardpane`: renamed CSS class `td-card-deck` to `td-card-group`.
+  - shortcode `card`, `card-code`: markup of inner content (html/markdown)
+    now depends on the syntax of the calling shortcode, not on extension
+    of page file any more [#906][906].
+  - shortcode `card-code` is now deprecated, use shortcode `card` with named
+    parameter `code=true` instead.
+
 **Other changes**:
 
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
