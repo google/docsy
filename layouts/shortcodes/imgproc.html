@@ -1,15 +1,17 @@
-{{ $original := .Page.Resources.GetMatch (printf "**%s*" (.Get 0)) }}
-{{ $command := .Get 1 }}
-{{ $options := .Get 2 }}
-{{ if eq $command "Fit"}}
-{{ .Scratch.Set "image" ($original.Fit $options) }}
-{{ else if eq $command "Resize"}}
-{{ .Scratch.Set "image" ($original.Resize $options) }}
-{{ else if eq $command "Fill"}}
-{{ .Scratch.Set "image" ($original.Fill $options) }}
-{{ else }}
-{{ errorf "Invalid image processing command: Must be one of Fit, Fill or Resize."}}
-{{ end }}
+{{ $original := .Page.Resources.GetMatch (printf "**%s*" (.Get 0)) -}}
+{{ $command := .Get 1 -}}
+{{ $options := .Get 2 -}}
+{{ if eq $command "Fit" -}}
+{{ .Scratch.Set "image" ($original.Fit $options) -}}
+{{ else if eq $command "Resize" -}}
+{{ .Scratch.Set "image" ($original.Resize $options) -}}
+{{ else if eq $command "Fill" -}}
+{{ .Scratch.Set "image" ($original.Fill $options) -}}
+{{ else if eq $command "Crop" -}}
+{{ .Scratch.Set "image" ($original.Crop $options) -}}
+{{ else -}}
+{{ errorf "Invalid image processing command %q: must be one of Fit, Fill, Crop or Resize." $command -}}
+{{ end -}}
 {{ $image := .Scratch.Get "image" }}
 <figure class="card rounded p-2 td-post-card mb-4 mt-4" style="max-width: {{ add $image.Width 10 }}px">
 	<img class="card-img-top" src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">

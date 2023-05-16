@@ -1,25 +1,25 @@
 {{/* Check parameter types */ -}}
 {{ with .Get "langEqualsHeader" -}}
-  {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'langEqualsHeader' must be either true or false" -}}
+  {{ if ne ( printf "%T" . )  "bool" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "langEqualsHeader" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "text" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'text' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "text" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "persistLang" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'persistLang' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "persistLang" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
 {{ with .Get "right" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "shortcode tabpane: parameter 'right' must be either true or false" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "right" (printf "%T" .) $.Position  -}}
   {{ end -}}
 {{ end -}}
 
@@ -45,6 +45,7 @@
   {{end -}}
 {{ end -}}
 
+{{/* Nav tabs */ -}}
 <ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $Ordinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
@@ -58,7 +59,7 @@
       {{ $lang = $element.header -}}
     {{ end -}}
     {{ with $element.language -}}
-      {{ $lang = $element.language -}}
+      {{ $lang = . -}}
     {{ end -}}
 
     {{/* Check for duplicate languages */ -}}
@@ -79,17 +80,17 @@
 
     {{/* Replace space and +, not valid for css selectors */ -}}
     {{ $lang := replaceRE "[\\s+]" "-" $lang -}}
-    <li class="nav-item{{ if $rightpush }} ml-auto{{ end -}}">
+    <li class="nav-item{{ if $rightpush }} ms-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
       {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
 
-      <a class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
-          id="{{ $tabid }}" data-toggle="tab" href="#{{ $entryid }}" role="tab"
+      <button class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
+          id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
           {{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
-          aria-controls="{{- $entryid -}}" aria-selected="{{- and ( not $activeSet ) ( not $disabled ) "true" "false" -}}">
+          aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
-      </a>
+      </button>
     </li>
 
     {{- if not $disabled -}}
@@ -100,13 +101,13 @@
 </ul>
 
 {{ if $duplicate -}}
-  {{ warnf "Tabpane on page '%s': duplicate language '%s' detected, disabling persistance of language to avoid multiple tab display." .Page.Title $duplicateLang  -}}
+  {{ warnf "Shortcode %q: duplicate language %q detected, disabling persistance of language to avoid multiple tab display. Position: %s" $.Name $duplicateLang $.Position -}}
 {{ end -}}
 {{ $duplicate = false -}}
 {{ $langs = slice -}}
 {{ $activeSet = false -}}
 
-{{/* Inner content */ -}}
+{{/* Tab panes */ -}}
 <div class="tab-content" id="tabs-{{ $Ordinal }}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
@@ -115,7 +116,7 @@
       {{ $lang = $element.header -}}
     {{ end -}}
     {{ with $element.language -}}
-      {{ $lang = $element.language -}}
+      {{ $lang = . -}}
     {{ end -}}
 
     {{ $disabled := false -}}
@@ -125,7 +126,7 @@
 
     {{ $hloptions := $hloptionsPane -}}
     {{ with $element.highlight -}}
-      {{ $hloptions = $element.highlight -}}
+      {{ $hloptions = . -}}
     {{ end -}}
 
     {{ $text := $textPane -}}
@@ -136,11 +137,11 @@
     {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
     {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize }}
     <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
-        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}">
+        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}" tabindex="{{ $Ordinal }}">
         {{ if $text -}}
           {{ index . "content" -}}
         {{ else -}}
-          {{ highlight (trim (index . "content") "\n") $lang $hloptions -}}
+          {{ highlight (trim (index . "content") "\r\n") $lang $hloptions -}}
         {{ end }}
     </div>
 
