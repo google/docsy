@@ -2,7 +2,7 @@
 {{ $height := .Get "height" | default "auto" -}}
 {{ with .Get "height" -}}
   {{ if not ( or ( eq . "auto" ) ( eq . "min" ) ( eq . "med" ) ( eq . "max" ) ( eq . "full" ) ) -}}
-    {{ errorf "shortcode 'lead': parameter height is '%s', must be one of 'auto', 'min', 'med', 'max' or 'full'." . -}}
+    {{ errorf "shortcode 'lead': parameter height is %q, must be one of 'auto', 'min', 'med', 'max' or 'full'." . -}}
   {{ end -}}
 {{ end -}}
 
