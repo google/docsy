@@ -34,9 +34,10 @@ services:
 languages:
   en:
     title: Docsy
-    description: Docsy does docs
     languageName: English
     weight: 1
+    params:
+      description: Docsy does docs
 
 markup:
   goldmark:
