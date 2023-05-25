@@ -1,8 +1,8 @@
 .td-blog {
   .td-rss-button {
     @extend .btn;
+    @extend .btn-info;
     @extend .btn-lg;
-    @extend .-bg-orange;
 
     float: right;
 
