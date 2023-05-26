@@ -4,7 +4,7 @@
 @mixin box-variant($parent, $color-name, $color-value) {
   $text-color: color-contrast($color-value);
   $link-color: mix($blue, $text-color, lightness($color-value));
-  $link-hover-color: rgba($link-color, 0.5) !default;
+  $link-hover-color: shade-color($text-color, $link-shade-percentage);
 
   #{$parent} {
     &--#{$color-name} {
@@ -31,7 +31,7 @@
 
   // Improve contrast for the links in paragraphs.
   @include link-variant(
-    "#{$parent}--#{$color-name} p > a",
+    "#{$parent}--#{$color-name} p > a, #{$parent}--#{$color-name} span > a",
     $link-color,
     $link-hover-color,
     false
