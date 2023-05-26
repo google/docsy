@@ -4,7 +4,11 @@
 @mixin box-variant($parent, $color-name, $color-value) {
   $text-color: color-contrast($color-value);
   $link-color: mix($blue, $text-color, lightness($color-value));
-  $link-hover-color: shade-color($text-color, $link-shade-percentage);
+  $link-hover-color: if(
+    color-contrast($link-color) == $color-contrast-light,
+    shade-color($link-color, $link-shade-percentage),
+    tint-color($link-color, $link-shade-percentage)
+  );
 
   #{$parent} {
     &--#{$color-name} {
