@@ -29,17 +29,19 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - Dropped support for pre-Hugo-0.54.x behavior of `{{% %}}`. ([#939])
   - `blocks/section`: **default** and accepted values of the `type` argument
     have changed! For details see [blocks/section] ([#1472]).
-
-- **[Adaptation of shortcodes for diplay of cards (#1376)][1376]:
-  - shortcode `cardpane`: renamed CSS class `td-card-deck` to `td-card-group`.
-  - shortcode `card`, `card-code`: markup of inner content (html/markdown)
-    now depends on the syntax of the calling shortcode, not on extension
-    of page file any more [#906][906].
-  - shortcode `card-code` is now deprecated, use shortcode `card` with named
-    parameter `code=true` instead.
+  - **Card shortcodes** ([#1376])]:
+    - Renamed CSS class `td-card-deck` to `td-card-group`.
+    - `card`, `card-code`: markup of inner content (HTML/markdown) now depends
+      on the syntax of the calling shortcode, not on extension of page file any
+      more [#906].
+    - `card-code` is deprecated; use `card` with named parameter `code=true`
+      instead.
 
 **Other changes**:
 
+- `$list-inline-padding` is increased in support of footer icons ([#1523]). If
+  this global adjustment is a problem for your project, let us know and we can
+  contextualize the adjustment to the footer.
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
   - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
@@ -47,8 +49,10 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [#1369]: https://github.com/google/docsy/issues/1369
+[#1376]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
 [#1472]: https://github.com/google/docsy/issues/1472
+[#1523]: https://github.com/google/docsy/pull/1523
 [blocks/section]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
