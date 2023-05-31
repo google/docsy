@@ -12,7 +12,11 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **New**:
 
-**Breaking changes**:
+- **Click to copy button for Chroma-highlighted code blocks**: If you already
+  implemented this functionality on your website, you can disable it. For
+  details see [Chroma highlighting docs][chroma-docsy].
+
+**Breaking changes:**
 
 - **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
   changes, see the [Bootstrap migration guide][bsv5mig]. Other Docsy-specific
@@ -36,6 +40,8 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
       more [#906].
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
+
+[chroma-docsy]: https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 
 **Other changes**:
 

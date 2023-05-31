@@ -144,6 +144,11 @@ guessSyntax: true
 {{< /tab >}}
 {{< /tabpane >}}
 
+If you are using a Docsy version later than `0.6.0`, the code blocks show a
+"Copy to clipboard" icon in the top right-hand corner. To disable this
+functionality set `disable_click2copy_chroma` to `true` in your configuration
+file:
+
 You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
