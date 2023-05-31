@@ -199,7 +199,7 @@ Norway Spruce *Picea abies* shoot with foliage buds.
 {{%/* /imgproc */%}}
 ```
 
-Use the syntax printed above if the inner content and/or the `byline` parameter of your shortcode is authored in markdown. In case of HTML content, use square brackets `<>` as innermost delimiters: `{{</* imgproc >}}<b>HTML</b> content{{< /imgproc */>}}`.
+Use the syntax above if the inner content and/or the `byline` parameter of your shortcode is authored in markdown. In case of HTML content, use `<>` as innermost delimiters: `{{</* imgproc >}}<b>HTML</b> content{{< /imgproc */>}}`.
 
 {{% imgproc spruce Fill "400x450" %}}
 Norway Spruce *Picea abies* shoot with foliage buds.
