@@ -18,7 +18,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes:**
 
-- **[Upgraded Bootstrap ([#470][])** to v5.2. For a list of Bootstrap breaking
+- **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap breaking
   changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
   changes are listed below:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
