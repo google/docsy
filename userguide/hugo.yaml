@@ -126,7 +126,6 @@ params:
   drawio:
     enable: true
 
-
 taxonomies:
   tag: tags
   category: categories
