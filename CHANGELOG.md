@@ -18,8 +18,6 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes:**
 
-- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
-
 - **[Upgraded Bootstrap ([#470][])** to v5.2. For a list of Bootstrap breaking
   changes, see the [Bootstrap migration guide][bsv5mig]. Other, Docsy-specific
   changes are listed below:
@@ -45,6 +43,8 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 [chroma-docsy]: https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 
+- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
+
 **Other changes**:
 
 - `$list-inline-padding` is increased in support of footer icons ([#1523]). If
@@ -54,9 +54,9 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
   - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
 [#470]: https://github.com/google/docsy/issues/470
-[#1185]: https://github.com/google/docsy/issues/1185
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
+[#1185]: https://github.com/google/docsy/issues/1185
 [#1369]: https://github.com/google/docsy/issues/1369
 [#1376]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
