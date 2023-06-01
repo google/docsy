@@ -12,11 +12,14 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **New**:
 
-**Breaking changes**:
+- **Click to copy button for Chroma-highlighted code blocks**: If you already
+  implemented this functionality on your website, you can disable it. For
+  details see [Chroma highlighting docs][chroma-docsy].
+
+**Breaking changes:**
 
 - **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
-  changes, see the [Bootstrap migration guide][bsv5mig]. Other Docsy-specific
-  changes are listed below:
+  changes, see the [Bootstrap migration page][bsv5mig]. Docsy-specific changes:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
     - Dropped `$primary-light`
     - Dropped `color-diff()`
@@ -37,6 +40,10 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
+[chroma-docsy]: https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+
+- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
+
 **Other changes**:
 
 - `$list-inline-padding` is increased in support of footer icons ([#1523]). If
@@ -48,6 +55,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 [#470]: https://github.com/google/docsy/issues/470
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
+[#1185]: https://github.com/google/docsy/issues/1185
 [#1369]: https://github.com/google/docsy/issues/1369
 [#1376]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
