@@ -43,11 +43,21 @@ $display1-size: null !default;
   @import url($web-font-path);
 }
 
-footer {
+.td-footer {
+  @extend .td-box--dark;
+
   min-height: 150px;
+  padding-top: map-get($spacers, 5);
 
   @include media-breakpoint-down(lg) {
     min-height: 200px;
+  }
+
+  &__copyright-etc {
+    @extend .small;
+  }
+  &__about {
+    font-size: initial;
   }
 }
 
