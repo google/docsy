@@ -33,10 +33,10 @@ services:
 
 languages:
   en:
-    title: Docsy
     languageName: English
     weight: 1
     params:
+      title: Docsy
       description: Docsy does docs
 
 markup:
