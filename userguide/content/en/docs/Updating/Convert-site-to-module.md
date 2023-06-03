@@ -169,6 +169,11 @@ module:
 You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
 Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
 
+{{% alert title="Tip" %}}
+In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
+If you are using hugo 0.110 or above, consider renaming your `config.toml` to `hugo.toml`!
+{{% /alert %}}
+
 {{% alert title="Attention" color="warning" %}}
 If you have a multi language installation, please make sure that the section `[languages]` inside your `config.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
 {{% /alert %}}
@@ -182,8 +187,8 @@ hugo mod graph
 hugo: collected modules in 1092 ms
 github.com/me/my-existing-site github.com/google/docsy@v{{% param "version" %}}
 github.com/me/my-existing-site github.com/google/docsy/dependencies@v{{% param "version" %}}
-github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/twbs/bootstrap@v4.6.1+incompatible
-github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@v0.0.0-20210804190922-7d3d774145ac
+github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
+github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@v0.0.0-20230327165841-0698449d50f2
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.

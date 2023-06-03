@@ -30,22 +30,18 @@ PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in s
 
 ## Site colors
 
-To easily customize your site's colors, add SCSS variable overrides to
-`assets/scss/_variables_project.scss`. A simple example changing the primary and
-secondary color to two shades of purple:
+To customize your site's colors, add SCSS variable overrides to
+`assets/scss/_variables_project.scss`. For example, you can set the primary and
+secondary site colors as follows:
 
 ```scss
 $primary: #390040;
 $secondary: #A23B72;
 ```
 
-The theme has features such as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
-
-```scss
-$enable-gradients: true;
-$enable-rounded: true;
-$enable-shadows: true;
-```
+The theme has features such as gradient backgrounds (`$enable-gradients`) and
+shadows (`$enable-shadows`) enabled by default. These can also be toggled in
+your project variables file by setting the variables to `false`.
 
 ## Fonts
 
@@ -95,11 +91,11 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper cont
 
 ## Code highlighting with Chroma
 
-With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `config.toml`/`config.yaml`/`config.json`:
+With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -108,7 +104,7 @@ With Hugo version 0.60 and higher, you can choose from a range of code block hig
       # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
       style = "tango"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 markup:
   goldmark:
     renderer:
@@ -116,7 +112,7 @@ markup:
   highlight:
     style: tango
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "markup": {
     "goldmark": {
@@ -132,38 +128,43 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 
-By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `config.toml`/`config.yaml`/`config.json`.
+By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 # Uncomment if you want your chosen highlight style used for code blocks without a specified language
 guessSyntax = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 guessSyntax: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "guessSyntax": true
 {{< /tab >}}
 {{< /tabpane >}}
+
+If you are using a Docsy version later than `0.6.0`, the code blocks show a
+"Copy to clipboard" icon in the top right-hand corner. To disable this
+functionality set `disable_click2copy_chroma` to `true` in your configuration
+file:
 
 You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
 
-Optionally, you can enable Prism syntax highlighting in your `config.toml`/`config.yaml`/`config.json`:
+Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 prism_syntax_highlighting: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "prism_syntax_highlighting": true
 {{< /tab >}}
 {{< /tabpane >}}
@@ -242,6 +243,55 @@ of the following:
 [project-styles]: /docs/adding-content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
+
+## Tables
+
+Docsy applies the following styles to all tables, through the class `.td-table`:
+
+- [Bootstrap table][] styles:
+  - `.table`
+  - `.table-striped`
+  - `.table-responsive`
+- `display: block`, which is necessary for tables to be responsive.
+
+This styling configuration gives you responsive tables using Markdown only,
+without the need to wrap the table in a `<div>`. It does, however, mean that all your tables have `display`
+set to `block`. If you don't want this, you can create your own custom styles for tables.
+
+{{% alert title="Note" %}}
+
+Our table styling goes against the [Bootstrap recommendation to _wrap_
+tables][wrap-tables] with `.table-responsive` &mdash; however, we think letting
+users create responsive tables with just Markdown table syntax is more
+convenient.
+
+[wrap-tables]: https://getbootstrap.com/docs/5.3/content/tables/#responsive-tables
+
+{{% /alert %}}
+
+To render a table without Docsy styling, apply the `.td-initial` class to the
+table. From the resulting `<table>` style base, it is easier to apply your own
+custom styles (rather than trying to undo Docsy table styling), as is
+illustrated in the following example:
+
+```markdown
+| Shape    | Number of sides |
+| -------- | --------------- |
+| Triangle | 3               |
+| Square   | 4               |
+{.td-initial .my-dark-table-style}
+```
+
+The example above uses [Markdown attribute][] syntax, and might render like this:
+
+| Shape    | Number of sides |
+| -------- | --------------- |
+| Triangle | 3               |
+| Square   | 4               |
+{.td-initial .table .table-dark}
+
+[Bootstrap table]: https://getbootstrap.com/docs/5.3/content/tables/
+[Markdown attribute]: https://discourse.gohugo.io/t/markdown-attributes/41783
 
 ## Customizing templates
 

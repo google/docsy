@@ -18,13 +18,15 @@ other = "Doorzoek deze site"
 [ui_in]
 other = "in"
 
+[ui_all]
+other = "alle"
+
 # Footer text
 [footer_all_rights_reserved]
 other = "Alle rechten voorbehouden"
 
 [footer_privacy_policy]
 other = "Privacy Policy"
-
 
 # Post (blog, articles etc.)
 [post_byline_by]
@@ -35,6 +37,8 @@ other = "Aangemaakt"
 other = "Laatst gewijzigd"
 [post_edit_this]
 other = "Bewerk deze pagina"
+[post_view_this]
+other = "Bekijk paginabron"
 [post_create_child_page]
 other = "Maak sub pagina"
 [post_create_issue]
@@ -56,22 +60,22 @@ other = "Klik hier om te printen"
 [print_show_regular]
 other = "Terug naar normale view van deze pagina"
 [print_entire_section]
-other = "Print complete sectie"
+other = "Print volledige sectie"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "Wordt lid van de {{ .Site.Title }} community"
 [community_introduce]
-other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} is een open source project welke iedereen kan gebruiken, verbeteren en van kan genieten. We zouden het fijn vinden als je betrokken wordt! Hier zijn een aantal manieren om erachter te komen wat er speelt en hoe je betrokken kunt worden."
 [community_learn]
-other = "Learn and Connect"
+other = "Leren en aansluiten"
 [community_using]
-other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+other = "Gebruik je {{ .Site.Title }} of wil je dit gebruiken? Meer informatie hier:"
 [community_develop]
-other = "Develop and Contribute"
+other = "Ontwikkel en draag bij"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "Als je meer betrokken wil zijn door bij te dragen aan {{ .Site.Title }}, meldt je hier aan:"
 [community_how_to]
-other = "You can find out how to contribute to {{ .Site.Title }} in our"
+other = "Je kunt meer informatie vinden over hoe bij te dragen aan {{ .Site.Title }} in onze"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "Richtlijnen voor bijdrage"

@@ -36,7 +36,26 @@ configuration file. For details, see [Configure Google Analytics][].
 By default, Docsy uses the [gtag.js][] analytics library for both GA4 (which
 _requires_ `gtag.js`) and Universal Analytics (UA) site tags. If you prefer using
 the older `analytics.js` library for your UA site tag, then set
-`params.disableGtagForUniversalAnalytics` to true in your project's config.
+`params.disableGtagForUniversalAnalytics` to `true` in your project's [configuration file].
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
+disableGtagForUniversalAnalytics = true
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  disableGtagForUniversalAnalytics: true
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "disableGtagForUniversalAnalytics": true
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% alert title="Warning" color="warning" %}}
   <!-- Remove this warning once the Hugo docs have been updated to include it. -->
@@ -75,7 +94,7 @@ of every documentation page, as shown in Figure 1.
 </figure>
 
 After clicking **Yes** the user should see a response like Figure 2. You can
-configure the response text in `config.toml`.
+[configure] the response text in the project's [configuration file] `hugo.toml`.
 
 <figure>
   <img src="/images/yes.png"
@@ -113,20 +132,20 @@ other words!
 
 ### Setup
 
-1.  Open `config.toml`/`config.yaml`/`config.json`.
+1.  Open `hugo.toml`/`hugo.yaml`/`hugo.json`.
 2.  Ensure that Google Analytics is enabled, as described [above](#setup).
 3.  Set the response text that users see after clicking **Yes** or **No**.
 
     {{< tabpane persistLang=false >}}
     {{< tab header="Configuration file:" disabled=true />}}
 
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui.feedback]
 enable = true
 yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   ui:
     feedback:
@@ -138,7 +157,7 @@ params:
         Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">
         tell us how we can improve</a>.
 
-{{< /tab >}}{{< tab header="config.json" lang="json" >}}
+{{< /tab >}}{{< tab header="hugo.json" lang="json" >}}
 
 {
   "params": {
@@ -155,7 +174,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-4.  Save and close `config.toml`/`config.yaml`/`config.json`.
+4.  Save and close `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 ### Access the feedback data
 
@@ -222,21 +241,21 @@ hide_feedback: true
 ### Disable feedback on all pages
 
 Set `params.ui.feedback.enable` to `false` in
-`config.toml`/`config.yaml`/`config.json`:
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui.feedback]
 enable = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   ui:
     feedback:
       enable: false
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "ui": {
@@ -300,3 +319,5 @@ partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizi
 [layouts/partials/page-description.html]: https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
 [summary]: https://gohugo.io/content-management/summaries/
+[configure]: #setup-1
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file

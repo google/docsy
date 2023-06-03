@@ -16,13 +16,13 @@ If you don't want a logo to appear in the navbar, then set `navbar_logo` to
 
 {{< tabpane persistLang=false >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 navbar_logo = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 navbar_logo: false
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "navbar_logo": false
 }
@@ -33,6 +33,12 @@ For information about styling your logo, see [Styling your project logo and
 name][].
 
 [Styling your project logo and name]: /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
+
+## Use icons
+
+Docsy includes the free FontAwesome icons by default, including logos for sites like GitHub and Stack Overflow. You can view all available icons in the [FontAwesome documentation](https://fontawesome.com/icons/), including the FontAwesome version when the icon was added and whether it is available for free tier users. Check Docsy's [`package.json`](https://github.com/google/docsy/blob/main/package.json) and release notes for Docsy's currently included version of FontAwesome.
+
+You can add FontAwesome icons to your [top-level menu](/docs/adding-content/navigation/#adding-icons-to-the-top-level-menu), [section menu](/docs/adding-content/navigation/#add-icons-to-the-section-menu), or anywhere in your text.
 
 ## Add your favicons
 
@@ -51,7 +57,7 @@ Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover)
 You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`:
 
 ```html
-{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" color="orange" */>}}
+{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" */>}}
 ...
 {{</* /blocks/cover */>}}
 ```

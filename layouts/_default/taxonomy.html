@@ -13,7 +13,7 @@
           {{ if not .Site.Params.ui.taxonomy_breadcrumb_disable -}}
             {{/* Use breadcrumb partial, but remove attributes that are invalid or inappropriate in this page-summary context. */ -}}
             {{ partial "breadcrumb.html" .
-              | replaceRE ` aria-\w+=\".*?\"|(breadcrumb-item) active|(btn-link) disabled` "$1" | safeHTML
+              | replaceRE ` aria-\w+=\".*?\"|(breadcrumb-item) active` "$1" | safeHTML
             -}}
           {{ end -}}
           <p>{{ .Description | markdownify }}</p>
