@@ -1,5 +1,5 @@
 baseURL: /
-title: Docsy Example
+title: Docsy
 enableRobotsTXT: true
 theme: [docsy]
 enableGitInfo: true
