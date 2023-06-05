@@ -18,7 +18,7 @@
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },
-  "cspell": "cSpell:ignore docsy userguide fortawesome fontawesome ",
+  "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "prettier": {
     "proseWrap": "always"
   },
