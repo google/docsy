@@ -352,3 +352,5 @@ The output of the page will look something like:
 ```html
 <body class="td-page" data-pagefind-filter="section:4.0">
 ```
+
+To apply the custom attribute to every page of a section or a directory, use the [Front Matter Cascade](https://gohugo.io/content-management/front-matter/#front-matter-cascade) feature of Hugo in your configuration file, or in the frontmatter of the highest-level page you want to modify.
