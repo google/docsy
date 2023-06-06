@@ -18,6 +18,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes:**
 
+- [**Hugo** release][hugo-releases] **0.110.0** or later is required.
 - **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
   changes, see the [Bootstrap migration page][bsv5mig]. Docsy-specific changes:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
@@ -64,6 +65,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 [blocks/section]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
+[hugo-releases]: https://github.com/gohugoio/hugo/releases
 
 ## [0.6.0][]
 
