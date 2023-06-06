@@ -531,7 +531,7 @@ which is used by all the other page templates:
 
 Sometimes it's useful to assign custom classes to a page, or to an entire section, for example, to apply custom styling. Docsy automatically adds the value of the `body_class` parameter of the frontmatter to the `class` attribute of the `body` element of the page.
 
-By default, Docsy adds the `td-section` class, like this:
+By default, Docsy adds the `td-{{ .Kind }}` class, where the kind is the kind of the page, like section, blog, and so on. For example:
 
 ```html
 <body class="td-section">
