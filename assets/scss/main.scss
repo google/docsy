@@ -59,6 +59,23 @@ $display1-size: null !default;
   &__about {
     font-size: initial;
   }
+
+  &__links {
+    &-list {
+      @extend .list-inline;
+      margin-bottom: 0;
+    }
+
+    &-item {
+      @extend .list-inline-item;
+      @extend .h3;
+
+      a {
+        color: inherit !important;
+      }
+    }
+  }
+
 }
 
 // Adjust anchors vs the fixed menu.
