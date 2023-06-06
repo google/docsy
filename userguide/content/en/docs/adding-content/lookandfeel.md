@@ -527,4 +527,22 @@ which is used by all the other page templates:
 </html>
 ```
 
+## Adding custom class to the body element
+
+Sometimes it's useful to assign custom classes to a page, or to an entire section, for example, to apply custom styling. Docsy automatically adds the value of the `body_class` parameter of the frontmatter to the `class` attribute of the `body` element of the page.
+
+By default, Docsy adds the `td-section` class, like this:
+
+```html
+<body class="td-section">
+```
+
+To add the classes `myclass` and `anotherclass`, add the following line to the frontmatter of the page:
+
+```toml
+body_class: "myclass anotherclass"
+```
+
+To apply the custom class to every page of a section or a directory, use the [Front Matter Cascade](https://gohugo.io/content-management/front-matter/#front-matter-cascade) feature of Hugo in your configuration file, or in the frontmatter of the highest-level page you want to modify.
+
 [bs-docs]: https://getbootstrap.com/docs/
