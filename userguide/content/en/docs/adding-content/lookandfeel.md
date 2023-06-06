@@ -358,7 +358,7 @@ body_class = "myclass anotherclass"
 body_class : "myclass anotherclass"
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"body_class" = "myclass anotherclass"
+"body_class" : "myclass anotherclass"
 {{< /tab >}}
 {{< /tabpane >}}
 
