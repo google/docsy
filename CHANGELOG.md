@@ -41,7 +41,8 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
-[chroma-docsy]: https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+[chroma-docsy]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 
 - **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
 
@@ -161,12 +162,16 @@ submodules. This has an impact on your project-build setup. To migrate your
 site, follow these steps (execute commands from your project's root directory):
 
 1.  Delete obsolete Docsy Git submodules:
-    ```console
-    $ rm -Rf themes/docsy/assets/vendor
+    ```sh
+    git rm themes/docsy/assets/vendor/Font-Awesome
+    git rm themes/docsy/assets/vendor/bootstrap
     ```
+    These commands remove the submodules from Git's tracking, from the
+    `.gitmodules` file, and deletes the submodule files under
+    `themes/docsy/assets/vendor`.
 2.  Get Docsy dependencies:
-    ```console
-    $ (cd themes/docsy && npm install)
+    ```sh
+    (cd themes/docsy && npm install)
     ```
 3.  Update your build scripts to fetch Docsy dependencies automatically. For
     example, if your site build uses NPM scripts, consider getting Docsy
