@@ -1,4 +1,4 @@
-{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "10.0.2" -}}
+{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "10.2.3" -}}
 {{ with .Site.Params.mermaid.version -}}
 {{ $version = . -}}
 {{ end -}}
