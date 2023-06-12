@@ -12,7 +12,6 @@
     .click-to-copy {
       display: block;
       text-align: right;
-      height: 1ex;
     }
 
     pre {
@@ -21,15 +20,15 @@
 
       // Default click-to-copy button
 
-      button {
+      button.td-click-to-copy {
         position: absolute;
         color: $gray-400;
         border-radius: 3px;
         border-width: 0;
         background-color: inherit;
         box-shadow: 1px 1px $gray-400;
-        right: 8px;
-        top: 6px;
+        right: 4px;
+        top: 2px;
 
         &:hover {
           color: $dark;
@@ -40,22 +39,6 @@
           background-color: $gray-400;
           transform: translateY(2px);
         }
-      }
-
-      .c2c-tooltip {
-        background: $dark;
-        color: $white;
-        padding: 2px 4px;
-        border-radius: 3px;
-        display: block;
-        visibility: hidden;
-        opacity: 0;
-        transition: visibility 0s, opacity 0.5s linear;
-      }
-
-      .c2c-tooltip[show-tooltip] {
-        visibility: visible;
-        opacity: 1;
       }
     }
   }
@@ -97,5 +80,6 @@
   pre.mermaid {
     background-color: inherit;
     font-size: 0;
+    padding: 0;
   }
 }

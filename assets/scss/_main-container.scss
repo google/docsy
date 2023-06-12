@@ -2,7 +2,7 @@
 .td-outer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 // The outer page container for the default base template.

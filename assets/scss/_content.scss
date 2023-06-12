@@ -41,11 +41,7 @@
   }
 
   table {
-    @extend .table-striped;
-
-    @extend .table-responsive;
-
-    @extend .table;
+    @extend .td-table;
   }
 
   blockquote {
@@ -64,18 +60,19 @@
     font-weight: $font-weight-bold;
   }
 
-  > pre,
+  .footnotes,
+  > .alert,
   > .highlight,
   > .lead,
-  > h1,
-  > h2,
-  > ul,
-  > ol,
-  > p,
+  > .td-table,
   > blockquote,
   > dl dd,
-  .footnotes,
-  > .alert {
+  > h1,
+  > h2,
+  > ol,
+  > p,
+  > pre,
+  > ul {
     @extend .td-max-width-on-larger-screens;
   }
 
