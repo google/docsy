@@ -8,15 +8,23 @@ Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
 For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
-## [0.8.0][releases] - next planned release (unpublished yet)
+## [0.8.0][releases] - next major release (unpublished yet)
 
 **New**:
-
-
 **Breaking changes**:
+**Other changes**:
 
+## [0.7.1][releases] - next planned release (unpublished yet)
+
+**Breaking changes**: none yet.
 
 **Other changes**:
+
+- Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
+  - `td-blog-posts-list__item` and `td-blog-posts-list__body` replace
+    the `.media` and `.media-body` classes, dropped by BS 5 [#1560].
+
+[#1560]: https://github.com/google/docsy/issues/1560
 
 ## [0.7.0][]
 
