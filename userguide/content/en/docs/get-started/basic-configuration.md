@@ -17,7 +17,7 @@ The copied `config.toml` file defines content in English, Norwegian and Farsi. Y
 
 If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `config.toml`:
 
-```
+```toml
 [languages.no]
 title = "Docsy"
 description = "Docsy er operativsystem for skyen"
