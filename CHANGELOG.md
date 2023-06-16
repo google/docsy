@@ -6,12 +6,14 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-For a list of issues targeted for the next release, see the [23Q1][] milestone.
+For a list of issues targeted for the next release, see the [23Q2][] milestone.
 
 ## [0.8.0][releases] - next major release (unpublished yet)
 
 **New**:
+
 **Breaking changes**:
+
 **Other changes**:
 
 ## [0.7.1][releases] - next planned release (unpublished yet)
@@ -20,11 +22,15 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Other changes**:
 
-- Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
-  - `td-blog-posts-list__item` and `td-blog-posts-list__body` replace
-    the `.media` and `.media-body` classes, dropped by BS 5 [#1560].
+Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
+
+- `td-blog-posts-list__item` and `td-blog-posts-list__body` replace the `.media`
+  and `.media-body` classes, dropped by BS 5 [#1560].
+- Docsy test for Bootstrap version has been made more robust, and can be
+  disabled. For details, see [#1578].
 
 [#1560]: https://github.com/google/docsy/issues/1560
+[#1578]: https://github.com/google/docsy/issues/1578
 
 ## [0.7.0][]
 
@@ -268,7 +274,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #
-[23q1]: https://github.com/google/docsy/milestone/6
+[23q2]: https://github.com/google/docsy/milestone/7
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
