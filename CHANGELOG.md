@@ -27,10 +27,10 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 - `td-blog-posts-list__item` and `td-blog-posts-list__body` replace the `.media`
   and `.media-body` classes, dropped by BS 5 [#1560].
 - Docsy test for Bootstrap version has been made more robust, and can be
-  disabled. For details, see [#1578].
+  disabled. For details, see [#1579].
 
 [#1560]: https://github.com/google/docsy/issues/1560
-[#1578]: https://github.com/google/docsy/issues/1578
+[#1579]: https://github.com/google/docsy/issues/1579
 
 ## [0.7.0][]
 
