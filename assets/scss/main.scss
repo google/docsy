@@ -7,11 +7,7 @@
 @import "support/mixins";
 
 @import "../vendor/bootstrap/scss/bootstrap";
-
-$display1-size: null !default;
-@if $display1-size {
-  @error "Docsy requires Bootstrap v5, but v4 was detected. Did you forget to update Docsy dependencies?";
-}
+@import "support/bootstrap_vers_test";
 
 @import "../vendor/Font-Awesome/scss/fontawesome.scss";
 @import "../vendor/Font-Awesome/scss/solid.scss";
