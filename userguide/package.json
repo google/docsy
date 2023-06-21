@@ -18,10 +18,12 @@
     "postbuild:preview": "npm run _check:links",
     "postbuild:production": "npm run _check:links",
     "prepare": "cd .. && npm install",
-    "serve": "npm run _serve"
+    "serve": "npm run _serve",
+    "test": "npm run check:links",
+    "update:pkg:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest"
   },
   "devDependencies": {
-    "autoprefixer": "^9.5.0",
-    "postcss-cli": "^5.0.1"
+    "autoprefixer": "^10.4.14",
+    "postcss-cli": "^10.1.0"
   }
 }

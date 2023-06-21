@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.7.0-dev",
+  "version": "0.7.1-dev.0-unreleased",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -15,6 +15,7 @@
     "docs-install": "npm run _cd:docs -- npm install",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "serve": "npm run cd:docs serve",
+    "test": "npm run cd:docs test",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },
@@ -27,7 +28,7 @@
     "bootstrap": "5.2.3"
   },
   "devDependencies": {
-    "hugo-extended": "0.112.3"
+    "hugo-extended": "0.113.0"
   },
   "engines": {
     "node": ">=18"

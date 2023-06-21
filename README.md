@@ -1,5 +1,4 @@
 # Docsy
-## 🚧 WARNING: `main` is unstable! For details, see [#1359](https://github.com/google/docsy/discussions/1359) 🚧
 
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.

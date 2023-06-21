@@ -43,7 +43,7 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 		Learn More <i class="fa-solid fa-circle-right ms-2"></i>
 	</a>
 	<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://example.org">
-		Download <i class="fa-brands fa-github ms-2 "></i>
+		Download <i class="fa-brands fa-github ms-2"></i>
 	</a>
 	<p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p>
 	<div class="mx-auto mt-5">
@@ -64,7 +64,7 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 | byline | Byline text on featured image. |
 
 
-To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/master/content/en), in the same directory.
+To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en), in the same directory.
 
 {{% alert title="Tip" %}}
 If you also include the word **featured** in the image name, e.g. `my-featured-background.jpg`, it will also be used as the Twitter Card image when shared.

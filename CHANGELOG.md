@@ -6,9 +6,33 @@
 
 Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
 
-For a list of issues targeted for the next release, see the [23Q1][] milestone.
+For a list of issues targeted for the next release, see the [23Q2][] milestone.
 
-## 0.7.0 - next planned release (unpublished yet)
+## [0.8.0][releases] - next major release (unpublished yet)
+
+**New**:
+
+**Breaking changes**:
+
+**Other changes**:
+
+## [0.7.1][releases] - next planned release (unpublished yet)
+
+**Breaking changes**: none yet.
+
+**Other changes**:
+
+Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
+
+- `td-blog-posts-list__item` and `td-blog-posts-list__body` replace the `.media`
+  and `.media-body` classes, dropped by BS 5 [#1560].
+- Docsy test for Bootstrap version has been made more robust, and can be
+  disabled. For details, see [#1579].
+
+[#1560]: https://github.com/google/docsy/issues/1560
+[#1579]: https://github.com/google/docsy/issues/1579
+
+## [0.7.0][]
 
 **New**:
 
@@ -18,6 +42,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 
 **Breaking changes:**
 
+- [**Hugo** release][hugo-releases] **0.110.0** or later is required.
 - **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
   changes, see the [Bootstrap migration page][bsv5mig]. Docsy-specific changes:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
@@ -40,7 +65,8 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
-[chroma-docsy]: https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+[chroma-docsy]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 
 - **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
 
@@ -64,6 +90,7 @@ For a list of issues targeted for the next release, see the [23Q1][] milestone.
 [blocks/section]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
+[hugo-releases]: https://github.com/gohugoio/hugo/releases
 
 ## [0.6.0][]
 
@@ -159,12 +186,16 @@ submodules. This has an impact on your project-build setup. To migrate your
 site, follow these steps (execute commands from your project's root directory):
 
 1.  Delete obsolete Docsy Git submodules:
-    ```console
-    $ rm -Rf themes/docsy/assets/vendor
+    ```sh
+    git rm themes/docsy/assets/vendor/Font-Awesome
+    git rm themes/docsy/assets/vendor/bootstrap
     ```
+    These commands remove the submodules from Git's tracking, from the
+    `.gitmodules` file, and deletes the submodule files under
+    `themes/docsy/assets/vendor`.
 2.  Get Docsy dependencies:
-    ```console
-    $ (cd themes/docsy && npm install)
+    ```sh
+    (cd themes/docsy && npm install)
     ```
 3.  Update your build scripts to fetch Docsy dependencies automatically. For
     example, if your site build uses NPM scripts, consider getting Docsy
@@ -235,6 +266,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC
+[0.7.0]: https://github.com/google/docsy/releases/v0.7.0
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [0.5.0]: https://github.com/google/docsy/releases/v0.5.0
@@ -242,7 +274,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #
-[23q1]: https://github.com/google/docsy/milestone/6
+[23q2]: https://github.com/google/docsy/milestone/7
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
