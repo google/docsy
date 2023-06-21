@@ -6,8 +6,6 @@ params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
-  drawio:
-    enable: true
 
 outputFormats:
   PRINT:
@@ -20,7 +18,7 @@ outputFormats:
 module:
   hugoVersion:
     extended: true
-    min: 0.73.0
+    min: 0.110.0
   mounts:
     - source: assets
       target: assets

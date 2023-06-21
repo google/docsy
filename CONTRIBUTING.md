@@ -29,6 +29,10 @@ information on using pull requests.
 This project follows
 [Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
 
+## Student contributions
+
+Docsy welcomes contributions from students. However, we cannot guarantee that PRs will be merged within any specific timeframe. We ask that instructors *not* create assignments requiring students to have PRs merged into the project. We will not merge PRs solely to satisfy any class assignments.
+
 ## How to contribute
 
 See the [contribution guidelines][] in the Docsy user guide.

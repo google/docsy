@@ -57,7 +57,7 @@ Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover)
 You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`:
 
 ```html
-{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" color="orange" */>}}
+{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" */>}}
 ...
 {{</* /blocks/cover */>}}
 ```

@@ -1,5 +1,6 @@
 baseURL: /
-title: Docsy Example
+title: &title Docsy
+description: &desc Docsy does docs
 enableRobotsTXT: true
 theme: [docsy]
 enableGitInfo: true
@@ -33,13 +34,16 @@ services:
 
 languages:
   en:
-    title: Docsy
-    description: Docsy does docs
     languageName: English
-    weight: 1
+    params:
+      title: *title
+      description: *desc
 
 markup:
   goldmark:
+    parser:
+      attribute:
+        block: true
     renderer:
       unsafe: true
   highlight:
@@ -50,7 +54,7 @@ params:
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
-  version: 0.6.0
+  version: 0.7.0
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
@@ -119,6 +123,8 @@ params:
     theme: default
     flowchart:
       diagramPadding: 20
+  drawio:
+    enable: true
 
 taxonomies:
   tag: tags
