@@ -1,0 +1,8 @@
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/{{ .Site.Params.hubspotId }}.js"></script>
+<!-- End of HubSpot Embed Code -->
+
+<!-- Disable collectedforms.js on pages without form -->
+{{ if not .Params.hubspotForm }}
+    <span id="CollectedForms-{{ .Site.Params.hubspotId }}"></span>
+{{ end }}
