@@ -1,19 +1,15 @@
-{{ with .Site.Params.markmap }}
-{{ if .enable }}
-
-
-(function($) {
-    var needMarkmap = false;
+{{ if lt hugo.Version "0.93.0" -}}
     $('.language-markmap').parent().replaceWith(function() {
-        needMarkmap = true;
-        return $('<div class="markmap">').text($(this).text());
+        return $('<pre class="markmap">').text($(this).text());
     });
+{{ end -}}
 
-    const { markmap } = window;
-    if(needMarkmap) {
-        markmap.autoLoader.renderAll();
-    }
-
-})(jQuery);
-{{ end }}
-{{ end }}
+window.markmap = {
+  autoLoader: {
+      manual: false,
+      onReady() {
+        const { autoLoader, builtInPlugins } = window.markmap;
+        autoLoader.transformPlugins = builtInPlugins.filter(plugin => plugin.name !== 'prism');
+      },
+  },
+};

@@ -1,0 +1,19 @@
+{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "0.14.4" -}}
+{{ with .Site.Params.markmap.version -}}
+{{ $version = . -}}
+{{ end -}}
+
+{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/markmap-autoloader@%s/dist/index.min.js" $version -}}
+{{ if ge hugo.Version "0.90.0" -}}
+{{ $markmapjs := resources.GetRemote $cdnurl -}}
+{{ if eq $markmapjs nil -}}
+{{ errorf "Invalid Markmap version %s, could not retrieve this version from CDN" $version -}}
+{{ else -}}
+{{ $markmapsecure := $markmapjs | resources.Fingerprint "sha512" -}}
+<script type="text/javascript" src="{{ $markmapsecure.Permalink }}" integrity="{{ $markmapsecure.Data.Integrity -}}">
+</script>
+{{ end }}
+{{ else -}}
+<script src="{{- $cdnurl -}}" integrity="sha512-j5qMN3ohGV3fA+DM3B1O6BDoZGdpXggU37x++RsTTWkwcEcRxdI5wvND0cPGj96AQTON5pQEF0HRJjjS4+EJlA==" crossorigin="anonymous"></script>
+{{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version -}}
+{{ end -}}

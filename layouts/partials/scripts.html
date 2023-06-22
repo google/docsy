@@ -1,38 +1,19 @@
 {{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
 {{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
 {{ $needmermaid := .Site.Params.mermaid.enable -}}
+{{ $needmarkmap := or .Site.Params.markmap.enable .Params.markmap -}}
 {{ if ge hugo.Version "0.93.0" -}}
     {{ with .Site.Params.mermaid }}
         {{ $needmermaid = true }}
     {{ end }}
-  {{ $needKaTeX = or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
-  {{ $needmhchem = or $needmhchem (.Page.Store.Get "hasmhchem") -}}
-  {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
+    {{ $needKaTeX  := or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
+    {{ $needmhchem := or $needmhchem (.Page.Store.Get "hasmhchem") -}}
+    {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
+    {{ $needmarkmap = or $needmarkmap (.Page.Store.Get "hasmarkmap") -}}
 {{ else -}}
-  {{ if or $needKaTeX $needmhchem $needmermaid -}}
+  {{ if or $needKaTeX $needmhchem $needmermaid $needmarkmap -}}
     {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version  }}
   {{ end -}}
-{{ end -}}
-
-{{ if .Site.Params.markmap.enable -}}
-<style>
-.markmap > svg {
-  width: 100%;
-  height: 300px;
-}
-</style>
-<script>
-window.markmap = {
-  autoLoader: {
-      manual: true,
-      onReady() {
-        const { autoLoader, builtInPlugins } = window.markmap;
-        autoLoader.transformPlugins = builtInPlugins.filter(plugin => plugin.name !== 'prism');
-      },
-  },
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
 {{ end -}}
 
 {{ if .Site.Params.plantuml.enable -}}
@@ -66,19 +47,24 @@ window.markmap = {
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsAnchor := resources.Get "js/anchor.js" -}}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
-{{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . -}}
-{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
 {{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . -}}
 {{ $jsDrawio := resources.Get "js/drawio.js" | resources.ExecuteAsTemplate "js/drawio.js" . -}}
 {{ if .Site.Params.offlineSearch -}}
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
 
-{{ $jsArray := slice $jsBs $jsBase $jsAnchor $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
+{{ $jsArray := slice $jsBs $jsBase $jsAnchor $jsSearch $jsPlantuml $jsDrawio -}}
 
 {{ if $needmermaid -}}
+{{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . -}}
 {{ $jsArray = $jsArray | append $jsMermaid -}}
 <script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js" integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin="anonymous"></script>
+{{ end -}}
+
+{{ if $needmarkmap -}}
+{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
+{{ $jsArray = $jsArray | append $jsMarkmap -}}
+{{ partial "scripts/markmap.html" . -}}
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}

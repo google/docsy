@@ -117,14 +117,16 @@ params:
     svg: false
   print:
     disable_toc: false
-  markmap:
-    enable: true
+
   mermaid:
     theme: default
     flowchart:
       diagramPadding: 20
   drawio:
     enable: true
+
+  markmap:
+    version: 0.14.4
 
 taxonomies:
   tag: tags

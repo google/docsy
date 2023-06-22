@@ -108,7 +108,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
   `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
-  `chem` blocks via KateX and mhchem. Support for formula rendering activation
+  `chem` blocks via KaTeX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
 
 ## [0.5.1][]
