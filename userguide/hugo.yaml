@@ -50,7 +50,9 @@ markup:
     style: tango
 
 params:
-  copyright: The Docsy Authors
+  copyright:
+    title: The Docsy Authors
+    year: 2024
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
