@@ -119,10 +119,6 @@ params:
     disable_toc: false
   markmap:
     enable: true
-  mermaid:
-    theme: default
-    flowchart:
-      diagramPadding: 20
   drawio:
     enable: true
 
