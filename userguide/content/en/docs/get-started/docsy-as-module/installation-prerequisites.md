@@ -10,26 +10,49 @@ This page describes the prerequisites for building a site that uses Docsy as a H
 
 ## Install Hugo
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (version 0.110.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
+To do local builds and previews of sites (like this one) that use Docsy, you need an [**extended** version](https://github.com/gohugoio/hugo/releases) of [Hugo](https://gohugo.io/), version `v0.110.0` or higher. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
 
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
-### On Linux
-
-Be careful using `sudo apt-get install hugo`, as it [doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/getting-started/installing/#debian-and-ubuntu), and may not be up-to-date with the most recent Hugo version.
-
-If you've already installed Hugo, check your version:
+As of docsy version `v0.7.0`, hugo version `v0.110.0` or higher is required. If you've already installed Hugo, check your version:
 
 ```bash
 hugo version
 ```
 
-If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll need to update to the latest version.
+
+### On Linux
+
+ You can see a complete list of Linux installation options in the official [hugo documentation](https://gohugo.io/installation/linux/). Below the two most popular installation options are described:
+ 
+#### Using hugo debian package
+
+The following shows you how to install Hugo from the release page using prebuilt debian packages:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
-3.  Download the latest extended version (`hugo_extended_0.1XX_Linux-64bit.tar.gz`).
+3.  Download the debian package of the latest extended version (`hugo_extended_0.1XX.X_linux-architecture.deb`) to a directory of your choice.
+
+    ```bash
+    wget https://github.com/gohugoio/hugo/releases/download/v0.1XX.X/hugo_extended_0.1XX.X_linux-architecture.deb
+    ```
+
+4.  Install Hugo using `dpkg` tool from debian package management system:
+
+    ```bash
+    sudo dpkg --install hugo_extended_0.1XX.X_linux-architecture.deb
+    ```
+
+#### Using prebuilt binaries
+
+The following shows you how to install Hugo from the release page using prebuilt binaries:
+
+1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
+2.  In the most recent release, scroll down until you find a list of
+    **Extended** versions.
+3.  Download the prebuilt binaries of the latest extended version (`hugo_extended_0.1XX_Linux-64bit.tar.gz`).
 4.  Create a new directory:
 
     ```bash
@@ -49,6 +72,10 @@ If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll n
     ```bash
     sudo install hugo /usr/bin
     ```
+
+{{% alert title="Warning" color="warning" %}}
+Be careful using `sudo apt-get install hugo`, as it doesn't get you the `extended` version for all Debian/Ubuntu versions, and may not be up-to-date with the most recent Hugo version.
+{{% /alert %}}
 
 ### On macOS
 
