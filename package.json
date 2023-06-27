@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.7.1",
+  "version": "0.7.2-dev.0-unreleased",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
