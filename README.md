@@ -1,5 +1,7 @@
 # Docsy
 
+## 🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use official Docsy [releases].
+
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.
 
@@ -12,21 +14,21 @@ The following are basic prerequisites for using Docsy in your site:
 
 - Install a recent release of the Hugo "extended" version. If you install from
   the [Hugo release page](https://github.com/gohugoio/hugo/releases), make sure
-  you download the `_extended` version which supports SCSS.
+  you download the `extended` version, which supports SCSS.
 
 - Install `PostCSS` so that the site build can create the final CSS assets. You
   can install it locally by running the following commands from the root
   directory of your project:
 
-  ```console
-  $ npm install --save-dev autoprefixer
-  $ npm install --save-dev postcss-cli
+  ```sh
+  npm install --save-dev autoprefixer
+  npm install --save-dev postcss-cli
   ```
   
   Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md),
   you must also separately install `postcss`:
 
-  ```bash
+  ```sh
   npm install -D postcss
   ```
   
@@ -70,11 +72,11 @@ Alternatively you can use Hugo to generate and serve a local copy of the guide
 (also useful for testing local theme changes), making sure you have installed
 all the prerequisites listed above:
 
-```console
-$ git clone --depth 1 https://github.com/google/docsy.git
-$ cd docsy/userguide/
-$ npm install
-$ npm run serve
+```sh
+git clone --depth 1 https://github.com/google/docsy.git
+cd docsy/userguide/
+npm install
+npm run serve
 ```
 
 ## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
@@ -94,3 +96,4 @@ details
 
 [Deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [Netlify]: https://netlify.com
+[releases]: https://github.com/google/docsy/releases
