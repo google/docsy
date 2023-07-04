@@ -105,7 +105,7 @@ window.markmap = {
 
 {{ if .Site.Params.jstoc.enable }}
 <!-- Initialize tocbot -->
-<script src="/js/tocbot.min.js"></script>
+<script src="{{ "/js/tocbot.min.js"" | relURL }}></script>
 <script type="text/javascript">
     tocbot.init({
         // Where to render the table of contents.
