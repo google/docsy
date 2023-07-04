@@ -24,14 +24,14 @@ The following are basic prerequisites for using Docsy in your site:
   npm install --save-dev autoprefixer
   npm install --save-dev postcss-cli
   ```
-  
+
   Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md),
   you must also separately install `postcss`:
 
   ```sh
   npm install -D postcss
   ```
-  
+
 Any additional prerequisites depend on the [installation option](https://www.docsy.dev/docs/get-started/#installation-options)
 you choose. We recommend using Docsy as a Hugo module, which requires that
 you have the `go` language installed in addition to Hugo and PostCSS.
