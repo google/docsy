@@ -176,7 +176,7 @@ your project's root directory:
 2.  Add Docsy as a theme, for example:
 
     ```sh
-    echo 'theme = "docsy"' >> config.toml
+    echo 'theme = "docsy"' >> hugo.toml
     ```
 
     {{% alert title="Tip" %}}
@@ -253,7 +253,7 @@ You can use Docsy as an NPM module as follows:
     ```sh
     hugo new site myproject
     cd myproject
-    echo 'theme = "docsy"' >> config.toml
+    echo 'theme = "docsy"' >> hugo.toml
     ```
 
 2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
@@ -276,7 +276,7 @@ You can use Docsy as an NPM module as follows:
     your site's configuration file:
 
     ```sh
-    echo 'themesDir = "node_modules"' >> config.toml
+    echo 'themesDir = "node_modules"' >> hugo.toml
     ```
 
 As an alternative to specifying a `themesDir`, on some platforms, you can

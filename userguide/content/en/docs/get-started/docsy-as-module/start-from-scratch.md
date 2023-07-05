@@ -22,7 +22,7 @@ hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v{{% param "version" %}}
-cat >> config.toml <<EOL
+cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
 [[module.imports]]
@@ -47,7 +47,7 @@ path = "github.com/google/docsy"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy/dependencies")>>config.toml
+path = "github.com/google/docsy/dependencies")>>hugo.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -68,7 +68,7 @@ hugo new site my-new-site
 cd  my-new-site
 ```
 
-This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file (default: `config.toml`).
+This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file (default: `hugo.toml`).
 
 {{% alert title="Tip" %}}
 In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
@@ -95,7 +95,7 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Add theme module configuration settings
 
-Add the settings in the following snippet at the end of your site's [configuration file] (default: `config.toml`) and save the file.
+Add the settings in the following snippet at the end of your site's [configuration file] (default: `hugo.toml`) and save the file.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
