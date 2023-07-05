@@ -11,11 +11,12 @@
   {{ end -}}
 {{ end -}}
 
-{{ with .Get "persistLang" -}}
-  {{ if ne ( printf "%T" . ) "bool" -}}
-    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "persistLang" (printf "%T" .) $.Position  -}}
+{{ $_persistLang := .Get "persistLang" -}}
+{{ if and (ne $_persistLang nil) (ne $_persistLang "") -}}
+  {{ if ne ( printf "%T" $_persistLang ) "bool" -}}
+    {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "persistLang" (printf "%T" $_persistLang) $.Position  -}}
   {{ else -}}
-    {{ warnf "Shortcode %q parameter `persistLang` is deprecated, use `persist=false` instead: %s" $.Name $.Position  -}}
+    {{ warnf "Shortcode %q parameter `persistLang` is deprecated, use `persist` instead: %s" $.Name $.Position  -}}
   {{ end -}}
 {{ end -}}
 
@@ -38,7 +39,7 @@
 {{ $hloptionsPane := default "" ($.Get "highlight") -}}
 {{ $textPane := default false ($.Get "text") -}}
 {{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
-{{ $deprecatedPersistLang := default true ($.Get "persistLang") -}}
+{{ $deprecatedPersistLang := $_persistLang | default true -}}
 {{ $persistKeyKind := $_persist | default (cond (eq $langPane "") "lang" "header") -}}
 {{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "none") -}}
 {{ $rightPane := default false ($.Get "right") -}}
