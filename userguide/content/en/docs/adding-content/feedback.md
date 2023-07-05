@@ -38,7 +38,7 @@ _requires_ `gtag.js`) and Universal Analytics (UA) site tags. If you prefer usin
 the older `analytics.js` library for your UA site tag, then set
 `params.disableGtagForUniversalAnalytics` to `true` in your project's [configuration file].
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
@@ -136,7 +136,7 @@ other words!
 2.  Ensure that Google Analytics is enabled, as described [above](#setup).
 3.  Set the response text that users see after clicking **Yes** or **No**.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
     {{< tab header="Configuration file:" disabled=true />}}
 
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -219,7 +219,7 @@ response text.
 Add the parameter `hide_feedback` to the page's front matter and set it to
 `true`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -243,7 +243,7 @@ hide_feedback: true
 Set `params.ui.feedback.enable` to `false` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.ui.feedback]
