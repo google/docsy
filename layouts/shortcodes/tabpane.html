@@ -14,6 +14,16 @@
 {{ with .Get "persistLang" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
     {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "persistLang" (printf "%T" .) $.Position  -}}
+  {{ else -}}
+    {{ warnf "Shortcode %q parameter `persistLang` is deprecated, use `persist=false` instead: %s" $.Name $.Position  -}}
+  {{ end -}}
+{{ end -}}
+
+{{ $_persist := .Get "persist" -}}
+{{ with $_persist -}}
+  {{ $matched := findRE "^(header|lang|none)$" . -}}
+  {{ if not $matched -}}
+    {{ errorf "Shortcode %q: parameter %q should be one of 'header', 'lang', or 'none'; but got %s. Error position: %s" $.Name "persist" $_persist $.Position  -}}
   {{ end -}}
 {{ end -}}
 
@@ -28,15 +38,17 @@
 {{ $hloptionsPane := default "" ($.Get "highlight") -}}
 {{ $textPane := default false ($.Get "text") -}}
 {{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
-{{ $persistLang := default true ($.Get "persistLang") -}}
+{{ $deprecatedPersistLang := default true ($.Get "persistLang") -}}
+{{ $persistKeyKind := $_persist | default (cond (eq $langPane "") "lang" "header") -}}
+{{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "none") -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
 {{- /* Scratchpad gets populated through call to .Inner */ -}}
 {{- .Inner -}}
 
-{{ $langs := slice -}}
+{{ $persistKeyList := slice -}}
 {{ $duplicate := false -}}
-{{ $duplicateLang := "" -}}
+{{ $duplicateKey := "" -}}
 
 {{ $Ordinal := $.Ordinal -}}
 {{ if ge hugo.Version "0.93.0" -}}
@@ -62,14 +74,21 @@
       {{ $lang = . -}}
     {{ end -}}
 
-    {{/* Check for duplicate languages */ -}}
-    {{ if and $persistLang (not $duplicate) -}}
-      {{ if and (not $disabled) (ne $lang "") -}}
-        {{ $langs = $langs | append $lang -}}
-      {{ end -}}
-      {{ if ne $langs (uniq $langs) -}}
+    {{ $persistKey := "" -}}
+    {{ if eq $persistKeyKind "lang" -}}
+      {{ $persistKey = $lang -}}
+    {{ else if eq $persistKeyKind "header" -}}
+      {{ $persistKey = $element.header -}}
+    {{ end -}}
+
+    {{/* Check for duplicate tab-persistence keys */ -}}
+    {{ if and $persistTab $persistKey -}}
+      {{ if in $persistKey $persistKeyList -}}
         {{ $duplicate = true -}}
-        {{ $duplicateLang = $lang -}}
+        {{ $duplicateKey = $persistKey -}}
+        {{ $persistTab = false -}}
+      {{ else -}}
+        {{ $persistKeyList = $persistKeyList | append $persistKey -}}
       {{ end -}}
     {{ end -}}
 
@@ -78,16 +97,23 @@
       {{ $rightpush = . -}}
     {{ end -}}
 
-    {{/* Replace space and +, not valid for css selectors */ -}}
-    {{ $lang := replaceRE "[\\s+]" "-" $lang -}}
+    {{/* Replace by "-" all chars that are not valid in a CSS class name: */ -}}
+    {{ $persistKey = replaceRE "[^a-zA-Z0-9_-]" "-" $persistKey | lower -}}
     <li class="nav-item{{ if $rightpush }} ms-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
       {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
 
-      <button class="nav-link{{ if and ( not $activeSet ) ( not $disabled ) }} active{{ end }}{{ if $disabled }} disabled{{ end }}{{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }} persistLang-{{- $lang -}}{{ end }}{{ end }}"
+      <button class="nav-link
+        {{- if and ( not $activeSet ) ( not $disabled ) }} active{{ end -}}
+        {{ if $disabled }} disabled{{ end -}}
+        {{ with $persistKey -}}
+          {{ if $persistTab }} persistLang-{{ . }}{{ end -}}
+        {{ end }}"
           id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
-          {{ if ne $lang "" }}{{ if and $persistLang (not $duplicate) }}onclick="persistLang({{ $lang }});"{{ end }}{{ end -}}
+          {{ with $persistKey -}}
+            {{ if $persistTab }}onclick="persistLang({{ . }});" {{ end -}}
+          {{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
       </button>
@@ -101,10 +127,9 @@
 </ul>
 
 {{ if $duplicate -}}
-  {{ warnf "Shortcode %q: duplicate language %q detected, disabling persistance of language to avoid multiple tab display. Position: %s" $.Name $duplicateLang $.Position -}}
+  {{ warnf "Shortcode %q: duplicate tab-persistence key %q detected, disabling persistance to avoid multiple tab display. Position: %s" $.Name $duplicateKey $.Position -}}
 {{ end -}}
-{{ $duplicate = false -}}
-{{ $langs = slice -}}
+
 {{ $activeSet = false -}}
 
 {{/* Tab panes */ -}}
