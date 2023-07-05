@@ -31,7 +31,7 @@ There are various parameter to control the functionality of taxonomies in the pr
 
 By default taxonomies for `tags` and `categories` are enabled in Hugo (see: https://gohugo.io/content-management/taxonomies/#default-taxonomies). In Docsy taxonomies are __disabled__ by default in the `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 disableKinds = ["taxonomy", "taxonomyTerm"]
@@ -55,7 +55,7 @@ If you want to enable taxonomies in Docsy you have to delete (or comment out) th
 
 With the following example you define a additional taxonomy `projects` beside the default taxonomies `tags` and `categories`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [taxonomies]
@@ -82,7 +82,7 @@ taxonomies:
 
 You can use the following parameters in your project's `hugo.toml`/`hugo.yaml`/`hugo.json` to control the output of the assigned taxonomy terms for each article resp. page of your docs and/or blog section in Docsy or a "tag cloud" in Docsy's right sidebar:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.taxonomy]
