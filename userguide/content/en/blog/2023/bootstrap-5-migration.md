@@ -85,7 +85,7 @@ This assumption wasn't apparent nor was it enforced in Bootstrap 4,
 consequently, some of Docsy's layouts failed to respect it. In
 [most cases](https://github.com/google/docsy/issues/1466), fixing violations
 consisted of simply wrapping a `.row`'s child element in a `.col`, but the
-[Docsy footer](http://layouts/partials/footer.html) required a couple of
+[Docsy footer](https://github.com/google/docsy/blob/v0.7.0/layouts/partials/footer.html) required a couple of
 iterations to get right.
 
 My first footer adjustment reset
@@ -144,7 +144,7 @@ Sass customization documentation.
 Having to maintain a custom list of a few dozen imports (even if it's relatively
 stable) feels like a maintenance overhead that we should avoid if we can, so in
 Docsy's
-[main.scss](https://github.com/google/docsy/blob/v5.2.3/assets/scss/main.scss),
+[main.scss](https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss),
 we \@import "functions" before Docsy- and project-specific variable overrides,
 and then we import the _full_ Bootstrap suite of SCSS. This results in
 [\_functions.scss](https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_functions.scss)
