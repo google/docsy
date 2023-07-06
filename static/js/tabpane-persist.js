@@ -1,9 +1,14 @@
 const td_persistStorageKeyName = 'td-tp-persist';
 const td_persistDataAttrName = `data-${td_persistStorageKeyName}`;
 
+// Helpers
+
 const tdPersistCssSelector = (attrValue) => attrValue
   ? `[${td_persistDataAttrName}="${attrValue}"]`
   : `[${td_persistDataAttrName}]`;
+const tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
+
+// Main functions
 
 function tdActivateTabsWithKey(key) {
   if (!key) return;
@@ -25,10 +30,10 @@ function tdPersistActiveTab(activeTabKey) {
   }
 }
 
-const tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
+// Register listeners
 
-// On page load, activate tabs
-if (tdSupportsLocalStorage()) {
+window.addEventListener('DOMContentLoaded', () => {
+  if (!tdSupportsLocalStorage()) return;
   const activeTabKey = localStorage.getItem(td_persistStorageKeyName);
   tdActivateTabsWithKey(activeTabKey);
-}
+});
