@@ -13,7 +13,7 @@
   {{ $header = (.Get 0) -}}
 {{ else -}}
   {{/* Prefill header if not given as named or unnamed parameter */ -}}
-  {{ $header = default (printf "Tab %v" ( add $.Ordinal 1)) (.Get "header") -}}
+  {{ $header = .Get "header" | default (printf "Tab %v" .Ordinal) -}}
 {{ end -}}
 
 {{/* store all tab info in dict tab */ -}}

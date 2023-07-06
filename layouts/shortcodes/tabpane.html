@@ -47,22 +47,16 @@
 {{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "none") -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
-{{- /* Scratchpad gets populated through call to .Inner */ -}}
-{{- .Inner -}}
+{{/* Scratchpad gets populated through call to .Inner */ -}}
+{{ .Inner -}}
 
-{{ $persistKeyList := slice -}}
 {{ $duplicate := false -}}
 {{ $duplicateKey := "" -}}
-
-{{ $Ordinal := $.Ordinal -}}
-{{ if ge hugo.Version "0.93.0" -}}
-  {{ if .Page.Store.Get "Ordinal" -}}
-    {{ $Ordinal = .Page.Store.Get "Ordinal" -}}
-  {{end -}}
-{{ end -}}
+{{ $persistKeyList := slice -}}
+{{ $tabPaneOrdinal := .Ordinal -}}
 
 {{/* Nav tabs */ -}}
-<ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $Ordinal -}}" role="tablist">
+<ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $tabPaneOrdinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
     {{ $disabled := false -}}
@@ -104,8 +98,8 @@
 
     <li class="nav-item{{ if $rightpush }} ms-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
-      {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
-      {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize -}}
+      {{ $tabid := printf "tabs-%02v-%v-tab" $tabPaneOrdinal $index | anchorize -}}
+      {{ $entryid := printf "tabs-%02v-%v" $tabPaneOrdinal $index | anchorize -}}
 
       <button class="nav-link
         {{- if and ( not $activeSet ) ( not $disabled ) }} active{{ end -}}
@@ -124,7 +118,7 @@
       {{ $activeSet = true -}}
     {{ end -}}
 
-  {{- end }}
+  {{ end }}
 </ul>
 
 {{ if $duplicate -}}
@@ -134,7 +128,7 @@
 {{ $activeSet = false -}}
 
 {{/* Tab panes */ -}}
-<div class="tab-content" id="tabs-{{ $Ordinal }}-content">
+<div class="tab-content" id="tabs-{{ $tabPaneOrdinal }}-content">
   {{- range $index, $element := $.Scratch.Get "tabs" -}}
 
     {{ $lang := $langPane -}}
@@ -160,10 +154,10 @@
       {{ $text = . }}
     {{ end -}}
 
-    {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
-    {{ $entryid := printf "tabs-%02v-%v" $Ordinal $index | anchorize }}
+    {{ $tabid := printf "tabs-%02v-%v-tab" $tabPaneOrdinal $index | anchorize -}}
+    {{ $entryid := printf "tabs-%02v-%v" $tabPaneOrdinal $index | anchorize }}
     <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
-        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}" tabindex="{{ $Ordinal }}">
+        id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}" tabindex="{{ $tabPaneOrdinal }}">
         {{ if $text -}}
           {{ index . "content" -}}
         {{ else -}}
@@ -175,5 +169,5 @@
       {{ $activeSet = true -}}
     {{ end -}}
 
-  {{- end }}
+  {{ end }}
 </div>
