@@ -106,7 +106,6 @@
         {{ if $disabled }} disabled{{ end -}}"
           id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
           {{ if and $persistTab $persistKey -}}
-            onclick="tdPersistActiveTab({{ $persistKey }});" {{/* */ -}}
             {{ printf "%s=%q " $tpPersistAttrName $persistKey | safeHTMLAttr -}}
           {{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">

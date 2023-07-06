@@ -64,7 +64,7 @@ function tdPersistActiveTab(activeTabKey) {
 }
 
 function tdGetAndActivatePersistedTabsInThisPage() {
-  // Get keys of tabs in this page
+  // Get unique persistence keys of tabs in this page
   var keyOfTabsInThisPage = [
     ...new Set(
       Array.from(document.querySelectorAll(_tdPersistCssSelector())).map((el) =>
@@ -93,10 +93,22 @@ function tdGetAndActivatePersistedTabsInThisPage() {
   return key_ageList;
 }
 
+function tdRegisterTabClickHandlers() {
+  // Tabs in this page
+  var tabs = document.querySelectorAll(_tdPersistCssSelector());
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const activeTabKey = tab.getAttribute(td_persistDataAttrName);
+      tdPersistActiveTab(activeTabKey);
+    });
+  });
+}
+
 // Register listeners
 
 window.addEventListener('DOMContentLoaded', () => {
   if (!_tdSupportsLocalStorage()) return;
   tdGetAndActivatePersistedTabsInThisPage();
-  // TODO: ... tabElement.addEventListener('click', f);
+  tdRegisterTabClickHandlers();
 });
