@@ -36,7 +36,7 @@ function tdPersistKey(key, value) {
 }
 
 // Retrieve, increment, and store tab-select event count, then returns it.
-function tdGetTabSelectEventCount() {
+function tdGetTabSelectEventCountAndInc() {
   // @requires: tdSupportsLocalStorage();
 
   const storedCount = localStorage.getItem(td_persistCounterStorageKeyName);
@@ -59,9 +59,14 @@ function tdActivateTabsWithKey(key) {
 function tdPersistActiveTab(activeTabKey) {
   if (!_tdSupportsLocalStorage()) return;
 
-  tdPersistKey(_tdStoragePersistKey(activeTabKey), tdGetTabSelectEventCount());
+  tdPersistKey(
+    _tdStoragePersistKey(activeTabKey),
+    tdGetTabSelectEventCountAndInc()
+  );
   tdActivateTabsWithKey(activeTabKey);
 }
+
+// Handlers
 
 function tdGetAndActivatePersistedTabs(tabs) {
   // Get unique persistence keys of tabs in this page
