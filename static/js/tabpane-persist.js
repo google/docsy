@@ -1,39 +1,97 @@
-const td_persistStorageKeyName = 'td-tp-persist';
-const td_persistDataAttrName = `data-${td_persistStorageKeyName}`;
+// Storage key names and data attribute name:
+const td_persistStorageKeyNameBase = 'td-tp-persist';
+const td_persistCounterStorageKeyName = `${td_persistStorageKeyNameBase}-count`;
+const td_persistDataAttrName = `data-${td_persistStorageKeyNameBase}`;
+
+// Utilities
+
+const _tdPersistCssSelector = (attrValue) => attrValue
+  ? `[${td_persistDataAttrName}="${attrValue}"]`
+  : `[${td_persistDataAttrName}]`;
+
+const _tdStoragePersistKey = (tabKey) =>
+  td_persistStorageKeyNameBase + ':' + (tabKey || '');
+
+const _tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
 
 // Helpers
 
-const tdPersistCssSelector = (attrValue) => attrValue
-  ? `[${td_persistDataAttrName}="${attrValue}"]`
-  : `[${td_persistDataAttrName}]`;
-const tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
+function tdPersistKey(key, value) {
+  // @requires: tdSupportsLocalStorage();
+
+  try {
+    if (value) {
+      localStorage.setItem(key, value);
+    } else {
+      localStorage.removeItem(key);
+    }
+  } catch (error) {
+    const action = value ? 'add' : 'remove';
+    console.error(`Docsy tabpane: unable to ${action} localStorage key '${key}': `, error);
+  }
+}
+
+// Retrieve, increment, and store tab-select event count, then returns it.
+function tdGetTabSelectEventCount() {
+  // @requires: tdSupportsLocalStorage();
+
+  const storedCount = localStorage.getItem(td_persistCounterStorageKeyName);
+  let numTabSelectEvents = parseInt(storedCount) || 0;
+  numTabSelectEvents++;
+  tdPersistKey(td_persistCounterStorageKeyName, numTabSelectEvents.toString());
+  return numTabSelectEvents;
+}
 
 // Main functions
 
 function tdActivateTabsWithKey(key) {
   if (!key) return;
+
   document
-    .querySelectorAll(tdPersistCssSelector(key))
+    .querySelectorAll(_tdPersistCssSelector(key))
     .forEach((element) => {
       new bootstrap.Tab(element).show();
     });
 }
 
 function tdPersistActiveTab(activeTabKey) {
-  if (!tdSupportsLocalStorage()) return;
+  if (!_tdSupportsLocalStorage()) return;
 
-  try {
-    localStorage.setItem(td_persistStorageKeyName, activeTabKey);
-    tdActivateTabsWithKey(activeTabKey);
-  } catch (error) {
-    console.error(`Unable to save active tab '${activeTabKey}' to localStorage:`, error);
-  }
+  tdPersistKey(_tdStoragePersistKey(activeTabKey), tdGetTabSelectEventCount());
+  tdActivateTabsWithKey(activeTabKey);
+}
+
+function tdGetAndActivatePersistedTabsInThisPage() {
+  // Get keys of tabs in this page
+  var keyOfTabsInThisPage = [...new Set(
+    Array.from(document.querySelectorAll(_tdPersistCssSelector()))
+      .map(el => el.getAttribute(td_persistDataAttrName))
+  )];
+
+  // Create a list of active tabs with their age:
+  let key_ageList = keyOfTabsInThisPage
+    // Map to [tab-key, last-activated-age]
+    .map(k => [
+      k,
+      parseInt(localStorage.getItem(_tdStoragePersistKey(k))) || 0
+    ])
+    // Exclude tabs that have never been activated
+    .filter(([k, v]) => v)
+    // Sort from oldest selected to most recently selected
+    .sort((a, b) => a[1] - b[1]);
+
+  // Activate tabs from the oldest to the newest
+  key_ageList.forEach(([key]) => {
+    tdActivateTabsWithKey(key);
+  });
+
+  return key_ageList;
 }
 
 // Register listeners
 
 window.addEventListener('DOMContentLoaded', () => {
-  if (!tdSupportsLocalStorage()) return;
-  const activeTabKey = localStorage.getItem(td_persistStorageKeyName);
-  tdActivateTabsWithKey(activeTabKey);
+  if (!_tdSupportsLocalStorage()) return;
+  tdGetAndActivatePersistedTabsInThisPage();
+  // TODO: ... tabElement.addEventListener('click', f);
 });
