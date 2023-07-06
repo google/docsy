@@ -14,7 +14,7 @@ overrides the default Docsy logo in the theme.
 If you don't want a logo to appear in the navbar, then set `navbar_logo` to
 `false` in your project's config:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 navbar_logo = false

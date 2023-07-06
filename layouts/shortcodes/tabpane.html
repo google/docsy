@@ -1,4 +1,7 @@
 {{/* Check parameter types */ -}}
+
+{{ $tpPersistAttrName := "data-td-tp-persist" -}}
+
 {{ with .Get "langEqualsHeader" -}}
   {{ if ne ( printf "%T" . )  "bool" -}}
     {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "langEqualsHeader" (printf "%T" .) $.Position  -}}
@@ -81,6 +84,7 @@
     {{ else if eq $persistKeyKind "header" -}}
       {{ $persistKey = $element.header -}}
     {{ end -}}
+    {{ $persistKey = $persistKey | lower -}}
 
     {{/* Check for duplicate tab-persistence keys */ -}}
     {{ if and $persistTab $persistKey -}}
@@ -98,8 +102,6 @@
       {{ $rightpush = . -}}
     {{ end -}}
 
-    {{/* Replace by "-" all chars that are not valid in a CSS class name: */ -}}
-    {{ $persistKey = replaceRE "[^a-zA-Z0-9_-]" "-" $persistKey | lower -}}
     <li class="nav-item{{ if $rightpush }} ms-auto{{ end -}}">
       {{/* Generate the IDs for the <a> and the <div> elements */ -}}
       {{ $tabid := printf "tabs-%02v-%v-tab" $Ordinal $index | anchorize -}}
@@ -107,13 +109,11 @@
 
       <button class="nav-link
         {{- if and ( not $activeSet ) ( not $disabled ) }} active{{ end -}}
-        {{ if $disabled }} disabled{{ end -}}
-        {{ with $persistKey -}}
-          {{ if $persistTab }} persistLang-{{ . }}{{ end -}}
-        {{ end }}"
+        {{ if $disabled }} disabled{{ end -}}"
           id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
-          {{ with $persistKey -}}
-            {{ if $persistTab }}onclick="persistLang({{ . }});" {{ end -}}
+          {{ if and $persistTab $persistKey -}}
+            onclick="tdPersistActiveTab({{ $persistKey }});" {{/* */ -}}
+            {{ printf "%s=%q " $tpPersistAttrName $persistKey | safeHTMLAttr -}}
           {{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
         {{ index . "header" | markdownify }}
