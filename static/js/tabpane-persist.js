@@ -5,9 +5,10 @@ const td_persistDataAttrName = `data-${td_persistStorageKeyNameBase}`;
 
 // Utilities
 
-const _tdPersistCssSelector = (attrValue) => attrValue
-  ? `[${td_persistDataAttrName}="${attrValue}"]`
-  : `[${td_persistDataAttrName}]`;
+const _tdPersistCssSelector = (attrValue) =>
+  attrValue
+    ? `[${td_persistDataAttrName}="${attrValue}"]`
+    : `[${td_persistDataAttrName}]`;
 
 const _tdStoragePersistKey = (tabKey) =>
   td_persistStorageKeyNameBase + ':' + (tabKey || '');
@@ -27,7 +28,10 @@ function tdPersistKey(key, value) {
     }
   } catch (error) {
     const action = value ? 'add' : 'remove';
-    console.error(`Docsy tabpane: unable to ${action} localStorage key '${key}': `, error);
+    console.error(
+      `Docsy tabpane: unable to ${action} localStorage key '${key}': `,
+      error
+    );
   }
 }
 
@@ -47,11 +51,9 @@ function tdGetTabSelectEventCount() {
 function tdActivateTabsWithKey(key) {
   if (!key) return;
 
-  document
-    .querySelectorAll(_tdPersistCssSelector(key))
-    .forEach((element) => {
-      new bootstrap.Tab(element).show();
-    });
+  document.querySelectorAll(_tdPersistCssSelector(key)).forEach((element) => {
+    new bootstrap.Tab(element).show();
+  });
 }
 
 function tdPersistActiveTab(activeTabKey) {
@@ -63,17 +65,20 @@ function tdPersistActiveTab(activeTabKey) {
 
 function tdGetAndActivatePersistedTabsInThisPage() {
   // Get keys of tabs in this page
-  var keyOfTabsInThisPage = [...new Set(
-    Array.from(document.querySelectorAll(_tdPersistCssSelector()))
-      .map(el => el.getAttribute(td_persistDataAttrName))
-  )];
+  var keyOfTabsInThisPage = [
+    ...new Set(
+      Array.from(document.querySelectorAll(_tdPersistCssSelector())).map((el) =>
+        el.getAttribute(td_persistDataAttrName)
+      )
+    ),
+  ];
 
   // Create a list of active tabs with their age:
   let key_ageList = keyOfTabsInThisPage
     // Map to [tab-key, last-activated-age]
-    .map(k => [
+    .map((k) => [
       k,
-      parseInt(localStorage.getItem(_tdStoragePersistKey(k))) || 0
+      parseInt(localStorage.getItem(_tdStoragePersistKey(k))) || 0,
     ])
     // Exclude tabs that have never been activated
     .filter(([k, v]) => v)
