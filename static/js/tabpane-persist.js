@@ -63,13 +63,11 @@ function tdPersistActiveTab(activeTabKey) {
   tdActivateTabsWithKey(activeTabKey);
 }
 
-function tdGetAndActivatePersistedTabsInThisPage() {
+function tdGetAndActivatePersistedTabs(tabs) {
   // Get unique persistence keys of tabs in this page
   var keyOfTabsInThisPage = [
     ...new Set(
-      Array.from(document.querySelectorAll(_tdPersistCssSelector())).map((el) =>
-        el.getAttribute(td_persistDataAttrName)
-      )
+      Array.from(tabs).map((el) => el.getAttribute(td_persistDataAttrName))
     ),
   ];
 
@@ -93,10 +91,7 @@ function tdGetAndActivatePersistedTabsInThisPage() {
   return key_ageList;
 }
 
-function tdRegisterTabClickHandlers() {
-  // Tabs in this page
-  var tabs = document.querySelectorAll(_tdPersistCssSelector());
-
+function tdRegisterTabClickHandler(tabs) {
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const activeTabKey = tab.getAttribute(td_persistDataAttrName);
@@ -105,10 +100,12 @@ function tdRegisterTabClickHandlers() {
   });
 }
 
-// Register listeners
+// Register listeners and activate tabs
 
 window.addEventListener('DOMContentLoaded', () => {
   if (!_tdSupportsLocalStorage()) return;
-  tdGetAndActivatePersistedTabsInThisPage();
-  tdRegisterTabClickHandlers();
+
+  var allTabsInThisPage = document.querySelectorAll(_tdPersistCssSelector());
+  tdRegisterTabClickHandler(allTabsInThisPage);
+  tdGetAndActivatePersistedTabs(allTabsInThisPage);
 });
