@@ -51,6 +51,7 @@ markup:
 
 params:
   copyright: The Docsy Authors
+  # homePage: /blog If set, this redirects from the default home page to use one of the content sub-directories
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
