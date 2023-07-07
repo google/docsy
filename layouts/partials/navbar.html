@@ -11,7 +11,11 @@
     {{- /**/ -}}
     <span class="navbar-brand__logo navbar-logo">
       {{- if ne .Site.Params.ui.navbar_logo false -}}
-        {{ with resources.Get "icons/logo.svg" -}}
+        {{ $logo := "icons/logo.svg" }}
+        {{ with .Site.Params.ui.navbar_logo }}
+          {{ $logo = . }}
+        {{ end }}
+        {{ with resources.Get $logo -}}
           {{ ( . | minify).Content | safeHTML -}}
         {{ end -}}
       {{ end -}}

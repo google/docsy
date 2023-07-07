@@ -8,8 +8,8 @@ description: Add and customize logos, icons, and images in your project.
 ## Add your logo
 
 By default, Docsy shows a site logo at the start of the navbar, that is, at the
-extreme left. Place your project's SVG logo in `assets/icons/logo.svg`. This
-overrides the default Docsy logo in the theme.
+extreme left. You may either place your project's SVG logo in `assets/icons/logo.svg` or define a custom path under the
+`assets/` folder. This overrides the default Docsy logo in the theme.
 
 If you don't want a logo to appear in the navbar, then set `navbar_logo` to
 `false` in your project's config:
@@ -25,6 +25,23 @@ navbar_logo: false
 {{< tab header="hugo.json" lang="json" >}}
 {
   "navbar_logo": false
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+Alternatively, if you want to override the default `assets/icons/logo.svg` location, then set `params.ui.navbar_logo` to the desired path in your project's config:
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+navbar_logo = "/img/myLogo.svg"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+navbar_logo: "/img/myLogo.svg"
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "navbar_logo": "/img/myLogo.svg"
 }
 {{< /tab >}}
 {{< /tabpane >}}
