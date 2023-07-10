@@ -11,7 +11,7 @@ The top level menu (the one that appears in the top navigation bar for the entir
 
 To add a page or section to this menu, add it to the site's `main` menu in either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -51,7 +51,7 @@ The menu is ordered from left to right by page `weight`. So, for example, a sect
 
 If you want to add a link to an external site to this menu, add it in `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
@@ -85,7 +85,7 @@ menu:
 
 As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [[menu.main]]
@@ -142,7 +142,7 @@ You can find out more in [Multi-language support](/docs/language/).
 The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title`, or `linkTitle` if different, as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
 
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -180,7 +180,7 @@ To hide a page or section from the left navigation menu, set `toc_hide: true` in
 
 To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -226,7 +226,7 @@ On large sites (default: > 2000 pages) the section menu is not generated for eac
 
 The tabbed pane below lists the menu section options you can define in your project [configuration file].
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui]
 sidebar_menu_compact = true
@@ -285,7 +285,7 @@ Breadcrumb navigation links are also shown for each item on the taxonomy results
 
 The tabbed pane below lists the breadcrumb navigation options you can define in your project [configuration file].
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui]
 breadcrumb_disable = true
@@ -325,7 +325,7 @@ Be aware that if you accidentally enable more than one search option in your pro
 
 By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 sidebar_search_disable = true
@@ -360,7 +360,7 @@ Once you have your search engine set up, you can add the feature to your site:
 
 1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -384,7 +384,7 @@ layout: search
 
 1. Add your Google Custom Search Engine ID to the site params in `hugo.toml`/`hugo.yaml`/`hugo.json`. You can add different values per language if needed.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
@@ -422,7 +422,7 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 1. Enable Algolia DocSearch in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 algolia_docsearch = true
@@ -474,7 +474,7 @@ To add Lunr search to your Docsy site:
 
 1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
@@ -501,7 +501,7 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 You can customize the summary length by setting `offlineSearchSummaryLength` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
@@ -524,7 +524,7 @@ offlineSearchSummaryLength: 200
 
 You can customize the maximum result count by setting `offlineSearchMaxResults` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
@@ -558,7 +558,7 @@ If you want to limit the width, add the following scss into `assets/scss/_variab
 
 To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++

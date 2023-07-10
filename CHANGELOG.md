@@ -16,11 +16,7 @@ For a list of issues targeted for the next release, see the [23Q2][] milestone.
 
 **Other changes**:
 
-## [0.7.1][releases] - next planned release (unpublished yet)
-
-**Breaking changes**: none yet.
-
-**Other changes**:
+## [0.7.1][]
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -266,6 +262,7 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC
+[0.7.1]: https://github.com/google/docsy/releases/v0.7.1
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1

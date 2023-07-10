@@ -67,7 +67,7 @@ As soon as you use a `math` code block on your page, support of \\(\KaTeX\\) is 
 
 If you want to use inline formulae and don't have a `math` code block present in your page which triggers auto activation, you need to manually activate \\(\KaTeX\\) support. The easiest way to do so is to add a `math` attribute to the frontmatter of your page and set it to `true`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -88,7 +88,7 @@ math: true
 
 If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
@@ -112,7 +112,7 @@ params:
 
 Additionally, you can customize various \\(\KaTeX\\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
@@ -283,7 +283,7 @@ As soon as you use a `chem` code block on your page, rendering support for chemi
 
 If you want to use chemical formulae inline and don't have a `chem` code block present in your page which triggers auto activation, you need to manually activate rendering support for chemical formulae. The easiest way to do so is to add a `chem` attribute to the frontmatter of your page and set it to `true`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -304,7 +304,7 @@ chem: true
 
 If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
@@ -368,7 +368,7 @@ With hugo version 0.93 or higher, support of Mermaid diagrams is automatically e
 
 If you are using hugo version 0.92 or lower, you need to enable Mermaid manually by updating your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Hugo version <= 0.92 only:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
@@ -392,7 +392,7 @@ params:
 
 If needed, you can define custom settings for your diagrams, such as themes, padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
@@ -476,7 +476,7 @@ Foo -> Foo7: To queue
 
 To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
@@ -500,7 +500,7 @@ params:
 
 Other optional settings are:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
@@ -609,7 +609,7 @@ Automatically renders to:
 
 To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.markmap]
@@ -650,7 +650,7 @@ As the diagram data is transported via the browser, the diagrams.net server does
 
 To enable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
@@ -674,7 +674,7 @@ params:
 
 You can also [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md) for editing diagrams, in which case update the configuration to point to that server:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
