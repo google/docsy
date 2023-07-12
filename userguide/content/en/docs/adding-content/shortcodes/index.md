@@ -248,7 +248,7 @@ resources:
 
 ### swaggerui
 
-The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+You can place the `swaggerui` shortcode anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -284,7 +284,7 @@ description: Reference for the Pet Store API
 {{< /tab >}}
 {{< /tabpane >}}
 
-You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
+You can customize Swagger UI's look and feel by overriding Swagger's CSS in `themes/docsy/assets/scss/_swagger.scss`.
 
 ### redoc
 

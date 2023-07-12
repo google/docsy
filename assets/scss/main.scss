@@ -34,6 +34,8 @@
 @import "taxonomy";
 @import "drawio";
 @import "shortcodes";
+@import "swagger";
+
 
 @if $td-enable-google-fonts {
   @import url($web-font-path);
