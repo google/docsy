@@ -94,7 +94,7 @@ As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-
     name = "GitHub"
     weight = 50
     url = "https://github.com/google/docsy/"
-    pre = "<i class="fa-brands fa-github"></i>"
+    pre = "<i class='fa-brands fa-github'></i>"
     post = "<span class='alert'>New!</span>"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -103,7 +103,7 @@ menu:
     - name: GitHub
       weight: 50
       url: 'https://github.com/google/docsy/'
-      pre: <i class="fa-brands fa-github"></i>
+      pre: <i class='fa-brands fa-github'></i>
       post: <span class='alert'>New!</span>
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
