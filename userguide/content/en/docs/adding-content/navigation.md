@@ -2,8 +2,7 @@
 title: Navigation and Menus
 date: 2017-01-05
 weight: 3
-description: >
-   Customize site navigation for your Docsy site.
+description: Customize site navigation for your Docsy site.
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including site menus, section menus, and page menus. This page shows you how they work and how to configure and customize them to meet your needs.
