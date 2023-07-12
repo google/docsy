@@ -18,7 +18,7 @@ If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the 
 version selector drop down to the top-level menu. You specify a URL and a name
 for each version you would like to add to the menu, as in the following example:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 # Add your release versions here
@@ -71,7 +71,7 @@ Remember to add your current version so that users can navigate back!
 The default title for the version drop-down menu is **Releases**. To change the
 title, change the `version_menu` parameter in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 version_menu = "Releases"
@@ -115,7 +115,7 @@ To add the banner to your doc site, make the following changes in your
 
 1. Set the `archived_version` parameter to `true`:
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 archived_version = true
@@ -131,7 +131,7 @@ archived_version: true
 1. Set the `version` parameter to the version of the archived doc set. For
   example, if the archived docs are for version 0.1:
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 version = "0.1"
@@ -148,7 +148,7 @@ version: '0.1'
   want to point readers to. In most cases, this should be the URL of the latest
   version of your docs:
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 url_latest_version = "https://your-latest-doc-site.com"

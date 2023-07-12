@@ -43,7 +43,7 @@ The **blocks/cover** shortcode creates a landing page type of block that fills t
 		Learn More <i class="fa-solid fa-circle-right ms-2"></i>
 	</a>
 	<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://example.org">
-		Download <i class="fa-brands fa-github ms-2 "></i>
+		Download <i class="fa-brands fa-github ms-2"></i>
 	</a>
 	<p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p>
 	<div class="mx-auto mt-5">
@@ -64,7 +64,7 @@ Note that the relevant shortcode parameters above will have sensible defaults, b
 | byline | Byline text on featured image. |
 
 
-To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/master/content/en), in the same directory.
+To set the background image, place an image with the word "background" in the name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles). For example, in our the example site the background image in the home page's cover block is [`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en), in the same directory.
 
 {{% alert title="Tip" %}}
 If you also include the word **featured** in the image name, e.g. `my-featured-background.jpg`, it will also be used as the Twitter Card image when shared.
@@ -207,7 +207,7 @@ Norway Spruce *Picea abies* shoot with foliage buds.
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -248,9 +248,9 @@ resources:
 
 ### swaggerui
 
-The `swaggerui` shortcode can be placed anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
+You can place the `swaggerui` shortcode anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -284,7 +284,7 @@ description: Reference for the Pet Store API
 {{< /tab >}}
 {{< /tabpane >}}
 
-You can customize Swagger UI's look and feel by overriding Swagger's CSS or by editing and compiling a [Swagger UI dist](https://github.com/swagger-api/swagger-ui) yourself and replace `themes/docsy/static/css/swagger-ui.css`.
+You can customize Swagger UI's look and feel by overriding Swagger's CSS in `themes/docsy/assets/scss/_swagger.scss`.
 
 ### redoc
 
