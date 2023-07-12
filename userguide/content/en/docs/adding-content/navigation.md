@@ -1,5 +1,5 @@
 ---
-title: "Navigation and Menus"
+title: Navigation and Menus
 date: 2017-01-05
 weight: 3
 description: >
