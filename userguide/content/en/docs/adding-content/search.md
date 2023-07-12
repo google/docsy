@@ -20,7 +20,7 @@ Be aware that if you accidentally enable more than one search option in your `co
 
 By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`/`config.yaml`/`config.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 sidebar_search_disable = true
@@ -55,7 +55,7 @@ Once you have your search engine set up, you can add the feature to your site:
 
 1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -79,7 +79,7 @@ layout: search
 
 1. Add your Google Custom Search Engine ID to the site params in `config.toml`/`config.yaml`/`config.json`. You can add different values per language if needed.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
@@ -117,7 +117,7 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 1. Enable Algolia DocSearch in `config.toml`/`config.yaml`/`config.json`.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 algolia_docsearch = true
@@ -169,7 +169,7 @@ To add Lunr search to your Docsy site:
 
 1. Enable local search in `config.toml`/`config.yaml`/`config.json`.
 
-    {{< tabpane persistLang=false >}}
+    {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 offlineSearch = true
@@ -196,7 +196,7 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`/`config.yaml`/`config.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
@@ -219,7 +219,7 @@ offlineSearchSummaryLength: 200
 
 You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`/`config.yaml`/`config.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="config.toml" lang="toml" >}}
 offlineSearch = true
@@ -253,7 +253,7 @@ If you want to limit the width, add the following scss into `assets/scss/_variab
 
 To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
