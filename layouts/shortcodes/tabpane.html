@@ -25,9 +25,9 @@
 
 {{ $_persist := .Get "persist" -}}
 {{ with $_persist -}}
-  {{ $matched := findRE "^(header|lang|none)$" . -}}
+  {{ $matched := findRE "^(header|lang|disabled)$" . -}}
   {{ if not $matched -}}
-    {{ errorf "Shortcode %q: parameter %q should be one of 'header', 'lang', or 'none'; but got %s. Error position: %s" $.Name "persist" $_persist $.Position  -}}
+    {{ errorf "Shortcode %q: parameter %q should be one of 'header', 'lang', or 'disabled'; but got %s. Error position: %s" $.Name "persist" $_persist $.Position  -}}
   {{ end -}}
 {{ end -}}
 
@@ -44,7 +44,7 @@
 {{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
 {{ $deprecatedPersistLang := $_persistLang | default true -}}
 {{ $persistKeyKind := $_persist | default (cond (eq $langPane "") "lang" "header") -}}
-{{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "none") -}}
+{{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "disabled") -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
 {{/* Scratchpad gets populated through call to .Inner */ -}}
@@ -106,7 +106,6 @@
         {{ if $disabled }} disabled{{ end -}}"
           id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
           {{ if and $persistTab $persistKey -}}
-            onclick="tdPersistActiveTab({{ $persistKey }});" {{/* */ -}}
             {{ printf "%s=%q " $tpPersistAttrName $persistKey | safeHTMLAttr -}}
           {{ end -}}
           aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
