@@ -44,7 +44,7 @@ By default, the Docsy example site uses its own [Google Custom Search Engine](ht
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 ```
 
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
+To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/search).
 
 
 ## What's next?
