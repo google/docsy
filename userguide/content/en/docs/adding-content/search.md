@@ -18,17 +18,17 @@ Be aware that if you accidentally enable more than one search option in your `co
 
 ## Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `config.toml`/`config.yaml`/`config.json`:
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 sidebar_search_disable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 sidebar_search_disable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "sidebar_search_disable": true
 {{< /tab >}}
 {{< /tabpane >}}
@@ -77,17 +77,17 @@ layout: search
 {{< /tab >}}
     {{< /tabpane >}}
 
-1. Add your Google Custom Search Engine ID to the site params in `config.toml`/`config.yaml`/`config.json`. You can add different values per language if needed.
+1. Add your Google Custom Search Engine ID to the site params in `hugo.toml`/`hugo.yaml`/`hugo.json`. You can add different values per language if needed.
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 gcs_engine_id: '011737558837375720776:fsdu1nryfng'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
 }
@@ -97,7 +97,7 @@ gcs_engine_id: '011737558837375720776:fsdu1nryfng'
 
 ### Disabling GCSE search
 
-If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `config.toml` from the example site and want to disable search, just comment out or remove the relevant line.
+If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `hugo.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
 ## Configure Algolia DocSearch
 
@@ -115,26 +115,26 @@ If you are accepted to the program, you will receive the code to add to your doc
 
 ### Adding Algolia DocSearch
 
-1. Enable Algolia DocSearch in `config.toml`/`config.yaml`/`config.json`.
+1. Enable Algolia DocSearch in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 algolia_docsearch = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 algolia_docsearch: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "algolia_docsearch": true
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
-3. Disable the sidebar search in `config.toml`/`config.yaml`/`config.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+3. Disable the sidebar search in `hugo.toml`/`hugo.yaml`/`hugo.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
 
 3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
 
@@ -167,24 +167,24 @@ When you've completed these steps, Algolia search should be enabled on your site
 
 To add Lunr search to your Docsy site:
 
-1. Enable local search in `config.toml`/`config.yaml`/`config.json`.
+1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `config.toml`/`config.yaml`/`config.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
@@ -194,20 +194,20 @@ If you're [testing this locally](/docs/deployment/#serving-your-site-locally) us
 
 ### Changing the summary length of the local search results
 
-You can customize the summary length by setting `offlineSearchSummaryLength` in `config.toml`/`config.yaml`/`config.json`.
+You can customize the summary length by setting `offlineSearchSummaryLength` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
 offlineSearch = true
 offlineSearchSummaryLength = 200
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 offlineSearchSummaryLength: 200
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true,
   "offlineSearchSummaryLength": 200
@@ -217,19 +217,19 @@ offlineSearchSummaryLength: 200
 
 ### Changing the maximum result count of the local search
 
-You can customize the maximum result count by setting `offlineSearchMaxResults` in `config.toml`/`config.yaml`/`config.json`.
+You can customize the maximum result count by setting `offlineSearchMaxResults` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 offlineSearch = true
 offlineSearchMaxResults = 25
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 offlineSearch: true
 offlineSearchMaxResults: 25
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "offlineSearch": true,
   "offlineSearchMaxResults": 25
@@ -277,3 +277,6 @@ exclude_search: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+
