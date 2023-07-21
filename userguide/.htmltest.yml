@@ -5,4 +5,4 @@ IgnoreDirectoryMissingTrailingSlash: true # FIXME
 IgnoreDirs: [_print] # FIXME
 IgnoreEmptyHref: true # FIXME
 IgnoreInternalEmptyHash: true # FIXME
-IgnoreInternalURLs:
+IgnoreURLs: [http://localhost:1313, https://pixabay.com] # Cloudflare (used by Pixabay) returns 403 to prevent “bot(ish)” automated traffic

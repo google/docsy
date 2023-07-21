@@ -1,0 +1,59 @@
+# .github/workflows/htmltest.yml
+# Run htmltest link checker on generated HTML output from user guide
+
+name: Link check with htmltest
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+  pull_request:
+
+jobs:
+  htmltest:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+          cache: 'npm'
+          # The action defaults to search for the dependency file (package-lock.json,
+          # npm-shrinkwrap.json or yarn.lock) in the repository root, and uses its
+          # hash as a part of the cache key.
+          # https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache-dependency-path: '**/package-lock.json'
+
+      # - run: npm --prefix=userguide --include=dev ci
+      - run: npm install postcss postcss-cli autoprefixer
+      - run: hugo --source userguide --destination $GITHUB_WORKSPACE/userguide/public --themesDir ../../ --theme docsy
+
+      - name: Test HTML
+        # https://github.com/wjdp/htmltest-action/
+        continue-on-error: false # <- Set to true if run shouldn't fail with broken links
+        uses: wjdp/htmltest-action@master
+        with:
+          # For consistency, use the same config file as for local builds
+          config: userguide/.htmltest.yml
+          path: userguide/public
+
+      - name: Archive htmltest results
+        uses: actions/upload-artifact@v3
+        with:
+          name: htmltest-report
+          path: tmp/.htmltest/htmltest.log
+          retention-days: 7 # default is 90 days
