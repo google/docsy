@@ -34,7 +34,7 @@ $td-sidebar-border-color: $border-color !default;
 $td-box-colors: $dark, $primary, $secondary, $info, $white, $gray-600, $success,
   $warning, $dark, $danger, $primary, $secondary, $info !default;
 
-$link-color: $blue-500;
+$link-color: $blue-500 !default;
 $link-decoration: none !default;
 $link-shade-percentage: 30% !default;
 
