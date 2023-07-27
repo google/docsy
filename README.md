@@ -1,11 +1,10 @@
+# Docsy
+
 [![Project status: active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Project releases](https://img.shields.io/github/release/google/docsy)](https://github.com/google/docsy/releases)
 [![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=master)](https://app.netlify.com/sites/docsydocs/deploys)
 [![Project contributors](https://img.shields.io/github/contributors/google/docsy)](https://github.com/google/docsy/graphs/contributors)
 [![Project license](https://img.shields.io/github/license/google/docsy)](https://github.com/google/docsy/blob/main/LICENSE)
-[![Follow docsy project on Twitter](https://img.shields.io/twitter/follow/docsydocs.svg?style=social)](https://twitter.com/intent/follow?screen_name=docsydocs)
-
-# Docsy
 
 ## 🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use official Docsy [releases].
 
