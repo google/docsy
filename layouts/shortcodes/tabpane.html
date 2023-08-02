@@ -82,7 +82,7 @@
 
     {{/* Check for duplicate tab-persistence keys */ -}}
     {{ if and $persistTab $persistKey -}}
-      {{ if in $persistKey $persistKeyList -}}
+      {{ if in $persistKeyList $persistKey -}}
         {{ $duplicate = true -}}
         {{ $duplicateKey = $persistKey -}}
         {{ $persistTab = false -}}
