@@ -8,6 +8,7 @@
 
 .tab-content {
   .tab-pane {
+    @extend .td-max-width-on-larger-screens;
     .highlight {
       margin: 0rem 0 0rem 0;
       border: none;
@@ -15,7 +16,6 @@
     }
     margin-top: 0rem;
     margin-bottom: 1.5rem;
-    max-width: 80%;
     border-left: 1px solid rgba(0, 0, 0, 0.125);
     border-right: 1px solid rgba(0, 0, 0, 0.125);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
