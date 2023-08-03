@@ -19,34 +19,34 @@
 {{/* store all tab info in dict tab */ -}}
 {{ $tab := dict "header" $header -}}
 {{ with $.Get "lang" -}}
-  {{ $tab = merge $tab (dict "language" ($.Get "lang")) -}}
+  {{ $tab = merge $tab (dict "language" .) -}}
 {{ end -}}
 {{ with $.Get "highlight" -}}
-  {{ $tab = merge $tab (dict "highlight" ($.Get "highlight")) -}}
+  {{ $tab = merge $tab (dict "highlight" .) -}}
 {{ end -}}
 {{ with $.Get "text" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
     {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "text" (printf "%T" .) $.Position  -}}
   {{ end -}}
-  {{ $tab = merge $tab (dict "text" ($.Get "text")) -}}
+  {{ $tab = merge $tab (dict "text" .) -}}
 {{ end -}}
 {{ with $.Get "right" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
     {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "right" (printf "%T" .) $.Position  -}}
   {{ end -}}
-  {{ $tab = merge $tab (dict "rightpush" ($.Get "right")) -}}
+  {{ $tab = merge $tab (dict "rightpush" .) -}}
 {{ end -}}
 {{ with $.Get "disabled" -}}
   {{ if ne ( printf "%T" . ) "bool" -}}
     {{ errorf "Shortcode %q: boolean value expected for parameter %q, but got %s. Error position: %s" $.Name "disabled" (printf "%T" .) $.Position  -}}
   {{ end -}}
-  {{ $tab = merge $tab (dict "disabled" ($.Get "disabled")) -}}
+  {{ $tab = merge $tab (dict "disabled" .) -}}
 {{ end -}}
 
 {{ with $.Inner -}}
   {{/* Trim any leading and trailing newlines from .Inner, this avoids
        spurious lines during syntax highlighting */ -}}
-  {{ $tab = merge $tab (dict "content" $.Inner) -}}
+  {{ $tab = merge $tab (dict "content" .) -}}
 {{ end -}}
 
 {{/* add dict tab to parent's scratchpad */ -}}

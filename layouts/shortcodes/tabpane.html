@@ -43,8 +43,9 @@
 {{ $textPane := default false ($.Get "text") -}}
 {{ $langEqualsHeader := default false ($.Get "langEqualsHeader") -}}
 {{ $deprecatedPersistLang := $_persistLang | default true -}}
-{{ $persistKeyKind := $_persist | default (cond (eq $langPane "") "lang" "header") -}}
-{{ $persistTab := and $deprecatedPersistLang (ne $persistKeyKind "disabled") -}}
+{{ $persistKeyKind := $_persist
+    | default (cond (or $textPane (ne "" $langPane)) "header" "lang") -}}
+{{ $persistTabpane := and $deprecatedPersistLang (ne $persistKeyKind "disabled") -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
 {{/* Scratchpad gets populated through call to .Inner */ -}}
@@ -59,10 +60,7 @@
 <ul class="nav nav-tabs{{ if $rightPane }} justify-content-end{{ end }}" id="tabs-{{- $tabPaneOrdinal -}}" role="tablist">
   {{ range $index, $element := $.Scratch.Get "tabs" -}}
 
-    {{ $disabled := false -}}
-    {{ with $element.disabled -}}
-      {{ $disabled = . -}}
-    {{ end -}}
+    {{ $enabled := not $element.disabled -}}
 
     {{ $lang := $langPane -}}
     {{ if $langEqualsHeader -}}
@@ -74,14 +72,21 @@
 
     {{ $persistKey := "" -}}
     {{ if eq $persistKeyKind "lang" -}}
-      {{ $persistKey = $lang -}}
+      {{ with $lang -}}
+        {{ $persistKey = . -}}
+      {{ else -}}
+        {{ with findRE "```(\\S+)" $element.content 1 -}}
+          {{ $persistKey = index . 1 -}}
+        {{ end -}}
+      {{ end -}}
     {{ else if eq $persistKeyKind "header" -}}
       {{ $persistKey = $element.header -}}
     {{ end -}}
     {{ $persistKey = $persistKey | lower -}}
+    {{ $persistTab := and $persistTabpane $persistKey $enabled -}}
 
     {{/* Check for duplicate tab-persistence keys */ -}}
-    {{ if and $persistTab $persistKey -}}
+    {{ if $persistTab -}}
       {{ if in $persistKeyList $persistKey -}}
         {{ $duplicate = true -}}
         {{ $duplicateKey = $persistKey -}}
@@ -101,23 +106,23 @@
       {{ $tabid := printf "tabs-%02v-%v-tab" $tabPaneOrdinal $index | anchorize -}}
       {{ $entryid := printf "tabs-%02v-%v" $tabPaneOrdinal $index | anchorize -}}
 
+      {{ $isActive := and $enabled (not $activeSet) -}}
+
       <button class="nav-link
-        {{- if and ( not $activeSet ) ( not $disabled ) }} active{{ end -}}
-        {{ if $disabled }} disabled{{ end -}}"
+        {{- if $isActive -}}
+          {{ $activeSet = true }} active
+        {{- end -}}
+        {{ if not $enabled }} disabled{{ end -}}"
           id="{{ $tabid }}" data-bs-toggle="tab" data-bs-target="#{{ $entryid }}" role="tab"
-          {{ if and $persistTab $persistKey -}}
+          {{ if $persistTab -}}
             {{ printf "%s=%q " $tpPersistAttrName $persistKey | safeHTMLAttr -}}
           {{ end -}}
-          aria-controls="{{- $entryid -}}" aria-selected="{{- cond ( and ( not $activeSet ) ( not $disabled ) ) "true" "false" -}}">
+          aria-controls="{{- $entryid -}}" aria-selected="{{ $isActive }}">
         {{ index . "header" | markdownify }}
       </button>
     </li>
 
-    {{- if not $disabled -}}
-      {{ $activeSet = true -}}
-    {{ end -}}
-
-  {{ end }}
+  {{- end }}
 </ul>
 
 {{ if $duplicate -}}
@@ -138,10 +143,7 @@
       {{ $lang = . -}}
     {{ end -}}
 
-    {{ $disabled := false -}}
-    {{ with $element.disabled -}}
-      {{ $disabled = . -}}
-    {{ end -}}
+    {{ $enabled := not $element.disabled -}}
 
     {{ $hloptions := $hloptionsPane -}}
     {{ with $element.highlight -}}
@@ -155,7 +157,12 @@
 
     {{ $tabid := printf "tabs-%02v-%v-tab" $tabPaneOrdinal $index | anchorize -}}
     {{ $entryid := printf "tabs-%02v-%v" $tabPaneOrdinal $index | anchorize }}
-    <div class="{{ if $text }}tab-body {{end}}tab-pane fade{{ if and ( not $activeSet ) ( not $disabled ) }} show active{{ end }}"
+    {{ $isActive := and $enabled (not $activeSet) -}}
+
+    <div class="{{ if $text }}tab-body {{end}}tab-pane fade
+        {{- if $isActive -}}
+          {{ $activeSet = true }} show active
+        {{- end }}"
         id="{{ $entryid }}" role="tabpanel" aria-labelled-by="{{ $tabid }}" tabindex="{{ $tabPaneOrdinal }}">
         {{ if $text -}}
           {{ index . "content" -}}
@@ -164,9 +171,5 @@
         {{ end }}
     </div>
 
-    {{- if not $disabled -}}
-      {{ $activeSet = true -}}
-    {{ end -}}
-
-  {{ end }}
+  {{- end }}
 </div>
