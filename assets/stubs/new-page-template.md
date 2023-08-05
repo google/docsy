@@ -6,6 +6,13 @@ description: >-
      Page description for heading and indexes.
 ---
 
+<!--
+In order to change the default frontmatter and the content for new pages,
+add a new template file `assets/stubs/new-page-template` to your project.
+This file will override the default settings of the theme. Adapt this file
+according to your needs.
+-->
+
 ## Heading
 
 Edit this template to create your new page.
