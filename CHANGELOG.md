@@ -278,7 +278,7 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 [0.4.0]: https://github.com/google/docsy/releases/v0.4.0
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
-[0.x.y]: #
+[0.x.y]: #changelog
 [23q3]: https://github.com/google/docsy/milestone/8
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
