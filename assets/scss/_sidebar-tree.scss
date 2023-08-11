@@ -26,9 +26,9 @@
     }
   }
 
-  // Handle the case where #content-mobile is displayed with a search box,
-  // regardless of the value of sidebar_search_disable:
-  @include media-breakpoint-only(md) {
+  // Handle cases for tablet (`md`) and mobile (<= `sm`) where the search box is
+  // displayed regardless of the value of sidebar_search_disable:
+  @include media-breakpoint-down(lg) {
     padding-top: 0 !important;
     @supports (position: sticky) {
       max-height: $_max-height !important;
