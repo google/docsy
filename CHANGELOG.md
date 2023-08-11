@@ -4,11 +4,18 @@
 
 # Changelog
 
-Useful links: Docsy [releases][] & [tags][]. Jump to the [latest][] release.
+We only document **breaking changes** and release **highlights** in this page.
+For the full list of changes of any particular release, see the [release
+notes][releases].
 
-For a list of issues targeted for the next release, see the [23Q2][] milestone.
+Useful links:
 
-## [0.8.0][releases] - next major release (unpublished yet)
+- [Releases][] & [tags][]. Jump to the [latest][] release.
+- [23Q3][] milestone
+
+## [0.8.0][0.x.y] - next major release (unpublished yet)
+
+For the full list of this release's changes, see the [release notes][0.x.y].
 
 **New**:
 
@@ -17,6 +24,8 @@ For a list of issues targeted for the next release, see the [23Q2][] milestone.
 **Other changes**:
 
 ## [0.7.1][]
+
+For the full list of this release's changes, see the [release notes][0.7.1].
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -29,6 +38,8 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 [#1579]: https://github.com/google/docsy/issues/1579
 
 ## [0.7.0][]
+
+For the full list of this release's changes, see the [release notes][0.7.0].
 
 **New**:
 
@@ -90,8 +101,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 ## [0.6.0][]
 
-For the full list of the changes found in this release, see the [release
-notes][0.6.0].
+For the full list of this release's changes, see the [release notes][0.6.0].
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -109,8 +119,8 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 ## [0.5.1][]
 
-For the full list of the changes found in this release, see the [release
-notes][0.5.1]. **BREAKING CHANGES** are documented below.
+For the full list of this release's changes, see the [release notes][0.5.1].
+**BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy:
 
@@ -165,7 +175,7 @@ Unpublished.
 
 ## [0.4.0][]
 
-For a full list of the changes to this release, see the [release notes][0.4.0].
+For the full list of this release's changes, see the [release notes][0.4.0].
 Potential **BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
@@ -220,7 +230,7 @@ Proceed as usual to build or serve your site.
 
 ## [0.3.0][]
 
-For a full list of the changes to this release, see the [release notes][0.3.0].
+For the full list of this release's changes, see the [release notes][0.3.0].
 
 **Breaking changes**:
 
@@ -238,6 +248,8 @@ For a full list of the changes to this release, see the [release notes][0.3.0].
 
 ## [0.2.0][]
 
+For the full list of this release's changes, see the [release notes][0.2.0].
+
 **New**:
 
 - Add official Docsy support for [Hugo modules][]. Many thanks to the dedicated
@@ -248,13 +260,9 @@ For a full list of the changes to this release, see the [release notes][0.3.0].
   For details, see
   [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
 
-**Details**:
-
-- For a full list of the changes to this release, see the [release notes][0.2.0]
-
 ## [0.X.Y][] - next planned release (unpublished yet)
 
-For a full list of the changes to this release, see the [release notes][0.x.y].
+For the full list of this release's changes, see the [release notes][0.x.y].
 
 **Breaking changes**:
 
@@ -270,8 +278,8 @@ For a full list of the changes to this release, see the [release notes][0.x.y].
 [0.4.0]: https://github.com/google/docsy/releases/v0.4.0
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
-[0.x.y]: #
-[23q2]: https://github.com/google/docsy/milestone/7
+[0.x.y]: #changelog
+[23q3]: https://github.com/google/docsy/milestone/8
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
