@@ -73,7 +73,6 @@ params:
     sidebar_menu_foldable: false
     sidebar_cache_limit: 10
     breadcrumb_disable: false
-    sidebar_search_disable: false
     feedback:
       enable: true
       'yes': >-

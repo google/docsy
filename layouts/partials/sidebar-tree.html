@@ -9,6 +9,7 @@
     </button>
   </form>
   {{ else -}}
+  <style>.td-sidebar-nav { --sidebar_search_disabled: 1; }</style>
   <div id="content-mobile">
   <form class="td-sidebar__search d-flex align-items-center">
     {{ partial "search-input.html" . }}

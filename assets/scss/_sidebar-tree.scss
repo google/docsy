@@ -2,14 +2,27 @@
 // Left side navigation
 //
 .td-sidebar-nav {
+  --sidebar_search_disabled: 0; // 0 or 1; set to 1 in sidebar-tree layout
+
+  // If --sidebar_search_disabled is 1, then add some top padding
+  padding-top: calc(1rem * var(--sidebar_search_disabled));
   padding-right: 0.5rem;
   margin-right: -15px;
   margin-left: -15px;
 
   @include media-breakpoint-up(md) {
     @supports (position: sticky) {
-      max-height: calc(100vh - 10rem);
+      max-height: calc(100vh - 8.5rem + 4.5rem * var(--sidebar_search_disabled));
       overflow-y: auto;
+    }
+  }
+
+  // Handle the case where #content-mobile is displayed with a search box
+  // (regardless of the value of --sidebar_search_disabled):
+  @include media-breakpoint-only(md) {
+    padding-top: 0;
+    @supports (position: sticky) {
+      max-height: calc(100vh - 8.5rem);
     }
   }
 
@@ -22,7 +35,7 @@
       list-style: none;
     }
 
-    ul {
+    &.ul-0, ul {
       padding: 0;
       margin: 0;
     }
@@ -119,9 +132,7 @@
   }
 
   &__search {
-    padding: 1rem 15px;
-    margin-right: -15px;
-    margin-left: -15px;
+    padding: 1rem 0;
   }
 
   &__inner {
@@ -132,7 +143,7 @@
         position: sticky;
         top: 4rem;
         z-index: 10;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - 5rem);
       }
     }
 
