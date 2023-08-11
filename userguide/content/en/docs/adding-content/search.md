@@ -141,20 +141,25 @@ algolia_docsearch: true
    * In `head-end.html` add the DocSearch CSS:
 
       ```html
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" integrity="sha512-O6ywtjtiV4QGgC6cD75C2Tf04SlTn9vvka8oV/dYpDL1JWM4lVP0QoZbdZt5RLtOWDpaP+MObzUrwl43ssqfvg==" crossorigin="anonymous" />
       ```
 
-
-   * In `body-end.html` add the DocSearch script, replacing the `docsearch` details with the snippet you get from Algolia (the example below is Algolia's own site index!). You must provide `#docsearch` as your `container` value as that's the ID of the `div` we provide in Docsy's layout:
+   * In `body-end.html` add the DocSearch script. In the code below, replace `docsearch` argument values for `appId`, `apiKey` and `indexName` with those provided by Algolia. Use the `container` values given below, they correspond to the IDs found in Docsy's layout:
 
       ```html
-      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
-      <script type="text/javascript">docsearch({
-        container: '#docsearch',
-        appId: 'R2IYF7ETH7',
-        apiKey: '599cec31baffa4868cae4e79f180729b',
-        indexName: 'docsearch',
-        });</script>
+      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" integrity="sha512-sQFwlNnBlEyWdI4EwJ9d2wjViu0ZPmIMjPP8kCmBoOjqcljGndf2gb4mldT4ZHxKCQcrdJ0+rxnMFKHuGWB7ag==" crossorigin="anonymous" ></script>
+      <script type="text/javascript">
+        for (let i = 0; i < 2; i++) {
+          docsearch({
+            container: `#docsearch-${i}`,
+            // Replace the values below with those for your site.
+            // These are Algolia's test values used for illustrative purposes:
+            appId: 'R2IYF7ETH7',
+            apiKey: '599cec31baffa4868cae4e79f180729b',
+            indexName: 'docsearch',
+          });
+        }
+      </script>
      ```
 
 You can find out more about how to configure DocSearch in the Algolia DocSearch V3 [Getting started](https://docsearch.algolia.com/docs/DocSearch-v3) guide.

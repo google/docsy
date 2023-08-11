@@ -4,7 +4,8 @@
   <input type="search" class="td-search__input form-control td-search-input" placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
 </div>
 {{ else if .Site.Params.algolia_docsearch -}}
-<div id="docsearch"></div>
+{{ $.Scratch.Add "docsearch-id-num" 1 -}}
+<div id="docsearch-{{ mod (.Scratch.Get "docsearch-id-num") 2 }}"></div>
 {{ else if .Site.Params.offlineSearch -}}
 {{ $offlineSearchIndex := resources.Get "json/offline-search-index.json" | resources.ExecuteAsTemplate "offline-search-index.json" . -}}
 {{ if hugo.IsProduction -}}
