@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="{{ "css/prism.css" | relURL }}"/>
 {{ end -}}
 
+{{ template "algolia/head" . -}}
+
 {{ partial "hooks/head-end.html" . -}}
 
 {{/* To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled */ -}}
@@ -51,4 +53,19 @@
   {{ else -}}
     {{ template "_internal/google_analytics_async.html" . -}}
   {{ end -}}
+{{ end -}}
+
+{{ define "algolia/head" -}}
+
+{{ if and .Site.Params.search (isset .Site.Params.search "algolia") -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
+  integrity="sha512-O6ywtjtiV4QGgC6cD75C2Tf04SlTn9vvka8oV/dYpDL1JWM4lVP0QoZbdZt5RLtOWDpaP+MObzUrwl43ssqfvg=="
+  crossorigin="anonymous" />
+{{ end -}}
+
+{{ if ne .Site.Params.algolia_docsearch nil -}}
+{{ warnf `Config 'params.algolia_docsearch' is deprecated: use 'params.search.algolia'
+      For details, see https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch.` -}}
+{{ end -}}
+
 {{ end -}}

@@ -76,6 +76,15 @@
   }
 }
 
+.td-sidebar .td-search--algolia {
+  display: block;
+  padding: 0 0.5rem;
+  > button {
+    margin: 0;
+    width: 100%;
+  }
+}
+
 // Offline search
 
 .td-search--offline {
