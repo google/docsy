@@ -37,13 +37,23 @@
   {{ $newPageQS := querify "value" $newPageStub.Content "filename" "change-me.md" | safeURL -}}
   {{ $newPageURL := printf "%s/new/%s?%s"  $gh_repo (path.Dir $gh_repo_path) $newPageQS -}}
 
+  {{ if (.Site.Params.ui.enable_meta_link_git_remote_view_page) -}}
   <a href="{{ $viewURL }}" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> {{ T "post_view_this" }}</a>
+  {{ end -}}
+  {{ if (.Site.Params.ui.enable_meta_link_git_remote_edit_page) -}}
   <a href="{{ $editURL }}" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
+  {{ end -}}
+  {{ if (.Site.Params.ui.enable_meta_link_git_remote_create_child_page) -}}
   <a href="{{ $newPageURL }}" class="td-page-meta--child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_create_child_page" }}</a>
+  {{ end -}}
+  {{ if (.Site.Params.ui.enable_meta_link_git_remote_create_doc_issue) -}}
   <a href="{{ $issuesURL }}" class="td-page-meta--issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_issue" }}</a>
-  {{ with $gh_project_repo -}}
-    {{ $project_issueURL := printf "%s/issues/new" . -}}
-    <a href="{{ $project_issueURL }}" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+  {{ end -}}
+  {{ if (.Site.Params.ui.enable_meta_link_git_remote_create_project_issue) -}}
+    {{ with $gh_project_repo -}}
+      {{ $project_issueURL := printf "%s/issues/new" . -}}
+      <a href="{{ $project_issueURL }}" class="td-page-meta--project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+    {{ end -}}
   {{ end -}}
 
 {{ end -}}

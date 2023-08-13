@@ -6,6 +6,12 @@ params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
+  ui:
+    enable_meta_link_git_remote_view_page: true
+    enable_meta_link_git_remote_edit_page: true
+    enable_meta_link_git_remote_create_child_page: true
+    enable_meta_link_git_remote_create_doc_issue: true
+    enable_meta_link_git_remote_create_project_issue: true
 
 outputFormats:
   PRINT:
