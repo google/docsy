@@ -9,7 +9,7 @@ description: >
 Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs. You can choose from:
 
 * [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine) (GCSE), the default option, which uses Google's index of your public site to generate a search results page.
-* [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and search mechanism, and provides an organized dropdown of search results when your readers use the search box. Algolia DocSearch is free for public documentation sites.
+* [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and search mechanism. Search results are displayed as a pop-up. Algolia DocSearch is free for public documentation sites.
 * [Local search with Lunr](#local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
 
 If you enable any of these search options in your project [configuration file], a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
