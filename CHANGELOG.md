@@ -32,7 +32,7 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 - **Algolia**
   - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
     the top and left navs).
-  - [#1662] DocSearch is natively supported by Docsy now, through site config.
+  - [#1662] DocSearch is supported by Docsy through site config.
   - For details, see [Algolia DocSearch].
 
 [#1651]: https://github.com/google/docsy/pull/1651
