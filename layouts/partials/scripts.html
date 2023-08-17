@@ -101,15 +101,13 @@ window.markmap = {
     crossorigin="anonymous"></script>
 {{ end -}}
 
-<script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
-
-{{- if and .Site.Params.search (isset .Site.Params.search "algolia") -}}
+{{ if and .Site.Params.search (isset .Site.Params.search "algolia") -}}
   {{ template "algolia/scripts" .Site.Params.search.algolia -}}
 {{ end -}}
-
+<script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 {{ partial "hooks/body-end.html" . -}}
 
-{{ define "algolia/scripts" }}
+{{ define "algolia/scripts" -}}
 <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"
   integrity="sha512-sQFwlNnBlEyWdI4EwJ9d2wjViu0ZPmIMjPP8kCmBoOjqcljGndf2gb4mldT4ZHxKCQcrdJ0+rxnMFKHuGWB7ag=="
   crossorigin="anonymous" ></script>
