@@ -68,7 +68,7 @@ params:
   offlineSearchMaxResults: 10
   prism_syntax_highlighting: false
   search:
-    algolia:
+    # algolia:
   ui:
     sidebar_cache_limit: 10
     sidebar_menu_compact: true
