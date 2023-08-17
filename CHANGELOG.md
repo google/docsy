@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore deining docsy gtag lookandfeel
+  cSpell:ignore deining docsy gtag lookandfeel navs
 -->
 
 # Changelog
@@ -22,6 +22,23 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 **Breaking changes**:
 
 **Other changes**:
+
+## [0.7.2][0.x.y] - next release (unpublished yet)
+
+For the full list of this release's changes, see the [release notes][0.x.y].
+
+**New**:
+
+- **Algolia**
+  - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
+    the top and left navs).
+  - [#1662] DocSearch is supported by Docsy through site config.
+  - For details, see [Algolia DocSearch].
+
+[#1651]: https://github.com/google/docsy/pull/1651
+[#1662]: https://github.com/google/docsy/pull/1662
+[Algolia DocSearch]:
+  https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
 
 ## [0.7.1][]
 

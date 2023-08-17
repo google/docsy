@@ -63,16 +63,16 @@ params:
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
   gcs_engine_id: 011217106833237091527:la2vtv2emlw
-  algolia_docsearch: false
   offlineSearch: false
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
   prism_syntax_highlighting: false
+  search:
+    # algolia:
   ui:
+    sidebar_cache_limit: 10
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
-    sidebar_cache_limit: 10
-    breadcrumb_disable: false
     sidebar_search_disable: false
     feedback:
       enable: true

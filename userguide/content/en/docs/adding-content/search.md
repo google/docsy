@@ -9,12 +9,18 @@ description: >
 Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs. You can choose from:
 
 * [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine) (GCSE), the default option, which uses Google's index of your public site to generate a search results page.
-* [Algolia DocSearch](#configure-algolia-docsearch), which uses Algolia's indexing and search mechanism, and provides an organized dropdown of search results when your readers use the search box. Algolia DocSearch is free for public documentation sites.
-* [Local search with Lunr](#configure-local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
+* [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and search mechanism. Search results are displayed as a pop-up. Algolia DocSearch is free for public documentation sites.
+* [Local search with Lunr](#local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
 
 If you enable any of these search options in your project [configuration file], a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
 
-Be aware that if you accidentally enable more than one search option in your project [configuration file], you may get unexpected results (for example, if you have added the `.js` for Algolia DocSearch, you'll get Algolia results if you enable GCSE search but forget to disable Algolia search).
+{{% alert title="You can only enable a single search option at a time" color=warning %}}
+
+If you accidentally enable more than one search option in your project
+configuration file, you will get a warning at build time, and undetermined
+behavior when serving your site.
+
+{{% /alert %}}
 
 ## Disabling the sidebar search box
 
@@ -99,74 +105,90 @@ gcs_engine_id: '011737558837375720776:fsdu1nryfng'
 
 If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `hugo.toml` from the example site and want to disable search, just comment out or remove the relevant line.
 
-## Configure Algolia DocSearch
+## Algolia DocSearch
 
-As an alternative to GCSE, you can use [Algolia DocSearch](https://docsearch.algolia.com/) with this theme. Algolia DocSearch is free for public documentation sites.  Docsy supports Algolia DocSearch v3.
+As an alternative to GCSE, you can use [Algolia
+DocSearch](https://docsearch.algolia.com), which is
+free for public documentation sites. Docsy supports **Algolia DocSearch v3**.
 
-{{% alert title="Note" %}}
-Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you are an existing Algolia DocSearch v2 user and want to use the latest Docsy version, [follow the migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the DocSearch documentation to update your DocSearch code snippet.
+{{% alert title="Algolia v2 is deprecated" %}}
+Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you
+are an existing Algolia DocSearch v2 user and want to use the latest Docsy
+version, [follow the migration
+instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the
+DocSearch documentation to update your DocSearch code snippet.
 {{% /alert %}}
 
 ### Sign up for Algolia DocSearch
 
-Complete the form at [https://docsearch.algolia.com/apply/](https://docsearch.algolia.com/apply/).
+Complete the form at <https://docsearch.algolia.com/apply>.
+Proceed to the next step once you've received Algolia DocSearch
+parameters for your project.
 
-If you are accepted to the program, you will receive the code to add to your documentation site from Algolia by email.
+### Eager to test DocSearch?
 
-### Adding Algolia DocSearch
+Docsy defaults to the [Algolia test][]-site parameters when
+none are provided. To enable search over the Algolia test, define
+`params.search.algolia` without any other fields, as outlined next.
 
-1. Enable Algolia DocSearch in `hugo.toml`/`hugo.yaml`/`hugo.json`.
+### Configure Algolia DocSearch
+
+1.  Ensure that [GCSE search](#disabling-gcse-search) is disabled.
+2.  Add your project's Algolia DocSearch parameters to
+    `hugo.toml`/`hugo.yaml`/`hugo.json`, for example (using [Algolia test][] values):
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-algolia_docsearch = true
+[params.search.algolia]
+appId = "R2IYF7ETH7"
+apiKey = "599cec31baffa4868cae4e79f180729b"
+indexName = "docsearch"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-algolia_docsearch: true
+params:
+  search:
+    algolia:
+      appId: R2IYF7ETH7
+      apiKey: 599cec31baffa4868cae4e79f180729b
+      indexName: docsearch
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "algolia_docsearch": true
+  "params": {
+    "search": {
+      "algolia": {
+        "appId": "R2IYF7ETH7",
+        "apiKey": "599cec31baffa4868cae4e79f180729b",
+        "indexName": "docsearch"
+      }
+    }
+  }
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure local search is set to `false` as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+To learn more about Algolia DocSearch V3, see [Getting
+started](https://docsearch.algolia.com/docs/DocSearch-v3).
 
-3. Disable the sidebar search in `hugo.toml`/`hugo.yaml`/`hugo.json` as this is not currently supported for Algolia DocSearch. See [Disabling the sidebar search box](#disabling-the-sidebar-search-box).
+When you've completed these steps, Algolia search should be enabled on your
+site. Search results are displayed as a pop-up, so you don't need to add any
+search results page.
 
-3. Add the CSS and JS to use Algolia to the head and body of every page in your site, following the instructions in [Add code to head or before body end](/docs/adding-content/lookandfeel/#add-code-to-head-or-before-body-end).
+### Customizing Algolia templates
 
-   * In `head-end.html` add the DocSearch CSS:
+You can customize or disable Docsy's default Algolia support by creating the
+following template files:
 
-      ```html
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3" integrity="sha512-O6ywtjtiV4QGgC6cD75C2Tf04SlTn9vvka8oV/dYpDL1JWM4lVP0QoZbdZt5RLtOWDpaP+MObzUrwl43ssqfvg==" crossorigin="anonymous" />
-      ```
+- `layouts/partials/algolia/head.html` used by `head.html` to load Algolia
+  DocSearch styles. It also issues a deprecation warning for
+  `params.algolia_docsearch`.
+- `layouts/partials/algolia/scripts.html` used by `scripts.html` to load and
+  configure Algolia DocSearch.
 
-   * In `body-end.html` add the DocSearch script. In the code below, replace `docsearch` argument values for `appId`, `apiKey` and `indexName` with those provided by Algolia. Use the `container` values given below, they correspond to the IDs found in Docsy's layout:
+Leave either file empty to disable Docsy's implementation.
 
-      ```html
-      <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3" integrity="sha512-sQFwlNnBlEyWdI4EwJ9d2wjViu0ZPmIMjPP8kCmBoOjqcljGndf2gb4mldT4ZHxKCQcrdJ0+rxnMFKHuGWB7ag==" crossorigin="anonymous" ></script>
-      <script type="text/javascript">
-        for (let i = 0; i < 2; i++) {
-          docsearch({
-            container: `#docsearch-${i}`,
-            // Replace the values below with those for your site.
-            // These are Algolia's test values used for illustrative purposes:
-            appId: 'R2IYF7ETH7',
-            apiKey: '599cec31baffa4868cae4e79f180729b',
-            indexName: 'docsearch',
-          });
-        }
-      </script>
-     ```
-
-You can find out more about how to configure DocSearch in the Algolia DocSearch V3 [Getting started](https://docsearch.algolia.com/docs/DocSearch-v3) guide.
-
-When you've completed these steps, Algolia search should be enabled on your site. Search results are displayed as a pop-up, so you don't need to add any search results page.
-
-## Configure local search with Lunr
+## Local search with Lunr
 
 [Lunr](https://lunrjs.com/) is a Javascript-based search option that lets you index your site and make it searchable without the need for external, server-side search services. This is a good option particularly for smaller or non-public sites.
 
@@ -283,5 +305,5 @@ exclude_search: true
 {{< /tab >}}
 {{< /tabpane >}}
 
+[algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
 [configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
-
