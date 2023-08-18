@@ -138,7 +138,14 @@ noteworthy changes here:
 [Tabbed panes]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
 
-## 0.7.1
+**Breaking changes**:
+
+- **Shortcodes**:
+  - The alert shortcode has been reworked to address [#906] and [#939]. For
+    details, see [#941].
+
+[#941]: https://github.com/google/docsy/pull/941
+
 
 For the full list of changes, see the [0.7.1] release notes.
 
