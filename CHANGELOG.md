@@ -80,6 +80,9 @@ For the full list of changes, see the [0.8.0] release notes.
 
 **Breaking changes**:
 
+- **Shortcodes**:
+  - The alert shortcode has been reworked to address [#906] and [#939]. For
+    details, see [#941].
 - Docsy is packaged as a **single Hugo module** ([#1120]).
   - For details, see [Use Docsy as a Hugo Module].
 - **Important**: non-Hugo-module projects should read the [Docsy NPM install
@@ -87,7 +90,7 @@ For the full list of changes, see the [0.8.0] release notes.
 - **Page feedback**, or [User feedback]:
   - In support of projects configuring analytics outside of Docsy, feedback
     functionality is enabled regardless of whether
-    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
+    site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
   - Feedback-event attribute changes ([#1726]):
     - Event `name` is `page_helpful`rather than`click`
     - Event `value` for "yes" is 100 by default, rather than 1, allowing for
@@ -97,6 +100,7 @@ For the full list of changes, see the [0.8.0] release notes.
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
 
+[#941]: https://github.com/google/docsy/pull/941
 [#1120]: https://github.com/google/docsy/issues/1120
 [#1385]: https://github.com/google/docsy/issues/1385
 [#1726]: https://github.com/google/docsy/pull/1726
@@ -137,14 +141,6 @@ noteworthy changes here:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
 [Tabbed panes]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
-
-**Breaking changes**:
-
-- **Shortcodes**:
-  - The alert shortcode has been reworked to address [#906] and [#939]. For
-    details, see [#941].
-
-[#941]: https://github.com/google/docsy/pull/941
 
 
 For the full list of changes, see the [0.7.1] release notes.
