@@ -2,14 +2,31 @@
 // Left side navigation
 //
 .td-sidebar-nav {
+  $_max-height: calc(100vh - 8.5rem);
+
   padding-right: 0.5rem;
   margin-right: -15px;
   margin-left: -15px;
 
   @include media-breakpoint-up(md) {
     @supports (position: sticky) {
-      max-height: calc(100vh - 10rem);
+      max-height: $_max-height;
       overflow-y: auto;
+    }
+  }
+
+  // Adjust height and padding when sidebar_search_disable is true, but only for
+  // >= `lg` views, because on tablet (`md`) and mobile (<= `sm`), the search
+  // box is displayed regardless of the value of sidebar_search_disable:
+  &.td-sidebar-nav--search-disabled {
+    @include media-breakpoint-up(lg) {
+      // There's no search box so add top padding
+      // and adjust max-height:
+      padding-top: 1rem;
+
+      @supports (position: sticky) {
+        max-height: calc(#{$_max-height} + 4.5rem);
+      }
     }
   }
 
@@ -22,7 +39,7 @@
       list-style: none;
     }
 
-    ul {
+    &.ul-0, ul {
       padding: 0;
       margin: 0;
     }
@@ -119,9 +136,7 @@
   }
 
   &__search {
-    padding: 1rem 15px;
-    margin-right: -15px;
-    margin-left: -15px;
+    padding: 1rem 0;
   }
 
   &__inner {
@@ -132,7 +147,7 @@
         position: sticky;
         top: 4rem;
         z-index: 10;
-        height: calc(100vh - 6rem);
+        height: calc(100vh - 5rem);
       }
     }
 
