@@ -1,11 +1,11 @@
 {{ $color := .Get "color" | default "primary" -}}
 
 <div class="alert alert-{{ $color }}" role="alert">
-{{ with .Get "title" -}}
+{{- with .Get "title" -}}
   <div class="h4 alert-heading">
     {{- . | safeHTML -}}
   </div>
-{{- end -}}
 {{/* Do **not** remove this comment! It ends the previous HTML block; see https://spec.commonmark.org/0.30/#html-blocks, 7. */}}
-{{ .Inner }}
+{{- end -}}
+{{ .Inner -}}
 </div>
