@@ -37,10 +37,6 @@
     width: 100%;
     text-indent: 1.25em;
 
-    @if $enable-rounded {
-      border-radius: 1rem;
-    }
-
     &:not(:focus) {
       background: transparent;
     }
@@ -77,6 +73,15 @@
 
   &:not(:focus-within) {
     color: $input-placeholder-color;
+  }
+}
+
+.td-sidebar .td-search--algolia {
+  display: block;
+  padding: 0 0.5rem;
+  > button {
+    margin: 0;
+    width: 100%;
   }
 }
 

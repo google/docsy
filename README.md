@@ -1,5 +1,11 @@
 # Docsy
 
+[![Project status: active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Project releases](https://img.shields.io/github/release/google/docsy)](https://github.com/google/docsy/releases)
+[![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=master)](https://app.netlify.com/sites/docsydocs/deploys)
+[![Project contributors](https://img.shields.io/github/contributors/google/docsy)](https://github.com/google/docsy/graphs/contributors)
+[![Project license](https://img.shields.io/github/license/google/docsy)](https://github.com/google/docsy/blob/main/LICENSE)
+
 ## 🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use official Docsy [releases].
 
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
@@ -81,7 +87,7 @@ npm install
 npm run serve
 ```
 
-## Contributing ![GitHub](https://img.shields.io/github/contributors/google/docsy)
+## Contributing
 
 Please read
 [CONTRIBUTING.md](https://github.com/google/docsy/blob/main/CONTRIBUTING.md) for
@@ -90,7 +96,7 @@ us. See also the list of
 [contributors](https://github.com/google/docsy/graphs/contributors) who
 participated in this project.
 
-## License ![GitHub](https://img.shields.io/github/license/google/docsy)
+## License
 
 This project is licensed under the Apache License 2.0 - see the
 [LICENSE.md](https://github.com/google/docsy/blob/main/LICENSE) file for details

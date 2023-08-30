@@ -18,7 +18,10 @@
   </div>
   <div id="content-desktop"></div>
   {{ end -}}
-  <nav class="collapse td-sidebar-nav{{ if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end }}" id="td-section-nav">
+  <nav class="td-sidebar-nav collapse
+      {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}
+      {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end -}}
+      " id="td-section-nav">
     {{ if  (gt (len .Site.Home.Translations) 0) -}}
     <div class="td-sidebar-nav__section nav-item dropdown d-block d-lg-none">
       {{ partial "navbar-lang-selector.html" . }}

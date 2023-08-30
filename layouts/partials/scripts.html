@@ -101,5 +101,25 @@ window.markmap = {
     crossorigin="anonymous"></script>
 {{ end -}}
 
+{{ if and .Site.Params.search (isset .Site.Params.search "algolia") -}}
+  {{ template "algolia/scripts" .Site.Params.search.algolia -}}
+{{ end -}}
 <script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 {{ partial "hooks/body-end.html" . -}}
+
+{{ define "algolia/scripts" -}}
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"
+  integrity="sha512-sQFwlNnBlEyWdI4EwJ9d2wjViu0ZPmIMjPP8kCmBoOjqcljGndf2gb4mldT4ZHxKCQcrdJ0+rxnMFKHuGWB7ag=="
+  crossorigin="anonymous" ></script>
+<script type="text/javascript">
+const containers = ['#docsearch-0', '#docsearch-1'];
+for (let c of containers) {
+  docsearch({
+    container: c,
+    appId: {{ .appId | default "R2IYF7ETH7" }},
+    apiKey: {{ .apiKey | default "599cec31baffa4868cae4e79f180729b" }},
+    indexName: {{ .indexName | default "docsearch" }},
+  });
+}
+</script>
+{{ end -}}
