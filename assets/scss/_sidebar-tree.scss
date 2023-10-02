@@ -78,7 +78,8 @@
   }
 
   a {
-    &:hover {
+    &:hover,
+    &:focus {
       color: $blue;
       text-decoration: underline;
     }
