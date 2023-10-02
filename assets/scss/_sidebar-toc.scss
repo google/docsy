@@ -50,12 +50,24 @@
 
       &:hover {
         color: $blue;
-        text-decoration: none;
       }
     }
   }
 
   ul {
     padding-left: 0;
+  }
+}
+
+.td-page-meta,
+.td-sidebar-toc,
+.td-toc {
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 }

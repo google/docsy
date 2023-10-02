@@ -63,6 +63,7 @@
 
     a {
       color: $gray-900;
+      text-decoration: none;
     }
   }
 
@@ -79,7 +80,7 @@
   a {
     &:hover {
       color: $blue;
-      text-decoration: none;
+      text-decoration: underline;
     }
 
     &.active {
