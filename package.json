@@ -28,9 +28,9 @@
     "bootstrap": "5.2.3"
   },
   "devDependencies": {
-    "hugo-extended": "0.115.1"
+    "hugo-extended": "0.120.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
