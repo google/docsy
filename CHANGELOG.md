@@ -23,11 +23,10 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 
 **Other changes**:
 
-## [0.7.2][0.x.y] - next release (unpublished yet)
+## [0.7.2][]
 
-For the full list of this release's changes, see the [release notes][0.x.y].
-
-**New**:
+For the full list of this release's changes, see the [release notes][0.7.2]. We
+mention one noteworthy change here:
 
 - **Algolia**
   - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
@@ -287,6 +286,7 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC
+[0.7.2]: https://github.com/google/docsy/releases/v0.7.2
 [0.7.1]: https://github.com/google/docsy/releases/v0.7.1
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0
