@@ -29,7 +29,7 @@
     "bootstrap": "5.2.3"
   },
   "devDependencies": {
-    "hugo-extended": "0.120.3"
+    "hugo-extended": "0.120.4"
   },
   "optionalDependencies": {
     "markdown-link-check": "^3.11.2",
