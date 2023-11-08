@@ -1,0 +1,5 @@
+.editorconfig
+.gitignore
+.nvmrc
+.prettierignore
+.s3deploy.yml

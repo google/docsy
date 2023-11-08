@@ -1,18 +1,22 @@
 {
   "name": "docsy",
-  "version": "0.7.2-dev.0-unreleased",
+  "version": "0.7.2",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "scripts": {
     "_cd:docs": "cd userguide &&",
+    "_check:format": "npx prettier --check .??* *.md",
     "build:preview": "npm run cd:docs build:preview",
     "build:production": "npm run cd:docs build:production",
     "build": "npm run cd:docs build",
     "cd:docs": "npm run _cd:docs -- npm run",
+    "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
+    "check:links--md": "npx markdown-link-check --config .markdown-link-check.json *.md",
     "check:links:all": "npm run cd:docs check:links:all",
     "check:links": "npm run cd:docs check:links",
     "docs-install": "npm run _cd:docs -- npm install",
+    "fix:format": "npm run _check:format -- --write",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test",
@@ -20,15 +24,16 @@
     "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
-  "prettier": {
-    "proseWrap": "always"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.4.0",
     "bootstrap": "5.2.3"
   },
   "devDependencies": {
     "hugo-extended": "0.120.3"
+  },
+  "optionalDependencies": {
+    "markdown-link-check": "^3.11.2",
+    "prettier": "^3.0.3"
   },
   "engines": {
     "node": ">=20"
