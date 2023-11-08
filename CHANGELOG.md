@@ -11,7 +11,7 @@ notes][releases].
 Useful links:
 
 - [Releases][] & [tags][]. Jump to the [latest][] release.
-- [23Q3][] milestone
+- [23Q4][] milestone
 
 ## [0.8.0][0.x.y] - next major release (unpublished yet)
 
@@ -25,17 +25,20 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 
 ## [0.7.2][]
 
-For the full list of this release's changes, see the [release notes][0.7.2]. We
-mention one noteworthy change here:
+For the full list of this release's changes, see the [0.7.2 release
+notes][0.7.2]. We mention one noteworthy change here:
 
 - **Algolia**
   - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
     the top and left navs).
   - [#1662] DocSearch is supported by Docsy through site config.
   - For details, see [Algolia DocSearch].
+- **Tabpane** shortcode: some improvements, with more to come; for details, see
+  [#1641].
 
 [#1651]: https://github.com/google/docsy/pull/1651
 [#1662]: https://github.com/google/docsy/pull/1662
+[#1641]: https://github.com/google/docsy/issues/1641
 [Algolia DocSearch]:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
 
@@ -296,7 +299,7 @@ For the full list of this release's changes, see the [release notes][0.x.y].
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [0.x.y]: #changelog
-[23q3]: https://github.com/google/docsy/milestone/8
+[23q4]: https://github.com/google/docsy/milestone/9
 [hugo modules]: https://gohugo.io/hugo-modules/
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
