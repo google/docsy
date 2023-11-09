@@ -18,7 +18,7 @@
     "docs-install": "npm run _cd:docs -- npm install",
     "fix:format": "npm run _check:format -- --write",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
-    "postinstall": "cd .. && npx mkdirp github.com/FortAwesome/Font-Awesome && npx mkdirp github.com/twbs/bootstrap",
+    "postinstall": "npx mkdirp ../github.com/FortAwesome/Font-Awesome ../github.com/twbs/bootstrap",
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
