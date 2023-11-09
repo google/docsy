@@ -35,10 +35,13 @@ notes][0.7.2]. We mention one noteworthy change here:
   - For details, see [Algolia DocSearch].
 - **Tabpane** shortcode: some improvements, with more to come; for details, see
   [#1641].
+- **Left-nav**, and **right-nav** (TOC + page meta): spacing issues have been
+  resolved; for details, see [#1661].
 
-[#1651]: https://github.com/google/docsy/pull/1651
-[#1662]: https://github.com/google/docsy/pull/1662
 [#1641]: https://github.com/google/docsy/issues/1641
+[#1651]: https://github.com/google/docsy/pull/1651
+[#1661]: https://github.com/google/docsy/pull/1661
+[#1662]: https://github.com/google/docsy/pull/1662
 [Algolia DocSearch]:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
 
