@@ -32,6 +32,7 @@
   "devDependencies": {
     "hugo-extended": "0.120.4",
     "markdown-link-check": "^3.11.2",
+    "mkdirp": "^3.0.1",
     "prettier": "^3.0.3"
   },
   "engines": {
