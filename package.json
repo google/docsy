@@ -24,7 +24,8 @@
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
+    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
+    "write:go.mod": "node tools/updateHugoModule/index.mjs"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "dependencies": {
