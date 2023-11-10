@@ -1,5 +1,5 @@
 // Runs `hugo mod get <module>@<vers>` for Docsy module dependencies.
-// Get dependencies versions from `package.json`.
+// It gets dependency versions from `package.json`.
 
 import fs from 'fs';
 import { execSync } from 'child_process';
@@ -7,20 +7,26 @@ import { execSync } from 'child_process';
 const packageJson = readPackageJson();
 let exitStatus = 0;
 
+const exit = () => process.exit(exitStatus);
+
 function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
   try {
     // Extract module version
-    const packageVersion = packageJson.dependencies[npmPkgNm];
-    if (!packageVersion) {
+    const pkgVers = packageJson.dependencies[npmPkgNm];
+    if (!pkgVers) {
       throw new Error(`${npmPkgNm} not found in dependencies`);
     }
+    if (!/^\d/.test(pkgVers)) {
+      const msg = `${npmPkgNm} version must be exact (start with a number), not: ${pkgVers}`;
+      throw new Error(msg);
+    }
 
-    const command = `hugo mod get ${hugoModuleRefAtV}${packageVersion}`;
+    const command = `hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
     console.log(`> ${command}`);
     const output = execSync(command);
     console.log(output.toString());
   } catch (error) {
-    console.error('An error occurred:', error.message);
+    console.error(`ERROR: ${error.message}\n`);
     exitStatus = 1;
   }
 }
@@ -30,12 +36,10 @@ function readPackageJson() {
     const packageJsonData = fs.readFileSync('package.json', 'utf8');
     return JSON.parse(packageJsonData);
   } catch (error) {
-    console.error('Failed to read package.json:', error.message);
+    console.error('FAILED to read package.json:', error.message);
     exit();
   }
 }
-
-const exit = () => process.exit(exitStatus);
 
 const packagesToUpdate = [
   // NPM package name, `Hugo module name@` optionally follow by `v` if needed
