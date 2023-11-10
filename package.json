@@ -19,13 +19,13 @@
     "check:links": "npm run cd:docs check:links",
     "docs-install": "npm run _cd:docs -- npm install",
     "fix:format": "npm run _check:format -- --write",
+    "get:hugo-modules": "node tools/getHugoModules/index.mjs",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "postinstall": "npm run _mkdir:hugo-mod && npm run _cp:bs-rfs",
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "write:go.mod": "node tools/updateHugoModule/index.mjs"
+    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "dependencies": {
