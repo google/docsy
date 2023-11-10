@@ -18,6 +18,7 @@
     "docs-install": "npm run _cd:docs -- npm install",
     "fix:format": "npm run _check:format -- --write",
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
+    "postinstall": "npx mkdirp ../github.com/FortAwesome/Font-Awesome ../github.com/twbs/bootstrap",
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "hugo-extended": "0.120.4",
     "markdown-link-check": "^3.11.2",
+    "mkdirp": "^3.0.1",
     "prettier": "^3.0.3"
   },
   "engines": {
