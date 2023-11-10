@@ -1,5 +1,7 @@
 module github.com/google/docsy
 
+// AUTO-GENERATED using `npm run write:go.mod`
+
 go 1.12
 
 require (
