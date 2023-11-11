@@ -20,18 +20,20 @@ Useful links:
 
 ## 0.8.0 - next major release (unpublished yet)
 
-For the full list of changes, see the [release][0.x.y] notes.
-
-**New**:
+For the full list of changes, see the [release][0.8.0] notes.
 
 **Breaking changes**:
 
+**New**:
+
 **Other changes**:
+
+[0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
 
 ## 0.7.2
 
-For the full list of this release's changes, see the [release][0.7.2] notes. We
-mention some noteworthy changes here:
+For the full list of changes, see the [release][0.7.2] notes. We mention some
+noteworthy changes here:
 
 - **Algolia**
   - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
@@ -275,7 +277,7 @@ For the full list of changes, see the [release][0.3.0] notes.
   [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
 - (**Edit**) [#1009] inadvertently changed the base [Bootstrap styles for
   cards][bs4cards], as well as the Docsy `highlight` style. For details, see
-  [issue #1154]. Release [0.5.0] includes a fix.
+  [issue #1154]. Release [0.5.1] includes a fix.
 
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
