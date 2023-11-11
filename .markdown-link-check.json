@@ -2,6 +2,9 @@
   "ignorePatterns": [
     {
       "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://badges.netlify.com/api/docsydocs.svg?branch=main"
     }
   ],
   "timeout": "3s",

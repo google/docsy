@@ -2,7 +2,7 @@
 
 [![Project status: active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Project releases](https://img.shields.io/github/release/google/docsy)](https://github.com/google/docsy/releases)
-[![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=master)](https://app.netlify.com/sites/docsydocs/deploys)
+[![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=main)](https://app.netlify.com/sites/docsydocs/deploys)
 [![Project contributors](https://img.shields.io/github/contributors/google/docsy)](https://github.com/google/docsy/graphs/contributors)
 [![Project license](https://img.shields.io/github/license/google/docsy)](https://github.com/google/docsy/blob/main/LICENSE)
 
@@ -72,9 +72,9 @@ details about the various usage options.
 ## Documentation
 
 Docsy has its own user guide (using Docsy, of course!) with lots more
-information about using the theme. It is hosted by [Netlify][] at
-[docsy.dev](https://docsy.dev). For deploy logs and more, see [Deploys][] from
-the site's Netlify dashboard.
+information about using the theme. It is hosted by [Netlify] at
+[docsy.dev](https://docsy.dev). For deploy logs and more, see [Deploys] from the
+site's Netlify dashboard.
 
 Alternatively you can use Hugo to generate and serve a local copy of the guide
 (also useful for testing local theme changes), making sure you have installed

@@ -10,23 +10,30 @@ notes][releases].
 
 Useful links:
 
-- [Releases][] & [tags][]. Jump to the [latest][] release.
-- [23Q4][] milestone
+- [Releases] & [tags]. Jump to the [latest] release.
+- [23Q4] milestone
 
-## [0.8.0][0.x.y] - next major release (unpublished yet)
+[23q4]: https://github.com/google/docsy/milestone/9
+[latest]: https://github.com/google/docsy/releases/latest
+[releases]: https://github.com/google/docsy/releases
+[tags]: https://github.com/google/docsy/tags
 
-For the full list of this release's changes, see the [release notes][0.x.y].
+## 0.8.0 - next major release (unpublished yet)
 
-**New**:
+For the full list of changes, see the [release][0.8.0] notes.
 
 **Breaking changes**:
 
+**New**:
+
 **Other changes**:
 
-## [0.7.2][]
+[0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
 
-For the full list of this release's changes, see the [0.7.2 release
-notes][0.7.2]. We mention one noteworthy change here:
+## 0.7.2
+
+For the full list of changes, see the [release][0.7.2] notes. We mention some
+noteworthy changes here:
 
 - **Algolia**
   - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
@@ -42,12 +49,13 @@ notes][0.7.2]. We mention one noteworthy change here:
 [#1651]: https://github.com/google/docsy/pull/1651
 [#1661]: https://github.com/google/docsy/pull/1661
 [#1662]: https://github.com/google/docsy/pull/1662
+[0.7.2]: https://github.com/google/docsy/releases/v0.7.2
 [Algolia DocSearch]:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
 
-## [0.7.1][]
+## 0.7.1
 
-For the full list of this release's changes, see the [release notes][0.7.1].
+For the full list of changes, see the [release][0.7.1] notes.
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -58,10 +66,11 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 [#1560]: https://github.com/google/docsy/issues/1560
 [#1579]: https://github.com/google/docsy/issues/1579
+[0.7.1]: https://github.com/google/docsy/releases/v0.7.1
 
-## [0.7.0][]
+## 0.7.0
 
-For the full list of this release's changes, see the [release notes][0.7.0].
+For the full list of changes, see the [release][0.7.0] notes.
 
 **New**:
 
@@ -97,7 +106,7 @@ For the full list of this release's changes, see the [release notes][0.7.0].
 [chroma-docsy]:
   https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 
-- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
+- **Detection of draw.io diagrams** is now **disabled** by default [#1185]
 
 **Other changes**:
 
@@ -107,23 +116,24 @@ For the full list of this release's changes, see the [release notes][0.7.0].
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
   - Draw.io diagram edit button: replaced custom colors by BS's outline primary.
 
-[#470]: https://github.com/google/docsy/issues/470
-[#906]: https://github.com/google/docsy/issues/906
-[#939]: https://github.com/google/docsy/issues/939
 [#1185]: https://github.com/google/docsy/issues/1185
 [#1369]: https://github.com/google/docsy/issues/1369
 [#1376]: https://github.com/google/docsy/issues/1369
 [#1442]: https://github.com/google/docsy/issues/1442
 [#1472]: https://github.com/google/docsy/issues/1472
 [#1523]: https://github.com/google/docsy/pull/1523
+[#470]: https://github.com/google/docsy/issues/470
+[#906]: https://github.com/google/docsy/issues/906
+[#939]: https://github.com/google/docsy/issues/939
+[0.7.0]: https://github.com/google/docsy/releases/v0.7.0
 [blocks/section]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 
-## [0.6.0][]
+## 0.6.0
 
-For the full list of this release's changes, see the [release notes][0.6.0].
+For the full list of changes, see the [release][0.6.0] notes.
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -139,19 +149,22 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
   `chem` blocks via KateX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
 
-## [0.5.1][]
+[0.6.0]: https://github.com/google/docsy/releases/v0.6.0
+[bs-announcement]: https://github.com/google/docsy/discussions/1308
 
-For the full list of this release's changes, see the [release notes][0.5.1].
-**BREAKING CHANGES** are documented below.
+## 0.5.1
+
+For the full list of changes, see the [release][0.5.1] notes. **BREAKING
+CHANGES** are documented below.
 
 **After you update** your project's Docsy:
 
-- Update your project setup (see [0.4.0][]) if you haven't already.
+- Update your project setup (see [0.4.0]) if you haven't already.
 - Run `npm install`.
 
 **New**:
 
-- Projects can now install and use [Docsy as an NPM package][].
+- Projects can now install and use [Docsy as an NPM package].
 
 **Breaking changes**:
 
@@ -164,22 +177,23 @@ For the full list of this release's changes, see the [release notes][0.5.1].
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
   how to hide the logo (or your brand name), see [Styling your project logo and
-  name][].
+  name].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
-  release notes][].
-- **[Upgraded FontAwesome][]** to v6 from v5. While many icons were renamed, the
+  release notes].
+- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
-  changed][].
+  changed].
 - **Search-box**: the HTML structure and class names have changed, due to the
   Font Awesome upgrade, for both online and offline search. This may affect your
   project if you have overridden search styling or scripts.
 
 **Other changes**:
 
-- By default, Docsy now uses the [gtag.js][] analytics library for all site
-  tags. For details, see [Adding Analytics > Setup][].
+- By default, Docsy now uses the [gtag.js] analytics library for all site tags.
+  For details, see [Adding Analytics > Setup].
 
+[0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [adding analytics > setup]:
   https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
@@ -191,14 +205,14 @@ For the full list of this release's changes, see the [release notes][0.5.1].
 [upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
 [what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
-## [0.5.0][]
+## 0.5.0
 
 Unpublished.
 
-## [0.4.0][]
+## 0.4.0
 
-For the full list of this release's changes, see the [release notes][0.4.0].
-Potential **BREAKING CHANGES** are documented below.
+For the full list of changes, see the [release][0.4.0] notes. Potential
+**BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
 
@@ -206,8 +220,8 @@ Potential **BREAKING CHANGES** are documented below.
 
 If your project uses Docsy as follows:
 
-- [Hugo Module][], then this change doesn't impact you.
-- For [other Docsy setups][], this is a **BREAKING CHANGE** -- read on.
+- [Hugo Module], then this change doesn't impact you.
+- For [other Docsy setups], this is a **BREAKING CHANGE** -- read on.
 
 Docsy now fetches Bootstrap and FontAwesome as NPM packages rather than git
 submodules. This has an impact on your project-build setup. To migrate your
@@ -227,7 +241,7 @@ site, follow these steps (execute commands from your project's root directory):
     ```
 3.  Update your build scripts to fetch Docsy dependencies automatically. For
     example, if your site build uses NPM scripts, consider getting Docsy
-    dependencies via a [prepare][] script as follows:
+    dependencies via a [prepare] script as follows:
     ```json
     {
       "name": "my-website",
@@ -245,14 +259,15 @@ site, follow these steps (execute commands from your project's root directory):
 
 Proceed as usual to build or serve your site.
 
+[0.4.0]: https://github.com/google/docsy/releases/v0.4.0
 [hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
 [prepare]:
   https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
 
-## [0.3.0][]
+## 0.3.0
 
-For the full list of this release's changes, see the [release notes][0.3.0].
+For the full list of changes, see the [release][0.3.0] notes.
 
 **Breaking changes**:
 
@@ -260,51 +275,48 @@ For the full list of this release's changes, see the [release notes][0.3.0].
   [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3). If
   your site uses the deprecated DocSearch v2, you must
   [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
-- (**Edit**) [PR #1009][] inadvertently changed the base [Bootstrap styles for
+- (**Edit**) [#1009] inadvertently changed the base [Bootstrap styles for
   cards][bs4cards], as well as the Docsy `highlight` style. For details, see
-  [issue #1154][]. Release [0.5.0][] includes a fix.
+  [issue #1154]. Release [0.5.1] includes a fix.
 
+[0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
-[pr #1009]: https://github.com/google/docsy/pull/1009
+[#1009]: https://github.com/google/docsy/pull/1009
 [issue #1154]: https://github.com/google/docsy/issues/1154
 
-## [0.2.0][]
+## 0.2.0
 
-For the full list of this release's changes, see the [release notes][0.2.0].
+For the full list of changes, see the [release][0.2.0] notes.
 
 **New**:
 
-- Add official Docsy support for [Hugo modules][]. Many thanks to the dedicated
-  and patient efforts of [@deining][], who researched, experimented, and
-  implemented this feature. Thanks to [@deining][] and [@LisaFC][] for the doc
+- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated
+  and patient efforts of [@deining], who researched, experimented, and
+  implemented this feature. Thanks to [@deining] and [@LisaFC] for the doc
   updates.
 
   For details, see
   [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
 
-## [0.X.Y][] - next planned release (unpublished yet)
+[@deining]: https://github.com/deining
+[@lisafc]: https://github.com/LisaFC
+[0.2.0]: https://github.com/google/docsy/releases/v0.2.0
+[hugo modules]: https://gohugo.io/hugo-modules/
 
-For the full list of this release's changes, see the [release notes][0.x.y].
+<!-- SECTION TEMPLATE ------------------------------------------------------
+
+## 0.X.Y - next planned release (unpublished yet)
+
+For the full list of changes, see the [release][0.x.y] notes.
 
 **Breaking changes**:
 
 - ...
 
-[@deining]: https://github.com/deining
-[@lisafc]: https://github.com/LisaFC
-[0.7.2]: https://github.com/google/docsy/releases/v0.7.2
-[0.7.1]: https://github.com/google/docsy/releases/v0.7.1
-[0.7.0]: https://github.com/google/docsy/releases/v0.7.0
-[0.6.0]: https://github.com/google/docsy/releases/v0.6.0
-[0.5.1]: https://github.com/google/docsy/releases/v0.5.1
-[0.5.0]: https://github.com/google/docsy/releases/v0.5.0
-[0.4.0]: https://github.com/google/docsy/releases/v0.4.0
-[0.3.0]: https://github.com/google/docsy/releases/v0.3.0
-[0.2.0]: https://github.com/google/docsy/releases/v0.2.0
-[0.x.y]: #changelog
-[23q4]: https://github.com/google/docsy/milestone/9
-[hugo modules]: https://gohugo.io/hugo-modules/
-[latest]: https://github.com/google/docsy/releases/latest
-[releases]: https://github.com/google/docsy/releases
-[tags]: https://github.com/google/docsy/tags
-[bs-announcement]: https://github.com/google/docsy/discussions/1308
+**New**:
+
+**Other changes**:
+
+[0.x.y]: https://github.com/google/docsy/releases/v0.X.Y-FIXME
+
+---------------------------------------------------------------------------->
