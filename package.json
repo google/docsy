@@ -23,7 +23,7 @@
     "get:submodule": "set -x && git submodule update --init ${DEPTH:- --depth 1}",
     "postinstall": "npm run _mkdir:hugo-mod && npm run _cp:bs-rfs",
     "serve": "npm run cd:docs serve",
-    "test": "npm run cd:docs test",
+    "test": "npm run cd:docs test && npm run check:links--md",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest"
   },

@@ -30,7 +30,7 @@ menu:
 
 services:
   googleAnalytics:
-    # id: G-XXXXXXXXX
+    # id: G-XXXXXXXXX # Waiting on https://github.com/google/docsy/issues/1097
 
 languages:
   en:

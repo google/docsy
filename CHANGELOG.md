@@ -27,6 +27,10 @@ For the full list of changes, see the [release][0.8.0] notes.
 - SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
+- **Page feedback**, or [User feedback]: in support of projects configuring
+  analytics outside of Docsy, feedback functionality will be enabled regardless
+  of whether `site.Config.Services.GoogleAnalytics.ID` is set.
+  - TBC
 
 **New**:
 
@@ -34,6 +38,8 @@ For the full list of changes, see the [release][0.8.0] notes.
 
 [#1385]: https://github.com/google/docsy/issues/1385
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
+[User feedback]:
+  https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
 
 ## 0.7.2
 
