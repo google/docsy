@@ -30,7 +30,7 @@ menu:
 
 services:
   googleAnalytics:
-    id: UA-00000000-0
+    # id: G-XXXXXXXXX
 
 languages:
   en:

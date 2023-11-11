@@ -1,3 +1,5 @@
+{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable)) -}}
+{{ with .Site.Params.ui.feedback -}}
 <style>
   .feedback--answer {
     display: inline-block;
@@ -57,3 +59,6 @@
     sendFeedback(0);
   });
 </script>
+{{ end -}}
+<br />
+{{ end -}}
