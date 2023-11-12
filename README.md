@@ -89,18 +89,19 @@ npm run serve
 
 ## Contributing
 
-Please read
-[CONTRIBUTING.md](https://github.com/google/docsy/blob/main/CONTRIBUTING.md) for
-details on our code of conduct, and the process for submitting pull requests to
-us. See also the list of
-[contributors](https://github.com/google/docsy/graphs/contributors) who
-participated in this project.
+Read [CONTRIBUTING.md] for details on our [code of conduct], and the process for
+submitting pull requests to us. Thank you to all past, present, and future
+[contributors]!
 
 ## License
 
 This project is licensed under the Apache License 2.0 - see the
 [LICENSE.md](https://github.com/google/docsy/blob/main/LICENSE) file for details
 
+[code of conduct]:
+  https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md
+[CONTRIBUTING.md]: https://github.com/google/docsy/blob/main/CONTRIBUTING.md
+[contributors]: https://github.com/google/docsy/graphs/contributors
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [netlify]: https://netlify.com
 [releases]: https://github.com/google/docsy/releases
