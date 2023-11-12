@@ -2,7 +2,6 @@ baseURL: /
 title: &title Docsy
 description: &desc Docsy does docs
 enableRobotsTXT: true
-theme: [docsy]
 enableGitInfo: true
 
 pygmentsCodeFences: true
@@ -127,6 +126,11 @@ taxonomies:
   category: categories
 
 module:
+  # Comment the next line to build for latest officially released version:
+  workspace: docsy.work
+  imports:
+    - path: github.com/google/docsy
+      disable: false
   mounts:
     - source: content/en
       target: content

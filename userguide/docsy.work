@@ -1,0 +1,4 @@
+go 1.19
+
+use .    // folder userguide
+use ..   // folder docsy (theme sources)

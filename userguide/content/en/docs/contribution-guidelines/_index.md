@@ -86,11 +86,10 @@ If you want to run your own local Hugo server to preview your changes as you wor
     ```
 
 1. Change to the `userguide` directory and run the following Hugo command to build the site and start the Hugo server.
-   Note that you need the `themesDir` flag because the site files are inside the theme repo.
 
     ```sh
     cd userguide
-    hugo server --themesDir ../..
+    hugo server
     ```
 
     By default your site will be available at http://localhost:1313/. Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.
