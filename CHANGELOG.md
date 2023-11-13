@@ -24,10 +24,15 @@ For the full list of changes, see the [release][0.8.0] notes.
 
 **Breaking changes**:
 
+- SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
+  have been dropped. Instead use the more general SASS/SCSS list `join()`
+  function ([#1385]).
+
 **New**:
 
 **Other changes**:
 
+[#1385]: https://github.com/google/docsy/issues/1385
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
 
 ## 0.7.2
