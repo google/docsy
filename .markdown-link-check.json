@@ -1,0 +1,13 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://badges.netlify.com/api/docsydocs.svg?branch=main"
+    }
+  ],
+  "timeout": "3s",
+  "retryOn429": true,
+  "aliveStatusCodes": [200, 206]
+}
