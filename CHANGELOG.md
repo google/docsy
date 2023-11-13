@@ -24,6 +24,12 @@ For the full list of changes, see the [release][0.8.0] notes.
 
 **Breaking changes**:
 
+- **Page feedback**, or [User feedback] ([#1726]):
+  - Feedback-event attribute changes:
+    - Event `name` is `page_helpful`rather than`click`
+    - Event `value` for "yes" is 100 by default, rather than 1, allowing for
+      more response options in the future. To override the default set
+      `params.ui.feedback.max_value`.
 - SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
@@ -37,6 +43,7 @@ For the full list of changes, see the [release][0.8.0] notes.
 **Other changes**:
 
 [#1385]: https://github.com/google/docsy/issues/1385
+[#1726]: https://github.com/google/docsy/pull/1726
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
 [User feedback]:
   https://www.docsy.dev/docs/adding-content/feedback/#user-feedback

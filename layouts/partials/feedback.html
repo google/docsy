@@ -47,7 +47,8 @@
   yesButton.addEventListener('click', () => {
     yesResponse.classList.add('feedback--response__visible');
     disableButtons();
-    sendFeedback(1);
+    {{ $maxValue := .max_value | default 100 -}}
+    sendFeedback({{ $maxValue }});
   });
   noButton.addEventListener('click', () => {
     noResponse.classList.add('feedback--response__visible');

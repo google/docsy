@@ -94,7 +94,7 @@ of every documentation page, as shown in Figure 1.
 </figure>
 
 After clicking **Yes** the user should see a response like Figure 2. You can
-[configure] the response text in the project's [configuration file] `hugo.toml`.
+[configure] the response text in your project's [configuration file].
 
 <figure>
   <img src="/images/yes.png"
@@ -184,6 +184,10 @@ params:
 {{< /tabpane >}}
 
 3.  Save the edits to your configuration file.
+
+By default, Docsy emits an event value of 100 when a user clicks "yes". You can
+change this value by setting `params.ui.feedback.max_value` to a positive
+integer. Docsy uses 0 for "no" events.
 
 ### Access the feedback data
 
