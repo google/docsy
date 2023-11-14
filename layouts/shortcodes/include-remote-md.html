@@ -1,0 +1,26 @@
+{{/* Fetch a remote markdown file  and include it in the page. If the file has a frontmatter, define the marker of the frontmatter in the second parameter (defaults to "---"). If the content after the frontmatter includes the marker (for example, includes "---" as part of a markdown-formatted table) the content included will be incomplete. */}}
+{{ $url := .Get 0 }}
+{{ $marker := .Get 1 | default "---" }}
+
+{{/* Do not change the indentation of the following block */}}
+{{ with resources.GetRemote $url }}
+    {{ with .Err }}
+    {{ errorf "%s" . }}
+{{ else }}
+{{/*  Test for frontmatter */}}
+{{ if hasPrefix .Content $marker }}
+{{ $split := split .Content $marker }}
+
+{{ with strings.Contains .Content $marker }} {{- warnf "Remote snippet includes frontmatter marker, content is truncated: %s" $url -}}
+{{ end }}
+
+{{/*  Output stuff after the frontmatter if a frontmatter was detected. */}}
+{{- index $split 2 | markdownify | safeHTML -}}
+{{ else }}
+{{/*  Output the content of the file if no frontmatter was detected. */}}
+{{- .Content | safeHTML -}}
+{{ end }}
+{{ end }}
+{{ else }}
+    {{ errorf "Unable to get remote resource %q" $url }}
+{{ end }}
