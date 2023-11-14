@@ -132,9 +132,18 @@ other words!
 
 ### Setup
 
-1.  Open `hugo.toml`/`hugo.yaml`/`hugo.json`.
-2.  Ensure that Google Analytics is enabled, as described [above](#setup).
-3.  Set the response text that users see after clicking **Yes** or **No**.
+{{% alert title="Version note" color=warning %}}
+
+As of Docsy version [0.8.0], feedback will be enabled whether
+`site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
+case where analytics is configured outside of Docsy.
+
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+
+{{% /alert %}}
+
+1.  Open your project's Hugo configuration file.
+2.  Set the response text that users see after clicking **Yes** or **No**.
 
     {{< tabpane >}}
     {{< tab header="Configuration file:" disabled=true />}}
@@ -174,7 +183,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-4.  Save and close `hugo.toml`/`hugo.yaml`/`hugo.json`.
+3.  Save the edits to your configuration file.
 
 ### Access the feedback data
 
