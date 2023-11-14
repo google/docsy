@@ -24,19 +24,26 @@ For the full list of changes, see the [release][0.8.0] notes.
 
 **Breaking changes**:
 
+- **Page feedback**, or [User feedback]:
+  - In support of projects configuring analytics outside of Docsy, feedback
+    functionality is enabled regardless of whether
+    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
+  - Feedback-event attribute changes ([#1726]):
+    - Event `name` is `page_helpful`rather than`click`
+    - Event `value` for "yes" is 100 by default, rather than 1, allowing for
+      more response options in the future. To override the default set
+      `params.ui.feedback.max_value`.
 - SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
-- **Page feedback**, or [User feedback]: in support of projects configuring
-  analytics outside of Docsy, feedback functionality will be enabled regardless
-  of whether `site.Config.Services.GoogleAnalytics.ID` is set.
-  - TBC
 
 **New**:
 
 **Other changes**:
 
 [#1385]: https://github.com/google/docsy/issues/1385
+[#1726]: https://github.com/google/docsy/pull/1726
+[#1727]: https://github.com/google/docsy/pull/1727
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
 [User feedback]:
   https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
