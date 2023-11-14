@@ -702,7 +702,7 @@ The remote file must be accessible from the host where you build the project. Au
 If you are including a file from GitHub or a similar provider, use the link of the raw file, for example:
 
 ```go-html-template
-{{< include-remote-md "https://github.com/google/docsy/raw/main/userguide/CONTRIBUTING.md" >}}
+{{</* include-remote-md "https://github.com/google/docsy/raw/main/userguide/CONTRIBUTING.md" */>}}
 ```
 
 ## Conditional text
