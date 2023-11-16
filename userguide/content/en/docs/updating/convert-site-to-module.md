@@ -23,8 +23,6 @@ cat >> hugo.toml <<EOL
 proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
-[[module.imports]]
-path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
@@ -39,11 +37,7 @@ proxy = "direct"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"^
-
-[[module.imports]]^
-
-path = "github.com/google/docsy/dependencies")>>hugo.toml
+path = "github.com/google/docsy")>>hugo.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -97,17 +91,15 @@ Change this line to:
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-theme = ["github.com/google/docsy", "github.com/google/docsy/dependencies"]
+theme = ["github.com/google/docsy"]
 {{< /tab >}}
 {{< tab header="config.yaml" lang="yaml" >}}
 theme:
   - github.com/google/docsy
-  - github.com/google/docsy/dependencies
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 "theme": [
-  "github.com/google/docsy",
-  "github.com/google/docsy/dependencies"
+  "github.com/google/docsy"
 ]
 {{< /tab >}}
 {{< /tabpane >}}
@@ -126,9 +118,6 @@ Alternatively, you can omit this line altogether and replace it with the setting
     min = "0.73.0"
   [[module.imports]]
     path = "github.com/google/docsy"
-    disable = false
-  [[module.imports]]
-    path = "github.com/google/docsy/dependencies"
     disable = false
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -186,9 +175,8 @@ To make sure that your configuration settings are correct, run the command `hugo
 hugo mod graph
 hugo: collected modules in 1092 ms
 github.com/me/my-existing-site github.com/google/docsy@v{{% param "version" %}}
-github.com/me/my-existing-site github.com/google/docsy/dependencies@v{{% param "version" %}}
-github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
-github.com/google/docsy/dependencies@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@v0.0.0-20230327165841-0698449d50f2
+github.com/google/docsy@v{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
+github.com/google/docsy@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@v0.0.0-20230327165841-0698449d50f2
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
@@ -201,7 +189,6 @@ hugo mod clean
 hugo: collected modules in 995 ms
 hugo: cleaned module cache for "github.com/FortAwesome/Font-Awesome"
 hugo: cleaned module cache for "github.com/google/docsy"
-hugo: cleaned module cache for "github.com/google/docsy/dependencies"
 hugo: cleaned module cache for "github.com/twbs/bootstrap"
 ```
 {{% /alert %}}
