@@ -1,5 +1,5 @@
 {{ if .File }}
-{{ $pathFormatted := replace .File.Path "\\" "/" -}}
+{{ $pathFormatted := strings.TrimPrefix hugo.WorkingDir $.File.Filename -}}
 {{ $gh_repo := ($.Param "github_repo") -}}
 {{ $gh_url := ($.Param "github_url") -}}
 {{ $gh_subdir := ($.Param "github_subdir") -}}
@@ -10,13 +10,9 @@
   {{ warnf "Warning: use of `github_url` is deprecated. For details see https://www.docsy.dev/docs/adding-content/repository-links/#github_url-optional" -}}
   <a href="{{ $gh_url }}" target="_blank"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
 {{ else if $gh_repo -}}
-  {{ $gh_repo_path := printf "%s/content/%s" $gh_branch $pathFormatted -}}
-  {{ if and ($gh_subdir) (.Site.Language.Lang) -}}
-    {{ $gh_repo_path = printf "%s/%s/content/%s/%s" $gh_branch $gh_subdir ($.Site.Language.Lang) $pathFormatted -}}
-  {{ else if .Site.Language.Lang -}}
-    {{ $gh_repo_path = printf "%s/content/%s/%s" $gh_branch ($.Site.Language.Lang) $pathFormatted -}}
-  {{ else if $gh_subdir -}}
-    {{ $gh_repo_path = printf "%s/%s/content/%s" $gh_branch $gh_subdir $pathFormatted -}}
+  {{ $gh_repo_path := printf "%s%s" $gh_branch $pathFormatted -}}
+  {{ if $gh_subdir -}}
+    {{ $gh_repo_path = printf "%s/%s%s" $gh_branch $gh_subdir $pathFormatted -}}
   {{ end -}}
 
   {{/* Adjust $gh_repo_path based on path_base_for_github_subdir */ -}}
@@ -35,7 +31,7 @@
   {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title ) -}}
   {{ $newPageStub := resources.Get "stubs/new-page-template.md" -}}
   {{ $newPageQS := querify "value" $newPageStub.Content "filename" "change-me.md" | safeURL -}}
-  {{ $newPageURL := printf "%s/new/%s?%s"  $gh_repo (path.Dir $gh_repo_path) $newPageQS -}}
+  {{ $newPageURL := printf "%s/new/%s?%s" $gh_repo (path.Dir $gh_repo_path) $newPageQS -}}
 
   <a href="{{ $viewURL }}" class="td-page-meta--view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> {{ T "post_view_this" }}</a>
   <a href="{{ $editURL }}" class="td-page-meta--edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
