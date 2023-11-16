@@ -27,8 +27,6 @@ cat >> hugo.toml <<EOL
 proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
-[[module.imports]]
-path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
@@ -43,11 +41,7 @@ proxy = "direct"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"^
-
-[[module.imports]]^
-
-path = "github.com/google/docsy/dependencies")>>hugo.toml
+path = "github.com/google/docsy"
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -110,9 +104,6 @@ Add the settings in the following snippet at the end of your site's [configurati
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
-  [[module.imports]]
-    path = "github.com/google/docsy/dependencies"
-    disable = false
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 module:
@@ -122,8 +113,6 @@ module:
     min: 0.73.0
   imports:
     - path: github.com/google/docsy
-      disable: false
-    - path: github.com/google/docsy/dependencies
       disable: false
 {{< /tab >}}
 {{< tab header="hugo.json"  lang="json" >}}
@@ -137,10 +126,6 @@ module:
     "imports": [
       {
         "path": "github.com/google/docsy",
-        "disable": false
-      },
-      {
-        "path": "github.com/google/docsy/dependencies",
         "disable": false
       }
     ]
