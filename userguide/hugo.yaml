@@ -119,8 +119,6 @@ params:
     disable_toc: false
   markmap:
     enable: true
-  mermaid:
-    version: 10.6.1
   drawio:
     enable: true
 

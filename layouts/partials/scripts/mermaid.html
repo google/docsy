@@ -1,35 +1,22 @@
-{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "10.6.1" -}}
+{{ $version := "latest" -}}
 {{ with .Site.Params.mermaid.version -}}
 {{ $version = . -}}
 {{ end -}}
 
 {{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.esm.min.mjs" $version -}}
-{{ if ge hugo.Version "0.90.0" -}}
-{{ if eq (resources.GetRemote $cdnurl) nil -}}
-{{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN" $version -}}
-{{ end -}}
-{{ else -}}
-{{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version -}}
-{{ end -}}
+{{ with resources.GetRemote $cdnurl }}
+  {{ with .Err }}
+    {{ errorf "Could not retrieve mermaid script from CDN. Reason: %s." . }}
+  {{ end }}
+{{ else }}
+  {{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN." $version }}
+{{ end }}
 
 <script type="module" async>
 import mermaid from "{{- $cdnurl -}}";
 
 (function($) {
-    var needMermaid = false;
-
-{{ if ge hugo.Version "0.93.0" -}}
-    if ($('.mermaid').length > 0) {
-        needMermaid = true;
-    };
-{{ else -}}
-    $('.language-mermaid').parent().replaceWith(function() {
-        needMermaid = true;
-        return $('<pre class="mermaid">').text($(this).text());
-    });
-{{ end -}}
-
-    if (!needMermaid)  {
+    if ($('.mermaid').length == 0)  {
         mermaid.initialize({startOnLoad: false});
         return;
     }
@@ -52,9 +39,10 @@ import mermaid from "{{- $cdnurl -}}";
         }
         return result;
     };
-    //var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
-    //settings.startOnLoad = true;
-    mermaid.initialize(params);
+
+    var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
+    settings.startOnLoad = true;
+    mermaid.initialize(settings);
 })(jQuery);
 
 </script>
