@@ -37,7 +37,7 @@ We do a [Pull Request](https://github.com/google/docsy/pulls) contributions work
 {{% /blocks/feature %}}
 
 
-{{% blocks/feature icon="fa-brands fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
+{{% blocks/feature icon="fa-brands fa-x-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
 Find out about new features and how our users are using Docsy.
 {{% /blocks/feature %}}
 

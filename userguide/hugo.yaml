@@ -98,7 +98,7 @@ params:
         desc: Sign up for Docsy announcements
       - name: Twitter
         url: https://twitter.com/docsydocs
-        icon: fa-brands fa-twitter
+        icon: fa-brands fa-x-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Stack Overflow
         url: https://stackoverflow.com/questions/tagged/docsy
