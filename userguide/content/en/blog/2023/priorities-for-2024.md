@@ -35,7 +35,7 @@ health. Our envisioned priorities for Docsy are:
 1.  **Stability** of Docsy's **core** through bug fixes and necessary upgrades
     --- the [migration from the end-of-life Bootstrap 4 to version
     5][bs5-migration] is one example of such an effort.
-2.  Reducing **technical debt**
+2.  Reducing **technical debt**.
 3.  **Improving usability, customizability, and maintainability** by, in
     particular, working to more **clearly separate** and document "**API
     surfaces**" --- or configuration / customization surfaces.
@@ -47,7 +47,7 @@ Docsy also accumulated considerable technical debt, and it now suffers (IMHO)
 from a mild case of software bloat/feature creep. So, in addition to investing
 in Docsy's long-term stability and maintainability, we need to **reaffirm
 Docsy's core features** and deprioritize the rest[^1] --- lest we suffer a [fate
-similar to projects like `cross-env`][ce] Consider Docsy on a feature diet.
+similar to projects like `cross-env`][ce]. Consider Docsy on a feature diet.
 
 Before tackling 2024 objectives, we plan on setting up a **test infrastructure**
 with (a growing) suite of tests to help us ensure Docsy's integrity as it
