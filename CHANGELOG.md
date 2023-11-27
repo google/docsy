@@ -67,8 +67,12 @@ noteworthy changes here:
     the top and left navs).
   - [#1662] DocSearch is supported by Docsy through site config.
   - For details, see [Algolia DocSearch].
-- **Tabpane** shortcode: some improvements, with more to come; for details, see
-  [#1641].
+- **[Tabbed panes]**:
+  - `persistLang` is deprecated, use `persist` instead
+  - Persistence is enabled by default (independent of the old `persistLang`
+    parameter value) ; to disable use `persist=disabled`
+  - Various fixes and enhancements, with more to come; for details, see [#1641]
+    and [Tabbed panes].
 - **Left-nav**, and **right-nav** (TOC + page meta): spacing issues have been
   resolved; for details, see [#1661].
 
@@ -79,6 +83,8 @@ noteworthy changes here:
 [0.7.2]: https://github.com/google/docsy/releases/v0.7.2
 [Algolia DocSearch]:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
+[Tabbed panes]:
+  https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
 
 ## 0.7.1
 
