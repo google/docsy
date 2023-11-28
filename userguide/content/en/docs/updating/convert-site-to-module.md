@@ -176,7 +176,7 @@ hugo mod graph
 hugo: collected modules in 1092 ms
 github.com/me/my-existing-site github.com/google/docsy@v{{% param "version" %}}
 github.com/google/docsy@v{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
-github.com/google/docsy@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@v0.0.0-20230327165841-0698449d50f2
+github.com/google/docsy@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@ v0.0.0-20230802202706-f0c25837a3fe
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
