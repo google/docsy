@@ -53,7 +53,8 @@ repo.
 3.  **Update Docsy version** to v0.X.Y for:
     - `version` key in [package.json](package.json)
     - `version` key in [userguide/hugo.yaml][]
-4.  Run `npm install` to have vendor assets and [go.mod](go.mod) updated.
+4.  Run `npm install` to have vendor assets and [go.mod](go.mod) updated for
+    dependencies.
 5.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
     preparation".
 6.  **Get PR approved and merged**.
@@ -111,10 +112,9 @@ further changes are merged into the default branch:
 
 1. Set `version` in [package.json](package.json) to the next planned (or the
    next dot) release with a dev suffix, such as `v0.X.Z-dev.0-unreleased`.
-2. (Optional) Run `hugo mod get`.
-3. **Submit a PR with your changes**, using a title like "Set NPM package
+2. **Submit a PR with your changes**, using a title like "Set NPM package
    version to next unreleased dev".
-4. **Get PR approved and merged**.
+3. **Get PR approved and merged**.
 
 [contribution guidelines]: https://www.docsy.dev/docs/contribution-guidelines/
 [Draft a new release]: https://github.com/google/docsy/releases/new

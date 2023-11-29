@@ -18,7 +18,7 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.8.0 - next major release (unpublished yet)
+## 0.8.0
 
 For the full list of changes, see the [release][0.8.0] notes.
 
@@ -41,15 +41,11 @@ For the full list of changes, see the [release][0.8.0] notes.
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
 
-**New**:
-
-**Other changes**:
-
 [#1120]: https://github.com/google/docsy/issues/1120
 [#1385]: https://github.com/google/docsy/issues/1385
 [#1726]: https://github.com/google/docsy/pull/1726
 [#1727]: https://github.com/google/docsy/pull/1727
-[0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
+[0.8.0]: https://github.com/google/docsy/releases/latest?fixme=v0.8.0
 [Docsy NPM install side-effect]:
   https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]:
