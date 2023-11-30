@@ -11,16 +11,31 @@ notes][releases].
 Useful links:
 
 - [Releases] & [tags]. Jump to the [latest] release.
-- [23Q4] milestone
+- Milestones: [23Q4], [24Q1]
 
-[23q4]: https://github.com/google/docsy/milestone/9
+[23Q4]: https://github.com/google/docsy/milestone/9
+[24Q1]: https://github.com/google/docsy/milestone/10
 [latest]: https://github.com/google/docsy/releases/latest
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
+## 0.8.1 or 0.9.0 - next planned release, WIP
+
+For the full list of changes, see the [0.x.y] release notes.
+
+**Breaking changes**:
+
+- ...
+
+**New**:
+
+**Other changes**:
+
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+
 ## 0.8.0
 
-For the full list of changes, see the [release][0.8.0] notes.
+For the full list of changes, see the [0.8.0] release notes.
 
 **Breaking changes**:
 
@@ -45,7 +60,7 @@ For the full list of changes, see the [release][0.8.0] notes.
 [#1385]: https://github.com/google/docsy/issues/1385
 [#1726]: https://github.com/google/docsy/pull/1726
 [#1727]: https://github.com/google/docsy/pull/1727
-[0.8.0]: https://github.com/google/docsy/releases/latest?fixme=v0.8.0
+[0.8.0]: https://github.com/google/docsy/releases/v0.8.0
 [Docsy NPM install side-effect]:
   https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]:
@@ -55,7 +70,7 @@ For the full list of changes, see the [release][0.8.0] notes.
 
 ## 0.7.2
 
-For the full list of changes, see the [release][0.7.2] notes. We mention some
+For the full list of changes, see the [0.7.2] release notes. We mention some
 noteworthy changes here:
 
 - **Algolia**
@@ -84,7 +99,7 @@ noteworthy changes here:
 
 ## 0.7.1
 
-For the full list of changes, see the [release][0.7.1] notes.
+For the full list of changes, see the [0.7.1] release notes.
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -99,7 +114,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 ## 0.7.0
 
-For the full list of changes, see the [release][0.7.0] notes.
+For the full list of changes, see the [0.7.0] release notes.
 
 **New**:
 
@@ -162,7 +177,7 @@ For the full list of changes, see the [release][0.7.0] notes.
 
 ## 0.6.0
 
-For the full list of changes, see the [release][0.6.0] notes.
+For the full list of changes, see the [0.6.0] release notes.
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -183,7 +198,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 ## 0.5.1
 
-For the full list of changes, see the [release][0.5.1] notes. **BREAKING
+For the full list of changes, see the [0.5.1] release notes. **BREAKING
 CHANGES** are documented below.
 
 **After you update** your project's Docsy:
@@ -240,7 +255,7 @@ Unpublished.
 
 ## 0.4.0
 
-For the full list of changes, see the [release][0.4.0] notes. Potential
+For the full list of changes, see the [0.4.0] release notes. Potential
 **BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
@@ -296,7 +311,7 @@ Proceed as usual to build or serve your site.
 
 ## 0.3.0
 
-For the full list of changes, see the [release][0.3.0] notes.
+For the full list of changes, see the [0.3.0] release notes.
 
 **Breaking changes**:
 
@@ -315,7 +330,7 @@ For the full list of changes, see the [release][0.3.0] notes.
 
 ## 0.2.0
 
-For the full list of changes, see the [release][0.2.0] notes.
+For the full list of changes, see the [0.2.0] release notes.
 
 **New**:
 
@@ -332,11 +347,11 @@ For the full list of changes, see the [release][0.2.0] notes.
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [hugo modules]: https://gohugo.io/hugo-modules/
 
-<!-- SECTION TEMPLATE ------------------------------------------------------
+<!-- ENTRY TEMPLATE ------------------------------------------------------
 
 ## 0.X.Y - next planned release (unpublished yet)
 
-For the full list of changes, see the [release][0.x.y] notes.
+For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
@@ -346,6 +361,6 @@ For the full list of changes, see the [release][0.x.y] notes.
 
 **Other changes**:
 
-[0.x.y]: https://github.com/google/docsy/releases/v0.X.Y-FIXME
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 
 ---------------------------------------------------------------------------->
