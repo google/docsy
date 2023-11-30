@@ -42,7 +42,7 @@ The following are basic prerequisites for using Docsy in your site:
 Any additional prerequisites depend on the
 [installation option](https://www.docsy.dev/docs/get-started/#installation-options)
 you choose. We recommend using Docsy as a Hugo module, which requires that you
-have the `go` language installed in addition to Hugo and PostCSS.
+have the Go language installed in addition to Hugo and PostCSS.
 
 For complete prerequisites and instructions, see our
 [Get started guides](https://www.docsy.dev/docs/get-started/).
@@ -89,8 +89,8 @@ npm run serve
 
 ## Contributing
 
-Read [CONTRIBUTING.md] for details on our [code of conduct], and the process for
-submitting pull requests to us. Thank you to all past, present, and future
+For details on our [code of conduct] and the process for submitting pull
+requests, see [CONTRIBUTING.md]. Thank you to all past, present, and future
 [contributors]!
 
 ## License
