@@ -35,6 +35,8 @@ other = "Oluşturuldu"
 other = "Son düzenleme"
 [post_edit_this]
 other = "Bu sayfayı düzenle"
+[post_view_this]
+other = "View page source"
 [post_create_child_page]
 other = "Çocuk sayfası oluştur"
 [post_create_issue]
