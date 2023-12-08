@@ -493,7 +493,7 @@ The `community` landing page template has boilerplate content that's automatical
 [[params.links.user]]
 	name ="Twitter"
 	url = "https://example.org/twitter"
-	icon = "fab fa-twitter"
+	icon = "fab fa-x-twitter"
         desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
 	name = "Stack Overflow"
@@ -527,7 +527,7 @@ params:
         desc: Discussion and help from your fellow users
       - name: Twitter
         url: 'https://example.org/twitter'
-        icon: fab fa-twitter
+        icon: fab fa-x-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Stack Overflow
         url: 'https://example.org/stack'
@@ -561,7 +561,7 @@ params:
         {
           "name": "Twitter",
           "url": "https://example.org/twitter",
-          "icon": "fa-brands fa-twitter",
+          "icon": "fa-brands fa-x-twitter",
           "desc": "Follow us on Twitter to get the latest news!"
         },
         {
