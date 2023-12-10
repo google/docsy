@@ -199,19 +199,23 @@ To add Lunr search to your Docsy site:
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 offlineSearch = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
+params:
+  offlineSearch: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true
+  "params": {
+    "offlineSearch": true
+  }
 }
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+3. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
