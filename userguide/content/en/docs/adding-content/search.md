@@ -231,17 +231,21 @@ You can customize the summary length by setting `offlineSearchSummaryLength` in 
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
+[params]
 offlineSearch = true
 offlineSearchSummaryLength = 200
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
-offlineSearchSummaryLength: 200
+params:
+  offlineSearch: true
+  offlineSearchSummaryLength: 200
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true,
-  "offlineSearchSummaryLength": 200
+  "params": {
+    "offlineSearch": true,
+    "offlineSearchSummaryLength": 200
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -253,17 +257,21 @@ You can customize the maximum result count by setting `offlineSearchMaxResults` 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 offlineSearch = true
 offlineSearchMaxResults = 25
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
-offlineSearchMaxResults: 25
+params:
+  offlineSearch: true
+  offlineSearchMaxResults: 25
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true,
-  "offlineSearchMaxResults": 25
+  "params": {
+    "offlineSearch": true,
+    "offlineSearchMaxResults": 25
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
