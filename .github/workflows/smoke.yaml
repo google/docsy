@@ -1,9 +1,8 @@
 name: smoke
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
@@ -21,7 +20,10 @@ jobs:
       - run: tools/install-hugo.sh
         shell: bash
       - name: Make site
+        env:
+          REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          BRANCH: ${{ github.head_ref }}
         run: |
-          mkdir tmp && cd tmp
-          ../tools/make-site.sh
+          mkdir tmp && cd tmp && set -x
+          ../tools/make-site.sh -p $REPO -v $BRANCH
         shell: bash
