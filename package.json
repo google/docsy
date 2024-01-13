@@ -31,7 +31,6 @@
     "pretest": "npm run _prebuild",
     "serve": "npm run cd:docs serve",
     "test": "npm run cd:docs test && npm run check",
-    "test-windows": "npm run cd:docs test",
     "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest"
   },
