@@ -1,11 +1,14 @@
+# Smoke test across OSs: build a Docsy-based site from scratch, fetching Docsy
+# via NPM.
+
 name: smoke
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
   schedule: # midnight every day
-    - cron:  '0 0 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
