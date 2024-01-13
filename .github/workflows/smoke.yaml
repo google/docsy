@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  new-site-from-npm:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
