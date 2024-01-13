@@ -88,4 +88,4 @@ $HUGO
 
 set +x
 
-echo "[INFO] $SITE_NAME has been successfully created, set up, and built."
+echo "[INFO] $SITE_NAME successfully created, set up, and built."
