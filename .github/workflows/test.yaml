@@ -1,3 +1,6 @@
+# Runs `npm test` to build Docsy & the User Guide and run all repo checks across
+# OSs.
+
 name: test
 
 on:

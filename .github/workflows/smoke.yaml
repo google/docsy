@@ -1,3 +1,6 @@
+# Smoke test across OSs: build a Docsy-based site from scratch, fetching Docsy
+# via NPM.
+
 name: smoke
 
 on:
