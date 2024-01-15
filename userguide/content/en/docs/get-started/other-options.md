@@ -351,6 +351,6 @@ from scratch as it provides defaults for many required configuration parameters.
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[npm scripts]: https://docs.npmjs.com/cli/v8/using-npm/scripts
+[npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
 [prepare]:
-  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
+  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish

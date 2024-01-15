@@ -307,7 +307,7 @@ Proceed as usual to build or serve your site.
 [hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
 [prepare]:
-  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
+  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
 
 ## 0.3.0
 
