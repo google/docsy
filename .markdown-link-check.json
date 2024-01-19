@@ -4,7 +4,10 @@
       "pattern": "^http://localhost"
     },
     {
-      "pattern": "^https://badges.netlify.com/api/docsydocs.svg?branch=main"
+      "pattern": "^https://badges.netlify.com/api/docsydocs.svg\\?branch=main"
+    },
+    {
+      "pattern": "https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish"
     }
   ],
   "timeout": "3s",
