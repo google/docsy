@@ -12,11 +12,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  new-site-from-npm:
+  new-site:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
+        docsy-src: [NPM, HUGO_MODULE]
     env:
       BASE_REPO: ${{ github.repository }}
       BRANCH: ${{ github.head_ref }}
@@ -37,11 +38,11 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           mkdir tmp && cd tmp && set -x
-          ../tools/make-site.sh -p $BASE_REPO -v $SHA
+          ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
       - name: Make site from PR
         if: github.event_name == 'pull_request'
         run: |
           mkdir tmp && cd tmp && set -x
-          ../tools/make-site.sh -p $PR_REPO -v $BRANCH
+          ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
