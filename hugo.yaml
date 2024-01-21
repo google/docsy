@@ -24,6 +24,10 @@ module:
       target: assets
     - source: node_modules/bootstrap
       target: assets/vendor/bootstrap
+    - source: node_modules/bootstrap/scss
+      target: assets/vendor/bootstrap/scss
+    - source: node_modules/bootstrap/scss/vendor
+      target: assets/vendor/bootstrap/scss/vendor
     - source: node_modules/@fortawesome/fontawesome-free
       target: assets/vendor/Font-Awesome
     - source: i18n
@@ -38,6 +42,10 @@ module:
     # "../.." moves out of themes/docsy so that Docsy can find its dependencies.
     - source: ../../node_modules/bootstrap
       target: assets/vendor/bootstrap
+    - source: ../../node_modules/bootstrap/scss
+      target: assets/vendor/bootstrap/scss
+    - source: ../../node_modules/bootstrap/scss/vendor
+      target: assets/vendor/bootstrap/scss/vendor
     - source: ../../node_modules/@fortawesome/fontawesome-free
       target: assets/vendor/Font-Awesome
     - source: ../../node_modules/@fortawesome/fontawesome-free/webfonts
