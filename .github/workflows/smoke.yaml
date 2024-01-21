@@ -7,8 +7,8 @@ on:
   push:
     branches: [main]
   pull_request:
-  schedule: # midnight every day
-    - cron: '0 0 * * *'
+  # schedule: # midnight every day
+  #   - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
