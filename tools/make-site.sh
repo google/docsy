@@ -20,7 +20,7 @@ Usage: `basename $0` [options]
 
   Creates a Docsy-themed site under SITE_NAME using the Hugo new command.
   Docsy is fetched as an NPM package from $DOCSY_REPO in GitHub,
-  unless the -l or -d HUGO_MOD flags are used.
+  unless the -l or -s HUGO_MOD flags are used.
 
   -f            Force delete SITE_NAME if it exists before recreating it
   -h            Output this usage info
@@ -71,7 +71,7 @@ function process_CLI_args() {
       s)
         DOCSY_SRC=$(echo "$OPTARG" | tr '[:lower:]' '[:upper:]')
         if [[ $DOCSY_SRC != "NPM" && $DOCSY_SRC != HUGO* ]]; then
-          echo "ERROR: invalid argument to -s flag: $DOCSY_SRC"
+          echo "ERROR: invalid argument to -s flag: $OPTARG"
           usage 1;
         fi
         ;;
