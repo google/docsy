@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore deining docsy gtag lookandfeel navs
+  cSpell:ignore deining docsy gitmodules gtag lookandfeel mhchem navs tabpane
 -->
 
 # Changelog
@@ -25,13 +25,29 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
-- ...
+- [Repository Links] now work for [multi-language] sites ([#1744]).
+
+  For any given page, repository links are now computed from a page's _resolved_
+  `File` path, as resolved _through_ mount points, if any. That is, the path
+  used is the one that refers to the file's actual location on disk, not it's
+  logical path in Hugo's [union file system].
+
+  This is a breaking change pages of sites that use mounts and
+  [path_base_for_github_subdir]. Projects will need to adjust the value of
+  [path_base_for_github_subdir] to be relative to the file's physical location.
 
 **New**:
 
 **Other changes**:
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[#1744]: https://github.com/google/docsy/pull/1744
+[multi-language]: https://www.docsy.dev/docs/language/
+[path_base_for_github_subdir]:
+  https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
+[Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
+[union file system]:
+  https://gohugo.io/getting-started/directory-structure/#union-file-system
 
 ## 0.8.0
 
