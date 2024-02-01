@@ -23,7 +23,7 @@
     "update:pkg:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.16",
-    "postcss-cli": "^10.1.0"
+    "autoprefixer": "^10.4.17",
+    "postcss-cli": "^11.0.0"
   }
 }
