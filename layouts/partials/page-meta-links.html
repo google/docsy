@@ -1,4 +1,4 @@
-{{ if .File }}
+{{ if .File -}}
 {{ $pathFormatted := strings.TrimPrefix hugo.WorkingDir $.File.Filename -}}
 {{ $gh_repo := ($.Param "github_repo") -}}
 {{ $gh_url := ($.Param "github_url") -}}
