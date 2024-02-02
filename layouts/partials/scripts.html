@@ -1,15 +1,10 @@
 {{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
 {{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
-{{ $needmermaid := .Site.Params.mermaid.enable -}}
 {{ if ge hugo.Version "0.93.0" -}}
-    {{ with .Site.Params.mermaid }}
-        {{ $needmermaid = true }}
-    {{ end }}
   {{ $needKaTeX = or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
   {{ $needmhchem = or $needmhchem (.Page.Store.Get "hasmhchem") -}}
-  {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
 {{ else -}}
-  {{ if or $needKaTeX $needmhchem $needmermaid -}}
+  {{ if or $needKaTeX $needmhchem -}}
     {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version  }}
   {{ end -}}
 {{ end -}}
@@ -65,7 +60,6 @@ window.markmap = {
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
-{{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . -}}
 {{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
 {{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . -}}
 {{ $jsDrawio := resources.Get "js/drawio.js" | resources.ExecuteAsTemplate "js/drawio.js" . -}}
@@ -75,9 +69,8 @@ window.markmap = {
 
 {{ $jsArray := slice $jsBs $jsBase $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
 
-{{ if $needmermaid -}}
-{{ $jsArray = $jsArray | append $jsMermaid -}}
-<script src="https://cdn.jsdelivr.net/npm/mermaid@9.3.0/dist/mermaid.min.js" integrity="sha512-ku2nmBrzAXY5YwohzTqLYH1/lvyMrpTVxgQKrvTabd/b/uesqltLORdmpVapYv6QhZVCLUX6wkvFaKOAY4xpUA==" crossorigin="anonymous"></script>
+{{ if .Page.Store.Get "hasmermaid" -}}
+{{- partial "scripts/mermaid.html" . -}}
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}

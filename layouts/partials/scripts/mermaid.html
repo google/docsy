@@ -1,25 +1,26 @@
-(function($) {
-    var needMermaid = false;
+{{ $version := .Site.Params.mermaid.version | default "latest" -}}
 
-{{ if ge hugo.Version "0.93.0" -}}
-    if ($('.mermaid').length > 0) {
-        needMermaid = true;
-    };
+{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.esm.min.mjs" $version -}}
+{{ with resources.GetRemote $cdnurl -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve mermaid script from CDN. Reason: %s." . -}}
+  {{ end -}}
 {{ else -}}
-    $('.language-mermaid').parent().replaceWith(function() {
-        needMermaid = true;
-        return $('<pre class="mermaid">').text($(this).text());
-    });
+  {{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN." $version -}}
 {{ end -}}
 
-    if (!needMermaid)  {
+<script type="module" async>
+import mermaid from "{{ $cdnurl }}";
+
+(function($) {
+    if ($('.mermaid').length == 0)  {
         mermaid.initialize({startOnLoad: false});
         return;
     }
 
     var params = {{ .Site.Params.mermaid | jsonify | safeJS }};
 
-    // site params are stored with lowercase keys; lookup correct casing
+    // Site params are stored with lowercase keys; lookup correct casing
     // from Mermaid default config.
     var norm = function(defaultConfig, params) {
         var result = {};
@@ -35,7 +36,9 @@
         }
         return result;
     };
+
     var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
     settings.startOnLoad = true;
     mermaid.initialize(settings);
 })(jQuery);
+</script>
