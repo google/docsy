@@ -42,10 +42,14 @@ For the full list of changes, see the [0.9.0] release notes.
   [render-heading.html](https://gohugo.io/templates/render-hooks/) hook. This is
   _potentially_ a breaking change for projects that override the hook.
 
+- The footer layout has been factored into parts: left, right, and center, with
+  copyright a subpart of center. Each part has its own style tag, for example:
+  `td-footer__left`. Note that the style `td-footer__copyright-etc` has been
+  renamed to `td-footer__center`. For details concerning all foot changes, see
+  [#1818].
+
 **Other changes**:
 
-- The footer parts can be individually customized: left, right, center, and
-  copyright. ([#1818]).
 - The latest release of [Mermaid] resources are fetched at build time ([#1410]).
 - Docsy follows recommended accessibility practice: page-body links are
   underlined. For details, see [#1814] and [#1815].
