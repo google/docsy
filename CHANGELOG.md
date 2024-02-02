@@ -44,7 +44,9 @@ For the full list of changes, see the [0.9.0] release notes.
 
 **Other changes**:
 
-- The latest release of [Mermaid] resources are fetch at build time ([#1410])
+- The footer parts can be individually customized: left, right, center, and
+  copyright. ([#1818]).
+- The latest release of [Mermaid] resources are fetched at build time ([#1410]).
 - Docsy follows recommended accessibility practice: page-body links are
   underlined. For details, see [#1814] and [#1815].
 
@@ -53,6 +55,7 @@ For the full list of changes, see the [0.9.0] release notes.
 [#1744]: https://github.com/google/docsy/pull/1744
 [#1814]: https://github.com/google/docsy/issues/1814
 [#1815]: https://github.com/google/docsy/pull/1815
+[#1818]: https://github.com/google/docsy/pull/1818
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: https://www.docsy.dev/docs/language/
