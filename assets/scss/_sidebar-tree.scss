@@ -77,9 +77,9 @@
   }
 
   a {
+    &:focus,
     &:hover {
-      color: $blue;
-      text-decoration: none;
+      color: $link-color;
     }
 
     &.active {
@@ -120,6 +120,8 @@
 }
 
 .td-sidebar {
+  @include link-decoration;
+
   @include media-breakpoint-up(md) {
     padding-top: 4rem;
     background-color: $td-sidebar-bg-color;
