@@ -48,6 +48,11 @@ For the full list of changes, see the [0.9.0] release notes.
   renamed to `td-footer__center`. For details concerning all foot changes, see
   [#1818].
 
+- **Footer, copyright notice**:
+  - display of year can now be customized via .Site.Params.copyright.year
+  - title displayed after year must now be given via
+    .Site.Params.copyright.title
+
 **Other changes**:
 
 - The latest release of [Mermaid] resources are fetched at build time ([#1410]).

@@ -1,3 +1,5 @@
 {{ with .Site.Params.copyright -}}
-  <span class="td_footer__copyright">&copy; {{ now.Year }} {{ . }} {{ T "footer_all_rights_reserved" }}</span>
+  <span class="td_footer__copyright">&copy; {{ with .year -}}{{- . -}}{{- else -}}{{- now.Year -}}{{- end }} {{ with .title -}}{{- . -}}{{- end }} {{ T "footer_all_rights_reserved" }}</span>
+  {{- else }}
+    {{ with .Site.Copyright }}{{ . | safeHTML }}{{ end }}
 {{- end -}}
