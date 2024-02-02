@@ -2,6 +2,8 @@
 // Right side toc
 //
 .td-sidebar-toc {
+  @include link-decoration;
+
   border-left: 1px solid $border-color;
 
   @supports (position: sticky) {
