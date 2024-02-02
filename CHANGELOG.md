@@ -38,12 +38,19 @@ For the full list of changes, see the [0.9.0] release notes.
   [path_base_for_github_subdir]. Projects will need to adjust the value of
   [path_base_for_github_subdir] to be relative to the file's physical location.
 
-**New**:
+- Docsy statically generates anchor-links after headings using Hugo's
+  [render-heading.html](https://gohugo.io/templates/render-hooks/) hook. This is
+  potentially a breaking change for projects that override the hook.
 
 **Other changes**:
 
+- Docsy follows recommended accessibility practice: page-body links are
+  underlined. For details, see [#1814] and [#1815].
+
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1744]: https://github.com/google/docsy/pull/1744
+[#1814]: https://github.com/google/docsy/issues/1814
+[#1815]: https://github.com/google/docsy/pull/1815
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
