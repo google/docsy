@@ -77,9 +77,9 @@
   }
 
   a {
+    &:focus,
     &:hover {
-      color: $blue;
-      text-decoration: none;
+      color: $link-color;
     }
 
     &.active {

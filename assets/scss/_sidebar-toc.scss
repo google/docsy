@@ -50,9 +50,9 @@
     a {
       color: $gray-600;
 
+      &:focus,
       &:hover {
-        color: $blue;
-        text-decoration: none;
+        color: initial;
       }
     }
   }
