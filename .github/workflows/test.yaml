@@ -1,5 +1,4 @@
-# Runs `npm test` to build Docsy & the User Guide and run all repo checks across
-# OSs.
+# Build Docsy & the User Guide and run all repo checks across OSs.
 
 name: test
 
@@ -25,4 +24,4 @@ jobs:
           cache: npm
           cache-dependency-path: package.json
       - run: npm install --omit=optional
-      - run: npm test
+      - run: npm run test:all

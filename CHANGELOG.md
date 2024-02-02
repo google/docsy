@@ -11,28 +11,30 @@ notes][releases].
 Useful links:
 
 - [Releases] & [tags]. Jump to the [latest] release.
-- Milestones: [23Q4], [24Q1]
+- [Milestones]
 
-[23Q4]: https://github.com/google/docsy/milestone/9
 [24Q1]: https://github.com/google/docsy/milestone/10
 [latest]: https://github.com/google/docsy/releases/latest
+[milestones]: https://github.com/google/docsy/milestones
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.8.1 or 0.9.0 - next planned release, WIP
+## 0.9.0
 
-For the full list of changes, see the [0.x.y] release notes.
+> ### UNRELEASED: this planned version is still under development.
+
+For the full list of changes, see the [0.9.0] release notes.
 
 **Breaking changes**:
 
 - [Repository Links] now work for [multi-language] sites ([#1744]).
 
   For any given page, repository links are now computed from a page's _resolved_
-  `File` path, as resolved _through_ mount points, if any. That is, the path
-  used is the one that refers to the file's actual location on disk, not it's
-  logical path in Hugo's [union file system].
+  `File` path &mdash; as resolved _through_ mount points, if any. That is, the
+  path used is the one that refers to the file's actual location on disk, not
+  it's logical path in Hugo's [union file system].
 
-  This is a breaking change pages of sites that use mounts and
+  This is a breaking change for pages of sites that use mounts and
   [path_base_for_github_subdir]. Projects will need to adjust the value of
   [path_base_for_github_subdir] to be relative to the file's physical location.
 
@@ -40,7 +42,7 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Other changes**:
 
-[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1744]: https://github.com/google/docsy/pull/1744
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
@@ -365,7 +367,9 @@ For the full list of changes, see the [0.2.0] release notes.
 
 <!-- ENTRY TEMPLATE ------------------------------------------------------
 
-## 0.X.Y - next planned release (unpublished yet)
+## 0.X.Y
+
+> ### UNRELEASED: this planned version is still under development.
 
 For the full list of changes, see the [0.x.y] release notes.
 
