@@ -388,18 +388,18 @@ By default, docsy pulls in the latest officially released version of Mermaid at 
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "10.6.1"
+version = "10.8.0"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 10.6.1
+    version: 10.8.0
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "10.6.1"
+      "version": "10.8.0"
     }
   }
 }
