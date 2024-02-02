@@ -330,23 +330,32 @@ following to your [projects's `_styles_project.scss`][project-style-files] file
 to hide **Create child page** links from all pages:
 
 ```scss
-.td-page-meta--child { display: none !important; }
+.td-page-meta__child { display: none !important; }
 ```
 
-Each link kind has an associated unique class named `.td-page-meta--KIND`, as
+Each link kind has an associated unique class named `.td-page-meta__KIND`, as
 defined by the following table:
 
 Link kind | Class name
 --- | ---
-View page source | `.td-page-meta--view`
-Edit this page | `.td-page-meta--edit`
-Create child page | `.td-page-meta--child`
-Create documentation issue | `.td-page-meta--issue`
-Create project issue | `.td-page-meta--project-issue`
+View page source | `.td-page-meta__view`
+Edit this page | `.td-page-meta__edit`
+Create child page | `.td-page-meta__child`
+Create documentation issue | `.td-page-meta__issue`
+Create project issue | `.td-page-meta__project-issue`
 
 Of course, you can also use these classes to give repository links unique styles
 for your project.
 
+{{% alert title="Version note" color=warning %}}
+
+Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+
+[v0.9.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#090
+
+{{% /alert %}}
+
+
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
-[multiple languages]: {{< relref "language" >}}
-[project-style-files]: {{< relref "lookandfeel#project-style-files" >}}
+[multiple languages]: {{% relref "language" %}}
+[project-style-files]: {{% relref "lookandfeel#project-style-files" %}}
