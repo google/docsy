@@ -1,11 +1,11 @@
-{{ with .Site.Params.copyright -}}
-<span>&copy; {{ now.Year }} {{ . }} {{ T "footer_all_rights_reserved" }}</span>
-{{- end }}
+{{ partial "footer/copyright.html"  . -}}
+
 {{ with .Site.Params.privacy_policy -}}
-<span class="ms-1"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></span>
-{{- end }}
-{{ if not .Site.Params.ui.footer_about_disable -}}
-{{ with .Site.GetPage "about" -}}
-	<p class="td-footer__about mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+  <span class="ms-2"><a href="{{ . }}" target="_blank" rel="noopener">{{ T "footer_privacy_policy" }}</a></span>
 {{- end -}}
-{{ end }}
+
+{{ if not .Site.Params.ui.footer_about_disable -}}
+  {{ with .Site.GetPage "about" -}}
+    <p class="td-footer__about mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+  {{- end -}}
+{{ end -}}

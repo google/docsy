@@ -1,13 +1,15 @@
 <footer class="td-footer row d-print-none">
   <div class="container-fluid">
     <div class="row mx-md-2">
-      <div class="col-6 col-sm-4 text-xs-center order-sm-1">
+      <div class="td-footer__left col-6 col-sm-4 order-sm-1">
         {{ partial "footer/left.html"  . }}
       </div>
-      <div class="col-6 col-sm-4 text-end text-xs-center order-sm-3">
+      {{- /* Trim WS */ -}}
+      <div class="td-footer__right col-6 col-sm-4 order-sm-3">
         {{ partial "footer/right.html"  . }}
       </div>
-      <div class="td-footer__copyright-etc col-12 col-sm-4 text-center py-2 order-sm-2">
+      {{- /* Trim WS */ -}}
+      <div class="td-footer__center col-12 col-sm-4 py-2 order-sm-2">
         {{ partial "footer/center.html"  . }}
       </div>
     </div>
