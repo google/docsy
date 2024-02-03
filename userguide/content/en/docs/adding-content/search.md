@@ -98,14 +98,19 @@ layout: search
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
+# Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-gcs_engine_id: '011737558837375720776:fsdu1nryfng'
+params:
+  gcs_engine_id: 011737558837375720776:fsdu1nryfng
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
+  "params": {
+    "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
+  }
 }
 {{< /tab >}}
     {{< /tabpane >}}

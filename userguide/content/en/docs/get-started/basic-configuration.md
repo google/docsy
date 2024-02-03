@@ -46,29 +46,7 @@ By default, the Docsy example site uses its own [Google Custom Search Engine](ht
 gcs_engine_id = "d72aa9b2712488cc3"
 ```
 
-To use your own Custom Search Engine, add the site parameter `gcs_engine_id` to your config file:
-
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params]
-# Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  gcs_engine_id: 011737558837375720776:fsdu1nryfng
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
-In the definition above, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/search).
+To use your own Custom Search Engine, set `gcs_engine_id` to your search engine ID. For details, see [Configure search with a Google Custom Search Engine](/docs/adding-content/search/#configure-search-with-a-google-custom-search-engine).
 
 ## What's next?
 
