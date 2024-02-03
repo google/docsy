@@ -43,7 +43,7 @@ By default, the Docsy example site uses its own [Google Custom Search Engine](ht
 
 ```
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "d72aa9b2712488cc3"
+gcs_engine_id = "..."
 ```
 
 To use your own Custom Search Engine, set `gcs_engine_id` to your search engine ID. For details, see [Configure search with a Google Custom Search Engine](/docs/adding-content/search/#configure-search-with-a-google-custom-search-engine).
