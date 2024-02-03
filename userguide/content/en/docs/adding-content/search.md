@@ -24,18 +24,28 @@ behavior when serving your site.
 
 ## Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set the site parameter `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
 sidebar_search_disable = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-sidebar_search_disable: true
+params:
+  ui:
+    sidebar_search_disable: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"sidebar_search_disable": true
+{
+  "params": {
+    "ui": {
+      "sidebar_search_disable": true
+    }
+  }
+}
+
 {{< /tab >}}
 {{< /tabpane >}}
 

@@ -614,17 +614,20 @@ Hugo will, by default, create an RSS feed for the home page and any section. For
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 rss_sections = ["blog"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-rss_sections:
-  - blog
+params:
+  rss_sections: [blog]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "rss_sections": [
-    "blog"
-  ]
+  "params": {
+    "rss_sections": [
+      "blog"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -634,17 +637,20 @@ To disable all RSS feeds, add the following to your `hugo.toml`/`hugo.yaml`/`hug
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 disableKinds = ["RSS"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-disableKinds:
-  - RSS
+params:
+  disableKinds: [RSS]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "disableKinds": [
-    "RSS"
-  ]
+  "params": {
+    "disableKinds": [
+      "RSS"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}

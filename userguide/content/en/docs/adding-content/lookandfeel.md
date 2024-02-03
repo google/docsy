@@ -158,14 +158,20 @@ Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.y
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-prism_syntax_highlighting: true
+params:
+  prism_syntax_highlighting: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"prism_syntax_highlighting": true
+{
+  "params": {
+    "prism_syntax_highlighting": true
+  }
+}
 {{< /tab >}}
 {{< /tabpane >}}
 

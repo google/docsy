@@ -18,7 +18,7 @@ Currently, Docsy supports only GitHub repository links "out of the box". Since G
 
 ## Link configuration
 
-There are four variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as one in your page metadata.
+There are four site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as one in your page metadata.
 
 ### `github_repo`
 
@@ -27,14 +27,18 @@ The URL for your site's source repository. This is used to generate the **Edit t
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_repo = "https://github.com/google/docsy"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-github_repo: 'https://github.com/google/docsy'
+params:
+  github_repo: https://github.com/google/docsy
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "github_repo": "https://github.com/google/docsy"
+  "params": {
+    "github_repo": "https://github.com/google/docsy"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -46,14 +50,18 @@ Specify a value here if your content directory is not in your repo's root direct
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_subdir = "userguide"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-github_subdir: 'userguide'
+params:
+  github_subdir: userguide
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "github_subdir": "userguide"
+  "params": {
+    "github_subdir": "userguide"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -65,14 +73,18 @@ Specify a value here if you have a separate project repo and you'd like your use
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_project_repo = "https://github.com/google/docsy"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-github_project_repo: 'https://github.com/google/docsy'
+params:
+  github_project_repo: https://github.com/google/docsy
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "github_project_repo": "https://github.com/google/docsy"
+  "params": {
+    "github_project_repo": "https://github.com/google/docsy"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -84,14 +96,18 @@ Specify a value here if you have would like to reference a different branch for 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_branch = "release"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-github_branch: 'release'
+params:
+  github_branch: release
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "github_branch": "release"
+  "params": {
+    "github_branch": "release"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
