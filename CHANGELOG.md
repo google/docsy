@@ -119,7 +119,7 @@ For the full list of changes, see the [0.8.0] release notes.
 - **Page feedback**, or [User feedback]:
   - In support of projects configuring analytics outside of Docsy, feedback
     functionality is enabled regardless of whether
-    site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
+    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
   - Feedback-event attribute changes ([#1726]):
     - Event `name` is `page_helpful`rather than`click`
     - Event `value` for "yes" is 100 by default, rather than 1, allowing for
@@ -171,6 +171,7 @@ noteworthy changes here:
 [Tabbed panes]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
 
+## 0.7.1
 
 For the full list of changes, see the [0.7.1] release notes.
 
