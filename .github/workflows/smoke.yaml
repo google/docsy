@@ -25,6 +25,7 @@ jobs:
       SHA: ${{ github.sha }}
     # TODO: drop PR testing under Windows because it's too slow?
     # if: github.event_name != 'pull_request' && matrix.os != 'windows-latest'
+    if: github.event_name != 'push' || github.repository == 'google/docsy'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

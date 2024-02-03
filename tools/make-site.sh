@@ -142,13 +142,22 @@ function _set_up_site_using_hugo_modules() {
   else
     echo "[INFO] Fetch Docsy GitHub repo '$DOCSY_REPO' @ '$DOCSY_VERS'"
     mkdir tmp
-    BRANCH_SPEC=""
+    local BRANCH_SPEC=""
+    local DEPTH=10
+    local SWITCH_NEEDED=
+    local CLONE="git clone --depth=$DEPTH https://github.com/$DOCSY_REPO tmp/docsy"
     if [[ -n $DOCSY_VERS ]]; then
       BRANCH_SPEC="-b $DOCSY_VERS"
     fi
-    git clone --depth=1 https://github.com/$DOCSY_REPO $BRANCH_SPEC tmp/docsy
-    (cd tmp/docsy && git log -1)
-
+    if ! $CLONE $BRANCH_SPEC; then
+      SWITCH_NEEDED=1
+      $CLONE
+    fi
+    ( \
+      cd tmp/docsy && \
+      git log --oneline -$DEPTH && \
+      if [[ -n $SWITCH_NEEDED ]]; then git switch --detach $DOCSY_VERS; fi \
+    )
     echo "replace github.com/$DOCSY_REPO_DEFAULT => ./tmp/docsy" >> go.mod
     eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT" $OUTPUT_REDIRECT
   fi
