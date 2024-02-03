@@ -19,18 +19,20 @@ If you don't intend to translate your site, you can remove the language switcher
 
 ```toml
 [languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
+[languages.no.params]
+title = "Goldydocs"
+description = "Docsy er operativsystem for skyen"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 
 [languages.fa]
-title = "اسناد گلدی"
-description = "یک نمونه برای پوسته داکسی"
 languageName ="فارسی"
 contentDir = "content/fa"
+[languages.fa.params]
+title = "اسناد گلدی"
+description = "یک نمونه برای پوسته داکسی"
 time_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
 ```
