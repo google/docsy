@@ -21,16 +21,18 @@ defaultContentLanguageInSubdir = false
 ...
 [languages]
 [languages.en]
-title = "Docsy"
-description = "Docsy does docs"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
+[languages.en.params]
+title = "Goldydocs"
+description = "Docsy does docs"
 [languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
+[languages.no.params]
+title = "Goldydocs"
+description = "Docsy er operativsystem for skyen"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 {{< /tab >}}
@@ -41,17 +43,19 @@ defaultContentLanguageInSubdir: false
 …
 languages:
   en:
-    title: Docsy
-    description: Docsy does docs
     languageName: English
     weight: 1 # used for sorting
+    params:
+      title: Docsy
+      description: Docsy does docs
   'no':
-    title: Docsy
-    description: Docsy er operativsystem for skyen
     languageName: Norsk
     contentDir: content/no
-    time_format_default: 02.01.2006
-    time_format_blog: 02.01.2006
+    params:
+      title: Docsy
+      description: Docsy er operativsystem for skyen
+      time_format_default: 02.01.2006
+      time_format_blog: 02.01.2006
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
@@ -60,18 +64,22 @@ languages:
   "defaultContentLanguageInSubdir": false,
   "languages": {
     "en": {
-      "title": "Docsy",
-      "description": "Docsy does docs",
       "languageName": "English",
-      "weight": 1
-    },
+      "weight": 1,
+      "params": {
+        "title": "Docsy",
+        "description": "Docsy does docs"
+      }
+  },
     "no": {
-      "title": "Docsy",
-      "description": "Docsy er operativsystem for skyen",
       "languageName": "Norsk",
       "contentDir": "content/no",
-      "time_format_default": "02.01.2006",
-      "time_format_blog": "02.01.2006"
+      "params": {
+        "title": "Docsy",
+        "description": "Docsy er operativsystem for skyen",
+        "time_format_default": "02.01.2006",
+        "time_format_blog": "02.01.2006"
+      }
     }
   }
 }
