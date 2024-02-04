@@ -9,6 +9,10 @@
       text-decoration: $focus_or_hover;
     }
   }
+
+  .btn-link {
+    text-decoration: $base;
+  }
 }
 
 @mixin link-variant($parent, $color, $hover-color, $underline: false) {
