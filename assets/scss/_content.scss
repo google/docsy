@@ -95,7 +95,7 @@
   }
 }
 
-.td-header-link {
+.td-heading-link {
   &:before {
     content: '#';
   }
@@ -114,7 +114,7 @@
 }
 
 @for $i from 1 through 6 {
-  h#{$i}:hover > .td-header-link {
+  h#{$i}:hover > .td-heading-link {
     visibility: visible;
   }
 }

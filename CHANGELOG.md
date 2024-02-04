@@ -41,14 +41,14 @@ For the full list of changes, see the [0.9.0] release notes.
 - Class names to disable [repository links] were misnamed with a suffix of the
   form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
 
-- Docsy statically generates anchor-links after headings using Hugo's
+- Docsy statically generates anchor links after headings using Hugo's
   [render-heading.html](https://gohugo.io/templates/render-hooks/) hook. This is
   _potentially_ a breaking change for projects that override the hook.
 
   The default heading-link symbol is `#`, but it can be customized via the
-  `.td-header-link` class. Projects can also _reuse_ (in their own heading
-  render hooks) or _override_ the heading anchor-link template
-  `docsy/header-link.html` under `layouts`.
+  `.td-heading-link` class. Projects can also _reuse_ (in their own heading
+  render hooks) or _override_ the heading-link template
+  `_default/_markup/_heading-link.html` under `layouts`.
 
 - **Footer layout** has been factored into parts: _left_, _right_, and _center_,
   with _copyright_ a subpart of center. Each part has its own style tag, for
