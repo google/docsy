@@ -95,7 +95,7 @@
   }
 }
 
-.td-heading-link {
+.td-heading-self-link {
   &:before {
     content: '#';
   }
@@ -114,7 +114,7 @@
 }
 
 @for $i from 1 through 6 {
-  h#{$i}:hover > .td-heading-link {
+  h#{$i}:hover > .td-heading-self-link {
     visibility: visible;
   }
 }
