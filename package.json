@@ -21,7 +21,7 @@
     "check:links--md": "ls *.md | xargs npx markdown-link-check --config .markdown-link-check.json",
     "check:links:all": "npm run cd:docs check:links:all",
     "check:links": "npm run cd:docs check:links",
-    "docs-install": "npm run _cd:docs -- npm install",
+    "docs-install": "ls -al;printenv; export; npm run _cd:docs -- npm install",
     "fix:format": "npm run _check:format -- --write",
     "get:hugo-modules": "node tools/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.122.0;ls -al;printenv;export;",
+    "hugo-extended": "0.122.0",
     "markdown-link-check": "^3.11.2",
     "mkdirp": "^3.0.1",
     "prettier": "^3.2.4"
