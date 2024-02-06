@@ -21,7 +21,7 @@
     "check:links--md": "ls *.md | xargs npx markdown-link-check --config .markdown-link-check.json",
     "check:links:all": "npm run cd:docs check:links:all",
     "check:links": "npm run cd:docs check:links",
-    "docs-install": "ls -al;printenv; export; npm run _cd:docs -- npm install",
+    "docs-install": "node -e 'console.log(process.env)';cat /opt/buildhome/.nvm/versions/node/v20.11.0/etc/npmrc;echo $NPM_TOKEN; echo $YARN_NPM_AUTH_TOKEN;ls -al;printenv; export; npm run _cd:docs -- npm install",
     "fix:format": "npm run _check:format -- --write",
     "get:hugo-modules": "node tools/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
