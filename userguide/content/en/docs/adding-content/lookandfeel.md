@@ -343,3 +343,20 @@ Both `head.html` and `scripts.html` are then used to build Docsy's [base page la
 </html>
 ```
 
+## Adding custom attributes to the body element
+
+Sometimes it's useful to assign custom attributes to a page, or to an entire section. Docsy automatically adds the value of the `body_attribute` parameter of the frontmatter as an attribute of the `body` element of the page.
+
+For example, to add the `data-pagefind-filter="section:4.0"` attribute, add the following line to the frontmatter of the page:
+
+```toml
+body_attribute: data-pagefind-filter="section:4.0"
+```
+
+The output of the page will look something like:
+
+```html
+<body class="td-page" data-pagefind-filter="section:4.0">
+```
+
+To apply the custom attribute to every page of a section or a directory, use the [Front Matter Cascade](https://gohugo.io/content-management/front-matter/#front-matter-cascade) feature of Hugo in your configuration file, or in the frontmatter of the highest-level page you want to modify.
