@@ -1,5 +1,39 @@
+{{ $page := .Page -}}
 {{ with .Site.Params.copyright -}}
-  <span class="td_footer__copyright">&copy; {{ with .year -}}{{- . -}}{{- else -}}{{- now.Year -}}{{- end }} {{ with .title -}}{{- . -}}{{- end }} {{ T "footer_all_rights_reserved" }}</span>
-  {{- else }}
-    {{ with .Site.Copyright }}{{ . | safeHTML }}{{ end }}
-{{- end -}}
+  {{ $fromYear := "" -}}
+  {{ $toYear := "" -}}
+  {{ $authors := "" -}}
+  {{ if reflect.IsMap . -}}
+    {{ $fromYear = .from_year -}}
+    {{ $toYear = .to_year -}}
+    {{ $authors = .authors -}}
+  {{ else -}}
+    {{ $authors = . -}}
+  {{ end -}}
+
+  <span class="td-footer__copyright">&copy;
+    {{ with $fromYear -}}
+      {{ . }}&ndash;
+    {{- end -}}
+    {{ $toYear | default now.Year }}
+    <span class="td-footer__authors">
+      {{- $authors | default "Site Authors" | $page.RenderString -}}
+    </span>
+    {{- /* Trim WS */ -}}
+  </span>
+
+  {{- with T "footer_all_rights_reserved" -}}
+    <span class="td-footer__all_rights_reserved">
+      {{- . -}}
+    </span>
+  {{- end }}
+
+{{- else -}}
+
+  {{ with .Site.Copyright -}}
+    <span class="td-footer__copyright">
+      {{- . | $page.RenderString -}}
+    </span>
+  {{- end -}}
+
+{{ end -}}

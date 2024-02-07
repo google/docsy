@@ -51,8 +51,10 @@ markup:
 
 params:
   copyright:
-    title: The Docsy Authors
-    year: 2024
+    authors: >-
+      Docsy Authors |
+      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) | 
+    from_year: 2018
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
@@ -72,6 +74,7 @@ params:
   search:
     # algolia:
   ui:
+    footer_about_disable: true
     sidebar_cache_limit: 10
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
