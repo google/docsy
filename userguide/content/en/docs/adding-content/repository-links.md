@@ -1,7 +1,8 @@
 ---
-title: Repository Links
+title: Repository Links and other page information
+linkTitle: Repo links and page info
 weight: 9
-description: Help your users interact with your source repository.
+description: Help your users interact with page source and view page-source information.
 ---
 
 The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-blog-posts) include links for readers to edit the page or create issues for your docs or project via your site's source repository. The current generated links for each docs or blog page are:
@@ -323,14 +324,15 @@ This can be useful if you have page source files in multiple Git repositories,
 or require a non-GitHub URL. Pages using this value have **Edit this page**
 links only.
 
-## Disabling links
+### Disabling links
 
-You can use CSS to selectively disable (hide) links. For example, add the
-following to your [projects's `_styles_project.scss`][project-style-files] file
-to hide **Create child page** links from all pages:
+You can use CSS to selectively hide links. For example, add the following to
+your [projects's `_styles_project.scss`][project-style-files] file to hide
+**Create child page** links from all pages (optionally with a `!important`
+modifier -- not shown):
 
 ```scss
-.td-page-meta__child { display: none !important; }
+.td-page-meta__child { display: none; }
 ```
 
 Each link kind has an associated unique class named `.td-page-meta__KIND`, as
@@ -355,6 +357,26 @@ Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 
 {{% /alert %}}
 
+## Last-modified page meta data
+
+To have page-source meta data displayed at the bottom of documentation pages and
+blog posts, set the following configuration parameter to `true`. A
+last-modified page note looks something like this:
+
+> <div class="td-page-meta__lastmod"
+>      style="margin-top: 0 !important; display: block !important;">
+>
+> Last modified November 29, 2023: [Release v0.8.0 preparation (#1756) (6bb4f99)](https://github.com/google/docsy/commit/6bb4f99d1eab4976fb80d1488c81ba12b1715c05)
+> </div>
+{.border-0}
+
+Once enabled site-wide, you can selectively hide last-modified notes in a page
+or section by declaring the following style (optionally with a `!important`
+modifier &mdash; not shown):
+
+```scss
+.td-page-meta__lastmod { display: none; }
+```
 
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [multiple languages]: {{% relref "language" %}}
