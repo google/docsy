@@ -38,6 +38,9 @@ For the full list of changes, see the [0.9.0] release notes.
   [path_base_for_github_subdir]. Projects will need to adjust the value of
   [path_base_for_github_subdir] to be relative to the file's physical location.
 
+- Class names to disable [repository links] were misnamed with a suffix of the
+  form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
+
 - Docsy statically generates anchor-links after headings using Hugo's
   [render-heading.html](https://gohugo.io/templates/render-hooks/) hook. This is
   _potentially_ a breaking change for projects that override the hook.
@@ -65,12 +68,14 @@ For the full list of changes, see the [0.9.0] release notes.
 [#1814]: https://github.com/google/docsy/issues/1814
 [#1815]: https://github.com/google/docsy/pull/1815
 [#1818]: https://github.com/google/docsy/pull/1818
+[disabling links]:
+  https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
-[Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
+[repository links]: https://www.docsy.dev/docs/adding-content/repository-links/
 [union file system]:
   https://gohugo.io/getting-started/directory-structure/#union-file-system
 
