@@ -129,6 +129,7 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 | ---------------- |------------| ------------|
 | title | | The title to use.
 | url | | The URL to link to.
+| url_text | The [language parameter](/docs/language/#internationalization-bundles) value of [`ui_read_more`](https://github.com/google/docsy/blob/main/i18n/en.toml) | The link text to use.
 | icon | | The icon class to use.
 
 
