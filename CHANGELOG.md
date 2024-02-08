@@ -48,28 +48,46 @@ For the full list of changes, see the [0.9.0] release notes.
   `render-heading.html` [hook], in favor of client-side rendering via
   `assets/js/anchor.js` &mdash; which has been dropped ([#1460]).
 
+**Footer changes**: refactoring, for easier customization, and simplification.
+For details concerning all footer changes, see [#1818].
+
 - **Footer layout** has been factored into parts: _left_, _right_, and _center_,
   with _copyright_ a subpart of center. Each part has its own style tag, for
   example: `td-footer__left`. Note that the style `td-footer__copyright-etc` has
-  been renamed to `td-footer__center`. For details concerning all footer
-  changes, see [#1818].
+  been renamed to `td-footer__center`.
 
-**Other changes**:
+- **Footer copyright**, supports date-range, and site copyright fallback.
 
-- **Footer copyright**:
   - Hugo config option `params.copyright`, previously a string, can now also be
     a map with the following optional fields: `authors`, `from_year`, `to_year`.
     When unset, `to_year` defaults to the year that the site built. The default
     `authors` is "Site Authors" and this field is rendered as markdown.
   - If `params.copyright` is unset, then the [site `copyright`] option will be
     used and rendered as markdown, "as is" &mdash; with no year is added.
+
+- **Footer simplification**
+  - The About-page footer link is now hidden by default. To enable this link,
+    set `.params.ui.footer_about_enable` to true in your project's configuration
+    file. Parameter `.params.ui.footer_about_disable` is deprecated.
+  - The All-rights-reserved text is hidden by default. To make it visible, add
+    the following to your `_styles_project.scss` [project style file], or delete
+    the `"footer_all_rights_reserved"` [language parameter] for all your site's
+    languages:
+    ```scss
+    .td-footer__all_rights_reserved {
+      display: inline;
+    }
+    ```
+
+**Other changes**:
+
+- **[blocks/feature] shortcode** no longer adds ellipsis (`...`) after the
+  read-more text. If you would like to recover the ellipsis, then add them to
+  the `"ui_read_more"` [language parameter] for your site's languages ([#1820]).
 - The latest release of **[Mermaid] resources** are fetched at build time
   ([#1410]).
 - Docsy follows recommended accessibility practice: page-body **links are
   underlined**. For details, see [#1814] and [#1815].
-- **[blocks/feature] shortcode** no longer adds ellipsis (`...`) after the
-  read-more text. If you would like to recover the ellipsis, then add them to
-  the "ui_read_more" [language parameter] for your site's languages ([#1820]).
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1410]: https://github.com/google/docsy/pull/1410
@@ -90,6 +108,8 @@ For the full list of changes, see the [0.9.0] release notes.
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
+[project style file]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#project-style-files
 [hook]: https://gohugo.io/templates/render-hooks/
 [language parameter]:
   https://www.docsy.dev/docs/language/#internationalization-bundles
