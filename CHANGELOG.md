@@ -41,25 +41,28 @@ For the full list of changes, see the [0.9.0] release notes.
 - Class names to disable [repository links] were misnamed with a suffix of the
   form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
 
+- **Heading self-link** support has been reimplemented and projects must now
+  explicitly enable the feature. For details, see [Heading self links].
+
+  Docsy has switched to build-time generation of heading self links using Hugo's
+  `render-heading.html` [hook], in favor of client-side rendering via
+  `assets/js/anchor.js` &mdash; which has been dropped ([#1460]).
+
 - **Footer layout** has been factored into parts: _left_, _right_, and _center_,
   with _copyright_ a subpart of center. Each part has its own style tag, for
   example: `td-footer__left`. Note that the style `td-footer__copyright-etc` has
-  been renamed to `td-footer__center`. For details concerning all foot changes,
-  see [#1818].
+  been renamed to `td-footer__center`. For details concerning all footer
+  changes, see [#1818].
 
 **Other changes**:
 
 - **Footer copyright**:
-  - The Hugo config option `params.copyright` can be a map with the following
-    optional fields: `authors`, `from_year`, `to_year`. When unset, `to_year`
-    defaults to the year that the site built. The default `authors` is "Site
-    Authors" and is it rendered as markdown.
+  - Hugo config option `params.copyright`, previously a string, can now also be
+    a map with the following optional fields: `authors`, `from_year`, `to_year`.
+    When unset, `to_year` defaults to the year that the site built. The default
+    `authors` is "Site Authors" and this field is rendered as markdown.
   - If `params.copyright` is unset, then the [site `copyright`] option will be
     used and rendered as markdown, "as is" &mdash; with no year is added.
-- Docsy statically generates **anchor links** after headings using Hugo's
-  [render-heading.html](https://gohugo.io/templates/render-hooks/) hook, rather
-  than having them generated dynamically using Anchor.js. Projects that override
-  the heading hook will need to reintegrate the functionality.
 - The latest release of **[Mermaid] resources** are fetched at build time
   ([#1410]).
 - Docsy follows recommended accessibility practice: page-body **links are
@@ -67,17 +70,21 @@ For the full list of changes, see the [0.9.0] release notes.
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1410]: https://github.com/google/docsy/pull/1410
+[#1460]: https://github.com/google/docsy/issues/1460
 [#1744]: https://github.com/google/docsy/pull/1744
 [#1814]: https://github.com/google/docsy/issues/1814
 [#1815]: https://github.com/google/docsy/pull/1815
 [#1818]: https://github.com/google/docsy/pull/1818
 [disabling links]:
   https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
+[Heading self links]:
+  https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
+[hook]: https://gohugo.io/templates/render-hooks/
 [Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
 [site `copyright`]: https://gohugo.io/methods/site/copyright/
 [union file system]:
