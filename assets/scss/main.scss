@@ -80,6 +80,10 @@
     }
   }
 
+  &__authors,
+  &__all_rights_reserved {
+    padding-left: map-get($spacers, 1);
+  }
 }
 
 // Adjust anchors vs the fixed menu.
