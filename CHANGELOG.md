@@ -67,6 +67,9 @@ For the full list of changes, see the [0.9.0] release notes.
   ([#1410]).
 - Docsy follows recommended accessibility practice: page-body **links are
   underlined**. For details, see [#1814] and [#1815].
+- **[blocks/feature] shortcode** no longer adds ellipsis (`...`) after the
+  read-more text. If you would like to recover the ellipsis, then add them to
+  the "ui_read_more" [language parameter] for your site's languages ([#1820]).
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1410]: https://github.com/google/docsy/pull/1410
@@ -75,6 +78,9 @@ For the full list of changes, see the [0.9.0] release notes.
 [#1814]: https://github.com/google/docsy/issues/1814
 [#1815]: https://github.com/google/docsy/pull/1815
 [#1818]: https://github.com/google/docsy/pull/1818
+[#1820]: https://github.com/google/docsy/issues/1820
+[blocks/feature]:
+  https://www.docsy.dev/docs/adding-content/shortcodes/#blocksfeature
 [disabling links]:
   https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
 [Heading self links]:
@@ -85,6 +91,8 @@ For the full list of changes, see the [0.9.0] release notes.
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
 [hook]: https://gohugo.io/templates/render-hooks/
+[language parameter]:
+  https://www.docsy.dev/docs/language/#internationalization-bundles
 [Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
 [site `copyright`]: https://gohugo.io/methods/site/copyright/
 [union file system]:
