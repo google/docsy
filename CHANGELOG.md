@@ -61,7 +61,7 @@ For details concerning all footer changes, see [#1818].
   - Hugo config option `params.copyright`, previously a string, can now also be
     a map with the following optional fields: `authors`, `from_year`, `to_year`.
     When unset, `to_year` defaults to the year that the site built. The default
-    `authors` is "Site Authors" and this field is rendered as markdown.
+    `authors` is "<Site.Title> Authors" and this field is rendered as markdown.
   - If `params.copyright` is unset, then the [site `copyright`] option will be
     used and rendered as markdown, "as is" &mdash; with no year is added.
 
