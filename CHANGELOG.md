@@ -79,15 +79,18 @@ For details concerning all footer changes, see [#1818].
     }
     ```
 
-**Other changes**:
+**Look and feel**:
 
+- Docsy follows recommended accessibility practice: page-body **links are
+  underlined**. For details, see [#1814] and [#1815].
 - **[blocks/feature] shortcode** no longer adds ellipsis (`...`) after the
   read-more text. If you would like to recover the ellipsis, then add them to
   the `"ui_read_more"` [language parameter] for your site's languages ([#1820]).
-- The latest release of **[Mermaid] resources** are fetched at build time
+
+**Other changes**:
+
+- The latest release of **[Mermaid] resources** are now fetched at build time
   ([#1410]).
-- Docsy follows recommended accessibility practice: page-body **links are
-  underlined**. For details, see [#1814] and [#1815].
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [#1410]: https://github.com/google/docsy/pull/1410
