@@ -47,6 +47,18 @@ markup:
             - \)
     renderer:
       unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)
   highlight:
     noClasses: false # Required for dark-mode
 
