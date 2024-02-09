@@ -357,9 +357,9 @@ Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 
 {{% /alert %}}
 
-## Last-modified page meta data
+## Last-modified page metadata
 
-To have page-source meta data displayed at the bottom of documentation pages and
+To have page-source metadata displayed at the bottom of documentation pages and
 blog posts, set the following configuration parameter to `true`. A
 last-modified page note looks something like this:
 
