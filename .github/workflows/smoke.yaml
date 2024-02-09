@@ -15,6 +15,7 @@ jobs:
   new-site:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest]
         docsy-src: [NPM, HUGO_MODULE]
