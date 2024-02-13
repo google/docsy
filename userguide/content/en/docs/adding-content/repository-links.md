@@ -360,8 +360,10 @@ Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 ## Last-modified page metadata
 
 To have page-source metadata displayed at the bottom of documentation pages and
-blog posts, set the following configuration parameter to `true`. A
-last-modified page note looks something like this:
+blog posts, set the `GitInfo` configuration parameter to `true`, and ensure that
+`params.github_repo` is defined.
+
+A last-modified page note looks something like this:
 
 > <div class="td-page-meta__lastmod"
 >      style="margin-top: 0 !important; display: block !important;">
