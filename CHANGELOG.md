@@ -13,7 +13,6 @@ Useful links:
 - [Releases] & [tags]. Jump to the [latest] release.
 - [Milestones]
 
-[24Q1]: https://github.com/google/docsy/milestone/10
 [latest]: https://github.com/google/docsy/releases/latest
 [milestones]: https://github.com/google/docsy/milestones
 [releases]: https://github.com/google/docsy/releases
@@ -21,9 +20,11 @@ Useful links:
 
 ## 0.9.0
 
-> ### UNRELEASED: this planned version is still under development.
+> ### UNRELEASED: this planned version is still under development
 
-For the full list of changes, see the [0.9.0] release notes.
+For an introduction and commentary, see the [0.9.0 release report]. For the full
+list of commits, see the [0.9.0] release notes. The most significant changes of
+this release are listed next.
 
 **Breaking changes**:
 
@@ -44,80 +45,40 @@ For the full list of changes, see the [0.9.0] release notes.
 - **Heading self-link** support has been reimplemented and projects must now
   explicitly enable the feature. For details, see [Heading self links].
 
-  Docsy has switched to build-time generation of heading self links using Hugo's
-  `render-heading.html` [hook], in favor of client-side rendering via
-  `assets/js/anchor.js` &mdash; which has been dropped ([#1460]).
-
 **Footer changes**: refactoring, for easier customization, and simplification.
 For details concerning all footer changes, see [#1818].
 
 - **Footer layout** has been factored into parts: _left_, _right_, and _center_,
-  with _copyright_ a subpart of center. Each part has its own style tag, for
-  example: `td-footer__left`. Note that the style `td-footer__copyright-etc` has
-  been renamed to `td-footer__center`.
-
-- **Footer copyright**, supports date-range, and site copyright fallback.
-
-  - Hugo config option `params.copyright`, previously a string, can now also be
-    a map with the following optional fields: `authors`, `from_year`, `to_year`.
-    When unset, `to_year` defaults to the year that the site built. The default
-    `authors` is "<Site.Title> Authors" and this field is rendered as markdown.
-  - If `params.copyright` is unset, then the [site `copyright`] option will be
-    used and rendered as markdown, "as is" &mdash; with no year is added.
-
-- **Footer simplification**
-  - The About-page footer link is now hidden by default. To enable this link,
-    set `.params.ui.footer_about_enable` to true in your project's configuration
-    file. Parameter `.params.ui.footer_about_disable` is deprecated.
-  - The All-rights-reserved text is hidden by default. To make it visible, add
-    the following to your `_styles_project.scss` [project style file], or delete
-    the `"footer_all_rights_reserved"` [language parameter] for all your site's
-    languages:
-    ```scss
-    .td-footer__all_rights_reserved {
-      display: inline;
-    }
-    ```
-
-**Look and feel**:
-
-- Docsy follows recommended accessibility practice: page-body **links are
-  underlined**. For details, see [#1814] and [#1815].
-- **[blocks/feature] shortcode** no longer adds ellipsis (`...`) after the
-  read-more text. If you would like to recover the ellipsis, then add them to
-  the `"ui_read_more"` [language parameter] for your site's languages ([#1820]).
+  with _copyright_ a subpart of center. For details see [Footer layout]
+- **Footer copyright**, supports date-range, and site copyright fallback. For
+  details, see [Footer copyright].
+- **Footer streamlined**: the About-page footer link and All-rights-reserved
+  text are now hidden by default. For details, see [Footer streamlined].
 
 **Other changes**:
 
 - The latest release of **[Mermaid] resources** are now fetched at build time
   ([#1410]).
+- [Look and feel] updates.
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
+[0.9.0 release report]: https://www.docsy.dev/blog/2024/0.9.0/
 [#1410]: https://github.com/google/docsy/pull/1410
-[#1460]: https://github.com/google/docsy/issues/1460
 [#1744]: https://github.com/google/docsy/pull/1744
-[#1814]: https://github.com/google/docsy/issues/1814
-[#1815]: https://github.com/google/docsy/pull/1815
 [#1818]: https://github.com/google/docsy/pull/1818
-[#1820]: https://github.com/google/docsy/issues/1820
-[blocks/feature]:
-  https://www.docsy.dev/docs/adding-content/shortcodes/#blocksfeature
 [disabling links]:
   https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
-[Heading self links]:
-  https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
+[Footer layout]: https://www.docsy.dev/blog/2024/0.9.0/#footer-layout
+[Footer copyright]: https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright
+[Footer streamlined]: https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined
+[Heading self links]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
+[look and feel]: https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: https://www.docsy.dev/docs/language/
 [path_base_for_github_subdir]:
   https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
-[project style file]:
-  https://www.docsy.dev/docs/adding-content/lookandfeel/#project-style-files
-[hook]: https://gohugo.io/templates/render-hooks/
-[language parameter]:
-  https://www.docsy.dev/docs/language/#internationalization-bundles
 [Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
-[site `copyright`]: https://gohugo.io/methods/site/copyright/
 [union file system]:
   https://gohugo.io/getting-started/directory-structure/#union-file-system
 
@@ -226,7 +187,7 @@ For the full list of changes, see the [0.7.0] release notes.
     extension testing. ([#906])
   - Dropped support for pre-Hugo-0.54.x behavior of `{{% %}}`. ([#939])
   - `blocks/section`: **default** and accepted values of the `type` argument
-    have changed! For details see [blocks/section] ([#1472]).
+    have changed! For details, see [blocks/section] ([#1472]).
   - **Card shortcodes** ([#1376])]:
     - Renamed CSS class `td-card-deck` to `td-card-group`.
     - `card`, `card-code`: markup of inner content (HTML/markdown) now depends
@@ -439,7 +400,7 @@ For the full list of changes, see the [0.2.0] release notes.
 
 ## 0.X.Y
 
-> ### UNRELEASED: this planned version is still under development.
+> ### UNRELEASED: this planned version is still under development
 
 For the full list of changes, see the [0.x.y] release notes.
 
