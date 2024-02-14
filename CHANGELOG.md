@@ -20,8 +20,6 @@ Useful links:
 
 ## 0.9.0
 
-> ### UNRELEASED: this planned version is still under development
-
 For an introduction and commentary, see the [0.9.0 release report]. For the full
 list of commits, see the [0.9.0] release notes. The most significant changes of
 this release are listed next.

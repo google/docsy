@@ -57,19 +57,21 @@ repo.
     dependencies.
 5.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
     preparation".
-6.  **Get PR approved and merged**.
-7.  **Pull in `main`** to get the last PR.
-8.  **Ensure** that you're:
+6.  **Test the PR** branch from selected sites, and push any required
+    adjustments.
+7.  **Get PR approved and merged**.
+8.  **Pull in `main`** to get the last PR.
+9.  **Ensure** that you're:
     - On the default branch, `main`
     - At the commit that you want to tag as v0.X.Y
-9.  **Create tags** for v0.X.Y:
+10. **Create tags** for v0.X.Y:
 
     ```sh
     REL=v0.X.Y
     git tag $REL
     ```
 
-10. **Push the new tags** to the main repo, which is named `upstream` in the
+11. **Push the new tags** to the main repo, which is named `upstream` in the
     following example:
 
     ```console
@@ -78,7 +80,7 @@ repo.
     * [new tag]         v0.X.Y -> v0.X.Y
     ```
 
-11. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+12. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
 
     - From the **release/tag dropdown**: Select the new release tag that you
       just pushed, v0.X.Y.
@@ -96,9 +98,9 @@ repo.
 
     - Select **Create a discussion for this release**.
 
-12. **Publish the release**: click _Publish release_.
-13. Test the release with a downstream project, such as [docsy-example].
-14. If you find issues, determine whether they need to be fixed immediately. If
+13. **Publish the release**: click _Publish release_.
+14. Test the release with a downstream project, such as [docsy-example].
+15. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Then publish a dot release:
     go back to step 1.
 
