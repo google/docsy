@@ -59,6 +59,7 @@ For details concerning all footer changes, see [#1818].
 
 - The latest release of **[Mermaid] resources** are now fetched at build time
   ([#1410]).
+- [Look and feel] updates.
 
 [0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
 [0.9.0 release report]: https://www.docsy.dev/blog/2024/0.9.0/
@@ -71,6 +72,7 @@ For details concerning all footer changes, see [#1818].
 [Footer copyright]: https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright
 [Footer streamlined]: https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined
 [Heading self links]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
+[look and feel]: https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: https://www.docsy.dev/docs/language/
