@@ -4,7 +4,7 @@
     {{ $pages = (where $pages "Type" "!=" "search") }}
     {{ $pages = (where $pages ".Params.hide_summary" "!=" true) -}}
     {{ $pages = (where $pages ".Parent" "!=" nil) -}}
-    {{ if .Parent.File -}}
+    {{ if and .Parent .Parent.File -}}
         {{ $pages = (where $pages "Parent.File.UniqueID" "==" $parent.File.UniqueID) -}}
     {{ end -}}
     {{ if or $parent.Params.no_list (eq (len $pages) 0) -}}
