@@ -18,6 +18,22 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
+## 0.9.1 or 0.10.0
+
+> ### UNRELEASED: this planned version is still under development
+
+For the full list of changes, see the [0.x.y] release notes.
+
+**Breaking changes**:
+
+- ...
+
+**New**:
+
+**Other changes**:
+
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+
 ## 0.9.0
 
 For an introduction and commentary, see the [0.9.0 release report]. For the full
@@ -59,7 +75,7 @@ For details concerning all footer changes, see [#1818].
   ([#1410]).
 - [Look and feel] updates.
 
-[0.9.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.0
+[0.9.0]: https://github.com/google/docsy/releases/v0.9.0
 [0.9.0 release report]: https://www.docsy.dev/blog/2024/0.9.0/
 [#1410]: https://github.com/google/docsy/pull/1410
 [#1744]: https://github.com/google/docsy/pull/1744

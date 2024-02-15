@@ -71,8 +71,8 @@ repo.
     git tag $REL
     ```
 
-11. **Push the new tags** to the main repo, which is named `upstream` in the
-    following example:
+11. **Push the new tags** to the main remote (`origin` or `upstream` depending
+    on your setup):
 
     ```console
     $ git push upstream $REL
@@ -93,7 +93,8 @@ repo.
       ```markdown
       ## Release summary
 
-      See, https://github.com/google/docsy/blob/main/CHANGELOG.md#0XY
+      - [Release report](https://www.docsy.dev/blog/2024/0.X.Y/)
+      - [CHANGELOG](https://github.com/google/docsy/blob/main/CHANGELOG.md#0XY)
       ```
 
     - Select **Create a discussion for this release**.
@@ -118,7 +119,7 @@ further changes are merged into the default branch:
    - **Pin the 0.X.Y release URL**, which ends with `latest?FIXME=...`, to the
      v0.X.Y release at `https://github.com/google/docsy/releases/v0.x.y`.
 3. **Submit a PR with your changes**, using a title like "Set NPM package
-   version to next unreleased dev".
+   version to next unreleased dev vers".
 4. **Get PR approved and merged**.
 
 [CHANGELOG]: CHANGELOG.md
