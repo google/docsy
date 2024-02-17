@@ -78,7 +78,7 @@ repo.
     ```
 
 11. **Push the new tags** to the main remote (`origin` or `upstream` depending
-    on your setup):
+    on your setup) as well as any secondary remotes, if any:
 
     ```console
     $ git push upstream $REL
