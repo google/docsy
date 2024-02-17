@@ -18,7 +18,7 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.9.1 or 0.10.0
+## 0.9.2 or 0.10.0
 
 > ### UNRELEASED: this planned version is still under development
 
@@ -33,6 +33,12 @@ For the full list of changes, see the [0.x.y] release notes.
 **Other changes**:
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+
+## 0.9.1
+
+Patch release. For details, see [0.9.1].
+
+[0.9.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.1
 
 ## 0.9.0
 

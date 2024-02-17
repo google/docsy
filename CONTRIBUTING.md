@@ -59,6 +59,12 @@ repo.
     preparation".
 6.  **Test the PR** branch from selected sites, and push any required
     adjustments.
+    - If the test site uses Docsy as a Git submodule:
+      ```console
+      $ cd themes/docs
+      $ git fetch
+      $ git switch -t repo/branch-name # e.g. chalin/chalin-im-0.9.1-2024-02-16
+      ```
 7.  **Get PR approved and merged**.
 8.  **Pull in `main`** to get the last PR.
 9.  **Ensure** that you're:
