@@ -23,6 +23,14 @@
           </aside>
           <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
             {{ partial "version-banner.html" . }}
+            {{ if .Page.Params.banner }}
+              {{ if .Page.Params.banner_file }}
+                {{ $bannerfile := printf "hooks/%s" $.Page.Params.banner_file }}
+                {{ partial $bannerfile . }}
+              {{ else }}
+                {{ partial "hooks/banner.html" . }}
+              {{ end }}
+            {{ end }}
             {{ if not .Site.Params.ui.breadcrumb_disable }}{{ partial "breadcrumb.html" . }}{{ end }}
             {{ block "main" . }}{{ end }}
           </main>
