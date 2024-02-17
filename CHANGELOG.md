@@ -38,7 +38,7 @@ For the full list of changes, see the [0.x.y] release notes.
 
 Patch release. For details, see [0.9.1].
 
-[0.9.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.9.1
+[0.9.1]: https://github.com/google/docsy/releases/v0.9.1
 
 ## 0.9.0
 
