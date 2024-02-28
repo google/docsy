@@ -57,17 +57,21 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% alert title="Warning" color="warning" %}}
+{{% alert title="Deprecation note and warning" color="warning" %}}
   <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-  You can configure your project's analytics ID by setting either the top-level
-  `googleAnalytics` config parameter or `services.googleAnalytics.id`. **Do not
-  define both,** otherwise this can result in [unexpected behavior][]. For
-  details, see [Is services.googleAnalytics.id an alias for
+  While you can configure your project's analytics ID by setting either the
+  top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
+  **`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and
+  will be removed in a future release.
+
+  **Do not define both parameters,** otherwise this can result in [unexpected
+  behavior][]. For details, see [Is services.googleAnalytics.id an alias for
   googleAnalytics][alias-discussion].
 
   [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
   [unexpected behavior]: https://github.com/google/docsy/issues/921
+  [v0.120.0]: https://github.com/gohugoio/hugo/releases/tag/v0.120.0
 
 {{% /alert %}}
 
