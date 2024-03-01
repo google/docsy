@@ -1,4 +1,4 @@
-FROM klakegg/hugo:0.101.0-ext-alpine as docsy-user-guide
+FROM klakegg/hugo:0.111.3-ext-alpine as docsy-user-guide
 
 RUN apk update
 RUN apk add git

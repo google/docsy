@@ -16,7 +16,7 @@ If you prefer to create a site from scratch, follow the instructions in Start a 
 At your Unix shell or Windows command line, run the following command:
 
 ```bash
-git clone https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch v{{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
 cd  my-new-site
 hugo server
 ```
@@ -39,14 +39,18 @@ There are two different routes to get a local clone of the example site:
 If you want  to use a remote repository other than GitHub (such as [GitLab](https://gitlab.com), [BitBucket](https://bitbucket.org/), [AWS CodeCommit](https://aws.amazon.com/codecommit/), [Gitea](https://gitea.io/)) or if you don't want a remote repo at all, simply make a local working copy of the example site directly using `git clone`. As last parameter, give your chosen local repo name (here: `my-new-site`):
 
 ```bash
-git clone https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch v{{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
 ```
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
 
 As the Docsy example site repo is a [template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/), creating your own remote GitHub clone of this Docsy example site repo is quite easy:
 
-1. Go to the [Docsy example site repo](https://github.com/google/docsy-example) and click **Use this template**.
+1. Go to the repo of the [Docsy example site](https://github.com/google/docsy-example).
+
+1. Use the dropdown for switching branches/tags to change to the latest released tag `v{{% param "version" %}}`. 
+
+1. Click the button **Use this template** and select the option `Create a new repository` from the dropdown.
 
 1. Chose a name for your new repository (e.g. `my-new-site`) and type it in the **Repository name** field. You can also add an optional **Description**.
 
@@ -59,8 +63,8 @@ As the Docsy example site repo is a [template repository](https://github.blog/20
     ```
 
 {{% alert title="Note" color="primary" %}}
-Depending on your environment you may need to tweak the [module top level settings](https://github.com/google/docsy-example/blob/1c7f7e300c90cd690ca5be66b43fe58713bb21c9/config.toml#L221-L228) inside your `config.toml` slightly, for example by adding a proxy to use when downloading remote modules.
-You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level). 
+Depending on your environment you may need to tweak the [module top level settings](https://github.com/google/docsy-example/blob/f88fca475c28ffba3d72710a50450870230eb3a0/hugo.toml#L222-L227) inside your `hugo.toml` slightly, for example by adding a proxy to use when downloading remote modules.
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
 {{% /alert %}}
 
 Now you can make local edits and test your copied site locally with Hugo.

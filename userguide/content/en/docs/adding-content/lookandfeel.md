@@ -6,23 +6,42 @@ description: Customize colors, fonts, code highlighting, and more for your site.
 spelling: cSpell:ignore wordmark docsy
 ---
 
-By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. And because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values (such as project colors and fonts) in its special SCSS project variables file, or do more serious customization by creating your own styles.
+By default, a site using Docsy has the theme's default fonts, colors, and
+general look and feel. However, if you want your own color scheme (and you
+probably will!) you can very easily override the theme defaults with your own
+project-specific values - Hugo will look in your project files first when
+looking for information to build your site. And because [Docsy uses Bootstrap 5]
+and SCSS for styling, you can override just single values (such as project
+colors and fonts) in its special SCSS project variables file, or do more serious
+customization by creating your own styles.
 
-Docsy also provides options for styling your code blocks, using either Chroma or Prism for highlighting.
+Docsy also provides options for styling your code blocks, using either Chroma or
+Prism for highlighting.
+
+[Docsy uses Bootstrap 5]: /blog/2023/bootstrap-5-migration/
 
 ## Project style files
 
-To customize your project's look and feel, create your own version of either or both of the following
-Docsy placeholder files (note the **`_project.scss`** suffixes):
+To customize your project's look and feel, create your own version of either or
+both of the following Docsy placeholder files (note the **`_project.scss`**
+suffixes):
 
-- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you add project-specific definitions of theme variables such as [site colors](#site-colors), as well as any additional Bootstrap variable values you want to set. You can find a list of Docsy's theme variables and their default values in [<code>assets/scss/<strong>_variables.scss</strong></code>][_variables].  For information about other Bootstrap 4 variables, see [Variable defaults][] and Bootstrap's [v4-dev/scss/_variables.scss][] file.
-- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can add your own custom SCSS styles, including overriding any of the styles in Docsy's theme SCSS files.
+- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you
+  add project-specific definitions of theme variables such as [site
+  colors](#site-colors), as well as any additional Bootstrap variable values you
+  want to set. You can find a list of Docsy's theme variables and their default
+  values in [`assets/scss/`**`_variables.scss`**][_variables].  For information
+  about other Bootstrap 5 variables, see [Variable defaults] and Bootstrap's
+  [`_variables.scss`] file.
+- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can
+  add your own custom SCSS styles, including overriding any of the styles in
+  Docsy's theme SCSS files.
 
 [_styles_project]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
 [_variables_project]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
 [_variables]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[v4-dev/scss/_variables.scss]: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-[Variable defaults]: https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
+[`_variables.scss`]: https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_variables.scss
+[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
@@ -30,22 +49,18 @@ PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in s
 
 ## Site colors
 
-To easily customize your site's colors, add SCSS variable overrides to
-`assets/scss/_variables_project.scss`. A simple example changing the primary and
-secondary color to two shades of purple:
+To customize your site's colors, add SCSS variable overrides to
+`assets/scss/_variables_project.scss`. For example, you can set the primary and
+secondary site colors as follows:
 
 ```scss
 $primary: #390040;
 $secondary: #A23B72;
 ```
 
-The theme has features such as rounded corners and gradient backgrounds enabled by default. These can also be toggled in your project variables file:
-
-```scss
-$enable-gradients: true;
-$enable-rounded: true;
-$enable-shadows: true;
-```
+The theme has features such as gradient backgrounds (`$enable-gradients`) and
+shadows (`$enable-shadows`) enabled by default. These can also be toggled in
+your project variables file by setting the variables to `false`.
 
 ## Fonts
 
@@ -95,11 +110,11 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper cont
 
 ## Code highlighting with Chroma
 
-With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `config.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `config.toml`/`config.yaml`/`config.json`:
+With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `hugo.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
@@ -108,7 +123,7 @@ With Hugo version 0.60 and higher, you can choose from a range of code block hig
       # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
       style = "tango"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 markup:
   goldmark:
     renderer:
@@ -116,7 +131,7 @@ markup:
   highlight:
     style: tango
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "markup": {
     "goldmark": {
@@ -132,39 +147,50 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 
-By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `config.toml`/`config.yaml`/`config.json`.
+By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 # Uncomment if you want your chosen highlight style used for code blocks without a specified language
 guessSyntax = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 guessSyntax: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "guessSyntax": true
 {{< /tab >}}
 {{< /tabpane >}}
+
+If you are using a Docsy version later than `0.6.0`, the code blocks show a
+"Copy to clipboard" icon in the top right-hand corner. To disable this
+functionality set `disable_click2copy_chroma` to `true` in your configuration
+file:
 
 You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
 
-Optionally, you can enable Prism syntax highlighting in your `config.toml`/`config.yaml`/`config.json`:
+Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-prism_syntax_highlighting: true
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  prism_syntax_highlighting: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
-"prism_syntax_highlighting": true
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "prism_syntax_highlighting": true
+  }
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -243,6 +269,55 @@ of the following:
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
 
+## Tables
+
+Docsy applies the following styles to all tables, through the class `.td-table`:
+
+- [Bootstrap table][] styles:
+  - `.table`
+  - `.table-striped`
+  - `.table-responsive`
+- `display: block`, which is necessary for tables to be responsive.
+
+This styling configuration gives you responsive tables using Markdown only,
+without the need to wrap the table in a `<div>`. It does, however, mean that all your tables have `display`
+set to `block`. If you don't want this, you can create your own custom styles for tables.
+
+{{% alert title="Note" %}}
+
+Our table styling goes against the [Bootstrap recommendation to _wrap_
+tables][wrap-tables] with `.table-responsive` &mdash; however, we think letting
+users create responsive tables with just Markdown table syntax is more
+convenient.
+
+[wrap-tables]: https://getbootstrap.com/docs/5.3/content/tables/#responsive-tables
+
+{{% /alert %}}
+
+To render a table without Docsy styling, apply the `.td-initial` class to the
+table. From the resulting `<table>` style base, it is easier to apply your own
+custom styles (rather than trying to undo Docsy table styling), as is
+illustrated in the following example:
+
+```markdown
+| Shape    | Number of sides |
+| -------- | --------------- |
+| Triangle | 3               |
+| Square   | 4               |
+{.td-initial .my-dark-table-style}
+```
+
+The example above uses [Markdown attribute][] syntax, and might render like this:
+
+| Shape    | Number of sides |
+| -------- | --------------- |
+| Triangle | 3               |
+| Square   | 4               |
+{.td-initial .table .table-dark}
+
+[Bootstrap table]: https://getbootstrap.com/docs/5.3/content/tables/
+[Markdown attribute]: https://discourse.gohugo.io/t/markdown-attributes/41783
+
 ## Customizing templates
 
 ### Add code to head or before body end
@@ -286,4 +361,3 @@ Both `head.html` and `scripts.html` are then used to build Docsy's [base page la
   </body>
 </html>
 ```
-

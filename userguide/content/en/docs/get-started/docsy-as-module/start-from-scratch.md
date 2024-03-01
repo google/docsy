@@ -22,13 +22,11 @@ hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
 hugo mod get github.com/google/docsy@v{{% param "version" %}}
-cat >> config.toml <<EOL
+cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
-[[module.imports]]
-path = "github.com/google/docsy/dependencies"
 EOL
 hugo server
 {{< /tab >}}
@@ -43,11 +41,7 @@ proxy = "direct"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"^
-
-[[module.imports]]^
-
-path = "github.com/google/docsy/dependencies")>>config.toml
+path = "github.com/google/docsy"
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -68,7 +62,12 @@ hugo new site my-new-site
 cd  my-new-site
 ```
 
-This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file, `config.toml.
+This will create a minimal site structure, containing the folders `archetypes`, `content`, `data`, `layouts`, `static`, and `themes` and a configuration file (default: `hugo.toml`).
+
+{{% alert title="Tip" %}}
+In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
+If you are using hugo 0.110 or above, consider renaming your `config.toml` to `hugo.toml`!
+{{% /alert %}}
 
 ### Import the Docsy theme module as a dependency of your site
 
@@ -90,11 +89,11 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Add theme module configuration settings
 
-Add the settings in the following snippet at the end of your site configuration file (default: `config.toml`) and save the file.
+Add the settings in the following snippet at the end of your site's [configuration file] (default: `hugo.toml`) and save the file.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml"  lang="toml" >}}
+{{< tab header="hugo.toml"  lang="toml" >}}
 [module]
   proxy = "direct"
   # uncomment line below for temporary local development of module
@@ -105,11 +104,8 @@ Add the settings in the following snippet at the end of your site configuration 
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
-  [[module.imports]]
-    path = "github.com/google/docsy/dependencies"
-    disable = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 module:
   proxy: direct
   hugoVersion:
@@ -118,10 +114,8 @@ module:
   imports:
     - path: github.com/google/docsy
       disable: false
-    - path: github.com/google/docsy/dependencies
-      disable: false
 {{< /tab >}}
-{{< tab header="config.json"  lang="json" >}}
+{{< tab header="hugo.json"  lang="json" >}}
 {
   "module": {
     "proxy": "direct",
@@ -132,10 +126,6 @@ module:
     "imports": [
       {
         "path": "github.com/google/docsy",
-        "disable": false
-      },
-      {
-        "path": "github.com/google/docsy/dependencies",
         "disable": false
       }
     ]
@@ -165,3 +155,5 @@ You may get Hugo errors for missing parameters and values when you try to build 
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file

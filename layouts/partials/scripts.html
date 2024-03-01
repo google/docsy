@@ -1,5 +1,12 @@
-{{ if .Site.Params.mermaid.enable -}}
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js" integrity="sha512-E/owfVh8/U1xwhvIT4HSI064DRc1Eo/xf7AYax84rt9gVqA8tc/JNH/lvTl1tuw9PUHQIMGUtObkjYkgRjFqAA==" crossorigin="anonymous"></script>
+{{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
+{{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
+{{ if ge hugo.Version "0.93.0" -}}
+  {{ $needKaTeX = or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
+  {{ $needmhchem = or $needmhchem (.Page.Store.Get "hasmhchem") -}}
+{{ else -}}
+  {{ if or $needKaTeX $needmhchem -}}
+    {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version  }}
+  {{ end -}}
 {{ end -}}
 
 {{ if .Site.Params.markmap.enable -}}
@@ -27,39 +34,46 @@ window.markmap = {
   <script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end -}}
 
-{{ if .Site.Params.katex.enable -}}
-<!-- load stylesheet and scripts for KaTeX support -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
-    integrity="sha512-vJqxkZ+Sugf/6WRlpcxN01qVfX/29hF6qc33eHF1va3NgoV+U+wCi+uTAsQ10sDoGyBxHLdaHvGwDlV3yVYboA==" crossorigin="anonymous">
-<!-- The loading of KaTeX is deferred to speed up page rendering -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"
-    integrity="sha512-5ufNcHqOYgilGEHPfuRIQ5B/vDS1M8+UC+DESZ5CwVgGTg+b2Ol/15rYL/GiCWJ/Sx8oVo0FPFok1dPk8U9INQ=="
-    crossorigin="anonymous"></script>
-<!-- check whether support of mhchem is enabled in config.toml -->
-{{ if .Site.Params.katex.mhchem.enable -}}
-<!-- To add support for displaying chemical equations and physical units, load the mhchem extension: -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js"
-    integrity="sha512-HWb6LyQhO6UkmYLjdSblpgiOvvbdkoMRjln0POPhOVbZu3l4QdqwZnMJ/cuwKScU5pWARejB495TAAAz0WNsXQ=="
-    crossorigin="anonymous"></script>
-{{ end -}}
-<!-- To automatically render math in text elements, include the auto-render extension: -->
-<script defer src='https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js'
-    integrity='sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==' crossorigin='anonymous'
-    {{ printf "onload='renderMathInElement(%s, %s);'" (( .Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}></script>
+{{ if  $needKaTeX -}}
+{{/* load stylesheet and scripts for KaTeX support */ -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+      integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous">
+  {{/* The loading of KaTeX is deferred to speed up page rendering */ -}}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+        integrity="sha512-LQNxIMR5rXv7o+b1l8+N1EZMfhG7iFZ9HhnbJkTp4zjNr5Wvst75AqUeFDxeRUa7l5vEDyUiAip//r+EFLLCyA=="
+        crossorigin="anonymous">
+</script>
+  {{ if $needmhchem -}}
+  {{/* To add support for displaying chemical equations and physical units, load the mhchem extension: */ -}}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/mhchem.min.js"
+        integrity="sha512-mxjNw/u1lIsFC09k/unscDRY3ofIYPVFbWkP8slrePcS36ht4d/OZ8rRu5yddB2uiqajhTcLD8+jupOWuYPebg=="
+        crossorigin="anonymous">
+</script>
+  {{ end -}}
+  {{/* To automatically render math in text elements, include the auto-render extension: */ -}}
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+       integrity="sha512-iWiuBS5nt6r60fCz26Nd0Zqe0nbk1ZTIQbl3Kv7kYsX+yKMUFHzjaH2+AnM6vp2Xs+gNmaBAVWJjSmuPw76Efg==" crossorigin="anonymous"
+       {{ printf "onload='renderMathInElement(%s, %s);'" (( $.Page.Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Page.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}>
+</script>
 {{ end -}}
 
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
-{{ $jsAnchor := resources.Get "js/anchor.js" -}}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
-{{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . -}}
 {{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
 {{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . -}}
 {{ $jsDrawio := resources.Get "js/drawio.js" | resources.ExecuteAsTemplate "js/drawio.js" . -}}
 {{ if .Site.Params.offlineSearch -}}
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
-{{ $js := (slice $jsBs $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap $jsDrawio) | resources.Concat "js/main.js" -}}
+
+{{ $jsArray := slice $jsBs $jsBase $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
+
+{{ if .Page.Store.Get "hasmermaid" -}}
+{{- partial "scripts/mermaid.html" . -}}
+{{ end -}}
+
+{{ $js := $jsArray | resources.Concat "js/main.js" -}}
 {{ if hugo.IsProduction -}}
   {{ $js := $js | minify | fingerprint -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
@@ -69,7 +83,7 @@ window.markmap = {
 
 {{ if .Site.Params.prism_syntax_highlighting -}}
   <script src='{{ "js/prism.js" | relURL }}'></script>
-{{ else if false -}}
+{{ else if ( not .Site.Params.disable_click2copy_chroma ) -}}
   {{ $c2cJS := resources.Get "js/click-to-copy.js" -}}
   {{ if hugo.IsProduction -}}
     {{ $c2cJS = $c2cJS | minify | fingerprint -}}
@@ -79,5 +93,25 @@ window.markmap = {
     crossorigin="anonymous"></script>
 {{ end -}}
 
+{{ if and .Site.Params.search (isset .Site.Params.search "algolia") -}}
+  {{ template "algolia/scripts" .Site.Params.search.algolia -}}
+{{ end -}}
 <script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
 {{ partial "hooks/body-end.html" . -}}
+
+{{ define "algolia/scripts" -}}
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.5.2"
+  integrity="sha512-LzxWPDNELae1RSIsDRSitKYPJpRtjYo22GbOl+d+xLcjKiZQRRdxSTI3cRRHw7O05e0MbIIu33QnU2rt6ymQ6A=="
+  crossorigin="anonymous" ></script>
+<script type="text/javascript">
+const containers = ['#docsearch-0', '#docsearch-1'];
+for (let c of containers) {
+  docsearch({
+    container: c,
+    appId: {{ .appId | default "R2IYF7ETH7" }},
+    apiKey: {{ .apiKey | default "599cec31baffa4868cae4e79f180729b" }},
+    indexName: {{ .indexName | default "docsearch" }},
+  });
+}
+</script>
+{{ end -}}
