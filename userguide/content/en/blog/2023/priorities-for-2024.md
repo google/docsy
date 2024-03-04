@@ -4,7 +4,7 @@ linkTitle: 2024 Priorities
 author: >
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering
-  Committee](https://www.docsy.dev/blog/2022/hello/#introducing-the-psc)
+  Committee](/blog/2022/hello/#introducing-the-psc)
 date: 2023-11-28
 # prettier-ignore
 cSpell:ignore: CNCF Chalin opentelemetry namespacing docsy customizability deprioritize
