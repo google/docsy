@@ -4,7 +4,7 @@ linkTitle: Upgrading to Docsy 0.7
 description: A guide to upgrading to Docsy 0.7 and Bootstrap 5 with examples
 author: >
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/) &
-  [Docsy Steering Committee](https://www.docsy.dev/blog/2022/hello/#introducing-the-psc))
+  [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc))
 date: 2023-08-03
 cSpell:ignore: CNCF Chalin opentelemetry namespacing docsy
 ---
