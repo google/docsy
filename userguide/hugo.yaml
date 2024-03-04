@@ -28,10 +28,6 @@ menu:
       post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
 
-services:
-  googleAnalytics:
-    # id: G-XXXXXXXXX # Waiting on https://github.com/google/docsy/issues/1097
-
 languages:
   en:
     languageName: English
