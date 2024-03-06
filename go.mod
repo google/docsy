@@ -6,5 +6,5 @@ go 1.12
 
 require (
 	github.com/FortAwesome/Font-Awesome v0.0.0-20240108205627-a1232e345536 // indirect
-	github.com/twbs/bootstrap v5.3.2+incompatible // indirect
+	github.com/twbs/bootstrap v5.3.3+incompatible // indirect
 )
