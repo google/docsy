@@ -18,7 +18,7 @@ import mermaid from "{{ $cdnurl }}";
         return;
     }
 
-    var params = {{ .Site.Params.mermaid | jsonify | safeJS }};
+    var params = {{ with .Site.Params.mermaid }}{{ . | jsonify | safeJS }}{{ else }}{}{{- end }};
 
     // Site params are stored with lowercase keys; lookup correct casing
     // from Mermaid default config.
