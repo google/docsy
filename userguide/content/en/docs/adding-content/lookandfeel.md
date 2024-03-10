@@ -6,23 +6,42 @@ description: Customize colors, fonts, code highlighting, and more for your site.
 spelling: cSpell:ignore wordmark docsy
 ---
 
-By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. And because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values (such as project colors and fonts) in its special SCSS project variables file, or do more serious customization by creating your own styles.
+By default, a site using Docsy has the theme's default fonts, colors, and
+general look and feel. However, if you want your own color scheme (and you
+probably will!) you can very easily override the theme defaults with your own
+project-specific values - Hugo will look in your project files first when
+looking for information to build your site. And because [Docsy uses Bootstrap 5]
+and SCSS for styling, you can override just single values (such as project
+colors and fonts) in its special SCSS project variables file, or do more serious
+customization by creating your own styles.
 
-Docsy also provides options for styling your code blocks, using either Chroma or Prism for highlighting.
+Docsy also provides options for styling your code blocks, using either Chroma or
+Prism for highlighting.
+
+[Docsy uses Bootstrap 5]: /blog/2023/bootstrap-5-migration/
 
 ## Project style files
 
-To customize your project's look and feel, create your own version of either or both of the following
-Docsy placeholder files (note the **`_project.scss`** suffixes):
+To customize your project's look and feel, create your own version of either or
+both of the following Docsy placeholder files (note the **`_project.scss`**
+suffixes):
 
-- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you add project-specific definitions of theme variables such as [site colors](#site-colors), as well as any additional Bootstrap variable values you want to set. You can find a list of Docsy's theme variables and their default values in [<code>assets/scss/<strong>_variables.scss</strong></code>][_variables].  For information about other Bootstrap 4 variables, see [Variable defaults][] and Bootstrap's [v4-dev/scss/_variables.scss][] file.
-- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can add your own custom SCSS styles, including overriding any of the styles in Docsy's theme SCSS files.
+- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you
+  add project-specific definitions of theme variables such as [site
+  colors](#site-colors), as well as any additional Bootstrap variable values you
+  want to set. You can find a list of Docsy's theme variables and their default
+  values in [`assets/scss/`**`_variables.scss`**][_variables].  For information
+  about other Bootstrap 5 variables, see [Variable defaults] and Bootstrap's
+  [`_variables.scss`] file.
+- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can
+  add your own custom SCSS styles, including overriding any of the styles in
+  Docsy's theme SCSS files.
 
 [_styles_project]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
 [_variables_project]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
 [_variables]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[v4-dev/scss/_variables.scss]: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-[Variable defaults]: https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
+[`_variables.scss`]: https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_variables.scss
+[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
@@ -158,14 +177,20 @@ Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.y
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-prism_syntax_highlighting: true
+params:
+  prism_syntax_highlighting: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"prism_syntax_highlighting": true
+{
+  "params": {
+    "prism_syntax_highlighting": true
+  }
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -336,4 +361,3 @@ Both `head.html` and `scripts.html` are then used to build Docsy's [base page la
   </body>
 </html>
 ```
-

@@ -24,18 +24,28 @@ behavior when serving your site.
 
 ## Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set the site parameter `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
 sidebar_search_disable = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-sidebar_search_disable: true
+params:
+  ui:
+    sidebar_search_disable: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"sidebar_search_disable": true
+{
+  "params": {
+    "ui": {
+      "sidebar_search_disable": true
+    }
+  }
+}
+
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -88,14 +98,19 @@ layout: search
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
+# Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-gcs_engine_id: '011737558837375720776:fsdu1nryfng'
+params:
+  gcs_engine_id: 011737558837375720776:fsdu1nryfng
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
+  "params": {
+    "gcs_engine_id": "011737558837375720776:fsdu1nryfng"
+  }
 }
 {{< /tab >}}
     {{< /tabpane >}}
@@ -199,14 +214,18 @@ To add Lunr search to your Docsy site:
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 offlineSearch = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
+params:
+  offlineSearch: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true
+  "params": {
+    "offlineSearch": true
+  }
 }
 {{< /tab >}}
     {{< /tabpane >}}
@@ -227,17 +246,21 @@ You can customize the summary length by setting `offlineSearchSummaryLength` in 
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 #Enable offline search with Lunr.js
+[params]
 offlineSearch = true
 offlineSearchSummaryLength = 200
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
-offlineSearchSummaryLength: 200
+params:
+  offlineSearch: true
+  offlineSearchSummaryLength: 200
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true,
-  "offlineSearchSummaryLength": 200
+  "params": {
+    "offlineSearch": true,
+    "offlineSearchSummaryLength": 200
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -249,17 +272,21 @@ You can customize the maximum result count by setting `offlineSearchMaxResults` 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 offlineSearch = true
 offlineSearchMaxResults = 25
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-offlineSearch: true
-offlineSearchMaxResults: 25
+params:
+  offlineSearch: true
+  offlineSearchMaxResults: 25
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "offlineSearch": true,
-  "offlineSearchMaxResults": 25
+  "params": {
+    "offlineSearch": true,
+    "offlineSearchMaxResults": 25
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}

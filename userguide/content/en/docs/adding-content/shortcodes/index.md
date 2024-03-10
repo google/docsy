@@ -105,7 +105,7 @@ Please follow this space for updates!
 {{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
 We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
 {{%/* /blocks/feature */%}}
-{{%/* blocks/feature icon="fa-brands fa-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
+{{%/* blocks/feature icon="fa-brands fa-x-twitter" title="Follow us on Twitter!" url="https://twitter.com/GoHugoIO" */%}}
 For announcement of latest features etc.
 {{%/* /blocks/feature */%}}
 {{</* /blocks/section */>}}
@@ -129,6 +129,7 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 | ---------------- |------------| ------------|
 | title | | The title to use.
 | url | | The URL to link to.
+| url_text | The [language parameter](/docs/language/#internationalization-bundles) value of [`ui_read_more`](https://github.com/google/docsy/blob/main/i18n/en.toml) | The link text to use.
 | icon | | The icon class to use.
 
 
@@ -427,16 +428,70 @@ This code translates to the right aligned tabbed pane below, showing a `Welcome!
 
 ### Shortcode details
 
-Tabbed panes are implemented using two shortcodes:
+Tabbed panes are implemented using two shortcodes: `tabpane` containing two or
+more nested `tab`s.
 
-* The `tabpane` shortcode, which is the container element for the tabs. This shortcode can hold the optional named parameters `lang`, `highlight` and `right`. The value of the optional parameters `lang` and `highlight` are passed on as second `LANG` and third `OPTIONS` arguments to Hugo's built-in [`highlight`](https://gohugo.io/functions/highlight/) function which is used to render the code blocks of the individual tabs. Specify `right=true` if you want to right align your tabs. In case the header text of the tab equals the language used in the tab's code block (as in the first tabbed pane example above), you may specify `langEqualsHeader=true` in the surrounding `tabpane` shortcode. Then, the header text of the individual tab is automatically set as `lang` parameter of the respective tab.
-* The various `tab` shortcodes represent the tabs you would like to show. Specify the named parameter `header` for each tab in order to set the header text of the tab. If the `header` parameter is the only parameter inside your tab shortcode, you can specify the header as unnamed parameter, something like `{{</* tab "My header" */>}} … {{</* /tab */>}}`. If your `tab` shortcode does not have any parameters, the header of the tab will default to `Tab n`. To split the panes into a left aligned and a right aligned tab group, specify `right=true` in the dividing tab. By giving `right=true` several times, you can even render multiple tab groups. You can disable a tab by specifying the parameter `disabled=true`. For enabled tabs, there are two modes for content display, `code` representation and _textual_ representation:
-  * By default, the tab's content is rendered as `code block`. In order to get proper syntax highlighting, specify the named parameter `lang` --and optionally the parameter `highlight`-- for each tab. Parameters set in the parent `tabpane` shortcode will be overwritten.
-  * If the contents of your tabs should be rendered as text with different styles and with optional images, specify `text=true` as parameter of your `tabpane` (or your `tab`). If your content is markdown, use the percent sign `%` as outermost delimiter of your `tab` shortcode, your markup should look like `{{%/* tab */%}}`Your \*\*markdown\*\* content`{{%/* /tab */%}}`. In case of HTML content, use `<>` as innermost delimiters: `{{</* tab */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /tab */>}}`.
+#### `tabpane`
 
-{{% alert title="Info" %}}
-By default, the language of the selected tab is stored and preserved between different browser sessions. If the content length within your tabs differs greatly, this may lead to unwanted scrolling when switching between tabs. To disable this unwanted behaviour, specify `persistLang=false` within your `tabpane` shortcode.
-{{% /alert %}}
+The `tabpane` shortcode, which is the container element for the tabs, supports
+the following named parameters, all of which are optional:
+
+- **`lang`**: the default code-block language to use for all contained tabs
+- **`highlight`**: parameter passed on to the code-block [highlight] function,
+  as described below
+- **`langEqualsHeader`**: set to `true` when header text matches the tab language.
+- **`persist`**: one of `header`, `lang`, or `disabled`
+- **`persistLang`**: deprecated, use `persist` instead
+- **`right`**: set to `true` if you want right-aligned tabs
+- **`text`**: set to `true` if the content of all contained tabs are text. Default
+  is `false` and assumes the content is code.
+
+The value of the optional parameters `lang` and `highlight` are passed on as
+second `LANG` and third `OPTIONS` arguments to Hugo's built-in [highlight]
+function, which is used to render the code blocks of the individual tabs.
+
+Tab selection is persisted by default. When unspecified, `persist` defaults to
+`header` when `text=true` or `lang` is set; otherwise `persist` defaults to
+`lang`. To disable tab persistence, set `persist=disable`.
+
+[highlight]: https://gohugo.io/functions/highlight/
+
+#### `tab`
+
+The `tab` shortcode represent the tabs you want to show. It supports the
+following named parameters, all of which are optional:
+
+- **`header`**: defines the tab's header text. When omitted it defaults to text of
+  the form "Tab _n_". You can omit the parameter name if it is the only tab
+  parameter:
+  ```
+  {{</* tab "My tab header" */>}} … {{</* /tab */>}}
+  ```
+- **`lang`**: code-block language for code tabs
+- **`highlight`**: parameter passed on to the code-block [highlight] function
+- **`right`**: set to `true` in order to split tab panes into a left aligned and a
+  right aligned tab groups. Specify `right=true` in the dividing tab. By using
+  `right=true` more than once, you can even render multiple tab groups.
+- **`disabled`**: set to `true` to disable a tab.
+- **`text`**: set to `true` for text tabs. By default tabs are assumed to
+  contain code.
+
+For enabled tabs, there are two modes for content display, `code` representation
+and _textual_ representation:
+
+- By default, the tab's content is rendered as a code block. In order to get
+  proper syntax highlighting, specify the named parameter `lang` --and
+  optionally the parameter `highlight`-- for each tab. Parameters set in the
+  parent `tabpane` shortcode will be overwritten.
+- If the contents of your tabs should be rendered as text with different styles
+  and optional images, specify `text=true` as parameter of your `tab`:
+
+> **Reminder**: If your content is markdown, use the percent sign `%` as
+> delimiter for your `tab` shortcode, like this:
+>
+> ```
+> {{%/* tab */%}} Your \*\*markdown\*\* content {{%/* /tab */%}}
+> ```
 
 ## Card panes
 

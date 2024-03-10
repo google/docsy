@@ -35,7 +35,6 @@ $td-box-colors: $dark, $primary, $secondary, $info, $white, $gray-600, $success,
   $warning, $dark, $danger, $primary, $secondary, $info !default;
 
 $link-color: $blue-500 !default;
-$link-decoration: none !default;
 $link-shade-percentage: 30% !default;
 
 // Fonts
@@ -52,7 +51,7 @@ $td-fonts-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   "Segoe UI Symbol";
 
 @if $td-enable-google-fonts {
-  $td-fonts-serif: prepend($td-fonts-serif, "#{$google_font_name}");
+  $td-fonts-serif: join("#{$google_font_name}", $td-fonts-serif);
 }
 
 $font-family-sans-serif: $td-fonts-serif !default; // TODO: consider moving into UG SCSS or namespace the var (td-)

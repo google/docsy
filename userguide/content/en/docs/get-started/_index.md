@@ -25,7 +25,7 @@ Hugo offers multiple options for using themes, all of which are supported by Doc
 
 ## Migration and backward compatibility
 
-If you have an existing site that uses Docsy as a Git submodule, and you would like to update it to use Hugo Modules, follow our [migration guide](https://www.docsy.dev/docs/updating/convert-site-to-module/). If you're not ready to migrate yet, don't worry! Your site will continue to work as usual.
+If you have an existing site that uses Docsy as a Git submodule, and you would like to update it to use Hugo Modules, follow our [migration guide](/docs/updating/convert-site-to-module/). If you're not ready to migrate yet, don't worry! Your site will continue to work as usual.
 
 ## Setup guides
 

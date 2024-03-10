@@ -1,5 +1,6 @@
 node_modules/
 package-lock.json
+/tmp
 
 # Hugo
 .hugo_build.lock

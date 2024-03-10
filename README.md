@@ -2,7 +2,7 @@
 
 [![Project status: active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Project releases](https://img.shields.io/github/release/google/docsy)](https://github.com/google/docsy/releases)
-[![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=master)](https://app.netlify.com/sites/docsydocs/deploys)
+[![Project build Status](https://badges.netlify.com/api/docsydocs.svg?branch=main)](https://app.netlify.com/sites/docsydocs/deploys)
 [![Project contributors](https://img.shields.io/github/contributors/google/docsy)](https://github.com/google/docsy/graphs/contributors)
 [![Project license](https://img.shields.io/github/license/google/docsy)](https://github.com/google/docsy/blob/main/LICENSE)
 
@@ -42,7 +42,7 @@ The following are basic prerequisites for using Docsy in your site:
 Any additional prerequisites depend on the
 [installation option](https://www.docsy.dev/docs/get-started/#installation-options)
 you choose. We recommend using Docsy as a Hugo module, which requires that you
-have the `go` language installed in addition to Hugo and PostCSS.
+have the Go language installed in addition to Hugo and PostCSS.
 
 For complete prerequisites and instructions, see our
 [Get started guides](https://www.docsy.dev/docs/get-started/).
@@ -72,9 +72,9 @@ details about the various usage options.
 ## Documentation
 
 Docsy has its own user guide (using Docsy, of course!) with lots more
-information about using the theme. It is hosted by [Netlify][] at
-[docsy.dev](https://docsy.dev). For deploy logs and more, see [Deploys][] from
-the site's Netlify dashboard.
+information about using the theme. It is hosted by [Netlify] at
+[docsy.dev](https://docsy.dev). For deploy logs and more, see [Deploys] from the
+site's Netlify dashboard.
 
 Alternatively you can use Hugo to generate and serve a local copy of the guide
 (also useful for testing local theme changes), making sure you have installed
@@ -89,18 +89,19 @@ npm run serve
 
 ## Contributing
 
-Please read
-[CONTRIBUTING.md](https://github.com/google/docsy/blob/main/CONTRIBUTING.md) for
-details on our code of conduct, and the process for submitting pull requests to
-us. See also the list of
-[contributors](https://github.com/google/docsy/graphs/contributors) who
-participated in this project.
+For details on our [code of conduct] and the process for submitting pull
+requests, see [CONTRIBUTING.md]. Thank you to all past, present, and future
+[contributors]!
 
 ## License
 
 This project is licensed under the Apache License 2.0 - see the
 [LICENSE.md](https://github.com/google/docsy/blob/main/LICENSE) file for details
 
+[code of conduct]:
+  https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md
+[CONTRIBUTING.md]: https://github.com/google/docsy/blob/main/CONTRIBUTING.md
+[contributors]: https://github.com/google/docsy/graphs/contributors
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [netlify]: https://netlify.com
 [releases]: https://github.com/google/docsy/releases
