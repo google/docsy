@@ -493,7 +493,7 @@ The `community` landing page template has boilerplate content that's automatical
 [[params.links.user]]
 	name ="Twitter"
 	url = "https://example.org/twitter"
-	icon = "fab fa-twitter"
+	icon = "fab fa-x-twitter"
         desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
 	name = "Stack Overflow"
@@ -527,7 +527,7 @@ params:
         desc: Discussion and help from your fellow users
       - name: Twitter
         url: 'https://example.org/twitter'
-        icon: fab fa-twitter
+        icon: fab fa-x-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Stack Overflow
         url: 'https://example.org/stack'
@@ -561,7 +561,7 @@ params:
         {
           "name": "Twitter",
           "url": "https://example.org/twitter",
-          "icon": "fa-brands fa-twitter",
+          "icon": "fa-brands fa-x-twitter",
           "desc": "Follow us on Twitter to get the latest news!"
         },
         {
@@ -614,17 +614,20 @@ Hugo will, by default, create an RSS feed for the home page and any section. For
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 rss_sections = ["blog"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-rss_sections:
-  - blog
+params:
+  rss_sections: [blog]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "rss_sections": [
-    "blog"
-  ]
+  "params": {
+    "rss_sections": [
+      "blog"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -634,17 +637,20 @@ To disable all RSS feeds, add the following to your `hugo.toml`/`hugo.yaml`/`hug
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 disableKinds = ["RSS"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-disableKinds:
-  - RSS
+params:
+  disableKinds: [RSS]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "disableKinds": [
-    "RSS"
-  ]
+  "params": {
+    "disableKinds": [
+      "RSS"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}

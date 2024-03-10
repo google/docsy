@@ -1,4 +1,4 @@
-baseURL: /
+baseURL: https://www.docsy.dev/
 title: &title Docsy
 description: &desc Docsy does docs
 enableRobotsTXT: true
@@ -28,10 +28,6 @@ menu:
       post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
 
-services:
-  googleAnalytics:
-    id: UA-00000000-0
-
 languages:
   en:
     languageName: English
@@ -50,11 +46,15 @@ markup:
     style: tango
 
 params:
-  copyright: The Docsy Authors
+  copyright:
+    authors: >-
+      Docsy Authors |
+      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+    from_year: 2018
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
-  version: 0.7.1
+  version: 0.9.1
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
@@ -63,16 +63,16 @@ params:
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
   gcs_engine_id: 011217106833237091527:la2vtv2emlw
-  algolia_docsearch: false
   offlineSearch: false
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
   prism_syntax_highlighting: false
+  search:
+    # algolia:
   ui:
+    sidebar_cache_limit: 10
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
-    sidebar_cache_limit: 10
-    breadcrumb_disable: false
     sidebar_search_disable: false
     feedback:
       enable: true
@@ -98,7 +98,7 @@ params:
         desc: Sign up for Docsy announcements
       - name: Twitter
         url: https://twitter.com/docsydocs
-        icon: fa-brands fa-twitter
+        icon: fa-brands fa-x-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Stack Overflow
         url: https://stackoverflow.com/questions/tagged/docsy

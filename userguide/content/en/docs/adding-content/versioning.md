@@ -69,18 +69,24 @@ params:
 Remember to add your current version so that users can navigate back!
 
 The default title for the version drop-down menu is **Releases**. To change the
-title, change the `version_menu` parameter in `hugo.toml`/`hugo.yaml`/`hugo.json`:
+title, change the site parameter `version_menu` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 version_menu = "Releases"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-version_menu: 'Releases'
+params:
+  version_menu: Releases
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"version_menu": "Releases"
+{
+  "params": {
+    "version_menu": "Releases"
+  }
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -113,50 +119,68 @@ For example, see the archived docs for
 To add the banner to your doc site, make the following changes in your
 `hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
-1. Set the `archived_version` parameter to `true`:
+1. Set the site parameter `archived_version` to `true`:
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 archived_version = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-archived_version: true
+params:
+  archived_version: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"archived_version": true
+{
+  "params": {
+    "archived_version": true
+  }
+}
 {{< /tab >}}
     {{< /tabpane >}}
 
-1. Set the `version` parameter to the version of the archived doc set. For
+1. Set the site parameter `version` to the version of the archived doc set. For
   example, if the archived docs are for version 0.1:
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 version = "0.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-version: '0.1'
+params:
+  version: 0.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"version": "0.1"
+{
+  "params": {
+    "version": "0.1"
+  }
+}
 {{< /tab >}}
     {{< /tabpane >}}
 
-1. Make sure that `url_latest_version` contains the URL of the website that you
+1. Make sure that site parameter `url_latest_version` contains the URL of the website that you
   want to point readers to. In most cases, this should be the URL of the latest
   version of your docs:
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 url_latest_version = "https://your-latest-doc-site.com"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-url_latest_version: 'https://your-latest-doc-site.com'
+params:
+  url_latest_version: https://your-latest-doc-site.com
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"url_latest_version": "https://your-latest-doc-site.com"
+{
+  "params": {
+    "url_latest_version": "https://your-latest-doc-site.com"
+  }
+}
 {{< /tab >}}
     {{< /tabpane >}}

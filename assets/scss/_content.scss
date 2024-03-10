@@ -94,3 +94,27 @@
     font-size: 3rem;
   }
 }
+
+.td-heading-self-link {
+  &:before {
+    content: '#';
+  }
+
+  font-size: 90%;
+  padding-left: 0.25em;
+  text-decoration: none;
+  visibility: hidden;
+
+  // Always visible on touch devices and small screens
+  @media (hover: none) and (pointer: coarse),
+  (max-width: map-get($grid-breakpoints, sm)) {
+    visibility: visible;
+  }
+
+}
+
+@for $i from 1 through 6 {
+  h#{$i}:hover > .td-heading-self-link {
+    visibility: visible;
+  }
+}
