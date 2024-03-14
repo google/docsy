@@ -26,25 +26,26 @@ To customize your project's look and feel, create your own version of the
 following Docsy placeholder files (note the **`_project*.scss`** suffixes) and
 place them inside your project's `assets/scss/` folder:
 
-- **`_variables_project.scss`**[^vp] and<br>
-  **`_variables_project_after_bs.scss`**[^vpabs] :
+- **[`_variables_project.scss`]** and<br>
+  **[`_variables_project_after_bs.scss`]** :
 
-  Use these files to add project-specific definitions of theme variables such as
-  [site colors](#site-colors) (explained in the next section), as well as any
-  additional Bootstrap variable values you want to set. You can find a list of
-  Docsy's theme variables and their default values in `_variables.scss`[^v]. For
-  information about other Bootstrap 5 variables, see [Variable defaults] and
-  Bootstrap's `_variables.scss`[^bv] file.
+  Use these files to add project-specific definitions of theme variables as well
+  as any additional Bootstrap variables you want to set or override. For
+  details, including an explanation of which file to use, see [Site
+  colors](#site-colors).
 
-- **`_styles_project.scss`**[^sp] is where you can add your own custom SCSS
-  styles, including overriding any of the styles in Docsy's theme SCSS files.
+  For a list of Docsy's theme variables and their default values, see
+  [`_variables.scss`]. For information about other Bootstrap 5 variables, see
+  [Variable defaults] and [Bootstrap's `_variables.scss`][bs_var] file.
 
-[^bv]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
-[^sp]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
-[^v]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[^vp]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
-[^vpabs]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+- **[`_styles_project.scss`]** is where you can add your own custom SCSS styles,
+  including overriding any of the styles in Docsy's theme SCSS files.
 
+[`_styles_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+[`_variables.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
+[`_variables_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+[`_variables_project_after_bs.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+[bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
@@ -65,7 +66,7 @@ The theme has features such as gradient backgrounds (`$enable-gradients`) and
 shadows (`$enable-shadows`) enabled by default. These can also be toggled in
 your project variables file by setting the variables to `false`.
 
-To can add colors to or modify Bootstrap's [color maps], use
+To add colors to or modify Bootstrap's [color maps], use
 **`assets/scss/_variables_project_after_bs.scss`**. For example:
 
 ```scss
