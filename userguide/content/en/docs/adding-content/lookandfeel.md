@@ -22,26 +22,30 @@ Prism for highlighting.
 
 ## Project style files
 
-To customize your project's look and feel, create your own version of either or
-both of the following Docsy placeholder files (note the **`_project.scss`**
-suffixes):
+To customize your project's look and feel, create your own version of the
+following Docsy placeholder files (note the **`_project*.scss`** suffixes) and
+place them inside your project's `assets/scss/` folder:
 
-- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you
-  add project-specific definitions of theme variables such as [site
-  colors](#site-colors), as well as any additional Bootstrap variable values you
-  want to set. You can find a list of Docsy's theme variables and their default
-  values in [`assets/scss/`**`_variables.scss`**][_variables].  For information
-  about other Bootstrap 5 variables, see [Variable defaults] and Bootstrap's
-  [`_variables.scss`] file.
-- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can
-  add your own custom SCSS styles, including overriding any of the styles in
-  Docsy's theme SCSS files.
+- **[`_variables_project.scss`]** and<br>
+  **[`_variables_project_after_bs.scss`]** :
 
-[_styles_project]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
-[_variables_project]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
-[_variables]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[`_variables.scss`]: https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_variables.scss
-[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
+  Use these files to add project-specific definitions of theme variables as well
+  as any additional Bootstrap variables you want to set or override. For
+  details, including an explanation of which file to use, see [Site
+  colors](#site-colors).
+
+  For a list of Docsy's theme variables and their default values, see
+  [`_variables.scss`]. For information about other Bootstrap 5 variables, see
+  [Variable defaults] and [Bootstrap's `_variables.scss`][bs_var] file.
+
+- **[`_styles_project.scss`]** is where you can add your own custom SCSS styles,
+  including overriding any of the styles in Docsy's theme SCSS files.
+
+[`_styles_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+[`_variables.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
+[`_variables_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+[`_variables_project_after_bs.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+[bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
@@ -50,8 +54,8 @@ PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in s
 ## Site colors
 
 To customize your site's colors, add SCSS variable overrides to
-`assets/scss/_variables_project.scss`. For example, you can set the primary and
-secondary site colors as follows:
+**`assets/scss/_variables_project.scss`**. For example, you can set the primary
+and secondary site colors as follows:
 
 ```scss
 $primary: #390040;
@@ -61,6 +65,25 @@ $secondary: #A23B72;
 The theme has features such as gradient backgrounds (`$enable-gradients`) and
 shadows (`$enable-shadows`) enabled by default. These can also be toggled in
 your project variables file by setting the variables to `false`.
+
+To add colors to or modify Bootstrap's [color maps], use
+**`assets/scss/_variables_project_after_bs.scss`**. For example:
+
+```scss
+$custom-colors: (
+  "my-favorite-color": purple,
+  "my-other-color": pink
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+```
+
+Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
+
+[Adding theme colors]: https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
+[color maps]: https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps
+[Maps and loops]: https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops
+[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
 ## Fonts
 
