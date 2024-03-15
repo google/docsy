@@ -71,7 +71,8 @@ To add colors to or modify Bootstrap's [color maps], use
 
 ```scss
 $custom-colors: (
-  "my-favorite-color": purple
+  "my-favorite-color": purple,
+  "my-other-color": pink
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
