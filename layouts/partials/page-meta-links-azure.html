@@ -1,5 +1,4 @@
-{{ $path := strings.TrimPrefix (add hugo.WorkingDir "/") $.File.Filename -}}
-{{ $pathFormatted := replace .File.Path "\\" "/" -}}
+{{ $path := strings.TrimPrefix (add (replace hugo.WorkingDir "\\" "/") "/") (replace $.File.Filename "\\" "/") -}}
 {{ $az_repo := ($.Param "azure_repo") -}}
 {{ $az_subdir := ($.Param "azure_subdir") -}}
 {{ $az_project_repo := ($.Param "azure_project_repo") -}}
@@ -15,14 +14,14 @@
     {{ $azs_base = $azs_base.from -}}
   {{ end -}}
   {{ with $azs_base -}}
-    {{ $path = replaceRE . $azs_rename $az_repo_path -}}
+    {{ $path = replaceRE . $azs_rename $path -}}
   {{ end -}}
 
-  {{ $az_repo_path := printf "%s/%s/%s" $az_branch $az_subdir $path -}}
+  {{ $az_repo_path := printf "%s/%s" $az_subdir $path -}}
   {{ $az_repo_path = replaceRE "//+" "/" $az_repo_path -}}
 
   {{ $baseUrl := replaceRE "/_git/.+$" "" $az_repo }}
-  {{ $viewURL := printf "%s?path=%s&_a=contents" $az_repo $az_repo_path -}}
+  {{ $viewURL := printf "%s?path=%s&version=GB%s&_a=contents" $az_repo $az_repo_path $az_branch -}}
   {{ $issuesURL := printf "%s/_workitems/create/Bug?[title]=%s" $baseUrl (safeURL $.Title ) -}}
   {{ if $az_issue_area -}}
     {{ $issuesURL = printf "%s/_workitems/create/Bug?[title]=%s&[Area Path]=%s" $baseUrl (safeURL $.Title) (safeURL $az_issue_area) -}}

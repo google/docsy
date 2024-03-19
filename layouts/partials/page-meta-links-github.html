@@ -1,7 +1,7 @@
 {{/* cSpell:ignore querify subdir */ -}}
 {{/* Class names ending with `--KIND` are deprecated in favor of `__KIND`, but we're keeping them for a few releases after 0.9.0 */ -}}
 
-{{ $path := strings.TrimPrefix (add hugo.WorkingDir "/") $.File.Filename -}}
+{{ $path := strings.TrimPrefix (add (replace hugo.WorkingDir "\\" "/") "/") (replace $.File.Filename "\\" "/") -}}
 {{ $gh_repo := $.Param "github_repo" -}}
 {{ $gh_url := $.Param "github_url" -}}
 {{ $gh_subdir := $.Param "github_subdir" | default "" -}}
