@@ -59,6 +59,13 @@ params:
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: userguide
+
+  # Added azure links for demo purposes
+  azure_repo: https://dev.azure.com/google/docsy/_git/docsy
+  azure_project_repo: https://dev.azure.com/google/docsy/_git/docsy
+  azure_subdir: userguide
+  azure_issue_area: Docsy\Issues
+
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
