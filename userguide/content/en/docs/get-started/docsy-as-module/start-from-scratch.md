@@ -41,7 +41,7 @@ proxy = "direct"^
 
 [[module.imports]]^
 
-path = "github.com/google/docsy"
+path = "github.com/google/docsy") >> hugo.toml
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
