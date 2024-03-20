@@ -51,7 +51,7 @@ $td-fonts-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   "Segoe UI Symbol";
 
 @if $td-enable-google-fonts {
-  $td-fonts-serif: join("#{$google_font_name}", $td-fonts-serif);
+  $td-fonts-serif: join($google_font_name, $td-fonts-serif);
 }
 
 $font-family-sans-serif: $td-fonts-serif !default; // TODO: consider moving into UG SCSS or namespace the var (td-)
