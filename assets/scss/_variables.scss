@@ -82,11 +82,6 @@ $td-block-space-bottom-base: 4 * $spacer !default;
 $pagination-color: $gray-600 !default; // TODO: consider using BS default
 $pagination-disabled-color: $gray-300 !default; // TODO: consider using BS default
 
-// Navbar
-
-$navbar-dark-color: rgba($white, 0.75) !default;      // TODO: consider moving into UG SCSS
-$navbar-dark-hover-color: rgba($white, 0.5) !default; // TODO: consider moving into UG SCSS
-
 // Footer
 
 $list-inline-padding: $spacer;
