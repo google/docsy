@@ -108,6 +108,9 @@ For the full list of changes, see the [0.8.0] release notes.
 
 **Breaking changes**:
 
+- **Shortcodes**:
+  - The alert shortcode has been reworked to address [#906] and [#939]. For
+    details, see [#941].
 - Docsy is packaged as a **single Hugo module** ([#1120]).
   - For details, see [Use Docsy as a Hugo Module].
 - **Important**: non-Hugo-module projects should read the [Docsy NPM install
@@ -125,6 +128,7 @@ For the full list of changes, see the [0.8.0] release notes.
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
 
+[#941]: https://github.com/google/docsy/pull/941
 [#1120]: https://github.com/google/docsy/issues/1120
 [#1385]: https://github.com/google/docsy/issues/1385
 [#1726]: https://github.com/google/docsy/pull/1726
