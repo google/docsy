@@ -57,6 +57,11 @@
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}
+      {{ if  .Site.Params.navbar_cta }}
+        <li class="nav-item nav-cta mr-4 d-none d-lg-block">
+        {{ partial "navbar-cta.html" . }}
+        </li>
+      {{ end }}
     </ul>
   </div>
   <div class="d-none d-lg-block">

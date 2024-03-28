@@ -292,6 +292,33 @@ of the following:
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
 
+### Adding a call-to-action
+
+You can include a call-to-action, like a sign-up or download button to the right side of the navbar.
+
+1. In your Hugo configuration file, set the `navbar_cta` parameter to true.
+
+    {{< tabpane persistLang=false >}}
+    {{< tab header="Configuration file:" disabled=true />}}
+    {{< tab header="hugo.toml" lang="toml" >}}
+    [params]
+    navbar_cta = true
+    {{< /tab >}}
+    {{< tab header="hugo.yaml" lang="yaml" >}}
+    params:
+      navbar_cta: true
+    {{< /tab >}}
+    {{< tab header="hugo.json" lang="json" >}}
+    {
+      "params": {
+        "navbar_cta": true
+      }
+    }
+    {{< /tab >}}
+    {{< /tabpane >}}
+
+1. Add the `layouts/partials/navbar-cta.html` file to your project and customize it as needed.
+
 ## Tables
 
 Docsy applies the following styles to all tables, through the class `.td-table`:
