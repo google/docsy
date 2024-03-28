@@ -43,6 +43,7 @@ markup:
     renderer:
       unsafe: true
   highlight:
+    noClasses: false
     style: tango
 
 params:

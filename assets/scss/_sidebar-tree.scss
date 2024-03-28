@@ -62,7 +62,7 @@
     }
 
     a {
-      color: $gray-900;
+      color: var(--bs-emphasis-color);
     }
   }
 
@@ -71,7 +71,7 @@
     padding-bottom: 0.375rem;
 
     &__page {
-      color: $gray-700;
+      color: var(--bs-body-color);
       font-weight: $font-weight-light;
     }
   }
@@ -133,7 +133,7 @@
 
   &__toggle {
     line-height: 1;
-    color: $gray-900;
+    color: var(--bs-emphasis-color);
     margin: 1rem;
   }
 
