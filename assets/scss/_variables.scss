@@ -19,6 +19,11 @@ $dark: #403f4c !default;  // TODO: consider using BS value
 
 $code-color: shade-color($secondary, 40%) !default;
 
+:root,
+[data-bs-theme="light"] {
+  --td-pre-bg: var(--bs-tertiary-bg);
+}
+
 // UI element colors
 
 $border-color: $gray-300 !default;

@@ -46,7 +46,7 @@
     }
 
     a {
-      color: $gray-600;
+      color: var(--bs-secondary-color);
 
       &:focus,
       &:hover {

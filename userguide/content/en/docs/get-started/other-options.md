@@ -51,7 +51,7 @@ and may not be up-to-date with the most recent Hugo version.
 
 If you've already installed Hugo, check your version:
 
-```
+```sh
 hugo version
 ```
 
@@ -66,18 +66,21 @@ The following shows you how to install Hugo from the release page:
 3.  Download the latest extended version
     (`hugo_extended_0.9X_Linux-64bit.tar.gz`).
 4.  Create a new directory:
-
-        mkdir hugo
+    ```sh
+    mkdir hugo
+    ```
 
 5.  Extract the files you downloaded to `hugo`.
 
 6.  Switch to your new directory:
-
-        cd hugo
+    ```sh
+    cd hugo
+    ```
 
 7.  Install Hugo:
-
-        sudo install hugo /usr/bin
+    ```sh
+    sudo install hugo /usr/bin
+    ```
 
 #### On macOS
 
@@ -90,7 +93,7 @@ You can install Hugo as an NPM module using
 [hugo-extended](https://www.npmjs.com/package/hugo-extended). To install the
 extended version of Hugo:
 
-```
+```sh
 npm install hugo-extended --save-dev
 ```
 
@@ -130,7 +133,7 @@ release][latest-lts].
 
 From your project root, run this command:
 
-```
+```sh
 npm install --save-dev autoprefixer postcss-cli
 ```
 
