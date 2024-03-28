@@ -73,6 +73,10 @@ window.markmap = {
 {{- partial "scripts/mermaid.html" . -}}
 {{ end -}}
 
+{{ if .Site.Params.ui.colorModeEnabled -}}
+  {{ $jsArray = $jsArray | append (resources.Get "js/color-mode.js") -}}
+{{ end -}}
+
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
 {{ if hugo.IsProduction -}}
   {{ $js := $js | minify | fingerprint -}}
