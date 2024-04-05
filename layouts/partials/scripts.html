@@ -74,7 +74,7 @@ window.markmap = {
 {{ end -}}
 
 {{ if .Site.Params.ui.showLightDarkModeMenu -}}
-  {{ $jsArray = $jsArray | append (resources.Get "js/color-mode.js") -}}
+  {{ $jsArray = $jsArray | append (resources.Get "js/dark-mode.js") -}}
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
