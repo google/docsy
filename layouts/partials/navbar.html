@@ -4,18 +4,6 @@
 -}}
 {{ $baseURL := urls.Parse $.Site.Params.Baseurl -}}
 
-<style>
-  .bi {
-    width: 1em;
-    height: 1em;
-    vertical-align: -.125em;
-    fill: currentcolor;
-  }
-  .td-navbar .dropdown-menu .active .bi {
-    display: block !important
-  }
-</style>
-
 <nav class="td-navbar js-navbar-scroll
             {{- if $cover }} td-navbar-cover {{- end }}" data-bs-theme="dark">
 <div class="container-fluid flex-column flex-md-row">
@@ -69,7 +57,7 @@
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}
-      {{ if .Site.Params.ui.colorModeEnabled -}}
+      {{ if .Site.Params.ui.showLightDarkModeMenu -}}
       <li class="nav-item dropdown">
         {{ partial "theme-toggler" . }}
       </li>

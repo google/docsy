@@ -91,6 +91,17 @@
       overflow-x: auto;
     }
   }
+
+  // Support for showLightDarkModeMenu:
+  .bi {
+    width: 1em;
+    height: 1em;
+    vertical-align: -.125em;
+    fill: currentcolor;
+  }
+  .td-navbar .dropdown-menu .active .bi {
+    display: block !important
+  }
 }
 
 // Icons
