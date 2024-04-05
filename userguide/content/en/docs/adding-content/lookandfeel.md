@@ -245,24 +245,6 @@ If the included Prism configuration is not sufficient for your requirements, and
 
 ## Navbar
 
-For pages containing a [blocks/cover][] shortcode, like most homepages, the
-navbar is translucent as long as the hero image hasn't scrolled up past the
-navbar. For an example, see the [About Docsy][] page. This initial translucent
-setting ensures that the hero image is maximally visible.
-
-After the hero image has scrolled past the navbar, the navbar's (opaque)
-background color is set -- usually to the site's [primary color][].
-
-The text of navbar entries can be difficult to read with some hero images. In
-these cases, you can disable navbar translucency by setting the
-`params.ui.navbar_translucent_over_cover_disable` option to `true` in your
-site's [configuration file][].
-
-[About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/adding-content/shortcodes/#blockscover
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
-[primary color]: #site-colors
-
 ### Styling your project logo and name
 
 The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
@@ -291,6 +273,36 @@ of the following:
 [project-styles]: /docs/adding-content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
+
+### Light/Dark mode menu
+
+To enable the display of a Light-/[Dark-mode] menu in the navbar, set
+`params.ui.showLightDarkModeMenu` to true in your project's configuration file.
+The dropdown menu appears at the extreme right, just before of the [search box],
+if present.
+
+[dark-mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
+[search box]: /docs/adding-content/search/
+
+### Translucent over cover images
+
+For pages containing a [blocks/cover][] shortcode, like most homepages, the
+navbar is translucent as long as the hero image hasn't scrolled up past the
+navbar. For an example, see the [About Docsy][] page. This initial translucent
+setting ensures that the hero image is maximally visible.
+
+After the hero image has scrolled past the navbar, the navbar's (opaque)
+background color is set -- usually to the site's [primary color][].
+
+The text of navbar entries can be difficult to read with some hero images. In
+these cases, you can disable navbar translucency by setting the
+`params.ui.navbar_translucent_over_cover_disable` option to `true` in your
+site's [configuration file][].
+
+[About Docsy]: https://www.docsy.dev/about/
+[blocks/cover]: /docs/adding-content/shortcodes/#blockscover
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[primary color]: #site-colors
 
 ## Tables
 
