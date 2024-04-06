@@ -19,7 +19,10 @@
 {{/* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/theme-toggler.html */ -}}
 
 {{ $isExamples := eq .Layout "examples" -}}
-<button class="btn {{ if $isExamples }}btn-bd-primary{{ else }}btn-link nav-link px-0 px-lg-2{{ end }} py-2 dropdown-toggle d-flex align-items-center"
+<button class="btn
+              {{- if $isExamples }} btn-bd-primary
+              {{- else }} btn-link nav-link
+              {{- end }} dropdown-toggle d-flex align-items-center"
         id="bd-theme"
         type="button"
         aria-expanded="false"
