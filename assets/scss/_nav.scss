@@ -92,15 +92,20 @@
     }
   }
 
-  // Support for showLightDarkModeMenu:
-  .bi {
-    width: 1em;
-    height: 1em;
-    vertical-align: -.125em;
-    fill: currentcolor;
-  }
-  .td-navbar .dropdown-menu .active .bi {
-    display: block !important
+  .td-light-dark-menu {
+    .bi {
+      // Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
+      width: 1em;
+      height: 1em;
+      vertical-align: -.125em;
+      fill: currentcolor;
+    }
+
+    &.dropdown {
+      @include media-breakpoint-down(lg) {
+        position: unset;
+      }
+    }
   }
 }
 

@@ -27,7 +27,9 @@
         {{ if not $isExamples }}data-bs-display="static"{{ end }}
         aria-label="Toggle theme (auto)">
   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
-  <span class="{{ if $isExamples }}visually-hidden{{ else }}d-lg-none ms-2{{ end }}" id="bd-theme-text">Toggle theme</span>
+  {{- /* Disable menu name for Docsy:
+    <span class="{{ if $isExamples }}visually-hidden{{ else }}d-lg-none ms-2{{ end }}" id="bd-theme-text">Toggle theme</span>
+  */}}
 </button>
 <ul class="dropdown-menu dropdown-menu-end{{ if $isExamples }} shadow{{ end }}" aria-labelledby="bd-theme-text">
   <li>
