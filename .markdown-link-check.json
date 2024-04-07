@@ -7,7 +7,10 @@
       "pattern": "^https://badges.netlify.com/api/docsydocs.svg\\?branch=main"
     },
     {
-      "pattern": "https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish"
+      "pattern": "^https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish"
+    },
+    {
+      "pattern": "^#070$"
     }
   ],
   "timeout": "3s",
