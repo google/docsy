@@ -174,14 +174,14 @@ This is a warning.
 The **pageinfo** shortcode creates a text box that you can use to add banner information for a page: for example, letting users know that the page contains placeholder content, that the content is deprecated, or that it documents a beta feature.
 
 ```go-html-template
-{{%/* pageinfo color="primary" */%}}
+{{%/* pageinfo color="info" */%}}
 This is placeholder content.
 {{%/* /pageinfo */%}}
 ```
 
 Renders to:
 
-{{% pageinfo color="primary" %}}
+{{% pageinfo color="info" %}}
 This is placeholder content
 {{% /pageinfo %}}
 
