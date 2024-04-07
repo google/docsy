@@ -26,7 +26,8 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
-- ...
+- Removed deprecated shortcode `card-code`; use shortcode `card` with named
+  parameter `code=true` instead.
 
 **New**:
 
