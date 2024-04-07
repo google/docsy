@@ -26,7 +26,7 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
-- Removed shortcode `card-code` that was deprecated in [0.7.0](#070); use
+- Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
   shortcode `card` with named parameter `code=true` instead.
 
 **New**:
