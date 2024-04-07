@@ -278,8 +278,8 @@ of the following:
 
 To enable the display of a Light-/[Dark-mode] menu in the navbar, set
 `params.ui.showLightDarkModeMenu` to true in your project's configuration file.
-The dropdown menu appears at the extreme right, just before of the [search box],
-if present.
+The dropdown menu appears at the right, immediately before the [search box], if
+present.
 
 [dark-mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [search box]: /docs/adding-content/search/
