@@ -18,7 +18,7 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.9.2 or 0.10.0
+## 0.10.0
 
 > ### UNRELEASED: this planned version is still under development
 
@@ -26,8 +26,11 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
-- Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
-  shortcode `card` with named parameter `code=true` instead.
+- **Shortcodes**:
+  - Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
+    shortcode `card` with named parameter `code=true` instead.
+  - The alert shortcode has been reworked to address [#906] and [#939]. For
+    details, see [#941].
 
 **New**:
 
@@ -126,6 +129,7 @@ For the full list of changes, see the [0.8.0] release notes.
   have been dropped. Instead use the more general SASS/SCSS list `join()`
   function ([#1385]).
 
+[#941]: https://github.com/google/docsy/pull/941
 [#1120]: https://github.com/google/docsy/issues/1120
 [#1385]: https://github.com/google/docsy/issues/1385
 [#1726]: https://github.com/google/docsy/pull/1726
