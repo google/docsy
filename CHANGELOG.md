@@ -18,7 +18,7 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.9.2 or 0.10.0
+## 0.10.0
 
 > ### UNRELEASED: this planned version is still under development
 
@@ -26,8 +26,11 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
-- Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
-  shortcode `card` with named parameter `code=true` instead.
+- **Shortcodes**:
+  - Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
+    shortcode `card` with named parameter `code=true` instead.
+  - The alert shortcode has been reworked to address [#906] and [#939]. For
+    details, see [#941].
 
 **New**:
 
@@ -109,9 +112,6 @@ For the full list of changes, see the [0.8.0] release notes.
 
 **Breaking changes**:
 
-- **Shortcodes**:
-  - The alert shortcode has been reworked to address [#906] and [#939]. For
-    details, see [#941].
 - Docsy is packaged as a **single Hugo module** ([#1120]).
   - For details, see [Use Docsy as a Hugo Module].
 - **Important**: non-Hugo-module projects should read the [Docsy NPM install
