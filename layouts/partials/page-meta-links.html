@@ -2,7 +2,8 @@
 {{/* Class names ending with `--KIND` are deprecated in favor of `__KIND`, but we're keeping them for a few releases after 0.9.0 */ -}}
 
 {{ if .File -}}
-{{ $path := strings.TrimPrefix (add hugo.WorkingDir "/") $.File.Filename -}}
+{{ $path := strings.TrimPrefix hugo.WorkingDir $.File.Filename -}}
+{{ $path := strings.TrimPrefix "/" $path -}}
 {{ $gh_repo := $.Param "github_repo" -}}
 {{ $gh_url := $.Param "github_url" -}}
 {{ $gh_subdir := $.Param "github_subdir" | default "" -}}
