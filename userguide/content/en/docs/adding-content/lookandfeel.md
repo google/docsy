@@ -276,12 +276,40 @@ of the following:
 
 ### Light/Dark mode menu
 
-To enable the display of a Light-/[Dark-mode] menu in the navbar, set
-`params.ui.showLightDarkModeMenu` to true in your project's configuration file.
-The dropdown menu appears at the right, immediately before the [search box], if
-present.
+If you enable this feature, Docsy adds a menu to your navbar that lets users
+switch your site's documentation page display between a default "light" mode,
+and a "dark" mode where the text is displayed in a light color on a dark
+background.
 
-[dark-mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
+To enable the display of a Light/[Dark mode] menu in the navbar, set
+`params.ui.showLightDarkModeMenu` to `true` in your project's configuration
+file. The dropdown menu appears at the right, immediately before the [search
+box], if present.
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
+[params.ui]
+showLightDarkModeMenu = true
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    showLightDarkModeMenu: true
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "showLightDarkModeMenu": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+[dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [search box]: /docs/adding-content/search/
 
 ### Translucent over cover images
