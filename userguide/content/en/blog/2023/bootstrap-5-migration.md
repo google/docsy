@@ -5,11 +5,11 @@ description: >
   An experience report in migrating Docsy from Bootstrap 4 to 5.2, with insights
   and instructions.
 author: >
-  [Patrice Chalin](https://github.com/chalin), [CNCF](https://www.cncf.io/) &
-  Docsy Steering Committee
+  [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/) &
+  [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc))
 date: 2023-06-05
 canonical_url: https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/
-spelling: cSpell:ignore CNCF Chalin opentelemetry techdocs
+cSpell:ignore: CNCF Chalin opentelemetry techdocs
 ---
 
 [Docsy](https://docsy.dev), and Docsy-based project websites ([including those
@@ -85,8 +85,8 @@ This assumption wasn't apparent nor was it enforced in Bootstrap 4,
 consequently, some of Docsy's layouts failed to respect it. In
 [most cases](https://github.com/google/docsy/issues/1466), fixing violations
 consisted of simply wrapping a `.row`'s child element in a `.col`, but the
-[Docsy footer](https://github.com/google/docsy/blob/v0.7.0/layouts/partials/footer.html) required a couple of
-iterations to get right.
+[Docsy footer](https://github.com/google/docsy/blob/v0.7.0/layouts/partials/footer.html)
+required a couple of iterations to get right.
 
 My first footer adjustment reset
 [`flex-shrink`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink) to
@@ -251,8 +251,8 @@ migration that didn't apply to Docsy since Docsy uses only the most trivial of
 forms.
 
 We'll have more to share about the OTel migration effort as well as general
-project-specific migration advice in a followup blog post. In the meantime, I
-hope that you have found parts of this technical article helpful for your own
+project-specific migration advice in a [followup blog post][]. In the meantime,
+I hope that you have found parts of this technical article helpful for your own
 migration efforts.
 
 [CNCF project](https://www.cncf.io/projects/) websites eager to migrate can send
@@ -277,5 +277,6 @@ _A version of this article originally appeared as the [CNCF blog][] post
 [cncf blog]: https://www.cncf.io/blog/
 [cncf-docsy]:
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
+[followup blog post]: /blog/2023/docsy-0.7/
 
 [original post]: {{% param canonical_url %}}

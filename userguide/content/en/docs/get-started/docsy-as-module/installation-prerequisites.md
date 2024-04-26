@@ -10,7 +10,7 @@ This page describes the prerequisites for building a site that uses Docsy as a H
 
 ## Install Hugo
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
+You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (version 0.110.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
 
 For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
@@ -24,7 +24,7 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -70,7 +70,7 @@ Hugo's commands for module management require that the Go programming language i
 
 ```console
 $ go version
-go version go1.20.5
+go version go1.21.6
 ```
 
 Ensure that you are using version 1.12 or higher.
@@ -84,14 +84,14 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```console
 $ git version
-git version 2.41.0
+git version 2.43.0
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.
 
 ## Install PostCSS
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v6/commands/npm-install#description):
+To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v10/commands/npm-install#description):
 
 ```bash
 npm install -D autoprefixer
@@ -138,11 +138,11 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    ```bash
    # Using Ubuntu
-   curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
    sudo apt-get install -y nodejs
 
    # Using Debian, as root
-   curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
    apt-get install -y nodejs
    ```
 
@@ -152,10 +152,10 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    ```bash
    # As root
-   curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+   curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
 
    # No root privileges
-   curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
+   curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
    ```
 
 

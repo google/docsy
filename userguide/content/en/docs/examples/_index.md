@@ -32,6 +32,8 @@ Example sites that have low to no customization:
 | [CloudWeGo](https://www.cloudwego.io/) | https://github.com/cloudwego/cloudwego.github.io |
 | [etcd](https://etcd.io/) | https://github.com/etcd-io/website |
 | [protobuf.dev](https://protobuf.dev) | https://github.com/protocolbuffers/protocolbuffers.github.io |
+| [Layer5 Docs](https://docs.layer5.io/) | https://github.com/layer5io/docs |
+| [Apache Parquet](https://parquet.apache.org/) | https://parquet.apache.org |
 
 ## Customized Docsy examples
 

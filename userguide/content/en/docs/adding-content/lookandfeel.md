@@ -6,23 +6,46 @@ description: Customize colors, fonts, code highlighting, and more for your site.
 spelling: cSpell:ignore wordmark docsy
 ---
 
-By default, a site using Docsy has the theme's default fonts, colors, and general look and feel. However, if you want your own color scheme (and you probably will!) you can very easily override the theme defaults with your own project-specific values - Hugo will look in your project files first when looking for information to build your site. And because Docsy uses Bootstrap 4 and SCSS for styling, you can override just single values (such as project colors and fonts) in its special SCSS project variables file, or do more serious customization by creating your own styles.
+By default, a site using Docsy has the theme's default fonts, colors, and
+general look and feel. However, if you want your own color scheme (and you
+probably will!) you can very easily override the theme defaults with your own
+project-specific values - Hugo will look in your project files first when
+looking for information to build your site. And because [Docsy uses Bootstrap 5]
+and SCSS for styling, you can override just single values (such as project
+colors and fonts) in its special SCSS project variables file, or do more serious
+customization by creating your own styles.
 
-Docsy also provides options for styling your code blocks, using either Chroma or Prism for highlighting.
+Docsy also provides options for styling your code blocks, using either Chroma or
+Prism for highlighting.
+
+[Docsy uses Bootstrap 5]: /blog/2023/bootstrap-5-migration/
 
 ## Project style files
 
-To customize your project's look and feel, create your own version of either or both of the following
-Docsy placeholder files (note the **`_project.scss`** suffixes):
+To customize your project's look and feel, create your own version of the
+following Docsy placeholder files (note the **`_project*.scss`** suffixes) and
+place them inside your project's `assets/scss/` folder:
 
-- [`assets/scss/`**`_variables_project.scss`**][_variables_project] is where you add project-specific definitions of theme variables such as [site colors](#site-colors), as well as any additional Bootstrap variable values you want to set. You can find a list of Docsy's theme variables and their default values in [<code>assets/scss/<strong>_variables.scss</strong></code>][_variables].  For information about other Bootstrap 4 variables, see [Variable defaults][] and Bootstrap's [v4-dev/scss/_variables.scss][] file.
-- [`assets/scss/`**`_styles_project.scss`**][_styles_project] is where you can add your own custom SCSS styles, including overriding any of the styles in Docsy's theme SCSS files.
+- **[`_variables_project.scss`]** and<br>
+  **[`_variables_project_after_bs.scss`]** :
 
-[_styles_project]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
-[_variables_project]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
-[_variables]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[v4-dev/scss/_variables.scss]: https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
-[Variable defaults]: https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
+  Use these files to add project-specific definitions of theme variables as well
+  as any additional Bootstrap variables you want to set or override. For
+  details, including an explanation of which file to use, see [Site
+  colors](#site-colors).
+
+  For a list of Docsy's theme variables and their default values, see
+  [`_variables.scss`]. For information about other Bootstrap 5 variables, see
+  [Variable defaults] and [Bootstrap's `_variables.scss`][bs_var] file.
+
+- **[`_styles_project.scss`]** is where you can add your own custom SCSS styles,
+  including overriding any of the styles in Docsy's theme SCSS files.
+
+[`_styles_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+[`_variables.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
+[`_variables_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+[`_variables_project_after_bs.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+[bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 {{% alert title="Tip" %}}
 PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
@@ -31,8 +54,8 @@ PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in s
 ## Site colors
 
 To customize your site's colors, add SCSS variable overrides to
-`assets/scss/_variables_project.scss`. For example, you can set the primary and
-secondary site colors as follows:
+**`assets/scss/_variables_project.scss`**. For example, you can set the primary
+and secondary site colors as follows:
 
 ```scss
 $primary: #390040;
@@ -42,6 +65,25 @@ $secondary: #A23B72;
 The theme has features such as gradient backgrounds (`$enable-gradients`) and
 shadows (`$enable-shadows`) enabled by default. These can also be toggled in
 your project variables file by setting the variables to `false`.
+
+To add colors to or modify Bootstrap's [color maps], use
+**`assets/scss/_variables_project_after_bs.scss`**. For example:
+
+```scss
+$custom-colors: (
+  "my-favorite-color": purple,
+  "my-other-color": pink
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+```
+
+Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
+
+[Adding theme colors]: https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
+[color maps]: https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps
+[Maps and loops]: https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops
+[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
 ## Fonts
 
@@ -158,14 +200,20 @@ Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.y
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
+[params]
 # Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-prism_syntax_highlighting: true
+params:
+  prism_syntax_highlighting: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"prism_syntax_highlighting": true
+{
+  "params": {
+    "prism_syntax_highlighting": true
+  }
+}
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -197,24 +245,6 @@ If the included Prism configuration is not sufficient for your requirements, and
 
 ## Navbar
 
-For pages containing a [blocks/cover][] shortcode, like most homepages, the
-navbar is translucent as long as the hero image hasn't scrolled up past the
-navbar. For an example, see the [About Docsy][] page. This initial translucent
-setting ensures that the hero image is maximally visible.
-
-After the hero image has scrolled past the navbar, the navbar's (opaque)
-background color is set -- usually to the site's [primary color][].
-
-The text of navbar entries can be difficult to read with some hero images. In
-these cases, you can disable navbar translucency by setting the
-`params.ui.navbar_translucent_over_cover_disable` option to `true` in your
-site's [configuration file][].
-
-[About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/adding-content/shortcodes/#blockscover
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
-[primary color]: #site-colors
-
 ### Styling your project logo and name
 
 The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
@@ -243,6 +273,64 @@ of the following:
 [project-styles]: /docs/adding-content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
+
+### Light/Dark mode menu
+
+If you enable this feature, Docsy adds a menu to your navbar that lets users
+switch your site's documentation page display between a default "light" mode,
+and a "dark" mode where the text is displayed in a light color on a dark
+background.
+
+To enable the display of a Light/[Dark mode] menu in the navbar, set
+`params.ui.showLightDarkModeMenu` to `true` in your project's configuration
+file. The dropdown menu appears at the right, immediately before the [search
+box], if present.
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
+[params.ui]
+showLightDarkModeMenu = true
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    showLightDarkModeMenu: true
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "ui": {
+      "showLightDarkModeMenu": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+[dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
+[search box]: /docs/adding-content/search/
+
+### Translucent over cover images
+
+For pages containing a [blocks/cover][] shortcode, like most homepages, the
+navbar is translucent as long as the hero image hasn't scrolled up past the
+navbar. For an example, see the [About Docsy][] page. This initial translucent
+setting ensures that the hero image is maximally visible.
+
+After the hero image has scrolled past the navbar, the navbar's (opaque)
+background color is set -- usually to the site's [primary color][].
+
+The text of navbar entries can be difficult to read with some hero images. In
+these cases, you can disable navbar translucency by setting the
+`params.ui.navbar_translucent_over_cover_disable` option to `true` in your
+site's [configuration file][].
+
+[About Docsy]: https://www.docsy.dev/about/
+[blocks/cover]: /docs/adding-content/shortcodes/#blockscover
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[primary color]: #site-colors
 
 ## Tables
 

@@ -1,7 +1,6 @@
 @import "../vendor/bootstrap/scss/functions";
 
-@import "support/functions";
-@import "_variables_forward";
+@import "variables_forward";
 @import "variables_project";
 @import "variables";
 @import "support/mixins";
@@ -13,6 +12,8 @@
 @import "../vendor/Font-Awesome/scss/solid.scss";
 @import "../vendor/Font-Awesome/scss/brands.scss";
 
+@import "variables_project_after_bs";
+
 @import "support/utilities";
 @import "colors";
 @import "table";
@@ -22,7 +23,6 @@
 @import "nav";
 @import "sidebar-tree";
 @import "sidebar-toc";
-@import "buttons";
 @import "breadcrumb";
 @import "alerts";
 @import "content";
@@ -35,6 +35,7 @@
 @import "drawio";
 @import "shortcodes";
 @import "tocbot";
+@import "swagger";
 
 @if $td-enable-google-fonts {
   @import url($web-font-path);
@@ -50,9 +51,17 @@
     min-height: 200px;
   }
 
-  &__copyright-etc {
+  /* &__left { } */
+
+  &__center {
     @extend .small;
+    text-align: center;
   }
+
+  &__right {
+    text-align: right;
+  }
+
   &__about {
     font-size: initial;
   }
@@ -73,6 +82,14 @@
     }
   }
 
+  &__authors,
+  &__all_rights_reserved {
+    padding-left: map-get($spacers, 1);
+  }
+
+  &__all_rights_reserved {
+    display: none;
+  }
 }
 
 // Adjust anchors vs the fixed menu.

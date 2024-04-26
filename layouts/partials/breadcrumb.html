@@ -23,7 +23,7 @@
     {{ if $isActive -}}
       {{ .p1.LinkTitle -}}
     {{ else -}}
-      <a href="{{ .p1.Permalink }}">{{ .p1.LinkTitle }}</a>
+      <a href="{{ .p1.RelPermalink }}">{{ .p1.LinkTitle }}</a>
     {{- end -}}
   </li>
 {{- end -}}

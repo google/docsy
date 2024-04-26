@@ -46,30 +46,33 @@ The site should then show a "Print entire section" link in the right hand naviga
 
 To disable showing the the table of contents in the printable view, set the `disable_toc` param to `true`, either in the page front matter, or in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane >}}
+{{< tabpane langEqualsHeader=true >}}
 {{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
+{{< tab toml >}}
 +++
 …
 disable_toc = true
 …
 +++
 {{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
+{{< tab yaml >}}
 ---
 …
 disable_toc: true
 …
 ---
 {{< /tab >}}
-{{< tab header="json" lang="json" >}}
+{{< tab json >}}
 {
   …,
   "disable_toc": true,
   …
 }
 {{< /tab >}}
-{{< tab header="or config file:" disabled=true />}}
+{{< /tabpane >}}
+
+{{< tabpane >}}
+{{< tab header="Config file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.print]
 disable_toc = true

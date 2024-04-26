@@ -8,11 +8,8 @@
 		{{ end -}}
 	</header>
 	{{ .Content }}
-	{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable) (.Site.GoogleAnalytics)) -}}
-		{{ partial "feedback.html" .Site.Params.ui.feedback }}
-		<br />
-	{{ end -}}
-	{{ if (.Site.Params.DisqusShortname) -}}
+	{{ partial "feedback.html" . -}}
+	{{ if (.Site.Config.Services.Disqus.Shortname) -}}
 		<br />
 		{{- partial "disqus-comment.html" . -}}
 	{{ end -}}
