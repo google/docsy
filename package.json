@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "github:chalin/hugo-extended#v0.125.4",
+    "hugo-extended": "0.125.4",
     "markdown-link-check": "^3.11.2",
     "mkdirp": "^3.0.1",
     "prettier": "^3.2.5"
