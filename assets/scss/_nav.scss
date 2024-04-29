@@ -196,7 +196,7 @@ nav.foldable-nav {
     padding-left: 0.4em;
     padding-right: 0.4em;
     font-size: 1em;
-    color: $gray-900;
+    color: var(--bs-secondary-color);
     transition: all 0.5s;
     &:hover {
       transform: rotate(90deg);
@@ -204,7 +204,7 @@ nav.foldable-nav {
   }
 
   .ul-1 .with-child > input:checked ~ label:before {
-    color: $primary;
+    color: var(--bs-secondary-color);
     transform: rotate(90deg);
     transition: transform 0.5s;
   }
@@ -217,12 +217,12 @@ nav.foldable-nav {
 @media (hover: hover) and (pointer: fine) {
   nav.foldable-nav {
     .ul-1 .with-child > label:hover:before {
-      color: $primary;
+      color: var(--bs-link-color);
       transition: color 0.3s;
     }
 
     .ul-1 .with-child > input:checked ~ label:hover:before {
-      color: $primary;
+      color: var(--bs-link-color);
       transition: color 0.3s;
     }
   }
