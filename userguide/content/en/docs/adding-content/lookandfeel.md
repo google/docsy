@@ -274,14 +274,14 @@ of the following:
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
 
-### Light/Dark mode menu
+### Light/dark mode menu
 
 If you enable this feature, Docsy adds a menu to your navbar that lets users
 switch your site's documentation page display between a default "light" mode,
 and a "dark" mode where the text is displayed in a light color on a dark
 background.
 
-To enable the display of a Light/[Dark mode] menu in the navbar, set
+To enable the display of a light/[dark mode] menu in the navbar, set
 `params.ui.showLightDarkModeMenu` to `true` in your project's configuration
 file. The dropdown menu appears at the right, immediately before the [search
 box], if present.
