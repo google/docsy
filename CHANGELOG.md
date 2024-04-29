@@ -37,13 +37,22 @@ For the full list of changes, see the [0.x.y] release notes.
 For an introduction to this release, see the [0.10.0 release report]. For the
 full list of changes, see the [0.10.0] release notes.
 
+**New**: color themes and dark-mode support! For details, see [Color themes and
+dark-mode support][dark-mode].
+
 **Breaking changes**:
 
-- Removed shortcode `card-code` that was [deprecated in 0.7.0](#070); use
+- Removes shortcode `card-code` that was [deprecated in 0.7.0](#070); use
   shortcode `card` with named parameter `code=true` instead.
+- The following SCSS variables are inlined in favor of dark-mode compatible
+  styling: `$border-color`, `$td-sidebar-tree-root-color`,
+  `$td-sidebar-bg-color`, `$td-sidebar-border-color` ([#1952])
 
+[#1952]: https://github.com/google/docsy/pull/1952
 [0.10.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.10.0
 [0.10.0 release report]: https://www.docsy.dev/blog/?FIXME=2024/0.10.0/
+[dark-mode]:
+  https://www.docsy.dev/blog/?FIXME=/2024/0.10.0/#color-themes-and-dark-mode-support
 
 ## 0.9.1
 
