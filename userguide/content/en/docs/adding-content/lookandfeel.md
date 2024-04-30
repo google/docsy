@@ -48,7 +48,11 @@ place them inside your project's `assets/scss/` folder:
 [bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 {{% alert title="Tip" %}}
-PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in server mode (it is a little slow), so Chrome is the recommended choice for development.
+
+PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in
+server mode (it is a little slow), so Chrome is the recommended choice for
+development.
+
 {{% /alert %}}
 
 ## Site colors
@@ -87,7 +91,9 @@ Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
 
 ## Fonts
 
-The theme uses [Open Sans](https://fonts.google.com/specimen/Open+Sans) as its primary font. To disable Google Fonts and use a system font, set this SCSS variable in `assets/scss/_variables_project.scss`:
+The theme uses [Open Sans](https://fonts.google.com/specimen/Open+Sans) as its
+primary font. To disable Google Fonts and use a system font, set this SCSS
+variable in `assets/scss/_variables_project.scss`:
 
 ```scss
 $td-enable-google-fonts: false;
@@ -100,20 +106,31 @@ $google_font_name: "Open Sans";
 $google_font_family: "Open+Sans:300,300i,400,400i,700,700i";
 ```
 
-Note that if you decide to go with a font with different weights (in the built-in configuration this is `300` (light), `400` (medium) and `700` (bold)), you also need to adjust the weight related variables, i.e. variables starting with `$font-weight-`.
+Note that if you decide to go with a font with different weights (in the
+built-in configuration this is `300` (light), `400` (medium) and `700` (bold)),
+you also need to adjust the weight related variables, i.e. variables starting
+with `$font-weight-`.
 
 ## CSS utilities
 
-For documentation of available CSS utility classes, see the [Bootstrap Documentation](https://getbootstrap.com/). This theme adds very little on its own in this area. However, we have added some color state CSS classes that can be useful in a dynamic context:
+For documentation of available CSS utility classes, see the [Bootstrap
+Documentation](https://getbootstrap.com/). This theme adds very little on its
+own in this area. However, we have added some color state CSS classes that can
+be useful in a dynamic context:
 
 * `.-bg-<color>`
 * `.-text-<color>`
 
-You can use these classes, for example, to style your text in an appropriate color when you don't know if the `primary` color is dark or light, to ensure proper color contrast. They are also useful when you receive the color code as a [shortcode](/docs/adding-content/shortcodes/) parameter.
+You can use these classes, for example, to style your text in an appropriate
+color when you don't know if the `primary` color is dark or light, to ensure
+proper color contrast. They are also useful when you receive the color code as a
+[shortcode](/docs/adding-content/shortcodes/) parameter.
 
-The value of `<color>` can be any of the color names, `primary`, `white`, `dark`, `warning`, `light`, `success`, `300`, `blue`, `orange` etc.
+The value of `<color>` can be any of the color names, `primary`, `white`,
+`dark`, `warning`, `light`, `success`, `300`, `blue`, `orange` etc.
 
-When you use `.-bg-<color>`, the text colors will be adjusted to get proper contrast:
+When you use `.-bg-<color>`, the text colors will be adjusted to get proper
+contrast:
 
 ```html
 <div class="-bg-primary p-3 display-4">Background: Primary</div>
@@ -133,7 +150,13 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper cont
 
 ## Code highlighting with Chroma
 
-With Hugo version 0.60 and higher, you can choose from a range of code block highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma) that are applied to your fenced code blocks by default. If you copied a recent `hugo.toml` your site uses Tango (like this site), otherwise the Hugo default is Monokai. You can switch to any of the [available Chroma styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+With Hugo version 0.60 and higher, you can choose from a range of code block
+highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma)
+that are applied to your fenced code blocks by default. If you copied a recent
+`hugo.toml` your site uses Tango (like this site), otherwise the Hugo default is
+Monokai. You can switch to any of the [available Chroma
+styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy
+default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -170,7 +193,11 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 
-By default code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. If you would like the code highlighting style to apply to all code blocks, even without a language, uncomment or add the following line under `[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
+By default code highlighting styles are not applied to code blocks without a
+specified language, instead you get Docsy's default style of grey with black
+text. If you would like the code highlighting style to apply to all code blocks,
+even without a language, uncomment or add the following line under
+`[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -191,11 +218,13 @@ If you are using a Docsy version later than `0.6.0`, the code blocks show a
 functionality set `disable_click2copy_chroma` to `true` in your configuration
 file:
 
-You can find out more about code highlighting in Hugo with Chroma in [Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
+You can find out more about code highlighting in Hugo with Chroma in [Syntax
+Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
 
-Optionally, you can enable Prism syntax highlighting in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+Optionally, you can enable Prism syntax highlighting in your
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -217,25 +246,37 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-When this option is enabled your site uses [Prism](https://prismjs.com/index.html) instead of Chroma for code block highlighting.
+When this option is enabled your site uses
+[Prism](https://prismjs.com/index.html) instead of Chroma for code block
+highlighting.
 
-Prism is a popular open source syntax highlighter which supports over 200 [languages](https://prismjs.com/index.html#supported-languages) and various [plugins](https://prismjs.com/index.html#plugins).
+Prism is a popular open source syntax highlighter which supports over 200
+[languages](https://prismjs.com/index.html#supported-languages) and various
+[plugins](https://prismjs.com/index.html#plugins).
 
-Docsy includes JavaScript and CSS files for a basic Prism configuration, which supports:
+Docsy includes JavaScript and CSS files for a basic Prism configuration, which
+supports:
 
 * Code blocks styled with the Prism `Default` theme
 * Copy to clipboard buttons on code blocks
-* Syntax highlighting for a number of common languages, as specified in the following Prism download link, [Customize your download][prismjs-download+].
+* Syntax highlighting for a number of common languages, as specified in the
+  following Prism download link, [Customize your download][prismjs-download+].
 
 [prismjs-download+]: https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
 
 ### Code blocks with no language
 
-By default, Prism code highlighting styles are not applied to code blocks without a specified language, instead you get Docsy's default style of grey with black text. To apply Prism styling to code blocks with no language or a language not supported by Prism, specify `none` as the language after your triple backticks.
+By default, Prism code highlighting styles are not applied to code blocks
+without a specified language, instead you get Docsy's default style of grey with
+black text. To apply Prism styling to code blocks with no language or a language
+not supported by Prism, specify `none` as the language after your triple
+backticks.
 
 ### Extending Prism for additional languages or plugins
 
-If the included Prism configuration is not sufficient for your requirements, and you want to use additional languages or plugins you can replace the included files with your own.
+If the included Prism configuration is not sufficient for your requirements, and
+you want to use additional languages or plugins you can replace the included
+files with your own.
 
 1. Download your own Prism JS and CSS files from <https://prismjs.com/download.html>
 2. Replace the included Prism JS and CSS with the files you downloaded:
@@ -343,8 +384,9 @@ Docsy applies the following styles to all tables, through the class `.td-table`:
 - `display: block`, which is necessary for tables to be responsive.
 
 This styling configuration gives you responsive tables using Markdown only,
-without the need to wrap the table in a `<div>`. It does, however, mean that all your tables have `display`
-set to `block`. If you don't want this, you can create your own custom styles for tables.
+without the need to wrap the table in a `<div>`. It does, however, mean that all
+your tables have `display` set to `block`. If you don't want this, you can
+create your own custom styles for tables.
 
 {{% alert title="Note" %}}
 
@@ -385,24 +427,34 @@ The example above uses [Markdown attribute][] syntax, and might render like this
 
 ### Add code to head or before body end
 
-If you need to add some code (CSS import, cookie consent, or similar) to the `head` section on every page, add the `head-end.html` partial to your project:
+If you need to add some code (CSS import, cookie consent, or similar) to the
+`head` section on every page, add the `head-end.html` partial to your project:
 
 ```
 layouts/partials/hooks/head-end.html
 ```
 
-And add the code you need in that file. Your partial code is automatically included just before the end of the theme partial [`head.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html). The theme version of [`head-end.html`](https://github.com/google/docsy/blob/main/layouts/partials/hooks/head-end.html) is empty.
+And add the code you need in that file. Your partial code is automatically
+included just before the end of the theme partial
+[`head.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
+The theme version of
+[`head-end.html`](https://github.com/google/docsy/blob/main/layouts/partials/hooks/head-end.html)
+is empty.
 
 
-Similarly, if you want to add some code right before the `body` end, create your own version of the following file:
+Similarly, if you want to add some code right before the `body` end, create your
+own version of the following file:
 
 ```
 layouts/partials/hooks/body-end.html
 ```
 
-Any code in this file is included automatically at the end of the theme partial [`scripts.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
+Any code in this file is included automatically at the end of the theme partial
+[`scripts.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
 
-Both `head.html` and `scripts.html` are then used to build Docsy's [base page layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html), which is used by all the other page templates:
+Both `head.html` and `scripts.html` are then used to build Docsy's [base page
+layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
+which is used by all the other page templates:
 
 ```html
 <!doctype html>
