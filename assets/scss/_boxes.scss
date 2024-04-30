@@ -118,14 +118,16 @@
 }
 
 // Single dark-mode compatibility override for white boxes:
-.td-box--white {
-  color: var(--bs-body-color) !important;
-  background-color: var(--bs-body-bg) !important;
-  p > a, span > a {
-    color: var(--bs-link-color);
-    &:focus,
-    &:hover {
-      color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+@include color-mode(dark) {
+  .td-box--white {
+    color: var(--bs-body-color) !important;
+    background-color: var(--bs-body-bg) !important;
+    p > a, span > a {
+      color: var(--bs-link-color);
+      &:focus,
+      &:hover {
+        color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+      }
     }
   }
 }
