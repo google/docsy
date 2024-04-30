@@ -39,6 +39,28 @@
 
     var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
     settings.startOnLoad = true;
+    const isDark = $('html[data-bs-theme="dark"]').length;
+    settings.theme = isDark ? 'dark' : 'base';
     mermaid.initialize(settings);
+
+    // Handle light/dark mode theme changes
+    const lightDarkModeThemeChangeHandler = function (mutationsList, observer) {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme') {
+          // Mermaid doesn't currently support reinitialization, see
+          // https://github.com/mermaid-js/mermaid/issues/1945. Until then,
+          // just reload the page.
+          location.reload();
+        }
+      }
+    };
+
+    const observer = new MutationObserver(lightDarkModeThemeChangeHandler);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-bs-theme']
+    });
+    // observer.disconnect();
+
   })(jQuery);
 </script>
