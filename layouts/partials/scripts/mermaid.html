@@ -39,8 +39,9 @@
 
     var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
     settings.startOnLoad = true;
-    const isDark = $('html[data-bs-theme="dark"]').length;
-    settings.theme = isDark ? 'dark' : 'base';
+    if ($('html[data-bs-theme="dark"]').length) {
+      settings.theme = 'dark';
+    }
     mermaid.initialize(settings);
 
     // Handle light/dark mode theme changes
