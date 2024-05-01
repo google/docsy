@@ -1,9 +1,9 @@
 [data-bs-theme="light"] {
-  @import 'chroma/tango';
+  @import 'td/chroma/light';
 }
 
 [data-bs-theme="dark"] {
-  @import 'chroma/onedark';
+  @import 'td/chroma/dark';
   .chroma {
     background-color: var(--td-pre-bg);
   }
