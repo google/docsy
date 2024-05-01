@@ -25,7 +25,7 @@
     "ci:post": "npm run fix:format && npm run _diff:check",
     "ci:prepare": "npm run docs-install && npm run _prepare && npm run _diff:check",
     "docs-install": "npm run _cd:docs -- npm install",
-    "fix:format": "npm run _check:format -- --write",
+    "fix:format": "npm run _check:format -- --write && npm run cd:docs fix:format",
     "get:hugo-modules": "node tools/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
     "serve": "npm run cd:docs serve",
