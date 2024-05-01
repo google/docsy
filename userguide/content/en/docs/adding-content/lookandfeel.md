@@ -114,6 +114,15 @@ so that code-block styles are compatible with light/dark mode:
 
 For details, see [Chroma for code highlighting].
 
+{{% alert title="Note" %}}
+
+Light/dark color themes, only affect documentation pages, and white [blocks
+shortcodes].
+
+[blocks shortcodes]: shortcodes/#shortcode-blocks
+
+{{% /alert %}}
+
 [Chroma for code highlighting]: #code-highlighting-with-chroma
 [light/dark menu]: #lightdark-mode-menu
 [Generate syntax highlighter CSS]:
