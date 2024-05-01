@@ -21,7 +21,7 @@ function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
       throw new Error(msg);
     }
 
-    const command = `hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
+    const command = `npx hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
     console.log(`> ${command}`);
     const output = execSync(command);
     console.log(output.toString());
