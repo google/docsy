@@ -25,7 +25,7 @@
 
       button.td-click-to-copy {
         position: absolute;
-        color: $gray-400;
+        color: var(--bs-tertiary-color);
         border-width: 0;
         background-color: transparent;
         background-image: none;
@@ -35,12 +35,12 @@
         top: 2px;
 
         &:hover {
-          color: $dark;
-          background-color: $gray-400;
+          color: var(--bs-secondary-color);
+          background-color: var(--bs-dark-bg-subtle);
         }
         &:active {
-          color: $dark;
-          background-color: $gray-400;
+          color: var(--bs-secondary-color);
+          background-color: var(--bs-dark-bg-subtle);
           transform: translateY(2px);
         }
       }
