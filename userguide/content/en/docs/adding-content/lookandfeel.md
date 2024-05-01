@@ -101,9 +101,9 @@ Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
 
 ### Light/dark color themes
 
-Docsy supports light and [dark mode] color themes. To allow your website users
-to choose light/dark modes, **enable the Docsy [light/dark menu]** or create
-your own custom theme selector.
+Docsy 0.10.0 supports light and [dark mode] color themes. To allow your website
+users to choose light/dark modes, **enable the Docsy [light/dark menu]** or
+create your own custom theme selector.
 
 If your site uses [Chroma for code highlighting], there are extra steps required
 so that code-block styles are compatible with light/dark mode:
