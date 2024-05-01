@@ -229,8 +229,8 @@ Docsy's default Chroma styles for [light/dark mode] are:
 - [tango] for light mode
 - [onedark] for dark mode
 
-If you would like to use other styles, save the [Hugo generated
-Chroma styles] to the appropriate file:
+If you would like to use other styles, save the [Hugo generated Chroma styles]
+to the appropriate file:
 
 - [assets/scss/td/chroma/_light.scss]
 - [assets/scss/td/chroma/_dark.scss]
