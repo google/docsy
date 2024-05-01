@@ -53,8 +53,8 @@ repo.
 3.  **Update Docsy version** to v0.X.Y for:
     - `version` key in [package.json](package.json)
     - `version` key in [userguide/hugo.yaml][]
-4.  Run `npm install` to have vendor assets and [go.mod](go.mod) updated for
-    dependencies.
+4.  Run `npm run ci:prrepare` to ensure that vendor assets and [go.mod](go.mod)
+    dependencies are up-to-date.
 5.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
     preparation".
 6.  **Test the PR** branch from selected sites, and push any required

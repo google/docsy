@@ -48,6 +48,12 @@ dark-mode support][dark-mode].
   styling: `$border-color`, `$td-sidebar-tree-root-color`,
   `$td-sidebar-bg-color`, `$td-sidebar-border-color` ([#1952])
 
+**Style changes** (potentially breaking):
+
+- The style of various shortcode and elements have been adjusted so that they
+  are compatible with light/dark mode. For details see, **Important style
+  changes** in [Color themes and dark-mode support][dark-mode].
+
 [#1952]: https://github.com/google/docsy/pull/1952
 [0.10.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.10.0
 [0.10.0 release report]: https://www.docsy.dev/blog/?FIXME=2024/0.10.0/

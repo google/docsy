@@ -58,7 +58,7 @@ params:
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
-  version: 0.9.1
+  version: 0.10.0
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
