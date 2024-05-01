@@ -1,0 +1,15 @@
+.*
+/*
+!/content
+/content/*
+!/content/en
+/content/en/*
+
+!/content/en/docs
+/content/en/docs/*
+!/content/en/docs/_index.md
+
+!/content/en/docs/adding-content
+/content/en/docs/adding-content/*
+
+!/content/en/docs/adding-content/lookandfeel.md
