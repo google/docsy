@@ -31,8 +31,8 @@ place them inside your project's `assets/scss/` folder:
 
   Use these files to add project-specific definitions of theme variables as well
   as any additional Bootstrap variables you want to set or override. For
-  details, including an explanation of which file to use, see [Site
-  colors](#site-colors).
+  details, including an explanation of which file to use, see
+  [Site colors](#site-colors).
 
   For a list of Docsy's theme variables and their default values, see
   [`_variables.scss`]. For information about other Bootstrap 5 variables, see
@@ -41,10 +41,14 @@ place them inside your project's `assets/scss/` folder:
 - **[`_styles_project.scss`]** is where you can add your own custom SCSS styles,
   including overriding any of the styles in Docsy's theme SCSS files.
 
-[`_styles_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
-[`_variables.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
-[`_variables_project.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
-[`_variables_project_after_bs.scss`]: https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+[`_styles_project.scss`]:
+  https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+[`_variables.scss`]:
+  https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
+[`_variables_project.scss`]:
+  https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+[`_variables_project_after_bs.scss`]:
+  https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
 [bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 {{% alert title="Tip" %}}
@@ -63,7 +67,7 @@ and secondary site colors as follows:
 
 ```scss
 $primary: #390040;
-$secondary: #A23B72;
+$secondary: #a23b72;
 ```
 
 The theme has features such as gradient backgrounds (`$enable-gradients`) and
@@ -75,8 +79,8 @@ To add colors to or modify Bootstrap's [color maps], use
 
 ```scss
 $custom-colors: (
-  "my-favorite-color": purple,
-  "my-other-color": pink
+  'my-favorite-color': purple,
+  'my-other-color': pink,
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
@@ -84,10 +88,13 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
 
-[Adding theme colors]: https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
+[Adding theme colors]:
+  https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
 [color maps]: https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps
-[Maps and loops]: https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops
-[variable defaults]: https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
+[Maps and loops]:
+  https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops
+[variable defaults]:
+  https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
 ## Fonts
 
@@ -102,8 +109,8 @@ $td-enable-google-fonts: false;
 To configure another Google Font:
 
 ```scss
-$google_font_name: "Open Sans";
-$google_font_family: "Open+Sans:300,300i,400,400i,700,700i";
+$google_font_name: 'Open Sans';
+$google_font_family: 'Open+Sans:300,300i,400,400i,700,700i';
 ```
 
 Note that if you decide to go with a font with different weights (in the
@@ -113,13 +120,13 @@ with `$font-weight-`.
 
 ## CSS utilities
 
-For documentation of available CSS utility classes, see the [Bootstrap
-Documentation](https://getbootstrap.com/). This theme adds very little on its
-own in this area. However, we have added some color state CSS classes that can
-be useful in a dynamic context:
+For documentation of available CSS utility classes, see the
+[Bootstrap Documentation](https://getbootstrap.com/). This theme adds very
+little on its own in this area. However, we have added some color state CSS
+classes that can be useful in a dynamic context:
 
-* `.-bg-<color>`
-* `.-text-<color>`
+- `.-bg-<color>`
+- `.-text-<color>`
 
 You can use these classes, for example, to style your text in an appropriate
 color when you don't know if the `primary` color is dark or light, to ensure
@@ -154,10 +161,12 @@ With Hugo version 0.60 and higher, you can choose from a range of code block
 highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma)
 that are applied to your fenced code blocks by default. If you copied a recent
 `hugo.toml` your site uses Tango (like this site), otherwise the Hugo default is
-Monokai. You can switch to any of the [available Chroma
-styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy
-default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+Monokai. You can switch to any of the
+[available Chroma styles](https://xyproto.github.io/splash/docs/all.html)
+(including our Docsy default Tango) using your
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -199,10 +208,10 @@ text. If you would like the code highlighting style to apply to all code blocks,
 even without a language, uncomment or add the following line under
 `[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-# Uncomment if you want your chosen highlight style used for code blocks without a specified language
 guessSyntax = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -218,19 +227,19 @@ If you are using a Docsy version later than `0.6.0`, the code blocks show a
 functionality set `disable_click2copy_chroma` to `true` in your configuration
 file:
 
-You can find out more about code highlighting in Hugo with Chroma in [Syntax
-Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
+You can find out more about code highlighting in Hugo with Chroma in
+[Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 
 ## Code highlighting with Prism
 
 Optionally, you can enable Prism syntax highlighting in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-# Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -257,12 +266,13 @@ Prism is a popular open source syntax highlighter which supports over 200
 Docsy includes JavaScript and CSS files for a basic Prism configuration, which
 supports:
 
-* Code blocks styled with the Prism `Default` theme
-* Copy to clipboard buttons on code blocks
-* Syntax highlighting for a number of common languages, as specified in the
+- Code blocks styled with the Prism `Default` theme
+- Copy to clipboard buttons on code blocks
+- Syntax highlighting for a number of common languages, as specified in the
   following Prism download link, [Customize your download][prismjs-download+].
 
-[prismjs-download+]: https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
+[prismjs-download+]:
+  https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
 
 ### Code blocks with no language
 
@@ -278,11 +288,11 @@ If the included Prism configuration is not sufficient for your requirements, and
 you want to use additional languages or plugins you can replace the included
 files with your own.
 
-1. Download your own Prism JS and CSS files from <https://prismjs.com/download.html>
+1. Download your own Prism JS and CSS files from
+   <https://prismjs.com/download.html>
 2. Replace the included Prism JS and CSS with the files you downloaded:
-    * Copy the Javascript file to `static/js/prism.js`
-    * Copy the CSS file to `static/css/prism.css`
-
+   - Copy the Javascript file to `static/js/prism.js`
+   - Copy the CSS file to `static/css/prism.css`
 
 ## Navbar
 
@@ -296,9 +306,10 @@ of the following:
 
     To ensure your logo displays correctly, you may want to resize it and ensure
     that it doesn't have height and width attributes so that its size is fully
-    responsive. [Override the default styling][project-styles] of `.td-navbar
-    .navbar-brand svg` or (equivalently) `.td-navbar .navbar-brand__logo` as
-    needed.
+    responsive. [Override the default styling][project-styles] of
+    `.td-navbar .navbar-brand svg` or (equivalently)
+    `.td-navbar .navbar-brand__logo` as needed.
+
 2.  Your project name, which is the site `title`. If you don't want your project
     name to appear (for example, because your logo is or contains a
     [wordmark][]), then add the following custom styling to your [project's
@@ -327,6 +338,7 @@ To enable the display of a light/[dark mode] menu in the navbar, set
 file. The dropdown menu appears at the right, immediately before the [search
 box], if present.
 
+<!--prettier-ignore-->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -370,7 +382,8 @@ site's [configuration file][].
 
 [About Docsy]: https://www.docsy.dev/about/
 [blocks/cover]: /docs/adding-content/shortcodes/#blockscover
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[configuration file]:
+  https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #site-colors
 
 ## Tables
@@ -395,7 +408,8 @@ tables][wrap-tables] with `.table-responsive` &mdash; however, we think letting
 users create responsive tables with just Markdown table syntax is more
 convenient.
 
-[wrap-tables]: https://getbootstrap.com/docs/5.3/content/tables/#responsive-tables
+[wrap-tables]:
+  https://getbootstrap.com/docs/5.3/content/tables/#responsive-tables
 
 {{% /alert %}}
 
@@ -404,6 +418,7 @@ table. From the resulting `<table>` style base, it is easier to apply your own
 custom styles (rather than trying to undo Docsy table styling), as is
 illustrated in the following example:
 
+<!-- prettier-ignore -->
 ```markdown
 | Shape    | Number of sides |
 | -------- | --------------- |
@@ -412,13 +427,16 @@ illustrated in the following example:
 {.td-initial .my-dark-table-style}
 ```
 
-The example above uses [Markdown attribute][] syntax, and might render like this:
+The example above uses [Markdown attribute][] syntax, and might render like
+this:
 
+<!-- prettier-ignore-start -->
 | Shape    | Number of sides |
 | -------- | --------------- |
 | Triangle | 3               |
 | Square   | 4               |
 {.td-initial .table .table-dark}
+<!-- prettier-ignore-end -->
 
 [Bootstrap table]: https://getbootstrap.com/docs/5.3/content/tables/
 [Markdown attribute]: https://discourse.gohugo.io/t/markdown-attributes/41783
@@ -441,7 +459,6 @@ The theme version of
 [`head-end.html`](https://github.com/google/docsy/blob/main/layouts/partials/hooks/head-end.html)
 is empty.
 
-
 Similarly, if you want to add some code right before the `body` end, create your
 own version of the following file:
 
@@ -452,10 +469,11 @@ layouts/partials/hooks/body-end.html
 Any code in this file is included automatically at the end of the theme partial
 [`scripts.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
 
-Both `head.html` and `scripts.html` are then used to build Docsy's [base page
-layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
+Both `head.html` and `scripts.html` are then used to build Docsy's
+[base page layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
 which is used by all the other page templates:
 
+<!-- prettier-ignore -->
 ```html
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
