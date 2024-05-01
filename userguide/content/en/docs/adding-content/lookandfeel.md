@@ -59,7 +59,9 @@ development.
 
 {{% /alert %}}
 
-## Site colors
+## Colors and color themes
+
+### Site colors
 
 To customize your site's colors, add SCSS variable overrides to
 **`assets/scss/_variables_project.scss`**. For example, you can set the primary
@@ -70,9 +72,10 @@ $primary: #390040;
 $secondary: #a23b72;
 ```
 
-The theme has features such as gradient backgrounds (`$enable-gradients`) and
-shadows (`$enable-shadows`) enabled by default. These can also be toggled in
-your project variables file by setting the variables to `false`.
+Docsy has [Bootstrap][bs-docs] features such as gradient backgrounds
+(`$enable-gradients`) and shadows (`$enable-shadows`) enabled by default. These
+can also be toggled in your project variables file by setting the variables to
+`false`.
 
 To add colors to or modify Bootstrap's [color maps], use
 **`assets/scss/_variables_project_after_bs.scss`**. For example:
@@ -95,6 +98,26 @@ Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
   https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops
 [variable defaults]:
   https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
+
+### Light/dark color themes
+
+Docsy supports light and [dark mode] color themes. To allow your website users
+to choose light/dark modes, **enable the Docsy [light/dark menu]** or create
+your own custom theme selector.
+
+If your site uses [Chroma for code highlighting], there are extra steps required
+so that code-block styles are compatible with light/dark mode:
+
+- Ensure that `markup.highlight.noClasses` is `false` in your project config.
+  For details about this option, see [Generate syntax highlighter CSS].
+- Add `@import 'code-dark'` to your project's [`_styles_project.scss`] file.
+
+For details, see [Chroma for code highlighting].
+
+[Chroma for code highlighting]: #code-highlighting-with-chroma
+[light/dark menu]: #lightdark-mode-menu
+[Generate syntax highlighter CSS]:
+  https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 
 ## Fonts
 
@@ -120,10 +143,10 @@ with `$font-weight-`.
 
 ## CSS utilities
 
-For documentation of available CSS utility classes, see the
-[Bootstrap Documentation](https://getbootstrap.com/). This theme adds very
-little on its own in this area. However, we have added some color state CSS
-classes that can be useful in a dynamic context:
+For documentation of available CSS utility classes, see the [Bootstrap
+documentation][bs-docs]. This theme adds very little on its own in this area.
+However, we have added some color state CSS classes that can be useful in a
+dynamic context:
 
 - `.-bg-<color>`
 - `.-text-<color>`
@@ -140,60 +163,49 @@ When you use `.-bg-<color>`, the text colors will be adjusted to get proper
 contrast:
 
 ```html
-<div class="-bg-primary p-3 display-4">Background: Primary</div>
-<div class="-bg-200 p-3 display-4">Background: Gray 200</div>
+<div class="-bg-primary p-3 display-6">Background: Primary</div>
+<div class="-bg-200 p-3 display-6">Background: Gray 200</div>
 ```
 
-<div class="-bg-primary p-3 display-4 w-75">Background: Primary</div>
-<div class="-bg-200 p-3 display-4 mb-5 w-50 w-75">Background: Gray 200</div>
+<div class="-bg-primary p-3 display-6 w-75">Background: Primary</div>
+<div class="-bg-200 p-3 display-6 mb-5 w-50 w-75">Background: Gray 200</div>
 
-`.-text-<color>` sets the text color only:
+To only set the text color use `.-text-<color>`:
 
 ```html
-<div class="-text-blue pt-3 display-4">Text: Blue</div>
+<div class="-text-blue pt-3 display-6">Text: Blue</div>
 ```
 
-<div class="-text-blue pt-3 display-4">Text: Blue</div>
+<div class="-text-blue pt-3 display-6">Text: Blue</div>
 
 ## Code highlighting with Chroma
 
-With Hugo version 0.60 and higher, you can choose from a range of code block
-highlight and colour styles using [Chroma](https://github.com/alecthomas/chroma)
-that are applied to your fenced code blocks by default. If you copied a recent
-`hugo.toml` your site uses Tango (like this site), otherwise the Hugo default is
-Monokai. You can switch to any of the
-[available Chroma styles](https://xyproto.github.io/splash/docs/all.html)
-(including our Docsy default Tango) using your
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
+As of Hugo 0.60+, you can choose from a range of code block highlight and color
+styles using [Chroma](https://github.com/alecthomas/chroma). These styles are
+applied to your fenced code blocks. For details about code highlighting in Hugo
+using Chroma, see [Syntax Highlighting].
+
+### Chroma style configuration
+
+Hugo's default Chroma style is [monokai]. To use another style, such as [tango],
+add the following to your project configuration:
 
 <!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
   [markup.highlight]
-      # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
       style = "tango"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 markup:
-  goldmark:
-    renderer:
-      unsafe: true
   highlight:
     style: tango
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "markup": {
-    "goldmark": {
-      "renderer": {
-        "unsafe": true
-      }
-    },
     "highlight": {
       "style": "tango"
     }
@@ -202,33 +214,47 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 
-By default code highlighting styles are not applied to code blocks without a
-specified language, instead you get Docsy's default style of grey with black
-text. If you would like the code highlighting style to apply to all code blocks,
-even without a language, uncomment or add the following line under
-`[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
+For the complete list of available styles, see [Chroma Style Gallery].
 
-<!-- prettier-ignore -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-guessSyntax = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-guessSyntax: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-"guessSyntax": true
-{{< /tab >}}
-{{< /tabpane >}}
+[Chroma Style Gallery]: https://xyproto.github.io/splash/docs/
+[monokai]: https://xyproto.github.io/splash/docs/monokai.html
+[onedark]: https://xyproto.github.io/splash/docs/onedark.html
+[Syntax Highlighting]: https://gohugo.io/content-management/syntax-highlighting/
+[tango]: https://xyproto.github.io/splash/docs/tango.html
 
-If you are using a Docsy version later than `0.6.0`, the code blocks show a
-"Copy to clipboard" icon in the top right-hand corner. To disable this
-functionality set `disable_click2copy_chroma` to `true` in your configuration
-file:
+### Light/dark code styles
 
-You can find out more about code highlighting in Hugo with Chroma in
-[Syntax Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
+Docsy's default Chroma styles for [light/dark mode] are:
+
+- [tango] for light mode
+- [onedark] for dark mode
+
+If you would like to use other styles, save the [Hugo generated
+Chroma styles] to the appropriate file:
+
+- [assets/scss/td/chroma/_light.scss]
+- [assets/scss/td/chroma/_dark.scss]
+
+[assets/scss/td/chroma/_dark.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_dark.scss
+[assets/scss/td/chroma/_light.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_light.scss
+[Hugo generated Chroma styles]:
+  https://gohugo.io/commands/hugo_gen_chromastyles/
+[light/dark mode]: #lightdark-color-themes
+
+### Code blocks without a specified language
+
+By default, highlighting is not applied to code blocks without a specified
+language. If you would like code highlighting to apply to _all_ code blocks,
+even without a language, set `markup.highlight.guessSyntax` to `true` in your
+project's configuration file.
+
+### Copy to clipboard
+
+If you are using a Docsy 0.6.0 or later, code blocks show a "Copy to clipboard"
+button in the top right-hand corner. To disable this functionality, set
+`disable_click2copy_chroma` to `true` in your configuration file:
 
 ## Code highlighting with Prism
 
@@ -338,7 +364,7 @@ To enable the display of a light/[dark mode] menu in the navbar, set
 file. The dropdown menu appears at the right, immediately before the [search
 box], if present.
 
-<!--prettier-ignore-->
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -494,3 +520,5 @@ which is used by all the other page templates:
   </body>
 </html>
 ```
+
+[bs-docs]: https://getbootstrap.com/docs/
