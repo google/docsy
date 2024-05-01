@@ -158,6 +158,7 @@ Monokai. You can switch to any of the [available Chroma
 styles](https://xyproto.github.io/splash/docs/all.html) (including our Docsy
 default Tango) using your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -199,10 +200,10 @@ text. If you would like the code highlighting style to apply to all code blocks,
 even without a language, uncomment or add the following line under
 `[markup.highlight]` in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-# Uncomment if you want your chosen highlight style used for code blocks without a specified language
 guessSyntax = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -226,11 +227,11 @@ Highlighting](https://gohugo.io/content-management/syntax-highlighting/).
 Optionally, you can enable Prism syntax highlighting in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-# Enable syntax highlighting and copy buttons on code blocks with Prism
 prism_syntax_highlighting = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -327,6 +328,7 @@ To enable the display of a light/[dark mode] menu in the navbar, set
 file. The dropdown menu appears at the right, immediately before the [search
 box], if present.
 
+<!--prettier-ignore-->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -404,6 +406,7 @@ table. From the resulting `<table>` style base, it is easier to apply your own
 custom styles (rather than trying to undo Docsy table styling), as is
 illustrated in the following example:
 
+<!-- prettier-ignore -->
 ```markdown
 | Shape    | Number of sides |
 | -------- | --------------- |
@@ -414,11 +417,13 @@ illustrated in the following example:
 
 The example above uses [Markdown attribute][] syntax, and might render like this:
 
+<!-- prettier-ignore-start -->
 | Shape    | Number of sides |
 | -------- | --------------- |
 | Triangle | 3               |
 | Square   | 4               |
 {.td-initial .table .table-dark}
+<!-- prettier-ignore-end -->
 
 [Bootstrap table]: https://getbootstrap.com/docs/5.3/content/tables/
 [Markdown attribute]: https://discourse.gohugo.io/t/markdown-attributes/41783
@@ -456,6 +461,7 @@ Both `head.html` and `scripts.html` are then used to build Docsy's [base page
 layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
 which is used by all the other page templates:
 
+<!-- prettier-ignore -->
 ```html
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
