@@ -10,7 +10,7 @@
     "_check:format": "npx prettier --check .??* *.md",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
     "_diff:check": "git diff --name-only --exit-code",
-    "_gen-chroma-styles": "tools/gen-chroma-styles.sh && tools/gen-chroma-styles.sh -s onedark -o _dark.scss",
+    "_gen-chroma-styles": "bash -c tools/gen-chroma-styles.sh && bash -c 'tools/gen-chroma-styles.sh -s onedark -o _dark.scss'",
     "_mkdir:hugo-mod": "npx mkdirp ../github.com/FortAwesome/Font-Awesome ../github.com/twbs/bootstrap",
     "_prepare": "npm run _cp:bs-rfs && npm run _gen-chroma-styles",
     "build:preview": "npm run cd:docs build:preview",
