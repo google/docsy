@@ -222,7 +222,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
+For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}\\)'s [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}\\)'s [configuration options](https://katex.org/docs/options.html).
 
 ### Display of Chemical Equations and Physical Units
 

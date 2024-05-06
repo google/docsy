@@ -1,15 +1,16 @@
 <div class="section-index">
-    {{ $parent := .Page -}}
+    {{ $page := .Page -}}
     {{ $pages := (where .Site.Pages "Section" .Section).ByWeight -}}
     {{ $pages = (where $pages "Type" "!=" "search") }}
     {{ $pages = (where $pages ".Params.hide_summary" "!=" true) -}}
     {{ $pages = (where $pages ".Parent" "!=" nil) -}}
-    {{ if and .Parent .Parent.File -}}
-        {{ $pages = (where $pages "Parent.File.UniqueID" "==" $parent.File.UniqueID) -}}
+    {{ $pages = (where $pages ".Parent.File" "!=" nil) -}}
+    {{ if $page.File -}}
+        {{ $pages = (where $pages "Parent.File.UniqueID" "==" $page.File.UniqueID) -}}
     {{ end -}}
-    {{ if or $parent.Params.no_list (eq (len $pages) 0) -}}
+    {{ if or $page.Params.no_list (eq (len $pages) 0) -}}
     {{/* If no_list is true or we don't have subpages we don't show a list of subpages */}}
-    {{ else if $parent.Params.simple_list -}}
+    {{ else if $page.Params.simple_list -}}
     {{/* If simple_list is true we show a bulleted list of subpages */}}
         <ul>
             {{ range $pages -}}

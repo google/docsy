@@ -33,8 +33,9 @@
 {{- else -}}
 
   {{ with .Site.Copyright -}}
+    {{/* For historical reasons we process this as HTML rather than markdown. */ -}}
     <span class="td-footer__copyright">
-      {{- . | $page.RenderString -}}
+      {{- . | safeHTML -}}
     </span>
   {{- end -}}
 

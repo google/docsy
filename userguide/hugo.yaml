@@ -43,8 +43,11 @@ markup:
     renderer:
       unsafe: true
   highlight:
-    noClasses: false
-    style: tango
+    # In support of dark mode:
+    noClasses: false # Require that Chroma style using classes
+    # style: tango # FIXME(@chalin): remove this line once the auto-generation of the CSS styles is setup
+    # When noClasses is false, the style is defined via CSS. For details, see:
+    # https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 
 params:
   copyright:
@@ -55,7 +58,7 @@ params:
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
-  version: 0.9.1
+  version: 0.10.0
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy

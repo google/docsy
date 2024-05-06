@@ -47,8 +47,8 @@
   blockquote {
     padding: 0 0 0 1rem;
     margin-bottom: $spacer;
-    color: $gray-600;
-    border-left: 6px solid $secondary;
+    color: var(--bs-secondary-color);
+    border-left: 6px solid var(--bs-primary);
   }
 
   ul li,

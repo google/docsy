@@ -73,7 +73,6 @@ If you've just spotted something you'd like to change while using the docs, Docs
 1. If you don't already have an up to date fork of the project repo, you are prompted to get one - click **Fork this repository and propose changes** or **Update your Fork** to get an up to date version of the project to edit. The appropriate page in your fork is displayed in edit mode.
 1. Follow the rest of the [Quick start with Netlify](#quick-start-with-netlify) process above to make and preview your changes.
 
-
 ### Previewing your changes locally
 
 If you want to run your own local Hugo server to preview your changes as you work:
@@ -93,7 +92,9 @@ If you want to run your own local Hugo server to preview your changes as you wor
     hugo server --themesDir ../..
     ```
 
-    By default your site will be available at http://localhost:1313/. Now that you're serving your site locally, Hugo will watch for changes to the content and automatically refresh your site.
+    By default your site will be available at <http://localhost:1313/>. Now that
+    you're serving your site locally, Hugo will watch for changes to the content
+    and automatically refresh your site.
 
 1. Continue with the usual GitHub workflow to edit files, commit them, push the
   changes up to your fork, and create a pull request.
@@ -133,7 +134,7 @@ locally with Docker, without installing any additional dependencies.
       DOCSY_USER=$(id -u):$(id -g) docker-compose up
       ```
 
-Open `http://localhost:1313` in your web browser to load the docsy user guide.
+Open <http://localhost:1313> in your web browser to load the docsy user guide.
 In most cases, docsy will automatically reload the site to reflect any changes
 to the documentation or the code. Changes to some parts of the docsy code may
 require manually reloading the page or re-starting the container.
@@ -143,8 +144,39 @@ Press **Ctrl + C** to stop the container.
 [docker]: https://docs.docker.com/get-docker/
 [docker-compose]: https://docs.docker.com/compose/install/
 
+### User guide formatting
+
+We use [Prettier](https://prettier.io) to format the markdown source of the User
+Guide. To to check the formatting of your documentation changes, use the
+following command:
+
+```bash
+npm run check:format
+```
+
+To automatically fix formatting issues, run `npm run fix:format`.
+
+Prettier doesn't currently understand Hugo template language directives,
+so you might need to bracket such directives using the following ignore
+directives:
+
+```go-html-template
+<!-- prettier-ignore-start -->
+{{</* tabpane */>}}
+...
+{{</* /tabpane */>}}
+<!-- prettier-ignore-end -->
+```
+
+You can use these ignore directives to surround any markdown that you'd like
+Prettier to ignore. If the region is a contiguous block of text, then you can
+omit the end directive and replace the start directive with
+`prettier-ignore-start`.
+
 ### Creating an issue
 
-If there's something you'd like to see in the docs, but you're not sure how to fix it yourself, please create an issue in [this repository](https://github.com/google/docsy). You can also create an issue about a specific page by clicking the **Create Issue** button in the top right hand corner of the page.
-
-
+If there's something you'd like to see in the docs, but you're not sure how to
+fix it yourself, please create an issue in [this
+repository](https://github.com/google/docsy). You can also create an issue about
+a specific page by clicking the **Create Issue** button in the top right hand
+corner of the page.
