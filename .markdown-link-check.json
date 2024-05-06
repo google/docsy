@@ -1,0 +1,19 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://badges.netlify.com/api/docsydocs.svg\\?branch=main"
+    },
+    {
+      "pattern": "^https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish"
+    },
+    {
+      "pattern": "^#070$"
+    }
+  ],
+  "timeout": "3s",
+  "retryOn429": true,
+  "aliveStatusCodes": [200, 206]
+}

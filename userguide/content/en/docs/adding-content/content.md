@@ -34,7 +34,7 @@ If you've copied the example site, you already have appropriately named top-leve
 
 If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/amazing` and want one or more pages in that custom section to use Docsy's `docs` template, you add `type: docs` to the frontmatter of each page:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -79,7 +79,7 @@ Since Hugo 0.76, this has become practical without copying layouts to your site,
 
 For example, for the `/news/` section, you can specify the following front matter in the index page which will change the type of the section and everything below it to "blog":
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -126,7 +126,7 @@ cascade:
 
 If you want to create a "docs" site, specifying something like the following in the top level `_index.md` will set all top level sections to be treated as "docs", except for "news":
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -192,7 +192,7 @@ Each page file in a Hugo site has metadata frontmatter that tells Hugo about the
 
 For example, here's the frontmatter for this page:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -235,23 +235,23 @@ As of version 0.100, [Goldmark](https://github.com/yuin/goldmark/) is the only M
 
 <h4 class="alert-heading">Tip</h4>
 
-If you've been using versions of Hugo before 0.60 that use [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser, you may need to make some small changes to your site to work with the current `Goldmark` Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `config.toml`/`config.yaml`/`config.json` to allow Goldmark to render raw HTML as well as Markdown:
+If you've been using versions of Hugo before 0.60 that use [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser, you may need to make some small changes to your site to work with the current `Goldmark` Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json` to allow Goldmark to render raw HTML as well as Markdown:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 markup:
   goldmark:
     renderer:
       unsafe: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "markup": {
     "goldmark": {
@@ -320,7 +320,7 @@ By default a docs section landing page (the `_index.md` or `_index.html` in the 
 
 To display a simple bulleted list of links to the section's pages instead, specify `simple_list: true` in the landing page's frontmatter:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -347,7 +347,7 @@ weight: 20
 
 To display no links at all, specify `no_list: true` in the landing page's frontmatter:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -376,9 +376,9 @@ weight: 20
 
 Docsy's `blog` layout also gives you a left nav menu (like the `docs` layout), and a list-type index page for your blog that's applied to `/blog/_index.md` and automatically displays snippets of all your recent posts in reverse chronological order.
 
-To create different blog categories to organize your posts, create subfolders in `blog/`. For instance, in our [example site](https://github.com/google/docsy-example/tree/master/content/en/blog) we have `news` and `releases`. Each category needs to have its own `_index.md` or `_index.html` landing page file specifying the category title for it to appear properly in the left nav and top-level blog landing page. Here's the index page for `releases`:
+To create different blog categories to organize your posts, create subfolders in `blog/`. For instance, in our [example site](https://github.com/google/docsy-example/tree/main/content/en/blog) we have `news` and `releases`. Each category needs to have its own `_index.md` or `_index.html` landing page file specifying the category title for it to appear properly in the left nav and top-level blog landing page. Here's the index page for `releases`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -405,7 +405,7 @@ weight: 20
 
 To add author and date information to blog posts, add them to the page frontmatter:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -478,11 +478,11 @@ If you've just used the theme, you can still use all Docsy's provided [page bloc
 
 ## Adding a community page
 
-The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `config.toml`/`config.yaml`/`config.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
+The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `hugo.toml`/`hugo.yaml`/`hugo.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
@@ -493,7 +493,7 @@ The `community` landing page template has boilerplate content that's automatical
 [[params.links.user]]
 	name ="Twitter"
 	url = "https://example.org/twitter"
-	icon = "fab fa-twitter"
+	icon = "fab fa-x-twitter"
         desc = "Follow us on Twitter to get the latest news!"
 [[params.links.user]]
 	name = "Stack Overflow"
@@ -517,7 +517,7 @@ The `community` landing page template has boilerplate content that's automatical
 	icon = "fa fa-envelope"
         desc = "Discuss development issues around the project"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   links:
     user:
@@ -527,7 +527,7 @@ params:
         desc: Discussion and help from your fellow users
       - name: Twitter
         url: 'https://example.org/twitter'
-        icon: fab fa-twitter
+        icon: fab fa-x-twitter
         desc: Follow us on Twitter to get the latest news!
       - name: Stack Overflow
         url: 'https://example.org/stack'
@@ -547,7 +547,7 @@ params:
         icon: fa fa-envelope
         desc: Discuss development issues around the project
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "links": {
@@ -561,7 +561,7 @@ params:
         {
           "name": "Twitter",
           "url": "https://example.org/twitter",
-          "icon": "fa-brands fa-twitter",
+          "icon": "fa-brands fa-x-twitter",
           "desc": "Follow us on Twitter to get the latest news!"
         },
         {
@@ -609,42 +609,48 @@ You can also use this directory for other files used by your project, including 
 
 ## RSS feeds
 
-Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `config.toml`/`config.yaml`/`config.json`. This is the default configuration:
+Hugo will, by default, create an RSS feed for the home page and any section. For the main RSS feed you can control which sections to include by setting a site param in your `hugo.toml`/`hugo.yaml`/`hugo.json`. This is the default configuration:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 rss_sections = ["blog"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-rss_sections:
-  - blog
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  rss_sections: [blog]
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "rss_sections": [
-    "blog"
-  ]
+  "params": {
+    "rss_sections": [
+      "blog"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
 
-To disable all RSS feeds, add the following to your `config.toml`/`config.yaml`/`config.json`:
+To disable all RSS feeds, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 disableKinds = ["RSS"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-disableKinds:
-  - RSS
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  disableKinds: [RSS]
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "disableKinds": [
-    "RSS"
-  ]
+  "params": {
+    "disableKinds": [
+      "RSS"
+      ]
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -654,22 +660,22 @@ disableKinds:
 
 <h4 class="alert-heading">Note</h4>
 
-If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `config.toml`/`config.yaml`/`config.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `config.toml`/`config.yaml`/`config.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
+If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `hugo.toml`/`hugo.yaml`/`hugo.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [outputs]
 section = [ "HTML", "RSS", "print" ]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 outputs:
   section:
     - HTML
     - RSS
     - print
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "outputs": {
     "section": [
@@ -687,23 +693,23 @@ outputs:
 
 Hugo creates a `sitemap.xml` file for your generated site by default: for example, [here's the sitemap](/sitemap.xml) for this site.
 
-You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `config.toml`/`config.yaml`/`config.json`:
+You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [sitemap]
   changefreq = "monthly"
   filename = "sitemap.xml"
   priority = 0.5
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 sitemap:
   changefreq: monthly
   filename: sitemap.xml
   priority: 0.5
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "sitemap": {
     "changefreq": "monthly",
@@ -716,7 +722,7 @@ sitemap:
 
 To override any of these values for a given page, specify it in page frontmatter:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
