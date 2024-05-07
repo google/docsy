@@ -55,10 +55,10 @@ dark-mode support][dark-mode].
   changes** in [Color themes and dark-mode support][dark-mode].
 
 [#1952]: https://github.com/google/docsy/pull/1952
-[0.10.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.10.0
-[0.10.0 release report]: https://www.docsy.dev/blog/?FIXME=2024/0.10.0/
+[0.10.0]: https://github.com/google/docsy/releases/v0.10.0
+[0.10.0 release report]: https://www.docsy.dev/blog/2024/0.10.0/
 [dark-mode]:
-  https://www.docsy.dev/blog/?FIXME=/2024/0.10.0/#color-themes-and-dark-mode-support
+  https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support
 
 ## 0.9.1
 
