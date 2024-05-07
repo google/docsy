@@ -306,6 +306,8 @@ description: Reference for the Pet Store API
 
 With this shortcode you can embed external content into a Docsy page as an inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
 
+{{< iframe src="https://example.com" >}}
+
 | Parameter        | Default    | Description  |
 | ---------------- |------------| ------------|
 | src | | URL of external content
