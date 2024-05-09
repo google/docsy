@@ -1,9 +1,8 @@
 baseURL: https://www.docsy.dev/
-title: &title Docsy
-description: &desc Docsy does docs
+title: Docsy
 enableRobotsTXT: true
-theme: [docsy]
 enableGitInfo: true
+theme: [docsy]
 
 pygmentsCodeFences: true
 pygmentsUseClasses: false
@@ -32,8 +31,7 @@ languages:
   en:
     languageName: English
     params:
-      title: *title
-      description: *desc
+      description: Docsy does docs
 
 markup:
   goldmark:
