@@ -2,8 +2,35 @@
 {{/* Class names ending with `--KIND` are deprecated in favor of `__KIND`, but we're keeping them for a few releases after 0.9.0 */ -}}
 
 {{ if .File -}}
+{{ $file_path := strings.TrimPrefix hugo.WorkingDir $.File.Filename -}}
+{{ $file_path := strings.TrimPrefix "/" $file_path -}}
+
+{{ $git_repo := $.Param "repo.url" -}}
+{{ $git_branch := $.Param "repo.branch" | default "main" -}}
+{{ $git_subdir := $.Param "repo.subdir" | default "" -}}
+{{ $git_project_repo := $.Param "repo.project_repo" -}}
 <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
   {{ partial "repo-links-github-deprecated.html" . -}}
+  {{- /* Adjust $file_path based on path_base_for_subdir */ -}}
+  {{ $git_path_replace_from := $.Param "repo.path_base_for_subdir" -}}
+  {{ $git_path_replace_to := "" -}}
+  {{ if reflect.IsMap $git_path_replace_from -}}
+    {{ $git_path_replace_to = $git_path_replace_from.to -}}
+    {{ $git_path_replace_from = $git_path_replace_from.from -}}
+  {{ end -}}
+  {{ $git_path := $file_path }}
+  {{ with $git_path_replace_from -}}
+    {{ $git_path = replaceRE . $git_path_replace_to $file_path -}}
+  {{ end -}}
+  {{ $git_repo_path := path.Join $git_subdir $file_path -}}
+
+  {{ $repo := (dict "repo_branch" $git_branch
+                    "repo_path" $git_repo_path
+                    "repo" ($.Param "repo")
+                    "context" .) -}}
+{{ with $.Param "repo.type" -}}
+  {{ partial ( printf "repo-links-%s.html" . ) $repo  -}}
+{{ end -}}
 {{ with .CurrentSection.AlternativeOutputFormats.Get "print" -}}
   <a id="print" href="{{ .RelPermalink | safeURL }}"><i class="fa-solid fa-print fa-fw"></i> {{ T "print_entire_section" }}</a>
 {{ end }}
