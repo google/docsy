@@ -1,15 +1,15 @@
 {
   "name": "docsy-user-guide",
   "scripts": {
-    "_build": "npm run _hugo-dev",
+    "_build": "npm run _hugo-dev --",
     "_check:format": "npx prettier --check .",
     "_check:links": "make check-links",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_serve": "npm run _hugo-dev -- --minify serve",
-    "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-/}\"",
+    "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
-    "build": "npm run _build",
+    "build": "npm run _build --",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links:all": "HTMLTEST_ARGS= npm run _check:links",
     "check:links": "npm run _check:links",
@@ -23,7 +23,7 @@
     "prepare": "cd .. && npm install",
     "serve": "npm run _serve",
     "test": "npm run check:links",
-    "update:pkg:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest"
+    "update:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
