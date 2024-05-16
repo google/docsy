@@ -18,10 +18,10 @@
 snappier to develop in Chrome, but makes it look sub-optimal in other browsers.
 */ -}}
 
+<link href="{{ $css.RelPermalink }}" rel="stylesheet">
+
 {{ with $rtlCSS -}}
   <link href="{{ $rtlCSS.RelPermalink }}" rel="stylesheet">
 {{ end -}}
-
-<link href="{{ $css.RelPermalink }}" rel="stylesheet">
 
 {{- /**/ -}}
