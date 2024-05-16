@@ -31,8 +31,8 @@
     "serve": "npm run cd:docs serve",
     "test:all": "npm run ci:prepare && npm run check && npm run cd:docs test && npm run ci:post",
     "test": "npm run cd:docs test",
-    "update:pkg:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:pkg:hugo": "npm install --save-exact -D hugo-extended@latest"
+    "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
+    "update:hugo": "npm install --save-exact -D hugo-extended@latest"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "dependencies": {
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "github:chalin/hugo-extended#v0.125.7",
-    "markdown-link-check": "^3.11.2",
+    "hugo-extended": "0.126.1",
+    "markdown-link-check": "^3.12.1",
     "mkdirp": "^3.0.1",
     "prettier": "^3.2.5"
   },
