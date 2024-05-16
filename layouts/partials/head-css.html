@@ -1,11 +1,27 @@
+{{ $scssMain := "scss/main.scss" -}}
+{{ $css := resources.Get $scssMain
+      | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
+{{ $rtlCSS :=
+    cond (eq .Site.Language.LanguageDirection "rtl")
+        (resources.Get "vendor/bootstrap/dist/css/bootstrap.rtl.css")
+        nil -}}
 
-{{ $scssMain := "scss/main.scss"}}
-{{ if not hugo.IsProduction }}
-{{/* Note the missing postCSS. This makes it snappier to develop in Chrome, but makes it look sub-optimal in other browsers. */}}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" true) }}
+{{ if hugo.IsProduction -}}
+  {{ with $rtlCSS -}}
+    {{ $rtlCSS = . | postCSS | minify | fingerprint -}}
+  {{ end -}}
+  {{ $css   = $css | postCSS | minify | fingerprint -}}
+  <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+{{- end -}}
+
+{{/* NOTE: when not in production, we don't apply `postCSS`. This makes it
+snappier to develop in Chrome, but makes it look sub-optimal in other browsers.
+*/ -}}
+
 <link href="{{ $css.RelPermalink }}" rel="stylesheet">
-{{ else }}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" false) | postCSS | minify | fingerprint }}
-<link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
-{{ end }}
+
+{{ with $rtlCSS -}}
+  <link href="{{ $rtlCSS.RelPermalink }}" rel="stylesheet">
+{{ end -}}
+
+{{- /**/ -}}
