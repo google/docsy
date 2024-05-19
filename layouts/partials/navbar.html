@@ -6,7 +6,7 @@
 
 <nav class="td-navbar js-navbar-scroll
             {{- if $cover }} td-navbar-cover {{- end }}" data-bs-theme="dark">
-<div class="container-fluid flex-column flex-md-row">
+<div class="container-fluid">
   <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
     {{- /**/ -}}
     <span class="navbar-brand__logo navbar-logo">
@@ -22,8 +22,8 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
-    <ul class="navbar-nav">
+  <div class="td-navbar-nav-scroll w-100" id="main_navbar">
+    <ul class="navbar-nav justify-content-end">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
       <li class="nav-item">
