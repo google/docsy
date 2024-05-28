@@ -110,7 +110,7 @@ so that code-block styles are compatible with light/dark mode:
 
 - Ensure that `markup.highlight.noClasses` is `false` in your project config.
   For details about this option, see [Generate syntax highlighter CSS].
-- Add `@import 'code-dark'` to your project's [`_styles_project.scss`] file.
+- Add `@import 'td/code-dark'` to your project's [`_styles_project.scss`] file.
 
 For details, see [Chroma for code highlighting].
 
