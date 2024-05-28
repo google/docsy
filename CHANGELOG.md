@@ -28,9 +28,13 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **New**:
 
+- Support for Right-To-Left (RLT) languages is reintroduced via [Bootstrap's
+  base support for RTL][bs-rtl].
+
 **Other changes**:
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
 
 ## 0.10.0
 
