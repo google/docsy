@@ -1,16 +1,24 @@
 {{ $scssMain := "scss/main.scss" -}}
 {{ $css := resources.Get $scssMain
       | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
-{{ $rtlCSS :=
-    cond (eq .Site.Language.LanguageDirection "rtl")
-        (resources.Get "vendor/bootstrap/dist/css/bootstrap.rtl.css")
-        nil -}}
+{{ $bsRtlCss := "vendor/bootstrap/dist/css/bootstrap.rtl.css" -}}
+{{ $rtlCSS := "" -}}
+
+{{ if eq .Site.Language.LanguageDirection "rtl" -}}
+  {{ with resources.Get $bsRtlCss -}}
+    {{ $rtlCSS = . -}}
+  {{ else -}}
+    {{ $msg := printf "Resource not found: %s" $bsRtlCss -}}
+    {{ warnf $msg -}}
+    <meta name="docsy-info" content="{{ $msg }}">
+  {{ end -}}
+{{ end -}}
 
 {{ if hugo.IsProduction -}}
   {{ with $rtlCSS -}}
     {{ $rtlCSS = . | postCSS | minify | fingerprint -}}
   {{ end -}}
-  {{ $css   = $css | postCSS | minify | fingerprint -}}
+  {{ $css = $css | postCSS | minify | fingerprint -}}
   <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
 {{- end -}}
 
@@ -18,7 +26,11 @@
 snappier to develop in Chrome, but makes it look sub-optimal in other browsers.
 */ -}}
 
-<link href="{{ $css.RelPermalink }}" rel="stylesheet">
+{{ with $css -}}
+  <link href="{{ .RelPermalink }}" rel="stylesheet">
+{{ else -}}
+  {{ errorf "Resource not found: %s" $scssMain -}}
+{{ end -}}
 
 {{ with $rtlCSS -}}
   <link href="{{ $rtlCSS.RelPermalink }}" rel="stylesheet">
