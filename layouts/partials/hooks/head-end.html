@@ -1,0 +1,26 @@
+{{ with .Params.canonical_url -}}
+
+<link rel="canonical" href="{{ . }}">
+
+{{- else -}}
+
+  {{ $canonicalURL := .Permalink -}}
+
+  {{ $defaultLang := "en" -}}
+  {{ if and (ne .Language.Lang $defaultLang) .File -}}
+    <!-- If the page is not in the default language section, Extract the path of the current page relative to the content directory -->
+    {{ $pagePath := strings.TrimPrefix (add hugo.WorkingDir "/content/") .File.Filename -}}
+    {{ if hasPrefix $pagePath $defaultLang -}}
+
+      <!-- If it's a default-language fallback page, use the permalink of the origin page as canonical -->
+
+      {{ $translationPages := where .Translations "Lang" $defaultLang -}}
+      {{ $translation := index $translationPages 0 -}}
+      {{ with $translation -}}
+        {{ $canonicalURL = .Permalink -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+  <link rel="canonical" href="{{ $canonicalURL }}">
+
+{{- end -}}
