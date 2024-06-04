@@ -34,7 +34,7 @@
     "test": "npm run cd:docs test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkgs": "npx npm-check-updates -u"
+    "update:pkgs": "npx npm-check-updates -u && npm run cd:docs update:pkgs"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "dependencies": {
