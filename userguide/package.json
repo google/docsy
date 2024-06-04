@@ -22,7 +22,7 @@
     "postbuild:production": "npm run _check:links",
     "prepare": "cd .. && npm install",
     "serve": "npm run _serve",
-    "test": "npm run check:links",
+    "test": "npm run check:format && npm run check:links",
     "update:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest"
   },
   "devDependencies": {
