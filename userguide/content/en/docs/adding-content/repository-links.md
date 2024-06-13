@@ -15,13 +15,15 @@ The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-
 
 This page shows you how to configure these links.
 
-Currently, Docsy supports only GitHub repository links "out of the box". Since GitLab can handle the same link scheme, it should work as well. If you are using another repository such as Bitbucket and would like generated repository links, feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
+Currently, Docsy supports GitHub and Azure Devops repository links "out of the box". Since GitLab can handle the same link scheme, it should work as well. If you are using another repository such as Bitbucket and would like generated repository links, feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
 
 ## Link configuration
 
 There are four site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as one in your page metadata.
 
-### `github_repo`
+### Github
+
+#### `github_repo`
 
 The URL for your site's source repository. This is used to generate the **Edit this page**, **Create child page**, and **Create documentation issue** links.
 
@@ -44,7 +46,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### `github_subdir` (optional)
+#### `github_subdir` (optional)
 
 Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the `userguide` subdirectory of its repo. Setting this value means that your edit links will go to the right page.
 
@@ -67,7 +69,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### `github_project_repo` (optional)
+#### `github_project_repo` (optional)
 
 Specify a value here if you have a separate project repo and you'd like your users to be able to create issues against your project from the relevant docs. The **Create project issue** link appears only if this is set.
 
@@ -90,7 +92,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### `github_branch` (optional)
+#### `github_branch` (optional)
 
 Specify a value here if you have would like to reference a different branch for the other github settings like **Edit this page** or **Create project issue**.
 
@@ -113,7 +115,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### `path_base_for_github_subdir` (optional)
+#### `path_base_for_github_subdir` (optional)
 
 Suppose that the source files for all of the pages under `content/some-section`
 come from another repo, such as a [git submodule][]. Add settings like these to
@@ -285,7 +287,7 @@ path_base_for_github_subdir:
 {{< /tab >}}
 {{< /tabpane >}}
 
-### `github_url` (optional)
+#### `github_url` (optional)
 
 {{% alert title="Deprecation note" color="warning" %}}
   This setting is deprecated. Use [path_base_for_github_subdir][] instead.
@@ -323,6 +325,65 @@ github_url: https://github.com/some-username/another-repo/edit/main/README.md
 This can be useful if you have page source files in multiple Git repositories,
 or require a non-GitHub URL. Pages using this value have **Edit this page**
 links only.
+
+### Azure Devops
+
+#### `azure_repo`
+
+The URL for your site's source repository. This is used to generate the **Edit this page**, **Create child page**, and **Create documentation issue** links.
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+azure_repo = "https://dev.azure.com/google/docsy/_git/docsy"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+azure_repo: 'https://dev.azure.com/google/docsy/_git/docsy'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "azure_repo": "https://dev.azure.com/google/docsy/_git/docsy"
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+#### `azure_subdir` (optional)
+
+Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the `userguide` subdirectory of its repo. Setting this value means that your edit links will go to the right page.
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+azure_subdir = "userguide"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+azure_subdir: 'userguide'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "azure_subdir": "userguide"
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+#### `azure_project_repo` (optional)
+
+Specify a value here if you have a separate project repo and you'd like your users to be able to create issues against your project from the relevant docs. The **Create project issue** link appears only if this is set.
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="config.toml" lang="toml" >}}
+azure_project_repo = "https://dev.azure.com/google/docsy/_git/docsy"
+{{< /tab >}}
+{{< tab header="config.yaml" lang="yaml" >}}
+azure_project_repo: 'https://dev.azure.com/google/docsy/_git/docsy'
+{{< /tab >}}
+{{< tab header="config.json" lang="json" >}}
+{
+  "azure_project_repo": "https://dev.azure.com/google/docsy/_git/docsy"
+}
+{{< /tab >}}
+{{< /tabpane >}}
 
 ### Disabling links
 
