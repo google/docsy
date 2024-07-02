@@ -1,0 +1,20 @@
+{{/* cSpell:ignore querify subdir */ -}}
+{{/* Class names ending with `--KIND` are deprecated in favor of `__KIND`, but we're keeping them for a few releases after 0.9.0 */ -}}
+
+{{ $viewURL := path.Join .repo.url "/tree" .repo_branch .repo_path -}}
+{{ $editURL := path.Join .repo.url "/edit" .repo_branch .repo_path -}}
+{{ $issuesQS := printf "issue[title]=%s" (safeURL $.context.Title) -}}
+{{ $issuesURL := path.Join .repo.url "/issues/new" -}}
+{{ $issuesURL = printf "%s?%" $issuesURL $issuesQS -}}
+{{ $newPageStub := resources.Get "stubs/new-page-template.md" -}}
+{{ $newPageQS := querify "value" $newPageStub.Content "filename" "change-me.md" | safeURL -}}
+{{ $newPageURL := path.Join .repo.url "/new" .repo_branch (path.Dir .repo_path) -}}
+{{ $newPageURL = printf "%s?%s" $newPageURL $newPageQS -}}
+<a href="{{ $viewURL }}" class="td-page-meta--view td-page-meta__view" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines fa-fw"></i> {{ T "post_view_this" }}</a>
+<a href="{{ $editURL }}" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
+<a href="{{ $newPageURL }}" class="td-page-meta--child td-page-meta__child" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_create_child_page" }}</a>
+<a href="{{ $issuesURL }}" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_issue" }}</a>
+{{ with .repo.project_url -}}
+  {{ $project_issueURL := printf "%s/issues/new" . -}}
+  <a href="{{ $project_issueURL }}" class="td-page-meta--project td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+{{ end -}}
