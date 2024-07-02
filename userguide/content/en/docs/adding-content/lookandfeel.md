@@ -552,7 +552,7 @@ body_class : myclass anotherclass
 {{< /tab >}}
 {{< /tabpane >}}
 
-The output will look like:
+The page's opening body tag will look like this (assuming it is a section page):
 
 ```html
 <body class="td-section myclass anotherclass">
