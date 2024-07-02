@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore deining docsy gtag lookandfeel navs
+  cSpell:ignore deining docsy gitmodules gtag lookandfeel mhchem navs tabpane
 -->
 
 # Changelog
@@ -11,28 +11,165 @@ notes][releases].
 Useful links:
 
 - [Releases] & [tags]. Jump to the [latest] release.
-- [23Q4] milestone
+- [Milestones]
 
-[23q4]: https://github.com/google/docsy/milestone/9
 [latest]: https://github.com/google/docsy/releases/latest
+[milestones]: https://github.com/google/docsy/milestones
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.8.0 - next major release (unpublished yet)
+## 0.10.1 or 0.11.0
 
-For the full list of changes, see the [release][0.8.0] notes.
+> ### UNRELEASED: this planned version is still under development
+
+For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
 **New**:
 
+- Support for Right-To-Left (RLT) languages is reintroduced via [Bootstrap's
+  base support for RTL][bs-rtl].
+
 **Other changes**:
 
-[0.8.0]: https://github.com/google/docsy/releases/v0.8.0/#FIXME
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
+
+## 0.10.0
+
+For an introduction to this release, see the [0.10.0 release report]. For the
+full list of changes, see the [0.10.0] release notes.
+
+**New**: color themes and dark-mode support! For details, see [Color themes and
+dark-mode support][dark-mode].
+
+**Breaking changes**:
+
+- Removes shortcode `card-code` that was [deprecated in 0.7.0](#070); use
+  shortcode `card` with named parameter `code=true` instead.
+- The following SCSS variables are inlined in favor of dark-mode compatible
+  styling: `$border-color`, `$td-sidebar-tree-root-color`,
+  `$td-sidebar-bg-color`, `$td-sidebar-border-color` ([#1952])
+
+**Style changes** (potentially breaking):
+
+- The style of various shortcode and elements have been adjusted so that they
+  are compatible with light/dark mode. For details see, **Important style
+  changes** in [Color themes and dark-mode support][dark-mode].
+
+[#1952]: https://github.com/google/docsy/pull/1952
+[0.10.0]: https://github.com/google/docsy/releases/v0.10.0
+[0.10.0 release report]: https://www.docsy.dev/blog/2024/0.10.0/
+[dark-mode]:
+  https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support
+
+## 0.9.1
+
+Patch release. For details, see [0.9.1].
+
+[0.9.1]: https://github.com/google/docsy/releases/v0.9.1
+
+## 0.9.0
+
+For an introduction and commentary, see the [0.9.0 release report]. For the full
+list of commits, see the [0.9.0] release notes. The most significant changes of
+this release are listed next.
+
+**Breaking changes**:
+
+- **[Repository Links]** now work for [multi-language] sites ([#1744]).
+
+  For any given page, repository links are now computed from a page's _resolved_
+  `File` path &mdash; as resolved _through_ mount points, if any. That is, the
+  path used is the one that refers to the file's actual location on disk, not
+  it's logical path in Hugo's [union file system].
+
+  This is a breaking change for pages of sites that use mounts and
+  [path_base_for_github_subdir]. Projects will need to adjust the value of
+  [path_base_for_github_subdir] to be relative to the file's physical location.
+
+- Class names to disable [repository links] were misnamed with a suffix of the form
+  `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
+
+- **Heading self-link** support has been reimplemented and projects must now
+  explicitly enable the feature. For details, see [Heading self links].
+
+**Footer changes**: refactoring, for easier customization, and simplification.
+For details concerning all footer changes, see [#1818].
+
+- **Footer layout** has been factored into parts: _left_, _right_, and _center_,
+  with _copyright_ a subpart of center. For details see [Footer layout]
+- **Footer copyright**, supports date-range, and site copyright fallback. For
+  details, see [Footer copyright].
+- **Footer streamlined**: the About-page footer link and All-rights-reserved
+  text are now hidden by default. For details, see [Footer streamlined].
+
+**Other changes**:
+
+- The latest release of **[Mermaid] resources** are now fetched at build time
+  ([#1410]).
+- [Look and feel] updates.
+
+[0.9.0]: https://github.com/google/docsy/releases/v0.9.0
+[0.9.0 release report]: https://www.docsy.dev/blog/2024/0.9.0/
+[#1410]: https://github.com/google/docsy/pull/1410
+[#1744]: https://github.com/google/docsy/pull/1744
+[#1818]: https://github.com/google/docsy/pull/1818
+[disabling links]:
+  https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
+[Footer layout]: https://www.docsy.dev/blog/2024/0.9.0/#footer-layout
+[Footer copyright]: https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright
+[Footer streamlined]: https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined
+[Heading self links]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
+[look and feel]: https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel
+[mermaid]:
+  https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
+[multi-language]: https://www.docsy.dev/docs/language/
+[path_base_for_github_subdir]:
+  https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
+[Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
+[union file system]:
+  https://gohugo.io/getting-started/directory-structure/#union-file-system
+
+## 0.8.0
+
+For the full list of changes, see the [0.8.0] release notes.
+
+**Breaking changes**:
+
+- Docsy is packaged as a **single Hugo module** ([#1120]).
+  - For details, see [Use Docsy as a Hugo Module].
+- **Important**: non-Hugo-module projects should read the [Docsy NPM install
+  side-effect] note.
+- **Page feedback**, or [User feedback]:
+  - In support of projects configuring analytics outside of Docsy, feedback
+    functionality is enabled regardless of whether
+    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
+  - Feedback-event attribute changes ([#1726]):
+    - Event `name` is `page_helpful`rather than`click`
+    - Event `value` for "yes" is 100 by default, rather than 1, allowing for
+      more response options in the future. To override the default set
+      `params.ui.feedback.max_value`.
+- SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
+  have been dropped. Instead use the more general SASS/SCSS list `join()`
+  function ([#1385]).
+
+[#1120]: https://github.com/google/docsy/issues/1120
+[#1385]: https://github.com/google/docsy/issues/1385
+[#1726]: https://github.com/google/docsy/pull/1726
+[#1727]: https://github.com/google/docsy/pull/1727
+[0.8.0]: https://github.com/google/docsy/releases/v0.8.0
+[Docsy NPM install side-effect]:
+  https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
+[Use Docsy as a Hugo Module]:
+  https://www.docsy.dev/docs/get-started/docsy-as-module/
+[User feedback]:
+  https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
 
 ## 0.7.2
 
-For the full list of changes, see the [release][0.7.2] notes. We mention some
+For the full list of changes, see the [0.7.2] release notes. We mention some
 noteworthy changes here:
 
 - **Algolia**
@@ -40,8 +177,12 @@ noteworthy changes here:
     the top and left navs).
   - [#1662] DocSearch is supported by Docsy through site config.
   - For details, see [Algolia DocSearch].
-- **Tabpane** shortcode: some improvements, with more to come; for details, see
-  [#1641].
+- **[Tabbed panes]**:
+  - `persistLang` is deprecated, use `persist` instead
+  - Persistence is enabled by default (independent of the old `persistLang`
+    parameter value) ; to disable use `persist=disabled`
+  - Various fixes and enhancements, with more to come; for details, see [#1641]
+    and [Tabbed panes].
 - **Left-nav**, and **right-nav** (TOC + page meta): spacing issues have been
   resolved; for details, see [#1661].
 
@@ -52,10 +193,12 @@ noteworthy changes here:
 [0.7.2]: https://github.com/google/docsy/releases/v0.7.2
 [Algolia DocSearch]:
   https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
+[Tabbed panes]:
+  https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
 
 ## 0.7.1
 
-For the full list of changes, see the [release][0.7.1] notes.
+For the full list of changes, see the [0.7.1] release notes.
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -70,7 +213,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 ## 0.7.0
 
-For the full list of changes, see the [release][0.7.0] notes.
+For the full list of changes, see the [0.7.0] release notes.
 
 **New**:
 
@@ -94,7 +237,7 @@ For the full list of changes, see the [release][0.7.0] notes.
     extension testing. ([#906])
   - Dropped support for pre-Hugo-0.54.x behavior of `{{% %}}`. ([#939])
   - `blocks/section`: **default** and accepted values of the `type` argument
-    have changed! For details see [blocks/section] ([#1472]).
+    have changed! For details, see [blocks/section] ([#1472]).
   - **Card shortcodes** ([#1376])]:
     - Renamed CSS class `td-card-deck` to `td-card-group`.
     - `card`, `card-code`: markup of inner content (HTML/markdown) now depends
@@ -133,7 +276,7 @@ For the full list of changes, see the [release][0.7.0] notes.
 
 ## 0.6.0
 
-For the full list of changes, see the [release][0.6.0] notes.
+For the full list of changes, see the [0.6.0] release notes.
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -154,7 +297,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 ## 0.5.1
 
-For the full list of changes, see the [release][0.5.1] notes. **BREAKING
+For the full list of changes, see the [0.5.1] release notes. **BREAKING
 CHANGES** are documented below.
 
 **After you update** your project's Docsy:
@@ -176,13 +319,12 @@ CHANGES** are documented below.
   as text.
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
-  how to hide the logo (or your brand name), see [Styling your project logo and
-  name].
+  how to hide the logo (or your brand name), see [Styling your project logo and name].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
   release notes].
-- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the
-  v5 names still work. For details about icon renames and more, see [What's
+- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the v5
+  names still work. For details about icon renames and more, see [What's
   changed].
 - **Search-box**: the HTML structure and class names have changed, due to the
   Font Awesome upgrade, for both online and offline search. This may affect your
@@ -211,7 +353,7 @@ Unpublished.
 
 ## 0.4.0
 
-For the full list of changes, see the [release][0.4.0] notes. Potential
+For the full list of changes, see the [0.4.0] release notes. Potential
 **BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
@@ -263,11 +405,11 @@ Proceed as usual to build or serve your site.
 [hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
 [other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
 [prepare]:
-  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
+  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
 
 ## 0.3.0
 
-For the full list of changes, see the [release][0.3.0] notes.
+For the full list of changes, see the [0.3.0] release notes.
 
 **Breaking changes**:
 
@@ -286,14 +428,13 @@ For the full list of changes, see the [release][0.3.0] notes.
 
 ## 0.2.0
 
-For the full list of changes, see the [release][0.2.0] notes.
+For the full list of changes, see the [0.2.0] release notes.
 
 **New**:
 
-- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated
-  and patient efforts of [@deining], who researched, experimented, and
-  implemented this feature. Thanks to [@deining] and [@LisaFC] for the doc
-  updates.
+- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated and
+  patient efforts of [@deining], who researched, experimented, and implemented this
+  feature. Thanks to [@deining] and [@LisaFC] for the doc updates.
 
   For details, see
   [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
@@ -303,11 +444,13 @@ For the full list of changes, see the [release][0.2.0] notes.
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [hugo modules]: https://gohugo.io/hugo-modules/
 
-<!-- SECTION TEMPLATE ------------------------------------------------------
+<!-- ENTRY TEMPLATE ------------------------------------------------------
 
-## 0.X.Y - next planned release (unpublished yet)
+## 0.X.Y
 
-For the full list of changes, see the [release][0.x.y] notes.
+> ### UNRELEASED: this planned version is still under development
+
+For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
@@ -317,6 +460,6 @@ For the full list of changes, see the [release][0.x.y] notes.
 
 **Other changes**:
 
-[0.x.y]: https://github.com/google/docsy/releases/v0.X.Y-FIXME
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 
 ---------------------------------------------------------------------------->

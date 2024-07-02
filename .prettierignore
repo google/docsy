@@ -1,4 +1,5 @@
 .editorconfig
+.gitattributes
 .gitignore
 .nvmrc
 .prettierignore

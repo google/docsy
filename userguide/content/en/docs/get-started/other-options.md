@@ -15,7 +15,7 @@ submodules also lets Hugo use the theme files from Docsy repo, though is more
 complicated to maintain than the Hugo Modules approach. This is the approach
 used in older versions of the Docsy example site, and is still supported. If you
 are using Docsy as a submodule but would like to migrate to Hugo Modules, see
-our [migration guide]().
+our [migration guide](/docs/updating/convert-site-to-module/).
 
 Alternatively if you don’t want Hugo to have to get the theme files from an
 external repo (for example, if you want to customize and maintain your own copy
@@ -51,7 +51,7 @@ and may not be up-to-date with the most recent Hugo version.
 
 If you've already installed Hugo, check your version:
 
-```
+```sh
 hugo version
 ```
 
@@ -66,18 +66,21 @@ The following shows you how to install Hugo from the release page:
 3.  Download the latest extended version
     (`hugo_extended_0.9X_Linux-64bit.tar.gz`).
 4.  Create a new directory:
-
-        mkdir hugo
+    ```sh
+    mkdir hugo
+    ```
 
 5.  Extract the files you downloaded to `hugo`.
 
 6.  Switch to your new directory:
-
-        cd hugo
+    ```sh
+    cd hugo
+    ```
 
 7.  Install Hugo:
-
-        sudo install hugo /usr/bin
+    ```sh
+    sudo install hugo /usr/bin
+    ```
 
 #### On macOS
 
@@ -90,7 +93,7 @@ You can install Hugo as an NPM module using
 [hugo-extended](https://www.npmjs.com/package/hugo-extended). To install the
 extended version of Hugo:
 
-```
+```sh
 npm install hugo-extended --save-dev
 ```
 
@@ -130,8 +133,8 @@ release][latest-lts].
 
 From your project root, run this command:
 
-```
-npm install --save-dev autoprefixer postcss-cli postcss
+```sh
+npm install --save-dev autoprefixer postcss-cli
 ```
 
 ## Option 1: Docsy as a Git submodule
@@ -190,6 +193,8 @@ If you are using hugo 0.110 or above, consider renaming your `config.toml` to `h
     (cd themes/docsy && npm install)
     ```
 
+    > **Important**: read the [Docsy NPM install side-effect] note.
+
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
     your project's `package.json` file:
@@ -234,6 +239,8 @@ cd docsy
 npm install
 ```
 
+> **Important**: read the [Docsy NPM install side-effect] note.
+
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the `-b v{{% param version
 %}}` argument from the clone command above.
@@ -259,8 +266,10 @@ You can use Docsy as an NPM module as follows:
 2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
 
     ```console
-    npm install --save-dev google/docsy#semver:{{% param version %}} autoprefixer postcss-cli postcss
+    npm install --save-dev google/docsy#semver:{{% param version %}} autoprefixer postcss-cli
     ```
+
+    > **Important**: read the [Docsy NPM install side-effect] note.
 
 3.  Build or serve your new site using the usual Hugo commands, specifying the
     path to the Docsy theme files. For example, build your site as follows:
@@ -289,6 +298,29 @@ pushd themes
 ln -s ../node_modules/docsy
 popd
 ```
+
+## Docsy NPM install side-effect
+
+{{% alert title="Important" color=warning %}}
+
+As of Docsy version [0.8.0], running `npm install` inside the Docsy theme
+directory will create a sibling folder named `github.com`, for example:
+
+```console
+$ ls themes
+docsy                   github.com
+```
+
+This is a workaround necessary to support Docsy's use as a single [Hugo module]
+([#1120]).
+
+[#1120]: https://github.com/google/docsy/issues/1120
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+[hugo module]: /docs/get-started/docsy-as-module/
+
+{{% /alert %}}
+
+[Docsy NPM install side-effect]: #docsy-npm-install-side-effect
 
 ## Preview your site
 
@@ -322,6 +354,6 @@ from scratch as it provides defaults for many required configuration parameters.
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[npm scripts]: https://docs.npmjs.com/cli/v8/using-npm/scripts
+[npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
 [prepare]:
-  https://docs.npmjs.com/cli/v8/using-npm/scripts#prepare-and-prepublish
+  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish

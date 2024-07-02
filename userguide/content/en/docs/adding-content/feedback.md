@@ -33,41 +33,21 @@ started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
 Enable Google Analytics by adding your project's analytics ID to the site
 configuration file. For details, see [Configure Google Analytics][].
 
-By default, Docsy uses the [gtag.js][] analytics library for both GA4 (which
-_requires_ `gtag.js`) and Universal Analytics (UA) site tags. If you prefer using
-the older `analytics.js` library for your UA site tag, then set
-`params.disableGtagForUniversalAnalytics` to `true` in your project's [configuration file].
-
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params]
-disableGtagForUniversalAnalytics = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  disableGtagForUniversalAnalytics: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "disableGtagForUniversalAnalytics": true
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-
-{{% alert title="Warning" color="warning" %}}
+{{% alert title="Deprecation note and warning" color="warning" %}}
   <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-  You can configure your project's analytics ID by setting either the top-level
-  `googleAnalytics` config parameter or `services.googleAnalytics.id`. **Do not
-  define both,** otherwise this can result in [unexpected behavior][]. For
-  details, see [Is services.googleAnalytics.id an alias for
+  While you can configure your project's analytics ID by setting either the
+  top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
+  **`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and
+  will be removed in a future release.
+
+  **Do not define both parameters,** otherwise this can result in [unexpected
+  behavior][]. For details, see [Is services.googleAnalytics.id an alias for
   googleAnalytics][alias-discussion].
 
   [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
   [unexpected behavior]: https://github.com/google/docsy/issues/921
+  [v0.120.0]: https://github.com/gohugoio/hugo/releases/tag/v0.120.0
 
 {{% /alert %}}
 
@@ -94,7 +74,7 @@ of every documentation page, as shown in Figure 1.
 </figure>
 
 After clicking **Yes** the user should see a response like Figure 2. You can
-[configure] the response text in the project's [configuration file] `hugo.toml`.
+[configure] the response text in your project's [configuration file].
 
 <figure>
   <img src="/images/yes.png"
@@ -132,9 +112,18 @@ other words!
 
 ### Setup
 
-1.  Open `hugo.toml`/`hugo.yaml`/`hugo.json`.
-2.  Ensure that Google Analytics is enabled, as described [above](#setup).
-3.  Set the response text that users see after clicking **Yes** or **No**.
+{{% alert title="Version note" color=warning %}}
+
+As of Docsy version [0.8.0], feedback will be enabled whether
+`site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
+case where analytics is configured outside of Docsy.
+
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+
+{{% /alert %}}
+
+1.  Open your project's Hugo configuration file.
+2.  Set the response text that users see after clicking **Yes** or **No**.
 
     {{< tabpane >}}
     {{< tab header="Configuration file:" disabled=true />}}
@@ -174,45 +163,39 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-4.  Save and close `hugo.toml`/`hugo.yaml`/`hugo.json`.
+3.  Save the edits to your configuration file.
+
+By default, Docsy emits an event value of 100 when a user clicks "yes". You can
+change this value by setting `params.ui.feedback.max_value` to a positive
+integer. Docsy uses 0 for "no" events.
 
 ### Access the feedback data
+
+Page feedback is reported to Google Analytics through [events].
+
+{{% alert title="Version note" color=warning %}}
+
+As of Docsy version [0.8.0], page feedback is reported as custom `page_helpful` events,
+rather than `click` events.
+
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+
+{{% /alert %}}
 
 This section assumes basic familiarity with Google Analytics. For example, you
 should know how to check pageviews over a certain time range and navigate
 between accounts if you have access to multiple documentation sites.
 
 1. Open Google Analytics.
-2. Open **Behavior** > **Events** > **Overview**.
-3. In the **Event Category** table click the **Helpful** row. Click **view full
-   report** if you don't see the **Helpful** row.
-4. Click **Event Label**. You now have a page-by-page breakdown of ratings.
+2. Open **Reports** > **Engagement** > **Events**.
+3. Click **page_helpful** in the events table. If there is no `page_helpful`
+   event, then none have been registered for the selected period. Adjust the
+   period as necessary.
 
-Here's what the 4 columns represent:
+Note that you might be required to create a custom report if you'd like better
+visualize individual data points (per page) along with average values.
 
-- **Total Events** is the total number of times that users clicked _either_
-  **Yes** or **No**.
-- **Unique Events** provides a rough indication of how frequently users are
-  rating your pages per session. For example, suppose your **Total Events** is
-  5000, and **Unique Events** is 2500. This means that you have 2500 users who
-  are rating 2 pages per session.
-- **Event Value** isn't that useful.
-- **Avg. Value** is the aggregated rating for that page. The value is always
-  between 0 and 1. When users click **No** a value of 0 is sent to Google
-  Analytics. When users click **Yes** a value of 1 is sent. You can think of it
-  as a percentage. If a page has an **Avg. Value** of 0.67, it means that 67% of
-  users clicked **Yes** and 33% clicked **No**.
-
-[events]:
-  https://developers.google.com/analytics/devguides/collection/analyticsjs/events
-[pr]: https://github.com/google/docsy/pull/1/files
-
-The underlying Google Analytics infrastructure that stores the "was this page
-helpful?" data is called [Events][events]. See [docsy pull request #1][pr] to
-see exactly what happens when a user clicks **Yes** or **No**. It's just a
-`click` event listener that fires the Google Analytics JavaScript function for
-logging an Event, disables the **Yes** and **No** buttons, and shows the
-response text.
+[events]: https://support.google.com/analytics/answer/9322688
 
 ### Disable feedback on a single page
 

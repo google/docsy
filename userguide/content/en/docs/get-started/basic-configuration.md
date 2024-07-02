@@ -19,18 +19,20 @@ If you don't intend to translate your site, you can remove the language switcher
 
 ```toml
 [languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
+[languages.no.params]
+title = "Goldydocs"
+description = "Docsy er operativsystem for skyen"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 
 [languages.fa]
-title = "اسناد گلدی"
-description = "یک نمونه برای پوسته داکسی"
 languageName ="فارسی"
 contentDir = "content/fa"
+[languages.fa.params]
+title = "اسناد گلدی"
+description = "یک نمونه برای پوسته داکسی"
 time_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
 ```
@@ -41,11 +43,10 @@ By default, the Docsy example site uses its own [Google Custom Search Engine](ht
 
 ```
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+gcs_engine_id = "..."
 ```
 
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/search).
-
+To use your own Custom Search Engine, set `gcs_engine_id` to your search engine ID. For details, see [Configure search with a Google Custom Search Engine](/docs/adding-content/search/#configure-search-with-a-google-custom-search-engine).
 
 ## What's next?
 

@@ -1,5 +1,0 @@
-// Common functions.
-
-@function prepend($list, $value) {
-  @return join($value, $list);
-}

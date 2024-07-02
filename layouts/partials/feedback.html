@@ -1,3 +1,5 @@
+{{ if (and (not .Params.hide_feedback) (.Site.Params.ui.feedback.enable)) -}}
+{{ with .Site.Params.ui.feedback -}}
 <style>
   .feedback--answer {
     display: inline-block;
@@ -35,21 +37,18 @@
     noButton.disabled = true;
   };
   const sendFeedback = (value) => {
-    if (typeof ga !== 'function') return;
-    const args = {
-      command: 'send',
-      hitType: 'event',
-      category: 'Helpful',
-      action: 'click',
-      label: window.location.pathname,
-      value: value
-    };
-    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
+    if (typeof gtag !== 'function') return;
+    gtag('event', 'page_helpful', {
+      'event_category': 'Helpful',
+      'event_label': window.location.pathname,
+      'value': value
+    });
   };
   yesButton.addEventListener('click', () => {
     yesResponse.classList.add('feedback--response__visible');
     disableButtons();
-    sendFeedback(1);
+    {{ $maxValue := .max_value | default 100 -}}
+    sendFeedback({{ $maxValue }});
   });
   noButton.addEventListener('click', () => {
     noResponse.classList.add('feedback--response__visible');
@@ -57,3 +56,6 @@
     sendFeedback(0);
   });
 </script>
+{{ end -}}
+<br />
+{{ end -}}
