@@ -545,7 +545,7 @@ To add the classes `myclass` and `anotherclass`, add the following line to the f
 body_class = "myclass anotherclass"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-body_class : "myclass anotherclass"
+body_class : myclass anotherclass
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 "body_class" : "myclass anotherclass"
