@@ -1,11 +1,39 @@
+{{ $scssMain := "scss/main.scss" -}}
+{{ $css := resources.Get $scssMain
+      | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
+{{ $bsRtlCss := "vendor/bootstrap/dist/css/bootstrap.rtl.css" -}}
+{{ $rtlCSS := "" -}}
 
-{{ $scssMain := "scss/main.scss"}}
-{{ if not hugo.IsProduction }}
-{{/* Note the missing postCSS. This makes it snappier to develop in Chrome, but makes it look sub-optimal in other browsers. */}}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" true) }}
-<link href="{{ $css.RelPermalink }}" rel="stylesheet">
-{{ else }}
-{{ $css := resources.Get $scssMain | toCSS (dict "enableSourceMap" false) | postCSS | minify | fingerprint }}
-<link rel="preload" href="{{ $css.RelPermalink }}" as="style">
-<link href="{{ $css.RelPermalink }}" rel="stylesheet" integrity="{{ $css.Data.integrity }}">
-{{ end }}
+{{ if eq .Site.Language.LanguageDirection "rtl" -}}
+  {{ with resources.Get $bsRtlCss -}}
+    {{ $rtlCSS = . -}}
+  {{ else -}}
+    {{ $msg := printf "Resource not found: %s" $bsRtlCss -}}
+    {{ warnf $msg -}}
+    <meta name="docsy-info" content="{{ $msg }}">
+  {{ end -}}
+{{ end -}}
+
+{{ if hugo.IsProduction -}}
+  {{ with $rtlCSS -}}
+    {{ $rtlCSS = . | postCSS | minify | fingerprint -}}
+  {{ end -}}
+  {{ $css = $css | postCSS | minify | fingerprint -}}
+  <link rel="preload" href="{{ $css.RelPermalink }}" as="style">
+{{- end -}}
+
+{{/* NOTE: when not in production, we don't apply `postCSS`. This makes it
+snappier to develop in Chrome, but makes it look sub-optimal in other browsers.
+*/ -}}
+
+{{ with $css -}}
+  <link href="{{ .RelPermalink }}" rel="stylesheet">
+{{ else -}}
+  {{ errorf "Resource not found: %s" $scssMain -}}
+{{ end -}}
+
+{{ with $rtlCSS -}}
+  <link href="{{ $rtlCSS.RelPermalink }}" rel="stylesheet">
+{{ end -}}
+
+{{- /**/ -}}

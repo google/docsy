@@ -1,9 +1,8 @@
 baseURL: https://www.docsy.dev/
-title: &title Docsy
-description: &desc Docsy does docs
+title: Docsy
 enableRobotsTXT: true
-theme: [docsy]
 enableGitInfo: true
+theme: [docsy]
 
 pygmentsCodeFences: true
 pygmentsUseClasses: false
@@ -32,8 +31,7 @@ languages:
   en:
     languageName: English
     params:
-      title: *title
-      description: *desc
+      description: Docsy does docs
 
 markup:
   goldmark:
@@ -43,11 +41,7 @@ markup:
     renderer:
       unsafe: true
   highlight:
-    # In support of dark mode:
-    noClasses: false # Require that Chroma style using classes
-    # style: tango # FIXME(@chalin): remove this line once the auto-generation of the CSS styles is setup
-    # When noClasses is false, the style is defined via CSS. For details, see:
-    # https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
+    noClasses: false # Required for dark-mode
 
 params:
   copyright:
