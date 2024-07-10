@@ -287,6 +287,10 @@ description: Reference for the Pet Store API
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS in `themes/docsy/assets/scss/_swagger.scss`.
 
+{{% alert title="Warning" color="warning" %}}
+This shortcode relies on JavaScript libraries hosted on unpkg. Make sure that you can access unpkg from your network when building or loading your site.
+{{% /alert %}}
+
 ### redoc
 
 The `redoc` shortcode uses the open-source [Redoc](https://github.com/Redocly/redoc) tool to render reference API documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content), but you can use a URL as well, for example:

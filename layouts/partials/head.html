@@ -24,7 +24,7 @@
 {{ template "_internal/opengraph.html" . -}}
 {{ template "_internal/schema.html" . -}}
 {{ template "_internal/twitter_cards.html" . -}}
-{{ partialCached "head-css.html" . "asdf" -}}
+{{ partialCached "head-css.html" . "head-css-cache-key" -}}
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
   integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -46,12 +46,7 @@
 
 {{/* To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled */ -}}
 {{ if hugo.IsProduction -}}
-  {{ $enableGtagForUniversalAnalytics := not .Site.Params.disableGtagForUniversalAnalytics -}}
-  {{ if (or $enableGtagForUniversalAnalytics (hasPrefix .Site.Config.Services.GoogleAnalytics.ID "G-")) -}}
-    {{ template "_internal/google_analytics_gtag.html" . -}}
-  {{ else -}}
-    {{ template "_internal/google_analytics.html" . -}}
-  {{ end -}}
+  {{ template "_internal/google_analytics.html" . -}}
 {{ end -}}
 
 {{ define "algolia/head" -}}

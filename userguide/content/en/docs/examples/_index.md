@@ -34,6 +34,7 @@ Example sites that have low to no customization:
 | [protobuf.dev](https://protobuf.dev) | https://github.com/protocolbuffers/protocolbuffers.github.io |
 | [Layer5 Docs](https://docs.layer5.io/) | https://github.com/layer5io/docs |
 | [Apache Parquet](https://parquet.apache.org/) | https://parquet.apache.org |
+| [YMCA Website Services](https://ds-docs.y.org/) | https://github.com/YCloudYUSA/yusaopeny_docs |
 
 ## Customized Docsy examples
 
