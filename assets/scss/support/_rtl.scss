@@ -5,3 +5,24 @@
     }
   }
 }
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+ 
+html[lang="fa"] {
+    body {
+        font-family: 'Vazirmatn', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Vazirmatn', sans-serif;
+        font-weight: 400;
+    }
+    p, span, div, a, li, ul, ol {
+        font-family: 'Vazirmatn', sans-serif;
+    }
+    // Add additional elements as needed
+    .d-none {
+      display: block !important;
+  }
+  .dropup, .dropend, .dropdown, .dropstart, .dropup-center, .dropdown-center {
+    position: static;
+  }
+}

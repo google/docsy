@@ -2,6 +2,13 @@
 // Main navbar
 //
 
+.dropup, .dropend, .dropdown, .dropstart, .dropup-center, .dropdown-center {
+  position: static;
+}
+.d-none {
+  display: block !important;
+}
+
 .td-navbar-cover {
   @include media-breakpoint-up(md) {
     background: transparent !important;
