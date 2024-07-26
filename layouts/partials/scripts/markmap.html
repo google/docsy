@@ -1,4 +1,4 @@
-{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "0.14.4" -}}
+{{ $version := cond ( ge hugo.Version "0.90.0" ) "latest" "0.17.0" -}}
 {{ with .Site.Params.markmap.version -}}
 {{ $version = . -}}
 {{ end -}}

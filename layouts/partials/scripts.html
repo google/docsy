@@ -1,13 +1,10 @@
 {{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
 {{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
-{{ $needmarkmap := or .Site.Params.markmap.enable .Params.markmap -}}
 {{ if ge hugo.Version "0.93.0" -}}
     {{ $needKaTeX  := or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
     {{ $needmhchem := or $needmhchem (.Page.Store.Get "hasmhchem") -}}
-    {{ $needmermaid = or $needmermaid (.Page.Store.Get "hasmermaid") -}}
-    {{ $needmarkmap = or $needmarkmap (.Page.Store.Get "hasmarkmap") -}}
 {{ else -}}
-  {{ if or $needKaTeX $needmhchem $needmermaid $needmarkmap -}}
+  {{ if or $needKaTeX $needmhchem -}}
     {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version  }}
   {{ end -}}
 {{ end -}}
@@ -48,18 +45,20 @@
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
 
-{{ $jsArray := slice $jsBs $jsBase $jsAnchor $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
+{{ $jsArray := slice $jsBs $jsBase $jsSearch $jsPlantuml $jsDrawio -}}
 
 {{ if .Page.Store.Get "hasmermaid" -}}
-{{- partial "scripts/mermaid.html" . -}}
+  {{- partial "scripts/mermaid.html" . -}}
+{{ end -}}
+
+{{ if .Page.Store.Get "hasmarkmap" -}}
+  {{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
+  {{ $jsArray = $jsArray | append $jsMarkmap -}}
+  {{ partial "scripts/markmap.html" . -}}
 {{ end -}}
 
 {{ if .Site.Params.ui.showLightDarkModeMenu -}}
   {{ $jsArray = $jsArray | append (resources.Get "js/dark-mode.js") -}}
-{{ if $needmarkmap -}}
-{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
-{{ $jsArray = $jsArray | append $jsMarkmap -}}
-{{ partial "scripts/markmap.html" . -}}
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
