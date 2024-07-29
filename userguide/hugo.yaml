@@ -116,12 +116,8 @@ params:
     svg: false
   print:
     disable_toc: false
-
   drawio:
     enable: true
-
-  markmap:
-    version: 0.17.0
 
 taxonomies:
   tag: tags

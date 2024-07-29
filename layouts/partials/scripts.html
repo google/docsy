@@ -1,8 +1,8 @@
 {{ $needKaTeX  := or .Site.Params.katex.enable .Params.math .Params.chem -}}
 {{ $needmhchem := or .Site.Params.katex.mhchem.enable .Params.chem -}}
 {{ if ge hugo.Version "0.93.0" -}}
-    {{ $needKaTeX  := or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
-    {{ $needmhchem := or $needmhchem (.Page.Store.Get "hasmhchem") -}}
+    {{ $needKaTeX  = or $needKaTeX (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
+    {{ $needmhchem = or $needmhchem (.Page.Store.Get "hasmhchem") -}}
 {{ else -}}
   {{ if or $needKaTeX $needmhchem -}}
     {{ warnf "Outdated Hugo version %s, consider upgrading to make full use of all theme features" hugo.Version  }}
@@ -52,7 +52,7 @@
 {{ end -}}
 
 {{ if .Page.Store.Get "hasmarkmap" -}}
-  {{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
+  {{ $jsMarkmap := resources.Get "js/markmap.js" -}}
   {{ $jsArray = $jsArray | append $jsMarkmap -}}
   {{ partial "scripts/markmap.html" . -}}
 {{ end -}}
