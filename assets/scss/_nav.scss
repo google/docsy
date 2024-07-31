@@ -2,13 +2,6 @@
 // Main navbar
 //
 
-.dropup, .dropend, .dropdown, .dropstart, .dropup-center, .dropdown-center {
-  position: static;
-}
-.d-none {
-  display: block !important;
-}
-
 .td-navbar-cover {
   @include media-breakpoint-up(md) {
     background: transparent !important;
@@ -65,6 +58,8 @@
 
   .dropdown {
     min-width: 50px;
+    display: block !important;
+    position: static;
   }
 
   @include media-breakpoint-up(md) {
@@ -78,6 +73,12 @@
 
     .navbar-nav {
       padding-top: 0 !important;
+    }
+
+    .dropdown {
+      min-width: 50px;
+      display: block !important;
+      position: relative;
     }
   }
 
@@ -96,6 +97,12 @@
     .navbar-nav {
       padding-bottom: 2rem;
       overflow-x: auto;
+    }
+
+    .dropdown {
+      min-width: 75px;
+      display: block !important;
+      position: static;
     }
   }
 
