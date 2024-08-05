@@ -36,7 +36,7 @@
 @import "shortcodes";
 @import "swagger";
 @import "support/rtl";
-
+@import "markmap";
 
 @if $td-enable-google-fonts {
   @import url($web-font-path);

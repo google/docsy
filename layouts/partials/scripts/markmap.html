@@ -1,0 +1,14 @@
+{{ $version := "latest" -}}
+{{ with .Site.Params.markmap.version -}}
+{{ $version = . -}}
+{{ end -}}
+
+{{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/markmap-autoloader@%s/dist/index.min.js" $version -}}
+{{ $markmapjs := resources.GetRemote $cdnurl -}}
+{{ if eq $markmapjs nil -}}
+{{ errorf "Invalid Markmap version %s, could not retrieve this version from CDN" $version -}}
+{{ else -}}
+{{ $markmapsecure := $markmapjs | resources.Fingerprint "sha512" -}}
+<script type="text/javascript" src="{{ $markmapsecure.Permalink }}" integrity="{{ $markmapsecure.Data.Integrity -}}">
+</script>
+{{ end }}

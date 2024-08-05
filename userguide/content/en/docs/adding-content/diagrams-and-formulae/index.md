@@ -388,18 +388,18 @@ By default, docsy pulls in the latest officially released version of Mermaid at 
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "10.9.0"
+version = "10.9.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 10.9.0
+    version: 10.9.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "10.9.0"
+      "version": "10.9.1"
     }
   }
 }
@@ -572,12 +572,12 @@ For example, the following defines a simple MindMap:
 ## Links
 
 - <https://markmap.js.org/>
-- [GitHub](https://github.com/gera2ld/markmap)
+- [GitHub](https://github.com/markmap/markmap)
 
 ## Related
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap)
-- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+- [coc-markmap](https://github.com/markmap/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/markmap/gatsby-remark-markmap)
 
 ## Features
 
@@ -590,7 +590,7 @@ For example, the following defines a simple MindMap:
     ```js
     console.log('code block');
     ```
-- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+- KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 ````
 
@@ -602,12 +602,12 @@ Automatically renders to:
 ## Links
 
 - <https://markmap.js.org/>
-- [GitHub](https://github.com/gera2ld/markmap)
+- [GitHub](https://github.com/markmap/markmap)
 
 ## Related
 
-- [coc-markmap](https://github.com/gera2ld/coc-markmap)
-- [gatsby-remark-markmap](https://github.com/gera2ld/gatsby-remark-markmap)
+- [coc-markmap](https://github.com/markmap/coc-markmap)
+- [gatsby-remark-markmap](https://github.com/markmap/gatsby-remark-markmap)
 
 ## Features
 
@@ -620,27 +620,37 @@ Automatically renders to:
     ```js
     console.log('code block');
     ```
-- Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
+- KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 
-To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
+If needed, you can define the desired width and/or height of an individual mindmap via code block attributes:
 
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
+````
+```markmap { height="300px" width="700px" }
+# ...
+```
+````
+
+Support of Markmap diagrams is automatically enabled as soon as you use a `markmap` code block on your page.
+
+By default, docsy pulls in the latest officially released version of Markmap at build time. If that doesn't fit your needs, you can specify the wanted markmap version inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Hugo version >= 0.90 only:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.markmap]
-enable = true
+version = "0.17.0"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   markmap:
-    enable: true
+    version: 0.17.0
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "markmap": {
-      "enable": true
+      "version": "0.17.0"
     }
   }
 }
