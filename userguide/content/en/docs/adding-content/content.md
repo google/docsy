@@ -599,6 +599,16 @@ params:
 
 If you're creating your own site and want to add a page using this template, add a `/community/_index.md` file in your content root directory. If you've copied the example site and *don't* want a community page, just delete the `/content/en/community/` directory in your project repo.
 
+By default, Docsy layouts assume that your project's contributing page is found
+at `<baseURL>/docs/contribution-guidelines`. To specify another URL, add it to
+the front matter of `/community/_index.md` as illustrated next. The URL can be
+an external URL or a local path:
+
+```yaml
+params:
+  contributingUrl: docs/contributing/
+```
+
 ## Adding static content
 
 You may want to serve some non-Hugo-built content along with your site: for example, if you have generated reference docs using Doxygen, Javadoc, or other doc generation tools.
