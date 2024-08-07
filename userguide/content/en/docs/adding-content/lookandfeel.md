@@ -545,19 +545,9 @@ be added to the class attribute of your page's body element.
 To add the classes `myclass` and `anotherclass`, add the following line to the
 front matter of the page:
 
-<!-- prettier-ignore -->
-{{< tabpane >}}
-{{< tab header="Front matter :" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-body_class = "myclass anotherclass"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-body_class : myclass anotherclass
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-"body_class" : "myclass anotherclass"
-{{< /tab >}}
-{{< /tabpane >}}
+```yaml
+body_class: myclass anotherclass
+```
 
 The page's opening body tag will look like this (assuming it is a section page):
 
