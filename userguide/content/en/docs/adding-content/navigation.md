@@ -335,6 +335,8 @@ override the heading self-link template
 `_default/_markup/_td-heading-self-link.html`, which is defined in
 [layouts/_default/_markup/td-render-heading.html].
 
+[configuration file]:
+  https://gohugo.io/getting-started/configuration/#configuration-file
 [layouts/_default/_markup/td-render-heading.html]:
   https://github.com/google/docsy/tree/main/layouts/_default/_markup/td-render-heading.html
 [hook]: https://gohugo.io/templates/render-hooks/
