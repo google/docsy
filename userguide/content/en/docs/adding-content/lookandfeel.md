@@ -546,7 +546,7 @@ To add the classes `myclass` and `anotherclass`, add the following line to the
 front matter of the page:
 
 <!-- prettier-ignore -->
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter :" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 body_class = "myclass anotherclass"
