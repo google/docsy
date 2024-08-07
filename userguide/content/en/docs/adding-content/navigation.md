@@ -222,6 +222,8 @@ By default, the section menu shows the current section fully expanded all the wa
 
 With the compact menu (`.ui.sidebar_menu_compact = true`), only the current page's ancestors, siblings and direct descendants are shown. You can use the optional parameter `.ui.ul_show` to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the first menu level is always displayed.
 
+The number of sidebar entries shown per section can be configured using the `.ui.sidebar_menu_truncate` parameter (default: 50).
+
 As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `hugo.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
 
 On large sites (default: > 2000 pages) the section menu is not generated for each page, but cached for the whole section. The HTML classes for marking the active menu item (and menu path) are then set using JS. You can adjust the limit for activating the cached section menu with the optional parameter `.ui.sidebar_cache_limit`.
