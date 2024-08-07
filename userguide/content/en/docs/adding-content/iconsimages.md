@@ -11,20 +11,28 @@ By default, Docsy shows a site logo at the start of the navbar, that is, at the
 extreme left. Place your project's SVG logo in `assets/icons/logo.svg`. This
 overrides the default Docsy logo in the theme.
 
-If you don't want a logo to appear in the navbar, then set `navbar_logo` to
-`false` in your project's config:
+If you don't want a logo to appear in the navbar, then set site parameter `navbar_logo`
+to `false` in your project's config:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.ui]
 navbar_logo = false
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-navbar_logo: false
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  ui:
+    navbar_logo: false
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
+
 {
-  "navbar_logo": false
+  "params": {
+    "ui": {
+      "navbar_logo": false
+    }
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -57,7 +65,7 @@ Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover)
 You specify the preferred display height of a cover block container (and hence its image) using the block's `height` parameter.  For a full viewport height, use `full`:
 
 ```html
-{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" color="orange" */>}}
+{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" */>}}
 ...
 {{</* /blocks/cover */>}}
 ```

@@ -1,5 +1,8 @@
 <!doctype html>
-<html itemscope itemtype="http://schema.org/WebPage" lang="{{ .Site.Language.Lang }}" class="no-js">
+<html itemscope itemtype="http://schema.org/WebPage"
+    {{- with .Site.Language.LanguageDirection }} dir="{{ . }}" {{- end -}}
+    {{ with .Site.Language.Lang }} lang="{{ . }}" {{- end }} {{/**/ -}}
+    class="no-js">
   <head>
     {{ partial "head.html" . }}
   </head>
@@ -10,7 +13,7 @@
     <div class="container-fluid td-outer">
       <div class="td-main">
         <div class="row flex-xl-nowrap">
-          <main class="col-12 col-md-9 col-xl-8 pl-md-5" role="main">
+          <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
             {{ block "main" . }}{{ end }}
           </main>
         </div>

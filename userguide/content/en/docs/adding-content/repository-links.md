@@ -1,7 +1,8 @@
 ---
-title: Repository Links
+title: Repository Links and other page information
+linkTitle: Repo links and page info
 weight: 9
-description: Help your users interact with your source repository.
+description: Help your users interact with page source and view page-source information.
 ---
 
 The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-blog-posts) include links for readers to edit the page or create issues for your docs or project via your site's source repository. The current generated links for each docs or blog page are:
@@ -18,23 +19,27 @@ Currently, Docsy supports only GitHub repository links "out of the box". Since G
 
 ## Link configuration
 
-There are four variables you can configure in `config.toml`/`config.yaml`/`config.json` to set up links, as well as one in your page metadata.
+There are four site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as one in your page metadata.
 
 ### `github_repo`
 
 The URL for your site's source repository. This is used to generate the **Edit this page**, **Create child page**, and **Create documentation issue** links.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_repo = "https://github.com/google/docsy"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-github_repo: 'https://github.com/google/docsy'
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  github_repo: https://github.com/google/docsy
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "github_repo": "https://github.com/google/docsy"
+  "params": {
+    "github_repo": "https://github.com/google/docsy"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -43,17 +48,21 @@ github_repo: 'https://github.com/google/docsy'
 
 Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the `userguide` subdirectory of its repo. Setting this value means that your edit links will go to the right page.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_subdir = "userguide"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-github_subdir: 'userguide'
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  github_subdir: userguide
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "github_subdir": "userguide"
+  "params": {
+    "github_subdir": "userguide"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -62,17 +71,21 @@ github_subdir: 'userguide'
 
 Specify a value here if you have a separate project repo and you'd like your users to be able to create issues against your project from the relevant docs. The **Create project issue** link appears only if this is set.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_project_repo = "https://github.com/google/docsy"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-github_project_repo: 'https://github.com/google/docsy'
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  github_project_repo: https://github.com/google/docsy
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "github_project_repo": "https://github.com/google/docsy"
+  "params": {
+    "github_project_repo": "https://github.com/google/docsy"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -81,17 +94,21 @@ github_project_repo: 'https://github.com/google/docsy'
 
 Specify a value here if you have would like to reference a different branch for the other github settings like **Edit this page** or **Create project issue**.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
 github_branch = "release"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
-github_branch: 'release'
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  github_branch: release
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
-  "github_branch": "release"
+  "params": {
+    "github_branch": "release"
+  }
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -103,7 +120,7 @@ come from another repo, such as a [git submodule][]. Add settings like these to
 the **section's index page** so that the repository links for all pages in that
 section refer to the originating repo:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -163,7 +180,7 @@ cascade:
 ---
 ```
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -200,7 +217,7 @@ Please note that the YAML code fragment makes use of [Yaml anchor](https://suppo
 The `path_base_for_github_subdir` setting is a regular expression, so you can
 use it even if you have a site with [multiple languages][] for example:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -229,7 +246,7 @@ In situations where a page originates from a file under a different name, you
 can specify `from` and `to` path-rename settings. Here's an example where an
 index file is named `README.md` in the originating repo:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -278,7 +295,7 @@ path_base_for_github_subdir:
 
 Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -307,30 +324,62 @@ This can be useful if you have page source files in multiple Git repositories,
 or require a non-GitHub URL. Pages using this value have **Edit this page**
 links only.
 
-## Disabling links
+### Disabling links
 
-You can use CSS to selectively disable (hide) links. For example, add the
-following to your [projects's `_styles_project.scss`][project-style-files] file
-to hide **Create child page** links from all pages:
+You can use CSS to selectively hide links. For example, add the following to
+your [projects's `_styles_project.scss`][project-style-files] file to hide
+**Create child page** links from all pages (optionally with a `!important`
+modifier -- not shown):
 
 ```scss
-.td-page-meta--child { display: none !important; }
+.td-page-meta__child { display: none; }
 ```
 
-Each link kind has an associated unique class named `.td-page-meta--KIND`, as
+Each link kind has an associated unique class named `.td-page-meta__KIND`, as
 defined by the following table:
 
 Link kind | Class name
 --- | ---
-View page source | `.td-page-meta--view`
-Edit this page | `.td-page-meta--edit`
-Create child page | `.td-page-meta--child`
-Create documentation issue | `.td-page-meta--issue`
-Create project issue | `.td-page-meta--project-issue`
+View page source | `.td-page-meta__view`
+Edit this page | `.td-page-meta__edit`
+Create child page | `.td-page-meta__child`
+Create documentation issue | `.td-page-meta__issue`
+Create project issue | `.td-page-meta__project-issue`
 
 Of course, you can also use these classes to give repository links unique styles
 for your project.
 
+{{% alert title="Version note" color=warning %}}
+
+Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+
+[v0.9.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#090
+
+{{% /alert %}}
+
+## Last-modified page metadata
+
+To have page-source metadata displayed at the bottom of documentation pages and
+blog posts, set the `GitInfo` configuration parameter to `true`, and ensure that
+`params.github_repo` is defined.
+
+A last-modified page note looks something like this:
+
+> <div class="td-page-meta__lastmod"
+>      style="margin-top: 0 !important; display: block !important;">
+>
+> Last modified November 29, 2023: [Release v0.8.0 preparation (#1756) (6bb4f99)](https://github.com/google/docsy/commit/6bb4f99d1eab4976fb80d1488c81ba12b1715c05)
+> </div>
+{.border-0}
+
+Once enabled site-wide, you can selectively hide last-modified notes in a page
+or section by declaring the following style (optionally with a `!important`
+modifier &mdash; not shown):
+
+```scss
+.td-page-meta__lastmod { display: none; }
+```
+
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
-[multiple languages]: {{< relref "language" >}}
-[project-style-files]: {{< relref "lookandfeel#project-style-files" >}}
+[multiple languages]: {{% relref "language" %}}
+[project-style-files]: {{% relref "lookandfeel#project-style-files" %}}

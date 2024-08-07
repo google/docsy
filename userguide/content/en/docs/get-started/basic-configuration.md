@@ -7,30 +7,32 @@ description: >
   Basic configuration for new Docsy sites.
 ---
 
-Site-wide configuration details and parameters are defined in your project's `config.toml` file. These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`config.toml` in the example project](https://github.com/google/docsy-example/blob/master/config.toml) for how to add this information. **We recommend copying this config.toml and editing it even if you’re just using the theme and not copying the entire Docsy example site**, as it includes default values for many parameters that you need to set for your site to build correctly.
+Site-wide configuration details and parameters are defined in your project's [configuration file] (`hugo.toml` or `config.toml`). These include your chosen Hugo theme (Docsy, of course!), project name, community links, Google Analytics configuration, and Markdown parser parameters. See the examples with comments in [`hugo.toml` in the example project](https://github.com/google/docsy-example/blob/main/hugo.toml) for how to add this information. **We recommend copying this hugo.toml and editing it even if you’re just using the theme and not copying the entire Docsy example site**, as it includes default values for many parameters that you need to set for your site to build correctly.
 
-You may want to remove or customize some defaults of the copied `config.toml` file straight away:
+You may want to remove or customize some defaults of the copied `hugo.toml` file straight away:
 
 ## Internationalization
 
-The copied `config.toml` file defines content in English, Norwegian and Farsi. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
+The copied `hugo.toml` file defines content in English, Norwegian and Farsi. You can find out more about how Docsy supports multi-language content in [Multi-language support](/docs/language/).
 
-If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `config.toml`:
+If you don't intend to translate your site, you can remove the language switcher by removing the following lines from `hugo.toml`:
 
-```
+```toml
 [languages.no]
-title = "Docsy"
-description = "Docsy er operativsystem for skyen"
 languageName ="Norsk"
 contentDir = "content/no"
+[languages.no.params]
+title = "Goldydocs"
+description = "Docsy er operativsystem for skyen"
 time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 
 [languages.fa]
-title = "اسناد گلدی"
-description = "یک نمونه برای پوسته داکسی"
 languageName ="فارسی"
 contentDir = "content/fa"
+[languages.fa.params]
+title = "اسناد گلدی"
+description = "یک نمونه برای پوسته داکسی"
 time_format_default = "2006.01.02"
 time_format_blog = "2006.01.02"
 ```
@@ -41,14 +43,15 @@ By default, the Docsy example site uses its own [Google Custom Search Engine](ht
 
 ```
 # Google Custom Search Engine ID. Remove or comment out to disable search.
-gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+gcs_engine_id = "..."
 ```
 
-To use your own Custom Search Engine, replace the value in the `gcs_engine_id` with the ID of your own search engine. Or [choose another search option](/docs/adding-content/navigation/#site-search-options).
-
+To use your own Custom Search Engine, set `gcs_engine_id` to your search engine ID. For details, see [Configure search with a Google Custom Search Engine](/docs/adding-content/search/#configure-search-with-a-google-custom-search-engine).
 
 ## What's next?
 
 * [Add content and customize your site](/docs/adding-content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
+
+[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file

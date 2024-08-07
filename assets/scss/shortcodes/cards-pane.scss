@@ -1,4 +1,4 @@
-.td-card-deck.card-deck {
+.td-card-group.card-group {
   @extend .td-max-width-on-larger-screens;
 }
 
@@ -8,12 +8,17 @@
 
     .highlight {
       border: none;
+      margin: 0;
     }
+  }
+
+  .card-header.code {
+    background-color: $card-bg;
   }
 
   .card-body {
     &.code {
-      background-color: #f8f9fa;
+      background-color: $card-bg;
       padding: 0 0 0 1ex;
     }
 

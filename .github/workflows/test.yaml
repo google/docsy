@@ -1,0 +1,31 @@
+# Build Docsy & the User Guide and run all repo checks across OSs.
+
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # schedule:
+  #   - cron: '11 0 * * *' # 11 past midnight every day
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package.json
+      - run: npm install --omit=optional
+      - if: runner.os != 'Windows'
+        run: npm run test:all
+      - if: runner.os == 'Windows'
+        run: npm run ci:prepare && npm run cd:docs build && npm run ci:post

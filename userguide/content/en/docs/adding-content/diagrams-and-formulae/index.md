@@ -1,6 +1,5 @@
 ---
-title: "Diagrams and Formulae"
-linkTitle: "Diagrams and Formulae"
+title: Diagrams and Formulae
 weight: 11
 description: Add generated diagrams and scientific formulae to your site.
 math: true
@@ -68,7 +67,7 @@ As soon as you use a `math` code block on your page, support of \\(\KaTeX\\) is 
 
 If you want to use inline formulae and don't have a `math` code block present in your page which triggers auto activation, you need to manually activate \\(\KaTeX\\) support. The easiest way to do so is to add a `math` attribute to the frontmatter of your page and set it to `true`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -87,20 +86,20 @@ math: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `config.toml`/`config.yaml`/`config.json`:
+If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -111,11 +110,11 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-Additionally, you can customize various \\(\KaTeX\\) options inside `config.toml`/`config.yaml`/`config.json`, if needed:
+Additionally, you can customize various \\(\KaTeX\\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 # enable/disable KaTeX support
 enable = true
@@ -152,7 +151,7 @@ errorColor = "#CD5C5C"
   right = "\\]"
   display = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true  # enable/disable KaTeX support
@@ -185,7 +184,7 @@ params:
           right: \]
           display: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -223,7 +222,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}'s\\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}'s\\) [configuration options](https://katex.org/docs/options.html).
+For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}\\)'s [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}\\)'s [configuration options](https://katex.org/docs/options.html).
 
 ### Display of Chemical Equations and Physical Units
 
@@ -284,7 +283,7 @@ As soon as you use a `chem` code block on your page, rendering support for chemi
 
 If you want to use chemical formulae inline and don't have a `chem` code block present in your page which triggers auto activation, you need to manually activate rendering support for chemical formulae. The easiest way to do so is to add a `chem` attribute to the frontmatter of your page and set it to `true`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
@@ -303,25 +302,25 @@ chem: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `config.toml`/`config.yaml`/`config.json`:
+If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.katex]
 enable = true
 
 [params.katex.mhchem]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   katex:
     enable: true
     mhchem:
       enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "katex": {
@@ -343,73 +342,89 @@ With Mermaid support enabled in Docsy, you can include the text definition of a 
 
 The great advantage of this is anyone who can edit the page can now edit the diagram - no more hunting for the original tools and version to make a new edit.
 
-For example, the following defines a simple flowchart:
+For example, the following defines a sequence diagram:
 
 ````
 ```mermaid
-graph TD
-  Start --> Need{"Hugo version >= 0.93.0"}
-  Need -- No --> Off["Set params.mermaid.enable = true"]
-  Off --> Author
-  Need -- Yes --> Author[Insert mermaid codeblock]
+sequenceDiagram
+    autonumber
+    Docsy user->>Discussion board: Ask question
+    Discussion board->>Community member: read question
+    loop Different strategies
+    Community member->>Test instance: Investigate issue raised
+    end
+    Note right of Community member: After hours of investigation:
+    Test instance-->>Community member: Come up with solution
+    Community member-->>Discussion board: Propose solution
+    Discussion board-->>Docsy user: check proposed solution
+    Docsy user->>Discussion board: Mark question as resolved
+    Docsy user->>Docsy user: Being happy
 ```
 ````
 
-Automatically renders to:
+which is automatically rendered to:
 
 ```mermaid
-graph TD
-  Start --> Need{"Hugo version >= 0.93.0"}
-  Need -- No --> Off["Set params.mermaid.enable = true"]
-  Off --> Author
-  Need -- Yes --> Author[Insert mermaid codeblock]
+sequenceDiagram
+    autonumber
+    Docsy user->>Discussion board: Ask question
+    Discussion board->>Community member: read question
+    loop Different strategies
+    Community member->>Test instance: Investigate issue raised
+    end
+    Note right of Community member: After hours of investigation:
+    Test instance-->>Community member: Come up with solution
+    Community member-->>Discussion board: Propose solution
+    Discussion board-->>Docsy user: check proposed solution
+    Docsy user->>Discussion board: Mark question as resolved
+    Docsy user->>Docsy user: Being happy
 ```
 
-With hugo version 0.93 or higher, support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
+Support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
 
-If you are using hugo version 0.92 or lower, you need to enable Mermaid manually by updating your `config.toml`/`config.yaml`/`config.json`:
+By default, docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
-{{< tab header="Hugo version <= 0.92 only:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-enable = true
+version = "10.9.0"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    enable: true
+    version: 10.9.0
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "enable": true
+      "version": "10.9.0"
     }
   }
 }
 {{< /tab >}}
 {{< /tabpane >}}
 
-If needed, you can define custom settings for your diagrams, such as themes, padding in your `config.toml`/`config.yaml`/`config.json`.
+If needed, you can define custom settings for your diagrams, such as themes, padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
 theme = "neutral"
 
 [params.mermaid.flowchart]
 diagramPadding = 6
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
     theme: neutral
     flowchart:
       diagramPadding: 6
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
@@ -425,7 +440,7 @@ params:
 
 See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults) for a list of defaults that can be overridden.
 
-Settings can also be overridden on a per-diagram basis by making use of the `%%init%%` header at the start of the diagram definition.  See the [Mermaid theming documentation](https://mermaid-js.github.io/mermaid/#/theming?id=themes-at-the-local-or-current-level).
+Settings can also be overridden on a per-diagram basis by making use of a [frontmatter config](http://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables) block at the start of the diagram definition.
 
 ## UML Diagrams with PlantUML
 
@@ -475,20 +490,20 @@ Foo -> Foo6 : To collections
 Foo -> Foo7: To queue
 ```
 
-To enable/disable PlantUML, update `config.toml`/`config.yaml`/`config.json`:
+To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   plantuml:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "plantuml": {
@@ -501,9 +516,9 @@ params:
 
 Other optional settings are:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.plantuml]
 enable = true
 theme = "default"
@@ -517,7 +532,7 @@ svg_image_url = "https://www.plantuml.com/plantuml/svg/"
 # default = false
 svg = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   plantuml:
     enable: true
@@ -530,7 +545,7 @@ params:
     # default = false
     svg: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "plantuml": {
@@ -608,20 +623,20 @@ Automatically renders to:
 - Katex - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
 
-To enable/disable MarkMap, update `config.toml`/`config.yaml`/`config.json`:
+To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.markmap]
 enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   markmap:
     enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "markmap": {
@@ -634,39 +649,39 @@ params:
 
 ## Diagrams with Diagrams.net
 
-[Diagrams.net](https://diagrams.net/) (aka draw.io) provides a free and open source diagram editor that can generate a wider range of diagrams than Mermaid or PlantUML using a web or desktop editor.
+[Diagrams.net](https://diagrams.net/) (aka `draw.io`) provides a free and open source diagram editor that can generate a wider range of diagrams than Mermaid or PlantUML using a web or desktop editor.
 
-SVG and PNG files exported with the tool contain the source code of the original diagram by default, which allows the diagrams.net site to import those images again for edit in the future.  Docsy can detect this and automatically add an "edit" button over any image that can be edited using the online site.
+SVG and PNG files exported with the tool contain the source code of the original diagram by default, which allows the diagrams.net site to import those images again for edit in the future. With `draw.io` enabled, Docsy will detect this and automatically add an `Edit` button over any image that can be edited using the online site.
 
-Hover over the image below and click edit to instantly start working with it.  Clicking the "Save" button will cause the edited diagram to be exported using the same filename and filetype, and downloaded to your browser.
+Hover over the image below and click edit to instantly start working with it.  Clicking the `Save` button will cause the edited diagram to be exported using the same filename and filetype, and downloaded to your browser.
 
 {{%alert title="Note"  color="primary" %}}
-If you're creating a new diagram, be sure to File -> Export in either svg or png format (svg is usually the best choice) and ensure the "Include a copy of my diagram" is selected so it can be edited again later.
+If you're creating a new diagram, be sure to `File -> Export` in either `svg` or `png` format (`svg` is usually the best choice) and ensure the `Include a copy of my diagram` is selected so it can be edited again later.
 {{%/alert%}}
 
 As the diagram data is transported via the browser, the diagrams.net server does not need to access the content on your Docsy server directly at all.
 
 
-{{< figure src="docsy-diagrams.svg" caption="Mouse over the above image and click the edit button!">}}
+{{< figure src="docsy-diagrams.svg" caption="Mouse over the above image and click the `Edit` button!">}}
 
-To disable detection of diagrams, update `config.toml`/`config.yaml`/`config.json`:
+To enable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
-enable = false
+enable = true
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   drawio:
-    enable: false
+    enable: true
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "drawio": {
-      "enable": false
+      "enable": true
     }
   }
 }
@@ -675,18 +690,18 @@ params:
 
 You can also [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md) for editing diagrams, in which case update the configuration to point to that server:
 
-{{< tabpane persistLang=false >}}
+{{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="config.toml" lang="toml" >}}
+{{< tab header="hugo.toml" lang="toml" >}}
 [params.drawio]
 drawio_server = "https://app.mydrawioserver.example.com"
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   drawio:
     drawio_server: 'https://app.mydrawioserver.example.com'
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "drawio": {
