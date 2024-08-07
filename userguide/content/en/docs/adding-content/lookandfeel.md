@@ -3,7 +3,7 @@ title: Look and Feel
 date: 2017-01-05
 weight: 2
 description: Customize colors, fonts, code highlighting, and more for your site.
-spelling: cSpell:ignore wordmark docsy
+spelling: cSpell:ignore wordmark docsy myclass anotherclass
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -552,4 +552,38 @@ Compared to the default sidebar ToC, this solution:
 - shows the title in the toc even if it was included from another file
 
 ![Screenshot of JavaScript-based sidebar table of contents](/images/sidebar-toc-with-tocbot.png)
+## Adding custom class to the body element
+
+By default, Docsy adds the `td-{{ .Kind }}` class, where the kind is the kind of
+the page, like section, blog, and so on. For example:
+
+<!-- prettier-ignore -->
+```html
+<body class="td-section">
+```
+
+Sometimes it's useful to assign custom classes to a page, or to an entire
+section, for example, to apply custom styling. To do so, add the `body_class`
+parameter to the front matter of your page. The value of the parameter will then
+be added to the class attribute of your page's body element.
+
+To add the classes `myclass` and `anotherclass`, add the following line to the
+front matter of the page:
+
+```yaml
+body_class: myclass anotherclass
+```
+
+The page's opening body tag will look like this (assuming it is a section page):
+
+<!-- prettier-ignore -->
+```html
+<body class="td-section myclass anotherclass">
+```
+
+To apply the custom class to every page of a section or a directory, use the
+[Front Matter Cascade](https://gohugo.io/content-management/front-matter/#front-matter-cascade)
+feature of Hugo in your configuration file, or in the front matter of the
+highest-level page you want to modify.
+
 [bs-docs]: https://getbootstrap.com/docs/
