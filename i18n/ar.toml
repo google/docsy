@@ -77,6 +77,7 @@ other = "إِذَا كُنْت تَرغَب فِي المشاركة بِشَكل
 other = "يُمْكِنك مَعرِفة كَيفِية المساهمة فِي {{ .Site.Title }} مِن خِلَال"
 [community_guideline]
 other = "إِرْشادات المساهمة"
+
 # Feedback
 [feedback_title]
 other = "تَقيِيم الأدَاء"
