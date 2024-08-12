@@ -1,0 +1,170 @@
+body.dark-mode,
+body.dark-mode {
+  background: rgb(45, 45, 45);
+  color: #f5f5f5;
+
+  .table, .td-content > table, .td-box .row.section > table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #c9c7c7;
+}
+
+.table-striped tbody tr:nth-of-type(odd), .td-content > table tbody tr:nth-of-type(odd), .td-box .row.section > table tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+  .td-sidebar-nav .td-sidebar-link.tree-root {
+    font-weight: 700;
+    color: #c9c7c7;
+    border-bottom: 1px #c9c7c7 solid;
+    margin-bottom: 1rem;
+  }
+
+  .td-sidebar-nav .td-sidebar-link {
+    display: inline-block;
+    color: #c9c7c7;
+    padding-bottom: 0.375rem;
+    width: 110%;
+    max-height: 1.75em;
+    overflow: clip;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .td-sidebar-nav .td-sidebar-link > span {
+    position: relative;
+    color: #c9c7c7;
+    cursor: pointer;
+    max-height: 2em;
+    text-overflow: ellipsis;
+  }
+
+  .td-content pre {
+    word-wrap: normal;
+    background-color: #050505;
+    padding: 1rem;
+}
+
+.td-content .highlight pre {
+    margin: 0;
+    padding: 1rem;
+    color: rgb(109, 235, 7);
+    background-color: black;
+}
+
+.td-content pre > code {
+    background-color: black;
+    text-shadow: none;
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    word-break: normal;
+    white-space: pre;
+    border: 0;
+    color: rgb(109, 235, 7);
+
+}
+
+div.method .signature {
+    background-color: #b3e0ff !important;
+    color: #000 !important;
+}
+
+.language-css .token.string, .style .token.string, .token.entity, .token.operator, .token.url {
+    color: #e64e0d;
+    background: transparent;
+}
+
+div.method .body > .returns .param-item .name, div.method .body > .returns .exc-item .name, div.method .body .parameters .param-item .name, div.method .body .parameters .exc-item .name, div.method .body .exceptions .param-item .name, div.method .body .exceptions .exc-item .name, div.method .body .examples .param-item .name, div.method .body .examples .exc-item .name {
+    background-color: #b3e0ff;
+    color: rgb(79, 78, 80);
+}
+.td-sidebar-nav__section-title a {
+    color: #8a8484;
+}
+  .callout .callout-title {
+    background-color: inherit;
+  }
+
+  .callout .callout-icon {
+    background-color: inherit;
+  }
+
+  dark-mode .callout-body > ul  {
+    background-color: inherit;
+    color: inherit;
+    padding-bottom: 3em;
+}
+
+.dark-mode .callout-body > ul > li  {
+    background-color: inherit;
+    color: inherit;
+}
+
+.callout-body > em  {
+    background-color: inherit;
+    color: inherit;
+}
+body.dark-mode .callout-body > p > strong  {
+    background-color: inherit;
+    color: inherit;
+}
+
+body.dark-mode .callout-body > p > code  {
+    background-color: inherit;
+    color: inherit;
+}
+.dark-mode .callout-body > ul > li > strong  {
+    background-color: inherit;
+    color: inherit;
+}
+.dark-mode .callout-body > ul > li > em  {
+    background-color: inherit;
+    color: inherit;
+}
+
+
+  .callout-notice {
+    background-color: hsl(226, 100%, 89%);
+  }
+
+  .callout-notice .callout-body {
+    background-color: hsl(226, 100%, 89%);
+    color: black;
+  }
+  .callout-notice .callout-body > p {
+    background-color: inherit;
+    color: black;
+  }
+  .callout-destructive .callout-body {
+    margin: 0.25rem 0 0.25rem 0;
+    background-color: hsl(8, 54%, 84%);
+    color: black;
+  }
+
+  .callout-destructive .callout-body > p {
+    background-color: hsl(8, 54%, 84%);
+    color: black;
+  }
+
+  .callout .resource-link-description {
+    color: rgba(42, 40, 40, 0.5) !important;
+  }
+  .resource-link .resource-link-description {
+    color: rgba(212, 209, 209, 0.5);
+  }
+
+  .resource-link .resource-link-description a {
+    color: rgba(212, 209, 209, 0.5);
+  }
+.callout .resource-link .block-label {
+  color: black;
+}
+
+.resource-link .parent-page-link {
+    color: rgba(212, 209, 209, 0.5);
+}
+
+.td-toc #TableOfContents a {
+    color: #c4c0c0;
+}
+}

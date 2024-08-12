@@ -33,6 +33,7 @@
 @import "api";
 @import "callouts";
 @import "resource-links";
+@import "darkmode";
 
 @if $td-enable-google-fonts {
     @import url($web-font-path);
