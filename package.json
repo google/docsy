@@ -38,15 +38,19 @@
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome userguide ",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.5.2",
+    "@fortawesome/fontawesome-free": "6.6.0",
     "bootstrap": "5.3.3"
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.126.3",
+    "hugo-extended": "0.131.0",
     "markdown-link-check": "^3.12.2",
     "mkdirp": "^3.0.1",
-    "prettier": "^3.3.0"
+    "prettier": "^3.3.3"
+  },
+  "optionalDependencies": {
+    "netlify-cli": "^17.33.5",
+    "npm-check-updates": "^17.0.3"
   },
   "engines": {
     "node": ">=20"

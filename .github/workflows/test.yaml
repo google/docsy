@@ -25,4 +25,7 @@ jobs:
           cache: npm
           cache-dependency-path: package.json
       - run: npm install --omit=optional
-      - run: npm run test:all
+      - if: runner.os != 'Windows'
+        run: npm run test:all
+      - if: runner.os == 'Windows'
+        run: npm run ci:prepare && npm run cd:docs build && npm run ci:post
