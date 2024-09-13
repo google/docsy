@@ -1,0 +1,113 @@
+# UI strings. Buttons and similar.
+
+[ui_pager_prev]
+other = "Əvvəlki"
+
+[ui_pager_next]
+other = "Növbəti"
+
+[ui_read_more]
+other = "Daha çox oxu"
+
+[ui_search]
+other = "Bu saytda axtarın..."
+
+# Used in sentences such as "Posted in News"
+[ui_in]
+other = "daxilində"
+
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "bütün"
+
+# Footer text
+[footer_all_rights_reserved]
+other = "Bütün Hüquqlar Qorunur"
+
+[footer_privacy_policy]
+other = "Məxfilik Siyasəti"
+
+# Post (blog, articles etc.)
+[post_byline_by]
+other = "tərəfindən"
+
+[post_created]
+other = "Yaradıldı"
+
+[post_last_mod]
+other = "Son redaktə"
+
+[post_edit_this]
+other = "Bu səhifəni redaktə edin"
+
+[post_view_this]
+other = "Səhifənin mənbəyini görüntülə"
+
+[post_create_child_page]
+other = "Alt səhifə yaradın"
+
+[post_create_issue]
+other = "Sənəd mövzusu yaradın"
+
+[post_create_project_issue]
+other = "Layihə mövzusu yaradın"
+
+[post_posts_in]
+other = "Yazılar daxilində"
+
+[post_reading_time]
+other = "dəqiqə oxuma"
+
+[post_less_than_a_minute_read]
+other = "1 dəqiqədən az"
+
+# Print support
+[print_printable_section]
+other = "Bu bölmə çap üçün uyğundur."
+
+[print_click_to_print]
+other = "Çap etmək üçün klikləyin"
+
+[print_show_regular]
+other = "Bu səhifənin adi görünüşünə qayıdın"
+
+[print_entire_section]
+other = "Bütün bölməni çap edin"
+
+# Community
+[community_join]
+other = "{{ .Site.Title }} icmasına qoşulun"
+
+[community_introduce]
+other = "{{ .Site.Title }} hər kəsin istifadə edə biləcəyi, inkişaf etdirə biləcəyi və zövq ala biləcəyi açıq mənbəli bir layihədir. Bizə qoşulmağınızı çox istərdik! Budur iştirak etməyin və layihə haqqında məlumat əldə etməyin bir neçə yolu."
+
+[community_learn]
+other = "Öyrənin və Bağlanın"
+
+[community_using]
+other = "{{ .Site.Title }} istifadə edirsiniz və ya istifadə etmək fikrindəsiniz? Daha çox məlumatı buradan əldə edə bilərsiniz:"
+
+[community_develop]
+other = "İnkişaf etdirin və Töhfə verin"
+
+[community_contribute]
+other = "Əgər {{ .Site.Title }}-a daha çox töhfə vermək istəyirsinizsə, bizə burada qoşulun:"
+
+[community_how_to]
+other = "{{ .Site.Title }}-a necə töhfə verməyi bizim"
+
+[community_guideline]
+other = "Töhfə Yönergələrimizdən öyrənə bilərsiniz."
+
+# Feedback
+[feedback_title]
+other = "Rəy"
+
+[feedback_question]
+other = "Bu səhifə sizin üçün faydalı oldu?"
+
+[feedback_positive]
+other = "Bəli"
+
+[feedback_negative]
+other = "Xeyr"
