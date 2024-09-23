@@ -30,11 +30,19 @@ For the full list of changes, see the [0.x.y] release notes.
 
 - Support for Right-To-Left (RLT) languages is reintroduced via [Bootstrap's
   base support for RTL][bs-rtl].
+- The URL to your project's contribution guidelines is configurable. For
+  details, see [Adding a community page].
+- A warning is now output when a section's sidebar entries are truncated because
+  there are more than [params.ui.sidebar_menu_truncate] section entries.
 
-**Other changes**:
+**Other changes**: TBC
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
+[Adding a community page]:
+  https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page
+[params.ui.sidebar_menu_truncate]:
+  https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options
 
 ## 0.10.0
 
