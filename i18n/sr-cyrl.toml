@@ -1,0 +1,90 @@
+# UI strings. Buttons and similar.
+
+[ui_pager_prev]
+other = "Претходно"
+
+[ui_pager_next]
+other = "Наредно"
+
+[ui_read_more]
+other = "Прочитајте више"
+
+[ui_search]
+other = "Претражите сајт…"
+
+# Used in sentences such as "Posted in News"
+[ui_in]
+other = "у"
+
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "све"
+
+# Footer text
+[footer_all_rights_reserved]
+other = "Сва права задржана"
+
+[footer_privacy_policy]
+other = "Политика приватности"
+
+# Post (blog, articles etc.)
+[post_byline_by]
+other = "Аутор"
+[post_created]
+other = "Креирано"
+[post_last_mod]
+other = "Последњи пут измењено"
+[post_edit_this]
+other = "Уредите ову страницу"
+[post_view_this]
+other = "Погледајте извор странице"
+[post_create_child_page]
+other = "Креирајте подстраницу"
+[post_create_issue]
+other = "Креирајте issue за документацију"
+[post_create_project_issue]
+other = "Креирајте issue за пројекат"
+[post_posts_in]
+other = "Објава у"
+[post_reading_time]
+other = "минута за читање"
+[post_less_than_a_minute_read]
+other = "мање од минута за читање"
+
+# Print support
+[print_printable_section]
+other = "Ово је вишестрани преглед за штампање ове секције."
+[print_click_to_print]
+other = "Кликните овде за штампање"
+[print_show_regular]
+other = "Повратак на обичан преглед ове странице"
+[print_entire_section]
+other = "Одштампајте читаву секцију"
+
+# Community
+[community_join]
+other = "Придружите се {{ .Site.Title }} заједници"
+[community_introduce]
+other = "{{ .Site.Title }} је open source пројекат којег свако у заједници може да користи, унапређује и да ужива у њему. Волели бисмо да нам се придружите! Овде се можете укључити како бисте сазнали шта се дешава."
+[community_learn]
+other = "Научите и повежите се"
+[community_using]
+other = "Већ користите или желите да почнете користити {{ .Site.Title }}? Сазнајте више:"
+[community_develop]
+other = "Развој и допринос"
+[community_contribute]
+other = "Ако желите да се више укључите у допринос на {{ .Site.Title }}, придружите нам се:"
+[community_how_to]
+other = "Можете сазнати како да допринесете на {{ .Site.Title }} у нашим"
+[community_guideline]
+other = "Смерницама за допринос"
+
+# Feedback
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "Да ли вам је ова страница била од помоћи?"
+[feedback_positive]
+other = "Да"
+[feedback_negative]
+other = "Не"
