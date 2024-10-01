@@ -78,10 +78,10 @@ In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to us
 {{< tab header="hugo.toml" lang="toml" >}}
 theme = ["docsy"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 theme: docsy
 {{< /tab >}}
-{{< tab header="config.json" lang="json" >}}
+{{< tab header="hugo.json" lang="json" >}}
 "theme": "docsy"
 {{< /tab >}}
 {{< /tabpane >}}
@@ -93,7 +93,7 @@ Change this line to:
 {{< tab header="hugo.toml" lang="toml" >}}
 theme = ["github.com/google/docsy"]
 {{< /tab >}}
-{{< tab header="config.yaml" lang="yaml" >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 theme:
   - github.com/google/docsy
 {{< /tab >}}
