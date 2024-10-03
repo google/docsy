@@ -1,0 +1,12 @@
+{{ $baseUrl := replaceRE "/_git/.+$" "" .repo.url }}
+{{ $viewURL := printf "%s?path=%s&version=GB%s&_a=contents" .repo.url .repo_path .repo_branch -}}
+{{ $issuesURL := printf "%s/_workitems/create/Bug?[title]=%s" $baseUrl (safeURL $.context.Title ) -}}
+{{ if .repo.azure.issue_area -}}
+  {{ $issuesURL = printf "%s/_workitems/create/Bug?[title]=%s&[Area Path]=%s" $baseUrl (safeURL $.context.Title) (safeURL .repo.azure.issue_area) -}}
+{{ end -}}
+<a href="{{ $viewURL }}" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_view_this" }}</a>
+<a href="{{ $issuesURL }}" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_issue" }}</a>
+{{ with .repo.project_url -}}
+  {{ $project_issueURL := printf "%s/_workitems/create/Bug" (replaceRE "/_git.+$" "" .) -}}
+  <a href="{{ $project_issueURL }}" class="td-page-meta--project-issue td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+{{ end -}}
