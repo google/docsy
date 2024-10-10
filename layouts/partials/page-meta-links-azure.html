@@ -1,0 +1,37 @@
+{{ $path := strings.TrimPrefix (add (replace hugo.WorkingDir "\\" "/") "/") (replace $.File.Filename "\\" "/") -}}
+{{ $az_repo := ($.Param "azure_repo") -}}
+{{ $az_subdir := ($.Param "azure_subdir") -}}
+{{ $az_project_repo := ($.Param "azure_project_repo") -}}
+{{ $az_branch := (default "main" ($.Param "azure_branch")) -}}
+{{ $az_issue_area := ($.Param "azure_issue_area") -}}
+
+{{ if $az_repo -}}
+  {{/* Adjust $path based on path_base_for_azure_subdir */ -}}
+  {{ $azs_base := $.Param "path_base_for_azure_subdir" -}}
+  {{ $azs_rename := "" -}}
+  {{ if reflect.IsMap $azs_base -}}
+    {{ $azs_rename = $azs_base.to -}}
+    {{ $azs_base = $azs_base.from -}}
+  {{ end -}}
+  {{ with $azs_base -}}
+    {{ $path = replaceRE . $azs_rename $path -}}
+  {{ end -}}
+
+  {{ $az_repo_path := printf "%s/%s" $az_subdir $path -}}
+  {{ $az_repo_path = replaceRE "//+" "/" $az_repo_path -}}
+
+  {{ $baseUrl := replaceRE "/_git/.+$" "" $az_repo }}
+  {{ $viewURL := printf "%s?path=%s&version=GB%s&_a=contents" $az_repo $az_repo_path $az_branch -}}
+  {{ $issuesURL := printf "%s/_workitems/create/Bug?[title]=%s" $baseUrl (safeURL $.Title ) -}}
+  {{ if $az_issue_area -}}
+    {{ $issuesURL = printf "%s/_workitems/create/Bug?[title]=%s&[Area Path]=%s" $baseUrl (safeURL $.Title) (safeURL $az_issue_area) -}}
+  {{ end -}}
+
+  <a href="{{ $viewURL }}" class="td-page-meta--edit td-page-meta__edit" target="_blank" rel="noopener"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_view_this" }}</a>
+  <a href="{{ $issuesURL }}" class="td-page-meta--issue td-page-meta__issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_issue" }}</a>
+  {{ with $az_project_repo -}}
+    {{ $project_issueURL := printf "%s/_workitems/create/Bug" (replaceRE "/_git.+$" "" .) -}}
+    <a href="{{ $project_issueURL }}" class="td-page-meta--project-issue td-page-meta__project-issue" target="_blank" rel="noopener"><i class="fa-solid fa-list-check fa-fw"></i> {{ T "post_create_project_issue" }}</a>
+  {{ end -}}
+
+{{ end -}}
