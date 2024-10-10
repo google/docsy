@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
-    "postcss-cli": "^11.0.0"
+    "postcss-cli": "^11.0.0",
+    "rtlcss": "^4.3.0"
   }
 }
