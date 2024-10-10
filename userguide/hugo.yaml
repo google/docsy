@@ -30,6 +30,7 @@ menu:
 languages:
   en:
     languageName: English
+    languageDirection: rtl
     params:
       description: Docsy does docs
 
