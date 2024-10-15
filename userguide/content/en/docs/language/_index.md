@@ -2,6 +2,7 @@
 title: Multi-language Support
 weight: 7
 description: Support multiple languages in your site.
+cSpell:ignore: Goldydocs rtlcss subdir operativsystem skyen Norsk
 ---
 
 If you'd like to provide site content in multiple languages, the Docsy theme and
@@ -12,9 +13,9 @@ navigate between language versions.
 
 To add content in multiple languages, you first need to define the available
 languages in a `languages` section in your site configuration. Each language can
-have its own language-specific configuration. For example, the Docsy Example
-Site config specifies that it provides content in English and Norwegian, and
-that the language version visitors will see by default is English:
+have its own language-specific configuration. For example, the [Docsy example]
+site config specifies that it provides content in English, Norwegian, and
+Persian. The default language is English:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -125,6 +126,27 @@ For adding multiple language versions of other site elements such as button
 text, see the [internationalization bundles](#internationalization-bundles)
 section below.
 
+### Right-to-left languages
+
+Docsy supports top-down Right-To-Left (RTL) languages such as Persian through
+[Bootstrap's RTL feature][bs-rtl], which uses [RTLCSS].
+
+If your multilingual site includes an RTL language (configured with
+`languageDirection: rtl`), then your project needs to include the [`rtlcss`
+package]. You can add this package to your dev dependencies as follows:
+
+```sh
+npm install rtlcss --save-dev
+```
+
+For an example of Docsy's RTL support, see the [Persian pages] of the [Docsy
+example].
+
+[bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
+[RTLCSS]: https://rtlcss.com/
+[`rtlcss` package]: https://www.npmjs.com/package/rtlcss
+[Persian pages]: https://example.docsy.dev/fa/
+
 ## Selecting a language
 
 If you configure more than one language in your
@@ -160,3 +182,5 @@ directory. For example, if you want to override any of Docsy's
 create your own `/i18n/en.toml` with just your custom strings. Any values you
 specify in this file will override the theme versions, while the remaining
 strings will come from the theme's corresponding internationalization bundle.
+
+[Docsy example]: https://example.docsy.dev/
