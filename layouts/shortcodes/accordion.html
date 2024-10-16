@@ -1,0 +1,40 @@
+{{/* Check parameter type */ -}}
+{{ with .Get "alwaysOpen" -}}
+  {{ warnf "Always open given" }}
+  {{ $type := printf "%T" . -}}
+  {{ if ne $type "bool" -}}
+    {{ errorf `shortcode 'accordion': boolean value expected for parameter 'alwaysOpen', but got %s` $type -}}
+  {{ end -}}
+{{ end -}}
+
+{{ $alwaysOpen := default false ($.Get "alwaysOpen") -}}
+
+{{- /* Scratchpad gets populated through call to .Inner */ -}}
+{{- .Inner -}}
+
+{{/* Accordion markup */ -}}
+<div id="accordion-{{- $.Ordinal -}}" class="accordion mb-4">
+  {{ range $index, $element := $.Scratch.Get "items" -}}
+    {{ $itemid := printf "-%02v-%v" $.Ordinal $index | anchorize -}}
+
+    {{ $open := false -}}
+    {{ with $element.open -}}
+      {{ $open = . -}}
+    {{ end -}}
+
+    <div class="accordion-item">
+      <div class="accordion-header" id="heading{{- $itemid -}}">
+        <button class="accordion-button {{- cond ( eq $index "00" ) "" " collapsed" -}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{- $itemid -}}"
+                aria-controls="collapse{{- $itemid -}}" aria-expanded="{{- cond ( eq $index "00" ) "true" "false" -}}">
+        {{ index . "header" | markdownify }}
+        </button>
+      </div>
+      <div id="collapse{{- $itemid -}}" class="accordion-collapse {{ cond $open "open" "collapse" }} {{- cond ( eq $index "00" ) " show" ""  -}}" 
+           aria-labelledby="heading{{- $itemid -}}" {{ if not $alwaysOpen -}}data-bs-parent="#accordion-{{- $.Ordinal -}}"{{- end }}>
+        <div class="accordion-body">
+          {{ index . "content" }}
+        </div>
+      </div>
+    </div>
+  {{- end }}
+</div>
