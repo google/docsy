@@ -61,6 +61,32 @@ configuration file. For details, see [Configure Google Analytics][].
 
 {{% /alert %}}
 
+## Installing the HubSpot tracking code
+
+If you have a [HubSpot account](https://www.hubspot.com/) and want to use it to track the visitors of your site, add the following to the `params` section of your project's [configuration file]:
+
+{{< tabpane persistLang=false >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params]
+hubspotId = "<your-hubspot-account-id-for-example-12345678>"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  hubspotId: "<your-hubspot-account-id-for-example-12345678>"
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "hubspotId": "<your-hubspot-account-id-for-example-12345678>"
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+To avoid loading unneeded Javascript files, Docsy doesn't load the Javascript needed for HubSpot forms by default. To use HubSpot forms with Docsy, add `hubspotForm: true` to the frontmatter of the page where you are using forms.
+Setting HubSpot page types is currently not supported.
+
 ## User Feedback
 
 By default Docsy puts a "was this page helpful?" feedback widget at the bottom
