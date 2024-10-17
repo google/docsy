@@ -1,5 +1,3 @@
-
-
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
@@ -35,6 +33,8 @@ other = "ساخته شده"
 other = "آخرین تغییرات"
 [post_edit_this]
 other = "این صفحه را ویرایش کنید"
+[post_view_this]
+other = "مشاهده منبع صفحه"
 [post_create_child_page]
 other = "ایجاد زیر صفحه در این صفحه"
 [post_create_issue]
@@ -76,3 +76,13 @@ other = "If you want to get more involved by contributing to {{ .Site.Title }}, 
 other = "You can find out how to contribute to {{ .Site.Title }} in our"
 [community_guideline]
 other = "Contribution Guidelines"
+
+# Feedback
+[feedback_title]
+other = "بازخورد"
+[feedback_question]
+other = "این صفحه به شما کمک کرد؟"
+[feedback_positive]
+other = "آره"
+[feedback_negative]
+other = "نه"
