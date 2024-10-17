@@ -1,11 +1,3 @@
-{{ with .Description | plainify -}}
-  {{ . -}}
-{{ else -}}
-  {{ if .IsPage -}}
-    {{ .Summary | plainify | chomp -}}
-  {{ else -}}
-    {{ with .Site.Params.description | plainify -}}
-      {{ . -}}
-    {{ end -}}
-  {{ end -}}
+{{ with or .Description .Summary site.Params.description | plainify | htmlUnescape -}}
+  {{ trim . "\n\r\t " -}}
 {{ end -}}
