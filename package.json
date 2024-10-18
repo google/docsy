@@ -1,7 +1,7 @@
 {
   "name": "docsy",
-  "version": "0.10.1-dev.0-unreleased",
-  "version.next": "0.10.2-dev.0-unreleased",
+  "version": "0.11.0",
+  "version.next": "0.11.1-dev.0-unreleased",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -41,13 +41,13 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.136.1",
+    "hugo-extended": "0.136.2",
     "markdown-link-check": "^3.12.2",
     "mkdirp": "^3.0.1",
     "prettier": "^3.3.3"
   },
   "optionalDependencies": {
-    "netlify-cli": "^17.37.0",
+    "netlify-cli": "^17.37.1",
     "npm-check-updates": "^17.1.4"
   },
   "engines": {
