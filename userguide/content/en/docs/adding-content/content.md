@@ -619,27 +619,23 @@ You can also use this directory for other files used by your project, including 
 
 ## RSS feeds
 
-Hugo will, by default, create an RSS feed for the home page and any section. 
-To disable all RSS feeds, add the following to your 
+Hugo will, by default, create an RSS feed for the home page and any section.
+To disable all RSS feeds, add the following to your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-[params]
 disableKinds = ["RSS"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  disableKinds: [RSS]
+disableKinds: [RSS]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
-  "params": {
-    "disableKinds": [
-      "RSS"
-      ]
-  }
+  "disableKinds": [
+    "RSS"
+  ]
 }
 {{< /tab >}}
 {{< /tabpane >}}
