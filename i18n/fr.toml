@@ -77,3 +77,14 @@ other = "Si vous voulez vous impliquer davantage en contribuant à {{ .Site.Titl
 other = "Vous pouvez trouver comment contribuer à {{ .Site.Title }} dans nos"
 [community_guideline]
 other = "Règles de contribution"
+
+# Feedback
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "Cette page est elle utile?"
+[feedback_positive]
+other = "Oui"
+[feedback_negative]
+other = "Non"
+
