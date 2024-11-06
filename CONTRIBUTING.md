@@ -118,14 +118,14 @@ least one downstream project, then perform the following actions before any
 further changes are merged into the default branch:
 
 1. Set `version` in [package.json](package.json) to the next planned (or the
-   next dot) release with a dev suffix, such as `v0.X.Z-dev.0-unreleased`.
+   next dot) release with a dev suffix, such as `v0.X.Z-dev-unreleased`.
 2. In the [CHANGELOG]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
      at the end of the file.
    - **Pin the 0.X.Y release URL**, which ends with `latest?FIXME=...`, to the
      v0.X.Y release at `https://github.com/google/docsy/releases/v0.x.y`.
 3. **Submit a PR with your changes**, using a title like "Set NPM package
-   version to next unreleased dev vers".
+   version to next unreleased dev version".
 4. **Get PR approved and merged**.
 
 [CHANGELOG]: CHANGELOG.md

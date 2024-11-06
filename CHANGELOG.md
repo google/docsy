@@ -45,7 +45,7 @@ For the full list of changes, see the [0.11.0] release notes.
 - When a section's sidebar entries are truncated because there are more than
   [params.ui.sidebar_menu_truncate] section entries, a warning is issued.
 
-[0.11.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[0.11.0]: https://github.com/google/docsy/releases/v0.11.0
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
 [Adding a community page]:
   https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page
