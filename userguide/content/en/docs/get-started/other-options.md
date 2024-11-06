@@ -283,7 +283,7 @@ You can use Docsy as an NPM module as follows:
 
     {{% alert title="Error: failed to load modules" color="warning" %}}
 
-If Hugo reports the following error when building your site:
+If Hugo reports the following error when building your site ([#2116]):
 
 ```
 Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
@@ -294,6 +294,8 @@ Then run the following command and try again:
 ```sh
 npm rebuild
 ```
+
+[#2116]: https://github.com/google/docsy/issues/2116
 
 {{% /alert %}}
 
