@@ -179,12 +179,12 @@ your project's root directory:
 2.  Add Docsy as a theme, for example:
 
     ```sh
-    echo 'theme = "docsy"' >> hugo.toml
+    echo 'theme: docsy' >> hugo.yaml
     ```
 
     {{% alert title="Tip" %}}
-In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
-If you are using hugo 0.110 or above, consider renaming your `config.toml` to `hugo.toml`!
+In Hugo 0.110.0 the default config base filename was changed to `hugo.*` from `config.*`.
+If you are using hugo 0.110 or above, consider renaming your `config.*` to `hugo.*`!
     {{% /alert %}}
 
 3.  Get Docsy dependencies:
@@ -258,14 +258,15 @@ You can use Docsy as an NPM module as follows:
 1.  Create your site and specify Docsy as the site theme:
 
     ```sh
-    hugo new site myproject
+    hugo new site --format yaml myproject
     cd myproject
-    echo 'theme = "docsy"' >> hugo.toml
+    echo 'theme: docsy' >> hugo.yaml
     ```
 
 2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
 
     ```console
+    npm init -y
     npm install --save-dev google/docsy#semver:{{% param version %}} autoprefixer postcss-cli
     ```
 
@@ -285,7 +286,7 @@ You can use Docsy as an NPM module as follows:
     your site's configuration file:
 
     ```sh
-    echo 'themesDir = "node_modules"' >> hugo.toml
+    echo 'themesDir: node_modules' >> hugo.yaml
     ```
 
 As an alternative to specifying a `themesDir`, on some platforms, you can
