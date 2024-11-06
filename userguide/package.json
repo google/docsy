@@ -3,23 +3,23 @@
   "scripts": {
     "_build": "npm run _hugo-dev --",
     "_check:format": "npx prettier --check .",
-    "_check:links": "make check-links",
-    "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_check:links": "make --keep-going check-links",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
+    "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build --",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
-    "check:links:all": "HTMLTEST_ARGS= npm run _check:links",
+    "check:links:internal": "HTMLTEST_ARGS='--skip-external' npm run _check:links",
     "check:links": "npm run _check:links",
     "clean": "rm -Rf public",
     "fix:format": "npm run _check:format -- --write",
     "make:public": "git init -b main public",
-    "precheck:links:all": "npm run build",
-    "precheck:links": "npm run build",
     "postbuild:preview": "npm run _check:links",
     "postbuild:production": "npm run _check:links",
+    "precheck:links:all": "npm run build",
+    "precheck:links": "npm run build",
     "prepare": "cd .. && npm install",
     "serve": "npm run _serve",
     "test": "npm run check:format && npm run check:links",
@@ -30,5 +30,6 @@
     "autoprefixer": "^10.4.20",
     "postcss-cli": "^11.0.0",
     "rtlcss": "^4.3.0"
-  }
+  },
+  "cSpell:ignore": "- docsy htmltest pkgs postbuild precheck rtlcss -"
 }

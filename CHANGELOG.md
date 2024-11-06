@@ -20,7 +20,7 @@ Useful links:
 
 ## 0.11.1 or 0.12.0
 
-> ### UNRELEASED: this planned version is still under development
+> **UNRELEASED: this planned version is still under development**
 
 For the full list of changes, see the [0.x.y] release notes.
 
@@ -255,7 +255,8 @@ For the full list of changes, see the [0.7.0] release notes.
 - **Shortcodes**:
   - Now using Hugo's native support for processing HTML & markdown, not file
     extension testing. ([#906])
-  - Dropped support for pre-Hugo-0.54.x behavior of `{{% %}}`. ([#939])
+  - Dropped support for pre-Hugo-0.54.x behavior of [shortcodes with markdown],
+    `{{%/*...*/%}}`. ([#939])
   - `blocks/section`: **default** and accepted values of the `type` argument
     have changed! For details, see [blocks/section] ([#1472]).
   - **Card shortcodes** ([#1376])]:
@@ -268,6 +269,8 @@ For the full list of changes, see the [0.7.0] release notes.
 
 [chroma-docsy]:
   https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+[shortcodes with markdown]:
+  https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
 
 - **Detection of draw.io diagrams** is now **disabled** by default [#1185]
 

@@ -14,6 +14,8 @@ outputs:
   page: [HTML]
   section: [HTML, RSS, print]
 
+ignoreFiles: [_include]
+
 imaging:
   resampleFilter: CatmullRom
   quality: 75
@@ -104,6 +106,10 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
+      - name: Project info
+        url: /project/
+        icon: fa fa-book
+        desc: Project design documentation and resources
       - name: GitHub
         url: https://github.com/google/docsy
         icon: fa-brands fa-github
@@ -129,3 +135,10 @@ module:
   mounts:
     - source: content/en
       target: content
+    # Mount the repo's top-level .md files
+    - source: ../README.md
+      target: content/project/_include/readme.md
+    - source: ../CHANGELOG.md
+      target: content/project/_include/changelog.md
+    - source: ../CONTRIBUTING.md
+      target: content/project/_include/contributing.md
