@@ -41,14 +41,14 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.136.5",
-    "markdown-link-check": "^3.12.2",
+    "hugo-extended": "0.137.0",
+    "markdown-link-check": "^3.13.5",
     "mkdirp": "^3.0.1",
     "prettier": "^3.3.3"
   },
   "optionalDependencies": {
     "netlify-cli": "^17.37.2",
-    "npm-check-updates": "^17.1.9"
+    "npm-check-updates": "^17.1.10"
   },
   "engines": {
     "node": ">=20"
