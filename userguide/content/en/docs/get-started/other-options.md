@@ -66,6 +66,7 @@ The following shows you how to install Hugo from the release page:
 3.  Download the latest extended version
     (`hugo_extended_0.9X_Linux-64bit.tar.gz`).
 4.  Create a new directory:
+
     ```sh
     mkdir hugo
     ```
@@ -73,6 +74,7 @@ The following shows you how to install Hugo from the release page:
 5.  Extract the files you downloaded to `hugo`.
 
 6.  Switch to your new directory:
+
     ```sh
     cd hugo
     ```
@@ -105,9 +107,8 @@ If you have Node installed already, check your version of Node. For example:
 node -v
 ```
 
-Install or upgrade your version of Node to the **active [LTS release][]**. We
-recommend using **[nvm][]** to manage your Node installation (Linux command
-shown):
+Install or upgrade your version of Node to the **active [LTS release][]**. We recommend
+using **[nvm][]** to manage your Node installation (Linux command shown):
 
 ```sh
 nvm install --lts
@@ -122,9 +123,8 @@ To build or update your site's CSS resources, you'll also need
 {{% alert title="IMPORTANT: Check your Node version" color="warning" %}}
 
 The PostCSS package installed by some older versions of Node is incompatible
-with Docsy. Check your version of Node against the **active [LTS release][]**
-and upgrade, if necessary. For details, see [Node: Get the latest LTS
-release][latest-lts].
+with Docsy. Check your version of Node against the **active [LTS release][]** and
+upgrade, if necessary. For details, see [Node: Get the latest LTS release][latest-lts].
 
 [lts release]: https://nodejs.org/en/about/releases/
 [latest-lts]: #node-get-the-latest-lts-release
@@ -169,8 +169,8 @@ your project's root directory:
     git checkout v{{% param version %}}
     ```
 
-    To work from the development version of Docsy (not recommended),
-    run the following command instead:
+    To work from the development version of Docsy (_not recommended_), run the
+    following command instead:
 
     ```sh
     git submodule add --depth 1 https://github.com/google/docsy.git themes/docsy
@@ -182,9 +182,9 @@ your project's root directory:
     echo 'theme: docsy' >> hugo.yaml
     ```
 
-    {{% alert title="Tip" %}}
-In Hugo 0.110.0 the default config base filename was changed to `hugo.*` from `config.*`.
-If you are using hugo 0.110 or above, consider renaming your `config.*` to `hugo.*`!
+    {{% alert title="Tip" %}}As of Hugo 0.110.0, the default config base
+    filename was changed to `hugo.*` from `config.*`. If you are using hugo
+    0.110 or above, consider renaming your `config.*` to `hugo.*`.
     {{% /alert %}}
 
 3.  Get Docsy dependencies:
@@ -242,8 +242,8 @@ npm install
 > **Important**: read the [Docsy NPM install side-effect] note.
 
 To work from the development version of Docsy (not recommended unless, for
-example, you plan to upstream changes to Docsy), omit the `-b v{{% param version
-%}}` argument from the clone command above.
+example, you plan to upstream changes to Docsy), omit the
+`-b v{{% param version %}}` argument from the clone command above.
 
 Then consider setting up an NPM [prepare][] script, as documented in Option 1.
 
@@ -260,7 +260,7 @@ You can use Docsy as an NPM module as follows:
     ```sh
     hugo new site --format yaml myproject
     cd myproject
-    echo 'theme: docsy' >> hugo.yaml
+    echo "theme: docsy\nthemesDir: node_modules" >> hugo.yaml
     ```
 
 2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
@@ -276,18 +276,28 @@ You can use Docsy as an NPM module as follows:
     path to the Docsy theme files. For example, build your site as follows:
 
     ```console
-    $ hugo --themesDir node_modules
+    $ hugo
     Start building sites …
     ...
-    Total in 1890 ms
     ```
 
-    You can drop the `--themesDir ...` flag by adding the themes directory to
-    your site's configuration file:
+    {{% alert title="Error: failed to load modules" color="warning" %}}
 
-    ```sh
-    echo 'themesDir: node_modules' >> hugo.yaml
-    ```
+If Hugo reports the following error when building your site ([#2116]):
+
+```
+Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
+```
+
+Then run the following command and try again:
+
+```sh
+npm rebuild
+```
+
+[#2116]: https://github.com/google/docsy/issues/2116
+
+{{% /alert %}}
 
 As an alternative to specifying a `themesDir`, on some platforms, you can
 instead create a symbolic link to the Docsy theme directory as follows (Linux
@@ -312,8 +322,7 @@ $ ls themes
 docsy                   github.com
 ```
 
-This is a workaround necessary to support Docsy's use as a single [Hugo module]
-([#1120]).
+This is a workaround necessary to support Docsy's use as a single [Hugo module] ([#1120]).
 
 [#1120]: https://github.com/google/docsy/issues/1120
 [0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
