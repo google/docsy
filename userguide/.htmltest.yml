@@ -12,12 +12,14 @@ IgnoreEmptyHref: true # FIXME
 IgnoreInternalEmptyHash: true # FIXME
 IgnoreInternalURLs: # list of paths
 IgnoreURLs: # list of regexs of paths or URLs to be ignored
+  - (index.xml|_print/)$ # ignore <link rel=alternate ...>
+  - ^https?://[^/]+/(categories|tags)/ # ignore Docsy-generated content
   - ^https?://localhost\b
   # Ignore Docsy-generated GitHub links for now
   - ^https?://github\.com/.*?/.*?/(new|edit)/ # view-page, edit-source etc
   # Ignore links to GH repo content for now.
   - ^https?://github\.com/.*?/.*?/(blob|tree)/
   - ^https://twitter.com/docsydocs$
-  # Too flaky unnecessary
+  # Too flaky or unnecessary
   - ^https://badges.netlify.com/api
   - ^https://code.jquery.com
