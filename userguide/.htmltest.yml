@@ -4,7 +4,6 @@ IgnoreAltMissing: true # FIXME
 IgnoreDirectoryMissingTrailingSlash: true # FIXME
 TestFilesConcurrently: true
 IgnoreDirs:
-  - _include
   - _print
   - ^blog/(\d+/)?page/\d+
   - ^docs/[a-z] # temporary; we'll incrementally add docs sections

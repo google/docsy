@@ -14,8 +14,6 @@ outputs:
   page: [HTML]
   section: [HTML, RSS, print]
 
-ignoreFiles: [_include]
-
 imaging:
   resampleFilter: CatmullRom
   quality: 75
