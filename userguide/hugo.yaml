@@ -135,10 +135,10 @@ module:
   mounts:
     - source: content/en
       target: content
-    # Mount the repo's top-level .md files
+    # Mount the repo's top-level .md files under project
     - source: ../README.md
-      target: content/project/_include/readme.md
+      target: content/project/readme.md
     - source: ../CHANGELOG.md
-      target: content/project/_include/changelog.md
+      target: content/project/changelog.md
     - source: ../CONTRIBUTING.md
-      target: content/project/_include/contributing.md
+      target: content/project/contributing.md

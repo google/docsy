@@ -469,9 +469,10 @@ For the full list of changes, see the [0.2.0] release notes.
 
 <!-- ENTRY TEMPLATE ------------------------------------------------------
 
+```
 ## 0.X.Y
 
-> ### UNRELEASED: this planned version is still under development
+> **UNRELEASED: this planned version is still under development**
 
 For the full list of changes, see the [0.x.y] release notes.
 
@@ -484,5 +485,6 @@ For the full list of changes, see the [0.x.y] release notes.
 **Other changes**:
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+```
 
 ---------------------------------------------------------------------------->

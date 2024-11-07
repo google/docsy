@@ -3,7 +3,10 @@ title: Docsy project
 linkTitle: Project
 description: Docsy project design documentation and other resources
 outputs: [HTML]
-cascade: { type: docs }
+cascade:
+  type: docs
+  # ui:
+  #   breadcrumb_disable: true
 ---
 
 - Docsy build and design notes (TBC)
