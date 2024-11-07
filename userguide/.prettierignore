@@ -13,3 +13,5 @@
 /content/en/docs/adding-content/*
 
 !/content/en/docs/adding-content/lookandfeel.md
+
+!/static

@@ -1,1 +1,1022 @@
-{"https://about.gitlab.com/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:25.833683-05:00"},"https://analytics.google.com/analytics/web/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.322149-05:00"},"https://app.netlify.com/sites/docsydocs/deploys":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:35.841165-05:00"},"https://bitbucket.org/product":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:35.872023-05:00"},"https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.720873-05:00"},"https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:45.233113-05:00"},"https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/#custom-color-modes":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:50.321773-05:00"},"https://cdn.jsdelivr.net/npm/markmap-autoloader":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:46.294443-05:00"},"https://cla.developers.google.com/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.498153-05:00"},"https://cloud-native.slack.com/archives/CUJ6W5TLM":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:07.527619-05:00"},"https://code.jquery.com/jquery-3.7.1.min.js":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:54.327311-05:00"},"https://creativecommons.org/licenses/by/4.0":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:35.685279-05:00"},"https://cse.google.com/cse/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:25.912167-05:00"},"https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:24.495606-05:00"},"https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink#values":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:58.431064-05:00"},"https://developer.mozilla.org/en-US/docs/Web/CSS/position#values":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:47.423046-05:00"},"https://discourse.gohugo.io/t/hugo-v0-112-0-new-template-functions/44512":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:46.242317-05:00"},"https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:59.437626-05:00"},"https://docsearch.algolia.com":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:35.804716-05:00"},"https://docsearch.algolia.com/docs/DocSearch-v3":{"StatusCode":206,"LastSeen":"2024-11-06T12:09:10.09504-05:00"},"https://docsearch.algolia.com/docs/migrating-from-v2":{"StatusCode":206,"LastSeen":"2024-11-06T12:09:15.363173-05:00"},"https://docsy.dev":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:31.312948-05:00"},"https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:56.490013-05:00"},"https://endoflife.date/bootstrap":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:46.366427-05:00"},"https://example.docsy.dev":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:59.699509-05:00"},"https://fontawesome.com/docs/web/setup/upgrade/":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:33.481615-05:00"},"https://fontawesome.com/docs/web/setup/upgrade/whats-changed":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:38.786091-05:00"},"https://getbootstrap.com":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:41.008371-05:00"},"https://getbootstrap.com/docs/4.1/components/card/":{"StatusCode":206,"LastSeen":"2024-11-06T12:09:26.306871-05:00"},"https://getbootstrap.com/docs/5.2/customize/sass/":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:19.851166-05:00"},"https://getbootstrap.com/docs/5.2/layout/breakpoints":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:01.658559-05:00"},"https://getbootstrap.com/docs/5.2/migration":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:13.382233-05:00"},"https://getbootstrap.com/docs/5.2/migration/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:41.045472-05:00"},"https://getbootstrap.com/docs/5.2/migration/#forms":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:29.453076-05:00"},"https://getbootstrap.com/docs/5.2/migration/#grid-updates":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:56.514751-05:00"},"https://getbootstrap.com/docs/5.2/migration/#javascript":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.432366-05:00"},"https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:25.038042-05:00"},"https://getbootstrap.com/docs/5.2/migration/#rtl":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:40.10422-05:00"},"https://getbootstrap.com/docs/5.2/migration/#sass":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:06.733431-05:00"},"https://getbootstrap.com/docs/5.2/migration/#utilities":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:46.341081-05:00"},"https://getbootstrap.com/docs/5.3/customize/color-modes/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.448386-05:00"},"https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:56.522694-05:00"},"https://getbootstrap.com/docs/5.3/getting-started/rtl/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.45515-05:00"},"https://github.com":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:10.082415-05:00"},"https://github.com/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:20.217545-05:00"},"https://github.com/LisaFC":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:41.54171-05:00"},"https://github.com/chalin":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.089511-05:00"},"https://github.com/deining":{"StatusCode":200,"LastSeen":"2024-11-06T12:09:48.106528-05:00"},"https://github.com/emckean":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:51.894824-05:00"},"https://github.com/geriom":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.520121-05:00"},"https://github.com/gohugoio/hugo/releases":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:57.31931-05:00"},"https://github.com/gohugoio/hugo/releases/tag/v0.112.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:35.928948-05:00"},"https://github.com/gohugoio/hugo/releases/tag/v0.123.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:36.030093-05:00"},"https://github.com/google/docsy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:30.503171-05:00"},"https://github.com/google/docsy-example":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:10.453664-05:00"},"https://github.com/google/docsy-example/pull/220":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:58.879594-05:00"},"https://github.com/google/docsy-example/pull/221":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:47.429416-05:00"},"https://github.com/google/docsy/commit/020f8608f7ce8dcc4b17cbeb6519c1debd7d89fd":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:01.047795-05:00"},"https://github.com/google/docsy/commit/712aa05897c1abe239786522131e83d69e5e1b4e":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:36.233252-05:00"},"https://github.com/google/docsy/commit/dd432d428dda757e3e6f2f4244d68c004f9edd3c":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:00.852956-05:00"},"https://github.com/google/docsy/commit/f2e336222ac52aac74fc6ca9bbba24569e91849d":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:07.854607-05:00"},"https://github.com/google/docsy/compare/v0.8.0...v0.9.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:36.036568-05:00"},"https://github.com/google/docsy/discussions":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:05.057915-05:00"},"https://github.com/google/docsy/discussions/1308":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.589992-05:00"},"https://github.com/google/docsy/discussions/1555":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:04.169461-05:00"},"https://github.com/google/docsy/discussions/798":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:21.244263-05:00"},"https://github.com/google/docsy/discussions/950":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:10.254503-05:00"},"https://github.com/google/docsy/discussions/categories/announcement":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:09.017642-05:00"},"https://github.com/google/docsy/discussions/new":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:12.720723-05:00"},"https://github.com/google/docsy/graphs/contributors":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:36.375028-05:00"},"https://github.com/google/docsy/issues":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:36.408184-05:00"},"https://github.com/google/docsy/issues/1120":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:40.795958-05:00"},"https://github.com/google/docsy/issues/1154":{"StatusCode":200,"LastSeen":"2024-11-06T12:09:32.113589-05:00"},"https://github.com/google/docsy/issues/1185":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:55.756687-05:00"},"https://github.com/google/docsy/issues/1369":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:33.896911-05:00"},"https://github.com/google/docsy/issues/138":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:30.69447-05:00"},"https://github.com/google/docsy/issues/1385":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:19.286462-05:00"},"https://github.com/google/docsy/issues/1442":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:35.06986-05:00"},"https://github.com/google/docsy/issues/1460":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:04.424906-05:00"},"https://github.com/google/docsy/issues/1466":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:19.11148-05:00"},"https://github.com/google/docsy/issues/1472":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.89355-05:00"},"https://github.com/google/docsy/issues/1510":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:29.462912-05:00"},"https://github.com/google/docsy/issues/1528":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.866324-05:00"},"https://github.com/google/docsy/issues/1560":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:11.763814-05:00"},"https://github.com/google/docsy/issues/1579":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:17.600933-05:00"},"https://github.com/google/docsy/issues/1641":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:54.674516-05:00"},"https://github.com/google/docsy/issues/1759":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:24.736233-05:00"},"https://github.com/google/docsy/issues/1812":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:52.305697-05:00"},"https://github.com/google/docsy/issues/1814":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:09.452354-05:00"},"https://github.com/google/docsy/issues/1820":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:23.626024-05:00"},"https://github.com/google/docsy/issues/1841":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:53.214345-05:00"},"https://github.com/google/docsy/issues/1845":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:40.553863-05:00"},"https://github.com/google/docsy/issues/1852":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:57.626147-05:00"},"https://github.com/google/docsy/issues/1944":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:30.590037-05:00"},"https://github.com/google/docsy/issues/2":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:14.152281-05:00"},"https://github.com/google/docsy/issues/331":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:57.646409-05:00"},"https://github.com/google/docsy/issues/470":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:31.810529-05:00"},"https://github.com/google/docsy/issues/906":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:39.719545-05:00"},"https://github.com/google/docsy/issues/939":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:08.372543-05:00"},"https://github.com/google/docsy/issues/new":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:10.099171-05:00"},"https://github.com/google/docsy/milestone/2":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:30.645035-05:00"},"https://github.com/google/docsy/milestones":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:41.439291-05:00"},"https://github.com/google/docsy/network/dependents":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:35.903218-05:00"},"https://github.com/google/docsy/pull/1009":{"StatusCode":200,"LastSeen":"2024-11-06T12:09:21.188261-05:00"},"https://github.com/google/docsy/pull/1367":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:08.065483-05:00"},"https://github.com/google/docsy/pull/1373":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:30.48777-05:00"},"https://github.com/google/docsy/pull/1388":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:35.025773-05:00"},"https://github.com/google/docsy/pull/1410":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:23.874043-05:00"},"https://github.com/google/docsy/pull/1462":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:56.190944-05:00"},"https://github.com/google/docsy/pull/1472":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:53.215306-05:00"},"https://github.com/google/docsy/pull/1500":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.825174-05:00"},"https://github.com/google/docsy/pull/1502#issue-1678874640":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:42.233022-05:00"},"https://github.com/google/docsy/pull/1523":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:36.557802-05:00"},"https://github.com/google/docsy/pull/1566":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:00.570989-05:00"},"https://github.com/google/docsy/pull/1651":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:31.959133-05:00"},"https://github.com/google/docsy/pull/1661":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:00.58422-05:00"},"https://github.com/google/docsy/pull/1662":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:38.396473-05:00"},"https://github.com/google/docsy/pull/1726":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:13.267815-05:00"},"https://github.com/google/docsy/pull/1727":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:07.491737-05:00"},"https://github.com/google/docsy/pull/1744":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:36.696918-05:00"},"https://github.com/google/docsy/pull/1815":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:15.331707-05:00"},"https://github.com/google/docsy/pull/1817":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:08.358602-05:00"},"https://github.com/google/docsy/pull/1818":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:47.022292-05:00"},"https://github.com/google/docsy/pull/1896":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:19.078138-05:00"},"https://github.com/google/docsy/pull/1908":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.418764-05:00"},"https://github.com/google/docsy/pull/1915":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:08.07516-05:00"},"https://github.com/google/docsy/pull/1920":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:13.892827-05:00"},"https://github.com/google/docsy/pull/1922":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.883712-05:00"},"https://github.com/google/docsy/pull/1952":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:13.893357-05:00"},"https://github.com/google/docsy/pulls":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.642661-05:00"},"https://github.com/google/docsy/releases":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.943218-05:00"},"https://github.com/google/docsy/releases/latest":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:35.978077-05:00"},"https://github.com/google/docsy/releases/new":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.000577-05:00"},"https://github.com/google/docsy/releases/tag/v0.10.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:25.779056-05:00"},"https://github.com/google/docsy/releases/tag/v0.7.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:25.685322-05:00"},"https://github.com/google/docsy/releases/tag/v0.9.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:25.774984-05:00"},"https://github.com/google/docsy/releases/v0.10.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:07.856243-05:00"},"https://github.com/google/docsy/releases/v0.11.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.627252-05:00"},"https://github.com/google/docsy/releases/v0.2.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:09:37.689429-05:00"},"https://github.com/google/docsy/releases/v0.3.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:09:04.862387-05:00"},"https://github.com/google/docsy/releases/v0.4.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:08:12.129351-05:00"},"https://github.com/google/docsy/releases/v0.5.1":{"StatusCode":200,"LastSeen":"2024-11-06T12:08:06.753992-05:00"},"https://github.com/google/docsy/releases/v0.6.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:08:01.153905-05:00"},"https://github.com/google/docsy/releases/v0.7.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:23.097737-05:00"},"https://github.com/google/docsy/releases/v0.7.1":{"StatusCode":200,"LastSeen":"2024-11-06T12:07:05.97486-05:00"},"https://github.com/google/docsy/releases/v0.7.2":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:24.708084-05:00"},"https://github.com/google/docsy/releases/v0.8.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:34.672005-05:00"},"https://github.com/google/docsy/releases/v0.9.0":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:24.353935-05:00"},"https://github.com/google/docsy/releases/v0.9.1":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:18.773921-05:00"},"https://github.com/google/docsy/tags":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:25.676987-05:00"},"https://github.com/jakejarvis/hugo-extended":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:42.875509-05:00"},"https://github.com/jmooring":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:47.078828-05:00"},"https://github.com/kentcdodds/cross-env/issues/257":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:52.203675-05:00"},"https://github.com/open-telemetry/opentelemetry.io/issues":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:24.377784-05:00"},"https://github.com/open-telemetry/opentelemetry.io/issues/2419":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:18.883576-05:00"},"https://github.com/open-telemetry/opentelemetry.io/pull/2490":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:36.326722-05:00"},"https://github.com/orgs/twbs/discussions/37951":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:14.742157-05:00"},"https://github.com/sarahmaddox":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:18.644822-05:00"},"https://github.com/twbs/bootstrap/issues/25254":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:09.357401-05:00"},"https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087L13":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:53.214753-05:00"},"https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087R18":{"StatusCode":200,"LastSeen":"2024-11-06T12:05:03.46348-05:00"},"https://github.com/twbs/bootstrap/releases/tag/v4.6.2":{"StatusCode":200,"LastSeen":"2024-11-06T12:08:22.731296-05:00"},"https://github.com/vsoch":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:57.13928-05:00"},"https://github.com/vsoch/docsy-jekyll":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:02.426537-05:00"},"https://gitprotect.io/blog/how-to-use-github-repository-templates/":{"StatusCode":200,"LastSeen":"2024-11-06T12:04:41.805344-05:00"},"https://gohugo.io":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:56.481854-05:00"},"https://gohugo.io/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:04.821967-05:00"},"https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown":{"StatusCode":206,"LastSeen":"2024-11-06T12:07:44.838556-05:00"},"https://gohugo.io/documentation/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:46.523198-05:00"},"https://gohugo.io/functions/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:41.056129-05:00"},"https://gohugo.io/getting-started/directory-structure/#union-file-system":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:41.026546-05:00"},"https://gohugo.io/hugo-modules/":{"StatusCode":206,"LastSeen":"2024-11-06T12:09:42.83213-05:00"},"https://gohugo.io/methods/site/copyright/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:23.921846-05:00"},"https://gohugo.io/templates/render-hooks/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:58.341425-05:00"},"https://groups.google.com/forum/#!forum/docsy-users":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:15.318082-05:00"},"https://help.github.com/articles/about-pull-requests/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:30.862657-05:00"},"https://img.shields.io/github/contributors/google/docsy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.301185-05:00"},"https://img.shields.io/github/license/google/docsy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:51.380092-05:00"},"https://img.shields.io/github/release/google/docsy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:25.800371-05:00"},"https://lunrjs.com/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:41.288729-05:00"},"https://netlify.com":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:17.787685-05:00"},"https://opensource.google.com/conduct/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:46.449139-05:00"},"https://opentelemetry.io/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:13.618841-05:00"},"https://opentelemetry.io/ecosystem/registry/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:34.919219-05:00"},"https://pages.github.com/themes/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.614022-05:00"},"https://policies.google.com/privacy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:41.207655-05:00"},"https://sass-lang.com/documentation/at-rules/import":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:30.528583-05:00"},"https://stackoverflow.com/questions/tagged/docsy":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:20.631446-05:00"},"https://support.google.com/analytics/answer/10220869":{"StatusCode":200,"LastSeen":"2024-11-06T12:08:43.993236-05:00"},"https://themes.gohugo.io/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:56.806827-05:00"},"https://www.cncf.io/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:20.447352-05:00"},"https://www.cncf.io/blog/":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:18.917189-05:00"},"https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:27.027319-05:00"},"https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:24.681803-05:00"},"https://www.cncf.io/projects/":{"StatusCode":200,"LastSeen":"2024-11-06T12:06:02.20758-05:00"},"https://www.docsy.dev/blog/2022/hello/#introducing-the-psc":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:41.378061-05:00"},"https://www.docsy.dev/blog/2023/bootstrap-5-migration/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:46.602346-05:00"},"https://www.docsy.dev/blog/2024/0.10.0/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:07.422163-05:00"},"https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:12.440347-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:23.85859-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:07.070588-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/#footer-layout":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:01.924772-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:12.169389-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:56.758279-05:00"},"https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:28.966929-05:00"},"https://www.docsy.dev/blog/_print/":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:54.676018-05:00"},"https://www.docsy.dev/blog/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.308447-05:00"},"https://www.docsy.dev/categories/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:15.698718-05:00"},"https://www.docsy.dev/categories/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.341526-05:00"},"https://www.docsy.dev/categories/taxonomies/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:04.815277-05:00"},"https://www.docsy.dev/categories/taxonomies/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.341321-05:00"},"https://www.docsy.dev/community/_print/":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:54.581987-05:00"},"https://www.docsy.dev/community/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.296446-05:00"},"https://www.docsy.dev/docs/_print/":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:54.711637-05:00"},"https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:56.90603-05:00"},"https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:17.480874-05:00"},"https://www.docsy.dev/docs/adding-content/feedback/#setup":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:49.162787-05:00"},"https://www.docsy.dev/docs/adding-content/feedback/#user-feedback":{"StatusCode":206,"LastSeen":"2024-11-06T12:06:01.765051-05:00"},"https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma":{"StatusCode":206,"LastSeen":"2024-11-06T12:07:28.264639-05:00"},"https://www.docsy.dev/docs/adding-content/lookandfeel/#project-style-files":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:29.222899-05:00"},"https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:17.225307-05:00"},"https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:02.230446-05:00"},"https://www.docsy.dev/docs/adding-content/repository-links/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:29.013652-05:00"},"https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:51.427025-05:00"},"https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:46.126424-05:00"},"https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch":{"StatusCode":206,"LastSeen":"2024-11-06T12:06:43.680938-05:00"},"https://www.docsy.dev/docs/adding-content/shortcodes/#blocksfeature":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:17.284993-05:00"},"https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection":{"StatusCode":206,"LastSeen":"2024-11-06T12:07:49.936454-05:00"},"https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes":{"StatusCode":206,"LastSeen":"2024-11-06T12:06:48.949389-05:00"},"https://www.docsy.dev/docs/contribution-guidelines/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.724747-05:00"},"https://www.docsy.dev/docs/examples/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:12.550803-05:00"},"https://www.docsy.dev/docs/get-started/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:07.318282-05:00"},"https://www.docsy.dev/docs/get-started/#installation-options":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:02.193448-05:00"},"https://www.docsy.dev/docs/get-started/docsy-as-module/":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:46.051135-05:00"},"https://www.docsy.dev/docs/get-started/other-options/":{"StatusCode":206,"LastSeen":"2024-11-06T12:08:54.302428-05:00"},"https://www.docsy.dev/docs/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.347914-05:00"},"https://www.docsy.dev/docs/language/":{"StatusCode":206,"LastSeen":"2024-11-06T12:04:34.26295-05:00"},"https://www.docsy.dev/docs/language/#internationalization-bundles":{"StatusCode":206,"LastSeen":"2024-11-06T12:05:22.434922-05:00"},"https://www.docsy.dev/docs/language/#right-to-left-languages":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:51.619196-05:00"},"https://www.docsy.dev/docs/updating/convert-site-to-module/":{"StatusCode":206,"LastSeen":"2024-11-06T12:09:53.370729-05:00"},"https://www.docsy.dev/tags/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:15.215542-05:00"},"https://www.docsy.dev/tags/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.329546-05:00"},"https://www.docsy.dev/tags/labelling/":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:59.911663-05:00"},"https://www.docsy.dev/tags/labelling/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.365073-05:00"},"https://www.docsy.dev/tags/structuring-content/":{"StatusCode":200,"LastSeen":"2024-11-06T12:03:10.066953-05:00"},"https://www.docsy.dev/tags/structuring-content/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.303058-05:00"},"https://www.docsy.dev/tags/tagging/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:09.961129-05:00"},"https://www.docsy.dev/tags/tagging/index.xml":{"StatusCode":206,"LastSeen":"2024-11-06T12:02:49.341504-05:00"},"https://www.netlify.com":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:04.805936-05:00"},"https://www.netlify.com/":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:41.203421-05:00"},"https://www.netlify.com/img/global/badges/netlify-color-accent.svg":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:10.241411-05:00"},"https://www.repostatus.org/#active":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:15.045534-05:00"},"https://www.repostatus.org/badges/latest/active.svg":{"StatusCode":206,"LastSeen":"2024-11-06T12:03:20.404752-05:00"}}
+{
+  "https://about.gitlab.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:25.833683-05:00"
+  },
+  "https://analytics.google.com/analytics/web/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.322149-05:00"
+  },
+  "https://app.netlify.com/sites/docsydocs/deploys": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:35.841165-05:00"
+  },
+  "https://bitbucket.org/product": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:35.872023-05:00"
+  },
+  "https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.720873-05:00"
+  },
+  "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:45.233113-05:00"
+  },
+  "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/#custom-color-modes": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:50.321773-05:00"
+  },
+  "https://cdn.jsdelivr.net/npm/markmap-autoloader": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:46.294443-05:00"
+  },
+  "https://cla.developers.google.com/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.498153-05:00"
+  },
+  "https://cloud-native.slack.com/archives/CUJ6W5TLM": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:07.527619-05:00"
+  },
+  "https://code.jquery.com/jquery-3.7.1.min.js": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:54.327311-05:00"
+  },
+  "https://creativecommons.org/licenses/by/4.0": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:35.685279-05:00"
+  },
+  "https://cse.google.com/cse/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:25.912167-05:00"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:24.495606-05:00"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink#values": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:58.431064-05:00"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/CSS/position#values": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:47.423046-05:00"
+  },
+  "https://discourse.gohugo.io/t/hugo-v0-112-0-new-template-functions/44512": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:46.242317-05:00"
+  },
+  "https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:59.437626-05:00"
+  },
+  "https://docsearch.algolia.com": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:35.804716-05:00"
+  },
+  "https://docsearch.algolia.com/docs/DocSearch-v3": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:09:10.09504-05:00"
+  },
+  "https://docsearch.algolia.com/docs/migrating-from-v2": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:09:15.363173-05:00"
+  },
+  "https://docsy.dev": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:31.312948-05:00"
+  },
+  "https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:56.490013-05:00"
+  },
+  "https://endoflife.date/bootstrap": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:46.366427-05:00"
+  },
+  "https://example.docsy.dev": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:59.699509-05:00"
+  },
+  "https://fontawesome.com/docs/web/setup/upgrade/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:33.481615-05:00"
+  },
+  "https://fontawesome.com/docs/web/setup/upgrade/whats-changed": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:38.786091-05:00"
+  },
+  "https://getbootstrap.com": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:41.008371-05:00"
+  },
+  "https://getbootstrap.com/docs/4.1/components/card/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:09:26.306871-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/customize/sass/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:19.851166-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/layout/breakpoints": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:01.658559-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:13.382233-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:41.045472-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#forms": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:29.453076-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#grid-updates": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:56.514751-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#javascript": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.432366-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:25.038042-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#rtl": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:40.10422-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#sass": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:06.733431-05:00"
+  },
+  "https://getbootstrap.com/docs/5.2/migration/#utilities": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:46.341081-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/customize/color-modes/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.448386-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:56.522694-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/getting-started/rtl/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.45515-05:00"
+  },
+  "https://github.com": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:10.082415-05:00"
+  },
+  "https://github.com/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:20.217545-05:00"
+  },
+  "https://github.com/LisaFC": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:41.54171-05:00"
+  },
+  "https://github.com/chalin": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.089511-05:00"
+  },
+  "https://github.com/deining": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:09:48.106528-05:00"
+  },
+  "https://github.com/emckean": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:51.894824-05:00"
+  },
+  "https://github.com/geriom": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.520121-05:00"
+  },
+  "https://github.com/gohugoio/hugo/releases": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:57.31931-05:00"
+  },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.112.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:35.928948-05:00"
+  },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.123.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:36.030093-05:00"
+  },
+  "https://github.com/google/docsy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:30.503171-05:00"
+  },
+  "https://github.com/google/docsy-example": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:10.453664-05:00"
+  },
+  "https://github.com/google/docsy-example/pull/220": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:58.879594-05:00"
+  },
+  "https://github.com/google/docsy-example/pull/221": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:47.429416-05:00"
+  },
+  "https://github.com/google/docsy/commit/020f8608f7ce8dcc4b17cbeb6519c1debd7d89fd": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:01.047795-05:00"
+  },
+  "https://github.com/google/docsy/commit/624a8a5cfc5ce85b88d72b0072a6638151db6f23": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-07T05:42:56.358626-05:00"
+  },
+  "https://github.com/google/docsy/commit/712aa05897c1abe239786522131e83d69e5e1b4e": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:36.233252-05:00"
+  },
+  "https://github.com/google/docsy/commit/930781cec8c7b62ec4f334451bc2448f611974ae": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-07T05:42:56.424252-05:00"
+  },
+  "https://github.com/google/docsy/commit/dd432d428dda757e3e6f2f4244d68c004f9edd3c": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:00.852956-05:00"
+  },
+  "https://github.com/google/docsy/commit/f2e336222ac52aac74fc6ca9bbba24569e91849d": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:07.854607-05:00"
+  },
+  "https://github.com/google/docsy/compare/v0.8.0...v0.9.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:36.036568-05:00"
+  },
+  "https://github.com/google/docsy/discussions": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:05.057915-05:00"
+  },
+  "https://github.com/google/docsy/discussions/1308": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.589992-05:00"
+  },
+  "https://github.com/google/docsy/discussions/1555": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:04.169461-05:00"
+  },
+  "https://github.com/google/docsy/discussions/798": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:21.244263-05:00"
+  },
+  "https://github.com/google/docsy/discussions/950": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:10.254503-05:00"
+  },
+  "https://github.com/google/docsy/discussions/categories/announcement": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:09.017642-05:00"
+  },
+  "https://github.com/google/docsy/discussions/new": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:12.720723-05:00"
+  },
+  "https://github.com/google/docsy/graphs/contributors": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:36.375028-05:00"
+  },
+  "https://github.com/google/docsy/issues": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:36.408184-05:00"
+  },
+  "https://github.com/google/docsy/issues/1120": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:40.795958-05:00"
+  },
+  "https://github.com/google/docsy/issues/1154": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:09:32.113589-05:00"
+  },
+  "https://github.com/google/docsy/issues/1185": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:55.756687-05:00"
+  },
+  "https://github.com/google/docsy/issues/1369": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:33.896911-05:00"
+  },
+  "https://github.com/google/docsy/issues/138": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:30.69447-05:00"
+  },
+  "https://github.com/google/docsy/issues/1385": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:19.286462-05:00"
+  },
+  "https://github.com/google/docsy/issues/1442": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:35.06986-05:00"
+  },
+  "https://github.com/google/docsy/issues/1460": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:04.424906-05:00"
+  },
+  "https://github.com/google/docsy/issues/1466": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:19.11148-05:00"
+  },
+  "https://github.com/google/docsy/issues/1472": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.89355-05:00"
+  },
+  "https://github.com/google/docsy/issues/1510": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:29.462912-05:00"
+  },
+  "https://github.com/google/docsy/issues/1528": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.866324-05:00"
+  },
+  "https://github.com/google/docsy/issues/1560": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:11.763814-05:00"
+  },
+  "https://github.com/google/docsy/issues/1579": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:17.600933-05:00"
+  },
+  "https://github.com/google/docsy/issues/1641": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:54.674516-05:00"
+  },
+  "https://github.com/google/docsy/issues/1759": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:24.736233-05:00"
+  },
+  "https://github.com/google/docsy/issues/1812": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:52.305697-05:00"
+  },
+  "https://github.com/google/docsy/issues/1814": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:09.452354-05:00"
+  },
+  "https://github.com/google/docsy/issues/1820": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:23.626024-05:00"
+  },
+  "https://github.com/google/docsy/issues/1841": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:53.214345-05:00"
+  },
+  "https://github.com/google/docsy/issues/1845": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:40.553863-05:00"
+  },
+  "https://github.com/google/docsy/issues/1852": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:57.626147-05:00"
+  },
+  "https://github.com/google/docsy/issues/1944": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:30.590037-05:00"
+  },
+  "https://github.com/google/docsy/issues/2": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:14.152281-05:00"
+  },
+  "https://github.com/google/docsy/issues/331": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:57.646409-05:00"
+  },
+  "https://github.com/google/docsy/issues/470": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:31.810529-05:00"
+  },
+  "https://github.com/google/docsy/issues/906": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:39.719545-05:00"
+  },
+  "https://github.com/google/docsy/issues/939": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:08.372543-05:00"
+  },
+  "https://github.com/google/docsy/issues/new": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:10.099171-05:00"
+  },
+  "https://github.com/google/docsy/milestone/2": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:30.645035-05:00"
+  },
+  "https://github.com/google/docsy/milestones": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:41.439291-05:00"
+  },
+  "https://github.com/google/docsy/network/dependents": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:35.903218-05:00"
+  },
+  "https://github.com/google/docsy/pull/1009": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:09:21.188261-05:00"
+  },
+  "https://github.com/google/docsy/pull/1367": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:08.065483-05:00"
+  },
+  "https://github.com/google/docsy/pull/1373": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:30.48777-05:00"
+  },
+  "https://github.com/google/docsy/pull/1388": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:35.025773-05:00"
+  },
+  "https://github.com/google/docsy/pull/1410": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:23.874043-05:00"
+  },
+  "https://github.com/google/docsy/pull/1462": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:56.190944-05:00"
+  },
+  "https://github.com/google/docsy/pull/1472": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:53.215306-05:00"
+  },
+  "https://github.com/google/docsy/pull/1500": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.825174-05:00"
+  },
+  "https://github.com/google/docsy/pull/1502#issue-1678874640": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:42.233022-05:00"
+  },
+  "https://github.com/google/docsy/pull/1523": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:36.557802-05:00"
+  },
+  "https://github.com/google/docsy/pull/1566": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:00.570989-05:00"
+  },
+  "https://github.com/google/docsy/pull/1651": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:31.959133-05:00"
+  },
+  "https://github.com/google/docsy/pull/1661": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:00.58422-05:00"
+  },
+  "https://github.com/google/docsy/pull/1662": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:38.396473-05:00"
+  },
+  "https://github.com/google/docsy/pull/1726": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:13.267815-05:00"
+  },
+  "https://github.com/google/docsy/pull/1727": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:07.491737-05:00"
+  },
+  "https://github.com/google/docsy/pull/1744": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:36.696918-05:00"
+  },
+  "https://github.com/google/docsy/pull/1815": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:15.331707-05:00"
+  },
+  "https://github.com/google/docsy/pull/1817": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:08.358602-05:00"
+  },
+  "https://github.com/google/docsy/pull/1818": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:47.022292-05:00"
+  },
+  "https://github.com/google/docsy/pull/1896": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:19.078138-05:00"
+  },
+  "https://github.com/google/docsy/pull/1908": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.418764-05:00"
+  },
+  "https://github.com/google/docsy/pull/1915": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:08.07516-05:00"
+  },
+  "https://github.com/google/docsy/pull/1920": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:13.892827-05:00"
+  },
+  "https://github.com/google/docsy/pull/1922": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.883712-05:00"
+  },
+  "https://github.com/google/docsy/pull/1952": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:13.893357-05:00"
+  },
+  "https://github.com/google/docsy/pulls": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.642661-05:00"
+  },
+  "https://github.com/google/docsy/releases": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.943218-05:00"
+  },
+  "https://github.com/google/docsy/releases/latest": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:35.978077-05:00"
+  },
+  "https://github.com/google/docsy/releases/new": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.000577-05:00"
+  },
+  "https://github.com/google/docsy/releases/tag/v0.10.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:25.779056-05:00"
+  },
+  "https://github.com/google/docsy/releases/tag/v0.7.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:25.685322-05:00"
+  },
+  "https://github.com/google/docsy/releases/tag/v0.9.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:25.774984-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.10.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:07.856243-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.11.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.627252-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.2.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:09:37.689429-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.3.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:09:04.862387-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.4.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:08:12.129351-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.5.1": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:08:06.753992-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.6.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:08:01.153905-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.7.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:23.097737-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.7.1": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:07:05.97486-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.7.2": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:24.708084-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.8.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:34.672005-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.9.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:24.353935-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.9.1": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:18.773921-05:00"
+  },
+  "https://github.com/google/docsy/tags": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:25.676987-05:00"
+  },
+  "https://github.com/jakejarvis/hugo-extended": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:42.875509-05:00"
+  },
+  "https://github.com/jmooring": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:47.078828-05:00"
+  },
+  "https://github.com/kentcdodds/cross-env/issues/257": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:52.203675-05:00"
+  },
+  "https://github.com/open-telemetry/opentelemetry.io/issues": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:24.377784-05:00"
+  },
+  "https://github.com/open-telemetry/opentelemetry.io/issues/2419": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:18.883576-05:00"
+  },
+  "https://github.com/open-telemetry/opentelemetry.io/pull/2490": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:36.326722-05:00"
+  },
+  "https://github.com/orgs/twbs/discussions/37951": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:14.742157-05:00"
+  },
+  "https://github.com/sarahmaddox": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:18.644822-05:00"
+  },
+  "https://github.com/twbs/bootstrap/issues/25254": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:09.357401-05:00"
+  },
+  "https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087L13": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:53.214753-05:00"
+  },
+  "https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087R18": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:05:03.46348-05:00"
+  },
+  "https://github.com/twbs/bootstrap/releases/tag/v4.6.2": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:08:22.731296-05:00"
+  },
+  "https://github.com/vsoch": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:57.13928-05:00"
+  },
+  "https://github.com/vsoch/docsy-jekyll": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:02.426537-05:00"
+  },
+  "https://gitprotect.io/blog/how-to-use-github-repository-templates/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:04:41.805344-05:00"
+  },
+  "https://gohugo.io": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:56.481854-05:00"
+  },
+  "https://gohugo.io/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:04.821967-05:00"
+  },
+  "https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:07:44.838556-05:00"
+  },
+  "https://gohugo.io/documentation/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:46.523198-05:00"
+  },
+  "https://gohugo.io/functions/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:41.056129-05:00"
+  },
+  "https://gohugo.io/getting-started/directory-structure/#union-file-system": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:41.026546-05:00"
+  },
+  "https://gohugo.io/hugo-modules/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:09:42.83213-05:00"
+  },
+  "https://gohugo.io/methods/site/copyright/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:23.921846-05:00"
+  },
+  "https://gohugo.io/templates/render-hooks/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:58.341425-05:00"
+  },
+  "https://groups.google.com/forum/#!forum/docsy-users": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:15.318082-05:00"
+  },
+  "https://help.github.com/articles/about-pull-requests/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:30.862657-05:00"
+  },
+  "https://img.shields.io/github/contributors/google/docsy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.301185-05:00"
+  },
+  "https://img.shields.io/github/license/google/docsy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:51.380092-05:00"
+  },
+  "https://img.shields.io/github/release/google/docsy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:25.800371-05:00"
+  },
+  "https://lunrjs.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:41.288729-05:00"
+  },
+  "https://netlify.com": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:17.787685-05:00"
+  },
+  "https://opensource.google.com/conduct/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:46.449139-05:00"
+  },
+  "https://opentelemetry.io/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:13.618841-05:00"
+  },
+  "https://opentelemetry.io/ecosystem/registry/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:34.919219-05:00"
+  },
+  "https://pages.github.com/themes/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.614022-05:00"
+  },
+  "https://policies.google.com/privacy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:41.207655-05:00"
+  },
+  "https://sass-lang.com/documentation/at-rules/import": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:30.528583-05:00"
+  },
+  "https://stackoverflow.com/questions/tagged/docsy": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:20.631446-05:00"
+  },
+  "https://support.google.com/analytics/answer/10220869": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:08:43.993236-05:00"
+  },
+  "https://themes.gohugo.io/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:56.806827-05:00"
+  },
+  "https://www.cncf.io/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:20.447352-05:00"
+  },
+  "https://www.cncf.io/blog/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:18.917189-05:00"
+  },
+  "https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:27.027319-05:00"
+  },
+  "https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:24.681803-05:00"
+  },
+  "https://www.cncf.io/projects/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:06:02.20758-05:00"
+  },
+  "https://www.docsy.dev/blog/2022/hello/#introducing-the-psc": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:41.378061-05:00"
+  },
+  "https://www.docsy.dev/blog/2023/bootstrap-5-migration/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:46.602346-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.10.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:07.422163-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:12.440347-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:23.85859-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:07.070588-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/#footer-layout": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:01.924772-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:12.169389-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:56.758279-05:00"
+  },
+  "https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:28.966929-05:00"
+  },
+  "https://www.docsy.dev/blog/_print/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:54.676018-05:00"
+  },
+  "https://www.docsy.dev/blog/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.308447-05:00"
+  },
+  "https://www.docsy.dev/categories/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:15.698718-05:00"
+  },
+  "https://www.docsy.dev/categories/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.341526-05:00"
+  },
+  "https://www.docsy.dev/categories/taxonomies/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:04.815277-05:00"
+  },
+  "https://www.docsy.dev/categories/taxonomies/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.341321-05:00"
+  },
+  "https://www.docsy.dev/community/_print/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:54.581987-05:00"
+  },
+  "https://www.docsy.dev/community/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.296446-05:00"
+  },
+  "https://www.docsy.dev/docs/_print/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:54.711637-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:56.90603-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:17.480874-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/feedback/#setup": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:49.162787-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/feedback/#user-feedback": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:06:01.765051-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:07:28.264639-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/lookandfeel/#project-style-files": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:29.222899-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:17.225307-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:02.230446-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/repository-links/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:29.013652-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:51.427025-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:46.126424-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:06:43.680938-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/shortcodes/#blocksfeature": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:17.284993-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:07:49.936454-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:06:48.949389-05:00"
+  },
+  "https://www.docsy.dev/docs/contribution-guidelines/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.724747-05:00"
+  },
+  "https://www.docsy.dev/docs/examples/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:12.550803-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:07.318282-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/#installation-options": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:02.193448-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/docsy-as-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:46.051135-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/other-options/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:08:54.302428-05:00"
+  },
+  "https://www.docsy.dev/docs/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.347914-05:00"
+  },
+  "https://www.docsy.dev/docs/language/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:04:34.26295-05:00"
+  },
+  "https://www.docsy.dev/docs/language/#internationalization-bundles": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:05:22.434922-05:00"
+  },
+  "https://www.docsy.dev/docs/language/#right-to-left-languages": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:51.619196-05:00"
+  },
+  "https://www.docsy.dev/docs/updating/convert-site-to-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:09:53.370729-05:00"
+  },
+  "https://www.docsy.dev/tags/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:15.215542-05:00"
+  },
+  "https://www.docsy.dev/tags/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.329546-05:00"
+  },
+  "https://www.docsy.dev/tags/labelling/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:59.911663-05:00"
+  },
+  "https://www.docsy.dev/tags/labelling/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.365073-05:00"
+  },
+  "https://www.docsy.dev/tags/structuring-content/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-11-06T12:03:10.066953-05:00"
+  },
+  "https://www.docsy.dev/tags/structuring-content/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.303058-05:00"
+  },
+  "https://www.docsy.dev/tags/tagging/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:09.961129-05:00"
+  },
+  "https://www.docsy.dev/tags/tagging/index.xml": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:02:49.341504-05:00"
+  },
+  "https://www.netlify.com": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:04.805936-05:00"
+  },
+  "https://www.netlify.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:41.203421-05:00"
+  },
+  "https://www.netlify.com/img/global/badges/netlify-color-accent.svg": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:10.241411-05:00"
+  },
+  "https://www.repostatus.org/#active": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:15.045534-05:00"
+  },
+  "https://www.repostatus.org/badges/latest/active.svg": {
+    "StatusCode": 206,
+    "LastSeen": "2024-11-06T12:03:20.404752-05:00"
+  }
+}

@@ -36,7 +36,7 @@ endif
 refcache-save:
 ifeq (refcache, $(REFCACHE))
 	cp $(LINK_CACHE_FILE_SRC_DIR)/$(LINK_CACHE_FILE) $(LINK_CACHE_FILE_DEST_DIR)/
-	npx prettier --write $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE)
+	npx prettier --prose-wrap=always --write $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE)
 else
 	@echo "SKIPPING refcache-save"
 endif
