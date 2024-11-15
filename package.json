@@ -18,10 +18,9 @@
     "build": "npm run cd:docs build",
     "cd:docs": "npm run _cd:docs -- npm run",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
-    "check:links--md": "echo SKIPPING LINK CHECK 'ls *.md | xargs npx markdown-link-check --config .markdown-link-check.json'",
-    "check:links:all": "npm run cd:docs check:links:all",
+    "check:links:internal": "npm run cd:docs check:links:internal",
     "check:links": "npm run cd:docs check:links",
-    "check": "npm run check:format && npm run check:links--md",
+    "check": "npm run check:format",
     "ci:post": "npm run fix:format && npm run _diff:check",
     "ci:prepare": "npm run docs-install && npm run _prepare && npm run _diff:check",
     "docs-install": "npm run _cd:docs -- npm install",
@@ -42,7 +41,6 @@
   "devDependencies": {
     "cpy-cli": "^5.0.0",
     "hugo-extended": "0.137.0",
-    "markdown-link-check": "^3.13.5",
     "mkdirp": "^3.0.1",
     "prettier": "^3.3.3"
   },
@@ -51,7 +49,7 @@
     "npm-check-updates": "^17.1.10"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark twbs netlify pkgs userguide -"
 }
