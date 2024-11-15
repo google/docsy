@@ -40,13 +40,11 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.137.0",
+    "hugo-extended": "0.138.0",
     "mkdirp": "^3.0.1",
-    "prettier": "^3.3.3"
-  },
-  "optionalDependencies": {
+    "prettier": "^3.3.3",
     "netlify-cli": "^17.37.2",
-    "npm-check-updates": "^17.1.10"
+    "npm-check-updates": "^17.1.11"
   },
   "engines": {
     "node": ">=22"
