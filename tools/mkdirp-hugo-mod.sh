@@ -18,7 +18,13 @@ echo "Will create empty directories under"
 echo " MODULE_PATH_PREFIX: $MODULE_PATH_PREFIX"
 echo "  which resolves to: $(cd "$MODULE_PATH_PREFIX"; pwd)\n"
 
-# Extract module paths from go.mod file, ignoring any that start with the local module prefix
+# Extract module paths from `go.mod`, assuming the dependencies appear in the form:
+#
+# require (
+#   github.com/...
+#   ...
+# )
+
 DIRECTORIES=$(grep -E '^\s+github' go.mod | awk '{print $1}')
 
 # Create given directory if it doesn't exist
