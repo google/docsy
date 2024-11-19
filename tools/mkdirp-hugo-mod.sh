@@ -6,16 +6,14 @@
 
 set -e
 
-DIRECTORIES=(
-  "github.com/FortAwesome/Font-Awesome"
-  "github.com/twbs/bootstrap"
-)
-
 MODULE_PATH_PREFIX=${1:-..}
 
 echo "Will create empty directories under"
 echo " MODULE_PATH_PREFIX: $MODULE_PATH_PREFIX"
 echo "  which resolves to: $(cd "$MODULE_PATH_PREFIX"; pwd)\n"
+
+# Extract module paths from go.mod file, ignoring any that start with the local module prefix
+DIRECTORIES=$(grep -E '^\s+github' go.mod | awk '{print $1}')
 
 # Create given directory if it doesn't exist
 function create_directory() {
@@ -27,6 +25,7 @@ function create_directory() {
   fi
 }
 
-for dir in "${DIRECTORIES[@]}"; do
+# Iterate over each directory and create it if it does not exist
+for dir in $DIRECTORIES; do
   create_directory "$dir"
 done
