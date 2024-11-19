@@ -13,50 +13,52 @@ if (process.env.DOCSY_MKDIR_HUGO_MOD_SKIP) {
 }
 
 const modulePathPrefix = process.argv[2] || '..';
-console.log("Will create empty directories under");
+console.log("Creating empty directories under");
 console.log(` MODULE_PATH_PREFIX: ${modulePathPrefix}`);
 console.log(`  which resolves to: ${path.resolve(modulePathPrefix)}\n`);
 
-// Read the `go.mod` file to extract module paths
-const goModPath = path.join(__dirname, 'go.mod');
-let directories = [];
+// Function to extract module paths from `go.mod`
+function extractModulePaths() {
+  const goModPath = path.join(__dirname, '..', 'go.mod');
+  let directories = [];
+  try {
+    const goModContent = fs.readFileSync(goModPath, 'utf8');
+    const lines = goModContent.split('\n');
+    let inRequireBlock = false;
 
-try {
-  const goModContent = fs.readFileSync(goModPath, 'utf8');
-  const lines = goModContent.split('\n');
-  let inRequireBlock = false;
-
-  lines.forEach((line) => {
-    line = line.trim();
-    if (line.startsWith('require (')) {
-      inRequireBlock = true;
-    } else if (inRequireBlock && line === ')') {
-      inRequireBlock = false;
-    } else if (inRequireBlock && line.startsWith('github.com/')) {
-      const modulePath = line.split(' ')[0];
-      directories.push(modulePath);
-    } else if (!inRequireBlock && line.startsWith('github.com/')) {
-      // Handle single-line require statements
-      const modulePath = line.split(' ')[1];
-      directories.push(modulePath);
-    }
-  });
-} catch (error) {
-  console.error(`Error reading go.mod file: ${error.message}`);
-  process.exit(1);
+    lines.forEach((line) => {
+      line = line.trim();
+      if (line.startsWith('require (')) {
+        inRequireBlock = true;
+      } else if (inRequireBlock && line === ')') {
+        inRequireBlock = false;
+      } else if (inRequireBlock && line.startsWith('github.com/')) {
+        const modulePath = line.split(' ')[0];
+        directories.push(modulePath);
+      } else if (!inRequireBlock && line.startsWith('github.com/')) {
+        // Handle single-line require statements
+        const modulePath = line.split(' ')[1];
+        directories.push(modulePath);
+      }
+    });
+  } catch (error) {
+    console.error(`Error reading go.mod file: ${error.message}`);
+    process.exit(1);
+  }
+  return directories;
 }
 
 // Function to create the directory if it doesn't exist
 function createDirectory(targetPath) {
   if (!fs.existsSync(targetPath)) {
-    console.log(`Creating directory ${targetPath}`);
+    console.log(`+ Creating directory ${targetPath}`);
     fs.mkdirSync(targetPath, { recursive: true });
   } else {
-    console.log(`Directory already exists: ${targetPath}`);
+    console.log(`! Directory already exists: ${targetPath}`);
   }
 }
 
-// Iterate over each directory and create it if it does not exist
+const directories = extractModulePaths();
 directories.forEach((dir) => {
   const targetPath = path.join(modulePathPrefix, dir);
   createDirectory(targetPath);
