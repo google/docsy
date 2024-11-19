@@ -6,19 +6,27 @@
 
 set -e
 
-MODULE_PATH_PREFIX=${1:=..}
+DIRECTORIES=(
+  "github.com/FortAwesome/Font-Awesome"
+  "github.com/twbs/bootstrap"
+)
 
-echo "MODULE_PATH_PREFIX:\n  $MODULE_PATH_PREFIX, which resolves as"
-echo "  $(cd "$MODULE_PATH_PREFIX"; pwd)"
+MODULE_PATH_PREFIX=${1:-..}
 
-TARGET="$MODULE_PATH_PREFIX/github.com/FortAwesome/Font-Awesome"
+echo "Will create empty directories under"
+echo " MODULE_PATH_PREFIX: $MODULE_PATH_PREFIX"
+echo "  which resolves to: $(cd "$MODULE_PATH_PREFIX"; pwd)\n"
 
-if [[ ! -e "$TARGET" ]]; then
-  (set -x; mkdir -p "$TARGET")
-fi
+# Create given directory if it doesn't exist
+function create_directory() {
+  local TARGET="$MODULE_PATH_PREFIX/$1"
+  if [[ ! -e "$TARGET" ]]; then
+    (set -x; mkdir -p "$TARGET")
+  else
+    echo "> Directory already exists: $TARGET"
+  fi
+}
 
-TARGET="$MODULE_PATH_PREFIX/github.com/twbs/bootstrap"
-
-if [[ ! -e "$TARGET" ]]; then
-  (set -x; mkdir -p "$TARGET")
-fi
+for dir in "${DIRECTORIES[@]}"; do
+  create_directory "$dir"
+done
