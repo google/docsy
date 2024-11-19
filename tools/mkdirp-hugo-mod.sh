@@ -6,6 +6,11 @@
 
 set -e
 
+if [[ -n "$DOCSY_MKDIR_HUGO_MOD_SKIP" ]]; then
+  echo "DOCSY_MKDIR_HUGO_MOD_SKIP is set. Skipping directory creation."
+  exit 0
+fi
+
 MODULE_PATH_PREFIX=${1:-..}
 
 echo "Will create empty directories under"
