@@ -1,7 +1,8 @@
 #!/bin/bash
 #
-# Create empty Hugo module directories for Docsy dependencies in support of
-# using Docsy as an NPM module. For details, see
+# Helper script to create empty Hugo-module directories for Docsy dependencies
+# listed in `go.mod`. This is necessary for projects not using Hugo modules. For
+# details, see
 # https://www.docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
 
 set -e

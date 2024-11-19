@@ -322,7 +322,11 @@ $ ls themes
 docsy                   github.com
 ```
 
-This is a workaround necessary to support Docsy's use as a single [Hugo module] ([#1120]).
+This is a workaround necessary to support Docsy's use as a single [Hugo module]
+([#1120]) in the context of projects _not_ using Hugo modules. The `github.com`
+folder is created via Docsy's `postinstall` script. To disable this behavior,
+set the environment variable `DOCSY_MKDIR_HUGO_MOD_SKIP=1` before running NPM
+install.
 
 [#1120]: https://github.com/google/docsy/issues/1120
 [0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
