@@ -17,29 +17,24 @@ console.log("Creating empty directories under");
 console.log(` MODULE_PATH_PREFIX: ${modulePathPrefix}`);
 console.log(`  which resolves to: ${path.resolve(modulePathPrefix)}\n`);
 
-// Function to extract module paths from `go.mod`
+// Extract module paths from `go.mod`, assuming the dependencies appear in the form:
+//
+// require (
+//   github.com/...
+//   ...
+// )
 function extractModulePaths() {
   const goModPath = path.join(__dirname, '..', 'go.mod');
+
   let directories = [];
   try {
     const goModContent = fs.readFileSync(goModPath, 'utf8');
     const lines = goModContent.split('\n');
-    let inRequireBlock = false;
-
     lines.forEach((line) => {
       line = line.trim();
-      if (line.startsWith('require (')) {
-        inRequireBlock = true;
-      } else if (inRequireBlock && line === ')') {
-        inRequireBlock = false;
-      } else if (inRequireBlock && line.startsWith('github.com/')) {
-        const modulePath = line.split(' ')[0];
-        directories.push(modulePath);
-      } else if (!inRequireBlock && line.startsWith('github.com/')) {
-        // Handle single-line require statements
-        const modulePath = line.split(' ')[1];
-        directories.push(modulePath);
-      }
+      if (!line.startsWith('github.com')) return;
+      const modulePath = line.split(' ')[0];
+      directories.push(modulePath);
     });
   } catch (error) {
     console.error(`Error reading go.mod file: ${error.message}`);
@@ -54,7 +49,7 @@ function createDirectory(targetPath) {
     console.log(`+ Creating directory ${targetPath}`);
     fs.mkdirSync(targetPath, { recursive: true });
   } else {
-    console.log(`! Directory already exists: ${targetPath}`);
+    console.log(`> Directory already exists: ${targetPath}`);
   }
 }
 
