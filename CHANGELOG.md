@@ -179,7 +179,7 @@ For the full list of changes, see the [0.8.0] release notes.
 [#1727]: https://github.com/google/docsy/pull/1727
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0
 [Docsy as an NPM package]:
-  http://docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+  https://docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [Docsy NPM install side-effect]:
   https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]:
