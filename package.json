@@ -35,12 +35,12 @@
     "update:pkgs": "npx npm-check-updates -u && npm run cd:docs update:pkgs"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "6.6.0",
+    "@fortawesome/fontawesome-free": "6.7.0",
     "bootstrap": "5.3.3"
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.138.0",
+    "hugo-extended": "0.139.0",
     "prettier": "^3.3.3",
     "netlify-cli": "^17.37.2",
     "npm-check-updates": "^17.1.11"
