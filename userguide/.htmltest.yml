@@ -1,3 +1,5 @@
+# cSpell:ignore github regexs
+CacheExpires: 9000h # ~ 12 months
 DirectoryPath: public
 CheckDoctype: false # Sadly, this is false only because of `static/google*.html`
 IgnoreAltMissing: true # FIXME
