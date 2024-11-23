@@ -7,6 +7,7 @@
     "_check:links": "make --keep-going check-links",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_hugo-0_139_0_gcse-patch": "perl -i -pe 's/gcse :/gcse:/' public/search/index.html",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
@@ -17,8 +18,8 @@
     "clean": "rm -Rf public",
     "fix:format": "npm run _check:format -- --write",
     "make:public": "git init -b main public",
-    "postbuild:preview": "npm run _check:links--warn",
-    "postbuild:production": "npm run _check:links--warn",
+    "postbuild:preview": "npm run _hugo-0_139_0_gcse-patch",
+    "postbuild:production": "npm run _hugo-0_139_0_gcse-patch",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "prepare": "cd .. && npm install",
@@ -32,5 +33,5 @@
     "postcss-cli": "^11.0.0",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- docsy htmltest pkgs postbuild precheck rtlcss -"
+  "cSpell:ignore": "- docsy gcse htmltest pkgs postbuild precheck rtlcss -"
 }
