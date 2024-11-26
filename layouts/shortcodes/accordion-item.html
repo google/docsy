@@ -1,0 +1,32 @@
+{{- /* Make sure that we are enclosed within a accordion shortcode block */ -}}
+{{ with $.Parent -}}
+{{ if ne $.Parent.Name "accordion" -}}
+    {{ errorf "shortcode 'accordion-item' must be used within an 'accordion' block" -}}
+  {{ end -}}
+{{ end -}}
+
+{{ $header := "Header" -}}
+{{ if and (not .IsNamedParams) (.Get 0) -}}
+  {{ $header = (.Get 0) -}}
+{{ else -}}
+  {{/* Prefill header if not given as named or unnamed parameter */ -}}
+  {{ $header = default (printf "Header %v" ( add $.Ordinal 1)) (.Get "header") -}}
+{{ end -}}
+
+{{/* store all tab info in dict item */ -}}
+{{ $item := dict "header" $header -}}
+{{ with $.Get "open" -}}
+  {{ if ne ( printf "%T" . ) "bool" -}}
+  {{ errorf "shortcode 'accordion-item': parameter 'open' must be either true or false" -}}
+  {{ end -}}
+  {{ $item = merge $item (dict "open" ($.Get "open")) -}}
+{{ end -}}
+
+{{ with $.Inner -}}
+  {{ $item = merge $item (dict "content" $.Inner) -}}
+{{ end -}}
+
+{{/* add dict tab to parent's scratchpad */ -}}
+{{ with .Parent -}}
+  {{ $.Parent.Scratch.SetInMap "items" (printf "%02v" $.Ordinal) $item -}}
+{{ end -}}
