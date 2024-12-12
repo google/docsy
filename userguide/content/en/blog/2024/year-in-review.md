@@ -49,7 +49,7 @@ introducing at least one major feature enhancement. Highlights include:
     language support** using Bootstrap's RTL capabilities.
 
 [#2]: https://github.com/google/docsy/issues/2
-[Bootstrap 5 upgrade]: https://github.com/google/docsy/issues/470
+[Bootstrap 5 migration]: https://github.com/google/docsy/issues/470
 
 ## Major feature enhancements {#enhancements}
 
