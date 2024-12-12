@@ -106,8 +106,8 @@ this release are listed next.
   [path_base_for_github_subdir]. Projects will need to adjust the value of
   [path_base_for_github_subdir] to be relative to the file's physical location.
 
-- Class names to disable [repository links] were misnamed with a suffix of the form
-  `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
+- Class names to disable [repository links] were misnamed with a suffix of the
+  form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
 
 - **Heading self-link** support has been reimplemented and projects must now
   explicitly enable the feature. For details, see [Heading self links].
@@ -157,9 +157,9 @@ For the full list of changes, see the [0.8.0] release notes.
 
 - Docsy is packaged as a **single Hugo module** ([#1120]). For details, see [Use
   Docsy as a Hugo Module].
-- **Important**: non-Hugo-module projects should be aware of the [Docsy
-  NPM install side-effect]. Also, for guidance on Hugo-reported "failed to load modules"
-  error, see [Docsy as an NPM package].
+- **Important**: non-Hugo-module projects should be aware of the [Docsy NPM
+  install side-effect]. Also, for guidance on Hugo-reported "failed to load
+  modules" error, see [Docsy as an NPM package].
 - **Page feedback**, or [User feedback]:
   - In support of projects configuring analytics outside of Docsy, feedback
     functionality is enabled regardless of whether
@@ -342,12 +342,13 @@ CHANGES** are documented below.
   as text.
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
-  how to hide the logo (or your brand name), see [Styling your project logo and name].
+  how to hide the logo (or your brand name), see [Styling your project logo and
+  name].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
   release notes].
-- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the v5
-  names still work. For details about icon renames and more, see [What's
+- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the
+  v5 names still work. For details about icon renames and more, see [What's
   changed].
 - **Search-box**: the HTML structure and class names have changed, due to the
   Font Awesome upgrade, for both online and offline search. This may affect your
@@ -455,9 +456,10 @@ For the full list of changes, see the [0.2.0] release notes.
 
 **New**:
 
-- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated and
-  patient efforts of [@deining], who researched, experimented, and implemented this
-  feature. Thanks to [@deining] and [@LisaFC] for the doc updates.
+- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated
+  and patient efforts of [@deining], who researched, experimented, and
+  implemented this feature. Thanks to [@deining] and [@LisaFC] for the doc
+  updates.
 
   For details, see
   [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
