@@ -43,7 +43,8 @@ introducing at least one major feature enhancement. Highlights include:
     upgrade, marking the completion of the [Bootstrap 5 migration] started
     in 2021. Also made adjustments to shortcodes and styles for dark-mode
     compatibility.
-  - Addressed breaking changes associated with Hugo upgrades beyond 0.123.
+  - Addressed breaking changes resulting from the major core upgrade to Hugo
+    0.123.0.
 - **[0.11.0](https://github.com/google/docsy/releases/tag/v0.11.0):**
   - Enhanced internationalization by reintroducing **Right-To-Left (RTL)
     language support** using Bootstrap's RTL capabilities.
@@ -79,7 +80,7 @@ custom RTL solution from 2023.
 
 This enhancement meets longstanding multilingual documentation needs. Notably,
 RTL support has been requested by major Docsy-based sites, including the two
-[top-velocity projects] of the [CNCF]:
+2024 [top-velocity projects] of the [CNCF]:
 
 - [Kubernetes]:
   [right-to-left language support #22730](https://github.com/kubernetes/website/issues/22730)
@@ -117,8 +118,8 @@ from v0.2, to align with the latest version and reduce technical debt:
 - [Align with upstream Docsy kubernetes.io#41171](https://github.com/kubernetes/website/issues/41171)
 - [Update Docsy step by step to the latest Docsy kubernetes.io#44002](https://github.com/kubernetes/website/issues/44002)
 
-The upgrade process is progressing well, as shown in the ongoing efforts
-documented in the [0.3.x upgrade] and [0.5.x upgrade].
+The upgrade is progressing well, as shown in the ongoing efforts documented in
+the [0.3.x upgrade] and [0.5.x upgrade].
 
 [0.3.x upgrade]: https://github.com/kubernetes/website/pull/48721
 [0.5.x upgrade]: https://github.com/kubernetes/website/issues/48807
@@ -139,7 +140,7 @@ adoption efforts by projects such as [gRPC (grpc.io#1389)] and [Jaeger
 (jaegertracing#746)].
 
 For features tentatively planned for the first release of 2025, see [Release
-0.12.0 preparation #2108]. Currently, the most upvoted enhancement requests are:
+0.12.0 preparation #2108]. The most upvoted enhancement requests are currently:
 [^2]
 
 - [Navigation indication on the right TOC #349](https://github.com/google/docsy/issues/349)
