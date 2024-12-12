@@ -10,7 +10,7 @@ description: >-
   usage increase, new features like dark mode, and improved internationalization
   support.
 # prettier-ignore
-cSpell:ignore: Chalin jaegertracing mentees opentelemetry toto upvoted kubernetes theupdateframework
+cSpell:ignore: Chalin jaegertracing mentees opentelemetry toto upvoted kubernetes theupdateframework Dindi Dariksha Ansari
 ---
 
 As we reflect on 2024, it’s exciting to see steady progress toward the goals
@@ -105,7 +105,7 @@ GitHub analytics show a **57% increase in usage**, reaching **2.2K projects** as
 of this writing.
 
 Adoption among CNCF projects has also grown since our [2023 report]. This year,
-two [Linux Foundation mentees][LFX] used the [CNCF Docsy starter] to migrate the
+[Linux Foundation mentees][LFX] [Sandra Dindi] and [Dariksha Ansari] used the [CNCF Docsy starter] to migrate the
 following sites to Docsy:
 
 - **[The Update Framework](https://theupdateframework.io)**
@@ -132,6 +132,8 @@ the [0.3.x upgrade] and [0.5.x upgrade].
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
 [in-toto.io#76]: https://github.com/in-toto/in-toto.io/issues/76
 [Kubernetes website]: https://github.com/kubernetes/website
+[Dariksha Ansari]: https://mentorship.lfx.linuxfoundation.org/project/34314eb1-0fc3-4802-ab04-2265418c2e48
+[Sandra Dindi]: https://mentorship.lfx.linuxfoundation.org/project/e35f28f9-f333-47a8-a76a-119567cf10ca
 
 ## What's ahead?
 
