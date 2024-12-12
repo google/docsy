@@ -191,6 +191,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:15.089511-05:00"
   },
+  "https://github.com/chalin/docsy-starter": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:36.174008-05:00"
+  },
   "https://github.com/deining": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:09:48.106528-05:00"
@@ -222,6 +226,10 @@
   "https://github.com/google/docsy-example": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:10.453664-05:00"
+  },
+  "https://github.com/google/docsy-example/issues/285": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:22.304468-05:00"
   },
   "https://github.com/google/docsy-example/pull/220": {
     "StatusCode": 200,
@@ -319,6 +327,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:06:19.286462-05:00"
   },
+  "https://github.com/google/docsy/issues/1436": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:12:04.025686-05:00"
+  },
   "https://github.com/google/docsy/issues/1442": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:05:35.06986-05:00"
@@ -391,13 +403,29 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:14.152281-05:00"
   },
+  "https://github.com/google/docsy/issues/2108": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:45.620648-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:57.646409-05:00"
   },
+  "https://github.com/google/docsy/issues/349": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:51.973091-05:00"
+  },
+  "https://github.com/google/docsy/issues/375": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:58.056581-05:00"
+  },
   "https://github.com/google/docsy/issues/470": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:31.810529-05:00"
+  },
+  "https://github.com/google/docsy/issues/726": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:14.036489-05:00"
   },
   "https://github.com/google/docsy/issues/906": {
     "StatusCode": 200,
@@ -523,6 +551,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:02.883712-05:00"
   },
+  "https://github.com/google/docsy/pull/1933": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:33.799485-05:00"
+  },
   "https://github.com/google/docsy/pull/1952": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:13.893357-05:00"
@@ -546,6 +578,10 @@
   "https://github.com/google/docsy/releases/tag/v0.10.0": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:25.779056-05:00"
+  },
+  "https://github.com/google/docsy/releases/tag/v0.11.0": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:16.686656-05:00"
   },
   "https://github.com/google/docsy/releases/tag/v0.7.0": {
     "StatusCode": 200,
@@ -611,6 +647,18 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:25.676987-05:00"
   },
+  "https://github.com/grpc/grpc.io/issues/1389": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:33.529009-05:00"
+  },
+  "https://github.com/in-toto/in-toto.io/issues/76": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:58.403402-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/issues/746": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:39.929875-05:00"
+  },
   "https://github.com/jakejarvis/hugo-extended": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:42.875509-05:00"
@@ -623,6 +671,38 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:52.203675-05:00"
   },
+  "https://github.com/kubernetes/website": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:03.957185-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/22726": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:07.826381-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/22727": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:13.428577-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/22730": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:01.942457-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/41171": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:09.835149-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/44002": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:15.519151-05:00"
+  },
+  "https://github.com/kubernetes/website/issues/48807": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:28.066952-05:00"
+  },
+  "https://github.com/kubernetes/website/pull/48721": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:11:22.283287-05:00"
+  },
   "https://github.com/open-telemetry/opentelemetry.io/issues": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:24.377784-05:00"
@@ -630,6 +710,14 @@
   "https://github.com/open-telemetry/opentelemetry.io/issues/2419": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:18.883576-05:00"
+  },
+  "https://github.com/open-telemetry/opentelemetry.io/issues/4023": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:28.180582-05:00"
+  },
+  "https://github.com/open-telemetry/opentelemetry.io/issues/4990": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:24.301934-05:00"
   },
   "https://github.com/open-telemetry/opentelemetry.io/pull/2490": {
     "StatusCode": 200,
@@ -642,6 +730,10 @@
   "https://github.com/sarahmaddox": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:18.644822-05:00"
+  },
+  "https://github.com/theupdateframework/theupdateframework.io/pull/105": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:47.645841-05:00"
   },
   "https://github.com/twbs/bootstrap/issues/25254": {
     "StatusCode": 200,
@@ -727,6 +819,14 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:25.800371-05:00"
   },
+  "https://in-toto.io": {
+    "StatusCode": 206,
+    "LastSeen": "2024-12-12T10:10:52.769146-05:00"
+  },
+  "https://kubernetes.io": {
+    "StatusCode": 206,
+    "LastSeen": "2024-12-12T10:09:55.829225-05:00"
+  },
   "https://lunrjs.com/": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:41.288729-05:00"
@@ -738,6 +838,10 @@
   "https://opensource.google.com/conduct/": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:46.449139-05:00"
+  },
+  "https://opentelemetry.io": {
+    "StatusCode": 206,
+    "LastSeen": "2024-12-12T10:10:18.699204-05:00"
   },
   "https://opentelemetry.io/": {
     "StatusCode": 206,
@@ -755,6 +859,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:41.207655-05:00"
   },
+  "https://rtlcss.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2024-12-12T10:09:38.949346-05:00"
+  },
   "https://sass-lang.com/documentation/at-rules/import": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:05:30.528583-05:00"
@@ -771,6 +879,14 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:56.806827-05:00"
   },
+  "https://theupdateframework.io": {
+    "StatusCode": 206,
+    "LastSeen": "2024-12-12T10:10:41.327928-05:00"
+  },
+  "https://www.cncf.io": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:50.597735-05:00"
+  },
   "https://www.cncf.io/": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:20.447352-05:00"
@@ -786,6 +902,14 @@
   "https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:06:24.681803-05:00"
+  },
+  "https://www.cncf.io/blog/2024/07/11/as-we-reach-mid-year-2024-a-look-at-cncf-linux-foundation-and-top-30-open-source-project-velocity/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:09:45.500547-05:00"
+  },
+  "https://www.cncf.io/blog/2024/09/27/congratulations-to-45-cncf-term-1-2024-lfx-program-mentees/": {
+    "StatusCode": 200,
+    "LastSeen": "2024-12-12T10:10:30.4954-05:00"
   },
   "https://www.cncf.io/projects/": {
     "StatusCode": 200,
