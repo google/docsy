@@ -22,7 +22,7 @@ the shortcode body as Markdown. You can use both styles in your pages.
 
 ## Shortcode blocks
 
-The theme comes with a set of custom  **Page Block** shortcodes that can be used to compose landing pages, about pages, and similar.
+The theme comes with a set of custom **Page Block** shortcodes that can be used to compose landing pages, about pages, and similar.
 
 These blocks share some common parameters:
 
@@ -111,7 +111,7 @@ For announcement of latest features etc.
 {{</* /blocks/section */>}}
 ```
 
-| Parameter        | Default    | Description  |
+| Parameter        | Default    | Description |
 | ---------------- |------------| ------------|
 | `height` | | See above.
 | `color` | | See above.
@@ -125,7 +125,7 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 {{%/* /blocks/feature */%}}
 ```
 
-| Parameter        | Default    | Description  |
+| Parameter        | Default    | Description |
 | ---------------- |------------| ------------|
 | title | | The title to use.
 | url | | The URL to link to.
@@ -143,7 +143,7 @@ The **blocks/link-down** shortcode creates a navigation link down to the next se
 </div>
 ```
 
-| Parameter        | Default    | Description  |
+| Parameter        | Default    | Description |
 | ---------------- |------------| ------------|
 | color | info | See above.
 
@@ -200,7 +200,7 @@ Norway Spruce *Picea abies* shoot with foliage buds.
 {{%/* /imgproc */%}}
 ```
 
-Use the syntax above if the inner content and/or the `byline` parameter of your shortcode is authored in markdown. In case of HTML content, use `<>` as innermost delimiters: `{{</* imgproc >}}<b>HTML</b> content{{< /imgproc */>}}`.
+Use the syntax above if the inner content and/or the `byline` parameter of your shortcode is authored in markdown. In case of HTML content, use angle brackets `<>` as outermost delimiters: `{{</* imgproc >}}<b>HTML</b> content{{< /imgproc */>}}`.
 
 {{% imgproc spruce Fill "400x450" %}}
 Norway Spruce *Picea abies* shoot with foliage buds.
@@ -331,7 +331,7 @@ in the response headers." you __CAN__ embed it, but when the test says "Great! X
 
 ## Tabbed panes
 
-Sometimes it's very useful to have tabbed panes when authoring content. One common use-case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the tabbed pane below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language:
+Sometimes it's very useful to have tabbed panes when authoring content. One common use case is to show multiple syntax highlighted code blocks that showcase the same problem, and how to solve it in different programming languages. As an example, the tabbed pane below shows the language-specific variants of the famous `Hello world!` program one usually writes first when learning a new programming language:
 
 {{< tabpane langEqualsHeader=true >}}
 {{< tab "C" >}}
@@ -555,7 +555,7 @@ You may say I'm a dreamer, but I'm not the only one<br/>
 I hope someday you'll join us and the world will live as one
 {{< /card >}}
 {{% card header="**Header**: specified via named parameter `Header`" title="**Card title**: specified via named parameter `title`" subtitle="**Card subtitle**: specified via named parameter `subtitle`" footer="**Footer**: specified via named parameter `footer`" %}}
-  **Content**: inner content of the shortcode, this may be plain text or formatted text, images, videos, … . If your content is markdown, use the percent sign `%` as outermost delimiter of your `card` shortcode, your markup should look like `{{%/* card */%}}Your **markdown** content{{%/* /card */%}}`. In case of HTML content, use square brackets `<>` as outermost delimiters: `{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}`
+  **Content**: inner content of the shortcode, this may be plain text or formatted text, images, videos, … . If your content is markdown, use the percent sign `%` as outermost delimiter of your `card` shortcode, your markup should look like `{{%/* card */%}}Your **markdown** content{{%/* /card */%}}`. In case of HTML content, use angle brackets `<>` as outermost delimiters: `{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}`
 {{% /card %}}
 {{% /cardpane %}}
 
@@ -764,5 +764,51 @@ This text does not appear in the output if `buildCondition = "bar" is set in you
 ```
 
 If you are using this shortcode, note that when evaluating the conditions, substring matches are matches as well. That means, if you set `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!
+
+## Accordion
+
+Sometimes it's very useful to have an accordion element at hand when authoring content. One common use case is a FAQ section where only one section (= accordion item) will be open at any time. The following sample showcases an accordion presenting the four principles of object-oriented programming:
+
+### Sample accordion: object-oriented programming
+
+{{< accordion alwaysOpen=false >}}
+{{% accordion-item header="Principle 1:&nbsp;**Abstraction**" %}}
+**Abstraction** is the process of showing only essential/necessary features of an entity/object to the outside world and hide the other irrelevant information. For example to shut on/off your TV you only have a on/off method (≙ power button). It is not required to understand what internal processes are triggered in order to power on/off your TV device.
+{{% /accordion-item %}}
+{{% accordion-item header="Principle 2:&nbsp;**Encapsulation**" %}}
+**Encapsulation** means wrapping up data and member functions (methods) together into a single unit, commonly referred to as class. One aspect of encapsulation is the concept of data hiding. We can hide data by marking variables as private and expose only needed properties (getters and setters) to the public. Internally, these properties make use of the private data not exposed to the public.
+{{% /accordion-item %}}
+{{% accordion-item header="Principle 3:&nbsp;**Inheritance**" %}}
+**Inheritance** is the ability of creating a new class from an existing class. A child object acquires the property of a parent object. By means of inheritance, we achieve that a child class (subclass) acquires the properties and behavior of another parent class (super-class).
+{{% /accordion-item %}}
+{{% accordion-item header="Principle 4:&nbsp;**Polymorphism**" %}}
+**Polymorphism** is derived from two Greek words: _πολύς_ (`polús`) translates to `many` and _μορφή_ (`morphḗ`) to `form`. So polymorphism means `many forms`. A child/subclass can define its own unique behavior and still share the same functionalities or behavior of its parent/base class. A subclass can have their own behavior and share some of its behavior from its parent class not the other way around. A parent class cannot have the behavior of its subclass.
+{{% /accordion-item %}}
+{{% /accordion %}}
+
+The Docsy template provides two shortcodes, `accordion` and `accordion-item`, that let you easily create an accordion component. To see how to use them, have a look at the following code block, which renders to the accordion shown above:
+
+```go-html-template
+{{%/* accordion alwaysOpen=false */%}}
+{{%/* accordion-item header="Principle 1: Abstraction" */%}}
+**Abstraction** is the process of ...
+{{%/* /accordion-item */%}}
+{{%/* accordion-item header="Principle 2: Encapsulation" */%}}
+**Encapsulation** means wrapping up data ...
+{{%/* /accordion-item */%}}
+{{%/* accordion-item Principle 3: Inheritance */%}}
+**Inheritance** is the ability of creating a new class ...
+{{%/* /accordion-item */%}}
+... fourth item omitted
+{{%/* /accordion %}}
+```
+
+### Shortcode details
+
+An accordion component is implemented using two shortcodes:
+
+* The `accordion` shortcode, which is the container element for the collapsible items of the accordion. This shortcode can hold the optional named parameters `alwaysOpen` and `flush`. Specify `alwaysOpen=true` if you want to make accordion items stay open even when another item is opened.
+
+* The various `accordion-item` shortcodes represent the collapsible items of your accordion. Specify the named parameter `header` for each `accordion-item` in order to set the header text of the item. If the `header` parameter is the only parameter inside your `accordion-item` shortcode, you can specify the header as unnamed parameter, something like `{{</* accordion-item "My header" */>}} … {{</* /accordion-item */>}}`. If your `accordion-item` shortcode does not have any parameters, the header of the item will default to `Header n`. When specifying `open=true` for an `accordion-item`, this item will be initially rendered opened (as opposed to an default collapsed item). If your item content is markdown, use the percent sign `%` as outermost delimiter of your `accordion-item` shortcode, your markup should look like `{{%/* accordion-item */%}}`Your \*\*markdown\*\* content`{{%/* /accordion-item */%}}`. In case of HTML content, use angle brackets `<>` as outermost delimiters: `{{</* accordion-item */>}}`Your &lt;b&gt;HTML&lt;/b&gt; content`{{</* /accordion-item */>}}`.
 
 [shortcode delimiter]: https://gohugo.io/content-management/shortcodes/#use-shortcodes
