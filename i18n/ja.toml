@@ -77,3 +77,13 @@ other = "If you want to get more involved by contributing to {{ .Site.Title }}, 
 other = "You can find out how to contribute to {{ .Site.Title }} in our"
 [community_guideline]
 other = "Contribution Guidelines"
+
+# Feedback
+[feedback_title]
+other = "フィードバック"
+[feedback_question]
+other = "このページは役に立ちましたか?"
+[feedback_positive]
+other = "役に立った"
+[feedback_negative]
+other = "役に立たなかった"
