@@ -30,7 +30,12 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Other changes**:
 
+- Blog section index page content and title used to be ignored. They are now
+  displayed ([#1787]). You can recover the old behavior use the following style
+  override: `.td-section.td-blog .td-content { display: none; }`.
+
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[#1787]: https://github.com/google/docsy/issues/1787
 
 ## 0.11.0
 
