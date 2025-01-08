@@ -283,11 +283,27 @@ To create a placeholder page, create a page file as usual in the directory where
 
 ## Breadcrumb navigation
 
-Breadcrumb navigation links appear at the top of each page by default. To disable breadcrumb navigation, set site param `ui.breadcrumb_disable = true` in `hugo.toml`.
+[Breadcrumb navigation] appears at the top of each non-index page be default. To
+also display single-element breadcrumb lists in index pages, add the following
+[style override] to your project:
 
-Breadcrumb navigation links are also shown for each item on the taxonomy results page (i.e. when you click one of the taxonomy labels, e.g. Tags/Categories). These breadcrumbs can be disabled in `hugo.toml` by setting site param `ui.taxonomy_breadcrumb_disable = true`.
+```scss
+.td-breadcrumbs__single {
+  display: inline !important;
+}
+```
 
-The tabbed pane below lists the breadcrumb navigation options you can define in your project [configuration file].
+[Breadcrumb navigation]: https://en.wikipedia.org/wiki/Breadcrumb_navigation
+[style override]: /docs/adding-content/lookandfeel/#project-style-files
+
+Breadcrumb navigation is also shown for each item in the taxonomy results page
+&mdash; that is, when you click one of the taxonomy labels such as _Categories_
+or _Tags_.
+
+As illustrated next, you can disable (non-taxonomy) breadcrumb navigation for an
+entire project, by setting `ui.breadcrumb_disable` to true in your project
+[configuration file]. Similarly, you can disabled taxonomy breadcrumbs by
+setting `ui.taxonomy_breadcrumb_disable` to true:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
@@ -312,6 +328,17 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+
+To disable breadcrumbs in a specific page or section set `ui.breadcrumb_disable`
+to true in the page or section-index front matter. Here is an example of the
+latter:
+
+```yaml
+cascade:
+  params:
+    ui:
+      breadcrumb_disable: true
+```
 
 ## Heading self links
 {.test-class}
