@@ -1,5 +1,10 @@
 {{ define "main" -}}
 
+<div class="td-content">
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+</div>
+
 {{ if (and .Parent .Parent.IsHome) -}}
   {{ $.Scratch.Set "blog-pages" (where .Site.RegularPages "Section" .Section) -}}
 {{ else -}}
