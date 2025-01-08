@@ -371,6 +371,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:24.736233-05:00"
   },
+  "https://github.com/google/docsy/issues/1787": {
+    "StatusCode": 206,
+    "LastSeen": "2025-01-07T17:47:01.735556-05:00"
+  },
   "https://github.com/google/docsy/issues/1812": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:52.305697-05:00"
