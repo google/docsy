@@ -2,16 +2,15 @@
 
 <div class="td-content">
 <h1>{{ .Title }}</h1>
-{{ .Content }}
+{{ with .Content }}{{ . }}{{ end -}}
 </div>
-
 {{ if (and .Parent .Parent.IsHome) -}}
   {{ $.Scratch.Set "blog-pages" (where .Site.RegularPages "Section" .Section) -}}
 {{ else -}}
   {{$.Scratch.Set "blog-pages" .Pages -}}
 {{ end -}}
 
-{{- if .Pages -}}
+{{ if .Pages -}}
 <div class="td-blog-posts">
   {{ $pager := .Paginate (( $.Scratch.Get "blog-pages").GroupByDate "2006" ) -}}
   {{ range $pager.PageGroups -}}
