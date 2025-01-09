@@ -32,33 +32,33 @@ other = "隱私政策"
 [post_byline_by]
 other = "作者："
 [post_created]
-other = "創建"
+other = "建立"
 [post_last_mod]
-other = "最後修改"
+other = "最後更新於"
 [post_edit_this]
 other = "編輯此頁"
 [post_view_this]
-other = "查看頁面原始碼"
+other = "檢視頁面原始碼"
 [post_create_child_page]
-other = "創建子頁面"
+other = "建立子頁面"
 [post_create_issue]
-other = "創建文檔議題"
+other = "建立文件議題"
 [post_create_project_issue]
-other = "創建項目議題"
+other = "建立專案議題"
 [post_posts_in]
 other = "張貼於"
 [post_reading_time]
-other = " 分鐘左右可讀完"
+other = " 分鐘閱讀時間"
 [post_less_than_a_minute_read]
 other = "1 分鐘內可讀完"
 
 # Print support
 [print_printable_section]
-other = "這是本節的多頁可列印視圖。"
+other = "這是本節的多頁可列印檢視。"
 [print_click_to_print]
-other = "點擊此處列印"
+other = "點選此處列印"
 [print_show_regular]
-other = "返回此頁面的常規視圖"
+other = "返回此頁面的標準檢視"
 [print_entire_section]
 other = "列印整個章節"
 
@@ -66,16 +66,26 @@ other = "列印整個章節"
 [community_join]
 other = "加入 {{ .Site.Title }} 社群"
 [community_introduce]
-other = "{{ .Site.Title }} 是一個開源項目，社群中的任何人都可以使用、改善和盡情使用它。我們很期待你能加入我們！下面是如何查看最近更新以及參與我們的一些方式。"
+other = "{{ .Site.Title }} 是一個開放原始碼專案，社群中的任何人都可以使用、改進並享受其成果。我們非常歡迎您加入我們！以下是了解最新動態以及參與我們的一些方式。"
 [community_learn]
-other = "學習和溝通"
+other = "學習與交流"
 [community_using]
-other = "正在或打算使用 {{ .Site.Title }} ？獲取更多資訊："
+other = "正在或打算使用 {{ .Site.Title }} 嗎？在此取得更多資訊："
 [community_develop]
 other = "開發和貢獻"
 [community_contribute]
-other = "如果你想通過為 {{ .Site.Title }} 貢獻更多參與，請在此處加入我們："
+other = "如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們："
 [community_how_to]
-other = "你可以了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的"
+other = "您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的"
 [community_guideline]
 other = "貢獻指南"
+
+# Feedback
+[feedback_title]
+other = "意見回饋"
+[feedback_question]
+other = "這個頁面對您有幫助嗎？"
+[feedback_positive]
+other = "有幫助"
+[feedback_negative]
+other = "沒幫助"
