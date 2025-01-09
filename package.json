@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.7.2",
+  "version": "0.7.2+1",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -28,10 +28,8 @@
     "@fortawesome/fontawesome-free": "6.4.0",
     "bootstrap": "5.2.3"
   },
-  "devDependencies": {
-    "hugo-extended": "0.120.4"
-  },
-  "optionalDependencies": {
+  "disabledDependencies": {
+    "hugo-extended": "0.120.4",
     "markdown-link-check": "^3.11.2",
     "prettier": "^3.0.3"
   },
