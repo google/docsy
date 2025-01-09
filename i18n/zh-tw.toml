@@ -66,7 +66,7 @@ other = "列印整個章節"
 [community_join]
 other = "加入 {{ .Site.Title }} 社群"
 [community_introduce]
-other = "{{ .Site.Title }} 是一個開放原始碼專案，社群中的任何人都可以盡情使用、參與改進，並享受其成果。我們期待您的加入！以下是了解最新動態以及參與我們的一些方式。"
+other = "{{ .Site.Title }} 是一個開放原始碼專案，社群中的任何人都可以使用、改進並享受其成果。我們非常歡迎您加入我們！以下是了解最新動態以及參與我們的一些方式。"
 [community_learn]
 other = "學習與交流"
 [community_using]
