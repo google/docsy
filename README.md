@@ -6,7 +6,8 @@
 [![Project contributors](https://img.shields.io/github/contributors/google/docsy)](https://github.com/google/docsy/graphs/contributors)
 [![Project license](https://img.shields.io/github/license/google/docsy)](https://github.com/google/docsy/blob/main/LICENSE)
 
-## 🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use official Docsy [releases].
+> **🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use
+> official Docsy [releases].**
 
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.
@@ -95,8 +96,8 @@ requests, see [CONTRIBUTING.md]. Thank you to all past, present, and future
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see the
-[LICENSE.md](https://github.com/google/docsy/blob/main/LICENSE) file for details
+This project is licensed under the Apache License 2.0 - see
+[LICENSE](https://github.com/google/docsy/blob/main/LICENSE) for details
 
 [code of conduct]:
   https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md

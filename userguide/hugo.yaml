@@ -52,7 +52,7 @@ params:
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
-  version: 0.10.0
+  version: 0.11.0
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
@@ -104,6 +104,10 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
+      - name: Project info
+        url: /project/
+        icon: fa fa-book
+        desc: Project design documentation and resources
       - name: GitHub
         url: https://github.com/google/docsy
         icon: fa-brands fa-github
@@ -129,3 +133,10 @@ module:
   mounts:
     - source: content/en
       target: content
+    # Mount the repo's top-level .md files under project
+    - source: ../README.md
+      target: content/project/readme.md
+    - source: ../CHANGELOG.md
+      target: content/project/changelog.md
+    - source: ../CONTRIBUTING.md
+      target: content/project/contributing.md

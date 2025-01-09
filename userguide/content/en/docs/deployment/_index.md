@@ -180,7 +180,7 @@ Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '
 
     1. Under **Build and deployment**, select **Deploy from a branch** in the **source** dropdown.
 
-    2. From the **branch** dropdown, select **gh-page** as branch where the site is built from.
+    2. From the **branch** dropdown, select **gh-pages** as branch where the site is built from.
 
     3. From the **folder** dropdown, select **/(root)** as root directory.
 

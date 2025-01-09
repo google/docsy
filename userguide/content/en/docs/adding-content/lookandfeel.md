@@ -10,10 +10,10 @@ By default, a site using Docsy has the theme's default fonts, colors, and
 general look and feel. However, if you want your own color scheme (and you
 probably will!) you can very easily override the theme defaults with your own
 project-specific values - Hugo will look in your project files first when
-looking for information to build your site. And because [Docsy uses Bootstrap
-5] and SCSS for styling, you can override just single values (such as project colors
-and fonts) in its special SCSS project variables file, or do more serious customization
-by creating your own styles.
+looking for information to build your site. And because [Docsy uses Bootstrap 5]
+and SCSS for styling, you can override just single values (such as project
+colors and fonts) in its special SCSS project variables file, or do more serious
+customization by creating your own styles.
 
 Docsy also provides options for styling your code blocks, using either Chroma or
 Prism for highlighting.
@@ -77,8 +77,8 @@ Docsy has [Bootstrap][bs-docs] features such as gradient backgrounds
 can also be toggled in your project variables file by setting the variables to
 `false`.
 
-To add colors to or modify Bootstrap's [color maps], use **`assets/scss/_variables_project_after_bs.scss`**.
-For example:
+To add colors to or modify Bootstrap's [color maps], use
+**`assets/scss/_variables_project_after_bs.scss`**. For example:
 
 ```scss
 $custom-colors: (
@@ -101,9 +101,9 @@ Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
 
 ### Light/dark color themes
 
-Docsy 0.10.0 supports light and [dark mode] color themes. To allow your website users
-to choose light/dark modes, **enable the Docsy [light/dark menu]** or create
-your own custom theme selector.
+Docsy 0.10.0 supports light and [dark mode] color themes. To allow your website
+users to choose light/dark modes, **enable the Docsy [light/dark menu]** or
+create your own custom theme selector.
 
 If your site uses [Chroma for code highlighting], there are extra steps required
 so that code-block styles are compatible with light/dark mode:
@@ -116,7 +116,8 @@ For details, see [Chroma for code highlighting].
 
 {{% alert title="Note" %}}
 
-Light/dark color themes, only affect documentation pages, and white [blocks shortcodes].
+Light/dark color themes, only affect documentation pages, and white [blocks
+shortcodes].
 
 [blocks shortcodes]: shortcodes/#shortcode-blocks
 
@@ -237,8 +238,8 @@ Docsy's default Chroma styles for [light/dark mode] are:
 - [tango] for light mode
 - [onedark] for dark mode
 
-If you would like to use other styles, save the [Hugo generated Chroma styles] to
-the appropriate file:
+If you would like to use other styles, save the [Hugo generated Chroma styles]
+to the appropriate file:
 
 - [assets/scss/td/chroma/_light.scss]
 - [assets/scss/td/chroma/_dark.scss]
@@ -335,8 +336,8 @@ files with your own.
 The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
 of the following:
 
-1.  [Your logo][], which is included in the navbar as an inline SVG, styled by `.td-navbar .navbar-brand svg`.
-    For the style details, see [_nav.scss][].
+1.  [Your logo][], which is included in the navbar as an inline SVG, styled by
+    `.td-navbar .navbar-brand svg`. For the style details, see [_nav.scss][].
 
     To ensure your logo displays correctly, you may want to resize it and ensure
     that it doesn't have height and width attributes so that its size is fully
@@ -367,9 +368,10 @@ switch your site's documentation page display between a default "light" mode,
 and a "dark" mode where the text is displayed in a light color on a dark
 background.
 
-To enable the display of a light/[dark mode] menu in the navbar, set `params.ui.showLightDarkModeMenu`
-to `true` in your project's configuration file. The dropdown menu appears at the
-right, immediately before the [search box], if present.
+To enable the display of a light/[dark mode] menu in the navbar, set
+`params.ui.showLightDarkModeMenu` to `true` in your project's configuration
+file. The dropdown menu appears at the right, immediately before the [search
+box], if present.
 
 <!-- prettier-ignore -->
 {{< tabpane >}}
@@ -402,8 +404,8 @@ params:
 
 For pages containing a [blocks/cover][] shortcode, like most homepages, the
 navbar is translucent as long as the hero image hasn't scrolled up past the
-navbar. For an example, see the [About Docsy][] page. This initial translucent setting
-ensures that the hero image is maximally visible.
+navbar. For an example, see the [About Docsy][] page. This initial translucent
+setting ensures that the hero image is maximally visible.
 
 After the hero image has scrolled past the navbar, the navbar's (opaque)
 background color is set -- usually to the site's [primary color][].
@@ -460,7 +462,8 @@ illustrated in the following example:
 {.td-initial .my-dark-table-style}
 ```
 
-The example above uses [Markdown attribute][] syntax, and might render like this:
+The example above uses [Markdown attribute][] syntax, and might render like
+this:
 
 <!-- prettier-ignore-start -->
 | Shape    | Number of sides |
