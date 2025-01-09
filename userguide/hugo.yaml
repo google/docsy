@@ -4,18 +4,13 @@ enableRobotsTXT: true
 enableGitInfo: true
 theme: [docsy]
 
-pygmentsCodeFences: true
-pygmentsUseClasses: false
-pygmentsUseClassic: false
-pygmentsStyle: tango
-
 outputs:
   home: [HTML]
   page: [HTML]
   section: [HTML, RSS, print]
 
 imaging:
-  resampleFilter: CatmullRom
+  resampleFilter: CatmullRom # cSpell:disable-line
   quality: 75
   anchor: smart
 
@@ -60,7 +55,7 @@ params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
-  gcs_engine_id: 011217106833237091527:la2vtv2emlw
+  gcs_engine_id: 011217106833237091527:la2vtv2emlw # cSpell:disable-line
   offlineSearch: false
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
@@ -140,3 +135,5 @@ module:
       target: content/project/changelog.md
     - source: ../CONTRIBUTING.md
       target: content/project/contributing.md
+
+# cSpell:ignore docsy github goldmark markmap plantuml readingtime userguide
