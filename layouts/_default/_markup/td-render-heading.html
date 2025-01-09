@@ -1,4 +1,6 @@
-<h{{ .Level }} id="{{- .Anchor | safeURL -}}">
+<h{{ .Level }} id="{{ .Anchor | safeURL }}"
+  {{- with .Attributes.class }} class="{{ . }}" {{- end -}}
+>
   {{- .Text | safeHTML -}}
   {{ template "_default/_markup/_td-heading-self-link.html" . -}}
 </h{{ .Level }}>
