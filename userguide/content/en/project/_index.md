@@ -5,8 +5,9 @@ description: Docsy project design documentation and other resources
 outputs: [HTML]
 cascade:
   type: docs
-  # ui:
-  #   breadcrumb_disable: true
+  params:
+    ui:
+      breadcrumb_disable: true
 ---
 
 - Docsy build and design notes (TBC)

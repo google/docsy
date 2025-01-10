@@ -23,7 +23,9 @@
           </aside>
           <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
             {{ partial "version-banner.html" . }}
-            {{ if not .Site.Params.ui.breadcrumb_disable }}{{ partial "breadcrumb.html" . }}{{ end }}
+            {{ if not (.Param "ui.breadcrumb_disable") -}}
+              {{ partial "breadcrumb.html" . -}}
+            {{ end -}}
             {{ block "main" . }}{{ end }}
           </main>
         </div>
