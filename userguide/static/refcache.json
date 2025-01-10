@@ -375,6 +375,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-01-07T17:47:01.735556-05:00"
   },
+  "https://github.com/google/docsy/issues/1788": {
+    "StatusCode": 206,
+    "LastSeen": "2025-01-08T13:26:59.139291-05:00"
+  },
   "https://github.com/google/docsy/issues/1812": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:52.305697-05:00"
@@ -562,6 +566,10 @@
   "https://github.com/google/docsy/pull/1952": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:04:13.893357-05:00"
+  },
+  "https://github.com/google/docsy/pull/2160": {
+    "StatusCode": 206,
+    "LastSeen": "2025-01-08T13:26:59.610341-05:00"
   },
   "https://github.com/google/docsy/pulls": {
     "StatusCode": 200,
@@ -1030,6 +1038,10 @@
   "https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:08:17.225307-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation": {
+    "StatusCode": 206,
+    "LastSeen": "2025-01-08T13:26:58.452656-05:00"
   },
   "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
     "StatusCode": 206,

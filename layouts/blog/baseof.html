@@ -27,6 +27,9 @@
               <i class="fa-solid fa-rss" aria-hidden="true"></i>
             </a>
             {{ end -}}
+            {{ if not (.Param "ui.breadcrumb_disable") -}}
+              {{ partial "breadcrumb.html" . -}}
+            {{ end -}}
             {{ block "main" . }}{{ end }}
           </main>
         </div>

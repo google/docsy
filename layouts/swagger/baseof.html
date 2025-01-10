@@ -24,7 +24,9 @@
             {{ partial "taxonomy_terms_clouds.html" . }}
           </aside>
           <main class="col-12 col-md-9 col-xl-8 ps-md-5" role="main">
-            {{ if not .Site.Params.ui.breadcrumb_disable }}{{ partial "breadcrumb.html" . }}{{ end }}
+            {{ if not (.Param "ui.breadcrumb_disable") -}}
+              {{ partial "breadcrumb.html" . -}}
+            {{ end -}}
             <script src="https://unpkg.com/swagger-ui-dist@5.1.0/swagger-ui-bundle.js" integrity="sha384-TBW5qg/G561aZRk4jvscdaB7BEDK/9wpe/jS8vyKzK/ls+nJfWQw0W4cobLRYkWk" crossorigin="anonymous"></script>
             <script src="https://unpkg.com/swagger-ui-dist@5.1.0/swagger-ui-standalone-preset.js" integrity="sha384-cftHzufgeQ3yLXAwNPSMCBSqPUkItABWOchc20veg7pQ1sDu0FQSp0Grfx/BfhN7" crossorigin="anonymous"></script>
             {{ block "main" . }}{{ end }}

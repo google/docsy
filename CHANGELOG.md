@@ -28,14 +28,25 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **New**:
 
+- **[Breadcrumb navigation]** support has been enhanced and adjusted:
+  - You can now disable breadcrumbs for an entire project, or individual pages
+    or sections by setting `ui.breadcrumb_disable` to true. For details, see
+    [Breadcrumb navigation].
+  - **Blog** pages now also have breadcrumbs by default ([#1788]).
+  - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
+
 **Other changes**:
 
-- Blog section index page content and title used to be ignored, they are now
+- **Blog** section index page content and title used to be ignored, they are now
   displayed ([#1787]). To recover the old behavior use the following style
   override: `.td-section.td-blog .td-content { display: none; }`.
 
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 [#1787]: https://github.com/google/docsy/issues/1787
+[#1788]: https://github.com/google/docsy/issues/1788
+[#2160]: https://github.com/google/docsy/pull/2160
+[Breadcrumb navigation]:
+  https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
 
 ## 0.11.0
 
