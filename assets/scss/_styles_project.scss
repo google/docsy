@@ -4,4 +4,13 @@ Nothing defined here. The Hugo project that uses this theme can override Bootstr
 
 assets/scss/_styles_project.scss
 
+
 */
+
+@use 'search';
+
+.td-search {
+  &__input {
+    field-sizing: content;
+  }
+}
