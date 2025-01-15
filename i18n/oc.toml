@@ -1,0 +1,90 @@
+# UI strings. Buttons and similar.
+
+[ui_pager_prev]
+other = "Precedent"
+
+[ui_pager_next]
+other = "Seguent"
+
+[ui_read_more]
+other = "Ne legir mai"
+
+[ui_search]
+other = "Cercar dins lo site…"
+
+# Used in sentences such as "Posted in News"
+[ui_in]
+other = "Dins"
+
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "Totas"
+
+# Footer text
+[footer_all_rights_reserved]
+other = "Tot drech reservat"
+
+[footer_privacy_policy]
+other = "Politica de confidencialitat"
+
+# Post (blog, articles etc.)
+[post_byline_by]
+other = "Per"
+[post_created]
+other = "Creacion"
+[post_last_mod]
+other = "Darrièra modificacion"
+[post_edit_this]
+other = "Modificar aquesta pagina"
+[post_view_this]
+other = "Veire la pagina font"
+[post_create_child_page]
+other = "Crear una pagina enfant"
+[post_create_issue]
+other = "Crear una anomalia de documentacion"
+[post_create_project_issue]
+other = "Crear una anomalia de projècte"
+[post_posts_in]
+other = "Publicacions dins"
+[post_reading_time]
+other = "minutas de lectura"
+[post_less_than_a_minute_read]
+other = "mens d'una minuta de lectura"
+
+# Print support
+[print_printable_section]
+other = "Aquò es una vista multipagina imprimibla de la seccion."
+[print_click_to_print]
+other = "Clicar aquí per imprimir"
+[print_show_regular]
+other = "Tornar a la vista normala d'aquesta pagina"
+[print_entire_section]
+other = "Imprimir la seccion complèta"
+
+# Community
+[community_join]
+other = "Rejónher la comunitat {{ .Site.Title }}"
+[community_introduce]
+other = "{{ .Site.Title }} es un projècte liure que totòm dins la comunitat pòt utilizar, melhorar e n'aprofichar. Nos agradariá que nos rejonguèssetz ! Vaquí d'unas etapas per saber çò que se passa e s'implicar."
+[community_learn]
+other = "Aprendre e se connectar"
+[community_using]
+other = "Utilizatz o volètz utilizar {{ .Site.Title }} ? Aprenètz-ne mai aquí :"
+[community_develop]
+other = "Desvelopar e contribuir"
+[community_contribute]
+other = "Se volètz vos implicar en contribuissent a {{ .Site.Title }}, retrobatz-nos :"
+[community_how_to]
+other = "Podètz trobar cossí contribuir a {{ .Site.Title }} dins nòstra"
+[community_guideline]
+other = "Guida de contribucion"
+
+# Feedback
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "Èra utila aquesta pagina ?"
+[feedback_positive]
+other = "Oc"
+[feedback_negative]
+other = "Non"
