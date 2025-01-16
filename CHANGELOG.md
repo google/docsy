@@ -24,7 +24,10 @@ Useful links:
 
 For the full list of changes, see the [0.x.y] release notes.
 
-**Breaking changes**:
+**Potential breaking change**:
+
+- Removes shortcode `figure`, hugo's built-in shortcode `figure` can/will be
+  used instead
 
 **New**:
 
