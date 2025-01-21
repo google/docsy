@@ -2,10 +2,10 @@
 
 {{/* load stylesheet and scripts for KaTeX support */ -}}
 {{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.css" $version -}}
-{{ with resources.GetRemote $katex_css_url -}}
+{{ with try (resources.GetRemote $katex_css_url) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
-  {{ else -}}
+  {{ else with.Value -}}
     {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
 <link rel="stylesheet" href="{{- $katex_css_url -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
   {{ end -}}
@@ -15,12 +15,12 @@
 
 {{/* The loading of KaTeX is deferred to speed up page rendering */ -}}
 {{ $katex_js_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex.min.js" $version -}}
-{{ with resources.GetRemote $katex_js_url -}}
+{{ with try (resources.GetRemote $katex_js_url) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX script from CDN. Reason: %s." . -}}
-  {{ else -}}
+  {{ else with.Value -}}
     {{ $secureJS := . | resources.Fingerprint "sha512" -}}
-<script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>    
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
@@ -34,14 +34,14 @@
 {{/* To automatically render math in text elements, include the auto-render extension: */ -}}
 
 {{ $katex_autorender_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/auto-render.min.js" $version -}}
-{{ with resources.GetRemote $katex_autorender_url -}}
+{{ with try (resources.GetRemote $katex_autorender_url) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX auto render extension from CDN. Reason: %s." . -}}
-  {{ else -}}
+  {{ else with .Value -}}
     {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous"
 {{ printf "onload='renderMathInElement(%s, %s);'" (( $.Page.Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Page.Site.Params.katex.options | jsonify )) | safeHTMLAttr -}} >
-</script>    
+</script>
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
