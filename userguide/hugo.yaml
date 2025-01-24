@@ -41,28 +41,10 @@ markup:
       passthrough:
         enable: true
         delimiters:
-          block:
-          - - \[
-            - \]
-          - - $$
-            - $$
-          inline:
-          - - \(
-            - \)
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
     renderer:
       unsafe: true
-    extensions:
-      passthrough:
-        enable: true
-        delimiters:
-          block:
-          - - \[
-            - \]
-          - - $$
-            - $$
-          inline:
-          - - \(
-            - \)
   highlight:
     noClasses: false # Required for dark-mode
 
@@ -147,10 +129,6 @@ params:
     enable: true
   drawio:
     enable: true
-  katex:
-    enable: false
-    mhchem:
-      enable: false
 
 taxonomies:
   tag: tags
