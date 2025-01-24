@@ -81,14 +81,8 @@ markup:
       passthrough:
         enable: true
         delimiters:
-          block:
-          - - \[
-            - \]
-          - - $$
-            - $$
-          inline:
-          - - \(
-            - \)
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
