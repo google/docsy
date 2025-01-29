@@ -50,8 +50,8 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Warning" color="warning" %}}
-`math` code blocks are supported as of hugo version 0.93, using the standard syntax is possible as of hugo version 0.122.
+{{% alert title="Attention" color="warning" %}}
+In order to display mathematical formulae and/or chemical equations inside your page(s), you need to run hugo version 0.141.0 or above. With older hugo versions, an error is thrown.
 {{% /alert %}}
 
 {{% alert title="Tip" %}}
@@ -166,6 +166,30 @@ params:
   "params": {
     "katex": {
       "enable": true
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+By default, docsy pulls in the latest officially released version of \(\KaTeX\) / mhchem extension at build time. If that doesn't fit your needs, you can specify the wanted \(\KaTeX\) version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.katex]
+version = "0.16.21"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  mermaid:
+    version: 0.16.21
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "mermaid": {
+      "version": "0.16.21"
     }
   }
 }
@@ -322,10 +346,6 @@ Both standard syntax and `chem` block renders to the same equation:
 \tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
 \]
 
-{{% alert title="Warning" color="warning" %}}
-`chem` code blocks are supported as of hugo version 0.93, using the standard syntax is possible as of hugo version 0.122.
-{{% /alert %}}
-
 {{% alert title="Note" %}}
 The [manual](https://mhchem.github.io/MathJax-mhchem/) for mchem’s input syntax provides in-depth information about typesetting chemical formulae and physical units using the `mhchem` tool.
 {{% /alert %}}
@@ -342,7 +362,7 @@ Use of `mhchem` is not limited to the authoring of chemical equations. By using 
 
 For a complete list of options when authoring physical units, have a look at the [section](https://mhchem.github.io/MathJax-mhchem/#pu) on physical units in the `mhchem` documentation.
 
-#### Activating rendering support for chemical formulae
+#### Activating rendering support for chemical equations
 
 ##### Auto activation
 
