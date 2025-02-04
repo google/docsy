@@ -64,7 +64,7 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 ````
-Both standard syntax and `math` block renders to the same formula:
+Both standard syntax and `math` block render to the same formula:
 
 The probability of getting \(k\) heads when flipping \(n\) coins is:
 ```math
@@ -72,7 +72,7 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 ```
 
 {{% alert title="Attention" color="warning" %}}
-In order to display mathematical formulae and/or chemical equations inside your page(s), you need to run hugo version 0.141.0 or above. With older hugo versions, an error is thrown.
+In order to display mathematical formulae and/or chemical equations in your page(s), you need to run Hugo version 0.141.0 or above. With older Hugo versions, an error is thrown.
 {{% /alert %}}
 
 {{% alert title="Tip" %}}
@@ -83,8 +83,8 @@ using the \(\LaTeX\) typesetting system.
 
 ### \(\LaTeX\) typesetting using standard syntax
 
-As of hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using
-the standard syntax. To do so, you have make use of the goldmark
+As of Hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using
+the standard syntax. To do so, you need to use of the goldmark
 `passthrough` extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
@@ -142,7 +142,7 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 
-You may alter this definition according to your needs. For details, please refer to the official [hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
+You can edit this definition to meet your own needs. For details, see the official [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
 ### Activating and configuring \(\KaTeX\) support
 
@@ -207,9 +207,9 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-By default, docsy pulls in the latest officially released version of
+By default, Docsy pulls in the latest officially released version of
 \(\KaTeX\) / mhchem extension at build time. If that doesn't fit your needs,
-you can specify the wanted \(\KaTeX\) version inside your configuration file
+you can specify the \(\KaTeX\) version you want in your configuration file
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
@@ -555,7 +555,7 @@ sequenceDiagram
 Support of Mermaid diagrams is automatically enabled as soon as you use a
 `mermaid` code block on your page.
 
-By default, docsy pulls in the latest officially released version of Mermaid at
+By default, Docsy pulls in the latest officially released version of Mermaid at
 build time. If that doesn't fit your needs, you can specify the wanted mermaid
 version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
@@ -564,18 +564,18 @@ version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "10.9.0"
+version = "11.4.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 10.9.0
+    version: 11.4.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "10.9.0"
+      "version": "11.4.1"
     }
   }
 }
