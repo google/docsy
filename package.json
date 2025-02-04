@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "^0.142.0",
-    "netlify-cli": "^18.0.2",
+    "hugo-extended": "^0.143.0",
+    "netlify-cli": "^18.0.3",
     "npm-check-updates": "^17.1.14",
     "prettier": "^3.4.2"
   },
