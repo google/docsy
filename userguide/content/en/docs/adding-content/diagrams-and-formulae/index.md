@@ -6,66 +6,128 @@ math: true
 chem: true
 ---
 
-Docsy has built-in support for a number of diagram creation and typesetting tools you can use to add rich content to your site, including \\(\KaTeX\\), Mermaid, Diagrams.net, PlantUML, and MarkMap.
+Docsy has built-in support for a number of diagram creation and typesetting tools you can use to add rich content to your site, including \(\KaTeX\), Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
-## \\(\LaTeX\\) support with \\(\KaTeX\\)
+## \(\LaTeX\) support with \(\KaTeX\)
 
-[\\(\LaTeX\\)](https://www.latex-project.org/) is a high-quality typesetting system for the production of technical and scientific documentation. Due to its excellent math typesetting capabilities, \\(\TeX\\) became the de facto standard for the communication and publication of scientific documents, especially if these documents contain a lot of mathematical formulae. Designed and mostly written by Donald Knuth, the initial version was released in 1978. Dating back that far, \\(\LaTeX\\) has `pdf` as its primary output target and is not particularly well suited for producing HTML output for the Web. Fortunately, with [\\(\KaTeX\\)](https://katex.org/) there exists a fast and easy-to-use JavaScript library for \\(\TeX\\) math rendering on the web, which was integrated into the Docsy theme.
+[\(\LaTeX\)](https://www.latex-project.org/) is a high-quality typesetting system for the production of technical and scientific documentation. Due to its excellent math typesetting capabilities, \(\TeX\) became the de facto standard for the communication and publication of scientific documents, especially if these documents contain a lot of mathematical formulae. Designed and mostly written by Donald Knuth, the initial version was released in 1978. Dating back that far, \(\LaTeX\) has `pdf` as its primary output target and is not particularly well suited for producing HTML output for the Web. Fortunately, with [\(\KaTeX\)](https://katex.org/) there exists a fast and easy-to-use JavaScript library for \(\TeX\) math rendering on the web, which was integrated into the Docsy theme.
 
-With \\(\KaTeX\\) support [enabled](#activating-and-configuring-katex-support) in Docsy, you can include complex mathematical formulae into your web page, either inline or centred on its own line. Since \\(\KaTeX\\) relies on server side rendering, it produces the same output regardless of your browser or your environment. Formulae can be shown either inline or in display mode:
+With \(\KaTeX\) support [enabled](#activating-and-configuring-katex-support) in Docsy, you can include complex mathematical formulae into your web page, either inline or centred on its own line. Since \(\KaTeX\) relies on server side rendering, it produces the same output regardless of your browser or your environment. Formulae can be shown either inline or in display mode:
 
 ### Inline formulae
 
 The following code sample produces a text line with three inline formulae:
 
 ```tex
-When \\(a \ne 0\\), there are two solutions to \\(ax^2 + bx + c= 0\\) and they are \\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\\).
+When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c= 0\) and they are \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\).
 ```
 
-When \\(a \ne 0\\), there are two solutions to \\(ax^2 + bx + c= 0\\) and they are \\(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\\).
+When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c= 0\) and they are \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\).
 
 ### Formulae in display mode
 
 The following code sample produces an introductory text line followed by a formula numbered as `(1)` residing on its own line:
 
 ````markdown
-The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
+The probability of getting \(k\) heads when flipping \(n\) coins is:
+\[
+\tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}
+\]
+````
+
+As an alternative to the standard syntax used above, formulae can also be authored using a [GLFM math block](https://docs.gitlab.com/ee/user/markdown.html#math):
+
+````markdown
+The probability of getting \(k\) heads when flipping \(n\) coins is:
 ```math
 \tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 ````
+Both standard syntax and `math` block render to the same formula:
 
-The formula itself is written inside a [GLFM math block](https://docs.gitlab.com/ee/user/markdown.html#math). The above code fragment renders to:
-
-The probability of getting \\(k\\) heads when flipping \\(n\\) coins is:
+The probability of getting \(k\) heads when flipping \(n\) coins is:
 ```math
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Warning" color="warning" %}}
-`math` code blocks are only supported as of hugo version 0.93.
-
-In case of hugo version 0.92 or lower, use this code snippet to display the formula:
-```tex
-$$
-\tag*{(1)} P(E) = {n \choose k} p^k (1-p)^{n-k}
-$$
-```
+{{% alert title="Attention" color="warning" %}}
+In order to display mathematical formulae and/or chemical equations in your page(s), you need to run Hugo version 0.141.0 or above. With older Hugo versions, an error is thrown.
 {{% /alert %}}
 
 {{% alert title="Tip" %}}
-This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth information about typesetting mathematical formulae using the \\(\LaTeX\\) typesetting system.
+This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth information about typesetting mathematical formulae using the \(\LaTeX\) typesetting system.
 {{% /alert %}}
 
-### Activating and configuring \\(\KaTeX\\) support
+### \(\LaTeX\) typesetting using standard syntax
+
+As of Hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using the standard syntax. To do so, you need to use of the goldmark `passthrough` extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+{{< tabpane >}}
+{{< tab header="Site configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+   "markup": {
+      "goldmark": {
+         "extensions": {
+            "passthrough": {
+               "delimiters": {
+                  "block": [
+                     [
+                        "\\[",
+                        "\\]"
+                     ],
+                     [
+                        "$$",
+                        "$$"
+                     ]
+                  ],
+                  "inline": [
+                     [
+                        "\\(",
+                        "\\)"
+                     ]
+                  ]
+               },
+               "enable": true
+            }
+         }
+      }
+   }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+You can edit this definition to meet your own needs. For details, see the official [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
+
+### Activating and configuring \(\KaTeX\) support
 
 #### Auto activation
 
-As soon as you use a `math` code block on your page, support of \\(\KaTeX\\) is automatically enabled.
+As soon as you use a `math` code block on your page, support of \(\KaTeX\) is automatically enabled.
 
-#### Manual activation (no `math` code block present or hugo 0.92 or lower)
+#### Manual activation (use of standard syntax, no `math` code block present)
 
-If you want to use inline formulae and don't have a `math` code block present in your page which triggers auto activation, you need to manually activate \\(\KaTeX\\) support. The easiest way to do so is to add a `math` attribute to the frontmatter of your page and set it to `true`:
+If you want to use formulae (block or inline) and don't have a `math` code block present in your page which triggers auto activation, you need to manually activate \(\KaTeX\) support. The easiest way to do so is to add a `math` attribute to the frontmatter of your page and set it to `true`:
 
 {{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
@@ -86,7 +148,7 @@ math: true
 {{< /tab >}}
 {{< /tabpane >}}
 
-If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
+If you use formulae in most of your pages, you can also enable sitewide \(\KaTeX\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
@@ -110,7 +172,31 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-Additionally, you can customize various \\(\KaTeX\\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
+By default, Docsy pulls in the latest officially released version of \(\KaTeX\) / mhchem extension at build time. If that doesn't fit your needs, you can specify the \(\KaTeX\) version you want in your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.katex]
+version = "0.16.21"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  mermaid:
+    version: 0.16.21
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "mermaid": {
+      "version": "0.16.21"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+Additionally, you can customize various \(\KaTeX\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
 
 {{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
@@ -222,19 +308,31 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 
-For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}\\)'s [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}\\)'s [configuration options](https://katex.org/docs/options.html).
+{{% alert title="Note" %}}
+If you define custom delimiters, please make sure they match with the delimiters defined [above](#latex-typesetting-using-standard-syntax) as passthrough extension.
+{{% /alert %}}
+
+For a complete list of options and their detailed description, have a look at the documentation of \({\KaTeX}'s\) [Rendering API options](https://katex.org/docs/autorender.html#api) and of \({\KaTeX}'s\) [configuration options](https://katex.org/docs/options.html).
 
 ### Display of Chemical Equations and Physical Units
 
-[mhchem](https://www.ctan.org/pkg/mhchem) is a \\(\LaTeX\\) package for typesetting chemical molecular formulae and equations. Fortunately, \\(\KaTeX\\) provides the `mhchem` [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes the `mhchem` package accessible when authoring content for the web. With `mhchem` extension [enabled](#activating-rendering-support-for-chemical-formulae), you can easily include chemical equations into your page. An equation can be shown either inline or can reside on its own line. The following code sample produces a text line including a chemical equation:
+[mhchem](https://www.ctan.org/pkg/mhchem) is a \(\LaTeX\) package for typesetting chemical molecular formulae and equations. Fortunately, \(\KaTeX\) provides the `mhchem` [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes the `mhchem` package accessible when authoring content for the web. With `mhchem` extension [enabled](#activating-rendering-support-for-chemical-formulae), you can easily include chemical equations into your page. An equation can be shown either inline or can reside on its own line. The following code sample produces a text line including a chemical equation:
 
 ```mhchem
-*Precipitation of barium sulfate:* \\(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\\)
+*Precipitation of barium sulfate:* \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)
 ```
 
-*Precipitation of barium sulfate:* \\(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\\)
+*Precipitation of barium sulfate:* \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)
 
-More complex equations need to be displayed on their own line. Use a code block adorned with `chem` in order to achieve this:
+More complex equations can be displayed on their own line using the block delimiters defined:
+
+````markdown
+\[
+\tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
+\]
+````
+
+Alternatively, you can use a code block adorned with `chem` in order to render the equation:
 
 ````markdown
 ```chem
@@ -242,44 +340,35 @@ More complex equations need to be displayed on their own line. Use a code block 
 ```
 ````
 
-```chem
-\tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
-```
+Both standard syntax and `chem` block renders to the same equation:
 
-{{% alert title="Warning" color="warning" %}}
-`chem` code blocks are only supported as of hugo version 0.93.
-
-In case of hugo version 0.92 or lower, use this code snippet to display the formula:
-```tex
-$$
+\[
 \tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
-$$
-```
-{{% /alert %}}
+\]
 
 {{% alert title="Note" %}}
 The [manual](https://mhchem.github.io/MathJax-mhchem/) for mchem’s input syntax provides in-depth information about typesetting chemical formulae and physical units using the `mhchem` tool.
 {{% /alert %}}
 
-Use of `mhchem` is not limited to the authoring of chemical equations, using the included `\pu` command, pretty looking physical units can be written with ease, too. The following code sample produces two text lines with four numbers plus their corresponding physical units:
+Use of `mhchem` is not limited to the authoring of chemical equations. By using the included `\pu` command, pretty looking physical units can be written with ease, too. The following code sample produces two text lines with four numbers plus their corresponding physical units:
 
 ```mhchem
-* Scientific number notation: \\(\pu{1.2e3 kJ}\\) or \\(\pu{1.2E3 kJ}\\) \\
-* Divisions: \\(\pu{123 kJ/mol}\\) or \\(\pu{123 kJ//mol}\\)
+* Scientific number notation: \(\pu{1.2e3 kJ}\) or \(\pu{1.2E3 kJ}\) \\
+* Divisions: \(\pu{123 kJ/mol}\) or \(\pu{123 kJ//mol}\)
 ```
 
-* Scientific number notation: \\(\pu{1.2e3 kJ}\\) or \\(\pu{1.2E3 kJ}\\)
-* Divisions: \\(\pu{123 kJ/mol}\\) or \\(\pu{123 kJ//mol}\\)
+* Scientific number notation: \(\pu{1.2e3 kJ}\) or \(\pu{1.2E3 kJ}\)
+* Divisions: \(\pu{123 kJ/mol}\) or \(\pu{123 kJ//mol}\)
 
 For a complete list of options when authoring physical units, have a look at the [section](https://mhchem.github.io/MathJax-mhchem/#pu) on physical units in the `mhchem` documentation.
 
-#### Activating rendering support for chemical formulae
+#### Activating rendering support for chemical equations
 
 ##### Auto activation
 
 As soon as you use a `chem` code block on your page, rendering support for chemical equations is automatically enabled.
 
-##### Manual activation (no `chem` code block present or hugo 0.92 or lower)
+##### Manual activation (use of standard syntax, no `chem` code block present)
 
 If you want to use chemical formulae inline and don't have a `chem` code block present in your page which triggers auto activation, you need to manually activate rendering support for chemical formulae. The easiest way to do so is to add a `chem` attribute to the frontmatter of your page and set it to `true`:
 
@@ -382,24 +471,24 @@ sequenceDiagram
 
 Support of Mermaid diagrams is automatically enabled as soon as you use a `mermaid` code block on your page.
 
-By default, docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, Docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "10.9.0"
+version = "11.4.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 10.9.0
+    version: 11.4.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "10.9.0"
+      "version": "11.4.1"
     }
   }
 }
