@@ -37,6 +37,8 @@ For the full list of changes, see the [0.x.y] release notes.
     [Breadcrumb navigation].
   - **Blog** pages now also have breadcrumbs by default ([#1788]).
   - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
+- Support for a [td-content-after-header.html] page-content render hook, which
+  can be [content type] specific ([#2192]).
 
 **Other changes**:
 
@@ -50,8 +52,10 @@ For the full list of changes, see the [0.x.y] release notes.
 [#1787]: https://github.com/google/docsy/issues/1787
 [#1788]: https://github.com/google/docsy/issues/1788
 [#2160]: https://github.com/google/docsy/pull/2160
+[#2192]: https://github.com/google/docsy/pull/2192
 [Breadcrumb navigation]:
   https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
+[content type]: https://gohugo.io/quick-reference/glossary/#content-type
 
 ## 0.11.0
 
