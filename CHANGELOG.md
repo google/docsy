@@ -56,6 +56,8 @@ For the full list of changes, see the [0.x.y] release notes.
 [Breadcrumb navigation]:
   https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
+[td-content-after-header.html]:
+  https://github.com/google/docsy/blob/main/layouts/_default/td-content-after-header.html
 
 ## 0.11.0
 
