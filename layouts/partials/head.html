@@ -15,6 +15,8 @@
 <title>
   {{- if .IsHome -}}
     {{ .Site.Title -}}
+  {{ else if .Site.Params.excludeSiteTitle -}}
+    {{ with .Title }}{{ . }}{{ end -}}
   {{ else -}}
     {{ with .Title }}{{ . }} | {{ end -}}
     {{ .Site.Title -}}
