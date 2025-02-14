@@ -10,7 +10,7 @@ Docsy has built-in support for a number of diagram creation and typesetting
 tools you can use to add rich content to your site, including \(\KaTeX\),
 Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
-## \(\LaTeX\) support with \(\KaTeX\)
+## \\(\\LaTeX\\) support with \\(\\KaTeX\\)
 
 [\(\LaTeX\)](https://www.latex-project.org/) is a high-quality typesetting
 system for the production of technical and scientific documentation. Due to its
@@ -81,7 +81,7 @@ provides in-depth information about typesetting mathematical formulae
 using the \(\LaTeX\) typesetting system.
 {{% /alert %}}
 
-### \(\LaTeX\) typesetting using standard syntax
+### \\(\\LaTeX\\) typesetting using standard syntax
 
 As of Hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using
 the standard syntax. To do so, you need to use of the goldmark
@@ -144,7 +144,7 @@ markup:
 
 You can edit this definition to meet your own needs. For details, see the official [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
-### Activating and configuring \(\KaTeX\) support
+### Activating and configuring \\(\\KaTeX\\) support
 
 #### Auto activation
 
