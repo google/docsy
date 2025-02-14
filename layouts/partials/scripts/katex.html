@@ -6,8 +6,10 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
   {{ else with.Value -}}
-    {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{- $katex_css_url -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+    {{ with resources.Copy "css/katex.min.css" . }}
+      {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+    {{ end -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
@@ -19,8 +21,10 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX script from CDN. Reason: %s." . -}}
   {{ else with.Value -}}
-    {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+    {{ with resources.Copy "js/katex.min.js" . }}  
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
+    {{ end -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
@@ -38,10 +42,12 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX auto render extension from CDN. Reason: %s." . -}}
   {{ else with .Value -}}
-    {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+    {{ with resources.Copy "js/auto-render.min.js" . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous"
 {{ printf "onload='renderMathInElement(%s, %s);'" (( $.Page.Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Page.Site.Params.katex.options | jsonify )) | safeHTMLAttr -}} >
 </script>
+    {{ end -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
