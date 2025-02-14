@@ -4,8 +4,10 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve mhchem script from CDN. Reason: %s." . -}}
   {{ else with .Value -}}
-    {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+    {{ with resources.Copy "js/mhchem.min.js" . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
+    {{ end -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." .version -}}
