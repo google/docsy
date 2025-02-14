@@ -8,7 +8,7 @@ chem: true
 
 Docsy has built-in support for a number of diagram creation and typesetting tools you can use to add rich content to your site, including \(\KaTeX\), Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
-## \(\LaTeX\) support with \(\KaTeX\)
+## \\(\\LaTeX\\) support with \\(\\KaTeX\\)
 
 [\(\LaTeX\)](https://www.latex-project.org/) is a high-quality typesetting system for the production of technical and scientific documentation. Due to its excellent math typesetting capabilities, \(\TeX\) became the de facto standard for the communication and publication of scientific documents, especially if these documents contain a lot of mathematical formulae. Designed and mostly written by Donald Knuth, the initial version was released in 1978. Dating back that far, \(\LaTeX\) has `pdf` as its primary output target and is not particularly well suited for producing HTML output for the Web. Fortunately, with [\(\KaTeX\)](https://katex.org/) there exists a fast and easy-to-use JavaScript library for \(\TeX\) math rendering on the web, which was integrated into the Docsy theme.
 
@@ -58,7 +58,7 @@ In order to display mathematical formulae and/or chemical equations in your page
 This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth information about typesetting mathematical formulae using the \(\LaTeX\) typesetting system.
 {{% /alert %}}
 
-### \(\LaTeX\) typesetting using standard syntax
+### \\(\\LaTeX\\) typesetting using standard syntax
 
 As of Hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using the standard syntax. To do so, you need to use of the goldmark `passthrough` extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
@@ -119,7 +119,7 @@ markup:
 
 You can edit this definition to meet your own needs. For details, see the official [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
-### Activating and configuring \(\KaTeX\) support
+### Activating and configuring \\(\\KaTeX\\) support
 
 #### Auto activation
 

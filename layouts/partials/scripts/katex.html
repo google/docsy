@@ -3,7 +3,6 @@
 {{/* load stylesheet and scripts for KaTeX support */ -}}
 {{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex%s.css" $version (cond hugo.IsProduction ".min" "") -}}
 
-{{ warnf $katex_css_url }}
 {{ with try (resources.GetRemote $katex_css_url) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
@@ -23,7 +22,7 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX script from CDN. Reason: %s." . -}}
   {{ else with.Value -}}
-    {{ with resources.Copy (printf "js/katex%s.js" (cond hugo.IsProduction ".min" "")) . }}  
+    {{ with resources.Copy (printf "js/katex%s.js" (cond hugo.IsProduction ".min" "")) . }}
       {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
     {{ end -}}
