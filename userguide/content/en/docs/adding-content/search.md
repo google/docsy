@@ -4,9 +4,10 @@ date: 2017-01-05
 weight: 3.5
 description: >
    Let users search your Docsy site with a choice of configurable search options.
+cSpell:ignore: GCSE
 ---
 
-Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs. You can choose from:
+Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs or [design your own](#custom-search). You can choose from:
 
 * [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine) (GCSE), the default option, which uses Google's index of your public site to generate a search results page.
 * [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and search mechanism. Search results are displayed as a pop-up. Algolia DocSearch is free for public documentation sites.
@@ -332,5 +333,22 @@ exclude_search: true
 {{< /tab >}}
 {{< /tabpane >}}
 
+### Custom search
+
+If none of the supported search engines address your project's needs, you can
+implement your own custom search. If your searchbox fits within Docsy's standard
+design, then you can implement custom search by overriding the following files:
+
+- [layouts/partials/search-input.html]
+- [assets/scss/_search.scss]
+- [assets/js/search.js]
+
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[assets/js/search.js]:
+  https://github.com/google/docsy/blob/main/assets/js/search.js
+[assets/scss/_search.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/_search.scss
+[configuration file]:
+  https://gohugo.io/getting-started/configuration/#configuration-file
+[layouts/partials/search-input.html]:
+  https://github.com/google/docsy/blob/main/layouts/partials/search-input.html
