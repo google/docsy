@@ -3,17 +3,29 @@ title: Search
 date: 2017-01-05
 weight: 3.5
 description: >
-   Let users search your Docsy site with a choice of configurable search options.
+  Let users search your Docsy site with a choice of configurable search options.
 cSpell:ignore: GCSE
 ---
 
-Docsy offers multiple options that let your readers search your site content, so you can pick one that suits your needs or [design your own](#custom-search). You can choose from:
+Docsy offers multiple options that let your readers search your site content, so
+you can pick one that suits your needs or [design your own](#custom-search). You
+can choose from:
 
-* [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine) (GCSE), the default option, which uses Google's index of your public site to generate a search results page.
-* [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and search mechanism. Search results are displayed as a pop-up. Algolia DocSearch is free for public documentation sites.
-* [Local search with Lunr](#local-search-with-lunr), which uses Javascript to index and search your site without the need to connect to external services. This option doesn't require your site to be public.
+- [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine)
+  (GCSE), the default option, which uses Google's index of your public site to
+  generate a search results page.
+- [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and
+  search mechanism. Search results are displayed as a pop-up. Algolia DocSearch
+  is free for public documentation sites.
+- [Local search with Lunr](#local-search-with-lunr), which uses Javascript to
+  index and search your site without the need to connect to external services.
+  This option doesn't require your site to be public.
 
-If you enable any of these search options in your project [configuration file], a search box displays in the right of your top navigation bar. By default a search box also displays at the top of the section menu in the left navigation pane, which you can disable if you prefer, or if you're using a search option that only works with the top search box.
+If you enable any of these search options in your project [configuration file],
+a search box displays in the right of your top navigation bar. By default a
+search box also displays at the top of the section menu in the left navigation
+pane, which you can disable if you prefer, or if you're using a search option
+that only works with the top search box.
 
 {{% alert title="You can only enable a single search option at a time" color=warning %}}
 
@@ -25,7 +37,10 @@ behavior when serving your site.
 
 ## Disabling the sidebar search box
 
-By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set the site parameter `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, the search box appears in both the top navigation bar and at the top
+of the sidebar left navigation pane. If you don't want the sidebar search box,
+set the site parameter `sidebar_search_disable` to `true` in
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- prettier-ignore -->
 {{< tabpane >}}
@@ -52,19 +67,35 @@ params:
 
 ## Configure search with a Google Custom Search Engine
 
-By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse/all) (GCSE) to search your site. To enable this feature, you'll first need to make sure that you have built and deployed [a production version of your site](/docs/deployment#build-environments-and-indexing), as otherwise your site won't be crawled and indexed.
+By default Docsy uses a [Google Custom Search Engine][GCSE] (GCSE) to search
+your site. To enable this feature, you'll first need to make sure that you have
+built and deployed a
+[production version of your site](/docs/deployment#build-environments-and-indexing),
+as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
 
-1.  Create a Google Custom Search Engine for your deployed site by clicking **New search engine** on the [Custom Search page](https://cse.google.com/cse/all) and following the instructions. Make a note of the ID for your new search engine.
-1.  Add any further configuration you want to your search engine using the **Edit search engine** options. In particular you may want to do the following:
+1.  Create a Google Custom Search Engine for your deployed site by clicking
+    **New search engine** on the [Custom Search page][GCSE] and following the
+    instructions. Make a note of the ID for your new search engine.
+1.  Add any further configuration you want to your search engine using the
+    **Edit search engine** options. In particular you may want to do the
+    following:
 
-    * Select **Look and feel**. Change from the default **Overlay** layout to **Results only**, as this option means your search results are embedded in your search page rather than appearing in a separate box. Click **Save** to save your changes.
-    * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
+    - Select **Look and feel**. Change from the default **Overlay** layout to
+      **Results only**, as this option means your search results are embedded in
+      your search page rather than appearing in a separate box. Click **Save**
+      to save your changes.
+    - Edit the default result link behavior so that search results from your
+      site don't open in a new tab. To do this, select **Search Features** -
+      **Advanced** - **Websearch Settings**. In the **Link Target** field, type
+      "\_parent". Click **Save** to save your changes.
 
 {{% alert title="Tip" %}}
 
-Your site search results should show up within a couple of days. If it takes longer than that, you can manually request that your site is indexed by [submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
+Your site search results should show up within a couple of days. If it takes
+longer than that, you can manually request that your site is indexed by
+[submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
 
 {{% /alert %}}
 
@@ -128,33 +159,37 @@ params:
 
 ### Disabling GCSE search
 
-If you don't specify a Google Custom Search Engine ID for your project and haven't enabled any other search options, the search box won't appear in your site. If you're using the default `hugo.toml` from the example site and want to disable search, just comment out or remove the relevant line.
+If you don't specify a Google Custom Search Engine ID for your project and
+haven't enabled any other search options, the search box won't appear in your
+site. If you're using the default `hugo.toml` from the example site and want to
+disable search, just comment out or remove the relevant line.
 
 ## Algolia DocSearch
 
-As an alternative to GCSE, you can use [Algolia
-DocSearch](https://docsearch.algolia.com), which is
-free for public documentation sites. Docsy supports **Algolia DocSearch v3**.
+As an alternative to GCSE, you can use
+[Algolia DocSearch](https://docsearch.algolia.com), which is free for public
+documentation sites. Docsy supports **Algolia DocSearch v3**.
 
 {{% alert title="Algolia v2 is deprecated" %}}
+
 Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you
 are an existing Algolia DocSearch v2 user and want to use the latest Docsy
-version, [follow the migration
-instructions](https://docsearch.algolia.com/docs/migrating-from-v2) in the
-DocSearch documentation to update your DocSearch code snippet.
+version, follow the
+[migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2)
+in the DocSearch documentation to update your DocSearch code snippet.
+
 {{% /alert %}}
 
 ### Sign up for Algolia DocSearch
 
-Complete the form at <https://docsearch.algolia.com/apply>.
-Proceed to the next step once you've received Algolia DocSearch
-parameters for your project.
+Complete the form at <https://docsearch.algolia.com/apply>. Proceed to the next
+step once you've received Algolia DocSearch parameters for your project.
 
 ### Eager to test DocSearch?
 
-Docsy defaults to the [Algolia test][]-site parameters when
-none are provided. To enable search over the Algolia test, define
-`params.search.algolia` without any other fields, as outlined next.
+Docsy defaults to the [Algolia test][]-site parameters when none are provided.
+To enable search over the Algolia test, define `params.search.algolia` without
+any other fields, as outlined next.
 
 ### Configure Algolia DocSearch
 
@@ -198,8 +233,8 @@ params:
 
 <!-- prettier-ignore-end -->
 
-To learn more about Algolia DocSearch V3, see [Getting
-started](https://docsearch.algolia.com/docs/DocSearch-v3).
+To learn more about Algolia DocSearch V3, see
+[Getting started](https://docsearch.algolia.com/docs/DocSearch-v3).
 
 When you've completed these steps, Algolia search should be enabled on your
 site. Search results are displayed as a pop-up, so you don't need to add any
@@ -220,7 +255,10 @@ Leave either file empty to disable Docsy's implementation.
 
 ## Local search with Lunr
 
-[Lunr](https://lunrjs.com/) is a Javascript-based search option that lets you index your site and make it searchable without the need for external, server-side search services. This is a good option particularly for smaller or non-public sites.
+[Lunr](https://lunrjs.com/) is a Javascript-based search option that lets you
+index your site and make it searchable without the need for external,
+server-side search services. This is a good option particularly for smaller or
+non-public sites.
 
 To add Lunr search to your Docsy site:
 
@@ -253,17 +291,23 @@ params:
 
 <!-- prettier-ignore-end -->
 
-Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
+Once you've completed these steps, local search is enabled for your site and
+results appear in a drop down when you use the search box.
 
 {{% alert title="Tip" %}}
 
-If you're [testing this locally](/docs/deployment/#serving-your-site-locally) using Hugo’s local server functionality, you need to build your `offline-search-index.xxx.json` file first by running `hugo`. If you have the Hugo server running while you build `offline-search-index.xxx.json`, you may need to stop the server and restart it in order to see your search results.
+If you're [testing this locally](/docs/deployment/#serving-your-site-locally)
+using Hugo’s local server functionality, you need to build your
+`offline-search-index.xxx.json` file first by running `hugo`. If you have the
+Hugo server running while you build `offline-search-index.xxx.json`, you may
+need to stop the server and restart it in order to see your search results.
 
 {{% /alert %}}
 
 ### Changing the summary length of the local search results
 
-You can customize the summary length by setting `offlineSearchSummaryLength` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
+You can customize the summary length by setting `offlineSearchSummaryLength` in
+`hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 <!-- prettier-ignore -->
 {{< tabpane >}}
@@ -291,7 +335,8 @@ params:
 
 ### Changing the maximum result count of the local search
 
-You can customize the maximum result count by setting `offlineSearchMaxResults` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
+You can customize the maximum result count by setting `offlineSearchMaxResults`
+in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
 <!-- prettier-ignore -->
 {{< tabpane >}}
@@ -318,9 +363,11 @@ params:
 
 ### Changing the width of the local search results popover
 
-The width of the search results popover will automatically widen according to the content.
+The width of the search results popover will automatically widen according to
+the content.
 
-If you want to limit the width, add the following scss into `assets/scss/_variables_project.scss`.
+If you want to limit the width, add the following scss into
+`assets/scss/_variables_project.scss`.
 
 ```scss
 .td-offline-search-results {
@@ -330,7 +377,8 @@ If you want to limit the width, add the following scss into `assets/scss/_variab
 
 ### Excluding pages from local search results
 
-To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
+To exclude pages from local search results, add `exclude_search: true` to the
+the frontmatter of each page:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -344,7 +392,7 @@ exclude_search = true
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
 ---
-title: "Index"
+title: Index
 weight: 10
 exclude_search: true
 ---
@@ -376,5 +424,6 @@ design, then you can implement custom search by overriding the following files:
   https://github.com/google/docsy/blob/main/assets/scss/_search.scss
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
+[GCSE]: https://cse.google.com/cse/all
 [layouts/partials/search-input.html]:
   https://github.com/google/docsy/blob/main/layouts/partials/search-input.html
