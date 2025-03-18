@@ -27,6 +27,7 @@ behavior when serving your site.
 
 By default, the search box appears in both the top navigation bar and at the top of the sidebar left navigation pane. If you don't want the sidebar search box, set the site parameter `sidebar_search_disable` to `true` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -46,7 +47,6 @@ params:
     }
   }
 }
-
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -63,14 +63,20 @@ By default Docsy uses a [Google Custom Search Engine](https://cse.google.com/cse
     * Edit the default result link behavior so that search results from your site don't open in a new tab. To do this, select **Search Features** - **Advanced** - **Websearch Settings**. In the **Link Target** field, type "\_parent". Click **Save** to save your changes.
 
 {{% alert title="Tip" %}}
+
 Your site search results should show up within a couple of days. If it takes longer than that, you can manually request that your site is indexed by [submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
+
 {{% /alert %}}
 
 ### Adding the search page
 
 Once you have your search engine set up, you can add the feature to your site:
 
-1. Ensure you have a Markdown file in `content/en/search.md` (and one per other languages if needed) to display your search results. It only needs a title and `layout: search`, as in the following example:
+<!-- prettier-ignore-start -->
+
+1.  Ensure you have a Markdown file in `content/en/search.md` (and one per other
+    languages if needed) to display your search results. It only needs a title
+    and `layout: search`, as in the following example:
 
     {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -94,7 +100,9 @@ layout: search
 {{< /tab >}}
     {{< /tabpane >}}
 
-1. Add your Google Custom Search Engine ID to the site params in `hugo.toml`/`hugo.yaml`/`hugo.json`. You can add different values per language if needed.
+1.  Add your Google Custom Search Engine ID to the site params in
+    `hugo.toml`/`hugo.yaml`/`hugo.json`. You can add different values per
+    language if needed.
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -116,6 +124,7 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 
+<!-- prettier-ignore-end -->
 
 ### Disabling GCSE search
 
@@ -149,9 +158,12 @@ none are provided. To enable search over the Algolia test, define
 
 ### Configure Algolia DocSearch
 
+<!-- prettier-ignore-start -->
+
 1.  Ensure that [GCSE search](#disabling-gcse-search) is disabled.
 2.  Add your project's Algolia DocSearch parameters to
-    `hugo.toml`/`hugo.yaml`/`hugo.json`, for example (using [Algolia test][] values):
+    `hugo.toml`/`hugo.yaml`/`hugo.json`, for example (using [Algolia test][]
+    values):
 
     {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -184,6 +196,8 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 
+<!-- prettier-ignore-end -->
+
 To learn more about Algolia DocSearch V3, see [Getting
 started](https://docsearch.algolia.com/docs/DocSearch-v3).
 
@@ -210,6 +224,8 @@ Leave either file empty to disable Docsy's implementation.
 
 To add Lunr search to your Docsy site:
 
+<!-- prettier-ignore-start -->
+
 1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
     {{< tabpane >}}
@@ -231,18 +247,25 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 
-2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and ensure Algolia DocSearch is set to `false`, as you can only have one type of search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+2. Remove or comment out any GCSE ID in `hugo.toml`/`hugo.yaml`/`hugo.json` and
+   ensure Algolia DocSearch is set to `false`, as you can only have one type of
+   search enabled. See [Disabling GCSE search](#disabling-gcse-search).
+
+<!-- prettier-ignore-end -->
 
 Once you've completed these steps, local search is enabled for your site and results appear in a drop down when you use the search box.
 
 {{% alert title="Tip" %}}
+
 If you're [testing this locally](/docs/deployment/#serving-your-site-locally) using Hugo’s local server functionality, you need to build your `offline-search-index.xxx.json` file first by running `hugo`. If you have the Hugo server running while you build `offline-search-index.xxx.json`, you may need to stop the server and restart it in order to see your search results.
+
 {{% /alert %}}
 
 ### Changing the summary length of the local search results
 
 You can customize the summary length by setting `offlineSearchSummaryLength` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -270,6 +293,7 @@ params:
 
 You can customize the maximum result count by setting `offlineSearchMaxResults` in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- prettier-ignore -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -308,6 +332,7 @@ If you want to limit the width, add the following scss into `assets/scss/_variab
 
 To exclude pages from local search results, add `exclude_search: true` to the the frontmatter of each page:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -332,6 +357,7 @@ exclude_search: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Custom search
 
