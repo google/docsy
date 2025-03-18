@@ -339,8 +339,16 @@ If none of the supported search engines address your project's needs, you can
 implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
-- `layouts/partials/search-input.html`
-- `assets/js/search.js`
+- [layouts/partials/search-input.html]
+- [assets/scss/_search.scss]
+- [assets/js/search.js]
 
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[assets/js/search.js]:
+  https://github.com/google/docsy/blob/main/assets/js/search.js
+[assets/scss/_search.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/_search.scss
+[configuration file]:
+  https://gohugo.io/getting-started/configuration/#configuration-file
+[layouts/partials/search-input.html]:
+  https://github.com/google/docsy/blob/main/layouts/partials/search-input.html
