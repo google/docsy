@@ -8,6 +8,7 @@
   "scripts": {
     "_cd:docs": "cd userguide &&",
     "_check:format": "npx prettier --check .??* *.md",
+    "_commit:public": "npm run cd:docs -- _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c tools/gen-chroma-styles.sh && bash -c 'tools/gen-chroma-styles.sh -s onedark -o _dark.scss'",
@@ -40,10 +41,10 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "^0.143.1",
-    "netlify-cli": "^18.0.4",
-    "npm-check-updates": "^17.1.14",
-    "prettier": "^3.5.0"
+    "hugo-extended": "^0.145.0",
+    "netlify-cli": "^19.0.2",
+    "npm-check-updates": "^17.1.15",
+    "prettier": "^3.5.3"
   },
   "engines": {
     "node": ">=22"
