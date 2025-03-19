@@ -1,4 +1,5 @@
-{{ if and .GitInfo .Site.Params.github_repo -}}
+{{ if and .GitInfo .Site.Params.github_repo  -}}
+{{ warnf "Warning: use of `github_repo` is deprecated, use `repo.url` instead " -}}
 <div class="td-page-meta__lastmod">
   {{ T "post_last_mod" }} {{ .Lastmod.Format .Site.Params.time_format_default -}}
   {{ with .GitInfo }}: {{/* Trim WS */ -}}
@@ -8,3 +9,16 @@
   {{- end }}
 </div>
 {{ end -}}
+
+{{/* Looks like all repo types have the same frmat for the commit link */}}
+{{ if and .GitInfo .Site.Params.repo.type -}}
+<div class="td-page-meta__lastmod">
+  {{ T "post_last_mod" }} {{ .Lastmod.Format .Site.Params.time_format_default -}}
+  {{ with .GitInfo }}: {{/* Trim WS */ -}}
+    <a href="{{ $.Site.Params.repo.url }}/commit/{{ .Hash }}">
+      {{- .Subject }} ({{ .AbbreviatedHash }}) {{- /* Trim WS */ -}}
+    </a>
+  {{- end }}
+</div>
+{{ end -}}
+
