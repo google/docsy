@@ -11,6 +11,7 @@
 
 !/content/en/docs/adding-content
 /content/en/docs/adding-content/*
+!/content/en/docs/adding-content/search.md
 
 !/content/en/docs/adding-content/lookandfeel.md
 
