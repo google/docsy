@@ -341,7 +341,6 @@ cascade:
 ```
 
 ## Heading self links
-{.test-class}
 
 Docsy supports build-time generation of heading self links using Hugo's
 `render-heading.html` [hook].
