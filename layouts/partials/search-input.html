@@ -58,4 +58,15 @@
 {{ if gt (.Scratch.Get "docsy-search") 1 -}}
 {{ warnf `You have more than one site-search option configured: choose only one.
       For details, see https://www.docsy.dev/docs/adding-content/search.` -}}
+
+{{ if .Site.Params.lunrSearch }}
+<div class="td-search td-search--lunr">
+  <div class="td-search__icon"></div>
+  <input id="lunr-search-input" type="search" class="td-search__input form-control" placeholder="Search" aria-label="Search" autocomplete="off">
+</div>
+<ul id="lunr-search-results"></ul>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script src="/js/lunr-search.js"></script>
+{{ end }}
+
 {{ end -}}
