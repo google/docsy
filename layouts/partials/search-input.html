@@ -70,3 +70,13 @@
 {{ end }}
 
 {{ end -}}
+
+{{ if .Site.Params.lunrSearch.enabled }}
+<div class="td-search td-search--lunr">
+  <div class="td-search__icon"></div>
+  <input id="lunr-search-input" type="search" class="td-search__input form-control" placeholder="Search" aria-label="Search" autocomplete="off">
+</div>
+<ul id="lunr-search-results"></ul>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script src="/js/lunr-search.js"></script>
+{{ end }}
