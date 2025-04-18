@@ -126,7 +126,7 @@
 </ul>
 
 {{ if $duplicate -}}
-  {{ warnf "Shortcode %q: duplicate tab-persistence key %q detected, disabling persistance to avoid multiple tab display. Position: %s" $.Name $duplicateKey $.Position -}}
+  {{ warnf "Shortcode %q: duplicate tab-persistence key %q detected, disabling persistence to avoid multiple tab display. Position: %s" $.Name $duplicateKey $.Position -}}
 {{ end -}}
 
 {{ $activeSet = false -}}
