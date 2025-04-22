@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
-    "bootstrap": "5.3.3"
+    "bootstrap": "5.3.5"
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
