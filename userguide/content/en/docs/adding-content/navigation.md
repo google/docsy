@@ -345,11 +345,11 @@ cascade:
 Docsy supports build-time generation of heading self links using Hugo's
 `render-heading.html` [hook].
 
-To enable this feature in
-your project, define `layouts/_default/_markup/render-heading.html` as:
+To enable this feature in your project, define
+`layouts/_default/_markup/render-heading.html` as:
 
 ```go-html-template
-{{ template "_default/_markup/td-render-heading.html" . }}
+{{ partial "td/render-heading.html" . }}
 ```
 
 The heading self-link anchor class is `.td-heading-self-link`, which you can
@@ -360,12 +360,11 @@ customize for your project. By default, the heading self-link style has these de
   visible on hover or focus.
 
 Your projects can also reuse (in your own custom heading render hook) or
-override the heading self-link template
-`_default/_markup/_td-heading-self-link.html`, which is defined in
-[layouts/_default/_markup/td-render-heading.html].
+override the heading self-link partial `td/heading-self-link.html`, which is
+defined in [layouts/partials/td/render-heading.html].
 
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
-[layouts/_default/_markup/td-render-heading.html]:
-  https://github.com/google/docsy/tree/main/layouts/_default/_markup/td-render-heading.html
+[layouts/partials/td/render-heading.html]:
+  https://github.com/google/docsy/tree/main/layouts/partials/td/render-heading.html
 [hook]: https://gohugo.io/templates/render-hooks/
