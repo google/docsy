@@ -24,10 +24,16 @@ Useful links:
 
 For the full list of changes, see the [0.x.y] release notes.
 
-**Potential breaking change**:
+**Breaking changes**:
+
+- Renames the default Docsy heading render hook and heading self-link partials.
+  This is a breaking change only if your project uses this feature. For details,
+  see [Heading self links][] ([#2223]).
+
+**Potential breaking changes**:
 
 - Removes shortcode `figure`, hugo's built-in shortcode `figure` can/will be
-  used instead
+  used instead.
 
 **New**:
 
@@ -53,9 +59,12 @@ For the full list of changes, see the [0.x.y] release notes.
 [#1788]: https://github.com/google/docsy/issues/1788
 [#2160]: https://github.com/google/docsy/pull/2160
 [#2192]: https://github.com/google/docsy/pull/2192
+[#2223]: https://github.com/google/docsy/pull/2223
 [Breadcrumb navigation]:
   https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
+[Heading self links]:
+  https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
 [td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_default/td-content-after-header.html
 
@@ -137,7 +146,8 @@ this release are listed next.
   form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
 
 - **Heading self-link** support has been reimplemented and projects must now
-  explicitly enable the feature. For details, see [Heading self links].
+  explicitly enable the feature. For details, see [Heading self
+  links][0.9.0:hsl].
 
 **Footer changes**: refactoring, for easier customization, and simplification.
 For details concerning all footer changes, see [#1818].
@@ -165,7 +175,7 @@ For details concerning all footer changes, see [#1818].
 [Footer layout]: https://www.docsy.dev/blog/2024/0.9.0/#footer-layout
 [Footer copyright]: https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright
 [Footer streamlined]: https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined
-[Heading self links]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
+[0.9.0:hsl]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
 [look and feel]: https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel
 [mermaid]:
   https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
