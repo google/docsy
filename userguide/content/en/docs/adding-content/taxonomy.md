@@ -252,8 +252,7 @@ taxonomies and its terms:
 {{ end }}
 ```
 
-As an example this will gave you for following HTML markup for the taxonomy
-`categories`:
+This will give you the following HTML markup for the taxonomy `categories`:
 
 ```html
 <div class="taxonomy taxonomy-terms-cloud taxo-categories">
@@ -310,12 +309,12 @@ isn't set.
 
 ## Multi language support for taxonomies
 
-The taxonomy terms associated content gets only counted and linked WITHIN the
-language! The control parameters for the taxonomy support can also get assigned
-language specific.
+For [multilingual sites][], taxonomy terms get counted and linked _within_ the
+language site only. Taxonomy config parameters can be adjusted per language.
 
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
 [enabled by default]:
   https://gohugo.io/content-management/taxonomies/#default-destinations
+[multilingual sites]: https://gohugo.io/configuration/params/#multilingual-sites
 [taxonomies]: https://gohugo.io/content-management/taxonomies/
