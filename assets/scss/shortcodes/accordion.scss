@@ -1,0 +1,32 @@
+.accordion {
+  --bs-accordion-bg: #fff important;
+  max-width: 80%;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #e7f1ff;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-collapse.show, .accordion-collapse.open
+{
+  --bs-accordion-border-width: 0px important;
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+}
+
+.accordion-item {
+  --bs-accordion-border-width: 0px important;
+}
+
+.accordion-item:last-of-type {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.accordion-button {
+  --bs-accordion-border-width: 1px important;
+  border: 1px solid #dee2e6;
+}
