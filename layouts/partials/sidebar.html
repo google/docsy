@@ -1,3 +1,14 @@
+<script>
+  /* Persist the scroll position of the section menu. See Docsy issue #257. */
+  function persistScrollPosition() {
+    var a = document.querySelector("#td-section-nav");
+    addEventListener("beforeunload", function() {
+        localStorage.setItem("menu.scrollTop", a.scrollTop)
+    });
+    a.scrollTop = localStorage.getItem("menu.scrollTop");
+  }
+</script>
+
 {{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
@@ -6,18 +17,22 @@
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
     $(function() {
-    $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #{{ $mid }}").addClass("active"); 
-    $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item"); 
-    $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path"); 
-    $("#td-section-nav li.active-path").addClass("show"); 
-    $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");  
-    $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");  
-    $("#td-sidebar-menu").toggleClass("d-none"); 
+      $("#td-section-nav a").removeClass("active");
+      $("#td-section-nav #{{ $mid }}").addClass("active");
+      $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item");
+      $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path");
+      $("#td-section-nav li.active-path").addClass("show");
+      $("#td-section-nav li.active-path").children("input").prop('checked', true);
+      $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");
+      $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");
+      $("#td-sidebar-menu").toggleClass("d-none");
+      persistScrollPosition();
     });
   </script>
   {{ partialCached "sidebar-tree.html" . .FirstSection.RelPermalink }}
 {{ else -}}
   {{ partial "sidebar-tree.html" . }}
+  <script>
+    persistScrollPosition();
+  </script>
 {{- end }}
