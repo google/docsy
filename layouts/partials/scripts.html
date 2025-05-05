@@ -101,6 +101,12 @@ window.markmap = {
   {{ template "algolia/scripts" .Site.Params.search.algolia -}}
 {{ end -}}
 <script src='{{ "js/tabpane-persist.js" | relURL }}'></script>
+
+<!-- load the HubSpot js if hubspot id is set -->
+{{ if .Site.Params.hubspotId }}
+{{ partial "hubspot.html" . }}
+{{ end }}
+
 {{ partial "hooks/body-end.html" . -}}
 
 {{ define "algolia/scripts" -}}
