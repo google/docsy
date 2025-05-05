@@ -39,11 +39,13 @@ markup:
     noClasses: false # Required for dark-mode
 
 params:
+  # homePage: /blog If set, this redirects from the default home page to use one of the content sub-directories
   copyright:
     authors: >-
       Docsy Authors |
       [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
+
   privacy_policy: https://policies.google.com/privacy
   version_menu: Releases
   archived_version: false
