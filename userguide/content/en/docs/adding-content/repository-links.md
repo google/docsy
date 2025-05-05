@@ -15,11 +15,265 @@ The Docsy [docs and blog layouts](/docs/adding-content/content/#adding-docs-and-
 
 This page shows you how to configure these links.
 
-Currently, Docsy supports only GitHub repository links "out of the box". Since GitLab can handle the same link scheme, it should work as well. If you are using another repository such as Bitbucket and would like generated repository links, feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
+Currently, Docsy supports GitHub, Azure DevOps, GitLab and Gitea repository links "out of the box". If you are using another repository such as Bitbucket and would like generated repository links, you can add a custom template to render the links. Feel free to [add a feature request or update our theme](/docs/contribution-guidelines/).
 
 ## Link configuration
 
-There are four site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as one in your page metadata.
+There are a few site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo.json` to set up links, as well as in your page metadata.
+
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.repo]
+  type = "github"
+  url = "https://github.com/google/docsy"
+  subdir = "userguide"
+  branch = "release"
+  project_url = "https://github.com/google/docsy"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  repo:
+    type: github
+    url: https://github.com/google/docsy
+    subdir: "userguide"
+    branch: "release"
+    project_url: "https://github.com/google/docsy"
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "repo": {
+        "type": "github",
+        "url": "https://github.com/google/docsy",
+        "subdir": "userguide",
+        "branch"= "release",
+        "project_url" = "https://github.com/google/docsy"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+### `repo.type`
+
+Repo Links are created differently for different types of git repositories. Currently Docsy supports [GitHub](https://www.github.com), [Azure DevOps](https://azure.microsoft.com/products/devops), [GitLab](https://about.gitlab.com) and [Gitea](https://about.gitea.com). Specify the type of repository you are using, supported values are `github`, `azure`, `gitlab`, `gitea`.
+
+Other repo types:
+
+* [Forgejo](https://forgejo.org) is a fork of gitea and uses the same link schema as gitea, so you can use `type: gitea`.
+* To use a **custom repository type**
+  * define `type: custom` in your configuration and
+  * place a custom template in your project at `layouts/partials/repo-links-custom.html` which will be used to render the links.
+    Instead of `custom` you can use any type, you like.
+
+### `repo.url`
+
+The URL for your site's source repository. This is used to generate the *Edit this page*, *Create child page*, and *Create documentation issue* links.
+
+### `repo.subdir` (optional)
+
+Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the userguide subdirectory of its repo. Setting this value means that your edit links will go to the right page.
+
+### `repo.branch` (optional)
+
+Specify a value here if you have would like to reference a different branch than `main` in the links to your repository like *Edit this page*.
+
+### `repo.project_url` (optional)
+
+Specify a value here if you have a separate project repo and you'd like your users to be able to create issues against your project from the relevant docs. The *Create project issue* link appears only if this is set.
+
+It is assumed that the `project_url` points to the same type of git repository as your documentation site.
+
+### `path_base_for_subdir` (optional)
+
+Suppose that the source files for all of the pages under `content/some-section`
+come from another repo, such as a [git submodule][]. Add settings like these to
+the **section's index page** so that the repository links for all pages in that
+section refer to the originating repo:
+
+{{< tabpane >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Some super section"
+[cascade.repo]
+type = "github"
+url = "https://github.com/some-username/another-repo/"
+subdir = "docs"
+path_base_for_subdir = "content/some-section"
+…
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+title: Some super section
+cascade:
+  repo:
+    type: github
+    url: https://github.com/some-username/another-repo/
+    subdir: docs
+    path_base_for_subdir: content/some-section
+…
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Some super section",
+  "cascade": {
+    repo: {
+      "type": "github",
+      "url": "https://github.com/some-username/another-repo/",
+      "subdir": "docs",
+      "path_base_for_subdir": "content/some-section"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+As an example, consider a page at the path
+`content/some-section/subpath/some-page.md` with `branch` globally set to
+`main`. The index page settings above will generate the following edit link for
+`some-page.md`:
+
+```nocode
+https://github.com/some-username/another-repo/edit/main/docs/subpath/some-page.md
+```
+
+To make it clear, without the settings in the sections index page, the edit link would be:
+
+```nocode
+https://github.com/google/docsy/edit/main/userguide/content/some-section/subpath/some-page.md
+```
+
+If you only have a single page originating from another repo, then omit the
+`cascade` key and write, at the top-level, the same settings as illustrated
+above.
+
+If you'd like users to create project issues in the originating project repo as well,
+then also set `project_url`, something like this:
+
+{{< tabpane >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+…
+[cascade.repo]
+url = "https://github.com/some-username/another-repo/"
+project_url = "https://github.com/some-username/another-repo/"
+…
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+…
+cascade:
+  repo:
+    url: &repo https://github.com/some-username/another-repo/
+    project_url: *repo
+…
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  …
+  "cascade": {
+    "repo": {
+      "url": "https://github.com/some-username/another-repo/",
+      "project_url": "https://github.com/some-username/another-repo/"
+    }
+  }
+  …
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+{{% alert title="Tip" %}}
+Please note that the YAML code fragment makes use of [Yaml anchor](https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/). Use of Yaml anchors is optional, but it helps keep the settings [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+{{% /alert %}}
+
+The `path_base_for_subdir` setting is a regular expression, so you can
+use it even if you have a site with [multiple languages][] for example:
+
+{{< tabpane >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+…
+path_base_for_subdir = "content/\w+/some-section"
+…
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+…
+path_base_for_subdir: content/\w+/some-section
+…
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+…
+  "path_base_for_subdir": "content/\w+/some-section"
+…
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
+In situations where a page originates from a file under a different name, you
+can specify `from` and `to` path-rename settings. Here's an example where an
+index file is named `README.md` in the originating repo:
+
+{{< tabpane >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+…
+[repo]
+url = "https://github.com/some-username/another-repo/"
+subdir = "docs"
+
+  [repo.path_base_for_github_subdir]
+  from = "content/some-section/(.*?)/_index.md"
+  to = "$1/README.md"
+…
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+…
+repo:
+  url: https://github.com/some-username/another-repo/
+  subdir: docs
+  path_base_for_github_subdir:
+    from: content/some-section/(.*?)/_index.md
+    to: $1/README.md
+…
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  …
+  "repo": {}
+    "url": "https://github.com/some-username/another-repo/",
+    "subdir": "docs",
+    "path_base_for_subdir": {
+      "from": "content/some-section/(.*?)/_index.md",
+      "to": "$1/README.md"
+    }
+ },
+  …
+}
+{{< /tab >}}
+{{< /tabpane >}}
+## GitHub configuration (deprecated)
+
+{{% alert title="Deprecation note" color="warning" %}}
+  These setting are deprecated. Use the params described in [Link Configuration][] instead.
+
+  [Link Configuration]: #link-configuration
+{{% /alert %}}
 
 ### `github_repo`
 
@@ -361,7 +615,7 @@ Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 
 To have page-source metadata displayed at the bottom of documentation pages and
 blog posts, set the `GitInfo` configuration parameter to `true`, and ensure that
-`params.github_repo` is defined.
+`params.repo.url` is defined.
 
 A last-modified page note looks something like this:
 
