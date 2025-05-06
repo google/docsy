@@ -1,5 +1,3 @@
-
-
 # UI strings. Buttons and similar.
 
 [ui_pager_prev]
@@ -18,13 +16,16 @@ other = "Buscar no site…"
 [ui_in]
 other = "em"
 
+# Used in sentences such as "All Tags"
+[ui_all]
+other = "todos"
+
 # Footer text
 [footer_all_rights_reserved]
 other = "Todos os direitos reservados"
 
 [footer_privacy_policy]
 other = "Política de Privacidade"
-
 
 # Post (blog, articles etc.)
 [post_byline_by]
@@ -35,6 +36,8 @@ other = "Criado"
 other = "Última modificação"
 [post_edit_this]
 other = "Editar essa página"
+[post_view_this]
+other = "Ver origem da página"
 [post_create_child_page]
 other = "Criar uma subpágina"
 [post_create_issue]
@@ -75,3 +78,13 @@ other = "If you want to get more involved by contributing to {{ .Site.Title }}, 
 other = "You can find out how to contribute to {{ .Site.Title }} in our"
 [community_guideline]
 other = "Contribution Guidelines"
+
+# Feedback
+[feedback_title]
+other = "Feedback"
+[feedback_question]
+other = "Esta página foi útil?"
+[feedback_positive]
+other = "Sim"
+[feedback_negative]
+other = "Não"
