@@ -21,9 +21,9 @@
   {{ end -}}
 </title>
 <meta name="description" content="{{ partial "page-description.html" . }}">
-{{ template "_internal/opengraph.html" . -}}
-{{ template "_internal/schema.html" . -}}
-{{ template "_internal/twitter_cards.html" . -}}
+{{ partial "opengraph.html" . -}}
+{{ partial "schema.html" . -}}
+{{ partial "twitter_cards.html" . -}}
 {{ partialCached "head-css.html" . "head-css-cache-key" -}}
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -46,7 +46,7 @@
 
 {{/* To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled */ -}}
 {{ if hugo.IsProduction -}}
-  {{ template "_internal/google_analytics.html" . -}}
+  {{ partial "google_analytics.html" . -}}
 {{ end -}}
 
 {{ define "algolia/head" -}}
