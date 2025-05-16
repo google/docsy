@@ -420,6 +420,7 @@ weight: 20
 
 To add author and date information to blog posts, add them to the page frontmatter:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -731,6 +732,7 @@ sitemap:
 
 To override any of these values for a given page, specify it in page frontmatter:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
