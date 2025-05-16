@@ -1,6 +1,5 @@
 ---
-title: "Adding Content"
-linkTitle: "Adding Content"
+title: Adding Content
 weight: 1
 description: >
   Add different types of content to your Docsy site.
@@ -34,6 +33,7 @@ If you've copied the example site, you already have appropriately named top-leve
 
 If you've copied the example site and *don't* want to use one of the provided content sections, just delete the appropriate content subdirectory. Similarly, if you want to add a top-level section, just add a new subdirectory, though you'll need to specify the layout or content type explicitly in the [frontmatter](#page-frontmatter) of each page if you want to use any existing Docsy template other than the default one. For example, if you create a new directory `content/en/amazing` and want one or more pages in that custom section to use Docsy's `docs` template, you add `type: docs` to the frontmatter of each page:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -64,6 +64,7 @@ description: >
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 Alternatively, create your own page template for your new section in your project's `layouts` directory based on one of the existing templates.
 
@@ -79,6 +80,7 @@ Since Hugo 0.76, this has become practical without copying layouts to your site,
 
 For example, for the `/news/` section, you can specify the following front matter in the index page which will change the type of the section and everything below it to "blog":
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -122,10 +124,12 @@ cascade:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 
 If you want to create a "docs" site, specifying something like the following in the top level `_index.md` will set all top level sections to be treated as "docs", except for "news":
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -181,6 +185,7 @@ cascade:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 Note the addition of `toc_root` here.  Setting that to true for a section causes it to be treated as a separate part of the site, with its own left hand navigation menu.
 
@@ -192,6 +197,7 @@ Each page file in a Hugo site has metadata frontmatter that tells Hugo about the
 
 For example, here's the frontmatter for this page:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -222,6 +228,7 @@ description: >
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 The minimum frontmatter you need to provide is a title: everything else is up to you! However, if you leave out the page weight, your [navigation](/docs/adding-content/navigation) may get a little disorganized. You may also want to include `description` since Docsy uses that to generate the meta `description` tag used by search engines. See [Search Engine Optimization (SEO) meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for details.
 
@@ -237,6 +244,7 @@ As of version 0.100, [Goldmark](https://github.com/yuin/goldmark/) is the only M
 
 If you've been using versions of Hugo before 0.60 that use [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser, you may need to make some small changes to your site to work with the current `Goldmark` Markdown parser. In particular, if you cloned an earlier version of our example site, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json` to allow Goldmark to render raw HTML as well as Markdown:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -263,6 +271,7 @@ markup:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 </div>
 
@@ -320,6 +329,7 @@ By default a docs section landing page (the `_index.md` or `_index.html` in the 
 
 To display a simple bulleted list of links to the section's pages instead, specify `simple_list: true` in the landing page's frontmatter:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -344,9 +354,11 @@ weight: 20
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To display no links at all, specify `no_list: true` in the landing page's frontmatter:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -371,6 +383,7 @@ weight: 20
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Organizing your blog posts
 
@@ -378,6 +391,7 @@ Docsy's `blog` layout also gives you a left nav menu (like the `docs` layout), a
 
 To create different blog categories to organize your posts, create subfolders in `blog/`. For instance, in our [example site](https://github.com/google/docsy-example/tree/main/content/en/blog) we have `news` and `releases`. Each category needs to have its own `_index.md` or `_index.html` landing page file specifying the category title for it to appear properly in the left nav and top-level blog landing page. Here's the index page for `releases`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -402,6 +416,7 @@ weight: 20
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To add author and date information to blog posts, add them to the page frontmatter:
 
@@ -456,6 +471,7 @@ resources:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If you've copied the example site and you don't want a blog section, or want to link to an external blog instead, just delete the `blog` subdirectory.
 
@@ -480,6 +496,7 @@ If you've just used the theme, you can still use all Docsy's provided [page bloc
 
 The `community` landing page template has boilerplate content that's automatically filled in with the project name and community links specified in `hugo.toml`/`hugo.yaml`/`hugo.json`, providing your users with quick links to resources that help them get involved in your project. The same links are also added by default to your site footer.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -596,6 +613,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If you're creating your own site and want to add a page using this template, add a `/community/_index.md` file in your content root directory. If you've copied the example site and *don't* want a community page, just delete the `/content/en/community/` directory in your project repo.
 
@@ -623,6 +641,7 @@ Hugo will, by default, create an RSS feed for the home page and any section.
 To disable all RSS feeds, add the following to your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -639,6 +658,7 @@ disableKinds: [RSS]
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 
 <div class="alert alert-info" role="alert">
@@ -647,6 +667,7 @@ disableKinds: [RSS]
 
 If you have enabled our [print feature](/docs/adding-content/print/) or otherwise specified section-level output formats in `hugo.toml`/`hugo.yaml`/`hugo.json`, make sure that `"RSS"` is listed as an output format, otherwise you won't get section-level RSS feeds (and your blog section won't get a nice orange RSS button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the Hugo default [output formats](https://gohugo.io/templates/output-formats/) for sections, which are HTML and RSS.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -672,6 +693,7 @@ outputs:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 </div>
 
 ## Sitemap
@@ -680,6 +702,7 @@ Hugo creates a `sitemap.xml` file for your generated site by default: for exampl
 
 You can configure the frequency with which your sitemap is updated, your sitemap filename, and the default page priority in your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -704,6 +727,7 @@ sitemap:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To override any of these values for a given page, specify it in page frontmatter:
 
@@ -744,5 +768,6 @@ sitemap:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To learn more about configuring sitemaps, see [Sitemap Template](https://gohugo.io/templates/sitemap-template/).
