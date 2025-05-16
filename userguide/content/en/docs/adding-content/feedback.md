@@ -10,7 +10,7 @@ weight: 8
 ## Adding Analytics
 
 The Docsy theme builds upon [Hugo's support for Google Analytics][hugo-ga],
-which Hugo provides through [internal templates][]. Once you set up analytics as
+which Hugo provides through [embedded templates][]. Once you set up analytics as
 described below, usage information for your site (such as page views) is sent to
 your [Google Analytics][] account.
 
@@ -301,12 +301,12 @@ partial. For details, see
 [Customizing templates](lookandfeel/#customizing-templates).
 
 [Configure Google Analytics]:
-  https://gohugo.io/templates/internal/#configure-google-analytics
+  https://gohugo.io/templates/embedded/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
 [gtag.js]: https://support.google.com/analytics/answer/10220869
-[hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
-[internal templates]: https://gohugo.io/templates/internal/
+[hugo-ga]: https://gohugo.io/templates/embedded/#google-analytics
+[embedded templates]: https://gohugo.io/templates/embedded/
 [page-description.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
