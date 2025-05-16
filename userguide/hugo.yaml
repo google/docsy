@@ -4,6 +4,10 @@ enableRobotsTXT: true
 enableGitInfo: true
 theme: [docsy]
 
+ignoreLogs:
+  # FIXME: find a better way to encode `project` pages than having to ignore warnings.
+  - warning-frontmatter-params-overrides # cSpell:disable-line
+
 outputs:
   home: [HTML]
   page: [HTML]
