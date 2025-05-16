@@ -23,8 +23,8 @@ started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
 
 {{% alert title="Tip" %}}
 
-  Your project's **analytics ID** is a string that starts with `G-` (a GA4
-  measurement ID) or `UA-` (a universal analytics property ID).
+Your project's **analytics ID** is a string that starts with `G-` (a GA4
+measurement ID) or `UA-` (a universal analytics property ID).
 
 {{% /alert %}}
 
@@ -34,30 +34,33 @@ Enable Google Analytics by adding your project's analytics ID to the site
 configuration file. For details, see [Configure Google Analytics][].
 
 {{% alert title="Deprecation note and warning" color="warning" %}}
+
   <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-  While you can configure your project's analytics ID by setting either the
-  top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
-  **`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and
-  will be removed in a future release.
+While you can configure your project's analytics ID by setting either the
+top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
+**`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and will be
+removed in a future release.
 
-  **Do not define both parameters,** otherwise this can result in [unexpected
-  behavior][]. For details, see [Is services.googleAnalytics.id an alias for
-  googleAnalytics][alias-discussion].
+**Do not define both parameters,** otherwise this can result in [unexpected
+behavior][]. For details, see [Is services.googleAnalytics.id an alias for
+googleAnalytics][alias-discussion].
 
-  [alias-discussion]: https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
-  [unexpected behavior]: https://github.com/google/docsy/issues/921
-  [v0.120.0]: https://github.com/gohugoio/hugo/releases/tag/v0.120.0
+[alias-discussion]:
+  https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
+[unexpected behavior]: https://github.com/google/docsy/issues/921
+[v0.120.0]: https://github.com/gohugoio/hugo/releases/tag/v0.120.0
 
 {{% /alert %}}
 
 {{% alert title="Production-only feature!" color="primary" %}}
 
-  Analytics are enabled _only_ for **production** builds (called "environments"
-  in Hugo terminology). For information about Hugo environments and how to set
-  them, see the following [discussion][].
+Analytics are enabled _only_ for **production** builds (called "environments" in
+Hugo terminology). For information about Hugo environments and how to set them,
+see the following [discussion][].
 
-  [discussion]: https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
+[discussion]:
+  https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
 
 {{% /alert %}}
 
@@ -122,6 +125,7 @@ case where analytics is configured outside of Docsy.
 
 {{% /alert %}}
 
+<!-- prettier-ignore-start -->
 1.  Open your project's Hugo configuration file.
 2.  Set the response text that users see after clicking **Yes** or **No**.
 
@@ -162,6 +166,7 @@ params:
 
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 3.  Save the edits to your configuration file.
 
@@ -175,8 +180,8 @@ Page feedback is reported to Google Analytics through [events].
 
 {{% alert title="Version note" color=warning %}}
 
-As of Docsy version [0.8.0], page feedback is reported as custom `page_helpful` events,
-rather than `click` events.
+As of Docsy version [0.8.0], page feedback is reported as custom `page_helpful`
+events, rather than `click` events.
 
 [0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
 
@@ -202,6 +207,7 @@ visualize individual data points (per page) along with average values.
 Add the parameter `hide_feedback` to the page's front matter and set it to
 `true`.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -220,12 +226,14 @@ hide_feedback: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Disable feedback on all pages
 
 Set `params.ui.feedback.enable` to `false` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -250,6 +258,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Add a contact form with Fabform
 
@@ -260,9 +269,9 @@ form that collects the user's email address to your site source:
 
 ```html
 <form action="https://fabform.io/f/{form-id}" method="post">
- <label for="email">Your Email</label>
- <input name="email" type="email">
- <button type="submit">Submit</button>
+  <label for="email">Your Email</label>
+  <input name="email" type="email" />
+  <button type="submit">Submit</button>
 </form>
 ```
 
@@ -281,8 +290,7 @@ using the `description` meta tag to tell search engines what your page is about.
 For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
 
-- The page `description` [frontmatter field]({{< ref
-"content#page-frontmatter" >}})
+- The page `description` [frontmatter field](content/#page-frontmatter)
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 
@@ -290,17 +298,20 @@ For the template code used to perform this computation, see
 [layouts/partials/page-description.html][].
 
 Add more meta tags as needed to your project's copy of the `head-end.html`
-partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizing-templates"
->}}).
+partial. For details, see
+[Customizing templates](lookandfeel/#customizing-templates).
 
-[Configure Google Analytics]: https://gohugo.io/templates/internal/#configure-google-analytics
+[Configure Google Analytics]:
+  https://gohugo.io/templates/internal/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
 [internal templates]: https://gohugo.io/templates/internal/
-[layouts/partials/page-description.html]: https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
+[layouts/partials/page-description.html]:
+  https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
 [summary]: https://gohugo.io/content-management/summaries/
 [configure]: #setup-1
-[configuration file]: https://gohugo.io/getting-started/configuration/#configuration-file
+[configuration file]:
+  https://gohugo.io/getting-started/configuration/#configuration-file

@@ -199,7 +199,7 @@ using Chroma, see [Syntax Highlighting].
 Hugo's default Chroma style is [monokai]. To use another style, such as [tango],
 add the following to your project configuration:
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -222,6 +222,7 @@ markup:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 For the complete list of available styles, see [Chroma Style Gallery].
 
@@ -270,7 +271,7 @@ button in the top right-hand corner. To disable this functionality, set
 Optionally, you can enable Prism syntax highlighting in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -289,6 +290,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 When this option is enabled your site uses
 [Prism](https://prismjs.com/index.html) instead of Chroma for code block
@@ -373,7 +375,7 @@ To enable the display of a light/[dark mode] menu in the navbar, set
 file. The dropdown menu appears at the right, immediately before the [search
 box], if present.
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -396,6 +398,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [search box]: /docs/adding-content/search/

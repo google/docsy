@@ -42,7 +42,7 @@ of the sidebar left navigation pane. If you don't want the sidebar search box,
 set the site parameter `sidebar_search_disable` to `true` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -64,6 +64,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Configure search with a Google Custom Search Engine
 
@@ -154,7 +155,6 @@ params:
 }
 {{< /tab >}}
     {{< /tabpane >}}
-
 <!-- prettier-ignore-end -->
 
 ### Disabling GCSE search
@@ -230,7 +230,6 @@ params:
 }
 {{< /tab >}}
     {{< /tabpane >}}
-
 <!-- prettier-ignore-end -->
 
 To learn more about Algolia DocSearch V3, see
@@ -309,7 +308,7 @@ need to stop the server and restart it in order to see your search results.
 You can customize the summary length by setting `offlineSearchSummaryLength` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -332,13 +331,14 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Changing the maximum result count of the local search
 
 You can customize the maximum result count by setting `offlineSearchMaxResults`
 in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -360,6 +360,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Changing the width of the local search results popover
 
