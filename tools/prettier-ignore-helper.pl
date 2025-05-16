@@ -1,7 +1,8 @@
-#!/usr/bin/env perl -w
-
+#!/usr/bin/env perl
 use strict;
 use warnings;
+
+# Usage: perl add_prettier_ignore.pl file1.md [file2.md ...]
 
 foreach my $file (@ARGV) {
     open my $in,  '<', $file or die "Cannot open $file: $!";
@@ -10,34 +11,36 @@ foreach my $file (@ARGV) {
 
     open my $out, '>', $file or die "Cannot write to $file: $!";
 
-    my $inside_tabpane = 0;
-    my $inside_ignore = 0;
+    my $i = 0;
+    while ($i <= $#lines) {
+        my $line = $lines[$i];
 
-    while (@lines) {
-        my $line = shift @lines;
-
-        if ($line =~ /<!--\s*prettier-ignore-start\s*-->/) {
-            $inside_ignore = 1;
-        } elsif ($line =~ /<!--\s*prettier-ignore-end\s*-->/) {
-            $inside_ignore = 0;
-        } elsif ($line =~ /^\s*\{\{<\s*tabpane\s*>\}\}\s*$/) {
-            if (!$inside_ignore) {
+        # Check for opening tabpane shortcode
+        if ($line =~ /^\s*\{\{<\s*tabpane\s*>\}\}\s*$/) {
+            # Check previous line for ignore-start
+            if ($i == 0 || $lines[$i-1] !~ /<!--\s*prettier-ignore-start\s*-->/) {
                 print $out "<!-- prettier-ignore-start -->\n";
-                $inside_ignore = 1;
             }
-            $inside_tabpane = 1;
-        } elsif ($inside_tabpane && $line =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
             print $out $line;
-            # If not already inside ignore, insert ignore-end
-            if ($inside_ignore) {
+
+            # Move to next line
+            $i++;
+            next;
+        }
+
+        # Check for closing tabpane shortcode
+        if ($line =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
+            print $out $line;
+            # Check next line for ignore-end
+            if ($i == $#lines || $lines[$i+1] !~ /<!--\s*prettier-ignore-end\s*-->/) {
                 print $out "<!-- prettier-ignore-end -->\n";
-                $inside_ignore = 0;
             }
-            $inside_tabpane = 0;
+            $i++;
             next;
         }
 
         print $out $line;
+        $i++;
     }
 
     close $out;
