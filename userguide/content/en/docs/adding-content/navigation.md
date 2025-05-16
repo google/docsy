@@ -459,10 +459,10 @@ defaults:
 
 Your projects can also reuse (in your own custom heading render hook) or
 override the heading self-link partial `td/heading-self-link.html`, which is
-defined in [layouts/partials/td/render-heading.html].
+defined in [layouts/_partials/td/render-heading.html].
 
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
-[layouts/partials/td/render-heading.html]:
-  https://github.com/google/docsy/tree/main/layouts/partials/td/render-heading.html
+[layouts/_partials/td/render-heading.html]:
+  https://github.com/google/docsy/tree/main/layouts/_partials/td/render-heading.html
 [hook]: https://gohugo.io/templates/render-hooks/

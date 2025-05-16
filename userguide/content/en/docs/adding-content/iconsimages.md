@@ -74,7 +74,7 @@ favicons you can use this site to generate them, then use Icongen to create more
 sizes (if necessary) from your generated `.png` file.
 
 If you have special favicon requirements, you can create your own
-`layouts/partials/favicons.html` with your links.
+`layouts/_partials/favicons.html` with your links.
 
 ## Add images
 
