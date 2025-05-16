@@ -30,20 +30,19 @@ foreach my $file (@ARGV) {
             next;
         }
 
-        # Only process tabpane blocks if NOT inside an ignore region
-        if (!$inside_ignore && $line =~ /^\s*\{\{<\s*tabpane.*?>\}\}\s*$/) {
-            # Check previous line for ignore-start
+        # Detect non-indented tabpane opening
+        if (!$inside_ignore && $line =~ /^\s*\{\{<\s*tabpane\s*>\}\}\s*$/ && $line !~ /^\s{1,}\{\{<\s*tabpane\s*>\}\}\s*$/) {
+            # Only process if NOT indented (no leading spaces/tabs)
             if ($i == 0 || $lines[$i-1] !~ /<!--\s*prettier-ignore-start\s*-->/) {
                 print $out "<!-- prettier-ignore-start -->\n";
             }
             print $out $line;
-
-            # Print inner block until closing shortcode
             $i++;
+            # Print inner block until non-indented closing shortcode
             while ($i <= $#lines) {
                 my $inner = $lines[$i];
                 print $out $inner;
-                if ($inner =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
+                if ($inner =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/ && $inner !~ /^\s{1,}\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
                     # Check next line for ignore-end
                     if ($i == $#lines || $lines[$i+1] !~ /<!--\s*prettier-ignore-end\s*-->/) {
                         print $out "<!-- prettier-ignore-end -->\n";
@@ -56,7 +55,16 @@ foreach my $file (@ARGV) {
             next;
         }
 
-        # Otherwise, print the line as is
+        # Detect indented tabpane opening/closing not in an ignore region and warn
+        if (!$inside_ignore &&
+            (
+                ($line =~ /^\s+\{\{<\s*tabpane\s*>\}\}\s*$/) ||
+                ($line =~ /^\s+\{\{<\s*\/tabpane\s*>\}\}\s*$/)
+            )
+        ) {
+            print STDERR "$file:", $i+1, ": WARNING: Indented tabpane shortcode found, usually because it is in a list. Add prettier-ignore directive manually before the start of the list.\n";
+        }
+
         print $out $line;
         $i++;
     }
