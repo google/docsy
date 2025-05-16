@@ -29,6 +29,8 @@ For the full list of changes, see the [0.x.y] release notes.
 - Renames the default Docsy heading render hook and heading self-link partials.
   This is a breaking change only if your project uses this feature. For details,
   see [Heading self links][] ([#2223]).
+- Relocates and adapts layouts in response to Hugo's updated template system.
+  For details, see [Adapt to new template system in Hugo v0.146.0 #2243][#2243].
 
 **Potential breaking changes**:
 
@@ -60,6 +62,7 @@ For the full list of changes, see the [0.x.y] release notes.
 [#2160]: https://github.com/google/docsy/pull/2160
 [#2192]: https://github.com/google/docsy/pull/2192
 [#2223]: https://github.com/google/docsy/pull/2223
+[#2243]: https://github.com/google/docsy/pull/2243
 [Breadcrumb navigation]:
   https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type

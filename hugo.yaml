@@ -18,7 +18,7 @@ outputFormats:
 module:
   hugoVersion:
     extended: true
-    min: 0.110.0
+    min: 0.146.0
   mounts:
     - source: assets
       target: assets
