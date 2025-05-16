@@ -1,3 +1,5 @@
+# cSpell:ignore lookandfeel
+
 .*
 /*
 !/content
@@ -8,12 +10,5 @@
 !/content/en/docs
 /content/en/docs/*
 !/content/en/docs/_index.md
-
 !/content/en/docs/adding-content
-/content/en/docs/adding-content/*
-!/content/en/docs/adding-content/search.md
-
-!/content/en/docs/adding-content/lookandfeel.md
-!/content/en/docs/adding-content/taxonomy.md
-
 !/static
