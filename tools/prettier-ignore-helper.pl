@@ -11,34 +11,52 @@ foreach my $file (@ARGV) {
 
     open my $out, '>', $file or die "Cannot write to $file: $!";
 
+    my $inside_ignore = 0;
     my $i = 0;
     while ($i <= $#lines) {
         my $line = $lines[$i];
 
-        # Check for opening tabpane shortcode
-        if ($line =~ /^\s*\{\{<\s*tabpane\s*>\}\}\s*$/) {
+        # Detect entering or leaving prettier-ignore regions
+        if ($line =~ /<!--\s*prettier-ignore-start\s*-->/) {
+            $inside_ignore = 1;
+            print $out $line;
+            $i++;
+            next;
+        }
+        if ($line =~ /<!--\s*prettier-ignore-end\s*-->/) {
+            $inside_ignore = 0;
+            print $out $line;
+            $i++;
+            next;
+        }
+
+        # Only process tabpane blocks if NOT inside an ignore region
+        if (!$inside_ignore && $line =~ /^\s*\{\{<\s*tabpane.*?>\}\}\s*$/) {
             # Check previous line for ignore-start
             if ($i == 0 || $lines[$i-1] !~ /<!--\s*prettier-ignore-start\s*-->/) {
                 print $out "<!-- prettier-ignore-start -->\n";
             }
             print $out $line;
 
-            # Move to next line
+            # Print inner block until closing shortcode
             $i++;
-            next;
-        }
-
-        # Check for closing tabpane shortcode
-        if ($line =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
-            print $out $line;
-            # Check next line for ignore-end
-            if ($i == $#lines || $lines[$i+1] !~ /<!--\s*prettier-ignore-end\s*-->/) {
-                print $out "<!-- prettier-ignore-end -->\n";
+            while ($i <= $#lines) {
+                my $inner = $lines[$i];
+                print $out $inner;
+                if ($inner =~ /^\s*\{\{<\s*\/tabpane\s*>\}\}\s*$/) {
+                    # Check next line for ignore-end
+                    if ($i == $#lines || $lines[$i+1] !~ /<!--\s*prettier-ignore-end\s*-->/) {
+                        print $out "<!-- prettier-ignore-end -->\n";
+                    }
+                    $i++;
+                    last;
+                }
+                $i++;
             }
-            $i++;
             next;
         }
 
+        # Otherwise, print the line as is
         print $out $line;
         $i++;
     }
