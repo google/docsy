@@ -70,7 +70,7 @@ Hugo's commands for module management require that the Go programming language i
 
 ```console
 $ go version
-go version go1.21.6
+go version go1.24.3
 ```
 
 Ensure that you are using version 1.12 or higher.
@@ -84,7 +84,7 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```console
 $ git version
-git version 2.43.0
+git version 2.49.0
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.
@@ -138,11 +138,11 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    ```bash
    # Using Ubuntu
-   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
    sudo apt-get install -y nodejs
 
    # Using Debian, as root
-   curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+   curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
    apt-get install -y nodejs
    ```
 
@@ -152,10 +152,10 @@ You can check your current Node.js version by running `node -v`.  If you need to
 
    ```bash
    # As root
-   curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+   curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
 
    # No root privileges
-   curl -fsSL https://rpm.nodesource.com/setup_20.x | sudo bash -
+   curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
    ```
 
 
