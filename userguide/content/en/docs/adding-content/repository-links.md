@@ -435,5 +435,5 @@ modifier &mdash; not shown):
 ```
 
 [git submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
-[multiple languages]: language/
+[multiple languages]: ../language/
 [project-style-files]: lookandfeel/#project-style-files

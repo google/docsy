@@ -824,8 +824,8 @@ this directory from other pages at `/reference/cpp/{file name}`.
 
 You can also use this directory for other files used by your project, including
 image files. You can find out more about serving static files, including
-configuring multiple directories for static content, in
-[Static Files](https://gohugo.io/content-management/static-files/).
+configuring multiple directories for
+[static content](https://gohugo.io/getting-started/directory-structure/#static).
 
 ## RSS feeds
 
@@ -862,7 +862,7 @@ otherwise specified section-level output formats in
 output format, otherwise you won't get section-level RSS feeds (and your blog
 section won't get a nice orange RSS button). Your
 `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the Hugo default
-[output formats](https://gohugo.io/templates/output-formats/) for sections,
+[output formats](https://gohugo.io/methods/page/outputformats/) for sections,
 which are HTML and RSS.
 
 <!-- prettier-ignore-start -->
