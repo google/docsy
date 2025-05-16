@@ -25,6 +25,7 @@ There are four site variables you can configure in `hugo.toml`/`hugo.yaml`/`hugo
 
 The URL for your site's source repository. This is used to generate the **Edit this page**, **Create child page**, and **Create documentation issue** links.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -43,11 +44,13 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### `github_subdir` (optional)
 
 Specify a value here if your content directory is not in your repo's root directory. For example, this site is in the `userguide` subdirectory of its repo. Setting this value means that your edit links will go to the right page.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -66,11 +69,13 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### `github_project_repo` (optional)
 
 Specify a value here if you have a separate project repo and you'd like your users to be able to create issues against your project from the relevant docs. The **Create project issue** link appears only if this is set.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -89,11 +94,13 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### `github_branch` (optional)
 
 Specify a value here if you have would like to reference a different branch for the other github settings like **Edit this page** or **Create project issue**.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -112,6 +119,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### `path_base_for_github_subdir` (optional)
 
@@ -120,6 +128,7 @@ come from another repo, such as a [git submodule][]. Add settings like these to
 the **section's index page** so that the repository links for all pages in that
 section refer to the originating repo:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -153,6 +162,7 @@ cascade:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 As an example, consider a page at the path
 `content/some-section/subpath/some-page.md` with `github_branch` globally set to
@@ -180,6 +190,7 @@ cascade:
 ---
 ```
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -209,6 +220,7 @@ cascade:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 {{% alert title="Tip" %}}
 Please note that the YAML code fragment makes use of [Yaml anchor](https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/). Use of Yaml anchors is optional, but it helps keep the settings [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
@@ -217,6 +229,7 @@ Please note that the YAML code fragment makes use of [Yaml anchor](https://suppo
 The `path_base_for_github_subdir` setting is a regular expression, so you can
 use it even if you have a site with [multiple languages][] for example:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -241,11 +254,13 @@ path_base_for_github_subdir: content/\w+/some-section
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 In situations where a page originates from a file under a different name, you
 can specify `from` and `to` path-rename settings. Here's an example where an
 index file is named `README.md` in the originating repo:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -284,6 +299,7 @@ path_base_for_github_subdir:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### `github_url` (optional)
 
@@ -295,6 +311,7 @@ path_base_for_github_subdir:
 
 Specify a value for this **in your page metadata** to set a specific edit URL for this page, as in the following example:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -319,6 +336,7 @@ github_url: https://github.com/some-username/another-repo/edit/main/README.md
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 This can be useful if you have page source files in multiple Git repositories,
 or require a non-GitHub URL. Pages using this value have **Edit this page**

@@ -18,6 +18,7 @@ If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the 
 version selector drop down to the top-level menu. You specify a URL and a name
 for each version you would like to add to the menu, as in the following example:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -65,12 +66,14 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 Remember to add your current version so that users can navigate back!
 
 The default title for the version drop-down menu is **Releases**. To change the
 title, change the site parameter `version_menu` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -89,6 +92,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If you set the `version_menu_pagelinks` parameter to `true`, then links in the version drop-down menu
 point to the current page in the other version, instead of the main page.
@@ -119,6 +123,7 @@ For example, see the archived docs for
 To add the banner to your doc site, make the following changes in your
 `hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
+<!-- prettier-ignore-start -->
 1. Set the site parameter `archived_version` to `true`:
 
     {{< tabpane >}}
@@ -184,3 +189,4 @@ params:
 }
 {{< /tab >}}
     {{< /tabpane >}}
+<!-- prettier-ignore-end -->

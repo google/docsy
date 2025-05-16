@@ -12,6 +12,7 @@ On some sites, it can be useful to enable a "print entire section" feature (as s
 
 To enable this feature, add the "print" output format in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` file for the "section" type:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -37,6 +38,7 @@ outputs:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 The site should then show a "Print entire section" link in the right hand navigation.
 
@@ -46,6 +48,7 @@ The site should then show a "Print entire section" link in the right hand naviga
 
 To disable showing the the table of contents in the printable view, set the `disable_toc` param to `true`, either in the page front matter, or in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab toml >}}
@@ -70,7 +73,9 @@ disable_toc: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Config file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -92,6 +97,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Layout hooks
 

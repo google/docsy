@@ -14,6 +14,7 @@ overrides the default Docsy logo in the theme.
 If you don't want a logo to appear in the navbar, then set site parameter `navbar_logo`
 to `false` in your project's config:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -36,6 +37,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 For information about styling your logo, see [Styling your project logo and
 name][].

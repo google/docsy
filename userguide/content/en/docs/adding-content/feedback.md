@@ -122,6 +122,7 @@ case where analytics is configured outside of Docsy.
 
 {{% /alert %}}
 
+<!-- prettier-ignore-start -->
 1.  Open your project's Hugo configuration file.
 2.  Set the response text that users see after clicking **Yes** or **No**.
 
@@ -162,6 +163,7 @@ params:
 
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 3.  Save the edits to your configuration file.
 
@@ -202,6 +204,7 @@ visualize individual data points (per page) along with average values.
 Add the parameter `hide_feedback` to the page's front matter and set it to
 `true`.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -220,12 +223,14 @@ hide_feedback: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Disable feedback on all pages
 
 Set `params.ui.feedback.enable` to `false` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -250,6 +255,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Add a contact form with Fabform
 
@@ -281,8 +287,7 @@ using the `description` meta tag to tell search engines what your page is about.
 For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
 
-- The page `description` [frontmatter field]({{< ref
-"content#page-frontmatter" >}})
+- The page `description` [frontmatter field](content/#page-frontmatter)
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 
@@ -290,8 +295,7 @@ For the template code used to perform this computation, see
 [layouts/partials/page-description.html][].
 
 Add more meta tags as needed to your project's copy of the `head-end.html`
-partial. For details, see [Customizing templates]({{< ref "lookandfeel#customizing-templates"
->}}).
+partial. For details, see [Customizing templates](lookandfeel/#customizing-templates).
 
 [Configure Google Analytics]: https://gohugo.io/templates/internal/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
