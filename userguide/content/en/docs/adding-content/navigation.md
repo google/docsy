@@ -5,13 +5,24 @@ weight: 3
 description: Customize site navigation for your Docsy site.
 ---
 
-Docsy provides multiple built-in navigation features for your sites, including site menus, section menus, and page menus. This page shows you how they work and how to configure and customize them to meet your needs.
+Docsy provides multiple built-in navigation features for your sites, including
+site menus, section menus, and page menus. This page shows you how they work and
+how to configure and customize them to meet your needs.
 
 ## Top-level menu
 
-The top level menu (the one that appears in the top navigation bar for the entire site) uses your site's [`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have a `main` menu array of menu entries, accessible via the `.Site.Menus` site variable and populatable via page front matter or your site's `hugo.toml`/`hugo.yaml`/`hugo.json`.
+The top level menu (the one that appears in the top navigation bar for the
+entire site) uses your site's
+[`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have
+a `main` menu array of menu entries, accessible via the `.Site.Menus` site
+variable and populatable via page front matter or your site's
+`hugo.toml`/`hugo.yaml`/`hugo.json`.
 
-To add a page or section to this menu, add it to the site's `main` menu in either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
+To add a page or section to this menu, add it to the site's `main` menu in
+either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front
+matter (in `_index.md` or `_index.html` for a section, as that's the section
+landing page). For example, here's how we added the Documentation section
+landing page to the main menu in this site:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -51,9 +62,12 @@ menu:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
+The menu is ordered from left to right by page `weight`. So, for example, a
+section index or page with `weight: 30` would appear after the Documentation
+section in the menu, while one with `weight: 10` would appear before it.
 
-If you want to add a link to an external site to this menu, add it in `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
+If you want to add a link to an external site to this menu, add it in
+`hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -89,7 +103,13 @@ menu:
 
 ### Adding icons to the top-level menu
 
-As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
+As described in the
+[Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu),
+you can add icons to the top-level menu by using the pre and/or post parameter
+for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json`
+or via page front matter. For example, the following configuration adds the
+GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this
+is a new addition to the menu.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -129,7 +149,9 @@ menu:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
+You can find a complete list of icons to use in the
+[FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
+includes the free FontAwesome icons by default.
 
 ### Adding a version drop-down
 
@@ -141,14 +163,23 @@ You can find out more in the guide to
 
 ### Adding a language drop-down
 
-If you configure more than one language in `hugo.toml`, the Docsy theme adds a language selector drop down to the top-level menu. Selecting a language takes the user to the translated version of the current page, or the home page for the given language.
+If you configure more than one language in `hugo.toml`, the Docsy theme adds a
+language selector drop down to the top-level menu. Selecting a language takes
+the user to the translated version of the current page, or the home page for the
+given language.
 
 You can find out more in [Multi-language support](/docs/language/).
 
 ## Section menu
 
-The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title`, or `linkTitle` if different, as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
-
+The section menu, as shown in the left side of the `docs` section, is
+automatically built from the `content` tree. Like the top-level menu, it is
+ordered by page or section index `weight` (or by page creation `date` if
+`weight` is not set), with the page or index's `Title`, or `linkTitle` if
+different, as its link title in the menu. If a section subfolder has pages other
+than `_index.md` or `_index.html`, those pages will appear as a submenu, again
+ordered by `weight`. For example, here's the metadata for this page showing its
+`weight` and `title`:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -186,9 +217,14 @@ description: >
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter.
+To hide a page or section from the left navigation menu, set `toc_hide: true` in
+the front matter.
 
-To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
+To hide a page from the section summary on a [docs section landing
+page]({{< ref "content#docs-section-landing-pages" >}}), set
+`hide_summary: true` in the front matter. If you want to hide a page from both
+the TOC menu and the section summary list, you need to set both `toc_hide` and
+`hide_summary` to `true` in the front matter.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -228,17 +264,33 @@ description: >
 
 ### Section menu options
 
-By default, the section menu shows the current section fully expanded all the way down. This may make the left nav too long and difficult to scan for bigger sites. Try setting site parameter `ui.sidebar_menu_compact = true` in `hugo.toml`.
+By default, the section menu shows the current section fully expanded all the
+way down. This may make the left nav too long and difficult to scan for bigger
+sites. Try setting site parameter `ui.sidebar_menu_compact = true` in
+`hugo.toml`.
 
-With the compact menu (`.ui.sidebar_menu_compact = true`), only the current page's ancestors, siblings and direct descendants are shown. You can use the optional parameter `.ui.ul_show` to set a desired menu depth to always be visible. For example, with `.ui.ul_show = 1` the first menu level is always displayed.
+With the compact menu (`.ui.sidebar_menu_compact = true`), only the current
+page's ancestors, siblings and direct descendants are shown. You can use the
+optional parameter `.ui.ul_show` to set a desired menu depth to always be
+visible. For example, with `.ui.ul_show = 1` the first menu level is always
+displayed.
 
-The number of sidebar entries shown per section can be configured using the `.ui.sidebar_menu_truncate` parameter (default: 100).
+The number of sidebar entries shown per section can be configured using the
+`.ui.sidebar_menu_truncate` parameter (default: 100).
 
-As well as the completely expanded and compact menu options, you can also create a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true` in `hugo.toml`. The foldable menu lets users expand and collapse menu sections by toggling arrow icons beside the section parents in the menu.
+As well as the completely expanded and compact menu options, you can also create
+a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true`
+in `hugo.toml`. The foldable menu lets users expand and collapse menu sections
+by toggling arrow icons beside the section parents in the menu.
 
-On large sites (default: > 2000 pages) the section menu is not generated for each page, but cached for the whole section. The HTML classes for marking the active menu item (and menu path) are then set using JS. You can adjust the limit for activating the cached section menu with the optional parameter `.ui.sidebar_cache_limit`.
+On large sites (default: > 2000 pages) the section menu is not generated for
+each page, but cached for the whole section. The HTML classes for marking the
+active menu item (and menu path) are then set using JS. You can adjust the limit
+for activating the cached section menu with the optional parameter
+`.ui.sidebar_cache_limit`.
 
-The tabbed pane below lists the menu section options you can define in your project [configuration file].
+The tabbed pane below lists the menu section options you can define in your
+project [configuration file].
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -272,26 +324,57 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-
 ### Add icons to the section menu
 
-You can add icons to the section menu in the sidebar by setting the `icon` parameter in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
+You can add icons to the section menu in the sidebar by setting the `icon`
+parameter in the page front matter (e.g.
+`icon: fa-solid fa-screwdriver-wrench`).
 
-You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
+You can find a complete list of icons to use in the
+[FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
+includes the free FontAwesome icons by default.
 
-Out of the box, if you want to use icons, you should define icons for all items on the same menu level in order to ensure an appropriate look. If the icons are used in a different way, individual CSS adjustments are likely necessary.
+Out of the box, if you want to use icons, you should define icons for all items
+on the same menu level in order to ensure an appropriate look. If the icons are
+used in a different way, individual CSS adjustments are likely necessary.
 
 ### Add manual links to the section menu
 
-By default the section menu is entirely generated from your section's pages. If you want to add a manual link to this menu, such as a link to an external site or a page in a different section of your site, you can do this by creating a *placeholder page file* in the doc hierarchy with the appropriate weight and some special parameters in its metadata (frontmatter) to specify the link details.
+By default the section menu is entirely generated from your section's pages. If
+you want to add a manual link to this menu, such as a link to an external site
+or a page in a different section of your site, you can do this by creating a
+_placeholder page file_ in the doc hierarchy with the appropriate weight and
+some special parameters in its metadata (frontmatter) to specify the link
+details.
 
-To create a placeholder page, create a page file as usual in the directory where you want the link to show up in the menu, and add a `manualLink` parameter to its metadata. If a page has `manualLink` in its metadata, Docsy generates a link for it in the section menu for this page and in the section index (the list of the child pages of a section on a landing page - see [description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)), but the link destination is replaced by the value of `manualLink`. The link text is the `title` (or `linkTitle` if set) of your placeholder page. You can optionally also set the `title` attribute of the link with the parameter `manualLinkTitle` and a link target with `manualLinkTarget` - for example if you want an external link to open in a new tab you can set the link target to `_blank`. Docsy automatically adds `rel=noopener` to links that open new tabs as a security best practice.
+To create a placeholder page, create a page file as usual in the directory where
+you want the link to show up in the menu, and add a `manualLink` parameter to
+its metadata. If a page has `manualLink` in its metadata, Docsy generates a link
+for it in the section menu for this page and in the section index (the list of
+the child pages of a section on a landing page - see
+[description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)),
+but the link destination is replaced by the value of `manualLink`. The link text
+is the `title` (or `linkTitle` if set) of your placeholder page. You can
+optionally also set the `title` attribute of the link with the parameter
+`manualLinkTitle` and a link target with `manualLinkTarget` - for example if you
+want an external link to open in a new tab you can set the link target to
+`_blank`. Docsy automatically adds `rel=noopener` to links that open new tabs as
+a security best practice.
 
- You can also use `manualLink` to add an additional cross reference to another existing page of your site. For internal links you can choose to use the parameter `manualLinkRelref` instead of `manualLink` to use the built-in Hugo function [relref](https://gohugo.io/functions/relref/ "External link to official Hugo Docs"). If `relref` can't find a unique page in your site, Hugo throws a error message.
+You can also use `manualLink` to add an additional cross reference to another
+existing page of your site. For internal links you can choose to use the
+parameter `manualLinkRelref` instead of `manualLink` to use the built-in Hugo
+function
+[relref](https://gohugo.io/functions/relref/ 'External link to official Hugo Docs').
+If `relref` can't find a unique page in your site, Hugo throws a error message.
 
- {{% alert title="Note" %}}
- Although all generated menu and landing page links based on your placeholder file are set according to the parameters `manualLink` or `manualLinkRelref`, Hugo still generates a regular HTML site page for the file, albeit one with no generated links to it. To avoid confusion if users accidentally land on a generated placeholder page, we recommend specifying the URL for the external link in the normal content and / or page description of the page.
- {{% /alert %}}
+{{% alert title="Note" %}} Although all generated menu and landing page links
+based on your placeholder file are set according to the parameters `manualLink`
+or `manualLinkRelref`, Hugo still generates a regular HTML site page for the
+file, albeit one with no generated links to it. To avoid confusion if users
+accidentally land on a generated placeholder page, we recommend specifying the
+URL for the external link in the normal content and / or page description of the
+page. {{% /alert %}}
 
 ## Breadcrumb navigation
 
@@ -367,7 +450,8 @@ To enable this feature in your project, define
 ```
 
 The heading self-link anchor class is `.td-heading-self-link`, which you can
-customize for your project. By default, the heading self-link style has these defaults:
+customize for your project. By default, the heading self-link style has these
+defaults:
 
 - The self-link symbol is `#`.
 - The symbol is always visible on mobile and touch devices, otherwise it is only
