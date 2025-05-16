@@ -13,6 +13,7 @@ The top level menu (the one that appears in the top navigation bar for the entir
 
 To add a page or section to this menu, add it to the site's `main` menu in either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front matter (in `_index.md` or `_index.html` for a section, as that's the section landing page). For example, here's how we added the Documentation section landing page to the main menu in this site:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -48,11 +49,13 @@ menu:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 The menu is ordered from left to right by page `weight`. So, for example, a section index or page with `weight: 30` would appear after the Documentation section in the menu, while one with `weight: 10` would appear before it.
 
 If you want to add a link to an external site to this menu, add it in `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -82,11 +85,13 @@ menu:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Adding icons to the top-level menu
 
 As described in the [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu), you can add icons to the top-level menu by using the pre and/or post parameter for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via page front matter. For example, the following configuration adds the GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this is a new addition to the menu.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -122,6 +127,7 @@ menu:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 You can find a complete list of icons to use in the [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy includes the free FontAwesome icons by default.
 
@@ -144,6 +150,7 @@ You can find out more in [Multi-language support](/docs/language/).
 The section menu, as shown in the left side of the `docs` section, is automatically built from the `content` tree. Like the top-level menu, it is ordered by page or section index `weight` (or by page creation `date` if `weight` is not set), with the page or index's `Title`, or `linkTitle` if different, as its link title in the menu. If a section subfolder has pages other than `_index.md` or `_index.html`, those pages will appear as a submenu, again ordered by `weight`. For example, here's the metadata for this page showing its `weight` and `title`:
 
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -177,11 +184,13 @@ description: >
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To hide a page or section from the left navigation menu, set `toc_hide: true` in the front matter.
 
 To hide a page from the section summary on a [docs section landing page]({{< ref "content#docs-section-landing-pages" >}}), set `hide_summary: true` in the front matter. If you want to hide a page from both the TOC menu and the section summary list, you need to set both `toc_hide` and `hide_summary` to `true` in the front matter.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -215,6 +224,7 @@ description: >
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Section menu options
 
@@ -230,6 +240,7 @@ On large sites (default: > 2000 pages) the section menu is not generated for eac
 
 The tabbed pane below lists the menu section options you can define in your project [configuration file].
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui]
@@ -259,6 +270,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 
 ### Add icons to the section menu
@@ -305,6 +317,7 @@ entire project, by setting `ui.breadcrumb_disable` to true in your project
 [configuration file]. Similarly, you can disabled taxonomy breadcrumbs by
 setting `ui.taxonomy_breadcrumb_disable` to true:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
 [params.ui]
@@ -328,6 +341,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 To disable breadcrumbs in a specific page or section set `ui.breadcrumb_disable`
 to true in the page or section-index front matter. Here is an example of the
