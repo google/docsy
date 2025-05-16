@@ -443,7 +443,7 @@ Docsy supports build-time generation of heading self links using Hugo's
 `render-heading.html` [hook].
 
 To enable this feature in your project, define
-`layouts/_default/_markup/render-heading.html` as:
+`layouts/_markup/render-heading.html` as:
 
 ```go-html-template
 {{ partial "td/render-heading.html" . }}

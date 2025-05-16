@@ -44,7 +44,7 @@ top-level site sections that you might need:
   for your site's Community page.
 
 It also provides a
-[default "landing page" type of template](https://github.com/google/docsy/tree/main/layouts/_default)
+[default "landing page" type of template](https://github.com/google/docsy/tree/main/layouts/)
 with the site header and footer, but no left nav, that you can use for any other
 section. In this site and our example site it's used for the site [home page](/)
 and the [About](/about/) page.
@@ -117,11 +117,10 @@ about how to add content and use each of Docsy's templates.
 
 ### Alternative site structure
 
-As noted above, by default your site has a home page (using the `_default`
-layout), a docs section under `/docs/`, a blog section under `/blog/` and a
-community section under `/community/`.
-[The type](https://gohugo.io/content-management/types/) of each section (which
-determines the layout it uses) matches its directory name.
+As noted above, by default your site has a home page, a docs section under
+`/docs/`, a blog section under `/blog/` and a community section under
+`/community/`. [The type](https://gohugo.io/content-management/types/) of each
+section (which determines the layout it uses) matches its directory name.
 
 In some cases, you may want to have a different directory structure, but still
 make use of Docsy's layouts. A common example is for a "docs site", where most
