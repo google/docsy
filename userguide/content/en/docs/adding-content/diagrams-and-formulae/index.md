@@ -67,6 +67,7 @@ As soon as you use a `math` code block on your page, support of \\(\KaTeX\\) is 
 
 If you want to use inline formulae and don't have a `math` code block present in your page which triggers auto activation, you need to manually activate \\(\KaTeX\\) support. The easiest way to do so is to add a `math` attribute to the frontmatter of your page and set it to `true`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -85,9 +86,11 @@ math: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If you use formulae in most of your pages, you can also enable sitewide \\(\KaTeX\\) support inside the Docsy theme. To do so update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -109,9 +112,11 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 Additionally, you can customize various \\(\KaTeX\\) options inside `hugo.toml`/`hugo.yaml`/`hugo.json`, if needed:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -221,6 +226,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 For a complete list of options and their detailed description, have a look at the documentation of \\({\KaTeX}\\)'s [Rendering API options](https://katex.org/docs/autorender.html#api) and of \\({\KaTeX}\\)'s [configuration options](https://katex.org/docs/options.html).
 
@@ -283,6 +289,7 @@ As soon as you use a `chem` code block on your page, rendering support for chemi
 
 If you want to use chemical formulae inline and don't have a `chem` code block present in your page which triggers auto activation, you need to manually activate rendering support for chemical formulae. The easiest way to do so is to add a `chem` attribute to the frontmatter of your page and set it to `true`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Page front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -301,9 +308,11 @@ chem: true
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If you use formulae in most of your pages, you can also enable sitewide rendering support for chemical formulae inside the Docsy theme. To do so, enable `mhchem` inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Site configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -333,6 +342,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Diagrams with Mermaid
 
@@ -384,6 +394,7 @@ Support of Mermaid diagrams is automatically enabled as soon as you use a `merma
 
 By default, docsy pulls in the latest officially released version of Mermaid at build time. If that doesn't fit your needs, you can specify the wanted mermaid version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -405,9 +416,11 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 If needed, you can define custom settings for your diagrams, such as themes, padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -437,6 +450,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 See the [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults) for a list of defaults that can be overridden.
 
@@ -492,6 +506,7 @@ Foo -> Foo7: To queue
 
 To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -513,9 +528,11 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 Other optional settings are:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -558,6 +575,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## MindMap support with MarkMap
 
@@ -625,6 +643,7 @@ Automatically renders to:
 
 To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -646,6 +665,7 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ## Diagrams with Diagrams.net
 
@@ -666,6 +686,7 @@ As the diagram data is transported via the browser, the diagrams.net server does
 
 To enable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -687,9 +708,11 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 You can also [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md) for editing diagrams, in which case update the configuration to point to that server:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
@@ -711,3 +734,4 @@ params:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->

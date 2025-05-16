@@ -208,6 +208,7 @@ Norway Spruce *Picea abies* shoot with foliage buds.
 
 The example above has also a byline with photo attribution added. When using illustrations with a free license from [WikiMedia](https://commons.wikimedia.org/) and similar, you will in most situations need a way to attribute the author or licensor. You can add metadata to your page resources in the page front matter. The `byline` param is used by convention in this theme:
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -240,6 +241,7 @@ resources:
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 | Parameter        | Description  |
 | ----------------: |------------|
@@ -251,6 +253,7 @@ resources:
 
 You can place the `swaggerui` shortcode anywhere inside a page with the [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger); it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI YAML or JSON file as source. This file can be hosted anywhere you like, for example in your site's root [`/static` folder](/docs/adding-content/content/#adding-static-content).
 
+<!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
@@ -284,6 +287,7 @@ description: Reference for the Pet Store API
 {{</* swaggerui src="/openapi/petstore.yaml" */>}}
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS in `themes/docsy/assets/scss/_swagger.scss`.
 
