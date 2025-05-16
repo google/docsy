@@ -294,8 +294,7 @@ using the first of the following that is defined:
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 
-For the template code used to perform this computation, see
-[layouts/partials/page-description.html][].
+For the code used to perform this computation, see [page-description.html].
 
 Add more meta tags as needed to your project's copy of the `head-end.html`
 partial. For details, see
@@ -308,8 +307,8 @@ partial. For details, see
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [hugo-ga]: https://gohugo.io/templates/internal/#google-analytics
 [internal templates]: https://gohugo.io/templates/internal/
-[layouts/partials/page-description.html]:
-  https://github.com/google/docsy/blob/main/layouts/partials/page-description.html
+[page-description.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
 [summary]: https://gohugo.io/content-management/summaries/
 [configure]: #setup-1

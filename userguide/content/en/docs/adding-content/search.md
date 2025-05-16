@@ -244,10 +244,10 @@ search results page.
 You can customize or disable Docsy's default Algolia support by creating the
 following template files:
 
-- `layouts/partials/algolia/head.html` used by `head.html` to load Algolia
+- `layouts/_partials/algolia/head.html` used by `head.html` to load Algolia
   DocSearch styles. It also issues a deprecation warning for
   `params.algolia_docsearch`.
-- `layouts/partials/algolia/scripts.html` used by `scripts.html` to load and
+- `layouts/_partials/algolia/scripts.html` used by `scripts.html` to load and
   configure Algolia DocSearch.
 
 Leave either file empty to disable Docsy's implementation.
@@ -414,7 +414,7 @@ If none of the supported search engines address your project's needs, you can
 implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
-- [layouts/partials/search-input.html]
+- [layouts/_partials/search-input.html]
 - [assets/scss/_search.scss]
 - [assets/js/search.js]
 
@@ -426,5 +426,5 @@ design, then you can implement custom search by overriding the following files:
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
 [GCSE]: https://cse.google.com/cse/all
-[layouts/partials/search-input.html]:
-  https://github.com/google/docsy/blob/main/layouts/partials/search-input.html
+[layouts/_partials/search-input.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/search-input.html

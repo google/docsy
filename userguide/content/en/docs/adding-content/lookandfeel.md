@@ -484,28 +484,22 @@ this:
 ### Add code to head or before body end
 
 If you need to add some code (CSS import, cookie consent, or similar) to the
-`head` section on every page, add the `head-end.html` partial to your project:
-
-```
-layouts/partials/hooks/head-end.html
-```
-
-And add the code you need in that file. Your partial code is automatically
-included just before the end of the theme partial
-[`head.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
-The theme version of
-[`head-end.html`](https://github.com/google/docsy/blob/main/layouts/partials/hooks/head-end.html)
-is empty.
+`head` section on every page, add a [hooks/head-end.html] partial to your
+project (the theme version is an empty placeholder). The content of this partial
+is automatically included just before the end of the theme partial [head.html].
 
 Similarly, if you want to add some code right before the `body` end, create your
-own version of the following file:
+own version of [hooks/body-end.html]. This partial is included automatically at
+the end of the theme partial [scripts.html].
 
-```
-layouts/partials/hooks/body-end.html
-```
-
-Any code in this file is included automatically at the end of the theme partial
-[`scripts.html`](https://github.com/google/docsy/blob/main/layouts/partials/head.html).
+[head.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/head.html
+[hooks/body-end.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/hooks/body-end.html
+[hooks/head-end.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html
+[scripts.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/head.html
 
 Both `head.html` and `scripts.html` are then used to build Docsy's
 [base page layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
