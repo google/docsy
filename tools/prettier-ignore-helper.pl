@@ -31,7 +31,7 @@ foreach my $file (@ARGV) {
         }
 
         # Detect non-indented tabpane opening
-        if (!$inside_ignore && $line =~ /^\s*\{\{<\s*tabpane\s*>\}\}\s*$/ && $line !~ /^\s{1,}\{\{<\s*tabpane\s*>\}\}\s*$/) {
+        if (!$inside_ignore && $line =~ /^\s*\{\{<\s*tabpane.*?>\}\}\s*$/ && $line !~ /^\s{1,}\{\{<\s*tabpane.*?>\}\}\s*$/) {
             # Only process if NOT indented (no leading spaces/tabs)
             if ($i == 0 || $lines[$i-1] !~ /<!--\s*prettier-ignore-start\s*-->/) {
                 print $out "<!-- prettier-ignore-start -->\n";
@@ -58,8 +58,8 @@ foreach my $file (@ARGV) {
         # Detect indented tabpane opening/closing not in an ignore region and warn
         if (!$inside_ignore &&
             (
-                ($line =~ /^\s+\{\{<\s*tabpane\s*>\}\}\s*$/) ||
-                ($line =~ /^\s+\{\{<\s*\/tabpane\s*>\}\}\s*$/)
+                ($line =~ /^\s+\{\{<\s*tabpane.*?>\}\}\s*$/) ||
+                ($line =~ /^\s+\{\{<\s*\/tabpane.*?>\}\}\s*$/)
             )
         ) {
             print STDERR "$file:", $i+1, ": WARNING: Indented tabpane shortcode found, usually because it is in a list. Add prettier-ignore directive manually before the start of the list.\n";

@@ -397,6 +397,7 @@ example, the tabbed pane below shows the language-specific variants of the
 famous `Hello world!` program one usually writes first when learning a new
 programming language:
 
+<!-- prettier-ignore-start -->
 {{< tabpane langEqualsHeader=true >}}
 {{< tab "C" >}}
 #include <stdio.h>
@@ -455,6 +456,7 @@ object HelloWorld extends App {
 }
 {{< /tab >}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 The Docsy template provides two shortcodes `tabpane` and `tab` that let you
 easily create tabbed panes. To see how to use them, have a look at the following
@@ -482,6 +484,7 @@ active tabs:
 This code translates to the right aligned tabbed pane below, showing a
 `Welcome!` greeting in English, German or Swahili:
 
+<!-- prettier-ignore-start -->
 {{< tabpane text=true right=true >}}
   {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
@@ -497,6 +500,7 @@ This code translates to the right aligned tabbed pane below, showing a
   **Karibu sana!**
   {{% /tab %}}
 {{< /tabpane >}}
+<!-- prettier-ignore-end -->
 
 ### Shortcode details
 
