@@ -4,11 +4,13 @@
   "caseSensitive": true,
   "words": [
     "Docsy",
+    "errorf",
     "hugo",
     "shortcode",
     "shortcodes",
     "tabpane",
     "upvote",
-    "warnf"
+    "warnf",
+    "relref"
   ]
 }
