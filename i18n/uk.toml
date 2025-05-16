@@ -37,7 +37,7 @@ other = "Востаннє змінено"
 [post_edit_this]
 other = "Редагувати цю сторінку"
 [post_view_this]
-other = "Переглянути вихідний код"
+other = "Переглянути джерело сторінки"
 [post_create_child_page]
 other = "Створити дочірню сторінку"
 [post_create_issue]
