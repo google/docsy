@@ -1,22 +1,22 @@
 ---
-title: "Doc Versioning"
+title: Doc Versioning
 date: 2020-02-02
 weight: 4
-description: >
-   Customize navigation and banners for multiple versions of your docs.
+description: Customize navigation and banners for multiple versions of your docs.
 ---
 
 Depending on your project's releases and versioning, you may want to let your
 users access previous versions of your documentation. How you deploy the
 previous versions is up to you. This page describes the Docsy features that you
-can use to provide navigation between the various versions of your docs and
-to display an information banner on the archived sites.
+can use to provide navigation between the various versions of your docs and to
+display an information banner on the archived sites.
 
 ## Adding a version drop-down menu
 
-If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the Docsy theme adds a
-version selector drop down to the top-level menu. You specify a URL and a name
-for each version you would like to add to the menu, as in the following example:
+If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the
+Docsy theme adds a version selector drop down to the top-level menu. You specify
+a URL and a name for each version you would like to add to the menu, as in the
+following example:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -71,7 +71,8 @@ params:
 Remember to add your current version so that users can navigate back!
 
 The default title for the version drop-down menu is **Releases**. To change the
-title, change the site parameter `version_menu` in `hugo.toml`/`hugo.yaml`/`hugo.json`:
+title, change the site parameter `version_menu` in
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -94,10 +95,11 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-If you set the `version_menu_pagelinks` parameter to `true`, then links in the version drop-down menu
-point to the current page in the other version, instead of the main page.
-This can be useful if the document doesn't change much between the different versions.
-Note that if the current page doesn't exist in the other version, the link will be broken.
+If you set the `version_menu_pagelinks` parameter to `true`, then links in the
+version drop-down menu point to the current page in the other version, instead
+of the main page. This can be useful if the document doesn't change much between
+the different versions. Note that if the current page doesn't exist in the other
+version, the link will be broken.
 
 You can read more about Docsy menus in the guide to
 [navigation and search](/docs/adding-content/navigation/).
@@ -124,6 +126,7 @@ To add the banner to your doc site, make the following changes in your
 `hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
 <!-- prettier-ignore-start -->
+
 1. Set the site parameter `archived_version` to `true`:
 
     {{< tabpane >}}
@@ -189,4 +192,5 @@ params:
 }
 {{< /tab >}}
     {{< /tabpane >}}
+
 <!-- prettier-ignore-end -->
