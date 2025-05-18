@@ -19,7 +19,7 @@
     // Click-through to the underlying input.
     pointer-events: none;
 
-    &:before {
+    &::before {
       @extend .fa;
       content: fa-content($fa-var-search);
     }
@@ -67,7 +67,7 @@
     }
 
     .td-search-input {
-      text-indent: 0px;
+      text-indent: 0;
     }
   }
 
@@ -114,7 +114,7 @@
     // cursor: pointer;
     float: right;
 
-    &:after {
+    &::after {
       @extend .fas;
       content: fa-content($fa-var-times);
     }
