@@ -2307,6 +2307,10 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:06:01.765051-05:00"
   },
+  "https://www.docsy.dev/docs/adding-content/lookandfeel/#before-page-content": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T13:24:36.066951-04:00"
+  },
   "https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:07:28.264639-05:00"
