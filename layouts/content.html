@@ -7,7 +7,7 @@
 			{{ partial "reading-time.html" . -}}
 		{{ end -}}
 	</header>
-	{{ .Render "td-content-after-header" -}}
+	{{ partial "td/content-after-header" . -}}
 	{{ .Content }}
 	{{ partial "feedback.html" . -}}
 	{{ if (.Site.Config.Services.Disqus.Shortname) -}}
