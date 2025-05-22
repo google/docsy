@@ -707,14 +707,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:36.405106-04:00"
   },
-  "https://github.com/google/docsy/blob/main/layouts/_default/baseof.html": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:35:01.926687-04:00"
-  },
-  "https://github.com/google/docsy/blob/main/layouts/_default/td-content-after-header.html": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.741144-04:00"
-  },
   "https://github.com/google/docsy/blob/main/layouts/_partials/head.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:35:01.197874-04:00"
@@ -1846,6 +1838,10 @@
   "https://gohugo.io/templates/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:37.548164-04:00"
+  },
+  "https://gohugo.io/templates/base/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T11:57:59.6157-04:00"
   },
   "https://gohugo.io/templates/embedded/": {
     "StatusCode": 206,
