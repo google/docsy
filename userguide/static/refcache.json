@@ -2043,7 +2043,7 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:44.15864-04:00"
   },
-  "https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard": {
+  "https://prismjs.com/download.html#themes=prism\u0026languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml\u0026plugins=toolbar+copy-to-clipboard": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:43.950837-04:00"
   },
