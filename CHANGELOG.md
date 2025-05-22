@@ -18,19 +18,32 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.11.1 or 0.12.0
+## 0.12.0
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.x.y] release notes.
+For the full list of changes, see the [0.12.0] release notes.
 
 **Breaking changes**:
 
 - Renames the default Docsy heading render hook and heading self-link partials.
   This is a breaking change only if your project uses this feature. For details,
   see [Heading self links][] ([#2223]).
-- Relocates and adapts layouts in response to Hugo's updated template system.
+- Relocates and adapts layouts in response to Hugo's [new template system][].
   For details, see [Adapt to new template system in Hugo v0.146.0 #2243][#2243].
+- **IMPORTANT**: if your project overrides any of the layout files mentioned in
+  [#2243], then apply the same name changes in your project files. In
+  particular, note that:
+  - Taxonomy-related layout files: names have been _swapped_, and `terms.html`
+    is now singular ([#2257]):
+    - Renames `_default/taxonomy.html` to `term.html` (singular)
+    - Renames `_default/terms.html` to `taxonomy.html`
+  - Renames `layouts/**/content.html` by adding a `_td-` filename prefix
+    ([#2259]).
+
+[#2257]: https://github.com/google/docsy/pull/2257
+[#2259]: https://github.com/google/docsy/pull/2259
+[new template system]: https://gohugo.io/templates/new-templatesystem-overview/
 
 **Potential breaking changes**:
 
@@ -57,7 +70,7 @@ For the full list of changes, see the [0.x.y] release notes.
 - Adds a `comment` shortcode, as a drop-in replacement for the on removed from
   Hugo.
 
-[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[0.12.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.12.0
 [#1787]: https://github.com/google/docsy/issues/1787
 [#1788]: https://github.com/google/docsy/issues/1788
 [#2160]: https://github.com/google/docsy/pull/2160
