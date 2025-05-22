@@ -1847,6 +1847,18 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:37.548164-04:00"
   },
+  "https://gohugo.io/templates/embedded/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T10:33:25.556387-04:00"
+  },
+  "https://gohugo.io/templates/embedded/#configure-google-analytics": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T10:33:25.984266-04:00"
+  },
+  "https://gohugo.io/templates/embedded/#google-analytics": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T10:33:25.360519-04:00"
+  },
   "https://gohugo.io/templates/internal/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:34.993115-04:00"
