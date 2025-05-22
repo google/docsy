@@ -69,7 +69,7 @@ For the full list of changes, see the [0.x.y] release notes.
 [Heading self links]:
   https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
 [td-content-after-header.html]:
-  https://github.com/google/docsy/blob/main/layouts/_default/td-content-after-header.html
+  https://github.com/google/docsy/blob/main/layouts/td-content-after-header.html
 
 ## 0.11.0
 
