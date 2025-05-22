@@ -3,7 +3,8 @@ title: Look and Feel
 date: 2017-01-05
 weight: 2
 description: Customize colors, fonts, code highlighting, and more for your site.
-spelling: cSpell:ignore wordmark docsy myclass anotherclass
+# prettier-ignore
+cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark wordmark
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -492,6 +493,11 @@ Similarly, if you want to add some code right before the `body` end, create your
 own version of [hooks/body-end.html]. This partial is included automatically at
 the end of the theme partial [scripts.html].
 
+Both [head.html] and [scripts.html] are included from [baseof.html], Docsy's
+[base template][].
+
+[baseof.html]: https://github.com/google/docsy/blob/main/layouts/baseof.html
+[base template]: https://gohugo.io/templates/base/
 [head.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/head.html
 [hooks/body-end.html]:
@@ -500,32 +506,6 @@ the end of the theme partial [scripts.html].
   https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html
 [scripts.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/head.html
-
-Both `head.html` and `scripts.html` are then used to build Docsy's
-[base page layout](https://github.com/google/docsy/blob/main/layouts/_default/baseof.html),
-which is used by all the other page templates:
-
-<!-- prettier-ignore -->
-```html
-<!doctype html>
-<html lang="{{ .Site.Language.Lang }}" class="no-js">
-  <head>
-    {{ partial "head.html" . }}
-  </head>
-  <body class="td-{{ .Kind }}">
-    <header>
-      {{ partial "navbar.html" . }}
-    </header>
-    <div class="container-fluid td-default td-outer">
-      <main role="main" class="td-main">
-        {{ block "main" . }}{{ end }}
-      </main>
-      {{ partial "footer.html" . }}
-    </div>
-    {{ partialCached "scripts.html" . }}
-  </body>
-</html>
-```
 
 ## Adding custom class to the body element
 
