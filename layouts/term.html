@@ -1,4 +1,4 @@
-{{ define "main" }}
+{{ define "main" -}}
 <div class="td-content">
   <main class="taxonomy-taxonomy-page">
     <h1>{{ with .Data.Singular }}{{ . | humanize }}: {{ end }}<span>{{ .Title }}</span></h1>
@@ -29,4 +29,4 @@
     <a href="{{ with .Site.GetPage (printf "/%s" ( lower .Data.Plural )) }}{{ .Permalink }}{{ end }}" class="all-taxonomy-terms">{{ humanize ( T "ui_all" ) }} {{ with .Data.Plural }}{{ . | humanize }}{{ end }}</a>
   </main>
 </div>
-{{ end }}
+{{- end }}
