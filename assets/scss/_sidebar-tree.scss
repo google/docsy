@@ -100,7 +100,7 @@
   li i {
     // Layout of icons
     padding-right: 0.5em;
-    &:before {
+    &::before {
       display: inline-block;
       text-align: center;
       min-width: 1em;

@@ -114,7 +114,7 @@
   li i {
     padding-right: 0.5em;
 
-    &:before {
+    &::before {
       display: inline-block;
       text-align: center;
       min-width: 1em;
@@ -127,7 +127,7 @@
     border: 0;
     font-weight: inherit;
 
-    &:before {
+    &::before {
       display: inline-block;
       font-style: normal;
       font-variant: normal;
@@ -182,7 +182,7 @@ nav.foldable-nav {
     padding-left: 1.5em;
   }
 
-  .ul-1 .with-child > label:before {
+  .ul-1 .with-child > label::before {
     display: inline-block;
     font-style: normal;
     font-variant: normal;
@@ -203,7 +203,7 @@ nav.foldable-nav {
     }
   }
 
-  .ul-1 .with-child > input:checked ~ label:before {
+  .ul-1 .with-child > input:checked ~ label::before {
     color: var(--bs-secondary-color);
     transform: rotate(90deg);
     transition: transform 0.5s;
@@ -216,12 +216,12 @@ nav.foldable-nav {
 
 @media (hover: hover) and (pointer: fine) {
   nav.foldable-nav {
-    .ul-1 .with-child > label:hover:before {
+    .ul-1 .with-child > label:hover::before {
       color: var(--bs-link-color);
       transition: color 0.3s;
     }
 
-    .ul-1 .with-child > input:checked ~ label:hover:before {
+    .ul-1 .with-child > input:checked ~ label:hover::before {
       color: var(--bs-link-color);
       transition: color 0.3s;
     }

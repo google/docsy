@@ -96,7 +96,7 @@
 }
 
 .td-heading-self-link {
-  &:before {
+  &::before {
     content: '#';
   }
 
