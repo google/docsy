@@ -115,6 +115,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:36.121607-04:00"
   },
+  "https://cthedot.de/icongen": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T22:35:07.769384352+02:00"
+  },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:04:24.495606-05:00"
@@ -1962,6 +1966,10 @@
   "https://mermaid-js.github.io/mermaid/#/Setup": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:39.364187-04:00"
+  },
+  "https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T22:35:07.842326703+02:00"
   },
   "https://mhchem.github.io/MathJax-mhchem/": {
     "StatusCode": 206,
