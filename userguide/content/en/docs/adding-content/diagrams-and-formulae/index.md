@@ -529,7 +529,7 @@ See the
 for a list of defaults that can be overridden.
 
 Settings can also be overridden on a per-diagram basis by making use of a
-[frontmatter config](http://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
+[frontmatter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
 block at the start of the diagram definition.
 
 ## UML Diagrams with PlantUML

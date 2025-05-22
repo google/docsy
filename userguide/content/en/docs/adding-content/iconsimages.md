@@ -63,7 +63,7 @@ or anywhere in your text.
 ## Add your favicons
 
 The easiest way to do this is to create a set of favicons via
-http://cthedot.de/icongen (which lets you create a huge range of icon sizes and
+https://cthedot.de/icongen (which lets you create a huge range of icon sizes and
 options from a single image) and/or [https://favicon.io](https://favicon.io),
 and put them in your site project's `static/favicons` directory. This will
 override the default favicons from the theme.
