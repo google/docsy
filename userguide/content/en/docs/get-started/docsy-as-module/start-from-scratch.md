@@ -55,7 +55,7 @@ Specifying the [Docsy theme](https://github.com/google/docsy) as Hugo Module for
 
 ### Create your new skeleton project
 
-To create a new Hugo site project and then add the Docs theme as a submodule, run the following commands from your project's root directory.
+To create a new Hugo site project and then add the Docsy theme as a Hugo module, run the following commands from your project's root directory.
 
 ```bash
 hugo new site my-new-site
