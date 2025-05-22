@@ -8,7 +8,7 @@
 			{{ partial "reading-time.html" . -}}
 		{{ end -}}
 	</header>
-	{{ .Render "td-content-after-header" -}}
+	{{ partial "td/content-after-header" . -}}
 	{{ .Content }}
 	{{ partial "section-index.html" . -}}
 	{{ partial "feedback.html" . -}}

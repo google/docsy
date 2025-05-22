@@ -533,31 +533,16 @@ which is used by all the other page templates:
 </html>
 ```
 
-## Sidebar table of contents
+### Adding a banner before page content (EXPERIMENTAL) {#before-page-content}
 
-By default, Docsy shows the table of contents for the current page in the right sidebar using the built-in function of Hugo. You can replace that with a JavaScript-based ToC that uses the [https://tscanlin.github.io/tocbot/](Tocbot library) by setting the following in your `config.toml` file:
+To have a banner, or other similar content, appear at the top of the pages in a
+section, add the content to the [td/content-after-header.html] partial. It will
+appear inside the `div.td-content`, after `</header>`, just before `.Content` is
+rendered.
 
-```toml
-[params.jstoc]
-enable = true
-```
+[td/content-after-header.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/td/content-after-header.html
 
-By default, h2-h4 headings are included in the sidebar, which includes tips and warnings if you are using the [alert shortcode of Docsy](/docs/adding-content/shortcodes/#alert). To change that,
-provide a comma-separated list of the headings to include in the `custom_headings` parameter, for example:
-
-```toml
-[params.jstoc]
-enable = true
-custom_headings = "h2, h3"
-```
-
-Compared to the default sidebar ToC, this solution:
-
-- has a marker that shows the current location of the screen (useful for long pages)
-- shows the correct title even if the title contains a shortcode
-- shows the title in the toc even if it was included from another file
-
-![Screenshot of JavaScript-based sidebar table of contents](/images/sidebar-toc-with-tocbot.png)
 ## Adding custom class to the body element
 
 By default, Docsy adds the `td-{{ .Kind }}` class, where the kind is the kind of
@@ -593,3 +578,29 @@ feature of Hugo in your configuration file, or in the front matter of the
 highest-level page you want to modify.
 
 [bs-docs]: https://getbootstrap.com/docs/
+
+## Sidebar table of contents
+
+By default, Docsy shows the table of contents for the current page in the right sidebar using the built-in function of Hugo. You can replace that with a JavaScript-based ToC that uses the [https://tscanlin.github.io/tocbot/](Tocbot library) by setting the following in your `config.toml` file:
+
+```toml
+[params.jstoc]
+enable = true
+```
+
+By default, h2-h4 headings are included in the sidebar, which includes tips and warnings if you are using the [alert shortcode of Docsy](/docs/adding-content/shortcodes/#alert). To change that,
+provide a comma-separated list of the headings to include in the `custom_headings` parameter, for example:
+
+```toml
+[params.jstoc]
+enable = true
+custom_headings = "h2, h3"
+```
+
+Compared to the default sidebar ToC, this solution:
+
+- has a marker that shows the current location of the screen (useful for long pages)
+- shows the correct title even if the title contains a shortcode
+- shows the title in the toc even if it was included from another file
+
+![Screenshot of JavaScript-based sidebar table of contents](/images/sidebar-toc-with-tocbot.png)

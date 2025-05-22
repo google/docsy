@@ -42,11 +42,12 @@ For the full list of changes, see the [0.x.y] release notes.
 - **[Breadcrumb navigation]** support has been enhanced and adjusted:
   - You can now disable breadcrumbs for an entire project, or individual pages
     or sections by setting `ui.breadcrumb_disable` to true. For details, see
-    [Breadcrumb navigation].
+    [Breadcrumb navigation][].
   - **Blog** pages now also have breadcrumbs by default ([#1788]).
   - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
-- Support for a [td-content-after-header.html] page-content render hook, which
-  can be [content type] specific ([#2192]).
+- Support for a [td/content-after-header.html] page-content render hook, which
+  can be [content type][] specific ([#2192]). For details, see the [User
+  Guide][before-page-content].
 
 **Other changes**:
 
@@ -63,13 +64,15 @@ For the full list of changes, see the [0.x.y] release notes.
 [#2192]: https://github.com/google/docsy/pull/2192
 [#2223]: https://github.com/google/docsy/pull/2223
 [#2243]: https://github.com/google/docsy/pull/2243
+[before-page-content]:
+  https://www.docsy.dev/docs/adding-content/lookandfeel/#before-page-content
 [Breadcrumb navigation]:
   https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Heading self links]:
   https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
-[td-content-after-header.html]:
-  https://github.com/google/docsy/blob/main/layouts/td-content-after-header.html
+[td/content-after-header.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/td/content-after-header.html
 
 ## 0.11.0
 
