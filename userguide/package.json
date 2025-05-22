@@ -8,6 +8,7 @@
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
+    "_refcache:prune": "jq 'with_entries(select(.value.StatusCode < 400))' static/refcache.json > tmp/refcache.json && mv tmp/refcache.json static/refcache.json",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
@@ -33,5 +34,5 @@
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- docsy htmltest pkgs postbuild precheck rtlcss -"
+  "cSpell:ignore": "- docsy htmltest pkgs postbuild precheck refcache rtlcss -"
 }
