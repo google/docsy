@@ -507,6 +507,16 @@ Both [head.html] and [scripts.html] are included from [baseof.html], Docsy's
 [scripts.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/head.html
 
+### Adding a banner before page content (EXPERIMENTAL) {#before-page-content}
+
+To have a banner, or other similar content, appear at the top of the pages in a
+section, add the content to the [td/content-after-header.html] partial. It will
+appear inside the `div.td-content`, after `</header>`, just before `.Content` is
+rendered.
+
+[td/content-after-header.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/td/content-after-header.html
+
 ## Adding custom class to the body element
 
 By default, Docsy adds the `td-{{ .Kind }}` class, where the kind is the kind of
