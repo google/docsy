@@ -1127,6 +1127,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T06:49:30.016774-04:00"
   },
+  "https://github.com/google/docsy/pull/2257": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T19:21:13.299835-04:00"
+  },
+  "https://github.com/google/docsy/pull/2259": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T19:21:14.104646-04:00"
+  },
   "https://github.com/google/docsy/pulls": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:15.642661-05:00"
@@ -1878,6 +1886,10 @@
   "https://gohugo.io/templates/internal/#google-analytics": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:34.523504-04:00"
+  },
+  "https://gohugo.io/templates/new-templatesystem-overview/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-22T19:21:12.30791-04:00"
   },
   "https://gohugo.io/templates/render-hooks/": {
     "StatusCode": 206,
