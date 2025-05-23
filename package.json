@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "_cd:docs": "cd userguide &&",
-    "_check:format": "npx prettier --check .??* *.md",
+    "_check:format": "npx prettier --check *.md",
     "_commit:public": "npm run cd:docs -- _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
     "_diff:check": "git diff --name-only --exit-code",
