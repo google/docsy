@@ -513,9 +513,9 @@ To have a banner or other similar content appear at the top of the pages in a
 section, add the relevant HTML to a [_td-content-after-header.html] file in the
 section's page path under `layouts` -- such as
 `layouts/blog/_td-content-after-header.html`. Add the file directly under
-`layouts` to have the file processed for all site pages. The file's content will
-be included inside the `div.td-content`, after `</header>`, just before
-`.Content` is rendered.
+`layouts` to have the file processed for all docs, blog, and swagger pages. The
+file's content will be included inside the `div.td-content`, after `</header>`,
+just before `.Content` is rendered.
 
 [_td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
