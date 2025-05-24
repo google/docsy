@@ -6,7 +6,7 @@
   <head>
     {{ partial "head.html" . }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.1.0/swagger-ui.css" integrity="sha384-4cTBOIJxihgy9mISVlGqdBZkd66byHFwoLscqza6swXPIp5qiLBwuzuJD9cMjYOw" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui.css" integrity="sha384-WoOxtFhjrhn23jYeguEcSJkYdgSIer0UxZkoMKKEqROW+TDEmHEPwckfxWmZXSIw" crossorigin="anonymous">
   </head>
   <body class="td-{{ .Kind }}">
     <header>
@@ -27,8 +27,8 @@
             {{ if not (.Param "ui.breadcrumb_disable") -}}
               {{ partial "breadcrumb.html" . -}}
             {{ end -}}
-            <script src="https://unpkg.com/swagger-ui-dist@5.1.0/swagger-ui-bundle.js" integrity="sha384-TBW5qg/G561aZRk4jvscdaB7BEDK/9wpe/jS8vyKzK/ls+nJfWQw0W4cobLRYkWk" crossorigin="anonymous"></script>
-            <script src="https://unpkg.com/swagger-ui-dist@5.1.0/swagger-ui-standalone-preset.js" integrity="sha384-cftHzufgeQ3yLXAwNPSMCBSqPUkItABWOchc20veg7pQ1sDu0FQSp0Grfx/BfhN7" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui-bundle.js" integrity="sha384-sVLSl7HyCV1nd7RZmv/iLgSAiKQD9VfnzE0//SWrbZUtoVy2sPhQuAHF5hNCpDp7" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui-standalone-preset.js" integrity="sha384-Zc0myuwGRY+wF+Mppj70Hoq/w2OticNP92nkFTlghzBS/OxDNlYummEqqmcOCyAX" crossorigin="anonymous"></script>
             {{ block "main" . }}{{ end }}
           </main>
         </div>
