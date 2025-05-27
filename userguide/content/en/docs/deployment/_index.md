@@ -45,11 +45,11 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
       * If you are using Docsy as a [Hugo module](/docs/get-started/docsy-as-module/) or NPM package, you can just specify `hugo`.
    3. Click **Show advanced**.
    4. In the **Advanced build settings** section, click **New variable**.
-   5. Specify `NODE_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest LTS version](https://nodejs.org/en/download/) of node.js (minimum recommended version: `v20.x`).
+   5. Specify `NODE_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest LTS version](https://nodejs.org/en/download/) of Node.js.
    6. In the **Advanced build settings** section, click **New variable**.
-   7. Specify `HUGO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://github.com/gohugoio/hugo/releases) of Hugo (minimum recommended version: `0.125.4`).
+   7. Specify `HUGO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://github.com/gohugoio/hugo/releases) of Hugo.
    8. In the **Advanced build settings** section, click **New variable** again.
-   9. Specify `GO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://go.dev/dl/) of Go (minimum recommended version: `1.21`).
+   9. Specify `GO_VERSION` as the **Key** for the new variable, and set its **Value** to the [latest version](https://go.dev/dl/) of Go.
 
    If you don't want your site to be indexed by search engines, you can add an environment flag to your build command to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
 1. Click **Deploy site**.

@@ -1,3 +1,4 @@
+# cSpell:ignore demosite licenselink
 name = "Docsy"
 license = "Apache 2.0"
 licenselink = "https://github.com/google/docsy/blob/main/LICENSE"
@@ -6,7 +7,7 @@ homepage = "https://docsy.dev"
 demosite = "https://example.docsy.dev/"
 tags = ["documentation", "multilingual", "customizable", "responsive", "docs"]
 features = []
-min_version = "0.110.0"
+min_version = "0.146.0"
 
 [author]
   name = "The Docsy Authors"
