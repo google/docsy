@@ -24,7 +24,7 @@
     display: inline-block;
     width: 100%;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     color: var(--bs-primary-text-emphasis);
     border-bottom: 1px solid var(--bs-tertiary-color);
     margin-bottom: 1em;
