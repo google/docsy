@@ -288,7 +288,7 @@
   margin-bottom: 1.5rem;
 }
 
-.article-teaser.article-type-docs h3 a:before {
+.article-teaser.article-type-docs h3 a::before {
   display: inline-block;
   font-style: normal;
   font-variant: normal;
@@ -299,7 +299,7 @@
   padding-right: 0.5em;
 }
 
-.article-teaser.article-type-blog h3 a:before {
+.article-teaser.article-type-blog h3 a::before {
   display: inline-block;
   font-style: normal;
   font-variant: normal;
@@ -315,7 +315,7 @@
   line-height: 1.2;
   font-size: 1.5rem;
 
-  &:before {
+  &::before {
     display: inline-block;
     font-style: normal;
     font-variant: normal;
@@ -334,11 +334,11 @@
   }
 
   .breadcrumb {
-    margin-bottom: 0em;
+    margin-bottom: 0;
     font-size: 0.85rem;
   }
 
   .article-meta {
-    margin-bottom: 0em;
+    margin-bottom: 0;
   }
 }
