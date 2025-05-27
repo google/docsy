@@ -20,7 +20,7 @@ for technical documentation sets. Our aim is to help you get a working
 documentation site up and running as easily as possible, so you can concentrate
 on creating great content for your users.
 
-<a href="https://www.netlify.com" target="_blank" rel="noopener">
+<a href="https://www.netlify.com/" target="_blank" rel="noopener">
   <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
 </a>
 {{% /blocks/lead %}}
