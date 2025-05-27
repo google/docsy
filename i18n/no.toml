@@ -20,10 +20,10 @@ other = "i"
 
 # Footer text
 [footer_all_rights_reserved]
-other = "Alle retter er reservert"
+other = "Alle rettigheter er reservert"
 
 [footer_privacy_policy]
-other = "Privacy Policy"
+other = "Personvernpolicy"
 
 
 # Post (blog, articles etc.)
@@ -36,42 +36,44 @@ other = "Sist endret"
 [post_edit_this]
 other = "Endre denne siden"
 [post_create_child_page]
-other = "Create child page"
+other = "Lag underside"
 [post_create_issue]
 other = "Opprett dokumentasjon sak"
 [post_create_project_issue]
 other = "Opprett prosjekt sak"
 [post_posts_in]
-other = "Poster i"
+other = "Poster til"
 [post_reading_time]
 other = "minute read"
 [post_less_than_a_minute_read]
 other = "less than a minute"
+[post_view_this]
+other = "Vis kildekoden"
 
 # Print support
 [print_printable_section]
-other = "This is the multi-page printable view of this section."
+other = "Dette er flersidevisningen av denne seksjonen."
 [print_click_to_print]
-other = "Click here to print"
+other = "Klikk her for å skrive ut"
 [print_show_regular]
-other = "Return to the regular view of this page"
+other = "Gå tilbake til vanlig sidevisning"
 [print_entire_section]
-other = "Print entire section"
+other = "Skriv ut hele seksjonen"
 
 # Community
 [community_join]
-other = "Join the {{ .Site.Title }} community"
+other = "Bli med i {{ .Site.Title }} fellesskapet"
 [community_introduce]
-other = "{{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved."
+other = "{{ .Site.Title }} er et åpen kildekodeprosjekt som alle kan bruke, forbedre og glede seg over. Bli med - her er noen måter du kan holde deg oppdatert på og bidra."
 [community_learn]
-other = "Learn and Connect"
+other = "Lær og få kontakt"
 [community_using]
-other = "Using or want to use {{ .Site.Title }}? Find out more here:"
+other = "Bruker du, eller har du lyst til å bruke {{ .Site.Title }}? Lær mer her:"
 [community_develop]
-other = "Develop and Contribute"
+other = "Bidra og videreutvikle"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "Dersom du vil involvere deg mer ved å bidra til {{ .Site.Title }}, bli med oss her:"
 [community_how_to]
-other = "You can find out how to contribute to {{ .Site.Title }} in our"
+other = "Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i vår"
 [community_guideline]
-other = "Contribution Guidelines"
+other = "Retningslinjer for bidrag"
