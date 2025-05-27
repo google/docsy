@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "hugo-extended": "0.147.4",
+    "hugo-extended": "0.147.5",
     "netlify-cli": "^21.5.0",
     "npm-check-updates": "^18.0.1",
     "prettier": "^3.5.3"
