@@ -67,22 +67,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:46.486412-04:00"
   },
-  "https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/contrib/auto-render.min.js": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:43.694904-04:00"
-  },
-  "https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/contrib/mhchem.min.js": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:43.346614-04:00"
-  },
-  "https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.css": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:42.422914-04:00"
-  },
-  "https://cdn.jsdelivr.net/npm/katex@0.16.19/dist/katex.min.js": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:43.013365-04:00"
-  },
   "https://cdn.jsdelivr.net/npm/markmap-autoloader": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:46.294443-05:00"
