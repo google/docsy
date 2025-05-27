@@ -1,0 +1,55 @@
+{{ $version := .Site.Params.katex.version | default "latest" -}}
+
+{{/* load stylesheet and scripts for KaTeX support */ -}}
+{{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex%s.css" $version (cond hugo.IsProduction ".min" "") -}}
+
+{{ with try (resources.GetRemote $katex_css_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+{{/* The loading of KaTeX is deferred to speed up page rendering */ -}}
+{{ $katex_js_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex%s.js" $version (cond hugo.IsProduction ".min" "") -}}
+{{ with try (resources.GetRemote $katex_js_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve KaTeX script from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "js/katex%s.js" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+{{/* Add support for displaying chemical equations and physical units by loading the mhchem extension: */ -}}
+{{ if .mhchem -}}
+{{ partial "scripts/mhchem.html" (dict "version" $version) -}}
+{{ end -}}
+
+{{/* To automatically render math in text elements, include the auto-render extension: */ -}}
+
+{{ $katex_autorender_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/auto-render%s.js" $version (cond hugo.IsProduction ".min" "") -}}
+{{ with try (resources.GetRemote $katex_autorender_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve KaTeX auto render extension from CDN. Reason: %s." . -}}
+  {{ else with .Value -}}
+    {{ with resources.Copy ( printf "js/auto-render%s.js" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous"
+{{ printf "onload='renderMathInElement(%s, %s);'" (( $.Page.Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Page.Site.Params.katex.options | jsonify )) | safeHTMLAttr -}} >
+</script>
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
