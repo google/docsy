@@ -66,7 +66,7 @@ other = "Bli med i {{ .Site.Title }} fellesskapet"
 [community_introduce]
 other = "{{ .Site.Title }} er et åpen kildekodeprosjekt som alle kan bruke, forbedre og glede seg over. Bli med - her er noen måter du kan holde deg oppdatert på og bidra."
 [community_learn]
-other = "Lær og knytt fellesskap"
+other = "Lær og få kontakt"
 [community_using]
 other = "Bruker du, eller har du lyst til å bruke {{ .Site.Title }}? Lær mer her:"
 [community_develop]
