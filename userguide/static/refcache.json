@@ -1159,6 +1159,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:46.627252-05:00"
   },
+  "https://github.com/google/docsy/releases/v0.12.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-27T12:33:39.089373-04:00"
+  },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:09:37.689429-05:00"

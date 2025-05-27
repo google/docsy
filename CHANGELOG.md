@@ -18,9 +18,23 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## 0.12.0
+## 0.12.1 or 0.13.0
 
 > **UNRELEASED: this planned version is still under development**
+
+For the full list of changes, see the [0.x.y] release notes.
+
+**Breaking changes**:
+
+- ...
+
+**New**:
+
+**Other changes**:
+
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+
+## 0.12.0
 
 For the full list of changes, see the [0.12.0] release notes.
 
@@ -70,7 +84,7 @@ For the full list of changes, see the [0.12.0] release notes.
 - Adds a `comment` shortcode, as a drop-in replacement for the one removed from
   Hugo.
 
-[0.12.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.12.0
+[0.12.0]: https://github.com/google/docsy/releases/v0.12.0
 [#1787]: https://github.com/google/docsy/issues/1787
 [#1788]: https://github.com/google/docsy/issues/1788
 [#2160]: https://github.com/google/docsy/pull/2160
