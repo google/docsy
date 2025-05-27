@@ -1,0 +1,14 @@
+{{/* Add support for displaying chemical equations and physical units by loading the mhchem extension: */ -}}
+{{ $mhchem_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/contrib/mhchem%s.js" .version (cond hugo.IsProduction ".min" "") -}}
+{{ with try (resources.GetRemote $mhchem_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve mhchem script from CDN. Reason: %s." . -}}
+  {{ else with .Value -}}
+    {{ with resources.Copy (printf "js/mhchem%s.js" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+<script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." .version -}}
+{{ end -}}

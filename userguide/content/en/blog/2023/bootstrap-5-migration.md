@@ -67,7 +67,7 @@ For details and an example, see:
 
 - [Sass](https://getbootstrap.com/docs/5.2/migration/#sass) section of the
   migration page
-- [\[BSv5\] Adjust `media-breakpoint-down()` argument · Docsy PR #1367](https://github.com/google/docsy/pull/1367)
+- [[BSv5] Adjust `media-breakpoint-down()` argument · Docsy PR #1367](https://github.com/google/docsy/pull/1367)
 
 ### Grid `.row` and `.col` style changes are breaking
 
@@ -111,11 +111,11 @@ updates and might impact Docsy-based projects as well:
 
 References:
 
-- [\[BSv5\] Row/col formatting breaks Docsy components #1466](https://github.com/google/docsy/issues/1466),
+- [[BSv5] Row/col formatting breaks Docsy components #1466](https://github.com/google/docsy/issues/1466),
   in particular
-  - [\[BSv5\] Footer fixes: reset flex-shrink, and more·](https://github.com/google/docsy/pull/1373)
+  - [[BSv5] Footer fixes: reset flex-shrink, and more·](https://github.com/google/docsy/pull/1373)
     [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1373](https://github.com/google/docsy/pull/1373)
-  - [\[BSv5\] Footer: drop flex-shrink tweak + other adjustments ·](https://github.com/google/docsy/pull/1523)
+  - [[BSv5] Footer: drop flex-shrink tweak + other adjustments ·](https://github.com/google/docsy/pull/1523)
     [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1523](https://github.com/google/docsy/pull/1523)
 - [Why are all col classes 'position: relative'? · Bootstrap v4 issue #25254](https://github.com/twbs/bootstrap/issues/25254)
 - [Why flex-shrink 0 for all columns? · Bootstrap discussion #37951](https://github.com/orgs/twbs/discussions/37951)
@@ -165,7 +165,7 @@ imports from
 
 References:
 
-- [\[BSv5\] Fix SCSS functions import issue ... ·](https://github.com/google/docsy/pull/1388)
+- [[BSv5] Fix SCSS functions import issue ... ·](https://github.com/google/docsy/pull/1388)
   [Docsy PR](https://github.com/google/docsy/pull/1367)
   [#1388](https://github.com/google/docsy/pull/1388)
 - [New \_maps.scss](https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss)
@@ -227,7 +227,7 @@ Docsy house cleaning. For details concerning both breaking and non-breaking
 Docsy-specific changes, consult the
 [changelog](https://github.com/google/docsy/blob/main/CHANGELOG.md#070). In
 particular, one non-breaking but important change to be aware of is:
-[\[BSv5\] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
+[[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
 
 ## Give it a try!
 
