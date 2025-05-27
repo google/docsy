@@ -1919,18 +1919,6 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:30.862657-05:00"
   },
-  "https://img.shields.io/github/contributors/google/docsy": {
-    "StatusCode": 200,
-    "LastSeen": "2024-11-06T12:03:46.301185-05:00"
-  },
-  "https://img.shields.io/github/license/google/docsy": {
-    "StatusCode": 200,
-    "LastSeen": "2024-11-06T12:03:51.380092-05:00"
-  },
-  "https://img.shields.io/github/release/google/docsy": {
-    "StatusCode": 200,
-    "LastSeen": "2024-11-06T12:03:25.800371-05:00"
-  },
   "https://in-toto.io": {
     "StatusCode": 206,
     "LastSeen": "2024-12-12T10:10:52.769146-05:00"
@@ -2487,10 +2475,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:37.890382-04:00"
   },
-  "https://www.netlify.com": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:03:04.805936-05:00"
-  },
   "https://www.netlify.com/": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:41.203421-05:00"
@@ -2518,14 +2502,6 @@
   "https://www.npmjs.com/package/rtlcss": {
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:36.538411-04:00"
-  },
-  "https://www.repostatus.org/#active": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:03:15.045534-05:00"
-  },
-  "https://www.repostatus.org/badges/latest/active.svg": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:03:20.404752-05:00"
   },
   "https://www.selenium.dev/": {
     "StatusCode": 206,
