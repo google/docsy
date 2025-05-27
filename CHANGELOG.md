@@ -67,7 +67,7 @@ For the full list of changes, see the [0.12.0] release notes.
 - **Blog** section index page content and title used to be ignored, they are now
   displayed ([#1787]). To recover the old behavior use the following style
   override: `.td-section.td-blog .td-content { display: none; }`.
-- Adds a `comment` shortcode, as a drop-in replacement for the on removed from
+- Adds a `comment` shortcode, as a drop-in replacement for the one removed from
   Hugo.
 
 [0.12.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.12.0
