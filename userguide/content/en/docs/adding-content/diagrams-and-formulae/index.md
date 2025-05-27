@@ -75,7 +75,7 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Attention" color="warning" %}} In order to display mathematical
+{{% alert title="Warning" color="warning" %}} In order to display mathematical
 formulae and/or chemical equations in your page(s), you need to run Hugo version
 0.141.0 or above. With older Hugo versions, an error is thrown. {{% /alert %}}
 
@@ -86,9 +86,9 @@ typesetting system. {{% /alert %}}
 
 ### \\(\\LaTeX\\) typesetting using standard syntax
 
-As of Hugo v0.122, \(\LaTeX\) you can enable typesetting in Markdown using the
-standard syntax. To do so, you need to use of the goldmark `passthrough`
-extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
+As of Hugo v0.122, you can enable \(\LaTeX\) typesetting in Markdown using the
+standard syntax. To do so, use the goldmark `passthrough` extension inside your
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
