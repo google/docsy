@@ -1,0 +1,4 @@
+// Override active link color
+.is-active-link::before {
+	background-color: $primary !important;
+}
