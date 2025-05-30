@@ -1,0 +1,5 @@
+// Used to customize right-hand sidebar when using Tocbot
+// Override active link color
+.is-active-link::before {
+	background-color: $primary !important;
+}

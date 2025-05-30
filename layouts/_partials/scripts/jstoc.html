@@ -1,0 +1,45 @@
+{{ $version := .Site.Params.jstoc.version | default "4.34.0" -}}
+{{ $hash := .Site.Params.jstoc.hash | default "sha512-EMZRx2Hno6csUwgZoOMjyKDp1UdNRrCQH0R97VEPYynqgSUrRItJn73HnRUwqujCat2/Zg731UEw+7xDXAL1ag==" -}}
+{{ $css_hash := .Site.Params.jstoc.css_hash | default "sha512-4q0OX9NAYcRTFEfy9nTK0AV9N7MxM665neDXEW3CjAj1pXc6+8Bcd6ryXl6cY8mTBBXt0aXepnSDLLQZSuJRww==" -}}
+{{ $css_url := printf "https://cdnjs.cloudflare.com/ajax/libs/tocbot/%s/tocbot.min.css" $version -}}
+{{ $cdn_url := printf "https://cdnjs.cloudflare.com/ajax/libs/tocbot/%s/tocbot.min.js" $version -}}
+
+{{ with try (resources.GetRemote $css_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Tocbot css file from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "css/tocbot.min.css" ) . }}
+      {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer">
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid Tocbot version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+{{ with try (resources.GetRemote $cdn_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Tocbot script from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "js/tocbot.min.js" ) . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+<script src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid Tocbot version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+<!-- Initialize tocbot -->
+<script type="text/javascript">
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.td-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.td-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: '{{ with .Site.Params.jstoc.custom_headings }}{{ . }}{{ else }}h2, h3, h4{{ end }}',
+        // ignore headings that are hidden in DOM
+        ignoreHiddenElements: true
+    });
+</script>
