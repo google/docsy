@@ -89,11 +89,10 @@ The following shows you how to install Hugo from the release page:
 Install Hugo using
 [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
 
-#### As an NPM module
+#### Hugo-extended NPM package {#hugo-extended-npm}
 
 You can install Hugo as an NPM module using
-[hugo-extended](https://www.npmjs.com/package/hugo-extended). To install the
-extended version of Hugo:
+[hugo-extended](https://www.npmjs.com/package/hugo-extended):
 
 ```sh
 npm install hugo-extended --save-dev
@@ -263,14 +262,23 @@ You can use Docsy as an NPM module as follows:
     echo "theme: docsy\nthemesDir: node_modules" >> hugo.yaml
     ```
 
-2.  Install Docsy, and postCSS (as [instructed earlier](#install-postcss)):
+2.  Install Docsy, and postCSS as [instructed earlier](#install-postcss):
 
     ```console
     npm init -y
-    npm install --save-dev google/docsy#semver:{{% param version %}} autoprefixer postcss-cli
+    npm install --save-dev autoprefixer postcss-cli
+    npm install --save-dev google/docsy#semver:{{% param version %}} --omit=peer
     ```
 
-    > **Important**: read the [Docsy NPM install side-effect] note.
+    {{% alert title="Hugo-module compatibility" color="warning" %}} Installing
+    Docsy using NPM creates an empty `github.com` sibling folder. For details,
+    see [Docsy NPM install side-effect](#docsy-npm-install-side-effect). {{%
+    /alert %}}
+
+    {{% alert title="Hugo install tip" color="info" %}} You can install Docsy's
+    officially supported version of [Hugo using NPM](#hugo-extended-npm) at the
+    same time as Docsy. Just omit the `--omit` flag from the command above. {{%
+    /alert %}}
 
 3.  Build or serve your new site using the usual Hugo commands, specifying the
     path to the Docsy theme files. For example, build your site as follows:
