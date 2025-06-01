@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 weight: 99999
 # prettier-ignore
-cSpell:ignore: deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
+cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -73,6 +73,11 @@ See [semver].
 - [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy
   ([#2366]).
 - [Section sidebar root][0.13.0-blog-sidebar] feature ([#2364]).
+- **Server side rendering of mathematical formulae**: we now use Hugo's embedded
+  KaTeX engine for rendering mathematical formulae and chemical equations. The
+  engine is auto-activated as soon as mathematical formulae or chemical
+  equations are encountered. There is no need to activate or configure KaTeX any
+  more.
 
 **Other changes**:
 
@@ -456,7 +461,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
   `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
-  `chem` blocks via KateX and mhchem. Support for formula rendering activation
+  `chem` blocks via KaTeX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
 
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0
