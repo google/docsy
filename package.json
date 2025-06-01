@@ -54,8 +54,7 @@
     }
   },
   "engines": {
-    "node": ">=22",
-    "npm": ">=11"
+    "node": ">=22"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark twbs netlify pkgs userguide -"
 }
