@@ -2,15 +2,13 @@
 title: Diagrams and Formulae
 weight: 11
 description: Add generated diagrams and scientific formulae to your site.
-math: true
-chem: true
 ---
 
 Docsy has built-in support for a number of diagram creation and typesetting
 tools you can use to add rich content to your site, including \(\KaTeX\),
 Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
-## \\(\\LaTeX\\) support with \\(\\KaTeX\\)
+## LaTeX support with KaTeX
 
 [\(\LaTeX\)](https://www.latex-project.org/) is a high-quality typesetting
 system for the production of technical and scientific documentation. Due to its
@@ -21,13 +19,13 @@ written by Donald Knuth, the initial version was released in 1978. Dating back
 that far, \(\LaTeX\) has `pdf` as its primary output target and is not
 particularly well suited for producing HTML output for the Web. Fortunately,
 with [\(\KaTeX\)](https://katex.org/) there exists a fast and easy-to-use
-JavaScript library for \(\TeX\) math rendering on the web, which was integrated
-into the Docsy theme.
+JavaScript library for \(\TeX\) math rendering on the web, which is embedded
+into Hugo as of Hugo version v0.132.0.
 
-With \(\KaTeX\) support [enabled](#activating-and-configuring-katex-support) in
-Docsy, you can include complex mathematical formulae into your web page, either
-inline or centred on its own line. Since \(\KaTeX\) relies on server side
-rendering, it produces the same output regardless of your browser or your
+With \(\KaTeX\) support [enabled](#activating-katex-support) in Docsy, you can
+include complex mathematical formulae into your web page, either inline or
+centred on its own line. Since Docsy theme exploits server side rendering of
+formulae, the same output is produced, regardless of your browser or your
 environment. Formulae can be shown either inline or in display mode:
 
 ### Inline formulae
@@ -75,20 +73,19 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Warning" color="warning" %}} In order to display mathematical
-formulae and/or chemical equations in your page(s), you need to run Hugo version
-0.141.0 or above. With older Hugo versions, an error is thrown. {{% /alert %}}
-
 {{% alert title="Tip" %}} This
 [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth
 information about typesetting mathematical formulae using the \(\LaTeX\)
 typesetting system. {{% /alert %}}
 
-### \\(\\LaTeX\\) typesetting using standard syntax
+### Activating KaTeX support
 
-As of Hugo v0.122, you can enable \(\LaTeX\) typesetting in Markdown using the
-standard syntax. To do so, use the goldmark `passthrough` extension inside your
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
+As of Docsy version v0.12.0, the theme uses Hugo's embedded instance of the
+KaTeX display engine to render mathematical markup to HTML. To enable \(\LaTeX\)
+typesetting in Markdown, you have to enable and configure the goldmark
+`passthrough` extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`. You can
+edit this definition to meet your own needs. For details, see the official
+[Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -147,222 +144,9 @@ markup:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-You can edit this definition to meet your own needs. For details, see the
-official [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
-
-### Activating and configuring \\(\\KaTeX\\) support
-
-#### Auto activation
-
-As soon as you use a `math` code block on your page, support of \(\KaTeX\) is
-automatically enabled.
-
-#### Manual activation (use of standard syntax, no `math` code block present)
-
-If you want to use formulae (block or inline) and don't have a `math` code block
-present in your page which triggers auto activation, you need to manually
-activate \(\KaTeX\) support. The easiest way to do so is to add a `math`
-attribute to the frontmatter of your page and set it to `true`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Page front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
-math = true
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-math: true
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
-{
-  "math": true
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-
-If you use formulae in most of your pages, you can also enable sitewide
-\(\KaTeX\) support inside the Docsy theme. To do so update
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.katex]
-enable = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  katex:
-    enable: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "katex": {
-      "enable": true
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-
-By default, Docsy pulls in the latest officially released version of \(\KaTeX\)
-/ mhchem extension at build time. If that doesn't fit your needs, you can
-specify the \(\KaTeX\) version you want in your configuration file
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.katex]
-version = "0.16.22"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  katex:
-    version: 0.16.22
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "katex": {
-      "version": "0.16.22"
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.katex]
-# enable/disable KaTeX support
-enable = true
-# Element(s) scanned by auto render extension. Default: document.body
-html_dom_element = "document.body"
-
-[params.katex.options]
-# If true (the default), KaTeX will throw a ParseError when it encounters an
-# unsupported command or invalid LaTeX. If false, KaTeX will render unsupported
-# commands as text, and render invalid LaTeX as its source code with hover text
-# giving the error, in the color given by errorColor.
-throwOnError = false
-errorColor = "#CD5C5C"
-
-# This is a list of delimiters to look for math, processed in the same order as
-# the list. Each delimiter has three properties:
-#   left:    A string which starts the math expression (i.e. the left delimiter).
-#   right:   A string which ends the math expression (i.e. the right delimiter).
-#   display: Whether math in the expression should be rendered in display mode.
-[[params.katex.options.delimiters]]
-  left = "$$"
-  right = "$$"
-  display = true
-[[params.katex.options.delimiters]]
-  left = "$"
-  right = "$"
-  display = false
-[[params.katex.options.delimiters]]
-  left = "\\("
-  right = "\\)"
-  display = false
-[[params.katex.options.delimiters]]
-  left = "\\["
-  right = "\\]"
-  display = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  katex:
-    enable: true  # enable/disable KaTeX support
-    html_dom_element: document.body  # Element(s) scanned by auto render extension. Default: document.body
-    options:
-
-      # If true (the default), KaTeX will throw a ParseError when it encounters an
-      # unsupported command or invalid LaTeX. If false, KaTeX will render unsupported
-      # commands as text, and render invalid LaTeX as its source code with hover text
-      # giving the error, in the color given by errorColor.
-      throwOnError: false
-      errorColor: '#CD5C5C'
-
-      # This is a list of delimiters to look for math, processed in the same order as
-      # the list. Each delimiter has three properties:
-      #   left:    A string which starts the math expression (i.e. the left delimiter).
-      #   right:   A string which ends the math expression (i.e. the right delimiter).
-      #   display: Whether math in the expression should be rendered in display mode.
-      delimiters:
-        - left: $$
-          right: $$
-          display: true
-        - left: $
-          right: $
-          display: false
-        - left: \(
-          right: \)
-          display: false
-        - left: \[
-          right: \]
-          display: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "katex": {
-      "enable": true,
-      "html_dom_element": "document.body",
-      "options": {
-        "throwOnError": false,
-        "errorColor": "#CD5C5C",
-        "delimiters": [
-          {
-            "left": "$$",
-            "right": "$$",
-            "display": true
-          },
-          {
-            "left": "$",
-            "right": "$",
-            "display": false
-          },
-          {
-            "left": "\\(",
-            "right": "\\)",
-            "display": false
-          },
-          {
-            "left": "\\[",
-            "right": "\\]",
-            "display": true
-          }
-        ]
-      }
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-
-{{% alert title="Note" %}} If you define custom delimiters, please make sure
-they match with the delimiters defined
-[above](#latex-typesetting-using-standard-syntax) as passthrough extension.
-{{% /alert %}}
-
-For a complete list of options and their detailed description, have a look at
-the documentation of \({\KaTeX}'s\)
-[Rendering API options](https://katex.org/docs/autorender.html#api) and of
-\({\KaTeX}'s\) [configuration options](https://katex.org/docs/options.html).
+With the `passthrough` extension enabled support of \(\KaTeX\) is automatically
+enabled as soon as you author a `math` code block on your page or make use of
+one of the passthrough delimiters defined above, .
 
 ### Display of Chemical Equations and Physical Units
 
@@ -370,12 +154,12 @@ the documentation of \({\KaTeX}'s\)
 typesetting chemical molecular formulae and equations. Fortunately, \(\KaTeX\)
 provides the `mhchem`
 [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes
-the `mhchem` package accessible when authoring content for the web. With
-`mhchem` extension
-[enabled](#activating-rendering-support-for-chemical-equations), you can easily
-include chemical equations into your page. An equation can be shown either
-inline or can reside on its own line. The following code sample produces a text
-line including a chemical equation:
+the `mhchem` package accessible when authoring content for the web. Fortunately,
+as of hugo version v0.144.0, the `mhchem` extension is enabled in Hugo's
+embedded KaTeX instance by default, therefore you can easily include chemical
+equations into your page. An equation can be shown either inline or can reside
+on its own line. The following code sample produces a text line including a
+chemical equation:
 
 ```mhchem
 *Precipitation of barium sulfate:* \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)
@@ -437,77 +221,6 @@ their corresponding physical units:
 For a complete list of options when authoring physical units, have a look at the
 [section](https://mhchem.github.io/MathJax-mhchem/#pu) on physical units in the
 `mhchem` documentation.
-
-#### Activating rendering support for chemical equations
-
-##### Auto activation
-
-As soon as you use a `chem` code block on your page, rendering support for
-chemical equations is automatically enabled.
-
-##### Manual activation (use of standard syntax, no `chem` code block present)
-
-If you want to use chemical formulae inline and don't have a `chem` code block
-present in your page which triggers auto activation, you need to manually
-activate rendering support for chemical formulae. The easiest way to do so is to
-add a `chem` attribute to the frontmatter of your page and set it to `true`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Page front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
-chem = true
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-chem: true
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
-{
-  "chem": true
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-
-If you use formulae in most of your pages, you can also enable sitewide
-rendering support for chemical formulae inside the Docsy theme. To do so, enable
-`mhchem` inside your `hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.katex]
-enable = true
-
-[params.katex.mhchem]
-enable = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  katex:
-    enable: true
-    mhchem:
-      enable: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "katex": {
-      "enable": true,
-      "mhchem": {
-        "enable": true
-      }
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
 
 ## Diagrams with Mermaid
 

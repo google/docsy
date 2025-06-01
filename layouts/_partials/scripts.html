@@ -1,6 +1,3 @@
-{{ $needKaTeX  := or .Params.math .Site.Params.katex.enable .Params.chem .Site.Params.chem (.Page.Store.Get "hasKaTeX") (.Page.Store.Get "hasmhchem") -}}
-{{ $needmhchem := or .Params.chem .Site.Params.katex.mhchem.enable (.Page.Store.Get "hasmhchem") -}}
-
 {{ if .Site.Params.markmap.enable -}}
 <style>
 .markmap > svg {
@@ -26,8 +23,9 @@ window.markmap = {
   <script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end -}}
 
-{{ if $needKaTeX -}}
-  {{ partial "scripts/katex.html" (dict "mhchem" $needmhchem) -}}
+{{ $noop := .WordCount }}
+{{ if (or (.Page.Store.Get "hasMath") .Params.math .Site.Params.katex.enable) -}}
+  {{ partial "scripts/katex.html" . -}}
 {{ end -}}
 
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
