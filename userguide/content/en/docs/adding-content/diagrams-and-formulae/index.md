@@ -81,10 +81,62 @@ typesetting system. {{% /alert %}}
 ### Activating KaTeX support
 
 As of Docsy version v0.12.0, the theme uses Hugo's embedded instance of the
-KaTeX display engine to render mathematical markup to HTML. To enable \(\LaTeX\)
-typesetting in Markdown, you have to enable and configure the goldmark
-`passthrough` extension inside your `hugo.toml`/`hugo.yaml`/`hugo.json`. You can
-edit this definition to meet your own needs. For details, see the official
+KaTeX display engine to render mathematical markup to HTML at build time.\
+To enable \(\LaTeX\) typesetting in Markdown, perform the three following steps
+described below:
+
+#### Create media types for KaTeX fonts
+
+KaTeX brings its own font files for rendering mathematical formulae. In order to
+enable the download of these font files locally during build time, two
+additional
+[media types](https://gohugo.io/configuration/media-types/#create-a-media-type)
+have to be created by adding the lines below to your
+`hugo.toml`/`hugo.yaml`/`hugo.json` configuration file:
+
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Site configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[mediaTypes]
+  [mediaTypes.'font/woff']
+    suffixes = ['woff']
+  [mediaTypes.'font/woff2']
+    suffixes = ['woff2']
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+mediaTypes:
+  font/woff:
+    suffixes:
+    - woff
+  font/woff2:
+    suffixes:
+    - woff2
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+   "mediaTypes": {
+      "font/woff": {
+         "suffixes": [
+            "woff"
+         ]
+      },
+     "font/woff2": {
+         "suffixes": [
+            "woff2"
+         ]
+      }
+   }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+
+#### Enable `passthrough` extension
+
+First you have to enable and configure the goldmark `passthrough` extension
+inside your `hugo.toml`/`hugo.yaml`/`hugo.json`. You can edit this definition to
+meet your own needs. For details, see the official
 [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
 <!-- prettier-ignore-start -->
@@ -144,9 +196,22 @@ markup:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-With the `passthrough` extension enabled support of \(\KaTeX\) is automatically
-enabled as soon as you author a `math` code block on your page or make use of
-one of the passthrough delimiters defined above, .
+#### Add `passthrough` render hook
+
+Docsy uses Hugo's `render-passthrough`
+[hook](https://gohugo.io/render-hooks/passthrough/) when generating of math
+equations at build-time.\
+To enable this hook in your project, add a new local hook file
+`layouts/_markup/render-passthrough.html` in your project site. The content of
+this file has to be one single line only:
+
+{{< card code=true header="**layouts/_markup/render-passthrough.html**" lang="go-html-template" highlight="linenos=inline,lineNoStart=1" >}}{{ partial "scripts/math.html" . }}
+{{< /card >}} <br>
+
+With the `passthrough` extension enabled and the render hook in place, support
+of \(\KaTeX\) is automatically enabled when you author a `math` code block on
+your page or when you add a mathematical formulae to your page using one of the
+passthrough delimiter pairs defined above.
 
 ### Display of Chemical Equations and Physical Units
 
@@ -154,12 +219,12 @@ one of the passthrough delimiters defined above, .
 typesetting chemical molecular formulae and equations. Fortunately, \(\KaTeX\)
 provides the `mhchem`
 [extension](https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem) that makes
-the `mhchem` package accessible when authoring content for the web. Fortunately,
-as of hugo version v0.144.0, the `mhchem` extension is enabled in Hugo's
-embedded KaTeX instance by default, therefore you can easily include chemical
-equations into your page. An equation can be shown either inline or can reside
-on its own line. The following code sample produces a text line including a
-chemical equation:
+the `mhchem` package accessible when authoring content for the web. As of hugo
+version v0.144.0, the `mhchem` extension is enabled in Hugo's embedded KaTeX
+instance by default, therefore you can easily include chemical equations into
+your page. An equation can be shown either inline or can reside on its own line.
+The following code sample produces a text line including an inline chemical
+equation:
 
 ```mhchem
 *Precipitation of barium sulfate:* \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)

@@ -148,4 +148,12 @@ module:
     - source: ../CONTRIBUTING.md
       target: content/project/contributing.md
 
+mediaTypes:
+  font/woff:
+    suffixes:
+    - woff
+  font/woff2:
+    suffixes:
+    - woff2
+
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime userguide
