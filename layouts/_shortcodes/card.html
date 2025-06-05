@@ -31,7 +31,7 @@
     {{ end -}}
     {{ with $.Inner -}}
       {{ if $code -}}
-        {{ highlight . $lang $highlight -}}
+        {{ highlight ( . | strings.TrimSpace ) $lang $highlight -}}
       {{ else -}}
       <p class="card-text">
         {{ . -}}
