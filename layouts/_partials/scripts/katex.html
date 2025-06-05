@@ -1,18 +1,49 @@
-{{/* load stylesheet for KaTeX support */ -}}
+{{/* stylesheet */ -}}
 
 {{ $version := .Site.Params.katex.version | default "latest" -}}
-
-{{ $katex_css_url := printf "https://cdn.jsdelivr.net/npm/katex@%s/dist/katex%s.css" $version (cond hugo.IsProduction ".min" "") -}}
-
-{{ with try (resources.GetRemote $katex_css_url) -}}
+{{ $cssFile := cond hugo.IsProduction "katex.min.css" "katex.css" -}}
+{{ $cssUrl := printf "https://unpkg.com/katex@%s/dist/%s" $version $cssFile -}}
+{{ with try (resources.GetRemote $cssUrl) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
-  {{ else with.Value -}}
-    {{ with resources.Copy (printf "css/katex%s.css" (cond hugo.IsProduction ".min" "")) . }}
-      {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
+  {{ else with .Value -}}
+    {{ with resources.Copy (printf "css/%s" $cssFile) . -}}
+      {{ $cssHash := . | fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous">
     {{ end -}}
   {{ end -}}
 {{ else -}}
   {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+{{/* font files */ -}}
+
+{{ $fontFiles := slice -}}
+{{ $data := dict -}}
+{{ $url := ( printf "https://unpkg.com/katex@%s/dist/fonts?meta" $version ) -}}
+{{ with try (resources.GetRemote $url) -}}
+  {{ with .Err -}}
+    {{ errorf "%s" . -}}
+  {{ else with ( .Value | unmarshal ) -}}
+      {{ range .files -}}
+        {{ $fontFiles = $fontFiles | append .path -}}
+      {{ end -}}
+  {{ else -}}
+    {{ errorf "Unable to get remote resource %q" $url -}}
+  {{ end -}}
+{{ end -}}
+
+{{ range $fontFile := $fontFiles -}}
+  {{ $fontUrl := (printf "https://unpkg.com/katex@%s%s" $version $fontFile) -}}
+  {{ with try (resources.GetRemote $fontUrl) -}}
+    {{ with .Err -}}
+      {{ errorf "Could not retrieve KaTeX font file from CDN. Reason: %s." . -}}
+    {{ else with .Value -}}
+      {{ with resources.Copy (printf "css/fonts/%s" (replace $fontFile "/dist/fonts/" "")) . -}}
+        {{ .Publish -}}
+      {{ end -}}
+    {{ end -}}
+  {{ else -}}
+    {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
+  {{ end -}}
 {{ end -}}

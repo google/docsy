@@ -24,7 +24,7 @@ window.markmap = {
 {{ end -}}
 
 {{ $noop := .WordCount }}
-{{ if (or (.Page.Store.Get "hasMath") .Params.math .Site.Params.katex.enable) -}}
+{{ if .Page.Store.Get "hasMath" -}}
   {{ partial "scripts/katex.html" . -}}
 {{ end -}}
 
