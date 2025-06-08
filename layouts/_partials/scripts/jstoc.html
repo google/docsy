@@ -1,14 +1,13 @@
-{{ $version := .Site.Params.jstoc.version | default "4.34.0" -}}
-{{ $hash := .Site.Params.jstoc.hash | default "sha512-EMZRx2Hno6csUwgZoOMjyKDp1UdNRrCQH0R97VEPYynqgSUrRItJn73HnRUwqujCat2/Zg731UEw+7xDXAL1ag==" -}}
-{{ $css_hash := .Site.Params.jstoc.css_hash | default "sha512-4q0OX9NAYcRTFEfy9nTK0AV9N7MxM665neDXEW3CjAj1pXc6+8Bcd6ryXl6cY8mTBBXt0aXepnSDLLQZSuJRww==" -}}
-{{ $css_url := printf "https://cdnjs.cloudflare.com/ajax/libs/tocbot/%s/tocbot.min.css" $version -}}
-{{ $cdn_url := printf "https://cdnjs.cloudflare.com/ajax/libs/tocbot/%s/tocbot.min.js" $version -}}
+{{ $version := .Site.Params.jstoc.version | default "latest" -}}
+
+{{ $css_url := printf "https://cdn.jsdelivr.net/npm/tocbot@%s/dist/tocbot%s.css" $version (cond hugo.IsProduction ".min" "") -}}
+{{ $cdn_url := printf "https://cdn.jsdelivr.net/npm/tocbot@%s/dist/tocbot%s.js" $version (cond hugo.IsProduction ".min" "") -}}
 
 {{ with try (resources.GetRemote $css_url) -}}
   {{ with .Err -}}
     {{ errorf "Could not retrieve Tocbot css file from CDN. Reason: %s." . -}}
   {{ else with.Value -}}
-    {{ with resources.Copy (printf "css/tocbot.min.css" ) . }}
+    {{ with resources.Copy (printf "css/tocbotx%s.css" (cond hugo.IsProduction ".min" "")) . }}
       {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
 <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer">
     {{ end -}}
@@ -21,7 +20,7 @@
   {{ with .Err -}}
     {{ errorf "Could not retrieve Tocbot script from CDN. Reason: %s." . -}}
   {{ else with.Value -}}
-    {{ with resources.Copy (printf "js/tocbot.min.js" ) . }}
+    {{ with resources.Copy (printf "js/tocbot%s.js" (cond hugo.IsProduction ".min" "")) . }}
       {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{ end -}}
