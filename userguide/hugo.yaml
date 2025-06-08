@@ -33,6 +33,8 @@ languages:
       description: Docsy does docs
 
 markup:
+  tableOfContents:
+    endLevel: 4
   goldmark:
     parser:
       attribute:

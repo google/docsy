@@ -669,10 +669,18 @@ int main(void)
 
 This code translates to the card shown below:
 
-{{< card code=true header="**C**" lang="C" highlight="" >}} #include <stdio.h>
+<!-- prettier-ignore-start -->
+{{< card code=true header="**C**" lang="C" highlight="" >}}
+#include <stdio.h>
 #include <stdlib.h>
 
-int main(void) { puts("Hello World!"); return EXIT_SUCCESS; } {{< /card >}}
+int main(void)
+{
+  puts("Hello World!");
+  return EXIT_SUCCESS;
+}
+{{< /card >}}
+<!-- prettier-ignore-end -->
 
 <br/>If called with parameter `code=true`, the `card` shortcode can optionally
 hold the named parameters `lang` and/or `highlight`. The values of these
