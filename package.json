@@ -6,6 +6,7 @@
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "scripts": {
+    "_build": "npm run cd:docs -- _build",
     "_cd:docs": "cd userguide &&",
     "_check:format": "npx prettier --check *.md",
     "_commit:public": "npm run cd:docs -- _commit:public",

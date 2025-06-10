@@ -54,7 +54,7 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
    If you don't want your site to be indexed by search engines, you can add an environment flag to your build command to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
 1. Click **Deploy site**.
 
-{{% alert title="Note" color="primary" %}}
+{{% alert title="Note" %}}
 Netlify uses your site repo's `package.json` file to install any JavaScript dependencies (like `postcss`) before building your site. If you haven't just copied our example site's version of this file, make sure that you've specified all our [prerequisites](/docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss).
 
 For example, if you want to use a version of `postcss-cli` later than version 8.0.0, you need to ensure that your `package.json` also specifies `postcss` separately:
@@ -81,7 +81,7 @@ The Docsy example site repo provides a [workflow file](https://github.com/google
 
 Before deploying on GitHub Pages, make sure that you've pushed your site source to your chosen GitHub repo, following any setup instructions in [Using the theme](/docs/get-started/docsy-as-module).
 
-{{% alert title="Correct baseURL setting" color="primary" %}}
+{{% alert title="Correct baseURL setting" %}}
 Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
 {{% /alert %}}
 
@@ -273,11 +273,11 @@ deployment:
 
 For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
 
-{{% alert title="Automated deployment with GitHub actions" color="primary" %}}
+{{% alert title="Automated deployment with GitHub actions" %}}
 If the source of your site lives in a GitHub repository, you can use [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
 {{% /alert %}}
 
-{{% alert title="Handling aliases" color="primary" %}}
+{{% alert title="Handling aliases" %}}
 If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
 {{% /alert %}}
 

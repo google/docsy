@@ -871,7 +871,7 @@ Hover over the image below and click edit to instantly start working with it.
 Clicking the `Save` button will cause the edited diagram to be exported using
 the same filename and filetype, and downloaded to your browser.
 
-{{%alert title="Note"  color="primary" %}} If you're creating a new diagram, be
+{{%alert title="Note" %}} If you're creating a new diagram, be
 sure to `File -> Export` in either `svg` or `png` format (`svg` is usually the
 best choice) and ensure the `Include a copy of my diagram` is selected so it can
 be edited again later. {{%/alert%}}
