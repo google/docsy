@@ -8,7 +8,7 @@
       {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
     {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve mhchem extension %q from CDN. Reason: invalid KaTeX version %q." $mhchem_url $.version -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." .version -}}
 {{ end -}}
