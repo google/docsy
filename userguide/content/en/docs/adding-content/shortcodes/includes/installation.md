@@ -1,7 +1,7 @@
 **Installation**
 
-{{% alert title="Note" color="primary" %}} Check system compatibility before
-proceeding. {{% /alert %}}
+{{% alert title="Note" %}} Check system compatibility before proceeding.
+{{% /alert %}}
 
 1.  Download the installation files.
 

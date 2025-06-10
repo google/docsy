@@ -53,7 +53,7 @@ googleAnalytics][alias-discussion].
 
 {{% /alert %}}
 
-{{% alert title="Production-only feature!" color="primary" %}}
+{{% alert title="Production-only feature!" %}}
 
 Analytics are enabled _only_ for **production** builds (called "environments" in
 Hugo terminology). For information about Hugo environments and how to set them,
