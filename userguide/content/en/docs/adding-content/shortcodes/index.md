@@ -215,6 +215,16 @@ accordingly. For example:
 
 This renders as:
 
+{{< comment >}}
+
+<!--
+IMPORTANT: the following lone opening div tag prevents the mis-formatted alert example below from breaking all the rest of the page. DO NOT remove it.
+-->
+
+{{< /comment >}}
+
+<div class="td-max-width-on-larger-screens">
+
 <!-- prettier-ignore -->
 - The following note is part of this list item:
   {{% alert title="Celebrate!" color=success %}}
