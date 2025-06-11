@@ -9,7 +9,6 @@ resources:
     params:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
 params:
-  greeting: '**Hello**, world!'
   message: Some _message_.
 cSpell:ignore: pageinfo Bjørn Pedersen
 ---
@@ -176,28 +175,32 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 ### alert
 
 Use the **alert** shortcode to display notices and warnings. The shortcode
-renders a [Bootstrap alert][]. It can be used with Markdown content and contain
-other shortcodes. For example:
+renders a [Bootstrap alert][bs-alert]. It can be used with Markdown content and
+contain other shortcodes. For example:
 
 ```go-html-template
-{{%/* alert title="Welcome" */%}} {{%/* param greeting */%}} {{%/* /alert */%}}
+{{%/* alert title="Welcome" */%}} **Hello**, world! {{%/* /alert */%}}
 ```
 
-With the `greeting` param defined as `{{% param greeting %}}`, this renders as:
+Renders as:
 
-{{% alert title="Welcome" %}} {{% param greeting %}} {{% /alert %}}
+{{% alert title="Welcome" %}} **Hello**, world! {{% /alert %}}
 
 Parameters:
 
-- `title` (optional) Renders as a Bootstrap alert heading, at heading level 4,
-  using the `h4` Bootstrap class over a `<div>` element. This prevents the title
-  from appearing in a page's table of contents.
-- `color` (optional) names one of the [Bootstrap alert][] variants: `primary`,
-  `info`, `warning`, etc.
+- `title` (optional): Use this to specify a title for your alert. The title
+  renders as a Bootstrap [alert heading][bs-alert], at heading level 4, using
+  the `h4` Bootstrap class over a `<div>` element. This prevents the title from
+  appearing in a page's table of contents.
+- `color` (optional): Use this parameter to specify one of Bootstrap's
+  predefined [alert variants][bs-alert], each of which has their own color.
+  These include `primary`, `info`, and `warning`.
 
-**Important!** When the `alert` shortcode is used in Markdown context that
-requires indentation, such as a list, then the alert _content_ must be indented
-accordingly. For example:
+#### Alerts and indentation
+
+When the `alert` shortcode is used in a Markdown context that requires
+indentation, such as a list, then the alert _content_ (whether specified as
+text/Markdown or a shortcode) must be indented accordingly. For example:
 
 ```go-html-template
 - The following note is part of this list item:
@@ -206,10 +209,10 @@ accordingly. For example:
 
   > {{%/* param message */%}}
   {{%/* /alert */%}}
-  More prose.
+  The first list item continues.
 
-- Don't do this, it breaks the alert rendering:
-  {{%/* alert title="Warning" color=warning */%}} **This content appears outside of
+- **Don't put content on the same line** as the opening tag, it breaks rendering:
+  {{%/* alert title="Misformed alert!" color=warning */%}} **This content appears outside of
   the list!** {{%/* /alert */%}}
 ```
 
@@ -232,13 +235,13 @@ IMPORTANT: the following lone opening div tag prevents the mis-formatted alert e
 
   > {{% param message %}}
   {{% /alert %}}
-  More prose.
+  The first list item continues.
 
-- Don't do this, it breaks the alert rendering:
-  {{% alert title="Warning" color=warning %}} **This content appears outside of
+- **Don't put content on the same line** as the opening tag, it breaks rendering:
+  {{% alert title="Misformed alert!" color=warning %}} **This alert content appears outside of
   the list!** {{% /alert %}}
 
-[Bootstrap alert]: https://getbootstrap.com/docs/5.3/components/alerts/
+[bs-alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 
 ### pageinfo
 
