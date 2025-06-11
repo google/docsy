@@ -21,5 +21,10 @@ For details, see https://www.docsy.dev/docs/adding-content/shortcodes/#alert.
 ensures that any Markdown in .Inner will be treated as Markdown. For details,
 see https://spec.commonmark.org/0.31.2/#html-blocks, 7. */ -}}
 
-{{ .Inner -}}
+{{ .Inner }}
+
+{{- /* Do NOT remove this space trimming comment. It ensures that any Markdown
+that _follows_ this shortcode remains correctly indented, in contexts where this
+is necessary. */ -}}
+
 </div>
