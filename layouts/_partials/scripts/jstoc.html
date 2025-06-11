@@ -9,7 +9,7 @@
   {{ else with.Value -}}
     {{ with resources.Copy (printf "css/tocbotx%s.css" (cond hugo.IsProduction ".min" "")) . }}
       {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ $secureCSS.Data.Integrity }}" crossorigin="anonymous" referrerpolicy="no-referrer">
     {{ end -}}
   {{ end -}}
 {{ else -}}
