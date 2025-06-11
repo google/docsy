@@ -8,6 +8,9 @@ resources:
   - src: '**spruce*.jpg'
     params:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
+params:
+  greeting: '**Hello**, world!'
+  message: Some _message_.
 cSpell:ignore: pageinfo Bjørn Pedersen
 ---
 
@@ -172,20 +175,17 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 
 ### alert
 
-Use the **alert** shortcode to display notices or warnings. The shortcode
+Use the **alert** shortcode to display notices and warnings. The shortcode
 renders a [Bootstrap alert][]. It can be used with Markdown content and contain
 other shortcodes. For example:
 
 ```go-html-template
-{{%/* alert title="Warning" color="warning" */%}}
-This is a **warning**.
-{{%/* /alert */%}}
+{{%/* alert title="Welcome" */%}} {{%/* param greeting */%}} {{%/* /alert */%}}
 ```
 
-Renders as:
+With the `greeting` param defined as `{{% param greeting %}}`, this renders as:
 
-{{% alert title="Warning" color="warning" %}} This is a **warning**.
-{{% /alert %}}
+{{% alert title="Welcome" %}} {{% param greeting %}} {{% /alert %}}
 
 Parameters:
 
@@ -200,24 +200,33 @@ requires indentation, such as a list, then the alert _content_ must be indented
 accordingly. For example:
 
 ```go-html-template
-- Item 1
-  {{%/* alert title="Note" color=info */%}}
-  This is properly indented alert content.
+- The following note is part of this list item:
+  {{%/* alert title="Celebrate!" color=success */%}}
+  This alert content is properly rendered.
+
+  > {{%/* param message */%}}
   {{%/* /alert */%}}
-- Don't do this, it won't render correctly:
-  {{%/* alert title="Warning" color=warning */%}} This content is not indented properly. {{%/* /alert */%}}
+  More prose.
+
+- Don't do this, it breaks the alert rendering:
+  {{%/* alert title="Warning" color=warning */%}} **This content appears outside of
+  the list!** {{%/* /alert */%}}
 ```
 
-renders as:
+This renders as:
 
 <!-- prettier-ignore -->
-- Item 1
-  {{% alert title="Note" color=info %}}
-  This is properly indented alert content.
+- The following note is part of this list item:
+  {{% alert title="Celebrate!" color=success %}}
+  This alert content is properly rendered.
+
+  > {{% param message %}}
   {{% /alert %}}
-- Don't do this, it won't render correctly:
-  {{% alert title="Warning" color=warning %}} This content appears outside of
-  the list! {{% /alert %}}
+  More prose.
+
+- Don't do this, it breaks the alert rendering:
+  {{% alert title="Warning" color=warning %}} **This content appears outside of
+  the list!** {{% /alert %}}
 
 [Bootstrap alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 
