@@ -1,0 +1,188 @@
+---
+title: Clockwise
+doc_type: doc
+doc_id: doc-952
+last_edited_date: '2025-05-25'
+last_edited_by: Ryan Laird
+version: '1.0'
+---
+
+<!-- Unsupported block type: image -->
+
+## Mission
+
+GitLab Inc. (collectively with its subsidiaries,“GitLab”, “we”, “our”) is committed to lawful and ethical behavior in all we do and expects members of GitLab’s Board of Directors (“Board”) and officers, employees, and contractors (collectively, “Team Members”) to conduct business ethically, with integrity, and in accordance with all applicable laws and regulations.
+
+GitLab’s culture is based on our VALUES, which are reflected in and reinforced by our Code of Business Conduct and Ethics and various supporting policies, such as our Anti-Fraud Policy and Anti-Retaliation Policy (collectively, “Compliance Standards”). Because GitLab is made up of individuals who are aligned with our VALUES and who are accountable to our customers, shareholders, and each other, we have designed this Ethics and Compliance Program (the “Program”) as an operational framework for our team members. This Program is dedicated to (among other things) making sure GitLab’s Compliance Standards are current, complete, and readily accessible. Team Members are educated on these Compliance Standards, through continuous training, awareness campaigns, required annual reviews and acknowledgments, and additional resources, including #compliance-legal.
+
+While compliance is certainly a company-wide effort, it is as importantly the individual responsibility of each and every GitLab team member. By embracing our Compliance Standards, together we will maintain our good standing and instill our customers and the wider community with confidence when they place their trust in GitLab.
+
+## Compliance Standards, Guidelines & Other Resources
+
+### Policies
+
+Listed below are GitLab’s policies and procedures, as well as guidance and other resources. This list will be updated, as needed, in order for GitLab to address the constantly evolving worldwide regulatory landscape, and partner with GitLab customers to allow them to meet their own regulatory requirements.
+
+- Acceptable Use Policy
+
+- Anti-Corruption Policy
+
+- Anti-Fraud Policy
+
+- Anti-Harassment Policy
+
+- Anti-Retaliation Policy
+
+- Authorization Matrix
+
+- Code of Business Conduct and Ethics
+
+- Corporate Communication Policy
+
+- Employee Privacy Policy
+
+- Entity-Specific Employment Policies
+
+- Events Code of Conduct
+
+- Gifts & Entertainment, Political Activities & Contributions, and Charitable Contributions
+
+- GitLab Federal Code of Ethics
+
+- Insider Trading Policy
+
+- Internal Acceptable Use Policy
+
+- Partner Code of Ethics
+
+- Privacy Statement
+
+- Record Retention Policy
+
+- Record Retention and Disposal Standards
+
+- Related Party Transactions
+
+- SAFE Framework
+
+- Social Media Policy
+
+- Third-Party Risk Management Process
+
+- UK Modern Slavery Act Transparency Statement
+
+- Whistleblower Policies
+
+### Policy Translations
+
+Certain policies are now available here in Dutch, French, and German.
+
+### Guidelines and Other Resources
+
+- Conflicts of Interest Disclosure Form
+
+- Gifts & Entertainment Inquiry Form
+
+- AI Ethics Principles for Product Development
+
+- Data Classification Standards
+
+- Designated Insider Pre-Clearance Process and FAQs
+
+- External Materials Compliance Checklist
+
+- Insider Trading Policy FAQs
+
+- IP Public Materials Guidelines
+
+- GitLab Federal Collaboration Guidelines
+
+- Learning Content Accessibility Guidelines
+
+- Materials Legal Review Process
+
+- Trade Controls relating to Russia, Belarus, and Ukraine - Sales
+
+- FAQ
+
+### Policy Change Management
+
+We anticipate the need for policy amendments and new policies and procedures, as GitLab continues to respond to the ever-evolving laws and regulations that our policies are designed to address. Team members who wish to implement new policies and/or amendments to policies identified here must document all necessary approvals (including DRI and Board, when necessary) using this issue template prior to that policy’s implementation. Using this process allows GitLab to drive consistency across our policies and procedures and maintain approvals in one central location.
+
+## Training
+
+Compliance training is critical to GitLab’s success and the success of its team members. Effective training helps team members achieve a more meaningful understanding of what our Compliance Standards require and puts them in a better position to recognize and escalate (as required) unethical and unlawful behavior when they see it.
+
+All team members are required, as part of their onboarding, to complete compliance training within 30 days of starting at GitLab. This training addresses key compliance topics such as anti-harassment, security, data privacy, and insider training, and must read and acknowledge GitLab’s Code of Business Conduct and Ethics. Laws and regulations are constantly evolving, which is why GitLab also provides annual and refresher training as appropriate. Currently, training is provided through NavexEngage and Level Up. GitLab’s General Security Awareness Training is provided through Proof Point. Additional information about Navex and the courses available there can be found here. The refresher training schedule for the current year is reflected in the GitLab Team Member Calendar.
+
+We recognize that some team members are subject to additional or heightened compliance requirements as a result of their roles and responsibilities or the geographies in which they operate. Depending on these factors, those team members may receive additional training. As an example, team members employed by or working closely with GitLab Federal, our United States public sector entity, must complete a training course titled Government Contracting: Gifts, Gratuities, and Bribery.
+
+## Reporting
+
+We recognize that unlawful and unethical behavior could happen despite our best efforts. We encourage and require team members to promptly report unlawful and unethical behavior, potential or suspected violations of GitLab’s Code of Business Conduct and Ethics or supporting policies, and any other violations described in GitLab’s Whistleblower Policy or any applicable country-specific whistleblower policy, and any concerns involving team member relations. GitLab offers several different ways for team members to report these concerns:
+
+### Reporting Misconduct (Anonymously OR Non-Anonymously)
+
+Team members should use EthicsPoint to report unethical and unlawful behavior, and violations of the Business Code of Conduct and Ethics and policies in support of the Code. Reports can be anonymous or non-anonymous. Reports can be made using the platform online or by using EthicsPoint’s hotline, which is available 24 hours a day, 365 days a year. The toll-free hotline number for the USA is 1-833-756-0853. Direct access phone numbers for other locations can be viewed on the EthicsPoint website by using the country location drop-down menu. In the alternative, misconduct may be reported in any manner described in GitLab’s Whistleblower Policy or applicable country-specific whistleblower policies.
+
+### Reporting Workplace Harassment (Non-Anonymous Only)
+
+Team members who are comfortable doing so may report workplace harassment concerns, non-anonymously, using GitLab’s Harassment Complaint Form. Simply complete and send it to our Team Member Relations Specialists at teammemberrelations@gitlab.com. Read our Anti-Harassment Policy to understand the different shapes that harassment may take and to understand the alternative reporting avenues that are available, such as GitLab’s Chief People Officer, GitLab’s Chief Legal Officer, the Team Member Relations Team, or a People Business Partner.
+
+### Reporting Concerns about Team Member Relations (Anonymously OR Non-Anonymously)
+
+Team members who would like to anonymously report workplace harassment concerns or who would like to, anonymously or non-anonymously, report other concerns involving team member relations should use Lighthouse Services. Topics may vary but could include, for example, wrongful discharge or disciplinary action, discrimination, alcohol and substance abuse, or threats.
+
+Reports can be made using the platform or through the following avenues, which are available 24 hours a day, 365 days a year.
+
+- A toll-free hotline number for the USA and Canada: 833-480-0010.
+
+- Direct access phone numbers for other locations, available here.
+
+- E-mail: reports@lighthouse-services.com (must include company name with report)
+
+- Fax: (215) 689-3885 (must include company name with report)
+
+Team members may, in the alternative, report concerns about team member relations, including violations of GitLab’s Anti-Harassment Policy, to GitLab’s Chief Legal Officer, Chief People Officer, the Team Member Relations Team, or a Business People Partner.
+
+### Manager Roles and Responsibilities
+
+Team members should report misconduct, workplace harassment, and other concerns about team member relations to their manager if they are comfortable doing so. Managers who receive a report (verbal or written) or otherwise become aware of misconduct, workplace harassment, or other concerns, must ensure that the misconduct is immediately reported to the relevant People Business Partner or through one of the reporting avenues described above.
+
+### Investigations
+
+GitLab takes allegations of misconduct very seriously and want an opportunity to resolve them. Reports submitted through any avenue described above will be reviewed promptly and addressed in accordance with GitLab’s Whistleblower Policy and Anti-Retaliation Policy. Potential instances of non-compliance are taken seriously, and unethical behavior and/or violations of GitLab policies may lead to termination of employment.
+
+## Ethics and Compliance Program Charter
+
+### Purpose
+
+The Ethics and Compliance Program is intended to help GitLab team members achieve and maintain a culture of compliance with GitLab’s Code of Business Conduct and Ethics and supporting policies, and all applicable laws and regulations. To accomplish that goal, the Program strives to:
+
+- Promote a culture of compliance and ethical decision-making, consistent with GitLab’s values;
+
+- Ensure that Compliance Standards and avenues for reporting potential instances of non-compliance are widely available to team members and are effectively communicated through training and awareness programs; and,
+
+- Encourage and facilitate appropriate risk assessment, due diligence, and remediation, to deter, detect, and address unlawful, unethical, and discriminatory conduct.
+
+### Program Governance and Responsibilities
+
+### Board of Directors
+
+The GitLab Inc.’s Board of Directors, through its Audit Committee, is responsible for administering the Code of Conduct and for addressing material issues and risks concerning Compliance Standards and applicable laws and regulations.
+
+### Chief Legal Officer
+
+The Audit Committee has delegated day-to-day responsibility for administering and interpreting the Code of Conduct to GitLab’s Chief Legal Officer (“CLO”). The CLO shall reasonably administer the Program and, among other things, will:
+
+- Allocate resources to the Program and delegate authority to its key stakeholders as needed to implement, maintain, and strengthen the Program;
+
+- Ensure that reasonable steps are taken to respond to potentially unlawful behavior and criminal misconduct;
+
+- Ensure that GitLab’s Compliance Standards are reasonably designed to prevent and detect misconduct, are widely available and accessible to team members, and are regularly assessed for potential updates and improvements;
+
+- Maintain awareness and encourage the use of mechanisms for reporting potential instances of non-compliance;
+
+- Collaborate with GitLab’s Internal Audit team and key stakeholders to ensure that the Program is implemented across GitLab, is monitored and assessed periodically for effectiveness, and that findings and observations are used to promote continuous improvement; and,
+
+- Consider recommendations to the Program itself or which are proposed in response to significant risk assessment or audit findings, instances of non-compliance with laws and regulations, or weaknesses in the Program, and shall advise the Audit Committee as needed.

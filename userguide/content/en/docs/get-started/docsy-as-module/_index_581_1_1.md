@@ -1,0 +1,309 @@
+---
+title: "Developer Relations"
+description: "The Developer Relations team supports GitLab's mission by working with our community to ensure they receive support and recognition for contributing to GitLab."
+twitter_image: '/images/tweets/handbook-marketing.png'
+---
+
+<i class="fas fa-bullhorn fa-fw color-orange font-awesome"></i> Welcome to the GitLab Developer Relations Handbook
+{.h1}
+
+## <i class="fa-regular fa-lightbulb"></i> What is DevRel?
+
+Developer Relations (short: DevRel) operates at the intersection of technology, community, and advocacy, serving as the voice and ears of GitLab in the wider tech world. Their core mission revolves around nurturing and sustaining a vibrant, engaged community of developers, contributors, and users. This involves a multifaceted approach that includes creating educational content, organizing events and workshops, developing programs, and providing platforms for knowledge exchange and collaboration. The team not only focuses on promoting GitLab's features and capabilities but also actively listens to and incorporates feedback from the community to inform product development and improvements.
+
+## <i class="far fa-newspaper" id="biz-tech-icons"></i>  Our mission & vision
+
+Developer Relations drives platform awareness and adoption by enabling GitLab customers, connecting through community, and engaging developers where they are. GitLab engages with more than 3000 developers every month on GitLab.com alone, and receives more than 250 contributions every month, giving us a unique level of influence in the DevSecOps space and helping accelerate our innovation. Our ultimate goal is to raise awareness of GitLab and drive customer success by winning the hearts & minds of developers through best-in-class technical enablement and an active community of contributors.
+
+In Developer Relations, we align our mission and vision with the company's [three year strategy](/handbook/company/strategy/). We believe that [everyone can contribute](/handbook/company/mission/#mission). To help GitLab reach this goal, we aim to double outreach and engagement, strengthen our community presence, and support a healthy community of contributors. Ultimately, these goals boost awareness, adoption, and power our [dual flywheels](/handbook/company/strategy/#dual-flywheels).
+
+## <i class="fas fa-map-marked-alt fa-fw color-orange font-awesome"></i> Our Strategy
+
+Our operational strategy is [documented in our internal handbook](https://internal.gitlab.com/handbook/marketing/developer-relations/) but is classified as confidential due to business sensitivity, customer impact, and to foster a psychological safe environment for our team members. Below you can find our strategic plans that are open to the wider community and where the Developer Relations team welcomes collaboration.
+
+- [Contributor Program Unification & Growth Plan](/handbook/marketing/developer-relations/strategic-plans/contributor-program-unification/)
+- [Co-Creation Initiative](/handbook/marketing/developer-relations/cocreation/)
+
+## <i class="fas fa-users fa-fw color-orange font-awesome"></i> Meet the Team
+
+{{< team-by-departments "Developer Relations" >}}
+
+## <i class="fas fa-paper-plane fa-fw color-orange font-awesome"></i> How to reach us
+
+### Chat with us
+
+- Developer Relations team members use three Slack channels:
+  - [#developer-relations](https://gitlab.slack.com/archives/C0R04UMT9): for all GitLab-related discussion (ex: questions about an issue, announcement of an upcoming event)
+  - [#developer-relations-hangout](https://gitlab.slack.com/archives/C01C018V7V3): for all social discussion and updates shared via the Community Catch bot (ex: plumbing problems, weekend plans)
+  - [developer-relations-confidential](https://gitlab.slack.com/archives/C0566B6N2KC): (private) for discussion of confidential topics that cannot be shared in a channel with people from outside GitLab (ex: discussing a topic that was shared in #company-fyi-private among our team)
+- GitLab team members and others with Slack access can reach us by visiting the [`#developer-relations`](https://gitlab.slack.com/messages/developer-relations) Slack channel, or by tagging the `@devrel-team` group handle.
+- Members of the wider GitLab community can connect with us in the [public Discord rooms](https://discord.gg/gitlab)
+
+Teams within Developer Relations are reachable in these Slack channels:
+
+- [#dev-advocacy-team](https://gitlab.slack.com/archives/CMELFQS4B): the [Developer Advocate](/handbook/marketing/developer-relations/developer-advocacy/) team shares content updates, thought leadership & product ideas, and support community responses, CFPs, etc.
+- [#community-programs](https://gitlab.slack.com/archives/C024ZBWK5KJ): for all inquiries regarding [GitLab Community Programs](/handbook/marketing/developer-relations/community-programs/) (EDU/OSS/Startups)
+- [#contributor-success](https://gitlab.slack.com/archives/C02R0NE6P6C): for all inquiries regarding [Contributor Success](/handbook/marketing/developer-relations/contributor-success/)
+
+### Email us
+
+- Please use the [e-mail address specific to each program](/handbook/marketing/developer-relations/program-resources/#contact-e-mails)
+
+### File an issue
+
+- File an issue to work with us: [See our project management section](/handbook/marketing/developer-relations/project-management/) to find program-specific workboards where you can file an issue
+
+### Emergency contact
+
+- [**Developer Relations emergency contacts**](https://docs.google.com/document/d/16oq7sl6dpI2QbADwY41KjKEjaEj7dJ9LI5owm8lO_iU/edit?usp=sharing)
+- [**Incident management roles**](/handbook/engineering/infrastructure/incident-management/#roles-and-responsibilities)
+- **Relevant Slack channels for incident/infrastructure:** [`#incident-management`](https://gitlab.slack.com/messages/incident-management), [`#infrastructure-lounge`](https://gitlab.slack.com/messages/incident-management)
+
+## <i class="fas fa-tasks" id="biz-tech-icons"></i> How we work
+
+### <i class="fas fa-map-signs fa-fw color-orange font-awesome"></i> Developer Relations Team resources
+
+- [Developer Relations project management](/handbook/marketing/developer-relations/project-management/)
+- [Common program resources](/handbook/marketing/developer-relations/program-resources/)
+- [Meetup checklist](/handbook/marketing/developer-relations/meetup-checklist)
+
+### <i class="far fa-edit fa-fw color-orange font-awesome"></i> Our handbooks
+
+- [Contributor Success](/handbook/marketing/developer-relations/contributor-success/)
+  - [Contributors Program](/handbook/marketing/developer-relations/contributors-program/)
+- [Developer Advocacy](/handbook/marketing/developer-relations/developer-advocacy/)
+- [Community Programs](/handbook/marketing/developer-relations/community-programs/)
+  - [Open Source Program](/handbook/marketing/developer-relations/community-programs/open-source-program/)
+  - [Education Program](/handbook/marketing/developer-relations/community-programs/education-program/)
+  - [Startups Program](/handbook/marketing/developer-relations/community-programs/startups-program/)
+- [Leading Organizations](/handbook/marketing/developer-relations/leading-organizations/)
+
+### <i class="far fa-clipboard fa-fw color-orange font-awesome"></i> Our workflows
+
+Community engagement:
+
+- [<i class="fas fa-shield-alt"></i> Code of Conduct Enforcement](/handbook/marketing/developer-relations/workflows-tools/code-of-conduct-enforcement/)
+- [<i class="fas fa-volume-up"></i> Community Response Process](/handbook/marketing/developer-relations/developer-advocacy/community-response/)
+- [<i class="fas fa-calendar-alt"></i> Events](/handbook/marketing/developer-relations/events/)
+
+Community platforms:
+
+- [<i class="fab fa-discourse"></i> Discourse Forum](/handbook/marketing/developer-relations/workflows-tools/forum/)
+- [<i class="fab fa-discord"></i> Discord](/handbook/marketing/developer-relations/workflows-tools/discord/)
+- [<i class="fab fa-reddit"></i> Reddit](/handbook/marketing/developer-relations/workflows-tools/reddit/)
+- [<i class="fab fa-stack-overflow"></i> StackOverflow](/handbook/marketing/developer-relations/workflows-tools/stackoverflow/)
+- [<i class="fas fa-eye"></i> Common Room](/handbook/marketing/developer-relations/workflows-tools/common-room/)
+
+Content:
+
+- [<i class="far fa-folder-open"></i> Content Effectiveness Strategy](/handbook/marketing/developer-relations/content-effectiveness/)
+- [<i class="far fa-edit"></i> Community newsletter](/handbook/marketing/developer-relations/developer-advocacy/community-newsletter/)
+- [<i class="far fa-edit"></i> Content Review / Fix Fridays](/handbook/marketing/developer-relations/workflows-tools/content-review/)
+- [<i class="fas fa-chart-line"></i> UTM Tracking Strategy](/handbook/marketing/developer-relations/utm-strategy/)
+- [<i class="far fa-folder-open"></i> Campaign management](/handbook/marketing/developer-relations/community-apps/campaign-manager/)
+
+Organization:
+
+- [<i class="fas fa-credit-card"></i> Team Budgets](/handbook/marketing/developer-relations/workflows-tools/team-budgets)
+- [<i class="fas fa-shopping-cart"></i> Swag operations](/handbook/marketing/developer-relations/workflows-tools/swag/)
+- [<i class="fas fa-magic"></i> Automated Community Programs](/handbook/marketing/developer-relations/community-programs/community-programs-workflows/#automated-applications-workflow-overview)
+- [<i class="fas fa-robot"></i> Zapier](/handbook/marketing/developer-relations/workflows-tools/zapier/)
+- [<i class="fas fa-inbox"></i> Zendesk](/handbook/marketing/developer-relations/workflows-tools/zendesk/)
+- [<i class="fas fa-envelope"></i> Email](/handbook/marketing/developer-relations/workflows-tools/e-mail/)
+- [<i class="fab fa-twitter"></i> Twitter/X](/handbook/marketing/developer-relations/workflows-tools/twitter/)
+- [<i class="fas fa-cloud"></i> Cloud Resources](/handbook/marketing/developer-relations/workflows-tools/cloud-resources/)
+
+#### Community Interest
+
+If you are working on changes to the company, product, or pricing that are expected to have a meaningful impact on members of the wider GitLab community or the GitLab brand, we encourage you to use the label `~Community Interest` so that the Developer Relations team can represent the interests of the wider GitLab community in the planning process.
+
+All members of the Developer Relations team should be subscribed to this label in both the [`gitlab-com`](https://gitlab.com/groups/gitlab-com/-/labels?search=community) and [`gitlab-org`](https://gitlab.com/groups/gitlab-org/-/labels?search=community) projects.
+
+### Team touchpoints
+
+Our team has a few weekly events that we use to stay connected and aligned on our work:
+
+- Team meeting (bi-weekly)
+  - Team meetings are recorded via Zoom and recordings linked to the corresponding date in the meeting notes.
+- 1:1 meeting between each team member and their manager.
+- Question check-in via Geekbot in Slack for each team member. The responses are shared in the [#developer-relations-hangout](https://gitlab.slack.com/archives/C01C018V7V3) Slack channel.
+  - Monday (weekend social, plans for the week)
+  - Thursday (reminder to share achievements, thoughts, blockers, etc.)
+- End of week updates: Results and wins, search for `Developer Relations - End of Week updates` in Google drive.
+
+### <i class="fa fa-calendar fa-fw color-orange font-awesome"></i> Our calendars
+
+We use team-wide calendars for collective notification and to manage team logistics and events. Additionally, specific teams within Developer Relations may maintain calendars specific to their programs (such as the Developer Advocacy team calendar).
+
+- [Developer Relations Team](https://calendar.google.com/calendar/u/0?cid=Y190M2JhY2k5MnFoYnJmYTMyMDdpZHZwdnYwMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
+- [Community Events](https://calendar.google.com/calendar/b/1?cid=Z2l0bGFiLmNvbV85MHQ1dWUxcThrYmpvcTViMHI5MW51N3J2Y0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t)
+- [Developer Advocacy Team](https://calendar.google.com/calendar/u/0?cid=Y183OTMwZmNiMGM5ZTQ3ODNiZGQzZDIzODU4YWU5YWY0MzA2ZjI4ZDk3NmE0MGM4MzNmNTA3MTBjN2NiODZiYTgyQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
+
+### Developer Relations OKRs
+
+Every quarter, we work on [team Objectives and Key Results (OKRs)](https://gitlab.com/gitlab-com/gitlab-OKRs/-/issues/?sort=updated_desc&state=opened&label_name%5B%5D=division%3A%3AMarketing&label_name%5B%5D=OKR&label_name%5B%5D=Department%3A%3ADeveloper%20Relations&first_page_size=20) that align with company OKRs.
+
+OKRs we seek to align with:
+
+- [company OKRs](/handbook/company/okrs/#most-recent-okrs)
+- [Marketing OKRs](/handbook/marketing/#marketing-okrs)
+
+#### DRI Responsibilities
+
+For each quarterly objective and key results, the Developer Relations team will assign a [DRI](/handbook/people-group/directly-responsible-individuals/). For our team, we have responsibilities that build upon the GitLab guidance on [achieving](/handbook/company/okrs/#documenting-how-to-achieve) and [updating](/handbook/company/okrs/#maintaining-the-status-of-okrs). Typically, People managers are the DRIs for objectives while ICs are the DRIs for key results.
+
+- Objective DRI Responsibilities
+  - Own strategy for achieving objectives including supporting the DRIs for key results that will help to achieve our objectives.
+  - Collaborate with the owners of the key results that contribte to your objective to set a plan to deliver on the KRs and objective.
+  - Maintain communication with KR owners - synchronous or asynchronous - throughout the quarter as needed.
+  - Provide bi-weekly updates in the epic and in the Developer Relations bi-weekly team meeting agenda on the objective including completion percentage and status. We recognize that there will be no change from the previous report at times.
+  - Present overview and status updates in team business reviews.
+  - Escalate any urgent needs to your manager.
+
+- Key Results DRI Responsibilities
+  - Create and manage strategy for achieving the key results. Manage dependencies, set actions, and define how your items will be scored.
+  - Provide bi-weekly updates in the issues in the [GitLab OKRs project](https://gitlab.com/gitlab-com/gitlab-OKRs/) including completion percentage and status. The issues are the single source of truth for your KR. We recognize that there will be no change from the previous report at times.
+  - Ensure key result information is up-to-date for team business reviews.
+  - Escalate any urgent needs to your manager.
+
+#### How we update our OKRs
+
+To update our [list of current OKRs](https://gitlab.com/gitlab-com/gitlab-OKRs/-/issues/?sort=updated_desc&state=opened&label_name%5B%5D=division%3A%3AMarketing&label_name%5B%5D=OKR&label_name%5B%5D=Department%3A%3ADeveloper%20Relations&first_page_size=20):
+
+1. Follow the [OKRs in GitLab handbook](/handbook/company/okrs/okrs-in-gitlab/)
+1. Create OKRs, and KR items.
+1. Add the following labels: `Division::Marketing`, `Department::Developer Relations`, `OKR`.
+
+**OKR Health:** We use [issue health](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#health-status) indicators to help people understand an OKRs status at a glance. These status indicators are:
+
+- `on track`
+- `needs attention`
+- `at risk`
+
+**Progress**: Edit the `progress` attribute in KRs to indicate how much progress has been made.
+
+### Developer Relations KPIs
+
+The Developer Relations team monitors several [Key Performance Indicators and related Performance Indicators](/handbook/marketing/developer-relations/performance-indicators/).
+
+{{< kpi-list "developer_relations_department" >}}
+
+## <i class="fas fa-vector-square fa-fw color-orange font-awesome"></i> Team Logos
+
+GitLab Developer Relations team logos can be found in `.png` and `.svg` formats by searching for `gitlab-devrel-logo` in Google Drive.
+
+## <i class="fas fa-receipt"></i> Team Budgets
+
+Learn more on the [Developer Relations budget page](/handbook/marketing/developer-relations/workflows-tools/team-budgets/)
+
+## <i class="fas fa-globe fa-fw color-orange font-awesome"></i> Community Diversity, Inclusion, and Belonging
+
+In alignment with [GitLab's core value of Diversity, Inclusion, and Belonging (DIB)](/handbook/values/#diversity-inclusion), the Developer Relations team seeks to purposefully design DIB into every facet of its programs and operations. We seek to foster DIB at GitLab and within the wider GitLab community.
+
+### DEI Strategies
+
+As DEI (Diversity, Equity and Inclusion) allies in the open source community, GitLab's Developer Relations team is committed to the following DEI efforts within our contributor communities:
+
+- **DEI project badging:**
+  - Partner with community-wide initiatives to establish a mechanism to recognize, support and promote DEI efforts through a badging system.
+  - Highlight the DEI values and inclusion efforts of GitLab's projects.
+  - Encourage open-source projects hosted on GitLab to do the same.
+- **First-time contributor inclusion:**
+  - Perform user research studies on first-time contributors to learn and improve the experience.
+  - Improve documentation from perspectives of first-time contributors.
+  - Improve community onboarding for newcomers.
+- **DEI group participation:**
+  - Track DEI group participation among GitLab team members, beginning with the Developer Relations team.
+  - Encourage team members to attend open-source DEI working groups and events.
+  - Poll team members quarterly to track participation.
+  - Expand from Developer Relations to Marketing and then across GitLab.
+- **Swag/contributor points coupons at qualifying events:**
+  - Offer GitLab swag and GitLab contributor points coupons at qualifying events.
+  - Incentivize community members and potential contributors with coupon codes.
+- **GitLab contributor resource groups:**
+  - Form GitLab contributor resource groups similar to GitLab [Team Member Resource Groups](/handbook/company/culture/inclusion/erg-guide/) (TMRGs).
+  - Include mentoring/coaching opportunities.
+  - Consider groups for non-contributing developers or for Developer Relations team members.
+  - Consider hosting events/days for specified underrepresented groups.
+
+### Planning Events and Activities
+
+This section is meant to document tips and best practices that the Developer Relations team, and GitLab team, should keep in mind as they plan [events](/handbook/marketing/developer-relations/events/) and activities.
+
+- **Images:** We seek to promote the use of images that represent a diverse group of users, customers, and community members. When we see a lack of diverse representation, we speak up and actively help update those images when possible.
+- **Speakers:** As event organizers and participants, we seek to include a diverse set of speakers in events that GitLab organizes or touches.
+- **We are open-minded:** We actively seek feedback and keep an open mind about our current policies. We are open to change and are willing to make structural changes to ensure that we continue to foster DIB among our team and the wider GitLab community.
+- **We retain a growth mindset and keep learning:** We read articles, attend workshops, and participate in trainings that help educate us about how to foster DIB in our community and how to be inclusive ourselves.
+- **We encourage a diverse set of community members to participate in research:** We recognize the product inclusivity is important and that we need to build with our community, not just for them.
+- **We promote the [GitLab Diversity Scholarship program](https://about.gitlab.com/community/sponsorship/):** This scholarship supports Diversity, Inclusion, and Belonging-focused events financially.
+
+## <i class="fas fa-lightbulb" fa-fw color-orange font-awesome></i> Communities who inspire us
+
+We take inspiration from the great work being done by other communities. Some of the communities who we take inspiration from:
+
+- [Linux Foundation](https://www.linuxfoundation.org/) - A large, engaged community that act as custodians for important open source technology.
+- [CNCF](https://www.cncf.io/) - A large, engaged community that act as custodians for important open source technology.
+- [FINOS](https://www.finos.org/) - A large, engaged community that act as custodians for important open source technology.
+- [Debian](https://www.debian.org/) - A large, engaged community that act as custodians for important open source technology.
+- [GNOME](https://www.gnome.org/) - A large, engaged community that act as custodians for important open source technology.
+- [KDE](https://kde.org/) - A large, engaged community that act as custodians for important open source technology.
+- [Fedora](https://fedoraproject.org/) - A large, engaged community that act as custodians for important open source technology.
+- [Drupal](https://www.drupal.org/) - A large, engaged community that act as custodians for important open source technology.
+- [Wikimedia Foundation](https://wikimediafoundation.org/) - This community is a champion for free information with a large, engaged community.
+- [Kubernetes](https://kubernetes.io/) - This community consists of a large network of user groups and champions that serve to help each other grow and better utilize Kubernetes.
+- [AWS](https://aws.amazon.com/developer/community/) - This community consists of a large network of user groups and champions that serve to help each other grow and better utilize AWS.
+- [Dev.to](https://dev.to/) - This community creates a welcoming place for the tech community, particularly newcomers, to learn and share content.
+- [Hacker News](https://news.ycombinator.com/) - This community is known for its engaging discussion of the latest tech news and trends.
+- [Google Summer of Code](https://summerofcode.withgoogle.com/) - This community inspires us through their work to make the tech community more diverse and inclusive and create new opportunities for people new to tech.
+- [Outreachy](https://www.outreachy.org/) - This community inspires us through their work to make the tech community more diverse and inclusive and create new opportunities for people new to tech.
+- [Grace Hopper Community / Systers](https://anitab.org/our-communities/systers/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Lesbians Who Tech](https://lesbianswhotech.org/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Techqueria](https://techqueria.org/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Latinas in Tech](https://latinasintech.org/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Women in Tech](https://women-in-tech.org/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Women Who Code](https://www.womenwhocode.com/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+- [Rails Girls](https://railsgirls.com/) - This community inspires us through their work to make the tech community more diverse and inclusive.
+
+## <i class="fas fa-book" fa-fw color-orange font-awesome></i> Community Learning Pathway
+
+The [Community Learning Pathway](/handbook/marketing/developer-relations/community-pathway) is a course built to educate the community on how the Developer Relations team works, the different community programs and how to contribute the GitLab. Members of the Community and GitLab team members who complete the course will earn a badge.
+
+## <i class="fas fa-book" fa-fw color-orange font-awesome></i> Community Building Reading Group
+
+The Community Building Reading Group is for GitLab team members interested or engaged in building communities at GitLab. Hosted by members of the Developer Relations team, this learning-focused group examines various principles and practices related to imagining, designing, building, nurturing, growing, and supporting communities. Potential topics of study and discussion include:
+
+- Leading and conducting community activities
+- Welcoming new contributors
+- Managing relationships in and with communities
+- Negotiating community authority and power relations
+- Architecting and enforcing community codes of conduct
+- Cultivating community cultures
+- Measuring community health and success
+- Converting community participants into community contributors
+- Encouraging community mentorship
+- Building community-powered innovation and business models
+- Assessing community infrastructure and governance models
+- Understanding community value propositions and exchanges
+
+By collaborating as part of this group, members aim to:
+
+- **Hone their craft.** Working with communities requires thoughtful and skillful practice. This group provides a space for collectively reviewing, assessing, and learning from materials that help members become better practitioners.
+- **Create space for support and growth.** Working with communities requires emotional labor, and people who undertake it often benefit from spaces to discuss the work's challenges with like-minded collaborators. This group would function as one such space.
+- **Generate and share resources.** Working with communities is easier with knowledge of best practices and trusted frameworks. By reading and reviewing materials on the state of the art, members generate a knowledge commons others can access and from which they can learn.
+
+Any GitLab team member interested in community-building practices is welcome to participate in and contribute to the group. Unlike typical [GitLab book clubs](/handbook/leadership/book-clubs/), this reading group:
+
+- is an ongoing effort rather than a discrete and time-delimited event
+- is focused on a series of works rather than a single one
+
+The reading group operates on a cadence group members determine together. Group members also collectively determine the material—for example, a book chapter, a white paper, a research report, a presentation recording, or a case study—they'll cover each week.
+
+1. Group members propose materials for the group to study and discuss by opening an issue in the Developer Relations team's `Community Building` [project](https://gitlab.com/gitlab-com/marketing/developer-relations/community-building) using the `reading-group` template, then attaching the `Reading Group::Proposed` label to it.
+1. Group members can then browse one another's suggestions and collectively select what to study.
+1. When they determine what they'll read, they re-label the issue `Reading Group::Up Next.`
+1. When they begin reading and studying proposed material, they re-label the issue, applying the `Reading Group::Now Reading` label.
+1. And when they've finished a selection, they apply the `Reading Group::Finished` label to the associated issue. A [project board](https://gitlab.com/gitlab-com/marketing/developer-relations/community-building/-/boards/4595510) tracks all selections.
+
+As they read, group members share notes and impressions asynchronously [via files](https://gitlab.com/gitlab-com/marketing/developer-relations/community-building/-/tree/master/resources) stored in the `Community Building` project. When they have completed a selection, they polish these notes and update the `Community Building` wiki accordingly.
+
+In each cycle, a group member (typically the person who proposed the materials) acts as "leader." Group leaders pose some basic discussion questions or thought-generating insights to guide the group's reading and frame its discussion. Group members meet at regular intervals for live, synchronous discussion of the reading materials (suggested time for discussion meetings: 45 minutes). Recordings of these meetings are available, but because discussions often contain personal details and sensitive issues, these recordings are only access to GitLab team members via an internal Google Drive.

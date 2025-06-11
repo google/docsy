@@ -1,0 +1,257 @@
+---
+title: Complex SPDX Expression Evaluation
+status: proposed
+creation-date: "2025-01-06"
+authors: [ "@hacks4oats" ]
+coaches: []
+dris: [ "@johncrowley", "@tkopel" ]
+owning-stage: "~devops::application security testing"
+participating-stages: ["~devops::security risk management"]
+# Hides this page in the left sidebar. Recommended so we don't pollute it.
+toc_hide: true
+---
+
+<!-- Design Documents often contain forward-looking statements -->
+<!-- vale gitlab.FutureTense = NO -->
+
+<!-- This renders the design document header on the detail page, so don't remove it-->
+{{< design-document-header >}}
+
+## Summary
+
+SPDX license expressions provide a clear, [standardized](https://spdx.github.io/spdx-spec/v2-draft/SPDX-license-expressions/),
+and machine-readable way to document the software licenses associated with code,
+ensuring compliance with licensing obligations. Standardized expressions help
+users manage legal risks, meet licensing requirements, and easily share software
+components for reuse.  Expressions can be simple, for example an expression
+composed of singular SPDX license identifier, or complex, like when more than
+one expressions are combined using boolean operators.
+
+## Motivation
+
+Projects are increasingly adopting licensing models that make use of complex
+license expressions. For example, a project might require both Apache-2.0 and
+MIT licenses, or it might let users choose _between_ Apache-2.0 or MIT licenses.
+Unfortunately, there's no way to express this with singular license expressions,
+so project's that depend on packages that utilize complex license expressions
+are left with a dependency list that only mentions an _unknown_ license. This
+results in a user experience where it's impossible to quickly view the licensing
+options of a dependency, and also presents a problem when a user tries to craft
+a license approval policy to fit such an expression. Supporting complex
+expressions will improve the development workflow for projects that work with
+dependencies that use complex licensing models.
+
+### Goals
+
+- Support for simple license identifiers, and the `AND` and `OR` boolean
+  operators.
+- Populate dependency list with license _expressions_ and not just license
+  identifiers. For example, a dependency with a `Apache-2.0 AND MIT` license
+  will show up as such in the dependency list.
+- Enforce license approval policies on projects that use expressions. For
+  example, if a license approval policy only approves of `Apache-2.0`, and a
+  proposed dependency has a `Apache-2.0 AND MIT` license, the dependency should
+  not pass the approval policy. On the other hand, if the approval has acceptance
+  for both licenses, it _should_ pass.
+- Performance should be acceptable for groups with many projects, and projects
+  with many dependencies.
+
+### Non-Goals
+
+- The first iteration will not include for the following:
+  - `WITH` operator
+  - `+` operator
+  - References using `AdditionRef-`, `DocumentRef-` or `LicenseRef-`
+
+## Proposal
+
+At a high level, license expressions will propagate from the Package Metadata
+Database (PMDB). These expressions will surface in the dependency list at both
+the project and group level, and will also be used when evaluating the approval
+status of a dependency's license.
+
+## Design and implementation details
+
+SPDX license expressions are supported across ecosystems at varying levels. The
+following table depicts the level at which they're supported by each ecosystem.
+
+| Ecosystem   | Support level
+| ----------- | -------------
+| `cargo`     | fully supported
+| `cocoapods` | one or more identifiers - equivalent to conjunctive `AND`
+| `composer`  | fully supported
+| `conan`     | one or more identifiers - equivalent to conjunctive `AND`
+| `gem`       | one or more identifiers - equivalent to conjunctive `AND`
+| `golang`    | one or more identifiers - equivalent to conjunctive `AND`
+| `maven`     | one or more identifiers - equivalent to conjunctive `AND`
+| `npm`       | fully supported
+| `pypi`      | one or more identifiers - equivalent to conjunctive `AND`
+| `swift`     | one or more identifiers - equivalent to conjunctive `AND`
+
+### Licensing options
+
+At a high level, a SPDX expression can be compiled down into a set of license
+combinations. Take the following expression, for example.
+
+```text
+Apache-2.0 AND (MIT OR GLP-3.0)
+```
+
+The expression is human readable, deterministic, but it's far from optimized for
+our use cases. We can improve on this by expanding the expression into the
+different licensing options it represents. In this case, the options could be
+represented like so:
+
+```json
+[
+    ["Apache-2.0", "MIT"],
+    ["Apache-2.0", "GLP-3.0"]
+]
+```
+
+From here, it's easy to see how a license approval policy can be evaluated
+against the different licensing options. If an approval policy denies any
+of the licenses, the next license option can be tested for denial. The change in
+logic is minimal, with the only change being an additional outer loop in the
+[violation checking logic](https://gitlab.com/gitlab-org/gitlab/blob/4d8427c67fd1ecb7b854469d4151b0cddd2e9b34/ee/lib/security/scan_result_policies/license_violation_checker.rb#L32-L38).
+
+### Evaluation
+
+The solution above is functional, but it must be further improved to meet our
+performance requirements. As previously mentioned, license scanning **must**
+remain performant even for the largest of projects. This solution does not
+provide that, and we can demonstrate this with the following example.
+
+Say that we scan a project with the following components and licenses, and have
+an approval policy that we want to evaluate against for policy violations.
+
+```json
+{
+    "packageA": [ ["LicenseA", "LicenseB"], ["LicenseA", "LicenseC"]],
+    "packageB": [ ["LicenseD", "LicenseE"], ["LicenseD", "LicenseF"]],
+    "packageC": [ ["LicenseG", "LicenseH"], ["LicenseG", "LicenseI"]],
+}
+```
+
+Before evaluating the license approval policies, we'd need to clean up the data,
+so that we have a singular array of licensing options to evaluate against. The
+process requires us to combine the options in order to compact the arrays. On
+first pass, we'd have the following options.
+
+```json
+[
+    ["LicenseA", "LicenseB"],
+    ["LicenseA", "LicenseC"],
+]
+```
+
+On second pass, we'd need to combine the existing options with the next set of
+licensing options, so we'll end up with something like so.
+
+```json
+[
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseE"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseE"],
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseF"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseF"],
+]
+```
+
+The amount of options has grown considerably, but we're _still not done_.
+We must do a third and final pass to incorporate the remaining licensing
+options for `packageC`. Doing so results in the following outcome.
+
+```json
+[
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseE", "LicenseG", "LicenseH"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseE", "LicenseG", "LicenseH"],
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseF", "LicenseG", "LicenseH"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseF", "LicenseG", "LicenseH"],
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseE", "LicenseG", "LicenseI"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseE", "LicenseG", "LicenseI"],
+    ["LicenseA", "LicenseB", "LicenseD", "LicenseF", "LicenseG", "LicenseI"],
+    ["LicenseA", "LicenseC", "LicenseD", "LicenseF", "LicenseG", "LicenseI"],
+]
+```
+
+From this example, we can see how quickly the search space can become because
+we're essentially getting the cartesian product of different sets. This
+[combinatorial explosion](https://en.wikipedia.org/wiki/Combinatorial_explosion)
+requires us to further refine the implementation, so that it remains performant
+should we be presented with a large amount of dual licensed packages.
+
+To do this, we can make use of [bit arrays](https://en.wikipedia.org/wiki/Bit_array)
+to act as a vector of licenses. At a high level the representation would work
+like this.
+
+- Every bit in the bit array will represent the detection of a license.
+- There are 729 known licenses in the SPDX library. If we account for this,
+future growth, and word alignment, we can use a bit array with 1024 bits.
+- We can XOR the bit arrays to detect for approvals or violations. Bitwise
+operations are fast, and can also be parallelized by the processor.
+
+To demonstrate the implementation, we can do an example using a smaller set of
+available options. Say that projects have the option of using one or more out of
+eight licenses. We could represent the licenses like so.
+
+| Name | Leftmost Index ([MSB](https://en.wikipedia.org/wiki/Bit_numbering))
+| ---- | --------------
+| LicenseA | 0
+| LicenseB | 1
+| LicenseC | 2
+| LicenseD | 3
+| LicenseE | 4
+| LicenseF | 5
+| LicenseG | 6
+| LicenseH | 7
+
+Let's say that there was a policy that disallowed `LicenseF`, and we wanted to
+evaluate it against the licensing options above. A list approach would have to
+do a union operation between two lists. Ruby makes this readable and
+[easy to do](https://gitlab.com/gitlab-org/gitlab/blob/4d8427c67fd1ecb7b854469d4151b0cddd2e9b34/ee/lib/security/scan_result_policies/license_violation_checker.rb#L32-L38):
+
+```ruby
+          all_denied_licenses = (licenses_from_report - licenses_from_policy).uniq
+          comparison_licenses = join_ids_and_names(license_ids, license_names)
+          policy_denied_license_names = (comparison_licenses - licenses_from_policy).uniq
+          violates_license_policy = policy_denied_license_names.present?
+```
+
+For a singular set of licensing options, it may be acceptable, but using this
+for larger sets of data would begin to deteriorate performance. In comparison,
+the bit array approach would look like so:
+
+```ruby
+licenses_from_policy = 0b00000100
+licenses_from_report = 0b01010010
+
+def is_compliant?(licenses_from_policy, licenses_from_report)
+  (licenses_from_report & ~licenses_from_policy) == 0
+end
+
+is_compliant?(licenses_from_policy, licenses_from_report)
+=> false
+```
+
+### Storage
+
+#### PMDB
+
+The [exporter service](https://gitlab.com/gitlab-org/security-products/license-db/license-exporter)
+for our Package Metadata Database will be in charge of parsing the SPDX
+expression, and converting it into an array of bitmasks.
+
+#### GitLab Rails
+
+The GitLab Rails database will no longer rely on an enum to identify the license used
+by a project. Instead it will add an additional column that stores the original
+license expression, and its equivalent bitmask representations.
+
+## Alternative Solutions
+
+<!--
+It might be a good idea to include a list of alternative solutions or paths considered, although it is not required. Include pros and cons for
+each alternative solution/path.
+
+"Do nothing" and its pros and cons could be included in the list too.
+-->

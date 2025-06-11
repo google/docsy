@@ -1,0 +1,3 @@
+Engineering management schedules Team Days every 2 quarters as a way to celebrate our wins as a team, with our counterparts, and look forward to the future. These are optional social events led primarily by the attendees in terms of activities and discussions, but scheduled and organized by engineering managers.
+
+Sync meetings will occur in all time zones, and activities may happen throughout the day in a dedicated team day Slack channel. While optional, all team members should have an opportunity to participate for as long as they want, so capacity for all engineers should be accounted for during milestone planning.

@@ -1,0 +1,301 @@
+<!-- Unsupported block type: image -->
+
+## Long term Social Media Strategy (Over the next 3-5 years)
+
+The Social Marketing Team is working towards a long term strategy that includes three major pillars. Each pillar would require dedicated resources to grow and flourish.
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+## Strategic direction
+
+Organic social is a two way communication system. It’s about community and conversations. We can to appeal to the emotions of our audience through real-time conversations and interactions.
+
+We want…
+
+people to feel good.
+
+to embrace our community.
+
+to create excitement for the product.
+
+Elevate our brand ⛰ - Increase team member community and sense of belonging. Less is more, particularly when it is executed well and resembles a world class brand.
+
+“Inside out culture” 🤝 - Exercising our internal values to our external audiences.
+
+No hard selling 🥎 - We throw softballs only.
+
+## FY23 OKRs
+
+Check out the FY23 OKR Epic here
+
+## FY23 Content Strategy
+
+The FY23 content strategy will enable our objectives of engagement and elevation.
+
+### Engagement
+
+Because engagement is our principal metric focus, it’s important that we consider all social content for engagement opportunities. Our reporting handbook page defines engagement and engagement rate:
+
+### ℹ️ Engagements
+
+Are the number of times that users took action on our posts during the reporting period. This includes likes, retweets, comments, saves, replies, reactions, and shares. Does not include quote retweets.
+
+### ℹ️ Engagement Rate
+
+Is the number of times during a reporting period that users engaged with our posts as a percentage of impressions. This metric indicates how engaging particular content or campaigns are overall.
+
+Content for organic social media should inherently be engaging to our audiences. Content should drive users to take an action: to share/retweet the post, to click an attached link, or to respond and create a two-way conversation with an individual user. Rather than years’ past where simple support for linked assets and coverage was provided, we’ll need to better understand why the user would want this information and whether or not in commands an action, particularly whether or not it would invite them to respond to us. This puts responses and 1-to-1 conversations of much higher importance than we previously focused on.
+
+To learn more about the specifics of engagement and conversations, check out our community management handbook page.
+
+### Elevation
+
+Elevate our brand on social by delivering on intentional and properly planned campaigns with cross-functional support to align with overall marketing OKRs. We’ll look to polish visuals, write higher quality and shorter copy, and experiment with rich content like Twitter Spaces, livestreaming video, and other formats.
+
+### What elevates our brand?
+
+Results - we want an increase in engagement as well as the quality of our metrics
+
+Emotional connections - we want to be able to say that we helped members of the community do better
+
+Individual connections - 1-to-1 with the brand and our evangelists, to better develop GitLab champions
+
+Polished look and feel - visuals and copy should resemble other big tech companies, refined and consistent messaging
+
+Elevation requires siginficant campaign planning, above years’ past. The social team has already begun this work by developing a quarterly brief form and sync meeting program where the team connections with stakeholders across the marketing organization to better plan and understand critical campaigns.
+
+Social Quarterly Brief Form
+
+### Remember when considering OKRs for organic social media
+
+- It’s about storytelling, not direct marketing
+
+- Because our content goes worldwide and untargeted, organic social is top-of-funnel activity driving impressions, engagements, and conversations with assistance in link clicks to move users further down the funnel for the next team to work with
+
+- The social team aids in corporate marketing OKRs as well as has our own to keep moving the practice at GitLab forward
+
+## Social Channels
+
+Channels under the care of the social team
+
+<!-- Unsupported block type: divider -->
+
+GitLab Brand Twitter
+
+<!-- Unsupported block type: divider -->
+
+GitLab Brand LinkedIn
+
+<!-- Unsupported block type: divider -->
+
+GitLab Brand Facebook
+
+<!-- Unsupported block type: divider -->
+
+GitLab Brand Instagram
+
+<!-- Unsupported block type: divider -->
+
+GitLab Brand GIPHY Channel
+
+<!-- Unsupported block type: divider -->
+
+GitLab Branded Social Channels include our company Twitter, LinkedIn, and Facebook which are managed in a more traditional manner. And an Instagram channel that takes more of an editorial look at remote life and work at GitLab. This channel is a little less “marketing-y” and more about sharing thoughtful stories by our team members. Our GIPHY account is mainly for new GIF content, which can be tied to larger initiatives.
+
+## Content Pillars (FY23)
+
+Our content pillars provide strategic direction for the social team and the GitLab team overall in terms of knowing what topics of content we should be investing in. Generally speaking, organic social will want to play a role in each of these pillars, as we have seen good performance on related content in the last few years. Content pillars also make up the Pillar: xyz reporting tag in Sprout. This allows us to categorize and quantify performance across pillars. There may be periods where we do not have content for a specific pillar, not all pillars are active and scheduled all the time. However, the pillars guide our priorities and allow us to shift attention as needed. Some content may straddle several pillars.
+
+- All Remote Brand
+
+- Blog
+
+- Developer Relations
+
+- Corporate Events
+
+- DevOps Leadership
+
+- Press / News
+
+- Product
+
+- Talent Brand
+
+A note on DevOps Leadership vs Product: Product pillar is only about GitLab the product. DevOps Leadership is more about perspective and point of view on the space, not necessarily about GitLab the product.
+
+For more info on the Sprout tags for Pillars, refer to the Reporting Handbook page.
+
+## Only the social team can manage GitLab’s social channels
+
+Social media can be used as a relationship builder between GitLab and partners, vendors, event organizers, and other third parties. Leveraging GitLab’s brand social media channels is a great way to extend these relationships further. However, only GitLab’s brand social team has the authority to commit GitLab’s brand social media channels for work. Please do not guarantee GitLab brand social media coverage to anyone without consulting and gaining approval from our team first. Our responsibility is to manage both our time as team members and the owned public image of our brand and product. These things are not taken into consideration unless the social team is actively a part of the conversation.
+
+If you have committed GitLab’s brand social media channels for social posts or committed the social team’s time to projects before consulting with and gaining approval, the social team will reject the commitments.
+
+## Sharing 3rd-party events (onsite or virtual) on organic social where a team member is speaking
+
+The purpose of GitLab team members participating in 3rd-party events is to bring GitLab’s message to the 3rd-party’s audience and to gain more community. Therefore, it’s contradictory for GitLab brand social channels to promote a team member speaker for a 3rd-party event by default. Periodically, if the speaking engagement is part of a critical campaign or would resonate with the zietgiest of the moment, we may tweet once for folks to register for the event. However, if you’re the speaker, we encourage you to post to your own social channels so that your network can join the event. Share your post with the #social_media Slack channel and we’ll like, comment, and maybe share your post!
+
+## Sharing blog posts
+
+New blogs are linked in the #content-updates channel, and then our team uses that as a notification that the blog is ready to schedule and share on social. Sometimes when it’s connected to a campaign or is particularly important, we’ll also get a ping about it in a thread from the original slack message.
+
+If the blog is connected to an integrated campaign, it will be picked up in the social issues and epics for that campaign. If it is a part of a press release/announcement, we’ll also be tagged in related issues through the PR workflow.
+
+On a quarterly basis the social media team will identify the best performing blogs. The top 2-3 blogs will then be reintroduced and scheduled to publish on GitLab’s Brand Social Channels.
+
+Check out the blog content workflow for social on our admin page
+
+## Sharing monthly releases
+
+In addition to the existing workflow with the release team, we should look to share the news with all of GitLab. Following the scheduling/publishing of our brand posts for the release, add the release post as a story to Bambu/Advocacy by Sprout. Once all links are available to share, respond to the message in #whats-happening Slack channel and also send this message to the channel to for more awareness.
+
+<!-- Unsupported block type: quote -->
+
+Replace the italicized words above with links to their respective posts.
+
+## Sharing content from behind a paywall
+
+We’ll come across articles that are behind a pay wall from time to time, mainly when it’s press coverage we’re looking to share. We can still share these articles on our social channels, however, we’ll need to disclose that there is a paywall in the copy of the social post, as to be transparent with our community. Clicks that come from folks who can’t read the article aren’t distinguishable from clicks where folks can read below the fold, so it’s important to be clear about the differences.
+
+Add the paywall disclosure copy to the very end of the copy. Consider using a line break to make this sentence explict to the community.
+
+<!-- Unsupported block type: code -->
+
+## Support and status communications on social media
+
+For GitLab status updates, folks can find info at the @gitlabstatus Twitter handle. This account is not managed by the social team.
+
+Beyond general inquries and regular social engagement with our followers, we do not provide core support in private messages on social channels. We will instead direct followers to the GitLab forums for support.
+
+Please use a derivative of this message:
+
+<!-- Unsupported block type: code -->
+
+## Calendaring and content volume
+
+We know that less is more, usually. However GitLab is a global all remote brand. We have users in every timezone and we are often organizing events and news to coordinate in ways that include people across the globe. Because of this, our calendaring and volume must remain adaptable.
+
+Content calendars are often at “full capacity” or what we’d consider:
+
+- 1-2x on LinkedIn per day
+
+- 1-2x on Facebook per day
+
+- 2-4x on Twitter per day
+
+This is due to the sheer volume of content that we’d deem as valuable to our audiences, the need to continue driving traffic to our website, and to continuously include followers across timezones on our social channels. However, we will ultimately publish content at the best times of day, determined by Sprout machine learning, which may or may not include a wide variety of times.
+
+Our “full capacity” concept is not a requirement. We can and will evolve our calendaring volume and focuses as brand, community, and business needs change. If this does change, we’ll need to establish proper expectations.
+
+## Channel Use
+
+### Twitter
+
+Because the wider developer community utilizes Twitter as a platform to celebrate contributions, make feature suggestions, and share industry ideas, GitLab prioritizes this channel. We post to this platform first, and also more frequently.
+
+On Twitter our GitLab community is our first priority. It includes those who contribute to our DevOps platform, our GitLab Heroes, and folks who evangelize the industry. We take time to listen to their feedback, even when it is critical. We make space for fun. Through inside jokes, polls, or simple questions, our Twitter channel provides developers an opportunity to take a break and relate to one another. GitLab’s Twitter community is unique because we focus on engaging with their opinions. And delivering them tailored content they will actually find useful, or inspiring.
+
+The GitLab Brand Twitter channel is establishing a sense of community through these activities:
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+### LinkedIn
+
+Our LinkedIn community consumes content over conversation, first. Though there are opportunities to drive conversation related to company culture, remote work, and exciting announcements. GitLab’s LinkedIn page strategically keeps our followers reading, and spending time on our blogs, releases, topic pages, and use cases. Ultimately, we use LinkedIn as an opportunity to expand in more detail on the content we care about. How do we do that? By using a variety of formatted posts with more thoughtful text, questions, polls, quotes, or even statistics. Due to the nature of the platform, there is less 1:1 conversation, and engagement with the community. We also have a decreased frequency of posts in comparison to our Twitter channel. How often GitLab should post on LinkedIn depends on the time of year, and the content we are sharing. Typically we post every single day, and up to2 times per day. However, we do make exceptions for special events, and major brand-level campaigns.
+
+The GitLab Brand LinkedIn channel is establishing GitLab as the complete DevOps platform through these activities:
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+### Facebook
+
+The reality is that GitLab has a smaller audience on Facebook so its priority does fall below our efforts on Twitter and LinkedIn. It is still important to maintain a presence on this channel because it provides folks basic information about our business, and proves to still see organic reach. That said, there is a decreased frequency for this channel. And social media team also chooses not to share certain types of campaigns to this channel as it is not the right audience.
+
+The GitLab Brand Facebook channel is reinforces our presence as a lovable brand through these activities:
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+### Instagram
+
+In no way shape or form should our Instagram account mirror our other GitLab Branded Social Channels. In fact, it takes more of an editorial approach to it, and is less “marketing-y” and more about building community.
+
+Since launching the GitLab Brand Instagram channel the Social Media Team committed to posting weekly content driven by a dedicated theme which represents our values, remote work, or life at GitLab.
+
+FY22Q1: We Belong Here
+
+FY22H1: Cribs
+
+Future themes TBD
+
+The GitLab Brand Instagram channel reinforces us as an all-remote organization that really awesome humans want to work for through these activities:
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+<!-- Unsupported block type: toggle -->
+
+### YouTube
+
+The social media team does not manage GitLab’s YouTube presence. Please reach out to Brand Video Team using the #brand_video Slack channel.
+
+## Social Media Design
+
+We look to the design team to provide integrated campaign assets and elements to use on social, many rapid design needs are fulfilled from the social team directly by Using Canva Pro. Canva Pro provides the social team with an easy-to-use tool on any device to quickly spin up designs. Social Media requires rapid responses and quick turnarounds, so to do we require the same of our designs.
+
+While Canva does provide many pre templated layouts, we do not use those. The social team will build custom art using basic GitLab brand guidelines and best practices for social media. In the future, many templates and individual assets will be brand team approved, but we have not iterated far enough to work in a rapid process.
+
+The elements the social team uses for our designs are mainly GitLab-owned. Icons, sketches, animations, etc. were usually created for non-social purposes and we’ve added them to our library to use for social media. We do use Pro-only elements on occasion, but strive to find elements we feel would not be used often by other brands.
+
+### Social image sizes
+
+While each channel has their own best sizes to use, and changes often, for the sake of scale and efficiency, we’ll use the following dimensions unless otherwise noted.
+
+- 1800 x 945 for Twitter, Facebook, LinkedIn, and about.gitlab.com embedded social sharing cards (or opengraphs)
+
+- 1620 x 1620 for Instagram wall posts (unless we are deliberately using IG’s vertical or horizontal options)
+
+- 1620 x 2880 for stories (vertical) posts on any channel that supports stories
+
+<!-- Unsupported block type: toggle -->
+
+### Social Videos
+
+Each social channel can have videos uploaded directly to them. We can use videos as we see fit, but they will need to follow the following guidelines:
+
+- 16:9 or 1:1 ratio
+
+- less than 2 minutes and 20 seconds required; though performance increases with shorter, snappier videos
+
+- min. of 720 resolution, preferably 1080 or 2k to account for high resolution screens
+
+- burned in subtitles or an srt file if there are any voices speaking in the video (this is requirement and videos are not usable without subtitles)
+
+- video title
+
+- no long intro or outro - the content needs to begin within the first 3 seconds of the video

@@ -1,0 +1,24 @@
+---
+title: "Technical Marketing Asset to Stakeholder Matrix"
+description: "This page contains a matrix of which assets might be usefull for which stakeholders."
+---
+
+## Asset to stakeholder matrix
+
+We create several types of technical assets which can be used by many potential stakeholders. This page contains a matrix of which assets might be usefull for which stakeholders.
+
+| asset/stakeholder                                      | Customers / Prospects | Field (SA/Sales) | Marketing - Digital | Marketing - Competitive Intelligence | Marketing - Field | Marketing - Corporate | Marketing - PR | Marketing - SDR | Marketing - Analysts | Marketing - Product | Partners / Channel | Product | Enablement | Learn@GitLab |
+|--------------------------------------------------------|:---------------------:|:----------------:|:-------------------:|:------------------------------------:|:-----------------:|:---------------------:|:--------------:|:---------------:|:--------------------:|:-------------------:|:------------------:|:-------:|:----------:|:------------:|
+| Use case overview demo - video (<=7 mins)              |           x           |                  |          x          |                                      |                   |                       |                |        x        |                      |                     |          x         |    x    |      x     |       x      |
+| Use case overview demo - sim demo*                     |           x           |         x        |                     |                                      |         x         |           x           |                |        x        |                      |                     |          x         |         |      x     |       x      |
+| Market Requirements demo - video (<=3 mins)            |           x           |         x        |          x          |                   x                  |                   |                       |                |        x        |                      |          x          |          x         |         |      x     |       x      |
+| Market Requirements demo - sim demo                    |           x           |         x        |                     |                                      |         x         |           x           |                |        x        |                      |                     |          x         |         |      x     |       x      |
+| GitLab feature/how-to videos (<=3 mins)                |           x           |         x        |          x          |                                      |                   |                       |                |        x        |                      |                     |          x         |    x    |      x     |       x      |
+| GitLab How-to - written (accompanying video, eg. blog) |           x           |                  |                     |                                      |                   |                       |                |                 |                      |                     |          x         |         |            |       x      |
+| Workshop (instructions, labs)                          |           x           |                  |                     |                                      |         x         |           x           |                |                 |                      |                     |          x         |         |      x     |       x      |
+| White papers                                           |           x           |                  |          x          |                                      |                   |                       |                |                 |                      |                     |          x         |         |      x     |       x      |
+| Technical presentations                                |           x           |         x        |          x          |                                      |         x         |           x           |                |                 |                      |                     |          x         |         |      x     |              |
+| Technical blogs                                        |           x           |                  |          x          |                                      |                   |                       |                |                 |                      |                     |          x         |         |            |       x      |
+| Analyst demos                                          |                       |                  |                     |                                      |                   |                       |                |                 |           x          |                     |                    |         |            |              |
+
+* sim demo = click-through demos v1 and v2 styles

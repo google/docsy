@@ -1,0 +1,113 @@
+## 1. Introduction
+
+This document defines the scope of Green Orbit Digital's Information Security Management System (ISMS), establishing the boundaries and applicability of information security controls within our organization.
+
+## 2. Organizational Context
+
+### 2.1 Company Overview
+
+Green Orbit Digital provides sustainable marketing solutions for the space industry. Our operations include digital marketing services, content creation, and strategic consulting, delivered through both office-based and remote working environments.
+
+## 3. ISMS Boundaries
+
+### 3.1 Physical Locations
+
+- Main office facilities
+
+- Remote working environments
+
+- Data center facilities
+
+- Cloud service infrastructure
+
+### 3.2 Technology Scope
+
+- Information systems and networks
+
+- Cloud-based services and applications
+
+- Mobile devices and endpoints
+
+- Data storage and backup systems
+
+### 3.3 Organizational Functions
+
+- Marketing and creative services
+
+- Client project management
+
+- IT operations and support
+
+- Administrative functions
+
+- Human resources
+
+## 4. Information Assets
+
+- Client data and marketing materials
+
+- Intellectual property
+
+- Employee information
+
+- Business strategy documents
+
+- System configurations and security controls
+
+## 5. Dependencies and Interfaces
+
+### 5.1 External Dependencies
+
+- Cloud service providers
+
+- IT service vendors
+
+- Communication service providers
+
+- Third-party software suppliers
+
+### 5.2 Internal Interfaces
+
+- Network infrastructure
+
+- Business applications
+
+- Communication systems
+
+- Security monitoring tools
+
+## 6. Exclusions
+
+The following areas are excluded from the ISMS scope:
+
+- Client-managed systems and infrastructure
+
+- Third-party managed services outside our direct control
+
+- Personal devices not used for business purposes
+
+## 7. Applicability
+
+This ISMS applies to:
+
+- All employees and contractors
+
+- All information systems owned or managed by Green Orbit Digital
+
+- All business processes and activities
+
+- All locations where company information is processed
+
+## 8. Compliance Requirements
+
+- ISO/IEC 27001:2022 standard
+
+- GDPR and data protection regulations
+
+- Industry-specific requirements
+
+- Contractual obligations
+
+## 9. Review and Update
+
+This scope document will be reviewed annually or when significant changes occur in the organization's context, ensuring it remains appropriate and effective for our information security needs.

@@ -1,0 +1,152 @@
+<!-- Unsupported block type: callout -->
+
+
+
+<!-- Unsupported block type: table_of_contents -->
+
+
+
+Company Overview
+
+Summary of Company History and Why It Was Started
+
+Green Orbit Digital was founded to help businesses leverage the power of space-driven solutions and innovative marketing to promote sustainability. The company was started by Ryan Laird with a mission to empower organisations across various industries—including space startups, smart cities, and environmental initiatives—to implement forward-thinking marketing strategies while ensuring positive environmental impact. With a deep understanding of both space technologies and sustainable business practices, Green Orbit Digital aims to bridge the gap between innovative technology and responsible business practices.
+
+High-Level Goals and Problems the Company Solves
+
+Green Orbit Digital's primary goal is to help businesses drive global sustainability through innovative marketing and space-driven solutions. The company addresses challenges such as:
+
+- Helping organisations align with sustainable practices and leverage space technology for long-term growth.
+
+- Assisting in communicating complex sustainability solutions clearly and effectively.
+
+- Enabling businesses to position themselves as leaders in the space and sustainability sectors while achieving measurable environmental outcomes.
+
+- Supporting the development and scaling of sustainability initiatives through tailored digital marketing strategies.
+
+Main Value Propositions of the Company
+
+- Sustainability: Green Orbit Digital is committed to driving sustainable practices and promoting green technologies, including space solutions, to meet business and environmental goals.
+
+- Expertise in Space and Sustainability: The company leverages space technologies to enhance businesses’ environmental impact and operational efficiency.
+
+- Innovative Marketing: Green Orbit Digital offers forward-thinking marketing strategies that empower organisations to effectively communicate their sustainability efforts and innovations.
+
+- Tailored Solutions: The company offers customised services that help clients achieve their sustainability targets while fostering collaboration and maximising industry potential.
+
+Quick Summary of the Company's Defining Qualities/Philosophy
+
+Green Orbit Digital is dedicated to promoting sustainability through the fusion of space technologies and digital marketing. The company is driven by the philosophy that space is an enabler of resilience, sustainability, and innovation, and believes that responsible marketing practices can help create a meaningful and lasting impact on the planet.
+
+<!-- Unsupported block type: divider -->
+
+### Products
+
+Quick Descriptions of Each Product or Package Sold
+
+1. Sustainable Marketing Campaigns
+
+1. Space Sustainability Consulting
+
+1. Corporate Social Responsibility (CSR) Framework Development
+
+1. Training and Workshops
+
+What is Each One For? What Does Each One Solve?
+
+- Sustainable Marketing Campaigns: These campaigns help businesses communicate their sustainability efforts effectively to customers, positioning them as leaders in responsible innovation.
+
+- Space Sustainability Consulting: This product provides expert guidance for space companies to reduce environmental impact and ensure sustainability practices are integrated into their business models.
+
+- Corporate Social Responsibility (CSR) Framework: The framework helps businesses align their operations with sustainability goals and ensures that environmental, ethical, and economic responsibilities are met.
+
+- Training and Workshops: These sessions provide organisations with the knowledge and tools to implement space technologies in a sustainable way and understand the broader environmental impact.
+
+Why Was Each Product Created? What Value Do They Provide?
+
+- Sustainable Marketing Campaigns: Created to assist businesses in sharing their sustainability stories with the world in an impactful, engaging, and responsible way.
+
+- Space Sustainability Consulting: Developed to help space companies navigate the complexities of sustainability regulations and industry standards while reducing their environmental footprint.
+
+- Corporate Social Responsibility (CSR) Framework: The CSR framework was created to help businesses structure their sustainability efforts, ensuring they meet both regulatory requirements and market expectations for responsible business practices.
+
+- Training and Workshops: Created to build industry knowledge and empower organisations to integrate space technologies in a way that drives sustainability across various sectors.
+
+Who Are These Products For? General Audience?
+
+- Sustainable Marketing Campaigns: Businesses seeking to promote their sustainability initiatives and engage with environmentally conscious consumers.
+
+- Space Sustainability Consulting: Space startups, established companies in the space sector, or those looking to integrate space technology into their operations with sustainability in mind.
+
+- Corporate Social Responsibility (CSR) Framework: Organisations of all sizes looking to build or refine their sustainability strategy, aligning with global sustainability standards.
+
+- Training and Workshops: Companies, teams, or professionals seeking to expand their knowledge of space technology and sustainability practices.
+
+<!-- Unsupported block type: divider -->
+
+### Process
+
+What Are the Main Steps of Your Sales Process?
+
+1. Lead Generation: Identify and target businesses within the space, sustainability, and technology sectors that align with Green Orbit Digital's services.
+
+1. Initial Outreach: Contact potential clients via email, phone calls, or social media to introduce the company and set up initial discovery meetings.
+
+1. Discovery Call: Assess the needs and goals of the potential client, discuss how Green Orbit Digital can assist, and outline potential solutions.
+
+1. Proposal Creation: Based on the discovery call, create a tailored proposal or solution package, highlighting the value Green Orbit Digital can provide.
+
+1. Follow-Up: Keep communication open and follow up with additional information or clarifications if necessary.
+
+1. Contract Negotiation: Once the client agrees to the proposal, negotiate contract terms and final pricing.
+
+1. Closing the Deal: Finalise the contract and begin the onboarding process with the client.
+
+On What Timeline/Cadence Do You Contact Customers?
+
+- Initial outreach typically occurs within 48 hours of identifying a lead.
+
+- Follow-up emails should be sent after 3-5 days of the first contact, and the sales team should maintain a cadence of reaching out every week until the prospect is engaged.
+
+- After the discovery call, follow-up should occur within 48 hours to keep the momentum going.
+
+How Do You Reach Customers?
+
+- Email: The primary mode for initial outreach and follow-up.
+
+- Phone: For more personal connections and closing the deal.
+
+- In-Person: For high-value clients or strategic partnerships, face-to-face meetings can be arranged.
+
+What is the Normal Timing for Moving Customers from Prospects to Closed Deals?
+
+- The timeline from prospect to closed deal typically ranges from 2-4 weeks, depending on the complexity of the proposal and the client's decision-making process.
+
+What Should Be Documented by the Sales Team Along the Way? Where Should They Keep Notes and Report on Their Progress?
+
+- Discovery Notes: Document client needs, goals, and key decision-makers.
+
+- Proposal Details: Document any changes or customisation requests for the proposal.
+
+- Follow-Up Details: Track communication dates and content.
+
+- Closed Deal Details: Final contract terms, project scope, and any client-specific preferences.
+
+Sales notes should be stored within Green Orbit Digital's CRM (HubSpot), ensuring visibility and tracking across the sales process.
+
+Guidelines for How to Speak to Customers? Etiquette Recommendations
+
+- Professional yet Personable: Approach clients as partners in sustainability, demonstrating deep industry knowledge while maintaining a personable, approachable tone.
+
+- Solution-Oriented: Always focus on how Green Orbit Digital can solve the client’s challenges, emphasising value and long-term outcomes.
+
+- Active Listening: Ensure that the client’s needs are heard and addressed. Encourage open dialogue and questions.
+
+- Transparency: Be open about pricing, deliverables, timelines, and potential challenges.
+
+- Empathy: Understand that sustainability and space technologies can be complex topics—be patient and willing to educate where needed.
+
+
+
+
+

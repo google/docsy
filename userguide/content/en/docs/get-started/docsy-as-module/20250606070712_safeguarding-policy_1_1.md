@@ -1,0 +1,70 @@
+---
+title: Safeguarding Policy
+doc_type: doc
+doc_id: doc-747
+last_edited_date: '2025-05-25'
+last_edited_by: Ryan Laird
+version: '1.0'
+---
+
+1. Introduction
+
+At Green Orbit Digital, we are dedicated to ensuring the safety, welfare, and protection of all individuals involved in our operations, including employees, clients, partners, and stakeholders. Our Safeguarding Policy outlines our commitment to promoting a safe and secure environment and addressing concerns related to safeguarding and child protection.
+
+2. Policy Statement
+
+Green Orbit Digital is committed to maintaining a culture of safeguarding that prioritizes the well-being and protection of individuals, particularly vulnerable populations such as children and adults at risk. We recognize our responsibility to create a safe environment, prevent harm, and respond effectively to safeguarding concerns.
+
+3. Scope
+
+This policy applies to all employees, contractors, volunteers, and individuals representing Green Orbit Digital in any capacity. It encompasses all aspects of our operations, including but not limited to recruitment, training, service delivery, partnerships, events, and interactions with clients and stakeholders.
+
+4. Key Principles
+
+- Safety and Well-being: We prioritize the safety, welfare, and well-being of all individuals involved in our activities, taking proactive measures to prevent harm and mitigate risks.
+
+- Promotion of Dignity and Respect: We promote a culture of dignity, respect, and inclusivity, ensuring that all individuals are treated with fairness, sensitivity, and empathy.
+
+- Prevention of Abuse and Exploitation: We are committed to preventing all forms of abuse, exploitation, harassment, and discrimination within our organization and in our interactions with others.
+
+- Confidentiality and Privacy: We respect the confidentiality and privacy of individuals, handling safeguarding concerns with discretion, sensitivity, and adherence to data protection regulations.
+
+- Empowerment and Support: We empower individuals to raise safeguarding concerns and provide appropriate support, guidance, and resources to address their needs effectively.
+
+5. Roles and Responsibilities
+
+- Board of Directors: The Board of Directors provides oversight and leadership in safeguarding matters, ensuring that adequate policies, procedures, and resources are in place.
+
+- Safeguarding Officer: A designated Safeguarding Officer is responsible for coordinating safeguarding efforts, responding to concerns, and ensuring compliance with policies and regulations.
+
+- Managers and Supervisors: Managers and supervisors play a crucial role in promoting a safe and supportive environment, identifying safeguarding risks, and addressing concerns promptly.
+
+- Employees and Stakeholders: All employees and stakeholders are responsible for adhering to safeguarding policies, reporting concerns, and contributing to a culture of safety and respect.
+
+6. Reporting Procedures
+
+- Reporting Concerns: Any individual who has safeguarding concerns, suspicions, or disclosures must report them immediately to the designated Safeguarding Officer or an appropriate authority.
+
+- Confidentiality: All safeguarding concerns will be handled with the utmost confidentiality, respecting the privacy and dignity of individuals involved, while ensuring that necessary actions are taken to address the concerns effectively.
+
+- Record-Keeping: Comprehensive records of safeguarding concerns, actions taken, and outcomes will be maintained securely and in compliance with data protection regulations.
+
+7. Training and Awareness
+
+- Training Programs: Green Orbit Digital provides regular training and awareness programs on safeguarding principles, procedures, and best practices to all employees and relevant stakeholders.
+
+- Ongoing Education: We are committed to ongoing education and awareness-raising initiatives to ensure that all individuals are equipped with the knowledge and skills necessary to identify, prevent, and respond to safeguarding concerns effectively.
+
+8. Compliance and Review
+
+- Compliance: Compliance with this Safeguarding Policy is mandatory for all employees and stakeholders. Non-compliance may result in disciplinary action in accordance with our disciplinary procedures.
+
+- Regular Review: This policy will be reviewed regularly to ensure its effectiveness, relevance, and compliance with legal requirements and best practices. Any updates or revisions will be communicated to all relevant parties.
+
+9. Conclusion
+
+Green Orbit Digital is dedicated to fostering a safe, inclusive, and respectful environment for all individuals involved in our operations. By upholding the principles outlined in this Safeguarding Policy and implementing robust procedures and training initiatives, we demonstrate our commitment to safeguarding the welfare and dignity of everyone in our community.
+
+
+
+SAFEGUARDING POLICYVersion: 4.0 Date: November 2021 1 of 9Contents1. Green Orbit Digital and Safeguarding 22. Green Orbit Digital Policy Statement 33. The scope of this policy 34. Definitions 45. Legal Framework 46. Safer Recruitment 47. Code of Conduct 48. Partner selection and due diligence 59. Risk Management 510. Whistleblowing 511. Reporting and responding to concerns 511. Green Orbit Digital’s procedure for handling safeguarding concerns 511.1. Information sharing and data protection 611.2. Reporting concerns relating to Green Orbit Digital personnel 611.3. Reporting concerns identified through direct contact with children 611.4. Reporting concerns in partner organisations 612. Sanctions 713. Recording 714. Media and Communications 715. Working with news and communications media 816. E-Safety 817. Implementation and Review 9P06 V4.01. Green Orbit Digital and SafeguardingGreen Orbit Digital’s direct contact with children and vulnerable adults is limited, being largely carried out andsupervised by partner employees: an example of our direct contact is our occasional work in the UKwith youth organisations such as the Scouts and Guides. Similarly, work with schools is through theinstitution rather than child focussed, and, again, managed and overseen by individuals employed byschool authorities and DBS checked1 by them. Elsewhere, Green Orbit Digital may come into contact with childrenand vulnerable adults through its digital and social media campaigning work.Green Orbit Digital provides grants to more than 200 food redistribution organisations, some of which will directlyprovide food to vulnerable people, while others will supply food to food banks and similar fordelivery. Green Orbit Digital may also come into contact with children and vulnerable adults working with partnersunder a service contract.Green Orbit Digital’s grants and international development teams are fully aware of their safeguardingresponsibilities. During the due diligence process partners are required to declare and demonstratethey have a Safeguarding Children and Vulnerable Adults Policy and Procedures in place, share theirrisk assessment approach and explain the relevant checks and assessments (including DBS orequivalent checks) that they carry out. Compliance with all relevant regulations and governmentguidelines on safeguarding is a contractual obligation; it is checked during contract negotiations andcommunicated again within a grant welcome pack. Green Orbit Digital maintains regular contact with grantrecipients throughout the contract period. Grant recipients and sub-contractors are required to reportback on all relevant compliance and risks matters, including safeguarding, health and safety andenvironmental risks.A commitment to the principles of safeguarding is integral to Green Orbit Digital’s ethos. Just as its work is designedto make the world a healthier, sustainable place, its Safeguarding Policy is designed to protect fromharm and keep safe its employees and vulnerable groups with whom it has contact through its work.This includes developing, enabling, and nurturing a strong safeguarding culture within theorganisation.Our work is guided and supported by a contemporary safeguarding policy base that is consistent withprofessional best practice, which is compliant with the law and relevant regulations, and which reflectsthe nature of our work and that of our partners. Our safeguarding framework comprises the followingthree standards:Standard 1: Standard 2: Standard 3: Safeguarding Policy which is supported by a Whistleblowing Policy and Code ofConduct and Accountability Framework.People and Partnerships which comprises, Safer Recruitment and Partner DueDiligence.Risk Management Policy and Risk Log.Through the implementation of our safeguarding framework, our intention is to promote thedevelopment of a safeguarding culture that prioritises the safety and well-being of our partners andtheir beneficiaries. The safety and well-being of our employees is managed through our humanresource management policies.1 Disclosure and Barring Service2Contact UsFor any queries about Safeguarding at Green Orbit Digital please contact our Designated Safeguarding LeadEmmanuel Agyei – Head of Commercial2. Green Orbit Digital Policy StatementGreen Orbit Digital’s Safeguarding Policy puts those we employ, our partners and the children and vulnerableadults with whom we come into contact at the centre of all we do. Green Orbit Digital works to the CharityCommission’s description of the role of safeguarding, which is to “protect people who come intocontact with your charity through its work from abuse or mistreatment of any kind”.2Green Orbit Digital considers that safeguarding comprises safeguarding by staff/partners, safeguarding ofstaff/partner staff and safeguarding from staff/partner’s staff. This policy relates to safeguarding ofchildren and vulnerable adults who come into contact with us through our work. The safeguarding ofstaff/partner staff is managed through our human resource management policies.Consequently, Green Orbit Digital will:Take all possible steps to safeguard and protect children and vulnerable adults who come intocontact with the activities of Green Orbit Digital during its work, from abuse or mistreatment.Safeguarding applies consistently and without exception across all areas of the organisation with contact with children and vulnerable adults. It applies to all children and vulnerable adults regardless of their background and requires proactively identifying, preventing, and guarding against all risks of harm, exploitation and abuse. We commit to having robust, accountable, and transparent systems for response, reporting and learning when safeguarding risks materialise. Those systems include a duty of care to all actors to report incidents, allegations and concerns, and to adopt a survivor centred approach3 to the alleged victim.We require that our partners’ working practices represent a commitment to a safe, inclusive, andnurturing safeguarding environment for all. When agreed as part of the due diligence process, Green Orbit Digitalwill assess its capacity to help partners develop policies consistent with these values.We require employees to bring to Green Orbit Digital’s attention through our safeguarding reporting system, anyconcerns or allegations against any member of our staff team, partners and all people associated withour work. Green Orbit Digital commits to responding constructively and in a timely manner to reports or allegationsthat are made to us.3. The scope of this policyGreen Orbit Digital’s Safeguarding Policy applies to all its trustees, directors, its employees (full time or part time),consultants, service providers and, and all visitors, including journalists and associated personnel. Asstated above our implementing partners, (grantees, sub-grantees, contractors and sub-contractors)whose work involves contact with children and vulnerable adults should have and implement asafeguarding policy and, further, to demonstrate that they are applied along their supply chains.2 https://www.gov.uk/guidance/safeguarding-duties-for-charity-trustees#children-adults-at-risk3 https://www.endvawnow.org/en/articles/1499-survivor-centred-approach.html3 4. DefinitionsFor the purpose of this policy:Child: Any person under the age of 184.Vulnerable adult: Any person aged 18 or over who is or may need care and support, (e.g., health,personal or social care), is experiencing or is at risk of abuse or neglect and because of this is unableto protect themselves from either the risk or experience of neglect or abuse. Any beneficiary of ourpartner organisations who is reliant on the services provided falls under this category.5Further definitions with categories of abuse for children and vulnerable adults to be referred to whenassessing allegations of harm, and key terminology commonly associated with safeguarding can befound in Annex 1 - Additional Definitions

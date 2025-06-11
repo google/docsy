@@ -1,0 +1,7 @@
+- Stage links
+  - Discussions and issues are located at [`gitlab-org/software-supply-chain-security`](https://gitlab.com/gitlab-org/software-supply-chain-security)
+  - General Slack [#s_software-supply-chain-security](https://app.slack.com/client/T02592416/CFHGVJ06R)
+  - Social channel [#sec-section-social](https://app.slack.com/client/T02592416/C01ACJRU5PH)
+  - Engineering Slack [#sd_sscs_engineering](https://app.slack.com/client/T02592416/C040C6LNANB)
+  - Software Supply Chain Security Shared Calendar ID `gitlab.com_ed6207uel78de0j1849vjjnb3k@group.calendar.google.com`
+  - GitLab Managers: `@gitlab-org/software-supply-chain-security/managers`

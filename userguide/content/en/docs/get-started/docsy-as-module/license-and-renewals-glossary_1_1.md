@@ -1,0 +1,25 @@
+---
+title: Licensing & Renewals Glossary of Terms
+description: A list of terms used in the Licensing and Renewals workflow
+---
+
+## Common Terminology
+
+|Term|Description|
+|--|--|
+|Add-on|An optional extra that can be purchased to increase the limits of what is available in GitLab. Common examples of this are a `Seat add-on` where additional seats are purchased during the subscription term, or an additional `Storage` or `Compute Minutes` purchase (on SaaS only).|
+|[Cloud Licensing](https://about.gitlab.com/pricing/licensing-faq/cloud-licensing/) / Cloud Activation *(SM Only)* | The preferred method of activating a self managed subscription where [subscription data is synchronized daily](https://docs.gitlab.com/ee/subscriptions/self_managed/#subscription-data-synchronization) from the customer instance to Customers.gitlab.com.  Unlike a License File, a cloud activation code does not need to be re-applied when the subscription is modified or renewed.|
+|Customers Portal / CustomersDOT / customers.gitlab.com|Available at [customers.gitlab.com](https://customers.gitlab.com), the customers portal allows customers to view, manage and purchase subscriptions. L&R Engineers can generate, modify and send subscription information from here.|
+|[GitLab Dedicated](https://docs.gitlab.com/ee/subscriptions/gitlab_dedicated/)|Provides the benefits of SaaS (fully managed maintenance and operations) with infrastructure-level isolation while the customer has access to Administrator account on their instance.|
+|Legacy License File / License Key *(SM Only)*| License files are now a legacy option used to provide SM trials, or for customers subject to certain criteria. License files are necessary to activate a subscription prior to GitLab 14.1.  License files typically have a maximum validity of one year, and must be re-issued and uploaded again if a subscription is modified or renewed.|
+|[Namespace](https://docs.gitlab.com/ee/user/namespace/#namespaces) *(SaaS Only)*|A top-level group on gitlab.com where a subscription is applied. The subscription plan is available to all subgroups and projects under the namespace|
+|Offline Cloud Licensing *(SM Only)*| In situations where customers must maintain an instance without Internet access, an [Offline Cloud License](https://about.gitlab.com/pricing/licensing-faq/cloud-licensing/#offline-cloud-licensing) provides the benefits of Cloud Licensing by generating a usage data file locally.  The customer is prompted to upload this file monthly. |
+|[Quarterly Subscription Reconciliation (QSR)](https://docs.gitlab.com/ee/subscriptions/quarterly_reconciliation.html)|Introduced as a “Pay as you Go” alternative to True-Ups. A QSR is processed quarterly and will deliver cost savings versus the annual approach of True-Ups.|
+|Seat|A seat represents GitLab’s implementation of a ‘concurrent software license’, which means the maximum number of users who will use the GitLab application and access paid features at any one time. Customers can change the specific users working with a GitLab Seat, providing the total seats in use does not exceed the total number of seats purchased. |
+|Self-Managed (**SM**)|Instances of the GitLab application managed by the customers themselves. The customers retain complete access and administrative control over their environment.|
+|Software-as-a-Service (**SaaS**)|GitLab.com is the Software as a Service (SaaS) offering for the GitLab product. GitLab team members handle the maintenance, operation and upgrading of GitLab.com.|
+|Subscription|Typically, a 12-month agreement to receive access to a tier of features in GitLab.|
+|Trial|A short trial (usually at most 30 days) of GitLab paid features with [some restrictions](https://about.gitlab.com/free-trial/#what-is-included-in-my-free-trial-what-is-excluded) when used on SaaS. Customers can initiate a trial directly for both SaaS and Self-Managed on gitlab.com.  Trials are often requested by GitLab Sales to extend subscriptions when a customer purchase has not been finalized.|
+|True-Ups|A method of reconciling `Users over Subscription` after the subscription term has expired. True-Ups require the full subscription fee for Users over Subscription to cover the previous subscription term.|
+|User|A user on the GitLab platform. Most users will occupy a seat, subject to [some exceptions](https://about.gitlab.com/pricing/licensing-faq/#GitLab.com). Users can include administrator accounts (on Self-Managed), as well as automated job or bot users. |
+|[Users over Subscription](https://docs.gitlab.com/ee/subscriptions/self_managed/index.html#users-over-subscription) (**SM**) / [Seats owed](https://docs.gitlab.com/ee/subscriptions/gitlab_com/index.html#seats-owed) (**SaaS**) |GitLab permits additional usage over the purchased seat agreement, ensuring more users can be added during the subscription term without unnecessary obstacles. This overage can be processed at any time by adding more seats to the current subscription (seats add-on), processing the overage annually (`True-Ups`) or quarterly (`Quarterly Subscription Reconciliation`).|

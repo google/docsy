@@ -1,0 +1,4 @@
+- Engineering links
+  - Foundations and Data Science engineering discussion are located at [`gitlab-org/foundations/engineering-managers`](https://gitlab.com/gitlab-org/foundations/engineering-managers)
+  - Social channel [#pikachus-social](https://gitlab.slack.com/archives/GSEL4S98S)
+  - Engineering Manager Slack [#s_foundations_data_science_ems](https://gitlab.slack.com/archives/C01VAATSWNP)

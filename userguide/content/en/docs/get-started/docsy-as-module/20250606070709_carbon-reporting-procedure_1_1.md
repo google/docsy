@@ -1,0 +1,18 @@
+---
+title: Carbon Reporting Procedure
+doc_type: doc
+doc_id: doc-182
+last_edited_date: '2025-05-25'
+last_edited_by: Ryan Laird
+version: '1.0'
+---
+
+<!-- Unsupported block type: callout -->
+
+<!-- Unsupported block type: column_list -->
+
+<!-- Unsupported block type: code -->
+
+# Related Resources
+
+-

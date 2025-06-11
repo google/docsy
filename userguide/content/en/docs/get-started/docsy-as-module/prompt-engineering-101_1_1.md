@@ -1,0 +1,117 @@
+## 🎯 Goal
+
+Learn how to write better prompts to get the most out of ChatGPT and similar tools — for all kinds of tasks, not just coding.
+
+<!-- Unsupported block type: divider -->
+
+## 🚀 Why This Matters
+
+Most people write prompts like this:
+
+<!-- Unsupported block type: quote -->
+
+That’s the equivalent of Googling "stuff".
+
+Let’s go pro.
+
+<!-- Unsupported block type: divider -->
+
+## 📦 Core Concepts of Prompting
+
+### 1. Context is King
+
+LLMs love context. The more you give, the better the output.
+
+<!-- Unsupported block type: quote -->
+
+<!-- Unsupported block type: quote -->
+
+<!-- Unsupported block type: divider -->
+
+### 2. Role Assignment
+
+<!-- Unsupported block type: quote -->
+
+Roles change everything. Try it.
+
+<!-- Unsupported block type: divider -->
+
+### 3. Examples > Explanations
+
+Few-shot prompting is powerful.
+
+<!-- Unsupported block type: quote -->
+
+<!-- Unsupported block type: divider -->
+
+### 4. Constraints Help
+
+<!-- Unsupported block type: quote -->
+
+Constraints = better outputs.
+
+<!-- Unsupported block type: divider -->
+
+### 5. Iterate, Don’t Expect Magic
+
+You’re allowed to keep going:
+
+<!-- Unsupported block type: quote -->
+
+LLMs love feedback.
+
+<!-- Unsupported block type: divider -->
+
+## 🔧 Dev Use Cases
+
+- 🔍 Debugging:
+
+- 📄 PR Summaries:
+
+- 🧠 Naming things:
+
+- 📜 Commit messages:
+
+- 🤖 GitHub Copilot prompts:
+
+<!-- Unsupported block type: divider -->
+
+## 💼 Non-Dev Use Cases
+
+- ✍️ Docs:
+
+- 📣 Marketing:
+
+- 📅 Planning:
+
+- 🧑‍🏫 Hiring:
+
+<!-- Unsupported block type: divider -->
+
+## ⚙️ Bonus: API-Level Prompting (1 Minute)
+
+If using OpenAI's API:
+
+<!-- Unsupported block type: code -->
+
+- system: Sets the role/persona
+
+- user: The actual prompt
+
+- temperature: 0 = deterministic, 1 = creative/random
+
+## 🎁 Cheat Code: Prompt Structure
+
+- [Persona or role]
+
+- [Clear task]
+
+- [Context]
+
+- [Constraints]
+
+- [Optional: examples]
+
+- [Optional: output formatting]
+
+🔥

@@ -1,0 +1,197 @@
+---
+title: "Cells"
+status: ongoing
+creation-date: "2022-09-07"
+authors: ["@ayufan", "@fzimmer", "@DylanGriffith", "@lohrc", "@tkuah"]
+coach: "@ayufan"
+approvers: ["@lohrc"]
+owning-stage: "~devops::tenant scale"
+participating-stages: []
+toc_hide: true
+no_list: true
+---
+
+{{< design-document-header >}}
+
+This document is a work-in-progress and represents a very early state of the Cells design. Significant aspects are not documented, though we expect to add them in the future.
+
+Cells is a new architecture for our software as a service platform. This architecture is horizontally scalable, resilient, and provides a more consistent user experience. It may also provide additional features in the future, such as data residency control (regions) and federated features.
+
+For more information about Cells, see also:
+
+## Cells Iterations
+
+- The [Cells 1.0](iterations/cells-1.0.md) target is to deliver a solution
+  for internal customers using the SaaS GitLab.com offering, and foundational work for Cells.
+- The [Cells 1.5](iterations/cells-1.5.md) target is to deliver a migration solution
+  for existing and new enterprise customers using the SaaS GitLab.com offering, built on top of the Cells 1.0 architecture.
+- The [Cells 2.0](iterations/cells-2.0.md) target is to support a public and open source contribution
+  model in a cellular architecture.
+
+## Goals
+
+See [Goals, Glossary and Requirements](goals.md).
+
+## Technical proposals
+
+The Cells architecture has long lasting implications to data processing, location, scalability and the GitLab architecture.
+This section links all different technical proposals that are being evaluated.
+
+- Cells Services:
+  - [HTTP Routing Service](http_routing_service.md)
+  - [SSH Routing Service](ssh_routing_service.md)
+  - [Topology Service](topology_service.md)
+  - Planned: Indexing Service
+- [Mutual authentication between Cell services](mutual_authentication_between_cell_services.md)
+- [Feature Flags](./infrastructure/feature_flags.md) - ([Previous iteration](feature_flags.md))
+- [Cells: Infrastructure](./infrastructure/_index.md)
+- [Organization migration](migration.md)
+- [Routable Tokens](routable_tokens.md)
+
+## Impacted features
+
+The Cells architecture will impact many features requiring some of them to be rewritten, or changed significantly.
+Below is a list of known affected features with preliminary proposed solutions.
+
+- [Cells: Admin Area](impacted_features/admin-area.md)
+- [Cells: Advanced search](impacted_features/advanced-search.md)
+- [Cells: Backups](impacted_features/backups.md)
+- [Cells: CI/CD Catalog](impacted_features/ci-cd-catalog.md)
+- [Cells: CI Runners](impacted_features/ci-runners.md)
+- [Cells: Container Registry](impacted_features/container-registry.md)
+- [Cells: Contributions: Forks](impacted_features/contributions-forks.md)
+- [Cells: Data Migration](impacted_features/data-migration.md)
+- [Cells: Explore](impacted_features/explore.md)
+- [Cells: Git Access](impacted_features/git-access.md)
+- [Cells: Global Search](impacted_features/global-search.md)
+- [Cells: GraphQL](impacted_features/graphql.md)
+- [Cells: Organizations](impacted_features/organizations.md)
+- [Cells: Personal Access Tokens](impacted_features/personal-access-tokens.md)
+- [Cells: Personal Namespaces](impacted_features/personal-namespaces.md)
+- [Cells: Secrets & Credentials](impacted_features/secrets.md)
+- [Cells: Snippets](impacted_features/snippets.md)
+- [Cells: User Profile](impacted_features/user-profile.md)
+- [Cells: Your Work](impacted_features/your-work.md)
+
+### Impacted features: Placeholders
+
+The following list of impacted features only represents placeholders that still require work to estimate the impact of Cells and develop solution proposals.
+
+- [Cells: Agent for Kubernetes](impacted_features/agent-for-kubernetes.md)
+- [Cells: Data pipeline ingestion](impacted_features/data-pipeline-ingestion.md)
+- [Cells: GitLab Pages](impacted_features/gitlab-pages.md)
+- [Cells: Group Transfer](impacted_features/group-transfer.md)
+- [Cells: Issues](impacted_features/issues.md)
+- [Cells: Merge Requests](impacted_features/merge-requests.md)
+- [Cells: Project Transfer](impacted_features/project-transfer.md)
+- [Cells: Router Endpoints Classification](impacted_features/router-endpoints-classification.md)
+- [Cells: Schema changes (Postgres and Elasticsearch migrations)](impacted_features/schema-changes.md)
+- [Cells: Uploads](impacted_features/uploads.md)
+- ...
+
+## Frequently Asked Questions
+
+### What's the difference between Cells architecture and GitLab Dedicated?
+
+We've captured individual thoughts and differences between Cells and Dedicated over [here](infrastructure/diff-between-dedicated.md)
+
+The new Cells architecture is meant to scale GitLab.com.
+The way to achieve this is by moving Organizations into Cells, but different Organizations can still share server resources, even if the application provides isolation from other Organizations.
+But all of them still operate under the existing GitLab SaaS domain name `gitlab.com`.
+Also, Cells still share some common data, like `users`, and routing information of Groups and Projects.
+For example, no two users can have the same username even if they belong to different Organizations that exist on different Cells.
+
+With the aforementioned differences, [GitLab Dedicated](https://about.gitlab.com/dedicated/) is still offered at higher costs due to the fact that it's provisioned with dedicated server resources for each customer, while Cells use shared resources.
+This makes GitLab Dedicated more suited for bigger customers, and GitLab Cells more suitable for small to mid-size companies that are starting on GitLab.com.
+
+On the other hand, GitLab Dedicated is meant to provide a completely isolated GitLab instance for any Organization.
+This instance is running on its own custom domain name, and is totally isolated from any other GitLab instance, including GitLab SaaS.
+For example, users on GitLab Dedicated don't have to have a different and unique username that was already taken on GitLab.com.
+
+### Can different Cells communicate with each other?
+
+Not directly, our goal is to keep them isolated and only communicate using global services.
+
+### How are Cells provisioned?
+
+The GitLab.com cluster of Cells will use GitLab Dedicated tooling to create instances.
+Once this instance gets provisioned it could join the GitLab.com cluster and become a Cell.
+One requirement will be that the instance does not contain any prior data.
+
+To reach shared resources, Cells will use [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect).
+
+See also the [design discussion](https://gitlab.com/gitlab-org/gitlab/-/issues/396641).
+
+### What is a Cells topology?
+
+See the [design discussion](https://gitlab.com/gitlab-org/gitlab/-/issues/396641).
+
+### How are users of an Organization routed to the correct Cell?
+
+TBD
+
+### How do users authenticate with Cells and Organizations?
+
+See the [design discussion](https://gitlab.com/gitlab-org/gitlab/-/issues/395736).
+
+### How are Cells rebalanced?
+
+TBD
+
+### How can Cells implement disaster recovery capabilities?
+
+TBD
+
+### How do I decide whether to move my feature to the cluster, Cell or Organization level?
+
+By default, features are required to be scoped to the Organization level. Any deviation from that rule should be validated and approved by Tenant Scale.
+
+The design goals of the Cells architecture describe that [all Cells are under a single domain](goals.md#all-cells-are-under-a-single-gitlabcom-domain) and as such, Cells are invisible to the user:
+
+- Cell-local features should be limited to those related to managing the Cell, but never be a feature where the Cell semantic is exposed to the customer.
+- The Cells architecture wants to freely control the distribution of Organization and customer data across Cells without impacting users when data is migrated.
+
+Cluster-wide features are strongly discouraged because:
+
+- They might require storing a substantial amount of data cluster-wide which decreases [scalability headroom](goals.md#provides-100x-headroom).
+- They might require implementation of non-trivial [data aggregation](goals.md#aggregation-of-cluster-wide-data) that reduces resilience to [single node failure](goals.md#high-resilience-to-a-single-cell-failure).
+- They are harder to build due to the need of being able to run [mixed deployments](goals.md#cells-running-in-mixed-deployments). Cluster-wide features need to take this into account.
+- They might affect our ability to provide an [on-premise like experience on GitLab.com](goals.md#on-premise-like-experience).
+- Some features that are expected to be cluster-wide might in fact be better implemented using aggregation techniques that use trusted intra-cluster communication using the same user identity.
+  For example, user Profile is shared across the cluster.
+- The Cells architecture limits what services can be considered cluster-wide.
+  Services that might initially be cluster-wide are still expected to be split in the future to achieve full service isolation.
+  No feature should be built to depend on such a service (like Elasticsearch).
+
+### Will Cells use the reference architecture for up to 1000 RPS or 50,000 users?
+
+See [reference architecture for up to 1000 RPS or 50,000 users](https://docs.gitlab.com/ee/administration/reference_architectures/50k_users.html).
+
+The infrastructure team will properly size Cells depending on the load.
+The Tenant Scale team sees an opportunity to use GitLab Dedicated as a base for Cells deployment.
+
+## Decision log
+
+- [ADR-001: Routing Technology using Cloudflare Workers](decisions/001_routing_technology.md)
+- [ADR-002: One GCP Project per Cell](decisions/002_gcp_project_boundary.md)
+- [ADR-003: One GKE Cluster per Cell](decisions/003_num_gke_clusters_per_cell.md)
+- [ADR-004: One VPC per Cell, with Private Service Connect for internal communication between Cells](decisions/004_vpc_subnet_design.md)
+- [ADR-005: Cells use Flexible Reference Architectures](decisions/005_flexible_reference_architectures.md)
+- [ADR-006: Use Geo for Disaster Recovery](decisions/006_disaster_recovery_geo.md)
+- [ADR-007: Cells 1.0 for internal customers only](decisions/007_internal_customers.md)
+- [ADR-008: Cluster wide unique database sequences](decisions/008_database_sequences.md)
+- [ADR-009: Initial Cell Sizes](decisions/009_cell_initial_sizing.md)
+- [ADR-010: HTTP Router uses static rules and HTTP-based caching mechanism](decisions/010_http_router_rules_and_cache.md)
+- [ADR-011: Cell Specific Configuration](decisions/011_cell_specific_configuration.md)
+- [ADR-012: Cell Unique Identifier](decisions/012_cell_unique_identifier.md)
+- [ADR 013: Use the same Cell ID for restoring a Cell from backup](decisions/013_cell_restore_from_backup.md)
+- [ADR 014: Clusterwide syncing in Cells 1.0](decisions/014_clusterwide_syncing_in_cells_1_0.md)
+
+## Links
+
+- [Internal Pods presentation](https://docs.google.com/presentation/d/1x1uIiN8FR9fhL7pzFh9juHOVcSxEY7d2_q4uiKKGD44/edit#slide=id.ge7acbdc97a_0_155)
+- [Cells Epic](https://gitlab.com/groups/gitlab-org/-/epics/7582)
+- [Database group investigation](../../../infrastructure-platforms/data-access/database-framework/doc/root-namespace-sharding/)
+- [Shopify Pods architecture](https://shopify.engineering/a-pods-architecture-to-allow-shopify-to-scale)
+- [Opstrace architecture](https://gitlab.com/gitlab-org/opstrace/opstrace/-/blob/main/docs/architecture/overview.md)
+- [Adding Diagrams to this blueprint](diagrams/_index.md)

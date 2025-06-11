@@ -1,0 +1,2 @@
+### structure data
+Google Search works hard to understand the content of a page. You can help us by providing explicit clues about the meaning of a page to Google by including structured data on the page

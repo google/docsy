@@ -1,0 +1,76 @@
+---
+title: Brand And Product Marketing
+doc_type: doc
+doc_id: doc-153
+last_edited_date: '2025-05-25'
+last_edited_by: Ryan Laird
+version: '1.0'
+---
+
+GitLab Brand and Product Marketing Handbook
+
+## Welcome to the GitLab Brand and Product Marketing Handbook
+
+The Brand and Product Marketing team’s goal is to accelerate GitLab’s path to market.
+
+- We tell the GitLab story at the brand, corporate, solution, and product levels.
+
+- We develop market insights, leadership positioning, messaging, and narratives that elevate our brand, show value in our solutions, and fuel demand for our platform.
+
+- We activate brand ambassadors and customer advocates to show GitLab’s momentum and trust in the market.
+
+## Team Disciplines – What We Do, Why We Do It
+
+### Brand
+
+Brand: We create awareness, trust, and affinity for the GitLab brand.
+
+We develop umbrella, corporate-level messaging to establish GitLab as market and category leader. We conduct research to define, evolve, and measure the health of the GitLab brand. We provide brand stewardship and governance, empowering internal and external advocates to become brand champions.
+
+### Product and Solution Marketing
+
+Product and Solution Marketing: We develop insights, positioning, and messaging that communicate the value of our platforms and solutions.
+
+Product and Solution Marketing consists of several specialities including core product marketing, customer advocacy, market insights, analyst relations, and competitive intelligence.
+
+We create positioning and messaging to fuel demand and adoption of GitLab’s solutions and products. We develop market and competitive intelligence in order to develop actionable insights on market trends, customer needs, and competitive insights that guide go-to-market and product strategy. We identify, recruit, and activate customer advocates to demonstrate momentum and trust in the market.
+
+### Design
+
+Design - Deliver creative designs and experiences that elevate our brand and fuel demand.
+
+We develop our brand visual identity design to ensure it stays relevant in the market and reflects the benefits and quality of our product. We are the creative partners for GitLab marketing. We create, conceptualize, and design high quality brand experiences.
+
+### Content
+
+Content - Showcase our leadership through easy-to-find content that is educational, thought-provoking, and market-defining.
+
+We create, review, and improve content to establish GitLab as the leader in modern software development and DevOps, while also sharing the company’s vision for the future. We create content that maintains and improves our search rankings around key terms. We create content for go-to-market campaigns that drive awareness, growth, engagement, and conversion.
+
+## Our core capabilities
+
+The Brand & Product Marketing team operates at the intersection of marketing, sales, customer success, and product management. As a team, we measure our impact through the following capabilities:
+
+<!-- Unsupported block type: image -->
+
+Brand and Product Marketing measurement
+
+### Brand
+
+GitLab Brand Handbook
+
+### Brand Creative Handbook
+
+GitLab Brand Creative Handbook:
+
+### Brand Video
+
+GitLab Brand Creative - Brand Video Handbook
+
+### GitLab Content Strategy & Ops
+
+An overview of the strategy and processes for the Content Strategy & Ops team.
+
+### Product and Solution Marketing
+
+GitLab Product and Solution Marketing: Core product marketing, competitive marketing and intelligence, market research and insights, analyst relations and customer advocacy

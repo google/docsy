@@ -1,0 +1,11 @@
+### libuv and async methods sum
+- in node js, async methods are handled by libuv
+- they are handled in two different ways
+    - Native async mechanism
+    - thread pool
+- whenever possible, libuv will use native async mechanisms in the OS so as to avoid blocking the main thread
+- since this is part of the kernel, there is different mechanism for each OS, we have Opoil for linux, Kqueue for MacOS and IO completion port on windows
+- Relying on native async mechanisms makes Node scalable as the only limitation is the operating system kernel
+- Example of this type is network I/O operation
+- if there is no native async support and the task is file I/O or CPU intensive, libuv uses the thread pool to avoid blocking the main thread
+- although the thread pool preserves asynchronicity with respect to node's main thread, it can still become a bottleneck if all threads are busy
