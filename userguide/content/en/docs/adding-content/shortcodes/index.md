@@ -10,7 +10,7 @@ resources:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
 params:
   message: Some _message_.
-cSpell:ignore: pageinfo Bjørn Pedersen
+cSpell:ignore: imgproc pageinfo Bjørn Pedersen
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -178,7 +178,7 @@ Use the **alert** shortcode to display notices and warnings. The shortcode
 renders a [Bootstrap alert component][bs-alert]. It can be used with Markdown
 content and contain other shortcodes. For example:
 
-```go-html-template
+```go-template
 {{%/* alert title="Welcome" */%}} **Hello**, world! {{%/* /alert */%}}
 ```
 
@@ -202,7 +202,7 @@ When the `alert` shortcode is used in a Markdown context that requires
 indentation, such as a list, then the alert _content_ (whether specified as
 text/Markdown or a shortcode) must be indented accordingly. For example:
 
-```go-html-template
+```go-template
 - The following note is part of this list item:
   {{%/* alert title="Celebrate!" color=success */%}}
   This alert content is properly rendered.
@@ -250,7 +250,7 @@ information for a page: for example, letting users know that the page contains
 placeholder content, that the content is deprecated, or that it documents a beta
 feature.
 
-```go-html-template
+```go-template
 {{%/* pageinfo color="info" */%}}
 This is placeholder content.
 {{%/* /pageinfo */%}}
@@ -274,7 +274,7 @@ The **imgproc** shortcode finds an image in the current
 [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a
 set of processing instructions.
 
-```go-html-template
+```go-template
 {{%/* imgproc spruce Fill "400x450" */%}}
 Norway Spruce *Picea abies* shoot with foliage buds.
 {{%/* /imgproc */%}}
