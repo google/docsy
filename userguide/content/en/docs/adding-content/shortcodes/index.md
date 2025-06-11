@@ -175,8 +175,8 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 ### alert
 
 Use the **alert** shortcode to display notices and warnings. The shortcode
-renders a [Bootstrap alert][bs-alert]. It can be used with Markdown content and
-contain other shortcodes. For example:
+renders a [Bootstrap alert component][bs-alert]. It can be used with Markdown
+content and contain other shortcodes. For example:
 
 ```go-html-template
 {{%/* alert title="Welcome" */%}} **Hello**, world! {{%/* /alert */%}}
