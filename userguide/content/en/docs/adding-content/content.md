@@ -1,8 +1,8 @@
 ---
 title: Adding Content
 weight: 1
-description: >
-  Add different types of content to your Docsy site.
+description: Add different types of content to your Docsy site.
+cSpell:ignore: goldmark Riona MacNamara
 ---
 
 So you've got a new Hugo website with Docsy, now it's time to add some content!
@@ -311,9 +311,7 @@ By default you create pages in a Docsy site as simple
 [Goldmark](https://github.com/yuin/goldmark/) is the only Markdown parser
 supported by Hugo.
 
-<div class="alert alert-primary" role="alert">
-
-<h4 class="alert-heading">Tip</h4>
+{{% alert title="Tip" %}}
 
 If you've been using versions of Hugo before 0.60 that use
 [`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser,
@@ -351,7 +349,7 @@ markup:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-</div>
+{{% /alert %}}
 
 In addition to your marked-up text, you can also use Hugo and Docsy's
 [shortcodes](/docs/adding-content/shortcodes): reusable chunks of HTML that you
@@ -852,9 +850,7 @@ disableKinds: [RSS]
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-<div class="alert alert-info" role="alert">
-
-<h4 class="alert-heading">Note</h4>
+{{% alert title=Note color=info %}}
 
 If you have enabled our [print feature](/docs/adding-content/print/) or
 otherwise specified section-level output formats in
@@ -892,7 +888,8 @@ outputs:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
-</div>
+
+{{% /alert %}}
 
 ## Sitemap
 

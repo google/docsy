@@ -35,7 +35,7 @@ configuration file. For details, see [Configure Google Analytics][].
 
 {{% alert title="Deprecation note and warning" color="warning" %}}
 
-  <!-- Remove this warning once the Hugo docs have been updated to include it. -->
+<!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
 While you can configure your project's analytics ID by setting either the
 top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,

@@ -3,12 +3,12 @@ title: Docsy Shortcodes
 linkTitle: Shortcodes
 date: 2017-01-05
 weight: 5
-description: >
-  Use Docsy's Hugo shortcodes to quickly build site pages.
+description: Use Docsy's Hugo shortcodes to quickly build site pages.
 resources:
   - src: '**spruce*.jpg'
     params:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
+cSpell:ignore: pageinfo Bjørn Pedersen
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -172,22 +172,54 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 
 ### alert
 
-The **alert** shortcode creates an alert block that can be used to display
-notices or warnings.
+Use the **alert** shortcode to display notices or warnings. The shortcode
+renders a [Bootstrap alert][]. It can be used with Markdown content and contain
+other shortcodes. For example:
 
 ```go-html-template
 {{%/* alert title="Warning" color="warning" */%}}
-This is a warning.
+This is a **warning**.
 {{%/* /alert */%}}
 ```
 
-Renders to:
+Renders as:
 
-{{% alert title="Warning" color="warning" %}} This is a warning. {{% /alert %}}
+{{% alert title="Warning" color="warning" %}} This is a **warning**.
+{{% /alert %}}
 
-| Parameter | Default | Description                                                   |
-| --------- | ------- | ------------------------------------------------------------- |
-| color     | primary | One of the theme colors, eg `primary`, `info`, `warning` etc. |
+Parameters:
+
+- `title` (optional) Renders as a Bootstrap alert heading, at heading level 4,
+  using the `h4` Bootstrap class over a `<div>` element. This prevents the title
+  from appearing in a page's table of contents.
+- `color` (optional) names one of the [Bootstrap alert][] variants: `primary`,
+  `info`, `warning`, etc.
+
+**Important!** When the `alert` shortcode is used in Markdown context that
+requires indentation, such as a list, then the alert _content_ must be indented
+accordingly. For example:
+
+```go-html-template
+- Item 1
+  {{%/* alert title="Note" color=info */%}}
+  This is properly indented alert content.
+  {{%/* /alert */%}}
+- Don't do this, it won't render correctly:
+  {{%/* alert title="Warning" color=warning */%}} This content is not indented properly. {{%/* /alert */%}}
+```
+
+renders as:
+
+<!-- prettier-ignore -->
+- Item 1
+  {{% alert title="Note" color=info %}}
+  This is properly indented alert content.
+  {{% /alert %}}
+- Don't do this, it won't render correctly:
+  {{% alert title="Warning" color=warning %}} This content appears outside of
+  the list! {{% /alert %}}
+
+[Bootstrap alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 
 ### pageinfo
 

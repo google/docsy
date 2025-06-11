@@ -411,6 +411,10 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:46.341081-05:00"
   },
+  "https://getbootstrap.com/docs/5.3/components/alerts/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-10T21:33:38.654894-04:00"
+  },
   "https://getbootstrap.com/docs/5.3/content/tables/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:45.464085-04:00"
@@ -1118,6 +1122,10 @@
   "https://github.com/google/docsy/pull/2259": {
     "StatusCode": 206,
     "LastSeen": "2025-05-22T19:21:14.104646-04:00"
+  },
+  "https://github.com/google/docsy/pull/941": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-10T18:59:25.465236-04:00"
   },
   "https://github.com/google/docsy/pulls": {
     "StatusCode": 200,
@@ -2354,6 +2362,10 @@
   "https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:06:43.680938-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/shortcodes/#alert": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-10T21:43:28.870112-04:00"
   },
   "https://www.docsy.dev/docs/adding-content/shortcodes/#blocksfeature": {
     "StatusCode": 206,
