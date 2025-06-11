@@ -22,7 +22,7 @@
   {{ else with.Value -}}
     {{ with resources.Copy (printf "js/tocbot%s.js" (cond hugo.IsProduction ".min" "")) . }}
       {{ $secureJS := . | resources.Fingerprint "sha512" -}}
-<script src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ .RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{ end -}}
   {{ end -}}
 {{ else -}}
