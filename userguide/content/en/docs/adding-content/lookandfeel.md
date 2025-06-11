@@ -556,7 +556,7 @@ highest-level page you want to modify.
 
 [bs-docs]: https://getbootstrap.com/docs/
 
-## Sidebar table of contents
+## Right sidebar table of contents
 
 By default, Docsy shows the table of contents for the current page in the right sidebar using the built-in function of Hugo. You can replace that with a JavaScript-based ToC that uses the [https://tscanlin.github.io/tocbot/](Tocbot library) by setting the following in your `config.toml` file:
 
