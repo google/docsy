@@ -281,7 +281,7 @@ You can use Docsy as an NPM module as follows:
 
     {{% /alert %}}
 
-    {{% alert title="Hugo install tip" color="info" %}}
+    {{% alert title="Hugo install tip" %}}
 
     You can install Docsy's
     officially supported version of [Hugo using NPM](#hugo-extended-npm) at the
