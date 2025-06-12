@@ -415,6 +415,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-06-10T21:33:38.654894-04:00"
   },
+  "https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-12T14:21:50.59607-04:00"
+  },
   "https://getbootstrap.com/docs/5.3/content/tables/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:45.464085-04:00"
@@ -434,6 +438,10 @@
   "https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:03:56.522694-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/customize/color/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-12T14:21:50.170954-04:00"
   },
   "https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps": {
     "StatusCode": 206,
@@ -1434,6 +1442,10 @@
   "https://github.com/google/docsy/tree/main/userguide/content/en/project/_index.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T08:36:58.469879-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/userguide/content/en/tests/index.md": {
+    "StatusCode": 404,
+    "LastSeen": "2025-06-12T14:21:50.223573-04:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,

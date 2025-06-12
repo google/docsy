@@ -22,5 +22,5 @@ IgnoreURLs: # list of regexs of paths or URLs to be ignored
   # Too flaky or unnecessary
   - ^https://badges.netlify.com/api
   - ^https://code.jquery.com
-  # TEMPORARY until we're done with https://github.com/google/docsy/issues/2243
-  # - ^https://github.com/google/docsy/blob/main/layouts/.*_td-content-after-header.html$
+  # TEMPORARY until the page lands in production:
+  - https://github.com/google/docsy/tree/main/userguide/content/en/tests/index.md
