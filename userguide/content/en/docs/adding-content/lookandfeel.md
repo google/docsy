@@ -62,6 +62,11 @@ development.
 
 ## Colors and color themes
 
+Docsy defaults to Bootstrap's [standard color scheme][]. This section explains
+how to customize your site's colors, and how to enable light/dark color themes.
+
+[standard color scheme]: https://getbootstrap.com/docs/5.3/customize/color/
+
 ### Site colors
 
 To customize your site's colors, add SCSS variable overrides to
@@ -90,7 +95,7 @@ $custom-colors: (
 $theme-colors: map-merge($theme-colors, $custom-colors);
 ```
 
-Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
+Learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
 
 [Adding theme colors]:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
@@ -102,8 +107,8 @@ Learn how to modify maps, see [Maps and loops] and [Adding theme colors].
 
 ### Light/dark color themes
 
-Docsy 0.10.0 supports light and [dark mode] color themes. To allow your website
-users to choose light/dark modes, **enable the Docsy [light/dark menu]** or
+Docsy 0.10.0 supports light and [dark mode][] color themes. To allow your website
+users to choose light/dark modes, **enable the Docsy [light/dark menu][]** or
 create your own custom theme selector.
 
 If your site uses [Chroma for code highlighting], there are extra steps required
@@ -131,25 +136,25 @@ shortcodes].
 
 ## Fonts
 
-The theme uses [Open Sans](https://fonts.google.com/specimen/Open+Sans) as its
-primary font. To disable Google Fonts and use a system font, set this SCSS
-variable in `assets/scss/_variables_project.scss`:
+By default, Docsy uses Bootstrap's [native font stack][] for its typography.
+However, Docsy also supports Google Fonts. To enable Google Fonts, and use [Open
+Sans] as your project's primary font, add the following variable to
+`assets/scss/_variables_project.scss`:
 
 ```scss
-$td-enable-google-fonts: false;
+$td-enable-google-fonts: true;
 ```
 
 To configure another Google Font:
 
 ```scss
-$google_font_name: 'Open Sans';
-$google_font_family: 'Open+Sans:300,300i,400,400i,700,700i';
+$td-google-font-name: 'Roboto';
+$td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 ```
 
-Note that if you decide to go with a font with different weights (in the
-built-in configuration this is `300` (light), `400` (medium) and `700` (bold)),
-you also need to adjust the weight related variables, i.e. variables starting
-with `$font-weight-`.
+[native font stack]:
+  https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack
+[Open Sans]: https://fonts.google.com/specimen/Open+Sans
 
 ## CSS utilities
 
