@@ -3,12 +3,14 @@ title: Docsy Shortcodes
 linkTitle: Shortcodes
 date: 2017-01-05
 weight: 5
-description: >
-  Use Docsy's Hugo shortcodes to quickly build site pages.
+description: Use Docsy's Hugo shortcodes to quickly build site pages.
 resources:
   - src: '**spruce*.jpg'
     params:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
+params:
+  message: Some _message_.
+cSpell:ignore: imgproc pageinfo Bjørn Pedersen
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -172,22 +174,74 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 
 ### alert
 
-The **alert** shortcode creates an alert block that can be used to display
-notices or warnings.
+Use the **alert** shortcode to display notices and warnings. The shortcode
+renders a [Bootstrap alert component][bs-alert]. It can be used with Markdown
+content and contain other shortcodes. For example:
 
-```go-html-template
-{{%/* alert title="Warning" color="warning" */%}}
-This is a warning.
-{{%/* /alert */%}}
+```go-template
+{{%/* alert title="Welcome" */%}} **Hello**, world! {{%/* /alert */%}}
 ```
 
-Renders to:
+Renders as:
 
-{{% alert title="Warning" color="warning" %}} This is a warning. {{% /alert %}}
+{{% alert title="Welcome" %}} **Hello**, world! {{% /alert %}}
 
-| Parameter | Default | Description                                                   |
-| --------- | ------- | ------------------------------------------------------------- |
-| color     | primary | One of the theme colors, eg `primary`, `info`, `warning` etc. |
+Parameters:
+
+- `title` (optional): Use this to specify a title for your alert. The title
+  renders as a Bootstrap [alert heading][bs-alert], at heading level 4, using
+  the `h4` Bootstrap class over a `<div>` element. This prevents the title from
+  appearing in a page's table of contents.
+- `color` (optional): Use this parameter to specify one of Bootstrap's
+  predefined [alert variants][bs-alert], each of which has their own color.
+  These include `primary`, `info`, and `warning`.
+
+#### Alerts and indentation
+
+When the `alert` shortcode is used in a Markdown context that requires
+indentation, such as a list, then the alert _content_ (whether specified as
+text/Markdown or a shortcode) must be indented accordingly. For example:
+
+```go-template
+- The following note is part of this list item:
+  {{%/* alert title="Celebrate!" color=success */%}}
+  This alert content is properly rendered.
+
+  > {{%/* param message */%}}
+  {{%/* /alert */%}}
+  The first list item continues.
+
+- **Don't put content on the same line** as the opening tag, it breaks rendering:
+  {{%/* alert title="Misformed alert!" color=warning */%}} **This content appears outside of
+  the list!** {{%/* /alert */%}}
+```
+
+This renders as:
+
+{{< comment >}}
+
+<!--
+IMPORTANT: the following lone opening div tag prevents the mis-formatted alert example below from breaking all the rest of the page. DO NOT remove it.
+-->
+
+{{< /comment >}}
+
+<div class="td-max-width-on-larger-screens">
+
+<!-- prettier-ignore -->
+- The following note is part of this list item:
+  {{% alert title="Celebrate!" color=success %}}
+  This alert content is properly rendered.
+
+  > {{% param message %}}
+  {{% /alert %}}
+  The first list item continues.
+
+- **Don't put content on the same line** as the opening tag, it breaks rendering:
+  {{% alert title="Misformed alert!" color=warning %}} **This alert content appears outside of
+  the list!** {{% /alert %}}
+
+[bs-alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 
 ### pageinfo
 
@@ -196,7 +250,7 @@ information for a page: for example, letting users know that the page contains
 placeholder content, that the content is deprecated, or that it documents a beta
 feature.
 
-```go-html-template
+```go-template
 {{%/* pageinfo color="info" */%}}
 This is placeholder content.
 {{%/* /pageinfo */%}}
@@ -220,7 +274,7 @@ The **imgproc** shortcode finds an image in the current
 [Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a
 set of processing instructions.
 
-```go-html-template
+```go-template
 {{%/* imgproc spruce Fill "400x450" */%}}
 Norway Spruce *Picea abies* shoot with foliage buds.
 {{%/* /imgproc */%}}

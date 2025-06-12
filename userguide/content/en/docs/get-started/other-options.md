@@ -181,9 +181,12 @@ your project's root directory:
     echo 'theme: docsy' >> hugo.yaml
     ```
 
-    {{% alert title="Tip" %}}As of Hugo 0.110.0, the default config base
+    {{% alert title="Tip" %}}
+
+    As of Hugo 0.110.0, the default config base
     filename was changed to `hugo.*` from `config.*`. If you are using hugo
     0.110 or above, consider renaming your `config.*` to `hugo.*`.
+
     {{% /alert %}}
 
 3.  Get Docsy dependencies:
@@ -270,15 +273,21 @@ You can use Docsy as an NPM module as follows:
     npm install --save-dev google/docsy#semver:{{% param version %}} --omit=peer
     ```
 
-    {{% alert title="Hugo-module compatibility" color="warning" %}} Installing
-    Docsy using NPM creates an empty `github.com` sibling folder. For details,
-    see [Docsy NPM install side-effect](#docsy-npm-install-side-effect). {{%
-    /alert %}}
+    {{% alert title="Hugo-module compatibility" color="warning" %}}
 
-    {{% alert title="Hugo install tip" color="info" %}} You can install Docsy's
+    Installing
+    Docsy using NPM creates an empty `github.com` sibling folder. For details,
+    see [Docsy NPM install side-effect](#docsy-npm-install-side-effect).
+
+    {{% /alert %}}
+
+    {{% alert title="Hugo install tip" %}}
+
+    You can install Docsy's
     officially supported version of [Hugo using NPM](#hugo-extended-npm) at the
-    same time as Docsy. Just omit the `--omit` flag from the command above. {{%
-    /alert %}}
+    same time as Docsy. Just omit the `--omit` flag from the command above.
+
+    {{% /alert %}}
 
 3.  Build or serve your new site using the usual Hugo commands, specifying the
     path to the Docsy theme files. For example, build your site as follows:
@@ -291,21 +300,21 @@ You can use Docsy as an NPM module as follows:
 
     {{% alert title="Error: failed to load modules" color="warning" %}}
 
-If Hugo reports the following error when building your site ([#2116]):
+    If Hugo reports the following error when building your site ([#2116]):
 
-```
-Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
-```
+    ```
+    Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
+    ```
 
-Then run the following command and try again:
+    Then run the following command and try again:
 
-```sh
-npm rebuild
-```
+    ```sh
+    npm rebuild
+    ```
 
-[#2116]: https://github.com/google/docsy/issues/2116
+    [#2116]: https://github.com/google/docsy/issues/2116
 
-{{% /alert %}}
+    {{% /alert %}}
 
 As an alternative to specifying a `themesDir`, on some platforms, you can
 instead create a symbolic link to the Docsy theme directory as follows (Linux

@@ -26,7 +26,15 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
+- **Shortcodes**:
+  - The alert shortcode has been reworked to address [#906] and [#939]. It can
+    now be used with Markdown content, and it can contain calls to other
+    shortcodes. For details, see [Shortcode helpers > alert][] ([#941])
 - ...
+
+[#941]: https://github.com/google/docsy/pull/941
+[Shortcode helpers > alert]:
+  https://www.docsy.dev/docs/adding-content/shortcodes/#alert
 
 **New**:
 
