@@ -9,6 +9,10 @@
     margin-bottom: 0;
   }
 
+  .alert-heading {
+    color: var(--bs-alert-link-color);
+  }
+
   @each $color, $value in $theme-colors {
     &-#{$color} {
       border-style: solid;
