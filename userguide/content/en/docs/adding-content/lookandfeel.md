@@ -63,7 +63,7 @@ development.
 ## Colors and color themes
 
 Docsy defaults to Bootstrap's [standard color scheme][]. This section explains
-how to customize your site's colors, and how to enable light/dark color themes.
+how to customize your site's colors and how to enable light/dark color themes.
 
 [standard color scheme]: https://getbootstrap.com/docs/5.3/customize/color/
 
@@ -95,7 +95,7 @@ $custom-colors: (
 $theme-colors: map-merge($theme-colors, $custom-colors);
 ```
 
-Learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
+To learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
 
 [Adding theme colors]:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors
@@ -137,7 +137,7 @@ shortcodes].
 ## Fonts
 
 By default, Docsy uses Bootstrap's [native font stack][] for its typography.
-However, Docsy also supports Google Fonts. To enable Google Fonts, and use [Open
+However, Docsy also supports Google Fonts. To enable Google Fonts and use [Open
 Sans] as your project's primary font, add the following variable to
 `assets/scss/_variables_project.scss`:
 
