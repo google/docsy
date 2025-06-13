@@ -6,11 +6,12 @@
     "Docsy",
     "errorf",
     "hugo",
+    "relref",
+    "scrollspy",
     "shortcode",
     "shortcodes",
     "tabpane",
     "upvote",
-    "warnf",
-    "relref"
+    "warnf"
   ]
 }

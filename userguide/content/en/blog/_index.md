@@ -1,4 +1,4 @@
 ---
 title: Blog
-menu: {main: {weight: 50}}
+menu: { main: { weight: 50 } }
 ---
