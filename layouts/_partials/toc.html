@@ -2,6 +2,7 @@
   {{ with .TableOfContents -}}
     {{ if ne . `<nav id="TableOfContents"></nav>` -}}
       <div class="td-toc">
+        <div class="toc-title">On this page</div>
         {{ . }}
       </div>
     {{ end -}}
