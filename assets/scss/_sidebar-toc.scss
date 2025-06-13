@@ -63,7 +63,7 @@
       &.active {
         color: var(--bs-primary);
         border-left-color: var(--bs-primary);
-        font-weight: $font-weight-medium;
+        background-color: var(--bs-secondary-bg-subtle);
       }
 
       &:focus,
