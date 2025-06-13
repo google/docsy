@@ -1,0 +1,4 @@
+data-bs-spy="scroll" {{/**/ -}}
+data-bs-target="#TableOfContents" {{/**/ -}}
+data-bs-smooth-scroll="true" {{/**/ -}}
+data-bs-root-margin="0px 0px -40%" {{/**/ -}}
