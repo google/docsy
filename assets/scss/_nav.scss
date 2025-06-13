@@ -1,6 +1,7 @@
 //
 // Main navbar
 //
+// cSpell:ignore onscroll
 
 .td-navbar-cover {
   @include media-breakpoint-up(md) {
@@ -133,7 +134,7 @@
       font-variant: normal;
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
-      font-family: $font-awesome-font-name;
+      font-family: $td-font-awesome-font-name;
       font-weight: 900;
       content: "\f0d9";
       padding-left: 0.5em;
@@ -188,7 +189,7 @@ nav.foldable-nav {
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: $font-awesome-font-name;
+    font-family: $td-font-awesome-font-name;
     font-weight: 900;
     content: "\f0da";
     position: absolute;
