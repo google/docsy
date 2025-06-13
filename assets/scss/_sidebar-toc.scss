@@ -25,6 +25,9 @@
 }
 
 .td-toc {
+  $toc-padding-base: 1rem;
+  $toc-padding-increment: 0.5rem; // for TOC entry nesting
+
   margin-top: 1rem;
 
   a {
@@ -51,7 +54,7 @@
 
     a {
       margin-left: 0;
-      padding-left: 1rem;
+      padding-left: $toc-padding-base;
       text-decoration: none;
       border-left: .125rem solid transparent;
       transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -70,16 +73,16 @@
     }
 
     ul ul a {
-      padding-left: 1.5rem;
+      padding-left: $toc-padding-base + $toc-padding-increment;
     }
     ul ul ul a {
-      padding-left: 2rem;
+      padding-left: $toc-padding-base + ($toc-padding-increment * 2);
     }
     ul ul ul ul a {
-      padding-left: 2.5rem;
+      padding-left: $toc-padding-base + ($toc-padding-increment * 3);
     }
     ul ul ul ul ul a {
-      padding-left: 3rem;
+      padding-left: $toc-padding-base + ($toc-padding-increment * 4);
     }
   }
 
