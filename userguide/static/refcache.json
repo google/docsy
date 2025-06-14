@@ -1683,6 +1683,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:34.86023-04:00"
   },
+  "https://gohugo.io/configuration/media-types/#create-a-media-type": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-06T15:13:21.028725+02:00"
+  },
   "https://gohugo.io/configuration/params/#multilingual-sites": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:35.410803-04:00"
@@ -1862,6 +1866,10 @@
   "https://gohugo.io/quick-reference/glossary/#content-type": {
     "StatusCode": 206,
     "LastSeen": "2025-02-10T11:24:50.719553-05:00"
+  },
+  "https://gohugo.io/render-hooks/passthrough/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-06T15:13:21.3743141+02:00"
   },
   "https://gohugo.io/shortcodes/relref/": {
     "StatusCode": 206,
