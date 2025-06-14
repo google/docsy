@@ -270,7 +270,7 @@ project's configuration file.
 
 If you are using a Docsy 0.6.0 or later, code blocks show a "Copy to clipboard"
 button in the top right-hand corner. To disable this functionality, set
-`disable_click2copy_chroma` to `true` in your configuration file:
+`disable_click2copy_chroma` to `true` in your configuration file.
 
 ## Code highlighting with Prism
 

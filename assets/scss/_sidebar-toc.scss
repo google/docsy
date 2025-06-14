@@ -51,8 +51,8 @@
       font-weight: $font-weight-bold;
     }
 
-    &:hover>&__link,
-    &:focus>&__link {
+    @at-root .td-toc:hover &__link,
+      .td-toc:focus &__link {
       visibility: visible !important;
     }
 
@@ -61,7 +61,7 @@
       padding-left: 0.25em;
       text-decoration: none;
       // Projects who wish to hide the link can set:
-      // visibility: hidden;
+      visibility: hidden;
 
       &::after {
         content: fa-content($fa-var-chevron-up);
@@ -70,7 +70,7 @@
 
       // Always visible on touch devices and small screens
       @media (hover: none) and (pointer: coarse),
-      (max-width: map-get($grid-breakpoints, sm)) {
+        (max-width: map-get($grid-breakpoints, sm)) {
         opacity: 1;
         visibility: visible;
       }
@@ -84,8 +84,7 @@
       margin-left: 0;
       padding-left: $toc-padding-base;
       text-decoration: none;
-      border-left: .125rem solid transparent;
-      transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+      border-left: 0.125rem solid transparent;
       color: var(--bs-secondary-color);
 
       &.active {
