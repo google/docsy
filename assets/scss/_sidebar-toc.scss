@@ -30,7 +30,7 @@
 
   margin-top: 1rem;
 
-  a {
+  nav a {
     display: block;
     font-weight: $font-weight-light;
     padding-bottom: 0.25rem;
@@ -41,12 +41,40 @@
     display: block;
   }
 
-  > .toc-title {
-    font-weight: $font-weight-bold;
+  &__title {
     color: var(--bs-secondary-color);
     border-bottom: 1px solid var(--bs-tertiary-color);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
+
+    &__text {
+      font-weight: $font-weight-bold;
+    }
+
+    &:hover>&__link,
+    &:focus>&__link {
+      visibility: visible !important;
+    }
+
+    &__link {
+      font-weight: $font-weight-bold;
+      padding-left: 0.25em;
+      text-decoration: none;
+      // Projects who wish to hide the link can set:
+      // visibility: hidden;
+
+      &::after {
+        content: fa-content($fa-var-chevron-up);
+        font-family: $td-font-awesome-font-name;
+      }
+
+      // Always visible on touch devices and small screens
+      @media (hover: none) and (pointer: coarse),
+      (max-width: map-get($grid-breakpoints, sm)) {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
   }
 
   #TableOfContents {
@@ -75,12 +103,15 @@
     ul ul a {
       padding-left: $toc-padding-base + $toc-padding-increment;
     }
+
     ul ul ul a {
       padding-left: $toc-padding-base + ($toc-padding-increment * 2);
     }
+
     ul ul ul ul a {
       padding-left: $toc-padding-base + ($toc-padding-increment * 3);
     }
+
     ul ul ul ul ul a {
       padding-left: $toc-padding-base + ($toc-padding-increment * 4);
     }

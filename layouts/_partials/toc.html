@@ -2,7 +2,10 @@
   {{ with .TableOfContents -}}
     {{ if ne . `<nav id="TableOfContents"></nav>` -}}
       <div class="td-toc">
-        <div class="toc-title">On this page</div>
+        <div class="td-toc__title">
+          <span class="td-toc__title__text">On this page</span>
+          <a class="td-toc__title__link" title="Scroll to top" href="#"></a>
+        </div>
         {{ . }}
       </div>
     {{ end -}}
