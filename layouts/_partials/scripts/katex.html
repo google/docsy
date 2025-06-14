@@ -11,9 +11,9 @@
       {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
 <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $secureCSS.Data.Integrity -}}" crossorigin="anonymous">
     {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid KaTeX version %q." $katex_css_url $version -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
 {{ end -}}
 
 {{/* The loading of KaTeX is deferred to speed up page rendering */ -}}
@@ -26,9 +26,9 @@
       {{ $secureJS := . | resources.Fingerprint "sha512" -}}
 <script defer src="{{- .RelPermalink -}}" integrity="{{- $secureJS.Data.Integrity -}}" crossorigin="anonymous" ></script>
     {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve javascript file %q from CDN. Reason: invalid KaTeX version %q." $katex_js_url $version -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
 {{ end -}}
 
 {{/* Add support for displaying chemical equations and physical units by loading the mhchem extension: */ -}}
@@ -49,7 +49,7 @@
 {{ printf "onload='renderMathInElement(%s, %s);'" (( $.Page.Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Page.Site.Params.katex.options | jsonify )) | safeHTMLAttr -}} >
 </script>
     {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve autorender extension %q from CDN. Reason: invalid KaTeX version %q." $katex_autorender_url $version -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
 {{ end -}}
