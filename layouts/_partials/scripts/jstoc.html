@@ -1,0 +1,44 @@
+{{ $version := .Site.Params.jstoc.version | default "latest" -}}
+
+{{ $css_url := printf "https://cdn.jsdelivr.net/npm/tocbot@%s/dist/tocbot%s.css" $version (cond hugo.IsProduction ".min" "") -}}
+{{ $cdn_url := printf "https://cdn.jsdelivr.net/npm/tocbot@%s/dist/tocbot%s.js" $version (cond hugo.IsProduction ".min" "") -}}
+
+{{ with try (resources.GetRemote $css_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Tocbot css file from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "css/tocbotx%s.css" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureCSS := . | resources.Fingerprint "sha512" -}}
+        <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ $secureCSS.Data.Integrity }}" crossorigin="anonymous" referrerpolicy="no-referrer">
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid Tocbot version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+{{ with try (resources.GetRemote $cdn_url) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Tocbot script from CDN. Reason: %s." . -}}
+  {{ else with.Value -}}
+    {{ with resources.Copy (printf "js/tocbot%s.js" (cond hugo.IsProduction ".min" "")) . }}
+      {{ $secureJS := . | resources.Fingerprint "sha512" -}}
+        <script src="{{ .RelPermalink }}" integrity="{{ $secureJS.Data.Integrity }}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid Tocbot version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+<!-- Initialize tocbot -->
+<script type="text/javascript">
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.td-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.td-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: '{{ with .Site.Params.jstoc.custom_headings }}{{ . }}{{ else }}h2, h3, h4{{ end }}',
+        // ignore headings that are hidden in DOM
+        ignoreHiddenElements: true
+    });
+</script>
