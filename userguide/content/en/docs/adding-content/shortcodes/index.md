@@ -444,7 +444,7 @@ unless it has been explicitly enabled for your site. {{% /alert %}}
 
 ### comment
 
-Use the comment shortcode to add internal notes that won't be shown in the rendered page.
+Use the `comment` shortcode to add internal notes or comment out large blocks of Markdown or HTML that won't be rendered on the page.
 
 ```go-template
 {{< comment >}}
