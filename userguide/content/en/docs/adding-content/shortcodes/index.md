@@ -442,6 +442,16 @@ says "Couldn’t find the X-Frame-Options header in the response headers." you
 found in the HTTP response headers as highlighted below.", you **CANNOT** -
 unless it has been explicitly enabled for your site. {{% /alert %}}
 
+### comment
+
+Use the comment shortcode to add internal notes that won't be shown in the rendered page.
+
+```go-template
+{{< comment >}}
+This comment will not be visible in the rendered page.
+{{< /comment >}}
+```
+
 ## Tabbed panes
 
 Sometimes it's very useful to have tabbed panes when authoring content. One
