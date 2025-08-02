@@ -120,9 +120,16 @@
         padding-right: 0.5rem;
       }
 
+      &-code {
+        display: none;
+      }
+
       @include media-breakpoint-down(lg) {
         &-text {
           display: none;
+        }
+        &-code {
+          display: inline;
         }
         &::before {
           padding-right: 0;

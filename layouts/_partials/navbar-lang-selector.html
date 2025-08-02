@@ -4,6 +4,7 @@
   <a class="nav-link dropdown-toggle td-lang-menu__title" href="#" role="button"
     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="td-lang-menu__title-text">{{ $langPage.Language.LanguageName }}</span>
+    <span class="td-lang-menu__title-code">{{ $langPage.Language.Lang | upper }}</span>
   </a>
 
   {{ $allPages := slice . }}
