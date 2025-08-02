@@ -1,0 +1,54 @@
+// Styles for the mobile scrollable navbar
+
+.td-navbar-nav-scroll--indicator {
+  // position: relative;
+
+  .scroll-indicator {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 20px;
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+
+    &.scroll-left {
+      left: 0;
+      background: linear-gradient(to right, $primary, transparent);
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-chevron-left);
+        color: var(--bs-navbar-active-color);
+        // font-size: 14px;
+      }
+    }
+
+    &.scroll-right {
+      right: 0;
+      background: linear-gradient(to left, $primary, transparent);
+
+      &::before {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-chevron-right);
+        color: var(--bs-navbar-active-color);
+        // font-size: 14px;
+      }
+    }
+
+    &.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}

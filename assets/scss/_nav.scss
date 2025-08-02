@@ -46,7 +46,6 @@
   }
 
   .navbar-nav {
-    // padding-top: $spacer * 0.5;
     white-space: nowrap;
   }
 
@@ -70,6 +69,8 @@
       padding-inline-end: $spacer * 0.5;
     }
   }
+
+  @import "_navbar-mobile-scroll";
 
   @include media-breakpoint-down(lg) {
     .td-navbar-nav-scroll {

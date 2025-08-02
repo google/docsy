@@ -22,7 +22,9 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
+  <div class="td-navbar-nav-scroll ms-md-auto td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left visible"></div>
+    <div class="scroll-indicator scroll-right visible"></div>
     <ul class="navbar-nav">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
