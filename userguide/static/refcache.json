@@ -2227,6 +2227,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:35.492337-04:00"
   },
+  "https://www.docsy.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-08-02T16:19:13.783813-04:00"
+  },
   "https://www.docsy.dev/about/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:45.23027-04:00"

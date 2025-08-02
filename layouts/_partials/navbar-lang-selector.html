@@ -6,14 +6,15 @@
     <span class="td-lang-menu__title-text">{{ $langPage.Language.LanguageName }}</span>
     <span class="td-lang-menu__title-code">{{ $langPage.Language.Lang | upper }}</span>
   </a>
-
-  {{ $allPages := slice . }}
-  {{ if .Translations }}
-    {{ $allPages = $allPages | append .Translations }}
-  {{ end }}
+  {{/* */ -}}
+  
+  {{ $allPages := slice . -}}
+  {{ if .Translations -}}
+    {{ $allPages = $allPages | append .Translations -}}
+  {{ end -}}
 
   <ul class="dropdown-menu">
-    {{ range $.Site.Languages }}
+    {{ range $.Site.Languages -}}
       {{ $translatedPages := where $allPages "Language.Lang" .Lang -}}
       {{ $translated := "" -}}
       {{ if gt (len $translatedPages) 0 -}}
@@ -21,14 +22,14 @@
       {{- end -}}
       {{ $isActive := eq $.Site.Language.Lang .Lang -}}
       <li>
-        {{ if $isActive }}
+        {{- if $isActive -}}
           <span class="dropdown-item active">{{ .LanguageName }}</span>
-        {{ else if $translated }}
+        {{- else if $translated -}}
           <a class="dropdown-item" href="{{ $translated.RelPermalink }}">{{ .LanguageName }}</a>
-        {{ else }}
+        {{- else -}}
           <span class="dropdown-item disabled">{{ .LanguageName }}</span>
-        {{ end }}
+        {{- end -}}
       </li>
-      {{ end }}
+      {{- end }}
     </ul>
 </div>
