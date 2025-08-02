@@ -87,7 +87,6 @@ repo.
     ```
 
 12. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-
     - From the **release/tag dropdown**: Select the new release tag that you
       just pushed, v0.X.Y.
     - Set the **release title** to the release number (without the "v").

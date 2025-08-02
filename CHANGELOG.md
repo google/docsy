@@ -40,7 +40,11 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Other changes**:
 
+- Hamburger menu toggle button icon changes to an X when the menu is expanded
+  ([#2301]). This is a style change only.
+
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[#2300]: https://github.com/google/docsy/pull/2300
 
 ## 0.12.0
 

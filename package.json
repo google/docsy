@@ -20,7 +20,7 @@
     "build:production": "npm run cd:docs -- build:production --",
     "build": "npm run cd:docs -- build --",
     "cd:docs": "npm run _cd:docs -- npm run",
-    "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
+    "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links:internal": "npm run cd:docs check:links:internal",
     "check:links": "npm run cd:docs check:links",
     "check": "npm run check:format",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "cpy-cli": "^5.0.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.6.2"
   },
   "peerDependencies": {
     "hugo-extended": "0.147.8",
