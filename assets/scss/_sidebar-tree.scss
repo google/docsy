@@ -124,11 +124,26 @@
     border-right: 1px solid var(--bs-border-color);
   }
 
+  // Hamburger menu button
   &__toggle {
+    // Only visible on mobile
+    @include media-breakpoint-up(md) {
+      display: none !important;
+    }
+
     color: var(--bs-body-color);
+
+    // Show as icon
+    &::before {
+      font: var(--fa-font-solid);
+      content: fa-content($fa-var-bars);
+    }
+
     // Ensure hamburger stays the same size in both toggle states
     width: 1rem;
     flex-shrink: 0;
+    margin: 0;
+    padding: 0 1.2rem;
 
     &[aria-expanded='true']::before {
       // We'd want to use xmark-large here, but it isn't free. Instead, we'll
