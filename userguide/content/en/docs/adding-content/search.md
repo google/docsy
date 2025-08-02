@@ -82,7 +82,6 @@ as otherwise your site won't be crawled and indexed.
 1.  Add any further configuration you want to your search engine using the
     **Edit search engine** options. In particular you may want to do the
     following:
-
     - Select **Look and feel**. Change from the default **Overlay** layout to
       **Results only**, as this option means your search results are embedded in
       your search page rather than appearing in a separate box. Click **Save**
