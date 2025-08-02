@@ -1,4 +1,6 @@
-{{/* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/icons.html */ -}}
+<div class="td-light-dark-menu dropdown">
+
+{{- /* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/icons.html */ -}}
 
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
   <symbol id="check2" viewBox="0 0 16 16">
@@ -16,25 +18,21 @@
   </symbol>
 </svg>
 
-{{/* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/theme-toggler.html */ -}}
+{{- /* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/theme-toggler.html */ -}}
 
 {{ $isExamples := eq .Layout "examples" -}}
-<button class="btn
-              {{- if $isExamples }} btn-bd-primary
-              {{- else }} btn-link nav-link
-              {{- end }} dropdown-toggle d-flex align-items-center"
+<button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
         id="bd-theme"
         type="button"
         aria-expanded="false"
         data-bs-toggle="dropdown"
-        {{ if not $isExamples }}data-bs-display="static"{{ end }}
         aria-label="Toggle theme (auto)">
   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
   {{- /* Disable menu name for Docsy:
     <span class="{{ if $isExamples }}visually-hidden{{ else }}d-lg-none ms-2{{ end }}" id="bd-theme-text">Toggle theme</span>
   */}}
 </button>
-<ul class="dropdown-menu dropdown-menu-end{{ if $isExamples }} shadow{{ end }}" aria-labelledby="bd-theme-text">
+<ul class="dropdown-menu" aria-labelledby="bd-theme">
   <li>
     <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
       <svg class="bi me-2 opacity-50"><use href="#sun-fill"></use></svg>
@@ -57,3 +55,5 @@
     </button>
   </li>
 </ul>
+</div>
+{{/* */ -}}
