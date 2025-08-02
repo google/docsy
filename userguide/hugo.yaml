@@ -82,6 +82,7 @@ params:
   ui:
     showLightDarkModeMenu: true
     sidebar_cache_limit: 10
+    sidebar_lang_menu: true # Set to true to show the language menu in the sidebar
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
     sidebar_search_disable: false

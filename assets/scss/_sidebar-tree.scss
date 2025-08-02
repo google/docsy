@@ -194,4 +194,14 @@
       display: block;
     }
   }
+
+  .td-lang-menu {
+    &__title {
+      padding-left: 0 !important;
+      &-code {
+        display: none;
+      }
+
+    }
+  }
 }

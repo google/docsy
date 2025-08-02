@@ -7,7 +7,7 @@
     <span class="td-lang-menu__title-code">{{ $langPage.Language.Lang | upper }}</span>
   </a>
   {{/* */ -}}
-  
+
   {{ $allPages := slice . -}}
   {{ if .Translations -}}
     {{ $allPages = $allPages | append .Translations -}}
