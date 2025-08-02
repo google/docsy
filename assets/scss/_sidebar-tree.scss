@@ -1,3 +1,4 @@
+// cSpell:ignore xmark
 //
 // Left side navigation
 //
@@ -123,12 +124,19 @@
     border-right: 1px solid var(--bs-border-color);
   }
 
-  padding-bottom: 1rem;
-
   &__toggle {
-    line-height: 1;
     color: var(--bs-body-color);
-    margin: 1rem;
+    // Ensure hamburger stays the same size in both toggle states
+    width: 1rem;
+    flex-shrink: 0;
+
+    &[aria-expanded='true']::before {
+      // We'd want to use xmark-large here, but it isn't free. Instead, we'll
+      // use the regular xmark and increase the font size slightly to match the
+      // size of the hamburger icon.
+      content: fa-content($fa-var-xmark);
+      font-size: 1.25rem;
+    }
   }
 
   &__search {
