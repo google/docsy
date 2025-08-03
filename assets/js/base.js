@@ -64,13 +64,23 @@ limitations under the License.
         // Navbar overflow detection with scroll indicators
     function checkNavbarOverflow() {
         const navbarNav = $('.navbar-nav');
-        const container = $('.td-navbar-nav-scroll--indicator');
+        const container = $('#main_navbar');
+        const navbarContainer = $('.td-navbar-container');
 
-        if (navbarNav.length && container.length) {
+        if (navbarNav.length) {
             const navElement = navbarNav[0];
             const isOverflowing = navElement.scrollWidth > navElement.clientWidth;
 
+            // console.log('Overflow check:', {
+            //     scrollWidth: navElement.scrollWidth,
+            //     clientWidth: navElement.clientWidth,
+            //     isOverflowing: isOverflowing
+            // });
+
             if (isOverflowing) {
+                container.addClass('td-navbar-nav-scroll--indicator');
+                navbarContainer.addClass('navbar-is-overflowing');
+
                 // Add click handlers
                 container.find('.scroll-left').on('click', function() {
                     navbarNav.animate({scrollLeft: '-=100'}, 300);
@@ -82,6 +92,9 @@ limitations under the License.
 
                 // Update indicator visibility based on scroll position
                 updateScrollIndicators();
+            } else {
+                container.removeClass('td-navbar-nav-scroll--indicator');
+                navbarContainer.removeClass('navbar-is-overflowing');
             }
         }
     }
@@ -106,10 +119,8 @@ limitations under the License.
             // Show/hide right indicator
             if (scrollLeft >= maxScroll) {
                 rightIndicator.removeClass('visible');
-                console.log('Right indicator hidden');
             } else {
                 rightIndicator.addClass('visible');
-                console.log('Right indicator visible');
             }
         }
     }
