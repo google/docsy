@@ -28,7 +28,7 @@ $td-google-font-family: "Open+Sans:300,300i,400,400i,700,700i" !default;
 $td-web-font-path: "https://fonts.googleapis.com/css?family=#{$td-google-font-family}&display=swap";
 
 @if $td-enable-google-fonts {
-  $td-fonts-serif: join("#{$td-google-font-name}", $td-fonts-serif);
+  $td-fonts-serif: join($td-google-font-name, $td-fonts-serif);
 }
 
 $font-family-sans-serif: null !default;
