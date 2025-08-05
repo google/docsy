@@ -46,7 +46,7 @@
   }
 
   .navbar-nav {
-    padding-top: $spacer * 0.5;
+    // padding-top: $spacer * 0.5;
     white-space: nowrap;
   }
 
@@ -69,10 +69,6 @@
     .nav-item {
       padding-inline-end: $spacer * 0.5;
     }
-
-    .navbar-nav {
-      padding-top: 0 !important;
-    }
   }
 
   @include media-breakpoint-down(lg) {
@@ -88,12 +84,17 @@
     }
 
     .navbar-nav {
-      padding-bottom: 2rem;
+      // padding-bottom: 2rem;
       overflow-x: auto;
     }
   }
 
   .td-light-dark-menu {
+    position: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .bi {
       // Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
       width: 1em;
@@ -101,12 +102,55 @@
       vertical-align: -.125em;
       fill: currentcolor;
     }
+  }
 
-    &.dropdown {
+  .td-lang-menu {
+    position: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      padding-left: 0;
+      padding-right: 0;
+
+      &::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-globe);
+        padding-right: 0.5rem;
+      }
+
+      &-code {
+        display: none;
+      }
+
       @include media-breakpoint-down(lg) {
-        position: unset;
+        &-text {
+          display: none;
+        }
+        &-code {
+          display: inline;
+        }
+        &::before {
+          padding-right: 0;
+        }
       }
     }
+
+    .dropdown-item {
+      position: relative;
+      padding-left: 2.5rem;
+
+      &.active::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-check);
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
   }
 }
 

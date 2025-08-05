@@ -1131,6 +1131,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-22T19:21:14.104646-04:00"
   },
+  "https://github.com/google/docsy/pull/2301": {
+    "StatusCode": 206,
+    "LastSeen": "2025-08-02T17:12:43.757038-04:00"
+  },
+  "https://github.com/google/docsy/pull/2303": {
+    "StatusCode": 206,
+    "LastSeen": "2025-08-02T17:12:43.051065-04:00"
+  },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
     "LastSeen": "2025-06-10T18:59:25.465236-04:00"
@@ -2227,6 +2235,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:35.492337-04:00"
   },
+  "https://www.docsy.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-08-02T16:19:13.783813-04:00"
+  },
   "https://www.docsy.dev/about/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:45.23027-04:00"
@@ -2331,6 +2343,10 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:06:01.765051-05:00"
   },
+  "https://www.docsy.dev/docs/adding-content/language/#adding-a-language-menu": {
+    "StatusCode": 404,
+    "LastSeen": "2025-08-02T17:12:43.30695-04:00"
+  },
   "https://www.docsy.dev/docs/adding-content/lookandfeel/#before-page-content": {
     "StatusCode": 206,
     "LastSeen": "2025-05-22T13:24:36.066951-04:00"
@@ -2346,6 +2362,10 @@
   "https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:08:17.225307-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-drop-down": {
+    "StatusCode": 206,
+    "LastSeen": "2025-08-02T17:42:11.260079-04:00"
   },
   "https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation": {
     "StatusCode": 206,

@@ -31,6 +31,11 @@ languages:
     languageName: English
     params:
       description: Docsy does docs
+  # Placeholder language used to demo multilingual support
+  xx:
+    languageName: Placeholder
+    params:
+      description: Docsy does multilingual docs
 
 markup:
   tableOfContents:
@@ -77,6 +82,7 @@ params:
   ui:
     showLightDarkModeMenu: true
     sidebar_cache_limit: 10
+    sidebar_lang_menu: true # Set to true to show the language menu in the sidebar
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
     sidebar_search_disable: false
@@ -147,5 +153,9 @@ module:
       target: content/project/changelog.md
     - source: ../CONTRIBUTING.md
       target: content/project/contributing.md
+    # Placeholder language used to demo multilingual support
+    - source: content/en
+      target: content
+      lang: xx
 
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime userguide

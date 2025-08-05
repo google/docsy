@@ -26,6 +26,11 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **Breaking changes**:
 
+- **Appearance**:
+  - The **language menu** is now visible from the navbar on all screen sizes
+    ([#2303]). The menu is hidden from the sidebar by default. To restore the
+    legacy behavior, set `ui.sidebar_lang_menu` to `true` in your project's
+    config. For details see, [Adding a language menu][].
 - **Shortcodes**:
   - The alert shortcode has been reworked to address [#906] and [#939]. It can
     now be used with Markdown content, and it can contain calls to other
@@ -43,8 +48,12 @@ For the full list of changes, see the [0.x.y] release notes.
 - Hamburger menu toggle button icon changes to an X when the menu is expanded
   ([#2301]). This is a style change only.
 
-[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 [#2300]: https://github.com/google/docsy/pull/2300
+[#2301]: https://github.com/google/docsy/pull/2301
+[#2303]: https://github.com/google/docsy/pull/2303
+[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[Adding a language menu]:
+  https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-drop-down
 
 ## 0.12.0
 

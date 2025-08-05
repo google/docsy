@@ -161,14 +161,20 @@ version selector drop down to the top-level menu.
 You can find out more in the guide to
 [versioning your docs](/docs/adding-content/versioning/).
 
-### Adding a language drop-down
+### Adding a language dropdown
 
-If you configure more than one language in `hugo.toml`, the Docsy theme adds a
-language selector drop down to the top-level menu. Selecting a language takes
-the user to the translated version of the current page, or the home page for the
-given language.
+If you configure more than one language in `hugo.toml`, Docsy adds a language
+selector drop down to the navbar menu. Selecting a language takes the user to
+the translated version of the current page, or the home page for the given
+language. The menu is visible for all screen sizes. By default current site
+language name is shown. On narrow displays, this is replaced by the language
+code.
 
 You can find out more in [Multi-language support](/docs/language/).
+
+You can control whether the language selector menu appears in the sidebar by
+setting the optional parameter `.ui.sidebar_lang_menu` to `true` (default:
+unset).
 
 ## Section menu
 
