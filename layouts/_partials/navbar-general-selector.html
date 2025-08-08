@@ -1,0 +1,13 @@
+<a class="nav-link {{- if .active }} active {{- end }} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  {{ .menuItem.Name }}
+</a>
+<ul class="dropdown-menu">
+  {{ $page := .page -}}
+  {{ range .menuItem.Children -}}
+  {{ $isActive := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) -}}
+  {{ with .Page -}}
+    {{ $isActive = or $isActive ( $page.IsDescendant .) -}}
+  {{ end -}}
+  <li><a class="dropdown-item {{- if $isActive }} active {{- end }}" href="{{ .URL }}">{{ .Name }}</a></li>
+  {{ end -}}
+</ul>

@@ -36,18 +36,7 @@
       {{ end -}}
       {{ if .HasChildren -}}
       <li class="nav-item">
-        <a class="nav-link {{- if $active }} active {{- end }} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ .Name }}
-        </a>
-        <ul class="dropdown-menu">
-          {{ range .Children -}}
-          {{ $isActive := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
-          {{ with .Page -}}
-            {{ $isActive = or $isActive ( $.IsDescendant .) -}}
-          {{ end -}}
-          <li><a class="dropdown-item {{- if $isActive }} active {{- end }}" href="{{ .URL }}">{{ .Name }}</a></li>
-          {{ end -}}
-        </ul>
+        {{ partial "navbar-general-selector.html" (dict "menuItem" . "active" $active "page" $p) -}}
       </li>
       {{ else -}}
       <li class="nav-item">
