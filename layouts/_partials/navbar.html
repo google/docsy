@@ -41,7 +41,11 @@
         </a>
         <ul class="dropdown-menu">
           {{ range .Children -}}
-          <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ $isActive := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
+          {{ with .Page -}}
+            {{ $isActive = or $isActive ( $.IsDescendant .) -}}
+          {{ end -}}
+          <li><a class="dropdown-item {{- if $isActive }} active {{- end }}" href="{{ .URL }}">{{ .Name }}</a></li>
           {{ end -}}
         </ul>
       </li>
