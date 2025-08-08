@@ -26,15 +26,27 @@
     <ul class="navbar-nav">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
+      {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
+      {{ $href := "" -}}
+      {{ with .Page -}}
+        {{ $active = or $active ( $.IsDescendant .) -}}
+        {{ $href = .RelPermalink -}}
+      {{ else -}}
+        {{ $href = .URL | relLangURL -}}
+      {{ end -}}
+      {{ if .HasChildren -}}
       <li class="nav-item">
-        {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
-        {{ $href := "" -}}
-        {{ with .Page -}}
-          {{ $active = or $active ( $.IsDescendant .) -}}
-          {{ $href = .RelPermalink -}}
-        {{ else -}}
-          {{ $href = .URL | relLangURL -}}
-        {{ end -}}
+        <a class="nav-link {{- if $active }} active {{- end }} dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ .Name }}
+        </a>
+        <ul class="dropdown-menu">
+          {{ range .Children -}}
+          <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end -}}
+        </ul>
+      </li>
+      {{ else -}}
+      <li class="nav-item">
         {{ $isExternal := ne $baseURL.Host (urls.Parse .URL).Host -}}
         <a {{/**/ -}}
           class="nav-link {{- if $active }} active {{- end }}" {{/**/ -}}
@@ -46,6 +58,7 @@
             {{- .Post -}}
         </a>
       </li>
+      {{ end -}}
       {{ end -}}
       {{ if .Site.Params.versions -}}
       <li class="nav-item dropdown d-none d-lg-block">
