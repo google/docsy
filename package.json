@@ -35,20 +35,20 @@
     "test": "npm run check && npm run cd:docs test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkgs": "npx npm-check-updates --dep 'prod,dev,optional,peer' -u && npm run cd:docs update:pkgs"
+    "update:pkgs": "npx npm-check-updates --dep 'prod,dev,optional,peer' -x @fortawesome/fontawesome-free -u && npm run cd:docs update:pkgs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
     "bootstrap": "5.3.8"
   },
   "devDependencies": {
-    "cpy-cli": "^5.0.0",
+    "cpy-cli": "^6.0.0",
     "prettier": "^3.6.2"
   },
   "peerDependencies": {
     "hugo-extended": "0.147.8",
-    "netlify-cli": "^22.1.3",
-    "npm-check-updates": "^18.0.1"
+    "netlify-cli": "^23.8.0",
+    "npm-check-updates": "^18.3.0"
   },
   "peerDependenciesMeta": {
     "netlify-cli": {
