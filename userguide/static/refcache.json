@@ -2283,10 +2283,6 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:05:28.966929-05:00"
   },
-  "https://www.docsy.dev/blog/_print/": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:02:54.676018-05:00"
-  },
   "https://www.docsy.dev/blog/index.xml": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:02:49.308447-05:00"
@@ -2307,17 +2303,9 @@
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:02:49.341321-05:00"
   },
-  "https://www.docsy.dev/community/_print/": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:02:54.581987-05:00"
-  },
   "https://www.docsy.dev/community/index.xml": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:02:49.296446-05:00"
-  },
-  "https://www.docsy.dev/docs/_print/": {
-    "StatusCode": 206,
-    "LastSeen": "2024-11-06T12:02:54.711637-05:00"
   },
   "https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page": {
     "StatusCode": 206,
