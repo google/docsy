@@ -43,12 +43,13 @@
   },
   "devDependencies": {
     "cpy-cli": "^6.0.0",
+    "cross-env": "^10.1.0",
     "prettier": "^3.6.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.147.8",
-    "netlify-cli": "^23.8.0",
-    "npm-check-updates": "^18.3.0"
+    "hugo-extended": "0.150.1",
+    "netlify-cli": "^23.9.1",
+    "npm-check-updates": "^19.0.0"
   },
   "peerDependenciesMeta": {
     "netlify-cli": {
