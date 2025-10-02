@@ -12,7 +12,7 @@
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
-    "build": "npm run _build -- --baseURL \"${BASE_URL:-http://localhost}\"",
+    "build": "npm run _build -- --baseURL \"${npm_config_base_url:-http://localhost}\"",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links:internal": "HTMLTEST_ARGS='--skip-external' npm run _check:links",
     "check:links": "npm run _check:links",
