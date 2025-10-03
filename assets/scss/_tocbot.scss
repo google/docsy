@@ -1,0 +1,5 @@
+// Tocbot style customization
+
+.is-active-link::before {
+	background-color: $primary !important;
+}
