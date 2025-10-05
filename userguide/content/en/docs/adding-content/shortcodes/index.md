@@ -10,7 +10,7 @@ resources:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
 params:
   message: Some _message_.
-cSpell:ignore: imgproc pageinfo Bjørn Pedersen
+cSpell:ignore: imgproc pageinfo Bjørn Pedersen swaggerui grayscale Picea
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -452,6 +452,7 @@ famous `Hello world!` program one usually writes first when learning a new
 programming language:
 
 <!-- prettier-ignore-start -->
+<!-- cSpell:ignore cout println -->
 {{< tabpane langEqualsHeader=true >}}
 {{< tab "C" >}}
 #include <stdio.h>
@@ -517,16 +518,18 @@ easily create tabbed panes. To see how to use them, have a look at the following
 code block, which renders to a right aligned pane with one disabled and three
 active tabs:
 
+<!-- cSpell:ignore Herzlich willkommen Karibu sana -->
+
 ```go-html-template
 {{</* tabpane text=true right=true */>}}
   {{%/* tab header="**Languages**:" disabled=true /*/%}}
   {{%/* tab header="English" lang="en" */%}}
   ![Flag United Kingdom](flags/uk.png)
-  Welcome!
+  **Welcome!**
   {{%/* /tab */%}}
   {{</* tab header="German" lang="de" */>}}
+    <img src="/docs/adding-content/shortcodes/flags/de.png" alt="Flag Germany">
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
   ![Flag Tanzania](flags/tz.png)
@@ -546,8 +549,8 @@ This code translates to the right aligned tabbed pane below, showing a
   **Welcome!**
   {{% /tab %}}
   {{< tab header="German" lang="de" >}}
+    <img src="/docs/adding-content/shortcodes/flags/de.png" alt="Flag Germany">
     <b>Herzlich willkommen!</b>
-    <img src="flags/de.png" alt="Flag Germany" style="float: right; padding: 0 0 0 0px">
   {{< /tab >}}
   {{% tab header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
