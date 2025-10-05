@@ -7,10 +7,10 @@ other = "上一页"
 other = "下一页"
 
 [ui_read_more]
-other = "更多"
+other = "阅读全文"
 
 [ui_search]
-other = "站内搜索…"
+other = "站内搜索……"
 
 # Used in sentences such as "Posted in News"
 [ui_in]
@@ -18,7 +18,7 @@ other = "在"
 
 # Used in sentences such as "All Tags"
 [ui_all]
-other = "所有"
+other = "全部"
 
 # Footer text
 [footer_all_rights_reserved]
@@ -30,7 +30,7 @@ other = "隐私政策"
 
 # Post (blog, articles etc.)
 [post_byline_by]
-other = "借由"
+other = "撰文："
 [post_created]
 other = "创建"
 [post_last_mod]
@@ -50,7 +50,7 @@ other = "撰写于"
 [post_reading_time]
 other = "分钟阅读"
 [post_less_than_a_minute_read]
-other = "少于1分钟"
+other = "1分钟内可阅读完"
 
 # Print support
 [print_printable_section]
@@ -79,3 +79,13 @@ other = "如果你想通过为 {{ .Site.Title }} 贡献更多参与，请在此�
 other = "你可以了解如何为 {{ .Site.Title }} 做出贡献，请参考我们的"
 [community_guideline]
 other = "贡献指南"
+
+# Feedback
+[feedback_title]
+other = "意见反馈"
+[feedback_question]
+other = "这个页面对您有帮助吗？"
+[feedback_positive]
+other = "有帮助"
+[feedback_negative]
+other = "没帮助"
