@@ -7,14 +7,14 @@ IgnoreDirectoryMissingTrailingSlash: true # FIXME
 TestFilesConcurrently: true
 IgnoreDirs:
   - ^blog/(\d+/)?page/\d+
-  - ^xx # Placeholder language
+  - ^xx # Placeholder language pages
 IgnoreEmptyHref: true # FIXME
 IgnoreInternalEmptyHash: true # FIXME
 IgnoreInternalURLs: # list of paths
 IgnoreURLs: # list of regexs of paths or URLs to be ignored
-  - ^(https://www.docsy.dev/)?xx/ # Placeholder language
+  - ^(https://www.docsy.dev/)?xx/ # Placeholder language pages
   - \?no-link-check
-  - (index.xml|_print/)$ # ignore <link rel=alternate ...>
+  - index.xml$ # ignore <link rel=alternate ...>
   - ^https?://[^/]+/(categories|tags)/ # ignore Docsy-generated content
   - ^https?://localhost\b
   # Ignore Docsy-generated GitHub links for now
@@ -23,5 +23,3 @@ IgnoreURLs: # list of regexs of paths or URLs to be ignored
   # Too flaky or unnecessary
   - ^https://badges.netlify.com/api
   - ^https://code.jquery.com
-  # TEMPORARY: remove after fix to https://github.com/google/docsy/issues/2323
-  - ^flags/de.png$
