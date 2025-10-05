@@ -1452,8 +1452,8 @@
     "LastSeen": "2025-05-16T08:36:58.469879-04:00"
   },
   "https://github.com/google/docsy/tree/main/userguide/content/en/tests/index.md": {
-    "StatusCode": 404,
-    "LastSeen": "2025-06-12T14:21:50.223573-04:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T04:30:39.242016-04:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,
@@ -2330,10 +2330,6 @@
   "https://www.docsy.dev/docs/adding-content/feedback/#user-feedback": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:06:01.765051-05:00"
-  },
-  "https://www.docsy.dev/docs/adding-content/language/#adding-a-language-menu": {
-    "StatusCode": 404,
-    "LastSeen": "2025-08-02T17:12:43.30695-04:00"
   },
   "https://www.docsy.dev/docs/adding-content/lookandfeel/#before-page-content": {
     "StatusCode": 206,

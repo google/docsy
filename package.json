@@ -9,6 +9,7 @@
     "_build": "npm run cd:docs -- _build",
     "_cd:docs": "cd userguide &&",
     "_check:format": "npx prettier --check *.md",
+    "_check:links": "npm run cd:docs -- _check:links",
     "_commit:public": "npm run cd:docs -- _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
     "_diff:check": "git diff --name-only --exit-code",
