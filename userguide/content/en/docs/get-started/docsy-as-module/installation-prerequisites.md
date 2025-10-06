@@ -130,35 +130,6 @@ SyntaxError: Unexpected identifier
 
 ```
 
-You can check your current Node.js version by running `node -v`.  If you need to install a new version, see the following instructions:
-
-* [Debian and Ubuntu based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions)
-
-   tl;dr:
-
-   ```bash
-   # Using Ubuntu
-   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-   sudo apt-get install -y nodejs
-
-   # Using Debian, as root
-   curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-   apt-get install -y nodejs
-   ```
-
-* [Enterprise Linux based distributions](https://github.com/nodesource/distributions/blob/master/README.md#installation-instructions-1)
-
-   tl;dr:
-
-   ```bash
-   # As root
-   curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
-
-   # No root privileges
-   curl -fsSL https://rpm.nodesource.com/setup_22.x | sudo bash -
-   ```
-
-
 ## What's next?
 
 With all prerequisites installed, choose how to start off with your new Hugo site

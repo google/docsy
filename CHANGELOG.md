@@ -53,7 +53,7 @@ For the full list of changes, see the [0.x.y] release notes.
 [#2303]: https://github.com/google/docsy/pull/2303
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 [Adding a language menu]:
-  https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-drop-down
+  https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-menu
 
 ## 0.12.0
 
