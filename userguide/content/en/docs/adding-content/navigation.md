@@ -153,22 +153,21 @@ You can find a complete list of icons to use in the
 [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
 includes the free FontAwesome icons by default.
 
-### Adding a version drop-down
+### Adding a version menu
 
-If you add some `[params.versions]` in `hugo.toml`, the Docsy theme adds a
-version selector drop down to the top-level menu.
+If you add some `[params.versions]` in `hugo.toml`, Docsy adds a version
+selector menu to the top-level menu.
 
 You can find out more in the guide to
 [versioning your docs](/docs/adding-content/versioning/).
 
-### Adding a language dropdown
+### Adding a language menu
 
 If you configure more than one language in `hugo.toml`, Docsy adds a language
-selector drop down to the navbar menu. Selecting a language takes the user to
-the translated version of the current page, or the home page for the given
-language. The menu is visible for all screen sizes. By default current site
-language name is shown. On narrow displays, this is replaced by the language
-code.
+selector menu to the navbar. Selecting a language takes the user to the
+translated version of the current page, or the home page for the given language.
+The menu is visible for all screen sizes. By default current site language name
+is shown. On narrow displays, this is replaced by the language code.
 
 You can find out more in [Multi-language support](/docs/language/).
 

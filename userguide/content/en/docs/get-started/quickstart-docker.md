@@ -15,11 +15,11 @@ locally, without having to install all Docsy's dependencies.
 
 1. On Mac and Windows, download and install [Docker
    Desktop](https://www.docker.com/get-started).  On Linux, install [Docker
-   engine](https://docs.docker.com/engine/install/#server) and [Docker
+   engine](https://docs.docker.com/engine/install/) and [Docker
    compose](https://docs.docker.com/compose/install/).
-   
+
    The installation may require you to reboot your computer for the changes to
-   take effect. 
+   take effect.
 
 1. [Install git](https://github.com/git-guides/install-git).
 

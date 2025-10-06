@@ -57,7 +57,7 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 
 As an alternative to the standard syntax used above, formulae can also be
 authored using a
-[GLFM math block](https://docs.gitlab.com/ee/user/markdown.html#math):
+[GLFM math block](https://docs.gitlab.com/user/markdown/#math-equations):
 
 ````markdown
 The probability of getting \(k\) heads when flipping \(n\) coins is:
