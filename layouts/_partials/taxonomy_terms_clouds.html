@@ -2,11 +2,17 @@
 {{ if .Site.Params.taxonomy -}}
 	{{ if .Site.Params.Taxonomy.taxonomyCloud -}}
 		{{ range $index, $taxo := .Site.Params.Taxonomy.taxonomyCloud -}}
-			{{ if $.Site.Params.Taxonomy.taxonomyCloudTitle -}}
-				{{ $.Scratch.Set "title" (index $.Site.Params.Taxonomy.taxonomyCloudTitle $index) -}}
-			{{ else -}}
-				{{ $.Scratch.Set "title" (humanize $taxo) -}}
-			{{ end -}}
+
+			{{ $title := (humanize $taxo) }}
+			{{ with (index $.Site.Params.Taxonomy.taxonomyCloudTitleMap $taxo) }}
+				{{ $title = . }}
+			{{ else }}
+				{{ if lt $index (len $.Site.Params.Taxonomy.taxonomyCloudTitle) }}
+					{{ $title = (index $.Site.Params.Taxonomy.taxonomyCloudTitle $index) }}
+				{{ end }}
+			{{ end }}
+			{{ $.Scratch.Set "title" $title }}
+
 			{{ partial "taxonomy_terms_cloud.html" (dict "context" $context "taxo" $taxo "title" ($.Scratch.Get "title")) -}}
 		{{ end }}
 	{{ else -}}

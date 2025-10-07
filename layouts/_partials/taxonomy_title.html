@@ -1,0 +1,13 @@
+{{ $taxo := .taxo }}
+{{ $title := humanize $taxo }}
+
+{{ with index site.Params.taxonomyTitleMap $taxo }}
+  {{ $title = . }}
+{{ else }}
+  {{ $i18nKey := printf "taxonomy_%s" $taxo }}
+  {{ with T $i18nKey }}
+    {{ $title = . }}
+  {{ end }}
+{{ end }}
+
+{{- return $title -}}
