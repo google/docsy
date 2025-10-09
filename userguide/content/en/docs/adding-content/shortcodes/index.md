@@ -898,6 +898,20 @@ throwing a compile error. Add `draft="true"` as a parameter. For example:
 {{</* readfile file="includes/deploy.yaml" code="true" lang="yaml" draft="true" */>}}
 ```
 
+### Include remote markdown files
+
+The `include-remote-md` shortcode fetches a remote markdown file and includes it in the page. This happens only when your Docsy project is built, so future changes of the remote markdown file are only included when you rebuild your project.
+
+If the file has a frontmatter, define the marker of the frontmatter in the second parameter of the shortcode (defaults to `---`). Note that if the content after the frontmatter includes the marker (for example, includes `---` as part of a markdown-formatted table) the content is truncated.
+
+The remote file must be accessible from the host where you build the project. Authentication is not supported.
+
+If you are including a file from GitHub or a similar provider, use the link of the raw file, for example:
+
+```go-html-template
+{{</* include-remote-md "https://github.com/google/docsy/raw/main/userguide/CONTRIBUTING.md" */>}}
+```
+
 ## Conditional text
 
 The `conditional-text` shortcode allows you to show or hide parts of your
