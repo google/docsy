@@ -827,8 +827,11 @@ configuring multiple directories for
 
 ## RSS feeds
 
-Hugo will, by default, create an RSS feed for the home page and any section. To
-disable all RSS feeds, add the following to your
+Hugo automatically generates RSS feeds for the home page and each section. The
+[Hugo RSS documentation](https://gohugo.io/templates/rss/) covers the available
+templates, how to customize them, and tips for exposing your feeds to readers.
+
+To disable RSS feeds entirely, add the following to your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- prettier-ignore-start -->
