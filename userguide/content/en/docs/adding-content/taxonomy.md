@@ -103,6 +103,11 @@ and/or blog section in Docsy or a "tag cloud" in Docsy's right sidebar:
 taxonomyCloud = ["projects", "tags"] # set taxonomyCloud = [] to hide taxonomy clouds
 taxonomyCloudTitle = ["Our Projects", "Tag Cloud"] # if used, must have same length as taxonomyCloud
 taxonomyPageHeader = ["tags", "categories"] # set taxonomyPageHeader = [] to hide taxonomies on the page headers
+[params.taxonomy.taxonomyCloudTitleMap] # Same to taxonomyCloudTitle, dictionary format, but higher priority
+projects = "Our Projects"
+tags = "Tag Cloud"
+[params.taxonomy.taxonomyAliasMap] # Localizing taxonomies not included in i18n files
+projects = "Projects"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
@@ -113,9 +118,14 @@ params:
     taxonomyCloudTitle:   # if used, must have the same
       - Our Projects      # number of entries as taxonomyCloud
       - Tag Cloud
+    taxonomyCloudTitleMap: # Same to taxonomyCloudTitle, dictionary format, but higher priority
+      projects: Our Projects
+      tags: Tag Cloud
     taxonomyPageHeader:
       - tags        # remove all entries
       - categories  # to hide taxonomy clouds
+    taxonomyAliasMap:
+      projects: Projects # Localizing taxonomies not included in i18n files
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
@@ -129,10 +139,17 @@ params:
         "Our Projects",
         "Tag Cloud"
       ],
+      "taxonomyCloudTitleMap": {
+        "projects": "Our Projects",
+        "tags": "Tag Cloud"
+      },
       "taxonomyPageHeader": [
         "tags",
         "categories"
-      ]
+      ],
+      "taxonomyAliasMap": {
+        "projects": "Projects"
+      }
     }
   }
 }

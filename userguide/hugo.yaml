@@ -36,6 +36,22 @@ languages:
     languageName: Placeholder
     params:
       description: Docsy does multilingual docs
+  zh-cn:
+    languageName: 简体中文
+    params:
+      description: Docsy为文档而生
+      taxonomy:
+        taxonomyCloud:
+          - tags
+          - categories
+          - topics
+        taxonomyCloudTitleMap:
+          tags: 标签云
+          categories: 类别簇
+          topics: 主题区
+        taxonomyAliasMap:
+          topic: 主题
+          topics: 主题
 
 markup:
   tableOfContents:
@@ -140,6 +156,7 @@ params:
 taxonomies:
   tag: tags
   category: categories
+  topic: topics
 
 module:
   mounts:
@@ -156,5 +173,8 @@ module:
     - source: content/en
       target: content
       lang: xx
+    - source: content/zh
+      target: content
+      lang: zh-cn
 
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime userguide

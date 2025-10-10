@@ -88,3 +88,23 @@ other = "Was this page helpful?"
 other = "Yes"
 [feedback_negative]
 other = "No"
+
+# Taxonomy
+[taxonomy_category]
+other = "Category"
+[taxonomy_categories]
+other = "Categories"
+[taxonomy_collection]
+other = "Collection"
+[taxonomy_collections]
+other = "Collections"
+[taxonomy_tag]
+other = "Tag"
+[taxonomy_tags]
+other = "Tags"
+[taxonomy_project]
+other = "Project"
+[taxonomy_projects]
+other = "Projects"
+[taxonomy_series]
+other = "Series"

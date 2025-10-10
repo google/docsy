@@ -89,3 +89,23 @@ other = "这个页面对您有帮助吗？"
 other = "有帮助"
 [feedback_negative]
 other = "没帮助"
+
+# Taxonomy
+[taxonomy_category]
+other = "分类"
+[taxonomy_categories]
+other = "分类"
+[taxonomy_collection]
+other = "合集"
+[taxonomy_collections]
+other = "合集"
+[taxonomy_tag]
+other = "标签"
+[taxonomy_tags]
+other = "标签"
+[taxonomy_project]
+other = "项目"
+[taxonomy_projects]
+other = "项目"
+[taxonomy_series]
+other = "系列"

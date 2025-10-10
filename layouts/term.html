@@ -1,7 +1,11 @@
 {{ define "main" -}}
 <div class="td-content">
   <main class="taxonomy-taxonomy-page">
-    <h1>{{ with .Data.Singular }}{{ . | humanize }}: {{ end }}<span>{{ .Title }}</span></h1>
+
+    {{ $singular := partial "taxonomy_title.html" (dict "context" . "taxo" .Data.Singular) }}
+    {{ $plural := partial "taxonomy_title.html" (dict "context" . "taxo" .Data.Plural) }}
+
+    <h1>{{ $singular }}: <span>{{ .Title }}</span></h1>
     <div>
       {{ .Content }}
     </div>
@@ -26,7 +30,7 @@
         </article>
       {{ end }}
     </div>
-    <a href="{{ with .Site.GetPage (printf "/%s" ( lower .Data.Plural )) }}{{ .Permalink }}{{ end }}" class="all-taxonomy-terms">{{ humanize ( T "ui_all" ) }} {{ with .Data.Plural }}{{ . | humanize }}{{ end }}</a>
+    <a href="{{ with .Site.GetPage (printf "/%s" ( lower .Data.Plural )) }}{{ .Permalink }}{{ end }}" class="all-taxonomy-terms">{{ humanize ( T "ui_all" ) }} {{ $plural }}</a>
   </main>
 </div>
 {{- end }}

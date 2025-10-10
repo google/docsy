@@ -1,0 +1,14 @@
+{{ $context := .context }}
+{{ $taxo := (lower .taxo) }}
+{{ $title := (humanize $taxo) }}
+
+{{ with (index $context.Site.Params.Taxonomy.taxonomyAliasMap $taxo) }}
+  {{ $title = . }}
+{{ else }}
+  {{ $i18nKey := printf "taxonomy_%s" $taxo }}
+  {{ with T $i18nKey }}
+    {{ $title = . }}
+  {{ end }}
+{{ end }}
+
+{{- $title -}}
