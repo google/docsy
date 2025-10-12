@@ -29,7 +29,7 @@ other = "Gizlilik Politikası"
 
 # Post (blog, articles etc.)
 [post_byline_by]
-other = "by"
+other = "Yazan"
 [post_created]
 other = "Oluşturuldu"
 [post_last_mod]
@@ -39,17 +39,17 @@ other = "Bu sayfayı düzenle"
 [post_view_this]
 other = "Sayfa kaynağını görüntüle"
 [post_create_child_page]
-other = "Çocuk sayfası oluştur"
+other = "Alt sayfa oluştur"
 [post_create_issue]
 other = "Belge konusu oluştur"
 [post_create_project_issue]
 other = "Proje konusu oluştur"
 [post_posts_in]
-other = "Gönderiler in"
+other = "Şuradaki gönderiler"
 [post_reading_time]
-other = "minute read"
+other = "dakikalık okuma"
 [post_less_than_a_minute_read]
-other = "1 dakikadan az"
+other = "1 dakikadan az okuma"
 
 # Print support
 [print_printable_section]
@@ -73,9 +73,9 @@ other = "{{ .Site.Title }} kullanıyor veya kullanmak mı istiyorsunuz? Daha faz
 [community_develop]
 other = "Geliştirin ve Katkıda Bulunun"
 [community_contribute]
-other = "If you want to get more involved by contributing to {{ .Site.Title }}, join us here:"
+other = "{{ .Site.Title }} katkıda bulunarak dahil olmak istiyorsanız, bize katılın:"
 [community_how_to]
-other = "You can find out how to contribute to {{ .Site.Title }} in our"
+other = "{{ .Site.Title }} nasıl katkıda bulunabileceğinizi sayfamızda bulabilirsiniz"
 [community_guideline]
 other = "Katkı Yönergeleri"
 
