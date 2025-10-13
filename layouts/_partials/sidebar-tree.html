@@ -1,11 +1,10 @@
-{{/* We cache this partial for bigger sites and set the active class client side. */ -}}
-
 {{ $context := .context -}}
 {{ $sidebarRoot := .sidebarRoot -}}
-{{ $cacheKey := .cacheKey -}}
+{{ $sidebarRootID := .sidebarRootID -}}
 
 {{ with $context -}}
 
+{{/* We cache this partial for bigger sites and set the active class client side. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
 
@@ -40,7 +39,7 @@
         {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}
         {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end }}"
       id="td-section-nav"
-      {{- with $cacheKey }} data-cache-key="{{ . }}"{{ end -}}
+      {{- with $sidebarRootID }} data-sidebar-root="{{ . }}"{{ end -}}
     >
     {{ if and .Site.Params.ui.sidebar_lang_menu (gt (len .Site.Home.Translations) 0) -}}
     <div class="td-sidebar-nav__section nav-item dropdown d-block d-lg-none">
@@ -56,7 +55,7 @@
     {{ $ulShow := .Site.Params.ui.ul_show | default 1 -}}
     {{ $sidebarMenuTruncate := .Site.Params.ui.sidebar_menu_truncate | default 100 -}}
     <ul class="td-sidebar-nav__section pe-md-3 ul-{{ $ulNr }}">
-      {{ template "section-tree-nav-section" (dict "cacheKey" $cacheKey "page" . "section" $navRoot "shouldDelayActive" $shouldDelayActive "sidebarMenuTruncate" $sidebarMenuTruncate "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
+      {{ template "section-tree-nav-section" (dict "page" . "section" $navRoot "shouldDelayActive" $shouldDelayActive "sidebarMenuTruncate" $sidebarMenuTruncate "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
     </ul>
   </nav>
 </div>
@@ -64,7 +63,7 @@
 {{- end }}{{/* with $context */ -}}
 
 {{ define "section-tree-nav-section" -}}
-  {{ $cacheKey := .cacheKey -}}
+  {{/* cSpell:ignore manuallink manuallinkrelref manuallinktitle */ -}}
   {{ $s := .section -}}
   {{ $p := .page -}}
   {{ $shouldDelayActive := .shouldDelayActive -}}
@@ -109,7 +108,7 @@
           <i class="{{ . }}"></i>
         {{- end -}}
         <span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
-          {{- $s.LinkTitle -}} {{- $cacheKey -}}
+          {{- $s.LinkTitle -}}
         </span> {{- /**/ -}}
       </a> {{- /**/ -}}
     </label>
@@ -131,7 +130,7 @@
         <i class="{{ . }}"></i>
       {{- end -}}
       <span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
-        {{- $s.LinkTitle }} {{ $cacheKey -}}
+        {{- $s.LinkTitle -}}
       </span></a>
     {{- end }}
     {{- if $withChild }}

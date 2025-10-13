@@ -3,9 +3,11 @@
   "version": "0.2",
   "caseSensitive": true,
   "words": [
+    "anchorize",
     "Docsy",
     "errorf",
     "hugo",
+    "isset",
     "relref",
     "scrollspy",
     "shortcode",

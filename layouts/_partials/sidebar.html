@@ -19,8 +19,8 @@
     {{ end -}}
   {{ end -}}
 {{ end -}}
-{{ $cacheKey := $sidebarRoot.RelPermalink -}}
-{{ $args := dict "context" . "sidebarRoot" $sidebarRoot "cacheKey" $cacheKey -}}
+{{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
+{{ $args := dict "context" . "sidebarRoot" $sidebarRoot "sidebarRootID" $sidebarRootID -}}
 {{ if $shouldCache -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
@@ -36,7 +36,7 @@
     $("#td-sidebar-menu").toggleClass("d-none");
     });
   </script>
-  {{ partialCached "sidebar-tree.html" $args $cacheKey }}
+  {{ partialCached "sidebar-tree.html" $args $sidebarRootID }}
 {{ else -}}
   {{ partial "sidebar-tree.html" $args }}
 {{- end }}
