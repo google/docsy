@@ -1,10 +1,9 @@
 {{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */ -}}
 
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
-{{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
-{{ $sidebarCacheTypeRoot := .Site.Params.ui.sidebar_cache_type_root | default false -}}
+{{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
 
-{{/* Determine cache key and sidebar root (if enabled) */ -}}
+{{/* Determine sidebar root and ID (if enabled) */ -}}
 {{ $sidebarRoot := .FirstSection -}}
 {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
 {{ if .Site.Params.ui.sidebar_root_enabled -}}
@@ -20,8 +19,13 @@
   {{ end -}}
 {{ end -}}
 {{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
-{{ $args := dict "context" . "sidebarRoot" $sidebarRoot "sidebarRootID" $sidebarRootID -}}
-{{ if $shouldCache -}}
+{{ $args := dict
+    "context" .
+    "cacheSidebar" $cacheSidebar
+    "sidebarRoot" $sidebarRoot
+    "sidebarRootID" $sidebarRootID
+-}}
+{{ if $cacheSidebar -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
     $(function() {

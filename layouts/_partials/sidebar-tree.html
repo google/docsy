@@ -1,12 +1,12 @@
 {{ $context := .context -}}
 {{ $sidebarRoot := .sidebarRoot -}}
 {{ $sidebarRootID := .sidebarRootID -}}
+{{ $cacheSidebar := .cacheSidebar -}}
 
 {{ with $context -}}
 
-{{/* We cache this partial for bigger sites and set the active class client side. */ -}}
-{{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
-{{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
+{{/* When the sidebar is cached, "active" class is set client side. */ -}}
+{{ $shouldDelayActive := $cacheSidebar -}}
 
 <div id="td-sidebar-menu" class="td-sidebar__inner{{ if $shouldDelayActive }} d-none{{ end }}">
   {{ if not .Site.Params.ui.sidebar_search_disable -}}
@@ -37,9 +37,9 @@
 
   <nav class="td-sidebar-nav collapse
         {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}
-        {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end }}"
+        {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end }}" {{/**/ -}}
       id="td-section-nav"
-      {{- with $sidebarRootID }} data-sidebar-root="{{ . }}"{{ end -}}
+      {{- if .Site.Params.ui.sidebar_root_enabled }} data-sidebar-root="{{ $sidebarRootID }}" {{- end -}}
     >
     {{ if and .Site.Params.ui.sidebar_lang_menu (gt (len .Site.Home.Translations) 0) -}}
     <div class="td-sidebar-nav__section nav-item dropdown d-block d-lg-none">
