@@ -36,7 +36,7 @@
     "test": "npm run check && npm run cd:docs test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkgs": "npx npm-check-updates --dep 'prod,dev,optional,peer' -x @fortawesome/fontawesome-free -u && npm run cd:docs update:pkgs"
+    "update:packages": "npx npm-check-updates --dep 'prod,dev,optional,peer' -x @fortawesome/fontawesome-free -u && npm run cd:docs update:packages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
@@ -48,7 +48,7 @@
     "prettier": "^3.6.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.150.1",
+    "hugo-extended": "0.151.0",
     "netlify-cli": "^23.9.1",
     "npm-check-updates": "^19.0.0"
   },
@@ -60,5 +60,5 @@
   "engines": {
     "node": ">=22"
   },
-  "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark twbs netlify pkgs userguide -"
+  "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark twbs netlify userguide -"
 }

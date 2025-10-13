@@ -26,13 +26,12 @@
     "prepare": "cd .. && npm install",
     "serve": "npm run _serve",
     "test": "npm run check:format && npm run check:links",
-    "update:dep": "npm install --save-dev autoprefixer@latest postcss-cli@latest",
-    "update:pkgs": "npx npm-check-updates -u"
+    "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- docsy htmltest pkgs postbuild precheck refcache rtlcss -"
+  "cSpell:ignore": "- docsy htmltest postbuild precheck refcache rtlcss -"
 }
