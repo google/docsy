@@ -204,4 +204,12 @@
 
     }
   }
+
+  &-root-up-icon {
+    &::after {
+      font: var(--fa-font-solid);
+      content: fa-content($fa-var-caret-up);
+      padding-left: 0.5em;
+    }
+  }
 }
