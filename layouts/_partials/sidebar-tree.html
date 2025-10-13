@@ -2,10 +2,12 @@
 
 {{/* Extract parameters - handle both dict and direct page context */ -}}
 {{ $cacheKey := "" -}}
+{{ $sidebarRoot := false -}}
 {{ $context := . -}}
 {{ if .page -}}
   {{/* Called with dict */ -}}
   {{ $cacheKey = .cacheKey -}}
+  {{ $sidebarRoot = .sidebarRoot -}}
   {{ $context = .page -}}
 {{ end -}}
 
@@ -52,18 +54,7 @@
     </div>
     {{ end -}}
     {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
-    {{/* Check for sidebar_root in page ancestors */ -}}
-    {{ $sidebarRoot := false -}}
-    {{ range .Ancestors.Reverse -}}
-      {{ if and (not $sidebarRoot) .IsSection (eq .Params.sidebar_root true) -}}
-        {{ $sidebarRoot = . -}}
-        {{/* Warn if sidebar_root is set on a top-level section */ -}}
-        {{ if or (eq . $.Site.Home) (eq . $navRoot) -}}
-          {{ warnf "sidebar_root is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
-        {{ end -}}
-      {{ end -}}
-    {{ end -}}
-    {{/* Use sidebar_root if found, otherwise use the default navRoot */ -}}
+    {{/* Use sidebar_root if provided, otherwise use the default navRoot */ -}}
     {{ if $sidebarRoot -}}
       {{ $navRoot = $sidebarRoot -}}
     {{ end -}}
