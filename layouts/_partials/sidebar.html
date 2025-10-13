@@ -1,23 +1,26 @@
 {{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */ -}}
+
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
 {{ $sidebarCacheTypeRoot := .Site.Params.ui.sidebar_cache_type_root | default false -}}
+
 {{/* Determine cache key and sidebar root (if enabled) */ -}}
-{{ $cacheKey := .FirstSection.RelPermalink -}}
-{{ $sidebarRoot := false -}}
+{{ $sidebarRoot := .FirstSection -}}
 {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
 {{ if .Site.Params.ui.sidebar_root_enabled -}}
   {{ range .Ancestors.Reverse -}}
-    {{ if and (not $sidebarRoot) .IsSection (eq .Params.sidebar_root true) -}}
-      {{ $sidebarRoot = . -}}
-      {{ $cacheKey = .RelPermalink -}}
-      {{/* Warn if sidebar_root is set on a top-level section */ -}}
-      {{ if or (eq . $.Site.Home) (eq . $navRoot) -}}
-        {{ warnf "sidebar_root is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
-      {{ end -}}
+    {{ if not (and .IsSection .Params.sidebar_root) -}}
+      {{ continue -}}
+    {{ end -}}
+    {{ $sidebarRoot = . -}}
+    {{/* Warn if sidebar_root is set on a top-level section */ -}}
+    {{ if or (eq . $.Site.Home) (eq . $navRoot) -}}
+      {{ warnf "sidebar_root is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
     {{ end -}}
   {{ end -}}
 {{ end -}}
+{{ $cacheKey := $sidebarRoot.RelPermalink -}}
+{{ $args := dict "context" . "sidebarRoot" $sidebarRoot "cacheKey" $cacheKey -}}
 {{ if $shouldCache -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
@@ -33,7 +36,7 @@
     $("#td-sidebar-menu").toggleClass("d-none");
     });
   </script>
-  {{ partialCached "sidebar-tree.html" (dict "page" . "cacheKey" $cacheKey "sidebarRoot" $sidebarRoot) $cacheKey }}
+  {{ partialCached "sidebar-tree.html" $args $cacheKey }}
 {{ else -}}
-  {{ partial "sidebar-tree.html" (dict "page" . "cacheKey" $cacheKey "sidebarRoot" $sidebarRoot) }}
+  {{ partial "sidebar-tree.html" $args }}
 {{- end }}

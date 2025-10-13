@@ -1,17 +1,11 @@
 {{/* We cache this partial for bigger sites and set the active class client side. */ -}}
 
-{{/* Extract parameters - handle both dict and direct page context */ -}}
-{{ $cacheKey := "" -}}
-{{ $sidebarRoot := false -}}
-{{ $context := . -}}
-{{ if .page -}}
-  {{/* Called with dict */ -}}
-  {{ $cacheKey = .cacheKey -}}
-  {{ $sidebarRoot = .sidebarRoot -}}
-  {{ $context = .page -}}
-{{ end -}}
+{{ $context := .context -}}
+{{ $sidebarRoot := .sidebarRoot -}}
+{{ $cacheKey := .cacheKey -}}
 
 {{ with $context -}}
+
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldDelayActive := ge (len .Site.Pages) $sidebarCacheLimit -}}
 
