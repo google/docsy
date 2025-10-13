@@ -2,22 +2,33 @@
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $shouldCache := ge (len .Site.Pages) $sidebarCacheLimit -}}
 {{ $sidebarCacheTypeRoot := .Site.Params.ui.sidebar_cache_type_root | default false -}}
+{{/* Determine cache key, accounting for sidebar_root */ -}}
+{{ $cacheKey := .FirstSection.RelPermalink -}}
+{{ if .Site.Params.ui.sidebar_root_enabled -}}
+  {{ $sidebarRoot := false -}}
+  {{ range .Ancestors.Reverse -}}
+    {{ if and (not $sidebarRoot) .IsSection (eq .Params.sidebar_root true) -}}
+      {{ $sidebarRoot = . -}}
+      {{ $cacheKey = .RelPermalink -}}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
 {{ if $shouldCache -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
     $(function() {
     $("#td-section-nav a").removeClass("active");
-    $("#td-section-nav #{{ $mid }}").addClass("active"); 
-    $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item"); 
-    $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path"); 
-    $("#td-section-nav li.active-path").addClass("show"); 
+    $("#td-section-nav #{{ $mid }}").addClass("active");
+    $("#td-section-nav #{{ $mid }}-li span").addClass("td-sidebar-nav-active-item");
+    $("#td-section-nav #{{ $mid }}").parents("li").addClass("active-path");
+    $("#td-section-nav li.active-path").addClass("show");
     $("#td-section-nav li.active-path").children("input").prop('checked', true);
-    $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");  
-    $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");  
-    $("#td-sidebar-menu").toggleClass("d-none"); 
+    $("#td-section-nav #{{ $mid }}-li").siblings("li").addClass("show");
+    $("#td-section-nav #{{ $mid }}-li").children("ul").children("li").addClass("show");
+    $("#td-sidebar-menu").toggleClass("d-none");
     });
   </script>
-  {{ partialCached "sidebar-tree.html" . .FirstSection.RelPermalink }}
+  {{ partialCached "sidebar-tree.html" (dict "page" . "cacheKey" $cacheKey) $cacheKey }}
 {{ else -}}
-  {{ partial "sidebar-tree.html" . }}
+  {{ partial "sidebar-tree.html" (dict "page" . "cacheKey" $cacheKey) }}
 {{- end }}

@@ -85,6 +85,8 @@ params:
     sidebar_menu_compact: true
     sidebar_menu_foldable: false
     sidebar_search_disable: false
+    sidebar_root_enabled: true
+    # sidebar_cache_limit: 1
     feedback:
       enable: true
       'yes': >-
