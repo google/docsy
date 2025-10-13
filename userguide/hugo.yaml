@@ -81,12 +81,11 @@ params:
     # algolia:
   ui:
     showLightDarkModeMenu: true
-    sidebar_lang_menu: true # Set to true to show the language menu in the sidebar
+    sidebar_lang_menu: false # Set to true to show the language menu in the sidebar
     sidebar_menu_compact: true
-    sidebar_menu_foldable: false
+    sidebar_menu_foldable: true
     sidebar_search_disable: false
-    # sidebar_root_enabled: true
-    # sidebar_cache_limit: 1
+    sidebar_root_enabled: true
     feedback:
       enable: true
       'yes': >-

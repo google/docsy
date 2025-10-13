@@ -161,7 +161,10 @@
       {{- with $s.Params.Icon -}}
         <i class="{{ . }}"></i>
       {{- end -}}
-      <span class="{{ if $active }}td-sidebar-nav-active-item{{ end }}">
+      <span class="
+        {{- if $active }}td-sidebar-nav-active-item{{ end -}}
+        {{- if $s.Params.sidebar_root }} td-sidebar-root-up-icon{{ end -}}
+      ">
         {{- $s.LinkTitle -}}
       </span></a>
     {{- end -}}

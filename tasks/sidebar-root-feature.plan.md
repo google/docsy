@@ -35,7 +35,7 @@ handling is required.
 - If found, use that section as `$navRoot` instead
 - Warn if `sidebar_root` is set on a top-level section
 
-### 2. Modify `layouts/_partials/sidebar-tree.html` - Add breadcrumb navigation
+### 2. Modify `layouts/_partials/sidebar-tree.html` - Add breadcrumb navigation (OPTIONAL/FUTURE)
 
 **After line 41:**
 
@@ -43,6 +43,7 @@ handling is required.
   section
 - Show "← Back to [Parent Section]" link(s) above the main navigation tree
 - Use appropriate styling to distinguish from regular navigation items
+- Note: CSS class `td-sidebar-root-up-icon` has been created in `_sidebar-tree.scss` for the up-arrow icon
 
 ### 3. Update `layouts/_partials/sidebar.html`
 
@@ -85,11 +86,11 @@ the top.
 
 ### To-dos
 
-- [ ] Implement logic to walk page ancestors and find section with sidebar_root
-      parameter
-- [ ] Modify $navRoot calculation in sidebar-tree.html to use sidebar_root when
+- [x] Implement logic to walk page ancestors and find section with sidebar_root
+      parameter (implemented in sidebar.html)
+- [x] Modify $navRoot calculation in sidebar-tree.html to use sidebar_root when
       found
-- [ ] Add breadcrumb navigation UI for navigating back to parent sections
-- [ ] Update sidebar.html cache key to account for sidebar_root sections
+- [ ] Add breadcrumb navigation UI for navigating back to parent sections (OPTIONAL/FUTURE)
+- [x] Update sidebar.html cache key to account for sidebar_root sections
 - [ ] Test with nested sections and verify all navigation scenarios work
       correctly
