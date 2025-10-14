@@ -89,3 +89,23 @@ other = "這個頁面對您有幫助嗎？"
 other = "有幫助"
 [feedback_negative]
 other = "沒幫助"
+
+# Taxonomy
+[taxonomy_category]
+other = "分類"
+[taxonomy_categories]
+other = "分類"
+[taxonomy_collection]
+other = "合集"
+[taxonomy_collections]
+other = "合集"
+[taxonomy_tag]
+other = "標籤"
+[taxonomy_tags]
+other = "標籤"
+[taxonomy_project]
+other = "專案"
+[taxonomy_projects]
+other = "專案"
+[taxonomy_series]
+other = "系列"
