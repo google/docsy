@@ -947,6 +947,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-12-12T10:11:45.620648-05:00"
   },
+  "https://github.com/google/docsy/issues/2115": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-16T07:39:48.413695-04:00"
+  },
   "https://github.com/google/docsy/issues/2116": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:40.019418-04:00"
@@ -1950,6 +1954,10 @@
   "https://katex.org/docs/options.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:36.992092-04:00"
+  },
+  "https://keepachangelog.com": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-16T08:09:13.265241-04:00"
   },
   "https://kubernetes.io": {
     "StatusCode": 206,
