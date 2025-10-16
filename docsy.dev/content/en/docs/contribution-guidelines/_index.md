@@ -50,7 +50,7 @@ We use [Netlify](https://www.netlify.com/) to manage the deployment of the site 
 
 ### Quick start with Netlify
 
-1. Fork the [Docsy repo](https://github.com/google/docsy) on GitHub: this site's files live in the `userguide` subdirectory.
+1. Fork the [Docsy repo](https://github.com/google/docsy) on GitHub: this site's files live in the `docsy.dev` subdirectory.
 1. Make your changes and send a pull request (PR).
 1. If you're not yet ready for a review, add "WIP" to the PR name to indicate
   it's a work in progress. (**Don't** add the Hugo property
@@ -84,11 +84,11 @@ If you want to run your own local Hugo server to preview your changes as you wor
     git clone https://github.com/google/docsy.git
     ```
 
-1. Change to the `userguide` directory and run the following Hugo command to build the site and start the Hugo server.
+1. Change to the `docsy.dev` directory and run the following Hugo command to build the site and start the Hugo server.
    Note that you need the `themesDir` flag because the site files are inside the theme repo.
 
     ```sh
-    cd userguide
+    cd docsy.dev
     hugo server --themesDir ../..
     ```
 
@@ -116,7 +116,7 @@ locally with Docker, without installing any additional dependencies.
 
       ```bash
       docker run -it --user=$(id -u):$(id -g) -p 1313:1313 \
-        -v $(pwd):/app/docsy -v /app/docsy/userguide/node_modules \
+        -v $(pwd):/app/docsy -v /app/docsy/docsy.dev/node_modules \
         docsy/user-guide
       ```
 

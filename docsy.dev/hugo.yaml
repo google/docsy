@@ -68,7 +68,7 @@ params:
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
-  github_subdir: userguide
+  github_subdir: docsy.dev
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
@@ -157,4 +157,4 @@ module:
       target: content
       lang: xx
 
-# cSpell:ignore docsy github goldmark markmap plantuml readingtime userguide
+# cSpell:ignore docsy github goldmark markmap plantuml readingtime

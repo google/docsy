@@ -1,5 +1,7 @@
 {
-  "name": "docsy-user-guide",
+  "name": "www.docsy.dev",
+  "description": "Docsy website and development environment for the Docsy theme",
+  "private": true,
   "scripts": {
     "_build": "npm run _hugo-dev --",
     "_check:format": "npx prettier --prose-wrap=always --check .",
@@ -23,13 +25,18 @@
     "postbuild:production": "npm run _check:links--warn",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
-    "prepare": "cd .. && npm install",
+    "prepare-disabled": "cd .. && npm install",
     "serve": "npm run _serve",
     "test": "npm run check:format && npm run check:links",
+    "update:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "cross-env": "^10.1.0",
+    "hugo-extended": "0.151.0",
+    "netlify-cli": "^23.9.1",
+    "npm-check-updates": "^19.0.0",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },

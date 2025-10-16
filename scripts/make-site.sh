@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# cSpell:ignore autoprefixer docsy postcss themesdir github oneline
 set -eo pipefail
 
 DEPS="autoprefixer postcss-cli"
