@@ -9,6 +9,7 @@
   "scripts": {
     "_cd:docsy.dev": "cd docsy.dev &&",
     "_check:format": "npx prettier --check *.md tasks",
+    "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh && bash -c 'scripts/gen-chroma-styles.sh -s onedark -o _dark.scss'",
@@ -22,10 +23,12 @@
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix:format": "npm run _check:format -- --write && npm run cd:docsy.dev fix:format",
+    "fix": "npm run fix:format",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
     "test:all": "npm run ci:prepare && npm run check && npm run cd:docsy.dev test && npm run ci:post",
-    "test": "npm run check && npm run cd:docsy.dev test",
+    "test:only": "npm run cd:docsy.dev test",
+    "test": "echo 'RUNNING FIX AND TESTS...'; npm run fix && npm run test:only",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages"
   },

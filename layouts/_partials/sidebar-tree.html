@@ -39,7 +39,7 @@
         {{- if .Site.Params.ui.sidebar_search_disable }} td-sidebar-nav--search-disabled{{ end -}}
         {{- if .Site.Params.ui.sidebar_menu_foldable }} foldable-nav{{ end }}" {{/**/ -}}
       id="td-section-nav"
-      {{- if .Site.Params.ui.sidebar_root_enabled }} data-sidebar-root="{{ $sidebarRootID }}"{{ end -}}
+      {{- if .Site.Params.ui.sidebar_root_enabled }} data-sidebar-root-id="{{ $sidebarRootID }}"{{ end -}}
     >
     {{ if and .Site.Params.ui.sidebar_lang_menu (gt (len .Site.Home.Translations) 0) -}}
     <div class="td-sidebar-nav__section nav-item d-block d-lg-none">
@@ -47,7 +47,6 @@
     </div>
     {{ end -}}
     {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
-    {{/* Use sidebar_root if provided, otherwise use the default navRoot */ -}}
     {{ if $sidebarRoot -}}
       {{ $navRoot = $sidebarRoot -}}
     {{ end -}}
@@ -163,7 +162,7 @@
       {{- end -}}
       <span class="
         {{- if $active }}td-sidebar-nav-active-item{{ end -}}
-        {{- if and $s.Params.sidebar_root .Site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
+        {{- if and $s.Params.sidebar_root_for site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
       ">
         {{- $s.LinkTitle -}}
       </span></a>

@@ -8,13 +8,13 @@
 {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
 {{ if .Site.Params.ui.sidebar_root_enabled -}}
   {{ range .Ancestors.Reverse -}}
-    {{ if not (and .IsSection .Params.sidebar_root) -}}
+    {{ if not (and .IsSection (eq .Params.sidebar_root_for "children")) -}}
       {{ continue -}}
     {{ end -}}
     {{ $sidebarRoot = . -}}
-    {{/* Warn if sidebar_root is set on a top-level section */ -}}
+    {{/* Warn if sidebar_root_for is set on a top-level section */ -}}
     {{ if or (eq . $.Site.Home) (eq . $navRoot) -}}
-      {{ warnf "sidebar_root is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
+      {{ warnf "sidebar_root_for is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
     {{ end -}}
   {{ end -}}
 {{ end -}}
