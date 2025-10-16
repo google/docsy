@@ -27,27 +27,30 @@ For the full list of changes, see the [0.x.y] release notes.
 **Breaking changes**:
 
 - **Appearance**:
-  - The **language menu** is now visible from the navbar on all screen sizes
-    ([#2303]). The menu is hidden from the sidebar by default. To restore the
-    legacy behavior, set `ui.sidebar_lang_menu` to `true` in your project's
-    config. For details see, [Adding a language menu][].
+  - **Language menu**:
+    - Changed the visibility of the **language menu** to display in the navbar
+      for all screen sizes ([#2303]).
+    - The menu is hidden from the sidebar by default. To restore the legacy
+      behavior, set the configuration parameter `ui.sidebar_lang_menu` to
+      `true`. For details, see [Adding a language menu][].
 - **Shortcodes**:
-  - The alert shortcode has been reworked to address [#906] and [#939]. It can
-    now be used with Markdown content, and it can contain calls to other
-    shortcodes. For details, see [Shortcode helpers > alert][] ([#941])
-- ...
+  - The **alert** shortcode can be used with Markdown content, and it can
+    contain calls to other shortcodes ([#906] and [#939]). For details, see
+    [alert] ([#941]).
 
 [#941]: https://github.com/google/docsy/pull/941
-[Shortcode helpers > alert]:
-  https://www.docsy.dev/docs/adding-content/shortcodes/#alert
+[alert]: https://www.docsy.dev/docs/adding-content/shortcodes/#alert
 
 **New**:
 
 **Other changes**:
 
+- Projects using Docsy via NPM, directly from the GitHub repository, will no
+  longer face optional and peer dependencies errors ([#2115]).
 - Hamburger menu toggle button icon changes to an X when the menu is expanded
   ([#2301]). This is a style change only.
 
+[#2115]: https://github.com/google/docsy/issues/2115
 [#2300]: https://github.com/google/docsy/pull/2300
 [#2301]: https://github.com/google/docsy/pull/2301
 [#2303]: https://github.com/google/docsy/pull/2303
