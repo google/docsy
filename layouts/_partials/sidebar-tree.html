@@ -110,6 +110,11 @@
         $s.Params.manualLinkTitle
         $s.Title
   -}}
+  {{ if and $treeRoot (eq $s.Params.sidebar_root_for "self") -}}
+    {{ with $s.Parent -}}
+      {{ $manualLink = .RelPermalink -}}
+    {{ end -}}
+  {{ end -}}
   <li class="td-sidebar-nav__section-title td-sidebar-nav__section
         {{- if $withChild }} with-child{{ else }} without-child{{ end -}}
         {{ if $activePath }} active-path{{ end -}}

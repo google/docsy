@@ -7,6 +7,7 @@ date: 2018-07-30
 description:
   Learn how to get started with Docsy, including the available options for
   installing and using the Docsy theme.
+sidebar_root_for: self
 ---
 
 As you saw in our introduction, Docsy is a [Hugo](https://gohugo.io) theme, which means that if you want to use Docsy, you need to set up your website source so that the Hugo static site generator can find and use the Docsy theme files when building your site. The simplest way to do this is to copy and edit our example site, though we also provide instructions for adding the Docsy theme manually to new or existing sites.

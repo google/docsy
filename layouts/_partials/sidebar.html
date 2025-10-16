@@ -7,15 +7,29 @@
 {{ $sidebarRoot := .FirstSection -}}
 {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
 {{ if .Site.Params.ui.sidebar_root_enabled -}}
-  {{ range .Ancestors.Reverse -}}
-    {{ if not (and .IsSection (eq .Params.sidebar_root_for "children")) -}}
-      {{ continue -}}
-    {{ end -}}
+  {{ if and .IsSection (eq .Params.sidebar_root_for "self") -}}
     {{ $sidebarRoot = . -}}
-    {{/* Warn if sidebar_root_for is set on a top-level section */ -}}
-    {{ if or (eq . $.Site.Home) (eq . $navRoot) -}}
-      {{ warnf "sidebar_root_for is set on a top-level section (%s). This parameter is intended for nested sections only." .Path -}}
+  {{ else -}}
+    {{/* Check ancestors for sidebar_root_for (any value) */ -}}
+    {{ range .Ancestors.Reverse -}}
+      {{ if not .IsSection -}}
+        {{ continue -}}
+      {{ end -}}
+      {{ $rootFor := .Params.sidebar_root_for -}}
+      {{ if not $rootFor -}}
+        {{ continue -}}
+      {{ end -}}
+      {{ if not (or (eq $rootFor "self") (eq $rootFor "children")) -}}
+        {{ warnf "%s: sidebar_root_for should be 'self' or 'children'. Invalid value: '%s'." .Path $rootFor -}}
+        {{ continue -}}
+      {{ end -}}
+      {{ $sidebarRoot = . -}}
+      {{ break -}}
     {{ end -}}
+  {{ end -}}
+  {{/* Warn if sidebar_root_for is set on a top-level section */ -}}
+  {{ if and $sidebarRoot.Params.sidebar_root_for (eq $sidebarRoot $navRoot) -}}
+    {{ warnf "%s: sidebar_root_for is set on a top-level section. This parameter is intended for nested sections only." $sidebarRoot.Path -}}
   {{ end -}}
 {{ end -}}
 {{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
