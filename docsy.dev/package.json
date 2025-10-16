@@ -8,7 +8,6 @@
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
     "_check:links": "make --keep-going check-links",
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
-    "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh && bash -c 'scripts/gen-chroma-styles.sh -s onedark -o _dark.scss'",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
     "_refcache:prune": "jq 'with_entries(select(.value.StatusCode < 400))' static/refcache.json > tmp/refcache.json && mv tmp/refcache.json static/refcache.json",
@@ -26,7 +25,7 @@
     "postbuild:production": "npm run _check:links--warn",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
-    "prepare": "cd .. && npm install",
+    "prepare-disabled": "cd .. && npm install",
     "serve": "npm run _serve",
     "test": "npm run check:format && npm run check:links",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
@@ -41,5 +40,5 @@
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- docsy htmltest postbuild precheck refcache rtlcss onedark -"
+  "cSpell:ignore": "- docsy htmltest postbuild precheck refcache rtlcss -"
 }

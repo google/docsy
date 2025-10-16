@@ -36,19 +36,17 @@ jobs:
           cache: npm
           cache-dependency-path: package.json
       - name: Setup workspace
-        run: mkdir -p tmp && cd tmp && npm init -y
-        shell: bash
-      - name: Install Hugo
-        working-directory: tmp
-        run: ../docsy.dev/scripts/install-hugo.sh
+        run: |
+          npm install
+          mkdir -p tmp && cd tmp && npm init -y
         shell: bash
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
         working-directory: tmp
-        run: ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
+        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
       - name: Make site from PR
         if: github.event_name == 'pull_request'
         working-directory: tmp
-        run: ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
+        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash

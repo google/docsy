@@ -3,13 +3,13 @@
 
 [build]
 publish = "docsy.dev/public"
-command = "npm run docsy.dev-install && npm run build:preview"
+command = "npm install && cd docsy.dev && npm run build:preview"
 
 [build.environment]
 GO_VERSION = "1.23.5"
 HUGO_THEME = "repo"
 
 [context.production]
-command = "npm run docsy.dev-install && npm run build:production"
+command = "npm install && cd docsy.dev && npm run build:production"
 
 # cSpell:ignore docsy
