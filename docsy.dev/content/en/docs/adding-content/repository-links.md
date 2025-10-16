@@ -72,7 +72,7 @@ params:
 ### `github_subdir` (optional)
 
 Specify a value here if your content directory is not in your repo's root
-directory. For example, this site is in the `userguide` subdirectory of its
+directory. For example, this site is in the `docsy.dev` subdirectory of its
 repo. Setting this value means that your edit links will go to the right page.
 
 <!-- prettier-ignore-start -->
@@ -80,16 +80,16 @@ repo. Setting this value means that your edit links will go to the right page.
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-github_subdir = "userguide"
+github_subdir = "docsy.dev"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  github_subdir: userguide
+  github_subdir: docsy.dev
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "github_subdir": "userguide"
+    "github_subdir": "docsy.dev"
   }
 }
 {{< /tab >}}

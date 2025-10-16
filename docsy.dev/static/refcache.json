@@ -159,7 +159,7 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:45.098848-04:00"
   },
-  "https://docs.aws.amazon.com/cli/latest/userguide/get-started-install.html": {
+  "https://docs.aws.amazon.com/cli/latest/docsy.dev/get-started-install.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:44.659444-04:00"
   },
@@ -699,6 +699,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:42.413544-04:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:59.550403-04:00"
+  },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T08:37:00.009501-04:00"
@@ -750,10 +754,6 @@
   "https://github.com/google/docsy/blob/main/package.json": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T08:36:58.931728-04:00"
-  },
-  "https://github.com/google/docsy/blob/main/userguide/hugo.yaml": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:59.550403-04:00"
   },
   "https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss": {
     "StatusCode": 206,
@@ -1247,6 +1247,186 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:01:09.766032-04:00"
   },
+  "https://github.com/google/docsy/tree/main/docsy.dev": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:35.357352-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2022/hello.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.411362-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2023/bootstrap-5-migration.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.542885-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2023/docsy-0.7.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.665262-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2023/priorities-for-2024.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.511948-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2024/0.10.0.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.411434-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2024/0.9.0.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.481618-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2024/year-in-review.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.481602-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.492493-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.512066-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.243119-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/content.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.242968-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/diagrams-and-formulae/index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.29628-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/feedback.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.57167-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/iconsimages.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.529995-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/lookandfeel.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.571721-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/navigation.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.493918-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/print.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.357925-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/repository-links.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.589332-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/search.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.551745-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/shortcodes/index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.21104-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/taxonomy.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.497884-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/adding-content/versioning.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.243124-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/best-practices/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.484899-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/best-practices/organizing-content.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.551345-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/best-practices/site-guidance.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.509949-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/contribution-guidelines/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.247491-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/deployment/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.296555-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/examples/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.243122-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.53006-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/basic-configuration.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.510016-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/docsy-as-module/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.64377-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/docsy-as-module/example-site-as-template.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.209838-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/docsy-as-module/installation-prerequisites.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.185609-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/docsy-as-module/start-from-scratch.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.497945-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/known_issues.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.366193-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/other-options.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.274673-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/get-started/quickstart-docker.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.649343-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/language/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.509831-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/updating/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.078278-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/updating/convert-site-to-module.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:33.530062-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/updating/updating-hugo-module.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.257566-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/docs/updating/updating-submodules.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T09:20:34.28026-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/project/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-16T08:36:58.469879-04:00"
+  },
+  "https://github.com/google/docsy/tree/main/docsy.dev/content/en/tests/index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T04:30:39.242016-04:00"
+  },
   "https://github.com/google/docsy/tree/main/layouts": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:35.408049-04:00"
@@ -1274,186 +1454,6 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:37.674866-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:35.357352-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2022/hello.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.411362-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2023/bootstrap-5-migration.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.542885-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2023/docsy-0.7.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.665262-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2023/priorities-for-2024.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.511948-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2024/0.10.0.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.411434-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2024/0.9.0.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.481618-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/2024/year-in-review.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.481602-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/blog/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.492493-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.512066-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.243119-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/content.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.242968-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/diagrams-and-formulae/index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.29628-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/feedback.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.57167-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/iconsimages.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.529995-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/lookandfeel.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.571721-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/navigation.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.493918-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/print.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.357925-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/repository-links.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.589332-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/search.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.551745-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/shortcodes/index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.21104-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/taxonomy.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.497884-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/adding-content/versioning.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.243124-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/best-practices/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.484899-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/best-practices/organizing-content.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.551345-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/best-practices/site-guidance.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.509949-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/contribution-guidelines/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.247491-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/deployment/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.296555-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/examples/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.243122-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.53006-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/basic-configuration.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.510016-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/docsy-as-module/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.64377-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/docsy-as-module/example-site-as-template.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.209838-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/docsy-as-module/installation-prerequisites.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.185609-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/docsy-as-module/start-from-scratch.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.497945-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/known_issues.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.366193-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/other-options.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.274673-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/get-started/quickstart-docker.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.649343-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/language/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.509831-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/updating/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.078278-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/updating/convert-site-to-module.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:33.530062-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/updating/updating-hugo-module.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.257566-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/docs/updating/updating-submodules.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T09:20:34.28026-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/project/_index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-16T08:36:58.469879-04:00"
-  },
-  "https://github.com/google/docsy/tree/main/userguide/content/en/tests/index.md": {
-    "StatusCode": 206,
-    "LastSeen": "2025-10-05T04:30:39.242016-04:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,

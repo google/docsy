@@ -1,4 +1,4 @@
-<!-- cSpell:ignore docsy hugo userguide -->
+<!-- cSpell:ignore docsy hugo -->
 
 # How to Contribute
 
@@ -52,7 +52,7 @@ repo.
     in a later step.)
 3.  **Update Docsy version** to v0.X.Y for:
     - `version` key in [package.json]
-    - `version` key in [userguide/hugo.yaml]
+    - `version` key in [docsy.dev/hugo.yaml]
 4.  Run `npm run ci:prepare` to ensure that vendor assets and [go.mod]
     dependencies are up-to-date.
 5.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
@@ -133,5 +133,5 @@ further changes are merged into the default branch:
 [Draft a new release]: https://github.com/google/docsy/releases/new
 [go.mod]: https://github.com/google/docsy/blob/main/go.mod
 [package.json]: https://github.com/google/docsy/blob/main/package.json
-[userguide/hugo.yaml]:
-  https://github.com/google/docsy/blob/main/userguide/hugo.yaml
+[docsy.dev/hugo.yaml]:
+  https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml

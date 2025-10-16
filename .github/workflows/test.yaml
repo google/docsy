@@ -1,4 +1,5 @@
 # Build Docsy & the User Guide and run all repo checks across OSs.
+# cSpell:ignore docsy
 
 name: test
 
@@ -28,4 +29,4 @@ jobs:
       - if: runner.os != 'Windows'
         run: npm run test:all
       - if: runner.os == 'Windows'
-        run: npm run ci:prepare && npm run cd:docs build && npm run ci:post
+        run: npm run ci:prepare && npm run cd:docsy.dev build && npm run ci:post

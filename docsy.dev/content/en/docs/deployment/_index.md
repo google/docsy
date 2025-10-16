@@ -210,7 +210,7 @@ For advanced use cases, the [`hugo-action`](https://github.com/peaceiris/actions
 There are several options for publishing your web site using [Amazon Web Services](https://aws.amazon.com). This section describes the most basic option, deploying your site using an S3 bucket and activating the CloudFront CDN (content delivery network) to speed up the delivery of your deployed contents.
 
 1. After your [registration](https://portal.aws.amazon.com/billing/signup#/start) at AWS, create your S3 bucket, connect it with your domain, and add it to the CloudFront CDN. This [blog post](https://www.noorix.com.au/blog/how-to/hosting-static-website-with-aws-s3-cloudfront/) has all the details and provides easy to follow step-by-step instructions for the whole procedure.
-1. Download and install the latest version 2 of the AWS [Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/get-started-install.html) (CLI). Then configure your CLI instance by issuing the command `aws configure` (make sure you have your AWS Access Key ID and your AWS Secret Access Key at hand):
+1. Download and install the latest version 2 of the AWS [Command Line Interface](https://docs.aws.amazon.com/cli/latest/docsy.dev/get-started-install.html) (CLI). Then configure your CLI instance by issuing the command `aws configure` (make sure you have your AWS Access Key ID and your AWS Secret Access Key at hand):
 
    ```
    $ aws configure

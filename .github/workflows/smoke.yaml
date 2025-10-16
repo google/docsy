@@ -1,5 +1,6 @@
 # Smoke test across OSs: build a Docsy-based site from scratch,
 # using Docsy as hugo module and fetching Docsy via NPM.
+# cSpell:ignore docsy github
 
 name: smoke
 
@@ -34,7 +35,9 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: package.json
-      - run: tools/install-hugo.sh
+      - run: |
+          mkdir -p tmp && cd tmp && set -x
+          ../docsy.dev/scripts/install-hugo.sh
         shell: bash
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'

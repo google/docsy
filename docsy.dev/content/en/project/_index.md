@@ -13,7 +13,7 @@ cascade:
       from: '^(.*)/(\w+\.md)'
       to: $2
 params:
-  github_subdir: userguide # cSpell:disable-line
+  github_subdir: docsy.dev # cSpell:disable-line
   path_base_for_github_subdir: ''
 ---
 
