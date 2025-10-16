@@ -1,4 +1,4 @@
-# Build Docsy & the User Guide and run all repo checks across OSs.
+# Build Docsy & the website and run all repo checks across OSs.
 # cSpell:ignore docsy
 
 name: test
