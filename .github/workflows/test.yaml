@@ -20,13 +20,23 @@ jobs:
         os: [windows-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: package.json
+
       - run: npm install --omit=optional
+
       - if: runner.os != 'Windows'
         run: npm run test:all
+
       - if: runner.os == 'Windows'
         run: npm run ci:prepare && npm run cd:docsy.dev build && npm run ci:post
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-site-${{ matrix.os }}
+          path: |
+            docsy.dev/public
