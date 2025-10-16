@@ -1955,6 +1955,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:36.992092-04:00"
   },
+  "https://keepachangelog.com": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-16T08:09:13.265241-04:00"
+  },
   "https://kubernetes.io": {
     "StatusCode": 206,
     "LastSeen": "2024-12-12T10:09:55.829225-05:00"

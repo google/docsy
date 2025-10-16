@@ -18,6 +18,15 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
+> Note to authors: Start each detailed change entry with a verb in the past
+> tense. Examples include "Added", "Changed", "Deprecated", and "Fixed". It's ok
+> to follow that with "you can now...". For additional guidance, see
+> [Keep a Changelog](https://keepachangelog.com)[^1].
+>
+> [^1]:
+>     Old entries might not follow this guidance; feel free to update them as
+>     needed.
+
 ## 0.12.1 or 0.13.0
 
 > **UNRELEASED: this planned version is still under development**
@@ -27,16 +36,14 @@ For the full list of changes, see the [0.x.y] release notes.
 **Breaking changes**:
 
 - **Appearance**:
-  - **Language menu**:
-    - Changed the visibility of the **language menu** to display in the navbar
-      for all screen sizes ([#2303]).
-    - The menu is hidden from the sidebar by default. To restore the legacy
-      behavior, set the configuration parameter `ui.sidebar_lang_menu` to
-      `true`. For details, see [Adding a language menu][].
+  - **Language menu**: Changed the visibility of the **language menu**. It is
+    now displayed in the navbar for all screen sizes ([#2303]). The menu is
+    hidden from the sidebar by default. To restore the legacy behavior, set the
+    configuration parameter `ui.sidebar_lang_menu` to `true`. For details, see
+    [Adding a language menu][].
 - **Shortcodes**:
-  - The **alert** shortcode can be used with Markdown content, and it can
-    contain calls to other shortcodes ([#906] and [#939]). For details, see
-    [alert] ([#941]).
+  - Changed the **alert** shortcode to support Markdown content and nested
+    shortcodes ([#906] and [#939]). For details, see [alert] ([#941]).
 
 [#941]: https://github.com/google/docsy/pull/941
 [alert]: https://www.docsy.dev/docs/adding-content/shortcodes/#alert
@@ -91,8 +98,8 @@ For the full list of changes, see the [0.12.0] release notes.
 **New**:
 
 - **[Breadcrumb navigation]** support has been enhanced and adjusted:
-  - You can now disable breadcrumbs for an entire project, or individual pages
-    or sections by setting `ui.breadcrumb_disable` to true. For details, see
+  - Added `ui.breadcrumb_disable` configuration parameter to disable breadcrumbs
+    for an entire project, individual pages, or section. For details, see
     [Breadcrumb navigation][].
   - **Blog** pages now also have breadcrumbs by default ([#1788]).
   - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
