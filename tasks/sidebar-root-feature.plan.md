@@ -43,7 +43,8 @@ interaction handling is required.
 
 **Support both `children` and `self` values:**
 
-- If current page is a section with `sidebar_root_for: "self"`, use it as sidebar root
+- If current page is a section with `sidebar_root_for: "self"`, use it as
+  sidebar root
 - Otherwise, walk up ancestors to find any section with `sidebar_root_for`
   (either `"self"` or `"children"`)
 - Use the closest match as sidebar root
@@ -52,6 +53,7 @@ interaction handling is required.
 - Pass `sidebarRoot` to `sidebar-tree.html` as parameter
 
 **Logic:**
+
 1. Check if current page has `sidebar_root_for: "self"` → use it
 2. Else check ancestors for `sidebar_root_for` (any value) → use first match
 3. Result: `self` applies to section itself, `children` only to descendants
@@ -113,18 +115,21 @@ sidebar_root_for: children
 ```
 
 **With `sidebar_root_for: children`:**
+
 - Viewing `/docs/adding-content/` index → shows **full** docs navigation
 - Viewing `/docs/adding-content/content/` → shows **rooted** sidebar (only
   "Content and Customization" and its children)
 
 **With `sidebar_root_for: self`:**
+
 - Viewing `/docs/adding-content/` index → shows **rooted** sidebar
 - Viewing `/docs/adding-content/content/` → shows **rooted** sidebar
 - Both the section itself and descendants get the focused navigation
 
 ### To-dos
 
-- [ ] Step 1: Update sidebar_root_for lookup to support both "self" and "children" values
+- [ ] Step 1: Update sidebar_root_for lookup to support both "self" and
+      "children" values
 - [ ] Step 2: Add link back to site root section index page
 - [ ] Step 3: Add breadcrumb navigation UI (OPTIONAL/FUTURE)
 - [x] Step 4: Use sidebar_root_for for $navRoot calculation in sidebar-tree.html
