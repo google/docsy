@@ -99,7 +99,7 @@
       // Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
       width: 1em;
       height: 1em;
-      vertical-align: -.125em;
+      vertical-align: -0.125em;
       fill: currentcolor;
     }
   }
@@ -150,7 +150,6 @@
         transform: translateY(-50%);
       }
     }
-
   }
 }
 
@@ -180,7 +179,7 @@
       -webkit-font-smoothing: antialiased;
       font-family: $td-font-awesome-font-name;
       font-weight: 900;
-      content: "\f0d9";
+      content: '\f0d9';
       padding-left: 0.5em;
       padding-right: 0.5em;
     }
@@ -205,7 +204,8 @@ nav.foldable-nav {
     margin: 0;
   }
 
-  .ul-1 > li {
+  .ul-1 > li,
+  .dropdown {
     padding-left: 1.5em;
   }
 
@@ -217,7 +217,7 @@ nav.foldable-nav {
     display: block;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     display: none;
   }
 
@@ -235,7 +235,7 @@ nav.foldable-nav {
     -webkit-font-smoothing: antialiased;
     font-family: $td-font-awesome-font-name;
     font-weight: 900;
-    content: "\f0da";
+    content: '\f0da';
     position: absolute;
     left: 0.1em;
     padding-left: 0.4em;

@@ -42,7 +42,7 @@
       {{- if .Site.Params.ui.sidebar_root_enabled }} data-sidebar-root="{{ $sidebarRootID }}"{{ end -}}
     >
     {{ if and .Site.Params.ui.sidebar_lang_menu (gt (len .Site.Home.Translations) 0) -}}
-    <div class="td-sidebar-nav__section nav-item dropdown d-block d-lg-none">
+    <div class="td-sidebar-nav__section nav-item d-block d-lg-none">
       {{ partial "navbar-lang-selector.html" . }}
     </div>
     {{ end -}}
