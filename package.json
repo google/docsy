@@ -23,7 +23,7 @@
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix:format": "npm run _check:format -- --write && npm run cd:docsy.dev fix:format",
-    "fix": "npm run fix:format",
+    "fix": "npm run fix:format && npm run cd:docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
     "test:all": "npm run ci:prepare && npm run check && npm run cd:docsy.dev test && npm run ci:post",

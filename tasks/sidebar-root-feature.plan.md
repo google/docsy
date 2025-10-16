@@ -17,11 +17,11 @@ deeply nested documentation sections.
 
 ## Feature characteristics
 
-- New `sidebar_root_for` parameter set in section `_index.md`. Values:
-  `children` (current implementation) and `self` (planned).
-- When `sidebar_root_for: children`, descendant pages (but not the section
-  itself) show the rooted sidebar. When `sidebar_root_for: self`, both the
-  section and its descendants show the rooted sidebar.
+- New `sidebar_root_for` parameter set in section `_index.md` with two values:
+  - `children`: Rooted sidebar shown only for descendant pages
+  - `self`: Rooted sidebar shown for the section itself and all descendants
+- Nested sidebar_root_for sections are supported: descendant pages use the
+  closest ancestor with `sidebar_root_for` set
 - Include navigation out of a sidebar-root section.
 - Work alongside existing `toc_root` feature (not replace it)
 - Warn if `sidebar_root_for` is set on a top-level section (including site home
@@ -41,10 +41,20 @@ interaction handling is required.
 
 ### 1. Update `layouts/_partials/sidebar.html` - Find sidebar root and update cache key
 
-- Walk up page ancestors to find section with `sidebar_root_for: children`
+**Support both `children` and `self` values:**
+
+- If current page is a section with `sidebar_root_for: "self"`, use it as sidebar root
+- Otherwise, walk up ancestors to find any section with `sidebar_root_for`
+  (either `"self"` or `"children"`)
+- Use the closest match as sidebar root
 - Use sidebar_root section's permalink as cache key
 - Warn if `sidebar_root_for` is set on a top-level section
 - Pass `sidebarRoot` to `sidebar-tree.html` as parameter
+
+**Logic:**
+1. Check if current page has `sidebar_root_for: "self"` → use it
+2. Else check ancestors for `sidebar_root_for` (any value) → use first match
+3. Result: `self` applies to section itself, `children` only to descendants
 
 ### 2. Add link back to sidebar-root section index page
 
@@ -102,19 +112,19 @@ sidebar_root_for: children
 ---
 ```
 
-When viewing any page under `/docs/adding-content/` (such as
-`/docs/adding-content/content/`), the sidebar will show only the "Content and
-Customization" section and its children, instead of the full docs navigation
-tree. This makes the sidebar more focused for users working within this
-subsection.
+**With `sidebar_root_for: children`:**
+- Viewing `/docs/adding-content/` index → shows **full** docs navigation
+- Viewing `/docs/adding-content/content/` → shows **rooted** sidebar (only
+  "Content and Customization" and its children)
 
-Note that viewing the index page of `/docs/adding-content/` will still show the
-full docs navigation tree.
+**With `sidebar_root_for: self`:**
+- Viewing `/docs/adding-content/` index → shows **rooted** sidebar
+- Viewing `/docs/adding-content/content/` → shows **rooted** sidebar
+- Both the section itself and descendants get the focused navigation
 
 ### To-dos
 
-- [x] Step 1: Implement sidebar_root_for lookup and cache key logic in
-      sidebar.html
+- [ ] Step 1: Update sidebar_root_for lookup to support both "self" and "children" values
 - [ ] Step 2: Add link back to site root section index page
 - [ ] Step 3: Add breadcrumb navigation UI (OPTIONAL/FUTURE)
 - [x] Step 4: Use sidebar_root_for for $navRoot calculation in sidebar-tree.html

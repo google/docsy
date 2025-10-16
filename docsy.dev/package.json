@@ -20,6 +20,7 @@
     "check:links": "npm run _check:links",
     "clean": "rm -Rf public",
     "fix:format": "npm run _check:format -- --write",
+    "fix": "npm run fix:format && npm run _refcache:prune",
     "make:public": "git init -b main public",
     "postbuild:preview": "npm run _check:links--warn",
     "postbuild:production": "npm run _check:links--warn",
