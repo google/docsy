@@ -1,6 +1,41 @@
 {{/* cSpell:ignore docsearch opengraph outputformat */ -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+{{ if .Site.Params.ui.showLightDarkModeMenu -}}
+{{/* Browser hints before CSS loads */ -}}
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#000000">
+
+{{/* Styles to set canvas colors and avoid transitions */ -}}
+<style>
+  {{/* Set system colors as default */ -}}
+  html { background: Canvas; color: CanvasText; }
+  {{/* Define reasonable dark defaults */ -}}
+  @media (prefers-color-scheme: dark) {
+    html { background: #0b0d12; color: #e6e6e6; }
+  }
+  {{/* Avoid transitions until theme CSS is loaded */ -}}
+  html[data-theme-init] * { transition: none !important; }
+</style>
+
+{{/* Set theme attribute before CSS loads to prevent flash */ -}}
+<script>
+  (function() {
+    const themeKey = 'td-color-theme';
+    const storedTheme = localStorage.getItem(themeKey);
+    let theme = storedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+    if (theme === 'auto') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    document.documentElement.setAttribute('data-bs-theme', theme);
+  })();
+</script>
+{{ end -}}
+
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
