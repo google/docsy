@@ -1,11 +1,13 @@
 {
   "name": "docsy",
-  "version": "0.12.1-dev-unreleased",
+  "version": "0.12.1-dev-unreleased+20251017-1612Z",
   "version.next": "0.12.2-dev-unreleased",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
-  "workspaces": ["docsy.dev"],
+  "workspaces": [
+    "docsy.dev"
+  ],
   "scripts": {
     "_cd:docsy.dev": "cd docsy.dev &&",
     "_check:format": "npx prettier --check *.md tasks",
@@ -30,7 +32,8 @@
     "test:only": "npm run cd:docsy.dev test",
     "test": "echo 'RUNNING FIX AND TESTS...'; npm run fix && npm run test:only",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages"
+    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages",
+    "update:version-build-id": "node scripts/update-version-build-id.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
