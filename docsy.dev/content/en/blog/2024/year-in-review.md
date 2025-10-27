@@ -105,8 +105,8 @@ GitHub analytics show a **57% increase in usage**, reaching **2.2K projects** as
 of this writing.
 
 Adoption among CNCF projects has also grown since our [2023 report]. This year,
-[Linux Foundation mentees][LFX] [Sandra Dindi] and [Dariksha Ansari] used the [CNCF Docsy starter] to migrate the
-following sites to Docsy:
+[Linux Foundation mentees][LFX] [Sandra Dindi] and [Dariksha Ansari] used the
+[CNCF Docsy starter] to migrate the following sites to Docsy:
 
 - **[The Update Framework](https://theupdateframework.io)**
   ([theupdateframework.io#105])
@@ -132,8 +132,10 @@ the [0.3.x upgrade] and [0.5.x upgrade].
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
 [in-toto.io#76]: https://github.com/in-toto/in-toto.io/issues/76
 [Kubernetes website]: https://github.com/kubernetes/website
-[Dariksha Ansari]: https://mentorship.lfx.linuxfoundation.org/project/34314eb1-0fc3-4802-ab04-2265418c2e48
-[Sandra Dindi]: https://mentorship.lfx.linuxfoundation.org/project/e35f28f9-f333-47a8-a76a-119567cf10ca
+[Dariksha Ansari]:
+  https://mentorship.lfx.linuxfoundation.org/project/34314eb1-0fc3-4802-ab04-2265418c2e48
+[Sandra Dindi]:
+  https://mentorship.lfx.linuxfoundation.org/project/e35f28f9-f333-47a8-a76a-119567cf10ca
 
 ## What's ahead?
 
