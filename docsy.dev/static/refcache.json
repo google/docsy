@@ -1807,6 +1807,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:36.578334-04:00"
   },
+  "https://gohugo.io/functions/resources/fingerprint/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-27T16:38:30.842331-04:00"
+  },
   "https://gohugo.io/getting-started/configuration/#configuration-file": {
     "StatusCode": 206,
     "LastSeen": "2025-10-06T11:52:59.999Z"
