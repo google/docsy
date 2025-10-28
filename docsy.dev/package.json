@@ -35,9 +35,9 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "cross-env": "^10.1.0",
-    "hugo-extended": "0.151.2",
+    "hugo-extended": "0.152.2",
     "netlify-cli": "^23.9.5",
-    "npm-check-updates": "^19.1.1",
+    "npm-check-updates": "^19.1.2",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
