@@ -55,29 +55,33 @@ repo.
     - `version` key in [docsy.dev/hugo.yaml]
 4.  Run `npm run ci:prepare` to ensure that vendor assets and [go.mod]
     dependencies are up-to-date.
-5.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
+5.  Run `npm test` to ensure that all checks pass and the build is successful.
+    This command runs `npm run fix`. Note if there are any file changes, and if
+    the version ID is still correct and has no build ID (which is usually added
+    by `fix:version`).
+6.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
     preparation".
-6.  **Test the PR** branch from selected sites, and push any required
+7.  **Test the PR** branch from selected sites, and push any required
     adjustments.
     - If the test site uses Docsy as a Git submodule:
-      ```console
-      $ cd themes/docs
-      $ git fetch
-      $ git switch -t repo/branch-name # e.g. chalin/chalin-im-0.9.1-2024-02-16
+      ```sh
+      cd themes/docs
+      git fetch
+      git switch -t REPO/BRANCH-NAME # e.g. chalin/chalin-m25-0.13.0-dev-alpha
       ```
-7.  **Get PR approved and merged**.
-8.  **Pull in `main`** to get the last PR.
-9.  **Ensure** that you're:
+8.  **Get PR approved and merged**.
+9.  **Pull in `main`** to get the last PR.
+10. **Ensure** that you're:
     - On the default branch, `main`
     - At the commit that you want to tag as v0.X.Y
-10. **Create tags** for v0.X.Y:
+11. **Create tags** for v0.X.Y:
 
     ```sh
     REL=v0.X.Y
     git tag $REL
     ```
 
-11. **Push the new tags** to the main remote (`origin` or `upstream` depending
+12. **Push the new tags** to the main remote (`origin` or `upstream` depending
     on your setup) as well as any secondary remotes, if any:
 
     ```console
@@ -86,7 +90,7 @@ repo.
     * [new tag]         v0.X.Y -> v0.X.Y
     ```
 
-12. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+13. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
     - From the **release/tag dropdown**: Select the new release tag that you
       just pushed, v0.X.Y.
     - Set the **release title** to the release number (without the "v").
@@ -104,9 +108,9 @@ repo.
 
     - Select **Create a discussion for this release**.
 
-13. **Publish the release**: click _Publish release_.
-14. Test the release with a downstream project, such as [docsy-example].
-15. If you find issues, determine whether they need to be fixed immediately. If
+14. **Publish the release**: click _Publish release_.
+15. Test the release with a downstream project, such as [docsy-example].
+16. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Then publish a dot release:
     go back to step 1.
 
@@ -117,7 +121,7 @@ least one downstream project, then perform the following actions before any
 further changes are merged into the default branch:
 
 1. Set `version` in [package.json] to the next planned (or the next dot) release
-   with a dev suffix, such as `v0.X.Z-dev-unreleased`.
+   with a dev suffix, such as `v0.X.Z-dev`.
 2. In the [CHANGELOG]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
      at the end of the file.
