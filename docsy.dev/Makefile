@@ -1,4 +1,3 @@
-# Set REFCACHE to another value to disable htmltest refcache-file manipulation
 REFCACHE?=refcache
 HTMLTEST_DIR=tmp
 HTMLTEST?=htmltest # Specify as make arg if different
@@ -27,19 +26,12 @@ $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE):
 	echo '{}' > $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE)
 
 refcache-restore: $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE) $(LINK_CACHE_FILE_SRC_DIR)
-ifeq (refcache, $(REFCACHE))
 	cp $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE) $(LINK_CACHE_FILE_SRC_DIR)/
-else
-	@echo "SKIPPING refcache-restore"
-endif
 
 refcache-save:
-ifeq (refcache, $(REFCACHE))
 	cp $(LINK_CACHE_FILE_SRC_DIR)/$(LINK_CACHE_FILE) $(LINK_CACHE_FILE_DEST_DIR)/
+	node scripts/unescape-refcache-json.mjs
 	npx prettier --prose-wrap=always --write $(LINK_CACHE_FILE_DEST_DIR)/$(LINK_CACHE_FILE)
-else
-	@echo "SKIPPING refcache-save"
-endif
 
 check-links: $(GET_LINK_CHECKER_IF_NEEDED) \
 	refcache-restore check-links-only refcache-save
