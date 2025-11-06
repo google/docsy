@@ -3,8 +3,7 @@ title: Docsy priorities for 2024
 linkTitle: 2024 Priorities
 author: >
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
-  for the [Docsy Steering
-  Committee](/blog/2022/hello/#introducing-the-psc)
+  for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
 date: 2023-11-28
 # prettier-ignore
 cSpell:ignore: CNCF Chalin opentelemetry namespacing docsy customizability deprioritize
@@ -68,6 +67,7 @@ start the new year, we'll be especially interested in getting help with testing
 and feature consolidation.
 
 [^0]: According to [Docsy's GitHub analytics][docsy-analytics].
+
 [^1]:
     Features outside the identified core could even be moved to a separate
     community-maintained repo. The steering committee is also considering a

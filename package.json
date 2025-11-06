@@ -1,7 +1,7 @@
 {
   "name": "docsy",
-  "version": "0.12.1-dev-unreleased+20251017-1612Z",
-  "version.next": "0.12.2-dev-unreleased",
+  "version": "0.13.0-dev+38-g53cfee7",
+  "version.next": "0.13.1-dev",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -18,6 +18,7 @@
     "_mkdir:hugo-mod": "node scripts/mkdirp-hugo-mod.js ..",
     "_prepare": "npm run _cp:bs-rfs && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
+    "_update:version-build-id": "node scripts/update-version-build-id.mjs",
     "cd:docsy.dev": "npm run _cd:docsy.dev -- npm run",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check": "npm run check:format",
@@ -25,15 +26,15 @@
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix:format": "npm run _check:format -- --write && npm run cd:docsy.dev fix:format",
-    "fix": "npm run fix:format && npm run cd:docsy.dev fix",
+    "fix:version": "npm run _update:version-build-id -- $(scripts/get-build-id.sh)",
+    "fix": "npm run fix:format && npm run fix:version && npm run cd:docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
     "test:all": "npm run ci:prepare && npm run check && npm run cd:docsy.dev test && npm run ci:post",
     "test:only": "npm run cd:docsy.dev test",
     "test": "echo 'RUNNING FIX AND TESTS...'; npm run fix && npm run test:only",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages",
-    "update:version-build-id": "node scripts/update-version-build-id.js"
+    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
@@ -47,7 +48,7 @@
     "hugo_version": "0.151.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark -"
 }

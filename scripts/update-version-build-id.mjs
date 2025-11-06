@@ -2,13 +2,20 @@
 
 /**
  * Updates the version in package.json by adding a build ID.
- * Usage: node scripts/update-version-build-id.js [build-id]
  *
- * If no build-id is provided, uses current UTC timestamp in YYYYMMDD-HHmmZ format.
+ * Usage: node scripts/update-version-build-id.mjs [build-id]
+ *
+ * - If no build-id is provided: uses current UTC timestamp in YYYYMMDD-HHmmZ format
+ * - If empty string "" is provided: removes the build ID (sets version to base version only)
+ * - If a build-id is provided: uses that build ID
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function main() {
   // Get package.json path
@@ -17,13 +24,19 @@ function main() {
   // Read package.json
   const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 
-  // Get build ID from command line or generate timestamp
-  const buildId = process.argv[2] || generateTimestamp();
+  let buildId;
+  if (process.argv.length === 2) {
+    // No argument provided
+    buildId = generateTimestamp();
+  } else {
+    // Empty string means remove build ID
+    buildId = process.argv[2];
+  }
 
   // Parse current version and add/update build ID
   const currentVersion = pkg.version;
   const baseVersion = currentVersion.split('+')[0]; // Remove existing build ID if present
-  const newVersion = `${baseVersion}+${buildId}`;
+  const newVersion = buildId ? `${baseVersion}+${buildId}` : baseVersion;
 
   // Update version
   pkg.version = newVersion;
@@ -46,4 +59,3 @@ function generateTimestamp() {
 }
 
 main();
-
