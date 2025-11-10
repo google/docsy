@@ -2,7 +2,8 @@
 <html itemscope itemtype="http://schema.org/WebPage"
     {{- with .Site.Language.LanguageDirection }} dir="{{ . }}" {{- end -}}
     {{ with .Site.Language.Lang }} lang="{{ . }}" {{- end }} {{/**/ -}}
-    class="no-js">
+    class="no-js"
+    {{- if .Site.Params.ui.showLightDarkModeMenu }} data-theme-init{{ end }}>
   <head>
     {{ partial "head.html" . }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
