@@ -19,6 +19,8 @@ IgnoreURLs: # list of regexs of paths or URLs to be ignored
   - ^https?://localhost\b
   # Ignore Docsy-generated GitHub links for now
   - ^https?://github\.com/.*?/.*?/(new|edit)/ # view-page, edit-source etc
+  # Ignore view page source links for now
+  - ^https://github.com/google/docsy/tree/main/docsy.dev/content/en/
   - ^https://twitter.com/docsydocs$
   # Too flaky or unnecessary
   - ^https://badges.netlify.com/api

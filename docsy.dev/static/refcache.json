@@ -955,6 +955,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:40.019418-04:00"
   },
+  "https://github.com/google/docsy/issues/2243": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-25T13:13:51.198559-04:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:57.646409-05:00"
@@ -1170,6 +1174,10 @@
   "https://github.com/google/docsy/releases/tag/v0.11.0": {
     "StatusCode": 200,
     "LastSeen": "2024-12-12T10:09:16.686656-05:00"
+  },
+  "https://github.com/google/docsy/releases/tag/v0.12.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-25T13:13:54.437588-04:00"
   },
   "https://github.com/google/docsy/releases/tag/v0.7.0": {
     "StatusCode": 200,
@@ -1798,6 +1806,10 @@
   "https://gohugo.io/functions/relref/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:36.578334-04:00"
+  },
+  "https://gohugo.io/functions/resources/fingerprint/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-27T16:38:30.842331-04:00"
   },
   "https://gohugo.io/getting-started/configuration/#configuration-file": {
     "StatusCode": 206,
