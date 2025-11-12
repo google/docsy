@@ -1,4 +1,10 @@
-{{/* The "active" toggle here may delay rendering, so we only cache this side bar menu for bigger sites. */ -}}
+{{/* Notes:
+
+- Sidebars are generated for "blog", "docs", and possibly other page types.
+- The "active" toggle here may delay rendering, so we only cache this side
+  bar menu for bigger sites.
+
+*/ -}}
 
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
@@ -27,6 +33,7 @@
       {{ break -}}
     {{ end -}}
   {{ end -}}
+
   {{/* Warn if sidebar_root_for is set to self for a top-level section */ -}}
   {{ $rootKind := $sidebarRoot.Params.sidebar_root_for -}}
   {{ if and (eq $rootKind "self") (eq $sidebarRoot $navRoot) -}}
@@ -35,9 +42,14 @@
         "The `self` mode is intended for nested sections proper."
         "Did you mean to use `children` instead?"
     -}}
-    {{ warnf "%s: %s" $sidebarRoot.File.Path (delimit $msg " ") -}}
+    {{ $filename := .Path -}}
+    {{ with $sidebarRoot.File -}}
+      {{ $filename = .Filename -}}
+    {{ end -}}
+    {{ warnf "%s: %s for page '%s'." $sidebarRoot.File.Filename (delimit $msg " ") .Path -}}
   {{ end -}}
 {{ end -}}
+
 {{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
 {{ $args := dict
     "context" .
