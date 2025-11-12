@@ -177,8 +177,8 @@ unset).
 
 ## Section menu
 
-The section menu, as shown in the left side of the `docs` section, is
-automatically built from the `content` tree. Like the top-level menu, it is
+The section menu, as shown in the left side of the `docs` and `blog` sections,
+is automatically built from the `content` tree. Like the top-level menu, it is
 ordered by page or section index `weight` (or by page creation `date` if
 `weight` is not set), with the page or index's `Title`, or `linkTitle` if
 different, as its link title in the menu. If a section subfolder has pages other
@@ -380,6 +380,54 @@ file, albeit one with no generated links to it. To avoid confusion if users
 accidentally land on a generated placeholder page, we recommend specifying the
 URL for the external link in the normal content and / or page description of the
 page. {{% /alert %}}
+
+### Section as sidebar root (EXPERIMENTAL) {#sidebar-root}
+
+To help readers stay focused within a section, you can “root” a section in the
+sidebar navigation. This is particularly useful when there is deeply nested
+pages.
+
+Enable the feature in your site configuration:
+
+```yaml
+params:
+  ui:
+    sidebar_root_enabled: true
+```
+
+Then add `sidebar_root_for` to a section’s `_index.md`. Available options are:
+
+- `self` applies the rooted sidebar to the index page as well as descendants.
+- `children` keeps the section’s index page in the global docs menu, but limits
+  descendant pages to the rooted sidebar.
+
+Example:
+
+```yaml
+---
+title: API Reference v2.0
+linkTitle: v2.0
+sidebar_root_for: self
+---
+```
+
+Examples:
+
+| `sidebar_root_for` | Example                                            |
+| ------------------ | -------------------------------------------------- |
+| `self`             | [Content and customization](/docs/adding-content/) |
+| `children`         | [Best practices](/docs/best-practices/)            |
+
+To navigate out of a rooted section, click the “up” icon in the sidebar next to
+the section title.
+
+Feature notes:
+
+- You can nest rooted sections.
+- Docsy will warn you if you set `sidebar_root_for` to `self` on a section root
+  page, since it is redundant.
+- Docsy will generally ignore `sidebar_root_for` for non "docs" pages and
+  non-section index pages.
 
 ## Breadcrumb navigation
 
