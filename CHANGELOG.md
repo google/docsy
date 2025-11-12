@@ -1,5 +1,5 @@
 <!--
-  cSpell:ignore deining docsy gitmodules gtag lookandfeel mhchem navs tabpane
+  cSpell:ignore deining docsy gitmodules gtag lookandfeel mhchem navs tabpane FOUC
 -->
 
 # Changelog
@@ -50,20 +50,27 @@ For the full list of changes, see the [0.x.y] release notes.
 
 **New**:
 
+- Added [Section sidebar root][] feature.
+
 **Other changes**:
 
 - Projects using Docsy via NPM, directly from the GitHub repository, will no
-  longer face optional and peer dependencies errors ([#2115]).
-- Hamburger menu toggle button icon changes to an X when the menu is expanded
+  longer face optional and peer dependencies issues ([#2115]).
+- Fixed dark-mode [Flash Of Unstyled Content][] (FOUC) ([#2185]).
+- Hamburger menu toggle button icon changed to an X when the menu is expanded
   ([#2301]). This is a style change only.
 
 [#2115]: https://github.com/google/docsy/issues/2115
-[#2300]: https://github.com/google/docsy/pull/2300
+[#2185]: https://github.com/google/docsy/issues/2185
 [#2301]: https://github.com/google/docsy/pull/2301
 [#2303]: https://github.com/google/docsy/pull/2303
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 [Adding a language menu]:
   https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-menu
+[Flash Of Unstyled Content]:
+  https://en.wikipedia.org/wiki/Flash_of_unstyled_content
+[Section sidebar root]:
+  https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root
 
 ## 0.12.0
 
