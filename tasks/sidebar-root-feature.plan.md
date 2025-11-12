@@ -1,31 +1,69 @@
 ---
 title: Sidebar-root feature development notes
 date: 2025-10-13
+updated: 2025-11-12
+cSpell:ignore: sidenav
 ---
 
-# Sidebar-root feature development notes
+## Feature description and plan
 
-<!-- cSpell:ignore sidenav -->
+<details>
+<summary>Original feature description and plan</summary>
 
-This is a feature description for issue [Sidenav support for section-as-root
-#2328][#2328], and some development notes. Being development notes, they might
-not fully capture the final implementation.
+> This is a feature description for issue [Sidenav support for section-as-root
+> #2328][#2328], and some development notes. During development, this document
+> will serve as development notes. During that time, this document might not
+> fully capture the final implementation.
+>
+> Add a `sidebar_root_for` front matter parameter that can be set in a section's
+> `_index.md` to make that section the root of sidebar navigation, useful for
+> deeply nested documentation sections.
 
-Add a `sidebar_root_for` front matter parameter that can be set in a section's
-`_index.md` to make that section the root of sidebar navigation, useful for
-deeply nested documentation sections.
+</details>
+<br />
+
+This page is a feature description and plan that also serves as a record of the
+work for issue [Sidenav support for section-as-root][#2328].
+
+Implementation has landed in the following PRs:
+
+- [Support non top-level section pages as sidebar roots (#2334)][#2334]
+- [Rewrite `sidebar_root:true` as `sidebar_root_for:children` (#2340)][#2340]
+- [Add support for `self` sidebar roots (#2341)][#2341]
+- [Fix sidebar entry HTML attribute spacing (#2342)][#2342]
+- [Relax top-level warning for `children` mode (#2361)][#2361]
+
+The notes below now serve as a record of what shipped and what follow-up
+remains.
+
+Summary of the shipped feature:
+
+- Adds a `sidebar_root_for` front matter parameter that can be set in a
+  section's `_index.md` to make that section the root of sidebar navigation,
+  useful for deeply nested documentation sections.
+- Supports two modes:
+  - `self`: Rooted sidebar shown for the section itself and all descendants.
+  - `children`: Rooted sidebar shown for descendant pages only, not the section
+    index page itself.
+- Works when `params.ui.sidebar_root_enabled` is set to `true`.
+- Coexists with existing `toc_root` behavior; no special interaction required.
+- Adds an “up” navigation link in rooted sections, reusing the section heading
+  as the link target links to navigate back to the parent section.
+
+Outstanding follow-up items are listed at the end of the document.
 
 ## Feature characteristics
 
 - New `sidebar_root_for` parameter set in section `_index.md` with two values:
-  - `children`: Rooted sidebar shown only for descendant pages
-  - `self`: Rooted sidebar shown for the section itself and all descendants
-- Nested sidebar_root_for sections are supported: descendant pages use the
+  - `self`: Rooted sidebar shown for the section itself and all descendants.
+  - `children`: Rooted sidebar shown for descendant pages only, not the section
+    index page itself.
+- Nested `sidebar_root_for` sections are supported: descendant pages use the
   closest ancestor with `sidebar_root_for` set
 - Include navigation out of a sidebar-root section.
 - Work alongside existing `toc_root` feature (not replace it)
-- Warn if `sidebar_root_for` is set on a top-level section (including site home
-  in docs-only sites)
+- Warn when `sidebar_root_for` is misconfigured (invalid value, or redundant
+  `self` on a top-level section)
 
 ## Feature interaction: `toc_root`
 
@@ -39,67 +77,36 @@ interaction handling is required.
 
 ## Implementation Changes
 
-### 1. Update `layouts/_partials/sidebar.html` - Find sidebar root and update cache key
+### Implementation summary
 
-**Support both `children` and `self` values:**
+1. (✅ #2334) Update `layouts/_partials/sidebar.html`
+   - Supports both `children` and `self` values.
+   - Traverses ancestors to locate the closest `sidebar_root_for`.
+   - Passes the resolved root and cache key to `sidebar-tree.html`.
+2. (✅ #2334) Enhance `layouts/_partials/sidebar-tree.html`
+   - Reuses the section heading link as the “up” affordance back to the parent.
+   - Adds `td-sidebar-root-up-icon` styling for rooted sections.
+3. (🚧 Optional, not yet implemented) Breadcrumb navigation for rooted sections.
+4. (✅ #2334) Use `sidebar_root_for` when computing `$navRoot` inside
+   `sidebar-tree.html`.
+5. (✅ #2334) Styling updates in `assets/scss/_sidebar-tree.scss`.
+6. (✅ #2340, #2341, #2342, #2361) Follow-up refinements:
+   - Rename `sidebar_root:true` to `sidebar_root_for: children`.
+   - Add support for `sidebar_root_for: self`.
+   - Fix attribute spacing issues in the rendered HTML.
+   - Avoid redundant warnings when a root section declares
+     `sidebar_root_for: children`.
 
-- If current page is a section with `sidebar_root_for: "self"`, use it as
-  sidebar root
-- Otherwise, walk up ancestors to find any section with `sidebar_root_for`
-  (either `"self"` or `"children"`)
-- Use the closest match as sidebar root
-- Use sidebar_root section's permalink as cache key
-- Warn if `sidebar_root_for` is set on a top-level section
-- Pass `sidebarRoot` to `sidebar-tree.html` as parameter
+## Testing considerations
 
-**Logic:**
-
-1. Check if current page has `sidebar_root_for: "self"` → use it
-2. Else check ancestors for `sidebar_root_for` (any value) → use first match
-3. Result: `self` applies to section itself, `children` only to descendants
-
-### 2. Add link back to sidebar-root section index page
-
-The current implementation of the sidebar tree, already has the sidebar tree
-"heading" as a link. This can naturally be used to link back to the sidebar-root
-section index page.
-
-**In `layouts/_partials/sidebar-tree.html`:**
-
-- When `sidebar_root_for` is active, add a link at the top of the sidebar
-  navigation
-- Link should point to the parent section of the sidebar_root
-- Use the `td-sidebar-root-up-icon` CSS class for the up-arrow icon
-- Style the link to be visually distinct from regular navigation items
-
-### 3. Modify `layouts/_partials/sidebar-tree.html` - Add breadcrumb navigation (OPTIONAL)
-
-- When a `sidebar_root_for` is active (not the top-level section), add a
-  breadcrumb section
-- Show "← Back to [Parent Section]" link(s) above the main navigation tree
-- Use appropriate styling to distinguish from regular navigation items
-
-### 4. Modify `layouts/_partials/sidebar-tree.html` - Use sidebar_root for $navRoot (COMPLETED)
-
-- Receive `sidebarRoot` as parameter from sidebar.html
-- Use `sidebarRoot` as `$navRoot` when provided
-- No duplicate ancestor walk needed (already done in sidebar.html)
-
-### 5. Add CSS styling (COMPLETED)
-
-**In `assets/scss/_sidebar-tree.scss`:**
-
-- Created `td-sidebar-root-up-icon` class with `::after` pseudo-element
-- Uses Font Awesome caret-up icon
-- Consistent spacing and alignment with other sidebar icons
-
-## Testing Considerations
-
-- [ ]Test with deeply nested sections (3+ levels)
-- [ ] Verify caching works correctly with sidebar_root_for active
-- [ ] Ensure foldable menu behavior still works
-- [ ] Test with both `sidebar_menu_compact` enabled and disabled
-- [ ] Verify it doesn't conflict with existing `toc_root` functionality
+- [ ] Test with deeply nested sections (3+ levels).
+- [ ] Verify caching works correctly with `sidebar_root_for` active
+      (`params.ui.sidebar_cache_limit` scenarios).
+- [ ] Ensure foldable menu behavior still works (`sidebar_menu_foldable`).
+- [ ] Test with both `sidebar_menu_compact` enabled and disabled.
+- [ ] Confirm interactions with `toc_root` remain unchanged.
+- [ ] Exercise dark-mode and language-menu combinations to catch regressions
+      introduced in neighboring work (#2339, #2355).
 
 ## Docsy User Guide usage example
 
@@ -126,14 +133,23 @@ sidebar_root_for: children
 - Viewing `/docs/adding-content/content/` → shows **rooted** sidebar
 - Both the section itself and descendants get the focused navigation
 
-### To-dos
+### Follow-up tasks
 
-- [ ] Step 1: Update sidebar_root_for lookup to support both "self" and
-      "children" values
-- [ ] Step 2: Add link back to site root section index page
-- [ ] Step 3: Add breadcrumb navigation UI (OPTIONAL/FUTURE)
-- [x] Step 4: Use sidebar_root_for for $navRoot calculation in sidebar-tree.html
-- [x] Step 5: Add CSS styling for up-arrow icon
-- [ ] Testing: Verify all navigation scenarios work correctly
+- [x] Step 1: Support both `"self"` and `"children"` (done in #2334/#2341).
+- [x] Step 2: Provide an “up” link using the rooted heading (done in #2334).
+- [ ] Step 3: (Optional) Add breadcrumb navigation UI for rooted sections.
+- [x] Step 4: Use `sidebar_root_for` when computing `$navRoot` (done in #2334).
+- [x] Step 5: Add CSS styling for up-arrow icon (done in #2334).
+- [ ] Documentation: add user-guide section covering configuration and examples.
+- [ ] Example site: update `docsy-example` to showcase the feature.
+- [ ] Testing: run the scenarios listed above and capture results in the wrapup
+      report.
+- [x] Adjust top-level warning: allow `sidebar_root_for: children` on root
+      sections without emitting the current warning (done in #2361).
 
 [#2328]: https://github.com/google/docsy/issues/2328
+[#2334]: https://github.com/google/docsy/pull/2334
+[#2340]: https://github.com/google/docsy/pull/2340
+[#2341]: https://github.com/google/docsy/pull/2341
+[#2342]: https://github.com/google/docsy/pull/2342
+[#2361]: https://github.com/google/docsy/pull/2361

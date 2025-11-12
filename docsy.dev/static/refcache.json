@@ -279,6 +279,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:35.708092-04:00"
   },
+  "https://en.wikipedia.org/wiki/Flash_of_unstyled_content": {
+    "StatusCode": 200,
+    "LastSeen": "2025-11-12T12:00:13.422237-05:00"
+  },
   "https://en.wikipedia.org/wiki/Wordmark": {
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:44.997719-04:00"
@@ -955,9 +959,17 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:40.019418-04:00"
   },
+  "https://github.com/google/docsy/issues/2185": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T12:00:14.199051-05:00"
+  },
   "https://github.com/google/docsy/issues/2243": {
     "StatusCode": 206,
     "LastSeen": "2025-10-25T13:13:51.198559-04:00"
+  },
+  "https://github.com/google/docsy/issues/2266": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T12:00:13.555016-05:00"
   },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 200,
@@ -2374,6 +2386,10 @@
   "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
     "StatusCode": 200,
     "LastSeen": "2025-10-06T12:11:12.345Z"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T12:00:13.317204-05:00"
   },
   "https://www.docsy.dev/docs/adding-content/repository-links/": {
     "StatusCode": 206,
