@@ -27,9 +27,15 @@
       {{ break -}}
     {{ end -}}
   {{ end -}}
-  {{/* Warn if sidebar_root_for is set on a top-level section */ -}}
-  {{ if and $sidebarRoot.Params.sidebar_root_for (eq $sidebarRoot $navRoot) -}}
-    {{ warnf "%s: sidebar_root_for is set on a top-level section. This parameter is intended for nested sections only." $sidebarRoot.Path -}}
+  {{/* Warn if sidebar_root_for is set to self for a top-level section */ -}}
+  {{ $rootKind := $sidebarRoot.Params.sidebar_root_for -}}
+  {{ if and (eq $rootKind "self") (eq $sidebarRoot $navRoot) -}}
+    {{ $msg := slice
+        "Setting sidebar_root_for to `self` for a section that is already a root is redundant."
+        "The `self` mode is intended for nested sections proper."
+        "Did you mean to use `children` instead?"
+    -}}
+    {{ warnf "%s: %s" $sidebarRoot.File.Path (delimit $msg " ") -}}
   {{ end -}}
 {{ end -}}
 {{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
