@@ -1,0 +1,23 @@
+# See https://github.com/DavidAnson/markdownlint/blob/main/README.md#rules--aliases
+# cSpell:ignore docsy
+
+ignores:
+  - "node_modules/**"
+  - "public/**"
+  - "docsy.dev/public/**"
+
+default: true
+
+emphasis-style: false
+first-line-h1: false
+line-length: false
+link-fragments: false
+list-marker-space: false
+no-emphasis-as-header: false
+no-hard-tabs: false
+no-inline-html: false
+no-trailing-punctuation: false
+no-trailing-spaces:
+  br_spaces: 0
+  strict: true
+table-column-style: false # Causes problems in ja and zh pages

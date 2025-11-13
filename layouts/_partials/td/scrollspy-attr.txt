@@ -1,10 +1,10 @@
-{{ if not (.Param "ui.scrollspy.disable") -}}
-  {{ replaceRE `\s+` " "
-  `
-  data-bs-spy="scroll"
-  data-bs-target="#TableOfContents"
-  data-bs-root-margin="0px 0px -40%"
-  `
- | strings.TrimSpace | add " " -}}
-
- {{ end -}}
+{{ if not (.Param "ui.scrollSpy.disable") -}}
+  {{ $rootMargin := .Param "ui.scrollSpy.rootMargin" | default "0px 0px -10%" -}}
+  {{/* Note that we tried `data-bs-smooth-scroll="true"`, but it breaks browser URL updates.
+       For details, see https://github.com/google/docsy/pull/2291 */ -}}
+  {{ $attr := slice
+      ` data-bs-spy="scroll"`
+      ` data-bs-target="#TableOfContents"`
+      (printf ` data-bs-root-margin="%s"` $rootMargin) -}}
+  {{ delimit $attr "" -}}
+{{ end -}}

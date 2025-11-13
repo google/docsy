@@ -7,7 +7,7 @@
     "_check:format": "npx prettier --prose-wrap=always --check .",
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
     "_check:links": "make --keep-going check-links",
-    "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
+    "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit --allow-empty -m \"Site at $HASH\"",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
     "_refcache:prune-4xx": "jq 'with_entries(select(.value.StatusCode < 400))' static/refcache.json > tmp/refcache.json && mv tmp/refcache.json static/refcache.json",
@@ -33,10 +33,10 @@
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
+    "autoprefixer": "^10.4.22",
     "cross-env": "^10.1.0",
     "hugo-extended": "0.152.2",
-    "netlify-cli": "^23.9.5",
+    "netlify-cli": "^23.10.0",
     "npm-check-updates": "^19.1.2",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"

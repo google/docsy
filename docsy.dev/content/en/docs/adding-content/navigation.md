@@ -24,6 +24,7 @@ matter (in `_index.md` or `_index.html` for a section, as that's the section
 landing page). For example, here's how we added the Documentation section
 landing page to the main menu in this site:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -61,6 +62,7 @@ menu:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 The menu is ordered from left to right by page `weight`. So, for example, a
 section index or page with `weight: 30` would appear after the Documentation
@@ -69,6 +71,7 @@ section in the menu, while one with `weight: 10` would appear before it.
 If you want to add a link to an external site to this menu, add it in
 `hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -100,6 +103,7 @@ menu:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 ### Adding icons to the top-level menu
 
@@ -111,6 +115,7 @@ or via page front matter. For example, the following configuration adds the
 GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this
 is a new addition to the menu.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -148,6 +153,7 @@ menu:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 You can find a complete list of icons to use in the
 [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
@@ -186,6 +192,7 @@ than `_index.md` or `_index.html`, those pages will appear as a submenu, again
 ordered by `weight`. For example, here's the metadata for this page showing its
 `weight` and `title`:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -221,6 +228,7 @@ description: >
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 To hide a page or section from the left navigation menu, set `toc_hide: true` in
 the front matter.
@@ -231,6 +239,7 @@ page]({{< ref "content#docs-section-landing-pages" >}}), set
 the TOC menu and the section summary list, you need to set both `toc_hide` and
 `hide_summary` to `true` in the front matter.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -266,6 +275,7 @@ description: >
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 ### Section menu options
 
@@ -297,6 +307,7 @@ for activating the cached section menu with the optional parameter
 The tabbed pane below lists the menu section options you can define in your
 project [configuration file].
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
@@ -328,6 +339,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 ### Add icons to the section menu
 
@@ -429,6 +441,102 @@ Feature notes:
 - Docsy will generally ignore `sidebar_root_for` for non "docs" pages and
   non-section index pages.
 
+## Table of contents
+
+Docsy provides a table of contents (TOC) for each "docs"page. The TOC is
+generated from the headings in the page content. The TOC is displayed in the
+right-hand sidebar by default.
+
+{{% alert title="Will shortcode headings appear in the TOC?" color=info %}}
+
+The headings contained in [Markdown shortcodes][] `{{%/* ... */%}}` get included
+in the TOC, while those in standard shortcodes `{{</* ... */>}}` will not. For
+details, see Hugo forum discussions [#55399] and [#51940].
+
+[#55399]:
+  https://discourse.gohugo.io/t/tableofcontents-doesnt-render-headings-correctly-that-contains-shortcode/55399
+[#51940]:
+  https://discourse.gohugo.io/t/can-hugo-include-shortcode-headings-in-toc/51940
+[Markdown shortcodes]: /docs/adding-content/shortcodes/#shortcode-delimiters
+
+{{% /alert %}}
+
+### Active TOC entry tracking with ScrollSpy {#toc-entry-tracking}
+
+Docsy highlights the active heading in the TOC sidebar using Bootstrap
+[ScrollSpy][]. By default, headings become active when they reach 10% from the
+top of the viewport (configured via `rootMargin`).
+
+- To disable ScrollSpy for a specific page, set `ui.scrollSpy.disable: true` in
+  that page's front matter. To disable for all pages in a section, [cascade] the
+  setting in the front matter of the section's index page.
+- To globally adjust when headings become active, set `ui.scrollSpy.rootMargin`
+  in your site configuration. The default is `0px 0px -10%`. Use a larger
+  negative percentage (e.g., `-20%`) to activate headings earlier, or a smaller
+  one (e.g., `-5%`) to activate them later.
+
+  <!-- prettier-ignore -->
+  {{< tabpane >}}
+  {{< tab header="Configuration file:" disabled=true />}}
+  {{< tab header="hugo.toml" lang="toml" >}}
+  [params.ui.scrollSpy]
+  rootMargin = "0px 0px -15%"
+  {{< /tab >}}
+  {{< tab header="hugo.yaml" lang="yaml" >}}
+  params:
+    ui:
+      scrollSpy:
+        rootMargin: 0px 0px -15%
+  {{< /tab >}}
+  {{< tab header="hugo.json" lang="json" >}}
+  {
+    "params": {
+      "ui": {
+        "scrollSpy": {
+          "rootMargin": "0px 0px -15%"
+        }
+      }
+    }
+  }
+  {{< /tab >}}
+  {{< /tabpane >}}
+
+  {{% alert title="Smooth scrolling issue" color=info %}}
+
+  We previously enabled ScrollSpy's smooth scrolling, but it interfered with
+  hash updates in the browser URL and in-page navigation, so it is disabled by
+  default. For details see PR [#2291].
+
+  {{% /alert %}}
+
+For advanced customization, such as adjusting `threshold`, override
+[layouts/_partials/td/scrollspy-attr.txt]. For ScrollSpy configuration details,
+see [ScrollSpy].
+
+{{% alert title="Note" %}}
+
+Bootstrap ScrollSpy determines the active TOC entry using the browser’s
+[IntersectionObserver API][], including its configurable [rootMargin]. Because
+of how these thresholds work, there can be brief moments where **no** heading is
+highlighted—especially when headings are close together or when the active
+region is small. For more details, see the Bootstrap [ScrollSpy options][] and
+the upstream discussion in [Bootstrap issue #34958][bs-34958].
+
+{{% /alert %}}
+
+[bs-34958]: https://github.com/twbs/bootstrap/issues/34958
+[cascade]: https://gohugo.io/content-management/front-matter/#cascade-1
+[IntersectionObserver API]:
+  https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
+[layouts/_partials/td/scrollspy-attr.txt]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/td/scrollspy-attr.txt
+[#2291]: https://github.com/google/docsy/pull/2291
+[ScrollSpy]: https://getbootstrap.com/docs/5.3/components/scrollspy/
+[rootmargin]:
+  https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
+[ScrollSpy options]:
+  https://getbootstrap.com/docs/5.3/components/scrollspy/#options
+
 ## Breadcrumb navigation
 
 [Breadcrumb navigation] appears at the top of each non-index page be default. To
@@ -453,6 +561,7 @@ entire project, by setting `ui.breadcrumb_disable` to true in your project
 [configuration file]. Similarly, you can disabled taxonomy breadcrumbs by
 setting `ui.taxonomy_breadcrumb_disable` to true:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
@@ -478,6 +587,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable -->
 
 To disable breadcrumbs in a specific page or section set `ui.breadcrumb_disable`
 to true in the page or section-index front matter. Here is an example of the
