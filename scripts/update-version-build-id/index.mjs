@@ -3,11 +3,7 @@
 /**
  * Updates the version in package.json by adding a build ID.
  *
- * Usage: node scripts/update-version-build-id/index.mjs [--silent|-s] [build-id]
- *
- * - If no build-id is provided: uses current UTC timestamp in YYYYMMDD-HHmmZ format
- * - If empty string "" is provided: removes the build ID (sets version to base version only)
- * - If a build-id is provided: uses that build ID
+ * Usage: see usage() function below.
  */
 
 import fs from 'fs';
@@ -45,29 +41,67 @@ export function main(
   return newVersion;
 }
 
+const usageText = `
+Usage: node scripts/update-version-build-id/index.mjs [BUILD-ID] [options]
+  Options:
+    --silent, -s    Don't log any messages
+    --help, -h      Show this help message
+    --id BUILD-ID   Use BUILD-ID as the build ID
+
+  Behavior:
+    - If no BUILD-ID is provided: uses current UTC timestamp in YYYYMMDD-HHmmZ format
+    - If empty string "" is provided: removes the build ID (sets version to base version only)
+    - If a BUILD-ID is provided: uses that BUILD-ID
+`;
+
+const maybeLog = (isSilent = false, log = console.log) => (message) => {
+  if (isSilent) return;
+  log(message);
+};
+
 export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
+  function usage(exitCode = 0) {
+    logger?.log?.(usageText);
+    process.exit(exitCode);
+  }
+
   let buildId;
   let silent = false;
+  const log = maybeLog(silent, logger?.log || console.log);
+  const warn = maybeLog(silent, logger?.warn || console.warn);
 
-  for (const arg of args) {
-    if (arg === '--silent' || arg === '-s') {
-      silent = true;
-    } else if (buildId === undefined) {
-      buildId = arg;
-    } else {
-      const message = `Ignoring unexpected argument: ${arg}`;
-      if (logger?.warn) {
-        logger.warn(message);
-      } else {
-        logger?.log?.(message);
-      }
+  let i = 0;
+  for (; i < args.length; i++) {
+    const arg = args[i];
+    switch (arg) {
+      case '--help':
+      case '-h':
+        usage();
+        break;
+      case '--silent':
+      case '-s':
+        silent = true;
+        break;
+      case '--id':
+        if (++i >= args.length) usage(1);
+        buildId = args[i];
+        break;
+      default:
+        if (buildId === undefined) {
+          buildId = arg;
+        } else {
+          warn?.(`Unexpected argument: ${arg}`);
+          usage(1);
+        }
     }
   }
 
   if (buildId === undefined) {
     buildId = generateTimestamp();
   } else if (buildId === '' && !silent) {
-    logger?.log?.('Build-ID argument is empty, so we will remove the build ID from the version.');
+    logger?.log?.(
+      'Build-ID argument is empty, so we will remove the build ID from the version.',
+    );
   }
 
   return { buildId, silent };
@@ -96,4 +130,3 @@ const modulePath = __filename;
 if (process.argv[1] && path.resolve(process.argv[1]) === modulePath) {
   main();
 }
-

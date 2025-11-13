@@ -10,7 +10,8 @@ resources:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
 params:
   message: Some _message_.
-cSpell:ignore: imgproc pageinfo Bjørn Pedersen swaggerui grayscale Picea
+# prettier-ignore
+cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile buildcondition
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -452,7 +453,7 @@ famous `Hello world!` program one usually writes first when learning a new
 programming language:
 
 <!-- prettier-ignore-start -->
-<!-- cSpell:ignore cout println -->
+<!-- cSpell:ignore cout println stdio stdlib endl -->
 {{< tabpane langEqualsHeader=true >}}
 {{< tab "C" >}}
 #include <stdio.h>
@@ -919,5 +920,4 @@ If you are using this shortcode, note that when evaluating the conditions,
 substring matches are matches as well. That means, if you set
 `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!
 
-[shortcode delimiter]:
-  https://gohugo.io/content-management/shortcodes/#use-shortcodes
+[shortcode delimiter]: https://gohugo.io/content-management/shortcodes/#notation

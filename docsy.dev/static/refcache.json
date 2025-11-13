@@ -103,6 +103,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-22T22:35:07.769384352+02:00"
   },
+  "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:11.398974-05:00"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:11.619939-05:00"
+  },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink": {
     "StatusCode": 206,
     "LastSeen": "2024-11-06T12:04:24.495606-05:00"
@@ -135,6 +143,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:41.460308-04:00"
   },
+  "https://discourse.gohugo.io/t/can-hugo-include-shortcode-headings-in-toc/51940": {
+    "StatusCode": 200,
+    "LastSeen": "2025-11-12T21:09:09.97557-05:00"
+  },
   "https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469": {
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:37.88603-04:00"
@@ -146,6 +158,10 @@
   "https://discourse.gohugo.io/t/markdown-attributes/41783": {
     "StatusCode": 200,
     "LastSeen": "2025-05-16T09:20:46.115114-04:00"
+  },
+  "https://discourse.gohugo.io/t/tableofcontents-doesnt-render-headings-correctly-that-contains-shortcode/55399": {
+    "StatusCode": 200,
+    "LastSeen": "2025-11-12T21:09:10.020103-05:00"
   },
   "https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2": {
     "StatusCode": 200,
@@ -418,6 +434,14 @@
   "https://getbootstrap.com/docs/5.3/components/alerts/": {
     "StatusCode": 206,
     "LastSeen": "2025-06-10T21:33:38.654894-04:00"
+  },
+  "https://getbootstrap.com/docs/5.3/components/scrollspy/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:10.106271-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/components/scrollspy/#options": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:11.717904-05:00"
   },
   "https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack": {
     "StatusCode": 200,
@@ -735,6 +759,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:38.127906-04:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/_partials/td/scrollspy-attr.txt": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:11.101706-05:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-23T09:04:28.74017-04:00"
@@ -971,6 +999,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-12T12:00:13.555016-05:00"
   },
+  "https://github.com/google/docsy/issues/2289": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:10.18619-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:57.646409-05:00"
@@ -1150,6 +1182,10 @@
   "https://github.com/google/docsy/pull/2259": {
     "StatusCode": 206,
     "LastSeen": "2025-05-22T19:21:14.104646-04:00"
+  },
+  "https://github.com/google/docsy/pull/2291": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:10.724265-05:00"
   },
   "https://github.com/google/docsy/pull/2301": {
     "StatusCode": 206,
@@ -1647,6 +1683,10 @@
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:05:09.357401-05:00"
   },
+  "https://github.com/twbs/bootstrap/issues/34958": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:12.129299-05:00"
+  },
   "https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087L13": {
     "StatusCode": 200,
     "LastSeen": "2025-10-06T11:42:12.345Z"
@@ -1723,6 +1763,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:39.15452-04:00"
   },
+  "https://gohugo.io/content-management/front-matter/#cascade-1": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:10.287327-05:00"
+  },
   "https://gohugo.io/content-management/front-matter/#front-matter-cascade": {
     "StatusCode": 206,
     "LastSeen": "2025-10-06T11:47:59.999Z"
@@ -1762,6 +1806,10 @@
   "https://gohugo.io/content-management/shortcodes/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:34.567684-04:00"
+  },
+  "https://gohugo.io/content-management/shortcodes/#notation": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:09.686825-05:00"
   },
   "https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown": {
     "StatusCode": 206,
@@ -2390,6 +2438,10 @@
   "https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T12:00:13.317204-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#toc-entry-tracking": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-12T21:09:10.640114-05:00"
   },
   "https://www.docsy.dev/docs/adding-content/repository-links/": {
     "StatusCode": 206,

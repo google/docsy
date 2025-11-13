@@ -41,21 +41,22 @@ cSpell:ignore: docsy
 
 Expand user guide coverage for the following features:
 
-- [ ] Document `sidebar_root_for` usage with examples and configuration
-      guidance - in progress (see
-      [sidebar-root-feature.plan.md](../sidebar-root-feature.plan.md)).
-- [ ] Elaborate on ScrollSpy behavior and tuning options post-update
+- [x] Document `sidebar_root_for` usage with examples
+  - For details, see
+    [sidebar-root-feature.plan.md](../sidebar-root-feature.plan.md)
+- [x] Elaborate on ScrollSpy behavior and tuning options post-update
 - [ ] Update release process checklist with new build ID helper references
       (confirm #2266 alignment)
 
 Add changelog entries for the following issues:
 
 - [ ] Accessibility color/typography fixes (#2285)
-- [ ] ScrollSpy & TOC UX improvements (#349/#2289)
+- [x] ScrollSpy & TOC UX improvements (#349/#2289) — covered in `CHANGELOG.md`
+      (0.12.1/0.13.0 "Other changes" section).
 - [x] Sidebar-root feature (#2328) — covered in `CHANGELOG.md` (0.12.1/0.13.0
-      “New” section, `sidebar_root_for` bullet).
-- [x] Dark-mode flash fix (no issue ID) — documented in `CHANGELOG.md`
-      (0.12.1/0.13.0 “Other changes” entry).
+      "New" section, `sidebar_root_for` bullet).
+- [x] Dark-mode flash fix (#2185) — documented in `CHANGELOG.md` (0.12.1/0.13.0
+      “Other changes” entry).
 - [ ] Translation refreshes (#2173, #2313, #2331) – optional but helpful
 
 Client-upgrade support:

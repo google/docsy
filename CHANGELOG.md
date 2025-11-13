@@ -27,7 +27,7 @@ Useful links:
 >     Old entries might not follow this guidance; feel free to update them as
 >     needed.
 
-## 0.12.1 or 0.13.0
+## 0.13.0
 
 > **UNRELEASED: this planned version is still under development**
 
@@ -57,14 +57,21 @@ For the full list of changes, see the [0.x.y] release notes.
 - Projects using Docsy via NPM, directly from the GitHub repository, will no
   longer face optional and peer dependencies issues ([#2115]).
 - Fixed dark-mode [Flash Of Unstyled Content][] (FOUC) ([#2185]).
+- Added Bootstrap ScrollSpy support to highlight the active heading in the TOC
+  sidebar. ([#349], [#2289]). For details, see [Active TOC entry tracking with
+  ScrollSpy][].
 - Hamburger menu toggle button icon changed to an X when the menu is expanded
   ([#2301]). This is a style change only.
 
+[#349]: https://github.com/google/docsy/issues/349
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2185]: https://github.com/google/docsy/issues/2185
+[#2289]: https://github.com/google/docsy/issues/2289
 [#2301]: https://github.com/google/docsy/pull/2301
 [#2303]: https://github.com/google/docsy/pull/2303
 [0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[Active TOC entry tracking with ScrollSpy]:
+  https://www.docsy.dev/docs/adding-content/navigation/#toc-entry-tracking
 [Adding a language menu]:
   https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-menu
 [Flash Of Unstyled Content]:
