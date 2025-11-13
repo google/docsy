@@ -8,6 +8,7 @@ ignores:
 
 default: true
 
+blanks-around-fences: false
 emphasis-style: false
 first-line-h1: false
 line-length: false
@@ -17,7 +18,5 @@ no-emphasis-as-header: false
 no-hard-tabs: false
 no-inline-html: false
 no-trailing-punctuation: false
-no-trailing-spaces:
-  br_spaces: 0
-  strict: true
+no-trailing-spaces: {  br_spaces: 0, strict: true}
 table-column-style: false # Causes problems in ja and zh pages

@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `595b25e` on `main`.
+> Report refreshed for commits through `0571623` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -43,6 +43,9 @@ client projects.
 - `1b8ccc3` (`#2355`) Prevent flash when entering dark mode (follow-up)
 - `3722bf7` (`#2349`) Publish upgrade guide blog for Docsy 0.12.0 → 0.11.0
 - `95de91f` (`#2356`) Align upgrade blog slugs/titles for consistency
+- `2523a8b` (`#2363`) Sidebar-root feature & 0.13-wrapup planning and tasks
+- `468c081` (`#2364`) Sidebar-root user guide and CHANGELOG additions
+- `0571623` (`#2366`) Adjust ScrollSpy TOC tracking and add documentation
 
 ## CI / tooling only
 
