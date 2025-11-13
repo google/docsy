@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy lookandfeel userguide
 ---
 
-> Report refreshed for commits through `595b25e` on `main`.
+> Report refreshed for commits through `0571623` on `main`.
 
 Assessment of issues addressed by [commits since
 v0.12.0][commits since v0.12.0].
@@ -46,16 +46,16 @@ v0.12.0][commits since v0.12.0].
 
 ## #349 / #2289 – TOC scrollspy & navigation indication
 
-- **Commits**: `4323d09`, `3a5cfea`, `55db259`, `2cb3725`
-- **Status**: Feature shipped; ScrollSpy + TOC polish in place.
-- **User Guide**: Minor updates to `lookandfeel.md`; consider expanding docs
-  with usage guidance.
-- **Changelog**: No explicit entry; add highlight for TOC/ScrollSpy
-  improvements.
+- **Commits**: `4323d09`, `3a5cfea`, `55db259`, `2cb3725`, `0571623`
+- **Status**: Feature shipped; ScrollSpy + TOC polish in place with
+  comprehensive documentation.
+- **User Guide**: Expanded documentation in `navigation.md` covering ScrollSpy
+  behavior, tuning options (`ui.scrollSpy.rootMargin`), and configuration
+  guidance.
+- **Changelog**: Entry added in 0.12.1/0.13.0 "Other changes" section.
 - **Client impact**: Yes — default TOC behavior changes; verify site-specific
   overrides.
-- **Follow-up**: Verify smooth scrolling removal impact; document configuration
-  knobs if any.
+- **Follow-up**: Complete.
 
 ## #2035 / #2001 – Language menu visibility & styling
 
@@ -99,15 +99,17 @@ v0.12.0][commits since v0.12.0].
 
 ## #2328 – Sidebar root feature (`sidebar_root_for`)
 
-- **Commits**: `b23e453`, `2e5ebc4`, `cf3a3d7`, `f0c0575`, `84526b3`
+- **Commits**: `b23e453`, `2e5ebc4`, `cf3a3d7`, `f0c0575`, `84526b3`, `2523a8b`,
+  `468c081`
 - **Status**: Core feature merged; both `children` and `self` variants
-  implemented, and warning UX refined for docs-only root sections.
-- **User Guide**: Minimal front matter tweaks only — lacks explanatory docs.
-- **Changelog**: Missing; should appear as a headline feature.
-- **Client impact**: Yes — new optional feature; document enablement steps and
-  new warning behavior.
-- **Follow-up**: Author dedicated documentation section (examples,
-  configuration) and add changelog entry.
+  implemented, warning UX refined for docs-only root sections, and documentation
+  added.
+- **User Guide**: Documentation added in `navigation.md` covering usage,
+  configuration options, and examples.
+- **Changelog**: Entry added in 0.12.1/0.13.0 "New" section.
+- **Client impact**: Yes — new optional feature; enablement steps and warning
+  behavior documented.
+- **Follow-up**: Complete.
 
 ## Dark-mode FOUC fix (no issue ID referenced)
 
@@ -120,9 +122,10 @@ v0.12.0][commits since v0.12.0].
 
 ## #2266 – Release process enhancements
 
-- **Commits**: `0e2ad18`, `595b25e`
-- **Status**: Guidance updated (scripts, instructions) and `fix:version` tooling
-  now works in pre-commit hooks.
+- **Commits**: `0e2ad18`, `595b25e`, `2523a8b`
+- **Status**: Guidance updated (scripts, instructions), `fix:version` tooling
+  now works in pre-commit hooks, and wrapup planning/reporting structure
+  established.
 - **User Guide**: Release docs updated within repo (not user-facing).
 - **Changelog**: Not needed.
 - **Client impact**: No direct impact; relevant mainly for maintainers.

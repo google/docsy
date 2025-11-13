@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy sidemenu FOUC
 ---
 
-> Report refreshed for commits through `595b25e` on `main`.
+> Report refreshed for commits through `0571623` on `main`.
 
 Mapping [commits since v0.12.0][] to their originating issues (when known).
 
@@ -48,6 +48,9 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `1b8ccc3` | `#2355` | Dark-mode flash follow-up                                       | —                    | Completes dark-mode FOUC fix (issue number not referenced)           |
 | `3722bf7` | `#2349` | Blog: Upgrading to Docsy 0.12.0 from 0.11.0                     | `#2349`              | Adds detailed upgrade guidance for prior release                     |
 | `95de91f` | `#2356` | Normalize upgrade blog titles/slugs                             | `#2356`              | Keeps blog naming consistent across releases                         |
+| `2523a8b` | `#2363` | Sidebar-root feature & 0.13-wrapup planning and tasks           | `#2328`, `#2266`     | Creates wrapup reports and updates sidebar-root feature plan         |
+| `468c081` | `#2364` | Sidebar-root user guide and CHANGELOG additions                 | `#2328`              | Adds user guide documentation and changelog entry for sidebar-root   |
+| `0571623` | `#2366` | Adjust ScrollSpy TOC tracking and add documentation             | `#349`, `#2289`      | ScrollSpy tuning improvements and comprehensive documentation        |
 
 ## CI / tooling commits
 

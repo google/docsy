@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `595b25e` on `main`.
+> Report refreshed for commits through `0571623` on `main`.
 
 ## Highlights since v0.12.0
 
@@ -41,12 +41,9 @@ cSpell:ignore: docsy
 
 Expand user guide coverage for the following features:
 
-- [x] Document `sidebar_root_for` usage with examples
-  - For details, see
-    [sidebar-root-feature.plan.md](../sidebar-root-feature.plan.md)
-- [x] Elaborate on ScrollSpy behavior and tuning options post-update
-- [ ] Update release process checklist with new build ID helper references
-      (confirm #2266 alignment)
+- [x] Document `sidebar_root_for` usage with examples — completed in `#2364`
+- [x] Elaborate on ScrollSpy behavior and tuning options post-update — completed
+      in `#2366`
 
 Add changelog entries for the following issues:
 
@@ -58,6 +55,10 @@ Add changelog entries for the following issues:
 - [x] Dark-mode flash fix (#2185) — documented in `CHANGELOG.md` (0.12.1/0.13.0
       “Other changes” entry).
 - [ ] Translation refreshes (#2173, #2313, #2331) – optional but helpful
+
+Contributing documentation:
+
+- [x] Update release process checklist with new build ID helper references
 
 Client-upgrade support:
 

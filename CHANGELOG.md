@@ -478,8 +478,6 @@ CHANGES** are documented below.
 [adding analytics > setup]:
   https://www.docsy.dev/docs/adding-content/feedback/#setup
 [v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
-[docsy as an npm package]:
-  https://www.docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name

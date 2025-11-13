@@ -1,7 +1,7 @@
 ---
 title: 0.13 Release wrapup plan
 date: 2025-11-12
-last-main-commit: 595b25e
+last-main-commit: 0571623
 cSpell:ignore: docsy
 ---
 
@@ -65,9 +65,10 @@ Repeat when new commits land on `main`:
 - Update the upgrade blog draft with the latest context (track outstanding
   content work in the wrapup report).
 
-Report refreshed for commits through [595b25e] (includes #2361 and #2362).
+Report refreshed for commits through [0571623] (includes #2363, #2364, and
+\#2366).
 
 [0.13.0 upgrade post]: upgrade-blog.md
-[595b25e]:
-  https://github.com/google/docsy/commit/595b25e3c63894967ae5a3a0d3cf9160a69c85eb
+[0571623]:
+  https://github.com/google/docsy/commit/05716234f49308dc9e39e97de2c858b1759803a5
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
