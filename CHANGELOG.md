@@ -27,61 +27,84 @@ Useful links:
 >     Old entries might not follow this guidance; feel free to update them as
 >     needed.
 
+## Breaking change
+
+A **breaking change** is a backward-incompatible change to Docsy’s _public
+contract_ that requires client projects to update their configuration, content,
+or customizations in order to:
+
+- Build successfully (without errors), or
+- Preserve existing, significant site functionality or user experience,
+  including visual design
+
+See [semver].
+
+> **Notes**:
+>
+> - The term _public contract_ refers to the templates, styles, configuration
+>   patterns, and runtime behavior that client projects reasonably rely on.
+> - A new build warning alone is not considered a breaking change, but it may
+>   indicate a future breaking change, such as signaling a deprecation.
+
+[semver]: https://semver.org/
+
+<!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
+
 ## 0.13.0
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.x.y] release notes.
+**References**:
+
+- [Release 0.13.0 report and upgrade guide][0.13.0-blog]
+- For the full list of changes, see the [0.13.0] release page.
 
 **Breaking changes**:
 
-- **Appearance**:
-  - **Language menu**: Changed the visibility of the **language menu**. It is
-    now displayed in the navbar for all screen sizes ([#2303]). The menu is
-    hidden from the sidebar by default. To restore the legacy behavior, set the
-    configuration parameter `ui.sidebar_lang_menu` to `true`. For details, see
-    [Adding a language menu][].
-- **Shortcodes**:
-  - Changed the **alert** shortcode to support Markdown content and nested
-    shortcodes ([#906] and [#939]). For details, see [alert] ([#941]).
-
-[#941]: https://github.com/google/docsy/pull/941
-[alert]: https://www.docsy.dev/docs/adding-content/shortcodes/#alert
+- **Language menu**: Visibility changed. See [Language menu
+  visibility][0.13.0-blog-lang-menu] in the blog post.
+- **Alert shortcode**: Content processing changed. See [Alert shortcode
+  improvements][0.13.0-blog-alert] in the blog post.
 
 **New**:
 
-- Added [Section sidebar root][] feature.
+- [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy.
+- [Section sidebar root][0.13.0-blog-sidebar] feature.
 
 **Other changes**:
 
-- Projects using Docsy via NPM, directly from the GitHub repository, will no
-  longer face optional and peer dependencies issues ([#2115]).
-- Fixed dark-mode [Flash Of Unstyled Content][] (FOUC) ([#2185]).
-- Added Bootstrap ScrollSpy support to highlight the active heading in the TOC
-  sidebar. ([#349], [#2289]). For details, see [Active TOC entry tracking with
-  ScrollSpy][].
-- Hamburger menu toggle button icon changed to an X when the menu is expanded
-  ([#2301]). This is a style change only.
+- Improved accessibility: [color contrast and
+  typography][0.13.0-blog-accessibility] ([#2285]).
+- Fixed dark-mode [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC)
+  ([#2332]).
+- Better NPM support: resolved optional and peer dependency issues ([#2115]).
+  See [breaking changes][0.13.0-blog-breaking] in the blog post.
+- Updated translations: added Occitan locale ([#2173]) and refreshed Simplified
+  Chinese ([#2313]) and Ukrainian ([#2331]).
 
-[#349]: https://github.com/google/docsy/issues/349
 [#2115]: https://github.com/google/docsy/issues/2115
-[#2185]: https://github.com/google/docsy/issues/2185
-[#2289]: https://github.com/google/docsy/issues/2289
-[#2301]: https://github.com/google/docsy/pull/2301
-[#2303]: https://github.com/google/docsy/pull/2303
-[0.x.y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
-[Active TOC entry tracking with ScrollSpy]:
-  https://www.docsy.dev/docs/adding-content/navigation/#toc-entry-tracking
-[Adding a language menu]:
-  https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-menu
-[Flash Of Unstyled Content]:
-  https://en.wikipedia.org/wiki/Flash_of_unstyled_content
-[Section sidebar root]:
-  https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root
+[#2173]: https://github.com/google/docsy/issues/2173
+[#2285]: https://github.com/google/docsy/issues/2285
+[#2313]: https://github.com/google/docsy/issues/2313
+[#2331]: https://github.com/google/docsy/issues/2331
+[#2332]: https://github.com/google/docsy/issues/2332
+[0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
+[0.13.0-blog]: https://www.docsy.dev/blog/2025/0.13.0/
+[0.13.0-blog-lang-menu]:
+  https://www.docsy.dev/blog/2025/0.13.0/#language-menu-visibility
+[0.13.0-blog-alert]: https://www.docsy.dev/blog/2025/0.13.0/#alert-shortcode
+[0.13.0-blog-toc]:
+  https://www.docsy.dev/blog/2025/0.13.0/#active-toc-entry-tracking
+[0.13.0-blog-sidebar]:
+  https://www.docsy.dev/blog/2025/0.13.0/#section-sidebar-root
+[0.13.0-blog-accessibility]:
+  https://www.docsy.dev/blog/2025/0.13.0/#accessibility
+[0.13.0-blog-fouc]: https://www.docsy.dev/blog/2025/0.13.0/#accessibility
+[0.13.0-blog-breaking]: https://www.docsy.dev/blog/2025/0.13.0/#breaking-changes
 
 ## 0.12.0
 
-For the full list of changes, see the [0.12.0] release notes.
+For the full list of changes, see the [0.12.0] release page.
 
 **Breaking changes**:
 
@@ -148,7 +171,7 @@ For the full list of changes, see the [0.12.0] release notes.
 
 ## 0.11.0
 
-For the full list of changes, see the [0.11.0] release notes.
+For the full list of changes, see the [0.11.0] release page.
 
 **New**:
 
@@ -170,7 +193,7 @@ For the full list of changes, see the [0.11.0] release notes.
 ## 0.10.0
 
 For an introduction to this release, see the [0.10.0 release report]. For the
-full list of changes, see the [0.10.0] release notes.
+full list of changes, see the [0.10.0] release page.
 
 **New**: color themes and dark-mode support! For details, see [Color themes and
 dark-mode support][dark-mode].
@@ -204,7 +227,7 @@ Patch release. For details, see [0.9.1].
 ## 0.9.0
 
 For an introduction and commentary, see the [0.9.0 release report]. For the full
-list of commits, see the [0.9.0] release notes. The most significant changes of
+list of commits, see the [0.9.0] release page. The most significant changes of
 this release are listed next.
 
 **Breaking changes**:
@@ -266,7 +289,7 @@ For details concerning all footer changes, see [#1818].
 
 ## 0.8.0
 
-For the full list of changes, see the [0.8.0] release notes.
+For the full list of changes, see the [0.8.0] release page.
 
 **Breaking changes**:
 
@@ -304,7 +327,7 @@ For the full list of changes, see the [0.8.0] release notes.
 
 ## 0.7.2
 
-For the full list of changes, see the [0.7.2] release notes. We mention some
+For the full list of changes, see the [0.7.2] release page. We mention some
 noteworthy changes here:
 
 - **Algolia**
@@ -333,7 +356,7 @@ noteworthy changes here:
 
 ## 0.7.1
 
-For the full list of changes, see the [0.7.1] release notes.
+For the full list of changes, see the [0.7.1] release page.
 
 Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
@@ -348,7 +371,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 ## 0.7.0
 
-For the full list of changes, see the [0.7.0] release notes.
+For the full list of changes, see the [0.7.0] release page.
 
 **New**:
 
@@ -414,7 +437,7 @@ For the full list of changes, see the [0.7.0] release notes.
 
 ## 0.6.0
 
-For the full list of changes, see the [0.6.0] release notes.
+For the full list of changes, see the [0.6.0] release page.
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -435,8 +458,8 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 ## 0.5.1
 
-For the full list of changes, see the [0.5.1] release notes. **BREAKING
-CHANGES** are documented below.
+For the full list of changes, see the [0.5.1] release page. **BREAKING CHANGES**
+are documented below.
 
 **After you update** your project's Docsy:
 
@@ -461,7 +484,7 @@ CHANGES** are documented below.
   name].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
-  release notes].
+  release page].
 - **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
   changed].
@@ -477,7 +500,7 @@ CHANGES** are documented below.
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [adding analytics > setup]:
   https://www.docsy.dev/docs/adding-content/feedback/#setup
-[v4.6.2 release notes]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
+[v4.6.2 release page]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
@@ -490,8 +513,8 @@ Unpublished.
 
 ## 0.4.0
 
-For the full list of changes, see the [0.4.0] release notes. Potential
-**BREAKING CHANGES** are documented below.
+For the full list of changes, see the [0.4.0] release page. Potential **BREAKING
+CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
 
@@ -546,7 +569,7 @@ Proceed as usual to build or serve your site.
 
 ## 0.3.0
 
-For the full list of changes, see the [0.3.0] release notes.
+For the full list of changes, see the [0.3.0] release page.
 
 **Breaking changes**:
 
@@ -565,7 +588,7 @@ For the full list of changes, see the [0.3.0] release notes.
 
 ## 0.2.0
 
-For the full list of changes, see the [0.2.0] release notes.
+For the full list of changes, see the [0.2.0] release page.
 
 **New**:
 
@@ -589,7 +612,7 @@ For the full list of changes, see the [0.2.0] release notes.
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.x.y] release notes.
+For the full list of changes, see the [0.x.y] release page.
 
 **Breaking changes**:
 

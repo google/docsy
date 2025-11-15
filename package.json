@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.13.0-dev+47-g0571623",
+  "version": "0.13.0-dev+48-g4d72b4b",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -10,6 +10,7 @@
   "scripts": {
     "_cd:docsy.dev": "cd docsy.dev &&",
     "_check:format": "npx prettier --check *.md tasks",
+    "_check:links": "npm run _cd:docsy.dev -- npm run _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
@@ -21,7 +22,8 @@
     "build": "npm run _cd:docsy.dev -- npm run build",
     "cd:docsy.dev": "npm run _cd:docsy.dev -- npm run",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
-    "check:markdown": "npm run _check:markdown -- '{docsy.dev,}/*.md' 'tasks/**/*.md'",
+    "check:links": "npm run _cd:docsy.dev -- npm run check:links",
+    "check:markdown": "npm run _check:markdown -- '{docsy.dev,.}/*.md' 'tasks/**/*.md'",
     "check": "npm run check:format && npm run check:markdown",
     "ci:post": "npm run fix:format && npm run _diff:check && npm run test:tooling",
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
