@@ -1271,6 +1271,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-27T12:33:39.089373-04:00"
   },
+  "https://github.com/google/docsy/releases/v0.13.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-14T12:01:21.148819-05:00"
+  },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:09:37.689429-05:00"
@@ -1694,6 +1698,10 @@
   "https://github.com/theupdateframework/theupdateframework.io/pull/105": {
     "StatusCode": 200,
     "LastSeen": "2024-12-12T10:10:47.645841-05:00"
+  },
+  "https://github.com/theupdateframework/theupdateframework.io/pull/126": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-14T11:08:52.393954-05:00"
   },
   "https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_functions.scss": {
     "StatusCode": 206,
@@ -2392,32 +2400,32 @@
     "LastSeen": "2025-10-06T11:55:12.345Z"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:03.490464-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.517725-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#accessibility": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:05.649648-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.992216-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#active-toc-entry-tracking": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:03.744578-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.824226-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#alert-shortcode": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:03.662235-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.677853-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#breaking-changes": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:06.695952-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:46.082539-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#language-menu-visibility": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:03.575377-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.592858-05:00"
   },
   "https://www.docsy.dev/blog/2025/0.13.0/#section-sidebar-root": {
-    "StatusCode": 404,
-    "LastSeen": "2025-11-15T13:13:03.830801-05:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T14:02:45.90823-05:00"
   },
   "https://www.docsy.dev/blog/index.xml": {
     "StatusCode": 206,
