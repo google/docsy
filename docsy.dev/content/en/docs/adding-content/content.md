@@ -124,14 +124,14 @@ As noted above, Docsy assumes that (by default) your site has:
 - Blog section under `/blog/`
 - Community section under `/community/`
 
-The [content type] of each section determines the layout Hugo uses for that
+The [content type][] of each section determines the layout Hugo uses for that
 section.
 
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 
-For some project you may want to have a different site structure, but still make
-use of Docsy's layouts. A common example is for a **_docs-only_** site, where
-all of the pages (including the home page) use the `docs` layout. In such a
+You may want to have a different site structure for your project while still
+making use of Docsy's layouts. A common example is for a **_docs-only_** site,
+where all of the pages (including the homepage) use the `docs` layout. In such a
 site, you might want to have `/news/` pages formatted with the blog layout.
 
 Since Hugo 0.76, this has become practical without copying layouts to your site,

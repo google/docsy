@@ -9,7 +9,7 @@ resources:
     params:
       byline: '*Photo*: Bjørn Erik Pedersen / CC-BY-SA'
 params:
-  message: Some _message_.
+  message: Hello, world!
 # prettier-ignore
 cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile buildcondition
 ---
@@ -216,16 +216,17 @@ text/Markdown or a shortcode) must be indented accordingly. For example:
 ```go-template
 - The following note is part of this list item:
   {{%/* alert title="Celebrate!" color=success */%}}
-  This alert content is properly rendered. A Markdown [link definition][]
-  get resolved even if it is defined outside of the alert body.
+  This alert is properly indented and rendered as part of the list item. Notice
+  how a Markdown [link definition][] gets resolved even if it is defined
+  _outside_ of the alert body.
 
-  > Nested shortcode use here → {{% param message %}}
+  > Nested shortcode used here → {{% param message %}}
   {{%/* /alert */%}}
-  The first list item continues.
+  The first list item content continues here.
 
 - **Don't put content on the same line** as the opening tag, it breaks rendering:
-  {{%/* alert title="Misformed alert!" color=warning */%}} **This content appears outside of
-  the list!** {{%/* /alert */%}}
+  {{%/* alert title="This alert's rendering is broken!" color=warning */%}} **Notice
+  how the alert content appears outside of the list!** {{%/* /alert */%}}
 
 [link definition]: # 'A link definition defined outside the alert body.'
 ```
@@ -246,16 +247,17 @@ example below from breaking all the rest of the page. DO NOT remove it.
 <!-- prettier-ignore -->
 - The following note is part of this list item:
   {{% alert title="Celebrate!" color=success %}}
-  This alert content is properly rendered. A Markdown [link definition][]
-  get resolved even if it is defined outside of the alert body.
+  This alert is properly indented and rendered as part of the list item. Notice
+  how a Markdown [link definition][] gets resolved even if it is defined
+  _outside_ of the alert body.
 
-  > Nested shortcode use here → {{% param message %}}
+  > Nested shortcode used here → {{% param message %}}
   {{% /alert %}}
-  The first list item continues.
+  The first list item content continues here.
 
 - **Don't put content on the same line** as the opening tag, it breaks rendering:
-  {{% alert title="Misformed alert!" color=warning %}} **This alert content appears outside of
-  the list!** {{% /alert %}}
+  {{% alert title="This alert's rendering is broken!" color=warning %}} **Notice
+  how the alert content appears outside of the list!** {{% /alert %}}
 
 [bs-alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 [link definition]: # 'A link definition defined outside the alert body.'

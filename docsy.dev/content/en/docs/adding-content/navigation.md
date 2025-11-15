@@ -541,7 +541,7 @@ usually happens because the heading text itself starts with a number.
 If you encounter this issue, you can try one of the following workarounds:
 
 - Explicitly set the heading ID using the attribute syntax `{#id}` to avoid the
-  leading number. For example, prefix the ID with a hyphen:
+  leading digit. For example, prefix the ID with a hyphen:
 
   ```markdown
   # 1. Introduction {#-1-introduction}
