@@ -1,21 +1,21 @@
 {{ $page := .Page -}}
 {{ with .Site.Params.copyright -}}
-  {{ $fromYear := "" -}}
-  {{ $toYear := "" -}}
+  {{ $yearRange := slice -}}
   {{ $authors := "" -}}
   {{ if reflect.IsMap . -}}
-    {{ $fromYear = .from_year -}}
-    {{ $toYear = .to_year -}}
+    {{ with .from_year -}}
+      {{ $yearRange = slice . -}}
+    {{ end -}}
+    {{ $yearRange = $yearRange
+          | append (.to_year | default now.Year)
+          | uniq -}}
     {{ $authors = .authors -}}
   {{ else -}}
     {{ $authors = . -}}
   {{ end -}}
 
   <span class="td-footer__copyright">&copy;
-    {{ with $fromYear -}}
-      {{ . }}&ndash;
-    {{- end -}}
-    {{ $toYear | default now.Year }}
+    {{ delimit $yearRange "–" }}
     <span class="td-footer__authors">
       {{- $authors
             | default (printf "%s Authors" ($.Site.Title | default "Site"))
