@@ -147,13 +147,14 @@ example].
 [`rtlcss` package]: https://www.npmjs.com/package/rtlcss
 [Persian pages]: https://example.docsy.dev/fa/
 
-## Selecting a language
+## Selecting a language from the language menu
 
-If you configure more than one language in your
-[configuration file](https://gohugo.io/getting-started/configuration/#configuration-file),
-the Docsy theme adds a language selector drop down to the top-level menu.
-Selecting a language takes the user to the translated version of the current
-page, or the home page for the given language.
+If you configure more than one language in your [configuration
+file](https://gohugo.io/getting-started/configuration/#configuration-file), the
+Docsy theme adds a language drop down to the top-level menu. Selecting
+a language takes the user to the translated version of the current page, or the
+home page for the given language. For details, see [Adding a language
+menu](/docs/adding-content/navigation/#adding-a-language-menu).
 
 ## Internationalization bundles
 

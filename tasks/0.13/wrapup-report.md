@@ -45,28 +45,35 @@ Expand user guide coverage for the following features:
 - [x] Elaborate on ScrollSpy behavior and tuning options post-update — completed
       in `#2366`
 
-Add changelog entries for the following issues:
+Add changelog entries for the following issues. Remember that the changelog is
+meant to be very terse, and refer the interested reader to further info.
 
-- [ ] Accessibility color/typography fixes (#2285)
-- [x] ScrollSpy & TOC UX improvements (#349/#2289) — covered in `CHANGELOG.md`
-      (0.12.1/0.13.0 "Other changes" section).
-- [x] Sidebar-root feature (#2328) — covered in `CHANGELOG.md` (0.12.1/0.13.0
-      "New" section, `sidebar_root_for` bullet).
-- [x] Dark-mode flash fix (#2185) — documented in `CHANGELOG.md` (0.12.1/0.13.0
-      “Other changes” entry).
-- [ ] Translation refreshes (#2173, #2313, #2331) – optional but helpful
+- [x] Accessibility color/typography fixes (#2285)
+- [x] ScrollSpy & TOC UX improvements (#349/#2289)
+- [x] Sidebar-root feature (#2328)
+- [x] Dark-mode flash fix (#2185)
+- [x] Translation refreshes (#2173, #2313, #2331)
 
 Contributing documentation:
 
 - [x] Update release process checklist with new build ID helper references
 
-Client-upgrade support:
+Blog posts:
 
-- [ ] Blog: cross-link 0.12.0 and 0.13.0 upgrade blogs once 0.13 content is
-      finalized
-- [ ] `docsy-example` example site:
-  - [ ] Update to adopt new alert shortcode and language menu defaults
-  - [ ] Update to adopt new sidebar-root feature
+- [x] Write 0.13.0 release report blog post (structured as a release report
+      similar to 0.9.0 and 0.10.0, with a brief upgrade section referencing
+      0.12.0 for command examples) — completed in
+      `docsy.dev/content/en/blog/2025/0.13.0.md`
+- [x] Blog: cross-link 0.12.0 upgrade guide and 0.13.0 release report —
+      completed
+- [x] Once the blog post is complete, review the changelog 0.13.0 section and
+      ensure that it is minimal and that it links to the appropriate section of
+      the blog post.
+
+Example site:
+
+- [ ] Update to adopt new alert shortcode and language menu defaults
+- [ ] Update to adopt new sidebar-root feature
 
 Verification, testing, and QA:
 
@@ -83,8 +90,10 @@ Verification, testing, and QA:
   - [ ] Review narrow-screen language menu screenshots and guidance
         (#2035/#2001)
 
-## Upgrade Blog
+## Release Report Blog
 
-- Draft outline: [0.13.0 upgrade article](upgrade-blog.md)
-- Flesh out full post with screenshots and code samples once follow-up actions
-  completed.
+- Release report blog post completed:
+  [0.13.0 release report](../../docsy.dev/content/en/blog/2025/0.13.0.md)
+- Structured as a release report focusing on new features and improvements, with
+  a brief upgrade section that references the 0.12.0 upgrade guide for command
+  examples.

@@ -197,7 +197,17 @@ Parameters:
   predefined [alert variants][bs-alert], each of which has their own color.
   These include `primary`, `info`, and `warning`.
 
-#### Alerts and indentation
+As of Docsy 0.13.0, the `alert` shortcode fully supports Markdown content. This
+means that for Markdown shortcode calls like `{{%/* alert */%}}`, your alert
+can:
+
+- Contain calls to other shortcodes (that is, nested shortcode calls).
+- Share link definitions from/to other parts of the page.
+- Be used in lists and other indented contexts.
+
+Examples of these features are provided in the next section.
+
+#### Alerts, indentation, and examples
 
 When the `alert` shortcode is used in a Markdown context that requires
 indentation, such as a list, then the alert _content_ (whether specified as
@@ -206,15 +216,18 @@ text/Markdown or a shortcode) must be indented accordingly. For example:
 ```go-template
 - The following note is part of this list item:
   {{%/* alert title="Celebrate!" color=success */%}}
-  This alert content is properly rendered.
+  This alert content is properly rendered. A Markdown [link definition][]
+  get resolved even if it is defined outside of the alert body.
 
-  > {{%/* param message */%}}
+  > Nested shortcode use here → {{% param message %}}
   {{%/* /alert */%}}
   The first list item continues.
 
 - **Don't put content on the same line** as the opening tag, it breaks rendering:
   {{%/* alert title="Misformed alert!" color=warning */%}} **This content appears outside of
   the list!** {{%/* /alert */%}}
+
+[link definition]: # 'A link definition defined outside the alert body.'
 ```
 
 This renders as:
@@ -222,7 +235,8 @@ This renders as:
 {{< comment >}}
 
 <!--
-IMPORTANT: the following lone opening div tag prevents the mis-formatted alert example below from breaking all the rest of the page. DO NOT remove it.
+IMPORTANT: the following lone opening div tag prevents the mis-formatted alert
+example below from breaking all the rest of the page. DO NOT remove it.
 -->
 
 {{< /comment >}}
@@ -232,9 +246,10 @@ IMPORTANT: the following lone opening div tag prevents the mis-formatted alert e
 <!-- prettier-ignore -->
 - The following note is part of this list item:
   {{% alert title="Celebrate!" color=success %}}
-  This alert content is properly rendered.
+  This alert content is properly rendered. A Markdown [link definition][]
+  get resolved even if it is defined outside of the alert body.
 
-  > {{% param message %}}
+  > Nested shortcode use here → {{% param message %}}
   {{% /alert %}}
   The first list item continues.
 
@@ -243,6 +258,7 @@ IMPORTANT: the following lone opening div tag prevents the mis-formatted alert e
   the list!** {{% /alert %}}
 
 [bs-alert]: https://getbootstrap.com/docs/5.3/components/alerts/
+[link definition]: # 'A link definition defined outside the alert body.'
 
 ### pageinfo
 

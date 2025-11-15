@@ -25,3 +25,5 @@ IgnoreURLs: # list of regexs of paths or URLs to be ignored
   # Too flaky or unnecessary
   - ^https://badges.netlify.com/api
   - ^https://code.jquery.com
+  # TODO: remove once the 0.130.0 is released
+  - ^https://www.docsy.dev/blog/2025/0.13.0/

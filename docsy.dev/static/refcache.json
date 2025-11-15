@@ -987,6 +987,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:40.019418-04:00"
   },
+  "https://github.com/google/docsy/issues/2173": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:07.682451-05:00"
+  },
   "https://github.com/google/docsy/issues/2185": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T12:00:14.199051-05:00"
@@ -999,9 +1003,29 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-12T12:00:13.555016-05:00"
   },
+  "https://github.com/google/docsy/issues/2285": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:05.569278-05:00"
+  },
   "https://github.com/google/docsy/issues/2289": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T21:09:10.18619-05:00"
+  },
+  "https://github.com/google/docsy/issues/2313": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:08.640022-05:00"
+  },
+  "https://github.com/google/docsy/issues/2329": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:03.952757-05:00"
+  },
+  "https://github.com/google/docsy/issues/2331": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:09.421596-05:00"
+  },
+  "https://github.com/google/docsy/issues/2332": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:06.596992-05:00"
   },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 200,
@@ -1603,6 +1627,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:38.5252-04:00"
   },
+  "https://github.com/nvm-sh/nvm": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:03.449456-05:00"
+  },
   "https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating": {
     "StatusCode": 200,
     "LastSeen": "2025-10-06T11:42:12.345Z"
@@ -1798,6 +1826,10 @@
   "https://gohugo.io/content-management/multilingual": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:35.001559-04:00"
+  },
+  "https://gohugo.io/content-management/multilingual/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:03.426895-05:00"
   },
   "https://gohugo.io/content-management/page-bundles/": {
     "StatusCode": 206,
@@ -2179,6 +2211,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-16T09:20:34.701748-04:00"
   },
+  "https://semver.org/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-15T13:13:03.159531-05:00"
+  },
   "https://stackoverflow.com/questions/tagged/docsy": {
     "StatusCode": 200,
     "LastSeen": "2024-11-06T12:03:20.631446-05:00"
@@ -2354,6 +2390,34 @@
   "https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel": {
     "StatusCode": 200,
     "LastSeen": "2025-10-06T11:55:12.345Z"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:03.490464-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#accessibility": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:05.649648-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#active-toc-entry-tracking": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:03.744578-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#alert-shortcode": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:03.662235-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#breaking-changes": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:06.695952-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#language-menu-visibility": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:03.575377-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/#section-sidebar-root": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-15T13:13:03.830801-05:00"
   },
   "https://www.docsy.dev/blog/index.xml": {
     "StatusCode": 206,

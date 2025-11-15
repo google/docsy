@@ -115,17 +115,24 @@ You can find out much more about how Hugo page layouts work in
 [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you
 about how to add content and use each of Docsy's templates.
 
-### Alternative site structure
+### Alternative site structure and docs-only sites {#alternative-site-structure}
 
-As noted above, by default your site has a home page, a docs section under
-`/docs/`, a blog section under `/blog/` and a community section under
-`/community/`. [The type](https://gohugo.io/content-management/types/) of each
-section (which determines the layout it uses) matches its directory name.
+As noted above, Docsy assumes that (by default) your site has:
 
-In some cases, you may want to have a different directory structure, but still
-make use of Docsy's layouts. A common example is for a "docs site", where most
-of the pages (including the home page) use the docs layout, or perhaps you'd
-rather have a `/news/` directory treated with the blog layout.
+- Home page
+- Docs section under `/docs/`
+- Blog section under `/blog/`
+- Community section under `/community/`
+
+The [content type] of each section determines the layout Hugo uses for that
+section.
+
+[content type]: https://gohugo.io/quick-reference/glossary/#content-type
+
+For some project you may want to have a different site structure, but still make
+use of Docsy's layouts. A common example is for a **_docs-only_** site, where
+all of the pages (including the home page) use the `docs` layout. In such a
+site, you might want to have `/news/` pages formatted with the blog layout.
 
 Since Hugo 0.76, this has become practical without copying layouts to your site,
 or having to specify `type: blog` on every single page by making use of
