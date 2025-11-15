@@ -26,7 +26,44 @@ limitations under the License.
           }
 
           var query = $(this).val();
-          var searchPage = '{{ "search/" | absURL }}?q=' + query;
+          //Get current language using multiple methods
+          function getCurrentLanguage() {
+            var htmlLang = document.documentElement.lang;
+            if (htmlLang) return htmlLang;
+
+            // Method 2: Extract from URL path
+            var path = window.location.pathname;
+            var pathParts = path.split('/').filter(Boolean);
+            if (pathParts.length > 0 && pathParts[0].length === 2) {
+
+              return pathParts[0];
+            }
+
+            //Method 3: Meta tag as as fallback
+            var metaLang = document.querySelector('meta[property="og:locale"]');
+            if (metaLang && metaLang.content) return metaLang.content;
+
+            // Fallback to default language from Hugo template
+            return '{{ .Site.Language.Lang}}';
+
+          }
+
+          var currentLang = getCurrentLanguage();
+          var defaultLang = '{{ .Site.Language.Lang }}';
+          var basePath = '{{ "/" | absURL }}';
+
+          //Build the correct search based on language
+
+          var searchPage;
+          if (currentLang && currentLang !== defaultLang) {
+            // For non-default languages: /fr/search?q==query
+            searchPage = basePath + currentLang + '/search?q=' + encodeURIComponent(query);
+
+          } else {
+            // For default language: /search?q=query
+            searchPage = basePath + 'search?q=' + encodeURIComponent(query);
+          }
+
           document.location = searchPage;
 
           return false;
