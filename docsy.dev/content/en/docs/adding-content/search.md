@@ -23,9 +23,9 @@ can choose from:
 
 If you enable any of these search options in your project [configuration file],
 a search box displays in the right of your top navigation bar. By default a
-search box also displays at the top of the section menu in the left navigation
-pane, which you can disable if you prefer, or if you're using a search option
-that only works with the top search box.
+search box also displays at the top of the sidebar in the left navigation pane,
+which you can disable if you prefer, or if you're using a search option that
+only works with the top search box.
 
 {{% alert title="You can only enable a single search option at a time" color=warning %}}
 

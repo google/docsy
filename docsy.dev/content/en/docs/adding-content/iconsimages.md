@@ -56,9 +56,9 @@ tier users. Check Docsy's
 release notes for Docsy's currently included version of FontAwesome.
 
 You can add FontAwesome icons to your
-[top-level menu](/docs/adding-content/navigation/#adding-icons-to-the-top-level-menu),
-[section menu](/docs/adding-content/navigation/#add-icons-to-the-section-menu),
-or anywhere in your text.
+[navbar](/docs/adding-content/navigation/#adding-icons-to-the-navbar),
+[sidenav](/docs/adding-content/navigation/#adding-icons-to-the-sidenav), or
+anywhere in your text.
 
 ## Add your favicons
 

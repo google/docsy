@@ -15,8 +15,8 @@ display an information banner on the archived sites.
 ## Adding a version drop-down menu
 
 If you add some `[params.versions]` in `hugo.toml`/`hugo.yaml`/`hugo.json`, the
-Docsy theme adds a version selector drop down to the top-level menu. You specify
-a URL and a name for each version you would like to add to the menu, as in the
+Docsy theme adds a version selector drop down to the navbar. You specify a URL
+and a name for each version you would like to add to the menu, as in the
 following example:
 
 <!-- prettier-ignore-start -->
