@@ -106,7 +106,7 @@ params:
         icon: fa-brands fa-github
         desc: Discussion and help from your fellow users
       - name: User mailing list
-        url: https://groups.google.com/forum/#!forum/docsy-users
+        url: https://groups.google.com/g/docsy-users
         icon: fa-solid fa-envelope
         desc: Sign up for Docsy announcements
       - name: Twitter
