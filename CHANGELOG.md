@@ -486,13 +486,13 @@ are documented below.
 - **Display logo by default**. Most projects show their logo in the navbar. In
   support of this majority, Docsy now displays a logo by default. For details on
   how to hide the logo (or your brand name), see [Styling your project logo and
-  name].
+  name][].
 - **Upgraded Bootstrap** to v4.6.2 from v4.6.1, resulting in some style changes
   (such as an adjustment in the size of `small`). For details, see [v4.6.2
   release page].
-- **[Upgraded FontAwesome]** to v6 from v5. While many icons were renamed, the
+- **[Upgraded FontAwesome to v6][]** from v5. While many icons were renamed, the
   v5 names still work. For details about icon renames and more, see [What's
-  changed].
+  changed in v6][].
 - **Search-box**: the HTML structure and class names have changed, due to the
   Font Awesome upgrade, for both online and offline search. This may affect your
   project if you have overridden search styling or scripts.
@@ -509,8 +509,9 @@ are documented below.
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
-[upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
-[what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
+[upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
+[what's changed in v6]:
+  https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
 
 ## v0.5.0
 
@@ -579,9 +580,9 @@ For the full list of changes, see the [0.3.0] release page.
 **Breaking changes**:
 
 - Upgrade to
-  [Algolia DocSearch v3](https://docsearch.algolia.com/docs/DocSearch-v3). If
+  [Algolia DocSearch v3](https://docsearch.algolia.com/docs/v3/docsearch). If
   your site uses the deprecated DocSearch v2, you must
-  [update your DocSearch code](https://docsearch.algolia.com/docs/migrating-from-v2).
+  [update your DocSearch code](https://docsearch.algolia.com/docs/v3/migrating-from-v2).
 - (**Edit**) [#1009] inadvertently changed the base [Bootstrap styles for
   cards][bs4cards], as well as the Docsy `highlight` style. For details, see
   [issue #1154]. Release [0.5.1] includes a fix.
