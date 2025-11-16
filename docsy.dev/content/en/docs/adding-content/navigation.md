@@ -171,16 +171,33 @@ You can find out more in the guide to
 
 If your site is [multilingual], Docsy adds a **language selector menu** to the
 navbar. Selecting a language takes the user to the translated version of the
-current page, or the home page for the given language. The menu is visible for
-all screen sizes. By default, the current site language name is shown. On narrow
-displays, this is replaced by the language code.
+current page, or the home page for the given language. The menu is visible in
+the navbar for all screen sizes.
+
+By default, the current site language name is shown. On narrow displays, this is
+replaced by the language code.
 
 You can find out more in [Multi-language support](/docs/language/).
 
-Prior to Docsy 0.13.0, the language selector menu was displayed in the left
-sidebar on narrow screens. As of Docsy 0.13.0, it remains hidden. To restore the
-legacy behavior, set the optional parameter `.ui.sidebar_lang_menu` to `true` in
-your site configuration.
+{{% alert title="Legacy UX" color="info" %}}
+
+Prior to Docsy 0.13.0, the language selector menu was displayed as follows.
+
+| Location     | Default visibility | Visibility on narrow screens |
+| ------------ | ------------------ | ---------------------------- |
+| Navbar       | Visible            | Hidden                       |
+| Left sidebar | Hidden             | Visible                      |
+
+To restore the legacy behavior:
+
+set the optional parameter `.ui.sidebar_lang_menu` to `true` in your site
+configuration.
+
+- In the left sidebar on narrow screens. As of Docsy 0.13.0, it remains hidden.
+  To restore the legacy behavior, set the optional parameter
+  `.ui.sidebar_lang_menu` to `true` in your site configuration.
+
+{{% /alert %}}
 
 [multilingual]: https://gohugo.io/content-management/multilingual/
 
@@ -531,31 +548,16 @@ options][] and the discussion in [Bootstrap issue #34958][bs-34958].
 
 {{% /alert %}}
 
-#### <i class="fa-solid fa-exclamation-triangle fa-lg text-warning px-1"></i> Current ScrollSpy limitations
+{{% alert title="<i class='fa-solid fa-exclamation-triangle fa-lg px-1'></i> Current ScrollSpy bug" color=warning %}}
 
-##### Headings starting with numbers
+As of Docsy 0.13.0, ScrollSpy fails if a page contains heading IDs that start
+with a digit. As a result, active TOC entry tracking will not work for that
+page. For details, see [ScrollSpy bug][].
 
-ScrollSpy will **throw an exception** if a heading ID starts with a digit, which
-usually happens because the heading text itself starts with a number.
+[ScrollSpy bug]: /blog/2025/0.13.0/#scrollspy-bug
 
-If you encounter this issue, you can try one of the following workarounds:
+{{% /alert %}}
 
-- Explicitly set the heading ID using the attribute syntax `{#id}` to avoid the
-  leading digit. For example, prefix the ID with a hyphen:
-
-  ```markdown
-  # 1. Introduction {#-1-introduction}
-  ```
-
-- Change the heading text so that it doesn't start with a number.
-
-- Disable ScrollSpy for affected pages by setting `ui.scrollSpy.disable: true`
-  in the page front matter.
-
-For the technical details behind this limitation, see [TOC scrolling results in
-runtime error when heading ID starts with a digit (#2329)][#2329].
-
-[#2329]: https://github.com/google/docsy/issues/2329
 [cascade]: https://gohugo.io/content-management/front-matter/#cascade-1
 [IntersectionObserver API]:
   https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver

@@ -1,12 +1,40 @@
+{{/*
+
+  FIXME: This is a temporary hack to adjust the heading IDs until Bootstrap fixes
+  ScrollSpy. For details, see:
+
+  - https://www.docsy.dev/blog/2025/0.13.0
+  - https://github.com/google/docsy/issues/2329
+
+  cSpell:ignore notoc
+*/ -}}
+
+{{ $scrollSpyEnabled := not (.Param "ui.scrollSpy.disable") -}}
+{{ $safeIds := .Param "ui.scrollSpy.safeIds" | default $scrollSpyEnabled -}}
+
 {{ if not .Params.notoc -}}
+  {{ $page := . }}
   {{ with .TableOfContents -}}
     {{ if ne . `<nav id="TableOfContents"></nav>` -}}
-      <div class="td-toc">
+      <div class="td-toc" data-proofer-ignore>
         <div class="td-toc__title">
           <span class="td-toc__title__text">On this page</span>
           <a class="td-toc__title__link" title="Top of page" href="#"></a>
         </div>
-        {{ . }}
+        {{ $toc := . -}}
+        {{ if $safeIds -}}
+          {{/* Adjust any href values that start with a digit by adding a prefixing */ -}}
+          {{ $toc = replaceRE `(href="#)([0-9])` "${1}_toc_id_patch_$2" $toc -}}
+        {{ else if $scrollSpyEnabled -}}
+          {{ with findRE `href="#[0-9][^"]*"` . -}}
+            {{ $msg := slice
+              (printf "%s: TOC contains href that may cause ScrollSpy to fail: %s." $page.File.Filename .)
+              "For details, see https://www.docsy.dev/blog/2025/0.13.0/."
+            -}}
+            {{ warnidf "scrollspy-toc-href" "[Docsy] %s" (delimit $msg " ") -}}
+          {{ end -}}
+        {{ end -}}
+        {{ $toc | safeHTML }}
       </div>
     {{ end -}}
   {{ end -}}

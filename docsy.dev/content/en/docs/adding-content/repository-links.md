@@ -403,7 +403,7 @@ for your project.
 
 Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 
-[v0.9.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#090
+[v0.9.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#v090
 
 {{% /alert %}}
 
