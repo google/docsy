@@ -174,7 +174,7 @@ documentation sites. Docsy supports **Algolia DocSearch v3**.
 Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you
 are an existing Algolia DocSearch v2 user and want to use the latest Docsy
 version, follow the
-[migration instructions](https://docsearch.algolia.com/docs/migrating-from-v2)
+[migration instructions](https://docsearch.algolia.com/docs/v3/migrating-from-v2)
 in the DocSearch documentation to update your DocSearch code snippet.
 
 {{% /alert %}}
@@ -232,7 +232,7 @@ params:
 <!-- prettier-ignore-end -->
 
 To learn more about Algolia DocSearch V3, see
-[Getting started](https://docsearch.algolia.com/docs/DocSearch-v3).
+[Getting started](https://docsearch.algolia.com/docs/v3/docsearch).
 
 When you've completed these steps, Algolia search should be enabled on your
 site. Search results are displayed as a pop-up, so you don't need to add any
