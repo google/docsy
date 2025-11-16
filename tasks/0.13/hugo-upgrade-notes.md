@@ -119,9 +119,12 @@ The `--omitEmpty` flag on the `chromastyles` command is deprecated. A new
 
 ## Summary for Docsy clients
 
-The main breaking change to be aware of is the file mount validation in
-v0.152.0, which was fixed in v0.152.2. If you use file mounts (especially for
-`node_modules`), ensure you're using v0.152.2 or later.
+The main breaking change to be aware of is the file mount validation in v0.152.0
+([#2347]), which was fixed in v0.152.2. Docsy 0.13.0 does not work with Hugo
+0.152.0 or 0.152.1; if you use file mounts (especially for `node_modules`),
+ensure you're using Hugo v0.152.2 or later.
+
+[#2347]: https://github.com/google/docsy/issues/2347
 
 The TOC rendering improvements in v0.149.0 may cause minor visual differences
 but should improve consistency.

@@ -121,7 +121,7 @@ As of Docsy version [0.8.0], feedback will be enabled whether
 `site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
 case where analytics is configured outside of Docsy.
 
-[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#v080
 
 {{% /alert %}}
 
@@ -183,7 +183,7 @@ Page feedback is reported to Google Analytics through [events].
 As of Docsy version [0.8.0], page feedback is reported as custom `page_helpful`
 events, rather than `click` events.
 
-[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#080
+[0.8.0]: https://github.com/google/docsy/blob/main/CHANGELOG.md/#v080
 
 {{% /alert %}}
 

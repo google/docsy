@@ -225,7 +225,7 @@ change to a ​​`media-breakpoint-down()` argument, as discussed earlier.
 During the migration effort we seized the opportunity to do some long overdue
 Docsy house cleaning. For details concerning both breaking and non-breaking
 Docsy-specific changes, consult the
-[changelog](https://github.com/google/docsy/blob/main/CHANGELOG.md#070). In
+[changelog](https://github.com/google/docsy/blob/main/CHANGELOG.md#v070). In
 particular, one non-breaking but important change to be aware of is:
 [[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
 
@@ -240,7 +240,7 @@ build of the Docsy User Guide: the
 After such a smoke test, we recommend systematically walking through the
 Bootstrap [migration page](https://getbootstrap.com/docs/5.2/migration/) as
 described above, and the Docsy
-[changelog](https://github.com/google/docsy/blob/main/CHANGELOG.md#070). I used
+[changelog](https://github.com/google/docsy/blob/main/CHANGELOG.md#v070). I used
 this approach for [opentelemetry.io](https://opentelemetry.io/), which was the
 first Docsy-based project to be upgraded with a pre-release of Bootstrap-5-based
 Docsy. The upgrade went

@@ -84,6 +84,9 @@ params:
     sidebar_menu_foldable: true
     sidebar_search_disable: false
     sidebar_root_enabled: true
+    scrollSpy:
+      # disable: true
+      # safeIds: false
     feedback:
       enable: true
       'yes': >-

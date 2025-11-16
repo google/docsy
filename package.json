@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.13.0-dev+48-g4d72b4b",
+  "version": "0.13.0-dev+49-gada99ce",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -31,8 +31,9 @@
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix-and-test": "echo 'RUNNING FIX AND TESTS...'; npm run fix && npm run test:website",
     "fix:format": "npm run _check:format -- --write && npm run cd:docsy.dev fix:format",
+    "fix:markdown": "npm run check:markdown -- --fix",
     "fix:version": "npm run set:package-version -- --id $(scripts/get-build-id.sh)",
-    "fix": "npm run fix:format && npm run fix:version && npm run cd:docsy.dev fix",
+    "fix": "npm run fix:format && npm run fix:markdown && npm run fix:version && npm run cd:docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "postinstall": "npm run _mkdir:hugo-mod",
     "serve": "npm run _cd:docsy.dev -- npm run serve",

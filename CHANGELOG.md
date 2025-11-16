@@ -50,7 +50,7 @@ See [semver].
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
-## 0.13.0
+## v0.13.0
 
 > **UNRELEASED: this planned version is still under development**
 
@@ -61,15 +61,16 @@ See [semver].
 
 **Breaking changes**:
 
-- **Language menu**: Visibility changed. See [Language menu
-  visibility][0.13.0-blog-lang-menu] in the blog post.
-- **Alert shortcode**: Content processing changed. See [Alert shortcode
-  improvements][0.13.0-blog-alert] in the blog post.
+- **Language menu**: changed visibility, see [Language menu
+  visibility][0.13.0-blog-lang-menu] ([#2303]).
+- **Alert shortcode**: Markdown content processing changed, see [Alert shortcode
+  improvements][0.13.0-blog-alert] ([#941]).
 
 **New**:
 
-- [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy.
-- [Section sidebar root][0.13.0-blog-sidebar] feature.
+- [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy
+  ([#2366]).
+- [Section sidebar root][0.13.0-blog-sidebar] feature ([#2364]).
 
 **Other changes**:
 
@@ -85,9 +86,13 @@ See [semver].
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2173]: https://github.com/google/docsy/issues/2173
 [#2285]: https://github.com/google/docsy/issues/2285
+[#2303]: https://github.com/google/docsy/pull/2303
 [#2313]: https://github.com/google/docsy/issues/2313
 [#2331]: https://github.com/google/docsy/issues/2331
 [#2332]: https://github.com/google/docsy/issues/2332
+[#2364]: https://github.com/google/docsy/pull/2364
+[#2366]: https://github.com/google/docsy/pull/2366
+[#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
 [0.13.0-blog]: https://www.docsy.dev/blog/2025/0.13.0/
 [0.13.0-blog-lang-menu]:
@@ -102,7 +107,7 @@ See [semver].
 [0.13.0-blog-fouc]: https://www.docsy.dev/blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: https://www.docsy.dev/blog/2025/0.13.0/#breaking-changes
 
-## 0.12.0
+## v0.12.0
 
 For the full list of changes, see the [0.12.0] release page.
 
@@ -169,7 +174,7 @@ For the full list of changes, see the [0.12.0] release page.
 [_td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
 
-## 0.11.0
+## v0.11.0
 
 For the full list of changes, see the [0.11.0] release page.
 
@@ -190,7 +195,7 @@ For the full list of changes, see the [0.11.0] release page.
   https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options
 [rtl]: https://www.docsy.dev/docs/language/#right-to-left-languages
 
-## 0.10.0
+## v0.10.0
 
 For an introduction to this release, see the [0.10.0 release report]. For the
 full list of changes, see the [0.10.0] release page.
@@ -200,7 +205,7 @@ dark-mode support][dark-mode].
 
 **Breaking changes**:
 
-- Removes shortcode `card-code` that was [deprecated in 0.7.0](#070); use
+- Removes shortcode `card-code` that was [deprecated in 0.7.0](#v070); use
   shortcode `card` with named parameter `code=true` instead.
 - The following SCSS variables are inlined in favor of dark-mode compatible
   styling: `$border-color`, `$td-sidebar-tree-root-color`,
@@ -218,13 +223,13 @@ dark-mode support][dark-mode].
 [dark-mode]:
   https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support
 
-## 0.9.1
+## v0.9.1
 
 Patch release. For details, see [0.9.1].
 
 [0.9.1]: https://github.com/google/docsy/releases/v0.9.1
 
-## 0.9.0
+## v0.9.0
 
 For an introduction and commentary, see the [0.9.0 release report]. For the full
 list of commits, see the [0.9.0] release page. The most significant changes of
@@ -287,7 +292,7 @@ For details concerning all footer changes, see [#1818].
 [union file system]:
   https://gohugo.io/getting-started/directory-structure/#union-file-system
 
-## 0.8.0
+## v0.8.0
 
 For the full list of changes, see the [0.8.0] release page.
 
@@ -325,7 +330,7 @@ For the full list of changes, see the [0.8.0] release page.
 [User feedback]:
   https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
 
-## 0.7.2
+## v0.7.2
 
 For the full list of changes, see the [0.7.2] release page. We mention some
 noteworthy changes here:
@@ -354,7 +359,7 @@ noteworthy changes here:
 [Tabbed panes]:
   https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
 
-## 0.7.1
+## v0.7.1
 
 For the full list of changes, see the [0.7.1] release page.
 
@@ -369,7 +374,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 [#1579]: https://github.com/google/docsy/issues/1579
 [0.7.1]: https://github.com/google/docsy/releases/v0.7.1
 
-## 0.7.0
+## v0.7.0
 
 For the full list of changes, see the [0.7.0] release page.
 
@@ -435,7 +440,7 @@ For the full list of changes, see the [0.7.0] release page.
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 
-## 0.6.0
+## v0.6.0
 
 For the full list of changes, see the [0.6.0] release page.
 
@@ -456,7 +461,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0
 [bs-announcement]: https://github.com/google/docsy/discussions/1308
 
-## 0.5.1
+## v0.5.1
 
 For the full list of changes, see the [0.5.1] release page. **BREAKING CHANGES**
 are documented below.
@@ -507,11 +512,11 @@ are documented below.
 [upgraded fontawesome]: https://fontawesome.com/docs/web/setup/upgrade/
 [what's changed]: https://fontawesome.com/docs/web/setup/upgrade/whats-changed
 
-## 0.5.0
+## v0.5.0
 
 Unpublished.
 
-## 0.4.0
+## v0.4.0
 
 For the full list of changes, see the [0.4.0] release page. Potential **BREAKING
 CHANGES** are documented below.
@@ -567,7 +572,7 @@ Proceed as usual to build or serve your site.
 [prepare]:
   https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
 
-## 0.3.0
+## v0.3.0
 
 For the full list of changes, see the [0.3.0] release page.
 
@@ -586,7 +591,7 @@ For the full list of changes, see the [0.3.0] release page.
 [#1009]: https://github.com/google/docsy/pull/1009
 [issue #1154]: https://github.com/google/docsy/issues/1154
 
-## 0.2.0
+## v0.2.0
 
 For the full list of changes, see the [0.2.0] release page.
 
@@ -608,7 +613,7 @@ For the full list of changes, see the [0.2.0] release page.
 <!-- ENTRY TEMPLATE ------------------------------------------------------
 
 ```
-## 0.X.Y
+## v0.X.Y
 
 > **UNRELEASED: this planned version is still under development**
 

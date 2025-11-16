@@ -129,7 +129,7 @@ repo.
       ## Release summary
 
       - [Release report](https://www.docsy.dev/blog/2024/0.X.Y/)
-      - [CHANGELOG](https://github.com/google/docsy/blob/main/CHANGELOG.md#0XY)
+      - [CHANGELOG](https://github.com/google/docsy/blob/main/CHANGELOG.md#v0XY)
       ```
 
     - Select **Create a discussion for this release**.

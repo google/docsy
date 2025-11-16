@@ -2,9 +2,9 @@
 # cSpell:ignore docsy
 
 ignores:
-  - "node_modules/**"
-  - "public/**"
-  - "docsy.dev/public/**"
+  - node_modules/**
+  - public/**
+  - docsy.dev/public/**
 
 default: true
 
