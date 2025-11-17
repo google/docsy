@@ -10,7 +10,7 @@
 
 // The following value makes sense for the Bootstrap base theme. Projects will
 // likely need to adjust this.
-$lighten-amount-for-dark-color-variant: 28% !default;
+$lighten-amount-for-dark-color-variant: 22% !default;
 
 $primary-dark: lighten($primary, $lighten-amount-for-dark-color-variant) !default;
 // $secondary-dark: lighten($secondary, $lighten-amount-for-dark-color-variant) !default;
