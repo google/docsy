@@ -88,14 +88,15 @@
       color: var(--bs-secondary-color);
 
       &.active {
-        color: var(--bs-primary);
+        color: var(--bs-primary-text-emphasis);
         border-left-color: var(--bs-primary);
         background-color: var(--bs-tertiary-bg);
       }
 
       &:focus,
       &:hover {
-        color: var(--bs-nav-link-disabled-color);
+        // Possible alternative color:
+        // color: var(--bs-nav-link-disabled-color);
         background-color: var(--bs-secondary-bg-subtle);
       }
     }
