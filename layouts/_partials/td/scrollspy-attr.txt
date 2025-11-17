@@ -5,8 +5,6 @@ always exist, otherwise ScrollSpy will scan the full page body, and this can
 cause problems -- see
 https://github.com/google/docsy/issues/2328#issuecomment-3538869206.
 
-`data-scrollspy-attr-cache-base` is only a diagnostic.
-
 */ -}}
 
 {{ if not (.Param "ui.scrollSpy.disable") -}}
@@ -17,7 +15,6 @@ https://github.com/google/docsy/issues/2328#issuecomment-3538869206.
       ` data-bs-spy="scroll"`
       ` data-bs-target=".td-toc"`
       (printf ` data-bs-root-margin="%s"` $rootMargin)
-      (printf ` data-scrollspy-attr-cache-base="%s"` .Path)
   -}}
   {{ delimit $attr "" -}}
 {{ end -}}

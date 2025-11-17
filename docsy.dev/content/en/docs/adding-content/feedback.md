@@ -4,6 +4,7 @@ date: 2019-06-05
 description: >-
   Add Google Analytics tracking to your site, collect user feedback and learn
   about the page description meta tag.
+cSpell:ignore: fabform pageviews frontmatter
 weight: 8
 ---
 
@@ -126,32 +127,42 @@ case where analytics is configured outside of Docsy.
 {{% /alert %}}
 
 <!-- prettier-ignore-start -->
+
 1.  Open your project's Hugo configuration file.
 2.  Set the response text that users see after clicking **Yes** or **No**.
 
-    {{< tabpane >}}
-    {{< tab header="Configuration file:" disabled=true />}}
+    {{< tabpane text=true persist=lang >}}
+    {{% tab header="Configuration file:" disabled=true /%}}
 
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.ui.feedback]
 enable = true
 yes = 'Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
 no = 'Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.'
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   ui:
     feedback:
       enable: true
       'yes': >-
-        Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">
-        tell us how we can improve</a>.
+        Glad to hear it! Please <a
+        href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
+        can improve</a>.
       'no': >-
-        Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">
-        tell us how we can improve</a>.
+        Sorry to hear that. Please <a
+        href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
+        can improve</a>.
+```
 
-{{< /tab >}}{{< tab header="hugo.json" lang="json" >}}
+{{%/tab %}} {{% tab header="hugo.json" lang="json" %}}
 
+```json
 {
   "params": {
     "ui": {
@@ -163,10 +174,9 @@ params:
     }
   }
 }
+```
 
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+{{% /tab %}} {{< /tabpane >}}
 
 3.  Save the edits to your configuration file.
 
@@ -207,46 +217,59 @@ visualize individual data points (per page) along with average values.
 Add the parameter `hide_feedback` to the page's front matter and set it to
 `true`.
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
+{{< tabpane text=true >}} {{< tab header="Front matter:" disabled=true />}}
+{{% tab header=toml %}}
+
+```toml
 +++
 hide_feedback = true
 +++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header=yaml %}}
+
+```yaml
 ---
 hide_feedback: true
 ---
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header=json %}}
+
+```json
 {
-    "hide_feedback": true
+  "hide_feedback": true
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 ### Disable feedback on all pages
 
 Set `params.ui.feedback.enable` to `false` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.ui.feedback]
 enable = false
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   ui:
     feedback:
       enable: false
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "ui": {
@@ -256,9 +279,9 @@ params:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{< /tab >}} {{< /tabpane >}}
 
 ## Add a contact form with Fabform
 
@@ -274,10 +297,6 @@ form that collects the user's email address to your site source:
   <button type="submit">Submit</button>
 </form>
 ```
-
-For more details, see
-[Add a Hugo contact form](https://fabform.io/a/hugo-contact-form) in the Fabform
-documentation.
 
 ## Search Engine Optimization meta tags
 
