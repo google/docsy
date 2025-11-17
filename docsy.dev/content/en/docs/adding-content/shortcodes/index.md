@@ -451,17 +451,18 @@ inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
 {{% alert title="Warning" color="warning" %}}
 
 You can only embed external content from a server when its `X-Frame-Options` is
-not set or if it specifically allows embedding for your site. For details,
-see [X-Frame-Options]
+not set or if it specifically allows embedding for your site. For details, see
+[X-Frame-Options]
 
 There are several tools you can use to check if a website can be embedded via
 iframe, such as [domsignal.com/x-frame-options-test]. Be aware that when this
-test says "Couldn’t find the X-Frame-Options header in the response headers." you
-**CAN** embed it, but when the test says "Great! X-Frame-Options header was
+test says "Couldn’t find the X-Frame-Options header in the response headers."
+you **CAN** embed it, but when the test says "Great! X-Frame-Options header was
 found in the HTTP response headers as highlighted below.", you **CANNOT** -
 unless it has been explicitly enabled for your site.
 
-[X-Frame-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+[X-Frame-Options]:
+  https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 [domsignal.com/x-frame-options-test]: https://domsignal.com/x-frame-options-test
 
 {{% /alert %}}
