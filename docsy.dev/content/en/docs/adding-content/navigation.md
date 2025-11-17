@@ -6,7 +6,7 @@ description: Customize site navigation for your Docsy site.
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including
-site menus, sidenavs, and page table of contents (TOC). This page shows you how
+site menus, side navs, and page table of contents (TOC). This page shows you how
 they work and how to configure and customize them to meet your needs.
 
 ## Site navbar
@@ -233,10 +233,10 @@ You can find a complete list of icons to use in the
 [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
 includes the free FontAwesome icons by default.
 
-## Sidenav section navigation {#sidenav}
+## Side navigation {#side-nav}
 
-A sidenav[^formerly_section_menu] for section navigation is shown in the left
-pane of the `docs` and `blog` pages. It is automatically built from the
+A side nav[^formerly_section_menu] for section navigation is shown in the left
+panel of the `docs` and `blog` pages. It is automatically built from the
 `content` tree. Like the navbar, it is ordered by page or section index `weight`
 (or by page creation `date` if `weight` is not set), with the page or index's
 `Title`, or `linkTitle` if different, as its link title in the menu. If a
@@ -331,9 +331,9 @@ description: >
 
 {{% /tab %}} {{< /tabpane >}}
 
-### Sidenav options
+### Side-nav options
 
-By default, the sidenav shows the current section fully expanded all the way
+By default, the side nav shows the current section fully expanded all the way
 down. This may make the left nav too long and difficult to scan for bigger
 sites. Try setting site parameter `ui.sidebar_menu_compact = true` in
 `hugo.toml`.
@@ -352,10 +352,10 @@ a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true`
 in `hugo.toml`. The foldable menu lets users expand and collapse menu sections
 by toggling arrow icons beside the section parents in the menu.
 
-On large sites (default: > 2000 pages) the sidenav is not generated for each
+On large sites (default: > 2000 pages) the side nav is not generated for each
 page, but cached for the whole section. The HTML classes for marking the active
 menu item (and menu path) are then set using JS. You can adjust the limit for
-activating the cached sidenav with the optional parameter
+activating the cached side nav with the optional parameter
 `.ui.sidebar_cache_limit`.
 
 The tabbed pane below lists the menu section options you can define in your
@@ -401,9 +401,9 @@ params:
 
 {{% /tab %}} {{< /tabpane >}}
 
-### Adding icons to the sidenav
+### Adding icons to the side nav
 
-You can add icons to the sidenav in the sidebar by setting the `icon` parameter
+You can add icons to the side nav in the sidebar by setting the `icon` parameter
 in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
 
 You can find a complete list of icons to use in the
@@ -414,9 +414,9 @@ Out of the box, if you want to use icons, you should define icons for all items
 on the same menu level in order to ensure an appropriate look. If the icons are
 used in a different way, individual CSS adjustments are likely necessary.
 
-### Adding manual links to the sidenav
+### Adding manual links to the side nav
 
-By default the sidenav is entirely generated from your section's pages. If you
+By default the side nav is entirely generated from your section's pages. If you
 want to add a manual link to this menu, such as a link to an external site or a
 page in a different section of your site, you can do this by creating a
 _placeholder page file_ in the doc hierarchy with the appropriate weight and
@@ -426,7 +426,7 @@ details.
 To create a placeholder page, create a page file as usual in the directory where
 you want the link to show up in the menu, and add a `manualLink` parameter to
 its metadata. If a page has `manualLink` in its metadata, Docsy generates a link
-for it in the sidenav for this page and in the section index (the list of the
+for it in the side nav for this page and in the section index (the list of the
 child pages of a section on a landing page - see
 [description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)),
 but the link destination is replaced by the value of `manualLink`. The link text

@@ -57,7 +57,7 @@ release notes for Docsy's currently included version of FontAwesome.
 
 You can add FontAwesome icons to your
 [navbar](/docs/adding-content/navigation/#adding-icons-to-the-navbar),
-[sidenav](/docs/adding-content/navigation/#adding-icons-to-the-sidenav), or
+[side nav](/docs/adding-content/navigation/#adding-icons-to-the-side-nav), or
 anywhere in your text.
 
 ## Add your favicons
