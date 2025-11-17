@@ -90,12 +90,13 @@
       &.active {
         color: var(--bs-primary);
         border-left-color: var(--bs-primary);
-        background-color: var(--bs-secondary-bg-subtle);
+        background-color: var(--bs-tertiary-bg);
       }
 
       &:focus,
       &:hover {
-        color: initial;
+        color: var(--bs-nav-link-disabled-color);
+        background-color: var(--bs-secondary-bg-subtle);
       }
     }
 
