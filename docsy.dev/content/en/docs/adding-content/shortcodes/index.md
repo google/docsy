@@ -11,7 +11,7 @@ resources:
 params:
   message: Hello, world!
 # prettier-ignore
-cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile buildcondition
+cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal
 ---
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
@@ -448,18 +448,23 @@ inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
 | class         |                                                                                                       | Optional parameter to set the classes of the iframe.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | sub           | Your browser cannot display embedded frames. You can access the embedded page via the following link: | The text displayed (in addition to the embedded URL) if the user's browser can't display embedded frames.                                                                                                                                                                                                                                                                                                                                                                                                |
 
-{{% alert title="Warning" color="warning" %}} You can only embed external
-content from a server when its `X-Frame-Options` is not set or if it
-specifically allows embedding for your site. See
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options for
-details.
+{{% alert title="Warning" color="warning" %}}
+
+You can only embed external content from a server when its `X-Frame-Options` is
+not set or if it specifically allows embedding for your site. For details,
+see [X-Frame-Options]
 
 There are several tools you can use to check if a website can be embedded via
-iframe - e.g.: https://gf.dev/x-frame-options-test. Be aware that when this test
-says "Couldn’t find the X-Frame-Options header in the response headers." you
+iframe, such as [domsignal.com/x-frame-options-test]. Be aware that when this
+test says "Couldn’t find the X-Frame-Options header in the response headers." you
 **CAN** embed it, but when the test says "Great! X-Frame-Options header was
 found in the HTTP response headers as highlighted below.", you **CANNOT** -
-unless it has been explicitly enabled for your site. {{% /alert %}}
+unless it has been explicitly enabled for your site.
+
+[X-Frame-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
+[domsignal.com/x-frame-options-test]: https://domsignal.com/x-frame-options-test
+
+{{% /alert %}}
 
 ## Tabbed panes
 
