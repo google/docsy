@@ -4,7 +4,7 @@ date: 2017-01-05
 weight: 2
 description: Customize colors, fonts, code highlighting, and more for your site.
 # prettier-ignore
-cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark wordmark
+cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark wordmark FOUC
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -110,20 +110,43 @@ To learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
 Docsy enables **light and dark** color modes through Bootstrap's [color modes][]
 feature.
 
-Adjust dark-mode support as follows:
+You can adjust dark-mode support as follows:
 
-- **Dark mode**: Dark mode support is **enabled by default**. Docsy includes the
-  necessary CSS so your site automatically switches between light and dark modes
-  based on the user's system preference. To disable dark mode entirely, see
-  [Disable dark mode](#disable-dark-mode).
+- **Docsy ships with dark mode support**, offering a good user experience (UX)
+  for site visitors through the following features:
+  - Docsy includes **complete CSS** styles for (both light mode and) dark mode
+    **by default**, so your site can automatically switch between light and dark
+    modes based on system settings or user preference.
 
-- **Light/dark-mode menu**: For a better user experience, enable Docsy's
+  - But, if you prefer, you can **disable** dark mode entirely, see
+    [How to disable dark mode](#how-to-disable-dark-mode).
+
+  - **No dark-mode flashes**: By default, Docsy adds page header content (like
+    meta tags, inline styles, and an early-loading script) to avoid or generally
+    prevent _Flashes Of Unstyled Content_ ([FOUC]) when pages load.[^FOUC-alt]
+
+    [^FOUC-alt]:
+        Also referred to as "Flash of incorrect theme" and, humorously, [_Flash
+        of inAccurate coloR Theme_][FART] (FART).
+
+    [FART]: https://css-tricks.com/flash-of-inaccurate-color-theme-fart/
+
+- **Light/dark-mode menu**: Enable Docsy's
   [light/dark-mode menu](#lightdark-mode-menu) in the [navbar](#navbar) to allow
-  your site users to switch between light and dark modes, or create your own.
+  your site users to switch between light and dark modes. Or create your own
+  custom menu.
 
-- **Dark-mode theme customization**: For extra light/dark mode styling and
-  advanced customization, see
-  [Dark-mode theme customization](#dark-mode-theme-customization).
+- **Dark-mode theme customization**: Docsy provides extra dark-mode styling that
+  you can selectively include, such as:
+  - **Code syntax highlighting**: if your site uses [Chroma for code
+    highlighting][], see [Light/dark code styles][] to learn how to support
+    [syntax highlighting][] in dark mode for your favorite code highlighting
+    themes.
+
+  - **Color-contrast adjustments**: if your site has custom theme colors, you
+    will probably need to selectively tune your dark-mode theme colors to ensure
+    that the have good color-contrast. Learn
+    [how to pick colors with good color-contrast](#how-to-pick-colors-with-good-color-contrast).
 
 {{% alert title="Terminology note" color=info %}}
 
@@ -136,32 +159,34 @@ secondary, success, etc.) defined in SCSS and used by components and utilities.
 
 {{% /alert %}}
 
-#### Disable dark mode
+[FOUC]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
 
-Bootstrap includes support for light (default) and dark [color modes][] by
-default, and so does Docsy. To [disable dark mode][] entirely, add the following
-variable in your project's [`_variables_project.scss`]:
+#### How to disable dark mode
 
-```scss
-$enable-dark-mode: false;
-```
+Docsy, like Bootstrap, ships with CSS support for light and dark [color modes][]
+by default.
+
+To [disable dark mode][] entirely:
+
+- Set `params.ui.showLightDarkModeMenu` to `false` in your [site
+  configuration][].
+
+- Add the following variable in your project's [`_variables_project.scss`]:
+
+  ```scss
+  $enable-dark-mode: false;
+  ```
 
 [disable dark mode]:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
+[site configuration]: https://gohugo.io/configuration/introduction/
 
-#### Dark-mode theme customization
-
-Docsy provides the following basic dark-mode theme customizations:
-
-- [Light/dark code styles][] as used in code [syntax highlighting][], provided
-  your project uses [Chroma for code highlighting][].
-- An example of dark-mode theme customization in the
-  [_color-adjustments-dark.scss] file.
+#### How to pick colors with good color-contrast
 
 Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
 provides [_color-adjustments-dark.scss] as an example of theme color
-customization by adjusting Bootstrap's default [primary color][bs-theme-colors]
-so that it has better contrast in dark mode.
+customization by illustrating color-contrast adjustments for Bootstrap's default
+[primary color][bs-theme-colors]
 
 [bs-theme-colors]:
   https://getbootstrap.com/docs/5.3/customize/color/#theme-colors
@@ -459,24 +484,31 @@ background. The menu also includes an "auto" option that follows the user's
 system preference.
 
 To enable the display of a light/[dark mode] menu in the navbar, set
-`params.ui.showLightDarkModeMenu` to `true` in your project's configuration
-file. The dropdown menu appears at the right, immediately before the [search
-box], if present.
+`params.ui.showLightDarkModeMenu` to `true` in your [site configuration][]. The
+dropdown menu appears at the right, immediately before the [search box], if
+present.
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params]
 [params.ui]
 showLightDarkModeMenu = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   ui:
     showLightDarkModeMenu: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "ui": {
@@ -484,9 +516,29 @@ params:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
+
+{{% alert title="<i class='fa-solid fa-exclamation-triangle pe-1'></i> Bring your own light/dark mode menu <span class='badge text-bg-warning fs-6 float-end'>EXPERIMENTAL</span>" color=warning %}}
+
+If you would like to use your own light/dark mode menu implementation instead of
+Docsy's default implementation:
+
+1. Set `params.ui.showLightDarkModeMenu` to `"enable-only (experimental)"`. This
+   will enable base dark-mode functionality (such as full CSS, no-flash support)
+   without Docsy's menu.
+
+2. Add your menu code to in the [layouts/_partials/theme-toggler.html] partial
+   file, thus overriding Docsy's default implementation.
+
+[layouts/_partials/theme-toggler.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html
+
+This feature is experimental. It may be removed and/or changed in
+backwards-incompatible ways in a future releases.
+
+{{% /alert %}}
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [search box]: /docs/adding-content/search/
