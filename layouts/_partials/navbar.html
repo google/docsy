@@ -57,7 +57,8 @@
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}
-      {{ if .Site.Params.ui.showLightDarkModeMenu -}}
+      {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+      {{ if $darkMode.showMenu -}}
       <li class="nav-item td-navbar__light-dark-menu">
         {{ partial "theme-toggler" . }}
       </li>
