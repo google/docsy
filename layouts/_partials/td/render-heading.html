@@ -1,42 +1,5 @@
-{{/*
-
-FIXME: This is a temporary hack to adjust the heading IDs until Bootstrap fixes
-ScrollSpy. For details, see https://github.com/google/docsy/issues/2329.
-
-*/ -}}
-
-{{ $id := .Anchor -}}
-{{ $scrollSpyEnabled := not (site.Param "ui.scrollSpy.disable") -}}
-{{ $safeIds := site.Param "ui.scrollSpy.safeIds" | default $scrollSpyEnabled -}}
-{{ if $scrollSpyEnabled -}}
-  {{/* Rough 'CSS-safe ID' check:
-      - must start with a letter or underscore
-      - then only letters, digits, underscore, or dash
-  */ -}}
-  {{ if not (findRE `^[A-Za-z_][A-Za-z0-9_-]*$` $id) -}}
-    {{ $extraInfo := "" -}}
-    {{ if and $safeIds (findRE `^[0-9]` $id) -}}
-      {{ $id = add "_toc_id_patch_" $id -}}
-      {{ $extraInfo = printf "The ID was modified to: %q." $id -}}
-    {{ else if not $safeIds -}}
-      {{ $extraInfo = "Active TOC entry tracking may not work for this page." -}}
-    {{ end -}}
-    {{ $msg := slice
-      (printf "heading ID %q on page %q is not a valid CSS-selector." .Anchor .Page.RelPermalink)
-      $extraInfo
-      "For details, see https://www.docsy.dev/blog/2025/0.13.0/."
-    -}}
-    {{/* Disable for now. Warning is printed by toc.html.
-      warnidf "scrollspy-heading-id" "[Docsy] %s" (delimit $msg " ")
-    */ -}}
-  {{ end -}}
-{{ end -}}
-
 <h{{ .Level }}
   {{- range $key, $value := .Attributes -}}
-    {{ if and $safeIds (eq $key "id") -}}
-      {{ $value = $id -}}
-    {{ end -}}
     {{ printf " %s=%q" $key (string $value) | safeHTMLAttr -}}
   {{ end -}}
 >
