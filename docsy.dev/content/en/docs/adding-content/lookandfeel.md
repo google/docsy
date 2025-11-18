@@ -105,32 +105,102 @@ To learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
 [variable defaults]:
   https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
-### Light/dark color themes
+### Light/dark color modes
 
-Docsy 0.10.0 supports light and [dark mode][] color themes. To allow your
-website users to choose light/dark modes, **enable the Docsy [light/dark
-menu][]** or create your own custom theme selector.
+Docsy enables **light and dark** color modes through Bootstrap's [color modes][]
+feature.
 
-If your site uses [Chroma for code highlighting], there are extra steps required
-so that code-block styles are compatible with light/dark mode:
+Adjust dark-mode support as follows:
 
-- Ensure that `markup.highlight.noClasses` is `false` in your project config.
-  For details about this option, see [Generate syntax highlighter CSS].
-- Add `@import 'td/code-dark'` to your project's [`_styles_project.scss`] file.
+- **Dark mode**: Dark mode support is **enabled by default**. Docsy includes the
+  necessary CSS so your site automatically switches between light and dark modes
+  based on the user's system preference. To disable dark mode entirely, see
+  [Disable dark mode](#disable-dark-mode).
 
-For details, see [Chroma for code highlighting].
+- **Light/dark-mode menu**: For a better user experience, enable Docsy's
+  [light/dark-mode menu](#lightdark-mode-menu) in the [navbar](#navbar) to allow
+  your site users to switch between light and dark modes, or create your own.
+
+- **Dark-mode theme customization**: For extra light/dark mode styling and
+  advanced customization, see
+  [Dark-mode theme customization](#dark-mode-theme-customization).
+
+{{% alert title="Terminology note" color=info %}}
+
+In Bootstrap, a color **mode** refers to a switchable presentation of the site
+(e.g., light or dark) from the user's point of view, implemented through CSS
+variable overrides activated via `data-bs-theme`.
+
+Whereas a color **theme** refers to the semantic color palette (primary,
+secondary, success, etc.) defined in SCSS and used by components and utilities.
+
+{{% /alert %}}
+
+#### Disable dark mode
+
+Bootstrap includes support for light (default) and dark [color modes][] by
+default, and so does Docsy. To [disable dark mode][] entirely, add the following
+variable in your project's [`_variables_project.scss`]:
+
+```scss
+$enable-dark-mode: false;
+```
+
+[disable dark mode]:
+  https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
+
+#### Dark-mode theme customization
+
+Docsy provides the following basic dark-mode theme customizations:
+
+- [Light/dark code styles][] as used in code [syntax highlighting][], provided
+  your project uses [Chroma for code highlighting][].
+- An example of dark-mode theme customization in the
+  [_color-adjustments-dark.scss] file.
+
+Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
+provides [_color-adjustments-dark.scss] as an example of theme color
+customization by adjusting Bootstrap's default [primary color][bs-theme-colors]
+so that it has better contrast in dark mode.
+
+[bs-theme-colors]:
+  https://getbootstrap.com/docs/5.3/customize/color/#theme-colors
+
+To use this file, import it in your project's [`_styles_project.scss`] file:
+
+```scss
+@import 'td/color-adjustments-dark';
+```
+
+We use `$lighten-amount-for-dark-color-variant` in that file to control how much
+lighter the primary color should be in dark mode as a percentage of the original
+primary color. To adjust this value for your project's `$primary` color, set
+this SCSS variable in your project's [`_variables_project.scss`] file, for
+example:
+
+```scss
+$lighten-amount-for-dark-color-variant: 28% !default;
+```
+
+If the file settings are not working for your project, you can create your own
+dark mode theme customization file and import it in your project's
+[`_styles_project.scss`].
+
+[_color-adjustments-dark.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss
+[Chroma for code highlighting]: #code-highlighting-with-chroma
+[Light/dark code styles]: #lightdark-code-styles
 
 {{% alert title="Note" %}}
 
 Light/dark color themes, only affect documentation pages, and white [blocks
-shortcodes].
+shortcodes][]. Other block shortcodes with fixed text and background colors are
+not affected by light/dark color mode changes.
 
 [blocks shortcodes]: shortcodes/#shortcode-blocks
 
 {{% /alert %}}
 
-[Chroma for code highlighting]: #code-highlighting-with-chroma
-[light/dark menu]: #lightdark-mode-menu
 [Generate syntax highlighter CSS]:
   https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 
@@ -198,7 +268,7 @@ To only set the text color use `.-text-<color>`:
 As of Hugo 0.60+, you can choose from a range of code block highlight and color
 styles using [Chroma](https://github.com/alecthomas/chroma). These styles are
 applied to your fenced code blocks. For details about code highlighting in Hugo
-using Chroma, see [Syntax Highlighting].
+using Chroma, see [Syntax Highlighting][].
 
 ### Chroma style configuration
 
@@ -235,12 +305,23 @@ For the complete list of available styles, see [Chroma Style Gallery].
 [Chroma Style Gallery]: https://xyproto.github.io/splash/docs/
 [monokai]: https://xyproto.github.io/splash/docs/monokai.html
 [onedark]: https://xyproto.github.io/splash/docs/onedark.html
-[Syntax Highlighting]: https://gohugo.io/content-management/syntax-highlighting/
 [tango]: https://xyproto.github.io/splash/docs/tango.html
 
 ### Light/dark code styles
 
-Docsy's default Chroma styles for [light/dark mode] are:
+To enable code styles that are compatible with light/dark color modes, you need
+to complete the following setup steps:
+
+1.  Ensure that `markup.highlight.noClasses` is `false` in your project config.
+    For details about this option, see [Generate syntax highlighter CSS].
+
+2.  Add the following import to your project's [`_styles_project.scss`] file:
+
+    ```scss
+    @import 'td/code-dark';
+    ```
+
+Docsy's default Chroma styles for [light/dark modes][] are:
 
 - [tango] for light mode
 - [onedark] for dark mode
@@ -257,7 +338,7 @@ to the appropriate file:
   https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_light.scss
 [Hugo generated Chroma styles]:
   https://gohugo.io/commands/hugo_gen_chromastyles/
-[light/dark mode]: #lightdark-color-themes
+[light/dark modes]: #lightdark-color-modes
 
 ### Code blocks without a specified language
 
@@ -369,12 +450,13 @@ of the following:
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/adding-content/iconsimages/#add-your-logo
 
-### Light/dark mode menu
+### Light/dark-mode menu
 
 If you enable this feature, Docsy adds a menu to your navbar that lets users
 switch your site's documentation page display between a default "light" mode,
 and a "dark" mode where the text is displayed in a light color on a dark
-background.
+background. The menu also includes an "auto" option that follows the user's
+system preference.
 
 To enable the display of a light/[dark mode] menu in the navbar, set
 `params.ui.showLightDarkModeMenu` to `true` in your project's configuration
@@ -561,3 +643,5 @@ feature of Hugo in your configuration file, or in the front matter of the
 highest-level page you want to modify.
 
 [bs-docs]: https://getbootstrap.com/docs/
+[color modes]: https://getbootstrap.com/docs/5.3/customize/color-modes/
+[syntax highlighting]: https://gohugo.io/content-management/syntax-highlighting/
