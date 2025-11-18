@@ -99,6 +99,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.143812-05:00"
   },
+  "https://css-tricks.com/flash-of-inaccurate-color-theme-fart/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T18:57:42.403254-05:00"
+  },
   "https://cthedot.de/icongen": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.321066-05:00"
@@ -770,6 +774,10 @@
   "https://github.com/google/docsy/blob/main/layouts/_partials/td/scrollspy-attr.txt": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T21:09:11.101706-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T18:57:42.176378-05:00"
   },
   "https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html": {
     "StatusCode": 206,
@@ -1806,6 +1814,10 @@
   "https://gohugo.io/commands/hugo_server/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:34.901354-05:00"
+  },
+  "https://gohugo.io/configuration/introduction/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T18:57:42.075075-05:00"
   },
   "https://gohugo.io/configuration/params/#multilingual-sites": {
     "StatusCode": 206,
