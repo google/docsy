@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parseArgsAndResolveBuildId, main, adjustVersionForBuildId } from './index.mjs';
+import {
+  parseArgsAndResolveBuildId,
+  main,
+  adjustVersionForBuildId,
+} from './index.mjs';
 
 const nullLogger = {
   log() {},
@@ -9,7 +13,9 @@ const nullLogger = {
 };
 
 test('parseArgsAndResolveBuildId enables silent flag via -s', () => {
-  const result = parseArgsAndResolveBuildId(['-s', '--id', 'custom-build'], { logger: nullLogger });
+  const result = parseArgsAndResolveBuildId(['-s', '--id', 'custom-build'], {
+    logger: nullLogger,
+  });
   assert.equal(result.silent, true);
   assert.equal(result.buildId, 'custom-build');
 });
@@ -29,7 +35,9 @@ test('parseArgsAndResolveBuildId logs when removing build ID unless silent', () 
     warn() {},
   };
 
-  const result = parseArgsAndResolveBuildId(['--id', ''], { logger: capturingLogger });
+  const result = parseArgsAndResolveBuildId(['--id', ''], {
+    logger: capturingLogger,
+  });
   assert.equal(result.buildId, '');
   assert.equal(result.silent, false);
   assert.deepEqual(messages, [
@@ -46,7 +54,9 @@ test('parseArgsAndResolveBuildId suppresses removal log in silent mode', () => {
     warn() {},
   };
 
-  const result = parseArgsAndResolveBuildId(['--id', '', '--silent'], { logger: capturingLogger });
+  const result = parseArgsAndResolveBuildId(['--id', '', '--silent'], {
+    logger: capturingLogger,
+  });
   assert.equal(result.buildId, '');
   assert.equal(result.silent, true);
   assert.deepEqual(messages, []);
@@ -80,7 +90,9 @@ test('main updates package data when build ID changes', () => {
   assert.deepEqual(writtenPkg, { version: '1.0.0-dev+custom-build' });
   assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
   assert.equal(newVersion, '1.0.0-dev+custom-build');
-  assert.deepEqual(messages, ['✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build']);
+  assert.deepEqual(messages, [
+    '✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build',
+  ]);
 });
 
 test('main logs updated build ID even with silent flag', () => {
@@ -111,7 +123,9 @@ test('main logs updated build ID even with silent flag', () => {
   assert.deepEqual(writtenPkg, { version: '1.0.0-dev+custom-build' });
   assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
   assert.equal(newVersion, '1.0.0-dev+custom-build');
-  assert.deepEqual(messages, ['✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build']);
+  assert.deepEqual(messages, [
+    '✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build',
+  ]);
 });
 
 test('main logs when version already matches', () => {
@@ -140,7 +154,9 @@ test('main logs when version already matches', () => {
   assert.equal(pkg.version, '1.0.0-dev+existing');
   assert.equal(writeCallCount, 0);
   assert.equal(newVersion, '1.0.0-dev+existing');
-  assert.deepEqual(messages, ['Package version is already set to 1.0.0-dev+existing.']);
+  assert.deepEqual(messages, [
+    'Package version is already set to 1.0.0-dev+existing.',
+  ]);
 });
 
 test('main reports no change with silent flag', () => {
@@ -173,14 +189,19 @@ test('main reports no change with silent flag', () => {
 });
 
 test('parseArgsAndResolveBuildId accepts --version option', () => {
-  const result = parseArgsAndResolveBuildId(['--version', '2.0.0'], { logger: nullLogger });
+  const result = parseArgsAndResolveBuildId(['--version', '2.0.0'], {
+    logger: nullLogger,
+  });
   assert.equal(result.version, '2.0.0');
   assert.equal(result.buildId, undefined);
   assert.equal(result.silent, false);
 });
 
 test('parseArgsAndResolveBuildId --version takes precedence over --id', () => {
-  const result = parseArgsAndResolveBuildId(['--version', '2.0.0', '--id', 'build-123'], { logger: nullLogger });
+  const result = parseArgsAndResolveBuildId(
+    ['--version', '2.0.0', '--id', 'build-123'],
+    { logger: nullLogger },
+  );
   assert.equal(result.version, '2.0.0');
   assert.equal(result.buildId, 'build-123'); // Still parsed but will be ignored
   assert.equal(result.silent, false);
@@ -324,7 +345,9 @@ test('main adjusts non-dev version when adding build ID', () => {
 });
 
 test('adjustVersionForBuildId adds build ID to dev version', () => {
-  const result = adjustVersionForBuildId('1.0.0-dev', 'build-123', { logger: nullLogger });
+  const result = adjustVersionForBuildId('1.0.0-dev', 'build-123', {
+    logger: nullLogger,
+  });
   assert.equal(result, '1.0.0-dev+build-123');
 });
 
@@ -344,7 +367,9 @@ test('adjustVersionForBuildId increments minor and adds -dev for non-dev version
 });
 
 test('adjustVersionForBuildId handles version without build ID', () => {
-  const result = adjustVersionForBuildId('1.0.0-dev', '', { logger: nullLogger });
+  const result = adjustVersionForBuildId('1.0.0-dev', '', {
+    logger: nullLogger,
+  });
   assert.equal(result, '1.0.0-dev');
 });
 
@@ -356,11 +381,12 @@ test('adjustVersionForBuildId handles unrecognized version format', () => {
     },
   };
 
-  const result = adjustVersionForBuildId('invalid-version', 'build-123', { logger });
+  const result = adjustVersionForBuildId('invalid-version', 'build-123', {
+    logger,
+  });
   assert.equal(result, 'invalid-version-dev+build-123');
   assert.deepEqual(warnings, [
     'Warning: Adding build ID to non-dev version. Incrementing minor version and adding -dev suffix.',
     'Warning: Version format not recognized (invalid-version). Appending -dev suffix.',
   ]);
 });
-

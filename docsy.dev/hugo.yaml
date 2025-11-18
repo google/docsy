@@ -86,7 +86,7 @@ params:
     sidebar_root_enabled: true
     scrollSpy:
       # disable: true
-      # safeIds: false
+      safeIds: false
     feedback:
       enable: true
       'yes': >-

@@ -32,7 +32,9 @@ export function main(
   const pkg = readPackageJson();
   const hugoYaml = readHugoYamlFn();
 
-  const { version, buildId, silent } = parseArgsAndResolveBuildId(args, { logger });
+  const { version, buildId, silent } = parseArgsAndResolveBuildId(args, {
+    logger,
+  });
 
   const currentVersion = pkg.version;
   let newVersion;
@@ -74,7 +76,9 @@ export function main(
     logger.log?.(`✓ Updated version: ${currentVersion} → ${newVersion}`);
     if (hugoYamlUpdated) {
       const baseVersion = newVersion.split('+')[0];
-      logger.log?.(`✓ Updated hugo.yaml version: ${currentHugoVersion || '(none)'} → ${baseVersion}`);
+      logger.log?.(
+        `✓ Updated hugo.yaml version: ${currentHugoVersion || '(none)'} → ${baseVersion}`,
+      );
     }
   } else if (!silent) {
     logger.log?.(`Package version is already set to ${currentVersion}.`);
@@ -169,7 +173,11 @@ export function generateTimestamp() {
  * @param {object} logger - Logger object with warn method
  * @returns {string} The adjusted version with build ID
  */
-export function adjustVersionForBuildId(baseVersion, buildId, { logger = console } = {}) {
+export function adjustVersionForBuildId(
+  baseVersion,
+  buildId,
+  { logger = console } = {},
+) {
   if (!buildId || baseVersion.endsWith('-dev')) {
     // No adjustment needed: either no build ID or already a dev version
     return buildId ? `${baseVersion}+${buildId}` : baseVersion;

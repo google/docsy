@@ -44,7 +44,7 @@ function readPackageJson() {
 const packagesToUpdate = [
   // NPM package name, `Hugo module name@` optionally follow by `v` if needed
   ['@fortawesome/fontawesome-free', 'github.com/FortAwesome/Font-Awesome@'],
-  ['bootstrap', 'github.com/twbs/bootstrap@v']
+  ['bootstrap', 'github.com/twbs/bootstrap@v'],
 ];
 
 packagesToUpdate.forEach(([npmPkgNm, hugoModuleRefAtV]) => {
