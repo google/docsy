@@ -595,16 +595,6 @@ options][] and the discussion in [Bootstrap issue #34958][bs-34958].
 
 {{% /alert %}}
 
-{{% alert title="<i class='fa-solid fa-exclamation-triangle fa-lg px-1'></i> Current ScrollSpy bug" color=warning %}}
-
-As of Docsy 0.13.0, ScrollSpy fails if a page contains heading IDs that start
-with a digit. As a result, active TOC entry tracking will not work for that
-page. For details, see [ScrollSpy bug][].
-
-[ScrollSpy bug]: /blog/2025/0.13.0/#scrollspy-bug
-
-{{% /alert %}}
-
 [cascade]: https://gohugo.io/content-management/front-matter/#cascade-1
 [IntersectionObserver API]:
   https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
