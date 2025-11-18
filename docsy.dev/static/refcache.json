@@ -463,6 +463,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:34.090741-05:00"
   },
+  "https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T12:25:52.56686-05:00"
+  },
   "https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.534269-05:00"
@@ -474,6 +478,10 @@
   "https://getbootstrap.com/docs/5.3/customize/color/#color-sass-maps": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.809637-05:00"
+  },
+  "https://getbootstrap.com/docs/5.3/customize/color/#theme-colors": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T12:25:53.239647-05:00"
   },
   "https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops": {
     "StatusCode": 206,
@@ -726,6 +734,10 @@
   "https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.3649-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-18T12:25:53.067637-05:00"
   },
   "https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_dark.scss": {
     "StatusCode": 206,

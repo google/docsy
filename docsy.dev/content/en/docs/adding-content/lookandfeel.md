@@ -474,6 +474,7 @@ illustrated in the following example:
 The example above uses [Markdown attribute][] syntax, and might render like
 this:
 
+<!-- markdownlint-disable table-pipe-style table-column-count -->
 <!-- prettier-ignore-start -->
 | Shape    | Number of sides |
 | -------- | --------------- |

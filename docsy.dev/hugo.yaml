@@ -79,7 +79,11 @@ params:
   search:
     # algolia:
   ui:
-    showLightDarkModeMenu: true
+    # showLightDarkModeMenu param values:
+    showLightDarkModeMenu:
+      true # default
+      # false # disable
+      # 'enable-only (experimental)'
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
     sidebar_search_disable: false

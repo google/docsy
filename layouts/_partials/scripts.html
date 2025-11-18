@@ -46,7 +46,8 @@ window.markmap = {
 {{- partial "scripts/mermaid.html" . -}}
 {{ end -}}
 
-{{ if .Site.Params.ui.showLightDarkModeMenu -}}
+{{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+{{ if $darkMode.enable -}}
   {{ $jsArray = $jsArray | append (resources.Get "js/dark-mode.js") -}}
 {{ end -}}
 
