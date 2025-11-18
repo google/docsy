@@ -10,7 +10,13 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-export const hugoYamlPath = path.join(__dirname, '..', '..', 'docsy.dev', 'hugo.yaml');
+export const hugoYamlPath = path.join(
+  __dirname,
+  '..',
+  '..',
+  'docsy.dev',
+  'hugo.yaml',
+);
 
 export function readHugoYaml() {
   const content = fs.readFileSync(hugoYamlPath, 'utf8');
@@ -31,7 +37,11 @@ export function readHugoYaml() {
     }
 
     // If we hit a top-level key (starts at column 0, not params), exit params section
-    if (line.match(/^[a-z_]+:/) && !line.match(/^params:/) && !line.match(/^  /)) {
+    if (
+      line.match(/^[a-z_]+:/) &&
+      !line.match(/^params:/) &&
+      !line.match(/^  /)
+    ) {
       inParams = false;
       continue;
     }
@@ -65,7 +75,11 @@ export function writeHugoYaml(hugoYaml) {
     }
 
     // If we hit a top-level key (starts at column 0, not params), exit params section
-    if (line.match(/^[a-z_]+:/) && !line.match(/^params:/) && !line.match(/^  /)) {
+    if (
+      line.match(/^[a-z_]+:/) &&
+      !line.match(/^params:/) &&
+      !line.match(/^  /)
+    ) {
       inParams = false;
       return line;
     }
@@ -90,11 +104,16 @@ export function writeHugoYaml(hugoYaml) {
         let insertIndex = i + 1;
         while (
           insertIndex < newLines.length &&
-          (newLines[insertIndex].match(/^  /) || newLines[insertIndex].trim() === '')
+          (newLines[insertIndex].match(/^  /) ||
+            newLines[insertIndex].trim() === '')
         ) {
           insertIndex++;
         }
-        newLines.splice(insertIndex, 0, `  version: ${hugoYaml.params.version}`);
+        newLines.splice(
+          insertIndex,
+          0,
+          `  version: ${hugoYaml.params.version}`,
+        );
         break;
       }
     }
@@ -102,4 +121,3 @@ export function writeHugoYaml(hugoYaml) {
 
   fs.writeFileSync(hugoYamlPath, newLines.join('\n'));
 }
-

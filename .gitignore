@@ -2,6 +2,10 @@ node_modules/
 package-lock.json
 /tmp
 
+# ScrollSpy patch related
+# Temporary files created by the patch command when it fails:
+assets/_cache/bootstrap/scrollspy-method.js.*
+
 # Hugo
 .hugo_build.lock
 /public

@@ -7,14 +7,14 @@ const fs = require('fs');
 const path = require('path');
 
 if (process.env.DOCSY_MKDIR_HUGO_MOD_SKIP) {
-  console.log("DOCSY_MKDIR_HUGO_MOD_SKIP is set. Skipping directory creation.");
+  console.log('DOCSY_MKDIR_HUGO_MOD_SKIP is set. Skipping directory creation.');
   process.exit(0);
 }
 
 const modulePathPrefix = process.argv[2] || '..';
 console.log(
   `Creating empty directories under MODULE_PATH_PREFIX: ${modulePathPrefix}
-  which resolves to: ${path.resolve(modulePathPrefix)}\n`
+  which resolves to: ${path.resolve(modulePathPrefix)}\n`,
 );
 
 // Extract module paths from `go.mod`, assuming the dependencies appear in the form:
