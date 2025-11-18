@@ -2,7 +2,6 @@
 title: Sidebar-root feature development notes
 date: 2025-10-13
 updated: 2025-11-12
-cSpell:ignore: sidenav
 ---
 
 ## Feature description and plan
@@ -10,7 +9,7 @@ cSpell:ignore: sidenav
 <details>
 <summary>Original feature description and plan</summary>
 
-> This is a feature description for issue [Sidenav support for section-as-root
+> This is a feature description for issue [Side-nav support for section-as-root
 > #2328][#2328], and some development notes. During development, this document
 > will serve as development notes. During that time, this document might not
 > fully capture the final implementation.
@@ -23,7 +22,7 @@ cSpell:ignore: sidenav
 <br />
 
 This page is a feature description and plan that also serves as a record of the
-work for issue [Sidenav support for section-as-root][#2328].
+work for issue [Side-nav support for section-as-root][#2328].
 
 Implementation has landed in the following PRs:
 

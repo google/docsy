@@ -1035,6 +1035,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-15T13:13:06.596992-05:00"
   },
+  "https://github.com/google/docsy/issues/2347": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-16T06:27:50.429002-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:26.805722-05:00"
@@ -1746,6 +1750,10 @@
   "https://github.com/twbs/bootstrap/pull/28517/files#diff-41667d8b9901aa9fa52483b538bb9026c287f2c663d2fdc01acffa06888cc087R18": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:37.321391-05:00"
+  },
+  "https://github.com/twbs/bootstrap/pull/41726": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-16T06:27:49.694807-05:00"
   },
   "https://github.com/twbs/bootstrap/releases/tag/v4.6.2": {
     "StatusCode": 206,
@@ -2507,10 +2515,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:38.151718-05:00"
   },
-  "https://www.docsy.dev/docs/adding-content/navigation/#adding-a-language-menu": {
-    "StatusCode": 206,
-    "LastSeen": "2025-10-06T12:29:00.111Z"
-  },
   "https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:34.628325-05:00"
@@ -2518,6 +2522,10 @@
   "https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:34.554154-05:00"
+  },
+  "https://www.docsy.dev/docs/adding-content/navigation/#language-menu": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-06T12:29:00.111Z"
   },
   "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
     "StatusCode": 206,

@@ -6,52 +6,59 @@ description: Customize site navigation for your Docsy site.
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including
-site menus, section menus, and page menus. This page shows you how they work and
-how to configure and customize them to meet your needs.
+site menus, side navs, and page table of contents (TOC). This page shows you how
+they work and how to configure and customize them to meet your needs.
 
-## Top-level menu
+## Site navbar
 
-The top level menu (the one that appears in the top navigation bar for the
-entire site) uses your site's
-[`main` menu](https://gohugo.io/content-management/menus/). All Hugo sites have
-a `main` menu array of menu entries, accessible via the `.Site.Menus` site
-variable and populatable via page front matter or your site's
-`hugo.toml`/`hugo.yaml`/`hugo.json`.
+A site navbar appears at the top of every site page. It is built from Hugo
+[menus] and Docsy-generated elements. Hugo [menus] consist of an array of menu
+entries, accessible via the `.Site.Menus` site variable.
 
-To add a page or section to this menu, add it to the site's `main` menu in
-either `hugo.toml`/`hugo.yaml`/`hugo.json` or in the destination page's front
-matter (in `_index.md` or `_index.html` for a section, as that's the section
-landing page). For example, here's how we added the Documentation section
-landing page to the main menu in this site:
+The `main` menu is build from:
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
+- [Menu] entries defined over the `main` menu.
+- Docsy-generated menus (depending on your site configuration):
+  - [Doc-version menu](#version-menu)
+  - [Language menu](#language-menu)
+  - [Light/dark theme menu](#lightdark-theme-menu)
+- Docsy-generated [search box](#search-box)
+
+### Adding `main` menu entries
+
+Define [menu] entries in your site's configuration file or via page front
+matter. For example, here's how you can add a Documentation section to the
+top-level navbar:
+
+{{< tabpane text=true >}} {{< tab header="Front matter:" disabled=true />}}
+{{% tab header="toml" %}}
+
+```toml
 title = "Welcome to Docsy"
 linkTitle = "Documentation"
 
 [menu.main]
 weight = 20
 pre = "<i class='fa-solid fa-book'></i>"
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-title: "Welcome to Docsy"
-linkTitle: "Documentation"
+```
+
+{{% /tab %}} {{% tab header="yaml" %}}
+
+```yaml
+title: Documentation
+linkTitle: Docs
 menu:
   main:
     weight: 20
     pre: <i class='fa-solid fa-book'></i>
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="json" %}}
+
+```json
 {
-  "title": "Welcome to Docsy",
-  "linkTitle": "Documentation",
+  "title": "Documentation",
+  "linkTitle": "Docs",
   "menu": {
     "main": {
       "weight": 20,
@@ -59,75 +66,140 @@ menu:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
 
-The menu is ordered from left to right by page `weight`. So, for example, a
+{{% /tab %}} {{< /tabpane >}}
+
+Navbar entries are ordered from left to right by `weight`. So, for example, a
 section index or page with `weight: 30` would appear after the Documentation
 section in the menu, while one with `weight: 10` would appear before it.
 
-If you want to add a link to an external site to this menu, add it in
-`hugo.toml`/`hugo.yaml`/`hugo.json`, specifying the `weight`.
+If you want to add a link to an external site to this menu, add it to your site
+configuration:[^add-external-link-via]
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [[menu.main]]
-    name = "GitHub"
-    weight = 50
-    url = "https://github.com/google/docsy/"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+  name = "Example Site"
+  weight = 40
+  url = "https://example.docsy.dev"
+  post = "<sup><i class='fa-solid fa-up-right-from-square fa-xs' aria-hidden='true'></i></sup>"
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 menu:
   main:
-    - name: GitHub
-      weight: 50
-      url: 'https://github.com/google/docsy/'
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+    - name: Example Site
+      weight: 40
+      url: https://example.docsy.dev
+      post:
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+        aria-hidden="true"></i></sup>
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "menu": {
     "main": [
       {
-        "name": "GitHub",
-        "weight": 50,
-        "url": "https://github.com/google/docsy/"
+        "name": "Example Site",
+        "weight": 40,
+        "url": "https://example.docsy.dev",
+        "post": "<sup><i class='fa-solid fa-up-right-from-square fa-xs' aria-hidden='true'></i></sup>"
       }
     ]
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
 
-### Adding icons to the top-level menu
+{{% /tab %}} {{< /tabpane >}}
+
+### Version menu
+
+Docsy adds a version selector menu to the top-level navbar if you have doc
+versions configured as explained in [Doc versioning][].
+
+To style the version menu, apply your custom CSS to `.td-navbar__version-menu`.
+
+[Doc versioning]: /docs/adding-content/versioning/
+
+### Language menu
+
+Docsy adds a language selector menu to the top-level navbar if you have a
+[multilingual] site configured as explained in [Multi-language support][].
+Selecting a language takes the user to the translated version of the current
+page, or the home page for the given language.
+
+The menu is visible in the navbar for all screen sizes. By default, the current
+site language name is shown. On narrow displays, this is replaced by the
+language code.
+
+{{% alert title="Legacy UX" color="info" %}}
+
+Prior to Docsy 0.13.0, the language selector menu could also be visible from the
+left sidebar, and its visibility in the navbar depended on the screen size. For
+details, including ways to restore the legacy behavior, see [Language menu
+visibility][].
+
+[Language menu visibility]: /blog/2025/0.13.0/#language-menu-visibility
+
+{{% /alert %}}
+
+To style the language menu, apply your custom CSS to `.td-navbar__lang-menu`.
+
+[multilingual]: https://gohugo.io/content-management/multilingual/
+
+### Light/dark theme menu
+
+Docsy adds a light/dark theme selector menu to the top-level navbar if you have
+it configured as explained in [Light/dark mode menu][].
+
+To style the light/dark mode menu, apply your custom CSS to
+`.td-navbar__light-dark-menu`.
+
+[Light/dark mode menu]: /docs/adding-content/lookandfeel/#lightdark-mode-menu
+
+### Search box
+
+To configure site search, see [Search](/docs/adding-content/search/). When
+configured, the search box appears as the last item in the top-level navbar, as
+well as the sidebar on mobile.
+
+To style the search menu, apply your custom CSS to `.td-navbar__search`.
+
+### Adding icons to the navbar
 
 As described in the
 [Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu),
-you can add icons to the top-level menu by using the pre and/or post parameter
-for main menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json`
-or via page front matter. For example, the following configuration adds the
-GitHub icon to the GitHub menu item, and a **New!** alert to indicate that this
-is a new addition to the menu.
+you can add icons to the navbar by using the pre and/or post parameter for main
+menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via
+page front matter. For example, the following configuration adds the GitHub icon
+to the GitHub menu item, and a **New!** alert to indicate that this is a new
+addition to the menu.
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [[menu.main]]
-    name = "GitHub"
-    weight = 50
-    url = "https://github.com/google/docsy/"
-    pre = "<i class='fa-brands fa-github'></i>"
-    post = "<span class='alert'>New!</span>"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+  name = "GitHub"
+  weight = 50
+  url = "https://github.com/google/docsy/"
+  pre = "<i class='fa-brands fa-github'></i>"
+  post = "<span class='alert'>New!</span>"
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 menu:
   main:
     - name: GitHub
@@ -135,8 +207,11 @@ menu:
       url: 'https://github.com/google/docsy/'
       pre: <i class='fa-brands fa-github'></i>
       post: <span class='alert'>New!</span>
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "menu": {
     "main": [
@@ -150,74 +225,31 @@ menu:
     ]
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 You can find a complete list of icons to use in the
 [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
 includes the free FontAwesome icons by default.
 
-### Adding a version menu
+## Side navigation {#side-nav}
 
-If you add some `[params.versions]` in `hugo.toml`, Docsy adds a version
-selector menu to the top-level menu.
+A side nav[^formerly_section_menu] for section navigation is shown in the left
+panel of the `docs` and `blog` pages. It is automatically built from the
+`content` tree. Like the navbar, it is ordered by page or section index `weight`
+(or by page creation `date` if `weight` is not set), with the page or index's
+`Title`, or `linkTitle` if different, as its link title in the menu. If a
+section subfolder has pages other than `_index.md` or `_index.html`, those pages
+will appear as a submenu, again ordered by `weight`. For example, here's the
+metadata for this page showing its `weight` and `title`:
 
-You can find out more in the guide to
-[versioning your docs](/docs/adding-content/versioning/).
+[^formerly_section_menu]: Formerly named the "section menu".
 
-### Adding a language menu
+{{< tabpane text=true >}} {{< tab header="Front matter:" disabled=true />}}
+{{% tab header="toml" lang="toml" %}}
 
-If your site is [multilingual], Docsy adds a **language selector menu** to the
-navbar. Selecting a language takes the user to the translated version of the
-current page, or the home page for the given language. The menu is visible in
-the navbar for all screen sizes.
-
-By default, the current site language name is shown. On narrow displays, this is
-replaced by the language code.
-
-You can find out more in [Multi-language support](/docs/language/).
-
-{{% alert title="Legacy UX" color="info" %}}
-
-Prior to Docsy 0.13.0, the language selector menu was displayed as follows.
-
-| Location     | Default visibility | Visibility on narrow screens |
-| ------------ | ------------------ | ---------------------------- |
-| Navbar       | Visible            | Hidden                       |
-| Left sidebar | Hidden             | Visible                      |
-
-To restore the legacy behavior:
-
-set the optional parameter `.ui.sidebar_lang_menu` to `true` in your site
-configuration.
-
-- In the left sidebar on narrow screens. As of Docsy 0.13.0, it remains hidden.
-  To restore the legacy behavior, set the optional parameter
-  `.ui.sidebar_lang_menu` to `true` in your site configuration.
-
-{{% /alert %}}
-
-[multilingual]: https://gohugo.io/content-management/multilingual/
-
-## Section menu
-
-The section menu, as shown in the left side of the `docs` and `blog` sections,
-is automatically built from the `content` tree. Like the top-level menu, it is
-ordered by page or section index `weight` (or by page creation `date` if
-`weight` is not set), with the page or index's `Title`, or `linkTitle` if
-different, as its link title in the menu. If a section subfolder has pages other
-than `_index.md` or `_index.html`, those pages will appear as a submenu, again
-ordered by `weight`. For example, here's the metadata for this page showing its
-`weight` and `title`:
-
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
+```toml
 title = "Navigation and Search"
 linkTitle = "Navigation and Search"
 date = 2017-01-05T00:00:00.000Z
@@ -225,19 +257,22 @@ weight = 3
 description = '''
 Customize site navigation and search for your Docsy site.
 '''
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-title: "Navigation and Search"
-linkTitle: "Navigation and Search"
+```
+
+{{% /tab %}} {{% tab header="yaml" lang="yaml" %}}
+
+```yaml
+title: 'Navigation and Search'
+linkTitle: 'Navigation and Search'
 date: 2017-01-05
 weight: 3
 description: >
   Customize site navigation and search for your Docsy site.
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="json" lang="json" %}}
+
+```json
 {
   "title": "Navigation and Search",
   "linkTitle": "Navigation and Search",
@@ -245,10 +280,9 @@ description: >
   "weight": 3,
   "description": "Customize site navigation and search for your Docsy site.\n"
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 To hide a page or section from the left navigation menu, set `toc_hide: true` in
 the front matter.
@@ -259,12 +293,10 @@ page]({{< ref "content#docs-section-landing-pages" >}}), set
 the TOC menu and the section summary list, you need to set both `toc_hide` and
 `hide_summary` to `true` in the front matter.
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
+{{< tabpane text=true >}} {{< tab header="Front matter:" disabled=true />}}
+{{% tab header="toml" lang="toml" %}}
+
+```toml
 title = "My Hidden Page"
 weight = 99
 toc_hide = true
@@ -272,19 +304,22 @@ hide_summary = true
 description = '''
 Page hidden from both the TOC menu and the section summary list.
 '''
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-title: "My Hidden Page"
+```
+
+{{% /tab %}} {{% tab header="yaml" lang="yaml" %}}
+
+```yaml
+title: 'My Hidden Page'
 weight: 99
 toc_hide: true
 hide_summary: true
 description: >
   Page hidden from both the TOC menu and the section summary list.
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="json" lang="json" %}}
+
+```json
 {
   "title": "My Hidden Page",
   "weight": 99,
@@ -292,15 +327,14 @@ description: >
   "hide_summary": true,
   "description": "Page hidden from both the TOC menu and the section summary list.\n"
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
 
-### Section menu options
+{{% /tab %}} {{< /tabpane >}}
 
-By default, the section menu shows the current section fully expanded all the
-way down. This may make the left nav too long and difficult to scan for bigger
+### Side-nav options
+
+By default, the side nav shows the current section fully expanded all the way
+down. This may make the left nav too long and difficult to scan for bigger
 sites. Try setting site parameter `ui.sidebar_menu_compact = true` in
 `hugo.toml`.
 
@@ -318,54 +352,59 @@ a foldable menu by setting the site parameter `ui.sidebar_menu_foldable = true`
 in `hugo.toml`. The foldable menu lets users expand and collapse menu sections
 by toggling arrow icons beside the section parents in the menu.
 
-On large sites (default: > 2000 pages) the section menu is not generated for
-each page, but cached for the whole section. The HTML classes for marking the
-active menu item (and menu path) are then set using JS. You can adjust the limit
-for activating the cached section menu with the optional parameter
+On large sites (default: > 2000 pages) the side nav is not generated for each
+page, but cached for the whole section. The HTML classes for marking the active
+menu item (and menu path) are then set using JS. You can adjust the limit for
+activating the cached side nav with the optional parameter
 `.ui.sidebar_cache_limit`.
 
 The tabbed pane below lists the menu section options you can define in your
 project [configuration file].
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+{{< tabpane text=true persist=lang >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.ui]
 sidebar_menu_compact = true
 ul_show = 1
 sidebar_menu_foldable = true
 sidebar_cache_limit = 1000
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   ui:
     sidebar_menu_compact: true
     ul_show: 1
     sidebar_menu_foldable: true
     sidebar_cache_limit: 1000
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "ui": {
       "sidebar_menu_compact": true,
       "ul_show": 1,
       "sidebar_menu_foldable": true,
-      "sidebar_cache_limit": 1000,
+      "sidebar_cache_limit": 1000
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
 
-### Add icons to the section menu
+{{% /tab %}} {{< /tabpane >}}
 
-You can add icons to the section menu in the sidebar by setting the `icon`
-parameter in the page front matter (e.g.
-`icon: fa-solid fa-screwdriver-wrench`).
+### Adding icons to the side nav
+
+You can add icons to the side nav in the sidebar by setting the `icon` parameter
+in the page front matter (e.g. `icon: fa-solid fa-screwdriver-wrench`).
 
 You can find a complete list of icons to use in the
 [FontAwesome documentation](https://fontawesome.com/icons?d=gallery&p=2). Docsy
@@ -375,11 +414,11 @@ Out of the box, if you want to use icons, you should define icons for all items
 on the same menu level in order to ensure an appropriate look. If the icons are
 used in a different way, individual CSS adjustments are likely necessary.
 
-### Add manual links to the section menu
+### Adding manual links to the side nav
 
-By default the section menu is entirely generated from your section's pages. If
-you want to add a manual link to this menu, such as a link to an external site
-or a page in a different section of your site, you can do this by creating a
+By default the side nav is entirely generated from your section's pages. If you
+want to add a manual link to this menu, such as a link to an external site or a
+page in a different section of your site, you can do this by creating a
 _placeholder page file_ in the doc hierarchy with the appropriate weight and
 some special parameters in its metadata (frontmatter) to specify the link
 details.
@@ -387,8 +426,8 @@ details.
 To create a placeholder page, create a page file as usual in the directory where
 you want the link to show up in the menu, and add a `manualLink` parameter to
 its metadata. If a page has `manualLink` in its metadata, Docsy generates a link
-for it in the section menu for this page and in the section index (the list of
-the child pages of a section on a landing page - see
+for it in the side nav for this page and in the section index (the list of the
+child pages of a section on a landing page - see
 [description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)),
 but the link destination is replaced by the value of `manualLink`. The link text
 is the `title` (or `linkTitle` if set) of your placeholder page. You can
@@ -495,20 +534,27 @@ top of the viewport (configured via `rootMargin`).
   negative percentage (e.g., `-20%`) to activate headings earlier, or a smaller
   one (e.g., `-5%`) to activate them later.
 
-  <!-- prettier-ignore -->
-  {{< tabpane >}}
+  {{< tabpane text=true persist=lang >}}
   {{< tab header="Configuration file:" disabled=true />}}
-  {{< tab header="hugo.toml" lang="toml" >}}
+  {{% tab header="hugo.toml" lang="toml" %}}
+
+  ```toml
   [params.ui.scrollSpy]
   rootMargin = "0px 0px -15%"
-  {{< /tab >}}
-  {{< tab header="hugo.yaml" lang="yaml" >}}
+  ```
+
+  {{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+  ```yaml
   params:
     ui:
       scrollSpy:
         rootMargin: 0px 0px -15%
-  {{< /tab >}}
-  {{< tab header="hugo.json" lang="json" >}}
+  ```
+
+  {{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+  ```json
   {
     "params": {
       "ui": {
@@ -518,8 +564,9 @@ top of the viewport (configured via `rootMargin`).
       }
     }
   }
-  {{< /tab >}}
-  {{< /tabpane >}}
+  ```
+
+  {{% /tab %}} {{< /tabpane >}}
 
   {{% alert title="Smooth scrolling issue" color=info %}}
 
@@ -594,21 +641,28 @@ entire project, by setting `ui.breadcrumb_disable` to true in your project
 [configuration file]. Similarly, you can disabled taxonomy breadcrumbs by
 setting `ui.taxonomy_breadcrumb_disable` to true:
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}{{< tab header="hugo.toml" lang="toml" >}}
+{{< tabpane text=true persist=lang >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.ui]
 breadcrumb_disable = true
 taxonomy_breadcrumb_disable = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   ui:
     breadcrumb_disable: true
     taxonomy_breadcrumb_disable: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "ui": {
@@ -617,10 +671,9 @@ params:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 To disable breadcrumbs in a specific page or section set `ui.breadcrumb_disable`
 to true in the page or section-index front matter. Here is an example of the
@@ -662,3 +715,5 @@ defined in [layouts/_partials/td/render-heading.html].
 [layouts/_partials/td/render-heading.html]:
   https://github.com/google/docsy/tree/main/layouts/_partials/td/render-heading.html
 [hook]: https://gohugo.io/templates/render-hooks/
+[menu]: https://gohugo.io/content-management/menus/
+[menus]: https://gohugo.io/content-management/menus/
