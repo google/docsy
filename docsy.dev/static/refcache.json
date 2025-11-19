@@ -1367,6 +1367,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.392469-05:00"
   },
+  "https://github.com/google/docsy/tree/main/changelog.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T02:56:04.337843-05:00"
+  },
   "https://github.com/google/docsy/tree/main/docsy.dev": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.944191-05:00"
@@ -2538,10 +2542,6 @@
   "https://www.docsy.dev/docs/adding-content/navigation/#language-menu": {
     "StatusCode": 206,
     "LastSeen": "2025-10-06T12:29:00.111Z"
-  },
-  "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
-    "StatusCode": 206,
-    "LastSeen": "2025-11-16T19:33:35.108963-05:00"
   },
   "https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root": {
     "StatusCode": 206,

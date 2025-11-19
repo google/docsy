@@ -1,3 +1,5 @@
 # Changelog
 
-The changelog is now published online. See: https://www.docsy.dev/site/changelog/
+The changelog is published online, see
+[Changelog](ttps://www.docsy.dev/site/changelog/) or the
+[page source](docsy.dev/content/en/site/changelog.md).

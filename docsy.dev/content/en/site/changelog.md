@@ -4,8 +4,6 @@ description: Docsy repository changelog
 cSpell:ignore: deining docsy gitmodules gtag lookandfeel mhchem navs tabpane FOUC
 ---
 
-# Changelog
-
 We only document **breaking changes** and release **highlights** in this page.
 For the full list of changes of any particular release, see the [release
 notes][releases].
@@ -96,18 +94,18 @@ See [semver].
 [#2366]: https://github.com/google/docsy/pull/2366
 [#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
-[0.13.0-blog]: https://www.docsy.dev/blog/2025/0.13.0/
+[0.13.0-blog]: /blog/2025/0.13.0/
 [0.13.0-blog-lang-menu]:
-  https://www.docsy.dev/blog/2025/0.13.0/#language-menu-visibility
-[0.13.0-blog-alert]: https://www.docsy.dev/blog/2025/0.13.0/#alert-shortcode
+  /blog/2025/0.13.0/#language-menu-visibility
+[0.13.0-blog-alert]: /blog/2025/0.13.0/#alert-shortcode
 [0.13.0-blog-toc]:
-  https://www.docsy.dev/blog/2025/0.13.0/#active-toc-entry-tracking
+  /blog/2025/0.13.0/#active-toc-entry-tracking
 [0.13.0-blog-sidebar]:
-  https://www.docsy.dev/blog/2025/0.13.0/#section-sidebar-root
+  /blog/2025/0.13.0/#section-sidebar-root
 [0.13.0-blog-accessibility]:
-  https://www.docsy.dev/blog/2025/0.13.0/#accessibility
-[0.13.0-blog-fouc]: https://www.docsy.dev/blog/2025/0.13.0/#accessibility
-[0.13.0-blog-breaking]: https://www.docsy.dev/blog/2025/0.13.0/#breaking-changes
+  /blog/2025/0.13.0/#accessibility
+[0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
+[0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
 
 ## v0.12.0
 
@@ -167,12 +165,12 @@ For the full list of changes, see the [0.12.0] release page.
 [#2223]: https://github.com/google/docsy/pull/2223
 [#2243]: https://github.com/google/docsy/pull/2243
 [before-page-content]:
-  https://www.docsy.dev/docs/adding-content/lookandfeel/#before-page-content
+  /docs/adding-content/lookandfeel/#before-page-content
 [Breadcrumb navigation]:
-  https://www.docsy.dev/docs/adding-content/navigation/#breadcrumb-navigation
+  /docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Heading self links]:
-  https://www.docsy.dev/docs/adding-content/navigation/#heading-self-links
+  /docs/adding-content/navigation/#heading-self-links
 [_td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
 
@@ -192,10 +190,10 @@ For the full list of changes, see the [0.11.0] release page.
 [0.11.0]: https://github.com/google/docsy/releases/v0.11.0
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
 [Adding a community page]:
-  https://www.docsy.dev/docs/adding-content/content/#adding-a-community-page
+  /docs/adding-content/content/#adding-a-community-page
 [params.ui.sidebar_menu_truncate]:
-  https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options
-[rtl]: https://www.docsy.dev/docs/language/#right-to-left-languages
+  /docs/adding-content/navigation/#side-nav-options
+[rtl]: /docs/language/#right-to-left-languages
 
 ## v0.10.0
 
@@ -221,9 +219,9 @@ dark-mode support][dark-mode].
 
 [#1952]: https://github.com/google/docsy/pull/1952
 [0.10.0]: https://github.com/google/docsy/releases/v0.10.0
-[0.10.0 release report]: https://www.docsy.dev/blog/2024/0.10.0/
+[0.10.0 release report]: /blog/2024/0.10.0/
 [dark-mode]:
-  https://www.docsy.dev/blog/2024/0.10.0/#color-themes-and-dark-mode-support
+  /blog/2024/0.10.0/#color-themes-and-dark-mode-support
 
 ## v0.9.1
 
@@ -274,23 +272,23 @@ For details concerning all footer changes, see [#1818].
 - [Look and feel] updates.
 
 [0.9.0]: https://github.com/google/docsy/releases/v0.9.0
-[0.9.0 release report]: https://www.docsy.dev/blog/2024/0.9.0/
+[0.9.0 release report]: /blog/2024/0.9.0/
 [#1410]: https://github.com/google/docsy/pull/1410
 [#1744]: https://github.com/google/docsy/pull/1744
 [#1818]: https://github.com/google/docsy/pull/1818
 [disabling links]:
-  https://www.docsy.dev/docs/adding-content/repository-links/#disabling-links
-[Footer layout]: https://www.docsy.dev/blog/2024/0.9.0/#footer-layout
-[Footer copyright]: https://www.docsy.dev/blog/2024/0.9.0/#footer-copyright
-[Footer streamlined]: https://www.docsy.dev/blog/2024/0.9.0/#footer-streamlined
-[0.9.0:hsl]: https://www.docsy.dev/blog/2024/0.9.0/#heading-self-links
-[look and feel]: https://www.docsy.dev/blog/2024/0.9.0/#look-and-feel
+  /docs/adding-content/repository-links/#disabling-links
+[Footer layout]: /blog/2024/0.9.0/#footer-layout
+[Footer copyright]: /blog/2024/0.9.0/#footer-copyright
+[Footer streamlined]: /blog/2024/0.9.0/#footer-streamlined
+[0.9.0:hsl]: /blog/2024/0.9.0/#heading-self-links
+[look and feel]: /blog/2024/0.9.0/#look-and-feel
 [mermaid]:
-  https://www.docsy.dev/docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
-[multi-language]: https://www.docsy.dev/docs/language/
+  /docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
+[multi-language]: /docs/language/
 [path_base_for_github_subdir]:
-  https://www.docsy.dev/docs/adding-content/repository-links/#path_base_for_github_subdir-optional
-[Repository Links]: https://www.docsy.dev/docs/adding-content/repository-links/
+  /docs/adding-content/repository-links/#path_base_for_github_subdir-optional
+[Repository Links]: /docs/adding-content/repository-links/
 [union file system]:
   https://gohugo.io/getting-started/directory-structure/#union-file-system
 
@@ -324,13 +322,13 @@ For the full list of changes, see the [0.8.0] release page.
 [#1727]: https://github.com/google/docsy/pull/1727
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0
 [Docsy as an NPM package]:
-  https://docsy.dev/docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+  /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [Docsy NPM install side-effect]:
-  https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect
+  /docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]:
-  https://www.docsy.dev/docs/get-started/docsy-as-module/
+  /docs/get-started/docsy-as-module/
 [User feedback]:
-  https://www.docsy.dev/docs/adding-content/feedback/#user-feedback
+  /docs/adding-content/feedback/#user-feedback
 
 ## v0.7.2
 
@@ -357,9 +355,9 @@ noteworthy changes here:
 [#1662]: https://github.com/google/docsy/pull/1662
 [0.7.2]: https://github.com/google/docsy/releases/v0.7.2
 [Algolia DocSearch]:
-  https://www.docsy.dev/docs/adding-content/search/#algolia-docsearch
+  /docs/adding-content/search/#algolia-docsearch
 [Tabbed panes]:
-  https://www.docsy.dev/docs/adding-content/shortcodes/#tabbed-panes
+  /docs/adding-content/shortcodes/#tabbed-panes
 
 ## v0.7.1
 
@@ -413,7 +411,7 @@ For the full list of changes, see the [0.7.0] release page.
       instead.
 
 [chroma-docsy]:
-  https://www.docsy.dev/docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+  /docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 [shortcodes with markdown]:
   https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
 
@@ -438,7 +436,7 @@ For the full list of changes, see the [0.7.0] release page.
 [#939]: https://github.com/google/docsy/issues/939
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
 [blocks/section]:
-  https://www.docsy.dev/docs/adding-content/shortcodes/#blockssection
+  /docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 
@@ -506,11 +504,11 @@ are documented below.
 
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [adding analytics > setup]:
-  https://www.docsy.dev/docs/adding-content/feedback/#setup
+  /docs/adding-content/feedback/#setup
 [v4.6.2 release page]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
-  https://www.docsy.dev/docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
+  /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
 [upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
 [what's changed in v6]:
   https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
@@ -570,8 +568,8 @@ site, follow these steps (execute commands from your project's root directory):
 Proceed as usual to build or serve your site.
 
 [0.4.0]: https://github.com/google/docsy/releases/v0.4.0
-[hugo module]: https://www.docsy.dev/docs/get-started/docsy-as-module/
-[other docsy setups]: https://www.docsy.dev/docs/get-started/other-options/
+[hugo module]: /docs/get-started/docsy-as-module/
+[other docsy setups]: /docs/get-started/other-options/
 [prepare]:
   https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
 
@@ -606,7 +604,7 @@ For the full list of changes, see the [0.2.0] release page.
   updates.
 
   For details, see
-  [Migrate to Hugo Modules](https://www.docsy.dev/docs/updating/convert-site-to-module/).
+  [Migrate to Hugo Modules](/docs/updating/convert-site-to-module/).
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC

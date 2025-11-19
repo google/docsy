@@ -28,3 +28,6 @@ IgnoreURLs: # list of regexs of paths or URLs to be ignored
   # TODO: remove once the 0.130.0 is released
   - ^https://www.docsy.dev/blog/2025/0.13.0/
   - ^/blog/2025/0.13.0/#(scrollspy-bug|language-menu-visibility)
+  # TODO: remove once the 0.130.0 is released
+  - ^https://www.docsy.dev/blog/2025/0.13.0/.+
+  - ^/blog/2025/0.13.0/#
