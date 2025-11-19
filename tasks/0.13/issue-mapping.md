@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy sidemenu FOUC
 ---
 
-> Report refreshed for commits through `0571623` on `main`.
+> Report refreshed for commits through `c37aad0` on `main`.
 
 Mapping [commits since v0.12.0][] to their originating issues (when known).
 
@@ -51,6 +51,23 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `2523a8b` | `#2363` | Sidebar-root feature & 0.13-wrapup planning and tasks           | `#2328`, `#2266`     | Creates wrapup reports and updates sidebar-root feature plan         |
 | `468c081` | `#2364` | Sidebar-root user guide and CHANGELOG additions                 | `#2328`              | Adds user guide documentation and changelog entry for sidebar-root   |
 | `0571623` | `#2366` | Adjust ScrollSpy TOC tracking and add documentation             | `#349`, `#2289`      | ScrollSpy tuning improvements and comprehensive documentation        |
+| `4d72b4b` | `#2367` | Update build & release related scripts and contrib docs         | `#2266`              | CI/tooling maintenance for release process                           |
+| `ada99ce` | `#2369` | UG adjustments to existing content, and task-file updates       | —                    | Documentation maintenance and task file updates                      |
+| `f23f1ab` | `#2370` | Implement a workaround to ScrollSpy's heading-ID problem        | `#349`, `#2289`      | ScrollSpy workaround for invalid CSS selector IDs                    |
+| `7727c79` | `#2371` | Add _param.html shortcode                                       | —                    | New shortcode for parameter substitution                             |
+| `c2a8453` | `#2372` | Navigation page: switch to navbar & sidenav terminology         | —                    | Documentation terminology cleanup                                    |
+| `0d54010` | `#2373` | Fix: ensure ScrollSpy can always find the TOC                   | `#349`, `#2289`      | ScrollSpy robustness fix for missing TOC elements                    |
+| `217fde4` | `#2374` | Chore: refcache refresh and 404 fixes                           | —                    | Maintenance: link checking and refcache updates                      |
+| `9da0354` | `#2375` | Chore: refcache refresh and more                                | —                    | Maintenance: refcache and documentation updates                      |
+| `2c84dd3` | `#2376` | Fix: TOC entry colors in dark mode                              | —                    | Dark mode color contrast improvements                                |
+| `40e1ad0` | `#2379` | Fix: TOC entry color contrast, even better                      | —                    | Further dark mode color contrast refinements                         |
+| `4990bc1` | `#2380` | Add color adjustments for dark mode - EXPERIMENTAL              | —                    | Experimental dark mode color adjustment system                       |
+| `8979f79` | `#2381` | Apply dark-mode color adjustments to the UG                     | —                    | Apply experimental dark mode adjustments to user guide               |
+| `2570ad5` | `#2382` | Add ScrollSpy patch workflow and runtime patch                  | `#349`, `#2289`      | ScrollSpy patch for heading ID issues                                |
+| `ef50fd1` | `#2383` | Remove ScrollSpy safeIds workaround and related docs            | `#349`, `#2289`      | Cleanup: remove workaround after patch implementation                |
+| `5891c6c` | `#2384` | Refactor dark mode config, add experimental style-only option   | —                    | Dark mode configuration improvements                                 |
+| `3abe89f` | `#2385` | Fix spacing of page meta re. dark-mode                          | —                    | Dark mode spacing fix                                                |
+| `c37aad0` | `#2387` | Add dark mode support for Google search                         | —                    | Dark mode support for search functionality                           |
 
 ## CI / tooling commits
 
@@ -59,5 +76,6 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `818f62f` | `#2344` | Script to embed build ID in version | —                    | Helper tooling                             |
 | `0e2ad18` | `#2351` | Release process instruction updates | `#2266`              | Prep work for 0.13 release tracker         |
 | `595b25e` | `#2362` | Rework `fix:version` for pre-commit | `#2266`              | Makes build-version helper usable in hooks |
+| `4d72b4b` | `#2367` | Update build & release related scripts and contrib docs | `#2266` | CI/tooling maintenance for release process |
 
 [commits since v0.12.0]: https://github.com/google/docsy/compare/v0.12.0...main

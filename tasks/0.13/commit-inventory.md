@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `0571623` on `main`.
+> Report refreshed for commits through `c37aad0` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -43,15 +43,32 @@ client projects.
 - `1b8ccc3` (`#2355`) Prevent flash when entering dark mode (follow-up)
 - `3722bf7` (`#2349`) Publish upgrade guide blog for Docsy 0.12.0 → 0.11.0
 - `95de91f` (`#2356`) Align upgrade blog slugs/titles for consistency
+- `ada99ce` (`#2369`) UG adjustments to existing content, and task-file updates pre-0.13.0
+- `c2a8453` (`#2372`) Navigation page: switch to navbar & sidenav terminology, cleanup markdown
+- `217fde4` (`#2374`) Chore: refcache refresh and 404 fixes
+- `9da0354` (`#2375`) Chore: refcache refresh and more
 - `2523a8b` (`#2363`) Sidebar-root feature & 0.13-wrapup planning and tasks
 - `468c081` (`#2364`) Sidebar-root user guide and CHANGELOG additions
 - `0571623` (`#2366`) Adjust ScrollSpy TOC tracking and add documentation
+- `f23f1ab` (`#2370`) Implement a workaround to ScrollSpy's heading-ID problem
+- `7727c79` (`#2371`) Add _param.html shortcode
+- `0d54010` (`#2373`) Fix: ensure ScrollSpy can always find the TOC
+- `2c84dd3` (`#2376`) Fix: TOC entry colors in dark mode
+- `40e1ad0` (`#2379`) Fix: TOC entry color contrast, even better
+- `4990bc1` (`#2380`) Add color adjustments for dark mode - EXPERIMENTAL
+- `8979f79` (`#2381`) Apply dark-mode color adjustments to the UG
+- `2570ad5` (`#2382`) Add ScrollSpy patch workflow and runtime patch
+- `ef50fd1` (`#2383`) Remove ScrollSpy safeIds workaround and related docs
+- `5891c6c` (`#2384`) Refactor dark mode config, add experimental style-only option
+- `3abe89f` (`#2385`) Fix spacing of page meta re. dark-mode
+- `c37aad0` (`#2387`) Add dark mode support for Google search
 
 ## CI / tooling only
 
 - `818f62f` (`#2344`) CI script to add build ID to version string
 - `0e2ad18` (`#2351`) Release process documentation and helper scripts
 - `595b25e` (`#2362`) Rework `fix:version` script for pre-commit use
+- `4d72b4b` (`#2367`) Update build & release related scripts and contrib docs
 
 > Note: `09ed8ba` includes formatting changes beyond dependency bumps; treat as
 > mixed when evaluating documentation and changelog needs.

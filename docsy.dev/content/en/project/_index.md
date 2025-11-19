@@ -2,6 +2,7 @@
 title: Docsy project
 linkTitle: Project
 description: Docsy project design documentation and other resources
+aliases: [project]
 outputs: [HTML]
 cascade:
   type: docs
