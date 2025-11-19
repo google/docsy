@@ -119,7 +119,7 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
-      - name: Site info
+      - name: Project docs and site info
         url: /site/
         icon: fa fa-book
         desc: Site design documentation and resources
@@ -148,9 +148,13 @@ module:
   mounts:
     - source: content/en
       target: content
-    # Mount the repo root README.md for inclusion in site/readme.md
+    # Mount the repo root *.md files
     - source: ../README.md
       target: content/site/repo/README.md
+    - source: ../CHANGELOG.md
+      target: content/site/repo/CHANGELOG.md
+    - source: ../CONTRIBUTING.md
+      target: content/site/repo/CONTRIBUTING.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content

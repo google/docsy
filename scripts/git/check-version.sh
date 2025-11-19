@@ -1,5 +1,6 @@
 #!/bin/sh
-# Common logic for git hooks that check package version
+#
+# Git hook helper used to check and update the package build ID / version.
 
 action_name="$1"  # "commit" or "push"
 hook_name="pre-$action_name"
@@ -26,4 +27,3 @@ if [ -n "$output" ]; then
   fi
   exit 1
 fi
-
