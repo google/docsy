@@ -1,7 +1,7 @@
 ---
 title: 0.13 Release wrapup plan
 date: 2025-11-12
-last-main-commit: 0571623
+last-main-commit: c37aad0
 cSpell:ignore: docsy
 ---
 
@@ -69,10 +69,9 @@ Repeat when new commits land on `main`:
 - Update the release report blog draft with the latest context (track
   outstanding content work in the wrapup report).
 
-Report refreshed for commits through [0571623] (includes #2363, #2364, and
-\#2366).
+Report refreshed for commits through [c37aad0] (includes dark mode enhancements,
+ScrollSpy fixes, and documentation updates).
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
-[0571623]:
-  https://github.com/google/docsy/commit/05716234f49308dc9e39e97de2c858b1759803a5
+[c37aad0]: https://github.com/google/docsy/commit/c37aad0
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main

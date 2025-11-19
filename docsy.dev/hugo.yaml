@@ -5,7 +5,7 @@ enableGitInfo: true
 theme: [docsy]
 
 ignoreLogs:
-  # FIXME: find a better way to encode `project` pages than having to ignore warnings.
+  # FIXME: find a better way to encode `site` pages than having to ignore warnings.
   - warning-frontmatter-params-overrides # cSpell:disable-line
 
 outputs:
@@ -23,7 +23,8 @@ menu:
     - name: Example Site
       weight: 40
       url: https://example.docsy.dev
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+      post:
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
 
 languages:
@@ -58,8 +59,7 @@ markup:
 params:
   copyright:
     authors: >-
-      Docsy Authors |
-      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+      Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
@@ -119,10 +119,10 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
-      - name: Project info
-        url: /project/
+      - name: Project docs and site info
+        url: /site/
         icon: fa fa-book
-        desc: Project design documentation and resources
+        desc: Site design documentation and resources
       - name: GitHub
         url: https://github.com/google/docsy
         icon: fa-brands fa-github
@@ -148,16 +148,15 @@ module:
   mounts:
     - source: content/en
       target: content
-    # Mount the repo's top-level .md files under project
+    # Mount the repo root *.md files
     - source: ../README.md
-      target: content/project/readme.md
+      target: content/site/repo/README.md
     - source: ../CHANGELOG.md
-      target: content/project/changelog.md
+      target: content/site/repo/CHANGELOG.md
     - source: ../CONTRIBUTING.md
-      target: content/project/contributing.md
+      target: content/site/repo/CONTRIBUTING.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content
       lang: xx
-
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime

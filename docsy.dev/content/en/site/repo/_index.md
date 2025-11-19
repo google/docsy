@@ -1,10 +1,9 @@
 ---
-title: Docsy project
-linkTitle: Project
-description: Docsy project design documentation and other resources
+title: Repository-root markdown files
+linkTitle: Repo files
+description: Repository-root pages for the Docsy project.
 outputs: [HTML]
 cascade:
-  type: docs
   params:
     ui:
       breadcrumb_disable: true
@@ -12,13 +11,8 @@ cascade:
     path_base_for_github_subdir:
       from: '^(.*)/(\w+\.md)'
       to: $2
+    toc_hide: true
 params:
   github_subdir: docsy.dev # cSpell:disable-line
   path_base_for_github_subdir: ''
 ---
-
-- Docsy build and design notes (TBC)
-- Repository files:
-  - [CHANGELOG](changelog)
-  - [CONTRIBUTING](contributing)
-  - [README](readme)

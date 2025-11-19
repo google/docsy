@@ -675,29 +675,17 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.687149-05:00"
   },
-  "https://github.com/google/docsy/blob/main/CHANGELOG.md#070": {
-    "StatusCode": 200,
-    "LastSeen": "2025-10-06T11:42:12.345Z"
-  },
   "https://github.com/google/docsy/blob/main/CHANGELOG.md#v070": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T05:34:10.075948-05:00"
-  },
-  "https://github.com/google/docsy/blob/main/CHANGELOG.md/#080": {
-    "StatusCode": 200,
-    "LastSeen": "2025-10-06T11:42:12.345Z"
-  },
-  "https://github.com/google/docsy/blob/main/CHANGELOG.md/#090": {
-    "StatusCode": 200,
-    "LastSeen": "2025-10-06T11:42:12.345Z"
+    "LastSeen": "2025-11-19T03:10:59.004293-05:00"
   },
   "https://github.com/google/docsy/blob/main/CHANGELOG.md/#v080": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T05:34:10.115248-05:00"
+    "LastSeen": "2025-11-19T03:10:58.98347-05:00"
   },
   "https://github.com/google/docsy/blob/main/CHANGELOG.md/#v090": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T05:34:10.099688-05:00"
+    "LastSeen": "2025-11-19T03:10:59.059607-05:00"
   },
   "https://github.com/google/docsy/blob/main/CONTRIBUTING.md": {
     "StatusCode": 206,
@@ -2539,10 +2527,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-10-06T12:29:00.111Z"
   },
-  "https://www.docsy.dev/docs/adding-content/navigation/#section-menu-options": {
-    "StatusCode": 206,
-    "LastSeen": "2025-11-16T19:33:35.108963-05:00"
-  },
   "https://www.docsy.dev/docs/adding-content/navigation/#sidebar-root": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T12:00:13.317204-05:00"
@@ -2630,6 +2614,14 @@
   "https://www.docsy.dev/docs/updating/convert-site-to-module/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:54.947539-05:00"
+  },
+  "https://www.docsy.dev/site/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T04:22:20.217183-05:00"
+  },
+  "https://www.docsy.dev/site/contributing/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T04:22:20.180351-05:00"
   },
   "https://www.docsy.dev/tags/": {
     "StatusCode": 206,

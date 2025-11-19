@@ -4,18 +4,25 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `0571623` on `main`.
+> Report refreshed for commits through `c37aad0` on `main`.
 
 ## Highlights since v0.12.0
 
 - Sidebar navigation now supports `sidebar_root_for` with `children` and `self`
   modes.
 - ScrollSpy overhaul delivers active TOC indication and UX polish (addresses
-  #349/#2289).
+  #349/#2289), including fixes for heading ID issues and TOC targeting.
 - Language selector redesign keeps the dropdown visible on all screen sizes.
 - Alert shortcode rewritten for Markdown content and nested shortcodes (#941).
 - Accessibility color and typography defaults improved for better contrast
   (#2285).
+- Dark mode enhancements:
+  - Experimental color adjustment system for better contrast with custom theme
+    colors
+  - Dark mode support for Google search integration
+  - TOC entry color contrast improvements
+  - Page meta spacing fixes
+- New `_param` shortcode for parameter substitution in templates.
 - Dependency stack refreshed:
   - Bootstrap 5.3.8 (from 5.3.6)
   - Hugo 0.152.2 (from 0.147.5)
