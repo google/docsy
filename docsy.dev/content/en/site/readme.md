@@ -1,12 +1,12 @@
 ---
-title: README
+title: ReadMe
 description: Docsy repository README
-cSpell:ignore: readfile
+cSpell:ignore: docsy readfile
 weight: 10
 ---
 
 <style>
-  h1 { display: none; }
+  .td-content h1#docsy { display: none; }
 </style>
 
 {{% readfile file="/site/repo/README.md" %}}

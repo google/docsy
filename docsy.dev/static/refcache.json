@@ -1359,6 +1359,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.944191-05:00"
   },
+  "https://github.com/google/docsy/tree/main/docsy.dev/Users/chalin/git/lf/docsy/docsy/README.md": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-19T04:12:27.902251-05:00"
+  },
   "https://github.com/google/docsy/tree/main/docsy.dev/content/en/blog/2022/hello.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-16T08:36:58.411362-04:00"
@@ -1562,6 +1566,10 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.494962-05:00"
+  },
+  "https://github.com/google/docsy/tree/main/readme.md": {
+    "StatusCode": 404,
+    "LastSeen": "2025-11-19T04:12:27.908344-05:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,
