@@ -1,8 +1,8 @@
 ---
-title: Docsy project
-linkTitle: Project
-description: Docsy project design documentation and other resources
-aliases: [project]
+title: Docsy site
+linkTitle: Site
+description: Docsy site design documentation and other resources
+aliases: [site]
 outputs: [HTML]
 cascade:
   type: docs
