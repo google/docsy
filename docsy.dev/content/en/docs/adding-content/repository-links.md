@@ -403,7 +403,7 @@ for your project.
 
 Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
 
-[v0.9.0]: /site/changelog/#v090
+[v0.9.0]: /site/changelog/#090
 
 {{% /alert %}}
 

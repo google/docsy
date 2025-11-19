@@ -134,7 +134,7 @@ repo.
       ## Release summary
 
       - [Release report](/blog/2024/0.X.Y/)
-      - [CHANGELOG](/site/changelog/#v0XY)
+      - [CHANGELOG](/site/changelog/#0XY)
       ```
 
     - Select **Create a discussion for this release**.
