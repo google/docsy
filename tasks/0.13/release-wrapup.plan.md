@@ -73,6 +73,5 @@ Report refreshed for commits through [c37aad0] (includes dark mode enhancements,
 ScrollSpy fixes, and documentation updates).
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
-[c37aad0]:
-  https://github.com/google/docsy/commit/c37aad0
+[c37aad0]: https://github.com/google/docsy/commit/c37aad0
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main

@@ -43,15 +43,17 @@ client projects.
 - `1b8ccc3` (`#2355`) Prevent flash when entering dark mode (follow-up)
 - `3722bf7` (`#2349`) Publish upgrade guide blog for Docsy 0.12.0 → 0.11.0
 - `95de91f` (`#2356`) Align upgrade blog slugs/titles for consistency
-- `ada99ce` (`#2369`) UG adjustments to existing content, and task-file updates pre-0.13.0
-- `c2a8453` (`#2372`) Navigation page: switch to navbar & sidenav terminology, cleanup markdown
+- `ada99ce` (`#2369`) UG adjustments to existing content, and task-file updates
+  pre-0.13.0
+- `c2a8453` (`#2372`) Navigation page: switch to navbar & sidenav terminology,
+  cleanup markdown
 - `217fde4` (`#2374`) Chore: refcache refresh and 404 fixes
 - `9da0354` (`#2375`) Chore: refcache refresh and more
 - `2523a8b` (`#2363`) Sidebar-root feature & 0.13-wrapup planning and tasks
 - `468c081` (`#2364`) Sidebar-root user guide and CHANGELOG additions
 - `0571623` (`#2366`) Adjust ScrollSpy TOC tracking and add documentation
 - `f23f1ab` (`#2370`) Implement a workaround to ScrollSpy's heading-ID problem
-- `7727c79` (`#2371`) Add _param.html shortcode
+- `7727c79` (`#2371`) Add \_param.html shortcode
 - `0d54010` (`#2373`) Fix: ensure ScrollSpy can always find the TOC
 - `2c84dd3` (`#2376`) Fix: TOC entry colors in dark mode
 - `40e1ad0` (`#2379`) Fix: TOC entry color contrast, even better
@@ -59,7 +61,8 @@ client projects.
 - `8979f79` (`#2381`) Apply dark-mode color adjustments to the UG
 - `2570ad5` (`#2382`) Add ScrollSpy patch workflow and runtime patch
 - `ef50fd1` (`#2383`) Remove ScrollSpy safeIds workaround and related docs
-- `5891c6c` (`#2384`) Refactor dark mode config, add experimental style-only option
+- `5891c6c` (`#2384`) Refactor dark mode config, add experimental style-only
+  option
 - `3abe89f` (`#2385`) Fix spacing of page meta re. dark-mode
 - `c37aad0` (`#2387`) Add dark mode support for Google search
 

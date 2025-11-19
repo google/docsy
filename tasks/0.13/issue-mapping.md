@@ -54,7 +54,7 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `4d72b4b` | `#2367` | Update build & release related scripts and contrib docs         | `#2266`              | CI/tooling maintenance for release process                           |
 | `ada99ce` | `#2369` | UG adjustments to existing content, and task-file updates       | —                    | Documentation maintenance and task file updates                      |
 | `f23f1ab` | `#2370` | Implement a workaround to ScrollSpy's heading-ID problem        | `#349`, `#2289`      | ScrollSpy workaround for invalid CSS selector IDs                    |
-| `7727c79` | `#2371` | Add _param.html shortcode                                       | —                    | New shortcode for parameter substitution                             |
+| `7727c79` | `#2371` | Add \_param.html shortcode                                      | —                    | New shortcode for parameter substitution                             |
 | `c2a8453` | `#2372` | Navigation page: switch to navbar & sidenav terminology         | —                    | Documentation terminology cleanup                                    |
 | `0d54010` | `#2373` | Fix: ensure ScrollSpy can always find the TOC                   | `#349`, `#2289`      | ScrollSpy robustness fix for missing TOC elements                    |
 | `217fde4` | `#2374` | Chore: refcache refresh and 404 fixes                           | —                    | Maintenance: link checking and refcache updates                      |
@@ -71,11 +71,11 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 
 ## CI / tooling commits
 
-| Commit    | PR      | Summary                             | Originating Issue(s) | Notes                                      |
-| --------- | ------- | ----------------------------------- | -------------------- | ------------------------------------------ |
-| `818f62f` | `#2344` | Script to embed build ID in version | —                    | Helper tooling                             |
-| `0e2ad18` | `#2351` | Release process instruction updates | `#2266`              | Prep work for 0.13 release tracker         |
-| `595b25e` | `#2362` | Rework `fix:version` for pre-commit | `#2266`              | Makes build-version helper usable in hooks |
-| `4d72b4b` | `#2367` | Update build & release related scripts and contrib docs | `#2266` | CI/tooling maintenance for release process |
+| Commit    | PR      | Summary                                                 | Originating Issue(s) | Notes                                      |
+| --------- | ------- | ------------------------------------------------------- | -------------------- | ------------------------------------------ |
+| `818f62f` | `#2344` | Script to embed build ID in version                     | —                    | Helper tooling                             |
+| `0e2ad18` | `#2351` | Release process instruction updates                     | `#2266`              | Prep work for 0.13 release tracker         |
+| `595b25e` | `#2362` | Rework `fix:version` for pre-commit                     | `#2266`              | Makes build-version helper usable in hooks |
+| `4d72b4b` | `#2367` | Update build & release related scripts and contrib docs | `#2266`              | CI/tooling maintenance for release process |
 
 [commits since v0.12.0]: https://github.com/google/docsy/compare/v0.12.0...main

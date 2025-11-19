@@ -17,7 +17,8 @@ cSpell:ignore: docsy
 - Accessibility color and typography defaults improved for better contrast
   (#2285).
 - Dark mode enhancements:
-  - Experimental color adjustment system for better contrast with custom theme colors
+  - Experimental color adjustment system for better contrast with custom theme
+    colors
   - Dark mode support for Google search integration
   - TOC entry color contrast improvements
   - Page meta spacing fixes
