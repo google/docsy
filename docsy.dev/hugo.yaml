@@ -148,9 +148,9 @@ module:
   mounts:
     - source: content/en
       target: content
-    # Mount the repo's top-level .md files under site
+    # Mount the repo root README.md for inclusion in site/readme.md
     - source: ../README.md
-      target: content/site/readme.md
+      target: content/site/repo/README.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content

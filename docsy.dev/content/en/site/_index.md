@@ -1,7 +1,7 @@
 ---
-title: Docsy site
-linkTitle: Site
-description: Docsy site design documentation and other resources
+title: About this website
+linkTitle: Website docs
+description: How this site is built, maintained, and deployed.
 aliases: [site]
 outputs: [HTML]
 cascade:
@@ -15,13 +15,16 @@ cascade:
         to: $2
     target:
       path: /site/readme
+  - params:
+      toc_hide: true
+    target:
+      path: /site/repo**
 params:
   github_subdir: docsy.dev # cSpell:disable-line
   path_base_for_github_subdir: ''
+  FA: <i class="fa-solid fa-{1} text-{2}"></i>
 ---
 
-- Docsy build and design notes (TBC)
-- Repository files:
-  - [CHANGELOG](changelog)
-  - [CONTRIBUTING](contributing)
-  - [README](readme)
+{{% _param FA person-digging " pe-2" %}}
+Coming soon: Design, implementation, and ops docs for the project
+{{% _param FA person-digging " ps-2" %}}

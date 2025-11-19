@@ -1,6 +1,7 @@
 ---
 title: Changelog
 description: Docsy repository changelog
+weight: 99999
 cSpell:ignore: deining docsy gitmodules gtag lookandfeel mhchem navs tabpane FOUC
 ---
 

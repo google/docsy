@@ -1,6 +1,7 @@
 ---
 title: Contributing
 description: How to contribute to Docsy
+weight: 100
 cSpell:ignore: chalin docsy hugo
 ---
 
