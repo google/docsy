@@ -21,4 +21,3 @@ const pruned = Object.fromEntries(
 writeFileSync(refcacheFile, JSON.stringify(pruned, null, 2) + '\n');
 
 console.log('Done.');
-

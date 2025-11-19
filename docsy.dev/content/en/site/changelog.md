@@ -2,7 +2,8 @@
 title: Changelog
 description: Docsy repository changelog
 weight: 99999
-cSpell:ignore: deining docsy gitmodules gtag lookandfeel mhchem navs tabpane FOUC
+# prettier-ignore
+cSpell:ignore: deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -96,15 +97,11 @@ See [semver].
 [#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
 [0.13.0-blog]: /blog/2025/0.13.0/
-[0.13.0-blog-lang-menu]:
-  /blog/2025/0.13.0/#language-menu-visibility
+[0.13.0-blog-lang-menu]: /blog/2025/0.13.0/#language-menu-visibility
 [0.13.0-blog-alert]: /blog/2025/0.13.0/#alert-shortcode
-[0.13.0-blog-toc]:
-  /blog/2025/0.13.0/#active-toc-entry-tracking
-[0.13.0-blog-sidebar]:
-  /blog/2025/0.13.0/#section-sidebar-root
-[0.13.0-blog-accessibility]:
-  /blog/2025/0.13.0/#accessibility
+[0.13.0-blog-toc]: /blog/2025/0.13.0/#active-toc-entry-tracking
+[0.13.0-blog-sidebar]: /blog/2025/0.13.0/#section-sidebar-root
+[0.13.0-blog-accessibility]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
 
@@ -165,13 +162,10 @@ For the full list of changes, see the [0.12.0] release page.
 [#2192]: https://github.com/google/docsy/pull/2192
 [#2223]: https://github.com/google/docsy/pull/2223
 [#2243]: https://github.com/google/docsy/pull/2243
-[before-page-content]:
-  /docs/adding-content/lookandfeel/#before-page-content
-[Breadcrumb navigation]:
-  /docs/adding-content/navigation/#breadcrumb-navigation
+[before-page-content]: /docs/adding-content/lookandfeel/#before-page-content
+[Breadcrumb navigation]: /docs/adding-content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
-[Heading self links]:
-  /docs/adding-content/navigation/#heading-self-links
+[Heading self links]: /docs/adding-content/navigation/#heading-self-links
 [_td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
 
@@ -190,8 +184,7 @@ For the full list of changes, see the [0.11.0] release page.
 
 [0.11.0]: https://github.com/google/docsy/releases/v0.11.0
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
-[Adding a community page]:
-  /docs/adding-content/content/#adding-a-community-page
+[Adding a community page]: /docs/adding-content/content/#adding-a-community-page
 [params.ui.sidebar_menu_truncate]:
   /docs/adding-content/navigation/#side-nav-options
 [rtl]: /docs/language/#right-to-left-languages
@@ -221,8 +214,7 @@ dark-mode support][dark-mode].
 [#1952]: https://github.com/google/docsy/pull/1952
 [0.10.0]: https://github.com/google/docsy/releases/v0.10.0
 [0.10.0 release report]: /blog/2024/0.10.0/
-[dark-mode]:
-  /blog/2024/0.10.0/#color-themes-and-dark-mode-support
+[dark-mode]: /blog/2024/0.10.0/#color-themes-and-dark-mode-support
 
 ## v0.9.1
 
@@ -277,15 +269,13 @@ For details concerning all footer changes, see [#1818].
 [#1410]: https://github.com/google/docsy/pull/1410
 [#1744]: https://github.com/google/docsy/pull/1744
 [#1818]: https://github.com/google/docsy/pull/1818
-[disabling links]:
-  /docs/adding-content/repository-links/#disabling-links
+[disabling links]: /docs/adding-content/repository-links/#disabling-links
 [Footer layout]: /blog/2024/0.9.0/#footer-layout
 [Footer copyright]: /blog/2024/0.9.0/#footer-copyright
 [Footer streamlined]: /blog/2024/0.9.0/#footer-streamlined
 [0.9.0:hsl]: /blog/2024/0.9.0/#heading-self-links
 [look and feel]: /blog/2024/0.9.0/#look-and-feel
-[mermaid]:
-  /docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
+[mermaid]: /docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: /docs/language/
 [path_base_for_github_subdir]:
   /docs/adding-content/repository-links/#path_base_for_github_subdir-optional
@@ -326,10 +316,8 @@ For the full list of changes, see the [0.8.0] release page.
   /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [Docsy NPM install side-effect]:
   /docs/get-started/other-options/#docsy-npm-install-side-effect
-[Use Docsy as a Hugo Module]:
-  /docs/get-started/docsy-as-module/
-[User feedback]:
-  /docs/adding-content/feedback/#user-feedback
+[Use Docsy as a Hugo Module]: /docs/get-started/docsy-as-module/
+[User feedback]: /docs/adding-content/feedback/#user-feedback
 
 ## v0.7.2
 
@@ -355,10 +343,8 @@ noteworthy changes here:
 [#1661]: https://github.com/google/docsy/pull/1661
 [#1662]: https://github.com/google/docsy/pull/1662
 [0.7.2]: https://github.com/google/docsy/releases/v0.7.2
-[Algolia DocSearch]:
-  /docs/adding-content/search/#algolia-docsearch
-[Tabbed panes]:
-  /docs/adding-content/shortcodes/#tabbed-panes
+[Algolia DocSearch]: /docs/adding-content/search/#algolia-docsearch
+[Tabbed panes]: /docs/adding-content/shortcodes/#tabbed-panes
 
 ## v0.7.1
 
@@ -411,8 +397,7 @@ For the full list of changes, see the [0.7.0] release page.
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
-[chroma-docsy]:
-  /docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+[chroma-docsy]: /docs/adding-content/lookandfeel/#code-highlighting-with-chroma
 [shortcodes with markdown]:
   https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
 
@@ -436,8 +421,7 @@ For the full list of changes, see the [0.7.0] release page.
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
-[blocks/section]:
-  /docs/adding-content/shortcodes/#blockssection
+[blocks/section]: /docs/adding-content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 
@@ -504,8 +488,7 @@ are documented below.
   For details, see [Adding Analytics > Setup].
 
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
-[adding analytics > setup]:
-  /docs/adding-content/feedback/#setup
+[adding analytics > setup]: /docs/adding-content/feedback/#setup
 [v4.6.2 release page]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:

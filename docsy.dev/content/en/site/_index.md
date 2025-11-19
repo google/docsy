@@ -25,6 +25,5 @@ params:
   FA: <i class="fa-solid fa-{1} text-{2}"></i>
 ---
 
-{{% _param FA person-digging " pe-2" %}}
-Coming soon: Design, implementation, and ops docs for the project
-{{% _param FA person-digging " ps-2" %}}
+{{% _param FA person-digging " pe-2" %}} Coming soon: Design, implementation,
+and ops docs for the project {{% _param FA person-digging " ps-2" %}}

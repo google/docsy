@@ -23,7 +23,8 @@ menu:
     - name: Example Site
       weight: 40
       url: https://example.docsy.dev
-      post: <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+      post:
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
 
 languages:
@@ -58,8 +59,7 @@ markup:
 params:
   copyright:
     authors: >-
-      Docsy Authors |
-      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+      Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
@@ -155,5 +155,4 @@ module:
     - source: content/en
       target: content
       lang: xx
-
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime
