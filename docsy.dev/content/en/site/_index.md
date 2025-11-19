@@ -5,14 +5,16 @@ description: Docsy site design documentation and other resources
 aliases: [site]
 outputs: [HTML]
 cascade:
-  type: docs
-  params:
-    ui:
-      breadcrumb_disable: true
-    github_subdir: ''
-    path_base_for_github_subdir:
-      from: '^(.*)/(\w+\.md)'
-      to: $2
+  - type: docs
+  - params:
+      ui:
+        breadcrumb_disable: true
+      github_subdir: ''
+      path_base_for_github_subdir:
+        from: '^(.*)/(\w+\.md)'
+        to: $2
+    target:
+      path: /site/readme
 params:
   github_subdir: docsy.dev # cSpell:disable-line
   path_base_for_github_subdir: ''

@@ -151,8 +151,6 @@ module:
     # Mount the repo's top-level .md files under site
     - source: ../README.md
       target: content/site/readme.md
-    - source: ../CONTRIBUTING.md
-      target: content/site/contributing.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content
