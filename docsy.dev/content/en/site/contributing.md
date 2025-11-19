@@ -133,7 +133,7 @@ repo.
       ## Release summary
 
       - [Release report](/blog/2024/0.X.Y/)
-      - [CHANGELOG](https://github.com/google/docsy/blob/main/CHANGELOG.md#v0XY)
+      - [CHANGELOG](/site/changelog/#v0XY)
       ```
 
     - Select **Create a discussion for this release**.
@@ -170,7 +170,7 @@ further changes are merged into the default branch:
 - **`scripts/set-package-version/index.mjs`**: Low-level version manager. See
   script help for usage.
 
-[CHANGELOG]: https://github.com/google/docsy/blob/main/CHANGELOG.md
+[CHANGELOG]: /site/changelog/
 [contribution guidelines]: /docs/contribution-guidelines/
 [docsy-example]: https://github.com/google/docsy-example
 [Draft a new release]: https://github.com/google/docsy/releases/new
