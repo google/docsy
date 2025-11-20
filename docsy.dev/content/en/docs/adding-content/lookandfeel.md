@@ -146,7 +146,7 @@ You can adjust dark-mode support as follows:
   - **Color-contrast adjustments**: if your site has custom theme colors, you
     will probably need to selectively tune your dark-mode theme colors to ensure
     that the have good color-contrast. Learn
-    [how to pick colors with good color-contrast](#how-to-pick-colors-with-good-color-contrast).
+    [how to pick colors with good color-contrast](#pick-good-color-contrast).
 
 {{% alert title="Terminology note" color=info %}}
 
@@ -181,7 +181,7 @@ To [disable dark mode][] entirely:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
 [site configuration]: https://gohugo.io/configuration/introduction/
 
-#### How to pick colors with good color-contrast
+#### How to pick colors with good color-contrast (EXPERIMENTAL) {#pick-good-color-contrast}
 
 Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
 provides [_color-adjustments-dark.scss] as an example of theme color
@@ -215,6 +215,13 @@ dark mode theme customization file and import it in your project's
   https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss
 [Chroma for code highlighting]: #code-highlighting-with-chroma
 [Light/dark code styles]: #lightdark-code-styles
+
+{{% alert title="EXPERIMENTAL" color="info" %}}
+
+This feature is experimental. We're releasing this early to so that projects can
+try out this approach and provide feedback on its usefulness and convenience.
+
+{{% /alert %}}
 
 {{% alert title="Note" %}}
 

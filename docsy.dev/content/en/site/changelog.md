@@ -56,10 +56,10 @@ See [semver].
 
 > **UNRELEASED: this planned version is still under development**
 
-**References**:
+**Resources**:
 
 - [Release 0.13.0 report and upgrade guide][0.13.0-blog]
-- For the full list of changes, see the [0.13.0] release page.
+- [0.13.0] release page for the full list of changes
 
 **Breaking changes**:
 
@@ -76,14 +76,24 @@ See [semver].
 
 **Other changes**:
 
-- Improved accessibility: [color contrast and
+- **Improved accessibility**: [color contrast and
   typography][0.13.0-blog-accessibility] ([#2285]).
-- Fixed dark-mode [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC)
-  ([#2332]).
+- Fixed **dark-mode**:
+  - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332]).
+  - Improved TOC entry color contrast in dark mode ([#2376], [#2379]).
 - Better NPM support: resolved optional and peer dependency issues ([#2115]).
   See [breaking changes][0.13.0-blog-breaking] in the blog post.
+- Dependency updates: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - Updated translations: added Occitan locale ([#2173]) and refreshed Simplified
   Chinese ([#2313]) and Ukrainian ([#2331]).
+
+**Experimental**:
+
+- **Dark mode**. Added support for:
+  - Google search integration ([#2387]).
+  - Sample support for color-contrast adjustments: for details, see [How to pick
+    colors with good color-contrast][] ([#2384]).
+- New `_param` shortcode with support for parameter substitution ([#2371]).
 
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2173]: https://github.com/google/docsy/issues/2173
@@ -94,6 +104,11 @@ See [semver].
 [#2332]: https://github.com/google/docsy/issues/2332
 [#2364]: https://github.com/google/docsy/pull/2364
 [#2366]: https://github.com/google/docsy/pull/2366
+[#2371]: https://github.com/google/docsy/pull/2371
+[#2376]: https://github.com/google/docsy/pull/2376
+[#2379]: https://github.com/google/docsy/pull/2379
+[#2384]: https://github.com/google/docsy/pull/2384
+[#2387]: https://github.com/google/docsy/pull/2387
 [#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
 [0.13.0-blog]: /blog/2025/0.13.0/
@@ -104,6 +119,8 @@ See [semver].
 [0.13.0-blog-accessibility]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
+[How to pick colors with good color-contrast]:
+  /docs/adding-content/lookandfeel/#pick-good-color-contrast
 
 ## v0.12.0
 

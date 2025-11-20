@@ -803,6 +803,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.15472-05:00"
   },
+  "https://github.com/google/docsy/blob/main/scripts/scrollspy-patch/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:48.212045-05:00"
+  },
   "https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.116869-05:00"
@@ -1045,7 +1049,7 @@
   },
   "https://github.com/google/docsy/issues/2347": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T06:27:50.429002-05:00"
+    "LastSeen": "2025-11-16T10:05:47.5945-05:00"
   },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
@@ -1246,6 +1250,34 @@
   "https://github.com/google/docsy/pull/2366": {
     "StatusCode": 206,
     "LastSeen": "2025-11-15T19:45:06.164029-05:00"
+  },
+  "https://github.com/google/docsy/pull/2371": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T17:22:30.695583-05:00"
+  },
+  "https://github.com/google/docsy/pull/2376": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:47.09091-05:00"
+  },
+  "https://github.com/google/docsy/pull/2379": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:47.726835-05:00"
+  },
+  "https://github.com/google/docsy/pull/2382": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:47.137642-05:00"
+  },
+  "https://github.com/google/docsy/pull/2383": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:47.727885-05:00"
+  },
+  "https://github.com/google/docsy/pull/2384": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:48.336894-05:00"
+  },
+  "https://github.com/google/docsy/pull/2387": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T19:40:47.214729-05:00"
   },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
@@ -1761,7 +1793,7 @@
   },
   "https://github.com/twbs/bootstrap/pull/41726": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T06:27:49.694807-05:00"
+    "LastSeen": "2025-11-16T10:05:46.680642-05:00"
   },
   "https://github.com/twbs/bootstrap/releases/tag/v4.6.2": {
     "StatusCode": 206,

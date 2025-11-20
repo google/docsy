@@ -60,9 +60,13 @@ cSpell:ignore: docsy
   command examples
 - Keep the draft updated in [0.13.0 release report][]
 
-### Refresh actions
+---
 
-Repeat when new commits land on `main`:
+## Refresh actions
+
+Repeat when new commits land on `main` do the following.
+
+### Update the plan and reports
 
 - Revisit the plan and update the reports with new commits to `main` integrated
   into existing summaries.
@@ -72,6 +76,24 @@ Repeat when new commits land on `main`:
 Report refreshed for commits through [c37aad0] (includes dark mode enhancements,
 ScrollSpy fixes, and documentation updates).
 
+### 0.13.0 blog post
+
+- Reread the [0.13.0 blog post][].
+- Compare it to the information you recently added to the 0.13.0 release report
+  pages in this folder.
+- Is the post complete? If not identify what is missing.
+
+### Changelog
+
+- Reread the [changelog entry for 0.13.0][0.13.0-changelog].
+- Compare it to the information you recently added to the 0.13.0 release report
+  pages in this folder.
+- Is the changelog complete? If not, add the missing information.
+- Remember that the changelog is meant to only (very briefly) highlight
+  significant changes.
+
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
+[0.13.0-changelog]: ../../docsy.dev/content/en/site/changelog/#v0130
 [c37aad0]: https://github.com/google/docsy/commit/c37aad0
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
+[0.13.0 blog post]: ../docsy.dev/content/en/blog/2025/0.13.0.md

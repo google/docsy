@@ -2,7 +2,6 @@
 title: Repository-root markdown files
 linkTitle: Repo files
 description: Repository-root pages for the Docsy project.
-outputs: [HTML]
 cascade:
   params:
     ui:
