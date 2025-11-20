@@ -120,7 +120,7 @@ See [semver].
 [0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
 [How to pick colors with good color-contrast]:
-  /docs/adding-content/lookandfeel/#pick-good-color-contrast
+  /docs/content/lookandfeel/#pick-good-color-contrast
 
 ## v0.12.0
 
@@ -179,10 +179,10 @@ For the full list of changes, see the [0.12.0] release page.
 [#2192]: https://github.com/google/docsy/pull/2192
 [#2223]: https://github.com/google/docsy/pull/2223
 [#2243]: https://github.com/google/docsy/pull/2243
-[before-page-content]: /docs/adding-content/lookandfeel/#before-page-content
-[Breadcrumb navigation]: /docs/adding-content/navigation/#breadcrumb-navigation
+[before-page-content]: /docs/content/lookandfeel/#before-page-content
+[Breadcrumb navigation]: /docs/content/navigation/#breadcrumb-navigation
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
-[Heading self links]: /docs/adding-content/navigation/#heading-self-links
+[Heading self links]: /docs/content/navigation/#heading-self-links
 [_td-content-after-header.html]:
   https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
 
@@ -201,9 +201,8 @@ For the full list of changes, see the [0.11.0] release page.
 
 [0.11.0]: https://github.com/google/docsy/releases/v0.11.0
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
-[Adding a community page]: /docs/adding-content/content/#adding-a-community-page
-[params.ui.sidebar_menu_truncate]:
-  /docs/adding-content/navigation/#side-nav-options
+[Adding a community page]: /docs/content/adding-content/#adding-a-community-page
+[params.ui.sidebar_menu_truncate]: /docs/content/navigation/#side-nav-options
 [rtl]: /docs/language/#right-to-left-languages
 
 ## v0.10.0
@@ -286,17 +285,17 @@ For details concerning all footer changes, see [#1818].
 [#1410]: https://github.com/google/docsy/pull/1410
 [#1744]: https://github.com/google/docsy/pull/1744
 [#1818]: https://github.com/google/docsy/pull/1818
-[disabling links]: /docs/adding-content/repository-links/#disabling-links
+[disabling links]: /docs/content/repository-links/#disabling-links
 [Footer layout]: /blog/2024/0.9.0/#footer-layout
 [Footer copyright]: /blog/2024/0.9.0/#footer-copyright
 [Footer streamlined]: /blog/2024/0.9.0/#footer-streamlined
 [0.9.0:hsl]: /blog/2024/0.9.0/#heading-self-links
 [look and feel]: /blog/2024/0.9.0/#look-and-feel
-[mermaid]: /docs/adding-content/diagrams-and-formulae/#diagrams-with-mermaid
+[mermaid]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [multi-language]: /docs/language/
 [path_base_for_github_subdir]:
-  /docs/adding-content/repository-links/#path_base_for_github_subdir-optional
-[Repository Links]: /docs/adding-content/repository-links/
+  /docs/content/repository-links/#path_base_for_github_subdir-optional
+[Repository Links]: /docs/content/repository-links/
 [union file system]:
   https://gohugo.io/getting-started/directory-structure/#union-file-system
 
@@ -334,7 +333,7 @@ For the full list of changes, see the [0.8.0] release page.
 [Docsy NPM install side-effect]:
   /docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]: /docs/get-started/docsy-as-module/
-[User feedback]: /docs/adding-content/feedback/#user-feedback
+[User feedback]: /docs/content/feedback/#user-feedback
 
 ## v0.7.2
 
@@ -360,8 +359,8 @@ noteworthy changes here:
 [#1661]: https://github.com/google/docsy/pull/1661
 [#1662]: https://github.com/google/docsy/pull/1662
 [0.7.2]: https://github.com/google/docsy/releases/v0.7.2
-[Algolia DocSearch]: /docs/adding-content/search/#algolia-docsearch
-[Tabbed panes]: /docs/adding-content/shortcodes/#tabbed-panes
+[Algolia DocSearch]: /docs/content/search/#algolia-docsearch
+[Tabbed panes]: /docs/content/shortcodes/#tabbed-panes
 
 ## v0.7.1
 
@@ -414,7 +413,7 @@ For the full list of changes, see the [0.7.0] release page.
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
-[chroma-docsy]: /docs/adding-content/lookandfeel/#code-highlighting-with-chroma
+[chroma-docsy]: /docs/content/lookandfeel/#code-highlighting-with-chroma
 [shortcodes with markdown]:
   https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
 
@@ -438,7 +437,7 @@ For the full list of changes, see the [0.7.0] release page.
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
-[blocks/section]: /docs/adding-content/shortcodes/#blockssection
+[blocks/section]: /docs/content/shortcodes/#blockssection
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 
@@ -505,11 +504,11 @@ are documented below.
   For details, see [Adding Analytics > Setup].
 
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
-[adding analytics > setup]: /docs/adding-content/feedback/#setup
+[adding analytics > setup]: /docs/content/feedback/#setup
 [v4.6.2 release page]: https://github.com/twbs/bootstrap/releases/tag/v4.6.2
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
-  /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
+  /docs/content/lookandfeel/#styling-your-project-logo-and-name
 [upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
 [what's changed in v6]:
   https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed

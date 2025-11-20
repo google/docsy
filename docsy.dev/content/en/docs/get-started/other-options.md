@@ -376,7 +376,7 @@ from scratch as it provides defaults for many required configuration parameters.
 ## What's next?
 
 - Add some [basic site configuration](/docs/get-started/basic-configuration/)
-- [Add content and customize your site](/docs/adding-content/)
+- [Add content and customize your site](/docs/content/)
 - Get some ideas from our
   [Example Site](https://github.com/google/docsy-example) and other
   [Examples](/docs/examples/).

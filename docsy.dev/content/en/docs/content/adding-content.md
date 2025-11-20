@@ -62,7 +62,7 @@ If you've copied the example site, you already have appropriately named
 top-level section directories for using Docsy's templates, each with an index
 page ( `_index.md` or `index.html`) page for users to land on. These top-level
 sections also appear in the example site's
-[navbar](/docs/adding-content/navigation/#site-navbar).
+[navbar](/docs/content/navigation/#site-navbar).
 
 ### Custom sections
 
@@ -305,7 +305,7 @@ description: >
 
 The minimum frontmatter you need to provide is a title: everything else is up to
 you! However, if you leave out the page weight, your
-[navigation](/docs/adding-content/navigation) may get a little disorganized. You
+[navigation](/docs/content/navigation) may get a little disorganized. You
 may also want to include `description` since Docsy uses that to generate the
 meta `description` tag used by search engines. See [Search Engine Optimization
 (SEO) meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}})
@@ -360,9 +360,9 @@ markup:
 {{% /alert %}}
 
 In addition to your marked-up text, you can also use Hugo and Docsy's
-[shortcodes](/docs/adding-content/shortcodes): reusable chunks of HTML that you
+[shortcodes](/docs/content/shortcodes): reusable chunks of HTML that you
 can use to quickly build your pages. Find out more about shortcodes in
-[Docsy Shortcodes](/docs/adding-content/shortcodes).
+[Docsy Shortcodes](/docs/content/shortcodes).
 
 {{% alert title="Note" color="info" %}} Hugo also supports adding content using
 other markups using
@@ -414,9 +414,9 @@ resources together with the content.
 
 You can see examples of both approaches in this and our example site. For
 example, the source for this page is just a standalone file
-`/content/en/docs/adding-content.md`. However the source for
-[Docsy Shortcodes](/docs/adding-content/shortcodes/) in this site lives in
-`/content/en/docs/adding-content/shortcodes/index.md`, with the image resource
+`/content/en/docs/content/adding-content.md`. However the source for
+[Docsy Shortcodes](/docs/content/shortcodes/) in this site lives in
+`/content/en/docs/content/shortcodes/index.md`, with the image resource
 used by the page in the same `/shortcodes/` directory. In Hugo terminology, this
 is called a _leaf bundle_ because it's a folder containing all the data for a
 single site page without any child pages (and uses `index.md` without an
@@ -441,7 +441,7 @@ Both these templates include:
 as well as the common header and footer used by all your site's pages. Which
 template is applied depends on whether you've added the content to the `blog` or
 `docs` content directory. You can find out more about how the nav and page menu
-are created in [Navigation and Search](/docs/adding-content/navigation/).
+are created in [Navigation and Search](/docs/content/navigation/).
 
 ### Organizing your documentation
 
@@ -465,7 +465,7 @@ To add docs to a subsection, just add your page files to the relevant
 subdirectory. Any pages that you add to a subsection in addition to the
 subsection index page will appear in a submenu (look to the left to see one in
 action!), again ordered by page `weight`. Find out more about adding Docsy's
-navigation metadata in [Navigation and Search](/docs/adding-content/navigation/)
+navigation metadata in [Navigation and Search](/docs/content/navigation/)
 
 If you've copied the example site, you'll already have some suggested
 subdirectories in your `docs` directory, with guidance for what types of content
@@ -478,7 +478,7 @@ organizing your content with Docsy in
 By default a docs section landing page (the `_index.md` or `_index.html` in the
 section directory) uses a layout that adds a formatted list of links to the
 pages in the section, with their frontmatter descriptions. The
-[Content and Customization](/docs/adding-content/) landing page in this site is
+[Content and Customization](/docs/content/) landing page in this site is
 a good example.
 
 To display a simple bulleted list of links to the section's pages instead,
@@ -654,10 +654,10 @@ has no left nav and is useful for creating a home page for your site or other
 
 If you've copied the example site, you already have a simple site landing page
 in `content/en/_index.html`. This is made up of Docsy's provided Hugo shortcode
-[page blocks](/docs/adding-content/shortcodes/#shortcode-blocks).
+[page blocks](/docs/content/shortcodes/#shortcode-blocks).
 
 To customize the large landing image, which is in a
-[cover](/docs/adding-content/shortcodes/#blockscover) block, replace the
+[cover](/docs/content/shortcodes/#blockscover) block, replace the
 `content/en/featured-background.jpg` file in your project with your own image
 (it can be called whatever you like as long as it has `background` in the file
 name). You can remove or add as many blocks as you like, as well as adding your
@@ -665,7 +665,7 @@ own custom content.
 
 The example site also has an About page in `content/en/about/_index.html` using
 the same Docsy template. Again, this is made up of
-[page blocks](/docs/adding-content/shortcodes/#shortcode-blocks), including
+[page blocks](/docs/content/shortcodes/#shortcode-blocks), including
 another background image in `content/en/about/featured-background.jpg`. As with
 the site landing page, you can replace the image, remove or add blocks, or just
 add your own content.
@@ -673,7 +673,7 @@ add your own content.
 ### Building your own landing pages
 
 If you've just used the theme, you can still use all Docsy's provided
-[page blocks](/docs/adding-content/shortcodes/#shortcode-blocks) (or any other
+[page blocks](/docs/content/shortcodes/#shortcode-blocks) (or any other
 content you want) to build your own landing pages in the same file locations.
 
 ## Adding a community page
@@ -863,7 +863,7 @@ disableKinds: [RSS]
 
 {{% alert title=Note color=info %}}
 
-If you have enabled our [print feature](/docs/adding-content/print/) or
+If you have enabled our [print feature](/docs/content/print/) or
 otherwise specified section-level output formats in
 `hugo.toml`/`hugo.yaml`/`hugo.json`, make sure that `"RSS"` is listed as an
 output format, otherwise you won't get section-level RSS feeds (and your blog

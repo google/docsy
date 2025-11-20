@@ -77,5 +77,5 @@ To cleanup your system and delete the container image follow the next steps.
 ## What's next?
 
 * Learn about [basic setup and configurations for Docsy](/docs/get-started/basic-configuration/).
-* [Add content and customize your site](/docs/adding-content/)
+* [Add content and customize your site](/docs/content/)
 * [Publish your site](/docs/deployment/).

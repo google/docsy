@@ -271,7 +271,7 @@ dynamic context:
 You can use these classes, for example, to style your text in an appropriate
 color when you don't know if the `primary` color is dark or light, to ensure
 proper color contrast. They are also useful when you receive the color code as a
-[shortcode](/docs/adding-content/shortcodes/) parameter.
+[shortcode](/docs/content/shortcodes/) parameter.
 
 The value of `<color>` can be any of the color names, `primary`, `white`,
 `dark`, `warning`, `light`, `success`, `300`, `blue`, `orange` etc.
@@ -478,9 +478,9 @@ of the following:
     ```
 
 [_nav.scss]: https://github.com/google/docsy/blob/main/assets/scss/_nav.scss
-[project-styles]: /docs/adding-content/lookandfeel/#project-style-files
+[project-styles]: /docs/content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
-[your logo]: /docs/adding-content/iconsimages/#add-your-logo
+[your logo]: /docs/content/iconsimages/#add-your-logo
 
 ### Light/dark-mode menu
 
@@ -548,7 +548,7 @@ backwards-incompatible ways in a future releases.
 {{% /alert %}}
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
-[search box]: /docs/adding-content/search/
+[search box]: /docs/content/search/
 
 ### Translucent over cover images
 
@@ -566,7 +566,7 @@ these cases, you can disable navbar translucency by setting the
 site's [configuration file][].
 
 [About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/adding-content/shortcodes/#blockscover
+[blocks/cover]: /docs/content/shortcodes/#blockscover
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #site-colors

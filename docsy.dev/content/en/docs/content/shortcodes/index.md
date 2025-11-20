@@ -81,7 +81,7 @@ but is included here for completeness.
 | byline       | Byline text on featured image. |
 
 To set the background image, place an image with the word "background" in the
-name in the page's [Page Bundle](/docs/adding-content/content/#page-bundles).
+name in the page's [Page Bundle](/docs/content/adding-content/#page-bundles).
 For example, in our the example site the background image in the home page's
 cover block is
 [`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en),
@@ -290,7 +290,7 @@ This is placeholder content
 ### imgproc
 
 The **imgproc** shortcode finds an image in the current
-[Page Bundle](/docs/adding-content/content/#page-bundles) and scales it given a
+[Page Bundle](/docs/content/adding-content/#page-bundles) and scales it given a
 set of processing instructions.
 
 ```go-template
@@ -361,7 +361,7 @@ You can place the `swaggerui` shortcode anywhere inside a page with the
 it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI
 YAML or JSON file as source. This file can be hosted anywhere you like, for
 example in your site's root
-[`/static` folder](/docs/adding-content/content/#adding-static-content).
+[`/static` folder](/docs/content/adding-content/#adding-static-content).
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -412,7 +412,7 @@ The `redoc` shortcode uses the open-source
 [Redoc](https://github.com/Redocly/redoc) tool to render reference API
 documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you
 like, for example in your site's root
-[`/static` folder](/docs/adding-content/content/#adding-static-content), but you
+[`/static` folder](/docs/content/adding-content/#adding-static-content), but you
 can use a URL as well, for example:
 
 ```yaml
@@ -553,7 +553,7 @@ active tabs:
   **Welcome!**
   {{%/* /tab */%}}
   {{</* tab header="German" lang="de" */>}}
-    <img src="/docs/adding-content/shortcodes/flags/de.png" alt="Flag Germany">
+    <img src="/docs/content/shortcodes/flags/de.png" alt="Flag Germany">
     <b>Herzlich willkommen!</b>
   {{</* /tab */>}}
   {{%/* tab header="Swahili" lang="sw" */%}}
@@ -574,7 +574,7 @@ This code translates to the right aligned tabbed pane below, showing a
   **Welcome!**
   {{% /tab %}}
   {{< tab header="German" lang="de" >}}
-    <img src="/docs/adding-content/shortcodes/flags/de.png" alt="Flag Germany">
+    <img src="/docs/content/shortcodes/flags/de.png" alt="Flag Germany">
     <b>Herzlich willkommen!</b>
   {{< /tab >}}
   {{% tab header="Swahili" lang="sw" %}}
