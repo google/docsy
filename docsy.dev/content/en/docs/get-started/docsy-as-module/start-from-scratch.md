@@ -152,7 +152,7 @@ You may get Hugo errors for missing parameters and values when you try to build 
 ## What's next?
 
 * Add some [basic configuration](/docs/get-started/basic-configuration/)
-* [Add content and customize your site](/docs/adding-content/)
+* [Add content and customize your site](/docs/content/)
 * Get some ideas from our [Example Site](https://github.com/google/docsy-example) and other [Examples](/docs/examples/).
 * [Publish your site](/docs/deployment/).
 

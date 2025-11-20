@@ -15,7 +15,7 @@ Updating Docsy means that your site will build using the latest version of Docsy
 at `HEAD` and include all the new commits or changes that have been merged since
 the point in time that you initially added the Docsy submodule, or last updated.
 Updating won't affect any modifications that you made in your own project to
-[override the Docsy look and feel](/docs/adding-content/lookandfeel/), as your
+[override the Docsy look and feel](/docs/content/lookandfeel/), as your
 overrides don't modify the theme itself. For details about what has changed in
 the theme since your last update, see the list of
 [Docsy commits](https://github.com/google/docsy/commits/main).

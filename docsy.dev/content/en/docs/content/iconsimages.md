@@ -43,7 +43,7 @@ For information about styling your logo, see [Styling your project logo and
 name][].
 
 [Styling your project logo and name]:
-  /docs/adding-content/lookandfeel/#styling-your-project-logo-and-name
+  /docs/content/lookandfeel/#styling-your-project-logo-and-name
 
 ## Use icons
 
@@ -56,8 +56,8 @@ tier users. Check Docsy's
 release notes for Docsy's currently included version of FontAwesome.
 
 You can add FontAwesome icons to your
-[navbar](/docs/adding-content/navigation/#adding-icons-to-the-navbar),
-[side nav](/docs/adding-content/navigation/#adding-icons-to-the-side-nav), or
+[navbar](/docs/content/navigation/#adding-icons-to-the-navbar),
+[side nav](/docs/content/navigation/#adding-icons-to-the-side-nav), or
 anywhere in your text.
 
 ## Add your favicons
@@ -80,7 +80,7 @@ If you have special favicon requirements, you can create your own
 
 ### Landing pages
 
-Docsy's [`blocks/cover` shortcode](/docs/adding-content/shortcodes/#blockscover)
+Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blockscover)
 make it easy to add large cover images to your landing pages. The shortcode
 looks for an image with the word "background" in the name inside the landing
 page's [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so,
@@ -109,8 +109,8 @@ For a shorter image, as in the example site's About page, use one of `min`,
 ### Other pages
 
 To add inline images to other pages, use the
-[`imgproc` shortcode](/docs/adding-content/shortcodes/#imgproc). Alternatively,
+[`imgproc` shortcode](/docs/content/shortcodes/#imgproc). Alternatively,
 if you prefer, just use regular Markdown or HTML images and add your image files
 to your project's `static` directory. You can find out more about using this
 directory in
-[Adding static content](/docs/adding-content/content/#adding-static-content).
+[Adding static content](/docs/content/adding-content/#adding-static-content).

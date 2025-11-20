@@ -309,7 +309,7 @@ using the `description` meta tag to tell search engines what your page is about.
 For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
 
-- The page `description` [frontmatter field](content/#page-frontmatter)
+- The page `description` [frontmatter field](/docs/content/adding-content/#page-frontmatter)
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 

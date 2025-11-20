@@ -7,7 +7,7 @@ description:
 ---
 
 The Docsy
-[docs and blog layouts](/docs/adding-content/content/#adding-docs-and-blog-posts)
+[docs and blog layouts](/docs/content/adding-content/#adding-docs-and-blog-posts)
 include links for readers to edit the page or create issues for your docs or
 project via your site's source repository. The current generated links for each
 docs or blog page are:

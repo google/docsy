@@ -128,7 +128,7 @@ versions configured as explained in [Doc versioning][].
 
 To style the version menu, apply your custom CSS to `.td-navbar__version-menu`.
 
-[Doc versioning]: /docs/adding-content/versioning/
+[Doc versioning]: /docs/content/versioning/
 
 ### Language menu
 
@@ -164,11 +164,11 @@ it configured as explained in [Light/dark mode menu][].
 To style the light/dark mode menu, apply your custom CSS to
 `.td-navbar__light-dark-menu`.
 
-[Light/dark mode menu]: /docs/adding-content/lookandfeel/#lightdark-mode-menu
+[Light/dark mode menu]: /docs/content/lookandfeel/#lightdark-mode-menu
 
 ### Search box
 
-To configure site search, see [Search](/docs/adding-content/search/). When
+To configure site search, see [Search](/docs/content/search/). When
 configured, the search box appears as the last item in the top-level navbar, as
 well as the sidebar on mobile.
 
@@ -428,7 +428,7 @@ you want the link to show up in the menu, and add a `manualLink` parameter to
 its metadata. If a page has `manualLink` in its metadata, Docsy generates a link
 for it in the side nav for this page and in the section index (the list of the
 child pages of a section on a landing page - see
-[description in the Docsy docs](/docs/adding-content/content/#docs-section-landing-pages)),
+[description in the Docsy docs](/docs/content/adding-content/#docs-section-landing-pages)),
 but the link destination is replaced by the value of `manualLink`. The link text
 is the `title` (or `linkTitle` if set) of your placeholder page. You can
 optionally also set the `title` attribute of the link with the parameter
@@ -486,7 +486,7 @@ Examples:
 
 | `sidebar_root_for` | Example                                            |
 | ------------------ | -------------------------------------------------- |
-| `self`             | [Content and customization](/docs/adding-content/) |
+| `self`             | [Content and customization](/docs/content/) |
 | `children`         | [Best practices](/docs/best-practices/)            |
 
 To navigate out of a rooted section, click the “up” icon in the sidebar next to
@@ -516,7 +516,7 @@ details, see Hugo forum discussions [#55399] and [#51940].
   https://discourse.gohugo.io/t/tableofcontents-doesnt-render-headings-correctly-that-contains-shortcode/55399
 [#51940]:
   https://discourse.gohugo.io/t/can-hugo-include-shortcode-headings-in-toc/51940
-[Markdown shortcodes]: /docs/adding-content/shortcodes/#shortcode-delimiters
+[Markdown shortcodes]: /docs/content/shortcodes/#shortcode-delimiters
 
 {{% /alert %}}
 
@@ -620,7 +620,7 @@ also display single-element breadcrumb lists in index pages, add the following
 ```
 
 [Breadcrumb navigation]: https://en.wikipedia.org/wiki/Breadcrumb_navigation
-[style override]: /docs/adding-content/lookandfeel/#project-style-files
+[style override]: /docs/content/lookandfeel/#project-style-files
 
 Breadcrumb navigation is also shown for each item in the taxonomy results page
 &mdash; that is, when you click one of the taxonomy labels such as _Categories_

@@ -103,7 +103,7 @@ the different versions. Note that if the current page doesn't exist in the other
 version, the link will be broken.
 
 You can read more about Docsy menus in the guide to
-[navigation and search](/docs/adding-content/navigation/).
+[navigation and search](/docs/content/navigation/).
 
 ## Displaying a banner on archived doc sites
 

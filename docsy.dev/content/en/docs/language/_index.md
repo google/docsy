@@ -100,7 +100,7 @@ option.
 
 Once you've updated your site config, you create a content root directory for
 each language version in your source repo, such as `content/en` for English
-text, and add your [content](/docs/adding-content/content/) as usual. See the
+text, and add your [content](/docs/content/adding-content/) as usual. See the
 [Hugo Docs](https://gohugo.io/content-management/multilingual) on multi-language
 support for more information.
 
@@ -154,7 +154,7 @@ file](https://gohugo.io/getting-started/configuration/#configuration-file), the
 Docsy theme adds a language drop down to the navbar. Selecting
 a language takes the user to the translated version of the current page, or the
 home page for the given language. For details, see [Adding a language
-menu](/docs/adding-content/navigation/#language-menu).
+menu](/docs/content/navigation/#language-menu).
 
 ## Internationalization bundles
 
