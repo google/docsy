@@ -102,8 +102,8 @@ of the main page. This can be useful if the document doesn't change much between
 the different versions. Note that if the current page doesn't exist in the other
 version, the link will be broken.
 
-You can read more about Docsy menus in the guide to
-[navigation and search](/docs/content/navigation/).
+To learn more about Docsy menus, see
+[Navigation and menus](/docs/content/navigation/).
 
 ## Displaying a banner on archived doc sites
 

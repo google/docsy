@@ -9,7 +9,7 @@
   {{ warnidf "experimental-dark-mode-config" (printf "%s %s %s"
     "Site config 'params.ui.showLightDarkModeMenu' is using 'enable-only (experimental)' mode."
     "For details, see "
-    "https://www.docsy.dev/docs/adding-content/lookandfeel/#lightdark-mode-menu"
+    "https://www.docsy.dev/docs/content/lookandfeel/#lightdark-mode-menu"
   ) -}}
   {{ $darkModeConfig = dict "enable" true "showMenu" false -}}
 {{ else if $menuConfig -}}
@@ -30,7 +30,7 @@
     "%s %s %s"
     "Site config 'params.ui.showLightDarkModeMenu' is deprecated:"
     "use 'params.ui.darkMode.showMenu' or 'params.ui.darkMode.enable'. For details, see"
-    "https://www.docsy.dev/docs/adding-content/lookandfeel/#lightdark-mode-menu"
+    "https://www.docsy.dev/docs/content/lookandfeel/#lightdark-mode-menu"
   ) -}}
 {{ else if eq $paramUiDarkMode true -}}
   {{/* Shorthand */ -}}

@@ -305,11 +305,11 @@ description: >
 
 The minimum frontmatter you need to provide is a title: everything else is up to
 you! However, if you leave out the page weight, your
-[navigation](/docs/content/navigation) may get a little disorganized. You
-may also want to include `description` since Docsy uses that to generate the
-meta `description` tag used by search engines. See [Search Engine Optimization
-(SEO) meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}})
-for details.
+[navigation](/docs/content/navigation) may get a little disorganized. You may
+also want to include `description` since Docsy uses that to generate the meta
+`description` tag used by search engines. See [Search Engine Optimization (SEO)
+meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for
+details.
 
 ## Page contents and markup
 
@@ -360,8 +360,8 @@ markup:
 {{% /alert %}}
 
 In addition to your marked-up text, you can also use Hugo and Docsy's
-[shortcodes](/docs/content/shortcodes): reusable chunks of HTML that you
-can use to quickly build your pages. Find out more about shortcodes in
+[shortcodes](/docs/content/shortcodes): reusable chunks of HTML that you can use
+to quickly build your pages. Find out more about shortcodes in
 [Docsy Shortcodes](/docs/content/shortcodes).
 
 {{% alert title="Note" color="info" %}} Hugo also supports adding content using
@@ -416,9 +416,9 @@ You can see examples of both approaches in this and our example site. For
 example, the source for this page is just a standalone file
 `/content/en/docs/content/adding-content.md`. However the source for
 [Docsy Shortcodes](/docs/content/shortcodes/) in this site lives in
-`/content/en/docs/content/shortcodes/index.md`, with the image resource
-used by the page in the same `/shortcodes/` directory. In Hugo terminology, this
-is called a _leaf bundle_ because it's a folder containing all the data for a
+`/content/en/docs/content/shortcodes/index.md`, with the image resource used by
+the page in the same `/shortcodes/` directory. In Hugo terminology, this is
+called a _leaf bundle_ because it's a folder containing all the data for a
 single site page without any child pages (and uses `index.md` without an
 underscore).
 
@@ -478,8 +478,8 @@ organizing your content with Docsy in
 By default a docs section landing page (the `_index.md` or `_index.html` in the
 section directory) uses a layout that adds a formatted list of links to the
 pages in the section, with their frontmatter descriptions. The
-[Content and Customization](/docs/content/) landing page in this site is
-a good example.
+[Content and Customization](/docs/content/) landing page in this site is a good
+example.
 
 To display a simple bulleted list of links to the section's pages instead,
 specify `simple_list: true` in the landing page's frontmatter:
@@ -665,16 +665,16 @@ own custom content.
 
 The example site also has an About page in `content/en/about/_index.html` using
 the same Docsy template. Again, this is made up of
-[page blocks](/docs/content/shortcodes/#shortcode-blocks), including
-another background image in `content/en/about/featured-background.jpg`. As with
-the site landing page, you can replace the image, remove or add blocks, or just
-add your own content.
+[page blocks](/docs/content/shortcodes/#shortcode-blocks), including another
+background image in `content/en/about/featured-background.jpg`. As with the site
+landing page, you can replace the image, remove or add blocks, or just add your
+own content.
 
 ### Building your own landing pages
 
 If you've just used the theme, you can still use all Docsy's provided
-[page blocks](/docs/content/shortcodes/#shortcode-blocks) (or any other
-content you want) to build your own landing pages in the same file locations.
+[page blocks](/docs/content/shortcodes/#shortcode-blocks) (or any other content
+you want) to build your own landing pages in the same file locations.
 
 ## Adding a community page
 
@@ -863,14 +863,13 @@ disableKinds: [RSS]
 
 {{% alert title=Note color=info %}}
 
-If you have enabled our [print feature](/docs/content/print/) or
-otherwise specified section-level output formats in
-`hugo.toml`/`hugo.yaml`/`hugo.json`, make sure that `"RSS"` is listed as an
-output format, otherwise you won't get section-level RSS feeds (and your blog
-section won't get a nice orange RSS button). Your
-`hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the Hugo default
-[output formats](https://gohugo.io/methods/page/outputformats/) for sections,
-which are HTML and RSS.
+If you have enabled our [print feature](/docs/content/print/) or otherwise
+specified section-level output formats in `hugo.toml`/`hugo.yaml`/`hugo.json`,
+make sure that `"RSS"` is listed as an output format, otherwise you won't get
+section-level RSS feeds (and your blog section won't get a nice orange RSS
+button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the
+Hugo default [output formats](https://gohugo.io/methods/page/outputformats/) for
+sections, which are HTML and RSS.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}

@@ -110,7 +110,7 @@ interaction handling is required.
 ## Docsy User Guide usage example
 
 Assume the following front matter in the User Guide:
-`/content/en/docs/adding-content/_index.md`:
+`/content/en/docs/content/_index.md`:
 
 ```yaml
 ---
@@ -122,14 +122,14 @@ sidebar_root_for: children
 
 **With `sidebar_root_for: children`:**
 
-- Viewing `/docs/adding-content/` index → shows **full** docs navigation
-- Viewing `/docs/adding-content/content/` → shows **rooted** sidebar (only
-  "Content and Customization" and its children)
+- Viewing `/docs/content/` index → shows **full** docs navigation
+- Viewing `/docs/content/content/` → shows **rooted** sidebar (only "Content and
+  Customization" and its children)
 
 **With `sidebar_root_for: self`:**
 
-- Viewing `/docs/adding-content/` index → shows **rooted** sidebar
-- Viewing `/docs/adding-content/content/` → shows **rooted** sidebar
+- Viewing `/docs/content/` index → shows **rooted** sidebar
+- Viewing `/docs/content/content/` → shows **rooted** sidebar
 - Both the section itself and descendants get the focused navigation
 
 ### Follow-up tasks
