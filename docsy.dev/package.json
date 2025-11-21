@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "_build": "npm run _hugo-dev --",
-    "_check:format": "npx prettier --prose-wrap=always --check .",
+    "_check:format": "npx prettier --config ../.prettierrc.json --check .",
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
     "_check:links": "make --keep-going check-links",
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit --allow-empty -m \"Site at $HASH\"",
@@ -36,7 +36,7 @@
     "autoprefixer": "^10.4.22",
     "cross-env": "^10.1.0",
     "hugo-extended": "0.152.2",
-    "netlify-cli": "^23.10.0",
+    "netlify-cli": "^23.11.1",
     "npm-check-updates": "^19.1.2",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"

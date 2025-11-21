@@ -10,7 +10,7 @@
 {{ $gh_branch := $.Param "github_branch" | default "main" -}}
 <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
 {{ if $gh_url -}}
-  {{ warnf "Warning: use of `github_url` is deprecated. For details, see https://www.docsy.dev/docs/adding-content/repository-links/#github_url-optional" -}}
+  {{ warnf "Warning: use of `github_url` is deprecated. For details, see https://www.docsy.dev/docs/content/repository-links/#github_url-optional" -}}
   <a href="{{ $gh_url }}" target="_blank"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
 {{ else if $gh_repo -}}
 

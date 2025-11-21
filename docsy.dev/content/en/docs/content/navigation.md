@@ -149,6 +149,7 @@ details, including ways to restore the legacy behavior, see [Language menu
 visibility][].
 
 [Language menu visibility]: /blog/2025/0.13.0/#language-menu-visibility
+[Multi-language support]: /docs/language/
 
 {{% /alert %}}
 
@@ -168,9 +169,9 @@ To style the light/dark mode menu, apply your custom CSS to
 
 ### Search box
 
-To configure site search, see [Search](/docs/content/search/). When
-configured, the search box appears as the last item in the top-level navbar, as
-well as the sidebar on mobile.
+To configure site search, see [Search](/docs/content/search/). When configured,
+the search box appears as the last item in the top-level navbar, as well as the
+sidebar on mobile.
 
 To style the search menu, apply your custom CSS to `.td-navbar__search`.
 
@@ -484,10 +485,10 @@ sidebar_root_for: self
 
 Examples:
 
-| `sidebar_root_for` | Example                                            |
-| ------------------ | -------------------------------------------------- |
+| `sidebar_root_for` | Example                                     |
+| ------------------ | ------------------------------------------- |
 | `self`             | [Content and customization](/docs/content/) |
-| `children`         | [Best practices](/docs/best-practices/)            |
+| `children`         | [Best practices](/docs/best-practices/)     |
 
 To navigate out of a rooted section, click the “up” icon in the sidebar next to
 the section title.

@@ -3,6 +3,7 @@ title: Logos and Images
 date: 2017-01-05
 weight: 6
 description: Add and customize logos, icons, and images in your project.
+cSpell:ignore: Icongen lookandfeel cthedot icongen imgproc
 ---
 
 ## Add your logo
@@ -57,21 +58,22 @@ release notes for Docsy's currently included version of FontAwesome.
 
 You can add FontAwesome icons to your
 [navbar](/docs/content/navigation/#adding-icons-to-the-navbar),
-[side nav](/docs/content/navigation/#adding-icons-to-the-side-nav), or
-anywhere in your text.
+[side nav](/docs/content/navigation/#adding-icons-to-the-side-nav), or anywhere
+in your text.
 
 ## Add your favicons
 
 The easiest way to do this is to create a set of favicons via
-https://cthedot.de/icongen (which lets you create a huge range of icon sizes and
-options from a single image) and/or [https://favicon.io](https://favicon.io),
-and put them in your site project's `static/favicons` directory. This will
-override the default favicons from the theme.
+[cthedot.de/icongen](https://cthedot.de/icongen) (which lets you create a huge
+range of icon sizes and options from a single image) and/or
+[https://favicon.io](https://favicon.io), and put them in your site project's
+`static/favicons` directory. This will override the default favicons from the
+theme.
 
-Note that https://favicon.io doesn't create as wide a range of sizes as Icongen
-but _does_ let you quickly create favicons from text: if you want to create text
-favicons you can use this site to generate them, then use Icongen to create more
-sizes (if necessary) from your generated `.png` file.
+Note that [favicon.io](https://favicon.io) doesn't create as wide a range of
+sizes as Icongen but _does_ let you quickly create favicons from text: if you
+want to create text favicons you can use this site to generate them, then use
+Icongen to create more sizes (if necessary) from your generated `.png` file.
 
 If you have special favicon requirements, you can create your own
 `layouts/_partials/favicons.html` with your links.
@@ -80,11 +82,11 @@ If you have special favicon requirements, you can create your own
 
 ### Landing pages
 
-Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blockscover)
-make it easy to add large cover images to your landing pages. The shortcode
-looks for an image with the word "background" in the name inside the landing
-page's [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so,
-for example, if you've copied the example site, the landing page image in
+Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blockscover) make
+it easy to add large cover images to your landing pages. The shortcode looks for
+an image with the word "background" in the name inside the landing page's
+[Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for
+example, if you've copied the example site, the landing page image in
 `content/en/_index.html` is `content/en/featured-background.jpg`.
 
 You specify the preferred display height of a cover block container (and hence
@@ -109,8 +111,8 @@ For a shorter image, as in the example site's About page, use one of `min`,
 ### Other pages
 
 To add inline images to other pages, use the
-[`imgproc` shortcode](/docs/content/shortcodes/#imgproc). Alternatively,
-if you prefer, just use regular Markdown or HTML images and add your image files
-to your project's `static` directory. You can find out more about using this
+[`imgproc` shortcode](/docs/content/shortcodes/#imgproc). Alternatively, if you
+prefer, just use regular Markdown or HTML images and add your image files to
+your project's `static` directory. You can find out more about using this
 directory in
 [Adding static content](/docs/content/adding-content/#adding-static-content).

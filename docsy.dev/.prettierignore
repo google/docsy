@@ -3,7 +3,7 @@
 /content/**/*.*
 !/content/en/blog/**/*.*
 !/content/en/docs/_index.md
-!/content/en/docs/adding-content/**/*.*
+!/content/en/docs/content/**/*.*
 !/content/en/site/**/*.*
 
 /layouts

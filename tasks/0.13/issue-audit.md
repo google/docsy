@@ -36,8 +36,8 @@ v0.12.0][commits since v0.12.0].
 
 - **Commits**: `aa0f617`
 - **Status**: Resolved; color contrast improvements landed.
-- **User Guide**: Updated
-  (`userguide/content/en/docs/adding-content/lookandfeel.md`, tests page).
+- **User Guide**: Updated (`userguide/content/en/docs/content/lookandfeel.md`,
+  tests page).
 - **Changelog**: No coverage yet — should be captured under accessibility
   improvements.
 - **Client impact**: Yes — visual adjustments land automatically; projects may
