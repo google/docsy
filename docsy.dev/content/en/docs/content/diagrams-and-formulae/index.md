@@ -203,7 +203,7 @@ To enable this hook in your project, add a new local hook file
 `layouts/_markup/render-passthrough.html` in your project site. The content of
 this file has to be one single line only:
 
-{{< card code=true header="**layouts/_markup/render-passthrough.html**" lang="go-html-template" highlight="linenos=inline,lineNoStart=1" >}}{{ partial "scripts/math.html" . }}
+{{< card code=true header="layouts/_markup/render-passthrough.html" lang="go-html-template" >}}{{ partial "scripts/math.html" . }}
 {{< /card >}} <br>
 
 With the `passthrough` extension enabled and the render hook in place, support
