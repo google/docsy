@@ -5,6 +5,12 @@
 action_name="$1"  # "commit" or "push"
 hook_name="pre-$action_name"
 
+# Skip version check if on main branch
+current_branch="$(git branch --show-current 2>/dev/null)"
+if [ "$current_branch" = "main" ]; then
+  exit 0
+fi
+
 output="$(npm run -s fix:version -- --silent 2>&1)"
 status=$?
 
