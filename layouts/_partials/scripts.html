@@ -46,13 +46,19 @@ window.markmap = {
 {{- partial "scripts/mermaid.html" . -}}
 {{ end -}}
 
-{{ if .Site.Params.ui.showLightDarkModeMenu -}}
+{{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+{{ if $darkMode.enable -}}
   {{ $jsArray = $jsArray | append (resources.Get "js/dark-mode.js") -}}
+{{ end -}}
+
+{{ if not (.Param "ui.scrollSpy.disable") -}}
+  {{ $jsScrollSpyPatch := resources.Get "js/scrollspy-patch.js" -}}
+  {{ $jsArray = $jsArray | append $jsScrollSpyPatch -}}
 {{ end -}}
 
 {{ $js := $jsArray | resources.Concat "js/main.js" -}}
 {{ if hugo.IsProduction -}}
-  {{ $js := $js | minify | fingerprint -}}
+  {{ $js = $js | minify | fingerprint -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ else -}}
   <script src="{{ $js.RelPermalink }}"></script>

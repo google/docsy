@@ -1,45 +1,46 @@
-@import "../vendor/bootstrap/scss/functions";
+// cSpell:ignore fontawesome pageinfo
 
-@import "variables_forward";
-@import "variables_project";
-@import "variables";
-@import "support/mixins";
+@import '../vendor/bootstrap/scss/functions';
 
-@import "../vendor/bootstrap/scss/bootstrap";
-@import "support/bootstrap_vers_test";
+@import 'variables_forward';
+@import 'variables_project';
+@import 'variables';
+@import 'support/mixins';
 
-@import "../vendor/Font-Awesome/scss/fontawesome";
-@import "../vendor/Font-Awesome/scss/solid";
-@import "../vendor/Font-Awesome/scss/brands";
+@import '../vendor/bootstrap/scss/bootstrap';
+@import 'support/bootstrap_vers_test';
 
-@import "variables_project_after_bs";
+@import '../vendor/Font-Awesome/scss/fontawesome';
+@import '../vendor/Font-Awesome/scss/solid';
+@import '../vendor/Font-Awesome/scss/brands';
 
-@import "support/utilities";
-@import "colors";
-@import "table";
-@import "boxes";
-@import "blog";
-@import "code";
-@import "nav";
-@import "sidebar-tree";
-@import "sidebar-toc";
-@import "breadcrumb";
-@import "alerts";
-@import "content";
-@import "search";
-@import "main-container";
-@import "blocks/blocks";
-@import "section-index";
-@import "pageinfo";
-@import "taxonomy";
-@import "drawio";
-@import "shortcodes";
-@import "swagger";
-@import "support/rtl";
+@import 'variables_project_after_bs';
 
+@import 'support/utilities';
+@import 'colors';
+@import 'table';
+@import 'boxes';
+@import 'blog';
+@import 'code';
+@import 'nav';
+@import 'sidebar-tree';
+@import 'sidebar-toc';
+@import 'breadcrumb';
+@import 'alerts';
+@import 'content';
+@import 'search';
+@import 'main-container';
+@import 'blocks/blocks';
+@import 'section-index';
+@import 'pageinfo';
+@import 'taxonomy';
+@import 'drawio';
+@import 'shortcodes';
+@import 'swagger';
+@import 'support/rtl';
 
 @if $td-enable-google-fonts {
-  @import url($web-font-path);
+  @import url($td-web-font-path);
 }
 
 .td-footer {
@@ -75,7 +76,7 @@
 
     &-item {
       @extend .list-inline-item;
-      @extend .h3;
+      @include font-size(map-get($font-sizes, 4));
 
       a {
         color: inherit !important;
@@ -107,11 +108,11 @@
   h4[id]::before,
   h5[id]::before {
     display: block;
-    content: " ";
+    content: ' ';
     margin-top: -5rem;
     height: 5rem;
     visibility: hidden;
   }
 }
 
-@import "styles_project";
+@import 'styles_project';

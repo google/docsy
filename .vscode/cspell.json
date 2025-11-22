@@ -3,14 +3,24 @@
   "version": "0.2",
   "caseSensitive": true,
   "words": [
+    "anchorize",
     "Docsy",
     "errorf",
+    "htmltest",
     "hugo",
+    "isset",
+    "nvmrc",
+    "Occitan",
+    "refcache",
+    "relref",
+    "scrollspy",
     "shortcode",
     "shortcodes",
+    "subfolders",
     "tabpane",
     "upvote",
     "warnf",
-    "relref"
+    "warnidf",
+    "wrapup"
   ]
 }

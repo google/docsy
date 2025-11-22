@@ -1,6 +1,6 @@
 # Docsy config
 #
-# cSpell:ignore docsy fortawesome fontawesome webfonts
+# cSpell:ignore docsy fortawesome fontawesome github permalinkable twbs webfonts
 
 params:
   time_format_blog: Monday, January 02, 2006

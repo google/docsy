@@ -1,0 +1,9 @@
+# cSpell:ignore lookandfeel
+
+/content/**/*.*
+!/content/en/blog/**/*.*
+!/content/en/docs/_index.md
+!/content/en/docs/content/**/*.*
+!/content/en/site/**/*.*
+
+/layouts

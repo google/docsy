@@ -48,23 +48,24 @@
       </li>
       {{ end -}}
       {{ if .Site.Params.versions -}}
-      <li class="nav-item dropdown d-none d-lg-block">
+      <li class="nav-item dropdown d-none d-lg-block td-navbar__version-menu">
         {{ partial "navbar-version-selector.html" . -}}
       </li>
       {{ end -}}
       {{ if (gt (len .Site.Home.Translations) 0) -}}
-      <li class="nav-item dropdown d-none d-lg-block">
+      <li class="nav-item td-navbar__lang-menu">
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}
-      {{ if .Site.Params.ui.showLightDarkModeMenu -}}
-      <li class="td-light-dark-menu nav-item dropdown">
+      {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+      {{ if $darkMode.showMenu -}}
+      <li class="nav-item td-navbar__light-dark-menu">
         {{ partial "theme-toggler" . }}
       </li>
       {{ end -}}
     </ul>
   </div>
-  <div class="d-none d-lg-block">
+  <div class="d-none d-lg-block td-navbar__search">
     {{ partial "search-input.html" . }}
   </div>
 </div>

@@ -1,6 +1,7 @@
 //
 // Main navbar
 //
+// cSpell:ignore onscroll
 
 .td-navbar-cover {
   @include media-breakpoint-up(md) {
@@ -45,7 +46,7 @@
   }
 
   .navbar-nav {
-    padding-top: $spacer * 0.5;
+    // padding-top: $spacer * 0.5;
     white-space: nowrap;
   }
 
@@ -68,10 +69,6 @@
     .nav-item {
       padding-inline-end: $spacer * 0.5;
     }
-
-    .navbar-nav {
-      padding-top: 0 !important;
-    }
   }
 
   @include media-breakpoint-down(lg) {
@@ -87,23 +84,70 @@
     }
 
     .navbar-nav {
-      padding-bottom: 2rem;
+      // padding-bottom: 2rem;
       overflow-x: auto;
     }
   }
 
   .td-light-dark-menu {
+    position: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .bi {
       // Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
       width: 1em;
       height: 1em;
-      vertical-align: -.125em;
+      vertical-align: -0.125em;
       fill: currentcolor;
     }
+  }
 
-    &.dropdown {
+  .td-lang-menu {
+    position: unset !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      padding-left: 0;
+      padding-right: 0;
+
+      &::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-globe);
+        padding-right: 0.5rem;
+      }
+
+      &-code {
+        display: none;
+      }
+
       @include media-breakpoint-down(lg) {
-        position: unset;
+        &-text {
+          display: none;
+        }
+        &-code {
+          display: inline;
+        }
+        &::before {
+          padding-right: 0;
+        }
+      }
+    }
+
+    .dropdown-item {
+      position: relative;
+      padding-left: 2.5rem;
+
+      &.active::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-check);
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
@@ -133,9 +177,9 @@
       font-variant: normal;
       text-rendering: auto;
       -webkit-font-smoothing: antialiased;
-      font-family: $font-awesome-font-name;
+      font-family: $td-font-awesome-font-name;
       font-weight: 900;
-      content: "\f0d9";
+      content: '\f0d9';
       padding-left: 0.5em;
       padding-right: 0.5em;
     }
@@ -160,7 +204,8 @@ nav.foldable-nav {
     margin: 0;
   }
 
-  .ul-1 > li {
+  .ul-1 > li,
+  .dropdown {
     padding-left: 1.5em;
   }
 
@@ -172,7 +217,7 @@ nav.foldable-nav {
     display: block;
   }
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     display: none;
   }
 
@@ -188,9 +233,9 @@ nav.foldable-nav {
     font-variant: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    font-family: $font-awesome-font-name;
+    font-family: $td-font-awesome-font-name;
     font-weight: 900;
-    content: "\f0da";
+    content: '\f0da';
     position: absolute;
     left: 0.1em;
     padding-left: 0.4em;

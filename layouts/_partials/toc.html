@@ -1,9 +1,21 @@
+{{/*
+
+  Always render the td-toc element. ScrollSpy is counting on it to exist,
+  even if it's empty.
+
+  cSpell:ignore notoc
+*/ -}}
+
+<div class="td-toc" data-proofer-ignore>
 {{ if not .Params.notoc -}}
-  {{ with .TableOfContents -}}
-    {{ if ne . `<nav id="TableOfContents"></nav>` -}}
-      <div class="td-toc">
-        {{ . }}
-      </div>
-    {{ end -}}
+  {{ $toc := .TableOfContents -}}
+  {{ if and $toc (ne $toc `<nav id="TableOfContents"></nav>`) -}}
+    <div class="td-toc__title">
+      <span class="td-toc__title__text">On this page</span>
+      <a class="td-toc__title__link" title="Top of page" href="#"></a>
+    </div>
+    {{ $toc | safeHTML }}
   {{ end -}}
 {{ end -}}
+</div>
+{{/* */ -}}

@@ -1,10 +1,30 @@
-{{ $_hugo_config := `{ "version": 1 }` }}
-{{ $color := .Get "color" | default "primary" }}
+{{/*
+
+@param {string} [title=""] HTML rendered as a Bootstrap alert heading.
+@param {string} [color="primary"] Suffix used for the Bootstrap alert class
+                `alert-{color}`.
+
+For details, see https://www.docsy.dev/docs/content/shortcodes/#alert.
+
+*/ -}}
+
+{{ $color := .Get "color" | default "primary" -}}
+
 <div class="alert alert-{{ $color }}" role="alert">
-{{ with .Get "title" }}<h4 class="alert-heading">{{ . | safeHTML }}</h4>{{ end }}
-{{ if eq .Page.File.Ext "md" }}
-    {{ .Inner | markdownify }}
-{{ else }}
-    {{ .Inner | htmlUnescape | safeHTML }}
-{{ end }}
+{{- with .Get "title" -}}
+  <div class="h4 alert-heading" role="heading">
+    {{- . | safeHTML -}}
+  </div>
+{{- end }}
+
+{{/* Do NOT remove the blank line above. It ends the previous HTML block and
+ensures that any Markdown in .Inner will be treated as Markdown. For details,
+see https://spec.commonmark.org/0.31.2/#html-blocks, 7. */ -}}
+
+{{ .Inner }}
+
+{{- /* Do NOT remove this space trimming comment. It ensures that any Markdown
+that _follows_ this shortcode remains correctly indented, in contexts where this
+is necessary. */ -}}
+
 </div>
