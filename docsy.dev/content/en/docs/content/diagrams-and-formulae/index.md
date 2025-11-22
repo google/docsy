@@ -198,18 +198,37 @@ markup:
 
 Docsy uses Hugo's `render-passthrough`
 [hook](https://gohugo.io/render-hooks/passthrough/) when generating of math
-equations at build-time.\
-To enable this hook in your project, add a new local hook file
-`layouts/_markup/render-passthrough.html` in your project site. The content of
-this file has to be one single line only:
+equations at build-time. To enable this hook in your project, add a new local
+hook file `layouts/_markup/render-passthrough.html` in your project site. The
+content of this file has to be one single line only:
 
-{{< card code=true header="layouts/_markup/render-passthrough.html" lang="go-html-template" >}}{{ partial "scripts/math.html" . }}
+{{< card code=true header="layouts/_markup/render-passthrough.html" lang="go-html-template" >}}
+
+{{ partial "scripts/math.html" . }}
+
 {{< /card >}} <br>
 
 With the `passthrough` extension enabled and the render hook in place, support
 of \(\KaTeX\) is automatically enabled when you author a `math` code block on
 your page or when you add a mathematical formulae to your page using one of the
 passthrough delimiter pairs defined above.
+
+{{% alert title="Passthrough for selected sections" %}}
+
+For very large sites, you might want to restrict the passthrough to selected
+sections. Do so by placing the passthrough hook in the section's `_markup`
+folder. For example:
+
+- `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
+  pages, but not for other sections such as the blog.
+- [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
+  hook is active for this page of the user guide only, which is how we actually
+  have it setup.
+
+[layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
+  https://github.com/google/docsy/blob/main/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
+
+{{% /alert %}}
 
 ### Display of Chemical Equations and Physical Units
 
