@@ -73,11 +73,6 @@ See [semver].
 - [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy
   ([#2366]).
 - [Section sidebar root][0.13.0-blog-sidebar] feature ([#2364]).
-- **Server side rendering of mathematical formulae**: we now use Hugo's embedded
-  KaTeX engine for rendering mathematical formulae and chemical equations. The
-  engine is auto-activated as soon as mathematical formulae or chemical
-  equations are encountered. There is no need to activate or configure KaTeX any
-  more.
 
 **Other changes**:
 
@@ -91,6 +86,8 @@ See [semver].
 - Dependency updates: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - Updated translations: added Occitan locale ([#2173]) and refreshed Simplified
   Chinese ([#2313]) and Ukrainian ([#2331]).
+- **Server-side rendering of mathematical formulae**: now using Hugo's embedded
+  KaTeX engine. For details, see [LaTeX support with KaTeX][diagrams-formulae].
 
 **Experimental**:
 
@@ -124,6 +121,8 @@ See [semver].
 [0.13.0-blog-accessibility]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
+[diagrams-formulae]:
+  /docs/content/diagrams-and-formulae/#latex-support-with-katex
 [How to pick colors with good color-contrast]:
   /docs/content/lookandfeel/#pick-good-color-contrast
 

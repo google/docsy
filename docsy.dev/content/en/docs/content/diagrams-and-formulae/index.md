@@ -2,6 +2,7 @@
 title: Diagrams and Formulae
 weight: 11
 description: Add generated diagrams and scientific formulae to your site.
+cSpell:ignore: goldmark linenos mhchem
 ---
 
 Docsy has built-in support for a number of diagram creation and typesetting
@@ -94,43 +95,44 @@ additional
 have to be created by adding the lines below to your
 `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file:
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [mediaTypes]
   [mediaTypes.'font/woff']
     suffixes = ['woff']
   [mediaTypes.'font/woff2']
     suffixes = ['woff2']
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 mediaTypes:
   font/woff:
-    suffixes:
-    - woff
+    suffixes: [woff]
   font/woff2:
-    suffixes:
-    - woff2
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+    suffixes: [woff2]
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
-   "mediaTypes": {
-      "font/woff": {
-         "suffixes": [
-            "woff"
-         ]
-      },
-     "font/woff2": {
-         "suffixes": [
-            "woff2"
-         ]
-      }
-   }
+  "mediaTypes": {
+    "font/woff": {
+      "suffixes": ["woff"]
+    },
+    "font/woff2": {
+      "suffixes": ["woff2"]
+    }
+  }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 #### Enable `passthrough` extension
 
@@ -139,10 +141,11 @@ inside your `hugo.toml`/`hugo.yaml`/`hugo.json`. You can edit this definition to
 meet your own needs. For details, see the official
 [Hugo docs](https://gohugo.io/content-management/mathematics/#step-1).
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Site configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
@@ -151,8 +154,11 @@ meet your own needs. For details, see the official
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)']]
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 markup:
   goldmark:
     extensions:
@@ -161,40 +167,32 @@ markup:
         delimiters:
           block: [['\[', '\]'], ['$$', '$$']]
           inline: [['\(', '\)']]
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
-   "markup": {
-      "goldmark": {
-         "extensions": {
-            "passthrough": {
-               "delimiters": {
-                  "block": [
-                     [
-                        "\\[",
-                        "\\]"
-                     ],
-                     [
-                        "$$",
-                        "$$"
-                     ]
-                  ],
-                  "inline": [
-                     [
-                        "\\(",
-                        "\\)"
-                     ]
-                  ]
-               },
-               "enable": true
-            }
-         }
+  "markup": {
+    "goldmark": {
+      "extensions": {
+        "passthrough": {
+          "delimiters": {
+            "block": [
+              ["\\[", "\\]"],
+              ["$$", "$$"]
+            ],
+            "inline": [["\\(", "\\)"]]
+          },
+          "enable": true
+        }
       }
-   }
+    }
+  }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 #### Add `passthrough` render hook
 
@@ -235,6 +233,7 @@ _Precipitation of barium sulfate:_ \(\ce{SO4^2- + Ba^2+ -> BaSO4 v}\)
 More complex equations can be displayed on their own line using the block
 delimiters defined:
 
+<!-- cSpell:ignore tetrahydroxozincate mchem -->
 <!-- prettier-ignore-start -->
 ````markdown
 \[
@@ -261,7 +260,7 @@ Both standard syntax and `chem` block renders to the same equation:
 <!-- prettier-ignore-end -->
 
 {{% alert title="Note" %}} The
-[manual](https://mhchem.github.io/MathJax-mhchem/) for mchem’s input syntax
+[manual](https://mhchem.github.io/MathJax-mhchem/) for mchem's input syntax
 provides in-depth information about typesetting chemical formulae and physical
 units using the `mhchem` tool. {{% /alert %}}
 
@@ -303,6 +302,8 @@ The great advantage of this is anyone who can edit the page can now edit the
 diagram - no more hunting for the original tools and version to make a new edit.
 
 For example, the following defines a sequence diagram:
+
+<!-- cSpell:ignore autonumber -->
 
 ````
 ```mermaid

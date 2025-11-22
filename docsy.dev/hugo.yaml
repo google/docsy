@@ -162,10 +162,7 @@ module:
 
 mediaTypes:
   font/woff:
-    suffixes:
-    - woff
+    suffixes: [woff]
   font/woff2:
-    suffixes:
-    - woff2
-
+    suffixes: [woff2]
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime
