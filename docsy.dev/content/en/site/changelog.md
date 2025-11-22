@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 weight: 99999
 # prettier-ignore
-cSpell:ignore: deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
+cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -86,6 +86,8 @@ See [semver].
 - Dependency updates: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - Updated translations: added Occitan locale ([#2173]) and refreshed Simplified
   Chinese ([#2313]) and Ukrainian ([#2331]).
+- **Server-side rendering of mathematical formulae**: now using Hugo's embedded
+  KaTeX engine. For details, see [LaTeX support with KaTeX][diagrams-formulae].
 
 **Experimental**:
 
@@ -119,6 +121,8 @@ See [semver].
 [0.13.0-blog-accessibility]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-fouc]: /blog/2025/0.13.0/#accessibility
 [0.13.0-blog-breaking]: /blog/2025/0.13.0/#breaking-changes
+[diagrams-formulae]:
+  /docs/content/diagrams-and-formulae/#latex-support-with-katex
 [How to pick colors with good color-contrast]:
   /docs/content/lookandfeel/#pick-good-color-contrast
 
@@ -456,7 +460,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
   `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
-  `chem` blocks via KateX and mhchem. Support for formula rendering activation
+  `chem` blocks via KaTeX and mhchem. Support for formula rendering activation
   on individual pages only. Hugo version >= 0.93.0 required.
 
 [0.6.0]: https://github.com/google/docsy/releases/v0.6.0

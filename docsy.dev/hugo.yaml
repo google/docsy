@@ -159,4 +159,10 @@ module:
     - source: content/en
       target: content
       lang: xx
+
+mediaTypes:
+  font/woff:
+    suffixes: [woff]
+  font/woff2:
+    suffixes: [woff2]
 # cSpell:ignore docsy github goldmark markmap plantuml readingtime
