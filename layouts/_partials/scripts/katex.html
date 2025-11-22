@@ -11,9 +11,9 @@
       {{ $cssHash := . | fingerprint "sha512" -}}
 <link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous">
     {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid KaTeX version %q." $cssUrl $version -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
 {{ end -}}
 
 {{/* font files */ -}}
@@ -29,7 +29,7 @@
         {{ $fontFiles = $fontFiles | append .path -}}
       {{ end -}}
   {{ else -}}
-    {{ errorf "Unable to get remote resource %q" $url -}}
+    {{ errorf "Unable to get fonts meta data %q from CDN. Reason: invalid KaTeX version %q." $url $version -}}
   {{ end -}}
 {{ end -}}
 
@@ -42,8 +42,9 @@
       {{ with resources.Copy (printf "css/fonts/%s" (replace $fontFile "/dist/fonts/" "")) . -}}
         {{ .Publish -}}
       {{ end -}}
+    {{ else -}}
+      {{ errorf "Could not retrieve font file %q from CDN. Reason: invalid KaTeX version %q." $fontUrl $version -}}
+      {{ break -}}
     {{ end -}}
-  {{ else -}}
-    {{ errorf "Invalid KaTeX version %s, could not retrieve this version from CDN." $version -}}
   {{ end -}}
 {{ end -}}
