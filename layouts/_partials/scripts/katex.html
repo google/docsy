@@ -1,3 +1,4 @@
+{{/* cSpell:ignore katex */ -}}
 {{/* stylesheet */ -}}
 
 {{ $version := .Site.Params.katex.version | default "latest" -}}
@@ -9,7 +10,9 @@
   {{ else with .Value -}}
     {{ with resources.Copy (printf "css/%s" $cssFile) . -}}
       {{ $cssHash := . | fingerprint "sha512" -}}
-<link rel="stylesheet" href="{{- .RelPermalink -}}" integrity="{{- $cssHash.Data.Integrity -}}" crossorigin="anonymous">
+      <link rel="stylesheet" href="{{- .RelPermalink -}}" {{/**/ -}}
+          integrity="{{- $cssHash.Data.Integrity -}}" {{/**/ -}}
+          crossorigin="anonymous">{{/**/ -}}
     {{ end -}}
   {{ else -}}
     {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid KaTeX version %q." $cssUrl $version -}}
@@ -47,4 +50,4 @@
       {{ break -}}
     {{ end -}}
   {{ end -}}
-{{ end -}}
+{{ end }}

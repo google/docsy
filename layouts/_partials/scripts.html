@@ -1,3 +1,5 @@
+{{/* cSpell:ignore docsearch markmap plantuml katex hasmermaid */ -}}
+
 {{ if .Site.Params.markmap.enable -}}
 <style>
 .markmap > svg {
@@ -23,11 +25,6 @@ window.markmap = {
   <script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end -}}
 
-{{ $noop := .WordCount }}
-{{ if .Page.Store.Get "hasMath" -}}
-  {{ partial "scripts/katex.html" . -}}
-{{ end -}}
-
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
@@ -41,7 +38,11 @@ window.markmap = {
 {{ $jsArray := slice $jsBs $jsBase $jsSearch $jsPlantuml $jsMarkmap $jsDrawio -}}
 
 {{ if .Page.Store.Get "hasmermaid" -}}
-{{- partial "scripts/mermaid.html" . -}}
+  {{ partial "scripts/mermaid.html" . -}}
+{{ end -}}
+
+{{ if .Page.Store.Get "hasMath" -}}
+  {{ partial "scripts/katex.html" . -}}
 {{ end -}}
 
 {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
