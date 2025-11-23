@@ -81,11 +81,14 @@ See [semver].
 - **Dark mode** fixes and improvements:
   - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332]).
   - Improved TOC entry color contrast in dark mode ([#2376], [#2379]).
+- **Mobile navbar**: Added scroll indicators for overflow navigation ([#2406]).
 - Better **NPM support**: resolved optional and peer dependency issues
   ([#2115]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
 - **Dependency updates**: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - **Updated translations**: added Occitan locale ([#2173]) and refreshed
   Simplified Chinese ([#2313]) and Ukrainian ([#2331]).
+- **TOC visibility control**: Documented the `notoc` page parameter (available
+  since 2016) for hiding the table of contents on specific pages ([#2405]).
 - **Build-time rendering of mathematical and chemical formulae**: now using
   Hugo's embedded KaTeX engine ([#2276], [#2394], [#2395]). For details, see
   [LaTeX support with KaTeX][diagrams-formulae].
@@ -115,6 +118,8 @@ See [semver].
 [#2387]: https://github.com/google/docsy/pull/2387
 [#2394]: https://github.com/google/docsy/pull/2394
 [#2395]: https://github.com/google/docsy/pull/2395
+[#2405]: https://github.com/google/docsy/pull/2405
+[#2406]: https://github.com/google/docsy/pull/2406
 [#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
 [0.13.0-blog]: /blog/2025/0.13.0/

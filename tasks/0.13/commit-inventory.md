@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `14c2061` on `main`.
+> Report refreshed for commits through `f59cbb8` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -81,6 +81,10 @@ client projects.
   rendering
 - `f2b0c56` (`#2399`) Add TOC style customization section to navigation docs
 - `14c2061` (`#2400`) Add i18n support for table of contents labels
+- `bd7f023` (`#2402`) Document i18n support for TOC labels, update task docs
+- `d3b5749` (`#2405`) Document `notoc`, and update TOC CSS class names
+- `f59cbb8` (`#2406`) [UX] Show left/right scroll indicators for the navbar on
+  mobile
 
 ## CI / tooling only
 

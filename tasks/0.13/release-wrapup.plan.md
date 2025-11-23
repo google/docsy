@@ -1,7 +1,7 @@
 ---
 title: 0.13 Release wrapup plan
 date: 2025-11-12
-last-main-commit: 14c2061
+last-main-commit: f59cbb8
 cSpell:ignore: docsy
 ---
 
@@ -79,9 +79,9 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [14c2061] (includes TOC i18n support, TOC
-style customization docs, KaTeX build-time rendering, dark mode enhancements,
-ScrollSpy fixes, and documentation updates).
+Report refreshed for commits through [f59cbb8] (includes mobile navbar scroll
+indicators, TOC i18n support, TOC style customization docs, KaTeX build-time
+rendering, dark mode enhancements, ScrollSpy fixes, and documentation updates).
 
 ### 0.13.0 blog post
 
@@ -109,6 +109,6 @@ ScrollSpy fixes, and documentation updates).
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
 [0.13.0-changelog]: ../../docsy.dev/content/en/site/changelog/#v0130
-[14c2061]: https://github.com/google/docsy/commit/14c2061
+[f59cbb8]: https://github.com/google/docsy/commit/f59cbb8
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
 [0.13.0 blog post]: ../docsy.dev/content/en/blog/2025/0.13.0.md
