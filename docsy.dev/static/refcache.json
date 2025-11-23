@@ -1067,6 +1067,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T10:05:47.5945-05:00"
   },
+  "https://github.com/google/docsy/issues/2404": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-23T11:57:05.06015-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:26.805722-05:00"
@@ -1421,7 +1425,7 @@
   },
   "https://github.com/google/docsy/tree/main/CONTRIBUTING.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-16T18:27:35.339611-05:00"
+    "LastSeen": "2025-11-23T09:55:04.730025-05:00"
   },
   "https://github.com/google/docsy/tree/main/README.md": {
     "StatusCode": 206,
