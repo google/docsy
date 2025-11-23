@@ -521,11 +521,25 @@ details, see Hugo forum discussions [#55399] and [#51940].
 
 {{% /alert %}}
 
+### Customizing the TOC
+
+You can use the following CSS classes as selectors to style the TOC:
+
+- `.td-toc` for the TOC container
+- `.td-toc__title` for the TOC title element (which includes the "On this page"
+  text and the top-of-page link)
+- `.td-toc__title__text` for the TOC title text
+- `.td-toc__title__link` for the TOC title link
+
 ### Active TOC entry tracking with ScrollSpy {#toc-entry-tracking}
 
 Docsy highlights the active heading in the TOC sidebar using Bootstrap
-[ScrollSpy][]. By default, headings become active when they reach 10% from the
-top of the viewport (configured via `rootMargin`).
+[ScrollSpy][]. ScrollSpy uses `.td-toc` (mentioned in the previous section) as
+`data-bs-target` selector to target the TOC container when tracking active
+headings.
+
+By default, headings become active when they reach 10% from the top of the
+viewport (configured via `rootMargin`).
 
 - To disable ScrollSpy for a specific page, set `ui.scrollSpy.disable: true` in
   that page's front matter. To disable for all pages in a section, [cascade] the
