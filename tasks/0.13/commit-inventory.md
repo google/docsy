@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `c37aad0` on `main`.
+> Report refreshed for commits through `f016114` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -65,6 +65,18 @@ client projects.
   option
 - `3abe89f` (`#2385`) Fix spacing of page meta re. dark-mode
 - `c37aad0` (`#2387`) Add dark mode support for Google search
+- `5333387` (`#2276`) KaTeX: drop js script files, use build-time rendering
+  instead
+- `3ac1dd1` (`#2394`) Scripts partial adj. for Katex, drop mhchem
+- `0002c6a` (`#2395`) Add note about section-specific passthrough hook usage,
+  fix KaTeX display elt width
+- `ee89baf` (`#2393`) Add missing link def to navigation.md, fix linter config,
+  and more
+- `26a0c57` (`#2392`) docs: swap slugs for 'adding-content' and 'content'
+- `ef1109c` (`#2391`) Add implementation docs and update changelog for 0.13.0
+- `ee765f4` (`#2386`) Improved light/dark-mode docs
+- `4145478` (`#2388`) Site docs reorg in prep for more design and ops docs, also
+  updated tasks/0.13.0 pages
 
 ## CI / tooling only
 
@@ -72,6 +84,7 @@ client projects.
 - `0e2ad18` (`#2351`) Release process documentation and helper scripts
 - `595b25e` (`#2362`) Rework `fix:version` script for pre-commit use
 - `4d72b4b` (`#2367`) Update build & release related scripts and contrib docs
+- `f016114` (`#2397`) Skip version check on main branch in pre-push hook
 
 > Note: `09ed8ba` includes formatting changes beyond dependency bumps; treat as
 > mixed when evaluating documentation and changelog needs.
