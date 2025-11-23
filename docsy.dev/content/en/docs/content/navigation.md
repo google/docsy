@@ -3,7 +3,7 @@ title: Navigation and Menus
 date: 2017-01-05
 weight: 3
 description: Customize site navigation for your Docsy site.
-cSpell:ignore: navs lightdark lookandfeel frontmatter
+cSpell:ignore: navs lightdark lookandfeel frontmatter notoc
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including
@@ -526,19 +526,35 @@ details, see Hugo forum discussions [#55399] and [#51940].
 
 {{% /alert %}}
 
-### Customizing the TOC
+### TOC customization
 
-You can use the following CSS classes as selectors to style the TOC:
+To **hide** the TOC for a specific page, set the following parameters in that
+page's front matter:
+
+```yaml
+notoc: true
+```
+
+You can use the following CSS classes to **style** TOC elements:
 
 - `.td-toc` for the TOC container
-- `.td-toc__title` for the TOC title element (which includes the "On this page"
+- `.td-toc-title` for the TOC title element (which includes the "On this page"
   text and the top-of-page link)
-- `.td-toc__title__text` for the TOC title text
-- `.td-toc__title__link` for the TOC title link
+- `.td-toc-title__text` for the TOC title text
+- `.td-toc-title__link` for the TOC title link
 
-The TOC labels "On this page" and "Top of page" are localizable through the keys
-`toc_on_this_page` and `toc_top_of_page`. For details, see [Internationalization
-bundles][].
+The TOC labels "On this page" and "Top of page" can be **localized**, for
+example:
+
+```toml
+# i18n/fr.toml
+toc_on_this_page = "Sur cette page"
+toc_top_of_page = "Haut de la page"
+```
+
+{{% comment %}} cSpell:ignore: cette haut {{% /comment %}}
+
+For details, see [Internationalization bundles][].
 
 [Internationalization bundles]: /docs/language/#internationalization-bundles
 

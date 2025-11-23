@@ -1,9 +1,7 @@
 ---
-title: 'Print Support'
-linkTitle: 'Print Support'
+title: Print Support
 weight: 7
-description: >
-  Making it easier to print entire sections of documentation.
+description: Making it easier to print entire sections of documentation.
 ---
 
 Individual documentation pages print well from most browsers as the layouts have
