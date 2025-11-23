@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy lookandfeel userguide
 ---
 
-> Report refreshed for commits through `0571623` on `main`.
+> Report refreshed for commits through `f016114` on `main`.
 
 Assessment of issues addressed by [commits since
 v0.12.0][commits since v0.12.0].

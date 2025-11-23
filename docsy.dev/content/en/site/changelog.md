@@ -78,16 +78,17 @@ See [semver].
 
 - **Improved accessibility**: [color contrast and
   typography][0.13.0-blog-accessibility] ([#2285]).
-- Fixed **dark-mode**:
+- **Dark mode** fixes and improvements:
   - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332]).
   - Improved TOC entry color contrast in dark mode ([#2376], [#2379]).
-- Better NPM support: resolved optional and peer dependency issues ([#2115]).
-  See [breaking changes][0.13.0-blog-breaking] in the blog post.
-- Dependency updates: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
-- Updated translations: added Occitan locale ([#2173]) and refreshed Simplified
-  Chinese ([#2313]) and Ukrainian ([#2331]).
-- **Server-side rendering of mathematical formulae**: now using Hugo's embedded
-  KaTeX engine. For details, see [LaTeX support with KaTeX][diagrams-formulae].
+- Better **NPM support**: resolved optional and peer dependency issues
+  ([#2115]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
+- **Dependency updates**: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
+- **Updated translations**: added Occitan locale ([#2173]) and refreshed
+  Simplified Chinese ([#2313]) and Ukrainian ([#2331]).
+- **Build-time rendering of mathematical and chemical formulae**: now using
+  Hugo's embedded KaTeX engine ([#2276], [#2394], [#2395]). For details, see
+  [LaTeX support with KaTeX][diagrams-formulae].
 
 **Experimental**:
 
@@ -99,6 +100,7 @@ See [semver].
 
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2173]: https://github.com/google/docsy/issues/2173
+[#2276]: https://github.com/google/docsy/pull/2276
 [#2285]: https://github.com/google/docsy/issues/2285
 [#2303]: https://github.com/google/docsy/pull/2303
 [#2313]: https://github.com/google/docsy/issues/2313
@@ -111,6 +113,8 @@ See [semver].
 [#2379]: https://github.com/google/docsy/pull/2379
 [#2384]: https://github.com/google/docsy/pull/2384
 [#2387]: https://github.com/google/docsy/pull/2387
+[#2394]: https://github.com/google/docsy/pull/2394
+[#2395]: https://github.com/google/docsy/pull/2395
 [#941]: https://github.com/google/docsy/pull/941
 [0.13.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.13.0
 [0.13.0-blog]: /blog/2025/0.13.0/

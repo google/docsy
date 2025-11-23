@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `c37aad0` on `main`.
+> Report refreshed for commits through `f016114` on `main`.
 
 ## Highlights since v0.12.0
 
@@ -23,6 +23,9 @@ cSpell:ignore: docsy
   - TOC entry color contrast improvements
   - Page meta spacing fixes
 - New `_param` shortcode for parameter substitution in templates.
+- **Build-time rendering of mathematical formulae**: KaTeX now uses Hugo's
+  embedded engine for build-time rendering, eliminating client-side JavaScript
+  ([#2276]).
 - Dependency stack refreshed:
   - Bootstrap 5.3.8 (from 5.3.6)
   - Hugo 0.152.2 (from 0.147.5)
@@ -42,6 +45,7 @@ cSpell:ignore: docsy
   [../docsy.dev/content/en/blog/2025/0.12.0.md](../docsy.dev/content/en/blog/2025/0.12.0.md)
 
 [#2266]: https://github.com/google/docsy/issues/2266
+[#2276]: https://github.com/google/docsy/pull/2276
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
 
 ## Action items

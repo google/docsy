@@ -1,7 +1,7 @@
 ---
 title: 0.13 Release wrapup plan
 date: 2025-11-12
-last-main-commit: c37aad0
+last-main-commit: f016114
 cSpell:ignore: docsy
 ---
 
@@ -69,12 +69,14 @@ Repeat when new commits land on `main` do the following.
 ### Update the plan and reports
 
 - Revisit the plan and update the reports with new commits to `main` integrated
-  into existing summaries.
+  into existing reports in this folder.
 - Update the release report blog draft with the latest context (track
   outstanding content work in the wrapup report).
+- Take note of fixes and features that are not yet documented in the blog post
+  or changelog.
 
-Report refreshed for commits through [c37aad0] (includes dark mode enhancements,
-ScrollSpy fixes, and documentation updates).
+Report refreshed for commits through [f016114] (includes KaTeX build-time
+rendering, dark mode enhancements, ScrollSpy fixes, and documentation updates).
 
 ### 0.13.0 blog post
 
@@ -82,6 +84,14 @@ ScrollSpy fixes, and documentation updates).
 - Compare it to the information you recently added to the 0.13.0 release report
   pages in this folder.
 - Is the post complete? If not identify what is missing.
+- Take note of fixes and features that are not yet documented.
+- Document breaking changes, new features, and other changes, as well as
+  deprecation notices and alerts of upcoming breaking changes.
+- For each change or feature:
+  - Link to: the corresponding issue, if it exists, otherwise link to the main
+    PR; link to the relevant section of the user guide.
+  - Mention any cleanup actions that the project needs to take, for example
+    removing obsolete configuration.
 
 ### Changelog
 
@@ -94,6 +104,6 @@ ScrollSpy fixes, and documentation updates).
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
 [0.13.0-changelog]: ../../docsy.dev/content/en/site/changelog/#v0130
-[c37aad0]: https://github.com/google/docsy/commit/c37aad0
+[f016114]: https://github.com/google/docsy/commit/f016114
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
 [0.13.0 blog post]: ../docsy.dev/content/en/blog/2025/0.13.0.md
