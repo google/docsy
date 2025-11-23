@@ -11,8 +11,8 @@
   {{ $toc := .TableOfContents -}}
   {{ if and $toc (ne $toc `<nav id="TableOfContents"></nav>`) -}}
     <div class="td-toc__title">
-      <span class="td-toc__title__text">On this page</span>
-      <a class="td-toc__title__link" title="Top of page" href="#"></a>
+      <span class="td-toc__title__text">{{ i18n "toc_on_this_page" }}</span>
+      <a class="td-toc__title__link" title="{{ i18n "toc_top_of_page" }}" href="#"></a>
     </div>
     {{ $toc | safeHTML }}
   {{ end -}}
