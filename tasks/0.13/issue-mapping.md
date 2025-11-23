@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy sidemenu FOUC katex mhchem sidenav
 ---
 
-> Report refreshed for commits through `14c2061` on `main`.
+> Report refreshed for commits through `f59cbb8` on `main`.
 
 Mapping [commits since v0.12.0][] to their originating issues (when known).
 
@@ -79,6 +79,9 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `a2cd44e` | `#2398` | Update changelogs and reports for KaTeX build-time rendering                          | `#2266`              | Release documentation maintenance                                        |
 | `f2b0c56` | `#2399` | Add TOC style customization section to navigation docs                                | `#2289`              | Documentation for TOC customization (ScrollSpy follow-up)                |
 | `14c2061` | `#2400` | Add i18n support for table of contents labels                                         | `#2289`              | Localization support for TOC "On this page" and "Top of page"            |
+| `bd7f023` | `#2402` | Document i18n support for TOC labels, update task docs                                | `#2289`              | Documentation follow-up for TOC i18n                                     |
+| `d3b5749` | `#2405` | Document `notoc`, and update TOC CSS class names                                      | `#2289`              | Documentation for `notoc` parameter and TOC CSS class updates            |
+| `f59cbb8` | `#2406` | [UX] Show left/right scroll indicators for the navbar on mobile                       | —                    | UX improvement for mobile navbar scrolling                               |
 
 ## CI / tooling commits
 
