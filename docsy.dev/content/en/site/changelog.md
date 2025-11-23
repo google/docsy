@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 weight: 99999
 # prettier-ignore
-cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane
+cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag lookandfeel mhchem navs tabpane katex
 ---
 
 We only document **breaking changes** and release **highlights** in this page.

@@ -999,6 +999,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:24.821835-05:00"
   },
+  "https://github.com/google/docsy/issues/2001": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-22T21:21:22.964034-05:00"
+  },
+  "https://github.com/google/docsy/issues/2035": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-22T21:21:22.044244-05:00"
+  },
   "https://github.com/google/docsy/issues/2108": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:26:30.089027-05:00"
@@ -1038,6 +1046,10 @@
   "https://github.com/google/docsy/issues/2313": {
     "StatusCode": 206,
     "LastSeen": "2025-11-15T13:13:08.640022-05:00"
+  },
+  "https://github.com/google/docsy/issues/2328": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-22T21:21:21.19062-05:00"
   },
   "https://github.com/google/docsy/issues/2329": {
     "StatusCode": 206,
@@ -1237,7 +1249,7 @@
   },
   "https://github.com/google/docsy/pull/2276": {
     "StatusCode": 206,
-    "LastSeen": "2025-11-22T19:11:50.204149-05:00"
+    "LastSeen": "2025-11-22T19:48:06.505712-05:00"
   },
   "https://github.com/google/docsy/pull/2291": {
     "StatusCode": 206,
@@ -1294,6 +1306,10 @@
   "https://github.com/google/docsy/pull/2395": {
     "StatusCode": 206,
     "LastSeen": "2025-11-22T19:11:51.453801-05:00"
+  },
+  "https://github.com/google/docsy/pull/2400": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-22T21:21:23.506177-05:00"
   },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
@@ -2006,6 +2022,10 @@
   "https://gohugo.io/methods/page/outputformats/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:43.161476-05:00"
+  },
+  "https://gohugo.io/methods/page/tableofcontents/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-23T08:52:31.653587-05:00"
   },
   "https://gohugo.io/methods/site/copyright/": {
     "StatusCode": 206,

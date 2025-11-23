@@ -3,6 +3,7 @@ title: Navigation and Menus
 date: 2017-01-05
 weight: 3
 description: Customize site navigation for your Docsy site.
+cSpell:ignore: navs lightdark lookandfeel frontmatter
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including
@@ -501,11 +502,15 @@ Feature notes:
 - Docsy will generally ignore `sidebar_root_for` for non "docs" pages and
   non-section index pages.
 
-## Table of contents
+## Table of contents (TOC) {#table-of-contents}
 
-Docsy provides a table of contents (TOC) for each "docs"page. The TOC is
-generated from the headings in the page content. The TOC is displayed in the
-right-hand sidebar by default.
+Docsy provides a table of contents (TOC) for each [`docs` page][]. The TOC is
+generated using Hugo's [TableOfContents][] function from the Markdown headings
+in the page content. The TOC is displayed in the right-hand sidebar of the
+page's main content area by default.
+
+[`docs` page]: /docs/content/adding-content/#content-sections-and-templates
+[TableOfContents]: https://gohugo.io/methods/page/tableofcontents/
 
 {{% alert title="Will shortcode headings appear in the TOC?" color=info %}}
 
@@ -530,6 +535,12 @@ You can use the following CSS classes as selectors to style the TOC:
   text and the top-of-page link)
 - `.td-toc__title__text` for the TOC title text
 - `.td-toc__title__link` for the TOC title link
+
+The TOC labels "On this page" and "Top of page" are localizable through the keys
+`toc_on_this_page` and `toc_top_of_page`. For details, see [Internationalization
+bundles][].
+
+[Internationalization bundles]: /docs/language/#internationalization-bundles
 
 ### Active TOC entry tracking with ScrollSpy {#toc-entry-tracking}
 

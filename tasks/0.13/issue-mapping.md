@@ -1,10 +1,10 @@
 ---
 title: 0.13 issue mapping
 date: 2025-11-12
-cSpell:ignore: docsy sidemenu FOUC
+cSpell:ignore: docsy sidemenu FOUC katex mhchem sidenav
 ---
 
-> Report refreshed for commits through `f016114` on `main`.
+> Report refreshed for commits through `14c2061` on `main`.
 
 Mapping [commits since v0.12.0][] to their originating issues (when known).
 
@@ -76,6 +76,9 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `ef1109c` | `#2391` | Add implementation docs and update changelog for 0.13.0                               | `#2266`              | Release documentation                                                    |
 | `ee765f4` | `#2386` | Improved light/dark-mode docs                                                         | —                    | Documentation improvements                                               |
 | `4145478` | `#2388` | Site docs reorg in prep for more design and ops docs, also updated tasks/0.13.0 pages | —                    | Documentation reorganization                                             |
+| `a2cd44e` | `#2398` | Update changelogs and reports for KaTeX build-time rendering                          | `#2266`              | Release documentation maintenance                                        |
+| `f2b0c56` | `#2399` | Add TOC style customization section to navigation docs                                | `#2289`              | Documentation for TOC customization (ScrollSpy follow-up)                |
+| `14c2061` | `#2400` | Add i18n support for table of contents labels                                         | `#2289`              | Localization support for TOC "On this page" and "Top of page"            |
 
 ## CI / tooling commits
 

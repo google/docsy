@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `f016114` on `main`.
+> Report refreshed for commits through `14c2061` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -77,6 +77,10 @@ client projects.
 - `ee765f4` (`#2386`) Improved light/dark-mode docs
 - `4145478` (`#2388`) Site docs reorg in prep for more design and ops docs, also
   updated tasks/0.13.0 pages
+- `a2cd44e` (`#2398`) Update changelogs and reports for KaTeX build-time
+  rendering
+- `f2b0c56` (`#2399`) Add TOC style customization section to navigation docs
+- `14c2061` (`#2400`) Add i18n support for table of contents labels
 
 ## CI / tooling only
 
