@@ -1235,6 +1235,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:40.272177-05:00"
   },
+  "https://github.com/google/docsy/pull/2276": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-22T19:48:06.505712-05:00"
+  },
   "https://github.com/google/docsy/pull/2291": {
     "StatusCode": 206,
     "LastSeen": "2025-11-12T21:09:10.724265-05:00"
