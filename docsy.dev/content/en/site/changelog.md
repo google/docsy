@@ -85,7 +85,8 @@ See [semver].
   ([#2115]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
 - **Dependency updates**: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - **Updated translations**: added Occitan locale ([#2173]) and refreshed
-  Simplified Chinese ([#2313]) and Ukrainian ([#2331]).
+  Simplified Chinese ([#2313]) and Ukrainian ([#2331]). Added translation
+  entries for the TOC labels ([#2400]).
 - **Build-time rendering of mathematical and chemical formulae**: now using
   Hugo's embedded KaTeX engine ([#2276], [#2394], [#2395]). For details, see
   [LaTeX support with KaTeX][diagrams-formulae].

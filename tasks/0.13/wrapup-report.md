@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `f016114` on `main`.
+> Report refreshed for commits through `14c2061` on `main`.
 
 ## Highlights since v0.12.0
 

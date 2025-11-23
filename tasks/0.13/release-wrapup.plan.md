@@ -1,7 +1,7 @@
 ---
 title: 0.13 Release wrapup plan
 date: 2025-11-12
-last-main-commit: f016114
+last-main-commit: 14c2061
 cSpell:ignore: docsy
 ---
 
@@ -64,7 +64,11 @@ cSpell:ignore: docsy
 
 ## Refresh actions
 
-Repeat when new commits land on `main` do the following.
+Repeat when new commits land on `main` do the following:
+
+- [Update the plan and reports](#update-the-plan-and-reports)
+- [0.13.0 blog post](#0130-blog-post)
+- [Changelog](#changelog)
 
 ### Update the plan and reports
 
@@ -75,8 +79,9 @@ Repeat when new commits land on `main` do the following.
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [f016114] (includes KaTeX build-time
-rendering, dark mode enhancements, ScrollSpy fixes, and documentation updates).
+Report refreshed for commits through [14c2061] (includes TOC i18n support, TOC
+style customization docs, KaTeX build-time rendering, dark mode enhancements,
+ScrollSpy fixes, and documentation updates).
 
 ### 0.13.0 blog post
 
@@ -104,6 +109,6 @@ rendering, dark mode enhancements, ScrollSpy fixes, and documentation updates).
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
 [0.13.0-changelog]: ../../docsy.dev/content/en/site/changelog/#v0130
-[f016114]: https://github.com/google/docsy/commit/f016114
+[14c2061]: https://github.com/google/docsy/commit/14c2061
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
 [0.13.0 blog post]: ../docsy.dev/content/en/blog/2025/0.13.0.md
