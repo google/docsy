@@ -332,15 +332,15 @@ test('main adjusts non-dev version when adding build ID', () => {
     },
   });
 
-  assert.equal(pkg.version, '1.1.0-dev+build-123');
-  assert.deepEqual(writtenPkg, { version: '1.1.0-dev+build-123' });
+  assert.equal(pkg.version, '1.0.1-dev+build-123');
+  assert.deepEqual(writtenPkg, { version: '1.0.1-dev+build-123' });
   assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
-  assert.equal(newVersion, '1.1.0-dev+build-123');
+  assert.equal(newVersion, '1.0.1-dev+build-123');
   assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing minor version and adding -dev suffix.',
+    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
   ]);
   assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0 → 1.1.0-dev+build-123',
+    '✓ Updated version: 1.0.0 → 1.0.1-dev+build-123',
   ]);
 });
 
@@ -351,7 +351,7 @@ test('adjustVersionForBuildId adds build ID to dev version', () => {
   assert.equal(result, '1.0.0-dev+build-123');
 });
 
-test('adjustVersionForBuildId increments minor and adds -dev for non-dev version', () => {
+test('adjustVersionForBuildId increments patch and adds -dev for non-dev version', () => {
   const warnings = [];
   const logger = {
     warn(message) {
@@ -360,9 +360,9 @@ test('adjustVersionForBuildId increments minor and adds -dev for non-dev version
   };
 
   const result = adjustVersionForBuildId('1.0.0', 'build-123', { logger });
-  assert.equal(result, '1.1.0-dev+build-123');
+  assert.equal(result, '1.0.1-dev+build-123');
   assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing minor version and adding -dev suffix.',
+    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
   ]);
 });
 
@@ -386,7 +386,7 @@ test('adjustVersionForBuildId handles unrecognized version format', () => {
   });
   assert.equal(result, 'invalid-version-dev+build-123');
   assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing minor version and adding -dev suffix.',
+    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
     'Warning: Version format not recognized (invalid-version). Appending -dev suffix.',
   ]);
 });
