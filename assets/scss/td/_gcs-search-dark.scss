@@ -167,6 +167,13 @@
       color: var(--td-gcs-secondary) !important;
     }
 
+    /* No results and error messages */
+    .gs-no-results-result .gs-snippet,
+    .gs-error-result .gs-snippet {
+      background-color: var(--bs-warning-bg-subtle) !important;
+      border: 1px solid var(--bs-warning-border-subtle) !important;
+    }
+
     .gs-visibleUrl,
     .gs-visibleUrl-short {
       color: var(--td-gcs-success) !important;
