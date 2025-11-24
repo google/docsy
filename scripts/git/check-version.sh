@@ -11,6 +11,10 @@ if [ "$current_branch" = "main" ]; then
   exit 0
 fi
 
+if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
+  exit 0
+fi
+
 output="$(npm run -s fix:version -- --silent 2>&1)"
 status=$?
 
@@ -31,5 +35,9 @@ if [ -n "$output" ]; then
   else
     echo 'Commit again if you are ok with the new ID.' >&2
   fi
+  echo >&2
+  echo "Don't want the version to be changed, maybe because this is a release" >&2
+  echo "branch? Set SKIP_VERSION_CHECK=1" >&2
+  echo >&2
   exit 1
 fi

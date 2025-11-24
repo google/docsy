@@ -82,7 +82,12 @@ repo.
     e.g., vendor assets and [go.mod] dependencies are up-to-date, etc.
 
 7.  **Submit a PR with your changes**, using a title like "Release v0.X.Y
-    preparation".
+    preparation". Use this command to create the PR via the web interface:
+
+    ```sh
+    gh pr create --web --title "Release $VERSION preparation" \
+      --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
+    ```
 
 8.  **Test the PR** branch from selected sites, and push any required
     adjustments.
