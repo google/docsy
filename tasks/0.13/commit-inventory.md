@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `f59cbb8` on `main`.
+> Report refreshed for commits through `52aa677` on `main`.
 
 Chronological list of [commits since v0.12.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -85,6 +85,11 @@ client projects.
 - `d3b5749` (`#2405`) Document `notoc`, and update TOC CSS class names
 - `f59cbb8` (`#2406`) [UX] Show left/right scroll indicators for the navbar on
   mobile
+- `39ee7ca` (`#2407`) Update changelog for navbar scroll indicators and notoc
+  docs
+- `15a3823` (`#2408`) Change link title from 'Documentation' to 'Docs'
+- `ec833d2` (`#2368`) [Blog] Release 0.13.0 report and upgrade guide
+- `52aa677` (`#2411`) Pre-0.13.0 release adjustments
 
 ## CI / tooling only
 

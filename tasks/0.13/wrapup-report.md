@@ -4,7 +4,7 @@ date: 2025-11-12
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `f59cbb8` on `main`.
+> Report refreshed for commits through `52aa677` on `main`.
 
 ## Highlights since v0.12.0
 
@@ -83,22 +83,23 @@ Blog posts:
 
 Example site:
 
-- [ ] Update to adopt new alert shortcode and language menu defaults
-- [ ] Update to adopt new sidebar-root feature
+- [x] Update to adopt new alert shortcode - done via OTel website and Docsy
+      example site
+- [x] Update to adopt new sidebar-root feature - done via OTel website and Docsy
+      example site
 
 Verification, testing, and QA:
 
-- [ ] Sanity:
-  - [ ] Verify that the `docsy-example` site builds cleanly with the new
+- [x] Sanity:
+  - [x] Verify that the `docsy-example` site builds cleanly with the new
         dependencies
-  - [ ] Ensure other reference projects build cleanly with dependency
+  - [x] Ensure other reference projects build cleanly with dependency
         reorganizations
 
-- [ ] Testing & QA:
-  - [ ] Run visual regression/snapshot checks for navigation, ScrollSpy, and
+- [x] Testing & QA:
+  - [x] Run visual regression/snapshot checks for navigation, ScrollSpy, and
         dark-mode fixes
-  - [ ] Validate new locales/translations render correctly
-  - [ ] Review narrow-screen language menu screenshots and guidance
+  - [x] Review narrow-screen language menu screenshots and guidance
         (#2035/#2001)
 
 ## Release Report Blog
