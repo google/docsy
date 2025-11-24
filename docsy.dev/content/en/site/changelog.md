@@ -54,8 +54,6 @@ See [semver].
 
 ## v0.13.0
 
-> **UNRELEASED: this planned version is still under development**
-
 **Resources**:
 
 - [Release 0.13.0 report and upgrade guide][0.13.0-blog]
