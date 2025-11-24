@@ -13,5 +13,6 @@ globs:
   # - docsy.dev/content/en/docs/content/search.md
   # - docsy.dev/content/en/docs/content/shortcodes.md
   # - docsy.dev/content/en/docs/content/versioning.md
+  - docsy.dev/content/en/blog/2025/0.13.0.md
 config:
   extends: .markdownlint.yaml
