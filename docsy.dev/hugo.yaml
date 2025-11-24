@@ -1,4 +1,4 @@
-baseURL: https://www.docsy.dev/
+# baseURL moved to be after params
 title: Docsy
 enableRobotsTXT: true
 enableGitInfo: true
@@ -57,6 +57,7 @@ markup:
     noClasses: false # Required for dark-mode
 
 params:
+  productionURL: &productionURL https://www.docsy.dev
   copyright:
     authors: >-
       Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
@@ -139,6 +140,8 @@ params:
     enable: true
   drawio:
     enable: true
+
+baseURL: *productionURL
 
 taxonomies:
   tag: tags

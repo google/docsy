@@ -185,16 +185,16 @@ export function adjustVersionForBuildId(
 
   // Need to adjust: version doesn't end with -dev
   logger?.warn?.(
-    `Warning: Adding build ID to non-dev version. Incrementing minor version and adding -dev suffix.`,
+    `Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.`,
   );
 
-  // Parse version and increment minor
+  // Parse version and increment patch
   const versionMatch = baseVersion.match(/^(\d+)\.(\d+)\.(\d+)$/);
   if (versionMatch) {
     const major = parseInt(versionMatch[1], 10);
     const minor = parseInt(versionMatch[2], 10);
     const patch = parseInt(versionMatch[3], 10);
-    const incrementedBase = `${major}.${minor + 1}.${patch}-dev`;
+    const incrementedBase = `${major}.${minor}.${patch + 1}-dev`;
     return `${incrementedBase}+${buildId}`;
   }
 

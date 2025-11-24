@@ -346,7 +346,7 @@ set the environment variable `DOCSY_MKDIR_HUGO_MOD_SKIP=1` before running NPM
 install.
 
 [#1120]: https://github.com/google/docsy/issues/1120
-[0.8.0]: /site/changelog/#v080
+[0.8.0]: /site/changelog/#v0.8.0
 [hugo module]: /docs/get-started/docsy-as-module/
 
 {{% /alert %}}
