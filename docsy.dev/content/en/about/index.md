@@ -9,9 +9,11 @@ menu: {main: {weight: 10}}
 Docsy is a pre-configured Hugo theme that provides the core features and behaviors needed to create a technical documentation site. Use Docsy to set up your documentation website, including an optional Blog section, and then spend your time focusing on authoring technical content. Depending on how you choose to configure Docsy and whether you use a hosting service that supports continuous builds, you can even just add your Markdown or HTML content file into a folder on your source repository, and then sit back while it automatically gets added to your site - complete with updated menus.
 
 Read on to find out more, or visit our [documentation](/docs/) to get started!
+
 {{% /blocks/cover %}}
 
 {{% blocks/section color="primary" %}}
+
 ## So what’s a technical documentation site?
 
 A technical documentation site is a website that your users can visit to find the documentation for your technical project.  Your documentation set contains all the information you think your users might need to engage with your project, from overviews that help them understand what the project is for, to instructions for specific tasks. Depending on the size of the project, a documentation set can be a page or two or an entire “book” with different types of information.
@@ -25,9 +27,11 @@ A technical documentation site is a website that your users can visit to find th
 If you have users around the world, you might also want to provide your content in multiple languages, and if you have an open source project, you’ll probably want your users to be able to contribute to the docs.
 
 Once you have your content, you use a technical documentation site to publish your technical documentation set online for your users. In addition to your documentation, your site might also contain material like contact information, a blog, or information about how to contribute to the project.
+
 {{% /blocks/section %}}
 
 {{% blocks/section color="white" %}}
+
 ## How does Docsy help?
 
 Particularly when working with open source projects, it can be difficult to figure out how to turn all your product knowledge into a website that helps and engages your users. **Enter Docsy!**
@@ -120,8 +124,11 @@ template, or even add new behaviors. [Learn more...](/docs/updating/)
 ### Focus on great content
 
 Because Docsy helps you create and serve a well-organized, navigable technical documentation set, it frees you up to create and maintain great reliable, comprehensive content that your users can enjoy and trust.
+
 {{% /blocks/section %}}
+
 {{% blocks/section color="primary" %}}
+
 ## What's next for Docsy?
 
 Docsy is an open source project and we love getting patches and contributions to make Docsy and its docs even better. We hope to continue to make improvements to the theme along with the Docsy community.
@@ -130,4 +137,5 @@ Visit our [Issues](https://github.com/google/docsy/issues) to see what we're cur
 
 You can find out how to update your site to the latest version of Docsy in [Keeping the theme up to date](/docs/updating/).
 <!-- There must not be a blank line at the end of this file otherwise it creates an empty paragraph in the rendered page -->
+
 {{% /blocks/section %}}
