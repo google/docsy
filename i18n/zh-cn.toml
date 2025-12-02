@@ -27,7 +27,6 @@ other = "保留所有权利"
 [footer_privacy_policy]
 other = "隐私政策"
 
-
 # Post (blog, articles etc.)
 [post_byline_by]
 other = "撰文："
@@ -89,3 +88,9 @@ other = "这个页面对您有帮助吗？"
 other = "有帮助"
 [feedback_negative]
 other = "没帮助"
+
+# Table of contents
+[toc_on_this_page]
+other = "本页目录"
+[toc_top_of_page]
+other = "回到顶部"
