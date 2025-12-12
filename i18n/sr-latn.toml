@@ -88,3 +88,9 @@ other = "Da li vam je ova stranica bila od pomoći?"
 other = "Da"
 [feedback_negative]
 other = "Ne"
+
+# Table of contents
+[toc_on_this_page]
+other = "Na ovoj stranici"
+[toc_top_of_page]
+other = "Vrh stranice"
