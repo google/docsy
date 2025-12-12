@@ -88,3 +88,9 @@ other = "Да ли вам је ова страница била од помоћ�
 other = "Да"
 [feedback_negative]
 other = "Не"
+
+# Table of contents
+[toc_on_this_page]
+other = "На овој страници"
+[toc_top_of_page]
+other = "Врх странице"
