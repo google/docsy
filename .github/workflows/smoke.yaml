@@ -1,5 +1,6 @@
 # Smoke test across OSs: build a Docsy-based site from scratch,
 # using Docsy as hugo module and fetching Docsy via NPM.
+# cSpell:ignore docsy github
 
 name: smoke
 
@@ -29,22 +30,35 @@ jobs:
     if: github.event_name != 'push' || github.repository == 'google/docsy'
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: package.json
-      - run: tools/install-hugo.sh
+
+      - name: Setup workspace
+        run: |
+          npm install
+          mkdir -p tmp && cd tmp && npm init -y
         shell: bash
+
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
-        run: |
-          mkdir tmp && cd tmp && set -x
-          ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
+        working-directory: tmp
+        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
+
       - name: Make site from PR
         if: github.event_name == 'pull_request'
-        run: |
-          mkdir tmp && cd tmp && set -x
-          ../tools/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
+        working-directory: tmp
+        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tmp-site-${{ matrix.os }}-${{ matrix.docsy-src }}
+          path: |
+            tmp
+            !**/node_modules
+            !**/resources

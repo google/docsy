@@ -6,7 +6,7 @@
 
 <nav class="td-navbar js-navbar-scroll
             {{- if $cover }} td-navbar-cover {{- end }}" data-bs-theme="dark">
-<div class="container-fluid flex-column flex-md-row">
+<div class="td-navbar-container container-fluid flex-column flex-md-row">
   <a class="navbar-brand" href="{{ .Site.Home.RelPermalink }}">
     {{- /**/ -}}
     <span class="navbar-brand__logo navbar-logo">
@@ -22,7 +22,8 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
+  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+    <div class="scroll-indicator scroll-left"></div>
     <ul class="navbar-nav">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
@@ -54,23 +55,25 @@
       {{ end -}}
       {{ end -}}
       {{ if .Site.Params.versions -}}
-      <li class="nav-item dropdown d-none d-lg-block">
+      <li class="nav-item dropdown d-none d-lg-block td-navbar__version-menu">
         {{ partial "navbar-version-selector.html" . -}}
       </li>
       {{ end -}}
       {{ if (gt (len .Site.Home.Translations) 0) -}}
-      <li class="nav-item">
+      <li class="nav-item td-navbar__lang-menu">
         {{ partial "navbar-lang-selector.html" . -}}
       </li>
       {{ end -}}
-      {{ if .Site.Params.ui.showLightDarkModeMenu -}}
-      <li class="nav-item">
+      {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
+      {{ if $darkMode.showMenu -}}
+      <li class="nav-item td-navbar__light-dark-menu">
         {{ partial "theme-toggler" . }}
       </li>
       {{ end -}}
     </ul>
+    <div class="scroll-indicator scroll-right"></div>
   </div>
-  <div class="d-none d-lg-block">
+  <div class="d-none d-lg-block td-navbar__search">
     {{ partial "search-input.html" . }}
   </div>
 </div>

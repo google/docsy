@@ -3,15 +3,29 @@
   "version": "0.2",
   "caseSensitive": true,
   "words": [
+    "anchorize",
     "Docsy",
     "errorf",
+    "Gantt",
+    "GLFM",
+    "htmltest",
     "hugo",
+    "isset",
+    "markdownify",
+    "nvmrc",
+    "Occitan",
+    "refcache",
     "relref",
     "scrollspy",
     "shortcode",
     "shortcodes",
+    "subfolders",
     "tabpane",
+    "unmarshal",
     "upvote",
-    "warnf"
+    "viewports",
+    "warnf",
+    "warnidf",
+    "wrapup"
   ]
 }

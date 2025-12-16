@@ -88,3 +88,9 @@ other = "Oui"
 [feedback_negative]
 other = "Non"
 
+# Table of contents
+[toc_on_this_page]
+other = "Sur cette page"
+[toc_top_of_page]
+other = "Haut de la page"
+

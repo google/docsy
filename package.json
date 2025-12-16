@@ -1,62 +1,70 @@
 {
   "name": "docsy",
-  "version": "0.12.1-dev-unreleased",
-  "version.next": "0.12.2-dev-unreleased",
+  "version": "0.13.1-dev",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
+  "workspaces": [
+    "docsy.dev"
+  ],
   "scripts": {
-    "_build": "npm run cd:docs -- _build",
-    "_cd:docs": "cd userguide &&",
-    "_check:format": "npx prettier --check *.md",
-    "_commit:public": "npm run cd:docs -- _commit:public",
+    "_cd:docsy.dev": "cd docsy.dev &&",
+    "_check:format": "npx prettier --check assets *.md scripts tasks",
+    "_check:links": "npm run _cd:docsy.dev -- npm run _check:links",
+    "_check:markdown": "npx markdownlint-cli2",
+    "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
     "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
+    "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
-    "_gen-chroma-styles": "bash -c tools/gen-chroma-styles.sh && bash -c 'tools/gen-chroma-styles.sh -s onedark -o _dark.scss'",
-    "_mkdir:hugo-mod": "node tools/mkdirp-hugo-mod.js ..",
-    "_prepare": "npm run _cp:bs-rfs && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
-    "_refresh-forward-sass-var": "bash -c tools/refresh-sass-variables.pl",
-    "build:preview": "npm run cd:docs -- build:preview --",
-    "build:production": "npm run cd:docs -- build:production --",
-    "build": "npm run cd:docs -- build --",
-    "cd:docs": "npm run _cd:docs -- npm run",
+    "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh && bash -c 'scripts/gen-chroma-styles.sh -s onedark -o _dark.scss'",
+    "_mkdir:hugo-mod": "node scripts/mkdirp-hugo-mod.js ..",
+    "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
+    "_prepare": "npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
+    "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
+    "build": "npm run _cd:docsy.dev -- npm run build",
+    "cd:docsy.dev": "echo 'Running in docsy.dev...'; npm run _cd:docsy.dev -- npm run",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
-    "check:links:internal": "npm run cd:docs check:links:internal",
-    "check:links": "npm run cd:docs check:links",
-    "check": "npm run check:format",
-    "ci:post": "npm run fix:format && npm run _diff:check",
-    "ci:prepare": "npm run docs-install && npm run _prepare && npm run _diff:check",
-    "docs-install": "npm run _cd:docs -- npm install",
-    "fix:format": "npm run _check:format -- --write && npm run cd:docs fix:format",
-    "get:hugo-modules": "node tools/getHugoModules/index.mjs",
+    "check:links": "npm run _cd:docsy.dev -- npm run check:links",
+    "check:markdown": "npm run _check:markdown -- '**/*.md'",
+    "check": "npm run check:format && npm run check:markdown",
+    "ci:post": "npm run fix-for-test && npm run _diff:check && npm run test:tooling",
+    "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
+    "ci:test": "npm run ci:prepare && npm run check && npm run test:website && npm run ci:post",
+    "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
+    "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website",
+    "fix:format": "npm run -s _check:format -- --write && echo && npm run -s cd:docsy.dev fix:format",
+    "fix:markdown": "npm run check:markdown -- --fix",
+    "fix:version": "npm run set:package-version -- --id \"$(scripts/get-build-id.sh)\"",
+    "fix-for-test": "npm run fix:format && npm run fix:markdown && echo 'Skipping fix:version' && npm run cd:docsy.dev fix",
+    "fix": "npm run fix:format && npm run fix:markdown && npm run fix:version && npm run cd:docsy.dev fix",
+    "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
+    "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "postinstall": "npm run _mkdir:hugo-mod",
-    "serve": "npm run cd:docs serve",
-    "test:all": "npm run ci:prepare && npm run check && npm run cd:docs test && npm run ci:post",
-    "test": "npm run check && npm run cd:docs test",
+    "postupdate:dep": "npm run -s post-update",
+    "postupdate:packages": "npm run -s post-update",
+    "serve": "npm run _cd:docsy.dev -- npm run serve",
+    "set:package-version": "node scripts/set-package-version/index.mjs",
+    "test:tooling": "node --test",
+    "test:website": "npm run cd:docsy.dev test",
+    "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:pkgs": "npx npm-check-updates --dep 'prod,dev,optional,peer' -u && npm run cd:docs update:pkgs"
+    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run cd:docsy.dev update:packages",
+    "zzz": "echo 'This is just a placeholder that is the last script in this script collection.'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
-    "bootstrap": "5.3.6"
+    "bootstrap": "5.3.8"
   },
   "devDependencies": {
-    "cpy-cli": "^5.0.0",
+    "cpy-cli": "^6.0.0",
+    "markdownlint-cli2": "^0.19.1",
     "prettier": "^3.6.2"
   },
-  "peerDependencies": {
-    "hugo-extended": "0.147.8",
-    "netlify-cli": "^22.1.3",
-    "npm-check-updates": "^18.0.1"
-  },
-  "peerDependenciesMeta": {
-    "netlify-cli": {
-      "optional": true
-    }
+  "config": {
+    "hugo_version": "0.151.0"
   },
   "engines": {
     "node": ">=22"
   },
-  "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark twbs netlify pkgs userguide -"
+  "spelling": "cSpell:ignore docsy hugo fortawesome fontawesome onedark -"
 }

@@ -61,5 +61,78 @@ limitations under the License.
         });
     });
 
+        // Navbar overflow detection with scroll indicators
+    function checkNavbarOverflow() {
+        const navbarNav = $('.navbar-nav');
+        const container = $('#main_navbar');
+        const navbarContainer = $('.td-navbar-container');
+
+        if (navbarNav.length) {
+            const navElement = navbarNav[0];
+            const isOverflowing = navElement.scrollWidth > navElement.clientWidth;
+
+            // console.log('Overflow check:', {
+            //     scrollWidth: navElement.scrollWidth,
+            //     clientWidth: navElement.clientWidth,
+            //     isOverflowing: isOverflowing
+            // });
+
+            if (isOverflowing) {
+                container.addClass('td-navbar-nav-scroll--indicator');
+                navbarContainer.addClass('navbar-is-overflowing');
+
+                // Add click handlers
+                container.find('.scroll-left').on('click', function() {
+                    navbarNav.animate({scrollLeft: '-=100'}, 300);
+                });
+
+                container.find('.scroll-right').on('click', function() {
+                    navbarNav.animate({scrollLeft: '+=100'}, 300);
+                });
+
+                // Update indicator visibility based on scroll position
+                updateScrollIndicators();
+            } else {
+                container.removeClass('td-navbar-nav-scroll--indicator');
+                navbarContainer.removeClass('navbar-is-overflowing');
+            }
+        }
+    }
+
+    function updateScrollIndicators() {
+        const navbarNav = $('.navbar-nav');
+        const leftIndicator = $('.scroll-left');
+        const rightIndicator = $('.scroll-right');
+
+        if (navbarNav.length) {
+            const navElement = navbarNav[0];
+            const scrollLeft = navElement.scrollLeft;
+            const maxScroll = navElement.scrollWidth - navElement.clientWidth;
+
+            // Show/hide left indicator
+            if (scrollLeft <= 0) {
+                leftIndicator.removeClass('visible');
+            } else {
+                leftIndicator.addClass('visible');
+            }
+
+            // Show/hide right indicator
+            if (scrollLeft >= maxScroll) {
+                rightIndicator.removeClass('visible');
+            } else {
+                rightIndicator.addClass('visible');
+            }
+        }
+    }
+
+    // Check overflow on page load and window resize
+    $(function() {
+        checkNavbarOverflow();
+        $(window).on('resize', checkNavbarOverflow);
+
+        // Update indicators on scroll
+        $('.navbar-nav').on('scroll', updateScrollIndicators);
+    });
+
 
 }(jQuery));
