@@ -77,7 +77,7 @@ all the prerequisites listed above:
 
 ```sh
 git clone --depth 1 https://github.com/google/docsy.git
-cd docsy/userguide/
+cd docsy/docsy.dev/
 npm install
 npm run serve
 ```

@@ -1,0 +1,48 @@
+// =============================================================================
+// Color adjustments for dark mode, mainly to improve color contrast.
+//
+// Note that other style files might also include dark-mode adjustments, search
+// for [data-bs-theme='dark'].
+//
+// Status: EXPERIMENTAL
+// Usage: @import 'td/color-adjustments-dark'; // in client _styles_project.scss
+// =============================================================================
+
+@if $enable-dark-mode {
+  // The following value makes sense for the Bootstrap base theme. Projects will
+  // likely need to adjust this.
+  $lighten-amount-for-dark-color-variant: 22% !default;
+
+  $primary-dark: lighten(
+    $primary,
+    $lighten-amount-for-dark-color-variant
+  ) !default;
+  // $secondary-dark: lighten($secondary, $lighten-amount-for-dark-color-variant) !default;
+  // $success-dark: lighten($success, $lighten-amount-for-dark-color-variant) !default;
+  // $info-dark: lighten($info, $lighten-amount-for-dark-color-variant) !default;
+  // $warning-dark: lighten($warning, $lighten-amount-for-dark-color-variant) !default;
+  // $danger-dark: lighten($danger, $lighten-amount-for-dark-color-variant) !default;
+
+  [data-bs-theme='dark'] {
+    --bs-primary: #{$primary-dark} !important;
+    // --bs-success: #{$success-dark} !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Tips 'n tricks
+  // ---------------------------------------------------------------------------
+
+  // If you need to adjust properties of a deeply nested class in dark mode, you
+  // can use the following syntax:
+
+  // .td-some-class {
+  //   .td-deeply-nested-class {
+  //     @at-root [data-bs-theme="dark"] #{&} {
+  //       // ...
+  //     }
+  //   }
+  // }
+
+  // Want to see the var value? Try:
+  // @warn "primary-dark: #{$primary-dark}";
+}

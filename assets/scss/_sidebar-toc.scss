@@ -41,7 +41,7 @@
     display: block;
   }
 
-  &__title {
+  &-title {
     color: var(--bs-secondary-color);
     border-bottom: 1px solid var(--bs-tertiary-color);
     padding-bottom: 0.25rem;
@@ -88,14 +88,16 @@
       color: var(--bs-secondary-color);
 
       &.active {
-        color: var(--bs-primary);
+        color: var(--bs-primary-text-emphasis);
         border-left-color: var(--bs-primary);
-        background-color: var(--bs-secondary-bg-subtle);
+        background-color: var(--bs-tertiary-bg);
       }
 
       &:focus,
       &:hover {
-        color: initial;
+        // Possible alternative color:
+        // color: var(--bs-nav-link-disabled-color);
+        background-color: var(--bs-secondary-bg-subtle);
       }
     }
 

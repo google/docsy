@@ -34,6 +34,8 @@
 
   setTheme(getPreferredTheme())
 
+  document.documentElement.removeAttribute('data-theme-init')
+
   const showActiveTheme = (theme, focus = false) => {
     const themeSwitcher = document.querySelector('#bd-theme')
 

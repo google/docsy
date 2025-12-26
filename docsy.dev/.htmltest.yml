@@ -1,0 +1,27 @@
+# cSpell:ignore github regexs
+CacheExpires: 9000h # ~ 12 months
+DirectoryPath: public
+CheckDoctype: false # Sadly, this is false only because of `static/google*.html`
+IgnoreAltMissing: true # FIXME
+IgnoreDirectoryMissingTrailingSlash: true # FIXME
+TestFilesConcurrently: true
+IgnoreDirs:
+  - ^blog/(\d+/)?page/\d+
+  - ^xx # Placeholder language pages
+IgnoreEmptyHref: true # FIXME
+IgnoreInternalEmptyHash: true # FIXME
+IgnoreInternalURLs: # list of paths
+IgnoreURLs: # list of regexs of paths or URLs to be ignored
+  - ^(https://www.docsy.dev/)?xx/ # Placeholder language pages
+  - \?no-link-check
+  - index.xml$ # ignore <link rel=alternate ...>
+  - ^https?://[^/]+/(categories|tags)/ # ignore Docsy-generated content
+  - ^https?://localhost\b
+  # Ignore Docsy-generated GitHub links for now
+  - ^https?://github\.com/.*?/.*?/(new|edit)/ # view-page, edit-source etc
+  # Ignore view page source links for now
+  - ^https://github.com/google/docsy/tree/main/docsy.dev/content/en/
+  - ^https://twitter.com/docsydocs$
+  # Too flaky or unnecessary
+  - ^https://badges.netlify.com/api
+  - ^https://code.jquery.com

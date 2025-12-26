@@ -83,6 +83,12 @@
     margin: 0;
     width: 100%;
   }
+
+  // FIXME: remove hardcoded column settings in the search layout.
+  &-result > div {
+    @extend .col-md-10;
+    @extend .offset-md-1;
+  }
 }
 
 // Offline search

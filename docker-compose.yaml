@@ -3,12 +3,12 @@ version: "3.3"
 services:
 
    site:
-      image: docsy/user-guide
+      image: docsy/docsy.dev
       build:
          context: .
-      ports: 
+      ports:
          - "1313:1313"
       user: "${DOCSY_USER}"
       volumes:
-         - /app/docsy/userguide/node_modules
+         - /app/docsy/docsy.dev/node_modules
          - .:/app/docsy

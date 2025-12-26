@@ -88,3 +88,9 @@ other = "Esta página foi útil?"
 other = "Sim"
 [feedback_negative]
 other = "Não"
+
+# Table of contents
+[toc_on_this_page]
+other = "Nesta página"
+[toc_top_of_page]
+other = "Topo da página"

@@ -1,0 +1,18 @@
+# cSpell:ignore docsy github lookandfeel iconsimages
+
+globs:
+  - '!node_modules/**'
+  - '!public/**'
+  - '!tmp/**'
+  - '!docsy.dev/**'
+  - docsy.dev/content/en/docs/content/iconsimages.md
+  - docsy.dev/content/en/docs/content/language.md
+  - docsy.dev/content/en/docs/content/lookandfeel.md
+  - docsy.dev/content/en/docs/content/navigation.md
+  # - docsy.dev/content/en/docs/content/repository-links.md
+  # - docsy.dev/content/en/docs/content/search.md
+  # - docsy.dev/content/en/docs/content/shortcodes.md
+  # - docsy.dev/content/en/docs/content/versioning.md
+  - docsy.dev/content/en/blog/2025/0.13.0.md
+config:
+  extends: .markdownlint.yaml
