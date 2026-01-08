@@ -62,6 +62,7 @@ params:
     authors: >-
       Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
+    to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
   version: 0.13.0

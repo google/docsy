@@ -20,7 +20,6 @@
   {{ $postPath := printf "%d/%s" . $version -}}
   {{ $blogPage = $blogSection.GetPage $postPath -}}
   {{ if $blogPage }}{{ break }}{{ end -}}
-  {{ warnf "%s: shortcode 'release-summary': Blog post not found for version %q in year %d, path: %q" $version . $postPath -}}
 {{ end -}}
 
 {{ if not $blogPage -}}
