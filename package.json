@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.13.1-dev+1-g69d4d6c",
+  "version": "0.13.1-dev+2-g5fd8175",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -57,8 +57,8 @@
   },
   "devDependencies": {
     "cpy-cli": "^6.0.0",
-    "markdownlint-cli2": "^0.19.1",
-    "prettier": "^3.6.2"
+    "markdownlint-cli2": "^0.20.0",
+    "prettier": "^3.7.4"
   },
   "config": {
     "hugo_version": "0.151.0"
