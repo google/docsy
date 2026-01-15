@@ -739,6 +739,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.355089-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-19T02:03:33.626643523+01:00"
+  },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.04329-05:00"
