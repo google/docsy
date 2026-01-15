@@ -1,16 +1,16 @@
 # Hugo build configuration for Netlify
-# (https://gohugo.io/hosting-and-deployment/hosting-on-netlify/#configure-hugo-version-in-netlify)
+# (https://gohugo.io/host-and-deploy/host-on-netlify/#configure-hugo-version-in-netlify)
 
 [build]
-publish = "docsy.dev/public"
-command = "npm install && cd docsy.dev && npm run build:preview"
+publish = "public"
+command = "scripts/_install.sh && npm run build:preview"
 
 [build.environment]
 GO_VERSION = "1.23.5"
 HUGO_THEME = "repo"
 
 [context.production]
-command = "npm install && cd docsy.dev && npm run build:production"
+command = "scripts/_install.sh && npm run build:production"
 
 # Redirects for slug swap: /docs/adding-content/ → /docs/content/
 [[redirects]]
@@ -23,4 +23,3 @@ command = "npm install && cd docsy.dev && npm run build:production"
   to = "/docs/content/:splat"
   status = 301
 
-# cSpell:ignore docsy
