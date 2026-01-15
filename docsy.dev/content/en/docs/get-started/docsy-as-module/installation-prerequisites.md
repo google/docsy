@@ -24,7 +24,7 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is `v0.146.0` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -70,7 +70,7 @@ Hugo's commands for module management require that the Go programming language i
 
 ```console
 $ go version
-go version go1.24.3
+go version go1.25.6
 ```
 
 Ensure that you are using version 1.12 or higher.
@@ -84,7 +84,7 @@ Hugo's commands for module management require that the `git` client is installed
 
 ```console
 $ git version
-git version 2.49.0
+git version 2.52.0
 ```
 
 If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.

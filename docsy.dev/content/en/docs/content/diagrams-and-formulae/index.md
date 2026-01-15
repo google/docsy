@@ -227,7 +227,7 @@ passthrough delimiter pairs defined above.
 >   actually have it setup.
 
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
-  https://github.com/google/docsy/blob/main/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
+  https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 
 ### Display of Chemical Equations and Physical Units
 
