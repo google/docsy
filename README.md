@@ -68,8 +68,11 @@ details about the various usage options.
 
 Docsy has its own user guide (using Docsy, of course!) with lots more
 information about using the theme. It is hosted by [Netlify] at
-[docsy.dev](https://docsy.dev). For deploy logs and more, see [Deploys] from the
-site's Netlify dashboard.
+[docsy.dev](https://docsy.dev/).
+
+**Maintainers**: you can access deploy logs, the [deploy preview of
+`main`][main-preview], and more from the [Deploys] section of the site's Netlify
+dashboard.
 
 Alternatively you can use Hugo to generate and serve a local copy of the guide
 (also useful for testing local theme changes), making sure you have installed
@@ -77,7 +80,7 @@ all the prerequisites listed above:
 
 ```sh
 git clone --depth 1 https://github.com/google/docsy.git
-cd docsy/docsy.dev/
+cd docsy
 npm install
 npm run serve
 ```
@@ -90,13 +93,16 @@ requests, see [CONTRIBUTING.md]. Thank you to all past, present, and future
 
 ## License
 
-This project is licensed under the Apache License 2.0 - see
-[LICENSE](https://github.com/google/docsy/blob/main/LICENSE) for details
+This project is licensed under the Apache License 2.0, see
+[LICENSE](https://github.com/google/docsy/blob/main/LICENSE) for details.
 
 [code of conduct]:
   https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md
 [CONTRIBUTING.md]: https://github.com/google/docsy/blob/main/CONTRIBUTING.md
 [contributors]: https://github.com/google/docsy/graphs/contributors
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
+[main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
 [releases]: https://github.com/google/docsy/releases
+
+<!-- cSpell:ignore docsy -->

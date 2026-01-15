@@ -283,6 +283,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:23.110933-05:00"
   },
+  "https://docsy.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T17:56:33.239145-05:00"
+  },
   "https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:37.09511-05:00"
@@ -2138,6 +2142,10 @@
   "https://lunrjs.com/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:23.708187-05:00"
+  },
+  "https://main--docsydocs.netlify.app/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T17:53:26.999006-05:00"
   },
   "https://markmap.js.org/": {
     "StatusCode": 206,
