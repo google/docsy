@@ -1,8 +1,10 @@
 # Hugo build configuration for Netlify
 # (https://gohugo.io/host-and-deploy/host-on-netlify/#configure-hugo-version-in-netlify)
 
+# base = "docsy.dev" - set via web UI
+
 [build]
-publish = "public"
+publish = "docsy.dev/public"
 command = "scripts/_install.sh && npm run build:preview"
 
 [build.environment]
@@ -23,3 +25,4 @@ command = "scripts/_install.sh && npm run build:production"
   to = "/docs/content/:splat"
   status = 301
 
+# cSpell:ignore docsy
