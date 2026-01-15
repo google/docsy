@@ -29,13 +29,6 @@ if [ ! -f package.json ] || [ ! -d docsy.dev ]; then
     exit 1
 fi
 
-# Temporary while we're transitioning to our new build configuration.
-if [ ! -e public ]; then
-    ln -s docsy.dev/public .
-else
-    echo "INFO: public directory already exists." >&2
-fi
-
 echo "Installing NPM packages for Docsy website and theme..."
 exec npm install
 
