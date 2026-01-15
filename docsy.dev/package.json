@@ -10,7 +10,7 @@
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit --allow-empty -m \"Site at $HASH\"",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
-    "_postbuild": "npm run _check:links--warn; cp -R public ../public || true",
+    "_postbuild": "npm run _check:links--warn",
     "_refcache:prune-4xx": "node scripts/prune-refcache-4xx.mjs",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "cross-env npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
