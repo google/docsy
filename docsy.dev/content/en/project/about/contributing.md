@@ -233,7 +233,7 @@ actions before any further changes are merged into the default branch:
 - **`scripts/set-package-version/index.mjs`**: Low-level version manager. See
   script help for usage.
 
-[CHANGELOG]: /project/changelog/
+[CHANGELOG]: /project/about/changelog/
 [contribution guidelines]: /docs/contribution-guidelines/
 [docsy-example]: https://github.com/google/docsy-example
 [docsy.dev]: https://www.docsy.dev/
