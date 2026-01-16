@@ -22,17 +22,17 @@ _param FA person-digging " ps-2" %}}
 
 Planned content organization (tentative):
 
-- [About](about/) — High-level information about the project, including its
+- [About](about/): High-level information about the project, including its
   purpose, ownership, and overall status.
-- **Design** — Architectural design, Information Architecture (IA), layout, UX
+- **Design**: Architectural design, Information Architecture (IA), layout, UX
   choices, theme related decisions, and other design-level artifacts.
-- [Implementation](implementation/) — Code-level structure and conventions, Hugo/Docsy
+- [Implementation](implementation/): Code-level structure and conventions, Hugo/Docsy
   templates, SCSS/JS customizations, patches, and internal shims.
-- [Build](build/) — Tooling, local development setup, CI/CD workflows, deployment
+- [Build](build/): Tooling, local development setup, CI/CD workflows, deployment
   environments, and automation details.
-- **Quality** — Link checking, accessibility standards, tests, review practices,
+- **Quality**: Link checking, accessibility standards, tests, review practices,
   and other quality-related processes.
-- **Roadmap** — Milestones, backlog, priorities, technical debt, and
+- **Roadmap**: Milestones, backlog, priorities, technical debt, and
   design/implementation decisions.
 
 ## Site build information

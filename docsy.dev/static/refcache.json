@@ -2603,11 +2603,11 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:54.947539-05:00"
   },
-  "https://www.docsy.dev/project/changelog/": {
+  "https://www.docsy.dev/project/about/changelog/": {
     "StatusCode": 206,
     "LastSeen": "2026-01-16T06:03:28.588398-05:00"
   },
-  "https://www.docsy.dev/project/contributing/": {
+  "https://www.docsy.dev/project/about/contributing/": {
     "StatusCode": 206,
     "LastSeen": "2026-01-16T06:03:28.585522-05:00"
   },
