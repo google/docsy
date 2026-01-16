@@ -1419,6 +1419,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:24.147983-05:00"
   },
+  "https://github.com/google/docsy/tree/main/AGENTS.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:33:38.855405-05:00"
+  },
   "https://github.com/google/docsy/tree/main/CHANGELOG.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.192725-05:00"

@@ -170,6 +170,8 @@ module:
       target: content/project/repo/CHANGELOG.md
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
+    - source: ../AGENTS.md
+      target: content/project/repo/AGENTS.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content
