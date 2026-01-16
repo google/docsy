@@ -65,7 +65,7 @@ params:
     to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
-  version: 0.13.0
+  version: 0.14.0-dev
   url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
