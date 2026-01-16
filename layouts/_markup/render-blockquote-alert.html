@@ -1,0 +1,32 @@
+{{ $title := or
+  .AlertTitle
+  (and
+    .AlertType
+    (or (i18n .AlertType) (title .AlertType))
+  )
+-}}
+
+{{ $singleLineBody := eq .AlertType "nb" -}}
+{{/* For NB single-line alerts without a body, use the title as the body */ -}}
+{{ $body := .Text -}}
+{{ if and (not $body) .AlertTitle $singleLineBody -}}
+  {{ $body = .AlertTitle -}}
+  {{ $title = "" -}}
+{{ end -}}
+
+<div class="td-alert td-alert__md alert alert-{{ .AlertType }}" role="alert">
+  {{- with $title -}}
+    <div class="h4 alert-heading" role="heading">
+      {{- . -}}
+    </div>
+  {{- end }}
+  <div class="td-alert-body">
+    {{ if $singleLineBody -}}
+      {{/* The render hook doesn't add <p> for single-line bodies, so we do it to
+      ensure visual consistency */ -}}
+      <p>{{ $body }}</p>
+    {{ else -}}
+      {{ $body }}
+    {{ end -}}
+  </div>
+</div>

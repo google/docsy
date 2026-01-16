@@ -1791,9 +1791,17 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:25.535959-05:00"
   },
+  "https://github.com/yuin/goldmark": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:11.733641-05:00"
+  },
   "https://github.com/yuin/goldmark/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:39.159385-05:00"
+  },
+  "https://github.github.com/gfm/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.116768-05:00"
   },
   "https://gitlab.com": {
     "StatusCode": 206,
@@ -1835,6 +1843,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-18T18:57:42.075075-05:00"
   },
+  "https://gohugo.io/configuration/markup/#extensions": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.494463-05:00"
+  },
   "https://gohugo.io/configuration/media-types/#create-a-media-type": {
     "StatusCode": 206,
     "LastSeen": "2025-06-06T15:13:21.028725+02:00"
@@ -1874,6 +1886,10 @@
   "https://gohugo.io/content-management/image-processing/#image-processing-options": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.977096-05:00"
+  },
+  "https://gohugo.io/content-management/markdown-attributes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.413218-05:00"
   },
   "https://gohugo.io/content-management/mathematics/#step-1": {
     "StatusCode": 206,
@@ -2035,9 +2051,21 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:28.833628-05:00"
   },
+  "https://gohugo.io/quick-reference/emojis/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.728703-05:00"
+  },
   "https://gohugo.io/quick-reference/glossary/#content-type": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.89252-05:00"
+  },
+  "https://gohugo.io/render-hooks/blockquotes/#alerts": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.815752-05:00"
+  },
+  "https://gohugo.io/render-hooks/introduction/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.588583-05:00"
   },
   "https://gohugo.io/render-hooks/passthrough/": {
     "StatusCode": 206,
@@ -2290,6 +2318,10 @@
   "https://semver.org/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-15T13:13:03.159531-05:00"
+  },
+  "https://spec.commonmark.org/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:11.973722-05:00"
   },
   "https://stackoverflow.com/questions/tagged/docsy": {
     "StatusCode": 200,
