@@ -1,4 +1,4 @@
-// Style alert boxes.
+// Bootstrap alert style adjustments:
 
 .alert {
   font-weight: $font-weight-medium;
@@ -22,8 +22,18 @@
   }
 }
 
-// The following is a placeholder class:
+// ------------------------------
+// Docsy alert styles
+// ------------------------------
+
+// Placeholder class(es):
+// .td-alert {}
+// .td-alert--md {}
 // .td-alert-body {}
+
+.td-alert-heading {
+  @extend .h4;
+}
 
 // Styles for GFM blockquote-alert types
 .alert-caution {

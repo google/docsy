@@ -587,11 +587,11 @@ To change the styling of an alert of type `abc`, override the CSS class
 }
 ```
 
-For example, to hide alert titles, use:
+For example, to make alert headings `h3` (the default is `h4`), use:
 
 ```scss
-.td-alert-body .alert-heading {
-  display: none;
+.td-alert-heading {
+  @extend .h3;
 }
 ```
 
