@@ -149,6 +149,16 @@ taxonomies:
   tag: tags
   category: categories
 
+# Allow Netlify build environment variables to be accessed in templates.
+#
+# TODO: consider instead using a CI script to write the build information to a
+# data file that Hugo could read.
+security:
+  funcs: # cspell:disable-line
+    getenv: # cspell:disable-line
+      # Netlify build env var
+      - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
+
 module:
   mounts:
     - source: content/en

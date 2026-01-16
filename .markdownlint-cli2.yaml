@@ -1,10 +1,11 @@
 # cSpell:ignore docsy github lookandfeel iconsimages
 
 globs:
+  - '!docsy.dev/**'
+  - '!layouts/**'
   - '!node_modules/**'
   - '!public/**'
   - '!tmp/**'
-  - '!docsy.dev/**'
   - docsy.dev/content/en/docs/content/iconsimages.md
   - docsy.dev/content/en/docs/content/language.md
   - docsy.dev/content/en/docs/content/lookandfeel.md

@@ -8,6 +8,7 @@
     "Docsy",
     "errorf",
     "Gantt",
+    "getenv",
     "GLFM",
     "htmltest",
     "hugo",
