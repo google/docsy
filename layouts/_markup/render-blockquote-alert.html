@@ -14,9 +14,19 @@
   {{ $title = "" -}}
 {{ end -}}
 
-<div class="td-alert td-alert__md alert alert-{{ .AlertType }}" role="alert">
+{{ $classes := printf "td-alert td-alert--md alert alert-%s" .AlertType -}}
+{{ with .Attributes.class }}
+  {{ $classes = printf "%s %s" $classes . -}}
+{{ end -}}
+
+<div class="{{ $classes }}" role="alert"
+  {{- range $key, $value := .Attributes -}}
+    {{ if eq $key "class" }}{{ continue -}}{{ end -}}
+    {{ printf " %s=%q" $key (string $value) | safeHTMLAttr -}}
+  {{ end -}}
+>
   {{- with $title -}}
-    <div class="h4 alert-heading" role="heading">
+    <div class="td-alert-heading alert-heading" role="heading">
       {{- . -}}
     </div>
   {{- end }}
