@@ -1,7 +1,7 @@
 ---
 title: Contributing
 description: How to contribute to Docsy
-weight: 100
+aliases: [../contributing]
 cSpell:ignore: chalin docsy hugo
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Changelog
 description: Docsy repository changelog
-weight: 99999
+aliases: [../changelog]
 # prettier-ignore
 cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
 ---

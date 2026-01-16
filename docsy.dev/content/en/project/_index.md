@@ -13,23 +13,27 @@ params:
 cSpell:ignore: docsydocs
 ---
 
-Planned content organization (tentative)
-
-- **info** — High-level information about the website project, including its
-  purpose, ownership, and overall status.
-- **design** — Architectural design, Information Architecture (IA), layout, UX
-  choices, theme related decisions, and other design-level artifacts.
-- **implementation** — Code-level structure and conventions, Hugo/Docsy
-  templates, SCSS/JS customizations, patches, and internal shims.
-- **build** — Tooling, local development setup, CI/CD workflows, deployment
-  environments, and automation details.
-- **quality** — Link checking, accessibility standards, tests, review practices,
-  and other quality-related processes.
-- **roadmap** — Milestones, backlog, priorities, technical debt, and
-  design/implementation decisions.
-
-{{% _param FA person-digging " pe-2" %}} This section is under development. {{%
+<span class="badge bg-warning text-bg-warning fs-6">
+{{% _param FA person-digging " pe-2" %}} Section under construction. {{%
 _param FA person-digging " ps-2" %}}
+</span>
+
+## Content (planned) {#content}
+
+Planned content organization (tentative):
+
+- [About](about/) — High-level information about the project, including its
+  purpose, ownership, and overall status.
+- **Design** — Architectural design, Information Architecture (IA), layout, UX
+  choices, theme related decisions, and other design-level artifacts.
+- [Implementation](implementation/) — Code-level structure and conventions, Hugo/Docsy
+  templates, SCSS/JS customizations, patches, and internal shims.
+- [Build](build/) — Tooling, local development setup, CI/CD workflows, deployment
+  environments, and automation details.
+- **Quality** — Link checking, accessibility standards, tests, review practices,
+  and other quality-related processes.
+- **Roadmap** — Milestones, backlog, priorities, technical debt, and
+  design/implementation decisions.
 
 ## Site build information
 
