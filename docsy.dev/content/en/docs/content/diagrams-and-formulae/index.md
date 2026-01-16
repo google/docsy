@@ -226,7 +226,7 @@ folder. For example:
   have it setup.
 
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
-  https://github.com/google/docsy/blob/main/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
+  https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 
 {{% /alert %}}
 
