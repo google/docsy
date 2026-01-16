@@ -1,7 +1,7 @@
 ---
-title: About this website
-linkTitle: Website docs
-description: How this site is built, maintained, and deployed.
+title: Project and website documentation
+linkTitle: Project docs
+description: How Docsy theme and website are built, maintained, and deployed.
 aliases: [project]
 cascade:
   outputs: [HTML]
@@ -10,6 +10,7 @@ cascade:
     hide_feedback: true
 params:
   FA: <i class="fa-solid fa-{1} text-{2}"></i>
+cSpell:ignore: docsydocs
 ---
 
 Planned content organization (tentative)
@@ -29,3 +30,7 @@ Planned content organization (tentative)
 
 {{% _param FA person-digging " pe-2" %}} This section is under development. {{%
 _param FA person-digging " ps-2" %}}
+
+## Site build information
+
+{{% td/site-build-info/netlify team="docsydocs" %}}
