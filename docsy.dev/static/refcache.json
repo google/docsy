@@ -2599,6 +2599,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:54.947539-05:00"
   },
+  "https://www.docsy.dev/project/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:03:28.588398-05:00"
+  },
+  "https://www.docsy.dev/project/contributing/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:03:28.585522-05:00"
+  },
   "https://www.docsy.dev/site/changelog/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-19T04:22:20.217183-05:00"

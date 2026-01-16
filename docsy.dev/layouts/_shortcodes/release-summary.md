@@ -28,7 +28,7 @@
       .Position $version (delimit $years ", ") -}}
 {{ end -}}
 
-{{ $changelogURL := printf "/site/changelog/#v%s" $version -}}
+{{ $changelogURL := printf "/project/changelog/#v%s" $version -}}
 {{ $productionURL := .Site.Params.productionURL -}}
 
 ## Release summary

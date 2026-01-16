@@ -2,7 +2,7 @@
 title: Project and website documentation
 linkTitle: Project docs
 description: How Docsy theme and website are built, maintained, and deployed.
-aliases: [project]
+aliases: [site]
 cascade:
   outputs: [HTML]
   type: docs

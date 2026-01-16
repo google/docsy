@@ -224,7 +224,7 @@ change to a ​​`media-breakpoint-down()` argument, as discussed earlier.
 
 During the migration effort we seized the opportunity to do some long overdue
 Docsy house cleaning. For details concerning both breaking and non-breaking
-Docsy-specific changes, consult the [changelog](/site/changelog/#v0.7.0). In
+Docsy-specific changes, consult the [changelog](/project/changelog/#v0.7.0). In
 particular, one non-breaking but important change to be aware of is:
 [[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
 
@@ -238,9 +238,9 @@ build of the Docsy User Guide: the
 
 After such a smoke test, we recommend systematically walking through the
 Bootstrap [migration page](https://getbootstrap.com/docs/5.2/migration/) as
-described above, and the Docsy [changelog](/site/changelog/#v0.7.0). I used this
-approach for [opentelemetry.io](https://opentelemetry.io/), which was the first
-Docsy-based project to be upgraded with a pre-release of Bootstrap-5-based
+described above, and the Docsy [changelog](/project/changelog/#v0.7.0). I used
+this approach for [opentelemetry.io](https://opentelemetry.io/), which was the
+first Docsy-based project to be upgraded with a pre-release of Bootstrap-5-based
 Docsy. The upgrade went
 [quite smoothly](https://github.com/open-telemetry/opentelemetry.io/issues/2419).
 The main pain point of the OTel website was upgrading to Bootstrap 5

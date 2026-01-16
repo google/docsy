@@ -123,7 +123,7 @@ params:
         desc: Practical questions and curated answers
     developer:
       - name: Project docs and site info
-        url: /site/
+        url: /project/
         icon: fa fa-book
         desc: Site design documentation and resources
       - name: GitHub
@@ -165,11 +165,11 @@ module:
       target: content
     # Mount the repo root *.md files
     - source: ../README.md
-      target: content/site/repo/README.md
+      target: content/project/repo/README.md
     - source: ../CHANGELOG.md
-      target: content/site/repo/CHANGELOG.md
+      target: content/project/repo/CHANGELOG.md
     - source: ../CONTRIBUTING.md
-      target: content/site/repo/CONTRIBUTING.md
+      target: content/project/repo/CONTRIBUTING.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content
