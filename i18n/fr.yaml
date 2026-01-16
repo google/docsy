@@ -1,3 +1,10 @@
+# Alert labels
+caution: Prudence
+important: Important
+note: Note
+tip: Astuce
+warning: Avertissement
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Précédent
 ui_pager_next: Suivant
