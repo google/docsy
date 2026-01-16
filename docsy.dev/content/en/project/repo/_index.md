@@ -15,3 +15,8 @@ params:
   github_subdir: docsy.dev # cSpell:disable-line
   path_base_for_github_subdir: ''
 ---
+
+- [AGENTS.md](AGENTS.md)
+- [README.md](README.md)
+- [CHANGELOG.md](CHANGELOG.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)

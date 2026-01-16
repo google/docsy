@@ -164,14 +164,14 @@ module:
     - source: content/en
       target: content
     # Mount the repo root *.md files
+    - source: ../AGENTS.md
+      target: content/project/repo/AGENTS.md
     - source: ../README.md
       target: content/project/repo/README.md
     - source: ../CHANGELOG.md
       target: content/project/repo/CHANGELOG.md
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
-    - source: ../AGENTS.md
-      target: content/project/repo/AGENTS.md
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content

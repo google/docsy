@@ -5,7 +5,7 @@ menu: { main: { weight: 20 } }
 cSpell:ignore: vsoch
 ---
 
-[<span class="badge bg-primary fs-6">v{{% param version %}}</span>
+[<span class="badge bg-primary text-bg-primary fs-6">v{{% param version %}}</span>
 ][docsy-version]
 
 Welcome to the Docsy theme user guide for version [{{% param version
