@@ -1,8 +1,9 @@
 # baseURL moved to be after params
 title: Docsy
+theme: [docsy]
 enableRobotsTXT: true
 enableGitInfo: true
-theme: [docsy]
+enableEmoji: true
 
 ignoreLogs:
   # FIXME: find a better way to encode `site` pages than having to ignore warnings.

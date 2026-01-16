@@ -26,4 +26,4 @@ you'll need to use regular Markdown links to section landing or other index
 pages. Specify these links relative to the site's root URL, for example:
 `/docs/content/`.
 
-[Learn more about linking](/docs/content/adding-content/#working-with-links).
+[Learn more about linking](/docs/content/adding-content/#links).

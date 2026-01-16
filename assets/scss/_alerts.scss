@@ -21,3 +21,28 @@
     }
   }
 }
+
+// The following is a placeholder class:
+// .td-alert-body {}
+
+// Styles for GFM blockquote-alert types
+.alert-caution {
+  @extend .alert-warning;
+}
+
+.alert-important {
+  @extend .alert-info;
+}
+
+.alert-note {
+  @extend .alert-primary;
+}
+
+.alert-tip {
+  @extend .alert-success;
+}
+
+// Docsy custom alert type:
+.alert-nb {
+  @extend .alert-note;
+}
