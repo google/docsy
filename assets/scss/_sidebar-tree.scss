@@ -25,8 +25,9 @@
       // and adjust max-height:
       padding-top: 1rem;
 
+      $_search-box-height: 4.5rem;
       @supports (position: sticky) {
-        max-height: calc(#{$_max-height} + 4.5rem);
+        max-height: calc(#{$_max-height} + #{$_search-box-height});
       }
     }
   }
@@ -166,7 +167,6 @@
         position: sticky;
         top: 4rem;
         z-index: 10;
-        height: calc(100vh - 5rem);
       }
     }
 
