@@ -107,6 +107,6 @@ changelog updates, final release adjustments, and documentation improvements).
   significant changes.
 
 [0.13.0 release report]: ../docsy.dev/content/en/blog/2025/0.13.0.md
-[0.13.0-changelog]: ../../docsy.dev/content/en/site/changelog/#v0.13.0
+[0.13.0-changelog]: ../../docsy.dev/content/en/project/about/changelog/#v0.13.0
 [v0.12.0...main]: https://github.com/google/docsy/compare/v0.12.0...main
 [0.13.0 blog post]: ../docsy.dev/content/en/blog/2025/0.13.0.md

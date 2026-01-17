@@ -571,6 +571,30 @@ site's [configuration file][].
   https://gohugo.io/getting-started/configuration/#configuration-file
 [primary color]: #site-colors
 
+## Alerts
+
+> [!NOTE] Coming soon: how to customize alerts
+>
+> - `alert-primary` is the default
+> - `alert-<AlertType>` is used
+
+To change the styling of an alert of type `abc`, override the CSS class
+`.alert-abc` like so:
+
+```scss
+.alert-abc {
+  @extend .alert-primary;
+}
+```
+
+For example, to make alert headings `h3` (the default is `h4`), use:
+
+```scss
+.td-alert-heading {
+  @extend .h3;
+}
+```
+
 ## Tables
 
 Docsy applies the following styles to all tables, through the class `.td-table`:

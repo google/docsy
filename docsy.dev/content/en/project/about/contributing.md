@@ -1,7 +1,7 @@
 ---
 title: Contributing
 description: How to contribute to Docsy
-weight: 100
+aliases: [../contributing]
 cSpell:ignore: chalin docsy hugo
 ---
 
@@ -188,6 +188,11 @@ accordingly.
 17. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Then publish a dot release:
     go back to step 1.
+18. Update the [`release` branch][release-branch] to refer to the commit that
+    you tagged as {{% param version %}}. This will trigger a production deploy
+    of the website.
+19. Wait for the production deploy to complete, and checks that [docsy.dev]
+    updates are visible.
 
 ## Post-release followup
 
@@ -228,9 +233,10 @@ actions before any further changes are merged into the default branch:
 - **`scripts/set-package-version/index.mjs`**: Low-level version manager. See
   script help for usage.
 
-[CHANGELOG]: /site/changelog/
+[CHANGELOG]: /project/about/changelog/
 [contribution guidelines]: /docs/contribution-guidelines/
 [docsy-example]: https://github.com/google/docsy-example
+[docsy.dev]: https://www.docsy.dev/
 [Draft a new release]: https://github.com/google/docsy/releases/new
 [go.mod]: https://github.com/google/docsy/blob/main/go.mod
 [package.json]: https://github.com/google/docsy/blob/main/package.json

@@ -7,6 +7,7 @@
 */ -}}
 
 {{ $version := $.Page.Param "version" | string -}}
+{{ $isDevVersion := strings.Contains $version "-dev" -}}
 {{ if not $version -}}
   {{ errorf "%s: shortcode 'release-summary': version parameter not found in page or site params" .Position -}}
 {{ end -}}
@@ -22,12 +23,12 @@
   {{ if $blogPage }}{{ break }}{{ end -}}
 {{ end -}}
 
-{{ if not $blogPage -}}
+{{ if and (not $blogPage) (not $isDevVersion) -}}
   {{ errorf "%s: shortcode 'release-summary': blog post not found for version %q during years: %q"
       .Position $version (delimit $years ", ") -}}
 {{ end -}}
 
-{{ $changelogURL := printf "/site/changelog/#v%s" $version -}}
+{{ $changelogURL := printf "/project/about/changelog/#v%s" $version -}}
 {{ $productionURL := .Site.Params.productionURL -}}
 
 ## Release summary

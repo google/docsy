@@ -2,6 +2,22 @@
 title: Adding Content
 weight: 1
 description: Add different types of content to your Docsy site.
+params:
+  alert-examples: |
+    > [!TIP]
+    >
+    > Did you know that...
+
+    > [!NOTE] Version note
+    >
+    > This feature is only available in version 2.0 and later.
+
+    > [!WARNING] :warning: Blank line required!
+    >
+    > This site uses the [Prettier] formatter, and it requires an empty line
+    > separating the alert tag/title from the alert body.
+
+    > [!DANGER] Danger Will Robinson!
 # prettier-ignore
 cSpell:ignore: goldmark Riona MacNamara frontmatter asciidoctor pandoc changefreq
 ---
@@ -311,75 +327,74 @@ also want to include `description` since Docsy uses that to generate the meta
 meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for
 details.
 
-## Page contents and markup
+## Page content
 
-By default you create pages in a Docsy site as simple
-[Markdown or HTML files](https://gohugo.io/content-management/formats/) with
-[page frontmatter](#page-frontmatter), as described above. As of version 0.100,
-[Goldmark](https://github.com/yuin/goldmark/) is the only Markdown parser
-supported by Hugo.
+Most often you create pages in a Docsy site as [Markdown or HTML files][formats]
+with [page frontmatter](#page-frontmatter). Hugo's default markup and markdown
+renderer is [Goldmark].
 
-{{% alert title="Tip" %}}
+### Markdown
 
-If you've been using versions of Hugo before 0.60 that use
-[`BlackFriday`](https://github.com/russross/blackfriday) as its Markdown parser,
-you may need to make some small changes to your site to work with the current
-`Goldmark` Markdown parser. In particular, if you cloned an earlier version of
-our example site, add the following to your `hugo.toml`/`hugo.yaml`/`hugo.json`
-to allow Goldmark to render raw HTML as well as Markdown:
+Markdown is Hugo’s default content format. Hugo renders Markdown to HTML using
+[Goldmark], which conforms to [CommonMark] and [GitHub Flavored Markdown][GFM]
+specifications and a few more extensions.
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-markup:
-  goldmark:
-    renderer:
-      unsafe: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "markup": {
-    "goldmark": {
-      "renderer": {
-        "unsafe": true
-      }
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+Hugo provides Markdown features including:
 
-{{% /alert %}}
+- [Attributes] for adding custom IDs and classes to Markdown elements
+- [Extensions] such as tables, footnotes, task lists, etc.
+- [Render hooks][] for customizing the HTML output of Markdown elements.
 
-In addition to your marked-up text, you can also use Hugo and Docsy's
-[shortcodes](/docs/content/shortcodes): reusable chunks of HTML that you can use
-to quickly build your pages. Find out more about shortcodes in
-[Docsy Shortcodes](/docs/content/shortcodes).
+Docsy provides custom render hooks for the following Markdown elements:
 
-{{% alert title="Note" color="info" %}} Hugo also supports adding content using
-other markups using
-[external parsers as helpers](https://gohugo.io/content-management/formats/#additional-formats-through-external-helpers).
-For example, you can add content in RST using `rst2html` as an external parser
-(though be aware this does not support all flavors of RST, such as Sphinx RST).
-Similarly, you can use `asciidoctor` to parse Asciidoc files, or `pandoc` for
-other formats.
+- [Blockquote alerts](#alerts)
+- Code blocks for Mermaid diagrams, math and chemical equations. For details,
+  see [Diagrams and Formulae](/docs/content/diagrams-and-formulae/)
 
-External parsers may not be suitable for use with all deployment options, as
-you'll need to install the external parser and run Hugo yourself to generate
-your site (so, for example, you won't be able to use
-[Netlify's continuous deployment feature](/docs/deployment/#deployment-with-netlify)).
-In addition, adding an external parser may cause performance issues building
-larger sites. {{% /alert %}}
+### Markup, shortcodes, and content features {#markup-and-content-features}
 
-### Working with links
+Hugo supports content formats and features including HTML, [Emojis], and more.
+For details, see [Content formats][formats].
+
+In addition, you can call [shortcodes] from your content. To learn more about
+shortcodes in general, and how to use Docsy's provided shortcodes, see
+[Shortcodes](/docs/content/shortcodes).
+
+### Alerts
+
+Docsy supports Hugo's blockquote syntax for [alerts], specifically [GFM] base
+syntax for callouts, and Obsidian-style titles. For example:
+
+```markdown
+{{% _param alert-examples %}}
+```
+
+Which renders as:
+
+{{% _param alert-examples %}}
+
+In addition, Docsy supports alert types corresponding to the Bootstrap alerts
+types missing from [GFM], as well as `NB` -- short for _nota bene_.
+
+Use `NB` for short single-line notes rendered without a label. For example:
+
+```markdown
+> [!NB] **Skip this section** if the package is already installed.
+```
+
+Which renders as:
+
+> [!NB] **Skip this section** if the package is already installed.
+
+As illustrated above, the alert type is used as a title when no title is
+specified.
+
+Learn how to customize alert appearance in the [Alert][LnF-Alert] section of
+[Look and Feel][].
+
+[LnF-Alert]: /docs/content/lookandfeel/#alerts
+
+### Links
 
 Hugo lets you specify links using normal Markdown syntax, though remember that
 you need to specify links relative to your site's root URL, and that relative
@@ -980,5 +995,18 @@ sitemap:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-To learn more about configuring sitemaps, see
-[Sitemap Template](https://gohugo.io/templates/sitemap-template/).
+To learn more about configuring sitemaps, see [Sitemap Templates][].
+
+[alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
+[attributes]: https://gohugo.io/content-management/markdown-attributes/
+[commonmark]: https://spec.commonmark.org/
+[Emojis]: https://gohugo.io/quick-reference/emojis/
+[extensions]: https://gohugo.io/configuration/markup/#extensions
+[formats]: https://gohugo.io/content-management/formats/
+[GFM]: https://github.github.com/gfm/
+[Goldmark]: https://github.com/yuin/goldmark
+[Look and Feel]: /docs/content/lookandfeel/
+[Prettier]: https://prettier.io
+[render hooks]: https://gohugo.io/render-hooks/introduction/
+[shortcodes]: https://gohugo.io/content-management/shortcodes/
+[Sitemap Templates]: https://gohugo.io/templates/sitemap-template/

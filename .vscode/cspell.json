@@ -4,9 +4,11 @@
   "caseSensitive": true,
   "words": [
     "anchorize",
+    "docset",
     "Docsy",
     "errorf",
     "Gantt",
+    "getenv",
     "GLFM",
     "htmltest",
     "hugo",
