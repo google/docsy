@@ -47,6 +47,7 @@ other = "Create project issue"
 [post_posts_in]
 other = "Posts in"
 [post_reading_time]
+one = "דקת קריאה"
 other = "דקות קריאה"
 [post_less_than_a_minute_read]
 other = "פחות מדקה"
