@@ -64,7 +64,7 @@ other = "הדפס הכל"
 
 # Community
 [community_join]
-other = "הצטרף על קהילת {{ .Site.Title }}"
+other = "הצטרף לקהילת {{ .Site.Title }}"
 [community_introduce]
 other = "{{ .Site.Title }} הוא פרוייקט קוד פתוח שכל אחד בקהילה יכול להשתמש, לשפר, ולהינות ממנו. אנחנו נשמח שתצטרף אלינו. הנה כמה דרכים להבין מה קורה פה ולהיות מעורב."
 [community_learn]
