@@ -55,6 +55,7 @@ To disable showing the the table of contents in the printable view, set the
 `disable_toc` param to `true`, either in the page front matter, or in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane langEqualsHeader=true >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -105,6 +106,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ## Layout hooks
 

@@ -8,9 +8,11 @@ description: >
 
 If you aren't using Hugo Modules, depending on how you chose to install Docsy on your existing site, use one of the following two procedures to update your theme.
 
-{{% alert title="Tip" %}}
-If you intend to update your site, consider [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/). After conversion, it's even simpler to update Docsy!
-{{% /alert %}}
+> [!TIP]
+>
+> If you intend to update your site, consider
+> [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/).
+>After conversion, it's even simpler to update Docsy!
 
 ## Update your Docsy submodule
 
@@ -21,7 +23,7 @@ If you are using the [Docsy theme as a submodule](/docs/get-started/other-option
     ```bash
     git submodule update --remote
     ```
-    
+
 1. Add and then commit the change to your project:
 
     ```bash

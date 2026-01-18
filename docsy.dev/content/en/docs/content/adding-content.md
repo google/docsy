@@ -92,6 +92,7 @@ directory `content/en/amazing` and want one or more pages in that custom section
 to use Docsy's `docs` template, you add `type: docs` to the frontmatter of each
 page:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -124,6 +125,7 @@ description: >
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 Alternatively, create your own page template for your new section in your
 project's `layouts` directory based on one of the existing templates.
@@ -159,6 +161,7 @@ For example, for the `/news/` section, you can specify the following front
 matter in the index page which will change the type of the section and
 everything below it to "blog":
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -204,11 +207,13 @@ cascade:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 If you want to create a "docs" site, specifying something like the following in
 the top level `_index.md` will set all top level sections to be treated as
 "docs", except for "news":
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -266,6 +271,7 @@ cascade:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 Note the addition of `toc_root` here. Setting that to true for a section causes
 it to be treated as a separate part of the site, with its own left hand
@@ -286,6 +292,7 @@ frontmatter in
 
 For example, here's the frontmatter for this page:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -318,6 +325,7 @@ description: >
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 The minimum frontmatter you need to provide is a title: everything else is up to
 you! However, if you leave out the page weight, your
@@ -499,6 +507,7 @@ example.
 To display a simple bulleted list of links to the section's pages instead,
 specify `simple_list: true` in the landing page's frontmatter:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -525,10 +534,12 @@ weight: 20
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 To display no links at all, specify `no_list: true` in the landing page's
 frontmatter:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -555,6 +566,7 @@ weight: 20
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### Organizing your blog posts
 
@@ -571,6 +583,7 @@ or `_index.html` landing page file specifying the category title for it to
 appear properly in the left nav and top-level blog landing page. Here's the
 index page for `releases`:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -597,10 +610,12 @@ weight: 20
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 To add author and date information to blog posts, add them to the page
 frontmatter:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -654,6 +669,7 @@ resources:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 If you've copied the example site and you don't want a blog section, or want to
 link to an external blog instead, just delete the `blog` subdirectory.
@@ -699,6 +715,7 @@ automatically filled in with the project name and community links specified in
 resources that help them get involved in your project. The same links are also
 added by default to your site footer.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -817,6 +834,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 If you're creating your own site and want to add a page using this template, add
 a `/community/_index.md` file in your content root directory. If you've copied
@@ -955,6 +973,7 @@ sitemap:
 To override any of these values for a given page, specify it in page
 frontmatter:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -994,6 +1013,7 @@ sitemap:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 To learn more about configuring sitemaps, see [Sitemap Templates][].
 
@@ -1006,7 +1026,6 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
 [Look and Feel]: /docs/content/lookandfeel/
-[Prettier]: https://prettier.io
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
