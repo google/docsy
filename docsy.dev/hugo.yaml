@@ -175,7 +175,9 @@ module:
     # Placeholder language used to demo multilingual support
     - source: content/en
       target: content
-      lang: xx
+      sites:
+        matrix:
+          languages: ['xx']
 
 mediaTypes:
   font/woff:
