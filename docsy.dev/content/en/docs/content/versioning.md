@@ -6,6 +6,8 @@ description: >-
   Customize navigation and banners for multiple versions of your docs.
 ---
 
+<!-- markdownlint-disable blanks-around-headings no-bare-urls single-h1 -->
+
 Depending on your project's releases and versioning, you may want to let your
 users access previous versions of your documentation. How you deploy the
 previous versions is up to you. This page describes the Docsy features that you

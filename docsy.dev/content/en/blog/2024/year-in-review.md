@@ -25,7 +25,6 @@ Let’s dive into the development highlights from 2024 and take a peek at what
 lies ahead.
 
 [2024 priorities]: ../2023/priorities-for-2024/
-[GitHub dependents data]: https://github.com/google/docsy/network/dependents
 
 ## Release highlights
 
@@ -163,8 +162,6 @@ continue creating exceptional documentation together.
     [vote for your most-desired feature](https://github.com/google/docsy/issues).
 
 [Docsy dependents]: https://github.com/google/docsy/network/dependents
-[cncf-top]:
-  https://www.cncf.io/blog/2024/07/11/as-we-reach-mid-year-2024-a-look-at-cncf-linux-foundation-and-top-30-open-source-project-velocity/
 [gRPC (grpc.io#1389)]: https://github.com/grpc/grpc.io/issues/1389
 [Jaeger (jaegertracing#746)]:
   https://github.com/jaegertracing/documentation/issues/746

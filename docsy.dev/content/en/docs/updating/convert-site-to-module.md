@@ -1,9 +1,7 @@
 ---
-title: "Migrate to Hugo Modules"
-linkTitle: "Migrate to Hugo Modules"
+title: Migrate to Hugo Modules
 weight: 3
-description: >
-  Convert an existing site to use Docsy as a Hugo Module
+description: Convert an existing site to use Docsy as a Hugo Module
 ---
 
 ## TL;DR: Conversion for the impatient expert
@@ -158,14 +156,17 @@ module:
 You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
 Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
 
-{{% alert title="Tip" %}}
-In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
-If you are using hugo 0.110 or above, we recommend renaming your `config.toml` to `hugo.toml`!
-{{% /alert %}}
+> [!TIP]
+>
+> In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
+> If you are using hugo 0.110 or above, we recommend renaming your `config.toml`
+> to `hugo.toml`!
 
-{{% alert title="Attention" color="warning" %}}
-If you have a multi language installation, please make sure that the section `[languages]` inside your `hugo.toml` is declared before the section `[module]` with the module imports. Otherwise you will run into trouble!
-{{% /alert %}}
+> [!CAUTION]
+>
+> If you have a multi-language installation, make sure that the section
+> `[languages]` inside your `hugo.toml` is declared before the section
+> `[module]` with the module imports. Otherwise you will run into trouble!
 
 ### Check validity of your configuration settings
 
@@ -181,17 +182,17 @@ github.com/google/docsy@v{{% param "version" %}} github.com/FortAwesome/Font-Awe
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
 
-{{% alert title="Tip" %}}
-In order to clean up your module cache, issue the command `hugo mod clean`
-
-```bash
-hugo mod clean
-hugo: collected modules in 995 ms
-hugo: cleaned module cache for "github.com/FortAwesome/Font-Awesome"
-hugo: cleaned module cache for "github.com/google/docsy"
-hugo: cleaned module cache for "github.com/twbs/bootstrap"
-```
-{{% /alert %}}
+> [!TIP]
+>
+> In order to clean up your module cache, issue the command `hugo mod clean`
+>
+> ```bash
+> hugo mod clean
+> hugo: collected modules in 995 ms
+> hugo: cleaned module cache for "github.com/FortAwesome/Font-Awesome"
+> hugo: cleaned module cache for "github.com/google/docsy"
+> hugo: cleaned module cache for "github.com/twbs/bootstrap"
+> ```
 
 ## Clean up your repository
 
@@ -224,6 +225,7 @@ You are now ready to commit your changes to your repository:
 git commit -m "Removed docsy git submodule"
 ```
 
-{{% alert title="Attention" color="warning" %}}
-Be careful when using the `rm -rf` command, make sure that you don't inadvertently delete any productive data files!
-{{% /alert %}}
+> [!CAUTION]
+>
+> Be careful when using the `rm -rf` command, make sure that you don't
+> inadvertently delete any productive data files!

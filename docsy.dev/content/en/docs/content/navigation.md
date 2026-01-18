@@ -142,17 +142,14 @@ The menu is visible in the navbar for all screen sizes. By default, the current
 site language name is shown. On narrow displays, this is replaced by the
 language code.
 
-{{% alert title="Legacy UX" color="info" %}}
-
-Prior to Docsy 0.13.0, the language selector menu could also be visible from the
-left sidebar, and its visibility in the navbar depended on the screen size. For
-details, including ways to restore the legacy behavior, see [Language menu
-visibility][].
-
-[Language menu visibility]: /blog/2025/0.13.0/#language-menu-visibility
-[Multi-language support]: /docs/language/
-
-{{% /alert %}}
+> [!INFO] Legacy UX
+>
+> Prior to Docsy 0.13.0, the language selector menu could also be visible from
+> the left sidebar, and its visibility in the navbar depended on the screen
+> size. For details, including ways to restore the legacy behavior, see
+> [Language menu visibility][lmv].
+>
+> [lmv]: /blog/2025/0.13.0/#language-menu-visibility
 
 To style the language menu, apply your custom CSS to `.td-navbar__lang-menu`.
 
@@ -446,13 +443,14 @@ function
 [relref](https://gohugo.io/functions/relref/ 'External link to official Hugo Docs').
 If `relref` can't find a unique page in your site, Hugo throws a error message.
 
-{{% alert title="Note" %}} Although all generated menu and landing page links
-based on your placeholder file are set according to the parameters `manualLink`
-or `manualLinkRelref`, Hugo still generates a regular HTML site page for the
-file, albeit one with no generated links to it. To avoid confusion if users
-accidentally land on a generated placeholder page, we recommend specifying the
-URL for the external link in the normal content and / or page description of the
-page. {{% /alert %}}
+> [!NOTE]
+>
+> Although all generated menu and landing page links based on your placeholder
+> file are set according to the parameters `manualLink` or `manualLinkRelref`,
+> Hugo still generates a regular HTML site page for the file, albeit one with no
+> generated links to it. To avoid confusion if users accidentally land on a
+> generated placeholder page, we recommend specifying the URL for the external
+> link in the normal content and / or page description of the page.
 
 ### Section as sidebar root (EXPERIMENTAL) {#sidebar-root}
 
@@ -610,13 +608,11 @@ viewport (configured via `rootMargin`).
 
   {{% /tab %}} {{< /tabpane >}}
 
-  {{% alert title="Smooth scrolling issue" color=info %}}
-
-  We previously enabled ScrollSpy's smooth scrolling, but it interfered with
-  hash updates in the browser URL and in-page navigation, so it is disabled by
-  default. For details see PR [#2291].
-
-  {{% /alert %}}
+> [!INFO] Smooth scrolling issue
+>
+> We previously enabled ScrollSpy's smooth scrolling, but it interfered with
+> hash updates in the browser URL and in-page navigation, so it is disabled by
+> default. For details see PR [#2291].
 
 #### Advanced ScrollSpy customization
 
@@ -624,18 +620,18 @@ For advanced customization, such as adjusting `threshold`, override
 [layouts/_partials/td/scrollspy-attr.txt]. For ScrollSpy configuration details,
 see [ScrollSpy].
 
-{{% alert title="Note" %}}
-
-ScrollSpy determines the active TOC entry using the browser's
-[IntersectionObserver API][], including its configurable [rootMargin]. Because
-of how these thresholds work, there can be brief moments while a user is
-scrolling when **no** heading is highlighted, especially when headings are close
-together or when the active region is small. For more details, see [ScrollSpy
-options][] and the discussion in [Bootstrap issue #34958][bs-34958].
-
-[bs-34958]: https://github.com/twbs/bootstrap/issues/34958
-
-{{% /alert %}}
+> [!NOTE]
+>
+> ScrollSpy determines the active TOC entry using the browser's
+> [IntersectionObserver API][], including its configurable [rootMargin]. Because
+> of how these thresholds work, there can be brief moments while a user is
+> scrolling when **no** heading is highlighted, especially when headings are
+> close together or when the active region is small. For more details, see
+> [ScrollSpy options][ss-opt] and the discussion in [Bootstrap issue
+> #34958][bs-34958].
+>
+> [bs-34958]: https://github.com/twbs/bootstrap/issues/34958
+> [ss-opt]: https://getbootstrap.com/docs/5.3/components/scrollspy/#options
 
 [cascade]: https://gohugo.io/content-management/front-matter/#cascade-1
 [IntersectionObserver API]:
@@ -646,8 +642,6 @@ options][] and the discussion in [Bootstrap issue #34958][bs-34958].
 [ScrollSpy]: https://getbootstrap.com/docs/5.3/components/scrollspy/
 [rootmargin]:
   https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin
-[ScrollSpy options]:
-  https://getbootstrap.com/docs/5.3/components/scrollspy/#options
 
 ## Breadcrumb navigation
 
@@ -749,3 +743,4 @@ defined in [layouts/_partials/td/render-heading.html].
 [hook]: https://gohugo.io/templates/render-hooks/
 [menu]: https://gohugo.io/content-management/menus/
 [menus]: https://gohugo.io/content-management/menus/
+[Multi-language support]: /docs/language/
