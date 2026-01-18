@@ -1,0 +1,57 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: 上一頁
+ui_pager_next: 下一頁
+ui_read_more: 閱讀全文
+ui_search: 站內搜尋…
+
+# Used in sentences such as "Posted in News"
+ui_in: 於
+
+# Used in sentences such as "All Tags"
+ui_all: 所有
+
+# Footer text
+footer_all_rights_reserved: 保留所有權利
+
+footer_privacy_policy: 隱私政策
+
+# Post (blog, articles etc.)
+post_byline_by: 作者：
+post_created: 建立
+post_last_mod: 最後更新於
+post_edit_this: 編輯此頁
+post_view_this: 檢視頁面原始碼
+post_create_child_page: 建立子頁面
+post_create_issue: 建立文件議題
+post_create_project_issue: 建立專案議題
+post_posts_in: 張貼於
+post_reading_time: " 分鐘閱讀時間"
+post_less_than_a_minute_read: 1 分鐘內可讀完
+
+# Print support
+print_printable_section: 這是本節的多頁可列印檢視。
+print_click_to_print: 點選此處列印
+print_show_regular: 返回此頁面的標準檢視
+print_entire_section: 列印整個章節
+
+# Community
+community_join: 加入 {{ .Site.Title }} 社群
+community_introduce: >-
+  {{ .Site.Title }} 是一個開放原始碼專案，社群中的任何人都可以使用、改進並享受其
+  成果。我們非常歡迎您加入我們！以下是了解最新動態以及參與我們的一些方式。
+community_learn: 學習與交流
+community_using: 正在或打算使用 {{ .Site.Title }} 嗎？在此取得更多資訊：
+community_develop: 開發和貢獻
+community_contribute: 如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
+community_how_to: 您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
+community_guideline: 貢獻指南
+
+# Feedback
+feedback_title: 意見回饋
+feedback_question: 這個頁面對您有幫助嗎？
+feedback_positive: 有幫助
+feedback_negative: 沒幫助
+
+# Table of contents
+toc_on_this_page: 本頁目錄
+toc_top_of_page: 回到頂部
