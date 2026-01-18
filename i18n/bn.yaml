@@ -1,3 +1,10 @@
+# Alert labels
+caution: সাবধানতা
+important: গুরুত্বপূর্ণ
+note: নোট
+tip: টিপ
+warning: সতর্কতা
+
 # ইউআই স্ট্রিং বাটন এবং অনুরূপ।
 ui_pager_prev: পূর্ববর্তী
 ui_pager_next: পরবর্তী
