@@ -1,3 +1,10 @@
+# Alert labels
+caution: 注意
+important: 重要
+note: 注記
+tip: ヒント
+warning: 警告
+
 # UI strings. Buttons and similar.
 ui_pager_prev: 前へ
 ui_pager_next: 次へ
@@ -8,7 +15,7 @@ ui_search: サイトを検索...
 ui_in: in
 
 # Footer text
-footer_all_rights_reserved: All Rights Reserved
+footer_all_rights_reserved: 著作権所有
 
 footer_privacy_policy: プライバシーポリシー
 
