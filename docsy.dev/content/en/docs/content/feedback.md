@@ -22,48 +22,42 @@ You will need an **analytics ID** for your website before proceeding
 "analytics ID" in this guide). If you don't have one, see the **How to get
 started** section of [Introducing Google Analytics 4 (GA4)][ga4-intro].
 
-{{% alert title="Tip" %}}
-
-Your project's **analytics ID** is a string that starts with `G-` (a GA4
-measurement ID) or `UA-` (a universal analytics property ID).
-
-{{% /alert %}}
+> [!TIP]
+>
+> Your project's **analytics ID** is a string that starts with `G-` (a GA4
+> measurement ID) or `UA-` (a universal analytics property ID).
 
 ### Setup
 
 Enable Google Analytics by adding your project's analytics ID to the site
 configuration file. For details, see [Configure Google Analytics][].
 
-{{% alert title="Deprecation note and warning" color="warning" %}}
-
 <!-- Remove this warning once the Hugo docs have been updated to include it. -->
 
-While you can configure your project's analytics ID by setting either the
-top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
-**`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and will be
-removed in a future release.
-
-**Do not define both parameters,** otherwise this can result in [unexpected
-behavior][]. For details, see [Is services.googleAnalytics.id an alias for
-googleAnalytics][alias-discussion].
+> [!WARNING] Deprecation note and warning
+>
+> While you can configure your project's analytics ID by setting either the
+> top-level `googleAnalytics` config parameter or `services.googleAnalytics.id`,
+> **`googleAnalytics` was [deprecated in Hugo 0.120.0][v0.120.0]** and will be
+> removed in a future release.
+>
+> **Do not define both parameters,** otherwise this can result in [unexpected
+> behavior][#921]. For details, see [Is services.googleAnalytics.id an alias for
+> googleAnalytics][alias-discussion].
 
 [alias-discussion]:
   https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469
-[unexpected behavior]: https://github.com/google/docsy/issues/921
+[#921]: https://github.com/google/docsy/issues/921
 [v0.120.0]: https://github.com/gohugoio/hugo/releases/tag/v0.120.0
 
-{{% /alert %}}
-
-{{% alert title="Production-only feature!" %}}
-
-Analytics are enabled _only_ for **production** builds (called "environments" in
-Hugo terminology). For information about Hugo environments and how to set them,
-see the following [discussion][].
+> [!NOTE] Production-only feature!
+>
+> Analytics are enabled _only_ for **production** builds (called "environments"
+> in Hugo terminology). For information about Hugo environments and how to set
+> them, see the following [discussion][].
 
 [discussion]:
   https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2
-
-{{% /alert %}}
 
 ## User Feedback
 
@@ -78,7 +72,7 @@ of every documentation page, as shown in Figure 1.
 </figure>
 
 After clicking **Yes** the user should see a response like Figure 2. You can
-[configure] the response text in your project's [configuration file].
+[configure] the response text in your project's [configuration file][].
 
 <figure>
   <img src="/images/yes.png"
@@ -114,18 +108,15 @@ page, it's more reasonable to believe that your users find code samples at the
 top of pages helpful. The scientific method, applied to technical writing, in
 other words!
 
-### Setup
+### Setup {#user-feedback-setup}
 
-{{% alert title="Version note" color=warning %}}
+> [!WARNING] Version note
+>
+> As of Docsy version [0.8.0], feedback will be enabled whether
+> `site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
+> case where analytics is configured outside of Docsy.
 
-As of Docsy version [0.8.0], feedback will be enabled whether
-`site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
-case where analytics is configured outside of Docsy.
-
-[0.8.0]: /project/about/changelog/#v0.8.0
-
-{{% /alert %}}
-
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 
 1.  Open your project's Hugo configuration file.
@@ -180,6 +171,8 @@ params:
 
 3.  Save the edits to your configuration file.
 
+<!-- markdownlint-restore -->
+
 By default, Docsy emits an event value of 100 when a user clicks "yes". You can
 change this value by setting `params.ui.feedback.max_value` to a positive
 integer. Docsy uses 0 for "no" events.
@@ -188,14 +181,10 @@ integer. Docsy uses 0 for "no" events.
 
 Page feedback is reported to Google Analytics through [events].
 
-{{% alert title="Version note" color=warning %}}
-
-As of Docsy version [0.8.0], page feedback is reported as custom `page_helpful`
-events, rather than `click` events.
-
-[0.8.0]: /project/about/changelog/#v0.8.0
-
-{{% /alert %}}
+> [!WARNING] Version note
+>
+> As of Docsy version [0.8.0], page feedback is reported as custom
+> `page_helpful` events, rather than `click` events.
 
 This section assumes basic familiarity with Google Analytics. For example, you
 should know how to check pageviews over a certain time range and navigate
@@ -320,17 +309,17 @@ Add more meta tags as needed to your project's copy of the `head-end.html`
 partial. For details, see
 [Customizing templates](lookandfeel/#customizing-templates).
 
+[0.8.0]: /project/about/changelog/#v0.8.0
 [Configure Google Analytics]:
   https://gohugo.io/templates/embedded/#configure-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
-[gtag.js]: https://support.google.com/analytics/answer/10220869
 [hugo-ga]: https://gohugo.io/templates/embedded/#google-analytics
 [embedded templates]: https://gohugo.io/templates/embedded/
 [page-description.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/page-description.html
 [site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
 [summary]: https://gohugo.io/content-management/summaries/
-[configure]: #setup-1
+[configure]: #setup
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file

@@ -113,10 +113,8 @@ References:
 
 - [[BSv5] Row/col formatting breaks Docsy components #1466](https://github.com/google/docsy/issues/1466),
   in particular
-  - [[BSv5] Footer fixes: reset flex-shrink, and more·](https://github.com/google/docsy/pull/1373)
-    [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1373](https://github.com/google/docsy/pull/1373)
-  - [[BSv5] Footer: drop flex-shrink tweak + other adjustments ·](https://github.com/google/docsy/pull/1523)
-    [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1523](https://github.com/google/docsy/pull/1523)
+  - [[BSv5] Footer fixes: reset flex-shrink, and more · Docsy PR #1373](https://github.com/google/docsy/pull/1373)
+  - [[BSv5] Footer: drop flex-shrink tweak + other adjustments · Docsy PR #1523](https://github.com/google/docsy/pull/1523)
 - [Why are all col classes 'position: relative'? · Bootstrap v4 issue #25254](https://github.com/twbs/bootstrap/issues/25254)
 - [Why flex-shrink 0 for all columns? · Bootstrap discussion #37951](https://github.com/orgs/twbs/discussions/37951)
 
@@ -271,11 +269,10 @@ to the migration effort.
     [Docsy up to Bootstrap 5.3](https://github.com/google/docsy/issues/1528).
 
 _A version of this article originally appeared as the [CNCF blog][] post
-[Migrating Docsy to Bootstrap 5 ][original post]._
+[Migrating Docsy to Bootstrap 5][original post]._
 
 [cncf blog]: https://www.cncf.io/blog/
 [cncf-docsy]:
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
 [followup blog post]: /blog/2023/docsy-0.7/
-
-[original post]: {{% param canonical_url %}}
+[original post]: <{{% param canonical_url %}}>
