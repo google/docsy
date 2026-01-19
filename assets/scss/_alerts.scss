@@ -1,4 +1,4 @@
-// Style alert boxes.
+// Bootstrap alert style adjustments:
 
 .alert {
   font-weight: $font-weight-medium;
@@ -20,4 +20,39 @@
       border-width: 0 0 0 4px;
     }
   }
+}
+
+// ------------------------------
+// Docsy alert styles
+// ------------------------------
+
+// Placeholder class(es):
+// .td-alert {}
+// .td-alert--md {}
+// .td-alert-body {}
+
+.td-alert-heading {
+  @extend .h4;
+}
+
+// Styles for GFM blockquote-alert types
+.alert-caution {
+  @extend .alert-warning;
+}
+
+.alert-important {
+  @extend .alert-info;
+}
+
+.alert-note {
+  @extend .alert-primary;
+}
+
+.alert-tip {
+  @extend .alert-success;
+}
+
+// Docsy custom alert type:
+.alert-nb {
+  @extend .alert-note;
 }

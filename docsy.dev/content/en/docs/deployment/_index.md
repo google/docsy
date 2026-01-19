@@ -54,20 +54,19 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
    If you don't want your site to be indexed by search engines, you can add an environment flag to your build command to specify a non-`production` environment, as described in [Build environments and indexing](#build-environments-and-indexing).
 1. Click **Deploy site**.
 
-{{% alert title="Note" %}}
-Netlify uses your site repo's `package.json` file to install any JavaScript dependencies (like `postcss`) before building your site. If you haven't just copied our example site's version of this file, make sure that you've specified all our [prerequisites](/docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss).
-
-For example, if you want to use a version of `postcss-cli` later than version 8.0.0, you need to ensure that your `package.json` also specifies `postcss` separately:
-
-```
-  "devDependencies": {
-    "autoprefixer": "^10.4.19",
-    "postcss-cli": "^11.0.0",
-    "postcss": "^8.4.38"
-  }
-```
-
-{{% /alert %}}
+> [!NOTE]
+>
+> Netlify uses your site repo's `package.json` file to install any JavaScript dependencies (like `postcss`) before building your site. If you haven't just copied our example site's version of this file, make sure that you've specified all our [prerequisites](/docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss).
+>
+> For example, if you want to use a version of `postcss-cli` later than version 8.0.0, you need to ensure that your `package.json` also specifies `postcss` separately:
+>
+> ```
+>   "devDependencies": {
+>     "autoprefixer": "^10.4.19",
+>     "postcss-cli": "^11.0.0",
+>     "postcss": "^8.4.38"
+>   }
+> ```
 
 Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
 
@@ -81,9 +80,9 @@ The Docsy example site repo provides a [workflow file](https://github.com/google
 
 Before deploying on GitHub Pages, make sure that you've pushed your site source to your chosen GitHub repo, following any setup instructions in [Using the theme](/docs/get-started/docsy-as-module).
 
-{{% alert title="Correct baseURL setting" %}}
-Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
-{{% /alert %}}
+> [!NOTE] Correct baseURL setting
+>
+> Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
 
 1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. You must create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
 
@@ -273,12 +272,12 @@ deployment:
 
 For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
 
-{{% alert title="Automated deployment with GitHub actions" %}}
-If the source of your site lives in a GitHub repository, you can use [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
-{{% /alert %}}
+> [!NOTE] Automated deployment with GitHub actions
+>
+> If the source of your site lives in a GitHub repository, you can use [GitHub Actions](https://docs.github.com/en/actions) to deploy the site to your S3 bucket as soon as you commit changes to your GitHub repo. Setup of this workflow is described in this [blog post](https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/).
 
-{{% alert title="Handling aliases" %}}
-If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
-{{% /alert %}}
+> [!NOTE] Handling aliases
+>
+> If you are using [aliases](https://gohugo.io/content-management/urls/#aliases) for URL management, you should have a look at this [blog post](https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/). It explains how to turn aliases into proper `301` redirects when using Amazon S3.
 
 If S3 does not meet your needs, consider AWS [Amplify Console](https://aws.amazon.com/amplify/console/). This is a more advanced continuous deployment (CD) platform with built-in support for the Hugo static site generator. A [starter](https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/) can be found in Hugo's official docs.

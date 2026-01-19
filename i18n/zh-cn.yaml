@@ -1,0 +1,57 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: 上一页
+ui_pager_next: 下一页
+ui_read_more: 阅读全文
+ui_search: 站内搜索……
+
+# Used in sentences such as "Posted in News"
+ui_in: 在
+
+# Used in sentences such as "All Tags"
+ui_all: 全部
+
+# Footer text
+footer_all_rights_reserved: 保留所有权利
+
+footer_privacy_policy: 隐私政策
+
+# Post (blog, articles etc.)
+post_byline_by: 撰文：
+post_created: 创建
+post_last_mod: 最后修改
+post_edit_this: 编辑此页
+post_view_this: 查看页面源码
+post_create_child_page: 添加子页面
+post_create_issue: 提交文档问题
+post_create_project_issue: 提交项目问题
+post_posts_in: 撰写于
+post_reading_time: 分钟阅读
+post_less_than_a_minute_read: 1分钟内可阅读完
+
+# Print support
+print_printable_section: 这是本节的多页打印视图。
+print_click_to_print: 点击此处打印
+print_show_regular: 返回本页常规视图
+print_entire_section: 整节打印
+
+# Community
+community_join: 加入 {{ .Site.Title }} 社区
+community_introduce: >-
+  {{ .Site.Title }} 是一个开源项目，社区中的任何人都可以使用、改善和尽情使用它。
+  我们很期待你能加入我们！下面是如何查看最近更新以及参与我们的一些方式。
+community_learn: 学习和沟通
+community_using: 正在或打算使用 {{ .Site.Title }} ？获取更多信息：
+community_develop: 开发和贡献
+community_contribute: 如果你想通过为 {{ .Site.Title }} 贡献更多参与，请在此处加入我们：
+community_how_to: 你可以了解如何为 {{ .Site.Title }} 做出贡献，请参考我们的
+community_guideline: 贡献指南
+
+# Feedback
+feedback_title: 意见反馈
+feedback_question: 这个页面对您有帮助吗？
+feedback_positive: 有帮助
+feedback_negative: 没帮助
+
+# Table of contents
+toc_on_this_page: 本页目录
+toc_top_of_page: 回到顶部

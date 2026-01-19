@@ -2,7 +2,7 @@
 ---
 title: Get started
 weight: 2
-aliases: [/docs/getting-started/]
+aliases: [getting-started]
 date: 2018-07-30
 description:
   Learn how to get started with Docsy, including the available options for

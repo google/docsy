@@ -1,0 +1,42 @@
+{{ $title := or
+  .AlertTitle
+  (and
+    .AlertType
+    (or (i18n .AlertType) (title .AlertType))
+  )
+-}}
+
+{{ $singleLineBody := eq .AlertType "nb" -}}
+{{/* For NB single-line alerts without a body, use the title as the body */ -}}
+{{ $body := .Text -}}
+{{ if and (not $body) .AlertTitle $singleLineBody -}}
+  {{ $body = .AlertTitle -}}
+  {{ $title = "" -}}
+{{ end -}}
+
+{{ $classes := printf "td-alert td-alert--md alert alert-%s" .AlertType -}}
+{{ with .Attributes.class }}
+  {{ $classes = printf "%s %s" $classes . -}}
+{{ end -}}
+
+<div class="{{ $classes }}" role="alert"
+  {{- range $key, $value := .Attributes -}}
+    {{ if eq $key "class" }}{{ continue -}}{{ end -}}
+    {{ printf " %s=%q" $key (string $value) | safeHTMLAttr -}}
+  {{ end -}}
+>
+  {{- with $title -}}
+    <div class="td-alert-heading alert-heading" role="heading">
+      {{- . -}}
+    </div>
+  {{- end }}
+  <div class="td-alert-body">
+    {{ if $singleLineBody -}}
+      {{/* The render hook doesn't add <p> for single-line bodies, so we do it to
+      ensure visual consistency */ -}}
+      <p>{{ $body }}</p>
+    {{ else -}}
+      {{ $body }}
+    {{ end -}}
+  </div>
+</div>

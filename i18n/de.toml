@@ -27,7 +27,6 @@ other = "Alle Rechte vorbehalten"
 [footer_privacy_policy]
 other = "Datenschutzrichtlinie"
 
-
 # Post (blog, articles etc.)
 [post_byline_by]
 other = "Von"
@@ -89,3 +88,9 @@ other = "War diese Seite hilfreich?"
 other = "Ja"
 [feedback_negative]
 other = "Nein"
+
+# Table of contents
+[toc_on_this_page]
+other = "Auf dieser Seite"
+[toc_top_of_page]
+other = "Zum Seitenanfang"

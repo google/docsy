@@ -27,13 +27,11 @@ search box also displays at the top of the sidebar in the left navigation pane,
 which you can disable if you prefer, or if you're using a search option that
 only works with the top search box.
 
-{{% alert title="You can only enable a single search option at a time" color=warning %}}
-
-If you accidentally enable more than one search option in your project
-configuration file, you will get a warning at build time, and undetermined
-behavior when serving your site.
-
-{{% /alert %}}
+> [!WARNING] You can only enable a single search option at a time
+>
+> If you accidentally enable more than one search option in your project
+> configuration file, you will get a warning at build time, and undetermined
+> behavior when serving your site.
 
 ## Disabling the sidebar search box
 
@@ -91,20 +89,18 @@ as otherwise your site won't be crawled and indexed.
       **Advanced** - **Websearch Settings**. In the **Link Target** field, type
       "\_parent". Click **Save** to save your changes.
 
-{{% alert title="Tip" %}}
-
-Your site search results should show up within a couple of days. If it takes
-longer than that, you can manually request that your site is indexed by
-[submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
-
-{{% /alert %}}
+> [!TIP]
+>
+> Your site search results should show up within a couple of days. If it takes
+> longer than that, you can manually request that your site is indexed by
+> [submitting a sitemap through the Google Search Console](https://support.google.com/webmasters/answer/183668?hl=en).
 
 ### Adding the search page
 
 Once you have your search engine set up, you can add the feature to your site:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
-
 1.  Ensure you have a Markdown file in `content/en/search.md` (and one per other
     languages if needed) to display your search results. It only needs a title
     and `layout: search`, as in the following example:
@@ -139,7 +135,6 @@ layout: search
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-# Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
@@ -155,6 +150,7 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### Disabling GCSE search
 
@@ -169,15 +165,13 @@ As an alternative to GCSE, you can use
 [Algolia DocSearch](https://docsearch.algolia.com), which is free for public
 documentation sites. Docsy supports **Algolia DocSearch v3**.
 
-{{% alert title="Algolia v2 is deprecated" %}}
-
-Docsy previously supported Algolia DocSearch v2, which is now deprecated. If you
-are an existing Algolia DocSearch v2 user and want to use the latest Docsy
-version, follow the
-[migration instructions](https://docsearch.algolia.com/docs/v3/migrating-from-v2)
-in the DocSearch documentation to update your DocSearch code snippet.
-
-{{% /alert %}}
+> [!NOTE] Algolia v2 is deprecated
+>
+> Docsy previously supported Algolia DocSearch v2, which is now deprecated. If
+> you are an existing Algolia DocSearch v2 user and want to use the latest Docsy
+> version, follow the
+> [migration instructions](https://docsearch.algolia.com/docs/v3/migrating-from-v2)
+> in the DocSearch documentation to update your DocSearch code snippet.
 
 ### Sign up for Algolia DocSearch
 
@@ -292,15 +286,13 @@ params:
 Once you've completed these steps, local search is enabled for your site and
 results appear in a drop down when you use the search box.
 
-{{% alert title="Tip" %}}
-
-If you're [testing this locally](/docs/deployment/#serving-your-site-locally)
-using Hugo’s local server functionality, you need to build your
-`offline-search-index.xxx.json` file first by running `hugo`. If you have the
-Hugo server running while you build `offline-search-index.xxx.json`, you may
-need to stop the server and restart it in order to see your search results.
-
-{{% /alert %}}
+> [!TIP]
+>
+> If you're [testing this locally](/docs/deployment/#serving-your-site-locally)
+> using Hugo’s local server functionality, you need to build your
+> `offline-search-index.xxx.json` file first by running `hugo`. If you have the
+> Hugo server running while you build `offline-search-index.xxx.json`, you may
+> need to stop the server and restart it in order to see your search results.
 
 ### Changing the summary length of the local search results
 
@@ -311,7 +303,6 @@ You can customize the summary length by setting `offlineSearchSummaryLength` in
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-#Enable offline search with Lunr.js
 [params]
 offlineSearch = true
 offlineSearchSummaryLength = 200
@@ -337,6 +328,7 @@ params:
 You can customize the maximum result count by setting `offlineSearchMaxResults`
 in `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -360,6 +352,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### Changing the width of the local search results popover
 
@@ -380,6 +373,7 @@ If you want to limit the width, add the following scss into
 To exclude pages from local search results, add `exclude_search: true` to the
 the frontmatter of each page:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -406,6 +400,7 @@ exclude_search: true
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### Custom search
 

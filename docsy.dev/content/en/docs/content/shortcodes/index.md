@@ -11,8 +11,11 @@ resources:
 params:
   message: Hello, world!
 # prettier-ignore
-cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal
+cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal buildcondition
 ---
+
+<!-- markdownlint-disable blanks-around-fence line-length -->
+<!-- markdownlint-capture -->
 
 Rather than writing all your site pages from scratch, Hugo lets you define and
 use [shortcodes](https://gohugo.io/content-management/shortcodes/). These are
@@ -75,10 +78,10 @@ but is included here for completeness.
 | Parameter    | Default                        | Description                           |
 | ------------ | ------------------------------ | ------------------------------------- |
 | title        |                                | The main display title for the block. |
-| image_anchor |                                |
+| image_anchor |                                |                                       |
 | height       |                                | See above.                            |
 | color        |                                | See above.                            |
-| byline       | Byline text on featured image. |
+| byline       | Byline text on featured image. |                                       |
 
 To set the background image, place an image with the word "background" in the
 name in the page's [Page Bundle](/docs/content/adding-content/#page-bundles).
@@ -87,9 +90,11 @@ cover block is
 [`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en),
 in the same directory.
 
-{{% alert title="Tip" %}} If you also include the word **featured** in the image
-name, e.g. `my-featured-background.jpg`, it will also be used as the Twitter
-Card image when shared. {{% /alert %}}
+> [!TIP]
+>
+> If you also include the word **featured** in the image name, e.g.
+> `my-featured-background.jpg`, it will also be used as the Twitter Card image
+> when shared.
 
 For available icons, see
 [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
@@ -171,9 +176,16 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 | --------- | ------- | ----------- |
 | color     | info    | See above.  |
 
-## Shortcode helpers
+## Helpers shortcodes
 
-### alert
+### `alert`
+
+> [!NOTE] Alerts in markdown syntax!
+>
+> As of Docsy [0.14.0][0.14.0-alerts], you can write alerts in markdown. For
+> details, see [Alerts](/docs/content/adding-content/#alerts).
+>
+> [0.14.0-alerts]: /blog/2026/0.14.0/#alerts
 
 Use the **alert** shortcode to display notices and warnings. The shortcode
 renders a [Bootstrap alert component][bs-alert]. It can be used with Markdown
@@ -244,6 +256,7 @@ example below from breaking all the rest of the page. DO NOT remove it.
 
 <div class="td-max-width-on-larger-screens">
 
+<!-- markdownlint-disable no-empty-links -->
 <!-- prettier-ignore -->
 - The following note is part of this list item:
   {{% alert title="Celebrate!" color=success %}}
@@ -262,7 +275,9 @@ example below from breaking all the rest of the page. DO NOT remove it.
 [bs-alert]: https://getbootstrap.com/docs/5.3/components/alerts/
 [link definition]: # 'A link definition defined outside the alert body.'
 
-### pageinfo
+<!-- markdownlint-restore -->
+
+### `pageinfo`
 
 The **pageinfo** shortcode creates a text box that you can use to add banner
 information for a page: for example, letting users know that the page contains
@@ -287,7 +302,7 @@ This is placeholder content
 | --------- | ------- | ------------------------------------------------------------- |
 | color     | primary | One of the theme colors, eg `primary`, `info`, `warning` etc. |
 
-### imgproc
+### `imgproc`
 
 The **imgproc** shortcode finds an image in the current
 [Page Bundle](/docs/content/adding-content/#page-bundles) and scales it given a
@@ -313,6 +328,7 @@ situations need a way to attribute the author or licensor. You can add metadata
 to your page resources in the page front matter. The `byline` param is used by
 convention in this theme:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -347,6 +363,7 @@ resources:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 | Parameter | Description                                                                                                                                                         |
 | --------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -354,7 +371,7 @@ resources:
 |         2 | Command. One of `Fit`, `Resize`, `Fill` or `Crop`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-processing-methods). |
 |         3 | Processing options, e.g. `400x450 r180`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-options).           |
 
-### swaggerui
+### `swaggerui`
 
 You can place the `swaggerui` shortcode anywhere inside a page with the
 [`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger);
@@ -363,6 +380,7 @@ YAML or JSON file as source. This file can be hosted anywhere you like, for
 example in your site's root
 [`/static` folder](/docs/content/adding-content/#adding-static-content).
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -398,15 +416,17 @@ description: Reference for the Pet Store API
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 You can customize Swagger UI's look and feel by overriding Swagger's CSS in
 `themes/docsy/assets/scss/_swagger.scss`.
 
-{{% alert title="Warning" color="warning" %}} This shortcode relies on
-JavaScript libraries hosted on unpkg. Make sure that you can access unpkg from
-your network when building or loading your site. {{% /alert %}}
+> [!WARNING]
+>
+> This shortcode relies on JavaScript libraries hosted on unpkg. Make sure that
+> you can access unpkg from your network when building or loading your site.
 
-### redoc
+### `redoc`
 
 The `redoc` shortcode uses the open-source
 [Redoc](https://github.com/Redocly/redoc) tool to render reference API
@@ -431,10 +451,12 @@ description: Reference for the Pet Store API
 }
 ```
 
-### iframe
+### `iframe`
 
 With this shortcode you can embed external content into a Docsy page as an
-inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
+inline frame ([iframe]).
+
+[iframe]: https://www.w3schools.com/tags/tag_iframe.asp
 
 | Parameter     | Default                                                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | ------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -448,24 +470,22 @@ inline frame (`iframe`) - see: https://www.w3schools.com/tags/tag_iframe.asp
 | class         |                                                                                                       | Optional parameter to set the classes of the iframe.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | sub           | Your browser cannot display embedded frames. You can access the embedded page via the following link: | The text displayed (in addition to the embedded URL) if the user's browser can't display embedded frames.                                                                                                                                                                                                                                                                                                                                                                                                |
 
-{{% alert title="Warning" color="warning" %}}
-
-You can only embed external content from a server when its `X-Frame-Options` is
-not set or if it specifically allows embedding for your site. For details, see
-[X-Frame-Options]
-
-There are several tools you can use to check if a website can be embedded via
-iframe, such as [domsignal.com/x-frame-options-test]. Be aware that when this
-test says "Couldn’t find the X-Frame-Options header in the response headers."
-you **CAN** embed it, but when the test says "Great! X-Frame-Options header was
-found in the HTTP response headers as highlighted below.", you **CANNOT** -
-unless it has been explicitly enabled for your site.
+> [!WARNING]
+>
+> You can only embed external content from a server when its `X-Frame-Options`
+> is not set or if it specifically allows embedding for your site. For details,
+> see [X-Frame-Options].
+>
+> There are several tools you can use to check if a website can be embedded via
+> iframe, such as [domsignal.com/x-frame-options-test]. Be aware that when this
+> test says "Couldn’t find the X-Frame-Options header in the response headers."
+> you **CAN** embed it, but when the test says "Great! X-Frame-Options header
+> was found in the HTTP response headers as highlighted below.", you
+> **CANNOT** - unless it has been explicitly enabled for your site.
 
 [X-Frame-Options]:
   https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
 [domsignal.com/x-frame-options-test]: https://domsignal.com/x-frame-options-test
-
-{{% /alert %}}
 
 ## Tabbed panes
 
@@ -475,6 +495,8 @@ the same problem, and how to solve it in different programming languages. As an
 example, the tabbed pane below shows the language-specific variants of the
 famous `Hello world!` program one usually writes first when learning a new
 programming language:
+
+<!-- markdownlint-disable no-missing-space-atx blanks-around-headings no-bare-urls single-h1 -->
 
 <!-- prettier-ignore-start -->
 <!-- cSpell:ignore cout println stdio stdlib endl -->
@@ -623,7 +645,7 @@ following named parameters, all of which are optional:
 - **`header`**: defines the tab's header text. When omitted it defaults to text
   of the form "Tab _n_". You can omit the parameter name if it is the only tab
   parameter:
-  ```
+  ```go-html-template
   {{</* tab "My tab header" */>}} … {{</* /tab */>}}
   ```
 - **`lang`**: code-block language for code tabs
@@ -645,10 +667,12 @@ and _textual_ representation:
 - If the contents of your tabs should be rendered as text with different styles
   and optional images, specify `text=true` as parameter of your `tab`:
 
-> **Reminder**: If your content is markdown, use the percent sign `%` as
-> delimiter for your `tab` shortcode, like this:
+> [!NOTE] Reminder
 >
-> ```
+> If your content is markdown, use the percent sign `%` as delimiter for your
+> `tab` shortcode, like this:
+>
+> ```go-html-template
 > {{%/* tab */%}} Your \*\*markdown\*\* content {{%/* /tab */%}}
 > ```
 
@@ -704,6 +728,8 @@ This code translates to the left card shown below, showing the lyrics of John
 Lennon's famous song `Imagine`. A second explanatory card element to the right
 indicates and explains the individual components of a card:
 
+<!-- markdownlint-disable -->
+
 {{% cardpane %}}
 {{< card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono" footer="![SignatureJohnLennon](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Firma_de_John_Lennon.svg/320px-Firma_de_John_Lennon.svg.png 'Signature John Lennon')" >}}
 Imagine there's no heaven, It's easy if you try<br/> No hell below us, above us
@@ -725,6 +751,8 @@ as outermost delimiter of your `card` shortcode, your markup should look like
 content, use square brackets `<>` as outermost delimiters:
 `{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}` {{% /card %}}
 {{% /cardpane %}}
+
+<!-- markdownlint-restore -->
 
 While the main content of the card is taken from the inner markup of the `card`
 shortcode, the optional elements `footer`, `header`, `title`, and `subtitle` are
@@ -751,6 +779,7 @@ int main(void)
 
 This code translates to the card shown below:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< card code=true header="**C**" lang="C" highlight="" >}}
 #include <stdio.h>
@@ -763,6 +792,7 @@ int main(void)
 }
 {{< /card >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 <br/>If called with parameter `code=true`, the `card` shortcode can optionally
 hold the named parameters `lang` and/or `highlight`. The values of these
@@ -819,16 +849,12 @@ contents:
 ```go-html-template
 ## Installation
 
-{{%/* alert title="Note" color="primary" */%}}
-Check system compatibility before proceeding.
-{{%/* /alert */%}}
+> [!IMPORTANT]
+>
+> Check system compatibility before proceeding.
 
 1.  Download the installation files.
-
-1.  Run the installation script
-
-    `sudo sh install.sh`
-
+1.  Run the installation script `sudo sh install.sh`
 1.  Test that your installation was successfully completed.
 ```
 
@@ -867,11 +893,11 @@ additional parameters:
 ```go-html-template
 To create a new pipeline, follow the next steps:
 
-1.  Create a configuration file `config.yaml`:
+1. Create a configuration file `config.yaml`:
 
-    {{</* readfile file="includes/config.yaml" code="true" lang="yaml" */>}}
+   {{</* readfile file="includes/config.yaml" code="true" lang="yaml" */>}}
 
-1.  Apply the file to your cluster `kubectl apply config.yaml`
+1. Apply the file to your cluster `kubectl apply config.yaml`
 ```
 
 This code automatically reads the content of `includes/config.yaml` and inserts
@@ -881,16 +907,18 @@ it into the document. The rendered text looks like this:
 
 To create a new pipeline, follow the next steps:
 
-1.  Create a configuration file `config.yaml`:
+1. Create a configuration file `config.yaml`:
 
-    {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
+   {{< readfile file="includes/config.yaml" code="true" lang="yaml" >}}
 
-1.  Apply the file to your cluster `kubectl apply config.yaml`
+1. Apply the file to your cluster `kubectl apply config.yaml`
 
 ---
 
-{{% alert title="Warning" color="warning" %}} You must use `{{</* */>}}`
-delimiters for the code highlighting to work correctly. {{% /alert %}}
+> [!WARNING]
+>
+> You must use `{{</* */>}}` delimiters for the code highlighting to work
+> correctly.
 
 The `file` parameter is the relative path to the file. Only relative paths under
 the parent file's working directory are supported.

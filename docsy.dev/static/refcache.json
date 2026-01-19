@@ -283,6 +283,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:23.110933-05:00"
   },
+  "https://docsy.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T17:56:33.239145-05:00"
+  },
   "https://docsy.dev/docs/get-started/other-options/#docsy-npm-install-side-effect": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:37.09511-05:00"
@@ -615,6 +619,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.033315-05:00"
   },
+  "https://github.com/gohugoio/hugo/issues/14361": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:40.809544-05:00"
+  },
   "https://github.com/gohugoio/hugo/releases": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:22.407579-05:00"
@@ -730,6 +738,10 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.355089-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-19T02:03:33.626643523+01:00"
   },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
@@ -1059,6 +1071,18 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T11:57:05.06015-05:00"
   },
+  "https://github.com/google/docsy/issues/2429": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:40.059009-05:00"
+  },
+  "https://github.com/google/docsy/issues/2431": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:42.491163-05:00"
+  },
+  "https://github.com/google/docsy/issues/2433": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.329492-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:26.805722-05:00"
@@ -1367,6 +1391,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-14T12:01:21.148819-05:00"
   },
+  "https://github.com/google/docsy/releases/v0.14.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:11:01.066692-05:00"
+  },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:53.221075-05:00"
@@ -1414,6 +1442,10 @@
   "https://github.com/google/docsy/tags": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:24.147983-05:00"
+  },
+  "https://github.com/google/docsy/tree/main/AGENTS.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:33:38.855405-05:00"
   },
   "https://github.com/google/docsy/tree/main/CHANGELOG.md": {
     "StatusCode": 206,
@@ -1787,9 +1819,17 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:25.535959-05:00"
   },
+  "https://github.com/yuin/goldmark": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:11.733641-05:00"
+  },
   "https://github.com/yuin/goldmark/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:39.159385-05:00"
+  },
+  "https://github.github.com/gfm/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.116768-05:00"
   },
   "https://gitlab.com": {
     "StatusCode": 206,
@@ -1831,6 +1871,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-18T18:57:42.075075-05:00"
   },
+  "https://gohugo.io/configuration/languages/#disabledefaultlanguageredirect": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.843838-05:00"
+  },
+  "https://gohugo.io/configuration/markup/#extensions": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.494463-05:00"
+  },
   "https://gohugo.io/configuration/media-types/#create-a-media-type": {
     "StatusCode": 206,
     "LastSeen": "2025-06-06T15:13:21.028725+02:00"
@@ -1870,6 +1918,10 @@
   "https://gohugo.io/content-management/image-processing/#image-processing-options": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.977096-05:00"
+  },
+  "https://gohugo.io/content-management/markdown-attributes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.413218-05:00"
   },
   "https://gohugo.io/content-management/mathematics/#step-1": {
     "StatusCode": 206,
@@ -2023,6 +2075,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:43.161476-05:00"
   },
+  "https://gohugo.io/methods/page/outputformats/#canonical": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.681942-05:00"
+  },
   "https://gohugo.io/methods/page/tableofcontents/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-23T08:52:31.653587-05:00"
@@ -2031,9 +2087,21 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:28.833628-05:00"
   },
+  "https://gohugo.io/quick-reference/emojis/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.728703-05:00"
+  },
   "https://gohugo.io/quick-reference/glossary/#content-type": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:33.89252-05:00"
+  },
+  "https://gohugo.io/render-hooks/blockquotes/#alerts": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.815752-05:00"
+  },
+  "https://gohugo.io/render-hooks/introduction/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:12.588583-05:00"
   },
   "https://gohugo.io/render-hooks/passthrough/": {
     "StatusCode": 206,
@@ -2138,6 +2206,10 @@
   "https://lunrjs.com/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:23.708187-05:00"
+  },
+  "https://main--docsydocs.netlify.app/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T17:53:26.999006-05:00"
   },
   "https://markmap.js.org/": {
     "StatusCode": 206,
@@ -2282,6 +2354,10 @@
   "https://semver.org/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-15T13:13:03.159531-05:00"
+  },
+  "https://spec.commonmark.org/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-15T20:07:11.973722-05:00"
   },
   "https://stackoverflow.com/questions/tagged/docsy": {
     "StatusCode": 200,
@@ -2558,6 +2634,14 @@
   "https://www.docsy.dev/docs/updating/convert-site-to-module/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:54.947539-05:00"
+  },
+  "https://www.docsy.dev/project/about/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:03:28.588398-05:00"
+  },
+  "https://www.docsy.dev/project/about/contributing/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T06:03:28.585522-05:00"
   },
   "https://www.docsy.dev/site/changelog/": {
     "StatusCode": 206,

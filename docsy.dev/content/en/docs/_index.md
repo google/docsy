@@ -2,11 +2,20 @@
 title: Welcome to Docsy
 linkTitle: Docs
 menu: { main: { weight: 20 } }
+cSpell:ignore: vsoch
 ---
 
-Welcome to the Docsy theme user guide! This guide shows you how to get started
-creating technical documentation sites using Docsy, including site customization
-and how to use Docsy's blocks and templates.
+<!-- markdownlint-disable-next-line no-space-in-links -->
+
+[<span class="badge bg-primary text-bg-primary fs-6">v{{% param version %}}
+</span>][version]
+
+Welcome to the Docsy theme user guide for version [{{% param version
+%}}][version]! This guide shows you how to get started creating technical
+documentation sites using Docsy, including site customization and how to use
+Docsy's blocks and templates.
+
+[version]: <https://github.com/google/docsy/releases/v{{% param version %}}>
 
 ## What is Docsy?
 
