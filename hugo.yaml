@@ -63,3 +63,10 @@ module:
           target: assets/vendor/Font-Awesome/scss
         - source: webfonts
           target: static/webfonts
+
+# needed fo KaTeX: https://github.com/google/docsy/issues/2420#issuecomment-3757453768
+mediaTypes:
+  font/woff:
+    suffixes: [woff]
+  font/woff2:
+    suffixes: [woff2]
