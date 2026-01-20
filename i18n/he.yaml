@@ -1,0 +1,58 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: הקודם
+ui_pager_next: הבא
+ui_read_more: קרא עוד
+ui_search: חיפוש באתר…
+
+# Used in sentences such as "Posted in News"
+ui_in: ב
+
+# Used in sentences such as "All Tags"
+ui_all: כל
+
+# Footer text
+footer_all_rights_reserved: כל הזכויות שמורות
+
+footer_privacy_policy: מדיניות פרטיות
+
+# Post (blog, articles etc.)
+post_byline_by: על ידי
+post_created: נוצר
+post_last_mod: עדכון אחרון
+post_edit_this: עריכת העמוד
+post_view_this: צפייה בקוד המקור של העמוד
+post_create_child_page: צור עמוד משנה
+post_create_issue: Create documentation issue
+post_create_project_issue: Create project issue
+post_posts_in: Posts in
+post_reading_time:
+  one: דקת קריאה
+  other: דקות קריאה
+post_less_than_a_minute_read: פחות מדקה
+
+# Print support
+print_printable_section: זוהי גרסה להדפסה
+print_click_to_print: לחץ כאן להדפסה
+print_show_regular: חזור לתצוגה רגילה
+print_entire_section: הדפס הכל
+
+# Community
+community_join: >-
+  הצטרף לקהילת {{ .Site.Title }}
+community_introduce: >-
+  {{ .Site.Title }} הוא פרוייקט קוד פתוח שכל אחד בקהילה יכול להשתמש, לשפר, ולהינות ממנו. אנחנו נשמח שתצטרף אלינו. הנה כמה דרכים להבין מה קורה פה ולהיות מעורב.
+community_learn: למד והתחבר
+community_using: >-
+  משתמש או רוצה להשתמש ב{{ .Site.Title }}? למד עוד כאן:
+community_develop: פיתוח ותרומה
+community_contribute: >-
+  אם אתה רוצה להיות יותר מעורב על ידי תרומה ל{{ .Site.Title }}, הצטרף אלינו כאן:
+community_how_to: >-
+  אתה יכול ללמוד איך לתרום ל{{ .Site.Title }} ב
+community_guideline: Contribution Guidelines
+
+# Feedback
+feedback_title: Feedback
+feedback_question: האם העמוד הזה היה מועיל לך?
+feedback_positive: כן
+feedback_negative: לא
