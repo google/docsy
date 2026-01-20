@@ -17,6 +17,7 @@ have its own language-specific configuration. For example, the [Docsy example]
 site config specifies that it provides content in English, Norwegian, and
 Persian. The default language is English:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -92,6 +93,7 @@ languages:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 Any setting not defined in a `[languages]` block will fall back to the global
 value for that setting: so, for example, the content directory used for the site
@@ -104,29 +106,32 @@ text, and add your [content](/docs/content/adding-content/) as usual. See the
 [Hugo Docs](https://gohugo.io/content-management/multilingual) on multi-language
 support for more information.
 
-{{% alert title="Attention (only when using Docsy as hugo module)" color="warning" %}}
+<!-- markdownlint-disable no-blanks-blockquote -->
 
-If you have a multi language installation, ensure that the section `[languages]`
-inside your
-[configuration file](https://gohugo.io/getting-started/configuration/#configuration-file)
-is declared **before** the section `[module]` with the module imports. Otherwise
-you will run into trouble!
+> [!WARNING] Attention (only when using Docsy as hugo module)
+>
+> If you have a multi language installation, ensure that the section
+> `[languages]` inside your
+> [configuration file](https://gohugo.io/getting-started/configuration/#configuration-file)
+> is declared **before** the section `[module]` with the module imports.
+> Otherwise you will run into trouble!
 
-{{% /alert %}}
-
-{{% alert title="Tip" %}}
-
-If there's any possibility your site might be translated into other languages,
-consider creating your site with your content in a language-specific
-subdirectory, as it means you don't need to move it if you add another language.
-
-{{% /alert %}}
+> [!TIP]
+>
+> If there's any possibility your site might be translated into other languages,
+> consider creating your site with your content in a language-specific
+> subdirectory, as it means you don't need to move it if you add another
+> language.
 
 For adding multiple language versions of other site elements such as button
 text, see the [internationalization bundles](#internationalization-bundles)
 section below.
 
+<!-- markdownlint-disable heading-increment -->
+
 ### Right-to-left languages
+
+<!-- markdownlint-restore -->
 
 Docsy supports top-down Right-To-Left (RTL) languages such as Persian through
 [Bootstrap's RTL feature][bs-rtl], which uses [RTLCSS].
@@ -149,12 +154,12 @@ example].
 
 ## Selecting a language from the language menu
 
-If you configure more than one language in your [configuration
-file](https://gohugo.io/getting-started/configuration/#configuration-file), the
-Docsy theme adds a language drop down to the navbar. Selecting
-a language takes the user to the translated version of the current page, or the
-home page for the given language. For details, see [Adding a language
-menu](/docs/content/navigation/#language-menu).
+If you configure more than one language in your
+[configuration file](https://gohugo.io/getting-started/configuration/#configuration-file),
+the Docsy theme adds a language drop down to the navbar. Selecting a language
+takes the user to the translated version of the current page, or the home page
+for the given language. For details, see
+[Adding a language menu](/docs/content/navigation/#language-menu).
 
 ## Internationalization bundles
 
@@ -169,9 +174,10 @@ then open a
 [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 to contribute your translation to the Docsy community.
 
-{{% alert title="Hugo Tip" %}} Run `hugo server --printI18nWarnings` when doing
-translation work, as it will give you warnings on what strings are missing.
-{{% /alert %}}
+> [!TIP] Hugo Tip
+>
+> Run `hugo server --printI18nWarnings` when doing translation work, as it will
+> give you warnings on what strings are missing.
 
 ### Create custom UI strings
 

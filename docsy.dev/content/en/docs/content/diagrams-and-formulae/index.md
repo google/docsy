@@ -2,7 +2,7 @@
 title: Diagrams and Formulae
 weight: 11
 description: Add generated diagrams and scientific formulae to your site.
-cSpell:ignore: goldmark linenos mhchem
+cSpell:ignore: docsy gatsby goldmark linenos markmap mhchem plantuml
 ---
 
 Docsy has built-in support for a number of diagram creation and typesetting
@@ -74,10 +74,11 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Tip" %}} This
-[wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth
-information about typesetting mathematical formulae using the \(\LaTeX\)
-typesetting system. {{% /alert %}}
+> [!TIP]
+>
+> This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides
+> in-depth information about typesetting mathematical formulae using the
+> \(\LaTeX\) typesetting system.
 
 ### Activating KaTeX support
 
@@ -213,22 +214,20 @@ of \(\KaTeX\) is automatically enabled when you author a `math` code block on
 your page or when you add a mathematical formulae to your page using one of the
 passthrough delimiter pairs defined above.
 
-{{% alert title="Passthrough for selected sections" %}}
-
-For very large sites, you might want to restrict the passthrough to selected
-sections. Do so by placing the passthrough hook in the section's `_markup`
-folder. For example:
-
-- `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
-  pages, but not for other sections such as the blog.
-- [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
-  hook is active for this page of the user guide only, which is how we actually
-  have it setup.
+> [!NOTE] Passthrough for selected sections
+>
+> For very large sites, you might want to restrict the passthrough to selected
+> sections. Do so by placing the passthrough hook in the section's `_markup`
+> folder. For example:
+>
+> - `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
+>   pages, but not for other sections such as the blog.
+> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
+>   hook is active for this page of the user guide only, which is how we
+>   actually have it setup.
 
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
-  https://github.com/google/docsy/blob/main/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
-
-{{% /alert %}}
+  https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 
 ### Display of Chemical Equations and Physical Units
 
@@ -253,6 +252,7 @@ More complex equations can be displayed on their own line using the block
 delimiters defined:
 
 <!-- cSpell:ignore tetrahydroxozincate mchem -->
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 ````markdown
 \[
@@ -277,11 +277,13 @@ Both standard syntax and `chem` block renders to the same equation:
 \tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
 \]
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
-{{% alert title="Note" %}} The
-[manual](https://mhchem.github.io/MathJax-mhchem/) for mchem's input syntax
-provides in-depth information about typesetting chemical formulae and physical
-units using the `mhchem` tool. {{% /alert %}}
+> [!NOTE]
+>
+> The [manual](https://mhchem.github.io/MathJax-mhchem/) for mchem's input
+> syntax provides in-depth information about typesetting chemical formulae and
+> physical units using the `mhchem` tool.
 
 Use of `mhchem` is not limited to the authoring of chemical equations. By using
 the included `\pu` command, pretty looking physical units can be written with
@@ -324,7 +326,7 @@ For example, the following defines a sequence diagram:
 
 <!-- cSpell:ignore autonumber -->
 
-````
+````markdown
 ```mermaid
 sequenceDiagram
     autonumber
@@ -431,7 +433,7 @@ See the
 for a list of defaults that can be overridden.
 
 Settings can also be overridden on a per-diagram basis by making use of a
-[frontmatter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
+[front matter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
 block at the start of the diagram definition.
 
 ## UML Diagrams with PlantUML
@@ -449,7 +451,7 @@ Diagrams are defined using a simple and intuitive language.
 
 The following example shows a use case diagram:
 
-````
+````markdown
 ```plantuml
 participant participant as Foo
 actor       actor       as Foo1
@@ -517,6 +519,9 @@ params:
 
 Other optional settings are:
 
+<!-- markdownlint-disable no-bare-urls -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -561,6 +566,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ## MindMap support with MarkMap
 
@@ -569,7 +575,9 @@ text definitions to MindMap in the browser.
 
 For example, the following defines a simple MindMap:
 
-````
+<!-- markdownlint-disable code-fence-style -->
+<!-- prettier-ignore -->
+~~~~markdown
 ```markmap
 # markmap
 
@@ -596,7 +604,9 @@ For example, the following defines a simple MindMap:
     ```
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
-````
+~~~~
+
+<!-- markdownlint-restore -->
 
 Automatically renders to:
 
@@ -669,10 +679,11 @@ Hover over the image below and click edit to instantly start working with it.
 Clicking the `Save` button will cause the edited diagram to be exported using
 the same filename and filetype, and downloaded to your browser.
 
-{{%alert title="Note" %}} If you're creating a new diagram, be sure to
-`File -> Export` in either `svg` or `png` format (`svg` is usually the best
-choice) and ensure the `Include a copy of my diagram` is selected so it can be
-edited again later. {{%/alert%}}
+> [!NOTE]
+>
+> If you're creating a new diagram, be sure to `File -> Export` in either `svg`
+> or `png` format (`svg` is usually the best choice) and ensure the
+> `Include a copy of my diagram` is selected so it can be edited again later.
 
 As the diagram data is transported via the browser, the diagrams.net server does
 not need to access the content on your Docsy server directly at all.

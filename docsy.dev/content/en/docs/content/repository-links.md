@@ -1,9 +1,10 @@
 ---
 title: Repository Links and other page information
 linkTitle: Repo links and page info
-weight: 9
 description:
   Help your users interact with page source and view page-source information.
+cSpell:ignore: docsy lastmod
+weight: 9
 ---
 
 The Docsy
@@ -48,6 +49,7 @@ metadata.
 The URL for your site's source repository. This is used to generate the **Edit
 this page**, **Create child page**, and **Create documentation issue** links.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -68,6 +70,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### `github_subdir` (optional)
 
@@ -102,6 +105,7 @@ Specify a value here if you have a separate project repo and you'd like your
 users to be able to create issues against your project from the relevant docs.
 The **Create project issue** link appears only if this is set.
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -122,6 +126,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### `github_branch` (optional)
 
@@ -156,6 +161,7 @@ come from another repo, such as a [git submodule][]. Add settings like these to
 the **section's index page** so that the repository links for all pages in that
 section refer to the originating repo:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -191,6 +197,7 @@ cascade:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 As an example, consider a page at the path
 `content/some-section/subpath/some-page.md` with `github_branch` globally set to
@@ -217,6 +224,7 @@ cascade:
 ---
 ```
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -248,15 +256,19 @@ cascade:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
-{{% alert title="Tip" %}} Please note that the YAML code fragment makes use of
-[Yaml anchor](https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/).
-Use of Yaml anchors is optional, but it helps keep the settings
-[DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). {{% /alert %}}
+> [!TIP]
+>
+> Notice that the YAML code fragment makes use of
+> [Yaml anchor](https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/).
+> Use of Yaml anchors is optional, but it helps keep the settings
+> [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 
 The `path_base_for_github_subdir` setting is a regular expression, so you can
 use it even if you have a site with [multiple languages][] for example:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -283,11 +295,13 @@ path_base_for_github_subdir: content/\w+/some-section
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 In situations where a page originates from a file under a different name, you
 can specify `from` and `to` path-rename settings. Here's an example where an
 index file is named `README.md` in the originating repo:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -328,19 +342,19 @@ path_base_for_github_subdir:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ### `github_url` (optional)
 
-{{% alert title="Deprecation note" color="warning" %}} This setting is
-deprecated. Use [path_base_for_github_subdir][] instead.
-
-[path_base_for_github_subdir]: #path_base_for_github_subdir-optional
-
-{{% /alert %}}
+> [!WARNING] Deprecation note
+>
+> This setting is deprecated. Use
+> [path_base_for_github_subdir](#path_base_for_github_subdir-optional) instead.
 
 Specify a value for this **in your page metadata** to set a specific edit URL
 for this page, as in the following example:
 
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Front matter:" disabled=true />}}
@@ -367,6 +381,7 @@ github_url: https://github.com/some-username/another-repo/edit/main/README.md
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 This can be useful if you have page source files in multiple Git repositories,
 or require a non-GitHub URL. Pages using this value have **Edit this page**
@@ -399,13 +414,11 @@ defined by the following table:
 Of course, you can also use these classes to give repository links unique styles
 for your project.
 
-{{% alert title="Version note" color=warning %}}
-
-Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
-
-[v0.9.0]: /project/about/changelog/#v0.9.0
-
-{{% /alert %}}
+> [!WARNING] Version note
+>
+> Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+>
+> [v0.9.0]: /project/about/changelog/#v0.9.0
 
 ## Last-modified page metadata
 

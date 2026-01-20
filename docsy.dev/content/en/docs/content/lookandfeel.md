@@ -3,6 +3,11 @@ title: Look and Feel
 date: 2017-01-05
 weight: 2
 description: Customize colors, fonts, code highlighting, and more for your site.
+params:
+  BringYourOwnLightDarkModeMenuAlertTitle: >-
+    <i class='fa-solid fa-exclamation-triangle pe-1'></i> Bring your own
+    light/dark mode menu <span class='badge text-bg-warning fs-6
+    float-end'>EXPERIMENTAL</span>
 # prettier-ignore
 cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark wordmark FOUC
 ---
@@ -52,13 +57,11 @@ place them inside your project's `assets/scss/` folder:
   https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
 [bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
-{{% alert title="Tip" %}}
-
-PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in
-server mode (it is a little slow), so Chrome is the recommended choice for
-development.
-
-{{% /alert %}}
+> [!TIP]
+>
+> PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in
+> server mode (it is a little slow), so Chrome is the recommended choice for
+> development.
 
 ## Colors and color themes
 
@@ -148,16 +151,15 @@ You can adjust dark-mode support as follows:
     that the have good color-contrast. Learn
     [how to pick colors with good color-contrast](#pick-good-color-contrast).
 
-{{% alert title="Terminology note" color=info %}}
-
-In Bootstrap, a color **mode** refers to a switchable presentation of the site
-(e.g., light or dark) from the user's point of view, implemented through CSS
-variable overrides activated via `data-bs-theme`.
-
-Whereas a color **theme** refers to the semantic color palette (primary,
-secondary, success, etc.) defined in SCSS and used by components and utilities.
-
-{{% /alert %}}
+> [!INFO] Terminology note
+>
+> In Bootstrap, a color **mode** refers to a switchable presentation of the site
+> (e.g., light or dark) from the user's point of view, implemented through CSS
+> variable overrides activated via `data-bs-theme`.
+>
+> Whereas a color **theme** refers to the semantic color palette (primary,
+> secondary, success, etc.) defined in SCSS and used by components and
+> utilities.
 
 [FOUC]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
 
@@ -216,22 +218,21 @@ dark mode theme customization file and import it in your project's
 [Chroma for code highlighting]: #code-highlighting-with-chroma
 [Light/dark code styles]: #lightdark-code-styles
 
-{{% alert title="EXPERIMENTAL" color="info" %}}
+<!-- markdownlint-disable no-blanks-blockquote -->
 
-This feature is experimental. We're releasing this early to so that projects can
-try out this approach and provide feedback on its usefulness and convenience.
+> [!CAUTION] EXPERIMENTAL
+>
+> This feature is experimental. We're releasing this early to so that projects
+> can try out this approach and provide feedback on its usefulness and
+> convenience.
 
-{{% /alert %}}
-
-{{% alert title="Note" %}}
-
-Light/dark color themes, only affect documentation pages, and white [blocks
-shortcodes][]. Other block shortcodes with fixed text and background colors are
-not affected by light/dark color mode changes.
-
-[blocks shortcodes]: shortcodes/#shortcode-blocks
-
-{{% /alert %}}
+> [!NOTE]
+>
+> Light/dark color themes, only affect documentation pages, and white [blocks
+> shortcodes][blocks]. Other block shortcodes with fixed text and background
+> colors are not affected by light/dark color mode changes.
+>
+> [blocks]: shortcodes/#shortcode-blocks
 
 [Generate syntax highlighter CSS]:
   https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
@@ -527,27 +528,23 @@ params:
 
 {{% /tab %}} {{< /tabpane >}}
 
-{{% alert title="<i class='fa-solid fa-exclamation-triangle pe-1'></i> Bring your own light/dark mode menu <span class='badge text-bg-warning fs-6 float-end'>EXPERIMENTAL</span>" color=warning %}}
-
-If you would like to use your own light/dark mode menu implementation instead of
-Docsy's default implementation:
-
-1. Set `params.ui.showLightDarkModeMenu` to `"enable-only (experimental)"`. This
-   will enable base dark-mode functionality (such as full CSS, no-flash support)
-   without Docsy's menu.
-
-2. Add your menu code to in the [layouts/_partials/theme-toggler.html] partial
-   file, thus overriding Docsy's default implementation.
-
-[layouts/_partials/theme-toggler.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html
-
-This feature is experimental. It may be removed and/or changed in
-backwards-incompatible ways in a future releases.
-
-{{% /alert %}}
+> [!CAUTION] {{% _param BringYourOwnLightDarkModeMenuAlertTitle %}}
+>
+> If you would like to use your own light/dark mode menu implementation instead
+> of Docsy's default implementation:
+>
+> 1. Set `params.ui.showLightDarkModeMenu` to `"enable-only (experimental)"`.
+>    This will enable base dark-mode functionality (such as full CSS, no-flash
+>    support) without Docsy's menu.
+> 2. Add your menu code to in the [layouts/_partials/theme-toggler.html] partial
+>    file, thus overriding Docsy's default implementation.
+>
+> This feature is experimental. It may be removed and/or changed in
+> backwards-incompatible ways in a future releases.
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
+[layouts/_partials/theme-toggler.html]:
+  https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html
 [search box]: /docs/content/search/
 
 ### Translucent over cover images
@@ -610,17 +607,15 @@ without the need to wrap the table in a `<div>`. It does, however, mean that all
 your tables have `display` set to `block`. If you don't want this, you can
 create your own custom styles for tables.
 
-{{% alert title="Note" %}}
-
-Our table styling goes against the [Bootstrap recommendation to _wrap_
-tables][wrap-tables] with `.table-responsive` &mdash; however, we think letting
-users create responsive tables with just Markdown table syntax is more
-convenient.
+> [!NOTE]
+>
+> Our table styling goes against the [Bootstrap recommendation to _wrap_
+> tables][wrap-tables] with `.table-responsive` &mdash; however, we think
+> letting users create responsive tables with just Markdown table syntax is more
+> convenient.
 
 [wrap-tables]:
   https://getbootstrap.com/docs/5.3/content/tables/#responsive-tables
-
-{{% /alert %}}
 
 To render a table without Docsy styling, apply the `.td-initial` class to the
 table. From the resulting `<table>` style base, it is easier to apply your own

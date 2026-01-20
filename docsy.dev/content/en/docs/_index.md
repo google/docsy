@@ -5,16 +5,17 @@ menu: { main: { weight: 20 } }
 cSpell:ignore: vsoch
 ---
 
-[<span class="badge bg-primary text-bg-primary fs-6">v{{% param version %}}</span>
-][docsy-version]
+<!-- markdownlint-disable-next-line no-space-in-links -->
+
+[<span class="badge bg-primary text-bg-primary fs-6">v{{% param version %}}
+</span>][version]
 
 Welcome to the Docsy theme user guide for version [{{% param version
-%}}][docsy-version]! This guide shows you how to get started creating technical
+%}}][version]! This guide shows you how to get started creating technical
 documentation sites using Docsy, including site customization and how to use
 Docsy's blocks and templates.
 
-[docsy-version]:
-  <https://github.com/google/docsy/releases/v{{% param version %}}>
+[version]: <https://github.com/google/docsy/releases/v{{% param version %}}>
 
 ## What is Docsy?
 

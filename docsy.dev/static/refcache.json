@@ -619,6 +619,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.033315-05:00"
   },
+  "https://github.com/gohugoio/hugo/issues/14361": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:40.809544-05:00"
+  },
   "https://github.com/gohugoio/hugo/releases": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:22.407579-05:00"
@@ -734,6 +738,10 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.355089-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-19T02:03:33.626643523+01:00"
   },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
@@ -1063,6 +1071,18 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T11:57:05.06015-05:00"
   },
+  "https://github.com/google/docsy/issues/2429": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:40.059009-05:00"
+  },
+  "https://github.com/google/docsy/issues/2431": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:42.491163-05:00"
+  },
+  "https://github.com/google/docsy/issues/2433": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.329492-05:00"
+  },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:26.805722-05:00"
@@ -1370,6 +1390,10 @@
   "https://github.com/google/docsy/releases/v0.13.0": {
     "StatusCode": 206,
     "LastSeen": "2025-11-14T12:01:21.148819-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.14.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:11:01.066692-05:00"
   },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 206,
@@ -1847,6 +1871,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-18T18:57:42.075075-05:00"
   },
+  "https://gohugo.io/configuration/languages/#disabledefaultlanguageredirect": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.843838-05:00"
+  },
   "https://gohugo.io/configuration/markup/#extensions": {
     "StatusCode": 206,
     "LastSeen": "2026-01-15T20:07:12.494463-05:00"
@@ -2046,6 +2074,10 @@
   "https://gohugo.io/methods/page/outputformats/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:43.161476-05:00"
+  },
+  "https://gohugo.io/methods/page/outputformats/#canonical": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-16T19:09:41.681942-05:00"
   },
   "https://gohugo.io/methods/page/tableofcontents/": {
     "StatusCode": 206,

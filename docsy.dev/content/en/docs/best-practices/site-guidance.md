@@ -21,9 +21,9 @@ generated site. For example a `{{</* ref "filename.md" */>}}` link in Hugo will
 actually find and automatically link to your file named `filename.md`.
 
 Note, however, that `ref` and `relref` links don't work with `_index` or `index`
-files (for example, this site's [content landing page](/docs/content/)):
-you'll need to use regular Markdown links to section landing or other index
-pages. Specify these links relative to the site's root URL, for example:
+files (for example, this site's [content landing page](/docs/content/)): you'll
+need to use regular Markdown links to section landing or other index pages.
+Specify these links relative to the site's root URL, for example:
 `/docs/content/`.
 
 [Learn more about linking](/docs/content/adding-content/#links).
