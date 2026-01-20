@@ -1751,6 +1751,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.977512-05:00"
   },
+  "https://github.com/prettier/prettier/issues/15528": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-20T11:07:33.193379-05:00"
+  },
+  "https://github.com/prettier/prettier/issues/15720": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-20T11:07:33.910471-05:00"
+  },
   "https://github.com/protocolbuffers/protocolbuffers.github.io": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:47.845049-05:00"
