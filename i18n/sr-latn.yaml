@@ -1,0 +1,60 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Prethodno
+ui_pager_next: Naredno
+ui_read_more: Pročitajte više
+ui_search: Pretražite sajt…
+
+# Used in sentences such as "Posted in News"
+ui_in: u
+
+# Used in sentences such as "All Tags"
+ui_all: sve
+
+# Footer text
+footer_all_rights_reserved: Sva prava zadržana
+
+footer_privacy_policy: Politika privatnosti
+
+# Post (blog, articles etc.)
+post_byline_by: Autor
+post_created: Kreirano
+post_last_mod: Poslednji put izmenjeno
+post_edit_this: Uredite ovu stranicu
+post_view_this: Pogledajte izvor stranice
+post_create_child_page: Kreirajte podstranicu
+post_create_issue: Kreirajte issue za dokumentaciju
+post_create_project_issue: Kreirajte issue za projekat
+post_posts_in: Objava u
+post_reading_time: minuta za čitanje
+post_less_than_a_minute_read: manje od minuta za čitanje
+
+# Print support
+print_printable_section: Ovo je višestrani pregled za štampanje ove sekcije.
+print_click_to_print: Kliknite ovde za štampanje
+print_show_regular: Povratak na običan pregled ove stranice
+print_entire_section: Odštampajte čitavu sekciju
+
+# Community
+community_join: >-
+  Pridružite se {{ .Site.Title }} zajednici
+community_introduce: >-
+  {{ .Site.Title }} je open source projekat kojeg svako u zajednici može da koristi, unapređuje i da uživa u njemu. Voleli bismo da nam se pridružite! Ovde se možete uključiti kako biste saznali šta se dešava.
+community_learn: Naučite i povežite se
+community_using: >-
+  Već koristite ili želite da počnete koristiti {{ .Site.Title }}? Saznajte više:
+community_develop: Razvoj i doprinos
+community_contribute: >-
+  Ako želite da se više uključite u doprinos na {{ .Site.Title }}, pridružite nam se:
+community_how_to: >-
+  Možete saznati kako da doprinesete na {{ .Site.Title }} u našim
+community_guideline: Smernicama za doprinos
+
+# Feedback
+feedback_title: Feedback
+feedback_question: Da li vam je ova stranica bila od pomoći?
+feedback_positive: Da
+feedback_negative: Ne
+
+# Table of contents
+toc_on_this_page: Na ovoj stranici
+toc_top_of_page: Vrh stranice

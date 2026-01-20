@@ -1,0 +1,50 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Tidigare
+ui_pager_next: Nästa
+ui_read_more: Läs mer
+ui_search: Sök denna sida…
+
+# Used in sentences such as "Posted in News"
+ui_in: i
+
+# Used in sentences such as "All Tags"
+ui_all: alla
+
+# Footer text
+footer_all_rights_reserved: Alla rättigheter förbehållna
+
+footer_privacy_policy: Integritetspolicy
+
+# Post (blog, articles etc.)
+post_byline_by: Av
+post_created: Skapat
+post_last_mod: Senast ändrad
+post_edit_this: Redigera sida
+post_view_this: Visa sidans källa
+post_create_child_page: Skapa barnsida
+post_create_issue: Skapa dokumentationsfråga
+post_create_project_issue: Skapa projektfråga
+post_posts_in: Inlägg i
+post_reading_time: minuter läst
+post_less_than_a_minute_read: mindre än en minut
+
+# Print support
+print_printable_section: Detta är den flersidiga utskrivbara vyn av detta avsnitt.
+print_click_to_print: Klicka här för att skriva ut
+print_show_regular: Återgå till den vanliga vyn på denna sida
+print_entire_section: Skriv ut hela avsnittet
+
+# Community
+community_join: >-
+  Gå med i {{ .Site.Title }} samhället
+community_introduce: >-
+  {{ .Site.Title }} är ett projekt med öppen källkod som alla i samhället kan använda, förbättra och njuta av. Vi vill gärna att du är med! Här är några sätt att ta reda på vad som händer och engagera dig.
+community_learn: Lär dig och Anslut
+community_using: >-
+  Använder eller vill använda {{ .Site.Title }}? Ta reda på mer här:
+community_develop: Utveckla och Medverka
+community_contribute: >-
+  Om du vill engagera dig mer genom att medverka till {{ .Site.Title }}, gå med oss här:
+community_how_to: >-
+  Du kan ta reda på hur du medverkar till {{ .Site.Title }} i våra
+community_guideline: Riktlinjer för att Medverka
