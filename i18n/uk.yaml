@@ -1,3 +1,10 @@
+# Alert labels
+caution: Застереження
+important: Важливо
+note: Примітка
+tip: Порада
+warning: Попередження
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Попередня
 ui_pager_next: Наступна
@@ -11,8 +18,7 @@ ui_in: у
 ui_all: всі
 
 # Footer text
-footer_all_rights_reserved: Усі права захищено
-
+footer_all_rights_reserved: Всі права застережено
 footer_privacy_policy: Політика захисту персональних даних
 
 # Post (blog, articles etc.)
@@ -37,23 +43,26 @@ print_entire_section: Надрукувати весь розділ
 # Community
 community_join: Приєднуйтесь до спільноти {{ .Site.Title }}
 community_introduce: >-
-  {{ .Site.Title }} — це проєкт з відкритим кодом, який може використовувати,
-  вдосконалювати та насолоджуватися ним будь-хто з членів спільноти. Ми будемо
-  раді, якщо ви приєднаєтеся до нас! Ось кілька способів дізнатися, що
-  відбувається, та взяти участь.
-community_learn: Вивчайте та приєднуйтесь
+  {{ .Site.Title }} — це проєкт з відкритим кодом, який може використовувати, 
+  вдосконалювати та насолоджуватися ним будь-хто з членів спільноти.
+  Ми будемо раді, якщо ви приєднаєтеся до нас! Ось кілька способів дізнатися,
+  що відбувається, та долучитися до нас.
+community_learn: Навчайся та спілкуйся
 community_using: >-
-  Використовуєте або хочете використовувати {{ .Site.Title }}? Дізнайтеся більше
-  тут:
-community_develop: Створюйте та робіть свій внесок
+  Використовуєте або хочете використовувати {{ .Site.Title }}? Дізнайтеся більше тут:
+community_develop: Створюйте та допомагайте
 community_contribute: >-
   Хочете долучитися до розвитку {{ .Site.Title }} та зробити свій внесок?
   Приєднуйтеся до нас тут:
 community_how_to: Дізнайтеся, як зробити внесок у {{ .Site.Title }} у наших
-community_guideline: Настановах з подання внесків
+community_guideline: Настановах з участі
 
 # Feedback
 feedback_title: Зворотний зв’язок
 feedback_question: Чи була ця сторінка корисною?
 feedback_positive: Так
 feedback_negative: Ні
+
+# Table of contents
+toc_on_this_page: На цій сторінці
+toc_top_of_page: Нагору сторінки
