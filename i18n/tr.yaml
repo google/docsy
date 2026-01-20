@@ -38,13 +38,17 @@ print_entire_section: Bütün bölümü yazıdırın
 community_join: >-
   {{ .Site.Title }} topluluğuna katılın
 community_introduce: >-
-  {{ .Site.Title }} topluluktaki herkesin kullanabileceği, geliştirebileceği ve keyfini çıkarabileceği açık kaynaklı bir projedir. Bize katılmanızı çok isteriz! İşte neler olduğunu öğrenmenin ve dahil olmanın birkaç yolu.
+  {{ .Site.Title }} topluluktaki herkesin kullanabileceği, geliştirebileceği ve
+  keyfini çıkarabileceği açık kaynaklı bir projedir. Bize katılmanızı çok
+  isteriz! İşte neler olduğunu öğrenmenin ve dahil olmanın birkaç yolu.
 community_learn: Öğrenin ve Bağlanın
 community_using: >-
-  {{ .Site.Title }} kullanıyor veya kullanmak mı istiyorsunuz? Daha fazlasını burada bulabilirsiniz:
+  {{ .Site.Title }} kullanıyor veya kullanmak mı istiyorsunuz? Daha fazlasını
+  burada bulabilirsiniz:
 community_develop: Geliştirin ve Katkıda Bulunun
 community_contribute: >-
-  If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us
+  here:
 community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: Katkı Yönergeleri

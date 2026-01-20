@@ -5,7 +5,7 @@ ui_read_more: Lue lisää
 ui_search: Hae sivustolta...
 
 # Used in sentences such as "Posted in News"
-ui_in: 
+ui_in:
 
 # Used in sentences such as "All Tags"
 ui_all: kaikki
@@ -38,7 +38,9 @@ print_entire_section: Tulosta koko osio
 community_join: >-
   Liity {{ .Site.Title }}-yhteisöön
 community_introduce: >-
-  {{ .Site.Title }} on avoimen lähdekoodin projekti, josta jokainen saa nauttia käyttämällä ja kehittämällä sitä. Olisi mahtavaa jos tulisit mukaan! Tässä pari tapaa osallistua.
+  {{ .Site.Title }} on avoimen lähdekoodin projekti, josta jokainen saa nauttia
+  käyttämällä ja kehittämällä sitä. Olisi mahtavaa jos tulisit mukaan! Tässä
+  pari tapaa osallistua.
 community_learn: Opi ja kohtaa muita
 community_using: >-
   Käytätkö tai haluatko käyttää {{ .Site.Title }}:a? Lisätietoa täällä:

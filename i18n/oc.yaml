@@ -38,7 +38,9 @@ print_entire_section: Imprimir la seccion complèta
 community_join: >-
   Rejónher la comunitat {{ .Site.Title }}
 community_introduce: >-
-  {{ .Site.Title }} es un projècte liure que totòm dins la comunitat pòt utilizar, melhorar e n'aprofichar. Nos agradariá que nos rejonguèssetz ! Vaquí d'unas etapas per saber çò que se passa e s'implicar.
+  {{ .Site.Title }} es un projècte liure que totòm dins la comunitat pòt
+  utilizar, melhorar e n'aprofichar. Nos agradariá que nos rejonguèssetz ! Vaquí
+  d'unas etapas per saber çò que se passa e s'implicar.
 community_learn: Aprendre e se connectar
 community_using: >-
   Utilizatz o volètz utilizar {{ .Site.Title }} ? Aprenètz-ne mai aquí :
