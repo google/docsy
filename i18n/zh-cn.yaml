@@ -1,3 +1,10 @@
+# Alert labels
+caution: 注意
+important: 重要
+note: 说明
+tip: 提示
+warning: 警告
+
 # UI strings. Buttons and similar.
 ui_pager_prev: 上一页
 ui_pager_next: 下一页
