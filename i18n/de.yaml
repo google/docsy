@@ -56,7 +56,8 @@ community_contribute: >-
 community_how_to: >-
   Wie Du selbst zu {{ .Site.Title }} beitragen kannst, kannst Du nachlesen in
   unseren
-community_guideline: Richtlinien für Beiträge
+community_guideline: >-
+  Richtlinien für Beiträge
 
 # Feedback
 feedback_title: Rückmeldung

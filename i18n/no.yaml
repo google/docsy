@@ -47,4 +47,5 @@ community_contribute: >-
   her:
 community_how_to: >-
   Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i vår
-community_guideline: Retningslinjer for bidrag
+community_guideline: >-
+  Retningslinjer for bidrag

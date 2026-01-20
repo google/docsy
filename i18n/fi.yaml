@@ -49,4 +49,5 @@ community_contribute: >-
   Jos haluat auttaa kehittämään {{ .Site.Title }}:a, liity tänne:
 community_how_to: >-
   Voit oppia kehittämään {{ .Site.Title }}:a meidän
-community_guideline: osallistumisohjeissamme
+community_guideline: >-
+  osallistumisohjeissamme

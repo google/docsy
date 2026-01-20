@@ -51,4 +51,5 @@ community_contribute: >-
   हमसे जुड़ें:
 community_how_to: >-
   आप हमारे यहां {{ .Site.Title }} में योगदान करने का तरीका जान सकते हैं
-community_guideline: योगदान दिशानिर्देश
+community_guideline: >-
+  योगदान दिशानिर्देश

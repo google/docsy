@@ -52,7 +52,8 @@ community_develop: 开发和贡献
 community_contribute: >-
   如果你想通过为 {{ .Site.Title }} 贡献更多参与，请在此处加入我们：
 community_how_to: 你可以了解如何为 {{ .Site.Title }} 做出贡献，请参考我们的
-community_guideline: 贡献指南
+community_guideline: >-
+  贡献指南
 
 # Feedback
 feedback_title: 意见反馈

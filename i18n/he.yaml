@@ -58,7 +58,8 @@ community_contribute: >-
   אם אתה רוצה להיות יותר מעורב על ידי תרומה ל{{ .Site.Title }}, הצטרף אלינו כאן:
 community_how_to: >-
   אתה יכול ללמוד איך לתרום ל{{ .Site.Title }} ב
-community_guideline: Contribution Guidelines
+community_guideline: >-
+  Contribution Guidelines
 
 # Feedback
 feedback_title: Feedback
