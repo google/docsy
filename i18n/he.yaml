@@ -1,3 +1,10 @@
+# Alert labels
+caution: זהירות
+important: חשוב
+note: הערה
+tip: טיפ
+warning: אזהרה
+
 # UI strings. Buttons and similar.
 ui_pager_prev: הקודם
 ui_pager_next: הבא
@@ -56,3 +63,7 @@ feedback_title: Feedback
 feedback_question: האם העמוד הזה היה מועיל לך?
 feedback_positive: כן
 feedback_negative: לא
+
+# Table of contents
+toc_on_this_page: בעמוד זה
+toc_top_of_page: ראש העמוד
