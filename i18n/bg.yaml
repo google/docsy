@@ -1,0 +1,46 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Предишен
+ui_pager_next: Следващ
+ui_read_more: Прочети повече
+ui_search: Търси в тази страница…
+
+# Used in sentences such as "Posted in News"
+ui_in: в
+
+# Footer text
+footer_all_rights_reserved: Всички права запазени!
+
+footer_privacy_policy: Политика за поверителност
+
+# Post (blog, articles etc.)
+post_byline_by: От
+post_created: Създаден
+post_last_mod: Последна промяна
+post_edit_this: Промени тази страница
+post_create_child_page: Създай дъщерна страница
+post_create_issue: Създаване на издаване на документ
+post_create_project_issue: Създаване на издаване на проект
+post_posts_in: Публикувано в
+post_reading_time: minute read
+post_less_than_a_minute_read: less than a minute
+
+# Print support
+print_printable_section: Изглед за печат на този раздел, в режим много страници
+print_click_to_print: Натисни тук за отпечатване
+print_show_regular: Върнете се към обичайния изглед на тази страница
+print_entire_section: Отпечатайте цялата секция
+
+# Community
+community_join: >-
+  Join the {{ .Site.Title }} community
+community_introduce: >-
+  {{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved.
+community_learn: Learn and Connect
+community_using: >-
+  Using or want to use {{ .Site.Title }}? Find out more here:
+community_develop: Develop and Contribute
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: Contribution Guidelines

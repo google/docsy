@@ -1,0 +1,49 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Предыдущая
+ui_pager_next: Следующая
+ui_read_more: Подробнее
+ui_search: Поиск по сайту…
+
+# Used in sentences such as "Posted in News"
+ui_in: в
+
+# Used in sentences such as "All Tags"
+ui_all: всё
+
+# Footer text
+footer_all_rights_reserved: Все права защищены
+
+footer_privacy_policy: Политика конфиденциальности
+
+# Post (blog, articles etc.)
+post_byline_by: Автор
+post_created: Создано
+post_last_mod: Изменено
+post_edit_this: Отредактировать страницу
+post_view_this: Увидеть источник страницы
+post_create_child_page: Создать дополнительную страницу
+post_create_issue: Предложить изменения документации
+post_create_project_issue: Предложить доработки по проекту
+post_posts_in: Публикации в
+post_reading_time: минутное чтение
+post_less_than_a_minute_read: меньше минуты
+
+# Print support
+print_printable_section: Это многостраничный печатный вид этого раздела.
+print_click_to_print: Нажмите что бы печатать
+print_show_regular: Вернуться к обычному просмотру страницы
+print_entire_section: Печатать весь раздел
+
+# Community
+community_join: >-
+  Присоединяйтесь к {{ .Site.Title }} комьюнити
+community_introduce: >-
+  {{ .Site.Title }} - это проект с открытым кодом который любой в комьюнити может использовать, улучшать и наслаждаться. Мы будем рады видеть тебя с нами! Вот несколько путей как присоединиться к нам, знать что происходит и быть вовлеченным.
+community_learn: Изучай и Присоединяйся
+community_using: >-
+  Уже пользуешься или хочешь пользоваться {{ .Site.Title }}? Узнай больше здесь:
+community_develop: Розвивай и Вноси свой вклад
+community_contribute: >-
+  Если ты хочешь принять более активное участие, внося свой вклад в {{ .Site.Title }}, присоединяйся к нам тут:
+community_how_to: Ты можешь узнать как сделать вклад в эти документы в нашем
+community_guideline: Рекомендации касательно вклада

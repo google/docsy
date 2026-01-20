@@ -1,0 +1,44 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Eelmine
+ui_pager_next: Järgmine
+ui_read_more: Loe lähemalt
+ui_search: Otsi lehelt…
+
+# Used in sentences such as "Posted in News"
+# not perfect. In Estonian this idea is represented by a suffix, not a separate word.
+ui_in: kohas
+
+# Footer text
+footer_all_rights_reserved: Kõik õigused kaitstud
+
+footer_privacy_policy: Privaatsuspoliitika
+
+# Post (blog, articles etc.)
+# not perfect. In Estonian this idea is represented by a suffix, not a separate word.
+post_byline_by: järgi
+post_created: Loodud
+post_last_mod: Viimati muudetud
+post_edit_this: Täienda lehte
+post_create_child_page: Loo alamleht
+# perhaps there is a better translation for "issue"...
+post_create_issue: Tõstata dokumentatsiooni kohta ülesanne
+post_create_project_issue: Tõstata projekti kohta ülesanne
+# in Estonian this "in" should be the suffix of the next word, cannot include it to that phrase.
+post_posts_in: Postitused
+post_reading_time: minute read
+post_less_than_a_minute_read: less than a minute
+
+# Community
+community_join: >-
+  Join the {{ .Site.Title }} community
+community_introduce: >-
+  {{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved.
+community_learn: Learn and Connect
+community_using: >-
+  Using or want to use {{ .Site.Title }}? Find out more here:
+community_develop: Develop and Contribute
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: Contribution Guidelines

@@ -1,0 +1,46 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Wstecz
+ui_pager_next: Dalej
+ui_read_more: Zobacz więcej
+ui_search: Szukaj na stronie ...
+
+# Used in sentences such as "Posted in News"
+ui_in: w
+
+# Footer text
+footer_all_rights_reserved: Wszelkie prawa zastrzeżone
+
+footer_privacy_policy: Polityki prywatności
+
+# Post (blog, articles etc.)
+post_byline_by: Przez
+post_created: Utworzono
+post_last_mod: Ostatnia modyfikacja
+post_edit_this: Edytuj tę stronę
+post_create_child_page: Utwórz podstronę
+post_create_issue: Zgłoś błąd w dokumencie
+post_create_project_issue: Zgłoś błąd na stronie
+post_posts_in: Posty
+post_reading_time: min.
+post_less_than_a_minute_read: mniej niż minutę
+
+# Print support
+print_printable_section: To wielostronicowy widok tej sekcji do wydrukowania.
+print_click_to_print: Kliknij aby wydrukować
+print_show_regular: Wróć do zwykłego widoku tej strony
+print_entire_section: Wydrukuj całą sekcję
+
+# Community
+community_join: >-
+  Join the {{ .Site.Title }} community
+community_introduce: >-
+  {{ .Site.Title }} is an open source project that anyone in the community can use, improve, and enjoy. We'd love you to join us! Here's a few ways to find out what's happening and get involved.
+community_learn: Learn and Connect
+community_using: >-
+  Using or want to use {{ .Site.Title }}? Find out more here:
+community_develop: Develop and Contribute
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: Contribution Guidelines
