@@ -21,7 +21,7 @@ ui_all: todos
 footer_all_rights_reserved: Todos os direitos reservados
 footer_privacy_policy: Política de Privacidade
 
-# Post (blog, articles etc.)
+# Post (blog, article, etc.)
 post_byline_by: Por
 post_created: Criado
 post_last_mod: Última modificação
