@@ -16,7 +16,15 @@ die "Usage: $0 <file.toml> [file.yaml]\n"
   unless @ARGV >= 1;
 
 my $toml_file = $ARGV[0];
-my $yaml_file = $ARGV[1] || ($toml_file =~ s/\.toml$/.yaml/r);
+my $yaml_file = $ARGV[1];
+
+if (!$yaml_file) {
+  if ($toml_file =~ m{(?:^|/)tmp/i18n/([^/]+)\.toml$}) {
+    $yaml_file = "i18n/$1.yaml";
+  } else {
+    ($yaml_file = $toml_file) =~ s/\.toml$/.yaml/;
+  }
+}
 
 -f $toml_file or die "TOML file not found: $toml_file\n";
 -f $yaml_file or die "YAML file not found: $yaml_file\n";
@@ -73,7 +81,7 @@ sub parse_toml_i18n {
     }
 
     # other = "value"  (ignoring more complex TOML)
-    if (defined $current_key && $line =~ /^other\s*=\s*"([^"]*)"/) {
+    if (defined $current_key && $line =~ /^other\s*=\s*"((?:\\.|[^"])*)"/) {
       my $val = $1;
       # Simple unescape of \" and \\ if present
       $val =~ s/\\"/"/g;
@@ -96,29 +104,40 @@ sub parse_yaml_i18n {
   my %map;
   my $current_key;
   my $in_block = 0;
+  my @block_lines;
 
   while (my $line = <$fh>) {
     chomp $line;
 
-    # Skip comments and blank lines
-    next if $line =~ /^\s*#/;
-    next if $line =~ /^\s*$/;
-
-    # Handle "key: >-" block scalars (as produced by toml-to-yaml-i18n.pl)
-    if ($line =~ /^([A-Za-z0-9_\-]+):\s*>\-\s*$/) {
-      $current_key = $1;
-      $in_block    = 1;
+    # Skip comments
+    if ($line =~ /^\s*#/) {
       next;
     }
 
+    # Handle block scalars (folded). Collect all indented lines.
     if ($in_block) {
-      # Expect an indented line with the actual value
       if ($line =~ /^\s+(.+)\s*$/) {
-        my $val = $1;
-        $map{$current_key} = $val;
+        push @block_lines, $1;
+        next;
       }
-      $in_block   = 0;
+
+      # End of block: fold lines with spaces (YAML ">-")
+      my $val = join(' ', @block_lines);
+      $map{$current_key} = $val;
+      $in_block = 0;
       $current_key = undef;
+      @block_lines = ();
+      redo;
+    }
+
+    # Skip blank lines
+    next if $line =~ /^\s*$/;
+
+    # Handle "key: >-" block scalars (as produced by toml-to-yaml-i18n.pl)
+    if ($line =~ /^([A-Za-z0-9_\-]+):\s*>\-?\s*$/) {
+      $current_key = $1;
+      $in_block    = 1;
+      @block_lines = ();
       next;
     }
 
@@ -131,6 +150,9 @@ sub parse_yaml_i18n {
         $v = $1;
         $v =~ s/\\"/"/g;
         $v =~ s/\\\\/\\/g;
+      } elsif ($v =~ /^'(.*)'$/) {
+        $v = $1;
+        $v =~ s/''/'/g;
       }
 
       $map{$k} = $v;
@@ -138,7 +160,12 @@ sub parse_yaml_i18n {
     }
   }
 
+  # Finalize any trailing block scalar at EOF
+  if ($in_block) {
+    my $val = join(' ', @block_lines);
+    $map{$current_key} = $val;
+  }
+
   close $fh;
   return %map;
 }
-
