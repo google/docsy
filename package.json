@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "_cd:docsy.dev": "cd docsy.dev &&",
-    "_check:format": "npx prettier --check assets *.md scripts tasks",
+    "_check:format": "npx prettier --check assets *.md i18n scripts tasks",
     "_check:links": "npm run _cd:docsy.dev -- npm run _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
@@ -58,7 +58,7 @@
   "devDependencies": {
     "cpy-cli": "^6.0.0",
     "markdownlint-cli2": "^0.20.0",
-    "prettier": "^3.7.4"
+    "prettier": "^3.8.0"
   },
   "config": {
     "hugo_version": "0.151.0"
