@@ -32,7 +32,7 @@ post_create_child_page: 建立子頁面
 post_create_issue: 建立文件議題
 post_create_project_issue: 建立專案議題
 post_posts_in: 張貼於
-post_reading_time: " 分鐘閱讀時間"
+post_reading_time: ' 分鐘閱讀時間'
 post_less_than_a_minute_read: 1 分鐘內可讀完
 
 # Print support
@@ -49,8 +49,10 @@ community_introduce: >-
 community_learn: 學習與交流
 community_using: 正在或打算使用 {{ .Site.Title }} 嗎？在此取得更多資訊：
 community_develop: 開發和貢獻
-community_contribute: 如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
-community_how_to: 您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
+community_contribute: >-
+  如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
+community_how_to: >-
+  您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
 community_guideline: 貢獻指南
 
 # Feedback

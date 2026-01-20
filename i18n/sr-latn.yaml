@@ -38,13 +38,17 @@ print_entire_section: Odštampajte čitavu sekciju
 community_join: >-
   Pridružite se {{ .Site.Title }} zajednici
 community_introduce: >-
-  {{ .Site.Title }} je open source projekat kojeg svako u zajednici može da koristi, unapređuje i da uživa u njemu. Voleli bismo da nam se pridružite! Ovde se možete uključiti kako biste saznali šta se dešava.
+  {{ .Site.Title }} je open source projekat kojeg svako u zajednici može da
+  koristi, unapređuje i da uživa u njemu. Voleli bismo da nam se pridružite!
+  Ovde se možete uključiti kako biste saznali šta se dešava.
 community_learn: Naučite i povežite se
 community_using: >-
-  Već koristite ili želite da počnete koristiti {{ .Site.Title }}? Saznajte više:
+  Već koristite ili želite da počnete koristiti {{ .Site.Title }}? Saznajte
+  više:
 community_develop: Razvoj i doprinos
 community_contribute: >-
-  Ako želite da se više uključite u doprinos na {{ .Site.Title }}, pridružite nam se:
+  Ako želite da se više uključite u doprinos na {{ .Site.Title }}, pridružite
+  nam se:
 community_how_to: >-
   Možete saznati kako da doprinesete na {{ .Site.Title }} u našim
 community_guideline: Smernicama za doprinos
