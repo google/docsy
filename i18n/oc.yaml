@@ -49,7 +49,8 @@ community_contribute: >-
   Se volètz vos implicar en contribuissent a {{ .Site.Title }}, retrobatz-nos :
 community_how_to: >-
   Podètz trobar cossí contribuir a {{ .Site.Title }} dins nòstra
-community_guideline: Guida de contribucion
+community_guideline: >-
+  Guida de contribucion
 
 # Feedback
 feedback_title: Feedback

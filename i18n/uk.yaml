@@ -50,7 +50,8 @@ community_contribute: >-
   Хочете долучитися до розвитку {{ .Site.Title }} та зробити свій внесок?
   Приєднуйтеся до нас тут:
 community_how_to: Дізнайтеся, як зробити внесок у {{ .Site.Title }} у наших
-community_guideline: Настановах з подання внесків
+community_guideline: >-
+  Настановах з подання внесків
 
 # Feedback
 feedback_title: Зворотний зв’язок

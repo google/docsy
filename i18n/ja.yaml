@@ -53,7 +53,8 @@ community_contribute: >-
   here:
 community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
-community_guideline: Contribution Guidelines
+community_guideline: >-
+  Contribution Guidelines
 
 # Feedback
 feedback_title: フィードバック

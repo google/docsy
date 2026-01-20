@@ -51,4 +51,5 @@ community_contribute: >-
 community_how_to: >-
   Je kunt meer informatie vinden over hoe bij te dragen aan {{ .Site.Title }} in
   onze
-community_guideline: Richtlijnen voor bijdrage
+community_guideline: >-
+  Richtlijnen voor bijdrage

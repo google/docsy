@@ -51,7 +51,8 @@ community_contribute: >-
   here:
 community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
-community_guideline: Katkı Yönergeleri
+community_guideline: >-
+  Katkı Yönergeleri
 
 # Feedback
 feedback_title: Geribildirim

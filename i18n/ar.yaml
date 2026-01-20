@@ -51,7 +51,8 @@ community_contribute: >-
   .Site.Title }} ،اِنْضمَّ إِليْنَا هُنَا:
 community_how_to: >-
   يُمْكِنك مَعرِفة كَيفِية المساهمة فِي {{ .Site.Title }} مِن خِلَال
-community_guideline: إِرْشادات المساهمة
+community_guideline: >-
+  إِرْشادات المساهمة
 
 # Feedback
 feedback_title: تَقيِيم الأدَاء

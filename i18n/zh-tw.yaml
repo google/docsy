@@ -53,7 +53,8 @@ community_contribute: >-
   如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
 community_how_to: >-
   您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
-community_guideline: 貢獻指南
+community_guideline: >-
+  貢獻指南
 
 # Feedback
 feedback_title: 意見回饋

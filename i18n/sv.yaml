@@ -51,4 +51,5 @@ community_contribute: >-
   oss här:
 community_how_to: >-
   Du kan ta reda på hur du medverkar till {{ .Site.Title }} i våra
-community_guideline: Riktlinjer för att Medverka
+community_guideline: >-
+  Riktlinjer för att Medverka

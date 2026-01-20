@@ -51,7 +51,8 @@ community_contribute: >-
   nam se:
 community_how_to: >-
   Možete saznati kako da doprinesete na {{ .Site.Title }} u našim
-community_guideline: Smernicama za doprinos
+community_guideline: >-
+  Smernicama za doprinos
 
 # Feedback
 feedback_title: Feedback
