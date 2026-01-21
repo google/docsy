@@ -60,12 +60,14 @@ For the full list of changes, see the [0.X.Y] release page.
 
 **Breaking changes**:
 
-- ...
+- **SCSS namespace**: Moved Docsy's internal SCSS files to `assets/scss/td/` to
+  prevent projects from inadvertently overriding theme files. ([#1654]).
 
 **New**:
 
 **Other changes**:
 
+[#1654]: https://github.com/google/docsy/issues/1654
 [0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 
 ## v0.13.0 {#v0.13.0}

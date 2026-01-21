@@ -26,7 +26,7 @@
 
 @include media-breakpoint-up(md) {
   .td-navbar-nav-scroll {
-  margin-left: auto !important;
+    margin-left: auto !important;
   }
 }
 
@@ -51,7 +51,7 @@
     // scrollbar when the navbar is overflowing. The following padding moves the
     // scroll indicators a bit higher, to visually centering them relative to
     // the navbar-nav without the scrollbar.
-    padding-bottom: .25rem;
+    padding-bottom: 0.25rem;
 
     &.scroll-left {
       &::before {
@@ -98,5 +98,4 @@
     scrollbar-width: thin;
     scrollbar-color: rgba($white, 0.3) transparent;
   }
-
 }

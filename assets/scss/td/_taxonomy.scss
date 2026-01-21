@@ -66,10 +66,10 @@
     }
 
     .taxonomy-count::before {
-      content: "(";
+      content: '(';
     }
     .taxonomy-count::after {
-      content: ")";
+      content: ')';
     }
   }
 }
@@ -173,7 +173,7 @@
   }
 
   li + li::before {
-    content: "|";
+    content: '|';
     color: $gray-600;
     margin-right: 0.2em;
   }
@@ -211,23 +211,23 @@
     display: inline-block;
   }
 
-  .taxonomy-term[data-taxonomy-term="apple"]::before {
-    content: "\f5d1";
+  .taxonomy-term[data-taxonomy-term='apple']::before {
+    content: '\f5d1';
     color: red;
   }
 
-  .taxonomy-term[data-taxonomy-term="carrot"]::before {
-    content: "\f787";
+  .taxonomy-term[data-taxonomy-term='carrot']::before {
+    content: '\f787';
     color: orange;
   }
 
-  .taxonomy-term[data-taxonomy-term="lemon"]::before {
-    content: "\f094";
+  .taxonomy-term[data-taxonomy-term='lemon']::before {
+    content: '\f094';
     color: limegreen;
   }
 
-  .taxonomy-term[data-taxonomy-term="pepper"]::before {
-    content: "\f816";
+  .taxonomy-term[data-taxonomy-term='pepper']::before {
+    content: '\f816';
     color: darkred;
   }
 
@@ -295,7 +295,7 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font-family: $td-font-awesome-font-name;
-  content: "\f02d";
+  content: '\f02d';
   padding-right: 0.5em;
 }
 
@@ -306,7 +306,7 @@
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   font-family: $td-font-awesome-font-name;
-  content: "\f781";
+  content: '\f781';
   padding-right: 0.5em;
 }
 
@@ -322,7 +322,7 @@
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     font-family: $td-font-awesome-font-name;
-    content: "\f122";
+    content: '\f122';
     padding-right: 0.5em;
   }
 }

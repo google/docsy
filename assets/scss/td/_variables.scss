@@ -4,7 +4,7 @@ $enable-gradients: true !default;
 $enable-shadows: true !default;
 
 :root,
-[data-bs-theme="light"] {
+[data-bs-theme='light'] {
   --td-pre-bg: var(--bs-tertiary-bg);
 }
 
@@ -15,20 +15,21 @@ $enable-shadows: true !default;
 // if not provided by the user. These colors are all part of the theme palette,
 // but the mix is fairly random to create variation. This can be overridden by
 // the project if needed.
-$td-box-colors: $dark, $primary, $secondary, $info, $white, $gray-600, $success,
-  $warning, $dark, $danger, $primary, $secondary, $info !default;
+$td-box-colors:
+  $dark, $primary, $secondary, $info, $white, $gray-600, $success, $warning,
+  $dark, $danger, $primary, $secondary, $info !default;
 
 // Fonts
 
 $td-enable-google-fonts: false !default;
 
-$td-font-awesome-font-name: "Font Awesome 6 Free" !default;
-$td-google-font-name: "Open Sans" !default;
-$td-google-font-family: "Open+Sans:300,300i,400,400i,700,700i" !default;
-$td-web-font-path: "https://fonts.googleapis.com/css?family=#{$td-google-font-family}&display=swap";
+$td-font-awesome-font-name: 'Font Awesome 6 Free' !default;
+$td-google-font-name: 'Open Sans' !default;
+$td-google-font-family: 'Open+Sans:300,300i,400,400i,700,700i' !default;
+$td-web-font-path: 'https://fonts.googleapis.com/css?family=#{$td-google-font-family}&display=swap';
 
 @if $td-enable-google-fonts {
-  $td-fonts-serif: join("#{$td-google-font-name}", $td-fonts-serif);
+  $td-fonts-serif: join('#{$td-google-font-name}', $td-fonts-serif);
 }
 
 $font-family-sans-serif: null !default;

@@ -109,10 +109,9 @@
 
   // Always visible on touch devices and small screens
   @media (hover: none) and (pointer: coarse),
-  (max-width: map-get($grid-breakpoints, sm)) {
+    (max-width: map-get($grid-breakpoints, sm)) {
     visibility: visible;
   }
-
 }
 
 @for $i from 1 through 6 {

@@ -27,7 +27,7 @@
           }
           z-index: 3;
           position: absolute;
-          content: "";
+          content: '';
         }
       }
     }
@@ -35,7 +35,7 @@
 
   // Improve contrast for the links in paragraphs.
   @include link-variant(
-    "#{$parent}--#{$color-name} p > a, #{$parent}--#{$color-name} span > a",
+    '#{$parent}--#{$color-name} p > a, #{$parent}--#{$color-name} span > a',
     $link-color,
     $link-hover-color,
     false
@@ -77,7 +77,7 @@
   }
 }
 
-@include td-box-height-modifiers(".td-box");
+@include td-box-height-modifiers('.td-box');
 
 // Styling for section boxes
 .td-box {
@@ -101,20 +101,20 @@
   $c: nth($td-box-colors, $i);
   $name: $i - 1;
 
-  @include box-variant(".td-box", $name, $c);
+  @include box-variant('.td-box', $name, $c);
 }
 
 // Same as above with all the theme color names.
 @each $color, $value in $colors {
-  @include box-variant(".td-box", $color, $value);
+  @include box-variant('.td-box', $color, $value);
 }
 
 @each $color, $value in $theme-colors {
-  @include box-variant(".td-box", $color, $value);
+  @include box-variant('.td-box', $color, $value);
 }
 
 @each $color, $value in $grays {
-  @include box-variant(".td-box", $color, $value);
+  @include box-variant('.td-box', $color, $value);
 }
 
 // Single dark-mode compatibility override for white boxes:
@@ -122,7 +122,8 @@
   .td-box--white {
     color: var(--bs-body-color);
     background-color: var(--bs-body-bg);
-    p > a, span > a {
+    p > a,
+    span > a {
       color: var(--bs-link-color);
       &:focus,
       &:hover {
