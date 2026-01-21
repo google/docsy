@@ -4,7 +4,7 @@ use strict;
 use warnings;
 
 my $bootstrap_vars = "node_modules/bootstrap/scss/_variables.scss";
-my $forward_vars = "assets/scss/_variables_forward.scss";
+my $forward_vars = "assets/scss/td/_variables_forward.scss";
 die "File not found: $bootstrap_vars\n" unless -f $bootstrap_vars;
 die "File not found: $forward_vars\n" unless -f $forward_vars;
 
