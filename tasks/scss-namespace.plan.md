@@ -1,6 +1,6 @@
 # Namespace Docsy SCSS Files Under `td/`
 
-Issue: https://github.com/google/docsy/issues/1654
+Issue: <https://github.com/google/docsy/issues/1654>
 
 ## Goal
 
@@ -10,12 +10,12 @@ files.
 
 ## Tasks
 
-- [ ] Move SCSS files and directories to `assets/scss/td/`
-- [ ] Create stub `main.scss` that imports `td/main`
-- [ ] Update import paths in `td/main.scss` for vendor and project files
-- [ ] Update `_code-dark.scss` to use relative chroma imports
-- [ ] Update GitHub links in documentation
-- [ ] Add changelog entry for SCSS namespace change
+- [x] Move SCSS files and directories to `assets/scss/td/`
+- [x] Create stub `main.scss` that imports `td/main`
+- [x] Update import paths in `td/main.scss` for vendor and project files
+- [x] Update `_code-dark.scss` to use relative chroma imports
+- [x] Update GitHub links in documentation
+- [x] Add changelog entry for SCSS namespace change
 
 ## Files to Move
 
@@ -29,15 +29,15 @@ files.
 - `_variables_forward.scss`, `_variables.scss`
 - `section-index.scss`, `shortcodes.scss`
 
-Note: `main.scss` content moves to `td/main.scss`, but a stub `main.scss` remains
-at `assets/scss/` to include `td/main.scss`.
+Note: `main.scss` content moves to `td/main.scss`, but a stub `main.scss`
+remains at `assets/scss/` to include `td/main.scss`.
 
 ### Subdirectories (move to `assets/scss/td/`)
 
 - `blocks/` (contains `_blocks.scss`, `_cover.scss`)
 - `shortcodes/` (contains `cards-pane.scss`, `tabbed-pane.scss`)
-- `support/` (contains `_bootstrap_vers_test.scss`, `_mixins.scss`,
-  `_rtl.scss`, `_utilities.scss`)
+- `support/` (contains `_bootstrap_vers_test.scss`, `_mixins.scss`, `_rtl.scss`,
+  `_utilities.scss`)
 
 ### Files to KEEP at `assets/scss/` (for project customization)
 
@@ -69,10 +69,11 @@ This keeps the entry point at `scss/main.scss` (no change to `head-css.html`).
 
 After moving to `td/`, update `assets/scss/td/main.scss` imports:
 
-- Bootstrap vendor imports: `../../vendor/bootstrap/...` (up two levels from `td/`)
+- Bootstrap vendor imports: `../../vendor/bootstrap/...` (up two levels from
+  `td/`)
 - Font Awesome vendor imports: `../../vendor/Font-Awesome/...`
-- Project override files: `../variables_project`, `../variables_project_after_bs`,
-  `../styles_project` (up one level to `scss/`)
+- Project override files: `../variables_project`,
+  `../variables_project_after_bs`, `../styles_project` (up one level to `scss/`)
 - Internal files: no path changes needed (still relative within `td/`)
 
 ### 3. Update imports within other files
@@ -135,8 +136,9 @@ This is a **breaking change** for any project that:
 1. Imports Docsy SCSS files directly (other than the documented project files)
 2. Overrides Docsy internal SCSS files by placing files at the same path
 
-Projects using only the documented customization files (`_variables_project.scss`,
-`_variables_project_after_bs.scss`, `_styles_project.scss`) will not be affected.
+Projects using only the documented customization files
+(`_variables_project.scss`, `_variables_project_after_bs.scss`,
+`_styles_project.scss`) will not be affected.
 
 ## Changelog Entry
 

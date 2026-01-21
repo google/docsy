@@ -50,7 +50,7 @@ place them inside your project's `assets/scss/` folder:
 [`_styles_project.scss`]:
   https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
 [`_variables.scss`]:
-  https://github.com/google/docsy/blob/main/assets/scss/_variables.scss
+  https://github.com/google/docsy/blob/main/assets/scss/td/_variables.scss
 [`_variables_project.scss`]:
   https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
 [`_variables_project_after_bs.scss`]:
@@ -478,7 +478,7 @@ of the following:
     }
     ```
 
-[_nav.scss]: https://github.com/google/docsy/blob/main/assets/scss/_nav.scss
+[_nav.scss]: https://github.com/google/docsy/blob/main/assets/scss/td/_nav.scss
 [project-styles]: /docs/content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/content/iconsimages/#add-your-logo
