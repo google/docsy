@@ -1,0 +1,53 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Edellinen
+ui_pager_next: Seuraava
+ui_read_more: Lue lisää
+ui_search: Hae sivustolta...
+
+# Used in sentences such as "Posted in News"
+ui_in:
+
+# Used in sentences such as "All Tags"
+ui_all: kaikki
+
+# Footer text
+footer_all_rights_reserved: (C)
+
+footer_privacy_policy: Tietosuojalauseke
+
+# Post (blog, article, etc.)
+post_byline_by: Kirjoittanut
+post_created: Luonut
+post_last_mod: Viimeksi muokattu
+post_edit_this: Muokkaa sivua
+post_view_this: Katso lähdekoodi
+post_create_child_page: Luo alisivu
+post_create_issue: Luo dokumentaation vikailmoitus
+post_create_project_issue: Luo projektin vikailmoitus
+post_posts_in: Kirjoituksia
+post_reading_time: minuutin teksti
+post_less_than_a_minute_read: alle minuutin
+
+# Print support
+print_printable_section: Tämä on monen sivun tulostettava näkymä osiosta
+print_click_to_print: Paina tulostaaksesi
+print_show_regular: Palaa tavalliseen näkymään
+print_entire_section: Tulosta koko osio
+
+# Community
+community_join: >-
+  Liity {{ .Site.Title }}-yhteisöön
+community_introduce: >-
+  {{ .Site.Title }} on avoimen lähdekoodin projekti, josta jokainen saa nauttia
+  käyttämällä ja kehittämällä sitä. Olisi mahtavaa jos tulisit mukaan! Tässä
+  pari tapaa osallistua.
+community_learn: Opi ja kohtaa muita
+community_using: >-
+  Käytätkö tai haluatko käyttää {{ .Site.Title }}:a? Lisätietoa täällä:
+community_develop: Kehitä ja osallistu
+community_contribute: >-
+  Jos haluat auttaa kehittämään {{ .Site.Title }}:a, liity tänne:
+community_how_to: >-
+  Voit oppia kehittämään {{ .Site.Title }}:a meidän
+community_guideline: >-
+  osallistumisohjeissamme

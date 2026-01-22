@@ -1,0 +1,55 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: पिछला
+ui_pager_next: अगला
+ui_read_more: अधिक जानें
+ui_search: इस साइट में खोजें…
+
+# Used in sentences such as "Posted in News"
+ui_in: में
+
+# Used in sentences such as "All Tags"
+ui_all: देखना सभी टैग
+
+# Footer text
+footer_all_rights_reserved: सर्वाधिकार सुरक्षित
+
+footer_privacy_policy: गोपनीयता नीति
+
+# Post (blog, article, etc.)
+post_byline_by: द्वारा
+post_created: बनाया
+post_last_mod: अंतिम बार संशोधित
+post_edit_this: इस पृष्ठ को संपादित करें
+post_view_this: पृष्ठ का स्त्रोत देखें
+post_create_child_page: चाइल्ड पृष्ठ बनाएं
+post_create_issue: समस्या की सुचना दें
+post_create_project_issue: परियोजना इशू बनाएं
+post_posts_in: पोस्ट में
+post_reading_time: लघु अध्ययन
+post_less_than_a_minute_read: एक मिनट से कम
+
+# Print support
+print_printable_section: यह इस खंड का बहु-पृष्ठ प्रिंट योग्य दृश्य है।
+print_click_to_print: प्रिंट करने के लिए यहां क्लिक करें
+print_show_regular: इस पृष्ठ के सामान्य दृश्य पर लौटें
+print_entire_section: संपूर्ण अनुभाग प्रिंट करें
+
+# Community
+community_join: >-
+  {{ .Site.Title }} समुदाय में शामिल हों
+community_introduce: >-
+  {{ .Site.Title }} एक खुला स्रोत प्रोजेक्ट है जिसका समुदाय में कोई भी उपयोग कर
+  सकता है, सुधार कर सकता है और आनंद ले सकता है। हम चाहेंगे कि आप हमारे साथ
+  जुड़ें! क्या हो रहा है इसका पता लगाने और इसमें शामिल होने के कुछ तरीके यहां
+  दिए गए हैं.
+community_learn: सीखें और जुड़ें
+community_using: >-
+  {{ .Site.Title }} का उपयोग कर रहे हैं या करना चाहते हैं? यहां और जानें:
+community_develop: विकास करें और योगदान दें
+community_contribute: >-
+  यदि आप {{ .Site.Title }} में योगदान देकर और अधिक शामिल होना चाहते हैं, तो यहां
+  हमसे जुड़ें:
+community_how_to: >-
+  आप हमारे यहां {{ .Site.Title }} में योगदान करने का तरीका जान सकते हैं
+community_guideline: >-
+  योगदान दिशानिर्देश

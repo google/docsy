@@ -9,4 +9,7 @@
 !/assets/scss/main.scss
 !/assets/scss/td/**/*
 
+# These files are derived from other sources,
+# don't Prettify them:
+/assets/scss/td/_variables_forward.scss
 /assets/scss/td/chroma/**/*

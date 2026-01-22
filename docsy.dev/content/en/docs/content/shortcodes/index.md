@@ -388,7 +388,6 @@ example in your site's root
 +++
 title = "Pet Store API"
 type = "swagger"
-weight = 1
 description = "Reference for the Pet Store API"
 +++
 
@@ -396,9 +395,8 @@ description = "Reference for the Pet Store API"
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
 ---
-title: "Pet Store API"
+title: Pet Store API
 type: swagger
-weight: 1
 description: Reference for the Pet Store API
 ---
 
@@ -408,7 +406,6 @@ description: Reference for the Pet Store API
 {
   "title": "Pet Store API",
   "type": "swagger",
-  "weight": 1,
   "description": "Reference for the Pet Store API"
 }
 
@@ -418,13 +415,16 @@ description: Reference for the Pet Store API
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-You can customize Swagger UI's look and feel by overriding Swagger's CSS in
-`themes/docsy/assets/scss/_swagger.scss`.
-
-> [!WARNING]
+> [!IMPORTANT]
 >
 > This shortcode relies on JavaScript libraries hosted on unpkg. Make sure that
 > you can access unpkg from your network when building or loading your site.
+
+To adjust Swagger UI's look and feel, customize the `.swagger-ui` class in your
+[project's SCSS file][]. Docsy provides only minimal styling in it's internal
+`assets/scss/td/_swagger.scss` file.
+
+[project's SCSS file]: lookandfeel/#project-style-files
 
 ### `redoc`
 

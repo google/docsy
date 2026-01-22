@@ -15,7 +15,7 @@ footer_all_rights_reserved: Усі права захищено
 
 footer_privacy_policy: Політика захисту персональних даних
 
-# Post (blog, articles etc.)
+# Post (blog, article, etc.)
 post_byline_by: Автор
 post_created: Створено
 post_last_mod: Востаннє змінено
@@ -50,7 +50,8 @@ community_contribute: >-
   Хочете долучитися до розвитку {{ .Site.Title }} та зробити свій внесок?
   Приєднуйтеся до нас тут:
 community_how_to: Дізнайтеся, як зробити внесок у {{ .Site.Title }} у наших
-community_guideline: Настановах з подання внесків
+community_guideline: >-
+  Настановах з подання внесків
 
 # Feedback
 feedback_title: Зворотний зв’язок

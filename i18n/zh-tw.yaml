@@ -1,3 +1,10 @@
+# Alert labels
+caution: 注意
+important: 重要
+note: 說明
+tip: 提示
+warning: 警告
+
 # UI strings. Buttons and similar.
 ui_pager_prev: 上一頁
 ui_pager_next: 下一頁
@@ -15,7 +22,7 @@ footer_all_rights_reserved: 保留所有權利
 
 footer_privacy_policy: 隱私政策
 
-# Post (blog, articles etc.)
+# Post (blog, article, etc.)
 post_byline_by: 作者：
 post_created: 建立
 post_last_mod: 最後更新於
@@ -25,7 +32,7 @@ post_create_child_page: 建立子頁面
 post_create_issue: 建立文件議題
 post_create_project_issue: 建立專案議題
 post_posts_in: 張貼於
-post_reading_time: " 分鐘閱讀時間"
+post_reading_time: ' 分鐘閱讀時間'
 post_less_than_a_minute_read: 1 分鐘內可讀完
 
 # Print support
@@ -42,9 +49,12 @@ community_introduce: >-
 community_learn: 學習與交流
 community_using: 正在或打算使用 {{ .Site.Title }} 嗎？在此取得更多資訊：
 community_develop: 開發和貢獻
-community_contribute: 如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
-community_how_to: 您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
-community_guideline: 貢獻指南
+community_contribute: >-
+  如果您想透過貢獻來更深入地參與 {{ .Site.Title }}，請在此處加入我們：
+community_how_to: >-
+  您可以透過文件了解如何為 {{ .Site.Title }} 做出貢獻，請參考我們的
+community_guideline: >-
+  貢獻指南
 
 # Feedback
 feedback_title: 意見回饋

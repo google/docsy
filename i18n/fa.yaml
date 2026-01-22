@@ -1,0 +1,57 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: قبلی
+ui_pager_next: بعدی
+ui_read_more: بیشتر بخوانید
+ui_search: در این سایت جستجو کنید...
+
+# Used in sentences such as "Posted in News"
+ui_in: در
+
+# Footer text
+footer_all_rights_reserved: تمام حقوق محفوظ است.
+
+footer_privacy_policy: سیاست حفظ حریم خصوصی
+
+# Post (blog, article, etc.)
+post_byline_by: توسط
+post_created: ساخته شده
+post_last_mod: آخرین تغییرات
+post_edit_this: این صفحه را ویرایش کنید
+post_view_this: مشاهده منبع صفحه
+post_create_child_page: ایجاد زیر صفحه در این صفحه
+post_create_issue: ساخت ایشو
+post_create_project_issue: ساخت ایشو برای پوسته
+post_posts_in: نوشته ها در
+post_reading_time: دقیقه برای خواندن
+post_less_than_a_minute_read: کمتر از یک دقیقه
+
+# Print support
+print_printable_section: این حالت نمایش چند صفحه ای قابل پرینت این قسمت می‌باشد.
+print_click_to_print: برای پرینت کلیک کنید.
+print_show_regular: بازگشت به حالت نمایش عادی این قسمت
+print_entire_section: پرینت کامل قسمت
+
+# Community
+community_join: >-
+  Join the {{ .Site.Title }} community
+community_introduce: >-
+  {{ .Site.Title }} is an open source project that anyone in the community can
+  use, improve, and enjoy. We'd love you to join us! Here's a few ways to find
+  out what's happening and get involved.
+community_learn: Learn and Connect
+community_using: >-
+  Using or want to use {{ .Site.Title }}? Find out more here:
+community_develop: Develop and Contribute
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us
+  here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: >-
+  Contribution Guidelines
+
+# Feedback
+feedback_title: بازخورد
+feedback_question: این صفحه به شما کمک کرد؟
+feedback_positive: آره
+feedback_negative: نه

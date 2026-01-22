@@ -727,6 +727,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-18T12:25:53.067637-05:00"
   },
+  "https://github.com/google/docsy/blob/main/assets/scss/td/_nav.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-21T12:21:39.012345-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/assets/scss/td/_variables.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-21T12:21:39.012345-05:00"
+  },
   "https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_dark.scss": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:40.451729-05:00"
@@ -954,6 +962,10 @@
   "https://github.com/google/docsy/issues/1641": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:40.017497-05:00"
+  },
+  "https://github.com/google/docsy/issues/1654": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-21T12:21:39.246162-05:00"
   },
   "https://github.com/google/docsy/issues/1759": {
     "StatusCode": 206,
@@ -1750,6 +1762,14 @@
   "https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.977512-05:00"
+  },
+  "https://github.com/prettier/prettier/issues/15528": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-20T11:07:33.193379-05:00"
+  },
+  "https://github.com/prettier/prettier/issues/15720": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-20T11:07:33.910471-05:00"
   },
   "https://github.com/protocolbuffers/protocolbuffers.github.io": {
     "StatusCode": 206,

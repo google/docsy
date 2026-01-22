@@ -21,7 +21,7 @@ ui_all: todos
 footer_all_rights_reserved: Derechos reservados
 footer_privacy_policy: Política de privacidad
 
-# Post (blog, articles etc.)
+# Post (blog, article, etc.)
 post_byline_by: Por
 post_created: Creado
 post_last_mod: Última modificación
@@ -56,7 +56,9 @@ community_contribute: >-
   aquí:
 community_how_to: >-
   Puedes averiguar cómo contribuir a {{ .Site.Title }} en nuestras
-community_guideline: Guias de Contribución
+community_guideline: >-
+  Guias de Contribución
+
 # Feedback
 feedback_title: Comentarios
 feedback_question: ¿Fue útil esta página?

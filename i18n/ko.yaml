@@ -1,0 +1,50 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: 이전
+ui_pager_next: 다음
+ui_read_more: 더 읽기
+ui_search: 사이트에서 검색…
+
+# Used in sentences such as "Posted in News"
+ui_in: in
+
+# Footer text
+footer_all_rights_reserved: All Rights Reserved
+
+footer_privacy_policy: 개인정보 보호 정책
+
+# Post (blog, article, etc.)
+post_byline_by: By
+post_created: 작성
+post_last_mod: 최종 수정
+post_edit_this: 페이지 편집
+post_create_child_page: 하부 페이지 생성
+post_create_issue: 문서에 이슈 생성
+post_create_project_issue: 프로젝트에 이슈 생성
+post_posts_in: Posts in
+post_reading_time: minute read
+post_less_than_a_minute_read: less than a minute
+
+# Print support
+print_printable_section: 이 섹션의 다중 페이지 출력 화면임.
+print_click_to_print: 여기를 클릭하여 프린트
+print_show_regular: 이 페이지의 일반 화면으로 돌아가기
+print_entire_section: 전체 섹션 프린트
+
+# Community
+community_join: >-
+  Join the {{ .Site.Title }} community
+community_introduce: >-
+  {{ .Site.Title }} is an open source project that anyone in the community can
+  use, improve, and enjoy. We'd love you to join us! Here's a few ways to find
+  out what's happening and get involved.
+community_learn: Learn and Connect
+community_using: >-
+  Using or want to use {{ .Site.Title }}? Find out more here:
+community_develop: Develop and Contribute
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us
+  here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: >-
+  Contribution Guidelines

@@ -19,7 +19,7 @@ footer_all_rights_reserved: Tous droits réservés
 
 footer_privacy_policy: Politique de confidentialité
 
-# Post (blog, articles etc.)
+# Post (blog, article, etc.)
 post_byline_by: Par
 post_created: Créé
 post_last_mod: Dernière modification
@@ -53,7 +53,9 @@ community_contribute: >-
   joignez-nous sur:
 community_how_to: >-
   Vous pouvez trouver comment contribuer à {{ .Site.Title }} dans nos
-community_guideline: Règles de contribution
+community_guideline: >-
+  Règles de contribution
+
 # Feedback
 feedback_title: Feedback
 feedback_question: Cette page est-elle utile?

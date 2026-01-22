@@ -1,0 +1,61 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Önceki
+ui_pager_next: Sonraki
+ui_read_more: Daha fazla oku
+ui_search: Bu sitede arayın…
+
+# Used in sentences such as "Posted in News"
+ui_in: içinde
+
+# Used in sentences such as "All Tags"
+ui_all: tüm
+
+# Footer text
+footer_all_rights_reserved: Tüm Hakları Saklıdır
+
+footer_privacy_policy: Gizlilik Politikası
+
+# Post (blog, article, etc.)
+post_byline_by: by
+post_created: Oluşturuldu
+post_last_mod: Son düzenleme
+post_edit_this: Bu sayfayı düzenle
+post_view_this: Sayfa kaynağını görüntüle
+post_create_child_page: Çocuk sayfası oluştur
+post_create_issue: Belge konusu oluştur
+post_create_project_issue: Proje konusu oluştur
+post_posts_in: Gönderiler in
+post_reading_time: minute read
+post_less_than_a_minute_read: 1 dakikadan az
+
+# Print support
+print_printable_section: Bu bölümün görüntüsü yazdırılabilir.
+print_click_to_print: Yazdırmak için tıklayın
+print_show_regular: Bu sayfanın normal görüntüsüne dönün
+print_entire_section: Bütün bölümü yazıdırın
+
+# Community
+community_join: >-
+  {{ .Site.Title }} topluluğuna katılın
+community_introduce: >-
+  {{ .Site.Title }} topluluktaki herkesin kullanabileceği, geliştirebileceği ve
+  keyfini çıkarabileceği açık kaynaklı bir projedir. Bize katılmanızı çok
+  isteriz! İşte neler olduğunu öğrenmenin ve dahil olmanın birkaç yolu.
+community_learn: Öğrenin ve Bağlanın
+community_using: >-
+  {{ .Site.Title }} kullanıyor veya kullanmak mı istiyorsunuz? Daha fazlasını
+  burada bulabilirsiniz:
+community_develop: Geliştirin ve Katkıda Bulunun
+community_contribute: >-
+  If you want to get more involved by contributing to {{ .Site.Title }}, join us
+  here:
+community_how_to: >-
+  You can find out how to contribute to {{ .Site.Title }} in our
+community_guideline: >-
+  Katkı Yönergeleri
+
+# Feedback
+feedback_title: Geribildirim
+feedback_question: Bu sayfa yararlı oldu mu?
+feedback_positive: Evet
+feedback_negative: Hayır

@@ -1,0 +1,65 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Претходно
+ui_pager_next: Наредно
+ui_read_more: Прочитајте више
+ui_search: Претражите сајт…
+
+# Used in sentences such as "Posted in News"
+ui_in: у
+
+# Used in sentences such as "All Tags"
+ui_all: све
+
+# Footer text
+footer_all_rights_reserved: Сва права задржана
+
+footer_privacy_policy: Политика приватности
+
+# Post (blog, article, etc.)
+post_byline_by: Аутор
+post_created: Креирано
+post_last_mod: Последњи пут измењено
+post_edit_this: Уредите ову страницу
+post_view_this: Погледајте извор странице
+post_create_child_page: Креирајте подстраницу
+post_create_issue: Креирајте issue за документацију
+post_create_project_issue: Креирајте issue за пројекат
+post_posts_in: Објава у
+post_reading_time: минута за читање
+post_less_than_a_minute_read: мање од минута за читање
+
+# Print support
+print_printable_section: Ово је вишестрани преглед за штампање ове секције.
+print_click_to_print: Кликните овде за штампање
+print_show_regular: Повратак на обичан преглед ове странице
+print_entire_section: Одштампајте читаву секцију
+
+# Community
+community_join: >-
+  Придружите се {{ .Site.Title }} заједници
+community_introduce: >-
+  {{ .Site.Title }} је open source пројекат којег свако у заједници може да
+  користи, унапређује и да ужива у њему. Волели бисмо да нам се придружите! Овде
+  се можете укључити како бисте сазнали шта се дешава.
+community_learn: Научите и повежите се
+community_using: >-
+  Већ користите или желите да почнете користити {{ .Site.Title }}? Сазнајте
+  више:
+community_develop: Развој и допринос
+community_contribute: >-
+  Ако желите да се више укључите у допринос на {{ .Site.Title }}, придружите нам
+  се:
+community_how_to: >-
+  Можете сазнати како да допринесете на {{ .Site.Title }} у нашим
+community_guideline: >-
+  Смерницама за допринос
+
+# Feedback
+feedback_title: Feedback
+feedback_question: Да ли вам је ова страница била од помоћи?
+feedback_positive: Да
+feedback_negative: Не
+
+# Table of contents
+toc_on_this_page: На овој страници
+toc_top_of_page: Врх странице

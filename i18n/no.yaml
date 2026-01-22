@@ -1,0 +1,51 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Forrige
+ui_pager_next: Neste
+ui_read_more: Les mer
+ui_search: Søk på nettstedet…
+
+# Used in sentences such as "Posted in News"
+ui_in: i
+
+# Footer text
+footer_all_rights_reserved: Alle rettigheter er reservert
+
+footer_privacy_policy: Personvernpolicy
+
+# Post (blog, article, etc.)
+post_byline_by: Av
+post_created: Opprettet
+post_last_mod: Sist endret
+post_edit_this: Endre denne siden
+post_create_child_page: Lag underside
+post_create_issue: Opprett dokumentasjon sak
+post_create_project_issue: Opprett prosjekt sak
+post_posts_in: Poster til
+post_reading_time: minute read
+post_less_than_a_minute_read: less than a minute
+post_view_this: Vis kildekoden
+
+# Print support
+print_printable_section: Dette er flersidevisningen av denne seksjonen.
+print_click_to_print: Klikk her for å skrive ut
+print_show_regular: Gå tilbake til vanlig sidevisning
+print_entire_section: Skriv ut hele seksjonen
+
+# Community
+community_join: >-
+  Bli med i {{ .Site.Title }} fellesskapet
+community_introduce: >-
+  {{ .Site.Title }} er et åpen kildekodeprosjekt som alle kan bruke, forbedre og
+  glede seg over. Bli med - her er noen måter du kan holde deg oppdatert på og
+  bidra.
+community_learn: Lær og få kontakt
+community_using: >-
+  Bruker du, eller har du lyst til å bruke {{ .Site.Title }}? Lær mer her:
+community_develop: Bidra og videreutvikle
+community_contribute: >-
+  Dersom du vil involvere deg mer ved å bidra til {{ .Site.Title }}, bli med oss
+  her:
+community_how_to: >-
+  Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i vår
+community_guideline: >-
+  Retningslinjer for bidrag
