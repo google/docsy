@@ -5,6 +5,7 @@ weight: 1
 date: 2021-12-08T10:33:16+01:00
 description: >
   Learn how to get started with Docsy by using the theme as a Hugo Module.
+sidebar_root_for: children
 ---
 
 [Hugo modules](https://gohugo.io/hugo-modules/) are the simplest and latest way to use Hugo themes like Docsy when building a website. Hugo uses the modules mechanism to pull in the theme files from the main Docsy repo at your chosen revision, and it’s easy to keep the theme up to date in your site. Our example site uses Docsy as a Hugo module.
