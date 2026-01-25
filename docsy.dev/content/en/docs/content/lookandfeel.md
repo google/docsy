@@ -26,7 +26,9 @@ Prism for highlighting.
 
 [Docsy uses Bootstrap 5]: /blog/2023/bootstrap-5-migration/
 
-## Project style files
+## Project styles
+
+### Project style files
 
 To customize your project's look and feel, create your own version of the
 following Docsy placeholder files (note the **`_project*.scss`** suffixes) and
@@ -57,11 +59,49 @@ place them inside your project's `assets/scss/` folder:
   https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
 [bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
-> [!TIP]
+> [!SUCCESS] Files you can customize (the rest are internal)
 >
-> PostCSS (autoprefixing of CSS browser-prefixes) is not enabled when running in
-> server mode (it is a little slow), so Chrome is the recommended choice for
-> development.
+> The files listed above, and only these files, are supported for project
+> customization. All other SCSS files under `assets/scss/` are internal to
+> Docsy.
+
+### Advanced style customization
+
+The recommended way to define project-specific styles that override Docsy
+defaults is via the `_styles_project.scss` file. This file is part of Docsy’s
+public customization surface. For the complete list of files, see
+[Project style files](#project-style-files).
+
+However, some projects require visual designs that differ substantially from
+Docsy’s base styling. In such cases, selectively overriding individual CSS rules
+can become complex and brittle.
+
+#### :warning: Resetting internal styles {#resetting-internal-styles}
+
+Docsy’s internal SCSS files (in [`assets/scss/td/`][assets/scss/td]) are
+organized by feature or function. For example, `_alerts.scss` contains the
+styles for [Alerts], while `_code.scss` and `_code-dark.scss` style
+[code blocks](#code-blocks).
+
+That said, if your project’s design diverges significantly from Docsy’s base
+styles, you may choose to _intentionally reset_ some of these defaults by
+shadowing selected internal SCSS files with empty files. That is, create an
+empty SCSS file in your project with the same relative path (`assets/scss/td/`)
+and filename as the Docsy file you want to reset.
+
+> [!CAUTION]
+>
+> This technique relies on Docsy internals and is therefore not covered by
+> semantic versioning stability expectations. Internal SCSS files may change in
+> _any_ release, which may require reviewing and adjusting your project
+> overrides when upgrading the theme. Use only if you accept the added
+> maintenance cost.
+
+After resetting selected internal SCSS files, define your project’s actual
+styles in `_styles_project.scss`, as usual.
+
+[assets/scss/td]: https://github.com/google/docsy/tree/main/assets/scss/td
+[Alerts]: /docs/content/adding-content/#alerts
 
 ## Colors and color themes
 
@@ -296,14 +336,20 @@ To only set the text color use `.-text-<color>`:
 
 <div class="-text-blue pt-3 display-6">Text: Blue</div>
 
-## Code highlighting with Chroma
+## Code blocks
+
+Docsy supports syntax highlighting of code blocks and other styling options
+through two syntax highlighters, [Chroma](#code-highlighting-with-chroma) and
+[Prism](#code-highlighting-with-prism).
+
+### Code highlighting with Chroma
 
 As of Hugo 0.60+, you can choose from a range of code block highlight and color
 styles using [Chroma](https://github.com/alecthomas/chroma). These styles are
 applied to your fenced code blocks. For details about code highlighting in Hugo
 using Chroma, see [Syntax Highlighting][].
 
-### Chroma style configuration
+#### Chroma style configuration
 
 Hugo's default Chroma style is [monokai]. To use another style, such as [tango],
 add the following to your project configuration:
@@ -340,7 +386,7 @@ For the complete list of available styles, see [Chroma Style Gallery].
 [onedark]: https://xyproto.github.io/splash/docs/onedark.html
 [tango]: https://xyproto.github.io/splash/docs/tango.html
 
-### Light/dark code styles
+#### Light/dark code styles
 
 To enable code styles that are compatible with light/dark color modes, you need
 to complete the following setup steps:
@@ -373,20 +419,20 @@ to the appropriate file:
   https://gohugo.io/commands/hugo_gen_chromastyles/
 [light/dark modes]: #lightdark-color-modes
 
-### Code blocks without a specified language
+#### Code blocks without a specified language
 
 By default, highlighting is not applied to code blocks without a specified
 language. If you would like code highlighting to apply to _all_ code blocks,
 even without a language, set `markup.highlight.guessSyntax` to `true` in your
 project's configuration file.
 
-### Copy to clipboard
+#### Copy to clipboard
 
 If you are using a Docsy 0.6.0 or later, code blocks show a "Copy to clipboard"
 button in the top right-hand corner. To disable this functionality, set
 `disable_click2copy_chroma` to `true` in your configuration file.
 
-## Code highlighting with Prism
+### Code highlighting with Prism
 
 Optionally, you can enable Prism syntax highlighting in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
@@ -431,7 +477,7 @@ supports:
 [prismjs-download+]:
   https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+bash+c+csharp+cpp+go+java+markdown+python+scss+sql+toml+yaml&plugins=toolbar+copy-to-clipboard
 
-### Code blocks with no language
+#### Code blocks with no language
 
 By default, Prism code highlighting styles are not applied to code blocks
 without a specified language, instead you get Docsy's default style of grey with
@@ -439,7 +485,7 @@ black text. To apply Prism styling to code blocks with no language or a language
 not supported by Prism, specify `none` as the language after your triple
 backticks.
 
-### Extending Prism for additional languages or plugins
+#### Extending Prism for additional languages or plugins
 
 If the included Prism configuration is not sufficient for your requirements, and
 you want to use additional languages or plugins you can replace the included
