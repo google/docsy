@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `4149391` on `main`.
+> Report refreshed for commits through `db32f5b` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -36,6 +36,41 @@ client projects.
 - `e1bb622` chore: Rename 'site' docs section to 'project' and update links
 - `113cc39` Move pages to About section
 - `8a2528f` Update links
+- `a1075cf` Migrate i18n files from TOML to YAML and add conversion scripts
+- `a989a32` Fix left sidebar height
+- `29bc71f` Add support for custom attributes in blockquote alerts
+- `c9f4299` Add alert label translations to i18n files
+- `3396c03` Convert i18n/uk.toml to .yaml
+- `ec122d8` Delete i18n/uk.toml since we have a .yaml format now
+- `f81406a` Convert most shortcode alerts to markdown, and more
+- `a600e53` Convert Bengali translations from TOML to YAML
+- `95c6a2d` Add Bengali translations for alert labels
+- `d2a63db` Address Hugo deprecation msg related to mounts
+- `93fe8ba` Convert Chinese i18n files from TOML to YAML
+- `81613ae` Convert Japanese translations from TOML to YAML
+- `23fea73` Add alert labels and all-rights-reserved in Japanese
+- `1a25ddf` Update i18n/ja.yaml
+- `6cbe364` Add alert label translations for zh-cn and zh-tw
+- `9dab6fe` zh-cn, use `note: 说明`
+- `e79719f` Create he.toml
+- `731531a` Update i18n/he.toml
+- `f4526dc` Update i18n/he.toml
+- `0d7d78d` Convert Hebrew translation file to YAML
+- `ebc264e` Add alert and table of contents labels to Hebrew i18n
+- `791a707` Convert all remaining i18n files to YAML, add helper scripts
+- `1dfd1a0` Format
+- `08a9569` Upgrade Prettier
+- `83db5b9` Format
+- `08fe966` Add CI/CD info about Prettier and i18n directory
+- `ef0e8b8` Update compare-i18n-toml-yaml.pl
+- `93322ff` Fix comment across locales
+- `199468a` Create scss-namespace.plan.md
+- `1e093f3` Namespace SCSS files, and make adjustments
+- `1560cec` Update refresh-sass-variables.pl
+- `7bcae61` Don't format \_variables_forward.scss
+- `b3cb2a7` Update Swagger UI customization instructions
+- `6f8f85a` Add nested `sidebar_root_for` to docs
+- `11bc51a` bugfix: nested sidebar_root_for
 
 ## CI / tooling only
 
@@ -43,6 +78,14 @@ client projects.
 - `6c1e391` [CI] Drop temp site-copy code and more
 - `4137043` Temporary: copy public to root while build config is in transition
 - `cb75133` [CI] Move Netlify config to docsy.dev subrepo
+- `ba7d0ec` Tasks, plan, and draft blog post for 0.14.0
+- `08fe966` Add CI/CD info about Prettier and i18n directory
+- `08a9569` Upgrade Prettier
+- `1dfd1a0` Format
+- `83db5b9` Format
+- `ef0e8b8` Update compare-i18n-toml-yaml.pl
+- `1560cec` Update refresh-sass-variables.pl
+- `7bcae61` Don't format \_variables_forward.scss
 
 ## Dependency / package configuration updates
 

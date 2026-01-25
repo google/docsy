@@ -1347,6 +1347,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T18:36:01.234519-05:00"
   },
+  "https://github.com/google/docsy/pull/2470": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-25T07:59:41.77875-05:00"
+  },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:32:55.725597-05:00"
@@ -1470,6 +1474,10 @@
   "https://github.com/google/docsy/tree/main/README.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.392469-05:00"
+  },
+  "https://github.com/google/docsy/tree/main/assets/scss/td": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-22T07:43:47.467727-05:00"
   },
   "https://github.com/google/docsy/tree/main/docsy.dev": {
     "StatusCode": 206,
@@ -1626,6 +1634,10 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.494962-05:00"
+  },
+  "https://github.com/google/docsy/tree/release": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-25T07:44:35.473205-05:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,

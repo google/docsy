@@ -12,7 +12,7 @@ globs:
   - 'docsy.dev/content/en/docs/best-practices/**/*.md'
   - 'docsy.dev/content/en/docs/get-started/other-options.md'
   - 'docsy.dev/content/en/docs/language.md'
-  - 'docsy.dev/content/en/site/**/*.md'
+  - 'docsy.dev/content/en/project/**/*.md'
 
 config:
   extends: .markdownlint.yaml

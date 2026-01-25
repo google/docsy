@@ -8,9 +8,9 @@ description:
 
 > [!INFO] Summary
 >
-> Docsy 0.13.0 includes a **runtime patch** for Bootstrap [ScrollSpy] that fixes a
-> bug affecting pages with heading IDs that aren't valid CSS selectors. The patch
-> ensures that [active TOC entry
+> Docsy 0.13.0 includes a **runtime patch** for Bootstrap [ScrollSpy] that fixes
+> a bug affecting pages with heading IDs that aren't valid CSS selectors. The
+> patch ensures that [active TOC entry
 > tracking][Active TOC entry tracking with ScrollSpy] works reliably for all
 > pages.
 
