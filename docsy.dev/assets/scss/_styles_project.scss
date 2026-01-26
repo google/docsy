@@ -2,3 +2,33 @@
 @import 'td/code-dark';
 @import 'td/gcs-search-dark';
 @import 'local/blog';
+
+//
+// Color tuning for the Docsy website
+//
+
+// For dark navbars, use primary bg color by default (i.e., on mobile)
+@include color-mode(dark) {
+  &.td-navbar-cover {
+    --td-navbar-bg-color: #{$primary};
+    --td-navbar-border-bottom: none;
+
+    // Illustration of tinted transparent background color on desktop:
+    @include media-breakpoint-up(md) {
+      &.td-navbar-transparent {
+        $rgba-primary: rgba($primary, 0.25);
+        --td-navbar-bg-color: #{$rgba-primary};
+      }
+    }
+  }
+}
+
+// Add a border between the footer and page content for pages with dark content
+// in general (like the homepage), or in dark mode.
+.td-home,
+.td-section,
+.td-page {
+  .td-footer {
+    border-top: 1px solid var(--bs-border-color);
+  }
+}
