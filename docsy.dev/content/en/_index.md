@@ -1,6 +1,8 @@
 ---
 title: Docsy
 description: A Hugo theme for creating great technical documentation sites
+params:
+  ui: { navbar_theme: dark}
 ---
 
 {{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full" %}}

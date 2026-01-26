@@ -9,7 +9,7 @@ params:
     light/dark mode menu <span class='badge text-bg-warning fs-6
     float-end'>EXPERIMENTAL</span>
 # prettier-ignore
-cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark wordmark FOUC
+cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark rgba wordmark FOUC
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -148,31 +148,48 @@ To learn how to modify maps, see [Maps and loops][] and [Adding theme colors][].
 [variable defaults]:
   https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults
 
-### Light/dark color modes
+### Light/dark color theme and mode support {#lightdark-color-feature}
 
-Docsy enables **light and dark** color modes through Bootstrap's [color modes][]
-feature.
+Docsy supports light and dark color _themes_ and color mode selection through
+Bootstrap's [color modes][] feature.
 
-You can adjust dark-mode support as follows:
+What is the difference between a color theme and a color mode as used in Docsy?
 
-- **Docsy ships with dark mode support**, offering a good user experience (UX)
-  for site visitors through the following features:
-  - Docsy includes **complete CSS** styles for (both light mode and) dark mode
-    **by default**, so your site can automatically switch between light and dark
-    modes based on system settings or user preference.
+- A color _theme_ is a semantic color palette (primary, secondary, success,
+  etc.) defined in SCSS and used by components and utilities.
+- A color _mode_ is a switchable presentation of the site (light or dark) from
+  the user's point of view, implemented through CSS variable overrides
+  (activated via `data-bs-theme`).
 
-  - But, if you prefer, you can **disable** dark mode entirely, see
-    [How to disable dark mode](#how-to-disable-dark-mode).
+The next section explains how to enable light/dark color themes and color mode
+selection.
 
-  - **No dark-mode flashes**: By default, Docsy adds page header content (like
-    meta tags, inline styles, and an early-loading script) to avoid or generally
-    prevent _Flashes Of Unstyled Content_ ([FOUC]) when pages load.[^FOUC-alt]
+## Light/dark color modes
 
-    [^FOUC-alt]:
-        Also referred to as "Flash of incorrect theme" and, humorously, [_Flash
-        of inAccurate coloR Theme_][FART] (FART).
+Docsy enables **light and dark** color mode selection, and the underlying color
+theme support, through Bootstrap's [color modes][] feature. All sites are in
+light mode by default, whether or not you choose to enable dark mode for your
+project.
 
-    [FART]: https://css-tricks.com/flash-of-inaccurate-color-theme-fart/
+Docsy ships with dark mode support, offering a good user experience (UX) for
+site visitors through the following features:
+
+- **Complete CSS** styles for both light and dark themes _by default_, so your
+  site can automatically switch between light and dark modes based on system
+  settings or user preference.
+
+- But, if you prefer, you can **disable** dark mode entirely, see
+  [How to disable dark mode](#how-to-disable-dark-mode).
+
+- **No dark-mode flashes**: By default, Docsy adds page header content (like
+  meta tags, inline styles, and an early-loading script) to avoid or generally
+  prevent _Flashes Of Unstyled Content_ ([FOUC]) when pages load.[^FOUC-alt]
+
+  [^FOUC-alt]:
+      Also referred to as "Flash of incorrect theme" and, humorously, [_Flash of
+      inAccurate coloR Theme_][FART] (FART).
+
+  [FART]: https://css-tricks.com/flash-of-inaccurate-color-theme-fart/
 
 - **Light/dark-mode menu**: Enable Docsy's
   [light/dark-mode menu](#lightdark-mode-menu) in the [navbar](#navbar) to allow
@@ -191,19 +208,26 @@ You can adjust dark-mode support as follows:
     that the have good color-contrast. Learn
     [how to pick colors with good color-contrast](#pick-good-color-contrast).
 
-> [!INFO] Terminology note
->
-> In Bootstrap, a color **mode** refers to a switchable presentation of the site
-> (e.g., light or dark) from the user's point of view, implemented through CSS
-> variable overrides activated via `data-bs-theme`.
->
-> Whereas a color **theme** refers to the semantic color palette (primary,
-> secondary, success, etc.) defined in SCSS and used by components and
-> utilities.
-
 [FOUC]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
 
-#### How to disable dark mode
+### Choosing themes or color modes for your site
+
+To help you decide whether to support light, dark, or both themes on your site,
+see:
+
+- [The Designer’s Guide to Dark Mode Accessibility][], January 2026
+- [Dark Mode vs Light Mode: The Complete UX Guide for 2025][], August 2025
+- [Dark and Light Mode: A Simple Guide for Web Design and Development][], May
+  2025
+
+[The Designer’s Guide to Dark Mode Accessibility]:
+  https://www.accessibilitychecker.org/blog/dark-mode-accessibility/
+[Dark Mode vs Light Mode: The Complete UX Guide for 2025]:
+  https://altersquare.io/dark-mode-vs-light-mode-the-complete-ux-guide-for-2025/
+[Dark and Light Mode: A Simple Guide for Web Design and Development]:
+  https://www.accessibilityfirst.at/posts/dark-and-light-mode-a-simple-guide-for-web-design-and-development
+
+### How to disable dark mode
 
 Docsy, like Bootstrap, ships with CSS support for light and dark [color modes][]
 by default.
@@ -223,7 +247,7 @@ To [disable dark mode][] entirely:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
 [site configuration]: https://gohugo.io/configuration/introduction/
 
-#### How to pick colors with good color-contrast (EXPERIMENTAL) {#pick-good-color-contrast}
+### How to pick colors with good color-contrast (EXPERIMENTAL) {#pick-good-color-contrast}
 
 Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
 provides [_color-adjustments-dark.scss] as an example of theme color
@@ -499,6 +523,111 @@ files with your own.
 
 ## Navbar
 
+By default, a Docsy site has a navbar that appears at the top of every page.
+
+### Default look and feel
+
+Docsy’s navbar styles are designed mobile-first.
+
+#### On mobile
+
+On **mobile**, the default navbar:
+
+- Uses the page’s (light/dark) body text and background colors to ensure that
+  navbar elements (like links, menus, and the search box) render correctly
+  across [light/dark color modes](#lightdark-color-modes).
+- Has an opaque background color.
+- Scrolls with the page content.
+
+#### On desktop
+
+On **desktop** (`md` breakpoint and up), the default appearance is the same,
+except that the navbar is fixed to the top of the viewport.
+
+##### Translucent over cover images {#default-over-cover}
+
+In addition, on desktop, when a page contains a [blocks/cover] (typically used
+for hero images on the home page), Docsy makes the navbar translucent while the
+cover is visible by adding the classes `td-navbar-cover td-navbar-transparent`
+to the navbar. For an example, see the [About Docsy][] page. This initial
+translucent setting ensures that the hero image is maximally visible. Once the
+user has scrolled past the cover (hero image), the navbar reverts to its default
+(opaque) style.
+
+[About Docsy]: https://www.docsy.dev/about/
+[blocks/cover]: /docs/content/shortcodes/#blockscover
+
+### Customizing the navbar {#navbar-customization}
+
+#### Background color/opacity {#navbar-background}
+
+To change the navbar background color/opacity across your site, override the
+SCSS variable `$td-navbar-bg-color` in your [project’s variables file][].
+
+For example, to set the navbar background color to the primary color:
+
+```scss
+$td-navbar-bg-color: $primary;
+```
+
+To set the navbar background color to a slightly translucent primary color use:
+
+```scss
+$td-navbar-bg-color: rgba($primary, 0.15);
+```
+
+> [!NOTE]- CSS variable implementation details
+>
+> Docsy uses the following CSS custom properties **internally** to style the
+> navbar: `--td-navbar-bg-color`, `--td-navbar-backdrop-filter`, and
+> `--td-navbar-border-bottom`. These can be overridden for advanced
+> customization. For an example, see the User Guide's [project
+> styles][ug-project-styles]. For the base styles, see [_nav.scss].
+
+[ug-project-styles]:
+  https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss
+
+#### Setting the navbar light/dark color theme {#navbar-lightdark-theme}
+
+Whether it is your chosen site design, or you want more contrast between the
+navbar and the page background (especially over a cover image), you can set the
+navbar theme to `dark` by adding `params.ui.navbar_theme: dark` to:
+
+- Your site config to apply this **site-wide**
+- Page [front matter `params`][] to apply this **per page**
+
+```yaml
+params:
+  ui:
+    navbar_theme: dark
+```
+
+[front matter `params`]:
+  https://gohugo.io/content-management/front-matter/#front-matter-parameters
+
+Internally, this adds `data-bs-theme="dark"` to the navbar, triggering
+Bootstrap's dark theme. This affects the default colors of navbar and all its
+child elements such as links, menus, and the search box.
+
+#### Translucent over cover images {#customize-over-cover}
+
+When a page contains a [blocks/cover], the navbar is styled with
+`td-navbar-cover`. While the navbar is over the cover, it is styled with
+`td-navbar-transparent` as well, which sets the background color to transparent
+and applies a blur effect (once the user has scrolled past the cover, the
+`td-navbar-transparent` class is removed).
+
+This translucent effect can sometimes make the text of navbar items difficult to
+read due to the lack of contrast. Adjusting the navbar background color/opacity
+or blur can help. For an example, see the User Guide's [project
+styles][ug-project-styles].
+
+Alternatively, you can disable the “translucent over cover” behavior globally by
+setting `params.ui.navbar_translucent_over_cover_disable` to `true` in your
+[site configuration][].
+
+[project’s variables file]: #project-style-files
+
 ### Styling your project logo and name
 
 The default Docsy navbar (`.td-navbar`) displays your site identity, consisting
@@ -592,27 +721,6 @@ params:
 [layouts/_partials/theme-toggler.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html
 [search box]: /docs/content/search/
-
-### Translucent over cover images
-
-For pages containing a [blocks/cover][] shortcode, like most homepages, the
-navbar is translucent as long as the hero image hasn't scrolled up past the
-navbar. For an example, see the [About Docsy][] page. This initial translucent
-setting ensures that the hero image is maximally visible.
-
-After the hero image has scrolled past the navbar, the navbar's (opaque)
-background color is set -- usually to the site's [primary color][].
-
-The text of navbar entries can be difficult to read with some hero images. In
-these cases, you can disable navbar translucency by setting the
-`params.ui.navbar_translucent_over_cover_disable` option to `true` in your
-site's [configuration file][].
-
-[About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/content/shortcodes/#blockscover
-[configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
-[primary color]: #site-colors
 
 ## Alerts
 

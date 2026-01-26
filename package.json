@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.0-dev+62-g11bc51a",
+  "version": "0.14.0-dev+63-gd5132bf",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -32,6 +32,7 @@
     "ci:test": "npm run ci:prepare && npm run check && npm run test:website && npm run ci:post",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website",
+    "fix:format:diff": "npm run fix:format",
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s cd:docsy.dev fix:format",
     "fix:markdown": "npm run check:markdown -- --fix",
     "fix:version": "npm run set:package-version -- --id \"$(scripts/get-build-id.sh)\"",
@@ -42,6 +43,7 @@
     "postinstall": "npm run _mkdir:hugo-mod",
     "postupdate:dep": "npm run -s post-update",
     "postupdate:packages": "npm run -s post-update",
+    "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _cd:docsy.dev -- npm run serve",
     "set:package-version": "node scripts/set-package-version/index.mjs",
     "test:tooling": "node --test",

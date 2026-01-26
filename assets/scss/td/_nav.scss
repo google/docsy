@@ -1,32 +1,25 @@
 //
 // Main navbar
 //
-// cSpell:ignore onscroll
 
-.td-navbar-cover {
-  @include media-breakpoint-up(md) {
-    background: transparent !important;
-
-    .nav-link {
-      text-shadow: 1px 1px 2px $dark;
-    }
-  }
-
-  &.navbar-bg-onscroll .nav-link {
-    text-shadow: none;
-  }
-}
-
-.navbar-bg-onscroll {
-  background: $primary !important;
-  opacity: inherit;
-}
+$td-navbar-bg-color: var(--bs-body-bg) !default;
 
 .td-navbar {
   @extend .navbar;
   @extend .navbar-expand;
 
-  background: $primary;
+  --td-navbar-bg-color: #{$td-navbar-bg-color};
+  --td-navbar-backdrop-filter: none;
+  --td-navbar-border-bottom: 1px solid var(--bs-border-color);
+
+  // To ensure that all child elements (such as form inputs) can inherit the
+  // right (light/dark) body color we set it explicitly here:
+  color: var(--bs-body-color);
+
+  background-color: var(--td-navbar-bg-color);
+  backdrop-filter: var(--td-navbar-backdrop-filter);
+  border-bottom: var(--td-navbar-border-bottom);
+
   min-height: 4rem;
   margin: 0;
   z-index: 32;
@@ -111,9 +104,11 @@
         &-text {
           display: none;
         }
+
         &-code {
           display: inline;
         }
+
         &::before {
           padding-right: 0;
         }
@@ -136,6 +131,21 @@
   }
 }
 
+.td-navbar-cover {
+  transition:
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease,
+    border-bottom 0.3s ease;
+
+  &.td-navbar-transparent {
+    @include media-breakpoint-up(md) {
+      --td-navbar-bg-color: transparent;
+      --td-navbar-backdrop-filter: blur(8px);
+      --td-navbar-border-bottom: none;
+    }
+  }
+}
+
 // Icons
 #main_navbar {
   li i {
@@ -147,6 +157,7 @@
       min-width: 1em;
     }
   }
+
   .alert {
     background-color: inherit;
     padding: 0;
@@ -226,6 +237,7 @@ nav.foldable-nav {
     font-size: 1em;
     color: var(--bs-secondary-color);
     transition: all 0.5s;
+
     &:hover {
       transform: rotate(90deg);
     }
