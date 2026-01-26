@@ -1095,6 +1095,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T11:57:05.06015-05:00"
   },
+  "https://github.com/google/docsy/issues/2413": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T12:10:06.777719-05:00"
+  },
   "https://github.com/google/docsy/issues/2429": {
     "StatusCode": 206,
     "LastSeen": "2026-01-16T19:09:40.059009-05:00"
@@ -1362,6 +1366,10 @@
   "https://github.com/google/docsy/pull/2470": {
     "StatusCode": 206,
     "LastSeen": "2026-01-25T07:59:41.77875-05:00"
+  },
+  "https://github.com/google/docsy/pull/2477": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T12:10:06.130456-05:00"
   },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
