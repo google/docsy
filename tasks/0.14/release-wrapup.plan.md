@@ -79,7 +79,7 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [db32f5b].
+Report refreshed for commits through [59b78ce].
 
 ### 0.14.0 blog post
 
@@ -105,7 +105,8 @@ Report refreshed for commits through [db32f5b].
 - Remember that the changelog is meant to only (very briefly) highlight
   significant changes.
 
-[0.14.0 release report]: ../docsy.dev/content/en/blog/2025/0.14.0.md
+[0.14.0 release report]: ../docsy.dev/content/en/blog/2026/0.14.0.md
 [0.14.0-changelog]: ../../docsy.dev/content/en/project/about/changelog/#v0.14.0
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
-[0.14.0 blog post]: ../docsy.dev/content/en/blog/2025/0.14.0.md
+[0.14.0 blog post]: ../docsy.dev/content/en/blog/2026/0.14.0.md
+[59b78ce]: https://github.com/google/docsy/commit/59b78ce
