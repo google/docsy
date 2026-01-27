@@ -286,7 +286,7 @@ feature.
 
 ```go-template
 {{%/* pageinfo color="info" */%}}
-This is placeholder content.
+This is _placeholder content_ :heart:
 {{%/* /pageinfo */%}}
 ```
 
@@ -294,13 +294,13 @@ Renders to:
 
 {{% pageinfo color="info" %}}
 
-This is placeholder content
+This is _placeholder content_ :heart:
 
 {{% /pageinfo %}}
 
-| Parameter | Default | Description                                                   |
-| --------- | ------- | ------------------------------------------------------------- |
-| color     | primary | One of the theme colors, eg `primary`, `info`, `warning` etc. |
+| Parameter | Default | Description                                                    |
+| --------- | ------- | -------------------------------------------------------------- |
+| color     | primary | One of the theme colors, eg `primary`, `info`, `warning`, etc. |
 
 ### `imgproc`
 
