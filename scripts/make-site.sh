@@ -8,15 +8,20 @@ DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
+
 : ${HUGO:=npx hugo}
+
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
-OUTPUT_REDIRECT="" # Use along with VERBOSE
+OUTPUT_REDIRECT="" # set to non-empty when -q is used
+
+# Parsed HUGO command (supports: HUGO="npx --yes hugo-extended" etc.)
+HUGO_CMD=()
 
 function _usage() {
   cat <<EOS
-Usage: `basename $0` [options]
+Usage: $(basename "$0") [options]
 
   Creates a Docsy-themed site under SITE_NAME using the Hugo new command.
   Docsy is fetched as an NPM package from $DOCSY_REPO in GitHub,
@@ -35,52 +40,101 @@ Usage: `basename $0` [options]
   -v VERS       Docsy Hugo module or NPM package version. Default: '$DOCSY_VERS'.
                 Examples for Hugo modules: v1.1.1, some-branch-name
                 Examples for NPM: semver:1.1.1, some-branch-name
-
 EOS
 }
 
 function usage() {
   local status=${1:-0}
   _usage 1>&2
-  exit $status
+  exit "$status"
+}
+
+function init_hugo_cmd() {
+  # Split $HUGO safely into an argv array (no eval).
+  # Example: HUGO="npx --yes hugo-extended" -> ["npx","--yes","hugo-extended"]
+  read -r -a HUGO_CMD <<<"$HUGO"
+  if [[ ${#HUGO_CMD[@]} -eq 0 ]]; then
+    echo "[ERROR] HUGO command is empty"
+    exit 1
+  fi
+}
+
+function run_hugo() {
+  if [[ -n "$OUTPUT_REDIRECT" ]]; then
+    "${HUGO_CMD[@]}" "$@" >/dev/null 2>&1
+  else
+    "${HUGO_CMD[@]}" "$@"
+  fi
+}
+
+function validate_repo() {
+  # Conservative org/repo pattern
+  if [[ ! "$DOCSY_REPO" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$ ]]; then
+    echo "[ERROR] Invalid -r / DOCSY_REPO value: '$DOCSY_REPO'"
+    echo "[ERROR] Expected format: ORG/REPO using [A-Za-z0-9_.-]"
+    exit 1
+  fi
+}
+
+function validate_vers_hugo() {
+  # Allow typical git ref-ish values (tag/branch/commit-ish) but block metacharacters/whitespace.
+  # Note: we intentionally disallow '@' because the script injects it as a separator.
+  if [[ -z "$DOCSY_VERS" ]]; then
+    return 0
+  fi
+  if [[ "$DOCSY_VERS" == -* ]]; then
+    echo "[ERROR] Invalid -v / DOCSY_VERS: must not start with '-'"
+    exit 1
+  fi
+  if [[ ! "$DOCSY_VERS" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]{0,99}$ ]]; then
+    echo "[ERROR] Invalid -v / DOCSY_VERS value: '$DOCSY_VERS'"
+    echo "[ERROR] Allowed pattern (HUGO mode): ^[A-Za-z0-9][A-Za-z0-9._/-]{0,99}$"
+    exit 1
+  fi
+}
+
+function validate_vers_npm() {
+  # NPM example includes "semver:1.1.1" so allow ':' and '+'
+  if [[ -z "$DOCSY_VERS" ]]; then
+    return 0
+  fi
+  if [[ "$DOCSY_VERS" == -* ]]; then
+    echo "[ERROR] Invalid -v / DOCSY_VERS: must not start with '-'"
+    exit 1
+  fi
+  if [[ ! "$DOCSY_VERS" =~ ^[A-Za-z0-9][A-Za-z0-9._/+:-]{0,99}$ ]]; then
+    echo "[ERROR] Invalid -v / DOCSY_VERS value: '$DOCSY_VERS'"
+    echo "[ERROR] Allowed pattern (NPM mode): ^[A-Za-z0-9][A-Za-z0-9._/+:-]{0,99}$"
+    exit 1
+  fi
 }
 
 function process_CLI_args() {
   while getopts ":fhl:n:qr:s:v:" opt; do
     case $opt in
-      f)
-        FORCE_DELETE=true
-        ;;
-      h)
-        usage
-        ;;
+      f) FORCE_DELETE=true ;;
+      h) usage ;;
       l)
         DOCSY_SRC="LOCAL"
         THEMESDIR="$OPTARG"
         ;;
-      n)
-        SITE_NAME="$OPTARG"
-        ;;
+      n) SITE_NAME="$OPTARG" ;;
       q)
         VERBOSE=""
-        OUTPUT_REDIRECT="> /dev/null 2>&1"
+        OUTPUT_REDIRECT="1"
         ;;
-      r)
-        DOCSY_REPO="$OPTARG"
-        ;;
+      r) DOCSY_REPO="$OPTARG" ;;
       s)
         DOCSY_SRC=$(echo "$OPTARG" | tr '[:lower:]' '[:upper:]')
         if [[ $DOCSY_SRC != "NPM" && $DOCSY_SRC != HUGO* ]]; then
           echo "ERROR: invalid argument to -s flag: $OPTARG"
-          usage 1;
+          usage 1
         fi
         ;;
-      v)
-        DOCSY_VERS="$OPTARG"
-        ;;
+      v) DOCSY_VERS="$OPTARG" ;;
       \?)
         echo "ERROR: unrecognized flag: -$OPTARG"
-        usage 1;
+        usage 1
         ;;
     esac
   done
@@ -88,11 +142,10 @@ function process_CLI_args() {
   shift $((OPTIND-1))
   if [ "$#" -gt 0 ]; then
     echo "ERROR: extra argument(s): $*" >&2
-    usage 1;
+    usage 1
   fi
 }
 
-# Create site directory, checking if it exists first
 function create_site_directory() {
   if [ -e "$SITE_NAME" ]; then
     if [ "$FORCE_DELETE" = true ]; then
@@ -106,14 +159,19 @@ function create_site_directory() {
 }
 
 function _npm_install() {
-  npm init -y > /dev/null
-  npm install --omit dev --save $DEPS
+  npm init -y >/dev/null
+  if [[ -n "$OUTPUT_REDIRECT" ]]; then
+    npm install --omit dev --save $DEPS >/dev/null 2>&1
+  else
+    npm install --omit dev --save $DEPS
+  fi
 }
 
 function set_up_and_cd_into_site() {
-  $HUGO new site --format yaml --quiet "$SITE_NAME"
+  run_hugo new site --format yaml --quiet "$SITE_NAME"
   cd "$SITE_NAME"
-  eval _npm_install $OUTPUT_REDIRECT
+
+  _npm_install
 
   if [[ "$DOCSY_SRC" == HUGO* ]]; then
     _set_up_site_using_hugo_modules
@@ -124,42 +182,50 @@ function set_up_and_cd_into_site() {
 }
 
 function _set_up_site_using_hugo_modules() {
-  local user_name=$(whoami)
-  # : ${user_name:=$USER}
-  # : ${user_name:="me"}
+  local user_name
+  user_name=$(whoami)
 
+  validate_repo
+  validate_vers_hugo
+
+  local HUGO_MOD_WITH_VERS
   HUGO_MOD_WITH_VERS=$DOCSY_REPO
-  if [[ -n $DOCSY_VERS ]]; then
+  if [[ -n "$DOCSY_VERS" ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"
   fi
 
   echo "[INFO] Getting Docsy as Hugo module $HUGO_MOD_WITH_VERS"
 
-  eval "$HUGO mod init github.com/$user_name/$SITE_NAME" $OUTPUT_REDIRECT
+  run_hugo mod init "github.com/$user_name/$SITE_NAME"
 
   if [[ "$DOCSY_REPO" == "$DOCSY_REPO_DEFAULT" ]]; then
-    eval "$HUGO mod get github.com/$HUGO_MOD_WITH_VERS" $OUTPUT_REDIRECT
+    run_hugo mod get "github.com/$HUGO_MOD_WITH_VERS"
   else
     echo "[INFO] Fetch Docsy GitHub repo '$DOCSY_REPO' @ '$DOCSY_VERS'"
-    mkdir tmp
-    local BRANCH_SPEC=""
+    mkdir -p tmp
+
     local DEPTH=10
-    local SWITCH_NEEDED=
-    local CLONE="git clone --depth=$DEPTH https://github.com/$DOCSY_REPO tmp/docsy"
-    if [[ -n $DOCSY_VERS ]]; then
-      BRANCH_SPEC="-b $DOCSY_VERS"
+    local SWITCH_NEEDED=""
+
+    if [[ -n "$DOCSY_VERS" ]]; then
+      if ! git clone --depth="$DEPTH" -b "$DOCSY_VERS" "https://github.com/$DOCSY_REPO" tmp/docsy; then
+        SWITCH_NEEDED="1"
+        git clone --depth="$DEPTH" "https://github.com/$DOCSY_REPO" tmp/docsy
+      fi
+    else
+      git clone --depth="$DEPTH" "https://github.com/$DOCSY_REPO" tmp/docsy
     fi
-    if ! $CLONE $BRANCH_SPEC; then
-      SWITCH_NEEDED=1
-      $CLONE
-    fi
-    ( \
-      cd tmp/docsy && \
-      git log --oneline -$DEPTH && \
-      if [[ -n $SWITCH_NEEDED ]]; then git switch --detach $DOCSY_VERS; fi \
+
+    (
+      cd tmp/docsy
+      git log --oneline -"$DEPTH"
+      if [[ -n "$SWITCH_NEEDED" && -n "$DOCSY_VERS" ]]; then
+        git switch --detach "$DOCSY_VERS"
+      fi
     )
+
     echo "replace github.com/$DOCSY_REPO_DEFAULT => ./tmp/docsy" >> go.mod
-    eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT" $OUTPUT_REDIRECT
+    run_hugo mod get "github.com/$DOCSY_REPO_DEFAULT"
   fi
 
   echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT, disable: false}]}" >> hugo.yaml
@@ -167,22 +233,30 @@ function _set_up_site_using_hugo_modules() {
 
 function main() {
   process_CLI_args "$@"
-  create_site_directory
+  init_hugo_cmd
 
   if [[ "$DOCSY_SRC" == "NPM" ]]; then
+    validate_repo
+    validate_vers_npm
+
     NPM_PKG=$DOCSY_REPO
-    if [[ -n $DOCSY_VERS ]]; then
+    if [[ -n "$DOCSY_VERS" ]]; then
       NPM_PKG+="#$DOCSY_VERS"
     fi
     echo "[INFO] Getting Docsy as NPM package '$NPM_PKG'"
     DEPS+=" $NPM_PKG"
   elif [[ "$DOCSY_SRC" == "LOCAL" ]]; then
-    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR"
+    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR'"
+  else
+    validate_repo
+    validate_vers_hugo
   fi
+
+  create_site_directory
 
   [[ $VERBOSE ]] && set -x
   set_up_and_cd_into_site
-  eval $HUGO $OUTPUT_REDIRECT # Generate site
+  run_hugo # Generate site
   [[ $VERBOSE ]] && set +x
   cd ..
 
