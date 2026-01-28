@@ -419,7 +419,7 @@ By default the side nav is entirely generated from your section's pages. If you
 want to add a manual link to this menu, such as a link to an external site or a
 page in a different section of your site, you can do this by creating a
 _placeholder page file_ in the doc hierarchy with the appropriate weight and
-some special parameters in its metadata (frontmatter) to specify the link
+some special parameters in its metadata (front matter) to specify the link
 details.
 
 To create a placeholder page, create a page file as usual in the directory where
