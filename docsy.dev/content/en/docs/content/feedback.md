@@ -299,7 +299,7 @@ For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
 
 - The page `description`
-  [frontmatter field](/docs/content/adding-content/#page-frontmatter)
+  [front matter field](/docs/content/adding-content/#page-front-matter)
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 
