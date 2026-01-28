@@ -3,6 +3,9 @@ ui_pager_prev: قبلی
 ui_pager_next: بعدی
 ui_read_more: بیشتر بخوانید
 ui_search: در این سایت جستجو کنید...
+ui_theme_light: روشن
+ui_theme_dark: تاریک
+ui_theme_auto: خودکار
 
 # Used in sentences such as "Posted in News"
 ui_in: در

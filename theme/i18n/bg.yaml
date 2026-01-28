@@ -3,6 +3,9 @@ ui_pager_prev: Предишен
 ui_pager_next: Следващ
 ui_read_more: Прочети повече
 ui_search: Търси в тази страница…
+ui_theme_light: Светла
+ui_theme_dark: Тъмна
+ui_theme_auto: Автоматична
 
 # Used in sentences such as "Posted in News"
 ui_in: в
