@@ -10,6 +10,9 @@ ui_pager_prev: 上一頁
 ui_pager_next: 下一頁
 ui_read_more: 閱讀全文
 ui_search: 站內搜尋…
+ui_theme_light: 淺色
+ui_theme_dark: 深色
+ui_theme_auto: 自動
 
 # Used in sentences such as "Posted in News"
 ui_in: 於

@@ -3,6 +3,9 @@ ui_pager_prev: Forrige
 ui_pager_next: Neste
 ui_read_more: Les mer
 ui_search: Søk på nettstedet…
+ui_theme_light: Lys
+ui_theme_dark: Mørk
+ui_theme_auto: Automatisk
 
 # Used in sentences such as "Posted in News"
 ui_in: i
