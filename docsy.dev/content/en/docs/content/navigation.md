@@ -75,6 +75,50 @@ Navbar entries are ordered from left to right by `weight`. So, for example, a
 section index or page with `weight: 30` would appear after the Documentation
 section in the menu, while one with `weight: 10` would appear before it.
 
+To group menu items in a dropdown, add a `parent` parameter to the page front
+matter. All menu items with the same `parent` value will be grouped together
+under a dropdown menu. For example, here's how to add a page to a
+"Community" dropdown:
+
+{{< tabpane >}}
+{{< tab header="Front matter:" disabled=true />}}
+{{< tab header="toml" lang="toml" >}}
++++
+title = "Contributing to the Project"
+linkTitle = "Contributing"
+description = "How to contribute to our documentation project."
+
+[menu.main]
+parent = "Community"
+weight = 10
++++
+{{< /tab >}}
+{{< tab header="yaml" lang="yaml" >}}
+---
+title: "Contributing to the Project"
+linkTitle: "Contributing"
+description: "How to contribute to our documentation project."
+menu:
+  main:
+    parent: "Community"
+    weight: 10
+---
+{{< /tab >}}
+{{< tab header="json" lang="json" >}}
+{
+  "title": "Contributing to the Project",
+  "linkTitle": "Contributing",
+  "description": "How to contribute to our documentation project.",
+  "menu": {
+    "main": {
+      "parent": "Community",
+      "weight": 10
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+
 If you want to add a link to an external site to this menu, add it to your site
 configuration:[^add-external-link-via]
 
