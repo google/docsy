@@ -3,7 +3,7 @@ title: Navigation and Menus
 date: 2017-01-05
 weight: 3
 description: Customize site navigation for your Docsy site.
-cSpell:ignore: navs lightdark lookandfeel frontmatter notoc
+cSpell:ignore: navs lightdark lookandfeel notoc
 ---
 
 Docsy provides multiple built-in navigation features for your sites, including
