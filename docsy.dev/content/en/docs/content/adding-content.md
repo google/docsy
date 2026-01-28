@@ -19,7 +19,7 @@ params:
 
     > [!DANGER] Danger Will Robinson!
 # prettier-ignore
-cSpell:ignore: goldmark Riona MacNamara frontmatter asciidoctor pandoc changefreq
+cSpell:ignore: goldmark Riona MacNamara asciidoctor pandoc changefreq
 ---
 
 So you've got a new Hugo website with Docsy, now it's time to add some content!
