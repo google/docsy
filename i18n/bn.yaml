@@ -10,6 +10,9 @@ ui_pager_prev: পূর্ববর্তী
 ui_pager_next: পরবর্তী
 ui_read_more: আরও পড়ুন
 ui_search: এই সাইটে খোঁজ করুন…
+ui_theme_light: হালকা
+ui_theme_dark: গাঢ়
+ui_theme_auto: স্বয়ংক্রিয়
 
 # "পোস্ট করা নিউজ" এর মতো বাক্যে ব্যবহৃত
 ui_in: মধ্যে

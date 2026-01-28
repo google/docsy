@@ -3,6 +3,9 @@ ui_pager_prev: السَّابق
 ui_pager_next: التَّالي
 ui_read_more: اِقْرأ اَلمزِيد
 ui_search: اِبْحث فِي هذَا اَلموْقِع
+ui_theme_light: فاتح
+ui_theme_dark: داكن
+ui_theme_auto: تلقائي
 
 # Used in sentences such as "Posted in News"
 ui_in: فِي

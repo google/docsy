@@ -3,6 +3,9 @@ ui_pager_prev: Edellinen
 ui_pager_next: Seuraava
 ui_read_more: Lue lisää
 ui_search: Hae sivustolta...
+ui_theme_light: Vaalea
+ui_theme_dark: Tumma
+ui_theme_auto: Automaattinen
 
 # Used in sentences such as "Posted in News"
 ui_in:

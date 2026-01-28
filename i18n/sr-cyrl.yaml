@@ -3,6 +3,9 @@ ui_pager_prev: Претходно
 ui_pager_next: Наредно
 ui_read_more: Прочитајте више
 ui_search: Претражите сајт…
+ui_theme_light: Светла
+ui_theme_dark: Тамна
+ui_theme_auto: Аутоматски
 
 # Used in sentences such as "Posted in News"
 ui_in: у

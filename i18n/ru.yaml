@@ -3,6 +3,9 @@ ui_pager_prev: Предыдущая
 ui_pager_next: Следующая
 ui_read_more: Подробнее
 ui_search: Поиск по сайту…
+ui_theme_light: Светлая
+ui_theme_dark: Тёмная
+ui_theme_auto: Авто
 
 # Used in sentences such as "Posted in News"
 ui_in: в
