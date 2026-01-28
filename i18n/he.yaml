@@ -32,9 +32,7 @@ post_create_child_page: צור עמוד משנה
 post_create_issue: Create documentation issue
 post_create_project_issue: Create project issue
 post_posts_in: Posts in
-post_reading_time:
-  one: דקת קריאה
-  other: דקות קריאה
+post_reading_time: דקות קריאה
 post_less_than_a_minute_read: פחות מדקה
 
 # Print support
