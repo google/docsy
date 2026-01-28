@@ -1,4 +1,6 @@
-# CI/CD
+---
+title: CI/CD
+---
 
 ## Prettier formatting
 
