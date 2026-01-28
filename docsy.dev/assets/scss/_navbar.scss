@@ -1,0 +1,15 @@
+// For dark navbars, use primary bg color by default (i.e., on mobile)
+@include color-mode(dark) {
+  &.td-navbar-cover {
+    --td-navbar-bg-color: #{$primary};
+    --td-navbar-border-bottom: none;
+
+    // Illustration of tinted transparent background color on desktop:
+    @include media-breakpoint-up(md) {
+      &.td-navbar-transparent {
+        $rgba-primary: rgba($primary, 0.25);
+        --td-navbar-bg-color: #{$rgba-primary};
+      }
+    }
+  }
+}
