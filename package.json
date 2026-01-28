@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.0-dev+69-ge7b91366",
+  "version": "0.14.0-dev+70-g6399194a",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -21,7 +21,7 @@
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
     "_prepare": "npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
-    "build": "npm run _cd:docsy.dev -- npm run build",
+    "build": "npm run _cd:docsy.dev -- npm run build --",
     "cd:docsy.dev": "echo 'Running in docsy.dev...'; npm run _cd:docsy.dev -- npm run",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links": "npm run _cd:docsy.dev -- npm run check:links",

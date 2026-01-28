@@ -58,6 +58,7 @@ markup:
     noClasses: false # Required for dark-mode
 
 params:
+  hugoMinVersion: &hugoMinVersion 0.155.0
   productionURL: &productionURL https://www.docsy.dev
   copyright:
     authors: >-
@@ -160,16 +161,26 @@ security:
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
 module:
+  hugoVersion:
+    extended: true
+    min: *hugoMinVersion
   mounts:
     - source: content/en
       target: content
-    # Mount the repo root *.md files
+      # English content for both en, and as fallback for xx sites
+      sites: &sites
+        matrix:
+          languages: [en, xx]
+    # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
+      sites: *sites
     - source: ../README.md
       target: content/project/repo/README.md
+      sites: *sites
     - source: ../CHANGELOG.md
       target: content/project/repo/CHANGELOG.md
+      sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
     # Placeholder language used to demo multilingual support
