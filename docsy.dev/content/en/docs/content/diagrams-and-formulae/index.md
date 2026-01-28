@@ -84,56 +84,8 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 
 As of Docsy version v0.12.0, the theme uses Hugo's embedded instance of the
 KaTeX display engine to render mathematical markup to HTML at build time.\
-To enable \(\LaTeX\) typesetting in Markdown, perform the three following steps
-described below:
-
-#### Create media types for KaTeX fonts
-
-KaTeX brings its own font files for rendering mathematical formulae. In order to
-enable the download of these font files locally during build time, two
-additional
-[media types](https://gohugo.io/configuration/media-types/#create-a-media-type)
-have to be created by adding the lines below to your
-`hugo.toml`/`hugo.yaml`/`hugo.json` configuration file:
-
-{{< tabpane text=true persist=lang >}}
-{{< tab header="Site configuration file:" disabled=true />}}
-{{% tab header="hugo.toml" lang="toml" %}}
-
-```toml
-[mediaTypes]
-  [mediaTypes.'font/woff']
-    suffixes = ['woff']
-  [mediaTypes.'font/woff2']
-    suffixes = ['woff2']
-```
-
-{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
-
-```yaml
-mediaTypes:
-  font/woff:
-    suffixes: [woff]
-  font/woff2:
-    suffixes: [woff2]
-```
-
-{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
-
-```json
-{
-  "mediaTypes": {
-    "font/woff": {
-      "suffixes": ["woff"]
-    },
-    "font/woff2": {
-      "suffixes": ["woff2"]
-    }
-  }
-}
-```
-
-{{% /tab %}} {{< /tabpane >}}
+To enable \(\LaTeX\) typesetting in Markdown, perform the two steps described
+below:
 
 #### Enable `passthrough` extension
 
