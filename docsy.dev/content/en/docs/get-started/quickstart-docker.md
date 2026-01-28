@@ -1,11 +1,10 @@
-
 ---
-title: "Deploy Docsy inside a Docker container"
-linkTitle: "Deploy Docsy inside a Docker container"
+title: Deploy Docsy inside a Docker container
 weight: 3
 date: 2018-07-30
 description: >
   Instructions on how to setup and run a local Docsy site with Docker.
+cSpell:ignore: docsy
 ---
 
 We provide a Docker image that you can use to run and test your Docsy site
@@ -13,10 +12,10 @@ locally, without having to install all Docsy's dependencies.
 
 ## Install the prerequisites
 
-1. On Mac and Windows, download and install [Docker
-   Desktop](https://www.docker.com/get-started).  On Linux, install [Docker
-   engine](https://docs.docker.com/engine/install/) and [Docker
-   compose](https://docs.docker.com/compose/install/).
+1. On Mac and Windows, download and install
+   [Docker Desktop](https://www.docker.com/get-started). On Linux, install
+   [Docker engine](https://docs.docker.com/engine/install/) and
+   [Docker compose](https://docs.docker.com/compose/install/).
 
    The installation may require you to reboot your computer for the changes to
    take effect.
@@ -25,14 +24,14 @@ locally, without having to install all Docsy's dependencies.
 
 ## Create your repository from the docsy-example template
 
-The docsy-example repository provides a basic site structure that you can use
-as starting point to create your own documentation.
+The docsy-example repository provides a basic site structure that you can use as
+starting point to create your own documentation.
 
-1. Use the [docsy-example template](https://github.com/google/docsy-example)
-   to [create your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
+1. Use the [docsy-example template](https://github.com/google/docsy-example) to
+   [create your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 
-1. Download the code to your local machine by [cloning your newly created
-   repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
+1. Download the code to your local machine by
+   [cloning your newly created repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
 
 1. Change your working directory to the newly created folder:
 
@@ -43,8 +42,8 @@ as starting point to create your own documentation.
 ## Build and run the container
 
 The docsy-example repository includes a
-[Dockerfile](https://docs.docker.com/engine/reference/builder/) that you can
-use to run your site.
+[Dockerfile](https://docs.docker.com/engine/reference/builder/) that you can use
+to run your site.
 
 1. Build the docker image:
 
@@ -76,6 +75,7 @@ To cleanup your system and delete the container image follow the next steps.
 
 ## What's next?
 
-* Learn about [basic setup and configurations for Docsy](/docs/get-started/basic-configuration/).
-* [Add content and customize your site](/docs/content/)
-* [Publish your site](/docs/deployment/).
+- Learn about
+  [basic setup and configurations for Docsy](/docs/get-started/basic-configuration/).
+- [Add content and customize your site](/docs/content/)
+- [Publish your site](/docs/deployment/).
