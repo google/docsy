@@ -1,5 +1,5 @@
 .td-navbar {
-  // Illustrate translucent background for regular pages (without blocks/cover)
+  // Illustrates translucent background for regular pages (without blocks/cover)
   @include media-breakpoint-up(md) {
     --td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), 0.85);
     --td-navbar-backdrop-filter: blur(8px);
@@ -19,14 +19,7 @@
     // Make search box border more visible
     --bs-border-color: #{$gray-500};
 
-    .nav-link {
-      @at-root .td-home & {
-        // On home page use more visible active color for all links
-        // --bs-nav-link-color: var(--bs-navbar-active-color) !important;
-      }
-    }
-
-    // Illustrate tinted transparent background color on desktop:
+    // Illustrates tinted transparent background color on desktop:
     @include media-breakpoint-up(md) {
       &.td-navbar-transparent {
         $rgba-primary: rgba($primary-darker, 0.65);
