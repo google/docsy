@@ -1,3 +1,10 @@
+# Alert labels
+caution: Forsiktig
+important: Viktig
+note: Merknad
+tip: Tips
+warning: Advarsel
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Forrige
 ui_pager_next: Neste
@@ -6,6 +13,9 @@ ui_search: Søk på nettstedet…
 
 # Used in sentences such as "Posted in News"
 ui_in: i
+
+# Used in sentences such as "All Tags"
+ui_all: alle
 
 # Footer text
 footer_all_rights_reserved: Alle rettigheter er reservert
@@ -49,3 +59,13 @@ community_how_to: >-
   Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i vår
 community_guideline: >-
   Retningslinjer for bidrag
+
+# Feedback
+feedback_title: Tilbakemelding
+feedback_question: Var denne siden nyttig?
+feedback_positive: Ja
+feedback_negative: Nei
+
+# Table of contents
+toc_on_this_page: På denne siden
+toc_top_of_page: Toppen av siden
