@@ -99,7 +99,7 @@
   .td-offset-anchor:target {
     display: block;
     position: relative;
-    top: -4rem;
+    top: -$td-navbar-min-height;
     visibility: hidden;
   }
 
@@ -107,10 +107,13 @@
   h3[id]::before,
   h4[id]::before,
   h5[id]::before {
+    $td-anchor-offset-delta: 1.5rem;
     display: block;
     content: ' ';
-    margin-top: -5rem;
-    height: 5rem;
+    margin-top: calc(
+      -1 * #{$td-navbar-min-height} - #{$td-anchor-offset-delta}
+    );
+    height: calc(#{$td-navbar-min-height} + #{$td-anchor-offset-delta});
     visibility: hidden;
   }
 }

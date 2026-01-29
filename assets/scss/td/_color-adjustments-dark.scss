@@ -8,24 +8,42 @@
 // Usage: @import 'td/color-adjustments-dark'; // in client _styles_project.scss
 // =============================================================================
 
+// The following value makes sense for the Bootstrap base theme. Projects will
+// likely need to adjust this.
+$lighten-amount-for-dark-color-variant: 22% !default;
+$secondary-lighter: lighten($secondary, 30%) !default;
+
+// Make box-shadow color contrast more obvious in dark mode.
+// https://github.com/twbs/bootstrap/issues/39053 reports this issue.
+$box-shadow-alpha-dark: 0.8 !default;
+// Note: for some reason the following SCSS var must be a CSS var.
+$box-shadow-color-rgb-dark: var(--bs-black-rgb) !default;
+
+$primary-darker: shade-color(
+  $primary,
+  $lighten-amount-for-dark-color-variant
+) !default;
+
 @if $enable-dark-mode {
-  // The following value makes sense for the Bootstrap base theme. Projects will
-  // likely need to adjust this.
-  $lighten-amount-for-dark-color-variant: 22% !default;
+  @include color-mode(dark) {
+    $box-shadow-color-rgba-dark: rgba(
+      #{$box-shadow-color-rgb-dark},
+      #{$box-shadow-alpha-dark}
+    ) !default;
 
-  $primary-dark: lighten(
-    $primary,
-    $lighten-amount-for-dark-color-variant
-  ) !default;
-  // $secondary-dark: lighten($secondary, $lighten-amount-for-dark-color-variant) !default;
-  // $success-dark: lighten($success, $lighten-amount-for-dark-color-variant) !default;
-  // $info-dark: lighten($info, $lighten-amount-for-dark-color-variant) !default;
-  // $warning-dark: lighten($warning, $lighten-amount-for-dark-color-variant) !default;
-  // $danger-dark: lighten($danger, $lighten-amount-for-dark-color-variant) !default;
+    // The following is supposed to only tweak the rgba value, but Bootstrap isn't
+    // setup to allow this. So we'll need to ensure that non-rgba values stay in
+    // sync with Bootstraps.
 
-  [data-bs-theme='dark'] {
-    --bs-primary: #{$primary-dark} !important;
-    // --bs-success: #{$success-dark} !important;
+    --bs-box-shadow: 0 0.5rem 1rem #{$box-shadow-color-rgba-dark};
+    --bs-box-shadow-sm: 0 0.125rem 0.25rem #{$box-shadow-color-rgba-dark};
+    --bs-box-shadow-lg: 0 1rem 3rem #{$box-shadow-color-rgba-dark};
+    --bs-box-shadow-inset: inset 0 1px 2px #{$box-shadow-color-rgba-dark};
+
+    // --------------------------------
+
+    --bs-primary: #{$primary-darker} !important;
+    --bs-secondary: #{$secondary-lighter} !important;
   }
 
   // ---------------------------------------------------------------------------
@@ -44,5 +62,5 @@
   // }
 
   // Want to see the var value? Try:
-  // @warn "primary-dark: #{$primary-dark}";
+  // @warn "primary-darker: #{$primary-darker}";
 }

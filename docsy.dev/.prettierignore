@@ -4,6 +4,7 @@
 !/content/en/blog/**/*.*
 !/content/en/docs/_index.md
 !/content/en/docs/content/**/*.*
+!/content/en/docs/examples*
 !/content/en/docs/best-practices/**/*.*
 !/content/en/docs/get-started/**/*.*
 !/content/en/docs/language.md

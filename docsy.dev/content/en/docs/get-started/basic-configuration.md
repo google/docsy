@@ -3,7 +3,6 @@ title: Basic site configuration
 date: 2021-12-08T09:22:27+01:00
 weight: 4
 description: Basic configuration for new Docsy sites.
-cSpell:ignore: Goldydocs
 ---
 
 Site-wide configuration details and parameters are defined in your project's

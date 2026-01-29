@@ -2,7 +2,7 @@
 title: Multi-language Support
 weight: 7
 description: Support multiple languages in your site.
-cSpell:ignore: Goldydocs rtlcss subdir operativsystem skyen Norsk
+cSpell:ignore: rtlcss subdir operativsystem skyen Norsk
 ---
 
 If you'd like to provide site content in multiple languages, the Docsy theme and

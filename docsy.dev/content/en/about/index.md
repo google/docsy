@@ -2,8 +2,6 @@
 title: About Docsy
 linkTitle: About
 menu: {main: {weight: 10}}
-params:
-  ui: { navbar_theme: dark}
 ---
 
 {{% blocks/cover title="About Docsy" height="auto" %}}
