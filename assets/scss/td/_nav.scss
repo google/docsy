@@ -2,12 +2,24 @@
 // Main navbar
 //
 
-$td-navbar-bg-color: var(--bs-body-bg) !default;
+$td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !default;
+$td-navbar-min-height: 4rem !default;
+
+// Should match Bootstrap's $link-underline-offset, see
+// https://getbootstrap.com/docs/5.3/utilities/link/#sass-utilities-api
+$td-link-underline-offsets: (
+  1: 0.125em,
+  2: 0.25em,
+  3: 0.375em,
+  4: 0.5em,
+) !default;
 
 .td-navbar {
   @extend .navbar;
   @extend .navbar-expand;
 
+  --bs-bg-opacity: 1;
+  --bs-link-underline-opacity: 0.75;
   --td-navbar-bg-color: #{$td-navbar-bg-color};
   --td-navbar-backdrop-filter: none;
   --td-navbar-border-bottom: 1px solid var(--bs-border-color);
@@ -20,21 +32,27 @@ $td-navbar-bg-color: var(--bs-body-bg) !default;
   backdrop-filter: var(--td-navbar-backdrop-filter);
   border-bottom: var(--td-navbar-border-bottom);
 
-  min-height: 4rem;
+  min-height: $td-navbar-min-height;
   margin: 0;
   z-index: 32;
 
   .navbar-brand {
-    text-transform: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &__logo {
+      display: flex;
+      align-items: center;
+    }
 
     &__name {
-      font-weight: $font-weight-bold;
+      font-weight: $font-weight-semibold;
     }
 
     svg {
-      display: inline-block;
-      margin: 0 10px;
-      height: 30px;
+      height: 2rem;
+      // width: auto;
     }
   }
 
@@ -43,8 +61,20 @@ $td-navbar-bg-color: var(--bs-body-bg) !default;
   }
 
   .nav-link {
-    text-transform: none;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-semibold;
+
+    &:focus,
+    // Bootstrap sets .nav-link:focus-visible, but in a way that isn't
+    // compatible with dark mode. This is a known issue, see
+    // https://github.com/twbs/bootstrap/issues/37549:
+    //
+    // > Docs navbar blue focus visible is almost invisible!
+    //
+    // Fallback to browser default:
+    &:focus-visible {
+      outline: revert;
+      box-shadow: none;
+    }
   }
 
   // For .td-search__input styling, see _search.scss
@@ -64,6 +94,21 @@ $td-navbar-bg-color: var(--bs-body-bg) !default;
   }
 
   @import '_navbar-mobile-scroll';
+
+  &.td-navbar-cover {
+    transition:
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      border-bottom 0.3s ease;
+
+    &.td-navbar-transparent {
+      @include media-breakpoint-up(md) {
+        --bs-bg-opacity: 0.75;
+        --td-navbar-backdrop-filter: blur(8px);
+        --td-navbar-border-bottom: none;
+      }
+    }
+  }
 
   .td-light-dark-menu {
     position: unset !important;
@@ -131,17 +176,20 @@ $td-navbar-bg-color: var(--bs-body-bg) !default;
   }
 }
 
-.td-navbar-cover {
-  transition:
-    background-color 0.3s ease,
-    backdrop-filter 0.3s ease,
-    border-bottom 0.3s ease;
-
-  &.td-navbar-transparent {
-    @include media-breakpoint-up(md) {
-      --td-navbar-bg-color: transparent;
-      --td-navbar-backdrop-filter: blur(8px);
-      --td-navbar-border-bottom: none;
+@if $enable-dark-mode {
+  @include color-mode(dark) {
+    // Better contrast for dark homepage navbar links
+    &.td-navbar-cover {
+      .nav-link {
+        @at-root .td-home & {
+          // The homepage is the only page that does not have any navbar items
+          // that are active, because the user isn't viewing a page in any other
+          // section. Make nav-links more contrasted by setting all entries (which
+          // happen to be non-active) to the active color.
+          --bs-nav-link-color: var(--bs-navbar-active-color) !important;
+          --bs-nav-link-hover-color: var(--bs-navbar-active-color) !important;
+        }
+      }
     }
   }
 }

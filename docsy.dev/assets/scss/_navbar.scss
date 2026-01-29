@@ -1,14 +1,42 @@
-// For dark navbars, use primary bg color by default (i.e., on mobile)
+.td-navbar {
+  // Illustrate translucent background for regular pages (without blocks/cover)
+  @include media-breakpoint-up(md) {
+    --td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), 0.85);
+    --td-navbar-backdrop-filter: blur(8px);
+  }
+}
+
+// Navbar styling when blocks/cover is use with a dark theme, which in this site,
+// is only done for the homepage.
 @include color-mode(dark) {
   &.td-navbar-cover {
+    // By default (on mobile) use primary bg color:
     --td-navbar-bg-color: #{$primary};
+    --td-navbar-backdrop-filter: blur(8px);
+    // No border. It's more aesthetic esp. when scrolling over
+    // background that is dark or of the primary color
     --td-navbar-border-bottom: none;
+    // Make search box border more visible
+    --bs-border-color: #{$gray-500};
 
-    // Illustration of tinted transparent background color on desktop:
+    .nav-link {
+      @at-root .td-home & {
+        // On home page use more visible active color for all links
+        // --bs-nav-link-color: var(--bs-navbar-active-color) !important;
+      }
+    }
+
+    // Illustrate tinted transparent background color on desktop:
     @include media-breakpoint-up(md) {
       &.td-navbar-transparent {
-        $rgba-primary: rgba($primary, 0.25);
+        $rgba-primary: rgba($primary-darker, 0.65);
         --td-navbar-bg-color: #{$rgba-primary};
+
+        // For the About page, fall back to brighter text color for non-active
+        // links
+        .nav-link {
+          --bs-nav-link-color: initial;
+        }
       }
     }
   }

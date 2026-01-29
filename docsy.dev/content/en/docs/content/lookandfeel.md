@@ -570,12 +570,6 @@ For example, to set the navbar background color to the primary color:
 $td-navbar-bg-color: $primary;
 ```
 
-To set the navbar background color to a slightly translucent primary color use:
-
-```scss
-$td-navbar-bg-color: rgba($primary, 0.15);
-```
-
 > [!NOTE]- CSS variable implementation details
 >
 > Docsy uses the following CSS custom properties **internally** to style the
@@ -583,6 +577,23 @@ $td-navbar-bg-color: rgba($primary, 0.15);
 > `--td-navbar-border-bottom`. These can be overridden for advanced
 > customization. For an example, see the User Guide's [project
 > styles][ug-project-styles]. For the base styles, see [_nav.scss].
+
+To set the navbar background color to a slightly translucent primary color use:
+
+```scss
+$td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), 0.85);
+```
+
+To also blur the background requires some this more advanced styling:
+
+```scss
+.td-navbar {
+  --td-navbar-bg-color: #{$td-navbar-bg-color};
+  --td-navbar-backdrop-filter: blur(8px);
+}
+```
+
+For more examples, see the User Guide's [project styles][ug-project-styles].
 
 [ug-project-styles]:
   https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss

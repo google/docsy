@@ -1,19 +1,22 @@
-//
-// Color tuning for the Docsy website
-//
+// Docsy website styles
 
+// Docsy theme opt-in style imports:
 @import 'td/color-adjustments-dark';
 @import 'td/code-dark';
+@import 'td/extra';
 @import 'td/gcs-search-dark';
+
+// Custom Docsy website styles below this point:
 @import 'blog';
 @import 'navbar';
 
-// Add a border between the footer and page content for pages with dark content
-// in general (like the homepage), or in dark mode.
-.td-home,
-.td-section,
-.td-page {
-  .td-footer {
-    border-top: 1px solid var(--bs-border-color);
+// To keep the `td/extra` color adjustments, while dropping the text-decoration,
+// use the following class (on your body element), or copy the class styles to
+// your project's style file. This class isn't used, it's just an example.
+._td-navbar-no-decoration {
+  .td-navbar {
+    .nav-link {
+      text-decoration: none !important;
+    }
   }
 }

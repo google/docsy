@@ -1,19 +1,24 @@
 ---
 title: Git repository information
-linkTitle: Git repo
+linkTitle: Git repos
 cSpell:ignore: docsy hotfixes
 ---
 
 ## Monorepo
 
-The Docsy repository is effectively a **monorepo** containing the Docsy:
+The [main Docsy repository][] is effectively a **monorepo** containing the
+Docsy:
 
 - **Theme** at the repo root
-- **Website** in the `docsy.dev` directory
+- **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
+  course, with extra styling.
+
+The main Docsy example site is [Goldydocs], located in the [Docsy example site
+repository][].
 
 ## Branch model
 
-The repo has two main branches:
+Both the Docsy and Goldydocs repositories use the same branch model:
 
 - `main`: development branch
   - All feature work and doc updates land here first.
@@ -57,3 +62,7 @@ Invariant: `release` should converge back to `main` ASAP.
 - Allows website production deploys on release commits (and a rare hotfix).
 - Keeps `main` free for ongoing theme + site development.
 - Maintains clear, immutable release points for theme consumers via tags.
+
+[Goldydocs]: <{{% param example_site_url %}}>
+[Docsy example site repository]: <{{% param github_repo %}}-example>
+[main Docsy repository]: <{{% param github_repo %}}>
