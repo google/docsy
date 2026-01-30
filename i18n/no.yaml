@@ -56,7 +56,7 @@ community_contribute: >-
   Dersom du vil involvere deg mer ved å bidra til {{ .Site.Title }}, bli med oss
   her:
 community_how_to: >-
-  Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i vår
+  Du kan finne ut hvordan du bidrar til {{ .Site.Title }} i våre
 community_guideline: >-
   Retningslinjer for bidrag
 
