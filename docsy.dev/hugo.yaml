@@ -1,3 +1,5 @@
+# cSpell:ignore docsy github goldmark markmap plantuml readingtime
+#
 # baseURL moved to be after params
 title: Docsy
 theme: [docsy]
@@ -166,6 +168,8 @@ module:
     extended: true
     min: *hugoMinVersion
   mounts:
+    # If our mock language (xx) had any content we'd configure this
+    # differently, but for now, this will do.
     - source: content/en
       target: content
       # English content for both en, and as fallback for xx sites
@@ -184,10 +188,3 @@ module:
       sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
-    # Placeholder language used to demo multilingual support
-    - source: content/en
-      target: content
-      sites:
-        matrix:
-          languages: ['xx']
-# cSpell:ignore docsy github goldmark markmap plantuml readingtime
