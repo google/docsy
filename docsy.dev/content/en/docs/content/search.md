@@ -371,7 +371,7 @@ If you want to limit the width, add the following scss into
 ### Excluding pages from local search results
 
 To exclude pages from local search results, add `exclude_search: true` to the
-the frontmatter of each page:
+the front matter of each page:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
