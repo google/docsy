@@ -10,8 +10,8 @@
 {{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
 
 {{/* Determine sidebar root and ID (if enabled) */ -}}
-{{ $sidebarRoot := .FirstSection -}}
 {{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
+{{ $sidebarRoot := $navRoot -}}
 {{ if .Site.Params.ui.sidebar_root_enabled -}}
   {{ if and .IsSection (eq .Params.sidebar_root_for "self") -}}
     {{ $sidebarRoot = . -}}
