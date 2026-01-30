@@ -1,0 +1,39 @@
+// Navbar styles: use underline decoration for active and hover nav-link states.
+
+.td-navbar {
+  .nav-link {
+    &.active,
+    &:hover {
+      text-decoration: $link-decoration;
+      text-decoration-color: rgba(
+        var(--bs-primary-rgb),
+        var(--bs-link-underline-opacity)
+      ) !important;
+      text-decoration-thickness: 3px;
+      text-underline-offset: map-get($td-link-underline-offsets, 3);
+    }
+
+    &:hover {
+      text-decoration-color: rgba(
+        var(--bs-secondary-rgb),
+        var(--bs-link-underline-opacity)
+      ) !important;
+      text-underline-offset: map-get($td-link-underline-offsets, 4);
+    }
+  }
+
+  &.td-navbar-cover {
+    transition:
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      border-bottom 0.3s ease;
+
+    &.td-navbar-transparent {
+      @include media-breakpoint-up(md) {
+        --bs-bg-opacity: 0.75;
+        --td-navbar-backdrop-filter: blur(8px);
+        --td-navbar-border-bottom: none;
+      }
+    }
+  }
+}

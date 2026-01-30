@@ -17,12 +17,13 @@
 @import '../variables_project_after_bs';
 
 @import 'support/utilities';
-@import 'colors';
-@import 'table';
-@import 'boxes';
 @import 'blog';
+@import 'boxes';
 @import 'code';
+@import 'colors';
+@import 'footer';
 @import 'nav';
+@import 'table';
 @import 'sidebar-tree';
 @import 'sidebar-toc';
 @import 'breadcrumb';
@@ -43,63 +44,12 @@
   @import url($td-web-font-path);
 }
 
-.td-footer {
-  @extend .td-box--dark;
-
-  min-height: 150px;
-  padding-top: map-get($spacers, 5);
-
-  @include media-breakpoint-down(lg) {
-    min-height: 200px;
-  }
-
-  /* &__left { } */
-
-  &__center {
-    @extend .small;
-    text-align: center;
-  }
-
-  &__right {
-    text-align: right;
-  }
-
-  &__about {
-    font-size: initial;
-  }
-
-  &__links {
-    &-list {
-      @extend .list-inline;
-      margin-bottom: 0;
-    }
-
-    &-item {
-      @extend .list-inline-item;
-      @include font-size(map-get($font-sizes, 4));
-
-      a {
-        color: inherit !important;
-      }
-    }
-  }
-
-  &__authors,
-  &__all_rights_reserved {
-    padding-left: map-get($spacers, 1);
-  }
-
-  &__all_rights_reserved {
-    display: none;
-  }
-}
-
 // Adjust anchors vs the fixed menu.
 @include media-breakpoint-up(md) {
   .td-offset-anchor:target {
     display: block;
     position: relative;
-    top: -4rem;
+    top: -$td-navbar-min-height;
     visibility: hidden;
   }
 
@@ -107,10 +57,13 @@
   h3[id]::before,
   h4[id]::before,
   h5[id]::before {
+    $td-anchor-offset-delta: 1.5rem;
     display: block;
     content: ' ';
-    margin-top: -5rem;
-    height: 5rem;
+    margin-top: calc(
+      -1 * #{$td-navbar-min-height} - #{$td-anchor-offset-delta}
+    );
+    height: calc(#{$td-navbar-min-height} + #{$td-anchor-offset-delta});
     visibility: hidden;
   }
 }

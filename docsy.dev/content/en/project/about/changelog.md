@@ -52,23 +52,48 @@ See [semver].
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
-## v0.14.0 or v0.13.1 {#v0.14.0}
+## v0.14.0 {#v0.14.0}
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.X.Y] release page.
+For the full list of changes, see the [0.14.0] release page.
 
 **Breaking changes**:
 
-- **SCSS namespace**: Moved Docsy's internal SCSS files to `assets/scss/td/` to
-  prevent projects from inadvertently overriding theme files. ([#1654]).
+- **Navbar styling** changed to a light-theme default (previously dark) and is
+  now configurable. See [Navbar style improvements][0.14.0-blog-navbar]
+  ([#2477]).
+- **Swagger UI style customization** [changed][0.14.0-blog-swagger].
+- **Hugo 0.153+ upgrade** introduced some [breaking changes][0.14.0-blog-hugo]
+  ([#2431]).
 
 **New**:
 
+- **[Markdown alert syntax][0.14.0-blog-alerts]**: added support for Hugo's
+  Markdown alert syntax.
+
 **Other changes**:
 
+- Fixed [navbar color contrast (#2413)][#2413] via [#2477]
+- Internal **SCSS file reorganization**: moved internal SCSS files to
+  `assets/scss/td/` ([#1654]) for [improved separation of project and internal
+  SCSS files][0.14.0-blog-scss].
+- **Internationalization**: [updated
+  translations][0.14.0-blog-internationalization] for multiple locales.
+- Fixed nested **`sidebar_root_for`** bug ([#2470]).
+
 [#1654]: https://github.com/google/docsy/issues/1654
-[0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[#2413]: https://github.com/google/docsy/issues/2413
+[#2431]: https://github.com/google/docsy/issues/2431
+[#2470]: https://github.com/google/docsy/pull/2470
+[#2477]: https://github.com/google/docsy/pull/2477
+[0.14.0]: https://github.com/google/docsy/releases/v0.14.0
+[0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
+[0.14.0-blog-hugo]: /blog/2026/0.14.0/#hugo
+[0.14.0-blog-internationalization]: /blog/2026/0.14.0/#internationalization
+[0.14.0-blog-navbar]: /blog/2026/0.14.0/#navbar
+[0.14.0-blog-scss]: /blog/2026/0.14.0/#improved-scss-soc
+[0.14.0-blog-swagger]: /blog/2026/0.14.0/#swagger-scss
 
 ## v0.13.0 {#v0.13.0}
 

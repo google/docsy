@@ -4,18 +4,27 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `4149391` on `main`.
+> Report refreshed for commits through `db32f5b` on `main`.
 
 ## Highlights since v0.13.0
 
 - **Documentation reorganization**: Site documentation section renamed to
   "project" section, with pages moved to About section for better organization.
 - **Internationalization improvements**:
+  - **i18n file format migration**: All translation files converted from TOML to
+    YAML format
   - Bengali localization: Added feedback section and table of contents
-    translations, fixed newline issues
+    translations, fixed newline issues, added alert labels
   - Serbian translations updated (both Cyrillic and Latin variants)
-  - Chinese translations updated (Simplified and Traditional)
+  - Chinese translations updated (Simplified and Traditional), added alert
+    labels
   - German localization completed
+  - Japanese translations: Converted to YAML, added alert labels and
+    all-rights-reserved
+  - Hebrew translations: New locale added with alert and table of contents
+    labels
+  - Ukrainian translations: Converted to YAML format
+  - Alert label translations added across multiple locales
 - **Hugo Markdown-style alert support**: Added support and documentation for
   Hugo's native Markdown-style alert syntax.
 - **Documentation enhancements**:
@@ -28,6 +37,18 @@ cSpell:ignore: docsy
   - Other packages updated
 - **CI/CD improvements**: Netlify configuration moved to docsy.dev subrepo, CI
   cleanup and reorganization.
+- **SCSS namespace work**: SCSS files namespaced and adjustments made for better
+  organization.
+- **Alert improvements**: Support for custom attributes in blockquote alerts,
+  conversion of shortcode alerts to Markdown.
+- **Hugo deprecation fixes**: Addressed Hugo deprecation messages related to
+  mounts.
+- **Tooling updates**: Prettier upgraded, formatting improvements, helper
+  scripts for i18n conversion.
+- **Sidebar root improvements**: Added support for nested `sidebar_root_for`
+  configuration and documentation updates.
+- **Documentation fixes**: Updated Swagger UI customization instructions to
+  reflect correct approach.
 
 ## References
 

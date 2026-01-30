@@ -1,3 +1,5 @@
+# cSpell:ignore docsy github goldmark markmap plantuml readingtime
+#
 # baseURL moved to be after params
 title: Docsy
 theme: [docsy]
@@ -18,15 +20,6 @@ imaging:
   resampleFilter: CatmullRom # cSpell:disable-line
   quality: 75
   anchor: smart
-
-menu:
-  main:
-    - name: Example Site
-      weight: 40
-      url: https://example.docsy.dev
-      post:
-        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
-        aria-hidden="true"></i></sup>
 
 languages:
   en:
@@ -58,7 +51,9 @@ markup:
     noClasses: false # Required for dark-mode
 
 params:
+  hugoMinVersion: &hugoMinVersion 0.155.0
   productionURL: &productionURL https://www.docsy.dev
+  mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
     authors: >-
       Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
@@ -67,10 +62,10 @@ params:
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
   version: 0.14.0-dev
-  url_latest_version: https://example.com
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
+  example_site_url: &exampleSiteURL https://example.docsy.dev
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog] # TODO: drop since this is the default
@@ -145,6 +140,15 @@ params:
 
 baseURL: *productionURL
 
+menu:
+  main:
+    - name: Example Site
+      weight: 40
+      url: *exampleSiteURL
+      post:
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+        aria-hidden="true"></i></sup>
+
 taxonomies:
   tag: tags
   category: categories
@@ -160,28 +164,27 @@ security:
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
 module:
+  hugoVersion:
+    extended: true
+    min: *hugoMinVersion
   mounts:
+    # If our mock language (xx) had any content we'd configure this
+    # differently, but for now, this will do.
     - source: content/en
       target: content
-    # Mount the repo root *.md files
+      # English content for both en, and as fallback for xx sites
+      sites: &sites
+        matrix:
+          languages: [en, xx]
+    # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
+      sites: *sites
     - source: ../README.md
       target: content/project/repo/README.md
+      sites: *sites
     - source: ../CHANGELOG.md
       target: content/project/repo/CHANGELOG.md
+      sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
-    # Placeholder language used to demo multilingual support
-    - source: content/en
-      target: content
-      sites:
-        matrix:
-          languages: ['xx']
-
-mediaTypes:
-  font/woff:
-    suffixes: [woff]
-  font/woff2:
-    suffixes: [woff2]
-# cSpell:ignore docsy github goldmark markmap plantuml readingtime

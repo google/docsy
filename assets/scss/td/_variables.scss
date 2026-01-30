@@ -1,8 +1,5 @@
 // Bootstrap options
 
-$enable-gradients: true !default;
-$enable-shadows: true !default;
-
 :root,
 [data-bs-theme='light'] {
   --td-pre-bg: var(--bs-tertiary-bg);

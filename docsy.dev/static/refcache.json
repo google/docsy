@@ -19,6 +19,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:50.224696-05:00"
   },
+  "https://altersquare.io/dark-mode-vs-light-mode-the-complete-ux-guide-for-2025/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T11:28:02.434125-05:00"
+  },
   "https://analytics.google.com/analytics/web/": {
     "StatusCode": 200,
     "LastSeen": "2025-11-16T12:09:21.158712-05:00"
@@ -743,6 +747,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:40.153493-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T11:36:00.083389-05:00"
+  },
   "https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.355089-05:00"
@@ -770,6 +778,10 @@
   "https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:42.311452-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_partials/navbar.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T11:28:00.611296-05:00"
   },
   "https://github.com/google/docsy/blob/main/layouts/_partials/page-description.html": {
     "StatusCode": 206,
@@ -1083,6 +1095,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T11:57:05.06015-05:00"
   },
+  "https://github.com/google/docsy/issues/2413": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T12:10:06.777719-05:00"
+  },
   "https://github.com/google/docsy/issues/2429": {
     "StatusCode": 206,
     "LastSeen": "2026-01-16T19:09:40.059009-05:00"
@@ -1347,6 +1363,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-23T18:36:01.234519-05:00"
   },
+  "https://github.com/google/docsy/pull/2470": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-25T07:59:41.77875-05:00"
+  },
+  "https://github.com/google/docsy/pull/2477": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T12:10:06.130456-05:00"
+  },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:32:55.725597-05:00"
@@ -1470,6 +1494,10 @@
   "https://github.com/google/docsy/tree/main/README.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.392469-05:00"
+  },
+  "https://github.com/google/docsy/tree/main/assets/scss/td": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-22T07:43:47.467727-05:00"
   },
   "https://github.com/google/docsy/tree/main/docsy.dev": {
     "StatusCode": 206,
@@ -1626,6 +1654,10 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.494962-05:00"
+  },
+  "https://github.com/google/docsy/tree/release": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-25T07:44:35.473205-05:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,
@@ -1926,6 +1958,10 @@
   "https://gohugo.io/content-management/front-matter/#front-matter-cascade": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T19:33:34.695461-05:00"
+  },
+  "https://gohugo.io/content-management/front-matter/#front-matter-parameters": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-26T11:28:03.008807-05:00"
   },
   "https://gohugo.io/content-management/front-matter/#target-specific-pages": {
     "StatusCode": 206,
@@ -2458,6 +2494,14 @@
   "https://v0-6.kubeflow.org/docs/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.192705-05:00"
+  },
+  "https://www.accessibilitychecker.org/blog/dark-mode-accessibility/": {
+    "StatusCode": 200,
+    "LastSeen": "2026-01-26T11:28:00.627399-05:00"
+  },
+  "https://www.accessibilityfirst.at/posts/dark-and-light-mode-a-simple-guide-for-web-design-and-development": {
+    "StatusCode": 200,
+    "LastSeen": "2026-01-26T11:28:02.358179-05:00"
   },
   "https://www.cloudpods.org": {
     "StatusCode": 206,

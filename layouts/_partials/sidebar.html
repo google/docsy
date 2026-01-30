@@ -17,7 +17,7 @@
     {{ $sidebarRoot = . -}}
   {{ else -}}
     {{/* Check ancestors for sidebar_root_for (any value) */ -}}
-    {{ range .Ancestors.Reverse -}}
+    {{ range .Ancestors -}}
       {{ if not .IsSection -}}
         {{ continue -}}
       {{ end -}}

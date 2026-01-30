@@ -5,8 +5,6 @@ aliases: [../contributing]
 cSpell:ignore: chalin docsy hugo
 ---
 
-# How to Contribute
-
 We'd love to accept your patches and contributions to this project. There are
 just a few small guidelines you need to follow.
 
@@ -214,7 +212,7 @@ actions before any further changes are merged into the default branch:
    - **Pin the {{% param version %}} release URL**, which ends with
      `latest?FIXME=...`, to the {{% param version %}} release at:
 
-     <https://github.com/google/docsy/releases/v{{% param version %}}>
+     <{{% param github_repo %}}/releases/v{{% param version %}}>
 
 3. **Submit a PR with your changes**, using a title like:
 
@@ -242,3 +240,4 @@ actions before any further changes are merged into the default branch:
 [package.json]: https://github.com/google/docsy/blob/main/package.json
 [docsy.dev/hugo.yaml]:
   https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml
+[release-branch]: https://github.com/google/docsy/tree/release

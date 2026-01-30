@@ -2,6 +2,12 @@
 
 @include td-box-height-modifiers('.td-cover-block');
 
+.td-cover-block {
+  &--height-auto {
+    @include td-main-height-auto;
+  }
+}
+
 .td-cover-logo {
   margin-right: 0.5em;
 }

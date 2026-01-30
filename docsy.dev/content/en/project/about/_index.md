@@ -1,8 +1,9 @@
 ---
 title: About the project
 linkTitle: About
-description: High-level information about the project, including its
-  purpose, ownership, and overall status.
+description:
+  High-level information about the project, including its purpose, ownership,
+  and overall status.
 weight: 10
 ---
 

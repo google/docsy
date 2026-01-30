@@ -2,7 +2,7 @@
 /* Generated using: hugo gen chromastyles --style=tango */
 
 /* Background */ .bg { background-color:#f8f8f8; }
-/* PreWrapper */ .chroma { background-color:#f8f8f8; }
+/* PreWrapper */ .chroma { background-color:#f8f8f8;-webkit-text-size-adjust:none; }
 /* Other */ .chroma .x { color:#000 }
 /* Error */ .chroma .err { color:#a40000 }
 /* LineLink */ .chroma .lnlinks { outline:none;text-decoration:none;color:inherit }

@@ -1,4 +1,22 @@
+// Docsy website styles
+
+// Docsy theme opt-in style imports:
 @import 'td/color-adjustments-dark';
 @import 'td/code-dark';
+@import 'td/extra';
 @import 'td/gcs-search-dark';
-@import 'local/blog';
+
+// Custom Docsy website styles below this point:
+@import 'blog';
+@import 'navbar';
+
+// To keep the `td/extra` color adjustments, while dropping the text-decoration,
+// use the following class (on your body element), or copy the class styles to
+// your project's style file. This class isn't used, it's just an example.
+._td-navbar-no-decoration {
+  .td-navbar {
+    .nav-link {
+      text-decoration: none !important;
+    }
+  }
+}

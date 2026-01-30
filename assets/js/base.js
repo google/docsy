@@ -32,33 +32,23 @@ limitations under the License.
         return element.offset().top + element.outerHeight();
     }
 
-    // Bootstrap Fixed Header
-    $(function() {
-        var promo = $(".js-td-cover");
-        if (!promo.length) {
-            return
-        }
+    // Navbar transparency over cover images
+    $(function () {
+      const promo = $('.js-td-cover');
+      if (!promo.length) return;
+      const navbar = $('.js-navbar-scroll');
+      if (!navbar.length) return;
 
-        var promoOffset = bottomPos(promo);
-        var navbarOffset = $('.js-navbar-scroll').offset().top;
+      const threshold = Math.ceil(navbar.outerHeight());
 
-        var threshold = Math.ceil($('.js-navbar-scroll').outerHeight());
-        if ((promoOffset - navbarOffset) < threshold) {
-            $('.js-navbar-scroll').addClass('navbar-bg-onscroll');
-        }
+      function adjustNavbarTransparency() {
+        const promoOffset = bottomPos(promo);
+        const navbarOffset = navbar.offset().top;
+        navbar.toggleClass('td-navbar-transparent', (promoOffset - navbarOffset) >= threshold);
+      }
 
-
-        $(window).on('scroll', function() {
-            var navtop = $('.js-navbar-scroll').offset().top - $(window).scrollTop();
-            var promoOffset = bottomPos($('.js-td-cover'));
-            var navbarOffset = $('.js-navbar-scroll').offset().top;
-            if ((promoOffset - navbarOffset) < threshold) {
-                $('.js-navbar-scroll').addClass('navbar-bg-onscroll');
-            } else {
-                $('.js-navbar-scroll').removeClass('navbar-bg-onscroll');
-                $('.js-navbar-scroll').addClass('navbar-bg-onscroll--fade');
-            }
-        });
+      adjustNavbarTransparency();
+      $(window).on('scroll', adjustNavbarTransparency);
     });
 
         // Navbar overflow detection with scroll indicators
