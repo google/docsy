@@ -141,11 +141,11 @@ params:
   ui:
     feedback:
       enable: true
-      'yes': >-
+      yes: >-
         Glad to hear it! Please <a
         href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
         can improve</a>.
-      'no': >-
+      no: >-
         Sorry to hear that. Please <a
         href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
         can improve</a>.

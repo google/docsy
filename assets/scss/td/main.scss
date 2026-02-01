@@ -56,7 +56,9 @@
   h2[id]::before,
   h3[id]::before,
   h4[id]::before,
-  h5[id]::before {
+  h5[id]::before,
+  h6[id]::before,
+  .td-offset-anchor::before {
     $td-anchor-offset-delta: 1.5rem;
     display: block;
     content: ' ';

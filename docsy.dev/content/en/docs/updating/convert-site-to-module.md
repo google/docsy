@@ -2,6 +2,7 @@
 title: Migrate to Hugo Modules
 weight: 3
 description: Convert an existing site to use Docsy as a Hugo Module
+cSpell:ignore: docsy findstr batchfile twbs
 ---
 
 ## TL;DR: Conversion for the impatient expert
@@ -113,7 +114,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
   # replacements = "github.com/google/docsy -> ../../docsy"
   [module.hugoVersion]
     extended = true
-    min = "0.73.0"
+    min = {{% param "hugoMinVersion" %}}
   [[module.imports]]
     path = "github.com/google/docsy"
     disable = false
@@ -123,7 +124,7 @@ module:
   proxy: direct
   hugoVersion:
     extended: true
-    min: 0.73.0
+    min: {{% param "hugoMinVersion" %}}
   imports:
     - path: github.com/google/docsy
       disable: false
@@ -136,7 +137,7 @@ module:
     "proxy": "direct",
     "hugoVersion": {
       "extended": true,
-      "min": "0.73.0"
+      "min": {{% param "hugoMinVersion" %}}
     },
     "imports": [
       {

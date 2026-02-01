@@ -9,7 +9,7 @@ author: >
   [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc))
 date: 2023-06-05
 canonical_url: https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/
-cSpell:ignore: CNCF Chalin opentelemetry techdocs
+cSpell:ignore: opentelemetry techdocs
 ---
 
 [Docsy](https://docsy.dev), and Docsy-based project websites ([including those
