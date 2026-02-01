@@ -282,12 +282,12 @@ An example docs-based site that uses this technique can be found at the
 
 ## Page front matter
 
-Each page file in a Hugo site has metadata front matter that tells Hugo about the
-page. You specify page front matter in TOML, YAML, or JSON (our example site and
-this site use YAML). Use the front matter to specify the page title, description,
-creation date, link title, template, menu weighting, and even any resources such
-as images used by the page. You can see a complete list of possible page
-front matter in
+Each page file in a Hugo site has metadata front matter that tells Hugo about
+the page. You specify page front matter in TOML, YAML, or JSON (our example site
+and this site use YAML). Use the front matter to specify the page title,
+description, creation date, link title, template, menu weighting, and even any
+resources such as images used by the page. You can see a complete list of
+possible page front matter in
 [Front Matter](https://gohugo.io/content-management/front-matter/).
 
 For example, here's the front matter for this page:
@@ -327,8 +327,8 @@ description: >
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-The minimum front matter you need to provide is a title: everything else is up to
-you! However, if you leave out the page weight, your
+The minimum front matter you need to provide is a title: everything else is up
+to you! However, if you leave out the page weight, your
 [navigation](/docs/content/navigation) may get a little disorganized. You may
 also want to include `description` since Docsy uses that to generate the meta
 `description` tag used by search engines. See [Search Engine Optimization (SEO)
@@ -536,8 +536,8 @@ weight: 20
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-To display no links at all, specify `no_list: true` in the landing page's
-front matter:
+To display no links at all, specify `no_list: true` in the landing page's front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -612,8 +612,8 @@ weight: 20
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-To add author and date information to blog posts, add them to the page
-front matter:
+To add author and date information to blog posts, add them to the page front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -970,8 +970,8 @@ sitemap:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-To override any of these values for a given page, specify it in page
-front matter:
+To override any of these values for a given page, specify it in page front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
