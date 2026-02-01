@@ -19,7 +19,7 @@ params:
 
     > [!DANGER] Danger Will Robinson!
 # prettier-ignore
-cSpell:ignore: goldmark Riona MacNamara frontmatter asciidoctor pandoc changefreq
+cSpell:ignore: goldmark Riona MacNamara asciidoctor pandoc changefreq
 ---
 
 So you've got a new Hugo website with Docsy, now it's time to add some content!
@@ -86,10 +86,10 @@ If you've copied the example site and _don't_ want to use one of the provided
 content sections, just delete the appropriate content subdirectory. Similarly,
 if you want to add a top-level section, just add a new subdirectory, though
 you'll need to specify the layout or content type explicitly in the
-[frontmatter](#page-frontmatter) of each page if you want to use any existing
+[front matter](#page-front-matter) of each page if you want to use any existing
 Docsy template other than the default one. For example, if you create a new
 directory `content/en/amazing` and want one or more pages in that custom section
-to use Docsy's `docs` template, you add `type: docs` to the frontmatter of each
+to use Docsy's `docs` template, you add `type: docs` to the front matter of each
 page:
 
 <!-- markdownlint-disable -->
@@ -280,17 +280,17 @@ navigation menu.
 An example docs-based site that uses this technique can be found at the
 [mostly docs](https://github.com/gwatts/mostlydocs/) repo.
 
-## Page frontmatter
+## Page front matter
 
-Each page file in a Hugo site has metadata frontmatter that tells Hugo about the
-page. You specify page frontmatter in TOML, YAML, or JSON (our example site and
-this site use YAML). Use the frontmatter to specify the page title, description,
-creation date, link title, template, menu weighting, and even any resources such
-as images used by the page. You can see a complete list of possible page
-frontmatter in
+Each page file in a Hugo site has metadata front matter that tells Hugo about
+the page. You specify page front matter in TOML, YAML, or JSON (our example site
+and this site use YAML). Use the front matter to specify the page title,
+description, creation date, link title, template, menu weighting, and even any
+resources such as images used by the page. You can see a complete list of
+possible page front matter in
 [Front Matter](https://gohugo.io/content-management/front-matter/).
 
-For example, here's the frontmatter for this page:
+For example, here's the front matter for this page:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -327,8 +327,8 @@ description: >
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-The minimum frontmatter you need to provide is a title: everything else is up to
-you! However, if you leave out the page weight, your
+The minimum front matter you need to provide is a title: everything else is up
+to you! However, if you leave out the page weight, your
 [navigation](/docs/content/navigation) may get a little disorganized. You may
 also want to include `description` since Docsy uses that to generate the meta
 `description` tag used by search engines. See [Search Engine Optimization (SEO)
@@ -338,7 +338,7 @@ details.
 ## Page content
 
 Most often you create pages in a Docsy site as [Markdown or HTML files][formats]
-with [page frontmatter](#page-frontmatter). Hugo's default markup and markdown
+with [page front matter](#page-front-matter). Hugo's default markup and markdown
 renderer is [Goldmark].
 
 ### Markdown
@@ -500,12 +500,12 @@ organizing your content with Docsy in
 
 By default a docs section landing page (the `_index.md` or `_index.html` in the
 section directory) uses a layout that adds a formatted list of links to the
-pages in the section, with their frontmatter descriptions. The
+pages in the section, with their front matter descriptions. The
 [Content and Customization](/docs/content/) landing page in this site is a good
 example.
 
 To display a simple bulleted list of links to the section's pages instead,
-specify `simple_list: true` in the landing page's frontmatter:
+specify `simple_list: true` in the landing page's front matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -536,8 +536,8 @@ weight: 20
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-To display no links at all, specify `no_list: true` in the landing page's
-frontmatter:
+To display no links at all, specify `no_list: true` in the landing page's front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -612,8 +612,8 @@ weight: 20
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-To add author and date information to blog posts, add them to the page
-frontmatter:
+To add author and date information to blog posts, add them to the page front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -970,8 +970,8 @@ sitemap:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-To override any of these values for a given page, specify it in page
-frontmatter:
+To override any of these values for a given page, specify it in page front
+matter:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
