@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `db32f5b` on `main`.
+> Report refreshed for commits through `5365d35` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -24,6 +24,7 @@ cSpell:ignore: docsy
   - Hebrew translations: New locale added with alert and table of contents
     labels
   - Ukrainian translations: Converted to YAML format
+  - Norwegian translations: New locale added with UI and alert translations
   - Alert label translations added across multiple locales
 - **Hugo Markdown-style alert support**: Added support and documentation for
   Hugo's native Markdown-style alert syntax.
@@ -33,7 +34,7 @@ cSpell:ignore: docsy
   - Added version badge to documentation
   - Version tracking added to docs landing page
 - **Dependency updates**:
-  - Hugo upgraded to 0.154.5 (from 0.152.2 in 0.13.0)
+  - Hugo upgraded to 0.155.0 (from 0.152.2 in 0.13.0)
   - Other packages updated
 - **CI/CD improvements**: Netlify configuration moved to docsy.dev subrepo, CI
   cleanup and reorganization.
@@ -49,6 +50,15 @@ cSpell:ignore: docsy
   configuration and documentation updates.
 - **Documentation fixes**: Updated Swagger UI customization instructions to
   reflect correct approach.
+- **SCSS refactoring**: Major refactoring of navbar, footer, and layout SCSS for
+  better maintainability and organization.
+- **Documentation clarifications**: Reformatted and clarified "Get Started"
+  pages for better user experience.
+- **Configuration improvements**: Hugo config cleanup, sites.matrix support,
+  KaTeX configuration enhancements.
+- **blocks/cover shortcode refactoring**: Removed pre-Hugo-0.54.x compatibility
+  code (breaking change - content processing now relies on Hugo's native
+  shortcode delimiter behavior) ([#939], [#2480]).
 
 ## References
 

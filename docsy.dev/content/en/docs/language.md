@@ -164,11 +164,11 @@ for the given language. For details, see
 ## Internationalization bundles
 
 All UI strings (text for buttons, repository links, etc.) are bundled inside
-`/i18n` in the theme, with a `.toml` file for each language.
+`/i18n` in the theme, with a `.yaml` file for each language.
 
 If your chosen language isn't currently in the theme and you create your own
-`.toml` file for all the common UI strings (for example, if you translate the UI
-text into Esperanto and create a copy of `en.toml` called `eo.toml`), we
+`.yaml` file for all the common UI strings (for example, if you translate the UI
+text into Esperanto and create a copy of `en.yaml` called `eo.yaml`), we
 recommend you do this **in the theme** rather than in your own project. You can
 then open a
 [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
@@ -185,8 +185,8 @@ If any of the Docsy theme UI strings in your chosen language aren't suitable for
 your project, or if you need additional strings for your site, you can create
 your own project-specific internationalization file in your project's `/i18n`
 directory. For example, if you want to override any of Docsy's
-[English-language strings](https://github.com/google/docsy/blob/main/i18n/en.toml),
-create your own `/i18n/en.toml` with just your custom strings. Any values you
+[English-language strings](https://github.com/google/docsy/blob/main/i18n/en.yaml),
+create your own `/i18n/en.yaml` with just your custom strings. Any values you
 specify in this file will override the theme versions, while the remaining
 strings will come from the theme's corresponding internationalization bundle.
 

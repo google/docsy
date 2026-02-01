@@ -1,7 +1,7 @@
 ---
 title: Other setup options
 description: Create a new Docsy site with Docsy using Git or NPM
-date: 2021-12-08T09:22:27+01:00
+date: 2021-12-08
 cSpell:ignore: docsy gohugo hugo myproject pushd popd
 weight: 2
 ---
@@ -37,9 +37,10 @@ prerequisites.
 
 You need a
 [recent **extended** version](https://github.com/gohugoio/hugo/releases) (we
-recommend version 0.73.0 or later) of [Hugo](https://gohugo.io/) to do local
-builds and previews of sites (like this one) that use Docsy. If you install from
-the release page, make sure to get the `extended` Hugo version, which supports
+recommend version {{% param "hugoMinVersion" %}} or later) of
+[Hugo](https://gohugo.io/) to do local builds and previews of sites (like this
+one) that use Docsy. If you install from the release page, make sure to get the
+`extended` Hugo version, which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
@@ -57,16 +58,16 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is `v0.73` or earlier, or if you don't see `Extended`, you'll need
-to install the latest version. You can see a complete list of Linux installation
-options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux).
-The following shows you how to install Hugo from the release page:
+If the result is {{% param "hugoMinVersion" %}} or earlier, or if you don't see
+`Extended`, you'll need to install the latest version. You can see a complete
+list of Linux installation options in
+[Install Hugo](https://gohugo.io/getting-started/installing/#linux). The
+following shows you how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
-3.  Download the latest extended version
-    (`hugo_extended_0.9X_Linux-64bit.tar.gz`).
+3.  Download the latest extended version.
 4.  Create a new directory:
 
     ```sh
@@ -183,8 +184,8 @@ your project's root directory:
     > [!TIP]
     >
     > As of Hugo 0.110.0, the default config base filename was changed to
-    > `hugo.*` from `config.*`. If you are using hugo 0.110 or above, consider
-    > renaming your `config.*` to `hugo.*`.
+    > `hugo.*` from `config.*`. If you are using hugo 0.110+, consider renaming
+    > your `config.*` to `hugo.*`.
 
 3.  Get Docsy dependencies:
 

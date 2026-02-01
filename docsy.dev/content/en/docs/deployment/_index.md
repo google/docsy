@@ -147,7 +147,7 @@ Before deploying on GitHub Pages, make sure that you've pushed your site source 
              - name: Setup Hugo
                uses: peaceiris/actions-hugo@v3
                with:
-                 hugo-version: '0.125.5'
+                 hugo-version: {{% param "hugoMinVersion" %}}
                  extended: true
 
              - name: Setup Node
