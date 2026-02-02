@@ -1,0 +1,18 @@
+// Browser scroll padding
+
+html,
+body {
+  --td-anchor-offset-delta: 1.5rem;
+  --td-scroll-padding-top: calc(
+    #{$td-navbar-min-height} + var(--td-anchor-offset-delta)
+  );
+
+  // Small viewports where the navbar is not fixed,
+  // we still want a bit of padding:
+  scroll-padding-top: var(--td-anchor-offset-delta);
+
+  // Wide viewports where the navbar is fixed.
+  @include media-breakpoint-up(md) {
+    scroll-padding-top: var(--td-scroll-padding-top);
+  }
+}

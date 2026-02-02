@@ -9,7 +9,7 @@ params:
     light/dark mode menu <span class='badge text-bg-warning fs-6
     float-end'>EXPERIMENTAL</span>
 # prettier-ignore
-cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark rgba wordmark FOUC
+cSpell:ignore: anotherclass autoprefixing baseof docsy lightdark monokai myclass onedark rgba wordmark FOUC
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -305,11 +305,11 @@ dark mode theme customization file and import it in your project's
 
 > [!NOTE]
 >
-> Light/dark color themes, only affect documentation pages, and white [blocks
-> shortcodes][blocks]. Other block shortcodes with fixed text and background
-> colors are not affected by light/dark color mode changes.
+> Light/dark color themes, only affect documentation pages, and white
+> [`blocks/*` shortcodes][blocks]. Other block shortcodes with fixed text and
+> background colors are not affected by light/dark color mode changes.
 >
-> [blocks]: shortcodes/#shortcode-blocks
+> [blocks]: shortcodes/#blocks
 
 [Generate syntax highlighter CSS]:
   https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
@@ -568,7 +568,7 @@ user has scrolled past the cover (hero image), the navbar reverts to its default
 (opaque) style.
 
 [About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/content/shortcodes/#blockscover
+[blocks/cover]: /docs/content/shortcodes/#blocks-cover
 
 ### Customizing the navbar {#navbar-customization}
 
