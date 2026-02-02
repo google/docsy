@@ -736,11 +736,55 @@ Your projects can also reuse (in your own custom heading render hook) or
 override the heading self-link partial `td/heading-self-link.html`, which is
 defined in [layouts/_partials/td/render-heading.html].
 
+## Heading aliases and in-page targets <a id="a-heading-aliases"></a> {#heading-aliases}
+
+By default, [heading IDs are auto-generated][] from heading text unless you set
+an explicit ID. If you change the text or explicit ID, the heading ID changes
+and existing [fragment] links to the heading will break. Treat a heading ID
+change like a page move: keep old fragments working with a heading ID alias.
+
+To create a heading ID alias:
+
+- Add an empty anchor element with the old ID to the heading.
+- Add the new heading ID using the `{#some-id}` [Markdown attributes] syntax.
+
+For example, if you rename "Getting Started" to "Quickstart":
+
+```html
+## Quickstart <a id="getting-started"></a> {#quickstart}
+```
+
+Now both `#getting-started` and `#quickstart` target the same heading and scroll
+to the right place.
+
+Give the heading alias for this section a try:
+[Heading aliases](#a-heading-aliases).[^might-not-scroll]
+
+> [!TIP] In-page targets <a id="in-page-targets-tip"></a>
+>
+> Anchor elements with IDs can be used to define in-page targets as well. For
+> example, you can link to this [in-page targets](#in-page-targets-tip)
+> tip.[^might-not-scroll]
+
+<!-- markdownlint-disable no-blanks-blockquote -->
+
+> [!IMPORTANT]
+>
+> Use an empty `<a id="..."></a>` for target IDs. Avoid `<span>` targets, as
+> they can be unreliable in some browsers.
+
+[^might-not-scroll]:
+    If the target is already visible, the page might not scroll.
+
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
+[fragment]: https://gohugo.io/quick-reference/glossary/#fragment
+[heading IDs are auto-generated]:
+  https://gohugo.io/configuration/markup/#parserautoheadingid
+[hook]: https://gohugo.io/templates/render-hooks/
 [layouts/_partials/td/render-heading.html]:
   https://github.com/google/docsy/tree/main/layouts/_partials/td/render-heading.html
-[hook]: https://gohugo.io/templates/render-hooks/
+[Markdown attributes]: https://gohugo.io/content-management/markdown-attributes/
 [menu]: https://gohugo.io/content-management/menus/
 [menus]: https://gohugo.io/content-management/menus/
 [Multi-language support]: /docs/language/

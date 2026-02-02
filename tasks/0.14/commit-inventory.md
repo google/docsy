@@ -1,10 +1,10 @@
 ---
 title: 0.14 commit inventory
 date: 2026-01-16
-cSpell:ignore: docsy
+cSpell:ignore: docsy frontmatter subrepo
 ---
 
-> Report refreshed for commits through `5365d35` on `main`.
+> Report refreshed for commits through `3753ff78` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -13,98 +13,112 @@ client projects.
 
 ## Features & fixes
 
-- `69d4d6c` (`#2415`) Update changelog anchors, release process docs, and vers
-  to 0.13.1-dev
-- `5fd8175` (`#2427`) docsy.dev: set to_year to "present", and shortcode cleanup
-- `b7f7335` (`#2428`) Update all packages other than Hugo
-- `9334955` (`#2430`) Upgrade Hugo to 0.154.3
-- `b52c265` (`#2432`) Update Hugo to 0.154.5
-- `53d4393` (`#2434`) Update alias format in get started page so it works as a
+- `69d4d6c` (#2415) Update changelog anchors, release process docs, and vers to
+  0.13.1-dev
+- `5fd8175` (#2427) docsy.dev: set to_year to "present", and shortcode cleanup
+- `b7f7335` (#2428) Update all packages other than Hugo
+- `9334955` (#2430) Upgrade Hugo to 0.154.3
+- `b52c265` (#2432) Update Hugo to 0.154.5
+- `53d4393` (#2434) Update alias format in get started page so it works as a
   fallback too
-- `bf9f559` (`#2435`) chore: complete German localization
-- `8607ceb` i18n: zh_cn and zh_tw
-- `48f9c75` Update Serbian (Cyrillic & Latin)
-- `13ba7b2` Add author for Serbian translations
-- `02479b2` Add feedback section and table of contents to Bengali localization
-- `9cca91a` Update feedback section translations in Bengali localization
-- `1465641` Fix newline issue in Bengali localization for table of contents
-- `73a7b3f` Add Hugo Markdown-style alert support and docs
-- `68cb0e7` Add docs version as a badge
-- `884d714` Add version to docs landing page, bump version to 0.14.0-dev
-- `62d4aac` Add site build info and build documentation
-- `4a11ed0` Add AGENTS.md
-- `e1bb622` chore: Rename 'site' docs section to 'project' and update links
-- `113cc39` Move pages to About section
-- `8a2528f` Update links
-- `a1075cf` Migrate i18n files from TOML to YAML and add conversion scripts
-- `a989a32` Fix left sidebar height
-- `29bc71f` Add support for custom attributes in blockquote alerts
-- `c9f4299` Add alert label translations to i18n files
-- `3396c03` Convert i18n/uk.toml to .yaml
-- `ec122d8` Delete i18n/uk.toml since we have a .yaml format now
-- `f81406a` Convert most shortcode alerts to markdown, and more
-- `a600e53` Convert Bengali translations from TOML to YAML
-- `95c6a2d` Add Bengali translations for alert labels
-- `d2a63db` Address Hugo deprecation msg related to mounts
-- `93fe8ba` Convert Chinese i18n files from TOML to YAML
-- `81613ae` Convert Japanese translations from TOML to YAML
-- `23fea73` Add alert labels and all-rights-reserved in Japanese
-- `1a25ddf` Update i18n/ja.yaml
-- `6cbe364` Add alert label translations for zh-cn and zh-tw
-- `9dab6fe` zh-cn, use `note: 说明`
-- `e79719f` Create he.toml
-- `731531a` Update i18n/he.toml
-- `f4526dc` Update i18n/he.toml
-- `0d7d78d` Convert Hebrew translation file to YAML
-- `ebc264e` Add alert and table of contents labels to Hebrew i18n
-- `791a707` Convert all remaining i18n files to YAML, add helper scripts
-- `1dfd1a0` Format
-- `08a9569` Upgrade Prettier
-- `83db5b9` Format
-- `08fe966` Add CI/CD info about Prettier and i18n directory
-- `ef0e8b8` Update compare-i18n-toml-yaml.pl
-- `93322ff` Fix comment across locales
-- `199468a` Create scss-namespace.plan.md
-- `1e093f3` Namespace SCSS files, and make adjustments
-- `1560cec` Update refresh-sass-variables.pl
-- `7bcae61` Don't format \_variables_forward.scss
-- `b3cb2a7` Update Swagger UI customization instructions
-- `6f8f85a` Add nested `sidebar_root_for` to docs
-- `11bc51a` bugfix: nested sidebar_root_for
-- `bf7c497f` Update 0.14.0 release notes and changelog details
-- `4f855a02` Refactor blocks/cover and pageinfo shortcodes
-- `61282a64` (`#2465`) KaTeX use: move media type declaration to theme's config
+- `bf9f559` (#2435) chore: complete German localization
+- `8607ceb` (#2419) i18n: zh_cn and zh_tw
+- `48f9c75` (#2425) Update Serbian (Cyrillic & Latin)
+- `13ba7b2` (#2425) Add author for Serbian translations
+- `02479b2` (#2416) Add feedback section and table of contents to Bengali
+  localization
+- `9cca91a` (#2416) Update feedback section translations in Bengali localization
+- `1465641` (#2416) Fix newline issue in Bengali localization for table of
+  contents
+- `73a7b3f` (#2443) Add Hugo Markdown-style alert support and docs
+- `68cb0e7` (#2442) Add docs version as a badge
+- `884d714` (#2441) Add version to docs landing page, bump version to 0.14.0-dev
+- `62d4aac` (#2444) Add site build info and build documentation
+- `4a11ed0` (#2446) Add AGENTS.md
+- `e1bb622` (#2445) chore: Rename 'site' docs section to 'project' and update
+  links
+- `113cc39` (#2446) Move pages to About section
+- `8a2528f` (#2446) Update links
+- `a1075cf` (#2447) Migrate i18n files from TOML to YAML and add conversion
+  scripts
+- `a989a32` (#2453) Fix left sidebar height
+- `29bc71f` (#2452) Add support for custom attributes in blockquote alerts
+- `c9f4299` (#2450) Add alert label translations to i18n files
+- `3396c03` (#2454) Convert i18n/uk.toml to .yaml
+- `ec122d8` (#2455) Delete i18n/uk.toml since we have a .yaml format now
+- `f81406a` (#2457) Convert most shortcode alerts to markdown, and more
+- `a600e53` (#2458) Convert Bengali translations from TOML to YAML
+- `95c6a2d` (#2459) Add Bengali translations for alert labels
+- `d2a63db` (#2460) Address Hugo deprecation msg related to mounts
+- `93fe8ba` (#2461) Convert Chinese i18n files from TOML to YAML
+- `81613ae` (#2463) Convert Japanese translations from TOML to YAML
+- `23fea73` (#2464) Add alert labels and all-rights-reserved in Japanese
+- `1a25ddf` (#2464) Update i18n/ja.yaml
+- `6cbe364` (#2462) Add alert label translations for zh-cn and zh-tw
+- `9dab6fe` (#2462) zh-cn, use `note: 说明`
+- `e79719f` (#2272) Create he.toml
+- `731531a` (#2272) Update i18n/he.toml
+- `f4526dc` (#2272) Update i18n/he.toml
+- `0d7d78d` (#2466) Convert Hebrew translation file to YAML
+- `ebc264e` (#2467) Add alert and table of contents labels to Hebrew i18n
+- `791a707` (#2468) Convert all remaining i18n files to YAML, add helper scripts
+- `1dfd1a0` (#2468) Format
+- `08a9569` (#2468) Upgrade Prettier
+- `83db5b9` (#2468) Format
+- `08fe966` (#2468) Add CI/CD info about Prettier and i18n directory
+- `ef0e8b8` (#2468) Update compare-i18n-toml-yaml.pl
+- `93322ff` (#2468) Fix comment across locales
+- `199468a` (#2469) Create scss-namespace.plan.md
+- `1e093f3` (#2469) Namespace SCSS files, and make adjustments
+- `1560cec` (#2469) Update refresh-sass-variables.pl
+- `7bcae61` (#2469) Don't format \_variables_forward.scss
+- `b3cb2a7` (#2473) Update Swagger UI customization instructions
+- `6f8f85a` (#2476) Add nested `sidebar_root_for` to docs
+- `11bc51a` (#2470) bugfix: nested sidebar_root_for
+- `bf7c497f` (#2478) Update 0.14.0 release notes and changelog details
+- `4f855a02` (#2480) Refactor blocks/cover and pageinfo shortcodes
+- `61282a64` (#2465) KaTeX use: move media type declaration to theme's config
   file
-- `e7b91366` (`#2481`) docsy.dev: minor reorg and refactor SCSS
-- `6399194a` (`#2486`) Update devDeps, incl. Hugo to 0.155.0
-- `b1b03b95` (`#2487`) docsy.dev config: switch to using sites.matrix
-- `c3035f02` (`#2488`) Reformat and clarify Docsy 'Get Started' pages
-- `7cc86a3e` (`#2489`) Refactor navbar and layout SCSS, update examples
-- `ca4a67eb` (`#2490`) Add new Norwegian translations for UI and alerts
-- `5ac2b165` (`#2491`) Refactor extra and footer SCSS, add footer border
-- `5365d35d` (`#2494`) chore(hugo.yaml): cleanup config and add some explanation
+- `e7b91366` (#2481) docsy.dev: minor reorg and refactor SCSS
+- `6399194a` (#2486) Update devDeps, incl. Hugo to 0.155.0
+- `b1b03b95` (#2487) docsy.dev config: switch to using sites.matrix
+- `c3035f02` (#2488) Reformat and clarify Docsy 'Get Started' pages
+- `7cc86a3e` (#2489) Refactor navbar and layout SCSS, update examples
+- `ca4a67eb` (#2490) Add new Norwegian translations for UI and alerts
+- `5ac2b165` (#2491) Refactor extra and footer SCSS, add footer border
+- `5365d35d` (#2494) chore(hugo.yaml): cleanup config and add some explanation
+- `34ab5de0` (#2498) Fix grammatical error in Norwegian translation
+- `061b3762` (#2483) Use "front matter" rather than "frontmatter"
+- `2aef9560` (#2502) Update 0.14 release notes, Hugo upgrade guide, style
+  adjustments, and more
+- `09b9a9f1` (#2495) Only set td-sidebar-root-up-icon for links that are the
+  tree root
+- `3753ff78` (#2505) Reorganize SCSS, fix scroll padding, normalize
+  blocks-shortcode heading IDs and keep old IDs as alias
 
 ## CI / tooling only
 
-- `66a0c7d` Update README, contrib docs for deployment and release process
-- `6c1e391` [CI] Drop temp site-copy code and more
-- `4137043` Temporary: copy public to root while build config is in transition
-- `cb75133` [CI] Move Netlify config to docsy.dev subrepo
-- `ba7d0ec` Tasks, plan, and draft blog post for 0.14.0
-- `08fe966` Add CI/CD info about Prettier and i18n directory
-- `08a9569` Upgrade Prettier
-- `1dfd1a0` Format
-- `83db5b9` Format
-- `ef0e8b8` Update compare-i18n-toml-yaml.pl
-- `1560cec` Update refresh-sass-variables.pl
-- `7bcae61` Don't format \_variables_forward.scss
-- `24c01d23` Add read-only contents permission to workflows
+- `66a0c7d` (#2440) Update README, contrib docs for deployment and release
+  process
+- `6c1e391` (#2439) [CI] Drop temp site-copy code and more
+- `4137043` (#2437) Temporary: copy public to root while build config is in
+  transition
+- `cb75133` (#2437) [CI] Move Netlify config to docsy.dev subrepo
+- `ba7d0ec` (#2456) Tasks, plan, and draft blog post for 0.14.0
+- `08fe966` (#2468) Add CI/CD info about Prettier and i18n directory
+- `08a9569` (#2468) Upgrade Prettier
+- `1dfd1a0` (#2468) Format
+- `83db5b9` (#2468) Format
+- `ef0e8b8` (#2468) Update compare-i18n-toml-yaml.pl
+- `1560cec` (#2469) Update refresh-sass-variables.pl
+- `7bcae61` (#2469) Don't format \_variables_forward.scss
+- `24c01d23` (#2479) Add read-only contents permission to workflows
 
 ## Dependency / package configuration updates
 
-- `b7f7335` (`#2428`) Update all packages other than Hugo
-- `9334955` (`#2430`) Upgrade Hugo to 0.154.3
-- `b52c265` (`#2432`) Update Hugo to 0.154.5
-- `6399194a` (`#2486`) Update devDeps, incl. Hugo to 0.155.0
+- `b7f7335` (#2428) Update all packages other than Hugo
+- `9334955` (#2430) Upgrade Hugo to 0.154.3
+- `b52c265` (#2432) Update Hugo to 0.154.5
+- `6399194a` (#2486) Update devDeps, incl. Hugo to 0.155.0
 
 [commits since v0.13.0]: https://github.com/google/docsy/compare/v0.13.0...main
