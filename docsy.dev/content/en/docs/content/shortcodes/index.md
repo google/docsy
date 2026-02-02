@@ -421,8 +421,14 @@ description: Reference for the Pet Store API
 > you can access unpkg from your network when building or loading your site.
 
 To adjust Swagger UI's look and feel, customize the `.swagger-ui` class in your
-[project's SCSS file][]. Docsy provides only minimal styling in it's internal
+[project's SCSS file][]. Docsy provides only minimal styling in its internal
 `assets/scss/td/_swagger.scss` file.
+
+> [!NOTE] Version note
+>
+> If you are upgrading from a version before 0.14.0 and previously customized
+> Swagger styles by overriding `_swagger.scss`, see the
+> [0.14.0 upgrade guide](/blog/2026/0.14.0/#swagger-scss) for migration steps.
 
 [project's SCSS file]: lookandfeel/#project-style-files
 
@@ -437,7 +443,7 @@ can use a URL as well, for example:
 
 ```yaml
 ---
-title: 'Pet Store API'
+title: Pet Store API
 type: docs
 weight: 1
 description: Reference for the Pet Store API

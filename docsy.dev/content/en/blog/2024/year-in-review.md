@@ -10,7 +10,7 @@ description: >-
   usage increase, new features like dark mode, and improved internationalization
   support.
 # prettier-ignore
-cSpell:ignore: Chalin jaegertracing mentees opentelemetry toto upvoted kubernetes theupdateframework Dindi Dariksha Ansari
+cSpell:ignore: jaegertracing mentees opentelemetry toto upvoted kubernetes theupdateframework Dindi Dariksha Ansari
 ---
 
 As we reflect on 2024, it’s exciting to see steady progress toward the goals

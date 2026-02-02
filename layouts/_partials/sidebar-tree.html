@@ -167,7 +167,7 @@
       {{- end -}}
       <span class="
         {{- if $active }}td-sidebar-nav-active-item{{ end -}}
-        {{- if and $s.Params.sidebar_root_for site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
+        {{- if and $treeRoot $s.Params.sidebar_root_for site.Params.ui.sidebar_root_enabled }} td-sidebar-root-up-icon{{ end -}}
       ">
         {{- $s.LinkTitle -}}
       </span></a>
@@ -183,4 +183,4 @@
     </ul>
     {{- end }}
   </li>
-{{- end }}
+{{- end -}}

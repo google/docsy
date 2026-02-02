@@ -2,3 +2,21 @@
 // eventually be merged into the core Docsy theme.
 
 @import 'navbar';
+
+// Margin fix for nested lists [EXPERIMENTAL]
+
+body {
+  // --td-nested-lists-last-item-margin: initial;
+
+  &:not(.td-disable-nested-lists-last-item-margin) {
+    .td-content {
+      --td-nested-lists-last-item-margin: 1rem;
+
+      li > ul {
+        > li:last-child {
+          margin-bottom: var(--td-nested-lists-last-item-margin);
+        }
+      }
+    }
+  }
+}

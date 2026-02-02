@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `db32f5b` on `main`.
+> Report refreshed for commits through `5365d35` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -23,7 +23,7 @@ client projects.
   fallback too
 - `bf9f559` (`#2435`) chore: complete German localization
 - `8607ceb` i18n: zh_cn and zh_tw
-- `48f9c75` Update Serbian (cyrillic & latin)
+- `48f9c75` Update Serbian (Cyrillic & Latin)
 - `13ba7b2` Add author for Serbian translations
 - `02479b2` Add feedback section and table of contents to Bengali localization
 - `9cca91a` Update feedback section translations in Bengali localization
@@ -71,6 +71,18 @@ client projects.
 - `b3cb2a7` Update Swagger UI customization instructions
 - `6f8f85a` Add nested `sidebar_root_for` to docs
 - `11bc51a` bugfix: nested sidebar_root_for
+- `bf7c497f` Update 0.14.0 release notes and changelog details
+- `4f855a02` Refactor blocks/cover and pageinfo shortcodes
+- `61282a64` (`#2465`) KaTeX use: move media type declaration to theme's config
+  file
+- `e7b91366` (`#2481`) docsy.dev: minor reorg and refactor SCSS
+- `6399194a` (`#2486`) Update devDeps, incl. Hugo to 0.155.0
+- `b1b03b95` (`#2487`) docsy.dev config: switch to using sites.matrix
+- `c3035f02` (`#2488`) Reformat and clarify Docsy 'Get Started' pages
+- `7cc86a3e` (`#2489`) Refactor navbar and layout SCSS, update examples
+- `ca4a67eb` (`#2490`) Add new Norwegian translations for UI and alerts
+- `5ac2b165` (`#2491`) Refactor extra and footer SCSS, add footer border
+- `5365d35d` (`#2494`) chore(hugo.yaml): cleanup config and add some explanation
 
 ## CI / tooling only
 
@@ -86,11 +98,13 @@ client projects.
 - `ef0e8b8` Update compare-i18n-toml-yaml.pl
 - `1560cec` Update refresh-sass-variables.pl
 - `7bcae61` Don't format \_variables_forward.scss
+- `24c01d23` Add read-only contents permission to workflows
 
 ## Dependency / package configuration updates
 
 - `b7f7335` (`#2428`) Update all packages other than Hugo
 - `9334955` (`#2430`) Upgrade Hugo to 0.154.3
 - `b52c265` (`#2432`) Update Hugo to 0.154.5
+- `6399194a` (`#2486`) Update devDeps, incl. Hugo to 0.155.0
 
 [commits since v0.13.0]: https://github.com/google/docsy/compare/v0.13.0...main

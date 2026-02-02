@@ -100,6 +100,19 @@ and filename as the Docsy file you want to reset.
 After resetting selected internal SCSS files, define your project’s actual
 styles in `_styles_project.scss`, as usual.
 
+#### Experimental extra styles {#experimental-extra-styles}
+
+Docsy includes an optional [td/extra][] styles folder with [experimental] styles
+that projects can test. These styles may eventually be merged into the core
+theme or change without notice.
+
+To enable them, add the following to your project's `_styles_project.scss`:
+
+```scss
+@import 'td/extra';
+```
+
+[td/extra]: https://github.com/google/docsy/tree/main/assets/scss/td/extra
 [assets/scss/td]: https://github.com/google/docsy/tree/main/assets/scss/td
 [Alerts]: /docs/content/adding-content/#alerts
 
@@ -559,6 +572,11 @@ user has scrolled past the cover (hero image), the navbar reverts to its default
 
 ### Customizing the navbar {#navbar-customization}
 
+#### Navbar height {#navbar-height}
+
+To adjust the navbar height, override the SCSS variable `$td-navbar-min-height`
+in your [project's variables file](#project-style-files).
+
 #### Background color/opacity {#navbar-background}
 
 To change the navbar background color/opacity across your site, override the
@@ -594,9 +612,6 @@ To also blur the background requires some this more advanced styling:
 ```
 
 For more examples, see the User Guide's [project styles][ug-project-styles].
-
-[ug-project-styles]:
-  https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss
 
 #### Setting the navbar light/dark color theme {#navbar-lightdark-theme}
 
@@ -888,3 +903,5 @@ highest-level page you want to modify.
 [bs-docs]: https://getbootstrap.com/docs/
 [color modes]: https://getbootstrap.com/docs/5.3/customize/color-modes/
 [syntax highlighting]: https://gohugo.io/content-management/syntax-highlighting/
+[ug-project-styles]:
+  https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss

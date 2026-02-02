@@ -2,7 +2,7 @@
 title: Contributing
 description: How to contribute to Docsy
 aliases: [../contributing]
-cSpell:ignore: chalin docsy hugo
+cSpell:ignore: docsy hugo
 ---
 
 We'd love to accept your patches and contributions to this project. There are

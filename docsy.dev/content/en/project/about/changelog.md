@@ -20,16 +20,53 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-> Note to authors: Start each detailed change entry with a verb in the past
-> tense. Examples include "Added", "Changed", "Deprecated", and "Fixed". It's ok
-> to follow that with "you can now...". For additional guidance, see
+> [!NOTE] Note to authors
+>
+> Start each detailed change entry with a verb in the past tense. Examples
+> include "Added", "Changed", "Deprecated", and "Fixed". It's ok to follow that
+> with "you can now...". For additional guidance, see
 > [Keep a Changelog](https://keepachangelog.com)[^1].
 >
 > [^1]:
 >     Old entries might not follow this guidance; feel free to update them as
 >     needed.
 
-## Breaking change
+## Definitions
+
+### Public customization surface {#public}
+
+As a Hugo theme, Docsy exposes various features that client projects may rely
+on, such as:
+
+- Layouts
+- Styles
+- Configuration options
+- Runtime behavior
+
+Aspects of these features are part of Docsy's **public contract**, which we also
+refer to as the **public customization surface**. We refer to such feature
+aspects as **public** for short.
+
+Because Docsy follows [semantic versioning][semver], we will not introduce
+[breaking changes](#breaking-change) to the public customization surface outside
+of major version releases.[^docsy-not-v1-yet]
+
+#### Private/internal features {#private}
+
+Aspects outside the _public customization surface_ are considered **private**
+and **internal** features and implementation details.
+
+[^docsy-not-v1-yet]:
+    Docsy is not yet at version 1.0.0, so we are bound by the pre-v1 semantic
+    versioning rules. We treat minor releases as if they were major releases.
+
+#### Experimental features {#experimental}
+
+Experimental features are not part of the
+[public customization surface](#public) and may change or be removed in future
+releases.
+
+### Breaking change
 
 A **breaking change** is a backward-incompatible change to Docsy’s _public
 contract_ that requires client projects to update their configuration, content,
@@ -41,14 +78,29 @@ or customizations in order to:
 
 See [semver].
 
-> **Notes**:
+> [!NOTE]
 >
-> - The term _public contract_ refers to the templates, styles, configuration
->   patterns, and runtime behavior that client projects reasonably rely on.
-> - A new build warning alone is not considered a breaking change, but it may
->   indicate a future breaking change, such as signaling a deprecation.
+> A new build warning alone is not considered a breaking change, but it may
+> indicate a future breaking change, such as signaling a deprecation.
 
-[semver]: https://semver.org/
+### Official support limits {#official-support}
+
+Due to limited resources, official support for Docsy is restricted as follows:
+
+- Officially [released][releases] versions of Docsy. The `main` branch is a
+  development branch and is considered unstable.
+
+- Each Docsy version **only** officially supports the following peer package
+  versions, as specified in the theme's [package.json] file:
+  - **Hugo** version ([hugo-extended])
+  - **Node.js** versions as declared in the `engines.node` section
+
+- Operating systems: Linux and macOS.
+
+Any other compatibility (including Windows support) is on a best effort basis.
+
+[package.json]: https://github.com/google/docsy/blob/main/package.json
+[hugo-extended]: https://github.com/jakejarvis/hugo-extended
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
@@ -58,13 +110,15 @@ See [semver].
 
 For the full list of changes, see the [0.14.0] release page.
 
-**Breaking changes**:
+[**Breaking changes**](#breaking-change):
 
 - **Navbar styling** changed to a light-theme default (previously dark) and is
   now configurable. See [Navbar style improvements][0.14.0-blog-navbar]
   ([#2477]).
+- **`blocks/cover` shortcode** content processing [changed][0.14.0-blog-cover]
+  ([#939], [#2480]).
 - **Swagger UI style customization** [changed][0.14.0-blog-swagger].
-- **Hugo 0.153+ upgrade** introduced some [breaking changes][0.14.0-blog-hugo]
+- **Hugo 0.153+ upgrade** introduced [breaking changes][0.14.0-blog-hugo]
   ([#2431]).
 
 **New**:
@@ -74,7 +128,7 @@ For the full list of changes, see the [0.14.0] release page.
 
 **Other changes**:
 
-- Fixed [navbar color contrast (#2413)][#2413] via [#2477]
+- Fixed [navbar color contrast (#2413)][#2413] via [#2477].
 - Internal **SCSS file reorganization**: moved internal SCSS files to
   `assets/scss/td/` ([#1654]) for [improved separation of project and internal
   SCSS files][0.14.0-blog-scss].
@@ -87,8 +141,10 @@ For the full list of changes, see the [0.14.0] release page.
 [#2431]: https://github.com/google/docsy/issues/2431
 [#2470]: https://github.com/google/docsy/pull/2470
 [#2477]: https://github.com/google/docsy/pull/2477
+[#2480]: https://github.com/google/docsy/pull/2480
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
+[0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
 [0.14.0-blog-hugo]: /blog/2026/0.14.0/#hugo
 [0.14.0-blog-internationalization]: /blog/2026/0.14.0/#internationalization
 [0.14.0-blog-navbar]: /blog/2026/0.14.0/#navbar
@@ -102,7 +158,7 @@ For the full list of changes, see the [0.14.0] release page.
 - [Release 0.13.0 report and upgrade guide][0.13.0-blog]
 - [0.13.0] release page for the full list of changes
 
-**Breaking changes**:
+[**Breaking changes**](#breaking-change):
 
 - **Language menu**: changed visibility, see [Language menu
   visibility][0.13.0-blog-lang-menu] ([#2303]).
@@ -122,25 +178,25 @@ For the full list of changes, see the [0.14.0] release page.
 - **Dark mode** fixes and improvements:
   - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332]).
   - Improved TOC entry color contrast in dark mode ([#2376], [#2379]).
-- **Mobile navbar**: Added scroll indicators for overflow navigation ([#2406]).
+- **Mobile navbar**: added scroll indicators for overflow navigation ([#2406]).
 - Better **NPM support**: resolved optional and peer dependency issues
   ([#2115]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
 - **Dependency updates**: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
 - **Updated translations**: added Occitan locale ([#2173]) and refreshed
   Simplified Chinese ([#2313]) and Ukrainian ([#2331]).
-- **TOC visibility control**: Documented the `notoc` page parameter (available
+- **TOC visibility control**: documented the `notoc` page parameter (available
   since 2016) for hiding the table of contents on specific pages ([#2405]).
-- **Build-time rendering of mathematical and chemical formulae**: now using
+- **Build-time rendering of mathematical and chemical formulae**: now uses
   Hugo's embedded KaTeX engine ([#2276], [#2394], [#2395]). For details, see
   [LaTeX support with KaTeX][diagrams-formulae].
 
-**Experimental**:
+[**Experimental**](#experimental):
 
 - **Dark mode**. Added support for:
   - Google search integration ([#2387]).
   - Sample support for color-contrast adjustments: for details, see [How to pick
     colors with good color-contrast][] ([#2384]).
-- New `_param` shortcode with support for parameter substitution ([#2371]).
+- Added `_param` shortcode with support for parameter substitution ([#2371]).
 
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2173]: https://github.com/google/docsy/issues/2173
@@ -180,12 +236,12 @@ For the full list of changes, see the [0.14.0] release page.
 
 For the full list of changes, see the [0.12.0] release page.
 
-**Breaking changes**:
+[**Breaking changes**](#breaking-change):
 
-- Renames the default Docsy heading render hook and heading self-link partials.
+- Renamed the default Docsy heading render hook and heading self-link partials.
   This is a breaking change only if your project uses this feature. For details,
   see [Heading self links][] ([#2223]).
-- Relocates and adapts layouts in response to Hugo's [new template system][].
+- Relocated and adapted layouts in response to Hugo's [new template system][].
   For details, see [Adapt to new template system in Hugo v0.146.0 #2243][#2243].
 - **IMPORTANT**: if your project overrides any of the layout files mentioned in
   [#2243], then apply the same name changes in your project files. In
@@ -203,28 +259,28 @@ For the full list of changes, see the [0.12.0] release page.
 
 **Potential breaking changes**:
 
-- Removes shortcode `figure`, hugo's built-in shortcode `figure` can/will be
+- Removed shortcode `figure`, hugo's built-in shortcode `figure` can/will be
   used instead.
 
 **New**:
 
-- **[Breadcrumb navigation]** support has been enhanced and adjusted:
+- Enhanced and adjusted **[Breadcrumb navigation]** support:
   - Added `ui.breadcrumb_disable` configuration parameter to disable breadcrumbs
     for an entire project, individual pages, or section. For details, see
     [Breadcrumb navigation][].
   - **Blog** pages now also have breadcrumbs by default ([#1788]).
   - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
-- Support for a [_td-content-after-header.html] page-content render hook, which
-  can be [content type][] specific ([#2192]). For details, see the [User
+- Added support for a [_td-content-after-header.html] page-content render hook,
+  which can be [content type][] specific ([#2192]). For details, see the [User
   Guide][before-page-content].
 
 **Other changes**:
 
-- **Blog** section index page content and title used to be ignored, they are now
+- **Blog** section index page content and title were ignored, they are now
   displayed ([#1787]). To recover the old behavior use the following style
   override: `.td-section.td-blog .td-content { display: none; }`.
 - Adds a `comment` shortcode, as a drop-in replacement for the one removed from
-  Hugo.
+  Hugo's built-in shortcode.
 
 [0.12.0]: https://github.com/google/docsy/releases/v0.12.0
 [#1787]: https://github.com/google/docsy/issues/1787
@@ -269,7 +325,7 @@ dark-mode support][dark-mode].
 
 **Breaking changes**:
 
-- Removes shortcode `card-code` that was [deprecated in 0.7.0](#v0.7.0); use
+- Removed shortcode `card-code` that was [deprecated in 0.7.0](#v0.7.0); use
   shortcode `card` with named parameter `code=true` instead.
 - The following SCSS variables are inlined in favor of dark-mode compatible
   styling: `$border-color`, `$td-sidebar-tree-root-color`,
@@ -277,9 +333,9 @@ dark-mode support][dark-mode].
 
 **Style changes** (potentially breaking):
 
-- The style of various shortcode and elements have been adjusted so that they
-  are compatible with light/dark mode. For details see, **Important style
-  changes** in [Color themes and dark-mode support][dark-mode].
+- Adjusted the style of various shortcode and elements so that they are
+  compatible with light/dark mode. For details see, **Important style changes**
+  in [Color themes and dark-mode support][dark-mode].
 
 [#1952]: https://github.com/google/docsy/pull/1952
 [0.10.0]: https://github.com/google/docsy/releases/v0.10.0
@@ -321,8 +377,8 @@ this release are listed next.
 **Footer changes**: refactoring, for easier customization, and simplification.
 For details concerning all footer changes, see [#1818].
 
-- **Footer layout** has been factored into parts: _left_, _right_, and _center_,
-  with _copyright_ a subpart of center. For details see [Footer layout]
+- **Footer layout** factored into parts: _left_, _right_, and _center_, with
+  _copyright_ a subpart of center. For details see [Footer layout]
 - **Footer copyright**, supports date-range, and site copyright fallback. For
   details, see [Footer copyright].
 - **Footer streamlined**: the About-page footer link and All-rights-reserved
@@ -578,7 +634,7 @@ CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
 
-### Update your project setup
+**Update your project setup**:
 
 If your project uses Docsy as follows:
 
@@ -664,6 +720,7 @@ For the full list of changes, see the [0.2.0] release page.
 [@lisafc]: https://github.com/LisaFC
 [0.2.0]: https://github.com/google/docsy/releases/v0.2.0
 [hugo modules]: https://gohugo.io/hugo-modules/
+[semver]: https://semver.org/
 
 <!-- ENTRY TEMPLATE ------------------------------------------------------
 
@@ -674,13 +731,19 @@ For the full list of changes, see the [0.2.0] release page.
 
 For the full list of changes, see the [0.X.Y] release page.
 
-**Breaking changes**:
+[**Breaking changes**](#breaking-change):
 
 - ...
 
 **New**:
 
 **Other changes**:
+
+- ...
+
+[**Experimental**](#experimental):
+
+- ...
 
 [0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 ```

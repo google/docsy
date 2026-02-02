@@ -4,7 +4,7 @@ date: 2019-06-05
 description: >-
   Add Google Analytics tracking to your site, collect user feedback and learn
   about the page description meta tag.
-cSpell:ignore: fabform pageviews frontmatter
+cSpell:ignore: fabform pageviews
 weight: 8
 ---
 
@@ -141,11 +141,11 @@ params:
   ui:
     feedback:
       enable: true
-      'yes': >-
+      yes: >-
         Glad to hear it! Please <a
         href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
         can improve</a>.
-      'no': >-
+      no: >-
         Sorry to hear that. Please <a
         href="https://github.com/USERNAME/REPOSITORY/issues/new"> tell us how we
         can improve</a>.
@@ -299,7 +299,7 @@ For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
 
 - The page `description`
-  [frontmatter field](/docs/content/adding-content/#page-frontmatter)
+  [front matter field](/docs/content/adding-content/#page-front-matter)
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 

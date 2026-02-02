@@ -83,6 +83,16 @@
     margin-bottom: 2 * $spacer;
   }
 
+  details {
+    &:not(:last-child) {
+      margin-bottom: $spacer;
+    }
+
+    > p:first-of-type {
+      margin-top: $spacer;
+    }
+  }
+
   .lead {
     margin-bottom: 1.5rem;
   }

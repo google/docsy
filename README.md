@@ -1,13 +1,16 @@
 # Docsy
 
-> **🚧 WARNING 🚧 : `main` is under development and potentially unstable! Use
-> official Docsy [releases].**
-
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.
 
 This is not an officially supported Google product. This project is actively
 being maintained.
+
+> [!IMPORTANT] 🚧 IMPORTANT 🚧
+>
+> The `main` branch is under development and not officially supported; use
+> official Docsy [releases]. For full support details, see [Official support
+> limits][official-support].
 
 ## Prerequisites
 
@@ -103,6 +106,11 @@ This project is licensed under the Apache License 2.0, see
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
+
+<!-- FIXME: once 0.14.0 is released, update the link to the changelog page -->
+
+[official-support]:
+  https://www.docsy.dev/blog/2024/0.10.0/#hugo-breaking-changes-and-deprecation-notices
 [releases]: https://github.com/google/docsy/releases
 
 <!-- cSpell:ignore docsy -->

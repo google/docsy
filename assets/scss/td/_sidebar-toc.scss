@@ -78,6 +78,7 @@
   }
 
   #TableOfContents {
+    --td-toc-h1-font-weight-delta: 200;
     margin-left: -0.75rem;
 
     a {
@@ -99,6 +100,12 @@
         // color: var(--bs-nav-link-disabled-color);
         background-color: var(--bs-secondary-bg-subtle);
       }
+    }
+
+    > ul > li > :not(ul) {
+      font-weight: calc(
+        var(--bs-body-font-weight, 400) + var(--td-toc-h1-font-weight-delta)
+      );
     }
 
     ul ul a {
