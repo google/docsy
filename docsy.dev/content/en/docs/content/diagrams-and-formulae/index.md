@@ -242,11 +242,6 @@ the included `\pu` command, pretty looking physical units can be written with
 ease, too. The following code sample produces two text lines with four numbers
 plus their corresponding physical units:
 
-Use of `mhchem` is not limited to the authoring of chemical equations, using the
-included `\pu` command, pretty looking physical units can be written with ease,
-too. The following code sample produces two text lines with four numbers plus
-their corresponding physical units:
-
 ```mhchem
 * Scientific number notation: \(\pu{1.2e3 kJ}\) or \(\pu{1.2E3 kJ}\) \\
 * Divisions: \(\pu{123 kJ/mol}\) or \(\pu{123 kJ//mol}\)
