@@ -664,8 +664,8 @@ or _Tags_.
 
 As illustrated next, you can disable (non-taxonomy) breadcrumb navigation for an
 entire project, by setting `ui.breadcrumb_disable` to true in your project
-[configuration file]. Similarly, you can disable taxonomy breadcrumbs by
-setting `ui.taxonomy_breadcrumb_disable` to true:
+[configuration file]. Similarly, you can disable taxonomy breadcrumbs by setting
+`ui.taxonomy_breadcrumb_disable` to true:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}

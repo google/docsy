@@ -130,8 +130,8 @@ params:
 
 ### `github_branch` (optional)
 
-Specify a value here if you would like to reference a different branch for
-the other github settings like **Edit this page** or **Create project issue**.
+Specify a value here if you would like to reference a different branch for the
+other github settings like **Edit this page** or **Create project issue**.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}

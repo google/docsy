@@ -302,9 +302,9 @@ dark mode theme customization file and import it in your project's
 
 > [!NOTE]
 >
-> Light/dark color themes only affect documentation pages and white
-> [`blocks/*` shortcodes][blocks]. Other block shortcodes with fixed text and
-> background colors are not affected by light/dark color mode changes.
+> Light/dark color themes only affect documentation pages and white [`blocks/*`
+> shortcodes][blocks]. Other block shortcodes with fixed text and background
+> colors are not affected by light/dark color mode changes.
 >
 > [blocks]: shortcodes/#blocks
 

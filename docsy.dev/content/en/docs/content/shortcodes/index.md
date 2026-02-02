@@ -825,9 +825,9 @@ function which is used to render the code block presented on the card.
 
 ### Card groups
 
-Displaying two or more cards side by side can be easily achieved by putting
-them between the opening and closing elements of a `cardpane` shortcode. The
-general markup of a card group resembles closely the markup of a tabbed pane:
+Displaying two or more cards side by side can be easily achieved by putting them
+between the opening and closing elements of a `cardpane` shortcode. The general
+markup of a card group resembles closely the markup of a tabbed pane:
 
 ```go-html-template
 {{</* cardpane */>}}
