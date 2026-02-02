@@ -83,7 +83,7 @@ Before deploying on GitHub Pages, make sure that you've pushed your site source 
 
 > [!NOTE] Correct baseURL setting
 >
-> Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
+> Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
 
 1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. You must create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
 
@@ -188,7 +188,7 @@ That's it! Your deployment workflow for your site is configured.
 
 Any future push to the branch specified in your workflow file will now trigger the action workflow defined in the workflow file. Additionally, you can trigger the deployment manually by using GitHub web UI.
 
-Once you push to your repo, you can see the progress of the triggered workflow in the **Actions** tab of the the GitHub web UI:
+Once you push to your repo, you can see the progress of the triggered workflow in the **Actions** tab of the GitHub web UI:
 
 ```
 URL 'Repo actions': https://github.com/<username>/<repository_name>/actions
@@ -269,7 +269,7 @@ deployment:
 
    As you can see, issuing the `hugo deploy` command automatically [invalidates](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) your CloudFront CDN cache.
 
-1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy`command!
+1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy` command!
 
 For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
 

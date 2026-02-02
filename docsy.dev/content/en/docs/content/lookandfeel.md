@@ -218,7 +218,7 @@ site visitors through the following features:
 
   - **Color-contrast adjustments**: if your site has custom theme colors, you
     will probably need to selectively tune your dark-mode theme colors to ensure
-    that the have good color-contrast. Learn
+    that they have good color-contrast. Learn
     [how to pick colors with good color-contrast](#pick-good-color-contrast).
 
 [FOUC]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
@@ -302,7 +302,7 @@ dark mode theme customization file and import it in your project's
 
 > [!NOTE]
 >
-> Light/dark color themes, only affect documentation pages, and white
+> Light/dark color themes only affect documentation pages and white
 > [`blocks/*` shortcodes][blocks]. Other block shortcodes with fixed text and
 > background colors are not affected by light/dark color mode changes.
 >
@@ -599,7 +599,7 @@ To set the navbar background color to a slightly translucent primary color use:
 $td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), 0.85);
 ```
 
-To also blur the background requires some this more advanced styling:
+To also blur the background requires this more advanced styling:
 
 ```scss
 .td-navbar {
@@ -738,7 +738,7 @@ params:
 >    file, thus overriding Docsy's default implementation.
 >
 > This feature is experimental. It may be removed and/or changed in
-> backwards-incompatible ways in a future releases.
+> backwards-incompatible ways in a future release.
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [layouts/_partials/theme-toggler.html]:

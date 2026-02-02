@@ -147,7 +147,7 @@ Press **Ctrl + C** to stop the container.
 ### User guide formatting
 
 We use [Prettier](https://prettier.io) to format the markdown source of the User
-Guide. To to check the formatting of your documentation changes, use the
+Guide. To check the formatting of your documentation changes, use the
 following command:
 
 ```bash

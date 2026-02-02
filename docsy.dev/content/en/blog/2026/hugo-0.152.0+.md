@@ -231,7 +231,7 @@ Notable changes that are non-breaking include:
 - `GoogleAnalytics.RespectDoNotTrack` default changed to `true`.
 - Duplicate content path warnings were removed (less noisy, but may hide
   issues).
-- **macOS distributions** are solely as signed and notarized `.pkg` installers,
+- **macOS distributions** are now distributed solely as signed and notarized `.pkg` installers,
   `.tar.gz` is no longer supported. See the notes below.
 
 > [!NOTE] macOS distributions and the `hugo-extended` NPM package
