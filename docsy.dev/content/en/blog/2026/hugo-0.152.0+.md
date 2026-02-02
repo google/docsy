@@ -1,14 +1,14 @@
 ---
 title: Hugo 0.152.0 to 0.155.x breaking and notable changes
 linkTitle: Hugo 0.152.0 to 0.155.x
-date: 2026-01-31
+date: 2026-02-02
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
 body_class: release-highlights published-draft-post
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: docsy dartsass libsass IPTC multihost libwebp opentelemetry gohugoio
+cSpell:ignore: docsy dartsass libsass IPTC multihost libwebp opentelemetry
 ---
 
 This post summarizes the breaking and notable changes in Hugo 0.152.0 to
@@ -17,7 +17,7 @@ This post summarizes the breaking and notable changes in Hugo 0.152.0 to
 
 ## Breaking changes and deprecations
 
-### 0.153.0
+### 0.153.0 {#0.153.0}
 
 Release [0.153.0] (2025-12-19) introduces, among other things, a powerful new
 [multidimensional content model][] (over languages, versions, and roles) through
@@ -77,7 +77,7 @@ least one Docsy-based site ([docsy.dev]):
 
 [docsy.dev]: https://docsy.dev
 
-### 0.152.0
+### 0.152.0 {#0.152.0}
 
 Release [0.152.0] (2025-10-21) upgrades to a more modern YAML library, which
 introduces a breaking change to the way that YAML interprets certain tokens
@@ -93,24 +93,24 @@ across configuration files and page front matter.
 Notable changes that are non-breaking include:
 
 - **[0.155.0]**
-  - Support for version and dimension range queries in the sites matrix (e.g.,
-    `>= v1.0.0`)
-  - Page aliases now work properly in multidimensional sites
-  - XMP and IPTC image metadata support added
+  - Version and dimension range queries are now supported in the sites matrix
+    (e.g., `>= v1.0.0`).
+  - Page aliases now work properly in multidimensional sites.
+  - XMP and IPTC image metadata support was added.
 
 - **[0.154.0]** - **[0.154.5]**
   - [Partial decorators] introduced (`inner` keyword) for powerful template
-    composition
-  - New [`Page.OutputFormats.Canonical`] method ([0.154.4])
-  - New `reflect.*` functions, such as `reflect.IsPage`
+    composition.
+  - New [`Page.OutputFormats.Canonical`] method ([0.154.4]).
+  - New `reflect.*` functions, such as `reflect.IsPage`.
   - Critical fixes for alias handling and site redirects in
-    multidimensional/multihost setups
+    multidimensional/multihost setups.
 
 - **[0.153.0]**
   - WebP encoding/decoding now uses `libwebp` via WASM. The extended edition is
     no longer required for WebP.
-  - Animated WebP support, including conversion to/from animated GIFs
-  - `GoogleAnalytics.RespectDoNotTrack` default changed to `true`
+  - Animated WebP support, including conversion to/from animated GIFs.
+  - `GoogleAnalytics.RespectDoNotTrack` default changed to `true`.
   - **macOS distributions** are solely as signed and notarized `.pkg`
     installers, `.tar.gz` is no longer supported. See the notes below.
 

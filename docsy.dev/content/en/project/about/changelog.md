@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
+cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -547,7 +547,7 @@ For the full list of changes, see the [0.7.0] release page.
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
-[blocks/section]: /docs/content/shortcodes/#blockssection
+[blocks/section]: /docs/content/shortcodes/#blocks-section
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 

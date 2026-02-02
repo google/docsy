@@ -14,6 +14,17 @@ params:
 cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal buildcondition
 ---
 
+{{< comment >}}
+
+> Maintainers note: some heading IDs have been normalized, including those for
+> blocks/\* shortcodes. We're keeping the old IDs as aliases for backward
+> compatibility. We might drop these aliases in a future release.
+
+<!-- prettier-ignore -->
+cSpell:ignore blockscover blockslead blockssection blocksfeature blockslinkdown
+
+{{< /comment >}}
+
 <!-- markdownlint-disable blanks-around-fence line-length -->
 <!-- markdownlint-capture -->
 
@@ -33,7 +44,7 @@ As illustrated below, using the bracket styled [shortcode delimiter][],
 no further processing. By using the delimiter `{{%/*...*/%}}`, Hugo will treat
 the shortcode body as Markdown. You can use both styles in your pages.
 
-## Shortcode blocks
+## `blocks/*` shortcodes <a id="shortcode-blocks"></a> {#blocks}
 
 The theme comes with a set of custom **Page Block** shortcodes that can be used
 to compose landing pages, about pages, and similar.
@@ -50,7 +61,7 @@ These blocks share some common parameters:
   `orange`. This will become the **background color** of the block, but text
   colors will adapt to get proper contrast.
 
-### blocks/cover
+### `blocks/cover` <a id="blockscover"></a> {#blocks-cover}
 
 The **blocks/cover** shortcode creates a landing page type of block that fills
 the top of the page.
@@ -99,10 +110,10 @@ in the same directory.
 For available icons, see
 [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
 
-### blocks/lead
+### `blocks/lead` <a id="blockslead"></a> {#blocks-lead}
 
-The **blocks/lead** block shortcode is a simple lead/title block with centred
-text and an arrow down pointing to the next section.
+The **blocks/lead** shortcode creates a lead/title block with centred text and
+an arrow down pointing to the next section.
 
 ```go-html-template
 {{%/* blocks/lead color="dark" */%}}
@@ -112,12 +123,12 @@ Runs on **bare metal** in the **cloud**!
 {{%/* /blocks/lead */%}}
 ```
 
-| Parameter | Default  | Description                               |
-| --------- | -------- | ----------------------------------------- |
-| height    | `auto`   | See [Shortcode blocks](#shortcode-blocks) |
-| color     | .Ordinal | See [Shortcode blocks](#shortcode-blocks) |
+| Parameter | Default  | Description               |
+| --------- | -------- | ------------------------- |
+| height    | `auto`   | See [`blocks/*`](#blocks) |
+| color     | .Ordinal | See [`blocks/*`](#blocks) |
 
-### blocks/section
+### `blocks/section` <a id="blockssection"></a> {#blocks-section}
 
 The **blocks/section** shortcode is meant as a general-purpose content
 container. It comes in two "flavors", one for general content and one with
@@ -146,7 +157,7 @@ For announcement of latest features etc.
 | `color`   |         | See above.                                                                                                                                           |
 | `type`    |         | Specify "container" (the default) if you want a general container, or "row" if the section will contain columns -- which must be immediate children. |
 
-### blocks/feature
+### `blocks/feature` <a id="blocksfeature"></a> {#blocks-feature}
 
 ```go-html-template
 {{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
@@ -161,7 +172,7 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 | url_text  | The [language parameter](/docs/language/#internationalization-bundles) value of [`ui_read_more`](https://github.com/google/docsy/blob/main/i18n/en.toml) | The link text to use.  |
 | icon      |                                                                                                                                                          | The icon class to use. |
 
-### blocks/link-down
+### `blocks/link-down` <a id="blockslinkdown"></a> {#blocks-link-down}
 
 The **blocks/link-down** shortcode creates a navigation link down to the next
 section. It's meant to be used in combination with the other blocks shortcodes.
@@ -176,7 +187,7 @@ section. It's meant to be used in combination with the other blocks shortcodes.
 | --------- | ------- | ----------- |
 | color     | info    | See above.  |
 
-## Helpers shortcodes
+## Helper shortcodes <a id="helpers-shortcodes"></a> {#helpers-shortcodes}
 
 ### `alert`
 

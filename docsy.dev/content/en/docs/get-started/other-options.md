@@ -2,7 +2,7 @@
 title: Other setup options
 description: Create a new Docsy site with Docsy using Git or NPM
 date: 2021-12-08
-cSpell:ignore: docsy gohugo hugo myproject pushd popd
+cSpell:ignore: docsy hugo myproject pushd popd
 weight: 2
 ---
 

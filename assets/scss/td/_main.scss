@@ -36,38 +36,13 @@
 @import 'pageinfo';
 @import 'taxonomy';
 @import 'drawio';
+@import 'scroll';
 @import 'shortcodes';
 @import 'swagger';
 @import 'support/rtl';
 
 @if $td-enable-google-fonts {
   @import url($td-web-font-path);
-}
-
-// Adjust anchors vs the fixed menu.
-@include media-breakpoint-up(md) {
-  .td-offset-anchor:target {
-    display: block;
-    position: relative;
-    top: -$td-navbar-min-height;
-    visibility: hidden;
-  }
-
-  h2[id]::before,
-  h3[id]::before,
-  h4[id]::before,
-  h5[id]::before,
-  h6[id]::before,
-  .td-offset-anchor::before {
-    $td-anchor-offset-delta: 1.5rem;
-    display: block;
-    content: ' ';
-    margin-top: calc(
-      -1 * #{$td-navbar-min-height} - #{$td-anchor-offset-delta}
-    );
-    height: calc(#{$td-navbar-min-height} + #{$td-anchor-offset-delta});
-    visibility: hidden;
-  }
 }
 
 @import '../styles_project';
