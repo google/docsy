@@ -197,3 +197,6 @@ module:
     - source: content/en/featured-background.jpg
       target: content/tests/blocks-cover/height-full/background.jpg
       sites: *sites
+    - source: content/en/featured-background.jpg
+      target: content/tests/blocks-cover/height-min/background.jpg
+      sites: *sites

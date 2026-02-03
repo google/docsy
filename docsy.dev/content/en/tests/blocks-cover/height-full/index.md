@@ -1,5 +1,5 @@
 ---
-title: Height full
+title: Height full with td-below-navbar
 type: home
 layout: home
 description: A Hugo theme for creating great technical documentation sites
@@ -7,7 +7,7 @@ params:
   ui: { navbar_theme: dark}
 ---
 
-{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full" %}}
+{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full td-below-navbar" %}}
 {{% param description %}}
 {.display-6}
 

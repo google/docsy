@@ -1,13 +1,13 @@
 ---
-title: Height auto with td-below-navbar
+title: Height min with td-below-navbar
 type: home
 layout: home
 description: A Hugo theme for creating great technical documentation sites
-params:
-  ui: { navbar_theme: dark}
+# params: # test variant
+#   ui: { navbar_theme: dark}
 ---
 
-{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="auto td-below-navbar" %}}
+{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="min td-below-navbar" %}}
 {{% param description %}}
 {.display-6}
 
