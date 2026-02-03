@@ -52,8 +52,12 @@ to compose landing pages, about pages, and similar.
 These blocks share some common parameters:
 
 - **height**: A pre-defined height of the block container. One of `min`, `med`,
-  `max`, `full`, or `auto`. Setting it to `full` will fill the Viewport Height,
-  which can be useful for landing pages.
+  `max`, `full`, or `auto`.
+  - `full`: the block fills the viewport height, which can be useful for landing
+    pages with a [blocks/cover] and a translucent navbar.
+  - `auto` leaves the block's minimum height unconstrained.
+  - All other settings constrain the block's minimum height.
+
 - **color**: The block will be assigned a color from the theme palette if not
   provided, but you can set your own if needed. You can use all of Bootstrap's
   color names, theme color names or a grayscale shade. Some examples would be
@@ -64,42 +68,40 @@ These blocks share some common parameters:
 ### `blocks/cover` <a id="blockscover"></a> {#blocks-cover}
 
 The **blocks/cover** shortcode creates a landing page type of block that fills
-the top of the page.
+the top of the page. For example:
 
 ```html
-{{</* blocks/cover title="Welcome!" image_anchor="center" height="full" color="primary" */>}}
-<div class="mx-auto">
-	<a class="btn btn-lg btn-primary me-3 mb-4" href="{{</* relref "/docs" */>}}">
-		Learn More <i class="fa-solid fa-circle-right ms-2"></i>
-	</a>
-	<a class="btn btn-lg btn-secondary me-3 mb-4" href="https://example.org">
-		Download <i class="fa-brands fa-github ms-2"></i>
-	</a>
-	<p class="lead mt-5">This program is now available in <a href="#">AppStore!</a></p>
-	<div class="mx-auto mt-5">
-		{{</* blocks/link-down color="info" */>}}
-	</div>
-</div>
+{{</* blocks/cover title="Welcome to Docsy!" height="auto td-below-navbar" */>}}
+...
 {{</* /blocks/cover */>}}
 ```
 
-Note that the relevant shortcode parameters above will have sensible defaults,
-but is included here for completeness.
+For a full example, see [docsy.dev's home page][].
 
-| Parameter    | Default                        | Description                           |
-| ------------ | ------------------------------ | ------------------------------------- |
-| title        |                                | The main display title for the block. |
-| image_anchor |                                |                                       |
-| height       |                                | See above.                            |
-| color        |                                | See above.                            |
-| byline       | Byline text on featured image. |                                       |
+[docsy.dev's home page]:
+  <{{% param github_repo %}}/blob/main/docsy.dev/content/en/_index.md?plain=1>
 
-To set the background image, place an image with the word "background" in the
-name in the page's [Page Bundle](/docs/content/adding-content/#page-bundles).
-For example, in our the example site the background image in the home page's
-cover block is
-[`featured-background.jpg`](https://github.com/google/docsy-example/tree/main/content/en),
-in the same directory.
+The shortcode parameters are:
+
+| Parameter    | Default                        | Description                                 |
+| ------------ | ------------------------------ | ------------------------------------------- |
+| title        |                                | The main display title for the block.       |
+| image_anchor |                                |                                             |
+| height       |                                | See [blocks/\*](#blocks) and the note below |
+| color        |                                | See [blocks/\*](#blocks)                    |
+| byline       | Byline text on featured image. |                                             |
+
+> [!NOTE] Below-navbar height adjustment <a id="td-below-navbar"></a>
+>
+> On desktop, `height="auto"` and `height="full"` align the cover with the top
+> of the viewport. To position the cover below the fixed navbar on desktop, add
+> the `td-below-navbar` helper class, for example:
+> `height="auto td-below-navbar"`.
+
+To set the **background image** (also referred to as a **hero image**), place an
+image with the word "background" in the name in the page's [page bundle][]. For
+example, in our the example site the background image in the home page's cover
+block is [featured-background.jpg], in the same directory.
 
 > [!TIP]
 >
@@ -107,8 +109,9 @@ in the same directory.
 > `my-featured-background.jpg`, it will also be used as the Twitter Card image
 > when shared.
 
-For available icons, see
-[Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
+[featured-background.jpg]:
+  https://github.com/google/docsy-example/tree/main/content/en
+[page bundle]: /docs/content/adding-content/#page-bundles
 
 ### `blocks/lead` <a id="blockslead"></a> {#blocks-lead}
 
@@ -171,6 +174,9 @@ We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions wor
 | url       |                                                                                                                                                          | The URL to link to.    |
 | url_text  | The [language parameter](/docs/language/#internationalization-bundles) value of [`ui_read_more`](https://github.com/google/docsy/blob/main/i18n/en.toml) | The link text to use.  |
 | icon      |                                                                                                                                                          | The icon class to use. |
+
+For available icons, see
+[Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
 
 ### `blocks/link-down` <a id="blockslinkdown"></a> {#blocks-link-down}
 

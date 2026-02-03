@@ -43,12 +43,8 @@
 }
 
 // Common min-height modifiers used for boxes.
-//
-// Note that `auto` and `auto-from-top` do not set a min-height, so they are not
-// included in this mixin. But `auto` does affect the height, see the mixin
-// `td-main-height-auto` in `td/_main-container.scss`.
-
 @mixin td-box-height-modifiers($parent) {
+  // `auto` does not set a min-height so it is excluded from this mixin.
   #{$parent} {
     &--height-min {
       min-height: 300px;

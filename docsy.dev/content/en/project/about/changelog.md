@@ -20,16 +20,19 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-> [!NOTE] Note to authors
->
-> Start each detailed change entry with a verb in the past tense. Examples
-> include "Added", "Changed", "Deprecated", and "Fixed". It's ok to follow that
-> with "you can now...". For additional guidance, see
-> [Keep a Changelog](https://keepachangelog.com)[^1].
->
-> [^1]:
->     Old entries might not follow this guidance; feel free to update them as
->     needed.
+## Style guide
+
+- Use past tense when when describing releases.
+- Generally, start each change entry with a verb (in the past tense). For
+  example: Added, Changed, Deprecated, Fixed.
+- It's ok to follow that with "you can now...". For example:
+  > **Feature abc**: you can now...".
+- For additional guidance, see
+  [Keep a Changelog](https://keepachangelog.com)[^1].
+
+[^1]:
+    Old entries might not follow this guidance; feel free to update them as
+    needed.
 
 ## Definitions
 
