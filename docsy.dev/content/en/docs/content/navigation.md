@@ -773,6 +773,15 @@ Give the heading alias for this section a try:
 > Use an empty `<a id="..."></a>` for target IDs. Avoid using other elements
 > such as `<span>` to set targets since they can be unreliable in some browsers.
 
+### Implementation notes {#heading-aliases-implementation-notes}
+
+- A scroll offset is set for all in-page targets via `scroll-padding-top`.
+- Docsy uses the `td-anchor-no-extra-offset` class for built-in block targets
+  (such as the blocks that are targets for link-down anchors) to keep the navbar
+  offset while canceling the extra scroll padding.
+
+For details, see [scroll styles][].
+
 [^might-not-scroll]:
     If the target is already visible, the page might not scroll.
 
@@ -788,3 +797,5 @@ Give the heading alias for this section a try:
 [menu]: https://gohugo.io/content-management/menus/
 [menus]: https://gohugo.io/content-management/menus/
 [Multi-language support]: /docs/language/
+[scroll styles]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/_scroll.scss

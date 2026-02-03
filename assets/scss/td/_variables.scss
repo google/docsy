@@ -40,3 +40,8 @@ $td-font-weight-body-text: $font-weight-normal !default;
 
 $td-block-space-top-base: 4 * $spacer !default;
 $td-block-space-bottom-base: 4 * $spacer !default;
+
+// Navbar
+
+$td-navbar-bg-color: rgba(var(--bs-body-bg-rgb), var(--bs-bg-opacity)) !default;
+$td-navbar-min-height: 4rem !default;

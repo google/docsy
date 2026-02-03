@@ -163,6 +163,10 @@ security:
       # Netlify build env var
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
+sites: &sites
+  matrix:
+    languages: [en, xx]
+
 module:
   hugoVersion:
     extended: true
@@ -173,9 +177,7 @@ module:
     - source: content/en
       target: content
       # English content for both en, and as fallback for xx sites
-      sites: &sites
-        matrix:
-          languages: [en, xx]
+      sites: *sites
     # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
@@ -188,3 +190,13 @@ module:
       sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
+    # Tests
+    - source: content/en/featured-background.jpg
+      target: content/tests/blocks-cover/height-auto/background.jpg
+      sites: *sites
+    - source: content/en/featured-background.jpg
+      target: content/tests/blocks-cover/height-full/background.jpg
+      sites: *sites
+    - source: content/en/featured-background.jpg
+      target: content/tests/blocks-cover/height-min/background.jpg
+      sites: *sites
