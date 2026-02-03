@@ -770,8 +770,8 @@ Give the heading alias for this section a try:
 
 > [!IMPORTANT]
 >
-> Use an empty `<a id="..."></a>` for target IDs. Avoid `<span>` targets, as
-> they can be unreliable in some browsers.
+> Use an empty `<a id="..."></a>` for target IDs. Avoid using other elements
+> such as `<span>` to set targets since they can be unreliable in some browsers.
 
 [^might-not-scroll]:
     If the target is already visible, the page might not scroll.
