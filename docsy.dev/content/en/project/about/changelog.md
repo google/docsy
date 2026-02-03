@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: blockssection deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
+cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -65,6 +65,9 @@ and **internal** features and implementation details.
 Experimental features are not part of the
 [public customization surface](#public) and may change or be removed in future
 releases.
+
+We release experimental features so that projects can try them out and share
+feedback.
 
 ### Breaking change
 
@@ -129,6 +132,8 @@ For the full list of changes, see the [0.14.0] release page.
 **Other changes**:
 
 - Fixed [navbar color contrast (#2413)][#2413] via [#2477].
+- Fixed **fragment link scrolling** by using `scroll-padding-top`, see [Heading
+  aliases][0.14.0-blog-heading-aliases].
 - Internal **SCSS file reorganization**: moved internal SCSS files to
   `assets/scss/td/` ([#1654]) for [improved separation of project and internal
   SCSS files][0.14.0-blog-scss].
@@ -145,6 +150,7 @@ For the full list of changes, see the [0.14.0] release page.
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
+[0.14.0-blog-heading-aliases]: /blog/2026/0.14.0/#heading-aliases
 [0.14.0-blog-hugo]: /blog/2026/0.14.0/#hugo
 [0.14.0-blog-internationalization]: /blog/2026/0.14.0/#internationalization
 [0.14.0-blog-navbar]: /blog/2026/0.14.0/#navbar
@@ -547,7 +553,7 @@ For the full list of changes, see the [0.7.0] release page.
 [#906]: https://github.com/google/docsy/issues/906
 [#939]: https://github.com/google/docsy/issues/939
 [0.7.0]: https://github.com/google/docsy/releases/v0.7.0
-[blocks/section]: /docs/content/shortcodes/#blockssection
+[blocks/section]: /docs/content/shortcodes/#blocks-section
 [bsv5mig]: https://getbootstrap.com/docs/5.2/migration/
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 

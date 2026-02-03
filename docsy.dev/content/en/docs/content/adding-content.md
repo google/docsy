@@ -685,10 +685,10 @@ has no left nav and is useful for creating a home page for your site or other
 
 If you've copied the example site, you already have a simple site landing page
 in `content/en/_index.html`. This is made up of Docsy's provided Hugo shortcode
-[page blocks](/docs/content/shortcodes/#shortcode-blocks).
+[page blocks](/docs/content/shortcodes/#blocks).
 
 To customize the large landing image, which is in a
-[cover](/docs/content/shortcodes/#blockscover) block, replace the
+[cover](/docs/content/shortcodes/#blocks-cover) block, replace the
 `content/en/featured-background.jpg` file in your project with your own image
 (it can be called whatever you like as long as it has `background` in the file
 name). You can remove or add as many blocks as you like, as well as adding your
@@ -696,16 +696,16 @@ own custom content.
 
 The example site also has an About page in `content/en/about/_index.html` using
 the same Docsy template. Again, this is made up of
-[page blocks](/docs/content/shortcodes/#shortcode-blocks), including another
-background image in `content/en/about/featured-background.jpg`. As with the site
-landing page, you can replace the image, remove or add blocks, or just add your
-own content.
+[page blocks](/docs/content/shortcodes/#blocks), including another background
+image in `content/en/about/featured-background.jpg`. As with the site landing
+page, you can replace the image, remove or add blocks, or just add your own
+content.
 
 ### Building your own landing pages
 
 If you've just used the theme, you can still use all Docsy's provided
-[page blocks](/docs/content/shortcodes/#shortcode-blocks) (or any other content
-you want) to build your own landing pages in the same file locations.
+[page blocks](/docs/content/shortcodes/#blocks) (or any other content you want)
+to build your own landing pages in the same file locations.
 
 ## Adding a community page
 

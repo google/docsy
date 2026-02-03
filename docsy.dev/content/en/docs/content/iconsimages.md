@@ -82,7 +82,7 @@ If you have special favicon requirements, you can create your own
 
 ### Landing pages
 
-Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blockscover) make
+Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blocks-cover) make
 it easy to add large cover images to your landing pages. The shortcode looks for
 an image with the word "background" in the name inside the landing page's
 [Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for

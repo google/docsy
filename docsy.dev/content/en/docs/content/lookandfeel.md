@@ -9,7 +9,7 @@ params:
     light/dark mode menu <span class='badge text-bg-warning fs-6
     float-end'>EXPERIMENTAL</span>
 # prettier-ignore
-cSpell:ignore: anotherclass autoprefixing baseof blockscover docsy lightdark monokai myclass onedark rgba wordmark FOUC
+cSpell:ignore: anotherclass autoprefixing baseof docsy lightdark monokai myclass onedark rgba wordmark FOUC
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -100,7 +100,7 @@ and filename as the Docsy file you want to reset.
 After resetting selected internal SCSS files, define your project’s actual
 styles in `_styles_project.scss`, as usual.
 
-#### Experimental extra styles {#experimental-extra-styles}
+#### Extra styles (EXPERIMENTAL) {#extra-styles}
 
 Docsy includes an optional [td/extra][] styles folder with [experimental] styles
 that projects can test. These styles may eventually be merged into the core
@@ -260,7 +260,12 @@ To [disable dark mode][] entirely:
   https://getbootstrap.com/docs/5.3/customize/color-modes/#building-with-sass
 [site configuration]: https://gohugo.io/configuration/introduction/
 
-### How to pick colors with good color-contrast (EXPERIMENTAL) {#pick-good-color-contrast}
+### How to pick colors with good color-contrast {#pick-good-color-contrast}
+
+> [!CAUTION]
+>
+> This feature is [experimental]. We invite projects to try it and share
+> feedback.
 
 Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
 provides [_color-adjustments-dark.scss] as an example of theme color
@@ -295,21 +300,13 @@ dark mode theme customization file and import it in your project's
 [Chroma for code highlighting]: #code-highlighting-with-chroma
 [Light/dark code styles]: #lightdark-code-styles
 
-<!-- markdownlint-disable no-blanks-blockquote -->
-
-> [!CAUTION] EXPERIMENTAL
->
-> This feature is experimental. We're releasing this early to so that projects
-> can try out this approach and provide feedback on its usefulness and
-> convenience.
-
 > [!NOTE]
 >
-> Light/dark color themes, only affect documentation pages, and white [blocks
-> shortcodes][blocks]. Other block shortcodes with fixed text and background
-> colors are not affected by light/dark color mode changes.
+> Light/dark color themes, only affect documentation pages, and white
+> [`blocks/*` shortcodes][blocks]. Other block shortcodes with fixed text and
+> background colors are not affected by light/dark color mode changes.
 >
-> [blocks]: shortcodes/#shortcode-blocks
+> [blocks]: shortcodes/#blocks
 
 [Generate syntax highlighter CSS]:
   https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
@@ -568,7 +565,7 @@ user has scrolled past the cover (hero image), the navbar reverts to its default
 (opaque) style.
 
 [About Docsy]: https://www.docsy.dev/about/
-[blocks/cover]: /docs/content/shortcodes/#blockscover
+[blocks/cover]: /docs/content/shortcodes/#blocks-cover
 
 ### Customizing the navbar {#navbar-customization}
 
@@ -902,6 +899,7 @@ highest-level page you want to modify.
 
 [bs-docs]: https://getbootstrap.com/docs/
 [color modes]: https://getbootstrap.com/docs/5.3/customize/color-modes/
+[experimental]: /project/about/changelog/#experimental
 [syntax highlighting]: https://gohugo.io/content-management/syntax-highlighting/
 [ug-project-styles]:
   https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss

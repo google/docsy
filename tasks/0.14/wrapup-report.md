@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `5365d35` on `main`.
+> Report refreshed for commits through `3753ff78` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -59,6 +59,15 @@ cSpell:ignore: docsy
 - **blocks/cover shortcode refactoring**: Removed pre-Hugo-0.54.x compatibility
   code (breaking change - content processing now relies on Hugo's native
   shortcode delimiter behavior) ([#939], [#2480]).
+- **Scroll and fragment navigation**: Scroll padding (CSS `scroll-padding-top`)
+  and anchor-alias class (scroll-margin-top fallback) for fragment navigation
+  below fixed navbar; scroll styling moved to `_scroll.scss` partial ([#2505]).
+- **Shortcode docs heading IDs**: Normalized blocks shortcode heading IDs and
+  kept legacy IDs as span aliases for backward-compatible deep links ([#2505]).
+- **Sidebar root icon**: Only set `td-sidebar-root-up-icon` for links that are
+  the tree root ([#2495]).
+- **Documentation and style**: Release notes and Hugo upgrade guide updates,
+  "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
 
 ## References
 
@@ -71,6 +80,11 @@ cSpell:ignore: docsy
   [../docsy.dev/content/en/blog/2025/0.13.0.md](../docsy.dev/content/en/blog/2025/0.13.0.md)
 
 [#2404]: https://github.com/google/docsy/issues/2404
+[#2483]: https://github.com/google/docsy/pull/2483
+[#2495]: https://github.com/google/docsy/pull/2495
+[#2498]: https://github.com/google/docsy/pull/2498
+[#2502]: https://github.com/google/docsy/pull/2502
+[#2505]: https://github.com/google/docsy/pull/2505
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
 
 ## Action items

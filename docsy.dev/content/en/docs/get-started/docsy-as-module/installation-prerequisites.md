@@ -4,6 +4,7 @@ date: 2021-12-08
 weight: 1
 description: >
   Prerequisites for building a site with Docsy as a Hugo Module.
+cSpell:ignore: docsy
 ---
 
 This page describes the prerequisites for building a site that uses Docsy as a
