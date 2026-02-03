@@ -130,8 +130,7 @@ import strategy chosen, due to a Sass map initialization limitation,
 Bootstrap-client projects need to perform (emphasis mine):
 
 > ... variable customizations ... **after** `@import "functions"`, but
-> **before** > `@import "variables"` and the rest of [the Bootstrap] import
-> stack.
+> **before** `@import "variables"` and the rest of [the Bootstrap] import stack.
 
 For details, see
 [New \_maps.scss](https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss)
