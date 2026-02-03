@@ -93,10 +93,9 @@ The shortcode parameters are:
 
 > [!NOTE] Below-navbar height adjustment <a id="td-below-navbar"></a>
 >
-> On desktop, `height="auto"` and `height="full"` align the cover with the top
-> of the viewport. To position the cover below the fixed navbar on desktop, add
-> the `td-below-navbar` helper class, for example:
-> `height="auto td-below-navbar"`.
+> On desktop, cover blocks align with the top of the viewport. To position the
+> cover below the fixed navbar on desktop, add the `td-below-navbar` helper
+> class, for example: `height="auto td-below-navbar"`.
 
 To set the **background image** (also referred to as a **hero image**), place an
 image with the word "background" in the name in the page's [page bundle][]. For

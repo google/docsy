@@ -3,13 +3,10 @@
 @include td-box-height-modifiers('.td-cover-block');
 
 .td-cover-block {
-  &--height-auto,
-  &--height-full {
-    &.td-below-navbar {
-      @include media-breakpoint-up(md) {
-        margin-top: $td-navbar-min-height;
-        padding-top: $td-block-space-top-base !important;
-      }
+  &.td-below-navbar {
+    @include media-breakpoint-up(md) {
+      margin-top: $td-navbar-min-height;
+      padding-top: $td-block-space-top-base !important;
     }
   }
 }
