@@ -847,6 +847,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-18T18:57:42.176378-05:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/_shortcodes/blocks/lead.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T13:51:27.310817-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_shortcodes/blocks/section.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T13:51:27.757886-05:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:40.62916-05:00"
@@ -858,6 +866,10 @@
   "https://github.com/google/docsy/blob/main/layouts/blog/baseof.html": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:42.392479-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/community/list.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T13:51:28.125665-05:00"
   },
   "https://github.com/google/docsy/blob/main/layouts/docs/baseof.html": {
     "StatusCode": 206,

@@ -91,11 +91,12 @@ The shortcode parameters are:
 | color        |                                | See [blocks/\*](#blocks)                    |
 | byline       | Byline text on featured image. |                                             |
 
-> [!NOTE] Below-navbar height adjustment <a id="td-below-navbar"></a>
+> [!NOTE] Below-navbar positioning <a id="td-below-navbar"></a>
 >
-> On desktop, cover blocks align with the top of the viewport. To position the
-> cover below the fixed navbar on desktop, add the `td-below-navbar` helper
-> class, for example: `height="auto td-below-navbar"`.
+> By default, cover blocks align with the top of the viewport, which means a
+> fixed navbar overlays the top of the cover. To position the cover _below_ the
+> navbar instead, add the `td-below-navbar` helper class to the `height`
+> parameter. For example: `height="auto td-below-navbar"`.
 
 To set the **background image** (also referred to as a **hero image**), place an
 image with the word "background" in the name in the page's [page bundle][]. For
