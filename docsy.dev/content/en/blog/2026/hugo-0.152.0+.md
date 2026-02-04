@@ -1,6 +1,6 @@
 ---
-title: Hugo 0.152.0 to 0.155.x breaking and notable changes
-linkTitle: Hugo 0.152.0 to 0.155.x
+title: Hugo 0.152.0-0.155.x upgrade guide
+linkTitle: Hugo 0.152+ upgrade guide
 date: 2026-02-04
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
