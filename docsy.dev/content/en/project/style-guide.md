@@ -17,7 +17,25 @@ and uses Prettier and Markdownlint to enforce basic formatting rules.
 
 ## Content
 
-For lists:
+### Verb tense
+
+- Use [present tense][] for all content, except as noted below.
+- For [release] and [upgrade][] blog posts:
+  - Use [present tense][] when referring to the release itself, for example:
+    > Docsy 0.14.0 adds ...
+  - Use **past tense** only when describing previous releases or pre-release
+    behavior, for example:
+    > Before Docsy 0.14.0, the navbar was ...
+- For the [Changelog]: use **past tense**; see its [style
+  guide][cl-style-guide].
+
+[changelog]: /project/about/changelog/
+[cl-style-guide]: /project/about/changelog/#style-guide
+[present tense]: https://developers.google.com/style/tense
+[release]: <{{% param productionURL %}}/tags/release/>
+[upgrade]: <{{% param productionURL %}}/tags/upgrade/>
+
+### Lists
 
 - Use periods when list items are complete sentences (including imperative
   steps).

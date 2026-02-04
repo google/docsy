@@ -20,16 +20,19 @@ Useful links:
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-> [!NOTE] Note to authors
->
-> Start each detailed change entry with a verb in the past tense. Examples
-> include "Added", "Changed", "Deprecated", and "Fixed". It's ok to follow that
-> with "you can now...". For additional guidance, see
-> [Keep a Changelog](https://keepachangelog.com)[^1].
->
-> [^1]:
->     Old entries might not follow this guidance; feel free to update them as
->     needed.
+## Style guide
+
+- Use past tense when when describing releases.
+- Generally, start each change entry with a verb (in the past tense). For
+  example: Added, Changed, Deprecated, Fixed.
+- It's ok to follow that with "you can now...". For example:
+  > **Feature abc**: you can now...".
+- For additional guidance, see
+  [Keep a Changelog](https://keepachangelog.com)[^1].
+
+[^1]:
+    Old entries might not follow this guidance; feel free to update them as
+    needed.
 
 ## Definitions
 
@@ -120,6 +123,9 @@ For the full list of changes, see the [0.14.0] release page.
   ([#2477]).
 - **`blocks/cover` shortcode** content processing [changed][0.14.0-blog-cover]
   ([#939], [#2480]).
+- **Heading aliases/in-page targets**: anchor target class renamed
+  (`td-offset-anchor` → `td-anchor-no-extra-offset`), see [Heading
+  aliases][0.14.0-blog-heading-aliases].
 - **Swagger UI style customization** [changed][0.14.0-blog-swagger].
 - **Hugo 0.153+ upgrade** introduced [breaking changes][0.14.0-blog-hugo]
   ([#2431]).
@@ -128,10 +134,14 @@ For the full list of changes, see the [0.14.0] release page.
 
 - **[Markdown alert syntax][0.14.0-blog-alerts]**: added support for Hugo's
   Markdown alert syntax.
+- **`td/site-build-info/netlify` shortcode** (experimental), see
+  [Shortcodes][0.14.0-blog-shortcodes].
 
 **Other changes**:
 
 - Fixed [navbar color contrast (#2413)][#2413] via [#2477].
+- **Style tweaks**: `<details>` spacing, TOC h1 weight, see [Style improvements
+  and fixes][0.14.0-blog-style-fixes].
 - Fixed **fragment link scrolling** by using `scroll-padding-top`, see [Heading
   aliases][0.14.0-blog-heading-aliases].
 - Internal **SCSS file reorganization**: moved internal SCSS files to
@@ -155,6 +165,8 @@ For the full list of changes, see the [0.14.0] release page.
 [0.14.0-blog-internationalization]: /blog/2026/0.14.0/#internationalization
 [0.14.0-blog-navbar]: /blog/2026/0.14.0/#navbar
 [0.14.0-blog-scss]: /blog/2026/0.14.0/#improved-scss-soc
+[0.14.0-blog-shortcodes]: /blog/2026/0.14.0/#shortcodes
+[0.14.0-blog-style-fixes]: /blog/2026/0.14.0/#style-improvements-and-fixes
 [0.14.0-blog-swagger]: /blog/2026/0.14.0/#swagger-scss
 
 ## v0.13.0 {#v0.13.0}

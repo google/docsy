@@ -7,12 +7,28 @@ body {
     #{$td-navbar-min-height} + var(--td-anchor-offset-delta)
   );
 
-  // Small viewports where the navbar is not fixed,
-  // we still want a bit of padding:
+  // Small viewports where the navbar is not fixed, we still want a bit of
+  // padding.
+  //
+  // IMPORTANT: if you change this value, adjust .td-anchor-no-extra-offset below.
   scroll-padding-top: var(--td-anchor-offset-delta);
 
   // Wide viewports where the navbar is fixed.
   @include media-breakpoint-up(md) {
+    // IMPORTANT: if you change this value, adjust .td-anchor-no-extra-offset below.
     scroll-padding-top: var(--td-scroll-padding-top);
+  }
+}
+
+// Counteract the extra offset delta on specific anchors (keep navbar height).
+.td-anchor-no-extra-offset {
+  $td-anchor-no-extra-offset-delta: calc(-1 * var(--td-anchor-offset-delta));
+
+  // IMPORTANT: this should match the delta used above.
+  scroll-margin-top: $td-anchor-no-extra-offset-delta;
+
+  @include media-breakpoint-up(md) {
+    // IMPORTANT: keep the navbar height; only counteract the delta.
+    scroll-margin-top: $td-anchor-no-extra-offset-delta;
   }
 }

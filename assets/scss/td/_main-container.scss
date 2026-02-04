@@ -5,14 +5,6 @@
   min-height: 100vh;
 }
 
-// Prior to 0.14.0, `auto` meant auto height from the top of the viewport. Since
-// 0.14.0, `auto` means auto height from the bottom of the navbar. Use
-// `auto-from-top` for the legacy behavior.
-@mixin td-main-height-auto {
-  margin-top: $td-navbar-min-height;
-  padding-top: $td-block-space-top-base !important;
-}
-
 // The outer page container for the default base template.
 .td-default {
   main {
@@ -21,10 +13,6 @@
         padding-top: calc(
           #{$td-navbar-min-height} + #{$td-block-space-top-base}
         );
-
-        &.td-box--height-auto {
-          @include td-main-height-auto;
-        }
       }
     }
 
@@ -36,14 +24,6 @@
 
 .td-main {
   flex-grow: 1;
-
-  &--height-auto {
-    margin-top: $td-navbar-min-height;
-    padding-top: $td-block-space-top-base !important;
-  }
-
-  // Use auto-top for legacy behavior of td-blocks-cover and td-box, use:
-  // &--height-auto-from-top { }
 }
 
 .td-404 main,

@@ -1,10 +1,5 @@
 ---
-title: Docsy tests
-linkTitle: Tests
-type: docs
-description: Tests of Docsy features
-params:
-  hide_feedback: true
+title: Alerts
 cSpell:ignore: thumbsup
 ---
 
