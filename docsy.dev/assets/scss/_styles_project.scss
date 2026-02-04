@@ -20,3 +20,14 @@
     }
   }
 }
+
+.td-checkbox-list-wrapper > ul,
+ul.td-checkbox-list {
+  list-style: none;
+  > li {
+    text-indent: -1.4rem;
+    > input {
+      margin-right: 0.3rem;
+    }
+  }
+}

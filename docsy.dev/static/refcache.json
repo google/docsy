@@ -679,6 +679,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-01-30T12:34:10.403961-05:00"
   },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.155.2": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T19:31:12.026539-05:00"
+  },
   "https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:36.636232-05:00"
@@ -1787,6 +1791,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:31.046026-05:00"
   },
+  "https://github.com/jmooring/hvm": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T19:31:11.603512-05:00"
+  },
   "https://github.com/kentcdodds/cross-env/issues/257": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T12:09:25.020229-05:00"
@@ -2042,6 +2050,10 @@
   "https://gohugo.io/configuration/media-types/#create-a-media-type": {
     "StatusCode": 206,
     "LastSeen": "2025-06-06T15:13:21.028725+02:00"
+  },
+  "https://gohugo.io/configuration/module/#files": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-03T19:31:10.981546-05:00"
   },
   "https://gohugo.io/configuration/params/#multilingual-sites": {
     "StatusCode": 206,
