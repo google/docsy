@@ -53,7 +53,7 @@ community_develop: Развој и допринос
 community_contribute: >-
   Ако желите да се више укључите у допринос на {{ .Site.Title }}, придружите нам
   се:
-community_how_to:
+community_how_to: >-
   Можете сазнати како да допринесете на {{ .Site.Title }} у нашим
 community_guideline: >-
   Смерницама за допринос
