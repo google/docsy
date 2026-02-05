@@ -122,6 +122,10 @@ params:
         url: /project/
         icon: fa fa-book
         desc: Site design documentation and resources
+      - name: Tests
+        url: /tests/
+        icon: fa-solid fa-flask
+        desc: Test and demo pages
       - name: GitHub
         url: https://github.com/google/docsy
         icon: fa-brands fa-github

@@ -438,15 +438,25 @@ resources together with the content.
 You can see examples of both approaches in this and our example site. For
 example, the source for this page is just a standalone file
 `/content/en/docs/content/adding-content.md`. However the source for
-[Docsy Shortcodes](/docs/content/shortcodes/) in this site lives in
+[Docsy Shortcodes](shortcodes/) in this site lives in
 `/content/en/docs/content/shortcodes/index.md`, with the image resource used by
-the page in the same `/shortcodes/` directory. In Hugo terminology, this is
+the page in the same `shortcodes/` directory. In Hugo terminology, this is
 called a _leaf bundle_ because it's a folder containing all the data for a
 single site page without any child pages (and uses `index.md` without an
 underscore).
 
 You can find out much more about managing resources with Hugo bundles in
-[Page Bundles](https://gohugo.io/content-management/page-bundles/).
+[Page bundles](https://gohugo.io/content-management/page-bundles/).
+
+> [!IMPORTANT]
+>
+> For multilingual single-host sites, Hugo does not duplicate shared page
+> resources (such as images) by default. You typically do not need to copy
+> shared resources into each locale's bundle. For details, see [Page resources
+> multilingual][pg-rsc-multilingual].
+
+[pg-rsc-multilingual]:
+  https://gohugo.io/content-management/page-resources/#multilingual
 
 ## Adding docs and blog posts
 

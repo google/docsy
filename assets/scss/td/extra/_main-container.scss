@@ -1,0 +1,44 @@
+// Styles for docs-like pages without left sidebar
+
+.td-no-left-sidebar .td-main {
+  // Hide left sidebar
+  .td-sidebar {
+    display: none !important;
+  }
+
+  // Adjust right/ToC sidebar, when visible (i.e., at md and up).
+  .td-sidebar-toc {
+    @include media-breakpoint-up(md) {
+      @extend .col-md-2;
+      display: block !important;
+    }
+  }
+
+  // The <main> element sibling of the ToC sidebar
+  > div > main {
+    // Always 10 col wide (unless the ToC sidebar is hidden)
+    @extend .col-md-10;
+    @extend .col-xl-10;
+
+    @include media-breakpoint-up(md) {
+      padding-right: 3rem;
+    }
+
+    @include media-breakpoint-up(lg) {
+      // Center content on larger screens
+
+      .td-content,
+      .td-breadcrumbs {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+
+        // Cancel .td-max-width-on-larger-screens
+        // TODO: generalize this?
+        > * {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
