@@ -662,7 +662,7 @@ Tab selection is persisted by default. When unspecified, `persist` defaults to
 
 #### `tab`
 
-The `tab` shortcode represent the tabs you want to show. It supports the
+The `tab` shortcode represents the tabs you want to show. It supports the
 following named parameters, all of which are optional:
 
 - **`header`**: defines the tab's header text. When omitted it defaults to text
@@ -825,9 +825,9 @@ function which is used to render the code block presented on the card.
 
 ### Card groups
 
-Displaying two ore more cards side by side can be easily achieved by putting
-them between the opening and closing elements of a `cardpane` shortcode. The
-general markup of a card group resembles closely the markup of a tabbed pane:
+Displaying two or more cards side by side can be easily achieved by putting them
+between the opening and closing elements of a `cardpane` shortcode. The general
+markup of a card group resembles closely the markup of a tabbed pane:
 
 ```go-html-template
 {{</* cardpane */>}}
@@ -844,7 +844,7 @@ general markup of a card group resembles closely the markup of a tabbed pane:
 ```
 
 Contrary to tabs, cards are presented side by side, however. This is especially
-useful it you want to compare different programming techniques (traditional vs.
+useful if you want to compare different programming techniques (traditional vs.
 modern) on two cards, like demonstrated in the example above:
 
 {{< cardpane >}} {{< card code=true header="**Java 5**" >}} File[] hiddenFiles =

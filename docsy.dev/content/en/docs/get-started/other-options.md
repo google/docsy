@@ -13,11 +13,11 @@ If you don't want to use
 do not want to install Go) but still don't want to copy the theme files into
 your own repo, you can **use Docsy as a
 [Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)**. Using
-submodules also lets Hugo use the theme files from Docsy repo, though is more
-complicated to maintain than the Hugo Modules approach. This is the approach
-used in older versions of the Docsy example site, and is still supported. If you
-are using Docsy as a submodule but would like to migrate to Hugo Modules, see
-our [migration guide](/docs/updating/convert-site-to-module/).
+submodules also lets Hugo use the theme files from the Docsy repo, though is
+more complicated to maintain than the Hugo Modules approach. This is the
+approach used in older versions of the Docsy example site, and is still
+supported. If you are using Docsy as a submodule but would like to migrate to
+Hugo Modules, see our [migration guide](/docs/updating/convert-site-to-module/).
 
 Alternatively if you don’t want Hugo to have to get the theme files from an
 external repo (for example, if you want to customize and maintain your own copy
@@ -224,13 +224,13 @@ hugo serve
 
 ## Option 2: Clone the Docsy theme
 
-If you don't want to use a submodules (for example, if you want to customize and
+If you don't want to use submodules (for example, if you want to customize and
 maintain your own copy of the theme directly, or your deployment choice requires
 you to include a copy of the theme in your repository), you can clone the theme
 into your project's `themes` subdirectory.
 
-To clone Docsy at v{{% param version %}} into your project's `theme` folder, run
-the following commands from your project's root directory:
+To clone Docsy at v{{% param version %}} into your project's `themes` folder,
+run the following commands from your project's root directory:
 
 ```sh
 cd themes

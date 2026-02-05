@@ -150,7 +150,7 @@ markup:
 #### Add `passthrough` render hook
 
 Docsy uses Hugo's `render-passthrough`
-[hook](https://gohugo.io/render-hooks/passthrough/) when generating of math
+[hook](https://gohugo.io/render-hooks/passthrough/) when generating math
 equations at build-time. To enable this hook in your project, add a new local
 hook file `layouts/_markup/render-passthrough.html` in your project site. The
 content of this file has to be one single line only:
@@ -163,7 +163,7 @@ content of this file has to be one single line only:
 
 With the `passthrough` extension enabled and the render hook in place, support
 of \(\KaTeX\) is automatically enabled when you author a `math` code block on
-your page or when you add a mathematical formulae to your page using one of the
+your page or when you add a mathematical formula to your page using one of the
 passthrough delimiter pairs defined above.
 
 > [!NOTE] Passthrough for selected sections
@@ -222,7 +222,7 @@ the equation:
 ```
 ````
 
-Both standard syntax and `chem` block renders to the same equation:
+Both standard syntax and `chem` blocks render to the same equation:
 
 <!-- prettier-ignore-start -->
 \[
@@ -241,11 +241,6 @@ Use of `mhchem` is not limited to the authoring of chemical equations. By using
 the included `\pu` command, pretty looking physical units can be written with
 ease, too. The following code sample produces two text lines with four numbers
 plus their corresponding physical units:
-
-Use of `mhchem` is not limited to the authoring of chemical equations, using the
-included `\pu` command, pretty looking physical units can be written with ease,
-too. The following code sample produces two text lines with four numbers plus
-their corresponding physical units:
 
 ```mhchem
 * Scientific number notation: \(\pu{1.2e3 kJ}\) or \(\pu{1.2E3 kJ}\) \\

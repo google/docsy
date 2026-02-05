@@ -32,7 +32,7 @@ A [movie-website sample][] taxonomy is provided by the Hugo docs.
 
 ## Parameters
 
-There are various parameter to control the functionality of taxonomies in the
+There are various parameters to control the functionality of taxonomies in the
 project [configuration file][]. Taxonomies are [enabled by default][] for `tags`
 and `categories` in Hugo. To **disable** taxonomies, add the following to your
 project config:
@@ -148,8 +148,8 @@ To disable any taxonomy cloud you have to set the Parameter `taxonomyCloud = []`
 resp. if you don't want to show the assigned terms you have to set
 `taxonomyPageHeader = []`.
 
-As default the plural label of a taxonomy is used as it cloud title. You can
-overwrite the default cloud title with `taxonomyCloudTitle`. But if you do so,
+By default, the plural label of a taxonomy is used as its cloud title. You can
+override the default cloud title with `taxonomyCloudTitle`. But if you do so,
 you have to define a manual title for each enabled taxonomy cloud
 (`taxonomyCloud` and `taxonomyCloudTitle` must have the same length!).
 
@@ -159,12 +159,12 @@ generated.
 
 ## Partials
 
-The by default used partials for displaying taxonomies are so defined, that you
-should be able to use them also easily in your own layouts.
+The partials used by default for displaying taxonomies are defined so that you
+can easily use them in your own layouts.
 
 ### taxonomy_terms_article
 
-The partial `taxonomy_terms_article` shows all assigned terms of an given
+The partial `taxonomy_terms_article` shows all assigned terms of a given
 taxonomy (partial parameter `taxo`) of an article respectively page (partial
 parameter `context`, most of the time the current page or context `.`).
 
@@ -178,7 +178,7 @@ docs section:
 {{ end }}
 ```
 
-This will gave you for each in the current page (resp. context) defined taxonomy
+This will give you for each in the current page (resp. context) defined taxonomy
 a list with all assigned terms:
 
 ```html
@@ -231,13 +231,13 @@ a list with all assigned terms:
 The partial `taxonomy_terms_article_wrapper` is a wrapper for the partial
 `taxonomy_terms_article` with the only parameter `context` (most of the time the
 current page or context `.`) and checks the taxonomy parameters of your
-project's `hugo.toml`/`hugo.yaml`/`hugo.json` to loop threw all listed
+project's `hugo.toml`/`hugo.yaml`/`hugo.json` to loop through all listed
 taxonomies in the parameter `taxonomyPageHeader` resp. all defined taxonomies of
 your page, if `taxonomyPageHeader` isn't set.
 
 ### taxonomy_terms_cloud
 
-The partial `taxonomy_terms_cloud` shows all used terms of an given taxonomy
+The partial `taxonomy_terms_cloud` shows all used terms of a given taxonomy
 (partial parameter `taxo`) for your site (partial parameter `context`, most of
 the time the current page or context `.`) and with the parameter `title` as
 headline.
@@ -303,7 +303,7 @@ This will give you the following HTML markup for the taxonomy `categories`:
 The partial `taxonomy_terms_clouds` is a wrapper for the partial
 `taxonomy_terms_cloud` with the only parameter `context` (most of the time the
 current page or context `.`) and checks the taxonomy parameters of your
-project's config to loop threw all listed taxonomies in the parameter
+project's config to loop through all listed taxonomies in the parameter
 `taxonomyCloud` resp. all defined taxonomies of your page, if `taxonomyCloud`
 isn't set.
 
