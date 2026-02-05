@@ -3,7 +3,6 @@ title: Docsy
 description: A Hugo theme for creating great technical documentation sites
 params:
   ui: { navbar_theme: dark }
-  btn-lg: class="btn btn-lg btn-{1}" type="button"
 ---
 
 {{% blocks/cover
@@ -18,12 +17,12 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <button {{% _param btn-lg primary %}} href="about/">
+  <a {{% _param btn-lg primary %}} href="about/">
     Learn more
-  </button>
-  <button {{% _param btn-lg secondary %}} href="docs/get-started/">
+  </a>
+  <a {{% _param btn-lg secondary %}} href="docs/get-started/">
     Get started
-  </button>
+  </a>
 </div>
 
 {{% blocks/link-down color="info" %}}
