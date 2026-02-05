@@ -32,7 +32,7 @@ you may need to take.
 - Optionally skim:
   - [Known issues and fixes](#known-issues)
   - [Notable changes](#notable-changes)
-- {{% _param FA rocket primary %}} Jump to [Upgrade to Hugo 0.155.x](#upgrade)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.155.x](#upgrade)
   once you're ready
 
 ## {{% _param BREAKING %}} YAML yes/no tokens are strings (0.152.0) <a id="0.152.0"></a> {#yaml-yes-no-etc}
@@ -241,7 +241,7 @@ Notable changes that are non-breaking include:
 > - The [hugo-extended][] NPM package briefly required `sudo` in versions
 >   0.153.0–0.153.3.
 
-## {{% _param FA rocket primary %}} Upgrade to Hugo 0.155.x {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.155.x {#upgrade}
 
 After addressing all [breaking changes](#breaking-changes) and
 [deprecations](#deprecations), upgrade to the latest release of Hugo 0.155.x. If

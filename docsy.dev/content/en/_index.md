@@ -2,21 +2,36 @@
 title: Docsy
 description: A Hugo theme for creating great technical documentation sites
 params:
-  ui: { navbar_theme: dark}
+  ui: { navbar_theme: dark }
+  btn-lg: class="btn btn-lg btn-{1}" type="button"
 ---
 
-{{% blocks/cover title="Welcome to Docsy!" image_anchor="top" height="full" %}}
+{{% blocks/cover
+  title="Welcome to Docsy!"
+  image_anchor="top"
+  height="full td-below-navbar"
+%}}
+
+<!-- prettier-ignore -->
 {{% param description %}}
 {.display-6}
 
-<a class="btn btn-lg btn-primary me-3" href="about/">Learn More</a>
-<a class="btn btn-lg btn-secondary" href="docs/get-started/">Get started</a>
-{.p-initial .my-5}
+<!-- prettier-ignore -->
+<div class="td-cta-buttons my-5">
+  <button {{% _param btn-lg primary %}} href="about/">
+    Learn more
+  </button>
+  <button {{% _param btn-lg secondary %}} href="docs/get-started/">
+    Get started
+  </button>
+</div>
 
 {{% blocks/link-down color="info" %}}
+
 {{% /blocks/cover %}}
 
 {{% blocks/lead color="primary" %}}
+
 Docsy is a theme for the Hugo static site generator that's specifically designed
 for technical documentation sets. Our aim is to help you get a working
 documentation site up and running as easily as possible, so you can concentrate

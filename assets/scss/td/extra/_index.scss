@@ -1,8 +1,11 @@
 // Experimental extra styles that projects can test run. These styles might
 // eventually be merged into the core Docsy theme.
 
+@import 'buttons';
+@import 'main-container';
 @import 'navbar';
 
+// -----------------------------------------------------------------------------
 // Margin fix for nested lists [EXPERIMENTAL]
 
 body {

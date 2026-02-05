@@ -2123,6 +2123,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:37.217515-05:00"
   },
+  "https://gohugo.io/content-management/page-resources/#multilingual": {
+    "StatusCode": 200,
+    "LastSeen": "2026-02-05T07:39:17.203966-05:00"
+  },
   "https://gohugo.io/content-management/shortcodes/": {
     "StatusCode": 206,
     "LastSeen": "2025-11-16T18:27:35.287863-05:00"
