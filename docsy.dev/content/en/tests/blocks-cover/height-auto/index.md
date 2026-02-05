@@ -4,8 +4,6 @@ linkTitle: Height auto
 type: home
 layout: home
 description: A Hugo theme for creating great technical documentation sites
-params:
-  btn-lg: class="btn btn-lg btn-{1}" type="button"
 ---
 
 {{% blocks/cover
@@ -20,12 +18,8 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <button {{% _param btn-lg primary %}} href="/about/">
-    Learn more
-  </button>
-  <button {{% _param btn-lg secondary %}} href="/docs/get-started/">
-    Get started
-  </button>
+  <a {{% _param btn-lg primary %}} href="/about/">Learn more</a>
+  <a {{% _param btn-lg secondary %}} href="/docs/get-started/">Get started</a>
 </div>
 
 {{% blocks/link-down color="info" %}}

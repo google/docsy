@@ -142,6 +142,8 @@ params:
     enable: true
   drawio:
     enable: true
+  # UG helpers: use with _param
+  btn-lg: class="btn btn-lg btn-{1}" role="button"
 
 baseURL: *productionURL
 
