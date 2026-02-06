@@ -637,9 +637,10 @@ are documented below.
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   /docs/content/lookandfeel/#styling-your-project-logo-and-name
-[upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
+[upgraded fontawesome to v6]:
+  https://web.archive.org/web/20251117042118/https://docs.fontawesome.com/v6/web/setup/upgrade
 [what's changed in v6]:
-  https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
+  https://web.archive.org/web/20251116052945/https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
 
 ## v0.5.0 {#v0.5.0}
 
