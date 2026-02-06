@@ -2,6 +2,7 @@
 title: Docsy
 description: A Hugo theme for creating great technical documentation sites
 params:
+  body_class: td-navbar-links-all-active
   ui: { navbar_theme: dark }
 ---
 
