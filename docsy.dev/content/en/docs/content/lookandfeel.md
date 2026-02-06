@@ -112,6 +112,14 @@ To enable them, add the following to your project's `_styles_project.scss`:
 @import 'td/extra';
 ```
 
+If your project uses Bootstrap's default color theme (that is, you do not
+override `$primary`, `$secondary`, etc.) then you can opt in to the extra
+dark-mode style adjustments as follows:
+
+```scss
+@import 'td/extra/bs-defaults';
+```
+
 [td/extra]: https://github.com/google/docsy/tree/main/assets/scss/td/extra
 [assets/scss/td]: https://github.com/google/docsy/tree/main/assets/scss/td
 [Alerts]: /docs/content/adding-content/#alerts
