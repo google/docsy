@@ -3,6 +3,10 @@
 //
 .td-sidebar-toc {
   @include link-decoration;
+  display: none;
+  @extend .d-print-none;
+  @extend .d-xl-block;
+  @extend .col-xl-2;
 
   border-left: 1px solid var(--bs-border-color);
 
