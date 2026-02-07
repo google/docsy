@@ -24,6 +24,14 @@
 
 .td-main {
   flex-grow: 1;
+  @at-root .td-section &,
+    .td-page & {
+    // Use flex so descendant elements (like <main>) can grow to fill the
+    // available vertical (viewport) space, but only for docs layouts (it breaks
+    // td-home, which needs column-based layout). We select docs layouts via
+    // .td-section and .td-page above.
+    display: flex;
+  }
 }
 
 .td-404 main,

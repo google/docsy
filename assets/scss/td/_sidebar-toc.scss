@@ -8,7 +8,7 @@
 
   @supports (position: sticky) {
     position: sticky;
-    top: $td-navbar-min-height;
+    margin-top: $td-navbar-min-height;
     height: calc(100vh - #{$td-navbar-min-height});
     overflow-y: auto;
   }
