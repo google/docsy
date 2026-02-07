@@ -3,6 +3,9 @@ ui_pager_prev: Előző
 ui_pager_next: Következő
 ui_read_more: További olvasnivaló
 ui_search: Keresés ezen az oldalon…
+ui_theme_light: Világos
+ui_theme_dark: Sötét
+ui_theme_auto: Automatikus
 
 # so I left it as is
 ui_in: in
