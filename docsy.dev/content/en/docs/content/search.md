@@ -11,9 +11,9 @@ Docsy offers multiple options that let your readers search your site content, so
 you can pick one that suits your needs or [design your own](#custom-search). You
 can choose from:
 
-- [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine)
-  (GCSE), the default option, which uses Google's index of your public site to
-  generate a search results page.
+- [Google Custom Search Engine](#google-search) (GCSE), the default option,
+  which uses Google's index of your public site to generate a search results
+  page.
 - [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and
   search mechanism. Search results are displayed as a pop-up. Algolia DocSearch
   is free for public documentation sites.
@@ -64,7 +64,7 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-## Configure search with a Google Custom Search Engine
+## Configure search with a Google Custom Search Engine {#google-search}
 
 By default Docsy uses a [Google Custom Search Engine][GCSE] (GCSE) to search
 your site. To enable this feature, you'll first need to make sure that you have
