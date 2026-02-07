@@ -150,6 +150,7 @@ For the full list of changes, see the [0.14.0] release page.
 - **Internationalization**: [updated
   translations][0.14.0-blog-internationalization] for multiple locales.
 - Fixed nested **`sidebar_root_for`** bug ([#2470]).
+- Fixed Google-search modal colors in dark mode ([#2524]).
 
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
@@ -157,6 +158,7 @@ For the full list of changes, see the [0.14.0] release page.
 [#2470]: https://github.com/google/docsy/pull/2470
 [#2477]: https://github.com/google/docsy/pull/2477
 [#2480]: https://github.com/google/docsy/pull/2480
+[#2524]: https://github.com/google/docsy/pull/2524
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
