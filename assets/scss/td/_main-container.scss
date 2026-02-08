@@ -33,7 +33,7 @@
   flex-grow: 1;
   // Use flex when this container has a sidebar so descendant elements with
   // flex:1 (like <main> in docs layouts) can grow.
-  &:has(> .td-sidebar) {
+  &:has(> .row > .td-sidebar) {
     display: flex;
   }
 }
