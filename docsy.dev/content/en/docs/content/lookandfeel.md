@@ -9,7 +9,7 @@ params:
     light/dark mode menu <span class='badge text-bg-warning fs-6
     float-end'>EXPERIMENTAL</span>
 # prettier-ignore
-cSpell:ignore: anotherclass autoprefixing baseof docsy lightdark monokai myclass onedark rgba wordmark FOUC
+cSpell:ignore: anotherclass autoprefixing docsy lightdark monokai myclass onedark rgba wordmark FOUC
 ---
 
 By default, a site using Docsy has the theme's default fonts, colors, and
@@ -100,7 +100,9 @@ and filename as the Docsy file you want to reset.
 After resetting selected internal SCSS files, define your project’s actual
 styles in `_styles_project.scss`, as usual.
 
-#### Extra styles (EXPERIMENTAL) {#extra-styles}
+#### Extra styles {#extra-styles}
+
+{{%_param BADGE EXPERIMENTAL info %}}
 
 Docsy includes an optional [td/extra][] styles folder with [experimental] styles
 that projects can test. These styles may eventually be merged into the core
@@ -564,7 +566,7 @@ except that the navbar is fixed to the top of the viewport.
 
 ##### Translucent over cover images {#default-over-cover}
 
-In addition, on desktop, when a page contains a [blocks/cover] (typically used
+In addition, on desktop, when a page contains a [blocks/cover][] (typically used
 for hero images on the home page), Docsy makes the navbar translucent while the
 cover is visible by adding the classes `td-navbar-cover td-navbar-transparent`
 to the navbar. For an example, see the [About Docsy][] page. This initial
@@ -579,8 +581,15 @@ user has scrolled past the cover (hero image), the navbar reverts to its default
 
 #### Navbar height {#navbar-height}
 
-To adjust the navbar height, override the SCSS variable `$td-navbar-min-height`
-in your [project's variables file](#project-style-files).
+{{%_param BADGE EXPERIMENTAL info %}}
+
+To adjust the navbar height, override one or both of the [experimental][] SCSS
+variables `$td-navbar-min-height` and `$td-navbar__main-min-height-mobile` in
+your [project's variables file](#project-style-files).
+
+The min height on mobile is the sum of `$td-navbar-min-height` and
+`$td-navbar__main-min-height-mobile`, on desktop it is just
+`$td-navbar-min-height`.
 
 #### Background color/opacity {#navbar-background}
 
@@ -858,7 +867,9 @@ Both [head.html] and [scripts.html] are included from [baseof.html], Docsy's
 [scripts.html]:
   https://github.com/google/docsy/blob/main/layouts/_partials/head.html
 
-### Adding a banner before page content (EXPERIMENTAL) {#before-page-content}
+### Adding a banner before page content {#before-page-content}
+
+{{%_param BADGE EXPERIMENTAL info %}}
 
 To have a banner or other similar content appear at the top of the pages in a
 section, add the relevant HTML to a [_td-content-after-header.html] file in the

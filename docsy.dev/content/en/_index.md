@@ -18,11 +18,12 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <a {{% _param btn-lg primary %}} href="about/">
-    Learn more
+  <a {{% _param btn-lg primary %}} href="docs/get-started/">
+    Get started with Docsy
   </a>
-  <a {{% _param btn-lg secondary %}} href="docs/get-started/">
-    Get started
+  <a {{% _param btn-lg secondary %}}
+    href="{{% param example_site_url %}}">
+    Explore the example site
   </a>
 </div>
 
