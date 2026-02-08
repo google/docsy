@@ -163,17 +163,28 @@ For announcement of latest features etc.
 ### `blocks/feature` <a id="blocksfeature"></a> {#blocks-feature}
 
 ```go-html-template
-{{%/* blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/gohugoio/hugo" */%}}
-We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions workflow on **GitHub**. New users are always welcome!
+{{%/* blocks/feature
+  icon="fa-brands fa-github"
+  title="Contributions welcome!"
+  url="https://github.com/gohugoio/hugo"
+  url_text="Pull Requests"
+*/%}}
+
+We do a [Pull Request](https://github.com/gohugoio/hugo/pulls) contributions
+workflow on **GitHub**. New users are always welcome!
+
 {{%/* /blocks/feature */%}}
 ```
 
-| Parameter | Default                                                                                                                                                  | Description            |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| title     |                                                                                                                                                          | The title to use.      |
-| url       |                                                                                                                                                          | The URL to link to.    |
-| url_text  | The [language parameter](/docs/language/#internationalization-bundles) value of [`ui_read_more`](https://github.com/google/docsy/blob/main/i18n/en.toml) | The link text to use.  |
-| icon      |                                                                                                                                                          | The icon class to use. |
+| Parameter | Default                                                            | Description    |
+| --------- | ------------------------------------------------------------------ | -------------- |
+| title     |                                                                    | Feature title  |
+| url       |                                                                    | URL to link to |
+| url_text  | The [language parameter][] value of [`ui_read_more`][ui_read_more] | Link text      |
+| icon      |                                                                    | Icon class     |
+
+[language parameter]: ../language/#internationalization-bundles
+[ui_read_more]: <{{% param github_repo %}}/blob/main/i18n/en.yaml>
 
 For available icons, see
 [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
@@ -662,7 +673,7 @@ Tab selection is persisted by default. When unspecified, `persist` defaults to
 
 #### `tab`
 
-The `tab` shortcode represent the tabs you want to show. It supports the
+The `tab` shortcode represents the tabs you want to show. It supports the
 following named parameters, all of which are optional:
 
 - **`header`**: defines the tab's header text. When omitted it defaults to text
@@ -706,19 +717,55 @@ code fragments on card like elements, which can be optionally presented side by
 side. Let's showcase this feature with the following sample card group which
 shows the first four Presidents of the United States:
 
+<!-- Ensure signature images are readable in dark mode -->
+<style>
+  [data-bs-theme="dark"] .card-footer:has(> img) {
+    --bs-card-cap-bg: #fff;
+  }
+</style>
+
+<!-- prettier-ignore-start -->
+<!-- Images: Wikimedia Commons -->
 {{% cardpane %}}
-{{% card header="**George Washington**" title="\*1732 &nbsp;&nbsp;&nbsp; †1799" subtitle="**President:** 1789 – 1797" footer="![SignatureGeorgeWashington](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/George_Washington_signature.svg/320px-George_Washington_signature.svg.png 'Signature George Washington')" %}}
-![PortraitGeorgeWashington](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg/633px-Gilbert_Stuart_Williamstown_Portrait_of_George_Washington.jpg 'Portrait George Washington')
+
+{{% card
+  header="**George Washington**"
+  title="\*1732 &nbsp;&nbsp;&nbsp; †1799"
+  subtitle="**President:** 1789 – 1797"
+  footer="![Signature George Washington](/docs/content/shortcodes/card-pane/george-washington-signature.png)"
+%}}
+![George Washington](card-pane/george-washington-portrait.jpg)
 {{% /card %}}
-{{% card header="**John Adams**" title="\* 1735 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1797 – 1801" footer="![SignatureJohnAdams](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/John_Adams_Sig_2.svg/320px-John_Adams_Sig_2.svg.png 'Signature John Adams')" %}}
-![PortraitJohnAdams](https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Gilbert_Stuart%2C_John_Adams%2C_c._1800-1815%2C_NGA_42933.jpg/633px-Gilbert_Stuart%2C_John_Adams%2C_c._1800-1815%2C_NGA_42933.jpg 'Portrait John Adams')
+
+{{% card
+  header="**John Adams**"
+  title="\*1735 &nbsp;&nbsp;&nbsp; †1826"
+  subtitle="**President:** 1797 – 1801"
+  footer="![Signature John Adams](/docs/content/shortcodes/card-pane/john-adams-signature.png)"
+%}}
+![John Adams](card-pane/john-adams-portrait.jpg)
 {{% /card %}}
-{{% card header="**Thomas Jefferson**" title="\* 1743 &nbsp;&nbsp;&nbsp; † 1826" subtitle="**President:** 1801 – 1809" footer="![SignatureThomasJefferson](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Thomas_Jefferson_Signature.svg/320px-Thomas_Jefferson_Signature.svg.png 'Signature Thomas Jefferson')" %}}
-![PortraitThomasJefferson](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29%28cropped%29.jpg/390px-Official_Presidential_portrait_of_Thomas_Jefferson_%28by_Rembrandt_Peale%2C_1800%29%28cropped%29.jpg 'Portrait Thomas Jefferson')
+
+{{% card
+  header="**Thomas Jefferson**"
+  title="\*1743 &nbsp;&nbsp;&nbsp; †1826"
+  subtitle="**President:** 1801 – 1809"
+  footer="![Signature Thomas Jefferson](/docs/content/shortcodes/card-pane/thomas-jefferson-signature.png)"
+%}}
+![Thomas Jefferson](card-pane/thomas-jefferson-portrait.jpg)
 {{% /card %}}
-{{% card header="**James Madison**" title="\* 1751 &nbsp;&nbsp;&nbsp; † 1836" subtitle="**President:** 1809 – 1817" footer="![SignatureJamesMadison](https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/James_Madison_sig.svg/320px-James_Madison_sig.svg.png 'Signature James Madison')" %}}
-![PortraitJamesMadison](https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/James_Madison%28cropped%29%28c%29.jpg/393px-James_Madison%28cropped%29%28c%29.jpg 'Portrait James Madison')
-{{% /card %}} {{% /cardpane %}}
+
+{{% card
+  header="**James Madison**"
+  title="\*1751 &nbsp;&nbsp;&nbsp; †1836"
+  subtitle="**President:** 1809 – 1817"
+  footer="![Signature James Madison](/docs/content/shortcodes/card-pane/james-madison-signature.png)"
+%}}
+![James Madison](card-pane/james-madison-portrait.jpg)
+{{% /card %}}
+
+{{% /cardpane %}}
+<!-- prettier-ignore-end -->
 
 Docsy supports creating such card panes via different shortcodes:
 
@@ -737,13 +784,17 @@ Make use of the `card` shortcode to display a card. The following code sample
 demonstrates how to code a card element:
 
 ```go-html-template
-{{</* card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono"
-          footer="![SignatureJohnLennon](https://server.tld/…/signature.png 'Signature John Lennon')"*/>}}
+{{</* card
+  header="**Imagine**"
+  title="Artist and songwriter: John Lennon"
+  subtitle="Co-writer: Yoko Ono"
+  footer="![SignatureJohnLennon](https://server.tld/…/signature.png)"
+*/>}}
+
 Imagine there's no heaven, It's easy if you try<br/>
 No hell below us, above us only sky<br/>
 Imagine all the people living for today…
 
-…
 {{</* /card */>}}
 ```
 
@@ -751,30 +802,54 @@ This code translates to the left card shown below, showing the lyrics of John
 Lennon's famous song `Imagine`. A second explanatory card element to the right
 indicates and explains the individual components of a card:
 
+<!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
 {{% cardpane %}}
-{{< card header="**Imagine**" title="Artist and songwriter: John Lennon" subtitle="Co-writer: Yoko Ono" footer="![SignatureJohnLennon](https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Firma_de_John_Lennon.svg/320px-Firma_de_John_Lennon.svg.png 'Signature John Lennon')" >}}
-Imagine there's no heaven, It's easy if you try<br/> No hell below us, above us
-only sky<br/> Imagine all the people living for today…
 
-Imagine there's no countries, it isn't hard to do<br/> Nothing to kill or die
-for, and no religion too<br/> Imagine all the people living life in peace…
+{{< card
+  header="**Imagine**"
+  title="Artist and songwriter: John Lennon"
+  subtitle="Co-writer: Yoko Ono"
+  footer="![SignatureJohnLennon](/docs/content/shortcodes/card-pane/john-lennon-signature.png)"
+>}}
 
-Imagine no possessions, I wonder if you can<br/> No need for greed or hunger - a
-brotherhood of man<br/> Imagine all the people sharing all the world…
+Imagine there's no heaven, It's easy if you try<br/>
+No hell below us, above us only sky<br/>
+Imagine all the people living for today…
 
-You may say I'm a dreamer, but I'm not the only one<br/> I hope someday you'll
-join us and the world will live as one {{< /card >}}
-{{% card header="**Header**: specified via named parameter `Header`" title="**Card title**: specified via named parameter `title`" subtitle="**Card subtitle**: specified via named parameter `subtitle`" footer="**Footer**: specified via named parameter `footer`" %}}
+Imagine there's no countries, it isn't hard to do<br/>
+Nothing to kill or die for, and no religion too<br/>
+Imagine all the people living life in peace…
+
+Imagine no possessions, I wonder if you can<br/>
+No need for greed or hunger - a brotherhood of man<br/>
+Imagine all the people sharing all the world…
+
+You may say I'm a dreamer, but I'm not the only one<br/>
+I hope someday you'll join us and the world will live as one
+
+{{< /card >}}
+
+{{% card
+  header="**Header**: specified via named parameter `Header`"
+  title="**Card title**: specified via named parameter `title`"
+  subtitle="**Card subtitle**: specified via named parameter `subtitle`"
+  footer="**Footer**: specified via named parameter `footer`"
+%}}
+
 **Content**: inner content of the shortcode, this may be plain text or formatted
 text, images, videos, … . If your content is markdown, use the percent sign `%`
 as outermost delimiter of your `card` shortcode, your markup should look like
 `{{%/* card */%}}Your **markdown** content{{%/* /card */%}}`. In case of HTML
 content, use square brackets `<>` as outermost delimiters:
-`{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}` {{% /card %}}
+`{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}`
+
+{{% /card %}}
+
 {{% /cardpane %}}
 
+<!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
 While the main content of the card is taken from the inner markup of the `card`
@@ -825,9 +900,9 @@ function which is used to render the code block presented on the card.
 
 ### Card groups
 
-Displaying two ore more cards side by side can be easily achieved by putting
-them between the opening and closing elements of a `cardpane` shortcode. The
-general markup of a card group resembles closely the markup of a tabbed pane:
+Displaying two or more cards side by side can be easily achieved by putting them
+between the opening and closing elements of a `cardpane` shortcode. The general
+markup of a card group resembles closely the markup of a tabbed pane:
 
 ```go-html-template
 {{</* cardpane */>}}
@@ -844,7 +919,7 @@ general markup of a card group resembles closely the markup of a tabbed pane:
 ```
 
 Contrary to tabs, cards are presented side by side, however. This is especially
-useful it you want to compare different programming techniques (traditional vs.
+useful if you want to compare different programming techniques (traditional vs.
 modern) on two cards, like demonstrated in the example above:
 
 {{< cardpane >}} {{< card code=true header="**Java 5**" >}} File[] hiddenFiles =

@@ -16,7 +16,7 @@ A site navbar appears at the top of every site page. It is built from Hugo
 [menus] and Docsy-generated elements. Hugo [menus] consist of an array of menu
 entries, accessible via the `.Site.Menus` site variable.
 
-The `main` menu is build from:
+The `main` menu is built from:
 
 - [Menu] entries defined over the `main` menu.
 - Docsy-generated menus (depending on your site configuration):
@@ -441,7 +441,7 @@ existing page of your site. For internal links you can choose to use the
 parameter `manualLinkRelref` instead of `manualLink` to use the built-in Hugo
 function
 [relref](https://gohugo.io/functions/relref/ 'External link to official Hugo Docs').
-If `relref` can't find a unique page in your site, Hugo throws a error message.
+If `relref` can't find a unique page in your site, Hugo throws an error message.
 
 > [!NOTE]
 >
@@ -455,7 +455,7 @@ If `relref` can't find a unique page in your site, Hugo throws a error message.
 ### Section as sidebar root (EXPERIMENTAL) {#sidebar-root}
 
 To help readers stay focused within a section, you can “root” a section in the
-sidebar navigation. This is particularly useful when there is deeply nested
+sidebar navigation. This is particularly useful when there are deeply nested
 pages.
 
 Enable the feature in your site configuration:
@@ -645,7 +645,7 @@ see [ScrollSpy].
 
 ## Breadcrumb navigation
 
-[Breadcrumb navigation] appears at the top of each non-index page be default. To
+[Breadcrumb navigation] appears at the top of each non-index page by default. To
 also display single-element breadcrumb lists in index pages, add the following
 [style override] to your project:
 
@@ -664,8 +664,8 @@ or _Tags_.
 
 As illustrated next, you can disable (non-taxonomy) breadcrumb navigation for an
 entire project, by setting `ui.breadcrumb_disable` to true in your project
-[configuration file]. Similarly, you can disabled taxonomy breadcrumbs by
-setting `ui.taxonomy_breadcrumb_disable` to true:
+[configuration file]. Similarly, you can disable taxonomy breadcrumbs by setting
+`ui.taxonomy_breadcrumb_disable` to true:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}

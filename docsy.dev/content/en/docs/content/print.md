@@ -51,7 +51,7 @@ navigation.
 
 ### Disabling the ToC
 
-To disable showing the the table of contents in the printable view, set the
+To disable showing the table of contents in the printable view, set the
 `disable_toc` param to `true`, either in the page front matter, or in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 

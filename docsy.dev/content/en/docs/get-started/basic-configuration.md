@@ -64,7 +64,7 @@ gcs_engine_id = "..."
 
 To use your own Custom Search Engine, set `gcs_engine_id` to your search engine
 ID. For details, see
-[Configure search with a Google Custom Search Engine](/docs/content/search/#configure-search-with-a-google-custom-search-engine).
+[Configure search with a Google Custom Search Engine](/docs/content/search/#google-search).
 
 ## What's next?
 

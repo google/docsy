@@ -3,12 +3,16 @@
 //
 .td-sidebar-toc {
   @include link-decoration;
+  display: none;
+  @extend .d-print-none;
+  @extend .d-xl-block;
+  @extend .col-xl-2;
 
   border-left: 1px solid var(--bs-border-color);
 
   @supports (position: sticky) {
     position: sticky;
-    top: $td-navbar-min-height;
+    margin-top: $td-navbar-min-height;
     height: calc(100vh - #{$td-navbar-min-height});
     overflow-y: auto;
   }

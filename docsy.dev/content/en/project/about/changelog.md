@@ -150,6 +150,7 @@ For the full list of changes, see the [0.14.0] release page.
 - **Internationalization**: [updated
   translations][0.14.0-blog-internationalization] for multiple locales.
 - Fixed nested **`sidebar_root_for`** bug ([#2470]).
+- Fixed Google-search modal colors in dark mode ([#2524]).
 
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
@@ -157,6 +158,7 @@ For the full list of changes, see the [0.14.0] release page.
 [#2470]: https://github.com/google/docsy/pull/2470
 [#2477]: https://github.com/google/docsy/pull/2477
 [#2480]: https://github.com/google/docsy/pull/2480
+[#2524]: https://github.com/google/docsy/pull/2524
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
@@ -320,7 +322,7 @@ For the full list of changes, see the [0.11.0] release page.
 
 **New**:
 
-- Support for Right-To-Left (RLT) languages is reintroduced via [Bootstrap's
+- Support for Right-To-Left (RTL) languages is reintroduced via [Bootstrap's
   support for RTL][bs-rtl]. For details, see [Right-to-left languages][rtl].
 - The URL to your project's contribution guidelines is configurable. For
   details, see [Adding a community page].
@@ -351,8 +353,8 @@ dark-mode support][dark-mode].
 
 **Style changes** (potentially breaking):
 
-- Adjusted the style of various shortcode and elements so that they are
-  compatible with light/dark mode. For details see, **Important style changes**
+- Adjusted the style of various shortcodes and elements so that they are
+  compatible with light/dark mode. For details, see **Important style changes**
   in [Color themes and dark-mode support][dark-mode].
 
 [#1952]: https://github.com/google/docsy/pull/1952
@@ -379,7 +381,7 @@ this release are listed next.
   For any given page, repository links are now computed from a page's _resolved_
   `File` path &mdash; as resolved _through_ mount points, if any. That is, the
   path used is the one that refers to the file's actual location on disk, not
-  it's logical path in Hugo's [union file system].
+  its logical path in Hugo's [union file system].
 
   This is a breaking change for pages of sites that use mounts and
   [path_base_for_github_subdir]. Projects will need to adjust the value of
@@ -580,7 +582,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 - **Simplified use of mermaid diagrams**: when using a `mermaid` code block on
   your page, mermaid is now automatically enabled (needs hugo version >=
-  0.93.0). For existing sites build with hugo 0.93.0+, parameter
+  0.93.0). For existing sites built with hugo 0.93.0+, parameter
   `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
@@ -637,9 +639,10 @@ are documented below.
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   /docs/content/lookandfeel/#styling-your-project-logo-and-name
-[upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
+[upgraded fontawesome to v6]:
+  https://web.archive.org/web/20251117042118/https://docs.fontawesome.com/v6/web/setup/upgrade
 [what's changed in v6]:
-  https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
+  https://web.archive.org/web/20251116052945/https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
 
 ## v0.5.0 {#v0.5.0}
 

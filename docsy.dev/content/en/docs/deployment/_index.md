@@ -20,7 +20,7 @@ Now that you're serving your site locally, Hugo will watch for changes to the co
 
 ## Build environments and indexing
 
-By default, Hugo sites built with `hugo` (rather than served locally with `hugo server`) have the Hugo build environment `production`. Deployed Docsy sites with `production` builds can be indexed by search engines, including [Google Custom Search Engines](/docs/content/search/#configure-search-with-a-google-custom-search-engine). Production builds also have optimized JavaScript and CSS for live deployment (for example, minified JS rather than the more legible original source).
+By default, Hugo sites built with `hugo` (rather than served locally with `hugo server`) have the Hugo build environment `production`. Deployed Docsy sites with `production` builds can be indexed by search engines, including [Google Custom Search Engines](/docs/content/search/#google-search). Production builds also have optimized JavaScript and CSS for live deployment (for example, minified JS rather than the more legible original source).
 
 If you do not want your deployed site to be indexed by search engines (for example if you are still developing your live site), or if you want to build a development version of your site for offline analysis, you can set your Hugo build environment to something else such as `development` (the default for local deploys with `hugo server`), `test`, or another environment name of your choice.
 
@@ -69,7 +69,14 @@ Then follow the instructions in [Host on Netlify](https://gohugo.io/hosting-and-
 >   }
 > ```
 
-Alternatively, you can follow the same instructions but specify your **Deploy settings** in a [`netlify.toml` file](https://docs.netlify.com/configure-builds/file-based-configuration/) in your repo rather than in the **Deploy settings** page. You can see an example of this in the [Docsy theme repo](https://github.com/google/docsy/blob/main/netlify.toml) (though note that the build command here is a little unusual because the Docsy user guide is *inside* the theme repo).
+Alternatively, you can follow the same instructions but specify your **Deploy
+settings** in a [`netlify.toml` file][] in your repo rather than in the **Deploy
+settings** page. For an example, see the [netlify.toml][] for the Docsy website
+(though note that the build command here is a little unusual because the Docsy
+user guide is *inside* the theme repo).
+
+[`netlify.toml` file]: https://docs.netlify.com/configure-builds/file-based-configuration/
+[netlify.toml]: https://github.com/google/docsy/blob/main/docsy.dev/netlify.toml
 
 If you have an existing deployment you can view and update the relevant information by selecting the site from your list of sites in Netlify, then clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Focal 20.04** is selected in the **Build image selection** section - if you're creating a new deployment this is used by default. You need to use this image to run the extended version of Hugo.
 
@@ -83,7 +90,7 @@ Before deploying on GitHub Pages, make sure that you've pushed your site source 
 
 > [!NOTE] Correct baseURL setting
 >
-> Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
+> Make sure to correctly set your site's `baseURL`, either via hugo's `--baseURL '…'` command line parameter or inside your `hugo.toml`/`hugo.yaml`/`hugo.json` configuration file. When deploying to GitHub pages your `baseURL` needs to be set to `https://<USERNAME>.github.io/<repository_name>`, otherwise your site layout will be broken.
 
 1. With GitHub Pages, a site is published to the branch `gh-pages` and served from there by default. You must create this branch first, either in the GitHub web interface or via command line (at the root of your local repo clone):
 
@@ -188,7 +195,7 @@ That's it! Your deployment workflow for your site is configured.
 
 Any future push to the branch specified in your workflow file will now trigger the action workflow defined in the workflow file. Additionally, you can trigger the deployment manually by using GitHub web UI.
 
-Once you push to your repo, you can see the progress of the triggered workflow in the **Actions** tab of the the GitHub web UI:
+Once you push to your repo, you can see the progress of the triggered workflow in the **Actions** tab of the GitHub web UI:
 
 ```
 URL 'Repo actions': https://github.com/<username>/<repository_name>/actions
@@ -269,7 +276,7 @@ deployment:
 
    As you can see, issuing the `hugo deploy` command automatically [invalidates](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html) your CloudFront CDN cache.
 
-1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy`command!
+1. That's all you need to do! From now on, you can easily deploy to your S3 bucket using Hugo's built-in `deploy` command!
 
 For more information about the Hugo `deploy` command, including command line options, see this [synopsis](https://gohugo.io/commands/hugo_deploy). In particular, you may find the `--maxDeletes int` option or the `--force` option (which forces upload of all files) useful.
 

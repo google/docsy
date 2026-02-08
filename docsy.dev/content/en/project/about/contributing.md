@@ -195,7 +195,7 @@ accordingly.
 ## Post-release followup
 
 Assuming that Docsy release v{{% param version %}} has been successfully
-deployed and use by at least one downstream project, then perform the following
+deployed and used by at least one downstream project, then perform the following
 actions before any further changes are merged into the default branch:
 
 1. Set `version` in [package.json] to the next planned (or the next dot) release

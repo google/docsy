@@ -2,8 +2,8 @@
 title: Docsy
 description: A Hugo theme for creating great technical documentation sites
 params:
+  body_class: td-navbar-links-all-active
   ui: { navbar_theme: dark }
-  btn-lg: class="btn btn-lg btn-{1}" type="button"
 ---
 
 {{% blocks/cover
@@ -18,12 +18,12 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <button {{% _param btn-lg primary %}} href="about/">
+  <a {{% _param btn-lg primary %}} href="about/">
     Learn more
-  </button>
-  <button {{% _param btn-lg secondary %}} href="docs/get-started/">
+  </a>
+  <a {{% _param btn-lg secondary %}} href="docs/get-started/">
     Get started
-  </button>
+  </a>
 </div>
 
 {{% blocks/link-down color="info" %}}
@@ -32,14 +32,17 @@ params:
 
 {{% blocks/lead color="primary" %}}
 
-Docsy is a theme for the Hugo static site generator that's specifically designed
-for technical documentation sets. Our aim is to help you get a working
+Docsy is a theme for the [Hugo][] static site generator that's specifically
+designed for technical documentation sets. Our aim is to help you get a working
 documentation site up and running as easily as possible, so you can concentrate
 on creating great content for your users.
 
-<a href="https://www.netlify.com/" target="_blank" rel="noopener">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
-</a>
+[![Deploys by Netlify][netlify-badge]][netlify]
+
+[Hugo]: https://gohugo.io/
+[netlify]: https://www.netlify.com/
+[netlify-badge]: https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+
 {{% /blocks/lead %}}
 
 {{% blocks/section color="dark" type="row" %}}

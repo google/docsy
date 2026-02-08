@@ -146,7 +146,7 @@ must use a local install.
 To ensure you can properly build your site beyond executing `hugo server`, you
 must have the
 [latest long term support (LTS) Version](https://nodejs.org/en/about/releases/)
-of Node.js. If you do not have the latest LTS version, you may see the one of
+of Node.js. If you do not have the latest LTS version, you may see one of the
 following errors:
 
 ```

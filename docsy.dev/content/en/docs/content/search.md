@@ -11,9 +11,9 @@ Docsy offers multiple options that let your readers search your site content, so
 you can pick one that suits your needs or [design your own](#custom-search). You
 can choose from:
 
-- [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine)
-  (GCSE), the default option, which uses Google's index of your public site to
-  generate a search results page.
+- [Google Custom Search Engine](#google-search) (GCSE), the default option,
+  which uses Google's index of your public site to generate a search results
+  page.
 - [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and
   search mechanism. Search results are displayed as a pop-up. Algolia DocSearch
   is free for public documentation sites.
@@ -64,7 +64,7 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-## Configure search with a Google Custom Search Engine
+## Configure search with a Google Custom Search Engine {#google-search}
 
 By default Docsy uses a [Google Custom Search Engine][GCSE] (GCSE) to search
 your site. To enable this feature, you'll first need to make sure that you have
@@ -371,7 +371,7 @@ If you want to limit the width, add the following scss into
 ### Excluding pages from local search results
 
 To exclude pages from local search results, add `exclude_search: true` to the
-the front matter of each page:
+front matter of each page:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -409,14 +409,14 @@ implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
 - [layouts/_partials/search-input.html]
-- [assets/scss/_search.scss]
+- [assets/scss/td/_search.scss]
 - [assets/js/search.js]
 
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
 [assets/js/search.js]:
   https://github.com/google/docsy/blob/main/assets/js/search.js
-[assets/scss/_search.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/_search.scss
+[assets/scss/td/_search.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/_search.scss
 [configuration file]:
   https://gohugo.io/getting-started/configuration/#configuration-file
 [GCSE]: https://cse.google.com/cse/all

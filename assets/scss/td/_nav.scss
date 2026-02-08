@@ -173,21 +173,17 @@ $td-link-underline-offsets: (
   }
 }
 
-@if $enable-dark-mode {
-  @include color-mode(dark) {
-    // Better contrast for dark homepage navbar links
-    &.td-navbar-cover {
-      .nav-link {
-        @at-root .td-home & {
-          // The homepage is the only page that does not have any navbar items
-          // that are active, because the user isn't viewing a page in any other
-          // section. Make nav-links more contrasted by setting all entries (which
-          // happen to be non-active) to the active color.
-          --bs-nav-link-color: var(--bs-navbar-active-color) !important;
-          --bs-nav-link-hover-color: var(--bs-navbar-active-color) !important;
-        }
-      }
-    }
+// EXPERIMENTAL better contrast for dark homepage navbar links. Opt-in via
+// body_class, or custom CSS, optionally guarded/wrapped by .td-home and/or
+// @include color-mode(dark):
+.td-navbar-links-all-active {
+  .nav-link {
+    // The homepage is the only page that does not have any navbar items
+    // that are active, because the user isn't viewing a page in any other
+    // section. Make nav-links more contrasted by setting all entries (which
+    // happen to be non-active) to the active color.
+    --bs-nav-link-color: var(--bs-navbar-active-color) !important;
+    --bs-nav-link-hover-color: var(--bs-navbar-active-color) !important;
   }
 }
 
