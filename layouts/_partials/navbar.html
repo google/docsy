@@ -23,7 +23,7 @@
     </span>
     {{- /**/ -}}
   </a>
-  <div class="td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
+  <div class="td-navbar__main td-navbar-nav-scroll td-navbar-nav-scroll--indicator" id="main_navbar">
     <div class="scroll-indicator scroll-left"></div>
     <ul class="navbar-nav">
       {{ $p := . -}}
@@ -68,7 +68,7 @@
     </ul>
     <div class="scroll-indicator scroll-right"></div>
   </div>
-  <div class="d-none d-lg-block td-navbar__search">
+  <div class="td-navbar__search d-none d-lg-block">
     {{ partial "search-input.html" . }}
   </div>
 </div>

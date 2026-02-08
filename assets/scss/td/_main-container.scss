@@ -2,7 +2,14 @@
 .td-outer {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+
+  min-height: calc(
+    100vh - #{$td-navbar-min-height} - #{$td-navbar__main-min-height-mobile}
+  );
+
+  @include media-breakpoint-up(md) {
+    min-height: 100vh;
+  }
 }
 
 // The outer page container for the default base template.
@@ -24,12 +31,9 @@
 
 .td-main {
   flex-grow: 1;
-  @at-root .td-section &,
-    .td-page & {
-    // Use flex so descendant elements (like <main>) can grow to fill the
-    // available vertical (viewport) space, but only for docs layouts (it breaks
-    // td-home, which needs column-based layout). We select docs layouts via
-    // .td-section and .td-page above.
+  // Use flex when this container has a sidebar so descendant elements with
+  // flex:1 (like <main> in docs layouts) can grow.
+  &:has(> .td-sidebar) {
     display: flex;
   }
 }

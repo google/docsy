@@ -6,10 +6,6 @@
   min-height: 150px;
   padding-top: map-get($spacers, 5);
 
-  @include media-breakpoint-down(lg) {
-    min-height: 200px;
-  }
-
   /* &__left { } */
 
   &__center {
