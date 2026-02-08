@@ -763,6 +763,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:45.582835-05:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/_markup/render-blockquote-alert.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:35.328725-05:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/_partials/head.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:13.107935-05:00"
@@ -787,6 +791,14 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:23.660542-05:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/_partials/sidebar-tree.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:35.756744-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_partials/sidebar.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:36.117367-05:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/_partials/td/scrollspy-attr.txt": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:17.33024-05:00"
@@ -795,6 +807,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:10.783648-05:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/_shortcodes/blocks/cover.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:36.403397-05:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/_shortcodes/blocks/lead.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:26:42.747366-05:00"
@@ -802,6 +818,14 @@
   "https://github.com/google/docsy/blob/main/layouts/_shortcodes/blocks/section.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:26:43.276043-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_shortcodes/pageinfo.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:36.77731-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/_shortcodes/td/site-build-info/netlify.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:37.119824-05:00"
   },
   "https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html": {
     "StatusCode": 206,
@@ -822,6 +846,10 @@
   "https://github.com/google/docsy/blob/main/layouts/docs/baseof.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:24:56.647928-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/swagger/baseof.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-08T05:54:37.536015-05:00"
   },
   "https://github.com/google/docsy/blob/main/package.json": {
     "StatusCode": 206,
