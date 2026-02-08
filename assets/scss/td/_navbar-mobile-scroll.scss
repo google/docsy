@@ -9,7 +9,7 @@
 @include media-breakpoint-down(lg) {
   .td-navbar-nav-scroll {
     max-width: 100%;
-    height: $td-navbar__main-min-height-mobile;
+    min-height: $td-navbar__main-min-height-mobile;
     overflow: hidden;
     font-size: 0.9rem;
   }
