@@ -1,12 +1,11 @@
 ---
 title: Get started
-weight: 2
-aliases: [getting-started]
-date: 2018-07-30
-description:
+description: >-
   Learn how to get started with Docsy, including the available options for
   installing and using the Docsy theme.
-sidebar_root_for: self
+date: 2018-07-30
+aliases: [getting-started]
+weight: 2
 ---
 
 As you saw in our introduction, Docsy is a [Hugo](https://gohugo.io) theme,

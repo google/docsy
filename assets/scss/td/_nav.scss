@@ -29,7 +29,7 @@ $td-link-underline-offsets: (
   backdrop-filter: var(--td-navbar-backdrop-filter);
   border-bottom: var(--td-navbar-border-bottom);
 
-  min-height: $td-navbar-min-height;
+  min-height: $td-navbar-min-height + $td-navbar__main-min-height-mobile;
   margin: 0;
   z-index: 32;
 
@@ -74,6 +74,8 @@ $td-link-underline-offsets: (
     }
   }
 
+  // &__main { }
+
   // For .td-search__input styling, see _search.scss
 
   .dropdown {
@@ -83,6 +85,7 @@ $td-link-underline-offsets: (
   @include media-breakpoint-up(md) {
     position: fixed;
     top: 0;
+    min-height: $td-navbar-min-height;
     width: 100%;
 
     .nav-item {

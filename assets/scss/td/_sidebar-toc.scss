@@ -12,6 +12,11 @@
 
   @supports (position: sticky) {
     position: sticky;
+
+    // Keep the sidebar below the fixed navbar in both states: margin-top
+    // applies in normal flow (before stickiness); top applies in the sticky
+    // state.
+    top: $td-navbar-min-height;
     margin-top: $td-navbar-min-height;
     height: calc(100vh - #{$td-navbar-min-height});
     overflow-y: auto;
