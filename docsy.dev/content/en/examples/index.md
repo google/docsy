@@ -1,14 +1,24 @@
 ---
 title: Examples and templates
 linkTitle: Examples
-description: Docsy in action!
+description: Get started with a Docsy template or explore some example sites
+aliases: [/docs/examples]
 body_class: td-no-left-sidebar
 menu: { main: { weight: 30 } }
 # prettier-ignore
 cSpell:ignore: docsy Agones kubeflow Navidrome tekton fluxcd Graphviz Stroom protobuf Dapr
 ---
 
-{{% blocks/cover title="Examples and templates" height="auto td-below-navbar" %}}
+{{% blocks/cover
+  title="Examples and templates"
+  height="min td-below-navbar"
+  image_anchor="bottom"
+%}}
+
+<!-- prettier-ignore -->
+{{% param description %}}
+{.display-6}
+
 {{% /blocks/cover %}}
 
 {{% blocks/section color="white" %}}
@@ -24,7 +34,7 @@ The Docsy project provides two site starter templates:
 | Site                                      | Repo                                      |
 | ----------------------------------------- | ----------------------------------------- |
 | [Goldydocs][] the main Docsy example site | <{{% param github_repo %}}-example>       |
-| [Docsy starter][]                    | <https://github.com/chalin/docsy-starter> |
+| [Docsy starter][]                         | <https://github.com/chalin/docsy-starter> |
 
 In addition to these example starters, there are several live sites using the
 theme. Consider adding your Docsy-based site to this page once you have a

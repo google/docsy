@@ -1,13 +1,21 @@
 ---
 title: About Docsy
 linkTitle: About
+description: >-
+  Docsy is a pre-configured Hugo theme that provides the core features and
+  behaviors needed to create a technical documentation site
 menu: {main: {weight: 10}}
 ---
 
-{{% blocks/cover title="About Docsy" height="max td-below-navbar" %}}
+{{% blocks/cover
+  title="About Docsy"
+  height="min td-below-navbar"
+  image_anchor="bottom"
+%}}
 
-Docsy is a pre-configured Hugo theme that provides the core features and
-behaviors needed to create a technical documentation site.
+<!-- prettier-ignore -->
+{{% param description %}}
+{.fs-3}
 
 {{% /blocks/cover %}}
 

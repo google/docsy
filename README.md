@@ -51,7 +51,7 @@ You can find an example project that uses Docsy in the
 [Docsy Example Project repo](https://github.com/google/docsy-example).The Docsy
 Example Project is hosted at [example.docsy.dev](https://example.docsy.dev). For
 real-life examples of sites that use Docsy (and their source repos), see our
-[Examples](https://www.docsy.dev/docs/examples/) page.
+[Examples and templates](https://www.docsy.dev/examples/) page.
 
 To use the Docsy theme for your own site:
 

@@ -369,7 +369,7 @@ from scratch as it provides defaults for many required configuration parameters.
 - [Add content and customize your site](/docs/content/)
 - Get some ideas from our
   [Example Site](https://github.com/google/docsy-example) and other
-  [Examples](/docs/examples/).
+  [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
 [lts release]: https://nodejs.org/en/about/releases/

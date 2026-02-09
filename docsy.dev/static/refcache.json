@@ -75,6 +75,10 @@
     "StatusCode": 200,
     "LastSeen": "2026-02-06T03:28:43.838921-05:00"
   },
+  "https://cncf-docsy-starter.netlify.app/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-09T08:44:54.91506-05:00"
+  },
   "https://commons.wikimedia.org/": {
     "StatusCode": 200,
     "LastSeen": "2026-02-06T03:25:26.855269-05:00"
@@ -2443,10 +2447,6 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:27:16.828766-05:00"
   },
-  "https://www.docsy.dev/docs/examples/": {
-    "StatusCode": 206,
-    "LastSeen": "2026-02-06T03:29:37.614325-05:00"
-  },
   "https://www.docsy.dev/docs/get-started/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:29:37.487945-05:00"
@@ -2458,6 +2458,10 @@
   "https://www.docsy.dev/docs/get-started/docsy-as-module/example-site-as-template/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-06T03:25:48.413001-05:00"
+  },
+  "https://www.docsy.dev/examples/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-06T03:29:37.614325-05:00"
   },
   "https://www.docsy.dev/project/about/changelog/": {
     "StatusCode": 206,

@@ -17,8 +17,13 @@ description: A Hugo theme for creating great technical documentation sites
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <a {{% _param btn-lg primary %}} href="/about/">Learn more</a>
-  <a {{% _param btn-lg secondary %}} href="/docs/get-started/">Get started</a>
+  <a {{% _param btn-lg primary %}} href="/docs/get-started/">
+    Get started
+  </a>
+  <a {{% _param btn-lg secondary %}}
+    href="/examples/">
+    Explore examples
+  </a>
 </div>
 
 {{% blocks/link-down color="info" %}}
@@ -42,7 +47,7 @@ on creating great content for your users.
 
 {{% blocks/section color="primary" type="row" %}}
 
-{{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/docs/examples/" %}}
+{{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/examples/" %}}
 As well as our example site, there's a growing number of projects using Docsy for their doc sites.
 {{% /blocks/feature %}}
 

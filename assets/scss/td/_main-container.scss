@@ -31,10 +31,12 @@
 
 .td-main {
   flex-grow: 1;
-  // Use flex when this container has a sidebar so descendant elements with
-  // flex:1 (like <main> in docs layouts) can grow.
-  &:has(> .row > .td-sidebar) {
-    display: flex;
+  @include media-breakpoint-up(md) {
+    // Use flex when this container has a sidebar so descendant elements with
+    // flex:1 (like <main> in docs layouts) can grow.
+    &:has(> .row .td-sidebar-nav) {
+      display: flex;
+    }
   }
 }
 
@@ -44,6 +46,7 @@
 
   padding-top: var(--td-main-padding-top);
   padding-bottom: 2rem;
+
   @include media-breakpoint-up(md) {
     padding-top: calc(var(--td-main-padding-top) + #{$td-navbar-min-height});
   }

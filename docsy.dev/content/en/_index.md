@@ -17,11 +17,11 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <a {{% _param btn-lg primary %}} href="docs/get-started/">
-    Get started with Docsy
+  <a {{% _param btn-lg primary %}} href="/docs/get-started/">
+    Get started
   </a>
   <a {{% _param btn-lg secondary %}}
-    href="docs/examples/">
+    href="/examples/">
     Explore examples
   </a>
 </div>
@@ -47,7 +47,7 @@ on creating great content for your users.
 
 {{% blocks/section color="primary" type="row" %}}
 
-{{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="docs/examples/" %}}
+{{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="examples/" %}}
 As well as our example site, there's a growing number of projects using Docsy for their doc sites.
 {{% /blocks/feature %}}
 
