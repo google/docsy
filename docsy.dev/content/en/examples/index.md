@@ -1,15 +1,44 @@
 ---
-title: Examples
-weight: 8
-description: Some examples of Docsy in action!
+title: Examples and templates
+linkTitle: Examples
+description: Get started with a Docsy template or explore some example sites
+aliases: [/docs/examples]
+body_class: td-no-left-sidebar
+menu: { main: { weight: 30 } }
 # prettier-ignore
 cSpell:ignore: docsy Agones kubeflow Navidrome tekton fluxcd Graphviz Stroom protobuf Dapr
 ---
 
+{{% blocks/cover
+  title="Examples and templates"
+  height="min td-below-navbar"
+  image_anchor="bottom"
+%}}
+
+<!-- prettier-ignore -->
+{{% param description %}}
+{.display-6}
+
+{{% /blocks/cover %}}
+
+{{% blocks/section color="white" %}}
+
 One of the best ways to see what Docsy can do, and learn how to configure a site
-with it, is to see some real projects. In addition to our provided Docsy Example
-Project, there are several live sites already using the theme. Please add your
-own examples once you've got a production site up and running with Docsy!
+with it, is to see some real projects. Of course, we use Docsy for this site.
+For the site source, see [docsy.dev][docsy.dev-repo].
+
+## Starter templates
+
+The Docsy project provides two site starter templates:
+
+| Site                                      | Repo                                      |
+| ----------------------------------------- | ----------------------------------------- |
+| [Goldydocs][] the main Docsy example site | <{{% param github_repo %}}-example>       |
+| [Docsy starter][]                         | <https://github.com/chalin/docsy-starter> |
+
+In addition to these example starters, there are several live sites using the
+theme. Consider adding your Docsy-based site to this page once you have a
+production site up and running.
 
 ## Docsy theme examples
 
@@ -51,4 +80,8 @@ Example sites that include a moderate to high amount of customization:
 | [XLT](https://xltdoc.xceptance.com/)                 | https://github.com/Xceptance/xlt-documentation |
 | [Dapr](https://docs.dapr.io/)                        | https://github.com/dapr/docs                   |
 
+[Docsy starter]: https://cncf-docsy-starter.netlify.app/
+[docsy.dev-repo]: <{{% param github_repo %}}/tree/main/docsy.dev>
 [Goldydocs]: <{{% param example_site_url %}}>
+
+{{% /blocks/section %}}

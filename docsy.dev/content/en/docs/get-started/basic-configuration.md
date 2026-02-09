@@ -71,7 +71,7 @@ ID. For details, see
 - [Add content and customize your site](/docs/content/)
 - Get some ideas from our
   [Example Site](https://github.com/google/docsy-example) and other
-  [Examples](/docs/examples/).
+  [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
 [configuration file]:
