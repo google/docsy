@@ -10,7 +10,6 @@ params:
 
 {{% blocks/cover
   title="Welcome to Docsy!"
-  image_anchor="top"
   height="min td-below-navbar"
 %}}
 
@@ -28,7 +27,7 @@ params:
 
 {{% /blocks/cover %}}
 
-{{% blocks/lead color="primary" %}}
+{{% blocks/lead color="white" %}}
 
 Docsy is a theme for the [Hugo][] static site generator that's specifically
 designed for technical documentation sets. Our aim is to help you get a working
@@ -43,7 +42,7 @@ on creating great content for your users.
 
 {{% /blocks/lead %}}
 
-{{% blocks/section color="dark" type="row" %}}
+{{% blocks/section color="primary" type="row" %}}
 
 {{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/docs/examples/" %}}
 As well as our example site, there's a growing number of projects using Docsy for their doc sites.

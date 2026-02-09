@@ -1,10 +1,23 @@
 .td-footer {
-  --td-footer-border-top: 1px solid var(--bs-border-color);
+  --td-footer-border-color: var(--bs-border-color);
+  --td-footer-border: 1px solid var(--bs-border-color);
+  --td-min-height: 10rem;
 
+  // TODO: don't impost dark theme here
   @extend .td-box--dark;
+  // TODO: until we're freed from the dark theme hide the border in light mode;
+  // we don't need it because the footer itself is dark.
+  @at-root {
+    @include color-mode(light) {
+      .td-footer {
+        --td-footer-border: none;
+      }
+    }
+  }
 
-  min-height: 150px;
+  min-height: var(--td-min-height);
   padding-top: map-get($spacers, 5);
+  border-top: var(--td-footer-border);
 
   /* &__left { } */
 
@@ -44,11 +57,5 @@
 
   &__all_rights_reserved {
     display: none;
-  }
-}
-
-@include color-mode(dark) {
-  .td-footer {
-    border-top: var(--td-footer-border-top);
   }
 }

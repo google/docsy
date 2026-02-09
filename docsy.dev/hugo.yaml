@@ -194,12 +194,13 @@ module:
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
     # Tests
-    - source: content/en/featured-background.jpg
+    # cSpell:ignore quang nguyen vinh therato
+    - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
       target: content/tests/blocks-cover/height-auto/background.jpg
       sites: *sites
-    - source: content/en/featured-background.jpg
+    - source: content/en/about/background-pexels-therato-3472764.jpg
       target: content/tests/blocks-cover/height-full/background.jpg
       sites: *sites
-    - source: content/en/featured-background.jpg
+    - source: *bg-img
       target: content/tests/blocks-cover/height-min/background.jpg
       sites: *sites
