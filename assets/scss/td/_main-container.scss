@@ -31,12 +31,17 @@
 
 .td-main {
   flex-grow: 1;
-  @include media-breakpoint-up(md) {
-    // Use flex when this container has a sidebar so descendant elements with
-    // flex:1 (like <main> in docs layouts) can grow.
-    &:has(> .row .td-sidebar-nav) {
-      display: flex;
-    }
+  @include media-breakpoint-between(md, xl) {
+    // Between md and xl, a docs page has a left (section) sidebar but no right
+    // (TOC) sidebar. Since it's the TOC sidebar that makes the .td-main
+    // vertically fill the .td-main container, we need another way to have
+    // td-main be full height when it's not there.
+    //
+    // Setting display:flex on .td-main does the trick, but we need to confine
+    // it to be between md and xl only: below md .td-main doesn't need to fill
+    // the page, we're in flow mode for mobile; above xl we don't need it
+    // either, the TOC sidebar is there and makes .td-main fill the page.
+    display: flex;
   }
 }
 
