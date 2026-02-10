@@ -172,8 +172,8 @@ accordingly.
     </details>
 
 14. Update the [`release` branch][release-branch] to refer to the commit that
-    you tagged as {{% param version %}}. This will trigger a production deploy of
-    the website.
+    you tagged as {{% param version %}}. This will trigger a production deploy
+    of the website.
 
     ```sh
     git checkout release
