@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy frontmatter subrepo
 ---
 
-> Report refreshed for commits through `29793a64` on `main`.
+> Report refreshed for commits through `37be7dc7` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -96,7 +96,7 @@ client projects.
 - `3753ff78` (#2505) Reorganize SCSS, fix scroll padding, normalize
   blocks-shortcode heading IDs and keep old IDs as alias
 
-### Since last refresh (3753ff78..29793a64)
+### Since last refresh (3753ff78..37be7dc7)
 
 - `4dc710b4` (#2506) Document heading aliases and in-page targets
 - `0ddab73a` (#2508) Improve 0.14.0 upgrade action-step guidance
@@ -132,6 +132,8 @@ client projects.
 - `8bc5f537` (#2531) Add cards with thumbnails to examples page, upgrade Hugo to
   0.155.3
 - `29793a64` (#2533) Add RTL fixes for code blocks and foldable-nav icons
+- `617b5960` (#2534) Release 0.14.0 preparation
+- `37be7dc7` (#2538) Fix ToC sidebar width in xl viewports
 
 ## CI / tooling only
 

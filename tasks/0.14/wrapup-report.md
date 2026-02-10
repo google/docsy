@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `29793a64` on `main`.
+> Report refreshed for commits through `37be7dc7` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -69,6 +69,7 @@ cSpell:ignore: docsy
 - **Documentation and style**: Release notes and Hugo upgrade guide updates,
   "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
 - **RTL**: Fixes for code blocks and foldable-nav icons ([#2533]).
+- **ToC**: Fix sidebar width in xl viewports ([#2538]).
 
 ## References
 
@@ -87,6 +88,7 @@ cSpell:ignore: docsy
 [#2502]: https://github.com/google/docsy/pull/2502
 [#2505]: https://github.com/google/docsy/pull/2505
 [#2533]: https://github.com/google/docsy/pull/2533
+[#2538]: https://github.com/google/docsy/pull/2538
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
 
 ## Action items
@@ -145,13 +147,12 @@ Verification, testing, and QA:
   a brief upgrade section that references the 0.13.0 upgrade guide for command
   examples.
 
-## Refresh note (29793a64)
+## Refresh note (37be7dc7)
 
-- Plan and reports updated for commits through `29793a64`; new commits in
-  [commit-inventory.md](commit-inventory.md) under "Since last refresh"
-  (includes #2531 Hugo 0.155.3 + examples cards, #2533 RTL fixes).
-- Blog post and changelog compared to this wrapup: 0.14.0 blog post is aligned;
-  changelog updated with **RTL** fixes ([#2533]) under Other changes; blog
-  "Style improvements and fixes" updated with RTL bullet.
+- Plan and reports updated for commits through `37be7dc7`; new commit in
+  [commit-inventory.md](commit-inventory.md) under "Since last refresh": #2538
+  Fix ToC sidebar width in xl viewports.
+- Blog and changelog: #2538 is in 0.14.1 scope. Removed from 0.14.0 blog post;
+  changelog now has it under new v0.14.1 section only.
 - Outstanding: optional changelog line for documentation reorganization (site →
   project) remains optional.
