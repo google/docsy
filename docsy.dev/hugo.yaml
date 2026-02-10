@@ -52,7 +52,7 @@ markup:
 
 params:
   # Officially supported Hugo version. Can be >= the Docsy min Hugo version.
-  hugoMinVersion: &hugoMinVersion 0.155.2
+  hugoMinVersion: &hugoMinVersion 0.155.3
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
