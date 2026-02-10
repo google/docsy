@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `3753ff78` on `main`.
+> Report refreshed for commits through `29793a64` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -68,6 +68,7 @@ cSpell:ignore: docsy
   the tree root ([#2495]).
 - **Documentation and style**: Release notes and Hugo upgrade guide updates,
   "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
+- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533]).
 
 ## References
 
@@ -85,6 +86,7 @@ cSpell:ignore: docsy
 [#2498]: https://github.com/google/docsy/pull/2498
 [#2502]: https://github.com/google/docsy/pull/2502
 [#2505]: https://github.com/google/docsy/pull/2505
+[#2533]: https://github.com/google/docsy/pull/2533
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
 
 ## Action items
@@ -142,3 +144,14 @@ Verification, testing, and QA:
 - Structured as a release report focusing on new features and improvements, with
   a brief upgrade section that references the 0.13.0 upgrade guide for command
   examples.
+
+## Refresh note (29793a64)
+
+- Plan and reports updated for commits through `29793a64`; new commits in
+  [commit-inventory.md](commit-inventory.md) under "Since last refresh"
+  (includes #2531 Hugo 0.155.3 + examples cards, #2533 RTL fixes).
+- Blog post and changelog compared to this wrapup: 0.14.0 blog post is aligned;
+  changelog updated with **RTL** fixes ([#2533]) under Other changes; blog
+  "Style improvements and fixes" updated with RTL bullet.
+- Outstanding: optional changelog line for documentation reorganization (site →
+  project) remains optional.

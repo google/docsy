@@ -110,11 +110,31 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
-## v0.14.0 {#v0.14.0}
+## v0.14.1 or v0.15.0 {#v0.15.0}
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.14.0] release page.
+For the full list of changes, see the [0.X.Y][] release page.
+
+[**Breaking changes**](#breaking-change):
+
+- ...
+
+**New**:
+
+**Other changes**:
+
+- ...
+
+[**Experimental**](#experimental):
+
+- ...
+
+[0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+
+## v0.14.0 {#v0.14.0}
+
+For the full list of changes, see the [0.14.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
@@ -151,6 +171,7 @@ For the full list of changes, see the [0.14.0] release page.
   translations][0.14.0-blog-internationalization] for multiple locales.
 - Fixed nested **`sidebar_root_for`** bug ([#2470]).
 - Fixed Google-search modal colors in dark mode ([#2524]).
+- **RTL**: fixes for code blocks and foldable-nav icons ([#2533]).
 
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
@@ -159,6 +180,7 @@ For the full list of changes, see the [0.14.0] release page.
 [#2477]: https://github.com/google/docsy/pull/2477
 [#2480]: https://github.com/google/docsy/pull/2480
 [#2524]: https://github.com/google/docsy/pull/2524
+[#2533]: https://github.com/google/docsy/pull/2533
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
@@ -750,7 +772,7 @@ For the full list of changes, see the [0.2.0] release page.
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.X.Y] release page.
+For the full list of changes, see the [0.X.Y][] release page.
 
 [**Breaking changes**](#breaking-change):
 
