@@ -128,7 +128,7 @@ accordingly.
     ```
 
 13. **Push the new tags** to the main remote (`origin` or `upstream` depending
-    on your setup) as well as any secondary remotes, if any:
+    on your setup) as well as secondary remotes, if any:
 
     ```console
     $ git push upstream $REL
@@ -136,19 +136,27 @@ accordingly.
     * [new tag]         v{{% param version %}} -> v{{% param version %}}
     ```
 
-    You can push to all remotes with this alias.[^push-all-remotes] First check
-    if it's already defined.
+    <details>
+    <summary class="h6 text-primary">How to push to all remotes with an alias</summary>
 
-    [^push-all-remotes]:
-        You only need to run this command once. Using `--global` will make the
-        alias available in all your Git repositories; it can be omitted to make
-        the alias available only in the current repository.
+    First check if the `push-all-remotes` alias is already defined:
 
-    ```console
-    $ git config --global --list | grep alias.push-all-remotes
-    $ git config --global alias.push-all-remotes \
-        '!f() { for r in $(git remote); do (set -x; git push "$r" "$1"); done; }; f'
+    ```sh
+    git config --global --list | grep alias.push-all-remotes
     ```
+
+    If not, define the alias:
+
+    ```sh
+    git config --global alias.push-all-remotes \
+      '!f() { for r in $(git remote); do (set -x; git push "$r" "$1"); done; }; f'
+    ```
+
+    > [!NOTE]
+    >
+    > You only need to define the alias once. Omit `--global` from the command
+    > above to make the alias available only in the current repository rather
+    > than all repositories.
 
     Then:
 
@@ -161,7 +169,19 @@ accordingly.
     ...
     ```
 
-14. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+    </details>
+
+14. Update the [`release` branch][release-branch] to refer to the commit that
+    you tagged as {{% param version %}}. This will trigger a production deploy
+    of the website.
+
+    ```sh
+    git checkout release
+    git merge --ff-only main
+    git push-all-remotes release
+    ```
+
+15. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
     - From the **release/tag dropdown**: Select the new release tag that you
       just pushed, v{{% param version %}}.
 
@@ -182,14 +202,14 @@ accordingly.
 
     - Select **Create a discussion for this release**.
 
-15. **Publish the release**: click _Publish release_.
-16. Test the release with a downstream project, such as [docsy-example].
-17. If you find issues, determine whether they need to be fixed immediately. If
+16. **Publish the release**: click _Publish release_.
+
+17. Test the release with a downstream project, such as [docsy-example].
+
+18. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Then publish a dot release:
     go back to step 1.
-18. Update the [`release` branch][release-branch] to refer to the commit that
-    you tagged as {{% param version %}}. This will trigger a production deploy
-    of the website.
+
 19. Wait for the production deploy to complete, and checks that [docsy.dev]
     updates are visible.
 

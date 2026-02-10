@@ -15,7 +15,8 @@ if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
   exit 0
 fi
 
-output="$(npm run -s fix:version -- --silent 2>&1)"
+new_version="$(scripts/get-build-id.sh)"
+output="$(npm run -s set:package-version -- --version "$new_version" --silent 2>&1)"
 status=$?
 
 if [ $status -ne 0 ]; then
@@ -29,7 +30,7 @@ if [ -n "$output" ]; then
   echo >&2
   abort_action="$(echo "$action_name" | tr '[:lower:]' '[:upper:]')"
   echo "$abort_action ABORTED! Why?" >&2
-  echo 'Just to let you know that the package build ID has been updated. ' >&2
+  echo 'Just to let you know that the package version has been updated.' >&2
   if [ "$action_name" = "push" ]; then
     echo 'Commit and push again if you are ok with the new ID.' >&2
   else
