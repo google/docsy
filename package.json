@@ -35,7 +35,7 @@
     "fix:format:diff": "npm run fix:format",
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s cd:docsy.dev fix:format",
     "fix:markdown": "npm run check:markdown -- --fix",
-    "fix:version": "npm run set:package-version -- --id \"$(scripts/get-build-id.sh)\"",
+    "fix:version": "npm run set:package-version -- --version \"$(scripts/get-build-id.sh)\"",
     "fix-for-test": "npm run fix:format && npm run fix:markdown && echo 'Skipping fix:version' && npm run cd:docsy.dev fix",
     "fix": "npm run fix:format && npm run fix:markdown && npm run fix:version && npm run cd:docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",

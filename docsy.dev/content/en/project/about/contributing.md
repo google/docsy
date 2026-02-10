@@ -178,7 +178,7 @@ accordingly.
     ```sh
     git checkout release
     git merge --ff-only main
-    git git push-all-remotes release
+    git push-all-remotes release
     ```
 
 15. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
