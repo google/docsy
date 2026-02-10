@@ -1,7 +1,7 @@
 ---
 title: 0.14 Release wrapup plan
 date: 2026-01-16
-last-main-commit: db32f5b
+last-main-commit: 29793a64
 cSpell:ignore: docsy
 ---
 
@@ -79,7 +79,7 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [3753ff78].
+Report refreshed for commits through [29793a64].
 
 ### 0.14.0 blog post
 

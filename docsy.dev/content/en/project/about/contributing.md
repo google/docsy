@@ -58,7 +58,8 @@ accordingly.
     - You'll create a new section for the next release in a later step.
 
 3.  **Update the release report blog post** for {{% param version %}}, if any.
-    Remove draft status.
+    - Remove draft status.
+    - Update the date to today's date.
 
 4.  Run `npm run fix`.
 
@@ -82,7 +83,7 @@ accordingly.
     e.g., vendor assets and [go.mod] dependencies are up-to-date, etc.
 
 7.  **Submit a PR with your changes**, using a title like "Release
-    {{% param version %}}" preparation". Use this command to create the PR via
+    {{% param version %}} preparation". Use this command to create the PR via
     the web interface:
 
     ```sh

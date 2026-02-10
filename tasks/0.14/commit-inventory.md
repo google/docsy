@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy frontmatter subrepo
 ---
 
-> Report refreshed for commits through `3753ff78` on `main`.
+> Report refreshed for commits through `29793a64` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -96,6 +96,43 @@ client projects.
 - `3753ff78` (#2505) Reorganize SCSS, fix scroll padding, normalize
   blocks-shortcode heading IDs and keep old IDs as alias
 
+### Since last refresh (3753ff78..29793a64)
+
+- `4dc710b4` (#2506) Document heading aliases and in-page targets
+- `0ddab73a` (#2508) Improve 0.14.0 upgrade action-step guidance
+- `88e96c7a` (#2509) Refactor navbar vars, anchors, and cover styles; update
+  blog & CL
+- `fe8683ca` (#2511) Update NPM packages, Hugo to 0.155.2
+- `d06e1406` (#2512) Rework Hugo upgrade post to make actions clearer
+- `c725abe7` (#2513) Adjust Hugo 0.152-0.155 upgrade guide title to better match
+  new org
+- `75e091ce` (#2514) Add extra styles for cover CTA/layouts and update 0.14.0
+  blog post
+- `5208380c` (#2515) Adjust ToC and main layout breakpoints under
+  td-no-left-sidebar
+- `ba02f629` (#2507) Fix typos, remove duplicate paragraph, and other copyedits
+- `cec16119` (#2517) Centralize btn-lg helper to Hugo params, use anchors not
+  buttons
+- `555ca48f` (#2518) Refresh refache, fix links, add local card images, and more
+- `4fdc4844` (#2519) Opt-in dark navbar link contrast via homepage body_class
+- `83e9a3e6` (#2520) Add td-navbar-links-all-active to list of experimental
+  styles in 0.14.0 blog post
+- `ec568185` (#2521) Style adjustments and new bs-defaults.scss partial
+- `6230b09e` (#2524) Add dark overlay styles for GCS modal
+- `cc2d0569` (#2525) Fix toc position on desktop, and left sidenav + main layout
+  on tablet
+- `a8db3e0d` (#2527) Factor sidebar-toc styles, and 0.13.0 + 0.14.0 blog post
+  improvements
+- `e27e4137` (#2528) Adjust navbar heights and main-container layout
+- `21112fb6` (#2516) Fix links in repository CHANGELOG.md & CONTRIBUTING.md
+- `9e8a9190` (#2510) Update Serbian (cyrillic & latin)
+- `901887d3` (#2526) Upgrade GitHub Actions for Node 24 compatibility
+- `234f18dd` (#2530) Promote examples page to navbar, rework CTA, hero images,
+  and more
+- `8bc5f537` (#2531) Add cards with thumbnails to examples page, upgrade Hugo to
+  0.155.3
+- `29793a64` (#2533) Add RTL fixes for code blocks and foldable-nav icons
+
 ## CI / tooling only
 
 - `66a0c7d` (#2440) Update README, contrib docs for deployment and release
@@ -120,5 +157,8 @@ client projects.
 - `9334955` (#2430) Upgrade Hugo to 0.154.3
 - `b52c265` (#2432) Update Hugo to 0.154.5
 - `6399194a` (#2486) Update devDeps, incl. Hugo to 0.155.0
+- `fe8683ca` (#2511) Update NPM packages, Hugo to 0.155.2
+- `8bc5f537` (#2531) Add cards with thumbnails to examples page, upgrade Hugo to
+  0.155.3
 
 [commits since v0.13.0]: https://github.com/google/docsy/compare/v0.13.0...main

@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `3753ff78` on `main`.
+> Report refreshed for commits through `29793a64` on `main`.
 
 Mapping [commits since v0.13.0][] to their originating issues (when known).
 
