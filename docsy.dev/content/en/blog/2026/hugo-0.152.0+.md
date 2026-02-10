@@ -1,7 +1,7 @@
 ---
 title: Hugo 0.152.0-0.155.x upgrade guide
 linkTitle: Hugo 0.152+ upgrade guide
-date: 2026-02-09
+date: 2026-02-10
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -12,7 +12,7 @@ cSpell:ignore: docsy dartsass libsass IPTC multihost libwebp opentelemetry
 ---
 
 This post summarizes the breaking and notable changes in Hugo 0.152.0 to
-0.155.2. It is a companion post to the Docsy [0.14.0](0.14.0/) and
+0.155.3. It is a companion post to the Docsy [0.14.0](0.14.0/) and
 [0.13.0](../2025/0.13.0/) release and upgrade guides.
 
 ## Upgrade summary

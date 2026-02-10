@@ -1,7 +1,7 @@
 ---
 title: Examples and templates
 linkTitle: Examples
-description: Get started with a Docsy template or explore some example sites
+description: Get started with a template or explore some Docsy-based sites
 aliases: [/docs/examples]
 body_class: td-no-left-sidebar
 menu: { main: { weight: 30 } }
@@ -27,18 +27,54 @@ One of the best ways to see what Docsy can do, and learn how to configure a site
 with it, is to see some real projects. Of course, we use Docsy for this site.
 For the site source, see [docsy.dev][docsy.dev-repo].
 
+<div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <img
+        src="docsy-example-home.jpg"
+        class="card-img-top"
+        alt="Goldydocs starter template homepage"
+      />
+      <div class="card-body">
+        <div class="h5 card-title mb-2"><a href="{{% param example_site_url %}}">Goldydocs</a></div>
+        <p class="card-text">The main Docsy example site starter template.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <img
+        src="docsy-starter-home.jpg"
+        class="card-img-top"
+        alt="Docsy starter template homepage"
+      />
+      <div class="card-body">
+        <div class="h5 card-title mb-2"><a href="https://cncf-docsy-starter.netlify.app/">Docsy starter</a></div>
+        <p class="card-text">An opinionated starter including CI/CD setup.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 ## Starter templates
 
 The Docsy project provides two site starter templates:
 
-| Site                                      | Repo                                      |
-| ----------------------------------------- | ----------------------------------------- |
-| [Goldydocs][] the main Docsy example site | <{{% param github_repo %}}-example>       |
-| [Docsy starter][]                         | <https://github.com/chalin/docsy-starter> |
+| Site                               | Repo                                      | Docsy            |
+| ---------------------------------- | ----------------------------------------- | ---------------- |
+| [Goldydocs][] - main Docsy example | <{{% param github_repo %}}-example>       | v0.14.0 (latest) |
+| [Docsy starter][]                  | <https://github.com/chalin/docsy-starter> | v0.14.0 (latest) |
 
 In addition to these example starters, there are several live sites using the
 theme. Consider adding your Docsy-based site to this page once you have a
 production site up and running.
+
+Thumbnails for the starter templates are shown above. Both use a hero image. For
+an example of a cover that is a gradient of the primary theme color, see this
+[test Homepage][].
+
+[test Homepage]: /tests/blocks-cover/color-gradient/
 
 ## Docsy theme examples
 
@@ -47,7 +83,6 @@ Example sites that have low to no customization:
 | Site                                                | Repo                                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
 | [docsy.dev](/) (this site)                          | <{{% param github_repo %}}/tree/main/docsy.dev>              |
-| [Goldydocs] the main Docsy example site             | <{{% param github_repo %}}-example>                          |
 | [AgileBase docs](https://docs.agilebase.co.uk/)     | https://github.com/okohll/abdocs                             |
 | [Agones.dev](https://agones.dev/site/)              | https://github.com/googleforgames/agones/tree/main/site      |
 | [Apache Parquet](https://parquet.apache.org/)       | https://parquet.apache.org                                   |
