@@ -275,6 +275,40 @@ test('main --version takes precedence over --id', () => {
   ]);
 });
 
+test('main removes -dev suffix with --version "" and updates hugo.yaml', () => {
+  const pkg = { version: '1.2.3-dev+build-123' };
+  const hugoYaml = { params: { version: '1.2.3-dev' } };
+  let writtenPkg;
+  let writtenHugoYaml;
+  const messages = [];
+  const logger = {
+    log(message) {
+      messages.push(message);
+    },
+  };
+
+  const newVersion = main(['--version', ''], {
+    logger,
+    readPackageJson: () => pkg,
+    writePackageJson: (updatedPkg) => {
+      writtenPkg = { ...updatedPkg };
+    },
+    readHugoYaml: () => ({ ...hugoYaml }),
+    writeHugoYaml: (updatedYaml) => {
+      writtenHugoYaml = { ...updatedYaml };
+    },
+  });
+
+  assert.equal(pkg.version, '1.2.3');
+  assert.deepEqual(writtenPkg, { version: '1.2.3' });
+  assert.equal(writtenHugoYaml.params.version, '1.2.3');
+  assert.equal(newVersion, '1.2.3');
+  assert.deepEqual(messages, [
+    '✓ Updated version: 1.2.3-dev+build-123 → 1.2.3',
+    '✓ Updated hugo.yaml version: 1.2.3-dev → 1.2.3',
+  ]);
+});
+
 test('main does not update hugo.yaml when using --id', () => {
   const pkg = { version: '1.0.0-dev' };
   const hugoYaml = { params: { version: '0.9.0' } }; // Different version, but should not be updated

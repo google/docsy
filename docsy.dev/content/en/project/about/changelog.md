@@ -110,17 +110,19 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
-## v0.14.1 or v0.15.0 {#v0.15.0}
+## v0.14.2 or v0.15.0 {#v0.15.0}
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.X.Y][] release page.
+For the full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
 - ...
 
 **New**:
+
+- ...
 
 **Other changes**:
 
@@ -130,7 +132,15 @@ For the full list of changes, see the [0.X.Y][] release page.
 
 - ...
 
-[0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
+[0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
+
+## v0.14.1 {#v0.14.1}
+
+Patch release [0.14.1][]:
+
+- Fixed **ToC** sidebar width in xl viewports ([#2538]).
+
+[0.14.1]: https://github.com/google/docsy/releases/v0.14.1
 
 ## v0.14.0 {#v0.14.0}
 
@@ -181,6 +191,7 @@ For the full list of changes, see the [0.14.0][] release page.
 [#2480]: https://github.com/google/docsy/pull/2480
 [#2524]: https://github.com/google/docsy/pull/2524
 [#2533]: https://github.com/google/docsy/pull/2533
+[#2538]: https://github.com/google/docsy/pull/2538
 [0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
@@ -779,6 +790,8 @@ For the full list of changes, see the [0.X.Y][] release page.
 - ...
 
 **New**:
+
+- ...
 
 **Other changes**:
 

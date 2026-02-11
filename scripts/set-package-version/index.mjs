@@ -3,7 +3,7 @@
 /**
  * Updates the version in package.json and optionally docsy.dev/hugo.yaml.
  * Can set the entire version or add/remove a build ID suffix.
- * The hugo.yaml file is only updated when --version is used.
+ * The hugo.yaml file is updated when --version is used.
  *
  * For usage, see the usage() function below.
  *
@@ -38,10 +38,15 @@ export function main(
 
   const currentVersion = pkg.version;
   let newVersion;
+  const removeDevSuffixOnly = version === '';
 
   if (version !== undefined) {
-    // --version takes precedence: set the entire version directly
-    newVersion = version;
+    if (removeDevSuffixOnly) {
+      newVersion = removeDevSuffix(currentVersion);
+    } else {
+      // --version takes precedence: set the entire version directly
+      newVersion = version;
+    }
   } else {
     // Use build ID logic: add/remove build ID from base version
     const baseVersion = currentVersion.split('+')[0]; // Remove existing build ID if present
@@ -57,7 +62,7 @@ export function main(
     updated = true;
   }
 
-  // Only update hugo.yaml when --version is used
+  // Update hugo.yaml when --version is used.
   let currentHugoVersion = '';
   if (version !== undefined) {
     const baseVersion = newVersion.split('+')[0]; // Remove build ID if present
@@ -90,16 +95,19 @@ export function main(
 const usageText = `
 Usage: node scripts/set-package-version/index.mjs [options]
   Options:
-    --silent, -s       Don't log any messages
-    --help, -h         Show this help message
-    --version VERS     Set the entire version to VERS
+    --silent|-s       Don't log any messages
+    --help|-h         Show this help message
+    --version|-v VERS  Set the entire version to VERS
     --id BUILD-ID      Set build ID to BUILD-ID (ignored if --version is used)
 
   Behavior:
-    - If --version VERS is provided: sets the version to VERS in both package.json and hugo.yaml
-    - If --id BUILD-ID is provided: adds BUILD-ID to the base version (package.json only)
-    - If --id "" is provided: removes the build ID (package.json only)
-    - If no --version or --id is provided: auto-generates build ID from timestamp (package.json only)
+    --version VERS : sets the version to VERS in both package.json and hugo.yaml
+    --version [''] : strips version to be just X.Y.Z in package.json and hugo.yaml
+    --id BUILD-ID  : adds BUILD-ID to the base version (package.json only)
+    --id ['']      : removes the build ID (package.json only)
+
+    When neither --version nor --id is provided: auto-generates build ID from
+    timestamp (package.json only)
 `;
 
 export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
@@ -126,12 +134,11 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
         silent = true;
         break;
       case '--version':
-        if (++i >= args.length) usage(1);
-        version = args[i];
+      case '-v':
+        version = ++i >= args.length ? '' : args[i];
         break;
       case '--id':
-        if (++i >= args.length) usage(1);
-        buildId = args[i];
+        buildId = ++i >= args.length ? '' : args[i];
         break;
       default:
         warn?.(`Unexpected argument: ${arg}`);
@@ -203,6 +210,10 @@ export function adjustVersionForBuildId(
     `Warning: Version format not recognized (${baseVersion}). Appending -dev suffix.`,
   );
   return `${baseVersion}-dev+${buildId}`;
+}
+
+export function removeDevSuffix(version) {
+  return version.replace(/-dev(?:[0-9A-Za-z.-]*)?(?:\+.*)?$/, '');
 }
 
 function defaultReadPackageJson() {
