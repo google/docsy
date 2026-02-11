@@ -110,7 +110,7 @@ This project is licensed under the Apache License 2.0, see
 <!-- FIXME: once 0.14.0 is released, update the link to the changelog page -->
 
 [official-support]:
-  https://www.docsy.dev/blog/2024/0.10.0/#hugo-breaking-changes-and-deprecation-notices
+  https://www.docsy.dev/project/about/changelog/#official-support
 [releases]: https://github.com/google/docsy/releases
 
 <!-- cSpell:ignore docsy -->

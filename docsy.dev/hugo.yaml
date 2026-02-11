@@ -62,7 +62,7 @@ params:
     to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
-  version: 0.14.1
+  version: 0.14.2-dev-001-over-main-20ff86e7
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
@@ -118,6 +118,10 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
+      - name: Contributing
+        url: /docs/contribution-guidelines/
+        icon: fa fa-book
+        desc: How to contribute
       - name: Project docs and site info
         url: /project/
         icon: fa fa-book

@@ -8,20 +8,23 @@
 
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-export const hugoYamlPath = path.join(
-  __dirname,
-  '..',
-  '..',
-  'docsy.dev',
-  'hugo.yaml',
-);
+/**
+ * Resolves the path to hugo.yaml. The docsy repo uses docsy.dev/hugo.yaml;
+ * docsy-example and similar sites use hugo.yaml at the repo root.
+ */
+export function getHugoYamlPath() {
+  const cwd = process.cwd();
+  const docsDevHugo = path.join(cwd, 'docsy.dev', 'hugo.yaml');
+  const rootHugo = path.join(cwd, 'hugo.yaml');
+  if (fs.existsSync(docsDevHugo)) {
+    return docsDevHugo;
+  }
+  return rootHugo;
+}
 
 export function readHugoYaml() {
-  const content = fs.readFileSync(hugoYamlPath, 'utf8');
+  const content = fs.readFileSync(getHugoYamlPath(), 'utf8');
   const lines = content.split('\n');
   const result = { params: {} };
 
@@ -61,7 +64,7 @@ export function readHugoYaml() {
 }
 
 export function writeHugoYaml(hugoYaml) {
-  const content = fs.readFileSync(hugoYamlPath, 'utf8');
+  const content = fs.readFileSync(getHugoYamlPath(), 'utf8');
   const lines = content.split('\n');
 
   // Update the version line under params
@@ -121,5 +124,5 @@ export function writeHugoYaml(hugoYaml) {
     }
   }
 
-  fs.writeFileSync(hugoYamlPath, newLines.join('\n'));
+  fs.writeFileSync(getHugoYamlPath(), newLines.join('\n'));
 }

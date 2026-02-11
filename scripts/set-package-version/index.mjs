@@ -17,7 +17,10 @@ import { readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const packagePath = path.join(__dirname, '..', '..', 'package.json');
+
+function getPackagePath() {
+  return path.join(process.cwd(), 'package.json');
+}
 
 export function main(
   args = process.argv.slice(2),
@@ -217,11 +220,11 @@ export function removeDevSuffix(version) {
 }
 
 function defaultReadPackageJson() {
-  return JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+  return JSON.parse(fs.readFileSync(getPackagePath(), 'utf8'));
 }
 
 function defaultWritePackageJson(pkg) {
-  fs.writeFileSync(packagePath, JSON.stringify(pkg, null, 2) + '\n');
+  fs.writeFileSync(getPackagePath(), JSON.stringify(pkg, null, 2) + '\n');
 }
 
 const modulePath = __filename;
