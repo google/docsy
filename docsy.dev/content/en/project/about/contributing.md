@@ -1,47 +1,12 @@
 ---
-title: Contributing
-description: How to contribute to Docsy
+title: Maintainer notes
+description: Notes for Docsy maintainers
 aliases: [../contributing]
-cSpell:ignore: docsy hugo
+cSpell:ignore: docsy hugo creatordate
 ---
 
-We'd love to accept your patches and contributions to this project. There are
-just a few small guidelines you need to follow.
-
-## Contributor License Agreement (CLA)
-
-Contributions to this project must be accompanied by a Contributor License
-Agreement. You (or your employer) retain the copyright to your contribution;
-this simply gives us permission to use and redistribute your contributions as
-part of the project. Head over to <https://cla.developers.google.com/> to see
-your current agreements on file or to sign a new one.
-
-You generally only need to submit a CLA once, so if you've already submitted one
-(even if it was for a different project), you probably don't need to do it
-again.
-
-## Code reviews
-
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
-
-## Community Guidelines / Code of conduct
-
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
-
-## Student contributions
-
-Docsy welcomes contributions from students. However, we cannot guarantee that
-PRs will be merged within any specific time frame. We ask that instructors _not_
-create assignments requiring students to have PRs merged into the project. We
-will not merge PRs solely to satisfy any class assignments.
-
-## How to contribute
-
-See the [contribution guidelines][] in the Docsy user guide.
+For our main contributing page covering license agreements, code of conduct and
+more, see [Contribution guidelines][]. This page is for **maintainers only**.
 
 ## Publishing a release
 
@@ -71,16 +36,17 @@ accordingly.
     (bash or zsh) terminal:
 
     ```sh
-    # Version {{% param version %}} or 0.X.Y; replace with actual version
     VERSION={{% param version %}}
-    npm run set:package-version -- --version $VERSION
+    npm run set:version -- --version $VERSION
     ```
 
     This updates both `version` keys in [package.json] and
-    [docsy.dev/hugo.yaml].
+    [docsy.dev/hugo.yaml]. You can omit the argument to `--version` when the
+    package is already a dev version of {{% param version %}}.
 
-6.  Run `npm run ci:test`, which runs `ci:prepare` and more to ensure that,
-    e.g., vendor assets and [go.mod] dependencies are up-to-date, etc.
+6.  <a id="ci-test-step">Run `npm run ci:test`</a>, which runs `ci:prepare` and
+    more to ensure that, e.g., vendor assets and [go.mod] dependencies are
+    up-to-date, etc.
 
 7.  **Submit a PR with your changes**, using a title like "Release
     {{% param version %}} preparation". Use this command to create the PR via
@@ -109,71 +75,121 @@ accordingly.
     - On the default branch, `main`
     - At the commit that you want to tag as {{% param version %}}
 
-12. **Create and push a tag** for {{% param version %}}. Set the REL variable to
-    the release version or use the `VERSION` variable if you set it in the
-    previous step.
+12. **Create the new tag** for {{% param version %}}.
+    - Set the REL variable to the release version or use the `VERSION` variable
+      if you set it in the previous step.
 
-    ```sh
-    # Replace with the actual version, or use the VERSION variable
-    REL=v{{% param version %}}
-    REL=v$VERSION
-    echo "REL=$REL"
-    ```
+      ```sh
+      REL=v${VERSION:-{{% param version %}}}
+      echo "REL=$REL"
+      ```
 
-    Then:
+    - Create the new tag.
 
-    ```sh
-    git tag $REL
-    git tag --list | grep $REL
-    ```
+      ```sh
+      git tag $REL
+      ```
 
-13. **Push the new tags** to the main remote (`origin` or `upstream` depending
-    on your setup) as well as secondary remotes, if any:
+    - Double check:
 
-    ```console
-    $ git push upstream $REL
-    ...
-    * [new tag]         v{{% param version %}} -> v{{% param version %}}
-    ```
+      ```sh
+      git tag --sort=-creatordate | head -3
+      ```
+
+13. **Push the new tag**: either to all remotes at once, or one at a time.
 
     <details>
-    <summary class="h6 text-primary">How to push to all remotes with an alias</summary>
+    <summary class="h6 text-info">Push to all remotes</summary>
 
-    First check if the `push-all-remotes` alias is already defined:
+    <!-- Prevent Prettier from gluing the list to this HTML hunk -->
+    - List the remotes so you know what you'll be pushing to:
 
-    ```sh
-    git config --global --list | grep alias.push-all-remotes
-    ```
+      ```sh
+      git remote
+      ```
 
-    If not, define the alias:
+    - Check that the `push-all-remotes` alias is defined, and if not, define it:
 
-    ```sh
-    git config --global alias.push-all-remotes \
-      '!f() { for r in $(git remote); do (set -x; git push "$r" "$1"); done; }; f'
-    ```
+      ```sh
+      git config --global --list | grep alias.push-all-remotes
+      ```
 
-    > [!NOTE]
-    >
-    > You only need to define the alias once. Omit `--global` from the command
-    > above to make the alias available only in the current repository rather
-    > than all repositories.
+      <details>
+      <summary class="h6 text-primary">Define a `push-all-remotes` alias</summary>
 
-    Then:
+      First check if the `push-all-remotes` alias is already defined:
 
-    ```console
-    $ git push-all-remotes $REL
-    + git push origin v{{% param version %}}
-    * [new tag]         v{{% param version %}} -> v{{% param version %}}
-    + git push upstream v{{% param version %}}
-    * [new tag]         v{{% param version %}} -> v{{% param version %}}
-    ...
-    ```
+      ```sh
+      git config --global --list | grep alias.push-all-remotes
+      ```
+
+      If not, define the alias:
+
+      ```sh
+      git config --global alias.push-all-remotes \
+        '!f() { for r in $(git remote); do (set -x; git push "$r" "$1"); done; }; f'
+      ```
+
+      > [!NOTE]
+      >
+      > You only need to define the alias once. Omit `--global` from the command
+      > above to make the alias available only in the current repository rather
+      > than all repositories.
+
+      </details>
+
+    - If you have git hooks enabled that auto-update the Docsy package version,
+      disable the hook check for now:
+
+      ```sh
+      SKIP_VERSION_CHECK=1
+      ```
+
+    - Push the tag to the remotes:
+
+      ```console
+      $ git push-all-remotes $REL
+      + git push origin v{{% param version %}}
+      * [new tag]         v{{% param version %}} -> v{{% param version %}}
+      + git push upstream v{{% param version %}}
+      * [new tag]         v{{% param version %}} -> v{{% param version %}}
+      ...
+      ```
+
+    - Sanity check over `upstream` for example:
+
+      ```sh
+      git ls-remote --tags upstream | grep $REL
+      ```
+
+    - Unset the SKIP_VERSION_CHECK variable when you're done:
+
+      ```sh
+      unset SKIP_VERSION_CHECK
+      ```
 
     </details>
 
-14. Update the [`release` branch][release-branch] to refer to the commit that
-    you tagged as {{% param version %}}. This will trigger a production deploy
-    of the website.
+    <details>
+    <summary class="h6">Push to a single remote</summary>
+
+    <!-- Prevent Prettier from gluing the list to this HTML hunk -->
+    - Push to a single remote at a time, such as `upstream`:
+
+    ```sh
+    git push upstream $REL
+    ```
+
+    - Sanity check over `upstream` for example:
+
+      ```sh
+      git ls-remote --tags upstream | grep $REL
+      ```
+
+    </details>
+
+14. Fast-forward the [release][release-branch] branch so that it points to the
+    same commit as `main`:
 
     ```sh
     git checkout release
@@ -181,11 +197,17 @@ accordingly.
     git push-all-remotes release
     ```
 
-15. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-    - From the **release/tag dropdown**: Select the new release tag that you
-      just pushed, v{{% param version %}}.
+    This will trigger a production deploy of the website.
 
-    - Set the **release title** to the release version:
+15. Wait for the production deploy to complete and check that [docsy.dev][] has
+    been updated to the new release.
+
+16. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+    - **Target**: select the `release` branch.
+
+    - **Tag**: select new release tag v{{% param version %}}
+
+    - **Release title**: use the release version.
 
       ```text
       v{{% param version %}}
@@ -202,43 +224,75 @@ accordingly.
 
     - Select **Create a discussion for this release**.
 
-16. **Publish the release**: click _Publish release_.
+17. **Publish the release**: click _Publish release_.
 
-17. Test the release with a downstream project, such as [docsy-example].
+18. Test the release with a downstream project and/or the [docsy-example][]
+    site.
 
-18. If you find issues, determine whether they need to be fixed immediately. If
-    so, get fixes submitted, reviewed and approved. Then publish a dot release:
-    go back to step 1.
+19. If you find issues, determine whether they need to be fixed immediately. If
+    so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
+    a dot release.
 
-19. Wait for the production deploy to complete, and checks that [docsy.dev]
-    updates are visible.
+If all is well, release the Docsy example as detailed next.
 
-## Post-release followup
+## Docsy example release
 
-Assuming that Docsy release v{{% param version %}} has been successfully
-deployed and used by at least one downstream project, then perform the following
-actions before any further changes are merged into the default branch:
+The steps you follow are similar to the ones above for the Docsy release, but
+with the following modifications:
 
-1. Set `version` in [package.json] to the next planned (or the next dot) release
-   with a dev suffix, such as `v0.X.Z-dev`. You can also run:
+1.  **Update the version** of the example to {{% param version %}}:
 
-   ```sh
-   npm run set:package-version -- --id ''
+    ```sh
+    VERSION={{% param version %}}
+    npm run set:version:example -- --version $VERSION
+    ```
+
+2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
+    create a release and publish it with one difference:
+    - To create a new release draft, visit [Docsy-example release draft][].
+    - Once the release branch has been updated, wait for the production deploy
+      to complete and check that [example.docsy.dev][] has been updated to the
+      new release.
+
+[Docsy-example release draft]:
+  https://github.com/google/docsy-example/releases/new
+[example.docsy.dev]: https://example.docsy.dev
+
+## Post Docsy-release followup
+
+Assuming that both the Docsy and Docsy-example releases v{{% param version %}}
+have been successfully deployed, and that at least one other project has been
+successfully tested with the new release, then perform the following actions
+before any further changes are merged into the `main` branch:
+
+1. Update the package version to a dev ID for Docsy and Docsy-example:
+
+   ```console
+   $ npm run fix:version
+
+    > docsy@0.14.1 fix:version
+    > npm run set:version -- --version "$(scripts/get-build-id.sh)"
+
+
+    > docsy@0.14.1 set:version
+    > node scripts/set-package-version/index.mjs --version 0.14.2-dev-001-over-main-20ff86e7
+
+    ✓ Updated version: 0.14.1 → 0.14.2-dev-001-over-main-20ff86e7
+   $ npm run fix:version:example
+   ...
    ```
 
-2. In the [CHANGELOG]:
+2. In the [Changelog][]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
      at the end of the file.
 
-   - **Pin the {{% param version %}} release URL**, which ends with
-     `latest?FIXME=...`, to the {{% param version %}} release at:
-
-     <{{% param github_repo %}}/releases/v{{% param version %}}>
+   - **Fix the new release URL**, which ends with `latest?FIXME=...`, so that it
+     refers to the actual release, now that it exists.
 
 3. **Submit a PR with your changes**, using a title like:
 
    ```text
-   Set NPM package version to next unreleased dev version
+   Set version to {{% param version %}}
    ```
 
 4. **Get PR approved and merged**.
@@ -252,7 +306,7 @@ actions before any further changes are merged into the default branch:
 - **`scripts/set-package-version/index.mjs`**: Low-level version manager. See
   script help for usage.
 
-[CHANGELOG]: /project/about/changelog/
+[changelog]: /project/about/changelog/
 [contribution guidelines]: /docs/contribution-guidelines/
 [docsy-example]: https://github.com/google/docsy-example
 [docsy.dev]: https://www.docsy.dev/
