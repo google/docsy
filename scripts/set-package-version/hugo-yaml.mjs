@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+// cSpell:ignore docsy
+
 /**
  * Utilities for reading and writing the version field in docsy.dev/hugo.yaml.
  */
