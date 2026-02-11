@@ -97,7 +97,7 @@ other = "Əgər {{ .Site.Title }}-a daha çox töhfə vermək istəyirsinizsə, 
 other = "{{ .Site.Title }}-a necə töhfə verməyi bizim"
 
 [community_guideline]
-other = "Töhfə Yönergələrimizdən öyrənə bilərsiniz."
+other = "Töhfə Yönergələrimiz"
 
 # Feedback
 [feedback_title]
