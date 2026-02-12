@@ -5,11 +5,11 @@
 action_name="$1"  # "commit" or "push"
 hook_name="pre-$action_name"
 
-# Skip version check if on main branch
+# Skip version check if on main or release branch
 current_branch="$(git branch --show-current 2>/dev/null)"
-if [ "$current_branch" = "main" ]; then
-  exit 0
-fi
+case "$current_branch" in
+  main|release) exit 0 ;;
+esac
 
 if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
   exit 0
