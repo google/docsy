@@ -150,7 +150,7 @@ For the full list of changes, see the [0.15.0][] release page.
 For the full list of changes, see the [release report][0.14.2-blog] and
 [0.14.2][] release page.
 
-[**Breaking changes**](#breaking-change):
+[**Breaking changes**](#breaking-change) (style-only):
 
 - **[Default code styles][0.14.2-blog]** changed from `tango`/`onedark` to
   `friendly`/`native` for sites using `td/code-dark` ([#2548]).

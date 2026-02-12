@@ -13,10 +13,10 @@ make Docsy and its docs even better.
 >
 > We welcome your contributions but note that:
 >
-> - We cannot guarantee when pull requests will be reviewed.
+> - We cannot guarantee _when_ your [pull requests][pr] (PRs) will be reviewed.
 > - Review does not guarantee acceptance or merging.
-> - We may reject pull requests with content (e.g., AI-generated) that does not
->   meet our quality standards.
+> - We may reject PRs with content (e.g., AI-generated) that does not meet our
+>   quality standards.
 
 > [!NB] Maintainers, see [Maintainer notes](/project/about/contributing/).
 
@@ -75,7 +75,7 @@ familiar with basic GitHub workflows.
 
 1. Fork the [Docsy repo](https://github.com/google/docsy) on GitHub: this site's
    files live in the `docsy.dev` subdirectory.
-1. Make your changes and send a pull request (PR).
+1. Make your changes and send a [pull request][pr] (PR).
 1. If you're not yet ready for a review, add "WIP" to the PR name to indicate
    it's a work in progress. (**Don't** add the Hugo property "draft = true" to
    the page front matter, because that prevents the auto-deployment of the
@@ -210,3 +210,6 @@ fix it yourself, please create an issue in
 [this repository](https://github.com/google/docsy). You can also create an issue
 about a specific page by clicking the **Create Issue** button in the top right
 hand corner of the page.
+
+[PR]:
+  https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request

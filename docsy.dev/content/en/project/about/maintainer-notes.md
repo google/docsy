@@ -19,43 +19,68 @@ accordingly.
 2.  **Create or update a [changelog][] entry** for {{% param version %}}.
     - The section should provide a brief summary of breaking changes using the
       section template at the end of the file.
-    - Ensure to remove the UNRELEASED note.
+    - Ensure to remove the UNRELEASED note, if still present.
     - You'll create a new section for the next release in a later step.
 
 3.  **Update the release report blog post** for {{% param version %}}, if any.
     - Remove draft status.
-    - Update the date to today's date.
+    - Set `date` (or `lastmod` if already published) to today's date.
 
 4.  Run `npm run fix`.
 
-    > Note: This might update the version in `package.json` via `fix:version`,
+    > [!NOTE]
+    >
+    > This command might update the version in `package.json` via `fix:version`,
     > but you can ignore this change since you'll be setting the version
     > explicitly in the next step.
 
 5.  **Update Docsy version** to {{% param version %}} using the following from a
-    (bash or zsh) terminal:
+    (bash or zsh) terminal.
+    - First set the `VERSION` variable; we use it throughout the steps below.
 
-    ```sh
-    VERSION={{% param version %}}
-    npm run set:version -- --version $VERSION
-    ```
+      ```sh
+      VERSION={{% param version %}}
+      ```
 
-    This updates both `version` keys in [package.json] and
-    [docsy.dev/hugo.yaml]. You can omit the argument to `--version` when the
-    package is already a dev version of {{% param version %}}.
+    - Then run the `set:version` script.
+
+      Docsy is probably already at `{{% param version %}}-dev`, so you can run:
+
+      ```sh
+      npm run set:version
+      ```
+
+      Otherwise, set the version explicitly:
+
+      ```sh
+      npm run set:version -- --version $VERSION
+      ```
+
+      Both forms update the `version` related fields in [package.json][] and
+      [docsy.dev/hugo.yaml][].
 
 6.  <a id="ci-test-step">Run `npm run ci:test`</a>, which runs `ci:prepare` and
     more to ensure that, e.g., vendor assets and [go.mod] dependencies are
     up-to-date, etc.
 
-7.  **Submit a PR with your changes**, using a title like "Release
-    {{% param version %}} preparation". Use this command to create the PR via
-    the web interface:
+7.  **Submit a PR with your changes**.
+    - Commit any changes accumulated from the previous steps using this title:
 
-    ```sh
-    gh pr create --web --title "Release $VERSION preparation" \
-      --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
-    ```
+      ```text
+      Release {{% param version %}} preparation
+      ```
+
+    - Create a PR (with version-checks disabled) using the following command
+      that will open a PR-creation page in your browser:
+
+      ```sh
+      export SKIP_VERSION_CHECK=1
+      gh pr create --web --title "Release $VERSION preparation" \
+        --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
+      ```
+
+    - Use the web interface to fill in the PR details.
+    - Submit the PR.
 
 8.  **Test the PR** branch from selected sites, and push any required
     adjustments.
