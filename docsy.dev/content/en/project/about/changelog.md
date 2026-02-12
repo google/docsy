@@ -118,8 +118,8 @@ For the full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
-- **Default code styles** changed from `tango`/`onedark` to
-  `friendly`/`native` for sites using `td/code-dark`.
+- **Default code styles** changed from `tango`/`onedark` to `friendly`/`native`
+  for sites using `td/code-dark`.
 
 **New**:
 

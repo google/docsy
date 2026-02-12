@@ -396,8 +396,8 @@ For details, see the [Syntax highlighting][].
 > If your project uses [light/dark color modes](#lightdark-color-modes), then
 > skip to [Light/dark code styles](#lightdark-code-styles).
 
-Hugo's default Chroma style is [monokai][]. To use another style, such
-as [tango][], add the following to your project configuration.
+Hugo's default Chroma style is [monokai][]. To use another style, such as
+[tango][], add the following to your project configuration.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -462,8 +462,8 @@ command-text color. For details, see [_code-dark.scss][].
 ##### Selecting console block content
 
 In `console` code blocks that contain commands and command output, the command
-prompt and command output are unselectable. This is useful when copying
-commands to the clipboard. Give it a try:
+prompt and command output are unselectable. This is useful when copying commands
+to the clipboard. Give it a try:
 
 ```console
 $ echo "Hello, world!"

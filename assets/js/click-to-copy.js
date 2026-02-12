@@ -45,16 +45,20 @@ const copyCode = (codeSample) => {
   const isConsoleBlock = codeSample.matches(
     "code[data-lang='console'], code.language-console"
   );
-  const clone = codeSample.cloneNode(true);
-  pruneUnselectableElements(codeSample, clone);
-  let text = clone.textContent;
+  let text;
 
   if (isConsoleBlock) {
-    // Strip the space after the prompt (and before the command):
+    const clone = codeSample.cloneNode(true);
+    pruneUnselectableElements(codeSample, clone);
+    text = clone.textContent;
+    // For each command, strip the space after the prompt and before the
+    // command:
     text = text.replace(/^ /gm, '');
+  } else {
+    text = codeSample.textContent;
   }
-
-  navigator.clipboard.writeText(text.trim() + '\n');
+  text = text ? text.trim() : '';
+  navigator.clipboard.writeText(text + '\n');
 };
 
 const pruneUnselectableElements = (sourceNode, cloneNode) => {
