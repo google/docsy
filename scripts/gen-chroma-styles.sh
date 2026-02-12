@@ -3,7 +3,7 @@
 set -eo pipefail
 
 HUGO="npx hugo"
-CHROMA_STYLE=tango
+CHROMA_STYLE=friendly
 DEST_DIR=assets/scss/td/chroma
 DEST_FILE=_light.scss
 DEST_PATH=/dev/null # Set in process_CLI_args

@@ -42,5 +42,37 @@ for (let index = 0; index < codeListings.length; index++) {
 }
 
 const copyCode = (codeSample) => {
-  navigator.clipboard.writeText(codeSample.textContent.trim() + '\n');
+  const isConsoleBlock = codeSample.matches(
+    "code[data-lang='console'], code.language-console"
+  );
+  const clone = codeSample.cloneNode(true);
+  pruneUnselectableElements(codeSample, clone);
+  let text = clone.textContent;
+
+  if (isConsoleBlock) {
+    // Strip the space after the prompt (and before the command):
+    text = text.replace(/^ /gm, '');
+  }
+
+  navigator.clipboard.writeText(text.trim() + '\n');
+};
+
+const pruneUnselectableElements = (sourceNode, cloneNode) => {
+  const sourceChildren = sourceNode.children;
+  const cloneChildren = cloneNode.children;
+
+  for (let i = sourceChildren.length - 1; i >= 0; i--) {
+    const sourceChild = sourceChildren[i];
+    const cloneChild = cloneChildren[i];
+    const style = window.getComputedStyle(sourceChild);
+    const unselectable =
+      style.userSelect === 'none' || style.webkitUserSelect === 'none';
+
+    if (unselectable) {
+      cloneChild.remove();
+      continue;
+    }
+
+    pruneUnselectableElements(sourceChild, cloneChild);
+  }
 };
