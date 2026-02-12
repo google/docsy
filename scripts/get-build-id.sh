@@ -6,7 +6,7 @@
 # Example, from:
 #   - main at v0.14.0 (617b5960)
 #   - `git describe --tags` v0.14.0-1-g8047f659
-#   We get: 0.14.1-dev-001-over-main-617b5960
+#   We get: 0.14.1-dev+001-over-main-617b5960
 
 set -euo pipefail
 
@@ -29,4 +29,4 @@ build_num_padded=$(printf "%03d" "${build_num}")
 # Pin the base to the current main tip hash.
 main_sha=$(git rev-parse --short=8 main)
 
-echo "${major}.${minor}.${next_patch}-dev-${build_num_padded}-over-main-${main_sha}"
+echo "${major}.${minor}.${next_patch}-dev+${build_num_padded}-over-main-${main_sha}"

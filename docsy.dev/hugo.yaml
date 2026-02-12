@@ -62,7 +62,8 @@ params:
     to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
-  version: 0.14.2-dev-003-over-main-1f21d33c
+  version: 0.14.2-dev
+  versionWithBuildId: 0.14.2-dev+004-over-main-55a3fb27
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
@@ -120,11 +121,11 @@ params:
     developer:
       - name: Contributing
         url: /docs/contribution-guidelines/
-        icon: fa fa-book
+        icon: fa-solid fa-code-fork
         desc: How to contribute
       - name: Project docs and site info
         url: /project/
-        icon: fa fa-book
+        icon: fa-solid fa-book
         desc: Site design documentation and resources
       - name: Tests
         url: /tests/

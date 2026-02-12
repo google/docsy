@@ -5,6 +5,9 @@ import {
   parseArgsAndResolveBuildId,
   main,
   adjustVersionForBuildId,
+  getReleaseVersion,
+  removeBuildId,
+  getBuildId,
 } from './index.mjs';
 
 const nullLogger = {
@@ -20,117 +23,174 @@ test('parseArgsAndResolveBuildId enables silent flag via -s', () => {
   assert.equal(result.buildId, 'custom-build');
 });
 
-test('parseArgsAndResolveBuildId falls back to timestamp when build ID omitted', () => {
+test('parseArgsAndResolveBuildId defaults to release-strip mode', () => {
   const result = parseArgsAndResolveBuildId([], { logger: nullLogger });
-  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
+  assert.equal(result.version, undefined);
+  assert.equal(result.buildId, undefined);
   assert.equal(result.silent, false);
 });
 
-test('parseArgsAndResolveBuildId logs when removing build ID unless silent', () => {
-  const messages = [];
-  const capturingLogger = {
-    log(message) {
-      messages.push(message);
-    },
-    warn() {},
-  };
-
+test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
   const result = parseArgsAndResolveBuildId(['--id', ''], {
-    logger: capturingLogger,
+    logger: nullLogger,
   });
-  assert.equal(result.buildId, '');
-  assert.equal(result.silent, false);
-  assert.deepEqual(messages, [
-    'Build-ID argument is empty, so we will remove the build ID from the version.',
-  ]);
+  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
 });
 
-test('parseArgsAndResolveBuildId suppresses removal log in silent mode', () => {
-  const messages = [];
-  const capturingLogger = {
-    log(message) {
-      messages.push(message);
-    },
-    warn() {},
-  };
-
-  const result = parseArgsAndResolveBuildId(['--id', '', '--silent'], {
-    logger: capturingLogger,
+test('parseArgsAndResolveBuildId maps bare --id to timestamp build ID', () => {
+  const result = parseArgsAndResolveBuildId(['--id'], {
+    logger: nullLogger,
   });
-  assert.equal(result.buildId, '');
+  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
+});
+
+test('parseArgsAndResolveBuildId treats --id followed by flag as omitted BUILD-ID', () => {
+  const result = parseArgsAndResolveBuildId(['--id', '--silent'], {
+    logger: nullLogger,
+  });
+  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
   assert.equal(result.silent, true);
-  assert.deepEqual(messages, []);
 });
 
-test('main updates package data when build ID changes', () => {
-  const pkg = { version: '1.0.0-dev' }; // Use dev version to avoid adjustment
-  const hugoYaml = { params: { version: '1.0.0-dev' } };
-  let writtenPkg;
-  let writeHugoYamlCallCount = 0;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
+test('parseArgsAndResolveBuildId supports short -v and --version precedence', () => {
+  const result = parseArgsAndResolveBuildId(
+    ['-v', '2.0.0-dev+build-123', '--id', 'ignored-id'],
+    {
+      logger: nullLogger,
     },
+  );
+  assert.equal(result.version, '2.0.0-dev+build-123');
+  assert.equal(result.buildId, 'ignored-id');
+});
+
+test('release/build helpers split semver strings', () => {
+  assert.equal(getReleaseVersion('1.2.3-dev+build-9'), '1.2.3');
+  assert.equal(removeBuildId('1.2.3-dev+build-9'), '1.2.3-dev');
+  assert.equal(getBuildId('1.2.3-dev+build-9'), 'build-9');
+  assert.equal(getBuildId('1.2.3'), '');
+});
+
+test('main default strips pre-release and build metadata in both targets', () => {
+  const pkg = { version: '1.2.3-dev+old-build' };
+  const hugoYaml = {
+    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
   };
+  let writtenPkg;
+  let writtenHugoYaml;
+
+  const newVersion = main([], {
+    logger: nullLogger,
+    readPackageJson: () => pkg,
+    writePackageJson: (updatedPkg) => {
+      writtenPkg = { ...updatedPkg };
+    },
+    readHugoYaml: () => ({ ...hugoYaml, params: { ...hugoYaml.params } }),
+    writeHugoYaml: (updatedYaml) => {
+      writtenHugoYaml = { ...updatedYaml, params: { ...updatedYaml.params } };
+    },
+  });
+
+  assert.equal(pkg.version, '1.2.3');
+  assert.deepEqual(writtenPkg, { version: '1.2.3' });
+  assert.equal(writtenHugoYaml.params.version, '1.2.3');
+  assert.equal(writtenHugoYaml.params.versionWithBuildId, '1.2.3');
+  assert.equal(newVersion, '1.2.3');
+});
+
+test('main --id sets build metadata and preserves pre-release', () => {
+  const pkg = { version: '1.2.3-dev+old-build' };
+  const hugoYaml = {
+    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
+  };
+  let writtenPkg;
+  let writtenHugoYaml;
 
   const newVersion = main(['--id', 'custom-build'], {
-    logger,
+    logger: nullLogger,
     readPackageJson: () => pkg,
     writePackageJson: (updatedPkg) => {
       writtenPkg = { ...updatedPkg };
     },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: () => {
-      writeHugoYamlCallCount += 1;
+    readHugoYaml: () => ({ ...hugoYaml, params: { ...hugoYaml.params } }),
+    writeHugoYaml: (updatedYaml) => {
+      writtenHugoYaml = { ...updatedYaml, params: { ...updatedYaml.params } };
     },
   });
 
-  assert.equal(pkg.version, '1.0.0-dev+custom-build');
-  assert.deepEqual(writtenPkg, { version: '1.0.0-dev+custom-build' });
-  assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
-  assert.equal(newVersion, '1.0.0-dev+custom-build');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build',
-  ]);
+  assert.equal(pkg.version, '1.2.3-dev+custom-build');
+  assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
+  assert.equal(writtenHugoYaml.params.version, '1.2.3-dev');
+  assert.equal(
+    writtenHugoYaml.params.versionWithBuildId,
+    '1.2.3-dev+custom-build',
+  );
+  assert.equal(newVersion, '1.2.3-dev+custom-build');
 });
 
-test('main logs updated build ID even with silent flag', () => {
-  const pkg = { version: '1.0.0-dev' }; // Use dev version to avoid adjustment
-  const hugoYaml = { params: { version: '1.0.0-dev' } };
-  let writtenPkg;
-  let writeHugoYamlCallCount = 0;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
+test('main --id "" generates timestamp build metadata', () => {
+  const pkg = { version: '1.2.3-dev+old-build' };
+  const hugoYaml = {
+    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
   };
+  let writtenPkg;
+  let writtenHugoYaml;
 
-  const newVersion = main(['--id', 'custom-build', '--silent'], {
-    logger,
+  const newVersion = main(['--id', ''], {
+    logger: nullLogger,
     readPackageJson: () => pkg,
     writePackageJson: (updatedPkg) => {
       writtenPkg = { ...updatedPkg };
     },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: () => {
-      writeHugoYamlCallCount += 1;
+    readHugoYaml: () => ({ ...hugoYaml, params: { ...hugoYaml.params } }),
+    writeHugoYaml: (updatedYaml) => {
+      writtenHugoYaml = { ...updatedYaml, params: { ...updatedYaml.params } };
     },
   });
 
-  assert.equal(pkg.version, '1.0.0-dev+custom-build');
-  assert.deepEqual(writtenPkg, { version: '1.0.0-dev+custom-build' });
-  assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
-  assert.equal(newVersion, '1.0.0-dev+custom-build');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0-dev → 1.0.0-dev+custom-build',
-  ]);
+  assert.match(newVersion, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
+  assert.match(writtenPkg.version, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
+  assert.equal(writtenHugoYaml.params.version, '1.2.3-dev');
+  assert.match(
+    writtenHugoYaml.params.versionWithBuildId,
+    /^1\.2\.3-dev\+\d{8}-\d{4}Z$/,
+  );
 });
 
-test('main logs when version already matches', () => {
-  const pkg = { version: '1.0.0-dev+existing' }; // Use dev version to avoid adjustment
-  const hugoYaml = { params: { version: '1.0.0-dev' } };
+test('main sets entire version with --version and updates hugo split fields', () => {
+  const pkg = { version: '1.0.0+old-build' };
+  const hugoYaml = {
+    params: { version: '1.0.0', versionWithBuildId: '1.0.0+old-build' },
+  };
+  let writtenPkg;
+  let writtenHugoYaml;
+
+  const newVersion = main(['--version', '2.0.0-dev+build-123'], {
+    logger: nullLogger,
+    readPackageJson: () => pkg,
+    writePackageJson: (updatedPkg) => {
+      writtenPkg = { ...updatedPkg };
+    },
+    readHugoYaml: () => ({ ...hugoYaml, params: { ...hugoYaml.params } }),
+    writeHugoYaml: (updatedYaml) => {
+      writtenHugoYaml = { ...updatedYaml, params: { ...updatedYaml.params } };
+    },
+  });
+
+  assert.equal(pkg.version, '2.0.0-dev+build-123');
+  assert.deepEqual(writtenPkg, { version: '2.0.0-dev+build-123' });
+  assert.equal(writtenHugoYaml.params.version, '2.0.0-dev');
+  assert.equal(
+    writtenHugoYaml.params.versionWithBuildId,
+    '2.0.0-dev+build-123',
+  );
+  assert.equal(newVersion, '2.0.0-dev+build-123');
+});
+
+test('main logs when package/hugo versions already match', () => {
+  const pkg = { version: '1.0.0+existing' };
+  const hugoYaml = {
+    params: { version: '1.0.0', versionWithBuildId: '1.0.0+existing' },
+  };
   let writeCallCount = 0;
   const messages = [];
   const logger = {
@@ -145,282 +205,20 @@ test('main logs when version already matches', () => {
     writePackageJson: () => {
       writeCallCount += 1;
     },
-    readHugoYaml: () => ({ ...hugoYaml }),
+    readHugoYaml: () => ({ ...hugoYaml, params: { ...hugoYaml.params } }),
     writeHugoYaml: () => {
       writeCallCount += 1;
     },
   });
 
-  assert.equal(pkg.version, '1.0.0-dev+existing');
   assert.equal(writeCallCount, 0);
-  assert.equal(newVersion, '1.0.0-dev+existing');
+  assert.equal(newVersion, '1.0.0+existing');
   assert.deepEqual(messages, [
-    'Package version is already set to 1.0.0-dev+existing.',
+    'Package version is already set to 1.0.0+existing.',
   ]);
 });
 
-test('main reports no change with silent flag', () => {
-  const pkg = { version: '1.0.0-dev+existing' }; // Use dev version to avoid adjustment
-  const hugoYaml = { params: { version: '1.0.0-dev' } };
-  let writeCallCount = 0;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-  };
-
-  const newVersion = main(['--id', 'existing', '--silent'], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: () => {
-      writeCallCount += 1;
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: () => {
-      writeCallCount += 1;
-    },
-  });
-
-  assert.equal(pkg.version, '1.0.0-dev+existing');
-  assert.equal(writeCallCount, 0);
-  assert.equal(newVersion, '1.0.0-dev+existing');
-  assert.deepEqual(messages, []);
-});
-
-test('parseArgsAndResolveBuildId accepts --version option', () => {
-  const result = parseArgsAndResolveBuildId(['--version', '2.0.0'], {
-    logger: nullLogger,
-  });
-  assert.equal(result.version, '2.0.0');
-  assert.equal(result.buildId, undefined);
-  assert.equal(result.silent, false);
-});
-
-test('parseArgsAndResolveBuildId --version takes precedence over --id', () => {
-  const result = parseArgsAndResolveBuildId(
-    ['--version', '2.0.0', '--id', 'build-123'],
-    { logger: nullLogger },
-  );
-  assert.equal(result.version, '2.0.0');
-  assert.equal(result.buildId, 'build-123'); // Still parsed but will be ignored
-  assert.equal(result.silent, false);
-});
-
-test('main sets entire version with --version', () => {
-  const pkg = { version: '1.0.0' };
-  const hugoYaml = { params: { version: '1.0.0' } };
-  let writtenPkg;
-  let writtenHugoYaml;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-  };
-
-  const newVersion = main(['--version', '2.0.0'], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
-
-  assert.equal(pkg.version, '2.0.0');
-  assert.deepEqual(writtenPkg, { version: '2.0.0' });
-  assert.equal(writtenHugoYaml.params.version, '2.0.0');
-  assert.equal(newVersion, '2.0.0');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0 → 2.0.0',
-    '✓ Updated hugo.yaml version: 1.0.0 → 2.0.0',
-  ]);
-});
-
-test('main --version takes precedence over --id', () => {
-  const pkg = { version: '1.0.0+old-build' };
-  const hugoYaml = { params: { version: '1.0.0' } };
-  let writtenPkg;
-  let writtenHugoYaml;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-  };
-
-  const newVersion = main(['--version', '2.0.0', '--id', 'new-build'], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
-
-  assert.equal(pkg.version, '2.0.0');
-  assert.deepEqual(writtenPkg, { version: '2.0.0' });
-  assert.equal(writtenHugoYaml.params.version, '2.0.0');
-  assert.equal(newVersion, '2.0.0');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0+old-build → 2.0.0',
-    '✓ Updated hugo.yaml version: 1.0.0 → 2.0.0',
-  ]);
-});
-
-test('main removes -dev suffix with --version "" and updates hugo.yaml', () => {
-  const pkg = { version: '1.2.3-dev+build-123' };
-  const hugoYaml = { params: { version: '1.2.3-dev' } };
-  let writtenPkg;
-  let writtenHugoYaml;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-  };
-
-  const newVersion = main(['--version', ''], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
-
-  assert.equal(pkg.version, '1.2.3');
-  assert.deepEqual(writtenPkg, { version: '1.2.3' });
-  assert.equal(writtenHugoYaml.params.version, '1.2.3');
-  assert.equal(newVersion, '1.2.3');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.2.3-dev+build-123 → 1.2.3',
-    '✓ Updated hugo.yaml version: 1.2.3-dev → 1.2.3',
-  ]);
-});
-
-test('main does not update hugo.yaml when using --id', () => {
-  const pkg = { version: '1.0.0-dev' };
-  const hugoYaml = { params: { version: '0.9.0' } }; // Different version, but should not be updated
-  let writeHugoYamlCallCount = 0;
-  const messages = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-  };
-
-  const newVersion = main(['--id', 'build-123'], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: () => {},
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: () => {
-      writeHugoYamlCallCount += 1;
-    },
-  });
-
-  assert.equal(pkg.version, '1.0.0-dev+build-123');
-  assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
-  assert.equal(newVersion, '1.0.0-dev+build-123');
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0-dev → 1.0.0-dev+build-123',
-  ]);
-});
-
-test('main adjusts non-dev version when adding build ID', () => {
-  const pkg = { version: '1.0.0' };
-  const hugoYaml = { params: { version: '1.0.0' } };
-  let writtenPkg;
-  let writeHugoYamlCallCount = 0;
-  const messages = [];
-  const warnings = [];
-  const logger = {
-    log(message) {
-      messages.push(message);
-    },
-    warn(message) {
-      warnings.push(message);
-    },
-  };
-
-  const newVersion = main(['--id', 'build-123'], {
-    logger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: () => {
-      writeHugoYamlCallCount += 1;
-    },
-  });
-
-  assert.equal(pkg.version, '1.0.1-dev+build-123');
-  assert.deepEqual(writtenPkg, { version: '1.0.1-dev+build-123' });
-  assert.equal(writeHugoYamlCallCount, 0); // hugo.yaml should not be updated
-  assert.equal(newVersion, '1.0.1-dev+build-123');
-  assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
-  ]);
-  assert.deepEqual(messages, [
-    '✓ Updated version: 1.0.0 → 1.0.1-dev+build-123',
-  ]);
-});
-
-test('adjustVersionForBuildId adds build ID to dev version', () => {
-  const result = adjustVersionForBuildId('1.0.0-dev', 'build-123', {
-    logger: nullLogger,
-  });
+test('adjustVersionForBuildId replaces build metadata only', () => {
+  const result = adjustVersionForBuildId('1.0.0-dev+old', 'build-123');
   assert.equal(result, '1.0.0-dev+build-123');
-});
-
-test('adjustVersionForBuildId increments patch and adds -dev for non-dev version', () => {
-  const warnings = [];
-  const logger = {
-    warn(message) {
-      warnings.push(message);
-    },
-  };
-
-  const result = adjustVersionForBuildId('1.0.0', 'build-123', { logger });
-  assert.equal(result, '1.0.1-dev+build-123');
-  assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
-  ]);
-});
-
-test('adjustVersionForBuildId handles version without build ID', () => {
-  const result = adjustVersionForBuildId('1.0.0-dev', '', {
-    logger: nullLogger,
-  });
-  assert.equal(result, '1.0.0-dev');
-});
-
-test('adjustVersionForBuildId handles unrecognized version format', () => {
-  const warnings = [];
-  const logger = {
-    warn(message) {
-      warnings.push(message);
-    },
-  };
-
-  const result = adjustVersionForBuildId('invalid-version', 'build-123', {
-    logger,
-  });
-  assert.equal(result, 'invalid-version-dev+build-123');
-  assert.deepEqual(warnings, [
-    'Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.',
-    'Warning: Version format not recognized (invalid-version). Appending -dev suffix.',
-  ]);
 });

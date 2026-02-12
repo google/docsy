@@ -37,4 +37,6 @@ Planned content organization (tentative):
 
 ## Site build information
 
+Docsy version: `{{% _param versionWithBuildId %}}`
+
 {{% td/site-build-info/netlify team="docsydocs" %}}
