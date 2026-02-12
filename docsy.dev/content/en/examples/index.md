@@ -63,8 +63,8 @@ The Docsy project provides two site starter templates:
 
 | Site                               | Repo                                      | Docsy            |
 | ---------------------------------- | ----------------------------------------- | ---------------- |
-| [Goldydocs][] - main Docsy example | <{{% param github_repo %}}-example>       | v0.14.0 (latest) |
-| [Docsy starter][]                  | <https://github.com/chalin/docsy-starter> | v0.14.0 (latest) |
+| [Goldydocs][] - main Docsy example | <{{% param github_repo %}}-example>       | v0.14.1 (latest) |
+| [Docsy starter][]                  | <https://github.com/chalin/docsy-starter> | v0.14.1 (latest) |
 
 In addition to these example starters, there are several live sites using the
 theme. Consider adding your Docsy-based site to this page once you have a

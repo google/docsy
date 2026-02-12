@@ -110,9 +110,9 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
-## v0.14.2 or v0.15.0 {#v0.15.0}
+## Next release
 
-> **UNRELEASED: this planned version is still under development**
+> **UNRELEASED**: v0.14.2 or v0.15.0 - still under development
 
 For the full list of changes, see the [0.15.0][] release page.
 
