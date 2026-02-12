@@ -719,6 +719,14 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:25.549658-05:00"
   },
+  "https://github.com/google/docsy/blob/main/assets/scss/td/_code-dark.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-12T08:45:33.233141-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/assets/scss/td/_code.scss": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-12T08:45:33.659624-05:00"
+  },
   "https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.680937-05:00"
@@ -1955,6 +1963,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:59.335383-05:00"
   },
+  "https://gohugo.io/content-management/syntax-highlighting/#noclasses": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-12T08:45:32.662775-05:00"
+  },
   "https://gohugo.io/content-management/taxonomies/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:48.728698-05:00"
@@ -2543,9 +2555,17 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:59.219015-05:00"
   },
+  "https://xyproto.github.io/splash/docs/friendly.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-12T08:45:32.702511-05:00"
+  },
   "https://xyproto.github.io/splash/docs/monokai.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:59.018203-05:00"
+  },
+  "https://xyproto.github.io/splash/docs/native.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-12T08:45:32.783693-05:00"
   },
   "https://xyproto.github.io/splash/docs/onedark.html": {
     "StatusCode": 206,
