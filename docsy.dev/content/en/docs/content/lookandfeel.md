@@ -318,9 +318,6 @@ dark mode theme customization file and import it in your project's
 >
 > [blocks]: shortcodes/#blocks
 
-[Generate syntax highlighter CSS]:
-  https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
-
 ## Fonts
 
 By default, Docsy uses Bootstrap's [native font stack][] for its typography.
@@ -388,15 +385,19 @@ through two syntax highlighters, [Chroma](#code-highlighting-with-chroma) and
 
 ### Code highlighting with Chroma
 
-As of Hugo 0.60+, you can choose from a range of code block highlight and color
-styles using [Chroma](https://github.com/alecthomas/chroma). These styles are
-applied to your fenced code blocks. For details about code highlighting in Hugo
-using Chroma, see [Syntax Highlighting][].
+Hugo uses [Chroma](https://github.com/alecthomas/chroma) for syntax
+highlighting, which provides highlight and color styles for fenced code blocks.
+For details, see the [Syntax highlighting][].
 
-#### Chroma style configuration
+#### Basic Chroma style configuration {#chroma-style-configuration}
 
-Hugo's default Chroma style is [monokai]. To use another style, such as [tango],
-add the following to your project configuration:
+> [!NOTE]
+>
+> If your project uses [light/dark color modes](#lightdark-color-modes), then
+> skip to [Light/dark code styles](#lightdark-code-styles).
+
+Hugo's default Chroma style is [monokai][]. To use another style, such as
+[tango][], add the following to your project configuration.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -427,18 +428,17 @@ For the complete list of available styles, see [Chroma Style Gallery].
 
 [Chroma Style Gallery]: https://xyproto.github.io/splash/docs/
 [monokai]: https://xyproto.github.io/splash/docs/monokai.html
-[onedark]: https://xyproto.github.io/splash/docs/onedark.html
 [tango]: https://xyproto.github.io/splash/docs/tango.html
 
-#### Light/dark code styles
+#### Light/dark code styles and more {#lightdark-code-styles}
 
 To enable code styles that are compatible with light/dark color modes, you need
 to complete the following setup steps:
 
 1.  Ensure that `markup.highlight.noClasses` is `false` in your project config.
-    For details about this option, see [Generate syntax highlighter CSS].
+    For details about this option, see [noClasses][].
 
-2.  Add the following import to your project's [`_styles_project.scss`] file:
+2.  Add the following import to your project's [`_styles_project.scss`][] file:
 
     ```scss
     @import 'td/code-dark';
@@ -446,15 +446,56 @@ to complete the following setup steps:
 
 Docsy's default Chroma styles for [light/dark modes][] are:
 
-- [tango] for light mode
-- [onedark] for dark mode
+- [friendly][] for light mode
+- [native][] for dark mode
 
-If you would like to use other styles, save the [Hugo generated Chroma styles]
+If you would like to use other styles, save the [Hugo generated Chroma styles][]
 to the appropriate file:
 
 - [assets/scss/td/chroma/_light.scss]
 - [assets/scss/td/chroma/_dark.scss]
 
+Note that we tweak the [native][] style (in dark mode) so that the Generic
+Output color looks less prominent, offering better contrasts with the
+command-text color. For details, see [_code-dark.scss][].
+
+##### Selecting console block content
+
+In `console` code blocks that contain commands and command output, the command
+prompt and command output are unselectable. This is useful when copying commands
+to the clipboard. Give it a try:
+
+```console
+$ echo "Hello, world!"
+Hello, world!
+$ echo "Nice to meet you!"
+Nice to meet you!
+```
+
+Clicking copy-code leaves this code in your clipboard:
+
+```sh
+echo "Hello, world!"
+echo "Nice to meet you!"
+```
+
+For details, see [_code.scss][].
+
+If you want the entire content of a console block to be selectable, use a
+`console` language alias instead, such as `bash-session` or `shell-session`.
+Give it a try:
+
+```shell-session
+$ echo "Hello, world!"
+Hello, world!
+$ echo "Nice to meet you!"
+Nice to meet you!
+```
+
+[_code.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/_code.scss
+[_code-dark.scss]:
+  https://github.com/google/docsy/blob/main/assets/scss/td/_code-dark.scss
 [assets/scss/td/chroma/_dark.scss]:
   https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_dark.scss
 [assets/scss/td/chroma/_light.scss]:
@@ -462,6 +503,8 @@ to the appropriate file:
 [Hugo generated Chroma styles]:
   https://gohugo.io/commands/hugo_gen_chromastyles/
 [light/dark modes]: #lightdark-color-modes
+[friendly]: https://xyproto.github.io/splash/docs/friendly.html
+[native]: https://xyproto.github.io/splash/docs/native.html
 
 #### Code blocks without a specified language
 
@@ -919,6 +962,7 @@ highest-level page you want to modify.
 [bs-docs]: https://getbootstrap.com/docs/
 [color modes]: https://getbootstrap.com/docs/5.3/customize/color-modes/
 [experimental]: /project/about/changelog/#experimental
+[noClasses]: https://gohugo.io/content-management/syntax-highlighting/#noclasses
 [syntax highlighting]: https://gohugo.io/content-management/syntax-highlighting/
 [ug-project-styles]:
   https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss

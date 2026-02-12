@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
+cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
@@ -118,11 +118,13 @@ For the full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
-- ...
+- **Default code styles** changed from `tango`/`onedark` to `friendly`/`native`
+  for sites using `td/code-dark`.
 
 **New**:
 
-- ...
+- **Console block content selection**: selection and copy-code now only includes
+  commands, not output.
 
 **Other changes**:
 
