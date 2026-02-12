@@ -120,7 +120,10 @@ test('main --id sets build metadata and preserves pre-release', () => {
   assert.equal(pkg.version, '1.2.3-dev+custom-build');
   assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
   assert.equal(writtenHugoYaml.params.version, '1.2.3-dev');
-  assert.equal(writtenHugoYaml.params.versionWithBuildId, '1.2.3-dev+custom-build');
+  assert.equal(
+    writtenHugoYaml.params.versionWithBuildId,
+    '1.2.3-dev+custom-build',
+  );
   assert.equal(newVersion, '1.2.3-dev+custom-build');
 });
 
@@ -155,7 +158,9 @@ test('main --id "" generates timestamp build metadata', () => {
 
 test('main sets entire version with --version and updates hugo split fields', () => {
   const pkg = { version: '1.0.0+old-build' };
-  const hugoYaml = { params: { version: '1.0.0', versionWithBuildId: '1.0.0+old-build' } };
+  const hugoYaml = {
+    params: { version: '1.0.0', versionWithBuildId: '1.0.0+old-build' },
+  };
   let writtenPkg;
   let writtenHugoYaml;
 
@@ -174,13 +179,18 @@ test('main sets entire version with --version and updates hugo split fields', ()
   assert.equal(pkg.version, '2.0.0-dev+build-123');
   assert.deepEqual(writtenPkg, { version: '2.0.0-dev+build-123' });
   assert.equal(writtenHugoYaml.params.version, '2.0.0-dev');
-  assert.equal(writtenHugoYaml.params.versionWithBuildId, '2.0.0-dev+build-123');
+  assert.equal(
+    writtenHugoYaml.params.versionWithBuildId,
+    '2.0.0-dev+build-123',
+  );
   assert.equal(newVersion, '2.0.0-dev+build-123');
 });
 
 test('main logs when package/hugo versions already match', () => {
   const pkg = { version: '1.0.0+existing' };
-  const hugoYaml = { params: { version: '1.0.0', versionWithBuildId: '1.0.0+existing' } };
+  const hugoYaml = {
+    params: { version: '1.0.0', versionWithBuildId: '1.0.0+existing' },
+  };
   let writeCallCount = 0;
   const messages = [];
   const logger = {
@@ -203,7 +213,9 @@ test('main logs when package/hugo versions already match', () => {
 
   assert.equal(writeCallCount, 0);
   assert.equal(newVersion, '1.0.0+existing');
-  assert.deepEqual(messages, ['Package version is already set to 1.0.0+existing.']);
+  assert.deepEqual(messages, [
+    'Package version is already set to 1.0.0+existing.',
+  ]);
 });
 
 test('adjustVersionForBuildId replaces build metadata only', () => {
