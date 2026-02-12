@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `37be7dc7` on `main`.
+> Report refreshed for commits through `a1ddcab5` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -146,6 +146,19 @@ Verification, testing, and QA:
 - Structured as a release report focusing on new features and improvements, with
   a brief upgrade section that references the 0.13.0 upgrade guide for command
   examples.
+
+## Refresh note (a1ddcab5)
+
+- Plan and reports updated for commits through `a1ddcab5`. New commits in
+  [commit-inventory.md](commit-inventory.md) under "Since last refresh
+  (37be7dc7..a1ddcab5)": #2540 Release 0.14.1 preparation; #2542 version bump;
+  #2543 examples and misc; #2546 Apply .td-main flex only when sidebar exists
+  (0.14.2); #2547 pkg version build metadata and footer icons; #2548 Console
+  code blocks output not selectable, code style changes (friendly/native); #2549
+  Add name attribute to search input.
+- Changelog: 0.14.2 and "Next release" already cover #2546, console/code styles.
+  Added search input name (#2549) and version/footer (#2547) to Next release.
+- Blog: corrected [#2546] link (was pointing to #2538).
 
 ## Refresh note (37be7dc7)
 

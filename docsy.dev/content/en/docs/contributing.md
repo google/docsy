@@ -1,6 +1,7 @@
 ---
 title: Contribution guidelines
 description: How to contribute to Docsy
+aliases: [contribution-guidelines]
 weight: 9
 cSpell:ignore: docsy
 ---

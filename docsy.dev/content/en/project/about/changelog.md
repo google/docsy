@@ -10,10 +10,8 @@ We only document **breaking changes** and release **highlights** in this page.
 For the full list of changes of any particular release, see the [release
 notes][releases].
 
-Useful links:
-
-- [Releases] & [tags]. Jump to the [latest] release.
-- [Milestones]
+Useful links: [Releases] & [tags], jump to the [latest] release, and view the
+[milestones].
 
 [latest]: https://github.com/google/docsy/releases/latest
 [milestones]: https://github.com/google/docsy/milestones
@@ -35,6 +33,9 @@ Useful links:
     needed.
 
 ## Definitions
+
+<details>
+<summary>Definitions...</summary>
 
 ### Public customization surface {#public}
 
@@ -110,21 +111,24 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
+</details>
+
 ## Next release
 
-> **UNRELEASED**: v0.14.2 or v0.15.0 - still under development
+> **UNRELEASED**: v0.14.3 or v0.15.0 - still under development
+
+<details>
+<summary>To be completed</summary>
 
 For the full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
-- **Default code styles** changed from `tango`/`onedark` to `friendly`/`native`
-  for sites using `td/code-dark`.
+- ...
 
 **New**:
 
-- **Console block content selection**: selection and copy-code now only includes
-  commands, not output.
+- ...
 
 **Other changes**:
 
@@ -134,19 +138,53 @@ For the full list of changes, see the [0.15.0][] release page.
 
 - ...
 
+</details>
+
 [0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
+
+## v0.14.2 {#v0.14.2}
+
+**Key fix** for this patch: Apply `.td-main` flex only when sidebar exists
+([#2546]).
+
+For the full list of changes, see the [release report][0.14.2-blog] and
+[0.14.2][] release page.
+
+[**Breaking changes**](#breaking-change):
+
+- **[Default code styles][0.14.2-blog]** changed from `tango`/`onedark` to
+  `friendly`/`native` for sites using `td/code-dark` ([#2548]).
+
+**New**:
+
+- **[Console block content selection][0.14.2-blog]**: selection and copy-code
+  now only includes commands, not output ([#2548]).
+
+**Other changes**:
+
+- Added `name` attribute to search form field for better semantics and autofill
+  ([#2549]).
+- Package version build metadata and footer icon tweaks ([#2547]).
+
+[#2546]: https://github.com/google/docsy/pull/2546
+[#2547]: https://github.com/google/docsy/pull/2547
+[#2548]: https://github.com/google/docsy/pull/2548
+[#2549]: https://github.com/google/docsy/pull/2549
+[0.14.2]: https://github.com/google/docsy/releases/v0.14.2
+[0.14.2-blog]: /blog/2026/0.14.0/#0.14.2
 
 ## v0.14.1 {#v0.14.1}
 
-Patch release [0.14.1][]:
-
-- Fixed **ToC** sidebar width in xl viewports ([#2538]).
+Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
 
 [0.14.1]: https://github.com/google/docsy/releases/v0.14.1
 
 ## v0.14.0 {#v0.14.0}
 
-For the full list of changes, see the [0.14.0][] release page.
+**Resources**:
+
+- [Release 0.14.0 report and upgrade guide][0.14.0-blog]
+- [0.14.0][] release page for the full list of changes
 
 [**Breaking changes**](#breaking-change):
 
@@ -165,9 +203,11 @@ For the full list of changes, see the [0.14.0][] release page.
 **New**:
 
 - **[Markdown alert syntax][0.14.0-blog-alerts]**: added support for Hugo's
-  Markdown alert syntax.
+  Markdown alert syntax ([#2443]).
 - **`td/site-build-info/netlify` shortcode** (experimental), see
-  [Shortcodes][0.14.0-blog-shortcodes].
+  [Shortcodes][0.14.0-blog-shortcodes] ([#2444]).
+- **`td-below-navbar` helper class** for [`blocks/cover`][0.14.0-blog-cover]
+  positioning ([#2480]).
 
 **Other changes**:
 
@@ -188,13 +228,14 @@ For the full list of changes, see the [0.14.0][] release page.
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
 [#2431]: https://github.com/google/docsy/issues/2431
+[#2443]: https://github.com/google/docsy/pull/2443
+[#2444]: https://github.com/google/docsy/pull/2444
 [#2470]: https://github.com/google/docsy/pull/2470
 [#2477]: https://github.com/google/docsy/pull/2477
 [#2480]: https://github.com/google/docsy/pull/2480
 [#2524]: https://github.com/google/docsy/pull/2524
 [#2533]: https://github.com/google/docsy/pull/2533
 [#2538]: https://github.com/google/docsy/pull/2538
-[0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
 [0.14.0-blog-heading-aliases]: /blog/2026/0.14.0/#heading-aliases
@@ -205,6 +246,8 @@ For the full list of changes, see the [0.14.0][] release page.
 [0.14.0-blog-shortcodes]: /blog/2026/0.14.0/#shortcodes
 [0.14.0-blog-style-fixes]: /blog/2026/0.14.0/#style-improvements-and-fixes
 [0.14.0-blog-swagger]: /blog/2026/0.14.0/#swagger-scss
+[0.14.0-blog]: /blog/2026/0.14.0/
+[0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 
 ## v0.13.0 {#v0.13.0}
 
