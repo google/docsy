@@ -62,7 +62,7 @@ params:
     to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
-  version: 0.14.2-dev-002-over-main-6f8afa37
+  version: 0.14.2-dev-003-over-main-1f21d33c
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
