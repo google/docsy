@@ -1,12 +1,12 @@
 ---
 title: Maintainer notes
 description: Notes for Docsy maintainers
-aliases: [../contributing]
+aliases: [contributing, ../contributing]
 cSpell:ignore: docsy hugo creatordate
 ---
 
 For our main contributing page covering license agreements, code of conduct and
-more, see [Contribution guidelines][]. This page is for **maintainers only**.
+more, see [Contributing][]. This page is for **maintainers only**.
 
 ## Publishing a release
 
@@ -16,7 +16,7 @@ accordingly.
 
 1.  **Change directory** to your local Docsy repo.
 
-2.  **Create or update a [CHANGELOG] entry** for {{% param version %}}.
+2.  **Create or update a [changelog][] entry** for {{% param version %}}.
     - The section should provide a brief summary of breaking changes using the
       section template at the end of the file.
     - Ensure to remove the UNRELEASED note.
@@ -307,12 +307,12 @@ before any further changes are merged into the `main` branch:
   script help for usage.
 
 [changelog]: /project/about/changelog/
-[contribution guidelines]: /docs/contribution-guidelines/
+[contributing]: /docs/contributing/
 [docsy-example]: https://github.com/google/docsy-example
 [docsy.dev]: https://www.docsy.dev/
+[docsy.dev/hugo.yaml]:
+  https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml
 [Draft a new release]: https://github.com/google/docsy/releases/new
 [go.mod]: https://github.com/google/docsy/blob/main/go.mod
 [package.json]: https://github.com/google/docsy/blob/main/package.json
-[docsy.dev/hugo.yaml]:
-  https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml
 [release-branch]: https://github.com/google/docsy/tree/release

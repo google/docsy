@@ -1,10 +1,10 @@
 ---
 title: 0.14 commit inventory
 date: 2026-01-16
-cSpell:ignore: docsy frontmatter subrepo
+cSpell:ignore: docsy frontmatter subrepo refache sidenav cyrillic latin
 ---
 
-> Report refreshed for commits through `37be7dc7` on `main`.
+> Report refreshed for commits through `a1ddcab5` on `main`.
 
 Chronological list of [commits since v0.13.0][], broadly grouped into a few
 categories. We'll do a more detailed analysis and groupings when we create the
@@ -96,7 +96,20 @@ client projects.
 - `3753ff78` (#2505) Reorganize SCSS, fix scroll padding, normalize
   blocks-shortcode heading IDs and keep old IDs as alias
 
-### Since last refresh (3753ff78..37be7dc7)
+### Since last refresh (37be7dc7..a1ddcab5)
+
+- `20ff86e7` (#2540) Release 0.14.1 preparation
+- `6f8afa37` (#2542) Set version to 0.14.2-dev-001-over-main-20ff86e7, and more
+- `1f21d33c` (#2543) Update supported Docsy vers for main examples, and other
+  misc changes
+- `55a3fb27` (#2546) Apply .td-main flex only when sidebar exists
+- `a6050113` (#2547) Adjust pkg version logic splitting out build metadata, and
+  tweak footer icons
+- `cc763a9b` (#2548) Console code blocks: output is no longer selectable; and
+  code style changes
+- `a1ddcab5` (#2549) Add name attribute to search input
+
+### Previous refresh (3753ff78..37be7dc7)
 
 - `4dc710b4` (#2506) Document heading aliases and in-page targets
 - `0ddab73a` (#2508) Improve 0.14.0 upgrade action-step guidance
