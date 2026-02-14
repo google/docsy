@@ -9,7 +9,6 @@ assets/_cache/bootstrap/scrollspy-method.js.*
 # Hugo
 .hugo_build.lock
 /public
-resources/
 
 # vim temporary files
 *~
