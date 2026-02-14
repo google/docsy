@@ -11,7 +11,7 @@ resources:
 params:
   message: Hello, world!
 # prettier-ignore
-cSpell:ignore: cardpane docsy imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal buildcondition
+cSpell:ignore: cardpane imgproc pageinfo petstore Bjørn Pedersen swaggerui grayscale Picea tryautoheight readfile domsignal buildcondition
 ---
 
 {{< comment >}}

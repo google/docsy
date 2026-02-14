@@ -8,7 +8,7 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: docsy dartsass libsass IPTC multihost libwebp opentelemetry
+cSpell:ignore: dartsass libsass IPTC multihost libwebp opentelemetry
 ---
 
 This post summarizes the breaking and notable changes in Hugo 0.152.0 to

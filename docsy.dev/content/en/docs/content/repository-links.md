@@ -3,7 +3,7 @@ title: Repository Links and other page information
 linkTitle: Repo links and page info
 description:
   Help your users interact with page source and view page-source information.
-cSpell:ignore: docsy lastmod
+cSpell:ignore: lastmod
 weight: 9
 ---
 

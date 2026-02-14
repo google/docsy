@@ -31,13 +31,13 @@ lies ahead.
 We published three releases this year, each focusing on stability while
 introducing at least one major feature enhancement. Highlights include:
 
-- **[0.9.0](https://www.docsy.dev/blog/2024/0.9.0/)** added _long-awaited_:
+- **[0.9.0](0.9.0/)** added _long-awaited_:
   - **CI testing** via GitHub Actions to ensure quality and reliability across
     Linux and Windows.
   - **Footer customization** &mdash; Docsy's [longest-standing issue (#2)][#2]!
     &mdash; as well as improved repository links, and enhanced accessibility and
     look-and-feel.
-- **[0.10.0](https://www.docsy.dev/blog/2024/0.10.0/):**
+- **[0.10.0](0.10.0/):**
   - Enabled [color themes and **dark mode**][dark mode] via Bootstrap 5.3
     upgrade, marking the completion of the [Bootstrap 5 migration] started
     in 2021. Also made adjustments to shortcodes and styles for dark-mode

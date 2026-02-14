@@ -4,7 +4,6 @@ weight: 3
 date: 2018-07-30
 description: >
   Instructions on how to set up and run a local Docsy site with Docker.
-cSpell:ignore: docsy
 ---
 
 We provide a Docker image that you can use to run and test your Docsy site

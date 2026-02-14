@@ -2,7 +2,7 @@
 title: Maintainer notes
 description: Notes for Docsy maintainers
 aliases: [contributing, ../contributing]
-cSpell:ignore: docsy hugo creatordate
+cSpell:ignore: hugo creatordate
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -328,11 +328,10 @@ before any further changes are merged into the `main` branch:
 
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
-[docsy-example]: https://github.com/google/docsy-example
-[docsy.dev]: https://www.docsy.dev/
-[docsy.dev/hugo.yaml]:
-  https://github.com/google/docsy/blob/main/docsy.dev/hugo.yaml
-[Draft a new release]: https://github.com/google/docsy/releases/new
-[go.mod]: https://github.com/google/docsy/blob/main/go.mod
-[package.json]: https://github.com/google/docsy/blob/main/package.json
-[release-branch]: https://github.com/google/docsy/tree/release
+[docsy-example]: <{{% param github_repo %}}-example>
+[docsy.dev]: <{{% _param baseURL %}}>
+[docsy.dev/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/hugo.yaml>
+[Draft a new release]: <{{% param github_repo %}}/releases/new>
+[go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
+[package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[release-branch]: <{{% param github_repo %}}/tree/release>

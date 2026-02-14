@@ -69,7 +69,7 @@ params:
 By default Docsy uses a [Google Custom Search Engine][GCSE] (GCSE) to search
 your site. To enable this feature, you'll first need to make sure that you have
 built and deployed a
-[production version of your site](/docs/deployment#build-environments-and-indexing),
+[production version of your site](/docs/deployment/#build-environments-and-indexing),
 as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
@@ -288,11 +288,11 @@ results appear in a drop down when you use the search box.
 
 > [!TIP]
 >
-> If you're [testing this locally](/docs/deployment/#serving-your-site-locally)
-> using Hugo’s local server functionality, you need to build your
-> `offline-search-index.xxx.json` file first by running `hugo`. If you have the
-> Hugo server running while you build `offline-search-index.xxx.json`, you may
-> need to stop the server and restart it in order to see your search results.
+> If you're [testing this locally](/docs/deployment/local) using Hugo’s local
+> server functionality, you need to build your `offline-search-index.xxx.json`
+> file first by running `hugo`. If you have the Hugo server running while you
+> build `offline-search-index.xxx.json`, you may need to stop the server and
+> restart it in order to see your search results.
 
 ### Changing the summary length of the local search results
 
