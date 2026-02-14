@@ -96,11 +96,13 @@ accordingly.
 
 10. **Pull in `main`** to get the last PR.
 
-11. **Ensure** that you're:
+11. **Test Docsy from main**, from the [docsy-example][] repository for example.
+
+12. **Ensure** that you're:
     - On the default branch, `main`
     - At the commit that you want to tag as {{% param version %}}
 
-12. **Create the new tag** for {{% param version %}}.
+13. **Create the new tag** for {{% param version %}}.
     - Set the REL variable to the release version or use the `VERSION` variable
       if you set it in the previous step.
 
@@ -121,7 +123,7 @@ accordingly.
       git tag --sort=-creatordate | head -3
       ```
 
-13. **Push the new tag**: either to all remotes at once, or one at a time.
+14. **Push the new tag**: either to all remotes at once, or one at a time.
 
     <details>
     <summary class="h6 text-info">Push to all remotes</summary>
@@ -167,7 +169,7 @@ accordingly.
       disable the hook check for now:
 
       ```sh
-      SKIP_VERSION_CHECK=1
+      export SKIP_VERSION_CHECK=1
       ```
 
     - Push the tag to the remotes:
@@ -213,21 +215,21 @@ accordingly.
 
     </details>
 
-14. Fast-forward the [release][release-branch] branch so that it points to the
+15. Fast-forward the [release][release-branch] branch so that it points to the
     same commit as `main`:
 
     ```sh
-    git checkout release
+    git checkout release && \
     git merge --ff-only main
     git push-all-remotes release
     ```
 
     This will trigger a production deploy of the website.
 
-15. Wait for the production deploy to complete and check that [docsy.dev][] has
+16. Wait for the production deploy to complete and check that [docsy.dev][] has
     been updated to the new release.
 
-16. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
     - **Target**: select the `release` branch.
 
     - **Tag**: select new release tag v{{% param version %}}
@@ -249,12 +251,12 @@ accordingly.
 
     - Select **Create a discussion for this release**.
 
-17. **Publish the release**: click _Publish release_.
+18. **Publish the release**: click _Publish release_.
 
-18. Test the release with a downstream project and/or the [docsy-example][]
+19. Test the release with a downstream project and/or the [docsy-example][]
     site.
 
-19. If you find issues, determine whether they need to be fixed immediately. If
+20. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
     a dot release.
 
@@ -293,17 +295,11 @@ before any further changes are merged into the `main` branch:
 1. Update the package version to a dev ID for Docsy and Docsy-example:
 
    ```console
-   $ npm run fix:version
-
-    > docsy@0.14.1 fix:version
-    > npm run set:version -- --version "$(scripts/get-build-id.sh)"
-
-
-    > docsy@0.14.1 set:version
-    > node scripts/set-package-version/index.mjs --version 0.14.2-dev-001-over-main-20ff86e7
-
-    ✓ Updated version: 0.14.1 → 0.14.2-dev-001-over-main-20ff86e7
-   $ npm run fix:version:example
+   $ npm run -s fix:version
+   ✓ Updated version: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
+   ✓ Updated hugo.yaml version: 0.14.2 → 0.14.3-dev
+   ✓ Updated hugo.yaml versionWithBuildId: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
+   $ npm run -s fix:version:example
    ...
    ```
 
@@ -324,12 +320,11 @@ before any further changes are merged into the `main` branch:
 
 ## Release helper scripts
 
-- **`npm run fix:version`**: Adds build ID to `package.json` (for
-  development/CI).
-- **`scripts/get-build-id.sh`**: Generates build ID from git describe (empty on
+- NPM scripts: `fix:version`, `fix:version:example`, and `set:version`.
+- `scripts/get-build-id.sh`: Generates build ID from git describe (empty on
   tags).
-- **`scripts/set-package-version/index.mjs`**: Low-level version manager. See
-  script help for usage.
+- `scripts/set-package-version/index.mjs`: Low-level version manager. See script
+  help for usage.
 
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
