@@ -6,7 +6,7 @@ aliases: [/docs/examples]
 body_class: td-no-left-sidebar
 menu: { main: { weight: 30 } }
 # prettier-ignore
-cSpell:ignore: docsy Agones kubeflow Navidrome tekton fluxcd Graphviz Stroom protobuf Dapr
+cSpell:ignore: Agones kubeflow Navidrome tekton fluxcd Graphviz Stroom protobuf Dapr
 ---
 
 {{% blocks/cover

@@ -1,7 +1,7 @@
 ---
 title: Git repository information
 linkTitle: Git repos
-cSpell:ignore: docsy hotfixes
+cSpell:ignore: hotfixes
 ---
 
 ## Monorepo

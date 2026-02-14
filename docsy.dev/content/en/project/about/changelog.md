@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark
+cSpell:ignore: deining FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark
 ---
 
 We only document **breaking changes** and release **highlights** in this page.

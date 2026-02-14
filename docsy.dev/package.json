@@ -11,7 +11,7 @@
     "_hugo-dev": "npm run _hugo -- --logLevel info -e dev -DFE",
     "_hugo": "hugo --cleanDestinationDir --themesDir ../..",
     "_postbuild": "npm run _check:links--warn",
-    "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
+    "_serve": "npm run _hugo-dev -- serve --disableFastRender --renderToMemory",
     "build:preview": "cross-env npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "cross-env npm run _build -- --baseURL \"${BASE_URL:-http://localhost}\"",
@@ -28,7 +28,7 @@
     "precheck:links": "npm run build",
     "prepare-disabled": "cd .. && npm install",
     "prune:refcache": "node scripts/prune-refcache.mjs",
-    "serve": "npm run _serve",
+    "serve": "npm run _serve -- --minify",
     "test": "npm run check:format && npm run check:links",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:packages": "npx npm-check-updates -u"

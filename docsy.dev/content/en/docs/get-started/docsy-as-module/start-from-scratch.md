@@ -5,7 +5,7 @@ date: 2021-12-08T09:21:54+01:00
 weight: 3
 description: >
   Create a new Hugo site from scratch with Docsy as a Hugo Module
-cSpell:ignore: batchfile docsy
+cSpell:ignore: batchfile
 ---
 
 The simplest approach to creating a Docsy site is

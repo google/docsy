@@ -3,7 +3,7 @@ title: ReadMe
 description: Docsy repository README
 aliases: [../readme]
 weight: -1
-cSpell:ignore: docsy readfile
+cSpell:ignore: readfile
 ---
 
 <style>

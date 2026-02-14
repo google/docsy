@@ -2,7 +2,7 @@
 title: Diagrams and Formulae
 weight: 11
 description: Add generated diagrams and scientific formulae to your site.
-cSpell:ignore: docsy gatsby goldmark linenos markmap mhchem plantuml
+cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
 Docsy has built-in support for a number of diagram creation and typesetting
