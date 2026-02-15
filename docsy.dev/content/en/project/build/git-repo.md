@@ -21,40 +21,39 @@ repository][].
 Both the Docsy and Goldydocs repositories use the same branch model:
 
 - `main`: development branch
-  - All feature work and doc updates land here first.
-  - Source of leading-edge theme version for downstream sites.
+  - All feature work and documentation updates land here first.
+  - Source of the _leading-edge_ theme and website versions.
 
-- `release` branch
-  - Published & supported line of the theme and website.
-  - Website production builds are deployed from this branch via Netlify.
-  - An ancestor of `main` most of the time, diverged due to hotfixes on
-    occasion.
-
-No rebases and no history rewriting for either branch.
+- `deploy/*`: publishing branches used by Netlify
+  - `deploy/prod`: production site
+  - `deploy/docs-only`: docs-only site variant
+  - These branches determine what is published. They are not development
+    branches. Changes must originate from `main` and are typically
+    fast-forwarded here.
 
 ### Tags
 
 - Tags are used for **official theme releases**
-- Tags are attached to `main` commits, which are shared by `release` since the
-  two branches sync on releases.
+- Tags are attached to `main` commits, which are shared by `deploy/prod` since
+  the two branches sync on releases.
 
 ### Release flow
 
 1. Work merges into `main`.
 2. At release:
    - Tag the release commit on `main`.
-   - Fast-forward `release` to that same commit.
-3. Netlify deploys from `release`.
+   - Fast-forward `deploy/prod` to that same commit.
+3. Netlify deploys from `deploy/prod`.
 
 This keeps history mostly linear.
 
 ### Hotfixes (rare)
 
-- If a fix lands on `release`, it must be forward-merged or cherry-picked to
+- If a fix lands on `deploy/prod`, it must be forward-merged or cherry-picked to
   `main`.
-- Next promotion fast-forwards `release` to `main` again.
+- Next promotion fast-forwards `deploy/prod` to `main` again.
 
-Invariant: `release` should converge back to `main` ASAP.
+Invariant: `deploy/prod` should converge back to `main` ASAP.
 
 ## Why this model?
 

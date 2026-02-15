@@ -215,13 +215,13 @@ accordingly.
 
     </details>
 
-15. Fast-forward the [release][release-branch] branch so that it points to the
-    same commit as `main`:
+15. Fast-forward the [deploy/prod][] branch so that it points to the same commit
+    as `main`:
 
     ```sh
-    git checkout release && \
+    git checkout deploy/prod && \
     git merge --ff-only main
-    git push-all-remotes release
+    git push-all-remotes deploy/prod
     ```
 
     This will trigger a production deploy of the website.
@@ -230,7 +230,7 @@ accordingly.
     been updated to the new release.
 
 17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-    - **Target**: select the `release` branch.
+    - **Target**: select the `deploy/prod` branch.
 
     - **Tag**: select new release tag v{{% param version %}}
 
@@ -277,9 +277,9 @@ with the following modifications:
 2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
     create a release and publish it with one difference:
     - To create a new release draft, visit [Docsy-example release draft][].
-    - Once the release branch has been updated, wait for the production deploy
-      to complete and check that [example.docsy.dev][] has been updated to the
-      new release.
+    - Once the deploy/prod branch has been updated, wait for the production
+      deploy to complete and check that [example.docsy.dev][] has been updated
+      to the new release.
 
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new
@@ -329,10 +329,10 @@ before any further changes are merged into the `main` branch:
 
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
+[deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [docsy-example]: <{{% param github_repo %}}-example>
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/hugo.yaml>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
-[release-branch]: <{{% param github_repo %}}/tree/release>

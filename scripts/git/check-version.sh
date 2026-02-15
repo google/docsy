@@ -5,10 +5,10 @@
 action_name="$1"  # "commit" or "push"
 hook_name="pre-$action_name"
 
-# Skip version check if on main or release branch
+# Skip version check if on main or a deployment branch
 current_branch="$(git branch --show-current 2>/dev/null)"
 case "$current_branch" in
-  main|release) exit 0 ;;
+  main|deploy/*) exit 0 ;;
 esac
 
 if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
@@ -37,8 +37,7 @@ if [ -n "$output" ]; then
     echo 'Commit again if you are ok with the new ID.' >&2
   fi
   echo >&2
-  echo "Don't want the version to be changed, maybe because this is a release" >&2
-  echo "branch? Set SKIP_VERSION_CHECK=1" >&2
+  echo "Don't want the version to be changed, then set SKIP_VERSION_CHECK=1" >&2
   echo >&2
   exit 1
 fi
