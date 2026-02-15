@@ -10,8 +10,8 @@ tdBuildId: 001-over-main-24e96f1c
 
 test('parseParamsVersion extracts version and tdBuildId', () => {
   const result = parseParamsVersion(fixture_basic);
-  assert.equal(result.params.version, '0.14.3-dev');
-  assert.equal(result.params.tdBuildId, '001-over-main-24e96f1c');
+  assert.equal(result.version, '0.14.3-dev');
+  assert.equal(result.tdBuildId, '001-over-main-24e96f1c');
 });
 
 const expectedVers_basic = `
@@ -21,10 +21,8 @@ tdBuildId: release-abc
 
 test('updateYamlWithVersions updates version and tdBuildId in content', () => {
   const updated = updateYamlWithVersions(fixture_basic, {
-    params: {
-      version: '0.14.4',
-      tdBuildId: 'release-abc',
-    },
+    version: '0.14.4',
+    tdBuildId: 'release-abc',
   });
   assert.equal(updated, expectedVers_basic);
 });
@@ -35,9 +33,9 @@ const fixtureFieldAliases = `params:
 `;
 
 test('parseParamsVersion extracts version and tdBuildId from field aliases', () => {
-  const result = parseParamsVersion(fixtureFieldAliases, { inParams: false });
-  assert.equal(result.params.version, '0.14.3-dev');
-  assert.equal(result.params.tdBuildId, '001-over-main-24e96f1c');
+  const result = parseParamsVersion(fixtureFieldAliases);
+  assert.equal(result.version, '0.14.3-dev');
+  assert.equal(result.tdBuildId, '001-over-main-24e96f1c');
 });
 
 const expectedVersWithAlias = `params:
@@ -46,16 +44,10 @@ const expectedVersWithAlias = `params:
 `;
 
 test('updateYamlWithVersions updates version and tdBuildId in content with field aliases', () => {
-  const updated = updateYamlWithVersions(
-    fixtureFieldAliases,
-    {
-      params: {
-        version: '0.14.4',
-        tdBuildId: '',
-      },
-    },
-    { inParams: false },
-  );
+  const updated = updateYamlWithVersions(fixtureFieldAliases, {
+    version: '0.14.4',
+    tdBuildId: '',
+  });
   assert.equal(updated, expectedVersWithAlias);
 });
 
@@ -65,11 +57,9 @@ const fixture_versionWithComments = `params:
 `;
 
 test('parseParamsVersion extracts version and tdBuildId from content with comments', () => {
-  const result = parseParamsVersion(fixture_versionWithComments, {
-    inParams: false,
-  });
-  assert.equal(result.params.version, '0.14.3-dev');
-  assert.equal(result.params.tdBuildId, '001-over-main-24e96f1c');
+  const result = parseParamsVersion(fixture_versionWithComments);
+  assert.equal(result.version, '0.14.3-dev');
+  assert.equal(result.tdBuildId, '001-over-main-24e96f1c');
 });
 
 const expectedVersWithComments = `params:
@@ -78,16 +68,10 @@ const expectedVersWithComments = `params:
 `;
 
 test('updateYamlWithVersions updates version and tdBuildId in content with comments', () => {
-  const updated = updateYamlWithVersions(
-    fixture_versionWithComments,
-    {
-      params: {
-        version: '0.14.4',
-        tdBuildId: '1',
-      },
-    },
-    { inParams: false },
-  );
+  const updated = updateYamlWithVersions(fixture_versionWithComments, {
+    version: '0.14.4',
+    tdBuildId: '1',
+  });
   assert.equal(updated, expectedVersWithComments);
 });
 
@@ -105,8 +89,8 @@ versions:
 
 test('parseParamsVersion extracts version and tdBuildId from content with anchor', () => {
   const result = parseParamsVersion(fixture_versionWithMenuConfig);
-  assert.equal(result.params.version, '0.14.3-dev');
-  assert.equal(result.params.tdBuildId, '001-over-main-24e96f1c');
+  assert.equal(result.version, '0.14.3-dev');
+  assert.equal(result.tdBuildId, '001-over-main-24e96f1c');
 });
 
 const expectedVersWithMenuConfig = `
@@ -123,10 +107,8 @@ versions:
 
 test('updateYamlWithVersions updates version and tdBuildId in content with menu config', () => {
   const updated = updateYamlWithVersions(fixture_versionWithMenuConfig, {
-    params: {
-      version: '0.15.0-dev',
-      tdBuildId: '001-over-main-24e96f1c',
-    },
+    version: '0.15.0-dev',
+    tdBuildId: '001-over-main-24e96f1c',
   });
   assert.equal(updated, expectedVersWithMenuConfig);
 });
@@ -138,6 +120,12 @@ tdBuildId: "001-over-main-24e96f1c"
 
 test('parseParamsVersion extracts version and tdBuildId from content with quoted values', () => {
   const result = parseParamsVersion(fixture_versionQuoted);
-  assert.equal(result.params.version, '0.14.3-dev');
-  assert.equal(result.params.tdBuildId, '001-over-main-24e96f1c');
+  assert.equal(result.version, '0.14.3-dev');
+  assert.equal(result.tdBuildId, '001-over-main-24e96f1c');
+});
+
+test('parseParamsVersion extracts empty string for tdBuildId: ""', () => {
+  const result = parseParamsVersion("version: 0.14.0\ntdBuildId: ''");
+  assert.equal(result.version, '0.14.0');
+  assert.equal(result.tdBuildId, '');
 });

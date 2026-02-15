@@ -12,19 +12,16 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
-  configDir,
-  defaultParamsYamlPath,
-  readHugoYaml,
-  writeHugoYaml,
-} from './hugo-yaml.mjs';
+import { readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const cwd = process.cwd();
 
-const packageJsonPath = 'package.json';
+const configDir = 'docsy.dev';
+const defaultParamsYamlPath = 'config/_default/params.yaml';
 const defaultConfigPath = path.join(cwd, configDir, defaultParamsYamlPath);
+const packageJsonPath = 'package.json';
 
 export function getPackagePath() {
   return path.join(cwd, packageJsonPath);
@@ -104,18 +101,18 @@ export function main(
   const nextBuildId = getBuildId(newVersion);
 
   // Keep config's version/tdBuildId aligned with package.json.
-  const currentHugoVersion = hugoYaml.params?.version || '';
-  const currentHugoBuildId = hugoYaml.params?.tdBuildId || '';
+  const currentHugoVersion = hugoYaml.version || '';
+  const currentHugoBuildId = hugoYaml.tdBuildId || '';
   if (
     nextVersionNoBuild !== currentHugoVersion ||
     nextBuildId !== currentHugoBuildId
   ) {
-    if (!hugoYaml.params) {
-      hugoYaml.params = {};
-    }
-    hugoYaml.params.version = nextVersionNoBuild;
-    hugoYaml.params.tdBuildId = nextBuildId;
-    writeHugoYamlFn(hugoYaml, configPath);
+    const data = {
+      ...hugoYaml,
+      version: nextVersionNoBuild,
+      tdBuildId: nextBuildId,
+    };
+    writeHugoYamlFn(data, configPath);
     hugoYamlUpdated = true;
   }
 

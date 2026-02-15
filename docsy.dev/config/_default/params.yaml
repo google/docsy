@@ -14,7 +14,7 @@ version_menu_pagelinks: true
 versions:
   - name: Next
     version: *docsyVersion
-    url: https://main--docsydocs.netlify.app/
+    url: https://main--docsydocs.netlify.app
     # TODO: use https://next.docsy.dev once it's available
     # kind: next
   - version: *versionLatest

@@ -14,14 +14,15 @@
     {{ if .Site.Params.version_menu_pagelinks -}}
       {{ $path = .Page.RelPermalink -}}
     {{ end -}}
+    {{ $baseURL := strings.TrimSuffix "/" $.Site.BaseURL -}}
     {{ range .Site.Params.versions -}}
+      {{ $url := strings.TrimSuffix "/" (.url | default "") -}}
       {{ $isActive := or
           (eq .version $.Site.Params.version)
-          (eq $.Site.BaseURL .url) -}}
+          (eq $baseURL $url) -}}
       {{ $isSeparator := eq .name "---" -}}
       {{ $isEnabled := and .url (not $isSeparator) -}}
       {{ $name := .name | default .version -}}
-      {{ $tag := cond $isEnabled "a" "span" -}}
       <li>
         {{ if and $isEnabled (not $isActive) -}}
           <a {{ else -}}
@@ -33,8 +34,8 @@
             {{- if $isActive }} active {{- end -}}
           "
           {{- if $isActive }} aria-current="page" {{- end -}}
-          {{ if not $isEnabled }} disabled {{- end -}}
-          {{ with .url }} href="{{ . }}{{ $path }}" {{- end -}}
+          {{/* Note: $path starts with a '/' */ -}}
+          {{ with $url }} href="{{ . }}{{ $path }}" {{- end -}}
         >
         {{ if eq $name "---" -}}
         <hr class="dropdown-divider">
@@ -52,3 +53,4 @@
     {{ end -}}
   </ul>
 </div>
+{{/* */ -}}

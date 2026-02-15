@@ -4,7 +4,7 @@ date: 2017-01-05
 weight: 3.5
 description: >
   Let users search your Docsy site with a choice of configurable search options.
-cSpell:ignore: GCSE
+cSpell:ignore: GCSE docsearch websearch fsdu nryfng
 ---
 
 Docsy offers multiple options that let your readers search your site content, so
