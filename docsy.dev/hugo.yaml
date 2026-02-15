@@ -26,11 +26,10 @@ languages:
     languageName: English
     params:
       description: Docsy does docs
-  # Placeholder language used to demo multilingual support
-  xx:
-    languageName: Placeholder
+  fr:
+    languageName: Français
     params:
-      description: Docsy does multilingual docs
+      description: Docsy, c’est la doc.
 
 markup:
   tableOfContents:
@@ -172,18 +171,20 @@ security:
 
 sites: &sites
   matrix:
-    languages: [en, xx]
+    languages: [en, fr]
 
 module:
   hugoVersion:
     extended: true
     min: *hugoMinVersion
   mounts:
-    # If our mock language (xx) had any content we'd configure this
-    # differently, but for now, this will do.
+    # French landing page overrides home for fr
+    - source: content/fr
+      target: content
+      sites: { matrix: { languages: [fr] } }
+    # English content for en and as fallback for fr (other pages)
     - source: content/en
       target: content
-      # English content for both en, and as fallback for xx sites
       sites: *sites
     # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md

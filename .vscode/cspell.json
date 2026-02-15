@@ -2,6 +2,12 @@
 {
   "version": "0.2",
   "caseSensitive": true,
+  "import": [
+    "@cspell/dict-fr-fr/cspell-ext.json"
+  ],
+  "dictionaries": [
+    "fr-fr"
+  ],
   "words": [
     "anchorize",
     "baseof",

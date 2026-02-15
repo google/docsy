@@ -17,11 +17,11 @@ params:
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <a {{% _param btn-lg primary %}} href="/docs/get-started/">
+  <a {{% _param btn-lg primary %}} href="docs/get-started/">
     Get started
   </a>
   <a {{% _param btn-lg secondary %}}
-    href="/examples/">
+    href="examples/">
     Explore examples
   </a>
 </div>

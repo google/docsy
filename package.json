@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.3-dev+003-over-main-cf4f514b",
+  "version": "0.14.3-dev+004-over-main-7a82d787",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -63,6 +63,7 @@
     "bootstrap": "5.3.8"
   },
   "devDependencies": {
+    "@cspell/dict-fr-fr": "^2.3.2",
     "cpy-cli": "^6.0.0",
     "markdownlint-cli2": "^0.20.0",
     "prettier": "^3.8.1"

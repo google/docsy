@@ -43,9 +43,16 @@ export function readHugoYaml(filePath) {
   return parseParamsVersion(content);
 }
 
-export function writeHugoYaml(filePath, data) {
+/**
+ * Writes version and tdBuildId to YAML file.
+ *
+ * @param {{ version?: string, tdBuildId?: string }} data
+ * @param {string} filePath
+ */
+export function writeHugoYaml(versionInfo, filePath) {
+  console.log('writeHugoYaml', filePath, versionInfo);
   const content = fs.readFileSync(filePath, 'utf8');
-  const newContent = updateYamlWithVersions(content, data);
+  const newContent = updateYamlWithVersions(content, versionInfo);
   fs.writeFileSync(filePath, newContent);
 }
 

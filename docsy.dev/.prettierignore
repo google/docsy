@@ -12,5 +12,6 @@
 !/content/en/docs/language.md
 !/content/en/examples/**/*.*
 !/content/en/project/**/*.*
+!/content/fr/**/*.*
 
 /layouts
