@@ -16,7 +16,7 @@ if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
 fi
 
 new_version="$(scripts/get-build-id.sh)"
-output="$(npm run -s set:version -- --version "$new_version" --silent 2>&1)"
+output="$(npm run -s fix:version -- --silent 2>&1)"
 status=$?
 
 if [ $status -ne 0 ]; then
