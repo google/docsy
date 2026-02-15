@@ -1547,6 +1547,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:52.81195-05:00"
   },
+  "https://github.com/google/docsy/tree/deploy/prod": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-15T04:59:15.543652-05:00"
+  },
   "https://github.com/google/docsy/tree/main/AGENTS.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.354887-05:00"
@@ -1602,10 +1606,6 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:54.307861-05:00"
-  },
-  "https://github.com/google/docsy/tree/release": {
-    "StatusCode": 206,
-    "LastSeen": "2026-02-11T11:24:06.493756-05:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,

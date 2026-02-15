@@ -138,16 +138,16 @@ other github settings like **Edit this page** or **Create project issue**.
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-github_branch = "release"
+github_branch = "production"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  github_branch: release
+  github_branch: production
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "github_branch": "release"
+    "github_branch": "production"
   }
 }
 {{< /tab >}}
