@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import path from 'path';
 
 import {
   parseArgsAndResolveBuildId,
@@ -68,7 +69,7 @@ test('parseArgsAndResolveBuildId accepts -c/--config for config file path', () =
     ['--config', 'custom/params.yaml', '--id', 'build-1'],
     { logger: nullLogger },
   );
-  assert.ok(result.configPath.endsWith('custom/params.yaml'));
+  assert.ok(result.configPath.endsWith(path.join('custom', 'params.yaml')));
   assert.equal(result.buildId, 'build-1');
 });
 
@@ -203,9 +204,12 @@ test('main logs when package/hugo versions already match', () => {
 
   assert.equal(writeCallCount, 0);
   assert.equal(newVersion, '1.0.0+existing');
-  assert.deepEqual(messages, [
-    'Package version in docsy.dev/config/_default/params.yaml is already set to 1.0.0+existing.',
-  ]);
+  assert.equal(messages.length, 1);
+  assert.match(
+    messages[0],
+    // Regex to work on both Windows and Unix paths
+    /Package version in .+params\.yaml is already set to 1\.0\.0\+existing\./,
+  );
 });
 
 test('adjustVersionForBuildId replaces build metadata only', () => {
