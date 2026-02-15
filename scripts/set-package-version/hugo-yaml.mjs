@@ -43,7 +43,7 @@ export function readHugoYaml(filePath) {
   return parseParamsVersion(content);
 }
 
-export function writeParamsFile(filePath, data) {
+export function writeHugoYaml(filePath, data) {
   const content = fs.readFileSync(filePath, 'utf8');
   const newContent = updateYamlWithVersions(content, data);
   fs.writeFileSync(filePath, newContent);
@@ -76,17 +76,6 @@ export function updateYamlWithVersions(yamlConfig, { version, tdBuildId }) {
       return `${prefix}${key}: ${anchor}${value}${comment}`;
     })
     .join('\n');
-}
-
-export function writeHugoYaml(data, filePath) {
-  if (filePath) {
-    writeParamsFile(filePath, data);
-    return;
-  }
-  const pathToUse = getHugoYamlPath();
-  const content = fs.readFileSync(pathToUse, 'utf8');
-  const newContent = updateYamlWithVersions(content, data);
-  fs.writeFileSync(pathToUse, newContent);
 }
 
 function yamlScalar(value) {
