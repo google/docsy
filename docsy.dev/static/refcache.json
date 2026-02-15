@@ -2483,17 +2483,37 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:06.577733-05:00"
   },
+  "https://www.docsy.dev/404.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.321469-05:00"
+  },
   "https://www.docsy.dev/about/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:01.304275-05:00"
+  },
+  "https://www.docsy.dev/blog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.749337-05:00"
+  },
+  "https://www.docsy.dev/blog/2022/hello/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.227983-05:00"
   },
   "https://www.docsy.dev/blog/2022/hello/#introducing-the-psc": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:53.046526-05:00"
   },
+  "https://www.docsy.dev/blog/2023/0.7.x/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.452977-05:00"
+  },
   "https://www.docsy.dev/blog/2023/bootstrap-5-migration/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:53.491913-05:00"
+  },
+  "https://www.docsy.dev/blog/2023/priorities-for-2024/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.00764-05:00"
   },
   "https://www.docsy.dev/blog/2024/0.10.0/": {
     "StatusCode": 206,
@@ -2503,9 +2523,121 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.227542-05:00"
   },
+  "https://www.docsy.dev/blog/2024/year-in-review/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.055306-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.12.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:21.994808-05:00"
+  },
+  "https://www.docsy.dev/blog/2025/0.13.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.051604-05:00"
+  },
+  "https://www.docsy.dev/blog/2026/0.14.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.7528-05:00"
+  },
+  "https://www.docsy.dev/blog/2026/hugo-0.152.0+/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.685293-05:00"
+  },
+  "https://www.docsy.dev/community/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.649783-05:00"
+  },
+  "https://www.docsy.dev/docs/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.850699-05:00"
+  },
+  "https://www.docsy.dev/docs/best-practices/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.840393-05:00"
+  },
+  "https://www.docsy.dev/docs/best-practices/organizing-content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.314144-05:00"
+  },
+  "https://www.docsy.dev/docs/best-practices/site-guidance/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.733866-05:00"
+  },
+  "https://www.docsy.dev/docs/content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.844225-05:00"
+  },
+  "https://www.docsy.dev/docs/content/adding-content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.746339-05:00"
+  },
+  "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.123115-05:00"
+  },
+  "https://www.docsy.dev/docs/content/feedback/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.250239-05:00"
+  },
+  "https://www.docsy.dev/docs/content/iconsimages/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.025058-05:00"
+  },
+  "https://www.docsy.dev/docs/content/lookandfeel/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.982957-05:00"
+  },
+  "https://www.docsy.dev/docs/content/navigation/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.505849-05:00"
+  },
+  "https://www.docsy.dev/docs/content/print/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.441451-05:00"
+  },
+  "https://www.docsy.dev/docs/content/repository-links/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.373828-05:00"
+  },
+  "https://www.docsy.dev/docs/content/search/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.567022-05:00"
+  },
+  "https://www.docsy.dev/docs/content/shortcodes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.988835-05:00"
+  },
+  "https://www.docsy.dev/docs/content/taxonomy/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.952833-05:00"
+  },
+  "https://www.docsy.dev/docs/content/versioning/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.976033-05:00"
+  },
   "https://www.docsy.dev/docs/contributing/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-12T10:30:32.988537-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.761064-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/amazon/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:22:15.768393-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/github-pages/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:22:15.765449-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/local/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:22:15.763446-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/netlify/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:22:15.76535-05:00"
   },
   "https://www.docsy.dev/docs/get-started/": {
     "StatusCode": 206,
@@ -2515,13 +2647,69 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.086513-05:00"
   },
+  "https://www.docsy.dev/docs/get-started/basic-configuration/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.558996-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/docsy-as-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.512954-05:00"
+  },
   "https://www.docsy.dev/docs/get-started/docsy-as-module/example-site-as-template/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:53.624213-05:00"
   },
+  "https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.729274-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/docsy-as-module/start-from-scratch/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.951342-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/known_issues/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.460737-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/other-options/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.733827-05:00"
+  },
+  "https://www.docsy.dev/docs/get-started/quickstart-docker/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.015741-05:00"
+  },
+  "https://www.docsy.dev/docs/language/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.978504-05:00"
+  },
+  "https://www.docsy.dev/docs/updating/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.373824-05:00"
+  },
+  "https://www.docsy.dev/docs/updating/convert-site-to-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.844247-05:00"
+  },
+  "https://www.docsy.dev/docs/updating/updating-hugo-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.46999-05:00"
+  },
+  "https://www.docsy.dev/docs/updating/updating-submodules/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.842756-05:00"
+  },
   "https://www.docsy.dev/examples/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.267259-05:00"
+  },
+  "https://www.docsy.dev/project/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.001306-05:00"
+  },
+  "https://www.docsy.dev/project/about/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.063374-05:00"
   },
   "https://www.docsy.dev/project/about/changelog/": {
     "StatusCode": 206,
@@ -2534,6 +2722,98 @@
   "https://www.docsy.dev/project/about/contributing/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.550406-05:00"
+  },
+  "https://www.docsy.dev/project/about/maintainer-notes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.489911-05:00"
+  },
+  "https://www.docsy.dev/project/about/readme/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.668098-05:00"
+  },
+  "https://www.docsy.dev/project/build/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.015764-05:00"
+  },
+  "https://www.docsy.dev/project/build/ci-cd/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.719796-05:00"
+  },
+  "https://www.docsy.dev/project/build/git-repo/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.792698-05:00"
+  },
+  "https://www.docsy.dev/project/implementation/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.014231-05:00"
+  },
+  "https://www.docsy.dev/project/implementation/scrollspy-patch/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.536746-05:00"
+  },
+  "https://www.docsy.dev/project/repo/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.447707-05:00"
+  },
+  "https://www.docsy.dev/project/repo/agents/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.087142-05:00"
+  },
+  "https://www.docsy.dev/project/repo/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.500293-05:00"
+  },
+  "https://www.docsy.dev/project/repo/contributing/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.974784-05:00"
+  },
+  "https://www.docsy.dev/project/repo/readme/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.240907-05:00"
+  },
+  "https://www.docsy.dev/project/style-guide/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.729282-05:00"
+  },
+  "https://www.docsy.dev/search/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.01336-05:00"
+  },
+  "https://www.docsy.dev/tests/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.333724-05:00"
+  },
+  "https://www.docsy.dev/tests/alerts/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.053988-05:00"
+  },
+  "https://www.docsy.dev/tests/blocks-cover/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.674653-05:00"
+  },
+  "https://www.docsy.dev/tests/blocks-cover/color-gradient/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.34356-05:00"
+  },
+  "https://www.docsy.dev/tests/blocks-cover/height-auto/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.236986-05:00"
+  },
+  "https://www.docsy.dev/tests/blocks-cover/height-full/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.231678-05:00"
+  },
+  "https://www.docsy.dev/tests/blocks-cover/height-min/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.043602-05:00"
+  },
+  "https://www.docsy.dev/tests/layouts/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.588988-05:00"
+  },
+  "https://www.docsy.dev/tests/layouts/no-left-sidebar/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-14T14:02:22.572264-05:00"
   },
   "https://www.google.com/search": {
     "StatusCode": 200,

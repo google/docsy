@@ -62,8 +62,6 @@ params:
     to_year: present
   privacy_policy: https://policies.google.com/privacy
   archived_version: false
-  version: 0.14.3-dev
-  versionWithBuildId: 0.14.3-dev+002-over-main-4edd8f61
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
@@ -147,6 +145,7 @@ params:
     enable: true
   drawio:
     enable: true
+
   # UG helpers: use with _param
   FA: <i class="fa-{1} fa-{2} text-{3} px-1"></i>
   FAS: <i class="fa-solid fa-{1} text-{2} px-1"></i>

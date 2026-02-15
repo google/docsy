@@ -298,7 +298,7 @@ before any further changes are merged into the `main` branch:
    $ npm run -s fix:version
    ✓ Updated version: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
    ✓ Updated hugo.yaml version: 0.14.2 → 0.14.3-dev
-   ✓ Updated hugo.yaml versionWithBuildId: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
+   ✓ Updated config tdBuildId: (none) → 001-over-main-24e96f1c
    $ npm run -s fix:version:example
    ...
    ```

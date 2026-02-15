@@ -1,0 +1,6 @@
+{{ with .Site.Params.version -}}
+  {{ . -}}
+  {{ with $.Site.Params.tdBuildId -}}
+    +{{ . -}}
+  {{ end -}}
+{{ end -}}

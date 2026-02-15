@@ -9,6 +9,9 @@
 import fs from 'fs';
 import path from 'path';
 
+export const configDir = 'docsy.dev/config';
+export const defaultParamsYamlPath = '_default/params.yaml';
+
 /**
  * Resolves the path to hugo.yaml. The docsy repo uses docsy.dev/hugo.yaml;
  * docsy-example and similar sites use hugo.yaml at the repo root.
@@ -23,63 +26,113 @@ export function getHugoYamlPath() {
   return rootHugo;
 }
 
-export function readHugoYaml() {
-  const content = fs.readFileSync(getHugoYamlPath(), 'utf8');
+/**
+ * Parses version and tdBuildId from YAML content.
+ *
+ * @param {string} content - YAML file content
+ * @param {{ inParams?: boolean }} [options] - If true (default), parse top-level version fields (no params section)
+ * @returns {{ params: { version?: string, tdBuildId?: string } }}
+ */
+export function parseParamsVersion(content, { inParams = true } = {}) {
   const lines = content.split('\n');
   const result = { params: {} };
+  const lineRegex = /^(\s*)(version|tdBuildId):\s*(.+)$/;
+  const expectedPrefix = inParams ? '' : '  ';
 
-  // Simple YAML parser for the version field
-  // Look for "  version: <value>" under params section
-  let inParams = false;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
 
-    // Check if we're entering or leaving the params section
-    if (trimmed === 'params:') {
-      inParams = true;
-      continue;
-    }
-
-    // If we hit a top-level key (starts at column 0, not params), exit params section
-    if (
-      line.match(/^[a-z_]+:/) &&
-      !line.match(/^params:/) &&
-      !line.match(/^  /)
-    ) {
-      inParams = false;
-      continue;
-    }
-
-    // Look for version line within params section
-    if (inParams) {
-      const versionMatch = line.match(/^  version:\s*(.+)$/);
-      if (versionMatch) {
-        result.params.version = versionMatch[1].trim();
+    if (!inParams) {
+      if (trimmed === 'params:') {
+        inParams = true;
+        continue;
       }
-
-      const versionWithBuildIdMatch = line.match(
-        /^  versionWithBuildId:\s*(.*)$/,
-      );
-      if (versionWithBuildIdMatch) {
-        result.params.versionWithBuildId = stripYamlQuotes(
-          versionWithBuildIdMatch[1].trim(),
-        );
+      if (
+        line.match(/^[a-z_]+:/) &&
+        !line.match(/^params:/) &&
+        !line.match(/^  /)
+      ) {
+        inParams = false;
+        continue;
       }
     }
+
+    if (!inParams) continue;
+
+    const lineMatch = line.match(lineRegex);
+    if (!lineMatch) continue;
+    const prefix = lineMatch[1];
+    if (prefix !== expectedPrefix) continue;
+    const key = lineMatch[2];
+    if (key !== 'version' && key !== 'tdBuildId') continue;
+
+    const rawValueToken = lineMatch[3].trim();
+    const valueMatch = rawValueToken.match(
+      /^(?:&\w+\s+)?["']?(.+?)["']?(?:\s+#.*)?$/,
+    );
+    if (!valueMatch) continue;
+    result.params[key] = valueMatch[1].trim();
   }
 
   return result;
 }
 
-export function writeHugoYaml(hugoYaml) {
-  const content = fs.readFileSync(getHugoYamlPath(), 'utf8');
+export function readHugoYaml(filePath) {
+  const pathToUse = filePath ?? getHugoYamlPath();
+  const content = fs.readFileSync(pathToUse, 'utf8');
+  const inParams = /^(version|tdBuildId):/m.test(content);
+  return parseParamsVersion(content, { inParams });
+}
+
+export function writeParamsFile(filePath, data) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const inParams = /^(version|tdBuildId):/m.test(content);
+  const newContent = updateYamlWithVersions(content, data, { inParams });
+  fs.writeFileSync(filePath, newContent);
+}
+
+/**
+ * Updates version and tdBuildId in YAML content.
+ *
+ * @param {string} content - YAML file content
+ * @param {{ params?: { version?: string, tdBuildId?: string } }} hugoYaml
+ * @param {{ inParams?: boolean }} [options] - If true (default), update top-level version fields (no params section)
+ * @returns {string} Updated YAML content
+ */
+export function updateYamlWithVersions(
+  content,
+  hugoYaml,
+  { inParams = true } = {},
+) {
   const lines = content.split('\n');
 
-  // Update version fields under params.
-  let inParams = false;
+  if (inParams) {
+    return lines
+      .map((line) => {
+        const lineMatch = line.match(/^(version|tdBuildId):\s*(.+)$/);
+        if (!lineMatch) return line;
+        const key = lineMatch[1];
+        if (key !== 'version' && key !== 'tdBuildId') return line;
+        const newValue =
+          key === 'version'
+            ? hugoYaml.params?.version
+            : hugoYaml.params?.tdBuildId;
+        if (newValue === undefined) return line;
+        const rawValueToken = lineMatch[2];
+        const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
+        const prefix = anchorMatch ? anchorMatch[1] : '';
+        const commentMatch = rawValueToken.match(/(\s+#.*)$/);
+        const suffix = commentMatch ? commentMatch[1] : '';
+        const value = key === 'version' ? newValue : yamlScalar(newValue);
+        return `${key}: ${prefix}${value}${suffix}`;
+      })
+      .join('\n');
+  }
+
+  // params section format
   let versionUpdated = false;
-  let versionWithBuildIdUpdated = false;
+  let tdBuildIdUpdated = false;
   const newLines = lines.map((line) => {
     const trimmed = line.trim();
 
@@ -99,24 +152,30 @@ export function writeHugoYaml(hugoYaml) {
       return line;
     }
 
-    // Update version line within params section
     if (inParams) {
-      const versionMatch = line.match(/^  version:\s*(.+)$/);
-      if (versionMatch && hugoYaml.params?.version !== undefined) {
-        versionUpdated = true;
-        return `  version: ${hugoYaml.params.version}`;
-      }
+      const lineMatch = line.match(/^  (version|tdBuildId):\s*(.+)$/);
+      if (!lineMatch) return line;
 
-      const versionWithBuildIdMatch = line.match(
-        /^  versionWithBuildId:\s*(.*)$/,
-      );
-      if (
-        versionWithBuildIdMatch &&
-        hugoYaml.params?.versionWithBuildId !== undefined
-      ) {
-        versionWithBuildIdUpdated = true;
-        return `  versionWithBuildId: ${yamlScalar(hugoYaml.params.versionWithBuildId)}`;
-      }
+      const key = lineMatch[1];
+      if (key !== 'version' && key !== 'tdBuildId') return line;
+
+      const rawValueToken = lineMatch[2];
+      const newValue =
+        key === 'version'
+          ? hugoYaml.params?.version
+          : hugoYaml.params?.tdBuildId;
+      if (newValue === undefined) return line;
+
+      const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
+      const prefix = anchorMatch ? anchorMatch[1] : '';
+      const commentMatch = rawValueToken.match(/(\s+#.*)$/);
+      const suffix = commentMatch ? commentMatch[1] : '';
+
+      if (key === 'version') versionUpdated = true;
+      else tdBuildIdUpdated = true;
+
+      const value = key === 'version' ? newValue : yamlScalar(newValue);
+      return `  ${key}: ${prefix}${value}${suffix}`;
     }
 
     return line;
@@ -145,14 +204,11 @@ export function writeHugoYaml(hugoYaml) {
     }
   }
 
-  // Add missing versionWithBuildId line under params.
-  if (
-    !versionWithBuildIdUpdated &&
-    hugoYaml.params?.versionWithBuildId !== undefined
-  ) {
+  // Add missing tdBuildId line under params.
+  if (!tdBuildIdUpdated && hugoYaml.params?.tdBuildId !== undefined) {
     for (let i = 0; i < newLines.length; i++) {
       if (newLines[i].trim() === 'params:') {
-        // Prefer placing versionWithBuildId immediately after version.
+        // Prefer placing tdBuildId immediately after version.
         let insertIndex = -1;
         for (let j = i + 1; j < newLines.length; j++) {
           if (newLines[j].match(/^  version:\s*/)) {
@@ -182,24 +238,25 @@ export function writeHugoYaml(hugoYaml) {
         newLines.splice(
           insertIndex,
           0,
-          `  versionWithBuildId: ${yamlScalar(hugoYaml.params.versionWithBuildId)}`,
+          `  tdBuildId: ${yamlScalar(hugoYaml.params.tdBuildId)}`,
         );
         break;
       }
     }
   }
 
-  fs.writeFileSync(getHugoYamlPath(), newLines.join('\n'));
+  return newLines.join('\n');
 }
 
-function stripYamlQuotes(value) {
-  if (
-    (value.startsWith("'") && value.endsWith("'")) ||
-    (value.startsWith('"') && value.endsWith('"'))
-  ) {
-    return value.slice(1, -1);
+export function writeHugoYaml(hugoYaml, filePath) {
+  if (filePath) {
+    writeParamsFile(filePath, hugoYaml);
+    return;
   }
-  return value;
+  const pathToUse = getHugoYamlPath();
+  const content = fs.readFileSync(pathToUse, 'utf8');
+  const newContent = updateYamlWithVersions(content, hugoYaml);
+  fs.writeFileSync(pathToUse, newContent);
 }
 
 function yamlScalar(value) {

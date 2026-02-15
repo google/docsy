@@ -63,6 +63,15 @@ test('parseArgsAndResolveBuildId supports short -v and --version precedence', ()
   assert.equal(result.buildId, 'ignored-id');
 });
 
+test('parseArgsAndResolveBuildId accepts -c/--config for config file path', () => {
+  const result = parseArgsAndResolveBuildId(
+    ['--config', 'custom/params.yaml', '--id', 'build-1'],
+    { logger: nullLogger },
+  );
+  assert.ok(result.configPath.endsWith('custom/params.yaml'));
+  assert.equal(result.buildId, 'build-1');
+});
+
 test('release/build helpers split semver strings', () => {
   assert.equal(getReleaseVersion('1.2.3-dev+build-9'), '1.2.3');
   assert.equal(removeBuildId('1.2.3-dev+build-9'), '1.2.3-dev');
@@ -73,7 +82,7 @@ test('release/build helpers split semver strings', () => {
 test('main default strips pre-release and build metadata in both targets', () => {
   const pkg = { version: '1.2.3-dev+old-build' };
   const hugoYaml = {
-    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
+    params: { version: '1.2.3-dev', tdBuildId: 'old-build' },
   };
   let writtenPkg;
   let writtenHugoYaml;
@@ -93,14 +102,14 @@ test('main default strips pre-release and build metadata in both targets', () =>
   assert.equal(pkg.version, '1.2.3');
   assert.deepEqual(writtenPkg, { version: '1.2.3' });
   assert.equal(writtenHugoYaml.params.version, '1.2.3');
-  assert.equal(writtenHugoYaml.params.versionWithBuildId, '1.2.3');
+  assert.equal(writtenHugoYaml.params.tdBuildId, '');
   assert.equal(newVersion, '1.2.3');
 });
 
 test('main --id sets build metadata and preserves pre-release', () => {
   const pkg = { version: '1.2.3-dev+old-build' };
   const hugoYaml = {
-    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
+    params: { version: '1.2.3-dev', tdBuildId: 'old-build' },
   };
   let writtenPkg;
   let writtenHugoYaml;
@@ -120,17 +129,14 @@ test('main --id sets build metadata and preserves pre-release', () => {
   assert.equal(pkg.version, '1.2.3-dev+custom-build');
   assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
   assert.equal(writtenHugoYaml.params.version, '1.2.3-dev');
-  assert.equal(
-    writtenHugoYaml.params.versionWithBuildId,
-    '1.2.3-dev+custom-build',
-  );
+  assert.equal(writtenHugoYaml.params.tdBuildId, 'custom-build');
   assert.equal(newVersion, '1.2.3-dev+custom-build');
 });
 
 test('main --id "" generates timestamp build metadata', () => {
   const pkg = { version: '1.2.3-dev+old-build' };
   const hugoYaml = {
-    params: { version: '1.2.3-dev', versionWithBuildId: '1.2.3-dev+old-build' },
+    params: { version: '1.2.3-dev', tdBuildId: 'old-build' },
   };
   let writtenPkg;
   let writtenHugoYaml;
@@ -150,16 +156,13 @@ test('main --id "" generates timestamp build metadata', () => {
   assert.match(newVersion, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.match(writtenPkg.version, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.equal(writtenHugoYaml.params.version, '1.2.3-dev');
-  assert.match(
-    writtenHugoYaml.params.versionWithBuildId,
-    /^1\.2\.3-dev\+\d{8}-\d{4}Z$/,
-  );
+  assert.match(writtenHugoYaml.params.tdBuildId, /^\d{8}-\d{4}Z$/);
 });
 
 test('main sets entire version with --version and updates hugo split fields', () => {
   const pkg = { version: '1.0.0+old-build' };
   const hugoYaml = {
-    params: { version: '1.0.0', versionWithBuildId: '1.0.0+old-build' },
+    params: { version: '1.0.0', tdBuildId: 'old-build' },
   };
   let writtenPkg;
   let writtenHugoYaml;
@@ -179,17 +182,14 @@ test('main sets entire version with --version and updates hugo split fields', ()
   assert.equal(pkg.version, '2.0.0-dev+build-123');
   assert.deepEqual(writtenPkg, { version: '2.0.0-dev+build-123' });
   assert.equal(writtenHugoYaml.params.version, '2.0.0-dev');
-  assert.equal(
-    writtenHugoYaml.params.versionWithBuildId,
-    '2.0.0-dev+build-123',
-  );
+  assert.equal(writtenHugoYaml.params.tdBuildId, 'build-123');
   assert.equal(newVersion, '2.0.0-dev+build-123');
 });
 
 test('main logs when package/hugo versions already match', () => {
   const pkg = { version: '1.0.0+existing' };
   const hugoYaml = {
-    params: { version: '1.0.0', versionWithBuildId: '1.0.0+existing' },
+    params: { version: '1.0.0', tdBuildId: 'existing' },
   };
   let writeCallCount = 0;
   const messages = [];
@@ -214,7 +214,7 @@ test('main logs when package/hugo versions already match', () => {
   assert.equal(writeCallCount, 0);
   assert.equal(newVersion, '1.0.0+existing');
   assert.deepEqual(messages, [
-    'Package version is already set to 1.0.0+existing.',
+    'Package version in docsy.dev/config/_default/params.yaml is already set to 1.0.0+existing.',
   ]);
 });
 

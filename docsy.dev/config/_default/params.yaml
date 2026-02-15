@@ -1,0 +1,24 @@
+# cSpell:ignore pagelinks
+#
+# Version related parameters
+#
+# archived_version: false # TODO: generalize status
+# version:
+#   status: archived # Then fetch include
+
+version: &docsyVersion 0.14.3-dev
+tdBuildId: 003-over-main-cf4f514b
+versionLatest: &versionLatest v0.14.2
+version_menu: *docsyVersion
+version_menu_pagelinks: true
+versions:
+  - name: Next
+    version: *docsyVersion
+    url: https://main--docsydocs.netlify.app/
+    # TODO: use https://next.docsy.dev once it's available
+    # kind: next
+  - version: *versionLatest
+    url: https://www.docsy.dev
+    # kind: latest
+  - name: ---
+  - name: More coming soon...
