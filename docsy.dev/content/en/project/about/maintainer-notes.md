@@ -296,9 +296,10 @@ before any further changes are merged into the `main` branch:
 
    ```console
    $ npm run -s fix:version
-   ✓ Updated version: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
-   ✓ Updated hugo.yaml version: 0.14.2 → 0.14.3-dev
-   ✓ Updated hugo.yaml versionWithBuildId: 0.14.2 → 0.14.3-dev+001-over-main-24e96f1c
+   ✓ Updated package.json version: 0.14.3 → 0.14.3-dev+003-over-main-cf4f514b
+   ✓ Updated docsy.dev/config/_default/params.yaml version: 0.14.3 → 0.14.3-dev
+   ✓ Updated docsy.dev/config/_default/params.yaml tdBuildId: (none) → 003-over-main-cf4f514b
+   ...
    $ npm run -s fix:version:example
    ...
    ```

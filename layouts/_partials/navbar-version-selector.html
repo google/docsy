@@ -1,14 +1,56 @@
-<div class="dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{- .Site.Params.version_menu -}}
+{{/* cSpell:ignore pagelinks */ -}}
+
+<div class="td-version-menu dropdown">
+  <a class="nav-link dropdown-toggle td-version-menu__title" href="#" role="button"
+    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="td-version-menu__title-text">
+      {{- .Site.Params.version_menu -}}
+    </span>
   </a>
+  {{/* */ -}}
+
   <ul class="dropdown-menu">
     {{ $path := "" -}}
     {{ if .Site.Params.version_menu_pagelinks -}}
       {{ $path = .Page.RelPermalink -}}
     {{ end -}}
+    {{ $baseURL := strings.TrimSuffix "/" $.Site.BaseURL -}}
     {{ range .Site.Params.versions -}}
-    <li><a class="dropdown-item" href="{{ .url }}{{ $path }}">{{ .version }}</a></li>
+      {{ $url := strings.TrimSuffix "/" (.url | default "") -}}
+      {{ $isActive := or
+          (eq .version $.Site.Params.version)
+          (eq $baseURL $url) -}}
+      {{ $isSeparator := eq .name "---" -}}
+      {{ $isEnabled := and .url (not $isSeparator) -}}
+      {{ $name := .name | default .version -}}
+      <li>
+        {{ if and $isEnabled (not $isActive) -}}
+          <a {{ else -}}
+          <span {{/**/ -}}
+        {{ end -}}
+          class="dropdown-item
+            {{- if not $isEnabled }} disabled {{- end -}}
+            {{- with .kind }} dropdown-item-{{ . }} {{- end -}}
+            {{- if $isActive }} active {{- end -}}
+          "
+          {{- if $isActive }} aria-current="page" {{- end -}}
+          {{/* Note: $path starts with a '/' */ -}}
+          {{ with $url }} href="{{ . }}{{ $path }}" {{- end -}}
+        >
+        {{ if eq $name "---" -}}
+        <hr class="dropdown-divider">
+        {{ else -}}
+          {{- $name -}}
+        {{ end -}}
+
+        {{/* Closing tag */ -}}
+        {{ if $isEnabled -}}
+          </a>
+        {{ else -}}
+          </span>
+        {{ end -}}
+      </li>
     {{ end -}}
   </ul>
 </div>
+{{/* */ -}}

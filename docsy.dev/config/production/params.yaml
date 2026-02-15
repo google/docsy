@@ -1,0 +1,9 @@
+version: &docsyVersion 0.14.2
+version_menu: *docsyVersion
+versions:
+  - name: Next
+    kind: next
+    url: https://main--docsydocs.netlify.app/
+  - version: *docsyVersion
+    kind: latest
+    url: https://www.docsy.dev

@@ -111,7 +111,7 @@ $td-link-underline-offsets: (
   }
 
   .td-light-dark-menu {
-    position: unset !important;
+    position: unset;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -126,12 +126,29 @@ $td-link-underline-offsets: (
     }
   }
 
-  .td-lang-menu {
-    position: unset !important;
+  .td-lang-menu,
+  .td-version-menu {
+    position: unset;
     display: flex;
     align-items: center;
     justify-content: center;
 
+    .dropdown-item {
+      position: relative;
+      padding-left: 2.5rem;
+
+      &.active::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-check);
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .td-lang-menu {
     &__title {
       padding-left: 0;
       padding-right: 0;
@@ -158,20 +175,6 @@ $td-link-underline-offsets: (
         &::before {
           padding-right: 0;
         }
-      }
-    }
-
-    .dropdown-item {
-      position: relative;
-      padding-left: 2.5rem;
-
-      &.active::before {
-        font: var(--fa-font-solid);
-        content: fa-content($fa-var-check);
-        position: absolute;
-        left: 0.75rem;
-        top: 50%;
-        transform: translateY(-50%);
       }
     }
   }
