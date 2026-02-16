@@ -43,6 +43,10 @@
     // either, the TOC sidebar is there and makes .td-main fill the page.
     &:has(> .row .td-sidebar-nav) {
       display: flex;
+      flex-direction: column;
+      > .row {
+        flex-grow: 1;
+      }
     }
   }
 }
