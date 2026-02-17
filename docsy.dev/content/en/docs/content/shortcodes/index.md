@@ -623,16 +623,23 @@ This code translates to the right aligned tabbed pane below, showing a
 `Welcome!` greeting in English, German or Swahili:
 
 <!-- prettier-ignore-start -->
+{{< comment >}}
+
+Note: we use a Markdown call to the German-flag tab below so that the image link
+resolves correctly under doc-rooted builds. I'll keep the HTML call of the tab
+in the go-html-template block above for illustrative purposes.
+
+{{< /comment >}}
 {{< tabpane text=true right=true >}}
   {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
   ![Flag United Kingdom](flags/uk.png)
   **Welcome!**
   {{% /tab %}}
-  {{< tab header="German" lang="de" >}}
-    <img src="/docs/content/shortcodes/flags/de.png" alt="Flag Germany">
-    <b>Herzlich willkommen!</b>
-  {{< /tab >}}
+  {{% tab header="German" lang="de" %}}
+  ![Flag Germany](flags/de.png)
+  **Herzlich willkommen!**
+  {{% /tab %}}
   {{% tab header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
   **Karibu sana!**

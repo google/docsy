@@ -1,0 +1,7 @@
+# This doc-rooted variant of the Docsy site overrides the existing home page,
+# but Hugo doesn't seem to always resolve the conflict in the same way: locally
+# I see the docs landing page win, but on Netlify I see the site home page win.
+# Let's avoid the conflict by hiding the home page when building a doc-rooted
+# site variant. This config isn't necessary for regular doc-rooted sites.
+
+disableKinds: [home]

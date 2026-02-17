@@ -4,7 +4,9 @@ description: >-
   Learn how to get started with Docsy, including the available options for
   installing and using the Docsy theme.
 date: 2018-07-30
-aliases: [getting-started]
+aliases:
+  - getting-started
+  - /docs/get-started # TODO: drop once redirects are in place. This is only for doc-rooted example site
 weight: 2
 ---
 
