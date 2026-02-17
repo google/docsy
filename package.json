@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.3-dev+011-over-main-09a5d40d",
+  "version": "0.14.3-dev+012-over-main-bb43d873",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -32,6 +32,7 @@
     "ci:post": "npm run fix-for-test && npm run _diff:check && npm run test:tooling",
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
     "ci:test": "npm run ci:prepare && npm run check && npm run test:website && npm run ci:post",
+    "doc-rooted": "TD_BUILD_CTX=doc-rooted npm run",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
     "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website",
     "fix:format:diff": "npm run fix:format",
