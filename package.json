@@ -33,6 +33,7 @@
     "ci:prepare": "npm run docsy.dev-install && npm run _prepare && npm run _diff:check",
     "ci:test": "npm run ci:prepare && npm run check && npm run test:website && npm run ci:post",
     "docsy.dev-install": "npm run _cd:docsy.dev -- npm install",
+    "doc-rooted": "TD_BUILD_CTX=doc-rooted npm run",
     "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website",
     "fix:format:diff": "npm run fix:format",
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s cd:docsy.dev fix:format",

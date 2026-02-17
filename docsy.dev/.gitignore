@@ -3,3 +3,6 @@
 /public
 resources/
 tmp
+
+# Generated files
+/config/doc-rooted/module.yaml
