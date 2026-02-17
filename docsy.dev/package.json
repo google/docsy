@@ -25,7 +25,6 @@
     "make:public": "git init -b main public",
     "postbuild:preview": "npm run _postbuild",
     "postbuild:production": "npm run _postbuild",
-    "postinstall": "npm run _gen-docs-only-index",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "prepare-disabled": "cd .. && npm install",

@@ -17,8 +17,8 @@ $td-link-underline-offsets: (
     font: var(--fa-font-solid);
     position: absolute;
     left: 0.75rem;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 

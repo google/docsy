@@ -141,8 +141,8 @@ structure, where:
 
 - Documentation pages are published at the site root (`/`) rather than under the
   `/docs/` path prefix.
-- Page files remain in the `docs` section directory, for example
-  `content/docs/` or `content/en/docs/`.
+- Page files remain in the `docs` section directory, for example `content/docs/`
+  or `content/en/docs/`.
 
 As a consequence, the `docs` section landing page becomes the site home page. A
 doc-rooted site has the following benefits:
@@ -168,8 +168,8 @@ permalinks:
 > pages (for example, `/blog/` and `/community/`). If conflicts exist, rename
 > the conflicting non-doc paths or keep docs under `/docs/`.
 
-For an example of a doc-rooted variant of this site, see the [Doc-rooted example][]
-variant.
+For an example of a doc-rooted variant of this site, see the [Doc-rooted
+example][] variant.
 
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 
@@ -192,7 +192,7 @@ resources such as images used by the page. You can see a complete list of
 possible page front matter in
 [Front Matter](https://gohugo.io/content-management/front-matter/).
 
-For example, here's the front matter for this page:
+For example:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -925,7 +925,7 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
-[blocks]: ../../shortcodes/#blocks
+[blocks]: /docs/content/shortcodes/#blocks
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Emojis]: https://gohugo.io/quick-reference/emojis/
