@@ -1903,6 +1903,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.658614-05:00"
   },
+  "https://gohugo.io/configuration/permalinks/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-15T09:38:11.443242-05:00"
+  },
   "https://gohugo.io/content-management/formats/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:30.515578-05:00"

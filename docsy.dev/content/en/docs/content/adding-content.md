@@ -71,7 +71,7 @@ site content root. Hugo automatically applies the appropriate **template** for
 that section, depending on which folder the content is in. For example, this
 page is in the `docs` subdirectory of the site's content root directory
 `content/en/`, so Hugo automatically applies the `docs` template. You can
-override this by explicitly specifying a template or content type for a
+override this by explicitly specifying a template or [content type][] for a
 particular page.
 
 If you've copied the example site, you already have appropriately named
@@ -134,151 +134,53 @@ You can find out much more about how Hugo page layouts work in
 [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you
 about how to add content and use each of Docsy's templates.
 
-### Alternative site structure and docs-only sites {#alternative-site-structure}
+## Doc-rooted sites <a id="alternative-site-structure"></a>
 
-As noted above, Docsy assumes that (by default) your site has:
+Docsy supports documentation-first websites through a **doc-rooted** site
+structure, where:
 
-- Home page
-- Docs section under `/docs/`
-- Blog section under `/blog/`
-- Community section under `/community/`
+- Documentation pages are published at the site root (`/`) rather than under the
+  `/docs/` path prefix.
+- Page files remain in the `docs` section directory, for example
+  `content/docs/` or `content/en/docs/`.
 
-The [content type][] of each section determines the layout Hugo uses for that
-section.
+As a consequence, the `docs` section landing page becomes the site home page. A
+doc-rooted site has the following benefits:
 
-[content type]: https://gohugo.io/quick-reference/glossary/#content-type
+- Produces cleaner, documentation-focused URLs (no `/docs/` prefix).
+- Avoids the need to create a custom home page using [blocks][] shortcodes or
+  HTML.
 
-You may want to have a different site structure for your project while still
-making use of Docsy's layouts. A common example is for a **_docs-only_** site,
-where all of the pages (including the homepage) use the `docs` layout. In such a
-site, you might want to have `/news/` pages formatted with the blog layout.
+To create a doc-rooted site, redefine the `docs` section [permalinks][] in your
+[site configuration][] as follows (YAML format shown):
 
-Since Hugo 0.76, this has become practical without copying layouts to your site,
-or having to specify `type: blog` on every single page by making use of
-[target specific cascading front matter](https://gohugo.io/content-management/front-matter/#target-specific-pages).
+```yaml
+permalinks:
+  page:
+    docs: /:sections[1:]/:slug/
+  section:
+    docs: /:sections[1:]
+```
 
-For example, for the `/news/` section, you can specify the following front
-matter in the index page which will change the type of the section and
-everything below it to "blog":
+> [!CAUTION]
+>
+> Check for root-level URL path conflicts between doc and non-doc sections or
+> pages (for example, `/blog/` and `/community/`). If conflicts exist, rename
+> the conflicting non-doc paths or keep docs under `/docs/`.
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
-title = "Latest News"
-linkTitle = "News"
+For an example of a doc-rooted variant of this site, see the [Doc-rooted example][]
+variant.
 
-[menu.main]
-weight = 30
+[Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 
-[[cascade]]
-type = "blog"
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-title: "Latest News"
-linkTitle: "News"
-menu:
-  main:
-    weight: 30
-
-cascade:
-  - type: "blog"
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
-{
-  "title": "Latest News",
-  "linkTitle": "News",
-  "menu": {
-    "main": {
-      "weight": 30
-    }
-  },
-  "cascade": [
-    {
-      "type": "blog"
-    }
-  ]
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-restore -->
-
-If you want to create a "docs" site, specifying something like the following in
-the top level `_index.md` will set all top level sections to be treated as
-"docs", except for "news":
-
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Front matter:" disabled=true />}}
-{{< tab header="toml" lang="toml" >}}
-+++
-title = "My Wonderful Site"
-
-[[cascade]]
-type = "blog"
-toc_root = true
-
-  [cascade._target]
-  path = "/news/**"
-
-[[cascade]]
-type = "docs"
-
-  [cascade._target]
-  path = "/**"
-+++
-{{< /tab >}}
-{{< tab header="yaml" lang="yaml" >}}
----
-title: "My Wonderful Site"
-
-cascade:
-  - type: "blog"
-    toc_root: true
-    _target:
-    path: "/news/**"
-  - type: "docs"
-    _target:
-    path: "/**"
----
-{{< /tab >}}
-{{< tab header="json" lang="json" >}}
-{
-  "title": "My Wonderful Site",
-  "cascade": [
-    {
-      "type": "blog",
-      "toc_root": true,
-      "_target": {
-        "path": "/news/**"
-      }
-    },
-    {
-      "type": "docs",
-      "_target": {
-        "path": "/**"
-      }
-    }
-  ]
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-restore -->
-
-Note the addition of `toc_root` here. Setting that to true for a section causes
-it to be treated as a separate part of the site, with its own left hand
-navigation menu.
-
-An example docs-based site that uses this technique can be found at the
-[mostly docs](https://github.com/gwatts/mostlydocs/) repo.
+> [!NOTE] Legacy _docs-only_ setup
+>
+> Earlier versions of this page described a docs-only configuration that used a
+> front matter `cascade` to set page `type` values.
+>
+> That approach is no longer supported and can produce incorrect behavior. If
+> you are migrating from that setup, remove the `cascade` rule and configure
+> doc-rooted permalinks as described above.
 
 ## Page front matter
 
@@ -298,29 +200,23 @@ For example, here's the front matter for this page:
 {{< tab header="Front matter:" disabled=true />}}
 {{< tab header="toml" lang="toml" >}}
 +++
-title = "Adding Content"
-linkTitle = "Adding Content"
-weight = 1
-description = '''
-Add different types of content to your Docsy site.
-'''
+title = "About Docsy"
+linkTitle = "About"
+description = "Docsy is ..."
 +++
 {{< /tab >}}
 {{< tab header="yaml" lang="yaml" >}}
 ---
-title: "Adding Content"
-linkTitle: "Adding Content"
-weight: 1
-description: >
-  Add different types of content to your Docsy site.
+title: About Docsy
+linkTitle: About
+description: Docsy is ...
 ---
 {{< /tab >}}
 {{< tab header="json" lang="json" >}}
 {
-  "title": "Adding Content",
-  "linkTitle": "Adding Content",
-  "weight": 1,
-  "description": "Add different types of content to your Docsy site.\n"
+  "title": "About Docsy",
+  "linkTitle": "About",
+  "description": "Docsy is ..."
 }
 {{< /tab >}}
 {{< /tabpane >}}
@@ -1029,13 +925,17 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
+[blocks]: ../../shortcodes/#blocks
 [commonmark]: https://spec.commonmark.org/
+[content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
 [Look and Feel]: /docs/content/lookandfeel/
+[permalinks]: https://gohugo.io/configuration/permalinks/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
+[site configuration]: https://gohugo.io/configuration/introduction/
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
