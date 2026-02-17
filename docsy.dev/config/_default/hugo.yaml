@@ -60,7 +60,6 @@ params:
     from_year: 2018
     to_year: present
   privacy_policy: https://policies.google.com/privacy
-  archived_version: false
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
@@ -169,10 +168,6 @@ security:
       # Netlify build env var
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
-sites: &sites
-  matrix:
-    languages: [en, fr]
-
 module:
   hugoVersion:
     extended: true
@@ -185,7 +180,7 @@ module:
     # English content for en and as fallback for fr (other pages)
     - source: content/en
       target: content
-      sites: *sites
+      sites: &sites { matrix: { languages: [en, fr] } }
     # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md

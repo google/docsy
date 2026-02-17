@@ -175,6 +175,10 @@
     "StatusCode": 200,
     "LastSeen": "2026-02-11T11:18:54.909006-05:00"
   },
+  "https://doc-rooted--docsydocs.netlify.app": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:47.346717-05:00"
+  },
   "https://docs.agilebase.co.uk/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.86043-05:00"
@@ -1903,6 +1907,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.658614-05:00"
   },
+  "https://gohugo.io/configuration/permalinks/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-15T09:38:11.443242-05:00"
+  },
   "https://gohugo.io/content-management/formats/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:30.515578-05:00"
@@ -2219,9 +2227,321 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:06.451949-05:00"
   },
+  "https://main--docsydocs.netlify.app/404.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.795797-05:00"
+  },
+  "https://main--docsydocs.netlify.app/about/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.914246-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.77399-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2022/hello/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.773937-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2023/0.7.x/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.768637-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2023/bootstrap-5-migration/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.043688-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2023/priorities-for-2024/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.957832-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2024/0.10.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.54687-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2024/0.9.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.836909-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2024/year-in-review/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.353174-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2025/0.12.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.003746-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2025/0.13.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.449068-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2026/0.14.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.178566-05:00"
+  },
+  "https://main--docsydocs.netlify.app/blog/2026/hugo-0.152.0+/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.42811-05:00"
+  },
+  "https://main--docsydocs.netlify.app/community/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.779232-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.094192-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/best-practices/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.100748-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/best-practices/organizing-content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.012602-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/best-practices/site-guidance/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.837128-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.081959-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/adding-content/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.153271-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.058195-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/feedback/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.480518-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/iconsimages/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.793844-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/lookandfeel/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.007321-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/navigation/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.073059-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/print/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.335827-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/repository-links/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.26085-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/search/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.911064-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/shortcodes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.085429-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/taxonomy/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.467492-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/versioning/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.213793-05:00"
+  },
   "https://main--docsydocs.netlify.app/docs/contributing/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-12T11:15:10.534035-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/deployment/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.51066-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/deployment/amazon/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.092497-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/deployment/github-pages/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.891123-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/deployment/local/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.208975-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/deployment/netlify/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.146612-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.808383-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/basic-configuration/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.219815-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.555547-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/example-site-as-template/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.17107-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/installation-prerequisites/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.758092-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/start-from-scratch/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.008994-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/known_issues/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.072977-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/other-options/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.248799-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/get-started/quickstart-docker/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.900663-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/language/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.615418-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/updating/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.250178-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/updating/convert-site-to-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.869787-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/updating/updating-hugo-module/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.943453-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/updating/updating-submodules/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.406879-05:00"
+  },
+  "https://main--docsydocs.netlify.app/examples/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.989621-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.032769-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/about/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.173745-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/about/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.183123-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/about/maintainer-notes/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.514167-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/about/readme/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.646901-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/build/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.499949-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/build/ci-cd/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.695852-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/build/git-repo/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.762189-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/implementation/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.992352-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/implementation/scrollspy-patch/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.7978-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/repo/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.27282-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/repo/agents/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.16251-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/repo/changelog/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.322719-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/repo/contributing/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.963302-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/repo/readme/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.545617-05:00"
+  },
+  "https://main--docsydocs.netlify.app/project/style-guide/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.882514-05:00"
+  },
+  "https://main--docsydocs.netlify.app/search/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.694607-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.418894-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/alerts/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:46.031798-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/blocks-cover/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.355613-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/blocks-cover/color-gradient/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.242431-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/blocks-cover/height-auto/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.460768-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/blocks-cover/height-full/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.967093-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/blocks-cover/height-min/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:44.90213-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/layouts/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.921672-05:00"
+  },
+  "https://main--docsydocs.netlify.app/tests/layouts/no-left-sidebar/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-16T19:16:45.510553-05:00"
   },
   "https://markmap.js.org/": {
     "StatusCode": 206,

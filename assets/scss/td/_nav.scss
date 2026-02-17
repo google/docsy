@@ -11,6 +11,17 @@ $td-link-underline-offsets: (
   4: 0.5em,
 ) !default;
 
+@mixin td-navbar-dropdown-item-icon($fa-icon) {
+  &::before {
+    content: fa-content($fa-icon);
+    font: var(--fa-font-solid);
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 .td-navbar {
   @extend .navbar;
   @extend .navbar-expand;
@@ -137,13 +148,19 @@ $td-link-underline-offsets: (
       position: relative;
       padding-left: 2.5rem;
 
-      &.active::before {
-        font: var(--fa-font-solid);
-        content: fa-content($fa-var-check);
-        position: absolute;
-        left: 0.75rem;
-        top: 50%;
-        transform: translateY(-50%);
+      &.active {
+        @include td-navbar-dropdown-item-icon($fa-var-check);
+      }
+
+      &-home {
+        @include td-navbar-dropdown-item-icon($fa-var-house);
+      }
+
+      &-latest {
+        font-weight: $font-weight-semibold;
+        &::after {
+          content: ' (latest)';
+        }
       }
     }
   }
