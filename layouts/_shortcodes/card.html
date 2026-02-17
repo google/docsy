@@ -15,18 +15,18 @@
 <div class="td-card card border me-4">
 {{ with $.Get "header" -}}
     <div class="card-header{{- cond $code " code" "" -}}">
-      {{ . | markdownify }}
+      {{ . | $.Page.RenderString }}
     </div>
 {{ end -}}
   <div class="card-body{{- cond $code " code p-0 m-0" "" -}}">
     {{ with $.Get "title" -}}
       <h5 class="card-title">
-        {{ . | markdownify -}}
+        {{ . | $.Page.RenderString -}}
       </h5>
     {{ end -}}
     {{ with $.Get "subtitle" -}}
       <h6 class="card-title ms-2 text-body-secondary">
-        {{ . | markdownify -}}
+        {{ . | $.Page.RenderString -}}
       </h6>
     {{ end -}}
     {{ with $.Inner -}}
@@ -41,7 +41,7 @@
   </div>
   {{ with $.Get "footer" -}}
     <div class="card-footer">
-      {{ . | markdownify -}}
+      {{ . | $.Page.RenderString -}}
     </div>
   {{ end -}}
 </div>

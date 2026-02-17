@@ -1,7 +1,10 @@
 ---
 title: Contribution guidelines
 description: How to contribute to Docsy
-aliases: [contribution-guidelines]
+aliases:
+  - contributing
+  - contribution-guidelines
+  - /docs/contribution-guidelines # TODO: drop once redirects are in place. This is only for doc-rooted example site
 weight: 9
 ---
 
@@ -106,8 +109,8 @@ Docsy has a shortcut for you:
 If you want to run your own local Hugo server to preview your changes as you
 work:
 
-1. Follow the instructions in [Getting started](/docs/getting-started) to
-   install Hugo and any other tools you need.
+1. Follow the instructions in [Getting started](get-started) to install Hugo and
+   any other tools you need.
 1. Fork the [Docsy](https://github.com/google/docsy) repo into your own project,
    then create a local copy using `git clone`:
 

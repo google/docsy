@@ -751,11 +751,11 @@ To create a heading ID alias:
 For example, if you rename "Getting Started" to "Quickstart":
 
 ```html
-## Quickstart <a id="getting-started"></a> {#quickstart}
+## Quickstart <a id="get-started"></a> {#quickstart}
 ```
 
-Now both `#getting-started` and `#quickstart` target the same heading and scroll
-to the right place.
+Now both `#get-started` and `#quickstart` target the same heading and scroll to
+the right place.
 
 Give the heading alias for this section a try:
 [Heading aliases](#a-heading-aliases).[^might-not-scroll]

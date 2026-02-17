@@ -2223,6 +2223,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:51.084674-05:00"
   },
+  "https://main--docsydocs.netlify.app": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-17T06:15:14.691378-05:00"
+  },
   "https://main--docsydocs.netlify.app/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:06.451949-05:00"
@@ -2798,6 +2802,10 @@
   "https://www.docker.com/get-started": {
     "StatusCode": 200,
     "LastSeen": "2026-02-11T11:14:23.171612-05:00"
+  },
+  "https://www.docsy.dev": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-17T06:15:15.454399-05:00"
   },
   "https://www.docsy.dev/": {
     "StatusCode": 206,

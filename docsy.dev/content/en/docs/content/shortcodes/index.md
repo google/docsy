@@ -623,16 +623,23 @@ This code translates to the right aligned tabbed pane below, showing a
 `Welcome!` greeting in English, German or Swahili:
 
 <!-- prettier-ignore-start -->
+{{< comment >}}
+
+Note: we use a Markdown call to the German-flag tab below so that the image link
+resolves correctly under doc-rooted builds. I'll keep the HTML call of the tab
+in the go-html-template block above for illustrative purposes.
+
+{{< /comment >}}
 {{< tabpane text=true right=true >}}
   {{% tab header="**Languages**:" disabled=true /%}}
   {{% tab header="English" lang="en" %}}
   ![Flag United Kingdom](flags/uk.png)
   **Welcome!**
   {{% /tab %}}
-  {{< tab header="German" lang="de" >}}
-    <img src="/docs/content/shortcodes/flags/de.png" alt="Flag Germany">
-    <b>Herzlich willkommen!</b>
-  {{< /tab >}}
+  {{% tab header="German" lang="de" %}}
+  ![Flag Germany](flags/de.png)
+  **Herzlich willkommen!**
+  {{% /tab %}}
   {{% tab header="Swahili" lang="sw" %}}
   ![Flag Tanzania](flags/tz.png)
   **Karibu sana!**
@@ -732,7 +739,7 @@ shows the first four Presidents of the United States:
   header="**George Washington**"
   title="\*1732 &nbsp;&nbsp;&nbsp; †1799"
   subtitle="**President:** 1789 – 1797"
-  footer="![Signature George Washington](/docs/content/shortcodes/card-pane/george-washington-signature.png)"
+  footer="![Signature George Washington](card-pane/george-washington-signature.png)"
 %}}
 ![George Washington](card-pane/george-washington-portrait.jpg)
 {{% /card %}}
@@ -741,7 +748,7 @@ shows the first four Presidents of the United States:
   header="**John Adams**"
   title="\*1735 &nbsp;&nbsp;&nbsp; †1826"
   subtitle="**President:** 1797 – 1801"
-  footer="![Signature John Adams](/docs/content/shortcodes/card-pane/john-adams-signature.png)"
+  footer="![Signature John Adams](card-pane/john-adams-signature.png)"
 %}}
 ![John Adams](card-pane/john-adams-portrait.jpg)
 {{% /card %}}
@@ -750,7 +757,7 @@ shows the first four Presidents of the United States:
   header="**Thomas Jefferson**"
   title="\*1743 &nbsp;&nbsp;&nbsp; †1826"
   subtitle="**President:** 1801 – 1809"
-  footer="![Signature Thomas Jefferson](/docs/content/shortcodes/card-pane/thomas-jefferson-signature.png)"
+  footer="![Signature Thomas Jefferson](card-pane/thomas-jefferson-signature.png)"
 %}}
 ![Thomas Jefferson](card-pane/thomas-jefferson-portrait.jpg)
 {{% /card %}}
@@ -759,7 +766,7 @@ shows the first four Presidents of the United States:
   header="**James Madison**"
   title="\*1751 &nbsp;&nbsp;&nbsp; †1836"
   subtitle="**President:** 1809 – 1817"
-  footer="![Signature James Madison](/docs/content/shortcodes/card-pane/james-madison-signature.png)"
+  footer="![Signature James Madison](card-pane/james-madison-signature.png)"
 %}}
 ![James Madison](card-pane/james-madison-portrait.jpg)
 {{% /card %}}
@@ -811,7 +818,7 @@ indicates and explains the individual components of a card:
   header="**Imagine**"
   title="Artist and songwriter: John Lennon"
   subtitle="Co-writer: Yoko Ono"
-  footer="![SignatureJohnLennon](/docs/content/shortcodes/card-pane/john-lennon-signature.png)"
+  footer="![SignatureJohnLennon](card-pane/john-lennon-signature.png)"
 >}}
 
 Imagine there's no heaven, It's easy if you try<br/>

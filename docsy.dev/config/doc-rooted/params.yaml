@@ -6,8 +6,8 @@ versions:
   - name: Next
     kind: next
     url: https://main--docsydocs.netlify.app/
-    pagelinks: true
+    pagelinks: false
   - version: *docsyVersion
     kind: latest
     url: https://www.docsy.dev
-    pagelinks: true
+    pagelinks: false
