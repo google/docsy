@@ -177,10 +177,12 @@ module:
     - source: content/fr
       target: content
       sites: { matrix: { languages: [fr] } }
+      # files: ['! content/fr/_index.md'] # for doc-rooted: uncomment
     # English content for en and as fallback for fr (other pages)
     - source: content/en
       target: content
       sites: &sites { matrix: { languages: [en, fr] } }
+      # files: ['! content/en/_index.md'] # for doc-rooted: uncomment
     # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
