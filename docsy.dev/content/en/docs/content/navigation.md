@@ -482,12 +482,18 @@ sidebar_root_for: self
 ---
 ```
 
+{{< comment >}}
+
+FIXME: Add examples under test and refer to them here.
+
 Examples:
 
 | `sidebar_root_for` | Example                                     |
 | ------------------ | ------------------------------------------- |
 | `self`             | [Content and customization](/docs/content/) |
 | `children`         | [Best practices](/docs/best-practices/)     |
+
+{{< /comment >}}
 
 To navigate out of a rooted section, click the “up” icon in the sidebar next to
 the section title.
