@@ -2,10 +2,9 @@
   {{ range . }}
   {{ $isExternal := hasPrefix .url "http" -}}
   <li class="td-footer__links-item" data-bs-toggle="tooltip" title="{{ .name }}" aria-label="{{ .name }}">
-    <a
-      {{- if $isExternal }} target="_blank" rel="noopener" {{- end -}}
-      {{/**/}} href="{{ .url }}" aria-label="{{ .name }}"
+    <a href="{{ .url }}" aria-label="{{ .name }}"
       {{- with .rel }} rel="{{ . }}" {{- end -}}
+      {{ if $isExternal }} target="_blank" rel="noopener" {{- end -}}
     >
       <i class="{{ .icon }}"></i>
     </a>

@@ -26,7 +26,12 @@
 <ul>
 {{ range . -}}
   <li title="{{ .name }}">
-    <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}</a>:
+    {{ $isExternal := hasPrefix .url "http" -}}
+    <a href="{{ .url }}"
+      {{- if $isExternal }} target="_blank" rel="noopener" {{- end -}}
+    > {{/**/ -}}
+      <i class="{{ .icon }}"></i> {{ .name -}}
+    </a>:
     {{ .desc }}
   </li>
 {{ end }}
