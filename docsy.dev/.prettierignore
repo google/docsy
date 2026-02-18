@@ -1,6 +1,7 @@
 # cSpell:ignore lookandfeel
 
 /content/**/*.*
+!/content/en/about/**/*.*
 !/content/en/blog/**/*.*
 !/content/en/community/**/*.*
 !/content/en/docs/_index.md
