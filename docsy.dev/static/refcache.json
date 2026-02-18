@@ -763,6 +763,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:01.944819-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/config/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-18T03:26:03.119227-05:00"
+  },
   "https://github.com/google/docsy/blob/main/docsy.dev/content/en/_index.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:49.8453-05:00"

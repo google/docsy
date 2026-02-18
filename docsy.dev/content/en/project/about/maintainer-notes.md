@@ -57,13 +57,20 @@ accordingly.
       ```
 
       Both forms update the `version` related fields in [package.json][] and
-      [docsy.dev/hugo.yaml][].
+      [docsy.dev/config][] files.
 
 6.  <a id="ci-test-step">Run `npm run ci:test`</a>, which runs `ci:prepare` and
     more to ensure that, e.g., vendor assets and [go.mod] dependencies are
     up-to-date, etc.
 
 7.  **Submit a PR with your changes**.
+    - Set the `BASE` variable to the target branch: `main` if this is a stable
+      release, and `release` for patch releases.
+
+      ```sh
+      BASE=main
+      ```
+
     - Commit any changes accumulated from the previous steps using this title:
 
       ```text
@@ -76,6 +83,7 @@ accordingly.
       ```sh
       export SKIP_VERSION_CHECK=1
       gh pr create --web --title "Release $VERSION preparation" \
+        --base $BASE \
         --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
       ```
 
@@ -94,12 +102,12 @@ accordingly.
 
 9.  **Get PR approved and merged**.
 
-10. **Pull in `main`** to get the last PR.
+10. **Pull the PR** to get the last changes.
 
-11. **Test Docsy from main**, from the [docsy-example][] repository for example.
+11. **Test Docsy** from [docsy-example][], for example.
 
 12. **Ensure** that you're:
-    - On the default branch, `main`
+    - On the target `$BASE` branch
     - At the commit that you want to tag as {{% param version %}}
 
 13. **Create the new tag** for {{% param version %}}.
@@ -215,24 +223,28 @@ accordingly.
 
     </details>
 
-15. Fast-forward the [deploy/prod][] branch so that it points to the same commit
-    as `main`:
+15. Update the [deploy/prod][] branch from `$BASE`.
+
+    For stable releases from `main`, use:
 
     ```sh
-    git checkout deploy/prod && \
+    git checkout deploy/prod
     git merge --ff-only main
     git push-all-remotes deploy/prod
     ```
 
-    This will trigger a production deploy of the website.
+    For patch releases from `release`, selectively merge from `$BASE`.
+
+    The branch update will trigger a production deploy of the website.
 
 16. Wait for the production deploy to complete and check that [docsy.dev][] has
     been updated to the new release.
 
 17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-    - **Target**: select the `deploy/prod` branch.
+    - Visit [tags][] to find the new release tag v{{% param version %}}.
 
-    - **Tag**: select new release tag v{{% param version %}}
+    - Select Create a new release from the v{{% param version %}} tag dropdown
+      menu
 
     - **Release title**: use the release version.
 
@@ -332,7 +344,8 @@ before any further changes are merged into the `main` branch:
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [docsy-example]: <{{% param github_repo %}}-example>
 [docsy.dev]: <{{% _param baseURL %}}>
-[docsy.dev/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/hugo.yaml>
+[docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[tags]: <{{% param github_repo %}}/tags>
