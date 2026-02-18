@@ -1,6 +1,6 @@
 ---
-title: Git repository information
-linkTitle: Git repos
+title: Git repo info and branch model
+linkTitle: Git repos and branches
 cSpell:ignore: hotfixes
 ---
 
@@ -13,54 +13,91 @@ Docsy:
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
+These two projects are kept in sync at release points, but they may diverge
+between releases, usually to allow the website to ship doc content and UX
+improvements without forcing a theme release.
+
 The main Docsy example site is [Goldydocs], located in the [Docsy example site
 repository][].
 
 ## Branch model
 
-Both the Docsy and Goldydocs repositories use the same branch model:
+This repository's branch model is as follows:
 
-- `main`: development branch
-  - All feature work and documentation updates land here first.
-  - Source of the _leading-edge_ theme and website versions.
+- `main`: development branch for the next theme release and next site content.
+- `release`: release and maintenance branch for the current stable theme version
+- Publishing branches used by Netlify:
+  - `deploy/prod`: production site for the current stable release docs.
+  - `doc-rooted`: production branch for the doc-rooted site variant.
+  - These branches determine what is published. They are not feature development
+    branches.
 
-- `deploy/*`: publishing branches used by Netlify
-  - `deploy/prod`: production site
-  - `deploy/docs-only`: docs-only site variant
-  - These branches determine what is published. They are not development
-    branches. Changes must originate from `main` and are typically
-    fast-forwarded here.
+The Goldydocs repo has the same model, except for `doc-rooted` which is not
+used.
 
 ### Tags
 
-- Tags are used for **official theme releases**
-- Tags are attached to `main` commits, which are shared by `deploy/prod` since
-  the two branches sync on releases.
+- Tags are used for **official theme releases**.
+- Tags are created from `release`.
 
-### Release flow
+### Workflow
 
-1. Work merges into `main`.
-2. At release:
-   - Tag the release commit on `main`.
-   - Fast-forward `deploy/prod` to that same commit.
-3. Netlify deploys from `deploy/prod`.
+#### General workflow
 
-This keeps history mostly linear.
+1. Theme and site work is done on `main`.
 
-### Hotfixes (rare)
+2. When ready to release:
+   - Stable release: fast-forward merge from `main` to `release`.
+   - Patch release: create and merge a release PR from `main` to `release`,
+     e.g., by cherry-picking relevant commits.
 
-- If a fix lands on `deploy/prod`, it must be forward-merged or cherry-picked to
-  `main`.
-- Next promotion fast-forwards `deploy/prod` to `main` again.
+3. Publish site updates:
+   - Fast-forward `deploy/prod` from `main` when possible.
+   - Otherwise (usually because of `release` was patched),
 
-Invariant: `deploy/prod` should converge back to `main` ASAP.
+   - Bring release-facing site updates (for example changelog and release blog
+     updates) onto `main` from `release`.
+
+4. Netlify deploys from `deploy/prod` and `doc-rooted`.
+
+This keeps theme releases and site deploys coordinated, but not tightly coupled.
+
+#### Patch release workflow
+
+For patches to the theme or website, generally prefer making the changes to
+`main` first, though you can apply them to `release` then merge back to `main`.
+Assuming the former, the patch-release workflow is as follows:
+
+1. Cherry-pick relevant commits from `main` to `release`.
+2. Create a and merge a release PR from `main` to `release`.
+3. Bring release-facing site updates (for example changelog and release blog
+   updates) back onto `main` from `release`.
+4. Update `deploy/prod` from `main` by fast-forward merging if possible, if not
+   then selectively bring in release relevant changes.
+
+### Branch sync and invariants
+
+`release`:
+
+- The theme release and maintenance branch.
+- Theme tags come from this branch.
+- Flow is usually from `main` to `release` via fast-forward merge, when
+  possible, cherry-picking otherwise (on patch releases)
+- Periodically, after a patch release, record branch ancestry without taking
+  content by periodically running `git merge -s ours release` on `main`.
+
+`deploy/prod`:
+
+- Reflects the current release docs baseline
+- Can include site-only improvements that are compatible with the current
+  release
 
 ## Why this model?
 
-- Preserves a clean, mostly linear history.
-- Allows website production deploys on release commits (and a rare hotfix).
-- Keeps `main` free for ongoing theme + site development.
-- Maintains clear, immutable release points for theme consumers via tags.
+- Keeps stable theme releases predictable while `main` moves quickly.
+- Lets the website ship docs UX improvements without forcing a theme release.
+- Preserves clear release tags for theme consumers.
+- Keeps branch responsibilities explicit for a small maintainer team.
 
 [Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>
