@@ -1,6 +1,7 @@
 ---
 name: Bug report
-labels: [bug, needs-triage]
+labels: [needs-triage]
+type: bug
 about: Create a report to help us improve
 ---
 
@@ -8,14 +9,14 @@ about: Create a report to help us improve
 
 ### Environment
 
-- [ ] Version of Docsy you are using:
-- [ ] How are you using Docsy? As a:
+- **Hugo** version you are using (output of `hugo version`):
+- **Docsy** version you are using:
+- How are you using Docsy? As a:
   - [ ] Hugo module
   - [ ] NPM module
   - [ ] Git submodule
   - [ ] Other:
-- [ ] Version of Hugo you are using (output of `hugo version`):
-- [ ] OS:
+- OS:
   - [ ] Linux
   - [ ] macOS
   - [ ] Windows
