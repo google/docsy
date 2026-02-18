@@ -1,10 +1,7 @@
 ---
 title: Contribution guidelines
 description: How to contribute to Docsy
-aliases:
-  - contributing
-  - contribution-guidelines
-  - /docs/contribution-guidelines # TODO: drop once redirects are in place. This is only for doc-rooted example site
+aliases: [contribution-guidelines]
 weight: 9
 ---
 

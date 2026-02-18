@@ -116,7 +116,7 @@ params:
         desc: Practical questions and curated answers
     developer:
       - name: Contributing
-        url: /docs/contribution-guidelines/
+        url: /docs/contributing/
         icon: fa-solid fa-code-fork
         desc: How to contribute
       - name: Project docs and site info
