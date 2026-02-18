@@ -144,11 +144,12 @@ For the full list of changes, see the [0.15.0][] release page.
 
 ## v0.14.3 {#v0.14.3}
 
-Patch release [0.14.3][] applies the layout fix for [#2561], which ensures
+Patch release [0.14.3][] applies the layout fix for [#2561][], which ensures
 `.td-main > .row` grows vertically ([#2569]).
 
-[0.14.3]: https://github.com/google/docsy/releases/v0.14.3
+[#2561]: https://github.com/google/docsy/issues/2561
 [#2569]: https://github.com/google/docsy/pull/2569
+[0.14.3]: https://github.com/google/docsy/releases/v0.14.3
 
 ## v0.14.2 {#v0.14.2}
 
