@@ -1,10 +1,14 @@
 <ul class="td-footer__links-list">
   {{ range . }}
+  {{ $rel := .rel | string -}}
   {{ $isExternal := hasPrefix .url "http" -}}
+  {{ if $isExternal -}}
+    {{ $rel = cond $rel (add $rel " noopener") "noopener" -}}
+  {{ end -}}
   <li class="td-footer__links-item" data-bs-toggle="tooltip" title="{{ .name }}" aria-label="{{ .name }}">
     <a href="{{ .url }}" aria-label="{{ .name }}"
-      {{- with .rel }} rel="{{ . }}" {{- end -}}
-      {{ if $isExternal }} target="_blank" rel="noopener" {{- end -}}
+      {{- if $isExternal }} target="_blank" {{- end -}}
+      {{ with $rel }} rel="{{ . }}" {{- end -}}
     >
       <i class="{{ .icon }}"></i>
     </a>
