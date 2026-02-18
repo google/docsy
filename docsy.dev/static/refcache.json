@@ -1435,6 +1435,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-12T09:54:08.892388-05:00"
   },
+  "https://github.com/google/docsy/pull/2569": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-17T18:45:11.838703-05:00"
+  },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:02.968617-05:00"
@@ -1498,6 +1502,10 @@
   "https://github.com/google/docsy/releases/v0.14.2": {
     "StatusCode": 206,
     "LastSeen": "2026-02-12T07:50:49.680299-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.14.3": {
+    "StatusCode": 206,
+    "LastSeen": "2026-02-17T18:45:11.323854-05:00"
   },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 206,
