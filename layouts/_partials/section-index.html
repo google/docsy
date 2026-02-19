@@ -1,8 +1,12 @@
 <div class="section-index">
     {{ $page := .Page -}}
-    {{ $pages := (where .Site.Pages "Section" .Section).ByWeight -}}
+    {{ $pages := .Site.Pages.ByWeight -}}
+    {{ if .Section -}}
+        {{ $pages = (where $pages "Section" .Section) -}}
+    {{ end -}}
     {{ $pages = (where $pages "Type" "!=" "search") }}
     {{ $pages = (where $pages ".Params.hide_summary" "!=" true) -}}
+    {{ $pages = (where $pages ".Kind" "!=" "taxonomy") -}}
     {{ $pages = (where $pages ".Parent" "!=" nil) -}}
     {{ $pages = (where $pages ".Parent.File" "!=" nil) -}}
     {{ if $page.File -}}
