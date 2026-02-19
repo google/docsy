@@ -10,7 +10,7 @@ For details, see https://www.docsy.dev/docs/content/shortcodes/#alert.
 
 {{ $color := .Get "color" | default "primary" -}}
 
-<div class="alert alert-{{ $color }}" role="alert">
+<div class="alert alert-{{ $color }}" role="note">
 {{- with .Get "title" -}}
   <div class="h4 alert-heading" role="heading">
     {{- . | safeHTML -}}

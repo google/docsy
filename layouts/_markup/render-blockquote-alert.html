@@ -19,7 +19,7 @@
   {{ $classes = printf "%s %s" $classes . -}}
 {{ end -}}
 
-<div class="{{ $classes }}" role="alert"
+<div class="{{ $classes }}" role="note"
   {{- range $key, $value := .Attributes -}}
     {{ if eq $key "class" }}{{ continue -}}{{ end -}}
     {{ printf " %s=%q" $key (string $value) | safeHTMLAttr -}}
