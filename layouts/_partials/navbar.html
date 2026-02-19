@@ -28,15 +28,20 @@
     <ul class="navbar-nav">
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
+      {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
+      {{ $href := "" -}}
+      {{ with .Page -}}
+        {{ $active = or $active ( $.IsDescendant .) -}}
+        {{ $href = .RelPermalink -}}
+      {{ else -}}
+        {{ $href = .URL | relLangURL -}}
+      {{ end -}}
+      {{ if .HasChildren -}}
       <li class="nav-item">
-        {{ $active := or ($p.IsMenuCurrent "main" .) ($p.HasMenuCurrent "main" .) -}}
-        {{ $href := "" -}}
-        {{ with .Page -}}
-          {{ $active = or $active ( $.IsDescendant .) -}}
-          {{ $href = .RelPermalink -}}
-        {{ else -}}
-          {{ $href = .URL | relLangURL -}}
-        {{ end -}}
+        {{ partial "navbar-general-selector.html" (dict "menuItem" . "active" $active "page" $p) -}}
+      </li>
+      {{ else -}}
+      <li class="nav-item">
         {{ $isExternal := ne $baseURL.Host (urls.Parse .URL).Host -}}
         <a {{/**/ -}}
           class="nav-link {{- if $active }} active {{- end }}" {{/**/ -}}
@@ -48,6 +53,7 @@
             {{- .Post -}}
         </a>
       </li>
+      {{ end -}}
       {{ end -}}
       {{ if .Site.Params.versions -}}
       <li class="nav-item td-navbar__version-menu">
