@@ -3,6 +3,9 @@ ui_pager_prev: Vorige
 ui_pager_next: Volgende
 ui_read_more: Lees meer
 ui_search: Doorzoek deze site
+ui_theme_light: Licht
+ui_theme_dark: Donker
+ui_theme_auto: Automatisch
 
 # Used in sentences such as "Posted in News"
 ui_in: in

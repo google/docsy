@@ -10,6 +10,9 @@ ui_pager_prev: Précédent
 ui_pager_next: Suivant
 ui_read_more: Lire plus
 ui_search: Rechercher
+ui_theme_light: Clair
+ui_theme_dark: Sombre
+ui_theme_auto: Automatique
 
 # Used in sentences such as "Posted in News"
 ui_in: dans

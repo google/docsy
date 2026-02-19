@@ -3,6 +3,9 @@ ui_pager_prev: 이전
 ui_pager_next: 다음
 ui_read_more: 더 읽기
 ui_search: 사이트에서 검색…
+ui_theme_light: 라이트
+ui_theme_dark: 다크
+ui_theme_auto: 자동
 
 # Used in sentences such as "Posted in News"
 ui_in: in

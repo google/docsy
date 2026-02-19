@@ -3,6 +3,9 @@ ui_pager_prev: Eelmine
 ui_pager_next: Järgmine
 ui_read_more: Loe lähemalt
 ui_search: Otsi lehelt…
+ui_theme_light: Hele
+ui_theme_dark: Tume
+ui_theme_auto: Automaatne
 
 # Used in sentences such as "Posted in News"
 # not perfect. In Estonian this idea is represented by a suffix, not a separate word.

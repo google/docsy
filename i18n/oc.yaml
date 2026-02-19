@@ -3,6 +3,9 @@ ui_pager_prev: Precedent
 ui_pager_next: Seguent
 ui_read_more: Ne legir mai
 ui_search: Cercar dins lo site…
+ui_theme_light: Clar
+ui_theme_dark: Escur
+ui_theme_auto: Automatic
 
 # Used in sentences such as "Posted in News"
 ui_in: Dins
