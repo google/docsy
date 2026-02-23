@@ -6,9 +6,9 @@ cSpell:ignore: docsy
 
 > Report refreshed for commits through `52aa677` on `main`.
 
-Chronological list of [commits since v0.12.0][], broadly grouped into a few
-categories. We'll do a more detailed analysis and groupings when we create the
-release-wrapup report, in particular identifying commits that impact theme
+A chronological list of [commits since v0.12.0][], broadly grouped into a few
+categories. We will do a more detailed analysis and groupings when we create the
+release wrap-up report, in particular identifying commits that impact theme
 client projects.
 
 ## Features & fixes
