@@ -1,0 +1,68 @@
+# Alert labels
+caution: Atenție
+important: Important
+note: Notă
+tip: Sfat
+warning: Avertisment
+
+# UI strings. Buttons and similar.
+ui_pager_prev: Anterior
+ui_pager_next: Următor
+ui_read_more: Citește mai mult
+ui_search: Caută pe acest site…
+
+# Used in sentences such as "Posted in News"
+ui_in: în
+
+# Used in sentences such as "All Tags"
+ui_all: toate
+
+# Footer text
+footer_all_rights_reserved: Toate drepturile rezervate
+footer_privacy_policy: Politica de confidențialitate
+
+# Post (blog, article, etc.)
+post_byline_by: De
+post_created: Creat
+post_last_mod: Ultima modificare
+post_edit_this: Editează această pagină
+post_view_this: Vezi sursa paginii
+post_create_child_page: Creează pagină copil
+post_create_issue: Creează problemă de documentație
+post_create_project_issue: Creează problemă de proiect
+post_posts_in: Postări în
+post_reading_time: minute citite
+post_less_than_a_minute_read: mai puțin de un minut
+
+# Print support
+print_printable_section: Aceasta este vizualizarea imprimabilă pe mai multe pagini a acestei secțiuni.
+print_click_to_print: Click aici pentru a imprima
+print_show_regular: Întoarce-te la vizualizarea obișnuită a acestei pagini
+print_entire_section: Imprimare întreagă secțiune
+
+# Community
+community_join: Unește-te la comunitate {{ .Site.Title }}
+community_introduce: >-
+  {{ .Site.Title }} este un proiect open source pe care oricine din comunitate îl poate
+  folosi, îmbunătăți și bucura. Ne-ar plăcea să te alături! Iată câteva modalități de a afla
+  ce se întâmplă și de a te implica.
+community_learn: Învață și conectează-te
+community_using: >-
+  Folosești sau dorești să folosești {{ .Site.Title }}? Află mai multe aici:
+community_develop: Dezvoltă și contribuie
+community_contribute: >-
+  Dacă dorești să te implici mai mult contribuind la {{ .Site.Title }}, alătură-te
+  aici:
+community_how_to: Poți afla cum să contribui la {{ .Site.Title }} în
+community_guideline: >-
+  Ghidul de contribuție
+
+# Feedback
+feedback_title: Comentariu
+feedback_question: A fost utilă această pagină?
+feedback_positive: Da
+feedback_negative: Nu
+
+# Table of contents
+toc_on_this_page: Pe această pagină
+toc_top_of_page: Susul paginii
