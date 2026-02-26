@@ -35,7 +35,8 @@ post_reading_time: minute citite
 post_less_than_a_minute_read: mai puțin de un minut
 
 # Print support
-print_printable_section: Aceasta este vizualizarea imprimabilă pe mai multe pagini a acestei secțiuni.
+print_printable_section:
+  Aceasta este vizualizarea imprimabilă pe mai multe pagini a acestei secțiuni.
 print_click_to_print: Clic aici pentru a imprima
 print_show_regular: Revenire la vizualizarea normală a acestei pagini
 print_entire_section: Imprimă întreaga secțiune
@@ -43,16 +44,16 @@ print_entire_section: Imprimă întreaga secțiune
 # Community
 community_join: Alătură-te comunității {{ .Site.Title }}
 community_introduce: >-
-  {{ .Site.Title }} este un proiect open source pe care oricine din comunitate îl poate
-  folosi, îmbunătăți și aprecia. Ne-am bucura să ni te alături! Iată câteva modalități prin care poți afla
-  ce se întâmplă și te poți implica.
+  {{ .Site.Title }} este un proiect open source pe care oricine din comunitate
+  îl poate folosi, îmbunătăți și aprecia. Ne-am bucura să ni te alături! Iată
+  câteva modalități prin care poți afla ce se întâmplă și te poți implica.
 community_learn: Învață și conectează-te
 community_using: >-
   Folosești sau dorești să folosești {{ .Site.Title }}? Află mai multe aici:
 community_develop: Dezvoltă și contribuie
 community_contribute: >-
-  Dacă dorești să te implici mai mult contribuind la {{ .Site.Title }}, alătură-te
-  aici:
+  Dacă dorești să te implici mai mult contribuind la {{ .Site.Title }},
+  alătură-te aici:
 community_how_to: Poți afla cum să contribui la {{ .Site.Title }} în
 community_guideline: >-
   Ghidul de contribuție
