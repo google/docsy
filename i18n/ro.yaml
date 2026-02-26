@@ -38,7 +38,7 @@ post_less_than_a_minute_read: mai puțin de un minut
 print_printable_section: Aceasta este vizualizarea imprimabilă pe mai multe pagini a acestei secțiuni.
 print_click_to_print: Clic aici pentru a imprima
 print_show_regular: Revenire la vizualizarea normală a acestei pagini
-print_entire_section: Imprimă întreagă secțiune
+print_entire_section: Imprimă întreaga secțiune
 
 # Community
 community_join: Alătură-te comunității {{ .Site.Title }}
