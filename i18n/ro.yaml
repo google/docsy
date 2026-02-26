@@ -27,7 +27,7 @@ post_created: Creat
 post_last_mod: Ultima modificare
 post_edit_this: Editează această pagină
 post_view_this: Vezi sursa paginii
-post_create_child_page: Creează pagină copil
+post_create_child_page: Creează subpagină
 post_create_issue: Creează problemă de documentație
 post_create_project_issue: Creează problemă de proiect
 post_posts_in: Postări în
@@ -36,16 +36,16 @@ post_less_than_a_minute_read: mai puțin de un minut
 
 # Print support
 print_printable_section: Aceasta este vizualizarea imprimabilă pe mai multe pagini a acestei secțiuni.
-print_click_to_print: Click aici pentru a imprima
-print_show_regular: Întoarce-te la vizualizarea obișnuită a acestei pagini
-print_entire_section: Imprimare întreagă secțiune
+print_click_to_print: Clic aici pentru a imprima
+print_show_regular: Revenire la vizualizarea normală a acestei pagini
+print_entire_section: Imprimă întreagă secțiune
 
 # Community
-community_join: Unește-te la comunitate {{ .Site.Title }}
+community_join: Alătură-te comunității {{ .Site.Title }}
 community_introduce: >-
   {{ .Site.Title }} este un proiect open source pe care oricine din comunitate îl poate
-  folosi, îmbunătăți și bucura. Ne-ar plăcea să te alături! Iată câteva modalități de a afla
-  ce se întâmplă și de a te implica.
+  folosi, îmbunătăți și aprecia. Ne-am bucura să ni te alături! Iată câteva modalități prin care poți afla
+  ce se întâmplă și te poți implica.
 community_learn: Învață și conectează-te
 community_using: >-
   Folosești sau dorești să folosești {{ .Site.Title }}? Află mai multe aici:
