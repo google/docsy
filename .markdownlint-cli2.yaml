@@ -1,5 +1,8 @@
 # cSpell:ignore docsy github lookandfeel iconsimages
 
+customRules:
+  - ./scripts/_md-rules/link-rules.mjs
+
 globs:
   - '!docsy.dev/**'
   - '!layouts/**'
