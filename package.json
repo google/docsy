@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.4-dev+020-over-main-4a09247b",
+  "version": "0.14.4-dev+021-over-main-b219dab5",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -67,6 +67,7 @@
     "@cspell/dict-fr-fr": "^2.3.2",
     "cpy-cli": "^6.0.0",
     "markdownlint-cli2": "^0.20.0",
+    "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "prettier": "^3.8.1"
   },
   "config": {
