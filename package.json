@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.14.4-dev+021-over-main-b219dab5",
+  "version": "0.14.4-dev+022-over-main-6884d94e",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -13,7 +13,7 @@
     "_check:links": "npm run _cd:docsy.dev -- npm run _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
-    "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*' assets/_vendor/bootstrap/scss/",
+    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss assets/_vendor/bootstrap/scss/'",
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
@@ -52,7 +52,7 @@
     "serve": "npm run _cd:docsy.dev -- npm run serve --",
     "set:version:example": "cd ../docsy-example && node ../docsy/scripts/set-package-version/index.mjs",
     "set:version": "npm run -s _spv -- -c config/production/params.yaml && npm run -s _spv && npm run -s fix:version",
-    "test:tooling": "node --test",
+    "test:tooling": "node --test 'scripts/**/*.test.mjs'",
     "test:website": "npm run cd:docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
@@ -65,8 +65,7 @@
   },
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
-    "cpy-cli": "^6.0.0",
-    "markdownlint-cli2": "^0.20.0",
+    "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "prettier": "^3.8.1"
   },
