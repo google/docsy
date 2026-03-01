@@ -136,6 +136,8 @@ about how to add content and use each of Docsy's templates.
 
 ## Doc-rooted sites <a id="alternative-site-structure"></a>
 
+{{%_param BADGE EXPERIMENTAL info %}}
+
 Docsy supports documentation-first websites through a **doc-rooted** site
 structure, where:
 
@@ -147,7 +149,7 @@ structure, where:
 As a consequence, the `docs` section landing page becomes the site home page. A
 doc-rooted site has the following benefits:
 
-- Produces cleaner, documentation-focused URLs (no `/docs/` prefix).
+- Produces simpler, documentation-focused URLs (no `/docs/` prefix).
 - Avoids the need to create a custom home page using [blocks][] shortcodes or
   HTML.
 
@@ -162,25 +164,37 @@ permalinks:
     docs: /:sections[1:]
 ```
 
-> [!CAUTION]
->
-> Check for root-level URL path conflicts between doc and non-doc sections or
-> pages (for example, `/blog/` and `/community/`). If conflicts exist, rename
-> the conflicting non-doc paths or keep docs under `/docs/`.
+Because the docs section landing page now serves as the home page, you need to
+add extra configuration to avoid "Duplicate target paths" warnings and avoid
+render conflicts with the site-root index file.
+
+Add the following front matter to each site root index file (one per language in
+multilingual sites):
+
+```yaml
+build: { render: link }
+```
 
 For an example of a doc-rooted variant of this site, see the [Doc-rooted
 example][] variant.
 
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 
-> [!NOTE] Legacy _docs-only_ setup
->
-> Earlier versions of this page described a docs-only configuration that used a
-> front matter `cascade` to set page `type` values.
->
-> That approach is no longer supported and can produce incorrect behavior. If
-> you are migrating from that setup, remove the `cascade` rule and configure
-> doc-rooted permalinks as described above.
+### Check for path conflicts
+
+If your doc-rooted site has non-docs pages (such as blog or community pages),
+check for possible root-level path conflicts between docs and non-docs pages. To
+have Hugo report duplicate path warnings when building your site, use the
+`--printPathWarnings` flag.
+
+### Legacy _docs-only_ setup
+
+Earlier versions of this page described a docs-only configuration that used a
+front matter `cascade` to set page `type` values.
+
+That approach is no longer supported and can produce incorrect behavior. If you
+are migrating from that setup, remove the old `cascade` entries and use the
+configuration described earlier in this section.
 
 ## Page front matter
 
