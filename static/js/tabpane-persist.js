@@ -35,6 +35,12 @@ function tdPersistKey(key, value) {
   }
 }
 
+function getActiveTabFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeTab = urlParams.get('tab');
+  return activeTab ? activeTab.toLowerCase() : null;
+}
+
 // Retrieve, increment, and store tab-select event count, then returns it.
 function tdGetTabSelectEventCountAndInc() {
   // @requires: tdSupportsLocalStorage();
@@ -112,5 +118,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   var allTabsInThisPage = document.querySelectorAll(_tdPersistCssSelector());
   tdRegisterTabClickHandler(allTabsInThisPage);
-  tdGetAndActivatePersistedTabs(allTabsInThisPage);
+
+  const activeTabKeyFromURL = getActiveTabFromURL();
+  if (activeTabKeyFromURL) {
+    tdActivateTabsWithKey(activeTabKeyFromURL);
+  } else {
+    tdGetAndActivatePersistedTabs(allTabsInThisPage);
+  }
 });
