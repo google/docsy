@@ -13,7 +13,7 @@
     "_check:links": "npm run _cd:docsy.dev -- npm run _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run _cd:docsy.dev -- npm run _commit:public",
-    "_cp:bs-rfs": "npx cpy 'node_modules/bootstrap/scss/vendor/*.scss' assets/_vendor/bootstrap/scss/",
+    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss assets/_vendor/bootstrap/scss/'",
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
@@ -65,7 +65,6 @@
   },
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
-    "cpy-cli": "^7.0.0",
     "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "prettier": "^3.8.1"
