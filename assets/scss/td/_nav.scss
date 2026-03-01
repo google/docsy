@@ -162,6 +162,12 @@ $td-link-underline-offsets: (
           content: ' (latest)';
         }
       }
+
+      &-next {
+        &::after {
+          content: ' (next)';
+        }
+      }
     }
   }
 

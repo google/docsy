@@ -6,31 +6,26 @@
 # version:
 #   status: archived # Then fetch include
 
-version: &docsyVersion 0.14.4-dev
-tdBuildId: 022-over-main-6884d94e
-versionLatest: &versionLatest v0.14.3
-version_menu: *docsyVersion
+tdVersion:
+  latest: &tdLatestVers v0.14.3
+  dev: &tdDevVers v0.14.4-dev
+  buildId: &tdBuildId 023-over-main-3bcb7385
+
+version: *tdDevVers
+version_menu: *tdDevVers
 version_menu_pagelinks: true
 versions:
-  # - name: '**About**'
-  #   url: /project
-  #   pagelinks: false
-  # - name: ---
   - name: '**Versions**'
-  - name: Next
-    version: *docsyVersion
-    # TODO: use https://next.docsy.dev once it's available
-    url: https://main--docsydocs.netlify.app
-  - version: *versionLatest
-    url: https://www.docsy.dev
+  - version: *tdDevVers
+    # kind: next
+    pagelinks: true
+    url: https://main--docsydocs.netlify.app # TODO: use next.docsy.dev once available
+  - version: *tdLatestVers
     kind: latest
+    url: https://www.docsy.dev
   - name: ---
   - name: '**Variant**'
-  - name: Doc-rooted
-    url: https://doc-rooted--docsydocs.netlify.app
-    # TODO: implement /docs/* redirects for doc-rooted site, then drop pagelinks:false
-    pagelinks: false
+  - name: Doc-rooted (experimental)
     kind: home
-  # - name: Goldydocs
-  #   url: https://example.docsy.dev
-  #   pagelinks: false
+    pagelinks: false # TODO: drop this once /docs/* redirects are implemented
+    url: https://doc-rooted--docsydocs.netlify.app

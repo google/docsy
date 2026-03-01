@@ -17,7 +17,8 @@ description: A Hugo theme for creating great technical documentation sites
 
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
-  <a {{% _param btn-lg primary %}} href="/docs/get-started/">
+  <a {{% _param btn-lg primary %}}
+     href='{{% siteGetPage "/docs/get-started" RelPermalink %}}'>
     Get started
   </a>
   <a {{% _param btn-lg secondary %}}

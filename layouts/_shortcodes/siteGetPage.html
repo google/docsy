@@ -1,0 +1,14 @@
+{{ $path := .Get 0 -}}
+{{ $propertyName := .Get 1 -}}
+{{ if or (not $path) (not $propertyName) -}}
+  {{ errorf "shortcode 'siteGetPage': path and property name are required" .Position -}}
+{{ end -}}
+{{ with site.GetPage $path -}}
+  {{ if eq $propertyName "RelPermalink" -}}
+    {{ .RelPermalink }}
+  {{ else if eq $propertyName "Permalink" -}}
+    {{ .Permalink }}
+  {{ else -}}
+    {{ errorf "shortcode 'siteGetPage': unsupported or unknown property name %q" $propertyName .Position -}}
+  {{ end -}}
+{{ end -}}

@@ -1,13 +1,18 @@
 # cSpell:ignore pagelinks
 
-version: &docsyVersion 0.14.3
-version_menu: *docsyVersion
+tdVersion:
+  latest: &tdLatestVers v0.14.3
+  dev: &tdDevVers v0.14.4-dev
+  buildId: &tdBuildId 023-over-main-3bcb7385
+
+version: *tdLatestVers
+version_menu: *tdLatestVers
 versions:
+  - name: '**Versions**'
   - name: Next
-    kind: next
-    url: https://main--docsydocs.netlify.app/
-    pagelinks: true
-  - version: *docsyVersion
+    version: *tdDevVers
+    # kind: next
+    url: https://main--docsydocs.netlify.app
+  - version: *tdLatestVers
     kind: latest
     url: https://www.docsy.dev
-    pagelinks: true
