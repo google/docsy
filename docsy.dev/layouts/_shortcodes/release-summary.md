@@ -7,6 +7,7 @@
 */ -}}
 
 {{ $version := $.Page.Param "version" | string -}}
+{{ $version = strings.TrimPrefix "v" $version -}}
 {{ $isDevVersion := strings.Contains $version "-dev" -}}
 {{ if not $version -}}
   {{ errorf "%s: shortcode 'release-summary': version parameter not found in page or site params" .Position -}}
@@ -33,18 +34,30 @@
   {{ end -}}
 {{ end -}}
 
-{{ if and (not $blogPage) (not $isDevVersion) -}}
-  {{ errorf "%s: shortcode 'release-summary': blog post not found for version %q (tried %q) during years: %q"
-      .Position $version (delimit (slice $version $versionForBlog) ", ") (delimit $years ", ") -}}
+{{ $changelogUrlFragment := add "#" $version -}}
+{{ $errorOnMissingBlogPost := and (not $blogPage) (not $isDevVersion) -}}
+{{ if $errorOnMissingBlogPost -}}
+  {{ if false -}}
+    {{ errorf "%s: shortcode 'release-summary': blog post not found for version %q (tried %q) during years: %q"
+        .Position $version (delimit (slice $version $versionForBlog) ", ") (delimit $years ", ") -}}
+  {{ else -}}
+    {{ $changelogUrlFragment = "" -}}
+  {{ end -}}
 {{ end -}}
 
-{{ $changelogURL := printf "/project/about/changelog/#v%s" $version -}}
+{{ $changelogURL := printf "/project/about/changelog/%s" $changelogUrlFragment -}}
 {{ $productionURL := .Site.Params.productionURL -}}
 
 ## Release summary
 
-- [{{ $blogPage.Title }}][blog-post]
+- [{{ $blogPage.Title | default "Blog" }}][blog]
 - [Changelog v{{ $version }}][changelog] entry
 
-[blog-post]: <{{ $productionURL }}{{ $blogPage.RelPermalink }}>
+{{ if and (not $blogPage) (not $isDevVersion) -}}
+<!--
+  {{ printf "WARNING: shortcode 'release-summary': blog post not found for\n  version %q (tried %q) during years: %q\n"
+       $version (delimit (slice $version $versionForBlog) ", ") (delimit $years ", ") -}}
+-->
+{{ end }}
+[blog]: <{{ $productionURL }}{{ $blogPage.RelPermalink | default "/blog/" }}>
 [changelog]: <{{ $productionURL }}{{ $changelogURL }}>

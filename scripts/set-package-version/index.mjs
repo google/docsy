@@ -12,15 +12,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
+import { nextDevVersion, readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const cwd = process.cwd();
 
-const configDir = 'docsy.dev';
-const defaultParamsYamlPath = 'config/_default/params.yaml';
-const defaultConfigPath = path.join(cwd, configDir, defaultParamsYamlPath);
+const defaultParamsYamlPath = 'docsy.dev/config/_default/params.yaml';
+const defaultConfigPath = path.resolve(defaultParamsYamlPath);
 const packageJsonPath = 'package.json';
 
 export function getPackagePath() {
@@ -28,29 +27,27 @@ export function getPackagePath() {
 }
 
 const usageText = `
-Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUILD-ID]]
+Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUILD-ID]] [FILE...]
 
   Options:
-    --config|-c PATH   Path to config file to read/write versions from/to;
-                       relative to ${configDir}
-                       Default: ${defaultParamsYamlPath}
     --help|-h          Show this help message
     --id [BUILD-ID]    Set build ID metadata to BUILD-ID, if provided; otherwise,
                        set it to a timestamp-based value. Version is unchanged.
     --silent|-s        Don't log any messages
     --version|-v VERS  Set version in target files according to VERS
 
+  FILE                 Config file(s) to read/write version info; paths are
+                       relative to the current working directory or absolute.
+                       If none given, default is ${defaultParamsYamlPath}.
+
   The VERS specifier is a semver string of the form X.Y.Z-pre-rel+BUILD-ID.
-  Updates the version in the target files:
+  Updates the version in:
 
   - ${packageJsonPath}
-  - ${defaultParamsYamlPath}
-
-  The target files are updated as follows:
+  - Each listed config file (or ${defaultParamsYamlPath} if no FILEs given)
 
   - In package.json, the version is set to the full version.
-  - In ${defaultParamsYamlPath}: the version and tdBuildId fields are set,
-    where version omits the build ID metadata.
+  - In each config file: latest, dev, and buildId fields are set.
 
   The default behavior is to strip the pre-release suffix and build ID, if any, from
   the target files. Useful for preparing a non-dev release.
@@ -66,14 +63,10 @@ export function main(
     writeHugoYaml: writeHugoYamlFn = writeHugoYaml,
   } = {},
 ) {
-  const { version, buildId, configPath, silent } = parseArgsAndResolveBuildId(
-    args,
-    { logger },
-  );
+  const { version, buildId, configPaths, silent, versionSetExplicitly } =
+    parseArgsAndResolveBuildId(args, { logger });
 
   const pkg = readPackageJson();
-  const hugoYaml = readHugoYamlFn(configPath);
-
   const currentVersion = pkg.version;
   let newVersion;
 
@@ -89,7 +82,6 @@ export function main(
   }
 
   let updated = false;
-  let hugoYamlUpdated = false;
 
   if (newVersion !== currentVersion) {
     pkg.version = newVersion;
@@ -97,41 +89,70 @@ export function main(
     updated = true;
   }
 
-  const nextVersionNoBuild = removeBuildId(newVersion);
   const nextBuildId = getBuildId(newVersion);
+  const releaseVersion = getReleaseVersion(newVersion);
+  const versionWithoutBuild = removeBuildId(newVersion);
+  const hasPreRelease = versionWithoutBuild !== releaseVersion;
+  const leaveLatestUntouched = versionSetExplicitly && hasPreRelease;
 
-  // Keep config's version/tdBuildId aligned with package.json.
-  const currentHugoVersion = hugoYaml.version || '';
-  const currentHugoBuildId = hugoYaml.tdBuildId || '';
-  if (
-    nextVersionNoBuild !== currentHugoVersion ||
-    nextBuildId !== currentHugoBuildId
-  ) {
-    const data = {
-      ...hugoYaml,
-      version: nextVersionNoBuild,
-      tdBuildId: nextBuildId,
-    };
-    writeHugoYamlFn(data, configPath);
-    hugoYamlUpdated = true;
-  }
+  const newLatest = releaseVersion.startsWith('v')
+    ? releaseVersion
+    : `v${releaseVersion}`;
+  const newDev = leaveLatestUntouched
+    ? versionWithoutBuild.startsWith('v')
+      ? versionWithoutBuild
+      : `v${versionWithoutBuild}`
+    : nextDevVersion(releaseVersion);
+  const newBuildId = nextBuildId ?? '';
 
-  const configPathRelative = path.relative(cwd, configPath);
-  if (updated || hugoYamlUpdated) {
-    logger.log?.(
-      `✓ Updated package.json version: ${currentVersion} → ${newVersion}`,
-    );
-    if (hugoYamlUpdated) {
+  let hugoYamlUpdated = false;
+  for (const configPath of configPaths) {
+    const hugoYaml = readHugoYamlFn(configPath);
+    const currentLatest = hugoYaml.latest ?? '';
+    const currentDev = hugoYaml.dev ?? '';
+    const currentBuildId = hugoYaml.buildId ?? '';
+
+    const latestDiffers = newLatest !== currentLatest;
+    const devOrBuildIdDiffers =
+      newDev !== currentDev || newBuildId !== currentBuildId;
+    const shouldUpdate = leaveLatestUntouched
+      ? devOrBuildIdDiffers
+      : latestDiffers || devOrBuildIdDiffers;
+
+    if (shouldUpdate) {
+      const data = leaveLatestUntouched
+        ? { ...hugoYaml, dev: newDev, buildId: newBuildId }
+        : {
+            ...hugoYaml,
+            latest: newLatest,
+            dev: newDev,
+            buildId: newBuildId,
+          };
+      writeHugoYamlFn(data, configPath);
+      hugoYamlUpdated = true;
+      const configPathRelative = path.relative(cwd, configPath);
+      if (!leaveLatestUntouched && latestDiffers) {
+        logger.log?.(
+          `✓ Updated ${configPathRelative} latest: ${currentLatest || '(none)'} → ${newLatest}`,
+        );
+      }
       logger.log?.(
-        `✓ Updated ${configPathRelative} version: ${currentHugoVersion || '(none)'} → ${nextVersionNoBuild}`,
+        `✓ Updated ${configPathRelative} dev: ${currentDev || '(none)'} → ${newDev}`,
       );
       logger.log?.(
-        `✓ Updated ${configPathRelative} tdBuildId: ${currentHugoBuildId || '(none)'} → ${nextBuildId || '(none)'}`,
+        `✓ Updated ${configPathRelative} buildId: ${currentBuildId || '(none)'} → ${newBuildId || '(none)'}`,
+      );
+    } else if (!silent) {
+      const configPathRelative = path.relative(cwd, configPath);
+      logger.log?.(
+        `Package version in ${configPathRelative} is already set to ${currentVersion}.`,
       );
     }
-  } else if (!silent) {
+  }
+
+  if (updated) {
     logger.log?.(
-      `Package version in ${configPathRelative} is already set to ${currentVersion}.`,
+      `✓ Updated package.json version: ${currentVersion} → ${newVersion}`,
     );
   }
 
@@ -143,7 +164,7 @@ export function main(
  *
  * @param {string[]} args - Command line arguments
  * @param {{ logger?: Console }} [options] - Logger to use
- * @returns {{ version: string, buildId: string, configPath: string, silent: boolean }}
+ * @returns {{ version: string, buildId: string, configPaths: string[], silent: boolean, versionSetExplicitly: boolean }}
  */
 export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
   function usage(exitCode = 0) {
@@ -154,6 +175,7 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
   let version;
   let buildId;
   let configPath = defaultConfigPath;
+  const configPaths = [];
   let silent = false;
   const warn = logger?.warn || console.warn;
 
@@ -161,13 +183,6 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
   for (; i < args.length; i++) {
     const arg = args[i];
     switch (arg) {
-      case '--config':
-      case '-c':
-        if (++i >= args.length) {
-          usage(1);
-        }
-        configPath = path.join(cwd, configDir, args[i]);
-        break;
       case '--help':
       case '-h':
         usage();
@@ -192,6 +207,10 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
         version = args[i];
         break;
       default:
+        if (!arg.startsWith('-')) {
+          configPaths.push(path.resolve(arg));
+          break;
+        }
         warn?.(`Unexpected argument: ${arg}`);
         usage(1);
     }
@@ -201,7 +220,16 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
     buildId = generateTimestamp();
   }
 
-  return { version, buildId, configPath, silent };
+  const resolvedConfigPaths =
+    configPaths.length > 0 ? configPaths : [configPath];
+  const versionSetExplicitly = version !== undefined;
+  return {
+    version,
+    buildId,
+    configPaths: resolvedConfigPaths,
+    silent,
+    versionSetExplicitly,
+  };
 }
 
 export function generateTimestamp() {
