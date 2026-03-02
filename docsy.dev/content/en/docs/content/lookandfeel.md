@@ -617,7 +617,7 @@ translucent setting ensures that the hero image is maximally visible. Once the
 user has scrolled past the cover (hero image), the navbar reverts to its default
 (opaque) style.
 
-[About Docsy]: https://www.docsy.dev/about/
+[About Docsy]: /about/
 [blocks/cover]: /docs/content/shortcodes/#blocks-cover
 
 ### Customizing the navbar {#navbar-customization}

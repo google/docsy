@@ -28,12 +28,6 @@ accordingly.
 
 4.  Run `npm run fix`.
 
-    > [!NOTE]
-    >
-    > This command might update the version in `package.json` via `fix:version`,
-    > but you can ignore this change since you'll be setting the version
-    > explicitly in the next step.
-
 5.  **Update Docsy version** to {{% param version %}} using the following from a
     (bash or zsh) terminal.
     - First set the `VERSION` variable; we use it throughout the steps below.
@@ -184,10 +178,10 @@ accordingly.
 
       ```console
       $ git push-all-remotes $REL
-      + git push origin v{{% param version %}}
-      * [new tag]         v{{% param version %}} -> v{{% param version %}}
-      + git push upstream v{{% param version %}}
-      * [new tag]         v{{% param version %}} -> v{{% param version %}}
+      + git push origin {{% param version %}}
+      * [new tag]         {{% param version %}} -> {{% param version %}}
+      + git push upstream {{% param version %}}
+      * [new tag]         {{% param version %}} -> {{% param version %}}
       ...
       ```
 
@@ -241,15 +235,15 @@ accordingly.
     been updated to the new release.
 
 17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-    - Visit [tags][] to find the new release tag v{{% param version %}}.
+    - Visit [tags][] to find the new release tag {{% param version %}}.
 
-    - Select Create a new release from the v{{% param version %}} tag dropdown
+    - Select Create a new release from the {{% param version %}} tag dropdown
       menu
 
     - **Release title**: use the release version.
 
       ```text
-      v{{% param version %}}
+      {{% param version %}}
       ```
 
     - Click **Generate release notes** to get the release details inserted into
@@ -299,7 +293,7 @@ with the following modifications:
 
 ## Post Docsy-release followup
 
-Assuming that both the Docsy and Docsy-example releases v{{% param version %}}
+Assuming that both the Docsy and Docsy-example releases {{% param version %}}
 have been successfully deployed, and that at least one other project has been
 successfully tested with the new release, then perform the following actions
 before any further changes are merged into the `main` branch:
@@ -307,12 +301,12 @@ before any further changes are merged into the `main` branch:
 1. Update the package version to a dev ID for Docsy and Docsy-example:
 
    ```console
-   $ npm run -s fix:version
+   $ npm run -s set:version:git-info
    ✓ Updated package.json version: 0.14.3 → 0.14.3-dev+003-over-main-cf4f514b
    ✓ Updated docsy.dev/config/_default/params.yaml version: 0.14.3 → 0.14.3-dev
    ✓ Updated docsy.dev/config/_default/params.yaml tdBuildId: (none) → 003-over-main-cf4f514b
    ...
-   $ npm run -s fix:version:example
+   $ npm run -s set:version:example:git-info
    ...
    ```
 
@@ -333,7 +327,7 @@ before any further changes are merged into the `main` branch:
 
 ## Release helper scripts
 
-- NPM scripts: `fix:version`, `fix:version:example`, and `set:version`.
+- NPM scripts: `set:version` and `set:version:*`
 - `scripts/get-build-id.sh`: Generates build ID from git describe (empty on
   tags).
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script

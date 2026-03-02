@@ -1,5 +1,7 @@
 # Docsy
 
+<!-- markdownlint-disable no-docsy-dev-external-urls -->
+
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.
 
@@ -106,9 +108,6 @@ This project is licensed under the Apache License 2.0, see
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
-
-<!-- FIXME: once 0.14.0 is released, update the link to the changelog page -->
-
 [official-support]:
   https://www.docsy.dev/project/about/changelog/#official-support
 [releases]: https://github.com/google/docsy/releases

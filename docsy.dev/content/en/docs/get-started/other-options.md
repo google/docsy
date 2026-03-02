@@ -165,7 +165,7 @@ your project's root directory:
     ```sh
     git submodule add https://github.com/google/docsy.git themes/docsy
     cd themes/docsy
-    git checkout v{{% param version %}}
+    git checkout {{% param version %}}
     ```
 
     To work from the development version of Docsy (_not recommended_), run the
@@ -229,12 +229,12 @@ maintain your own copy of the theme directly, or your deployment choice requires
 you to include a copy of the theme in your repository), you can clone the theme
 into your project's `themes` subdirectory.
 
-To clone Docsy at v{{% param version %}} into your project's `themes` folder,
-run the following commands from your project's root directory:
+To clone Docsy at {{% param version %}} into your project's `themes` folder, run
+the following commands from your project's root directory:
 
 ```sh
 cd themes
-git clone -b v{{% param version %}} https://github.com/google/docsy
+git clone -b {{% param version %}} https://github.com/google/docsy
 cd docsy
 npm install
 ```
@@ -243,7 +243,7 @@ npm install
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
-`-b v{{% param version %}}` argument from the clone command above.
+`-b {{% param version %}}` argument from the clone command above.
 
 Then consider setting up an NPM [prepare][] script, as documented in Option 1.
 

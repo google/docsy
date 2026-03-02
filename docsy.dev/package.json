@@ -35,11 +35,11 @@
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.24",
+    "autoprefixer": "^10.4.27",
     "cross-env": "^10.1.0",
-    "hugo-extended": "0.155.3",
-    "netlify-cli": "^23.15.1",
-    "npm-check-updates": "^19.3.2",
+    "hugo-extended": "0.157.0",
+    "netlify-cli": "^24.0.1",
+    "npm-check-updates": "^19.6.3",
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },

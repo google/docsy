@@ -8,8 +8,6 @@ cascade:
   type: docs
   params:
     hide_feedback: true
-params:
-  FAS: <i class="fa-solid fa-{1} text-{2}"></i>
 cSpell:ignore: docsydocs
 ---
 
