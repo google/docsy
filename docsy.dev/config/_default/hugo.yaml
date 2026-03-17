@@ -23,11 +23,11 @@ imaging:
 
 languages:
   en:
-    languageName: English
+    label: English
     params:
       description: Docsy does docs
   fr:
-    languageName: Français
+    label: Français
     params:
       description: Docsy, c’est la doc.
 

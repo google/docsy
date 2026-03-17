@@ -75,6 +75,6 @@
     {{ with $home.OutputFormats.Get "markdown" -}}
       {{ $url = .Permalink -}}
     {{ end -}}
-    - [{{ $home.Language.LanguageName }}]({{ $url }}) {{- "\n" -}}
+    - [{{ $home.Language.Label }}]({{ $url }}) {{- "\n" -}}
   {{ end -}}
 {{ end -}}

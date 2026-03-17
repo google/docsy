@@ -29,14 +29,14 @@ defaultContentLanguageInSubdir = false
 ...
 [languages]
 [languages.en]
-languageName ="English"
+label ="English"
 # Weight used for sorting.
 weight = 1
 [languages.en.params]
 title = "Goldydocs"
 description = "Docsy does docs"
 [languages.no]
-languageName ="Norsk"
+label ="Norsk"
 contentDir = "content/no"
 [languages.no.params]
 title = "Goldydocs"
@@ -51,13 +51,13 @@ defaultContentLanguageInSubdir: false
 …
 languages:
   en:
-    languageName: English
+    label: English
     weight: 1 # used for sorting
     params:
       title: Docsy
       description: Docsy does docs
   'no':
-    languageName: Norsk
+    label: Norsk
     contentDir: content/no
     params:
       title: Docsy
@@ -72,7 +72,7 @@ languages:
   "defaultContentLanguageInSubdir": false,
   "languages": {
     "en": {
-      "languageName": "English",
+      "label": "English",
       "weight": 1,
       "params": {
         "title": "Docsy",
@@ -80,7 +80,7 @@ languages:
       }
   },
     "no": {
-      "languageName": "Norsk",
+      "label": "Norsk",
       "contentDir": "content/no",
       "params": {
         "title": "Docsy",
