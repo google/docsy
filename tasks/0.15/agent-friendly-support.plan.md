@@ -61,21 +61,16 @@ Current `docsy.dev` outputs:
 
 ## Rollout
 
-1. Phase 1.1: `list`
-2. Phase 1.2: `single`
-3. Phase 1.3: `home`
-4. Phase 1.4: `term` and `taxonomy` if still in scope
-5. Phase 2: `llms.txt`
-6. Phase 3: docs
+Given that Docsy has layouts for `single` and `list`, we'll use those file names
+rather than `page` and `section`.
 
-Likely theme layout files:
-
-- `layouts/list.md`
-- `layouts/single.md`
-- `layouts/home.md`
-- `layouts/term.md`
-- `layouts/taxonomy.md`
-- `layouts/index.llms.txt`
+- Phase 1:
+  - Step 1: `list`
+  - Step 2: `single`
+  - Step 3: `home`
+  - Step 4: `term` and `taxonomy` if still in scope
+- Phase 2: `llms.txt`
+- Phase 3: docs
 
 ## Phase 1: Markdown outputs
 
