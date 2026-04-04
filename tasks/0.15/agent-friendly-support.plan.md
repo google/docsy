@@ -35,6 +35,7 @@ Out:
 - HTTP content negotiation such as `Accept: text/markdown`
 - hidden HTML discovery hints
 - HTML parity in Markdown outputs
+- Markdown outputs for `term` and `taxonomy` pages
 - default-on behavior for all Docsy sites
 
 ## Current State
@@ -68,7 +69,6 @@ rather than `page` and `section`.
   - Step 1: `list`
   - Step 2: `single`
   - Step 3: `home`
-  - Step 4: `term` and `taxonomy` if still in scope
 - Phase 2: `llms.txt`
 - Phase 3: docs
 
@@ -105,11 +105,6 @@ Add home page support:
 - links to key sections
 
 Validate both English and French home behavior.
-
-### 1.4 `term` and `taxonomy` (optional)
-
-Add these only if they are useful for discovery in the first experimental
-release.
 
 ### Phase 1 validation
 
@@ -163,6 +158,7 @@ instructions are sufficient when followed on `docsy.dev`.
 
 - hidden HTML discovery hints
 - support for `Accept: text/markdown`
+- Markdown outputs for `term` and `taxonomy` if a real discovery need emerges
 - a fuller `llms-full.txt` style index if needed
 
 [dc26]: https://dachary.org/2025/11/21/make-your-hugo-site-agent-friendly/
