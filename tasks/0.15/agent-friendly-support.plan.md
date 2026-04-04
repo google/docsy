@@ -2,7 +2,7 @@
 title: Plan for Agent-friendly support
 date: 2026-04-04
 status: draft
-cSpell:ignore: Dachary llms
+cSpell:ignore: Dachary llms imgproc readfile tabpane
 ---
 
 ## Goal
@@ -60,13 +60,30 @@ Current `docsy.dev` outputs:
 - Prefer clean Markdown over reproducing theme chrome.
 - Start with the simplest viable rendering path and document limitations.
 
+## Testing strategy
+
+If `docsy.dev/public` is maintained as a git repo, after each build (`npm run
+build` from the repo root. Then sort the sitemap.xml files. If available, use
+the helper in `~/bin/sort.sh` or `./tmp/sort.sh` to normalize sitemaps. Then run
+`git diff` in `public/` shows exactly what changed. Expected noise is limited to
+build timestamps; everything else should be traceable to the current increment.
+
+This gives us golden-file-style regression checking without a formal test
+harness.
+
 ## Rollout
 
-Given that Docsy has layouts for `single` and `list`, we'll use those file names
-rather than `page` and `section`.
+Given that Docsy uses `single` and `list` layout names rather than Hugo's `page`
+and `section`, the Markdown templates follow the same naming.
+
+Docsy does not have a generic root-level `layouts/list.html` — it uses
+type-specific layouts (`layouts/docs/list.html`, `layouts/blog/list.html`, etc.).
+The Markdown templates mirror this structure rather than introducing a generic
+fallback with no HTML counterpart. Sections without a type-specific `.md`
+template simply won't produce Markdown output.
 
 - Phase 1:
-  - Step 1: `list`
+  - Step 1: `list` (per section type: `docs`, `blog`, others as needed)
   - Step 2: `single`
   - Step 3: `home`
 - Phase 2: `llms.txt`
@@ -88,27 +105,28 @@ config is a full override, not additive — if a site forgets to include existin
 formats like `RSS` or `print`, those break silently. The docs (Phase 3) must
 call this out.
 
-### Template lookup
-
-Root-level templates (`layouts/list.md`, `layouts/single.md`, `layouts/home.md`)
-serve as the fallback for all content types. Docsy's existing HTML layouts use
-type-specific directories (`layouts/docs/`, `layouts/blog/`, etc.) which take
-precedence in Hugo's lookup order. The same applies to Markdown templates: a
-`layouts/docs/single.md` would win over `layouts/single.md`.
-
-Start with root-level templates only. Type-specific Markdown templates can be
-added later if docs vs. blog rendering needs diverge.
-
 ### 1.1 `list`
 
-Start with section pages:
+Type-specific Markdown list templates, mirroring Docsy's HTML layout structure.
+
+#### 1.1a `docs/list.md`
+
+Start with docs section pages — the highest-value target for agent consumption:
 
 - section title
 - section summary
-- child page index
+- child page index with descriptions
 
-Validate section landing pages on `docsy.dev`, and confirm RSS and `print`
+Validate docs section landing pages on `docsy.dev`, and confirm RSS and `print`
 behavior is unchanged.
+
+#### 1.1b `blog/list.md`
+
+Blog section index. May include dates alongside child links.
+
+#### 1.1c Other section types
+
+Add `community`, `swagger`, etc. as needed.
 
 ### 1.2 `single`
 
