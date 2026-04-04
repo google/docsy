@@ -191,6 +191,8 @@ instructions are sufficient when followed on `docsy.dev`.
 - hidden HTML discovery hints
 - support for `Accept: text/markdown`
 - Markdown outputs for `term` and `taxonomy` if a real discovery need emerges
+- Markdown-aware support for high-value Docsy shortcodes, including possible
+  `.md`-specific shortcode templates or Markdown-friendly shortcode variants
 - a fuller `llms-full.txt` style index if needed
 
 ## Appendix: Differences from Carey's article
@@ -211,6 +213,29 @@ diverges in several places:
 The core pattern — Markdown output format, `isPlainText: true`, `.RawContent` —
 is the same. The differences reflect Docsy's position as a theme (not a site)
 and the goal of keeping the initial API surface small.
+
+## Appendix 2: Notes on Markdown rendering options
+
+Recent Hugo releases added features that may become relevant to this work:
+
+- `RenderShortcodes`, which renders shortcodes while preserving surrounding
+  Markdown
+- `transform.HTMLToMarkdown`, which converts rendered HTML back to Markdown
+
+These are promising, but neither changes the initial recommendation for Phase
+1.2:
+
+- `.RawContent` is still the simplest baseline and keeps the first
+  implementation easy to reason about
+- `RenderShortcodes` may become the better path if it handles enough shortcode
+  use cases cleanly in Docsy content
+- `transform.HTMLToMarkdown` is better treated as an experimental fallback than
+  as the primary design, since it starts from HTML rather than Markdown-shaped
+  content
+
+For now, the plan should continue to start with `.RawContent`, document its
+shortcode limitations, and revisit these newer Hugo functions once the basic
+output format and template structure are in place.
 
 [dc26]: https://dacharycarey.com/2026/03/01/make-hugo-site-agent-friendly/
 [llms.txt]: https://llmstxt.org/
