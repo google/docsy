@@ -73,8 +73,8 @@ outputs.
    or documented site configuration.
 2. Provide theme templates for the main page kinds:
    - `home`
-   - `page`
-   - `section`
+   - `single`
+   - `list`
    - optionally `taxonomy` and `term` if we decide they add value for discovery
 3. Document how a site enables the format in its Hugo outputs config.
 4. Validate the theme implementation on `docsy.dev`.
@@ -89,12 +89,12 @@ perfect HTML layout parity.
 Likely theme layout files:
 
 - `layouts/home.md`
-- `layouts/page.md`
-- `layouts/section.md`
+- `layouts/single.md`
+- `layouts/list.md`
 - `layouts/term.md`
 - `layouts/taxonomy.md`
 
-#### 1.1: `section`
+#### 1.1: `list`
 
 Add section/list support first:
 
@@ -102,7 +102,7 @@ Add section/list support first:
 - section summary
 - child page index
 
-#### 1.2: `page`
+#### 1.2: `single`
 
 Add page/single support next:
 
@@ -235,9 +235,9 @@ to enable it, and what tradeoffs or limitations site owners should expect.
 ## Suggested Implementation Sequence
 
 1. Design the experimental theme API and opt-in configuration surface.
-2. Phase 1.1: add `section` Markdown output support.
+2. Phase 1.1: add `list` Markdown output support.
 3. Validate section landing pages on `docsy.dev`.
-4. Phase 1.2: add `page` Markdown output support.
+4. Phase 1.2: add `single` Markdown output support.
 5. Validate representative docs, blog, and project pages on `docsy.dev`.
 6. Phase 1.3: add `home` Markdown output support.
 7. Validate home page behavior, including French home handling.
