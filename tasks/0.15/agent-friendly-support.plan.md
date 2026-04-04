@@ -7,287 +7,168 @@ cSpell:ignore: Dachary llms
 
 ## Goal
 
-Add experimental agent-friendly support to the Docsy theme without destabilizing
-existing HTML, RSS, and print outputs.
+Add experimental agent-friendly support to the Docsy theme without breaking
+existing HTML, RSS, or `print` outputs.
 
-The result should give us:
+This should provide:
 
-- Theme-level support for stable Markdown representations of key page kinds.
-- Theme-level support for a machine-readable top-level [llms.txt][].
-- A documented, opt-in setup that Docsy adopters can enable in their own sites.
-- Validation on `docsy.dev` before the feature is presented as supported
-  experimental functionality.
+- opt-in Markdown outputs for key page kinds
+- opt-in top-level [llms.txt][]
+- validation on `docsy.dev`
+- docs showing how a Docsy site enables the feature
 
-This plan was inspired by various community sources, including [Make Your Hugo
-Site Agent-Friendly][dc26] article by Dachary Carey.
+This plan is informed by community work, including Dachary Carey's [Make Your
+Hugo Site Agent-Friendly][dc26], but Docsy's API and docs remain the primary
+design drivers.
 
-## Initial scope
+## Scope
 
-1. Add theme support for generating Markdown output files.
-2. Illustrate the feature on `docsy.dev`.
-3. Add theme support for generating `llms.txt`.
-4. Update the Docsy docs to explain how projects can enable this experimental
-   support.
+In:
 
-Out of scope for the first pass:
+1. Theme support for Markdown outputs.
+2. `docsy.dev` as the proving ground.
+3. Theme support for `llms.txt`.
+4. Docs for enabling the experimental feature.
 
-- Theme support for HTTP content negotiation such as `Accept: text/markdown`.
-- Hidden HTML discovery hints unless they become necessary after `llms.txt`.
-- Perfect parity with every HTML-only affordance in Markdown output.
-- Enabling the feature by default for all Docsy sites.
+Out:
+
+- HTTP content negotiation such as `Accept: text/markdown`
+- hidden HTML discovery hints
+- HTML parity in Markdown outputs
+- default-on behavior for all Docsy sites
 
 ## Current State
 
-Docsy currently has no built-in agent-facing output feature. The `docsy.dev`
-site is the most realistic place to prove the feature because it exercises:
+Docsy does not currently provide built-in agent-facing outputs.
 
-- multilingual content
-- docs, blog, and generic pages
-- existing custom outputs such as `print`
-- mounted repository content
-- a real user-facing documentation set that can document the feature itself
+`docsy.dev` is the right validation target because it covers multilingual
+content, docs/blog/generic pages, custom `print` output, mounted repository
+content, and the documentation that will describe the feature.
 
-Current `docsy.dev` outputs are:
+Current `docsy.dev` outputs:
 
 - `home: [HTML]`
 - `page: [HTML]`
 - `section: [HTML, RSS, print]`
 
-Relevant theme constraints:
+## Constraints
 
-- Docsy must not break existing HTML, RSS, or `print` outputs.
-- The feature should be opt-in and clearly experimental.
-- The public theme API should stay small and understandable.
+- Keep the feature opt-in and explicitly experimental.
+- Keep the theme API small.
+- Preserve existing HTML, RSS, and `print` behavior.
+- Prefer clean Markdown over reproducing theme chrome.
+- Start with the simplest viable rendering path and document limitations.
 
-## Phase 1: Markdown outputs
+## Rollout
 
-### Deliverable
-
-Docsy should provide opt-in support for publishing Markdown representations
-alongside HTML outputs, using predictable URLs and without breaking current
-outputs.
-
-### Proposed approach
-
-1. Define a Markdown media type and output format in theme-level configuration
-   or documented site configuration.
-2. Provide theme templates for the main page kinds:
-   - `home`
-   - `single`
-   - `list`
-   - optionally `taxonomy` and `term` if we decide they add value for discovery
-3. Document how a site enables the format in its Hugo outputs config.
-4. Validate the theme implementation on `docsy.dev`.
-5. Keep `print` output unchanged and verify that adding markdown outputs does
-   not change existing template resolution for HTML, RSS, or `print`.
-
-### Layout plan
-
-Implement minimal Markdown layouts incrementally, favoring clean content over
-perfect HTML layout parity.
+1. Phase 1.1: `list`
+2. Phase 1.2: `single`
+3. Phase 1.3: `home`
+4. Phase 1.4: `term` and `taxonomy` if still in scope
+5. Phase 2: `llms.txt`
+6. Phase 3: docs
 
 Likely theme layout files:
 
-- `layouts/home.md`
-- `layouts/single.md`
 - `layouts/list.md`
+- `layouts/single.md`
+- `layouts/home.md`
 - `layouts/term.md`
 - `layouts/taxonomy.md`
+- `layouts/index.llms.txt`
 
-#### 1.1: `list`
+## Phase 1: Markdown outputs
 
-Add section/list support first:
+Provide opt-in Markdown outputs with stable URLs.
+
+### 1.1 `list`
+
+Start with section pages:
 
 - section title
 - section summary
 - child page index
 
-#### 1.2: `single`
+Validate section landing pages on `docsy.dev`, and confirm RSS and `print`
+behavior is unchanged.
 
-Add page/single support next:
+### 1.2 `single`
+
+Add regular content pages:
 
 - title
-- description metadata when useful
-- `.RawContent` or a Markdown-safe rendering path
+- optional description metadata
+- `.RawContent` or another Markdown-safe rendering path
 
-#### 1.3: `home`
+Validate representative docs, blog, and project pages on `docsy.dev`.
 
-Add home support next:
+### 1.3 `home`
+
+Add home page support:
 
 - site summary
-- high-value section links
+- links to key sections
 
-#### 1.4: `term` and `taxonomy` (optional)
+Validate both English and French home behavior.
 
-TBC.
+### 1.4 `term` and `taxonomy` (optional)
 
-### Theme design considerations
+Add these only if they are useful for discovery in the first experimental
+release.
 
-- Keep the feature opt-in, for example via documented output settings rather
-  than hard-wiring it into all sites.
-- Preserve the current `print` output for docs and blog sections.
-- Do not try to reproduce nav chrome, sidebars, breadcrumbs, or footer in
-  Markdown output.
-- Prefer canonical content URLs in Markdown indexes.
-- Decide explicitly whether pages with heavy shortcode output should use
-  `.RawContent` or a rendered form; start simple and document known exceptions.
-- Keep template override points obvious so sites can customize the markdown
-  representation.
-- Decide whether taxonomy support belongs in the initial experimental API or can
-  wait.
+### Phase 1 validation
 
-### `docsy.dev` validation considerations
-
-- Ensure the French home page override still gets a useful markdown output.
-- Validate how mounted repository files under `content/project/repo/` behave.
-- Verify docs, blog, and generic pages all render acceptably through the theme
-  templates.
-
-### Acceptance criteria
-
-- Theme templates and documented config are sufficient for a Docsy site to emit
-  Markdown siblings.
-- `docsy.dev` builds successfully with the feature enabled.
-- HTML, RSS, and `print` outputs still build.
-- Core pages gain Markdown siblings.
-- Markdown pages are readable without theme boilerplate.
-- URL shape is stable enough to reference from `llms.txt`.
+- `docsy.dev` builds with Markdown outputs enabled
+- HTML, RSS, and `print` outputs still build
+- generated Markdown excludes theme chrome
+- URL conventions are stable enough to reference from `llms.txt`
 
 ## Phase 2: `llms.txt`
 
-### Deliverable
+Provide opt-in generation of a top-level `llms.txt`.
 
-Docsy should provide opt-in support for publishing an `llms.txt` file at the
-site root that points agents toward markdown outputs and the most relevant site
-entry points.
+The first version should stay curated and small:
 
-### Proposed approach
+- site name and short description
+- canonical site URL
+- markdown home URL
+- links to the main documentation entry points
+- brief guidance to prefer Markdown URLs
 
-1. Add `llms.txt` as a documented home output format for sites that opt in.
-2. Implement a dedicated theme template, likely:
-   - `layouts/index.llms.txt`
-3. Generate the file from site data rather than require a handwritten copy.
-4. Let sites override or extend the curation rules as needed.
-5. Keep the first version intentionally small and curated.
+For `docsy.dev`, start with English entry points unless multilingual discovery
+proves necessary.
 
-### Initial content shape
+Validate that `llms.txt` is generated at the site root, links resolve, and home
+outputs do not regress.
 
-The first version should include:
+## Phase 3: Docs
 
-- Site name and short description
-- Canonical site URL
-- Link to the markdown home page
-- Links to the most important sections in markdown form
-- Brief guidance that markdown URLs are preferred for agent consumption
+Document:
 
-### Theme design considerations
+- what the feature provides
+- how to enable Markdown outputs
+- how to enable `llms.txt`
+- what theme templates are provided
+- known limitations and experimental status
 
-- Keep links absolute so the file is useful outside a browser context.
-- Avoid enumerating every page initially; section entry points should be enough
-  for v1.
-- Decide what minimal site params or data hooks are needed for curation without
-  making configuration heavy.
-- Reuse the same URL conventions established in Phase 1.
-
-### `docsy.dev` validation considerations
-
-- Favor English entry points in the first version unless multilingual discovery
-  is explicitly required.
-- Include links that are meaningful for Docsy users, such as docs, blog,
-  project, and contributing material.
-
-### Acceptance criteria
-
-- Theme templates and documented config are sufficient for a Docsy site to emit
-  `llms.txt`.
-- `docsy.dev` generates `llms.txt` at the site root.
-- Links resolve to valid markdown outputs.
-- The file remains concise and manually inspectable.
-- No regressions to existing home outputs.
-
-## Phase 3: Documentation
-
-### Deliverable
-
-Docsy documentation should explain what the experimental feature provides, how
-to enable it, and what tradeoffs or limitations site owners should expect.
-
-### Proposed approach
-
-1. Add or update docs under `docsy.dev/content/en/docs/`.
-2. Describe:
-   - the feature goal
-   - required Hugo output configuration
-   - what templates the theme provides
-   - how to customize or override outputs
-   - known limitations, especially shortcode/rendering caveats
-   - the experimental status of the feature
-3. Include `llms.txt` setup once Phase 2 is ready.
-4. Link the feature docs from the most relevant content/navigation pages.
-
-### Acceptance criteria
-
-- A Docsy user can discover the feature in the docs.
-- A Docsy user can enable markdown output support by following the docs.
-- A Docsy user can enable `llms.txt` by following the docs.
-- The docs clearly mark the feature as experimental.
-
-## Suggested Implementation Sequence
-
-1. Design the experimental theme API and opt-in configuration surface.
-2. Phase 1.1: add `list` Markdown output support.
-3. Validate section landing pages on `docsy.dev`.
-4. Phase 1.2: add `single` Markdown output support.
-5. Validate representative docs, blog, and project pages on `docsy.dev`.
-6. Phase 1.3: add `home` Markdown output support.
-7. Validate home page behavior, including French home handling.
-8. Decide whether Phase 1.4 (`term` and `taxonomy`) belongs in the first
-   release, then implement it if yes.
-9. Add theme `llms.txt` output support and validate it on `docsy.dev`.
-10. Document how projects enable markdown outputs.
-11. Document how projects enable and customize `llms.txt`.
-
-## Validation Checklist
-
-- Run `hugo` for `docsy.dev` with the experimental feature enabled.
-- Inspect representative outputs for:
-  - `/index.md`
-  - `/docs/index.md`
-  - a docs leaf page
-  - a blog post
-  - `/project/index.md`
-  - French home page behavior
-- Verify `section` pages still emit RSS where expected.
-- Verify `print` outputs still resolve for docs and blog sections.
-- Confirm theme templates can still be overridden cleanly by site layouts.
-- Check that generated markdown does not include HTML chrome or duplicated nav
-  content.
-- Check that `llms.txt` uses production-style absolute URLs.
-- Walk through the docs setup instructions on `docsy.dev` and confirm they are
-  sufficient.
+Link the feature docs from the most relevant Docsy docs pages and verify the
+instructions are sufficient when followed on `docsy.dev`.
 
 ## Risks
 
-- Hugo template resolution for custom output formats may interact with existing
-  `print` templates in non-obvious ways.
-- Theme API choices made now may be hard to unwind if they are too broad.
-- `.RawContent` may omit important shortcode expansions on some pages.
-- Rendered content may include too much HTML for agent-facing use on some pages.
-- Multilingual home handling may need a dedicated override.
-- URL conventions chosen for markdown output will affect `llms.txt` and should
-  not change casually after release.
-- Documentation could over-promise if the experimental limitations are not made
-  explicit.
+- Custom output formats may interact with existing template resolution in
+  unexpected ways.
+- `.RawContent` may be too raw for some pages, while rendered output may be too
+  HTML-heavy.
+- Multilingual home handling may need special treatment.
+- Early URL decisions will shape `llms.txt` and should not churn.
+- The docs must not overstate the maturity of the feature.
 
-## Follow-up Options
+## Follow-up
 
-If the first two phases land cleanly, consider later work for:
-
-- hidden HTML discovery hints for `llms.txt`
-- optional support for `Accept: text/markdown`
-- a fuller `llms-full.txt` style index if the curated file proves insufficient
-- revisiting whether any site-level curation hooks should become first-class
-  theme params
+- hidden HTML discovery hints
+- support for `Accept: text/markdown`
+- a fuller `llms-full.txt` style index if needed
 
 [dc26]: https://dachary.org/2025/11/21/make-your-hugo-site-agent-friendly/
 [llms.txt]: https://docs.llmstack.com/llms/llms-txt
