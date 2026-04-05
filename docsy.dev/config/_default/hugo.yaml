@@ -14,7 +14,7 @@ ignoreLogs:
 outputs:
   home: [HTML]
   page: [HTML]
-  section: [HTML, RSS, print]
+  section: [HTML, RSS, print, Markdown]
 
 imaging:
   resampleFilter: CatmullRom # cSpell:disable-line
