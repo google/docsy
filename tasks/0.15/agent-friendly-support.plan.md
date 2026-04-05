@@ -257,3 +257,22 @@ output format and template structure are in place.
 
 [dc26]: https://dacharycarey.com/2026/03/01/make-hugo-site-agent-friendly/
 [llms.txt]: https://llmstxt.org/
+
+## Appendix 3: Golden file tests for Markdown outputs
+
+Add golden files for a representative set of generated `index.md` pages.
+After each build, a test script diffs the generated output against the goldens
+and fails on unexpected changes.
+
+Candidate golden pages (covering different template code paths):
+
+- `docs/index.md` — description + child links, no body content
+- `docs/get-started/index.md` — description + body content + child links
+- `docs/content/index.md` — description only, many children
+- `blog/index.md` — no description, no body, children with mixed descriptions
+- `community/index.md` — different section type
+
+Golden files live under `docsy.dev/tests/` or similar. The test script builds,
+then compares each generated page against its golden. A mismatch means the
+template changed behavior — update the golden intentionally or fix the
+regression.
