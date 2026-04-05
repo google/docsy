@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const goldenDir = fileURLToPath(new URL('./goldens/', import.meta.url));
 const publicDir = fileURLToPath(new URL('../../public/', import.meta.url));
 
+// `kind` is descriptive only (for readable test names); it doesn't affect test logic.
 const manifest = JSON.parse(
   readFileSync(new URL('./goldens.json', import.meta.url), 'utf8'),
 );

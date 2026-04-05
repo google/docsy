@@ -30,13 +30,15 @@ docsy.dev/
 
 ### Key design decisions
 
-- `goldens.json` is the single source of truth: it lists each golden file path
-  and a `covers` field documenting why the golden is there. Both the test and
-  the update script read it. Adding a new golden means adding a manifest entry
-  and copying the file.
-- The five initial pages cover the main template branches (presence/absence of
+- `goldens.json` is the single source of truth: it lists each golden with
+  `path`, a descriptive `kind` (Hugo page kind), and a `covers` list of template
+  attributes exercised (prefixed with `!` when absent). Both the test and the
+  update script read it. Adding a new golden means adding a manifest entry and
+  copying the file.
+- The initial goldens cover the main template branches (presence/absence of
   description, body, and children across home, section, and page kinds).
-- The `covers` field appears in test runner output for self-documenting results.
+- `kind` and `covers` appear in test runner output for self-documenting results;
+  neither affects test logic.
 
 ### Workflow
 
@@ -50,8 +52,10 @@ npm scripts in `docsy.dev/package.json`: `test:md-output` and
 `update:md-goldens`. Separate from the existing `test` script (format + link
 checks). Can be wired into `ci:test` later.
 
-## Notes
+## Coverage gaps
 
-- The blog `Hello Docsy!` post has a minor `!.` artifact (description ends with
-  `!`, template appends `.`). The golden captures current behavior; the template
-  can be refined separately.
+Current goldens fully cover the `section` kind (all description × body ×
+children combinations) but only one `page`-kind cell (description + body).
+Missing page-kind combinations (!description, !body, etc.) don't exist in the
+docsy.dev content. To fill these gaps, add purpose-built test pages under
+`docsy.dev/content/en/tests/md-output/` with the needed attribute combinations.
