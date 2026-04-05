@@ -1,22 +1,28 @@
-# {{ .Title }}
+# {{ .Title -}}
 
-{{ with .Description -}}
-{{ strings.TrimSpace . }}
+{{/* Description ------------------------------------------------------- */ -}}
 
----
+{{ with .Description | strings.TrimSpace }}
 
-{{ end -}}
-
-
-{{ with .RenderShortcodes -}}
-{{ strings.TrimSpace . }}
-
----
+{{ . -}}
+{{ if not (hasSuffix "." .) -}} . {{- end -}}
 
 {{ end -}}
 
+{{/* Page content ------------------------------------------------------ */ -}}
 
-{{ with .Pages -}}
+{{ with .RenderShortcodes | strings.TrimSpace }}
+
+---
+
+{{ . -}}
+{{ end -}}
+
+{{/* Section index, if any --------------------------------------------- */ -}}
+
+{{ with .Pages }}
+
+---
 
 Section pages:
 
