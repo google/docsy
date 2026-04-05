@@ -1,6 +1,6 @@
 # Get started
 
-Learn how to get started with Docsy, including the available options for installing and using the Docsy theme.
+> Learn how to get started with Docsy, including the available options for installing and using the Docsy theme.
 
 ---
 

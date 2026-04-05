@@ -6,7 +6,7 @@
 
 {{ with .Description | strings.TrimSpace }}
 
-{{ . -}}
+> {{ replace . "\n" "\n> " -}}
 {{ $needSeparator = true -}}
 {{ end -}}
 

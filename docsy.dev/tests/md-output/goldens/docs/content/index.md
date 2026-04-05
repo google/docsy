@@ -1,6 +1,6 @@
 # Content and Customization
 
-How to add content to and customize your Docsy site.
+> How to add content to and customize your Docsy site.
 
 ---
 

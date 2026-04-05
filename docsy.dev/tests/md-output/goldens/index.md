@@ -1,6 +1,6 @@
 # Docsy
 
-A Hugo theme for creating great technical documentation sites
+> A Hugo theme for creating great technical documentation sites
 
 ---
 

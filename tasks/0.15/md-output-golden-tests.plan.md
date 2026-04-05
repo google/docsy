@@ -59,3 +59,7 @@ children combinations) but only one `page`-kind cell (description + body).
 Missing page-kind combinations (!description, !body, etc.) don't exist in the
 docsy.dev content. To fill these gaps, add purpose-built test pages under
 `docsy.dev/content/en/tests/md-output/` with the needed attribute combinations.
+
+No existing page has a multi-line description, so the `replace . "\n" "\n> "`
+logic in `all.md` (blockquote continuation) is untested. Add a test page with a
+multi-line description to exercise this.

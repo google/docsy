@@ -58,12 +58,12 @@ Markdown output format. A single template covers home, section, and single
 pages:
 
 - **Title** as an H1 heading
-- **Description** if present, as plain text followed by a horizontal rule.
-  Rendered without a label or blockquote — the positional convention (first
-  paragraph after title, before `---`) is unambiguous. Alternatives considered:
-  `**Description:**` prefix (awkward for humans and requires i18n), blockquote
-  (fragile with multi-line Markdown links), front matter (conflicts with `---`
-  thematic breaks), or dropping it entirely (too sparse for bodyless sections)
+- **Description** if present, as a blockquote (`>`), followed by a horizontal
+  rule. The blockquote structurally distinguishes the description from body
+  content, making it easy for agents to extract. Alternatives considered:
+  `**Description:**` prefix (awkward for humans, requires i18n), front matter
+  (conflicts with `---` thematic breaks), plain text with positional convention
+  (implicit), or dropping it entirely (too sparse for bodyless sections)
 - **Body content** via `.RenderShortcodes` (renders shortcodes while preserving
   surrounding Markdown)
 - **Child page index** with links and descriptions (for section pages; empty for
