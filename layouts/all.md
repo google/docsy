@@ -5,7 +5,7 @@
 {{ with .Description | strings.TrimSpace }}
 
 {{ . -}}
-{{ if not (hasSuffix "." .) -}} . {{- end -}}
+{{ if not (hasSuffix . ".") -}} . {{- end }}
 
 {{ end -}}
 
