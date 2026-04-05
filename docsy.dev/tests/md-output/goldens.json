@@ -28,5 +28,10 @@
     "path": "blog/2022/hello/index.md",
     "kind": "page",
     "covers": ["description", "body", "!children"]
+  },
+  {
+    "path": "fr/index.md",
+    "kind": "home",
+    "covers": ["description", "body", "children", "i18n:fr"]
   }
 ]
