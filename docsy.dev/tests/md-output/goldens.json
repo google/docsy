@@ -1,0 +1,22 @@
+[
+  {
+    "path": "index.md",
+    "covers": "home page: description, body (shortcodes), and children"
+  },
+  {
+    "path": "blog/index.md",
+    "covers": "section: no description, no body, children only"
+  },
+  {
+    "path": "docs/content/index.md",
+    "covers": "section: description + children, no body"
+  },
+  {
+    "path": "docs/get-started/index.md",
+    "covers": "section: description + body + children"
+  },
+  {
+    "path": "blog/2022/hello/index.md",
+    "covers": "page: description + body, no children"
+  }
+]

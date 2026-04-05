@@ -22,27 +22,21 @@ colocated. Top-level `tests/` remains available for theme-level tests.
 docsy.dev/
   tests/
     md-output/
+      goldens.json                 # manifest: path + coverage rationale
       golden.test.mjs              # test: compare goldens to public/
       update-goldens.sh            # refresh goldens from latest build
       goldens/                     # golden files, mirroring public/ paths
-        index.md                         # home page
-        blog/index.md                    # section: no description, no body
-        docs/content/index.md            # section: description + children
-        docs/get-started/index.md        # section: description + body + children
-        blog/2022/hello/index.md         # page: description + body, no children
 ```
-
-The five pages cover the main template branches (presence/absence of
-description, body, and children across home, section, and page kinds).
 
 ### Key design decisions
 
-- The `goldens/` directory is its own manifest: both the test and the update
-  script walk it to discover files. No duplicated file list.
-- `update-goldens.sh` refreshes all goldens from the latest build by copying the
-  corresponding file from `public/` for each golden.
-- Adding a new golden page is just one `cp` into `goldens/` at the matching
-  relative path.
+- `goldens.json` is the single source of truth: it lists each golden file path
+  and a `covers` field documenting why the golden is there. Both the test and
+  the update script read it. Adding a new golden means adding a manifest entry
+  and copying the file.
+- The five initial pages cover the main template branches (presence/absence of
+  description, body, and children across home, section, and page kinds).
+- The `covers` field appears in test runner output for self-documenting results.
 
 ### Workflow
 
