@@ -89,7 +89,9 @@ documented in Phase 3.
 The theme's `hugo.yaml` defines a `Markdown` output format (named to match
 Docsy's existing `PRINT` convention and Carey's article rather than using `MD`).
 The format uses `isPlainText: true` so Hugo emits raw Markdown rather than
-HTML-escaped output.
+HTML-escaped output. No `mediaTypes` declaration is needed because
+`text/markdown` is a
+[Hugo built-in](https://gohugo.io/configuration/media-types/).
 
 Sites opt in by adding `Markdown` to their `outputs` config. Hugo's `outputs`
 config is a full override, not additive — if a site forgets to include existing
@@ -204,6 +206,7 @@ instructions are sufficient when followed on `docsy.dev`.
 - Markdown outputs for `term` and `taxonomy` if a real discovery need emerges
 - Markdown-aware shortcode templates for high-value Docsy shortcodes
 - type-specific `.md` layouts if field-testing reveals the need
+- i18n key for the "Section pages" label in `all.md` (currently hardcoded)
 - a fuller `llms-full.txt` style index if needed
 
 ## Appendix: Differences from Carey's article
