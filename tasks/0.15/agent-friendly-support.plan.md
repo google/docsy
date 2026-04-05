@@ -223,13 +223,14 @@ instructions are sufficient when followed on `docsy.dev`.
 
 ## Follow-up
 
-- hidden HTML discovery hints
-- support for `Accept: text/markdown`
-- Markdown outputs for `term` and `taxonomy` if a real discovery need emerges
 - Markdown-aware shortcode templates for high-value Docsy shortcodes
-- type-specific `.md` layouts if field-testing reveals the need
-- i18n key for the "Section pages" label in `all.md` (currently hardcoded)
-- a fuller `llms-full.txt` style index if needed
+- Type-specific `.md` layouts if field-testing reveals the need
+- `i18n` key for the "Section pages" label in `all.md` (currently hardcoded)
+- A fuller `llms-full.txt` style index if needed
+- Markdown outputs for `term` and `taxonomy` if a real discovery need emerges
+
+> **Note**:Deferred items already listed under **Out** in [Scope](#scope) are
+> not repeated here.
 
 ## Appendix: Differences from Carey's article
 
@@ -237,15 +238,15 @@ instructions are sufficient when followed on `docsy.dev`.
 existing Hugo sites, including one using Docsy. This plan draws on that work but
 diverges in several places:
 
-| Area                    | Carey's approach                                                         | This plan                   | Why                                                                            |
-| ----------------------- | ------------------------------------------------------------------------ | --------------------------- | ------------------------------------------------------------------------------ |
-| Template strategy       | Separate templates per page kind (`single.md`, `section.md`, `index.md`) | Single `all.md` catch-all   | Mirrors Docsy's `all.html`; covers all page kinds with minimal API surface     |
-| Content rendering       | `.RawContent` (shortcodes unexpanded)                                    | `.RenderShortcodes`         | Resolves shortcodes while preserving Markdown; available since Hugo 0.117      |
-| `llms.txt` generation   | Shell script parsing front matter with `sed`, run before `hugo build`    | Hugo output format template | Participates in Hugo's build pipeline; no external script for sites to wire up |
-| Content negotiation     | Apache `.htaccess` rewrite rules for `Accept: text/markdown`             | Out of scope (follow-up)    | Server-specific; not something a theme can control                             |
-| HTML discovery hint     | Hidden `sr-only` div in `baseof.html`                                    | Out of scope (follow-up)    | Adds theme chrome to HTML output; evaluate after Markdown URLs are stable      |
-| `term`/`taxonomy` pages | Included for content-parity completeness                                 | Out of scope                | No real discovery need yet                                                     |
-| `baseof.html` overrides | Site-level overrides of each type-specific `baseof.html`                 | Not needed                  | Markdown output format templates don't use `baseof`; they render standalone    |
+| Area                                 | Carey's approach                                                         | This plan                   | Why                                                                            |
+| ------------------------------------ | ------------------------------------------------------------------------ | --------------------------- | ------------------------------------------------------------------------------ |
+| Template strategy                    | Separate templates per page kind (`single.md`, `section.md`, `index.md`) | Single `all.md` catch-all   | Mirrors Docsy's `all.html`; covers all page kinds with minimal API surface     |
+| Content rendering                    | `.RawContent` (shortcodes unexpanded)                                    | `.RenderShortcodes`         | Resolves shortcodes while preserving Markdown; available since Hugo 0.117      |
+| `llms.txt` generation                | Shell script parsing front matter with `sed`, run before `hugo build`    | Hugo output format template | Participates in Hugo's build pipeline; no external script for sites to wire up |
+| Server-side HTTP content negotiation | Apache `.htaccess` rewrite rules for `Accept: text/markdown`             | Out of scope (follow-up)    | Server-specific; not something a theme can control                             |
+| HTML discovery hint                  | Hidden `sr-only` div in `baseof.html`                                    | Out of scope (follow-up)    | Adds theme chrome to HTML output; evaluate after Markdown URLs are stable      |
+| `term`/`taxonomy` pages              | Included for content-parity completeness                                 | Out of scope                | No real discovery need yet                                                     |
+| `baseof.html` overrides              | Site-level overrides of each type-specific `baseof.html`                 | Not needed                  | Markdown output format templates don't use `baseof`; they render standalone    |
 
 The core pattern — Markdown output format, `isPlainText: true` — is shared. The
 differences reflect Docsy's position as a theme (not a site) and the strategy of
