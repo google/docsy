@@ -11,8 +11,8 @@ const manifest = JSON.parse(
   readFileSync(new URL('./goldens.json', import.meta.url), 'utf8'),
 );
 
-for (const { path, covers } of manifest) {
-  test(`${path} — ${covers}`, () => {
+for (const { path, kind, covers } of manifest) {
+  test(`${path} (${kind}) — ${covers.join(', ')}`, () => {
     const expected = readFileSync(join(goldenDir, path), 'utf8');
     const actual = readFileSync(join(publicDir, path), 'utf8');
     assert.equal(actual, expected);

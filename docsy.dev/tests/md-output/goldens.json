@@ -1,22 +1,32 @@
 [
   {
     "path": "index.md",
-    "covers": "home page: description, body (shortcodes), and children"
+    "kind": "home",
+    "covers": ["description", "body", "children"]
   },
   {
     "path": "blog/index.md",
-    "covers": "section: no description, no body, children only"
+    "kind": "section",
+    "covers": ["!description", "!body", "children"]
+  },
+  {
+    "path": "docs/index.md",
+    "kind": "section",
+    "covers": ["!description", "body", "children"]
   },
   {
     "path": "docs/content/index.md",
-    "covers": "section: description + children, no body"
+    "kind": "section",
+    "covers": ["description", "!body", "children"]
   },
   {
     "path": "docs/get-started/index.md",
-    "covers": "section: description + body + children"
+    "kind": "section",
+    "covers": ["description", "body", "children"]
   },
   {
     "path": "blog/2022/hello/index.md",
-    "covers": "page: description + body, no children"
+    "kind": "page",
+    "covers": ["description", "body", "!children"]
   }
 ]
