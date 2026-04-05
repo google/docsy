@@ -5,8 +5,6 @@
 {{ with .Description | strings.TrimSpace }}
 
 {{ . -}}
-{{ if not (hasSuffix . ".") -}} . {{- end }}
-
 {{ end -}}
 
 {{/* Page content ------------------------------------------------------ */ -}}

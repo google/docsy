@@ -1,8 +1,6 @@
 # Hello Docsy!
 
-Welcome to the Docsy blog!.
-
-
+Welcome to the Docsy blog!
 
 ---
 

@@ -2,8 +2,6 @@
 
 Learn how to get started with Docsy, including the available options for installing and using the Docsy theme.
 
-
-
 ---
 
 As you saw in our introduction, Docsy is a [Hugo](https://gohugo.io) theme,

@@ -2,8 +2,6 @@
 
 How to add content to and customize your Docsy site.
 
-
-
 ---
 
 Section pages:

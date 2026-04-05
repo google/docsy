@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#
 # Refresh golden files from the latest build output.
 # The goldens/ directory is its own manifest: this script walks it and copies
 # the corresponding file from public/ for each golden found.
