@@ -28,6 +28,7 @@
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "prepare-disabled": "cd .. && npm install",
+    "pretest:md-output": "npm run build",
     "prune:refcache": "node scripts/prune-refcache.mjs",
     "serve": "npm run _serve -- --minify",
     "test": "npm run check:format && npm run check:links && npm run test:md-output",

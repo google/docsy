@@ -1,7 +1,5 @@
 # Welcome to Docsy
 
----
-
 <!-- markdownlint-disable-next-line no-space-in-links -->
 
 <span class="badge bg-primary text-bg-primary fs-6">v0.14.4-dev
