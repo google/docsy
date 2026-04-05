@@ -39,8 +39,8 @@ description, body, and children across home, section, and page kinds).
 
 - The `goldens/` directory is its own manifest: both the test and the update
   script walk it to discover files. No duplicated file list.
-- `update-goldens.sh` refreshes all goldens from the latest build by copying
-  the corresponding file from `public/` for each golden.
+- `update-goldens.sh` refreshes all goldens from the latest build by copying the
+  corresponding file from `public/` for each golden.
 - Adding a new golden page is just one `cp` into `goldens/` at the matching
   relative path.
 
