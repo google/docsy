@@ -7,36 +7,39 @@ cSpell:ignore: Dachary llms imgproc readfile tabpane
 
 ## Goal
 
-Add experimental agent-friendly support to the Docsy theme without breaking
+Add _experimental_ agent-friendly support to the Docsy theme without breaking
 existing HTML, RSS, or `print` outputs.
 
 This should provide:
 
-- opt-in Markdown outputs for all page kinds
+- opt-in Markdown outputs at least for home, section, and page outputs
+- HTML page metadata linking directly to the Markdown alternate output
 - opt-in top-level [llms.txt][]
 - validation on `docsy.dev` and field-testing on real Docsy sites
 - docs showing how a Docsy site enables the feature
 
-This plan is informed by community work, including Dachary Carey's [Make Your
-Hugo Site Agent-Friendly][dc26], but Docsy's API and docs remain the primary
-design drivers.
+This plan draws on several sources, including Dachary Carey's [Make Your Hugo
+Site Agent-Friendly][dc26], but Docsy-specific API, output, and documentation
+constraints drive the design.
 
 ## Scope
 
 In:
 
-1. Theme support for Markdown outputs via a single `all.md` catch-all template.
-2. `docsy.dev` as the proving ground; field-testing on external Docsy sites
-   (e.g. OTel) before investing in more complex approaches.
-3. Theme support for `llms.txt`.
-4. Docs for enabling the experimental feature.
+1. Theme support for Markdown outputs.
+2. Page-level discovery via HTML metadata linking to the Markdown alternate
+   output.
+3. `docsy.dev` as the proving ground; field-testing on external Docsy sites
+   (e.g. OTel) before investing in more complex approaches (if needed).
+4. Theme support for `llms.txt`.
+5. Docs for enabling the experimental feature.
 
 Out:
 
-- HTTP content negotiation such as `Accept: text/markdown`
-- hidden HTML discovery hints
+- Server-side HTTP content negotiation such as `Accept: text/markdown`
+- Hidden HTML discovery hints
 - HTML parity in Markdown outputs
-- default-on behavior for all Docsy sites
+- Default-on behavior for all Docsy sites
 
 ## Constraints
 
@@ -50,12 +53,14 @@ Out:
 
 ## Approach
 
-### One template for all page kinds
+### One template as the default Markdown fallback
 
 Docsy's `layouts/all.html` is the catch-all fallback for any page kind that
 doesn't match a more specific template. `layouts/all.md` mirrors this for the
-Markdown output format. A single template covers home, section, and single
-pages:
+Markdown output format. In the current rollout, one template covers the
+field-tested page kinds: home, section, and single pages. Sites can still opt
+specific pages out of Markdown output when that content is not useful to agents
+(for example, a JavaScript-driven search page).
 
 - **Title** as an H1 heading
 - **Description** if present, as a blockquote (`>`), followed by a horizontal
@@ -63,7 +68,8 @@ pages:
   content, making it easy for agents to extract. Alternatives considered:
   `**Description:**` prefix (awkward for humans, requires i18n), front matter
   (conflicts with `---` thematic breaks), plain text with positional convention
-  (implicit), or dropping it entirely (too sparse for bodyless sections)
+  (implicit), or dropping it entirely (too sparse for sections without body
+  content)
 - **Body content** via `.RenderShortcodes` (renders shortcodes while preserving
   surrounding Markdown)
 - **Child page index** with links and descriptions (for section pages; empty for
@@ -103,6 +109,12 @@ config is a full override, not additive — if a site forgets to include existin
 formats like `RSS` or `print`, those break silently. The docs (Phase 3) must
 call this out.
 
+Generated links in Markdown outputs should stay canonical (`/docs/get-started/`)
+rather than being rewritten to `index.md` (as [Carey's article][dc26]
+recommends). Page body links are not rewritten either, so keeping one
+internal-link convention is simpler. Future `llms.txt` docs can tell agents to
+prefer Markdown URLs when that matters.
+
 ## Testing strategy
 
 `docsy.dev/public` is maintained as a git repo. After each build
@@ -117,13 +129,15 @@ Add golden files for a representative set of generated `index.md` pages. After
 each build, a test script diffs the generated output against the goldens and
 fails on unexpected changes.
 
-Candidate golden pages (covering different template code paths):
+Current goldens (covering the main template code paths):
 
-- `docs/index.md` — description + child links, no body content
+- `index.md` — home page with description + body content + child links
+- `fr/index.md` — multilingual home page regression coverage
+- `docs/index.md` — body content + child links, no description
 - `docs/get-started/index.md` — description + body content + child links
 - `docs/content/index.md` — description only, many children
 - `blog/index.md` — no description, no body, children with mixed descriptions
-- `community/index.md` — different section type
+- `blog/2022/hello/index.md` — page content with description, no children
 
 ## Rollout
 
@@ -135,8 +149,8 @@ Candidate golden pages (covering different template code paths):
 ### Phase 1: Markdown outputs (prototype complete)
 
 The `Markdown` output format is defined in `hugo.yaml`. The `layouts/all.md`
-template provides Markdown output for all page kinds. `docsy.dev` enables the
-format via:
+template is the default Markdown fallback used in this rollout. `docsy.dev`
+enables the format via:
 
 ```yaml
 outputs:
@@ -144,6 +158,9 @@ outputs:
   page: [HTML, Markdown]
   section: [HTML, RSS, print, Markdown]
 ```
+
+The JS-driven `search.md` page explicitly opts out with `outputs: [HTML]`,
+because an empty search shell adds little value for agents.
 
 HTML output gains a `<link rel="alternate" type="text/markdown">` tag
 automatically — this is Hugo's built-in behavior for alternate output formats.

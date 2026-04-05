@@ -2,7 +2,7 @@
 
 ## Rationale
 
-The `layouts/all.md` template produces Markdown output for all page kinds. A
+The `layouts/all.md` template supports Markdown output for all page kinds. A
 small set of golden file tests will catch regressions when the template or site
 content changes. Follows the existing `node --test` pattern used by
 `test:tooling` -- zero new dependencies.
@@ -49,8 +49,9 @@ npm run test:md-output -w docsy.dev   # verify
 ```
 
 npm scripts in `docsy.dev/package.json`: `test:md-output` and
-`update:md-goldens`. Separate from the existing `test` script (format + link
-checks). Can be wired into `ci:test` later.
+`update:md-goldens`. `test:md-output` can still be run directly while iterating,
+but it is also wired into the existing `test` script so format, link, and
+Markdown-output regressions are checked together on `docsy.dev`.
 
 ## Coverage gaps
 

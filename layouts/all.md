@@ -41,4 +41,5 @@ Section pages:
   {{ end }}
 {{ end -}}
 
+{{ else }}
 {{ end -}}
