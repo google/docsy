@@ -8,6 +8,9 @@ params:
   rss_sections: [blog]
 
 outputFormats:
+  Markdown:
+    isPlainText: true
+    mediaType: text/markdown
   PRINT:
     baseName: index
     # FIXME: leave isHTML unset (i.e. false) until we get a Hugo fix for

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "index.md",
+    "kind": "home",
+    "covers": ["description", "body", "children"]
+  },
+  {
+    "path": "blog/index.md",
+    "kind": "section",
+    "covers": ["!description", "!body", "children"]
+  },
+  {
+    "path": "docs/index.md",
+    "kind": "section",
+    "covers": ["!description", "body", "children"]
+  },
+  {
+    "path": "docs/content/index.md",
+    "kind": "section",
+    "covers": ["description", "!body", "children"]
+  },
+  {
+    "path": "docs/get-started/index.md",
+    "kind": "section",
+    "covers": ["description", "body", "children"]
+  },
+  {
+    "path": "blog/2022/hello/index.md",
+    "kind": "page",
+    "covers": ["description", "body", "!children"]
+  },
+  {
+    "path": "fr/index.md",
+    "kind": "home",
+    "covers": ["description", "body", "children", "i18n:fr"]
+  }
+]

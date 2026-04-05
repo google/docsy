@@ -12,9 +12,9 @@ ignoreLogs:
   - warning-frontmatter-params-overrides # cSpell:disable-line
 
 outputs:
-  home: [HTML]
-  page: [HTML]
-  section: [HTML, RSS, print]
+  home: [HTML, Markdown]
+  page: [HTML, Markdown]
+  section: [HTML, RSS, print, Markdown]
 
 imaging:
   resampleFilter: CatmullRom # cSpell:disable-line

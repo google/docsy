@@ -16,3 +16,5 @@
 !/content/fr/**/*.*
 
 /layouts
+
+/tests/md-output/goldens/**/*.*
