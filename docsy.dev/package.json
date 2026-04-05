@@ -35,7 +35,7 @@
     "test": "npm run test:base && npm run test:md-output",
     "test:md-output": "node --test 'tests/md-output/**/*.test.mjs'",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
-    "update:md-goldens": "bash tests/md-output/update-goldens.sh",
+    "update:md-goldens": "node tests/md-output/update-goldens.mjs",
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {

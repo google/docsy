@@ -24,7 +24,7 @@ docsy.dev/
     md-output/
       goldens.json                 # manifest: path + coverage rationale
       golden.test.mjs              # test: compare goldens to public/
-      update-goldens.sh            # refresh goldens from latest build
+      update-goldens.mjs           # refresh goldens from latest build
       goldens/                     # golden files, mirroring public/ paths
 ```
 
