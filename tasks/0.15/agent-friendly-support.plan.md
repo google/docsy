@@ -93,7 +93,7 @@ to the theme:
   hand-tuned agent-facing output
 
 The theme's job is to provide a reasonable default. The override path is
-documented in Phase 3.
+documented in Phase 4.
 
 ### Output format definition
 
@@ -141,12 +141,12 @@ Current goldens (covering the main template code paths):
 
 ## Rollout
 
-- Phase 1: Markdown outputs via `all.md` (done in prototype)
-- Phase 2: field-test on `docsy.dev` and external Docsy sites
-- Phase 3: `llms.txt`
-- Phase 4: docs
+- Phase 1: Markdown outputs via `all.md` (complete; verified on `docsy.dev`)
+- Phase 2: field-test on `docsy.dev` and external Docsy sites (in progress)
+- Phase 3: `llms.txt` (not started)
+- Phase 4: docs (not started)
 
-### Phase 1: Markdown outputs (prototype complete)
+### Phase 1: Markdown outputs (complete)
 
 The `Markdown` output format is defined in `hugo.yaml`. The `layouts/all.md`
 template is the default Markdown fallback used in this rollout. `docsy.dev`
@@ -154,9 +154,9 @@ enables the format via:
 
 ```yaml
 outputs:
-  home: [HTML, Markdown]
-  page: [HTML, Markdown]
-  section: [HTML, RSS, print, Markdown]
+  home: [HTML, markdown]
+  page: [HTML, markdown]
+  section: [HTML, RSS, print, markdown]
 ```
 
 The JS-driven `search.md` page explicitly opts out with `outputs: [HTML]`,
@@ -165,19 +165,19 @@ because an empty search shell adds little value for agents.
 HTML output gains a `<link rel="alternate" type="text/markdown">` tag
 automatically — this is Hugo's built-in behavior for alternate output formats.
 
-### Phase 2: Field-testing
+### Phase 2: Field-testing (in progress)
 
 Validate the approach on real Docsy sites before investing in more complex
 alternatives:
 
-- Enable Markdown output on `docsy.dev` and review generated pages
-- Field-test on an external Docsy site (e.g. OpenTelemetry) to evaluate whether
-  the `all.md` output is useful enough for agents in practice
-- Gather feedback on which pages benefit most, which are too noisy, and whether
-  the progressive override path is sufficient
-- Decide whether to invest in type-specific templates, Markdown-aware
-  shortcodes, or other refinements — or whether the simple approach is good
-  enough
+- [x] Enable Markdown output on `docsy.dev` and review generated pages.
+- [ ] Field-test on an external Docsy site (e.g. OpenTelemetry) to evaluate
+      whether the `all.md` output is useful enough for agents in practice.
+- [ ] Gather feedback on which pages benefit most, which are too noisy, and
+      whether the progressive override path is sufficient.
+- [ ] Decide whether to invest in type-specific templates, Markdown-aware
+      shortcodes, or other refinements — or whether the simple approach is good
+      enough.
 
 ### Phase 3: `llms.txt`
 
