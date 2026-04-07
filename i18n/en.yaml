@@ -26,6 +26,7 @@ post_byline_by: By
 post_created: Created
 post_last_mod: Last modified
 post_edit_this: Edit this page
+post_view_markdown: View Markdown
 post_view_this: View page source
 post_create_child_page: Create child page
 post_create_issue: Create documentation issue
