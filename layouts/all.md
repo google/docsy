@@ -1,4 +1,4 @@
-# {{ .Title -}}
+# {{ .Title | strings.TrimSpace -}}
 
 {{ $needSeparator := false -}}
 
@@ -35,9 +35,9 @@
 Section pages:
 
 {{ range . -}}
-- [ {{- .Title -}} ]( {{- .RelPermalink -}} )
-  {{- with .Description -}}
-    : {{ strings.TrimSpace . -}}
+- [ {{- .Title | strings.TrimSpace -}} ]( {{- .RelPermalink -}} )
+  {{- with .Description | strings.TrimSpace -}}
+    : {{ . -}}
   {{ end }}
 {{ end -}}
 
