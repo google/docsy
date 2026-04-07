@@ -1,3 +1,10 @@
+# Alert labels
+caution: Осторожно
+important: Важно
+note: Примечание
+tip: Подсказка
+warning: Предупреждение
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Предыдущая
 ui_pager_next: Следующая
@@ -8,47 +15,54 @@ ui_search: Поиск по сайту…
 ui_in: в
 
 # Used in sentences such as "All Tags"
-ui_all: всё
+ui_all: все
 
 # Footer text
 footer_all_rights_reserved: Все права защищены
-
 footer_privacy_policy: Политика конфиденциальности
 
 # Post (blog, article, etc.)
 post_byline_by: Автор
 post_created: Создано
 post_last_mod: Изменено
-post_edit_this: Отредактировать страницу
-post_view_this: Увидеть источник страницы
-post_create_child_page: Создать дополнительную страницу
-post_create_issue: Предложить изменения документации
-post_create_project_issue: Предложить доработки по проекту
+post_edit_this: Редактировать страницу
+post_view_this: Увидеть исходник страницы
+post_create_child_page: Создать вложенную страницу
+post_create_issue: Создать тикет по документации
+post_create_project_issue: Создать тикет по проекту
 post_posts_in: Публикации в
-post_reading_time: минутное чтение
+post_reading_time: минут, чтобы прочитать
 post_less_than_a_minute_read: меньше минуты
 
 # Print support
-print_printable_section: Это многостраничный печатный вид этого раздела.
-print_click_to_print: Нажмите что бы печатать
+print_printable_section: Это многостраничный печатный вид текущего раздела.
+print_click_to_print: Нажмите, чтобы распечатать
 print_show_regular: Вернуться к обычному просмотру страницы
-print_entire_section: Печатать весь раздел
+print_entire_section: Распечатать весь раздел
 
 # Community
-community_join: >-
-  Присоединяйтесь к {{ .Site.Title }} комьюнити
+community_join: Присоединяйтесь к сообществу {{ .Site.Title }}
 community_introduce: >-
-  {{ .Site.Title }} - это проект с открытым кодом который любой в комьюнити
-  может использовать, улучшать и наслаждаться. Мы будем рады видеть тебя с нами!
-  Вот несколько путей как присоединиться к нам, знать что происходит и быть
-  вовлеченным.
-community_learn: Изучай и Присоединяйся
+  {{ .Site.Title }} — это проект с открытым кодом, которым любой в сообществе
+  может пользоваться, улучшать и наслаждаться. Мы рады всем! Вот несколько
+  способов оставаться в курсе происходящего в проекте и участвовать в нём.
+community_learn: Изучай и присоединяйся
 community_using: >-
-  Уже пользуешься или хочешь пользоваться {{ .Site.Title }}? Узнай больше здесь:
-community_develop: Розвивай и Вноси свой вклад
+  Уже используете или хотите пользоваться {{ .Site.Title }}? Узнайте больше здесь:
+community_develop: Развивай и вноси свой вклад
 community_contribute: >-
-  Если ты хочешь принять более активное участие, внося свой вклад в {{
-  .Site.Title }}, присоединяйся к нам тут:
-community_how_to: Ты можешь узнать как сделать вклад в эти документы в нашем
+  Если вы хотите принять более активное участие, внося свой вклад в {{ .Site.Title }},
+  присоединяйтесь к нам здесь:
+community_how_to: О том, как внести свой вклад в {{ .Site.Title }}, рассказывает
 community_guideline: >-
-  Рекомендации касательно вклада
+  Руководство по внесению изменений
+
+# Feedback
+feedback_title: Обратная связь
+feedback_question: Эта страница была полезна?
+feedback_positive: Да
+feedback_negative: Нет
+
+# Table of contents
+toc_on_this_page: На этой странице
+toc_top_of_page: Верх страницы
