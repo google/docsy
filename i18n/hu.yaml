@@ -18,6 +18,7 @@ post_created: Elkészítve
 post_last_mod: Utolsó módosítás
 post_edit_this: Oldal szerkesztése
 post_create_child_page: Create child page
+post_view_markdown: Markdown megtekintése
 post_create_issue: Dokumentáció issue létrehozása
 post_create_project_issue: Projekt issue létrehozása
 # so I left it as is

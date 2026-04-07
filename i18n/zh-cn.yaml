@@ -27,6 +27,7 @@ post_byline_by: 撰文：
 post_created: 创建
 post_last_mod: 最后修改
 post_edit_this: 编辑此页
+post_view_markdown: 查看 Markdown
 post_view_this: 查看页面源码
 post_create_child_page: 添加子页面
 post_create_issue: 提交文档问题

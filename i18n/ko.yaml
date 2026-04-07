@@ -18,6 +18,7 @@ post_created: 작성
 post_last_mod: 최종 수정
 post_edit_this: 페이지 편집
 post_create_child_page: 하부 페이지 생성
+post_view_markdown: Markdown 보기
 post_create_issue: 문서에 이슈 생성
 post_create_project_issue: 프로젝트에 이슈 생성
 post_posts_in: Posts in
