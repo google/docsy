@@ -24,6 +24,7 @@ post_byline_by: By
 post_created: 作成
 post_last_mod: 最終更新
 post_edit_this: ページの編集
+post_view_markdown: Markdownを表示
 post_view_this: ページのソースコードを見る
 post_create_child_page: 子ページを作成
 post_create_issue: ドキュメントのissueを作成

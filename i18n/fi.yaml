@@ -20,6 +20,7 @@ post_byline_by: Kirjoittanut
 post_created: Luonut
 post_last_mod: Viimeksi muokattu
 post_edit_this: Muokkaa sivua
+post_view_markdown: Näytä Markdown
 post_view_this: Katso lähdekoodi
 post_create_child_page: Luo alisivu
 post_create_issue: Luo dokumentaation vikailmoitus

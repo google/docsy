@@ -24,6 +24,7 @@ post_byline_by: Par
 post_created: Créé
 post_last_mod: Dernière modification
 post_edit_this: Modifier cette page
+post_view_markdown: Voir le Markdown
 post_view_this: Afficher la source de la page
 post_create_child_page: Créer une page dans cette section
 post_create_issue: Signaler un problème dans la documentation
