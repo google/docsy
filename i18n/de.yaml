@@ -1,3 +1,10 @@
+# Alert labels
+caution: Achtung
+important: Wichtig
+note: Hinweis
+tip: Tipp
+warning: Warnung
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Zurück
 ui_pager_next: Weiter
@@ -12,7 +19,6 @@ ui_all: alle
 
 # Footer text
 footer_all_rights_reserved: Alle Rechte vorbehalten
-
 footer_privacy_policy: Datenschutzrichtlinie
 
 # Post (blog, article, etc.)
@@ -38,8 +44,7 @@ print_show_regular: Zur Standardansicht zurückkehren
 print_entire_section: Kapitel inkl. Unterseiten drucken
 
 # Community
-community_join: >-
-  Werde Teil der {{ .Site.Title }} Community
+community_join: Werde Teil der {{ .Site.Title }} Community
 community_introduce: >-
   {{ .Site.Title }} ist ein Open Source Projekt das jedes Mitglied der Community
   nutzen, verbessern und genießen kann. Wir würden uns freuen, wenn Du Dich an
