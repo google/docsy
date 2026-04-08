@@ -12,7 +12,7 @@ ignoreLogs:
   - warning-frontmatter-params-overrides # cSpell:disable-line
 
 outputs:
-  home: [HTML, markdown]
+  home: [HTML, markdown, LLMS]
   page: [HTML, markdown]
   section: [HTML, RSS, print, markdown]
 

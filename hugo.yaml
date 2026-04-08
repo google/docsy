@@ -8,6 +8,11 @@ params:
   rss_sections: [blog]
 
 outputFormats:
+  LLMS:
+    baseName: llms
+    isPlainText: true
+    mediaType: text/plain
+    notAlternative: true
   print:
     baseName: index
     # FIXME: leave isHTML unset (i.e. false) until we get a Hugo fix for

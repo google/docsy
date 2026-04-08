@@ -4,6 +4,10 @@
 
 ---
 
+LLMS index: [llms.txt](/llms.txt)
+
+---
+
 As you saw in our introduction, Docsy is a [Hugo](https://gohugo.io) theme,
 which means that if you want to use Docsy, you need to set up your website
 source so that the Hugo static site generator can find and use the Docsy theme

@@ -2,7 +2,7 @@
 title: Plan for Agent-friendly support
 date: 2026-04-04
 status: draft
-cSpell:ignore: Dachary llms imgproc readfile tabpane
+cSpell:ignore: Dachary llms imgproc readfile tabpane opentelemetry
 ---
 
 ## Goal
@@ -142,8 +142,8 @@ Current goldens (covering the main template code paths):
 ## Rollout
 
 - Phase 1: Markdown outputs via `all.md` (complete; verified on `docsy.dev`)
-- Phase 2: field-test on `docsy.dev` and external Docsy sites (in progress)
-- Phase 3: `llms.txt` (not started)
+- Phase 2: field-test on `docsy.dev` and external Docsy sites (complete)
+- Phase 3: `llms.txt` (complete)
 - Phase 4: docs (not started)
 
 ### Phase 1: Markdown outputs (complete)
@@ -165,37 +165,45 @@ because an empty search shell adds little value for agents.
 HTML output gains a `<link rel="alternate" type="text/markdown">` tag
 automatically — this is Hugo's built-in behavior for alternate output formats.
 
-### Phase 2: Field-testing (in progress)
+### Phase 2: Field-testing (complete)
 
 Validate the approach on real Docsy sites before investing in more complex
 alternatives:
 
 - [x] Enable Markdown output on `docsy.dev` and review generated pages.
-- [ ] Field-test on an external Docsy site (e.g. OpenTelemetry) to evaluate
+- [x] Field-test on an external Docsy site (`opentelemetry.io`) to evaluate
       whether the `all.md` output is useful enough for agents in practice.
-- [ ] Gather feedback on which pages benefit most, which are too noisy, and
-      whether the progressive override path is sufficient.
-- [ ] Decide whether to invest in type-specific templates, Markdown-aware
-      shortcodes, or other refinements — or whether the simple approach is good
-      enough.
+- [x] Iterate a few improvements based on field-testing.
+- [x] Confirm the simple `all.md` approach is good enough to proceed to
+      `llms.txt`.
 
-### Phase 3: `llms.txt`
+Current signal:
+
+- `opentelemetry.io` was processed successfully by an agent-ready evaluation
+  service.
+- The site scored `59%` (via Fern) before `llms.txt` support, which is good
+  enough for this phase.
+
+### Phase 3: `llms.txt` (in progress)
 
 Provide opt-in generation of a top-level `llms.txt`.
 
 The first version should stay curated and small:
 
-- site name and short description
-- canonical site URL
-- markdown home URL
-- links to the main documentation entry points
-- brief guidance to prefer Markdown URLs
+- Site name and short description
+- Canonical site URL
+- Markdown home URL
+- Links derived from the main menu
+- Brief guidance to prefer Markdown URLs
 
 For `docsy.dev`, start with English entry points unless multilingual discovery
 proves necessary.
 
-Validate that `llms.txt` is generated at the site root, links resolve, and home
-outputs do not regress.
+Status:
+
+- [x] Generate `/llms.txt` from the main menu on `docsy.dev`.
+- [x] Emit absolute Markdown URLs when a Markdown alternate output exists.
+- [x] Keep the first version English-only for `docsy.dev`.
 
 ### Phase 4: Docs
 

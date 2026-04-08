@@ -1,5 +1,9 @@
 # Blog
 
+LLMS index: [llms.txt](/llms.txt)
+
+---
+
 Section pages:
 
 - [Release 0.14.0 report and upgrade guide](/blog/2026/0.14.0/)
