@@ -4,6 +4,10 @@
 
 ---
 
+LLMS index: [llms.txt](/llms.txt)
+
+---
+
 ## Hello
 
 It may seem strange to see a "Hello" post from a project that's several years

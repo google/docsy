@@ -1,0 +1,50 @@
+# Agent-Friendly Docs — https://afdocs.dev/reference/config-file.html
+
+url: https://www.docsy.dev # Site to check. CLI flag overrides this
+
+checks:
+  # --- Content Discoverability ---
+  - llms-txt-exists
+  - llms-txt-valid
+  - llms-txt-size
+  - llms-txt-links-resolve
+  - llms-txt-links-markdown
+  - llms-txt-directive
+
+  # --- Markdown Availability ---
+  - markdown-url-support
+  - content-negotiation
+
+  # --- Page Size and Truncation Risk ---
+  - rendering-strategy
+  - page-size-markdown
+  - page-size-html
+  # - content-start-position
+
+  # --- Content Structure ---
+  - tabbed-content-serialization
+  - section-header-quality
+  - markdown-code-fence-validity
+
+  # --- URL Stability and Redirects ---
+  - http-status-codes
+  - redirect-behavior
+
+  # --- Observability and Content Health ---
+  # - llms-txt-freshness
+  # - markdown-content-parity
+  - cache-header-hygiene
+
+  # --- Authentication and Access ---
+  - auth-gate-detection
+  - auth-alternative-access
+
+# options:
+#   maxLinksToTest: 50
+#   samplingStrategy: random # random | deterministic | none
+#   maxConcurrency: 3
+#   requestDelay: 200
+#   requestTimeout: 30000
+#   thresholds:
+#     pass: 50000
+#     fail: 100000

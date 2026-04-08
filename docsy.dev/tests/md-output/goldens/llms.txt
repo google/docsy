@@ -1,0 +1,26 @@
+# Docsy
+
+> A Hugo theme for creating great technical documentation sites
+
+## Site index
+
+- [Home page](http://localhost/index.md)
+- [AGENTS.md](http://localhost/project/repo/agents/index.md)
+- [About](http://localhost/about/index.md): Docsy is a pre-configured Hugo theme that provides the core features and behaviors needed to create a technical documentation site
+- [Docs](http://localhost/docs/index.md)
+- [Examples](http://localhost/examples/index.md): Get started with a template or explore some Docsy-based sites
+- [Community](http://localhost/community/index.md)
+- [Blog](http://localhost/blog/index.md)
+
+## Documentation index
+
+- [Get started](http://localhost/docs/get-started/index.md)
+- [Content and Customization](http://localhost/docs/content/index.md)
+- [Deployment and previews](http://localhost/docs/deployment/index.md)
+- [Update Docsy](http://localhost/docs/updating/index.md)
+- [Best Practices](http://localhost/docs/best-practices/index.md)
+
+## Site locales
+
+- [English](http://localhost/index.md)
+- [Français](http://localhost/fr/index.md)

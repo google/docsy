@@ -4,6 +4,10 @@
 
 ---
 
+LLMS index: [llms.txt](/llms.txt)
+
+---
+
 Section pages:
 
 - [Adding Content](/docs/content/adding-content/): Add different types of content to your Docsy site.

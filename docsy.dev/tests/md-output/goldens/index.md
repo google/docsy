@@ -4,6 +4,10 @@
 
 ---
 
+LLMS index: [llms.txt](/llms.txt)
+
+---
+
 <link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_cc01584da1b14539.jpg" media="(max-width: 1200px)">
 <link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_b69ccedf938815cf.jpg" media="(min-width: 1200px)">
 <style>

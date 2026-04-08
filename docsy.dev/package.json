@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "_build": "npm run _hugo-dev --",
+    "_check:afdocs": "npx afdocs check --config agent-docs.config.yml --format scorecard",
     "_check:format": "npx prettier --config ../.prettierrc.json --check .",
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
     "_check:links": "make --keep-going check-links",
@@ -39,6 +40,7 @@
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
+    "afdocs": "^0.9.2",
     "autoprefixer": "^10.4.27",
     "cross-env": "^10.1.0",
     "hugo-extended": "0.157.0",
@@ -47,5 +49,5 @@
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- docsy htmltest postbuild precheck refcache rtlcss -"
+  "cSpell:ignore": "- afdocs docsy htmltest postbuild precheck refcache rtlcss -"
 }
