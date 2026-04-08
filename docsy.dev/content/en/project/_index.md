@@ -4,7 +4,6 @@ linkTitle: Project docs
 description: How Docsy theme and website are built, maintained, and deployed.
 aliases: [site]
 cascade:
-  outputs: [HTML]
   type: docs
   params:
     hide_feedback: true
