@@ -4,7 +4,7 @@ date: 2026-01-16
 cSpell:ignore: docsy
 ---
 
-> Report refreshed for commits through `3753ff78` on `main`.
+> Report refreshed for commits through `a1ddcab5` on `main`.
 
 ## Highlights since v0.13.0
 
@@ -68,6 +68,8 @@ cSpell:ignore: docsy
   the tree root ([#2495]).
 - **Documentation and style**: Release notes and Hugo upgrade guide updates,
   "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
+- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533]).
+- **ToC**: Fix sidebar width in xl viewports ([#2538]).
 
 ## References
 
@@ -85,6 +87,8 @@ cSpell:ignore: docsy
 [#2498]: https://github.com/google/docsy/pull/2498
 [#2502]: https://github.com/google/docsy/pull/2502
 [#2505]: https://github.com/google/docsy/pull/2505
+[#2533]: https://github.com/google/docsy/pull/2533
+[#2538]: https://github.com/google/docsy/pull/2538
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
 
 ## Action items
@@ -142,3 +146,26 @@ Verification, testing, and QA:
 - Structured as a release report focusing on new features and improvements, with
   a brief upgrade section that references the 0.13.0 upgrade guide for command
   examples.
+
+## Refresh note (a1ddcab5)
+
+- Plan and reports updated for commits through `a1ddcab5`. New commits in
+  [commit-inventory.md](commit-inventory.md) under "Since last refresh
+  (37be7dc7..a1ddcab5)": #2540 Release 0.14.1 preparation; #2542 version bump;
+  #2543 examples and misc; #2546 Apply .td-main flex only when sidebar exists
+  (0.14.2); #2547 pkg version build metadata and footer icons; #2548 Console
+  code blocks output not selectable, code style changes (friendly/native); #2549
+  Add name attribute to search input.
+- Changelog: 0.14.2 and "Next release" already cover #2546, console/code styles.
+  Added search input name (#2549) and version/footer (#2547) to Next release.
+- Blog: corrected [#2546] link (was pointing to #2538).
+
+## Refresh note (37be7dc7)
+
+- Plan and reports updated for commits through `37be7dc7`; new commit in
+  [commit-inventory.md](commit-inventory.md) under "Since last refresh": #2538
+  Fix ToC sidebar width in xl viewports.
+- Blog and changelog: #2538 is in 0.14.1 scope. Removed from 0.14.0 blog post;
+  changelog now has it under new v0.14.1 section only.
+- Outstanding: optional changelog line for documentation reorganization (site →
+  project) remains optional.

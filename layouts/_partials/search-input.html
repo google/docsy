@@ -1,3 +1,5 @@
+{{/* cSpell:ignore docsy docsearch absurlreplacer */ -}}
+
 {{ .Scratch.Set "docsy-search" 0 -}}
 
 {{ if .Site.Params.gcs_engine_id -}}
@@ -5,7 +7,10 @@
 
 <div class="td-search">
   <div class="td-search__icon"></div>
-  <input type="search" class="td-search__input form-control td-search-input" placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}" autocomplete="off">
+  <input type="search" name="q" {{/**/ -}}
+    class="td-search__input form-control td-search-input" {{/**/ -}}
+    placeholder='{{ T "ui_search" }}' {{/**/ -}}
+    aria-label='{{ T "ui_search" }}' autocomplete="off">
 </div>
 
 {{- end -}}
@@ -36,9 +41,10 @@
   <div class="td-search__icon"></div>
   <input
     type="search"
+    name="q"
     class="td-search__input form-control"
-    placeholder="{{ T "ui_search" }}"
-    aria-label="{{ T "ui_search" }}"
+    placeholder='{{ T "ui_search" }}'
+    aria-label='{{ T "ui_search" }}'
     autocomplete="off"
     {{/*
       The data attribute name of the json file URL must end with `src` since

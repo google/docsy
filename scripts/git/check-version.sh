@@ -5,17 +5,18 @@
 action_name="$1"  # "commit" or "push"
 hook_name="pre-$action_name"
 
-# Skip version check if on main branch
+# Skip version check if on main or a deployment branch
 current_branch="$(git branch --show-current 2>/dev/null)"
-if [ "$current_branch" = "main" ]; then
-  exit 0
-fi
+case "$current_branch" in
+  main|deploy/*) exit 0 ;;
+esac
 
 if [ -n "${SKIP_VERSION_CHECK:-}" ]; then
   exit 0
 fi
 
-output="$(npm run -s fix:version -- --silent 2>&1)"
+new_version="$(scripts/get-build-id.sh)"
+output="$(npm run -s set:version:git-info -- --silent 2>&1)"
 status=$?
 
 if [ $status -ne 0 ]; then
@@ -29,15 +30,14 @@ if [ -n "$output" ]; then
   echo >&2
   abort_action="$(echo "$action_name" | tr '[:lower:]' '[:upper:]')"
   echo "$abort_action ABORTED! Why?" >&2
-  echo 'Just to let you know that the package build ID has been updated. ' >&2
+  echo 'Just to let you know that the package version has been updated.' >&2
   if [ "$action_name" = "push" ]; then
     echo 'Commit and push again if you are ok with the new ID.' >&2
   else
     echo 'Commit again if you are ok with the new ID.' >&2
   fi
   echo >&2
-  echo "Don't want the version to be changed, maybe because this is a release" >&2
-  echo "branch? Set SKIP_VERSION_CHECK=1" >&2
+  echo "Don't want the version to be changed, then set SKIP_VERSION_CHECK=1" >&2
   echo >&2
   exit 1
 fi

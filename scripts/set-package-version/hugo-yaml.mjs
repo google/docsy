@@ -1,123 +1,140 @@
 #!/usr/bin/env node
 
+// cSpell:ignore docsy
+
 /**
- * Utilities for reading and writing the version field in docsy.dev/hugo.yaml.
+ * Utilities for reading and writing version fields in docsy.dev/hugo.yaml.
  */
 
+import assert from 'node:assert';
 import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-export const hugoYamlPath = path.join(
-  __dirname,
-  '..',
-  '..',
-  'docsy.dev',
-  'hugo.yaml',
+const KEY_AND_ANCHOR = {
+  latest: 'tdLatestVers',
+  dev: 'tdDevVers',
+  buildId: 'tdBuildId',
+};
+
+const VERSION_KEYS = Object.keys(KEY_AND_ANCHOR);
+const VERSION_IDS = Object.values(KEY_AND_ANCHOR);
+const versionKeysLineRegex = new RegExp(
+  `^(\\s{0,4})(${VERSION_KEYS.join('|')}):\\s*(.+)$`,
 );
+const versionIdsLineRegex = new RegExp(`(${VERSION_IDS.join('|')})`);
 
-export function readHugoYaml() {
-  const content = fs.readFileSync(hugoYamlPath, 'utf8');
-  const lines = content.split('\n');
-  const result = { params: {} };
+/**
+ * @typedef {Object} VersionInfo
+ * @property {string} [latest]
+ * @property {string} [dev]
+ * @property {string} [buildId]
+ */
 
-  // Simple YAML parser for the version field
-  // Look for "  version: <value>" under params section
-  let inParams = false;
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const trimmed = line.trim();
+/**
+ * Parses version info from YAML content.
+ *
+ * @param {string} yamlConfig - YAML config
+ * @returns {VersionInfo}
+ */
+export function parseParamsVersion(yamlConfig) {
+  const result = {};
+  for (const line of yamlConfig.split('\n')) {
+    // Match version IDs either as YAML aliases or in a comment
+    // (actually, anywhere in the line):
+    //   latest: &tdLatestVers v0.14.3
+    //   dev: 0.14.4-dev # tdDevVers
+    if (!line.match(versionIdsLineRegex)) continue;
 
-    // Check if we're entering or leaving the params section
-    if (trimmed === 'params:') {
-      inParams = true;
-      continue;
-    }
+    const match = line.match(versionKeysLineRegex);
+    if (!match) continue;
+    const [, _indentation, key, rawValueToken] = match;
+    if (!VERSION_KEYS.includes(key)) continue;
 
-    // If we hit a top-level key (starts at column 0, not params), exit params section
-    if (
-      line.match(/^[a-z_]+:/) &&
-      !line.match(/^params:/) &&
-      !line.match(/^  /)
-    ) {
-      inParams = false;
-      continue;
-    }
-
-    // Look for version line within params section
-    if (inParams) {
-      const versionMatch = line.match(/^  version:\s*(.+)$/);
-      if (versionMatch) {
-        result.params.version = versionMatch[1].trim();
-      }
-    }
+    // Matching, e.g.:
+    //   `v0.14.3`
+    //   `&tdLatestVers v0.14.3`
+    //   `&tdDevVers 0.14.4-dev # comment`
+    const valueMatch = rawValueToken.match(
+      /^(?:&\w+\s+)?["']?(.*?)["']?\s*(?:#.*)?$/,
+    );
+    if (!valueMatch) continue;
+    result[key] = valueMatch[1];
   }
 
   return result;
 }
 
-export function writeHugoYaml(hugoYaml) {
-  const content = fs.readFileSync(hugoYamlPath, 'utf8');
-  const lines = content.split('\n');
+export function readHugoYaml(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  return parseParamsVersion(content);
+}
 
-  // Update the version line under params
-  let inParams = false;
-  let updated = false;
-  const newLines = lines.map((line) => {
-    const trimmed = line.trim();
+/**
+ * Writes version info to YAML file.
+ *
+ * @param {VersionInfo} versionInfo
+ * @param {string} filePath
+ */
+export function writeHugoYaml(versionInfo, filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const newContent = updateYamlWithVersions(content, versionInfo);
+  fs.writeFileSync(filePath, newContent);
+}
 
-    // Check if we're entering or leaving the params section
-    if (trimmed === 'params:') {
-      inParams = true;
-      return line;
-    }
+/**
+ * Updates version info in YAML content.
+ *
+ * @param {string} yamlConfig - YAML file content
+ * @param {VersionInfo} data
+ * @returns {string} Updated YAML content
+ */
+export function updateYamlWithVersions(yamlConfig, { latest, dev, buildId }) {
+  const data = {
+    latest,
+    dev: dev ?? (latest ? nextDevVersion(latest) : undefined),
+    buildId: buildId ?? '',
+  };
+  return yamlConfig
+    .split('\n')
+    .map((line) => {
+      if (!line.match(versionIdsLineRegex)) return line;
+      const match = line.match(versionKeysLineRegex);
+      if (!match) return line;
+      const [_, indentation, key, rawValueToken] = match;
+      if (!VERSION_KEYS.includes(key)) return line;
+      const newValue = data[key];
+      if (newValue === undefined) return line;
 
-    // If we hit a top-level key (starts at column 0, not params), exit params section
-    if (
-      line.match(/^[a-z_]+:/) &&
-      !line.match(/^params:/) &&
-      !line.match(/^  /)
-    ) {
-      inParams = false;
-      return line;
-    }
+      const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
+      const anchor = anchorMatch ? anchorMatch[1] : '';
+      const commentMatch = rawValueToken.match(/(\s+#.*)$/);
+      const comment = commentMatch ? commentMatch[1] : '';
+      const value =
+        (key === 'latest' || key === 'dev') && !newValue.startsWith('v')
+          ? `v${newValue}`
+          : yamlScalar(newValue);
+      if (anchor) assert.strictEqual(anchor, `&${KEY_AND_ANCHOR[key]} `);
+      return `${indentation}${key}: ${anchor}${value}${comment}`;
+    })
+    .join('\n');
+}
 
-    // Update version line within params section
-    if (inParams) {
-      const versionMatch = line.match(/^  version:\s*(.+)$/);
-      if (versionMatch && hugoYaml.params?.version !== undefined) {
-        updated = true;
-        return `  version: ${hugoYaml.params.version}`;
-      }
-    }
+/**
+ * Derives dev version from latest: patch + 1, then "-dev", with v prefix (e.g. v0.14.4 → v0.14.5-dev).
+ *
+ * @param {string} latest - e.g. "0.14.4" or "v0.14.4"
+ * @returns {string} e.g. "v0.14.5-dev"
+ */
+export function nextDevVersion(latest) {
+  const s = String(latest).replace(/^v/i, '');
+  const m = s.match(/^(\d+)\.(\d+)\.(\d+)/);
+  if (!m) return `v${s}-dev`;
+  const [, major, minor, patch] = m;
+  return `v${major}.${minor}.${Number(patch) + 1}-dev`;
+}
 
-    return line;
-  });
-
-  // If version line wasn't found, add it after params:
-  if (!updated && hugoYaml.params?.version !== undefined) {
-    for (let i = 0; i < newLines.length; i++) {
-      if (newLines[i].trim() === 'params:') {
-        // Find the next non-indented line or end of params section
-        let insertIndex = i + 1;
-        while (
-          insertIndex < newLines.length &&
-          (newLines[insertIndex].match(/^  /) ||
-            newLines[insertIndex].trim() === '')
-        ) {
-          insertIndex++;
-        }
-        newLines.splice(
-          insertIndex,
-          0,
-          `  version: ${hugoYaml.params.version}`,
-        );
-        break;
-      }
-    }
+function yamlScalar(value) {
+  if (value === '') {
+    return "''";
   }
-
-  fs.writeFileSync(hugoYamlPath, newLines.join('\n'));
+  return String(value);
 }

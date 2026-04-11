@@ -32,8 +32,8 @@ and uses Prettier and Markdownlint to enforce basic formatting rules.
 [changelog]: /project/about/changelog/
 [cl-style-guide]: /project/about/changelog/#style-guide
 [present tense]: https://developers.google.com/style/tense
-[release]: <{{% param productionURL %}}/tags/release/>
-[upgrade]: <{{% param productionURL %}}/tags/upgrade/>
+[release]: <{{% _param baseURL %}}/tags/release/>
+[upgrade]: <{{% _param baseURL %}}/tags/upgrade/>
 
 ### Lists
 

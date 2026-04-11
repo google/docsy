@@ -9,6 +9,12 @@
 {{ $gh_project_repo := $.Param "github_project_repo" -}}
 {{ $gh_branch := $.Param "github_branch" | default "main" -}}
 <div class="td-page-meta ms-2 pb-1 pt-2 mb-0">
+{{ with .AlternativeOutputFormats.Get "markdown" -}}
+<a href="{{ .RelPermalink }}" class="td-page-meta__markdown"> {{/**/ -}}
+  <i class="fa-brands fa-markdown fa-fw"></i> {{ T "post_view_markdown" -}}
+</a>
+{{ end -}}
+
 {{ if $gh_url -}}
   {{ warnf "Warning: use of `github_url` is deprecated. For details, see https://www.docsy.dev/docs/content/repository-links/#github_url-optional" -}}
   <a href="{{ $gh_url }}" target="_blank"><i class="fa-solid fa-pen-to-square fa-fw"></i> {{ T "post_edit_this" }}</a>
@@ -46,7 +52,7 @@
 
 {{ end -}}
 {{ with .CurrentSection.AlternativeOutputFormats.Get "print" -}}
-  <a id="print" href="{{ .RelPermalink | safeURL }}"><i class="fa-solid fa-print fa-fw"></i> {{ T "print_entire_section" }}</a>
+  <a id="print" href="{{ .RelPermalink }}"><i class="fa-solid fa-print fa-fw"></i> {{ T "print_entire_section" }}</a>
 {{ end }}
 </div>
 {{ end -}}

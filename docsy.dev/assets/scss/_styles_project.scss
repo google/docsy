@@ -4,15 +4,17 @@
 @import 'td/color-adjustments-dark';
 @import 'td/code-dark';
 @import 'td/extra';
+@import 'td/extra/bs-defaults';
 @import 'td/gcs-search-dark';
 
 // Custom Docsy website styles below this point:
 @import 'blog';
 @import 'navbar';
 
-// To keep the `td/extra` color adjustments, while dropping the text-decoration,
-// use the following class (on your body element), or copy the class styles to
-// your project's style file. This class isn't used, it's just an example.
+// EXAMPLE: To keep the `td/extra` color adjustments, while dropping the
+// text-decoration, use the following class (on your body element), or copy the
+// class styles to your project's style file. This class isn't used, it's just
+// an example.
 ._td-navbar-no-decoration {
   .td-navbar {
     .nav-link {

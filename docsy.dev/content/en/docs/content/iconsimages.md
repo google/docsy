@@ -82,31 +82,48 @@ If you have special favicon requirements, you can create your own
 
 ### Landing pages
 
-Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blocks-cover) make
-it easy to add large cover images to your landing pages. The shortcode looks for
-an image with the word "background" in the name inside the landing page's
-[Page Bundle](https://gohugo.io/content-management/page-bundles/) - so, for
-example, if you've copied the example site, the landing page image in
-`content/en/_index.html` is `content/en/featured-background.jpg`.
+Docsy's [`blocks/cover` shortcode](/docs/content/shortcodes/#blocks-cover) makes
+it easy to add cover images (also known as hero images) to landing pages. The
+shortcode looks for an image with the word "background" in the name within the
+landing page's [page bundle](adding-content/#page-bundles).
 
-You specify the preferred display height of a cover block container (and hence
-its image) using the block's `height` parameter. For a full viewport height, use
-`full`:
+For example, the example site's landing page `content/en/_index.md` uses the
+image `content/en/featured-background.jpg`, which is in the same directory --
+see the [content/en][] folder on GitHub.
 
-```html
-{{</* blocks/cover title="Welcome to the Docsy Example Project!" image_anchor="top" height="full" */>}}
+[content/en]: https://github.com/google/docsy-example/tree/main/content/en
+
+Use the block's [`height` parameter][] to set the preferred display height of
+the cover container (and therefore its image). For a full viewport height, use
+`full`, along with the `td-below-navbar` helper class to position the cover
+below the navbar:
+
+[`height` parameter]: shortcodes/#blocks
+
+```go-html-template
+{{%/* blocks/cover
+  title="Welcome to Docsy!"
+  image_anchor="top"
+  height="full td-below-navbar"
+*/%}}
 ...
-{{</* /blocks/cover */>}}
+{{%/* /blocks/cover */%}}
 ```
 
-For a shorter image, as in the example site's About page, use one of `min`,
-`med`, `max` or `auto` (the actual height of the image):
+For a shorter image, as in the [example site's About][] page, use one of `min`,
+`med`, `max`, or `auto` (the image's natural height):
 
-```html
-{{</* blocks/cover title="About the Docsy Example" image_anchor="bottom" height="min" */>}}
+```go-html-template
+{{%/* blocks/cover
+  title="About the Docsy Example"
+  image_anchor="bottom"
+  height="min td-below-navbar"
+*/%}}
 ...
-{{</* /blocks/cover */>}}
+{{%/* /blocks/cover */%}}
 ```
+
+[example site's About]: <{{% param example_site_url %}}/about/>
 
 ### Other pages
 

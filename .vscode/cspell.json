@@ -2,12 +2,20 @@
 {
   "version": "0.2",
   "caseSensitive": true,
+  "import": [
+    "@cspell/dict-fr-fr/cspell-ext.json"
+  ],
+  "dictionaries": [
+    "fr-fr"
+  ],
   "words": [
     "anchorize",
+    "baseof",
     "chalin",
     "CNCF",
     "docset",
     "docsets",
+    "docsy",
     "Docsy",
     "errorf",
     "Gantt",
@@ -20,11 +28,16 @@
     "hugo",
     "isset",
     "lastmod",
+    "llms",
     "markdownify",
+    "mentees",
     "navbars",
+    "nguyen",
     "nvmrc",
     "Occitan",
     "pageinfo",
+    "pexels",
+    "quang",
     "refcache",
     "relref",
     "scrollspy",
@@ -33,8 +46,11 @@
     "subfolders",
     "tabpane",
     "unmarshal",
+    "unselectable",
     "upvote",
     "viewports",
+    "vinh",
+    "vsoch",
     "warnf",
     "warnidf",
     "wrapup"

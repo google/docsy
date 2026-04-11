@@ -2,15 +2,6 @@
 
 @include td-box-height-modifiers('.td-cover-block');
 
-.td-cover-block {
-  &.td-below-navbar {
-    @include media-breakpoint-up(md) {
-      margin-top: $td-navbar-min-height;
-      padding-top: $td-block-space-top-base !important;
-    }
-  }
-}
-
 .td-cover-logo {
   margin-right: 0.5em;
 }

@@ -64,14 +64,14 @@ gcs_engine_id = "..."
 
 To use your own Custom Search Engine, set `gcs_engine_id` to your search engine
 ID. For details, see
-[Configure search with a Google Custom Search Engine](/docs/content/search/#configure-search-with-a-google-custom-search-engine).
+[Configure search with a Google Custom Search Engine](/docs/content/search/#google-search).
 
 ## What's next?
 
 - [Add content and customize your site](/docs/content/)
 - Get some ideas from our
   [Example Site](https://github.com/google/docsy-example) and other
-  [Examples](/docs/examples/).
+  [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
 [configuration file]:

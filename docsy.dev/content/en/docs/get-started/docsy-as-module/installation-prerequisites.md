@@ -4,7 +4,6 @@ date: 2021-12-08
 weight: 1
 description: >
   Prerequisites for building a site with Docsy as a Hugo Module.
-cSpell:ignore: docsy
 ---
 
 This page describes the prerequisites for building a site that uses Docsy as a
@@ -72,17 +71,12 @@ Install Hugo using
 
 ### As an `npm` module
 
-You can install Hugo as an `npm` module using
-[`hugo-bin`](https://www.npmjs.com/package/hugo-bin). This adds `hugo-bin` to
-your `node_modules` folder and adds the dependency to your `package.json` file.
-To install the extended version of Hugo:
+You can conveniently install any Hugo version using [hugo-extended][] (replace
+`latest` with the version you want to install):
 
 ```bash
-npm install hugo-extended --save-dev
+npm install hugo-extended@latest --save-dev
 ```
-
-See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for
-usage details.
 
 ## Install Go language
 
@@ -146,7 +140,7 @@ must use a local install.
 To ensure you can properly build your site beyond executing `hugo server`, you
 must have the
 [latest long term support (LTS) Version](https://nodejs.org/en/about/releases/)
-of Node.js. If you do not have the latest LTS version, you may see the one of
+of Node.js. If you do not have the latest LTS version, you may see one of the
 following errors:
 
 ```
@@ -175,3 +169,5 @@ site
 
 - [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
 - [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
+
+[hugo-extended]: https://www.npmjs.com/package/hugo-extended

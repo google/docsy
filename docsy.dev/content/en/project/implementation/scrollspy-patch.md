@@ -25,9 +25,9 @@ about this bug, see [#2329].
 
 Docsy 0.13.0 implements a runtime patch for [ScrollSpy] that intercepts
 ScrollSpy's initialization to properly handle heading IDs starting with digits
-or contain other characters that form invalid CSS selectors. This allows active
-TOC entry tracking to work correctly without altering the original heading IDs,
-so links to headings continue to work as expected.
+or containing other characters that form invalid CSS selectors. This allows
+active TOC entry tracking to work correctly without altering the original
+heading IDs, so links to headings continue to work as expected.
 
 The patch is automatically applied when ScrollSpy is enabled (which is the
 default). For implementation details, see [#2382], [#2383].

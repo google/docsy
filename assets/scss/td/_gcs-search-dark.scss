@@ -19,6 +19,7 @@
     --td-gcs-border: var(--bs-border-color);
     --td-gcs-success: var(--bs-success);
     --td-gcs-radius: var(--bs-border-radius);
+    --td-gcs-overlay-alpha: 0.72;
   }
 
   .gs-web-image-box {
@@ -110,6 +111,39 @@
       border-color: var(--td-gcs-primary) !important;
       color: #fff !important;
       border-radius: var(--td-gcs-radius);
+    }
+
+    /* ------------------------------------------------------------
+    * MODAL BACKDROP (IMAGE OVERLAY)
+    * ------------------------------------------------------------ */
+    .gsc-modal-background-image {
+      background-color: rgba(
+        var(--td-gcs-bg),
+        var(--td-gcs-overlay-alpha)
+      ) !important;
+      background-image: none !important;
+    }
+
+    .gsc-modal-background-image.gsc-modal-background-image-visible {
+      background-color: rgba(
+        var(--td-gcs-bg),
+        var(--td-gcs-overlay-alpha)
+      ) !important;
+      background-image: none !important;
+    }
+
+    .gsc-results-wrapper-overlay {
+      background-color: rgba(
+        var(--td-gcs-bg),
+        var(--td-gcs-overlay-alpha)
+      ) !important;
+    }
+
+    .gsc-results-wrapper-overlay.gsc-results-wrapper-visible {
+      background-color: rgba(
+        var(--bs-secondary-bg-rgb),
+        var(--td-gcs-overlay-alpha)
+      ) !important;
     }
 
     /* ------------------------------------------------------------

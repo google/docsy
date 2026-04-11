@@ -12,9 +12,9 @@ ignoreLogs:
   - warning-frontmatter-params-overrides # cSpell:disable-line
 
 outputs:
-  home: [HTML]
-  page: [HTML]
-  section: [HTML, RSS, print]
+  home: [HTML, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, print, markdown]
 
 imaging:
   resampleFilter: CatmullRom # cSpell:disable-line
@@ -26,11 +26,10 @@ languages:
     languageName: English
     params:
       description: Docsy does docs
-  # Placeholder language used to demo multilingual support
-  xx:
-    languageName: Placeholder
+  fr:
+    languageName: Français
     params:
-      description: Docsy does multilingual docs
+      description: Docsy, c’est la doc.
 
 markup:
   tableOfContents:
@@ -52,7 +51,7 @@ markup:
 
 params:
   # Officially supported Hugo version. Can be >= the Docsy min Hugo version.
-  hugoMinVersion: &hugoMinVersion 0.155.2
+  hugoMinVersion: &hugoMinVersion 0.155.3
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
@@ -61,8 +60,6 @@ params:
     from_year: 2018
     to_year: present
   privacy_policy: https://policies.google.com/privacy
-  archived_version: false
-  version: 0.14.0-dev
   github_repo: https://github.com/google/docsy
   github_project_repo: https://github.com/google/docsy
   github_subdir: docsy.dev
@@ -118,10 +115,18 @@ params:
         icon: fa-brands fa-stack-overflow
         desc: Practical questions and curated answers
     developer:
+      - name: Contributing
+        url: /docs/contributing/
+        icon: fa-solid fa-code-fork
+        desc: How to contribute
       - name: Project docs and site info
         url: /project/
-        icon: fa fa-book
+        icon: fa-solid fa-book
         desc: Site design documentation and resources
+      - name: Tests
+        url: /tests/
+        icon: fa-solid fa-flask
+        desc: Test and demo pages
       - name: GitHub
         url: https://github.com/google/docsy
         icon: fa-brands fa-github
@@ -139,16 +144,15 @@ params:
   drawio:
     enable: true
 
-baseURL: *productionURL
+  # UG helpers: use with _param
+  FA: <i class="fa-{1} fa-{2} text-{3} px-1"></i>
+  FAS: <i class="fa-solid fa-{1} text-{2} px-1"></i>
+  FAS_LG: <i class="fa-solid fa-{1} text-{2} fa-lg"></i>
+  # Badge usage: {{% _param BADGE text color %}}
+  BADGE: <span class="badge text-bg-{2} rounded-pill text-small">{1}</span>
+  btn-lg: class="btn btn-lg btn-{1}" role="button"
 
-menu:
-  main:
-    - name: Example Site
-      weight: 40
-      url: *exampleSiteURL
-      post:
-        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
-        aria-hidden="true"></i></sup>
+baseURL: *productionURL
 
 taxonomies:
   tag: tags
@@ -164,21 +168,19 @@ security:
       # Netlify build env var
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
-sites: &sites
-  matrix:
-    languages: [en, xx]
-
 module:
   hugoVersion:
     extended: true
     min: *hugoMinVersion
   mounts:
-    # If our mock language (xx) had any content we'd configure this
-    # differently, but for now, this will do.
+    # French landing page overrides home for fr
+    - source: content/fr
+      target: content
+      sites: { matrix: { languages: [fr] } }
+    # English content for en and as fallback for fr (other pages)
     - source: content/en
       target: content
-      # English content for both en, and as fallback for xx sites
-      sites: *sites
+      sites: &sites { matrix: { languages: [en, fr] } }
     # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
@@ -192,12 +194,13 @@ module:
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
     # Tests
-    - source: content/en/featured-background.jpg
+    # cSpell:ignore quang nguyen vinh therato
+    - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
       target: content/tests/blocks-cover/height-auto/background.jpg
       sites: *sites
-    - source: content/en/featured-background.jpg
+    - source: content/en/about/background-pexels-therato-3472764.jpg
       target: content/tests/blocks-cover/height-full/background.jpg
       sites: *sites
-    - source: content/en/featured-background.jpg
+    - source: *bg-img
       target: content/tests/blocks-cover/height-min/background.jpg
       sites: *sites

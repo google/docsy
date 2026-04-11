@@ -3,17 +3,15 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: deining docsy FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane
+cSpell:ignore: deining FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark
 ---
 
 We only document **breaking changes** and release **highlights** in this page.
 For the full list of changes of any particular release, see the [release
 notes][releases].
 
-Useful links:
-
-- [Releases] & [tags]. Jump to the [latest] release.
-- [Milestones]
+Useful links: [Releases] & [tags], jump to the [latest] release, and view the
+[milestones].
 
 [latest]: https://github.com/google/docsy/releases/latest
 [milestones]: https://github.com/google/docsy/milestones
@@ -35,6 +33,9 @@ Useful links:
     needed.
 
 ## Definitions
+
+<details>
+<summary>Definitions...</summary>
 
 ### Public customization surface {#public}
 
@@ -110,11 +111,89 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
+</details>
+
+## Next release
+
+> **UNRELEASED**: v0.14.3 or v0.15.0 - still under development
+
+<details>
+<summary>To be completed</summary>
+
+For the full list of changes, see the [0.15.0][] release page.
+
+[**Breaking changes**](#breaking-change):
+
+- ...
+
+**New**:
+
+- ...
+
+**Other changes**:
+
+- ...
+
+[**Experimental**](#experimental):
+
+- ...
+
+</details>
+
+[0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
+
+## v0.14.3 {#v0.14.3}
+
+Patch release [0.14.3][] applies the layout fix for [#2561][], which ensures
+`.td-main > .row` grows vertically ([#2569]).
+
+[#2561]: https://github.com/google/docsy/issues/2561
+[#2569]: https://github.com/google/docsy/pull/2569
+[0.14.3]: https://github.com/google/docsy/releases/v0.14.3
+
+## v0.14.2 {#v0.14.2}
+
+**Key fix** for this patch: Apply `.td-main` flex only when sidebar exists
+([#2546]).
+
+For the full list of changes, see the [release report][0.14.2-blog] and
+[0.14.2][] release page.
+
+[**Breaking changes**](#breaking-change) (style-only):
+
+- **[Default code styles][0.14.2-blog]** changed from `tango`/`onedark` to
+  `friendly`/`native` for sites using `td/code-dark` ([#2548]).
+
+**New**:
+
+- **[Console block content selection][0.14.2-blog]**: selection and copy-code
+  now only includes commands, not output ([#2548]).
+
+**Other changes**:
+
+- Added `name` attribute to search form field for better semantics and autofill
+  ([#2549]).
+- Package version build metadata and footer icon tweaks ([#2547]).
+
+[#2546]: https://github.com/google/docsy/pull/2546
+[#2547]: https://github.com/google/docsy/pull/2547
+[#2548]: https://github.com/google/docsy/pull/2548
+[#2549]: https://github.com/google/docsy/pull/2549
+[0.14.2]: https://github.com/google/docsy/releases/v0.14.2
+[0.14.2-blog]: /blog/2026/0.14.0/#0.14.2
+
+## v0.14.1 {#v0.14.1}
+
+Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
+
+[0.14.1]: https://github.com/google/docsy/releases/v0.14.1
+
 ## v0.14.0 {#v0.14.0}
 
-> **UNRELEASED: this planned version is still under development**
+**Resources**:
 
-For the full list of changes, see the [0.14.0] release page.
+- [Release 0.14.0 report and upgrade guide][0.14.0-blog]
+- [0.14.0][] release page for the full list of changes
 
 [**Breaking changes**](#breaking-change):
 
@@ -133,9 +212,11 @@ For the full list of changes, see the [0.14.0] release page.
 **New**:
 
 - **[Markdown alert syntax][0.14.0-blog-alerts]**: added support for Hugo's
-  Markdown alert syntax.
+  Markdown alert syntax ([#2443]).
 - **`td/site-build-info/netlify` shortcode** (experimental), see
-  [Shortcodes][0.14.0-blog-shortcodes].
+  [Shortcodes][0.14.0-blog-shortcodes] ([#2444]).
+- **`td-below-navbar` helper class** for [`blocks/cover`][0.14.0-blog-cover]
+  positioning ([#2480]).
 
 **Other changes**:
 
@@ -150,14 +231,20 @@ For the full list of changes, see the [0.14.0] release page.
 - **Internationalization**: [updated
   translations][0.14.0-blog-internationalization] for multiple locales.
 - Fixed nested **`sidebar_root_for`** bug ([#2470]).
+- Fixed Google-search modal colors in dark mode ([#2524]).
+- **RTL**: fixes for code blocks and foldable-nav icons ([#2533]).
 
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
 [#2431]: https://github.com/google/docsy/issues/2431
+[#2443]: https://github.com/google/docsy/pull/2443
+[#2444]: https://github.com/google/docsy/pull/2444
 [#2470]: https://github.com/google/docsy/pull/2470
 [#2477]: https://github.com/google/docsy/pull/2477
 [#2480]: https://github.com/google/docsy/pull/2480
-[0.14.0]: https://github.com/google/docsy/releases/v0.14.0
+[#2524]: https://github.com/google/docsy/pull/2524
+[#2533]: https://github.com/google/docsy/pull/2533
+[#2538]: https://github.com/google/docsy/pull/2538
 [0.14.0-blog-alerts]: /blog/2026/0.14.0/#alerts
 [0.14.0-blog-cover]: /blog/2026/0.14.0/#blocks-cover
 [0.14.0-blog-heading-aliases]: /blog/2026/0.14.0/#heading-aliases
@@ -168,6 +255,8 @@ For the full list of changes, see the [0.14.0] release page.
 [0.14.0-blog-shortcodes]: /blog/2026/0.14.0/#shortcodes
 [0.14.0-blog-style-fixes]: /blog/2026/0.14.0/#style-improvements-and-fixes
 [0.14.0-blog-swagger]: /blog/2026/0.14.0/#swagger-scss
+[0.14.0-blog]: /blog/2026/0.14.0/
+[0.14.0]: https://github.com/google/docsy/releases/v0.14.0
 
 ## v0.13.0 {#v0.13.0}
 
@@ -320,7 +409,7 @@ For the full list of changes, see the [0.11.0] release page.
 
 **New**:
 
-- Support for Right-To-Left (RLT) languages is reintroduced via [Bootstrap's
+- Support for Right-To-Left (RTL) languages is reintroduced via [Bootstrap's
   support for RTL][bs-rtl]. For details, see [Right-to-left languages][rtl].
 - The URL to your project's contribution guidelines is configurable. For
   details, see [Adding a community page].
@@ -351,8 +440,8 @@ dark-mode support][dark-mode].
 
 **Style changes** (potentially breaking):
 
-- Adjusted the style of various shortcode and elements so that they are
-  compatible with light/dark mode. For details see, **Important style changes**
+- Adjusted the style of various shortcodes and elements so that they are
+  compatible with light/dark mode. For details, see **Important style changes**
   in [Color themes and dark-mode support][dark-mode].
 
 [#1952]: https://github.com/google/docsy/pull/1952
@@ -379,7 +468,7 @@ this release are listed next.
   For any given page, repository links are now computed from a page's _resolved_
   `File` path &mdash; as resolved _through_ mount points, if any. That is, the
   path used is the one that refers to the file's actual location on disk, not
-  it's logical path in Hugo's [union file system].
+  its logical path in Hugo's [union file system].
 
   This is a breaking change for pages of sites that use mounts and
   [path_base_for_github_subdir]. Projects will need to adjust the value of
@@ -580,7 +669,7 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 - **Simplified use of mermaid diagrams**: when using a `mermaid` code block on
   your page, mermaid is now automatically enabled (needs hugo version >=
-  0.93.0). For existing sites build with hugo 0.93.0+, parameter
+  0.93.0). For existing sites built with hugo 0.93.0+, parameter
   `mermaid.enable` can be removed from site config.
 
 - **Add render hook for chem code blocks**: add auto-activation of `math` and
@@ -637,9 +726,10 @@ are documented below.
 [gtag.js]: https://support.google.com/analytics/answer/10220869
 [styling your project logo and name]:
   /docs/content/lookandfeel/#styling-your-project-logo-and-name
-[upgraded fontawesome to v6]: https://docs.fontawesome.com/v6/web/setup/upgrade
+[upgraded fontawesome to v6]:
+  https://web.archive.org/web/20251117042118/https://docs.fontawesome.com/v6/web/setup/upgrade
 [what's changed in v6]:
-  https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
+  https://web.archive.org/web/20251116052945/https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed
 
 ## v0.5.0 {#v0.5.0}
 
@@ -747,13 +837,15 @@ For the full list of changes, see the [0.2.0] release page.
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.X.Y] release page.
+For the full list of changes, see the [0.X.Y][] release page.
 
 [**Breaking changes**](#breaking-change):
 
 - ...
 
 **New**:
+
+- ...
 
 **Other changes**:
 

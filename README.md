@@ -1,5 +1,7 @@
 # Docsy
 
+<!-- markdownlint-disable no-docsy-dev-external-urls -->
+
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
 providing simple navigation, site structure, and more.
 
@@ -51,7 +53,7 @@ You can find an example project that uses Docsy in the
 [Docsy Example Project repo](https://github.com/google/docsy-example).The Docsy
 Example Project is hosted at [example.docsy.dev](https://example.docsy.dev). For
 real-life examples of sites that use Docsy (and their source repos), see our
-[Examples](https://www.docsy.dev/docs/examples/) page.
+[Examples and templates](https://www.docsy.dev/examples/) page.
 
 To use the Docsy theme for your own site:
 
@@ -106,11 +108,8 @@ This project is licensed under the Apache License 2.0, see
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
-
-<!-- FIXME: once 0.14.0 is released, update the link to the changelog page -->
-
 [official-support]:
-  https://www.docsy.dev/blog/2024/0.10.0/#hugo-breaking-changes-and-deprecation-notices
+  https://www.docsy.dev/project/about/changelog/#official-support
 [releases]: https://github.com/google/docsy/releases
 
 <!-- cSpell:ignore docsy -->

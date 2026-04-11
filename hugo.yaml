@@ -8,7 +8,12 @@ params:
   rss_sections: [blog]
 
 outputFormats:
-  PRINT:
+  LLMS:
+    baseName: llms
+    isPlainText: true
+    mediaType: text/plain
+    notAlternative: true
+  print:
     baseName: index
     # FIXME: leave isHTML unset (i.e. false) until we get a Hugo fix for
     # https://github.com/gohugoio/hugo/issues/14381

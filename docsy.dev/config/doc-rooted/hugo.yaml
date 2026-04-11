@@ -1,0 +1,13 @@
+# Publish docs pages/sections at site root (no /docs prefix).
+permalinks:
+  page:
+    docs: /:sections[1:]/:slug/
+  section:
+    docs: /:sections[1:]
+
+# Make home pages link-only so docs section landing pages can own root URLs;
+# this avoids Hugo warning about duplicate pages rendering at the site roots
+# (for each locale).
+cascade:
+  build: { render: link }
+  target: { path: / }

@@ -5,7 +5,7 @@ weight: 4
 description: Known issues when installing Docsy theme.
 ---
 
-The following issues are know on [MacOS](#macos) and on
+The following issues are known on [MacOS](#macos) and on
 [Windows Subsystem for Linux](#windows-subsystem-for-linux-wsl):
 
 ### MacOS
@@ -41,7 +41,7 @@ To temporarily allow more open files:
    ```
 
 2. Increase the limit to `65535` files by running the following commands. If
-   your site has fewer files, you can set choose to set lower soft (`65535`) and
+   your site has fewer files, you can choose to set lower soft (`65535`) and
    hard (`200000`) limits.
 
    ```shell

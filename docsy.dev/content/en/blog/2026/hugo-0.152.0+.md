@@ -1,18 +1,18 @@
 ---
 title: Hugo 0.152.0-0.155.x upgrade guide
 linkTitle: Hugo 0.152+ upgrade guide
-date: 2026-02-04
+date: 2026-02-09
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
-body_class: release-highlights published-draft-post
+body_class: release-highlights
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: docsy dartsass libsass IPTC multihost libwebp opentelemetry
+cSpell:ignore: dartsass libsass IPTC multihost libwebp opentelemetry
 ---
 
 This post summarizes the breaking and notable changes in Hugo 0.152.0 to
-0.155.2. It is a companion post to the Docsy [0.14.0](0.14.0/) and
+0.155.3. It is a companion post to the Docsy [0.14.0](0.14.0/) and
 [0.13.0](../2025/0.13.0/) release and upgrade guides.
 
 ## Upgrade summary
@@ -32,7 +32,7 @@ you may need to take.
 - Optionally skim:
   - [Known issues and fixes](#known-issues)
   - [Notable changes](#notable-changes)
-- {{% _param FA rocket primary %}} Jump to [Upgrade to Hugo 0.155.x](#upgrade)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.155.x](#upgrade)
   once you're ready
 
 ## {{% _param BREAKING %}} YAML yes/no tokens are strings (0.152.0) <a id="0.152.0"></a> {#yaml-yes-no-etc}
@@ -231,8 +231,8 @@ Notable changes that are non-breaking include:
 - `GoogleAnalytics.RespectDoNotTrack` default changed to `true`.
 - Duplicate content path warnings were removed (less noisy, but may hide
   issues).
-- **macOS distributions** are solely as signed and notarized `.pkg` installers,
-  `.tar.gz` is no longer supported. See the notes below.
+- **macOS distributions** are now distributed solely as signed and notarized
+  `.pkg` installers, `.tar.gz` is no longer supported. See the notes below.
 
 > [!NOTE] macOS distributions and the `hugo-extended` NPM package
 >
@@ -241,7 +241,7 @@ Notable changes that are non-breaking include:
 > - The [hugo-extended][] NPM package briefly required `sudo` in versions
 >   0.153.0–0.153.3.
 
-## {{% _param FA rocket primary %}} Upgrade to Hugo 0.155.x {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.155.x {#upgrade}
 
 After addressing all [breaking changes](#breaking-changes) and
 [deprecations](#deprecations), upgrade to the latest release of Hugo 0.155.x. If

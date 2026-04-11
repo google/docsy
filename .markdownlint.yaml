@@ -15,3 +15,10 @@ no-inline-html: false
 no-trailing-punctuation: false
 no-trailing-spaces: {  br_spaces: 0, strict: true}
 # table-column-style: false
+
+# Link-validation rules (from scripts/_md-rules/link-rules.mjs)
+
+no-docsy-dev-external-urls:
+  pattern: 'https?://(?:www\.)?docsy\.dev/'
+  message: Use a site-relative path instead of the full docsy.dev URL.
+  replace: '/'

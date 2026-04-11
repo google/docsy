@@ -3,8 +3,7 @@ title: Deploy Docsy inside a Docker container
 weight: 3
 date: 2018-07-30
 description: >
-  Instructions on how to setup and run a local Docsy site with Docker.
-cSpell:ignore: docsy
+  Instructions on how to set up and run a local Docsy site with Docker.
 ---
 
 We provide a Docker image that you can use to run and test your Docsy site
@@ -25,7 +24,7 @@ locally, without having to install all Docsy's dependencies.
 ## Create your repository from the docsy-example template
 
 The docsy-example repository provides a basic site structure that you can use as
-starting point to create your own documentation.
+a starting point to create your own documentation.
 
 1. Use the [docsy-example template](https://github.com/google/docsy-example) to
    [create your own repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
@@ -63,7 +62,7 @@ to run your site.
 
 ## Cleanup
 
-To cleanup your system and delete the container image follow the next steps.
+To clean up your system and delete the container image, follow the next steps.
 
 1. Stop Docker Compose with **Ctrl + C**.
 

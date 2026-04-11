@@ -196,8 +196,8 @@ between accounts if you have access to multiple documentation sites.
    event, then none have been registered for the selected period. Adjust the
    period as necessary.
 
-Note that you might be required to create a custom report if you'd like better
-visualize individual data points (per page) along with average values.
+Note that you might be required to create a custom report if you'd like to
+better visualize individual data points (per page) along with average values.
 
 [events]: https://support.google.com/analytics/answer/9322688
 
@@ -289,7 +289,7 @@ form that collects the user's email address to your site source:
 
 ## Search Engine Optimization meta tags
 
-To learn how to optimize your site for SEO see,
+To learn how to optimize your site for SEO, see
 [Search Engine Optimization (SEO) Starter Guide](https://developers.google.com/search/docs/beginner/seo-starter-guide).
 
 Google

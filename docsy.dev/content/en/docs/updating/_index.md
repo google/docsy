@@ -5,7 +5,7 @@ weight: 8
 ---
 
 We hope to continue to make improvements to the theme
-[along with the Docsy community](/docs/contribution-guidelines/). If you have
+[along with the Docsy community](/docs/contributing/). If you have
 cloned the example site (or are otherwise using the theme as a Hugo Module or
 Git submodule), you can easily update the Docsy theme in your site yourself. If
 you have cloned the theme itself into your own project you can also update,

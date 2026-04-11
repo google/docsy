@@ -1,14 +1,65 @@
-<div class="dropdown">
-  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{- .Site.Params.version_menu -}}
+{{/* cSpell:ignore pagelinks */ -}}
+
+{{ $menuName := .Site.Params.version_menu -}}
+
+<div class="td-version-menu dropdown">
+  <a class="nav-link dropdown-toggle td-version-menu__title" href="#" role="button"
+    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="td-version-menu__title-text">
+      {{- $menuName -}}
+    </span>
   </a>
+  {{/* */ -}}
+
   <ul class="dropdown-menu">
     {{ $path := "" -}}
     {{ if .Site.Params.version_menu_pagelinks -}}
       {{ $path = .Page.RelPermalink -}}
     {{ end -}}
+    {{ $baseURL := strings.TrimSuffix "/" $.Site.BaseURL -}}
     {{ range .Site.Params.versions -}}
-    <li><a class="dropdown-item" href="{{ .url }}{{ $path }}">{{ .version }}</a></li>
-    {{ end -}}
+      {{ $isSeparator := eq .name "---" -}}
+      <li>
+        {{ if $isSeparator -}}
+          {{ if .url -}}
+            {{ warnf "Version menu '%s': separator with URL is not allowed" $menuName -}}
+          {{ end -}}
+          <hr class="dropdown-divider">
+        {{ else -}}
+          {{ $url := strings.TrimSuffix "/" (.url | default "") -}}
+          {{ $isActive := or
+            (eq .version $.Site.Params.version)
+            (eq $baseURL $url) -}}
+          {{ $useAnchorTag := $url -}}
+          {{ $isDisabled := not $url -}}
+          {{ $name := .name | default .version -}}
+          {{ $kind := .kind | default (cond $isDisabled "text" "") -}}
+          {{ $pagelinks := ne .pagelinks false -}}
+          {{ if $useAnchorTag -}}
+            <a {{ else -}}
+            <span {{/**/ -}}
+          {{ end -}}
+            class="dropdown-item
+              {{- if $isActive }} active
+              {{- else if $isDisabled }} disabled
+              {{- end -}}
+              {{ with $kind }} dropdown-item-{{ . }} {{- end -}}
+            "
+            {{- if $isActive }} aria-current="page" {{- end -}}
+            {{ with $url }} href="
+                {{- . -}}
+                {{/* Note: $path starts with a '/' */ -}}
+                {{ if $pagelinks -}}
+                  {{ $path -}}
+                {{ end -}}
+              " {{- end -}}
+          >
+          {{- $name | markdownify -}}
+          {{/* Closing tag */ -}}
+          {{ if $useAnchorTag }}</a>{{ else }}</span>{{ end }}
+        {{ end }}
+      </li>
+    {{ end }}
   </ul>
 </div>
+{{/* */ -}}

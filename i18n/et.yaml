@@ -19,6 +19,7 @@ post_byline_by: järgi
 post_created: Loodud
 post_last_mod: Viimati muudetud
 post_edit_this: Täienda lehte
+post_view_markdown: Vaata Markdowni
 post_create_child_page: Loo alamleht
 # perhaps there is a better translation for "issue"...
 post_create_issue: Tõstata dokumentatsiooni kohta ülesanne

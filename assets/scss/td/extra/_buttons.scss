@@ -1,0 +1,15 @@
+$td-cta-buttons-row-breakpoint: sm !default;
+
+.td-cta-buttons {
+  --td-cta-buttons-gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--td-cta-buttons-gap);
+
+  @if $td-cta-buttons-row-breakpoint {
+    @include media-breakpoint-up($td-cta-buttons-row-breakpoint) {
+      flex-direction: row;
+    }
+  }
+}

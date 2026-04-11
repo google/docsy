@@ -20,6 +20,7 @@ post_byline_by: by
 post_created: Oluşturuldu
 post_last_mod: Son düzenleme
 post_edit_this: Bu sayfayı düzenle
+post_view_markdown: Markdown'ı Görüntüle
 post_view_this: Sayfa kaynağını görüntüle
 post_create_child_page: Çocuk sayfası oluştur
 post_create_issue: Belge konusu oluştur

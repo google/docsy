@@ -74,11 +74,11 @@ easy:
 1. Click the button **Use this template** and select the option
    `Create a new repository` from the dropdown.
 
-1. Chose a name for your new repository (e.g. `my-new-site`) and type it in the
+1. Choose a name for your new repository (e.g. `my-new-site`) and type it in the
    **Repository name** field. You can also add an optional **Description**.
 
 1. Click **Create repository from template** to create your new repository.
-   Congratulations, you just created your remote Github clone which now serves
+   Congratulations, you just created your remote GitHub clone which now serves
    as starting point for your own site!
 
 1. Make a local copy of your newly created GitHub repository by using

@@ -1,0 +1,50 @@
+[
+  {
+    "path": "llms.txt",
+    "kind": "home output",
+    "covers": [],
+    "skip": false
+  },
+  {
+    "path": "index.md",
+    "kind": "home",
+    "covers": ["description", "body", "children"],
+    "skip": false
+  },
+  {
+    "path": "blog/index.md",
+    "kind": "section",
+    "covers": ["!description", "!body", "children"],
+    "skip": false
+  },
+  {
+    "path": "docs/index.md",
+    "kind": "section",
+    "covers": ["!description", "body", "children"],
+    "skip": false
+  },
+  {
+    "path": "docs/content/index.md",
+    "kind": "section",
+    "covers": ["description", "!body", "children"],
+    "skip": false
+  },
+  {
+    "path": "docs/get-started/index.md",
+    "kind": "section",
+    "covers": ["description", "body", "children"],
+    "skip": false
+  },
+  {
+    "path": "blog/2022/hello/index.md",
+    "kind": "page",
+    "covers": ["description", "body", "!children"],
+    "skip": false
+  },
+  {
+    "path": "fr/index.md",
+    "kind": "home",
+    "covers": ["description", "body", "children", "i18n:fr"],
+    "skip": false
+  }
+]

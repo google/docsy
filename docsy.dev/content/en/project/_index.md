@@ -4,18 +4,15 @@ linkTitle: Project docs
 description: How Docsy theme and website are built, maintained, and deployed.
 aliases: [site]
 cascade:
-  outputs: [HTML]
   type: docs
   params:
     hide_feedback: true
-params:
-  FA: <i class="fa-solid fa-{1} text-{2}"></i>
 cSpell:ignore: docsydocs
 ---
 
 <span class="badge bg-warning text-bg-warning fs-6">
-{{% _param FA person-digging " pe-2" %}} Section under construction. {{%
-_param FA person-digging " ps-2" %}}
+{{% _param FAS person-digging " pe-2" %}} Section under construction. {{%
+_param FAS person-digging " ps-2" %}}
 </span>
 
 ## Content (planned) {#content}
@@ -36,5 +33,7 @@ Planned content organization (tentative):
   design/implementation decisions.
 
 ## Site build information
+
+Docsy version: `{{% version %}}`
 
 {{% td/site-build-info/netlify team="docsydocs" %}}

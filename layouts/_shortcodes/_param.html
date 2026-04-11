@@ -19,6 +19,11 @@ NOTE: This is currently an Docsy-private shortcode.
 {{ $position := .Position -}}
 {{ $paramName := .Get 0 | default (.Get "name") -}}
 {{ $paramValue := $.Page.Param $paramName | string -}}
+{{ if not $paramValue -}}
+  {{ if eq $paramName "baseURL" -}}
+    {{ $paramValue = .Site.BaseURL -}}
+  {{ end -}}
+{{ end -}}
 {{ if not $paramName -}}
   {{ errorf "%s: shortcode '_param': parameter name is missing" $position -}}
 {{ else if not $paramValue -}}

@@ -27,6 +27,7 @@ post_byline_by: 作者：
 post_created: 建立
 post_last_mod: 最後更新於
 post_edit_this: 編輯此頁
+post_view_markdown: 檢視 Markdown
 post_view_this: 檢視頁面原始碼
 post_create_child_page: 建立子頁面
 post_create_issue: 建立文件議題

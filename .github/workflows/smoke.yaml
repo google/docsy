@@ -31,9 +31,9 @@ jobs:
     # if: github.event_name != 'pull_request' && matrix.os != 'windows-latest'
     if: github.event_name != 'push' || github.repository == 'google/docsy'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -57,7 +57,7 @@ jobs:
         run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: tmp-site-${{ matrix.os }}-${{ matrix.docsy-src }}
           path: |

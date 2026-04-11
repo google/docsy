@@ -38,6 +38,7 @@
           color: var(--bs-secondary-color);
           background-color: var(--bs-dark-bg-subtle);
         }
+
         &:active {
           color: var(--bs-secondary-color);
           background-color: var(--bs-dark-bg-subtle);
@@ -87,5 +88,19 @@
     background-color: inherit;
     font-size: 0;
     padding: 0;
+  }
+
+  .chroma {
+    // Console blocks: exclude prompt and output from selection so copy yields
+    // only the command(s). Chroma: .gp is GenericPrompt (e.g. $), .go is
+    // GenericOutput.
+    code[data-lang='console'],
+    code.language-console {
+      .go,
+      .gp {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+    }
   }
 }

@@ -1,0 +1,10 @@
+// Bootstrap default theme color overrides:
+// TODO: rework the td-box--* classes so that they don't override `color`;
+// otherwise we can't use Bootstrap's CSS variables:
+// --bs-link-color: $color !important;
+// --bs-link-color-rgb: red !important;
+.td-box--primary {
+  a {
+    color: tint-color($primary, 80%) !important;
+  }
+}

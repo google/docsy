@@ -3,7 +3,7 @@ title: Repository Links and other page information
 linkTitle: Repo links and page info
 description:
   Help your users interact with page source and view page-source information.
-cSpell:ignore: docsy lastmod
+cSpell:ignore: lastmod
 weight: 9
 ---
 
@@ -35,8 +35,7 @@ This page shows you how to configure these links.
 Currently, Docsy supports only GitHub repository links "out of the box". Since
 GitLab can handle the same link scheme, it should work as well. If you are using
 another repository such as Bitbucket and would like generated repository links,
-feel free to
-[add a feature request or update our theme](/docs/contribution-guidelines/).
+feel free to [add a feature request or update our theme](/docs/contributing/).
 
 ## Link configuration
 
@@ -130,24 +129,24 @@ params:
 
 ### `github_branch` (optional)
 
-Specify a value here if you have would like to reference a different branch for
-the other github settings like **Edit this page** or **Create project issue**.
+Specify a value here if you would like to reference a different branch for the
+other github settings like **Edit this page** or **Create project issue**.
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-github_branch = "release"
+github_branch = "production"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  github_branch: release
+  github_branch: production
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "github_branch": "release"
+    "github_branch": "production"
   }
 }
 {{< /tab >}}

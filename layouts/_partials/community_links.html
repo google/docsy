@@ -17,7 +17,12 @@
     {{ end }}
     <p>
       {{ T "community_how_to" . }}
-      <a href="{{ $contribUrl | relURL }}">{{ T "community_guideline" }}</a>.
+      {{ $url := $contribUrl -}}
+      {{ $isExternal := (urls.Parse $url).IsAbs -}}
+      {{ if not $isExternal -}}
+        {{ with site.GetPage $url }}{{ $url = .RelPermalink }}{{ end -}}
+      {{ end -}}
+      <a href="{{ $url | relURL }}">{{ T "community_guideline" }}</a>.
     </p>
   </div>
 </section>
@@ -26,7 +31,16 @@
 <ul>
 {{ range . -}}
   <li title="{{ .name }}">
-    <a target="_blank" rel="noopener" href="{{ .url }}"><i class="{{ .icon }}"></i> {{ .name }}</a>:
+    {{ $url := .url -}}
+    {{ $isExternal := (urls.Parse $url).IsAbs -}}
+    {{ if not $isExternal -}}
+      {{ with site.GetPage .url }}{{ $url = .RelPermalink }}{{ end -}}
+    {{ end -}}
+    <a href="{{ $url | relURL }}"
+      {{- if $isExternal }} target="_blank" rel="noopener" {{- end -}}
+    > {{/**/ -}}
+      <i class="{{ .icon }}"></i> {{ .name -}}
+    </a>:
     {{ .desc }}
   </li>
 {{ end }}
