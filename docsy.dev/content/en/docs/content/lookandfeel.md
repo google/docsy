@@ -16,8 +16,8 @@ By default, a site using Docsy has the theme's default fonts, colors, and
 general look and feel. However, if you want your own color scheme (and you
 probably will!) you can very easily override the theme defaults with your own
 project-specific values - Hugo will look in your project files first when
-looking for information to build your site. And because [Docsy uses Bootstrap 5]
-and SCSS for styling, you can override just single values (such as project
+looking for information to build your site. And because [Docsy uses Bootstrap
+5][] and SCSS for styling, you can override just single values (such as project
 colors and fonts) in its special SCSS project variables file, or do more serious
 customization by creating your own styles.
 
@@ -34,8 +34,8 @@ To customize your project's look and feel, create your own version of the
 following Docsy placeholder files (note the **`_project*.scss`** suffixes) and
 place them inside your project's `assets/scss/` folder:
 
-- **[`_variables_project.scss`]** and<br>
-  **[`_variables_project_after_bs.scss`]** :
+- **[`_variables_project.scss`][]** and<br>
+  **[`_variables_project_after_bs.scss`][]** :
 
   Use these files to add project-specific definitions of theme variables as well
   as any additional Bootstrap variables you want to set or override. For
@@ -43,11 +43,11 @@ place them inside your project's `assets/scss/` folder:
   [Site colors](#site-colors).
 
   For a list of Docsy's theme variables and their default values, see
-  [`_variables.scss`]. For information about other Bootstrap 5 variables, see
-  [Variable defaults] and [Bootstrap's `_variables.scss`][bs_var] file.
+  [`_variables.scss`][]. For information about other Bootstrap 5 variables, see
+  [Variable defaults][] and [Bootstrap's `_variables.scss`][bs_var] file.
 
-- **[`_styles_project.scss`]** is where you can add your own custom SCSS styles,
-  including overriding any of the styles in Docsy's theme SCSS files.
+- **[`_styles_project.scss`][]** is where you can add your own custom SCSS
+  styles, including overriding any of the styles in Docsy's theme SCSS files.
 
 [`_styles_project.scss`]:
   https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
@@ -80,7 +80,7 @@ can become complex and brittle.
 
 Docsy’s internal SCSS files (in [`assets/scss/td/`][assets/scss/td]) are
 organized by feature or function. For example, `_alerts.scss` contains the
-styles for [Alerts], while `_code.scss` and `_code-dark.scss` style
+styles for [Alerts][], while `_code.scss` and `_code-dark.scss` style
 [code blocks](#code-blocks).
 
 That said, if your project’s design diverges significantly from Docsy’s base
@@ -104,9 +104,9 @@ styles in `_styles_project.scss`, as usual.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-Docsy includes an optional [td/extra][] styles folder with [experimental] styles
-that projects can test. These styles may eventually be merged into the core
-theme or change without notice.
+Docsy includes an optional [td/extra][] styles folder with [experimental][]
+styles that projects can test. These styles may eventually be merged into the
+core theme or change without notice.
 
 To enable them, add the following to your project's `_styles_project.scss`:
 
@@ -149,7 +149,7 @@ Docsy has [Bootstrap][bs-docs] features such as gradient backgrounds
 can also be toggled in your project variables file by setting the variables to
 `false`.
 
-To add colors to or modify Bootstrap's [color maps], use
+To add colors to or modify Bootstrap's [color maps][], use
 **`assets/scss/_variables_project_after_bs.scss`**. For example:
 
 ```scss
@@ -206,7 +206,7 @@ site visitors through the following features:
 
 - **No dark-mode flashes**: By default, Docsy adds page header content (like
   meta tags, inline styles, and an early-loading script) to avoid or generally
-  prevent _Flashes Of Unstyled Content_ ([FOUC]) when pages load.[^FOUC-alt]
+  prevent _Flashes Of Unstyled Content_ ([FOUC][]) when pages load.[^FOUC-alt]
 
   [^FOUC-alt]:
       Also referred to as "Flash of incorrect theme" and, humorously, [_Flash of
@@ -260,7 +260,7 @@ To [disable dark mode][] entirely:
 - Set `params.ui.showLightDarkModeMenu` to `false` in your [site
   configuration][].
 
-- Add the following variable in your project's [`_variables_project.scss`]:
+- Add the following variable in your project's [`_variables_project.scss`][]:
 
   ```scss
   $enable-dark-mode: false;
@@ -274,18 +274,18 @@ To [disable dark mode][] entirely:
 
 > [!CAUTION]
 >
-> This feature is [experimental]. We invite projects to try it and share
+> This feature is [experimental][]. We invite projects to try it and share
 > feedback.
 
 Getting dark-mode theme colors to have proper contrast can be tricky. Docsy
-provides [_color-adjustments-dark.scss] as an example of theme color
+provides [_color-adjustments-dark.scss][] as an example of theme color
 customization by illustrating color-contrast adjustments for Bootstrap's default
 [primary color][bs-theme-colors]
 
 [bs-theme-colors]:
   https://getbootstrap.com/docs/5.3/customize/color/#theme-colors
 
-To use this file, import it in your project's [`_styles_project.scss`] file:
+To use this file, import it in your project's [`_styles_project.scss`][] file:
 
 ```scss
 @import 'td/color-adjustments-dark';
@@ -294,7 +294,7 @@ To use this file, import it in your project's [`_styles_project.scss`] file:
 We use `$lighten-amount-for-dark-color-variant` in that file to control how much
 lighter the primary color should be in dark mode as a percentage of the original
 primary color. To adjust this value for your project's `$primary` color, set
-this SCSS variable in your project's [`_variables_project.scss`] file, for
+this SCSS variable in your project's [`_variables_project.scss`][] file, for
 example:
 
 ```scss
@@ -303,7 +303,7 @@ $lighten-amount-for-dark-color-variant: 28% !default;
 
 If the file settings are not working for your project, you can create your own
 dark mode theme customization file and import it in your project's
-[`_styles_project.scss`].
+[`_styles_project.scss`][].
 
 [_color-adjustments-dark.scss]:
   https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss
@@ -424,7 +424,7 @@ markup:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-For the complete list of available styles, see [Chroma Style Gallery].
+For the complete list of available styles, see [Chroma Style Gallery][].
 
 [Chroma Style Gallery]: https://xyproto.github.io/splash/docs/
 [monokai]: https://xyproto.github.io/splash/docs/monokai.html
@@ -452,8 +452,8 @@ Docsy's default Chroma styles for [light/dark modes][] are:
 If you would like to use other styles, save the [Hugo generated Chroma styles][]
 to the appropriate file:
 
-- [assets/scss/td/chroma/_light.scss]
-- [assets/scss/td/chroma/_dark.scss]
+- [assets/scss/td/chroma/_light.scss][]
+- [assets/scss/td/chroma/_dark.scss][]
 
 Note that we tweak the [native][] style (in dark mode) so that the Generic
 Output color looks less prominent, offering better contrasts with the
@@ -651,7 +651,7 @@ $td-navbar-bg-color: $primary;
 > navbar: `--td-navbar-bg-color`, `--td-navbar-backdrop-filter`, and
 > `--td-navbar-border-bottom`. These can be overridden for advanced
 > customization. For an example, see the User Guide's [project
-> styles][ug-project-styles]. For the base styles, see [_nav.scss].
+> styles][ug-project-styles]. For the base styles, see [_nav.scss][].
 
 To set the navbar background color to a slightly translucent primary color use:
 
@@ -694,7 +694,7 @@ child elements such as links, menus, and the search box.
 
 #### Translucent over cover images {#customize-over-cover}
 
-When a page contains a [blocks/cover], the navbar is styled with
+When a page contains a [blocks/cover][], the navbar is styled with
 `td-navbar-cover`. While the navbar is over the cover, it is styled with
 `td-navbar-transparent` as well, which sets the background color to transparent
 and applies a blur effect (once the user has scrolled past the cover, the
@@ -749,9 +749,9 @@ and a "dark" mode where the text is displayed in a light color on a dark
 background. The menu also includes an "auto" option that follows the user's
 system preference.
 
-To enable the display of a light/[dark mode] menu in the navbar, set
+To enable the display of a light/[dark mode][] menu in the navbar, set
 `params.ui.showLightDarkModeMenu` to `true` in your [site configuration][]. The
-dropdown menu appears at the right, immediately before the [search box], if
+dropdown menu appears at the right, immediately before the [search box][], if
 present.
 
 {{< tabpane text=true persist=lang >}}
@@ -794,8 +794,8 @@ params:
 > 1. Set `params.ui.showLightDarkModeMenu` to `"enable-only (experimental)"`.
 >    This will enable base dark-mode functionality (such as full CSS, no-flash
 >    support) without Docsy's menu.
-> 2. Add your menu code to in the [layouts/_partials/theme-toggler.html] partial
->    file, thus overriding Docsy's default implementation.
+> 2. Add your menu code to in the [layouts/_partials/theme-toggler.html][]
+>    partial file, thus overriding Docsy's default implementation.
 >
 > This feature is experimental. It may be removed and/or changed in
 > backwards-incompatible ways in a future release.
@@ -888,16 +888,17 @@ this:
 ### Add code to head or before body end
 
 If you need to add some code (CSS import, cookie consent, or similar) to the
-`head` section on every page, add a [hooks/head-end.html] partial to your
+`head` section on every page, add a [hooks/head-end.html][] partial to your
 project (the theme version is an empty placeholder). The content of this partial
-is automatically included just before the end of the theme partial [head.html].
+is automatically included just before the end of the theme partial
+[head.html][].
 
 Similarly, if you want to add some code right before the `body` end, create your
-own version of [hooks/body-end.html]. This partial is included automatically at
-the end of the theme partial [scripts.html].
+own version of [hooks/body-end.html][]. This partial is included automatically
+at the end of the theme partial [scripts.html][].
 
-Both [head.html] and [scripts.html] are included from [baseof.html], Docsy's
-[base template][].
+Both [head.html][] and [scripts.html][] are included from [baseof.html][],
+Docsy's [base template][].
 
 [baseof.html]: https://github.com/google/docsy/blob/main/layouts/baseof.html
 [base template]: https://gohugo.io/templates/base/
@@ -915,8 +916,8 @@ Both [head.html] and [scripts.html] are included from [baseof.html], Docsy's
 {{%_param BADGE EXPERIMENTAL info %}}
 
 To have a banner or other similar content appear at the top of the pages in a
-section, add the relevant HTML to a [_td-content-after-header.html] file in the
-section's page path under `layouts` -- such as
+section, add the relevant HTML to a [_td-content-after-header.html][] file in
+the section's page path under `layouts` -- such as
 `layouts/blog/_td-content-after-header.html`. Add the file directly under
 `layouts` to have the file processed for all docs, blog, and swagger pages. The
 file's content will be included inside the `div.td-content` after `</header>`,

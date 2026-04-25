@@ -415,7 +415,7 @@ for your project.
 
 > [!WARNING] Version note
 >
-> Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+> Class names using the `--KIND` suffix were deprecated as of [v0.9.0][].
 >
 > [v0.9.0]: /project/about/changelog/#v0.9.0
 

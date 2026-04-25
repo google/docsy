@@ -10,8 +10,8 @@ We only document **breaking changes** and release **highlights** in this page.
 For the full list of changes of any particular release, see the [release
 notes][releases].
 
-Useful links: [Releases] & [tags], jump to the [latest] release, and view the
-[milestones].
+Useful links: [Releases][] & [tags][], jump to the [latest][] release, and view
+the [milestones][].
 
 [latest]: https://github.com/google/docsy/releases/latest
 [milestones]: https://github.com/google/docsy/milestones
@@ -83,7 +83,7 @@ or customizations in order to:
 - Preserve existing, significant site functionality or user experience,
   including visual design
 
-See [semver].
+See [semver][].
 
 > [!NOTE]
 >
@@ -98,8 +98,8 @@ Due to limited resources, official support for Docsy is restricted as follows:
   development branch and is considered unstable.
 
 - Each Docsy version **only** officially supports the following peer package
-  versions, as specified in the theme's [package.json] file:
-  - **Hugo** version ([hugo-extended])
+  versions, as specified in the theme's [package.json][] file:
+  - **Hugo** version ([hugo-extended][])
   - **Node.js** versions as declared in the `engines.node` section
 
 - Operating systems: Linux and macOS.
@@ -145,7 +145,7 @@ For the full list of changes, see the [0.15.0][] release page.
 ## v0.14.3 {#v0.14.3}
 
 Patch release [0.14.3][] applies the layout fix for [#2561][], which ensures
-`.td-main > .row` grows vertically ([#2569]).
+`.td-main > .row` grows vertically ([#2569][]).
 
 [#2561]: https://github.com/google/docsy/issues/2561
 [#2569]: https://github.com/google/docsy/pull/2569
@@ -154,7 +154,7 @@ Patch release [0.14.3][] applies the layout fix for [#2561][], which ensures
 ## v0.14.2 {#v0.14.2}
 
 **Key fix** for this patch: Apply `.td-main` flex only when sidebar exists
-([#2546]).
+([#2546][]).
 
 For the full list of changes, see the [release report][0.14.2-blog] and
 [0.14.2][] release page.
@@ -162,18 +162,18 @@ For the full list of changes, see the [release report][0.14.2-blog] and
 [**Breaking changes**](#breaking-change) (style-only):
 
 - **[Default code styles][0.14.2-blog]** changed from `tango`/`onedark` to
-  `friendly`/`native` for sites using `td/code-dark` ([#2548]).
+  `friendly`/`native` for sites using `td/code-dark` ([#2548][]).
 
 **New**:
 
 - **[Console block content selection][0.14.2-blog]**: selection and copy-code
-  now only includes commands, not output ([#2548]).
+  now only includes commands, not output ([#2548][]).
 
 **Other changes**:
 
 - Added `name` attribute to search form field for better semantics and autofill
-  ([#2549]).
-- Package version build metadata and footer icon tweaks ([#2547]).
+  ([#2549][]).
+- Package version build metadata and footer icon tweaks ([#2547][]).
 
 [#2546]: https://github.com/google/docsy/pull/2546
 [#2547]: https://github.com/google/docsy/pull/2547
@@ -184,7 +184,8 @@ For the full list of changes, see the [release report][0.14.2-blog] and
 
 ## v0.14.1 {#v0.14.1}
 
-Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
+Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports
+([#2538][]).
 
 [0.14.1]: https://github.com/google/docsy/releases/v0.14.1
 
@@ -199,40 +200,40 @@ Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
 
 - **Navbar styling** changed to a light-theme default (previously dark) and is
   now configurable. See [Navbar style improvements][0.14.0-blog-navbar]
-  ([#2477]).
+  ([#2477][]).
 - **`blocks/cover` shortcode** content processing [changed][0.14.0-blog-cover]
-  ([#939], [#2480]).
+  ([#939][], [#2480][]).
 - **Heading aliases/in-page targets**: anchor target class renamed
   (`td-offset-anchor` → `td-anchor-no-extra-offset`), see [Heading
   aliases][0.14.0-blog-heading-aliases].
 - **Swagger UI style customization** [changed][0.14.0-blog-swagger].
 - **Hugo 0.153+ upgrade** introduced [breaking changes][0.14.0-blog-hugo]
-  ([#2431]).
+  ([#2431][]).
 
 **New**:
 
 - **[Markdown alert syntax][0.14.0-blog-alerts]**: added support for Hugo's
-  Markdown alert syntax ([#2443]).
+  Markdown alert syntax ([#2443][]).
 - **`td/site-build-info/netlify` shortcode** (experimental), see
-  [Shortcodes][0.14.0-blog-shortcodes] ([#2444]).
+  [Shortcodes][0.14.0-blog-shortcodes] ([#2444][]).
 - **`td-below-navbar` helper class** for [`blocks/cover`][0.14.0-blog-cover]
-  positioning ([#2480]).
+  positioning ([#2480][]).
 
 **Other changes**:
 
-- Fixed [navbar color contrast (#2413)][#2413] via [#2477].
+- Fixed [navbar color contrast (#2413)][#2413] via [#2477][].
 - **Style tweaks**: `<details>` spacing, TOC h1 weight, see [Style improvements
   and fixes][0.14.0-blog-style-fixes].
 - Fixed **fragment link scrolling** by using `scroll-padding-top`, see [Heading
   aliases][0.14.0-blog-heading-aliases].
 - Internal **SCSS file reorganization**: moved internal SCSS files to
-  `assets/scss/td/` ([#1654]) for [improved separation of project and internal
+  `assets/scss/td/` ([#1654][]) for [improved separation of project and internal
   SCSS files][0.14.0-blog-scss].
 - **Internationalization**: [updated
   translations][0.14.0-blog-internationalization] for multiple locales.
-- Fixed nested **`sidebar_root_for`** bug ([#2470]).
-- Fixed Google-search modal colors in dark mode ([#2524]).
-- **RTL**: fixes for code blocks and foldable-nav icons ([#2533]).
+- Fixed nested **`sidebar_root_for`** bug ([#2470][]).
+- Fixed Google-search modal colors in dark mode ([#2524][]).
+- **RTL**: fixes for code blocks and foldable-nav icons ([#2533][]).
 
 [#1654]: https://github.com/google/docsy/issues/1654
 [#2413]: https://github.com/google/docsy/issues/2413
@@ -263,47 +264,48 @@ Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
 **Resources**:
 
 - [Release 0.13.0 report and upgrade guide][0.13.0-blog]
-- [0.13.0] release page for the full list of changes
+- [0.13.0][] release page for the full list of changes
 
 [**Breaking changes**](#breaking-change):
 
 - **Language menu**: changed visibility, see [Language menu
-  visibility][0.13.0-blog-lang-menu] ([#2303]).
+  visibility][0.13.0-blog-lang-menu] ([#2303][]).
 - **Alert shortcode**: Markdown content processing changed, see [Alert shortcode
-  improvements][0.13.0-blog-alert] ([#941]).
+  improvements][0.13.0-blog-alert] ([#941][]).
 
 **New**:
 
 - [Active TOC entry tracking][0.13.0-blog-toc] using Bootstrap ScrollSpy
-  ([#2366]).
-- [Section sidebar root][0.13.0-blog-sidebar] feature ([#2364]).
+  ([#2366][]).
+- [Section sidebar root][0.13.0-blog-sidebar] feature ([#2364][]).
 
 **Other changes**:
 
 - **Improved accessibility**: [color contrast and
-  typography][0.13.0-blog-accessibility] ([#2285]).
+  typography][0.13.0-blog-accessibility] ([#2285][]).
 - **Dark mode** fixes and improvements:
-  - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332]).
-  - Improved TOC entry color contrast in dark mode ([#2376], [#2379]).
-- **Mobile navbar**: added scroll indicators for overflow navigation ([#2406]).
+  - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332][]).
+  - Improved TOC entry color contrast in dark mode ([#2376][], [#2379][]).
+- **Mobile navbar**: added scroll indicators for overflow navigation
+  ([#2406][]).
 - Better **NPM support**: resolved optional and peer dependency issues
-  ([#2115]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
+  ([#2115][]). See [breaking changes][0.13.0-blog-breaking] in the blog post.
 - **Dependency updates**: Bootstrap 5.3.8, Hugo 0.152.2, Node LTS ≥24.
-- **Updated translations**: added Occitan locale ([#2173]) and refreshed
-  Simplified Chinese ([#2313]) and Ukrainian ([#2331]).
+- **Updated translations**: added Occitan locale ([#2173][]) and refreshed
+  Simplified Chinese ([#2313][]) and Ukrainian ([#2331][]).
 - **TOC visibility control**: documented the `notoc` page parameter (available
-  since 2016) for hiding the table of contents on specific pages ([#2405]).
+  since 2016) for hiding the table of contents on specific pages ([#2405][]).
 - **Build-time rendering of mathematical and chemical formulae**: now uses
-  Hugo's embedded KaTeX engine ([#2276], [#2394], [#2395]). For details, see
-  [LaTeX support with KaTeX][diagrams-formulae].
+  Hugo's embedded KaTeX engine ([#2276][], [#2394][], [#2395][]). For details,
+  see [LaTeX support with KaTeX][diagrams-formulae].
 
 [**Experimental**](#experimental):
 
 - **Dark mode**. Added support for:
-  - Google search integration ([#2387]).
+  - Google search integration ([#2387][]).
   - Sample support for color-contrast adjustments: for details, see [How to pick
-    colors with good color-contrast][] ([#2384]).
-- Added `_param` shortcode with support for parameter substitution ([#2371]).
+    colors with good color-contrast][] ([#2384][]).
+- Added `_param` shortcode with support for parameter substitution ([#2371][]).
 
 [#2115]: https://github.com/google/docsy/issues/2115
 [#2173]: https://github.com/google/docsy/issues/2173
@@ -341,24 +343,24 @@ Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports ([#2538]).
 
 ## v0.12.0 {#v0.12.0}
 
-For the full list of changes, see the [0.12.0] release page.
+For the full list of changes, see the [0.12.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
 - Renamed the default Docsy heading render hook and heading self-link partials.
   This is a breaking change only if your project uses this feature. For details,
-  see [Heading self links][] ([#2223]).
+  see [Heading self links][] ([#2223][]).
 - Relocated and adapted layouts in response to Hugo's [new template system][].
   For details, see [Adapt to new template system in Hugo v0.146.0 #2243][#2243].
 - **IMPORTANT**: if your project overrides any of the layout files mentioned in
-  [#2243], then apply the same name changes in your project files. In
+  [#2243][], then apply the same name changes in your project files. In
   particular, note that:
   - Taxonomy-related layout files: names have been _swapped_, and `terms.html`
-    is now singular ([#2257]):
+    is now singular ([#2257][]):
     - Renames `_default/taxonomy.html` to `term.html` (singular)
     - Renames `_default/terms.html` to `taxonomy.html`
   - Renames `layouts/**/content.html` by adding a `_td-` filename prefix
-    ([#2259]).
+    ([#2259][]).
 
 [#2257]: https://github.com/google/docsy/pull/2257
 [#2259]: https://github.com/google/docsy/pull/2259
@@ -371,20 +373,21 @@ For the full list of changes, see the [0.12.0] release page.
 
 **New**:
 
-- Enhanced and adjusted **[Breadcrumb navigation]** support:
+- Enhanced and adjusted **[Breadcrumb navigation][]** support:
   - Added `ui.breadcrumb_disable` configuration parameter to disable breadcrumbs
     for an entire project, individual pages, or section. For details, see
     [Breadcrumb navigation][].
-  - **Blog** pages now also have breadcrumbs by default ([#1788]).
-  - Index-page single-element breadcrumb lists are hidden by default ([#2160]).
-- Added support for a [_td-content-after-header.html] page-content render hook,
-  which can be [content type][] specific ([#2192]). For details, see the [User
-  Guide][before-page-content].
+  - **Blog** pages now also have breadcrumbs by default ([#1788][]).
+  - Index-page single-element breadcrumb lists are hidden by default
+    ([#2160][]).
+- Added support for a [_td-content-after-header.html][] page-content render
+  hook, which can be [content type][] specific ([#2192][]). For details, see the
+  [User Guide][before-page-content].
 
 **Other changes**:
 
 - **Blog** section index page content and title were ignored, they are now
-  displayed ([#1787]). To recover the old behavior use the following style
+  displayed ([#1787][]). To recover the old behavior use the following style
   override: `.td-section.td-blog .td-content { display: none; }`.
 - Adds a `comment` shortcode, as a drop-in replacement for the one removed from
   Hugo's built-in shortcode.
@@ -405,16 +408,16 @@ For the full list of changes, see the [0.12.0] release page.
 
 ## v0.11.0 {#v0.11.0}
 
-For the full list of changes, see the [0.11.0] release page.
+For the full list of changes, see the [0.11.0][] release page.
 
 **New**:
 
 - Support for Right-To-Left (RTL) languages is reintroduced via [Bootstrap's
   support for RTL][bs-rtl]. For details, see [Right-to-left languages][rtl].
 - The URL to your project's contribution guidelines is configurable. For
-  details, see [Adding a community page].
+  details, see [Adding a community page][].
 - When a section's sidebar entries are truncated because there are more than
-  [params.ui.sidebar_menu_truncate] section entries, a warning is issued.
+  [params.ui.sidebar_menu_truncate][] section entries, a warning is issued.
 
 [0.11.0]: https://github.com/google/docsy/releases/v0.11.0
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
@@ -424,8 +427,8 @@ For the full list of changes, see the [0.11.0] release page.
 
 ## v0.10.0 {#v0.10.0}
 
-For an introduction to this release, see the [0.10.0 release report]. For the
-full list of changes, see the [0.10.0] release page.
+For an introduction to this release, see the [0.10.0 release report][]. For the
+full list of changes, see the [0.10.0][] release page.
 
 **New**: color themes and dark-mode support! For details, see [Color themes and
 dark-mode support][dark-mode].
@@ -436,7 +439,7 @@ dark-mode support][dark-mode].
   shortcode `card` with named parameter `code=true` instead.
 - The following SCSS variables are inlined in favor of dark-mode compatible
   styling: `$border-color`, `$td-sidebar-tree-root-color`,
-  `$td-sidebar-bg-color`, `$td-sidebar-border-color` ([#1952])
+  `$td-sidebar-bg-color`, `$td-sidebar-border-color` ([#1952][])
 
 **Style changes** (potentially breaking):
 
@@ -451,51 +454,53 @@ dark-mode support][dark-mode].
 
 ## v0.9.1 {#v0.9.1}
 
-Patch release. For details, see [0.9.1].
+Patch release. For details, see [0.9.1][].
 
 [0.9.1]: https://github.com/google/docsy/releases/v0.9.1
 
 ## v0.9.0 {#v0.9.0}
 
-For an introduction and commentary, see the [0.9.0 release report]. For the full
-list of commits, see the [0.9.0] release page. The most significant changes of
-this release are listed next.
+For an introduction and commentary, see the [0.9.0 release report][]. For the
+full list of commits, see the [0.9.0][] release page. The most significant
+changes of this release are listed next.
 
 **Breaking changes**:
 
-- **[Repository Links]** now work for [multi-language] sites ([#1744]).
+- **[Repository Links][]** now work for [multi-language][] sites ([#1744][]).
 
   For any given page, repository links are now computed from a page's _resolved_
   `File` path &mdash; as resolved _through_ mount points, if any. That is, the
   path used is the one that refers to the file's actual location on disk, not
-  its logical path in Hugo's [union file system].
+  its logical path in Hugo's [union file system][].
 
   This is a breaking change for pages of sites that use mounts and
-  [path_base_for_github_subdir]. Projects will need to adjust the value of
-  [path_base_for_github_subdir] to be relative to the file's physical location.
+  [path_base_for_github_subdir][]. Projects will need to adjust the value of
+  [path_base_for_github_subdir][] to be relative to the file's physical
+  location.
 
-- Class names to disable [repository links] were misnamed with a suffix of the
-  form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling links].
+- Class names to disable [repository links][] were misnamed with a suffix of the
+  form `--KIND`. The new suffix is `__KIND`. For details, see [Disabling
+  links][].
 
 - **Heading self-link** support has been reimplemented and projects must now
   explicitly enable the feature. For details, see [Heading self
   links][0.9.0:hsl].
 
 **Footer changes**: refactoring, for easier customization, and simplification.
-For details concerning all footer changes, see [#1818].
+For details concerning all footer changes, see [#1818][].
 
 - **Footer layout** factored into parts: _left_, _right_, and _center_, with
-  _copyright_ a subpart of center. For details see [Footer layout]
+  _copyright_ a subpart of center. For details see [Footer layout][]
 - **Footer copyright**, supports date-range, and site copyright fallback. For
-  details, see [Footer copyright].
+  details, see [Footer copyright][].
 - **Footer streamlined**: the About-page footer link and All-rights-reserved
-  text are now hidden by default. For details, see [Footer streamlined].
+  text are now hidden by default. For details, see [Footer streamlined][].
 
 **Other changes**:
 
-- The latest release of **[Mermaid] resources** are now fetched at build time
-  ([#1410]).
-- [Look and feel] updates.
+- The latest release of **[Mermaid][] resources** are now fetched at build time
+  ([#1410][]).
+- [Look and feel][] updates.
 
 [0.9.0]: https://github.com/google/docsy/releases/v0.9.0
 [0.9.0 release report]: /blog/2024/0.9.0/
@@ -518,27 +523,27 @@ For details concerning all footer changes, see [#1818].
 
 ## v0.8.0 {#v0.8.0}
 
-For the full list of changes, see the [0.8.0] release page.
+For the full list of changes, see the [0.8.0][] release page.
 
 **Breaking changes**:
 
-- Docsy is packaged as a **single Hugo module** ([#1120]). For details, see [Use
-  Docsy as a Hugo Module].
+- Docsy is packaged as a **single Hugo module** ([#1120][]). For details, see
+  [Use Docsy as a Hugo Module][].
 - **Important**: non-Hugo-module projects should be aware of the [Docsy NPM
   install side-effect]. Also, for guidance on Hugo-reported "failed to load
-  modules" error, see [Docsy as an NPM package].
-- **Page feedback**, or [User feedback]:
+  modules" error, see [Docsy as an NPM package][].
+- **Page feedback**, or [User feedback][]:
   - In support of projects configuring analytics outside of Docsy, feedback
     functionality is enabled regardless of whether
-    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727]).
-  - Feedback-event attribute changes ([#1726]):
+    `site.Config.Services.GoogleAnalytics.ID` is set ([#1727][]).
+  - Feedback-event attribute changes ([#1726][]):
     - Event `name` is `page_helpful`rather than`click`
     - Event `value` for "yes" is 100 by default, rather than 1, allowing for
       more response options in the future. To override the default set
       `params.ui.feedback.max_value`.
 - SCSS: `@function prepend()` and file `assets/scss/support/_functions.scss`
   have been dropped. Instead use the more general SASS/SCSS list `join()`
-  function ([#1385]).
+  function ([#1385][]).
 
 [#1120]: https://github.com/google/docsy/issues/1120
 [#1385]: https://github.com/google/docsy/issues/1385
@@ -554,22 +559,22 @@ For the full list of changes, see the [0.8.0] release page.
 
 ## v0.7.2 {#v0.7.2}
 
-For the full list of changes, see the [0.7.2] release page. We mention some
+For the full list of changes, see the [0.7.2][] release page. We mention some
 noteworthy changes here:
 
 - **Algolia**
-  - [#1651] DocSearch fixed for mobile and for sites with two search boxes (in
+  - [#1651][] DocSearch fixed for mobile and for sites with two search boxes (in
     the top and left navs).
-  - [#1662] DocSearch is supported by Docsy through site config.
-  - For details, see [Algolia DocSearch].
-- **[Tabbed panes]**:
+  - [#1662][] DocSearch is supported by Docsy through site config.
+  - For details, see [Algolia DocSearch][].
+- **[Tabbed panes][]**:
   - `persistLang` is deprecated, use `persist` instead
   - Persistence is enabled by default (independent of the old `persistLang`
     parameter value) ; to disable use `persist=disabled`
-  - Various fixes and enhancements, with more to come; for details, see [#1641]
-    and [Tabbed panes].
+  - Various fixes and enhancements, with more to come; for details, see
+    [#1641][] and [Tabbed panes][].
 - **Left-nav**, and **right-nav** (TOC + page meta): spacing issues have been
-  resolved; for details, see [#1661].
+  resolved; for details, see [#1661][].
 
 [#1641]: https://github.com/google/docsy/issues/1641
 [#1651]: https://github.com/google/docsy/pull/1651
@@ -581,14 +586,14 @@ noteworthy changes here:
 
 ## v0.7.1 {#v0.7.1}
 
-For the full list of changes, see the [0.7.1] release page.
+For the full list of changes, see the [0.7.1][] release page.
 
-Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
+Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470][]):
 
 - `td-blog-posts-list__item` and `td-blog-posts-list__body` replace the `.media`
-  and `.media-body` classes, dropped by BS 5 [#1560].
+  and `.media-body` classes, dropped by BS 5 [#1560][].
 - Docsy test for Bootstrap version has been made more robust, and can be
-  disabled. For details, see [#1579].
+  disabled. For details, see [#1579][].
 
 [#1560]: https://github.com/google/docsy/issues/1560
 [#1579]: https://github.com/google/docsy/issues/1579
@@ -596,7 +601,7 @@ Followup changes to **Bootstrap (BS) 5.2 upgrade** ([#470]):
 
 ## v0.7.0 {#v0.7.0}
 
-For the full list of changes, see the [0.7.0] release page.
+For the full list of changes, see the [0.7.0][] release page.
 
 **New**:
 
@@ -607,26 +612,26 @@ For the full list of changes, see the [0.7.0] release page.
 **Breaking changes:**
 
 - [**Hugo** release][hugo-releases] **0.110.0** or later is required.
-- **Upgraded Bootstrap ([#470])** to v5.2. For a list of Bootstrap's breaking
+- **Upgraded Bootstrap ([#470][])** to v5.2. For a list of Bootstrap's breaking
   changes, see the [Bootstrap migration page][bsv5mig]. Docsy-specific changes:
   - Clean up of unused, or rarely used, variables, functions, and mixins:
     - Dropped `$primary-light`
     - Dropped `color-diff()`
-    - Dropped `bg-gradient-variant()` mixin ([#1369])
+    - Dropped `bg-gradient-variant()` mixin ([#1369][])
   - Docsy's RTL support has been removed because it is incompatible with BSv5.
-    For progress on the reintroduction of RTL support, see [#1442].
+    For progress on the reintroduction of RTL support, see [#1442][].
 - **Shortcodes**:
   - Now using Hugo's native support for processing HTML & markdown, not file
-    extension testing. ([#906])
-  - Dropped support for pre-Hugo-0.54.x behavior of [shortcodes with markdown],
-    `{{%/*...*/%}}`. ([#939])
+    extension testing. ([#906][])
+  - Dropped support for pre-Hugo-0.54.x behavior of [shortcodes with
+    markdown][], `{{%/*...*/%}}`. ([#939][])
   - `blocks/section`: **default** and accepted values of the `type` argument
-    have changed! For details, see [blocks/section] ([#1472]).
-  - **Card shortcodes** ([#1376])]:
+    have changed! For details, see [blocks/section][] ([#1472][]).
+  - **Card shortcodes** ([#1376][])]:
     - Renamed CSS class `td-card-deck` to `td-card-group`.
     - `card`, `card-code`: markup of inner content (HTML/markdown) now depends
       on the syntax of the calling shortcode, not on extension of page file any
-      more [#906].
+      more [#906][].
     - `card-code` is deprecated; use `card` with named parameter `code=true`
       instead.
 
@@ -634,11 +639,11 @@ For the full list of changes, see the [0.7.0] release page.
 [shortcodes with markdown]:
   https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
 
-- **Detection of draw.io diagrams** is now **disabled** by default [#1185]
+- **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
 
 **Other changes**:
 
-- `$list-inline-padding` is increased in support of footer icons ([#1523]). If
+- `$list-inline-padding` is increased in support of footer icons ([#1523][]). If
   this global adjustment is a problem for your project, let us know and we can
   contextualize the adjustment to the footer.
 - Non-breaking changes that result from the Bootstrap v5 upgrade:
@@ -660,7 +665,7 @@ For the full list of changes, see the [0.7.0] release page.
 
 ## v0.6.0 {#v0.6.0}
 
-For the full list of changes, see the [0.6.0] release page.
+For the full list of changes, see the [0.6.0][] release page.
 
 With this release we declare a feature freeze while we migrate to the newest
 Bootstrap version. See [the announcement][bs-announcement] for more information.
@@ -681,17 +686,17 @@ Bootstrap version. See [the announcement][bs-announcement] for more information.
 
 ## v0.5.1 {#v0.5.1}
 
-For the full list of changes, see the [0.5.1] release page. **BREAKING CHANGES**
-are documented below.
+For the full list of changes, see the [0.5.1][] release page. **BREAKING
+CHANGES** are documented below.
 
 **After you update** your project's Docsy:
 
-- Update your project setup (see [0.4.0]) if you haven't already.
+- Update your project setup (see [0.4.0][]) if you haven't already.
 - Run `npm install`.
 
 **New**:
 
-- Projects can now install and use [Docsy as an NPM package].
+- Projects can now install and use [Docsy as an NPM package][].
 
 **Breaking changes**:
 
@@ -717,8 +722,8 @@ are documented below.
 
 **Other changes**:
 
-- By default, Docsy now uses the [gtag.js] analytics library for all site tags.
-  For details, see [Adding Analytics > Setup].
+- By default, Docsy now uses the [gtag.js][] analytics library for all site
+  tags. For details, see [Adding Analytics > Setup][].
 
 [0.5.1]: https://github.com/google/docsy/releases/v0.5.1
 [adding analytics > setup]: /docs/content/feedback/#setup
@@ -737,8 +742,8 @@ Unpublished.
 
 ## v0.4.0 {#v0.4.0}
 
-For the full list of changes, see the [0.4.0] release page. Potential **BREAKING
-CHANGES** are documented below.
+For the full list of changes, see the [0.4.0][] release page. Potential
+**BREAKING CHANGES** are documented below.
 
 **After you update** your project's Docsy, run `npm install`.
 
@@ -746,8 +751,8 @@ CHANGES** are documented below.
 
 If your project uses Docsy as follows:
 
-- [Hugo Module], then this change doesn't impact you.
-- For [other Docsy setups], this is a **BREAKING CHANGE** -- read on.
+- [Hugo Module][], then this change doesn't impact you.
+- For [other Docsy setups][], this is a **BREAKING CHANGE** -- read on.
 
 Docsy now fetches Bootstrap and FontAwesome as NPM packages rather than git
 submodules. This has an impact on your project-build setup. To migrate your
@@ -767,7 +772,7 @@ site, follow these steps (execute commands from your project's root directory):
     ```
 3.  Update your build scripts to fetch Docsy dependencies automatically. For
     example, if your site build uses NPM scripts, consider getting Docsy
-    dependencies via a [prepare] script as follows:
+    dependencies via a [prepare][] script as follows:
     ```json
     {
       "name": "my-website",
@@ -793,7 +798,7 @@ Proceed as usual to build or serve your site.
 
 ## v0.3.0 {#v0.3.0}
 
-For the full list of changes, see the [0.3.0] release page.
+For the full list of changes, see the [0.3.0][] release page.
 
 **Breaking changes**:
 
@@ -801,9 +806,9 @@ For the full list of changes, see the [0.3.0] release page.
   [Algolia DocSearch v3](https://docsearch.algolia.com/docs/v3/docsearch). If
   your site uses the deprecated DocSearch v2, you must
   [update your DocSearch code](https://docsearch.algolia.com/docs/v3/migrating-from-v2).
-- (**Edit**) [#1009] inadvertently changed the base [Bootstrap styles for
+- (**Edit**) [#1009][] inadvertently changed the base [Bootstrap styles for
   cards][bs4cards], as well as the Docsy `highlight` style. For details, see
-  [issue #1154]. Release [0.5.1] includes a fix.
+  [issue #1154][]. Release [0.5.1][] includes a fix.
 
 [0.3.0]: https://github.com/google/docsy/releases/v0.3.0
 [bs4cards]: https://getbootstrap.com/docs/4.1/components/card/
@@ -812,13 +817,13 @@ For the full list of changes, see the [0.3.0] release page.
 
 ## v0.2.0 {#v0.2.0}
 
-For the full list of changes, see the [0.2.0] release page.
+For the full list of changes, see the [0.2.0][] release page.
 
 **New**:
 
-- Add official Docsy support for [Hugo modules]. Many thanks to the dedicated
-  and patient efforts of [@deining], who researched, experimented, and
-  implemented this feature. Thanks to [@deining] and [@LisaFC] for the doc
+- Add official Docsy support for [Hugo modules][]. Many thanks to the dedicated
+  and patient efforts of [@deining][], who researched, experimented, and
+  implemented this feature. Thanks to [@deining][] and [@LisaFC][] for the doc
   updates.
 
   For details, see

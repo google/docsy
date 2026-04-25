@@ -21,11 +21,11 @@ can choose from:
   index and search your site without the need to connect to external services.
   This option doesn't require your site to be public.
 
-If you enable any of these search options in your project [configuration file],
-a search box displays in the right of your top navigation bar. By default a
-search box also displays at the top of the sidebar in the left navigation pane,
-which you can disable if you prefer, or if you're using a search option that
-only works with the top search box.
+If you enable any of these search options in your project [configuration
+file][], a search box displays in the right of your top navigation bar. By
+default a search box also displays at the top of the sidebar in the left
+navigation pane, which you can disable if you prefer, or if you're using a
+search option that only works with the top search box.
 
 > [!WARNING] You can only enable a single search option at a time
 >
@@ -408,9 +408,9 @@ If none of the supported search engines address your project's needs, you can
 implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
-- [layouts/_partials/search-input.html]
-- [assets/scss/td/_search.scss]
-- [assets/js/search.js]
+- [layouts/_partials/search-input.html][]
+- [assets/scss/td/_search.scss][]
+- [assets/js/search.js][]
 
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
 [assets/js/search.js]:

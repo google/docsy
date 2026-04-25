@@ -101,7 +101,7 @@ The shortcode parameters are:
 To set the **background image** (also referred to as a **hero image**), place an
 image with the word "background" in the name in the page's [page bundle][]. For
 example, in our the example site the background image in the home page's cover
-block is [featured-background.jpg], in the same directory.
+block is [featured-background.jpg][], in the same directory.
 
 > [!TIP]
 >
@@ -488,7 +488,7 @@ description: Reference for the Pet Store API
 ### `iframe`
 
 With this shortcode you can embed external content into a Docsy page as an
-inline frame ([iframe]).
+inline frame ([iframe][]).
 
 [iframe]: https://www.w3schools.com/tags/tag_iframe.asp
 
@@ -508,13 +508,13 @@ inline frame ([iframe]).
 >
 > You can only embed external content from a server when its `X-Frame-Options`
 > is not set or if it specifically allows embedding for your site. For details,
-> see [X-Frame-Options].
+> see [X-Frame-Options][].
 >
 > There are several tools you can use to check if a website can be embedded via
-> iframe, such as [domsignal.com/x-frame-options-test]. Be aware that when this
-> test says "Couldn’t find the X-Frame-Options header in the response headers."
-> you **CAN** embed it, but when the test says "Great! X-Frame-Options header
-> was found in the HTTP response headers as highlighted below.", you
+> iframe, such as [domsignal.com/x-frame-options-test][]. Be aware that when
+> this test says "Couldn’t find the X-Frame-Options header in the response
+> headers." you **CAN** embed it, but when the test says "Great! X-Frame-Options
+> header was found in the HTTP response headers as highlighted below.", you
 > **CANNOT** - unless it has been explicitly enabled for your site.
 
 [X-Frame-Options]:
@@ -658,7 +658,7 @@ The `tabpane` shortcode, which is the container element for the tabs, supports
 the following named parameters, all of which are optional:
 
 - **`lang`**: the default code-block language to use for all contained tabs
-- **`highlight`**: parameter passed on to the code-block [highlight] function,
+- **`highlight`**: parameter passed on to the code-block [highlight][] function,
   as described below
 - **`langEqualsHeader`**: set to `true` when header text matches the tab
   language.
@@ -669,7 +669,7 @@ the following named parameters, all of which are optional:
   Default is `false` and assumes the content is code.
 
 The value of the optional parameters `lang` and `highlight` are passed on as
-second `LANG` and third `OPTIONS` arguments to Hugo's built-in [highlight]
+second `LANG` and third `OPTIONS` arguments to Hugo's built-in [highlight][]
 function, which is used to render the code blocks of the individual tabs.
 
 Tab selection is persisted by default. When unspecified, `persist` defaults to
@@ -690,7 +690,7 @@ following named parameters, all of which are optional:
   {{</* tab "My tab header" */>}} … {{</* /tab */>}}
   ```
 - **`lang`**: code-block language for code tabs
-- **`highlight`**: parameter passed on to the code-block [highlight] function
+- **`highlight`**: parameter passed on to the code-block [highlight][] function
 - **`right`**: set to `true` in order to split tab panes into a left aligned and
   a right aligned tab groups. Specify `right=true` in the dividing tab. By using
   `right=true` more than once, you can even render multiple tab groups.

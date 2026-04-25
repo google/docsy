@@ -7,7 +7,7 @@ cSpell:ignore: docsy
 
 ## Inventory commits
 
-- Pull git log from [v0.12.0...main] and export commit list with PR numbers
+- Pull git log from [v0.12.0...main][] and export commit list with PR numbers
 - Group dependency-only commits together and flag mixed-change commits for
   review.
 - Keep groupings broad so the list stays manageable; note detailed client-impact

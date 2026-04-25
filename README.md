@@ -11,7 +11,7 @@ being maintained.
 > [!IMPORTANT] 🚧 IMPORTANT 🚧
 >
 > The `main` branch is under development and not officially supported; use
-> official Docsy [releases]. For full support details, see [Official support
+> official Docsy [releases][]. For full support details, see [Official support
 > limits][official-support].
 
 ## Prerequisites
@@ -72,12 +72,12 @@ details about the various usage options.
 ## Documentation
 
 Docsy has its own user guide (using Docsy, of course!) with lots more
-information about using the theme. It is hosted by [Netlify] at
+information about using the theme. It is hosted by [Netlify][] at
 [docsy.dev](https://docsy.dev/).
 
 **Maintainers**: you can access deploy logs, the [deploy preview of
-`main`][main-preview], and more from the [Deploys] section of the site's Netlify
-dashboard.
+`main`][main-preview], and more from the [Deploys][] section of the site's
+Netlify dashboard.
 
 Alternatively you can use Hugo to generate and serve a local copy of the guide
 (also useful for testing local theme changes), making sure you have installed
@@ -92,9 +92,9 @@ npm run serve
 
 ## Contributing
 
-For details on our [code of conduct] and the process for submitting pull
-requests, see [CONTRIBUTING.md]. Thank you to all past, present, and future
-[contributors]!
+For details on our [code of conduct][] and the process for submitting pull
+requests, see [CONTRIBUTING.md][]. Thank you to all past, present, and future
+[contributors][]!
 
 ## License
 

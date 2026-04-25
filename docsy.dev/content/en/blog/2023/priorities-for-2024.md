@@ -57,9 +57,9 @@ evolves.
 This is a tall order for 2024 and beyond, but I believe that slow and steady
 wins the day.
 
-We're eager to hear from you, the Docsy community! [Share your thoughts] on our
-focus areas and how we can enhance Docsy. Take a look at our issue triage into
-[quarterly milestones] for a rough idea of what is targeted for upcoming
+We're eager to hear from you, the Docsy community! [Share your thoughts][] on
+our focus areas and how we can enhance Docsy. Take a look at our issue triage
+into [quarterly milestones][] for a rough idea of what is targeted for upcoming
 releases. Vote for or comment on issues that are important to you, and we'll do
 our best to respond and adjust release targets within the boundaries of our set
 priorities. Better yet, volunteer to work on the current quarter's tasks. As we

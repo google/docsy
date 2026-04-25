@@ -249,18 +249,18 @@ details.
 
 Most often you create pages in a Docsy site as [Markdown or HTML files][formats]
 with [page front matter](#page-front-matter). Hugo's default markup and markdown
-renderer is [Goldmark].
+renderer is [Goldmark][].
 
 ### Markdown
 
 Markdown is Hugo’s default content format. Hugo renders Markdown to HTML using
-[Goldmark], which conforms to [CommonMark] and [GitHub Flavored Markdown][GFM]
-specifications and a few more extensions.
+[Goldmark][], which conforms to [CommonMark][] and [GitHub Flavored
+Markdown][GFM] specifications and a few more extensions.
 
 Hugo provides Markdown features including:
 
-- [Attributes] for adding custom IDs and classes to Markdown elements
-- [Extensions] such as tables, footnotes, task lists, etc.
+- [Attributes][] for adding custom IDs and classes to Markdown elements
+- [Extensions][] such as tables, footnotes, task lists, etc.
 - [Render hooks][] for customizing the HTML output of Markdown elements.
 
 Docsy provides custom render hooks for the following Markdown elements:
@@ -271,17 +271,17 @@ Docsy provides custom render hooks for the following Markdown elements:
 
 ### Markup, shortcodes, and content features {#markup-and-content-features}
 
-Hugo supports content formats and features including HTML, [Emojis], and more.
+Hugo supports content formats and features including HTML, [Emojis][], and more.
 For details, see [Content formats][formats].
 
-In addition, you can call [shortcodes] from your content. To learn more about
+In addition, you can call [shortcodes][] from your content. To learn more about
 shortcodes in general, and how to use Docsy's provided shortcodes, see
 [Shortcodes](/docs/content/shortcodes).
 
 ### Alerts
 
-Docsy supports Hugo's blockquote syntax for [alerts], specifically [GFM] base
-syntax for callouts, and Obsidian-style titles. For example:
+Docsy supports Hugo's blockquote syntax for [alerts][], specifically [GFM][]
+base syntax for callouts, and Obsidian-style titles. For example:
 
 ```markdown
 {{% _param alert-examples %}}
@@ -292,7 +292,7 @@ Which renders as:
 {{% _param alert-examples %}}
 
 In addition, Docsy supports alert types corresponding to the Bootstrap alerts
-types missing from [GFM], as well as `NB` -- short for _nota bene_.
+types missing from [GFM][], as well as `NB` -- short for _nota bene_.
 
 Use `NB` for short single-line notes rendered without a label. For example:
 

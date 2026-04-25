@@ -174,7 +174,7 @@ passthrough delimiter pairs defined above.
 >
 > - `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
 >   pages, but not for other sections such as the blog.
-> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
+> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html][] -
 >   hook is active for this page of the user guide only, which is how we
 >   actually have it setup.
 

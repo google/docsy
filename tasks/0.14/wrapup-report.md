@@ -61,15 +61,18 @@ cSpell:ignore: docsy
   shortcode delimiter behavior) ([#939], [#2480]).
 - **Scroll and fragment navigation**: Scroll padding (CSS `scroll-padding-top`)
   and anchor-alias class (scroll-margin-top fallback) for fragment navigation
-  below fixed navbar; scroll styling moved to `_scroll.scss` partial ([#2505]).
+  below fixed navbar; scroll styling moved to `_scroll.scss` partial
+  ([#2505][]).
 - **Shortcode docs heading IDs**: Normalized blocks shortcode heading IDs and
-  kept legacy IDs as span aliases for backward-compatible deep links ([#2505]).
+  kept legacy IDs as span aliases for backward-compatible deep links
+  ([#2505][]).
 - **Sidebar root icon**: Only set `td-sidebar-root-up-icon` for links that are
-  the tree root ([#2495]).
+  the tree root ([#2495][]).
 - **Documentation and style**: Release notes and Hugo upgrade guide updates,
-  "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
-- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533]).
-- **ToC**: Fix sidebar width in xl viewports ([#2538]).
+  "front matter" wording, Norwegian translation fix ([#2483][], [#2498][],
+  [#2502][]).
+- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533][]).
+- **ToC**: Fix sidebar width in xl viewports ([#2538][]).
 
 ## References
 
