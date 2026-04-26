@@ -9,19 +9,29 @@ description: >-
 > [!NB] :warning: Features described in this page are [experimental][].
 
 Docsy can emit **plain Markdown** alongside HTML for the same logical page, add
-**machine-readable discovery** in HTML, and generate a top-level
-[`llms.txt`][llmstxt] file. Together these patterns help agents consume your
-documentation without having to parse HTML.
+**machine-readable discovery** in HTML, and generate a top-level [llms.txt][]
+file. Together these patterns help agents consume your documentation without
+having to parse HTML.
 
-Design goals align with the **[Agent-Friendly Documentation spec][afs]**, which
-describes how agent-oriented consumers discover and read documentation. The
-**[AFDocs][afdocs]** effort implements that spec as automated checks and
-scorecards you can run on your own site.
+The **[Agent-Friendly Documentation spec][afs]** is a shared vocabulary for how
+agent-oriented consumers **discover and read** documentation. The
+**[AFDocs][afdocs]** project turns overlapping parts of that spec into
+automated checks and scorecards you can run against a deployed URL.
 
-> [!NOTE]
->
-> We run AFDocs checks over **docsy.dev**. For details on how we have set this
-> up, see [AFDocs checks](/project/build/ci-cd/#afdocs-checks).
+**Docsy’s agent support is broader than AFDocs.** The theme ships Hugo layouts,
+configuration guidance, maintainer-side tests (for example Markdown goldens on
+this site), and the user-facing docs on this page — work that sits outside any
+single checker’s checklist. We **treat the spec and AFDocs as community
+infrastructure we build on**, and we **use AFDocs on docsy.dev** as a practical
+signal for regressions in discoverability and related behaviors. It is a
+**tool we integrate with**, not the outer boundary of what “agent support” means
+for Docsy.
+
+**Looking ahead**, we may add documentation for **complementary measures** of how
+well documentation **works for agents** — including more **qualitative** views
+of whether generated content is **semantically useful**, not only whether
+formats and links behave as expected. When those efforts are ready to describe
+publicly, they will extend this page rather than replace the foundation below.
 
 ## What you get
 
@@ -132,19 +142,30 @@ You are not limited to the default `all.md`:
 - The feature set is **opt-in** by design; existing sites keep prior behavior
   until they add these outputs.
 
+## Example
+
+This site has agent-friendly support enabled. Here is our AFDocs scorecard:
+
+```text
+{{< readfile "afdocs-scorecard.txt" >}}
+```
+
+For details on how we have set this up, see
+[AFDocs checks](/project/build/ci-cd/#afdocs-checks).
+
 ## Further reading
 
 - [Agent-Friendly Documentation spec][afs] — normative goals and terminology.
 - [AFDocs][afdocs] — checks, CLI, and scorecards derived from the spec.
 - [AFDocs config file format][afdocs-config] — options for
   `agent-docs.config.yml`.
-- [llms.txt][llmstxt] — proposed convention for LLM-oriented site summaries.
+- [llms.txt][] — proposed convention for LLM-oriented site summaries.
 
 [afdocs-config]: https://afdocs.dev/reference/config-file
 [afdocs]: https://afdocs.dev/
 [afs]: https://agentdocsspec.com/
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
-[llmstxt]: https://llmstxt.org/
+[llms.txt]: https://llmstxt.org/
 [sof]:
   https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates
