@@ -1,13 +1,13 @@
 ---
 title: 0.15 release-prep wrapup report
 date: 2026-04-25
-lastmod: 2026-04-25
+lastmod: 2026-04-26
 range: v0.14.3..main
-last-main-commit: ee79b52c
+last-main-commit: 343d6154
 cSpell:ignore: afdocs
 ---
 
-> Report prepared for commits in [v0.14.3...main][] through [ee79b52c][].
+> Report prepared for commits in [v0.14.3...main][] through [343d6154][].
 
 ## Release Themes
 
@@ -43,13 +43,19 @@ cSpell:ignore: afdocs
 ## Release Content Status
 
 - Created draft release report:
-  [0.15.0 release report](../../../docsy.dev/content/en/blog/2026/0.15.0.md).
+  [0.15.0 release report](../../../docsy.dev/content/en/blog/2026/0.15.0.md)
+  ([#2610][]).
 - Updated changelog "Next release" section with 0.15 highlights and links.
 - Omit 0.14.3-only fixes from 0.15 highlights. The 0.14 release resources
   already cover the v0.14.3 layout fix.
+- **Before publishing the blog**: merge the branch that adds
+  `docs/content/agent-support/` so the post’s [Agent support][] link is not a
+  404 on `main`.
 
 ## Follow-Up Checklist
 
+- [ ] Merge Agent support user-guide page (`docs/content/agent-support/`) before
+      publishing the 0.15.0 post, or temporarily retarget the blog link.
 - [ ] Check [#2504][] and close it, or move any remaining doc-rooted work to
       follow-up issues, before finalizing 0.15.
 - [ ] Decide whether additional [#2596][] work lands before 0.15; otherwise keep
@@ -74,5 +80,7 @@ cSpell:ignore: afdocs
 [#2501]: https://github.com/google/docsy/issues/2501
 [#2504]: https://github.com/google/docsy/issues/2504
 [#2596]: https://github.com/google/docsy/issues/2596
-[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[#2610]: https://github.com/google/docsy/pull/2610
+[343d6154]: https://github.com/google/docsy/commit/343d6154
+[Agent support]: ../../../docsy.dev/content/en/docs/content/agent-support/
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

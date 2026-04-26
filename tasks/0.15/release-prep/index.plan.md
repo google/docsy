@@ -1,8 +1,8 @@
 ---
 title: 0.15 Release wrapup plan
 date: 2026-04-25
-lastmod: 2026-04-25
-last-main-commit: ee79b52c
+lastmod: 2026-04-26
+last-main-commit: 343d6154
 ---
 
 ## Agent guidance
@@ -116,7 +116,7 @@ Create and maintain:
 
 ## Refresh actions
 
-Repeat when new commits land on `main` do the following:
+When new commits land on `main`, repeat the following:
 
 - [Update the plan and reports](#update-the-plan-and-reports)
 - [0.15.0 blog post](#0150-blog-post)
@@ -131,8 +131,8 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-First execution should refresh reports for commits in [v0.14.3...main][] through
-[ee79b52c][].
+Refresh reports for commits in [v0.14.3...main][] through the commit named as
+`last-main-commit` in this file’s front matter (currently [343d6154][]).
 
 ### 0.15.0 blog post
 
@@ -167,7 +167,7 @@ First execution should refresh reports for commits in [v0.14.3...main][] through
   ../../../docsy.dev/content/en/project/about/changelog/#v0.15.0
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [0.15.0 blog post]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
-[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[343d6154]: https://github.com/google/docsy/commit/343d6154
 [changelog style guide]:
   ../../../docsy.dev/content/en/project/about/changelog/#style-guide
 [Docsy style guide]: ../../../docsy.dev/content/en/project/style-guide/

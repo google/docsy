@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue audit
 date: 2026-04-25
-lastmod: 2026-04-25
+lastmod: 2026-04-26
 range: v0.14.3..main
-last-main-commit: ee79b52c
+last-main-commit: 343d6154
 cSpell:ignore: afdocs overpromising
 ---
 
 ## Scope
 
-Draft audit covers material changes in [v0.14.3...main][] through [ee79b52c][].
+Draft audit covers material changes in [v0.14.3...main][] through [343d6154][].
 This is an evidence pass for review before writing the wrapup report, release
 blog post, or changelog updates.
 
@@ -32,7 +32,10 @@ blog post, or changelog updates.
 - Changelog status: draft 0.15.0 entry exists and needs final review before
   release.
 - Blog status: draft release report exists at
-  `docsy.dev/content/en/blog/2026/0.15.0.md`.
+  `docsy.dev/content/en/blog/2026/0.15.0.md` ([#2610][]).
+- Link check: the blog points to `/docs/content/agent-support/`; that user-guide
+  page is **not** on `main` at [343d6154][] (landed in follow-up branch work).
+  Resolve before publishing the post.
 
 ### Docs/blog/changelog status summary
 
@@ -85,6 +88,7 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2604][]: Create `az.yaml` from TOML                      | rel  | WIP  | WIP  | Internationalization                       |
 | [#2605][]: Add LLMS output and `llms.txt`                  | WIP  | WIP  | WIP  | Experimental agent support                 |
 | [#2606][]: Allow Markdown output for project docs          | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2610][]: 0.15 release-prep omnibus                       | done | rel  | rel  | Blog, changelog, refcache, reports, links |
 
 Raw commits in scope without PR numbers in their commit subjects:
 
@@ -114,12 +118,13 @@ Raw commits in scope without PR numbers in their commit subjects:
     exists.
   - Includes new i18n key `post_view_markdown`.
 - Docs impact:
-  - Status: WIP.
-  - Feature planning exists in `tasks/0.15/agent-friendly-support.plan.md`.
+  - Status: rel. Feature planning in `tasks/0.15/agent-friendly-support.plan.md`
+    on `main` at [343d6154][] (branch renames it to `agent-support.plan.md`).
   - Golden-test planning exists in `tasks/0.15/md-output-golden-tests.plan.md`.
   - `docsy.dev` is configured to enable Markdown and LLMS outputs.
-  - User-facing guide documentation for enabling Markdown outputs and `llms.txt`
-    still needs release-facing review.
+  - Dedicated user-guide page `docsy.dev/content/en/docs/content/agent-support/`
+    exists on the current branch; **merge before release** so the blog link is
+    not dead on `main`.
 - Changelog impact:
   - Status: WIP.
   - Draft 0.15 changelog entry includes this under Experimental.
@@ -368,6 +373,7 @@ Raw commits in scope without PR numbers in their commit subjects:
 [#2604]: https://github.com/google/docsy/pull/2604
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
+[#2610]: https://github.com/google/docsy/pull/2610
 [#726]: https://github.com/google/docsy/issues/726
-[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[343d6154]: https://github.com/google/docsy/commit/343d6154
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
