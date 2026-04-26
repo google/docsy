@@ -180,8 +180,8 @@ by adding a proxy to use when downloading remote modules.
 ### Install PostCSS
 
 To build or update your site's CSS resources, you also need
-[PostCSS](https://postcss.org/). Run the following commands from your site
-root directory to install the required packages:
+[PostCSS](https://postcss.org/). Run the following commands from your site root
+directory to install the required packages:
 
 ```bash
 npm install -D autoprefixer postcss-cli postcss
@@ -192,10 +192,10 @@ content:
 
 ```javascript
 module.exports = {
-    plugins: {
-        autoprefixer: {}
-    },
-}
+  plugins: {
+    autoprefixer: {},
+  },
+};
 ```
 
 For more details, see
