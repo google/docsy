@@ -177,7 +177,7 @@ module:
     - source: content/fr
       target: content
       sites: { matrix: { languages: [fr] } }
-    # English content for en and and fallback for fr
+    # English content for en and as fallback for fr (other pages)
     - source: content/en
       target: content
       sites: &sites { matrix: { languages: [en, fr] } }
