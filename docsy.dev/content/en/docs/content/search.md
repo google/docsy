@@ -1,7 +1,6 @@
 ---
 title: Search
-date: 2017-01-05
-weight: 3.5
+# date: 2017-01-05
 description: >
   Let users search your Docsy site with a choice of configurable search options.
 cSpell:ignore: GCSE docsearch websearch fsdu nryfng

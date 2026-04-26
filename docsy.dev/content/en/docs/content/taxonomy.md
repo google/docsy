@@ -1,6 +1,5 @@
 ---
 title: Taxonomy Support
-weight: 10
 tags: [Tagging, Structuring Content, Labelling]
 categories: [Taxonomies]
 description: >

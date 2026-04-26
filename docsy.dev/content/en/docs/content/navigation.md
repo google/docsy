@@ -1,7 +1,6 @@
 ---
 title: Navigation and Menus
-date: 2017-01-05
-weight: 3
+# date: 2017-01-05
 description: Customize site navigation for your Docsy site.
 cSpell:ignore: navs lightdark lookandfeel notoc
 ---

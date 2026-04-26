@@ -1,6 +1,5 @@
 ---
 title: Adding Content
-weight: 1
 description: Add different types of content to your Docsy site.
 params:
   alert-examples: |

@@ -1,7 +1,6 @@
 ---
 title: Look and Feel
-date: 2017-01-05
-weight: 2
+# date: 2017-01-05
 description: Customize colors, fonts, code highlighting, and more for your site.
 params:
   BringYourOwnLightDarkModeMenuAlertTitle: >-

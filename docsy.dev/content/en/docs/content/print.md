@@ -1,6 +1,5 @@
 ---
 title: Print Support
-weight: 7
 description: Making it easier to print entire sections of documentation.
 ---
 
