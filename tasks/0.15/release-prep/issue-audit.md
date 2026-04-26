@@ -47,32 +47,32 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 - rel: the work scoped for this release is complete, but more work is needed
 - WIP: work in progress
 
-| Item                                                       | Docs | CL   | Blog | Notes                                      |
+| Item                                                       | Docs | Blog | CL   | Notes                                      |
 | ---------------------------------------------------------- | ---- | ---- | ---- | ------------------------------------------ |
 | [#2082][]: Add Azerbaijan language                         | rel  | WIP  | WIP  | Internationalization                       |
 | [#2555][]: Set version to 0.14.3-dev                       | N/A  | N/A  | N/A  | Release-prep maintenance                   |
-| [#2556][]: Reorg deployment docs, normalize links          | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2556][]: Reorg deployment docs, normalize links          | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2557][]: Add version menu to site                        | done | rel  | rel  | No client-facing release-note impact       |
 | [#2558][]: Replace placeholder locale by French            | rel  | WIP  | WIP  | Internationalization                       |
-| [#2559][]: Document `deploy/prod` branch                   | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2559][]: Document `deploy/prod` branch                   | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2560][]: Update bug report template                      | N/A  | N/A  | N/A  | Admin                                      |
-| [#2562][]: Ensure `.td-main > .row` grows vertically       | rel  | done | rel  | Already covered by v0.14.3                 |
+| [#2562][]: Ensure `.td-main > .row` grows vertically       | rel  | rel  | done | Already covered by v0.14.3                 |
 | [#2563][]: Add doc-rooted example version and guidance     | rel  | WIP  | WIP  | Doc-rooted sites                           |
 | [#2564][]: Use `TD_BUILD_CTX` for doc-rooted builds        | rel  | WIP  | WIP  | Doc-rooted sites                           |
 | [#2565][]: Update doc-rooted configs and `card` rendering  | rel  | WIP  | WIP  | Includes client-impacting `card` change    |
 | [#2567][]: Remove `sidebar_root_for` user-guide docs       | rel  | WIP  | WIP  | Doc-rooted cleanup                         |
 | [#2568][]: Dedup site homepages for doc-rooted sites       | rel  | WIP  | WIP  | Doc-rooted sites                           |
 | [#2571][]: Update `deploy/prod` to 0.14.3                  | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2572][]: Clarify release process and branch model        | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2572][]: Clarify release process and branch model        | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2573][]: Sync `release` and `deploy/prod` branches       | N/A  | N/A  | N/A  | Branch maintenance                         |
 | [#2574][]: Link release branches back into main ancestry   | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2575][]: Format project about docs and add project link  | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2575][]: Format project about docs and add project link  | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2576][]: Fix footer/community link target and `rel`      | 0    | WIP  | WIP  | Community/footer links                     |
 | [#2577][]: Record ancestry with release branches           | N/A  | N/A  | N/A  | Branch ancestry                            |
-| [#2579][]: Use canonical URL to contributing page          | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2579][]: Use canonical URL to contributing page          | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2580][]: Resolve community/footer links under permalinks | 0    | WIP  | WIP  | Potentially breaking multilingual behavior |
 | [#2583][]: Add Romanian locale                             | rel  | WIP  | WIP  | Internationalization                       |
-| [#2584][]: Add site-local URL markdownlint rule            | done | rel  | WIP  | Documentation/process cleanup              |
+| [#2584][]: Add site-local URL markdownlint rule            | done | WIP  | rel  | Documentation/process cleanup              |
 | [#2585][]: Update NPM packages and Hugo tooling            | WIP  | WIP  | WIP  | Confirm final supported versions           |
 | [#2586][]: Update version and variant menu                 | done | rel  | rel  | No client-facing release-note impact       |
 | [#2587][]: Finalize doc-rooted configuration explanation   | rel  | WIP  | WIP  | Doc-rooted sites                           |
@@ -89,16 +89,16 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 
 Raw commits in scope without PR numbers in their commit subjects:
 
-| Item                                                 | Docs | CL  | Blog | Notes                         |
-| ---------------------------------------------------- | ---- | --- | ---- | ----------------------------- |
-| `40bef3c7`: Record ancestry with release             | N/A  | N/A | N/A  | Covered by branch maintenance |
-| `21a1ff37`: Record ancestry with deploy/prod         | N/A  | N/A | N/A  | Covered by branch maintenance |
-| `5f0b2c86`: Use canonical URL to contributing page   | done | rel | WIP  | Covered by [#2579][]          |
-| `df519b49`: Resolve community and footer links paths | 0    | WIP | WIP  | Covered by [#2580][]          |
-| `e91cf749`: Add markdownlint rule and fix link       | done | rel | WIP  | Covered by [#2584][]          |
-| `ca5deb63`: Update NPM packages and Hugo to 0.157.0  | WIP  | WIP | WIP  | Covered by [#2585][]          |
-| `2ad607a8`: Update package.json                      | WIP  | WIP | WIP  | Covered by [#2585][]          |
-| `28d44d1f`: Use bash `cp` instead of NPM `cpy-cli`   | WIP  | WIP | WIP  | Covered by [#2585][]          |
+| Item                                                 | Docs | Blog | CL  | Notes                         |
+| ---------------------------------------------------- | ---- | ---- | --- | ----------------------------- |
+| `40bef3c7`: Record ancestry with release             | N/A  | N/A  | N/A | Covered by branch maintenance |
+| `21a1ff37`: Record ancestry with deploy/prod         | N/A  | N/A  | N/A | Covered by branch maintenance |
+| `5f0b2c86`: Use canonical URL to contributing page   | done | WIP  | rel | Covered by [#2579][]          |
+| `df519b49`: Resolve community and footer links paths | 0    | WIP  | WIP | Covered by [#2580][]          |
+| `e91cf749`: Add markdownlint rule and fix link       | done | WIP  | rel | Covered by [#2584][]          |
+| `ca5deb63`: Update NPM packages and Hugo to 0.157.0  | WIP  | WIP  | WIP | Covered by [#2585][]          |
+| `2ad607a8`: Update package.json                      | WIP  | WIP  | WIP | Covered by [#2585][]          |
+| `28d44d1f`: Use bash `cp` instead of NPM `cpy-cli`   | WIP  | WIP  | WIP | Covered by [#2585][]          |
 
 ## Audit details
 
