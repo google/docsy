@@ -4,6 +4,7 @@ date: 2026-04-25
 lastmod: 2026-04-25
 range: v0.14.3..main
 last-main-commit: ee79b52c
+cSpell:ignore: afdocs overpromising
 ---
 
 ## Scope
@@ -23,12 +24,12 @@ blog post, or changelog updates.
   - deployment and release-process documentation improvements
   - i18n additions and translation updates
 - Known likely breaking or action-requiring items:
-  - #2580 changes multilingual community/footer path interpretation to
+  - [#2580][] changes multilingual community/footer path interpretation to
     site-relative paths.
-  - #2565 changes `card` shortcode rendering from `markdownify` to
+  - [#2565][] changes `card` shortcode rendering from `markdownify` to
     `$.Page.RenderString`, which may affect some client overrides or shortcode
     content rendering.
-  - #2585 raises the repository-supported Hugo version to 0.157.0.
+  - [#2585][] raises the repository-supported Hugo version to 0.157.0.
 - Changelog status: the "Next release" section still contains placeholders and
   still says "v0.14.3 or v0.15.0".
 - Blog status: `docsy.dev/content/en/blog/2026/0.15.0.md` does not exist yet.
@@ -37,10 +38,10 @@ blog post, or changelog updates.
 
 ### Agent-friendly Markdown output and `llms.txt`
 
-- Evidence: #2597, #2599, #2600, #2601, #2602, #2605, #2606; tracker #2596;
-  golden-test tracker #726.
+- Evidence: [#2597][], [#2599][], [#2600][], [#2601][], [#2602][], [#2605][],
+  [#2606][]; tracker [#2596][]; golden-test tracker [#726][].
 - Status: partial. The basic Markdown output and `llms.txt` implementation is
-  merged, but tracker #2596 intentionally remains open while additional 0.15
+  merged, but tracker [#2596][] intentionally remains open while additional 0.15
   follow-up work is still undecided.
 - Docs impact:
   - Feature planning exists in `tasks/0.15/agent-friendly-support.plan.md`.
@@ -63,10 +64,11 @@ blog post, or changelog updates.
 
 ### Doc-rooted site support
 
-- Evidence: #2563, #2564, #2565, #2567, #2568, #2579, #2580, #2586, #2587;
-  tracker #2504; closed issues #2492 and #2499.
-- Status: partial. #2492 and #2499 are closed through #2563, but the overall
-  #2504 tracker remains open.
+- Evidence: [#2563][], [#2564][], [#2565][], [#2567][], [#2568][], [#2579][],
+  [#2580][], [#2586][], [#2587][]; tracker [#2504][]; closed issues [#2492][]
+  and [#2499][].
+- Status: partial. [#2492][] and [#2499][] are closed through [#2563][], but the
+  overall [#2504][] tracker remains open.
 - Docs impact:
   - `docsy.dev/content/en/docs/content/adding-content.md` now documents
     doc-rooted sites and links the doc-rooted example.
@@ -86,14 +88,15 @@ blog post, or changelog updates.
 - Changelog/blog note: mention the `card` shortcode rendering change as an
   internal behavior change that may affect some client projects.
 - Follow-up needed:
-  - Confirm which #2504 checklist items remain before calling doc-rooted support
-    complete.
+  - Confirm which [#2504][] checklist items remain before calling doc-rooted
+    support complete.
 
 ### Community and Footer Link Behavior
 
-- Evidence: #2576, #2580; closed issues #1380 and #2133; tracker #2504.
-- Status: resolved for #1380 and #2133. #2580 contributes to #2504 and carries a
-  potentially breaking behavior note.
+- Evidence: [#2576][], [#2580][]; closed issues [#1380][] and [#2133][]; tracker
+  [#2504][].
+- Status: resolved for [#1380][] and [#2133][]. [#2580][] contributes to
+  [#2504][] and carries a potentially breaking behavior note.
 - Docs impact: no dedicated user-guide update found in the first pass.
 - Changelog impact: missing from the current 0.15 changelog placeholder.
 - Downstream/client impact:
@@ -116,8 +119,9 @@ blog post, or changelog updates.
 
 ### Version and Variant Menus
 
-- Evidence: #2557, #2586.
-- Status: implemented; no linked issue found except #2586 contributes to #2504.
+- Evidence: [#2557][], [#2586][].
+- Status: implemented; no linked issue found except [#2586][] contributes to
+  [#2504][].
 - Docs impact:
   - `docsy.dev/content/en/docs/content/navigation.md` includes version menu
     guidance.
@@ -136,7 +140,7 @@ blog post, or changelog updates.
 
 ### Layout Fixes
 
-- Evidence: #2562; closed issue #2561.
+- Evidence: [#2562][]; closed issue [#2561][].
 - Status: resolved. This fix is also part of the 0.14.3 patch-release story.
 - Docs impact: no user-guide action expected.
 - Changelog impact: already documented under v0.14.3; probably do not duplicate
@@ -148,7 +152,7 @@ blog post, or changelog updates.
 
 ### Deployment and Release Process Docs
 
-- Evidence: #2556, #2559, #2572, #2575, #2579, #2584.
+- Evidence: [#2556][], [#2559][], [#2572][], [#2575][], [#2579][], [#2584][].
 - Status: implemented.
 - Docs impact:
   - Deployment docs were split into provider-specific pages.
@@ -164,7 +168,7 @@ blog post, or changelog updates.
 
 ### Dependencies and Tooling
 
-- Evidence: #2585.
+- Evidence: [#2585][].
 - Status: implemented.
 - Docs impact: supported-version references may need review.
 - Changelog impact: missing from the current 0.15 changelog placeholder if Hugo
@@ -181,7 +185,8 @@ blog post, or changelog updates.
 
 ### Internationalization
 
-- Evidence: #2558, #2583, #2603, #2082, #2604, #2591, #2602.
+- Evidence: [#2558][], [#2583][], [#2603][], [#2082][], [#2604][], [#2591][],
+  [#2602][].
 - Status: implemented.
 - Docs impact: no release-blocking docs found.
 - Changelog impact: missing from current 0.15 changelog placeholder.
@@ -201,8 +206,47 @@ blog post, or changelog updates.
   experimental, preview, or a standard feature?
 - Should 0.14.3-only fixes in the range be omitted from 0.15 highlights, or
   briefly mentioned as already included?
-- Does #2504 need to remain open after 0.15, or should specific remaining tasks
-  be spun out before release?
+- Does [#2504][] need to remain open after 0.15, or should specific remaining
+  tasks be spun out before release?
 
-[v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
+[#1380]: https://github.com/google/docsy/issues/1380
+[#2082]: https://github.com/google/docsy/pull/2082
+[#2133]: https://github.com/google/docsy/issues/2133
+[#2492]: https://github.com/google/docsy/issues/2492
+[#2499]: https://github.com/google/docsy/issues/2499
+[#2504]: https://github.com/google/docsy/issues/2504
+[#2556]: https://github.com/google/docsy/pull/2556
+[#2557]: https://github.com/google/docsy/pull/2557
+[#2558]: https://github.com/google/docsy/pull/2558
+[#2559]: https://github.com/google/docsy/pull/2559
+[#2561]: https://github.com/google/docsy/issues/2561
+[#2562]: https://github.com/google/docsy/pull/2562
+[#2563]: https://github.com/google/docsy/pull/2563
+[#2564]: https://github.com/google/docsy/pull/2564
+[#2565]: https://github.com/google/docsy/pull/2565
+[#2567]: https://github.com/google/docsy/pull/2567
+[#2568]: https://github.com/google/docsy/pull/2568
+[#2572]: https://github.com/google/docsy/pull/2572
+[#2575]: https://github.com/google/docsy/pull/2575
+[#2576]: https://github.com/google/docsy/pull/2576
+[#2579]: https://github.com/google/docsy/pull/2579
+[#2580]: https://github.com/google/docsy/pull/2580
+[#2583]: https://github.com/google/docsy/pull/2583
+[#2584]: https://github.com/google/docsy/pull/2584
+[#2585]: https://github.com/google/docsy/pull/2585
+[#2586]: https://github.com/google/docsy/pull/2586
+[#2587]: https://github.com/google/docsy/pull/2587
+[#2591]: https://github.com/google/docsy/pull/2591
+[#2596]: https://github.com/google/docsy/issues/2596
+[#2597]: https://github.com/google/docsy/pull/2597
+[#2599]: https://github.com/google/docsy/pull/2599
+[#2600]: https://github.com/google/docsy/pull/2600
+[#2601]: https://github.com/google/docsy/pull/2601
+[#2602]: https://github.com/google/docsy/pull/2602
+[#2603]: https://github.com/google/docsy/pull/2603
+[#2604]: https://github.com/google/docsy/pull/2604
+[#2605]: https://github.com/google/docsy/pull/2605
+[#2606]: https://github.com/google/docsy/pull/2606
+[#726]: https://github.com/google/docsy/issues/726
 [ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
