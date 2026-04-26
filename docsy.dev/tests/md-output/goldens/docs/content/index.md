@@ -11,7 +11,7 @@ LLMS index: [llms.txt](/llms.txt)
 Section pages:
 
 - [Adding Content](/docs/content/adding-content/): Add different types of content to your Docsy site.
-- [Agent-friendly docs](/docs/content/agent-friendly/): Opt-in Markdown alternate output and llms.txt so tools and agents can read your site without scraping HTML.
+- [Agent support](/docs/content/agent-support/): Theme features and docs so agents can use your site—including opt-in Markdown output, llms.txt, and ties to the Agent-Friendly Documentation ecosystem.
 - [Analytics, User Feedback, and SEO](/docs/content/feedback/): Add Google Analytics tracking to your site, collect user feedback and learn about the page description meta tag.
 - [Diagrams and Formulae](/docs/content/diagrams-and-formulae/): Add generated diagrams and scientific formulae to your site.
 - [Logos and Images](/docs/content/iconsimages/): Add and customize logos, icons, and images in your project.

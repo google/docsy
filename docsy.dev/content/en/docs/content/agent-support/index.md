@@ -1,9 +1,10 @@
 ---
-title: Agent-friendly docs support
-linkTitle: Agent-friendly docs
+title: Agent support
 description: >-
-  Opt-in Markdown alternate output and llms.txt so tools and agents can read
-  your site without scraping HTML.
+  Features so agents can better understand and use your site, including opt-in Markdown
+  output, llms.txt.
+aliases:
+  - /docs/content/agent-friendly/
 ---
 
 > [!NB] :warning: Features described in this page are [experimental][].
@@ -13,25 +14,16 @@ Docsy can emit **plain Markdown** alongside HTML for the same logical page, add
 file. Together these patterns help agents consume your documentation without
 having to parse HTML.
 
-The **[Agent-Friendly Documentation spec][afs]** is a shared vocabulary for how
-agent-oriented consumers **discover and read** documentation. The
-**[AFDocs][afdocs]** project turns overlapping parts of that spec into
-automated checks and scorecards you can run against a deployed URL.
+The **[Agent-Friendly Documentation spec][afs]** and **[AFDocs][afdocs]**
+(checks against a deployed URL) capture part of what “good” means for
+agent-readable docs. **Docsy’s agent support is wider**: layouts, config
+guidance, maintainer tests (for example Markdown goldens), and this guide. We
+**build on** that ecosystem and **run AFDocs on docsy.dev** for
+discoverability-style regressions — a **tool we use**, not the whole roadmap.
 
-**Docsy’s agent support is broader than AFDocs.** The theme ships Hugo layouts,
-configuration guidance, maintainer-side tests (for example Markdown goldens on
-this site), and the user-facing docs on this page — work that sits outside any
-single checker’s checklist. We **treat the spec and AFDocs as community
-infrastructure we build on**, and we **use AFDocs on docsy.dev** as a practical
-signal for regressions in discoverability and related behaviors. It is a
-**tool we integrate with**, not the outer boundary of what “agent support” means
-for Docsy.
-
-**Looking ahead**, we may add documentation for **complementary measures** of how
-well documentation **works for agents** — including more **qualitative** views
-of whether generated content is **semantically useful**, not only whether
-formats and links behave as expected. When those efforts are ready to describe
-publicly, they will extend this page rather than replace the foundation below.
+Later we may document **more qualitative** ways to judge whether agent-facing
+output is **semantically helpful**; when that is public, it will **extend** this
+section, not replace what follows.
 
 ## What you get
 
@@ -144,7 +136,7 @@ You are not limited to the default `all.md`:
 
 ## Example
 
-This site has agent-friendly support enabled. Here is our AFDocs scorecard:
+This site has agent support features enabled. Here is our AFDocs scorecard:
 
 ```text
 {{< readfile "afdocs-scorecard.txt" >}}
