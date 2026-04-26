@@ -1,0 +1,208 @@
+---
+title: 0.15 issue audit
+date: 2026-04-25
+lastmod: 2026-04-25
+range: v0.14.3..main
+last-main-commit: ee79b52c
+---
+
+## Scope
+
+Draft audit covers material changes in [v0.14.3...main][] through
+[ee79b52c][]. This is an evidence pass for review before writing the wrapup
+report, release blog post, or changelog updates.
+
+## Summary
+
+- Major candidate release themes:
+  - experimental agent-friendly content generation with Markdown outputs and
+    `llms.txt`
+  - doc-rooted site support and documentation
+  - version and variant menu improvements
+  - community/footer link behavior fixes
+  - deployment and release-process documentation improvements
+  - i18n additions and translation updates
+- Known likely breaking or action-requiring items:
+  - #2580 changes multilingual community/footer path interpretation to
+    site-relative paths.
+  - #2586 changes version config to consistently use v-prefixed version values.
+  - #2585 raises the repository-supported Hugo version to 0.157.0.
+- Changelog status: the "Next release" section still contains placeholders and
+  still says "v0.14.3 or v0.15.0".
+- Blog status: `docsy.dev/content/en/blog/2026/0.15.0.md` does not exist yet.
+
+## Audit Details
+
+### Agent-friendly Markdown output and `llms.txt`
+
+- Evidence: #2597, #2599, #2600, #2601, #2602, #2605, #2606; tracker #2596;
+  golden-test tracker #726.
+- Status: partial. Markdown output phase 1 is complete; `llms.txt` base
+  implementation is merged. Tracker #2596 remains open, with #2606 still shown
+  as an unchecked housekeeping item in the tracker body.
+- Docs impact:
+  - Feature planning exists in `tasks/0.15/agent-friendly-support.plan.md`.
+  - Golden-test planning exists in `tasks/0.15/md-output-golden-tests.plan.md`.
+  - `docsy.dev` is configured to enable Markdown and LLMS outputs.
+  - User-facing guide documentation for enabling Markdown outputs and
+    `llms.txt` still needs release-facing review.
+- Changelog impact: missing from the current 0.15 changelog placeholder.
+- Downstream/client impact:
+  - Adds opt-in theme support through Hugo output formats and templates.
+  - Adds a visible "View Markdown" page-meta link when Markdown alternate output
+    exists.
+  - Includes new i18n key `post_view_markdown`.
+- Blog inclusion: include as a major experimental feature. Explain what is
+  available now, what is opt-in, and what remains experimental.
+- Follow-up needed:
+  - Decide whether #2606 should be checked in #2596.
+  - Add user-guide or release-blog guidance for enabling Markdown output and
+    `llms.txt`.
+  - Note any measured `afdocs` caveats without overpromising support.
+
+### Doc-rooted site support
+
+- Evidence: #2563, #2564, #2565, #2567, #2568, #2579, #2580, #2586, #2587;
+  tracker #2504; closed issues #2492 and #2499.
+- Status: partial. #2492 and #2499 are closed through #2563, but the overall
+  #2504 tracker remains open.
+- Docs impact:
+  - `docsy.dev/content/en/docs/content/adding-content.md` now documents
+    doc-rooted sites and links the doc-rooted example.
+  - `docsy.dev/config/doc-rooted/` adds a doc-rooted site configuration.
+  - `docsy.dev/content/en/project/build/git-repo.md` documents the `doc-rooted`
+    branch.
+- Changelog impact: missing from the current 0.15 changelog placeholder.
+- Downstream/client impact:
+  - Adds a concrete configuration pattern for documentation-first sites.
+  - May affect users with custom docs-only/doc-rooted configurations.
+- Blog inclusion: include as a major feature or improvement, with migration
+  notes for projects that previously used docs-only patterns.
+- Follow-up needed:
+  - Confirm which #2504 checklist items remain before calling doc-rooted support
+    complete.
+  - Decide whether the `card` shortcode rendering change in #2565 should be
+    mentioned separately.
+
+### Community and Footer Link Behavior
+
+- Evidence: #2576, #2580; closed issues #1380 and #2133; tracker #2504.
+- Status: resolved for #1380 and #2133. #2580 contributes to #2504 and carries
+  a potentially breaking behavior note.
+- Docs impact: no dedicated user-guide update found in the first pass.
+- Changelog impact: missing from the current 0.15 changelog placeholder.
+- Downstream/client impact:
+  - Footer links now support `rel`.
+  - Community/footer links only open in a new target for external links.
+  - Community/footer links resolve under custom permalinks.
+  - Potentially breaking: multilingual sites now interpret paths as
+    site-relative; use the default language code prefix to force a default
+    language target.
+- Blog inclusion: include in breaking/action section if the multilingual path
+  behavior is release-noteworthy.
+- Follow-up needed: add release-note guidance and, if appropriate, user-guide
+  examples for multilingual path prefixes.
+
+### Version and Variant Menus
+
+- Evidence: #2557, #2586.
+- Status: implemented; no linked issue found except #2586 contributes to #2504.
+- Docs impact:
+  - `docsy.dev/content/en/docs/content/navigation.md` includes version menu
+    guidance.
+  - `docsy.dev/content/en/project/about/maintainer-notes.md` and package version
+    scripts were updated.
+- Changelog impact: missing from the current 0.15 changelog placeholder.
+- Downstream/client impact:
+  - Updates version/variant menu behavior and markup.
+  - Introduces `tdVersion` YAML structure.
+  - Version v-prefix use changed: old config used bare values such as
+    `0.14.4-dev`; new config consistently uses values such as `v0.14.4-dev`.
+- Blog inclusion: include as a user-facing site/versioning improvement if the
+  theme-facing impact is real for downstream sites; otherwise place in "Other
+  notable changes".
+- Follow-up needed: confirm whether v-prefix behavior is a required action for
+  client projects or only for Docsy site/release tooling.
+
+### Layout Fixes
+
+- Evidence: #2562; closed issue #2561.
+- Status: resolved. This fix is also part of the 0.14.3 patch-release story.
+- Docs impact: no user-guide action expected.
+- Changelog impact: already documented under v0.14.3; probably do not duplicate
+  in 0.15 unless summarizing that 0.15 includes all 0.14.3 changes.
+- Downstream/client impact: fixes `.td-main > .row` vertical growth.
+- Blog inclusion: probably omit from 0.15 main highlights unless the post
+  summarizes patch-release carry-forward fixes.
+- Follow-up needed: none identified.
+
+### Deployment and Release Process Docs
+
+- Evidence: #2556, #2559, #2572, #2575, #2579, #2584.
+- Status: implemented.
+- Docs impact:
+  - Deployment docs were split into provider-specific pages.
+  - Branch model now documents `main`, `release`, `deploy/prod`, and
+    `doc-rooted`.
+  - Markdownlint now checks for site-local `docsy.dev` external URLs.
+- Changelog impact: probably not required unless highlighting project process
+  changes.
+- Downstream/client impact: primarily documentation quality.
+- Blog inclusion: include only if the 0.15 post has an "Other notable docs
+  updates" section.
+- Follow-up needed: none identified for release blockers.
+
+### Dependencies and Tooling
+
+- Evidence: #2585.
+- Status: implemented.
+- Docs impact: supported-version references may need review.
+- Changelog impact: missing from the current 0.15 changelog placeholder if Hugo
+  0.157.0 is the release-supported Hugo version.
+- Downstream/client impact:
+  - Updates NPM packages.
+  - Updates Hugo to 0.157.0.
+  - Drops `cpy-cli` in favor of a shell `cp` call.
+- Blog inclusion: include in upgrade/runtime section if Hugo 0.157.0 becomes the
+  official 0.15 Hugo requirement.
+- Follow-up needed:
+  - Confirm final Hugo and Node support matrix before release.
+  - Check whether `cpy-cli` removal affects consumers or only repo tooling.
+
+### Internationalization
+
+- Evidence: #2558, #2583, #2603, #2082, #2604, #2591, #2602.
+- Status: implemented.
+- Docs impact: no release-blocking docs found.
+- Changelog impact: missing from current 0.15 changelog placeholder.
+- Downstream/client impact:
+  - Adds French homepage setup for the site.
+  - Adds Romanian locale and "View Markdown" translation.
+  - Adds Azerbaijan language YAML.
+  - Adds missing German alert-label translations.
+  - Adds `post_view_markdown` values across i18n files.
+- Blog inclusion: include as "Internationalization" under other notable changes.
+- Follow-up needed: invite native-speaker review for generated or assisted
+  translations if desired.
+
+## Release Tracker Alignment
+
+\#2501 is open and still references `v0.14.0...main` in its checklist and
+related links. Since the correct audit range is now [v0.14.3...main][], the
+tracker should be updated before final release prep.
+
+## Open Questions For Review
+
+- Should the 0.15 release report treat agent-friendly Markdown/LLMS support as
+  experimental, preview, or a standard feature?
+- Is #2580 a breaking change that needs a required-action section, or is a
+  release-note warning enough?
+- Is #2586's v-prefixed version change client-facing, maintainer-facing, or
+  both?
+- Should 0.14.3-only fixes in the range be omitted from 0.15 highlights, or
+  briefly mentioned as already included?
+- Does #2504 need to remain open after 0.15, or should specific remaining tasks
+  be spun out before release?
+
+[v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
+[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c

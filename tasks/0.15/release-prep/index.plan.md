@@ -2,7 +2,7 @@
 title: 0.15 Release wrapup plan
 date: 2026-04-25
 lastmod: 2026-04-25
-last-main-commit: 46da75a7
+last-main-commit: ee79b52c
 ---
 
 ## Agent guidance
@@ -14,6 +14,16 @@ last-main-commit: 46da75a7
 - Treat the [0.15 release tracker][] as the release coordination issue.
 - When updating release content, follow the [Docsy style guide][] and the
   [changelog style guide][].
+- First determine the last release of the previous version (0.14.3) and use that
+  as the baseline for the commit inventory, not the previous minor release tag
+  (0.14.0). This ensures we capture all commits since the last official release.
+- When refreshing reports, use the latest commit on `main` as the new refresh
+  point.
+- For the release report blog post, focus on explaining user-facing changes and
+  required actions for breaking changes, not just listing commits. Link to
+  relevant issues, PRs, and user guide sections for each change. Keep upgrade
+  mechanics brief and reference the upgrade guide for command examples when
+  applicable.
 
 ## Deliverables
 
@@ -39,7 +49,9 @@ Create and maintain:
 
 ## Inventory commits
 
-- Pull git log from [v0.14.0...main][] and export commit list with PR numbers
+- Pull git log from the last release of the previous version and main (that is
+  [v0.14.3...main][]) and export commit list with PR numbers. Use the latest
+  official release tag as the baseline, not the previous minor release tag.
 - Group dependency-only commits together and flag mixed-change commits for
   review.
 - Keep groupings broad so the list stays manageable; note detailed client-impact
@@ -119,7 +131,8 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-First execution should refresh reports for commits through [46da75a7][].
+First execution should refresh reports for commits in [v0.14.3...main][] through
+[ee79b52c][].
 
 ### 0.15.0 blog post
 
@@ -151,9 +164,9 @@ First execution should refresh reports for commits through [46da75a7][].
 [0.15.0 release report]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
 [0.15.0-changelog]:
   ../../../docsy.dev/content/en/project/about/changelog/#v0.15.0
-[v0.14.0...main]: https://github.com/google/docsy/compare/v0.14.0...main
+[v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [0.15.0 blog post]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
-[46da75a7]: https://github.com/google/docsy/commit/46da75a7
+[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
 [changelog style guide]:
   ../../../docsy.dev/content/en/project/about/changelog/#style-guide
 [Docsy style guide]: ../../../docsy.dev/content/en/project/style-guide/
