@@ -4,10 +4,10 @@ title: CI/CD
 
 ## Agent-support checks
 
-The **docsy.dev** site has an [AFDocs][] configuration and npm script to
-generate a scorecard locally:
+The site has an [AFDocs][] configuration and npm script to generate a scorecard
+locally:
 
-- Config: [`docsy.dev/agent-docs.config.yml`][agent-docs-config]
+- Config: [docsy.dev/agent-docs.config.yml][]
 - Script: `_check:afdocs` in [docsy.dev/package.json][]
 
 To generate a fresh scorecard, run each of these commands in separate terminals:
@@ -17,16 +17,18 @@ npm run serve             # From one terminal
 npm run check:afdocs:dev  # From another terminal
 ```
 
-The report is not automatically updated when you make changes to the site.
+The latter command saves the generated scorecard to
+`docs/content/agent-support/afdocs-scorecard.txt` under `docsy.dev/content/en`,
+which will be included in [Scorecard examples][] on the next build.
 
-Read more:
+Note that the scorecard generation is not run as a part of the full CI/CD
+pipeline. It needs to be run manually.
 
-- [Scorecard examples](/docs/content/agent-support/#scorecard-examples)
-- [AFDocs config file format][afdocs-config]
+Read more: [AFDocs config file format][afdocs-config].
 
 [AFDocs]: https://afdocs.dev/
 [afdocs-config]: https://afdocs.dev/reference/config-file
-[agent-docs-config]:
+[docsy.dev/agent-docs.config.yml]:
   https://github.com/google/docsy/blob/main/docsy.dev/agent-docs.config.yml
 
 ## Prettier formatting
@@ -70,3 +72,4 @@ and we'll be able to remove this hack.
 [#15720]: https://github.com/prettier/prettier/issues/15720
 [docsy.dev/package.json]:
   https://github.com/google/docsy/blob/main/docsy.dev/package.json
+[Scorecard examples]: /docs/content/agent-support/#scorecard-examples
