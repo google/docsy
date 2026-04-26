@@ -3,6 +3,7 @@ title: Agent support
 description: >-
   Opt-in features to help agents better use your site, including Markdown
   output, alternate links in HTML, and `llms.txt`.
+cSpell:ignore: llmstxt
 ---
 
 > [!NOTE] Early evaluation
@@ -11,29 +12,26 @@ description: >-
 > adoption and evaluation. Output details and validation coverage may change in
 > future releases.
 
-Docsy provides opt-in agent support through the features listed below. For
-validation and metrics, we use [AFDocs][afdocs] on docsy.dev.
-
 ## Features
 
-- **Markdown URLs** — For each page where Markdown output is enabled, Hugo can
-  emit `index.md` (or the configured output path) and a
-  `<link rel="alternate" type="text/markdown" href="…">` in the HTML head.
-- **“View Markdown”** — When a page has a Markdown alternate, Docsy shows a
-  **View Markdown** link in the page meta area (same pattern as other repo and
-  print links).
-- **`layouts/all.md`** — A single catch-all Markdown template (similar in spirit
-  to Docsy’s `all.html`) renders title, optional description (as a blockquote),
-  body via `.RenderShortcodes`, a pointer to `llms.txt`, and a short list of
-  child section pages where applicable.
-- **`llms.txt`** — Optional home-only output (`LLMS` format) listing key entry
-  points, preferring Markdown permalinks when available.
+When your site opts in, these are the user-facing and machine-readable behaviors
+Docsy enables:
 
-## Enable Markdown output
+- **[Markdown output format](#markdown-output)** support for all site pages.
+- **Discovery**: page HTML headers include `rel="alternate"` links to the
+  Markdown version of the page.
+- **View Markdown**: page meta area includes a **View Markdown** link to the
+  Markdown version of the page.
+- **[`llms.txt`](#llms-txt)**: site-root file listing.
 
-Hugo’s `outputs` map is a **full replacement** for each page kind, not a merge.
-When you add `markdown`, keep every format your site already relies on (for
-example `RSS` and `print` on sections).
+The remainder of this page explains how to enable each feature, and discusses
+[validation and metrics](#validation-and-metrics) supported with examples.
+
+## Enable Markdown output {#markdown-output}
+
+Hugo comes with several [built-in output formats][], including `markdown`. To
+enable Markdown output, add `markdown` to the Hugo [outputs][] configuration for
+the page kinds you want to support. For example:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -69,25 +67,41 @@ outputs:
 
 {{% /tab %}} {{< /tabpane >}}
 
-Use the lowercase name **`markdown`** so it matches Hugo’s built-in Markdown
-output format and Docsy’s templates.
+### Opt pages out {#opt-pages-out}
 
-### Opt pages out
+> [!TIP]
+>
+> Hugo’s `outputs` map (in the site config and page front matter) is a **full
+> replacement** for each page kind, not a merge [^1]. When you add `markdown`,
+> keep every format your site already relies on (for example `RSS` and `print`
+> on sections).
 
-For pages where Markdown adds little value (for example a JavaScript-only search
-shell), set outputs to HTML only in front matter:
+[^1]:
+    This is contrary to the documented Hugo behavior for front-matter
+    configuration, but it is confirmed with our testing as of Hugo 0.157.0.
+
+To opt pages out of Markdown output, set `outputs` in page front matter to
+`HTML` only, or whatever your page's default output formats are while excluding
+`markdown`. For example:
 
 ```yaml
 ---
-title: Search
+title: HTML-only test page
 outputs: [HTML]
 ---
+...
 ```
 
-## Enable `llms.txt`
+## Enable `llms.txt` {#llms-txt}
 
-The theme defines an `LLMS` output format and `layouts/index.llms.txt`. Add
-`LLMS` to the **home** outputs list alongside your existing formats:
+The `llms.txt` format is a simple text format for listing machine-readable links
+to site content. It is designed to be easy for agents to discover and parse, and
+to complement the richer but more complex Markdown outputs. To learn more, see
+[llmstxt.org][].
+
+Docsy generates `llms.txt` at the site root, and includes links to the home
+page, main menu pages, and Markdown alternates where they exist. To enable it,
+add `LLMS` to the Hugo [outputs][] configuration for the home page. For example:
 
 ```yaml
 outputs:
@@ -96,40 +110,38 @@ outputs:
   section: [HTML, RSS, print, markdown]
 ```
 
-The generated file is published at `/llms.txt` (per language when you use
-multilingual builds). Content is derived from the site home, main menu, and
-Markdown alternates where they exist.
+For an example of the generated `llms.txt` for this site, see
+[/llms.txt](/llms.txt).
 
-## Improving Markdown over time
+## Customize output
 
-You are not limited to the default `all.md`:
+Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
+via `layouts/index.llms.txt`. You can override these defaults at several levels:
 
-- **Per kind** — Add `home.md`, `_default/single.md`, or other layout names
-  under `layouts/` in your project to override Markdown for specific [Hugo
+- **Per kind** — Add templates such as `home.md` or `_default/single.md` under
+  `layouts/` in your project to tailor Markdown output for specific [Hugo
   kinds][].
-- **Per shortcode** — Use [output-format-specific shortcode templates][sof] so a
-  shortcode can emit Markdown instead of HTML when appropriate.
-- **Per page** — Provide dedicated Markdown or structured content for high-value
-  pages that need a hand-tuned agent view.
+- **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
+  project-local shortcodes so they emit Markdown-friendly content when
+  appropriate.
+- **Per page** — Provide page-specific content or structure for high-value pages
+  that need a curated agent-facing view.
 
-## Limitations
+## Server-side support
 
-- Markdown is **not** an HTML clone: theme chrome, sidebars, and some shortcodes
-  appear as HTML or simplified text where templates do not have
-  Markdown-specific variants.
-- **Server-side content negotiation** (for example honoring
-  `Accept: text/markdown` on the same URL as HTML) is outside what a theme can
-  guarantee; static hosts serve `.md` files with their own MIME rules.
-- The feature set is **opt-in** by design; existing sites keep prior behavior
-  until they add these outputs.
+While outside the scope of Docsy's support, sites can facilitate agent discovery
+and access to Markdown content by implementing server-side content negotiation.
+For example, honoring `Accept: text/markdown` on the same URL as HTML.
 
 ## Validation and metrics
 
-We use [AFDocs][afdocs] on docsy.dev for basic metrics. It performs checks
-across various categories defined in the [Agent-Friendly Documentation
-spec][afs], such as Markdown alternates and `llms.txt`. We plan to expand
-validation beyond AFDocs in future releases, including syntactic and semantic
-checks of generated Markdown.
+The **docsy.dev** workspace ships [AFDocs][afdocs] configuration and npm scripts
+so maintainers can score a **deployed** URL against overlapping [Agent-Friendly
+Documentation spec][afs] checks (Markdown URLs, `llms.txt`, and related
+categories). That is **not** the default GitHub Actions `test` job; see
+[AFDocs checks](/project/build/ci-cd/#afdocs-checks). We plan to broaden
+validation over time, including syntactic and semantic review of generated
+Markdown.
 
 ### Scorecard examples
 
@@ -143,21 +155,15 @@ of an online report, see [OpenTelemetry agent score][].
 For details on how we have set this up, see
 [AFDocs checks](/project/build/ci-cd/#afdocs-checks).
 
-## Further reading
-
-- [Agent-Friendly Documentation spec][afs] — normative goals and terminology.
-- [AFDocs][afdocs] — checks, CLI, and scorecards derived from the spec.
-- [AFDocs config file format][afdocs-config] — options for
-  `agent-docs.config.yml`.
-- [llms.txt][] — proposed convention for LLM-oriented site summaries.
-
-[afdocs-config]: https://afdocs.dev/reference/config-file
 [afdocs]: https://afdocs.dev/
 [afs]: https://agentdocsspec.com/
+[built-in output formats]: https://gohugo.io/configuration/output-formats/
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
-[llms.txt]: https://llmstxt.org/
+[layouts/all.md]: https://github.com/google/docsy/blob/main/layouts/all.md
+[llmstxt.org]: https://llmstxt.org/
 [OpenTelemetry agent score]:
   https://buildwithfern.com/agent-score/company/opentelemetry
+[outputs]: https://gohugo.io/configuration/outputs/
 [sof]:
   https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates
