@@ -57,6 +57,7 @@ blog post, or changelog updates.
   - Includes new i18n key `post_view_markdown`.
 - Blog inclusion: include as a major experimental feature. Explain what is
   available now, what is opt-in, and what remains experimental.
+- Release-post treatment: experimental.
 - Follow-up needed:
   - Add user-guide or release-blog guidance for enabling Markdown output and
     `llms.txt`.
@@ -68,7 +69,8 @@ blog post, or changelog updates.
   [#2580][], [#2586][], [#2587][]; tracker [#2504][]; closed issues [#2492][]
   and [#2499][].
 - Status: partial. [#2492][] and [#2499][] are closed through [#2563][], but the
-  overall [#2504][] tracker remains open.
+  overall [#2504][] tracker remains open. Current expectation is that [#2504][]
+  will close for 0.15, but confirm before finalizing release content.
 - Docs impact:
   - `docsy.dev/content/en/docs/content/adding-content.md` now documents
     doc-rooted sites and links the doc-rooted example.
@@ -144,10 +146,10 @@ blog post, or changelog updates.
 - Status: resolved. This fix is also part of the 0.14.3 patch-release story.
 - Docs impact: no user-guide action expected.
 - Changelog impact: already documented under v0.14.3; probably do not duplicate
-  in 0.15 unless summarizing that 0.15 includes all 0.14.3 changes.
+  in 0.15.
 - Downstream/client impact: fixes `.td-main > .row` vertical growth.
-- Blog inclusion: probably omit from 0.15 main highlights unless the post
-  summarizes patch-release carry-forward fixes.
+- Blog inclusion: omit from 0.15 highlights. It belongs to the 0.14.3 patch
+  story, and keeping 0.15 lean avoids duplicating 0.14 material.
 - Follow-up needed: none identified.
 
 ### Deployment and Release Process Docs
@@ -200,14 +202,14 @@ blog post, or changelog updates.
 - Follow-up needed: invite native-speaker review for generated or assisted
   translations if desired.
 
-## Open Questions For Review
+## Review Decisions
 
-- Should the 0.15 release report treat agent-friendly Markdown/LLMS support as
-  experimental, preview, or a standard feature?
-- Should 0.14.3-only fixes in the range be omitted from 0.15 highlights, or
-  briefly mentioned as already included?
-- Does [#2504][] need to remain open after 0.15, or should specific remaining
-  tasks be spun out before release?
+- Treat agent-friendly Markdown output and `llms.txt` support as experimental in
+  the 0.15 release report.
+- Omit 0.14.3-only fixes from 0.15 highlights. They are covered by the 0.14
+  release resources, including the v0.14.3 changelog entry.
+- Check [#2504][] before finalizing 0.15. It is expected to close, but confirm
+  whether any remaining tasks need separate follow-up.
 
 [#1380]: https://github.com/google/docsy/issues/1380
 [#2082]: https://github.com/google/docsy/pull/2082
