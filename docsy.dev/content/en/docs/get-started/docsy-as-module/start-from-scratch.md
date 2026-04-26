@@ -39,6 +39,14 @@ proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy"
 EOL
+npm install -D autoprefixer postcss-cli postcss
+cat > postcss.config.js <<EOL
+module.exports = {
+    plugins: {
+        autoprefixer: {}
+    },
+}
+EOL
 hugo server
 {{< /tab >}}
 {{< tab header="Windows command line" lang="Batchfile" >}}
@@ -53,6 +61,12 @@ proxy = "direct"^
 [[module.imports]]^
 
 path = "github.com/google/docsy") >> hugo.toml
+npm install -D autoprefixer postcss-cli postcss
+(echo module.exports = {^
+    plugins: {^
+        autoprefixer: {}^
+    },^
+}) > postcss.config.js
 hugo server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -162,6 +176,30 @@ You can find details of what these configuration settings do in the
 [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
 Depending on your environment you may need to tweak them slightly, for example
 by adding a proxy to use when downloading remote modules.
+
+### Install PostCSS
+
+To build or update your site's CSS resources, you also need
+[PostCSS](https://postcss.org/). Run the following commands from your site
+root directory to install the required packages:
+
+```bash
+npm install -D autoprefixer postcss-cli postcss
+```
+
+Then create a `postcss.config.js` file in your site root with the following
+content:
+
+```javascript
+module.exports = {
+    plugins: {
+        autoprefixer: {}
+    },
+}
+```
+
+For more details, see
+[Install PostCSS](/docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss).
 
 ### Preview your site
 
