@@ -5,28 +5,24 @@ title: CI/CD
 ## Agent-support checks
 
 The **docsy.dev** site has an [AFDocs][] configuration and npm script to
-generate a scorecard for agent support locally:
+generate a scorecard locally:
 
-- Config: [`docsy.dev/agent-docs.config.yml`][agent-docs-config] in the theme
-  repository.
-- Script: `_check:afdocs` in `docsy.dev/package.json` (runs
-  `npx afdocs check --config agent-docs.config.yml --format scorecard`).
+- Config: [`docsy.dev/agent-docs.config.yml`][agent-docs-config]
+- Script: `_check:afdocs` in [docsy.dev/package.json][]
 
-From the **theme repository root**, score a site served at
-`http://localhost:1313`:
+To generate a fresh scorecard, run each of these commands in separate terminals:
 
 ```sh
-npm run serve   # in one terminal
-npm run check:afdocs:dev
+npm run serve             # From one terminal
+npm run check:afdocs:dev  # From another terminal
 ```
 
-The default GitHub Actions [`test` workflow][test-workflow] runs
-`npm run ci:test` on Ubuntu (formatting, markdownlint, site build, link checks,
-Markdown golden tests). It does **not** run AFDocs; add a step to your own
-workflow if you want continuous scoring (for example against a preview URL).
+The report is not automatically updated when you make changes to the site.
 
-For AFDocs scorecard examples, see [Scorecard examples](#scorecard-example) For
-AFDocs configuration options, see [AFDocs config file format][afdocs-config].
+Read more:
+
+- [Scorecard examples](/docs/content/agent-support/#scorecard-examples)
+- [AFDocs config file format][afdocs-config]
 
 [AFDocs]: https://afdocs.dev/
 [afdocs-config]: https://afdocs.dev/reference/config-file
@@ -40,13 +36,17 @@ AFDocs configuration options, see [AFDocs config file format][afdocs-config].
 We use [Prettier](https://prettier.io) to format Docsy and the website files
 using the following command:
 
-```bash
+```sh
 npm run check:format
 ```
 
-To fix formatting, run Prettier: `npm run fix:format`.
+To fix formatting, run:
 
-### i18n workaround
+```sh
+npm run fix:format
+```
+
+### Workaround for `i18n` files
 
 The translation files in the `i18n` directory are formatted using Prettier. But
 Prettier removes the blank line before the `# Feedback` section heading. This
@@ -70,3 +70,5 @@ and we'll be able to remove this hack.
 
 [#15528]: https://github.com/prettier/prettier/issues/15528
 [#15720]: https://github.com/prettier/prettier/issues/15720
+[docsy.dev/package.json]:
+  https://github.com/google/docsy/blob/main/docsy.dev/package.json

@@ -31,15 +31,15 @@ Throw a compile error or print an error on the page if the file is not found */ 
 
 {{ if fileExists ($.Scratch.Get "filepath") -}}
   {{ if eq (.Get "code") "true" -}}
-    {{- highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape |
+    {{ highlight ($.Scratch.Get "filepath" | readFile | htmlUnescape |
     safeHTML ) (.Get "lang") "" -}}
   {{ else -}}
-    {{- $.Scratch.Get "filepath" | os.ReadFile | .Page.RenderString | safeHTML -}}
+    {{ $.Scratch.Get "filepath" | os.ReadFile | .Page.RenderString | safeHTML -}}
   {{ end -}}
 {{ else if eq (.Get "draft") "true" -}}
 
-  <p style="color: #D74848"><b><i>The file <code>{{ $.Scratch.Get "filepath" -}}</code> was not found.</i></b></p>
+  <p style="color: #D74848"><b><i>The file <code>{{ $.Scratch.Get "filepath" }}</code> was not found.</i></b></p>
 
-{{ else -}}
+{{- else -}}
   {{ errorf "Shortcode %q: file %q not found at %s" .Name ($.Scratch.Get "filepath") .Position -}}
 {{ end -}}

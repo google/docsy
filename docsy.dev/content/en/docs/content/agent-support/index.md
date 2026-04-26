@@ -35,22 +35,22 @@ the page kinds you want to support. For example:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{% tab header="hugo.toml" lang="toml" %}}
-
-```toml
-[outputs]
-home = [ "HTML", "markdown" ]
-page = [ "HTML", "markdown" ]
-section = [ "HTML", "RSS", "print", "markdown" ]
-```
-
-{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+{{% tab header="hugo.yaml" lang="yaml" %}}
 
 ```yaml
 outputs:
   home: [HTML, markdown]
   page: [HTML, markdown]
   section: [HTML, RSS, print, markdown]
+```
+
+{{% /tab %}} {{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
+[outputs]
+home = [ "HTML", "markdown" ]
+page = [ "HTML", "markdown" ]
+section = [ "HTML", "RSS", "print", "markdown" ]
 ```
 
 {{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
@@ -71,10 +71,10 @@ outputs:
 
 > [!TIP]
 >
-> Hugo’s `outputs` map (in the site config and page front matter) is a **full
-> replacement** for each page kind, not a merge [^1]. When you add `markdown`,
-> keep every format your site already relies on (for example `RSS` and `print`
-> on sections).
+> By default, Hugo’s `outputs` map (whether in multi-file site config or page front matter)
+> is a **full replacement** for each page kind, not a merge [^1]. When you add
+> `markdown`, keep every format your site already relies on -- for example `RSS`
+> and `print` on sections as is shown in the examples above.
 
 [^1]:
     This is contrary to the documented Hugo behavior for front-matter
@@ -139,21 +139,29 @@ The **docsy.dev** workspace ships [AFDocs][afdocs] configuration and npm scripts
 so maintainers can score a **deployed** URL against overlapping [Agent-Friendly
 Documentation spec][afs] checks (Markdown URLs, `llms.txt`, and related
 categories). That is **not** the default GitHub Actions `test` job; see
-[AFDocs checks](/project/build/ci-cd/#afdocs-checks). We plan to broaden
-validation over time, including syntactic and semantic review of generated
-Markdown.
+[Agent-support checks](/project/build/ci-cd/#agent-support-checks). We plan to
+broaden validation over time, including syntactic and semantic review of
+generated Markdown.
 
 ### Scorecard examples
 
-Included next is an example of an AFDocs scorecard for this site. For an example
-of an online report, see [OpenTelemetry agent score][].
+For scorecard examples, see:
 
-```text
-{{< readfile "afdocs-scorecard.txt" >}}
-```
+- [OpenTelemetry agent score][] online report
 
-For details on how we have set this up, see
-[AFDocs checks](/project/build/ci-cd/#afdocs-checks).
+- An AFDocs scorecard for this site:
+
+  <details>
+  <summary><code>docsy.dev</code> scorecard</summary>
+
+  ```text
+  {{< readfile "afdocs-scorecard.txt" >}}
+  ```
+
+  </details>
+
+For details on how we have set up p, see
+[Agent-support checks](/project/build/ci-cd/#agent-support-checks).
 
 [afdocs]: https://afdocs.dev/
 [afs]: https://agentdocsspec.com/

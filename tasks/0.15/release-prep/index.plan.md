@@ -159,8 +159,7 @@ First execution should refresh reports for commits in [v0.14.3...main][] through
 - Is the changelog complete? If not, add the missing information.
 - Remember that the changelog is meant to:
   - Only (very briefly) highlight significant changes.
-  - Link to the relevant section of the blog post for more details. significant
-    changes.
+  - Link to the relevant section of the blog post for more details.
 
 [0.15 release tracker]: https://github.com/google/docsy/issues/2501
 [0.15.0 release report]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
