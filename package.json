@@ -10,7 +10,7 @@
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_cd:docsy.dev": "cd docsy.dev &&",
-    "_check:afdocs": "npm run cd:docsy.dev -- _check:afdocs",
+    "_check:afdocs": "npm run -s cd:docsy.dev -- _check:afdocs",
     "_check:format": "npx prettier --check assets *.md i18n scripts tasks",
     "_check:links": "npm run cd:docsy.dev -- _check:links",
     "_check:markdown": "npx markdownlint-cli2",
@@ -28,7 +28,7 @@
     "_spv": "npm run -s __spv docsy.dev/config/*/params.yaml --",
     "build": "npm run cd:docsy.dev -- build --",
     "cd:docsy.dev": "echo 'Running in docsy.dev...'; npm run _cd:docsy.dev -- npm run",
-    "check:afdocs:dev": "npm run _check:afdocs -- http://localhost:1313",
+    "check:afdocs:dev": "npm run -s _check:afdocs -- http://localhost:1313 | tee docsy.dev/content/en/content/agent-support/afdocs-scorecard.txt",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links": "npm run cd:docsy.dev -- check:links",
     "check:markdown": "npm run _check:markdown -- '**/*.md'",
