@@ -3,10 +3,10 @@ title: CI/CD
 cSpell:ignore: afdocs npx scorecard
 ---
 
-## Agent-friendly docs (AFDocs) checks {#afdocs-checks}
+## AFDocs checks for agent support {#afdocs-checks}
 
 The **docsy.dev** site has an [AFDocs][] configuration and npm script to
-generate an agent-friendly scorecard locally:
+generate a scorecard for agent support locally:
 
 - Config: [`docsy.dev/agent-docs.config.yml`][agent-docs-config] in the theme
   repository.

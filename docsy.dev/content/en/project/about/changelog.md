@@ -143,9 +143,9 @@ full list of changes, see the [0.15.0][] release page.
 
 [**Experimental**](#experimental):
 
-- **[Agent-friendly docs][0.15.0-blog-agent-friendly]** (AFDocs): added Markdown
-  alternate outputs, "View Markdown" links, and `llms.txt` ([#2597][],
-  [#2601][], [#2605][], [#2606][]).
+- **[Agent support][0.15.0-blog-agent-support]**: added Markdown alternate
+  outputs, "View Markdown" links, and `llms.txt` ([#2597][], [#2601][],
+  [#2605][], [#2606][]).
 
 [#2556]: https://github.com/google/docsy/pull/2556
 [#2563]: https://github.com/google/docsy/pull/2563
@@ -160,7 +160,7 @@ full list of changes, see the [0.15.0][] release page.
 [#2606]: https://github.com/google/docsy/pull/2606
 [0.15.0 release report]: /blog/2026/0.15.0/
 [0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
-[0.15.0-blog-agent-friendly]: /blog/2026/0.15.0/#agent-friendly
+[0.15.0-blog-agent-support]: /blog/2026/0.15.0/#agent-support
 [0.15.0-blog-card]: /blog/2026/0.15.0/#card-shortcode
 [0.15.0-blog-community-footer]: /blog/2026/0.15.0/#community-footer-links
 [0.15.0-blog-doc-rooted]: /blog/2026/0.15.0/#doc-rooted-sites

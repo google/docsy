@@ -11,9 +11,9 @@ cSpell:ignore: afdocs
 
 ## Release Themes
 
-- **Experimental agent-friendly output**: Markdown alternate outputs, a visible
-  "View Markdown" page-meta link, `llms.txt`, and golden tests are implemented
-  for the first 0.15 pass. Treat this as experimental in release content.
+- **Experimental agent support**: Markdown alternate outputs, a visible "View
+  Markdown" page-meta link, `llms.txt`, and golden tests are implemented for the
+  first 0.15 pass. Treat this as experimental in release content.
 - **Doc-rooted sites**: Docsy now has a documented doc-rooted site pattern and a
   `doc-rooted` example variant. The [#2504][] tracker is expected to close, but
   check before final publication.
@@ -53,7 +53,7 @@ cSpell:ignore: afdocs
 - [ ] Check [#2504][] and close it, or move any remaining doc-rooted work to
       follow-up issues, before finalizing 0.15.
 - [ ] Decide whether additional [#2596][] work lands before 0.15; otherwise keep
-      remaining agent-friendly work as post-release follow-up.
+      remaining agent support work as post-release follow-up.
 - [ ] Confirm final supported Hugo and Node versions and update the blog,
       changelog, and release checklist if needed.
 - [ ] Review the 0.15 release report for user-guide links and action guidance.

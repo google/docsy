@@ -1,29 +1,26 @@
 ---
 title: Agent support
 description: >-
-  Features so agents can better understand and use your site, including opt-in Markdown
-  output, llms.txt.
-aliases:
-  - /docs/content/agent-friendly/
+  Opt-in features to help agents better use your site, including Markdown
+  output, alternate links in HTML, and `llms.txt`.
 ---
 
 > [!NB] :warning: Features described in this page are [experimental][].
 
-Docsy can emit **plain Markdown** alongside HTML for the same logical page, add
-**machine-readable discovery** in HTML, and generate a top-level [llms.txt][]
-file. Together these patterns help agents consume your documentation without
-having to parse HTML.
+Docsy provides opt-in agent support for documentation sites. It can publish
+**plain Markdown** alongside HTML for the same logical page, advertise that
+Markdown with `<link rel="alternate" type="text/markdown">` in HTML, and
+generate a top-level [llms.txt][] file. These features give agents direct entry
+points into your content without making them infer structure from themed HTML.
 
-The **[Agent-Friendly Documentation spec][afs]** and **[AFDocs][afdocs]**
-(checks against a deployed URL) capture part of what “good” means for
-agent-readable docs. **Docsy’s agent support is wider**: layouts, config
-guidance, maintainer tests (for example Markdown goldens), and this guide. We
-**build on** that ecosystem and **run AFDocs on docsy.dev** for
-discoverability-style regressions — a **tool we use**, not the whole roadmap.
+Docsy also uses [AFDocs][afdocs] for basic validation on docsy.dev. AFDocs
+checks a deployed URL for discovery signals from the [Agent-Friendly
+Documentation spec][afs], such as Markdown alternates and `llms.txt`. We use it
+as a regression check for those signals, not as the full definition of
+agent-readable documentation.
 
-Later we may document **more qualitative** ways to judge whether agent-facing
-output is **semantically helpful**; when that is public, it will **extend** this
-section, not replace what follows.
+> :information_source: We plan to expand validation beyond AFDocs in future
+> releases, including syntactic and semantic checks of generated Markdown.
 
 ## What you get
 

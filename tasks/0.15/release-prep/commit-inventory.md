@@ -20,7 +20,7 @@ uses first-parent commits as the release-audit spine.
 
 ## User-facing changes
 
-### Agent-friendly and Markdown output
+### Agent support and Markdown output
 
 - `4db086c6` [#2597][] Add agent-friendly support plan and phase 1
   implementation of Markdown output

@@ -50,8 +50,8 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [ee79b52c][].
 | [#2602][]: Add `post_view_markdown` to all i18n files                  | [#2596][] (PR body)                                | Translation baseline                                 |
 | [#2603][]: Add Romanian translation for "View Markdown"                | [#2583][] (PR body)                                | Follow-up to Romanian locale                         |
 | [#2604][]: Create `az.yaml` from TOML                                  | [#2082][] (PR body)                                | Format-only follow-up                                |
-| [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent-friendly support                  |
-| [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured agent-friendly score                 |
+| [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent support                           |
+| [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured AFDocs score                         |
 
 ## Linked Issues
 

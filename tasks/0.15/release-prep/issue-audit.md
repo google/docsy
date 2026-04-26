@@ -16,8 +16,7 @@ blog post, or changelog updates.
 ## Summary
 
 - Major candidate release themes:
-  - experimental agent-friendly content generation with Markdown outputs and
-    `llms.txt`
+  - experimental agent support with Markdown outputs and `llms.txt`
   - doc-rooted site support and documentation
   - version and variant menu improvements
   - community/footer link behavior fixes
@@ -77,15 +76,15 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2586][]: Update version and variant menu                 | done | rel  | rel  | No client-facing release-note impact       |
 | [#2587][]: Finalize doc-rooted configuration explanation   | rel  | WIP  | WIP  | Doc-rooted sites                           |
 | [#2591][]: Add German alert-label translations             | rel  | WIP  | WIP  | Internationalization                       |
-| [#2597][]: Add Markdown output phase 1                     | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
-| [#2599][]: Drop Docsy-defined `Markdown` output format     | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
-| [#2600][]: Trim Markdown output titles and descriptions    | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
-| [#2601][]: Add View Markdown page-meta link                | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
-| [#2602][]: Add `post_view_markdown` to i18n files          | WIP  | WIP  | WIP  | Agent-friendly output and i18n             |
+| [#2597][]: Add Markdown output phase 1                     | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2599][]: Drop Docsy-defined `Markdown` output format     | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2600][]: Trim Markdown output titles and descriptions    | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2601][]: Add View Markdown page-meta link                | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2602][]: Add `post_view_markdown` to i18n files          | WIP  | WIP  | WIP  | Agent support and i18n                     |
 | [#2603][]: Add Romanian View Markdown translation          | rel  | WIP  | WIP  | Internationalization                       |
 | [#2604][]: Create `az.yaml` from TOML                      | rel  | WIP  | WIP  | Internationalization                       |
-| [#2605][]: Add LLMS output and `llms.txt`                  | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
-| [#2606][]: Allow Markdown output for project docs          | WIP  | WIP  | WIP  | Experimental agent-friendly output         |
+| [#2605][]: Add LLMS output and `llms.txt`                  | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2606][]: Allow Markdown output for project docs          | WIP  | WIP  | WIP  | Experimental agent support                 |
 
 Raw commits in scope without PR numbers in their commit subjects:
 
@@ -102,7 +101,7 @@ Raw commits in scope without PR numbers in their commit subjects:
 
 ## Audit details
 
-### Agent-friendly Markdown output and `llms.txt`
+### Agent support: Markdown output and `llms.txt`
 
 - Evidence: [#2597][], [#2599][], [#2600][], [#2601][], [#2602][], [#2605][],
   [#2606][]; tracker [#2596][]; golden-test tracker [#726][].
@@ -132,7 +131,7 @@ Raw commits in scope without PR numbers in their commit subjects:
 - Follow-up needed:
   - Add user-guide or release-blog guidance for enabling Markdown output and
     `llms.txt`.
-  - Note any measured `afdocs` caveats without overpromising support.
+  - Note any measured AFDocs caveats without overpromising support.
 
 ### Doc-rooted site support
 
@@ -313,7 +312,7 @@ Raw commits in scope without PR numbers in their commit subjects:
 
 ## Review Decisions
 
-- Treat agent-friendly Markdown output and `llms.txt` support as experimental in
+- Treat agent support Markdown output and `llms.txt` support as experimental in
   the 0.15 release report.
 - Omit 0.14.3-only fixes from 0.15 highlights. They are covered by the 0.14
   release resources, including the v0.14.3 changelog entry.
