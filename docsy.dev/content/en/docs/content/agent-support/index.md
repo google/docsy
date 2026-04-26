@@ -5,22 +5,23 @@ description: >-
   output, alternate links in HTML, and `llms.txt`.
 ---
 
-> [!NB] :warning: Features described in this page are [experimental][].
+> [!NOTE] Early evaluation
+>
+> Features described in this page are [experimental][], and are useful for early
+> adoption and evaluation. Output details and validation coverage may change in
+> future releases.
 
-Docsy provides opt-in agent support for documentation sites. It can publish
-**plain Markdown** alongside HTML for the same logical page, advertise that
-Markdown with `<link rel="alternate" type="text/markdown">` in HTML, and
-generate a top-level [llms.txt][] file. These features give agents direct entry
-points into your content without making them infer structure from themed HTML.
+Docsy provides opt-in agent support. It can publish **plain Markdown** alongside
+HTML for the same logical page, advertise that Markdown with `<link
+rel="alternate" type="text/markdown">` in HTML, and generate a top-level
+[llms.txt][] file. These features give agents direct entry points into your
+content without making them infer structure from themed HTML.
 
-Docsy also uses [AFDocs][afdocs] for basic validation on docsy.dev. AFDocs
-checks a deployed URL for discovery signals from the [Agent-Friendly
-Documentation spec][afs], such as Markdown alternates and `llms.txt`. We use it
-as a regression check for those signals, not as the full definition of
-agent-readable documentation.
-
-> :information_source: We plan to expand validation beyond AFDocs in future
-> releases, including syntactic and semantic checks of generated Markdown.
+We use [AFDocs][afdocs] on docsy.dev for basic metrics. It performs checks
+across various categories defined in the [Agent-Friendly Documentation
+spec][afs], such as Markdown alternates and `llms.txt`. We plan to expand
+validation beyond AFDocs in future releases, including syntactic and semantic
+checks of generated Markdown.
 
 ## What you get
 
@@ -32,8 +33,8 @@ agent-readable documentation.
   print links).
 - **`layouts/all.md`** — A single catch-all Markdown template (similar in spirit
   to Docsy’s `all.html`) renders title, optional description (as a blockquote),
-  body via `.RenderShortcodes`, a pointer to `llms.txt` when present, and a
-  short list of child section pages where applicable.
+  body via `.RenderShortcodes`, a pointer to `llms.txt`, and a short list of
+  child section pages where applicable.
 - **`llms.txt`** — Optional home-only output (`LLMS` format) listing key entry
   points, preferring Markdown permalinks when available.
 
