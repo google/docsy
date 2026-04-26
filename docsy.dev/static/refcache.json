@@ -3,6 +3,22 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:27.373746-05:00"
   },
+  "https://afdocs.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.448695-04:00"
+  },
+  "https://afdocs.dev/reference/config-file": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.917562-04:00"
+  },
+  "https://agentdocsspec.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.329934-04:00"
+  },
+  "https://agentdocsspec.com/spec/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.925783-04:00"
+  },
   "https://agones.dev/site/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:52.642994-05:00"
@@ -58,6 +74,10 @@
   "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/#custom-color-modes": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:12.993271-05:00"
+  },
+  "https://buildwithfern.com/agent-score/company/opentelemetry": {
+    "StatusCode": 200,
+    "LastSeen": "2026-04-26T12:08:51.658385-04:00"
   },
   "https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/": {
     "StatusCode": 206,
@@ -759,6 +779,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:00.206283-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/agent-docs.config.yml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.213024-04:00"
+  },
   "https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:01.944819-05:00"
@@ -782,6 +806,10 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/netlify.toml": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.108616-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/package.json": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.818821-04:00"
   },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
@@ -858,6 +886,10 @@
   "https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:06.249401-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/layouts/all.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.769422-04:00"
   },
   "https://github.com/google/docsy/blob/main/layouts/baseof.html": {
     "StatusCode": 206,
@@ -2003,6 +2035,14 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:54.612215-05:00"
   },
+  "https://gohugo.io/configuration/output-formats/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.689603-04:00"
+  },
+  "https://gohugo.io/configuration/outputs/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.006775-04:00"
+  },
   "https://gohugo.io/configuration/params/#multilingual-sites": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.658614-05:00"
@@ -2275,9 +2315,17 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.845185-05:00"
   },
+  "https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.230731-04:00"
+  },
   "https://gohugo.io/templates/sitemap-template/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:33.938214-05:00"
+  },
+  "https://gohugo.io/templates/types/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.944099-04:00"
   },
   "https://gohugo.io/themes/": {
     "StatusCode": 206,
@@ -2318,6 +2366,10 @@
   "https://kubernetes.io": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.795121-05:00"
+  },
+  "https://llmstxt.org/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.110304-04:00"
   },
   "https://lunrjs.com/": {
     "StatusCode": 206,
@@ -2418,6 +2470,10 @@
   "https://main--docsydocs.netlify.app/docs/content/adding-content/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:46.153271-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/agent-support/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.495821-04:00"
   },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,
@@ -3006,6 +3062,10 @@
   "https://www.docsy.dev/docs/content/adding-content/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:02:22.746339-05:00"
+  },
+  "https://www.docsy.dev/docs/content/agent-support/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.01174-04:00"
   },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,

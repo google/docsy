@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue mapping
 date: 2026-04-25
-lastmod: 2026-04-25
+lastmod: 2026-04-26
 range: v0.14.3..main
-last-main-commit: ee79b52c
+last-main-commit: 343d6154
 cSpell:ignore: opentelemetry
 ---
 
 ## Scope
 
-Mapping covers first-parent commits in [v0.14.3...main][] through [ee79b52c][].
+Mapping covers first-parent commits in [v0.14.3...main][] through [343d6154][].
 
 ## Mapping
 
@@ -50,8 +50,9 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [ee79b52c][].
 | [#2602][]: Add `post_view_markdown` to all i18n files                  | [#2596][] (PR body)                                | Translation baseline                                 |
 | [#2603][]: Add Romanian translation for "View Markdown"                | [#2583][] (PR body)                                | Follow-up to Romanian locale                         |
 | [#2604][]: Create `az.yaml` from TOML                                  | [#2082][] (PR body)                                | Format-only follow-up                                |
-| [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent-friendly support                  |
-| [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured agent-friendly score                 |
+| [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent support                           |
+| [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured AFDocs score                         |
+| [#2610][]: 0.15 release notes, audit, and wrapup content               | [#2501][] (Release prep scope)                     | Blog draft, changelog, refcache, link sweep, reports |
 
 ## Linked Issues
 
@@ -113,6 +114,7 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [ee79b52c][].
 [#2604]: https://github.com/google/docsy/pull/2604
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
+[#2610]: https://github.com/google/docsy/pull/2610
 [#726]: https://github.com/google/docsy/issues/726
-[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[343d6154]: https://github.com/google/docsy/commit/343d6154
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

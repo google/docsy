@@ -1,11 +1,10 @@
 ---
 title: Analytics, User Feedback, and SEO
-date: 2019-06-05
+# date: 2019-06-05
 description: >-
   Add Google Analytics tracking to your site, collect user feedback and learn
   about the page description meta tag.
 cSpell:ignore: fabform pageviews
-weight: 8
 ---
 
 ## Adding Analytics

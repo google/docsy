@@ -1,8 +1,7 @@
 ---
 title: Docsy Shortcodes
 linkTitle: Shortcodes
-date: 2017-01-05
-weight: 5
+# date: 2017-01-05
 description: Use Docsy's Hugo shortcodes to quickly build site pages.
 resources:
   - src: '**spruce*.jpg'

@@ -117,66 +117,54 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 > **UNRELEASED**: v0.15.0 - still under development
 
-<details>
-<summary>v0.15.0 highlights</summary>
-
 For an introduction to this release, see the [0.15.0 release report][]. For the
 full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
-- **Community and footer link paths** became site-relative on multilingual
-  sites, which can affect links that previously relied on default-language path
-  resolution ([#2580][]).
-- **`card` shortcode rendering** changed internally: `header`, `title`,
-  `subtitle`, and `footer` now render with `$.Page.RenderString` instead of
-  `markdownify` ([#2565][]).
+- **Community and footer link paths** changed for multilingual sites; see
+  [Community and footer links][0.15.0-blog-community-footer] ([#2580][]).
+- **`card` shortcode rendering** changed for selected fields; see [`card`
+  shortcode rendering][0.15.0-blog-card] ([#2565][]).
 
 **New**:
 
-- **Doc-rooted sites**: added a documented pattern and example variant for
-  documentation-first sites published at the site root ([#2563][], [#2587][]).
+- **[Doc-rooted sites][0.15.0-blog-doc-rooted]**: added a documented pattern and
+  example variant for documentation-first sites ([#2563][], [#2587][]).
 
 **Other changes**:
 
-- Community and footer links now support `rel`, avoid new targets for site-local
-  links, and resolve correctly under custom permalinks ([#2576][], [#2580][]).
-- Deployment docs were split into focused pages, and release branch model docs
-  were clarified ([#2556][], [#2572][]).
+- **Internationalization**: [added and updated
+  translations][0.15.0-blog-internationalization].
+- Split deployment docs into focused pages and clarified release branch-model
+  docs ([#2556][], [#2572][]).
 - Updated NPM packages and `docsy.dev` tooling, including `hugo-extended`
   0.157.0 ([#2585][]).
-- Added Romanian and Azerbaijan language support, missing German alert labels,
-  and translations for "View Markdown" ([#2583][], [#2603][], [#2082][],
-  [#2604][], [#2591][], [#2602][]).
 
 [**Experimental**](#experimental):
 
-- **Agent-friendly output**: added experimental Markdown alternate outputs,
-  "View Markdown" links, `llms.txt`, and Markdown output golden tests
-  ([#2597][], [#2601][], [#2605][], [#2606][]).
+- **[Agent support][0.15.0-blog-agent-support]**: added Markdown alternate
+  outputs, "View Markdown" links, and `llms.txt` ([#2597][], [#2601][],
+  [#2605][], [#2606][]).
 
-</details>
-
-[#2082]: https://github.com/google/docsy/pull/2082
 [#2556]: https://github.com/google/docsy/pull/2556
 [#2563]: https://github.com/google/docsy/pull/2563
 [#2565]: https://github.com/google/docsy/pull/2565
 [#2572]: https://github.com/google/docsy/pull/2572
-[#2576]: https://github.com/google/docsy/pull/2576
 [#2580]: https://github.com/google/docsy/pull/2580
-[#2583]: https://github.com/google/docsy/pull/2583
 [#2585]: https://github.com/google/docsy/pull/2585
 [#2587]: https://github.com/google/docsy/pull/2587
-[#2591]: https://github.com/google/docsy/pull/2591
 [#2597]: https://github.com/google/docsy/pull/2597
 [#2601]: https://github.com/google/docsy/pull/2601
-[#2602]: https://github.com/google/docsy/pull/2602
-[#2603]: https://github.com/google/docsy/pull/2603
-[#2604]: https://github.com/google/docsy/pull/2604
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
 [0.15.0 release report]: /blog/2026/0.15.0/
 [0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
+[0.15.0-blog-agent-support]: /blog/2026/0.15.0/#agent-support
+[0.15.0-blog-card]: /blog/2026/0.15.0/#card-shortcode
+[0.15.0-blog-community-footer]: /blog/2026/0.15.0/#community-footer-links
+[0.15.0-blog-doc-rooted]: /blog/2026/0.15.0/#doc-rooted-sites
+[0.15.0-blog-internationalization]: /blog/2026/0.15.0/#internationalization
 
 ## v0.14.3 {#v0.14.3}
 

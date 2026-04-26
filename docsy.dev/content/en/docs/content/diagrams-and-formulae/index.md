@@ -1,6 +1,5 @@
 ---
 title: Diagrams and Formulae
-weight: 11
 description: Add generated diagrams and scientific formulae to your site.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---

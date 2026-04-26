@@ -1,17 +1,17 @@
 ---
 title: 0.15 commit inventory
 date: 2026-04-25
-lastmod: 2026-04-25
+lastmod: 2026-04-26
 range: v0.14.3..main
-last-main-commit: ee79b52c
+last-main-commit: 343d6154
 ---
 
 ## Scope
 
-Inventory covers commits in [v0.14.3...main][] through [ee79b52c][].
+Inventory covers commits in [v0.14.3...main][] through [343d6154][].
 
 - First-parent commits: 37
-- Raw commits in range: 45
+- Raw commits in range: 46
 - Baseline: latest official release tag, [v0.14.3][]
 
 The extra raw commits are implementation commits that are also represented by
@@ -20,7 +20,7 @@ uses first-parent commits as the release-audit spine.
 
 ## User-facing changes
 
-### Agent-friendly and Markdown output
+### Agent support and Markdown output
 
 - `4db086c6` [#2597][] Add agent-friendly support plan and phase 1
   implementation of Markdown output
@@ -74,6 +74,9 @@ uses first-parent commits as the release-audit spine.
   aliases
 - `6884d94e` [#2584][] Add markdownlint rule for no `docsy.dev` external URLs
   and fix link
+- `343d6154` [#2610][] 0.15 release-prep: release report blog draft, changelog
+  “Next release”, refcache refresh, wide user-guide link sweep, and
+  `tasks/0.15/release-prep` reports
 
 ## Internationalization
 
@@ -109,6 +112,9 @@ uses first-parent commits as the release-audit spine.
   and task plans.
 - [#2605][] combines `llms.txt`, Markdown output refinements, tests,
   dependencies, and a temporary Hugo scrollspy escaping workaround.
+- [#2610][] is a large release-prep omnibus (blog, changelog, refcache, link
+  hygiene, and task reports). Prefer the feature PRs above for functional change
+  notes.
 
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2555]: https://github.com/google/docsy/pull/2555
@@ -147,6 +153,7 @@ uses first-parent commits as the release-audit spine.
 [#2604]: https://github.com/google/docsy/pull/2604
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
-[ee79b52c]: https://github.com/google/docsy/commit/ee79b52c
+[#2610]: https://github.com/google/docsy/pull/2610
+[343d6154]: https://github.com/google/docsy/commit/343d6154
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [v0.14.3]: https://github.com/google/docsy/releases/tag/v0.14.3
