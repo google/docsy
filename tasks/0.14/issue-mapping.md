@@ -1,7 +1,7 @@
 ---
 title: 0.14 issue mapping
 date: 2026-01-16
-cSpell:ignore: docsy
+cSpell:ignore: subrepo frontmatter cyrillic
 ---
 
 > Report refreshed for commits through `37be7dc7` on `main`.

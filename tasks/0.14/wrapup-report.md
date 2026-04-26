@@ -1,7 +1,7 @@
 ---
 title: 0.14 release-wrapup report
 date: 2026-01-16
-cSpell:ignore: docsy
+cSpell:ignore: subrepo
 ---
 
 > Report refreshed for commits through `a1ddcab5` on `main`.

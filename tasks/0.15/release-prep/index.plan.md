@@ -1,13 +1,45 @@
 ---
-title: 0.14 Release wrapup plan
-date: 2026-01-16
-last-main-commit: a1ddcab5
-cSpell:ignore: docsy
+title: 0.15 Release wrapup plan
+date: 2026-04-25
+lastmod: 2026-04-25
+last-main-commit: 46da75a7
 ---
+
+## Agent guidance
+
+- All generated content should be lean and DRY.
+- Do not duplicate detailed findings across reports. Keep the commit inventory
+  concise, use the issue audit for evidence, and use the wrapup report for
+  decisions and action items.
+- Treat the [0.15 release tracker][] as the release coordination issue.
+- When updating release content, follow the [Docsy style guide][] and the
+  [changelog style guide][].
+
+## Deliverables
+
+Create and maintain:
+
+- [commit inventory](commit-inventory.md) with these sections:
+  - scope and refresh point
+  - headline groups for user-facing changes, maintenance changes, dependency
+    updates, tests/tooling, docs/site work, and mixed-change commits needing
+    review
+  - per-entry commit short SHA, PR number, title, and brief classification
+- [issue mapping](issue-mapping.md) as a table with commit, PR, title, linked
+  issue or tracker, source of the link, and notes.
+- [issue audit](issue-audit.md) as the evidence log. For each material change,
+  record issue/PR, status, docs impact, changelog impact, downstream/client
+  impact, blog inclusion, and follow-up needed.
+- [wrapup report](wrapup-report.md) as the decision and action summary,
+  including resolved themes, outstanding release blockers, dependency bundles,
+  required docs/changelog/blog work, post-release actions, and tracker
+  alignment.
+- The 0.15 blog post under `docsy.dev/content/en/blog/2026/0.15.0.md`, not as a
+  task-local draft.
 
 ## Inventory commits
 
-- Pull git log from [v0.13.0...main] and export commit list with PR numbers
+- Pull git log from [v0.14.0...main][] and export commit list with PR numbers
 - Group dependency-only commits together and flag mixed-change commits for
   review.
 - Keep groupings broad so the list stays manageable; note detailed client-impact
@@ -28,7 +60,11 @@ cSpell:ignore: docsy
   follow-up
 - Check `docsy.dev/content` and other user-guide paths for corresponding
   documentation updates
-- Confirm `CHANGELOG.md` entries exist and are complete where needed
+- Confirm the published changelog entries in
+  `docsy.dev/content/en/project/about/changelog.md` are complete where needed.
+  The root `CHANGELOG.md` is only a pointer to that page.
+- Confirm the current "Next release" changelog heading is ready to become
+  v0.15.0 before final release prep.
 - Identify whether each change affects downstream theme client projects and note
   the impact in the audit summary
 - Maintain the findings in [issue audit](issue-audit.md)
@@ -47,18 +83,22 @@ cSpell:ignore: docsy
 
 - Draft a summary document outlining resolved issues, outstanding work,
   dependency bundles, and action items
-- Cross-reference the `google/docsy#2404` tracker and update/checklist alignment
+- Cross-reference the [0.15 release tracker][] and update/checklist alignment
 - Publish outcomes to the [wrapup report](wrapup-report.md)
 
 ## Prepare release report blog post
 
 - Draft `docsy.dev` blog post highlighting new features, improvements, and
-  breaking changes in 0.14.0
-- Structure as a release report (similar to 0.9.0 and 0.10.0), focusing on
-  what's new rather than detailed upgrade mechanics
-- Include a brief upgrade section that references the 0.13.0 upgrade guide for
-  command examples
-- Keep the draft updated in [0.14.0 release report][]
+  breaking changes in 0.15.0
+- Model the post on the 0.14.0 release report: highlight and explain user-facing
+  changes in 0.15.0, and give required-action guidance for breaking changes.
+- Include sections for release summary, readiness/action overview, major
+  user-facing changes, breaking changes and required actions, other notable
+  changes, upgrade steps, sanity checks, what's next, and references. Omit empty
+  sections if they do not apply.
+- Keep upgrade mechanics brief and reference the 0.14.0 upgrade guide for
+  command examples when the same commands apply.
+- Keep the draft updated in [0.15.0 release report][]
 
 ---
 
@@ -67,7 +107,7 @@ cSpell:ignore: docsy
 Repeat when new commits land on `main` do the following:
 
 - [Update the plan and reports](#update-the-plan-and-reports)
-- [0.14.0 blog post](#0140-blog-post)
+- [0.15.0 blog post](#0150-blog-post)
 - [Changelog](#changelog)
 
 ### Update the plan and reports
@@ -79,17 +119,19 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [a1ddcab5].
+First execution should refresh reports for commits through [46da75a7][].
 
-### 0.14.0 blog post
+### 0.15.0 blog post
 
-- Reread the [0.14.0 blog post][].
-- Compare it to the information you recently added to the 0.14.0 release report
+- Reread the [0.15.0 blog post][].
+- Compare it to the information you recently added to the 0.15.0 release report
   pages in this folder.
 - Is the post complete? If not identify what is missing.
 - Take note of fixes and features that are not yet documented.
 - Document breaking changes, new features, and other changes, as well as
   deprecation notices and alerts of upcoming breaking changes.
+- Ensure the post is useful to Docsy users by explaining user-facing changes and
+  required action for breaking changes, not just listing commits.
 - For each change or feature:
   - Link to: the corresponding issue, if it exists, otherwise link to the main
     PR; link to the relevant section of the user guide.
@@ -98,14 +140,20 @@ Report refreshed for commits through [a1ddcab5].
 
 ### Changelog
 
-- Reread the [changelog entry for 0.14.0][0.14.0-changelog].
-- Compare it to the information you recently added to the 0.14.0 release report
+- Reread the [changelog entry for 0.15.0][0.15.0-changelog].
+- Compare it to the information you recently added to the 0.15.0 release report
   pages in this folder.
 - Is the changelog complete? If not, add the missing information.
 - Remember that the changelog is meant to only (very briefly) highlight
   significant changes.
 
-[0.14.0 release report]: ../docsy.dev/content/en/blog/2026/0.14.0.md
-[0.14.0-changelog]: ../../docsy.dev/content/en/project/about/changelog/#v0.14.0
-[v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
-[0.14.0 blog post]: ../docsy.dev/content/en/blog/2026/0.14.0.md
+[0.15 release tracker]: https://github.com/google/docsy/issues/2501
+[0.15.0 release report]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
+[0.15.0-changelog]:
+  ../../../docsy.dev/content/en/project/about/changelog/#v0.15.0
+[v0.14.0...main]: https://github.com/google/docsy/compare/v0.14.0...main
+[0.15.0 blog post]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
+[46da75a7]: https://github.com/google/docsy/commit/46da75a7
+[changelog style guide]:
+  ../../../docsy.dev/content/en/project/about/changelog/#style-guide
+[Docsy style guide]: ../../../docsy.dev/content/en/project/style-guide/
