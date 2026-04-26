@@ -6,6 +6,7 @@ LLMS index: [llms.txt](/llms.txt)
 
 Section pages:
 
+- [Release 0.15.0 report and upgrade guide](/blog/2026/0.15.0/)
 - [Release 0.14.0 report and upgrade guide](/blog/2026/0.14.0/)
 - [Hugo 0.152.0-0.155.x upgrade guide](/blog/2026/hugo-0.152.0+/)
 - [Release 0.13.0 report and upgrade guide](/blog/2025/0.13.0/)
