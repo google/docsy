@@ -11,19 +11,10 @@ description: >-
 > adoption and evaluation. Output details and validation coverage may change in
 > future releases.
 
-Docsy provides opt-in agent support. It can publish **plain Markdown** alongside
-HTML for the same logical page, advertise that Markdown with `<link
-rel="alternate" type="text/markdown">` in HTML, and generate a top-level
-[llms.txt][] file. These features give agents direct entry points into your
-content without making them infer structure from themed HTML.
+Docsy provides opt-in agent support through the features listed below. For
+validation and metrics, we use [AFDocs][afdocs] on docsy.dev.
 
-We use [AFDocs][afdocs] on docsy.dev for basic metrics. It performs checks
-across various categories defined in the [Agent-Friendly Documentation
-spec][afs], such as Markdown alternates and `llms.txt`. We plan to expand
-validation beyond AFDocs in future releases, including syntactic and semantic
-checks of generated Markdown.
-
-## What you get
+## Features
 
 - **Markdown URLs** — For each page where Markdown output is enabled, Hugo can
   emit `index.md` (or the configured output path) and a
@@ -132,9 +123,18 @@ You are not limited to the default `all.md`:
 - The feature set is **opt-in** by design; existing sites keep prior behavior
   until they add these outputs.
 
-## Example
+## Validation and metrics
 
-This site has agent support features enabled. Here is our AFDocs scorecard:
+We use [AFDocs][afdocs] on docsy.dev for basic metrics. It performs checks
+across various categories defined in the [Agent-Friendly Documentation
+spec][afs], such as Markdown alternates and `llms.txt`. We plan to expand
+validation beyond AFDocs in future releases, including syntactic and semantic
+checks of generated Markdown.
+
+### Scorecard examples
+
+Included next is an example of an AFDocs scorecard for this site. For an example
+of an online report, see [OpenTelemetry agent score][].
 
 ```text
 {{< readfile "afdocs-scorecard.txt" >}}
@@ -157,5 +157,7 @@ For details on how we have set this up, see
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
 [llms.txt]: https://llmstxt.org/
+[OpenTelemetry agent score]:
+  https://buildwithfern.com/agent-score/company/opentelemetry
 [sof]:
   https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates
