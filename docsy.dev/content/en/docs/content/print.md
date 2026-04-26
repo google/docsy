@@ -16,6 +16,7 @@ table of contents for the section.
 To enable this feature, add the "print" output format in your site's
 `hugo.toml`/`hugo.yaml`/`hugo.json` file for the "section" type:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -43,6 +44,7 @@ outputs:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 The site should then show a "Print entire section" link in the right hand
 navigation.

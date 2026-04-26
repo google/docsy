@@ -13,7 +13,7 @@ no-emphasis-as-header: false
 no-hard-tabs: false
 no-inline-html: false
 no-shortcut-ref-link:
-  check_undefined: false
+  ignore_pattern: '^(x)$'
 no-trailing-punctuation: false
 no-trailing-spaces: {  br_spaces: 0, strict: true}
 # table-column-style: false

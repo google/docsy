@@ -399,6 +399,7 @@ For details, see the [Syntax highlighting][].
 Hugo's default Chroma style is [monokai][]. To use another style, such as
 [tango][], add the following to your project configuration.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -423,6 +424,7 @@ markup:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 For the complete list of available styles, see [Chroma Style Gallery][].
 
@@ -524,26 +526,33 @@ button in the top right-hand corner. To disable this functionality, set
 Optionally, you can enable Prism syntax highlighting in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params]
 prism_syntax_highlighting = true
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   prism_syntax_highlighting: true
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "prism_syntax_highlighting": true
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
 
 When this option is enabled your site uses
 [Prism](https://prismjs.com/index.html) instead of Chroma for code block

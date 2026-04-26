@@ -795,6 +795,7 @@ Hugo will, by default, create an RSS feed for the home page and any section. To
 disable all RSS feeds, add the following to your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -813,6 +814,7 @@ disableKinds: [RSS]
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 {{% alert title=Note color=info %}}
 
@@ -824,6 +826,7 @@ button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the
 Hugo default [output formats](https://gohugo.io/methods/page/outputformats/) for
 sections, which are HTML and RSS.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -851,6 +854,7 @@ outputs:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 {{% /alert %}}
 
@@ -863,6 +867,7 @@ You can configure the frequency with which your sitemap is updated, your sitemap
 filename, and the default page priority in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -889,6 +894,7 @@ sitemap:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 To override any of these values for a given page, specify it in page front
 matter:

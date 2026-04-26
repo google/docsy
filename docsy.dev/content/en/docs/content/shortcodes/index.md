@@ -54,7 +54,7 @@ These blocks share some common parameters:
 - **height**: A pre-defined height of the block container. One of `min`, `med`,
   `max`, `full`, or `auto`.
   - `full`: the block fills the viewport height, which can be useful for landing
-    pages with a [blocks/cover] and a translucent navbar.
+    pages with a [blocks/cover](#blocks-cover) and a translucent navbar.
   - `auto` leaves the block's minimum height unconstrained.
   - All other settings constrain the block's minimum height.
 

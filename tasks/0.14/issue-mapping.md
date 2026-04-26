@@ -82,6 +82,8 @@ Mapping [commits since v0.13.0][] to their originating issues (when known).
 
 ## CI / tooling commits
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
+
 | Commit     | PR  | Summary                                                            | Originating Issue(s) | Notes                           |
 | ---------- | --- | ------------------------------------------------------------------ | -------------------- | ------------------------------- |
 | `66a0c7d`  | —   | Update README, contrib docs for deployment and release process     | —                    | Contributing documentation      |
@@ -98,5 +100,7 @@ Mapping [commits since v0.13.0][] to their originating issues (when known).
 | `7bcae61`  | —   | Don't format \_variables_forward.scss                              | —                    | Tooling configuration           |
 | `199468a`  | —   | Create scss-namespace.plan.md                                      | —                    | Planning documentation          |
 | `24c01d23` | —   | Add read-only contents permission to workflows                     | —                    | CI security configuration       |
+
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 [commits since v0.13.0]: https://github.com/google/docsy/compare/v0.13.0...main

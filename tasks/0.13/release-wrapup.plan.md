@@ -79,7 +79,7 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [52aa677] (includes release blog post,
+Report refreshed for commits through `52aa677` (includes release blog post,
 changelog updates, final release adjustments, and documentation improvements).
 
 ### 0.13.0 blog post

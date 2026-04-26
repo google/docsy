@@ -79,7 +79,7 @@ Repeat when new commits land on `main` do the following:
 - Take note of fixes and features that are not yet documented in the blog post
   or changelog.
 
-Report refreshed for commits through [a1ddcab5].
+Report refreshed for commits through `a1ddcab5`.
 
 ### 0.14.0 blog post
 

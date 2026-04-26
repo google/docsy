@@ -40,6 +40,7 @@ of the sidebar left navigation pane. If you don't want the sidebar search box,
 set the site parameter `sidebar_search_disable` to `true` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -63,6 +64,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ## Configure search with a Google Custom Search Engine {#google-search}
 
@@ -186,6 +188,7 @@ any other fields, as outlined next.
 
 ### Configure Algolia DocSearch
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1.  Ensure that [GCSE search](#disabling-gcse-search) is disabled.
@@ -224,6 +227,7 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 To learn more about Algolia DocSearch V3, see
 [Getting started](https://docsearch.algolia.com/docs/v3/docsearch).
@@ -254,6 +258,7 @@ non-public sites.
 
 To add Lunr search to your Docsy site:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
@@ -282,6 +287,7 @@ params:
    search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Once you've completed these steps, local search is enabled for your site and
 results appear in a drop down when you use the search box.
@@ -299,6 +305,7 @@ results appear in a drop down when you use the search box.
 You can customize the summary length by setting `offlineSearchSummaryLength` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -322,6 +329,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### Changing the maximum result count of the local search
 
