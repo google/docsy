@@ -88,7 +88,7 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2604][]: Create `az.yaml` from TOML                      | rel  | WIP  | WIP  | Internationalization                       |
 | [#2605][]: Add LLMS output and `llms.txt`                  | WIP  | WIP  | WIP  | Experimental agent support                 |
 | [#2606][]: Allow Markdown output for project docs          | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2610][]: 0.15 release-prep omnibus                       | done | rel  | rel  | Blog, changelog, refcache, reports, links |
+| [#2610][]: 0.15 release-prep omnibus                       | done | rel  | rel  | Blog, changelog, refcache, reports, links  |
 
 Raw commits in scope without PR numbers in their commit subjects:
 

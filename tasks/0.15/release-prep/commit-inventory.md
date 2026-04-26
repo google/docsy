@@ -113,8 +113,8 @@ uses first-parent commits as the release-audit spine.
 - [#2605][] combines `llms.txt`, Markdown output refinements, tests,
   dependencies, and a temporary Hugo scrollspy escaping workaround.
 - [#2610][] is a large release-prep omnibus (blog, changelog, refcache, link
-  hygiene, and task reports). Prefer the feature PRs above for functional
-  change notes.
+  hygiene, and task reports). Prefer the feature PRs above for functional change
+  notes.
 
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2555]: https://github.com/google/docsy/pull/2555

@@ -71,10 +71,10 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 > [!TIP]
 >
-> By default, Hugo’s `outputs` map (whether in multi-file site config or page front matter)
-> is a **full replacement** for each page kind, not a merge [^1]. When you add
-> `markdown`, keep every format your site already relies on -- for example `RSS`
-> and `print` on sections as is shown in the examples above.
+> By default, Hugo’s `outputs` map (whether in multi-file site config or page
+> front matter) is a **full replacement** for each page kind, not a merge [^1].
+> When you add `markdown`, keep every format your site already relies on -- for
+> example `RSS` and `print` on sections as is shown in the examples above.
 
 [^1]:
     This is contrary to the documented Hugo behavior for front-matter

@@ -28,8 +28,6 @@ Read more:
 [afdocs-config]: https://afdocs.dev/reference/config-file
 [agent-docs-config]:
   https://github.com/google/docsy/blob/main/docsy.dev/agent-docs.config.yml
-[test-workflow]:
-  https://github.com/google/docsy/blob/main/.github/workflows/test.yaml
 
 ## Prettier formatting
 

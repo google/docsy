@@ -52,7 +52,7 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [343d6154][].
 | [#2604][]: Create `az.yaml` from TOML                                  | [#2082][] (PR body)                                | Format-only follow-up                                |
 | [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent support                           |
 | [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured AFDocs score                         |
-| [#2610][]: 0.15 release notes, audit, and wrapup content             | [#2501][] (Release prep scope)                     | Blog draft, changelog, refcache, link sweep, reports |
+| [#2610][]: 0.15 release notes, audit, and wrapup content               | [#2501][] (Release prep scope)                     | Blog draft, changelog, refcache, link sweep, reports |
 
 ## Linked Issues
 
