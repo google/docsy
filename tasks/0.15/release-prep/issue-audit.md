@@ -30,9 +30,10 @@ blog post, or changelog updates.
     `$.Page.RenderString`, which may affect some client overrides or shortcode
     content rendering.
   - [#2585][] raises the repository-supported Hugo version to 0.157.0.
-- Changelog status: the "Next release" section still contains placeholders and
-  still says "v0.14.3 or v0.15.0".
-- Blog status: `docsy.dev/content/en/blog/2026/0.15.0.md` does not exist yet.
+- Changelog status: draft 0.15.0 entry exists and needs final review before
+  release.
+- Blog status: draft release report exists at
+  `docsy.dev/content/en/blog/2026/0.15.0.md`.
 
 ## Audit Details
 
