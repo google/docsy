@@ -72,7 +72,7 @@ of every documentation page, as shown in Figure 1.
 </figure>
 
 After clicking **Yes** the user should see a response like Figure 2. You can
-[configure] the response text in your project's [configuration file][].
+[configure][] the response text in your project's [configuration file][].
 
 <figure>
   <img src="/images/yes.png"
@@ -112,7 +112,7 @@ other words!
 
 > [!WARNING] Version note
 >
-> As of Docsy version [0.8.0], feedback will be enabled whether
+> As of Docsy version [0.8.0][], feedback will be enabled whether
 > `site.Config.Services.GoogleAnalytics.ID` is set or not. This supports the use
 > case where analytics is configured outside of Docsy.
 
@@ -179,11 +179,11 @@ integer. Docsy uses 0 for "no" events.
 
 ### Access the feedback data
 
-Page feedback is reported to Google Analytics through [events].
+Page feedback is reported to Google Analytics through [events][].
 
 > [!WARNING] Version note
 >
-> As of Docsy version [0.8.0], page feedback is reported as custom
+> As of Docsy version [0.8.0][], page feedback is reported as custom
 > `page_helpful` events, rather than `click` events.
 
 This section assumes basic familiarity with Google Analytics. For example, you
@@ -303,7 +303,7 @@ using the first of the following that is defined:
 - For non-index pages, the page [summary][], as computed by Hugo
 - The site description taken from the [site `params`][]
 
-For the code used to perform this computation, see [page-description.html].
+For the code used to perform this computation, see [page-description.html][].
 
 Add more meta tags as needed to your project's copy of the `head-end.html`
 partial. For details, see

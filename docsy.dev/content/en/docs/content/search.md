@@ -21,11 +21,11 @@ can choose from:
   index and search your site without the need to connect to external services.
   This option doesn't require your site to be public.
 
-If you enable any of these search options in your project [configuration file],
-a search box displays in the right of your top navigation bar. By default a
-search box also displays at the top of the sidebar in the left navigation pane,
-which you can disable if you prefer, or if you're using a search option that
-only works with the top search box.
+If you enable any of these search options in your project [configuration
+file][], a search box displays in the right of your top navigation bar. By
+default a search box also displays at the top of the sidebar in the left
+navigation pane, which you can disable if you prefer, or if you're using a
+search option that only works with the top search box.
 
 > [!WARNING] You can only enable a single search option at a time
 >
@@ -40,6 +40,7 @@ of the sidebar left navigation pane. If you don't want the sidebar search box,
 set the site parameter `sidebar_search_disable` to `true` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -63,6 +64,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ## Configure search with a Google Custom Search Engine {#google-search}
 
@@ -186,6 +188,7 @@ any other fields, as outlined next.
 
 ### Configure Algolia DocSearch
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1.  Ensure that [GCSE search](#disabling-gcse-search) is disabled.
@@ -224,6 +227,7 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 To learn more about Algolia DocSearch V3, see
 [Getting started](https://docsearch.algolia.com/docs/v3/docsearch).
@@ -254,6 +258,7 @@ non-public sites.
 
 To add Lunr search to your Docsy site:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
@@ -282,6 +287,7 @@ params:
    search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Once you've completed these steps, local search is enabled for your site and
 results appear in a drop down when you use the search box.
@@ -299,6 +305,7 @@ results appear in a drop down when you use the search box.
 You can customize the summary length by setting `offlineSearchSummaryLength` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -322,6 +329,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### Changing the maximum result count of the local search
 
@@ -408,9 +416,9 @@ If none of the supported search engines address your project's needs, you can
 implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
-- [layouts/_partials/search-input.html]
-- [assets/scss/td/_search.scss]
-- [assets/js/search.js]
+- [layouts/_partials/search-input.html][]
+- [assets/scss/td/_search.scss][]
+- [assets/js/search.js][]
 
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
 [assets/js/search.js]:

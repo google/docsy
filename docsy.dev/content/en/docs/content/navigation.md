@@ -13,12 +13,12 @@ they work and how to configure and customize them to meet your needs.
 ## Site navbar
 
 A site navbar appears at the top of every site page. It is built from Hugo
-[menus] and Docsy-generated elements. Hugo [menus] consist of an array of menu
-entries, accessible via the `.Site.Menus` site variable.
+[menus][] and Docsy-generated elements. Hugo [menus][] consist of an array of
+menu entries, accessible via the `.Site.Menus` site variable.
 
 The `main` menu is built from:
 
-- [Menu] entries defined over the `main` menu.
+- [Menu][] entries defined over the `main` menu.
 - Docsy-generated menus (depending on your site configuration):
   - [Doc-version menu](#version-menu)
   - [Language menu](#language-menu)
@@ -27,7 +27,7 @@ The `main` menu is built from:
 
 ### Adding `main` menu entries
 
-Define [menu] entries in your site's configuration file or via page front
+Define [menu][] entries in your site's configuration file or via page front
 matter. For example, here's how you can add a Documentation section to the
 top-level navbar:
 
@@ -134,7 +134,7 @@ To style the version menu, apply your custom CSS to `.td-navbar__version-menu`.
 ### Language menu
 
 Docsy adds a language selector menu to the top-level navbar if you have a
-[multilingual] site configured as explained in [Multi-language support][].
+[multilingual][] site configured as explained in [Multi-language support][].
 Selecting a language takes the user to the translated version of the current
 page, or the home page for the given language.
 
@@ -358,7 +358,7 @@ activating the cached side nav with the optional parameter
 `.ui.sidebar_cache_limit`.
 
 The tabbed pane below lists the menu section options you can define in your
-project [configuration file].
+project [configuration file][].
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -520,7 +520,7 @@ page's main content area by default.
 
 The headings contained in [Markdown shortcodes][] `{{%/* ... */%}}` get included
 in the TOC, while those in standard shortcodes `{{</* ... */>}}` will not. For
-details, see Hugo forum discussions [#55399] and [#51940].
+details, see Hugo forum discussions [#55399][] and [#51940][].
 
 [#55399]:
   https://discourse.gohugo.io/t/tableofcontents-doesnt-render-headings-correctly-that-contains-shortcode/55399
@@ -573,8 +573,8 @@ By default, headings become active when they reach 10% from the top of the
 viewport (configured via `rootMargin`).
 
 - To disable ScrollSpy for a specific page, set `ui.scrollSpy.disable: true` in
-  that page's front matter. To disable for all pages in a section, [cascade] the
-  setting in the front matter of the section's index page.
+  that page's front matter. To disable for all pages in a section, [cascade][]
+  the setting in the front matter of the section's index page.
 - To globally adjust when headings become active, set `ui.scrollSpy.rootMargin`
   in your site configuration. The default is `0px 0px -10%`. Use a larger
   negative percentage (e.g., `-20%`) to activate headings earlier, or a smaller
@@ -618,20 +618,20 @@ viewport (configured via `rootMargin`).
 >
 > We previously enabled ScrollSpy's smooth scrolling, but it interfered with
 > hash updates in the browser URL and in-page navigation, so it is disabled by
-> default. For details see PR [#2291].
+> default. For details see PR [#2291][].
 
 #### Advanced ScrollSpy customization
 
 For advanced customization, such as adjusting `threshold`, override
-[layouts/_partials/td/scrollspy-attr.txt]. For ScrollSpy configuration details,
-see [ScrollSpy].
+[layouts/_partials/td/scrollspy-attr.txt][]. For ScrollSpy configuration
+details, see [ScrollSpy][].
 
 > [!NOTE]
 >
 > ScrollSpy determines the active TOC entry using the browser's
-> [IntersectionObserver API][], including its configurable [rootMargin]. Because
-> of how these thresholds work, there can be brief moments while a user is
-> scrolling when **no** heading is highlighted, especially when headings are
+> [IntersectionObserver API][], including its configurable [rootMargin][].
+> Because of how these thresholds work, there can be brief moments while a user
+> is scrolling when **no** heading is highlighted, especially when headings are
 > close together or when the active region is small. For more details, see
 > [ScrollSpy options][ss-opt] and the discussion in [Bootstrap issue
 > #34958][bs-34958].
@@ -651,9 +651,9 @@ see [ScrollSpy].
 
 ## Breadcrumb navigation
 
-[Breadcrumb navigation] appears at the top of each non-index page by default. To
-also display single-element breadcrumb lists in index pages, add the following
-[style override] to your project:
+[Breadcrumb navigation][] appears at the top of each non-index page by default.
+To also display single-element breadcrumb lists in index pages, add the
+following [style override][] to your project:
 
 ```scss
 .td-breadcrumbs__single {
@@ -670,8 +670,8 @@ or _Tags_.
 
 As illustrated next, you can disable (non-taxonomy) breadcrumb navigation for an
 entire project, by setting `ui.breadcrumb_disable` to true in your project
-[configuration file]. Similarly, you can disable taxonomy breadcrumbs by setting
-`ui.taxonomy_breadcrumb_disable` to true:
+[configuration file][]. Similarly, you can disable taxonomy breadcrumbs by
+setting `ui.taxonomy_breadcrumb_disable` to true:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -721,7 +721,7 @@ cascade:
 ## Heading self links
 
 Docsy supports build-time generation of heading self links using Hugo's
-`render-heading.html` [hook].
+`render-heading.html` [hook][].
 
 To enable this feature in your project, define
 `layouts/_markup/render-heading.html` as:
@@ -740,19 +740,19 @@ defaults:
 
 Your projects can also reuse (in your own custom heading render hook) or
 override the heading self-link partial `td/heading-self-link.html`, which is
-defined in [layouts/_partials/td/render-heading.html].
+defined in [layouts/_partials/td/render-heading.html][].
 
 ## Heading aliases and in-page targets <a id="a-heading-aliases"></a> {#heading-aliases}
 
 By default, [heading IDs are auto-generated][] from heading text unless you set
 an explicit ID. If you change the text or explicit ID, the heading ID changes
-and existing [fragment] links to the heading will break. Treat a heading ID
+and existing [fragment][] links to the heading will break. Treat a heading ID
 change like a page move: keep old fragments working with a heading ID alias.
 
 To create a heading ID alias:
 
 - Add an empty anchor element with the old ID to the heading.
-- Add the new heading ID using the `{#some-id}` [Markdown attributes] syntax.
+- Add the new heading ID using the `{#some-id}` [Markdown attributes][] syntax.
 
 For example, if you rename "Getting Started" to "Quickstart":
 

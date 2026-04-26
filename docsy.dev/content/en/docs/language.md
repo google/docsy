@@ -13,7 +13,7 @@ navigate between language versions.
 
 To add content in multiple languages, you first need to define the available
 languages in a `languages` section in your site configuration. Each language can
-have its own language-specific configuration. For example, the [Docsy example]
+have its own language-specific configuration. For example, the [Docsy example][]
 site config specifies that it provides content in English, Norwegian, and
 Persian. The default language is English:
 
@@ -134,7 +134,7 @@ section below.
 <!-- markdownlint-restore -->
 
 Docsy supports top-down Right-To-Left (RTL) languages such as Persian through
-[Bootstrap's RTL feature][bs-rtl], which uses [RTLCSS].
+[Bootstrap's RTL feature][bs-rtl], which uses [RTLCSS][].
 
 If your multilingual site includes an RTL language (configured with
 `languageDirection: rtl`), then your project needs to include the [`rtlcss`
@@ -144,7 +144,7 @@ package]. You can add this package to your dev dependencies as follows:
 npm install rtlcss --save-dev
 ```
 
-For an example of Docsy's RTL support, see the [Persian pages] of the [Docsy
+For an example of Docsy's RTL support, see the [Persian pages][] of the [Docsy
 example].
 
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/

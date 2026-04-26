@@ -71,6 +71,7 @@
     "@cspell/dict-fr-fr": "^2.3.2",
     "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
+    "markdownlint-rule-no-shortcut-ref-link": "github:chalin/markdownlint-rule-no-shortcut-ref-link#v0.3.1",
     "prettier": "^3.8.1"
   },
   "config": {

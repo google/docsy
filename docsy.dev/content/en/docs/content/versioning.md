@@ -4,6 +4,7 @@ date: 2020-02-02
 weight: 4
 description: >-
   Customize navigation and banners for multiple versions of your docs.
+cSpell:ignore: pagelinks Kubeflow
 ---
 
 <!-- markdownlint-disable blanks-around-headings no-bare-urls single-h1 -->
@@ -21,6 +22,7 @@ Docsy theme adds a version selector drop down to the navbar. You specify a URL
 and a name for each version you would like to add to the menu, as in the
 following example:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -70,6 +72,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Remember to add your current version so that users can navigate back!
 
@@ -77,6 +80,7 @@ The default title for the version drop-down menu is **Releases**. To change the
 title, change the site parameter `version_menu` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -97,6 +101,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 If you set the `version_menu_pagelinks` parameter to `true`, then links in the
 version drop-down menu point to the current page in the other version, instead
@@ -128,6 +133,7 @@ For example, see the archived docs for
 To add the banner to your doc site, make the following changes in your
 `hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1. Set the site parameter `archived_version` to `true`:
@@ -197,3 +203,4 @@ params:
     {{< /tabpane >}}
 
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->

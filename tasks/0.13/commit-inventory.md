@@ -83,12 +83,12 @@ client projects.
 - `14c2061` (`#2400`) Add i18n support for table of contents labels
 - `bd7f023` (`#2402`) Document i18n support for TOC labels, update task docs
 - `d3b5749` (`#2405`) Document `notoc`, and update TOC CSS class names
-- `f59cbb8` (`#2406`) [UX] Show left/right scroll indicators for the navbar on
+- `f59cbb8` (`#2406`) (UX) Show left/right scroll indicators for the navbar on
   mobile
 - `39ee7ca` (`#2407`) Update changelog for navbar scroll indicators and notoc
   docs
 - `15a3823` (`#2408`) Change link title from 'Documentation' to 'Docs'
-- `ec833d2` (`#2368`) [Blog] Release 0.13.0 report and upgrade guide
+- `ec833d2` (`#2368`) (Blog) Release 0.13.0 report and upgrade guide
 - `52aa677` (`#2411`) Pre-0.13.0 release adjustments
 
 ## CI / tooling only

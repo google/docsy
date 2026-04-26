@@ -54,7 +54,7 @@ accordingly.
       [docsy.dev/config][] files.
 
 6.  <a id="ci-test-step">Run `npm run ci:test`</a>, which runs `ci:prepare` and
-    more to ensure that, e.g., vendor assets and [go.mod] dependencies are
+    more to ensure that, e.g., vendor assets and [go.mod][] dependencies are
     up-to-date, etc.
 
 7.  **Submit a PR with your changes**.

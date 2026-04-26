@@ -81,10 +81,10 @@ Mapping [commits since v0.12.0][] to their originating issues (when known).
 | `14c2061` | `#2400` | Add i18n support for table of contents labels                                         | `#2289`              | Localization support for TOC "On this page" and "Top of page"            |
 | `bd7f023` | `#2402` | Document i18n support for TOC labels, update task docs                                | `#2289`              | Documentation follow-up for TOC i18n                                     |
 | `d3b5749` | `#2405` | Document `notoc`, and update TOC CSS class names                                      | `#2289`              | Documentation for `notoc` parameter and TOC CSS class updates            |
-| `f59cbb8` | `#2406` | [UX] Show left/right scroll indicators for the navbar on mobile                       | —                    | UX improvement for mobile navbar scrolling                               |
+| `f59cbb8` | `#2406` | (UX) Show left/right scroll indicators for the navbar on mobile                       | —                    | UX improvement for mobile navbar scrolling                               |
 | `39ee7ca` | `#2407` | Update changelog for navbar scroll indicators and notoc docs                          | `#2406`, `#2405`     | Release documentation maintenance                                        |
 | `15a3823` | `#2408` | Change link title from 'Documentation' to 'Docs'                                      | —                    | Documentation terminology update                                         |
-| `ec833d2` | `#2368` | [Blog] Release 0.13.0 report and upgrade guide                                        | `#2266`              | Release blog post for 0.13.0                                             |
+| `ec833d2` | `#2368` | (Blog) Release 0.13.0 report and upgrade guide                                        | `#2266`              | Release blog post for 0.13.0                                             |
 | `52aa677` | `#2411` | Pre-0.13.0 release adjustments                                                        | `#2266`              | Final release preparation adjustments                                    |
 
 ## CI / tooling commits

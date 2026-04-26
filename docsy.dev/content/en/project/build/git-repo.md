@@ -17,7 +17,7 @@ These two projects are kept in sync at release points, but they may diverge
 between releases, usually to allow the website to ship doc content and UX
 improvements without forcing a theme release.
 
-The main Docsy example site is [Goldydocs], located in the [Docsy example site
+The main Docsy example site is [Goldydocs][], located in the [Docsy example site
 repository][].
 
 ## Branch model

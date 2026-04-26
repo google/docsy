@@ -110,7 +110,7 @@ node -v
 ```
 
 Install or upgrade your version of Node to the **active [LTS release][]**. We
-recommend using **[nvm]** to manage your Node installation (Linux command
+recommend using **[nvm][]** to manage your Node installation (Linux command
 shown):
 
 ```sh
@@ -193,7 +193,8 @@ your project's root directory:
     (cd themes/docsy && npm install)
     ```
 
-    > [!IMPORTANT] **Important**: read the [Docsy NPM install side-effect] note.
+    > [!IMPORTANT] **Important**: read the [Docsy NPM install side-effect][]
+    > note.
 
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
@@ -294,7 +295,7 @@ You can use Docsy as an NPM module as follows:
 
     > [!WARNING] Error: failed to load modules
     >
-    > If Hugo reports the following error when building your site ([#2116]):
+    > If Hugo reports the following error when building your site ([#2116][]):
     >
     > ```text
     > Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
@@ -323,7 +324,7 @@ popd
 
 > [!NOTE]
 >
-> As of Docsy version [0.8.0], running `npm install` inside the Docsy theme
+> As of Docsy version [0.8.0][], running `npm install` inside the Docsy theme
 > directory will create a sibling folder named `github.com`, for example:
 >
 > ```console
@@ -332,10 +333,10 @@ popd
 > ```
 >
 > This is a workaround necessary to support Docsy's use as a single [Hugo
-> module][hm] ([#1120]) in the context of projects _not_ using Hugo modules. The
-> `github.com` folder is created via Docsy's `postinstall` script. To disable
-> this behavior, set the environment variable `DOCSY_MKDIR_HUGO_MOD_SKIP=1`
-> before running NPM install.
+> module][hm] ([#1120][]) in the context of projects _not_ using Hugo modules.
+> The `github.com` folder is created via Docsy's `postinstall` script. To
+> disable this behavior, set the environment variable
+> `DOCSY_MKDIR_HUGO_MOD_SKIP=1` before running NPM install.
 >
 > [#1120]: https://github.com/google/docsy/issues/1120
 > [0.8.0]: /project/about/changelog/#v0.8.0
