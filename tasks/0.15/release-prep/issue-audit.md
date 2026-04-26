@@ -8,9 +8,9 @@ last-main-commit: ee79b52c
 
 ## Scope
 
-Draft audit covers material changes in [v0.14.3...main][] through
-[ee79b52c][]. This is an evidence pass for review before writing the wrapup
-report, release blog post, or changelog updates.
+Draft audit covers material changes in [v0.14.3...main][] through [ee79b52c][].
+This is an evidence pass for review before writing the wrapup report, release
+blog post, or changelog updates.
 
 ## Summary
 
@@ -25,7 +25,9 @@ report, release blog post, or changelog updates.
 - Known likely breaking or action-requiring items:
   - #2580 changes multilingual community/footer path interpretation to
     site-relative paths.
-  - #2586 changes version config to consistently use v-prefixed version values.
+  - #2565 changes `card` shortcode rendering from `markdownify` to
+    `$.Page.RenderString`, which may affect some client overrides or shortcode
+    content rendering.
   - #2585 raises the repository-supported Hugo version to 0.157.0.
 - Changelog status: the "Next release" section still contains placeholders and
   still says "v0.14.3 or v0.15.0".
@@ -37,15 +39,15 @@ report, release blog post, or changelog updates.
 
 - Evidence: #2597, #2599, #2600, #2601, #2602, #2605, #2606; tracker #2596;
   golden-test tracker #726.
-- Status: partial. Markdown output phase 1 is complete; `llms.txt` base
-  implementation is merged. Tracker #2596 remains open, with #2606 still shown
-  as an unchecked housekeeping item in the tracker body.
+- Status: partial. The basic Markdown output and `llms.txt` implementation is
+  merged, but tracker #2596 intentionally remains open while additional 0.15
+  follow-up work is still undecided.
 - Docs impact:
   - Feature planning exists in `tasks/0.15/agent-friendly-support.plan.md`.
   - Golden-test planning exists in `tasks/0.15/md-output-golden-tests.plan.md`.
   - `docsy.dev` is configured to enable Markdown and LLMS outputs.
-  - User-facing guide documentation for enabling Markdown outputs and
-    `llms.txt` still needs release-facing review.
+  - User-facing guide documentation for enabling Markdown outputs and `llms.txt`
+    still needs release-facing review.
 - Changelog impact: missing from the current 0.15 changelog placeholder.
 - Downstream/client impact:
   - Adds opt-in theme support through Hugo output formats and templates.
@@ -55,7 +57,6 @@ report, release blog post, or changelog updates.
 - Blog inclusion: include as a major experimental feature. Explain what is
   available now, what is opt-in, and what remains experimental.
 - Follow-up needed:
-  - Decide whether #2606 should be checked in #2596.
   - Add user-guide or release-blog guidance for enabling Markdown output and
     `llms.txt`.
   - Note any measured `afdocs` caveats without overpromising support.
@@ -76,19 +77,23 @@ report, release blog post, or changelog updates.
 - Downstream/client impact:
   - Adds a concrete configuration pattern for documentation-first sites.
   - May affect users with custom docs-only/doc-rooted configurations.
+  - `card` shortcode rendering now uses `$.Page.RenderString` instead of
+    `markdownify`, which renders shortcode fields in the page context. This may
+    affect clients that depend on the previous rendering behavior or override
+    the shortcode.
 - Blog inclusion: include as a major feature or improvement, with migration
   notes for projects that previously used docs-only patterns.
+- Changelog/blog note: mention the `card` shortcode rendering change as an
+  internal behavior change that may affect some client projects.
 - Follow-up needed:
   - Confirm which #2504 checklist items remain before calling doc-rooted support
     complete.
-  - Decide whether the `card` shortcode rendering change in #2565 should be
-    mentioned separately.
 
 ### Community and Footer Link Behavior
 
 - Evidence: #2576, #2580; closed issues #1380 and #2133; tracker #2504.
-- Status: resolved for #1380 and #2133. #2580 contributes to #2504 and carries
-  a potentially breaking behavior note.
+- Status: resolved for #1380 and #2133. #2580 contributes to #2504 and carries a
+  potentially breaking behavior note.
 - Docs impact: no dedicated user-guide update found in the first pass.
 - Changelog impact: missing from the current 0.15 changelog placeholder.
 - Downstream/client impact:
@@ -98,10 +103,16 @@ report, release blog post, or changelog updates.
   - Potentially breaking: multilingual sites now interpret paths as
     site-relative; use the default language code prefix to force a default
     language target.
-- Blog inclusion: include in breaking/action section if the multilingual path
-  behavior is release-noteworthy.
-- Follow-up needed: add release-note guidance and, if appropriate, user-guide
-  examples for multilingual path prefixes.
+- Blog inclusion: include in the breaking/action section as a potentially
+  breaking change.
+- Guidance:
+  - Review community and footer link path values on multilingual sites.
+  - Paths are now interpreted as site-relative so they resolve correctly under
+    custom permalinks.
+  - To force a link to the default language, prefix the path with the default
+    language code.
+- Follow-up needed: add this guidance to release notes and, if appropriate,
+  user-guide examples for multilingual path prefixes.
 
 ### Version and Variant Menus
 
@@ -114,15 +125,14 @@ report, release blog post, or changelog updates.
     scripts were updated.
 - Changelog impact: missing from the current 0.15 changelog placeholder.
 - Downstream/client impact:
+  - No client-facing release-note impact expected for 0.15.
   - Updates version/variant menu behavior and markup.
   - Introduces `tdVersion` YAML structure.
   - Version v-prefix use changed: old config used bare values such as
     `0.14.4-dev`; new config consistently uses values such as `v0.14.4-dev`.
-- Blog inclusion: include as a user-facing site/versioning improvement if the
-  theme-facing impact is real for downstream sites; otherwise place in "Other
-  notable changes".
-- Follow-up needed: confirm whether v-prefix behavior is a required action for
-  client projects or only for Docsy site/release tooling.
+- Blog inclusion: omit from client-facing highlights unless later release review
+  identifies a downstream effect.
+- Follow-up needed: none for release notes.
 
 ### Layout Fixes
 
@@ -185,20 +195,10 @@ report, release blog post, or changelog updates.
 - Follow-up needed: invite native-speaker review for generated or assisted
   translations if desired.
 
-## Release Tracker Alignment
-
-\#2501 is open and still references `v0.14.0...main` in its checklist and
-related links. Since the correct audit range is now [v0.14.3...main][], the
-tracker should be updated before final release prep.
-
 ## Open Questions For Review
 
 - Should the 0.15 release report treat agent-friendly Markdown/LLMS support as
   experimental, preview, or a standard feature?
-- Is #2580 a breaking change that needs a required-action section, or is a
-  release-note warning enough?
-- Is #2586's v-prefixed version change client-facing, maintainer-facing, or
-  both?
 - Should 0.14.3-only fixes in the range be omitted from 0.15 highlights, or
   briefly mentioned as already included?
 - Does #2504 need to remain open after 0.15, or should specific remaining tasks
