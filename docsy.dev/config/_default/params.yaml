@@ -8,8 +8,8 @@
 
 tdVersion:
   latest: &tdLatestVers v0.14.3
-  dev: &tdDevVers v0.14.4-dev
-  buildId: &tdBuildId 024-over-main-500ee239
+  dev: &tdDevVers v0.15.0-dev
+  buildId: &tdBuildId ''
 
 version: *tdDevVers
 version_menu: *tdDevVers
