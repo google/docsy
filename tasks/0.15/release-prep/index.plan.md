@@ -44,6 +44,8 @@ Create and maintain:
   including resolved themes, outstanding release blockers, dependency bundles,
   required docs/changelog/blog work, post-release actions, and tracker
   alignment.
+- [milestone 23 review](milestone-23-review.md): open issues slated for 0.15 vs
+  0.16+ and milestone hygiene.
 - The 0.15 blog post under `docsy.dev/content/en/blog/2026/0.15.0.md`, not as a
   task-local draft.
 

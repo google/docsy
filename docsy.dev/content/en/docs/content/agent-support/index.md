@@ -1,8 +1,9 @@
 ---
 title: Agent support
 description: >-
-  Opt-in features to help agents better use your site, including Markdown
-  output, alternate links in HTML, and `llms.txt`.
+  Opt-in features that help AI agents and automated tools discover and use your
+  site content, including Markdown output, alternate links in HTML, and
+  llms.txt.
 cSpell:ignore: llmstxt
 ---
 
@@ -10,7 +11,10 @@ cSpell:ignore: llmstxt
 >
 > Features described in this page are [experimental][], and are useful for early
 > adoption and evaluation. Output details and validation coverage may change in
-> future releases.
+> future releases. To track the phased evolution of the agent-support feature,
+> see [Improve support for AI-agent doc consumption #2614][ #2614].
+
+[#2614]: https://github.com/google/docsy/issues/2614
 
 ## Features
 
@@ -135,13 +139,16 @@ For example, honoring `Accept: text/markdown` on the same URL as HTML.
 
 ## Validation and metrics
 
-The **docsy.dev** workspace ships [AFDocs][afdocs] configuration and npm scripts
-so maintainers can score a **deployed** URL against overlapping [Agent-Friendly
-Documentation spec][afs] checks (Markdown URLs, `llms.txt`, and related
-categories). That is **not** the default GitHub Actions `test` job; see
-[Agent-support checks](/project/build/ci-cd/#agent-support-checks). We plan to
-broaden validation over time, including syntactic and semantic review of
-generated Markdown.
+We use [AFDocs][] to assess basic structural support for agent-facing content,
+and to validate that generated outputs meet the configured checks. We also
+encourage sites to implement their own monitoring and metrics on agent access
+patterns—for example logging requests to Markdown URLs or `llms.txt`, and
+collecting metrics on their use. For details, see
+[Agent-support checks](/project/build/ci-cd/#agent-support-checks).
+
+The `docsy.dev` subrepository contains [AFDocs][] configuration and npm scripts
+so maintainers can score a deployed URL against checks that overlap with Docsy’s
+agent-support goals, including Markdown URLs, llms.txt, and related categories.
 
 ### Scorecard examples
 
@@ -160,11 +167,10 @@ For scorecard examples, see:
 
   </details>
 
-For details on how we have set up p, see
+For details on how these checks are configured, see
 [Agent-support checks](/project/build/ci-cd/#agent-support-checks).
 
 [afdocs]: https://afdocs.dev/
-[afs]: https://agentdocsspec.com/
 [built-in output formats]: https://gohugo.io/configuration/output-formats/
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/

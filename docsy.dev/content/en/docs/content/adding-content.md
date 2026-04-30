@@ -634,11 +634,11 @@ automatically filled in with the project name and community links specified in
 resources that help them get involved in your project. The same links are also
 added by default to your site footer.
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
@@ -672,8 +672,11 @@ added by default to your site footer.
 	url = "https://example.org/mail"
 	icon = "fa fa-envelope"
         desc = "Discuss development issues around the project"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   links:
     user:
@@ -702,8 +705,11 @@ params:
         url: 'https://example.org/mail'
         icon: fa fa-envelope
         desc: Discuss development issues around the project
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "links": {
@@ -750,10 +756,29 @@ params:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-restore -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
+
+Each `params.links.user` and `params.links.developer` entry may include an
+optional [`rel` attribute][]. For example (in YAML):
+
+```yaml
+params:
+  links:
+    user:
+      - name: Mastodon
+        url: https://fosstodon.org/@opentelemetry
+        icon: fab fa-mastodon
+        desc: Follow us on Mastodon to get the latest news!
+        rel: me
+```
+
+Docsy applies it when rendering **footer** icon links; for `http` or `https`
+URLs it merges in `noopener` as well.
+
+[`rel` attribute]:
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel
 
 If you're creating your own site and want to add a page using this template, add
 a `/community/_index.md` file in your content root directory. If you've copied
