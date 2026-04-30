@@ -147,7 +147,7 @@ patterns—for example logging requests to Markdown URLs or `llms.txt`, and
 collecting metrics on their use. For details, see
 [Agent-support checks](/project/build/ci-cd/#agent-support-checks).
 
-The `docsy.dev` subrepository contains [AFDocs][] configuration and npm scripts
+The `docsy.dev` project contains [AFDocs][] configuration and npm scripts
 so maintainers can score a deployed URL against checks that overlap with Docsy’s
 agent-support goals, including Markdown URLs, llms.txt, and related categories.
 

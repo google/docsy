@@ -10,6 +10,8 @@
 #     0.14.1-dev+001-over-main-617b5960
 #   - Same tag but package.json version 0.15.0-dev — core stays 0.15.0:
 #     0.15.0-dev+001-over-main-617b5960
+#
+# cSpell:ignore toplevel
 
 set -euo pipefail
 
