@@ -21,6 +21,6 @@ no-trailing-spaces: {  br_spaces: 0, strict: true}
 # Link-validation rules (from scripts/_md-rules/link-rules.mjs)
 
 no-docsy-dev-external-urls:
-  pattern: 'https?://(?:www\.)?docsy\.dev/'
+  pattern: '^https?://(?:www\.)?docsy\.dev/'
   message: Use a site-relative path instead of the full docsy.dev URL.
   replace: '/'
