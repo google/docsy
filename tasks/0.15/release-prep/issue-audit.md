@@ -1,7 +1,7 @@
 ---
 title: 0.15 issue audit
 date: 2026-04-25
-lastmod: 2026-05-01
+lastmod: 2026-04-30
 range: v0.14.3..main
 last-main-commit: 466bd327
 cSpell:ignore: afdocs overpromising
@@ -25,11 +25,17 @@ blog post, or changelog updates.
 - Known likely breaking or action-requiring items:
   - [#2580][] changes multilingual community/footer path interpretation to
     site-relative paths.
-  - [#2565][] changes `card` shortcode rendering from `markdownify` to
-    `$.Page.RenderString`, which may affect some client overrides or shortcode
-    content rendering.
   - [#2585][] raises the repository-supported Hugo version to 0.157.0 and keeps
     release guidance on Node LTS 24.
+- Final messaging for [#2565][] (`card` shortcode rendering: `markdownify` →
+  `$.Page.RenderString`): **both** a **new** capability (page-context relative
+  links/images and Markdown render hooks) and a **low-risk potentially
+  breaking** change for sites affected by the new rendering behavior. The
+  [0.15.0 release blog card section][0.15.0-blog-card] uses BREAKING/NEW; the
+  changelog lists it under **Breaking** and **New**;
+  `docsy.dev/static/upgrades/0.15.0.yaml` models it under `breaking[]` with a
+  low-risk title for agent-oriented detect rules. If something breaks, file an
+  issue (see blog NOTE).
 - Changelog / blog: refreshed for **0.15** through [#2616][] and follow-on prep
   ([#2618][], [#2619][], [#2620][], [#2621][]). Final tagging pass still
   replaces prerelease/release-page placeholders as needed.
@@ -157,9 +163,12 @@ Raw commits in scope without PR numbers in their commit subjects:
   - Adds a concrete configuration pattern for documentation-first sites.
   - May affect users with custom docs-only/doc-rooted configurations.
   - `card` shortcode rendering now uses `$.Page.RenderString` instead of
-    `markdownify`, which renders shortcode fields in the page context. This may
-    affect clients that depend on the previous rendering behavior or override
-    the shortcode.
+    `markdownify`, which renders Markdown in named arguments in the page context
+    — enabling page-relative link/image resolution and page-context Markdown
+    render hooks. Release messaging treats this as **new** behavior **and** a
+    **low-risk** potentially breaking review item (see Summary above and [Card
+    shortcode rendering][0.15.0-blog-card] in the 0.15.0 blog). Override authors
+    should diff local `card.html` against the v0.15.0 partial.
 - Docs impact:
   - Status: **rel** on the summary table for ongoing doc-rooted refinements;
     baseline guidance and examples shipped for 0.15.
@@ -176,8 +185,9 @@ Raw commits in scope without PR numbers in their commit subjects:
   - Status: done.
   - Included as a major improvement, with migration notes for projects that
     previously used docs-only patterns.
-  - The `card` shortcode rendering change is called out as a breaking/action
-    review item.
+  - The `card` shortcode change appears in **Ready to Upgrade** as breaking
+    (low-risk) and in the dedicated section as BREAKING/NEW, aligned with the
+    changelog.
 - Follow-up needed:
   - Use 0.16+ issues for any remaining doc-rooted refinements.
 
@@ -318,6 +328,7 @@ Raw commits in scope without PR numbers in their commit subjects:
 
 - [Release 0.15.0 preparation #2501][#2501]
 
+[0.15.0-blog-card]: /blog/2026/0.15.0/#card-shortcode
 [#1380]: https://github.com/google/docsy/issues/1380
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2133]: https://github.com/google/docsy/issues/2133

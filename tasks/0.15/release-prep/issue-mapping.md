@@ -25,7 +25,7 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
 | [#2562][]: Ensure `.td-main > .row` grows vertically                   | [#2561][] (PR body, closing issue)                 | Fixed in 0.14.3 release path; still in current range |
 | [#2563][]: Add doc-rooted site example version, update guidance        | #2504, #2499, [#2492][] (PR body, closing issues)  | Part of doc-rooted tracker                           |
 | [#2564][]: Use `TD_BUILD_CTX` for doc-rooted builds                    | [#2504][] (Inferred from neighboring tracker work) | Build-support follow-up                              |
-| [#2565][]: Update doc-rooted configs to avoid root index render clash  | [#2504][] (PR body)                                | `card` now uses `$.Page.RenderString`                |
+| [#2565][]: Update doc-rooted configs to avoid root index render clash  | [#2504][] (PR body)                                | `card` args: new + low-risk breaking                 |
 | [#2567][]: Remove `sidebar_root_for` user-guide docs                   | None found (N/A)                                   | Follow-up docs cleanup                               |
 | [#2568][]: Dedup site homepages for doc-rooted sites                   | [#2504][] (PR body)                                | Doc-rooted support                                   |
 | [#2571][]: Update `deploy/prod` to 0.14.3                              | [#2501][] (Release prep scope)                     | Branch maintenance                                   |

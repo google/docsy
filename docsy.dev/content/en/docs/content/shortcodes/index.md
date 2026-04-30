@@ -794,7 +794,7 @@ demonstrates how to code a card element:
   header="**Imagine**"
   title="Artist and songwriter: John Lennon"
   subtitle="Co-writer: Yoko Ono"
-  footer="![SignatureJohnLennon](https://server.tld/…/signature.png)"
+  footer="![SignatureJohnLennon](card-pane/john-lennon-signature.png)"
 */>}}
 
 Imagine there's no heaven, It's easy if you try<br/>
@@ -849,7 +849,7 @@ text, images, videos, … . If your content is markdown, use the percent sign `%
 as outermost delimiter of your `card` shortcode, your markup should look like
 `{{%/* card */%}}Your **markdown** content{{%/* /card */%}}`. In case of HTML
 content, use square brackets `<>` as outermost delimiters:
-`{{</* card */>}}Your <b>HTML</b> content{{</* /card */>}}`
+`{{</* card */>}} Your <b>HTML</b> content {{</* /card */>}}`
 
 {{% /card %}}
 
