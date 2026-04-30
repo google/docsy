@@ -21,8 +21,8 @@ cSpell:ignore: llmstxt
 When your site opts in, these are the user-facing and machine-readable behaviors
 Docsy enables:
 
-- **[Markdown output format](#markdown-output)** support. Your
-  project's `outputs` configuration controls which page kinds publish Markdown.
+- **[Markdown output format](#markdown-output)** support. Your project's
+  `outputs` configuration controls which page kinds publish Markdown.
 - **Discovery**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page.
 - **View Markdown**: page meta area includes a **View Markdown** link to the

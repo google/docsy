@@ -43,53 +43,56 @@ Each PR and commit in scope of this release may require updates to the docs, or
 require an entry in the changelog or blog. Here is a summary of the status of
 each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 
-- 0: not started
-- done: full done
-- N/A: not applicable
-- rel: the work scoped for this release is complete, but more work is needed
-- WIP: work in progress
+- **0**: not started
+- **done**: Shipped for this release **and** no further planned work on **that
+  channel** (docs, blog, or changelog) to carry into a later release.
+- **rel**: Shipped for this release **and** follow-up on **that channel** is
+  expected or tracked for a future release (see audit detail **Follow-up
+  needed**).
+- **N/A**: not applicable
+- **WIP**: work in progress
 
 | Item                                                       | Docs | Blog | CL   | Notes                                      |
 | ---------------------------------------------------------- | ---- | ---- | ---- | ------------------------------------------ |
-| [#2082][]: Add Azerbaijan language                         | rel  | done | done | Internationalization                       |
+| [#2082][]: Add Azerbaijan language                         | done | done | done | Internationalization                       |
 | [#2555][]: Set version to 0.14.3-dev                       | N/A  | N/A  | N/A  | Release-prep maintenance                   |
-| [#2556][]: Reorg deployment docs, normalize links          | done | done | rel  | Documentation/process cleanup              |
-| [#2557][]: Add version menu to site                        | done | rel  | rel  | No client-facing release-note impact       |
-| [#2558][]: Replace placeholder locale by French            | rel  | rel  | rel  | Site-only i18n setup                       |
-| [#2559][]: Document `deploy/prod` branch                   | done | done | rel  | Documentation/process cleanup              |
+| [#2556][]: Reorg deployment docs, normalize links          | done | done | done | Documentation/process cleanup              |
+| [#2557][]: Add version menu to site                        | done | done | done | No client-facing release-note impact       |
+| [#2558][]: Replace placeholder locale by French            | done | done | done | Site-only i18n setup                       |
+| [#2559][]: Document `deploy/prod` branch                   | done | done | done | Documentation/process cleanup              |
 | [#2560][]: Update bug report template                      | N/A  | N/A  | N/A  | Admin                                      |
-| [#2562][]: Ensure `.td-main > .row` grows vertically       | rel  | rel  | done | Already covered by v0.14.3                 |
+| [#2562][]: Ensure `.td-main > .row` grows vertically       | done | done | done | Already covered by v0.14.3                 |
 | [#2563][]: Add doc-rooted example version and guidance     | done | done | done | Doc-rooted sites                           |
 | [#2564][]: Use `TD_BUILD_CTX` for doc-rooted builds        | rel  | done | done | Doc-rooted sites                           |
 | [#2565][]: Update doc-rooted configs and `card` rendering  | rel  | done | done | Includes client-impacting `card` change    |
 | [#2567][]: Remove `sidebar_root_for` user-guide docs       | rel  | done | done | Doc-rooted cleanup                         |
 | [#2568][]: Dedup site homepages for doc-rooted sites       | rel  | done | done | Doc-rooted sites                           |
 | [#2571][]: Update `deploy/prod` to 0.14.3                  | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2572][]: Clarify release process and branch model        | done | done | rel  | Documentation/process cleanup              |
+| [#2572][]: Clarify release process and branch model        | done | done | done | Documentation/process cleanup              |
 | [#2573][]: Sync `release` and `deploy/prod` branches       | N/A  | N/A  | N/A  | Branch maintenance                         |
 | [#2574][]: Link release branches back into main ancestry   | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2575][]: Format project about docs and add project link  | done | done | rel  | Documentation/process cleanup              |
-| [#2576][]: Fix footer/community link target and `rel`      | rel  | done | done | Community/footer links                     |
+| [#2575][]: Format project about docs and add project link  | done | done | done | Documentation/process cleanup              |
+| [#2576][]: Fix footer/community link target and `rel`      | done | done | done | Community/footer links                     |
 | [#2577][]: Record ancestry with release branches           | N/A  | N/A  | N/A  | Branch ancestry                            |
-| [#2579][]: Use canonical URL to contributing page          | done | done | rel  | Documentation/process cleanup              |
-| [#2580][]: Resolve community/footer links under permalinks | rel  | done | done | Potentially breaking multilingual behavior |
-| [#2583][]: Add Romanian locale                             | rel  | done | done | Internationalization                       |
-| [#2584][]: Add site-local URL markdownlint rule            | done | done | rel  | Documentation/process cleanup              |
+| [#2579][]: Use canonical URL to contributing page          | done | done | done | Documentation/process cleanup              |
+| [#2580][]: Resolve community/footer links under permalinks | done | done | done | Potentially breaking multilingual behavior |
+| [#2583][]: Add Romanian locale                             | done | done | done | Internationalization                       |
+| [#2584][]: Add site-local URL markdownlint rule            | done | done | done | Documentation/process cleanup              |
 | [#2585][]: Update NPM packages and Hugo tooling            | done | done | done | Final versions reflected in blog           |
-| [#2586][]: Update version and variant menu                 | done | rel  | rel  | No client-facing release-note impact       |
+| [#2586][]: Update version and variant menu                 | done | done | done | No client-facing release-note impact       |
 | [#2587][]: Finalize doc-rooted configuration explanation   | done | done | done | Doc-rooted sites                           |
-| [#2591][]: Add German alert-label translations             | rel  | done | done | Internationalization                       |
+| [#2591][]: Add German alert-label translations             | done | done | done | Internationalization                       |
 | [#2597][]: Add Markdown output phase 1                     | done | done | done | Experimental agent support                 |
 | [#2599][]: Drop Docsy-defined `Markdown` output format     | done | done | done | Experimental agent support                 |
 | [#2600][]: Trim Markdown output titles and descriptions    | done | done | done | Experimental agent support                 |
 | [#2601][]: Add View Markdown page-meta link                | done | done | done | Experimental agent support                 |
 | [#2602][]: Add `post_view_markdown` to i18n files          | done | done | done | Agent support and i18n                     |
-| [#2603][]: Add Romanian View Markdown translation          | rel  | done | done | Internationalization                       |
-| [#2604][]: Create `az.yaml` from TOML                      | rel  | done | done | Internationalization                       |
+| [#2603][]: Add Romanian View Markdown translation          | done | done | done | Internationalization                       |
+| [#2604][]: Create `az.yaml` from TOML                      | done | done | done | Internationalization                       |
 | [#2605][]: Add LLMS output and `llms.txt`                  | done | done | done | Experimental agent support                 |
 | [#2606][]: Allow Markdown output for project docs          | done | done | done | Experimental agent support                 |
-| [#2610][]: 0.15 release-prep omnibus                       | done | rel  | rel  | Blog, changelog, refcache, reports, links  |
-| [#2611][]: Agent support UG and release-prep refresh       | done | rel  | rel  | Resolves agent-support blog-link blocker   |
+| [#2610][]: 0.15 release-prep omnibus                       | done | done | done | Blog, changelog, refcache, reports, links  |
+| [#2611][]: Agent support UG and release-prep refresh       | done | done | done | Resolves agent-support blog-link blocker   |
 | [#2616][]: Update 0.15 release blog, CL, and docs          | done | done | done | Final release-content refresh              |
 
 Raw commits in scope without PR numbers in their commit subjects:
@@ -98,9 +101,9 @@ Raw commits in scope without PR numbers in their commit subjects:
 | ---------------------------------------------------- | ---- | ---- | ---- | ----------------------------- |
 | `40bef3c7`: Record ancestry with release             | N/A  | N/A  | N/A  | Covered by branch maintenance |
 | `21a1ff37`: Record ancestry with deploy/prod         | N/A  | N/A  | N/A  | Covered by branch maintenance |
-| `5f0b2c86`: Use canonical URL to contributing page   | done | done | rel  | Covered by [#2579][]          |
-| `df519b49`: Resolve community and footer links paths | rel  | done | done | Covered by [#2580][]          |
-| `e91cf749`: Add markdownlint rule and fix link       | done | done | rel  | Covered by [#2584][]          |
+| `5f0b2c86`: Use canonical URL to contributing page   | done | done | done | Covered by [#2579][]          |
+| `df519b49`: Resolve community and footer links paths | done | done | done | Covered by [#2580][]          |
+| `e91cf749`: Add markdownlint rule and fix link       | done | done | done | Covered by [#2584][]          |
 | `ca5deb63`: Update NPM packages and Hugo to 0.157.0  | done | done | done | Covered by [#2585][]          |
 | `2ad607a8`: Update package.json                      | done | done | done | Covered by [#2585][]          |
 | `28d44d1f`: Use bash `cp` instead of NPM `cpy-cli`   | done | done | done | Covered by [#2585][]          |
@@ -120,21 +123,23 @@ Raw commits in scope without PR numbers in their commit subjects:
     exists.
   - Includes new i18n key `post_view_markdown`.
 - Docs impact:
-  - Status: done. Feature planning is in `tasks/0.15/agent-support.plan.md`.
+  - Status: **done** for phase 1 (no further docs/blog/changelog carry-forward
+    required for this release).
+  - Feature planning is in `tasks/0.15/agent-support.plan.md`.
   - Golden-test planning exists in `tasks/0.15/md-output-golden-tests.plan.md`.
   - `docsy.dev` is configured to enable Markdown and LLMS outputs.
   - Dedicated user-guide page `docsy.dev/content/en/docs/content/agent-support/`
     exists on `main` via [#2611][].
 - Changelog impact:
-  - Status: done.
+  - Status: **done** for phase 1.
   - The 0.15 changelog entry includes this under Experimental.
 - Blog inclusion:
-  - Status: done.
+  - Status: **done** for phase 1.
   - Included as a major experimental feature, with a link to the user guide and
-    [#2614][] follow-up tracker.
+    [#2614][] for later phases.
 - Release-post treatment: experimental.
-- Follow-up needed:
-  - Use [#2614][] for post-0.15 improvements.
+- Follow-up (later releases, not release-channel carry-forward for 0.15):
+  - Track further agent-support work in [#2614][].
 
 ### Doc-rooted site support
 
@@ -151,7 +156,8 @@ Raw commits in scope without PR numbers in their commit subjects:
     affect clients that depend on the previous rendering behavior or override
     the shortcode.
 - Docs impact:
-  - Status: done for 0.15.
+  - Status: **rel** on the summary table for ongoing doc-rooted refinements;
+    baseline guidance and examples shipped for 0.15.
   - `docsy.dev/content/en/docs/content/adding-content.md` now documents
     doc-rooted sites and links the doc-rooted example.
   - `docsy.dev/config/doc-rooted/` adds a doc-rooted site configuration.
@@ -184,8 +190,8 @@ Raw commits in scope without PR numbers in their commit subjects:
     site-relative; use the default language code prefix to force a default
     language target.
 - Docs impact:
-  - Status: rel.
-  - Release guidance links to the existing community-page configuration docs.
+  - Status: **done** (guidance links to the existing community-page configuration
+    docs).
 - Changelog impact:
   - Status: done.
   - The 0.15 changelog entry includes this as a breaking change.
@@ -198,8 +204,8 @@ Raw commits in scope without PR numbers in their commit subjects:
     custom permalinks.
   - To force a link to the default language, prefix the path with the default
     language code.
-- Follow-up needed: consider user-guide examples for multilingual path prefixes
-  after 0.15 if more detail is needed.
+- Follow-up (optional polish): richer multilingual examples only if triage
+  requests them; not required on docs/blog/changelog channels for 0.15.
 
 ### Version and Variant Menus
 
