@@ -190,8 +190,8 @@ Raw commits in scope without PR numbers in their commit subjects:
     site-relative; use the default language code prefix to force a default
     language target.
 - Docs impact:
-  - Status: **done** (guidance links to the existing community-page configuration
-    docs).
+  - Status: **done** (guidance links to the existing community-page
+    configuration docs).
 - Changelog impact:
   - Status: done.
   - The 0.15 changelog entry includes this as a breaking change.
