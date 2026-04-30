@@ -111,11 +111,11 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 ### Bug fixes
 
-Considering a bug as a documented undesirable behavior, classify a bug fix
-commit or pull request (PR) under **Fixed** or **Other changes**, unless its
-scope extends beyond a fix and affects user-facing functionality. In such a
-case, classify it as a hybrid [Breaking change](#breaking-change) or **New**
-functionality, depending on the scope. Ideally, avoid such broadly scoped PRs.
+We define a bug as undesirable behavior documented through an issue. Classify
+bug-fix commits or pull requests (PRs) under **Fixed** or **Other changes**,
+unless they extend beyond a fix and affect user-facing functionality. In that
+case, classify them as a [Breaking change](#breaking-change) or **New**
+functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
