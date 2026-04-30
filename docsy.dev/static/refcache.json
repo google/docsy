@@ -799,6 +799,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-18T03:26:03.119227-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/config/_default/hugo.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T03:52:11.351682-04:00"
+  },
   "https://github.com/google/docsy/blob/main/docsy.dev/content/en/_index.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:49.8453-05:00"
@@ -818,6 +822,10 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/package.json": {
     "StatusCode": 206,
     "LastSeen": "2026-04-26T12:08:49.818821-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/scripts/install-hugo.sh": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T03:52:10.528499-04:00"
   },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
@@ -1650,6 +1658,10 @@
   "https://github.com/google/docsy/releases/v0.14.3": {
     "StatusCode": 206,
     "LastSeen": "2026-02-17T18:45:11.323854-05:00"
+  },
+  "https://github.com/google/docsy/releases/v0.15.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T02:22:00.009495-04:00"
   },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 206,

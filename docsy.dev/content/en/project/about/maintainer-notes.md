@@ -8,6 +8,24 @@ cSpell:ignore: hugo creatordate
 For our main contributing page covering license agreements, code of conduct and
 more, see [Contributing][]. This page is for **maintainers only**.
 
+## Hugo version pins
+
+From the repo root:
+
+```sh
+npm run set:hugo:version -- X.Y.Z
+npm install  # optional, if hugo is already installed
+```
+
+This updates:
+
+- [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
+  installs `hugo-extended` into `docsy.dev` if it is not already present.
+- [docsy.dev/config/_default/hugo.yaml][]:
+  - `params.hugoMinVersion` / `&hugoMinVersion`
+  - Note: `module.hugoVersion.min` stays as `*hugoMinVersion`
+- [docsy.dev/package.json][]: `hugo-extended`
+
 ## Publishing a release
 
 These notes are WIP for creating a **release** from a local copy of the repo.
@@ -327,11 +345,16 @@ before any further changes are merged into the `main` branch:
 
 ## Release helper scripts
 
-- NPM scripts: `set:version` and `set:version:*`
-- `scripts/get-build-id.sh`: Generates build ID from git describe (empty on
-  tags).
+- NPM scripts: `set:version` and `set:version:*`; **`set:hugo:version`** (see
+  [Hugo version pins](#hugo-version-pins))
+- `scripts/get-build-id.sh`: Builds `X.Y.Z-dev+…-over-main-…` from the latest
+  semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
+  X.Y.Z core is already **greater** than that git-derived core, keeps the higher
+  core (release prep ahead of tagging).
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script
   help for usage.
+
+<!-- prettier-ignore-start -->
 
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
@@ -339,7 +362,12 @@ before any further changes are merged into the `main` branch:
 [docsy-example]: <{{% param github_repo %}}-example>
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
+[docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
+[docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
+[install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [tags]: <{{% param github_repo %}}/tags>
+
+<!-- prettier-ignore-end -->
