@@ -1,0 +1,10 @@
+{{ with $.Site.Params.tdVersion.dev -}}
+  {{ . -}}
+  {{ with $.Site.Params.tdVersion.buildId -}}
+    +{{ replace . "+" "-" -}}
+  {{ end -}}
+{{ else -}}
+  {{ with $.Site.Params.version -}}
+    {{ replace . " " "_" -}}
+  {{ end -}}
+{{ end -}}
