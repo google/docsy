@@ -25,3 +25,6 @@ resources/
 /.vscode/**
 !/.vscode/cspell.json
 /.cursor
+
+# Claude Code
+/.claude

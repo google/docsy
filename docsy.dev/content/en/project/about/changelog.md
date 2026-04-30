@@ -124,11 +124,17 @@ full list of changes, see the [0.15.0][] release page.
   [Community and footer links][0.15.0-blog-community-footer] ([#2580][]).
 - **`card` shortcode rendering** changed for selected fields; see [`card`
   shortcode rendering][0.15.0-blog-card] ([#2565][]).
+- **Version menu markup and mobile visibility** changed for sites using
+  `params.versions`; see [Version menu entries][0.15.0-blog-version-menu]
+  ([#2557][], [#2586][]).
 
 **New**:
 
 - **[Doc-rooted sites][0.15.0-blog-doc-rooted]**: added a documented pattern and
   example variant for documentation-first sites ([#2563][], [#2587][]).
+- **[Version menu entries][0.15.0-blog-version-menu]**: added support for
+  headings, separators, per-entry page-link behavior, and kind-specific styling
+  ([#2557][], [#2586][]).
 - Footer `params.links` support optional `rel` attribute values ([#2576][]); see
   [Community and footer links][0.15.0-blog-community-footer].
 
@@ -140,6 +146,9 @@ full list of changes, see the [0.15.0][] release page.
   docs ([#2556][], [#2572][]).
 - Updated NPM packages and `docsy.dev` tooling, including `hugo-extended`
   0.157.0 ([#2585][]).
+- Added `siteGetPage` shortcode ([#2586][]) — **internal** to `docsy.dev`; not
+  part of Docsy's [public customization surface](#public) and may change or be
+  removed without notice.
 
 [**Experimental**](#experimental):
 
@@ -148,12 +157,14 @@ full list of changes, see the [0.15.0][] release page.
   [#2605][], [#2606][]).
 
 [#2556]: https://github.com/google/docsy/pull/2556
+[#2557]: https://github.com/google/docsy/pull/2557
 [#2563]: https://github.com/google/docsy/pull/2563
 [#2565]: https://github.com/google/docsy/pull/2565
 [#2572]: https://github.com/google/docsy/pull/2572
 [#2576]: https://github.com/google/docsy/pull/2576
 [#2580]: https://github.com/google/docsy/pull/2580
 [#2585]: https://github.com/google/docsy/pull/2585
+[#2586]: https://github.com/google/docsy/pull/2586
 [#2587]: https://github.com/google/docsy/pull/2587
 [#2597]: https://github.com/google/docsy/pull/2597
 [#2601]: https://github.com/google/docsy/pull/2601
@@ -165,6 +176,7 @@ full list of changes, see the [0.15.0][] release page.
 [0.15.0-blog-community-footer]: /blog/2026/0.15.0/#community-footer-links
 [0.15.0-blog-doc-rooted]: /blog/2026/0.15.0/#doc-rooted-sites
 [0.15.0-blog-internationalization]: /blog/2026/0.15.0/#internationalization
+[0.15.0-blog-version-menu]: /blog/2026/0.15.0/#version-menu
 [0.15.0]: https://github.com/google/docsy/releases/v0.15.0
 
 ## v0.14.3 {#v0.14.3}

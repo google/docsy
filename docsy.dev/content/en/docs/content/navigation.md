@@ -126,9 +126,27 @@ menu:
 Docsy adds a version selector menu to the top-level navbar if you have doc
 versions configured as explained in [Doc versioning][].
 
-To style the version menu, apply your custom CSS to `.td-navbar__version-menu`.
+The version menu is visible in the navbar for all screen sizes. Version entries
+can include text headings, separators, per-entry page-link behavior, and
+kind-specific styling. For configuration details, see [Doc versioning][].
+
+To style the version menu wrapper, apply your custom CSS to
+`.td-navbar__version-menu`. To style the dropdown itself, use
+`.td-version-menu`. Entries with a configured `kind` also get a
+`dropdown-item-<kind>` class. These kind-specific class names and styles are
+[experimental][].
+
+Docsy includes built-in styling for these kinds:
+
+- `latest`: adds a **(latest)** label and semibold text.
+- `next`: adds a **(next)** label.
+- `home`: adds a home icon.
+
+Other `kind` values still add a matching `dropdown-item-<kind>` class, but do
+not have built-in Docsy styling.
 
 [Doc versioning]: /docs/content/versioning/
+[experimental]: /project/about/changelog/#experimental
 
 ### Language menu
 

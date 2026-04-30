@@ -1,3 +1,13 @@
+{{- /*
+
+  Returns a property (RelPermalink or Permalink) of the page at the given
+  site-relative path. Internal to docsy.dev test pages; not part of Docsy's
+  public customization surface and may change or be removed without notice.
+
+  Usage: {{% siteGetPage "/path/to/page" "RelPermalink" %}}
+
+*/ -}}
+
 {{ $path := .Get 0 -}}
 {{ $propertyName := .Get 1 -}}
 {{ if or (not $path) (not $propertyName) -}}

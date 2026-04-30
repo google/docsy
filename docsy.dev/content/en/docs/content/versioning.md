@@ -108,8 +108,40 @@ of the main page. This can be useful if the document doesn't change much between
 the different versions. Note that if the current page doesn't exist in the other
 version, the link will be broken.
 
-To learn more about Docsy menus, see
-[Navigation and menus](/docs/content/navigation/).
+You can also configure individual menu entries:
+
+- Use `name` instead of `version` when the menu label is not a version number.
+- Set `name` to `---` to add a menu separator.
+- Omit `url` to render a disabled text item, such as a group heading.
+- Set `kind` to add a kind-specific class for styling. For details, see
+  [Navigation and menus][].
+- Set `pagelinks: false` on an entry to link to that version's main URL even
+  when the global `version_menu_pagelinks` parameter is `true`.
+
+For example:
+
+```yaml
+params:
+  version_menu: v1.2
+  version_menu_pagelinks: true
+  versions:
+    - name: '**Versions**'
+    - version: v1.3-dev
+      kind: next
+      url: https://next.example.com
+    - version: v1.2
+      kind: latest
+      url: https://docs.example.com
+    - name: ---
+    - name: Preview variant
+      kind: home
+      pagelinks: false
+      url: https://preview.example.com
+```
+
+To learn more about Docsy menus, see [Navigation and menus][].
+
+[Navigation and menus]: /docs/content/navigation/#version-menu
 
 ## Displaying a banner on archived doc sites
 

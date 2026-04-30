@@ -8,6 +8,32 @@ cSpell:ignore: hugo creatordate
 For our main contributing page covering license agreements, code of conduct and
 more, see [Contributing][]. This page is for **maintainers only**.
 
+## PR descriptions
+
+Generally speaking, a PR opening comment should be a Markdown list that explains
+the “why” behind the changes, and at a very high level what was changed. Start
+each item with a verb in the present tense, 3rd person singular.
+
+PR authors are _encouraged_ to flag the **scope of changes** when a PR touches
+Docsy's [public customization surface][public] -- especially for [breaking
+changes][breaking change] -- to help reviewers and release-time audits. For
+example:
+
+```markdown
+- Scope: breaking (removal), user-facing (new)
+```
+
+Suggested scope labels (use one or more):
+
+- **breaking**, **user-facing**, **internal-only**, **docs-only**.
+
+Optionally qualify with **kinds** in parentheses, mapping to release-blog and
+changelog sections: **new**, **change**, **fix**, **removal**, **deprecation**.
+
+The release-time audit (see [Release-prep audit](#release-prep-audit)) is the
+source of truth for what gets documented; PR-level scope labels are a hint, not
+a substitute.
+
 ## Hugo version pins
 
 From the repo root:
@@ -26,15 +52,46 @@ This updates:
   - Note: `module.hugoVersion.min` stays as `*hugoMinVersion`
 - [docsy.dev/package.json][]: `hugo-extended`
 
+## Release-prep audit
+
+Before drafting the changelog entry and release blog post, run a careful audit
+of every PR and raw commit in the release range so nothing user-visible slips
+through (motivated by the version-menu near-miss during 0.15.0 prep).
+
+For each PR/commit in `git log v<prev>..main`:
+
+1. Inspect the actual diff (not just the title or PR description). Use
+   `gh pr view <num>` and `git show <sha>` as needed.
+2. Classify the change: **breaking**, **user-facing**, **internal-only**, or
+   **docs-only** (see definitions in [Public customization surface][public] and
+   [Breaking change][breaking change]).
+3. For every **breaking** or **user-facing** item, verify it appears in **both**
+   the [changelog][] and the release blog post — with cross-links to the
+   relevant user-guide sections where applicable.
+4. Be especially alert to: new/renamed params, partials, shortcodes, layouts,
+   CSS classes, i18n keys, default-behavior shifts, and changes to the version
+   menu, navigation, or other rendered output.
+
+Capture the audit as a working document under `tasks/<release>/release-prep/`
+(see prior releases for examples) so reviewers can sanity-check the
+classifications. Treat the audit — not PR-level scope hints — as the source of
+truth for what the changelog and release blog must cover.
+
 ## Publishing a release
 
 These notes are WIP for creating a **release** from a local copy of the repo.
 These instructions assume the release is {{% param version %}}, if not adjust
 accordingly.
 
+> [!IMPORTANT]
+>
+> Before creating a release, do a [release-prep audit](#release-prep-audit) and
+> use it to drive the changelog and release-blog updates in the next two steps.
+
 1.  **Change directory** to your local Docsy repo.
 
 2.  **Create or update a [changelog][] entry** for {{% param version %}}.
+    - This step is driven by the [release-prep audit](#release-prep-audit).
     - The section should provide a brief summary of breaking changes using the
       section template at the end of the file.
     - Ensure to remove the UNRELEASED note, if still present.
@@ -356,6 +413,7 @@ before any further changes are merged into the `main` branch:
 
 <!-- prettier-ignore-start -->
 
+[breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
@@ -365,9 +423,11 @@ before any further changes are merged into the `main` branch:
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
 [docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
+[experimental]: /project/about/changelog/#experimental
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[public]: /project/about/changelog/#public
 [tags]: <{{% param github_repo %}}/tags>
 
 <!-- prettier-ignore-end -->
