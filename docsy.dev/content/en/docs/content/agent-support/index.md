@@ -12,7 +12,7 @@ cSpell:ignore: llmstxt
 > Features described in this page are [experimental][], and are useful for early
 > adoption and evaluation. Output details and validation coverage may change in
 > future releases. To track the phased evolution of the agent-support feature,
-> see [Improve support for AI-agent doc consumption #2614][ #2614].
+> see [Improve support for AI-agent doc consumption #2614][#2614].
 
 [#2614]: https://github.com/google/docsy/issues/2614
 
@@ -21,7 +21,8 @@ cSpell:ignore: llmstxt
 When your site opts in, these are the user-facing and machine-readable behaviors
 Docsy enables:
 
-- **[Markdown output format](#markdown-output)** support for all site pages.
+- **[Markdown output format](#markdown-output)** support. Your
+  project's `outputs` configuration controls which page kinds publish Markdown.
 - **Discovery**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page.
 - **View Markdown**: page meta area includes a **View Markdown** link to the

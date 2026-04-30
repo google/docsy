@@ -79,7 +79,7 @@
     "hugo_version": "0.157.0"
   },
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "spelling": "cSpell:ignore afdocs docsy hugo fortawesome fontawesome onedark -"
 }

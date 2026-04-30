@@ -19,12 +19,12 @@ npm install  # optional, if hugo is already installed
 
 This updates:
 
+- [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
+  installs `hugo-extended` into `docsy.dev` if it is not already present.
 - [docsy.dev/config/_default/hugo.yaml][]:
   - `params.hugoMinVersion` / `&hugoMinVersion`
   - Note: `module.hugoVersion.min` stays as `*hugoMinVersion`
 - [docsy.dev/package.json][]: `hugo-extended`
-- [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
-  installs `hugo-extended` into `docsy.dev` if it is not already present.
 
 ## Publishing a release
 

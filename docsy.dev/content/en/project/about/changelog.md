@@ -113,9 +113,7 @@ Any other compatibility (including Windows support) is on a best effort basis.
 
 </details>
 
-## Next release {#v0.15.0}
-
-> **UNRELEASED**: v0.15.0 - still under development
+## v0.15.0 {#v0.15.0}
 
 For an introduction to this release, see the [0.15.0 release report][]. For the
 full list of changes, see the [0.15.0][] release page.
