@@ -111,11 +111,11 @@ uses first-parent commits as the release-audit spine.
 ## Mixed-change commits needing review
 
 - [#2565][] includes doc-rooted config work and a `card` shortcode rendering
-  change: the shortcode now uses `$.Page.RenderString` instead of
-  `markdownify`, enabling page-context resolution of relative links/images and
-  page-context Markdown render hooks. **Reclassified during release prep**
-  from breaking to new behavior — see the Summary section of `issue-audit.md`
-  for the rationale and reclassification advisory.
+  change: the shortcode now uses `$.Page.RenderString` instead of `markdownify`,
+  enabling page-context resolution of relative links/images and page-context
+  Markdown render hooks. **Reclassified during release prep** from breaking to
+  new behavior — see the Summary section of `issue-audit.md` for the rationale
+  and reclassification advisory.
 - [#2580][] includes a likely breaking behavior change for multilingual
   community/footer paths.
 - [#2586][] combines version/variant menu UX, `tdVersion` config structure,

@@ -125,6 +125,8 @@ full list of changes, see the [0.15.0][] release page.
 - **Version menu markup and mobile visibility** changed for sites using
   `params.versions`; see [Version menu entries][0.15.0-blog-version-menu]
   ([#2557][], [#2586][]).
+- **`card` shortcode rendering** has a low-risk of breaking.
+  [Details][0.15.0-blog-card].
 
 **New**:
 
@@ -133,12 +135,9 @@ full list of changes, see the [0.15.0][] release page.
 - **[Version menu entries][0.15.0-blog-version-menu]**: added support for
   headings, separators, per-entry page-link behavior, and kind-specific styling
   ([#2557][], [#2586][]).
-- **[`card` shortcode rendering][0.15.0-blog-card]**: selected fields
-  (`header`, `title`, `subtitle`, `footer`) now render in the page context via
-  `$.Page.RenderString`, enabling page-relative link/image resolution and
-  page-context Markdown render hooks ([#2565][]). Classified as new behavior
-  rather than breaking; see the linked blog section for the rationale and
-  reclassification advisory.
+- **`card` shortcode rendering**: Markdown in card arguments now renders in the
+  _including page's context_, enabling use of relative Markdown link paths and
+  more flexible render-hook behavior. [Details][0.15.0-blog-card] ([#2565][]).
 - Footer `params.links` support optional `rel` attribute values ([#2576][]); see
   [Community and footer links][0.15.0-blog-community-footer].
 

@@ -1,5 +1,6 @@
 ---
-title: Agent support
+title: AI-agent support
+linkTitle: Agent support
 description: >-
   Opt-in features that help AI agents and automated tools discover and use your
   site content, including Markdown output, alternate links in HTML, and

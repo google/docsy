@@ -30,16 +30,15 @@ blog post, or changelog updates.
 - Reclassified during release prep:
   - [#2565][] (`card` shortcode rendering: `markdownify` →
     `$.Page.RenderString`) was originally listed as **breaking** but was
-    reclassified to **new behavior** during release prep. Rationale: the
-    change enables page-context resolution of relative links/images and
-    page-context Markdown render hooks — a capability that wasn't available
-    before. To the project's best knowledge, no client relied on the previous
-    resolution behavior in a way that would break under 0.15.0, and no issue
-    requested the new capability prior to its inclusion in [#2565][]. The
-    judgement call is documented in the 0.15.0 release blog (Card shortcode
-    rendering section) and the upgrade manifest's `new[]` entry, both of
-    which note that the item will be reclassified back to **breaking** if a
-    regression is reported.
+    reclassified to **new behavior** during release prep. Rationale: the change
+    enables page-context resolution of relative links/images and page-context
+    Markdown render hooks — a capability that wasn't available before. To the
+    project's best knowledge, no client relied on the previous resolution
+    behavior in a way that would break under 0.15.0, and no issue requested the
+    new capability prior to its inclusion in [#2565][]. The judgement call is
+    documented in the 0.15.0 release blog (Card shortcode rendering section) and
+    the upgrade manifest's `new[]` entry, both of which note that the item will
+    be reclassified back to **breaking** if a regression is reported.
 - Changelog / blog: refreshed for **0.15** through [#2616][] and follow-on prep
   ([#2618][], [#2619][], [#2620][], [#2621][]). Final tagging pass still
   replaces prerelease/release-page placeholders as needed.
@@ -170,9 +169,9 @@ Raw commits in scope without PR numbers in their commit subjects:
     `markdownify`, which renders shortcode fields in the page context — a
     capability (page-relative link/image resolution and page-context Markdown
     render hooks) that wasn't available before. **Reclassified during release
-    prep** from breaking to new behavior; see the Summary section of this
-    audit for the rationale. Override authors may still want to diff their
-    local `card.html` against the v0.15.0 partial.
+    prep** from breaking to new behavior; see the Summary section of this audit
+    for the rationale. Override authors may still want to diff their local
+    `card.html` against the v0.15.0 partial.
 - Docs impact:
   - Status: **rel** on the summary table for ongoing doc-rooted refinements;
     baseline guidance and examples shipped for 0.15.

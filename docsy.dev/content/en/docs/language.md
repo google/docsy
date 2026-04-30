@@ -7,7 +7,8 @@ cSpell:ignore: rtlcss subdir operativsystem skyen Norsk
 
 If you'd like to provide site content in multiple languages, the Docsy theme and
 Hugo make it easy to both add your translated content and for your users to
-navigate between language versions.
+navigate between language versions. For details about Hugo's multi-language
+support, see the [Multilingual mode][].
 
 ## Content and configuration
 
@@ -170,9 +171,8 @@ If your chosen language isn't currently in the theme and you create your own
 `.yaml` file for all the common UI strings (for example, if you translate the UI
 text into Esperanto and create a copy of `en.yaml` called `eo.yaml`), we
 recommend you do this **in the theme** rather than in your own project. You can
-then open a
-[pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
-to contribute your translation to the Docsy community.
+then open a [pull request][PR] to contribute your translation to the Docsy
+community.
 
 > [!TIP] Hugo Tip
 >
@@ -184,10 +184,15 @@ to contribute your translation to the Docsy community.
 If any of the Docsy theme UI strings in your chosen language aren't suitable for
 your project, or if you need additional strings for your site, you can create
 your own project-specific internationalization file in your project's `/i18n`
-directory. For example, if you want to override any of Docsy's
-[English-language strings](https://github.com/google/docsy/blob/main/i18n/en.yaml),
-create your own `/i18n/en.yaml` with just your custom strings. Any values you
-specify in this file will override the theme versions, while the remaining
-strings will come from the theme's corresponding internationalization bundle.
+directory. For example, if you want to override any of Docsy's [English-language
+strings][en.yaml], create your own `/i18n/en.yaml` with just your custom
+strings. Any values you specify in this file will override the theme versions,
+while the remaining strings will come from the theme's corresponding
+internationalization bundle.
 
+<!-- prettier-ignore-start -->
 [Docsy example]: https://example.docsy.dev/
+[en.yaml]: https://github.com/google/docsy/blob/main/i18n/en.yaml
+[Multilingual mode]: https://gohugo.io/content-management/multilingual/
+[PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+<!-- prettier-ignore-end -->

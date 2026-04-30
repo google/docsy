@@ -32,6 +32,35 @@ peer:
 # Each item is independently gated by a `detect` rule so callers can
 # evaluate applicability against the consuming project.
 breaking:
+  - id: card-shortcode-rendering
+    title: card shortcode rendering
+    summary: >-
+      The `card` shortcode now renders the `header`, `title`, `subtitle`, and
+      `footer` fields with `$.Page.RenderString` instead of `markdownify`, so
+      they render in the page context. Shortcode invocations inside those fields
+      now execute (previously passed through `markdownify`'s escape behavior).
+    applies-if: >-
+      Your project uses the `card` shortcode with Markdown, images, links,
+      shortcode invocations inside the affected fields, or a custom
+      `layouts/_shortcodes/card.html` override.
+    detect:
+      any:
+        - kind: grep
+          pattern: '\{\{[<%][[:space:]]*card\b'
+          paths: [content/, layouts/]
+        - kind: file-exists
+          path: layouts/_shortcodes/card.html
+        - kind: file-exists
+          path: layouts/shortcodes/card.html
+    actions:
+      - Review rendered cards that use any of the affected fields.
+      - Diff any local card-shortcode override against the v0.15.0 partial.
+    references:
+      blog: /blog/2026/0.15.0/#card-shortcode
+      partials:
+        - https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html
+      prs: [2565]
+
   - id: community-footer-multilingual-paths
     title: community and footer link paths (multilingual)
     summary: >-
@@ -127,26 +156,21 @@ breaking:
         - https://github.com/google/docsy/blob/v0.15.0/layouts/_partials/navbar.html
       prs: [2557, 2586]
 
-# New behavior — items that introduce a capability that wasn't available
-# before. Listed here (rather than under `breaking`) when, to the best of
-# the project's knowledge, no client project relied on the previous
-# behavior in a way that would break under the new release. If a regression
-# is reported, an item may be reclassified to `breaking`.
+# New behavior
 new:
   - id: card-shortcode-rendering
     title: card shortcode rendering — page-context resolution
     summary: >-
       The `card` shortcode now renders the `header`, `title`, `subtitle`, and
       `footer` fields with `$.Page.RenderString` instead of `markdownify`, so
-      relative links and images inside those fields resolve relative to the
-      page that includes the `card`, and Markdown render hooks fire in the
-      page context — capabilities that weren't available before.
+      relative links and images inside those fields resolve relative to the page
+      that includes the `card`, and Markdown render hooks fire in the page
+      context — capabilities that weren't available before.
     classification-note: >-
-      Treated as new behavior rather than breaking based on a judgement call:
-      to the project's best knowledge, no client relied on the previous
-      resolution behavior in a way that would break under 0.15.0. Reclassify
-      to `breaking` if a regression is reported. See blog rationale for
-      details.
+      Treated as new behavior rather than breaking based on a judgement call: to
+      the project's best knowledge, no client relied on the previous resolution
+      behavior in a way that would break under 0.15.0. Reclassify to `breaking`
+      if a regression is reported. See blog rationale for details.
     applies-if: >-
       Your project uses the `card` shortcode with Markdown, images, links, or
       maintains a custom `layouts/_shortcodes/card.html` override.
