@@ -1,0 +1,185 @@
+# Docsy upgrade manifest — 0.15.0
+#
+# Machine-readable companion to the 0.15.0 release blog. Lists breaking
+# changes with detect rules so an agent (or human) can quickly determine
+# which items apply to a given site, and surface anchored references back
+# into the human-readable release blog and changelog.
+#
+# Status: experimental. Schema is expected to evolve through 0.16.0+;
+# see the tracking issue for the planned DRY/data-driven approach.
+#
+# Authoritative for: detect predicates, version pins, breaking-item ids.
+# Authoritative narrative remains in the release blog.
+
+schema: docsy-upgrade-manifest/v0
+from: 0.14.3
+to: 0.15.0
+references:
+  blog: /blog/2026/0.15.0/
+  changelog: /project/about/changelog/#v0.15.0
+  release: https://github.com/google/docsy/releases/v0.15.0
+  tag: https://github.com/google/docsy/tree/v0.15.0
+peer:
+  hugo:
+    from: '>=0.155.3'
+    to: '>=0.157.0'
+    notes: Matches docsy.dev `params.hugoMinVersion` and `hugo-extended`.
+  node:
+    to: lts/24
+    notes: Later Node versions may work but are not officially supported.
+
+# Breaking changes — items that may require a client-project change.
+# Each item is independently gated by a `detect` rule so callers can
+# evaluate applicability against the consuming project.
+breaking:
+  - id: card-shortcode-rendering
+    title: card shortcode rendering
+    summary: >-
+      The `card` shortcode now renders the `header`, `title`, `subtitle`, and
+      `footer` fields with `$.Page.RenderString` instead of `markdownify`, so
+      they render in the page context. Shortcode invocations inside those fields
+      now execute (previously passed through `markdownify`'s escape behavior).
+    applies-if: >-
+      Your project uses the `card` shortcode with Markdown, images, links,
+      shortcode invocations inside the affected fields, or a custom
+      `layouts/_shortcodes/card.html` override.
+    detect:
+      any:
+        - kind: grep
+          pattern: '\{\{[<%][[:space:]]*card\b'
+          paths: [content/, layouts/]
+        - kind: file-exists
+          path: layouts/_shortcodes/card.html
+        - kind: file-exists
+          path: layouts/shortcodes/card.html
+    actions:
+      - Review rendered cards that use any of the affected fields.
+      - Diff any local card-shortcode override against the v0.15.0 partial.
+    references:
+      blog: /blog/2026/0.15.0/#card-shortcode
+      partials:
+        - https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html
+      prs: [2565]
+
+  - id: community-footer-multilingual-paths
+    title: community and footer link paths (multilingual)
+    summary: >-
+      For multilingual sites, community and footer link paths
+      (`params.links.user`, `params.links.developer`) are now interpreted as
+      site-relative rather than always resolving under the default language. To
+      force the default-language target, prefix the path with the default
+      language code (e.g. `/en/community/` instead of `/community/`).
+    applies-if: >-
+      Your site is multilingual and configures `params.links.user` or
+      `params.links.developer` with site-local paths.
+    detect:
+      all:
+        - kind: config-multilingual
+          description: Site has more than one language configured.
+        - kind: grep
+          pattern: '^\s*(user|developer)\s*[:=]'
+          paths: [config/, hugo.toml, hugo.yaml, hugo.json]
+          context: under params.links
+    actions:
+      - >-
+        Review each path and decide whether it should be site-relative or target
+        the default language.
+      - >-
+        For default-language targets, prefix with the default-language code
+        (e.g. `/en/community/`).
+      - Recheck generated community/footer links in each language.
+    references:
+      blog: /blog/2026/0.15.0/#community-footer-links
+      prs: [2576, 2580]
+
+  - id: community-footer-link-target
+    title: community and footer link target attribute
+    summary: >-
+      Community and footer links now only open in a new browser target for
+      external links. Previously, site-local links also opened in a new target.
+    applies-if: >-
+      Your site relied on community or footer links opening in a new tab/window
+      for site-local URLs.
+    detect:
+      kind: grep
+      pattern: '^\s*(user|developer)\s*[:=]'
+      paths: [config/, hugo.toml, hugo.yaml, hugo.json]
+      context: under params.links
+    actions:
+      - >-
+        If your design depended on site-local community/footer links opening in
+        a new target, plan to surface those links elsewhere or accept the new
+        same-target behavior.
+    references:
+      blog: /blog/2026/0.15.0/#community-footer-links
+      prs: [2576]
+
+  - id: version-menu-customization
+    title: version menu markup, classes, and mobile visibility
+    summary: >-
+      The version menu uses updated markup and CSS classes
+      (`.td-navbar__version-menu` wrapper, `.td-version-menu` dropdown,
+      kind-specific classes per entry) and is no longer hidden on smaller
+      viewports.
+    applies-if: >-
+      Your site configures `params.versions` AND customizes the version menu
+      partial, navbar partial, or related CSS.
+    detect:
+      all:
+        - kind: config-key-present
+          path: params.versions
+        - any:
+            - kind: file-exists
+              path: layouts/_partials/navbar-version-selector.html
+            - kind: file-exists
+              path: layouts/partials/navbar-version-selector.html
+            - kind: file-exists
+              path: layouts/_partials/navbar.html
+            - kind: file-exists
+              path: layouts/partials/navbar.html
+            - kind: grep
+              pattern: 'td-(navbar|version-menu)'
+              paths: [assets/]
+    actions:
+      - Review custom CSS that targets the version menu dropdown.
+      - >-
+        Diff local `navbar-version-selector.html` or `navbar.html` overrides
+        against the v0.15.0 partials.
+      - Recheck the navbar on both desktop and mobile viewports.
+    references:
+      blog: /blog/2026/0.15.0/#version-menu
+      user-guide:
+        - /docs/content/versioning/#adding-a-version-drop-down-menu
+        - /docs/content/navigation/#version-menu
+      partials:
+        - https://github.com/google/docsy/blob/v0.15.0/layouts/_partials/navbar-version-selector.html
+        - https://github.com/google/docsy/blob/v0.15.0/layouts/_partials/navbar.html
+      prs: [2557, 2586]
+
+# Sanity checks to run after upgrading. These are project-agnostic.
+sanity:
+  - run: hugo --gc
+    description: Build the site and surface any errors.
+  - run: hugo --printPathWarnings
+    description:
+      Surface path collisions; especially relevant for doc-rooted sites.
+    applies-if: doc-rooted-or-custom-permalinks
+  - check:
+      Verify community and footer links resolve correctly in each configured
+      language.
+  - check:
+      If `params.versions` is configured, check the version menu on desktop and
+      mobile viewports.
+  - check: Inspect pages that use the `card` shortcode.
+  - check:
+      If Markdown outputs / `llms.txt` are enabled, inspect the generated `.md`
+      pages and `/llms.txt`.
+
+# Rollback guidance: pin Docsy to the previous stable release if upgrading
+# blocks shipping. See: https://github.com/google/docsy/releases/v0.14.3
+rollback:
+  docsy: 0.14.3
+  hugo: '>=0.155.3'
+  notes: >-
+    Re-pin via npm and Hugo module dependencies. See `Upgrade to Docsy 0.12.0`
+    for the standard package-update procedure, applied in reverse.
