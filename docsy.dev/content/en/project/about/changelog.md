@@ -147,7 +147,7 @@ full list of changes, see the [0.15.0][] release page.
 - **Internationalization**: [added and updated
   translations][0.15.0-blog-internationalization].
 - Fixed community/footer links so site-local links no longer open in a new
-  browser target ([#2576][], [#2133][]).
+  browser target ([#2133][], [#2576][]).
 
 [**Experimental**](#experimental):
 
@@ -165,6 +165,7 @@ For maintainers:
   part of Docsy's [public customization surface](#public) and may change or be
   removed without notice.
 
+[#2133]: https://github.com/google/docsy/issues/2133
 [#2556]: https://github.com/google/docsy/pull/2556
 [#2557]: https://github.com/google/docsy/pull/2557
 [#2563]: https://github.com/google/docsy/pull/2563
