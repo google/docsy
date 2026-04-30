@@ -347,8 +347,10 @@ before any further changes are merged into the `main` branch:
 
 - NPM scripts: `set:version` and `set:version:*`; **`set:hugo:version`** (see
   [Hugo version pins](#hugo-version-pins))
-- `scripts/get-build-id.sh`: Generates build ID from git describe (empty on
-  tags).
+- `scripts/get-build-id.sh`: Builds `X.Y.Z-dev+…-over-main-…` from the latest
+  semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
+  X.Y.Z core is already **greater** than that git-derived core, keeps the higher
+  core (release prep ahead of tagging).
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script
   help for usage.
 
