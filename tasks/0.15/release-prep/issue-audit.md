@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue audit
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 7a0b370f
+last-main-commit: 466bd327
 cSpell:ignore: afdocs overpromising
 ---
 
 ## Scope
 
-Draft audit covers material changes in [v0.14.3...main][] through [7a0b370f][].
+Draft audit covers material changes in [v0.14.3...main][] through [466bd327][].
 This is an evidence pass for review before writing the wrapup report, release
 blog post, or changelog updates.
 
@@ -30,10 +30,9 @@ blog post, or changelog updates.
     content rendering.
   - [#2585][] raises the repository-supported Hugo version to 0.157.0 and keeps
     release guidance on Node LTS 24.
-- Changelog status: refreshed 0.15.0 entry exists ([#2616][]); final release
-  pass still needs replacing prerelease/release-page placeholders when tagging.
-- Blog status: refreshed release report exists at
-  `docsy.dev/content/en/blog/2026/0.15.0.md` ([#2616][]).
+- Changelog / blog: refreshed for **0.15** through [#2616][] and follow-on prep
+  ([#2618][], [#2619][], [#2620][], [#2621][]). Final tagging pass still
+  replaces prerelease/release-page placeholders as needed.
 - Link check: the agent-support user-guide page is now on `main` via [#2611][];
   the earlier blog-link blocker is resolved.
 
@@ -368,6 +367,10 @@ Raw commits in scope without PR numbers in their commit subjects:
 [#2611]: https://github.com/google/docsy/pull/2611
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2616]: https://github.com/google/docsy/pull/2616
+[#2618]: https://github.com/google/docsy/pull/2618
+[#2619]: https://github.com/google/docsy/pull/2619
+[#2620]: https://github.com/google/docsy/pull/2620
+[#2621]: https://github.com/google/docsy/pull/2621
 [#726]: https://github.com/google/docsy/issues/726
-[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
+[466bd327]: https://github.com/google/docsy/commit/466bd327
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

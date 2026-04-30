@@ -1,17 +1,17 @@
 ---
 title: 0.15 commit inventory
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 7a0b370f
+last-main-commit: 466bd327
 ---
 
 ## Scope
 
-Inventory covers commits in [v0.14.3...main][] through [7a0b370f][].
+Inventory covers commits in [v0.14.3...main][] through [466bd327][].
 
-- First-parent commits: 39
-- Raw commits in range: 48
+- First-parent commits: 43
+- Raw commits in range: 52
 - Baseline: latest official release tag, [v0.14.3][]
 
 The extra raw commits are implementation commits that are also represented by
@@ -81,6 +81,13 @@ uses first-parent commits as the release-audit spine.
   release-prep refresh, CI docs, and `readfile` shortcode cleanup
 - `7a0b370f` [#2616][] Update the 0.15 release blog, changelog, and user-guide
   docs; finalize 0.15 upgrade guidance around Hugo 0.157.0 and Node LTS 24
+- `9319aa47` [#2618][] Prepare 0.15.0 release tooling, site metadata, and
+  release-prep docs
+- `f5ebf609` [#2619][] Add release-prep audit guidance; document missed 0.15.0
+  user-visible changes
+- `a19b3dd6` [#2620][] Replace `cd:docsy.dev` npm scripts with
+  `npm run -C docsy.dev`
+- `466bd327` [#2621][] Prettierignore rule cleanup, and fix format of more pages
 
 ## Internationalization
 
@@ -126,6 +133,9 @@ uses first-parent commits as the release-audit spine.
   rather than a separate user-facing feature.
 - [#2616][] finalizes the release blog, changelog, doc-rooted guidance, and
   version-support wording. It closes stale WIP notes from earlier report passes.
+- [#2618][], [#2619][], [#2620][], and [#2621][] continue release prep:
+  tooling/metadata, audit guidance, npm `-C docsy.dev` ergonomics, and Prettier
+  ignore/format hygiene (see commits above).
 
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2555]: https://github.com/google/docsy/pull/2555
@@ -168,6 +178,10 @@ uses first-parent commits as the release-audit spine.
 [#2610]: https://github.com/google/docsy/pull/2610
 [#2611]: https://github.com/google/docsy/pull/2611
 [#2616]: https://github.com/google/docsy/pull/2616
-[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
+[#2618]: https://github.com/google/docsy/pull/2618
+[#2619]: https://github.com/google/docsy/pull/2619
+[#2620]: https://github.com/google/docsy/pull/2620
+[#2621]: https://github.com/google/docsy/pull/2621
+[466bd327]: https://github.com/google/docsy/commit/466bd327
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [v0.14.3]: https://github.com/google/docsy/releases/tag/v0.14.3
