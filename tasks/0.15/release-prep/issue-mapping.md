@@ -40,7 +40,7 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
 | [#2583][]: Add Romanian locale                                         | External: opentelemetry.io#4593 (PR body)          | Locale contribution                                  |
 | [#2584][]: Add markdownlint rule for no site-local external URLs       | None found (N/A)                                   | Link hygiene                                         |
 | [#2585][]: Update NPM packages, Hugo to 0.157.0, drop `cpy-cli`        | None found (N/A)                                   | Dependency/tooling bundle                            |
-| [#2586][]: Update version+variant menu, add `siteGetPage`, `tdVersion` | [#2504][] (PR body)                                | Not client-facing for release notes                  |
+| [#2586][]: Update version+variant menu, add `siteGetPage`, `tdVersion` | [#2504][] (PR body)                                | User-facing; potentially breaking for custom menus   |
 | [#2587][]: Finalize doc-rooted configuration explanation               | [#2504][] (PR body)                                | Documentation follow-up                              |
 | [#2591][]: Add missing German alert label translations                 | None found (N/A)                                   | i18n fix                                             |
 | [#2597][]: Agent-friendly support plan and Markdown output phase 1     | #2596, #726 (PR body)                              | Experimental Markdown outputs and tests              |

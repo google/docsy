@@ -57,7 +57,7 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2082][]: Add Azerbaijan language                         | done | done | done | Internationalization                       |
 | [#2555][]: Set version to 0.14.3-dev                       | N/A  | N/A  | N/A  | Release-prep maintenance                   |
 | [#2556][]: Reorg deployment docs, normalize links          | done | done | done | Documentation/process cleanup              |
-| [#2557][]: Add version menu to site                        | done | done | done | No client-facing release-note impact       |
+| [#2557][]: Add version menu to site                        | done | done | done | New / potentially breaking [^ver-menu]     |
 | [#2558][]: Replace placeholder locale by French            | done | done | done | Site-only i18n setup                       |
 | [#2559][]: Document `deploy/prod` branch                   | done | done | done | Documentation/process cleanup              |
 | [#2560][]: Update bug report template                      | N/A  | N/A  | N/A  | Admin                                      |
@@ -79,7 +79,7 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2583][]: Add Romanian locale                             | done | done | done | Internationalization                       |
 | [#2584][]: Add site-local URL markdownlint rule            | done | done | done | Documentation/process cleanup              |
 | [#2585][]: Update NPM packages and Hugo tooling            | done | done | done | Final versions reflected in blog           |
-| [#2586][]: Update version and variant menu                 | done | done | done | No client-facing release-note impact       |
+| [#2586][]: Update version and variant menu                 | done | done | done | New / potentially breaking [^ver-menu]     |
 | [#2587][]: Finalize doc-rooted configuration explanation   | done | done | done | Doc-rooted sites                           |
 | [#2591][]: Add German alert-label translations             | done | done | done | Internationalization                       |
 | [#2597][]: Add Markdown output phase 1                     | done | done | done | Experimental agent support                 |
@@ -94,6 +94,12 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2610][]: 0.15 release-prep omnibus                       | done | done | done | Blog, changelog, refcache, reports, links  |
 | [#2611][]: Agent support UG and release-prep refresh       | done | done | done | Resolves agent-support blog-link blocker   |
 | [#2616][]: Update 0.15 release blog, CL, and docs          | done | done | done | Final release-content refresh              |
+
+[^ver-menu]:
+    The docsy.dev navbar **version / variant** menu was visible (including
+    **`main`** / **`0.14.4-dev`**) before any Blog/changelog note; **0.15**
+    documents it ([#2616][]):
+    [Version menu entries](/blog/2026/0.15.0/#version-menu).
 
 Raw commits in scope without PR numbers in their commit subjects:
 
@@ -209,30 +215,15 @@ Raw commits in scope without PR numbers in their commit subjects:
 
 ### Version and Variant Menus
 
-- Evidence: [#2557][], [#2586][].
-- Status: implemented; no linked issue found except [#2586][] contributes to
-  [#2504][].
-- Downstream/client impact:
-  - No client-facing release-note impact expected for 0.15.
-  - Updates version/variant menu behavior and markup.
-  - Introduces `tdVersion` YAML structure.
-  - Version v-prefix use changed: old config used bare values such as
-    `0.14.4-dev`; new config consistently uses values such as `v0.14.4-dev`.
-- Docs impact:
-  - Status: done.
-  - `docsy.dev/content/en/docs/content/navigation.md` includes version menu
-    guidance.
-  - `docsy.dev/content/en/project/about/maintainer-notes.md` and package version
-    scripts were updated.
-- Changelog impact:
-  - Status: done for 0.15.
-  - Omit from client-facing release notes unless later release review identifies
-    a downstream effect.
-- Blog inclusion:
-  - Status: done for 0.15.
-  - Omit from client-facing highlights unless later release review identifies a
-    downstream effect.
-- Follow-up needed: none for release notes.
+- Evidence: [#2557][], [#2586][]; [#2586][] contributes to [#2504][].
+- Downstream/client impact: Version/variant menu markup; `tdVersion` structure;
+  v-prefix normalization (`0.14.4-dev` → `v0.14.4-dev`); version menu is no
+  longer hidden on smaller viewports. Blog/CL timing for docsy.dev: [^ver-menu].
+- Docs impact: done — `docsy.dev/content/en/docs/content/versioning.md`,
+  `docsy.dev/content/en/docs/content/navigation.md`, maintainer-notes, version
+  scripts.
+- Changelog / Blog: done for **0.15** — [^ver-menu].
+- Follow-up: none.
 
 ### Layout Fixes
 

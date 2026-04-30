@@ -110,8 +110,10 @@ uses first-parent commits as the release-audit spine.
 - [#2580][] includes a likely breaking behavior change for multilingual
   community/footer paths.
 - [#2586][] combines version/variant menu UX, `tdVersion` config structure,
-  `siteGetPage`, scripts, tests, and docs. Current review treats these changes
-  as not client-facing for 0.15 release notes.
+  `siteGetPage`, scripts, tests, and docs. Current review treats the menu UX and
+  configuration surface as user-facing and potentially breaking for sites that
+  customize version menu markup, CSS, or mobile navbar layout; the script
+  changes remain release tooling.
 - [#2597][] combines the Markdown output feature, `docsy.dev` enablement, tests,
   and task plans.
 - [#2605][] combines `llms.txt`, Markdown output refinements, tests,
