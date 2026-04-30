@@ -1,15 +1,15 @@
 # Docsy upgrade manifest — 0.15.0
 #
-# Machine-readable companion to the 0.15.0 release blog. Lists breaking
-# changes with detect rules so an agent (or human) can quickly determine
-# which items apply to a given site, and surface anchored references back
-# into the human-readable release blog and changelog.
+# Machine-readable companion to the 0.15.0 release blog. Lists breaking-style
+# review items (with detect rules), optional experimental features, and sanity
+# checks so an agent (or human) can determine applicability and jump back to the
+# blog, changelog, and user guide.
 #
 # Status: experimental. Schema is expected to evolve through 0.16.0+;
 # see the tracking issue for the planned DRY/data-driven approach.
 #
-# Authoritative for: detect predicates, version pins, breaking-item ids.
-# Authoritative narrative remains in the release blog.
+# Authoritative for: detect predicates, version pins, item ids.
+# Authoritative narrative remains in the release blog and user guide.
 
 schema: docsy-upgrade-manifest/v0
 from: 0.14.3
@@ -28,39 +28,10 @@ peer:
     to: lts/24
     notes: Later Node versions may work but are not officially supported.
 
-# Breaking changes — items that may require a client-project change.
-# Each item is independently gated by a `detect` rule so callers can
-# evaluate applicability against the consuming project.
+# Breaking changes — items flagged as breaking in the release blog (some also
+# introduce new behavior; see blog). Low-risk items note that in title or summary.
+# Each item is gated by a `detect` rule where applicable.
 breaking:
-  - id: card-shortcode-rendering
-    title: card shortcode rendering
-    summary: >-
-      The `card` shortcode now renders the `header`, `title`, `subtitle`, and
-      `footer` fields with `$.Page.RenderString` instead of `markdownify`, so
-      they render in the page context. Shortcode invocations inside those fields
-      now execute (previously passed through `markdownify`'s escape behavior).
-    applies-if: >-
-      Your project uses the `card` shortcode with Markdown, images, links,
-      shortcode invocations inside the affected fields, or a custom
-      `layouts/_shortcodes/card.html` override.
-    detect:
-      any:
-        - kind: grep
-          pattern: '\{\{[<%][[:space:]]*card\b'
-          paths: [content/, layouts/]
-        - kind: file-exists
-          path: layouts/_shortcodes/card.html
-        - kind: file-exists
-          path: layouts/shortcodes/card.html
-    actions:
-      - Review rendered cards that use any of the affected fields.
-      - Diff any local card-shortcode override against the v0.15.0 partial.
-    references:
-      blog: /blog/2026/0.15.0/#card-shortcode
-      partials:
-        - https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html
-      prs: [2565]
-
   - id: community-footer-multilingual-paths
     title: community and footer link paths (multilingual)
     summary: >-
@@ -90,29 +61,9 @@ breaking:
       - Recheck generated community/footer links in each language.
     references:
       blog: /blog/2026/0.15.0/#community-footer-links
-      prs: [2576, 2580]
-
-  - id: community-footer-link-target
-    title: community and footer link target attribute
-    summary: >-
-      Community and footer links now only open in a new browser target for
-      external links. Previously, site-local links also opened in a new target.
-    applies-if: >-
-      Your site relied on community or footer links opening in a new tab/window
-      for site-local URLs.
-    detect:
-      kind: grep
-      pattern: '^\s*(user|developer)\s*[:=]'
-      paths: [config/, hugo.toml, hugo.yaml, hugo.json]
-      context: under params.links
-    actions:
-      - >-
-        If your design depended on site-local community/footer links opening in
-        a new target, plan to surface those links elsewhere or accept the new
-        same-target behavior.
-    references:
-      blog: /blog/2026/0.15.0/#community-footer-links
-      prs: [2576]
+      user-guide:
+        - /docs/content/adding-content/#adding-a-community-page
+      prs: [2580]
 
   - id: version-menu-customization
     title: version menu markup, classes, and mobile visibility
@@ -152,28 +103,25 @@ breaking:
         - /docs/content/versioning/#adding-a-version-drop-down-menu
         - /docs/content/navigation/#version-menu
       partials:
+        - https://github.com/google/docsy/tree/v0.15.0/layouts/_partials
         - https://github.com/google/docsy/blob/v0.15.0/layouts/_partials/navbar-version-selector.html
         - https://github.com/google/docsy/blob/v0.15.0/layouts/_partials/navbar.html
       prs: [2557, 2586]
 
-# New behavior
-new:
   - id: card-shortcode-rendering
-    title: card shortcode rendering — page-context resolution
+    title: Card shortcode rendering (low-risk)
     summary: >-
-      The `card` shortcode now renders the `header`, `title`, `subtitle`, and
-      `footer` fields with `$.Page.RenderString` instead of `markdownify`, so
-      relative links and images inside those fields resolve relative to the page
-      that includes the `card`, and Markdown render hooks fire in the page
-      context — capabilities that weren't available before.
-    classification-note: >-
-      Treated as new behavior rather than breaking based on a judgement call: to
-      the project's best knowledge, no client relied on the previous resolution
-      behavior in a way that would break under 0.15.0. Reclassify to `breaking`
-      if a regression is reported. See blog rationale for details.
+      Markdown in the `header`, `title`, `subtitle`, and `footer` arguments is
+      rendered with `.Page.RenderString` instead of `markdownify`, so it runs in
+      the including page's context. Relative Markdown links (including images)
+      and Markdown render hooks behave like body content—especially useful for
+      multilingual sites. Shortcodes inside those arguments may execute where
+      they previously did not under `markdownify`. Breakage should be rare; see
+      the blog NOTE.
     applies-if: >-
-      Your project uses the `card` shortcode with Markdown, images, links, or
-      maintains a custom `layouts/_shortcodes/card.html` override.
+      Your project uses the `card` shortcode or maintains a custom
+      `layouts/_shortcodes/card.html` or `layouts/shortcodes/card.html`
+      override.
     detect:
       any:
         - kind: grep
@@ -184,32 +132,69 @@ new:
         - kind: file-exists
           path: layouts/shortcodes/card.html
     actions:
-      - Review rendered cards that use any of the affected fields.
-      - Diff any local card-shortcode override against the v0.15.0 partial.
+      - Ensure that cards still render as expected.
+      - >-
+        Diff any local `card` override against the v0.15.0 theme partial; update
+        it intentionally if you want page-context resolution, relative paths, or
+        render hooks in those arguments.
     references:
       blog: /blog/2026/0.15.0/#card-shortcode
+      user-guide:
+        - /docs/content/shortcodes/#shortcode-card-textual-content
       partials:
         - https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html
       prs: [2565]
 
+# Fixes and other user-visible changes that do not require upgrade action.
+fixes:
+  - id: community-footer-link-target
+    title: community and footer link target attribute
+    summary: >-
+      Community and footer links now open in a new browser target only for
+      external links, fixing site-local links that previously behaved like
+      external links.
+    references:
+      blog: /blog/2026/0.15.0/#community-footer-links
+      user-guide:
+        - /docs/content/adding-content/#adding-a-community-page
+      issues: [2133]
+      prs: [2576]
+
+# Experimental features — opt-in; enablement is site-specific.
+experimental:
+  - id: agent-support-phase-1
+    title: Agent support (phase 1)
+    summary: >-
+      Opt-in Markdown alternate outputs, a _View Markdown_ page-meta link when a
+      Markdown alternate exists, and generated `llms.txt`. Phased evolution is
+      tracked in https://github.com/google/docsy/issues/2614.
+    references:
+      blog: /blog/2026/0.15.0/#agent-support
+      user-guide:
+        - /docs/content/agent-support/
+      prs: [2597, 2601, 2605, 2606]
+
 # Sanity checks to run after upgrading. These are project-agnostic.
 sanity:
-  - run: hugo --gc
-    description: Build the site and surface any errors.
+  - run: hugo
+    description: >-
+      Build the site locally and surface errors (baseline: release blog sanity
+      checklist).
   - run: hugo --printPathWarnings
-    description:
-      Surface path collisions; especially relevant for doc-rooted sites.
-    applies-if: doc-rooted-or-custom-permalinks
+    description: >-
+      Same as the blog nested bullet under "Build your site locally": use when
+      your site is doc-rooted (see blog Doc-rooted sites section).
+    applies-if: doc-rooted-site
   - check:
-      Verify community and footer links resolve correctly in each configured
-      language.
+      For multilingual sites, verify community and footer links (see blog
+      community/footer actions).
   - check:
       If `params.versions` is configured, check the version menu on desktop and
       mobile viewports.
   - check: Inspect pages that use the `card` shortcode.
   - check:
-      If Markdown outputs / `llms.txt` are enabled, inspect the generated `.md`
-      pages and `/llms.txt`.
+      If agent support is enabled, inspect generated `*.md` pages and
+      `/llms.txt`.
 
 # Rollback guidance: pin Docsy to the previous stable release if upgrading
 # blocks shipping. See: https://github.com/google/docsy/releases/v0.14.3

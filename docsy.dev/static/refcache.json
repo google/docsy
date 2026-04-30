@@ -935,6 +935,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:09.005756-05:00"
   },
+  "https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:13.398577-04:00"
+  },
   "https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:09.115871-05:00"
@@ -1122,6 +1126,10 @@
   "https://github.com/google/docsy/issues/2116": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:31.429537-05:00"
+  },
+  "https://github.com/google/docsy/issues/2133": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:33:54.425775-04:00"
   },
   "https://github.com/google/docsy/issues/2173": {
     "StatusCode": 206,
@@ -1779,6 +1787,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:54.307861-05:00"
   },
+  "https://github.com/google/docsy/tree/v0.15.0/layouts/_partials": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.750809-04:00"
+  },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:53.339518-05:00"
@@ -2215,6 +2227,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:51.88846-05:00"
   },
+  "https://gohugo.io/functions/transform/markdownify/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.959528-04:00"
+  },
   "https://gohugo.io/getting-started/configuration/#configuration-file": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:23.651029-05:00"
@@ -2278,6 +2294,10 @@
   "https://gohugo.io/methods/page/outputformats/#canonical": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:58.028592-05:00"
+  },
+  "https://gohugo.io/methods/page/renderstring/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.875771-04:00"
   },
   "https://gohugo.io/methods/page/tableofcontents/": {
     "StatusCode": 206,

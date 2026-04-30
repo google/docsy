@@ -121,12 +121,12 @@ full list of changes, see the [0.15.0][] release page.
 [**Breaking changes**](#breaking-change):
 
 - **Community and footer link paths** changed for multilingual sites; see
-  [Community and footer links][0.15.0-blog-community-footer] ([#2580][]).
+  [blog][0.15.0-blog-community-footer] ([#2580][]).
 - **Version menu markup and mobile visibility** changed for sites using
   `params.versions`; see [Version menu entries][0.15.0-blog-version-menu]
   ([#2557][], [#2586][]).
-- **`card` shortcode rendering** has a low-risk of breaking.
-  [Details][0.15.0-blog-card].
+- **`card` shortcode rendering** changed for Markdown arguments; breakage risk
+  is low. See [blog][0.15.0-blog-card].
 
 **New**:
 
@@ -135,16 +135,28 @@ full list of changes, see the [0.15.0][] release page.
 - **[Version menu entries][0.15.0-blog-version-menu]**: added support for
   headings, separators, per-entry page-link behavior, and kind-specific styling
   ([#2557][], [#2586][]).
-- **`card` shortcode rendering**: Markdown in card arguments now renders in the
-  _including page's context_, enabling use of relative Markdown link paths and
-  more flexible render-hook behavior. [Details][0.15.0-blog-card] ([#2565][]).
-- Footer `params.links` support optional `rel` attribute values ([#2576][]); see
-  [Community and footer links][0.15.0-blog-community-footer].
+- **`card` shortcode rendering**: changed Markdown rendering in card arguments
+  to use the _including page's context_, enabling relative Markdown link paths
+  and more flexible render-hook behavior. [Details][0.15.0-blog-card]
+  ([#2565][]).
+- Added optional `rel` attribute values for footer `params.links` ([#2576][]);
+  see [Community and footer links][0.15.0-blog-community-footer].
 
 **Other changes**:
 
 - **Internationalization**: [added and updated
   translations][0.15.0-blog-internationalization].
+- Fixed community/footer links so site-local links no longer open in a new
+  browser target ([#2576][], [#2133][]).
+
+[**Experimental**](#experimental):
+
+- **[Agent support][0.15.0-blog-agent-support]**: added Markdown alternate
+  outputs, "View Markdown" links, and `llms.txt` ([#2597][], [#2601][],
+  [#2605][], [#2606][]).
+
+For maintainers:
+
 - Split deployment docs into focused pages and clarified release branch-model
   docs ([#2556][], [#2572][]).
 - Updated NPM packages and `docsy.dev` tooling, including `hugo-extended`
@@ -152,12 +164,6 @@ full list of changes, see the [0.15.0][] release page.
 - Added `siteGetPage` shortcode ([#2586][]) — **internal** to `docsy.dev`; not
   part of Docsy's [public customization surface](#public) and may change or be
   removed without notice.
-
-[**Experimental**](#experimental):
-
-- **[Agent support][0.15.0-blog-agent-support]**: added Markdown alternate
-  outputs, "View Markdown" links, and `llms.txt` ([#2597][], [#2601][],
-  [#2605][], [#2606][]).
 
 [#2556]: https://github.com/google/docsy/pull/2556
 [#2557]: https://github.com/google/docsy/pull/2557

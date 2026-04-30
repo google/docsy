@@ -1,7 +1,7 @@
 ---
 title: 0.15 commit inventory
 date: 2026-04-25
-lastmod: 2026-05-01
+lastmod: 2026-04-30
 range: v0.14.3..main
 last-main-commit: 466bd327
 ---
@@ -111,11 +111,10 @@ uses first-parent commits as the release-audit spine.
 ## Mixed-change commits needing review
 
 - [#2565][] includes doc-rooted config work and a `card` shortcode rendering
-  change: the shortcode now uses `$.Page.RenderString` instead of `markdownify`,
-  enabling page-context resolution of relative links/images and page-context
-  Markdown render hooks. **Reclassified during release prep** from breaking to
-  new behavior — see the Summary section of `issue-audit.md` for the rationale
-  and reclassification advisory.
+  change: named arguments use `$.Page.RenderString` instead of `markdownify`,
+  enabling page-context relative links/images and render hooks — treated as
+  **new** and **low-risk potentially breaking** in the [0.15.0
+  blog][0.15.0-blog-card]. See the Summary section of `issue-audit.md`.
 - [#2580][] includes a likely breaking behavior change for multilingual
   community/footer paths.
 - [#2586][] combines version/variant menu UX, `tdVersion` config structure,
@@ -139,6 +138,7 @@ uses first-parent commits as the release-audit spine.
   tooling/metadata, audit guidance, npm `-C docsy.dev` ergonomics, and Prettier
   ignore/format hygiene (see commits above).
 
+[0.15.0-blog-card]: /blog/2026/0.15.0/#card-shortcode
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2555]: https://github.com/google/docsy/pull/2555
 [#2556]: https://github.com/google/docsy/pull/2556
