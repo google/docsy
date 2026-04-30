@@ -1,13 +1,13 @@
 ---
 title: 0.15 release-prep wrapup report
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 7a0b370f
+last-main-commit: 466bd327
 cSpell:ignore: afdocs
 ---
 
-> Report prepared for commits in [v0.14.3...main][] through [7a0b370f][].
+> Report prepared for commits in [v0.14.3...main][] through [466bd327][].
 
 ## Release Themes
 
@@ -48,7 +48,8 @@ cSpell:ignore: afdocs
 - Added the Agent support user-guide page and refreshed the release prep reports
   ([#2611][]).
 - Updated changelog "Next release" section with 0.15 highlights and links; the
-  latest release-content pass is [#2616][].
+  primary release-content pass is [#2616][], followed by prep/tooling PRs
+  ([#2618][], [#2619][], [#2620][], [#2621][]).
 - Omit 0.14.3-only fixes from 0.15 highlights. The 0.14 release resources
   already cover the v0.14.3 layout fix.
 - The earlier Agent support blog-link blocker is resolved: [Agent support][] is
@@ -67,7 +68,6 @@ cSpell:ignore: afdocs
 - [x] Review the 0.15 release report for user-guide links and action guidance.
 - [x] Review the changelog entry after the blog draft is final so it stays terse
       and points to the release report for detail.
-- [ ] Decide whether a docsy-example follow-up PR is needed.
 
 ## References
 
@@ -86,6 +86,10 @@ cSpell:ignore: afdocs
 [#2611]: https://github.com/google/docsy/pull/2611
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2616]: https://github.com/google/docsy/pull/2616
-[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
+[#2618]: https://github.com/google/docsy/pull/2618
+[#2619]: https://github.com/google/docsy/pull/2619
+[#2620]: https://github.com/google/docsy/pull/2620
+[#2621]: https://github.com/google/docsy/pull/2621
+[466bd327]: https://github.com/google/docsy/commit/466bd327
 [Agent support]: ../../../docsy.dev/content/en/docs/content/agent-support/
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

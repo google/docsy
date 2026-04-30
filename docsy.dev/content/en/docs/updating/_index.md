@@ -5,11 +5,11 @@ weight: 8
 ---
 
 We hope to continue to make improvements to the theme
-[along with the Docsy community](/docs/contributing/). If you have
-cloned the example site (or are otherwise using the theme as a Hugo Module or
-Git submodule), you can easily update the Docsy theme in your site yourself. If
-you have cloned the theme itself into your own project you can also update,
-though you may need to resolve merge conflicts.
+[along with the Docsy community](/docs/contributing/). If you have cloned the
+example site (or are otherwise using the theme as a Hugo Module or Git
+submodule), you can easily update the Docsy theme in your site yourself. If you
+have cloned the theme itself into your own project you can also update, though
+you may need to resolve merge conflicts.
 
 Updating Docsy means that your site will build using the latest version of Docsy
 at `HEAD` and include all the new commits or changes that have been merged since
