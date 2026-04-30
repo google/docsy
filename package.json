@@ -52,6 +52,7 @@
     "prune:refcache": "npm run cd:docsy.dev -- prune:refcache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run cd:docsy.dev -- serve --",
+    "set:hugo:version": "node scripts/set-hugo-version.mjs",
     "set:version:example:git-info": "echo FIXME - npm run set:version:example -- -c ../hugo.yaml --version \"$(scripts/get-build-id.sh)\"",
     "set:version:example": "echo FIXME - 'cd ../docsy-example && node ../docsy/scripts/set-package-version/index.mjs'",
     "set:version:git-info": "npm run -s _spv -- --version \"$(scripts/get-build-id.sh)\"",
@@ -75,7 +76,7 @@
     "prettier": "^3.8.1"
   },
   "config": {
-    "hugo_version": "0.151.0"
+    "hugo_version": "0.157.0"
   },
   "engines": {
     "node": ">=22"
