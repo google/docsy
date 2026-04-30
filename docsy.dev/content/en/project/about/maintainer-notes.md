@@ -423,7 +423,6 @@ before any further changes are merged into the `main` branch:
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
 [docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
-[experimental]: /project/about/changelog/#experimental
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>

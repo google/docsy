@@ -26,5 +26,6 @@ resources/
 !/.vscode/cspell.json
 /.cursor
 
-# Claude Code
-/.claude
+# cSpell:ignore worktrees
+/.claude/worktrees
+/.claude/settings.local.json
