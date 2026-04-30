@@ -1,22 +1,22 @@
 ---
 title: 0.15 release-prep wrapup report
 date: 2026-04-25
-lastmod: 2026-04-26
+lastmod: 2026-04-30
 range: v0.14.3..main
-last-main-commit: 343d6154
+last-main-commit: 7a0b370f
 cSpell:ignore: afdocs
 ---
 
-> Report prepared for commits in [v0.14.3...main][] through [343d6154][].
+> Report prepared for commits in [v0.14.3...main][] through [7a0b370f][].
 
 ## Release Themes
 
 - **Experimental agent support**: Markdown alternate outputs, a visible "View
   Markdown" page-meta link, `llms.txt`, and golden tests are implemented for the
-  first 0.15 pass. Treat this as experimental in release content.
+  first 0.15 pass. The user guide and AFDocs scorecard are also on `main`. Treat
+  this as experimental in release content.
 - **Doc-rooted sites**: Docsy now has a documented doc-rooted site pattern and a
-  `doc-rooted` example variant. The [#2504][] tracker is expected to close, but
-  check before final publication.
+  `doc-rooted` example variant. The [#2504][] tracker is closed for 0.15.
 - **Community and footer links**: Link handling is more accurate under custom
   permalinks, footer links support `rel`, and external-link target behavior is
   fixed.
@@ -37,33 +37,35 @@ cSpell:ignore: afdocs
   `card` shortcode rendering should review header, title, subtitle, and footer
   output because those fields now use `$.Page.RenderString`.
 - **Runtime check**: Confirm final Hugo and Node support values before
-  publishing 0.15. The repo currently uses `hugo-extended` 0.157.0 in
-  `docsy.dev`.
+  publishing 0.15. The refreshed blog currently says Hugo 0.157.0 and Node
+  LTS 24.
 
 ## Release Content Status
 
 - Created draft release report:
   [0.15.0 release report](../../../docsy.dev/content/en/blog/2026/0.15.0.md)
   ([#2610][]).
-- Updated changelog "Next release" section with 0.15 highlights and links.
+- Added the Agent support user-guide page and refreshed the release prep reports
+  ([#2611][]).
+- Updated changelog "Next release" section with 0.15 highlights and links; the
+  latest release-content pass is [#2616][].
 - Omit 0.14.3-only fixes from 0.15 highlights. The 0.14 release resources
   already cover the v0.14.3 layout fix.
-- **Before publishing the blog**: merge the branch that adds
-  `docs/content/agent-support/` so the post’s [Agent support][] link is not a
-  404 on `main`.
+- The earlier Agent support blog-link blocker is resolved: [Agent support][] is
+  present on `main`.
 
 ## Follow-Up Checklist
 
-- [ ] Merge Agent support user-guide page (`docs/content/agent-support/`) before
-      publishing the 0.15.0 post, or temporarily retarget the blog link.
-- [ ] Check [#2504][] and close it, or move any remaining doc-rooted work to
+- [x] Merge Agent support user-guide page (`docs/content/agent-support/`) before
+      publishing the 0.15.0 post.
+- [x] Check [#2504][] and close it, or move any remaining doc-rooted work to
       follow-up issues, before finalizing 0.15.
-- [ ] Decide whether additional [#2596][] work lands before 0.15; otherwise keep
-      remaining agent support work as post-release follow-up.
-- [ ] Confirm final supported Hugo and Node versions and update the blog,
+- [x] Decide whether additional [#2596][] work lands before 0.15; remaining
+      agent support work now tracks under [#2614][].
+- [x] Confirm final supported Hugo and Node versions and update the blog,
       changelog, and release checklist if needed.
-- [ ] Review the 0.15 release report for user-guide links and action guidance.
-- [ ] Review the changelog entry after the blog draft is final so it stays terse
+- [x] Review the 0.15 release report for user-guide links and action guidance.
+- [x] Review the changelog entry after the blog draft is final so it stays terse
       and points to the release report for detail.
 - [ ] Decide whether a docsy-example follow-up PR is needed.
 
@@ -81,6 +83,9 @@ cSpell:ignore: afdocs
 [#2504]: https://github.com/google/docsy/issues/2504
 [#2596]: https://github.com/google/docsy/issues/2596
 [#2610]: https://github.com/google/docsy/pull/2610
-[343d6154]: https://github.com/google/docsy/commit/343d6154
+[#2611]: https://github.com/google/docsy/pull/2611
+[#2614]: https://github.com/google/docsy/issues/2614
+[#2616]: https://github.com/google/docsy/pull/2616
+[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
 [Agent support]: ../../../docsy.dev/content/en/docs/content/agent-support/
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

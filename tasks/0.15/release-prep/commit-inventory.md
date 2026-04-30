@@ -1,17 +1,17 @@
 ---
 title: 0.15 commit inventory
 date: 2026-04-25
-lastmod: 2026-04-26
+lastmod: 2026-04-30
 range: v0.14.3..main
-last-main-commit: 343d6154
+last-main-commit: 7a0b370f
 ---
 
 ## Scope
 
-Inventory covers commits in [v0.14.3...main][] through [343d6154][].
+Inventory covers commits in [v0.14.3...main][] through [7a0b370f][].
 
-- First-parent commits: 37
-- Raw commits in range: 46
+- First-parent commits: 39
+- Raw commits in range: 48
 - Baseline: latest official release tag, [v0.14.3][]
 
 The extra raw commits are implementation commits that are also represented by
@@ -77,6 +77,10 @@ uses first-parent commits as the release-audit spine.
 - `343d6154` [#2610][] 0.15 release-prep: release report blog draft, changelog
   “Next release”, refcache refresh, wide user-guide link sweep, and
   `tasks/0.15/release-prep` reports
+- `566be03e` [#2611][] Add Agent support user-guide page, AFDocs scorecard,
+  release-prep refresh, CI docs, and `readfile` shortcode cleanup
+- `7a0b370f` [#2616][] Update the 0.15 release blog, changelog, and user-guide
+  docs; finalize 0.15 upgrade guidance around Hugo 0.157.0 and Node LTS 24
 
 ## Internationalization
 
@@ -115,6 +119,11 @@ uses first-parent commits as the release-audit spine.
 - [#2610][] is a large release-prep omnibus (blog, changelog, refcache, link
   hygiene, and task reports). Prefer the feature PRs above for functional change
   notes.
+- [#2611][] completes the agent-support user-guide slice and refreshes release
+  prep after [#2610][]; treat it as documentation and validation for [#2596][]
+  rather than a separate user-facing feature.
+- [#2616][] finalizes the release blog, changelog, doc-rooted guidance, and
+  version-support wording. It closes stale WIP notes from earlier report passes.
 
 [#2082]: https://github.com/google/docsy/pull/2082
 [#2555]: https://github.com/google/docsy/pull/2555
@@ -144,6 +153,7 @@ uses first-parent commits as the release-audit spine.
 [#2586]: https://github.com/google/docsy/pull/2586
 [#2587]: https://github.com/google/docsy/pull/2587
 [#2591]: https://github.com/google/docsy/pull/2591
+[#2596]: https://github.com/google/docsy/issues/2596
 [#2597]: https://github.com/google/docsy/pull/2597
 [#2599]: https://github.com/google/docsy/pull/2599
 [#2600]: https://github.com/google/docsy/pull/2600
@@ -154,6 +164,8 @@ uses first-parent commits as the release-audit spine.
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
 [#2610]: https://github.com/google/docsy/pull/2610
-[343d6154]: https://github.com/google/docsy/commit/343d6154
+[#2611]: https://github.com/google/docsy/pull/2611
+[#2616]: https://github.com/google/docsy/pull/2616
+[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [v0.14.3]: https://github.com/google/docsy/releases/tag/v0.14.3

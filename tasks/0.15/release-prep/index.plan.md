@@ -1,8 +1,8 @@
 ---
 title: 0.15 Release wrapup plan
 date: 2026-04-25
-lastmod: 2026-04-26
-last-main-commit: 343d6154
+lastmod: 2026-04-30
+last-main-commit: 7a0b370f
 ---
 
 ## Agent guidance
@@ -134,7 +134,7 @@ When new commits land on `main`, repeat the following:
   or changelog.
 
 Refresh reports for commits in [v0.14.3...main][] through the commit named as
-`last-main-commit` in this file’s front matter (currently [343d6154][]).
+`last-main-commit` in this file’s front matter (currently [7a0b370f][]).
 
 ### 0.15.0 blog post
 
@@ -169,7 +169,7 @@ Refresh reports for commits in [v0.14.3...main][] through the commit named as
   ../../../docsy.dev/content/en/project/about/changelog/#v0.15.0
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
 [0.15.0 blog post]: ../../../docsy.dev/content/en/blog/2026/0.15.0.md
-[343d6154]: https://github.com/google/docsy/commit/343d6154
+[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
 [changelog style guide]:
   ../../../docsy.dev/content/en/project/about/changelog/#style-guide
 [Docsy style guide]: ../../../docsy.dev/content/en/project/style-guide/

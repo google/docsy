@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue audit
 date: 2026-04-25
-lastmod: 2026-04-26
+lastmod: 2026-04-30
 range: v0.14.3..main
-last-main-commit: 343d6154
+last-main-commit: 7a0b370f
 cSpell:ignore: afdocs overpromising
 ---
 
 ## Scope
 
-Draft audit covers material changes in [v0.14.3...main][] through [343d6154][].
+Draft audit covers material changes in [v0.14.3...main][] through [7a0b370f][].
 This is an evidence pass for review before writing the wrapup report, release
 blog post, or changelog updates.
 
@@ -28,14 +28,14 @@ blog post, or changelog updates.
   - [#2565][] changes `card` shortcode rendering from `markdownify` to
     `$.Page.RenderString`, which may affect some client overrides or shortcode
     content rendering.
-  - [#2585][] raises the repository-supported Hugo version to 0.157.0.
-- Changelog status: draft 0.15.0 entry exists and needs final review before
-  release.
-- Blog status: draft release report exists at
-  `docsy.dev/content/en/blog/2026/0.15.0.md` ([#2610][]).
-- Link check: the blog points to `/docs/content/agent-support/`; that user-guide
-  page is **not** on `main` at [343d6154][] (landed in follow-up branch work).
-  Resolve before publishing the post.
+  - [#2585][] raises the repository-supported Hugo version to 0.157.0 and keeps
+    release guidance on Node LTS 24.
+- Changelog status: refreshed 0.15.0 entry exists ([#2616][]); final release
+  pass still needs replacing prerelease/release-page placeholders when tagging.
+- Blog status: refreshed release report exists at
+  `docsy.dev/content/en/blog/2026/0.15.0.md` ([#2616][]).
+- Link check: the agent-support user-guide page is now on `main` via [#2611][];
+  the earlier blog-link blocker is resolved.
 
 ### Docs/blog/changelog status summary
 
@@ -51,57 +51,59 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 
 | Item                                                       | Docs | Blog | CL   | Notes                                      |
 | ---------------------------------------------------------- | ---- | ---- | ---- | ------------------------------------------ |
-| [#2082][]: Add Azerbaijan language                         | rel  | WIP  | WIP  | Internationalization                       |
+| [#2082][]: Add Azerbaijan language                         | rel  | done | done | Internationalization                       |
 | [#2555][]: Set version to 0.14.3-dev                       | N/A  | N/A  | N/A  | Release-prep maintenance                   |
-| [#2556][]: Reorg deployment docs, normalize links          | done | WIP  | rel  | Documentation/process cleanup              |
+| [#2556][]: Reorg deployment docs, normalize links          | done | done | rel  | Documentation/process cleanup              |
 | [#2557][]: Add version menu to site                        | done | rel  | rel  | No client-facing release-note impact       |
-| [#2558][]: Replace placeholder locale by French            | rel  | WIP  | WIP  | Internationalization                       |
-| [#2559][]: Document `deploy/prod` branch                   | done | WIP  | rel  | Documentation/process cleanup              |
+| [#2558][]: Replace placeholder locale by French            | rel  | rel  | rel  | Site-only i18n setup                       |
+| [#2559][]: Document `deploy/prod` branch                   | done | done | rel  | Documentation/process cleanup              |
 | [#2560][]: Update bug report template                      | N/A  | N/A  | N/A  | Admin                                      |
 | [#2562][]: Ensure `.td-main > .row` grows vertically       | rel  | rel  | done | Already covered by v0.14.3                 |
-| [#2563][]: Add doc-rooted example version and guidance     | rel  | WIP  | WIP  | Doc-rooted sites                           |
-| [#2564][]: Use `TD_BUILD_CTX` for doc-rooted builds        | rel  | WIP  | WIP  | Doc-rooted sites                           |
-| [#2565][]: Update doc-rooted configs and `card` rendering  | rel  | WIP  | WIP  | Includes client-impacting `card` change    |
-| [#2567][]: Remove `sidebar_root_for` user-guide docs       | rel  | WIP  | WIP  | Doc-rooted cleanup                         |
-| [#2568][]: Dedup site homepages for doc-rooted sites       | rel  | WIP  | WIP  | Doc-rooted sites                           |
+| [#2563][]: Add doc-rooted example version and guidance     | done | done | done | Doc-rooted sites                           |
+| [#2564][]: Use `TD_BUILD_CTX` for doc-rooted builds        | rel  | done | done | Doc-rooted sites                           |
+| [#2565][]: Update doc-rooted configs and `card` rendering  | rel  | done | done | Includes client-impacting `card` change    |
+| [#2567][]: Remove `sidebar_root_for` user-guide docs       | rel  | done | done | Doc-rooted cleanup                         |
+| [#2568][]: Dedup site homepages for doc-rooted sites       | rel  | done | done | Doc-rooted sites                           |
 | [#2571][]: Update `deploy/prod` to 0.14.3                  | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2572][]: Clarify release process and branch model        | done | WIP  | rel  | Documentation/process cleanup              |
+| [#2572][]: Clarify release process and branch model        | done | done | rel  | Documentation/process cleanup              |
 | [#2573][]: Sync `release` and `deploy/prod` branches       | N/A  | N/A  | N/A  | Branch maintenance                         |
 | [#2574][]: Link release branches back into main ancestry   | N/A  | N/A  | N/A  | Branch maintenance                         |
-| [#2575][]: Format project about docs and add project link  | done | WIP  | rel  | Documentation/process cleanup              |
-| [#2576][]: Fix footer/community link target and `rel`      | 0    | WIP  | WIP  | Community/footer links                     |
+| [#2575][]: Format project about docs and add project link  | done | done | rel  | Documentation/process cleanup              |
+| [#2576][]: Fix footer/community link target and `rel`      | rel  | done | done | Community/footer links                     |
 | [#2577][]: Record ancestry with release branches           | N/A  | N/A  | N/A  | Branch ancestry                            |
-| [#2579][]: Use canonical URL to contributing page          | done | WIP  | rel  | Documentation/process cleanup              |
-| [#2580][]: Resolve community/footer links under permalinks | 0    | WIP  | WIP  | Potentially breaking multilingual behavior |
-| [#2583][]: Add Romanian locale                             | rel  | WIP  | WIP  | Internationalization                       |
-| [#2584][]: Add site-local URL markdownlint rule            | done | WIP  | rel  | Documentation/process cleanup              |
-| [#2585][]: Update NPM packages and Hugo tooling            | WIP  | WIP  | WIP  | Confirm final supported versions           |
+| [#2579][]: Use canonical URL to contributing page          | done | done | rel  | Documentation/process cleanup              |
+| [#2580][]: Resolve community/footer links under permalinks | rel  | done | done | Potentially breaking multilingual behavior |
+| [#2583][]: Add Romanian locale                             | rel  | done | done | Internationalization                       |
+| [#2584][]: Add site-local URL markdownlint rule            | done | done | rel  | Documentation/process cleanup              |
+| [#2585][]: Update NPM packages and Hugo tooling            | done | done | done | Final versions reflected in blog           |
 | [#2586][]: Update version and variant menu                 | done | rel  | rel  | No client-facing release-note impact       |
-| [#2587][]: Finalize doc-rooted configuration explanation   | rel  | WIP  | WIP  | Doc-rooted sites                           |
-| [#2591][]: Add German alert-label translations             | rel  | WIP  | WIP  | Internationalization                       |
-| [#2597][]: Add Markdown output phase 1                     | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2599][]: Drop Docsy-defined `Markdown` output format     | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2600][]: Trim Markdown output titles and descriptions    | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2601][]: Add View Markdown page-meta link                | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2602][]: Add `post_view_markdown` to i18n files          | WIP  | WIP  | WIP  | Agent support and i18n                     |
-| [#2603][]: Add Romanian View Markdown translation          | rel  | WIP  | WIP  | Internationalization                       |
-| [#2604][]: Create `az.yaml` from TOML                      | rel  | WIP  | WIP  | Internationalization                       |
-| [#2605][]: Add LLMS output and `llms.txt`                  | WIP  | WIP  | WIP  | Experimental agent support                 |
-| [#2606][]: Allow Markdown output for project docs          | WIP  | WIP  | WIP  | Experimental agent support                 |
+| [#2587][]: Finalize doc-rooted configuration explanation   | done | done | done | Doc-rooted sites                           |
+| [#2591][]: Add German alert-label translations             | rel  | done | done | Internationalization                       |
+| [#2597][]: Add Markdown output phase 1                     | done | done | done | Experimental agent support                 |
+| [#2599][]: Drop Docsy-defined `Markdown` output format     | done | done | done | Experimental agent support                 |
+| [#2600][]: Trim Markdown output titles and descriptions    | done | done | done | Experimental agent support                 |
+| [#2601][]: Add View Markdown page-meta link                | done | done | done | Experimental agent support                 |
+| [#2602][]: Add `post_view_markdown` to i18n files          | done | done | done | Agent support and i18n                     |
+| [#2603][]: Add Romanian View Markdown translation          | rel  | done | done | Internationalization                       |
+| [#2604][]: Create `az.yaml` from TOML                      | rel  | done | done | Internationalization                       |
+| [#2605][]: Add LLMS output and `llms.txt`                  | done | done | done | Experimental agent support                 |
+| [#2606][]: Allow Markdown output for project docs          | done | done | done | Experimental agent support                 |
 | [#2610][]: 0.15 release-prep omnibus                       | done | rel  | rel  | Blog, changelog, refcache, reports, links  |
+| [#2611][]: Agent support UG and release-prep refresh       | done | rel  | rel  | Resolves agent-support blog-link blocker   |
+| [#2616][]: Update 0.15 release blog, CL, and docs          | done | done | done | Final release-content refresh              |
 
 Raw commits in scope without PR numbers in their commit subjects:
 
-| Item                                                 | Docs | Blog | CL  | Notes                         |
-| ---------------------------------------------------- | ---- | ---- | --- | ----------------------------- |
-| `40bef3c7`: Record ancestry with release             | N/A  | N/A  | N/A | Covered by branch maintenance |
-| `21a1ff37`: Record ancestry with deploy/prod         | N/A  | N/A  | N/A | Covered by branch maintenance |
-| `5f0b2c86`: Use canonical URL to contributing page   | done | WIP  | rel | Covered by [#2579][]          |
-| `df519b49`: Resolve community and footer links paths | 0    | WIP  | WIP | Covered by [#2580][]          |
-| `e91cf749`: Add markdownlint rule and fix link       | done | WIP  | rel | Covered by [#2584][]          |
-| `ca5deb63`: Update NPM packages and Hugo to 0.157.0  | WIP  | WIP  | WIP | Covered by [#2585][]          |
-| `2ad607a8`: Update package.json                      | WIP  | WIP  | WIP | Covered by [#2585][]          |
-| `28d44d1f`: Use bash `cp` instead of NPM `cpy-cli`   | WIP  | WIP  | WIP | Covered by [#2585][]          |
+| Item                                                 | Docs | Blog | CL   | Notes                         |
+| ---------------------------------------------------- | ---- | ---- | ---- | ----------------------------- |
+| `40bef3c7`: Record ancestry with release             | N/A  | N/A  | N/A  | Covered by branch maintenance |
+| `21a1ff37`: Record ancestry with deploy/prod         | N/A  | N/A  | N/A  | Covered by branch maintenance |
+| `5f0b2c86`: Use canonical URL to contributing page   | done | done | rel  | Covered by [#2579][]          |
+| `df519b49`: Resolve community and footer links paths | rel  | done | done | Covered by [#2580][]          |
+| `e91cf749`: Add markdownlint rule and fix link       | done | done | rel  | Covered by [#2584][]          |
+| `ca5deb63`: Update NPM packages and Hugo to 0.157.0  | done | done | done | Covered by [#2585][]          |
+| `2ad607a8`: Update package.json                      | done | done | done | Covered by [#2585][]          |
+| `28d44d1f`: Use bash `cp` instead of NPM `cpy-cli`   | done | done | done | Covered by [#2585][]          |
 
 ## Audit details
 
@@ -109,43 +111,38 @@ Raw commits in scope without PR numbers in their commit subjects:
 
 - Evidence: [#2597][], [#2599][], [#2600][], [#2601][], [#2602][], [#2605][],
   [#2606][]; tracker [#2596][]; golden-test tracker [#726][].
-- Status: partial. The basic Markdown output and `llms.txt` implementation is
-  merged, but tracker [#2596][] intentionally remains open while additional 0.15
-  follow-up work is still undecided.
+- Status: resolved for 0.15 phase 1. The basic Markdown output, `llms.txt`,
+  "View Markdown" link, user-guide page, and scorecard documentation are merged.
+  Phase-1 tracker [#2596][] is closed; future work moved to [#2614][].
 - Downstream/client impact:
   - Adds opt-in theme support through Hugo output formats and templates.
   - Adds a visible "View Markdown" page-meta link when Markdown alternate output
     exists.
   - Includes new i18n key `post_view_markdown`.
 - Docs impact:
-  - Status: rel. Feature planning in `tasks/0.15/agent-friendly-support.plan.md`
-    on `main` at [343d6154][] (branch renames it to `agent-support.plan.md`).
+  - Status: done. Feature planning is in `tasks/0.15/agent-support.plan.md`.
   - Golden-test planning exists in `tasks/0.15/md-output-golden-tests.plan.md`.
   - `docsy.dev` is configured to enable Markdown and LLMS outputs.
   - Dedicated user-guide page `docsy.dev/content/en/docs/content/agent-support/`
-    exists on the current branch; **merge before release** so the blog link is
-    not dead on `main`.
+    exists on `main` via [#2611][].
 - Changelog impact:
-  - Status: WIP.
-  - Draft 0.15 changelog entry includes this under Experimental.
+  - Status: done.
+  - The 0.15 changelog entry includes this under Experimental.
 - Blog inclusion:
-  - Status: WIP.
-  - Include as a major experimental feature. Explain what is available now, what
-    is opt-in, and what remains experimental.
+  - Status: done.
+  - Included as a major experimental feature, with a link to the user guide and
+    [#2614][] follow-up tracker.
 - Release-post treatment: experimental.
 - Follow-up needed:
-  - Add user-guide or release-blog guidance for enabling Markdown output and
-    `llms.txt`.
-  - Note any measured AFDocs caveats without overpromising support.
+  - Use [#2614][] for post-0.15 improvements.
 
 ### Doc-rooted site support
 
 - Evidence: [#2563][], [#2564][], [#2565][], [#2567][], [#2568][], [#2579][],
   [#2580][], [#2586][], [#2587][]; tracker [#2504][]; closed issues [#2492][]
   and [#2499][].
-- Status: partial. [#2492][] and [#2499][] are closed through [#2563][], but the
-  overall [#2504][] tracker remains open. Current expectation is that [#2504][]
-  will close for 0.15, but confirm before finalizing release content.
+- Status: resolved for 0.15. [#2492][] and [#2499][] are closed through
+  [#2563][], and the overall [#2504][] tracker is closed.
 - Downstream/client impact:
   - Adds a concrete configuration pattern for documentation-first sites.
   - May affect users with custom docs-only/doc-rooted configurations.
@@ -161,18 +158,17 @@ Raw commits in scope without PR numbers in their commit subjects:
   - `docsy.dev/content/en/project/build/git-repo.md` documents the `doc-rooted`
     branch.
 - Changelog impact:
-  - Status: WIP.
-  - Draft 0.15 changelog entry includes doc-rooted sites and `card` shortcode
+  - Status: done.
+  - The 0.15 changelog entry includes doc-rooted sites and `card` shortcode
     rendering.
 - Blog inclusion:
-  - Status: WIP.
-  - Include as a major feature or improvement, with migration notes for projects
-    that previously used docs-only patterns.
-  - Mention the `card` shortcode rendering change as an internal behavior change
-    that may affect some client projects.
+  - Status: done.
+  - Included as a major improvement, with migration notes for projects that
+    previously used docs-only patterns.
+  - The `card` shortcode rendering change is called out as a breaking/action
+    review item.
 - Follow-up needed:
-  - Confirm which [#2504][] checklist items remain before calling doc-rooted
-    support complete.
+  - Use 0.16+ issues for any remaining doc-rooted refinements.
 
 ### Community and Footer Link Behavior
 
@@ -188,22 +184,22 @@ Raw commits in scope without PR numbers in their commit subjects:
     site-relative; use the default language code prefix to force a default
     language target.
 - Docs impact:
-  - Status: 0.
-  - No dedicated user-guide update found in the first pass.
+  - Status: rel.
+  - Release guidance links to the existing community-page configuration docs.
 - Changelog impact:
-  - Status: WIP.
-  - Draft 0.15 changelog entry includes this as a breaking change.
+  - Status: done.
+  - The 0.15 changelog entry includes this as a breaking change.
 - Blog inclusion:
-  - Status: WIP.
-  - Include in the breaking/action section as a potentially breaking change.
+  - Status: done.
+  - Included in the breaking/action section.
 - Guidance:
   - Review community and footer link path values on multilingual sites.
   - Paths are now interpreted as site-relative so they resolve correctly under
     custom permalinks.
   - To force a link to the default language, prefix the path with the default
     language code.
-- Follow-up needed: add this guidance to release notes and, if appropriate,
-  user-guide examples for multilingual path prefixes.
+- Follow-up needed: consider user-guide examples for multilingual path prefixes
+  after 0.15 if more detail is needed.
 
 ### Version and Variant Menus
 
@@ -265,8 +261,9 @@ Raw commits in scope without PR numbers in their commit subjects:
   - Draft 0.15 changelog entry briefly mentions deployment and branch-model
     docs.
 - Blog inclusion:
-  - Status: WIP.
-  - Include only if the 0.15 post has an "Other notable docs updates" section.
+  - Status: done for 0.15.
+  - Omitted from the refreshed 0.15 post except where relevant as supporting
+    links. The changelog carries the terse process-docs note.
 - Follow-up needed: none identified for release blockers.
 
 ### Dependencies and Tooling
@@ -278,19 +275,16 @@ Raw commits in scope without PR numbers in their commit subjects:
   - Updates Hugo to 0.157.0.
   - Drops `cpy-cli` in favor of a shell `cp` call.
 - Docs impact:
-  - Status: WIP.
-  - Supported-version references need review before final release.
+  - Status: done.
+  - Supported-version references were refreshed in [#2616][].
 - Changelog impact:
-  - Status: WIP.
-  - Draft 0.15 changelog entry mentions `hugo-extended` 0.157.0, but final
-    supported-version wording needs confirmation.
+  - Status: done.
+  - The 0.15 changelog entry mentions `hugo-extended` 0.157.0.
 - Blog inclusion:
-  - Status: WIP.
-  - Include in upgrade/runtime section if Hugo 0.157.0 becomes the official 0.15
-    Hugo requirement.
+  - Status: done.
+  - The upgrade section now lists Docsy 0.15.0, Hugo 0.157.0, and Node LTS 24.
 - Follow-up needed:
-  - Confirm final Hugo and Node support matrix before release.
-  - Check whether `cpy-cli` removal affects consumers or only repo tooling.
+  - Replace release-page placeholders when tagging.
 
 ### Internationalization
 
@@ -307,11 +301,11 @@ Raw commits in scope without PR numbers in their commit subjects:
   - Status: done for 0.15.
   - No release-blocking docs found.
 - Changelog impact:
-  - Status: WIP.
-  - Draft 0.15 changelog entry includes i18n highlights.
+  - Status: done.
+  - The 0.15 changelog entry includes i18n highlights.
 - Blog inclusion:
-  - Status: WIP.
-  - Include as "Internationalization" under other notable changes.
+  - Status: done.
+  - Included as "Internationalization" under other notable changes.
 - Follow-up needed: invite native-speaker review for generated or assisted
   translations if desired.
 
@@ -321,8 +315,8 @@ Raw commits in scope without PR numbers in their commit subjects:
   the 0.15 release report.
 - Omit 0.14.3-only fixes from 0.15 highlights. They are covered by the 0.14
   release resources, including the v0.14.3 changelog entry.
-- Check [#2504][] before finalizing 0.15. It is expected to close, but confirm
-  whether any remaining tasks need separate follow-up.
+- [#2504][] and [#2596][] are now closed for 0.15. Use [#2614][] and the 0.16
+  tracker for follow-up that should not block the tag.
 
 ## References
 
@@ -374,6 +368,9 @@ Raw commits in scope without PR numbers in their commit subjects:
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
 [#2610]: https://github.com/google/docsy/pull/2610
+[#2611]: https://github.com/google/docsy/pull/2611
+[#2614]: https://github.com/google/docsy/issues/2614
+[#2616]: https://github.com/google/docsy/pull/2616
 [#726]: https://github.com/google/docsy/issues/726
-[343d6154]: https://github.com/google/docsy/commit/343d6154
+[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main

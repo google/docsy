@@ -167,7 +167,7 @@ full list of changes, see the [0.15.0][] release page.
 [0.15.0-blog-community-footer]: /blog/2026/0.15.0/#community-footer-links
 [0.15.0-blog-doc-rooted]: /blog/2026/0.15.0/#doc-rooted-sites
 [0.15.0-blog-internationalization]: /blog/2026/0.15.0/#internationalization
-[0.15.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.0
+[0.15.0]: https://github.com/google/docsy/releases/v0.15.0
 
 ## v0.14.3 {#v0.14.3}
 

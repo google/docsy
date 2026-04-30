@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue mapping
 date: 2026-04-25
-lastmod: 2026-04-26
+lastmod: 2026-04-30
 range: v0.14.3..main
-last-main-commit: 343d6154
+last-main-commit: 7a0b370f
 cSpell:ignore: opentelemetry
 ---
 
 ## Scope
 
-Mapping covers first-parent commits in [v0.14.3...main][] through [343d6154][].
+Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
 
 ## Mapping
 
@@ -53,12 +53,16 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [343d6154][].
 | [#2605][]: Add LLMS output and `llms.txt` support                      | [#2596][] (PR body)                                | Experimental agent support                           |
 | [#2606][]: Project docs: allow default outputs, including Markdown     | [#2596][] (PR body)                                | Raises measured AFDocs score                         |
 | [#2610][]: 0.15 release notes, audit, and wrapup content               | [#2501][] (Release prep scope)                     | Blog draft, changelog, refcache, link sweep, reports |
+| [#2611][]: Add Agent support UG page and refresh 0.15 release prep     | [#2596][], [#2501][] (PR body)                     | Completes agent-support docs for phase 1             |
+| [#2616][]: Update 0.15 release blog, CL, and docs                      | [#2501][], [#2614][] (PR body)                     | Final release-content pass before tag                |
 
 ## Linked Issues
 
 - [#2501][]: Release 0.15.0 preparation, open.
-- [#2504][]: Reintroduce support for doc-rooted sites, open.
-- [#2596][]: Add support for agent-friendly content generation, open.
+- [#2504][]: Reintroduce support for doc-rooted sites, closed.
+- [#2596][]: Add support for agent-friendly content generation, phase 1, closed.
+- [#2614][]: Improve support for AI-agent doc consumption, open as follow-up
+  tracker.
 - [#726][]: Add golden tests, open.
 - [#2492][]: Top-level section landing pages are always rooted in a docs-only
   site, closed.
@@ -115,6 +119,9 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [343d6154][].
 [#2605]: https://github.com/google/docsy/pull/2605
 [#2606]: https://github.com/google/docsy/pull/2606
 [#2610]: https://github.com/google/docsy/pull/2610
+[#2611]: https://github.com/google/docsy/pull/2611
+[#2614]: https://github.com/google/docsy/issues/2614
+[#2616]: https://github.com/google/docsy/pull/2616
 [#726]: https://github.com/google/docsy/issues/726
-[343d6154]: https://github.com/google/docsy/commit/343d6154
+[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
