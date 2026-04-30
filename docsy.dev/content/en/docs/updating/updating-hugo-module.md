@@ -23,9 +23,9 @@ done!
 
 > [!TIP]
 >
-> If you want to set your module to a certain version inside the Docsy theme repo,
-> simply specify the name of the tag representing this version when updating your
-> theme, for example:
+> If you want to set your module to a certain version inside the Docsy theme
+> repo, simply specify the name of the tag representing this version when
+> updating your theme, for example:
 >
 > ```bash
 > hugo mod get -u github.com/google/docsy@v{{% param "version" %}}
