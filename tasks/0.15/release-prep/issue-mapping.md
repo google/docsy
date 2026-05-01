@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue mapping
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 7a0b370f
+last-main-commit: 0a4cdfa8
 cSpell:ignore: opentelemetry
 ---
 
 ## Scope
 
-Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
+Mapping covers first-parent commits in [v0.14.3...main][] through [0a4cdfa8][].
 
 ## Mapping
 
@@ -55,6 +55,13 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
 | [#2610][]: 0.15 release notes, audit, and wrapup content               | [#2501][] (Release prep scope)                     | Blog draft, changelog, refcache, link sweep, reports |
 | [#2611][]: Add Agent support UG page and refresh 0.15 release prep     | [#2596][], [#2501][] (PR body)                     | Completes agent-support docs for phase 1             |
 | [#2616][]: Update 0.15 release blog, CL, and docs                      | [#2501][], [#2614][] (PR body)                     | Final release-content pass before tag                |
+| [#2618][]: Prepare 0.15.0 release tooling and metadata                 | [#2501][] (Release prep scope)                     | Release tooling and site metadata                    |
+| [#2619][]: Add release-prep audit guidance                             | [#2501][] (Release prep scope)                     | Audit process and missed-change coverage             |
+| [#2620][]: Replace `cd:docsy.dev` scripts with `npm run -C`            | None found (N/A)                                   | Tooling ergonomics                                   |
+| [#2621][]: Prettierignore cleanup and report refresh                   | [#2501][] (Release prep scope)                     | Formatting and release-prep refresh                  |
+| [#2624][]: Adjust release docs and add upgrade manifest                | [#2501][] (Release prep scope)                     | Upgrade manifest and release guidance                |
+| [#2625][]: Replace `version` shortcode with `dev-version`              | None found (N/A)                                   | Project-site version display                         |
+| [#2626][]: Copyedit blog and changelog                                 | [#2501][] (Release prep scope)                     | Final release-copy polish                            |
 
 ## Linked Issues
 
@@ -122,6 +129,13 @@ Mapping covers first-parent commits in [v0.14.3...main][] through [7a0b370f][].
 [#2611]: https://github.com/google/docsy/pull/2611
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2616]: https://github.com/google/docsy/pull/2616
+[#2618]: https://github.com/google/docsy/pull/2618
+[#2619]: https://github.com/google/docsy/pull/2619
+[#2620]: https://github.com/google/docsy/pull/2620
+[#2621]: https://github.com/google/docsy/pull/2621
+[#2624]: https://github.com/google/docsy/pull/2624
+[#2625]: https://github.com/google/docsy/pull/2625
+[#2626]: https://github.com/google/docsy/pull/2626
 [#726]: https://github.com/google/docsy/issues/726
-[7a0b370f]: https://github.com/google/docsy/commit/7a0b370f
+[0a4cdfa8]: https://github.com/google/docsy/commit/0a4cdfa8
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
