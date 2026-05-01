@@ -58,7 +58,7 @@
 
 ## Release summary
 
-- [{{ $blogPage.Title | default "Blog" }}][blog]
+- [{{ with $blogPage }}{{ .Title }}{{ else }}Blog{{ end }}][blog]
 - [Changelog v{{ $changelogVersion }}][changelog] entry
 
 {{ if and (not $blogPage) (not $isDevVersion) -}}
@@ -67,5 +67,5 @@
        $version (delimit (slice $version $versionForBlog) ", ") (delimit $years ", ") -}}
 -->
 {{ end }}
-[blog]: <{{ $productionURL }}{{ $blogPage.RelPermalink | default "/blog/" }}>
+[blog]: <{{ $productionURL }}{{ with $blogPage }}{{ .RelPermalink }}{{ else }}/blog/{{ end }}>
 [changelog]: <{{ $productionURL }}{{ $changelogURL }}>
