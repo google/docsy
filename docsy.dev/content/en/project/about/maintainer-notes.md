@@ -382,6 +382,20 @@ with the following modifications:
   https://github.com/google/docsy-example/releases/new
 [example.docsy.dev]: https://example.docsy.dev
 
+## Doc-rooted release
+
+Update the [doc-rooted][] branch from [deploy/prod][]:
+
+```sh
+git checkout doc-rooted
+git merge --ff-only deploy/prod
+npm run doc-rooted -- build
+git push-all-remotes doc-rooted
+```
+
+If the fast-forward merge fails, stop and reconcile the branch history. Once
+pushed, wait for the Netlify deploy and check the doc-rooted preview.
+
 ## Post Docsy-release followup
 
 Assuming that both the Docsy and Docsy-example releases {{% param version %}}
@@ -433,6 +447,7 @@ before any further changes are merged into the `main` branch:
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
+[doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
