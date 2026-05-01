@@ -390,6 +390,10 @@ Update the [doc-rooted][] branch from [deploy/prod][]:
 git checkout doc-rooted
 git merge --ff-only deploy/prod
 npm run doc-rooted -- build
+# Optionally take a look at the preview
+npm run doc-rooted -- serve
+curl http://localhost:1313/index.md
+# Push the changes
 git push-all-remotes doc-rooted
 ```
 
