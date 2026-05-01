@@ -169,9 +169,6 @@ For maintainers:
   docs ([#2556][], [#2572][]).
 - Updated NPM packages and `docsy.dev` tooling, including `hugo-extended`
   0.157.0 ([#2585][]).
-- Added `siteGetPage` shortcode ([#2586][]) — **internal** to `docsy.dev`; not
-  part of Docsy's [public customization surface](#public) and may change or be
-  removed without notice.
 
 [#2133]: https://github.com/google/docsy/issues/2133
 [#2556]: https://github.com/google/docsy/pull/2556
