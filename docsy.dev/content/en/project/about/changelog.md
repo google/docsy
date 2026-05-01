@@ -109,6 +109,14 @@ Any other compatibility (including Windows support) is on a best effort basis.
 [package.json]: https://github.com/google/docsy/blob/main/package.json
 [hugo-extended]: https://github.com/jakejarvis/hugo-extended
 
+### Bug fixes
+
+We define a bug as undesirable behavior documented through an issue. Classify
+bug-fix commits or pull requests (PRs) under **Fixed** or **Other changes**,
+unless they extend beyond a fix and affect user-facing functionality. In that
+case, classify them as a [Breaking change](#breaking-change) or **New**
+functionality, depending on scope. Prefer narrow, focused PRs where possible.
+
 <!-- TODO: look into https://www.conventionalcommits.org/en/v1.0.0/#summary -->
 
 </details>
