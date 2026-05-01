@@ -4,6 +4,8 @@
   Usage: {{% release-summary %}}
 
   The version is read from .Params.version in the page's front matter.
+  The changelog label and #v anchor follow the blog post version when a matching
+  release report exists (e.g. 0.15.1-dev → blog 2026/0.15.0 → changelog #v0.15.0).
 */ -}}
 
 {{ $version := $.Page.Param "version" | string -}}
@@ -23,18 +25,24 @@
 {{/* Get the blog section and search for a post: exact version first, then same release with patch 0 */ -}}
 {{ $blogSection := $.Site.GetPage "/blog" -}}
 {{ $blogPage := false -}}
+{{/* Changelog anchor + label align with the resolved release-report version when a blog post exists */ -}}
+{{ $changelogVersion := $version -}}
 {{ $currentYear := now.Year -}}
 {{ $years := slice $currentYear (add $currentYear -1) -}}
 {{ range $ver := (slice $version $versionForBlog) -}}
   {{ if $blogPage }}{{ break }}{{ end -}}
   {{ range $years -}}
     {{ $postPath := printf "%d/%s" . $ver -}}
-    {{ $blogPage = $blogSection.GetPage $postPath -}}
-    {{ if $blogPage }}{{ break }}{{ end -}}
+    {{ $candidate := $blogSection.GetPage $postPath -}}
+    {{ if $candidate -}}
+      {{ $blogPage = $candidate -}}
+      {{ $changelogVersion = $ver -}}
+      {{ break -}}
+    {{ end -}}
   {{ end -}}
 {{ end -}}
 
-{{ $changelogUrlFragment := add "#" $version -}}
+{{ $changelogUrlFragment := add "#v" $changelogVersion -}}
 {{ $errorOnMissingBlogPost := and (not $blogPage) (not $isDevVersion) -}}
 {{ if $errorOnMissingBlogPost -}}
   {{ if false -}}
@@ -50,8 +58,8 @@
 
 ## Release summary
 
-- [{{ $blogPage.Title | default "Blog" }}][blog]
-- [Changelog v{{ $version }}][changelog] entry
+- [{{ with $blogPage }}{{ .Title }}{{ else }}Blog{{ end }}][blog]
+- [Changelog v{{ $changelogVersion }}][changelog] entry
 
 {{ if and (not $blogPage) (not $isDevVersion) -}}
 <!--
@@ -59,5 +67,5 @@
        $version (delimit (slice $version $versionForBlog) ", ") (delimit $years ", ") -}}
 -->
 {{ end }}
-[blog]: <{{ $productionURL }}{{ $blogPage.RelPermalink | default "/blog/" }}>
+[blog]: <{{ $productionURL }}{{ with $blogPage }}{{ .RelPermalink }}{{ else }}/blog/{{ end }}>
 [changelog]: <{{ $productionURL }}{{ $changelogURL }}>

@@ -1731,6 +1731,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-15T04:59:15.543652-05:00"
   },
+  "https://github.com/google/docsy/tree/doc-rooted": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-01T11:31:42.793435-04:00"
+  },
   "https://github.com/google/docsy/tree/main/AGENTS.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.354887-05:00"

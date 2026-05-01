@@ -200,7 +200,7 @@ If not adjust accordingly.
       if you set it in the previous step.
 
       ```sh
-      REL=v${VERSION:-{{% param tdVersion.latest %}}}
+      REL=${VERSION:-{{% param tdVersion.latest %}}}
       echo "REL=$REL"
       ```
 
@@ -373,14 +373,32 @@ with the following modifications:
 
 2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
     create a release and publish it with one difference:
-    - To create a new release draft, visit [Docsy-example release draft][].
     - Once the deploy/prod branch has been updated, wait for the production
       deploy to complete and check that [example.docsy.dev][] has been updated
       to the new release.
+    - To create a new release draft, visit [Docsy-example release draft][].
 
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new
 [example.docsy.dev]: https://example.docsy.dev
+
+## Doc-rooted release
+
+Update the [doc-rooted][] branch from [deploy/prod][]:
+
+```sh
+git checkout doc-rooted
+git merge --ff-only deploy/prod
+npm run doc-rooted -- build
+# Optionally take a look at the preview
+npm run doc-rooted -- serve
+curl http://localhost:1313/index.md
+# Push the changes
+git push-all-remotes doc-rooted
+```
+
+If the fast-forward merge fails, stop and reconcile the branch history. Once
+pushed, wait for the Netlify deploy and check the doc-rooted preview.
 
 ## Post Docsy-release followup
 
@@ -411,7 +429,7 @@ before any further changes are merged into the `main` branch:
 3. **Submit a PR with your changes**, using a title like:
 
    ```text
-   Set version to {{% param tdVersion.latest %}}
+   Set version to {{% param version %}}
    ```
 
 4. **Get PR approved and merged**.
@@ -433,6 +451,7 @@ before any further changes are merged into the `main` branch:
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
+[doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
