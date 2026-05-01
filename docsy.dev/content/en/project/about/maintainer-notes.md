@@ -411,7 +411,7 @@ before any further changes are merged into the `main` branch:
 3. **Submit a PR with your changes**, using a title like:
 
    ```text
-   Set version to {{% param tdVersion.latest %}}
+   Set version to {{% param version %}}
    ```
 
 4. **Get PR approved and merged**.

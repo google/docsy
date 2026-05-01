@@ -1,8 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'fs';
+import os from 'os';
 import path from 'path';
 
 import {
+  resolveDefaultConfigPath,
   parseArgsAndResolveBuildId,
   main,
   adjustVersionForBuildId,
@@ -15,6 +18,55 @@ const nullLogger = {
   log() {},
   warn() {},
 };
+
+test('resolveDefaultConfigPath prefers docsy.dev params.yaml when present', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
+  try {
+    const paramsFile = path.join(dir, 'docsy.dev/config/_default/params.yaml');
+    fs.mkdirSync(path.dirname(paramsFile), { recursive: true });
+    fs.writeFileSync(paramsFile, 'tdVersion:\n');
+    fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'params:\n');
+    assert.equal(resolveDefaultConfigPath(dir), path.resolve(paramsFile));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('resolveDefaultConfigPath uses hugo.yaml when params.yaml is absent', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'baseURL: /\n');
+    assert.equal(resolveDefaultConfigPath(dir), path.resolve(dir, 'hugo.yaml'));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('resolveDefaultConfigPath falls back to params path when neither file exists', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
+  try {
+    assert.equal(
+      resolveDefaultConfigPath(dir),
+      path.resolve(dir, 'docsy.dev/config/_default/params.yaml'),
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('parseArgsAndResolveBuildId default config follows hugo.yaml when params.yaml missing', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
+  try {
+    fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'params:\n');
+    const result = parseArgsAndResolveBuildId([], {
+      logger: nullLogger,
+      cwd: dir,
+    });
+    assert.deepEqual(result.configPaths, [path.resolve(dir, 'hugo.yaml')]);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
 
 test('parseArgsAndResolveBuildId enables silent flag via -s', () => {
   const result = parseArgsAndResolveBuildId(['-s', '--id', 'custom-build'], {

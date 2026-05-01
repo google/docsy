@@ -3,7 +3,8 @@
 // cSpell:ignore docsy
 
 /**
- * Utilities for reading and writing version fields in docsy.dev/hugo.yaml.
+ * Utilities for reading and writing version fields in Docsy site YAML / hugo.yaml:
+ * tdVersion (latest, dev, buildId) and optional params.version scalars (docsy-example).
  */
 
 import assert from 'node:assert';
@@ -63,6 +64,74 @@ export function parseParamsVersion(yamlConfig) {
   return result;
 }
 
+/**
+ * Dev string suitable for docsy-example-style `params.version` scalars (no `v` prefix).
+ *
+ * @param {string} [dev]
+ * @returns {string|undefined}
+ */
+export function devAsParamsScalar(dev) {
+  if (dev === undefined || dev === null || dev === '') return undefined;
+  const s = String(dev).trim();
+  if (!s) return undefined;
+  return s.startsWith('v') ? s.slice(1) : s;
+}
+
+/**
+ * @param {string} line
+ * @param {{ latest?: string, dev?: string, buildId?: string }} data
+ * @returns {string|null} updated line, original line if td-handled but unchanged, or null if not td-managed
+ */
+function applyTdVersionLine(line, data) {
+  if (!line.match(versionIdsLineRegex)) return null;
+  const match = line.match(versionKeysLineRegex);
+  if (!match) return line;
+  const [, indentation, key, rawValueToken] = match;
+  if (!VERSION_KEYS.includes(key)) return line;
+  const newValue = data[key];
+  if (newValue === undefined) return line;
+
+  const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
+  const anchor = anchorMatch ? anchorMatch[1] : '';
+  const commentMatch = rawValueToken.match(/(\s+#.*)$/);
+  const comment = commentMatch ? commentMatch[1] : '';
+  const value =
+    (key === 'latest' || key === 'dev') && !newValue.startsWith('v')
+      ? `v${newValue}`
+      : yamlScalar(newValue);
+  if (anchor) assert.strictEqual(anchor, `&${KEY_AND_ANCHOR[key]} `);
+  return `${indentation}${key}: ${anchor}${value}${comment}`;
+}
+
+/**
+ * `params.version` scalar (e.g. docsy-example). Skips aliases and `- version:` entries.
+ *
+ * @param {string} line
+ * @param {string} [dev]
+ * @returns {string|null} replacement line, or null if not applicable
+ */
+function applyParamsScalarVersionLine(line, dev) {
+  const scalar = devAsParamsScalar(dev);
+  if (scalar === undefined) return null;
+
+  const m = line.match(/^(\s*)version:\s*(.*)$/);
+  if (!m) return null;
+
+  const rest = m[2];
+  const hashIdx = rest.indexOf('#');
+  const beforeHash = hashIdx === -1 ? rest : rest.slice(0, hashIdx);
+  const commentSuffix = hashIdx === -1 ? '' : rest.slice(hashIdx);
+  const valueOnly = beforeHash.trim();
+  if (!valueOnly) return null;
+  if (valueOnly.startsWith('*') || valueOnly.startsWith('&')) return null;
+
+  const unquoted = valueOnly.replace(/^['"]|['"]$/g, '');
+  if (!/^[vV]?\d+\.\d+\.\d/.test(unquoted)) return null;
+
+  const next = `${m[1]}version: ${scalar}${commentSuffix}`;
+  return next === line ? null : next;
+}
+
 export function readHugoYaml(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   return parseParamsVersion(content);
@@ -96,24 +165,13 @@ export function updateYamlWithVersions(yamlConfig, { latest, dev, buildId }) {
   return yamlConfig
     .split('\n')
     .map((line) => {
-      if (!line.match(versionIdsLineRegex)) return line;
-      const match = line.match(versionKeysLineRegex);
-      if (!match) return line;
-      const [_, indentation, key, rawValueToken] = match;
-      if (!VERSION_KEYS.includes(key)) return line;
-      const newValue = data[key];
-      if (newValue === undefined) return line;
+      const tdLine = applyTdVersionLine(line, data);
+      if (tdLine !== null) return tdLine;
 
-      const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
-      const anchor = anchorMatch ? anchorMatch[1] : '';
-      const commentMatch = rawValueToken.match(/(\s+#.*)$/);
-      const comment = commentMatch ? commentMatch[1] : '';
-      const value =
-        (key === 'latest' || key === 'dev') && !newValue.startsWith('v')
-          ? `v${newValue}`
-          : yamlScalar(newValue);
-      if (anchor) assert.strictEqual(anchor, `&${KEY_AND_ANCHOR[key]} `);
-      return `${indentation}${key}: ${anchor}${value}${comment}`;
+      const pvLine = applyParamsScalarVersionLine(line, data.dev);
+      if (pvLine !== null) return pvLine;
+
+      return line;
     })
     .join('\n');
 }

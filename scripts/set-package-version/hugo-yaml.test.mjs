@@ -130,6 +130,40 @@ test('updateYamlWithVersions updates version info in content with menu config', 
   assert.equal(updated, expectedVersWithMenuConfig);
 });
 
+test('updateYamlWithVersions sets params.version scalar to dev (docsy-example)', () => {
+  const fixture = `baseURL: /
+params:
+  description: Example
+  version: 0.15.0
+module:
+  hugoVersion:
+`;
+
+  const updated = updateYamlWithVersions(fixture, {
+    latest: 'v0.15.1',
+    dev: 'v0.15.2-dev',
+    buildId: '',
+  });
+
+  assert.ok(updated.includes('  version: 0.15.2-dev'));
+  assert.ok(!updated.includes('  version: 0.15.0'));
+});
+
+test('updateYamlWithVersions leaves version alias lines unchanged', () => {
+  const before = `tdVersion:
+  dev: &tdDevVers v0.14.4-dev
+version: *tdDevVers
+`;
+
+  const updated = updateYamlWithVersions(before, {
+    latest: 'v0.14.4',
+    dev: 'v0.14.5-dev',
+    buildId: '',
+  });
+
+  assert.ok(updated.includes('version: *tdDevVers'));
+});
+
 const fixture_versionQuoted = `
   latest: 'v0.14.4' # tdLatestVers
   buildId: '1' # tdBuildId

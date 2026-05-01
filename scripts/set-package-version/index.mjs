@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Updates the version in package.json and optionally docsy.dev/hugo.yaml.
+ * Updates the version in package.json and optional site YAML (Docsy
+ * `docsy.dev/config/_default/params.yaml`, or `./hugo.yaml` when that path is absent).
  * Can set the entire version, set build metadata, or strip to release version.
  *
  * For usage, see the usage() function below.
@@ -19,8 +20,26 @@ const __dirname = path.dirname(__filename);
 const cwd = process.cwd();
 
 const defaultParamsYamlPath = 'docsy.dev/config/_default/params.yaml';
-const defaultConfigPath = path.resolve(defaultParamsYamlPath);
+const defaultHugoYamlPath = 'hugo.yaml';
 const packageJsonPath = 'package.json';
+
+/**
+ * Default config file for version stamps: Docsy site params, else Hugo root config.
+ *
+ * @param {string} [cwd=process.cwd()]
+ * @returns {string} Absolute path (may not exist if neither file is present).
+ */
+export function resolveDefaultConfigPath(cwd = process.cwd()) {
+  const paramsPath = path.resolve(cwd, defaultParamsYamlPath);
+  if (fs.existsSync(paramsPath)) {
+    return paramsPath;
+  }
+  const hugoYamlPath = path.resolve(cwd, defaultHugoYamlPath);
+  if (fs.existsSync(hugoYamlPath)) {
+    return hugoYamlPath;
+  }
+  return paramsPath;
+}
 
 export function getPackagePath() {
   return path.join(cwd, packageJsonPath);
@@ -38,13 +57,15 @@ Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUI
 
   FILE                 Config file(s) to read/write version info; paths are
                        relative to the current working directory or absolute.
-                       If none given, default is ${defaultParamsYamlPath}.
+                       If none given, default is ${defaultParamsYamlPath} when that
+                       file exists; otherwise ./${defaultHugoYamlPath} at the project
+                       root (both resolved relative to cwd).
 
   The VERS specifier is a semver string of the form X.Y.Z-pre-rel+BUILD-ID.
   Updates the version in:
 
   - ${packageJsonPath}
-  - Each listed config file (or ${defaultParamsYamlPath} if no FILEs given)
+  - Each listed config file (or the default path above if no FILEs given)
 
   - In package.json, the version is set to the full version.
   - In each config file: latest, dev, and buildId fields are set.
@@ -163,10 +184,13 @@ export function main(
  * Parses command line arguments and resolves the build ID.
  *
  * @param {string[]} args - Command line arguments
- * @param {{ logger?: Console }} [options] - Logger to use
+ * @param {{ logger?: Console, cwd?: string }} [options]
  * @returns {{ version: string, buildId: string, configPaths: string[], silent: boolean, versionSetExplicitly: boolean }}
  */
-export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
+export function parseArgsAndResolveBuildId(
+  args,
+  { logger = console, cwd = process.cwd() } = {},
+) {
   function usage(exitCode = 0) {
     logger?.log?.(usageText);
     process.exit(exitCode);
@@ -174,7 +198,7 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
 
   let version;
   let buildId;
-  let configPath = defaultConfigPath;
+  let configPath = resolveDefaultConfigPath(cwd);
   const configPaths = [];
   let silent = false;
   const warn = logger?.warn || console.warn;
