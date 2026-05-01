@@ -134,8 +134,9 @@ test('updateYamlWithVersions sets params.version scalar to dev (docsy-example)',
   const fixture = `baseURL: /
 params:
   description: Example
-  version: 0.15.0
+  version: 0.15.0 # unreleased docs version
 module:
+  version: 1.2.3
   hugoVersion:
 `;
 
@@ -145,8 +146,28 @@ module:
     buildId: '',
   });
 
-  assert.ok(updated.includes('  version: 0.15.2-dev'));
+  assert.ok(
+    updated.includes('  version: 0.15.2-dev # unreleased docs version'),
+  );
   assert.ok(!updated.includes('  version: 0.15.0'));
+  assert.ok(updated.includes('  version: 1.2.3'));
+});
+
+test('updateYamlWithVersions leaves non-params version scalars unchanged', () => {
+  const fixture = `version: 0.15.0
+module:
+  version: 0.15.0
+params:
+  description: Example
+`;
+
+  const updated = updateYamlWithVersions(fixture, {
+    latest: 'v0.15.1',
+    dev: 'v0.15.2-dev',
+    buildId: '',
+  });
+
+  assert.equal(updated, fixture);
 });
 
 test('updateYamlWithVersions leaves version alias lines unchanged', () => {

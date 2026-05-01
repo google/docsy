@@ -19,53 +19,70 @@ const nullLogger = {
   warn() {},
 };
 
-test('resolveDefaultConfigPath prefers docsy.dev params.yaml when present', () => {
+function withTempDir(run) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
   try {
+    return run(dir);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+function runMainWithMemory(args, { pkg, hugoYaml, logger = nullLogger }) {
+  let writtenPkg;
+  let writtenHugoYaml;
+  const writtenPaths = [];
+  const newVersion = main(args, {
+    logger,
+    readPackageJson: () => pkg,
+    writePackageJson: (updatedPkg) => {
+      writtenPkg = { ...updatedPkg };
+    },
+    readHugoYaml: () => ({ ...hugoYaml }),
+    writeHugoYaml: (data, filePath) => {
+      writtenPaths.push(filePath);
+      writtenHugoYaml = { ...data };
+    },
+  });
+
+  return { newVersion, writtenPkg, writtenHugoYaml, writtenPaths };
+}
+
+test('resolveDefaultConfigPath prefers docsy.dev params.yaml when present', () => {
+  withTempDir((dir) => {
     const paramsFile = path.join(dir, 'docsy.dev/config/_default/params.yaml');
     fs.mkdirSync(path.dirname(paramsFile), { recursive: true });
     fs.writeFileSync(paramsFile, 'tdVersion:\n');
     fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'params:\n');
     assert.equal(resolveDefaultConfigPath(dir), path.resolve(paramsFile));
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+  });
 });
 
 test('resolveDefaultConfigPath uses hugo.yaml when params.yaml is absent', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
-  try {
+  withTempDir((dir) => {
     fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'baseURL: /\n');
     assert.equal(resolveDefaultConfigPath(dir), path.resolve(dir, 'hugo.yaml'));
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+  });
 });
 
 test('resolveDefaultConfigPath falls back to params path when neither file exists', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
-  try {
+  withTempDir((dir) => {
     assert.equal(
       resolveDefaultConfigPath(dir),
       path.resolve(dir, 'docsy.dev/config/_default/params.yaml'),
     );
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+  });
 });
 
 test('parseArgsAndResolveBuildId default config follows hugo.yaml when params.yaml missing', () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'docsy-spv-'));
-  try {
+  withTempDir((dir) => {
     fs.writeFileSync(path.join(dir, 'hugo.yaml'), 'params:\n');
     const result = parseArgsAndResolveBuildId([], {
       logger: nullLogger,
       cwd: dir,
     });
     assert.deepEqual(result.configPaths, [path.resolve(dir, 'hugo.yaml')]);
-  } finally {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+  });
 });
 
 test('parseArgsAndResolveBuildId enables silent flag via -s', () => {
@@ -171,19 +188,9 @@ test('main default strips pre-release and build metadata in both targets', () =>
     dev: 'v1.2.4-dev',
     buildId: 'some-build',
   };
-  let writtenPkg;
-  let writtenHugoYaml;
-
-  const newVersion = main([], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
+  const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory([], {
+    pkg,
+    hugoYaml,
   });
 
   assert.equal(pkg.version, '1.2.3');
@@ -201,20 +208,10 @@ test('main --id sets build metadata and preserves pre-release', () => {
     dev: 'v1.2.4-dev',
     buildId: 'some-build',
   };
-  let writtenPkg;
-  let writtenHugoYaml;
-
-  const newVersion = main(['--id', 'custom-build'], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
+  const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
+    ['--id', 'custom-build'],
+    { pkg, hugoYaml },
+  );
 
   assert.equal(pkg.version, '1.2.3-dev+custom-build');
   assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
@@ -231,20 +228,10 @@ test('main --id "" generates timestamp build metadata', () => {
     dev: 'v1.2.4-dev',
     buildId: 'some-build',
   };
-  let writtenPkg;
-  let writtenHugoYaml;
-
-  const newVersion = main(['--id', ''], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
+  const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
+    ['--id', ''],
+    { pkg, hugoYaml },
+  );
 
   assert.match(newVersion, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.match(writtenPkg.version, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
@@ -260,20 +247,10 @@ test('main sets version info from full version string with --version', () => {
     dev: 'v1.0.1-dev',
     buildId: 'some-build',
   };
-  let writtenPkg;
-  let writtenHugoYaml;
-
-  const newVersion = main(['--version', '1.0.1-dev+build-123'], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
+  const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
+    ['--version', '1.0.1-dev+build-123'],
+    { pkg, hugoYaml },
+  );
 
   assert.equal(pkg.version, '1.0.1-dev+build-123');
   assert.deepEqual(writtenPkg, { version: '1.0.1-dev+build-123' });
@@ -290,20 +267,10 @@ test('main sets version info from --version w/o pre-release or build ID', () => 
     dev: 'v1.0.1-dev',
     buildId: 'some-build',
   };
-  let writtenPkg;
-  let writtenHugoYaml;
-
-  const newVersion = main(['--version', '3.2.1'], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: (updatedPkg) => {
-      writtenPkg = { ...updatedPkg };
-    },
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (updatedYaml) => {
-      writtenHugoYaml = { ...updatedYaml };
-    },
-  });
+  const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
+    ['--version', '3.2.1'],
+    { pkg, hugoYaml },
+  );
 
   assert.equal(pkg.version, '3.2.1');
   assert.deepEqual(writtenPkg, { version: '3.2.1' });
@@ -347,26 +314,18 @@ test('set version and build ID from command line', { skip: true }, () => {
 test('main with single file argument processes that file', () => {
   const pkg = { version: '1.2.3' };
   const hugoYaml = { latest: 'v1.2.2', dev: 'v1.2.3-dev', buildId: '1' };
-  const writtenPaths = [];
-  let writtenData;
   const fileArg = 'config/production/params.yaml';
 
-  main([fileArg], {
-    logger: nullLogger,
-    readPackageJson: () => pkg,
-    writePackageJson: () => {},
-    readHugoYaml: () => ({ ...hugoYaml }),
-    writeHugoYaml: (data, filePath) => {
-      writtenPaths.push(filePath);
-      writtenData = data;
-    },
+  const { writtenPaths, writtenHugoYaml } = runMainWithMemory([fileArg], {
+    pkg,
+    hugoYaml,
   });
 
   assert.equal(writtenPaths.length, 1);
   assert.equal(writtenPaths[0], path.resolve(fileArg));
-  assert.equal(writtenData.latest, 'v1.2.3');
-  assert.equal(writtenData.dev, 'v1.2.4-dev');
-  assert.equal(writtenData.buildId, '');
+  assert.equal(writtenHugoYaml.latest, 'v1.2.3');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.buildId, '');
 });
 
 test('main logs when package/hugo versions already match', () => {
