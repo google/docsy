@@ -80,8 +80,11 @@ truth for what the changelog and release blog must cover.
 ## Publishing a release
 
 These notes are WIP for creating a **release** from a local copy of the repo.
-These instructions assume the release is {{% param version %}}, if not adjust
-accordingly.
+These instructions assume the release is:
+
+- **{{% dev-version final %}}**
+
+If not adjust accordingly.
 
 > [!IMPORTANT]
 >
@@ -89,31 +92,44 @@ accordingly.
 > use it to drive the changelog and release-blog updates in the next two steps.
 
 1.  **Change directory** to your local Docsy repo.
+    - Expecting final adjustments as you prepare for the release? Create a
+      branch to work from. For example:
 
-2.  **Create or update a [changelog][] entry** for {{% param version %}}.
+      ```sh
+      git checkout -b release-{{% dev-version final %}}-prep
+      # Or you have a local create-branch alias:
+      gcb release-{{% dev-version final %}}-prep
+      ```
+
+    - Serve the site and continue working through these steps from the served
+      version of these notes.
+
+2.  **Create or update a [changelog][] entry** for {{% dev-version final %}}.
     - This step is driven by the [release-prep audit](#release-prep-audit).
     - The section should provide a brief summary of breaking changes using the
       section template at the end of the file.
     - Ensure to remove the UNRELEASED note, if still present.
     - You'll create a new section for the next release in a later step.
 
-3.  **Update the release report blog post** for {{% param version %}}, if any.
+3.  **Update the release report blog post** for {{% dev-version final %}}, if
+    any.
     - Remove draft status.
     - Set `date` (or `lastmod` if already published) to today's date.
 
 4.  Run `npm run fix`.
 
-5.  **Update Docsy version** to {{% param version %}} using the following from a
-    (bash or zsh) terminal.
+5.  **Update Docsy version** to {{% dev-version final %}} using the following
+    from a (bash or zsh) terminal.
     - First set the `VERSION` variable; we use it throughout the steps below.
 
       ```sh
-      VERSION={{% param version %}}
+      VERSION={{% dev-version final %}}
       ```
 
     - Then run the `set:version` script.
 
-      Docsy is probably already at `{{% param version %}}-dev`, so you can run:
+      Docsy is probably already at `{{% dev-version final %}}-dev`, so you can
+      run:
 
       ```sh
       npm run set:version
