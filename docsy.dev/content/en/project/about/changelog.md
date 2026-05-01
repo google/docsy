@@ -126,23 +126,14 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 For an introduction to this release, see the [0.15.0 release report][]. For the
 full list of changes, see the [0.15.0][] release page.
 
-[**Breaking changes**](#breaking-change):
+**New**:
 
 - **[Agent support][0.15.0-blog-agent-support]**
   ([experimental](#experimental)): added Markdown alternate outputs, "View
   Markdown" links, and `llms.txt` ([#2597][], [#2601][], [#2605][], [#2606][]
-- **Community and footer link paths** changed for multilingual sites; see
-  [blog][0.15.0-blog-community-footer] ([#2580][]).
-- **Version menu markup and mobile visibility** changed for sites using
-  `params.versions`; see [Version menu entries][0.15.0-blog-version-menu]
-  ([#2557][], [#2586][]).
-- **`card` shortcode rendering** changed for Markdown arguments; breakage risk
-  is low. See [blog][0.15.0-blog-card].
-
-**New**:
-
-- **[Doc-rooted sites][0.15.0-blog-doc-rooted]**: added a documented pattern and
-  example variant for documentation-first sites ([#2563][], [#2587][]).
+- **[Doc-rooted sites][0.15.0-blog-doc-rooted]**
+  ([experimental](#experimental)): added a documented pattern and example
+  variant for documentation-first sites ([#2563][], [#2587][]).
 - **[Version menu entries][0.15.0-blog-version-menu]**: added support for
   headings, separators, per-entry page-link behavior, and kind-specific styling
   ([#2557][], [#2586][]).
@@ -152,6 +143,16 @@ full list of changes, see the [0.15.0][] release page.
   ([#2565][]).
 - Added optional `rel` attribute values for footer `params.links` ([#2576][]);
   see [Community and footer links][0.15.0-blog-community-footer].
+
+[**Breaking changes**](#breaking-change):
+
+- **Community and footer link paths** changed for multilingual sites; see
+  [blog][0.15.0-blog-community-footer] ([#2580][]).
+- **Version menu markup and mobile visibility** changed for sites using
+  `params.versions`; see [Version menu entries][0.15.0-blog-version-menu]
+  ([#2557][], [#2586][]).
+- **`card` shortcode rendering** changed for Markdown arguments; breakage risk
+  is low. See [blog][0.15.0-blog-card].
 
 **Other changes**:
 
