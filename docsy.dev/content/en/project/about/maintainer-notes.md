@@ -159,7 +159,7 @@ If not adjust accordingly.
     - Commit any changes accumulated from the previous steps using this title:
 
       ```text
-      Release {{% param version %}} preparation
+      Release {{% param tdVersion.latest %}} preparation
       ```
 
     - Create a PR (with version-checks disabled) using the following command
@@ -193,14 +193,14 @@ If not adjust accordingly.
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
-    - At the commit that you want to tag as {{% param version %}}
+    - At the commit that you want to tag as {{% param tdVersion.latest %}}
 
-13. **Create the new tag** for {{% param version %}}.
+13. **Create the new tag** for {{% param tdVersion.latest %}}.
     - Set the REL variable to the release version or use the `VERSION` variable
       if you set it in the previous step.
 
       ```sh
-      REL=v${VERSION:-{{% param version %}}}
+      REL=v${VERSION:-{{% param tdVersion.latest %}}}
       echo "REL=$REL"
       ```
 
@@ -269,10 +269,10 @@ If not adjust accordingly.
 
       ```console
       $ git push-all-remotes $REL
-      + git push origin {{% param version %}}
-      * [new tag]         {{% param version %}} -> {{% param version %}}
-      + git push upstream {{% param version %}}
-      * [new tag]         {{% param version %}} -> {{% param version %}}
+      + git push origin {{% param tdVersion.latest %}}
+      * [new tag]         {{% param tdVersion.latest %}} -> {{% param tdVersion.latest %}}
+      + git push upstream {{% param tdVersion.latest %}}
+      * [new tag]         {{% param tdVersion.latest %}} -> {{% param tdVersion.latest %}}
       ...
       ```
 
@@ -326,15 +326,15 @@ If not adjust accordingly.
     been updated to the new release.
 
 17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
-    - Visit [tags][] to find the new release tag {{% param version %}}.
+    - Visit [tags][] to find the new release tag {{% param tdVersion.latest %}}.
 
-    - Select Create a new release from the {{% param version %}} tag dropdown
-      menu
+    - Select Create a new release from the {{% param tdVersion.latest %}} tag
+      dropdown menu
 
     - **Release title**: use the release version.
 
       ```text
-      {{% param version %}}
+      {{% param tdVersion.latest %}}
       ```
 
     - Click **Generate release notes** to get the release details inserted into
@@ -411,7 +411,7 @@ before any further changes are merged into the `main` branch:
 3. **Submit a PR with your changes**, using a title like:
 
    ```text
-   Set version to {{% param version %}}
+   Set version to {{% param tdVersion.latest %}}
    ```
 
 4. **Get PR approved and merged**.
