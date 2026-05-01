@@ -128,6 +128,9 @@ full list of changes, see the [0.15.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
+- **[Agent support][0.15.0-blog-agent-support]**
+  ([experimental](#experimental)): added Markdown alternate outputs, "View
+  Markdown" links, and `llms.txt` ([#2597][], [#2601][], [#2605][], [#2606][]
 - **Community and footer link paths** changed for multilingual sites; see
   [blog][0.15.0-blog-community-footer] ([#2580][]).
 - **Version menu markup and mobile visibility** changed for sites using
@@ -157,28 +160,12 @@ full list of changes, see the [0.15.0][] release page.
 - Fixed community/footer links so site-local links no longer open in a new
   browser target ([#2133][], [#2576][]).
 
-[**Experimental**](#experimental):
-
-- **[Agent support][0.15.0-blog-agent-support]**: added Markdown alternate
-  outputs, "View Markdown" links, and `llms.txt` ([#2597][], [#2601][],
-  [#2605][], [#2606][]).
-
-For maintainers:
-
-- Split deployment docs into focused pages and clarified release branch-model
-  docs ([#2556][], [#2572][]).
-- Updated NPM packages and `docsy.dev` tooling, including `hugo-extended`
-  0.157.0 ([#2585][]).
-
 [#2133]: https://github.com/google/docsy/issues/2133
-[#2556]: https://github.com/google/docsy/pull/2556
 [#2557]: https://github.com/google/docsy/pull/2557
 [#2563]: https://github.com/google/docsy/pull/2563
 [#2565]: https://github.com/google/docsy/pull/2565
-[#2572]: https://github.com/google/docsy/pull/2572
 [#2576]: https://github.com/google/docsy/pull/2576
 [#2580]: https://github.com/google/docsy/pull/2580
-[#2585]: https://github.com/google/docsy/pull/2585
 [#2586]: https://github.com/google/docsy/pull/2586
 [#2587]: https://github.com/google/docsy/pull/2587
 [#2597]: https://github.com/google/docsy/pull/2597
