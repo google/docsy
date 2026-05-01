@@ -200,7 +200,7 @@ If not adjust accordingly.
       if you set it in the previous step.
 
       ```sh
-      REL=v${VERSION:-{{% param tdVersion.latest %}}}
+      REL=${VERSION:-{{% param tdVersion.latest %}}}
       echo "REL=$REL"
       ```
 
@@ -373,10 +373,10 @@ with the following modifications:
 
 2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
     create a release and publish it with one difference:
-    - To create a new release draft, visit [Docsy-example release draft][].
     - Once the deploy/prod branch has been updated, wait for the production
       deploy to complete and check that [example.docsy.dev][] has been updated
       to the new release.
+    - To create a new release draft, visit [Docsy-example release draft][].
 
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new
