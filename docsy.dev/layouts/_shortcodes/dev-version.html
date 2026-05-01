@@ -1,8 +1,26 @@
+{{/*
+  Returns the development version of Docsy.
+
+  Usage: {{% dev-version [final] %}}
+
+  The development version is read from .Params.version in the page's front
+  matter. If [as-final-version] is true, the final non-dev version is returned,
+  as derived from the dev version. For example, v0.15.0-dev → v0.15.0.
+
+   */ -}}
+
+{{ $finalVersion := eq (.Get 0) "final" -}}
 {{ with $.Site.Params.tdVersion.dev -}}
-  {{ . -}}
-  {{ with $.Site.Params.tdVersion.buildId -}}
-    +{{ replace . "+" "-" -}}
+  {{ $devVersion := . -}}
+  {{ if $finalVersion -}}
+    {{ replace $devVersion "-dev" "" -}}
+  {{ else -}}
+    {{ . -}}
+    {{ with $.Site.Params.tdVersion.buildId -}}
+      +{{ replace . "+" "-" -}}
+    {{ end -}}
   {{ end -}}
+
 {{ else -}}
   {{ with $.Site.Params.version -}}
     {{ replace . " " "_" -}}

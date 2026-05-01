@@ -1,17 +1,17 @@
 ---
 title: 0.15 commit inventory
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 466bd327
+last-main-commit: 0a4cdfa8
 ---
 
 ## Scope
 
-Inventory covers commits in [v0.14.3...main][] through [466bd327][].
+Inventory covers commits in [v0.14.3...main][] through [0a4cdfa8][].
 
-- First-parent commits: 43
-- Raw commits in range: 52
+- First-parent commits: 46
+- Raw commits in range: 55
 - Baseline: latest official release tag, [v0.14.3][]
 
 The extra raw commits are implementation commits that are also represented by
@@ -88,6 +88,9 @@ uses first-parent commits as the release-audit spine.
 - `a19b3dd6` [#2620][] Replace `cd:docsy.dev` npm scripts with
   `npm run -C docsy.dev`
 - `466bd327` [#2621][] Prettierignore rule cleanup, and fix format of more pages
+- `f8175b82` [#2624][] Adjust 0.15.0 release docs and add upgrade manifest
+- `b2a1dfec` [#2625][] Replace version shortcode with `dev-version`
+- `0a4cdfa8` [#2626][] Copyedits to 0.15.0 blog, and changelog note about fixes
 
 ## Internationalization
 
@@ -134,9 +137,11 @@ uses first-parent commits as the release-audit spine.
   rather than a separate user-facing feature.
 - [#2616][] finalizes the release blog, changelog, doc-rooted guidance, and
   version-support wording. It closes stale WIP notes from earlier report passes.
-- [#2618][], [#2619][], [#2620][], and [#2621][] continue release prep:
-  tooling/metadata, audit guidance, npm `-C docsy.dev` ergonomics, and Prettier
-  ignore/format hygiene (see commits above).
+- [#2618][], [#2619][], [#2620][], [#2621][], [#2624][], [#2625][], and
+  [#2626][] continue release prep: tooling/metadata, audit guidance, npm
+  `-C docsy.dev` ergonomics, Prettier ignore/format hygiene, the upgrade
+  manifest, release copyedits, and project-site version display (see commits
+  above).
 
 [0.15.0-blog-card]: /blog/2026/0.15.0/#card-shortcode
 [#2082]: https://github.com/google/docsy/pull/2082
@@ -184,6 +189,9 @@ uses first-parent commits as the release-audit spine.
 [#2619]: https://github.com/google/docsy/pull/2619
 [#2620]: https://github.com/google/docsy/pull/2620
 [#2621]: https://github.com/google/docsy/pull/2621
-[466bd327]: https://github.com/google/docsy/commit/466bd327
+[#2624]: https://github.com/google/docsy/pull/2624
+[#2625]: https://github.com/google/docsy/pull/2625
+[#2626]: https://github.com/google/docsy/pull/2626
+[0a4cdfa8]: https://github.com/google/docsy/commit/0a4cdfa8
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
-[v0.14.3]: https://github.com/google/docsy/releases/tag/v0.14.3
+[v0.14.3]: https://github.com/google/docsy/releases/v0.14.3

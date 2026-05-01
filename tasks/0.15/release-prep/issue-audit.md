@@ -1,15 +1,15 @@
 ---
 title: 0.15 issue audit
 date: 2026-04-25
-lastmod: 2026-04-30
+lastmod: 2026-05-01
 range: v0.14.3..main
-last-main-commit: 466bd327
+last-main-commit: 0a4cdfa8
 cSpell:ignore: afdocs overpromising
 ---
 
 ## Scope
 
-Draft audit covers material changes in [v0.14.3...main][] through [466bd327][].
+Draft audit covers material changes in [v0.14.3...main][] through [0a4cdfa8][].
 This is an evidence pass for review before writing the wrapup report, release
 blog post, or changelog updates.
 
@@ -37,8 +37,9 @@ blog post, or changelog updates.
   low-risk title for agent-oriented detect rules. If something breaks, file an
   issue (see blog NOTE).
 - Changelog / blog: refreshed for **0.15** through [#2616][] and follow-on prep
-  ([#2618][], [#2619][], [#2620][], [#2621][]). Final tagging pass still
-  replaces prerelease/release-page placeholders as needed.
+  ([#2618][], [#2619][], [#2620][], [#2621][], [#2624][], [#2625][], [#2626][]).
+  Final tagging pass still replaces prerelease/release-page placeholders as
+  needed.
 - Link check: the agent-support user-guide page is now on `main` via [#2611][];
   the earlier blog-link blocker is resolved.
 
@@ -99,6 +100,13 @@ each of these for Docs, Blog, and Changelog (CL). Table entry values include:
 | [#2610][]: 0.15 release-prep omnibus                       | done | done | done | Blog, changelog, refcache, reports, links  |
 | [#2611][]: Agent support UG and release-prep refresh       | done | done | done | Resolves agent-support blog-link blocker   |
 | [#2616][]: Update 0.15 release blog, CL, and docs          | done | done | done | Final release-content refresh              |
+| [#2618][]: Prepare release tooling and metadata            | done | done | done | Release-prep tooling and docs              |
+| [#2619][]: Add release-prep audit guidance                 | done | done | done | Audit process and missed-change coverage   |
+| [#2620][]: Replace `cd:docsy.dev` scripts                  | N/A  | N/A  | N/A  | Tooling ergonomics                         |
+| [#2621][]: Prettierignore cleanup and report refresh       | done | done | done | Formatting and release-prep refresh        |
+| [#2624][]: Add upgrade manifest and adjust release docs    | done | done | done | Upgrade manifest and release guidance      |
+| [#2625][]: Replace `version` with `dev-version` shortcode  | done | N/A  | N/A  | Project-site version display               |
+| [#2626][]: Copyedit blog and changelog                     | done | done | done | Final release-copy polish                  |
 
 [^ver-menu]:
     The docsy.dev navbar **version / variant** menu was visible (including
@@ -382,6 +390,9 @@ Raw commits in scope without PR numbers in their commit subjects:
 [#2619]: https://github.com/google/docsy/pull/2619
 [#2620]: https://github.com/google/docsy/pull/2620
 [#2621]: https://github.com/google/docsy/pull/2621
+[#2624]: https://github.com/google/docsy/pull/2624
+[#2625]: https://github.com/google/docsy/pull/2625
+[#2626]: https://github.com/google/docsy/pull/2626
 [#726]: https://github.com/google/docsy/issues/726
-[466bd327]: https://github.com/google/docsy/commit/466bd327
+[0a4cdfa8]: https://github.com/google/docsy/commit/0a4cdfa8
 [v0.14.3...main]: https://github.com/google/docsy/compare/v0.14.3...main
