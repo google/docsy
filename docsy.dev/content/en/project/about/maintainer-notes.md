@@ -189,7 +189,8 @@ If not adjust accordingly.
 
 10. **Pull the PR** to get the last changes.
 
-11. **Test Docsy** from [docsy-example][], for example.
+11. **Test Docsy** from [docsy-example][] and the docsy-starter. (Consider
+    updating the Docsy version for these examples in the examples page.)
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
@@ -378,6 +379,9 @@ with the following modifications:
       to the new release.
     - To create a new release draft, visit [Docsy-example release draft][].
 
+3.  **Update the [Examples page][]** Docsy version in the Starter templates
+    table to {{% dev-version final %}}.
+
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new
 [example.docsy.dev]: https://example.docsy.dev
@@ -458,6 +462,7 @@ before any further changes are merged into the `main` branch:
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
 [docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
+[Examples page]: /examples/
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
