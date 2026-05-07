@@ -3,7 +3,7 @@
 <div class="td-lang-menu dropdown">
   <a class="nav-link dropdown-toggle td-lang-menu__title" href="#" role="button"
     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="td-lang-menu__title-text">{{ $langPage.Language.LanguageName }}</span>
+    <span class="td-lang-menu__title-text">{{ $langPage.Language.Label }}</span>
     <span class="td-lang-menu__title-code">{{ $langPage.Language.Lang | upper }}</span>
   </a>
   {{/* */ -}}
@@ -23,11 +23,11 @@
       {{ $isActive := eq $.Site.Language.Lang .Lang -}}
       <li>
         {{- if $isActive -}}
-          <span class="dropdown-item active">{{ .LanguageName }}</span>
+          <span class="dropdown-item active">{{ .Label }}</span>
         {{- else if $translated -}}
-          <a class="dropdown-item" href="{{ $translated.RelPermalink }}">{{ .LanguageName }}</a>
+          <a class="dropdown-item" href="{{ $translated.RelPermalink }}">{{ .Label }}</a>
         {{- else -}}
-          <span class="dropdown-item disabled">{{ .LanguageName }}</span>
+          <span class="dropdown-item disabled">{{ .Label }}</span>
         {{- end -}}
       </li>
       {{ end -}}

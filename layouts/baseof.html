@@ -1,6 +1,6 @@
 <!doctype html>
 <html itemscope itemtype="http://schema.org/WebPage"
-    {{- with .Site.Language.LanguageDirection }} dir="{{ . }}" {{- end -}}
+    {{- with .Site.Language.Direction }} dir="{{ . }}" {{- end -}}
     {{ with .Site.Language.Lang }} lang="{{ . }}" {{- end }} {{/**/ -}}
     class="no-js"
     {{- $darkMode := partialCached "dark-mode-config.html" "dark-mode-global" -}}
