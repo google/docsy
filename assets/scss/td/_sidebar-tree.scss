@@ -212,3 +212,10 @@
     }
   }
 }
+
+@include media-breakpoint-down(md) {
+  .td-sidebar-nav {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
