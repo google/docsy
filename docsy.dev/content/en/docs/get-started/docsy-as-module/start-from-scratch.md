@@ -32,7 +32,7 @@ At your command prompt, run the following:
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
