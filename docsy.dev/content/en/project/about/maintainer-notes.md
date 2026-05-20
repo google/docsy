@@ -153,7 +153,7 @@ If not adjust accordingly.
       release, and `release` for patch releases.
 
       ```sh
-      BASE=main
+      BASE=main # or release for patch releases
       ```
 
     - Commit any changes accumulated from the previous steps using this title:
@@ -319,7 +319,7 @@ If not adjust accordingly.
     git push-all-remotes deploy/prod
     ```
 
-    For patch releases from `release`, selectively merge from `$BASE`.
+    For patch releases from `release`, selectively merge from `release`.
 
     The branch update will trigger a production deploy of the website.
 
@@ -358,6 +358,38 @@ If not adjust accordingly.
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
     a dot release.
 
+21. **Update the `release` branch** once the release is final.
+
+    For a stable release, fast-forward `release` to the final release commit
+    from `main`:
+
+    ```sh
+    git checkout release
+    git merge --ff-only main
+    git push-all-remotes release
+    ```
+
+    For patch releases, the release-prep PR should already target `release`, so
+    there is no separate `main` to `release` fast-forward.
+
+22. Update the [doc-rooted][] branch from [deploy/prod][]:
+
+    ```sh
+    git checkout doc-rooted
+    git merge --ff-only deploy/prod
+    npm run doc-rooted -- build
+    # Optionally take a look at the preview
+    npm run doc-rooted -- serve
+    curl http://localhost:1313/index.md
+    # Push the changes
+    git push-all-remotes doc-rooted
+    ```
+
+    If the fast-forward merge fails, stop and reconcile the branch history. Once
+    pushed, wait for the Netlify deploy and check the doc-rooted preview.
+
+23. Update, create, or close GitHub milestones as appropriate.
+
 If all is well, release the Docsy example as detailed next.
 
 ## Docsy example release
@@ -385,24 +417,6 @@ with the following modifications:
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new
 [example.docsy.dev]: https://example.docsy.dev
-
-## Doc-rooted release
-
-Update the [doc-rooted][] branch from [deploy/prod][]:
-
-```sh
-git checkout doc-rooted
-git merge --ff-only deploy/prod
-npm run doc-rooted -- build
-# Optionally take a look at the preview
-npm run doc-rooted -- serve
-curl http://localhost:1313/index.md
-# Push the changes
-git push-all-remotes doc-rooted
-```
-
-If the fast-forward merge fails, stop and reconcile the branch history. Once
-pushed, wait for the Netlify deploy and check the doc-rooted preview.
 
 ## Post Docsy-release followup
 
