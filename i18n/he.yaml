@@ -10,6 +10,9 @@ ui_pager_prev: הקודם
 ui_pager_next: הבא
 ui_read_more: קרא עוד
 ui_search: חיפוש באתר…
+ui_theme_light: בהיר
+ui_theme_dark: כהה
+ui_theme_auto: אוטומטי
 
 # Used in sentences such as "Posted in News"
 ui_in: ב
