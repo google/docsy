@@ -4,7 +4,6 @@ linkTitle: Repo links and page info
 description:
   Help your users interact with page source and view page-source information.
 cSpell:ignore: lastmod
-weight: 9
 ---
 
 The Docsy
@@ -77,6 +76,7 @@ Specify a value here if your content directory is not in your repo's root
 directory. For example, this site is in the `docsy.dev` subdirectory of its
 repo. Setting this value means that your edit links will go to the right page.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -97,6 +97,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### `github_project_repo` (optional)
 
@@ -132,6 +133,7 @@ params:
 Specify a value here if you would like to reference a different branch for the
 other github settings like **Edit this page** or **Create project issue**.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -152,6 +154,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### `path_base_for_github_subdir` (optional)
 
@@ -415,7 +418,7 @@ for your project.
 
 > [!WARNING] Version note
 >
-> Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+> Class names using the `--KIND` suffix were deprecated as of [v0.9.0][].
 >
 > [v0.9.0]: /project/about/changelog/#v0.9.0
 

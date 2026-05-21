@@ -1,6 +1,5 @@
 ---
 title: Adding Content
-weight: 1
 description: Add different types of content to your Docsy site.
 params:
   alert-examples: |
@@ -249,18 +248,18 @@ details.
 
 Most often you create pages in a Docsy site as [Markdown or HTML files][formats]
 with [page front matter](#page-front-matter). Hugo's default markup and markdown
-renderer is [Goldmark].
+renderer is [Goldmark][].
 
 ### Markdown
 
 Markdown is Hugo’s default content format. Hugo renders Markdown to HTML using
-[Goldmark], which conforms to [CommonMark] and [GitHub Flavored Markdown][GFM]
-specifications and a few more extensions.
+[Goldmark][], which conforms to [CommonMark][] and [GitHub Flavored
+Markdown][GFM] specifications and a few more extensions.
 
 Hugo provides Markdown features including:
 
-- [Attributes] for adding custom IDs and classes to Markdown elements
-- [Extensions] such as tables, footnotes, task lists, etc.
+- [Attributes][] for adding custom IDs and classes to Markdown elements
+- [Extensions][] such as tables, footnotes, task lists, etc.
 - [Render hooks][] for customizing the HTML output of Markdown elements.
 
 Docsy provides custom render hooks for the following Markdown elements:
@@ -271,17 +270,17 @@ Docsy provides custom render hooks for the following Markdown elements:
 
 ### Markup, shortcodes, and content features {#markup-and-content-features}
 
-Hugo supports content formats and features including HTML, [Emojis], and more.
+Hugo supports content formats and features including HTML, [Emojis][], and more.
 For details, see [Content formats][formats].
 
-In addition, you can call [shortcodes] from your content. To learn more about
+In addition, you can call [shortcodes][] from your content. To learn more about
 shortcodes in general, and how to use Docsy's provided shortcodes, see
 [Shortcodes](/docs/content/shortcodes).
 
 ### Alerts
 
-Docsy supports Hugo's blockquote syntax for [alerts], specifically [GFM] base
-syntax for callouts, and Obsidian-style titles. For example:
+Docsy supports Hugo's blockquote syntax for [alerts][], specifically [GFM][]
+base syntax for callouts, and Obsidian-style titles. For example:
 
 ```markdown
 {{% _param alert-examples %}}
@@ -292,7 +291,7 @@ Which renders as:
 {{% _param alert-examples %}}
 
 In addition, Docsy supports alert types corresponding to the Bootstrap alerts
-types missing from [GFM], as well as `NB` -- short for _nota bene_.
+types missing from [GFM][], as well as `NB` -- short for _nota bene_.
 
 Use `NB` for short single-line notes rendered without a label. For example:
 
@@ -635,11 +634,11 @@ automatically filled in with the project name and community links specified in
 resources that help them get involved in your project. The same links are also
 added by default to your site footer.
 
-<!-- markdownlint-disable -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
+{{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
+{{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
 [params.links]
 # End user relevant links. These will show up on left side of footer and in the community page if you have one.
 [[params.links.user]]
@@ -673,8 +672,11 @@ added by default to your site footer.
 	url = "https://example.org/mail"
 	icon = "fa fa-envelope"
         desc = "Discuss development issues around the project"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+
+```yaml
 params:
   links:
     user:
@@ -703,8 +705,11 @@ params:
         url: 'https://example.org/mail'
         icon: fa fa-envelope
         desc: Discuss development issues around the project
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
+```
+
+{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
+
+```json
 {
   "params": {
     "links": {
@@ -751,10 +756,29 @@ params:
     }
   }
 }
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-restore -->
+```
+
+{{% /tab %}} {{< /tabpane >}}
+
+Each `params.links.user` and `params.links.developer` entry may include an
+optional [`rel` attribute][]. For example (in YAML):
+
+```yaml
+params:
+  links:
+    user:
+      - name: Mastodon
+        url: https://fosstodon.org/@opentelemetry
+        icon: fab fa-mastodon
+        desc: Follow us on Mastodon to get the latest news!
+        rel: me
+```
+
+Docsy applies it when rendering **footer** icon links; for `http` or `https`
+URLs it merges in `noopener` as well.
+
+[`rel` attribute]:
+  https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel
 
 If you're creating your own site and want to add a page using this template, add
 a `/community/_index.md` file in your content root directory. If you've copied
@@ -795,6 +819,7 @@ Hugo will, by default, create an RSS feed for the home page and any section. To
 disable all RSS feeds, add the following to your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -813,6 +838,7 @@ disableKinds: [RSS]
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 {{% alert title=Note color=info %}}
 
@@ -824,6 +850,7 @@ button). Your `hugo.toml`/`hugo.yaml`/`hugo.json` specification overrides the
 Hugo default [output formats](https://gohugo.io/methods/page/outputformats/) for
 sections, which are HTML and RSS.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -851,6 +878,7 @@ outputs:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 {{% /alert %}}
 
@@ -863,6 +891,7 @@ You can configure the frequency with which your sitemap is updated, your sitemap
 filename, and the default page priority in your
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -889,6 +918,7 @@ sitemap:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 To override any of these values for a given page, specify it in page front
 matter:

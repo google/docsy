@@ -150,12 +150,17 @@ client projects.
 
 ## CI / tooling only
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
+
 - `66a0c7d` (#2440) Update README, contrib docs for deployment and release
   process
 - `6c1e391` (#2439) [CI] Drop temp site-copy code and more
 - `4137043` (#2437) Temporary: copy public to root while build config is in
   transition
 - `cb75133` (#2437) [CI] Move Netlify config to docsy.dev subrepo
+
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
 - `ba7d0ec` (#2456) Tasks, plan, and draft blog post for 0.14.0
 - `08fe966` (#2468) Add CI/CD info about Prettier and i18n directory
 - `08a9569` (#2468) Upgrade Prettier

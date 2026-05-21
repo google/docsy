@@ -1,9 +1,9 @@
 ---
-title: Doc Versioning
-date: 2020-02-02
-weight: 4
+title: Versioning
+# date: 2020-02-02
 description: >-
   Customize navigation and banners for multiple versions of your docs.
+cSpell:ignore: pagelinks Kubeflow
 ---
 
 <!-- markdownlint-disable blanks-around-headings no-bare-urls single-h1 -->
@@ -21,6 +21,7 @@ Docsy theme adds a version selector drop down to the navbar. You specify a URL
 and a name for each version you would like to add to the menu, as in the
 following example:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -70,6 +71,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Remember to add your current version so that users can navigate back!
 
@@ -77,6 +79,7 @@ The default title for the version drop-down menu is **Releases**. To change the
 title, change the site parameter `version_menu` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -97,6 +100,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 If you set the `version_menu_pagelinks` parameter to `true`, then links in the
 version drop-down menu point to the current page in the other version, instead
@@ -104,8 +108,40 @@ of the main page. This can be useful if the document doesn't change much between
 the different versions. Note that if the current page doesn't exist in the other
 version, the link will be broken.
 
-To learn more about Docsy menus, see
-[Navigation and menus](/docs/content/navigation/).
+You can also configure individual menu entries:
+
+- Use `name` instead of `version` when the menu label is not a version number.
+- Set `name` to `---` to add a menu separator.
+- Omit `url` to render a disabled text item, such as a group heading.
+- Set `kind` to add a kind-specific class for styling. For details, see
+  [Navigation and menus][].
+- Set `pagelinks: false` on an entry to link to that version's main URL even
+  when the global `version_menu_pagelinks` parameter is `true`.
+
+For example:
+
+```yaml
+params:
+  version_menu: v1.2
+  version_menu_pagelinks: true
+  versions:
+    - name: '**Versions**'
+    - version: v1.3-dev
+      kind: next
+      url: https://next.example.com
+    - version: v1.2
+      kind: latest
+      url: https://docs.example.com
+    - name: ---
+    - name: Preview variant
+      kind: home
+      pagelinks: false
+      url: https://preview.example.com
+```
+
+To learn more about Docsy menus, see [Navigation and menus][].
+
+[Navigation and menus]: /docs/content/navigation/#version-menu
 
 ## Displaying a banner on archived doc sites
 
@@ -128,6 +164,7 @@ For example, see the archived docs for
 To add the banner to your doc site, make the following changes in your
 `hugo.toml`/`hugo.yaml`/`hugo.json` file:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1. Set the site parameter `archived_version` to `true`:
@@ -197,3 +234,4 @@ params:
     {{< /tabpane >}}
 
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->

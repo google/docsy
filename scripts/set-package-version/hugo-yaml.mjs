@@ -3,7 +3,8 @@
 // cSpell:ignore docsy
 
 /**
- * Utilities for reading and writing version fields in docsy.dev/hugo.yaml.
+ * Utilities for reading and writing version fields in Docsy site YAML / hugo.yaml:
+ * tdVersion (latest, dev, buildId) and optional params.version scalars (docsy-example).
  */
 
 import assert from 'node:assert';
@@ -21,6 +22,7 @@ const versionKeysLineRegex = new RegExp(
   `^(\\s{0,4})(${VERSION_KEYS.join('|')}):\\s*(.+)$`,
 );
 const versionIdsLineRegex = new RegExp(`(${VERSION_IDS.join('|')})`);
+const mappingKeyLineRegex = /^(\s*)([A-Za-z_][\w-]*):(?:\s|$)/;
 
 /**
  * @typedef {Object} VersionInfo
@@ -63,6 +65,105 @@ export function parseParamsVersion(yamlConfig) {
   return result;
 }
 
+/**
+ * Dev string suitable for docsy-example-style `params.version` scalars (no `v` prefix).
+ *
+ * @param {string} [dev]
+ * @returns {string|undefined}
+ */
+export function devAsParamsScalar(dev) {
+  if (dev === undefined || dev === null || dev === '') return undefined;
+  const s = String(dev).trim();
+  if (!s) return undefined;
+  return s.startsWith('v') ? s.slice(1) : s;
+}
+
+/**
+ * @param {string} line
+ * @param {{ latest?: string, dev?: string, buildId?: string }} data
+ * @returns {string|null} updated line, original line if td-handled but unchanged, or null if not td-managed
+ */
+function applyTdVersionLine(line, data) {
+  if (!line.match(versionIdsLineRegex)) return null;
+  const match = line.match(versionKeysLineRegex);
+  if (!match) return line;
+  const [, indentation, key, rawValueToken] = match;
+  if (!VERSION_KEYS.includes(key)) return line;
+  const newValue = data[key];
+  if (newValue === undefined) return line;
+
+  const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
+  const anchor = anchorMatch ? anchorMatch[1] : '';
+  const { comment } = splitYamlValueAndComment(rawValueToken);
+  const value =
+    (key === 'latest' || key === 'dev') && !newValue.startsWith('v')
+      ? `v${newValue}`
+      : yamlScalar(newValue);
+  if (anchor) assert.strictEqual(anchor, `&${KEY_AND_ANCHOR[key]} `);
+  return `${indentation}${key}: ${anchor}${value}${comment}`;
+}
+
+/**
+ * `params.version` scalar (e.g. docsy-example). Skips aliases and `- version:` entries.
+ *
+ * @param {string} line
+ * @param {string[]} yamlPath
+ * @param {string} [dev]
+ * @returns {string|null} replacement line, or null if not applicable
+ */
+function applyParamsScalarVersionLine(line, yamlPath, dev) {
+  const scalar = devAsParamsScalar(dev);
+  if (scalar === undefined) return null;
+  if (yamlPath.join('.') !== 'params.version') return null;
+
+  const m = line.match(/^(\s*)version:\s*(.*)$/);
+  if (!m) return null;
+
+  const { value, comment } = splitYamlValueAndComment(m[2]);
+  if (!value) return null;
+  if (value.startsWith('*') || value.startsWith('&')) return null;
+
+  const unquoted = value.replace(/^['"]|['"]$/g, '');
+  if (!/^[vV]?\d+\.\d+\.\d/.test(unquoted)) return null;
+
+  const next = `${m[1]}version: ${scalar}${comment}`;
+  return next === line ? null : next;
+}
+
+/**
+ * Splits a simple YAML scalar from a trailing inline comment.
+ *
+ * @param {string} raw
+ * @returns {{ value: string, comment: string }}
+ */
+function splitYamlValueAndComment(raw) {
+  const match = raw.match(/^(.*?)(\s+#.*)?$/);
+  return {
+    value: (match?.[1] ?? raw).trim(),
+    comment: match?.[2] ?? '',
+  };
+}
+
+/**
+ * Tracks the mapping path for simple block YAML while preserving line-oriented edits.
+ *
+ * @param {string} line
+ * @param {{ indent: number, key: string }[]} stack
+ * @returns {string[]}
+ */
+function yamlPathForLine(line, stack) {
+  const match = line.match(mappingKeyLineRegex);
+  if (!match) return stack.map(({ key }) => key);
+
+  const [, indentation, key] = match;
+  const indent = indentation.length;
+  while (stack.length > 0 && stack.at(-1).indent >= indent) {
+    stack.pop();
+  }
+  stack.push({ indent, key });
+  return stack.map((entry) => entry.key);
+}
+
 export function readHugoYaml(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   return parseParamsVersion(content);
@@ -93,27 +194,18 @@ export function updateYamlWithVersions(yamlConfig, { latest, dev, buildId }) {
     dev: dev ?? (latest ? nextDevVersion(latest) : undefined),
     buildId: buildId ?? '',
   };
+  const yamlPathStack = [];
   return yamlConfig
     .split('\n')
     .map((line) => {
-      if (!line.match(versionIdsLineRegex)) return line;
-      const match = line.match(versionKeysLineRegex);
-      if (!match) return line;
-      const [_, indentation, key, rawValueToken] = match;
-      if (!VERSION_KEYS.includes(key)) return line;
-      const newValue = data[key];
-      if (newValue === undefined) return line;
+      const yamlPath = yamlPathForLine(line, yamlPathStack);
+      const tdLine = applyTdVersionLine(line, data);
+      if (tdLine !== null) return tdLine;
 
-      const anchorMatch = rawValueToken.match(/^(&\w+\s+)/);
-      const anchor = anchorMatch ? anchorMatch[1] : '';
-      const commentMatch = rawValueToken.match(/(\s+#.*)$/);
-      const comment = commentMatch ? commentMatch[1] : '';
-      const value =
-        (key === 'latest' || key === 'dev') && !newValue.startsWith('v')
-          ? `v${newValue}`
-          : yamlScalar(newValue);
-      if (anchor) assert.strictEqual(anchor, `&${KEY_AND_ANCHOR[key]} `);
-      return `${indentation}${key}: ${anchor}${value}${comment}`;
+      const pvLine = applyParamsScalarVersionLine(line, yamlPath, data.dev);
+      if (pvLine !== null) return pvLine;
+
+      return line;
     })
     .join('\n');
 }

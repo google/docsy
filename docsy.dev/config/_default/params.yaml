@@ -7,9 +7,9 @@
 #   status: archived # Then fetch include
 
 tdVersion:
-  latest: &tdLatestVers v0.14.3
-  dev: &tdDevVers v0.14.4-dev
-  buildId: &tdBuildId 024-over-main-500ee239
+  latest: &tdLatestVers v0.15.0
+  dev: &tdDevVers v0.15.1-dev
+  buildId: &tdBuildId 002-over-main-ce9942b8
 
 version: *tdDevVers
 version_menu: *tdDevVers

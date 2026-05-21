@@ -207,6 +207,8 @@ Status:
 
 ### Phase 4: Docs
 
+User guide: [`docsy.dev/content/en/docs/content/agent-support/`][].
+
 Document:
 
 - what the feature provides
@@ -217,6 +219,9 @@ Document:
 
 Link the feature docs from the most relevant Docsy docs pages and verify the
 instructions are sufficient when followed on `docsy.dev`.
+
+[`docsy.dev/content/en/docs/content/agent-support/`]:
+  https://github.com/google/docsy/blob/main/docsy.dev/content/en/docs/content/agent-support/
 
 ## Risks
 

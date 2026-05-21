@@ -1,7 +1,7 @@
 ---
 title: 0.14 release-wrapup report
 date: 2026-01-16
-cSpell:ignore: docsy
+cSpell:ignore: subrepo
 ---
 
 > Report refreshed for commits through `a1ddcab5` on `main`.
@@ -58,18 +58,21 @@ cSpell:ignore: docsy
   KaTeX configuration enhancements.
 - **blocks/cover shortcode refactoring**: Removed pre-Hugo-0.54.x compatibility
   code (breaking change - content processing now relies on Hugo's native
-  shortcode delimiter behavior) ([#939], [#2480]).
+  shortcode delimiter behavior) ([#939][], [#2480][]).
 - **Scroll and fragment navigation**: Scroll padding (CSS `scroll-padding-top`)
   and anchor-alias class (scroll-margin-top fallback) for fragment navigation
-  below fixed navbar; scroll styling moved to `_scroll.scss` partial ([#2505]).
+  below fixed navbar; scroll styling moved to `_scroll.scss` partial
+  ([#2505][]).
 - **Shortcode docs heading IDs**: Normalized blocks shortcode heading IDs and
-  kept legacy IDs as span aliases for backward-compatible deep links ([#2505]).
+  kept legacy IDs as span aliases for backward-compatible deep links
+  ([#2505][]).
 - **Sidebar root icon**: Only set `td-sidebar-root-up-icon` for links that are
-  the tree root ([#2495]).
+  the tree root ([#2495][]).
 - **Documentation and style**: Release notes and Hugo upgrade guide updates,
-  "front matter" wording, Norwegian translation fix ([#2483], [#2498], [#2502]).
-- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533]).
-- **ToC**: Fix sidebar width in xl viewports ([#2538]).
+  "front matter" wording, Norwegian translation fix ([#2483][], [#2498][],
+  [#2502][]).
+- **RTL**: Fixes for code blocks and foldable-nav icons ([#2533][]).
+- **ToC**: Fix sidebar width in xl viewports ([#2538][]).
 
 ## References
 
@@ -89,6 +92,8 @@ cSpell:ignore: docsy
 [#2505]: https://github.com/google/docsy/pull/2505
 [#2533]: https://github.com/google/docsy/pull/2533
 [#2538]: https://github.com/google/docsy/pull/2538
+[#939]: https://github.com/google/docsy/issues/939
+[#2480]: https://github.com/google/docsy/pull/2480
 [v0.13.0...main]: https://github.com/google/docsy/compare/v0.13.0...main
 
 ## Action items
@@ -158,7 +163,7 @@ Verification, testing, and QA:
   Add name attribute to search input.
 - Changelog: 0.14.2 and "Next release" already cover #2546, console/code styles.
   Added search input name (#2549) and version/footer (#2547) to Next release.
-- Blog: corrected [#2546] link (was pointing to #2538).
+- Blog: corrected [#2546][] link (was pointing to #2538).
 
 ## Refresh note (37be7dc7)
 
@@ -169,3 +174,5 @@ Verification, testing, and QA:
   changelog now has it under new v0.14.1 section only.
 - Outstanding: optional changelog line for documentation reorganization (site →
   project) remains optional.
+
+[#2546]: https://github.com/google/docsy/pull/2546

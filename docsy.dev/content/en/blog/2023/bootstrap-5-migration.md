@@ -63,6 +63,8 @@ breakpoint. Thankfully, a similar change isn't required of
 If you forget to make this non-obviously breaking layout change, your project's
 responsive layouts will likely start misbehaving in apparently strange ways.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
+
 For details and an example, see:
 
 - [Sass](https://getbootstrap.com/docs/5.2/migration/#sass) section of the
@@ -225,6 +227,8 @@ Docsy-specific changes, consult the
 [changelog](/project/about/changelog/#v0.7.0). In particular, one non-breaking
 but important change to be aware of is:
 [[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
+
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ## Give it a try!
 

@@ -25,7 +25,7 @@ cSpell:ignore: docsy
 - New `_param` shortcode for parameter substitution in templates.
 - **Build-time rendering of mathematical formulae**: KaTeX now uses Hugo's
   embedded engine for build-time rendering, eliminating client-side JavaScript
-  ([#2276]).
+  ([#2276][]).
 - Dependency stack refreshed:
   - Bootstrap 5.3.8 (from 5.3.6)
   - Hugo 0.152.2 (from 0.147.5)

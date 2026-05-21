@@ -9,10 +9,12 @@
     "fr-fr"
   ],
   "words": [
+    "afdocs",
     "anchorize",
     "baseof",
     "chalin",
     "CNCF",
+    "dedup",
     "docset",
     "docsets",
     "docsy",
@@ -38,6 +40,7 @@
     "pageinfo",
     "pexels",
     "quang",
+    "readfile",
     "refcache",
     "relref",
     "scrollspy",

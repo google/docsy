@@ -18,7 +18,7 @@ description: A Hugo theme for creating great technical documentation sites
 <!-- prettier-ignore -->
 <div class="td-cta-buttons my-5">
   <a {{% _param btn-lg primary %}}
-     href='{{% siteGetPage "/docs/get-started" RelPermalink %}}'>
+    href='{{% siteGetPage "/docs/get-started" RelPermalink %}}'>
     Get started
   </a>
   <a {{% _param btn-lg secondary %}}
@@ -42,24 +42,31 @@ on creating great content for your users.
 
 [Hugo]: https://gohugo.io/
 [netlify]: https://www.netlify.com/
-[netlify-badge]: https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+[netlify-badge]:
+  https://www.netlify.com/img/global/badges/netlify-color-accent.svg
 
 {{% /blocks/lead %}}
 
 {{% blocks/section color="primary" type="row" %}}
 
 {{% blocks/feature icon="fa-lightbulb" title="See Docsy in action!" url="/examples/" %}}
-As well as our example site, there's a growing number of projects using Docsy for their doc sites.
-{{% /blocks/feature %}}
 
+As well as our example site, there's a growing number of projects using Docsy
+for their doc sites.
+
+{{% /blocks/feature %}}
 
 {{% blocks/feature icon="fa-brands fa-github" title="Contributions welcome!" url="https://github.com/google/docsy" %}}
-We do a [Pull Request](https://github.com/google/docsy/pulls) contributions workflow on **GitHub**. New users are always welcome!
+
+We do a [Pull Request](https://github.com/google/docsy/pulls) contributions
+workflow on **GitHub**. New users are always welcome!
+
 {{% /blocks/feature %}}
 
-
 {{% blocks/feature icon="fa-brands fa-x-twitter" title="Follow us on Twitter!" url="https://twitter.com/docsydocs" %}}
+
 Find out about new features and how our users are using Docsy.
+
 {{% /blocks/feature %}}
 
 {{% /blocks/section %}}

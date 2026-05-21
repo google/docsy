@@ -3,6 +3,22 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:27.373746-05:00"
   },
+  "https://afdocs.dev/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.448695-04:00"
+  },
+  "https://afdocs.dev/reference/config-file": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.917562-04:00"
+  },
+  "https://agentdocsspec.com/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.329934-04:00"
+  },
+  "https://agentdocsspec.com/spec/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.925783-04:00"
+  },
   "https://agones.dev/site/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:52.642994-05:00"
@@ -58,6 +74,10 @@
   "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/#custom-color-modes": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:12.993271-05:00"
+  },
+  "https://buildwithfern.com/agent-score/company/opentelemetry": {
+    "StatusCode": 200,
+    "LastSeen": "2026-04-26T12:08:51.658385-04:00"
   },
   "https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/": {
     "StatusCode": 206,
@@ -122,6 +142,10 @@
   "https://developer.mozilla.org/en-US/docs/Web/CSS/position#values": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:01.435364-05:00"
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-29T20:27:41.801895-04:00"
   },
   "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options": {
     "StatusCode": 206,
@@ -647,6 +671,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:00.978132-05:00"
   },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.157.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-29T20:27:41.801894-04:00"
+  },
   "https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:07.239646-05:00"
@@ -759,6 +787,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:00.206283-05:00"
   },
+  "https://github.com/google/docsy/blob/main/docsy.dev/agent-docs.config.yml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.213024-04:00"
+  },
   "https://github.com/google/docsy/blob/main/docsy.dev/assets/scss/_styles_project.scss": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:01.944819-05:00"
@@ -766,6 +798,10 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/config/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-18T03:26:03.119227-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/config/_default/hugo.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T03:52:11.351682-04:00"
   },
   "https://github.com/google/docsy/blob/main/docsy.dev/content/en/_index.md": {
     "StatusCode": 206,
@@ -782,6 +818,14 @@
   "https://github.com/google/docsy/blob/main/docsy.dev/netlify.toml": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:05.108616-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/package.json": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.818821-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/docsy.dev/scripts/install-hugo.sh": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T03:52:10.528499-04:00"
   },
   "https://github.com/google/docsy/blob/main/go.mod": {
     "StatusCode": 206,
@@ -859,6 +903,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:06.249401-05:00"
   },
+  "https://github.com/google/docsy/blob/main/layouts/all.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.769422-04:00"
+  },
   "https://github.com/google/docsy/blob/main/layouts/baseof.html": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:05.427327-05:00"
@@ -886,6 +934,10 @@
   "https://github.com/google/docsy/blob/main/scripts/scrollspy-patch/README.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:09.005756-05:00"
+  },
+  "https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:13.398577-04:00"
   },
   "https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss": {
     "StatusCode": 206,
@@ -1075,6 +1127,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:31.429537-05:00"
   },
+  "https://github.com/google/docsy/issues/2133": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:33:54.425775-04:00"
+  },
   "https://github.com/google/docsy/issues/2173": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:11.08471-05:00"
@@ -1143,9 +1199,25 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:02.338019-05:00"
   },
+  "https://github.com/google/docsy/issues/2504": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:42.367297-04:00"
+  },
   "https://github.com/google/docsy/issues/2561": {
     "StatusCode": 206,
     "LastSeen": "2026-02-18T02:41:59.012968-05:00"
+  },
+  "https://github.com/google/docsy/issues/2596": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:49.994027-04:00"
+  },
+  "https://github.com/google/docsy/issues/2614": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-29T20:27:41.908544-04:00"
+  },
+  "https://github.com/google/docsy/issues/2615": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-29T20:27:43.305714-04:00"
   },
   "https://github.com/google/docsy/issues/331": {
     "StatusCode": 206,
@@ -1303,6 +1375,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:20.189378-05:00"
   },
+  "https://github.com/google/docsy/pull/2082": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:46.049089-04:00"
+  },
   "https://github.com/google/docsy/pull/2160": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:15.442031-05:00"
@@ -1447,9 +1523,89 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-12T09:54:08.892388-05:00"
   },
+  "https://github.com/google/docsy/pull/2556": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:44.47029-04:00"
+  },
+  "https://github.com/google/docsy/pull/2557": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T06:32:49.029274-04:00"
+  },
+  "https://github.com/google/docsy/pull/2563": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:43.366139-04:00"
+  },
+  "https://github.com/google/docsy/pull/2565": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:42.873688-04:00"
+  },
   "https://github.com/google/docsy/pull/2569": {
     "StatusCode": 206,
     "LastSeen": "2026-02-17T18:45:11.838703-05:00"
+  },
+  "https://github.com/google/docsy/pull/2572": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:45.028375-04:00"
+  },
+  "https://github.com/google/docsy/pull/2576": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:43.019393-04:00"
+  },
+  "https://github.com/google/docsy/pull/2580": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:42.221622-04:00"
+  },
+  "https://github.com/google/docsy/pull/2583": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:44.534631-04:00"
+  },
+  "https://github.com/google/docsy/pull/2584": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:49.17377-04:00"
+  },
+  "https://github.com/google/docsy/pull/2585": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:45.619732-04:00"
+  },
+  "https://github.com/google/docsy/pull/2586": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T06:32:49.719367-04:00"
+  },
+  "https://github.com/google/docsy/pull/2587": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:43.837869-04:00"
+  },
+  "https://github.com/google/docsy/pull/2591": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:47.341466-04:00"
+  },
+  "https://github.com/google/docsy/pull/2597": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:49.451638-04:00"
+  },
+  "https://github.com/google/docsy/pull/2601": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:49.913606-04:00"
+  },
+  "https://github.com/google/docsy/pull/2602": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:48.57353-04:00"
+  },
+  "https://github.com/google/docsy/pull/2603": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:45.209143-04:00"
+  },
+  "https://github.com/google/docsy/pull/2604": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:46.631784-04:00"
+  },
+  "https://github.com/google/docsy/pull/2605": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:50.538707-04:00"
+  },
+  "https://github.com/google/docsy/pull/2606": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:51.063372-04:00"
   },
   "https://github.com/google/docsy/pull/941": {
     "StatusCode": 206,
@@ -1519,6 +1675,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-17T18:45:11.323854-05:00"
   },
+  "https://github.com/google/docsy/releases/v0.15.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T02:22:00.009495-04:00"
+  },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:50.294445-05:00"
@@ -1570,6 +1730,10 @@
   "https://github.com/google/docsy/tree/deploy/prod": {
     "StatusCode": 206,
     "LastSeen": "2026-02-15T04:59:15.543652-05:00"
+  },
+  "https://github.com/google/docsy/tree/doc-rooted": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-01T11:31:42.793435-04:00"
   },
   "https://github.com/google/docsy/tree/main/AGENTS.md": {
     "StatusCode": 206,
@@ -1626,6 +1790,10 @@
   "https://github.com/google/docsy/tree/main/layouts/swagger": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:54.307861-05:00"
+  },
+  "https://github.com/google/docsy/tree/v0.15.0/layouts/_partials": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.750809-04:00"
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
     "StatusCode": 206,
@@ -1919,6 +2087,14 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:54.612215-05:00"
   },
+  "https://gohugo.io/configuration/output-formats/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.689603-04:00"
+  },
+  "https://gohugo.io/configuration/outputs/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.006775-04:00"
+  },
   "https://gohugo.io/configuration/params/#multilingual-sites": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.658614-05:00"
@@ -2055,6 +2231,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:51.88846-05:00"
   },
+  "https://gohugo.io/functions/transform/markdownify/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.959528-04:00"
+  },
   "https://gohugo.io/getting-started/configuration/#configuration-file": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:23.651029-05:00"
@@ -2118,6 +2298,10 @@
   "https://gohugo.io/methods/page/outputformats/#canonical": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:58.028592-05:00"
+  },
+  "https://gohugo.io/methods/page/renderstring/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-30T15:13:12.875771-04:00"
   },
   "https://gohugo.io/methods/page/tableofcontents/": {
     "StatusCode": 206,
@@ -2191,9 +2375,17 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.845185-05:00"
   },
+  "https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:50.230731-04:00"
+  },
   "https://gohugo.io/templates/sitemap-template/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:33.938214-05:00"
+  },
+  "https://gohugo.io/templates/types/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.944099-04:00"
   },
   "https://gohugo.io/themes/": {
     "StatusCode": 206,
@@ -2234,6 +2426,10 @@
   "https://kubernetes.io": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.795121-05:00"
+  },
+  "https://llmstxt.org/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.110304-04:00"
   },
   "https://lunrjs.com/": {
     "StatusCode": 206,
@@ -2299,6 +2495,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:46.178566-05:00"
   },
+  "https://main--docsydocs.netlify.app/blog/2026/0.15.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:41.716511-04:00"
+  },
   "https://main--docsydocs.netlify.app/blog/2026/hugo-0.152.0+/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:45.42811-05:00"
@@ -2330,6 +2530,10 @@
   "https://main--docsydocs.netlify.app/docs/content/adding-content/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:46.153271-05:00"
+  },
+  "https://main--docsydocs.netlify.app/docs/content/agent-support/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:48.495821-04:00"
   },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,
@@ -2767,6 +2971,10 @@
     "StatusCode": 200,
     "LastSeen": "2026-02-11T11:24:45.045844-05:00"
   },
+  "https://web.archive.org/web/20260216125700/https://www.docsy.dev/docs/content/adding-content/#alternative-site-structure": {
+    "StatusCode": 200,
+    "LastSeen": "2026-04-29T20:27:42.900532-04:00"
+  },
   "https://www.accessibilitychecker.org/blog/dark-mode-accessibility/": {
     "StatusCode": 200,
     "LastSeen": "2026-02-11T11:18:55.189488-05:00"
@@ -2883,6 +3091,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:02:22.7528-05:00"
   },
+  "https://www.docsy.dev/blog/2026/0.15.0/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-25T21:19:41.822781-04:00"
+  },
   "https://www.docsy.dev/blog/2026/hugo-0.152.0+/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:02:22.685293-05:00"
@@ -2914,6 +3126,10 @@
   "https://www.docsy.dev/docs/content/adding-content/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:02:22.746339-05:00"
+  },
+  "https://www.docsy.dev/docs/content/agent-support/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-04-26T12:08:49.01174-04:00"
   },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,

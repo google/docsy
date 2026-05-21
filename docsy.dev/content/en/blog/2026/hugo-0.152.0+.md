@@ -93,7 +93,7 @@ list of tokens, see [0.152.0 release notes][yes-no-list].
 
 ## Multidimensional content model (0.153.0) {#0.153.0}
 
-Release [0.153.0] (2025-12-19) introduces, among other things, a powerful new
+Release [0.153.0][] (2025-12-19) introduces, among other things, a powerful new
 [multidimensional content model][] (over versions and roles in addition to the
 previously supported languages dimension) through the new [sites.matrix][]
 configuration option.
@@ -118,7 +118,7 @@ Update your logic to select the default site explicitly.
 How you fix your code will depend on how you access the sites. For example, if
 your code contains `index site.Sites 0`, then replace it with
 `site.Sites.Default`. For more concrete examples, see
-[open-telemetry/opentelemetry.io#8850].
+[open-telemetry/opentelemetry.io#8850][].
 
 ## Deprecations
 
@@ -145,7 +145,7 @@ For example:
       languages: ['fr']
 ```
 
-For a concrete example, see [open-telemetry/opentelemetry.io#9070].
+For a concrete example, see [open-telemetry/opentelemetry.io#9070][].
 
 ### `includeFiles`/`excludeFiles` deprecation {#use-files}
 
@@ -178,7 +178,7 @@ For example:
 > which will fail to exclude the desired files. For a discussion on the topic,
 > see [Why does glob negation require a space after?][56651]
 
-For a concrete example, see [open-telemetry/opentelemetry.io#9070].
+For a concrete example, see [open-telemetry/opentelemetry.io#9070][].
 
 ## Known issues and fixes {#known-issues}
 
@@ -188,7 +188,7 @@ For a concrete example, see [open-telemetry/opentelemetry.io#9070].
 <summary class="h6 text-primary">Known issues with <b>aliases</b></summary>
 
 In Hugo 0.153.x, alias handling had regressions that affected at least one
-Docsy-based site ([docsy.dev]). The issues were:
+Docsy-based site ([docsy.dev][]). The issues were:
 
 - **Default language alias**: behavior changes could cause refresh-page issues.
   See [gohugoio/hugo#14363][#14363] and [gohugoio/hugo#14361][#14361].

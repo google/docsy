@@ -11,7 +11,9 @@ shown, and the main container is centered.
 
 ## Section A
 
-This is sample text for the first section. This is sample text for the first section. This is sample text for the first section. This is sample text for the first section.
+This is sample text for the first section. This is sample text for the first
+section. This is sample text for the first section. This is sample text for the
+first section.
 
 ### Subsection
 

@@ -1,3 +1,12 @@
+{{- /*
+
+  Returns a property of the page at the given site-relative path.
+  Currently used in mock/test homepages.
+
+  Usage: {{% siteGetPage "/path/to/page" "RelPermalink" %}}
+
+*/ -}}
+
 {{ $path := .Get 0 -}}
 {{ $propertyName := .Get 1 -}}
 {{ if or (not $path) (not $propertyName) -}}

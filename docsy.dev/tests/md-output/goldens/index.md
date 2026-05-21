@@ -74,7 +74,8 @@ on creating great content for your users.
 
 [Hugo]: https://gohugo.io/
 [netlify]: https://www.netlify.com/
-[netlify-badge]: https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+[netlify-badge]:
+  https://www.netlify.com/img/global/badges/netlify-color-accent.svg
 
 
 </div>
@@ -96,12 +97,12 @@ on creating great content for your users.
 </div>
 <h4 class="h3">See Docsy in action!</h4>
 <div class="mb-0">
-<p>As well as our example site, there&rsquo;s a growing number of projects using Docsy for their doc sites.</p>
+<p>As well as our example site, there&rsquo;s a growing number of projects using Docsy
+for their doc sites.</p>
 
 </div>
 <p><a href="examples/">Read more</a></p>
 </div>
-
 
 
 <div class="col-lg-4 mb-5 mb-lg-0 text-center">
@@ -110,12 +111,12 @@ on creating great content for your users.
 </div>
 <h4 class="h3">Contributions welcome!</h4>
 <div class="mb-0">
-<p>We do a <a href="https://github.com/google/docsy/pulls">Pull Request</a> contributions workflow on <strong>GitHub</strong>. New users are always welcome!</p>
+<p>We do a <a href="https://github.com/google/docsy/pulls">Pull Request</a> contributions
+workflow on <strong>GitHub</strong>. New users are always welcome!</p>
 
 </div>
 <p><a href="https://github.com/google/docsy">Read more</a></p>
 </div>
-
 
 
 <div class="col-lg-4 mb-5 mb-lg-0 text-center">

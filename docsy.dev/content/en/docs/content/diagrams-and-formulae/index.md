@@ -1,6 +1,5 @@
 ---
 title: Diagrams and Formulae
-weight: 11
 description: Add generated diagrams and scientific formulae to your site.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
@@ -174,7 +173,7 @@ passthrough delimiter pairs defined above.
 >
 > - `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
 >   pages, but not for other sections such as the blog.
-> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
+> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html][] -
 >   hook is active for this page of the user guide only, which is how we
 >   actually have it setup.
 
@@ -316,6 +315,7 @@ By default, Docsy pulls in the latest officially released version of Mermaid at
 build time. If that doesn't fit your needs, you can specify the wanted mermaid
 version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -339,10 +339,12 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -374,6 +376,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 See the
 [Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults)
@@ -440,6 +443,7 @@ Foo -> Foo7: To queue
 
 To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -463,6 +467,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Other optional settings are:
 
@@ -586,6 +591,7 @@ Automatically renders to:
 
 To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -609,6 +615,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ## Diagrams with Diagrams.net
 
@@ -639,6 +646,7 @@ not need to access the content on your Docsy server directly at all.
 
 To enable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -662,12 +670,14 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 You can also
 [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md)
 for editing diagrams, in which case update the configuration to point to that
 server:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -691,3 +701,4 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->

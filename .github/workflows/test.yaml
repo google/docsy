@@ -35,7 +35,7 @@ jobs:
         run: npm run ci:test
 
       - if: runner.os == 'Windows'
-        run: npm run ci:prepare && npm run cd:docsy.dev build && npm run ci:post
+        run: npm run ci:prepare && npm run -C docsy.dev build && npm run ci:post
 
       - uses: actions/upload-artifact@v6
         with:

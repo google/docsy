@@ -1,7 +1,6 @@
 ---
 title: Logos and Images
-date: 2017-01-05
-weight: 6
+# date: 2017-01-05
 description: Add and customize logos, icons, and images in your project.
 cSpell:ignore: Icongen lookandfeel cthedot icongen imgproc
 ---
@@ -15,6 +14,7 @@ overrides the default Docsy logo in the theme.
 If you don't want a logo to appear in the navbar, then set site parameter
 `navbar_logo` to `false` in your project's config:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -39,6 +39,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 For information about styling your logo, see [Styling your project logo and
 name][].

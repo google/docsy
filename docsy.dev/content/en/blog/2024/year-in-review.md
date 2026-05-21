@@ -14,9 +14,9 @@ cSpell:ignore: jaegertracing mentees opentelemetry toto upvoted kubernetes theup
 ---
 
 As we reflect on 2024, it’s exciting to see steady progress toward the goals
-outlined in our [2024 priorities]. This year, we focused on enhancing stability,
-improving internationalization, and delivering long-anticipated features like
-dark mode and continuous integration (CI) testing.
+outlined in our [2024 priorities][]. This year, we focused on enhancing
+stability, improving internationalization, and delivering long-anticipated
+features like dark mode and continuous integration (CI) testing.
 
 > <i class="fa-solid fa-chart-line"></i> Docsy’s use **increased by 57%** in
 > 2024, from 1.4K to 2.2K projects! [^1]
@@ -39,7 +39,7 @@ introducing at least one major feature enhancement. Highlights include:
     look-and-feel.
 - **[0.10.0](0.10.0/):**
   - Enabled [color themes and **dark mode**][dark mode] via Bootstrap 5.3
-    upgrade, marking the completion of the [Bootstrap 5 migration] started
+    upgrade, marking the completion of the [Bootstrap 5 migration][] started
     in 2021. Also made adjustments to shortcodes and styles for dark-mode
     compatibility.
   - Addressed breaking changes resulting from the major core upgrade to Hugo
@@ -58,13 +58,13 @@ stability, here are the major user-facing enhancements introduced in 2024.
 
 ### Dark mode support
 
-[Dark mode] support was the **_most upvoted_ Docsy enhancement** prior to its
+[Dark mode][] support was the **_most upvoted_ Docsy enhancement** prior to its
 debut in v0.10.0. Powered by Bootstrap 5.3 color themes, this Docsy feature
 includes a built-in light/dark mode menu selector for easy implementation.
 
-We plan on [enabling dark mode] in the [Docsy example], for even easier
+We plan on [enabling dark mode][] in the [Docsy example][], for even easier
 adoption. Dark mode has already been adopted in notable projects like
-OpenTelemetry ([opentelemetry.io#4023]).
+OpenTelemetry ([opentelemetry.io#4023][]).
 
 [enabling dark mode]: https://github.com/google/docsy-example/issues/285
 [Docsy example]: https://github.com/google/docsy-example
@@ -74,18 +74,18 @@ OpenTelemetry ([opentelemetry.io#4023]).
 ### Right-To-Left (RTL) language support
 
 [RTL language support (#1933)][#1933], reintroduced through Bootstrap's use of
-the mature and well-vetted [RTLCSS] framework, replaced Docsy's deprecated
+the mature and well-vetted [RTLCSS][] framework, replaced Docsy's deprecated
 custom RTL solution from 2023.
 
 This enhancement meets longstanding multilingual documentation needs. Notably,
 RTL support has been requested by major Docsy-based sites, including the two
-2024 [top-velocity projects] of the [CNCF]:
+2024 [top-velocity projects][] of the [CNCF][]:
 
-- [Kubernetes]:
+- [Kubernetes][]:
   [right-to-left language support #22730](https://github.com/kubernetes/website/issues/22730)
   - [Localize website into Arabic (ar) #22726](https://github.com/kubernetes/website/issues/22726)
   - [Localize website into Persian (fa) #22727](https://github.com/kubernetes/website/issues/22727)
-- [OpenTelemetry]:
+- [OpenTelemetry][]:
   - [Add Persian version of website pages #4990](https://github.com/open-telemetry/opentelemetry.io/issues/4990)
 
 [#1933]: https://github.com/google/docsy/pull/1933
@@ -103,22 +103,22 @@ One of the most exciting developments in 2024 has been Docsy's growing adoption.
 GitHub analytics show a **57% increase in usage**, reaching **2.2K projects** as
 of this writing.
 
-Adoption among CNCF projects has also grown since our [2023 report]. This year,
-[Linux Foundation mentees][LFX] [Sandra Dindi] and [Dariksha Ansari] used the
-[CNCF Docsy starter] to migrate the following sites to Docsy:
+Adoption among CNCF projects has also grown since our [2023 report][]. This
+year, [Linux Foundation mentees][LFX] [Sandra Dindi][] and [Dariksha Ansari][]
+used the [CNCF Docsy starter][] to migrate the following sites to Docsy:
 
 - **[The Update Framework](https://theupdateframework.io)**
-  ([theupdateframework.io#105])
-- **[in-toto](https://in-toto.io)** ([in-toto.io#76])
+  ([theupdateframework.io#105][])
+- **[in-toto](https://in-toto.io)** ([in-toto.io#76][])
 
-Additionally, the [Kubernetes website] is undergoing a significant Docsy upgrade
-from v0.2, to align with the latest version and reduce technical debt:
+Additionally, the [Kubernetes website][] is undergoing a significant Docsy
+upgrade from v0.2, to align with the latest version and reduce technical debt:
 
 - [Align with upstream Docsy kubernetes.io#41171](https://github.com/kubernetes/website/issues/41171)
 - [Update Docsy step by step to the latest Docsy kubernetes.io#44002](https://github.com/kubernetes/website/issues/44002)
 
 The upgrade is progressing well, as shown in the ongoing efforts documented in
-the [0.3.x upgrade] and [0.5.x upgrade].
+the [0.3.x upgrade][] and [0.5.x upgrade][].
 
 [0.3.x upgrade]: https://github.com/kubernetes/website/pull/48721
 [0.5.x upgrade]: https://github.com/kubernetes/website/issues/48807
@@ -139,7 +139,7 @@ the [0.3.x upgrade] and [0.5.x upgrade].
 ## What's ahead?
 
 Looking ahead, we’re excited to continue supporting the Docsy upgrade and
-adoption efforts by projects such as [gRPC (grpc.io#1389)] and [Jaeger
+adoption efforts by projects such as [gRPC (grpc.io#1389)][] and [Jaeger
 (jaegertracing#746)].
 
 For features tentatively planned for the first release of 2025, see [Release
@@ -155,7 +155,7 @@ Thank you to all contributors and users who made 2024 a meaningful year for
 Docsy. Wishing you a fantastic end to 2024 and a great start to 2025! Let’s
 continue creating exceptional documentation together.
 
-[^1]: Based on GitHub analytics [Docsy dependents] as of the time of writing.
+[^1]: Based on GitHub analytics [Docsy dependents][] as of the time of writing.
 
 [^2]:
     Remember to

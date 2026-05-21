@@ -25,3 +25,7 @@ resources/
 /.vscode/**
 !/.vscode/cspell.json
 /.cursor
+
+# cSpell:ignore worktrees
+/.claude/worktrees
+/.claude/settings.local.json
