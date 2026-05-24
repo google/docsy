@@ -15,7 +15,7 @@ my $SCRIPT_DIR = dirname(abs_path($0));
 my $PROJECT_ROOT = dirname(dirname($SCRIPT_DIR));
 
 my $BOOTSTRAP_SOURCE = "$PROJECT_ROOT/node_modules/bootstrap/js/src/scrollspy.js";
-my $CACHED_METHOD_FILE = "$PROJECT_ROOT/assets/_cache/bootstrap/scrollspy-method.js";
+my $CACHED_METHOD_FILE = "$PROJECT_ROOT/theme/assets/_cache/bootstrap/scrollspy-method.js";
 
 # Check if Bootstrap source exists
 unless (-f $BOOTSTRAP_SOURCE) {

@@ -5,16 +5,17 @@
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "workspaces": [
+    "theme",
     "docsy.dev"
   ],
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
-    "_check:format": "npx prettier --check assets *.md i18n scripts tasks",
+    "_check:format": "npx prettier --check theme/assets *.md theme/i18n scripts tasks",
     "_check:links": "npm run -C docsy.dev _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",
-    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss assets/_vendor/bootstrap/scss/'",
+    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss theme/assets/_vendor/bootstrap/scss/'",
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",

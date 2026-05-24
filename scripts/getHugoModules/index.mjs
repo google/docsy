@@ -22,8 +22,8 @@ function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
     }
 
     const command = `npx hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
-    console.log(`> ${command}`);
-    const output = execSync(command);
+    console.log(`> (cd theme && ${command})`);
+    const output = execSync(command, { cwd: 'theme' });
     console.log(output.toString());
   } catch (error) {
     console.error(`ERROR: ${error.message}\n`);

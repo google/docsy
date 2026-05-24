@@ -11,7 +11,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
-CACHE_DIR="$PROJECT_ROOT/assets/_cache/bootstrap"
+CACHE_DIR="$PROJECT_ROOT/theme/assets/_cache/bootstrap"
 CACHED_METHOD_FILE="$CACHE_DIR/scrollspy-method.js"
 PATCH_FILE="$CACHE_DIR/method.patch"
 PATCHED_DEST_FILE="$CACHE_DIR/scrollspy-method-patched.js"

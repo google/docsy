@@ -24,7 +24,9 @@ console.log(
 //   ...
 // )
 function extractModulePaths() {
-  const goModPath = path.join(__dirname, '..', 'go.mod');
+  // go.mod lives in theme/ as of the TOF refactor; this script remains at the
+  // repo root's scripts/ so its callers (root postinstall) need no path change.
+  const goModPath = path.join(__dirname, '..', 'theme', 'go.mod');
 
   let directories = [];
   try {

@@ -60,23 +60,37 @@ install shape and it should remove the install-time workarounds listed above.
 │   ├── images/        # theme images only
 │   ├── layouts/
 │   ├── static/
+│   ├── scripts/
+│   │   └── mkdirp-hugo-mod.js
 │   ├── hugo.yaml      # canonical theme config (mounts, mediaTypes, outputFormats)
 │   ├── theme.toml     # canonical
 │   ├── go.mod         # module path: github.com/google/docsy/theme
 │   ├── go.sum
-│   └── package.json   # theme runtime deps + minimal lifecycle scripts only
-├── docsy.dev/         # website + dev/test tooling
-├── scripts/           # repo-wide maintainer scripts
+│   └── package.json   # source of truth for theme runtime deps
+├── docsy.dev/         # website; its own node_modules for the site build
+├── _dev/              # maintainer-orchestration folder (not published)
+│   ├── scripts/       # all maintainer-only scripts (incl. sync-root-deps.mjs)
+│   └── package.json   # devDeps (hugo-extended, prettier, markdownlint, …)
 ├── tasks/
-└── package.json       # repo-wide tooling; not the theme
+└── package.json       # thin publishable shim; name "docsy"; files: [theme, …]
 ```
 
 Key properties:
 
-- `theme/` is what NPM ships and what Hugo modules resolve to.
-- The repo root is no longer a Docsy theme. Its `package.json` no longer carries
-  `name: "docsy"`, and it holds no theme runtime files.
-- No facades, escape mounts, or workaround `postinstall` scripts in `theme/`.
+- `theme/` is what NPM ships and what Hugo modules resolve to. Its
+  `package.json` is the **single source of truth** for theme runtime deps.
+- The repo root is the **publishable manifest only**. It still carries
+  `name: "docsy"` (this is the consumer-facing package), but its `files`
+  whitelist allows only `theme/` and the top-level docs files into the tarball,
+  and it declares **no** `devDependencies`. A `prepare` script mirrors theme
+  runtime deps from `theme/package.json` to the root manifest so consumers'
+  transitive-install graphs are correct.
+- `_dev/` is where maintainers run commands from. It owns the monorepo-wide
+  tooling and the Hugo version (single source). No npm workspaces are declared
+  anywhere; each of `theme/`, `docsy.dev/`, and `_dev/` is its own independent
+  install root.
+- No facades, escape mounts, or workaround `postinstall` scripts in `theme/`
+  beyond `mkdirp-hugo-mod.js`, which Hugo-module consumers need.
 - Anything generated (vendored Bootstrap SCSS, scrollspy patch output, chroma
   styles, `go.sum`) is committed under `theme/` so consumers never run the
   generators.
@@ -129,51 +143,100 @@ iterated.
 
 ## Package boundary
 
-`theme/package.json` includes only what installed theme users need:
+Each `package.json` carries a clearly-scoped set of dependencies. The four
+manifests are:
 
-| Dependency or tool                                                          | Owner                      |
-| --------------------------------------------------------------------------- | -------------------------- |
-| `bootstrap`                                                                 | theme runtime              |
-| `@fortawesome/fontawesome-free`                                             | theme runtime              |
-| `autoprefixer`, `postcss-cli`                                               | user/site build dependency |
-| `hugo-extended`                                                             | site/dev dependency        |
-| `prettier`, `markdownlint*`, `afdocs`, `netlify-cli`, `rtlcss`, `cross-env` | repo or website tooling    |
+| File                       | Role                                | Notable contents                                                                                       |
+| -------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `theme/package.json`       | Source of truth, theme runtime deps | `bootstrap`, `@fortawesome/fontawesome-free`; `postinstall: mkdirp-hugo-mod.js`                        |
+| `package.json` (repo root) | Publishable shim                    | `files: [theme, …]`, `prepare: sync-root-deps.mjs`, `postinstall: mkdirp-hugo-mod.js`. **No devDeps.** |
+| `docsy.dev/package.json`   | Website's site-build / site-tooling | `autoprefixer`, `postcss-cli`, `cross-env`, `rtlcss`, `afdocs`, `netlify-cli`, `npm-check-updates`     |
+| `_dev/package.json`        | Maintainer-orchestration            | `hugo-extended`, `prettier`, `markdownlint-cli2`, `markdownlint-rule-*`, `@cspell/dict-fr-fr`          |
 
 Keep docs-site, CI, release, formatting, link-checking, and test-only
 dependencies out of `theme/package.json`.
 
 The GitHub/NPM install path is a key use case. Installing Docsy from GitHub
-through NPM must not fetch `docsy.dev` dev dependencies or execute
-maintainer-only generators. In particular:
+through NPM must not fetch maintainer or `docsy.dev` dev dependencies or execute
+maintainer-only generators. The shape of that install is enforced by:
 
-- No `prepare` script in `theme/package.json`.
-- No `postinstall` side-effects that touch paths outside `theme/`.
-- All generated theme assets are committed.
+- `files: ["CHANGELOG.md", "LICENSE", "README.md", "theme"]` at the root — the
+  tarball contains nothing else.
+- Zero `devDependencies` at the root — git-URL installs see no dev workflow to
+  run, so npm does not install a maintainer toolchain in the clone.
+- A `postinstall` at the root that only runs `theme/scripts/mkdirp-hugo-mod.js`
+  to create the empty Hugo module placeholder dirs the consumer's Hugo expects.
+- All generated theme assets committed under `theme/` so consumers never run a
+  generator.
 
-Ideally, theme users need no theme dev dependencies at all.
+The `prepare` script at the root delegates to `_dev/scripts/sync-root-deps.mjs`,
+which mirrors `theme/package.json`'s `dependencies` onto the root manifest. The
+committed root manifest is kept in sync with `theme/` (the sync script is
+idempotent); `prepare` runs as a safety net during `npm pack` and during git-URL
+installs in the consumer-side clone.
+
+## Package versioning
+
+Both the root (publishable as `docsy`) and `theme/` carry a `version`, plus
+`docsy.dev/` and `_dev/` carry their own private versions. The question is which
+one is the **canonical** version, and how it propagates.
+
+**Open question.** Two viable patterns:
+
+- **Theme-only canonical version.** `theme/package.json` is the canonical
+  source. The sync script (already used for `dependencies`) is extended to
+  mirror `version` from `theme/` onto the root manifest at `prepare` time. The
+  root commits a synced value to keep maintainer working trees clean.
+- **Root-canonical version.** Maintainers bump the root `version` and the
+  release tooling propagates it to `theme/package.json`. The two are kept
+  aligned by tooling. Preserves continuity with the current setup (where release
+  tooling already targets the root version).
+
+Either way, the released artifact (the tarball whose root `package.json`
+declares `name: "docsy"`) is what consumers see, so the **effective**
+user-facing version is whatever the root carries at pack time. The choice is
+primarily about maintainer ergonomics and which file the release tooling treats
+as authoritative.
+
+To be resolved during the spike or early in Phase 5 (docs and release notes).
 
 ## Maintainer workflow
 
 The lead maintainer (and other contributors) coordinate theme and website
-changes from the repo root. `docsy.dev` is Docsy's primary end-to-end test of
-theme changes, so coordinated edits across both happen daily.
+changes from the repo. `docsy.dev` is Docsy's primary end-to-end test of theme
+changes, so coordinated edits across both happen daily.
 
-The root remains the maintainer-orchestration layer:
+Orchestration commands run from `_dev/`:
 
-- The root `package.json` keeps NPM workspace declarations and exposes commands
-  such as `npm run serve`, `npm run check`, and `npm run fix`. These delegate to
-  the workspace that owns each tool.
-- Maintainers can edit theme code under `theme/` and see effects in the website
-  under `docsy.dev` from a single shell at the root.
-- Theme runtime concerns stay under `theme/`; orchestration concerns stay at the
-  root.
+```sh
+cd _dev
+npm run install:all   # installs theme/, docsy.dev/, and _dev/ in sequence
+npm run build         # builds docsy.dev against the local theme/
+npm run serve         # docsy.dev dev server with live reload
+npm run check         # repo-wide format + markdown checks
+npm run fix           # auto-fix
+```
+
+The maintainer's shell sits in `_dev/`; edits happen across `theme/`,
+`docsy.dev/`, and `_dev/` as needed, and one orchestration command from `_dev/`
+exercises the cross-folder loop. The repo root is **not** the maintainer's
+working directory; it is the publishable manifest only.
 
 ## Tooling versions
 
-Maintainers still need a predictable local toolchain. There is one clear source
-for each shared tool version, so CI, local development, and release work do not
-drift. Root commands stay as convenient entry points and delegate to the
-workspace that owns each tool.
+Each shared tool has exactly one declaration in the repo:
+
+- `hugo-extended` lives in `_dev/devDependencies`. The `hugo` binary lands at
+  `_dev/node_modules/.bin/hugo` after `cd _dev && npm install`, and is on PATH
+  for nested `npm run -C ../docsy.dev …` invocations via npm-script PATH
+  inheritance. Bumping the Hugo version is a single edit.
+- `prettier`, `markdownlint-cli2`, the markdownlint rule plugins, and
+  `@cspell/dict-fr-fr` likewise live in `_dev/devDependencies`.
+- Site-build tools (`autoprefixer`, `postcss-cli`, `cross-env`, `rtlcss`) and
+  site-tooling (`afdocs`, `netlify-cli`, `npm-check-updates`) live in
+  `docsy.dev/devDependencies` because that is where they are used.
+- Theme runtime deps (`bootstrap`, `@fortawesome/fontawesome-free`) live in
+  `theme/package.json` and are mirrored to the root manifest by the sync script.
 
 ## Test boundary
 
@@ -187,29 +250,36 @@ easy for maintainers to run; theme users never install the test toolchain.
 
 1. **Move the theme into `theme/`.** Move `assets/`, `i18n/`, `images/`,
    `layouts/`, `static/`, `hugo.yaml`, `theme.toml`, `go.mod`, `go.sum`, and the
-   theme-runtime parts of `package.json` into `theme/`. Update the `module`
-   declaration in `theme/go.mod` to `github.com/google/docsy/theme`. Update all
-   generators and patch scripts in `scripts/` to write to the new paths under
-   `theme/`.
+   `mkdirp-hugo-mod.js` postinstall helper into `theme/`. Update the `module`
+   declaration in `theme/go.mod` to `github.com/google/docsy/theme`. Update
+   generators and patch scripts that have moved to `_dev/scripts/` to write to
+   the new paths under `theme/`.
 
-2. **Reshape the root.** Root `package.json` becomes repo-level only; its `name`
-   is no longer `docsy`. Remove the `postinstall` side-effect script. Move or
-   delete `postcss.config.js` based on consumer guidance. Keep `Dockerfile`,
-   `docker-compose.yaml`, `.editorconfig`, `.prettierrc.json`, `.markdownlint*`,
-   `.nvmrc`, `.gitattributes`, `.gitignore` at the root.
+2. **Carve out `_dev/`.** Create `_dev/` and `git mv scripts _dev/scripts` so
+   maintainer scripts retain history. Move repo-wide devDeps from the old root
+   `package.json` to `_dev/package.json`. Move `hugo-extended` here as the
+   single Hugo source. Add `_dev/scripts/sync-root-deps.mjs` for the theme-deps
+   mirror.
 
-3. **Update `docsy.dev`.** Pin to the new Hugo module path
-   (`github.com/google/docsy/theme`). Update the `_hugo --themesDir` assumption.
-   The website becomes a real first-class consumer of the theme.
+3. **Reshape the root.** Root `package.json` becomes a thin publishable shim:
+   `name: "docsy"`, a `files` whitelist, `prepare` + `postinstall` hooks, no
+   `devDependencies`, no workspaces. Keep `Dockerfile`, `docker-compose.yaml`,
+   `.editorconfig`, `.prettierrc.json`, `.markdownlint*`, `.nvmrc`,
+   `.gitattributes`, `.gitignore` at the root.
 
-4. **Update `docsy-example`.** Land a coordinated PR that bumps the import path.
+4. **Update `docsy.dev`.** Pin to the new Hugo module path
+   (`github.com/google/docsy/theme`) or the classic `theme: docsy/theme` form.
+   Remove `hugo-extended` from `docsy.dev/package.json` (it now lives in
+   `_dev/`). The website becomes a real first-class consumer of the theme.
+
+5. **Update `docsy-example`.** Land a coordinated PR that bumps the import path.
    Confirms the example continues to work as the canonical user reference.
 
-5. **Update CI and smoke tests.** `scripts/make-site.sh` and the GitHub Actions
-   workflows must exercise the new install paths. Keep the existing matrix (NPM
-   × HUGO_MODULE × Windows × Ubuntu) green.
+6. **Update CI and smoke tests.** `_dev/scripts/make-site.sh` and the GitHub
+   Actions workflows must exercise the new install paths. Keep the existing
+   matrix (NPM × HUGO_MODULE × Windows × Ubuntu) green.
 
-6. **Update docs and release notes.** Document the one-line config change per
+7. **Update docs and release notes.** Document the one-line config change per
    install mode. The release blog post must include exact before/after snippets,
    and the user-guide get-started pages must reflect the new import path.
 
@@ -224,11 +294,14 @@ easy for maintainers to run; theme users never install the test toolchain.
 - A new site can use Docsy through the GitHub/NPM install path with the
   documented one-line config change.
 - Non-module theme usage works with the documented one-line config change.
-- `theme/package.json` contains only theme runtime dependencies and minimal
-  lifecycle scripts. No `prepare` or `postinstall` scripts that affect
-  consumers.
-- Installing Docsy from GitHub through NPM does not install `docsy.dev` dev
-  dependencies, does not execute `_prepare`, and does not build the whole repo.
+- `theme/package.json` contains only theme runtime dependencies and the
+  `mkdirp-hugo-mod.js` postinstall helper. No other lifecycle scripts.
+- The root `package.json` has no `devDependencies` and a `files` whitelist so
+  that `npm install github:google/docsy#<rev>` brings the consumer only
+  `theme/` + a handful of top-level docs files, plus `bootstrap` and
+  `@fortawesome/fontawesome-free` as transitive deps. Installing Docsy this way
+  does not install `docsy.dev` dev dependencies, does not install maintainer
+  tooling, does not execute `_prepare`, and does not build the whole repo.
 - All generated theme assets (vendored Bootstrap SCSS, scrollspy patch output,
   chroma styles, `go.sum`) are committed under `theme/`.
 - HTML, screenshot, and other golden tests can be added without increasing the

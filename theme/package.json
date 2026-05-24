@@ -1,0 +1,13 @@
+{
+  "name": "@docsy/theme",
+  "version": "0.15.1-dev+002-over-main-ce9942b8",
+  "description": "The Docsy Hugo theme for technical documentation sites",
+  "repository": "github:google/docsy",
+  "homepage": "https://www.docsy.dev",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "6.7.2",
+    "bootstrap": "5.3.8"
+  }
+}

@@ -2,7 +2,7 @@
 #
 # baseURL moved to be after params
 title: Docsy
-theme: [docsy]
+theme: [docsy/theme]
 enableRobotsTXT: true
 enableGitInfo: true
 enableEmoji: true

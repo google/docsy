@@ -49,15 +49,14 @@ module:
       target: static
     - source: node_modules/@fortawesome/fontawesome-free/webfonts
       target: static/webfonts
-    # Mounts for projects using Docsy as an NPM package. The source path prefix
-    # "../.." moves out of themes/docsy so that Docsy can find its dependencies.
-    - source: ../../node_modules/bootstrap
-      target: assets/vendor/bootstrap
-    - source: ../../node_modules/@fortawesome/fontawesome-free
-      target: assets/vendor/Font-Awesome
-    - source: ../../node_modules/@fortawesome/fontawesome-free/webfonts
-      target: static/webfonts
-    # Mounts for module installations,
+    # The local `node_modules/...` mounts above use Hugo's dual lookup for
+    # theme/module imports: Hugo first tries the source relative to the
+    # theme directory, then falls back to the consumer site's working
+    # directory. That covers both the maintainer case (theme-local
+    # node_modules) and the NPM-consumer case (site-local node_modules)
+    # without an explicit `../../node_modules` escape mount.
+    # See Hugo's modules/collect.go (`nodeModulesRoot`) and issue #14083.
+    # Mount for module installations,
     # needed to work around a known bug in Go’s module management.
     - source: assets/_vendor/bootstrap/scss
       target: assets/vendor/bootstrap/scss/vendor
