@@ -1,11 +1,15 @@
 {
-  "name": "@docsy/theme",
+  "name": "theme",
   "version": "0.15.1-dev+002-over-main-ce9942b8",
-  "description": "The Docsy Hugo theme for technical documentation sites",
+  "description": "Internal folder for the Docsy theme files",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "private": true,
+  "scripts": {
+    "todo-add-script-to-sync-deps": "echo TODO"
+  },
+  "dependencies-note": "DO NOT EDIT the dependencies, they are synced from root package.json",
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
     "bootstrap": "5.3.8"

@@ -4,9 +4,8 @@
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
+  "workspaces-todo": "TODO: try adding theme later once all phases of repo reorg are complete",
   "workspaces": [
-    "theme",
-    "docsy.dev"
   ],
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
@@ -80,5 +79,5 @@
   "engines": {
     "node": ">=24"
   },
-  "spelling": "cSpell:ignore afdocs docsy hugo fortawesome fontawesome onedark -"
+  "spelling": "cSpell:ignore -"
 }
