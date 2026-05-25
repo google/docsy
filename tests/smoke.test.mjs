@@ -5,10 +5,8 @@
 //
 //   Run:      npm run test:smoke
 //   Prereqs:  npm run install:all   (provides hugo-extended for run-hugo.mjs)
-//   Target:   defaults to repo "google/docsy", branch "task/repo-reorg-2026-05"
-//             (the TOF rollout branch). Override per run with flags (after --):
-//               npm run test:smoke -- --repo myfork/docsy --branch my-branch
-//             Flip the default branch to "main" once the TOF move merges.
+//   Target:   defaults to repo "google/docsy", branch "main"; override with
+//             flags, e.g. npm run test:smoke -- --repo myfork/docsy --branch wip
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
 // kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
@@ -37,21 +35,24 @@ const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 const RUN_HUGO = path.join(repoRoot, 'scripts', 'run-hugo.mjs');
 
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
-// forwards), falling back to a default.
+// forwards), falling back to a default. Last occurrence wins, so a flag passed
+// on the command line overrides one baked into the `test:smoke` npm script.
 function arg(name, fallback) {
+  let value = fallback;
   for (let i = 2; i < process.argv.length; i++) {
     const a = process.argv[i];
-    if (a === `--${name}`) return process.argv[i + 1] ?? fallback;
-    if (a.startsWith(`--${name}=`)) return a.slice(name.length + 3);
+    if (a === `--${name}`) value = process.argv[i + 1] ?? value;
+    else if (a.startsWith(`--${name}=`)) value = a.slice(name.length + 3);
   }
-  return fallback;
+  return value;
 }
 
 // Target the smoke test installs Docsy from: a repo and a branch/ref. Defaults
-// to the TOF rollout branch on google/docsy; override with `--repo` / `--branch`.
+// to repo "google/docsy", branch "main"; override with `--repo` / `--branch`.
+// NOTE: during the TOF rollout the `test:smoke` npm script passes
+// `--branch task/repo-reorg-2026-05`; drop that flag once the move merges to main.
 const REPO = arg('repo', 'google/docsy');
-// TODO(#2617): change the default branch to 'main' after the TOF move merges.
-const BRANCH = arg('branch', 'task/repo-reorg-2026-05');
+const BRANCH = arg('branch', 'main');
 const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 
 // Run a command, capturing output; print it only when the command fails so a
