@@ -2,13 +2,15 @@
 # cSpell:ignore autoprefixer docsy postcss themesdir github oneline
 set -eo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 DEPS="autoprefixer postcss-cli"
 DOCSY_REPO_DEFAULT="google/docsy"
 DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-: ${HUGO:=npx hugo}
+: "${HUGO:=node $SCRIPT_DIR/run-hugo.mjs}"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1

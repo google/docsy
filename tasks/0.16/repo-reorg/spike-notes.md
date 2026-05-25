@@ -309,5 +309,36 @@ reusable by the planned local test harness across the dev's own OS):
   `docsy.dev`'s single declaration but makes the consumer smoke test reach into
   `docsy.dev`.
 
-Current leaning: **C**, with an `HUGO=` override (E) kept as an escape hatch. No
-decision committed yet; no code changed.
+**Decision: E, made cross-OS.** Added `scripts/run-hugo.mjs` — a Node helper
+that locates an installed `hugo-extended` (searching `docsy.dev/node_modules`
+first, then the repo root) and execs its `dist/cli.mjs` bin wrapper via the
+current `node`. It is portable by construction: it relies on Node plus
+`hugo-extended`'s own JS wrapper to pick the platform binary, so there is no
+dependency on POSIX symlinks or Windows `.cmd`/`.ps1` shims. The Hugo _version_
+stays single-sourced — the helper runs whatever `docsy.dev` installed, which is
+pinned via `package.json` `config.hugo_version` (currently 0.157.0).
+
+`make-site.sh` now defaults to it: `: "${HUGO:=node $SCRIPT_DIR/run-hugo.mjs}"`
+(an explicit `HUGO=` export still wins, e.g. `HUGO='npx hugo'`).
+
+Implementation notes:
+
+- Resolve the package by its `node_modules/hugo-extended` path, **not**
+  `require.resolve('hugo-extended/package.json')` — the latter is blocked by the
+  package's `exports` map (`ERR_PACKAGE_PATH_NOT_EXPORTED`).
+- Verified locally (macOS) with **no `HUGO` override**: `make-site.sh -s NPM`
+  and `-s HUGO_MODULE` against `google/docsy@task/repo-reorg-2026-05` both build
+  green (369 KB `main.min.css` each); `node scripts/run-hugo.mjs version`
+  reports extended 0.157.0 from any cwd.
+
+**CI step — done locally, pending a real CI run.** The helper reuses
+`docsy.dev`'s `hugo-extended`, but `smoke.yaml`'s setup previously ran only root
+`npm install`. Added an `install:all` root script
+(`npm install && npm run docsy.dev-install`) and switched the smoke job's "Setup
+workspace" step to `npm run install:all`, so `docsy.dev` (and its
+`hugo-extended`) is installed before `make-site.sh`. Chose `install:all` over a
+lighter targeted `hugo-extended` install for now — consistency across jobs and a
+useful onboarding command outweigh the few seconds saved. Verified locally:
+`npm run install:all` completes and `node scripts/run-hugo.mjs version` resolves
+extended 0.157.0. Still to confirm on a real CI run: the Windows + Ubuntu matrix
+goes green (Windows runner behaviour in particular).

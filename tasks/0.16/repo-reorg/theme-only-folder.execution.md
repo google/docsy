@@ -144,10 +144,15 @@ principles).
 - **Resolve Hugo availability on the runner.** Root cause: `docsy.dev` is no
   longer an npm workspace, so root `npm install` no longer hoists
   `hugo-extended` into the repo-root `node_modules/.bin/` where the smoke test's
-  `npx hugo` resolved it. Solution options (A–E) and the current leaning (C:
-  smoke site installs its own `hugo-extended@<config.hugo_version>`) are
-  recorded in [spike-notes][] Phase 3. Keep the Hugo _version_ single-sourced
-  from `package.json` `config.hugo_version`.
+  `npx hugo` resolved it. **Decided: option E, made cross-OS** —
+  `scripts/run-hugo.mjs` reuses `docsy.dev`'s installed `hugo-extended` (version
+  single-sourced via `config.hugo_version`) and is now the `make-site.sh`
+  default; verified locally for NPM + HUGO_MODULE. See [spike-notes][] Phase 3.
+- **Make `hugo-extended` available to the smoke job** (done): added an
+  `install:all` root script (`npm install && npm run docsy.dev-install`) and
+  switched `smoke.yaml`'s "Setup workspace" step to `npm run install:all`, so
+  `docsy.dev`'s `hugo-extended` is installed where `run-hugo.mjs` looks. Chose
+  `install:all` over a lean targeted install for consistency + onboarding value.
 - Update `.github/workflows/smoke.yaml` and `.github/workflows/test.yaml` for
   the new paths.
 - Push the spike branch and watch the Windows + Ubuntu matrix go green.
@@ -157,9 +162,12 @@ Exit criterion: full CI matrix green on the spike branch (which also closes
 Phase 2). **Decision gate to merge to `main`.** If everything above held, the
 canonical move lands.
 
-Status (2026-05-25): **in progress — CI red.** Smoke matrix fails on both OSes:
-no Hugo executable on the runner (root cause above). Fix under discussion; no
-code changed yet.
+Status (2026-05-25): **implemented locally; awaiting a real CI run.** Hugo
+resolution decided and built (`scripts/run-hugo.mjs`, the `make-site.sh`
+default), and the smoke job now runs `npm run install:all` to provide
+`hugo-extended`. All verified locally (NPM + HUGO_MODULE build green with no
+`HUGO` override). Remaining: push and confirm the Windows + Ubuntu matrix — the
+merge gate.
 
 ### Phase 4: `docsy-example`
 
@@ -183,18 +191,23 @@ The user-facing payload, derived from the spike notes.
 Exit criterion: a reviewer who has not seen the design conversation can upgrade
 to 0.16 by following only the release notes.
 
-## Later: formalize the smoke matrix as a local test harness
+## Local test harness
 
-**Marked for later — do not start before Phases 2–3 are green.**
+**Seed (done):** `tests/smoke.test.mjs`, run via `npm run test:smoke`. It uses
+Node's built-in test runner (`node --test`) — **no new deps** — to drive the
+three install modes on the developer's own OS and assert each produces a real,
+fully-styled site (index page, > 100 KB compiled CSS, Font Awesome webfonts),
+not just a zero exit. It covers what the CI smoke matrix runs (NPM, HUGO_MODULE)
+**plus** the non-module clone, which CI does not exercise. Target is
+parameterized via `DOCSY_REPO` / `DOCSY_VERS` (defaults
+`google/docsy@task/repo-reorg-2026-05`). Prereq: `npm run install:all` (for
+`hugo-extended`). It is deliberately kept out of `test:tooling` / CI `ci:post`
+(slow, network-bound).
 
-Once the smoke matrix passes locally and in CI, formalize it as a runnable test
-folder that emulates the CI matrix on the developer's own OS (one OS per run,
-not the full Windows + Ubuntu cross-product). Direction under consideration: a
-**Vitest**-based harness with all code written in **TypeScript executed directly
-under Node** (no separate compile step — relying on recent Vitest/Node TS
-support), wrapping the `make-site.sh` install-mode flow. The Hugo-resolution
-mechanism chosen in Phase 3 should be one the harness can reuse unchanged across
-OSes (a point in favour of option C). This is a follow-on to TOF, not part of
+**Later (not started):** upgrade the seed to a **Vitest** harness with all code
+in **TypeScript executed directly under Node** (no separate compile step). The
+`node:test` `describe`/`test` shape maps closely onto Vitest, so the seed is the
+migration starting point, not throwaway. This is a follow-on to TOF, not part of
 the move.
 
 ## Out of scope (this plan)
