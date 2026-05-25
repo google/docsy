@@ -47,16 +47,11 @@ function arg(name, fallback) {
   return value;
 }
 
-// Target the smoke test installs Docsy from: a repo and a branch/ref. Defaults
-// to repo "google/docsy", branch "main"; override with `--repo` / `--branch`.
-// NOTE: during the TOF rollout the `test:smoke` npm script passes
-// `--branch task/repo-reorg-2026-05`; drop that flag once the move merges to main.
 const REPO = arg('repo', 'google/docsy');
 const BRANCH = arg('branch', 'main');
 const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 
-// Run a command, capturing output; print it only when the command fails so a
-// passing run stays quiet but a failure is diagnosable.
+// Run a command; surface its output only on failure.
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { encoding: 'utf8', ...opts });
   if (r.status !== 0) {
@@ -67,26 +62,21 @@ function run(cmd, args, opts = {}) {
   return r;
 }
 
-// Run the repo's cross-OS Hugo resolver (the make-site.sh default).
 function hugo(args, opts = {}) {
   return run('node', [RUN_HUGO, ...args], opts);
 }
 
-// Live progress line. Write straight to fd 2 so it streams immediately —
-// `node --test` captures a test's console output and only emits it once the
-// test finishes, which would hide progress during the (multi-second) builds.
+// Stream a progress line via fd 2 directly: node:test buffers a test's console
+// output until the test finishes, which would otherwise hide progress mid-build.
 function progress(msg) {
   writeSync(2, `[smoke] ${msg}\n`);
 }
 
-// A real, fully-styled build has: a non-trivial compiled stylesheet (Bootstrap +
-// Docsy SCSS), a rendered home page that actually links that stylesheet, and a
-// generated sitemap. The CSS size plus the HTML->CSS link guard against "Hugo
-// succeeded but styling silently broke".
+// Assert a real, fully-styled build (not just a zero exit): a non-trivial
+// compiled stylesheet that the home page actually links, plus a sitemap.
 function assertBuilt(name) {
   const pub = path.join(TMP, name, 'public');
 
-  // Compiled stylesheet: present and non-trivial.
   const scssDir = path.join(pub, 'scss');
   const mainCss = existsSync(scssDir)
     ? readdirSync(scssDir).find((f) => /^main\.min.*\.css$/.test(f))
@@ -97,8 +87,6 @@ function assertBuilt(name) {
     'compiled CSS is non-trivial (> 100 KB)',
   );
 
-  // Home page: rendered (has a <title>) and wired to the compiled stylesheet
-  // (references the exact fingerprinted CSS filename).
   const indexHtml = readFileSync(path.join(pub, 'index.html'), 'utf8');
   assert.match(
     indexHtml,
@@ -110,7 +98,6 @@ function assertBuilt(name) {
     'index.html links the compiled stylesheet',
   );
 
-  // Sitemap: generated with at least one page URL.
   const sitemap = readFileSync(path.join(pub, 'sitemap.xml'), 'utf8');
   assert.match(sitemap, /<urlset/, 'sitemap.xml is a <urlset>');
   assert.match(
@@ -152,7 +139,6 @@ test('non-module clone into themes/docsy', () => {
   const site = path.join(TMP, name);
   rmSync(site, { recursive: true, force: true });
 
-  // New site, then clone the whole Docsy repo under themes/docsy.
   progress('clone: hugo new site…');
   assert.equal(
     hugo(['new', 'site', '--format', 'yaml', '--quiet', site], { cwd: TMP })
@@ -176,8 +162,8 @@ test('non-module clone into themes/docsy', () => {
     'git clone theme into themes/docsy',
   );
 
-  // Theme runtime deps must live at the theme-dir-relative node_modules, i.e.
-  // inside themes/docsy/theme/, for the `node_modules/bootstrap` mount.
+  // Theme deps must sit at themes/docsy/theme/ — the theme-dir-relative
+  // node_modules the `node_modules/bootstrap` mount resolves against.
   progress('clone: npm install theme deps (themes/docsy/theme)…');
   assert.equal(
     run('npm', ['install', '--no-audit', '--no-fund'], {
@@ -187,9 +173,8 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps in themes/docsy/theme',
   );
 
-  // theme/package.json has no postinstall (script-less private mirror), so the
-  // empty Hugo-module placeholder dirs must be generated explicitly, under
-  // themesDir (themes/). Use the cloned repo's own script + go.mod.
+  // theme/package.json has no postinstall, so create the empty Hugo-module
+  // placeholder dirs explicitly, under themesDir (themes/).
   progress('clone: generate empty Hugo-module placeholder dirs…');
   assert.equal(
     run('node', [path.join('scripts', 'mkdirp-hugo-mod.js'), '..'], {
@@ -199,7 +184,7 @@ test('non-module clone into themes/docsy', () => {
     'create empty Hugo-module dirs under themes/',
   );
 
-  // PostCSS at the site root (unchanged prerequisite for non-module installs).
+  // PostCSS at the site root: a non-module install prerequisite.
   progress('clone: npm install postcss at site root…');
   assert.equal(run('npm', ['init', '-y'], { cwd: site }).status, 0, 'npm init');
   assert.equal(
@@ -219,7 +204,7 @@ test('non-module clone into themes/docsy', () => {
     'install postcss at site root',
   );
 
-  // The single consumer config edit, then build.
+  // The one-line consumer config change.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
   progress('clone: hugo build…');
   assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
