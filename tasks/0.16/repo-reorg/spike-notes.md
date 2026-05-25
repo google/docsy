@@ -266,12 +266,48 @@ emitted). The config promise holds. The get-started "clone" docs (Option 2 in
 Phase 5. No design change is required for the move to land; the clone path works
 as documented here.
 
-### Phase 2 exit criterion
+### Phase 2 exit criterion — NOT yet met (paired with Phase 3)
 
-Met: all three install modes build locally and the matrix above is complete with
-exact one-line config edits. One follow-up for Phase 5 (get-started clone docs),
-no blocker for the merge gate.
+Local builds: all three install modes build locally and the matrix above is
+complete with exact one-line config edits. But the local runs **masked a CI
+gap**: each one set `HUGO` to an extended binary explicitly
+(`docsy.dev/node_modules/.bin/hugo`). With `make-site.sh`'s default `npx hugo`,
+CI finds no Hugo executable (see Phase 3). A local pass that relies on an ad-hoc
+`HUGO` override does not count as a Phase 2 exit — Phase 2 and Phase 3 are now
+iterated as a pair (the same install matrix on two surfaces). Standing follow-up
+for Phase 5: get-started clone docs.
 
-## Phase 3: GitHub CI — pending
+## Phase 3: GitHub CI — in progress (Hugo executable blocker)
 
-To be recorded during Phase 3 work.
+**Symptom:** the smoke matrix (`smoke.yaml`) fails on both OSes because the
+throwaway site cannot find a Hugo executable.
+
+**Root cause:** `docsy.dev` used to be an npm **workspace**, so root
+`npm install` hoisted `hugo-extended` (declared in `docsy.dev/devDependencies`)
+up into the repo-root `node_modules/.bin/`. The smoke test runs `make-site.sh`
+from `tmp/`, and its default `npx hugo` walks _up_ the tree, resolving
+`repo-root/node_modules/.bin/hugo`. Under TOF, `workspaces: []`, so root
+`npm install` no longer pulls `docsy.dev`'s deps — `hugo-extended` is gone from
+root `node_modules`, and `npx hugo` resolves nothing.
+
+**Solution options under discussion** (constraints: single source of truth for
+the Hugo version — `package.json` `config.hugo_version`; and ideally a mechanism
+reusable by the planned local test harness across the dev's own OS):
+
+- **A. Restore workspace hoisting** (`workspaces: ["docsy.dev"]`). Smallest diff
+  but reopens the deferred `workspaces-todo` trade-off.
+- **B. Declare `hugo-extended` at the repo root** (pinned to
+  `config.hugo_version`). Duplicates the declaration the plan keeps only in
+  `docsy.dev`.
+- **C. Smoke site installs its own Hugo**
+  (`npm i hugo-extended@<config.hugo_version>` into the throwaway site). Most
+  faithful to a real consumer; identical in CI and the local harness on any OS.
+  Adds an install per run; `make-site.sh` must read the version.
+- **D. Job-level setup action** (`peaceiris/actions-hugo`, extended). Fast and
+  standard but CI-only — does not help the local harness.
+- **E. Pass `HUGO` from an installed binary** (the local workaround). Reuses
+  `docsy.dev`'s single declaration but makes the consumer smoke test reach into
+  `docsy.dev`.
+
+Current leaning: **C**, with an `HUGO=` override (E) kept as an escape hatch. No
+decision committed yet; no code changed.

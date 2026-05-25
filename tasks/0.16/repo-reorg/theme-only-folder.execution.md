@@ -29,6 +29,11 @@ a bird's-eye view of where we are and what's next, see the folder
 - **Phases 0 and 1 are intertwined in practice.** Expect to cycle between moving
   files (Phase 0) and trying the `docsy.dev` build (Phase 1) until both exit
   criteria are met. Treat them as a tight loop, not two sequential blocks.
+- **Phases 2 and 3 are a pair, too.** Local smoke (Phase 2) and CI smoke
+  (Phase 3) validate the _same_ install matrix on two surfaces. A local-only
+  green does **not** close Phase 2 if it relies on environment fixups (e.g. an
+  ad-hoc `HUGO` override) that CI does not have. Iterate them as one loop until
+  the same matrix passes both locally and in CI.
 - **Single feature branch through Phases 0–3.** All consumer-surface validation
   runs against the same tree. Merge to `main` only after Phase 3 passes.
 - **Running spike notes** live at `tasks/0.16/repo-reorg/spike-notes.md`. They
@@ -110,33 +115,51 @@ time.
 - Validate non-module theme install: `hugo new site` + `git clone` Docsy into
   `themes/docsy/`. Confirm; record.
 
-Exit criterion: all three install modes build locally; the spike-notes matrix is
-complete with exact one-line edits.
+Exit criterion (paired with Phase 3): all three install modes build with the
+_same_ Hugo-resolution mechanism CI uses, and the spike-notes matrix is complete
+with exact one-line edits. A local-only pass that relies on an ad-hoc `HUGO`
+override does not count.
 
-Status (2026-05-24): **exit criterion met.** All three install modes built
-locally against the pushed spike branch
-(`chalin/docsy@chalin-m24-monorepo-2026-0520`), each with full styling (~370 KB
-compiled CSS + Font Awesome webfonts). NPM and HUGO_MODULE are a clean one-line
-consumer config edit. The non-module clone is a one-line _config_ edit too, but
-its _setup procedure_ gained a step (theme deps now install into
-`themes/docsy/theme/`, and the empty Hugo-module placeholder dirs must be
-generated explicitly since `theme/package.json` carries no lifecycle scripts) —
-a Phase 5 get-started docs follow-up, not a merge blocker. Full matrix and exact
-commands are in [spike-notes][] Phase 2.
+Status (2026-05-25): **reopened — local builds pass, CI does not.** All three
+modes build locally against the spike branch, each with full styling (~370 KB
+compiled CSS + Font Awesome webfonts); matrix and exact one-line edits are in
+[spike-notes][] Phase 2. But the local runs **masked a CI gap**: each set `HUGO`
+to an extended binary explicitly (`docsy.dev/node_modules/.bin/hugo`). On CI,
+`make-site.sh`'s default `npx hugo` finds no executable, because `docsy.dev` is
+no longer an npm workspace — root `npm install` used to hoist `hugo-extended`
+(declared in `docsy.dev/devDependencies`) into the repo-root
+`node_modules/.bin/` where the smoke test's upward `npx hugo` search resolved
+it; with `workspaces: []` that binary is gone. So Phase 2 is **not** complete:
+it is now iterated together with Phase 3 (the Hugo-availability fix and the CI
+run land as one loop). The non-module-clone setup-step follow-up for Phase 5
+still stands.
 
 [spike-notes]: ./spike-notes.md
 
 ### Phase 3: GitHub CI
 
-Lift Phase 2 into Actions on the same branch.
+Lift Phase 2 into Actions on the same branch. Paired with Phase 2 (see Working
+principles).
 
+- **Resolve Hugo availability on the runner.** Root cause: `docsy.dev` is no
+  longer an npm workspace, so root `npm install` no longer hoists
+  `hugo-extended` into the repo-root `node_modules/.bin/` where the smoke test's
+  `npx hugo` resolved it. Solution options (A–E) and the current leaning (C:
+  smoke site installs its own `hugo-extended@<config.hugo_version>`) are
+  recorded in [spike-notes][] Phase 3. Keep the Hugo _version_ single-sourced
+  from `package.json` `config.hugo_version`.
 - Update `.github/workflows/smoke.yaml` and `.github/workflows/test.yaml` for
   the new paths.
 - Push the spike branch and watch the Windows + Ubuntu matrix go green.
 - Fix any platform-specific issues (Windows in particular).
 
-Exit criterion: full CI matrix green on the spike branch. **Decision gate to
-merge to `main`.** If everything above held, the canonical move lands.
+Exit criterion: full CI matrix green on the spike branch (which also closes
+Phase 2). **Decision gate to merge to `main`.** If everything above held, the
+canonical move lands.
+
+Status (2026-05-25): **in progress — CI red.** Smoke matrix fails on both OSes:
+no Hugo executable on the runner (root cause above). Fix under discussion; no
+code changed yet.
 
 ### Phase 4: `docsy-example`
 
@@ -160,6 +183,20 @@ The user-facing payload, derived from the spike notes.
 Exit criterion: a reviewer who has not seen the design conversation can upgrade
 to 0.16 by following only the release notes.
 
+## Later: formalize the smoke matrix as a local test harness
+
+**Marked for later — do not start before Phases 2–3 are green.**
+
+Once the smoke matrix passes locally and in CI, formalize it as a runnable test
+folder that emulates the CI matrix on the developer's own OS (one OS per run,
+not the full Windows + Ubuntu cross-product). Direction under consideration: a
+**Vitest**-based harness with all code written in **TypeScript executed directly
+under Node** (no separate compile step — relying on recent Vitest/Node TS
+support), wrapping the `make-site.sh` install-mode flow. The Hugo-resolution
+mechanism chosen in Phase 3 should be one the harness can reuse unchanged across
+OSes (a point in favour of option C). This is a follow-on to TOF, not part of
+the move.
+
 ## Out of scope (this plan)
 
 See the plan's [What this plan does not change][plan-defer] section for the
@@ -172,7 +209,8 @@ canonical list of deferred work.
 - Parent issue: [#2617][]. Keep a phase checklist there (or sub-issues, if the
   team prefers) so progress is visible.
 - Spike notes: `tasks/0.16/repo-reorg/spike-notes.md`, grown through Phases 1–3.
-- One feature branch (currently `chalin-m24-monorepo-2026-0520`) carries Phases
-  0–3. Phases 4–5 land as separate PRs against `main` after the spike merges.
+- The first spike branch (the Phase 0 structural move,
+  `chalin-m24-monorepo-2026-0520`) has merged. Phases 2–3 continue on a
+  follow-up branch atop it. Phases 4–5 land as separate PRs against `main`.
 
 [#2617]: https://github.com/google/docsy/issues/2617

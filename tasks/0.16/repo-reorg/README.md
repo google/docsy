@@ -25,25 +25,30 @@ Upstream tracking: issue [#2617][].
 
 ## Status at a glance
 
-Updated 2026-05-24. Per-phase detail (with exit criteria) lives in the
-[execution plan][exec].
+Updated 2026-05-25. Per-phase detail (with exit criteria) lives in the
+[execution plan][exec]. **Phases 2 and 3 are now iterated as a pair** (like 0
+and 1): a local-only smoke pass does not close Phase 2 until the same matrix is
+green in CI.
 
-| Phase                                | Status                                                       |
-| ------------------------------------ | ------------------------------------------------------------ |
-| 0 — structural move                  | Landed; `_prepare` + `_diff:check` regression pending        |
-| 1 — `docsy.dev` consumes TOF         | Local build green; Netlify preview pending                   |
-| 2 — local smoke tests (CI emulation) | Done; all 3 modes build locally (clone setup → Phase 5 docs) |
-| 3 — GitHub CI                        | Pending                                                      |
-| 4 — `docsy-example`                  | Pending (post-pre-release)                                   |
-| 5 — docs and release notes           | Pending                                                      |
+| Phase                                | Status                                                           |
+| ------------------------------------ | ---------------------------------------------------------------- |
+| 0 — structural move                  | Merged; `_prepare` + `_diff:check` regression pending            |
+| 1 — `docsy.dev` consumes TOF         | Local build green; Netlify preview pending                       |
+| 2 — local smoke tests (CI emulation) | In progress (paired w/ 3); local builds OK, CI blocked           |
+| 3 — GitHub CI                        | In progress; CI red — no Hugo executable on runners (fix in TBD) |
+| 4 — `docsy-example`                  | Pending (post-pre-release)                                       |
+| 5 — docs and release notes           | Pending                                                          |
 
 Next concrete steps, in order:
 
-1. Re-run `npm run _prepare` and `npm run _diff:check` end-to-end against the
-   new layout to close out Phase 0.
-2. Push the branch and confirm a Netlify deploy preview of `docsy.dev` builds.
-3. Phase 3: lift the now-green local smoke matrix into GitHub Actions
-   (`smoke.yaml` / `test.yaml`) and watch the Windows + Ubuntu matrix. This is
-   the decision gate to merge to `main`.
+1. **Phases 2 + 3 loop (active):** make a Hugo executable available to the smoke
+   matrix in CI, then get the Windows + Ubuntu matrix green — the decision gate
+   to merge. Root cause and solution options (A–E, leaning C) are in
+   [spike-notes][spike] Phase 3.
+2. Phase 0 carry-over: re-run `npm run _prepare` and `npm run _diff:check`
+   end-to-end against the new layout.
+3. Phase 1 carry-over: confirm a Netlify deploy preview of `docsy.dev` builds.
 4. Phase 5 carry-over: update the get-started "clone" docs for the new
    non-module setup procedure recorded in [spike-notes][spike] Phase 2.
+5. Later (after Phases 2–3): formalize the smoke matrix as a local Vitest/TS
+   test harness — see the execution plan's "Later" section.
