@@ -14,9 +14,12 @@ of operations for the compatibility spike work and the canonical move, broken
 into phases that are independently checkable and, where practical, independently
 mergeable.
 
-The plan itself is the design contract. This doc is purely about sequencing.
+The plan itself is the design contract. This doc is purely about sequencing. For
+a bird's-eye view of where we are and what's next, see the folder
+[README][readme].
 
 [plan]: ./theme-only-folder.plan.md
+[readme]: ./README.md
 
 ## Working principles
 
@@ -150,18 +153,10 @@ to 0.16 by following only the release notes.
 
 ## Out of scope (this plan)
 
-The following improvements were considered during the spike and explicitly
-deferred to a follow-on plan so this PR stays focused on the structural move:
+See the plan's [What this plan does not change][plan-defer] section for the
+canonical list of deferred work.
 
-- Slim the root `package.json` to a thin publishable shim (`files: [theme, …]`,
-  no `devDependencies`).
-- Carve out a dedicated maintainer-orchestration folder (e.g. `_dev/`) that owns
-  repo-wide `devDependencies` and `hugo-extended`.
-- Move root-level `prepare`/`postinstall` work behind that boundary.
-- NPM-registry publication of the `docsy` package.
-
-These are tracked separately and will draw on the structural cleanliness that
-TOF establishes.
+[plan-defer]: ./theme-only-folder.plan.md#tof-repo-layout
 
 ## Tracking
 

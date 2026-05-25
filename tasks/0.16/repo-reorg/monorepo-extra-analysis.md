@@ -3,18 +3,18 @@ title: Extra analysis for the theme-subfolder monorepo plan
 date: 2026-05-20
 status: draft
 issue: https://github.com/google/docsy/issues/2617
-companion: ./monorepo-theme-subfolder.plan.md
+companion: ./theme-only-folder.plan.md
 cSpell:ignore: webfonts cutover bikeshedding
 ---
 
 ## About This Doc
 
-Companion notes to [monorepo-theme-subfolder.plan.md][plan]. This doc collects
-concrete pitfalls, open questions, and acceptance-criteria additions found while
+Companion notes to [theme-only-folder.plan.md][plan]. This doc collects concrete
+pitfalls, open questions, and acceptance-criteria additions found while
 reviewing the plan against the current repo. The parent plan should stay lean;
 this doc is the working scratchpad and reviewer reference.
 
-[plan]: ./monorepo-theme-subfolder.plan.md
+[plan]: ./theme-only-folder.plan.md
 
 ## TL;DR
 

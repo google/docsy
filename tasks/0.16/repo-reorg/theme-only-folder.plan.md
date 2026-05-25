@@ -48,10 +48,20 @@ Move the canonical Docsy theme into a folder named `theme/`, whose contents are
 
 We expect this to be a structural change with one consumer-facing edit per
 install mode. It trades a small documented migration for a clean, predictable
-install shape and removes one of the install-time workarounds (the
-`../../node_modules/*` escape mounts) up front. The remaining workarounds (the
-`postinstall` mkdirp helper and the `_prepare` scrollspy/SCSS toolchain) keep
-working unchanged; later phases can revisit them.
+install shape. Mapping the four [Motivation](#motivation) workarounds to this
+PR:
+
+| Workaround                                | This PR             |
+| ----------------------------------------- | ------------------- |
+| `../../node_modules/*` escape mounts      | **Fixed**           |
+| `postinstall` mkdirp helper               | Kept; deferred      |
+| `_prepare` scrollspy + vendored SCSS      | Kept; deferred      |
+| Root `package.json` mixes theme + tooling | Partially; deferred |
+
+"Partially" because `theme/package.json` now declares the theme runtime deps (as
+a synced mirror), giving us a clean boundary to push the rest of the cleanup
+through. The thin-shim refactor that fully separates the manifests is
+[scoped out](#tof-repo-layout) and lives in a follow-on plan.
 
 ## TOF repo layout
 
@@ -153,6 +163,11 @@ commands used, the exact one-line config edit, and whether the result is
 "one-line change" or "needs more design". Any "needs more design" result blocks
 the merge until the design is iterated.
 
+For the order in which Phase 0 (move) and Phases 1–5 (consumer validation,
+release) are run, see the [execution plan][exec].
+
+[exec]: ./theme-only-folder.execution.md
+
 ## Package boundary
 
 Each `package.json` carries a clearly-scoped set of dependencies. The three
@@ -166,14 +181,6 @@ manifests are:
 
 Keep docs-site, CI, release, formatting, link-checking, and test-only
 dependencies out of `theme/package.json`.
-
-Today (without a `files` whitelist or `prepare` hook at the root), the
-GitHub/NPM install path still ships more than the theme tree to consumers.
-Reducing that to a clean tarball — `files: [theme, …]`, no devDeps at root, a
-`prepare` script that runs the sync — is a deliberate **next step** captured in
-a follow-on plan, not this one. The structural move makes that follow-on
-straightforward; until then, consumers can keep using the existing install path
-with only the one-line theme-path edit.
 
 ## Maintainer workflow
 
@@ -192,14 +199,13 @@ npm run check            # repo-wide format + markdown checks
 npm run fix              # auto-fix
 ```
 
-`docsy.dev`'s `postinstall` runs `_install-theme-deps`, which executes
-`npm install ../theme --install-links --no-save && rm -rf node_modules/theme`.
-The `--install-links` flag tells npm to treat the local `../theme` package as a
-tarball, which has the side effect of materialising `theme/`'s declared runtime
-dependencies (currently `bootstrap` and `@fortawesome/fontawesome-free`) into
-`docsy.dev/node_modules/`. The `rm -rf node_modules/theme` line then discards
-the now-redundant copy of the theme itself. Hugo's consumer-cwd `node_modules`
-lookup finds Bootstrap and Font Awesome there during the `docsy.dev` build.
+`docsy.dev`'s `postinstall` runs `_install-theme-deps` (see
+`docsy.dev/package.json`), which materialises `theme/`'s declared runtime deps
+into `docsy.dev/node_modules/` so Hugo's consumer-cwd lookup finds them during
+the build. The mechanics (`--install-links` flag and the cleanup line) are
+recorded in [spike-notes][].
+
+[spike-notes]: ./spike-notes.md
 
 ## Tooling versions
 
@@ -227,41 +233,6 @@ Test fixtures, generated goldens, and test-only dependencies live in
 `docsy.dev/` (current) or a repo-level `tests/` folder (future). Root commands
 make the suite easy for maintainers to run; theme users never install the test
 toolchain.
-
-## Work areas
-
-1. **Move the theme into `theme/`.** Move `assets/`, `i18n/`, `images/`,
-   `layouts/`, `static/`, `hugo.yaml`, `theme.toml`, `go.mod`, `go.sum` into
-   `theme/`. Update the `module` declaration in `theme/go.mod` to
-   `github.com/google/docsy/theme`. Drop the legacy `../../node_modules/*`
-   escape mounts from `theme/hugo.yaml`.
-
-2. **Update repo-root scripts.** Update generators and patch scripts in
-   `scripts/` (`mkdirp-hugo-mod.js`, `_gen-chroma-style.sh`,
-   `refresh-sass-variables.pl`, `scrollspy-patch/*`, `getHugoModules/`,
-   `make-site.sh`) to read/write under `theme/`. Update the root `package.json`
-   script paths to point at `theme/assets`, `theme/i18n`, etc.
-
-3. **Add `theme/package.json` as a private mirror.** Same `dependencies` as the
-   root; `"private": true`. Add `scripts/sync-theme-deps.mjs` to keep the mirror
-   aligned with root and wire it into `_prepare`, `postupdate:dep`, and
-   `postupdate:packages`.
-
-4. **Update `docsy.dev`.** Switch the consumer config to `theme: [docsy/theme]`
-   (classic non-module form). Add a `postinstall` that runs
-   `_install-theme-deps` (uses `npm install ../theme --install-links --no-save`
-   to materialise theme deps into `docsy.dev/node_modules/` without symlinking
-   the theme itself).
-
-5. **Update `docsy-example`.** Land a coordinated PR that bumps the import path.
-
-6. **Update CI and smoke tests.** `scripts/make-site.sh` and the GitHub Actions
-   workflows must exercise the new install paths. Keep the existing matrix (NPM
-   × HUGO_MODULE × Windows × Ubuntu) green.
-
-7. **Update docs and release notes.** Document the one-line config change per
-   install mode. The release blog post must include exact before/after snippets,
-   and the user-guide get-started pages must reflect the new import path.
 
 ## Acceptance criteria
 
@@ -293,6 +264,3 @@ toolchain.
   module path. The cost of carrying a fragile facade outweighs the value of "no
   config change" for one release.
 - Do not change the Hugo theme name (`docsy`).
-- Do not, in this change, slim the root `package.json` to a thin publishable
-  shim or add a `files` whitelist. That work is in scope for a follow-on plan;
-  TOF lays the structural ground for it.
