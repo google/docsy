@@ -149,8 +149,8 @@ npm run docsy.dev-install    # docsy.dev deps (site build + hugo-extended);
 npm run build                # green
 ```
 
-Netlify deploy preview verification (the second half of the Phase 1 exit
-criterion) is still pending.
+The second half of the Phase 1 exit criterion — a green Netlify deploy preview —
+is confirmed on [#2640](https://github.com/google/docsy/pull/2640).
 
 ### Note: `docsy.dev` is a distinct (sibling-folder) install shape
 
@@ -178,18 +178,16 @@ such.
 
 ## Phase 2: local smoke tests (CI emulation)
 
-Ran all three install modes locally against the pushed spike branch
-(`origin = github.com/chalin/docsy`, ref `chalin-m24-monorepo-2026-0520`). Each
-mode built a runnable site with full styling (the compiled `main.min.css` is
-~370 KB and the Font Awesome `webfonts/` are emitted, confirming the Bootstrap +
-Font Awesome SCSS resolved — not just an empty CSS shell).
+Ran all three install modes locally against the integration branch
+(`google/docsy@task/repo-reorg-2026-05`). Each mode built a runnable site with
+full styling (the compiled `main.min.css` is ~370 KB and the Font Awesome
+`webfonts/` are emitted, confirming the Bootstrap + Font Awesome SCSS resolved —
+not just an empty CSS shell).
 
-Local-run detail: this dev machine exposes `hugo` only through an `hvm` shell
-function (no plain `hugo` binary on `PATH`, so `make-site.sh`'s default
-`npx hugo` cannot resolve one). Each run therefore set `HUGO` to the extended
-binary already present in the repo:
-`HUGO="$PWD/docsy.dev/node_modules/.bin/hugo"` (v0.157.0 extended). This is a
-local-environment workaround, not a TOF change; CI provides Hugo its own way.
+Local-run detail: `make-site.sh` defaults `HUGO` to `node scripts/run-hugo.mjs`
+(see Phase 3), which resolves `docsy.dev`'s extended Hugo — so a local run needs
+no manual Hugo setup beyond `npm run install:all` (an explicit `HUGO=` export
+still overrides it).
 
 ### Result matrix
 
@@ -204,7 +202,7 @@ local-environment workaround, not a TOF change; CI provides Hugo its own way.
 ```sh
 mkdir -p tmp && cd tmp
 # CI does: ../scripts/make-site.sh -s NPM -r $PR_REPO -v $BRANCH
-../scripts/make-site.sh -s NPM -r chalin/docsy -v chalin-m24-monorepo-2026-0520
+../scripts/make-site.sh -s NPM -r google/docsy -v task/repo-reorg-2026-05
 ```
 
 The consumer-facing edit is the single `theme:` line. Under the hood:
@@ -224,7 +222,7 @@ side-effect"), so the theme's `imports:` resolve; the real SCSS comes from the
 ```sh
 cd tmp
 # CI does: ../scripts/make-site.sh -s HUGO_MODULE -r $PR_REPO -v $BRANCH
-../scripts/make-site.sh -s HUGO_MODULE -r chalin/docsy -v chalin-m24-monorepo-2026-0520
+../scripts/make-site.sh -s HUGO_MODULE -r google/docsy -v task/repo-reorg-2026-05
 ```
 
 The consumer-facing edit is the module import path gaining the `/theme` suffix:
@@ -238,13 +236,12 @@ The consumer-facing edit is the module import path gaining the `/theme` suffix:
 
 Bootstrap and Font Awesome are supplied by the theme's own Hugo-module
 `imports:` (`github.com/twbs/bootstrap`, `github.com/FortAwesome/Font-Awesome`),
-so no `node_modules` are needed in this mode. The
-`replace … => ./tmp/docsy/theme` directive that `make-site.sh` writes is only
-the harness's way of pointing a fork branch at a local clone (because the module
-path is `google/docsy/theme` but the branch lives on `chalin/docsy`); it is
-**not** part of the user-facing migration. For the real `google/docsy`, the
-command is just `hugo mod get github.com/google/docsy/theme@<rev>`. **Result:
-one-line change.**
+so no `node_modules` are needed in this mode. With `-r google/docsy` (the
+canonical module path) `make-site.sh` runs
+`hugo mod get github.com/google/docsy/theme@<rev>` directly. (For a fork whose
+branch lives off the canonical path, it instead clones the fork and writes a
+`replace … => ./tmp/docsy/theme` directive — a harness mechanism, not part of
+the user-facing migration.) **Result: one-line change.**
 
 ### Mode 3 — non-module clone into `themes/docsy/`
 
@@ -290,18 +287,16 @@ emitted). The config promise holds. The get-started "clone" docs (Option 2 in
 Phase 5. No design change is required for the move to land; the clone path works
 as documented here.
 
-### Phase 2 exit criterion — NOT yet met (paired with Phase 3)
+### Phase 2 exit criterion — met (with Phase 3)
 
-Local builds: all three install modes build locally and the matrix above is
-complete with exact one-line config edits. But the local runs **masked a CI
-gap**: each one set `HUGO` to an extended binary explicitly
-(`docsy.dev/node_modules/.bin/hugo`). With `make-site.sh`'s default `npx hugo`,
-CI finds no Hugo executable (see Phase 3). A local pass that relies on an ad-hoc
-`HUGO` override does not count as a Phase 2 exit — Phase 2 and Phase 3 are now
-iterated as a pair (the same install matrix on two surfaces). Standing follow-up
-for Phase 5: get-started clone docs.
+All three install modes build with the same Hugo-resolution mechanism CI uses
+(`run-hugo.mjs`, no `HUGO` override), and the CI smoke matrix is green (see
+Phase 3). The earlier local-only passes had relied on an ad-hoc `HUGO` override,
+which masked the CI gap that `run-hugo.mjs` + `install:all` then closed — so
+Phases 2 and 3 closed together, as the same install matrix on two surfaces.
+Standing follow-up for Phase 5: get-started clone docs.
 
-## Phase 3: GitHub CI — in progress (Hugo executable blocker)
+## Phase 3: GitHub CI — resolved (decision E); CI matrix green
 
 **Symptom:** the smoke matrix (`smoke.yaml`) fails on both OSes because the
 throwaway site cannot find a Hugo executable.
@@ -355,14 +350,15 @@ Implementation notes:
   green (369 KB `main.min.css` each); `node scripts/run-hugo.mjs version`
   reports extended 0.157.0 from any cwd.
 
-**CI step — done locally, pending a real CI run.** The helper reuses
-`docsy.dev`'s `hugo-extended`, but `smoke.yaml`'s setup previously ran only root
+**CI step — done; matrix green.** The helper reuses `docsy.dev`'s
+`hugo-extended`, but `smoke.yaml`'s setup previously ran only root
 `npm install`. Added an `install:all` root script
-(`npm install && npm run docsy.dev-install`) and switched the smoke job's "Setup
-workspace" step to `npm run install:all`, so `docsy.dev` (and its
-`hugo-extended`) is installed before `make-site.sh`. Chose `install:all` over a
-lighter targeted `hugo-extended` install for now — consistency across jobs and a
-useful onboarding command outweigh the few seconds saved. Verified locally:
-`npm run install:all` completes and `node scripts/run-hugo.mjs version` resolves
-extended 0.157.0. Still to confirm on a real CI run: the Windows + Ubuntu matrix
-goes green (Windows runner behaviour in particular).
+(`npm run docsy.dev-install && npm install` — `docsy.dev-install` first so
+`test.yaml`'s `install:all -- --omit=optional` applies the flag to the final
+root `npm install`) and switched the smoke job's "Setup workspace" step to
+`npm run install:all`, so `docsy.dev` (and its `hugo-extended`) is installed
+before `make-site.sh`. Chose `install:all` over a lighter targeted install —
+consistency across jobs and a useful onboarding command outweigh the few seconds
+saved. **Confirmed on CI** ([#2640](https://github.com/google/docsy/pull/2640)):
+`test` (build) and `smoke` (new-site NPM + HUGO_MODULE) pass on ubuntu-latest
+and windows-latest, plus a green Netlify deploy preview.
