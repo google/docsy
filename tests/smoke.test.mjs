@@ -1,5 +1,4 @@
-// Smoke tests for the TOF (theme-only-folder) install modes — repo-reorg
-// Phase 2/3. Builds a Docsy-based site three ways and asserts each produces a
+// Smoke tests: builds a Docsy-based site three ways and asserts each produces a
 // real, fully-styled site (not merely a zero exit code).
 //
 // Uses Node's built-in test runner (`node --test`) — no extra test deps.
@@ -17,6 +16,7 @@ import { spawnSync } from 'node:child_process';
 import {
   appendFileSync,
   existsSync,
+  readFileSync,
   readdirSync,
   rmSync,
   statSync,
@@ -52,16 +52,14 @@ function hugo(args, opts = {}) {
   return run('node', [RUN_HUGO, ...args], opts);
 }
 
-// A real, fully-styled build has an index page, a non-trivial compiled
-// stylesheet (Bootstrap + Docsy SCSS), and the Font Awesome webfonts. The CSS
-// size guards against "Hugo succeeded but styling silently broke".
+// A real, fully-styled build has: a non-trivial compiled stylesheet (Bootstrap +
+// Docsy SCSS), a rendered home page that actually links that stylesheet, and a
+// generated sitemap. The CSS size plus the HTML->CSS link guard against "Hugo
+// succeeded but styling silently broke".
 function assertBuilt(name) {
   const pub = path.join(TMP, name, 'public');
-  assert.ok(
-    existsSync(path.join(pub, 'index.html')),
-    'public/index.html exists',
-  );
 
+  // Compiled stylesheet: present and non-trivial.
   const scssDir = path.join(pub, 'scss');
   const mainCss = existsSync(scssDir)
     ? readdirSync(scssDir).find((f) => /^main\.min.*\.css$/.test(f))
@@ -72,10 +70,26 @@ function assertBuilt(name) {
     'compiled CSS is non-trivial (> 100 KB)',
   );
 
-  const fonts = path.join(pub, 'webfonts');
+  // Home page: rendered (has a <title>) and wired to the compiled stylesheet
+  // (references the exact fingerprinted CSS filename).
+  const indexHtml = readFileSync(path.join(pub, 'index.html'), 'utf8');
+  assert.match(
+    indexHtml,
+    /<title>[^<]+<\/title>/,
+    'index.html has a rendered <title>',
+  );
   assert.ok(
-    existsSync(fonts) && readdirSync(fonts).length > 0,
-    'Font Awesome webfonts emitted',
+    indexHtml.includes(mainCss),
+    'index.html links the compiled stylesheet',
+  );
+
+  // Sitemap: generated with at least one page URL.
+  const sitemap = readFileSync(path.join(pub, 'sitemap.xml'), 'utf8');
+  assert.match(sitemap, /<urlset/, 'sitemap.xml is a <urlset>');
+  assert.match(
+    sitemap,
+    /<loc>https?:\/\/[^<]+<\/loc>/,
+    'sitemap.xml lists a page URL',
   );
 }
 

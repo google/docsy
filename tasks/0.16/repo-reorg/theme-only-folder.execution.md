@@ -196,13 +196,13 @@ to 0.16 by following only the release notes.
 **Seed (done):** `tests/smoke.test.mjs`, run via `npm run test:smoke`. It uses
 Node's built-in test runner (`node --test`) — **no new deps** — to drive the
 three install modes on the developer's own OS and assert each produces a real,
-fully-styled site (index page, > 100 KB compiled CSS, Font Awesome webfonts),
-not just a zero exit. It covers what the CI smoke matrix runs (NPM, HUGO_MODULE)
-**plus** the non-module clone, which CI does not exercise. Target is
-parameterized via `DOCSY_REPO` / `DOCSY_VERS` (defaults
-`google/docsy@task/repo-reorg-2026-05`). Prereq: `npm run install:all` (for
-`hugo-extended`). It is deliberately kept out of `test:tooling` / CI `ci:post`
-(slow, network-bound).
+fully-styled site — a rendered home page that links the exact compiled
+stylesheet (> 100 KB), plus a generated sitemap — not just a zero exit. It
+covers what the CI smoke matrix runs (NPM, HUGO_MODULE) **plus** the non-module
+clone, which CI does not exercise. Target is parameterized via `DOCSY_REPO` /
+`DOCSY_VERS` (defaults `google/docsy@task/repo-reorg-2026-05`). Prereq:
+`npm run install:all` (for `hugo-extended`). It is deliberately kept out of
+`test:tooling` / CI `ci:post` (slow, network-bound).
 
 **Later (not started):** upgrade the seed to a **Vitest** harness with all code
 in **TypeScript executed directly under Node** (no separate compile step). The
