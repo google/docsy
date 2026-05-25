@@ -113,9 +113,18 @@ time.
 Exit criterion: all three install modes build locally; the spike-notes matrix is
 complete with exact one-line edits.
 
-Status (2026-05-24): pending. `make-site.sh` has been updated for the new
-`/theme` suffix in both the NPM and HUGO_MODULE paths but the runs themselves
-have not yet been executed against the current architecture.
+Status (2026-05-24): **exit criterion met.** All three install modes built
+locally against the pushed spike branch
+(`chalin/docsy@chalin-m24-monorepo-2026-0520`), each with full styling (~370 KB
+compiled CSS + Font Awesome webfonts). NPM and HUGO_MODULE are a clean one-line
+consumer config edit. The non-module clone is a one-line _config_ edit too, but
+its _setup procedure_ gained a step (theme deps now install into
+`themes/docsy/theme/`, and the empty Hugo-module placeholder dirs must be
+generated explicitly since `theme/package.json` carries no lifecycle scripts) —
+a Phase 5 get-started docs follow-up, not a merge blocker. Full matrix and exact
+commands are in [spike-notes][] Phase 2.
+
+[spike-notes]: ./spike-notes.md
 
 ### Phase 3: GitHub CI
 

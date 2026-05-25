@@ -28,19 +28,22 @@ Upstream tracking: issue [#2617][].
 Updated 2026-05-24. Per-phase detail (with exit criteria) lives in the
 [execution plan][exec].
 
-| Phase                                | Status                                                |
-| ------------------------------------ | ----------------------------------------------------- |
-| 0 — structural move                  | Landed; `_prepare` + `_diff:check` regression pending |
-| 1 — `docsy.dev` consumes TOF         | Local build green; Netlify preview pending            |
-| 2 — local smoke tests (CI emulation) | Pending; `make-site.sh` paths updated                 |
-| 3 — GitHub CI                        | Pending                                               |
-| 4 — `docsy-example`                  | Pending (post-pre-release)                            |
-| 5 — docs and release notes           | Pending                                               |
+| Phase                                | Status                                                       |
+| ------------------------------------ | ------------------------------------------------------------ |
+| 0 — structural move                  | Landed; `_prepare` + `_diff:check` regression pending        |
+| 1 — `docsy.dev` consumes TOF         | Local build green; Netlify preview pending                   |
+| 2 — local smoke tests (CI emulation) | Done; all 3 modes build locally (clone setup → Phase 5 docs) |
+| 3 — GitHub CI                        | Pending                                                      |
+| 4 — `docsy-example`                  | Pending (post-pre-release)                                   |
+| 5 — docs and release notes           | Pending                                                      |
 
 Next concrete steps, in order:
 
 1. Re-run `npm run _prepare` and `npm run _diff:check` end-to-end against the
    new layout to close out Phase 0.
 2. Push the branch and confirm a Netlify deploy preview of `docsy.dev` builds.
-3. Run `make-site.sh -s NPM`, then `-s HUGO_MODULE`, then a manual non-module
-   `themes/docsy/` clone-and-build. Record each in [spike-notes][spike].
+3. Phase 3: lift the now-green local smoke matrix into GitHub Actions
+   (`smoke.yaml` / `test.yaml`) and watch the Windows + Ubuntu matrix. This is
+   the decision gate to merge to `main`.
+4. Phase 5 carry-over: update the get-started "clone" docs for the new
+   non-module setup procedure recorded in [spike-notes][spike] Phase 2.

@@ -152,19 +152,125 @@ npm run build                # green
 Netlify deploy preview verification (the second half of the Phase 1 exit
 criterion) is still pending.
 
-## Phase 2: NPM (GitHub) — pending under current architecture
+## Phase 2: local smoke tests (CI emulation)
 
-The Phase 2 work (`make-site.sh -s NPM`, `-s HUGO_MODULE`, and the non-module
-`themes/docsy/` install) is still to be run against the current architecture.
-`make-site.sh` itself has been updated for the `/theme` suffix in both NPM and
-HUGO_MODULE paths, but the runs themselves have not yet been executed.
+Ran all three install modes locally against the pushed spike branch
+(`origin = github.com/chalin/docsy`, ref `chalin-m24-monorepo-2026-0520`). Each
+mode built a runnable site with full styling (the compiled `main.min.css` is
+~370 KB and the Font Awesome `webfonts/` are emitted, confirming the Bootstrap +
+Font Awesome SCSS resolved — not just an empty CSS shell).
 
-Note: an earlier iteration in this spike tested an `npm pack` + consumer install
-flow under a different architecture (root as a thin shim with a
-`files: [theme, …]` whitelist, no devDeps, and a `prepare` script that synced
-theme deps to root). That architecture was deferred to a follow-on plan; the
-consumer-install footprint under the current shipped architecture needs to be
-re-measured as part of Phase 2.
+Local-run detail: this dev machine exposes `hugo` only through an `hvm` shell
+function (no plain `hugo` binary on `PATH`, so `make-site.sh`'s default
+`npx hugo` cannot resolve one). Each run therefore set `HUGO` to the extended
+binary already present in the repo:
+`HUGO="$PWD/docsy.dev/node_modules/.bin/hugo"` (v0.157.0 extended). This is a
+local-environment workaround, not a TOF change; CI provides Hugo its own way.
+
+### Result matrix
+
+| #   | Install mode     | Consumer config edit (the one line)                               | Builds? | Result                                                     |
+| --- | ---------------- | ----------------------------------------------------------------- | ------- | ---------------------------------------------------------- |
+| 1   | Hugo module      | import path `github.com/google/docsy` → `…/docsy/theme`           | ✅      | one-line change                                            |
+| 2   | NPM (GitHub)     | `theme: docsy` → `theme: docsy/theme` (`themesDir: node_modules`) | ✅      | one-line change                                            |
+| 3   | Non-module clone | `theme: docsy` → `theme: docsy/theme`                             | ✅      | one-line config; setup procedure gained a step (see below) |
+
+### Mode 2 — NPM (GitHub)
+
+```sh
+mkdir -p tmp && cd tmp
+# CI does: ../scripts/make-site.sh -s NPM -r $PR_REPO -v $BRANCH
+../scripts/make-site.sh -s NPM -r chalin/docsy -v chalin-m24-monorepo-2026-0520
+```
+
+The consumer-facing edit is the single `theme:` line. Under the hood:
+`npm install` of the GitHub package lands the whole repo at
+`node_modules/docsy/`, so `theme: docsy/theme` + `themesDir: node_modules`
+resolves the theme at `node_modules/docsy/theme/`. The root `postinstall`
+(`_mkdir:hugo-mod`) ran in the installed package and created the empty
+Hugo-module placeholder dirs `node_modules/github.com/twbs/bootstrap` and
+`node_modules/github.com/FortAwesome/Font-Awesome` (the documented "NPM install
+side-effect"), so the theme's `imports:` resolve; the real SCSS comes from the
+`node_modules/bootstrap` / `node_modules/@fortawesome/fontawesome-free` mounts
+(brought in as deps of the `docsy` package). `mkdirp-hugo-mod.js` already reads
+`theme/go.mod`, so no change was needed there. **Result: one-line change.**
+
+### Mode 1 — Hugo module
+
+```sh
+cd tmp
+# CI does: ../scripts/make-site.sh -s HUGO_MODULE -r $PR_REPO -v $BRANCH
+../scripts/make-site.sh -s HUGO_MODULE -r chalin/docsy -v chalin-m24-monorepo-2026-0520
+```
+
+The consumer-facing edit is the module import path gaining the `/theme` suffix:
+
+```diff
+ module:
+   imports:
+-    - path: github.com/google/docsy
++    - path: github.com/google/docsy/theme
+```
+
+Bootstrap and Font Awesome are supplied by the theme's own Hugo-module
+`imports:` (`github.com/twbs/bootstrap`, `github.com/FortAwesome/Font-Awesome`),
+so no `node_modules` are needed in this mode. The
+`replace … => ./tmp/docsy/theme` directive that `make-site.sh` writes is only
+the harness's way of pointing a fork branch at a local clone (because the module
+path is `google/docsy/theme` but the branch lives on `chalin/docsy`); it is
+**not** part of the user-facing migration. For the real `google/docsy`, the
+command is just `hugo mod get github.com/google/docsy/theme@<rev>`. **Result:
+one-line change.**
+
+### Mode 3 — non-module clone into `themes/docsy/`
+
+The Hugo **config** edit is one line (`theme: docsy` → `theme: docsy/theme`),
+and the clone still lands at `themes/docsy/`. But the **setup procedure**
+changed versus pre-TOF and needs a doc update in Phase 5. Exact working flow
+(run from the site root; site created with `hugo new site --format yaml`):
+
+```sh
+# 1. Clone the theme (whole repo) into themes/docsy
+cd themes
+git clone -b <version> https://github.com/google/docsy
+# 2. Install the theme's runtime deps INTO the theme/ subfolder
+(cd docsy/theme && npm install)
+# 3. Create the empty Hugo-module placeholder dirs under themesDir (themes/)
+(cd docsy && node scripts/mkdirp-hugo-mod.js ..)
+cd ..
+# 4. PostCSS at the site root (unchanged prerequisite)
+npm install --save-dev autoprefixer postcss-cli
+# 5. config: theme: docsy/theme
+```
+
+Why steps 2 and 3 are now separate (pre-TOF, a single
+`cd themes/docsy && npm install` did both):
+
+- The theme root Hugo sees is now `themes/docsy/theme/`, one level deeper.
+  Hugo's `node_modules/bootstrap` mount is resolved theme-dir-relative first, so
+  the deps must be installed at `themes/docsy/theme/node_modules/`. Verified:
+  with the deps one level up at `themes/docsy/node_modules/` the build fails
+  with
+  `File to import not found or unreadable: ../../vendor/bootstrap/scss/functions`;
+  moving them into `themes/docsy/theme/node_modules/` fixes it.
+- `theme/package.json` is a script-less private mirror (no `postinstall`), by
+  design (acceptance criteria: "No other lifecycle scripts"). So the empty
+  `github.com/...` placeholder dirs that the root `postinstall` used to create
+  must now be generated explicitly with `mkdirp-hugo-mod.js` (step 3), which
+  writes them under `themesDir` (`themes/github.com/...`) where Hugo looks up
+  the theme's `imports:` for a non-module site.
+
+**Result: one-line config change ✅, builds ✅** (8 pages, ~370 KB CSS, webfonts
+emitted). The config promise holds. The get-started "clone" docs (Option 2 in
+`other-options.md`) need the updated multi-step install above — tracked for
+Phase 5. No design change is required for the move to land; the clone path works
+as documented here.
+
+### Phase 2 exit criterion
+
+Met: all three install modes build locally and the matrix above is complete with
+exact one-line config edits. One follow-up for Phase 5 (get-started clone docs),
+no blocker for the merge gate.
 
 ## Phase 3: GitHub CI — pending
 
