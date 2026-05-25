@@ -29,6 +29,11 @@ a bird's-eye view of where we are and what's next, see the folder
 - **Phases 0 and 1 are intertwined in practice.** Expect to cycle between moving
   files (Phase 0) and trying the `docsy.dev` build (Phase 1) until both exit
   criteria are met. Treat them as a tight loop, not two sequential blocks.
+- **Phases 2 and 3 are a pair, too.** Local smoke (Phase 2) and CI smoke
+  (Phase 3) validate the _same_ install matrix on two surfaces. A local-only
+  green does **not** close Phase 2 if it relies on environment fixups (e.g. an
+  ad-hoc `HUGO` override) that CI does not have. Iterate them as one loop until
+  the same matrix passes both locally and in CI.
 - **Single feature branch through Phases 0–3.** All consumer-surface validation
   runs against the same tree. Merge to `main` only after Phase 3 passes.
 - **Running spike notes** live at `tasks/0.16/repo-reorg/spike-notes.md`. They
@@ -91,12 +96,12 @@ This is the most informative single check.
 Exit criterion: `docsy.dev` builds locally and on Netlify against the spike
 branch.
 
-Status (2026-05-24): **local build exit criterion met.** `docsy.dev` builds from
-`theme/` with the one-line `theme: [docsy/theme]` consumer config change and no
-symlinks anywhere (223 EN + 218 FR pages). `docsy.dev/scripts/_install.sh` now
-installs both the root and `docsy.dev` packages (workspaces are empty), so the
-Netlify command sequence works in principle. Netlify deploy preview verification
-is still pending.
+Status (2026-05-25): **exit criterion met.** `docsy.dev` builds from `theme/`
+with the one-line `theme: [docsy/theme]` consumer config change and no symlinks
+anywhere (223 EN + 218 FR pages), and the Netlify deploy preview is green on
+[#2640][]. `docsy.dev/scripts/_install.sh` installs both the root and
+`docsy.dev` packages (workspaces are empty), which is what the Netlify build
+sequence needs.
 
 ### Phase 2: local smoke tests (CI emulation)
 
@@ -110,24 +115,55 @@ time.
 - Validate non-module theme install: `hugo new site` + `git clone` Docsy into
   `themes/docsy/`. Confirm; record.
 
-Exit criterion: all three install modes build locally; the spike-notes matrix is
-complete with exact one-line edits.
+Exit criterion (paired with Phase 3): all three install modes build with the
+_same_ Hugo-resolution mechanism CI uses, and the spike-notes matrix is complete
+with exact one-line edits. A local-only pass that relies on an ad-hoc `HUGO`
+override does not count.
 
-Status (2026-05-24): pending. `make-site.sh` has been updated for the new
-`/theme` suffix in both the NPM and HUGO_MODULE paths but the runs themselves
-have not yet been executed against the current architecture.
+Status (2026-05-25): **exit criterion met.** All three install modes build with
+the same Hugo-resolution mechanism CI uses (`run-hugo.mjs`, no `HUGO` override),
+and the CI smoke matrix is green ([#2640][]). Earlier local-only runs had masked
+a gap — they set `HUGO` explicitly, while CI's `npx hugo` found nothing once
+`docsy.dev` stopped being a workspace (so `hugo-extended` was no longer hoisted
+to the repo root). Closing that gap is exactly what `run-hugo.mjs` +
+`install:all` do (Phase 3). The non-module-clone setup-step follow-up for Phase
+5 still stands.
+
+[spike-notes]: ./spike-notes.md
 
 ### Phase 3: GitHub CI
 
-Lift Phase 2 into Actions on the same branch.
+Lift Phase 2 into Actions on the same branch. Paired with Phase 2 (see Working
+principles).
 
+- **Resolve Hugo availability on the runner.** Root cause: `docsy.dev` is no
+  longer an npm workspace, so root `npm install` no longer hoists
+  `hugo-extended` into the repo-root `node_modules/.bin/` where the smoke test's
+  `npx hugo` resolved it. **Decided: option E, made cross-OS** —
+  `scripts/run-hugo.mjs` reuses `docsy.dev`'s installed `hugo-extended` (version
+  single-sourced via `config.hugo_version`) and is now the `make-site.sh`
+  default; verified locally for NPM + HUGO_MODULE. See [spike-notes][] Phase 3.
+- **Make `hugo-extended` available to the smoke job** (done): added an
+  `install:all` root script (`npm run docsy.dev-install && npm install`) and
+  switched `smoke.yaml`'s "Setup workspace" step to `npm run install:all`, so
+  `docsy.dev`'s `hugo-extended` is installed where `run-hugo.mjs` looks.
+  (`docsy.dev-install` runs first so `test.yaml`'s
+  `install:all -- --omit=optional` lands the flag on the final root
+  `npm install`.) Chose `install:all` over a lean targeted install for
+  consistency + onboarding value.
 - Update `.github/workflows/smoke.yaml` and `.github/workflows/test.yaml` for
-  the new paths.
-- Push the spike branch and watch the Windows + Ubuntu matrix go green.
-- Fix any platform-specific issues (Windows in particular).
+  the new paths (done).
+- Push the branch and watch the Windows + Ubuntu matrix go green (done).
 
-Exit criterion: full CI matrix green on the spike branch. **Decision gate to
-merge to `main`.** If everything above held, the canonical move lands.
+Exit criterion: full CI matrix green on the spike branch (which also closes
+Phase 2). **Decision gate to merge to `main`.** If everything above held, the
+canonical move lands.
+
+Status (2026-05-25): **exit criterion met — CI matrix green ([#2640][]).** Both
+`test` (build; ubuntu + windows) and `smoke` (new-site NPM + HUGO_MODULE; ubuntu
+
+- windows) pass, and the Netlify deploy preview is green. The merge gate is
+  satisfied.
 
 ### Phase 4: `docsy-example`
 
@@ -151,6 +187,33 @@ The user-facing payload, derived from the spike notes.
 Exit criterion: a reviewer who has not seen the design conversation can upgrade
 to 0.16 by following only the release notes.
 
+## Local test harness
+
+**Seed (done):** `tests/smoke.test.mjs`, run via `npm run test:smoke`. It uses
+Node's built-in test runner (node:test) — **no new deps** — to drive the three
+install modes on the developer's own OS and assert each produces a real,
+fully-styled site — a rendered home page that links the exact compiled
+stylesheet (> 100 KB), plus a generated sitemap — not just a zero exit. It
+covers what the CI smoke matrix runs (NPM, HUGO_MODULE) **plus** the non-module
+clone, which CI does not exercise. Target repo/branch are set with `--repo` /
+`--branch` flags (defaults: repo `google/docsy`, branch `main`); the
+`test:smoke` script pins `--branch task/repo-reorg-2026-05` during the TOF
+rollout. Prereq: `npm run install:all` (for `hugo-extended`). Deliberately kept
+out of `test:tooling` / CI `ci:post` (slow, network-bound).
+
+**Later (not started):**
+
+- Upgrade the seed to a **Vitest** harness with all code in **TypeScript
+  executed directly under Node** (no separate compile step). The `node:test`
+  `describe`/`test` shape maps closely onto Vitest, so the seed is the migration
+  starting point, not throwaway.
+- Possibly add a 4th smoke case for the `docsy.dev` **sibling-folder** shape
+  (`--themesDir ../..`) if/when it is surfaced as a documented power-user setup
+  — see [spike-notes][] Phase 1. It is already exercised by the `docsy.dev`
+  build, so this is optional coverage, not a gap.
+
+Both are follow-ons to TOF, not part of the move.
+
 ## Out of scope (this plan)
 
 See the plan's [What this plan does not change][plan-defer] section for the
@@ -163,7 +226,9 @@ canonical list of deferred work.
 - Parent issue: [#2617][]. Keep a phase checklist there (or sub-issues, if the
   team prefers) so progress is visible.
 - Spike notes: `tasks/0.16/repo-reorg/spike-notes.md`, grown through Phases 1–3.
-- One feature branch (currently `chalin-m24-monorepo-2026-0520`) carries Phases
-  0–3. Phases 4–5 land as separate PRs against `main` after the spike merges.
+- The first spike branch (the Phase 0 structural move,
+  `chalin-m24-monorepo-2026-0520`) has merged. Phases 2–3 continue on a
+  follow-up branch atop it. Phases 4–5 land as separate PRs against `main`.
 
 [#2617]: https://github.com/google/docsy/issues/2617
+[#2640]: https://github.com/google/docsy/pull/2640

@@ -2,12 +2,15 @@
 // It gets dependency versions from `package.json`.
 
 import fs from 'fs';
+import path from 'path';
 import { execSync } from 'child_process';
 
+const SCRIPT_DIR = path.join(process.cwd(), 'scripts');
 const packageJson = readPackageJson();
 let exitStatus = 0;
 
 const exit = () => process.exit(exitStatus);
+const hugoCmd = () => `node ${SCRIPT_DIR}/run-hugo.mjs`;
 
 function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
   try {
@@ -21,7 +24,7 @@ function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
       throw new Error(msg);
     }
 
-    const command = `npx hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
+    const command = `${hugoCmd()} mod get ${hugoModuleRefAtV}${pkgVers}`;
     console.log(`> (cd theme && ${command})`);
     const output = execSync(command, { cwd: 'theme' });
     console.log(output.toString());
