@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -29,7 +29,7 @@ jobs:
           cache: npm
           cache-dependency-path: package.json
 
-      - run: npm install --omit=optional
+      - run: npm run install:all -- --omit=optional
 
       - if: runner.os != 'Windows'
         run: npm run ci:test
