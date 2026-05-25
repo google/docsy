@@ -1,0 +1,14 @@
+{
+  "name": "theme",
+  "version": "0.15.1-dev+002-over-main-ce9942b8",
+  "description": "Internal folder for the Docsy theme files",
+  "repository": "github:google/docsy",
+  "homepage": "https://www.docsy.dev",
+  "license": "Apache-2.0",
+  "private": true,
+  "dependencies-note": "DO NOT EDIT directly; versions are synced from the root package.json by scripts/sync-theme-deps.mjs (run via `npm run _sync:theme-deps`).",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "6.7.2",
+    "bootstrap": "5.3.8"
+  }
+}

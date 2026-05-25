@@ -4,25 +4,26 @@
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
+  "workspaces-todo": "TODO: try adding theme later once all phases of repo reorg are complete",
   "workspaces": [
-    "docsy.dev"
   ],
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
-    "_check:format": "npx prettier --check assets *.md i18n scripts tasks",
+    "_check:format": "npx prettier --check theme/assets *.md theme/i18n scripts tasks",
     "_check:links": "npm run -C docsy.dev _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",
-    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss assets/_vendor/bootstrap/scss/'",
+    "_cp:bs-rfs": "bash -c 'cp node_modules/bootstrap/scss/vendor/*.scss theme/assets/_vendor/bootstrap/scss/'",
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
     "_mkdir:hugo-mod": "node scripts/mkdirp-hugo-mod.js ..",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
-    "_prepare": "npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
+    "_prepare": "npm run _sync:theme-deps && npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
     "_serve": "npm run -C docsy.dev _serve --",
+    "_sync:theme-deps": "node scripts/sync-theme-deps.mjs",
     "_spv:example": "echo TBC - npm run -s __spv docsy.dev/config/example/params.yaml --",
     "_spv": "npm run -s __spv docsy.dev/config/*/params.yaml --",
     "build": "npm run -C docsy.dev build --",
@@ -45,8 +46,8 @@
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "postinstall": "npm run _mkdir:hugo-mod",
-    "postupdate:dep": "npm run -s post-update",
-    "postupdate:packages": "npm run -s post-update",
+    "postupdate:dep": "npm run _sync:theme-deps && npm run -s post-update",
+    "postupdate:packages": "npm run _sync:theme-deps && npm run -s post-update",
     "prune:refcache": "npm run -C docsy.dev prune:refcache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run -C docsy.dev serve --",
@@ -79,5 +80,5 @@
   "engines": {
     "node": ">=24"
   },
-  "spelling": "cSpell:ignore afdocs docsy hugo fortawesome fontawesome onedark -"
+  "spelling": "cSpell:ignore -"
 }

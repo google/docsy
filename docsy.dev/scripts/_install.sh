@@ -3,9 +3,11 @@
 # Private script used by CI/CD workflows to install NPM packages necessary for
 # the website and theme.
 #
-# Since docsy.dev is a workspace of the Docsy repo root, we only need to install
-# the Docsy repo root dependencies. That will automatically install the
-# dependencies for docsy.dev.
+# Installs the Docsy repo-root packages (theme runtime deps + maintainer
+# tooling) and then the docsy.dev packages (site-build tooling such as
+# hugo-extended, autoprefixer, cross-env, …). The repo root currently has no
+# `docsy.dev` workspace declared, so the two installs must be invoked
+# explicitly.
 
 set -euo pipefail
 
@@ -29,7 +31,10 @@ if [ ! -f package.json ] || [ ! -d docsy.dev ]; then
     exit 1
 fi
 
-echo "Installing NPM packages for Docsy website and theme..."
-exec npm install
+echo "Installing NPM packages for the Docsy repo root..."
+npm install
+
+echo "Installing NPM packages for the docsy.dev website..."
+exec npm install -C docsy.dev
 
 # cSpell:ignore docsy
