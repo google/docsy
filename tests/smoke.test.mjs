@@ -1,11 +1,14 @@
 // Smoke tests: builds a Docsy-based site three ways and asserts each produces a
 // real, fully-styled site (not merely a zero exit code).
 //
-// Uses Node's built-in test runner (`node --test`) — no extra test deps.
+// Uses Node's built-in test runner (node:test) — no extra test deps.
 //
 //   Run:      npm run test:smoke
 //   Prereqs:  npm run install:all   (provides hugo-extended for run-hugo.mjs)
-//   Target:   override via env DOCSY_REPO / DOCSY_VERS
+//   Target:   defaults to repo "google/docsy", branch "task/repo-reorg-2026-05"
+//             (the TOF rollout branch). Override per run with flags (after --):
+//               npm run test:smoke -- --repo myfork/docsy --branch my-branch
+//             Flip the default branch to "main" once the TOF move merges.
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
 // kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
@@ -20,6 +23,7 @@ import {
   readdirSync,
   rmSync,
   statSync,
+  writeSync,
 } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -32,8 +36,23 @@ const TMP = path.join(repoRoot, 'tmp');
 const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 const RUN_HUGO = path.join(repoRoot, 'scripts', 'run-hugo.mjs');
 
-const REPO = process.env.DOCSY_REPO ?? 'google/docsy';
-const REF = process.env.DOCSY_VERS ?? 'task/repo-reorg-2026-05';
+// Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
+// forwards), falling back to a default.
+function arg(name, fallback) {
+  for (let i = 2; i < process.argv.length; i++) {
+    const a = process.argv[i];
+    if (a === `--${name}`) return process.argv[i + 1] ?? fallback;
+    if (a.startsWith(`--${name}=`)) return a.slice(name.length + 3);
+  }
+  return fallback;
+}
+
+// Target the smoke test installs Docsy from: a repo and a branch/ref. Defaults
+// to the TOF rollout branch on google/docsy; override with `--repo` / `--branch`.
+const REPO = arg('repo', 'google/docsy');
+// TODO(#2617): change the default branch to 'main' after the TOF move merges.
+const BRANCH = arg('branch', 'task/repo-reorg-2026-05');
+const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 
 // Run a command, capturing output; print it only when the command fails so a
 // passing run stays quiet but a failure is diagnosable.
@@ -50,6 +69,13 @@ function run(cmd, args, opts = {}) {
 // Run the repo's cross-OS Hugo resolver (the make-site.sh default).
 function hugo(args, opts = {}) {
   return run('node', [RUN_HUGO, ...args], opts);
+}
+
+// Live progress line. Write straight to fd 2 so it streams immediately —
+// `node --test` captures a test's console output and only emits it once the
+// test finishes, which would hide progress during the (multi-second) builds.
+function progress(msg) {
+  writeSync(2, `[smoke] ${msg}\n`);
 }
 
 // A real, fully-styled build has: a non-trivial compiled stylesheet (Bootstrap +
@@ -94,6 +120,7 @@ function assertBuilt(name) {
 }
 
 before(() => {
+  progress(`Target — ${TARGET}  (override with --repo / --branch)`);
   const v = hugo(['version']);
   assert.match(
     v.stdout ?? '',
@@ -106,13 +133,15 @@ before(() => {
 for (const src of ['NPM', 'HUGO_MODULE']) {
   test(`make-site.sh -s ${src}`, () => {
     const name = `smoke-${src.toLowerCase()}`;
+    progress(`${src}: make-site (npm/Hugo fetch + build) — ${TARGET}…`);
     const r = run(
       'bash',
-      [MAKE_SITE, '-s', src, '-r', REPO, '-v', REF, '-f', '-n', name],
+      [MAKE_SITE, '-s', src, '-r', REPO, '-v', BRANCH, '-f', '-n', name],
       { cwd: TMP },
     );
     assert.equal(r.status, 0, `${src} site build exited 0`);
     assertBuilt(name);
+    progress(`${src}: ok`);
   });
 }
 
@@ -123,6 +152,7 @@ test('non-module clone into themes/docsy', () => {
   rmSync(site, { recursive: true, force: true });
 
   // New site, then clone the whole Docsy repo under themes/docsy.
+  progress('clone: hugo new site…');
   assert.equal(
     hugo(['new', 'site', '--format', 'yaml', '--quiet', site], { cwd: TMP })
       .status,
@@ -130,11 +160,12 @@ test('non-module clone into themes/docsy', () => {
     'hugo new site',
   );
   const themesDocsy = path.join(site, 'themes', 'docsy');
+  progress(`clone: git clone ${TARGET} into themes/docsy…`);
   assert.equal(
     run('git', [
       'clone',
       '-b',
-      REF,
+      BRANCH,
       '--depth',
       '1',
       `https://github.com/${REPO}`,
@@ -146,6 +177,7 @@ test('non-module clone into themes/docsy', () => {
 
   // Theme runtime deps must live at the theme-dir-relative node_modules, i.e.
   // inside themes/docsy/theme/, for the `node_modules/bootstrap` mount.
+  progress('clone: npm install theme deps (themes/docsy/theme)…');
   assert.equal(
     run('npm', ['install', '--no-audit', '--no-fund'], {
       cwd: path.join(themesDocsy, 'theme'),
@@ -157,6 +189,7 @@ test('non-module clone into themes/docsy', () => {
   // theme/package.json has no postinstall (script-less private mirror), so the
   // empty Hugo-module placeholder dirs must be generated explicitly, under
   // themesDir (themes/). Use the cloned repo's own script + go.mod.
+  progress('clone: generate empty Hugo-module placeholder dirs…');
   assert.equal(
     run('node', [path.join('scripts', 'mkdirp-hugo-mod.js'), '..'], {
       cwd: themesDocsy,
@@ -166,6 +199,7 @@ test('non-module clone into themes/docsy', () => {
   );
 
   // PostCSS at the site root (unchanged prerequisite for non-module installs).
+  progress('clone: npm install postcss at site root…');
   assert.equal(run('npm', ['init', '-y'], { cwd: site }).status, 0, 'npm init');
   assert.equal(
     run(
@@ -186,6 +220,8 @@ test('non-module clone into themes/docsy', () => {
 
   // The single consumer config edit, then build.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
+  progress('clone: hugo build…');
   assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
   assertBuilt(name);
+  progress('clone: ok');
 });

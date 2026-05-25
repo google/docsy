@@ -152,6 +152,30 @@ npm run build                # green
 Netlify deploy preview verification (the second half of the Phase 1 exit
 criterion) is still pending.
 
+### Note: `docsy.dev` is a distinct (sibling-folder) install shape
+
+`docsy.dev` consumes Docsy as an **in-repo sibling folder**, which is a fourth
+shape beyond the three smoke modes (NPM, Hugo module, non-module clone):
+
+- **Theme access:** Hugo runs from `docsy.dev/` with `--themesDir ../..` (the
+  parent of the repo) and `theme: [docsy/theme]`, so `docsy/theme` re-descends
+  into the sibling `theme/` of the same repo. (Relies on the repo dir being
+  named `docsy`.)
+- **Theme deps:** `docsy.dev`'s `postinstall` → `_install-theme-deps`
+  (`npm install ../theme --install-links --no-save && rm -rf node_modules/theme`)
+  installs the theme's runtime deps into `docsy.dev/node_modules/`, where Hugo's
+  `node_modules/bootstrap` mount resolves via the consumer-cwd lookup.
+- **Module placeholders:** the theme's `imports:` resolve to the empty
+  `github.com/...` dirs the repo-root `npm install` postinstall creates at `..`
+  (the parent of the repo), which is exactly where `--themesDir ../..` looks.
+
+This shape is **already exercised** every time the `docsy.dev` site builds (it
+is the Phase 1 exit criterion), so it is covered — just not in the `node:test`
+smoke driver. For now it is treated as a maintainer/in-repo shape. It could
+later be surfaced and documented as a supported **power-user** consumer setup
+(and, if so, get its own smoke case); deferred until we decide to document it as
+such.
+
 ## Phase 2: local smoke tests (CI emulation)
 
 Ran all three install modes locally against the pushed spike branch

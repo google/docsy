@@ -204,11 +204,18 @@ clone, which CI does not exercise. Target is parameterized via `DOCSY_REPO` /
 `npm run install:all` (for `hugo-extended`). It is deliberately kept out of
 `test:tooling` / CI `ci:post` (slow, network-bound).
 
-**Later (not started):** upgrade the seed to a **Vitest** harness with all code
-in **TypeScript executed directly under Node** (no separate compile step). The
-`node:test` `describe`/`test` shape maps closely onto Vitest, so the seed is the
-migration starting point, not throwaway. This is a follow-on to TOF, not part of
-the move.
+**Later (not started):**
+
+- Upgrade the seed to a **Vitest** harness with all code in **TypeScript
+  executed directly under Node** (no separate compile step). The `node:test`
+  `describe`/`test` shape maps closely onto Vitest, so the seed is the migration
+  starting point, not throwaway.
+- Possibly add a 4th smoke case for the `docsy.dev` **sibling-folder** shape
+  (`--themesDir ../..`) if/when it is surfaced as a documented power-user setup
+  — see [spike-notes][] Phase 1. It is already exercised by the `docsy.dev`
+  build, so this is optional coverage, not a gap.
+
+Both are follow-ons to TOF, not part of the move.
 
 ## Out of scope (this plan)
 
