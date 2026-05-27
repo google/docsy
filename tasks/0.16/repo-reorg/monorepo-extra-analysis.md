@@ -14,6 +14,9 @@ pitfalls, open questions, and acceptance-criteria additions found while
 reviewing the plan against the current repo. The parent plan should stay lean;
 this doc is the working scratchpad and reviewer reference.
 
+This is historical pre-merge analysis. For current status, use
+[README.md](./README.md).
+
 [plan]: ./theme-only-folder.plan.md
 
 ## TL;DR
@@ -90,7 +93,8 @@ The root `hugo.yaml` contains:
 `../..` is counted from the theme root. If the consumer-visible theme root is
 deeper after the move (for example `node_modules/docsy/theme/`), the escape may
 need to be `../../../`. The same goes for Hugo module cache paths. Validate with
-a real consuming site before merging.
+a real consuming site before landing the TOF move. This validation is now
+complete; see [README.md](./README.md).
 
 ### 4. The `postinstall` lifecycle story is the live one
 

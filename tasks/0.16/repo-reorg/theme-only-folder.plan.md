@@ -133,16 +133,16 @@ the change.
 
 The release-note migration section pairs each install mode with its exact
 before/after snippet, derived from the spike. There should be exactly **one
-line** to change per install mode. If any mode requires more, iterate on TOF
-before merging.
+line** to change per install mode. The spike confirmed that shape before TOF
+merged.
 
 ## Compatibility spike
 
-Before the move lands on `main`, validate TOF on a feature branch. The three
-documented install modes below must each build a runnable site from the branch
-with at most a one-line consumer config change.
+TOF was validated on the task branch before it landed on `main` via [#2641][].
+The three documented install modes below each built a runnable site with at most
+a one-line consumer config change.
 
-The values in the table are the working hypothesis to be confirmed by the spike.
+The values in the table are the validated migration shape.
 
 | #   | Install mode     | Consumer command (example)                         | Consumer config after TOF                                 | Theme location Hugo reads   |
 | --- | ---------------- | -------------------------------------------------- | --------------------------------------------------------- | --------------------------- |
@@ -150,19 +150,19 @@ The values in the table are the working hypothesis to be confirmed by the spike.
 | 2   | NPM (GitHub)     | `npm install github:google/docsy#<rev>`            | `theme: docsy/theme`, `themesDir: node_modules`           | `node_modules/docsy/theme/` |
 | 3   | Non-module theme | `git clone` into `themes/docsy/`                   | `theme: docsy/theme`                                      | `themes/docsy/theme/`       |
 
-Validation harness, all run against the spike branch:
+Validation covered:
 
 - `docsy.dev` builds locally and in CI using the TOF Hugo module path.
-- `docsy-example` builds against the branch with the one-line module update.
+- `docsy-example` builds against the task branch with the one-line module
+  update.
 - `scripts/make-site.sh -s NPM` and `-s HUGO_MODULE` pass on Windows and Ubuntu
   after the smoke script is updated for the new path.
 - A minimal `hugo new site` with Docsy cloned into `themes/docsy/` builds with
   the one-line `theme:` edit.
+- Local smoke tests pass on `main` after the TOF merge.
 
-For each mode, record in `tasks/0.16/repo-reorg/spike-notes.md`: the exact
-commands used, the exact one-line config edit, and whether the result is
-"one-line change" or "needs more design". Any "needs more design" result blocks
-the merge until the design is iterated.
+The exact commands and one-line config edits are recorded in
+`tasks/0.16/repo-reorg/spike-notes.md`.
 
 For the order in which Phase 0 (move) and Phases 1–5 (consumer validation,
 release) are run, see the [execution plan][exec].
@@ -238,8 +238,7 @@ toolchain.
 ## Acceptance criteria
 
 - The [Compatibility spike](#compatibility-spike) has been run for all three
-  install modes on a feature branch, and its results are recorded, before the
-  canonical move merges to `main`.
+  install modes and its results are recorded.
 - `docsy.dev` builds from `theme/`.
 - A new site can use Docsy as a Hugo module with the documented one-line config
   change.
@@ -265,3 +264,5 @@ toolchain.
   module path. The cost of carrying a fragile facade outweighs the value of "no
   config change" for one release.
 - Do not change the Hugo theme name (`docsy`).
+
+[#2641]: https://github.com/google/docsy/pull/2641
