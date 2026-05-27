@@ -191,12 +191,12 @@ theme changes, so coordinated edits across both happen daily.
 Orchestration commands continue to run from the repo root:
 
 ```sh
-npm install              # repo root deps (theme runtime + maintainer tools)
-npm run docsy.dev-install  # docsy.dev/ deps (site build + hugo-extended)
+npm run install:all      # repo root deps + docsy.dev (incl. hugo-extended)
 npm run build            # builds docsy.dev against theme/
 npm run serve            # docsy.dev dev server with live reload
 npm run check            # repo-wide format + markdown checks
 npm run fix              # auto-fix
+npm run test:smoke       # local NPM / Hugo-module / non-module-clone smoke
 ```
 
 `docsy.dev`'s `postinstall` runs `_install-theme-deps` (see
