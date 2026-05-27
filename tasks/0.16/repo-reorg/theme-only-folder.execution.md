@@ -68,13 +68,9 @@ small stack) so the move is reviewable as a unit.
 Exit criterion: file move is clean; `_prepare` + `_diff:check` pass; no consumer
 surface validated yet.
 
-Status (2026-05-24): structural move landed on `chalin-m24-monorepo-2026-0520`.
-`theme/`, `scripts/sync-theme-deps.mjs`, `docsy.dev`'s `_install-theme-deps`
-postinstall, and the `.prettierignore` / `.markdownlint-cli2.yaml` path updates
-are all in place. `_prepare` / `_diff:check` regression check is still pending —
-Phase 0 / Phase 1 ran as a tight loop and `docsy.dev` already builds (see Phase
-1), but the maintainer `_prepare` chain has not yet been re-exercised end-to-end
-against the new layout.
+Status (2026-05-25): **exit criterion met — landed on task branch.** The
+structural move plus the `_prepare` / `_diff:check` regression check have all
+landed on `task/repo-reorg-2026-05`.
 
 ### Phase 1: `docsy.dev` consumes TOF
 
@@ -167,13 +163,21 @@ Status (2026-05-25): **exit criterion met — CI matrix green ([#2640][]).** Bot
 
 ### Phase 4: `docsy-example`
 
-Coordinated PR in the `docsy-example` repo that bumps the import path.
+Coordinated work in the `docsy-example` repo that bumps the import path to the
+TOF layout. Three parts, in order:
 
-- Land the `docsy-example` PR after a Docsy 0.16 pre-release (or against a
-  pinned commit) so the example tracks reality.
+- **(a) Local sibling-repo test (done):** build `docsy-example` against this
+  branch's `theme/` via the local sibling-folder setup, to catch breakage before
+  the canonical move lands.
+- **(b) Merge the task branch to `main`** via a PR. The canonical move lands.
+- **(c) Final `docsy-example` config + test against `main`:** bump the
+  `docsy-example` import path / `theme:` value to the released `google/docsy`
+  layout and confirm a clean build (and its own smoke checks) against `main`.
 
-Exit criterion: `docsy-example` builds against 0.16-pre and passes its own smoke
-checks.
+Exit criterion: `docsy-example` builds against released Docsy from `main` with
+only the documented one-line config edit, and passes its own smoke checks.
+
+Status (2026-05-25): (a) done; (b) pending PR; (c) pending (b).
 
 ### Phase 5: docs and release notes
 
