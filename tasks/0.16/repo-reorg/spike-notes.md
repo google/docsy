@@ -42,6 +42,10 @@ hugo mod get github.com/google/docsy/theme@<version>
 hugo mod tidy
 ```
 
+Maintainer release note: because the Hugo module now lives in the `theme/`
+subdirectory, the Go module tag must be `theme/<version>` at the same commit as
+the repo release tag. Users still type `@<version>` in the command above.
+
 ### NPM from GitHub
 
 Before:

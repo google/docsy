@@ -174,11 +174,13 @@ TOF layout. Three parts, in order:
 - **(c) Final `docsy-example` config + test against `main`:** bump the
   `docsy-example` import path / `theme:` value to the released `google/docsy`
   layout and confirm a clean build (and its own smoke checks) against `main`.
+  Done via [google/docsy-example#458][#458].
 
 Exit criterion: `docsy-example` builds against released Docsy from `main` and
 passes its own checks.
 
-Status (2026-05-27): (a) done; (b) done via [#2641][]; (c) pending.
+Status (2026-05-27): **exit criterion met.** (a) done; (b) done via [#2641][];
+(c) done via [google/docsy-example#458][#458].
 
 ### Phase 5: docs and release notes
 
@@ -187,6 +189,8 @@ The user-facing payload, derived from the spike notes.
 - Update get-started pages with the new theme path / import path.
 - Update the changelog and release blog post; the migration section reads the
   exact snippets out of `spike-notes.md`.
+- Update release-process docs so the root release tag and nested module tag
+  (`theme/vX.Y.Z`) are created at the same commit.
 - Update `README.md` if it references the old install shape.
 
 Exit criterion: a reviewer who has not seen the design conversation can upgrade
@@ -233,8 +237,10 @@ canonical list of deferred work.
   team prefers) so progress is visible.
 - Spike notes: `tasks/0.16/repo-reorg/spike-notes.md`, grown through Phases 1–3.
 - The main TOF move has merged to `main` via [#2641][].
-- Phase 4c and Phase 5 land as follow-up PRs against `main`.
+- Phase 4c landed via [google/docsy-example#458][#458].
+- Phase 5 lands as follow-up PRs against `main`.
 
 [#2617]: https://github.com/google/docsy/issues/2617
 [#2640]: https://github.com/google/docsy/pull/2640
 [#2641]: https://github.com/google/docsy/pull/2641
+[#458]: https://github.com/google/docsy-example/pull/458
