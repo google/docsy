@@ -187,6 +187,8 @@ The user-facing payload, derived from the spike notes.
 - Update get-started pages with the new theme path / import path.
 - Update the changelog and release blog post; the migration section reads the
   exact snippets out of `spike-notes.md`.
+- Update release-process docs so the root release tag and nested module tag
+  (`theme/vX.Y.Z`) are created at the same commit.
 - Update `README.md` if it references the old install shape.
 
 Exit criterion: a reviewer who has not seen the design conversation can upgrade

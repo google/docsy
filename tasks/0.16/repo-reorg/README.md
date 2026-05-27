@@ -63,6 +63,7 @@ Next concrete steps, in order:
    - (b) merge the task branch to `main` via [#2641][] — **done**.
    - (c) final `docsy-example` config + test against Docsy from `main`.
 2. Phase 5: update the get-started "clone" docs for the new non-module setup
-   procedure recorded in [spike-notes][spike] Phase 2, plus changelog/blog.
+   procedure recorded in [spike-notes][spike] Phase 2, plus changelog/blog and
+   release-process notes for the nested module tag (`theme/vX.Y.Z`).
 3. Later: formalize the smoke matrix as a local Vitest/TS harness — see the
    execution plan's "Local test harness" section.

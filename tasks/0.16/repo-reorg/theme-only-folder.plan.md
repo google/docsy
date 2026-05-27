@@ -136,6 +136,21 @@ before/after snippet, derived from the spike. There should be exactly **one
 line** to change per install mode. The spike confirmed that shape before TOF
 merged.
 
+## Release tagging
+
+`theme/` is a nested Hugo/Go module with module path
+`github.com/google/docsy/theme`. Users can request the normal version string,
+for example:
+
+```sh
+hugo mod get github.com/google/docsy/theme@v0.16.0
+```
+
+For that to resolve, the release process must also create a subdirectory module
+tag at the same commit, for example `theme/v0.16.0`. This is not a separate
+repository or separate theme release artifact; it is an additional Git tag in
+the same repo.
+
 ## Compatibility spike
 
 TOF was validated on the task branch before it landed on `main` via [#2641][].
