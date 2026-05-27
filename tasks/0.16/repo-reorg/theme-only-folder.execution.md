@@ -84,10 +84,9 @@ This is the most informative single check.
   surprises.
 - Record the exact before/after config change and any maintainer-workflow
   observations in `tasks/0.16/repo-reorg/spike-notes.md`.
-- Confirm Netlify deploy previews work from the spike branch (update
-  `docsy.dev/scripts/_install.sh` so the Netlify command sequence
-  `scripts/_install.sh && npm run build:preview` installs both the repo-root and
-  `docsy.dev` packages).
+- Confirm Netlify deploy previews work from the spike branch (`docsy.dev/netlify.toml`:
+  `npm run install:all && npm run build:preview`, and the production variant;
+  `docsy.dev`'s `install:all` installs the repo root then `docsy.dev`).
 
 Exit criterion: `docsy.dev` builds locally and on Netlify against the spike
 branch.
@@ -95,9 +94,9 @@ branch.
 Status (2026-05-25): **exit criterion met.** `docsy.dev` builds from `theme/`
 with the one-line `theme: [docsy/theme]` consumer config change and no symlinks
 anywhere (223 EN + 218 FR pages), and the Netlify deploy preview is green on
-[#2640][]. `docsy.dev/scripts/_install.sh` installs both the root and
-`docsy.dev` packages (workspaces are empty), which is what the Netlify build
-sequence needs.
+[#2640][]. Netlify uses `npm run install:all && npm run build:preview` (and
+`build:production` in production); `docsy.dev`'s `install:all` installs the repo
+root then `docsy.dev` (workspaces are empty).
 
 ### Phase 2: local smoke tests (CI emulation)
 

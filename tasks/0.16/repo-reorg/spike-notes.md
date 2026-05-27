@@ -180,11 +180,10 @@ here for traceability; they are not user-facing.
   `theme/`'s declared runtime deps (Bootstrap, Font Awesome) into
   `docsy.dev/node_modules/`. The `rm -rf` line then drops the now-redundant copy
   of the theme tree itself.
-- `docsy.dev/scripts/_install.sh` updated (and its comment refreshed) to install
-  both the repo-root packages and the `docsy.dev` packages, since `docsy.dev` is
-  no longer a workspace of the root. Netlify's
-  `scripts/_install.sh && npm run build:preview` sequence works under that
-  shape.
+- `docsy.dev/scripts/_install.sh` removed. `docsy.dev/package.json` gained
+  `install:all` (`npm install -C .. && npm install`). Netlify runs
+  `npm run install:all && npm run build:preview` (and `build:production` in
+  production) per `docsy.dev/netlify.toml`.
 
 ### Observations
 
