@@ -68,9 +68,9 @@ small stack) so the move is reviewable as a unit.
 Exit criterion: file move is clean; `_prepare` + `_diff:check` pass; no consumer
 surface validated yet.
 
-Status (2026-05-25): **exit criterion met — landed on task branch.** The
-structural move plus the `_prepare` / `_diff:check` regression check have all
-landed on `task/repo-reorg-2026-05`.
+Status (2026-05-27): **exit criterion met — landed on `main` via [#2641][].**
+The structural move plus the `_prepare` / `_diff:check` regression check have
+landed.
 
 ### Phase 1: `docsy.dev` consumes TOF
 
@@ -84,15 +84,15 @@ This is the most informative single check.
   surprises.
 - Record the exact before/after config change and any maintainer-workflow
   observations in `tasks/0.16/repo-reorg/spike-notes.md`.
-- Confirm Netlify deploy previews work from the spike branch
+- Confirm Netlify deploy previews work from the task branch
   (`docsy.dev/netlify.toml`: `npm run install:all && npm run build:preview`, and
   the production variant; `docsy.dev`'s `install:all` installs the repo root
   then `docsy.dev`).
 
-Exit criterion: `docsy.dev` builds locally and on Netlify against the spike
+Exit criterion: `docsy.dev` builds locally and on Netlify against the task
 branch.
 
-Status (2026-05-25): **exit criterion met.** `docsy.dev` builds from `theme/`
+Status (2026-05-27): **exit criterion met.** `docsy.dev` builds from `theme/`
 with the one-line `theme: [docsy/theme]` consumer config change and no symlinks
 anywhere (223 EN + 218 FR pages), and the Netlify deploy preview is green on
 [#2640][]. Netlify uses `npm run install:all && npm run build:preview` (and
@@ -116,14 +116,14 @@ _same_ Hugo-resolution mechanism CI uses, and the spike-notes matrix is complete
 with exact one-line edits. A local-only pass that relies on an ad-hoc `HUGO`
 override does not count.
 
-Status (2026-05-25): **exit criterion met.** All three install modes build with
+Status (2026-05-27): **exit criterion met.** All three install modes build with
 the same Hugo-resolution mechanism CI uses (`run-hugo.mjs`, no `HUGO` override),
-and the CI smoke matrix is green ([#2640][]). Earlier local-only runs had masked
-a gap — they set `HUGO` explicitly, while CI's `npx hugo` found nothing once
-`docsy.dev` stopped being a workspace (so `hugo-extended` was no longer hoisted
-to the repo root). Closing that gap is exactly what `run-hugo.mjs` +
-`install:all` do (Phase 3). The non-module-clone setup-step follow-up for Phase
-5 still stands.
+local smoke tests pass on `main`, and the CI smoke matrix is green ([#2640][]).
+Earlier local-only runs had masked a gap — they set `HUGO` explicitly, while
+CI's `npx hugo` found nothing once `docsy.dev` stopped being a workspace (so
+`hugo-extended` was no longer hoisted to the repo root). Closing that gap is
+exactly what `run-hugo.mjs` + `install:all` do (Phase 3). The non-module-clone
+setup-step follow-up for Phase 5 still stands.
 
 [spike-notes]: ./spike-notes.md
 
@@ -151,33 +151,34 @@ principles).
   the new paths (done).
 - Push the branch and watch the Windows + Ubuntu matrix go green (done).
 
-Exit criterion: full CI matrix green on the spike branch (which also closes
-Phase 2). **Decision gate to merge to `main`.** If everything above held, the
-canonical move lands.
+Exit criterion: full CI matrix green on the task branch (which also closes Phase
+2). **Decision gate to merge to `main`.** If everything above held, the
+canonical move could land.
 
-Status (2026-05-25): **exit criterion met — CI matrix green ([#2640][]).** Both
+Status (2026-05-27): **exit criterion met — CI matrix green ([#2640][]).** Both
 `test` (build; ubuntu + windows) and `smoke` (new-site NPM + HUGO_MODULE; ubuntu
 
 - windows) pass, and the Netlify deploy preview is green. The merge gate is
-  satisfied.
+  satisfied; the canonical move then landed on `main` via [#2641][].
 
 ### Phase 4: `docsy-example`
 
 Coordinated work in the `docsy-example` repo that bumps the import path to the
 TOF layout. Three parts, in order:
 
-- **(a) Local sibling-repo test (done):** build `docsy-example` against this
+- **(a) Local sibling-repo test (done):** build `docsy-example` against the task
   branch's `theme/` via the local sibling-folder setup, to catch breakage before
   the canonical move lands.
 - **(b) Merge the task branch to `main`** via a PR. The canonical move lands.
+  Done via [#2641][].
 - **(c) Final `docsy-example` config + test against `main`:** bump the
   `docsy-example` import path / `theme:` value to the released `google/docsy`
   layout and confirm a clean build (and its own smoke checks) against `main`.
 
-Exit criterion: `docsy-example` builds against released Docsy from `main` with
-only the documented one-line config edit, and passes its own smoke checks.
+Exit criterion: `docsy-example` builds against released Docsy from `main` and
+passes its own checks.
 
-Status (2026-05-25): (a) done; (b) pending PR; (c) pending (b).
+Status (2026-05-27): (a) done; (b) done via [#2641][]; (c) pending.
 
 ### Phase 5: docs and release notes
 
@@ -231,9 +232,9 @@ canonical list of deferred work.
 - Parent issue: [#2617][]. Keep a phase checklist there (or sub-issues, if the
   team prefers) so progress is visible.
 - Spike notes: `tasks/0.16/repo-reorg/spike-notes.md`, grown through Phases 1–3.
-- The first spike branch (the Phase 0 structural move,
-  `chalin-m24-monorepo-2026-0520`) has merged. Phases 2–3 continue on a
-  follow-up branch atop it. Phases 4–5 land as separate PRs against `main`.
+- The main TOF move has merged to `main` via [#2641][].
+- Phase 4c and Phase 5 land as follow-up PRs against `main`.
 
 [#2617]: https://github.com/google/docsy/issues/2617
 [#2640]: https://github.com/google/docsy/pull/2640
+[#2641]: https://github.com/google/docsy/pull/2641
