@@ -13,6 +13,7 @@
     "_hugo-dev": "cross-env npm run _hugo -- -e \"${TD_BUILD_CTX:-dev}\" -DFE --printPathWarnings",
     "_hugo": "hugo --cleanDestinationDir --logLevel info --themesDir ../..",
     "_postbuild": "npm run _check:links--warn",
+    "_install-theme-deps": "npm install ../theme --install-links --no-save && rm -rf node_modules/theme",
     "_serve": "npm run _hugo-dev -- serve --disableFastRender --renderToMemory",
     "build:preview": "cross-env npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
@@ -23,9 +24,11 @@
     "clean": "rm -Rf public",
     "fix:format": "npm run _check:format -- --write",
     "fix": "npm run fix:format && npm run prune:refcache",
+    "install:all": "npm install -C .. && npm install",
     "make:public": "git init -b main public",
     "postbuild:preview": "npm run _postbuild",
     "postbuild:production": "npm run _postbuild",
+    "postinstall": "npm run _install-theme-deps",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "prepare-disabled": "cd .. && npm install",
@@ -39,6 +42,7 @@
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
     "update:packages": "npx npm-check-updates -u"
   },
+  "dependencies-note": "Dependencies installed from ../theme; see postinstall script",
   "devDependencies": {
     "afdocs": "^0.9.2",
     "autoprefixer": "^10.4.27",

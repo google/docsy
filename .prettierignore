@@ -2,14 +2,14 @@
 # gotcha is that once a _directory_ is ignored, it's content cannot be
 # unignored.
 
-# Ignore all _files_ under assets
-/assets/**/*.*
+# Ignore all _files_ under the theme's assets
+/theme/assets/**/*.*
 
 # Selectively unignore some files
-!/assets/scss/main.scss
-!/assets/scss/td/**/*
+!/theme/assets/scss/main.scss
+!/theme/assets/scss/td/**/*
 
 # These files are derived from other sources,
 # don't Prettify them:
-/assets/scss/td/_variables_forward.scss
-/assets/scss/td/chroma/**/*
+/theme/assets/scss/td/_variables_forward.scss
+/theme/assets/scss/td/chroma/**/*

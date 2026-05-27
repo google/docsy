@@ -2,13 +2,15 @@
 # cSpell:ignore autoprefixer docsy postcss themesdir github oneline
 set -eo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 DEPS="autoprefixer postcss-cli"
 DOCSY_REPO_DEFAULT="google/docsy"
 DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-: ${HUGO:=npx hugo}
+: "${HUGO:=node $SCRIPT_DIR/run-hugo.mjs}"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
@@ -118,7 +120,7 @@ function set_up_and_cd_into_site() {
   if [[ "$DOCSY_SRC" == HUGO* ]]; then
     _set_up_site_using_hugo_modules
   else
-    echo "theme: docsy" >> hugo.yaml
+    echo "theme: docsy/theme" >> hugo.yaml
     echo "themesDir: $THEMESDIR" >> hugo.yaml
   fi
 }
@@ -128,7 +130,8 @@ function _set_up_site_using_hugo_modules() {
   # : ${user_name:=$USER}
   # : ${user_name:="me"}
 
-  HUGO_MOD_WITH_VERS=$DOCSY_REPO
+  # TOF: Docsy theme lives in the `theme/` subfolder of the Docsy repo.
+  HUGO_MOD_WITH_VERS="$DOCSY_REPO/theme"
   if [[ -n $DOCSY_VERS ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"
   fi
@@ -158,11 +161,11 @@ function _set_up_site_using_hugo_modules() {
       git log --oneline -$DEPTH && \
       if [[ -n $SWITCH_NEEDED ]]; then git switch --detach $DOCSY_VERS; fi \
     )
-    echo "replace github.com/$DOCSY_REPO_DEFAULT => ./tmp/docsy" >> go.mod
-    eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT" $OUTPUT_REDIRECT
+    echo "replace github.com/$DOCSY_REPO_DEFAULT/theme => ./tmp/docsy/theme" >> go.mod
+    eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT/theme" $OUTPUT_REDIRECT
   fi
 
-  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT, disable: false}]}" >> hugo.yaml
+  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT/theme, disable: false}]}" >> hugo.yaml
 }
 
 function main() {
@@ -177,7 +180,7 @@ function main() {
     echo "[INFO] Getting Docsy as NPM package '$NPM_PKG'"
     DEPS+=" $NPM_PKG"
   elif [[ "$DOCSY_SRC" == "LOCAL" ]]; then
-    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR"
+    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR'"
   fi
 
   [[ $VERBOSE ]] && set -x
