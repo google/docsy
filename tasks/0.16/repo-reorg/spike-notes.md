@@ -12,6 +12,87 @@ Living log of the TOF compatibility spike. Records the exact consumer-facing
 config edits, the maintainer-side changes that made them possible, and any
 observations. Read by the release-notes drafting work in Phase 5.
 
+## Migration snippets for Phase 5
+
+Use this section as the release-facing source of truth. The rest of this file is
+the engineering record behind these snippets.
+
+### Hugo module
+
+Before:
+
+```yaml
+module:
+  imports:
+    - path: github.com/google/docsy
+```
+
+After:
+
+```yaml
+module:
+  imports:
+    - path: github.com/google/docsy/theme
+```
+
+Upgrade command:
+
+```sh
+hugo mod get github.com/google/docsy/theme@<version>
+hugo mod tidy
+```
+
+### NPM from GitHub
+
+Before:
+
+```yaml
+theme: docsy
+themesDir: node_modules
+```
+
+After:
+
+```yaml
+theme: docsy/theme
+themesDir: node_modules
+```
+
+Install command shape is unchanged except for the Docsy version:
+
+```sh
+npm install --save-dev google/docsy#semver:<version> --omit=peer
+```
+
+### Clone or Git submodule
+
+Before:
+
+```yaml
+theme: docsy
+```
+
+After:
+
+```yaml
+theme: docsy/theme
+```
+
+Setup commands after TOF:
+
+```sh
+cd themes
+git clone -b <version> https://github.com/google/docsy
+(cd docsy/theme && npm install)
+(cd docsy && node scripts/mkdirp-hugo-mod.js ..)
+cd ..
+npm install --save-dev autoprefixer postcss-cli
+```
+
+For a Git submodule install, keep the existing submodule workflow but run the
+same `docsy/theme` npm install and `mkdirp-hugo-mod.js` commands after updating
+the submodule.
+
 ## Repo state at start of spike
 
 - Branch: `chalin-m24-monorepo-2026-0520`

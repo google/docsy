@@ -10,6 +10,18 @@ Upstream tracking: issue [#2617][].
 This work is split across phases, and submitted via multiple PRs over the
 task-working branch `task/repo-reorg-2026-05`.
 
+## Reviewer hot path
+
+For release-facing review, start with:
+
+1. [theme-only-folder.plan.md][plan] for the intended end state.
+2. [spike-notes.md][spike] "Migration snippets for Phase 5" for the final user
+   migration text.
+3. This README's status table for what is done and what remains.
+
+Use [theme-only-folder.execution.md][exec] only when phase sequencing or a
+specific status decision matters.
+
 ## In this folder
 
 | File                                   | Purpose                                                                                |
