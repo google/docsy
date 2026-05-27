@@ -170,6 +170,8 @@ Validation covered:
 - `docsy.dev` builds locally and in CI using the TOF Hugo module path.
 - `docsy-example` builds against the task branch with the one-line module
   update.
+- The final `docsy-example` update against Docsy from `main` merged via
+  [google/docsy-example#458][#458].
 - `scripts/make-site.sh -s NPM` and `-s HUGO_MODULE` pass on Windows and Ubuntu
   after the smoke script is updated for the new path.
 - A minimal `hugo new site` with Docsy cloned into `themes/docsy/` builds with
@@ -281,3 +283,4 @@ toolchain.
 - Do not change the Hugo theme name (`docsy`).
 
 [#2641]: https://github.com/google/docsy/pull/2641
+[#458]: https://github.com/google/docsy-example/pull/458
