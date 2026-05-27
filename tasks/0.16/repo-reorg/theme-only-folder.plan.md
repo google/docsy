@@ -3,7 +3,7 @@ title: Theme-Only Folder (TOF) plan for 0.16
 date: 2026-05-21
 status: draft
 issue: https://github.com/google/docsy/issues/2617
-cSpell:ignore: fontawesome
+cSpell:ignore: postupdate
 ---
 
 ## About this plan
@@ -200,10 +200,10 @@ npm run test:smoke       # local NPM / Hugo-module / non-module-clone smoke
 ```
 
 `docsy.dev`'s `postinstall` runs `_install-theme-deps` (see
-`docsy.dev/package.json`), which materialises `theme/`'s declared runtime deps
-into `docsy.dev/node_modules/` so Hugo's consumer-cwd lookup finds them during
-the build. The mechanics (`--install-links` flag and the cleanup line) are
-recorded in [spike-notes][].
+`docsy.dev/package.json`), which creates `theme/`'s declared runtime deps into
+`docsy.dev/node_modules/` so Hugo's consumer-cwd lookup finds them during the
+build. The mechanics (`--install-links` flag and the cleanup line) are recorded
+in [spike-notes][].
 
 [spike-notes]: ./spike-notes.md
 

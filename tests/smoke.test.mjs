@@ -4,9 +4,9 @@
 // Uses Node's built-in test runner (node:test) — no extra test deps.
 //
 //   Run:      npm run test:smoke
-//   Prereqs:  npm run install:all   (provides hugo-extended for run-hugo.mjs)
+//   Assumes:  npm run install:all   (provides hugo-extended for run-hugo.mjs)
 //   Target:   defaults to repo "google/docsy", branch "main"; override with
-//             flags, e.g. npm run test:smoke -- --repo myfork/docsy --branch wip
+//             flags, e.g. npm run test:smoke -- --repo my-fork/docsy --branch wip
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
 // kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
@@ -17,6 +17,7 @@ import { spawnSync } from 'node:child_process';
 import {
   appendFileSync,
   existsSync,
+  mkdirSync,
   readFileSync,
   readdirSync,
   rmSync,
@@ -108,6 +109,7 @@ function assertBuilt(name) {
 }
 
 before(() => {
+  if (!existsSync(TMP)) mkdirSync(TMP);
   progress(`Target — ${TARGET}  (override with --repo / --branch)`);
   const v = hugo(['version']);
   assert.match(

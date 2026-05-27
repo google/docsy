@@ -24,6 +24,7 @@
     "clean": "rm -Rf public",
     "fix:format": "npm run _check:format -- --write",
     "fix": "npm run fix:format && npm run prune:refcache",
+    "install:all": "npm install -C .. && npm install",
     "make:public": "git init -b main public",
     "postbuild:preview": "npm run _postbuild",
     "postbuild:production": "npm run _postbuild",
