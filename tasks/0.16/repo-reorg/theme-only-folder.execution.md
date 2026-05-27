@@ -84,9 +84,10 @@ This is the most informative single check.
   surprises.
 - Record the exact before/after config change and any maintainer-workflow
   observations in `tasks/0.16/repo-reorg/spike-notes.md`.
-- Confirm Netlify deploy previews work from the spike branch (`docsy.dev/netlify.toml`:
-  `npm run install:all && npm run build:preview`, and the production variant;
-  `docsy.dev`'s `install:all` installs the repo root then `docsy.dev`).
+- Confirm Netlify deploy previews work from the spike branch
+  (`docsy.dev/netlify.toml`: `npm run install:all && npm run build:preview`, and
+  the production variant; `docsy.dev`'s `install:all` installs the repo root
+  then `docsy.dev`).
 
 Exit criterion: `docsy.dev` builds locally and on Netlify against the spike
 branch.
@@ -198,11 +199,12 @@ install modes on the developer's own OS and assert each produces a real,
 fully-styled site — a rendered home page that links the exact compiled
 stylesheet (> 100 KB), plus a generated sitemap — not just a zero exit. It
 covers what the CI smoke matrix runs (NPM, HUGO_MODULE) **plus** the non-module
-clone, which CI does not exercise. Target repo/branch are set with `--repo` /
-`--branch` flags (defaults: repo `google/docsy`, branch `main`); the
-`test:smoke` script pins `--branch task/repo-reorg-2026-05` during the TOF
-rollout. Prereq: `npm run install:all` (for `hugo-extended`). Deliberately kept
-out of `test:tooling` / CI `ci:post` (slow, network-bound).
+clone, which CI does not exercise. Target repo/branch via `--repo` / `--branch`
+(defaults: `google/docsy`, `main`; the `test:smoke` npm script also passes
+`--branch main`). During TOF rollout on a task branch:
+`npm run test:smoke -- --branch task/repo-reorg-2026-05`. Prereq:
+`npm run install:all` (for `hugo-extended`). Deliberately kept out of
+`test:tooling` / CI `ci:post` (slow, network-bound).
 
 **Later (not started):**
 

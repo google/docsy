@@ -79,7 +79,7 @@ through. The thin-shim refactor that fully separates the manifests is
 │   ├── go.sum
 │   └── package.json   # private mirror of theme runtime deps (see below)
 ├── docsy.dev/         # website; its own node_modules for the site build
-├── scripts/           # maintainer scripts (chroma, scrollspy patch, sync-theme-deps, …)
+├── scripts/           # maintainer scripts (scrollspy patch, sync-theme-deps, …)
 ├── tasks/
 └── package.json       # repo root: canonical for theme runtime deps + repo-wide tooling
 ```
