@@ -180,7 +180,7 @@ function main() {
     echo "[INFO] Getting Docsy as NPM package '$NPM_PKG'"
     DEPS+=" $NPM_PKG"
   elif [[ "$DOCSY_SRC" == "LOCAL" ]]; then
-    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR"
+    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR'"
   fi
 
   [[ $VERBOSE ]] && set -x

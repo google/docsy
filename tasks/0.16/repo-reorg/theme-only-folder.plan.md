@@ -86,7 +86,8 @@ through. The thin-shim refactor that fully separates the manifests is
 
 Key properties:
 
-- `theme/` is what NPM ships and what Hugo modules resolve to.
+- `theme/` is what Hugo module resolves to. GitHub-NPM still ships the full repo
+  (see below).
 - The repo root `package.json` is the **single source of truth** for theme
   runtime dependency versions and continues to host repo-wide maintainer tooling
   (Prettier, markdownlint, cSpell French dict). The `theme/` `package.json` is a
