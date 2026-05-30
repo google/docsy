@@ -41,7 +41,7 @@ jobs:
 
       - name: Setup workspace
         run: |
-          npm run install:all -- --omit=optional
+          npm install --omit=optional
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
 

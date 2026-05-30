@@ -4,8 +4,7 @@
 
 set -eo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HUGO="node $SCRIPT_DIR/run-hugo.mjs"
+HUGO="npx hugo"
 CHROMA_STYLE=
 DEST_DIR=theme/assets/scss/td/chroma
 DEST_FILE=

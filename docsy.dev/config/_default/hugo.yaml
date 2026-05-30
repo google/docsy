@@ -1,4 +1,4 @@
-# cSpell:ignore docsy github goldmark markmap plantuml readingtime
+# cSpell:ignore goldmark markmap plantuml readingtime
 #
 # baseURL moved to be after params
 title: Docsy
@@ -19,14 +19,14 @@ outputs:
 imaging:
   resampleFilter: CatmullRom # cSpell:disable-line
   quality: 75
-  anchor: smart
+  anchor: Smart
 
 languages:
   en:
     languageName: English
     params:
       description: Docsy does docs
-  fr:
+  fr: # cSpell:disable-next-line
     languageName: Français
     params:
       description: Docsy, c’est la doc.

@@ -3,10 +3,12 @@
 //
 // Uses Node's built-in test runner (node:test) — no extra test deps.
 //
-//   Run:      npm run test:smoke
-//   Assumes:  npm run install:all   (provides hugo-extended for run-hugo.mjs)
-//   Target:   defaults to repo "google/docsy", branch "main"; override with
-//             flags, e.g. npm run test:smoke -- --repo my-fork/docsy --branch wip
+//   Usage: npm run test:smoke -- [options]
+//   Options:
+//     --repo <repo>    GitHub org+repo to fetch Docsy from.
+//                      Format: GITHUB_USER/DOCSY_REPO. Default: google/docsy
+//     --branch <branch>
+//                      Docsy branch to fetch. Default: main
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
 // kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
@@ -33,7 +35,6 @@ const repoRoot = path.resolve(
 );
 const TMP = path.join(repoRoot, 'tmp');
 const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
-const RUN_HUGO = path.join(repoRoot, 'scripts', 'run-hugo.mjs');
 
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
 // forwards), falling back to a default. Last occurrence wins, so a flag passed
@@ -64,7 +65,7 @@ function run(cmd, args, opts = {}) {
 }
 
 function hugo(args, opts = {}) {
-  return run('node', [RUN_HUGO, ...args], opts);
+  return run('npx', ['hugo', ...args], opts);
 }
 
 // Stream a progress line via fd 2 directly: node:test buffers a test's console
@@ -115,7 +116,7 @@ before(() => {
   assert.match(
     v.stdout ?? '',
     /extended/,
-    'extended Hugo not found — run `npm run install:all` first',
+    'extended Hugo not found — run `npm install` at the repo root first',
   );
 });
 
@@ -164,44 +165,21 @@ test('non-module clone into themes/docsy', () => {
     'git clone theme into themes/docsy',
   );
 
-  // Theme deps must sit at themes/docsy/theme/ — the theme-dir-relative
-  // node_modules the `node_modules/bootstrap` mount resolves against.
-  progress('clone: npm install theme deps (themes/docsy/theme)…');
+  progress('clone: npm run theme postinstall for theme deps etc…');
   assert.equal(
-    run('npm', ['install', '--no-audit', '--no-fund'], {
-      cwd: path.join(themesDocsy, 'theme'),
-    }).status,
+    run('npm', ['run', '--prefix', themesDocsy, 'postinstall'], {}).status,
     0,
-    'install theme deps in themes/docsy/theme',
-  );
-
-  // theme/package.json has no postinstall, so create the empty Hugo-module
-  // placeholder dirs explicitly, under themesDir (themes/).
-  progress('clone: generate empty Hugo-module placeholder dirs…');
-  assert.equal(
-    run('node', [path.join('scripts', 'mkdirp-hugo-mod.js'), '..'], {
-      cwd: themesDocsy,
-    }).status,
-    0,
-    'create empty Hugo-module dirs under themes/',
+    'install theme deps etc',
   );
 
   // PostCSS at the site root: a non-module install prerequisite.
   progress('clone: npm install postcss at site root…');
   assert.equal(run('npm', ['init', '-y'], { cwd: site }).status, 0, 'npm init');
+  const flags = '--save-dev --no-audit --no-fund';
   assert.equal(
-    run(
-      'npm',
-      [
-        'install',
-        '--save-dev',
-        '--no-audit',
-        '--no-fund',
-        'autoprefixer',
-        'postcss-cli',
-      ],
-      { cwd: site },
-    ).status,
+    run('npm', `install ${flags} autoprefixer postcss-cli`.split(' '), {
+      cwd: site,
+    }).status,
     0,
     'install postcss at site root',
   );

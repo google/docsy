@@ -4,8 +4,9 @@
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
-  "workspaces-todo": "TODO: try adding theme later once all phases of repo reorg are complete",
   "workspaces": [
+    "docsy.dev",
+    "theme"
   ],
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
@@ -19,13 +20,13 @@
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
     "_mkdir:hugo-mod": "node scripts/mkdirp-hugo-mod.js ..",
+    "_postinstall": "npm run install:theme-deps && npm run _mkdir:hugo-mod",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
-    "_prepare": "npm run _sync:theme-deps && npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
+    "_prepare": "npm run _cp:bs-rfs && npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles && npm run get:hugo-modules",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
     "_serve": "npm run -C docsy.dev _serve --",
     "_spv:example": "echo TBC - npm run -s __spv docsy.dev/config/example/params.yaml --",
     "_spv": "npm run -s __spv docsy.dev/config/*/params.yaml --",
-    "_sync:theme-deps": "node scripts/sync-theme-deps.mjs",
     "build": "npm run -C docsy.dev build --",
     "check:afdocs:dev": "npm run -s _check:afdocs -- http://localhost:1313 | tee docsy.dev/content/en/docs/content/agent-support/afdocs-scorecard.txt",
     "check:format": "npm list prettier && npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
@@ -44,11 +45,11 @@
     "fix:markdown": "npm run check:markdown -- --fix",
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
-    "install:all": "npm run docsy.dev-install && npm install",
+    "install:theme-deps": "npm install --prefix theme --omit=dev --omit=peer --no-audit --no-fund",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
-    "postinstall": "npm run _mkdir:hugo-mod",
-    "postupdate:dep": "npm run _sync:theme-deps && npm run -s post-update",
-    "postupdate:packages": "npm run _sync:theme-deps && npm run -s post-update",
+    "postinstall": "npm run _postinstall",
+    "postupdate:dep": "npm run -s post-update",
+    "postupdate:packages": "npm run -s post-update",
     "prune:refcache": "npm run -C docsy.dev prune:refcache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run -C docsy.dev serve --",
@@ -62,13 +63,10 @@
     "test:website": "npm run -C docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
+    "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages:not-hugo": "npm run update:packages -- -x hugo-extended",
-    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u && npm run -C docsy.dev update:packages",
+    "update:packages": "npx npm-check-updates -u",
     "zzz": "echo 'This is just a placeholder that is the last script in this script collection.'"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "6.7.2",
-    "bootstrap": "5.3.8"
   },
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
