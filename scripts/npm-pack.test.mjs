@@ -20,27 +20,59 @@ const LIMITS = {
   maxCompressedBytes: 1_200_000,
 };
 
+const TAR = 'package/';
+const SCRIPTS = `${TAR}scripts/`;
+
+// Spot-check paths inside the tarball (package/ prefix).
 const REQUIRED = [
-  'package/package.json',
-  'package/LICENSE',
-  'package/theme/hugo.yaml',
-  'package/theme/go.mod',
-  'package/theme/layouts/baseof.html',
-  'package/theme/assets/scss/main.scss',
+  `${TAR}package.json`,
+  `${TAR}LICENSE`,
+  `${SCRIPTS}mkdirp-hugo-mod.js`,
+  `${TAR}theme/hugo.yaml`,
+  `${TAR}theme/go.mod`,
+  `${TAR}theme/layouts/baseof.html`,
+  `${TAR}theme/assets/scss/main.scss`,
 ];
 
 const FORBIDDEN_PREFIXES = [
-  'package/docsy.dev/',
-  'package/scripts/',
-  'package/tests/',
-  'package/tasks/',
+  `${TAR}docsy.dev/`,
+  `${SCRIPTS}`,
+  `${TAR}tests/`,
+  `${TAR}tasks/`,
 ];
 
 const FORBIDDEN_SUBSTRINGS = ['theme/node_modules', 'theme/package-lock.json'];
 
+const REQUIRED_SET = new Set(REQUIRED);
+
+// package.json "files" entries derived from the lists above.
+const PKG_FILES = [
+  'theme',
+  ...FORBIDDEN_SUBSTRINGS.map((s) => `!${s}`),
+  ...REQUIRED.filter((p) => p.startsWith(SCRIPTS)).map((p) =>
+    p.slice(TAR.length),
+  ),
+];
+
 let tarballPath;
 /** @type {string[]} */
 let entries;
+
+function isForbidden(entry) {
+  if (REQUIRED_SET.has(entry)) return false;
+  return (
+    FORBIDDEN_PREFIXES.some((p) => entry.startsWith(p)) ||
+    FORBIDDEN_SUBSTRINGS.some((f) => entry.includes(f))
+  );
+}
+
+function packDiff(packed) {
+  const set = new Set(packed);
+  return {
+    missing: REQUIRED.filter((p) => !set.has(p)),
+    extra: packed.filter(isForbidden),
+  };
+}
 
 before(() => {
   fs.mkdirSync(packDir, { recursive: true });
@@ -78,35 +110,14 @@ test('package.json declares private and theme-only files with exclusions', () =>
   const pkg = JSON.parse(
     fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
   );
-  assert.equal(pkg.private, true);
-  assert.ok(Array.isArray(pkg.files));
-  assert.ok(pkg.files.includes('theme'));
-  assert.ok(pkg.files.includes('!theme/node_modules'));
-  assert.ok(pkg.files.includes('!theme/package-lock.json'));
+  assert.equal(pkg.private, true, 'package is private');
+  assert.deepEqual(pkg.files, PKG_FILES, 'package.json "files"');
 });
 
-test('npm pack includes essential GitHub-NPM paths', () => {
-  const set = new Set(entries);
-  for (const p of REQUIRED) {
-    assert.ok(set.has(p), `missing ${p}`);
-  }
-});
-
-test('npm pack excludes maintainer and locally-installed paths', () => {
-  for (const entry of entries) {
-    for (const prefix of FORBIDDEN_PREFIXES) {
-      assert.ok(
-        !entry.startsWith(prefix),
-        `forbidden prefix ${prefix} matched by ${entry}`,
-      );
-    }
-    for (const fragment of FORBIDDEN_SUBSTRINGS) {
-      assert.ok(
-        !entry.includes(fragment),
-        `forbidden fragment ${fragment} in ${entry}`,
-      );
-    }
-  }
+test('npm pack tarball matches GitHub-NPM contract', () => {
+  const { missing, extra } = packDiff(entries);
+  assert.deepEqual(missing, [], 'missing from npm pack tarball');
+  assert.deepEqual(extra, [], 'extra in npm pack tarball');
 });
 
 test('npm pack stays within file-count and compressed-size limits', () => {
