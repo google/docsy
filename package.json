@@ -4,6 +4,12 @@
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
+  "private": true,
+  "files": [
+    "theme",
+    "!theme/node_modules",
+    "!theme/package-lock.json"
+  ],
   "workspaces": [
     "docsy.dev",
     "theme"
