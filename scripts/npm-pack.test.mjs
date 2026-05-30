@@ -36,10 +36,7 @@ const FORBIDDEN_PREFIXES = [
   'package/tasks/',
 ];
 
-const FORBIDDEN_SUBSTRINGS = [
-  'theme/node_modules',
-  'theme/package-lock.json',
-];
+const FORBIDDEN_SUBSTRINGS = ['theme/node_modules', 'theme/package-lock.json'];
 
 let tarballPath;
 /** @type {string[]} */
