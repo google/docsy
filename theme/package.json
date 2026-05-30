@@ -6,7 +6,10 @@
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "private": true,
-  "dependencies-note": "DO NOT EDIT directly; versions are synced from the root package.json by scripts/sync-theme-deps.mjs (run via `npm run _sync:theme-deps`).",
+  "scripts": {
+    "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
+    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
+  },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
     "bootstrap": "5.3.8"
