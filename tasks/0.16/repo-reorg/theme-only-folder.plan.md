@@ -51,17 +51,17 @@ install mode. It trades a small documented migration for a clean, predictable
 install shape. Mapping the four [Motivation](#motivation) workarounds to this
 PR:
 
-| Workaround                                | This PR             |
-| ----------------------------------------- | ------------------- |
-| `../../node_modules/*` escape mounts      | **Fixed**           |
-| `postinstall` mkdirp helper               | Kept; deferred      |
-| `_prepare` scrollspy + vendored SCSS      | Kept; deferred      |
-| Root `package.json` mixes theme + tooling | Partially; deferred |
+| Workaround                                | This PR                                         |
+| ----------------------------------------- | ----------------------------------------------- |
+| `../../node_modules/*` escape mounts      | **Fixed**                                       |
+| `postinstall` mkdirp helper               | Kept, but scoped to the minimal install surface |
+| `_prepare` scrollspy + vendored SCSS      | Kept as maintainer-only generated artifacts     |
+| Root `package.json` mixes theme + tooling | **Fixed for runtime deps**                      |
 
-"Partially" because `theme/package.json` now declares the theme runtime deps (as
-a synced mirror), giving us a clean boundary to push the rest of the cleanup
-through. The thin-shim refactor that fully separates the manifests is
-[scoped out](#tof-repo-layout) and lives in a follow-on plan.
+The final Phase 4 mini-cycle moved the repo to a cleaner monorepo shape:
+`theme/package.json` owns theme runtime dependencies, the repo root is private
+workspace orchestration, and the GitHub-NPM install surface is constrained by
+the root `files` list.
 
 ## TOF repo layout
 
@@ -77,26 +77,28 @@ through. The thin-shim refactor that fully separates the manifests is
 │   ├── theme.toml     # canonical
 │   ├── go.mod         # module path: github.com/google/docsy/theme
 │   ├── go.sum
-│   └── package.json   # private mirror of theme runtime deps (see below)
+│   └── package.json   # canonical theme runtime deps
 ├── docsy.dev/         # website; its own node_modules for the site build
-├── scripts/           # maintainer scripts (scrollspy patch, sync-theme-deps, …)
+├── scripts/           # maintainer scripts and install helper
+├── tests/             # repo-level smoke tests
 ├── tasks/
-└── package.json       # repo root: canonical for theme runtime deps + repo-wide tooling
+└── package.json       # private workspace root + GitHub-NPM files contract
 ```
 
 Key properties:
 
 - `theme/` is what Hugo module resolves to. GitHub-NPM still ships the full repo
-  (see below).
-- The repo root `package.json` is the **single source of truth** for theme
-  runtime dependency versions and continues to host repo-wide maintainer tooling
-  (Prettier, markdownlint, cSpell French dict). The `theme/` `package.json` is a
-  small **private mirror** so that file/tarball installs of `theme/` (notably
-  `docsy.dev`'s postinstall — see [Maintainer workflow](#maintainer-workflow))
-  see the right versions.
-- The mirror is kept in sync by `scripts/sync-theme-deps.mjs` (run by
-  `_prepare`, `postupdate:dep`, and `postupdate:packages`). Maintainers should
-  not edit `theme/package.json`'s `dependencies` by hand.
+  package, but the root `files` list limits the packed/installable surface to
+  `theme/` plus `scripts/mkdirp-hugo-mod.js`.
+- The repo root `package.json` is private and owns workspace orchestration plus
+  repo-wide maintainer tooling (Prettier, markdownlint, cSpell French dict). It
+  declares workspaces for `docsy.dev` and `theme`.
+- `theme/package.json` is the **single source of truth** for theme runtime
+  dependency versions (`bootstrap`, `@fortawesome/fontawesome-free`). It is
+  private because Docsy is not publishing a separate NPM registry package in
+  0.16.
+- `theme/package-lock.json` is checked in so theme runtime installs are stable
+  and separate from repo/website tooling.
 - Theme-only configuration moved to `theme/`: `hugo.yaml`, `theme.toml`,
   `go.mod`/`go.sum`. The `theme/go.mod` module path becomes
   `github.com/google/docsy/theme`.
@@ -110,9 +112,6 @@ Key properties:
 
 What this plan **does not** change (deferred to a follow-on plan):
 
-- The repo root keeps `devDependencies` for repo-wide maintainer tooling and
-  keeps `bootstrap` + `@fortawesome/fontawesome-free` as runtime deps. There is
-  no `files` whitelist yet and no thin-shim refactor.
 - There is no dedicated `_dev/` (or similar) maintainer-orchestration folder
   yet. Maintainers continue to work from the repo root.
 - NPM-registry publication remains future work; the immediate consumer surface
@@ -188,17 +187,26 @@ release) are run, see the [execution plan][exec].
 
 ## Package boundary
 
-Each `package.json` carries a clearly-scoped set of dependencies. The three
-manifests are:
+Each `package.json` carries a clearly-scoped set of dependencies:
 
-| File                       | Role                                              | Notable contents                                                                                                                                |
-| -------------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `package.json` (repo root) | Canonical theme deps + repo-wide maintainer tools | `bootstrap`, `@fortawesome/fontawesome-free`; `prettier`, `markdownlint-cli2`, markdownlint rule plugins, `@cspell/dict-fr-fr`; `postinstall`   |
-| `theme/package.json`       | Private mirror of theme runtime deps              | Same `dependencies` as root (kept in sync by `sync-theme-deps.mjs`); `"private": true`                                                          |
-| `docsy.dev/package.json`   | Website's site-build / site-tooling               | `autoprefixer`, `postcss-cli`, `cross-env`, `rtlcss`, `afdocs`, `netlify-cli`, `npm-check-updates`, `hugo-extended`; `_install-theme-deps` hook |
+- `package.json` (repo root): private workspace root, repo dev tools, `files`
+  list for GitHub-NPM, and install helpers.
+- `theme/package.json`: canonical theme runtime package with `bootstrap` and
+  `@fortawesome/fontawesome-free`; no dev dependencies.
+- `docsy.dev/package.json`: website build and site tooling such as
+  `hugo-extended`, `autoprefixer`, `postcss-cli`, `cross-env`, `rtlcss`,
+  `afdocs`, `netlify-cli`, and `npm-check-updates`.
 
 Keep docs-site, CI, release, formatting, link-checking, and test-only
 dependencies out of `theme/package.json`.
+
+The root `files` list is part of the GitHub-NPM contract. It includes:
+
+- `theme`
+- `scripts/mkdirp-hugo-mod.js`
+- explicit exclusions for `theme/node_modules` and `theme/package-lock.json`
+
+The fast `scripts/npm-pack.test.mjs` test guards that package surface.
 
 ## Maintainer workflow
 
@@ -209,39 +217,35 @@ theme changes, so coordinated edits across both happen daily.
 Orchestration commands continue to run from the repo root:
 
 ```sh
-npm run install:all      # repo root deps + docsy.dev (incl. hugo-extended)
-npm run build            # builds docsy.dev against theme/
-npm run serve            # docsy.dev dev server with live reload
-npm run check            # repo-wide format + markdown checks
-npm run fix              # auto-fix
-npm run test:smoke       # local NPM / Hugo-module / non-module-clone smoke
+npm install          # workspace install; also installs theme deps
+npm run build        # builds docsy.dev against theme/
+npm run serve        # docsy.dev dev server with live reload
+npm run check        # repo-wide format + markdown checks
+npm run fix          # auto-fix
+npm run test:smoke   # local NPM / Hugo-module / non-module-clone smoke
 ```
 
-`docsy.dev`'s `postinstall` runs `_install-theme-deps` (see
-`docsy.dev/package.json`), which creates `theme/`'s declared runtime deps into
-`docsy.dev/node_modules/` so Hugo's consumer-cwd lookup finds them during the
-build. The mechanics (`--install-links` flag and the cleanup line) are recorded
-in [spike-notes][].
-
-[spike-notes]: ./spike-notes.md
+Root `postinstall` runs `install:theme-deps` and `_mkdir:hugo-mod`. The same
+theme-dependency install is also exposed from `docsy.dev`'s `postinstall`, so a
+site-only install still refreshes `theme/node_modules` for the local website
+build.
 
 ## Tooling versions
 
 Each shared tool has exactly one declaration in the repo:
 
 - `hugo-extended` lives in `docsy.dev/devDependencies`. The `hugo` binary lands
-  at `docsy.dev/node_modules/.bin/hugo` after `npm run docsy.dev-install` and is
-  invoked by `docsy.dev`'s `_hugo` scripts. Bumping the Hugo version is a single
-  edit (see `scripts/set-hugo-version.mjs`).
+  through the workspace install and is invoked by `docsy.dev`'s `_hugo` scripts
+  and by `npx hugo` in smoke tests. Bumping the Hugo version is a single edit
+  (see `scripts/set-hugo-version.mjs`).
 - `prettier`, `markdownlint-cli2`, the markdownlint rule plugins, and
   `@cspell/dict-fr-fr` live in the **repo-root** `devDependencies` because they
   are run from the repo root.
 - Site-build tools (`autoprefixer`, `postcss-cli`, `cross-env`, `rtlcss`) and
   site-tooling (`afdocs`, `netlify-cli`, `npm-check-updates`) live in
   `docsy.dev/devDependencies` because that is where they are used.
-- Theme runtime deps (`bootstrap`, `@fortawesome/fontawesome-free`) live in the
-  repo-root `dependencies` and are mirrored into `theme/package.json` by
-  `scripts/sync-theme-deps.mjs`.
+- Theme runtime deps (`bootstrap`, `@fortawesome/fontawesome-free`) live in
+  `theme/package.json`.
 
 ## Test boundary
 
@@ -262,8 +266,8 @@ toolchain.
 - A new site can use Docsy through the GitHub/NPM install path with the
   documented one-line config change.
 - Non-module theme usage works with the documented one-line config change.
-- `theme/package.json` contains only theme runtime dependencies (mirrored from
-  root) and is marked `"private": true`. No other lifecycle scripts.
+- `theme/package.json` contains only theme runtime dependencies and package
+  update scripts, and is marked `"private": true`.
 - All generated theme assets (vendored Bootstrap SCSS, scrollspy patch output,
   chroma styles, `go.sum`) are committed under `theme/`.
 - CI and smoke tests pass against the new layout on Windows and Ubuntu.
