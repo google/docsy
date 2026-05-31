@@ -36,17 +36,17 @@ specific status decision matters.
 
 ## Status at a glance
 
-Updated 2026-05-27. Per-phase detail (with exit criteria) lives in the
-[execution plan][exec]. The canonical TOF move is now on `main` since [#2641][].
+Updated 2026-05-31. Per-phase detail (with exit criteria) lives in the
+[execution plan][exec]. The canonical TOF move is on `main` since [#2641][].
 
-| Phase                                | Status                                                          |
-| ------------------------------------ | --------------------------------------------------------------- |
-| 0 — structural move                  | Done — landed on task branch, and `main`                        |
-| 1 — `docsy.dev` consumes TOF         | Done — local + Netlify deploy preview green ([#2640][])         |
-| 2 — local smoke tests (CI emulation) | Done — local smoke passes; CI smoke matrix green ([#2640][])    |
-| 3 — GitHub CI                        | Done — run-hugo + install:all; full CI matrix green ([#2640][]) |
-| 4 — `docsy-example`                  | Done — final update merged via [#458][]                         |
-| 5 — docs and release notes           | Next                                                            |
+| Phase                                  | Status                                                       |
+| -------------------------------------- | ------------------------------------------------------------ |
+| 0 — structural move                    | Done — landed on `main` via [#2641][]                        |
+| 1 — `docsy.dev` consumes TOF           | Done — local + Netlify deploy preview green ([#2640][])      |
+| 2 — local smoke tests (CI emulation)   | Done — local smoke passes; CI smoke matrix green ([#2640][]) |
+| 3 — GitHub CI                          | Done — workspace install; full CI matrix green               |
+| 4 — `docsy-example` + monorepo cleanup | Done — final example update + package/workspace mini-cycle   |
+| 5 — docs and release notes             | Next                                                         |
 
 Next concrete steps, in order:
 
@@ -55,6 +55,7 @@ Next concrete steps, in order:
    - (b) merge the task branch to `main` via [#2641][] — **done**.
    - (c) final `docsy-example` config + test against Docsy from `main` — done
      via [google/docsy-example#458][#458].
+   - (d) monorepo package/workspace cleanup — **done**.
 2. **Phase 5 (next):** update the get-started "clone" docs for the new
    non-module setup procedure recorded in [spike-notes][spike] Phase 2, plus
    changelog/blog and release-process notes for the nested module tag

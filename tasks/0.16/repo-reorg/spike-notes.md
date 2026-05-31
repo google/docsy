@@ -87,15 +87,35 @@ Setup commands after TOF:
 ```sh
 cd themes
 git clone -b <version> https://github.com/google/docsy
-(cd docsy/theme && npm install)
-(cd docsy && node scripts/mkdirp-hugo-mod.js ..)
+(cd docsy && npm run postinstall)
 cd ..
 npm install --save-dev autoprefixer postcss-cli
 ```
 
 For a Git submodule install, keep the existing submodule workflow but run the
-same `docsy/theme` npm install and `mkdirp-hugo-mod.js` commands after updating
-the submodule.
+same `docsy` postinstall after updating the submodule.
+
+## Current monorepo design after the Phase 4 mini-cycle
+
+This section supersedes the earlier spike narrative where it conflicts.
+
+- Root `package.json` is private and declares the two workspaces: `docsy.dev`
+  and `theme`.
+- Root `package.json` has no theme runtime dependencies. It owns repo-wide
+  maintainer tooling and the GitHub-NPM package contract through `files`.
+- The GitHub-NPM package surface is intentionally small: `theme/` plus
+  `scripts/mkdirp-hugo-mod.js`, excluding `theme/node_modules` and
+  `theme/package-lock.json`.
+- `theme/package.json` owns the theme runtime dependencies and
+  `theme/package-lock.json`.
+- Root `postinstall` runs `install:theme-deps` and `_mkdir:hugo-mod`.
+- `docsy.dev/package.json` owns website/dev tooling, including `hugo-extended`,
+  and its `postinstall` delegates to the root `install:theme-deps` script.
+- Netlify builds from the repo root with `npm run -C docsy.dev build:preview` or
+  `build:production`; `docsy.dev/netlify.toml` sets `HUGO_THEME=repo/theme`.
+- CI and local smoke use plain `npx hugo` after `npm install`; the temporary
+  `scripts/run-hugo.mjs` helper was removed.
+- `scripts/npm-pack.test.mjs` is the fast guard for the GitHub-NPM tarball.
 
 ## Repo state at start of spike
 
