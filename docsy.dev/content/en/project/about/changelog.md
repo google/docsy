@@ -133,12 +133,20 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
-- ...
+- The minimum required Hugo version is now **[0.158.0][hugo-0.158.0]** (was
+  0.146.0): theme templates now use the language APIs introduced in 0.158.0
+  (`label`, `direction`, `Language.Name`, etc.).
 
 **Other changes**:
 
-- Updated **Hugo** to [0.158.0][hugo-0.158.0], which deprecates `languageName`
-  and other language config keys and methods in favor of `label` etc.
+- Updated **Hugo** to [0.158.0][hugo-0.158.0] and migrated the theme and docs
+  off the deprecated language config keys and methods (`languageName` → `label`,
+  `languageDirection` → `direction`, `Language.Lang` → `Language.Name`, etc.),
+  as well as the 0.156.0-deprecated `.Site.Languages` and `.Site.AllPages`
+  methods. Thanks [@deining][] for the groundwork in [#2594][] and [#2578][]!
+
+[#2594]: https://github.com/google/docsy/pull/2594
+[#2578]: https://github.com/google/docsy/pull/2578
 
 [**Experimental**](#experimental):
 

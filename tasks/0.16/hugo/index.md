@@ -16,3 +16,20 @@ For the plan, see [`0.158.0.md`](./local/upgrades/0.158.0.md).
   - `docsy.dev/package.json` → `hugo-extended` devDependency
   - `docsy.dev/config/_default/hugo.yaml` → `params.hugoMinVersion`
     (`&hugoMinVersion`, also feeds `module.hugoVersion.min` for the site)
+
+#### Status: complete (pending review)
+
+- Pins bumped to 0.158.0; site config `languageName` → `label`; full test suite
+  and minified-production spot checks pass. Smoke tests pass too, but they fetch
+  the theme from the remote repo, so they won't exercise this branch's theme
+  changes until pushed — re-run after push.
+- **Theme min Hugo version raised to 0.158.0** (`theme/theme.toml`,
+  `theme/hugo.yaml`) — a 0.16 breaking change — and all deprecated language APIs
+  migrated in theme templates (`Lang` → `Name`, `LanguageName` → `Label`,
+  `LanguageDirection` → `Direction`), including the 0.156-era `.Site.Languages`
+  (navbar-lang-selector, via `hugo.Sites`) and `.Site.AllPages`
+  (offline-search-index) usages. Builds now log zero deprecation notices at
+  `--logLevel info`.
+- User-guide examples updated (`language.md`, `basic-configuration.md`);
+  changelog updated with breaking-change entry and thanks to @deining (#2594,
+  #2578).

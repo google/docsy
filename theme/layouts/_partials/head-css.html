@@ -6,7 +6,7 @@
 makes it snappier to develop in Chrome, but it may look sub-optimal in other
 browsers. */ -}}
 
-{{ if eq .Site.Language.LanguageDirection "rtl" -}}
+{{ if eq .Site.Language.Direction "rtl" -}}
   {{ $css = $css
       | postCSS (dict "use" "autoprefixer rtlcss" "noMap" true)
       | resources.Copy (replace $scssMain "." ".rtl.") -}}

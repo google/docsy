@@ -7,7 +7,7 @@ homepage = "https://docsy.dev"
 demosite = "https://example.docsy.dev/"
 tags = ["documentation", "multilingual", "customizable", "responsive", "docs"]
 features = []
-min_version = "0.146.0"
+min_version = "0.158.0"
 
 [author]
   name = "The Docsy Authors"

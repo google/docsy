@@ -31,7 +31,7 @@ by removing the following lines from `hugo.toml`:
 
 ```toml
 [languages.no]
-languageName ="Norsk"
+label ="Norsk"
 contentDir = "content/no"
 [languages.no.params]
 title = "Goldydocs"
@@ -40,7 +40,7 @@ time_format_default = "02.01.2006"
 time_format_blog = "02.01.2006"
 
 [languages.fa]
-languageName ="فارسی"
+label ="فارسی"
 contentDir = "content/fa"
 [languages.fa.params]
 title = "اسناد گلدی"
