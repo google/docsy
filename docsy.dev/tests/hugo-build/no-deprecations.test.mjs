@@ -52,7 +52,8 @@ test('build with seeded deprecated API call logs a deprecation notice', (t) => {
       '{{ .Language.LanguageName }}\n',
   );
   try {
-    const { deprecations } = buildSite();
+    const { res, output, deprecations } = buildSite();
+    assert.equal(res.status, 0, `Seeded build failed:\n${output}`);
     assert.ok(
       deprecations.length > 0,
       'Seeded deprecated API call was not reported by the Hugo build',

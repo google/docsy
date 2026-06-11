@@ -44,6 +44,14 @@ test('offline-search index covers all site languages', (t) => {
   assert.ok(fr.length > 0, 'No French entries in index');
   assert.ok(en.length > 0, 'No English entries in index');
 
+  // Known-content spot checks, one per language.
+  for (const ref of ['/docs/', '/fr/docs/']) {
+    assert.ok(
+      entries.some((e) => e.ref === ref),
+      `Index lacks an entry for ${ref}`,
+    );
+  }
+
   t.diagnostic(
     `Index entries: ${entries.length} (en: ${en.length}, fr: ${fr.length})`,
   );
