@@ -198,8 +198,8 @@ fully-styled site — a rendered home page that links the exact compiled
 stylesheet (> 100 KB), plus a generated sitemap — not just a zero exit. It
 covers what the CI smoke matrix runs (NPM, HUGO_MODULE) **plus** the non-module
 clone, which CI does not exercise. Target repo/branch via `--repo` / `--branch`
-(defaults: `google/docsy`, `main`; the `test:smoke` npm script also passes
-`--branch main`). During TOF rollout on a task branch:
+(default: the current branch's GitHub upstream when it exists and isn't main;
+fallback: `google/docsy`, `main`). During TOF rollout on a task branch:
 `npm run test:smoke -- --branch task/repo-reorg-2026-05`. Prereq: `npm install`
 (for workspace tooling, including `hugo-extended`). Deliberately kept out of
 `test:tooling` / CI `ci:post` (slow, network-bound).

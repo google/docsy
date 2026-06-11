@@ -675,6 +675,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-04-29T20:27:41.801894-04:00"
   },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.158.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T13:28:58.464005-04:00"
+  },
   "https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:07.239646-05:00"
@@ -934,6 +938,14 @@
   "https://github.com/google/docsy/blob/main/scripts/scrollspy-patch/README.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:09.005756-05:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/hugo.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T14:37:46.356387-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/theme.toml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T14:37:45.852618-04:00"
   },
   "https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html": {
     "StatusCode": 206,
@@ -1551,6 +1563,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-04-25T21:19:43.019393-04:00"
   },
+  "https://github.com/google/docsy/pull/2578": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T13:43:23.433638-04:00"
+  },
   "https://github.com/google/docsy/pull/2580": {
     "StatusCode": 206,
     "LastSeen": "2026-04-25T21:19:42.221622-04:00"
@@ -1578,6 +1594,10 @@
   "https://github.com/google/docsy/pull/2591": {
     "StatusCode": 206,
     "LastSeen": "2026-04-25T21:19:47.341466-04:00"
+  },
+  "https://github.com/google/docsy/pull/2594": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T13:43:22.687744-04:00"
   },
   "https://github.com/google/docsy/pull/2597": {
     "StatusCode": 206,
@@ -2074,6 +2094,10 @@
   "https://gohugo.io/configuration/introduction/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.088072-05:00"
+  },
+  "https://gohugo.io/configuration/languages/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-11T14:37:43.963556-04:00"
   },
   "https://gohugo.io/configuration/markup/#extensions": {
     "StatusCode": 206,

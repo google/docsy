@@ -84,7 +84,7 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 [^1]:
     This is contrary to the documented Hugo behavior for front-matter
-    configuration, but it is confirmed with our testing as of Hugo 0.157.0.
+    configuration, but it is confirmed with our testing as of Hugo 0.158.0.
 
 To opt pages out of Markdown output, set `outputs` in page front matter to
 `HTML` only, or whatever your page's default output formats are while excluding

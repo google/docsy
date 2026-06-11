@@ -6,9 +6,13 @@
 //   Usage: npm run test:smoke -- [options]
 //   Options:
 //     --repo <repo>    GitHub org+repo to fetch Docsy from.
-//                      Format: GITHUB_USER/DOCSY_REPO. Default: google/docsy
+//                      Format: GITHUB_USER/DOCSY_REPO. Fallback: google/docsy
 //     --branch <branch>
-//                      Docsy branch to fetch. Default: main
+//                      Docsy branch to fetch. Fallback: main
+//
+// When no flags are given and the current branch has a GitHub upstream other
+// than main, that upstream (repo and branch) is used as the default target —
+// the common case when smoke-testing a PR branch pushed to a fork.
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
 // kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
@@ -49,8 +53,30 @@ function arg(name, fallback) {
   return value;
 }
 
-const REPO = arg('repo', 'google/docsy');
-const BRANCH = arg('branch', 'main');
+// Default target: the GitHub upstream of the current branch, when it exists
+// and isn't main; otherwise google/docsy main.
+function gitUpstreamTarget() {
+  const opts = { cwd: repoRoot, encoding: 'utf8' };
+  const upstream = spawnSync(
+    'git',
+    ['rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}'],
+    opts,
+  );
+  if (upstream.status !== 0) return undefined;
+  const [remote, ...rest] = upstream.stdout.trim().split('/');
+  const branch = rest.join('/');
+  if (!branch || branch === 'main') return undefined;
+  const url = spawnSync('git', ['remote', 'get-url', remote], opts);
+  const m = (url.stdout ?? '')
+    .trim()
+    .match(/github\.com[:/]([^/]+\/[^/]+?)(?:\.git)?$/);
+  if (url.status !== 0 || !m) return undefined;
+  return { repo: m[1], branch };
+}
+
+const upstream = gitUpstreamTarget();
+const REPO = arg('repo', upstream?.repo ?? 'google/docsy');
+const BRANCH = arg('branch', upstream?.branch ?? 'main');
 const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 
 // Run a command; surface its output only on failure.

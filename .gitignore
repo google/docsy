@@ -28,4 +28,7 @@ resources/
 
 # cSpell:ignore worktrees
 /.claude/worktrees
+
+# Local folders and settings
 /.claude/settings.local.json
+tasks/**/local
