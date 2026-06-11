@@ -26,11 +26,15 @@ Detailed plan: `local/upgrades/0.158.0.md` — a maintainer-local file
   exercised.
 - **Theme min Hugo version raised to 0.158.0** (`theme/theme.toml`,
   `theme/hugo.yaml`) — a 0.16 breaking change — and all deprecated language APIs
-  migrated in theme templates (`Lang` → `Name`, `LanguageName` → `Label`,
-  `LanguageDirection` → `Direction`), including the 0.156-era `.Site.Languages`
-  (navbar-lang-selector, via `hugo.Sites`) and `.Site.AllPages`
-  (offline-search-index) usages. Builds now log zero deprecation notices at
-  `--logLevel info`.
+  migrated in theme templates. For the API rename details, see the
+  [changelog](/project/about/changelog/).
 - User-guide examples updated (`language.md`, `basic-configuration.md`);
   changelog updated with breaking-change entry and thanks to @deining (#2594,
   #2578).
+- Automated guards added under `docsy.dev/tests/` (run via
+  `npm run test:extra`): `test:hugo-build` fails the build on any Hugo
+  deprecation notice (with a seeded-deprecation sanity case), and
+  `test:alt-site` validates the offline-search index (entry count, shape, en+fr
+  coverage). Smoke tests now default to the current branch's GitHub upstream.
+- Deferred: manual check of the navbar language selector (disabled entries for
+  untranslated languages) when upgrading docsy-example or otel to 0.16.

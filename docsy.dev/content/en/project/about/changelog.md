@@ -134,10 +134,11 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [**Breaking changes**](#breaking-change):
 
 - Raised the theme's minimum supported Hugo version to
-  **[0.158.0][hugo-0.158.0]** (was 0.146.0). Theme templates now use the
-  language APIs introduced in Hugo 0.158.0. Note: the language config keys
-  deprecated by Hugo 0.158.0 (`languageName`, `languageDirection`) still work in
-  your site config, but consider renaming them to `label` and `direction` — see
+  **[0.158.0][hugo-0.158.0]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
+  Theme templates now use the language APIs introduced in Hugo 0.158.0. Note:
+  the language config keys deprecated by Hugo 0.158.0 (`languageName`,
+  `languageDirection`) still work in your site config, but consider renaming
+  them to `label` and `direction` — see
   [Multi-language support](/docs/language/).
 
 **Other changes**:
