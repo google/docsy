@@ -137,7 +137,8 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 **Other changes**:
 
-- ...
+- Updated **Hugo** to [0.158.0][hugo-0.158.0], which deprecates `languageName`
+  and other language config keys and methods in favor of `label` etc.
 
 [**Experimental**](#experimental):
 
@@ -145,6 +146,7 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 [0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
 [0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0
+[hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0
 
 ## v0.15.0 {#v0.15.0}
 
