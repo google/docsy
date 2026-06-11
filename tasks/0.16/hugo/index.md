@@ -20,6 +20,8 @@ Detailed plan: `local/upgrades/0.158.0.md` — a maintainer-local file
 
 #### Status
 
+- **PR [#2647](https://github.com/google/docsy/pull/2647) open** against
+  google/docsy (contributes to #2593).
 - Pins bumped to 0.158.0; site config `languageName` → `label`; full test suite
   and minified-production spot checks pass. Smoke tests pass for all 3 site
   flavors, re-verified against the pushed branch so the theme changes were
