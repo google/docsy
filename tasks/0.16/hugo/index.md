@@ -1,23 +1,24 @@
 ---
 title: Hugo upgrade plan
 date: 2026-06-11
-status: draft
+status: complete (pending review)
 ---
 
 ## Upgrade summary
 
 ### 0.158.0
 
-For the plan, see [`0.158.0.md`](./local/upgrades/0.158.0.md).
+Detailed plan: `local/upgrades/0.158.0.md` — a maintainer-local file
+([`tasks/**/local`](../../../.gitignore) paths are not committed).
 
-- **Current baseline:** Hugo extended 0.157.0, pinned in:
+- **Previous baseline:** Hugo extended 0.157.0, pinned in:
   - `package.json` → `config.hugo_version` (used by
     `docsy.dev/scripts/install-hugo.sh`)
   - `docsy.dev/package.json` → `hugo-extended` devDependency
   - `docsy.dev/config/_default/hugo.yaml` → `params.hugoMinVersion`
     (`&hugoMinVersion`, also feeds `module.hugoVersion.min` for the site)
 
-#### Status: complete (pending review)
+#### Status
 
 - Pins bumped to 0.158.0; site config `languageName` → `label`; full test suite
   and minified-production spot checks pass. Smoke tests pass for all 3 site

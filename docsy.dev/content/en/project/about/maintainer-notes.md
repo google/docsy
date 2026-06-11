@@ -52,6 +52,12 @@ This updates:
   - Note: `module.hugoVersion.min` stays as `*hugoMinVersion`
 - [docsy.dev/package.json][]: `hugo-extended`
 
+The script deliberately does **not** touch the _theme_ support floor,
+[theme/theme.toml][] `min_version`, and [theme/hugo.yaml][]
+`module.hugoVersion.min`. Raising the theme floor is a breaking change for theme
+users; do it only as an explicit decision, with a changelog breaking-change
+entry and upgrade notes.
+
 ## Release-prep audit
 
 Before drafting the changelog entry and release blog post, run a careful audit
@@ -480,6 +486,8 @@ before any further changes are merged into the `main` branch:
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
+[theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [public]: /project/about/changelog/#public
 [tags]: <{{% param github_repo %}}/tags>
 

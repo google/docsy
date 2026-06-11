@@ -31,4 +31,4 @@ resources/
 
 # Local folders and settings
 /.claude/settings.local.json
-local
+tasks/**/local
