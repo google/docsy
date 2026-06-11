@@ -20,9 +20,9 @@ For the plan, see [`0.158.0.md`](./local/upgrades/0.158.0.md).
 #### Status: complete (pending review)
 
 - Pins bumped to 0.158.0; site config `languageName` → `label`; full test suite
-  and minified-production spot checks pass. Smoke tests pass too, but they fetch
-  the theme from the remote repo, so they won't exercise this branch's theme
-  changes until pushed — re-run after push.
+  and minified-production spot checks pass. Smoke tests pass for all 3 site
+  flavors, re-verified against the pushed branch so the theme changes were
+  exercised.
 - **Theme min Hugo version raised to 0.158.0** (`theme/theme.toml`,
   `theme/hugo.yaml`) — a 0.16 breaking change — and all deprecated language APIs
   migrated in theme templates (`Lang` → `Name`, `LanguageName` → `Label`,
