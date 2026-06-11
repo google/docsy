@@ -6,9 +6,9 @@
 //   Usage: npm run test:smoke -- [options]
 //   Options:
 //     --repo <repo>    GitHub org+repo to fetch Docsy from.
-//                      Format: GITHUB_USER/DOCSY_REPO. Default: google/docsy
+//                      Format: GITHUB_USER/DOCSY_REPO. Fallback: google/docsy
 //     --branch <branch>
-//                      Docsy branch to fetch. Default: main
+//                      Docsy branch to fetch. Fallback: main
 //
 // When no flags are given and the current branch has a GitHub upstream other
 // than main, that upstream (repo and branch) is used as the default target —
