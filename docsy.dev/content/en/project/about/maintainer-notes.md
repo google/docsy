@@ -8,6 +8,20 @@ cSpell:ignore: hugo creatordate
 For our main contributing page covering license agreements, code of conduct and
 more, see [Contributing][]. This page is for **maintainers only**.
 
+## Content placement
+
+Keep project content DRY by writing each fact in the artifact whose purpose and
+audience it serves:
+
+- **[Changelog][]**: a lean record of _what changed_, for devs who want a quick
+  overview. No upgrade advice, implementation detail, or background.
+- **Release and upgrade blog posts**: what's new, what to watch out for, and
+  actionable upgrade guidance — the historical narrative.
+- **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
+  or links to issues and PRs.
+- **Test and code comments**: implementation rationale and regression
+  background.
+
 ## PR descriptions
 
 Generally speaking, a PR opening comment should be a Markdown list that explains
@@ -57,6 +71,27 @@ The script deliberately does **not** touch the _theme_ support floor,
 `module.hugoVersion.min`. Raising the theme floor is a breaking change for theme
 users; do it only as an explicit decision, with a changelog breaking-change
 entry and upgrade notes.
+
+Note that `params.hugoMinVersion` feeds **user-facing docs** (via
+`{{%/* param hugoMinVersion */%}}`) as the _site-recommended_ Hugo version. For
+a **build-only bump** — raising the project's own Hugo without changing what we
+recommend to users — skip the script and manually update only
+`config.hugo_version` (root [package.json][]) and `hugo-extended`
+([docsy.dev/package.json][]).
+
+## Test suites
+
+From the repo root:
+
+| Script           | Role                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| `test:website`   | Full docsy.dev checks: format, links, hugo-build, alt-site, and md-output golden tests    |
+| `test:mono-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
+| `test:tooling`   | Unit tests for repo scripts                                                               |
+| `test:smoke`     | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
+
+All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
+validation (they auto-target the current branch's GitHub upstream).
 
 ## Release-prep audit
 
