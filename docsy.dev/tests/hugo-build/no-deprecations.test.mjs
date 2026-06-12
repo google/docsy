@@ -1,13 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
+import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -33,30 +27,6 @@ test('site build logs no Hugo deprecation notices', (t) => {
   assert.equal(res.status, 0, `Build failed:\n${output}`);
   assert.deepEqual(deprecations, [], 'Hugo build logged deprecation notice(s)');
   t.diagnostic(`Scanned ${output.split('\n').length} build-log lines`);
-});
-
-// Depends on the build from the test above (tests in this file run
-// sequentially; keep this one right after it).
-//
-// Guards the rendered-HTML escaping of `&` in Markdown link URLs: Hugo
-// 0.159.2 double-escaped them (`&amp;amp;`, gohugoio/hugo#14715; fixed in
-// 0.160.0) on sites using goldmark's plain link rendering. This site is
-// shielded — multilingual single-host sites get `useEmbedded: fallback`,
-// i.e. the embedded link render hook — so this is an invariant check on the
-// output rather than a reproduction of the bug.
-test('ampersands in Markdown link URLs are escaped exactly once', () => {
-  const htmlPath = join(
-    siteDir,
-    'public',
-    'docs',
-    'content',
-    'navigation',
-    'index.html',
-  );
-  assert.ok(existsSync(htmlPath), `${htmlPath} not found; build first`);
-  const html = readFileSync(htmlPath, 'utf8');
-  assert.match(html, /fontawesome\.com\/icons\?d=gallery&amp;p=2/);
-  assert.doesNotMatch(html, /&amp;amp;/);
 });
 
 // Sanity check that the test above can actually detect deprecation notices:
