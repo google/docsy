@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.15.1-dev+010-over-main-5c5733de",
+  "version": "0.15.1-dev+011-over-main-3e76f1f2",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -84,7 +84,7 @@
     "prettier": "^3.8.1"
   },
   "config": {
-    "hugo_version": "0.160.1"
+    "hugo_version": "0.163.1"
   },
   "engines": {
     "node": ">=24"
