@@ -18,7 +18,10 @@ outputs:
 
 imaging:
   resampleFilter: CatmullRom # cSpell:disable-line
-  quality: 75
+  jpeg:
+    quality: 75
+  webp:
+    quality: 75
   anchor: Smart
 
 languages:
