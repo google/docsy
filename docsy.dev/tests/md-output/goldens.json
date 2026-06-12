@@ -42,6 +42,12 @@
     "skip": false
   },
   {
+    "path": "docs/content/navigation/index.md",
+    "kind": "page",
+    "covers": ["body", "amp-in-link-urls"],
+    "skip": false
+  },
+  {
     "path": "fr/index.md",
     "kind": "home",
     "covers": ["description", "body", "children", "i18n:fr"],
