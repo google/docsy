@@ -14,7 +14,7 @@ Run the following from the command line:
 {{< tab header="Unix shell" lang="Bash" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 sed -i '/theme = \["docsy"\]/d' config.toml
 mv config.toml hugo.toml
 cat >> hugo.toml <<EOL
@@ -28,7 +28,7 @@ hugo server
 {{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 findstr /v /c:"theme = [\"docsy\"]" config.toml > hugo.toml
 (echo [module]^
 
@@ -63,7 +63,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -176,9 +176,9 @@ To make sure that your configuration settings are correct, run the command `hugo
 ```bash
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/google/docsy@v{{% param "version" %}}
-github.com/google/docsy@v{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
-github.com/google/docsy@v{{% param "version" %}} github.com/FortAwesome/Font-Awesome@ v0.0.0-20230802202706-f0c25837a3fe
+github.com/me/my-existing-site github.com/google/docsy@{{% param "version" %}}
+github.com/google/docsy@{{% param "version" %}} github.com/twbs/bootstrap@v5.2.3+incompatible
+github.com/google/docsy@{{% param "version" %}} github.com/FortAwesome/Font-Awesome@ v0.0.0-20230802202706-f0c25837a3fe
 ```
 
 Make sure that three lines with dependencies `docsy`, `bootstrap` and `Font-Awesome` are listed. If not, please double check your config settings.
