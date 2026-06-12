@@ -21,8 +21,14 @@ test('& in Markdown link URL is escaped exactly once', () => {
     },
   });
   assert.equal(r.status, 0, `hugo build failed:\n${r.stdout}${r.stderr}`);
+  const html = r.publicFile('docs/amp/index.html');
+  assert.doesNotMatch(
+    html,
+    /&amp;amp;/,
+    'no double-escaped & (the #14715 symptom) in rendered HTML',
+  );
   assert.match(
-    r.publicFile('docs/amp/index.html'),
+    html,
     /href="https:\/\/example\.com\/\?a=1&amp;b=2"/,
     '& in Markdown link URL is escaped exactly once in rendered HTML',
   );
