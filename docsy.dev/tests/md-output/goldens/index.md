@@ -8,15 +8,15 @@ LLMS index: [llms.txt](/llms.txt)
 
 ---
 
-<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_28cf822f25b6f961.jpg" media="(max-width: 1200px)">
-<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_d1a634809060463b.jpg" media="(min-width: 1200px)">
+<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_ac3e76417c708174.jpg" media="(max-width: 1200px)">
+<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_1a0ad6f9205bc79d.jpg" media="(min-width: 1200px)">
 <style>
 #td-cover-block-0 {
-  background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_28cf822f25b6f961.jpg);
+  background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_ac3e76417c708174.jpg);
 }
 @media only screen and (min-width: 1200px) {
   #td-cover-block-0 {
-    background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_d1a634809060463b.jpg);
+    background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_1a0ad6f9205bc79d.jpg);
   }
 }
 </style>
