@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.15.1-dev+002-over-main-ce9942b8",
+  "version": "0.15.1-dev+010-over-main-5c5733de",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -41,11 +41,11 @@
     "check:links": "npm run -C docsy.dev check:links",
     "check:markdown": "npm run _check:markdown -- '**/*.md'",
     "check": "npm run check:format && npm run check:markdown",
-    "ci:post": "npm run fix-for-test && npm run _diff:check && npm run test:tooling",
+    "ci:post": "npm run fix-for-test && npm run _diff:check && npm run test:tooling && npm run test:mono-site",
     "ci:prepare": "npm run _prepare && npm run _diff:check",
     "ci:test": "npm run ci:prepare && npm run check && npm run test:website && npm run ci:post",
     "doc-rooted": "TD_BUILD_CTX=doc-rooted npm run",
-    "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website",
+    "fix-and-test": "echo 'RUNNING most FIXES AND TESTS...'; npm run fix-for-test && npm run test:website && npm run test:mono-site",
     "fix-for-test": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "fix:format:diff": "npm run fix:format",
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s -C docsy.dev fix:format",
@@ -65,6 +65,7 @@
     "set:version:example": "cd ../docsy-example && node ../docsy/scripts/set-package-version/index.mjs",
     "set:version:git-info": "npm run -s _spv -- --version \"$(scripts/get-build-id.sh)\"",
     "set:version": "npm run -s _spv --",
+    "test:mono-site": "node --test 'tests/mono-site/**/*.test.mjs'",
     "test:smoke": "node tests/smoke.test.mjs",
     "test:tooling": "node --test 'scripts/**/*.test.mjs'",
     "test:website": "npm run -C docsy.dev test",
@@ -83,7 +84,7 @@
     "prettier": "^3.8.1"
   },
   "config": {
-    "hugo_version": "0.158.0"
+    "hugo_version": "0.160.1"
   },
   "engines": {
     "node": ">=24"

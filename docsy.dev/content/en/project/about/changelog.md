@@ -145,9 +145,12 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 - Migrated the theme and docs off deprecated Hugo language APIs. Thanks
   [@deining][] for the groundwork in [#2594][] and [#2578][]!
+- Upgraded the project's Hugo build to [0.160.1][hugo-0.160.1]. The theme's
+  minimum supported Hugo version remains 0.158.0.
 
 [#2594]: https://github.com/google/docsy/pull/2594
 [#2578]: https://github.com/google/docsy/pull/2578
+[hugo-0.160.1]: https://github.com/gohugoio/hugo/releases/tag/v0.160.1
 
 [**Experimental**](#experimental):
 
