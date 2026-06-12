@@ -45,7 +45,7 @@ export function buildSite(name, { files = {}, srcDir, extraConfig = '' } = {}) {
     mkdirSync(path.dirname(f), { recursive: true });
     writeFileSync(f, content);
   }
-  // PostCSS & friends, resolved from the repo's own install.
+  // PostCSS and friends, resolved from the repo's own install.
   symlinkSync(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
