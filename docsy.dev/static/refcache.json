@@ -635,6 +635,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:57.051186-05:00"
   },
+  "https://github.com/gohugoio/hugo/issues/14715": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-12T05:59:51.656014-04:00"
+  },
   "https://github.com/gohugoio/hugo/pull/14363": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:55.7498-05:00"
@@ -678,6 +682,14 @@
   "https://github.com/gohugoio/hugo/releases/tag/v0.158.0": {
     "StatusCode": 206,
     "LastSeen": "2026-06-11T13:28:58.464005-04:00"
+  },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.159.2": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-12T05:59:50.757419-04:00"
+  },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.160.1": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-12T05:59:50.245978-04:00"
   },
   "https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md": {
     "StatusCode": 206,
