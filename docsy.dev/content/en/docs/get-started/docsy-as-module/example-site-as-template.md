@@ -24,7 +24,7 @@ site from scratch.
 At your Unix shell or Windows command line, run the following command:
 
 ```bash
-git clone --depth 1 --branch v{{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
 cd  my-new-site
 hugo server
 ```
@@ -55,7 +55,7 @@ make a local working copy of the example site directly using `git clone`. As
 last parameter, give your chosen local repo name (here: `my-new-site`):
 
 ```bash
-git clone --depth 1 --branch v{{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
 ```
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
@@ -69,7 +69,7 @@ easy:
    [Docsy example site](https://github.com/google/docsy-example).
 
 1. Use the dropdown for switching branches/tags to change to the latest released
-   tag `v{{% param "version" %}}`.
+   tag `{{% param "version" %}}`.
 
 1. Click the button **Use this template** and select the option
    `Create a new repository` from the dropdown.
