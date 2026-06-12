@@ -84,7 +84,7 @@
     "prettier": "^3.8.1"
   },
   "config": {
-    "hugo_version": "0.160.1"
+    "hugo_version": "0.163.0"
   },
   "engines": {
     "node": ">=24"
