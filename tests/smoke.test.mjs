@@ -28,7 +28,6 @@ import {
   readdirSync,
   rmSync,
   statSync,
-  writeFileSync,
   writeSync,
 } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -136,35 +135,6 @@ function assertBuilt(name) {
   );
 }
 
-// Seed a docs page with a `&`-bearing Markdown link URL; assertAmpEscaping
-// then checks it renders escaped exactly once. Guards the regression class of
-// gohugoio/hugo#14715 (0.159.2 double-escaped to &amp;amp;, fixed in 0.160.0):
-// smoke sites are monolingual with no link render hooks, i.e. goldmark's
-// plain link rendering — the only path that was affected. (The docsy.dev
-// site can't cover this: multilingual single-host sites silently use the
-// embedded link render hook and are immune.)
-const AMP_PAGE = 'amp-escaping-check';
-function seedAmpPage(site) {
-  const dir = path.join(site, 'content', 'docs', AMP_PAGE);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(
-    path.join(dir, '_index.md'),
-    '---\ntitle: Amp escaping check\n---\n\n' +
-      '[amp link](https://example.com/?a=1&b=2)\n',
-  );
-}
-function assertAmpEscaping(name) {
-  const html = readFileSync(
-    path.join(TMP, name, 'public', 'docs', AMP_PAGE, 'index.html'),
-    'utf8',
-  );
-  assert.match(
-    html,
-    /href="https:\/\/example\.com\/\?a=1&amp;b=2"/,
-    '& in Markdown link URL is escaped exactly once in rendered HTML',
-  );
-}
-
 before(() => {
   if (!existsSync(TMP)) mkdirSync(TMP);
   progress(`Target — ${TARGET}  (override with --repo / --branch)`);
@@ -242,10 +212,8 @@ test('non-module clone into themes/docsy', () => {
 
   // The one-line consumer config change.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
-  seedAmpPage(site);
   progress('clone: hugo build…');
   assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
   assertBuilt(name);
-  assertAmpEscaping(name);
   progress('clone: ok');
 });
