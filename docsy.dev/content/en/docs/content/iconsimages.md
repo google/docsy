@@ -2,7 +2,7 @@
 title: Logos and Images
 # date: 2017-01-05
 description: Add and customize logos, icons, and images in your project.
-cSpell:ignore: Icongen lookandfeel cthedot icongen imgproc
+cSpell:ignore: lookandfeel imgproc
 ---
 
 ## Add your logo
