@@ -44,7 +44,7 @@ concentrer sur la création de contenu pour vos utilisateurs.
 [Hugo]: https://gohugo.io/
 [netlify]: https://www.netlify.com/
 [netlify-badge]:
-  https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+  https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg
 
 {{% /blocks/lead %}}
 

@@ -75,7 +75,7 @@ on creating great content for your users.
 [Hugo]: https://gohugo.io/
 [netlify]: https://www.netlify.com/
 [netlify-badge]:
-  https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+  https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg
 
 
 </div>
