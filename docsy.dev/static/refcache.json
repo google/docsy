@@ -3443,6 +3443,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:14:23.74052-05:00"
   },
+  "https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-12T21:31:34.241182-04:00"
+  },
   "https://www.netlify.com/docs/continuous-deployment/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:49.228342-05:00"
