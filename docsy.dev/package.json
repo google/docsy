@@ -29,7 +29,7 @@
     "postbuild:production": "npm run _postbuild",
     "postinstall": "npm run --prefix .. install:theme-deps",
     "precheck:links:all": "npm run build",
-    "precheck:links": "npm run _build",
+    "precheck:links": "npm run build",
     "prune:refcache": "node scripts/prune-refcache.mjs",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _serve -- --minify",
