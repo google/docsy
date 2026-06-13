@@ -14,6 +14,7 @@
     "_hugo": "hugo --cleanDestinationDir --logLevel info --themesDir ../..",
     "_postbuild": "npm run _check:links--warn",
     "_serve": "npm run _hugo-dev -- serve --disableFastRender --renderToMemory",
+    "_test:base": "npm run check:format && npm run _check:links",
     "build:preview": "cross-env npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "cross-env npm run _build -- --baseURL \"${BASE_URL:-http://localhost}\"",
@@ -28,18 +29,19 @@
     "postbuild:production": "npm run _postbuild",
     "postinstall": "npm run --prefix .. install:theme-deps",
     "precheck:links:all": "npm run build",
-    "precheck:links": "npm run build",
-    "pretest:md-output": "npm run build",
+    "precheck:links": "npm run _build",
     "prune:refcache": "node scripts/prune-refcache.mjs",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _serve -- --minify",
     "test:alt-site": "node --test 'tests/alt-site/**/*.test.mjs'",
-    "test:base": "npm run check:format && npm run check:links",
-    "test:extra": "npm run seq -- test:hugo-build test:alt-site",
+    "test:base": "npm run seq -- build _test:base",
+    "test:extra": "npm run seq -- test:hugo-build test:alt-site test:md-output test:favicons",
+    "test:favicons": "node --test 'tests/favicons/**/*.test.mjs'",
     "test:hugo-build": "node --test 'tests/hugo-build/**/*.test.mjs'",
-    "test": "npm run seq -- test:base test:extra test:md-output",
     "test:md-output": "node --test 'tests/md-output/**/*.test.mjs'",
+    "test": "npm run seq -- test:base test:extra",
     "update:dep": "npm run -s update:hugo",
+    "update:favicon-goldens": "node tests/favicons/update-goldens.mjs",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
     "update:packages": "npx npm-check-updates -u"
@@ -55,5 +57,5 @@
     "postcss-cli": "^11.0.1",
     "rtlcss": "^4.3.0"
   },
-  "cSpell:ignore": "- goldens postbuild -"
+  "cSpell:ignore": "- favicons goldens postbuild -"
 }
