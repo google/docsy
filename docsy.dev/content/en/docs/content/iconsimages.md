@@ -65,8 +65,9 @@ in your text.
 ## Add your favicons
 
 The theme ships no default favicons. To add your own, create a set of favicon
-files, put them in your site project's `static/favicons` directory, and link
-them by adding a `layouts/_partials/favicons.html` partial with your links.
+files, put them in your site project's `static` directory so they publish at the
+site root (where browsers probe for them), and link them by adding a
+`layouts/_partials/favicons.html` partial with your links.
 
 You can generate favicons from a single image with a tool such as
 [favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg].
