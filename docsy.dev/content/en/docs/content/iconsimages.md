@@ -69,11 +69,14 @@ files, put them in your site project's `static` directory so they publish at the
 site root (where browsers probe for them), and link them by adding a
 `layouts/_partials/favicons.html` partial. For example:
 
-```html
-<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+```go-html-template
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="16x16 32x32 48x48" />
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" />
 ```
+
+Using `relURL` keeps the links correct when your site's `baseURL` includes a
+subpath.
 
 You can generate favicons from a single image with a tool such as
 [favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg].
