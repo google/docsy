@@ -34,13 +34,13 @@ before(() => {
 // Build a throwaway site that uses the theme, optionally with a site-supplied
 // favicons partial, and return the favicon `<link>` tags it emits. Guards #2595:
 // the theme must ship no default favicons of its own.
-function buildSiteFavicons(partial) {
+function buildSiteFavicons(partial, baseURL = 'http://localhost/') {
   const dir = mkdtempSync(join(tmpdir(), 'docsy-theme-favicons-'));
   try {
     writeFileSync(
       join(dir, 'hugo.toml'),
       [
-        'baseURL = "http://localhost/"',
+        `baseURL = "${baseURL}"`,
         'title = "Minimal"',
         'theme = "theme"',
         'disableKinds = ["taxonomy","term","RSS","sitemap","404"]',
@@ -95,4 +95,16 @@ test('theme emits no favicon links without a site override', () => {
 test('site-supplied favicons partial is used', () => {
   const links = buildSiteFavicons('<link rel="icon" href="/favicon.ico" />\n');
   assert.match(links, /rel="icon"/);
+});
+
+// The user guide recommends `relURL` (with no leading slash) so favicon links
+// stay correct under a `baseURL` subpath; a root-absolute href does not. See
+// https://gohugo.io/functions/urls/relurl/#input-begins-with-a-slash.
+test('relURL favicon links pick up a baseURL subpath', () => {
+  const partial =
+    '<link rel="icon" href="{{ "favicon.ico" | relURL }}" />\n' +
+    '<link rel="apple-touch-icon" href="/apple-touch-icon.png" />\n';
+  const links = buildSiteFavicons(partial, 'https://example.org/sub/path/');
+  assert.match(links, /href="\/sub\/path\/favicon\.ico"/);
+  assert.match(links, /href="\/apple-touch-icon\.png"/);
 });
