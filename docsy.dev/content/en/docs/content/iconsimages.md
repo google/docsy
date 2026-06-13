@@ -67,7 +67,13 @@ in your text.
 The theme ships no default favicons. To add your own, create a set of favicon
 files, put them in your site project's `static` directory so they publish at the
 site root (where browsers probe for them), and link them by adding a
-`layouts/_partials/favicons.html` partial with your links.
+`layouts/_partials/favicons.html` partial. For example:
+
+```html
+<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+```
 
 You can generate favicons from a single image with a tool such as
 [favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg].

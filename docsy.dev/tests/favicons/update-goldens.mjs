@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { extractFaviconLinks, pages } from './extract.mjs';
+import { extractFaviconLinks, pages } from './lib/extract.mjs';
 
 const goldenDir = fileURLToPath(new URL('./goldens/', import.meta.url));
 const publicDir = fileURLToPath(new URL('../../public/', import.meta.url));

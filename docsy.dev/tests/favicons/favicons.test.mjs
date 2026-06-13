@@ -1,10 +1,11 @@
+// cSpell:ignore hrefs
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { extractFaviconLinks, pages } from './extract.mjs';
+import { extractFaviconLinks, faviconHrefs, pages } from './lib/extract.mjs';
 
 const goldenDir = fileURLToPath(new URL('./goldens/', import.meta.url));
 const publicDir = fileURLToPath(new URL('../../public/', import.meta.url));
@@ -20,3 +21,14 @@ for (const page of pages) {
     assert.equal(actual, expected);
   });
 }
+
+// Smoke check that links point at real assets; the golden above pins the rest.
+test('linked favicon files exist in the build output', () => {
+  const [href] = faviconHrefs(readFileSync(join(publicDir, pages[0]), 'utf8'));
+  assert.ok(href, 'favicon links are present');
+  assert.strictEqual(href, '/favicon.ico');
+  assert.ok(
+    existsSync(join(publicDir, href.replace(/^\//, ''))),
+    `linked favicon asset exists in the build output: ${href}`,
+  );
+});
