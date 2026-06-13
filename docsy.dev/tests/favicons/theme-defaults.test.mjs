@@ -10,7 +10,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { delimiter, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { extractFaviconLinks } from './lib/extract.mjs';
@@ -72,7 +72,7 @@ function buildSiteFavicons(partial, baseURL = 'http://localhost/') {
         // the test runs outside an `npm run` PATH.
         env: {
           ...process.env,
-          PATH: `${join(repoDir, 'node_modules', '.bin')}:${process.env.PATH}`,
+          PATH: `${join(repoDir, 'node_modules', '.bin')}${delimiter}${process.env.PATH ?? ''}`,
         },
       },
     );
