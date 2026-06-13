@@ -24,11 +24,12 @@ for (const page of pages) {
 
 // Smoke check that links point at real assets; the golden above pins the rest.
 test('linked favicon files exist in the build output', () => {
-  const [href] = faviconHrefs(readFileSync(join(publicDir, pages[0]), 'utf8'));
-  assert.ok(href, 'favicon links are present');
-  assert.strictEqual(href, '/favicon.ico');
-  assert.ok(
-    existsSync(join(publicDir, href.replace(/^\//, ''))),
-    `linked favicon asset exists in the build output: ${href}`,
-  );
+  const hrefs = faviconHrefs(readFileSync(join(publicDir, pages[0]), 'utf8'));
+  assert.ok(hrefs.length, 'favicon links are present');
+  for (const href of hrefs) {
+    assert.ok(
+      existsSync(join(publicDir, href.replace(/^\//, ''))),
+      `linked favicon asset exists in the build output: ${href}`,
+    );
+  }
 });
