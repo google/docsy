@@ -64,20 +64,43 @@ in your text.
 
 ## Add your favicons
 
-The easiest way to do this is to create a set of favicons via
-[cthedot.de/icongen](https://cthedot.de/icongen) (which lets you create a huge
-range of icon sizes and options from a single image) and/or
-[https://favicon.io](https://favicon.io), and put them in your site project's
-`static/favicons` directory. This will override the default favicons from the
-theme.
+The theme ships **no** favicons, so you need to add your own. Docsy generates
+the favicon `<link>` tags from a single source image, resizing it to the
+required sizes via Hugo's [image processing][], and publishes the files at your
+site **root** (for example `/favicon.ico` and `/apple-touch-icon.png`) where
+browsers and other clients look for them by convention. Put your files in your
+site's `assets/` directory (at the root or under `favicons/`):
 
-Note that [favicon.io](https://favicon.io) doesn't create as wide a range of
-sizes as Icongen but _does_ let you quickly create favicons from text: if you
-want to create text favicons you can use this site to generate them, then use
-Icongen to create more sizes (if necessary) from your generated `.png` file.
+- `favicon.png` — a square source image (ideally 512&times;512 or larger).
+  Docsy resizes it to each configured size and to a 180&times;180
+  `apple-touch-icon`.
+- `favicon.svg` — _optional_. Published as-is for browsers that prefer SVG
+  icons.
+- `favicon.ico` — _optional_. Published as-is for legacy browsers.
 
-If you have special favicon requirements, you can create your own
-`layouts/_partials/favicons.html` with your links.
+You can customize the behavior under `params.td.favicons` (defaults shown):
+
+```yaml
+params:
+  td:
+    favicons:
+      path: favicon.* # base path of your icon files; the extension is ignored
+      sizes: [16, 32, 48] # PNG sizes generated from the source image
+      no_apple_precomposed: false # set true to skip apple-touch-icon-precomposed.png
+```
+
+Docsy resolves `path` against your `assets/` directory, trying the given
+location first and then a `favicons/` subdirectory, so files at either the root
+or under `favicons/` are found.
+
+If no favicons are found, Docsy logs a build warning. Suppress it by adding
+`ignoreLogs: ['docsy-no-favicons']` to your site configuration.
+
+To create a source image from text, [favicon.io](https://favicon.io) is handy.
+For special requirements, override the partial by creating your own
+`layouts/_partials/favicons.html`.
+
+[image processing]: https://gohugo.io/content-management/image-processing/
 
 ## Add images
 
