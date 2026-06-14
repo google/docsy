@@ -78,9 +78,9 @@ it finds, in this order, with no partial or configuration required:
 | `favicon-16x16.png`    | `rel="icon"` with `type="image/png" sizes="16x16"` |
 | `apple-touch-icon.png` | `rel="apple-touch-icon"`                           |
 
-A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers
-practically every browser. To customize the links -- for example to add a web
-app manifest -- override the theme by adding your own
+A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers common
+browser and platform favicon needs. To customize the links -- for example to add
+a web app manifest -- override the theme by adding your own
 `layouts/_partials/favicons.html` partial; use `relURL` so links stay correct
 when your site's `baseURL` includes a subpath.
 

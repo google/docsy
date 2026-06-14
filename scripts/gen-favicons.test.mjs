@@ -25,11 +25,35 @@ test(
     );
     const res = spawnSync('bash', [script, svg, dir], { encoding: 'utf8' });
     assert.equal(res.status, 0, res.stderr);
-    assert.ok(existsSync(join(dir, 'favicon.ico')), 'favicon.ico created');
-    assert.ok(
-      existsSync(join(dir, 'apple-touch-icon.png')),
-      'apple-touch-icon.png created',
+
+    const ico = join(dir, 'favicon.ico');
+    const apple = join(dir, 'apple-touch-icon.png');
+    assert.ok(existsSync(ico), 'favicon.ico created');
+    assert.ok(existsSync(apple), 'apple-touch-icon.png created');
+
+    // Guard the script's contract: the .ico bundles 16/32/48px frames and the
+    // Apple touch icon is the expected 180x180.
+    const frames = spawnSync(
+      'magick',
+      ['identify', '-format', '%wx%h\n', ico],
+      {
+        encoding: 'utf8',
+      },
     );
+    assert.equal(frames.status, 0, frames.stderr);
+    for (const size of ['16x16', '32x32', '48x48']) {
+      assert.ok(
+        frames.stdout.includes(size),
+        `favicon.ico missing ${size} frame; got:\n${frames.stdout}`,
+      );
+    }
+    const appleSize = spawnSync(
+      'magick',
+      ['identify', '-format', '%wx%h', apple],
+      { encoding: 'utf8' },
+    );
+    assert.equal(appleSize.status, 0, appleSize.stderr);
+    assert.equal(appleSize.stdout, '180x180');
   },
 );
 
