@@ -64,23 +64,36 @@ in your text.
 
 ## Add your favicons
 
-The theme ships no default favicons. To add your own, create a set of favicon
-files, put them in your site project's `static` directory so they publish at the
-site root (where browsers probe for them), and link them by adding a
-`layouts/_partials/favicons.html` partial. For example:
+The theme ships no favicon files, but it **discovers and links** a set of
+conventionally named icons when you supply them: create your favicon files and
+put them in your site project's `static` directory so they publish at the site
+root (where browsers probe for them). The theme links whichever of these files
+it finds, in this order, with no partial or configuration required:
 
-```go-html-template
-<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="16x16 32x32 48x48" />
-<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" />
+| File                   | Link                                               |
+| ---------------------- | -------------------------------------------------- |
+| `favicon.ico`          | `rel="icon"` with `sizes="16x16 32x32 48x48"`      |
+| `favicon.svg`          | `rel="icon"` with `type="image/svg+xml"`           |
+| `favicon-32x32.png`    | `rel="icon"` with `type="image/png" sizes="32x32"` |
+| `favicon-16x16.png`    | `rel="icon"` with `type="image/png" sizes="16x16"` |
+| `apple-touch-icon.png` | `rel="apple-touch-icon"`                           |
+
+A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers
+practically every browser. To customize the links -- for example to add a web
+app manifest -- override the theme by adding your own
+`layouts/_partials/favicons.html` partial; use `relURL` so links stay correct
+when your site's `baseURL` includes a subpath.
+
+You can generate favicons from a single image with an online tool such as
+[favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg]. If you have a
+source SVG and [ImageMagick][] installed, Docsy also ships a helper script that
+writes `favicon.ico` and `apple-touch-icon.png` for you:
+
+```sh
+path/to/docsy/scripts/gen-favicons.sh favicon.svg static/
 ```
 
-Using `relURL` keeps the links correct when your site's `baseURL` includes a
-subpath.
-
-You can generate favicons from a single image with a tool such as
-[favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg].
-
+[ImageMagick]: https://imagemagick.org
 [rfg]: https://realfavicongenerator.net
 
 ## Add images

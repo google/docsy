@@ -129,7 +129,12 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 **New**:
 
-- ...
+- **Favicon discovery**: the theme now discovers and links a site's
+  conventionally named favicon files (`favicon.ico`, `favicon.svg`,
+  `apple-touch-icon.png`, and optional 16/32px PNGs) when you place them in
+  `static/` -- no favicons partial required. A new `scripts/gen-favicons.sh`
+  helper generates the raster icons from a source SVG. See [Add your
+  favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
@@ -151,6 +156,7 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
   minimum supported Hugo version remains 0.158.0.
 
 [#2594]: https://github.com/google/docsy/pull/2594
+[#2357]: https://github.com/google/docsy/issues/2357
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2578]: https://github.com/google/docsy/pull/2578
 [favicons]: /docs/content/iconsimages/#add-your-favicons
