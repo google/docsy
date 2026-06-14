@@ -1207,6 +1207,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:19:18.890513-05:00"
   },
+  "https://github.com/google/docsy/issues/2357": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-14T05:53:49.272122-04:00"
+  },
   "https://github.com/google/docsy/issues/2390": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:59.671894-05:00"
@@ -2454,6 +2458,10 @@
   "https://help.github.com/articles/about-pull-requests/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:49.951907-05:00"
+  },
+  "https://imagemagick.org": {
+    "StatusCode": 200,
+    "LastSeen": "2026-06-14T05:53:48.743381-04:00"
   },
   "https://in-toto.io": {
     "StatusCode": 206,

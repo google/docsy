@@ -32,9 +32,14 @@ before(() => {
 });
 
 // Build a throwaway site that uses the theme, optionally with a site-supplied
-// favicons partial, and return the favicon `<link>` tags it emits. Guards #2595:
-// the theme must ship no default favicons of its own.
-function buildSiteFavicons(partial, baseURL = 'http://localhost/') {
+// favicons partial and/or files in `static/`, and return the favicon `<link>`
+// tags it emits. Guards #2595: the theme ships no icon files of its own, only
+// the logic that links the ones a site supplies.
+function buildSiteFavicons(
+  partial,
+  baseURL = 'http://localhost/',
+  staticFiles = [],
+) {
   const dir = mkdtempSync(join(tmpdir(), 'docsy-theme-favicons-'));
   try {
     writeFileSync(
@@ -49,6 +54,13 @@ function buildSiteFavicons(partial, baseURL = 'http://localhost/') {
     );
     mkdirSync(join(dir, 'content'));
     writeFileSync(join(dir, 'content', '_index.md'), '---\ntitle: Home\n---\n');
+    if (staticFiles.length) {
+      mkdirSync(join(dir, 'static'), { recursive: true });
+      // Existence is all the partial checks; content is irrelevant here.
+      for (const file of staticFiles) {
+        writeFileSync(join(dir, 'static', file), '');
+      }
+    }
     if (partial !== undefined) {
       mkdirSync(join(dir, 'layouts', '_partials'), { recursive: true });
       writeFileSync(
@@ -86,8 +98,68 @@ function buildSiteFavicons(partial, baseURL = 'http://localhost/') {
   }
 }
 
-test('theme emits no favicon links without a site override', () => {
+test('theme emits no favicon links when the site supplies none', () => {
   assert.equal(buildSiteFavicons(), '');
+});
+
+// The default partial discovers conventionally named files a site drops
+// in `static/` and links them, with no partial or config of its own.
+test('theme discovers and links a site favicon from static/ with no partial', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon.ico',
+  ]);
+  assert.equal(
+    links,
+    '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />\n',
+  );
+});
+
+test('theme discovers and links the full conventional favicon set from static/', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon.ico',
+    'favicon.svg',
+    'apple-touch-icon.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon\.ico" sizes="16x16 32x32 48x48"/,
+  );
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon\.svg" type="image\/svg\+xml"/,
+  );
+  assert.match(links, /rel="apple-touch-icon" href="\/apple-touch-icon\.png"/);
+});
+
+test('theme does not link favicon files a site has not supplied', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon.ico',
+  ]);
+  assert.doesNotMatch(links, /apple-touch-icon|favicon\.svg/);
+});
+
+// Lock the optional PNG-variant rows of the discovery table: when a site
+// supplies the 16/32px PNGs, the partial links both with the right type/sizes.
+test('theme discovers and links the optional 16/32px PNG variants from static/', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-32x32.png',
+    'favicon-16x16.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+  );
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-16x16\.png" type="image\/png" sizes="16x16"/,
+  );
+});
+
+test('discovered favicons pick up a baseURL subpath via relURL', () => {
+  const links = buildSiteFavicons(undefined, 'https://example.org/sub/path/', [
+    'favicon.ico',
+  ]);
+  assert.match(links, /href="\/sub\/path\/favicon\.ico"/);
 });
 
 // Sanity check: a site-supplied partial is emitted and detected, so the

@@ -129,12 +129,20 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 **New**:
 
-- ...
+- **Favicon discovery**: you can now drop a site's conventionally named favicon
+  files (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and optional
+  16/32px PNGs) into `static/` and the theme discovers and links them -- no
+  favicons partial required. A new `scripts/gen-favicons.sh` helper generates
+  the raster icons from a source SVG. See [Add your favicons][favicons]
+  ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
-- **Default favicons** removed from the theme; sites now supply their own. See
-  [Add your favicons][favicons] ([#2653][]).
+- **Default favicons** removed from the theme; sites now supply their own.
+  Conventional `static/` filenames are discovered and linked automatically (see
+  **Favicon discovery** under **New** above), so a custom partial is only needed
+  for non-default filenames or extra links. See [Add your favicons][favicons]
+  ([#2653][]).
 - Raised the theme's minimum supported Hugo version to
   **[0.158.0][hugo-0.158.0]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
   Theme templates now use the language APIs introduced in Hugo 0.158.0. Note:
@@ -151,6 +159,7 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
   minimum supported Hugo version remains 0.158.0.
 
 [#2594]: https://github.com/google/docsy/pull/2594
+[#2357]: https://github.com/google/docsy/issues/2357
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2578]: https://github.com/google/docsy/pull/2578
 [favicons]: /docs/content/iconsimages/#add-your-favicons
