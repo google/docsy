@@ -93,6 +93,10 @@ writes `favicon.ico` and `apple-touch-icon.png` for you:
 path/to/docsy/scripts/gen-favicons.sh favicon.svg static/
 ```
 
+The script writes only the raster icons (`favicon.ico` and
+`apple-touch-icon.png`). If you also want an SVG favicon, copy your source SVG
+to `static/favicon.svg` yourself -- the partial links it directly.
+
 [ImageMagick]: https://imagemagick.org
 [rfg]: https://realfavicongenerator.net
 

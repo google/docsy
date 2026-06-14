@@ -102,7 +102,7 @@ test('theme emits no favicon links when the site supplies none', () => {
   assert.equal(buildSiteFavicons(), '');
 });
 
-// The smart default partial discovers conventionally named files a site drops
+// The default partial discovers conventionally named files a site drops
 // in `static/` and links them, with no partial or config of its own.
 test('theme discovers and links a site favicon from static/ with no partial', () => {
   const links = buildSiteFavicons(undefined, 'http://localhost/', [
@@ -136,6 +136,23 @@ test('theme does not link favicon files a site has not supplied', () => {
     'favicon.ico',
   ]);
   assert.doesNotMatch(links, /apple-touch-icon|favicon\.svg/);
+});
+
+// Lock the optional PNG-variant rows of the discovery table: when a site
+// supplies the 16/32px PNGs, the partial links both with the right type/sizes.
+test('theme discovers and links the optional 16/32px PNG variants from static/', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-32x32.png',
+    'favicon-16x16.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+  );
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-16x16\.png" type="image\/png" sizes="16x16"/,
+  );
 });
 
 test('discovered favicons pick up a baseURL subpath via relURL', () => {
