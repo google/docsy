@@ -1,23 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
+const tmpDir = join(siteDir, 'tmp');
 
+// Build the real site to a throwaway destination under the gitignored `tmp/` so
+// this probe build never clobbers the published `public/` that `test:base`
+// produces and other tests (e.g. published-head) read.
 function buildSite() {
-  const res = spawnSync('npm run build', {
-    cwd: siteDir,
-    shell: true,
-    encoding: 'utf8',
-  });
-  const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
-  const deprecations = output
-    .split('\n')
-    .filter((line) => /deprecated/i.test(line));
-  return { res, output, deprecations };
+  mkdirSync(tmpDir, { recursive: true });
+  const destDir = mkdtempSync(join(tmpDir, 'no-deprecations-'));
+  try {
+    const res = spawnSync('npm run build -- -d ' + destDir, {
+      cwd: siteDir,
+      shell: true,
+      encoding: 'utf8',
+    });
+    const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
+    const deprecations = output
+      .split('\n')
+      .filter((line) => /deprecated/i.test(line));
+    return { res, output, deprecations };
+  } finally {
+    rmSync(destDir, { recursive: true, force: true });
+  }
 }
 
 test('site build logs no Hugo deprecation notices', (t) => {
@@ -29,37 +39,21 @@ test('site build logs no Hugo deprecation notices', (t) => {
   t.diagnostic(`Scanned ${output.split('\n').length} build-log lines`);
 });
 
-// Sanity check that the test above can actually detect deprecation notices:
-// seed a deprecated API call via the theme's head-end hook and ensure that
-// Hugo reports it. Guards against, e.g., Hugo demoting deprecation notices
-// below the info log level.
-test('build with seeded deprecated API call logs a deprecation notice', (t) => {
-  const hookPath = join(
-    siteDir,
-    'layouts',
-    '_partials',
-    'hooks',
-    'head-end.html',
+// The check above can only catch deprecations if the build runs at a log level
+// where Hugo surfaces them (`info` or more verbose). Rather than re-derive that
+// with a second build that seeds a deprecated API call -- which would have to
+// mutate tracked source -- assert the invariant statically against the `_hugo`
+// script. If someone raises the level (e.g. to `warn`), this fails fast.
+test('the site build runs at a log level that surfaces deprecations', () => {
+  const pkg = JSON.parse(
+    readFileSync(new URL('../../package.json', import.meta.url), 'utf8'),
   );
+  const hugoScript = pkg.scripts?._hugo ?? '';
+  const match = hugoScript.match(/--logLevel\s+(\w+)/);
+  assert.ok(match, `_hugo script has no --logLevel flag: ${hugoScript}`);
   assert.ok(
-    !existsSync(hookPath),
-    `${hookPath} already exists; this test needs to create it`,
+    ['info', 'debug'].includes(match[1]),
+    `_hugo --logLevel ${match[1]} is too quiet to surface Hugo deprecation ` +
+      'notices; use info (or more verbose)',
   );
-  mkdirSync(dirname(hookPath), { recursive: true });
-  writeFileSync(
-    hookPath,
-    '{{/* Temporary file seeded by no-deprecations.test.mjs. */}}\n' +
-      '{{ .Language.LanguageName }}\n',
-  );
-  try {
-    const { res, output, deprecations } = buildSite();
-    assert.equal(res.status, 0, `Seeded build failed:\n${output}`);
-    assert.ok(
-      deprecations.length > 0,
-      'Seeded deprecated API call was not reported by the Hugo build',
-    );
-    t.diagnostic(`Seeded deprecation reported as: ${deprecations[0].trim()}`);
-  } finally {
-    rmSync(hookPath);
-  }
 });
