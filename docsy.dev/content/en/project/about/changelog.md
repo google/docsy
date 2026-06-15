@@ -137,7 +137,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   `static/` and the theme discovers and links them -- no favicons partial
   required. A new `gen-favicons` helper generates raster icons from a source
   SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
-  favicons][favicons] ([#2357][], [#2654][]).
+  favicons][favicons] ([#2357][], [#2654][], [#2656][]).
 
 [**Breaking changes**](#breaking-change):
 
@@ -190,6 +190,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2649]: https://github.com/google/docsy/pull/2649
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2654]: https://github.com/google/docsy/pull/2654
+[#2656]: https://github.com/google/docsy/pull/2656
 [#2658]: https://github.com/google/docsy/pull/2658
 [#2659]: https://github.com/google/docsy/issues/2659
 [0.16.0 release report]: /blog/2026/0.16.0/
