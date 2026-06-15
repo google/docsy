@@ -43,6 +43,25 @@ Note this partitioning of concerns in the docs (to keep things lean and DRY):
 - Release message links to the changelog and upgrade blog posts, and lists the
   actual Git history since the last release.
 
+## Monorepo layout
+
+The repo root orchestrates two npm workspaces:
+
+- `theme/` — the Docsy theme module (the published Hugo module). Consuming sites
+  import `github.com/google/docsy/theme`; npm/clone installs use
+  `theme: docsy/theme`. `theme/package.json` owns Bootstrap and Font Awesome.
+- `docsy.dev/` — the project website (this content tree).
+
+Releases publish a nested module tag `theme/vX.Y.Z` alongside `vX.Y.Z`.
+
+## Release prep
+
+Release prep is driven by the `docsy-release-artifacts` skill, with a living
+workspace under `tasks/VERSION/release-prep/` (release coordinates, a coverage
+ledger, and a wrapup). It tracks every change since the last release and routes
+each into the right artifact (changelog, release post, Hugo post). Refresh the
+workspace as commits land; see the skill for the process.
+
 ## Pull requests
 
 - Before the final push of a PR branch, run `npm run set:version:git-info` to
