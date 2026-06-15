@@ -967,6 +967,26 @@
     "StatusCode": 206,
     "LastSeen": "2026-06-15T11:20:26.763912-04:00"
   },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/head.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-15T12:41:36.240999-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/body-end.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-15T12:41:36.681712-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-15T12:41:35.616418-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-15T12:41:37.180129-04:00"
+  },
+  "https://github.com/google/docsy/blob/main/theme/layouts/baseof.html": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-15T12:41:37.774833-04:00"
+  },
   "https://github.com/google/docsy/blob/main/theme/theme.toml": {
     "StatusCode": 206,
     "LastSeen": "2026-06-11T14:37:45.852618-04:00"
