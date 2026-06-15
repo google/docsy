@@ -5,10 +5,23 @@
 {{ $icons := slice
   (dict "file" "favicon.ico" "rel" "icon" "sizes" "16x16 32x32 48x48")
   (dict "file" "favicon.svg" "rel" "icon" "type" "image/svg+xml")
-  (dict "file" "favicon-32x32.png" "rel" "icon" "type" "image/png" "sizes" "32x32")
-  (dict "file" "favicon-16x16.png" "rel" "icon" "type" "image/png" "sizes" "16x16")
-  (dict "file" "apple-touch-icon.png" "rel" "apple-touch-icon")
 -}}
+
+{{/* Discover square favicon-NxN.png variants in static/, linked in size order. */ -}}
+{{ $sizes := slice -}}
+{{ if os.FileExists "static" -}}
+  {{ range (os.ReadDir "static") -}}
+    {{ range (findRESubmatch `^favicon-(\d+)x(\d+)\.png$` .Name) -}}
+      {{ if eq (index . 1) (index . 2) }}{{ $sizes = $sizes | append (int (index . 1)) }}{{ end -}}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
+{{ range (sort $sizes) -}}
+  {{ $icons = $icons | append (dict "file" (printf "favicon-%dx%d.png" . .) "rel" "icon" "type" "image/png" "sizes" (printf "%dx%d" . .)) -}}
+{{ end -}}
+
+{{ $icons = $icons | append (dict "file" "apple-touch-icon.png" "rel" "apple-touch-icon") -}}
+
 {{ range $icons -}}
   {{ if os.FileExists (printf "static/%s" .file) -}}
     {{ $attrs := printf `rel=%q href=%q` .rel (.file | relURL) -}}

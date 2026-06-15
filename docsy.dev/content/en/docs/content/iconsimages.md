@@ -70,13 +70,16 @@ put them in your site project's `static` directory so they publish at the site
 root (where browsers probe for them). The theme links whichever of these files
 it finds, in this order, with no partial or configuration required:
 
-| File                   | Link                                               |
-| ---------------------- | -------------------------------------------------- |
-| `favicon.ico`          | `rel="icon"` with `sizes="16x16 32x32 48x48"`      |
-| `favicon.svg`          | `rel="icon"` with `type="image/svg+xml"`           |
-| `favicon-32x32.png`    | `rel="icon"` with `type="image/png" sizes="32x32"` |
-| `favicon-16x16.png`    | `rel="icon"` with `type="image/png" sizes="16x16"` |
-| `apple-touch-icon.png` | `rel="apple-touch-icon"`                           |
+| File                   | Link                                             |
+| ---------------------- | ------------------------------------------------ |
+| `favicon.ico`          | `rel="icon"` with `sizes="16x16 32x32 48x48"`    |
+| `favicon.svg`          | `rel="icon"` with `type="image/svg+xml"`         |
+| `favicon-NxN.png`      | `rel="icon"` with `type="image/png" sizes="NxN"` |
+| `apple-touch-icon.png` | `rel="apple-touch-icon"`                         |
+
+You can supply as many square `favicon-NxN.png` raster variants as you like (for
+example `favicon-16x16.png` and `favicon-32x32.png`); the theme discovers them
+and links them in ascending size order.
 
 A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers common
 browser and platform favicon needs. To customize the links -- for example to add

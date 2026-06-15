@@ -155,6 +155,32 @@ test('theme discovers and links the optional 16/32px PNG variants from static/',
   );
 });
 
+// Discovery generalizes to any square favicon-NxN.png, linked in ascending
+// pixel-size (numeric, not lexical) order.
+test('theme discovers any square favicon PNG variant, sorted by size', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-128x128.png',
+    'favicon-16x16.png',
+    'favicon-48x48.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-48x48\.png" type="image\/png" sizes="48x48"/,
+  );
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-128x128\.png" type="image\/png" sizes="128x128"/,
+  );
+  const order = [...links.matchAll(/favicon-(\d+)x\d+\.png/g)].map((m) =>
+    Number(m[1]),
+  );
+  assert.deepEqual(
+    order,
+    [16, 48, 128],
+    'PNG variants are linked in ascending pixel-size order',
+  );
+});
+
 test('discovered favicons pick up a baseURL subpath via relURL', () => {
   const links = buildSiteFavicons(undefined, 'https://example.org/sub/path/', [
     'favicon.ico',
