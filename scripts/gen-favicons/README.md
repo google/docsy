@@ -15,16 +15,17 @@ produced ahead of time with [ImageMagick][].
 ## Usage
 
 For a site that installs Docsy as an npm package, the command is on your
-project's `PATH`:
+project's `PATH`. Save your source SVG as `static/favicon.svg` so the theme
+links it directly, then write the raster icons alongside it:
 
 ```sh
-npx gen-favicons favicon.svg static/
+npx gen-favicons static/favicon.svg static/
 ```
 
 For a Hugo module or Git submodule install, run the CLI directly:
 
 ```sh
-node path/to/docsy/scripts/gen-favicons/cli.mjs favicon.svg static/
+node path/to/docsy/scripts/gen-favicons/cli.mjs static/favicon.svg static/
 ```
 
 The second argument is the output directory (default: the current directory);

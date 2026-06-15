@@ -13,8 +13,8 @@ const HELP = `Usage: ${PROG} [options] SOURCE.svg [OUTPUT_DIR]
 
 Generate the raster favicons that Docsy's favicons partial discovers
 (favicon.ico, favicon-NxN.png, apple-touch-icon.png) from a single source SVG,
-using ImageMagick. Keep your favicon.svg alongside the output; the partial
-links it directly.
+using ImageMagick. Pass your static/favicon.svg as the source so it is linked
+directly and the rasterized icons land alongside it.
 
 Arguments:
   SOURCE.svg     Source vector image to rasterize.
@@ -32,9 +32,9 @@ word "none" to skip that icon family. With more than one --apple size, sized
 apple-touch-icon-NxN.png companions are written alongside apple-touch-icon.png.
 
 Examples:
-  ${PROG} favicon.svg static/
-  ${PROG} --png none --ico 16,32,48 favicon.svg static/
-  ${PROG} --apple 152,167,180 favicon.svg static/
+  ${PROG} static/favicon.svg static/
+  ${PROG} --png none --ico 16,32,48 static/favicon.svg static/
+  ${PROG} --apple 152,167,180 static/favicon.svg static/
 
 See: https://docsy.dev/docs/content/iconsimages/#add-your-favicons
 `;
