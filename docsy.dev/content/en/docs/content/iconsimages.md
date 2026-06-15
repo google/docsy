@@ -115,7 +115,9 @@ For a Git submodule install of Docsy, `DOCSY_DIR` is `themes/docsy`. For a Hugo
 module install of Docsy, `DOCSY_DIR` is the directory of your Docsy install,
 which you can find with `go list -m -f '{{.Dir}}' github.com/google/docsy`.
 
-For command details, run `gen-favicons --help`.
+For the sizes and other options you can pass, add `--help` to the command form
+for your install (`npx gen-favicons --help`, or
+`node DOCSY_DIR/scripts/gen-favicons/cli.mjs --help`).
 
 [ImageMagick]: https://imagemagick.org
 [rfg]: https://realfavicongenerator.net

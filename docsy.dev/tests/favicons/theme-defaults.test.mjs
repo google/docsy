@@ -246,6 +246,35 @@ test('theme links a sized apple-touch-icon without the unsized file', () => {
   );
 });
 
+// Discovery scans every file in static/, so unrelated assets (and non-matching
+// favicon files) must be passed over without disturbing the variant scan for
+// either prefix. Guards the empty-findRESubmatch path in the sized-variants
+// helper, where `index ... 0` returns nil for a non-matching name.
+test('theme ignores unrelated static files while discovering variants', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'robots.txt',
+    'logo.svg',
+    'favicon.svg',
+    'favicon-32x32.png',
+    'apple-touch-icon-180x180.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+    'the square favicon variant is linked',
+  );
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+    'the square apple-touch-icon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /href="\/(robots\.txt|logo\.svg)"/,
+    'unrelated static files are not linked',
+  );
+});
+
 test('discovered favicons pick up a baseURL subpath via relURL', () => {
   const links = buildSiteFavicons(undefined, 'https://example.org/sub/path/', [
     'favicon.ico',
