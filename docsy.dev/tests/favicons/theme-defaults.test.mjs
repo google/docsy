@@ -108,10 +108,7 @@ test('theme discovers and links a site favicon from static/ with no partial', ()
   const links = buildSiteFavicons(undefined, 'http://localhost/', [
     'favicon.ico',
   ]);
-  assert.equal(
-    links,
-    '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />\n',
-  );
+  assert.equal(links, '<link rel="icon" href="/favicon.ico" />\n');
 });
 
 test('theme discovers and links the full conventional favicon set from static/', () => {
@@ -120,10 +117,7 @@ test('theme discovers and links the full conventional favicon set from static/',
     'favicon.svg',
     'apple-touch-icon.png',
   ]);
-  assert.match(
-    links,
-    /rel="icon" href="\/favicon\.ico" sizes="16x16 32x32 48x48"/,
-  );
+  assert.match(links, /rel="icon" href="\/favicon\.ico"/);
   assert.match(
     links,
     /rel="icon" href="\/favicon\.svg" type="image\/svg\+xml"/,

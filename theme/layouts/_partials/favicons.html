@@ -4,7 +4,7 @@
 */ -}}
 
 {{ $icons := (slice
-    (dict "file" "favicon.ico" "rel" "icon" "sizes" "16x16 32x32 48x48")
+    (dict "file" "favicon.ico" "rel" "icon")
     (dict "file" "favicon.svg" "rel" "icon" "type" "image/svg+xml"))
   | append (partial "favicons/sized-variants.html" (dict "prefix" "favicon" "rel" "icon" "type" "image/png"))
   | append (dict "file" "apple-touch-icon.png" "rel" "apple-touch-icon")

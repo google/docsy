@@ -70,7 +70,7 @@ whichever of these files it finds, in this order:
 
 | File                       | Link                                             |
 | -------------------------- | ------------------------------------------------ |
-| `favicon.ico`              | `rel="icon"` with `sizes="16x16 32x32 48x48"`    |
+| `favicon.ico`              | `rel="icon"`[^svg-pref]                          |
 | `favicon.svg`              | `rel="icon"` with `type="image/svg+xml"`         |
 | `favicon-NxN.png`          | `rel="icon"` with `type="image/png" sizes="NxN"` |
 | `apple-touch-icon.png`     | `rel="apple-touch-icon"` (implicit size 180x180) |
@@ -78,6 +78,13 @@ whichever of these files it finds, in this order:
 
 If you have any square-size variants listed above, Docsy adds them in ascending
 size order.
+
+[^svg-pref]:
+    The `.ico` link carries no `sizes`: the file is self-describing (browsers
+    read the frame sizes it contains), so declaring sizes here would only risk
+    drifting from the actual file. When you also supply a `favicon.svg`,
+    browsers that support SVG favicons (most modern ones) prefer it, and the
+    `.ico` serves as the fallback.
 
 A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers common
 browser and platform favicon needs. For anything beyond that:
