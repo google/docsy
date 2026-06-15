@@ -243,6 +243,7 @@ If not adjust accordingly.
 
       ```sh
       REL=${VERSION:-{{% param tdVersion.latest %}}}
+      REL=v${REL#v} # tags are v-prefixed; normalize to exactly one leading v
       echo "REL=$REL"
       ```
 
