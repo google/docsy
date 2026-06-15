@@ -88,7 +88,7 @@ a web app manifest -- override the theme by adding your own
 `layouts/_partials/favicons.html` partial; use `relURL` so links stay correct
 when your site's `baseURL` includes a subpath.
 
-## Generate favicons
+### Generate favicons
 
 Don't have a favicon yet? You can generate favicons from a single image with an
 online tool such as [favicon.io](https://favicon.io) or
