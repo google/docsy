@@ -70,7 +70,7 @@ whichever of these files it finds, in this order:
 
 | File                       | Link                                             |
 | -------------------------- | ------------------------------------------------ |
-| `favicon.ico`              | `rel="icon"`[^svg-pref]                          |
+| `favicon.ico`              | `rel="icon"`[^ico-link]                          |
 | `favicon.svg`              | `rel="icon"` with `type="image/svg+xml"`         |
 | `favicon-NxN.png`          | `rel="icon"` with `type="image/png" sizes="NxN"` |
 | `apple-touch-icon.png`     | `rel="apple-touch-icon"` (implicit size 180x180) |
@@ -79,7 +79,7 @@ whichever of these files it finds, in this order:
 If you have any square-size variants listed above, Docsy adds them in ascending
 size order.
 
-[^svg-pref]:
+[^ico-link]:
     The `.ico` link carries no `sizes`: the file is self-describing (browsers
     read the frame sizes it contains), so declaring sizes here would only risk
     drifting from the actual file. When you also supply a `favicon.svg`,
@@ -177,7 +177,7 @@ directory in
 [content/en]: https://github.com/google/docsy-example/tree/main/content/en
 [example site's About]: <{{% param example_site_url %}}/about/>
 [`height` parameter]: shortcodes/#blocks
-[hooks/head-end.html]: https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html
+[hooks/head-end.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html
 [ImageMagick]: https://imagemagick.org
 [layouts/_partials/favicons.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/favicons.html
 [navbar]: /docs/content/navigation/#adding-icons-to-the-navbar
