@@ -1,0 +1,349 @@
+---
+title: Hugo 0.158.0-0.163.x upgrade guide
+linkTitle: Hugo 0.158+ upgrade guide
+date: 2026-06-15
+draft: true
+author: >-
+  [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
+  for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
+body_class: release-highlights
+tags: [hugo, upgrade]
+# prettier-ignore
+cSpell:ignore: amp AVIF CatmullRom goldmark partialCached passthrough renderSegments useEmbedded userinfo
+---
+
+This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
+0.163.1 that are relevant to Docsy users. It is a companion post to the Docsy
+[0.16.0](0.16.0/) release and upgrade guide.
+
+Docsy 0.16.0 requires Hugo 0.158.0 or later. The Docsy project build is tested
+with Hugo 0.163.1, which is the recommended target for this upgrade range.
+
+## Upgrade summary
+
+This guide highlights Hugo changes that may require action when upgrading a
+Docsy site to 0.16.0.
+
+- Review {{% _param BADGE BREAKING warning %}} changes:
+  <a id="breaking-changes"></a>
+  - {{% _param BREAKING %}}
+    [Docsy now requires Hugo 0.158.0 or later](#hugo-version)
+  - {{% _param BREAKING %}}
+    [Node 22+ is required for Hugo-managed Node tools](#node-tools)
+  - {{% _param BREAKING %}}
+    [HTML content and symlink security changed](#security)
+- Review **deprecations**: <a id="deprecations"></a>
+  - [Language config and template APIs](#language-apis)
+  - [Imaging config and template APIs](#imaging)
+- Optionally skim:
+  - [Markdown-link escaping](#amp-escaping)
+  - [Image URL churn](#image-url-churn)
+  - [Template and module cleanup](#template-module-cleanup)
+  - [Notable changes](#notable-changes)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.1](#upgrade)
+  once you're ready.
+
+## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
+
+Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
+**0.158.0**. Theme templates now use Hugo language APIs introduced in 0.158.0,
+so older Hugo versions will fail with template errors.
+
+The theme minimum remains 0.158.0 through the 0.163.x range. However, we
+recommend upgrading directly to **Hugo 0.163.1** because the later releases
+include security fixes, avoid a short-lived 0.159.x link-escaping regression,
+and are the versions validated across Docsy, the Docsy example site, and at
+least one large downstream Docsy site.
+
+### Actions {#hugo-version-actions}
+
+{{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
+
+- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.1.
+- If your project declares `module.hugoVersion.min`, set it to at least
+  `0.158.0`.
+- If you use `hugo-extended`, pin a compatible version in your site:
+
+  ```sh
+  npm install hugo-extended@0.163.1 --save-dev
+  ```
+
+- If you use [hvm][], select the latest compatible Hugo release:
+
+  ```sh
+  hvm use 0.163.1
+  ```
+
+## Language API deprecations (0.158.0) {#language-apis}
+
+Hugo 0.158.0 renamed several language configuration keys and template methods.
+The old names log deprecation notices first, then move toward warnings and
+eventual errors on Hugo's deprecation timeline.
+
+Docsy's own templates and docs now use the new names, which is why Docsy 0.16.0
+requires Hugo 0.158.0 or later.
+
+### Actions {#language-api-actions}
+
+**Applies if** your multilingual site config uses older language keys. Rename
+them when convenient:
+
+```yaml
+# OLD
+languages:
+  en:
+    languageName: English
+    languageDirection: ltr
+
+# NEW
+languages:
+  en:
+    label: English
+    direction: ltr
+```
+
+**Applies if** your site overrides language-related templates or partials.
+Review custom template code for these replacements:
+
+| Deprecated                                | Replacement              |
+| ----------------------------------------- | ------------------------ |
+| `.Language.Lang`                          | `.Language.Name`         |
+| `.Language.LanguageCode`                  | `.Language.Locale`       |
+| `.Language.LanguageName`                  | `.Language.Label`        |
+| `.Language.LanguageDirection`             | `.Language.Direction`    |
+| `.Site.LanguageCode`                      | `.Site.Language.Locale`  |
+| `(Page\|Site).Language.Weight`            | no direct replacement    |
+| `.Site.Languages` for cross-site language | `hugo.Sites` or `.Sites` |
+
+For current Docsy examples, see [Multi-language support][].
+
+## Markdown-link escaping (0.159.2 to 0.160.1) {#amp-escaping}
+
+Hugo 0.159.2 included a security fix for dangerous URLs in Markdown links and
+images. It also introduced a regression that could double-escape `&` in rendered
+Markdown link URLs, producing `&amp;amp;` in HTML output.
+
+Hugo 0.160.0 fixed that regression, and Hugo 0.160.1 is the safer 0.160.x patch
+release. If you are moving through this range, do not stop at 0.159.2.
+
+### Actions {#amp-escaping-actions}
+
+**Applies if** you briefly tested or deployed Hugo 0.159.2.
+
+- Upgrade to Hugo 0.160.1 or later.
+- Search generated HTML for `&amp;amp;` in link URLs.
+- Pay closest attention to monolingual sites without custom link render hooks.
+
+Multilingual single-host sites are usually shielded because Hugo's
+`useEmbedded: auto` behavior activates the embedded link render hook. Sites with
+custom link render hooks are also usually shielded. The safest path is still to
+use Hugo 0.160.1 or later.
+
+## Template and module cleanup (0.159.x-0.160.x) {#template-module-cleanup}
+
+Hugo 0.159.x continued several cleanup paths that may show up in older Docsy
+sites, Docsy forks, or large downstream sites with local template overrides.
+Hugo 0.160.1 then fixed several rendering issues in this range.
+
+### Actions {#template-module-cleanup-actions}
+
+**Applies if** your site has custom templates, module mounts, or conversion
+scripts.
+
+- Replace deprecated `site.Data` usage with `hugo.Data`.
+- Replace deprecated `includeFiles` and `excludeFiles` module mount options with
+  `files`.
+- Replace deprecated `:filename` permalink placeholders with `:contentbasename`.
+- If you run `hugo mod npm pack`, test it after upgrading.
+- If you use `hugo convert`, review generated output before committing it.
+
+**Applies if** your site uses Goldmark passthrough, `RenderShortcodes`, or
+multilingual root sections. Prefer Hugo 0.160.1 or later and include these pages
+in smoke tests. Hugo 0.160.1 fixed relevant regressions around passthrough
+elements in headings, shortcode rendering context markers, and multilingual root
+section generation.
+
+## {{% _param BREAKING %}} Node-managed tools (0.161.x) {#node-tools}
+
+Hugo 0.161.x runs Node-based tools such as PostCSS, Babel, and Tailwind under
+Node's `--permission` sandbox. This requires **Node 22 or later**. Docsy
+continues to recommend Node LTS 24 for supported builds.
+
+Docsy sites commonly use PostCSS for CSS processing, so this can be a practical
+breaking change even when the Docsy theme itself has not changed.
+
+### Actions {#node-tools-actions}
+
+{{% _param BREAKING %}} **Applies if** your site uses Hugo 0.161.x or later and
+runs PostCSS, Babel, Tailwind, or similar Node tools during the Hugo build.
+
+- Upgrade Node to the active LTS release. For Docsy 0.16.0, use Node LTS 24.
+- Build locally and check for Node permission errors.
+- If your project uses Tailwind, install Tailwind as an npm package. Hugo no
+  longer supports the standalone Tailwind binary in this path.
+
+## {{% _param BREAKING %}} Content and resource security (0.161.x-0.163.x) {#security}
+
+Hugo tightened several security boundaries in this range:
+
+- `security.http.urls` defaults became more restrictive, and
+  `resources.GetRemote` re-checks redirects.
+- `text/html` content files are denied by default unless allowed through
+  `security.allowContent`.
+- Symlinked entries are rejected or ignored by more template/resource functions,
+  including `resources.Get` and, in 0.163.1, `os.ReadDir`, `os.ReadFile`,
+  `os.Stat`, and `os.FileExists`.
+
+Docsy's own workspace and smoke-test install shapes were validated across these
+changes, but site-specific mounts, symlinks, and remote resource fetches are
+always project-specific.
+
+### Actions {#security-actions}
+
+{{% _param BREAKING %}} **Applies if** your site uses remote resources,
+hand-authored `.html` content files, or symlinked content/assets.
+
+- Build locally with your target Hugo version and review security-related errors
+  or warnings.
+- If you intentionally publish `.html` content files, configure
+  `security.allowContent` explicitly.
+- If templates call `resources.GetRemote`, review `security.http.urls` and test
+  redirecting URLs.
+- If your content or assets are symlinked into the project, test those pages and
+  consider replacing symlinks with Hugo mounts or real files if Hugo blocks
+  them.
+- If templates use `templates.Defer` inside `partialCached`, move that deferred
+  work outside the cached partial; Hugo now reports this invalid combination
+  instead of silently doing the wrong thing.
+
+## Imaging deprecations and URL churn (0.163.x) {#imaging}
+
+Hugo 0.163.0 deprecated global imaging quality settings in favor of per-format
+settings. It also introduced AVIF-related imaging configuration and changed
+internal resized-image cache keys.
+
+Docsy's website configuration was streamlined as part of the upgrade: settings
+that matched Hugo defaults were removed, and `resampleFilter: CatmullRom` was
+kept because it materially affects photo downscaling quality.
+
+### Actions {#imaging-actions}
+
+**Applies if** your site config uses global `imaging.quality` or
+`imaging.compression`.
+
+- Replace global settings with per-format settings, or remove them if they match
+  Hugo defaults.
+- Keep `resampleFilter: CatmullRom` if your site relies on Docsy-style sharp
+  photographic downscaling.
+
+For example:
+
+```yaml
+imaging:
+  resampleFilter: CatmullRom
+```
+
+### Image URL churn {#image-url-churn}
+
+**Applies if** your site commits generated output, compares public builds, or
+uses a CDN that caches generated image resources aggressively.
+
+Hugo 0.161.x-0.163.x can change resized-image filenames that contain
+`_hu_<HASH>` even when the source image and visual output are unchanged. Treat
+this as expected cache-key churn. It can create noisy diffs and cache misses,
+but it is not usually a content regression.
+
+## Other deprecations and notable changes {#notable-changes}
+
+### Template and config deprecations {#other-deprecations}
+
+Review these if your site has custom templates or JavaScript tooling config:
+
+- `.IsNode` is deprecated; use `.IsBranch`.
+- `jsconfig` `baseUrl` support was removed.
+- If you read Git metadata from module-mounted pages, verify `.Page.GitInfo`
+  output. Hugo 0.162.0 fixed GitInfo handling for modules whose `go.mod` lives
+  in a repository subdirectory.
+- If you use `--renderSegments`, prefer Hugo 0.163.1 for its segment-merge fix.
+
+### Security fixes {#security-fixes}
+
+This range includes multiple security-related updates, including Go
+`html/template` fixes and stricter URL/content handling. This is a strong reason
+to prefer 0.163.1 over stopping at the minimum 0.158.0.
+
+### New features worth knowing about {#new-features}
+
+- `css.Build` and later `hugo:vars` support may be useful for site-specific CSS
+  pipelines, but Docsy has not moved its Sass/PostCSS pipeline to `css.Build`.
+- AVIF image processing was added and then tuned in the 0.162.x-0.163.x range.
+- `strings.ReplacePairs` is available for template authors on Hugo 0.158.0 or
+  later.
+
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.1 {#upgrade}
+
+After addressing applicable breaking changes and deprecations, upgrade to Hugo
+0.163.1.
+
+If you use the [hugo-extended][] npm package:
+
+```sh
+npm install hugo-extended@0.163.1 --save-dev
+```
+
+If you use [hvm][]:
+
+```sh
+hvm use 0.163.1
+```
+
+<section class="td-checkbox-list-wrapper">
+
+### Sanity checks
+
+- [ ] **Build output**: ensure your site builds without errors, warnings, or
+      deprecation notices.
+- [ ] **Node version**: confirm Node 22 or later; use Node LTS 24 for Docsy
+      0.16.0.
+- [ ] **Multilingual sites**: check language menu output and language config
+      keys.
+- [ ] **Links**: inspect generated HTML for `&amp;amp;` if you tested Hugo
+      0.159.2.
+- [ ] **Images**: expect `_hu_` resized-image filename churn and verify the
+      rendered images, not just filenames.
+- [ ] **Security policy**: test remote resources, symlinked inputs, and any
+      `.html` content files.
+
+### Cross-checks
+
+#### Required actions, as applicable {#required-actions}
+
+- [ ] [Hugo version actions](#hugo-version-actions)
+- [ ] [Node tooling actions](#node-tools-actions)
+- [ ] [Security actions](#security-actions)
+
+#### Recommended review {#recommended-review}
+
+- [ ] [Language API actions](#language-api-actions)
+- [ ] [Imaging actions](#imaging-actions)
+- [ ] [Markdown-link escaping actions](#amp-escaping-actions)
+
+</section>
+
+## Recommended minimum Hugo version {#min-hugo-version}
+
+Docsy 0.16.0 requires Hugo 0.158.0 or later:
+
+```yaml
+module:
+  hugoVersion:
+    min: 0.158.0
+```
+
+For local builds, deployments, and new upgrades, we recommend Hugo 0.163.1.
+
+<!-- prettier-ignore-start -->
+[hugo-extended]: https://www.npmjs.com/package/hugo-extended
+[hvm]: https://github.com/jmooring/hvm
+[Multi-language support]: /docs/language/
+<!-- prettier-ignore-end -->
