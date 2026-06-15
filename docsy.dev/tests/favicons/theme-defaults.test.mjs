@@ -108,10 +108,7 @@ test('theme discovers and links a site favicon from static/ with no partial', ()
   const links = buildSiteFavicons(undefined, 'http://localhost/', [
     'favicon.ico',
   ]);
-  assert.equal(
-    links,
-    '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />\n',
-  );
+  assert.equal(links, '<link rel="icon" href="/favicon.ico" />\n');
 });
 
 test('theme discovers and links the full conventional favicon set from static/', () => {
@@ -120,10 +117,7 @@ test('theme discovers and links the full conventional favicon set from static/',
     'favicon.svg',
     'apple-touch-icon.png',
   ]);
-  assert.match(
-    links,
-    /rel="icon" href="\/favicon\.ico" sizes="16x16 32x32 48x48"/,
-  );
+  assert.match(links, /rel="icon" href="\/favicon\.ico"/);
   assert.match(
     links,
     /rel="icon" href="\/favicon\.svg" type="image\/svg\+xml"/,
@@ -152,6 +146,126 @@ test('theme discovers and links the optional 16/32px PNG variants from static/',
   assert.match(
     links,
     /rel="icon" href="\/favicon-16x16\.png" type="image\/png" sizes="16x16"/,
+  );
+});
+
+// Discovery generalizes to any square favicon-NxN.png, linked in ascending
+// pixel-size (numeric, not lexical) order.
+test('theme discovers any square favicon PNG variant, sorted by size', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-128x128.png',
+    'favicon-16x16.png',
+    'favicon-48x48.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-48x48\.png" type="image\/png" sizes="48x48"/,
+  );
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-128x128\.png" type="image\/png" sizes="128x128"/,
+  );
+  const order = [...links.matchAll(/favicon-(\d+)x\d+\.png/g)].map((m) =>
+    Number(m[1]),
+  );
+  assert.deepEqual(
+    order,
+    [16, 48, 128],
+    'PNG variants are linked in ascending pixel-size order',
+  );
+});
+
+// Discovery generalizes to the Apple touch icon: the unsized
+// apple-touch-icon.png plus any square apple-touch-icon-NxN.png variants, each
+// linked in ascending pixel-size order.
+test('theme discovers any square apple-touch-icon variant, sorted by size', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'apple-touch-icon.png',
+    'apple-touch-icon-180x180.png',
+    'apple-touch-icon-120x120.png',
+  ]);
+  assert.match(links, /rel="apple-touch-icon" href="\/apple-touch-icon\.png"/);
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-120x120\.png" sizes="120x120"/,
+  );
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+  );
+  const order = [...links.matchAll(/apple-touch-icon-(\d+)x\d+\.png/g)].map(
+    (m) => Number(m[1]),
+  );
+  assert.deepEqual(
+    order,
+    [120, 180],
+    'sized apple-touch-icon variants are linked in ascending pixel-size order',
+  );
+});
+
+// Discovery is limited to square NxN variants: a rectangular favicon-WxH.png is
+// ignored, so only the square sibling is linked.
+test('theme ignores a non-square favicon PNG variant', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-16x32.png',
+    'favicon-32x32.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+    'the square favicon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /favicon-16x32\.png/,
+    'the non-square favicon variant is ignored',
+  );
+});
+
+// A sized apple-touch-icon variant stands on its own: it is linked with its
+// sizes even when the unsized apple-touch-icon.png is absent.
+test('theme links a sized apple-touch-icon without the unsized file', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'apple-touch-icon-180x180.png',
+  ]);
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+    'the sized apple-touch-icon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /href="\/apple-touch-icon\.png"/,
+    'the absent unsized apple-touch-icon.png is not linked',
+  );
+});
+
+// Discovery scans every file in static/, so unrelated assets (and non-matching
+// favicon files) must be passed over without disturbing the variant scan for
+// either prefix. Guards the empty-findRESubmatch path in the sized-variants
+// helper, where `index ... 0` returns nil for a non-matching name.
+test('theme ignores unrelated static files while discovering variants', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'robots.txt',
+    'logo.svg',
+    'favicon.svg',
+    'favicon-32x32.png',
+    'apple-touch-icon-180x180.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+    'the square favicon variant is linked',
+  );
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+    'the square apple-touch-icon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /href="\/(robots\.txt|logo\.svg)"/,
+    'unrelated static files are not linked',
   );
 });
 

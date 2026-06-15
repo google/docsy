@@ -11,6 +11,7 @@
   "words": [
     "afdocs",
     "anchorize",
+    "basenames",
     "baseof",
     "chalin",
     "claude",
@@ -37,6 +38,7 @@
     "isset",
     "lastmod",
     "llms",
+    "magick",
     "markdownify",
     "mentees",
     "navbars",
@@ -56,6 +58,7 @@
     "shortcode",
     "shortcodes",
     "subfolders",
+    "submatch",
     "tabpane",
     "unmarshal",
     "unselectable",

@@ -5,11 +5,17 @@
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "private": true,
+  "bin": {
+    "gen-favicons": "scripts/gen-favicons/cli.mjs"
+  },
   "files": [
     "theme",
     "!theme/node_modules",
     "!theme/package-lock.json",
-    "scripts/mkdirp-hugo-mod.js"
+    "scripts/mkdirp-hugo-mod.js",
+    "scripts/gen-favicons/cli.mjs",
+    "scripts/gen-favicons/index.mjs",
+    "scripts/gen-favicons/README.md"
   ],
   "workspaces": [
     "docsy.dev",

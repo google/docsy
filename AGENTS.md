@@ -30,3 +30,15 @@ Enforce the [style guide][] when reviewing user guide additions or
 modifications.
 
 [style guide]: docsy.dev/content/en/project/style-guide.md
+
+## Separation of concerns
+
+Note this partitioning of concerns in the docs (to keep things lean and DRY):
+
+- Changelog: see guidelines at the top. Very terse listing of changes; will link
+  to posts to for "Details" links.
+- Upgrade blog posts: help clients (humans and agents), know what has changed,
+  what needs upgrading, and when upgrading is needed (for each change)
+- The Docs reflect the current Docsy design. No or little historical notes.
+- Release message links to the changelog and upgrade blog posts, and lists the
+  actual Git history since the last release.

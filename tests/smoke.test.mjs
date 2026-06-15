@@ -158,6 +158,21 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     );
     assert.equal(r.status, 0, `${src} site build exited 0`);
     assertBuilt(name);
+
+    // An npm install of Docsy puts the `gen-favicons` CLI on the project's
+    // PATH; `--help` exercises the wired bin without needing ImageMagick.
+    if (src === 'NPM') {
+      progress('NPM: npx gen-favicons --help…');
+      const help = run('npx', ['gen-favicons', '--help'], {
+        cwd: path.join(TMP, name),
+      });
+      assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
+      assert.match(
+        help.stdout ?? '',
+        /Usage: gen-favicons/,
+        'npx gen-favicons --help prints usage',
+      );
+    }
     progress(`${src}: ok`);
   });
 }

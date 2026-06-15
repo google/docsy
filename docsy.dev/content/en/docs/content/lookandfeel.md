@@ -908,16 +908,14 @@ at the end of the theme partial [scripts.html][].
 Both [head.html][] and [scripts.html][] are included from [baseof.html][],
 Docsy's [base template][].
 
-[baseof.html]: https://github.com/google/docsy/blob/main/layouts/baseof.html
+<!-- prettier-ignore-start -->
 [base template]: https://gohugo.io/templates/base/
-[head.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/head.html
-[hooks/body-end.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/hooks/body-end.html
-[hooks/head-end.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html
-[scripts.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/head.html
+[baseof.html]: https://github.com/google/docsy/blob/main/theme/layouts/baseof.html
+[head.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/head.html
+[hooks/body-end.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/body-end.html
+[hooks/head-end.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html
+[scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
+<!-- prettier-ignore-end -->
 
 ### Adding a banner before page content {#before-page-content}
 
