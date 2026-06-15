@@ -209,6 +209,43 @@ test('theme discovers any square apple-touch-icon variant, sorted by size', () =
   );
 });
 
+// Discovery is limited to square NxN variants: a rectangular favicon-WxH.png is
+// ignored, so only the square sibling is linked.
+test('theme ignores a non-square favicon PNG variant', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'favicon-16x32.png',
+    'favicon-32x32.png',
+  ]);
+  assert.match(
+    links,
+    /rel="icon" href="\/favicon-32x32\.png" type="image\/png" sizes="32x32"/,
+    'the square favicon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /favicon-16x32\.png/,
+    'the non-square favicon variant is ignored',
+  );
+});
+
+// A sized apple-touch-icon variant stands on its own: it is linked with its
+// sizes even when the unsized apple-touch-icon.png is absent.
+test('theme links a sized apple-touch-icon without the unsized file', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'apple-touch-icon-180x180.png',
+  ]);
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+    'the sized apple-touch-icon variant is linked',
+  );
+  assert.doesNotMatch(
+    links,
+    /href="\/apple-touch-icon\.png"/,
+    'the absent unsized apple-touch-icon.png is not linked',
+  );
+});
+
 test('discovered favicons pick up a baseURL subpath via relURL', () => {
   const links = buildSiteFavicons(undefined, 'https://example.org/sub/path/', [
     'favicon.ico',

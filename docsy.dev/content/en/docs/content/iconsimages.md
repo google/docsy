@@ -98,7 +98,8 @@ If your site installs Docsy as an npm package, run the command like this:
 npx gen-favicons favicon.svg static/
 ```
 
-For a Hugo module or Git submodule install, run the CLI directly instead:
+For a Hugo module or Git submodule install, run the CLI directly instead,
+replacing *`PATH_TO_DOCSY`* with the path to your local Docsy checkout:
 
 ```sh
 node PATH_TO_DOCSY/scripts/gen-favicons/cli.mjs favicon.svg static/
