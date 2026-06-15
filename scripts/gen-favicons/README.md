@@ -32,8 +32,9 @@ The second argument is the output directory (default: the current directory);
 point it at your site's `static/` so the icons publish at the site root, where
 browsers and the favicons partial expect them.
 
-Run `gen-favicons --help` for the icon sizes you can choose and all other
-options.
+For the icon sizes you can choose and all other options, add `--help` to the
+command form for your install (`npx gen-favicons --help`, or
+`node path/to/docsy/scripts/gen-favicons/cli.mjs --help`).
 
 [partial]: https://docsy.dev/docs/content/iconsimages/#add-your-favicons
 [imagemagick]: https://imagemagick.org

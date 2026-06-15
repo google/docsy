@@ -53,14 +53,11 @@ Docsy includes the free FontAwesome icons by default, including logos for sites
 like GitHub and Stack Overflow. You can view all available icons in the
 [FontAwesome documentation](https://fontawesome.com/icons/), including the
 FontAwesome version when the icon was added and whether it is available for free
-tier users. Check Docsy's
-[`package.json`](https://github.com/google/docsy/blob/main/package.json) and
-release notes for Docsy's currently included version of FontAwesome.
+tier users. Check Docsy's [package.json][] and release notes for Docsy's
+currently included version of FontAwesome.
 
-You can add FontAwesome icons to your
-[navbar](/docs/content/navigation/#adding-icons-to-the-navbar),
-[side nav](/docs/content/navigation/#adding-icons-to-the-side-nav), or anywhere
-in your text.
+You can add FontAwesome icons to your [navbar][], [side nav][], or anywhere in
+your text.
 
 ## Add your favicons
 
@@ -68,8 +65,8 @@ The theme ships no favicon files, but it **discovers and links** a set of
 conventionally named icons when you supply them:
 [create your favicon files](#generate-favicons) and put them in your site
 project's `static` directory so they publish at the site root (where browsers
-probe for them). The theme links whichever of these files it finds, in this
-order, with no partial or configuration required:
+probe for them). Docsy adds `<link>` elements inside each page's `<head>` for
+whichever of these files it finds, in this order:
 
 | File                       | Link                                             |
 | -------------------------- | ------------------------------------------------ |
@@ -79,20 +76,22 @@ order, with no partial or configuration required:
 | `apple-touch-icon.png`     | `rel="apple-touch-icon"` (implicit size 180x180) |
 | `apple-touch-icon-NxN.png` | `rel="apple-touch-icon"` with `sizes="NxN"`      |
 
-Docsy discovers square size variants listed above and links them in ascending
+If you have any square-size variants listed above, Docsy adds them in ascending
 size order.
 
 A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers common
-browser and platform favicon needs. To customize the links -- for example to add
-a web app manifest -- override the theme by adding your own
-`layouts/_partials/favicons.html` partial; use `relURL` so links stay correct
-when your site's `baseURL` includes a subpath.
+browser and platform favicon needs. For anything beyond that:
+
+- Add web app manifest `<link>` elements to [hooks/head-end.html][].
+- If you need to customize the favicon links themselves, override
+  [layouts/_partials/favicons.html][]. Make sure you use `relURL` so links stay
+  correct when your site's `baseURL` includes a subpath.
 
 ### Generate favicons
 
 Don't have a favicon yet? You can generate favicons from a single image with an
 online tool such as [favicon.io](https://favicon.io) or
-[RealFaviconGenerator][rfg].
+[RealFaviconGenerator][].
 
 If you have a source SVG and [ImageMagick][] installed, Docsy also ships a
 `gen-favicons` helper. Save your source SVG as `static/favicon.svg` -- the theme
@@ -115,12 +114,7 @@ For a Git submodule install of Docsy, `DOCSY_DIR` is `themes/docsy`. For a Hugo
 module install of Docsy, `DOCSY_DIR` is the directory of your Docsy install,
 which you can find with `go list -m -f '{{.Dir}}' github.com/google/docsy`.
 
-For the sizes and other options you can pass, add `--help` to the command form
-for your install (`npx gen-favicons --help`, or
-`node DOCSY_DIR/scripts/gen-favicons/cli.mjs --help`).
-
-[ImageMagick]: https://imagemagick.org
-[rfg]: https://realfavicongenerator.net
+For the sizes and other options you can pass, run the command with `--help`.
 
 ## Add images
 
@@ -135,14 +129,10 @@ For example, the example site's landing page `content/en/_index.md` uses the
 image `content/en/featured-background.jpg`, which is in the same directory --
 see the [content/en][] folder on GitHub.
 
-[content/en]: https://github.com/google/docsy-example/tree/main/content/en
-
 Use the block's [`height` parameter][] to set the preferred display height of
 the cover container (and therefore its image). For a full viewport height, use
 `full`, along with the `td-below-navbar` helper class to position the cover
 below the navbar:
-
-[`height` parameter]: shortcodes/#blocks
 
 ```go-html-template
 {{%/* blocks/cover
@@ -167,8 +157,6 @@ For a shorter image, as in the [example site's About][] page, use one of `min`,
 {{%/* /blocks/cover */%}}
 ```
 
-[example site's About]: <{{% param example_site_url %}}/about/>
-
 ### Other pages
 
 To add inline images to other pages, use the
@@ -177,3 +165,16 @@ prefer, just use regular Markdown or HTML images and add your image files to
 your project's `static` directory. You can find out more about using this
 directory in
 [Adding static content](/docs/content/adding-content/#adding-static-content).
+
+<!-- prettier-ignore-start -->
+[content/en]: https://github.com/google/docsy-example/tree/main/content/en
+[example site's About]: <{{% param example_site_url %}}/about/>
+[`height` parameter]: shortcodes/#blocks
+[hooks/head-end.html]: https://github.com/google/docsy/blob/main/layouts/_partials/hooks/head-end.html
+[ImageMagick]: https://imagemagick.org
+[layouts/_partials/favicons.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/favicons.html
+[navbar]: /docs/content/navigation/#adding-icons-to-the-navbar
+[package.json]: https://github.com/google/docsy/blob/main/package.json
+[RealFaviconGenerator]: https://realfavicongenerator.net
+[side nav]: /docs/content/navigation/#adding-icons-to-the-side-nav
+<!-- prettier-ignore-end -->
