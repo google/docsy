@@ -28,6 +28,9 @@ const REQUIRED = [
   `${TAR}package.json`,
   `${TAR}LICENSE`,
   `${SCRIPTS}mkdirp-hugo-mod.js`,
+  `${SCRIPTS}gen-favicons/cli.mjs`,
+  `${SCRIPTS}gen-favicons/index.mjs`,
+  `${SCRIPTS}gen-favicons/README.md`,
   `${TAR}theme/hugo.yaml`,
   `${TAR}theme/go.mod`,
   `${TAR}theme/layouts/baseof.html`,
@@ -112,6 +115,15 @@ test('package.json declares private and theme-only files with exclusions', () =>
   );
   assert.equal(pkg.private, true, 'package is private');
   assert.deepEqual(pkg.files, PKG_FILES, 'package.json "files"');
+  assert.deepEqual(
+    pkg.bin,
+    { 'gen-favicons': 'scripts/gen-favicons/cli.mjs' },
+    'package.json "bin"',
+  );
+  assert.ok(
+    REQUIRED.includes(`${SCRIPTS}gen-favicons/cli.mjs`),
+    'the gen-favicons bin target is shipped in the tarball',
+  );
 });
 
 test('npm pack tarball matches GitHub-NPM contract', () => {

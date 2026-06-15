@@ -131,10 +131,10 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 - **Favicon discovery**: you can now drop a site's conventionally named favicon
   files (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and optional
-  16/32px PNGs) into `static/` and the theme discovers and links them -- no
-  favicons partial required. A new `scripts/gen-favicons.sh` helper generates
-  the raster icons from a source SVG. See [Add your favicons][favicons]
-  ([#2357][]).
+  square `favicon-NxN.png` variants) into `static/` and the theme discovers and
+  links them -- no favicons partial required. A new `gen-favicons` helper
+  generates the raster icons from a source SVG. See [Add your
+  favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 

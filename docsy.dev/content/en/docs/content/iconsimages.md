@@ -89,16 +89,29 @@ when your site's `baseURL` includes a subpath.
 
 You can generate favicons from a single image with an online tool such as
 [favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg]. If you have a
-source SVG and [ImageMagick][] installed, Docsy also ships a helper script that
-writes `favicon.ico` and `apple-touch-icon.png` for you:
+source SVG and [ImageMagick][] installed, Docsy also ships a `gen-favicons`
+helper that writes the raster icons Hugo can't generate:
+
+- `favicon.ico`, and `favicon-NxN.png` size variants
+- `apple-touch-icon.png`, and `apple-touch-icon-NxN.png` size variants
+
+If your site installs Docsy as an npm package, run the command like this
+(`--help` for usage):
 
 ```sh
-path/to/docsy/scripts/gen-favicons.sh favicon.svg static/
+npx gen-favicons favicon.svg static/
 ```
 
-The script writes only the raster icons (`favicon.ico` and
-`apple-touch-icon.png`). If you also want an SVG favicon, copy your source SVG
-to `static/favicon.svg` yourself -- the partial links it directly.
+For a Hugo module or Git submodule install, run the CLI directly instead:
+
+```sh
+node path/to/docsy/scripts/gen-favicons/cli.mjs favicon.svg static/
+```
+
+You can choose which sizes to generate with the `--ico`, `--png`, and `--apple`
+flags, or run it with no flags for a sensible default set. The tool doesn't
+rasterize an SVG favicon, so copy your source SVG to `static/favicon.svg`
+yourself -- the theme links it directly.
 
 [ImageMagick]: https://imagemagick.org
 [rfg]: https://realfavicongenerator.net
