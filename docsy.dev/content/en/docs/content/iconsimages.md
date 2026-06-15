@@ -70,16 +70,16 @@ put them in your site project's `static` directory so they publish at the site
 root (where browsers probe for them). The theme links whichever of these files
 it finds, in this order, with no partial or configuration required:
 
-| File                   | Link                                             |
-| ---------------------- | ------------------------------------------------ |
-| `favicon.ico`          | `rel="icon"` with `sizes="16x16 32x32 48x48"`    |
-| `favicon.svg`          | `rel="icon"` with `type="image/svg+xml"`         |
-| `favicon-NxN.png`      | `rel="icon"` with `type="image/png" sizes="NxN"` |
-| `apple-touch-icon.png` | `rel="apple-touch-icon"`                         |
+| File                       | Link                                             |
+| -------------------------- | ------------------------------------------------ |
+| `favicon.ico`              | `rel="icon"` with `sizes="16x16 32x32 48x48"`    |
+| `favicon.svg`              | `rel="icon"` with `type="image/svg+xml"`         |
+| `favicon-NxN.png`          | `rel="icon"` with `type="image/png" sizes="NxN"` |
+| `apple-touch-icon.png`     | `rel="apple-touch-icon"` (implicit size 180x180) |
+| `apple-touch-icon-NxN.png` | `rel="apple-touch-icon"` with `sizes="NxN"`      |
 
-You can supply as many square `favicon-NxN.png` raster variants as you like (for
-example `favicon-16x16.png` and `favicon-32x32.png`); the theme discovers them
-and links them in ascending size order.
+Docsy discovers square size variants listed above and links them in ascending
+size order.
 
 A modern `favicon.ico` plus an SVG and an `apple-touch-icon.png` covers common
 browser and platform favicon needs. To customize the links -- for example to add
@@ -90,13 +90,9 @@ when your site's `baseURL` includes a subpath.
 You can generate favicons from a single image with an online tool such as
 [favicon.io](https://favicon.io) or [RealFaviconGenerator][rfg]. If you have a
 source SVG and [ImageMagick][] installed, Docsy also ships a `gen-favicons`
-helper that writes the raster icons Hugo can't generate:
+helper that writes the raster icons Hugo can't generate from it.
 
-- `favicon.ico`, and `favicon-NxN.png` size variants
-- `apple-touch-icon.png`, and `apple-touch-icon-NxN.png` size variants
-
-If your site installs Docsy as an npm package, run the command like this
-(`--help` for usage):
+If your site installs Docsy as an npm package, run the command like this:
 
 ```sh
 npx gen-favicons favicon.svg static/
@@ -105,11 +101,10 @@ npx gen-favicons favicon.svg static/
 For a Hugo module or Git submodule install, run the CLI directly instead:
 
 ```sh
-node path/to/docsy/scripts/gen-favicons/cli.mjs favicon.svg static/
+node PATH_TO_DOCSY/scripts/gen-favicons/cli.mjs favicon.svg static/
 ```
 
-You can choose which sizes to generate with the `--ico`, `--png`, and `--apple`
-flags, or run it with no flags for a sensible default set. The tool doesn't
+Run `gen-favicons --help` to choose which sizes are generated. The tool doesn't
 rasterize an SVG favicon, so copy your source SVG to `static/favicon.svg`
 yourself -- the theme links it directly.
 

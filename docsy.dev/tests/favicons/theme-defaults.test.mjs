@@ -181,6 +181,34 @@ test('theme discovers any square favicon PNG variant, sorted by size', () => {
   );
 });
 
+// Discovery generalizes to the Apple touch icon: the unsized
+// apple-touch-icon.png plus any square apple-touch-icon-NxN.png variants, each
+// linked in ascending pixel-size order.
+test('theme discovers any square apple-touch-icon variant, sorted by size', () => {
+  const links = buildSiteFavicons(undefined, 'http://localhost/', [
+    'apple-touch-icon.png',
+    'apple-touch-icon-180x180.png',
+    'apple-touch-icon-120x120.png',
+  ]);
+  assert.match(links, /rel="apple-touch-icon" href="\/apple-touch-icon\.png"/);
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-120x120\.png" sizes="120x120"/,
+  );
+  assert.match(
+    links,
+    /rel="apple-touch-icon" href="\/apple-touch-icon-180x180\.png" sizes="180x180"/,
+  );
+  const order = [...links.matchAll(/apple-touch-icon-(\d+)x\d+\.png/g)].map(
+    (m) => Number(m[1]),
+  );
+  assert.deepEqual(
+    order,
+    [120, 180],
+    'sized apple-touch-icon variants are linked in ascending pixel-size order',
+  );
+});
+
 test('discovered favicons pick up a baseURL subpath via relURL', () => {
   const links = buildSiteFavicons(undefined, 'https://example.org/sub/path/', [
     'favicon.ico',
