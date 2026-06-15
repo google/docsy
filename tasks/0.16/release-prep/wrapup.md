@@ -104,6 +104,9 @@ milestone's closed list matches the [coverage ledger](coverage.md).
 
 ## Tag-time checklist
 
+The canonical procedure is maintainer notes, [Publishing a release][pub-rel];
+this tracks 0.16-specific status and deltas, not the full mechanics.
+
 - [ ] Flip `draft: true` → `false` on both blog posts and set their final dates.
 - [ ] Replace placeholders that resolve only after tagging: the
       `releases/tag/v0.16.0` links and the changelog `UNRELEASED`
@@ -111,7 +114,8 @@ milestone's closed list matches the [coverage ledger](coverage.md).
 - [ ] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
-      (required by the theme folder move).
+      (required by the theme folder move; **not yet in the maintainer notes
+      procedure** — new this release).
 - [ ] Milestone hygiene: close or move all milestone-24 issues except [#2615][].
 - [ ] Post-release: refresh `docsy-example` and the examples page for 0.16.0.
 
@@ -126,11 +130,15 @@ milestone's closed list matches the [coverage ledger](coverage.md).
 - [Release 0.16.0 preparation #2615][#2615] · [milestone #24][milestone]
 - [v0.15.0...main][]
 - [coverage.md](coverage.md) · [release report][] · [Hugo upgrade guide][]
+- Process: [maintainer notes][maint-notes] ([Publishing a release][pub-rel])
 
 [milestone]: https://github.com/google/docsy/milestone/24
 [release report]: ../../../docsy.dev/content/en/blog/2026/0.16.0.md
 [hugo upgrade guide]: ../../../docsy.dev/content/en/blog/2026/hugo-0.158.0+.md
 [Add your favicons]: ../../../docsy.dev/content/en/docs/content/iconsimages.md
+[maint-notes]: ../../../docsy.dev/content/en/project/about/maintainer-notes.md
+[pub-rel]:
+  ../../../docsy.dev/content/en/project/about/maintainer-notes.md#publishing-a-release
 [#726]: https://github.com/google/docsy/issues/726
 [#1987]: https://github.com/google/docsy/issues/1987
 [#2357]: https://github.com/google/docsy/issues/2357
