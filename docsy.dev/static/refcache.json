@@ -699,6 +699,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-06-12T10:47:00.544108-04:00"
   },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.163.2": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-16T12:57:45.131513-04:00"
+  },
   "https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:24:07.239646-05:00"

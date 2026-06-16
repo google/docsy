@@ -90,7 +90,7 @@
     "prettier": "^3.8.1"
   },
   "config": {
-    "hugo_version": "0.163.1"
+    "hugo_version": "0.163.2"
   },
   "engines": {
     "node": ">=24"
