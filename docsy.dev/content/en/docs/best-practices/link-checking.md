@@ -2,6 +2,7 @@
 title: Link checking
 description:
   Speed up external link checking with lean-render builds for checkers
+cSpell:ignore pagelinks
 ---
 
 A link checker that crawls your built site re-checks the repeated,
@@ -12,12 +13,19 @@ site that's the bulk of the work, and it inflates checker output.
 **Lean render** is a build mode that omits the repeated chrome from the output,
 so a checker reaches each link once instead of once per page. It works with any
 external link checker, needs no extra post-build pass, and keeps just enough
-instances of each region for full coverage:
+instances of each region to keep its repeated links reachable:
 
-- **Navbar and footer** (config-defined): kept on each locale's home page.
-- **Left-nav** (computed): kept on each locale's docs landing page, which
-  carries the full docs tree. On a [doc-rooted site][doc-rooted], that landing
-  page _is_ the home page.
+- **Navbar and footer**: kept on each locale's home page. Their links are
+  config-defined and the same across the locale, except for the navbar's
+  language selector (and an optional version menu) &mdash; see the caution.
+- **Left-nav** (computed per page): kept on each locale's docs landing page,
+  which carries the full docs tree. On a [doc-rooted site][doc-rooted], that
+  landing page _is_ the home page.
+
+The navbar's language selector points to each page's own translation rather than
+a fixed target, but those translations are docs pages that the destination
+locale's left-nav already covers, so the single kept navbar loses no reachable
+link.
 
 Dropping the repeated chrome also makes a lean build a much less noisy basis for
 diffing generated output: changes to a shared region show up once, instead of on
