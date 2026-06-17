@@ -1,9 +1,9 @@
+{{ if partial "lean-render.html" (dict "page" . "region" "navbar") -}}
 {{ $cover := and
     (.HasShortcode "blocks/cover")
     (not .Site.Params.ui.navbar_translucent_over_cover_disable)
 -}}
 {{ $baseURL := urls.Parse $.Site.Params.Baseurl -}}
-
 <nav class="td-navbar js-navbar-scroll
       {{- if $cover }} td-navbar-cover td-navbar-transparent {{- end }}"
       {{- if eq (.Param "ui.navbar_theme") "dark" }} data-bs-theme="dark" {{- end }}>
@@ -73,3 +73,4 @@
   </div>
 </div>
 </nav>
+{{- end -}}

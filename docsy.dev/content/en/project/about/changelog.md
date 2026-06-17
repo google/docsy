@@ -162,12 +162,15 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [#2357]: https://github.com/google/docsy/issues/2357
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2578]: https://github.com/google/docsy/pull/2578
+[#2659]: https://github.com/google/docsy/issues/2659
 [favicons]: /docs/content/iconsimages/#add-your-favicons
 [hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
+[link-checking]: /docs/best-practices/link-checking/
 
 [**Experimental**](#experimental):
 
-- ...
+- **Lean render**: you can now omit repeated chrome (navbar, footer, left-nav)
+  to speed up link checking. See [Link checking][link-checking] ([#2659][]).
 
 [0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
 [0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0

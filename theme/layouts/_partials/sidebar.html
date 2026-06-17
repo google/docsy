@@ -6,6 +6,7 @@
 
 */ -}}
 
+{{ if partial "lean-render.html" (dict "page" . "region" "sidebar") -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
 
@@ -72,7 +73,8 @@
     $("#td-sidebar-menu").toggleClass("d-none");
     });
   </script>
-  {{ partialCached "sidebar-tree.html" $args $sidebarRootID }}
+  {{ partialCached "sidebar-tree.html" $args $sidebarRootID -}}
 {{ else -}}
-  {{ partial "sidebar-tree.html" $args }}
-{{- end }}
+  {{ partial "sidebar-tree.html" $args -}}
+{{ end -}}
+{{ end -}}
