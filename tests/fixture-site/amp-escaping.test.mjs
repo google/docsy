@@ -1,6 +1,6 @@
 // Regression guard for the class of gohugoio/hugo#14715: Hugo 0.159.2's
 // dangerous-URL escaping fix double-escaped `&` in Markdown link URLs
-// (rendering `&amp;amp;`); fixed in 0.160.0. Only goldmark's plain link
+// (rendering `&amp;amp;`); fixed in 0.160.0. Only Goldmark's plain link
 // rendering was affected — monolingual sites without link render hooks,
 // which is exactly what this fixture builds. (The docsy.dev site can't cover
 // this: multilingual single-host sites silently use the embedded link render

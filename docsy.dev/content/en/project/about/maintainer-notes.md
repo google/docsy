@@ -83,12 +83,12 @@ recommend to users — skip the script and manually update only
 
 From the repo root:
 
-| Script           | Role                                                                                      |
-| ---------------- | ----------------------------------------------------------------------------------------- |
-| `test:website`   | Full docsy.dev checks: format, links, hugo-build, alt-site, and md-output golden tests    |
-| `test:mono-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
-| `test:tooling`   | Unit tests for repo scripts                                                               |
-| `test:smoke`     | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
+| Script              | Role                                                                                      |
+| ------------------- | ----------------------------------------------------------------------------------------- |
+| `test:fixture-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
+| `test:smoke`        | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
+| `test:tooling`      | Unit tests for repo scripts                                                               |
+| `test:website`      | Full docsy.dev checks: format, links, hugo-build, alt-site, and md-output golden tests    |
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).
@@ -505,7 +505,6 @@ before any further changes are merged into the `main` branch:
   help for usage.
 
 <!-- prettier-ignore-start -->
-
 [breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
@@ -525,5 +524,4 @@ before any further changes are merged into the `main` branch:
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [public]: /project/about/changelog/#public
 [tags]: <{{% param github_repo %}}/tags>
-
 <!-- prettier-ignore-end -->

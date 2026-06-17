@@ -1,6 +1,5 @@
 ---
 title: Organizing Your Content
-weight: 9
 description: >
   Optional guidance and recommendations on how to organize your documentation
   site.
