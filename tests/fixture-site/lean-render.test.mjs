@@ -98,6 +98,20 @@ test('lean render mode is case-insensitive', () => {
   assert.ok(!has.footer(landing), 'footer absent on the docs landing');
 });
 
+// The documented config path (params.td.lean_render) must work too, not just
+// the HUGOx… environment override the other tests use.
+test('lean render can be enabled via site config', () => {
+  const r = buildSite('lean-config', {
+    files,
+    extraConfig: ['params:', '  td:', '    lean_render: remove', ''].join('\n'),
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+  const landing = r.publicFile('docs/index.html');
+  assert.ok(has.sidebar(landing), 'left-nav kept on the docs landing');
+  assert.ok(!has.navbar(landing), 'navbar absent on the docs landing');
+  assert.ok(!has.footer(landing), 'footer absent on the docs landing');
+});
+
 // Each locale's left-nav links differ, so every locale's docs landing is kept.
 test('lean render on keeps the sidebar on every locale docs landing page', () => {
   const mlFiles = {
