@@ -1,0 +1,68 @@
+# Docsy config
+#
+# cSpell:ignore docsy fortawesome fontawesome github permalinkable twbs webfonts
+
+params:
+  time_format_blog: Monday, January 02, 2006
+  time_format_default: January 2, 2006
+  rss_sections: [blog]
+
+outputFormats:
+  LLMS:
+    baseName: llms
+    isPlainText: true
+    mediaType: text/plain
+    notAlternative: true
+  print:
+    baseName: index
+    # FIXME: leave isHTML unset (i.e. false) until we get a Hugo fix for
+    # https://github.com/gohugoio/hugo/issues/14381
+    # isHTML: true
+    mediaType: text/html
+    path: _print
+    permalinkable: false
+
+# Needed fo KaTeX, possibly useful for others. see
+# https://github.com/google/docsy/pull/2465
+mediaTypes:
+  font/woff:
+    suffixes: [woff]
+  font/woff2:
+    suffixes: [woff2]
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.158.0
+  mounts:
+    - source: assets
+      target: assets
+    - source: node_modules/bootstrap
+      target: assets/vendor/bootstrap
+    - source: node_modules/@fortawesome/fontawesome-free
+      target: assets/vendor/Font-Awesome
+    - source: i18n
+      target: i18n
+    - source: layouts
+      target: layouts
+    - source: static
+      target: static
+    - source: node_modules/@fortawesome/fontawesome-free/webfonts
+      target: static/webfonts
+    - source: assets/_vendor/bootstrap/scss
+      target: assets/vendor/bootstrap/scss/vendor
+  imports:
+    - path: github.com/twbs/bootstrap
+      disable: false
+      mounts:
+        - source: scss
+          target: assets/vendor/bootstrap/scss
+        - source: dist/js
+          target: assets/vendor/bootstrap/dist/js
+    - path: github.com/FortAwesome/Font-Awesome
+      disable: false
+      mounts:
+        - source: scss
+          target: assets/vendor/Font-Awesome/scss
+        - source: webfonts
+          target: static/webfonts

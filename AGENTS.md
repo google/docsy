@@ -12,6 +12,18 @@ project CI/CD, release process, etc.
 [project]: docsy.dev/content/en/project/_index.md
 [git-info.md]: docsy.dev/content/en/project/build/git-repo.md
 
+## Code, test, and documentation conventions
+
+- Assume that the maintainers and readers of the code you write are senior web
+  developers and designers who know the site's tools, including Hugo, Bootstrap,
+  etc.
+- Brevity is good — in code, comments, and commit messages.
+- When you write, think lean and DRY.
+- Don't use comments to explain the obvious; use self-explanatory names and
+  short names when the context is clear.
+- This project has a long history; look for existing helpers (partials,
+  shortcodes, SCSS mixins, and similar) before adding new ones.
+
 ## User guide
 
 Enforce the [style guide][] when reviewing user guide additions or
@@ -19,4 +31,20 @@ modifications.
 
 [style guide]: docsy.dev/content/en/project/style-guide.md
 
-<!-- cSpell:ignore docsy -->
+## Separation of concerns
+
+Note this partitioning of concerns in the docs (to keep things lean and DRY):
+
+- Changelog: see guidelines at the top. Very terse listing of changes; will link
+  to posts to for "Details" links.
+- Upgrade blog posts: help clients (humans and agents), know what has changed,
+  what needs upgrading, and when upgrading is needed (for each change)
+- The Docs reflect the current Docsy design. No or little historical notes.
+- Release message links to the changelog and upgrade blog posts, and lists the
+  actual Git history since the last release.
+
+## Pull requests
+
+- Before the final push of a PR branch, run `npm run set:version:git-info` to
+  refresh the package build ID. A pre-push hook also runs this and will abort
+  the push if the ID changed, so doing it yourself avoids a failed push.

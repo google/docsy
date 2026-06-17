@@ -32,7 +32,7 @@ At your command prompt, run the following:
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
@@ -45,7 +45,7 @@ hugo server
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 (echo [module]^
 
 proxy = "direct"^
@@ -103,7 +103,7 @@ which holds the checksums for module verification.
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy@v{{% param "version" %}}
+hugo mod get github.com/google/docsy@{{% param "version" %}}
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.

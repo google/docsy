@@ -1,5 +1,5 @@
 // Runs `hugo mod get <module>@<vers>` for Docsy module dependencies.
-// It gets dependency versions from `package.json`.
+// It gets dependency versions from `theme/package.json`.
 
 import fs from 'fs';
 import { execSync } from 'child_process';
@@ -22,8 +22,8 @@ function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
     }
 
     const command = `npx hugo mod get ${hugoModuleRefAtV}${pkgVers}`;
-    console.log(`> ${command}`);
-    const output = execSync(command);
+    console.log(`> (cd theme && ${command})`);
+    const output = execSync(command, { cwd: 'theme' });
     console.log(output.toString());
   } catch (error) {
     console.error(`ERROR: ${error.message}\n`);
@@ -33,10 +33,10 @@ function getHugoModule(npmPkgNm, hugoModuleRefAtV) {
 
 function readPackageJson() {
   try {
-    const packageJsonData = fs.readFileSync('package.json', 'utf8');
+    const packageJsonData = fs.readFileSync('theme/package.json', 'utf8');
     return JSON.parse(packageJsonData);
   } catch (error) {
-    console.error('FAILED to read package.json:', error.message);
+    console.error('FAILED to read theme/package.json:', error.message);
     exit();
   }
 }

@@ -6,7 +6,7 @@ set -eo pipefail
 
 HUGO="npx hugo"
 CHROMA_STYLE=
-DEST_DIR=assets/scss/td/chroma
+DEST_DIR=theme/assets/scss/td/chroma
 DEST_FILE=
 DEST_PATH=/dev/null # Set in process_CLI_args
 

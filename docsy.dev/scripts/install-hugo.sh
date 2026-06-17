@@ -1,6 +1,8 @@
 #!/bin/bash
 #
-# Install the hugo-extended NPM package if not already present.
+# Install the hugo-extended NPM package if not already present either from the
+# canonical source or from the chalin fork. The fork version is used when a Hugo
+# version hasn't yet landed on `hugo-extended` as an NPM package.
 
 set -e
 
@@ -14,5 +16,3 @@ if ! npm ls hugo-extended; then
     npm install --save-exact -D chalin/hugo-extended#v$_HUGO_EXTENDED_VERS --omit=optional
   fi
 fi
-
-# cSpell:ignore chalin

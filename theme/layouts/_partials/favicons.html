@@ -1,0 +1,42 @@
+{{/*
+  Link conventionally named favicons found in `static/`.
+  For details, see https://docsy.dev/docs/content/iconsimages/#add-your-favicons
+*/ -}}
+
+{{ $icons := (slice
+    (dict "file" "favicon.ico" "rel" "icon")
+    (dict "file" "favicon.svg" "rel" "icon" "type" "image/svg+xml"))
+  | append (partial "favicons/sized-variants.html" (dict "prefix" "favicon" "rel" "icon" "type" "image/png"))
+  | append (dict "file" "apple-touch-icon.png" "rel" "apple-touch-icon")
+  | append (partial "favicons/sized-variants.html" (dict "prefix" "apple-touch-icon" "rel" "apple-touch-icon")) -}}
+
+{{ range $icons -}}
+  {{ if os.FileExists (printf "static/%s" .file) -}}
+    {{ $attrs := printf `rel=%q href=%q` .rel (.file | relURL) -}}
+    {{ with .type }}{{ $attrs = printf "%s type=%q" $attrs . }}{{ end -}}
+    {{ with .sizes }}{{ $attrs = printf "%s sizes=%q" $attrs . }}{{ end -}}
+    {{ printf "<link %s />" $attrs | safeHTML }}{{- "\n" -}}
+  {{ end -}}
+{{ end -}}
+
+{{/* Return icon dicts for the square `<prefix>-NxN.png` files in `static/`, in
+     ascending size order, carrying the caller's rel (and optional type). */ -}}
+
+{{ define "_partials/favicons/sized-variants.html" -}}
+  {{ $sizes := slice -}}
+  {{ if os.FileExists "static" -}}
+    {{ range (os.ReadDir "static") -}}
+      {{ $m := index (findRESubmatch (printf `^%s-(\d+)x(\d+)\.png$` $.prefix) .Name) 0 -}}
+      {{/* The regex has no backreference for "square", so compare the two groups. */ -}}
+      {{ if and $m (eq (index $m 1) (index $m 2)) -}}
+        {{ $sizes = $sizes | append (int (index $m 1)) -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+  {{ $icons := slice -}}
+  {{ range (sort $sizes) -}}
+    {{ $icons = $icons | append (dict "file" (printf "%s-%dx%d.png" $.prefix . .) "rel" $.rel "type" $.type "sizes" (printf "%dx%d" . .)) -}}
+  {{ end -}}
+  {{/* Coerce to []interface{} so the caller's `append` always flattens it. */ -}}
+  {{ return append slice $icons -}}
+{{ end -}}

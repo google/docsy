@@ -28,7 +28,7 @@ done!
 > updating your theme, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy@v{{% param "version" %}}
+> hugo mod get -u github.com/google/docsy@{{% param "version" %}}
 > ```
 >
 > Instead of a version tag, you can also specify a commit hash, for example:

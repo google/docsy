@@ -2,6 +2,8 @@
 # cSpell:ignore autoprefixer docsy postcss themesdir github oneline
 set -eo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 DEPS="autoprefixer postcss-cli"
 DOCSY_REPO_DEFAULT="google/docsy"
 DOCSY_REPO=$DOCSY_REPO_DEFAULT
@@ -9,7 +11,7 @@ DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
 
-: ${HUGO:=npx hugo}
+: "${HUGO:=npx hugo}"
 
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
@@ -82,10 +84,12 @@ function validate_vers_hugo() {
   if [[ -z "$DOCSY_VERS" ]]; then
     return 0
   fi
+
   if [[ "$DOCSY_VERS" == -* ]]; then
     echo "[ERROR] Invalid -v / DOCSY_VERS: must not start with '-'"
     exit 1
   fi
+
   if [[ ! "$DOCSY_VERS" =~ ^[A-Za-z0-9][A-Za-z0-9._/-]{0,99}$ ]]; then
     echo "[ERROR] Invalid -v / DOCSY_VERS value: '$DOCSY_VERS'"
     echo "[ERROR] Allowed pattern (HUGO mode): ^[A-Za-z0-9][A-Za-z0-9._/-]{0,99}$"
@@ -98,10 +102,12 @@ function validate_vers_npm() {
   if [[ -z "$DOCSY_VERS" ]]; then
     return 0
   fi
+
   if [[ "$DOCSY_VERS" == -* ]]; then
     echo "[ERROR] Invalid -v / DOCSY_VERS: must not start with '-'"
     exit 1
   fi
+
   if [[ ! "$DOCSY_VERS" =~ ^[A-Za-z0-9][A-Za-z0-9._/+:-]{0,99}$ ]]; then
     echo "[ERROR] Invalid -v / DOCSY_VERS value: '$DOCSY_VERS'"
     echo "[ERROR] Allowed pattern (NPM mode): ^[A-Za-z0-9][A-Za-z0-9._/+:-]{0,99}$"
@@ -112,26 +118,36 @@ function validate_vers_npm() {
 function process_CLI_args() {
   while getopts ":fhl:n:qr:s:v:" opt; do
     case $opt in
-      f) FORCE_DELETE=true ;;
-      h) usage ;;
+      f)
+        FORCE_DELETE=true
+        ;;
+      h)
+        usage
+        ;;
       l)
         DOCSY_SRC="LOCAL"
         THEMESDIR="$OPTARG"
         ;;
-      n) SITE_NAME="$OPTARG" ;;
+      n)
+        SITE_NAME="$OPTARG"
+        ;;
       q)
         VERBOSE=""
         OUTPUT_REDIRECT="1"
         ;;
-      r) DOCSY_REPO="$OPTARG" ;;
+      r)
+        DOCSY_REPO="$OPTARG"
+        ;;
       s)
         DOCSY_SRC=$(echo "$OPTARG" | tr '[:lower:]' '[:upper:]')
-        if [[ $DOCSY_SRC != "NPM" && $DOCSY_SRC != HUGO* ]]; then
+        if [[ "$DOCSY_SRC" != "NPM" && "$DOCSY_SRC" != HUGO* ]]; then
           echo "ERROR: invalid argument to -s flag: $OPTARG"
           usage 1
         fi
         ;;
-      v) DOCSY_VERS="$OPTARG" ;;
+      v)
+        DOCSY_VERS="$OPTARG"
+        ;;
       \?)
         echo "ERROR: unrecognized flag: -$OPTARG"
         usage 1
@@ -139,16 +155,16 @@ function process_CLI_args() {
     esac
   done
 
-  shift $((OPTIND-1))
-  if [ "$#" -gt 0 ]; then
+  shift $((OPTIND - 1))
+  if [[ "$#" -gt 0 ]]; then
     echo "ERROR: extra argument(s): $*" >&2
     usage 1
   fi
 }
 
 function create_site_directory() {
-  if [ -e "$SITE_NAME" ]; then
-    if [ "$FORCE_DELETE" = true ]; then
+  if [[ -e "$SITE_NAME" ]]; then
+    if [[ "$FORCE_DELETE" = true ]]; then
       echo "[INFO] Directory '$SITE_NAME' already exists. Deleting it as requested (-f)."
       ([[ $VERBOSE ]] && set -x; rm -rf "$SITE_NAME")
     else
@@ -160,6 +176,7 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y >/dev/null
+
   if [[ -n "$OUTPUT_REDIRECT" ]]; then
     npm install --omit dev --save $DEPS >/dev/null 2>&1
   else
@@ -176,7 +193,7 @@ function set_up_and_cd_into_site() {
   if [[ "$DOCSY_SRC" == HUGO* ]]; then
     _set_up_site_using_hugo_modules
   else
-    echo "theme: docsy" >> hugo.yaml
+    echo "theme: docsy/theme" >> hugo.yaml
     echo "themesDir: $THEMESDIR" >> hugo.yaml
   fi
 }
@@ -189,7 +206,10 @@ function _set_up_site_using_hugo_modules() {
   validate_vers_hugo
 
   local HUGO_MOD_WITH_VERS
-  HUGO_MOD_WITH_VERS=$DOCSY_REPO
+
+  # Docsy theme lives in the `theme/` subfolder of the Docsy repo.
+  HUGO_MOD_WITH_VERS="$DOCSY_REPO/theme"
+
   if [[ -n "$DOCSY_VERS" ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"
   fi
@@ -219,16 +239,17 @@ function _set_up_site_using_hugo_modules() {
     (
       cd tmp/docsy
       git log --oneline -"$DEPTH"
+
       if [[ -n "$SWITCH_NEEDED" && -n "$DOCSY_VERS" ]]; then
         git switch --detach "$DOCSY_VERS"
       fi
     )
 
-    echo "replace github.com/$DOCSY_REPO_DEFAULT => ./tmp/docsy" >> go.mod
-    run_hugo mod get "github.com/$DOCSY_REPO_DEFAULT"
+    echo "replace github.com/$DOCSY_REPO_DEFAULT/theme => ./tmp/docsy/theme" >> go.mod
+    run_hugo mod get "github.com/$DOCSY_REPO_DEFAULT/theme"
   fi
 
-  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT, disable: false}]}" >> hugo.yaml
+  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT/theme, disable: false}]}" >> hugo.yaml
 }
 
 function main() {
@@ -243,6 +264,7 @@ function main() {
     if [[ -n "$DOCSY_VERS" ]]; then
       NPM_PKG+="#$DOCSY_VERS"
     fi
+
     echo "[INFO] Getting Docsy as NPM package '$NPM_PKG'"
     DEPS+=" $NPM_PKG"
   elif [[ "$DOCSY_SRC" == "LOCAL" ]]; then
@@ -255,9 +277,12 @@ function main() {
   create_site_directory
 
   [[ $VERBOSE ]] && set -x
+
   set_up_and_cd_into_site
   run_hugo # Generate site
+
   [[ $VERBOSE ]] && set +x
+
   cd ..
 
   echo "[INFO] '$SITE_NAME' successfully created, set up, and built."
@@ -265,6 +290,7 @@ function main() {
   if [[ $VERBOSE ]]; then
     echo "[INFO] Here are the site files:"
     echo
+
     set -x
     ls -l "$SITE_NAME"
     echo

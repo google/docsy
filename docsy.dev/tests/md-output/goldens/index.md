@@ -8,15 +8,15 @@ LLMS index: [llms.txt](/llms.txt)
 
 ---
 
-<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_cc01584da1b14539.jpg" media="(max-width: 1200px)">
-<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_b69ccedf938815cf.jpg" media="(min-width: 1200px)">
+<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_ac3e76417c708174.jpg" media="(max-width: 1200px)">
+<link rel="preload" as="image" href="/background-pexels-quang-nguyen-vinh-222549-2131841_hu_1a0ad6f9205bc79d.jpg" media="(min-width: 1200px)">
 <style>
 #td-cover-block-0 {
-  background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_cc01584da1b14539.jpg);
+  background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_ac3e76417c708174.jpg);
 }
 @media only screen and (min-width: 1200px) {
   #td-cover-block-0 {
-    background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_b69ccedf938815cf.jpg);
+    background-image: url(/background-pexels-quang-nguyen-vinh-222549-2131841_hu_1a0ad6f9205bc79d.jpg);
   }
 }
 </style>
@@ -75,7 +75,7 @@ on creating great content for your users.
 [Hugo]: https://gohugo.io/
 [netlify]: https://www.netlify.com/
 [netlify-badge]:
-  https://www.netlify.com/img/global/badges/netlify-color-accent.svg
+  https://www.netlify.com/assets/badges/netlify-badge-color-accent.svg
 
 
 </div>
