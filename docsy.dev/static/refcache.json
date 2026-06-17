@@ -3517,7 +3517,7 @@
   },
   "https://www.nngroup.com/articles/browser-and-gui-chrome/": {
     "StatusCode": 200,
-    "LastSeen": "2026-06-17T11:05:00.000000-04:00"
+    "LastSeen": "2026-06-17T11:05:00-04:00"
   },
   "https://www.noorix.com.au/blog/how-to/hosting-static-website-with-aws-s3-cloudfront/": {
     "StatusCode": 206,
