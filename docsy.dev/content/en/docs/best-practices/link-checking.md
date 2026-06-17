@@ -2,7 +2,7 @@
 title: Link checking
 description:
   Speed up external link checking with lean-render builds for checkers
-cSpell:ignore pagelinks
+cSpell:ignore: pagelinks
 ---
 
 A link checker that crawls your built site re-checks the repeated,
