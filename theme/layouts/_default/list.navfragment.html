@@ -1,0 +1,14 @@
+{{- /* navfragment output format: a docs section's left-nav as a standalone,
+chrome-free HTML fragment (e.g. /docs/_nav.html) that a lean build fetches and
+injects client-side. Bare content (no `define` block) so Hugo renders it
+without the baseof page wrapper. Forces the cached/shared sidebar shape: no
+per-page active state is baked in — that is applied client-side after injection,
+so one fragment serves every page under the same sidebar root. */ -}}
+{{- $a := partial "sidebar-args.html" . -}}
+{{- $args := dict
+    "context" $a.context
+    "cacheSidebar" true
+    "sidebarRoot" $a.sidebarRoot
+    "sidebarRootID" $a.sidebarRootID
+-}}
+{{- partialCached "sidebar-tree.html" $args $a.sidebarRootID -}}

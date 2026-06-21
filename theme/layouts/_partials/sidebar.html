@@ -7,57 +7,8 @@
 */ -}}
 
 {{ if partial "lean-render.html" (dict "page" . "region" "sidebar") -}}
-{{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
-{{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
-
-{{/* Determine sidebar root and ID (if enabled) */ -}}
-{{ $sidebarRoot := .FirstSection -}}
-{{ $navRoot := cond (and (ne .Params.toc_root true) (eq .Site.Home.Type "docs")) .Site.Home .FirstSection -}}
-{{ if .Site.Params.ui.sidebar_root_enabled -}}
-  {{ if and .IsSection (eq .Params.sidebar_root_for "self") -}}
-    {{ $sidebarRoot = . -}}
-  {{ else -}}
-    {{/* Check ancestors for sidebar_root_for (any value) */ -}}
-    {{ range .Ancestors -}}
-      {{ if not .IsSection -}}
-        {{ continue -}}
-      {{ end -}}
-      {{ $rootFor := .Params.sidebar_root_for -}}
-      {{ if not $rootFor -}}
-        {{ continue -}}
-      {{ end -}}
-      {{ if not (or (eq $rootFor "self") (eq $rootFor "children")) -}}
-        {{ warnf "%s: sidebar_root_for should be 'self' or 'children'. Invalid value: '%s'." .Path $rootFor -}}
-        {{ continue -}}
-      {{ end -}}
-      {{ $sidebarRoot = . -}}
-      {{ break -}}
-    {{ end -}}
-  {{ end -}}
-
-  {{/* Warn if sidebar_root_for is set to self for a top-level section */ -}}
-  {{ $rootKind := $sidebarRoot.Params.sidebar_root_for -}}
-  {{ if and (eq $rootKind "self") (eq $sidebarRoot $navRoot) -}}
-    {{ $msg := slice
-        "Setting sidebar_root_for to `self` for a section that is already a root is redundant."
-        "The `self` mode is intended for nested sections proper."
-        "Did you mean to use `children` instead?"
-    -}}
-    {{ $filename := .Path -}}
-    {{ with $sidebarRoot.File -}}
-      {{ $filename = .Filename -}}
-    {{ end -}}
-    {{ warnf "%s: %s for page '%s'." $sidebarRoot.File.Filename (delimit $msg " ") .Path -}}
-  {{ end -}}
-{{ end -}}
-
-{{ $sidebarRootID := $sidebarRoot.RelPermalink -}}
-{{ $args := dict
-    "context" .
-    "cacheSidebar" $cacheSidebar
-    "sidebarRoot" $sidebarRoot
-    "sidebarRootID" $sidebarRootID
--}}
+{{ $args := partial "sidebar-args.html" . -}}
+{{ $cacheSidebar := $args.cacheSidebar -}}
 {{ if $cacheSidebar -}}
   {{ $mid := printf "m-%s" (.RelPermalink | anchorize) }}
   <script>
@@ -73,7 +24,7 @@
     $("#td-sidebar-menu").toggleClass("d-none");
     });
   </script>
-  {{ partialCached "sidebar-tree.html" $args $sidebarRootID -}}
+  {{ partialCached "sidebar-tree.html" $args $args.sidebarRootID -}}
 {{ else -}}
   {{ partial "sidebar-tree.html" $args -}}
 {{ end -}}
