@@ -98,6 +98,40 @@
     }
   }
 
+  // --- Sidebar-root scoping (sidebar_root_for) ----------------------------
+  // Self-contained so it's easy to review or remove. The donor ships the full
+  // docs-landing tree; on a scoped page we prune it to the subtree rooted at
+  // `navRoot` and re-point that root item "up" to its parent, matching a full
+  // build's scoped sidebar. Functional parity only (same links, same active
+  // item); wrappers and depth numbering may differ.
+  function reRootMenu(menu, navRoot) {
+    const nav = menu.querySelector('#' + NAV_ID);
+    if (!nav) return;
+    const rootUrl = new URL(navRoot, window.location.href);
+    const rootPath = normalizePath(rootUrl.pathname);
+
+    let rootLink = null;
+    for (const link of nav.querySelectorAll('a[href]')) {
+      if (normalizePath(new URL(link.href).pathname) === rootPath) {
+        rootLink = link;
+        break;
+      }
+    }
+    const rootLi = rootLink && rootLink.closest('li');
+    if (!rootLi) return; // hint didn't resolve; leave the full tree in place
+
+    // Re-point the scope-root item up to its parent (the "up" affordance).
+    rootLink.setAttribute('href', new URL('..', rootUrl).pathname);
+    rootLink.classList.add('tree-root');
+
+    // Promote the subtree to be the nav's sole top-level section.
+    const topUl = nav.querySelector('ul');
+    if (topUl) {
+      rootLi.remove();
+      topUl.replaceChildren(rootLi);
+    }
+  }
+
   // Parse the stored/extracted menu markup into this document and swap it in for
   // the placeholder, then hydrate it.
   function injectMarkup(placeholder, menuMarkup) {
@@ -105,7 +139,10 @@
     template.innerHTML = menuMarkup.trim();
     const menu = template.content.firstElementChild;
     if (!menu) return;
+    const navRoot = placeholder.getAttribute('data-nav-root');
     placeholder.replaceWith(menu);
+    // Re-root once in-document, so link hrefs resolve to absolute URLs.
+    if (navRoot) reRootMenu(menu, navRoot);
     hydrate(menu);
   }
 
