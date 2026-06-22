@@ -1,6 +1,0 @@
-# Force the cached/shared sidebar path even on this relatively small site, so
-# the client-side active-state code in assets/js/csr-nav.js is exercised on both
-# the cached inline nav (docs landing) and the injected fragment (inner pages).
-# Use 1 (not 0): Hugo's `default` treats 0 as unset, so 0 wouldn't force caching.
-ui:
-  sidebar_cache_limit: 1
