@@ -1,9 +1,14 @@
 {{/* Resolves the sidebar root and builds the args dict consumed by
-sidebar-tree.html. Shared by sidebar.html (inline nav) and the navfragment
-output format (standalone fragment), so the root-resolution logic lives in one
-place. Returns a dict: context, cacheSidebar, sidebarRoot, sidebarRootID. */ -}}
+sidebar-tree.html, so the root-resolution logic lives in one place. Returns a
+dict: context, cacheSidebar, sidebarRoot, sidebarRootID, navRoot. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}
+
+{{/* CSR mode shares one nav across the section, so force the neutral cached
+shape (no per-page active state baked in); the client applies it after fetch. */ -}}
+{{ if eq (lower (.Param "td.lean_render")) "csr" -}}
+  {{ $cacheSidebar = true -}}
+{{ end -}}
 
 {{/* Determine sidebar root and ID (if enabled) */ -}}
 {{ $sidebarRoot := .FirstSection -}}
@@ -52,4 +57,5 @@ place. Returns a dict: context, cacheSidebar, sidebarRoot, sidebarRootID. */ -}}
     "cacheSidebar" $cacheSidebar
     "sidebarRoot" $sidebarRoot
     "sidebarRootID" $sidebarRootID
+    "navRoot" $navRoot
 -}}

@@ -13,10 +13,6 @@ outputFormats:
     isPlainText: true
     mediaType: text/plain
     notAlternative: true
-  navfragment:
-    baseName: _nav
-    mediaType: text/html
-    notAlternative: true
   print:
     baseName: index
     # FIXME: leave isHTML unset (i.e. false) until we get a Hugo fix for

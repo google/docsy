@@ -17,11 +17,12 @@
   {{ partial "sidebar-tree.html" $args -}}
 {{ end -}}
 {{ else -}}
-  {{/* Lean render dropped the inline nav on this page. If the site opted the
-  sidebar root into the navfragment output format, leave a placeholder for the
-  client to fetch + inject; otherwise emit nothing (unchanged lean behavior). */ -}}
-  {{ $args := partial "sidebar-args.html" . -}}
-  {{ with $args.sidebarRoot.OutputFormats.Get "navfragment" -}}
-    <div class="td-sidebar-csr-placeholder d-none" data-nav-src="{{ .RelPermalink }}"></div>
+  {{/* Lean render dropped the inline nav on this page. In CSR mode, leave a
+  placeholder pointing at the kept docs landing (the "donor"); the client fetches
+  it, extracts the left-nav, and injects it (assets/js/csr-nav.js). In plain
+  "remove" mode, emit nothing — lean behavior is unchanged. */ -}}
+  {{ if eq (lower (.Param "td.lean_render")) "csr" -}}
+    {{ $args := partial "sidebar-args.html" . -}}
+    <div class="td-sidebar-csr-placeholder" data-nav-donor="{{ $args.navRoot.RelPermalink }}"></div>
   {{ end -}}
 {{ end -}}
