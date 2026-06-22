@@ -1,0 +1,10 @@
+# CSR experiment environment (TD_BUILD_CTX=csr).
+#
+# Opts the docs section into the theme's `navfragment` output format so a lean
+# build emits each section's left-nav as a standalone fragment (e.g.
+# /docs/_nav.html) that assets/js/csr-nav.js fetches and injects client-side.
+#
+# Build the lean variant with:
+#   HUGOxPARAMSxTDxLEAN_RENDER=remove TD_BUILD_CTX=csr npm run -C docsy.dev build
+outputs:
+  section: [HTML, RSS, print, markdown, navfragment]
