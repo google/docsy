@@ -50,3 +50,38 @@ test('navfragment emits a chrome-free docs left-nav fragment', () => {
   assert.ok(!chrome.navbar(frag), 'navbar absent from the fragment');
   assert.ok(!chrome.footer(frag), 'footer absent from the fragment');
 });
+
+test('lean inner page carries a fragment placeholder instead of the inline nav', () => {
+  const r = buildSite('navfragment-inject', {
+    files,
+    extraConfig: optInNavfragment,
+    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'remove' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+
+  // A lean inner page omits the inline nav and instead carries a placeholder
+  // pointing at the section's fragment, which the client fetches and injects.
+  const deep = r.publicFile('docs/page-a/index.html');
+  assert.match(
+    deep,
+    /data-nav-src="\/docs\/_nav\.html"/,
+    'deep page carries a nav placeholder targeting the section fragment',
+  );
+  assert.ok(
+    !/id="td-section-nav"/.test(deep),
+    'inline section nav absent on the lean deep page',
+  );
+
+  // The docs landing keeps its inline nav as the server-rendered exemplar (and
+  // the no-JS reachable copy), so it needs no placeholder.
+  const landing = r.publicFile('docs/index.html');
+  assert.match(
+    landing,
+    /id="td-section-nav"/,
+    'docs landing keeps its inline nav',
+  );
+  assert.ok(
+    !/data-nav-src=/.test(landing),
+    'docs landing carries no placeholder',
+  );
+});
