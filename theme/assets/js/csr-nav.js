@@ -22,6 +22,23 @@
 
   const normalizePath = (path) => (path.endsWith('/') ? path : path + '/');
 
+  // The page's logical path, used to key all active-state restores. It defaults
+  // to window.location, but on print (/_print/…) and paginator (…/page/N/) pages
+  // the request URL isn't the page's canonical one; the server bakes the logical
+  // URL as data-canonical-path on the navbar placeholder (see navbar.html), read
+  // once in init() before the placeholders are swapped out.
+  let canonicalPath = null;
+
+  function currentPath() {
+    return canonicalPath || normalizePath(window.location.pathname);
+  }
+
+  function readCanonicalPath() {
+    const el = document.querySelector('[data-canonical-path]');
+    const raw = el && el.getAttribute('data-canonical-path');
+    return raw ? normalizePath(raw) : null;
+  }
+
   // Apply the active-page classes to a freshly injected or shared nav. The
   // current page is matched by link href rather than a server-baked id, so one
   // shared fragment can serve every page under the same sidebar root.
@@ -29,23 +46,48 @@
     const nav = menu.querySelector('#' + NAV_ID);
     if (!nav) return;
 
-    const here = normalizePath(window.location.pathname);
+    const here = currentPath();
+
+    // Prefer an exact nav entry for this page; otherwise fall back to the
+    // nearest ancestor entry (longest matching prefix). An out-of-tree page —
+    // one absent from its own nav, e.g. via toc_hide — has no exact entry, but a
+    // full build still marks its ancestor sections as the active path (sidebar
+    // tree: active-path when the page IsDescendant of a section), so anchor on
+    // the ancestor to reproduce that trail.
     let activeLink = null;
+    let ancestorLink = null;
+    let ancestorLen = -1;
     for (const link of nav.querySelectorAll('a[href]')) {
-      if (normalizePath(new URL(link.href).pathname) === here) {
+      let path;
+      try {
+        path = normalizePath(new URL(link.href).pathname);
+      } catch (e) {
+        continue;
+      }
+      if (path === here) {
         activeLink = link;
         break;
       }
+      if (here.startsWith(path) && path.length > ancestorLen) {
+        ancestorLink = link;
+        ancestorLen = path.length;
+      }
     }
-    if (!activeLink) return;
 
-    activeLink.classList.add('active');
-    const label = activeLink.querySelector('span');
-    if (label) label.classList.add('td-sidebar-nav-active-item');
+    const anchorLink = activeLink || ancestorLink;
+    if (!anchorLink) return;
 
-    const currentItem = activeLink.closest('li');
+    // Only an exact match is the "active" link; an ancestor anchor gets the
+    // active-path trail but no active link/item, matching a full build.
+    if (activeLink) {
+      activeLink.classList.add('active');
+      const label = activeLink.querySelector('span');
+      if (label) label.classList.add('td-sidebar-nav-active-item');
+    }
 
-    // Mark the current item and all of its ancestors as the active path.
+    const currentItem = anchorLink.closest('li');
+
+    // Mark the anchor item and all of its ancestors as the active path.
     for (
       let li = currentItem;
       li;
@@ -68,8 +110,9 @@
 
     // In a non-foldable nav, also open the current item's siblings and direct
     // children; a foldable nav leaves these to the checkboxes, matching a full
-    // build (which only checks the active path).
-    if (currentItem && !foldable) {
+    // build (which only checks the active path). Exact-match pages only — an
+    // ancestor anchor isn't the current item, so it gets no extra expansion.
+    if (activeLink && currentItem && !foldable) {
       // Expand the current item's siblings and its direct children.
       for (const sibling of currentItem.parentElement.children) {
         if (sibling !== currentItem && sibling.tagName === 'LI') {
@@ -211,7 +254,7 @@
   // nav-link whose target is the closest ancestor of the current path (longest
   // prefix), matching a full build's IsMenuCurrent/IsDescendant logic.
   function setNavbarActive(navbar) {
-    const here = normalizePath(window.location.pathname);
+    const here = currentPath();
     let best = null;
     let bestLen = -1;
     for (const link of navbar.querySelectorAll('.navbar-nav .nav-link')) {
@@ -243,7 +286,7 @@
   // full build's `base + thisPagePath`. Links without the page path (pagelinks
   // off) don't end with `donorPath`, so they're left untouched.
   function restoreVersionLinks(navbar, donorPath) {
-    const here = normalizePath(window.location.pathname);
+    const here = currentPath();
     for (const link of navbar.querySelectorAll(
       '.td-version-menu .dropdown-menu a[href]',
     )) {
@@ -261,7 +304,7 @@
   // case); otherwise a best-effort functional restore — see the caveat in
   // projects/docsy/tasks/csr/client-render.md (thoughtry).
   function restoreLangLinks(navbar, donorPath) {
-    const here = normalizePath(window.location.pathname);
+    const here = currentPath();
     if (!here.startsWith(donorPath)) return;
     const rel = here.slice(donorPath.length);
     for (const link of navbar.querySelectorAll(
@@ -325,6 +368,7 @@
   }
 
   function init() {
+    canonicalPath = readCanonicalPath();
     restoreChrome();
     const placeholder = document.querySelector(
       '.td-sidebar-csr-placeholder[data-nav-donor]',
