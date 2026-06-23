@@ -2631,6 +2631,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-04-26T12:08:48.495821-04:00"
   },
+  "https://main--docsydocs.netlify.app/docs/content/csr/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-23T17:30:18.103279-04:00"
+  },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:46.058195-05:00"
@@ -3234,6 +3238,10 @@
   "https://www.docsy.dev/docs/content/agent-support/": {
     "StatusCode": 206,
     "LastSeen": "2026-04-26T12:08:49.01174-04:00"
+  },
+  "https://www.docsy.dev/docs/content/csr/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-23T17:30:18.401373-04:00"
   },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,
