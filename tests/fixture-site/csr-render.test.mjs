@@ -1,3 +1,4 @@
+// Cases: CSR-01 (csr_enable param), CSR-02 (kept chrome). See the CSR case registry.
 // Tests for the params.td.csr_enable gate (_partials/csr-render.html), which
 // drops repeated chrome so a link checker reaches each link once. See the
 // Client-side chrome rendering guide:

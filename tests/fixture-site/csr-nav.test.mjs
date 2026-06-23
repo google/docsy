@@ -1,3 +1,4 @@
+// Cases: CSR-05 (side-nav restore), CSR-06 (active state), CSR-08 (cached nav). See the CSR case registry.
 // Equivalence tests for client-side nav hydration (assets/js/csr-nav.js).
 //
 // In CSR mode a lean build drops the repeated left-nav and either (a) leaves a

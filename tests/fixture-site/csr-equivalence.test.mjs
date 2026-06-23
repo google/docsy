@@ -1,3 +1,4 @@
+// Cases: CSR-03 (navbar), CSR-04 (footer), CSR-05 (side-nav), CSR-06 (active state), CSR-09 (version selector). See the CSR case registry.
 // Full-page equivalence: a CSR (lean) build, inlined by the real shipped client,
 // vs a full build of the same fixture. Unlike csr-nav.test.mjs (which checks the
 // functional nav facets: links, active, active-path), this asserts the stronger
