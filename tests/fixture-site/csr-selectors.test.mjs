@@ -1,0 +1,138 @@
+// Client-side restore of the navbar's per-page selectors (version + language).
+//
+// In CSR mode the navbar is dropped on inner pages and restored from the home
+// donor, whose selector links point at the home page. The client re-derives the
+// per-page links the donor can't supply:
+//   - version links exactly — each is a version's base URL plus the page path,
+//     so stripping the donor's path and appending this page's reproduces them;
+//   - language links by prefix-swap — each points at the same page in another
+//     locale, so swapping the current locale's home prefix for the target's
+//     reproduces them when translations share slugs (the common case).
+//
+// Each test builds the same fixture full and CSR, runs the real shipped client
+// over the CSR inner page, and compares the restored selector links to the full
+// build's.
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { JSDOM } from 'jsdom';
+import { buildSite } from './lib/build-site.mjs';
+import { inlineCsr, normalize } from '../site-equivalence/lib/equivalence.mjs';
+
+const BASE = 'https://example.org';
+
+// Run the client over a CSR page, resolving every donor (chrome and sidebar)
+// from the CSR build's own output.
+async function inlinePage(csr, page, url) {
+  return normalize(
+    await inlineCsr(csr.publicFile(page), {
+      url,
+      resolveDonor: (pathname) => {
+        const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
+        const file = rel ? `${rel}/index.html` : 'index.html';
+        try {
+          return csr.publicFile(file);
+        } catch {
+          return null;
+        }
+      },
+    }),
+  );
+}
+
+// The raw href attributes of the links inside a selector's dropdown menu.
+function selectorLinks(html, menuSelector) {
+  const { document } = new JSDOM(html).window;
+  return [...document.querySelectorAll(`${menuSelector} a[href]`)]
+    .map((a) => a.getAttribute('href'))
+    .sort();
+}
+
+const VERSION_MENU = '.td-version-menu .dropdown-menu';
+const LANG_MENU = '.td-lang-menu .dropdown-menu';
+
+test('CSR restores per-page version-selector links to match the full build', async () => {
+  const files = {
+    'content/_index.md': '---\ntitle: Home\n---\nHome\n',
+    'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+    'content/docs/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
+    'content/docs/guide/intro.md': '---\ntitle: Intro\n---\nIntro\n',
+  };
+  const extraConfig = `params:
+  version: v2.0
+  version_menu: Releases
+  version_menu_pagelinks: true
+  versions:
+    - version: v2.0
+      url: https://example.org
+    - version: v1.0
+      url: https://v1.example.org
+`;
+  const title = 'Docsy selector fixture';
+  const full = buildSite('sel-version-full', { files, extraConfig, title });
+  const csr = buildSite('sel-version-csr', {
+    files,
+    extraConfig,
+    title,
+    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  });
+  assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
+  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+
+  const page = 'docs/guide/intro/index.html';
+  const url = `${BASE}/docs/guide/intro/`;
+
+  const want = selectorLinks(normalize(full.publicFile(page)), VERSION_MENU);
+  // Precondition: the full build's version links really are per-page.
+  assert.ok(
+    want.some((h) => h.includes('/docs/guide/intro/')),
+    'full version links are per-page',
+  );
+
+  const got = selectorLinks(await inlinePage(csr, page, url), VERSION_MENU);
+  assert.ok(got.length > 0, 'restored version menu carries links');
+  assert.deepEqual(got, want, 'restored version links match the full build');
+});
+
+test('CSR restores per-page language-selector links by prefix-swap', async () => {
+  const files = {
+    'content/_index.md': '---\ntitle: Home\n---\nHome\n',
+    'content/_index.ja.md': '---\ntitle: ホーム\n---\nHome\n',
+    'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+    'content/docs/_index.ja.md':
+      '---\ntitle: ドキュメント\n---\nDocs landing\n',
+    'content/docs/page-a.md': '---\ntitle: Page A\n---\nA\n',
+    'content/docs/page-a.ja.md': '---\ntitle: ページA\n---\nA\n',
+  };
+  const extraConfig = `defaultContentLanguage: en
+languages:
+  en:
+    weight: 1
+  ja:
+    weight: 2
+`;
+  const title = 'Docsy selector fixture';
+  const full = buildSite('sel-lang-full', { files, extraConfig, title });
+  const csr = buildSite('sel-lang-csr', {
+    files,
+    extraConfig,
+    title,
+    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  });
+  assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
+  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+
+  const page = 'docs/page-a/index.html';
+  const url = `${BASE}/docs/page-a/`;
+
+  const want = selectorLinks(normalize(full.publicFile(page)), LANG_MENU);
+  // Precondition: the full build's lang link targets this page's translation.
+  assert.ok(
+    want.includes('/ja/docs/page-a/'),
+    "full lang link targets this page's translation",
+  );
+
+  const got = selectorLinks(await inlinePage(csr, page, url), LANG_MENU);
+  assert.ok(got.length > 0, 'restored language menu carries links');
+  assert.deepEqual(got, want, 'restored language links match the full build');
+});

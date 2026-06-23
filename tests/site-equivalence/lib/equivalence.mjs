@@ -63,13 +63,14 @@ export function sortClassTokens(root) {
   }
 }
 
-// The navbar's version/language selectors carry per-page links (each version's
-// or translation's counterpart of the current page), which CSR can't restore
-// from the home donor and ships as a placeholder instead. Blank both sides'
-// selector menus so a comparison ignores them. See "Feature interactions" in
+// The navbar's language selector carries per-page links (each translation's
+// counterpart of the current page). The client restores them by prefix-swapping
+// the donor's home links, which is exact only when translations share slugs and
+// all exist, so a structural comparison neutralizes both sides' language menu.
+// The version selector, by contrast, the client restores exactly, so it is
+// compared. See "Feature interactions" in
 // projects/docsy/tasks/csr/client-render.md (thoughtry).
-const SELECTOR_MENUS =
-  '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
+const SELECTOR_MENUS = '.td-lang-menu .dropdown-menu';
 export function neutralizeSelectorMenus(root) {
   for (const menu of root.querySelectorAll(SELECTOR_MENUS)) {
     menu.replaceChildren();

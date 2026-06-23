@@ -215,22 +215,49 @@
     if (best) best.classList.add('active');
   }
 
-  // The navbar's version/language selectors carry per-page links (each version's
-  // or translation's counterpart of the current page). Restored from the home
-  // donor they'd point at home, so — for now — replace their menus with a
-  // placeholder rather than ship wrong links. Temporary: a real fix re-derives
-  // these client-side; see "Feature interactions" in client-render (thoughtry).
-  const SELECTOR_MENUS =
-    '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
-  function placeholderSelectorMenus(navbar) {
-    for (const menu of navbar.querySelectorAll(SELECTOR_MENUS)) {
-      const li = document.createElement('li');
-      const span = document.createElement('span');
-      span.className = 'dropdown-item disabled td-csr-selector-placeholder';
-      span.textContent = '…';
-      li.appendChild(span);
-      menu.replaceChildren(li);
+  // The navbar's version/language selectors carry per-page links that the home
+  // donor renders for the home page, so re-derive each for the current page.
+  // `donorPath` is the donor's path — the current locale's home — passed down
+  // from restoreChrome.
+
+  // Version links are exact: each is a version's base URL plus the page path
+  // (when `version_menu_pagelinks` is on), so the donor's link is
+  // `base + donorPath`. Strip that path and append this page's to reproduce the
+  // full build's `base + thisPagePath`. Links without the page path (pagelinks
+  // off) don't end with `donorPath`, so they're left untouched.
+  function restoreVersionLinks(navbar, donorPath) {
+    const here = normalizePath(window.location.pathname);
+    for (const link of navbar.querySelectorAll(
+      '.td-version-menu .dropdown-menu a[href]',
+    )) {
+      const href = link.getAttribute('href');
+      if (!href.endsWith(donorPath)) continue;
+      const base = href.slice(0, href.length - donorPath.length);
+      link.setAttribute('href', base + here);
     }
+  }
+
+  // Language links point at the current page's counterpart in each locale; the
+  // donor renders the home's, i.e. each locale's home. Swap the current locale's
+  // home prefix (`donorPath`) for the target locale's to reproduce the full
+  // build's link. Exact when translations share slugs and all exist (the common
+  // case); otherwise a best-effort functional restore — see the caveat in
+  // projects/docsy/tasks/csr/client-render.md (thoughtry).
+  function restoreLangLinks(navbar, donorPath) {
+    const here = normalizePath(window.location.pathname);
+    if (!here.startsWith(donorPath)) return;
+    const rel = here.slice(donorPath.length);
+    for (const link of navbar.querySelectorAll(
+      '.td-lang-menu .dropdown-menu a[href]',
+    )) {
+      const langHome = normalizePath(new URL(link.href).pathname);
+      link.setAttribute('href', langHome + rel);
+    }
+  }
+
+  function restoreSelectorLinks(navbar, donorPath) {
+    restoreVersionLinks(navbar, donorPath);
+    restoreLangLinks(navbar, donorPath);
   }
 
   // Fetch a donor page (cached across the session) and hand its parsed Document
@@ -260,6 +287,9 @@
     );
     if (!placeholders.length) return;
     const donor = placeholders[0].getAttribute('data-chrome-donor');
+    const donorPath = normalizePath(
+      new URL(donor, window.location.href).pathname,
+    );
     withDonorDoc(donor, (donorDoc) => {
       for (const placeholder of placeholders) {
         const region = placeholder.getAttribute('data-chrome-region');
@@ -270,7 +300,7 @@
         placeholder.replaceWith(node);
         if (region === 'navbar') {
           setNavbarActive(node);
-          placeholderSelectorMenus(node);
+          restoreSelectorLinks(node, donorPath);
         }
       }
     });

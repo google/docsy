@@ -1,9 +1,10 @@
 // Full-page equivalence: a CSR (lean) build, inlined by the real shipped client,
 // vs a full build of the same fixture. Unlike csr-nav.test.mjs (which checks the
 // functional nav facets: links, active, active-path), this asserts the stronger
-// *structural* bar — the inlined left-nav, navbar, footer, and whole page match
-// the full build modulo class-token order — and pins the one deliberate gap: the
-// per-page navbar selectors (version/language), which CSR ships as a placeholder.
+// *structural* bar — the inlined left-nav, navbar (incl. the per-page version
+// selector the client re-derives exactly), footer, and whole page match the full
+// build modulo class-token order. The language selector, restored only by
+// best-effort prefix-swap, is neutralized on both sides (see equivalence.mjs).
 //
 // The fixture runs foldable (the Docsy default for real docs sites such as
 // docsy.dev and otel.io), so the nav reveals via checked checkboxes.
@@ -139,13 +140,13 @@ test('CSR restores the navbar to match the full build', async () => {
   assert.equal(got, want, 'restored navbar matches the full build');
 });
 
-test('CSR ships a placeholder for per-page navbar selectors', async () => {
+test('CSR restores the per-page version selector to match the full build', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
   // Precondition: the full build's version selector links are per-page (each
-  // version's counterpart of this page), so they can't be restored from the home
-  // donor without re-deriving them.
+  // version's counterpart of this page), so restoring them from the home donor
+  // genuinely exercises the client's re-derivation.
   const fullNav = regionOf(normalize(full.publicFile(page)), '.td-navbar');
   assert.match(
     fullNav,
@@ -153,19 +154,17 @@ test('CSR ships a placeholder for per-page navbar selectors', async () => {
     'full version selector links are per-page',
   );
 
-  // So CSR replaces those menus with a marked placeholder rather than ship the
-  // donor's home-pointing links (a documented, temporary feature interaction).
-  const csrNav = regionOf(await inlinePage(page, url), '.td-navbar');
-  assert.match(
-    csrNav,
-    /td-csr-selector-placeholder/,
-    'CSR selector menu is a placeholder',
+  // The client strips the donor's (home) path and appends this page's, so the
+  // restored version menu matches the full build exactly.
+  const opts = { canonical: true };
+  const got = regionOf(await inlinePage(page, url), '.td-version-menu', opts);
+  const want = regionOf(
+    normalize(full.publicFile(page)),
+    '.td-version-menu',
+    opts,
   );
-  assert.doesNotMatch(
-    csrNav,
-    /v1\.example\.org/,
-    'CSR drops the donor version-selector links',
-  );
+  assert.ok(got.length > 0, 'inlined page carries a version selector');
+  assert.equal(got, want, 'restored version selector matches the full build');
 });
 
 test('CSR page matches the full build (whole page)', async () => {
