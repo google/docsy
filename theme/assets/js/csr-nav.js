@@ -189,6 +189,23 @@
   // once, extract each region, and swap it in, so the page matches a full render.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
+  // Re-apply this page's navbar cover/theme traits after the swap. The cover
+  // (translucent) styling and dark theme are per-page, but the restored navbar
+  // is the home donor's, which may carry different traits. The placeholder's
+  // server-baked hints (data-navbar-cover, data-navbar-theme) carry this page's,
+  // so the result matches a full build (see _partials/navbar.html).
+  function applyNavbarCoverTheme(navbar, placeholder) {
+    const cover = placeholder.getAttribute('data-navbar-cover') === 'true';
+    navbar.classList.toggle('td-navbar-cover', cover);
+    navbar.classList.toggle('td-navbar-transparent', cover);
+    const theme = placeholder.getAttribute('data-navbar-theme');
+    if (theme) {
+      navbar.setAttribute('data-bs-theme', theme);
+    } else {
+      navbar.removeAttribute('data-bs-theme');
+    }
+  }
+
   // Re-derive the navbar's active link for the current page. The home donor's
   // navbar carries the home page's active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
@@ -299,6 +316,7 @@
         const node = document.importNode(source, true);
         placeholder.replaceWith(node);
         if (region === 'navbar') {
+          applyNavbarCoverTheme(node, placeholder);
           setNavbarActive(node);
           restoreSelectorLinks(node, donorPath);
         }
