@@ -2,6 +2,7 @@
 title: Deployment and previews
 linkTitle: Deployment
 weight: 7
+sidebar_root_for: self
 description: Deploying your Docsy site.
 ---
 
