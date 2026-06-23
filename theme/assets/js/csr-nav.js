@@ -175,6 +175,16 @@
     rootLink.setAttribute('href', new URL('..', rootUrl).pathname);
     rootLink.classList.add('tree-root');
 
+    // Match a full scoped build's root markers when sidebar-root scoping is on
+    // (the donor nav carries data-sidebar-root-id iff sidebar_root_enabled):
+    // advertise the subtree as the nav's root, and flag the root link's label as
+    // the "up" icon (see sidebar-tree.html: data-sidebar-root-id, up-icon span).
+    if (nav.hasAttribute('data-sidebar-root-id')) {
+      nav.setAttribute('data-sidebar-root-id', rootPath);
+      const rootSpan = rootLink.querySelector('span');
+      if (rootSpan) rootSpan.classList.add('td-sidebar-root-up-icon');
+    }
+
     // Promote the subtree to be the nav's sole top-level section.
     const topUl = nav.querySelector('ul');
     if (topUl) {

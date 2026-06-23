@@ -1,3 +1,4 @@
+// Cases: CSR-12 (scoped re-root), CSR-13 (scoped root markers). See the CSR case registry.
 // Equivalence tests for CSR re-rooting on sidebar_root_for ("scoped") pages.
 //
 // Kept separate from csr-nav.test.mjs because this exercises one self-contained
@@ -147,5 +148,39 @@ test('CSR re-roots the donor tree to match a full self-root build', async () => 
     got.activePath,
     want.activePath,
     'same active-path trail as the full build',
+  );
+});
+
+test('CSR re-root sets the scoped root-id and up-icon, matching the full build', async () => {
+  const page = 'docs/guide/intro/index.html';
+  const url = `${BASE}/docs/guide/intro/`;
+
+  const donorHtml = lean.publicFile('docs/index.html');
+  const gotNav = (
+    await hydrate(lean.publicFile(page), url, donorHtml)
+  ).querySelector('#td-section-nav');
+  const wantNav = docOf(full.publicFile(page), url).querySelector(
+    '#td-section-nav',
+  );
+
+  // The scoped nav advertises its subtree as the root, not the donor's root.
+  assert.equal(
+    wantNav.getAttribute('data-sidebar-root-id'),
+    '/docs/guide/',
+    'full scoped build roots the nav at the subtree',
+  );
+  assert.equal(
+    gotNav.getAttribute('data-sidebar-root-id'),
+    wantNav.getAttribute('data-sidebar-root-id'),
+    'CSR re-root advertises the same subtree root id',
+  );
+
+  // The re-rooted tree root carries the "up" icon, as in a full scoped build.
+  const hasUpIcon = (nav) =>
+    !!nav.querySelector('.tree-root .td-sidebar-root-up-icon');
+  assert.ok(hasUpIcon(wantNav), 'full scoped build renders the up-icon');
+  assert.ok(
+    hasUpIcon(gotNav),
+    'CSR re-root renders the up-icon on the tree root',
   );
 });
