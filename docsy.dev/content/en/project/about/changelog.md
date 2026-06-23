@@ -165,12 +165,14 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [#2659]: https://github.com/google/docsy/issues/2659
 [favicons]: /docs/content/iconsimages/#add-your-favicons
 [hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
-[link-checking]: /docs/best-practices/link-checking/
+[csr]: /docs/content/csr/
 
 [**Experimental**](#experimental):
 
-- **Lean render**: you can now omit repeated chrome (navbar, footer, left-nav)
-  to speed up link checking. See [Link checking][link-checking] ([#2659][]).
+- **Client-side chrome rendering (CSR)**: an experimental build mode that omits
+  the repeated chrome (navbar, footer, left-nav) from the build output and
+  restores it in the browser, so one build serves both readers and link
+  checkers. See [Client-side chrome rendering][csr] ([#2659][]).
 
 [0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
 [0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0
