@@ -68,12 +68,27 @@ export function sortClassTokens(root) {
 // the donor's home links, which is exact only when translations share slugs and
 // all exist, so a structural comparison neutralizes both sides' language menu.
 // The version selector, by contrast, the client restores exactly, so it is
-// compared. See "Feature interactions" in
-// projects/docsy/tasks/csr/client-render.md (thoughtry).
+// compared.
 const SELECTOR_MENUS = '.td-lang-menu .dropdown-menu';
 export function neutralizeSelectorMenus(root) {
   for (const menu of root.querySelectorAll(SELECTOR_MENUS)) {
     menu.replaceChildren();
+  }
+}
+
+// The td/site-build-info shortcode bakes Hugo's build time into a `new Date("…")`
+// literal that drives the #local-time widget, so two builds run seconds apart
+// differ on that line. That's non-deterministic build output unrelated to CSR, so
+// replace the baked timestamp with a constant to neutralize it. Scoped to scripts
+// that drive #local-time, leaving genuine date content elsewhere untouched.
+const BUILD_TIME_CONST = '1970-01-01T00:00:00Z';
+export function neutralizeBuildTimestamps(root) {
+  for (const script of root.querySelectorAll('script')) {
+    if (!script.textContent.includes('local-time')) continue;
+    script.textContent = script.textContent.replace(
+      /new Date\("[^"]*"\)/g,
+      `new Date("${BUILD_TIME_CONST}")`,
+    );
   }
 }
 

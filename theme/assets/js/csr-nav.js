@@ -311,8 +311,7 @@
   // donor renders the home's, i.e. each locale's home. Swap the current locale's
   // home prefix (`donorPath`) for the target locale's to reproduce the full
   // build's link. Exact when translations share slugs and all exist (the common
-  // case); otherwise a best-effort functional restore — see the caveat in
-  // projects/docsy/tasks/csr/client-render.md (thoughtry).
+  // case); otherwise a best-effort functional restore.
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;

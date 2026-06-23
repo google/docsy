@@ -39,6 +39,7 @@ import {
   normalize,
   sortClassTokens,
   neutralizeSelectorMenus,
+  neutralizeBuildTimestamps,
 } from './lib/equivalence.mjs';
 import { JSDOM } from 'jsdom';
 
@@ -119,12 +120,14 @@ function hasCsrWork(html) {
   );
 }
 
-// Optional canonicalization: sort class tokens and neutralize the per-page
-// language selector (its prefix-swap restore is best-effort), matching the
-// structural-equivalence bar the fixture tests use.
+// Optional canonicalization: sort class tokens, neutralize the per-page
+// language selector (its prefix-swap restore is best-effort) and the build-time
+// timestamp (non-deterministic between builds), matching the structural-
+// equivalence bar the fixture tests use.
 function canonicalize(html) {
   const dom = new JSDOM(html);
   const { document } = dom.window;
+  neutralizeBuildTimestamps(document.body);
   neutralizeSelectorMenus(document.body);
   sortClassTokens(document.body);
   return dom.serialize();
