@@ -8,8 +8,8 @@
 //
 // Usage (run from the worktree root; scratch output lands under ./tmp so it's
 // easy to inspect afterwards):
-//   npm run -C docsy.dev build      -- -d "$PWD/tmp/equiv-full"
-//   npm run -C docsy.dev csr build  -- -d "$PWD/tmp/equiv-csr"
+//   ( cd docsy.dev && npm run build     -- -d "$PWD/../tmp/equiv-full" )
+//   ( cd docsy.dev && npm run csr build -- -d "$PWD/../tmp/equiv-csr"  )
 //   node tests/site-equivalence/inline-and-diff.mjs \
 //     --full tmp/equiv-full --csr tmp/equiv-csr --pages docs/a,docs/b
 //
@@ -22,12 +22,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { JSDOM } from 'jsdom';
-
-const csrNavSrc = readFileSync(
-  new URL('../../theme/assets/js/csr-nav.js', import.meta.url),
-  'utf8',
-);
+import { inlineCsr, normalize, navRegion } from './lib/equivalence.mjs';
 
 function parseArgs(argv) {
   const args = {};
@@ -59,63 +54,11 @@ const NAV_REGION = 'td-sidebar-menu';
 const fileFor = (dir, p) => join(dir, p, 'index.html');
 const urlFor = (p) => `${base}/${p}/`;
 
-// Normalize HTML by parsing and re-serializing through jsdom: identical
-// formatting on both sides, so only semantic differences remain.
-const normalize = (html) => new JSDOM(html).serialize();
-
-// Run the real shipped csr-nav.js over a CSR page in jsdom, with fetch resolving
-// any donor request to the matching file under csrDir. Resolves once the nav has
-// been revealed (or after a bounded wait if there is nothing to do).
-async function inlineCsr(html, pageUrl) {
-  const dom = new JSDOM(html, { url: pageUrl, runScripts: 'outside-only' });
-  const { window } = dom;
-
-  window.fetch = async (resource) => {
-    const path = new URL(resource, pageUrl).pathname; // e.g. /docs/
-    const file = join(csrDir, path, 'index.html');
-    if (!existsSync(file)) return { ok: false, status: 404 };
-    const body = readFileSync(file, 'utf8');
-    return { ok: true, status: 200, text: async () => body };
-  };
-
-  window.eval(csrNavSrc);
-
-  // Wait until the menu is present and revealed (d-none removed), or give up.
-  for (let i = 0; i < 100; i++) {
-    const menu = window.document.getElementById(NAV_REGION);
-    if (menu && !menu.classList.contains('d-none')) break;
-    await new Promise((r) => setTimeout(r, 5));
-  }
-  return dom.serialize();
-}
-
-function regionOf(html, id) {
-  const el = new JSDOM(html).window.document.getElementById(id);
-  return el ? el.outerHTML + '\n' : '';
-}
-
-// Canonicalize away differences that are equivalent-by-construction: class-token
-// order, the transient expansion signals (server uses `checked`; the client uses
-// a `show` class plus the checkbox .checked property, invisible to a static
-// serializer), and the reveal toggle (`d-none`). What remains is structure,
-// links, and the active/active-path state.
-const TRANSIENT_CLASSES = new Set(['show', 'd-none']);
-function canonicalRegion(html, id) {
-  const { document } = new JSDOM(html).window;
-  const root = document.getElementById(id);
-  if (!root) return '';
-  for (const el of root.querySelectorAll('*')) {
-    if (el.hasAttribute('class')) {
-      const toks = [...el.classList].filter((c) => !TRANSIENT_CLASSES.has(c));
-      if (toks.length) el.setAttribute('class', toks.sort().join(' '));
-      else el.removeAttribute('class');
-    }
-    if (el.tagName === 'INPUT' && el.getAttribute('type') === 'checkbox') {
-      el.removeAttribute('checked');
-    }
-  }
-  return root.outerHTML + '\n';
-}
+// Resolve a donor fetch (e.g. /docs/) to its built file under the CSR dir.
+const resolveDonor = (pathname) => {
+  const file = join(csrDir, pathname, 'index.html');
+  return existsSync(file) ? readFileSync(file, 'utf8') : null;
+};
 
 function gitDiff(aPath, bPath) {
   const res = spawnSync(
@@ -143,7 +86,9 @@ for (const p of pages) {
   const csrHtml = readFileSync(fileFor(csrDir, p), 'utf8');
 
   const normFull = normalize(fullHtml);
-  const normCsr = normalize(await inlineCsr(csrHtml, urlFor(p)));
+  const normCsr = normalize(
+    await inlineCsr(csrHtml, { url: urlFor(p), resolveDonor }),
+  );
 
   const safe = p.replace(/\//g, '__');
   const fFull = join(outDir, `${safe}.full.html`);
@@ -158,8 +103,8 @@ for (const p of pages) {
   // (b) Nav-region diff: is the inlined left-nav exact?
   const navFull = join(outDir, `${safe}.full.nav.html`);
   const navCsr = join(outDir, `${safe}.csr.nav.html`);
-  writeFileSync(navFull, regionOf(normFull, NAV_REGION));
-  writeFileSync(navCsr, regionOf(normCsr, NAV_REGION));
+  writeFileSync(navFull, navRegion(normFull));
+  writeFileSync(navCsr, navRegion(normCsr));
   const navDiff = gitDiffFull(navFull, navCsr);
   console.log(`--- nav region (#${NAV_REGION}), raw ---`);
   if (!navDiff) {
@@ -169,13 +114,14 @@ for (const p of pages) {
     console.log(`  ✗ differs (${lines.length} diff lines)`);
   }
 
-  // (c) Nav-region diff after canonicalizing equivalent-by-construction noise.
+  // (c) Nav-region diff modulo class-token order (the structural-equivalence
+  // bar): after the client matches the server's reveal mechanism this is exact.
   const cNavFull = join(outDir, `${safe}.full.nav.canon.html`);
   const cNavCsr = join(outDir, `${safe}.csr.nav.canon.html`);
-  writeFileSync(cNavFull, canonicalRegion(normFull, NAV_REGION));
-  writeFileSync(cNavCsr, canonicalRegion(normCsr, NAV_REGION));
+  writeFileSync(cNavFull, navRegion(normFull, { canonical: true }));
+  writeFileSync(cNavCsr, navRegion(normCsr, { canonical: true }));
   const cNavDiff = gitDiffFull(cNavFull, cNavCsr);
-  console.log(`--- nav region (#${NAV_REGION}), canonicalized ---`);
+  console.log(`--- nav region (#${NAV_REGION}), modulo class-token order ---`);
   if (!cNavDiff) {
     console.log('  ✓ EXACT MATCH');
   } else {

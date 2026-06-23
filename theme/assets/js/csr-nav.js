@@ -54,14 +54,22 @@
       li.classList.add('active-path');
     }
 
-    // Expand every item on the active path (and tick its foldable checkbox).
+    // Reveal the active path. A foldable nav (the Docsy default for docs sites)
+    // opens purely via checked checkboxes — exactly what a full build bakes — so
+    // we set the same attribute and add nothing else, keeping the result
+    // structurally identical to a full render. A non-foldable nav has no
+    // checkboxes and instead uses the Bootstrap `show` class to open branches.
+    const foldable = !!nav.querySelector('input[type="checkbox"]');
     for (const li of nav.querySelectorAll('li.active-path')) {
-      li.classList.add('show');
-      const checkbox = li.querySelector(':scope > input');
-      if (checkbox) checkbox.checked = true;
+      const checkbox = li.querySelector(':scope > input[type="checkbox"]');
+      if (checkbox) checkbox.setAttribute('checked', '');
+      else if (!foldable) li.classList.add('show');
     }
 
-    if (currentItem) {
+    // In a non-foldable nav, also open the current item's siblings and direct
+    // children; a foldable nav leaves these to the checkboxes, matching a full
+    // build (which only checks the active path).
+    if (currentItem && !foldable) {
       // Expand the current item's siblings and its direct children.
       for (const sibling of currentItem.parentElement.children) {
         if (sibling !== currentItem && sibling.tagName === 'LI') {
