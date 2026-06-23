@@ -6,7 +6,7 @@
 
 */ -}}
 
-{{ if partial "lean-render.html" (dict "page" . "region" "sidebar") -}}
+{{ if partial "csr-render.html" (dict "page" . "region" "sidebar") -}}
 {{ $args := partial "sidebar-args.html" . -}}
 {{ $cacheSidebar := $args.cacheSidebar -}}
 {{ if $cacheSidebar -}}
@@ -17,16 +17,13 @@
   {{ partial "sidebar-tree.html" $args -}}
 {{ end -}}
 {{ else -}}
-  {{/* Lean render dropped the inline nav on this page. In CSR mode, leave a
-  placeholder pointing at the kept docs landing (the "donor"); the client fetches
-  it, extracts the left-nav, and injects it (assets/js/csr-nav.js). A scoped page
+  {{/* CSR dropped the inline nav on this page. Leave a placeholder pointing at
+  the kept docs landing (the "donor"); the client fetches it, extracts the
+  left-nav, and injects it (assets/js/csr-nav.js). A scoped page
   (sidebar_root_for) also names its subtree via data-nav-root so the client can
-  re-root the donor tree. In plain "remove" mode, emit nothing — lean behavior is
-  unchanged. */ -}}
-  {{ if eq (lower (.Param "td.lean_render")) "csr" -}}
-    {{ $args := partial "sidebar-args.html" . -}}
-    <div class="td-sidebar-csr-placeholder" data-nav-donor="{{ $args.navRoot.RelPermalink }}"
-      {{- if $args.scoped }} data-nav-root="{{ $args.sidebarRoot.RelPermalink }}"{{ end -}}
-    ></div>
-  {{ end -}}
+  re-root the donor tree. */ -}}
+  {{ $args := partial "sidebar-args.html" . -}}
+  <div class="td-sidebar-csr-placeholder" data-nav-donor="{{ $args.navRoot.RelPermalink }}"
+    {{- if $args.scoped }} data-nav-root="{{ $args.sidebarRoot.RelPermalink }}"{{ end -}}
+  ></div>
 {{ end -}}

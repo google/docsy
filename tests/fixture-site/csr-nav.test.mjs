@@ -77,7 +77,7 @@ test('CSR-injected lean nav matches the full build on an inner page', async () =
 
   const lean = buildSite('csr-lean', {
     files,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'csr' },
+    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
   });
   assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
 
@@ -127,7 +127,7 @@ test('CSR-hydrated cached inline nav matches the full build on the docs landing'
   // shared nav hidden with no server-baked active state.
   const lean = buildSite('csr-lean-landing', {
     files,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'csr' },
+    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
   });
   assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
 

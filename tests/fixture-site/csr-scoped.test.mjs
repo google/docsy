@@ -76,7 +76,7 @@ const full = buildSite('csr-scoped-full', { files, extraConfig });
 const lean = buildSite('csr-scoped-lean', {
   files,
   extraConfig,
-  env: { HUGOxPARAMSxTDxLEAN_RENDER: 'csr' },
+  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
 });
 
 test('a lean scoped page carries a data-nav-root hint; an unscoped one does not', () => {

@@ -67,7 +67,7 @@ export function sortClassTokens(root) {
 // or translation's counterpart of the current page), which CSR can't restore
 // from the home donor and ships as a placeholder instead. Blank both sides'
 // selector menus so a comparison ignores them. See "Feature interactions" in
-// projects/link-checking/lean-render-csr.md (thoughtry).
+// projects/docsy/tasks/csr/client-render.md (thoughtry).
 const SELECTOR_MENUS =
   '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
 export function neutralizeSelectorMenus(root) {

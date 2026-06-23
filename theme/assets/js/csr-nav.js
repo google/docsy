@@ -219,7 +219,7 @@
   // or translation's counterpart of the current page). Restored from the home
   // donor they'd point at home, so — for now — replace their menus with a
   // placeholder rather than ship wrong links. Temporary: a real fix re-derives
-  // these client-side; see "Feature interactions" in lean-render-csr (thoughtry).
+  // these client-side; see "Feature interactions" in client-render (thoughtry).
   const SELECTOR_MENUS =
     '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
   function placeholderSelectorMenus(navbar) {

@@ -1,4 +1,4 @@
-{{ if partial "lean-render.html" (dict "page" . "region" "navbar") -}}
+{{ if partial "csr-render.html" (dict "page" . "region" "navbar") -}}
 {{ $cover := and
     (.HasShortcode "blocks/cover")
     (not .Site.Params.ui.navbar_translucent_over_cover_disable)
@@ -73,10 +73,9 @@
   </div>
 </div>
 </nav>
-{{- else if eq (lower (.Param "td.lean_render")) "csr" -}}
-  {{- /* Lean render dropped the navbar here. In CSR mode, leave a placeholder
-  naming the home page (the "donor", which keeps the navbar); the client fetches
-  it, swaps the navbar in, and re-derives the active link for this page
-  (assets/js/csr-nav.js). */ -}}
+{{- else -}}
+  {{- /* CSR dropped the navbar here. Leave a placeholder naming the home page
+  (the "donor", which keeps the navbar); the client fetches it, swaps the navbar
+  in, and re-derives the active link for this page (assets/js/csr-nav.js). */ -}}
   <div class="td-csr-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="navbar"></div>
 {{- end -}}

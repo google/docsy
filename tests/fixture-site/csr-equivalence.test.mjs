@@ -56,15 +56,15 @@ menus:
       weight: 20
 `;
 
-// Both builds share a title so they differ only by output dir and lean_render
-// mode; otherwise the navbar brand (`.Site.Title`) would diverge.
+// Both builds share a title so they differ only by output dir and CSR mode;
+// otherwise the navbar brand (`.Site.Title`) would diverge.
 const title = 'Docsy equivalence fixture';
 const full = buildSite('equiv-full', { files, extraConfig, title });
 const csr = buildSite('equiv-csr', {
   files,
   extraConfig,
   title,
-  env: { HUGOxPARAMSxTDxLEAN_RENDER: 'csr' },
+  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
 });
 
 // Inline a CSR page by running the client, with donors resolved from the CSR
