@@ -182,7 +182,102 @@
       });
   }
 
+  // --- Page-invariant chrome (navbar, footer) -----------------------------
+  // Lean render keeps the navbar and footer only on home pages. In CSR mode an
+  // inner page leaves a placeholder per dropped region (see _partials/navbar.html
+  // and _partials/footer.html) naming the home "donor". Here we fetch the donor
+  // once, extract each region, and swap it in, so the page matches a full render.
+  const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
+
+  // Re-derive the navbar's active link for the current page. The home donor's
+  // navbar carries the home page's active state, so clear it and mark the
+  // nav-link whose target is the closest ancestor of the current path (longest
+  // prefix), matching a full build's IsMenuCurrent/IsDescendant logic.
+  function setNavbarActive(navbar) {
+    const here = normalizePath(window.location.pathname);
+    let best = null;
+    let bestLen = -1;
+    for (const link of navbar.querySelectorAll('.navbar-nav .nav-link')) {
+      link.classList.remove('active');
+      const raw = link.getAttribute('href');
+      if (!raw || raw.startsWith('#')) continue; // skip dropdown toggles
+      let path;
+      try {
+        path = normalizePath(new URL(link.href).pathname);
+      } catch (e) {
+        continue;
+      }
+      if ((here === path || here.startsWith(path)) && path.length > bestLen) {
+        best = link;
+        bestLen = path.length;
+      }
+    }
+    if (best) best.classList.add('active');
+  }
+
+  // The navbar's version/language selectors carry per-page links (each version's
+  // or translation's counterpart of the current page). Restored from the home
+  // donor they'd point at home, so — for now — replace their menus with a
+  // placeholder rather than ship wrong links. Temporary: a real fix re-derives
+  // these client-side; see "Feature interactions" in lean-render-csr (thoughtry).
+  const SELECTOR_MENUS =
+    '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
+  function placeholderSelectorMenus(navbar) {
+    for (const menu of navbar.querySelectorAll(SELECTOR_MENUS)) {
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      span.className = 'dropdown-item disabled td-csr-selector-placeholder';
+      span.textContent = '…';
+      li.appendChild(span);
+      menu.replaceChildren(li);
+    }
+  }
+
+  // Fetch a donor page (cached across the session) and hand its parsed Document
+  // to `callback`. Used to restore page-invariant chrome from the home page.
+  function withDonorDoc(url, callback) {
+    const cached = readCache('doc:' + url);
+    if (cached) {
+      callback(new DOMParser().parseFromString(cached, 'text/html'));
+      return;
+    }
+    fetch(url)
+      .then((response) =>
+        response.ok ? response.text() : Promise.reject(response.status),
+      )
+      .then((html) => {
+        writeCache('doc:' + url, html);
+        callback(new DOMParser().parseFromString(html, 'text/html'));
+      })
+      .catch(() => {
+        // Leave the placeholder in place if the donor can't be fetched.
+      });
+  }
+
+  function restoreChrome() {
+    const placeholders = document.querySelectorAll(
+      '.td-csr-chrome-placeholder[data-chrome-donor]',
+    );
+    if (!placeholders.length) return;
+    const donor = placeholders[0].getAttribute('data-chrome-donor');
+    withDonorDoc(donor, (donorDoc) => {
+      for (const placeholder of placeholders) {
+        const region = placeholder.getAttribute('data-chrome-region');
+        const selector = CHROME_REGIONS[region];
+        const source = selector && donorDoc.querySelector(selector);
+        if (!source) continue;
+        const node = document.importNode(source, true);
+        placeholder.replaceWith(node);
+        if (region === 'navbar') {
+          setNavbarActive(node);
+          placeholderSelectorMenus(node);
+        }
+      }
+    });
+  }
+
   function init() {
+    restoreChrome();
     const placeholder = document.querySelector(
       '.td-sidebar-csr-placeholder[data-nav-donor]',
     );

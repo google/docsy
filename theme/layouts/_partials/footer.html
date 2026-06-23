@@ -16,4 +16,10 @@
     </div>
   </div>
 </footer>
+{{- else if eq (lower (.Param "td.lean_render")) "csr" -}}
+  {{- /* Lean render dropped the footer here. In CSR mode, leave a placeholder
+  naming the home page (the "donor", which keeps the footer); the client fetches
+  it and swaps the footer in (assets/js/csr-nav.js). The footer is page-invariant,
+  so no per-page fix-up is needed. */ -}}
+  <div class="td-csr-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="footer"></div>
 {{- end -}}

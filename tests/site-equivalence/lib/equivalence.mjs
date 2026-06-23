@@ -38,7 +38,11 @@ export async function inlineCsr(
 
   for (let i = 0; i < 100; i++) {
     const menu = window.document.getElementById(MENU_ID);
-    if (menu && !menu.classList.contains('d-none')) break;
+    const navReady = menu && !menu.classList.contains('d-none');
+    const chromeReady = !window.document.querySelector(
+      '.td-csr-chrome-placeholder',
+    );
+    if (navReady && chromeReady) break;
     await new Promise((r) => setTimeout(r, 5));
   }
   return dom.serialize();
@@ -59,12 +63,34 @@ export function sortClassTokens(root) {
   }
 }
 
-// The left-nav region's HTML, optionally canonicalized (class-token order).
-export function navRegion(html, { canonical = false } = {}) {
-  const el = new JSDOM(html).window.document.getElementById(MENU_ID);
+// The navbar's version/language selectors carry per-page links (each version's
+// or translation's counterpart of the current page), which CSR can't restore
+// from the home donor and ships as a placeholder instead. Blank both sides'
+// selector menus so a comparison ignores them. See "Feature interactions" in
+// projects/link-checking/lean-render-csr.md (thoughtry).
+const SELECTOR_MENUS =
+  '.td-version-menu .dropdown-menu, .td-lang-menu .dropdown-menu';
+export function neutralizeSelectorMenus(root) {
+  for (const menu of root.querySelectorAll(SELECTOR_MENUS)) {
+    menu.replaceChildren();
+  }
+}
+
+// The named region's HTML, optionally canonicalized (class-token order, with
+// per-page selector menus neutralized).
+export function regionOf(html, selector, { canonical = false } = {}) {
+  const el = new JSDOM(html).window.document.querySelector(selector);
   if (!el) return '';
-  if (canonical) sortClassTokens(el);
+  if (canonical) {
+    neutralizeSelectorMenus(el);
+    sortClassTokens(el);
+  }
   return el.outerHTML + '\n';
+}
+
+// The left-nav region's HTML, optionally canonicalized (class-token order).
+export function navRegion(html, opts) {
+  return regionOf(html, '#' + MENU_ID, opts);
 }
 
 // Elements whose inter-child whitespace is significant and must be preserved.
@@ -94,15 +120,17 @@ function stripIgnorableWhitespace(root, doc) {
   for (const n of blanks) n.data = '';
 }
 
-// A page's body HTML with the named chrome regions removed, class tokens sorted,
-// and ignorable whitespace blanked — for asserting "equal everywhere except this
-// chrome", modulo class-token order and indentation.
+// A page's body HTML with the named chrome regions removed, per-page selector
+// menus neutralized, class tokens sorted, and ignorable whitespace blanked — for
+// asserting "equal everywhere except this chrome", modulo class-token order and
+// indentation.
 export function bodyWithout(html, selectors = []) {
   const { document } = new JSDOM(html).window;
   for (const sel of selectors) {
     document.querySelectorAll(sel).forEach((el) => el.remove());
   }
   const body = document.body;
+  neutralizeSelectorMenus(body);
   stripIgnorableWhitespace(body, document);
   sortClassTokens(body);
   return body.innerHTML;
