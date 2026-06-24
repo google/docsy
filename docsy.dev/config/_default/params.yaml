@@ -9,7 +9,7 @@
 tdVersion:
   latest: &tdLatestVers v0.15.0
   dev: &tdDevVers v0.15.1-dev
-  buildId: &tdBuildId 022-over-main-487050c2
+  buildId: &tdBuildId 023-over-main-3bcd6e7d
 
 version: *tdDevVers
 version_menu: *tdDevVers
