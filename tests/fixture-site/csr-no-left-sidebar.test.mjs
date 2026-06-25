@@ -32,7 +32,7 @@ const csr = buildSite('no-left-sidebar-csr', {
   files,
   extraConfig,
   title,
-  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
 async function inlinePage(page, url) {

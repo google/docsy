@@ -66,7 +66,7 @@ const csr = buildSite('equiv-csr', {
   files,
   extraConfig,
   title,
-  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
 // Inline a CSR page by running the client, with donors resolved from the CSR

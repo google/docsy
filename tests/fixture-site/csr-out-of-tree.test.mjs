@@ -67,7 +67,7 @@ const full = buildSite('csr-oot-full', { files, extraConfig });
 const lean = buildSite('csr-oot-lean', {
   files,
   extraConfig,
-  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
 test('an out-of-tree page is absent from its own donor nav', () => {

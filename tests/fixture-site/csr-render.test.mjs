@@ -1,8 +1,8 @@
-// Cases: CSR-01 (csr_enable param), CSR-02 (kept chrome). See the CSR case registry in tasks/0.16/csr/.
-// Tests for the params.td.csr_enable gate (_partials/csr-render.html), which
+// Cases: CSR-01 (td.chrome param), CSR-02 (kept chrome). See the CSR case registry in tasks/0.16/csr/.
+// Tests for the params.td.chrome gate (_partials/csr-render.html), which
 // drops repeated chrome so a link checker reaches each link once. See the
-// Client-side chrome rendering guide:
-// docsy.dev/content/en/docs/content/csr.md
+// chrome build modes guide:
+// docsy.dev/content/en/docs/deployment/chrome.md
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -51,7 +51,7 @@ test('CSR off (default) keeps all chrome on every page', () => {
 test('CSR on keeps one reference instance of each region', () => {
   const r = buildSite('csr-on', {
     files,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
 
@@ -70,13 +70,12 @@ test('CSR on keeps one reference instance of each region', () => {
   assert.ok(!has.footer(deep), 'footer absent on the deep docs page');
 });
 
-// Env-var overrides arrive as strings ("false"), which Hugo only casts to bool
-// when the key is declared in site config; the gate must still read this as off
-// (a bare truthiness check would wrongly treat the string "false" as true).
-test('csr_enable="false" via the environment keeps all chrome', () => {
-  const r = buildSite('csr-env-false', {
+// Setting the build mode explicitly to `full` (the default) keeps chrome on
+// every page, the same as leaving td.chrome unset.
+test('td.chrome="full" via the environment keeps all chrome', () => {
+  const r = buildSite('csr-env-full', {
     files,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'false' },
+    env: { HUGO_PARAMS_TD_CHROME: 'full' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   for (const rel of ['index.html', 'docs/page-a/index.html']) {
@@ -90,13 +89,12 @@ test('csr_enable="false" via the environment keeps all chrome', () => {
   );
 });
 
-// The gate uses Hugo's case-sensitive `in (slice true "true" 1)` idiom, so the
-// documented value is lowercase `true`; an uppercase "TRUE" isn't recognized and
-// leaves CSR off — a safe degradation, since full chrome still renders.
-test('csr_enable="TRUE" (uppercase) is not recognized; CSR stays off', () => {
-  const r = buildSite('csr-env-upper', {
+// Only the exact value `shared` enables the lean mode; any other value — a typo
+// or wrong case like "SHARED" — safely falls back to full chrome.
+test('td.chrome with an unrecognized value falls back to full chrome', () => {
+  const r = buildSite('csr-env-unknown', {
     files,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'TRUE' },
+    env: { HUGO_PARAMS_TD_CHROME: 'SHARED' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   const landing = r.publicFile('docs/index.html');
@@ -104,12 +102,12 @@ test('csr_enable="TRUE" (uppercase) is not recognized; CSR stays off', () => {
   assert.ok(has.footer(landing), 'footer present on the docs landing');
 });
 
-// The documented config path (params.td.csr_enable) must work too, not just
-// the HUGOx… environment override the other tests use.
-test('CSR can be enabled via site config', () => {
+// The documented config path (params.td.chrome) must work too, not just the
+// HUGO_PARAMS_TD_CHROME environment override the other tests use.
+test('shared mode can be set via site config', () => {
   const r = buildSite('csr-config', {
     files,
-    extraConfig: ['params:', '  td:', '    csr_enable: true', ''].join('\n'),
+    extraConfig: ['params:', '  td:', '    chrome: shared', ''].join('\n'),
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   const landing = r.publicFile('docs/index.html');
@@ -129,7 +127,7 @@ test('CSR on keeps the sidebar on every locale docs landing page', () => {
   };
   const r = buildSite('csr-on-ml', {
     files: mlFiles,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
     extraConfig: [
       'defaultContentLanguage: en',
       'languages:',
@@ -167,7 +165,7 @@ test('CSR on a doc-rooted site keeps chrome on the home landing only', () => {
       'content/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
       'content/guide/page-a.md': '---\ntitle: Page A\n---\nDeep page\n',
     },
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
 
@@ -216,7 +214,7 @@ test('CSR keeps a docs-landing tree that covers section-rooted subsets', () => {
   const on = buildSite('csr-section-root-on', {
     files,
     extraConfig,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(on.status, 0, `hugo build succeeds:\n${on.stdout}${on.stderr}`);
   assert.ok(

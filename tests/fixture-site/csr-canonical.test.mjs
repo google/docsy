@@ -59,7 +59,7 @@ const csr = buildSite('canon-csr', {
   files,
   extraConfig,
   title,
-  env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+  env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
 async function inlineAt(page, url) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-// Link-check matrix: compares a FULL build against a LEAN (CSR) build
-// (params.td.csr_enable=true) over the docsy.dev site, reporting both:
+// Link-check matrix: compares a FULL build against a LEAN (shared-chrome) build
+// (params.td.chrome=shared) over the docsy.dev site, reporting both:
 //
 //   - speed:  wall-clock for build + htmltest, per cell;
 //   - parity: the set of unique link targets each build exposes to the checker.
@@ -89,7 +89,7 @@ function isChecked(link) {
 
 const CELLS = [
   { mode: 'full', env: {} },
-  { mode: 'lean', env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' } },
+  { mode: 'lean', env: { HUGO_PARAMS_TD_CHROME: 'shared' } },
 ];
 
 function run(cmd, cmdArgs, { env = {} } = {}) {

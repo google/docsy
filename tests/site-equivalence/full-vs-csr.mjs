@@ -10,10 +10,10 @@
 // scoreboard of what's left (e.g. navbar cover/theme, scoped-sidebar structure).
 //
 // Usage (run from the worktree root; scratch lands under ./tmp for inspection).
-// The CSR build sets the csr_enable param directly rather than via the `csr`
+// The CSR build sets the td.chrome param directly rather than via the `csr`
 // npm decorator, since that decorator swallows the `--` that forwards `-d`:
 //   ( cd docsy.dev && npm run build -- -d "$PWD/../tmp/equiv-full" )
-//   ( cd docsy.dev && HUGOxPARAMSxTDxCSR_ENABLE=true \
+//   ( cd docsy.dev && HUGO_PARAMS_TD_CHROME=shared \
 //       npm run build -- -d "$PWD/../tmp/equiv-csr" )
 //   node tests/site-equivalence/full-vs-csr.mjs \
 //     --full tmp/equiv-full --csr tmp/equiv-csr [--out tmp/equiv-tree] \

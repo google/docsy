@@ -12,7 +12,7 @@ restores them in the browser. This is the **case registry**: every way a
 CSR-restored page can differ from a full build — each a **case** with a stable
 `CSR-NN` ID — and where a test covers it.
 
-- **User docs:** [Client-side chrome rendering](/docs/content/csr/).
+- **User docs:** [Chrome build modes](/docs/deployment/chrome/).
 - **Tracking issue:** [#2659][].
 - Tests cite their case ID in a header comment, so the ID ↔ test link is
   greppable both ways (`grep -rn CSR-13 tests/`).
@@ -24,7 +24,7 @@ _restored_ (matches a full build) or _deferred_ (known, not yet handled). The
 
 | ID     | Case / wrinkle                                                    | Status   | Tests                              |
 | ------ | ----------------------------------------------------------------- | -------- | ---------------------------------- |
-| CSR-01 | `csr_enable` param normalization (env/config `"false"` footgun)   | restored | `csr-render`                       |
+| CSR-01 | `td.chrome` build-mode gate (`full` default, `shared` opt-in)     | restored | `csr-render`                       |
 | CSR-02 | Kept reference instances (one navbar/footer/side-nav; donor)      | restored | `csr-render`, `csr-build`          |
 | CSR-03 | Navbar restore from the home donor                                | restored | `csr-equivalence`                  |
 | CSR-04 | Footer restore (verbatim, page-invariant)                         | restored | `csr-equivalence`                  |

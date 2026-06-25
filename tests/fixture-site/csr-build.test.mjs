@@ -1,5 +1,5 @@
 // Cases: CSR-02 (kept reference instances). See the CSR case registry in tasks/0.16/csr/.
-// Build-contract tests for CSR mode (params.td.csr_enable=true).
+// Build-contract tests for `shared` chrome mode (params.td.chrome=shared).
 //
 // CSR drops the repeated left-nav from inner pages and additionally leaves a
 // placeholder pointing at the section's "donor" page (the kept docs landing).
@@ -23,7 +23,7 @@ const files = {
 test('CSR mode leaves a donor placeholder on inner pages, no opt-in needed', () => {
   const r = buildSite('csr-build', {
     files,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
 
@@ -58,7 +58,7 @@ test('CSR mode leaves a donor placeholder on inner pages, no opt-in needed', () 
 test('CSR mode emits no standalone nav fragment file', () => {
   const r = buildSite('csr-build-nofrag', {
     files,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   assert.throws(

@@ -75,7 +75,7 @@ test('CSR restores per-page version-selector links to match the full build', asy
     files,
     extraConfig,
     title,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
@@ -118,7 +118,7 @@ languages:
     files,
     extraConfig,
     title,
-    env: { HUGOxPARAMSxTDxCSR_ENABLE: 'true' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
