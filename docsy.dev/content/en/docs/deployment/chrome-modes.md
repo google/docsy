@@ -1,7 +1,8 @@
 ---
-title: Client-side chrome rendering
+title: Chrome build modes
 description: >-
-  Strip the repeated navigation chrome and restore it in the client side.
+  Choose how Docsy emits repeated navigation chrome: on every page, or shared
+  across pages and restored client-side for smaller, faster-to-check output.
 cSpell:ignore: pagelinks
 ---
 
@@ -11,23 +12,29 @@ usually identical site-wide. That repetition bloats the output and slows
 anything that processes every page, such as a link checker or a diff of
 generated HTML.
 
-**Client-side rendering** (CSR) of chrome is an experimental build mode that
-omits the repeated chrome from the rendered HTML and restores it in the browser
-with a small script. The output stays lean, while readers still get the full
-navigation once the page loads. It gives you:
+The `td.chrome` parameter selects one of two **build modes**:
+
+- **`full`** (default) emits each page's chrome on the page itself, ready for any
+  client.
+- **`shared`** emits each region on just one _donor_ page per locale and restores
+  it on the other pages in the browser with a small script. The output stays
+  lean, while readers still get the full navigation once the page loads.
+
+`shared` mode helps wherever a JavaScript-capable client or a link checker
+consumes the output:
 
 - **Faster, quieter [link checking][link-checking].** A checker reaches each
   unique chrome link once instead of once per page, and sees the lean output
   because it doesn't run the restore script.
 - **Cleaner output diffs.** A change to a shared region shows up once instead of
   on every page, so a diff surfaces the content that actually changed.
-- **Smaller HTML** on every page that drops its chrome.
+- **Smaller output** for local development and deploy previews.
 
-## What stays in the server output
+## What `shared` mode keeps reachable
 
-CSR keeps each region on exactly one page per locale &mdash; its _donor_, which
-the browser restores the others from &mdash; so every chrome link stays
-reachable without JavaScript:
+In `shared` mode, each region stays on exactly one page per locale &mdash; its
+_donor_, which the browser restores the others from &mdash; so every chrome link
+stays reachable without JavaScript:
 
 - **Navbar and footer**: kept on each locale's home page. Their links are
   config-defined and identical across the locale, except for the navbar's
@@ -43,11 +50,14 @@ link.
 
 > [!CAUTION]
 >
-> CSR is an [experimental][] optimization that rests on assumptions about how
-> chrome repeats, which may not hold for every site. The browser restore of the
-> navbar's language and version selectors is still a work in progress, so today
-> CSR is best suited to **link-checking and output-diffing builds** rather than
-> reader-facing deploys. Run full-site link checks as well, even if less often.
+> `shared` mode is an [experimental][] optimization that rests on assumptions
+> about how chrome repeats, which may not hold for every site. The browser
+> restore of the navbar's language and version selectors is still a work in
+> progress, so today `shared` is best suited to **development, deploy previews,
+> link-checking, and output-diffing builds** rather than production deploys:
+> clients without JavaScript (and some search crawlers) see only the donor
+> pages' chrome. Keep `full` for production, and run full-site link checks as
+> well, even if less often.
 >
 > Two known cases:
 >
@@ -59,15 +69,15 @@ link.
 >   difference isn't visible in the rendered nav &mdash; only in a
 >   serialized-HTML diff.
 
-## Enabling CSR
+## Setting the build mode
 
-Set the `td.csr_enable` parameter to `true`:
+Set the `td.chrome` parameter to `shared` (the default is `full`):
 
 {{< tabpane text=true >}} {{% tab header="hugo.toml" lang="toml" %}}
 
 ```toml
 [params.td]
-csr_enable = true
+chrome = "shared"
 ```
 
 {{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
@@ -75,22 +85,19 @@ csr_enable = true
 ```yaml
 params:
   td:
-    csr_enable: true
+    chrome: shared
 ```
 
 {{% /tab %}} {{< /tabpane >}}
 
-For a link-checking CI job, it's usually cleaner to set it through the
+For a link-checking or preview CI job, it's usually cleaner to set it through the
 environment instead, leaving your committed config untouched:
 
 ```sh
-HUGOxPARAMSxTDxCSR_ENABLE=true hugo
+HUGO_PARAMS_TD_CHROME=shared hugo
 ```
 
-Use a non-underscore delimiter (`x` above), not `HUGO_PARAMS_TD_CSR_ENABLE`:
-Hugo treats every `_` after the `HUGO` prefix as a key separator, which would
-split the `csr_enable` key. See Hugo's [configuration with environment
-variables][hugo-env-config].
+See Hugo's [configuration with environment variables][hugo-env-config].
 
 <!-- prettier-ignore-start -->
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/

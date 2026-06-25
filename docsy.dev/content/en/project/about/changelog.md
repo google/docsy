@@ -163,10 +163,10 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 
 [**Experimental**](#experimental):
 
-- Added **client-side rendering (CSR) of chrome**, an experimental build mode
-  that omits the repeated chrome (navbar, footer, left-nav) from the build output
-  and restores it in the browser, so one build serves both readers and link
-  checkers. See [Client-side chrome rendering][csr] ([#2659][]).
+- Added a **`shared` chrome build mode** (`td.chrome`), an experimental option
+  that emits the repeated chrome (navbar, footer, left-nav) on one donor page per
+  locale and restores it in the browser, so one build serves both readers and
+  link checkers. See [Chrome build modes][csr] ([#2659][]).
 
 [#2594]: https://github.com/google/docsy/pull/2594
 [#2357]: https://github.com/google/docsy/issues/2357
@@ -175,7 +175,7 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [#2659]: https://github.com/google/docsy/issues/2659
 [favicons]: /docs/content/iconsimages/#add-your-favicons
 [hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
-[csr]: /docs/content/csr/
+[csr]: /docs/deployment/chrome-modes/
 [0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
 [0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0
 [hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0
