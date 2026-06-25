@@ -20,9 +20,12 @@ Use the `td.chrome` parameter to select one of two **build modes**:
   restores it on the other pages in the browser with a small script. The output
   stays lean, while readers still get the full navigation once the page loads.
 
-For web developers: `shared` applies the app-shell pattern to page chrome
-&mdash; a single instance, fetched from its donor and restored on the client,
-over an otherwise static [multi-page site][mpa].
+> [!NOTE] Web dev note
+>
+> `shared` mode is in the spirit of the [app-shell pattern][app-shell] but
+> applied to page chrome, where a single region instance is fetched from its
+> donor and restored on the client, over an otherwise static [multi-page
+> site][mpa].
 
 The `shared` mode helps wherever a JavaScript-capable client or a link checker
 consumes the output:
@@ -104,6 +107,7 @@ HUGO_PARAMS_TD_CHROME=shared hugo
 See Hugo's [configuration with environment variables][hugo-env-config].
 
 <!-- prettier-ignore-start -->
+[app-shell]: https://developer.chrome.com/blog/app-shell
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
