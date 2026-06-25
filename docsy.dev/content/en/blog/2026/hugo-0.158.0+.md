@@ -9,15 +9,15 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: amp AVIF CatmullRom goldmark partialCached passthrough renderSegments useEmbedded userinfo
+cSpell:ignore: amp AVIF CatmullRom goldmark Netlify Pandoc partialCached passthrough renderSegments reStructuredText useEmbedded userinfo
 ---
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
-0.163.1 that are relevant to Docsy users. It is a companion post to the Docsy
+0.163.2 that are relevant to Docsy users. It is a companion post to the Docsy
 [0.16.0](0.16.0/) release and upgrade guide.
 
 Docsy 0.16.0 requires Hugo 0.158.0 or later. The Docsy project build is tested
-with Hugo 0.163.1, which is the recommended target for this upgrade range.
+with Hugo 0.163.2, which is the recommended target for this upgrade range.
 
 ## Upgrade summary
 
@@ -40,7 +40,7 @@ Docsy site to 0.16.0.
   - [Image URL churn](#image-url-churn)
   - [Template and module cleanup](#template-module-cleanup)
   - [Notable changes](#notable-changes)
-- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.1](#upgrade)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.2](#upgrade)
   once you're ready.
 
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
@@ -50,7 +50,7 @@ Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
 so older Hugo versions will fail with template errors.
 
 The theme minimum remains 0.158.0 through the 0.163.x range. However, we
-recommend upgrading directly to **Hugo 0.163.1** because the later releases
+recommend upgrading directly to **Hugo 0.163.2** because the later releases
 include security fixes, avoid a short-lived 0.159.x link-escaping regression,
 and are the versions validated across Docsy, the Docsy example site, and at
 least one large downstream Docsy site.
@@ -59,19 +59,19 @@ least one large downstream Docsy site.
 
 {{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
 
-- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.1.
+- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.2.
 - If your project declares `module.hugoVersion.min`, set it to at least
   `0.158.0`.
 - If you use `hugo-extended`, pin a compatible version in your site:
 
   ```sh
-  npm install hugo-extended@0.163.1 --save-dev
+  npm install hugo-extended@0.163.2 --save-dev
   ```
 
 - If you use [hvm][], select the latest compatible Hugo release:
 
   ```sh
-  hvm use 0.163.1
+  hvm use 0.163.2
   ```
 
 ## Language API deprecations (0.158.0) {#language-apis}
@@ -172,6 +172,11 @@ continues to recommend Node LTS 24 for supported builds.
 Docsy sites commonly use PostCSS for CSS processing, so this can be a practical
 breaking change even when the Docsy theme itself has not changed.
 
+Hugo 0.163.2 fixes an `ERR_ACCESS_DENIED` regression in this permission model
+that could abort builds when `node_modules` lives outside the project tree, such
+as in a CI provider's shared cache (for example, Netlify). It is another reason
+to prefer 0.163.2 for PostCSS pipelines.
+
 ### Actions {#node-tools-actions}
 
 {{% _param BREAKING %}} **Applies if** your site uses Hugo 0.161.x or later and
@@ -179,6 +184,9 @@ runs PostCSS, Babel, Tailwind, or similar Node tools during the Hugo build.
 
 - Upgrade Node to the active LTS release. For Docsy 0.16.0, use Node LTS 24.
 - Build locally and check for Node permission errors.
+- If your CI keeps `node_modules` outside the project tree (for example,
+  Netlify's shared cache) and the build fails with `ERR_ACCESS_DENIED`, upgrade
+  to Hugo 0.163.2.
 - If your project uses Tailwind, install Tailwind as an npm package. Hugo no
   longer supports the standalone Tailwind binary in this path.
 
@@ -257,7 +265,8 @@ but it is not usually a content regression.
 
 ### Template and config deprecations {#other-deprecations}
 
-Review these if your site has custom templates or JavaScript tooling config:
+Review these if your site has custom templates, external content converters, or
+JavaScript tooling config:
 
 - `.IsNode` is deprecated; use `.IsBranch`.
 - `jsconfig` `baseUrl` support was removed.
@@ -265,12 +274,16 @@ Review these if your site has custom templates or JavaScript tooling config:
   output. Hugo 0.162.0 fixed GitInfo handling for modules whose `go.mod` lives
   in a repository subdirectory.
 - If you use `--renderSegments`, prefer Hugo 0.163.1 for its segment-merge fix.
+- If your site renders Pandoc or reStructuredText content through external
+  converters, Hugo 0.163.2 now **fails the build** when the converter binary is
+  missing (matching AsciiDoc) instead of silently publishing raw content; ensure
+  the converter is installed wherever you build.
 
 ### Security fixes {#security-fixes}
 
 This range includes multiple security-related updates, including Go
 `html/template` fixes and stricter URL/content handling. This is a strong reason
-to prefer 0.163.1 over stopping at the minimum 0.158.0.
+to prefer 0.163.2 over stopping at the minimum 0.158.0.
 
 ### New features worth knowing about {#new-features}
 
@@ -280,21 +293,21 @@ to prefer 0.163.1 over stopping at the minimum 0.158.0.
 - `strings.ReplacePairs` is available for template authors on Hugo 0.158.0 or
   later.
 
-## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.1 {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.2 {#upgrade}
 
 After addressing applicable breaking changes and deprecations, upgrade to Hugo
-0.163.1.
+0.163.2.
 
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@0.163.1 --save-dev
+npm install hugo-extended@0.163.2 --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use 0.163.1
+hvm use 0.163.2
 ```
 
 <section class="td-checkbox-list-wrapper">
@@ -340,7 +353,7 @@ module:
     min: 0.158.0
 ```
 
-For local builds, deployments, and new upgrades, we recommend Hugo 0.163.1.
+For local builds, deployments, and new upgrades, we recommend Hugo 0.163.2.
 
 <!-- prettier-ignore-start -->
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
