@@ -1,6 +1,6 @@
-// Shared engine for CSR/full equivalence checks.
+// Shared engine for shared mode/full equivalence checks.
 //
-// `inlineCsr` runs the real shipped client (assets/js/csr-nav.js) over a CSR
+// `inlineChrome` runs the real shipped client (assets/js/chrome-nav.js) over a shared mode
 // (lean) page in jsdom — fetching the donor, injecting/re-rooting/hydrating the
 // nav exactly as a browser would. `normalize` and `navRegion` re-serialize HTML
 // through the same jsdom serializer so comparisons are semantic, not serializer
@@ -12,17 +12,17 @@ import { JSDOM } from 'jsdom';
 
 export const MENU_ID = 'td-sidebar-menu';
 
-export const CSR_NAV_SRC = readFileSync(
-  new URL('../../../theme/assets/js/csr-nav.js', import.meta.url),
+export const CHROME_NAV_SRC = readFileSync(
+  new URL('../../../theme/assets/js/chrome-nav.js', import.meta.url),
   'utf8',
 );
 
 // Run the client over `html` served at `url`. `resolveDonor(pathname)` returns
 // the donor page's HTML for a fetch, or null/undefined for a 404. Resolves once
 // the nav is revealed (d-none removed) or after a bounded wait.
-export async function inlineCsr(
+export async function inlineChrome(
   html,
-  { url, resolveDonor = () => null, csrNavSrc = CSR_NAV_SRC } = {},
+  { url, resolveDonor = () => null, chromeNavSrc = CHROME_NAV_SRC } = {},
 ) {
   const dom = new JSDOM(html, { url, runScripts: 'outside-only' });
   const { window } = dom;
@@ -34,13 +34,13 @@ export async function inlineCsr(
     return { ok: true, status: 200, text: async () => body };
   };
 
-  window.eval(csrNavSrc);
+  window.eval(chromeNavSrc);
 
   for (let i = 0; i < 100; i++) {
     const menu = window.document.getElementById(MENU_ID);
     const navReady = menu && !menu.classList.contains('d-none');
     const chromeReady = !window.document.querySelector(
-      '.td-csr-chrome-placeholder',
+      '.td-chrome-placeholder',
     );
     if (navReady && chromeReady) break;
     await new Promise((r) => setTimeout(r, 5));
@@ -78,7 +78,7 @@ export function neutralizeSelectorMenus(root) {
 
 // The td/site-build-info shortcode bakes Hugo's build time into a `new Date("…")`
 // literal that drives the #local-time widget, so two builds run seconds apart
-// differ on that line. That's non-deterministic build output unrelated to CSR, so
+// differ on that line. That's non-deterministic build output unrelated to shared mode, so
 // replace the baked timestamp with a constant to neutralize it. Scoped to scripts
 // that drive #local-time, leaving genuine date content elsewhere untouched.
 const BUILD_TIME_CONST = '1970-01-01T00:00:00Z';
@@ -113,7 +113,7 @@ export function navRegion(html, opts) {
 const PREFORMATTED = new Set(['PRE', 'CODE', 'TEXTAREA', 'SCRIPT', 'STYLE']);
 
 // Blank out whitespace-only text nodes (outside preformatted contexts), so a
-// comparison ignores indentation — e.g. the seam left where the CSR placeholder
+// comparison ignores indentation — e.g. the seam left where the chrome placeholder
 // is replaced by the injected menu.
 function stripIgnorableWhitespace(root, doc) {
   const walker = doc.createTreeWalker(root, 0x4 /* NodeFilter.SHOW_TEXT */);

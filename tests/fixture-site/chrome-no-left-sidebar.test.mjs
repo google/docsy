@@ -1,15 +1,15 @@
-// Cases: CSR-18 (no-left-sidebar layout). See the CSR case registry in tasks/0.16/csr/.
+// Cases: CCR-18 (no-left-sidebar layout). See the CCR case registry in tasks/0.16/ccr/.
 // Equivalence guard for the no-left-sidebar layout (body_class
 // td-no-left-sidebar), mirroring docsy.dev's tests/layouts/no-left-sidebar. The
 // left sidebar is hidden by CSS, but the full build still renders it in the DOM;
 // a lean build drops it and restores it from the donor. The inlined page must
-// still match the full build, so CSR stays equivalent on this layout too.
+// still match the full build, so shared mode stays equivalent on this layout too.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
 import {
-  inlineCsr,
+  inlineChrome,
   normalize,
   bodyWithout,
 } from '../site-equivalence/lib/equivalence.mjs';
@@ -37,7 +37,7 @@ const csr = buildSite('no-left-sidebar-csr', {
 
 async function inlinePage(page, url) {
   return normalize(
-    await inlineCsr(csr.publicFile(page), {
+    await inlineChrome(csr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
@@ -52,7 +52,7 @@ async function inlinePage(page, url) {
   );
 }
 
-test('a no-left-sidebar page carries the body class and CSR markers', () => {
+test('a no-left-sidebar page carries the body class and chrome markers', () => {
   assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
   const html = csr.publicFile('docs/plain/index.html');
   assert.match(
@@ -62,12 +62,12 @@ test('a no-left-sidebar page carries the body class and CSR markers', () => {
   );
   assert.match(
     html,
-    /td-sidebar-csr-placeholder/,
+    /td-sidebar-chrome-placeholder/,
     'lean page still drops the sidebar behind a placeholder',
   );
 });
 
-test('CSR no-left-sidebar page matches the full build (whole page)', async () => {
+test('shared mode no-left-sidebar page matches the full build (whole page)', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
 
   const page = 'docs/plain/index.html';

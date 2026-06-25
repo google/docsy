@@ -1,7 +1,7 @@
-// Full-site CSR equivalence spike.
+// Full-site chrome equivalence spike.
 //
-// Compares a full (non-lean) build against a CSR (lean) build that has been
-// "inlined" by running the real shipped client (assets/js/csr-nav.js) over each
+// Compares a full (non-lean) build against a shared mode (lean) build that has been
+// "inlined" by running the real shipped client (assets/js/chrome-nav.js) over each
 // page in jsdom — fetching the donor, injecting/re-rooting/hydrating the nav,
 // exactly as a browser would. Both sides are then re-serialized through the
 // same jsdom serializer so the diff is semantic, not serializer noise.
@@ -9,11 +9,11 @@
 // Usage (run from the worktree root; scratch output lands under ./tmp so it's
 // easy to inspect afterwards):
 //   ( cd docsy.dev && npm run build     -- -d "$PWD/../tmp/equiv-full" )
-//   ( cd docsy.dev && npm run csr build -- -d "$PWD/../tmp/equiv-csr"  )
+//   ( cd docsy.dev && npm run chrome build -- -d "$PWD/../tmp/equiv-shared"  )
 //   node tests/site-equivalence/inline-and-diff.mjs \
-//     --full tmp/equiv-full --csr tmp/equiv-csr --pages docs/a,docs/b
+//     --full tmp/equiv-full --shared tmp/equiv-shared --pages docs/a,docs/b
 //
-// For each page it writes <out>/<page>.{full,csr}.html (normalized) plus
+// For each page it writes <out>/<page>.{full,shared}.html (normalized) plus
 // .nav / .nav.canon variants, and prints `git diff --no-index` for (a) the whole
 // page and (b) the left-nav region (#td-sidebar-menu), raw and canonicalized.
 // <out> defaults to ./tmp/equiv-out.
@@ -22,7 +22,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { inlineCsr, normalize, navRegion } from './lib/equivalence.mjs';
+import { inlineChrome, normalize, navRegion } from './lib/equivalence.mjs';
 
 function parseArgs(argv) {
   const args = {};
@@ -34,15 +34,15 @@ function parseArgs(argv) {
 
 const args = parseArgs(process.argv.slice(2));
 const fullDir = args.full;
-const csrDir = args.csr;
+const sharedDir = args.shared;
 const base = (args.base || 'http://localhost').replace(/\/$/, '');
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 const outDir = args.out || join(repoRoot, 'tmp/equiv-out');
 const pages = (args.pages || '').split(',').filter(Boolean);
 
-if (!fullDir || !csrDir || pages.length === 0) {
+if (!fullDir || !sharedDir || pages.length === 0) {
   console.error(
-    'Usage: --full <dir> --csr <dir> --pages a,b [--base url] [--out dir]',
+    'Usage: --full <dir> --shared <dir> --pages a,b [--base url] [--out dir]',
   );
   process.exit(2);
 }
@@ -54,9 +54,9 @@ const NAV_REGION = 'td-sidebar-menu';
 const fileFor = (dir, p) => join(dir, p, 'index.html');
 const urlFor = (p) => `${base}/${p}/`;
 
-// Resolve a donor fetch (e.g. /docs/) to its built file under the CSR dir.
+// Resolve a donor fetch (e.g. /docs/) to its built file under the shared build dir.
 const resolveDonor = (pathname) => {
-  const file = join(csrDir, pathname, 'index.html');
+  const file = join(sharedDir, pathname, 'index.html');
   return existsSync(file) ? readFileSync(file, 'utf8') : null;
 };
 
@@ -83,29 +83,29 @@ mkdirSync(outDir, { recursive: true });
 for (const p of pages) {
   console.log(`\n========== ${p} ==========`);
   const fullHtml = readFileSync(fileFor(fullDir, p), 'utf8');
-  const csrHtml = readFileSync(fileFor(csrDir, p), 'utf8');
+  const sharedHtml = readFileSync(fileFor(sharedDir, p), 'utf8');
 
   const normFull = normalize(fullHtml);
-  const normCsr = normalize(
-    await inlineCsr(csrHtml, { url: urlFor(p), resolveDonor }),
+  const normShared = normalize(
+    await inlineChrome(sharedHtml, { url: urlFor(p), resolveDonor }),
   );
 
   const safe = p.replace(/\//g, '__');
   const fFull = join(outDir, `${safe}.full.html`);
-  const fCsr = join(outDir, `${safe}.csr.html`);
+  const fShared = join(outDir, `${safe}.shared.html`);
   writeFileSync(fFull, normFull);
-  writeFileSync(fCsr, normCsr);
+  writeFileSync(fShared, normShared);
 
   // (a) Whole-page diff stat.
   console.log('--- whole page (diffstat) ---');
-  process.stdout.write(gitDiff(fFull, fCsr) || '  (identical)\n');
+  process.stdout.write(gitDiff(fFull, fShared) || '  (identical)\n');
 
   // (b) Nav-region diff: is the inlined left-nav exact?
   const navFull = join(outDir, `${safe}.full.nav.html`);
-  const navCsr = join(outDir, `${safe}.csr.nav.html`);
+  const navShared = join(outDir, `${safe}.shared.nav.html`);
   writeFileSync(navFull, navRegion(normFull));
-  writeFileSync(navCsr, navRegion(normCsr));
-  const navDiff = gitDiffFull(navFull, navCsr);
+  writeFileSync(navShared, navRegion(normShared));
+  const navDiff = gitDiffFull(navFull, navShared);
   console.log(`--- nav region (#${NAV_REGION}), raw ---`);
   if (!navDiff) {
     console.log('  ✓ EXACT MATCH');
@@ -117,10 +117,10 @@ for (const p of pages) {
   // (c) Nav-region diff modulo class-token order (the structural-equivalence
   // bar): after the client matches the server's reveal mechanism this is exact.
   const cNavFull = join(outDir, `${safe}.full.nav.canon.html`);
-  const cNavCsr = join(outDir, `${safe}.csr.nav.canon.html`);
+  const cNavShared = join(outDir, `${safe}.shared.nav.canon.html`);
   writeFileSync(cNavFull, navRegion(normFull, { canonical: true }));
-  writeFileSync(cNavCsr, navRegion(normCsr, { canonical: true }));
-  const cNavDiff = gitDiffFull(cNavFull, cNavCsr);
+  writeFileSync(cNavShared, navRegion(normShared, { canonical: true }));
+  const cNavDiff = gitDiffFull(cNavFull, cNavShared);
   console.log(`--- nav region (#${NAV_REGION}), modulo class-token order ---`);
   if (!cNavDiff) {
     console.log('  ✓ EXACT MATCH');

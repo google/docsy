@@ -1,13 +1,13 @@
-// Cases: CSR-02 (kept reference instances). See the CSR case registry in tasks/0.16/csr/.
+// Cases: CCR-02 (kept reference instances). See the CCR case registry in tasks/0.16/ccr/.
 // Build-contract tests for `shared` chrome mode (params.td.chrome=shared).
 //
-// CSR drops the repeated left-nav from inner pages and additionally leaves a
+// shared mode drops the repeated left-nav from inner pages and additionally leaves a
 // placeholder pointing at the section's "donor" page (the kept docs landing).
-// The client (assets/js/csr-nav.js) fetches that donor, extracts its left-nav,
+// The client (assets/js/chrome-nav.js) fetches that donor, extracts its left-nav,
 // and injects it — no separate output format or per-site opt-in required.
 //
 // These tests pin the server-rendered contract the client depends on; the
-// full-vs-hydrated equivalence is checked separately in csr-nav.test.mjs.
+// full-vs-hydrated equivalence is checked separately in chrome-nav.test.mjs.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,7 +20,7 @@ const files = {
   'content/docs/guide/intro.md': '---\ntitle: Intro\n---\nIntro\n',
 };
 
-test('CSR mode leaves a donor placeholder on inner pages, no opt-in needed', () => {
+test('shared mode leaves a donor placeholder on inner pages, no opt-in needed', () => {
   const r = buildSite('csr-build', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
@@ -32,7 +32,7 @@ test('CSR mode leaves a donor placeholder on inner pages, no opt-in needed', () 
   const inner = r.publicFile('docs/guide/intro/index.html');
   assert.match(
     inner,
-    /class="td-sidebar-csr-placeholder"[^>]*data-nav-donor="\/docs\/"/,
+    /class="td-sidebar-chrome-placeholder"[^>]*data-nav-donor="\/docs\/"/,
     'inner page carries a donor placeholder targeting the docs landing',
   );
   assert.ok(
@@ -50,12 +50,12 @@ test('CSR mode leaves a donor placeholder on inner pages, no opt-in needed', () 
     'docs landing ships the neutral cached nav, hidden',
   );
   assert.ok(
-    !/td-sidebar-csr-placeholder/.test(landing),
+    !/td-sidebar-chrome-placeholder/.test(landing),
     'docs landing carries no placeholder',
   );
 });
 
-test('CSR mode emits no standalone nav fragment file', () => {
+test('shared mode emits no standalone nav fragment file', () => {
   const r = buildSite('csr-build-nofrag', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },

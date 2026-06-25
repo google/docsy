@@ -1,11 +1,11 @@
-// Cases: CSR-17 (out-of-tree active-path). See the CSR case registry in tasks/0.16/csr/.
+// Cases: CCR-17 (out-of-tree active-path). See the CCR case registry in tasks/0.16/ccr/.
 // Equivalence test for the active-path of an "out-of-tree" page: one that isn't
 // itself a left-nav entry because it (or a cascade) sets toc_hide. The full
 // build still marks the page's ancestor sections as the active path (sidebar
 // tree: active-path when the current page IsDescendant of a section). A lean
 // build drops the nav and restores it from the donor; with no nav entry for the
 // page, the client must still mark the nearest ancestor's active path, matching
-// the full build — see assets/js/csr-nav.js (applyActiveState longest-prefix).
+// the full build — see assets/js/chrome-nav.js (applyActiveState longest-prefix).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -14,8 +14,10 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
 
-const csrNavSrc = readFileSync(
-  fileURLToPath(new URL('../../theme/assets/js/csr-nav.js', import.meta.url)),
+const chromeNavSrc = readFileSync(
+  fileURLToPath(
+    new URL('../../theme/assets/js/chrome-nav.js', import.meta.url),
+  ),
   'utf8',
 );
 
@@ -52,7 +54,7 @@ function navState(doc) {
 async function hydrate(html, url, donorHtml) {
   const { window } = new JSDOM(html, { url, runScripts: 'outside-only' });
   window.fetch = async () => ({ ok: true, text: async () => donorHtml });
-  window.eval(csrNavSrc);
+  window.eval(chromeNavSrc);
   for (let i = 0; i < 50; i++) {
     const menu = window.document.getElementById('td-sidebar-menu');
     if (menu && !menu.classList.contains('d-none')) break;
@@ -79,7 +81,7 @@ test('an out-of-tree page is absent from its own donor nav', () => {
   );
 });
 
-test('CSR marks the ancestor active-path for an out-of-tree page', async () => {
+test('chrome marks the ancestor active-path for an out-of-tree page', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
 

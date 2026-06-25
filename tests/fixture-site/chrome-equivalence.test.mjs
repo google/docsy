@@ -1,6 +1,6 @@
-// Cases: CSR-03 (navbar), CSR-04 (footer), CSR-05 (side-nav), CSR-06 (active state), CSR-09 (version selector). See the CSR case registry in tasks/0.16/csr/.
-// Full-page equivalence: a CSR (lean) build, inlined by the real shipped client,
-// vs a full build of the same fixture. Unlike csr-nav.test.mjs (which checks the
+// Cases: CCR-03 (navbar), CCR-04 (footer), CCR-05 (side-nav), CCR-06 (active state), CCR-09 (version selector). See the CCR case registry in tasks/0.16/ccr/.
+// Full-page equivalence: a shared mode (lean) build, inlined by the real shipped client,
+// vs a full build of the same fixture. Unlike chrome-nav.test.mjs (which checks the
 // functional nav facets: links, active, active-path), this asserts the stronger
 // *structural* bar — the inlined left-nav, navbar (incl. the per-page version
 // selector the client re-derives exactly), footer, and whole page match the full
@@ -14,7 +14,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
 import {
-  inlineCsr,
+  inlineChrome,
   normalize,
   navRegion,
   regionOf,
@@ -58,7 +58,7 @@ menus:
       weight: 20
 `;
 
-// Both builds share a title so they differ only by output dir and CSR mode;
+// Both builds share a title so they differ only by output dir and shared mode;
 // otherwise the navbar brand (`.Site.Title`) would diverge.
 const title = 'Docsy equivalence fixture';
 const full = buildSite('equiv-full', { files, extraConfig, title });
@@ -69,11 +69,11 @@ const csr = buildSite('equiv-csr', {
   env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
-// Inline a CSR page by running the client, with donors resolved from the CSR
+// Inline a shared-mode page by running the client, with donors resolved from the shared mode
 // build (the kept docs landing).
 async function inlinePage(page, url) {
   return normalize(
-    await inlineCsr(csr.publicFile(page), {
+    await inlineChrome(csr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
@@ -88,7 +88,7 @@ async function inlinePage(page, url) {
   );
 }
 
-test('CSR-inlined left-nav structurally matches the full build', async () => {
+test('inlined left-nav structurally matches the full build', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
 
@@ -109,7 +109,7 @@ test('CSR-inlined left-nav structurally matches the full build', async () => {
   assert.equal(got, want, 'inlined left-nav matches the full build');
 });
 
-test('CSR restores the footer to match the full build', async () => {
+test('shared mode restores the footer to match the full build', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
@@ -120,7 +120,7 @@ test('CSR restores the footer to match the full build', async () => {
   assert.equal(got, want, 'restored footer matches the full build');
 });
 
-test('CSR restores the navbar to match the full build', async () => {
+test('shared mode restores the navbar to match the full build', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
@@ -141,7 +141,7 @@ test('CSR restores the navbar to match the full build', async () => {
   assert.equal(got, want, 'restored navbar matches the full build');
 });
 
-test('CSR restores the per-page version selector to match the full build', async () => {
+test('shared mode restores the per-page version selector to match the full build', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
@@ -168,12 +168,12 @@ test('CSR restores the per-page version selector to match the full build', async
   assert.equal(got, want, 'restored version selector matches the full build');
 });
 
-test('CSR page matches the full build (whole page)', async () => {
+test('shared-mode page matches the full build (whole page)', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
   const got = bodyWithout(await inlinePage(page, url), []);
   const want = bodyWithout(normalize(full.publicFile(page)), []);
 
-  assert.equal(got, want, 'inlined CSR page matches the full build');
+  assert.equal(got, want, 'inlined shared-mode page matches the full build');
 });

@@ -1,11 +1,11 @@
-// Cases: CSR-05 (side-nav restore), CSR-06 (active state), CSR-08 (cached nav). See the CSR case registry in tasks/0.16/csr/.
-// Equivalence tests for client-side nav hydration (assets/js/csr-nav.js).
+// Cases: CCR-05 (side-nav restore), CCR-06 (active state), CCR-08 (cached nav). See the CCR case registry in tasks/0.16/ccr/.
+// Equivalence tests for client-side nav hydration (assets/js/chrome-nav.js).
 //
-// In CSR mode a lean build drops the repeated left-nav and either (a) leaves a
+// In shared mode a lean build drops the repeated left-nav and either (a) leaves a
 // placeholder pointing at the section's donor page (the kept docs landing) for
 // the client to fetch and inject, or (b) — on the donor itself — ships the
 // shared cached nav hidden, with no server-baked active state. Either way, once
-// csr-nav.js runs, the docs left-nav must match a full (non-lean) build's: the
+// chrome-nav.js runs, the docs left-nav must match a full (non-lean) build's: the
 // same entries, the same active page, and the same active-path trail.
 //
 // Each test builds the same fixture full and lean, runs the real shipped script
@@ -18,8 +18,10 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
 
-const csrNavSrc = readFileSync(
-  fileURLToPath(new URL('../../theme/assets/js/csr-nav.js', import.meta.url)),
+const chromeNavSrc = readFileSync(
+  fileURLToPath(
+    new URL('../../theme/assets/js/chrome-nav.js', import.meta.url),
+  ),
   'utf8',
 );
 
@@ -55,14 +57,14 @@ function navState(doc) {
   };
 }
 
-// Run the real shipped csr-nav.js inside a jsdom window over `html` served at
+// Run the real shipped chrome-nav.js inside a jsdom window over `html` served at
 // `url`, with fetch resolving the placeholder's donor to `donorHtml` (a full
 // page from which the script extracts the left-nav). Resolves once the nav is
 // hydrated (menu revealed).
 async function hydrate(html, url, donorHtml) {
   const { window } = new JSDOM(html, { url, runScripts: 'outside-only' });
   window.fetch = async () => ({ ok: true, text: async () => donorHtml });
-  window.eval(csrNavSrc);
+  window.eval(chromeNavSrc);
   for (let i = 0; i < 50; i++) {
     const menu = window.document.getElementById('td-sidebar-menu');
     if (menu && !menu.classList.contains('d-none')) break;
@@ -73,7 +75,7 @@ async function hydrate(html, url, donorHtml) {
 
 const docOf = (html, url) => new JSDOM(html, { url }).window.document;
 
-test('CSR-injected lean nav matches the full build on an inner page', async () => {
+test('injected lean nav matches the full build on an inner page', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
 
   const lean = buildSite('csr-lean', {
@@ -121,10 +123,10 @@ test('CSR-injected lean nav matches the full build on an inner page', async () =
   );
 });
 
-test('CSR-hydrated cached inline nav matches the full build on the docs landing', async () => {
+test('hydrated cached inline nav matches the full build on the docs landing', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
 
-  // CSR mode forces the neutral cached shape, so the donor landing ships the
+  // shared mode forces the neutral cached shape, so the donor landing ships the
   // shared nav hidden with no server-baked active state.
   const lean = buildSite('csr-lean-landing', {
     files,
@@ -143,7 +145,7 @@ test('CSR-hydrated cached inline nav matches the full build on the docs landing'
     'cached menu ships hidden on the docs landing',
   );
   assert.ok(
-    !/td-sidebar-csr-placeholder/.test(leanHtml),
+    !/td-sidebar-chrome-placeholder/.test(leanHtml),
     'docs landing carries no placeholder',
   );
 

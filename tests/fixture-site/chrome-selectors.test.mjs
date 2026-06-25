@@ -1,7 +1,7 @@
-// Cases: CSR-09 (version selector), CSR-10 (language selector). See the CSR case registry in tasks/0.16/csr/.
+// Cases: CCR-09 (version selector), CCR-10 (language selector). See the CCR case registry in tasks/0.16/ccr/.
 // Client-side restore of the navbar's per-page selectors (version + language).
 //
-// In CSR mode the navbar is dropped on inner pages and restored from the home
+// In shared mode the navbar is dropped on inner pages and restored from the home
 // donor, whose selector links point at the home page. The client re-derives the
 // per-page links the donor can't supply:
 //   - version links exactly — each is a version's base URL plus the page path,
@@ -10,23 +10,26 @@
 //     locale, so swapping the current locale's home prefix for the target's
 //     reproduces them when translations share slugs (the common case).
 //
-// Each test builds the same fixture full and CSR, runs the real shipped client
-// over the CSR inner page, and compares the restored selector links to the full
+// Each test builds the same fixture full and shared mode, runs the real shipped client
+// over the shared-mode inner page, and compares the restored selector links to the full
 // build's.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
-import { inlineCsr, normalize } from '../site-equivalence/lib/equivalence.mjs';
+import {
+  inlineChrome,
+  normalize,
+} from '../site-equivalence/lib/equivalence.mjs';
 
 const BASE = 'https://example.org';
 
-// Run the client over a CSR page, resolving every donor (chrome and sidebar)
-// from the CSR build's own output.
+// Run the client over a shared-mode page, resolving every donor (chrome and sidebar)
+// from the shared build's own output.
 async function inlinePage(csr, page, url) {
   return normalize(
-    await inlineCsr(csr.publicFile(page), {
+    await inlineChrome(csr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
@@ -52,7 +55,7 @@ function selectorLinks(html, menuSelector) {
 const VERSION_MENU = '.td-version-menu .dropdown-menu';
 const LANG_MENU = '.td-lang-menu .dropdown-menu';
 
-test('CSR restores per-page version-selector links to match the full build', async () => {
+test('shared mode restores per-page version-selector links to match the full build', async () => {
   const files = {
     'content/_index.md': '---\ntitle: Home\n---\nHome\n',
     'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
@@ -95,7 +98,7 @@ test('CSR restores per-page version-selector links to match the full build', asy
   assert.deepEqual(got, want, 'restored version links match the full build');
 });
 
-test('CSR restores per-page language-selector links by prefix-swap', async () => {
+test('shared mode restores per-page language-selector links by prefix-swap', async () => {
   const files = {
     'content/_index.md': '---\ntitle: Home\n---\nHome\n',
     'content/_index.ja.md': '---\ntitle: ホーム\n---\nHome\n',

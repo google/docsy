@@ -1,4 +1,4 @@
-{{ if partial "csr-render.html" (dict "page" . "region" "footer") -}}
+{{ if partial "chrome-render.html" (dict "page" . "region" "footer") -}}
 <footer class="td-footer row d-print-none">
   <div class="container-fluid">
     <div class="row mx-md-2">
@@ -17,9 +17,9 @@
   </div>
 </footer>
 {{- else -}}
-  {{- /* CSR dropped the footer here. Leave a placeholder naming the home page
+  {{- /* shared mode dropped the footer here. Leave a placeholder naming the home page
   (the "donor", which keeps the footer); the client fetches it and swaps the
-  footer in (assets/js/csr-nav.js). The footer is page-invariant, so no per-page
+  footer in (assets/js/chrome-nav.js). The footer is page-invariant, so no per-page
   fix-up is needed. */ -}}
-  <div class="td-csr-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="footer"></div>
+  <div class="td-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="footer"></div>
 {{- end -}}

@@ -24,7 +24,7 @@
     "check:links:matrix": "node scripts/link-check-matrix.mjs",
     "check:links": "npm run _check:links",
     "clean": "rm -Rf public",
-    "csr": "cross-env HUGO_PARAMS_TD_CHROME=shared npm run",
+    "ccr": "cross-env HUGO_PARAMS_TD_CHROME=shared npm run",
     "fix:format": "npm run _check:format -- --write",
     "fix": "npm run fix:format && npm run prune:refcache",
     "make:public": "git init -b main public",

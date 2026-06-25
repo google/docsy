@@ -1,7 +1,7 @@
 {{/* Resolves the sidebar root and builds the args dict consumed by
 sidebar-tree.html, so the root-resolution logic lives in one place. Returns a
 dict: context, cacheSidebar, sidebarRoot, sidebarRootID, navRoot, scoped.
-"scoped" is true when sidebar_root_for narrows the nav to a subtree, which CSR
+"scoped" is true when sidebar_root_for narrows the nav to a subtree, which shared mode
 uses to re-root the donor tree client-side. */ -}}
 {{ $sidebarCacheLimit := .Site.Params.ui.sidebar_cache_limit | default 2000 -}}
 {{ $cacheSidebar := ge (len .Site.Pages) $sidebarCacheLimit -}}

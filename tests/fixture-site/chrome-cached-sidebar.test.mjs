@@ -1,16 +1,16 @@
-// Cases: CSR-08 (cached inline nav hydration, non-CSR large-site path). See the CSR case registry in tasks/0.16/csr/.
-// Regression guard for the cached-sidebar path on large sites with CSR *off*.
+// Cases: CCR-08 (cached inline nav hydration, non-shared mode large-site path). See the CCR case registry in tasks/0.16/ccr/.
+// Regression guard for the cached-sidebar path on large sites with shared mode *off*.
 //
 // On a site above ui.sidebar_cache_limit, Docsy renders one shared left-nav
 // hidden (d-none) with no per-page active state baked in, then keys it per page
 // in the browser. This branch routes that activation through the shared
-// assets/js/csr-nav.js (hydrate() on d-none menus) instead of the per-page
-// inline jQuery it used before — so even a CSR-off large site now relies on the
+// assets/js/chrome-nav.js (hydrate() on d-none menus) instead of the per-page
+// inline jQuery it used before — so even a full-mode large site now relies on the
 // script. This test pins that path: a cached inner page must hydrate to the same
 // nav a full (non-cached) build bakes server-side.
 //
-// The cache is forced by lowering sidebar_cache_limit (not by enabling CSR), so
-// this exercises the non-CSR regression path specifically.
+// The cache is forced by lowering sidebar_cache_limit (not by enabling shared mode), so
+// this exercises the non-shared-mode regression path specifically.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,8 +19,10 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
 
-const csrNavSrc = readFileSync(
-  fileURLToPath(new URL('../../theme/assets/js/csr-nav.js', import.meta.url)),
+const chromeNavSrc = readFileSync(
+  fileURLToPath(
+    new URL('../../theme/assets/js/chrome-nav.js', import.meta.url),
+  ),
   'utf8',
 );
 
@@ -40,7 +42,7 @@ const files = {
 // state server side and keeps the inline nav on every page.
 const full = buildSite('cached-full', { files });
 
-// CSR stays OFF; lowering the cache limit to 1 forces the shared/cached nav.
+// shared mode stays OFF; lowering the cache limit to 1 forces the shared/cached nav.
 const cached = buildSite('cached-nav', {
   files,
   extraConfig: 'params:\n  ui:\n    sidebar_cache_limit: 1\n',
@@ -61,13 +63,13 @@ function navState(doc) {
   };
 }
 
-// Run the real shipped csr-nav.js inside a jsdom window over `html` served at
+// Run the real shipped chrome-nav.js inside a jsdom window over `html` served at
 // `url`. The cached path needs no donor fetch (the menu is inline), but fetch is
 // stubbed so the script never reaches the network. Resolves once hydrated.
 async function hydrate(html, url) {
   const { window } = new JSDOM(html, { url, runScripts: 'outside-only' });
   window.fetch = async () => ({ ok: true, text: async () => '' });
-  window.eval(csrNavSrc);
+  window.eval(chromeNavSrc);
   for (let i = 0; i < 50; i++) {
     const menu = window.document.getElementById('td-sidebar-menu');
     if (menu && !menu.classList.contains('d-none')) break;
@@ -78,7 +80,7 @@ async function hydrate(html, url) {
 
 const docOf = (html, url) => new JSDOM(html, { url }).window.document;
 
-test('cached inner page (CSR off) hydrates to the full build via csr-nav.js', async () => {
+test('cached inner page (full mode) hydrates to the full build via chrome-nav.js', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(cached.status, 0, `cached build succeeds:\n${cached.stderr}`);
 
@@ -87,7 +89,7 @@ test('cached inner page (CSR off) hydrates to the full build via csr-nav.js', as
   const cachedHtml = cached.publicFile(page);
 
   // Precondition: the inner page ships the shared menu hidden, with no
-  // placeholder (CSR is off) and no server-baked active state — so without the
+  // placeholder (shared mode is off) and no server-baked active state — so without the
   // client script it would render no active nav at all.
   assert.match(
     cachedHtml,
@@ -95,8 +97,8 @@ test('cached inner page (CSR off) hydrates to the full build via csr-nav.js', as
     'cached menu ships hidden on the inner page',
   );
   assert.ok(
-    !/td-sidebar-csr-placeholder/.test(cachedHtml),
-    'cached inner page carries no CSR placeholder',
+    !/td-sidebar-chrome-placeholder/.test(cachedHtml),
+    'cached inner page carries no chrome placeholder',
   );
   assert.equal(
     navState(docOf(cachedHtml, url)).active.length,

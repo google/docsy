@@ -18,7 +18,7 @@
 
   const MENU_ID = 'td-sidebar-menu';
   const NAV_ID = 'td-section-nav';
-  const CACHE_PREFIX = 'td-csr-nav:';
+  const CACHE_PREFIX = 'td-chrome-nav:';
 
   const normalizePath = (path) => (path.endsWith('/') ? path : path + '/');
 
@@ -232,15 +232,15 @@
       })
       .catch((reason) => {
         // Leave the placeholder in place if the donor can't be fetched. A richer
-        // recovery (retry, visible fallback) is a TODO if CSR graduates beyond
-        // experimental; see tasks/0.16/csr.
+        // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
+        // experimental; see tasks/0.16/ccr.
         console.warn('csr-nav: could not fetch nav donor', donor, reason);
       });
   }
 
   // --- Page-invariant chrome (navbar, footer) -----------------------------
-  // Lean render keeps the navbar and footer only on home pages. In CSR mode an
-  // inner page leaves a placeholder per dropped region (see _partials/navbar.html
+  // The shared build keeps the navbar and footer only on home pages. An inner
+  // page leaves a placeholder per dropped region (see _partials/navbar.html
   // and _partials/footer.html) naming the home "donor". Here we fetch the donor
   // once, extract each region, and swap it in, so the page matches a full render.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
@@ -350,15 +350,15 @@
       })
       .catch((reason) => {
         // Leave the placeholder in place if the donor can't be fetched. A richer
-        // recovery (retry, visible fallback) is a TODO if CSR graduates beyond
-        // experimental; see tasks/0.16/csr.
+        // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
+        // experimental; see tasks/0.16/ccr.
         console.warn('csr-nav: could not fetch chrome donor', url, reason);
       });
   }
 
   function restoreChrome() {
     const placeholders = document.querySelectorAll(
-      '.td-csr-chrome-placeholder[data-chrome-donor]',
+      '.td-chrome-placeholder[data-chrome-donor]',
     );
     if (!placeholders.length) return;
     const donor = placeholders[0].getAttribute('data-chrome-donor');
@@ -386,7 +386,7 @@
     canonicalPath = readCanonicalPath();
     restoreChrome();
     const placeholder = document.querySelector(
-      '.td-sidebar-csr-placeholder[data-nav-donor]',
+      '.td-sidebar-chrome-placeholder[data-nav-donor]',
     );
     if (placeholder) {
       injectFromDonor(placeholder);

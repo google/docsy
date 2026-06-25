@@ -3,7 +3,7 @@
     (not .Site.Params.ui.navbar_translucent_over_cover_disable)
 -}}
 {{ $dark := eq (.Param "ui.navbar_theme") "dark" -}}
-{{ if partial "csr-render.html" (dict "page" . "region" "navbar") -}}
+{{ if partial "chrome-render.html" (dict "page" . "region" "navbar") -}}
 {{ $baseURL := urls.Parse $.Site.Params.Baseurl -}}
 <nav class="td-navbar js-navbar-scroll
       {{- if $cover }} td-navbar-cover td-navbar-transparent {{- end }}"
@@ -75,9 +75,9 @@
 </div>
 </nav>
 {{- else -}}
-  {{- /* CSR dropped the navbar here. Leave a placeholder naming the home page
+  {{- /* shared mode dropped the navbar here. Leave a placeholder naming the home page
   (the "donor", which keeps the navbar); the client fetches it, swaps the navbar
-  in, and re-derives the active link for this page (assets/js/csr-nav.js). The
+  in, and re-derives the active link for this page (assets/js/chrome-nav.js). The
   cover/theme hints carry this page's navbar traits, which the donor (home) may
   not share, so the client can re-apply them after the swap. The canonical-path
   hint is this page's logical (HTML-output) URL, which differs from the request
@@ -85,5 +85,5 @@
   active-state restore to it rather than window.location. */ -}}
   {{- $canonical := .RelPermalink -}}
   {{- with .OutputFormats.Get "html" }}{{ $canonical = .RelPermalink }}{{ end -}}
-  <div class="td-csr-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="navbar" data-canonical-path="{{ $canonical }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
+  <div class="td-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="navbar" data-canonical-path="{{ $canonical }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
 {{- end -}}

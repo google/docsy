@@ -1,5 +1,5 @@
-// Cases: CSR-11 (navbar cover/theme). See the CSR case registry in tasks/0.16/csr/.
-// CSR cover/theme per-page hint: the navbar's cover (translucent) styling and
+// Cases: CCR-11 (navbar cover/theme). See the CCR case registry in tasks/0.16/ccr/.
+// shared-mode cover/theme per-page hint: the navbar's cover (translucent) styling and
 // dark theme are *per-page* traits. When the home donor is a cover page and/or
 // sets a dark navbar theme, those traits must NOT leak onto restored inner
 // pages. The client reads a server-baked per-page hint on the placeholder and
@@ -10,7 +10,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
 import {
-  inlineCsr,
+  inlineChrome,
   normalize,
   regionOf,
 } from '../site-equivalence/lib/equivalence.mjs';
@@ -49,7 +49,7 @@ const csr = buildSite('cover-csr', {
 
 async function inlinePage(page, url) {
   return normalize(
-    await inlineCsr(csr.publicFile(page), {
+    await inlineChrome(csr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
@@ -89,7 +89,7 @@ test('inner page full navbar has neither cover nor dark theme (precondition)', (
   );
 });
 
-test('CSR restores an inner navbar without leaking the cover/dark theme', async () => {
+test('shared mode restores an inner navbar without leaking the cover/dark theme', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 

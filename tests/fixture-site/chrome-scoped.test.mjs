@@ -1,7 +1,7 @@
-// Cases: CSR-12 (scoped re-root), CSR-13 (scoped root markers). See the CSR case registry in tasks/0.16/csr/.
-// Equivalence tests for CSR re-rooting on sidebar_root_for ("scoped") pages.
+// Cases: CCR-12 (scoped re-root), CCR-13 (scoped root markers). See the CCR case registry in tasks/0.16/ccr/.
+// Equivalence tests for shared mode re-rooting on sidebar_root_for ("scoped") pages.
 //
-// Kept separate from csr-nav.test.mjs because this exercises one self-contained
+// Kept separate from chrome-nav.test.mjs because this exercises one self-contained
 // concern — sidebar-root scoping — so it is easy to review or pull out. On a
 // scoped page a lean build still ships a single donor (the full docs-landing
 // tree); the client prunes that tree to the subtree rooted at data-nav-root and
@@ -16,8 +16,10 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
 
-const csrNavSrc = readFileSync(
-  fileURLToPath(new URL('../../theme/assets/js/csr-nav.js', import.meta.url)),
+const chromeNavSrc = readFileSync(
+  fileURLToPath(
+    new URL('../../theme/assets/js/chrome-nav.js', import.meta.url),
+  ),
   'utf8',
 );
 
@@ -56,13 +58,13 @@ function navState(doc) {
   };
 }
 
-// Run the real shipped csr-nav.js in jsdom over `html` served at `url`, with
+// Run the real shipped chrome-nav.js in jsdom over `html` served at `url`, with
 // fetch resolving the placeholder's donor to `donorHtml`. Resolves once the nav
 // is hydrated (menu revealed).
 async function hydrate(html, url, donorHtml) {
   const { window } = new JSDOM(html, { url, runScripts: 'outside-only' });
   window.fetch = async () => ({ ok: true, text: async () => donorHtml });
-  window.eval(csrNavSrc);
+  window.eval(chromeNavSrc);
   for (let i = 0; i < 50; i++) {
     const menu = window.document.getElementById('td-sidebar-menu');
     if (menu && !menu.classList.contains('d-none')) break;
@@ -107,7 +109,7 @@ test('a lean scoped page carries a data-nav-root hint; an unscoped one does not'
   );
 });
 
-test('CSR re-roots the donor tree to match a full self-root build', async () => {
+test('shared mode re-roots the donor tree to match a full self-root build', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
 
@@ -151,7 +153,7 @@ test('CSR re-roots the donor tree to match a full self-root build', async () => 
   );
 });
 
-test('CSR re-root sets the scoped root-id and up-icon, matching the full build', async () => {
+test('shared mode re-root sets the scoped root-id and up-icon, matching the full build', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
@@ -172,7 +174,7 @@ test('CSR re-root sets the scoped root-id and up-icon, matching the full build',
   assert.equal(
     gotNav.getAttribute('data-sidebar-root-id'),
     wantNav.getAttribute('data-sidebar-root-id'),
-    'CSR re-root advertises the same subtree root id',
+    'shared mode re-root advertises the same subtree root id',
   );
 
   // The re-rooted tree root carries the "up" icon, as in a full scoped build.
@@ -181,6 +183,6 @@ test('CSR re-root sets the scoped root-id and up-icon, matching the full build',
   assert.ok(hasUpIcon(wantNav), 'full scoped build renders the up-icon');
   assert.ok(
     hasUpIcon(gotNav),
-    'CSR re-root renders the up-icon on the tree root',
+    'shared mode re-root renders the up-icon on the tree root',
   );
 });

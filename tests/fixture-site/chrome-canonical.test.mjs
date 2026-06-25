@@ -1,11 +1,11 @@
-// Cases: CSR-15 (print canonical URL), CSR-16 (paginated canonical URL). See the CSR case registry in tasks/0.16/csr/.
-// Equivalence test for the per-page canonical path. CSR can run on a URL that
+// Cases: CCR-15 (print canonical URL), CCR-16 (paginated canonical URL). See the CCR case registry in tasks/0.16/ccr/.
+// Equivalence test for the per-page canonical path. shared mode can run on a URL that
 // isn't the page's canonical one — a print view (/_print/docs/…) or a paginator
 // page (…/page/2/) — yet the full build derives the navbar active link, the
 // per-page version-selector links, and the sidebar active state from the page's
 // logical URL, not the request URL. The server bakes that logical URL as a
 // data-canonical-path hint; the client must key its active-state restore to it
-// rather than window.location (see assets/js/csr-nav.js: currentPath).
+// rather than window.location (see assets/js/chrome-nav.js: currentPath).
 //
 // The fixture has no print/paginator output, so we simulate the mismatch: load
 // the regular page's lean HTML (which bakes the canonical path) at a print-style
@@ -15,7 +15,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
 import {
-  inlineCsr,
+  inlineChrome,
   normalize,
   regionOf,
   navRegion,
@@ -64,7 +64,7 @@ const csr = buildSite('canon-csr', {
 
 async function inlineAt(page, url) {
   return normalize(
-    await inlineCsr(csr.publicFile(page), {
+    await inlineChrome(csr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
@@ -88,7 +88,7 @@ test('the lean page bakes a data-canonical-path hint', () => {
   );
 });
 
-test('CSR keys active state to the canonical path, not the request URL', async () => {
+test('shared mode keys active state to the canonical path, not the request URL', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
   assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
 

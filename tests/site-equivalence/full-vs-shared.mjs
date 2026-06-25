@@ -1,22 +1,22 @@
-// Whole-site CSR equivalence scoreboard.
+// Whole-site chrome equivalence scoreboard.
 //
 // Builds a single git tree from a full (non-lean) build, commits it as the
-// baseline, then overlays the same pages from a CSR (lean) build *after running
-// the real shipped client* (assets/js/csr-nav.js) over each one in jsdom —
+// baseline, then overlays the same pages from a shared mode (lean) build *after running
+// the real shipped client* (assets/js/chrome-nav.js) over each one in jsdom —
 // fetching the donor, injecting/re-rooting/hydrating the nav and restoring the
 // navbar/footer exactly as a browser would. Both sides pass through the same
 // jsdom serializer, so `git diff` shows only semantic differences. An empty diff
-// means the CSR build is equivalent to the full build; a non-empty diff is the
+// means the shared build is equivalent to the full build; a non-empty diff is the
 // scoreboard of what's left (e.g. navbar cover/theme, scoped-sidebar structure).
 //
 // Usage (run from the worktree root; scratch lands under ./tmp for inspection).
-// The CSR build sets the td.chrome param directly rather than via the `csr`
+// The shared build sets the td.chrome param directly rather than via the `chrome`
 // npm decorator, since that decorator swallows the `--` that forwards `-d`:
 //   ( cd docsy.dev && npm run build -- -d "$PWD/../tmp/equiv-full" )
 //   ( cd docsy.dev && HUGO_PARAMS_TD_CHROME=shared \
-//       npm run build -- -d "$PWD/../tmp/equiv-csr" )
-//   node tests/site-equivalence/full-vs-csr.mjs \
-//     --full tmp/equiv-full --csr tmp/equiv-csr [--out tmp/equiv-tree] \
+//       npm run build -- -d "$PWD/../tmp/equiv-shared" )
+//   node tests/site-equivalence/full-vs-shared.mjs \
+//     --full tmp/equiv-full --shared tmp/equiv-shared [--out tmp/equiv-tree] \
 //     [--base http://localhost] [--pages docs/a,docs/b] [--canonical]
 //
 // Leaves the committed/overlaid tree at <out> (default ./tmp/equiv-tree) and the
@@ -35,7 +35,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import {
-  inlineCsr,
+  inlineChrome,
   normalize,
   sortClassTokens,
   neutralizeSelectorMenus,
@@ -62,7 +62,7 @@ function parseArgs(argv) {
 
 const args = parseArgs(process.argv.slice(2));
 const fullDir = args.full;
-const csrDir = args.csr;
+const sharedDir = args.shared;
 const base = (args.base || 'http://localhost').replace(/\/$/, '');
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 const outDir = args.out
@@ -70,15 +70,15 @@ const outDir = args.out
   : join(repoRoot, 'tmp/equiv-tree');
 const canonical = !!args.canonical;
 
-if (!fullDir || !csrDir) {
+if (!fullDir || !sharedDir) {
   console.error(
-    'Usage: --full <dir> --csr <dir> [--out dir] [--base url] [--pages a,b] [--canonical]',
+    'Usage: --full <dir> --shared <dir> [--out dir] [--base url] [--pages a,b] [--canonical]',
   );
   process.exit(2);
 }
 
 const fullAbs = join(repoRoot, fullDir);
-const csrAbs = join(repoRoot, csrDir);
+const sharedAbs = join(repoRoot, sharedDir);
 
 // A page is a directory holding an index.html, keyed by its posix-relative path
 // ('' for the site root). Served at <base>/<page>/ and stored at <dir>/<page>/index.html.
@@ -101,21 +101,21 @@ function listPages(root) {
 
 const pages = args.pages
   ? String(args.pages).split(',').filter(Boolean)
-  : listPages(csrAbs);
+  : listPages(sharedAbs);
 
 const fileFor = (dir, p) => join(dir, p, 'index.html');
 const urlFor = (p) => `${base}/${p ? p + '/' : ''}`;
 const resolveDonor = (pathname) => {
-  const file = join(csrAbs, pathname, 'index.html');
+  const file = join(sharedAbs, pathname, 'index.html');
   return existsSync(file) ? readFileSync(file, 'utf8') : null;
 };
 
-// Does this CSR page have any client-side restore work to do? If not, the lean
+// Does this shared-mode page have any client-side restore work to do? If not, the lean
 // build kept the chrome as-is, so it equals the full build and we skip jsdom.
-function hasCsrWork(html) {
+function hasSharedWork(html) {
   return (
-    html.includes('td-csr-chrome-placeholder') ||
-    html.includes('td-sidebar-csr-placeholder') ||
+    html.includes('td-chrome-placeholder') ||
+    html.includes('td-sidebar-chrome-placeholder') ||
     html.includes('td-sidebar-menu')
   );
 }
@@ -170,32 +170,32 @@ git(outDir, 'add', '-A');
 git(
   outDir,
   '-c',
-  'user.email=csr@example.com',
+  'user.email=chrome@example.com',
   '-c',
-  'user.name=CSR Equivalence',
+  'user.name=chrome equivalence',
   'commit',
   '-q',
   '-m',
   'full build baseline',
 );
 
-// Phase 2 — overlay the CSR build, inlined as a browser would render it.
+// Phase 2 — overlay the shared build, inlined as a browser would render it.
 let inlined = 0;
 let skipped = 0;
-let missingCsr = 0;
+let missingShared = 0;
 for (const p of pages) {
-  const f = fileFor(csrAbs, p);
+  const f = fileFor(sharedAbs, p);
   if (!existsSync(f)) {
-    missingCsr++;
+    missingShared++;
     continue;
   }
-  const csrHtml = readFileSync(f, 'utf8');
+  const sharedHtml = readFileSync(f, 'utf8');
   let out;
-  if (hasCsrWork(csrHtml)) {
-    out = await inlineCsr(csrHtml, { url: urlFor(p), resolveDonor });
+  if (hasSharedWork(sharedHtml)) {
+    out = await inlineChrome(sharedHtml, { url: urlFor(p), resolveDonor });
     inlined++;
   } else {
-    out = csrHtml;
+    out = sharedHtml;
     skipped++;
   }
   let html = normalize(out);
@@ -212,9 +212,9 @@ writeFileSync(diffPath, fullDiff);
 
 console.log(`pages:        ${pages.length}`);
 console.log(`  inlined:    ${inlined}`);
-console.log(`  unchanged:  ${skipped} (no CSR markers; kept as-is)`);
+console.log(`  unchanged:  ${skipped} (no chrome markers; kept as-is)`);
 if (missingFull) console.log(`  full-only missing: ${missingFull}`);
-if (missingCsr) console.log(`  csr-only missing:  ${missingCsr}`);
+if (missingShared) console.log(`  shared-only missing:  ${missingShared}`);
 console.log(`canonical:    ${canonical}`);
 console.log(`differing pages: ${names.length}`);
 console.log(`tree:  ${outDir}`);
