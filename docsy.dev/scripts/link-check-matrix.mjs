@@ -36,9 +36,15 @@ if (args.includes('--help') || args.includes('-h')) {
     .toString()
     .split('\n');
   const help = [];
+  let started = false;
   for (const l of src.slice(1)) {
-    if (!l.startsWith('//')) break; // leading comment block only
-    help.push(l.replace(/^\/\/ ?/, ''));
+    if (l.startsWith('//')) {
+      started = true;
+      help.push(l.replace(/^\/\/ ?/, ''));
+    } else if (started) {
+      break; // end of the leading comment block
+    }
+    // else: skip blank lines before the block (e.g. after the shebang)
   }
   console.log(help.join('\n'));
   process.exit(0);
