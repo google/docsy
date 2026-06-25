@@ -7,9 +7,12 @@
 // same jsdom serializer so the diff is semantic, not serializer noise.
 //
 // Usage (run from the worktree root; scratch output lands under ./tmp so it's
-// easy to inspect afterwards):
-//   ( cd docsy.dev && npm run build     -- -d "$PWD/../tmp/equiv-full" )
-//   ( cd docsy.dev && npm run chrome build -- -d "$PWD/../tmp/equiv-shared"  )
+// easy to inspect afterwards). The shared build sets td.chrome directly rather
+// than via the `ccr` npm decorator, since that decorator swallows the `--` that
+// forwards `-d`:
+//   ( cd docsy.dev && npm run build -- -d "$PWD/../tmp/equiv-full" )
+//   ( cd docsy.dev && HUGO_PARAMS_TD_CHROME=shared \
+//       npm run build -- -d "$PWD/../tmp/equiv-shared" )
 //   node tests/site-equivalence/inline-and-diff.mjs \
 //     --full tmp/equiv-full --shared tmp/equiv-shared --pages docs/a,docs/b
 //
