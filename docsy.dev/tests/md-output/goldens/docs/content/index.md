@@ -13,7 +13,6 @@ Section pages:
 - [Adding Content](/docs/content/adding-content/): Add different types of content to your Docsy site.
 - [AI-agent support](/docs/content/agent-support/): Opt-in features that help AI agents and automated tools discover and use your site content, including Markdown output, alternate links in HTML, and llms.txt.
 - [Analytics, User Feedback, and SEO](/docs/content/feedback/): Add Google Analytics tracking to your site, collect user feedback and learn about the page description meta tag.
-- [Client-side chrome rendering](/docs/content/csr/): Strip the repeated navigation chrome from your build output and restore it in the browser: leaner HTML that link checkers and output diffs love, with full navigation preserved for readers.
 - [Diagrams and Formulae](/docs/content/diagrams-and-formulae/): Add generated diagrams and scientific formulae to your site.
 - [Logos and Images](/docs/content/iconsimages/): Add and customize logos, icons, and images in your project.
 - [Look and Feel](/docs/content/lookandfeel/): Customize colors, fonts, code highlighting, and more for your site.

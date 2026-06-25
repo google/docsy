@@ -123,6 +123,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:50.081432-05:00"
   },
+  "https://developer.chrome.com/blog/app-shell": {
+    "StatusCode": 200,
+    "LastSeen": "2026-06-25T11:13:55.337732-04:00"
+  },
   "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver": {
     "StatusCode": 206,
     "LastSeen": "2026-02-11T11:18:55.249857-05:00"
