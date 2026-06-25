@@ -3,7 +3,7 @@
 //
 // Kept separate from chrome-nav.test.mjs because this exercises one self-contained
 // concern — sidebar-root scoping — so it is easy to review or pull out. On a
-// scoped page a lean build still ships a single donor (the full docs-landing
+// scoped page a shared build still ships a single donor (the full docs-landing
 // tree); the client prunes that tree to the subtree rooted at data-nav-root and
 // re-points the root item "up" to its parent, matching a full build's scoped
 // sidebar. Parity here is *functional* (same links, same active item, root
@@ -43,7 +43,7 @@ const extraConfig = [
   '',
 ].join('\n');
 
-// The left-nav facets that must match between a full and a hydrated-lean nav.
+// The left-nav facets that must match between a full build and a restored nav.
 function navState(doc) {
   const nav = doc.querySelector('#td-section-nav');
   assert.ok(nav, 'section nav is present');

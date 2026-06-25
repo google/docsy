@@ -1,15 +1,15 @@
 // Cases: CCR-05 (side-nav restore), CCR-06 (active state), CCR-08 (cached nav). See the CCR case registry in tasks/0.16/ccr/.
 // Equivalence tests for client-side nav hydration (assets/js/chrome-nav.js).
 //
-// In shared mode a lean build drops the repeated left-nav and either (a) leaves a
+// In shared mode the build drops the repeated left-nav and either (a) leaves a
 // placeholder pointing at the section's donor page (the kept docs landing) for
 // the client to fetch and inject, or (b) — on the donor itself — ships the
 // shared cached nav hidden, with no server-baked active state. Either way, once
-// chrome-nav.js runs, the docs left-nav must match a full (non-lean) build's: the
+// chrome-nav.js runs, the docs left-nav must match a full build's: the
 // same entries, the same active page, and the same active-path trail.
 //
-// Each test builds the same fixture full and lean, runs the real shipped script
-// in jsdom over the lean HTML, and compares the resulting nav to the full build.
+// Each test builds the same fixture full and shared, runs the real shipped script
+// in jsdom over the shared build's HTML, and compares the resulting nav to the full build.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -37,11 +37,11 @@ const files = {
   'content/docs/other.md': '---\ntitle: Other\n---\nOther\n',
 };
 
-// The full (non-lean) build is the reference: it bakes the active state server
+// The full build is the reference: it bakes the active state server
 // side and keeps the inline nav on every page. Built once for all tests.
 const full = buildSite('chrome-full', { files });
 
-// The left-nav facets that must match between a full and a hydrated-lean nav:
+// The left-nav facets that must match between a full build and a restored nav:
 // the link entries, the active link, and the active-path trail.
 function navState(doc) {
   const nav = doc.querySelector('#td-section-nav');
@@ -88,7 +88,7 @@ test('injected shared nav matches the full build on an inner page', async () => 
   const url = `${BASE}/docs/guide/intro/`;
   const ccrHtml = ccr.publicFile(page);
 
-  // Precondition: the lean page really is on the donor-placeholder path.
+  // Precondition: the shared page really is on the donor-placeholder path.
   assert.match(
     ccrHtml,
     /data-nav-donor="\/docs\/"/,

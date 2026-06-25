@@ -8,7 +8,7 @@
 // rather than window.location (see assets/js/chrome-nav.js: currentPath).
 //
 // The fixture has no print/paginator output, so we simulate the mismatch: load
-// the regular page's lean HTML (which bakes the canonical path) at a print-style
+// the regular page's shared HTML (which bakes the canonical path) at a print-style
 // URL, and assert the restored chrome still matches the full page.
 
 import { test } from 'node:test';

@@ -38,7 +38,7 @@ const files = {
   'content/docs/other.md': '---\ntitle: Other\n---\nOther\n',
 };
 
-// The full (non-lean, non-cached) build is the reference: it bakes the active
+// The full (non-shared, non-cached) build is the reference: it bakes the active
 // state server side and keeps the inline nav on every page.
 const full = buildSite('cached-full', { files });
 

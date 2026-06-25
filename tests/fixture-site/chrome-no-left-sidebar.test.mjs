@@ -2,7 +2,7 @@
 // Equivalence guard for the no-left-sidebar layout (body_class
 // td-no-left-sidebar), mirroring docsy.dev's tests/layouts/no-left-sidebar. The
 // left sidebar is hidden by CSS, but the full build still renders it in the DOM;
-// a lean build drops it and restores it from the donor. The inlined page must
+// a shared build drops it and restores it from the donor. The inlined page must
 // still match the full build, so shared mode stays equivalent on this layout too.
 
 import { test } from 'node:test';

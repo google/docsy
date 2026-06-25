@@ -2,7 +2,7 @@
 // Equivalence test for the active-path of an "out-of-tree" page: one that isn't
 // itself a left-nav entry because it (or a cascade) sets toc_hide. The full
 // build still marks the page's ancestor sections as the active path (sidebar
-// tree: active-path when the current page IsDescendant of a section). A lean
+// tree: active-path when the current page IsDescendant of a section). A shared
 // build drops the nav and restores it from the donor; with no nav entry for the
 // page, the client must still mark the nearest ancestor's active path, matching
 // the full build — see assets/js/chrome-nav.js (applyActiveState longest-prefix).

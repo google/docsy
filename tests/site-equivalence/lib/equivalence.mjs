@@ -1,7 +1,7 @@
 // Shared engine for shared mode/full equivalence checks.
 //
-// `inlineChrome` runs the real shipped client (assets/js/chrome-nav.js) over a shared mode
-// (lean) page in jsdom — fetching the donor, injecting/re-rooting/hydrating the
+// `inlineChrome` runs the real shipped client (assets/js/chrome-nav.js) over a shared-mode
+// page in jsdom — fetching the donor, injecting/re-rooting/hydrating the
 // nav exactly as a browser would. `normalize` and `navRegion` re-serialize HTML
 // through the same jsdom serializer so comparisons are semantic, not serializer
 // noise; `navRegion(..., { canonical: true })` additionally sorts class tokens so

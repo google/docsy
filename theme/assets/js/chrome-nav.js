@@ -1,6 +1,6 @@
 // Client-side hydration of the docs left-nav.
 //
-// A lean build drops the repeated left-nav from inner pages and leaves a
+// A shared build drops the repeated left-nav from inner pages and leaves a
 // placeholder behind (see _partials/sidebar.html). Here we fetch the section's
 // "donor" page — the kept docs landing, named by data-nav-donor — extract its
 // left-nav, inject it in place of the placeholder, and apply the active-page
@@ -10,7 +10,7 @@
 // The same active-state pass also hydrates the cached inline nav that the donor
 // (and bigger sites) render once and share across pages: that menu ships hidden,
 // with no per-page active state baked in. Either way the resulting DOM matches a
-// full, non-lean render, so a lean build stays functionally equivalent to a full
+// full, non-shared render, so a shared build stays functionally equivalent to a full
 // one.
 
 (function () {

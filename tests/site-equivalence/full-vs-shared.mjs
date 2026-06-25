@@ -1,7 +1,7 @@
 // Whole-site chrome equivalence scoreboard.
 //
-// Builds a single git tree from a full (non-lean) build, commits it as the
-// baseline, then overlays the same pages from a shared mode (lean) build *after running
+// Builds a single git tree from a full (non-shared) build, commits it as the
+// baseline, then overlays the same pages from a shared-mode build *after running
 // the real shipped client* (assets/js/chrome-nav.js) over each one in jsdom —
 // fetching the donor, injecting/re-rooting/hydrating the nav and restoring the
 // navbar/footer exactly as a browser would. Both sides pass through the same
@@ -110,7 +110,7 @@ const resolveDonor = (pathname) => {
   return existsSync(file) ? readFileSync(file, 'utf8') : null;
 };
 
-// Does this shared-mode page have any client-side restore work to do? If not, the lean
+// Does this shared-mode page have any client-side restore work to do? If not, the shared
 // build kept the chrome as-is, so it equals the full build and we skip jsdom.
 function hasSharedWork(html) {
   return (

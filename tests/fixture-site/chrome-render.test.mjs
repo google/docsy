@@ -89,7 +89,7 @@ test('td.chrome="full" via the environment keeps all chrome', () => {
   );
 });
 
-// Only the exact value `shared` enables the lean mode; any other value — a typo
+// Only the exact value `shared` enables shared mode; any other value — a typo
 // or wrong case like "SHARED" — safely falls back to full chrome.
 test('td.chrome with an unrecognized value falls back to full chrome', () => {
   const r = buildSite('ccr-env-unknown', {

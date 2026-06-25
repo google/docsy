@@ -1,6 +1,6 @@
 // Full-site chrome equivalence spike.
 //
-// Compares a full (non-lean) build against a shared mode (lean) build that has been
+// Compares a full (non-shared) build against a shared-mode build that has been
 // "inlined" by running the real shipped client (assets/js/chrome-nav.js) over each
 // page in jsdom — fetching the donor, injecting/re-rooting/hydrating the nav,
 // exactly as a browser would. Both sides are then re-serialized through the
