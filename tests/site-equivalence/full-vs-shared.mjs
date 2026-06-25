@@ -10,14 +10,25 @@
 // scoreboard of what's left (e.g. navbar cover/theme, scoped-sidebar structure).
 //
 // Usage (run from the worktree root; scratch lands under ./tmp for inspection).
-// The shared build sets the td.chrome param directly rather than via the `chrome`
-// npm decorator, since that decorator swallows the `--` that forwards `-d`:
+// With no build dirs it builds docsy.dev both ways automatically, so the simplest
+// invocation is the one-command `npm run test:site-equivalence` (which adds
+// --check). The shared build sets the td.chrome param directly rather than via
+// the `ccr` npm decorator, since that decorator swallows the `--` that forwards
+// `-d`:
+//   node tests/site-equivalence/full-vs-shared.mjs        # builds + compares
+//
+// To reuse existing builds (faster iteration / inspection), pass both dirs:
 //   ( cd docsy.dev && npm run build -- -d "$PWD/../tmp/equiv-full" )
 //   ( cd docsy.dev && HUGO_PARAMS_TD_CHROME=shared \
 //       npm run build -- -d "$PWD/../tmp/equiv-shared" )
 //   node tests/site-equivalence/full-vs-shared.mjs \
 //     --full tmp/equiv-full --shared tmp/equiv-shared [--out tmp/equiv-tree] \
-//     [--base http://localhost] [--pages docs/a,docs/b] [--canonical]
+//     [--base http://localhost] [--pages docs/a,docs/b] [--no-canonical] [--check]
+//
+// Comparison is canonicalized by default (sorts class tokens, neutralizes the
+// best-effort language selector and the build timestamp), matching the
+// structural-equivalence bar; pass --no-canonical for a stricter, raw diff.
+// --check makes the run exit non-zero when any page differs (test semantics).
 //
 // Leaves the committed/overlaid tree at <out> (default ./tmp/equiv-tree) and the
 // full unified diff at <out>.diff. Prints a concise summary; read the .diff file
@@ -61,24 +72,55 @@ function parseArgs(argv) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const fullDir = args.full;
-const sharedDir = args.shared;
 const base = (args.base || 'http://localhost').replace(/\/$/, '');
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url));
 const outDir = args.out
   ? join(repoRoot, args.out)
   : join(repoRoot, 'tmp/equiv-tree');
-const canonical = !!args.canonical;
+const canonical = !args['no-canonical'];
+const check = !!args.check;
 
-if (!fullDir || !sharedDir) {
+// Build dirs: explicit --full/--shared reuse existing builds (fast iteration /
+// inspection); with neither, docsy.dev is built both ways into default scratch
+// dirs so the command works out of the box (mirrors `npm run test:smoke`).
+if (Boolean(args.full) !== Boolean(args.shared)) {
   console.error(
-    'Usage: --full <dir> --shared <dir> [--out dir] [--base url] [--pages a,b] [--canonical]',
+    'Pass both --full and --shared, or neither (to build docsy.dev automatically).',
   );
   process.exit(2);
 }
-
+const autoBuild = !args.full && !args.shared;
+const fullDir = args.full || 'tmp/equiv-full';
+const sharedDir = args.shared || 'tmp/equiv-shared';
 const fullAbs = join(repoRoot, fullDir);
 const sharedAbs = join(repoRoot, sharedDir);
+
+// Build docsy.dev into `destAbs`. `shared` selects the `shared` chrome build
+// mode via the env var (the direct form, since the `ccr` npm decorator swallows
+// the `--` that forwards `-d`). Output is captured and shown only on failure, to
+// keep the terminal quiet.
+function buildDocsyDev(destAbs, shared) {
+  const label = shared ? 'shared' : 'full';
+  console.log(`Building docsy.dev (${label}) → ${destAbs} …`);
+  const res = spawnSync('npm', ['run', 'build', '--', '-d', destAbs], {
+    cwd: join(repoRoot, 'docsy.dev'),
+    encoding: 'utf8',
+    env: shared
+      ? { ...process.env, HUGO_PARAMS_TD_CHROME: 'shared' }
+      : process.env,
+  });
+  if (res.status !== 0) {
+    if (res.stdout) console.error(res.stdout);
+    if (res.stderr) console.error(res.stderr);
+    console.error(`docsy.dev ${label} build failed (exit ${res.status}).`);
+    process.exit(1);
+  }
+}
+
+if (autoBuild) {
+  buildDocsyDev(fullAbs, false);
+  buildDocsyDev(sharedAbs, true);
+}
 
 // A page is a directory holding an index.html, keyed by its posix-relative path
 // ('' for the site root). Served at <base>/<page>/ and stored at <dir>/<page>/index.html.
@@ -224,6 +266,7 @@ if (names.length) {
   for (const n of names) console.log('  ' + n.replace(/\/index\.html$/, '/'));
   console.log('\n--- diffstat (tail) ---');
   console.log(stat.split('\n').slice(-1)[0]);
+  if (check) process.exit(1);
 } else {
   console.log('\n✓ EQUIVALENT — no differences.');
 }

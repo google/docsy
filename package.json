@@ -72,6 +72,7 @@
     "set:version:git-info": "npm run -s _spv -- --version \"$(scripts/get-build-id.sh)\"",
     "set:version": "npm run -s _spv --",
     "test:fixture-site": "node --test 'tests/fixture-site/**/*.test.mjs'",
+    "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.test.mjs",
     "test:tooling": "node --test 'scripts/**/*.test.mjs'",
     "test:website": "npm run -C docsy.dev test",
