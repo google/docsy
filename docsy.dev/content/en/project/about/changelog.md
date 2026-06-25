@@ -175,7 +175,7 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [#2659]: https://github.com/google/docsy/issues/2659
 [favicons]: /docs/content/iconsimages/#add-your-favicons
 [hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
-[csr]: /docs/deployment/chrome-modes/
+[csr]: /docs/deployment/chrome/
 [0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
 [0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0
 [hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0

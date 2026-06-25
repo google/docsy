@@ -8,24 +8,28 @@ cSpell:ignore: pagelinks
 
 A docs site re-emits the same auto-generated _[chrome][]_ &mdash; the navbar,
 footer, and left-nav &mdash; on _every_ page, even though those regions are
-usually identical site-wide. That repetition bloats the output and slows
-anything that processes every page, such as a link checker or a diff of
-generated HTML.
+usually identical site-wide. That repetition slows the build, bloats the output,
+and slows anything that processes every page, such as a link checker; it also
+makes for noisy output diffs.
 
-The `td.chrome` parameter selects one of two **build modes**:
+Use the `td.chrome` parameter to select one of two **build modes**:
 
-- **`full`** (default) emits each page's chrome on the page itself, ready for any
-  client.
-- **`shared`** emits each region on just one _donor_ page per locale and restores
-  it on the other pages in the browser with a small script. The output stays
-  lean, while readers still get the full navigation once the page loads.
+- **`full`** (default) emits each page's chrome on the page itself, ready for
+  any client.
+- **`shared`** emits each region on just **one** _donor_ page per locale and
+  restores it on the other pages in the browser with a small script. The output
+  stays lean, while readers still get the full navigation once the page loads.
 
-`shared` mode helps wherever a JavaScript-capable client or a link checker
+For web developers: `shared` applies the app-shell pattern to page chrome &mdash;
+a single instance, fetched from its donor and restored on the client, over an
+otherwise static [multi-page site][mpa].
+
+The `shared` mode helps wherever a JavaScript-capable client or a link checker
 consumes the output:
 
-- **Faster, quieter [link checking][link-checking].** A checker reaches each
-  unique chrome link once instead of once per page, and sees the lean output
-  because it doesn't run the restore script.
+- **Faster link checking.** A checker reaches each unique chrome link once
+  instead of once per page, and sees the lean output because it doesn't run the
+  restore script.
 - **Cleaner output diffs.** A change to a shared region shows up once instead of
   on every page, so a diff surfaces the content that actually changed.
 - **Smaller output** for local development and deploy previews.
@@ -38,10 +42,10 @@ stays reachable without JavaScript:
 
 - **Navbar and footer**: kept on each locale's home page. Their links are
   config-defined and identical across the locale, except for the navbar's
-  language selector (and an optional version menu) &mdash; see the caution.
-- **Left-nav** (computed per page): kept on each locale's docs landing page,
-  which carries the full docs tree. On a [doc-rooted site][doc-rooted], that
-  landing page _is_ the home page.
+  optional language selector and version menu &mdash; see the caution.
+- **Left-nav** (computed per page): kept on each locale's docs landing page; it
+  carries the full docs tree. On a [doc-rooted site][doc-rooted], that landing
+  page _is_ the home page.
 
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination
@@ -73,14 +77,7 @@ link.
 
 Set the `td.chrome` parameter to `shared` (the default is `full`):
 
-{{< tabpane text=true >}} {{% tab header="hugo.toml" lang="toml" %}}
-
-```toml
-[params.td]
-chrome = "shared"
-```
-
-{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
+{{< tabpane text=true >}} {{% tab header="hugo.yaml" lang="yaml" %}}
 
 ```yaml
 params:
@@ -88,10 +85,17 @@ params:
     chrome: shared
 ```
 
+{{% /tab %}} {{% tab header="hugo.toml" lang="toml" %}}
+
+```toml
+[params.td]
+chrome = "shared"
+```
+
 {{% /tab %}} {{< /tabpane >}}
 
-For a link-checking or preview CI job, it's usually cleaner to set it through the
-environment instead, leaving your committed config untouched:
+For a link-checking or preview CI job, it's usually cleaner to set it through
+the environment instead, leaving your committed config untouched:
 
 ```sh
 HUGO_PARAMS_TD_CHROME=shared hugo
@@ -104,7 +108,7 @@ See Hugo's [configuration with environment variables][hugo-env-config].
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/getting-started/configuration/#configure-with-environment-variables
-[link-checking]: /docs/best-practices/link-checking/
+[mpa]: https://web.dev/learn/pwa/architecture/
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu
 <!-- prettier-ignore-end -->
