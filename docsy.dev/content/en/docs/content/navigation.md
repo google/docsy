@@ -369,10 +369,11 @@ in `hugo.toml`. The foldable menu lets users expand and collapse menu sections
 by toggling arrow icons beside the section parents in the menu.
 
 On large sites (default: > 2000 pages) the side nav is not generated for each
-page, but cached for the whole section. The HTML classes for marking the active
-menu item (and menu path) are then set using JS. You can adjust the limit for
-activating the cached side nav with the optional parameter
-`.ui.sidebar_cache_limit`.
+page, but cached once for the whole section. The classes that mark the active
+menu item (and its menu path) are then applied client-side, by the same script
+that restores chrome in [`shared` build mode][shared-chrome]. This caching kicks
+in on large sites regardless of the build mode; you can adjust its threshold
+with the optional parameter `.ui.sidebar_cache_limit`.
 
 The tabbed pane below lists the menu section options you can define in your
 project [configuration file][].
@@ -822,3 +823,4 @@ For details, see [scroll styles][].
 [Multi-language support]: /docs/language/
 [scroll styles]:
   https://github.com/google/docsy/blob/main/assets/scss/td/_scroll.scss
+[shared-chrome]: /docs/deployment/chrome/

@@ -48,7 +48,9 @@ stays reachable without JavaScript:
   optional language selector and version menu &mdash; see the caution.
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
   carries the full docs tree. On a [doc-rooted site][doc-rooted], that landing
-  page _is_ the home page.
+  page _is_ the home page. `shared` mode currently targets the **docs** section;
+  other sections (such as blog) aren't a validated target yet, so keep `full`
+  for them.
 
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination
