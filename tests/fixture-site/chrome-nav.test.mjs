@@ -39,7 +39,7 @@ const files = {
 
 // The full (non-lean) build is the reference: it bakes the active state server
 // side and keeps the inline nav on every page. Built once for all tests.
-const full = buildSite('csr-full', { files });
+const full = buildSite('chrome-full', { files });
 
 // The left-nav facets that must match between a full and a hydrated-lean nav:
 // the link entries, the active link, and the active-path trail.
@@ -75,33 +75,33 @@ async function hydrate(html, url, donorHtml) {
 
 const docOf = (html, url) => new JSDOM(html, { url }).window.document;
 
-test('injected lean nav matches the full build on an inner page', async () => {
+test('injected shared nav matches the full build on an inner page', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
 
-  const lean = buildSite('csr-lean', {
+  const ccr = buildSite('chrome-shared', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
-  const leanHtml = lean.publicFile(page);
+  const ccrHtml = ccr.publicFile(page);
 
   // Precondition: the lean page really is on the donor-placeholder path.
   assert.match(
-    leanHtml,
+    ccrHtml,
     /data-nav-donor="\/docs\/"/,
-    'lean inner page carries the donor placeholder',
+    'shared inner page carries the donor placeholder',
   );
   assert.ok(
-    !/id="td-section-nav"/.test(leanHtml),
-    'lean inner page omits the inline nav',
+    !/id="td-section-nav"/.test(ccrHtml),
+    'shared inner page omits the inline nav',
   );
 
   // The donor is the docs landing's full page; the script extracts its left-nav.
-  const donorHtml = lean.publicFile('docs/index.html');
-  const got = navState(await hydrate(leanHtml, url, donorHtml));
+  const donorHtml = ccr.publicFile('docs/index.html');
+  const got = navState(await hydrate(ccrHtml, url, donorHtml));
   const want = navState(docOf(full.publicFile(page), url));
 
   assert.ok(got.links.length > 0, 'hydrated nav carries link entries');
@@ -128,28 +128,28 @@ test('hydrated cached inline nav matches the full build on the docs landing', as
 
   // shared mode forces the neutral cached shape, so the donor landing ships the
   // shared nav hidden with no server-baked active state.
-  const lean = buildSite('csr-lean-landing', {
+  const ccr = buildSite('chrome-shared-landing', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/index.html';
   const url = `${BASE}/docs/`;
-  const leanHtml = lean.publicFile(page);
+  const ccrHtml = ccr.publicFile(page);
 
   // Precondition: the landing ships the inline menu hidden, with no placeholder.
   assert.match(
-    leanHtml,
+    ccrHtml,
     /id="td-sidebar-menu"[^>]*\bd-none\b/,
     'cached menu ships hidden on the docs landing',
   );
   assert.ok(
-    !/td-sidebar-chrome-placeholder/.test(leanHtml),
+    !/td-sidebar-chrome-placeholder/.test(ccrHtml),
     'docs landing carries no placeholder',
   );
 
-  const got = navState(await hydrate(leanHtml, url, ''));
+  const got = navState(await hydrate(ccrHtml, url, ''));
   const want = navState(docOf(full.publicFile(page), url));
 
   assert.deepEqual(got.links, want.links, 'same nav entries as the full build');

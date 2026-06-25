@@ -27,15 +27,15 @@ const BASE = 'https://example.org';
 
 // Run the client over a shared-mode page, resolving every donor (chrome and sidebar)
 // from the shared build's own output.
-async function inlinePage(csr, page, url) {
+async function inlinePage(ccr, page, url) {
   return normalize(
-    await inlineChrome(csr.publicFile(page), {
+    await inlineChrome(ccr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
         const file = rel ? `${rel}/index.html` : 'index.html';
         try {
-          return csr.publicFile(file);
+          return ccr.publicFile(file);
         } catch {
           return null;
         }
@@ -74,14 +74,14 @@ test('shared mode restores per-page version-selector links to match the full bui
 `;
   const title = 'Docsy selector fixture';
   const full = buildSite('sel-version-full', { files, extraConfig, title });
-  const csr = buildSite('sel-version-csr', {
+  const ccr = buildSite('sel-version-ccr', {
     files,
     extraConfig,
     title,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
@@ -93,7 +93,7 @@ test('shared mode restores per-page version-selector links to match the full bui
     'full version links are per-page',
   );
 
-  const got = selectorLinks(await inlinePage(csr, page, url), VERSION_MENU);
+  const got = selectorLinks(await inlinePage(ccr, page, url), VERSION_MENU);
   assert.ok(got.length > 0, 'restored version menu carries links');
   assert.deepEqual(got, want, 'restored version links match the full build');
 });
@@ -117,14 +117,14 @@ languages:
 `;
   const title = 'Docsy selector fixture';
   const full = buildSite('sel-lang-full', { files, extraConfig, title });
-  const csr = buildSite('sel-lang-csr', {
+  const ccr = buildSite('sel-lang-ccr', {
     files,
     extraConfig,
     title,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/page-a/index.html';
   const url = `${BASE}/docs/page-a/`;
@@ -136,7 +136,7 @@ languages:
     "full lang link targets this page's translation",
   );
 
-  const got = selectorLinks(await inlinePage(csr, page, url), LANG_MENU);
+  const got = selectorLinks(await inlinePage(ccr, page, url), LANG_MENU);
   assert.ok(got.length > 0, 'restored language menu carries links');
   assert.deepEqual(got, want, 'restored language links match the full build');
 });

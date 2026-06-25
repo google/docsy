@@ -21,7 +21,7 @@ const files = {
 };
 
 test('shared mode leaves a donor placeholder on inner pages, no opt-in needed', () => {
-  const r = buildSite('csr-build', {
+  const r = buildSite('ccr-build', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
@@ -56,7 +56,7 @@ test('shared mode leaves a donor placeholder on inner pages, no opt-in needed', 
 });
 
 test('shared mode emits no standalone nav fragment file', () => {
-  const r = buildSite('csr-build-nofrag', {
+  const r = buildSite('ccr-build-nofrag', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });

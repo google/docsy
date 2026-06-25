@@ -27,7 +27,7 @@ const navLinks = (h) => {
 };
 
 test('full mode (default) keeps all chrome on every page', () => {
-  const r = buildSite('csr-off', { files });
+  const r = buildSite('ccr-off', { files });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   for (const rel of [
     'index.html',
@@ -49,7 +49,7 @@ test('full mode (default) keeps all chrome on every page', () => {
 });
 
 test('shared mode keeps one reference instance of each region', () => {
-  const r = buildSite('csr-on', {
+  const r = buildSite('ccr-on', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
@@ -73,7 +73,7 @@ test('shared mode keeps one reference instance of each region', () => {
 // Setting the build mode explicitly to `full` (the default) keeps chrome on
 // every page, the same as leaving td.chrome unset.
 test('td.chrome="full" via the environment keeps all chrome', () => {
-  const r = buildSite('csr-env-full', {
+  const r = buildSite('ccr-env-full', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'full' },
   });
@@ -92,7 +92,7 @@ test('td.chrome="full" via the environment keeps all chrome', () => {
 // Only the exact value `shared` enables the lean mode; any other value — a typo
 // or wrong case like "SHARED" — safely falls back to full chrome.
 test('td.chrome with an unrecognized value falls back to full chrome', () => {
-  const r = buildSite('csr-env-unknown', {
+  const r = buildSite('ccr-env-unknown', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'SHARED' },
   });
@@ -105,7 +105,7 @@ test('td.chrome with an unrecognized value falls back to full chrome', () => {
 // The documented config path (params.td.chrome) must work too, not just the
 // HUGO_PARAMS_TD_CHROME environment override the other tests use.
 test('shared mode can be set via site config', () => {
-  const r = buildSite('csr-config', {
+  const r = buildSite('ccr-config', {
     files,
     extraConfig: ['params:', '  td:', '    chrome: shared', ''].join('\n'),
   });
@@ -125,7 +125,7 @@ test('shared mode keeps the sidebar on every locale docs landing page', () => {
       '---\ntitle: ドキュメント\n---\nDocs landing\n',
     'content/docs/page-a/_index.ja.md': '---\ntitle: ページA\n---\nDeep page\n',
   };
-  const r = buildSite('csr-on-ml', {
+  const r = buildSite('ccr-on-ml', {
     files: mlFiles,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
     extraConfig: [
@@ -159,7 +159,7 @@ test('shared mode keeps the sidebar on every locale docs landing page', () => {
 // Doc-rooted site (home is the docs landing): the single kept left-nav is the
 // home's, and it carries the full tree, so deeper pages can drop all chrome.
 test('shared mode on a doc-rooted site keeps chrome on the home landing only', () => {
-  const r = buildSite('csr-doc-rooted', {
+  const r = buildSite('ccr-doc-rooted', {
     files: {
       'content/_index.md': '---\ntitle: Home\ntype: docs\n---\nDocs landing\n',
       'content/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
@@ -202,7 +202,7 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
     '',
   ].join('\n');
 
-  const off = buildSite('csr-section-root-off', { files, extraConfig });
+  const off = buildSite('ccr-section-root-off', { files, extraConfig });
   assert.equal(
     off.status,
     0,
@@ -211,7 +211,7 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   const scoped = navLinks(off.publicFile('docs/sub/page-x/index.html'));
   assert.ok(scoped.length > 0, 'section-rooted page renders a scoped left-nav');
 
-  const on = buildSite('csr-section-root-on', {
+  const on = buildSite('ccr-section-root-on', {
     files,
     extraConfig,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },

@@ -28,7 +28,7 @@ const extraConfig = 'params:\n  ui:\n    sidebar_menu_foldable: true\n';
 const title = 'Docsy no-left-sidebar fixture';
 
 const full = buildSite('no-left-sidebar-full', { files, extraConfig, title });
-const csr = buildSite('no-left-sidebar-csr', {
+const ccr = buildSite('no-left-sidebar-ccr', {
   files,
   extraConfig,
   title,
@@ -37,13 +37,13 @@ const csr = buildSite('no-left-sidebar-csr', {
 
 async function inlinePage(page, url) {
   return normalize(
-    await inlineChrome(csr.publicFile(page), {
+    await inlineChrome(ccr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
         const file = rel ? `${rel}/index.html` : 'index.html';
         try {
-          return csr.publicFile(file);
+          return ccr.publicFile(file);
         } catch {
           return null;
         }
@@ -53,8 +53,8 @@ async function inlinePage(page, url) {
 }
 
 test('a no-left-sidebar page carries the body class and chrome markers', () => {
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
-  const html = csr.publicFile('docs/plain/index.html');
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
+  const html = ccr.publicFile('docs/plain/index.html');
   assert.match(
     html,
     /td-no-left-sidebar/,
@@ -63,7 +63,7 @@ test('a no-left-sidebar page carries the body class and chrome markers', () => {
   assert.match(
     html,
     /td-sidebar-chrome-placeholder/,
-    'lean page still drops the sidebar behind a placeholder',
+    'shared page still drops the sidebar behind a placeholder',
   );
 });
 

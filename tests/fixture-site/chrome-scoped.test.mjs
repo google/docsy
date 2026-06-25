@@ -75,17 +75,17 @@ async function hydrate(html, url, donorHtml) {
 
 const docOf = (html, url) => new JSDOM(html, { url }).window.document;
 
-const full = buildSite('csr-scoped-full', { files, extraConfig });
-const lean = buildSite('csr-scoped-lean', {
+const full = buildSite('scoped-full', { files, extraConfig });
+const ccr = buildSite('scoped-ccr', {
   files,
   extraConfig,
   env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
-test('a lean scoped page carries a data-nav-root hint; an unscoped one does not', () => {
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
+test('a shared scoped page carries a data-nav-root hint; an unscoped one does not', () => {
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
-  const scoped = lean.publicFile('docs/guide/intro/index.html');
+  const scoped = ccr.publicFile('docs/guide/intro/index.html');
   assert.match(
     scoped,
     /data-nav-donor="\/docs\/"/,
@@ -97,7 +97,7 @@ test('a lean scoped page carries a data-nav-root hint; an unscoped one does not'
     'scoped page names its sidebar-root subtree',
   );
 
-  const unscoped = lean.publicFile('docs/other/index.html');
+  const unscoped = ccr.publicFile('docs/other/index.html');
   assert.match(
     unscoped,
     /data-nav-donor="\/docs\/"/,
@@ -111,15 +111,15 @@ test('a lean scoped page carries a data-nav-root hint; an unscoped one does not'
 
 test('shared mode re-roots the donor tree to match a full self-root build', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
   // The donor is the docs landing's full page; the client prunes it to the
   // guide subtree using the data-nav-root hint.
-  const donorHtml = lean.publicFile('docs/index.html');
-  const got = navState(await hydrate(lean.publicFile(page), url, donorHtml));
+  const donorHtml = ccr.publicFile('docs/index.html');
+  const got = navState(await hydrate(ccr.publicFile(page), url, donorHtml));
   const want = navState(docOf(full.publicFile(page), url));
 
   assert.ok(got.links.length > 0, 'hydrated scoped nav carries link entries');
@@ -157,9 +157,9 @@ test('shared mode re-root sets the scoped root-id and up-icon, matching the full
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
-  const donorHtml = lean.publicFile('docs/index.html');
+  const donorHtml = ccr.publicFile('docs/index.html');
   const gotNav = (
-    await hydrate(lean.publicFile(page), url, donorHtml)
+    await hydrate(ccr.publicFile(page), url, donorHtml)
   ).querySelector('#td-section-nav');
   const wantNav = docOf(full.publicFile(page), url).querySelector(
     '#td-section-nav',

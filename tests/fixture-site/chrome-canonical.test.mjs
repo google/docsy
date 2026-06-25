@@ -55,7 +55,7 @@ menus:
 
 const title = 'Docsy canonical fixture';
 const full = buildSite('canon-full', { files, extraConfig, title });
-const csr = buildSite('canon-csr', {
+const ccr = buildSite('canon-ccr', {
   files,
   extraConfig,
   title,
@@ -64,13 +64,13 @@ const csr = buildSite('canon-csr', {
 
 async function inlineAt(page, url) {
   return normalize(
-    await inlineChrome(csr.publicFile(page), {
+    await inlineChrome(ccr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
         const file = rel ? `${rel}/index.html` : 'index.html';
         try {
-          return csr.publicFile(file);
+          return ccr.publicFile(file);
         } catch {
           return null;
         }
@@ -79,10 +79,10 @@ async function inlineAt(page, url) {
   );
 }
 
-test('the lean page bakes a data-canonical-path hint', () => {
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+test('the shared page bakes a data-canonical-path hint', () => {
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
   assert.match(
-    csr.publicFile('docs/guide/intro/index.html'),
+    ccr.publicFile('docs/guide/intro/index.html'),
     /data-canonical-path="\/docs\/guide\/intro\/"/,
     'the page advertises its logical path',
   );
@@ -90,7 +90,7 @@ test('the lean page bakes a data-canonical-path hint', () => {
 
 test('shared mode keys active state to the canonical path, not the request URL', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/guide/intro/index.html';
   // A print-style request URL that differs from the page's canonical path.

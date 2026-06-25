@@ -65,16 +65,16 @@ async function hydrate(html, url, donorHtml) {
 
 const docOf = (html, url) => new JSDOM(html, { url }).window.document;
 
-const full = buildSite('csr-oot-full', { files, extraConfig });
-const lean = buildSite('csr-oot-lean', {
+const full = buildSite('oot-full', { files, extraConfig });
+const ccr = buildSite('oot-ccr', {
   files,
   extraConfig,
   env: { HUGO_PARAMS_TD_CHROME: 'shared' },
 });
 
 test('an out-of-tree page is absent from its own donor nav', () => {
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
-  const donor = lean.publicFile('docs/index.html');
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
+  const donor = ccr.publicFile('docs/index.html');
   assert.ok(
     !/href="\/docs\/repo\/readme\/"/.test(donor),
     'the toc_hide page is not a nav entry',
@@ -83,7 +83,7 @@ test('an out-of-tree page is absent from its own donor nav', () => {
 
 test('chrome marks the ancestor active-path for an out-of-tree page', async () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(lean.status, 0, `lean build succeeds:\n${lean.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const page = 'docs/repo/readme/index.html';
   const url = `${BASE}/docs/repo/readme/`;
@@ -97,8 +97,8 @@ test('chrome marks the ancestor active-path for an out-of-tree page', async () =
   );
   assert.deepEqual(want.active, [], 'full build marks no active link');
 
-  const donorHtml = lean.publicFile('docs/index.html');
-  const got = navState(await hydrate(lean.publicFile(page), url, donorHtml));
+  const donorHtml = ccr.publicFile('docs/index.html');
+  const got = navState(await hydrate(ccr.publicFile(page), url, donorHtml));
 
   assert.deepEqual(
     got.activePath,

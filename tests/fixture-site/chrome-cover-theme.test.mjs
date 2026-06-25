@@ -40,7 +40,7 @@ menus:
 
 const title = 'Docsy cover/theme fixture';
 const full = buildSite('cover-full', { files, extraConfig, title });
-const csr = buildSite('cover-csr', {
+const ccr = buildSite('cover-ccr', {
   files,
   extraConfig,
   title,
@@ -49,13 +49,13 @@ const csr = buildSite('cover-csr', {
 
 async function inlinePage(page, url) {
   return normalize(
-    await inlineChrome(csr.publicFile(page), {
+    await inlineChrome(ccr.publicFile(page), {
       url,
       resolveDonor: (pathname) => {
         const rel = pathname.replace(/^\/+/, '').replace(/\/$/, '');
         const file = rel ? `${rel}/index.html` : 'index.html';
         try {
-          return csr.publicFile(file);
+          return ccr.publicFile(file);
         } catch {
           return null;
         }
@@ -66,7 +66,7 @@ async function inlinePage(page, url) {
 
 test('home donor navbar carries cover + dark theme (precondition)', () => {
   assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
-  assert.equal(csr.status, 0, `csr build succeeds:\n${csr.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
 
   const homeNav = regionOf(
     normalize(full.publicFile('index.html')),
