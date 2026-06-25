@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-// Link-check matrix: compares a FULL build against a LEAN (shared-chrome) build
+// Link-check matrix: compares a `full` build against a `shared` build
 // (params.td.chrome=shared) over the docsy.dev site, reporting both:
 //
 //   - speed:  wall-clock for build + htmltest, per cell;
 //   - parity: the set of unique link targets each build exposes to the checker.
-//             A lean build is a strict subset of the full build's HTML (it only
-//             drops repeated chrome), so any target present in FULL but missing
-//             from LEAN is a link the checker would no longer reach.
+//             A `shared` build is a strict subset of the full build's HTML (it
+//             only drops repeated chrome), so any target present in `full` but
+//             missing from `shared` is a link the checker would no longer reach.
 //
 // Both cells build into isolated temp dirs and run htmltest via a per-cell
 // config (a copy of .htmltest.yml with DirectoryPath repointed), so the working
@@ -89,7 +89,7 @@ function isChecked(link) {
 
 const CELLS = [
   { mode: 'full', env: {} },
-  { mode: 'lean', env: { HUGO_PARAMS_TD_CHROME: 'shared' } },
+  { mode: 'shared', env: { HUGO_PARAMS_TD_CHROME: 'shared' } },
 ];
 
 function run(cmd, cmdArgs, { env = {} } = {}) {
@@ -200,19 +200,19 @@ function main() {
     results[cell.mode] = { dest, buildMs, links, check };
   }
 
-  const { full, lean } = results;
-  // Parity: targets in full but not in lean = links lean stops surfacing.
-  const dropped = [...full.links].filter((l) => !lean.links.has(l)).sort();
+  const { full, shared } = results;
+  // Parity: targets in full but not in shared = links shared stops surfacing.
+  const dropped = [...full.links].filter((l) => !shared.links.has(l)).sort();
   const ext = dropped.filter((l) => /^[a-z]+:\/\//.test(l));
   const internal = dropped.filter((l) => !/^[a-z]+:\/\//.test(l));
 
   const lines = [];
-  lines.push('# docsy.dev link-check matrix: full vs lean', '');
+  lines.push('# docsy.dev link-check matrix: full vs shared', '');
   lines.push(`Run: ${new Date().toISOString()}`);
   lines.push(`External checks: ${skipExternal ? 'skipped' : 'enabled'}`, '');
   lines.push('| Cell | Build | htmltest | Total | Unique links | Result |');
   lines.push('| ---- | ----- | -------- | ----- | ------------ | ------ |');
-  for (const mode of ['full', 'lean']) {
+  for (const mode of ['full', 'shared']) {
     const r = results[mode];
     const total = r.buildMs + r.check.ms;
     lines.push(
@@ -224,19 +224,19 @@ function main() {
   lines.push('');
   lines.push('## Parity', '');
   lines.push(
-    `Unique link targets in **full** but not **lean**: ` +
+    `Unique link targets in **full** but not **shared**: ` +
       `**${dropped.length}** (${internal.length} internal, ${ext.length} external).`,
     '',
   );
   if (dropped.length) {
     lines.push(
-      'Dropped targets (lean no longer surfaces these to the checker):',
+      'Dropped targets (shared no longer surfaces these to the checker):',
       '',
     );
     for (const l of dropped.slice(0, 50)) lines.push(`- \`${l}\``);
     if (dropped.length > 50) lines.push(`- … and ${dropped.length - 50} more`);
   } else {
-    lines.push('No links dropped — lean reaches every unique target. ✅');
+    lines.push('No links dropped — shared reaches every unique target. ✅');
   }
   lines.push('');
 
@@ -247,7 +247,7 @@ function main() {
     console.log(`\nReport written to ${outFile}`);
   }
   if (!keep) {
-    for (const mode of ['full', 'lean']) {
+    for (const mode of ['full', 'shared']) {
       rmSync(path.join(MATRIX_DIR, mode), { recursive: true, force: true });
     }
   }
