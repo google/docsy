@@ -1,4 +1,4 @@
-// Cases: CSR-15 (print canonical URL), CSR-16 (paginated canonical URL). See the CSR case registry.
+// Cases: CSR-15 (print canonical URL), CSR-16 (paginated canonical URL). See the CSR case registry in tasks/0.16/csr/.
 // Equivalence test for the per-page canonical path. CSR can run on a URL that
 // isn't the page's canonical one — a print view (/_print/docs/…) or a paginator
 // page (…/page/2/) — yet the full build derives the navbar active link, the

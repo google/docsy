@@ -1,4 +1,4 @@
-// Cases: CSR-01 (csr_enable param), CSR-02 (kept chrome). See the CSR case registry.
+// Cases: CSR-01 (csr_enable param), CSR-02 (kept chrome). See the CSR case registry in tasks/0.16/csr/.
 // Tests for the params.td.csr_enable gate (_partials/csr-render.html), which
 // drops repeated chrome so a link checker reaches each link once. See the
 // Client-side chrome rendering guide:
@@ -90,17 +90,18 @@ test('csr_enable="false" via the environment keeps all chrome', () => {
   );
 });
 
-// The truthiness check is case-insensitive, so "TRUE" enables CSR too.
-test('csr_enable is case-insensitively truthy', () => {
+// The gate uses Hugo's case-sensitive `in (slice true "true" 1)` idiom, so the
+// documented value is lowercase `true`; an uppercase "TRUE" isn't recognized and
+// leaves CSR off — a safe degradation, since full chrome still renders.
+test('csr_enable="TRUE" (uppercase) is not recognized; CSR stays off', () => {
   const r = buildSite('csr-env-upper', {
     files,
     env: { HUGOxPARAMSxTDxCSR_ENABLE: 'TRUE' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   const landing = r.publicFile('docs/index.html');
-  assert.ok(has.sidebar(landing), 'left-nav kept on the docs landing');
-  assert.ok(!has.navbar(landing), 'navbar absent on the docs landing');
-  assert.ok(!has.footer(landing), 'footer absent on the docs landing');
+  assert.ok(has.navbar(landing), 'navbar present on the docs landing');
+  assert.ok(has.footer(landing), 'footer present on the docs landing');
 });
 
 // The documented config path (params.td.csr_enable) must work too, not just

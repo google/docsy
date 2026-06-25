@@ -1,4 +1,4 @@
-// Cases: CSR-12 (scoped re-root), CSR-13 (scoped root markers). See the CSR case registry.
+// Cases: CSR-12 (scoped re-root), CSR-13 (scoped root markers). See the CSR case registry in tasks/0.16/csr/.
 // Equivalence tests for CSR re-rooting on sidebar_root_for ("scoped") pages.
 //
 // Kept separate from csr-nav.test.mjs because this exercises one self-contained

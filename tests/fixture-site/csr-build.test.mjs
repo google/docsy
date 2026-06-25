@@ -1,4 +1,4 @@
-// Cases: CSR-02 (kept reference instances). See the CSR case registry.
+// Cases: CSR-02 (kept reference instances). See the CSR case registry in tasks/0.16/csr/.
 // Build-contract tests for CSR mode (params.td.csr_enable=true).
 //
 // CSR drops the repeated left-nav from inner pages and additionally leaves a

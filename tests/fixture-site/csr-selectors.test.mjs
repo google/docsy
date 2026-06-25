@@ -1,4 +1,4 @@
-// Cases: CSR-09 (version selector), CSR-10 (language selector). See the CSR case registry.
+// Cases: CSR-09 (version selector), CSR-10 (language selector). See the CSR case registry in tasks/0.16/csr/.
 // Client-side restore of the navbar's per-page selectors (version + language).
 //
 // In CSR mode the navbar is dropped on inner pages and restored from the home

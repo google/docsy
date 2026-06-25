@@ -1,4 +1,4 @@
-// Cases: CSR-17 (out-of-tree active-path). See the CSR case registry.
+// Cases: CSR-17 (out-of-tree active-path). See the CSR case registry in tasks/0.16/csr/.
 // Equivalence test for the active-path of an "out-of-tree" page: one that isn't
 // itself a left-nav entry because it (or a cascade) sets toc_hide. The full
 // build still marks the page's ancestor sections as the active path (sidebar

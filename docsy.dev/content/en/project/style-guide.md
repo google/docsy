@@ -17,6 +17,22 @@ and uses Prettier and Markdownlint to enforce basic formatting rules.
 
 ## Content
 
+### Alerts
+
+- Prefer Hugo's blockquote [alert syntax][] over the legacy `alert` shortcode
+  for new and edited content. Both render similar output, but the blockquote
+  form is better supported by tools and agents, and naturally renders as is in
+  [Markdown format for AI agents][agent-support].
+
+### Lists
+
+- Use periods when list items are complete sentences (including imperative
+  steps).
+- Omit periods when list items are fragments, labels, or link-only bullets.
+- Keep punctuation consistent within each list. When this isn't possible, ask
+  the author how they prefer reworking the list item text: e.g., by making all
+  sentences complete.
+
 ### Verb tense
 
 - Use [present tense][] for all content, except as noted below.
@@ -29,17 +45,12 @@ and uses Prettier and Markdownlint to enforce basic formatting rules.
 - For the [Changelog][]: use **past tense**; see its [style
   guide][cl-style-guide].
 
+<!-- prettier-ignore-start -->
+[alert syntax]: /docs/content/adding-content/#alerts
+[agent-support]: /docs/content/agent-support/
 [changelog]: /project/about/changelog/
 [cl-style-guide]: /project/about/changelog/#style-guide
 [present tense]: https://developers.google.com/style/tense
 [release]: <{{% _param baseURL %}}/tags/release/>
 [upgrade]: <{{% _param baseURL %}}/tags/upgrade/>
-
-### Lists
-
-- Use periods when list items are complete sentences (including imperative
-  steps).
-- Omit periods when list items are fragments, labels, or link-only bullets.
-- Keep punctuation consistent within each list. When this isn't possible, ask
-  the author how they prefer reworking the list item text: e.g., by making all
-  sentences complete.
+<!-- prettier-ignore-end -->

@@ -1,4 +1,4 @@
-// Cases: CSR-11 (navbar cover/theme). See the CSR case registry.
+// Cases: CSR-11 (navbar cover/theme). See the CSR case registry in tasks/0.16/csr/.
 // CSR cover/theme per-page hint: the navbar's cover (translucent) styling and
 // dark theme are *per-page* traits. When the home donor is a cover page and/or
 // sets a dark navbar theme, those traits must NOT leak onto restored inner

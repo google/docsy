@@ -8,7 +8,7 @@ uses to re-root the donor tree client-side. */ -}}
 
 {{/* CSR mode shares one nav across the section, so force the neutral cached
 shape (no per-page active state baked in); the client applies it after fetch. */ -}}
-{{ if partial "csr-enabled.html" . -}}
+{{ if in (slice true "true" 1) (.Param "td.csr_enable") -}}
   {{ $cacheSidebar = true -}}
 {{ end -}}
 

@@ -230,8 +230,11 @@
         writeCache(donor, markup);
         injectMarkup(placeholder, markup);
       })
-      .catch(() => {
-        // Leave the placeholder in place if the donor can't be fetched.
+      .catch((reason) => {
+        // Leave the placeholder in place if the donor can't be fetched. A richer
+        // recovery (retry, visible fallback) is a TODO if CSR graduates beyond
+        // experimental; see tasks/0.16/csr.
+        console.warn('csr-nav: could not fetch nav donor', donor, reason);
       });
   }
 
@@ -345,8 +348,11 @@
         writeCache('doc:' + url, html);
         callback(new DOMParser().parseFromString(html, 'text/html'));
       })
-      .catch(() => {
-        // Leave the placeholder in place if the donor can't be fetched.
+      .catch((reason) => {
+        // Leave the placeholder in place if the donor can't be fetched. A richer
+        // recovery (retry, visible fallback) is a TODO if CSR graduates beyond
+        // experimental; see tasks/0.16/csr.
+        console.warn('csr-nav: could not fetch chrome donor', url, reason);
       });
   }
 

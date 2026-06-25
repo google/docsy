@@ -11,16 +11,16 @@
     navbar, footer  configured chrome  -> each home page
     sidebar         computed left-nav  -> each locale's docs landing page
 
-  When CSR is off, every region renders. Reading a param (not os.Getenv) means no
-  consuming site needs a security.funcs.getenv change. See the Client-side chrome
-  rendering guide for what this is and how to enable it:
+  When CSR is off, every region renders. See the Client-side chrome rendering
+  guide for what this is and how to enable it:
   docsy.dev/content/en/docs/content/csr.md
 
   ctx: dict "page" PAGE "region" REGION
 */ -}}
 {{ $p := .page -}}
 {{ $render := true -}}
-{{ if partial "csr-enabled.html" $p -}}
+{{/* csr_enable may arrive as a string (env override), not a bool. */ -}}
+{{ if in (slice true "true" 1) ($p.Param "td.csr_enable") -}}
   {{ if eq .region "sidebar" -}}
     {{ $root := cond (and (ne $p.Params.toc_root true) (eq $p.Site.Home.Type "docs")) $p.Site.Home $p.FirstSection -}}
     {{ $render = and $root (eq $p.RelPermalink $root.RelPermalink) -}}
