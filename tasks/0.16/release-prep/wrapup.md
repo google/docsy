@@ -1,9 +1,9 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-06-15
+lastmod: 2026-06-25
 range: v0.15.0..main
-last-main-commit: f3128285
+last-main-commit: b3ce9274
 cSpell:ignore: favicons
 ---
 
@@ -11,7 +11,7 @@ Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
 milestone hygiene, and the tag-time checklist. The objective per-change matrix
 lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
-> Prepared for commits in [v0.15.0...main][] through [f3128285][].
+> Prepared for commits in [v0.15.0...main][] through [b3ce9274][].
 
 ## Themes (with evidence and client impact)
 
@@ -22,12 +22,12 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   a one-line path update (Hugo module `…/docsy/theme`; npm/clone
   `theme: docsy/theme`), and the release must publish the nested `theme/vX.Y.Z`
   module tag.
-- **Hugo 0.158+ support** — [#2647][], [#2648][], [#2649][]; trackers [#2581][],
-  [#2593][] (closed); goldens [#726][]. Theme minimum raised to 0.158.0; project
-  build validated on 0.163.1; templates/docs moved off deprecated language APIs
-  (zero deprecation notices). **Breaking** minimum-Hugo bump. Old keys
-  (`languageName`/`languageDirection`) still work but should become
-  `label`/`direction`. Node 22+ required for Hugo-managed Node tools from
+- **Hugo 0.158+ support** — [#2647][], [#2648][], [#2649][], [#2658][]; trackers
+  [#2581][], [#2593][] (closed); goldens [#726][]. Theme minimum raised to
+  0.158.0; project build validated on 0.163.2; templates/docs moved off
+  deprecated language APIs (zero deprecation notices). **Breaking** minimum-Hugo
+  bump. Old keys (`languageName`/`languageDirection`) still work but should
+  become `label`/`direction`. Node 22+ required for Hugo-managed Node tools from
   0.161.x (Docsy recommends Node LTS 24). Per-version mechanics live in the
   [Hugo upgrade guide][].
 - **Favicons** — [#2653][], [#2654][], [#2656][]; [#2595][] closed, [#2357][]
@@ -37,6 +37,15 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   `apple-touch-icon-NxN.png` variants); a `gen-favicons` CLI generates raster
   icons from a source SVG. **Breaking** (defaults removed) and **new**
   (zero-config discovery). User guide: [Add your favicons][].
+- **Shared chrome build mode (experimental)** — [#2660][], [#2662][]; tooling
+  [#2661][]; tracker [#2659][] (open). New opt-in `td.chrome = shared` build
+  mode: Docsy emits the repeated chrome (navbar, footer, left-nav) on one donor
+  page per language and restores it in the browser via the shipped
+  `chrome-nav.js`, so one build serves both readers and link checkers. A
+  contributor/CI-experience win; the default `full` mode and production output
+  are unchanged. The large-site cached-sidebar optimization is preserved and
+  generalized — its activation moved into `chrome-nav.js`, which now ships on
+  every page. User guide: [Chrome build modes][chrome].
 - **Packaging, docs, and tooling cleanup** — npm workspaces, maintainer-notes
   and examples-page refreshes, a Netlify-badge URL fix, a version-doc `vv` fix,
   and test guards (Hugo deprecation probe, mono-site fixtures). Mostly
@@ -47,7 +56,7 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 1. **Theme folder move** — update the install path for your mode (Hugo module
    `…/docsy/theme`; npm/clone `theme: docsy/theme`). See [release report][]
    (Theme folder move).
-2. **Minimum Hugo 0.158.0** — upgrade Hugo (prefer 0.163.1); optionally rename
+2. **Minimum Hugo 0.158.0** — upgrade Hugo (prefer 0.163.2); optionally rename
    `languageName`/`languageDirection` to `label`/`direction`; use Node LTS 24.
    See [Hugo upgrade guide][].
 3. **Default favicons removed** — supply your own files under `static/`; the
@@ -57,20 +66,28 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 ## Release content status
 
 - [release report][] (`blog/2026/0.16.0.md`): complete draft (`draft: true`).
-  Covers all three breaking changes with Actions, an upgrade section, and sanity
-  checks.
+  Covers the three breaking changes plus the experimental shared chrome build
+  mode, each with Actions, an upgrade section, and sanity checks.
 - [Hugo upgrade guide][] (`blog/2026/hugo-0.158.0+.md`): complete draft
-  (`draft: true`). Carries per-version Hugo mechanics (DRY).
+  (`draft: true`). Carries per-version Hugo mechanics for 0.158.0–0.163.2 (DRY).
 - Changelog `v0.16.0 - UNRELEASED` section: complete; reconciled with the
   ledger.
 
 ## Decisions
 
 - The three breaking changes for 0.16 are the theme folder move, the
-  minimum-Hugo bump, and default-favicon removal; everything else is new/cleanup
-  or internal.
+  minimum-Hugo bump, and default-favicon removal. The headline **new** feature
+  is the experimental `shared` chrome build mode; everything else is cleanup or
+  internal.
+- Ship the `shared` chrome build mode as **experimental and opt-in** (off by
+  default, `td.chrome = full`); it is a contributor/CI feature that doesn't
+  change production output, so it is **not** a breaking change. Route it as one
+  blog NEW section spanning [#2660][] and [#2662][]; [#2661][] (the
+  full-vs-shared link-check matrix) is internal tooling (`N/A`).
 - Keep Hugo mechanics in the [Hugo upgrade guide][] and link to it from the
   report and changelog (DRY).
+- Moved the project Hugo build to 0.163.2 ([#2658][]) for the PostCSS/Netlify
+  `ERR_ACCESS_DENIED` fix; the theme minimum stays 0.158.0.
 - Referenced [#2656][] from the favicon report/changelog entries (was
   implemented but unreferenced).
 - Omitted [#2650][] (double-`v` docs fix) from the changelog — too minor; the
@@ -136,6 +153,7 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [release report]: ../../../docsy.dev/content/en/blog/2026/0.16.0.md
 [hugo upgrade guide]: ../../../docsy.dev/content/en/blog/2026/hugo-0.158.0+.md
 [Add your favicons]: ../../../docsy.dev/content/en/docs/content/iconsimages.md
+[chrome]: ../../../docsy.dev/content/en/docs/deployment/chrome.md
 [maint-notes]: ../../../docsy.dev/content/en/project/about/maintainer-notes.md
 [pub-rel]:
   ../../../docsy.dev/content/en/project/about/maintainer-notes.md#publishing-a-release
@@ -161,5 +179,10 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2654]: https://github.com/google/docsy/pull/2654
 [#2656]: https://github.com/google/docsy/pull/2656
-[f3128285]: https://github.com/google/docsy/commit/f3128285
+[#2658]: https://github.com/google/docsy/pull/2658
+[#2659]: https://github.com/google/docsy/issues/2659
+[#2660]: https://github.com/google/docsy/pull/2660
+[#2661]: https://github.com/google/docsy/pull/2661
+[#2662]: https://github.com/google/docsy/pull/2662
+[b3ce9274]: https://github.com/google/docsy/commit/b3ce9274
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
