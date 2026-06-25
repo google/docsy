@@ -1,0 +1,30 @@
+{{/*
+  Returns whether the partial's REGION should render on the current PAGE.
+
+  With the `shared` chrome build mode (td.chrome) enabled, each repeated,
+  auto-generated region is kept on just enough pages for a link checker to reach
+  every link once; the dropped instances are restored in the browser (see
+  _partials/navbar.html, footer.html, sidebar.html and assets/js/chrome-nav.js) so
+  the shared build stays functionally equivalent to a full one. The regions kept
+  are:
+
+    navbar, footer  configured chrome  -> each home page
+    sidebar         computed left-nav  -> each locale's docs landing page
+
+  In `full` mode (the default), every region renders. See the chrome build modes
+  guide for what this is and how to enable it:
+  docsy.dev/content/en/docs/deployment/chrome.md
+
+  ctx: dict "page" PAGE "region" REGION
+*/ -}}
+{{ $p := .page -}}
+{{ $render := true -}}
+{{ if eq ($p.Param "td.chrome") "shared" -}}
+  {{ if eq .region "sidebar" -}}
+    {{ $root := cond (and (ne $p.Params.toc_root true) (eq $p.Site.Home.Type "docs")) $p.Site.Home $p.FirstSection -}}
+    {{ $render = and $root (eq $p.RelPermalink $root.RelPermalink) -}}
+  {{ else -}}
+    {{ $render = $p.IsHome -}}
+  {{ end -}}
+{{ end -}}
+{{ return $render -}}

@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.15.1-dev+022-over-main-487050c2",
+  "version": "0.15.1-dev+023-over-main-3bcd6e7d",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -72,6 +72,7 @@
     "set:version:git-info": "npm run -s _spv -- --version \"$(scripts/get-build-id.sh)\"",
     "set:version": "npm run -s _spv --",
     "test:fixture-site": "node --test 'tests/fixture-site/**/*.test.mjs'",
+    "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.test.mjs",
     "test:tooling": "node --test 'scripts/**/*.test.mjs'",
     "test:website": "npm run -C docsy.dev test",
@@ -84,6 +85,7 @@
   },
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
+    "jsdom": "^29.1.1",
     "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "markdownlint-rule-no-shortcut-ref-link": "github:chalin/markdownlint-rule-no-shortcut-ref-link#v0.3.1",

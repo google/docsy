@@ -1,6 +1,8 @@
-// Tests for the params.td.lean_render="remove" gate (_partials/lean-render.html),
-// which drops repeated chrome so a link checker reaches each link once. See the
-// Link checking guide: docsy.dev/content/en/docs/best-practices/link-checking.md
+// Cases: CCR-01 (td.chrome param), CCR-02 (kept chrome). See the CCR case registry in tasks/0.16/ccr/.
+// Tests for the params.td.chrome gate (_partials/chrome-render.html), which
+// drops repeated chrome so a link checker reaches each link once. See the
+// chrome build modes guide:
+// docsy.dev/content/en/docs/deployment/chrome.md
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -24,8 +26,8 @@ const navLinks = (h) => {
   return m ? [...m[0].matchAll(/href="([^"]+)"/g)].map((x) => x[1]) : [];
 };
 
-test('lean render off (default) keeps all chrome on every page', () => {
-  const r = buildSite('lean-off', { files });
+test('full mode (default) keeps all chrome on every page', () => {
+  const r = buildSite('ccr-off', { files });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   for (const rel of [
     'index.html',
@@ -46,10 +48,10 @@ test('lean render off (default) keeps all chrome on every page', () => {
   );
 });
 
-test('lean render on keeps one reference instance of each region', () => {
-  const r = buildSite('lean-on', {
+test('shared mode keeps one reference instance of each region', () => {
+  const r = buildSite('ccr-on', {
     files,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'remove' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
 
@@ -68,11 +70,12 @@ test('lean render on keeps one reference instance of each region', () => {
   assert.ok(!has.footer(deep), 'footer absent on the deep docs page');
 });
 
-// Guards the future "tag" mode: an unimplemented value must stay a no-op.
-test('lean render with an unknown mode keeps all chrome', () => {
-  const r = buildSite('lean-unknown', {
+// Setting the build mode explicitly to `full` (the default) keeps chrome on
+// every page, the same as leaving td.chrome unset.
+test('td.chrome="full" via the environment keeps all chrome', () => {
+  const r = buildSite('ccr-env-full', {
     files,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'tag' },
+    env: { HUGO_PARAMS_TD_CHROME: 'full' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   for (const rel of ['index.html', 'docs/page-a/index.html']) {
@@ -86,24 +89,25 @@ test('lean render with an unknown mode keeps all chrome', () => {
   );
 });
 
-test('lean render mode is case-insensitive', () => {
-  const r = buildSite('lean-case', {
+// Only the exact value `shared` enables shared mode; any other value — a typo
+// or wrong case like "SHARED" — safely falls back to full chrome.
+test('td.chrome with an unrecognized value falls back to full chrome', () => {
+  const r = buildSite('ccr-env-unknown', {
     files,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'REMOVE' },
+    env: { HUGO_PARAMS_TD_CHROME: 'SHARED' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   const landing = r.publicFile('docs/index.html');
-  assert.ok(has.sidebar(landing), 'left-nav kept on the docs landing');
-  assert.ok(!has.navbar(landing), 'navbar absent on the docs landing');
-  assert.ok(!has.footer(landing), 'footer absent on the docs landing');
+  assert.ok(has.navbar(landing), 'navbar present on the docs landing');
+  assert.ok(has.footer(landing), 'footer present on the docs landing');
 });
 
-// The documented config path (params.td.lean_render) must work too, not just
-// the HUGOx… environment override the other tests use.
-test('lean render can be enabled via site config', () => {
-  const r = buildSite('lean-config', {
+// The documented config path (params.td.chrome) must work too, not just the
+// HUGO_PARAMS_TD_CHROME environment override the other tests use.
+test('shared mode can be set via site config', () => {
+  const r = buildSite('ccr-config', {
     files,
-    extraConfig: ['params:', '  td:', '    lean_render: remove', ''].join('\n'),
+    extraConfig: ['params:', '  td:', '    chrome: shared', ''].join('\n'),
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
   const landing = r.publicFile('docs/index.html');
@@ -113,7 +117,7 @@ test('lean render can be enabled via site config', () => {
 });
 
 // Each locale's left-nav links differ, so every locale's docs landing is kept.
-test('lean render on keeps the sidebar on every locale docs landing page', () => {
+test('shared mode keeps the sidebar on every locale docs landing page', () => {
   const mlFiles = {
     ...files,
     'content/_index.ja.md': '---\ntitle: ホーム\n---\nHome body\n',
@@ -121,9 +125,9 @@ test('lean render on keeps the sidebar on every locale docs landing page', () =>
       '---\ntitle: ドキュメント\n---\nDocs landing\n',
     'content/docs/page-a/_index.ja.md': '---\ntitle: ページA\n---\nDeep page\n',
   };
-  const r = buildSite('lean-on-ml', {
+  const r = buildSite('ccr-on-ml', {
     files: mlFiles,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'remove' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
     extraConfig: [
       'defaultContentLanguage: en',
       'languages:',
@@ -154,14 +158,14 @@ test('lean render on keeps the sidebar on every locale docs landing page', () =>
 
 // Doc-rooted site (home is the docs landing): the single kept left-nav is the
 // home's, and it carries the full tree, so deeper pages can drop all chrome.
-test('lean render on a doc-rooted site keeps chrome on the home landing only', () => {
-  const r = buildSite('lean-doc-rooted', {
+test('shared mode on a doc-rooted site keeps chrome on the home landing only', () => {
+  const r = buildSite('ccr-doc-rooted', {
     files: {
       'content/_index.md': '---\ntitle: Home\ntype: docs\n---\nDocs landing\n',
       'content/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
       'content/guide/page-a.md': '---\ntitle: Page A\n---\nDeep page\n',
     },
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'remove' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
 
@@ -180,9 +184,9 @@ test('lean render on a doc-rooted site keeps chrome on the home landing only', (
   assert.ok(!has.sidebar(deep), 'left-nav absent on the deep page');
 });
 
-// Section-root scopes the left-nav to a subtree; lean render keeps only the
-// docs landing's full tree, which must already cover those scoped links.
-test('lean render keeps a docs-landing tree that covers section-rooted subsets', () => {
+// Section-root scopes the left-nav to a subtree; shared mode keeps only the docs
+// landing's full tree, which must already cover those scoped links.
+test('shared mode keeps a docs-landing tree that covers section-rooted subsets', () => {
   const files = {
     'content/_index.md': '---\ntitle: Home\n---\nLanding\n',
     'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
@@ -198,7 +202,7 @@ test('lean render keeps a docs-landing tree that covers section-rooted subsets',
     '',
   ].join('\n');
 
-  const off = buildSite('lean-section-root-off', { files, extraConfig });
+  const off = buildSite('ccr-section-root-off', { files, extraConfig });
   assert.equal(
     off.status,
     0,
@@ -207,10 +211,10 @@ test('lean render keeps a docs-landing tree that covers section-rooted subsets',
   const scoped = navLinks(off.publicFile('docs/sub/page-x/index.html'));
   assert.ok(scoped.length > 0, 'section-rooted page renders a scoped left-nav');
 
-  const on = buildSite('lean-section-root-on', {
+  const on = buildSite('ccr-section-root-on', {
     files,
     extraConfig,
-    env: { HUGOxPARAMSxTDxLEAN_RENDER: 'remove' },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(on.status, 0, `hugo build succeeds:\n${on.stdout}${on.stderr}`);
   assert.ok(

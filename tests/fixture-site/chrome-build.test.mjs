@@ -1,0 +1,68 @@
+// Cases: CCR-02 (kept reference instances). See the CCR case registry in tasks/0.16/ccr/.
+// Build-contract tests for `shared` chrome mode (params.td.chrome=shared).
+//
+// shared mode drops the repeated left-nav from inner pages and additionally leaves a
+// placeholder pointing at the section's "donor" page (the kept docs landing).
+// The client (assets/js/chrome-nav.js) fetches that donor, extracts its left-nav,
+// and injects it — no separate output format or per-site opt-in required.
+//
+// These tests pin the server-rendered contract the client depends on; the
+// full-vs-hydrated equivalence is checked separately in chrome-nav.test.mjs.
+
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { buildSite } from './lib/build-site.mjs';
+
+const files = {
+  'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+  'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+  'content/docs/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
+  'content/docs/guide/intro.md': '---\ntitle: Intro\n---\nIntro\n',
+};
+
+test('shared mode leaves a donor placeholder on inner pages, no extra nav-fragment opt-in needed', () => {
+  const r = buildSite('ccr-build', {
+    files,
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+
+  // An inner page drops the inline nav and points at the kept docs landing as
+  // its donor, with zero site configuration.
+  const inner = r.publicFile('docs/guide/intro/index.html');
+  assert.match(
+    inner,
+    /class="td-sidebar-chrome-placeholder"[^>]*data-nav-donor="\/docs\/"/,
+    'inner page carries a donor placeholder targeting the docs landing',
+  );
+  assert.ok(
+    !/id="td-section-nav"/.test(inner),
+    'inline section nav is absent on the inner page',
+  );
+
+  // The docs landing is the donor: it keeps the left-nav in the neutral cached
+  // shape (hidden, no server-baked active state) so the client can apply the
+  // per-page active state after fetching it.
+  const landing = r.publicFile('docs/index.html');
+  assert.match(
+    landing,
+    /id="td-sidebar-menu"[^>]*\bd-none\b/,
+    'docs landing ships the neutral cached nav, hidden',
+  );
+  assert.ok(
+    !/td-sidebar-chrome-placeholder/.test(landing),
+    'docs landing carries no placeholder',
+  );
+});
+
+test('shared mode emits no standalone nav fragment file', () => {
+  const r = buildSite('ccr-build-nofrag', {
+    files,
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+  assert.throws(
+    () => r.publicFile('docs/_nav.html'),
+    'the donor approach emits no per-section fragment file',
+  );
+});
