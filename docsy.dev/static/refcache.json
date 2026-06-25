@@ -2691,6 +2691,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:46.092497-05:00"
   },
+  "https://main--docsydocs.netlify.app/docs/deployment/chrome/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-25T10:19:13.186997-04:00"
+  },
   "https://main--docsydocs.netlify.app/docs/deployment/github-pages/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-16T19:16:45.891123-05:00"
@@ -3079,6 +3083,10 @@
     "StatusCode": 200,
     "LastSeen": "2026-04-29T20:27:42.900532-04:00"
   },
+  "https://web.dev/learn/pwa/architecture/": {
+    "StatusCode": 200,
+    "LastSeen": "2026-06-25T10:19:13.095134-04:00"
+  },
   "https://www.accessibilitychecker.org/blog/dark-mode-accessibility/": {
     "StatusCode": 200,
     "LastSeen": "2026-02-11T11:18:55.189488-05:00"
@@ -3239,10 +3247,6 @@
     "StatusCode": 206,
     "LastSeen": "2026-04-26T12:08:49.01174-04:00"
   },
-  "https://www.docsy.dev/docs/content/csr/": {
-    "StatusCode": 206,
-    "LastSeen": "2026-06-23T17:30:18.401373-04:00"
-  },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:02:22.123115-05:00"
@@ -3298,6 +3302,10 @@
   "https://www.docsy.dev/docs/deployment/amazon/": {
     "StatusCode": 206,
     "LastSeen": "2026-02-14T14:22:15.768393-05:00"
+  },
+  "https://www.docsy.dev/docs/deployment/chrome/": {
+    "StatusCode": 206,
+    "LastSeen": "2026-06-25T10:19:13.752169-04:00"
   },
   "https://www.docsy.dev/docs/deployment/github-pages/": {
     "StatusCode": 206,

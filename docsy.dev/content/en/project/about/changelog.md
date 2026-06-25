@@ -164,9 +164,9 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
 [**Experimental**](#experimental):
 
 - Added a **`shared` chrome build mode** (`td.chrome`), an experimental option
-  that emits the repeated chrome (navbar, footer, left-nav) on one donor page per
-  locale and restores it in the browser, so one build serves both readers and
-  link checkers. See [Chrome build modes][csr] ([#2659][]).
+  that emits the repeated chrome (navbar, footer, left-nav) on one donor page
+  per locale and restores it in the browser, so one build serves both readers
+  and link checkers. See [Chrome build modes][csr] ([#2659][]).
 
 [#2594]: https://github.com/google/docsy/pull/2594
 [#2357]: https://github.com/google/docsy/issues/2357
