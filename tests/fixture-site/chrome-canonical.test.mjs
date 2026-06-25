@@ -1,4 +1,7 @@
-// Cases: CCR-15 (print canonical URL), CCR-16 (paginated canonical URL). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-15 (print canonical URL), CCR-16 (paginated canonical URL) — both
+// validated here through the shared canonical-path mechanism, simulated via a
+// print-style request URL (no real print or paginator output is built). See the
+// CCR case registry in tasks/0.16/ccr/.
 // Equivalence test for the per-page canonical path. shared mode can run on a URL that
 // isn't the page's canonical one — a print view (/_print/docs/…) or a paginator
 // page (…/page/2/) — yet the full build derives the navbar active link, the
@@ -9,7 +12,8 @@
 //
 // The fixture has no print/paginator output, so we simulate the mismatch: load
 // the regular page's shared HTML (which bakes the canonical path) at a print-style
-// URL, and assert the restored chrome still matches the full page.
+// URL, and assert the restored chrome still matches the full page. A real
+// print/paginator fixture is a tracked follow-up (see the registry open items).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

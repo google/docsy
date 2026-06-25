@@ -168,12 +168,20 @@ test('shared mode restores the per-page version selector to match the full build
   assert.equal(got, want, 'restored version selector matches the full build');
 });
 
-test('shared-mode page matches the full build (whole page)', async () => {
+test('canonicalized shared-mode page matches the full build, except documented neutralizations', async () => {
   const page = 'docs/guide/intro/index.html';
   const url = `${BASE}/docs/guide/intro/`;
 
+  // `bodyWithout` canonicalizes both sides: it neutralizes the best-effort
+  // language selector (CCR-10), sorts class tokens, blanks ignorable whitespace,
+  // and pins the build timestamp — so this asserts whole-page equivalence modulo
+  // those documented neutralizations, not a byte-for-byte match.
   const got = bodyWithout(await inlinePage(page, url), []);
   const want = bodyWithout(normalize(full.publicFile(page)), []);
 
-  assert.equal(got, want, 'inlined shared-mode page matches the full build');
+  assert.equal(
+    got,
+    want,
+    'canonicalized shared-mode page matches the full build, except documented neutralizations',
+  );
 });

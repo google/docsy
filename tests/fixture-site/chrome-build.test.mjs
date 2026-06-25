@@ -20,7 +20,7 @@ const files = {
   'content/docs/guide/intro.md': '---\ntitle: Intro\n---\nIntro\n',
 };
 
-test('shared mode leaves a donor placeholder on inner pages, no opt-in needed', () => {
+test('shared mode leaves a donor placeholder on inner pages, no extra nav-fragment opt-in needed', () => {
   const r = buildSite('ccr-build', {
     files,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
