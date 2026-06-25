@@ -140,3 +140,59 @@ languages:
   assert.ok(got.length > 0, 'restored language menu carries links');
   assert.deepEqual(got, want, 'restored language links match the full build');
 });
+
+test('shared mode language selector links a missing translation, diverging from a full build (known CCR-10 gap)', async () => {
+  // `page-b` exists only in `en`; the home and `docs` landing exist in both
+  // locales (so the donor home still renders a live `ja` link to swap from).
+  const files = {
+    'content/_index.md': '---\ntitle: Home\n---\nHome\n',
+    'content/_index.ja.md': '---\ntitle: ホーム\n---\nHome\n',
+    'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+    'content/docs/_index.ja.md':
+      '---\ntitle: ドキュメント\n---\nDocs landing\n',
+    'content/docs/page-b.md': '---\ntitle: Page B\n---\nB\n',
+  };
+  const extraConfig = `defaultContentLanguage: en
+languages:
+  en:
+    weight: 1
+  ja:
+    weight: 2
+`;
+  const title = 'Docsy selector fixture';
+  const full = buildSite('sel-lang-missing-full', {
+    files,
+    extraConfig,
+    title,
+  });
+  const ccr = buildSite('sel-lang-missing-ccr', {
+    files,
+    extraConfig,
+    title,
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.equal(full.status, 0, `full build succeeds:\n${full.stderr}`);
+  assert.equal(ccr.status, 0, `CCR build succeeds:\n${ccr.stderr}`);
+
+  const page = 'docs/page-b/index.html';
+  const url = `${BASE}/docs/page-b/`;
+
+  // A full build renders the absent `ja` translation as a disabled <span>, so
+  // its language menu carries no live link to the non-existent page.
+  const want = selectorLinks(normalize(full.publicFile(page)), LANG_MENU);
+  assert.ok(
+    !want.includes('/ja/docs/page-b/'),
+    'full build leaves the missing translation as a disabled item',
+  );
+
+  // Known limitation (CCR-10): shared mode prefix-swaps the donor's home links
+  // unconditionally, so it restores a live link to the missing translation. This
+  // pins the current divergence; the planned fix (bake each page's available
+  // locales into the navbar placeholder and emit a disabled item for the rest)
+  // will turn this into a parity assertion. See tasks/0.16/ccr/.
+  const got = selectorLinks(await inlinePage(ccr, page, url), LANG_MENU);
+  assert.ok(
+    got.includes('/ja/docs/page-b/'),
+    'shared mode currently links the missing translation (known CCR-10 gap)',
+  );
+});
