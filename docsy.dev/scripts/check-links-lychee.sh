@@ -23,4 +23,13 @@ if [ -z "${GITHUB_TOKEN:-}" ] && command -v gh >/dev/null; then
   export GITHUB_TOKEN
 fi
 
-exec lychee --config lychee.toml --root-dir "$public" "$@" "$public"
+status=0
+lychee --config lychee.toml --root-dir "$public" "$@" "$public" || status=$?
+
+# Normalize cache order (lychee writes .lycheecache nondeterministically) so
+# reruns yield a byte-stable file and the committed cache diffs cleanly.
+if [ -f .lycheecache ]; then
+  LC_ALL=C sort -o .lycheecache .lycheecache
+fi
+
+exit "$status"
