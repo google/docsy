@@ -1,11 +1,5 @@
-// Sanity tests for the Lychee link checker and our use of it, ahead of the
-// htmltest -> Lychee switch (see thoughtry projects/link-checking/lychee-docsy).
-//
-// They pin the behavior the switch depends on: Lychee is installed, and it
-// passes/fails local paths, local fragments, external URLs, and external
-// fragments as expected. The external cases target docsy.dev itself -- a site we
-// control -- so the "good" target is stable; a canary test fails loudly if that
-// target ever moves. Set LYCHEE_SANITY_NO_NET=1 to skip the network cases.
+// Sanity tests for the Lychee link checker and our use of it. See thoughtry
+// projects/link-checking/lychee-docsy for rationale and findings.
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -16,19 +10,15 @@ import path from 'node:path';
 
 const noNet = process.env.LYCHEE_SANITY_NO_NET === '1';
 
-// A stable, controlled external target on our own site.
 const DOCSY_URL = 'https://www.docsy.dev/docs/get-started/';
-const DOCSY_FRAGMENT = 'installation-options'; // a get-started heading id
+const DOCSY_FRAGMENT = 'installation-options';
 
-// Inline fixtures, written to a temp dir at setup.
 const FILES = {
   'target.html': '<!doctype html><meta charset=utf-8><h2 id="known">known</h2>',
   'links-ok.html':
     '<a href="target.html">path</a> <a href="target.html#known">fragment</a>',
   'links-bad-path.html': '<a href="missing.html">missing path</a>',
   'links-bad-fragment.html': '<a href="target.html#absent">absent fragment</a>',
-  // A Hugo-style pretty URL: the page lives at pretty/index.html but is linked
-  // as pretty/. Used by the --index-files fragment tests below.
   'pretty/index.html': '<!doctype html><meta charset=utf-8><h2 id="pa">pa</h2>',
   'links-pretty-fragment.html': '<a href="pretty/#pa">pretty fragment</a>',
   'external-ok.html': `<a href="${DOCSY_URL}">url</a> <a href="${DOCSY_URL}#${DOCSY_FRAGMENT}">fragment</a>`,
@@ -52,7 +42,6 @@ after(() => rmSync(dir, { recursive: true, force: true }));
 
 const fx = (f) => path.join(dir, f);
 
-// Run lychee with JSON output; returns { status, json, stderr }.
 function runLychee(args) {
   const r = spawnSync(
     'lychee',
@@ -63,7 +52,7 @@ function runLychee(args) {
   try {
     json = JSON.parse(r.stdout);
   } catch {
-    /* non-JSON output (e.g. --version) */
+    /* non-JSON output, e.g. --version */
   }
   return { status: r.status, json, stderr: r.stderr };
 }
@@ -133,12 +122,8 @@ test(
   },
 );
 
-// Hugo emits pretty URLs (`/foo/`) backed by `foo/index.html`. Offline, Lychee
-// resolves a directory link to its index file only when told which index file
-// names to use, via `--index-files`. With it, a fragment on a pretty-URL page
-// resolves correctly; without it, lychee checks the directory path and reports
-// the fragment missing. otel.io's generated lychee.toml sets this (and
-// `include_fragments`) for the same reason. See lychee #1751, #1718.
+// `--index-files` resolves a Hugo pretty-URL dir link (/foo/) to foo/index.html
+// for fragment checks; matches otel.io's lychee.toml. See lychee #1751, #1718.
 test('offline fragment check resolves a Hugo pretty-URL directory via --index-files', () => {
   const r = runLychee([
     ...OFFLINE,
@@ -155,9 +140,6 @@ test('offline fragment check resolves a Hugo pretty-URL directory via --index-fi
   );
 });
 
-// Guard the failure mode: without --index-files, the same link is reported
-// missing. This pins *why* the option is required, so a future lychee that
-// resolves directory indexes by default turns this into a green-light signal.
 test('without --index-files, a pretty-URL fragment is (still) reported missing', () => {
   const r = runLychee([
     ...OFFLINE,
