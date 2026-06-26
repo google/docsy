@@ -63,7 +63,6 @@
     "postinstall": "npm run _postinstall",
     "postupdate:dep": "npm run -s post-update",
     "postupdate:packages": "npm run -s post-update",
-    "prune:refcache": "npm run -C docsy.dev prune:refcache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run -C docsy.dev serve --",
     "set:hugo:version": "node scripts/set-hugo-version.mjs",

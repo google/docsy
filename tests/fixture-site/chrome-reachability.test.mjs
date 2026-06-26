@@ -7,8 +7,7 @@
 // but keeps one donor instance of each per locale. This is the static-HTML
 // counterpart to the jsdom restoration-parity tests (chrome-nav,
 // chrome-equivalence): nothing runs the client here — we read the built HTML as
-// htmltest or Lychee would, and assert those donors leave no chrome link
-// unreachable. Mirrors docsy.dev's link-check-matrix.mjs at fixture scale.
+// Lychee would, and assert those donors leave no chrome link unreachable.
 //
 // The fixture configures all three link-bearing chrome regions — a navbar menu
 // (internal + external items), footer link columns (`params.links` user +
