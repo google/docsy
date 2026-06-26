@@ -121,11 +121,13 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
-## v0.15.1 or v0.16.0 - UNRELEASED {#next}
+## v0.16.0 - UNRELEASED {#next}
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
+For an introduction to this release, see the [0.16.0 release report][]. For
+Hugo-specific notes, see the [Hugo 0.158+ upgrade guide][]. For the full list of
+changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 **New**:
 
@@ -133,30 +135,38 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
   files (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and optional
   square `favicon-NxN.png` and `apple-touch-icon-NxN.png` variants) into
   `static/` and the theme discovers and links them -- no favicons partial
-  required. A new `gen-favicons` helper generates the raster icons from a source
-  SVG. See [Add your favicons][favicons] ([#2357][]).
+  required. A new `gen-favicons` helper generates raster icons from a source
+  SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
+  favicons][favicons] ([#2357][], [#2654][], [#2656][]).
 
 [**Breaking changes**](#breaking-change):
 
 - **Default favicons** removed from the theme; sites now supply their own.
   Conventional `static/` filenames are discovered and linked automatically (see
   **Favicon discovery** under **New** above), so a custom partial is only needed
-  for non-default filenames or extra links. See [Add your favicons][favicons]
-  ([#2653][]).
+  for non-default filenames or extra links. See [0.16.0 release
+  report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2653][]).
 - Raised the theme's minimum supported Hugo version to
   **[0.158.0][hugo-0.158.0]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
   Theme templates now use the language APIs introduced in Hugo 0.158.0. Note:
   the language config keys deprecated by Hugo 0.158.0 (`languageName`,
   `languageDirection`) still work in your site config, but consider renaming
-  them to `label` and `direction` — see
-  [Multi-language support](/docs/language/).
+  them to `label` and `direction`. See [Hugo 0.158+ upgrade guide][] and
+  [Multi-language support](/docs/language/) ([#2647][]).
+- **Theme folder move**: the canonical theme now lives in `theme/`; consuming
+  sites need a one-line install-path update for their install mode. See [0.16.0
+  release report][0.16.0-blog-theme-folder] ([#2641][], [#2645][]).
 
 **Other changes**:
 
 - Migrated the theme and docs off deprecated Hugo language APIs. Thanks
   [@deining][] for the groundwork in [#2594][] and [#2578][]!
 - Upgraded the project's Hugo build to [0.163.2][hugo-0.163.2]. The theme's
-  minimum supported Hugo version remains 0.158.0.
+  minimum supported Hugo version remains 0.158.0. See [Hugo 0.158+ upgrade
+  guide][] ([#2581][], [#2648][], [#2649][], [#2658][]).
+- Reorganized the repository package boundary: `theme/package.json` owns theme
+  runtime dependencies, and the root package orchestrates the `docsy.dev` and
+  `theme` workspaces ([#2645][]).
 - Moved cached-sidebar activation on large sites (above `sidebar_cache_limit`)
   from per-page inline jQuery to the shared `chrome-nav.js` hydration path;
   rendered navigation is unchanged.
@@ -168,17 +178,32 @@ For the full list of changes, see the [0.15.1][] or [0.16.0][] release page.
   per locale and restores it in the browser, so one build serves both readers
   and link checkers. See [Chrome build modes][chrome] ([#2659][]).
 
-[#2594]: https://github.com/google/docsy/pull/2594
+<!-- prettier-ignore-start -->
 [#2357]: https://github.com/google/docsy/issues/2357
-[#2653]: https://github.com/google/docsy/pull/2653
 [#2578]: https://github.com/google/docsy/pull/2578
+[#2581]: https://github.com/google/docsy/issues/2581
+[#2594]: https://github.com/google/docsy/pull/2594
+[#2641]: https://github.com/google/docsy/pull/2641
+[#2645]: https://github.com/google/docsy/pull/2645
+[#2647]: https://github.com/google/docsy/pull/2647
+[#2648]: https://github.com/google/docsy/pull/2648
+[#2649]: https://github.com/google/docsy/pull/2649
+[#2653]: https://github.com/google/docsy/pull/2653
+[#2654]: https://github.com/google/docsy/pull/2654
+[#2656]: https://github.com/google/docsy/pull/2656
+[#2658]: https://github.com/google/docsy/pull/2658
 [#2659]: https://github.com/google/docsy/issues/2659
-[favicons]: /docs/content/iconsimages/#add-your-favicons
-[hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
+[0.16.0 release report]: /blog/2026/0.16.0/
+[0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
+[0.16.0-blog-theme-folder]: /blog/2026/0.16.0/#theme-folder
+[0.16.0]: https://github.com/google/docsy/releases/tag/v0.16.0
 [chrome]: /docs/deployment/chrome/
-[0.15.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.15.1
-[0.16.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.0
+[favicons]: /docs/content/iconsimages/#add-your-favicons
+[git history since 0.15.0]: https://github.com/google/docsy/compare/v0.15.0...main
+[Hugo 0.158+ upgrade guide]: /blog/2026/hugo-0.158.0+/
 [hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0
+[hugo-0.163.2]: https://github.com/gohugoio/hugo/releases/tag/v0.163.2
+<!-- prettier-ignore-end -->
 
 ## v0.15.0 {#v0.15.0}
 
@@ -220,6 +245,7 @@ full list of changes, see the [0.15.0][] release page.
 - Fixed community/footer links so site-local links no longer open in a new
   browser target ([#2133][], [#2576][]).
 
+<!-- prettier-ignore-start -->
 [#2133]: https://github.com/google/docsy/issues/2133
 [#2557]: https://github.com/google/docsy/pull/2557
 [#2563]: https://github.com/google/docsy/pull/2563
@@ -240,6 +266,7 @@ full list of changes, see the [0.15.0][] release page.
 [0.15.0-blog-internationalization]: /blog/2026/0.15.0/#internationalization
 [0.15.0-blog-version-menu]: /blog/2026/0.15.0/#version-menu
 [0.15.0]: https://github.com/google/docsy/releases/v0.15.0
+<!-- prettier-ignore-end -->
 
 ## v0.14.3 {#v0.14.3}
 

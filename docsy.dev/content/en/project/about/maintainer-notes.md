@@ -243,6 +243,7 @@ If not adjust accordingly.
 
       ```sh
       REL=${VERSION:-{{% param tdVersion.latest %}}}
+      REL=v${REL#v} # tags are v-prefixed; normalize to exactly one leading v
       echo "REL=$REL"
       ```
 
@@ -252,13 +253,23 @@ If not adjust accordingly.
       git tag $REL
       ```
 
+    - Also create the nested **theme module tag**. Since the theme moved under
+      `theme/`, it is its own Go module ([github.com/google/docsy/theme][]), and
+      Go resolves it via a subdirectory-prefixed tag — this is what consuming
+      sites get when they import `…/docsy/theme`:
+
+      ```sh
+      git tag theme/$REL
+      ```
+
     - Double check:
 
       ```sh
       git tag --sort=-creatordate | head -3
       ```
 
-14. **Push the new tag**: either to all remotes at once, or one at a time.
+14. **Push the new tags** (the release tag `$REL` and the theme module tag
+    `theme/$REL`): either to all remotes at once, or one at a time.
 
     <details>
     <summary class="h6 text-info">Push to all remotes</summary>
@@ -307,7 +318,7 @@ If not adjust accordingly.
       export SKIP_VERSION_CHECK=1
       ```
 
-    - Push the tag to the remotes:
+    - Push the tags to the remotes (the release tag, then the theme module tag):
 
       ```console
       $ git push-all-remotes $REL
@@ -315,6 +326,8 @@ If not adjust accordingly.
       * [new tag]         {{% param tdVersion.latest %}} -> {{% param tdVersion.latest %}}
       + git push upstream {{% param tdVersion.latest %}}
       * [new tag]         {{% param tdVersion.latest %}} -> {{% param tdVersion.latest %}}
+      ...
+      $ git push-all-remotes theme/$REL
       ...
       ```
 
@@ -340,6 +353,7 @@ If not adjust accordingly.
 
     ```sh
     git push upstream $REL
+    git push upstream theme/$REL
     ```
 
     - Sanity check over `upstream` for example:
@@ -517,6 +531,7 @@ before any further changes are merged into the `main` branch:
 [docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [Examples page]: /examples/
+[github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
