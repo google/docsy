@@ -316,8 +316,9 @@ For [multilingual sites][], taxonomy terms get counted and linked _within_ the
 language site only. Taxonomy config parameters can be adjusted per language.
 
 [configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
+  https://gohugo.io/configuration/introduction/#configuration-file
 [enabled by default]:
   https://gohugo.io/content-management/taxonomies/#default-destinations
-[multilingual sites]: https://gohugo.io/configuration/params/#multilingual-sites
+[multilingual sites]:
+  https://gohugo.io/configuration/params/#multilingual-projects
 [taxonomies]: https://gohugo.io/content-management/taxonomies/

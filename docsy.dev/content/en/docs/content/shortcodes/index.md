@@ -183,7 +183,7 @@ workflow on **GitHub**. New users are always welcome!
 | icon      |                                                                    | Icon class     |
 
 [language parameter]: ../language/#internationalization-bundles
-[ui_read_more]: <{{% param github_repo %}}/blob/main/i18n/en.yaml>
+[ui_read_more]: <{{% param github_repo %}}/blob/main/theme/i18n/en.yaml>
 
 For available icons, see
 [Font Awesome](https://fontawesome.com/icons?d=gallery&m=free).
@@ -392,16 +392,16 @@ resources:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
-| Parameter | Description                                                                                                                                                         |
-| --------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|         1 | The image filename or enough of it to identify it (we do Glob matching)                                                                                             |
-|         2 | Command. One of `Fit`, `Resize`, `Fill` or `Crop`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-processing-methods). |
-|         3 | Processing options, e.g. `400x450 r180`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#image-processing-options).           |
+| Parameter | Description                                                                                                                                                 |
+| --------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|         1 | The image filename or enough of it to identify it (we do Glob matching)                                                                                     |
+|         2 | Command. One of `Fit`, `Resize`, `Fill` or `Crop`. See [Image Processing Methods](https://gohugo.io/content-management/image-processing/#image-operations). |
+|         3 | Processing options, e.g. `400x450 r180`. See [Image Processing Options](https://gohugo.io/content-management/image-processing/#processing).                 |
 
 ### `swaggerui`
 
 You can place the `swaggerui` shortcode anywhere inside a page with the
-[`swagger` layout](https://github.com/google/docsy/tree/main/layouts/swagger);
+[`swagger` layout](https://github.com/google/docsy/tree/main/theme/layouts/swagger);
 it renders [Swagger UI](https://swagger.io/tools/swagger-ui/) using any OpenAPI
 YAML or JSON file as source. This file can be hosted anywhere you like, for
 example in your site's root

@@ -316,7 +316,7 @@ module:
   <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoMinVersion %}}>
 [hvm]: https://github.com/jmooring/hvm
 [multidimensional content model]:
-  https://gohugo.io/about/features/#multi-dimensional-content-model
+  https://gohugo.io/about/features/#multidimensional-content-model
 [open-telemetry/opentelemetry.io#8850]:
   https://github.com/open-telemetry/opentelemetry.io/pull/8850
 [open-telemetry/opentelemetry.io#9070]:

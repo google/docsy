@@ -49,13 +49,13 @@ place them inside your project's `assets/scss/` folder:
   styles, including overriding any of the styles in Docsy's theme SCSS files.
 
 [`_styles_project.scss`]:
-  https://github.com/google/docsy/blob/main/assets/scss/_styles_project.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/_styles_project.scss
 [`_variables.scss`]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/_variables.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_variables.scss
 [`_variables_project.scss`]:
-  https://github.com/google/docsy/blob/main/assets/scss/_variables_project.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/_variables_project.scss
 [`_variables_project_after_bs.scss`]:
-  https://github.com/google/docsy/blob/main/assets/scss/_variables_project_after_bs.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/_variables_project_after_bs.scss
 [bs_var]: https://github.com/twbs/bootstrap/blob/v5.3.3/scss/_variables.scss
 
 > [!SUCCESS] Files you can customize (the rest are internal)
@@ -121,8 +121,8 @@ dark-mode style adjustments as follows:
 @import 'td/extra/bs-defaults';
 ```
 
-[td/extra]: https://github.com/google/docsy/tree/main/assets/scss/td/extra
-[assets/scss/td]: https://github.com/google/docsy/tree/main/assets/scss/td
+[td/extra]: https://github.com/google/docsy/tree/main/theme/assets/scss/td/extra
+[assets/scss/td]: https://github.com/google/docsy/tree/main/theme/assets/scss/td
 [Alerts]: /docs/content/adding-content/#alerts
 
 ## Colors and color themes
@@ -305,7 +305,7 @@ dark mode theme customization file and import it in your project's
 [`_styles_project.scss`][].
 
 [_color-adjustments-dark.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/_color-adjustments-dark.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_color-adjustments-dark.scss
 [Chroma for code highlighting]: #code-highlighting-with-chroma
 [Light/dark code styles]: #lightdark-code-styles
 
@@ -494,13 +494,13 @@ Nice to meet you!
 ```
 
 [_code.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/_code.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_code.scss
 [_code-dark.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/_code-dark.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_code-dark.scss
 [assets/scss/td/chroma/_dark.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_dark.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/chroma/_dark.scss
 [assets/scss/td/chroma/_light.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/chroma/_light.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/chroma/_light.scss
 [Hugo generated Chroma styles]:
   https://gohugo.io/commands/hugo_gen_chromastyles/
 [light/dark modes]: #lightdark-color-modes
@@ -694,7 +694,7 @@ params:
 ```
 
 [front matter `params`]:
-  https://gohugo.io/content-management/front-matter/#front-matter-parameters
+  https://gohugo.io/content-management/front-matter/#parameters
 
 Internally, this adds `data-bs-theme="dark"` to the navbar, triggering
 Bootstrap's dark theme. This affects the default colors of navbar and all its
@@ -744,7 +744,8 @@ of the following:
     }
     ```
 
-[_nav.scss]: https://github.com/google/docsy/blob/main/assets/scss/td/_nav.scss
+[_nav.scss]:
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_nav.scss
 [project-styles]: /docs/content/lookandfeel/#project-style-files
 [wordmark]: https://en.wikipedia.org/wiki/Wordmark
 [your logo]: /docs/content/iconsimages/#add-your-logo
@@ -810,7 +811,7 @@ params:
 
 [dark mode]: https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode
 [layouts/_partials/theme-toggler.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/theme-toggler.html
+  https://github.com/google/docsy/blob/main/theme/layouts/_partials/theme-toggler.html
 [search box]: /docs/content/search/
 
 ## Alerts
@@ -930,7 +931,7 @@ file's content will be included inside the `div.td-content` after `</header>`,
 just before `.Content` is rendered.
 
 [_td-content-after-header.html]:
-  https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
+  https://github.com/google/docsy/blob/main/theme/layouts/_td-content-after-header.html
 
 ## Adding custom class to the body element
 
@@ -962,7 +963,7 @@ The page's opening body tag will look like this (assuming it is a section page):
 ```
 
 To apply the custom class to every page of a section or a directory, use the
-[Front Matter Cascade](https://gohugo.io/content-management/front-matter/#front-matter-cascade)
+[Front Matter Cascade](https://gohugo.io/content-management/front-matter/#cascade-1)
 feature of Hugo in your configuration file, or in the front matter of the
 highest-level page you want to modify.
 

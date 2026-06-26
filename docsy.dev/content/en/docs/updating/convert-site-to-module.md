@@ -154,7 +154,7 @@ module:
 {{< /tab >}}
 {{< /tabpane >}}
 
-You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
 Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
 
 > [!TIP]

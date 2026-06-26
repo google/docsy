@@ -36,7 +36,7 @@ sections and templates, which we'll look at in
 [Content sections and templates](#content-sections-and-templates).
 
 You can find out more about Hugo directory structure in
-[Directory Structure Explained](https://gohugo.io/getting-started/directory-structure/#directory-structure-explained).
+[Directory Structure Explained](https://gohugo.io/getting-started/directory-structure/).
 
 ## Content sections and templates
 
@@ -49,18 +49,18 @@ snippets of HTML for page elements like headers, search boxes, and more.
 
 Because most technical documentation sites have different sections for different
 types of content, the Docsy theme comes with the
-[following templates](https://github.com/google/docsy/tree/main/layouts) for
-top-level site sections that you might need:
+[following templates](https://github.com/google/docsy/tree/main/theme/layouts)
+for top-level site sections that you might need:
 
-- [`docs`](https://github.com/google/docsy/tree/main/layouts/docs) is for pages
-  in your site's Documentation section.
-- [`blog`](https://github.com/google/docsy/tree/main/layouts/blog) is for pages
-  in your site's Blog.
-- [`community`](https://github.com/google/docsy/tree/main/layouts/community) is
-  for your site's Community page.
+- [`docs`](https://github.com/google/docsy/tree/main/theme/layouts/docs) is for
+  pages in your site's Documentation section.
+- [`blog`](https://github.com/google/docsy/tree/main/theme/layouts/blog) is for
+  pages in your site's Blog.
+- [`community`](https://github.com/google/docsy/tree/main/theme/layouts/community)
+  is for your site's Community page.
 
 It also provides a
-[default "landing page" type of template](https://github.com/google/docsy/tree/main/layouts/)
+[default "landing page" type of template](https://github.com/google/docsy/tree/main/theme/layouts/)
 with the site header and footer, but no left nav, that you can use for any other
 section. In this site and our example site it's used for the site [home page](/)
 and the [About](/about/) page.
@@ -370,9 +370,9 @@ You can find out much more about managing resources with Hugo bundles in
 ## Adding docs and blog posts
 
 The template you'll probably use most often is the
-[`docs` template](https://github.com/google/docsy/blob/main/layouts/docs/baseof.html)
+[`docs` template](https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html)
 (as used in this page) or the very similar
-[`blog` template](https://github.com/google/docsy/blob/main/layouts/blog/baseof.html).
+[`blog` template](https://github.com/google/docsy/blob/main/theme/layouts/blog/baseof.html).
 Both these templates include:
 
 - a left nav
@@ -596,7 +596,7 @@ link to an external blog instead, just delete the `blog` subdirectory.
 ## Working with top-level landing pages
 
 Docsy's
-[default page template](https://github.com/google/docsy/blob/main/layouts/docs/baseof.html)
+[default page template](https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html)
 has no left nav and is useful for creating a home page for your site or other
 "landing" type pages.
 

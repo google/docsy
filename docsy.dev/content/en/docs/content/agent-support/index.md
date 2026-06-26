@@ -176,10 +176,9 @@ For details on how these checks are configured, see
 [built-in output formats]: https://gohugo.io/configuration/output-formats/
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
-[layouts/all.md]: https://github.com/google/docsy/blob/main/layouts/all.md
+[layouts/all.md]: https://github.com/google/docsy/blob/main/theme/layouts/all.md
 [llmstxt.org]: https://llmstxt.org/
 [OpenTelemetry agent score]:
   https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
-[sof]:
-  https://gohugo.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates
+[sof]: https://gohugo.io/templates/shortcode/

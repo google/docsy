@@ -379,8 +379,8 @@ params:
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
 See the
-[Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults)
-for a list of defaults that can be overridden.
+[Mermaid documentation](https://mermaid.js.org/config/configuration.html) for a
+list of defaults that can be overridden.
 
 Settings can also be overridden on a per-diagram basis by making use of a
 [front matter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)

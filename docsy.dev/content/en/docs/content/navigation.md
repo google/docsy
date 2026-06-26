@@ -192,8 +192,7 @@ To style the search menu, apply your custom CSS to `.td-navbar__search`.
 
 ### Adding icons to the navbar
 
-As described in the
-[Hugo docs](https://gohugo.io/content-management/menus/#add-non-content-entries-to-a-menu),
+As described in the [Hugo docs](https://gohugo.io/content-management/menus/),
 you can add icons to the navbar by using the pre and/or post parameter for main
 menu items defined in your site's `hugo.toml`/`hugo.yaml`/`hugo.json` or via
 page front matter. For example, the following configuration adds the GitHub icon
@@ -661,7 +660,7 @@ details, see [ScrollSpy][].
 [IntersectionObserver API]:
   https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver
 [layouts/_partials/td/scrollspy-attr.txt]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/td/scrollspy-attr.txt
+  https://github.com/google/docsy/blob/main/theme/layouts/_partials/td/scrollspy-attr.txt
 [#2291]: https://github.com/google/docsy/pull/2291
 [ScrollSpy]: https://getbootstrap.com/docs/5.3/components/scrollspy/
 [rootmargin]:
@@ -810,17 +809,17 @@ For details, see [scroll styles][].
     If the target is already visible, the page might not scroll.
 
 [configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
+  https://gohugo.io/configuration/introduction/#configuration-file
 [fragment]: https://gohugo.io/quick-reference/glossary/#fragment
 [heading IDs are auto-generated]:
   https://gohugo.io/configuration/markup/#parserautoheadingid
 [hook]: https://gohugo.io/templates/render-hooks/
 [layouts/_partials/td/render-heading.html]:
-  https://github.com/google/docsy/tree/main/layouts/_partials/td/render-heading.html
+  https://github.com/google/docsy/blob/main/theme/layouts/_partials/td/render-heading.html
 [Markdown attributes]: https://gohugo.io/content-management/markdown-attributes/
 [menu]: https://gohugo.io/content-management/menus/
 [menus]: https://gohugo.io/content-management/menus/
 [Multi-language support]: /docs/language/
 [scroll styles]:
-  https://github.com/google/docsy/blob/main/assets/scss/td/_scroll.scss
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_scroll.scss
 [shared-chrome]: /docs/deployment/chrome/
