@@ -17,7 +17,7 @@ exclude_path = [
 # .htmltest.yml IgnoreURLs.
 exclude = [
   '^(https://www\.docsy\.dev/)?fr/',                  # French language pages
-  '[?&]no-link-check',                                # opt-out query param
+  '[?&]link-check=no',                                # opt-out query param
   '/index\.xml$',                                     # rel=alternate RSS links
   '^https?://[^/]+/(categories|tags)/',              # Docsy-generated taxonomy
   '^https?://localhost\b',
