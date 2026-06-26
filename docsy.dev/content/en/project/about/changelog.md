@@ -176,8 +176,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 - Added a **`shared` chrome build mode** (`td.chrome`), an experimental option
   that emits the repeated chrome (navbar, footer, left-nav) on one donor page
   per locale and restores it in the browser, so one build serves both readers
-  and link checkers. See [Chrome build modes][chrome] ([#2659][], [#2660][],
-  [#2662][]).
+  and link checkers. See [Chrome build modes][chrome] ([#2659][]).
 
 <!-- prettier-ignore-start -->
 [#2357]: https://github.com/google/docsy/issues/2357
@@ -194,8 +193,6 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2656]: https://github.com/google/docsy/pull/2656
 [#2658]: https://github.com/google/docsy/pull/2658
 [#2659]: https://github.com/google/docsy/issues/2659
-[#2660]: https://github.com/google/docsy/pull/2660
-[#2662]: https://github.com/google/docsy/pull/2662
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
 [0.16.0-blog-theme-folder]: /blog/2026/0.16.0/#theme-folder
