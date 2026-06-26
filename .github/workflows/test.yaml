@@ -31,6 +31,18 @@ jobs:
 
       - run: npm install --omit=optional
 
+      # Put lychee on PATH for the link checker (ci:test runs on Linux only).
+      - if: runner.os != 'Windows'
+        name: Install lychee
+        env:
+          LYCHEE_VERSION: v0.24.2
+        run: |
+          tmp="$(mktemp -d)"
+          curl -sfL "https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C "$tmp"
+          install -D "$(find "$tmp" -type f -name lychee | head -n1)" "$HOME/.local/bin/lychee"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
       - if: runner.os != 'Windows'
         run: npm run ci:test
 

@@ -2,4 +2,5 @@
 /content/en/tests/alerts.md
 
 /layouts
+/lychee.toml
 /tests/md-output/goldens/**/*.*
