@@ -75,4 +75,4 @@ ID. For details, see
 - [Publish your site](/docs/deployment/).
 
 [configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
+  https://gohugo.io/configuration/introduction/#configuration-file

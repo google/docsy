@@ -49,7 +49,7 @@ For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 #### On Linux
 
 Be careful using `sudo apt-get install hugo`, as it
-[doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/getting-started/installing/#debian-and-ubuntu),
+[doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/installation/linux/#debian),
 and may not be up-to-date with the most recent Hugo version.
 
 If you've already installed Hugo, check your version:
@@ -61,8 +61,8 @@ hugo version
 If the result is {{% param "hugoMinVersion" %}} or earlier, or if you don't see
 `Extended`, you'll need to install the latest version. You can see a complete
 list of Linux installation options in
-[Install Hugo](https://gohugo.io/getting-started/installing/#linux). The
-following shows you how to install Hugo from the release page:
+[Install Hugo](https://gohugo.io/installation/linux/). The following shows you
+how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
@@ -89,8 +89,7 @@ following shows you how to install Hugo from the release page:
 
 #### On macOS
 
-Install Hugo using
-[Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
+Install Hugo using [Brew](https://gohugo.io/installation/macos/#homebrew).
 
 #### Hugo-extended NPM package {#hugo-extended-npm}
 

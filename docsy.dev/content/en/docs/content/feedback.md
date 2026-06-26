@@ -289,10 +289,10 @@ form that collects the user's email address to your site source:
 ## Search Engine Optimization meta tags
 
 To learn how to optimize your site for SEO, see
-[Search Engine Optimization (SEO) Starter Guide](https://developers.google.com/search/docs/beginner/seo-starter-guide).
+[Search Engine Optimization (SEO) Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide).
 
 Google
-[recommends](https://developers.google.com/search/docs/beginner/seo-starter-guide?hl=en%2F#descriptionmeta)
+[recommends](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 using the `description` meta tag to tell search engines what your page is about.
 For each generated page, Docsy will set the content of the meta `description` by
 using the first of the following that is defined:
@@ -310,15 +310,15 @@ partial. For details, see
 
 [0.8.0]: /project/about/changelog/#v0.8.0
 [Configure Google Analytics]:
-  https://gohugo.io/templates/embedded/#configure-google-analytics
+  https://gohugo.io/templates/embedded/#configuration-google-analytics
 [ga4-intro]: https://support.google.com/analytics/answer/1042508
 [Google Analytics]: https://analytics.google.com/analytics/web/
 [hugo-ga]: https://gohugo.io/templates/embedded/#google-analytics
 [embedded templates]: https://gohugo.io/templates/embedded/
 [page-description.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/page-description.html
-[site `params`]: https://gohugo.io/variables/site/#the-siteparams-variable
+  https://github.com/google/docsy/blob/main/theme/layouts/_partials/page-description.html
+[site `params`]: https://gohugo.io/methods/site/params/
 [summary]: https://gohugo.io/content-management/summaries/
 [configure]: #setup
 [configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
+  https://gohugo.io/configuration/introduction/#configuration-file

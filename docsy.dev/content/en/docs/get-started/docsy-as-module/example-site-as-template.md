@@ -95,7 +95,7 @@ easy:
 > inside your `hugo.toml` slightly, for example by adding a proxy to use when
 > downloading remote modules. You can find details of what these configuration
 > settings do in the
-> [Hugo modules documentation](https://gohugo.io/hugo-modules/configuration/#module-config-top-level).
+> [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
 
 Now you can make local edits and test your copied site locally with Hugo.
 

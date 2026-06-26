@@ -117,7 +117,7 @@ chrome link reachable.
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
-[hugo-env-config]: https://gohugo.io/getting-started/configuration/#configure-with-environment-variables
+[hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [mpa]: https://web.dev/learn/pwa/architecture/
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu

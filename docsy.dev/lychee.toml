@@ -17,7 +17,7 @@ exclude_path = [
 # .htmltest.yml IgnoreURLs.
 exclude = [
   '^(https://www\.docsy\.dev/)?fr/',                  # French language pages
-  '[?&]no-link-check',                                # opt-out query param
+  '[?&]link-check=no',                                # opt-out query param
   '/index\.xml$',                                     # rel=alternate RSS links
   '^https?://[^/]+/(categories|tags)/',              # Docsy-generated taxonomy
   '^https?://localhost\b',
@@ -40,31 +40,4 @@ exclude = [
   '^https://www\.docsy\.dev/docs/deployment/chrome/$',
   '^https://www\.docsy\.dev/blog/2026/0\.16\.0/$',
   '^https://www\.docsy\.dev/blog/2026/hugo-0\.158\.0\+/$',
-
-  # Remove when content-rot fixes land (parked: chalin-m24-docsy-link-rot-2026-0626).
-  # These externals are genuinely broken on this branch and fixed on that one;
-  # excluded only to keep CI green until it lands, then this block goes away.
-  '^https://github\.com/google/docsy/(blob|tree)/main/(assets|i18n|layouts|go\.mod)\b',  # theme moved under theme/
-  '^https://developers\.google\.com/search/docs/beginner/seo-starter-guide',     # moved to fundamentals/
-  '^https://mermaid-js\.github\.io/mermaid/#/Setup',                             # moved to mermaid.js.org
-  # gohugo.io anchors renamed by a docs IA reorg (pages 200, fragments gone):
-  '^https://gohugo\.io/about/features/#multi-dimensional-content-model',
-  '^https://gohugo\.io/configuration/params/#multilingual-sites',
-  '^https://gohugo\.io/content-management/front-matter/#front-matter-cascade',
-  '^https://gohugo\.io/content-management/front-matter/#front-matter-parameters',
-  '^https://gohugo\.io/content-management/image-processing/#image-processing-methods',
-  '^https://gohugo\.io/content-management/image-processing/#image-processing-options',
-  '^https://gohugo\.io/content-management/menus/#add-non-content-entries-to-a-menu',
-  '^https://gohugo\.io/content-management/shortcodes/#shortcodes-with-markdown',
-  '^https://gohugo\.io/getting-started/configuration/#configuration-file',
-  '^https://gohugo\.io/getting-started/configuration/#configure-with-environment-variables',
-  '^https://gohugo\.io/getting-started/directory-structure/#directory-structure-explained',
-  '^https://gohugo\.io/getting-started/directory-structure/#union-file-system',
-  '^https://gohugo\.io/getting-started/installing/#debian-and-ubuntu',
-  '^https://gohugo\.io/getting-started/installing/#homebrew-macos',
-  '^https://gohugo\.io/getting-started/installing/#linux',
-  '^https://gohugo\.io/hugo-modules/configuration/#module-config-top-level',
-  '^https://gohugo\.io/templates/embedded/#configure-google-analytics',
-  '^https://gohugo\.io/templates/shortcode-templates/#output-format-specific-templates-shortcode-templates',
-  '^https://gohugo\.io/variables/site/#the-siteparams-variable',
 ]

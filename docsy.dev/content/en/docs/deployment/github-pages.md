@@ -177,8 +177,8 @@ workflow file has more configuration options, which are well
 [cd]:
   https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment
 [marketplace for actions]:
-  https://github.com/marketplace?no-link-check&type=actions
+  https://github.com/marketplace?link-check=no&type=actions
 [workflow file]:
-  https://github.com/google/docsy-example/blob/master/.github/workflows/deploy-github-pages.yml?no-link-check
+  https://github.com/google/docsy-example/blob/master/.github/workflows/deploy-github-pages.yml?link-check=no
 [example site as template]:
   /docs/get-started/docsy-as-module/example-site-as-template/

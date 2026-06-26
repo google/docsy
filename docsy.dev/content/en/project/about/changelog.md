@@ -530,7 +530,7 @@ For the full list of changes, see the [0.12.0][] release page.
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Heading self links]: /docs/content/navigation/#heading-self-links
 [_td-content-after-header.html]:
-  https://github.com/google/docsy/blob/main/layouts/_td-content-after-header.html
+  https://github.com/google/docsy/blob/main/theme/layouts/_td-content-after-header.html
 
 ## v0.11.0 {#v0.11.0}
 
@@ -645,7 +645,7 @@ For details concerning all footer changes, see [#1818][].
   /docs/content/repository-links/#path_base_for_github_subdir-optional
 [Repository Links]: /docs/content/repository-links/
 [union file system]:
-  https://gohugo.io/getting-started/directory-structure/#union-file-system
+  https://gohugo.io/getting-started/directory-structure/#unified-file-system
 
 ## v0.8.0 {#v0.8.0}
 
@@ -763,7 +763,7 @@ For the full list of changes, see the [0.7.0][] release page.
 
 [chroma-docsy]: /docs/content/lookandfeel/#code-highlighting-with-chroma
 [shortcodes with markdown]:
-  https://gohugo.io/content-management/shortcodes/#shortcodes-with-markdown
+  https://gohugo.io/content-management/shortcodes/#notation
 
 - **Detection of draw.io diagrams** is now **disabled** by default [#1185][]
 

@@ -532,7 +532,7 @@ before any further changes are merged into the `main` branch:
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [Examples page]: /examples/
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
-[go.mod]: <{{% param github_repo %}}/blob/main/go.mod>
+[go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>

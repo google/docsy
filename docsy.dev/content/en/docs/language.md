@@ -113,7 +113,7 @@ support for more information.
 >
 > If you have a multi language installation, ensure that the section
 > `[languages]` inside your
-> [configuration file](https://gohugo.io/getting-started/configuration/#configuration-file)
+> [configuration file](https://gohugo.io/configuration/introduction/#configuration-file)
 > is declared **before** the section `[module]` with the module imports.
 > Otherwise you will run into trouble!
 
@@ -156,7 +156,7 @@ example].
 ## Selecting a language from the language menu
 
 If you configure more than one language in your
-[configuration file](https://gohugo.io/getting-started/configuration/#configuration-file),
+[configuration file](https://gohugo.io/configuration/introduction/#configuration-file),
 the Docsy theme adds a language drop down to the navbar. Selecting a language
 takes the user to the translated version of the current page, or the home page
 for the given language. For details, see
@@ -192,7 +192,7 @@ internationalization bundle.
 
 <!-- prettier-ignore-start -->
 [Docsy example]: https://example.docsy.dev/
-[en.yaml]: https://github.com/google/docsy/blob/main/i18n/en.yaml
+[en.yaml]: https://github.com/google/docsy/blob/main/theme/i18n/en.yaml
 [Multilingual mode]: https://gohugo.io/content-management/multilingual/
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 <!-- prettier-ignore-end -->
