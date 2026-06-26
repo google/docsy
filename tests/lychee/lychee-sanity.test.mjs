@@ -28,7 +28,7 @@ const FILES = {
   'links-bad-path.html': '<a href="missing.html">missing path</a>',
   'links-bad-fragment.html': '<a href="target.html#absent">absent fragment</a>',
   // A Hugo-style pretty URL: the page lives at pretty/index.html but is linked
-  // as pretty/. Used by the known-limitation (todo) test below.
+  // as pretty/. Used by the --index-files fragment tests below.
   'pretty/index.html': '<!doctype html><meta charset=utf-8><h2 id="pa">pa</h2>',
   'links-pretty-fragment.html': '<a href="pretty/#pa">pretty fragment</a>',
   'external-ok.html': `<a href="${DOCSY_URL}">url</a> <a href="${DOCSY_URL}#${DOCSY_FRAGMENT}">fragment</a>`,
@@ -133,25 +133,40 @@ test(
   },
 );
 
-// Known limitation (TDD): offline, Lychee resolves a Hugo pretty URL (pretty/)
-// to the directory rather than pretty/index.html when scanning for an anchor,
-// so the fragment is reported missing even though it exists. Tracked upstream
-// (lychee #1751, #1718). Remove `todo` once Lychee resolves directory indexes
-// for offline fragment checks.
-test(
-  'offline fragment check resolves a Hugo pretty-URL directory to its index.html',
-  { todo: 'lychee maps /foo/ to the dir, not foo/index.html, for fragments' },
-  () => {
-    const r = runLychee([
-      ...OFFLINE,
-      '--root-dir',
-      dir,
-      fx('links-pretty-fragment.html'),
-    ]);
-    assert.equal(
-      r.json.errors,
-      0,
-      'a fragment on a pretty-URL page is reachable',
-    );
-  },
-);
+// Hugo emits pretty URLs (`/foo/`) backed by `foo/index.html`. Offline, Lychee
+// resolves a directory link to its index file only when told which index file
+// names to use, via `--index-files`. With it, a fragment on a pretty-URL page
+// resolves correctly; without it, lychee checks the directory path and reports
+// the fragment missing. otel.io's generated lychee.toml sets this (and
+// `include_fragments`) for the same reason. See lychee #1751, #1718.
+test('offline fragment check resolves a Hugo pretty-URL directory via --index-files', () => {
+  const r = runLychee([
+    ...OFFLINE,
+    '--index-files',
+    'index.html',
+    '--root-dir',
+    dir,
+    fx('links-pretty-fragment.html'),
+  ]);
+  assert.equal(
+    r.json.errors,
+    0,
+    'a fragment on a pretty-URL page is reachable',
+  );
+});
+
+// Guard the failure mode: without --index-files, the same link is reported
+// missing. This pins *why* the option is required, so a future lychee that
+// resolves directory indexes by default turns this into a green-light signal.
+test('without --index-files, a pretty-URL fragment is (still) reported missing', () => {
+  const r = runLychee([
+    ...OFFLINE,
+    '--root-dir',
+    dir,
+    fx('links-pretty-fragment.html'),
+  ]);
+  assert.ok(
+    r.json.errors >= 1,
+    'documents that --index-files is required for pretty-URL fragments',
+  );
+});
