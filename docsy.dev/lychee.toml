@@ -1,0 +1,31 @@
+# Lychee link-checker config for docsy.dev. Ported from `.htmltest.yml`; run via
+# `npm run check:links:lychee`. See thoughtry projects/link-checking/lychee-docsy.
+
+cache = true
+max_cache_age = "375d"             # ~ .htmltest.yml CacheExpires: 9000h
+no_progress = true
+extensions = ["html"]              # built HTML only (htmltest checks .html)
+include_fragments = "full"         # htmltest anchor checking (0.24.2: enum, not bool)
+index_files = ["index.html"]       # resolve Hugo pretty-URL dir links to index.html
+
+# .htmltest.yml IgnoreDirs.
+exclude_path = [
+  'blog/(\d+/)?page/\d+',  # blog pagination
+  '/fr/',                  # French language pages
+]
+
+# .htmltest.yml IgnoreURLs.
+exclude = [
+  '^(https://www\.docsy\.dev/)?fr/',                  # French language pages
+  '[?&]no-link-check',                                # opt-out query param
+  '/index\.xml$',                                     # rel=alternate RSS links
+  '^https?://[^/]+/(categories|tags)/',              # Docsy-generated taxonomy
+  '^https?://localhost\b',
+  '^https://github\.com/google/docsy/releases/v[\d.]+-dev',  # non-existent -dev versions
+  '^https://deploy-preview-\d+--docsydocs\.netlify\.app',    # previews not yet served
+  '^https?://github\.com/.*?/.*?/(new|edit)/',       # Docsy view/edit-source links
+  '^https://github\.com/google/docsy/tree/main/docsy\.dev/content/en/',
+  '^https://twitter\.com/docsydocs$',
+  '^https://badges\.netlify\.com/api',
+  '^https://code\.jquery\.com',
+]
