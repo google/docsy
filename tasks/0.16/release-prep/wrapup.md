@@ -48,7 +48,7 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   every page. User guide: [Chrome build modes][chrome].
 - **Packaging, docs, and tooling cleanup** — npm workspaces, maintainer-notes
   and examples-page refreshes, a Netlify-badge URL fix, a version-doc `vv` fix,
-  and test guards (Hugo deprecation probe, mono-site fixtures). Mostly
+  and test guards (Hugo deprecation probe, fixture-site tests). Mostly
   internal/maintainer-facing.
 
 ## Breaking changes and required actions
