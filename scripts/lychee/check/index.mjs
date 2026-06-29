@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-// Run lychee over a built site's ./public output (resolved to an absolute path;
-// public/ may be a symlink), then normalize .lycheecache so reruns stay byte
-// stable. Bridges a GitHub token from the `gh` CLI when GITHUB_TOKEN isn't set:
-// lychee reads GITHUB_TOKEN (not gh's stored credentials), and a token raises
-// the github.com rate limit; CI provides GITHUB_TOKEN directly. Extra args pass
-// through to lychee. Operates on the current directory (the site root), so any
-// Docsy-based site can reuse it.
+// The `lychee-norm-cache` bin: run lychee over a built site and normalize
+// .lycheecache for byte-stable reruns. Runs in the cwd (the site root), so any
+// Docsy-based site can reuse it. Run with `--help` for usage.
 //
-// Usage: node scripts/lychee/check/index.mjs [lychee args...]
-//        (installed as the `lychee-norm-cache` bin)
+// When GITHUB_TOKEN is unset, a token is bridged from the gh CLI — lychee reads
+// GITHUB_TOKEN, which also lifts the github.com rate limit; CI sets it directly.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
@@ -29,8 +25,7 @@ Run \`lychee --help\` for all link-checking options.`;
 
 // --- pure helpers (unit-tested) --------------------------------------------
 
-// Resolve a GitHub token: an existing GITHUB_TOKEN wins; otherwise fall back to
-// the `gh` CLI's stored token. Returns '' when neither is available.
+// Prefer an existing GITHUB_TOKEN; otherwise fall back to the gh CLI; '' if neither.
 export function resolveToken({ env = process.env, runGh = ghAuthToken } = {}) {
   const fromEnv = (env.GITHUB_TOKEN ?? '').trim();
   if (fromEnv) return fromEnv;
@@ -38,8 +33,7 @@ export function resolveToken({ env = process.env, runGh = ghAuthToken } = {}) {
 }
 
 // Sort .lycheecache by raw byte value (matching `LC_ALL=C sort`) and terminate
-// with a single newline. lychee writes the cache nondeterministically, so
-// normalizing keeps reruns byte stable and the committed cache diffing cleanly.
+// with a single newline, so lychee's nondeterministic cache writes diff cleanly.
 // Byte order via Buffer.compare — not JS string order, which compares UTF-16
 // code units and can diverge from LC_ALL=C on non-ASCII URLs.
 export function sortCacheText(text) {

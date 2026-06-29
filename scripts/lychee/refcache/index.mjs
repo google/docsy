@@ -1,15 +1,6 @@
 #!/usr/bin/env node
-// Inspect and prune a Lychee refcache (`.lycheecache`). Options run in the order
-// given, over the evolving cache, so `-l 5 -p 5` lists the 5 oldest about to be
-// pruned, while `-p 5 -l 5` lists the next 5 after pruning. Read-only unless
-// `--prune` is given; takes no network.
-//
-// Usage: node scripts/lychee/refcache/index.mjs [REFCACHE_FILE] [options]
-//        (installed as the `refcache` bin)
-//   -l, --list NUM       list the NUM oldest entries
-//   -p, --prune NUM[%]   drop the NUM (or NUM%) oldest entries, then rewrite
-//   -s, --summary        print a summary (counts, ages, status, histogram)
-//   -h, --help           show usage
+// The `refcache` bin: inspect and prune a Lychee refcache. Read-only unless
+// `--prune` is given, and never hits the network. Run with `--help` for usage.
 //
 // Refcache line format: URL,STATUS,UNIX_TIMESTAMP — the URL is CSV-quoted when
 // it contains a comma, so STATUS and TIMESTAMP are read from the final two

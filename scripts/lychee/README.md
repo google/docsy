@@ -20,16 +20,18 @@ a self-contained, cached link-checking setup.
 
 ## Usage
 
-For a site that installs Docsy as an npm package, the commands are on your
-project's `PATH`:
+For a site that installs Docsy as an npm package, the bins are on your project's
+`PATH`:
 
 ```sh
-npx lychee-norm-cache                    # check links, then sort/normalize the cache
-npx lychee-norm-cache --offline          # skip external links (internal-only)
-npx lychee-norm-cache --max-cache-age 0  # re-validate every cached result
-npx refcache --summary                   # cache stats (count, oldest, status, ages)
-npx refcache --prune 10%                 # drop the oldest 10%, then rewrite
+npx lychee-norm-cache    # check links, then sort/normalize the cache
+npx refcache --summary   # cache stats (count, oldest, status, ages)
 ```
+
+`lychee-norm-cache` runs in the current directory (your site root) and forwards
+any extra arguments to lychee. Run either tool with `--help` for its full
+options, and `lychee --help` for the link-checking flags `lychee-norm-cache`
+forwards (e.g. `--offline`, `--max-cache-age 0`).
 
 For a Hugo module or Git submodule install, run the tools directly:
 
@@ -41,9 +43,6 @@ node DOCSY_DIR/scripts/lychee/refcache/index.mjs --summary
 Here `DOCSY_DIR` is your Docsy install directory: `themes/docsy` for a Git
 submodule, or the path printed by
 `go list -m -f '{{.Dir}}' github.com/google/docsy` for a Hugo module.
-
-`lychee-norm-cache` runs in the current directory (your site root) and passes
-any extra arguments through to lychee. For all `refcache` options, add `--help`.
 
 <!-- prettier-ignore-start -->
 [Lychee]: https://github.com/lycheeverse/lychee
