@@ -1,7 +1,8 @@
 // Unit tests for the Lychee check wrapper's pure helpers: GitHub-token
 // resolution and byte-exact .lycheecache normalization. The lychee invocation
 // itself is exercised by tests/lychee/lychee-sanity.test.mjs (needs the
-// binary). See thoughtry projects/link-checking/lychee/docsy for rationale.
+// binary). See the maintainers' link-checking notes (internal ref
+// `link-checking/lychee`; ask the dev lead) for rationale.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

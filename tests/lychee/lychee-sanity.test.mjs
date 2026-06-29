@@ -1,5 +1,6 @@
-// Sanity tests for the Lychee link checker and our use of it. See thoughtry
-// projects/link-checking/lychee-docsy for rationale and findings.
+// Sanity tests for the Lychee link checker and our use of it. See the
+// maintainers' link-checking notes (internal ref `link-checking/lychee`; ask
+// the dev lead) for rationale and findings.
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';

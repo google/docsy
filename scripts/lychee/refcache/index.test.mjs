@@ -1,5 +1,6 @@
-// Tests for the Lychee refcache helper (list / prune / summary). See thoughtry
-// projects/link-checking/lychee/docsy for rationale.
+// Tests for the Lychee refcache helper (list / prune / summary). See the
+// maintainers' link-checking notes (internal ref `link-checking/lychee`; ask
+// the dev lead) for rationale.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
