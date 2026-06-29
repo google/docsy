@@ -1,5 +1,6 @@
 # Lychee link-checker config for docsy.dev. Ported from `.htmltest.yml`; run via
-# `npm run check:links:lychee`. See thoughtry projects/link-checking/lychee-docsy.
+# `npm run check:links`. Rationale: the maintainers' link-checking notes
+# (internal ref `link-checking/lychee`; ask the dev lead).
 
 cache = true
 max_cache_age = "375d"             # ~ .htmltest.yml CacheExpires: 9000h

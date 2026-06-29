@@ -46,6 +46,12 @@ jobs:
       - if: runner.os != 'Windows'
         run: npm run ci:test
 
+      # Offline lychee canaries; Linux-only, like ci:test (no lychee on Windows).
+      - if: runner.os != 'Windows'
+        name: Lychee sanity tests (offline)
+        env: { LYCHEE_SANITY_NO_NET: 1 }
+        run: npm run test:lychee
+
       - if: runner.os == 'Windows'
         run: npm run ci:prepare && npm run -C docsy.dev build && npm run ci:post
 

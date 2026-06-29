@@ -93,6 +93,22 @@ From the repo root:
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).
 
+## Link checking and the refcache
+
+`test:website` checks docsy.dev's links with Lychee, caching external-link
+results in the committed `docsy.dev/.lycheecache` (the "refcache") so checks
+stay fast and offline-friendly. Config lives in `docsy.dev/lychee.toml`. CI
+installs a pinned lychee binary (see `.github/workflows/test.yaml`); a plain
+site build doesn't need it.
+
+- **Refresh** after adding or changing external links: `npm run fix:refcache`
+  re-runs the check, adding any missing entries and renormalizing — then commit
+  the updated `.lycheecache`.
+- **Inspect or prune** with `npm run refcache` (`-- -s` for a summary,
+  `-- -p 10%` to drop the oldest tenth).
+
+Both scripts work from the repo root or `docsy.dev/`.
+
 ## Release-prep audit
 
 Before drafting the changelog entry and release blog post, run a careful audit

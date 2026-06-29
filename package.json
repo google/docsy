@@ -1,11 +1,13 @@
 {
   "name": "docsy",
-  "version": "0.15.1-dev+025-over-main-5998cf5e",
+  "version": "0.15.1-dev+028-over-main-93948e65",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "private": true,
   "bin": {
+    "lychee-norm-cache": "scripts/lychee/check/index.mjs",
+    "refcache": "scripts/lychee/refcache/index.mjs",
     "gen-favicons": "scripts/gen-favicons/cli.mjs"
   },
   "files": [
@@ -15,7 +17,10 @@
     "scripts/mkdirp-hugo-mod.js",
     "scripts/gen-favicons/cli.mjs",
     "scripts/gen-favicons/index.mjs",
-    "scripts/gen-favicons/README.md"
+    "scripts/gen-favicons/README.md",
+    "scripts/lychee/check/index.mjs",
+    "scripts/lychee/refcache/index.mjs",
+    "scripts/lychee/README.md"
   ],
   "workspaces": [
     "docsy.dev",
@@ -56,6 +61,7 @@
     "fix:format:diff": "npm run fix:format",
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s -C docsy.dev fix:format",
     "fix:markdown": "npm run check:markdown -- --fix",
+    "fix:refcache": "npm run -C docsy.dev fix:refcache",
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "get:hugo-modules": "node scripts/getHugoModules/index.mjs",
     "install:theme-deps": "npm install --prefix theme --omit=dev --omit=peer --no-audit --no-fund",
@@ -63,6 +69,7 @@
     "postinstall": "npm run _postinstall",
     "postupdate:dep": "npm run -s post-update",
     "postupdate:packages": "npm run -s post-update",
+    "refcache": "npm run -C docsy.dev refcache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run -C docsy.dev serve --",
     "set:hugo:version": "node scripts/set-hugo-version.mjs",
@@ -89,7 +96,7 @@
     "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "markdownlint-rule-no-shortcut-ref-link": "github:chalin/markdownlint-rule-no-shortcut-ref-link#v0.3.1",
-    "prettier": "^3.8.1"
+    "prettier": "^3.9.3"
   },
   "config": {
     "hugo_version": "0.163.3"
