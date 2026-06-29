@@ -9,6 +9,7 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const INSTALL_HINT = 'https://github.com/lycheeverse/lychee#installation';
 
@@ -95,6 +96,16 @@ function main(argv) {
   return status;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Real-path compare, not `file://${argv[1]}`: npm links bins as symlinks, so
+// argv[1] is the symlink while import.meta.url is the real path.
+function isEntryPoint() {
+  try {
+    return realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+}
+
+if (isEntryPoint()) {
   process.exit(main(process.argv.slice(2)));
 }

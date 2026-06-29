@@ -7,6 +7,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { mkdtempSync, rmSync, symlinkSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { resolveToken, sortCacheText } from './index.mjs';
@@ -87,3 +90,29 @@ test('--help prints usage and exits 0 without needing lychee', () => {
   assert.equal(r.status, 0, 'help exits 0');
   assert.match(r.stdout, /Usage: lychee-norm-cache/, 'help prints usage');
 });
+
+test(
+  'runs when invoked through a bin symlink (npx)',
+  { skip: process.platform === 'win32' ? 'POSIX symlink bins only' : false },
+  () => {
+    // A naive `file://${argv[1]}` guard misses the symlink and silently skips
+    // main(), so `npx lychee-norm-cache` would do nothing.
+    const script = fileURLToPath(new URL('./index.mjs', import.meta.url));
+    const dir = mkdtempSync(join(tmpdir(), 'lnc-'));
+    const link = join(dir, 'lychee-norm-cache');
+    symlinkSync(script, link);
+    try {
+      const r = spawnSync(process.execPath, [link, '--help'], {
+        encoding: 'utf8',
+      });
+      assert.equal(r.status, 0, 'help exits 0');
+      assert.match(
+        r.stdout,
+        /Usage: lychee-norm-cache/,
+        'main ran via the symlink',
+      );
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  },
+);
