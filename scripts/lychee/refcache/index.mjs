@@ -6,7 +6,8 @@
 // it contains a comma, so STATUS and TIMESTAMP are read from the final two
 // fields.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const DAY = 86400;
 const BUCKET_COUNT = 5;
@@ -316,6 +317,16 @@ function main(argv) {
   if (writeLines) writeFileSync(args.path, writeLines.join('\n'));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Real-path compare, not `file://${argv[1]}`: npm links bins as symlinks, so
+// argv[1] is the symlink while import.meta.url is the real path.
+function isEntryPoint() {
+  try {
+    return realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+}
+
+if (isEntryPoint()) {
   main(process.argv.slice(2));
 }

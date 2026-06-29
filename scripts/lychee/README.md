@@ -21,7 +21,13 @@ a self-contained, cached link-checking setup.
 ## Usage
 
 For a site that installs Docsy as an npm package, the bins are on your project's
-`PATH`:
+`PATH`. Until Docsy is published to the npm registry, install it from GitHub:
+
+```sh
+npm install --save-dev github:google/docsy
+```
+
+Then run the bins with `npx`:
 
 ```sh
 npx lychee-norm-cache    # check links, then sort/normalize the cache
@@ -33,16 +39,17 @@ any extra arguments to lychee. Run either tool with `--help` for its full
 options, and `lychee --help` for the link-checking flags `lychee-norm-cache`
 forwards (e.g. `--offline`, `--max-cache-age 0`).
 
-For a Hugo module or Git submodule install, run the tools directly:
+For a Git submodule install, run the tools directly — the submodule includes
+this `scripts/` directory:
 
 ```sh
-node DOCSY_DIR/scripts/lychee/check/index.mjs
-node DOCSY_DIR/scripts/lychee/refcache/index.mjs --summary
+node themes/docsy/scripts/lychee/check/index.mjs
+node themes/docsy/scripts/lychee/refcache/index.mjs --summary
 ```
 
-Here `DOCSY_DIR` is your Docsy install directory: `themes/docsy` for a Git
-submodule, or the path printed by
-`go list -m -f '{{.Dir}}' github.com/google/docsy` for a Hugo module.
+A Hugo-module install doesn't expose these scripts (they live outside the
+theme's Hugo module), so use the npm-package approach above: add Docsy as a
+devDependency, then run the `npx` commands.
 
 <!-- prettier-ignore-start -->
 [Lychee]: https://github.com/lycheeverse/lychee

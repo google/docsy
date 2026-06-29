@@ -4,6 +4,11 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, rmSync, symlinkSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   parseArgs,
@@ -240,3 +245,27 @@ test('runOps without a prune does not rewrite the file', () => {
   assert.equal(pruned, 0, 'nothing pruned');
   assert.equal(writeLines, null, 'no write when nothing changed');
 });
+
+// --- CLI entry point ---
+
+test(
+  'runs when invoked through a bin symlink (npx)',
+  { skip: process.platform === 'win32' ? 'POSIX symlink bins only' : false },
+  () => {
+    // A naive `file://${argv[1]}` guard misses the symlink and silently skips
+    // main(), so `npx refcache` would do nothing.
+    const script = fileURLToPath(new URL('./index.mjs', import.meta.url));
+    const dir = mkdtempSync(join(tmpdir(), 'refcache-'));
+    const link = join(dir, 'refcache');
+    symlinkSync(script, link);
+    try {
+      const r = spawnSync(process.execPath, [link, '--help'], {
+        encoding: 'utf8',
+      });
+      assert.equal(r.status, 0, 'help exits 0');
+      assert.match(r.stdout, /Usage: refcache/, 'main ran via the symlink');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  },
+);
