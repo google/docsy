@@ -159,19 +159,22 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     assert.equal(r.status, 0, `${src} site build exited 0`);
     assertBuilt(name);
 
-    // An npm install of Docsy puts the `gen-favicons` CLI on the project's
-    // PATH; `--help` exercises the wired bin without needing ImageMagick.
+    // An npm install of Docsy puts its CLI bins on the project's PATH; `--help`
+    // exercises each wired bin without needing its native dependency (the lychee
+    // binary for lychee-norm-cache, ImageMagick for gen-favicons).
     if (src === 'NPM') {
-      progress('NPM: npx gen-favicons --help…');
-      const help = run('npx', ['gen-favicons', '--help'], {
-        cwd: path.join(TMP, name),
-      });
-      assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
-      assert.match(
-        help.stdout ?? '',
-        /Usage: gen-favicons/,
-        'npx gen-favicons --help prints usage',
-      );
+      for (const bin of ['gen-favicons', 'lychee-norm-cache', 'refcache']) {
+        progress(`NPM: npx ${bin} --help…`);
+        const help = run('npx', [bin, '--help'], {
+          cwd: path.join(TMP, name),
+        });
+        assert.equal(help.status, 0, `npx ${bin} --help exits 0`);
+        assert.match(
+          help.stdout ?? '',
+          new RegExp(`Usage: ${bin}`),
+          `npx ${bin} --help prints usage`,
+        );
+      }
     }
     progress(`${src}: ok`);
   });
