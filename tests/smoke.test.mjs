@@ -221,18 +221,6 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps etc',
   );
 
-  // PostCSS at the site root: a non-module install prerequisite.
-  progress('clone: npm install postcss at site root…');
-  assert.equal(run('npm', ['init', '-y'], { cwd: site }).status, 0, 'npm init');
-  const flags = '--save-dev --no-audit --no-fund';
-  assert.equal(
-    run('npm', `install ${flags} autoprefixer postcss-cli`.split(' '), {
-      cwd: site,
-    }).status,
-    0,
-    'install postcss at site root',
-  );
-
   // The one-line consumer config change.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
   progress('clone: hugo build…');

@@ -4,7 +4,7 @@ set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-DEPS="autoprefixer postcss-cli"
+DEPS=""
 DOCSY_REPO_DEFAULT="google/docsy"
 DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
@@ -109,8 +109,8 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
-  # HUGO_MODULE sites get their npm deps (PostCSS tooling + Bootstrap and
-  # Font-Awesome) from the theme via `hugo mod npm pack`; see below.
+  # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
+  # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
     npm install --omit dev --save $DEPS
   fi
