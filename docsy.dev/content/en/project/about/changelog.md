@@ -156,6 +156,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 - **Theme folder move**: the canonical theme now lives in `theme/`; consuming
   sites need a one-line install-path update for their install mode. See [0.16.0
   release report][0.16.0-blog-theme-folder] ([#2641][], [#2645][]).
+- **Bootstrap and Font Awesome via npm**: the theme declares them (and the
+  PostCSS toolchain) as npm dependencies instead of importing them as Hugo
+  modules. Hugo-module sites run `hugo mod npm pack` and `npm install` to pull
+  them in. See [0.16.0 release report][0.16.0-blog-npm-deps] ([#2668][]).
 
 **Other changes**:
 
@@ -193,8 +197,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2656]: https://github.com/google/docsy/pull/2656
 [#2658]: https://github.com/google/docsy/pull/2658
 [#2659]: https://github.com/google/docsy/issues/2659
+[#2668]: https://github.com/google/docsy/issues/2668
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
+[0.16.0-blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [0.16.0-blog-theme-folder]: /blog/2026/0.16.0/#theme-folder
 [0.16.0]: https://github.com/google/docsy/releases/tag/v0.16.0
 [chrome]: /docs/deployment/chrome/
