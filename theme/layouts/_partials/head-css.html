@@ -2,11 +2,8 @@
 {{ $css := resources.Get $scssMain
       | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
 
-{{/* NOTE: in production, apply `postCSS` (e.g. autoprefixer) only when the site
-provides a project-root postcss.config.{js,mjs,cjs}; otherwise Sass output is
-used as-is. RTL always runs `postCSS` for `rtlcss`. Skipping postCSS in dev makes
-local builds snappier in Chrome at the cost of looking sub-optimal in other
-browsers. */ -}}
+{{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
+site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}
 
 {{ if eq .Site.Language.Direction "rtl" -}}
   {{ $css = $css
