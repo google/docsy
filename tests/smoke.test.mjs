@@ -32,13 +32,18 @@ import {
 } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import os from 'node:os';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
-const TMP = path.join(repoRoot, 'tmp');
+const TMP = path.join(os.tmpdir(), 'docsy-smoke');
 const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
+// Smoke sites build under the OS temp dir, outside the repo, so Node can't
+// resolve the repo's own node_modules and mask a packaging gap. Only Hugo (the
+// build tool, not a dependency under test) is borrowed from the repo install.
+const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
 
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
 // forwards), falling back to a default. Last occurrence wins, so a flag passed
@@ -91,7 +96,7 @@ function run(cmd, args, opts = {}) {
 }
 
 function hugo(args, opts = {}) {
-  return run('npx', ['hugo', ...args], opts);
+  return run(HUGO_BIN, args, opts);
 }
 
 // Stream a progress line via fd 2 directly: node:test buffers a test's console
@@ -154,7 +159,7 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     const r = run(
       'bash',
       [MAKE_SITE, '-s', src, '-r', REPO, '-v', BRANCH, '-f', '-n', name],
-      { cwd: TMP },
+      { cwd: TMP, env: { ...process.env, HUGO: HUGO_BIN } },
     );
     assert.equal(r.status, 0, `${src} site build exited 0`);
     assertBuilt(name);
