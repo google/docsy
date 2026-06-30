@@ -49,5 +49,3 @@ module:
       target: static
     - source: node_modules/@fortawesome/fontawesome-free/webfonts
       target: static/webfonts
-    - source: assets/_vendor/bootstrap/scss
-      target: assets/vendor/bootstrap/scss/vendor
