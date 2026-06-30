@@ -12,6 +12,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
-    "bootstrap": "5.3.8"
+    "autoprefixer": "^10.4.27",
+    "bootstrap": "5.3.8",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^11.0.1"
   }
 }
