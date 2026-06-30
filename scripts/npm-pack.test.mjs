@@ -27,7 +27,6 @@ const SCRIPTS = `${TAR}scripts/`;
 const REQUIRED = [
   `${TAR}package.json`,
   `${TAR}LICENSE`,
-  `${SCRIPTS}mkdirp-hugo-mod.js`,
   `${SCRIPTS}gen-favicons/cli.mjs`,
   `${SCRIPTS}gen-favicons/index.mjs`,
   `${SCRIPTS}gen-favicons/README.md`,

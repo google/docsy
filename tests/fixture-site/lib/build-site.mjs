@@ -60,18 +60,6 @@ export function buildSite(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
   );
-  // Empty Hugo-module placeholder dirs (github.com/...) at the themesDir
-  // root, needed by non-module consumers of the theme; cf. root postinstall.
-  const mkdirp = spawnSync(
-    'node',
-    [path.join(repoRoot, 'scripts', 'mkdirp-hugo-mod.js'), repoRoot],
-    { encoding: 'utf8' },
-  );
-  if (mkdirp.status !== 0) {
-    throw new Error(
-      `mkdirp-hugo-mod.js failed:\n${mkdirp.stdout}${mkdirp.stderr}`,
-    );
-  }
   const r = spawnSync('npx', ['hugo'], {
     cwd: site,
     encoding: 'utf8',

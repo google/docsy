@@ -1,4 +1,4 @@
-import test, { before } from 'node:test';
+import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
@@ -19,17 +19,6 @@ const repoDir = fileURLToPath(new URL('../../../', import.meta.url));
 const themesDir = repoDir.replace(/\/$/, '');
 const hugoBin = join(repoDir, 'node_modules', '.bin', 'hugo');
 const hugo = existsSync(hugoBin) ? hugoBin : 'hugo';
-
-// Create the empty placeholder module dirs the theme build needs; a clean CI
-// checkout has no Hugo module cache to fall back on.
-before(() => {
-  const res = spawnSync(
-    'node',
-    [join(repoDir, 'scripts', 'mkdirp-hugo-mod.js'), themesDir],
-    { encoding: 'utf8' },
-  );
-  assert.equal(res.status, 0, `mkdirp-hugo-mod failed:\n${res.stderr ?? ''}`);
-});
 
 // Build a throwaway site that uses the theme, optionally with a site-supplied
 // favicons partial and/or files in `static/`, and return the favicon `<link>`
