@@ -109,7 +109,11 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
-  npm install --omit dev --save $DEPS
+  # HUGO_MODULE sites get their npm deps (PostCSS tooling + Bootstrap and
+  # Font-Awesome) from the theme via `hugo mod npm pack`; see below.
+  if [[ "$DOCSY_SRC" != HUGO* ]]; then
+    npm install --omit dev --save $DEPS
+  fi
 }
 
 function set_up_and_cd_into_site() {
@@ -166,6 +170,11 @@ function _set_up_site_using_hugo_modules() {
   fi
 
   echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT/theme, disable: false}]}" >> hugo.yaml
+
+  # Consolidate the theme's declared npm deps into this project's workspace,
+  # then install them.
+  eval "$HUGO mod npm pack" $OUTPUT_REDIRECT
+  eval "npm install --no-audit --no-fund" $OUTPUT_REDIRECT
 }
 
 function main() {
