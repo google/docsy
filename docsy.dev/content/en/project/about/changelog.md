@@ -157,9 +157,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   sites need a one-line install-path update for their install mode. See [0.16.0
   release report][0.16.0-blog-theme-folder] ([#2641][], [#2645][]).
 - **Bootstrap and Font Awesome via npm**: the theme declares them as npm
-  dependencies instead of importing them as Hugo modules. Hugo-module sites run
-  `hugo mod npm pack` and `npm install` to pull them in. See [0.16.0 release
-  report][0.16.0-blog-npm-deps] ([#2668][]).
+  dependencies instead of importing them as Hugo modules. **Applies to
+  Hugo-module installs**, which run `hugo mod npm pack` and `npm install` to
+  pull them in; npm-package and clone/submodule installs are unaffected. See
+  [0.16.0 release report][0.16.0-blog-npm-deps] ([#2668][]).
 
 **Other changes**:
 
@@ -171,13 +172,13 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 - Reorganized the repository package boundary: `theme/package.json` owns theme
   runtime dependencies, and the root package orchestrates the `docsy.dev` and
   `theme` workspaces ([#2645][]).
-- **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for RTL
-  languages or when a site provides a project-root
-  `postcss.config.{js,mjs,cjs}`, so non-RTL sites no longer need
-  `autoprefixer`/`postcss`/`postcss-cli`. RTL sites still install their own
-  PostCSS toolchain plus `rtlcss`. Docsy's CSS targets the Browserslist
-  `defaults` browsers. See [0.16.0 release report][0.16.0-blog-postcss]
-  ([#2668][]).
+- **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for sites
+  with RTL languages or that provide a project-root
+  `postcss.config.{js,mjs,cjs}`, so other sites no longer need
+  `autoprefixer`/`postcss`/`postcss-cli`. Sites with RTL languages still install
+  their own PostCSS toolchain plus `rtlcss`. Docsy's CSS targets the
+  Browserslist `defaults` browsers. See [0.16.0 release
+  report][0.16.0-blog-postcss] ([#2668][]).
 - Moved cached-sidebar activation on large sites (above `sidebar_cache_limit`)
   from per-page inline jQuery to the shared `chrome-nav.js` hydration path;
   rendered navigation is unchanged.

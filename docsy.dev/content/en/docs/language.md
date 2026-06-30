@@ -139,10 +139,11 @@ Docsy supports top-down Right-To-Left (RTL) languages such as Persian through
 
 If your multilingual site includes an RTL language (configured with
 `direction: rtl`), then Docsy transforms its stylesheet with [RTLCSS][] through
-[PostCSS][]. Add these to your dev dependencies:
+[PostCSS][]. Add the [`rtlcss`][rtlcss-npm] package and the PostCSS toolchain to
+your dev dependencies:
 
 ```sh
-npm install --save-dev rtlcss autoprefixer postcss postcss-cli
+npm install --save-dev rtlcss autoprefixer postcss-cli
 ```
 
 For an example of Docsy's RTL support, see the [Persian pages][] of the [Docsy
@@ -151,6 +152,7 @@ example].
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
 [PostCSS]: https://postcss.org/
 [RTLCSS]: https://rtlcss.com/
+[rtlcss-npm]: https://www.npmjs.com/package/rtlcss
 [Persian pages]: https://example.docsy.dev/fa/
 
 ## Selecting a language from the language menu
