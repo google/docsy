@@ -2,15 +2,17 @@
 {{ $css := resources.Get $scssMain
       | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
 
-{{/* NOTE: we only apply `postCSS` in production or for RTL languages. This
-makes it snappier to develop in Chrome, but it may look sub-optimal in other
-browsers. */ -}}
+{{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
+site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}
 
 {{ if eq .Site.Language.Direction "rtl" -}}
   {{ $css = $css
       | postCSS (dict "use" "autoprefixer rtlcss" "noMap" true)
       | resources.Copy (replace $scssMain "." ".rtl.") -}}
-{{ else if hugo.IsProduction -}}
+{{ else if and hugo.IsProduction (or
+      (os.FileExists "postcss.config.js")
+      (os.FileExists "postcss.config.mjs")
+      (os.FileExists "postcss.config.cjs")) -}}
   {{ $css = $css | postCSS -}}
 {{ end -}}
 
