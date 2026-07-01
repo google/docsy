@@ -116,24 +116,22 @@ shown):
 nvm install --lts
 ```
 
-### Install PostCSS
+### Install PostCSS (optional) {#install-postcss}
 
-To build or update your site's CSS resources, you'll also need
-[PostCSS](https://postcss.org/). Install it using the Node package manager,
-`npm`.
+Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
+sites don't need it. Install PostCSS only if your site has a **right-to-left
+(RTL)** language (Docsy uses `rtlcss` to generate RTL styles) or you
+post-process your own CSS with a project-root `postcss.config.{js,mjs,cjs}`
+file.
 
-> [!IMPORTANT] IMPORTANT: Check your Node version
->
-> The PostCSS package installed by some older versions of Node is incompatible
-> with Docsy. Check your version of Node against the **active [LTS release][]**
-> and upgrade, if necessary. For details, see
-> [Node: Get the latest LTS release](#node-get-the-latest-lts-release).
-
-From your project root, run this command:
+If either applies, install PostCSS from your project root:
 
 ```sh
-npm install --save-dev autoprefixer postcss-cli
+npm install --save-dev autoprefixer postcss postcss-cli
 ```
+
+For more about this change, see [PostCSS is opt-in for non-RTL
+sites][blog-postcss] in the 0.16.0 release notes.
 
 ## Option 1: Docsy as a Git submodule
 
@@ -150,9 +148,7 @@ following commands:
     git init
     ```
 
-2.  Install postCSS as [instructed earlier](#install-postcss).
-
-3.  Follow the instructions below for an existing site.
+2.  Follow the instructions below for an existing site.
 
 ### For an existing site
 
@@ -177,7 +173,7 @@ your project's root directory:
 2.  Add Docsy as a theme, for example:
 
     ```sh
-    echo 'theme: docsy' >> hugo.yaml
+    echo 'theme: docsy/theme' >> hugo.yaml
     ```
 
     > [!TIP]
@@ -189,11 +185,8 @@ your project's root directory:
 3.  Get Docsy dependencies:
 
     ```sh
-    (cd themes/docsy && npm install)
+    (cd themes/docsy && npm run postinstall)
     ```
-
-    > [!IMPORTANT] **Important**: read the [Docsy NPM install side-effect][]
-    > note.
 
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
@@ -204,7 +197,7 @@ your project's root directory:
       "...": "...",
       "scripts": {
         "get:submodule": "git submodule update --init --depth 1",
-        "_prepare:docsy": "cd themes/docsy && npm install",
+        "_prepare:docsy": "cd themes/docsy && npm run postinstall",
         "prepare": "npm run get:submodule && npm run _prepare:docsy",
         "...": "..."
       },
@@ -236,10 +229,11 @@ the following commands from your project's root directory:
 cd themes
 git clone -b {{% param version %}} https://github.com/google/docsy
 cd docsy
-npm install
+npm run postinstall
 ```
 
-> [!IMPORTANT] **Important**: read the [Docsy NPM install side-effect][] note.
+As with the [submodule option](#option-1-docsy-as-a-git-submodule), set
+`theme: docsy/theme` in your site configuration.
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
@@ -260,22 +254,15 @@ You can use Docsy as an NPM module as follows:
     ```sh
     hugo new site --format yaml myproject
     cd myproject
-    echo "theme: docsy\nthemesDir: node_modules" >> hugo.yaml
+    echo "theme: docsy/theme\nthemesDir: node_modules" >> hugo.yaml
     ```
 
-2.  Install Docsy, and postCSS as [instructed earlier](#install-postcss):
+2.  Install Docsy:
 
     ```console
     npm init -y
-    npm install --save-dev autoprefixer postcss-cli
     npm install --save-dev google/docsy#semver:{{% param version %}} --omit=peer
     ```
-
-    > [!WARNING] Hugo-module compatibility
-    >
-    > Installing Docsy using NPM creates an empty `github.com` sibling folder.
-    > For details, see
-    > [Docsy NPM install side-effect](#docsy-npm-install-side-effect).
 
     > [!TIP] Hugo install tip
     >
@@ -292,22 +279,6 @@ You can use Docsy as an NPM module as follows:
     ...
     ```
 
-    > [!WARNING] Error: failed to load modules
-    >
-    > If Hugo reports the following error when building your site ([#2116][]):
-    >
-    > ```text
-    > Error: failed to load modules: module "github.com/FortAwesome/Font-Awesome" not found in ".../myproject/node_modules/github.com/FortAwesome/Font-Awesome" ...
-    > ```
-    >
-    > Then run the following command and try again:
-    >
-    > ```sh
-    > npm rebuild
-    > ```
-    >
-    > [#2116]: https://github.com/google/docsy/issues/2116
-
 As an alternative to specifying a `themesDir`, on some platforms, you can
 instead create a symbolic link to the Docsy theme directory as follows (Linux
 commands shown, executed from the site root folder):
@@ -318,30 +289,6 @@ pushd themes
 ln -s ../node_modules/docsy
 popd
 ```
-
-## Docsy NPM install side-effect
-
-> [!NOTE]
->
-> As of Docsy version [0.8.0][], running `npm install` inside the Docsy theme
-> directory will create a sibling folder named `github.com`, for example:
->
-> ```console
-> $ ls themes
-> docsy                   github.com
-> ```
->
-> This is a workaround necessary to support Docsy's use as a single [Hugo
-> module][hm] ([#1120][]) in the context of projects _not_ using Hugo modules.
-> The `github.com` folder is created via Docsy's `postinstall` script. To
-> disable this behavior, set the environment variable
-> `DOCSY_MKDIR_HUGO_MOD_SKIP=1` before running NPM install.
->
-> [#1120]: https://github.com/google/docsy/issues/1120
-> [0.8.0]: /project/about/changelog/#v0.8.0
-> [hm]: /docs/get-started/docsy-as-module/
-
-[Docsy NPM install side-effect]: #docsy-npm-install-side-effect
 
 ## Preview your site
 
@@ -372,6 +319,7 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
+[blog-postcss]: /blog/2026/0.16.0/#postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
