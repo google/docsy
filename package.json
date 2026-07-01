@@ -6,8 +6,6 @@
   "license": "Apache-2.0",
   "private": true,
   "bin": {
-    "lychee-norm-cache": "scripts/lychee/check/index.mjs",
-    "refcache": "scripts/lychee/refcache/index.mjs",
     "gen-favicons": "scripts/gen-favicons/cli.mjs"
   },
   "files": [
@@ -16,10 +14,7 @@
     "!theme/package-lock.json",
     "scripts/gen-favicons/cli.mjs",
     "scripts/gen-favicons/index.mjs",
-    "scripts/gen-favicons/README.md",
-    "scripts/lychee/check/index.mjs",
-    "scripts/lychee/refcache/index.mjs",
-    "scripts/lychee/README.md"
+    "scripts/gen-favicons/README.md"
   ],
   "workspaces": [
     "docsy.dev",
