@@ -165,10 +165,10 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     assertBuilt(name);
 
     // An npm install of Docsy puts its CLI bins on the project's PATH; `--help`
-    // exercises each wired bin without needing its native dependency (the lychee
-    // binary for lychee-norm-cache, ImageMagick for gen-favicons).
+    // exercises each wired bin without needing its native dependency (ImageMagick
+    // for gen-favicons).
     if (src === 'NPM') {
-      for (const bin of ['gen-favicons', 'lychee-norm-cache', 'refcache']) {
+      for (const bin of ['gen-favicons']) {
         progress(`NPM: npx ${bin} --help…`);
         const help = run('npx', [bin, '--help'], {
           cwd: path.join(TMP, name),

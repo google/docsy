@@ -30,9 +30,6 @@ const REQUIRED = [
   `${SCRIPTS}gen-favicons/cli.mjs`,
   `${SCRIPTS}gen-favicons/index.mjs`,
   `${SCRIPTS}gen-favicons/README.md`,
-  `${SCRIPTS}lychee/check/index.mjs`,
-  `${SCRIPTS}lychee/refcache/index.mjs`,
-  `${SCRIPTS}lychee/README.md`,
   `${TAR}theme/hugo.yaml`,
   `${TAR}theme/go.mod`,
   `${TAR}theme/layouts/baseof.html`,
@@ -120,8 +117,6 @@ test('package.json declares private and theme-only files with exclusions', () =>
   assert.deepEqual(
     pkg.bin,
     {
-      'lychee-norm-cache': 'scripts/lychee/check/index.mjs',
-      refcache: 'scripts/lychee/refcache/index.mjs',
       'gen-favicons': 'scripts/gen-favicons/cli.mjs',
     },
     'package.json "bin"',
