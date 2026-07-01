@@ -670,8 +670,8 @@ For the full list of changes, see the [0.8.0][] release page.
 
 - Docsy is packaged as a **single Hugo module** ([#1120][]). For details, see
   [Use Docsy as a Hugo Module][].
-- **Important**: non-Hugo-module projects should be aware of the [Docsy NPM
-  install side-effect]. Also, for guidance on Hugo-reported "failed to load
+- **Important**: non-Hugo-module projects should be aware of the Docsy NPM
+  install side-effect. Also, for guidance on Hugo-reported "failed to load
   modules" error, see [Docsy as an NPM package][].
 - **Page feedback**, or [User feedback][]:
   - In support of projects configuring analytics outside of Docsy, feedback
@@ -693,8 +693,6 @@ For the full list of changes, see the [0.8.0][] release page.
 [0.8.0]: https://github.com/google/docsy/releases/v0.8.0
 [Docsy as an NPM package]:
   /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
-[Docsy NPM install side-effect]:
-  /docs/get-started/other-options/#docsy-npm-install-side-effect
 [Use Docsy as a Hugo Module]: /docs/get-started/docsy-as-module/
 [User feedback]: /docs/content/feedback/#user-feedback
 
