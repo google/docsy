@@ -108,58 +108,38 @@ If no `git` client is installed on your system yet, go to the
 [Git website](https://git-scm.com/), download the installer for your system
 architecture and execute it. Afterwards, check for a successful installation.
 
-## Install PostCSS
+## Install Node.js
 
-To build or update your site's CSS resources, you also need
-[`PostCSS`](https://postcss.org/) to create the final assets. If you need to
-install it, you must have a recent version of [NodeJS](https://nodejs.org/en/)
-installed on your machine so you can use `npm`, the Node package manager. By
-default `npm` installs tools under the directory where you run
-[`npm install`](https://docs.npmjs.com/cli/v10/commands/npm-install#description):
+Docsy sources its Bootstrap and Font Awesome assets from npm, so you need
+[Node.js](https://nodejs.org/) (which provides `npm`, the Node package manager)
+to install them. Install or upgrade to the active [long-term support (LTS)
+release][node-lts], then check your version:
 
 ```bash
-npm install -D autoprefixer
-npm install -D postcss-cli
+node -v
 ```
 
-Starting in
-[version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md),
-you must also separately install `postcss`:
+You install these assets when you create your site, using `hugo mod npm pack`
+followed by `npm install`, as described in the next steps.
+
+## Install PostCSS (optional) {#install-postcss}
+
+Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
+sites don't need it. Install PostCSS only if:
+
+- your site has a **right-to-left (RTL)** language (Docsy uses `rtlcss` to
+  generate RTL styles), or
+- you post-process your own CSS with a project-root
+  `postcss.config.{js,mjs,cjs}` file.
+
+If either applies, install PostCSS from your project root:
 
 ```bash
-npm install -D postcss
+npm install --save-dev autoprefixer postcss postcss-cli
 ```
 
-Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if
-installed [globally](https://flaviocopes.com/npm-packages-local-global/), you
-must use a local install.
-
-## Install/Upgrade Node.js
-
-To ensure you can properly build your site beyond executing `hugo server`, you
-must have the
-[latest long term support (LTS) Version](https://nodejs.org/en/about/releases/)
-of Node.js. If you do not have the latest LTS version, you may see one of the
-following errors:
-
-```
-Error: Error building site: POSTCSS: failed to transform "scss/main.css" (text/css): Unexpected identifier
-#OR
-/home/user/repos/my-new-site/themes/docsy/node_modules/hugo-extended/postinstall.js:1
-import install from "./lib/install.js";
-       ^^^^^^^
-
-SyntaxError: Unexpected identifier
-    at Module._compile (internal/modules/cjs/loader.js:723:23)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
-    at Module.load (internal/modules/cjs/loader.js:653:32)
-    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
-    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
-    at startup (internal/bootstrap/node.js:283:19)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
-
-```
+For more about this change, see [PostCSS is opt-in for non-RTL
+sites][blog-postcss] in the 0.16.0 release notes.
 
 ## What's next?
 
@@ -169,4 +149,6 @@ site
 - [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
 - [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
 
+[blog-postcss]: /blog/2026/0.16.0/#postcss
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
+[node-lts]: https://nodejs.org/en/about/releases/
