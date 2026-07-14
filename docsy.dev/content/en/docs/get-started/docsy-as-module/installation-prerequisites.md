@@ -119,8 +119,8 @@ release][node-lts], then check your version:
 node -v
 ```
 
-You install these assets when you create your site, using `hugo mod npm pack`
-followed by `npm install`, as described in the next steps.
+You install these assets when you create your site, as described in the next
+steps.
 
 ## Install PostCSS (optional) {#install-postcss}
 
