@@ -128,7 +128,7 @@ Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
 sites don't need it. Install PostCSS only if:
 
 - your site has a **right-to-left (RTL)** language (Docsy uses `rtlcss` to
-  generate RTL styles), or
+  generate RTL styles — see [Right-to-left languages][rtl]), or
 - you post-process your own CSS with a project-root
   `postcss.config.{js,mjs,cjs}` file.
 
@@ -152,3 +152,4 @@ site
 [blog-postcss]: /blog/2026/0.16.0/#postcss
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
+[rtl]: /docs/language/#right-to-left-languages

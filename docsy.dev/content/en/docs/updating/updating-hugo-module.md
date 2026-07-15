@@ -15,11 +15,10 @@ cd /path/to/my-existing-site
 Then invoke hugo's module `get` subcommand with the update flag:
 
 ```bash
-hugo mod get -u github.com/google/docsy
+hugo mod get -u github.com/google/docsy/theme
 ```
 
-Hugo automatically pulls in the latest theme version. That's it, your update is
-done!
+Hugo automatically pulls in the latest theme version.
 
 > [!TIP]
 >
@@ -28,11 +27,25 @@ done!
 > updating your theme, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy@{{% param "version" %}}
+> hugo mod get -u github.com/google/docsy/theme@{{% param "version" %}}
 > ```
 >
 > Instead of a version tag, you can also specify a commit hash, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy@6c8a3afe
+> hugo mod get -u github.com/google/docsy/theme@6c8a3afe
 > ```
+
+After updating the theme, refresh the [theme npm dependencies][] that are
+consolidated into your site's `package.json`, and reinstall them:
+
+```bash
+hugo mod npm pack
+npm install
+```
+
+Hugo warns at build time when your `package.json` dependency set has drifted
+from the theme's. That's it, your update is done!
+
+[theme npm dependencies]:
+  /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies

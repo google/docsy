@@ -26,8 +26,14 @@ At your Unix shell or Windows command line, run the following command:
 ```bash
 git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
 cd  my-new-site
+npm install
 hugo server
 ```
+
+The `npm install` is required: it installs the project's npm dependencies, which
+include the theme's npm dependencies as well as the [PostCSS][prereq-postcss]
+toolchain that the example site needs for its right-to-left (RTL) language
+support.
 
 You now can preview your new site in your browser at
 [http://localhost:1313](http://localhost:1313/).
@@ -91,8 +97,8 @@ easy:
 > [!NOTE]
 >
 > Depending on your environment you may need to tweak the
-> [module top level settings](https://github.com/google/docsy-example/blob/f88fca475c28ffba3d72710a50450870230eb3a0/hugo.toml#L222-L227)
-> inside your `hugo.toml` slightly, for example by adding a proxy to use when
+> [module top level settings](https://github.com/google/docsy-example/blob/main/hugo.yaml)
+> inside your `hugo.yaml` slightly, for example by adding a proxy to use when
 > downloading remote modules. You can find details of what these configuration
 > settings do in the
 > [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
@@ -102,10 +108,11 @@ Now you can make local edits and test your copied site locally with Hugo.
 ### Preview your site
 
 To build and preview your site locally, switch to the root of your cloned
-project and use hugo's `server` command:
+project, install the project dependencies, and use hugo's `server` command:
 
 ```bash
 cd my-new-site
+npm install
 hugo server
 ```
 
@@ -121,3 +128,6 @@ like. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 - [Edit existing content and add more pages](/docs/content/)
 - [Customize your site](/docs/content/lookandfeel/)
 - [Publish your site](/docs/deployment/).
+
+[prereq-postcss]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss

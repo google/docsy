@@ -177,7 +177,8 @@ hugo mod npm pack
 npm install
 ```
 
-Re-run `hugo mod npm pack` whenever you update Docsy; Hugo warns when the
+Re-run `hugo mod npm pack` whenever you
+[update Docsy](/docs/updating/updating-hugo-module/); Hugo warns when the
 dependency set drifts. For background, see
 [Bootstrap and Font Awesome via npm](/blog/2026/0.16.0/#npm-deps) in the 0.16.0
 release notes.

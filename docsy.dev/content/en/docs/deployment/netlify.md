@@ -53,22 +53,11 @@ provider account. Once you're logged in:
 
 > [!NOTE]
 >
-> Netlify uses your site repo's `package.json` file to install any JavaScript
-> dependencies (like `postcss`) before building your site. If you haven't just
-> copied our example site's version of this file, make sure that you've
-> specified all our [prerequisites][].
->
-> For example, if you want to use a version of `postcss-cli` later than version
-> 8.0.0, you need to ensure that your `package.json` also specifies `postcss`
-> separately:
->
-> ```
->   "devDependencies": {
->     "autoprefixer": "^10.4.19",
->     "postcss-cli": "^11.0.0",
->     "postcss": "^8.4.38"
->   }
-> ```
+> Netlify uses your site repo's `package.json` file to install any npm
+> dependencies — including the Docsy theme's — before building your site. If you
+> haven't just copied our example site's version of this file, make sure that
+> you've specified all our [prerequisites][], including
+> [PostCSS][prereq-postcss] if your site needs it.
 
 Alternatively, you can follow the same instructions but specify your **Deploy
 settings** in a [`netlify.toml` file][] in your repo rather than in the **Deploy
@@ -93,3 +82,5 @@ run the extended version of Hugo.
   /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [Hugo module]: /docs/get-started/docsy-as-module/
 [prerequisites]: /docs/get-started/docsy-as-module/installation-prerequisites
+[prereq-postcss]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
