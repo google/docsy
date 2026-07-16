@@ -2,6 +2,7 @@
 title: Hugo 0.158.0-0.163.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-06-15
+lastmod: 2026-07-16
 draft: true
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
@@ -13,11 +14,11 @@ cSpell:ignore: amp AVIF CatmullRom goldmark Netlify Pandoc partialCached passthr
 ---
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
-0.163.2 that are relevant to Docsy users. It is a companion post to the Docsy
+0.163.3 that are relevant to Docsy users. It is a companion post to the Docsy
 [0.16.0](0.16.0/) release and upgrade guide.
 
 Docsy 0.16.0 requires Hugo 0.158.0 or later. The Docsy project build is tested
-with Hugo 0.163.2, which is the recommended target for this upgrade range.
+with Hugo 0.163.3, which is the recommended target for this upgrade range.
 
 ## Upgrade summary
 
@@ -40,7 +41,7 @@ Docsy site to 0.16.0.
   - [Image URL churn](#image-url-churn)
   - [Template and module cleanup](#template-module-cleanup)
   - [Notable changes](#notable-changes)
-- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.2](#upgrade)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.3](#upgrade)
   once you're ready.
 
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
@@ -50,7 +51,7 @@ Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
 so older Hugo versions will fail with template errors.
 
 The theme minimum remains 0.158.0 through the 0.163.x range. However, we
-recommend upgrading directly to **Hugo 0.163.2** because the later releases
+recommend upgrading directly to **Hugo 0.163.3** because the later releases
 include security fixes, avoid a short-lived 0.159.x link-escaping regression,
 and are the versions validated across Docsy, the Docsy example site, and at
 least one large downstream Docsy site.
@@ -59,19 +60,19 @@ least one large downstream Docsy site.
 
 {{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
 
-- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.2.
+- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.3.
 - If your project declares `module.hugoVersion.min`, set it to at least
   `0.158.0`.
 - If you use `hugo-extended`, pin a compatible version in your site:
 
   ```sh
-  npm install hugo-extended@0.163.2 --save-dev
+  npm install hugo-extended@0.163.3 --save-dev
   ```
 
 - If you use [hvm][], select the latest compatible Hugo release:
 
   ```sh
-  hvm use 0.163.2
+  hvm use 0.163.3
   ```
 
 ## Language API deprecations (0.158.0) {#language-apis}
@@ -174,8 +175,10 @@ breaking change even when the Docsy theme itself has not changed.
 
 Hugo 0.163.2 fixes an `ERR_ACCESS_DENIED` regression in this permission model
 that could abort builds when `node_modules` lives outside the project tree, such
-as in a CI provider's shared cache (for example, Netlify). It is another reason
-to prefer 0.163.2 for PostCSS pipelines.
+as in a CI provider's shared cache (for example, Netlify). Hugo 0.163.3 extends
+the same work so that config-file resolution also finds `.mjs` and `.cjs`
+variants of PostCSS and Babel configs. Both are reasons to prefer 0.163.3 for
+PostCSS pipelines.
 
 ### Actions {#node-tools-actions}
 
@@ -186,7 +189,9 @@ runs PostCSS, Babel, Tailwind, or similar Node tools during the Hugo build.
 - Build locally and check for Node permission errors.
 - If your CI keeps `node_modules` outside the project tree (for example,
   Netlify's shared cache) and the build fails with `ERR_ACCESS_DENIED`, upgrade
-  to Hugo 0.163.2.
+  to Hugo 0.163.2 or later.
+- If your PostCSS or Babel config uses an `.mjs` or `.cjs` variant (for example,
+  `postcss.config.mjs`), use Hugo 0.163.3, which resolves those variants.
 - If your project uses Tailwind, install Tailwind as an npm package. Hugo no
   longer supports the standalone Tailwind binary in this path.
 
@@ -274,6 +279,9 @@ JavaScript tooling config:
   output. Hugo 0.162.0 fixed GitInfo handling for modules whose `go.mod` lives
   in a repository subdirectory.
 - If you use `--renderSegments`, prefer Hugo 0.163.1 for its segment-merge fix.
+- If your site sets `uglyURLs: true` and has a page and a section sharing a name
+  (for example, `download.htm` beside `download/`), use Hugo 0.163.3, which
+  fixes a rendering collision introduced earlier in the 0.163.x range.
 - If your site renders Pandoc or reStructuredText content through external
   converters, Hugo 0.163.2 now **fails the build** when the converter binary is
   missing (matching AsciiDoc) instead of silently publishing raw content; ensure
@@ -282,8 +290,11 @@ JavaScript tooling config:
 ### Security fixes {#security-fixes}
 
 This range includes multiple security-related updates, including Go
-`html/template` fixes and stricter URL/content handling. This is a strong reason
-to prefer 0.163.2 over stopping at the minimum 0.158.0.
+`html/template` fixes and stricter URL/content handling. Hugo 0.163.3 also
+hardens the default code-block render hook: the language token (info string) of
+fenced code blocks is now escaped, which matters most for sites that render
+untrusted Markdown. This is a strong reason to prefer 0.163.3 over stopping at
+the minimum 0.158.0.
 
 ### New features worth knowing about {#new-features}
 
@@ -293,21 +304,21 @@ to prefer 0.163.2 over stopping at the minimum 0.158.0.
 - `strings.ReplacePairs` is available for template authors on Hugo 0.158.0 or
   later.
 
-## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.2 {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.3 {#upgrade}
 
 After addressing applicable breaking changes and deprecations, upgrade to Hugo
-0.163.2.
+0.163.3.
 
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@0.163.2 --save-dev
+npm install hugo-extended@0.163.3 --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use 0.163.2
+hvm use 0.163.3
 ```
 
 <section class="td-checkbox-list-wrapper">
@@ -353,7 +364,7 @@ module:
     min: 0.158.0
 ```
 
-For local builds, deployments, and new upgrades, we recommend Hugo 0.163.2.
+For local builds, deployments, and new upgrades, we recommend Hugo 0.163.3.
 
 <!-- prettier-ignore-start -->
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
