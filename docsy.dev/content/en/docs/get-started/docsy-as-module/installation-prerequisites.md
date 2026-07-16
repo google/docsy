@@ -140,8 +140,11 @@ If either applies, install PostCSS from your project root:
 npm install --save-dev autoprefixer postcss-cli
 ```
 
-For more about this change, see [PostCSS is opt-in for non-RTL
-sites][blog-postcss] in the 0.16.0 release notes.
+> [!NOTE]
+>
+> npm also installs [postcss][postcss] itself, as a peer dependency of the
+> packages listed above. If you use a package manager that doesn't auto-install
+> peer dependencies, such as Yarn, add `postcss` to the install command.
 
 ## What's next?
 
@@ -152,8 +155,8 @@ site
 - [Start site from scratch (for experts)](start-from-scratch/)
 
 <!-- prettier-ignore-start -->
-[blog-postcss]: /blog/2026/0.16.0/#postcss
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
+[postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
 <!-- prettier-ignore-end -->
