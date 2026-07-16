@@ -146,10 +146,15 @@ your dev dependencies:
 npm install --save-dev rtlcss autoprefixer postcss-cli
 ```
 
+npm also installs `postcss` itself as a peer dependency; for details, see
+[Install PostCSS][install-postcss].
+
 For an example of Docsy's RTL support, see the [Persian pages][] of the [Docsy
 example].
 
 [bs-rtl]: https://getbootstrap.com/docs/5.3/getting-started/rtl/
+[install-postcss]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [PostCSS]: https://postcss.org/
 [RTLCSS]: https://rtlcss.com/
 [rtlcss-npm]: https://www.npmjs.com/package/rtlcss

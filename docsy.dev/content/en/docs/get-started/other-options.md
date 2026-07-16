@@ -48,10 +48,6 @@ For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
 #### On Linux
 
-Be careful using `sudo apt-get install hugo`, as it
-[doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/installation/linux/#debian),
-and may not be up-to-date with the most recent Hugo version.
-
 If you've already installed Hugo, check your version:
 
 ```sh

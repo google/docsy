@@ -53,10 +53,7 @@ You can also put the build command and environment variables in a
 
 If you have an existing deployment you can view and update the relevant
 information by selecting the site from your list of sites in Netlify, then
-clicking **Site settings** - **Build and deploy**. Ensure that **Ubuntu Focal
-20.04** is selected in the **Build image selection** section - if you're
-creating a new deployment this is used by default. You need to use this image to
-run the extended version of Hugo.
+clicking **Site settings** > **Build and deploy**.
 
 <!-- prettier-ignore-start -->
 [Build environments and indexing]: /docs/deployment/#build-environments-and-indexing
@@ -70,5 +67,5 @@ run the extended version of Hugo.
 [netlify-toml-docs]: https://docs.netlify.com/configure-builds/file-based-configuration/
 [netlify.toml]: <{{% param github_repo %}}/blob/main/docsy.dev/netlify.toml>
 [node-lts]: https://nodejs.org/en/download/
-[Using the theme]: /docs/get-started/docsy-as-module
+[Using the theme]: /docs/get-started/docsy-as-module/
 <!-- prettier-ignore-end -->
