@@ -1,11 +1,11 @@
 ---
 title: 'Create a new site: start with a prepopulated site'
 linkTitle: Start with a prepopulated site
-date: 2021-12-08T09:21:54+01:00
-weight: 2
 description: >
   Create a new Hugo site by using a clone of the Docsy example site as your
   starting point.
+weight: 2
+cSpell:ignore: gitea
 ---
 
 The simplest way to create a new Docsy site is to use the source of the
@@ -16,8 +16,8 @@ example site automatically pulls in the Docsy theme as a
 [Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
 [keep up to date](/docs/updating/updating-hugo-module/).
 
-If you prefer to create a site from scratch, follow the instructions in Start a
-site from scratch.
+If you prefer to create a site from scratch, follow
+[Start a site from scratch][start-from-scratch].
 
 ## TL;DR: Setup for the impatient expert
 
@@ -96,8 +96,6 @@ easy:
 > in your `hugo.yaml` slightly, for example by adding a proxy to use when
 > downloading remote modules.
 
-Now you can make local edits and test your copied site locally with Hugo.
-
 ### Preview your site
 
 To build and preview your site locally, switch to the root of your cloned
@@ -124,5 +122,6 @@ MacOS limits, see [MacOS issues][macos-issues].
 
 <!-- prettier-ignore-start -->
 [macos-issues]: /docs/get-started/troubleshooting/#macos
+[start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
 [Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
 <!-- prettier-ignore-end -->
