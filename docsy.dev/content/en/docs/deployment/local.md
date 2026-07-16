@@ -11,8 +11,7 @@ during development to preview content changes. To serve your site locally:
 
 1. Ensure you have the tools described in [Prerequisites and
    installation][prereq] installed on your local machine, including
-   `postcss-cli` (you'll need it to generate the site resources the first time
-   you run the server).
+   [PostCSS][prereq-postcss] if your site needs it.
 1. Run the `hugo server` command in your site root. By default your site will be
    available at <http://localhost:1313>.
 
@@ -22,3 +21,5 @@ branch, when you switch between git branches the local website reflects the
 files in the current branch.
 
 [prereq]: /docs/get-started/docsy-as-module/installation-prerequisites
+[prereq-postcss]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss

@@ -1,11 +1,11 @@
 ---
 title: 'Create a new site: start with a prepopulated site'
-linkTitle: 'Start with a prepopulated site'
-date: 2021-12-08T09:21:54+01:00
-weight: 2
+linkTitle: Start with a prepopulated site
 description: >
   Create a new Hugo site by using a clone of the Docsy example site as your
   starting point.
+weight: 2
+cSpell:ignore: gitea
 ---
 
 The simplest way to create a new Docsy site is to use the source of the
@@ -16,21 +16,22 @@ example site automatically pulls in the Docsy theme as a
 [Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
 [keep up to date](/docs/updating/updating-hugo-module/).
 
-If you prefer to create a site from scratch, follow the instructions in Start a
-site from scratch.
+If you prefer to create a site from scratch, follow [Start a site from
+scratch][start-from-scratch].
 
 ## TL;DR: Setup for the impatient expert
 
-At your Unix shell or Windows command line, run the following command:
+From a terminal:
 
 ```bash
 git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
-cd  my-new-site
+cd my-new-site
+npm install
 hugo server
 ```
 
-You now can preview your new site in your browser at
-[http://localhost:1313](http://localhost:1313/).
+Preview at <http://localhost:1313/>. If the build fails with a missing Bootstrap
+import, see [Troubleshooting][].
 
 ## Detailed Setup instructions
 
@@ -91,29 +92,25 @@ easy:
 > [!NOTE]
 >
 > Depending on your environment you may need to tweak the
-> [module top level settings](https://github.com/google/docsy-example/blob/f88fca475c28ffba3d72710a50450870230eb3a0/hugo.toml#L222-L227)
-> inside your `hugo.toml` slightly, for example by adding a proxy to use when
-> downloading remote modules. You can find details of what these configuration
-> settings do in the
-> [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
-
-Now you can make local edits and test your copied site locally with Hugo.
+> [module top-level settings](https://gohugo.io/configuration/module/#top-level-settings)
+> in your `hugo.yaml` slightly, for example by adding a proxy to use when
+> downloading remote modules.
 
 ### Preview your site
 
 To build and preview your site locally, switch to the root of your cloned
-project and use hugo's `server` command:
+project, install the project dependencies, and use hugo's `server` command:
 
 ```bash
 cd my-new-site
+npm install
 hugo server
 ```
 
-Preview your site in your browser at:
-[http://localhost:1313](http://localhost:1313/). Thanks to Hugo's live preview,
-you can immediately see the effect of changes that you are making to the source
-files of your local repo. Use `Ctrl + c` to stop the Hugo server whenever you
-like. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
+Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
+immediately see the effect of changes that you are making to the source files of
+your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
+the build fails with a missing Bootstrap import, see [Troubleshooting][].
 
 ## What's next?
 
@@ -121,3 +118,8 @@ like. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 - [Edit existing content and add more pages](/docs/content/)
 - [Customize your site](/docs/content/lookandfeel/)
 - [Publish your site](/docs/deployment/).
+
+<!-- prettier-ignore-start -->
+[start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
+[Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
+<!-- prettier-ignore-end -->

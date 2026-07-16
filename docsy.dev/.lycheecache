@@ -63,6 +63,7 @@ https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-
 https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request,200,1782498226
 https://docs.gitlab.com/user/markdown/#math-equations,200,1782498236
 https://docs.layer5.io/,200,1782498244
+https://docs.netlify.com/build/configure-builds/overview/#definitions,200,1784219324
 https://docs.netlify.com/configure-builds/file-based-configuration/,200,1782563368
 https://docs.npmjs.com/cli/v10/commands/npm-install#description,200,1782563368
 https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish,200,1782563368
@@ -381,6 +382,7 @@ https://github.com/google/docsy/issues/new?title=Search,200,1782498242
 https://github.com/google/docsy/issues/new?title=Serving%20your%20site%20locally,200,1782498244
 https://github.com/google/docsy/issues/new?title=Style%20guide,200,1782498547
 https://github.com/google/docsy/issues/new?title=Taxonomy%20Support,200,1782498243
+https://github.com/google/docsy/issues/new?title=Troubleshooting%20and%20known%20issues,200,1784211755
 https://github.com/google/docsy/issues/new?title=Update%20Docsy%20without%20Hugo%20Modules,200,1782498243
 https://github.com/google/docsy/issues/new?title=Update%20Docsy,200,1782498244
 https://github.com/google/docsy/issues/new?title=Update%20your%20Docsy%20Hugo%20Module,200,1782498245
@@ -744,6 +746,7 @@ https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/start-from-
 https://main--docsydocs.netlify.app/docs/get-started/known_issues/,200,1782498243
 https://main--docsydocs.netlify.app/docs/get-started/other-options/,200,1782498243
 https://main--docsydocs.netlify.app/docs/get-started/quickstart-docker/,200,1782498245
+https://main--docsydocs.netlify.app/docs/get-started/troubleshooting/,206,1784212116
 https://main--docsydocs.netlify.app/docs/language/,200,1782498243
 https://main--docsydocs.netlify.app/docs/updating/,200,1782563367
 https://main--docsydocs.netlify.app/docs/updating/convert-site-to-module/,200,1782498243
@@ -890,6 +893,7 @@ https://www.docsy.dev/docs/get-started/docsy-as-module/start-from-scratch/,200,1
 https://www.docsy.dev/docs/get-started/known_issues/,200,1782498243
 https://www.docsy.dev/docs/get-started/other-options/,200,1782498243
 https://www.docsy.dev/docs/get-started/quickstart-docker/,200,1782498243
+https://www.docsy.dev/docs/get-started/troubleshooting/,206,1784212116
 https://www.docsy.dev/docs/language/,200,1782498243
 https://www.docsy.dev/docs/updating/,200,1782563367
 https://www.docsy.dev/docs/updating/convert-site-to-module/,200,1782498243

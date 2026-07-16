@@ -48,10 +48,6 @@ For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
 #### On Linux
 
-Be careful using `sudo apt-get install hugo`, as it
-[doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/installation/linux/#debian),
-and may not be up-to-date with the most recent Hugo version.
-
 If you've already installed Hugo, check your version:
 
 ```sh
@@ -118,20 +114,7 @@ nvm install --lts
 
 ### Install PostCSS (optional) {#install-postcss}
 
-Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
-sites don't need it. Install PostCSS only if your site has a **right-to-left
-(RTL)** language (Docsy uses `rtlcss` to generate RTL styles) or you
-post-process your own CSS with a project-root `postcss.config.{js,mjs,cjs}`
-file.
-
-If either applies, install PostCSS from your project root:
-
-```sh
-npm install --save-dev autoprefixer postcss postcss-cli
-```
-
-For more about this change, see [PostCSS is opt-in for non-RTL
-sites][blog-postcss] in the 0.16.0 release notes.
+See [Install PostCSS][].
 
 ## Option 1: Docsy as a Git submodule
 
@@ -299,8 +282,8 @@ cd myproject
 hugo server
 ```
 
-By default, your site will be available at <http://localhost:1313>.
-[See the known issues on MacOS](/docs/get-started/known_issues/#macos).
+By default, your site will be available at <http://localhost:1313>. For common
+issues, see [Troubleshooting](/docs/get-started/troubleshooting/).
 
 You may get Hugo errors for missing parameters and values when you try to build
 your site. This is usually because you’re missing default values for some
@@ -319,7 +302,8 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[blog-postcss]: /blog/2026/0.16.0/#postcss
+[Install PostCSS]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating

@@ -24,10 +24,6 @@ For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
 ### On Linux
 
-Be careful using `sudo apt-get install hugo`, as it
-[doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/installation/linux/#debian),
-and may not be up-to-date with the most recent Hugo version.
-
 If you've already installed Hugo, check your version:
 
 ```bash
@@ -124,31 +120,39 @@ steps.
 
 ## Install PostCSS (optional) {#install-postcss}
 
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
 Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
 sites don't need it. Install PostCSS only if:
 
-- your site has a **right-to-left (RTL)** language (Docsy uses `rtlcss` to
-  generate RTL styles), or
-- you post-process your own CSS with a project-root
+- Your site has a **[right-to-left (RTL)][rtl]** language, or
+- You post-process your own CSS with a project-root
   `postcss.config.{js,mjs,cjs}` file.
 
 If either applies, install PostCSS from your project root:
 
 ```bash
-npm install --save-dev autoprefixer postcss postcss-cli
+npm install --save-dev autoprefixer postcss-cli
 ```
 
-For more about this change, see [PostCSS is opt-in for non-RTL
-sites][blog-postcss] in the 0.16.0 release notes.
+> [!NOTE]
+>
+> npm also installs [postcss][postcss] itself, as a peer dependency of the
+> packages listed above. If you use a package manager that doesn't auto-install
+> peer dependencies, such as Yarn, add `postcss` to the install command.
 
 ## What's next?
 
 With all prerequisites installed, choose how to start off with your new Hugo
 site
 
-- [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
-- [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
+- [Start with a prepopulated site (for beginners)](example-site-as-template/)
+- [Start site from scratch (for experts)](start-from-scratch/)
 
-[blog-postcss]: /blog/2026/0.16.0/#postcss
+<!-- prettier-ignore-start -->
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
+[postcss]: https://www.npmjs.com/package/postcss
+[rtl]: /docs/language/#right-to-left-languages
+<!-- prettier-ignore-end -->

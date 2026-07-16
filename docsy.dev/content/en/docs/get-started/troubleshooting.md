@@ -1,9 +1,36 @@
 ---
-title: Known issues
-date: 2021-12-08T09:22:27+01:00
-weight: 4
-description: Known issues when installing Docsy theme.
+title: Troubleshooting and known issues
+linkTitle: Troubleshooting
+weight: 60
+description: >
+  Troubleshooting and known issues when installing and using Docsy.
+aliases: [known_issues]
+cSpell:ignore: TOCSS maxfiles maxfilesperproc
 ---
+
+## Troubleshooting
+
+### Missing theme npm dependencies
+
+For any Docsy install mode, if the theme's npm packages aren't available, Hugo
+fails while compiling SCSS with an error like:
+
+```text
+TOCSS: failed to transform "/scss/main.scss" (text/x-scss):
+File to import not found or unreadable: ../../vendor/bootstrap/scss/functions.
+```
+
+To fix this, install the theme's npm dependencies for your [setup][], then
+rebuild:
+
+- Example-site-based projects, and sites using Docsy as an [NPM
+  package][npm-pkg]: run `npm install` from your site root.
+- Hugo module sites built from scratch: see [Install theme npm
+  dependencies][theme-npm-deps].
+- Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
+  `npm run postinstall` from `themes/docsy`.
+
+## Known issues
 
 The following issues are known on [MacOS](#macos) and on
 [Windows Subsystem for Linux](#windows-subsystem-for-linux-wsl):
@@ -58,3 +85,10 @@ Note that you might need to set these limits for each new shell.
 
 If you're using WSL, ensure that you're running `hugo` on a Linux mount of the
 filesystem, rather than a Windows one, otherwise you may get unexpected errors.
+
+<!-- prettier-ignore-start -->
+[npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[setup]: /docs/get-started/
+[submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
+[theme-npm-deps]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies
+<!-- prettier-ignore-end -->

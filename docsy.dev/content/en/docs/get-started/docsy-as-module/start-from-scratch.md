@@ -177,9 +177,10 @@ hugo mod npm pack
 npm install
 ```
 
-Re-run `hugo mod npm pack` whenever you [update Docsy](/docs/updating/); Hugo
-warns when the dependency set drifts. For background, see [Bootstrap and Font
-Awesome via npm][blog-npm-deps] in the 0.16.0 release notes.
+Re-run `hugo mod npm pack` whenever you
+[update Docsy](/docs/updating/updating-hugo-module/); Hugo warns when the
+dependency set drifts. For background, see [Bootstrap and Font Awesome via
+npm][blog-npm-deps] in the 0.16.0 release notes.
 
 ### Preview your site
 
@@ -190,9 +191,8 @@ hugo server
 ```
 
 By default, your site will be available at
-[http://localhost:1313](http://localhost:1313/). When encountering problems,
-have a look at the [known issues](/docs/get-started/known_issues/#macos) on
-MacOS.
+[http://localhost:1313](http://localhost:1313/). For common issues, such as the
+build failing with a missing Bootstrap import, see [Troubleshooting][].
 
 You may get Hugo errors for missing parameters and values when you try to build
 your site. This is usually because you're missing default values for some
@@ -214,3 +214,4 @@ from scratch as it provides defaults for many required configuration parameters.
 [blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [configuration file]:
   https://gohugo.io/configuration/introduction/#configuration-file
+[Troubleshooting]: /docs/get-started/troubleshooting/
