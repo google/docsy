@@ -92,11 +92,9 @@ easy:
 > [!NOTE]
 >
 > Depending on your environment you may need to tweak the
-> [module top level settings](https://github.com/google/docsy-example/blob/main/hugo.yaml)
-> inside your `hugo.yaml` slightly, for example by adding a proxy to use when
-> downloading remote modules. You can find details of what these configuration
-> settings do in the
-> [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
+> [module top-level settings](https://gohugo.io/configuration/module/#top-level-settings)
+> in your `hugo.yaml` slightly, for example by adding a proxy to use when
+> downloading remote modules.
 
 Now you can make local edits and test your copied site locally with Hugo.
 
@@ -111,11 +109,11 @@ npm install
 hugo server
 ```
 
-Preview your site in your browser at:
-[http://localhost:1313](http://localhost:1313/). Thanks to Hugo's live preview,
-you can immediately see the effect of changes that you are making to the source
-files of your local repo. Use `Ctrl + c` to stop the Hugo server whenever you
-like. [See the known issues on MacOS][macos-issues].
+Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
+immediately see the effect of changes that you are making to the source files of
+your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
+the build fails with a missing Bootstrap import, see [Troubleshooting][]. For
+MacOS limits, see [MacOS issues][macos-issues].
 
 ## What's next?
 
