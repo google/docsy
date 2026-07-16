@@ -75,6 +75,7 @@
     "test:website": "npm run -C docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
+    "update:goldens": "npm run -C docsy.dev update:goldens",
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages:not-hugo": "npm run update:packages -- -x hugo-extended",
     "update:packages": "npx npm-check-updates -u",
