@@ -21,8 +21,8 @@ File to import not found or unreadable: ../../vendor/bootstrap/scss/functions.
 ```
 
 To fix this, install the theme's npm dependencies for your [setup][], then
-rebuild. Hugo module sites: see [Install theme npm
-dependencies][theme-npm-deps].
+rebuild. Example-site-based projects: run `npm install` in your site root. Hugo
+module sites from scratch: see [Install theme npm dependencies][theme-npm-deps].
 
 ## Known issues
 

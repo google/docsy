@@ -29,7 +29,9 @@ provider account. Once you're logged in:
         You need to specify this rather than just `hugo` so that Netlify can use
         the theme's submodules.
       - If you are using Docsy as a [Hugo module][] or NPM package, you can just
-        specify `hugo`.
+        specify `hugo`. Netlify installs dependencies automatically when your
+        site's [base directory][] includes your Node dependency files (such as
+        `package.json` and lock files).
    2. Click **Show advanced**.
    3. In the **Advanced build settings** section, click **New variable**.
    4. Specify `NODE_VERSION` as the **Key** for the new variable, and set its
@@ -57,6 +59,7 @@ clicking **Site settings** > **Build and deploy**.
 
 <!-- prettier-ignore-start -->
 [Build environments and indexing]: /docs/deployment/#build-environments-and-indexing
+[base directory]: https://docs.netlify.com/build/configure-builds/overview/#definitions
 [cd]: https://www.netlify.com/docs/continuous-deployment/
 [Git submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [go-dl]: https://go.dev/dl/

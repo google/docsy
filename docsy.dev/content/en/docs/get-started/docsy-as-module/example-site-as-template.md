@@ -110,8 +110,7 @@ hugo server
 Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
 immediately see the effect of changes that you are making to the source files of
 your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
-the build fails with a missing Bootstrap import, see [Troubleshooting][]. For
-MacOS limits, see [MacOS issues][macos-issues].
+the build fails with a missing Bootstrap import, see [Troubleshooting][].
 
 ## What's next?
 
@@ -121,7 +120,6 @@ MacOS limits, see [MacOS issues][macos-issues].
 - [Publish your site](/docs/deployment/).
 
 <!-- prettier-ignore-start -->
-[macos-issues]: /docs/get-started/troubleshooting/#macos
 [start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
 [Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
 <!-- prettier-ignore-end -->
