@@ -204,8 +204,10 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2403]: https://github.com/google/docsy/issues/2403
 [#2431]: https://github.com/google/docsy/issues/2431
 [#2554]: https://github.com/google/docsy/issues/2554
+[#2578]: https://github.com/google/docsy/pull/2578
 [#2581]: https://github.com/google/docsy/issues/2581
 [#2593]: https://github.com/google/docsy/issues/2593
+[#2594]: https://github.com/google/docsy/pull/2594
 [#2595]: https://github.com/google/docsy/issues/2595
 [#2598]: https://github.com/google/docsy/issues/2598
 [#2614]: https://github.com/google/docsy/issues/2614
