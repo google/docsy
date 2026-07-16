@@ -88,10 +88,15 @@ From the repo root:
 | `test:fixture-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
 | `test:smoke`        | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
 | `test:tooling`      | Unit tests for repo scripts                                                               |
-| `test:website`      | Full docsy.dev checks: format, links, hugo-build, alt-site, and md-output golden tests    |
+| `test:website`      | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests  |
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).
+
+The md-output and favicon tests compare built output against committed golden
+files. When a golden test reports intended drift, run `npm run update:goldens`
+to rebuild the site and refresh both suites' goldens, then review the diff and
+commit it.
 
 ## Link checking and the refcache
 
