@@ -124,6 +124,9 @@ steps.
 
 ## Install PostCSS (optional) {#install-postcss}
 
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
 Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
 sites don't need it. Install PostCSS only if:
 

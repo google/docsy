@@ -118,20 +118,10 @@ nvm install --lts
 
 ### Install PostCSS (optional) {#install-postcss}
 
-Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
-sites don't need it. Install PostCSS only if your site has a **right-to-left
-(RTL)** language (Docsy uses `rtlcss` to generate RTL styles — see
-[Right-to-left languages][rtl]) or you post-process your own CSS with a
-project-root `postcss.config.{js,mjs,cjs}` file.
-
-If either applies, install PostCSS from your project root:
-
-```sh
-npm install --save-dev autoprefixer postcss postcss-cli
-```
-
-For more about this change, see [PostCSS is opt-in for non-RTL
-sites][blog-postcss] in the 0.16.0 release notes.
+Docsy builds its CSS without PostCSS by default, so most sites don't need it. If
+your site has a right-to-left (RTL) language or post-processes its own CSS, see
+[Install PostCSS][] in the Hugo-module prerequisites — the same guidance applies
+to all installation options.
 
 ## Option 1: Docsy as a Git submodule
 
@@ -319,11 +309,11 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[blog-postcss]: /blog/2026/0.16.0/#postcss
+[Install PostCSS]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
 [prepare]:
   https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
-[rtl]: /docs/language/#right-to-left-languages
