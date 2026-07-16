@@ -16,8 +16,8 @@ example site automatically pulls in the Docsy theme as a
 [Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
 [keep up to date](/docs/updating/updating-hugo-module/).
 
-If you prefer to create a site from scratch, follow
-[Start a site from scratch][start-from-scratch].
+If you prefer to create a site from scratch, follow [Start a site from
+scratch][start-from-scratch].
 
 ## TL;DR: Setup for the impatient expert
 
