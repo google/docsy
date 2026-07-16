@@ -130,15 +130,14 @@ Hugo-module setups.
 Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
 sites don't need it. Install PostCSS only if:
 
-- your site has a **right-to-left (RTL)** language (Docsy uses `rtlcss` to
-  generate RTL styles — see [Right-to-left languages][rtl]), or
-- you post-process your own CSS with a project-root
+- Your site has a **[right-to-left (RTL)][rtl]** language, or
+- You post-process your own CSS with a project-root
   `postcss.config.{js,mjs,cjs}` file.
 
 If either applies, install PostCSS from your project root:
 
 ```bash
-npm install --save-dev autoprefixer postcss postcss-cli
+npm install --save-dev autoprefixer postcss-cli
 ```
 
 For more about this change, see [PostCSS is opt-in for non-RTL
@@ -149,10 +148,12 @@ sites][blog-postcss] in the 0.16.0 release notes.
 With all prerequisites installed, choose how to start off with your new Hugo
 site
 
-- [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
-- [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
+- [Start with a prepopulated site (for beginners)](example-site-as-template/)
+- [Start site from scratch (for experts)](start-from-scratch/)
 
+<!-- prettier-ignore-start -->
 [blog-postcss]: /blog/2026/0.16.0/#postcss
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [rtl]: /docs/language/#right-to-left-languages
+<!-- prettier-ignore-end -->

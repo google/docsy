@@ -118,10 +118,7 @@ nvm install --lts
 
 ### Install PostCSS (optional) {#install-postcss}
 
-Docsy builds its CSS without PostCSS by default, so most sites don't need it. If
-your site has a right-to-left (RTL) language or post-processes its own CSS, see
-[Install PostCSS][] in the Hugo-module prerequisites — the same guidance applies
-to all installation options.
+See [Install PostCSS][].
 
 ## Option 1: Docsy as a Git submodule
 

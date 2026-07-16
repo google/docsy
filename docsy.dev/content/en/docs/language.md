@@ -143,7 +143,7 @@ If your multilingual site includes an RTL language (configured with
 your dev dependencies:
 
 ```sh
-npm install --save-dev autoprefixer postcss postcss-cli rtlcss
+npm install --save-dev rtlcss autoprefixer postcss-cli
 ```
 
 For an example of Docsy's RTL support, see the [Persian pages][] of the [Docsy
