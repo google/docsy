@@ -137,7 +137,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   `static/` and the theme discovers and links them -- no favicons partial
   required. A new `gen-favicons` helper generates raster icons from a source
   SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
-  favicons][favicons] ([#2357][], [#2654][], [#2656][]).
+  favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
@@ -145,17 +145,17 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   Conventional `static/` filenames are discovered and linked automatically (see
   **Favicon discovery** under **New** above), so a custom partial is only needed
   for non-default filenames or extra links. See [0.16.0 release
-  report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2653][]).
+  report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2595][]).
 - Raised the theme's minimum supported Hugo version to
   **[0.158.0][hugo-0.158.0]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
   Theme templates now use the language APIs introduced in Hugo 0.158.0. Note:
   the language config keys deprecated by Hugo 0.158.0 (`languageName`,
   `languageDirection`) still work in your site config, but consider renaming
   them to `label` and `direction`. See [Hugo 0.158+ upgrade guide][] and
-  [Multi-language support](/docs/language/) ([#2647][]).
+  [Multi-language support](/docs/language/) ([#2593][]).
 - **Theme folder move**: the canonical theme now lives in `theme/`; consuming
   sites need a one-line install-path update for their install mode. See [0.16.0
-  release report][0.16.0-blog-theme-folder] ([#2641][], [#2645][]).
+  release report][0.16.0-blog-theme-folder] ([#2617][]).
 - **Bootstrap and Font Awesome via npm**: the theme declares them as npm
   dependencies instead of importing them as Hugo modules. **Applies to
   Hugo-module installs**, which run `hugo mod npm pack` and `npm install` to
@@ -168,10 +168,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   [@deining][] for the groundwork in [#2594][] and [#2578][]!
 - Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
   minimum supported Hugo version remains 0.158.0. See [Hugo 0.158+ upgrade
-  guide][] ([#2581][], [#2648][], [#2649][], [#2658][]).
+  guide][] ([#2581][]).
 - Reorganized the repository package boundary: `theme/package.json` owns theme
   runtime dependencies, and the root package orchestrates the `docsy.dev` and
-  `theme` workspaces ([#2645][]).
+  `theme` workspaces ([#2617][]).
 - **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for sites
   with RTL languages or that provide a project-root
   `postcss.config.{js,mjs,cjs}`, so other sites no longer need
@@ -194,16 +194,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2357]: https://github.com/google/docsy/issues/2357
 [#2578]: https://github.com/google/docsy/pull/2578
 [#2581]: https://github.com/google/docsy/issues/2581
+[#2593]: https://github.com/google/docsy/issues/2593
 [#2594]: https://github.com/google/docsy/pull/2594
-[#2641]: https://github.com/google/docsy/pull/2641
-[#2645]: https://github.com/google/docsy/pull/2645
-[#2647]: https://github.com/google/docsy/pull/2647
-[#2648]: https://github.com/google/docsy/pull/2648
-[#2649]: https://github.com/google/docsy/pull/2649
-[#2653]: https://github.com/google/docsy/pull/2653
-[#2654]: https://github.com/google/docsy/pull/2654
-[#2656]: https://github.com/google/docsy/pull/2656
-[#2658]: https://github.com/google/docsy/pull/2658
+[#2595]: https://github.com/google/docsy/issues/2595
+[#2617]: https://github.com/google/docsy/issues/2617
 [#2659]: https://github.com/google/docsy/issues/2659
 [#2668]: https://github.com/google/docsy/issues/2668
 [0.16.0 release report]: /blog/2026/0.16.0/

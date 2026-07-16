@@ -93,6 +93,13 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
 ## Decisions
 
+- Applied the enumeration-home rule (2026-07-16, now canonical in maintainer
+  notes → Content placement): the GitHub release notes + milestone own the
+  exhaustive PR/issue record; the blog post carries no PR/issue enumeration
+  (open trackers only where they add follow-up context: [#2617][], [#2659][],
+  [#2357][] in What's next); the changelog cites key issues, keeping PR links
+  only for contributor credit ([#2594][], [#2578][]). The ledger remains the
+  internal full-coverage record.
 - The highlights card is capped at **three items** (2026-07-16): a merged
   **Packaging modernization** entry (theme folder move + npm-sourced deps, title
   linking `#theme-folder` with an inline link to `#npm-deps`), favicons, and

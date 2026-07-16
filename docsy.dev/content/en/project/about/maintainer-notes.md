@@ -11,14 +11,23 @@ more, see [Contributing][]. This page is for **maintainers only**.
 ## Content placement
 
 Keep project content DRY by writing each fact in the artifact whose purpose and
-audience it serves:
+audience it serves. Each artifact links to the more detailed ones rather than
+restating them:
 
 - **[Changelog][]**: a lean record of _what changed_, for devs who want a quick
-  overview. No upgrade advice, implementation detail, or background.
+  overview. No upgrade advice, implementation detail, or background. Entries
+  link to the release report for details and cite a change's key issues — PRs
+  only when there is no key issue, such as for contributor credit.
 - **Release and upgrade blog posts**: what's new, what to watch out for, and
-  actionable upgrade guidance — the historical narrative.
+  actionable upgrade guidance — the historical narrative. Link to the site docs
+  for current behavior and reference detail. Don't enumerate PRs and issues;
+  link an open tracker only where it adds follow-up context.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
+- **[Release notes][] and [milestones][]**: the exhaustive record — generated
+  release notes list every PR, PRs link their motivating issues, and the release
+  milestone gathers the issues resolved. Authored artifacts link to these rather
+  than reproducing the enumeration.
 - **Test and code comments**: implementation rationale and regression
   background.
 
@@ -555,7 +564,9 @@ before any further changes are merged into the `main` branch:
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
+[milestones]: <{{% param github_repo %}}/milestones>
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [public]: /project/about/changelog/#public
