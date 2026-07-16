@@ -300,7 +300,7 @@ hugo server
 ```
 
 By default, your site will be available at <http://localhost:1313>.
-[See the known issues on MacOS](/docs/get-started/known_issues/#macos).
+[See the known issues on MacOS](/docs/get-started/troubleshooting/#macos).
 
 You may get Hugo errors for missing parameters and values when you try to build
 your site. This is usually because you’re missing default values for some

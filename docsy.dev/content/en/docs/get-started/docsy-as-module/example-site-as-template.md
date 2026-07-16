@@ -1,6 +1,6 @@
 ---
 title: 'Create a new site: start with a prepopulated site'
-linkTitle: 'Start with a prepopulated site'
+linkTitle: Start with a prepopulated site
 date: 2021-12-08T09:21:54+01:00
 weight: 2
 description: >
@@ -21,22 +21,17 @@ site from scratch.
 
 ## TL;DR: Setup for the impatient expert
 
-At your Unix shell or Windows command line, run the following command:
+From a terminal:
 
 ```bash
 git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
-cd  my-new-site
+cd my-new-site
 npm install
 hugo server
 ```
 
-The `npm install` is required: it installs the project's npm dependencies, which
-include the theme's npm dependencies as well as the [PostCSS][prereq-postcss]
-toolchain that the example site needs for its right-to-left (RTL) language
-support.
-
-You now can preview your new site in your browser at
-[http://localhost:1313](http://localhost:1313/).
+Preview at <http://localhost:1313/>. If the build fails with a missing Bootstrap
+import, see [Troubleshooting][].
 
 ## Detailed Setup instructions
 
@@ -120,7 +115,7 @@ Preview your site in your browser at:
 [http://localhost:1313](http://localhost:1313/). Thanks to Hugo's live preview,
 you can immediately see the effect of changes that you are making to the source
 files of your local repo. Use `Ctrl + c` to stop the Hugo server whenever you
-like. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
+like. [See the known issues on MacOS][macos-issues].
 
 ## What's next?
 
@@ -129,5 +124,7 @@ like. [See the known issues on MacOS](/docs/get-started/known_issues/#macos).
 - [Customize your site](/docs/content/lookandfeel/)
 - [Publish your site](/docs/deployment/).
 
-[prereq-postcss]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
+<!-- prettier-ignore-start -->
+[macos-issues]: /docs/get-started/troubleshooting/#macos
+[Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
+<!-- prettier-ignore-end -->
