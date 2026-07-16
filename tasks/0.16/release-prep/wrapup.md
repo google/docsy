@@ -93,6 +93,12 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
 ## Decisions
 
+- The highlights card is capped at **three items** (2026-07-16): a merged
+  **Packaging modernization** entry (theme folder move + npm-sourced deps, title
+  linking `#theme-folder` with an inline link to `#npm-deps`), favicons, and
+  shared chrome. The minimum-Hugo bump is deliberately not in the card: it is
+  routine (0.15 did the same), has its own section plus the companion Hugo
+  guide, and Ready-to-Upgrade lists every breaking change anyway.
 - The four breaking changes for 0.16 are the theme folder move, the minimum-Hugo
   bump, default-favicon removal, and npm-sourced Bootstrap/Font Awesome
   ([#2670][], added in the 2026-07-16 refresh). The headline **new** feature is
