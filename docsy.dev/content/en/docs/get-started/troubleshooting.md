@@ -21,8 +21,14 @@ File to import not found or unreadable: ../../vendor/bootstrap/scss/functions.
 ```
 
 To fix this, install the theme's npm dependencies for your [setup][], then
-rebuild. Example-site-based projects: run `npm install` in your site root. Hugo
-module sites from scratch: see [Install theme npm dependencies][theme-npm-deps].
+rebuild:
+
+- Example-site-based projects, and sites using Docsy as an [NPM
+  package][npm-pkg]: run `npm install` from your site root.
+- Hugo module sites built from scratch: see [Install theme npm
+  dependencies][theme-npm-deps].
+- Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
+  `npm run postinstall` from `themes/docsy`.
 
 ## Known issues
 
@@ -81,6 +87,8 @@ If you're using WSL, ensure that you're running `hugo` on a Linux mount of the
 filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 
 <!-- prettier-ignore-start -->
+[npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [setup]: /docs/get-started/
+[submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [theme-npm-deps]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies
 <!-- prettier-ignore-end -->
