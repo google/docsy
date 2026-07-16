@@ -66,4 +66,4 @@ Section pages:
 - [Other setup options](/docs/get-started/other-options/): Create a new Docsy site with Docsy using Git or NPM
 - [Deploy Docsy inside a Docker container](/docs/get-started/quickstart-docker/): Instructions on how to set up and run a local Docsy site with Docker.
 - [Basic site configuration](/docs/get-started/basic-configuration/): Basic configuration for new Docsy sites.
-- [Troubleshooting](/docs/get-started/troubleshooting/): Troubleshooting and known issues when installing and using Docsy.
+- [Troubleshooting and known issues](/docs/get-started/troubleshooting/): Troubleshooting and known issues when installing and using Docsy.
