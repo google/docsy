@@ -1,5 +1,5 @@
 ---
-title: Hugo 0.158.0-0.163.x upgrade guide
+title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-06-15
 lastmod: 2026-07-17
@@ -10,15 +10,15 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: amp AVIF CatmullRom goldmark Netlify Pandoc partialCached passthrough renderSegments reStructuredText useEmbedded userinfo
+cSpell:ignore: amp AVIF CatmullRom chromastyles goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
 ---
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
-0.163.3 that are relevant to Docsy users. It is a companion post to the Docsy
+0.164.0 that are relevant to Docsy users. It is a companion post to the Docsy
 [0.16.0](0.16.0/) release and upgrade guide.
 
 Docsy 0.16.0 requires Hugo 0.160.1 or later. The Docsy project build is tested
-with Hugo 0.163.3, which is the recommended target for this upgrade range.
+with Hugo 0.164.0, which is the recommended target for this upgrade range.
 
 ## Upgrade summary
 
@@ -40,8 +40,9 @@ Docsy site to 0.16.0.
   - [Markdown-link escaping](#amp-escaping)
   - [Image URL churn](#image-url-churn)
   - [Template and module cleanup](#template-module-cleanup)
+  - [Faster builds and stricter templates](#hugo-0-164-0)
   - [Notable changes](#notable-changes)
-- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.163.3](#upgrade)
+- {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.164.0](#upgrade)
   once you're ready.
 
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
@@ -59,27 +60,29 @@ Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
 - **0.160.1** excludes the known regressions in the 0.159.2 to 0.160.0 range,
   such as Markdown-link escaping, and passthrough and shortcode rendering.
 
-We recommend upgrading directly to **Hugo 0.163.3** because the later releases
-include security fixes and are the versions validated across Docsy, the Docsy
-example site, and at least one large downstream Docsy site.
+We recommend upgrading directly to **Hugo 0.164.0**: the later releases include
+security fixes, 0.164.0
+[fixes a long-standing template-rendering slowdown](#hugo-0-164-0), and these
+are the versions validated across Docsy, the Docsy example site, and at least
+one large downstream Docsy site.
 
 ### Actions {#hugo-version-actions}
 
 {{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
 
-- Upgrade Hugo to 0.160.1 or later. Prefer 0.163.3.
+- Upgrade Hugo to 0.160.1 or later. Prefer 0.164.0.
 - If your project declares `module.hugoVersion.min`, set it to at least
   `0.160.1`.
 - If you use `hugo-extended`, pin a compatible version in your site:
 
   ```sh
-  npm install hugo-extended@0.163.3 --save-dev
+  npm install hugo-extended@0.164.0 --save-dev
   ```
 
 - If you use [hvm][], select the latest compatible Hugo release:
 
   ```sh
-  hvm use 0.163.3
+  hvm use 0.164.0
   ```
 
 ## Language API deprecations (0.158.0) {#language-apis}
@@ -185,8 +188,8 @@ Hugo 0.163.2 fixes an `ERR_ACCESS_DENIED` regression in this permission model
 that could abort builds when `node_modules` lives outside the project tree, such
 as in a CI provider's shared cache (for example, Netlify). Hugo 0.163.3 extends
 the same work so that config-file resolution also finds `.mjs` and `.cjs`
-variants of PostCSS and Babel configs. Both are reasons to prefer 0.163.3 for
-PostCSS pipelines.
+variants of PostCSS and Babel configs. Both are reasons to prefer 0.163.3 or
+later for PostCSS pipelines.
 
 ### Actions {#node-tools-actions}
 
@@ -274,6 +277,37 @@ Hugo 0.161.x-0.163.x can change resized-image filenames that contain
 this as expected cache-key churn. It can create noisy diffs and cache misses,
 but it is not usually a content regression.
 
+## Faster builds and stricter templates (0.164.0) {#hugo-0-164-0}
+
+Hugo 0.164.0 fixes a template-rendering slowdown that affected Hugo 0.128.0
+through 0.163.x. Large sites benefit the most: on a reported ~8,500-page Docsy
+site, the fix cut full-build time from 608 to 117 seconds ([performance
+discussion][hugo-164-perf]).
+
+The same release tightens template handling and refreshes syntax highlighting:
+
+- `resources.PostProcess` is deprecated; use `templates.Defer` instead. Docsy's
+  templates don't use `resources.PostProcess`.
+- `.Render` now fails the build when the named view template is missing, instead
+  of silently rendering nothing; nested view names work again.
+- The bundled Chroma highlighter retokenizes some languages, such as protobuf,
+  YAML, and Markdown: syntax-highlighting classes change, text content does not.
+- In multilingual sitemaps, each URL's `xhtml:link` alternates now list the
+  entry's own language first.
+
+### Actions {#hugo-0-164-0-actions}
+
+**Applies if** your site is large, overrides or adds templates, or commits
+generated output.
+
+- Benchmark a clean production build; template-heavy sites may see large
+  build-time wins.
+- Replace `resources.PostProcess` with `templates.Defer` in custom templates.
+- Fix any `.Render` calls that name a missing view template; they now fail the
+  build.
+- Treat syntax-highlighting class changes and sitemap alternate-link reordering
+  as expected output churn.
+
 ## Other deprecations and notable changes {#notable-changes}
 
 ### Template and config deprecations {#other-deprecations}
@@ -301,8 +335,8 @@ This range includes multiple security-related updates, including Go
 `html/template` fixes and stricter URL/content handling. Hugo 0.163.3 also
 hardens the default code-block render hook: the language token (info string) of
 fenced code blocks is now escaped, which matters most for sites that render
-untrusted Markdown. This is a strong reason to prefer 0.163.3 over stopping at
-the minimum 0.158.0.
+untrusted Markdown. This is a strong reason to prefer 0.163.3 or later over
+stopping at the minimum 0.160.1.
 
 ### New features worth knowing about {#new-features}
 
@@ -311,22 +345,24 @@ the minimum 0.158.0.
 - AVIF image processing was added and then tuned in the 0.162.x-0.163.x range.
 - `strings.ReplacePairs` is available for template authors on Hugo 0.158.0 or
   later.
+- On Hugo 0.164.0, `hugo gen chromastyles` gains `--mode` and `--modeSelector`
+  flags for generating combined light/dark syntax-highlighting stylesheets.
 
-## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.163.3 {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo 0.164.0 {#upgrade}
 
 After addressing applicable breaking changes and deprecations, upgrade to Hugo
-0.163.3.
+0.164.0.
 
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@0.163.3 --save-dev
+npm install hugo-extended@0.164.0 --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use 0.163.3
+hvm use 0.164.0
 ```
 
 <section class="td-checkbox-list-wrapper">
@@ -343,6 +379,8 @@ hvm use 0.163.3
       0.159.2.
 - [ ] **Images**: expect `_hu_` resized-image filename churn and verify the
       rendered images, not just filenames.
+- [ ] **Generated output**: on 0.164.0, expect syntax-highlighting class and
+      sitemap alternate-link churn in committed output.
 - [ ] **Security policy**: test remote resources, symlinked inputs, and any
       `.html` content files.
 
@@ -359,23 +397,25 @@ hvm use 0.163.3
 - [ ] [Language API actions](#language-api-actions)
 - [ ] [Imaging actions](#imaging-actions)
 - [ ] [Markdown-link escaping actions](#amp-escaping-actions)
+- [ ] [Hugo 0.164.0 actions](#hugo-0-164-0-actions)
 
 </section>
 
 ## Recommended minimum Hugo version {#min-hugo-version}
 
-Docsy 0.16.0 requires Hugo 0.158.0 or later:
+Docsy 0.16.0 requires Hugo 0.160.1 or later:
 
 ```yaml
 module:
   hugoVersion:
-    min: 0.158.0
+    min: 0.160.1
 ```
 
-For local builds, deployments, and new upgrades, we recommend Hugo 0.163.3.
+For local builds, deployments, and new upgrades, we recommend Hugo 0.164.0.
 
 <!-- prettier-ignore-start -->
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
+[hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
 [Multi-language support]: /docs/language/
 <!-- prettier-ignore-end -->

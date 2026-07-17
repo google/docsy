@@ -3,16 +3,16 @@ title: 0.16 coverage ledger
 date: 2026-06-15
 lastmod: 2026-07-17
 range: v0.15.0..main
-last-main-commit: a7c58f5d
+last-main-commit: 4e954dc1
 cSpell:ignore: favicons gohugoio lycheecache
 ---
 
 The coverage ledger: one row per landed change in [v0.15.0...main][] through
-[a7c58f5d][], mapped to where each is covered. This is the objective "is
+[4e954dc1][], mapped to where each is covered. This is the objective "is
 everything covered, in the right place?" snapshot and the entry point for each
 refresh — add a row per new commit and route it.
 
-All 34 commits in range are squash-merged PRs (one commit per PR), so the
+All 36 commits in range are squash-merged PRs (one commit per PR), so the
 first-parent spine and the raw range are identical; every subject carries its
 `(#NNNN)` PR number.
 
@@ -64,6 +64,8 @@ first-parent spine and the raw range are identical; every subject carries its
 | `1e2d57ea` [#2672][] | [#2668][] | Get-started install docs reconciled for 0.16    | docs  | done | N/A  | N/A  | N/A  | Module paths, npm-pack step, PostCSS      |
 | `15d2f98c` [#2674][] | —         | Adopt renamed link-cache pkg (was lychee-cache) | tool  | N/A  | N/A  | N/A  | N/A  | devDependency switch only                 |
 | `a7c58f5d` [#2675][] | —         | Reconcile remaining docs w/ npm-dep changes     | docs  | done | N/A  | N/A  | N/A  | Troubleshooting page; PostCSS single home |
+| `7c9a0608` [#2678][] | —         | Add `update:goldens` golden-refresh scripts     | tool  | N/A  | N/A  | N/A  | N/A  | Test tooling; root `fix:goldens` alias    |
+| `4e954dc1` [#2679][] | —         | Project Hugo build 0.164.0                      | maint | N/A  | done | done | done | 0.128.0+ perf fix; Chroma/sitemap churn   |
 | — [#2677][]          | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
 
 ## Notes on bundled changes
@@ -186,6 +188,8 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2672]: https://github.com/google/docsy/pull/2672
 [#2674]: https://github.com/google/docsy/pull/2674
 [#2675]: https://github.com/google/docsy/pull/2675
-[a7c58f5d]: https://github.com/google/docsy/commit/a7c58f5d
+[#2678]: https://github.com/google/docsy/pull/2678
+[#2679]: https://github.com/google/docsy/pull/2679
+[4e954dc1]: https://github.com/google/docsy/commit/4e954dc1
 [link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
