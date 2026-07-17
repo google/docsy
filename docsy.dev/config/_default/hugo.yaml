@@ -48,9 +48,6 @@ markup:
     noClasses: false # Required for dark-mode
 
 params:
-  # Docsy's minimum supported Hugo version, that is, the published theme floor.
-  # Must match the floor declared by theme/theme.toml and theme/hugo.yaml;
-  # enforced by scripts/hugo-floor-sync.test.mjs.
   hugoMinVersion: &hugoMinVersion 0.160.1
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/

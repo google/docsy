@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 // @ts-check
-/**
- * Bump the project's Hugo Extended build version (see maintainer notes).
- * Does NOT touch the theme floor or `params.hugoMinVersion`; those move
- * together, by explicit decision only (cf. scripts/hugo-floor-sync.test.mjs).
- */
+/** Bump the project's Hugo Extended build version (see maintainer notes). */
 
 import fs from 'node:fs';
 import path from 'node:path';

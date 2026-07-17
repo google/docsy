@@ -1,9 +1,5 @@
-// The published Hugo floor has three declarations that must agree:
-// theme/theme.toml `min_version`, theme/hugo.yaml `module.hugoVersion.min`,
-// and docsy.dev `params.hugoMinVersion` (which feeds the user docs).
-// Raising the floor is an explicit decision that moves all three in one PR;
-// `set:hugo:version` (project build bump) touches none of them.
-// Fast and offline; picked up by test:tooling / ci:post.
+// The theme's minimum supported Hugo version has three declarations that
+// must agree (see maintainer notes, "Hugo version pins"). Fast and offline.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -43,14 +39,14 @@ const declarations = {
     ),
 };
 
-test('Hugo floor declarations are in sync', () => {
+test('Hugo minimum-version declarations are in sync', () => {
   const values = Object.entries(declarations).map(([file, get]) => {
     const value = get();
-    assert.match(value, SEMVER, `${file} floor is X.Y.Z semver`);
+    assert.match(value, SEMVER, `${file} minimum is X.Y.Z semver`);
     return [file, value];
   });
   const [, reference] = values[0];
   for (const [file, value] of values) {
-    assert.equal(value, reference, `${file} floor matches theme/theme.toml`);
+    assert.equal(value, reference, `${file} minimum matches theme/theme.toml`);
   }
 });

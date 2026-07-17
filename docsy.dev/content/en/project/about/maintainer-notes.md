@@ -59,13 +59,35 @@ a substitute.
 
 ## Hugo version pins
 
-The repo tracks two distinct Hugo versions: the **project build version** (what
-docsy.dev builds and CI tests with) and the **theme floor** (the minimum Hugo
-that Docsy supports, published to users).
+The repo tracks two distinct Hugo versions, as documented below.
+
+### Theme minimum
+
+The minimum Hugo version that Docsy supports is declared in three places that
+must agree, as enforced by `tests/hugo-min-sync.test.mjs`
+(`test:hugo-min-sync`):
+
+- [theme/theme.toml][] `min_version`
+- [theme/hugo.yaml][] `module.hugoVersion.min`
+- [docsy.dev/config/_default/hugo.yaml][] `params.hugoMinVersion`, which feeds
+  the requirement statements in user-facing docs (via
+  `{{%/* param hugoMinVersion */%}}`) and, through the `&hugoMinVersion` anchor,
+  docsy.dev's own `module.hugoVersion.min`.
+
+Raising the minimum is a breaking change for theme users; do it only as an
+explicit decision — moving all three declarations in one PR — with a changelog
+breaking-change entry and upgrade notes.
+
+The converse risk: features landed during a release can quietly require newer
+Hugo than the declared minimum — 0.16.0's npm-dependency install needed 0.159.0
+while the declared minimum was 0.158.0, and the sub-0.159 failure was silent.
+Before tagging, **validate the minimum**: build a consumer site (for example, a
+fixture site) with Hugo pinned to exactly `min_version`, and raise the minimum
+if the build fails.
 
 ### Project build version
 
-From the repo root:
+The Hugo version that docsy.dev builds and CI tests with. From the repo root:
 
 ```sh
 npm run set:hugo:version -- X.Y.Z
@@ -77,29 +99,6 @@ This updates:
 - [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
   installs `hugo-extended` into `docsy.dev` if it is not already present.
 - [docsy.dev/package.json][]: `hugo-extended`
-
-### Theme floor
-
-The floor is declared in three places that must agree, as enforced by
-`scripts/hugo-floor-sync.test.mjs` (`test:tooling`):
-
-- [theme/theme.toml][] `min_version`
-- [theme/hugo.yaml][] `module.hugoVersion.min`
-- [docsy.dev/config/_default/hugo.yaml][] `params.hugoMinVersion`, which feeds
-  the requirement statements in user-facing docs (via
-  `{{%/* param hugoMinVersion */%}}`) and, through the `&hugoMinVersion` anchor,
-  docsy.dev's own `module.hugoVersion.min`.
-
-Raising the floor is a breaking change for theme users; do it only as an
-explicit decision — moving all three declarations in one PR — with a changelog
-breaking-change entry and upgrade notes.
-
-The converse risk: features landed during a release can quietly require newer
-Hugo than the declared floor — 0.16.0's npm-dependency install needed 0.159.0
-while the floor said 0.158.0, and the sub-0.159 failure was silent. Before
-tagging, **validate the floor**: build a consumer site (for example, a fixture
-site) with Hugo pinned to exactly `min_version`, and raise the floor if the
-build fails.
 
 ## Test suites
 
