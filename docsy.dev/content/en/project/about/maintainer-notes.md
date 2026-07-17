@@ -60,13 +60,13 @@ a substitute.
 ## Hugo versions
 
 The repo tracks two distinct Hugo versions, as documented below. Their
-declarations, synchronization requirements and relative-version constraints, are
+declarations, synchronization requirements, and relative-version constraints are
 guarded by [test:hugo-versions](#test-suites).
 
 ### Minimum Hugo version
 
 Docsy declares the minimum Hugo version required to support the features that
-Docsy provides and covers important security fixes.
+Docsy provides and to cover important security fixes.
 
 This version is declared in three places that must agree:
 
@@ -93,12 +93,13 @@ generally kept in sync with the latest Hugo release; to update it, run:
 
 From the repo root:
 
-| Script              | Role                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| `test:fixture-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
-| `test:smoke`        | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
-| `test:tooling`      | Unit tests for repo scripts                                                               |
-| `test:website`      | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests  |
+| Script               | Role                                                                                      |
+| -------------------- | ----------------------------------------------------------------------------------------- |
+| `test:fixture-site`  | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
+| `test:hugo-versions` | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints  |
+| `test:smoke`         | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
+| `test:tooling`       | Unit tests for repo scripts                                                               |
+| `test:website`       | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests  |
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).

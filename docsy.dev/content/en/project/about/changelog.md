@@ -90,7 +90,7 @@ See [semver][].
 > A new build warning alone is not considered a breaking change, but it may
 > indicate a future breaking change, such as signaling a deprecation.
 
-## Official support {#official-support}
+### Official support {#official-support}
 
 Docsy officially supports the following:
 
