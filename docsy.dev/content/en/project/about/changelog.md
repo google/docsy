@@ -97,20 +97,22 @@ Due to limited resources, official support for Docsy is restricted as follows:
 - Officially [released][releases] versions of Docsy. The `main` branch is a
   development branch and is considered unstable.
 
-- Each Docsy version **only** officially supports the following tool versions,
-  as specified in the project's [package.json][] file — generally the latest
-  releases available at the time of the Docsy release:
-  - **Hugo**: the version pinned by `config.hugo_version`. Older versions, down
-    to Docsy's declared [minimum Hugo version][], usually work.
-  - **Node.js**: versions matching `engines.node`
+- Each Docsy version **only** officially supports the following tool versions —
+  generally the latest releases available at the time of the Docsy release:
+  - **Hugo**: the version pinned as `hugo-extended` in
+    [docsy.dev/package.json][]. Older versions, down to Docsy's declared
+    [minimum Hugo version][], usually work.
+  - **Node.js**: versions matching `engines.node` in [package.json][]
 
 - Operating systems: Linux and macOS.
 
 Any other compatibility (including Windows support) is on a best effort basis.
 
-[package.json]: https://github.com/google/docsy/blob/main/package.json
+[docsy.dev/package.json]:
+  https://github.com/google/docsy/blob/main/docsy.dev/package.json
 [minimum Hugo version]:
   /docs/get-started/docsy-as-module/installation-prerequisites/
+[package.json]: https://github.com/google/docsy/blob/main/package.json
 
 ### Bug fixes
 

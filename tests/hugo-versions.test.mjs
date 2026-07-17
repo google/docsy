@@ -1,5 +1,5 @@
 // Docsy's Hugo version declarations must stay consistent (see maintainer
-// notes, "Hugo version pins"). Fast and offline.
+// notes, "Hugo versions"). Fast and offline.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -42,11 +42,8 @@ const declarations = {
 const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
-const pins = {
-  'package.json': () => readJSON('package.json').config.hugo_version,
-  'docsy.dev/package.json': () =>
-    readJSON('docsy.dev/package.json').devDependencies['hugo-extended'],
-};
+const pin = () =>
+  readJSON('docsy.dev/package.json').devDependencies['hugo-extended'];
 
 function assertInSync(entries, what) {
   const values = Object.entries(entries).map(([file, get]) => {
@@ -65,16 +62,13 @@ test('Hugo minimum-version declarations are in sync', () => {
   assertInSync(declarations, 'minimum');
 });
 
-test('Officially supported Hugo version pins are in sync', () => {
-  assertInSync(pins, 'pin');
-});
-
 test('Hugo minimum is at most the officially supported version', () => {
   const minimum = declarations['theme/theme.toml']();
-  const pin = pins['package.json']();
+  const supported = pin();
+  assert.match(supported, SEMVER, 'hugo-extended pin is X.Y.Z semver');
   const toParts = (v) => v.split('.').map(Number);
   const cmp = toParts(minimum)
-    .map((n, i) => n - toParts(pin)[i])
+    .map((n, i) => n - toParts(supported)[i])
     .find((d) => d !== 0);
-  assert.ok((cmp ?? 0) <= 0, `minimum ${minimum} <= pin ${pin}`);
+  assert.ok((cmp ?? 0) <= 0, `minimum ${minimum} <= pin ${supported}`);
 });

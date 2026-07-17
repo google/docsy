@@ -57,7 +57,7 @@ The release-time audit (see [Release-prep audit](#release-prep-audit)) is the
 source of truth for what gets documented; PR-level scope labels are a hint, not
 a substitute.
 
-## Hugo version pins
+## Hugo versions
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations — and that the minimum never exceeds the officially supported
@@ -89,18 +89,16 @@ if the build fails.
 ### Officially supported version
 
 The Hugo version that docsy.dev builds and CI tests with — the version that
-Docsy [officially supports][]. To bump it, from the repo root:
+Docsy [officially supports][]. It is pinned as the `hugo-extended` dev
+dependency in [docsy.dev/package.json][]. To bump it to the latest Hugo release,
+from the repo root:
 
 ```sh
-npm run set:hugo:version -- X.Y.Z
-npm install  # optional, if hugo is already installed
+npm -C docsy.dev run update:hugo
 ```
 
-This updates:
-
-- [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
-  installs `hugo-extended` into `docsy.dev` if it is not already present.
-- [docsy.dev/package.json][]: `hugo-extended`
+To pin a specific version, use
+`npm -C docsy.dev install -DE hugo-extended@X.Y.Z`.
 
 ## Test suites
 
@@ -553,8 +551,8 @@ before any further changes are merged into the `main` branch:
 
 ## Release helper scripts
 
-- NPM scripts: `set:version` and `set:version:*`; **`set:hugo:version`** (see
-  [Hugo version pins](#hugo-version-pins))
+- NPM scripts: `set:version` and `set:version:*`; `update:hugo` (see
+  [Hugo versions](#hugo-versions))
 - `scripts/get-build-id.sh`: Builds `X.Y.Z-dev+…-over-main-…` from the latest
   semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher
@@ -577,7 +575,6 @@ before any further changes are merged into the `main` branch:
 [Examples page]: /examples/
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
-[install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
