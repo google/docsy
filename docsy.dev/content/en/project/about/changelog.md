@@ -166,7 +166,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 - Migrated the theme and docs off deprecated Hugo language APIs. Thanks
   [@deining][] for the groundwork in [#2594][] and [#2578][]!
-- Upgraded the project's Hugo build to [0.163.3][hugo-0.163.3]. The theme's
+- Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
   minimum supported Hugo version remains 0.158.0. See [Hugo 0.158+ upgrade
   guide][] ([#2581][], [#2648][], [#2649][], [#2658][]).
 - Reorganized the repository package boundary: `theme/package.json` owns theme
@@ -217,7 +217,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [git history since 0.15.0]: https://github.com/google/docsy/compare/v0.15.0...main
 [Hugo 0.158+ upgrade guide]: /blog/2026/hugo-0.158.0+/
 [hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0
-[hugo-0.163.3]: https://github.com/gohugoio/hugo/releases/tag/v0.163.3
+[hugo-0.164.0]: https://github.com/gohugoio/hugo/releases/tag/v0.164.0
 <!-- prettier-ignore-end -->
 
 ## v0.15.0 {#v0.15.0}
