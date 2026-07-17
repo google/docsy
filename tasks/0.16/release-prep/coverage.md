@@ -67,6 +67,7 @@ first-parent spine and the raw range are identical; every subject carries its
 | `7c9a0608` [#2678][] | —         | Add `update:goldens` golden-refresh scripts     | tool  | N/A  | N/A  | N/A  | N/A  | Test tooling; root `fix:goldens` alias    |
 | `4e954dc1` [#2679][] | —         | Project Hugo build 0.164.0                      | maint | N/A  | done | done | done | 0.128.0+ perf fix; Chroma/sitemap churn   |
 | — [#2677][]          | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
+| — [#2680][]          | —         | Clarify minimum vs officially supported Hugo    | docs  | done | done | todo | N/A  | User-visible: support policy surfaced     |
 
 ## Notes on bundled changes
 
@@ -108,6 +109,12 @@ first-parent spine and the raw range are identical; every subject carries its
   and migrated the skip marker to `?link-check=no`. Maintainer-facing; one-line
   blog mention under build and test guards. [#2667][] also raised the prettier
   floor to `^3.9.3` (3.9.0–3.9.2 corrupt multi-line Hugo shortcodes).
+- **Hugo-version semantics** ([#2680][]): names and separates the two Hugo
+  versions Docsy tracks — the **minimum** (requirement statements) and the
+  **officially supported** version (the docsy.dev pin) — sync-guards them
+  (`test:hugo-versions`, minimum-Hugo smoke lane), and surfaces the
+  official-support policy in the changelog and install prerequisites.
+  User-visible improvement: worth a release-blog mention (Blog: todo above).
 
 ## Linked issues
 
@@ -190,6 +197,7 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2675]: https://github.com/google/docsy/pull/2675
 [#2678]: https://github.com/google/docsy/pull/2678
 [#2679]: https://github.com/google/docsy/pull/2679
+[#2680]: https://github.com/google/docsy/pull/2680
 [4e954dc1]: https://github.com/google/docsy/commit/4e954dc1
 [link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
