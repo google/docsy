@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 // @ts-check
-/** Bump Hugo Extended semver across docsy.dev pins (see maintainer notes). */
+/**
+ * Bump the project's Hugo Extended build version (see maintainer notes).
+ * Does NOT touch the theme floor or `params.hugoMinVersion`; those move
+ * together, by explicit decision only (cf. scripts/hugo-floor-sync.test.mjs).
+ */
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -10,7 +14,6 @@ const SEMVER = /^\d+\.\d+\.\d+$/;
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const paths = {
-  hugoYaml: path.join(ROOT, 'docsy.dev/config/_default/hugo.yaml'),
   docsyDevPkg: path.join(ROOT, 'docsy.dev/package.json'),
   rootPkg: path.join(ROOT, 'package.json'),
 };
@@ -29,25 +32,16 @@ function main() {
     usage(1);
   }
 
-  let yaml = fs.readFileSync(paths.hugoYaml, 'utf8');
-  const yamlLine =
-    /^(\s*hugoMinVersion:\s*&hugoMinVersion\s+)(\d+\.\d+\.\d+)(\s*)$/m;
-  const ym = yaml.match(yamlLine);
-  if (!ym) {
-    console.error(`Missing hugoMinVersion anchor line in ${paths.hugoYaml}`);
-    process.exit(1);
-  }
-  const prev = ym[2];
-  yaml = yaml.replace(yamlLine, `$1${v}$3`);
-  fs.writeFileSync(paths.hugoYaml, yaml, 'utf8');
-
+  let prev = '';
   function setQuotedField(filePath, field) {
     let t = fs.readFileSync(filePath, 'utf8');
     const re = new RegExp(`^(\\s*"${field}":\\s*")([^"]+)(")`, 'm');
-    if (!re.test(t)) {
+    const m = t.match(re);
+    if (!m) {
       console.error(`Missing "${field}" in ${path.relative(ROOT, filePath)}`);
       process.exit(1);
     }
+    prev = m[2];
     fs.writeFileSync(filePath, t.replace(re, `$1${v}$3`), 'utf8');
   }
 
