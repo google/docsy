@@ -251,6 +251,14 @@ If not adjust accordingly.
 
 8.  **Test the PR** branch from selected sites, and push any required
     adjustments.
+    - Run the [smoke tests](#test-suites), which auto-target the PR branch
+      pushed in the previous step and include a build at the
+      [minimum Hugo version](#minimum-hugo-version):
+
+      ```sh
+      npm run test:smoke
+      ```
+
     - If the test site uses Docsy as a Git submodule:
 
       ```sh
