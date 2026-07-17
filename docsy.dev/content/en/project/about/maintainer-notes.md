@@ -81,6 +81,13 @@ The script deliberately does **not** touch the _theme_ support floor,
 users; do it only as an explicit decision, with a changelog breaking-change
 entry and upgrade notes.
 
+The converse risk: features landed during a release can quietly require newer
+Hugo than the declared floor — 0.16.0's npm-dependency install needed 0.159.0
+while the floor said 0.158.0, and the sub-0.159 failure was silent. Before
+tagging, **validate the floor**: build a consumer site (for example, a fixture
+site) with Hugo pinned to exactly `min_version`, and raise the floor if the
+build fails.
+
 Note that `params.hugoMinVersion` feeds **user-facing docs** (via
 `{{%/* param hugoMinVersion */%}}`) as the _site-recommended_ Hugo version. For
 a **build-only bump** — raising the project's own Hugo without changing what we
