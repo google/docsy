@@ -48,17 +48,8 @@ Docsy site to 0.16.0.
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
 
 Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
-**0.160.1**. The minimum reflects three changes in this range:
-
-- Theme templates use Hugo language APIs introduced in **0.158.0**; older Hugo
-  versions fail with template errors.
-- The theme's npm-sourced Bootstrap and Font Awesome rely on `hugo mod npm pack`
-  support introduced in **0.159.0**. On older Hugo versions the pack step exits
-  successfully but writes empty dependency lists, so the failure surfaces only
-  later, as a hard-to-trace SCSS import error — Hugo's minimum-version warning
-  is the only early signal.
-- **0.160.1** excludes the known regressions in the 0.159.2 to 0.160.0 range,
-  such as Markdown-link escaping, and passthrough and shortcode rendering.
+**0.160.1**. For the rationale behind that floor, see
+[Hugo 0.160.1+ support](0.16.0/#hugo) in the release post.
 
 We recommend upgrading directly to **Hugo 0.164.0**: the later releases include
 security fixes, 0.164.0

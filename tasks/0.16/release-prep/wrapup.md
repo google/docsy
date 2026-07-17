@@ -120,7 +120,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   blog NEW section spanning [#2660][] and [#2662][]; [#2661][] (the
   full-vs-shared link-check matrix) is internal tooling (`N/A`).
 - Keep Hugo mechanics in the [Hugo upgrade guide][] and link to it from the
-  report and changelog (DRY).
+  report and changelog; conversely, the **floor rationale** lives in the release
+  report's Hugo section, with the Hugo post and changelog linking to it rather
+  than restating (DRY, one home per fact; 2026-07-17).
 - Moved the project Hugo build to 0.163.2 ([#2658][]) for the PostCSS/Netlify
   `ERR_ACCESS_DENIED` fix, then to 0.163.3 ([#2664][]) — a build-only patch bump
   (code-block escaping, PostCSS/Babel config variants, `uglyURLs` fix); the
