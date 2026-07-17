@@ -20,7 +20,9 @@ which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support). For
+comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
 ### On Linux
 
