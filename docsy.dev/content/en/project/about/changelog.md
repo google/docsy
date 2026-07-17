@@ -112,7 +112,7 @@ support — is on a best-effort basis.
 [docsy.dev/package.json]:
   https://github.com/google/docsy/blob/main/docsy.dev/package.json
 [minimum Hugo version]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/google/docsy/blob/main/package.json
 
 ### Bug fixes

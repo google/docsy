@@ -187,9 +187,10 @@ The canonical procedure is maintainer notes, [Publishing a release][pub-rel];
 this tracks 0.16-specific status and deltas, not the full mechanics.
 
 - [ ] Flip `draft: true` → `false` on both blog posts and set their final dates.
-- [x] Validate the theme floor per maintainer notes (Hugo version pins): done
-      2026-07-17 via a fixture-matrix build on 0.158.0/0.159.0; floor raised to
-      0.160.1 — see Decisions.
+- [x] Validate the theme's minimum Hugo version: done 2026-07-17 via a one-off
+      fixture-matrix build on 0.158.0/0.159.0; minimum raised to 0.160.1 — see
+      Decisions. Ongoing validation is now the minimum-Hugo lane of
+      `test:smoke`, run at release step 8.
 - [ ] Replace placeholders that resolve only after tagging: the
       `releases/tag/v0.16.0` links and the changelog `UNRELEASED`
       heading/banner.
