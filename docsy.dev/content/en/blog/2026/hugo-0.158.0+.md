@@ -2,7 +2,7 @@
 title: Hugo 0.158.0-0.163.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-06-15
-lastmod: 2026-07-16
+lastmod: 2026-07-17
 draft: true
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
@@ -17,7 +17,7 @@ This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
 0.163.3 that are relevant to Docsy users. It is a companion post to the Docsy
 [0.16.0](0.16.0/) release and upgrade guide.
 
-Docsy 0.16.0 requires Hugo 0.158.0 or later. The Docsy project build is tested
+Docsy 0.16.0 requires Hugo 0.160.1 or later. The Docsy project build is tested
 with Hugo 0.163.3, which is the recommended target for this upgrade range.
 
 ## Upgrade summary
@@ -28,7 +28,7 @@ Docsy site to 0.16.0.
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
   - {{% _param BREAKING %}}
-    [Docsy now requires Hugo 0.158.0 or later](#hugo-version)
+    [Docsy now requires Hugo 0.160.1 or later](#hugo-version)
   - {{% _param BREAKING %}}
     [Node 22+ is required for Hugo-managed Node tools](#node-tools)
   - {{% _param BREAKING %}}
@@ -47,22 +47,29 @@ Docsy site to 0.16.0.
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
 
 Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
-**0.158.0**. Theme templates now use Hugo language APIs introduced in 0.158.0,
-so older Hugo versions will fail with template errors.
+**0.160.1**. The minimum reflects three changes in this range:
 
-The theme minimum remains 0.158.0 through the 0.163.x range. However, we
-recommend upgrading directly to **Hugo 0.163.3** because the later releases
-include security fixes, avoid a short-lived 0.159.x link-escaping regression,
-and are the versions validated across Docsy, the Docsy example site, and at
-least one large downstream Docsy site.
+- Theme templates use Hugo language APIs introduced in **0.158.0**; older Hugo
+  versions fail with template errors.
+- The theme's npm-sourced Bootstrap and Font Awesome rely on `hugo mod npm pack`
+  support introduced in **0.159.0**. On older Hugo versions the pack step exits
+  successfully but writes empty dependency lists, so the failure surfaces only
+  later, as a hard-to-trace SCSS import error — Hugo's minimum-version warning
+  is the only early signal.
+- **0.160.1** excludes the known regressions in the 0.159.2 to 0.160.0 range,
+  such as Markdown-link escaping, and passthrough and shortcode rendering.
+
+We recommend upgrading directly to **Hugo 0.163.3** because the later releases
+include security fixes and are the versions validated across Docsy, the Docsy
+example site, and at least one large downstream Docsy site.
 
 ### Actions {#hugo-version-actions}
 
 {{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
 
-- Upgrade Hugo to 0.158.0 or later. Prefer 0.163.3.
+- Upgrade Hugo to 0.160.1 or later. Prefer 0.163.3.
 - If your project declares `module.hugoVersion.min`, set it to at least
-  `0.158.0`.
+  `0.160.1`.
 - If you use `hugo-extended`, pin a compatible version in your site:
 
   ```sh
@@ -81,8 +88,8 @@ Hugo 0.158.0 renamed several language configuration keys and template methods.
 The old names log deprecation notices first, then move toward warnings and
 eventual errors on Hugo's deprecation timeline.
 
-Docsy's own templates and docs now use the new names, which is why Docsy 0.16.0
-requires Hugo 0.158.0 or later.
+Docsy's own templates and docs now use the new names — one of the changes behind
+0.16.0's [raised Hugo minimum](#hugo-version).
 
 ### Actions {#language-api-actions}
 
@@ -125,7 +132,8 @@ images. It also introduced a regression that could double-escape `&` in rendered
 Markdown link URLs, producing `&amp;amp;` in HTML output.
 
 Hugo 0.160.0 fixed that regression, and Hugo 0.160.1 is the safer 0.160.x patch
-release. If you are moving through this range, do not stop at 0.159.2.
+release. If you are moving through this range, do not stop at 0.159.2. Docsy
+0.16.0's minimum Hugo version, 0.160.1, already excludes this window.
 
 ### Actions {#amp-escaping-actions}
 

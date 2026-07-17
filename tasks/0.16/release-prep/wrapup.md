@@ -1,10 +1,10 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-07-16
+lastmod: 2026-07-17
 range: v0.15.0..main
 last-main-commit: a7c58f5d
-cSpell:ignore: favicons
+cSpell:ignore: favicons thoughtry
 ---
 
 Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
@@ -24,12 +24,13 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   module tag.
 - **Hugo 0.158+ support** — [#2647][], [#2648][], [#2649][], [#2658][],
   [#2664][]; trackers [#2581][], [#2593][] (closed); goldens [#726][]. Theme
-  minimum raised to 0.158.0; project build validated on 0.163.3; templates/docs
-  moved off deprecated language APIs (zero deprecation notices). **Breaking**
-  minimum-Hugo bump. Old keys (`languageName`/`languageDirection`) still work
-  but should become `label`/`direction`. Node 22+ required for Hugo-managed Node
-  tools from 0.161.x (Docsy recommends Node LTS 24). Per-version mechanics live
-  in the [Hugo upgrade guide][].
+  minimum raised to 0.160.1 (language APIs 0.158.0; npm-dep install 0.159.0;
+  0.159.2–0.160.0 regressions excluded); project build validated on 0.163.3;
+  templates/docs moved off deprecated language APIs (zero deprecation notices).
+  **Breaking** minimum-Hugo bump. Old keys (`languageName`/`languageDirection`)
+  still work but should become `label`/`direction`. Node 22+ required for
+  Hugo-managed Node tools from 0.161.x (Docsy recommends Node LTS 24).
+  Per-version mechanics live in the [Hugo upgrade guide][].
 - **Favicons** — [#2653][], [#2654][], [#2656][]; [#2595][] closed, [#2357][]
   continues (26Q3). Default favicon artwork removed; the default partial
   discovers and links conventional `static/` files (`favicon.ico`,
@@ -69,7 +70,7 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 1. **Theme folder move** — update the install path for your mode (Hugo module
    `…/docsy/theme`; npm/clone `theme: docsy/theme`). See [release report][]
    (Theme folder move).
-2. **Minimum Hugo 0.158.0** — upgrade Hugo (prefer 0.163.3); optionally rename
+2. **Minimum Hugo 0.160.1** — upgrade Hugo (prefer 0.163.3); optionally rename
    `languageName`/`languageDirection` to `label`/`direction`; use Node LTS 24.
    See [Hugo upgrade guide][].
 3. **Default favicons removed** — supply your own files under `static/`; the
@@ -121,7 +122,16 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 - Moved the project Hugo build to 0.163.2 ([#2658][]) for the PostCSS/Netlify
   `ERR_ACCESS_DENIED` fix, then to 0.163.3 ([#2664][]) — a build-only patch bump
   (code-block escaping, PostCSS/Babel config variants, `uglyURLs` fix); the
-  theme minimum stays 0.158.0. Both blog posts recommend 0.163.3.
+  theme minimum stayed 0.158.0 at that point. Both blog posts recommend 0.163.3.
+- **Raised the theme's Hugo floor to 0.160.1** (2026-07-17): a fixture-matrix
+  test showed the npm-dep install flow (`hugo mod npm pack` → `npm install` →
+  `hugo`) silently fails on 0.158.x — pack exits 0 but writes empty dependency
+  lists, surfacing only later as an SCSS import error — and works from 0.159.0.
+  With a silent sub-0.159 failure mode, Hugo's minimum-version warning is the
+  only consumer guardrail, so the floor must be accurate. 0.160.1 (not bare
+  0.159.0) also excludes the 0.159.2–0.160.0 regression window. Security
+  currency stays the recommendation's job (0.163.3). Analysis and methodology:
+  thoughtry `projects/docsy/tasks/v0.16.0/index.md` (2026-07-17).
 - Routed the link-check tooling arc ([#2665][]–[#2674][]) as
   internal/maintainer-facing: no changelog entry; a one-line mention under the
   report's build-and-test-guards section. The cache CLIs live in the external

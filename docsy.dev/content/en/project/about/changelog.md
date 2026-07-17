@@ -147,9 +147,11 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   for non-default filenames or extra links. See [0.16.0 release
   report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2595][]).
 - Raised the theme's minimum supported Hugo version to
-  **[0.158.0][hugo-0.158.0]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
-  Theme templates now use the language APIs introduced in Hugo 0.158.0. Note:
-  the language config keys deprecated by Hugo 0.158.0 (`languageName`,
+  **[0.160.1][hugo-0.160.1]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
+  Theme templates use the language APIs introduced in Hugo 0.158.0, the theme's
+  npm-dependency install relies on `hugo mod npm pack` support from Hugo
+  0.159.0, and 0.160.1 excludes known 0.159.2–0.160.0 regressions. Note: the
+  language config keys deprecated by Hugo 0.158.0 (`languageName`,
   `languageDirection`) still work in your site config, but consider renaming
   them to `label` and `direction`. See [Hugo 0.158+ upgrade guide][] and
   [Multi-language support](/docs/language/) ([#2593][]).
@@ -167,7 +169,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 - Migrated the theme and docs off deprecated Hugo language APIs. Thanks
   [@deining][] for the groundwork in [#2594][] and [#2578][]!
 - Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
-  minimum supported Hugo version remains 0.158.0. See [Hugo 0.158+ upgrade
+  minimum supported Hugo version remains 0.160.1. See [Hugo 0.158+ upgrade
   guide][] ([#2581][]).
 - Reorganized the repository package boundary: `theme/package.json` owns theme
   runtime dependencies, and the root package orchestrates the `docsy.dev` and
@@ -210,7 +212,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [favicons]: /docs/content/iconsimages/#add-your-favicons
 [git history since 0.15.0]: https://github.com/google/docsy/compare/v0.15.0...main
 [Hugo 0.158+ upgrade guide]: /blog/2026/hugo-0.158.0+/
-[hugo-0.158.0]: https://github.com/gohugoio/hugo/releases/tag/v0.158.0
+[hugo-0.160.1]: https://github.com/gohugoio/hugo/releases/tag/v0.160.1
 [hugo-0.164.0]: https://github.com/gohugoio/hugo/releases/tag/v0.164.0
 <!-- prettier-ignore-end -->
 

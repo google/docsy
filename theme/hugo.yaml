@@ -33,7 +33,7 @@ mediaTypes:
 module:
   hugoVersion:
     extended: true
-    min: 0.158.0
+    min: 0.160.1
   mounts:
     - source: assets
       target: assets

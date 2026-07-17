@@ -1,7 +1,7 @@
 ---
 title: 0.16 coverage ledger
 date: 2026-06-15
-lastmod: 2026-07-16
+lastmod: 2026-07-17
 range: v0.15.0..main
 last-main-commit: a7c58f5d
 cSpell:ignore: favicons gohugoio lycheecache
@@ -64,6 +64,7 @@ first-parent spine and the raw range are identical; every subject carries its
 | `1e2d57ea` [#2672][] | [#2668][] | Get-started install docs reconciled for 0.16    | docs  | done | N/A  | N/A  | N/A  | Module paths, npm-pack step, PostCSS      |
 | `15d2f98c` [#2674][] | —         | Adopt renamed link-cache pkg (was lychee-cache) | tool  | N/A  | N/A  | N/A  | N/A  | devDependency switch only                 |
 | `a7c58f5d` [#2675][] | —         | Reconcile remaining docs w/ npm-dep changes     | docs  | done | N/A  | N/A  | N/A  | Troubleshooting page; PostCSS single home |
+| — [#2677][]          | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
 
 ## Notes on bundled changes
 
@@ -92,7 +93,10 @@ first-parent spine and the raw range are identical; every subject carries its
   (`postinstall`). The same arc made **PostCSS opt-in** for non-RTL sites
   (direction change recorded in [#2668][]). [#2672][] reconciles the
   get-started/convert-to-module docs; [#2675][] completes the adjacent pages
-  (updating, troubleshooting, deployment, RTL).
+  (updating, troubleshooting, deployment, RTL). The npm-dep install flow also
+  drove the theme's Hugo floor to **0.160.1** ([#2677][]): `hugo mod npm pack`
+  silently writes empty dependency lists before 0.159.0, and 0.160.1 excludes
+  the 0.159.2–0.160.0 regression window.
 - **Link-check tooling** ([#2665][], [#2666][], [#2667][], [#2669][], [#2671][],
   [#2674][]): docsy.dev link checking moved from the unmaintained htmltest to
   Lychee with a committed `.lycheecache`. The cache CLIs were first packaged
@@ -175,6 +179,7 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2666]: https://github.com/google/docsy/pull/2666
 [#2667]: https://github.com/google/docsy/pull/2667
 [#2668]: https://github.com/google/docsy/issues/2668
+[#2677]: https://github.com/google/docsy/pull/2677
 [#2669]: https://github.com/google/docsy/pull/2669
 [#2670]: https://github.com/google/docsy/pull/2670
 [#2671]: https://github.com/google/docsy/pull/2671
