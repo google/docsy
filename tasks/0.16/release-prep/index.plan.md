@@ -1,7 +1,7 @@
 ---
 title: 0.16 release-prep plan
 date: 2026-06-15
-lastmod: 2026-06-25
+lastmod: 2026-07-17
 # Release coordinates — the per-release facts the process keys off.
 prev-version: 0.15.0 # baseline tag: v0.15.0 (2026-05-01)
 version: 0.16.0
@@ -9,7 +9,7 @@ milestone: 24
 tracker-issue: 2615
 compare-range: v0.15.0..main
 version-stamp-from: 0.15.1-dev
-last-main-commit: b3ce9274
+last-main-commit: 4e954dc1
 hugo-post: hugo-0.158.0+ # companion Hugo upgrade post; omit if no Hugo bump
 ---
 

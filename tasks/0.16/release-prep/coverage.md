@@ -1,18 +1,18 @@
 ---
 title: 0.16 coverage ledger
 date: 2026-06-15
-lastmod: 2026-06-25
+lastmod: 2026-07-17
 range: v0.15.0..main
-last-main-commit: b3ce9274
-cSpell:ignore: favicons gohugoio
+last-main-commit: 4e954dc1
+cSpell:ignore: favicons gohugoio lycheecache
 ---
 
 The coverage ledger: one row per landed change in [v0.15.0...main][] through
-[b3ce9274][], mapped to where each is covered. This is the objective "is
+[4e954dc1][], mapped to where each is covered. This is the objective "is
 everything covered, in the right place?" snapshot and the entry point for each
 refresh — add a row per new commit and route it.
 
-All 23 commits in range are squash-merged PRs (one commit per PR), so the
+All 36 commits in range are squash-merged PRs (one commit per PR), so the
 first-parent spine and the raw range are identical; every subject carries its
 `(#NNNN)` PR number.
 
@@ -32,7 +32,7 @@ first-parent spine and the raw range are identical; every subject carries its
 | -------------------- | --------- | ----------------------------------------------- | ----- | ---- | ---- | ---- | ---- | ----------------------------------------- |
 | `843c5345` [#2641][] | [#2617][] | Move theme into `theme/` (TOF phases 0–4b)      | break | done | done | done | N/A  | Install-path change; pairs w/ [#2645][]   |
 | `94f94145` [#2645][] | [#2617][] | npm workspaces; simplify theme-deps install     | maint | done | done | done | N/A  | Packaging cleanup; pairs w/ [#2641][]     |
-| `5c5733de` [#2647][] | [#2593][] | Hugo 0.158.0; raise theme min; language APIs    | break | done | done | done | done | Min-Hugo bump 0.146→0.158                 |
+| `5c5733de` [#2647][] | [#2593][] | Hugo 0.158.0; raise theme min; language APIs    | break | done | done | done | done | Floor 0.146→0.158; now 0.160.1 [#2677][]  |
 | `3e76f1f2` [#2648][] | [#2581][] | Upgrade to Hugo 0.160.1                         | maint | done | done | done | done | Combined 0.159.x + 0.160.x                |
 | `f22a352d` [#2649][] | [#2581][] | Project Hugo build 0.163.1; imaging migration   | maint | done | done | done | done | `imaging.quality` config migration        |
 | `acf3453b` [#2653][] | [#2595][] | Remove default favicons; modernize docsy.dev    | break | done | done | done | N/A  | ~18 bundled icons removed                 |
@@ -53,6 +53,20 @@ first-parent spine and the raw range are identical; every subject carries its
 | `487050c2` [#2660][] | [#2659][] | Lean-render mode: drop repeated chrome          | feat  | done | done | done | N/A  | Chrome v1; folded into `shared` [#2662][] |
 | `3bcd6e7d` [#2661][] | [#2659][] | full-vs-shared link-check matrix (docsy.dev)    | tool  | N/A  | N/A  | N/A  | N/A  | Internal CI tooling for chrome            |
 | `b3ce9274` [#2662][] | [#2659][] | Experimental `shared` chrome build mode         | feat  | done | done | done | N/A  | One feature w/ [#2660][]; off by default  |
+| `5998cf5e` [#2663][] | [#2615][] | Draft 0.16.0 release report + Hugo guide        | tool  | N/A  | N/A  | N/A  | N/A  | The release artifacts + this workspace    |
+| `5758c063` [#2664][] | —         | Project Hugo build 0.163.3 (patch over 0.163.2) | maint | N/A  | done | done | done | Blog/Hugo-post bumps landed this refresh  |
+| `09443ba8` [#2665][] | —         | Link checking: htmltest → Lychee (docsy.dev)    | tool  | N/A  | N/A  | done | N/A  | One-line mention in build/test guards     |
+| `93948e65` [#2666][] | —         | Fix rotted externals; skip-marker migration     | docs  | done | N/A  | N/A  | N/A  | Site content fixes                        |
+| `56c2cf0e` [#2667][] | —         | Packaged root-level Lychee tooling              | tool  | N/A  | N/A  | N/A  | N/A  | Superseded by [#2671][]; prettier ^3.9.3  |
+| `394e86f4` [#2669][] | —         | Fix Lychee bin entry point (npx/PATH)           | tool  | N/A  | N/A  | N/A  | N/A  | Superseded by [#2671][]                   |
+| `56c5ab12` [#2670][] | [#2668][] | Bootstrap and Font Awesome from npm             | break | done | done | done | N/A  | Hugo-module installs: `hugo mod npm pack` |
+| `1aa519e7` [#2671][] | [#2668][] | Link-check CLIs → external link-cache pkg       | tool  | N/A  | N/A  | N/A  | N/A  | `docsy` pkg ships only `gen-favicons` bin |
+| `1e2d57ea` [#2672][] | [#2668][] | Get-started install docs reconciled for 0.16    | docs  | done | N/A  | N/A  | N/A  | Module paths, npm-pack step, PostCSS      |
+| `15d2f98c` [#2674][] | —         | Adopt renamed link-cache pkg (was lychee-cache) | tool  | N/A  | N/A  | N/A  | N/A  | devDependency switch only                 |
+| `a7c58f5d` [#2675][] | —         | Reconcile remaining docs w/ npm-dep changes     | docs  | done | N/A  | N/A  | N/A  | Troubleshooting page; PostCSS single home |
+| `7c9a0608` [#2678][] | —         | Add `update:goldens` golden-refresh scripts     | tool  | N/A  | N/A  | N/A  | N/A  | Test tooling; root `fix:goldens` alias    |
+| `4e954dc1` [#2679][] | —         | Project Hugo build 0.164.0                      | maint | N/A  | done | done | done | 0.128.0+ perf fix; Chroma/sitemap churn   |
+| — [#2677][]          | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
 
 ## Notes on bundled changes
 
@@ -75,6 +89,25 @@ first-parent spine and the raw range are identical; every subject carries its
   it as client-restored `shared` chrome; [#2661][] is the internal
   full-vs-shared link-check matrix. Tracker [#2659][]; the default `full` mode
   is unchanged.
+- **npm-dep modernization** ([#2670][]; docs [#2672][] + [#2675][]): [#2670][]
+  is **breaking** for Hugo-module installs (they now run `hugo mod npm pack` +
+  `npm install`); npm-package and clone/submodule installs are unaffected
+  (`postinstall`). The same arc made **PostCSS opt-in** for non-RTL sites
+  (direction change recorded in [#2668][]). [#2672][] reconciles the
+  get-started/convert-to-module docs; [#2675][] completes the adjacent pages
+  (updating, troubleshooting, deployment, RTL). The npm-dep install flow also
+  drove the theme's Hugo floor to **0.160.1** ([#2677][]): `hugo mod npm pack`
+  silently writes empty dependency lists before 0.159.0, and 0.160.1 excludes
+  the 0.159.2–0.160.0 regression window.
+- **Link-check tooling** ([#2665][], [#2666][], [#2667][], [#2669][], [#2671][],
+  [#2674][]): docsy.dev link checking moved from the unmaintained htmltest to
+  Lychee with a committed `.lycheecache`. The cache CLIs were first packaged
+  in-repo ([#2667][], entry-point fix [#2669][]), then split out to the external
+  [link-cache][] package ([#2671][], rename [#2674][]), so the published `docsy`
+  package ships only the `gen-favicons` bin. [#2666][] fixed rotted externals
+  and migrated the skip marker to `?link-check=no`. Maintainer-facing; one-line
+  blog mention under build and test guards. [#2667][] also raised the prettier
+  floor to `^3.9.3` (3.9.0–3.9.2 corrupt multi-line Hugo shortcodes).
 
 ## Linked issues
 
@@ -84,6 +117,8 @@ first-parent spine and the raw range are identical; every subject carries its
   experimental).
 - [#2581][]: Upgrade Hugo from 0.157.0 to latest — closed.
 - [#2593][]: Deprecation warnings with Hugo 0.158.0 — closed.
+- [#2668][]: npm-dep modernization (Bootstrap/Font Awesome via npm) — closed
+  (completed 2026-07-15).
 - [#2578][], [#2594][]: contributor language-API PRs ([@deining][]), superseded
   by [#2647][].
 - [#2590][]: community Russian-locale sync — PR only (no separate issue).
@@ -140,5 +175,21 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2660]: https://github.com/google/docsy/pull/2660
 [#2661]: https://github.com/google/docsy/pull/2661
 [#2662]: https://github.com/google/docsy/pull/2662
-[b3ce9274]: https://github.com/google/docsy/commit/b3ce9274
+[#2663]: https://github.com/google/docsy/pull/2663
+[#2664]: https://github.com/google/docsy/pull/2664
+[#2665]: https://github.com/google/docsy/pull/2665
+[#2666]: https://github.com/google/docsy/pull/2666
+[#2667]: https://github.com/google/docsy/pull/2667
+[#2668]: https://github.com/google/docsy/issues/2668
+[#2677]: https://github.com/google/docsy/pull/2677
+[#2669]: https://github.com/google/docsy/pull/2669
+[#2670]: https://github.com/google/docsy/pull/2670
+[#2671]: https://github.com/google/docsy/pull/2671
+[#2672]: https://github.com/google/docsy/pull/2672
+[#2674]: https://github.com/google/docsy/pull/2674
+[#2675]: https://github.com/google/docsy/pull/2675
+[#2678]: https://github.com/google/docsy/pull/2678
+[#2679]: https://github.com/google/docsy/pull/2679
+[4e954dc1]: https://github.com/google/docsy/commit/4e954dc1
+[link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
