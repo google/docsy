@@ -18,31 +18,6 @@ the [milestones][].
 [releases]: https://github.com/google/docsy/releases
 [tags]: https://github.com/google/docsy/tags
 
-## Official support {#official-support}
-
-Docsy officially supports the following:
-
-- [Released][releases] versions of Docsy, in particular the latest release. The
-  `main` branch is a development branch and is considered unstable.
-
-- These tool versions — generally the latest releases available at the time of
-  the Docsy release:
-  - **Hugo**: the version pinned as `hugo-extended` in
-    [docsy.dev/package.json][]. Older versions, down to Docsy's declared
-    [minimum Hugo version][], usually work.
-  - **Node.js**: versions matching `engines.node` in [package.json][]
-
-- Operating systems: Linux and macOS.
-
-Docsy is maintained with limited resources; everything else — including Windows
-support — is on a best-effort basis.
-
-[docsy.dev/package.json]:
-  https://github.com/google/docsy/blob/main/docsy.dev/package.json
-[minimum Hugo version]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/
-[package.json]: https://github.com/google/docsy/blob/main/package.json
-
 ## Style guide
 
 - Use past tense when when describing releases.
@@ -114,6 +89,31 @@ See [semver][].
 >
 > A new build warning alone is not considered a breaking change, but it may
 > indicate a future breaking change, such as signaling a deprecation.
+
+## Official support {#official-support}
+
+Docsy officially supports the following:
+
+- [Released][releases] versions of Docsy, in particular the latest release. The
+  `main` branch is a development branch and is considered unstable.
+
+- These tool versions — generally the latest releases available at the time of
+  the Docsy release:
+  - **Hugo**: the version pinned as `hugo-extended` in
+    [docsy.dev/package.json][]. Older versions, down to Docsy's declared
+    [minimum Hugo version][], usually work.
+  - **Node.js**: versions matching `engines.node` in [package.json][]
+
+- Operating systems: Linux and macOS.
+
+Docsy is maintained with limited resources; everything else — including Windows
+support — is on a best-effort basis.
+
+[docsy.dev/package.json]:
+  https://github.com/google/docsy/blob/main/docsy.dev/package.json
+[minimum Hugo version]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/
+[package.json]: https://github.com/google/docsy/blob/main/package.json
 
 ### Bug fixes
 

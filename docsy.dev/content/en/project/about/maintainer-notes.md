@@ -2,7 +2,7 @@
 title: Maintainer notes
 description: Notes for Docsy maintainers
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate
+cSpell:ignore: hugo creatordate lycheecache
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -60,45 +60,34 @@ a substitute.
 ## Hugo versions
 
 The repo tracks two distinct Hugo versions, as documented below. Their
-declarations — and that the minimum never exceeds the officially supported
-version — are guarded by `tests/hugo-versions.test.mjs` (`test:hugo-versions`).
+declarations, synchronization requirements and relative-version constraints, are
+guarded by [test:hugo-versions](#test-suites).
 
-### Minimum version
+### Minimum Hugo version
 
-The minimum Hugo version that Docsy supports is declared in three places that
-must agree:
+Docsy declares the minimum Hugo version required to support the features that
+Docsy provides and covers important security fixes.
 
-- [theme/theme.toml][] `min_version`
+This version is declared in three places that must agree:
+
+- [theme/theme.toml][] `min_version` (canonical source)
 - [theme/hugo.yaml][] `module.hugoVersion.min`
 - [docsy.dev/config/_default/hugo.yaml][] `params.hugoMinVersion`, which feeds
   the requirement statements in user-facing docs (via
   `{{%/* param hugoMinVersion */%}}`) and, through the `&hugoMinVersion` anchor,
   docsy.dev's own `module.hugoVersion.min`.
 
-Raising the minimum is a breaking change for theme users; do it only as an
-explicit decision — moving all three declarations in one PR — with a changelog
-breaking-change entry and upgrade notes.
+Raising the minimum is a breaking change for theme users, only done to support
+new features or security fixes.
 
-The converse risk: features landed during a release can quietly require newer
-Hugo than the declared minimum — 0.16.0's npm-dependency install needed 0.159.0
-while the declared minimum was 0.158.0, and the sub-0.159 failure was silent.
-Before tagging, **validate the minimum**: build a consumer site (for example, a
-fixture site) with Hugo pinned to exactly `min_version`, and raise the minimum
-if the build fails.
+### Officially supported Hugo version {#official-hugo-version}
 
-### Officially supported version
+The Hugo version that Docsy [officially supports][] is pinned as the
+`hugo-extended` dev dependency in [docsy.dev/package.json][]. This version is
+generally kept in sync with the latest Hugo release; to update it, run:
 
-The Hugo version that docsy.dev builds and CI tests with — the version that
-Docsy [officially supports][]. It is pinned as the `hugo-extended` dev
-dependency in [docsy.dev/package.json][]. To bump it to the latest Hugo release,
-from the repo root:
-
-```sh
-npm -C docsy.dev run update:hugo
-```
-
-To pin a specific version, use
-`npm -C docsy.dev install -DE hugo-extended@X.Y.Z`.
+- `npm -C docsy.dev run update:hugo` for the latest
+- `npm -C docsy.dev install -DE hugo-extended@X.Y.Z` for a specific version
 
 ## Test suites
 
