@@ -48,7 +48,7 @@ Docsy site to 0.16.0.
 ## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
 
 Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
-**0.160.1**. For the rationale behind that floor, see
+**0.160.1**. For the rationale behind that minimum, see
 [Hugo 0.160.1+ support](0.16.0/#hugo) in the release post.
 
 We recommend upgrading directly to **Hugo 0.164.0**: the later releases include

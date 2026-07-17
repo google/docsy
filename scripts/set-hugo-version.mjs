@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @ts-check
-/** Bump the project's Hugo Extended build version (see maintainer notes). */
+/** Bump the officially supported Hugo version (see maintainer notes). */
 
 import fs from 'node:fs';
 import path from 'node:path';

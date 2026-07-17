@@ -59,13 +59,14 @@ a substitute.
 
 ## Hugo version pins
 
-The repo tracks two distinct Hugo versions, as documented below.
+The repo tracks two distinct Hugo versions, as documented below. Their
+declarations — and that the minimum never exceeds the officially supported
+version — are guarded by `tests/hugo-versions.test.mjs` (`test:hugo-versions`).
 
-### Theme minimum
+### Minimum version
 
 The minimum Hugo version that Docsy supports is declared in three places that
-must agree, as enforced by `tests/hugo-min-sync.test.mjs`
-(`test:hugo-min-sync`):
+must agree:
 
 - [theme/theme.toml][] `min_version`
 - [theme/hugo.yaml][] `module.hugoVersion.min`
@@ -85,9 +86,10 @@ Before tagging, **validate the minimum**: build a consumer site (for example, a
 fixture site) with Hugo pinned to exactly `min_version`, and raise the minimum
 if the build fails.
 
-### Project build version
+### Officially supported version
 
-The Hugo version that docsy.dev builds and CI tests with. From the repo root:
+The Hugo version that docsy.dev builds and CI tests with — the version that
+Docsy [officially supports][]. To bump it, from the repo root:
 
 ```sh
 npm run set:hugo:version -- X.Y.Z
@@ -577,6 +579,7 @@ before any further changes are merged into the `main` branch:
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [milestones]: <{{% param github_repo %}}/milestones>
+[officially supports]: /project/about/changelog/#official-support
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>

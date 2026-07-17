@@ -244,14 +244,13 @@ You can use Docsy as an NPM module as follows:
 
     ```console
     npm init -y
-    npm install --save-dev google/docsy#semver:{{% param version %}} --omit=peer
+    npm install --save-dev google/docsy#semver:{{% param version %}}
     ```
 
     > [!TIP] Hugo install tip
     >
-    > You can install Docsy's officially supported version of
-    > [Hugo using NPM](#hugo-extended-npm) at the same time as Docsy. Just omit
-    > the `--omit` flag from the command above.
+    > To also install Hugo as an NPM package, see
+    > [Hugo-extended NPM package](#hugo-extended-npm).
 
 3.  Build or serve your new site using the usual Hugo commands, specifying the
     path to the Docsy theme files. For example, build your site as follows:
