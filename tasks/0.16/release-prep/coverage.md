@@ -32,7 +32,7 @@ first-parent spine and the raw range are identical; every subject carries its
 | -------------------- | --------- | ----------------------------------------------- | ----- | ---- | ---- | ---- | ---- | ----------------------------------------- |
 | `843c5345` [#2641][] | [#2617][] | Move theme into `theme/` (TOF phases 0–4b)      | break | done | done | done | N/A  | Install-path change; pairs w/ [#2645][]   |
 | `94f94145` [#2645][] | [#2617][] | npm workspaces; simplify theme-deps install     | maint | done | done | done | N/A  | Packaging cleanup; pairs w/ [#2641][]     |
-| `5c5733de` [#2647][] | [#2593][] | Hugo 0.158.0; raise theme min; language APIs    | break | done | done | done | done | Min-Hugo bump 0.146→0.158                 |
+| `5c5733de` [#2647][] | [#2593][] | Hugo 0.158.0; raise theme min; language APIs    | break | done | done | done | done | Floor 0.146→0.158; now 0.160.1 [#2677][]  |
 | `3e76f1f2` [#2648][] | [#2581][] | Upgrade to Hugo 0.160.1                         | maint | done | done | done | done | Combined 0.159.x + 0.160.x                |
 | `f22a352d` [#2649][] | [#2581][] | Project Hugo build 0.163.1; imaging migration   | maint | done | done | done | done | `imaging.quality` config migration        |
 | `acf3453b` [#2653][] | [#2595][] | Remove default favicons; modernize docsy.dev    | break | done | done | done | N/A  | ~18 bundled icons removed                 |

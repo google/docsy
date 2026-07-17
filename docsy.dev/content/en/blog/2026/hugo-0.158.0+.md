@@ -119,7 +119,7 @@ Review custom template code for these replacements:
 
 For current Docsy examples, see [Multi-language support][].
 
-## Markdown-link escaping (0.159.2 to 0.160.1) {#amp-escaping}
+## Markdown-link escaping (0.159.2, fixed in 0.160.0) {#amp-escaping}
 
 Hugo 0.159.2 included a security fix for dangerous URLs in Markdown links and
 images. It also introduced a regression that could double-escape `&` in rendered

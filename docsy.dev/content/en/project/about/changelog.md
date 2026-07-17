@@ -148,11 +148,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2595][]).
 - Raised the theme's minimum supported Hugo version to
   **[0.160.1][hugo-0.160.1]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
-  For the rationale, see [0.16.0 release report][0.16.0-blog-hugo]. Note: the
-  language config keys deprecated by Hugo 0.158.0 (`languageName`,
-  `languageDirection`) still work in your site config, but consider renaming
-  them to `label` and `direction`. See [Hugo 0.158+ upgrade guide][] and
-  [Multi-language support](/docs/language/) ([#2593][]).
+  For the rationale, see [0.16.0 release report][0.16.0-blog-hugo] ([#2668][],
+  [#2677][]). Note: the language config keys deprecated by Hugo 0.158.0 still
+  work in your site config, but consider renaming them; see [Hugo 0.158+ upgrade
+  guide][] ([#2593][]).
 - **Theme folder move**: the canonical theme now lives in `theme/`; consuming
   sites need a one-line install-path update for their install mode. See [0.16.0
   release report][0.16.0-blog-theme-folder] ([#2617][]).
@@ -200,6 +199,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2617]: https://github.com/google/docsy/issues/2617
 [#2659]: https://github.com/google/docsy/issues/2659
 [#2668]: https://github.com/google/docsy/issues/2668
+[#2677]: https://github.com/google/docsy/pull/2677
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
 [0.16.0-blog-hugo]: /blog/2026/0.16.0/#hugo
