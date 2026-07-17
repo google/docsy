@@ -200,8 +200,8 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
       procedure** — new this release).
 - [ ] Milestone hygiene: close or move all milestone-24 issues except [#2615][].
 - [ ] Post-release: refresh `docsy-example` and the examples page for 0.16.0.
-      (Its Hugo floor is already 0.160.1: [docsy-example#478] landed early since
-      the site tracks Docsy main, where npm-dep installs already require it.)
+      (Its Hugo floor is handled early by [docsy-example#478][], since the site
+      tracks Docsy main, where npm-dep installs already require 0.160.1.)
 
 ## Post-release / deferred
 
