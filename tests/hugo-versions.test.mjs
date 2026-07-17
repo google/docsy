@@ -62,6 +62,20 @@ test('Hugo minimum-version declarations are in sync', () => {
   assertInSync(declarations, 'minimum');
 });
 
+// docsy.dev's own module.hugoVersion.min must relay the params value via the
+// YAML anchor, not restate it (which could then drift silently).
+test('docsy.dev module Hugo minimum aliases the params anchor', () => {
+  const text = fs.readFileSync(
+    path.join(repoRoot, 'docsy.dev/config/_default/hugo.yaml'),
+    'utf8',
+  );
+  assert.match(
+    text,
+    /^\s*hugoVersion:\s*\n(?:\s+extended:.*\n)?\s+min: \*hugoMinVersion$/m,
+    'module.hugoVersion.min references the &hugoMinVersion anchor',
+  );
+});
+
 test('Hugo minimum is at most the officially supported version', () => {
   const minimum = declarations['theme/theme.toml']();
   const supported = pin();

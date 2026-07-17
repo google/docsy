@@ -98,7 +98,8 @@ Docsy officially supports the following:
   `main` branch is a development branch and is considered unstable.
 
 - These tool versions — generally the latest releases available at the time of
-  the Docsy release:
+  the Docsy release (the links below reflect `main`; for a given Docsy release,
+  consult these files at the release's tag):
   - **Hugo**: the version pinned as `hugo-extended` in
     [docsy.dev/package.json][]. Older versions, down to Docsy's declared
     [minimum Hugo version][], usually work.

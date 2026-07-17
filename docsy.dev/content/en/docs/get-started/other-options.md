@@ -56,9 +56,9 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is {{% param "hugoMinVersion" %}} or earlier, or if you don't see
-`Extended`, you'll need to install the latest version. You can see a complete
-list of Linux installation options in
+If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
+see `Extended`, you'll need to install the latest version. You can see a
+complete list of Linux installation options in
 [Install Hugo](https://gohugo.io/installation/linux/). The following shows you
 how to install Hugo from the release page:
 
