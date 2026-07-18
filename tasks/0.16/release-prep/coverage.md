@@ -66,8 +66,8 @@ first-parent spine and the raw range are identical; every subject carries its
 | `a7c58f5d` [#2675][] | —         | Reconcile remaining docs w/ npm-dep changes     | docs  | done | N/A  | N/A  | N/A  | Troubleshooting page; PostCSS single home |
 | `7c9a0608` [#2678][] | —         | Add `update:goldens` golden-refresh scripts     | tool  | N/A  | N/A  | N/A  | N/A  | Test tooling; root `fix:goldens` alias    |
 | `4e954dc1` [#2679][] | —         | Project Hugo build 0.164.0                      | maint | N/A  | done | done | done | 0.128.0+ perf fix; Chroma/sitemap churn   |
-| — [#2677][]          | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
-| — [#2680][]          | —         | Clarify minimum vs officially supported Hugo    | docs  | done | done | todo | N/A  | User-visible: support policy surfaced     |
+| `6d9367e2` [#2677][] | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
+| [#2680][]            | —         | Clarify minimum vs officially supported Hugo    | docs  | done | done | todo | N/A  | User-visible: support policy surfaced     |
 
 ## Notes on bundled changes
 
