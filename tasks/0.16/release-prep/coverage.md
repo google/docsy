@@ -1,18 +1,18 @@
 ---
 title: 0.16 coverage ledger
 date: 2026-06-15
-lastmod: 2026-07-17
+lastmod: 2026-07-18
 range: v0.15.0..main
-last-main-commit: 4e954dc1
+last-main-commit: 494f3da6
 cSpell:ignore: favicons gohugoio lycheecache
 ---
 
 The coverage ledger: one row per landed change in [v0.15.0...main][] through
-[4e954dc1][], mapped to where each is covered. This is the objective "is
+[494f3da6][], mapped to where each is covered. This is the objective "is
 everything covered, in the right place?" snapshot and the entry point for each
 refresh — add a row per new commit and route it.
 
-All 36 commits in range are squash-merged PRs (one commit per PR), so the
+All 38 commits in range are squash-merged PRs (one commit per PR), so the
 first-parent spine and the raw range are identical; every subject carries its
 `(#NNNN)` PR number.
 
@@ -66,8 +66,8 @@ first-parent spine and the raw range are identical; every subject carries its
 | `a7c58f5d` [#2675][] | —         | Reconcile remaining docs w/ npm-dep changes     | docs  | done | N/A  | N/A  | N/A  | Troubleshooting page; PostCSS single home |
 | `7c9a0608` [#2678][] | —         | Add `update:goldens` golden-refresh scripts     | tool  | N/A  | N/A  | N/A  | N/A  | Test tooling; root `fix:goldens` alias    |
 | `4e954dc1` [#2679][] | —         | Project Hugo build 0.164.0                      | maint | N/A  | done | done | done | 0.128.0+ perf fix; Chroma/sitemap churn   |
-| `6d9367e2` [#2677][] | [#2668][] | Raise theme Hugo floor to 0.160.1               | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
-| [#2680][]            | —         | Clarify minimum vs officially supported Hugo    | docs  | done | done | todo | N/A  | User-visible: support policy surfaced     |
+| `6d9367e2` [#2677][] | [#2668][] | Artifact refresh; theme Hugo floor → 0.160.1    | break | done | done | done | done | npm-pack needs 0.159.0; skip regressions  |
+| `494f3da6` [#2680][] | —         | Clarify minimum vs officially supported Hugo    | docs  | done | done | done | N/A  | User-visible: support policy surfaced     |
 
 ## Notes on bundled changes
 
@@ -114,7 +114,9 @@ first-parent spine and the raw range are identical; every subject carries its
   **officially supported** version (the docsy.dev pin) — sync-guards them
   (`test:hugo-versions`, minimum-Hugo smoke lane), and surfaces the
   official-support policy in the changelog and install prerequisites.
-  User-visible improvement: worth a release-blog mention (Blog: todo above).
+  User-visible improvement: the release post's Hugo section links the policy
+  (routed 2026-07-18); the changelog coverage **is** the rewritten §Official
+  support section itself.
 
 ## Linked issues
 
@@ -198,6 +200,6 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2678]: https://github.com/google/docsy/pull/2678
 [#2679]: https://github.com/google/docsy/pull/2679
 [#2680]: https://github.com/google/docsy/pull/2680
-[4e954dc1]: https://github.com/google/docsy/commit/4e954dc1
+[494f3da6]: https://github.com/google/docsy/commit/494f3da6
 [link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
