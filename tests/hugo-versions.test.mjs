@@ -58,7 +58,7 @@ function assertInSync(entries, what) {
   return reference;
 }
 
-test('Hugo minimum-version declarations are in sync', () => {
+test('Hugo minimum-version literal declarations are in sync', () => {
   assertInSync(declarations, 'minimum');
 });
 
