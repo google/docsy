@@ -36,15 +36,17 @@ prerequisites.
 ### Install Hugo
 
 You need a
-[recent **extended** version](https://github.com/gohugoio/hugo/releases) (we
-recommend version {{% param "hugoMinVersion" %}} or later) of
-[Hugo](https://gohugo.io/) to do local builds and previews of sites (like this
-one) that use Docsy. If you install from the release page, make sure to get the
-`extended` Hugo version, which supports
+[recent **extended** version](https://github.com/gohugoio/hugo/releases)
+(version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
+to do local builds and previews of sites (like this one) that use Docsy. If you
+install from the release page, make sure to get the `extended` Hugo version,
+which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support). For
+comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
 
 #### On Linux
 
@@ -54,9 +56,9 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is {{% param "hugoMinVersion" %}} or earlier, or if you don't see
-`Extended`, you'll need to install the latest version. You can see a complete
-list of Linux installation options in
+If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
+see `Extended`, you'll need to install the latest version. You can see a
+complete list of Linux installation options in
 [Install Hugo](https://gohugo.io/installation/linux/). The following shows you
 how to install Hugo from the release page:
 
@@ -244,14 +246,13 @@ You can use Docsy as an NPM module as follows:
 
     ```console
     npm init -y
-    npm install --save-dev google/docsy#semver:{{% param version %}} --omit=peer
+    npm install --save-dev google/docsy#semver:{{% param version %}}
     ```
 
     > [!TIP] Hugo install tip
     >
-    > You can install Docsy's officially supported version of
-    > [Hugo using NPM](#hugo-extended-npm) at the same time as Docsy. Just omit
-    > the `--omit` flag from the command above.
+    > To also install Hugo as an NPM package, see
+    > [Hugo-extended NPM package](#hugo-extended-npm).
 
 3.  Build or serve your new site using the usual Hugo commands, specifying the
     path to the Docsy theme files. For example, build your site as follows:

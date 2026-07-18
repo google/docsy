@@ -2,7 +2,7 @@
 title: Maintainer notes
 description: Notes for Docsy maintainers
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate
+cSpell:ignore: hugo creatordate lycheecache
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -57,54 +57,55 @@ The release-time audit (see [Release-prep audit](#release-prep-audit)) is the
 source of truth for what gets documented; PR-level scope labels are a hint, not
 a substitute.
 
-## Hugo version pins
+## Hugo versions
 
-From the repo root:
+The repo tracks two distinct Hugo versions, as documented below. Their
+declarations, synchronization requirements, and relative-version constraints are
+guarded by [test:hugo-versions](#test-suites).
 
-```sh
-npm run set:hugo:version -- X.Y.Z
-npm install  # optional, if hugo is already installed
-```
+### Minimum Hugo version
 
-This updates:
+Docsy declares the minimum Hugo version required to support the features that
+Docsy provides and to cover important security fixes.
 
-- [package.json][]: `config.hugo_version`, used by [install-hugo.sh][], which
-  installs `hugo-extended` into `docsy.dev` if it is not already present.
-- [docsy.dev/config/_default/hugo.yaml][]:
-  - `params.hugoMinVersion` / `&hugoMinVersion`
-  - Note: `module.hugoVersion.min` stays as `*hugoMinVersion`
-- [docsy.dev/package.json][]: `hugo-extended`
+This version is declared in three places that must agree:
 
-The script deliberately does **not** touch the _theme_ support floor,
-[theme/theme.toml][] `min_version`, and [theme/hugo.yaml][]
-`module.hugoVersion.min`. Raising the theme floor is a breaking change for theme
-users; do it only as an explicit decision, with a changelog breaking-change
-entry and upgrade notes.
+- [theme/theme.toml][] `min_version` (canonical source)
+- [theme/hugo.yaml][] `module.hugoVersion.min`
+- [docsy.dev/config/_default/hugo.yaml][] `params.hugoMinVersion`, which feeds
+  the requirement statements in user-facing docs (via
+  `{{%/* param hugoMinVersion */%}}`) and, through the `&hugoMinVersion` anchor,
+  docsy.dev's own `module.hugoVersion.min`.
 
-The converse risk: features landed during a release can quietly require newer
-Hugo than the declared floor — 0.16.0's npm-dependency install needed 0.159.0
-while the floor said 0.158.0, and the sub-0.159 failure was silent. Before
-tagging, **validate the floor**: build a consumer site (for example, a fixture
-site) with Hugo pinned to exactly `min_version`, and raise the floor if the
-build fails.
+Raising the minimum is a breaking change for theme users, only done to support
+new features or security fixes. To validate that a Docsy site actually builds
+with Hugo pinned to the declared minimum, run [test:smoke](#test-suites).
 
-Note that `params.hugoMinVersion` feeds **user-facing docs** (via
-`{{%/* param hugoMinVersion */%}}`) as the _site-recommended_ Hugo version. For
-a **build-only bump** — raising the project's own Hugo without changing what we
-recommend to users — skip the script and manually update only
-`config.hugo_version` (root [package.json][]) and `hugo-extended`
-([docsy.dev/package.json][]).
+### Officially supported Hugo version {#official-hugo-version}
+
+The Hugo version that Docsy [officially supports][] is pinned as the
+`hugo-extended` dev dependency in [docsy.dev/package.json][].
+
+This version is generally kept in sync with the latest Hugo release; to update
+it, run:
+
+- `npm -C docsy.dev run update:hugo` for the latest
+- `npm -C docsy.dev install -DE hugo-extended@X.Y.Z` for a specific version
+
+Docs render this version live through the `hugo-version` shortcode
+(`hugo.Version`): docsy.dev builds always run the pinned Hugo.
 
 ## Test suites
 
 From the repo root:
 
-| Script              | Role                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| `test:fixture-site` | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover |
-| `test:smoke`        | Slow, network-bound; builds a site from GitHub three ways (NPM, Hugo module, clone)       |
-| `test:tooling`      | Unit tests for repo scripts                                                               |
-| `test:website`      | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests  |
+| Script               | Role                                                                                                |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
+| `test:fixture-site`  | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover           |
+| `test:hugo-versions` | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints            |
+| `test:smoke`         | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
+| `test:tooling`       | Unit tests for repo scripts                                                                         |
+| `test:website`       | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).
@@ -255,6 +256,14 @@ If not adjust accordingly.
 
 8.  **Test the PR** branch from selected sites, and push any required
     adjustments.
+    - Run the [smoke tests](#test-suites), which auto-target the PR branch
+      pushed in the previous step and include a build at the
+      [minimum Hugo version](#minimum-hugo-version):
+
+      ```sh
+      npm run test:smoke
+      ```
+
     - If the test site uses Docsy as a Git submodule:
 
       ```sh
@@ -546,8 +555,8 @@ before any further changes are merged into the `main` branch:
 
 ## Release helper scripts
 
-- NPM scripts: `set:version` and `set:version:*`; **`set:hugo:version`** (see
-  [Hugo version pins](#hugo-version-pins))
+- NPM scripts: `set:version` and `set:version:*`; `update:hugo` (see
+  [Hugo versions](#hugo-versions))
 - `scripts/get-build-id.sh`: Builds `X.Y.Z-dev+…-over-main-…` from the latest
   semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher
@@ -570,8 +579,8 @@ before any further changes are merged into the `main` branch:
 [Examples page]: /examples/
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
-[install-hugo.sh]: <{{% param github_repo %}}/blob/main/docsy.dev/scripts/install-hugo.sh>
 [milestones]: <{{% param github_repo %}}/milestones>
+[officially supports]: /project/about/changelog/#official-support
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>

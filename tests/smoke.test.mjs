@@ -1,5 +1,5 @@
-// Smoke tests: builds a Docsy-based site three ways and asserts each produces a
-// real, fully-styled site (not merely a zero exit code).
+// Smoke tests: builds a Docsy-based site several ways and asserts each produces
+// a real, fully-styled site (not merely a zero exit code).
 //
 // Uses Node's built-in test runner (node:test) — no extra test deps.
 //
@@ -184,6 +184,61 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     progress(`${src}: ok`);
   });
 }
+
+// --- declared minimum Hugo version actually builds --------------------------
+// Pins Hugo to the theme's declared minimum (theme.toml min_version) and
+// builds the Hugo-module-mode site — the most version-sensitive path: on
+// sub-minimum Hugos, `hugo mod npm pack` emits empty deps and the build
+// breaks, historically even silently (exit 0, unstyled site) — the failure
+// class that assertBuilt() exists to catch.
+test('minimum Hugo version builds the HUGO_MODULE site', () => {
+  const min = readFileSync(
+    path.join(repoRoot, 'theme', 'theme.toml'),
+    'utf8',
+  ).match(/^min_version\s*=\s*"([^"]+)"/m)?.[1];
+  assert.ok(min, 'theme.toml declares min_version');
+
+  // Scratch-install hugo-extended@min under TMP (cached across runs).
+  const minHugo = path.join(TMP, `hugo-${min}`, 'node_modules', '.bin', 'hugo');
+  if (!existsSync(minHugo)) {
+    progress(`min-hugo: npm install hugo-extended@${min}…`);
+    const dir = path.join(TMP, `hugo-${min}`);
+    mkdirSync(dir, { recursive: true });
+    const install = run(
+      'npm',
+      ['install', '--no-audit', '--no-fund', `hugo-extended@${min}`],
+      { cwd: dir },
+    );
+    assert.equal(install.status, 0, `hugo-extended@${min} installs`);
+  }
+  assert.match(
+    run(minHugo, ['version']).stdout ?? '',
+    new RegExp(`v${min.replaceAll('.', '\\.')}(?!\\d).*extended`),
+    `scratch Hugo is extended v${min}`,
+  );
+
+  const name = 'smoke-min-hugo';
+  progress(`min-hugo: make-site -s HUGO_MODULE with Hugo v${min} — ${TARGET}…`);
+  const r = run(
+    'bash',
+    [
+      MAKE_SITE,
+      '-s',
+      'HUGO_MODULE',
+      '-r',
+      REPO,
+      '-v',
+      BRANCH,
+      '-f',
+      '-n',
+      name,
+    ],
+    { cwd: TMP, env: { ...process.env, HUGO: minHugo } },
+  );
+  assert.equal(r.status, 0, `min-Hugo site build exited 0`);
+  assertBuilt(name);
+  progress('min-hugo: ok');
+});
 
 // --- non-module clone into themes/docsy/ (no CI smoke coverage otherwise) ---
 test('non-module clone into themes/docsy', () => {

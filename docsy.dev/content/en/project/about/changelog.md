@@ -90,24 +90,33 @@ See [semver][].
 > A new build warning alone is not considered a breaking change, but it may
 > indicate a future breaking change, such as signaling a deprecation.
 
-### Official support limits {#official-support}
+### Official support {#official-support}
 
-Due to limited resources, official support for Docsy is restricted as follows:
+Docsy is maintained with very limited resources and only supports the latest
+releases of Docsy, its dependencies & tools, and operating systems.
 
-- Officially [released][releases] versions of Docsy. The `main` branch is a
-  development branch and is considered unstable.
+Specifically, the Docsy team **officially supports** the following:
 
-- Each Docsy version **only** officially supports the following peer package
-  versions, as specified in the theme's [package.json][] file:
-  - **Hugo** version ([hugo-extended][])
-  - **Node.js** versions as declared in the `engines.node` section
+- The latest Docsy [release][releases]. The `main` branch is a development
+  branch and is considered unstable.
 
-- Operating systems: Linux and macOS.
+- The tool versions as specified for the Docsy release you are using:
+  - **Hugo**:
+    - The version pinned as `hugo-extended` in [docsy.dev/package.json][]
+      ({{% hugo-version %}})
+    - Older versions, down to Docsy's declared [minimum Hugo version][], usually
+      work.
+  - **Node.js**: versions matching `engines.node` in [package.json][]
 
-Any other compatibility (including Windows support) is on a best effort basis.
+- Operating systems: macOS (latest minor release) and Linux.
 
+Everything else — including Windows — is supported on a best-effort basis.
+
+[docsy.dev/package.json]:
+  https://github.com/google/docsy/blob/main/docsy.dev/package.json
+[minimum Hugo version]:
+  /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/google/docsy/blob/main/package.json
-[hugo-extended]: https://github.com/jakejarvis/hugo-extended
 
 ### Bug fixes
 

@@ -20,7 +20,9 @@ which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support). For
+comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
 ### On Linux
 
@@ -30,9 +32,9 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is {{% param "hugoMinVersion" %}} or earlier, or if you don't see
-`Extended`, you'll need to install the latest version. You can see a complete
-list of Linux installation options in
+If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
+see `Extended`, you'll need to install the latest version. You can see a
+complete list of Linux installation options in
 [Install Hugo](https://gohugo.io/installation/linux/). The following shows you
 how to install Hugo from the release page:
 
