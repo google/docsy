@@ -100,7 +100,7 @@ to your chosen GitHub repo, following any setup instructions in
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v3
               with:
-                hugo-version: '{{% param "hugoMinVersion" %}}'
+                hugo-version: '{{% hugo-supported-version %}}'
                 extended: true
 
             - name: Setup Node
@@ -121,11 +121,6 @@ to your chosen GitHub repo, following any setup instructions in
               with:
                 github_token: ${{ secrets.GITHUB_TOKEN }}
       ```
-
-      The workflow sets `hugo-version` to Docsy's minimum Hugo version; any
-      later release, including the
-      [officially supported version](/project/about/changelog/#official-support),
-      also works.
 
    1. Add the file to the staging area, commit your change and push the change
       to your remote GitHub repo:

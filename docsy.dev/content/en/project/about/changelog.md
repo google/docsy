@@ -92,23 +92,23 @@ See [semver][].
 
 ### Official support {#official-support}
 
-Docsy officially supports the following:
+Docsy is maintained with very limited resources and only supports the latest
+releases of Docsy, its dependencies & tools, and operating systems.
 
-- [Released][releases] versions of Docsy, in particular the latest release. The
-  `main` branch is a development branch and is considered unstable.
+Specifically, the Docsy team **officially supports** the following:
 
-- These tool versions — generally the latest releases available at the time of
-  the Docsy release (the links below reflect `main`; for a given Docsy release,
-  consult these files at the release's tag):
-  - **Hugo**: the version pinned as `hugo-extended` in
-    [docsy.dev/package.json][]. Older versions, down to Docsy's declared
-    [minimum Hugo version][], usually work.
+- The last three Docsy [releases][]. The `main` branch is a development branch
+  and is considered unstable.
+
+- The tool versions as specified for the Docsy release you are using:
+  - **Hugo**:
+    - The version pinned as `hugo-extended` in [docsy.dev/package.json][]
+      ({{% hugo-supported-version %}})
+    - Older versions, down to Docsy's declared [minimum Hugo version][], usually
+      work.
   - **Node.js**: versions matching `engines.node` in [package.json][]
 
-- Operating systems: Linux and macOS.
-
-Docsy is maintained with limited resources; everything else — including Windows
-support — is on a best-effort basis.
+- Operating systems: Linux and macOS, their latest minor release.
 
 [docsy.dev/package.json]:
   https://github.com/google/docsy/blob/main/docsy.dev/package.json
