@@ -83,9 +83,8 @@ with Hugo pinned to the declared minimum, run [test:smoke](#test-suites).
 
 ### Officially supported Hugo version {#official-hugo-version}
 
-The Hugo version that Docsy [officially supports][] —- currently
-{{% hugo-supported-version %}} —- is pinned as the `hugo-extended` dev
-dependency in [docsy.dev/package.json][].
+The Hugo version that Docsy [officially supports][] is pinned as the
+`hugo-extended` dev dependency in [docsy.dev/package.json][].
 
 This version is generally kept in sync with the latest Hugo release; to update
 it, run:
@@ -93,11 +92,8 @@ it, run:
 - `npm -C docsy.dev run update:hugo` for the latest
 - `npm -C docsy.dev install -DE hugo-extended@X.Y.Z` for a specific version
 
-Docs render this version via the `hugo-supported-version` shortcode, which
-returns `hugo.Version`, the Hugo running the build. This rests on a development
-assumption: docsy.dev is always built with the pinned Hugo — npm scripts, CI,
-and Netlify all resolve `hugo` from the `hugo-extended` devDep — so the pin
-needs no second, synced declaration.
+Docs render this version live through the `hugo-version` shortcode
+(`hugo.Version`): docsy.dev builds always run the pinned Hugo.
 
 ## Test suites
 

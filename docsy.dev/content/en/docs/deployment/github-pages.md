@@ -100,7 +100,7 @@ to your chosen GitHub repo, following any setup instructions in
             - name: Setup Hugo
               uses: peaceiris/actions-hugo@v3
               with:
-                hugo-version: '{{% hugo-supported-version %}}'
+                hugo-version: '{{% hugo-version %}}'
                 extended: true
 
             - name: Setup Node
