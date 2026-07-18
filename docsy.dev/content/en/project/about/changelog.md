@@ -108,7 +108,7 @@ Specifically, the Docsy team **officially supports** the following:
       work.
   - **Node.js**: versions matching `engines.node` in [package.json][]
 
-- Operating systems: Linux and macOS, their latest minor release.
+- Operating systems: macOS (latest minor release) and Linux.
 
 Everything else — including Windows — is supported on a best-effort basis.
 

@@ -213,7 +213,7 @@ test('minimum Hugo version builds the HUGO_MODULE site', () => {
   }
   assert.match(
     run(minHugo, ['version']).stdout ?? '',
-    new RegExp(`v${min.replaceAll('.', '\\.')}.*extended`),
+    new RegExp(`v${min.replaceAll('.', '\\.')}(?!\\d).*extended`),
     `scratch Hugo is extended v${min}`,
   );
 
