@@ -10,7 +10,7 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 # prettier-ignore
-cSpell:ignore: amp AVIF CatmullRom chromastyles goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
+cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
 ---
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
@@ -61,19 +61,14 @@ one large downstream Docsy site.
 
 {{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
 
-- Upgrade Hugo to 0.160.1 or later. Prefer 0.164.0.
-- If your project declares `module.hugoVersion.min`, set it to at least
-  `0.160.1`.
-- If you use `hugo-extended`, pin a compatible version in your site:
+- Upgrade Hugo to 0.160.1 or later. Prefer 0.164.0; for install commands, see
+  [Upgrade to Hugo 0.164.0](#upgrade).
+- If your project declares a minimum Hugo version, set it to at least 0.160.1:
 
-  ```sh
-  npm install hugo-extended@0.164.0 --save-dev
-  ```
-
-- If you use [hvm][], select the latest compatible Hugo release:
-
-  ```sh
-  hvm use 0.164.0
+  ```yaml
+  module:
+    hugoVersion:
+      min: 0.160.1
   ```
 
 ## Language API deprecations (0.158.0) {#language-apis}
@@ -133,14 +128,11 @@ release. If you are moving through this range, do not stop at 0.159.2. Docsy
 
 **Applies if** you briefly tested or deployed Hugo 0.159.2.
 
-- Upgrade to Hugo 0.160.1 or later.
 - Search generated HTML for `&amp;amp;` in link URLs.
-- Pay closest attention to monolingual sites without custom link render hooks.
-
-Multilingual single-host sites are usually shielded because Hugo's
-`useEmbedded: auto` behavior activates the embedded link render hook. Sites with
-custom link render hooks are also usually shielded. The safest path is still to
-use Hugo 0.160.1 or later.
+- Pay closest attention to monolingual sites without custom link render hooks:
+  multilingual single-host sites are usually shielded by Hugo's
+  `useEmbedded: auto` link render hook, and custom link render hooks also
+  usually shield a site.
 
 ## Template and module cleanup (0.159.x-0.160.x) {#template-module-cleanup}
 
@@ -161,26 +153,20 @@ scripts.
 - If you use `hugo convert`, review generated output before committing it.
 
 **Applies if** your site uses Goldmark passthrough, `RenderShortcodes`, or
-multilingual root sections. Prefer Hugo 0.160.1 or later and include these pages
-in smoke tests. Hugo 0.160.1 fixed relevant regressions around passthrough
-elements in headings, shortcode rendering context markers, and multilingual root
-section generation.
+multilingual root sections. Hugo 0.160.1 -- Docsy 0.16.0's minimum -- fixed
+regressions in this range around passthrough elements in headings, shortcode
+rendering context markers, and multilingual root section generation; include
+such pages in your smoke tests.
 
 ## {{% _param BREAKING %}} Node-managed tools (0.161.x) {#node-tools}
 
 Hugo 0.161.x runs Node-based tools such as PostCSS, Babel, and Tailwind under
-Node's `--permission` sandbox. This requires **Node 22 or later**. Docsy
-continues to recommend Node LTS 24 for supported builds.
+Node's `--permission` sandbox. This requires **Node 22 or later**.
 
 Docsy sites commonly use PostCSS for CSS processing, so this can be a practical
-breaking change even when the Docsy theme itself has not changed.
-
-Hugo 0.163.2 fixes an `ERR_ACCESS_DENIED` regression in this permission model
-that could abort builds when `node_modules` lives outside the project tree, such
-as in a CI provider's shared cache (for example, Netlify). Hugo 0.163.3 extends
-the same work so that config-file resolution also finds `.mjs` and `.cjs`
-variants of PostCSS and Babel configs. Both are reasons to prefer 0.163.3 or
-later for PostCSS pipelines.
+breaking change even when the Docsy theme itself has not changed. Hugo 0.163.2
+and 0.163.3 fix regressions in this permission model, so prefer 0.163.3 or later
+for PostCSS pipelines; the actions below give the specifics.
 
 ### Actions {#node-tools-actions}
 
@@ -391,18 +377,6 @@ hvm use 0.164.0
 - [ ] [Hugo 0.164.0 actions](#hugo-0-164-0-actions)
 
 </section>
-
-## Recommended minimum Hugo version {#min-hugo-version}
-
-Docsy 0.16.0 requires Hugo 0.160.1 or later:
-
-```yaml
-module:
-  hugoVersion:
-    min: 0.160.1
-```
-
-For local builds, deployments, and new upgrades, we recommend Hugo 0.164.0.
 
 <!-- prettier-ignore-start -->
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
