@@ -14,14 +14,17 @@ Keep project content DRY by writing each fact in the artifact whose purpose and
 audience it serves. Each artifact links to the more detailed ones rather than
 restating them:
 
-- **[Changelog][]**: a lean record of _what changed_, for devs who want a quick
-  overview. No upgrade advice, implementation detail, or background. Entries
-  link to the release report for details and cite a change's key issues — PRs
-  only when there is no key issue, such as for contributor credit.
+- **[Changelog][]**: a lean record of _what changed_, for developers who want a
+  quick overview. No upgrade advice, implementation detail, or background.
+  Entries link to the release report for details and cite a change's key issues
+  — PRs only when there is no key issue, such as for contributor credit.
 - **Release and upgrade blog posts**: what's new, what to watch out for, and
   actionable upgrade guidance — the historical narrative. Link to the site docs
   for current behavior and reference detail. Don't enumerate PRs and issues;
-  link an open tracker only where it adds follow-up context.
+  link an open tracker only where it adds follow-up context. Upgrades are a
+  chore, so keep posts maximally actionable yet lean: the release summary reads
+  like a selective table of contents — a link per section with a clause of
+  guiding glue — and each fact appears in one section, its home.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
 - **[Release notes][] and [milestones][]**: the exhaustive record — generated
