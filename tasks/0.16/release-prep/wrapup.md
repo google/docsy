@@ -1,9 +1,9 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-07-17
+lastmod: 2026-07-18
 range: v0.15.0..main
-last-main-commit: 4e954dc1
+last-main-commit: 494f3da6
 cSpell:ignore: favicons retokenization thoughtry
 ---
 
@@ -11,7 +11,7 @@ Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
 milestone hygiene, and the tag-time checklist. The objective per-change matrix
 lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
-> Prepared for commits in [v0.15.0...main][] through [4e954dc1][].
+> Prepared for commits in [v0.15.0...main][] through [494f3da6][].
 
 ## Themes (with evidence and client impact)
 
@@ -31,7 +31,8 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   (`languageName`/`languageDirection`) still work but should become
   `label`/`direction`. Node 22+ required for Hugo-managed Node tools from
   0.161.x (Docsy recommends Node LTS 24). Per-version mechanics live in the
-  [Hugo upgrade guide][].
+  [Hugo upgrade guide][]. The **minimum** vs **officially supported** version
+  distinction is now named, documented, and sync-guarded ([#2680][]).
 - **Favicons** — [#2653][], [#2654][], [#2656][]; [#2595][] closed, [#2357][]
   continues (26Q3). Default favicon artwork removed; the default partial
   discovers and links conventional `static/` files (`favicon.ico`,
@@ -151,6 +152,12 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   implemented but unreferenced).
 - Omitted [#2650][] (double-`v` docs fix) from the changelog — too minor; the
   changelog tracks breaking changes and highlights only.
+- **Clarified Hugo-version semantics** ([#2680][], 2026-07-18): Docsy names and
+  sync-guards its two Hugo versions — the theme **minimum** (requirement
+  statements, `test:hugo-versions`, minimum-Hugo smoke lane) and the
+  **officially supported** version (the docsy.dev pin). Policy home is the
+  changelog §Official support; the release post's Hugo section and the install
+  prerequisites link to it rather than restating (one home per fact).
 - Defer remaining monorepo ([#2617][]) and favicon ([#2357][]) work to post-0.16
   trackers; neither blocks the tag.
 
@@ -265,7 +272,8 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2675]: https://github.com/google/docsy/pull/2675
 [#2678]: https://github.com/google/docsy/pull/2678
 [#2679]: https://github.com/google/docsy/pull/2679
-[4e954dc1]: https://github.com/google/docsy/commit/4e954dc1
+[#2680]: https://github.com/google/docsy/pull/2680
+[494f3da6]: https://github.com/google/docsy/commit/494f3da6
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
 [link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
