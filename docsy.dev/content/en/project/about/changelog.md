@@ -141,26 +141,20 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 **New**:
 
 - **Favicon discovery**: you can now drop a site's conventionally named favicon
-  files (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png`, and optional
-  square `favicon-NxN.png` and `apple-touch-icon-NxN.png` variants) into
-  `static/` and the theme discovers and links them -- no favicons partial
-  required. A new `gen-favicons` helper generates raster icons from a source
-  SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
+  files into `static/` and the theme discovers and links them -- no favicons
+  partial required. A new `gen-favicons` helper generates raster icons from a
+  source SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
   favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
-- **Default favicons** removed from the theme; sites now supply their own.
-  Conventional `static/` filenames are discovered and linked automatically (see
-  **Favicon discovery** under **New** above), so a custom partial is only needed
-  for non-default filenames or extra links. See [0.16.0 release
+- **Default favicons** removed from the theme; sites now supply their own --
+  most simply via **Favicon discovery** (see **New** above). See [0.16.0 release
   report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2595][]).
 - Raised the theme's minimum supported Hugo version to
   **[0.160.1][hugo-0.160.1]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
   For the rationale, see [0.16.0 release report][0.16.0-blog-hugo] ([#2668][],
-  [#2677][]). Note: the language config keys deprecated by Hugo 0.158.0 still
-  work in your site config, but consider renaming them; see [Hugo 0.158+ upgrade
-  guide][] ([#2593][]).
+  [#2677][]).
 - **Theme folder move**: the canonical theme now lives in `theme/`; consuming
   sites need a one-line install-path update for their install mode. See [0.16.0
   release report][0.16.0-blog-theme-folder] ([#2617][]).
@@ -172,8 +166,8 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 **Other changes**:
 
-- Migrated the theme and docs off deprecated Hugo language APIs. Thanks
-  [@deining][] for the groundwork in [#2594][] and [#2578][]!
+- Migrated the theme and docs off deprecated Hugo language APIs ([#2593][]).
+  Thanks [@deining][] for the groundwork in [#2594][] and [#2578][]!
 - Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
   minimum supported Hugo version remains 0.160.1. See [Hugo 0.158+ upgrade
   guide][] ([#2581][]).
@@ -181,11 +175,8 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   runtime dependencies, and the root package orchestrates the `docsy.dev` and
   `theme` workspaces ([#2617][]).
 - **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for sites
-  with RTL languages or that provide a project-root
-  `postcss.config.{js,mjs,cjs}`, so other sites no longer need
-  `autoprefixer`/`postcss`/`postcss-cli`. Sites with RTL languages still install
-  their own PostCSS toolchain plus `rtlcss`. Docsy's CSS targets the
-  Browserslist `defaults` browsers. See [0.16.0 release
+  with RTL languages or a project-root `postcss.config.{js,mjs,cjs}`; other
+  sites no longer need a PostCSS toolchain. See [0.16.0 release
   report][0.16.0-blog-postcss] ([#2668][]).
 - Moved cached-sidebar activation on large sites (above `sidebar_cache_limit`)
   from per-page inline jQuery to the shared `chrome-nav.js` hydration path;

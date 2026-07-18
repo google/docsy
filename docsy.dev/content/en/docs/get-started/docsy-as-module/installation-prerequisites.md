@@ -125,8 +125,9 @@ steps.
 This section applies to all [installation options](/docs/get-started/), not just
 Hugo-module setups.
 
-Docsy builds its CSS without [PostCSS](https://postcss.org/) by default, so most
-sites don't need it. Install PostCSS only if:
+Docsy builds its CSS without [PostCSS](https://postcss.org/) by default -- the
+shipped CSS targets the [Browserslist `defaults`][browserslist-defaults]
+browsers -- so most sites don't need it. Install PostCSS only if:
 
 - Your site has a **[right-to-left (RTL)][rtl]** language, or
 - You post-process your own CSS with a project-root
@@ -153,6 +154,7 @@ site
 - [Start site from scratch (for experts)](start-from-scratch/)
 
 <!-- prettier-ignore-start -->
+[browserslist-defaults]: https://github.com/browserslist/browserslist
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [postcss]: https://www.npmjs.com/package/postcss
