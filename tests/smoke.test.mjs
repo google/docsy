@@ -185,6 +185,62 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
   });
 }
 
+// --- npm registry install of @docsy/theme -----------------------------------
+// Like the NPM mode above, but installs the theme-only package from the npm
+// registry rather than the repo package from GitHub — the path consumers take
+// once @docsy/theme is published. Written red-first before the first publish:
+// unskip when a version is live on the registry.
+test(
+  'npm registry install of @docsy/theme',
+  { skip: 'unskip after the first @docsy/theme publish to the npm registry' },
+  () => {
+    const name = 'smoke-registry';
+    const site = path.join(TMP, name);
+    rmSync(site, { recursive: true, force: true });
+
+    progress('registry: hugo new site…');
+    assert.equal(
+      hugo(['new', 'site', '--format', 'yaml', '--quiet', site], { cwd: TMP })
+        .status,
+      0,
+      'hugo new site',
+    );
+
+    progress('registry: npm install @docsy/theme…');
+    assert.equal(
+      run('npm', ['init', '-y'], { cwd: site }).status,
+      0,
+      'npm init',
+    );
+    assert.equal(
+      run('npm', ['install', '--no-audit', '--no-fund', '@docsy/theme'], {
+        cwd: site,
+      }).status,
+      0,
+      '@docsy/theme installs from the registry',
+    );
+
+    // The one-line consumer config change (@ must be quoted in YAML).
+    appendFileSync(
+      path.join(site, 'hugo.yaml'),
+      "\ntheme: '@docsy/theme'\nthemesDir: node_modules\n",
+    );
+    progress('registry: hugo build…');
+    assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+    assertBuilt(name);
+
+    progress('registry: npx gen-favicons --help…');
+    const help = run('npx', ['gen-favicons', '--help'], { cwd: site });
+    assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
+    assert.match(
+      help.stdout ?? '',
+      /Usage: gen-favicons/,
+      'npx gen-favicons --help prints usage',
+    );
+    progress('registry: ok');
+  },
+);
+
 // --- declared minimum Hugo version actually builds --------------------------
 // Pins Hugo to the theme's declared minimum (theme.toml min_version) and
 // builds the Hugo-module-mode site — the most version-sensitive path: on
