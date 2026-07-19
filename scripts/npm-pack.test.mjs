@@ -21,15 +21,15 @@ const LIMITS = {
 };
 
 const TAR = 'package/';
-const SCRIPTS = `${TAR}scripts/`;
+const THEME_SCRIPTS = `${TAR}theme/scripts/`;
 
 // Spot-check paths inside the tarball (package/ prefix).
 const REQUIRED = [
   `${TAR}package.json`,
   `${TAR}LICENSE`,
-  `${SCRIPTS}gen-favicons/cli.mjs`,
-  `${SCRIPTS}gen-favicons/index.mjs`,
-  `${SCRIPTS}gen-favicons/README.md`,
+  `${THEME_SCRIPTS}gen-favicons/cli.mjs`,
+  `${THEME_SCRIPTS}gen-favicons/index.mjs`,
+  `${THEME_SCRIPTS}gen-favicons/README.md`,
   `${TAR}theme/hugo.yaml`,
   `${TAR}theme/go.mod`,
   `${TAR}theme/layouts/baseof.html`,
@@ -38,22 +38,25 @@ const REQUIRED = [
 
 const FORBIDDEN_PREFIXES = [
   `${TAR}docsy.dev/`,
-  `${SCRIPTS}`,
+  `${TAR}scripts/`,
   `${TAR}tests/`,
   `${TAR}tasks/`,
 ];
 
-const FORBIDDEN_SUBSTRINGS = ['theme/node_modules', 'theme/package-lock.json'];
+const FORBIDDEN_SUBSTRINGS = [
+  'theme/node_modules',
+  'theme/package-lock.json',
+  '.test.mjs',
+];
 
 const REQUIRED_SET = new Set(REQUIRED);
 
-// package.json "files" entries derived from the lists above.
+// Mirror of package.json "files"; keep the two in sync.
 const PKG_FILES = [
   'theme',
-  ...FORBIDDEN_SUBSTRINGS.map((s) => `!${s}`),
-  ...REQUIRED.filter((p) => p.startsWith(SCRIPTS)).map((p) =>
-    p.slice(TAR.length),
-  ),
+  '!theme/node_modules',
+  '!theme/package-lock.json',
+  '!theme/scripts/**/*.test.mjs',
 ];
 
 let tarballPath;
@@ -117,12 +120,12 @@ test('package.json declares private and theme-only files with exclusions', () =>
   assert.deepEqual(
     pkg.bin,
     {
-      'gen-favicons': 'scripts/gen-favicons/cli.mjs',
+      'gen-favicons': 'theme/scripts/gen-favicons/cli.mjs',
     },
     'package.json "bin"',
   );
   assert.ok(
-    REQUIRED.includes(`${SCRIPTS}gen-favicons/cli.mjs`),
+    REQUIRED.includes(`${THEME_SCRIPTS}gen-favicons/cli.mjs`),
     'the gen-favicons bin target is shipped in the tarball',
   );
 });

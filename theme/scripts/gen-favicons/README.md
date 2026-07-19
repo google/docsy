@@ -25,12 +25,12 @@ npx gen-favicons static/favicon.svg static/
 For a Hugo module or Git submodule install, run the CLI directly:
 
 ```sh
-node DOCSY_DIR/scripts/gen-favicons/cli.mjs static/favicon.svg static/
+node DOCSY_THEME_DIR/scripts/gen-favicons/cli.mjs static/favicon.svg static/
 ```
 
-Here `DOCSY_DIR` is your Docsy install directory: `themes/docsy` for a Git
-submodule, or the path printed by
-`go list -m -f '{{.Dir}}' github.com/google/docsy` for a Hugo module.
+Here `DOCSY_THEME_DIR` is the theme directory of your Docsy install:
+`themes/docsy/theme` for a Git submodule, or the path printed by
+`go list -m -f '{{.Dir}}' github.com/google/docsy/theme` for a Hugo module.
 
 The second argument is the output directory (default: the current directory);
 point it at your site's `static/` so the icons publish at the site root, where
@@ -38,7 +38,7 @@ browsers and the favicons partial expect them.
 
 For the icon sizes you can choose and all other options, add `--help` to the
 command form for your install (`npx gen-favicons --help`, or
-`node DOCSY_DIR/scripts/gen-favicons/cli.mjs --help`).
+`node DOCSY_THEME_DIR/scripts/gen-favicons/cli.mjs --help`).
 
 [partial]: https://docsy.dev/docs/content/iconsimages/#add-your-favicons
 [imagemagick]: https://imagemagick.org
