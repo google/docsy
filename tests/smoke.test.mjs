@@ -151,6 +151,28 @@ before(() => {
   );
 });
 
+// An npm install of @docsy/theme wires the package bins into
+// node_modules/.bin; assert the shim exists, then run it with
+// `npx --no-install`: when the shim is missing, a bare `npx NAME` offers to
+// fetch a same-named package from the public registry instead (an unrelated
+// `gen-favicons` package exists there).
+function assertGenFaviconsBin(site) {
+  assert.ok(
+    existsSync(path.join(site, 'node_modules', '.bin', 'gen-favicons')),
+    'gen-favicons bin shim is wired into node_modules/.bin',
+  );
+  progress('npx --no-install gen-favicons --help…');
+  const help = run('npx', ['--no-install', 'gen-favicons', '--help'], {
+    cwd: site,
+  });
+  assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
+  assert.match(
+    help.stdout ?? '',
+    /Usage: gen-favicons/,
+    'npx gen-favicons --help prints usage',
+  );
+}
+
 // --- make-site.sh modes (mirror the CI smoke matrix) -----------------------
 for (const src of ['NPM', 'HUGO_MODULE']) {
   test(`make-site.sh -s ${src}`, () => {
@@ -163,81 +185,86 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
     );
     assert.equal(r.status, 0, `${src} site build exited 0`);
     assertBuilt(name);
-
-    // An npm install of Docsy puts its CLI bins on the project's PATH; `--help`
-    // exercises each wired bin without needing its native dependency (ImageMagick
-    // for gen-favicons).
-    if (src === 'NPM') {
-      for (const bin of ['gen-favicons']) {
-        progress(`NPM: npx ${bin} --help…`);
-        const help = run('npx', [bin, '--help'], {
-          cwd: path.join(TMP, name),
-        });
-        assert.equal(help.status, 0, `npx ${bin} --help exits 0`);
-        assert.match(
-          help.stdout ?? '',
-          new RegExp(`Usage: ${bin}`),
-          `npx ${bin} --help prints usage`,
-        );
-      }
-    }
+    if (src === 'NPM') assertGenFaviconsBin(path.join(TMP, name));
     progress(`${src}: ok`);
   });
 }
 
-// --- npm registry install of @docsy/theme -----------------------------------
-// Like the NPM mode above, but installs the theme-only package from the npm
-// registry rather than the repo package from GitHub — the path consumers take
-// once @docsy/theme is published. Written red-first before the first publish:
-// unskip when a version is live on the registry.
+// --- consumer installs of @docsy/theme --------------------------------------
+// Install the theme-only package into a scratch site outside the repo and
+// exercise the consumer contract: a styled build plus the wired gen-favicons
+// bin. The tarball test packs theme/ from this checkout — the pre-publish
+// check that covers the code under review. The registry test installs a
+// published spec — the post-publish check.
+
+function buildThemeConsumerSite(name, pkgSpec) {
+  const site = path.join(TMP, name);
+  rmSync(site, { recursive: true, force: true });
+
+  progress(`${name}: hugo new site…`);
+  assert.equal(
+    hugo(['new', 'site', '--format', 'yaml', '--quiet', site], { cwd: TMP })
+      .status,
+    0,
+    'hugo new site',
+  );
+
+  progress(`${name}: npm install ${pkgSpec}…`);
+  // npm is npm.cmd on Windows, and .cmd files require a shell.
+  const npmOpts = { cwd: site, shell: process.platform === 'win32' };
+  assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
+  assert.equal(
+    run('npm', ['install', '--no-audit', '--no-fund', pkgSpec], npmOpts).status,
+    0,
+    `${pkgSpec} installs`,
+  );
+
+  // The one-line consumer config change (@ must be quoted in YAML).
+  appendFileSync(
+    path.join(site, 'hugo.yaml'),
+    "\ntheme: '@docsy/theme'\nthemesDir: node_modules\n",
+  );
+  progress(`${name}: hugo build…`);
+  assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+  assertBuilt(name);
+  assertGenFaviconsBin(site);
+  progress(`${name}: ok`);
+}
+
+test('tarball install of @docsy/theme packed from this checkout', () => {
+  const packDest = path.join(TMP, 'theme-pack');
+  rmSync(packDest, { recursive: true, force: true });
+  mkdirSync(packDest, { recursive: true });
+  progress('tarball: npm pack theme/…');
+  const pack = run(
+    'npm',
+    ['pack', '--pack-destination', packDest, '--silent'],
+    {
+      cwd: path.join(repoRoot, 'theme'),
+      shell: process.platform === 'win32',
+    },
+  );
+  assert.equal(pack.status, 0, 'npm pack exits 0');
+  const tgz = readdirSync(packDest).find((f) => f.endsWith('.tgz'));
+  assert.ok(tgz, 'npm pack produced a tarball');
+  buildThemeConsumerSite('smoke-tarball', path.join(packDest, tgz));
+});
+
+// DOCSY_THEME_PKG selects the registry spec — e.g. @docsy/theme@next to vet
+// an RC, or @docsy/theme@0.16.0. Without it the test targets the bare name,
+// which resolves to the `latest` dist-tag; it stays skipped until a stable
+// version is live there.
+const REGISTRY_PKG = process.env.DOCSY_THEME_PKG;
 test(
-  'npm registry install of @docsy/theme',
-  { skip: 'unskip after the first @docsy/theme publish to the npm registry' },
+  'registry install of @docsy/theme',
+  {
+    skip: REGISTRY_PKG
+      ? false
+      : '@docsy/theme has no version under `latest` yet; ' +
+        'set DOCSY_THEME_PKG (e.g. @docsy/theme@next) to target another spec',
+  },
   () => {
-    const name = 'smoke-registry';
-    const site = path.join(TMP, name);
-    rmSync(site, { recursive: true, force: true });
-
-    progress('registry: hugo new site…');
-    assert.equal(
-      hugo(['new', 'site', '--format', 'yaml', '--quiet', site], { cwd: TMP })
-        .status,
-      0,
-      'hugo new site',
-    );
-
-    progress('registry: npm install @docsy/theme…');
-    assert.equal(
-      run('npm', ['init', '-y'], { cwd: site }).status,
-      0,
-      'npm init',
-    );
-    assert.equal(
-      run('npm', ['install', '--no-audit', '--no-fund', '@docsy/theme'], {
-        cwd: site,
-      }).status,
-      0,
-      '@docsy/theme installs from the registry',
-    );
-
-    // The one-line consumer config change (@ must be quoted in YAML).
-    appendFileSync(
-      path.join(site, 'hugo.yaml'),
-      "\ntheme: '@docsy/theme'\nthemesDir: node_modules\n",
-    );
-    progress('registry: hugo build…');
-    assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
-    assertBuilt(name);
-
-    progress('registry: npx gen-favicons --help…');
-    const help = run('npx', ['gen-favicons', '--help'], { cwd: site });
-    assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
-    assert.match(
-      help.stdout ?? '',
-      /Usage: gen-favicons/,
-      'npx gen-favicons --help prints usage',
-    );
-    progress('registry: ok');
+    buildThemeConsumerSite('smoke-registry', REGISTRY_PKG ?? '@docsy/theme');
   },
 );
 
