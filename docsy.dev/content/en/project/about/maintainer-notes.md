@@ -14,14 +14,17 @@ Keep project content DRY by writing each fact in the artifact whose purpose and
 audience it serves. Each artifact links to the more detailed ones rather than
 restating them:
 
-- **[Changelog][]**: a lean record of _what changed_, for devs who want a quick
-  overview. No upgrade advice, implementation detail, or background. Entries
-  link to the release report for details and cite a change's key issues — PRs
-  only when there is no key issue, such as for contributor credit.
+- **[Changelog][]**: a lean record of _what changed_, for developers who want a
+  quick overview. No upgrade advice, implementation detail, or background.
+  Entries link to the release report for details and cite a change's key issues
+  — PRs only when there is no key issue, such as for contributor credit.
 - **Release and upgrade blog posts**: what's new, what to watch out for, and
   actionable upgrade guidance — the historical narrative. Link to the site docs
   for current behavior and reference detail. Don't enumerate PRs and issues;
-  link an open tracker only where it adds follow-up context.
+  link an open tracker only where it adds follow-up context. Upgrades are a
+  chore, so keep posts maximally actionable yet lean: the release summary reads
+  like a selective table of contents — a link per section with a clause of
+  guiding glue — and each fact appears in one section, its home.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
 - **[Release notes][] and [milestones][]**: the exhaustive record — generated
@@ -62,6 +65,17 @@ a substitute.
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
 guarded by [test:hugo-versions](#test-suites).
+
+Only current-state pages — docs and the changelog's
+[official support](/project/about/changelog/#official-support) section — render
+these versions live, via the `hugoMinVersion` site param and the `hugo-version`
+shortcode. Blog posts are historical snapshots and render versions
+time-insensitively: a post that renders one of these version params freezes it
+in its front matter, so updating the post (say, for a patch release) means
+editing one field. (Version literals in narrative text are already
+time-insensitive.) Page params take precedence over site params, so the same
+`{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
+Guarded by [test:hugo-versions](#test-suites).
 
 ### Minimum Hugo version
 

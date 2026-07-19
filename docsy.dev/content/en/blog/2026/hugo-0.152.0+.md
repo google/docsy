@@ -7,6 +7,8 @@ author: >-
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
 body_class: release-highlights
 tags: [hugo, upgrade]
+params:
+  hugoMinVersion: 0.157.0
 # prettier-ignore
 cSpell:ignore: dartsass libsass IPTC multihost libwebp opentelemetry
 ---
