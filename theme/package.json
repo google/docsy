@@ -1,11 +1,35 @@
 {
-  "name": "theme",
+  "name": "@docsy/theme",
   "version": "0.15.1-dev+002-over-main-ce9942b8",
-  "description": "Internal folder for the Docsy theme files",
-  "repository": "github:google/docsy",
+  "description": "A Hugo theme for technical documentation sites",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/docsy.git",
+    "directory": "theme"
+  },
   "homepage": "https://www.docsy.dev",
+  "bugs": "https://github.com/google/docsy/issues",
   "license": "Apache-2.0",
-  "private": true,
+  "keywords": ["hugo", "hugo-theme", "documentation", "docsy"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "gen-favicons": "scripts/gen-favicons/cli.mjs"
+  },
+  "files": [
+    "assets",
+    "go.mod",
+    "hugo.yaml",
+    "i18n",
+    "images",
+    "layouts",
+    "scripts/gen-favicons/cli.mjs",
+    "scripts/gen-favicons/index.mjs",
+    "scripts/gen-favicons/README.md",
+    "static",
+    "theme.toml"
+  ],
   "scripts": {
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
