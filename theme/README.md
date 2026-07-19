@@ -1,9 +1,9 @@
-# Docsy
+# @docsy/theme
 
 [Docsy][] is a [Hugo][] theme for technical documentation sites.
 
-This package, `@docsy/theme`, contains the theme files and their npm
-dependencies, plus the [gen-favicons][] helper.
+This package contains the theme files and their npm dependencies, plus the
+[gen-favicons][] helper.
 
 ## Usage
 
@@ -20,9 +20,10 @@ theme: '@docsy/theme'
 themesDir: node_modules
 ```
 
-For prerequisites, project setup, and everything else, see the
-[Docsy documentation][docsy].
+For prerequisites, project setup, and everything else, see the [Docsy
+documentation][docsy].
 
 [docsy]: https://www.docsy.dev
-[gen-favicons]: https://github.com/google/docsy/tree/main/theme/scripts/gen-favicons#readme
+[gen-favicons]:
+  https://github.com/google/docsy/tree/main/theme/scripts/gen-favicons#readme
 [hugo]: https://gohugo.io

@@ -14,6 +14,7 @@
     "hugo",
     "hugo-theme",
     "documentation",
+    "technical-documentation",
     "docsy"
   ],
   "publishConfig": {
