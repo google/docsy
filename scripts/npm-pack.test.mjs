@@ -120,19 +120,19 @@ before(() => {
     assert.equal(
       pack.status,
       0,
-      `npm pack failed for ${name}: ${pack.stderr || pack.stdout}`,
+      `npm pack exits 0 for ${name}: ${pack.stderr || pack.stdout}`,
     );
 
     const tgzFiles = fs.readdirSync(dest).filter((f) => f.endsWith('.tgz'));
     assert.equal(
       tgzFiles.length,
       1,
-      `expected one .tgz in ${dest}, got: ${tgzFiles.join(', ')}`,
+      `exactly one .tgz in ${dest} (got: ${tgzFiles.join(', ') || 'none'})`,
     );
     const tarballPath = path.join(dest, tgzFiles[0]);
 
     const tar = spawnSync('tar', ['-tzf', tarballPath], { encoding: 'utf8' });
-    assert.equal(tar.status, 0, `tar -tzf failed for ${name}: ${tar.stderr}`);
+    assert.equal(tar.status, 0, `tar -tzf lists ${name}: ${tar.stderr}`);
     const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);
     packed.set(name, { tarballPath, entries });
@@ -170,6 +170,16 @@ test('root and @docsy/theme manifests declare the same version', () => {
   );
 });
 
+// theme/LICENSE is a copy of the root LICENSE (npm pack does not follow
+// symlinks); the copies must not drift.
+test('root and @docsy/theme ship identical LICENSE files', () => {
+  const license = (dir) => fs.readFileSync(path.join(dir, 'LICENSE'));
+  assert.ok(
+    license(PACKAGES['@docsy/theme'].dir).equals(license(PACKAGES.root.dir)),
+    '@docsy/theme LICENSE is byte-identical to the root LICENSE',
+  );
+});
+
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: package.json declares expected files and bin`, () => {
     const manifest = JSON.parse(
@@ -197,20 +207,20 @@ for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: npm pack tarball matches contract`, () => {
     const { entries } = packed.get(name);
     const { missing, extra } = packDiff(pkg, entries);
-    assert.deepEqual(missing, [], 'missing from npm pack tarball');
-    assert.deepEqual(extra, [], 'extra in npm pack tarball');
+    assert.deepEqual(missing, [], 'all required entries are packed');
+    assert.deepEqual(extra, [], 'no forbidden entries are packed');
   });
 
   test(`${name}: npm pack stays within file-count and size limits`, () => {
     const { tarballPath, entries } = packed.get(name);
     assert.ok(
       entries.length <= pkg.limits.maxFiles,
-      `file count ${entries.length} > ${pkg.limits.maxFiles}`,
+      `file count ${entries.length} is within the ${pkg.limits.maxFiles} limit`,
     );
     const compressed = fs.statSync(tarballPath).size;
     assert.ok(
       compressed <= pkg.limits.maxCompressedBytes,
-      `compressed ${compressed} bytes > ${pkg.limits.maxCompressedBytes}`,
+      `compressed size ${compressed} is within ${pkg.limits.maxCompressedBytes} bytes`,
     );
   });
 }
