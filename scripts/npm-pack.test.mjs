@@ -157,6 +157,19 @@ function packDiff(pkg, entries) {
   };
 }
 
+// The registry version must equal the git tag at publish time, so the
+// manifests must move together: root package.json is canonical and
+// theme/package.json must match (kept in sync by set-package-version).
+test('root and @docsy/theme manifests declare the same version', () => {
+  const version = (dir) =>
+    JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8')).version;
+  assert.equal(
+    version(PACKAGES['@docsy/theme'].dir),
+    version(PACKAGES.root.dir),
+    '@docsy/theme version matches the root package version',
+  );
+});
+
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: package.json declares expected files and bin`, () => {
     const manifest = JSON.parse(
