@@ -8,8 +8,6 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 params:
-  # Frozen at publish time (shadows the site param); see maintainer notes,
-  # "Hugo versions".
   hugoMinVersion: 0.157.0
 # prettier-ignore
 cSpell:ignore: dartsass libsass IPTC multihost libwebp opentelemetry

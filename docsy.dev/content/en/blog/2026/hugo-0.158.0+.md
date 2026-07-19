@@ -10,7 +10,6 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 params:
-  # Frozen at publish time; see maintainer notes, "Hugo versions".
   hugoSupportedVersion: 0.164.0
 # prettier-ignore
 cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo

@@ -87,11 +87,9 @@ test('Hugo minimum is at most the officially supported version', () => {
   assert.ok((cmp ?? 0) <= 0, `minimum ${minimum} <= pin ${supported}`);
 });
 
-// Blog posts are historical snapshots: they must render Hugo versions
-// time-insensitively (see maintainer notes, "Hugo versions"). A version param
-// used in a post must be frozen in the post's front matter — page params take
-// precedence over site params — and the live hugo-version shortcode is
-// off-limits.
+// Blog posts are historical snapshots: any Hugo version a post renders must be
+// frozen as a page param in its front matter, never rendered live (see
+// maintainer notes, "Hugo versions").
 test('blog posts freeze the Hugo versions that they render', () => {
   const blogDir = path.join(repoRoot, 'docsy.dev/content/en/blog');
   const posts = fs
