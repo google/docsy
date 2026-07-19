@@ -92,14 +92,26 @@ const blogPosts = () =>
   fs.readdirSync(blogDir, { recursive: true }).filter((f) => f.endsWith('.md'));
 const frontMatterOf = (text) => text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
 
+// Hugo resolves a page param only when it is a top-level front-matter field or
+// a direct child of `params:`; a deeper-nested param is silently ignored and
+// the live site value is rendered instead.
+const pageParamOf = (frontMatter, param) => {
+  const entry = (prefix) =>
+    new RegExp(String.raw`^${prefix}${param}:[ \t]*['"]?([^'"\s]+)`, 'm');
+  const paramsBlock = frontMatter.match(/^params:\n((?: +.*\n?)*)/m)?.[1] ?? '';
+  return (
+    frontMatter.match(entry(''))?.[1] ?? paramsBlock.match(entry('  '))?.[1]
+  );
+};
+
 // The version params that posts freeze, mapped to their live values.
 const liveVersions = {
   hugoMinVersion: declarations['theme/theme.toml'],
   hugoSupportedVersion: pin,
 };
 
-// Blog posts are historical snapshots: any Hugo version a post renders must be
-// frozen as a page param in its front matter, never rendered live (see
+// Blog posts are historical snapshots: a post that renders one of the declared
+// version params must freeze it in its front matter, never render it live (see
 // maintainer notes, "Hugo versions").
 test('blog posts freeze the Hugo versions that they render', () => {
   const posts = blogPosts();
@@ -119,9 +131,9 @@ test('blog posts freeze the Hugo versions that they render', () => {
       if (!use.test(text)) continue;
       frozenUses++;
       assert.match(
-        frontMatter,
-        new RegExp(String.raw`^\s+${param}:`, 'm'),
-        `${post} front matter freezes ${param}`,
+        pageParamOf(frontMatter, param) ?? '',
+        /^\d+\.\d+\.\d+$/,
+        `${post} freezes ${param} as an effective page param`,
       );
     }
   }
@@ -138,11 +150,28 @@ test('draft posts freeze the currently declared Hugo versions', () => {
     );
     if (!/^draft: true$/m.test(frontMatter)) continue;
     for (const [param, live] of Object.entries(liveVersions)) {
-      const frozen = frontMatter.match(
-        new RegExp(String.raw`^\s+${param}:\s*(\S+)`, 'm'),
-      )?.[1];
+      const frozen = pageParamOf(frontMatter, param);
       if (frozen === undefined) continue;
       assert.equal(frozen, live(), `${post} freezes the current ${param}`);
     }
+  }
+});
+
+// A draft guide whose title advertises an upper version bound must keep it on
+// the frozen target: advancing hugoSupportedVersion forces the guide's title
+// and coverage to be reviewed.
+test('draft post titles cover the frozen supported Hugo version', () => {
+  for (const post of blogPosts()) {
+    const frontMatter = frontMatterOf(
+      fs.readFileSync(path.join(blogDir, post), 'utf8'),
+    );
+    if (!/^draft: true$/m.test(frontMatter)) continue;
+    const bound = frontMatter.match(/^title:.*\b(\d+\.\d+)\.x\b/m)?.[1];
+    if (!bound) continue;
+    const target = pageParamOf(frontMatter, 'hugoSupportedVersion');
+    assert.ok(
+      target?.startsWith(`${bound}.`),
+      `${post} title bound ${bound}.x covers hugoSupportedVersion ${target}`,
+    );
   }
 });

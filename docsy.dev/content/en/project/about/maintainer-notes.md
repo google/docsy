@@ -70,9 +70,10 @@ Only current-state pages — docs and the changelog's
 [official support](/project/about/changelog/#official-support) section — render
 these versions live, via the `hugoMinVersion` site param and the `hugo-version`
 shortcode. Blog posts are historical snapshots and render versions
-time-insensitively: declare each version a post repeats as a page param, frozen
+time-insensitively: a post that renders one of these version params freezes it
 in its front matter, so updating the post (say, for a patch release) means
-editing one field. Page params take precedence over site params, so the same
+editing one field. (Version literals in narrative text are already
+time-insensitive.) Page params take precedence over site params, so the same
 `{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
 Guarded by [test:hugo-versions](#test-suites).
 
