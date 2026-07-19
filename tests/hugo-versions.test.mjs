@@ -87,17 +87,24 @@ test('Hugo minimum is at most the officially supported version', () => {
   assert.ok((cmp ?? 0) <= 0, `minimum ${minimum} <= pin ${supported}`);
 });
 
+const blogDir = path.join(repoRoot, 'docsy.dev/content/en/blog');
+const blogPosts = () =>
+  fs.readdirSync(blogDir, { recursive: true }).filter((f) => f.endsWith('.md'));
+const frontMatterOf = (text) => text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+
+// The version params that posts freeze, mapped to their live values.
+const liveVersions = {
+  hugoMinVersion: declarations['theme/theme.toml'],
+  hugoSupportedVersion: pin,
+};
+
 // Blog posts are historical snapshots: any Hugo version a post renders must be
 // frozen as a page param in its front matter, never rendered live (see
 // maintainer notes, "Hugo versions").
 test('blog posts freeze the Hugo versions that they render', () => {
-  const blogDir = path.join(repoRoot, 'docsy.dev/content/en/blog');
-  const posts = fs
-    .readdirSync(blogDir, { recursive: true })
-    .filter((f) => f.endsWith('.md'));
+  const posts = blogPosts();
   assert.ok(posts.length > 0, 'blog posts are found');
 
-  const versionParams = ['hugoMinVersion', 'hugoSupportedVersion'];
   let frozenUses = 0;
   for (const post of posts) {
     const text = fs.readFileSync(path.join(blogDir, post), 'utf8');
@@ -106,8 +113,8 @@ test('blog posts freeze the Hugo versions that they render', () => {
       /\{\{[%<]\s*hugo-version\b/,
       `${post} renders versions time-insensitively`,
     );
-    const frontMatter = text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
-    for (const param of versionParams) {
+    const frontMatter = frontMatterOf(text);
+    for (const param of Object.keys(liveVersions)) {
       const use = new RegExp(String.raw`\{\{[%<]\s*_?param\s+"?${param}\b`);
       if (!use.test(text)) continue;
       frozenUses++;
@@ -119,4 +126,23 @@ test('blog posts freeze the Hugo versions that they render', () => {
     }
   }
   assert.ok(frozenUses > 0, 'at least one post uses a frozen version param');
+});
+
+// Frozen versions snapshot publish-time values, so until a post is published
+// they must track the live declarations. Also keeps companion posts in
+// agreement. Dormant for published posts, whose values age by design.
+test('draft posts freeze the currently declared Hugo versions', () => {
+  for (const post of blogPosts()) {
+    const frontMatter = frontMatterOf(
+      fs.readFileSync(path.join(blogDir, post), 'utf8'),
+    );
+    if (!/^draft: true$/m.test(frontMatter)) continue;
+    for (const [param, live] of Object.entries(liveVersions)) {
+      const frozen = frontMatter.match(
+        new RegExp(String.raw`^\s+${param}:\s*(\S+)`, 'm'),
+      )?.[1];
+      if (frozen === undefined) continue;
+      assert.equal(frozen, live(), `${post} freezes the current ${param}`);
+    }
+  }
 });
