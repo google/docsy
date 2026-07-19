@@ -68,9 +68,13 @@ guarded by [test:hugo-versions](#test-suites).
 
 Only current-state pages — docs and the changelog's
 [official support](/project/about/changelog/#official-support) section — render
-these versions computed, via `hugoMinVersion` and the `hugo-version` shortcode.
-Blog posts are historical snapshots: hard-code version literals there, since a
-computed value silently rewrites the post when the version next moves.
+these versions live, via the `hugoMinVersion` site param and the `hugo-version`
+shortcode. Blog posts are historical snapshots and render versions
+time-insensitively: declare each version a post repeats as a page param, frozen
+in its front matter, so updating the post (say, for a patch release) means
+editing one field. Page params take precedence over site params, so the same
+`{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
+Guarded by [test:hugo-versions](#test-suites).
 
 ### Minimum Hugo version
 

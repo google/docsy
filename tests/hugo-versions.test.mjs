@@ -86,3 +86,39 @@ test('Hugo minimum is at most the officially supported version', () => {
     .find((d) => d !== 0);
   assert.ok((cmp ?? 0) <= 0, `minimum ${minimum} <= pin ${supported}`);
 });
+
+// Blog posts are historical snapshots: they must render Hugo versions
+// time-insensitively (see maintainer notes, "Hugo versions"). A version param
+// used in a post must be frozen in the post's front matter — page params take
+// precedence over site params — and the live hugo-version shortcode is
+// off-limits.
+test('blog posts freeze the Hugo versions that they render', () => {
+  const blogDir = path.join(repoRoot, 'docsy.dev/content/en/blog');
+  const posts = fs
+    .readdirSync(blogDir, { recursive: true })
+    .filter((f) => f.endsWith('.md'));
+  assert.ok(posts.length > 0, 'blog posts are found');
+
+  const versionParams = ['hugoMinVersion', 'hugoTarget'];
+  let frozenUses = 0;
+  for (const post of posts) {
+    const text = fs.readFileSync(path.join(blogDir, post), 'utf8');
+    assert.doesNotMatch(
+      text,
+      /\{\{[%<]\s*hugo-version\b/,
+      `${post} renders versions time-insensitively`,
+    );
+    const frontMatter = text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
+    for (const param of versionParams) {
+      const use = new RegExp(String.raw`\{\{[%<]\s*_?param\s+"?${param}\b`);
+      if (!use.test(text)) continue;
+      frozenUses++;
+      assert.match(
+        frontMatter,
+        new RegExp(String.raw`^\s+${param}:`, 'm'),
+        `${post} front matter freezes ${param}`,
+      );
+    }
+  }
+  assert.ok(frozenUses > 0, 'at least one post uses a frozen version param');
+});

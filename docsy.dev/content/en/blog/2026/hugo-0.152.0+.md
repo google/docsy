@@ -7,6 +7,10 @@ author: >-
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
 body_class: release-highlights
 tags: [hugo, upgrade]
+params:
+  # Frozen at publish time (shadows the site param); see maintainer notes,
+  # "Hugo versions".
+  hugoMinVersion: 0.157.0
 # prettier-ignore
 cSpell:ignore: dartsass libsass IPTC multihost libwebp opentelemetry
 ---
@@ -297,12 +301,12 @@ your convenience, we link to required and optional actions for each section.
 
 For projects using the new sites matrix features who also want the latest fixes
 and updated support for aliases in the context of multidimensional sites, we
-recommend using Hugo [0.157.0][hugo-min-version] or later:
+recommend using Hugo [{{% param hugoMinVersion %}}][hugo-min-version] or later:
 
 ```yaml
 module:
   hugoVersion:
-    min: '0.157.0'
+    min: '{{% _param hugoMinVersion %}}'
 ```
 
 [0.152.0]: https://github.com/gohugoio/hugo/releases/tag/v0.152.0
@@ -312,7 +316,8 @@ module:
   https://discourse.gohugo.io/t/why-does-glob-negation-require-a-space-after/56651
 [files]: https://gohugo.io/configuration/module/#files
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
-[hugo-min-version]: https://github.com/gohugoio/hugo/releases/tag/v0.157.0
+[hugo-min-version]:
+  <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoMinVersion %}}>
 [hvm]: https://github.com/jmooring/hvm
 [multidimensional content model]:
   https://gohugo.io/about/features/#multidimensional-content-model
