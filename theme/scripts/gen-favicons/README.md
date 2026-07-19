@@ -15,30 +15,16 @@ produced ahead of time with [ImageMagick][].
 ## Usage
 
 For a site that installs Docsy as an npm package, the command is on your
-project's `PATH`. Save your source SVG as `static/favicon.svg` so the theme
-links it directly, then write the raster icons alongside it:
+project's `PATH`:
 
 ```sh
 npx gen-favicons static/favicon.svg static/
 ```
 
-For a Hugo module or Git submodule install, run the CLI directly:
+For all options, run `npx gen-favicons --help`. For the full workflow, including
+how to run the CLI from a Hugo module or Git submodule install, see [Generate
+favicons][docs].
 
-```sh
-node DOCSY_THEME_DIR/scripts/gen-favicons/cli.mjs static/favicon.svg static/
-```
-
-Here `DOCSY_THEME_DIR` is the theme directory of your Docsy install:
-`themes/docsy/theme` for a Git submodule, or the path printed by
-`go list -m -f '{{.Dir}}' github.com/google/docsy/theme` for a Hugo module.
-
-The second argument is the output directory (default: the current directory);
-point it at your site's `static/` so the icons publish at the site root, where
-browsers and the favicons partial expect them.
-
-For the icon sizes you can choose and all other options, add `--help` to the
-command form for your install (`npx gen-favicons --help`, or
-`node DOCSY_THEME_DIR/scripts/gen-favicons/cli.mjs --help`).
-
-[partial]: https://docsy.dev/docs/content/iconsimages/#add-your-favicons
+[docs]: https://docsy.dev/docs/content/iconsimages/#generate-favicons
 [imagemagick]: https://imagemagick.org
+[partial]: https://docsy.dev/docs/content/iconsimages/#add-your-favicons
