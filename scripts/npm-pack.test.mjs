@@ -22,7 +22,7 @@ const TAR = 'package/';
 const PACKAGES = {
   root: {
     dir: repoRoot,
-    limits: { maxFiles: 280, maxCompressedBytes: 1_200_000 },
+    limits: { maxFiles: 280, maxCompressedBytes: 600_000 },
     required: [
       `${TAR}package.json`,
       `${TAR}LICENSE`,
@@ -39,6 +39,8 @@ const PACKAGES = {
       `${TAR}scripts/`,
       `${TAR}tests/`,
       `${TAR}tasks/`,
+      // Registry screenshots: only the git-based channels need them.
+      `${TAR}theme/images/`,
     ],
     forbiddenSubstrings: [
       'theme/node_modules',
@@ -48,6 +50,7 @@ const PACKAGES = {
     // Mirror of package.json "files"; keep the two in sync.
     pkgFiles: [
       'theme',
+      '!theme/images',
       '!theme/node_modules',
       '!theme/package-lock.json',
       '!theme/scripts/**/*.test.mjs',
@@ -57,7 +60,7 @@ const PACKAGES = {
   },
   '@docsy/theme': {
     dir: path.join(repoRoot, 'theme'),
-    limits: { maxFiles: 280, maxCompressedBytes: 1_200_000 },
+    limits: { maxFiles: 280, maxCompressedBytes: 600_000 },
     required: [
       `${TAR}package.json`,
       `${TAR}LICENSE`,
@@ -66,29 +69,30 @@ const PACKAGES = {
       `${TAR}scripts/gen-favicons/index.mjs`,
       `${TAR}scripts/gen-favicons/README.md`,
       `${TAR}hugo.yaml`,
-      `${TAR}go.mod`,
-      `${TAR}theme.toml`,
       `${TAR}layouts/baseof.html`,
       `${TAR}assets/scss/main.scss`,
       `${TAR}i18n/en.yaml`,
       `${TAR}static/js/tabpane-persist.js`,
-      `${TAR}images/screenshot.png`,
     ],
-    forbiddenPrefixes: [`${TAR}node_modules/`],
-    forbiddenSubstrings: ['package-lock.json', '.test.mjs'],
+    // images/, theme.toml, and go.mod serve only the git-based channels
+    // (Hugo themes registry, Hugo modules), so npm clients never need them.
+    forbiddenPrefixes: [`${TAR}node_modules/`, `${TAR}images/`],
+    forbiddenSubstrings: [
+      'package-lock.json',
+      '.test.mjs',
+      'theme.toml',
+      'go.mod',
+    ],
     // Mirror of theme/package.json "files"; keep the two in sync.
     pkgFiles: [
       'assets',
-      'go.mod',
       'hugo.yaml',
       'i18n',
-      'images',
       'layouts',
       'scripts/gen-favicons/cli.mjs',
       'scripts/gen-favicons/index.mjs',
       'scripts/gen-favicons/README.md',
       'static',
-      'theme.toml',
     ],
     bin: { 'gen-favicons': 'scripts/gen-favicons/cli.mjs' },
     binTarget: `${TAR}scripts/gen-favicons/cli.mjs`,

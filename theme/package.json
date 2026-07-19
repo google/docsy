@@ -10,7 +10,12 @@
   "homepage": "https://www.docsy.dev",
   "bugs": "https://github.com/google/docsy/issues",
   "license": "Apache-2.0",
-  "keywords": ["hugo", "hugo-theme", "documentation", "docsy"],
+  "keywords": [
+    "hugo",
+    "hugo-theme",
+    "documentation",
+    "docsy"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -19,16 +24,13 @@
   },
   "files": [
     "assets",
-    "go.mod",
     "hugo.yaml",
     "i18n",
-    "images",
     "layouts",
     "scripts/gen-favicons/cli.mjs",
     "scripts/gen-favicons/index.mjs",
     "scripts/gen-favicons/README.md",
-    "static",
-    "theme.toml"
+    "static"
   ],
   "scripts": {
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",

@@ -10,6 +10,7 @@
   },
   "files": [
     "theme",
+    "!theme/images",
     "!theme/node_modules",
     "!theme/package-lock.json",
     "!theme/scripts/**/*.test.mjs"
