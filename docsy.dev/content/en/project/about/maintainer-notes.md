@@ -66,6 +66,12 @@ The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
 guarded by [test:hugo-versions](#test-suites).
 
+Only current-state pages — docs and the changelog's
+[official support](/project/about/changelog/#official-support) section — render
+these versions computed, via `hugoMinVersion` and the `hugo-version` shortcode.
+Blog posts are historical snapshots: hard-code version literals there, since a
+computed value silently rewrites the post when the version next moves.
+
 ### Minimum Hugo version
 
 Docsy declares the minimum Hugo version required to support the features that
