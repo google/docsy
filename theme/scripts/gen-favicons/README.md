@@ -7,23 +7,8 @@ Generate the raster favicons that Docsy's [favicons partial][partial] discovers
 from a single source SVG. Hugo can't rasterize SVG or write `.ico`, so these are
 produced ahead of time with [ImageMagick][].
 
-## Requirements
-
-- [ImageMagick][] (the `magick` command) on your `PATH`.
-- A source `favicon.svg` (or any SVG).
-
-## Usage
-
-For a site that installs Docsy as an npm package, the command is on your
-project's `PATH`:
-
-```sh
-npx gen-favicons static/favicon.svg static/
-```
-
-For all options, run `npx gen-favicons --help`. For the full workflow, including
-how to run the CLI from a Hugo module or Git submodule install, see [Generate
-favicons][docs].
+For the workflow, see [Generate favicons][docs]. For all options, run the CLI
+with `--help`.
 
 [docs]: https://docsy.dev/docs/content/iconsimages/#generate-favicons
 [imagemagick]: https://imagemagick.org
