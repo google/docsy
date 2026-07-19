@@ -106,7 +106,12 @@ before(() => {
     const pack = spawnSync(
       'npm',
       ['pack', '--pack-destination', dest, '--silent'],
-      { cwd: pkg.dir, encoding: 'utf8' },
+      {
+        cwd: pkg.dir,
+        encoding: 'utf8',
+        // npm is npm.cmd on Windows, and .cmd files require a shell.
+        shell: process.platform === 'win32',
+      },
     );
     assert.equal(
       pack.status,
@@ -124,7 +129,7 @@ before(() => {
 
     const tar = spawnSync('tar', ['-tzf', tarballPath], { encoding: 'utf8' });
     assert.equal(tar.status, 0, `tar -tzf failed for ${name}: ${tar.stderr}`);
-    const entries = tar.stdout.trim().split('\n').filter(Boolean);
+    const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);
     packed.set(name, { tarballPath, entries });
   }

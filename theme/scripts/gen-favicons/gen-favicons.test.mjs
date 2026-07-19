@@ -30,7 +30,7 @@ function icoFrames(file) {
     encoding: 'utf8',
   });
   assert.equal(r.status, 0, r.stderr);
-  return r.stdout.trim().split('\n');
+  return r.stdout.trim().split(/\r?\n/);
 }
 
 // --- parseSizes (pure) -----------------------------------------------------
