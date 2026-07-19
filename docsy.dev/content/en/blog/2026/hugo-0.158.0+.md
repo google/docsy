@@ -11,14 +11,15 @@ body_class: release-highlights
 tags: [hugo, upgrade]
 params:
   # Frozen at publish time; see maintainer notes, "Hugo versions".
-  hugoTarget: 0.164.0
+  hugoSupportedVersion: 0.164.0
 # prettier-ignore
 cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
 ---
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
-{{% param hugoTarget %}} that are relevant to Docsy users. It is a companion
-post to the Docsy [0.16.0](0.16.0/) release and upgrade guide, which covers the
+{{% param hugoSupportedVersion %}} that are relevant to Docsy users. It is a
+companion post to the Docsy [0.16.0](0.16.0/) release and upgrade guide, which
+covers the
 [Hugo versions that Docsy 0.16.0 requires and validates](0.16.0/#hugo).
 
 ## Upgrade summary
@@ -42,7 +43,8 @@ Docsy site to 0.16.0.
   - [Faster builds and stricter templates](#hugo-0-164-0)
   - [Notable changes](#notable-changes)
 - {{% _param FAS rocket primary %}} Jump to
-  [Upgrade to Hugo {{% param hugoTarget %}}](#upgrade) once you're ready.
+  [Upgrade to Hugo {{% param hugoSupportedVersion %}}](#upgrade) once you're
+  ready.
 
 ## Language API deprecations (0.158.0) {#language-apis}
 
@@ -298,21 +300,21 @@ stopping at the minimum 0.160.1.
 - On Hugo 0.164.0, `hugo gen chromastyles` gains `--mode` and `--modeSelector`
   flags for generating combined light/dark syntax-highlighting stylesheets.
 
-## {{% _param FAS rocket primary %}} Upgrade to Hugo {{% param hugoTarget %}} {#upgrade}
+## {{% _param FAS rocket primary %}} Upgrade to Hugo {{% param hugoSupportedVersion %}} {#upgrade}
 
 After addressing applicable breaking changes and deprecations, upgrade to Hugo
-{{% param hugoTarget %}}.
+{{% param hugoSupportedVersion %}}.
 
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@{{% _param hugoTarget %}} --save-dev
+npm install hugo-extended@{{% _param hugoSupportedVersion %}} --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use {{% _param hugoTarget %}}
+hvm use {{% _param hugoSupportedVersion %}}
 ```
 
 <section class="td-checkbox-list-wrapper">

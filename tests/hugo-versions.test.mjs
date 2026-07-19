@@ -99,7 +99,7 @@ test('blog posts freeze the Hugo versions that they render', () => {
     .filter((f) => f.endsWith('.md'));
   assert.ok(posts.length > 0, 'blog posts are found');
 
-  const versionParams = ['hugoMinVersion', 'hugoTarget'];
+  const versionParams = ['hugoMinVersion', 'hugoSupportedVersion'];
   let frozenUses = 0;
   for (const post of posts) {
     const text = fs.readFileSync(path.join(blogDir, post), 'utf8');
