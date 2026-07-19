@@ -117,8 +117,8 @@ Otherwise, run:
 node DOCSY_THEME_DIR/scripts/gen-favicons/cli.mjs static/favicon.svg static/
 ```
 
-For a Git submodule install of Docsy, `DOCSY_THEME_DIR` is
-`themes/docsy/theme`. For a Hugo module install, it is the directory printed by
+For a Git submodule install of Docsy, `DOCSY_THEME_DIR` is `themes/docsy/theme`.
+For a Hugo module install, it is the directory printed by
 `go list -m -f '{{.Dir}}' github.com/google/docsy/theme`.
 
 For the sizes and other options you can pass, run the command with `--help`.
