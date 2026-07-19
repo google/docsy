@@ -15,10 +15,8 @@ cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling gold
 
 This post summarizes breaking, security, and notable changes in Hugo 0.158.0 to
 0.164.0 that are relevant to Docsy users. It is a companion post to the Docsy
-[0.16.0](0.16.0/) release and upgrade guide.
-
-Docsy 0.16.0 requires Hugo 0.160.1 or later. The Docsy project build is tested
-with Hugo 0.164.0, which is the recommended target for this upgrade range.
+[0.16.0](0.16.0/) release and upgrade guide, which covers the
+[Hugo versions that Docsy 0.16.0 requires and validates](0.16.0/#hugo).
 
 ## Upgrade summary
 
@@ -27,8 +25,6 @@ Docsy site to 0.16.0.
 
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
-  - {{% _param BREAKING %}}
-    [Docsy now requires Hugo 0.160.1 or later](#hugo-version)
   - {{% _param BREAKING %}}
     [Node 22+ is required for Hugo-managed Node tools](#node-tools)
   - {{% _param BREAKING %}}
@@ -45,32 +41,6 @@ Docsy site to 0.16.0.
 - {{% _param FAS rocket primary %}} Jump to [Upgrade to Hugo 0.164.0](#upgrade)
   once you're ready.
 
-## {{% _param BREAKING %}} Hugo version for Docsy 0.16.0 {#hugo-version}
-
-Docsy 0.16.0 raises the theme's minimum supported Hugo version from 0.146.0 to
-**0.160.1**. For the rationale behind that minimum, see
-[Hugo 0.160.1+ support](0.16.0/#hugo) in the release post.
-
-We recommend upgrading directly to **Hugo 0.164.0**: the later releases include
-security fixes, 0.164.0
-[fixes a long-standing template-rendering slowdown](#hugo-0-164-0), and these
-are the versions validated across Docsy, the Docsy example site, and at least
-one large downstream Docsy site.
-
-### Actions {#hugo-version-actions}
-
-{{% _param BREAKING %}} **Applies to all sites upgrading to Docsy 0.16.0.**
-
-- Upgrade Hugo to 0.160.1 or later. Prefer 0.164.0; for install commands, see
-  [Upgrade to Hugo 0.164.0](#upgrade).
-- If your project declares a minimum Hugo version, set it to at least 0.160.1:
-
-  ```yaml
-  module:
-    hugoVersion:
-      min: 0.160.1
-  ```
-
 ## Language API deprecations (0.158.0) {#language-apis}
 
 Hugo 0.158.0 renamed several language configuration keys and template methods.
@@ -78,7 +48,7 @@ The old names log deprecation notices first, then move toward warnings and
 eventual errors on Hugo's deprecation timeline.
 
 Docsy's own templates and docs now use the new names — one of the changes behind
-0.16.0's [raised Hugo minimum](#hugo-version).
+0.16.0's [raised Hugo minimum](0.16.0/#hugo).
 
 ### Actions {#language-api-actions}
 
@@ -365,7 +335,7 @@ hvm use 0.164.0
 
 #### Required actions, as applicable {#required-actions}
 
-- [ ] [Hugo version actions](#hugo-version-actions)
+- [ ] [Hugo version actions](0.16.0/#hugo-actions) in the release post
 - [ ] [Node tooling actions](#node-tools-actions)
 - [ ] [Security actions](#security-actions)
 
