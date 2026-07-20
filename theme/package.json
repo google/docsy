@@ -1,12 +1,41 @@
 {
-  "name": "theme",
-  "version": "0.15.1-dev+002-over-main-ce9942b8",
-  "description": "Internal folder for the Docsy theme files",
-  "repository": "github:google/docsy",
+  "name": "@docsy/theme",
+  "version": "0.15.1-dev+041-over-main-4d8d85ef",
+  "description": "A Hugo theme for technical documentation sites",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/docsy.git",
+    "directory": "theme"
+  },
   "homepage": "https://www.docsy.dev",
+  "bugs": "https://github.com/google/docsy/issues",
   "license": "Apache-2.0",
-  "private": true,
+  "keywords": [
+    "hugo",
+    "hugo-theme",
+    "documentation",
+    "technical-documentation",
+    "docsy"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "gen-favicons": "scripts/gen-favicons/cli.mjs"
+  },
+  "files": [
+    "assets",
+    "hugo.yaml",
+    "i18n",
+    "layouts",
+    "scripts/gen-favicons/cli.mjs",
+    "scripts/gen-favicons/index.mjs",
+    "scripts/gen-favicons/README.md",
+    "static"
+  ],
   "scripts": {
+    "prepack": "node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\"",
+    "postpack": "node -e \"require('fs').rmSync('LICENSE', { force: true })\"",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
   },

@@ -12,6 +12,7 @@ import {
   getReleaseVersion,
   removeBuildId,
   getBuildId,
+  syncSecondaryManifests,
 } from './index.mjs';
 
 const nullLogger = {
@@ -32,11 +33,16 @@ function runMainWithMemory(args, { pkg, hugoYaml, logger = nullLogger }) {
   let writtenPkg;
   let writtenHugoYaml;
   const writtenPaths = [];
+  const syncedVersions = [];
   const newVersion = main(args, {
     logger,
     readPackageJson: () => pkg,
     writePackageJson: (updatedPkg) => {
       writtenPkg = { ...updatedPkg };
+    },
+    syncManifests: (version) => {
+      syncedVersions.push(version);
+      return [];
     },
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: (data, filePath) => {
@@ -45,7 +51,13 @@ function runMainWithMemory(args, { pkg, hugoYaml, logger = nullLogger }) {
     },
   });
 
-  return { newVersion, writtenPkg, writtenHugoYaml, writtenPaths };
+  return {
+    newVersion,
+    writtenPkg,
+    writtenHugoYaml,
+    writtenPaths,
+    syncedVersions,
+  };
 }
 
 test('resolveDefaultConfigPath prefers docsy.dev params.yaml when present', () => {
@@ -174,6 +186,49 @@ test('parseArgsAndResolveBuildId reports unknown flag for --config', () => {
   }
 });
 
+test('main syncs secondary manifests even when the root version is current', () => {
+  const pkg = { version: '1.2.3' };
+  const hugoYaml = { latest: 'v1.2.3', dev: 'v1.2.4-dev', buildId: '' };
+  const { syncedVersions } = runMainWithMemory(['--version', '1.2.3'], {
+    pkg,
+    hugoYaml,
+  });
+
+  assert.deepEqual(syncedVersions, ['1.2.3']);
+});
+
+test('syncSecondaryManifests aligns theme/package.json with the version', () => {
+  withTempDir((dir) => {
+    const themeDir = path.join(dir, 'theme');
+    fs.mkdirSync(themeDir);
+    const themeManifest = path.join(themeDir, 'package.json');
+    fs.writeFileSync(
+      themeManifest,
+      JSON.stringify(
+        { name: '@docsy/theme', version: '0.0.1-stale' },
+        null,
+        2,
+      ) + '\n',
+    );
+
+    const updated = syncSecondaryManifests('9.9.9', { cwd: dir });
+
+    assert.deepEqual(updated, ['theme/package.json']);
+    const written = JSON.parse(fs.readFileSync(themeManifest, 'utf8'));
+    assert.equal(written.version, '9.9.9');
+    assert.equal(written.name, '@docsy/theme', 'other fields are preserved');
+
+    // Idempotent: a second run reports nothing to update.
+    assert.deepEqual(syncSecondaryManifests('9.9.9', { cwd: dir }), []);
+  });
+});
+
+test('syncSecondaryManifests skips absent manifests', () => {
+  withTempDir((dir) => {
+    assert.deepEqual(syncSecondaryManifests('9.9.9', { cwd: dir }), []);
+  });
+});
+
 test('release/build helpers split semver strings', () => {
   assert.equal(getReleaseVersion('1.2.3-dev+build-9'), '1.2.3');
   assert.equal(removeBuildId('1.2.3-dev+build-9'), '1.2.3-dev');
@@ -297,6 +352,7 @@ test('set version and build ID from command line', { skip: true }, () => {
     writePackageJson: (updatedPkg) => {
       writtenPkg = { ...updatedPkg };
     },
+    syncManifests: () => [],
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: (updatedYaml) => {
       writtenHugoYaml = { ...updatedYaml };
@@ -345,6 +401,7 @@ test('main logs when package/hugo versions already match', () => {
     writePackageJson: () => {
       writeCallCount += 1;
     },
+    syncManifests: () => [],
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: () => {
       writeCallCount += 1;

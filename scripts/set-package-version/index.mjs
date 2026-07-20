@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * Updates the version in package.json and optional site YAML (Docsy
+ * Updates the version in package.json (plus secondary manifests such as
+ * theme/package.json, kept in sync) and optional site YAML (Docsy
  * `docsy.dev/config/_default/params.yaml`, or `./hugo.yaml` when that path is absent).
  * Can set the entire version, set build metadata, or strip to release version.
  *
@@ -22,6 +23,10 @@ const cwd = process.cwd();
 const defaultParamsYamlPath = 'docsy.dev/config/_default/params.yaml';
 const defaultHugoYamlPath = 'hugo.yaml';
 const packageJsonPath = 'package.json';
+// Secondary manifests kept in sync with the root package.json version (the
+// canonical home). Synced when present; absent entries are skipped, so
+// running from another project (e.g. docsy-example) is unaffected.
+const secondaryManifestPaths = ['theme/package.json'];
 
 /**
  * Default config file for version stamps: Docsy site params, else Hugo root config.
@@ -65,6 +70,7 @@ Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUI
   Updates the version in:
 
   - ${packageJsonPath}
+  - ${secondaryManifestPaths.join(', ')} (when present; kept in sync with ${packageJsonPath})
   - Each listed config file (or the default path above if no FILEs given)
 
   - In package.json, the version is set to the full version.
@@ -80,6 +86,7 @@ export function main(
     logger = console,
     readPackageJson = defaultReadPackageJson,
     writePackageJson = defaultWritePackageJson,
+    syncManifests = syncSecondaryManifests,
     readHugoYaml: readHugoYamlFn = readHugoYaml,
     writeHugoYaml: writeHugoYamlFn = writeHugoYaml,
   } = {},
@@ -109,6 +116,10 @@ export function main(
     writePackageJson(pkg);
     updated = true;
   }
+
+  // Sync unconditionally: a secondary manifest can be stale even when the
+  // root version is already at the target.
+  const syncedManifests = syncManifests(newVersion);
 
   const nextBuildId = getBuildId(newVersion);
   const releaseVersion = getReleaseVersion(newVersion);
@@ -175,6 +186,9 @@ export function main(
     logger.log?.(
       `✓ Updated package.json version: ${currentVersion} → ${newVersion}`,
     );
+  }
+  for (const manifestPath of syncedManifests) {
+    logger.log?.(`✓ Updated ${manifestPath} version to ${newVersion}`);
   }
 
   return newVersion;
@@ -327,6 +341,27 @@ function defaultReadPackageJson() {
 
 function defaultWritePackageJson(pkg) {
   fs.writeFileSync(getPackagePath(), JSON.stringify(pkg, null, 2) + '\n');
+}
+
+/**
+ * Aligns the secondary manifests with the given version.
+ *
+ * @param {string} version - Version to set
+ * @param {{ cwd?: string }} [options]
+ * @returns {string[]} Relative paths of the manifests that were updated
+ */
+export function syncSecondaryManifests(version, { cwd: baseDir = cwd } = {}) {
+  const updated = [];
+  for (const relPath of secondaryManifestPaths) {
+    const manifestPath = path.join(baseDir, relPath);
+    if (!fs.existsSync(manifestPath)) continue;
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (manifest.version === version) continue;
+    manifest.version = version;
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    updated.push(relPath);
+  }
+  return updated;
 }
 
 const modulePath = __filename;

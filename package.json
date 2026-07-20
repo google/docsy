@@ -1,20 +1,20 @@
 {
   "name": "docsy",
-  "version": "0.15.1-dev+036-over-main-7c9a0608",
+  "version": "0.15.1-dev+041-over-main-4d8d85ef",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
   "private": true,
   "bin": {
-    "gen-favicons": "scripts/gen-favicons/cli.mjs"
+    "gen-favicons": "theme/scripts/gen-favicons/cli.mjs"
   },
   "files": [
     "theme",
+    "!theme/LICENSE",
+    "!theme/images",
     "!theme/node_modules",
     "!theme/package-lock.json",
-    "scripts/gen-favicons/cli.mjs",
-    "scripts/gen-favicons/index.mjs",
-    "scripts/gen-favicons/README.md"
+    "!theme/scripts/**/*.test.mjs"
   ],
   "workspaces": [
     "docsy.dev",
@@ -23,7 +23,7 @@
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
-    "_check:format": "npx prettier --check theme/assets *.md theme/i18n scripts tasks tests",
+    "_check:format": "npx prettier --check theme/assets *.md theme/i18n theme/scripts scripts tasks tests",
     "_check:links": "npm run -C docsy.dev _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",
@@ -71,7 +71,7 @@
     "test:lychee": "node --test 'tests/lychee/**/*.test.mjs'",
     "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.test.mjs",
-    "test:tooling": "node --test 'scripts/**/*.test.mjs'",
+    "test:tooling": "node --test scripts/npm-pack.test.mjs scripts/set-package-version/hugo-yaml.test.mjs scripts/set-package-version/index.test.mjs theme/scripts/gen-favicons/gen-favicons.test.mjs",
     "test:website": "npm run -C docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
