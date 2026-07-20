@@ -34,6 +34,8 @@
     "static"
   ],
   "scripts": {
+    "prepack": "node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\"",
+    "postpack": "node -e \"require('fs').rmSync('LICENSE', { force: true })\"",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
   },

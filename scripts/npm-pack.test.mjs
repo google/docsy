@@ -63,6 +63,8 @@ const PACKAGES = {
     limits: { maxFiles: 280, maxCompressedBytes: 600_000 },
     required: [
       `${TAR}package.json`,
+      // Materialized from the root LICENSE by the prepack script (npm pack
+      // cannot reach above the package dir, and skips symlinks).
       `${TAR}LICENSE`,
       `${TAR}README.md`,
       `${TAR}scripts/gen-favicons/cli.mjs`,
@@ -170,15 +172,9 @@ test('root and @docsy/theme manifests declare the same version', () => {
   );
 });
 
-// theme/LICENSE is a copy of the root LICENSE (npm pack does not follow
-// symlinks); the copies must not drift.
-test('root and @docsy/theme ship identical LICENSE files', () => {
-  const license = (dir) => fs.readFileSync(path.join(dir, 'LICENSE'));
-  assert.ok(
-    license(PACKAGES['@docsy/theme'].dir).equals(license(PACKAGES.root.dir)),
-    '@docsy/theme LICENSE is byte-identical to the root LICENSE',
-  );
-});
+// theme/LICENSE needs no drift guard: the prepack script re-copies the root
+// LICENSE on every pack, so the tarball copy cannot drift by construction
+// (its presence is asserted by the @docsy/theme "required" contract above).
 
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: package.json declares expected files and bin`, () => {
