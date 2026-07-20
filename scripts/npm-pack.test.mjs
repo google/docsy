@@ -150,12 +150,13 @@ after(() => {
 
 function packDiff(pkg, entries) {
   const requiredSet = new Set(pkg.required);
+  const entrySet = new Set(entries);
   const isForbidden = (entry) =>
     !requiredSet.has(entry) &&
     (pkg.forbiddenPrefixes.some((p) => entry.startsWith(p)) ||
       pkg.forbiddenSubstrings.some((f) => entry.includes(f)));
   return {
-    missing: pkg.required.filter((p) => !new Set(entries).has(p)),
+    missing: pkg.required.filter((p) => !entrySet.has(p)),
     extra: entries.filter(isForbidden),
   };
 }
