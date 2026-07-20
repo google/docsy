@@ -84,6 +84,9 @@ const REPO = arg('repo', upstream?.repo ?? 'google/docsy');
 const BRANCH = arg('branch', upstream?.branch ?? 'main');
 const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 
+// npm and npx are .cmd shims on Windows, and .cmd files require a shell.
+const winShell = process.platform === 'win32';
+
 // Run a command; surface its output only on failure.
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { encoding: 'utf8', ...opts });
@@ -164,6 +167,7 @@ function assertGenFaviconsBin(site) {
   progress('npx --no-install gen-favicons --help…');
   const help = run('npx', ['--no-install', 'gen-favicons', '--help'], {
     cwd: site,
+    shell: winShell,
   });
   assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
   assert.match(
@@ -210,8 +214,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
   );
 
   progress(`${name}: npm install ${pkgSpec}…`);
-  // npm is npm.cmd on Windows, and .cmd files require a shell.
-  const npmOpts = { cwd: site, shell: process.platform === 'win32' };
+  const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
   assert.equal(
     run('npm', ['install', '--no-audit', '--no-fund', pkgSpec], npmOpts).status,
@@ -241,7 +244,7 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
     ['pack', '--pack-destination', packDest, '--silent'],
     {
       cwd: path.join(repoRoot, 'theme'),
-      shell: process.platform === 'win32',
+      shell: winShell,
     },
   );
   assert.equal(pack.status, 0, 'npm pack exits 0');

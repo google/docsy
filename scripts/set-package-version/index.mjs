@@ -188,7 +188,7 @@ export function main(
     );
   }
   for (const manifestPath of syncedManifests) {
-    logger.log?.(`✓ Updated ${manifestPath} version: → ${newVersion}`);
+    logger.log?.(`✓ Updated ${manifestPath} version to ${newVersion}`);
   }
 
   return newVersion;
