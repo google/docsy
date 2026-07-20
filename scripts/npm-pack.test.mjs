@@ -41,6 +41,8 @@ const PACKAGES = {
       `${TAR}tasks/`,
       // Registry screenshots: only the git-based channels need them.
       `${TAR}theme/images/`,
+      // Ephemeral theme-prepack artifact; a failed theme pack can strand it.
+      `${TAR}theme/LICENSE`,
     ],
     forbiddenSubstrings: [
       'theme/node_modules',
@@ -50,6 +52,7 @@ const PACKAGES = {
     // Mirror of package.json "files"; keep the two in sync.
     pkgFiles: [
       'theme',
+      '!theme/LICENSE',
       '!theme/images',
       '!theme/node_modules',
       '!theme/package-lock.json',
@@ -167,6 +170,13 @@ test('root and @docsy/theme manifests declare the same version', () => {
     version(PACKAGES['@docsy/theme'].dir),
     version(PACKAGES.root.dir),
     '@docsy/theme version matches the root package version',
+  );
+});
+
+test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
+  assert.ok(
+    !fs.existsSync(path.join(PACKAGES['@docsy/theme'].dir, 'LICENSE')),
+    'materialized LICENSE is removed after a successful pack',
   );
 });
 
