@@ -63,8 +63,6 @@ const PACKAGES = {
     limits: { maxFiles: 280, maxCompressedBytes: 600_000 },
     required: [
       `${TAR}package.json`,
-      // Materialized from the root LICENSE by the prepack script (npm pack
-      // cannot reach above the package dir, and skips symlinks).
       `${TAR}LICENSE`,
       `${TAR}README.md`,
       `${TAR}scripts/gen-favicons/cli.mjs`,
@@ -171,10 +169,6 @@ test('root and @docsy/theme manifests declare the same version', () => {
     '@docsy/theme version matches the root package version',
   );
 });
-
-// theme/LICENSE needs no drift guard: the prepack script re-copies the root
-// LICENSE on every pack, so the tarball copy cannot drift by construction
-// (its presence is asserted by the @docsy/theme "required" contract above).
 
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: package.json declares expected files and bin`, () => {

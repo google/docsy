@@ -2,7 +2,6 @@ node_modules/
 package-lock.json
 /tmp
 
-# Materialized from the root LICENSE at pack time (theme prepack/postpack)
 /theme/LICENSE
 
 # ScrollSpy patch related
