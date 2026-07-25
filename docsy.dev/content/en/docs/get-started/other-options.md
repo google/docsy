@@ -26,8 +26,8 @@ of the theme in your repository), you can **clone the files directly into your
 site source**.
 
 Finally, you can **install
-[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)** — the simplest
-option if your project already uses npm.
+[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)** — no extra
+toolchain needed if your project already uses npm.
 
 This guide provides instructions for all of these options, along with common
 prerequisites.
@@ -298,9 +298,9 @@ install one of the following unsupported versions:
 
   This installs the repository's default branch (`main`); to select another
   revision, append `#` and a branch, tag, or commit, or use `#semver:` followed
-  by a version range. The GitHub package is named `docsy` and contains the theme
-  files in a subfolder, so with this install form use `theme: docsy/theme` in
-  your site configuration.
+  by a version range — for details, see [npm install][]. The GitHub package is
+  named `docsy` and contains the theme files in a subfolder, so with this
+  install form use `theme: docsy/theme` in your site configuration.
 
 ## Preview your site
 
@@ -336,6 +336,7 @@ from scratch as it provides defaults for many required configuration parameters.
 [`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
 [lts release]: https://nodejs.org/en/about/releases/
+[npm install]: https://docs.npmjs.com/cli/v11/commands/npm-install#description
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
