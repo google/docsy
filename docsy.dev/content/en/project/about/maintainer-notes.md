@@ -84,12 +84,17 @@ Docsy provides and to cover important security fixes.
 
 This version is declared in three places that must agree:
 
-- [theme/theme.toml][] `min_version` (canonical source)
-- [theme/hugo.yaml][] `module.hugoVersion.min`
+- [theme/hugo.yaml][] `module.hugoVersion.min` (canonical source)
+- [theme/theme.toml][] `min_version`
 - [docsy.dev/config/_default/hugo.yaml][] `params.hugoMinVersion`, which feeds
   the requirement statements in user-facing docs (via
   `{{%/* param hugoMinVersion */%}}`) and, through the `&hugoMinVersion` anchor,
   docsy.dev's own `module.hugoVersion.min`.
+
+`theme.toml` is Hugo's legacy theme descriptor: its `min_version` is read only
+as a fallback when the module config sets none, and the file's sole remaining
+consumer is the [themes showcase][], which ingests it from the theme's git repo.
+Hence the npm package omits it ([theme/package.json][] `files`).
 
 Raising the minimum is a breaking change for theme users, only done to support
 new features or security fixes. To validate that a Docsy site actually builds
@@ -598,7 +603,9 @@ before any further changes are merged into the `main` branch:
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
+[theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
+[themes showcase]: https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
 [public]: /project/about/changelog/#public
 [tags]: <{{% param github_repo %}}/tags>
 <!-- prettier-ignore-end -->
