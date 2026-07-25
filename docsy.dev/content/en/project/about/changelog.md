@@ -97,8 +97,10 @@ releases of Docsy, its dependencies & tools, and operating systems.
 
 Specifically, the Docsy team **officially supports** the following:
 
-- The latest Docsy [release][releases]. The `main` branch is a development
-  branch and is considered unstable.
+- The latest **official release** of Docsy: a stable semver version `vX.Y.Z`,
+  whether consumed as a GitHub [release][releases] or git tag, or as the
+  [@docsy/theme][] npm package. Anything else is unsupported, whether the `main`
+  branch, an older release, or a pre- or dev release (npm dist-tag `next`).
 
 - The tool versions as specified for the Docsy release you are using:
   - **Hugo**:
@@ -112,11 +114,12 @@ Specifically, the Docsy team **officially supports** the following:
 
 Everything else — including Windows — is supported on a best-effort basis.
 
-[docsy.dev/package.json]:
-  https://github.com/google/docsy/blob/main/docsy.dev/package.json
-[minimum Hugo version]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
+<!-- prettier-ignore-start -->
+[@docsy/theme]: https://www.npmjs.com/package/@docsy/theme
+[docsy.dev/package.json]: https://github.com/google/docsy/blob/main/docsy.dev/package.json
+[minimum Hugo version]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/google/docsy/blob/main/package.json
+<!-- prettier-ignore-end -->
 
 ### Bug fixes
 
