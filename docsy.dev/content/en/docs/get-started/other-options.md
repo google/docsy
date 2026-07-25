@@ -26,8 +26,7 @@ of the theme in your repository), you can **clone the files directly into your
 site source**.
 
 Finally, you can **install
-[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)** — no extra
-toolchain needed if your project already uses npm.
+[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)**.
 
 This guide provides instructions for all of these options, along with common
 prerequisites.
@@ -296,11 +295,10 @@ install one of the following unsupported versions:
   npm install --save-dev google/docsy
   ```
 
-  This installs the repository's default branch (`main`); to select another
-  revision, append `#` and a branch, tag, or commit, or use `#semver:` followed
-  by a version range — for details, see [npm install][]. The GitHub package is
-  named `docsy` and contains the theme files in a subfolder, so with this
-  install form use `theme: docsy/theme` in your site configuration.
+  This installs the repository's default branch (`main`); for how to select
+  another revision, see [npm install][]. The GitHub package is named `docsy` and
+  contains the theme files in a subfolder, so with this install form use
+  `theme: docsy/theme` in your site configuration.
 
 ## Preview your site
 
