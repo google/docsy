@@ -93,8 +93,8 @@ This version is declared in three places that must agree:
 
 `theme.toml` is Hugo's legacy theme descriptor: its `min_version` is read only
 as a fallback when the module config sets none, and the file's sole remaining
-consumer is the [themes showcase][], which ingests it from the theme's git repo.
-Hence the npm package omits it ([theme/package.json][] `files`).
+external consumer is the [themes showcase][], which ingests it from the theme's
+git repo. Hence the npm package omits it ([theme/package.json][] `files`).
 
 Raising the minimum is a breaking change for theme users, only done to support
 new features or security fixes. To validate that a Docsy site actually builds

@@ -272,17 +272,17 @@ test(
 );
 
 // --- declared minimum Hugo version actually builds --------------------------
-// Pins Hugo to the theme's declared minimum (theme.toml min_version) and
+// Pins Hugo to the theme's declared minimum (module.hugoVersion.min) and
 // builds the Hugo-module-mode site — the most version-sensitive path: on
 // sub-minimum Hugos, `hugo mod npm pack` emits empty deps and the build
 // breaks, historically even silently (exit 0, unstyled site) — the failure
 // class that assertBuilt() exists to catch.
 test('minimum Hugo version builds the HUGO_MODULE site', () => {
   const min = readFileSync(
-    path.join(repoRoot, 'theme', 'theme.toml'),
+    path.join(repoRoot, 'theme', 'hugo.yaml'),
     'utf8',
-  ).match(/^min_version\s*=\s*"([^"]+)"/m)?.[1];
-  assert.ok(min, 'theme.toml declares min_version');
+  ).match(/^\s*hugoVersion:\s*\n(?:\s+extended:.*\n)?\s+min:\s*(\S+)/m)?.[1];
+  assert.ok(min, 'theme/hugo.yaml declares module.hugoVersion.min');
 
   // Scratch-install hugo-extended@min under TMP (cached across runs).
   const minHugo = path.join(TMP, `hugo-${min}`, 'node_modules', '.bin', 'hugo');
