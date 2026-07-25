@@ -69,6 +69,8 @@ https://docs.netlify.com/configure-builds/file-based-configuration/,200,17825633
 https://docs.npmjs.com/cli/v10/commands/npm-install#description,200,1782563368
 https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish,200,1782563368
 https://docs.npmjs.com/cli/v10/using-npm/scripts,200,1782563368
+https://docs.npmjs.com/cli/v11/commands/npm-dist-tag,200,1784978353
+https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/,200,1784978429
 https://docsy.dev/,200,1782563367
 https://domsignal.com/x-frame-options-test,200,1782498238
 https://ds-docs.y.org/,200,1782498244
@@ -693,6 +695,7 @@ https://graphviz.org/,200,1782498244
 https://groups.google.com/g/docsy-users,200,1782563367
 https://help.github.com/articles/about-pull-requests/,200,1782498227
 https://imagemagick.org/,200,1782498227
+https://img.shields.io/npm/v/%40docsy%2Ftheme,200,1784978353
 https://in-toto.io/,200,1782498230
 https://jvmperf.net/,200,1782498244
 https://katex.org/,200,1782498236

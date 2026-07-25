@@ -1,5 +1,7 @@
 # Docsy
 
+[![npm version][npm-badge]][npm-package]
+
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
@@ -63,8 +65,8 @@ To use the Docsy theme for your own site:
   customize this pre-configured basic site into your own Docsy themed site.
   [Learn more...](https://github.com/google/docsy-example)
 
-- Add Docsy to your existing Hugo site. You can add Docsy as a Hugo module, as a
-  Git submodule, or clone the Docsy theme into your project.
+- Add Docsy to your existing Hugo site. You can add Docsy as an NPM package, as
+  a Hugo module, as a Git submodule, or clone the Docsy theme into your project.
 
 See the [Get started guides](https://www.docsy.dev/docs/get-started/) for
 details about the various usage options.
@@ -108,6 +110,8 @@ This project is licensed under the Apache License 2.0, see
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
+[npm-badge]: https://img.shields.io/npm/v/%40docsy%2Ftheme
+[npm-package]: https://www.npmjs.com/package/@docsy/theme
 [official-support]:
   https://www.docsy.dev/project/about/changelog/#official-support
 [releases]: https://github.com/google/docsy/releases

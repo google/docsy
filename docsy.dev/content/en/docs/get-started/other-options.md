@@ -2,7 +2,7 @@
 title: Other setup options
 description: Create a new Docsy site with Docsy using Git or NPM
 date: 2021-12-08
-cSpell:ignore: hugo myproject pushd popd
+cSpell:ignore: hugo myproject
 weight: 2
 ---
 
@@ -26,7 +26,8 @@ of the theme in your repository), you can **clone the files directly into your
 site source**.
 
 Finally, you can **install
-[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)**.
+[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)** — the simplest
+option if your project already uses npm.
 
 This guide provides instructions for all of these options, along with common
 prerequisites.
@@ -44,9 +45,9 @@ which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
-For the tool versions that Docsy officially supports, see
-[Official support](/project/about/changelog/#official-support). For
-comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
+For the tool versions that Docsy officially supports, see [Official
+support][official-support]. For comprehensive Hugo documentation, see
+[gohugo.io](https://gohugo.io/).
 
 #### On Linux
 
@@ -232,21 +233,21 @@ For more information, see
 
 ## Option 3: Docsy as an NPM package
 
-You can use Docsy as an NPM module as follows:
+Docsy is published to the npm registry as [`@docsy/theme`][]. To create a new
+site that uses the Docsy NPM package:
 
-1.  Create your site and specify Docsy as the site theme:
+1.  Create your site:
 
     ```sh
     hugo new site --format yaml myproject
     cd myproject
-    echo "theme: docsy/theme\nthemesDir: node_modules" >> hugo.yaml
     ```
 
 2.  Install Docsy:
 
-    ```console
+    ```sh
     npm init -y
-    npm install --save-dev google/docsy#semver:{{% param version %}}
+    npm install --save-dev @docsy/theme
     ```
 
     > [!TIP] Hugo install tip
@@ -254,8 +255,16 @@ You can use Docsy as an NPM module as follows:
     > To also install Hugo as an NPM package, see
     > [Hugo-extended NPM package](#hugo-extended-npm).
 
-3.  Build or serve your new site using the usual Hugo commands, specifying the
-    path to the Docsy theme files. For example, build your site as follows:
+3.  Add Docsy as your site's theme by including the following in your project's
+    `hugo.yaml`:
+
+    ```yaml
+    theme: '@docsy/theme'
+    themesDir: node_modules
+    ```
+
+4.  Build or serve your new site using the usual Hugo commands. For example,
+    build your site as follows:
 
     ```console
     $ hugo
@@ -263,16 +272,35 @@ You can use Docsy as an NPM module as follows:
     ...
     ```
 
-As an alternative to specifying a `themesDir`, on some platforms, you can
-instead create a symbolic link to the Docsy theme directory as follows (Linux
-commands shown, executed from the site root folder):
+To update Docsy to the latest release, run:
 
 ```sh
-mkdir -p themes
-pushd themes
-ln -s ../node_modules/docsy
-popd
+npm install --save-dev @docsy/theme@latest
 ```
+
+### Development versions of Docsy
+
+Only [official Docsy releases][official-support] are supported. If you want to
+try an unreleased version of Docsy — for testing, or as a contributor — you can
+install one of the following unsupported versions:
+
+- A pre-release, when one is available, through the `next` [dist-tag][]:
+
+  ```sh
+  npm install --save-dev @docsy/theme@next
+  ```
+
+- Docsy directly from GitHub:
+
+  ```sh
+  npm install --save-dev google/docsy
+  ```
+
+  This installs the repository's default branch (`main`); to select another
+  revision, append `#` and a branch, tag, or commit, or use `#semver:` followed
+  by a version range. The GitHub package is named `docsy` and contains the theme
+  files in a subfolder, so with this install form use `theme: docsy/theme` in
+  your site configuration.
 
 ## Preview your site
 
@@ -305,9 +333,12 @@ from scratch as it provides defaults for many required configuration parameters.
 
 [Install PostCSS]:
   /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
+[`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
+[dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
 [lts release]: https://nodejs.org/en/about/releases/
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
+[official-support]: /project/about/changelog/#official-support
 [prepare]:
   https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
