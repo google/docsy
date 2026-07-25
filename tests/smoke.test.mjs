@@ -269,6 +269,8 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
 // breaks, historically even silently (exit 0, unstyled site) — the failure
 // class that assertBuilt() exists to catch.
 test('minimum Hugo version builds the HUGO_MODULE site', () => {
+  // Extraction regex duplicated from tests/hugo-versions.test.mjs (the
+  // min-version sync suite) so each suite runs standalone; sync changes there.
   const min = readFileSync(
     path.join(repoRoot, 'theme', 'hugo.yaml'),
     'utf8',
