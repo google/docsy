@@ -54,6 +54,12 @@ The repo root orchestrates two npm workspaces:
 
 Releases publish a nested module tag `theme/vX.Y.Z` alongside `vX.Y.Z`.
 
+Site builds resolve the theme through the checkout's parent directory
+(`--themesDir ../..` with `theme: docsy/theme`), so the checkout directory must
+be named `docsy`. From a checkout named differently — a git worktree, for
+example — set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where _`DIR_NAME`_ is the
+checkout's directory name.
+
 ## Release prep
 
 Release prep is driven by the `docsy-release-artifacts` skill, with a living
