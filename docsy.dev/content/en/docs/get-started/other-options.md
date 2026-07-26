@@ -279,9 +279,9 @@ npm install --save-dev @docsy/theme@latest
 
 ### Development versions of Docsy
 
-Only [official Docsy releases][official-support] are supported. If you want to
-try an unreleased version of Docsy — for testing, or as a contributor — you can
-install one of the following unsupported versions:
+Only [official Docsy releases][official-support] are supported. For development
+or testing, you can install Docsy in the following ways ([all
+unsupported][official-support]):
 
 - A pre-release, when one is available, through the `next` [dist-tag][]:
 

@@ -97,10 +97,13 @@ releases of Docsy, its dependencies & tools, and operating systems.
 
 Specifically, the Docsy team **officially supports** the following:
 
-- The latest **official release** of Docsy: a stable semver version `vX.Y.Z`,
-  whether consumed as a GitHub [release][releases] or git tag, or as the
-  [@docsy/theme][] npm package. Anything else is unsupported, whether the `main`
-  branch, an older release, or a pre- or dev release (npm dist-tag `next`).
+- The latest **official release** of Docsy:
+  - A stable semver version `vX.Y.Z`, whether consumed as a GitHub
+    [release][releases] or git tag (via Hugo modules or git), or as the
+    [@docsy/theme][] npm package.
+  - Anything else is unsupported, whether the `main` branch, an older release, a
+    pre- or dev release (npm dist-tag `next`), or an npm install of Docsy from
+    GitHub (`google/docsy`) including at a release tag.
 
 - The tool versions as specified for the Docsy release you are using:
   - **Hugo**:
