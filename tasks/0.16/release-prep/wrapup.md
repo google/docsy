@@ -318,7 +318,7 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
 [install-postcss]:
-  ../../../docsy.dev/content/en/docs/get-started/installation-prerequisites.md
+  ../../../docsy.dev/content/en/docs/get-started/docsy-as-module/installation-prerequisites.md
 [link-cache]: https://github.com/chalin/link-cache
 [official support policy]:
   ../../../docsy.dev/content/en/project/about/changelog.md
