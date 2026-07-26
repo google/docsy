@@ -97,8 +97,8 @@ releases of Docsy, its dependencies & tools, and operating systems.
 
 Specifically, the Docsy team **officially supports** the following:
 
-- The latest **official release** of Docsy: a stable semver version `_X_._Y_._Z_`
-  from the following sources:
+- The latest **official release** of Docsy: a stable semver version `X.Y.Z` from
+  the following sources:
   - [@docsy/theme][] npm package
   - Hugo module
   - GitHub [release][releases] or git tag
@@ -107,7 +107,7 @@ Specifically, the Docsy team **officially supports** the following:
   - The `main` branch
   - An older stable release
   - A pre- or dev release (npm dist-tag `next`)
-  - An npm install of Docsy from GitHub (`google/docsy`), including a stable
+  - An npm install of Docsy from GitHub (`google/docsy`), even for a stable
     release
 
   Issue reports against unofficial versions are welcome — they help us catch
