@@ -195,11 +195,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   language-API section notes Page-level `.Lang` is unaffected (a textual `.Lang`
   sweep hits such uses — the otel.io review did).
 - **PostCSS section made self-explanatory** (2026-07-26): added Actions (drop
-  the toolchain vs keep it for RTL/own-config) and the rationale — modern
-  browsers largely obviate vendor prefixing, the shipped CSS targets
-  Browserslist `defaults` (policy home: [Install PostCSS][install-postcss]), and
-  against those targets the pass was verified a byte-identical no-op, so nothing
-  is lost. Decision record: thoughtry
+  the toolchain vs keep it for RTL/own-config) and the rationale (Autoprefixer
+  verified a byte-identical no-op against the shipped CSS's browser targets).
+  Decision record: thoughtry
   `projects/docsy/tasks/repo-reorg/postcss-policy.decision.md`; public trail
   [#2668][].
 
@@ -317,8 +315,6 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2689]: https://github.com/google/docsy/issues/2689
 [9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
-[install-postcss]:
-  ../../../docsy.dev/content/en/docs/get-started/docsy-as-module/installation-prerequisites.md
 [link-cache]: https://github.com/chalin/link-cache
 [official support policy]:
   ../../../docsy.dev/content/en/project/about/changelog.md

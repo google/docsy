@@ -173,6 +173,13 @@ your project's root directory:
     (cd themes/docsy && npm run postinstall)
     ```
 
+    > [!NOTE]
+    >
+    > Run `npm run postinstall`, not `npm install`: `postinstall` installs only
+    > the theme's runtime dependencies (about 34 MB); a plain `npm install`
+    > inside `themes/docsy/` also pulls the repository's maintainer workspaces
+    > (roughly 1.5 GB).
+
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
     your project's `package.json` file:
