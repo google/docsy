@@ -225,7 +225,8 @@ npm run postinstall
 ```
 
 As with the [submodule option](#option-1-docsy-as-a-git-submodule), set
-`theme: docsy/theme` in your site configuration.
+`theme: docsy/theme` in your site configuration. The note above about
+`npm run postinstall` versus `npm install` applies here as well.
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
