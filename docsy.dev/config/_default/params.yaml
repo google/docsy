@@ -2,6 +2,10 @@
 #
 # Version related parameters
 #
+# `version` identifies the published site variant (badge, welcome line, version
+# menu) and is not always a git ref. Content that needs a resolvable release
+# ref -- install commands, for example -- uses `tdVersion.latest`.
+#
 # archived_version: false # TODO: generalize status
 # version:
 #   status: archived # Then fetch include

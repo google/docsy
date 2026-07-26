@@ -23,6 +23,9 @@ project CI/CD, release process, etc.
   short names when the context is clear.
 - This project has a long history; look for existing helpers (partials,
   shortcodes, SCSS mixins, and similar) before adding new ones.
+- In site content, `version` is the published variant's identity, not always a
+  git ref; anything needing a resolvable release ref (install commands, etc.)
+  uses `tdVersion.latest` (`docsy.dev/config/_default/params.yaml`).
 
 ## User guide
 
