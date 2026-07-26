@@ -2,7 +2,7 @@
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-06-15
-lastmod: 2026-07-17
+lastmod: 2026-07-26
 draft: true
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
@@ -85,6 +85,13 @@ Review custom template code for these replacements:
 | `.Site.LanguageCode`                      | `.Site.Language.Locale`  |
 | `(Page\|Site).Language.Weight`            | no direct replacement    |
 | `.Site.Languages` for cross-site language | `hugo.Sites` or `.Sites` |
+
+> [!NOTE]
+>
+> Page-level `.Lang` is unaffected: the deprecation applies to `.Language.Lang`,
+> not to the `Lang` method on `Page` objects. For example,
+> `where .Translations "Lang" "fr"` needs no change. A textual search for
+> `.Lang` will surface such uses; leave them as is.
 
 For current Docsy examples, see [Multi-language support][].
 

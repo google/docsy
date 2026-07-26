@@ -150,6 +150,12 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 **New**:
 
+- **Docsy on the npm registry**: the theme is now published as
+  [`@docsy/theme`][@docsy/theme] -- install it directly from npm, with Bootstrap
+  and Font Awesome delivered as ordinary dependencies. An npm install from
+  GitHub (`google/docsy`) is now [unsupported](#official-support). See [0.16.0
+  release report][0.16.0-blog-npm-registry] and [Docsy as an NPM
+  package][option-3-npm] ([#2683][]).
 - **Favicon discovery**: you can now drop a site's conventionally named favicon
   files into `static/` and the theme discovers and links them -- no favicons
   partial required. A new `gen-favicons` helper generates raster icons from a
@@ -210,10 +216,12 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2659]: https://github.com/google/docsy/issues/2659
 [#2668]: https://github.com/google/docsy/issues/2668
 [#2677]: https://github.com/google/docsy/pull/2677
+[#2683]: https://github.com/google/docsy/issues/2683
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
 [0.16.0-blog-hugo]: /blog/2026/0.16.0/#hugo
 [0.16.0-blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
+[0.16.0-blog-npm-registry]: /blog/2026/0.16.0/#npm-registry
 [0.16.0-blog-postcss]: /blog/2026/0.16.0/#postcss
 [0.16.0-blog-theme-folder]: /blog/2026/0.16.0/#theme-folder
 [0.16.0]: https://github.com/google/docsy/releases/tag/v0.16.0
@@ -223,6 +231,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [Hugo 0.158+ upgrade guide]: /blog/2026/hugo-0.158.0+/
 [hugo-0.160.1]: https://github.com/gohugoio/hugo/releases/tag/v0.160.1
 [hugo-0.164.0]: https://github.com/gohugoio/hugo/releases/tag/v0.164.0
+[option-3-npm]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 <!-- prettier-ignore-end -->
 
 ## v0.15.0 {#v0.15.0}

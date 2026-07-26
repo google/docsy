@@ -1,9 +1,9 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-07-18
+lastmod: 2026-07-26
 range: v0.15.0..main
-last-main-commit: 494f3da6
+last-main-commit: 9b1d9951
 cSpell:ignore: favicons retokenization thoughtry
 ---
 
@@ -11,17 +11,17 @@ Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
 milestone hygiene, and the tag-time checklist. The objective per-change matrix
 lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
-> Prepared for commits in [v0.15.0...main][] through [494f3da6][].
+> Prepared for commits in [v0.15.0...main][] through [9b1d9951][].
 
 ## Themes (with evidence and client impact)
 
 - **Theme folder move (monorepo)** — [#2641][], [#2645][]; tracker [#2617][]
-  (open). The canonical theme now lives in `theme/`, with `theme/package.json`
-  owning Bootstrap and Font Awesome and the repo root orchestrating the
-  `docsy.dev` and `theme` npm workspaces. **Breaking**: every install mode needs
-  a one-line path update (Hugo module `…/docsy/theme`; npm/clone
-  `theme: docsy/theme`), and the release must publish the nested `theme/vX.Y.Z`
-  module tag.
+  (closed 2026-07-26). The canonical theme now lives in `theme/`, with
+  `theme/package.json` owning Bootstrap and Font Awesome and the repo root
+  orchestrating the `docsy.dev` and `theme` npm workspaces. **Breaking**: every
+  install mode needs a one-line path update (Hugo module `…/docsy/theme`;
+  npm/clone `theme: docsy/theme`), and the release must publish the nested
+  `theme/vX.Y.Z` module tag.
 - **Hugo 0.158+ support** — [#2647][], [#2648][], [#2649][], [#2658][],
   [#2664][], [#2679][]; trackers [#2581][], [#2593][] (closed); goldens
   [#726][]. Theme minimum raised to 0.160.1 (language APIs 0.158.0; npm-dep
@@ -50,15 +50,26 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   clone/submodule installs unaffected (`postinstall`). The same arc made
   **PostCSS opt-in** for non-RTL sites. [#2672][] + [#2675][] reconcile the
   get-started, updating, deployment, and RTL docs.
+- **Docsy on the npm registry** — [#2684][], [#2688][]; tracker [#2683][] (open;
+  completes at tag time). The `theme/` workspace is publishable as
+  `@docsy/theme`: registry installs get the theme with Bootstrap and Font
+  Awesome as ordinary npm dependencies (no `postinstall` hack), and the install
+  docs lead Option 3 with the registry. **New** install channel, announced in
+  the release post's npm-registry section. The official-support policy was
+  recast in two-axis form (production use vs issue reports), under which an npm
+  install from GitHub (`google/docsy`) is unsupported even for a stable release.
+  `0.16.0-rc.1` rehearsed the publish under dist-tag `next`; the stable publish
+  and `next` re-point are tag-time steps (mechanics: `docsy-npm-publish` skill).
 - **Shared chrome build mode (experimental)** — [#2660][], [#2662][]; tooling
-  [#2661][]; tracker [#2659][] (open). New opt-in `td.chrome = shared` build
-  mode: Docsy emits the repeated chrome (navbar, footer, left-nav) on one donor
-  page per language and restores it in the browser via the shipped
-  `chrome-nav.js`, so one build serves both readers and link checkers. A
-  contributor/CI-experience win; the default `full` mode and production output
-  are unchanged. The large-site cached-sidebar optimization is preserved and
-  generalized — its activation moved into `chrome-nav.js`, which now ships on
-  every page. User guide: [Chrome build modes][chrome].
+  [#2661][]; tracker [#2659][] (closed 2026-07-26; open follow-ups spun into
+  [#2689][], 26Q3). New opt-in `td.chrome = shared` build mode: Docsy emits the
+  repeated chrome (navbar, footer, left-nav) on one donor page per language and
+  restores it in the browser via the shipped `chrome-nav.js`, so one build
+  serves both readers and link checkers. A contributor/CI-experience win; the
+  default `full` mode and production output are unchanged. The large-site
+  cached-sidebar optimization is preserved and generalized — its activation
+  moved into `chrome-nav.js`, which now ships on every page. User guide: [Chrome
+  build modes][chrome].
 - **Packaging, docs, and tooling cleanup** — npm workspaces, maintainer-notes
   and examples-page refreshes, a Netlify-badge URL fix, a version-doc `vv` fix,
   and test guards (Hugo deprecation probe, fixture-site tests), plus
@@ -87,13 +98,17 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 ## Release content status
 
 - [release report][] (`blog/2026/0.16.0.md`): complete draft (`draft: true`).
-  Covers the four breaking changes plus the experimental shared chrome build
-  mode, each with Actions, an upgrade section, and sanity checks. Highlights
-  refreshed in the 2026-07-16 pass (value-first phrasing; npm-dep item added).
+  Covers the four breaking changes, the npm-registry announcement, and the
+  experimental shared chrome build mode, each with Actions, an upgrade section,
+  and sanity checks. 2026-07-26 refresh: npm-registry section added; otel.io
+  guide feedback applied (postinstall caution, favicons command qualified);
+  PostCSS section gained Actions and its rationale.
 - [Hugo upgrade guide][] (`blog/2026/hugo-0.158.0+.md`): complete draft
   (`draft: true`). Carries per-version Hugo mechanics for 0.158.0–0.164.0 (DRY).
+  2026-07-26: Page-level `.Lang` unaffected note added to the language-API
+  table.
 - Changelog `v0.16.0 - UNRELEASED` section: complete; reconciled with the
-  ledger.
+  ledger. 2026-07-26: npm-registry **New** entry added.
 
 ## Decisions
 
@@ -158,35 +173,52 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   **officially supported** version (the docsy.dev pin). Policy home is the
   changelog §Official support; the release post's Hugo section and the install
   prerequisites link to it rather than restating (one home per fact).
-- Defer remaining monorepo ([#2617][]) and favicon ([#2357][]) work to post-0.16
-  trackers; neither blocks the tag.
+- Defer remaining favicon work ([#2357][], 26Q3); it doesn't block the tag. (The
+  monorepo tracker [#2617][], originally deferred alongside it, instead closed
+  as delivered at the 2026-07-26 gate — its npm-publish capstone [#2683][] ships
+  with this release.)
+- **Routed the npm-registry announcement** (2026-07-26, npm-publish plan step
+  4): a NEW release-post section completing the packaging cluster (theme folder
+  → npm deps → registry), with a switch Action for GitHub-npm installs; the
+  support-status delta links the [official support policy][] rather than
+  restating it, and the policy rewrite itself shipped with [#2688][] (routed
+  then). The changelog carries one **New** entry citing [#2683][]. Highlights
+  card: the registry claim joins the merged **Packaging modernization** entry —
+  the three-item cap holds.
+- **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
+  over opentelemetry.io, [otel#10906][]): clone/submodule Actions warn that a
+  plain `npm install` inside `themes/docsy/` pulls the maintainer workspaces
+  (~1.5 GB) where `npm run postinstall` installs only theme runtime deps (~34
+  MB); the favicons helper command is qualified as npm-package-install specific,
+  deferring per-mode commands to [Add your favicons][]; the Hugo guide's
+  language-API section notes Page-level `.Lang` is unaffected (a textual `.Lang`
+  sweep hits such uses — the otel.io review did).
+- **PostCSS section made self-explanatory** (2026-07-26): added Actions (drop
+  the toolchain vs keep it for RTL/own-config) and the rationale — modern
+  browsers largely obviate vendor prefixing, the shipped CSS targets
+  Browserslist `defaults` (policy home: [Install PostCSS][install-postcss]), and
+  against those targets the pass was verified a byte-identical no-op, so nothing
+  is lost. Decision record: thoughtry
+  `projects/docsy/tasks/repo-reorg/postcss-policy.decision.md`; public trail
+  [#2668][].
 
 ## Milestone 24 hygiene
 
-Hygiene review of [milestone #24][milestone] ahead of tagging (issues only). As
-of this pass (2026-07-16): **7 open**, **7 closed**.
+The 0.16.0 gate closed at the **2026-07-26 milestone-gate triage**
+(`docsy-milestone-triage` pass; record: thoughtry
+`projects/docsy/tasks/v0.16.0/`). [Milestone #24][milestone] now holds **2
+open**, 9 closed. Open by design:
 
-Closed (shipped in 0.16): [#2595][] (favicons), [#2593][] (Hugo deprecations),
-[#2581][] (Hugo upgrade), [#2598][] (Netlify badge), [#2431][] (predecessor of
-[#2581][]), [#2668][] (npm-dep modernization). Closed as not planned: [#2657][]
-(page-meta URL marker; Lychee's URL-pattern excludes cover those links without a
-marker).
+- [#2615][]: release tracker — closes when 0.16.0 ships.
+- [#2683][]: npm publish — the stable publish is a tag-time step.
 
-Open — disposition before/at release:
+Everything else is closed as shipped ([#2617][] monorepo and [#2659][] chrome
+closed 2026-07-26 with the chrome follow-ups spun into [#2689][]) or moved:
+[#2554][], [#2403][], [#1987][] → 0.17.0 (due 2026-08-31); [#2614][] → 0.18.0
+(due 2026-09-30) — both milestones created at the triage.
 
-| Issue                                                 | Type        | In 0.16?      | Action                                  |
-| ----------------------------------------------------- | ----------- | ------------- | --------------------------------------- |
-| [#2615][]: Release 0.16.0 preparation                 | tracker     | n/a           | Keep; close when 0.16.0 is tagged.      |
-| [#2617][]: Finalize monorepo setup — 26Q2             | tracker     | partial (TOF) | Keep open; remaining cleanup post-0.16. |
-| [#2659][]: Experimental `shared` chrome build mode    | tracker     | yes (exp.)    | Keep open; feature continues post-0.16. |
-| [#2614][]: AI-agent doc consumption                   | tracker     | no (phase 2+) | Move off the 0.16 milestone.            |
-| [#2554][]: Use 'note' role instead of 'alert'         | enhancement | no            | Reassign to a later milestone.          |
-| [#2403][]: View-page URL should use `blob` not `tree` | bug         | no            | Reassign to a later milestone.          |
-| [#1987][]: i18n for dark-mode menu button             | enhancement | no            | Reassign to a later milestone.          |
-
-Before tagging, every milestone-24 issue except the release tracker [#2615][]
-should be **closed** (shipped) or **moved** to a later milestone. Confirm the
-milestone's closed list matches the [coverage ledger](coverage.md).
+Before tagging, confirm the milestone's closed list matches the
+[coverage ledger](coverage.md).
 
 ## Tag-time checklist
 
@@ -206,16 +238,24 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
       (required by the theme folder move; **not yet in the maintainer notes
       procedure** — new this release).
+- [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
+      and re-point dist-tag `next` at it, **before** the site deploy flips the
+      posts live (the post's install commands must resolve). Verify with
+      `npm run test:smoke`. Also new this release; mechanics:
+      `docsy-npm-publish` skill, tracker [#2683][] (close it here).
 - [ ] Milestone hygiene: close or move all milestone-24 issues except [#2615][].
+      Trued up at the 2026-07-26 gate — only [#2683][] also remains, closing
+      with the npm publish above; see Milestone 24 hygiene.
 - [ ] Post-release: refresh `docsy-example` and the examples page for 0.16.0.
       (Its Hugo floor is handled early by [docsy-example#478][], since the site
       tracks Docsy main, where npm-dep installs already require 0.160.1.)
 
 ## Post-release / deferred
 
-- Remaining monorepo cleanup: [#2617][].
+- Shared-chrome follow-ups (navbar pagelinks, non-docs sections, CCR-10):
+  [#2689][] (26Q3).
 - Favicon light/dark and further polish: [#2357][] (26Q3).
-- AI-agent doc consumption phase 2+: [#2614][].
+- AI-agent doc consumption phase 2+: [#2614][] (0.18.0).
 
 ## References
 
@@ -236,14 +276,12 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#1987]: https://github.com/google/docsy/issues/1987
 [#2357]: https://github.com/google/docsy/issues/2357
 [#2403]: https://github.com/google/docsy/issues/2403
-[#2431]: https://github.com/google/docsy/issues/2431
 [#2554]: https://github.com/google/docsy/issues/2554
 [#2578]: https://github.com/google/docsy/pull/2578
 [#2581]: https://github.com/google/docsy/issues/2581
 [#2593]: https://github.com/google/docsy/issues/2593
 [#2594]: https://github.com/google/docsy/pull/2594
 [#2595]: https://github.com/google/docsy/issues/2595
-[#2598]: https://github.com/google/docsy/issues/2598
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2615]: https://github.com/google/docsy/issues/2615
 [#2617]: https://github.com/google/docsy/issues/2617
@@ -256,7 +294,6 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2653]: https://github.com/google/docsy/pull/2653
 [#2654]: https://github.com/google/docsy/pull/2654
 [#2656]: https://github.com/google/docsy/pull/2656
-[#2657]: https://github.com/google/docsy/issues/2657
 [#2658]: https://github.com/google/docsy/pull/2658
 [#2659]: https://github.com/google/docsy/issues/2659
 [#2660]: https://github.com/google/docsy/pull/2660
@@ -273,7 +310,16 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2678]: https://github.com/google/docsy/pull/2678
 [#2679]: https://github.com/google/docsy/pull/2679
 [#2680]: https://github.com/google/docsy/pull/2680
-[494f3da6]: https://github.com/google/docsy/commit/494f3da6
+[#2683]: https://github.com/google/docsy/issues/2683
+[#2684]: https://github.com/google/docsy/pull/2684
+[#2688]: https://github.com/google/docsy/pull/2688
+[#2689]: https://github.com/google/docsy/issues/2689
+[9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
+[install-postcss]:
+  ../../../docsy.dev/content/en/docs/get-started/installation-prerequisites.md
 [link-cache]: https://github.com/chalin/link-cache
+[official support policy]:
+  ../../../docsy.dev/content/en/project/about/changelog.md
+[otel#10906]: https://github.com/open-telemetry/opentelemetry.io/pull/10906
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main
