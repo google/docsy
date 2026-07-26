@@ -295,10 +295,16 @@ install one of the following unsupported versions:
   npm install --save-dev google/docsy
   ```
 
-  This installs the repository's default branch (`main`); for how to select
-  another revision, see [npm install][]. The GitHub package is named `docsy` and
-  contains the theme files in a subfolder, so with this install form use
-  `theme: docsy/theme` in your site configuration.
+  This installs the repository's default branch (`main`). To pin a tagged
+  version:
+
+  ```sh
+  npm install --save-dev google/docsy#semver:{{% param version %}}
+  ```
+
+  For other revision selectors, see [npm install][]. The GitHub package is named
+  `docsy` and contains the theme files in a subfolder, so with this install form
+  use `theme: docsy/theme` in your site configuration.
 
 ## Preview your site
 
