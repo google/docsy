@@ -22,15 +22,16 @@ function extract(relPath, re, what) {
   return m[1];
 }
 
+// First entry is the canonical min-version home; assertInSync anchors on it.
 const declarations = {
-  'theme/theme.toml': () =>
-    extract('theme/theme.toml', /^min_version\s*=\s*"([^"]+)"/m, 'min_version'),
   'theme/hugo.yaml': () =>
     extract(
       'theme/hugo.yaml',
       /^\s*hugoVersion:\s*\n(?:\s+extended:.*\n)?\s+min:\s*(\S+)/m,
       'module.hugoVersion.min',
     ),
+  'theme/theme.toml': () =>
+    extract('theme/theme.toml', /^min_version\s*=\s*"([^"]+)"/m, 'min_version'),
   'docsy.dev/config/_default/hugo.yaml': () =>
     extract(
       'docsy.dev/config/_default/hugo.yaml',
@@ -77,7 +78,7 @@ test('docsy.dev module Hugo minimum aliases the params anchor', () => {
 });
 
 test('Hugo minimum is at most the officially supported version', () => {
-  const minimum = declarations['theme/theme.toml']();
+  const minimum = declarations['theme/hugo.yaml']();
   const supported = pin();
   assert.match(supported, SEMVER, 'hugo-extended pin is X.Y.Z semver');
   const toParts = (v) => v.split('.').map(Number);
@@ -106,7 +107,7 @@ const pageParamOf = (frontMatter, param) => {
 
 // The version params that posts freeze, mapped to their live values.
 const liveVersions = {
-  hugoMinVersion: declarations['theme/theme.toml'],
+  hugoMinVersion: declarations['theme/hugo.yaml'],
   hugoSupportedVersion: pin,
 };
 

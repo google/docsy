@@ -253,36 +253,29 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   buildThemeConsumerSite('smoke-tarball', path.join(packDest, tgz));
 });
 
-// DOCSY_THEME_PKG selects the registry spec — e.g. @docsy/theme@next to vet
-// an RC, or @docsy/theme@0.16.0. Without it the test targets the bare name,
-// which resolves to the `latest` dist-tag; it stays skipped until a stable
-// version is live there.
-const REGISTRY_PKG = process.env.DOCSY_THEME_PKG;
-test(
-  'registry install of @docsy/theme',
-  {
-    skip: REGISTRY_PKG
-      ? false
-      : '@docsy/theme has no version under `latest` yet; ' +
-        'set DOCSY_THEME_PKG (e.g. @docsy/theme@next) to target another spec',
-  },
-  () => {
-    buildThemeConsumerSite('smoke-registry', REGISTRY_PKG ?? '@docsy/theme');
-  },
-);
+// DOCSY_THEME_PKG overrides the registry spec — e.g. @docsy/theme@next to vet
+// an RC, or @docsy/theme@0.16.0 to pin a version. The default, the bare name,
+// resolves to the `latest` dist-tag: whatever the registry currently serves
+// plain `npm install @docsy/theme` users.
+const REGISTRY_PKG = process.env.DOCSY_THEME_PKG ?? '@docsy/theme';
+test(`registry install of ${REGISTRY_PKG}`, () => {
+  buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
+});
 
 // --- declared minimum Hugo version actually builds --------------------------
-// Pins Hugo to the theme's declared minimum (theme.toml min_version) and
+// Pins Hugo to the theme's declared minimum (module.hugoVersion.min) and
 // builds the Hugo-module-mode site — the most version-sensitive path: on
 // sub-minimum Hugos, `hugo mod npm pack` emits empty deps and the build
 // breaks, historically even silently (exit 0, unstyled site) — the failure
 // class that assertBuilt() exists to catch.
 test('minimum Hugo version builds the HUGO_MODULE site', () => {
+  // Extraction regex duplicated from tests/hugo-versions.test.mjs (the
+  // min-version sync suite) so each suite runs standalone; sync changes there.
   const min = readFileSync(
-    path.join(repoRoot, 'theme', 'theme.toml'),
+    path.join(repoRoot, 'theme', 'hugo.yaml'),
     'utf8',
-  ).match(/^min_version\s*=\s*"([^"]+)"/m)?.[1];
-  assert.ok(min, 'theme.toml declares min_version');
+  ).match(/^\s*hugoVersion:\s*\n(?:\s+extended:.*\n)?\s+min:\s*(\S+)/m)?.[1];
+  assert.ok(min, 'theme/hugo.yaml declares module.hugoVersion.min');
 
   // Scratch-install hugo-extended@min under TMP (cached across runs).
   const minHugo = path.join(TMP, `hugo-${min}`, 'node_modules', '.bin', 'hugo');

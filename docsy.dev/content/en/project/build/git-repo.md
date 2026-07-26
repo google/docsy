@@ -26,14 +26,26 @@ This repository's branch model is as follows:
 
 - `main`: development branch for the next theme release and next site content.
 - `release`: release and maintenance branch for the current stable theme version
-- Publishing branches used by Netlify:
-  - `deploy/prod`: production site for the current stable release docs.
-  - `doc-rooted`: production branch for the doc-rooted site variant.
-  - These branches determine what is published. They are not feature development
-    branches.
+- `deploy/prod` and `doc-rooted`: publishing branches used by Netlify. These
+  branches determine what is published (see the table below); they are not
+  feature development branches.
 
 The Goldydocs repo has the same model, except for `doc-rooted` which is not
 used.
+
+### Published sites
+
+Netlify publishes the following site variants. A variant's version identity
+(`version` and related params) comes from its config directory under
+`docsy.dev/config/`:
+
+| Site variant                         | Publishing branch | Version params |
+| ------------------------------------ | ----------------- | -------------- |
+| [Latest release][prod-site]          | `deploy/prod`     | `production/`  |
+| [Next (dev)][next-site]              | `main`            | `_default/`    |
+| [Doc-rooted (experimental)][dr-site] | `doc-rooted`      | `doc-rooted/`  |
+
+PR deploy previews build like the Next variant.
 
 ### Tags
 
@@ -101,4 +113,7 @@ Assuming the former, the patch-release workflow is as follows:
 
 [Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>
+[dr-site]: https://doc-rooted--docsydocs.netlify.app
 [main Docsy repository]: <{{% param github_repo %}}>
+[next-site]: https://main--docsydocs.netlify.app
+[prod-site]: https://www.docsy.dev

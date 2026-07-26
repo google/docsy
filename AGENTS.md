@@ -23,6 +23,9 @@ project CI/CD, release process, etc.
   short names when the context is clear.
 - This project has a long history; look for existing helpers (partials,
   shortcodes, SCSS mixins, and similar) before adding new ones.
+- In site content, `version` is the published variant's identity, not always a
+  git ref; anything needing a resolvable release ref (install commands, etc.)
+  uses `tdVersion.latest` (`docsy.dev/config/_default/params.yaml`).
 
 ## User guide
 
@@ -53,6 +56,12 @@ The repo root orchestrates two npm workspaces:
 - `docsy.dev/` — the project website (this content tree).
 
 Releases publish a nested module tag `theme/vX.Y.Z` alongside `vX.Y.Z`.
+
+Site builds resolve the theme through the checkout's parent directory
+(`--themesDir ../..` with `theme: docsy/theme`), so the checkout directory must
+be named `docsy`. From a checkout named differently — a git worktree, for
+example — set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where _`DIR_NAME`_ is the
+checkout's directory name.
 
 ## Release prep
 

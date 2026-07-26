@@ -2,7 +2,7 @@
 title: Other setup options
 description: Create a new Docsy site with Docsy using Git or NPM
 date: 2021-12-08
-cSpell:ignore: hugo myproject pushd popd
+cSpell:ignore: hugo myproject
 weight: 2
 ---
 
@@ -44,9 +44,9 @@ which supports
 [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
 may need to scroll down the list of releases to see it.
 
-For the tool versions that Docsy officially supports, see
-[Official support](/project/about/changelog/#official-support). For
-comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io/).
+For the tool versions that Docsy officially supports, see [Official
+support][official-support]. For comprehensive Hugo documentation, see
+[gohugo.io](https://gohugo.io/).
 
 #### On Linux
 
@@ -145,7 +145,7 @@ your project's root directory:
     ```sh
     git submodule add https://github.com/google/docsy.git themes/docsy
     cd themes/docsy
-    git checkout {{% param version %}}
+    git checkout {{% param tdVersion.latest %}}
     ```
 
     To work from the development version of Docsy (_not recommended_), run the
@@ -207,12 +207,12 @@ maintain your own copy of the theme directly, or your deployment choice requires
 you to include a copy of the theme in your repository), you can clone the theme
 into your project's `themes` subdirectory.
 
-To clone Docsy at {{% param version %}} into your project's `themes` folder, run
-the following commands from your project's root directory:
+To clone Docsy at {{% param tdVersion.latest %}} into your project's `themes`
+folder, run the following commands from your project's root directory:
 
 ```sh
 cd themes
-git clone -b {{% param version %}} https://github.com/google/docsy
+git clone -b {{% param tdVersion.latest %}} https://github.com/google/docsy
 cd docsy
 npm run postinstall
 ```
@@ -222,7 +222,7 @@ As with the [submodule option](#option-1-docsy-as-a-git-submodule), set
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
-`-b {{% param version %}}` argument from the clone command above.
+`-b {{% param tdVersion.latest %}}` argument from the clone command above.
 
 Then consider setting up an NPM [prepare][] script, as documented in Option 1.
 
@@ -232,21 +232,21 @@ For more information, see
 
 ## Option 3: Docsy as an NPM package
 
-You can use Docsy as an NPM module as follows:
+Docsy is published to the npm registry as [`@docsy/theme`][]. To create a new
+site that uses the Docsy NPM package:
 
-1.  Create your site and specify Docsy as the site theme:
+1.  Create your site:
 
     ```sh
     hugo new site --format yaml myproject
     cd myproject
-    echo "theme: docsy/theme\nthemesDir: node_modules" >> hugo.yaml
     ```
 
 2.  Install Docsy:
 
-    ```console
+    ```sh
     npm init -y
-    npm install --save-dev google/docsy#semver:{{% param version %}}
+    npm install --save-dev @docsy/theme
     ```
 
     > [!TIP] Hugo install tip
@@ -254,8 +254,16 @@ You can use Docsy as an NPM module as follows:
     > To also install Hugo as an NPM package, see
     > [Hugo-extended NPM package](#hugo-extended-npm).
 
-3.  Build or serve your new site using the usual Hugo commands, specifying the
-    path to the Docsy theme files. For example, build your site as follows:
+3.  Add Docsy as your site's theme by including the following in your project's
+    `hugo.yaml`:
+
+    ```yaml
+    theme: '@docsy/theme'
+    themesDir: node_modules
+    ```
+
+4.  Build or serve your new site using the usual Hugo commands. For example,
+    build your site as follows:
 
     ```console
     $ hugo
@@ -263,16 +271,39 @@ You can use Docsy as an NPM module as follows:
     ...
     ```
 
-As an alternative to specifying a `themesDir`, on some platforms, you can
-instead create a symbolic link to the Docsy theme directory as follows (Linux
-commands shown, executed from the site root folder):
+To update Docsy to the latest release, run:
 
 ```sh
-mkdir -p themes
-pushd themes
-ln -s ../node_modules/docsy
-popd
+npm install --save-dev @docsy/theme@latest
 ```
+
+### Development versions of Docsy
+
+Use only [official Docsy releases][official-support] in production. For Docsy
+development or testing, you can also install:
+
+- A pre-release, when one is available, through the `next` [dist-tag][]:
+
+  ```sh
+  npm install --save-dev @docsy/theme@next
+  ```
+
+- Docsy directly from GitHub:
+
+  ```sh
+  npm install --save-dev google/docsy
+  ```
+
+  This installs the repository's default branch (`main`). To pin a tagged
+  version:
+
+  ```sh
+  npm install --save-dev google/docsy#semver:{{% param tdVersion.latest %}}
+  ```
+
+  For other revision selectors, see [npm install][]. The GitHub package is named
+  `docsy` and contains the theme files in a subfolder, so with this install form
+  use `theme: docsy/theme` in your site configuration.
 
 ## Preview your site
 
@@ -305,9 +336,13 @@ from scratch as it provides defaults for many required configuration parameters.
 
 [Install PostCSS]:
   /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
+[`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
+[dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
 [lts release]: https://nodejs.org/en/about/releases/
+[npm install]: https://docs.npmjs.com/cli/v11/commands/npm-install#description
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
+[official-support]: /project/about/changelog/#official-support
 [prepare]:
   https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish

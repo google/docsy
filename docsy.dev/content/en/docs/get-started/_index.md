@@ -27,6 +27,11 @@ appropriate setup guide to get started.
 Hugo offers multiple options for using themes, all of which are supported by
 Docsy.
 
+- **Adding the theme as an NPM package**: Docsy is published to the npm registry
+  as [`@docsy/theme`](https://www.npmjs.com/package/@docsy/theme). If your
+  project already uses npm, this option adds no extra toolchain — you install
+  and update the theme like any other npm dependency. For instructions, see
+  [Docsy as an NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
 - **Adding the theme as a Hugo Module**:
   [Hugo Modules](https://gohugo.io/hugo-modules/) are the simplest and latest
   way to use Hugo themes. Hugo uses the modules mechanism to pull in the theme

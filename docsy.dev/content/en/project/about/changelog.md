@@ -97,8 +97,17 @@ releases of Docsy, its dependencies & tools, and operating systems.
 
 Specifically, the Docsy team **officially supports** the following:
 
-- The latest Docsy [release][releases]. The `main` branch is a development
-  branch and is considered unstable.
+- **Production use**: the latest **official release** of Docsy — a stable semver
+  version from the following sources:
+  - [@docsy/theme][] npm package (`X.Y.Z`)
+  - Hugo module (`vX.Y.Z`)
+  - GitHub [release][releases] or git tag (`vX.Y.Z`)
+
+  An npm install of Docsy from GitHub (`google/docsy`) is unsupported, even for
+  a stable release.
+
+- **Issue reports**: over the latest official release, a current pre-release, or
+  the `main` branch.
 
 - The tool versions as specified for the Docsy release you are using:
   - **Hugo**:
@@ -112,11 +121,12 @@ Specifically, the Docsy team **officially supports** the following:
 
 Everything else — including Windows — is supported on a best-effort basis.
 
-[docsy.dev/package.json]:
-  https://github.com/google/docsy/blob/main/docsy.dev/package.json
-[minimum Hugo version]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
+<!-- prettier-ignore-start -->
+[@docsy/theme]: https://www.npmjs.com/package/@docsy/theme
+[docsy.dev/package.json]: https://github.com/google/docsy/blob/main/docsy.dev/package.json
+[minimum Hugo version]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/google/docsy/blob/main/package.json
+<!-- prettier-ignore-end -->
 
 ### Bug fixes
 

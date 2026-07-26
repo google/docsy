@@ -69,6 +69,9 @@ https://docs.netlify.com/configure-builds/file-based-configuration/,200,17825633
 https://docs.npmjs.com/cli/v10/commands/npm-install#description,200,1782563368
 https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish,200,1782563368
 https://docs.npmjs.com/cli/v10/using-npm/scripts,200,1782563368
+https://docs.npmjs.com/cli/v11/commands/npm-dist-tag,200,1784978353
+https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/,200,1784978429
+https://docs.npmjs.com/cli/v11/commands/npm-install#description,200,1784982268
 https://docsy.dev/,200,1782563367
 https://domsignal.com/x-frame-options-test,200,1782498238
 https://ds-docs.y.org/,200,1782498244
@@ -166,6 +169,7 @@ https://github.com/gohugoio/hugo/releases/tag/v0.160.1,200,1784287569
 https://github.com/gohugoio/hugo/releases/tag/v0.163.2,200,1782498231
 https://github.com/gohugoio/hugo/releases/tag/v0.163.3,200,1782563370
 https://github.com/gohugoio/hugo/releases/tag/v0.164.0,200,1784242277
+https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration,200,1785057657
 https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md,200,1782563368
 https://github.com/google/docsy,200,1782563367
 https://github.com/google/docsy-example,200,1782563368
@@ -237,6 +241,7 @@ https://github.com/google/docsy/blob/main/theme/layouts/community/list.html?plai
 https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html,200,1782498242
 https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html?plain=1,200,1782498233
 https://github.com/google/docsy/blob/main/theme/layouts/swagger/baseof.html?plain=1,200,1782498233
+https://github.com/google/docsy/blob/main/theme/package.json,200,1785057657
 https://github.com/google/docsy/blob/main/theme/theme.toml,200,1782498229
 https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html,200,1782498231
 https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss,200,1782498241
@@ -693,6 +698,7 @@ https://graphviz.org/,200,1782498244
 https://groups.google.com/g/docsy-users,200,1782563367
 https://help.github.com/articles/about-pull-requests/,200,1782498227
 https://imagemagick.org/,200,1782498227
+https://img.shields.io/npm/v/%40docsy%2Ftheme,200,1784978353
 https://in-toto.io/,200,1782498230
 https://jvmperf.net/,200,1782498244
 https://katex.org/,200,1782498236
