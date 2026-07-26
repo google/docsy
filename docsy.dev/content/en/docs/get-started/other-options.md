@@ -279,8 +279,8 @@ npm install --save-dev @docsy/theme@latest
 
 ### Development versions of Docsy
 
-Use only [official Docsy releases][official-support] for production sites. For
-Docsy development or testing, you can also install:
+Use only [official Docsy releases][official-support] in production. For Docsy
+development or testing, you can also install:
 
 - A pre-release, when one is available, through the `next` [dist-tag][]:
 
