@@ -119,12 +119,12 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   [#2357][] in What's next); the changelog cites key issues, keeping PR links
   only for contributor credit ([#2594][], [#2578][]). The ledger remains the
   internal full-coverage record.
-- The highlights card is capped at **three items** (2026-07-16): a merged
-  **Packaging modernization** entry (theme folder move + npm-sourced deps, title
-  linking `#theme-folder` with an inline link to `#npm-deps`), favicons, and
-  shared chrome. The minimum-Hugo bump is deliberately not in the card: it is
-  routine (0.15 did the same), has its own section plus the companion Hugo
-  guide, and Ready-to-Upgrade lists every breaking change anyway.
+- The highlights card is capped at **three items** (2026-07-16): a packaging
+  entry (**First-class npm support** since the 2026-07-26 rework -- see the
+  routing decision below), favicons, and shared chrome. The minimum-Hugo bump is
+  deliberately not in the card: it is routine (0.15 did the same), has its own
+  section plus the companion Hugo guide, and Ready-to-Upgrade lists every
+  breaking change anyway.
 - The four breaking changes for 0.16 are the theme folder move, the minimum-Hugo
   bump, default-favicon removal, and npm-sourced Bootstrap/Font Awesome
   ([#2670][], added in the 2026-07-16 refresh). The headline **new** feature is
@@ -183,8 +183,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   support-status delta links the [official support policy][] rather than
   restating it, and the policy rewrite itself shipped with [#2688][] (routed
   then). The changelog carries one **New** entry citing [#2683][]. Highlights
-  card: the registry claim joins the merged **Packaging modernization** entry —
-  the three-item cap holds.
+  card: the packaging entry now leads with the npm story — **First-class npm
+  support**, title linking `#npm-registry`, with the theme-folder move swept
+  into "and more" (owner call, 2026-07-26) — the three-item cap holds.
 - **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
   over opentelemetry.io, [otel#10906][]): clone/submodule Actions warn that a
   plain `npm install` inside `themes/docsy/` pulls the maintainer workspaces
