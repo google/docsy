@@ -189,8 +189,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 - **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
   over opentelemetry.io, [otel#10906][]): clone/submodule Actions warn that a
   plain `npm install` inside `themes/docsy/` pulls the maintainer workspaces
-  (~1.5 GB) where `npm run postinstall` installs only theme runtime deps (~34
-  MB); the favicons helper command is qualified as npm-package-install specific,
+  where `npm run postinstall` installs only theme runtime deps (caution homed in
+  the docs, [Other installation options][], order-of-magnitude phrasing); the
+  favicons helper command is qualified as npm-package-install specific,
   deferring per-mode commands to [Add your favicons][]; the Hugo guide's
   language-API section notes Page-level `.Lang` is unaffected (a textual `.Lang`
   sweep hits such uses — the otel.io review did).
@@ -269,6 +270,8 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [Add your favicons]: ../../../docsy.dev/content/en/docs/content/iconsimages.md
 [chrome]: ../../../docsy.dev/content/en/docs/deployment/chrome.md
 [maint-notes]: ../../../docsy.dev/content/en/project/about/maintainer-notes.md
+[Other installation options]:
+  ../../../docsy.dev/content/en/docs/get-started/other-options.md
 [pub-rel]:
   ../../../docsy.dev/content/en/project/about/maintainer-notes.md#publishing-a-release
 [#726]: https://github.com/google/docsy/issues/726
