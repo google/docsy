@@ -1,7 +1,7 @@
 ---
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
-date: 2026-06-15
+date: 2026-06-14
 lastmod: 2026-07-26
 draft: true
 author: >-
