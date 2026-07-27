@@ -183,7 +183,8 @@ always project-specific.
 ### Actions {#security-actions}
 
 {{% _param BREAKING %}} **Applies if** your site uses remote resources,
-hand-authored `.html` content files, or symlinked content/assets.
+hand-authored `.html` content files, symlinked content/assets, or
+`templates.Defer` inside cached partials.
 
 - Build locally with your target Hugo version and review security-related errors
   or warnings.
@@ -314,14 +315,16 @@ After addressing applicable breaking changes and deprecations, upgrade to Hugo
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@{{% _param hugoSupportedVersion %}} --save-dev
+npm install hugo-extended@{{% param hugoSupportedVersion %}} --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use {{% _param hugoSupportedVersion %}}
+hvm use {{% param hugoSupportedVersion %}}/extended
 ```
+
+For other installation methods, see [Install Hugo][].
 
 <section class="td-checkbox-list-wrapper">
 
@@ -363,5 +366,6 @@ hvm use {{% _param hugoSupportedVersion %}}
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
+[Install Hugo]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [Multi-language support]: /docs/language/
 <!-- prettier-ignore-end -->
