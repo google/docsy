@@ -103,8 +103,8 @@ Specifically, the Docsy team **officially supports** the following:
   - Hugo module (`vX.Y.Z`)
   - GitHub [release][releases] or git tag (`vX.Y.Z`)
 
-  An npm install of Docsy from GitHub (`google/docsy`) is unsupported, even for
-  a stable release.
+  npm installs of Docsy from GitHub (`google/docsy`) are for development and
+  testing only, not production use.
 
 - **Issue reports**: over the latest official release, a current pre-release, or
   the `main` branch.
@@ -152,10 +152,11 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 - **Docsy on the npm registry**: the theme is now published as
   [`@docsy/theme`][@docsy/theme]. Install it directly from npm, with Bootstrap
-  and Font Awesome delivered as ordinary dependencies. An npm install from
-  GitHub (`google/docsy`) is now [unsupported](#official-support). See [0.16.0
-  release report][0.16.0-blog-npm-registry] and [Docsy as an NPM
-  package][option-3-npm] ([#2683][]).
+  and Font Awesome delivered as ordinary dependencies. npm installs from GitHub
+  (`google/docsy`) are now for
+  [development and testing only](#official-support). See [0.16.0 release
+  report][0.16.0-blog-npm-registry] and [Docsy as an NPM package][option-3-npm]
+  ([#2683][]).
 - **Favicon discovery**: you can now drop a site's conventionally named favicon
   files into `static/` and the theme discovers and links them -- no favicons
   partial required. A new `gen-favicons` helper generates raster icons from a
