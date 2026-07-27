@@ -26,8 +26,8 @@ Follow the page matching your install mode:
 > [!NOTE]
 >
 > Updating from Docsy 0.15 or earlier? The theme's install paths changed in
-> 0.16.0: first apply the config changes from the 0.16.0 post's
-> [theme folder actions][tfa], then follow your install mode's page.
+> 0.16.0: first apply the config changes from the 0.16.0 post's [theme folder
+> actions][tfa], then follow your install mode's page.
 
 If you are using Docsy as a Git submodule or clone, consider
 [migrating to Hugo modules](convert-site-to-module/) or the [NPM
@@ -105,4 +105,5 @@ release's post.
 [npm-package]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[tfa]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions
+[tfa]:
+  https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions
