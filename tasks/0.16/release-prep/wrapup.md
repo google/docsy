@@ -97,9 +97,6 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
 ## Release content status
 
-> [!NOTE] Next edit round: bump both posts' `lastmod` (still 2026-07-26; the
-> 07-27 review rounds didn't restamp them).
-
 - [release report][] (`blog/2026/0.16.0.md`): complete draft (`draft: true`).
   Covers the four breaking changes, the npm-registry announcement, and the
   experimental shared chrome build mode, each with Actions, an upgrade section,
