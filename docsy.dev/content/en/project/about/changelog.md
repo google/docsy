@@ -151,7 +151,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 **New**:
 
 - **Docsy on the npm registry**: the theme is now published as
-  [`@docsy/theme`][@docsy/theme] -- install it directly from npm, with Bootstrap
+  [`@docsy/theme`][@docsy/theme]. Install it directly from npm, with Bootstrap
   and Font Awesome delivered as ordinary dependencies. An npm install from
   GitHub (`google/docsy`) is now [unsupported](#official-support). See [0.16.0
   release report][0.16.0-blog-npm-registry] and [Docsy as an NPM
