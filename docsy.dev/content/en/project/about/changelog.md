@@ -6,8 +6,9 @@ aliases: [../changelog]
 cSpell:ignore: deining FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark
 ---
 
-We only document **breaking changes** and release **highlights** in this page.
-For the full list of changes of any particular release, see the [release
+We document **breaking changes** and release **highlights** in this page, with
+maintainer-facing changes summarized at the end of each release section. For the
+full list of changes of any particular release, see the [release
 notes][releases].
 
 Useful links: [Releases][] & [tags][], jump to the [latest][] release, and view
@@ -185,12 +186,10 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 - Migrated the theme and docs off deprecated Hugo language APIs ([#2593][]).
   Thanks [@deining][] for the groundwork in [#2594][] and [#2578][]!
+- Synced and corrected the Russian UI strings. Thanks [@shurup][]!
 - Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
   minimum supported Hugo version remains 0.160.1. See [Hugo 0.158+ upgrade
   guide][] ([#2581][]).
-- Reorganized the repository package boundary: `theme/package.json` owns theme
-  runtime dependencies, and the root package orchestrates the `docsy.dev` and
-  `theme` workspaces ([#2617][]).
 - **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for sites
   with RTL languages or a project-root `postcss.config.{js,mjs,cjs}`; other
   sites no longer need a PostCSS toolchain. See [0.16.0 release
@@ -205,6 +204,15 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   that emits the repeated chrome (navbar, footer, left-nav) on one donor page
   per locale and restores it in the browser, so one build serves both readers
   and link checkers. See [Chrome build modes][chrome] ([#2659][]).
+
+**For maintainers**:
+
+- Reorganized the repository package boundary: `theme/package.json` owns theme
+  runtime dependencies, and the root package orchestrates the `docsy.dev` and
+  `theme` workspaces ([#2617][]).
+- Added build and test guards (Hugo deprecation output, fixture-site
+  regressions) and moved link checking from htmltest to Lychee. See [0.16.0
+  release report][0.16.0-blog-maintainers].
 
 <!-- prettier-ignore-start -->
 [#2357]: https://github.com/google/docsy/issues/2357
@@ -221,6 +229,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
 [0.16.0-blog-hugo]: /blog/2026/0.16.0/#hugo
+[0.16.0-blog-maintainers]: /blog/2026/0.16.0/#for-maintainers
 [0.16.0-blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [0.16.0-blog-npm-registry]: /blog/2026/0.16.0/#npm-registry
 [0.16.0-blog-postcss]: /blog/2026/0.16.0/#postcss
@@ -233,6 +242,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [hugo-0.160.1]: https://github.com/gohugoio/hugo/releases/tag/v0.160.1
 [hugo-0.164.0]: https://github.com/gohugoio/hugo/releases/tag/v0.164.0
 [option-3-npm]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[@shurup]: https://github.com/shurup
 <!-- prettier-ignore-end -->
 
 ## v0.15.0 {#v0.15.0}

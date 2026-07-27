@@ -18,6 +18,8 @@ restating them:
   quick overview. No upgrade advice, implementation detail, or background.
   Entries link to the release report for details and cite a change's key issues
   — PRs only when there is no key issue, such as for contributor credit.
+  Maintainer-facing changes get a short **For maintainers** list at the end of
+  the release section.
 - **Release and upgrade blog posts**: what's new, what to watch out for, and
   actionable upgrade guidance — the historical narrative. Link to the site docs
   for current behavior and reference detail. Don't enumerate PRs and issues;
@@ -25,6 +27,8 @@ restating them:
   chore, so keep posts maximally actionable yet lean: the release summary reads
   like a selective table of contents — a link per section with a clause of
   guiding glue — and each fact appears in one section, its home.
+  Maintainer-facing changes are summarized in a **For maintainers** section at
+  the end of the documented changes.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
 - **[Release notes][] and [milestones][]**: the exhaustive record — generated
