@@ -279,11 +279,8 @@ site that uses the Docsy NPM package:
     ...
     ```
 
-To update Docsy to the latest release, run:
-
-```sh
-npm install --save-dev @docsy/theme@latest
-```
+To update Docsy later, see
+[Update your Docsy NPM package](/docs/updating/updating-npm-package/).
 
 ### Development versions of Docsy
 

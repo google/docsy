@@ -1,6 +1,6 @@
 ---
 title: Migrate to Hugo Modules
-weight: 3
+weight: 4
 description: Convert an existing site to use Docsy as a Hugo Module
 cSpell:ignore: findstr batchfile twbs
 ---
@@ -14,7 +14,7 @@ Run the following from the command line:
 {{< tab header="Unix shell" lang="Bash" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 sed -i '/theme = \["docsy"\]/d' config.toml
 mv config.toml hugo.toml
 cat >> hugo.toml <<EOL
@@ -30,7 +30,7 @@ hugo server
 {{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 findstr /v /c:"theme = [\"docsy\"]" config.toml > hugo.toml
 (echo [module]^
 
@@ -67,7 +67,7 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -190,7 +190,7 @@ To make sure that your configuration settings are correct, run the command `hugo
 ```bash
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/google/docsy/theme@{{% param "version" %}}
+github.com/me/my-existing-site github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
 Make sure that the `docsy/theme` dependency is listed. If not, please double check your config settings.

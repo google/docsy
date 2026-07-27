@@ -27,7 +27,7 @@ Hugo automatically pulls in the latest theme version.
 > updating your theme, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy/theme@{{% param "version" %}}
+> hugo mod get -u github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 > ```
 >
 > Instead of a version tag, you can also specify a commit hash, for example:
@@ -45,7 +45,9 @@ npm install
 ```
 
 Hugo warns at build time when your `package.json` dependency set has drifted
-from the theme's. That's it, your update is done!
+from the theme's. To verify the update, confirm that your site's `go.mod` now
+records `github.com/google/docsy/theme` at the version you expect. That's it,
+your update is done!
 
 [theme npm dependencies]:
   /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies

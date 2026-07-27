@@ -1,6 +1,6 @@
 ---
 title: Update Docsy without Hugo Modules
-weight: 2
+weight: 3
 description: >
   Update the Docsy theme to the latest version using submodules or `git pull`.
 ---
@@ -12,58 +12,65 @@ theme.
 > [!TIP]
 >
 > If you intend to update your site, consider
-> [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/).
+> [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/)
+> or switching to the
+> [Docsy NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
 > After conversion, it's even simpler to update Docsy!
 
 ## Update your Docsy submodule
 
 If you are using the
 [Docsy theme as a submodule](/docs/get-started/other-options/#option-1-docsy-as-a-git-submodule)
-in your project, here's how you update the submodule:
+in your project, here's how you update the submodule to the latest release:
 
-1. Navigate to the root of your local project, then run:
+1. Navigate to the root of your local project, then update the submodule to the
+   release tag that you are targeting, for example:
 
-   ```bash
-   git submodule update --remote
+   ```sh
+   git -C themes/docsy fetch --tags
+   git -C themes/docsy checkout {{% param tdVersion.latest %}}
    ```
+
+1. Reinstall the theme's runtime dependencies:
+
+   ```sh
+   npm run postinstall --prefix themes/docsy
+   ```
+
+   > [!WARNING]
+   >
+   > Run `npm run postinstall`, not `npm install`: a plain `npm install` inside
+   > `themes/docsy/` pulls in the repository's maintainer workspaces, not just
+   > the theme's runtime dependencies.
 
 1. Add and then commit the change to your project:
 
-   ```bash
-   git add themes/
-   git commit -m "Updating theme submodule"
+   ```sh
+   git add themes/docsy
+   git commit -m "Update Docsy theme to {{% param tdVersion.latest %}}"
    ```
 
-1. Push the commit to your project repo. For example, run:
+1. Push the commit to your project repo.
 
-   ```bash
-   git push origin master
-   ```
-
-## Route 2: Update your Docsy clone
+## Update your Docsy clone
 
 If you
 [cloned the Docsy theme](/docs/get-started/other-options/#option-2-clone-the-docsy-theme)
-into the `themes` folder in your project, then you use the `git pull` command:
+into the `themes` folder in your project, update the clone to the release tag
+that you are targeting:
 
-1. Navigate to the `themes` directory in your local project:
+1. Navigate to the root of your local project, then run:
 
-   ```bash
-   cd themes
-
+   ```sh
+   git -C themes/docsy fetch --tags origin
+   git -C themes/docsy checkout {{% param tdVersion.latest %}}
    ```
 
-1. Ensure that `origin` is set to `https://github.com/google/docsy.git`:
+   Ensure that `origin` is set to `https://github.com/google/docsy.git`
+   (`git -C themes/docsy remote -v`).
 
-   ```bash
-   git remote -v
-
-   ```
-
-1. Update your local clone:
-   ```bash
-   git pull origin master
-   ```
+1. Reinstall the theme's runtime dependencies as described in the submodule
+   procedure above.
 
 If you have made any local changes to the cloned theme, **you must manually
 resolve any merge conflicts**.
