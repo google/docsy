@@ -178,8 +178,8 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 - **Bootstrap and Font Awesome via npm**: the theme declares them as npm
   dependencies instead of importing them as Hugo modules. **Applies to
   Hugo-module installs**, which run `hugo mod npm pack` and `npm install` to
-  pull them in; npm-package and clone/submodule installs are unaffected. See
-  [0.16.0 release report][0.16.0-blog-npm-deps] ([#2668][]).
+  pull them in; other install modes are unaffected. See [0.16.0 release
+  report][0.16.0-blog-npm-deps] ([#2668][]).
 
 **Other changes**:
 

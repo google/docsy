@@ -23,9 +23,6 @@ covers the
 
 ## Upgrade summary
 
-This guide highlights Hugo changes that may require action when upgrading a
-Docsy site to 0.16.0.
-
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
   - {{% _param BREAKING %}}
@@ -102,18 +99,18 @@ images. It also introduced a regression that could double-escape `&` in rendered
 Markdown link URLs, producing `&amp;amp;` in HTML output.
 
 Hugo 0.160.0 fixed that regression, and Hugo 0.160.1 is the safer 0.160.x patch
-release. If you are moving through this range, do not stop at 0.159.2. Docsy
-0.16.0's minimum Hugo version, 0.160.1, already excludes this window.
+release. Docsy 0.16.0's minimum Hugo version, 0.160.1, already excludes this
+window.
 
 ### Actions {#amp-escaping-actions}
 
 **Applies if** you briefly tested or deployed Hugo 0.159.2.
 
 - Search generated HTML for `&amp;amp;` in link URLs.
-- Pay closest attention to monolingual sites without custom link render hooks:
+- Monolingual sites without custom link render hooks are the most exposed:
   multilingual single-host sites are usually shielded by Hugo's
-  `useEmbedded: auto` link render hook, and custom link render hooks also
-  usually shield a site.
+  `useEmbedded: auto` link render hook, as are sites with custom link render
+  hooks.
 
 ## Template and module cleanup (0.159.x-0.160.x) {#template-module-cleanup}
 
@@ -147,7 +144,7 @@ Node's `--permission` sandbox. This requires **Node 22 or later**.
 Docsy sites commonly use PostCSS for CSS processing, so this can be a practical
 breaking change even when the Docsy theme itself has not changed. Hugo 0.163.2
 and 0.163.3 fix regressions in this permission model, so prefer 0.163.3 or later
-for PostCSS pipelines; the actions below give the specifics.
+for PostCSS pipelines.
 
 ### Actions {#node-tools-actions}
 
@@ -177,8 +174,7 @@ Hugo tightened several security boundaries in this range:
   `os.Stat`, and `os.FileExists`.
 
 Docsy's own workspace and smoke-test install shapes were validated across these
-changes, but site-specific mounts, symlinks, and remote resource fetches are
-always project-specific.
+changes.
 
 ### Actions {#security-actions}
 
