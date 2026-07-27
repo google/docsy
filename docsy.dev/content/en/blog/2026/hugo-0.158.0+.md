@@ -1,8 +1,8 @@
 ---
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
-date: 2026-06-15
-lastmod: 2026-07-17
+date: 2026-06-14
+lastmod: 2026-07-27
 draft: true
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
@@ -22,9 +22,6 @@ covers the
 [Hugo versions that Docsy 0.16.0 requires and validates](0.16.0/#hugo).
 
 ## Upgrade summary
-
-This guide highlights Hugo changes that may require action when upgrading a
-Docsy site to 0.16.0.
 
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
@@ -86,6 +83,13 @@ Review custom template code for these replacements:
 | `(Page\|Site).Language.Weight`            | no direct replacement    |
 | `.Site.Languages` for cross-site language | `hugo.Sites` or `.Sites` |
 
+> [!NOTE]
+>
+> Page-level `.Lang` is unaffected: the deprecation applies to `.Language.Lang`,
+> not to the `Lang` method on `Page` objects. For example,
+> `where .Translations "Lang" "fr"` needs no change. A textual search for
+> `.Lang` will surface such uses; leave them as is.
+
 For current Docsy examples, see [Multi-language support][].
 
 ## Markdown-link escaping (0.159.2, fixed in 0.160.0) {#amp-escaping}
@@ -95,18 +99,18 @@ images. It also introduced a regression that could double-escape `&` in rendered
 Markdown link URLs, producing `&amp;amp;` in HTML output.
 
 Hugo 0.160.0 fixed that regression, and Hugo 0.160.1 is the safer 0.160.x patch
-release. If you are moving through this range, do not stop at 0.159.2. Docsy
-0.16.0's minimum Hugo version, 0.160.1, already excludes this window.
+release. Docsy 0.16.0's minimum Hugo version, 0.160.1, already excludes this
+window.
 
 ### Actions {#amp-escaping-actions}
 
 **Applies if** you briefly tested or deployed Hugo 0.159.2.
 
 - Search generated HTML for `&amp;amp;` in link URLs.
-- Pay closest attention to monolingual sites without custom link render hooks:
+- Monolingual sites without custom link render hooks are the most exposed:
   multilingual single-host sites are usually shielded by Hugo's
-  `useEmbedded: auto` link render hook, and custom link render hooks also
-  usually shield a site.
+  `useEmbedded: auto` link render hook, as are sites with custom link render
+  hooks.
 
 ## Template and module cleanup (0.159.x-0.160.x) {#template-module-cleanup}
 
@@ -140,7 +144,7 @@ Node's `--permission` sandbox. This requires **Node 22 or later**.
 Docsy sites commonly use PostCSS for CSS processing, so this can be a practical
 breaking change even when the Docsy theme itself has not changed. Hugo 0.163.2
 and 0.163.3 fix regressions in this permission model, so prefer 0.163.3 or later
-for PostCSS pipelines; the actions below give the specifics.
+for PostCSS pipelines.
 
 ### Actions {#node-tools-actions}
 
@@ -170,13 +174,13 @@ Hugo tightened several security boundaries in this range:
   `os.Stat`, and `os.FileExists`.
 
 Docsy's own workspace and smoke-test install shapes were validated across these
-changes, but site-specific mounts, symlinks, and remote resource fetches are
-always project-specific.
+changes.
 
 ### Actions {#security-actions}
 
 {{% _param BREAKING %}} **Applies if** your site uses remote resources,
-hand-authored `.html` content files, or symlinked content/assets.
+hand-authored `.html` content files, symlinked content/assets, or
+`templates.Defer` inside cached partials.
 
 - Build locally with your target Hugo version and review security-related errors
   or warnings.
@@ -307,14 +311,16 @@ After addressing applicable breaking changes and deprecations, upgrade to Hugo
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@{{% _param hugoSupportedVersion %}} --save-dev
+npm install hugo-extended@{{% param hugoSupportedVersion %}} --save-dev
 ```
 
 If you use [hvm][]:
 
 ```sh
-hvm use {{% _param hugoSupportedVersion %}}
+hvm use {{% param hugoSupportedVersion %}}/extended
 ```
+
+For other installation methods, see [Install Hugo][].
 
 <section class="td-checkbox-list-wrapper">
 
@@ -356,5 +362,6 @@ hvm use {{% _param hugoSupportedVersion %}}
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
+[Install Hugo]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [Multi-language support]: /docs/language/
 <!-- prettier-ignore-end -->

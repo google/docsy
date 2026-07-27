@@ -173,6 +173,13 @@ your project's root directory:
     (cd themes/docsy && npm run postinstall)
     ```
 
+    > [!NOTE]
+    >
+    > Run `npm run postinstall`, not `npm install`: `postinstall` installs only
+    > the theme's runtime dependencies; a plain `npm install` inside
+    > `themes/docsy/` also pulls the repository's maintainer workspaces, an
+    > install more than an order of magnitude larger.
+
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
     your project's `package.json` file:
@@ -218,7 +225,8 @@ npm run postinstall
 ```
 
 As with the [submodule option](#option-1-docsy-as-a-git-submodule), set
-`theme: docsy/theme` in your site configuration.
+`theme: docsy/theme` in your site configuration. The note above about
+`npm run postinstall` versus `npm install` applies here as well.
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
