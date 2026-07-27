@@ -37,11 +37,8 @@ in your project, here's how you update the submodule to the latest release:
    npm run postinstall --prefix themes/docsy
    ```
 
-   > [!WARNING]
-   >
-   > Run `npm run postinstall`, not `npm install`: a plain `npm install` inside
-   > `themes/docsy/` pulls in the repository's maintainer workspaces, not just
-   > the theme's runtime dependencies.
+   Run `npm run postinstall`, not `npm install` — for why, see the [setup
+   note][postinstall-note].
 
 1. Add and then commit the change to your project:
 
@@ -62,15 +59,22 @@ that you are targeting:
 1. Navigate to the root of your local project, then run:
 
    ```sh
-   git -C themes/docsy fetch --tags origin
+   git -C themes/docsy fetch --tags
    git -C themes/docsy checkout {{% param tdVersion.latest %}}
    ```
 
    Ensure that `origin` is set to `https://github.com/google/docsy.git`
    (`git -C themes/docsy remote -v`).
 
-1. Reinstall the theme's runtime dependencies as described in the submodule
-   procedure above.
+1. Reinstall the theme's runtime dependencies:
+
+   ```sh
+   npm run postinstall --prefix themes/docsy
+   ```
+
+   As in the submodule procedure, run `npm run postinstall`, not `npm install`.
 
 If you have made any local changes to the cloned theme, **you must manually
 resolve any merge conflicts**.
+
+[postinstall-note]: /docs/get-started/other-options/#for-an-existing-site

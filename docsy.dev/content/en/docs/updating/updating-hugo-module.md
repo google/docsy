@@ -27,19 +27,21 @@ Hugo automatically pulls in the latest theme version.
 > updating your theme, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy/theme@{{% param tdVersion.latest %}}
+> hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 > ```
 >
 > Instead of a version tag, you can also specify a commit hash, for example:
 >
 > ```bash
-> hugo mod get -u github.com/google/docsy/theme@6c8a3afe
+> hugo mod get github.com/google/docsy/theme@9b1d9951
 > ```
 
-After updating the theme, refresh the [theme npm dependencies][] that are
-consolidated into your site's `package.json`, and reinstall them:
+After updating the theme, tidy your module files, refresh the [theme npm
+dependencies][] that are consolidated into your site's `package.json`, and
+reinstall them:
 
 ```bash
+hugo mod tidy
 hugo mod npm pack
 npm install
 ```
