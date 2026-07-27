@@ -3,6 +3,9 @@ ui_pager_prev: Əvvəlki
 ui_pager_next: Növbəti
 ui_read_more: Daha çox oxu
 ui_search: Bu saytda axtarın...
+ui_theme_light: Açıq
+ui_theme_dark: Tünd
+ui_theme_auto: Avtomatik
 
 # Used in sentences such as "Posted in News"
 ui_in: daxilində
