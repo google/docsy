@@ -231,13 +231,18 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
       Decisions. Ongoing validation is now the minimum-Hugo lane of
       `test:smoke`, run at release step 8.
 - [ ] Replace placeholders that resolve only after tagging: the
-      `releases/tag/v0.16.0` links and the changelog `UNRELEASED`
-      heading/banner.
+      `releases/tag/v0.16.0` links, the changelog `UNRELEASED` heading/banner,
+      the release post's `[CL@0.16.0]` link (`/changelog/#next` →
+      `/changelog/#v0.16.0`, since the heading anchor changes at release), and
+      its `[compare-0.15.0]` link (`v0.15.0...main` → `v0.15.0...v0.16.0`).
 - [ ] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
       (required by the theme folder move; **not yet in the maintainer notes
-      procedure** — new this release).
+      procedure** — new this release). Verify the tag exists **before** flipping
+      the posts' `draft: true`: every install-mode Action in the release post
+      depends on it, and 0.16.0 is the first release to exercise the nested-tag
+      scheme.
 - [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
       and re-point dist-tag `next` at it, **before** the site deploy flips the
       posts live (the post's install commands must resolve). Verify with
