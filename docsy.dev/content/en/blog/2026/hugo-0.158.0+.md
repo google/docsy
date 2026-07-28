@@ -21,6 +21,15 @@ companion post to the Docsy [0.16.0](0.16.0/) release and upgrade guide, which
 covers the
 [Hugo versions that Docsy 0.16.0 requires and validates](0.16.0/#hugo).
 
+> [!NOTE]
+>
+> **Who is this guide for?**
+>
+> - Site owners upgrading to Docsy [0.16.0](0.16.0/), which raises the minimum
+>   Hugo version -- upgrade Hugo first, then return to the Docsy
+>   [upgrade](0.16.0/#upgrade).
+> - Site owners upgrading only Hugo, to any version in this range.
+
 ## Upgrade summary {#upgrade-summary}
 
 - Review {{% _param BADGE BREAKING warning %}} changes:
