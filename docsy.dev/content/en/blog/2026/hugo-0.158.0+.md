@@ -316,7 +316,7 @@ hvm use {{% param hugoSupportedVersion %}}/extended
 
 For other installation methods, see [Install Hugo][].
 
-### What next? {#what-next}
+### {{% _param FAS square-check primary %}} Sanity checks {#sanity-checks}
 
 Confirm that you've addressed [every action][] that applies to your site. Then:
 
