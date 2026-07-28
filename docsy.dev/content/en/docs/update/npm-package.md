@@ -1,6 +1,7 @@
 ---
 title: Update your Docsy NPM package
 linkTitle: NPM package
+aliases: [/docs/updating/updating-npm-package/]
 weight: 2
 description: Update your Docsy theme to the latest version using npm.
 ---

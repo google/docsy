@@ -1,6 +1,7 @@
 ---
 title: Update your Docsy Git submodule or clone
 linkTitle: Git submodule or clone
+aliases: [/docs/updating/updating-submodules/]
 weight: 3
 description: >
   Update the Docsy theme to the latest version using submodules or `git pull`.

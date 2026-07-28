@@ -1,6 +1,7 @@
 ---
 title: Update Docsy
 description: Keeping your Docsy theme up to date
+aliases: [/docs/updating/]
 weight: 8
 ---
 

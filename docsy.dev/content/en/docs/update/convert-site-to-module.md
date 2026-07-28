@@ -1,5 +1,6 @@
 ---
 title: Migrate to Hugo Modules
+aliases: [/docs/updating/convert-site-to-module/]
 weight: 4
 description: Convert an existing site to use Docsy as a Hugo Module
 cSpell:ignore: findstr batchfile twbs
