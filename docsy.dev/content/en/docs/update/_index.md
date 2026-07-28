@@ -5,8 +5,9 @@ aliases: [/docs/updating/]
 weight: 8
 ---
 
-This section documents how to update your site's Docsy theme and, when required,
-its Node.js and Hugo versions. For what changed in a given release, and any
+This section documents how to update your site's Docsy theme to
+{{% param tdVersion.latest %}}, the latest release, and, when required, its
+Node.js and Hugo versions. For what changed in a given release, and any
 release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 ## Before you begin {#before-you-begin}
@@ -14,14 +15,15 @@ release-specific upgrade actions, see the [upgrade blog posts][blog].
 - **Make sure that you can restore your project's current state**: for example,
   work from a Git branch, merging only after [checking your site](#check), or
   back up your project files first. Rolling back is then a simple restore.
-- **If the release raises the minimum Hugo or Node.js version** (its [blog
-  post][blog] says so), update [Node.js](#update-node) and [Hugo](#update-hugo)
-  first, so that the theme-update commands run with supported versions.
+- **If {{% param tdVersion.latest %}} raises the minimum Hugo or Node.js
+  version** (its [blog post][blog] says so), update [Node.js](#update-node) and
+  [Hugo](#update-hugo) first, so that the theme-update commands run with
+  supported versions.
 
 > [!NOTE]
 >
-> Updating from Docsy 0.15 or earlier? First apply the config changes from the
-> 0.16.0 post's [theme folder actions][tfa].
+> Updating from Docsy [0.15][] or earlier? First apply the config changes from
+> the 0.16.0 post's [theme folder actions][tfa].
 
 <!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
@@ -103,6 +105,7 @@ post][blog].
 
 [blog]: /tags/upgrade/
 [Heading self-links]: /docs/content/navigation/#heading-self-links
+[0.15]: /blog/2026/0.15.0/
 
 <!-- TODO(tag-time): re-point the preview-host (main--) link below to the
      production /blog/2026/0.16.0/ URL once the post publishes; see the
