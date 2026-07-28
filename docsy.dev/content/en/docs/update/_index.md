@@ -8,6 +8,11 @@ This section documents how to update your site's Docsy theme and, when required,
 its Node.js and Hugo versions. For what changed in a given release, and any
 release-specific upgrade actions, see the [upgrade blog posts][blog].
 
+> [!TIP]
+>
+> Do the update on a branch, and merge only after [checking your site](#check):
+> that way, rolling back is a plain Git operation.
+
 > [!NOTE]
 >
 > Updating from Docsy 0.15 or earlier? First apply the config changes from the
@@ -80,31 +85,21 @@ Use this checklist as a guide to verify that your update succeeded:
   - [ ] [Heading self-links][] work and are styled correctly
   - [ ] On mobile or tablet: navigation is usable and there is no horizontal
         scroll
-- [ ] Dark mode toggle works (if enabled)
-- [ ] Custom shortcodes render correctly (if used)
-- [ ] Search returns expected results (if used)
-- [ ] Print preview looks correct (if used)
+- [ ] Dark mode toggle works, if enabled
+- [ ] Custom shortcodes render correctly, if used
+- [ ] Search returns expected results, if used
+- [ ] Print preview looks correct, if used
 
 Also perform any release-specific checks listed in the release's [upgrade blog
 post][blog].
 
-## Roll back {#roll-back}
-
-To roll back an update:
-
-1. Re-run your install mode's update procedure, specifying the Docsy version
-   that you were previously using; likewise for Hugo, if you updated it.
-2. Consult the [upgrade blog post][blog] of the release you are rolling back
-   **from** for any release-specific steps to reverse, such as site-config
-   changes (for example, [0.16.0's rollback][0.16.0]).
-
-<!-- TODO(tag-time): re-point the two preview-host (main--) links below to
-     production /blog/2026/0.16.0/ URLs once the post publishes; see the
-     release-prep wrapup checklist. -->
-
-[0.16.0]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#rollback
 [blog]: /tags/upgrade/
 [Heading self-links]: /docs/content/navigation/#heading-self-links
+
+<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+     production /blog/2026/0.16.0/ URL once the post publishes; see the
+     release-prep wrapup checklist. -->
+
 [hugo-override]:
   https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
