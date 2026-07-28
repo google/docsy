@@ -62,11 +62,11 @@ Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
 friends) also work this way, but the theme's copies are placeholders that are
 intentionally empty: there's nothing to diff, so they don't need this review.
 
-## Verify your update {#verify}
+## Check your site {#check}
 
-Build or serve your site and check for errors and warnings. We recommend
-building both development and production versions of your site, since they can
-differ in their configuration, minification, etc.
+After updating, build or serve your site and check for errors and warnings.
+We recommend building both development and production versions of your site,
+since they can differ in their configuration, minification, etc.
 
 Use this checklist as a guide to verify that your update succeeded:
 
