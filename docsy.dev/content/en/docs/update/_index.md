@@ -64,10 +64,9 @@ intentionally empty: there's nothing to diff, so they don't need this review.
 
 ## Test your update {#test}
 
-Build and serve your site (for example, with `hugo` and `hugo server`, or your
-site's `npm run build` and `npm run serve` scripts) and check for errors. We
-recommend building both development and production versions of your site, since
-they can differ in minification, base URL, and configuration.
+Build or serve your site and check for errors and warnings. We recommend
+building both development and production versions of your site, since they can
+differ in their configuration, minification, etc.
 
 Use this checklist to verify that your update succeeded:
 
