@@ -266,8 +266,12 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 - [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
       and re-point dist-tag `next` at it, **before** the site deploy flips the
       posts live (the post's install commands must resolve). Verify with
-      `npm run test:smoke`. Also new this release; mechanics:
-      `docsy-npm-publish` skill, tracker [#2683][] (close it here).
+      `npm run test:smoke`, and verify the dist-tags post-publish
+      (`npm view @docsy/theme dist-tags`): `latest` → `0.16.0`, `next` →
+      `0.16.0` — until then `latest` serves `0.16.0-rc.1` (npm requires a
+      `latest` tag and the RC is the only version; round-2 POV 2 R2P2-02), so
+      the update docs' `@latest` command installs the RC. Also new this release;
+      mechanics: `docsy-npm-publish` skill, tracker [#2683][] (close it here).
 - [ ] Milestone hygiene: close or move all milestone-24 issues except [#2615][].
       Trued up at the 2026-07-26 gate — only [#2683][] also remains, closing
       with the npm publish above; see Milestone 24 hygiene.

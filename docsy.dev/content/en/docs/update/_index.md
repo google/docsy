@@ -15,6 +15,10 @@ Make sure that you can restore your project's current state: for example, work
 from a Git branch, merging only after [checking your site](#check), or back up
 your project files first. Rolling back is then a simple restore.
 
+If the release raises the minimum Hugo or Node.js version (its [blog post][blog]
+says so), update [Node.js](#update-node) and [Hugo](#update-hugo) first, so that
+the theme-update commands run with supported versions.
+
 > [!NOTE]
 >
 > Updating from Docsy 0.15 or earlier? First apply the config changes from the
