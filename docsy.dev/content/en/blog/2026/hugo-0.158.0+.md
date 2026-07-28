@@ -21,7 +21,7 @@ companion post to the Docsy [0.16.0](0.16.0/) release and upgrade guide, which
 covers the
 [Hugo versions that Docsy 0.16.0 requires and validates](0.16.0/#hugo).
 
-## Upgrade summary
+## Upgrade summary {#upgrade-summary}
 
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
@@ -316,27 +316,12 @@ hvm use {{% param hugoSupportedVersion %}}/extended
 
 For other installation methods, see [Install Hugo][].
 
-<section class="td-checkbox-list-wrapper">
+After upgrading, confirm that you've addressed every action that applies to your
+site ([upgrade summary](#upgrade-summary)). Then:
 
-### Sanity checks
-
-In addition to the [generic site checks][check], confirm that you have covered
-this guide's actions:
-
-#### Required actions, as applicable {#required-actions}
-
-- [ ] [Hugo version actions](0.16.0/#hugo-actions) in the release post
-- [ ] [Node tooling actions](#node-tools-actions)
-- [ ] [Security actions](#security-actions)
-
-#### Recommended review {#recommended-review}
-
-- [ ] [Language API actions](#language-api-actions)
-- [ ] [Imaging actions](#imaging-actions)
-- [ ] [Markdown-link escaping actions](#amp-escaping-actions)
-- [ ] [Hugo 0.164.0 actions](#hugo-0-164-0-actions)
-
-</section>
+- Upgrading as part of [Docsy 0.16.0](0.16.0/)? Continue with its
+  [upgrade section](0.16.0/#upgrade).
+- Upgrading only Hugo? Finish with the [generic site checks][check].
 
 <!-- prettier-ignore-start -->
 [check]: /docs/update/#check
