@@ -316,8 +316,9 @@ hvm use {{% param hugoSupportedVersion %}}/extended
 
 For other installation methods, see [Install Hugo][].
 
-After upgrading, confirm that you've addressed every action that applies to your
-site ([upgrade summary](#upgrade-summary)). Then:
+### After upgrading {#after-upgrading}
+
+Confirm that you've addressed [every action][] that applies to your site. Then:
 
 - Upgrading as part of [Docsy 0.16.0](0.16.0/)? Continue with its
   [upgrade section](0.16.0/#upgrade).
@@ -325,6 +326,7 @@ site ([upgrade summary](#upgrade-summary)). Then:
 
 <!-- prettier-ignore-start -->
 [check]: /docs/update/#check
+[every action]: #upgrade-summary
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
