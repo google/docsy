@@ -53,8 +53,10 @@ If your project [overrides theme files][hugo-override], then after updating,
 diff each override against its new theme counterpart and port upstream changes
 as needed. Look for overrides in your project's:
 
+- `assets/`
+- `i18n/`
 - `layouts/`, the most common location
-- `assets/`, `i18n/`, and `static/`
+- `static/`
 
 Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
 friends) also work this way, but the theme's copies are placeholders that are
@@ -62,22 +64,23 @@ intentionally empty: there's nothing to diff, so they don't need this review.
 
 ## Test your update {#test}
 
-Build and serve your site using your usual commands to check for errors and
-verify that your site renders as expected: for example, `hugo` and
-`hugo server`, or your site's `npm run build` and `npm run serve` scripts. We
-recommend building both development and production versions of your site.
+Build and serve your site (for example, with `hugo` and `hugo server`, or your
+site's `npm run build` and `npm run serve` scripts) and check for errors. We
+recommend building both development and production versions of your site, since
+they can differ in minification, base URL, and configuration.
 
 Use this checklist to verify that your update succeeded:
 
 - [ ] Build succeeds without errors, warnings, or deprecation notices; CSS and
-      other asset files are rendered
-- [ ] Key pages (e.g. home, a doc page, a blog post) load with no 404s or broken
-      layout
+      other asset files are generated
+- [ ] Key pages (for example, home, a doc page, a blog post) load with no 404s
+      or broken layout
+- [ ] Browser console shows no errors
 - [ ] Nav links resolve; breadcrumbs show current path; current section is
       highlighted
 - [ ] On mobile or tablet: navigation is usable and key pages have no horizontal
       scroll
-- [ ] External links show expected styling (e.g. icon)
+- [ ] External links show expected styling (for example, icon)
 - [ ] [Heading self-links][] work and are styled correctly
 - [ ] Dark mode toggle works (if enabled)
 - [ ] Custom shortcodes render correctly (if used)
