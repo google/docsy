@@ -62,7 +62,7 @@ Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
 friends) also work this way, but the theme's copies are placeholders that are
 intentionally empty: there's nothing to diff, so they don't need this review.
 
-## Test your update {#test}
+## Verify your update {#verify}
 
 Build or serve your site and check for errors and warnings. We recommend
 building both development and production versions of your site, since they can
@@ -72,14 +72,14 @@ Use this checklist as a guide to verify that your update succeeded:
 
 - [ ] Build completes without warnings or deprecation notices
 - [ ] Key pages load and have proper layout, for example the site home, a doc
-      page, and a blog post
-- [ ] Browser console shows no errors
-- [ ] Nav links resolve; breadcrumbs show current path; current section is
-      highlighted
-- [ ] On mobile or tablet: navigation is usable and key pages have no horizontal
-      scroll
-- [ ] External links show expected styling (for example, icon)
-- [ ] [Heading self-links][] work and are styled correctly
+      page, and a blog post. On each page:
+  - [ ] Browser console shows no errors
+  - [ ] Nav links resolve; breadcrumbs show current path; current section is
+        highlighted
+  - [ ] External links show expected styling (for example, icon)
+  - [ ] [Heading self-links][] work and are styled correctly
+  - [ ] On mobile or tablet: navigation is usable and there is no horizontal
+        scroll
 - [ ] Dark mode toggle works (if enabled)
 - [ ] Custom shortcodes render correctly (if used)
 - [ ] Search returns expected results (if used)
