@@ -9,12 +9,11 @@ This section documents how to update your site's Docsy theme and, when required,
 its Node.js and Hugo versions. For what changed in a given release, and any
 release-specific upgrade actions, see the [upgrade blog posts][blog].
 
-> [!TIP]
->
-> Before updating, make sure that you can restore your project's current state:
-> for example, work from a Git branch, merging only after
-> [checking your site](#check), or back up your project files first. Rolling
-> back is then a simple restore.
+## Before you begin {#before-you-begin}
+
+Make sure that you can restore your project's current state: for example, work
+from a Git branch, merging only after [checking your site](#check), or back up
+your project files first. Rolling back is then a simple restore.
 
 > [!NOTE]
 >
