@@ -3,7 +3,9 @@ title: Update your Docsy Hugo Module
 linkTitle: Hugo module
 aliases: [/docs/updating/updating-hugo-module/]
 weight: 1
-description: Update your Docsy theme to the latest version using Hugo Modules.
+description: >-
+  Update Docsy with `hugo mod get`, for sites that manage the theme as a Hugo
+  Module.
 ---
 
 At the command prompt, change to the root directory of your existing site.

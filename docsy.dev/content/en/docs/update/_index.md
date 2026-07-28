@@ -1,14 +1,13 @@
 ---
 title: Update Docsy
-description: Keeping your Docsy theme up to date
+description: Theme updates for every install mode, plus Node.js and Hugo
 aliases: [/docs/updating/]
 weight: 8
 ---
 
-This section explains how to update your site's Docsy theme to a **target
-release** of {{% param version %}} or a compatible version. For what changed in
-a given release, and any release-specific upgrade actions, see the [upgrade blog
-posts][blog].
+These pages apply to a **target release** of {{% param version %}} or a
+compatible version. For what changed in a given release, and any
+release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 ## Before you begin
 

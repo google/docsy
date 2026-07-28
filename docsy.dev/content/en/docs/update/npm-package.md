@@ -3,12 +3,13 @@ title: Update your Docsy NPM package
 linkTitle: NPM package
 aliases: [/docs/updating/updating-npm-package/]
 weight: 2
-description: Update your Docsy theme to the latest version using npm.
+description: >-
+  Update Docsy with `npm install`, for sites that use the `@docsy/theme`
+  package.
 ---
 
-If your site installs Docsy from the npm registry as
-[`@docsy/theme`][npm-package-setup], update the theme to the latest release by
-running the following from your project root:
+Update the theme to the latest release by running the following from your
+project root:
 
 ```sh
 npm install --save-dev @docsy/theme@latest
@@ -22,8 +23,8 @@ npm install --save-dev @docsy/theme@latest
 > npm install --save-dev @docsy/theme@{{% param tdVersion.latest %}}
 > ```
 
-To verify the update, confirm that `@docsy/theme` in your `package.json` records
-the version you expect.
+To verify the update, confirm that [`@docsy/theme`][npm-package-setup] in your
+`package.json` records the version you expect.
 
 If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
