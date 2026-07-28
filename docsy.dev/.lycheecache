@@ -397,6 +397,7 @@ https://github.com/google/docsy/issues/new?title=Taxonomy%20Support,200,17824982
 https://github.com/google/docsy/issues/new?title=Troubleshooting%20and%20known%20issues,200,1784211755
 https://github.com/google/docsy/issues/new?title=Update%20Docsy%20without%20Hugo%20Modules,200,1782498243
 https://github.com/google/docsy/issues/new?title=Update%20Docsy,200,1782498244
+https://github.com/google/docsy/issues/new?title=Update%20your%20Docsy%20Git%20submodule%20or%20clone,200,1785240360
 https://github.com/google/docsy/issues/new?title=Update%20your%20Docsy%20Hugo%20Module,200,1782498245
 https://github.com/google/docsy/issues/new?title=Update%20your%20Docsy%20NPM%20package,200,1785188000
 https://github.com/google/docsy/issues/new?title=Upgrade%20to%20Docsy%200.12.0%20from%200.11.0,200,1782498546
@@ -771,9 +772,9 @@ https://main--docsydocs.netlify.app/docs/get-started/troubleshooting/,206,178421
 https://main--docsydocs.netlify.app/docs/language/,200,1782498243
 https://main--docsydocs.netlify.app/docs/update/,200,1782563367
 https://main--docsydocs.netlify.app/docs/update/convert-site-to-module/,200,1782498243
+https://main--docsydocs.netlify.app/docs/update/git/,200,1782498237
 https://main--docsydocs.netlify.app/docs/update/hugo-module/,200,1782498243
 https://main--docsydocs.netlify.app/docs/update/npm-package/,200,1785188019
-https://main--docsydocs.netlify.app/docs/update/submodules/,200,1782498237
 https://main--docsydocs.netlify.app/examples/,200,1782498244
 https://main--docsydocs.netlify.app/project/,200,1782498222
 https://main--docsydocs.netlify.app/project/about/,200,1782563368
@@ -919,9 +920,9 @@ https://www.docsy.dev/docs/get-started/troubleshooting/,206,1784212116
 https://www.docsy.dev/docs/language/,200,1782498243
 https://www.docsy.dev/docs/update/,200,1782563367
 https://www.docsy.dev/docs/update/convert-site-to-module/,200,1782498243
+https://www.docsy.dev/docs/update/git/,200,1782498237
 https://www.docsy.dev/docs/update/hugo-module/,200,1782498243
 https://www.docsy.dev/docs/update/npm-package/,200,1785188019
-https://www.docsy.dev/docs/update/submodules/,200,1782498237
 https://www.docsy.dev/examples/,200,1782563367
 https://www.docsy.dev/project/,200,1782498222
 https://www.docsy.dev/project/about/,200,1782563368

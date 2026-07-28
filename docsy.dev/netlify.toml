@@ -42,7 +42,7 @@ TD_BUILD_CTX = "doc-rooted"
 
 [[redirects]]
   from = "/docs/updating/updating-submodules/*"
-  to = "/docs/update/submodules/:splat"
+  to = "/docs/update/git/:splat"
   status = 301
 
 [[redirects]]

@@ -30,7 +30,7 @@ project. Follow the page matching your install mode:
 
 - [Hugo module](hugo-module/)
 - [NPM package](npm-package/)
-- [Git submodule or clone](submodules/)
+- [Git submodule or clone](git/)
 
 The remaining update steps apply to all install modes.
 
