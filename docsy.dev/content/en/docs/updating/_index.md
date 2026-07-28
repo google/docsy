@@ -4,11 +4,10 @@ description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-This section documents how to update your site's Docsy theme (and, when
-required, its Node.js and Hugo versions) for upgrades to Docsy 0.16.0 or later;
-for earlier targets, follow the target release's [upgrade blog post][blog]. For
-what changed in a given release and any release-specific actions, see the
-release's post and the [changelog][].
+This section documents how to update your site's Docsy theme and, when
+required, its Node.js and Hugo versions. For what changed in a given release,
+and any release-specific upgrade actions, see the release's [upgrade blog
+post][blog] and the [changelog][].
 
 ## Update the theme {#update-docsy}
 
@@ -23,6 +22,9 @@ Follow the page matching your install mode:
 > Updating from Docsy 0.15 or earlier? The theme's install paths changed in
 > 0.16.0: first apply the config changes from the 0.16.0 post's [theme folder
 > actions][tfa], then follow your install mode's page.
+
+<!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
+     traffic fades; release history lives in the blog posts. (2026-07-28) -->
 
 ## Update Node.js {#update-node}
 
