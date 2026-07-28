@@ -4,7 +4,7 @@ linkTitle: Git submodule or clone
 aliases: [/docs/updating/updating-submodules/]
 weight: 3
 description: >
-  Update your Docsy theme to the latest version using submodules or `git pull`.
+  Update your Docsy theme to the latest version using a Git submodule or clone.
 ---
 
 If you aren't using Hugo Modules, depending on how you chose to install Docsy on
@@ -13,11 +13,10 @@ theme.
 
 > [!TIP]
 >
-> If you intend to update your site, consider
+> To simplify future updates, consider
 > [converting your site to Hugo Modules](/docs/update/convert-site-to-module/)
 > or switching to the
 > [Docsy NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
-> After conversion, it's even simpler to update Docsy!
 
 ## Update your Docsy submodule
 
@@ -76,7 +75,13 @@ that you are targeting:
 
    As in the submodule procedure, run `npm run postinstall`, not `npm install`.
 
-If you have made any local changes to the cloned theme, **you must manually
-resolve any merge conflicts**.
+If you have local changes in the cloned theme, commit or stash them first:
+checking out a tag fails on uncommitted changes, and detaches `HEAD` from any
+local branch. After checking out the new tag, reapply your changes (for example,
+`git stash pop`, or rebase your branch onto the tag), resolving any conflicts.
+
+After updating the theme, continue with the
+[remaining update steps](/docs/update/#update-node): Node.js, Hugo, overrides,
+and site checks.
 
 [postinstall-note]: /docs/get-started/other-options/#for-an-existing-site

@@ -181,7 +181,7 @@ npm install
 Re-run `hugo mod npm pack` whenever you
 [update Docsy](/docs/update/hugo-module/); Hugo warns when the
 dependency set drifts. For background, see
-[Bootstrap and Font Awesome via npm](/blog/2026/0.16.0/#npm-deps) in the 0.16.0
+[Bootstrap and Font Awesome via npm][blog-npm-deps] in the 0.16.0
 release notes.
 
 ### Check validity of your configuration settings
@@ -241,3 +241,10 @@ git commit -m "Removed docsy git submodule"
 >
 > Be careful when using the `rm -rf` command, make sure that you don't
 > inadvertently delete any productive data files!
+
+<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+     production /blog/2026/0.16.0/ URL once the post publishes; see the
+     release-prep wrapup checklist. -->
+
+[blog-npm-deps]:
+  https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps

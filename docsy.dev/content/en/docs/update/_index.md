@@ -32,6 +32,11 @@ project. Follow the page matching your install mode:
 - [NPM package](npm-package/)
 - [Git submodule or clone](git/)
 
+Not sure which mode your project uses? Hugo-module sites have a `go.mod`
+requiring `github.com/google/docsy/theme`; npm-package sites list `@docsy/theme`
+in `package.json`; Git installs have a `themes/docsy` folder (with a
+`.gitmodules` entry when it's a submodule).
+
 The remaining update steps apply to all install modes.
 
 ## Update Node.js {#update-node}

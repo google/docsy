@@ -113,10 +113,14 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 ## Decisions
 
 - **Accepted the pre-tag window for the evergreen updating docs** (2026-07-27,
-  owner call at the [#2692][] disposition): `/docs/updating/` and the 0.12.0
-  forward note publish on merge, while `tdVersion.latest` renders `v0.15.0`
-  until the tag-time bump — so the version-pinned commands are wrong for a few
-  hours (mirroring the npm RC window). Draft-post links use the preview host in
+  owner call at the [#2692][] disposition): the `/docs/update/` pages and the
+  0.12.0 forward note publish on merge, while `tdVersion.latest` renders
+  `v0.15.0` until the tag-time bump — so the version-pinned commands are wrong
+  for a few hours (mirroring the npm RC window). Affected pages (round-2 POV 3
+  I1): `update/hugo-module.md`, `update/npm-package.md`,
+  `update/convert-site-to-module.md`, and
+  `get-started/docsy-as-module/start-from-scratch.md`; the `git checkout` paths
+  keep working (`v0.15.0` tag exists). Draft-post links use the preview host in
   the interim (flip step above). The 0.16.0 post's `#theme-folder-actions` keeps
   its full per-mode command snapshot deliberately: upgrade posts are
   frozen-in-time and must serve a reader upgrading at exactly 0.16.0 later,
@@ -246,9 +250,11 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
       its `[compare-0.15.0]` link (`v0.15.0...main` → `v0.15.0...v0.16.0`).
 - [ ] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
       the production `/blog/2026/0.16.0/` URLs once the post publishes: the
-      `[r16]` link def in `blog/2025/0.12.0.md`, and the `[0.16.0]` and `[tfa]`
-      link defs in `docs/updating/_index.md` (each site carries a
-      `TODO(tag-time)` comment; from [#2692][]).
+      `[0.16.0]` link def in `blog/2025/0.12.0.md`, the `[tfa]` link def in
+      `docs/update/_index.md`, and the `[blog-npm-deps]` link defs in
+      `docs/update/convert-site-to-module.md` and
+      `docs/get-started/docsy-as-module/start-from-scratch.md` (each site
+      carries a `TODO(tag-time)` comment; from [#2692][]).
 - [ ] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit

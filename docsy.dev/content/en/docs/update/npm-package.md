@@ -28,11 +28,16 @@ the version you expect.
 > [!NOTE]
 >
 > Registry versions of `@docsy/theme` start at 0.16.0. To install or roll back
-> to an earlier version, install from GitHub instead, as described below.
+> to an earlier version, [install from GitHub with npm][github-npm] instead, and
+> restore the pre-0.16 theme path (`theme: docsy`) that those versions require.
 
 If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
 with the desired [revision selector][github-npm].
+
+After updating the theme, continue with the
+[remaining update steps](/docs/update/#update-node): Node.js, Hugo, overrides,
+and site checks.
 
 [github-npm]: /docs/get-started/other-options/#development-versions-of-docsy
 [npm-package-setup]:

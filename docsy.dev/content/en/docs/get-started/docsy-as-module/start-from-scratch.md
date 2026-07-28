@@ -211,7 +211,11 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
+<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+     production /blog/2026/0.16.0/ URL once the post publishes; see the
+     release-prep wrapup checklist. -->
+
+[blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
 [configuration file]:
   https://gohugo.io/configuration/introduction/#configuration-file
 [Troubleshooting]: /docs/get-started/troubleshooting/
