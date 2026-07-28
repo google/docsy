@@ -10,8 +10,10 @@ release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 > [!TIP]
 >
-> Do the update on a branch, and merge only after [checking your site](#check):
-> that way, rolling back is a plain Git operation.
+> Before updating, make sure that you can restore your project's current state:
+> for example, work from a Git branch, merging only after
+> [checking your site](#check), or back up your project files first. Rolling
+> back is then a simple restore.
 
 > [!NOTE]
 >
@@ -21,7 +23,10 @@ release-specific upgrade actions, see the [upgrade blog posts][blog].
 <!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
 
-To update the theme, follow the page matching your install mode:
+## Update the theme {#update-theme}
+
+How you update the theme depends on the way that Docsy is installed in your
+project. Follow the page matching your install mode:
 
 - [Hugo module](hugo-module/)
 - [NPM package](npm-package/)
