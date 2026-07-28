@@ -4,7 +4,7 @@ linkTitle: Git submodule or clone
 aliases: [/docs/updating/updating-submodules/]
 weight: 3
 description: >
-  Update the Docsy theme to the latest version using submodules or `git pull`.
+  Update your Docsy theme to the latest version using submodules or `git pull`.
 ---
 
 If you aren't using Hugo Modules, depending on how you chose to install Docsy on
