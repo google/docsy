@@ -178,9 +178,9 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/update/hugo-module/); Hugo warns when the
-dependency set drifts. For background, see [Bootstrap and Font Awesome via
-npm][blog-npm-deps] in the 0.16.0 release notes.
+[update Docsy](/docs/update/hugo-module/); Hugo warns when the dependency set
+drifts. For background, see [Bootstrap and Font Awesome via npm][blog-npm-deps]
+in the 0.16.0 release notes.
 
 ### Preview your site
 

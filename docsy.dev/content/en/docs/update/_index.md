@@ -4,9 +4,9 @@ description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-This section documents how to update your site's Docsy theme and, when
-required, its Node.js and Hugo versions. For what changed in a given release,
-and any release-specific upgrade actions, see the [upgrade blog posts][blog].
+This section documents how to update your site's Docsy theme and, when required,
+its Node.js and Hugo versions. For what changed in a given release, and any
+release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 > [!NOTE]
 >
@@ -27,8 +27,8 @@ The remaining update steps apply to all install modes.
 ## Update Node.js {#update-node}
 
 Docsy is tested against a specific Node.js LTS release; a release's upgrade
-[blog post][blog] names it. We recommend using [nvm][] to install and select
-the active LTS release:
+[blog post][blog] names it. We recommend using [nvm][] to install and select the
+active LTS release:
 
 ```sh
 nvm install --lts
@@ -47,17 +47,26 @@ npm install --save-exact --save-dev hugo-extended@latest
 After updating, also refresh any CI/CD cache keys so that builds don't reuse a
 cached Hugo.
 
-## Review and update theme-file overrides {#update-overrides}
+## Review your theme overrides {#update-overrides}
 
-If your site [overrides theme files][lookandfeel], diff each override against
-the new theme version and port upstream changes.
+Hugo lets your project override theme files: a project file at the same relative
+path as a theme file silently replaces it. Override copies don't receive theme
+updates, so after updating, diff each one against its new theme counterpart and
+port upstream changes. Look for overrides in your project's:
+
+- `layouts/`, the most common location
+- `assets/`, `i18n/`, and `static/`
+
+Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
+friends) also work this way, but the theme's copies are placeholders that are
+intentionally empty: there's nothing to diff, so they don't need this review.
 
 ## Test your update {#test}
 
-Build and serve your site using your usual commands (for example, `hugo` and
-`hugo server`, or your site's `npm run build` and `npm run serve` scripts) to
-check for errors and verify that your site renders as expected. We recommend
-building both development and production versions of your site.
+Build and serve your site using your usual commands to check for errors and
+verify that your site renders as expected: for example, `hugo` and
+`hugo server`, or your site's `npm run build` and `npm run serve` scripts. We
+recommend building both development and production versions of your site.
 
 Use this checklist to verify that your update succeeded:
 
@@ -81,12 +90,13 @@ post][blog].
 
 ## Roll back {#roll-back}
 
-To roll back an update, re-run your install mode's update procedure,
-specifying the Docsy version that you were
-previously using; likewise for Hugo, if you updated it. Consult the [upgrade
-blog post][blog] of the release you are rolling back **from** for any
-release-specific steps to reverse, such as site-config changes (for example,
-[0.16.0's rollback][0.16.0]).
+To roll back an update:
+
+1. Re-run your install mode's update procedure, specifying the Docsy version
+   that you were previously using; likewise for Hugo, if you updated it.
+2. Consult the [upgrade blog post][blog] of the release you are rolling back
+   **from** for any release-specific steps to reverse, such as site-config
+   changes (for example, [0.16.0's rollback][0.16.0]).
 
 <!-- TODO(tag-time): re-point the two preview-host (main--) links below to
      production /blog/2026/0.16.0/ URLs once the post publishes; see the
@@ -96,7 +106,7 @@ release-specific steps to reverse, such as site-config changes (for example,
 [blog]: /tags/upgrade/
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
-[lookandfeel]: /docs/content/lookandfeel/
+[lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [tfa]:
