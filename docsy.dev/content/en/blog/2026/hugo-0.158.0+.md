@@ -23,8 +23,7 @@ companion to the [Docsy 0.16.0 release post](0.16.0/), which specifies the
 ## Upgrade summary {#upgrade-summary}
 
 - **This guide is for you if** you're:
-  - [Upgrading to Docsy 0.16.0](0.16.0/#upgrade) -- upgrade Hugo first, then
-    return there
+  - [Upgrading to Docsy 0.16.0](0.16.0/#upgrade)
   - Upgrading only Hugo
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
