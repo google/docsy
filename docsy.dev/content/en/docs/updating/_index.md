@@ -6,9 +6,10 @@ weight: 8
 
 Some update steps are the same for every Docsy release: update your Docsy
 package, and possibly your Hugo and Node.js versions. This section documents
-those steps for each install mode. For what changed in a given release and any
-release-specific actions, see the release's [upgrade blog post][blog] and the
-[changelog][].
+those steps for each install mode, for upgrades to Docsy 0.16.0 or later. For
+what changed in a given release and any release-specific actions, see the
+release's [upgrade blog post][blog] and the [changelog][]. For upgrades to
+earlier versions, follow the target release's post.
 
 Updating Docsy won't affect any modifications that you made in your own project
 to [override the Docsy look and feel][lookandfeel], as your overrides don't
