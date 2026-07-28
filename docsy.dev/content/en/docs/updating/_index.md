@@ -4,16 +4,9 @@ description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-For what changed in a given release, and any release-specific upgrade actions,
-see the [upgrade blog posts][blog].
-
-## Update the theme {#update-docsy}
-
-Follow the page matching your install mode:
-
-- [Hugo module](updating-hugo-module/)
-- [NPM package](updating-npm-package/)
-- [Git submodule or clone](updating-submodules/)
+This section documents how to update your site's Docsy theme and, when
+required, its Node.js and Hugo versions. For what changed in a given release,
+and any release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 > [!NOTE]
 >
@@ -22,6 +15,14 @@ Follow the page matching your install mode:
 
 <!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
+
+To update the theme, follow the page matching your install mode:
+
+- [Hugo module](updating-hugo-module/)
+- [NPM package](updating-npm-package/)
+- [Git submodule or clone](updating-submodules/)
+
+The remaining update steps apply to all install modes.
 
 ## Update Node.js {#update-node}
 
@@ -46,7 +47,7 @@ npm install --save-exact --save-dev hugo-extended@latest
 After updating, also refresh any CI/CD cache keys so that builds don't reuse a
 cached Hugo.
 
-## Update your theme overrides {#update-overrides}
+## Review and update theme-file overrides {#update-file-overrides}
 
 If your site [overrides theme files][lookandfeel], diff each override against
 the new theme version and port upstream changes.
@@ -80,8 +81,8 @@ post][blog].
 
 ## Roll back {#roll-back}
 
-To roll back an update, re-run your install mode's
-[update procedure](#update-docsy), specifying the Docsy version that you were
+To roll back an update, re-run your install mode's update procedure,
+specifying the Docsy version that you were
 previously using; likewise for Hugo, if you updated it. Consult the [upgrade
 blog post][blog] of the release you are rolling back **from** for any
 release-specific steps to reverse, such as site-config changes (for example,
