@@ -82,4 +82,6 @@ local branch. After checking out the new tag, reapply your changes (for example,
 After updating the theme, continue with the remaining
 [update steps](/docs/update/#update-order).
 
+<!-- prettier-ignore-start -->
 [postinstall-note]: /docs/get-started/other-options/#for-an-existing-site
+<!-- prettier-ignore-end -->

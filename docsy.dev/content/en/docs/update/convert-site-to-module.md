@@ -248,5 +248,6 @@ git commit -m "Removed docsy git submodule"
      production /blog/2026/0.16.0/ URL once the post publishes; see the
      release-prep wrapup checklist. -->
 
-[blog-npm-deps]:
-  https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
+<!-- prettier-ignore-start -->
+[blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
+<!-- prettier-ignore-end -->

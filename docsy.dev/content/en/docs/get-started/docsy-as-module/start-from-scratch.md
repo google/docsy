@@ -215,7 +215,8 @@ from scratch as it provides defaults for many required configuration parameters.
      production /blog/2026/0.16.0/ URL once the post publishes; see the
      release-prep wrapup checklist. -->
 
+<!-- prettier-ignore-start -->
 [blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
-[configuration file]:
-  https://gohugo.io/configuration/introduction/#configuration-file
+[configuration file]: https://gohugo.io/configuration/introduction/#configuration-file
 [Troubleshooting]: /docs/get-started/troubleshooting/
+<!-- prettier-ignore-end -->

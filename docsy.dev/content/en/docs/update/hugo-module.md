@@ -54,5 +54,6 @@ records `github.com/google/docsy/theme` at the version you expect.
 After updating the theme, continue with the remaining
 [update steps](/docs/update/#update-order).
 
-[theme npm dependencies]:
-  /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies
+<!-- prettier-ignore-start -->
+[theme npm dependencies]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies
+<!-- prettier-ignore-end -->

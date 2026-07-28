@@ -8,16 +8,16 @@ weight: 8
 These pages apply to Docsy {{% param version %}} and compatible versions, and
 **target release** refers to the Docsy version that you are updating your site
 to. For what changed in a given release, and any release-specific upgrade
-actions, see the [upgrade blog posts][blog].
+actions, see the [upgrade blog posts](/tags/upgrade/).
 
 ## Before you begin
 
 - **Backup or safeguard your project's current state**: for example, work from a
   Git branch, merging only after [checking your site](#check), or back up your
   project files first. Rolling back is then a simple restore.
-- **Updating from Docsy [0.15][] or earlier?** First apply the theme-path config
-  changes, and only those, from the 0.16.0 post's [theme folder actions][tfa];
-  this page's steps cover the rest.
+- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
+  theme-path config changes, and only those, from the 0.16.0 post's [theme
+  folder actions][tfa]; this page's steps cover the rest.
 
 <!-- TODO(0.18-ish): drop the crossing bullet above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
@@ -35,8 +35,8 @@ Perform the update steps in the order given by this page:
 ## Update Node.js {#update-node}
 
 **Applies if** your target release names a newer Node.js LTS than your project
-uses; its upgrade [blog post][blog] says so. We recommend using [nvm][] to
-install and select the active LTS release:
+uses; its upgrade [blog post](/tags/upgrade/) says so. We recommend using
+[nvm][] to install and select the active LTS release:
 
 ```sh
 nvm install --lts
@@ -45,7 +45,7 @@ nvm install --lts
 ## Update Hugo
 
 **Applies if** your target release raises the minimum or recommended Hugo
-version; its upgrade [blog post][blog] says so. For projects using the
+version; its upgrade [blog post](/tags/upgrade/) says so. For projects using the
 [hugo-extended NPM package][hugo-extended], update the package version, for
 example:
 
@@ -107,22 +107,18 @@ Use this checklist as a guide to verify that your update succeeded:
 - [ ] Search returns expected results, if used
 - [ ] Print preview looks correct, if used
 
-Also perform any release-specific checks listed in the release's [upgrade blog
-post][blog].
+Also perform any release-specific checks listed in the release's
+[upgrade blog post](/tags/upgrade/).
 
-[blog]: /tags/upgrade/
-[Heading self-links]: /docs/content/navigation/#heading-self-links
-[0.15]: /blog/2026/0.15.0/
-
-<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+<!-- TODO(tag-time): re-point the preview-host (main--) tfa link below to the
      production /blog/2026/0.16.0/ URL once the post publishes; see the
      release-prep wrapup checklist. -->
 
-[hugo-override]:
-  https://gohugo.io/getting-started/directory-structure/#theme-skeleton
+<!-- prettier-ignore-start -->
+[Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
+[hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
-[nvm]:
-  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[tfa]:
-  https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions
+[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+[tfa]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions
+<!-- prettier-ignore-end -->

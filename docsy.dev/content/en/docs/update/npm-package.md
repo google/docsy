@@ -33,6 +33,7 @@ with the desired [revision selector][github-npm].
 After updating the theme, continue with the remaining
 [update steps](/docs/update/#update-order).
 
+<!-- prettier-ignore-start -->
 [github-npm]: /docs/get-started/other-options/#development-versions-of-docsy
-[npm-package-setup]:
-  /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[npm-package-setup]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+<!-- prettier-ignore-end -->
