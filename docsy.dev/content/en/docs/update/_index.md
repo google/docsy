@@ -34,13 +34,15 @@ Perform the update steps in the order given by this page:
 
 ## Update Node.js {#update-node}
 
-**Applies if** your target release names a newer Node.js LTS than your project
-uses; its upgrade [blog post](/tags/upgrade/) says so. We recommend using
-[nvm][] to install and select the active LTS release:
+**Applies if** your target release names a newer Node.js version than your
+project uses; its upgrade [blog post](/tags/upgrade/) says so. With [nvm][],
+install and select that version, for example:
 
 ```sh
-nvm install --lts
+nvm install NODE_VERSION
 ```
+
+Replace _`NODE_VERSION`_ with the version that the upgrade post names.
 
 ## Update Hugo
 

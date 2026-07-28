@@ -48,8 +48,13 @@ npm install
 ```
 
 Hugo warns at build time when your `package.json` dependency set has drifted
-from the theme's. To verify the update, confirm that your site's `go.mod` now
-records `github.com/google/docsy/theme` at the version you expect.
+from the theme's. To verify the resolved version, run:
+
+```sh
+hugo mod graph
+```
+
+Confirm that it lists `github.com/google/docsy/theme` at the version you expect.
 
 After updating the theme, continue with the remaining update steps, starting
 with [Review your theme overrides](/docs/update/#update-overrides).

@@ -23,8 +23,11 @@ npm install --save-dev @docsy/theme@latest
 > npm install --save-dev @docsy/theme@{{% param tdVersion.latest %}}
 > ```
 
-To verify the update, confirm that [`@docsy/theme`][npm-package-setup] in your
-`package.json` records the version you expect.
+To verify the resolved version of [`@docsy/theme`][npm-package-setup], run:
+
+```sh
+npm ls @docsy/theme --depth=0
+```
 
 If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
