@@ -5,32 +5,54 @@ aliases: [/docs/updating/]
 weight: 8
 ---
 
-This section explains how to:
+This section explains how to update your site's Docsy theme to a **target
+release** of {{% param version %}} or a compatible version. For what changed in
+a given release, and any release-specific upgrade actions, see the [upgrade blog
+posts][blog].
 
-- Update your site's Docsy theme to {{% param version %}} (and compatible
-  versions)
-- Update Node.js and Hugo, when a release requires it
-
-For what changed in a given release, and any release-specific upgrade actions,
-see the [upgrade blog posts][blog].
-
-## Before you begin {#before-you-begin}
+## Before you begin
 
 - **Backup or safeguard your project's current state**: for example, work from a
   Git branch, merging only after [checking your site](#check), or back up your
   project files first. Rolling back is then a simple restore.
-- **If the target release raises the minimum Hugo or Node.js version** (its
-  [blog post][blog] says so), update [Node.js](#update-node) and
-  [Hugo](#update-hugo) first, so that the theme-update commands run with
-  supported versions.
+- **Updating from Docsy [0.15][] or earlier?** First apply the config changes
+  from the 0.16.0 post's [theme folder actions][tfa].
 
-> [!NOTE]
->
-> Updating from Docsy [0.15][] or earlier? First apply the config changes from
-> the 0.16.0 post's [theme folder actions][tfa].
-
-<!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
+<!-- TODO(0.18-ish): drop the crossing bullet above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
+
+## Order of steps {#update-order}
+
+Perform the update steps in the order given by this page:
+
+1. [Node.js](#update-node) and [Hugo](#update-hugo), when your target release
+   requires it
+2. [The theme](#update-theme), by install mode
+3. [Review your theme overrides](#update-overrides)
+4. [Check your site](#check)
+
+## Update Node.js {#update-node}
+
+**Applies if** your target release names a newer Node.js LTS than your project
+uses; its upgrade [blog post][blog] says so. We recommend using [nvm][] to
+install and select the active LTS release:
+
+```sh
+nvm install --lts
+```
+
+## Update Hugo
+
+**Applies if** your target release raises the minimum Hugo version; its upgrade
+[blog post][blog] says so. For projects using the [hugo-extended NPM
+package][hugo-extended], update the package version, for example:
+
+```sh
+npm install --save-exact --save-dev hugo-extended@latest
+```
+
+After updating, also refresh any CI/CD cache keys so that builds don't reuse a
+cached Hugo.
 
 ## Update the theme {#update-theme}
 
@@ -42,29 +64,6 @@ project. Follow the page matching your install mode:
 - [Git submodule or clone](git/)
 
 The remaining update steps apply to all install modes.
-
-## Update Node.js {#update-node}
-
-Docsy is tested against a specific Node.js LTS release; a release's upgrade
-[blog post][blog] names it. We recommend using [nvm][] to install and select the
-active LTS release:
-
-```sh
-nvm install --lts
-```
-
-## Update Hugo {#update-hugo}
-
-Each Docsy release declares a minimum Hugo version; a release's upgrade [blog
-post][blog] lists it. For projects using the [hugo-extended NPM
-package][hugo-extended], update the package version, for example:
-
-```sh
-npm install --save-exact --save-dev hugo-extended@latest
-```
-
-After updating, also refresh any CI/CD cache keys so that builds don't reuse a
-cached Hugo.
 
 ## Review your theme overrides {#update-overrides}
 

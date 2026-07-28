@@ -29,8 +29,8 @@ If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
 with the desired [revision selector][github-npm].
 
-After updating the theme, continue with the
-[remaining update steps](/docs/update/#update-node).
+After updating the theme, continue with the remaining
+[update steps](/docs/update/#update-order).
 
 [github-npm]: /docs/get-started/other-options/#development-versions-of-docsy
 [npm-package-setup]:

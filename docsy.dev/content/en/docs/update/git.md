@@ -80,7 +80,7 @@ checking out a tag fails on uncommitted changes, and detaches `HEAD` from any
 local branch. After checking out the new tag, reapply your changes (for example,
 `git stash pop`, or rebase your branch onto the tag), resolving any conflicts.
 
-After updating the theme, continue with the
-[remaining update steps](/docs/update/#update-node).
+After updating the theme, continue with the remaining
+[update steps](/docs/update/#update-order).
 
 [postinstall-note]: /docs/get-started/other-options/#for-an-existing-site
