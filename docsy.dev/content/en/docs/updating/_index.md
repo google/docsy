@@ -6,8 +6,7 @@ weight: 8
 
 This section documents how to update your site's Docsy theme and, when
 required, its Node.js and Hugo versions. For what changed in a given release,
-and any release-specific upgrade actions, see the release's [upgrade blog
-post][blog] and the [changelog][].
+and any release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 ## Update the theme {#update-docsy}
 
@@ -19,9 +18,9 @@ Follow the page matching your install mode:
 
 > [!NOTE]
 >
-> Updating from Docsy 0.15 or earlier? The theme's install paths changed in
-> 0.16.0: first apply the config changes from the 0.16.0 post's [theme folder
-> actions][tfa], then follow your install mode's page.
+> The pages below assume your site config uses the theme install paths
+> introduced in Docsy 0.16.0. Updating from 0.15 or earlier? First apply the
+> config changes from the 0.16.0 post's [theme folder actions][tfa].
 
 <!-- TODO(0.18-ish): drop the crossing note above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
@@ -96,7 +95,6 @@ release-specific steps to reverse, such as site-config changes (for example,
 
 [0.16.0]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#rollback
 [blog]: /tags/upgrade/
-[changelog]: /project/about/changelog/
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
 [lookandfeel]: /docs/content/lookandfeel/
