@@ -4,17 +4,11 @@ description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-To update your site to a new Docsy release, update your Docsy package and, when
-required, your Hugo and Node.js versions. This section documents those steps
-for each install mode, for upgrades to Docsy 0.16.0 or later; for earlier
-targets, follow the target release's [upgrade blog post][blog]. For what
-changed in a given release and any release-specific actions, see the release's
-post and the [changelog][].
-
-Updating Docsy won't affect any modifications that you made in your own project
-to [override the Docsy look and feel][lookandfeel], as your overrides don't
-modify the theme itself. You may, however, need to port upstream changes to
-copies of theme files that your site overrides.
+This section documents how to update your site's Docsy package (and, when
+required, its Hugo and Node.js versions) for upgrades to Docsy 0.16.0 or later;
+for earlier targets, follow the target release's [upgrade blog post][blog]. For
+what changed in a given release and any release-specific actions, see the
+release's post and the [changelog][].
 
 ## Update the theme {#update-docsy}
 
@@ -30,10 +24,6 @@ Follow the page matching your install mode:
 > 0.16.0: first apply the config changes from the 0.16.0 post's [theme folder
 > actions][tfa], then follow your install mode's page.
 
-If you are using Docsy as a Git submodule or clone, consider
-[migrating to Hugo modules](convert-site-to-module/) or the [NPM
-package][npm-package]: both are easier to keep up to date.
-
 ## Update Hugo and Node.js {#update-hugo-node}
 
 Each Docsy release declares a minimum Hugo version and is tested against a
@@ -45,8 +35,8 @@ package version, for example:
 npm install --save-exact --save-dev hugo-extended@latest
 ```
 
-After updating, also refresh your NPM lockfile or any CI/CD cache keys so that
-builds don't reuse a cached Hugo.
+After updating, also refresh any CI/CD cache keys so that builds don't reuse a
+cached Hugo.
 
 For Node.js, we recommend using [nvm][] to install and select the active LTS
 release:
@@ -74,6 +64,8 @@ Use this checklist to verify that your update succeeded:
       scroll
 - [ ] External links show expected styling (e.g. icon)
 - [ ] [Heading self-links][] work and are styled correctly
+- [ ] [Look-and-feel overrides][lookandfeel]: diff each overridden theme file
+      against the new theme version and port upstream changes (if used)
 - [ ] Dark mode toggle works (if enabled)
 - [ ] Custom shortcodes render correctly (if used)
 - [ ] Search returns expected results (if used)
@@ -101,7 +93,6 @@ release-specific steps to reverse, such as site-config changes (for example,
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
 [lookandfeel]: /docs/content/lookandfeel/
-[npm-package]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [nvm]:
   https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [tfa]:
