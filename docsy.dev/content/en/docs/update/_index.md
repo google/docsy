@@ -71,8 +71,8 @@ differ in their configuration, minification, etc.
 Use this checklist as a guide to verify that your update succeeded:
 
 - [ ] Build completes without warnings or deprecation notices
-- [ ] Key pages (for example, home, a doc page, a blog post) load with no 404s
-      or broken layout
+- [ ] Key pages load and have proper layout, for example the site home, a doc
+      page, and a blog post
 - [ ] Browser console shows no errors
 - [ ] Nav links resolve; breadcrumbs show current path; current section is
       highlighted
