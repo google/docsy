@@ -1,5 +1,5 @@
 ---
-title: Update Docsy without Hugo Modules
+title: Update your Docsy Git submodule or clone
 linkTitle: Git submodule or clone
 weight: 3
 description: >
