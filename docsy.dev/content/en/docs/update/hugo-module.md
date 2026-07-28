@@ -14,7 +14,7 @@ At the command prompt, change to the root directory of your existing site.
 cd /path/to/my-existing-site
 ```
 
-Then invoke hugo's module `get` subcommand with the update flag:
+Then invoke Hugo's module `get` subcommand with the update flag:
 
 ```bash
 hugo mod get -u github.com/google/docsy/theme

@@ -5,17 +5,19 @@ aliases: [/docs/updating/]
 weight: 8
 ---
 
-These pages apply to a **target release** of {{% param version %}} or a
-compatible version. For what changed in a given release, and any
-release-specific upgrade actions, see the [upgrade blog posts][blog].
+These pages apply to Docsy {{% param version %}} and compatible versions, and
+**target release** refers to the Docsy version that you are updating your site
+to. For what changed in a given release, and any release-specific upgrade
+actions, see the [upgrade blog posts][blog].
 
 ## Before you begin
 
 - **Backup or safeguard your project's current state**: for example, work from a
   Git branch, merging only after [checking your site](#check), or back up your
   project files first. Rolling back is then a simple restore.
-- **Updating from Docsy [0.15][] or earlier?** First apply the config changes
-  from the 0.16.0 post's [theme folder actions][tfa].
+- **Updating from Docsy [0.15][] or earlier?** First apply the theme-path config
+  changes, and only those, from the 0.16.0 post's [theme folder actions][tfa];
+  this page's steps cover the rest.
 
 <!-- TODO(0.18-ish): drop the crossing bullet above once 0.15-to-0.16 upgrade
      traffic fades; release history lives in the blog posts. (2026-07-28) -->
@@ -48,8 +50,10 @@ version; its upgrade [blog post][blog] says so. For projects using the
 example:
 
 ```sh
-npm install --save-exact --save-dev hugo-extended@latest
+npm install --save-exact --save-dev hugo-extended@HUGO_VERSION
 ```
+
+Replace _`HUGO_VERSION`_ with the version that the upgrade post names.
 
 After updating, also refresh any CI/CD cache keys so that builds don't reuse a
 cached Hugo.

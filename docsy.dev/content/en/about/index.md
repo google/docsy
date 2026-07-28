@@ -188,8 +188,8 @@ create an issue yourself - or assign yourself an issue if you'd like to fix or
 add something! See our [contribution guidelines](/docs/contributing/) for more
 information.
 
-You can find out how to update your site to the latest version of Docsy in
-[Keeping the theme up to date](/docs/update/).
+To update your site to the latest version of Docsy, see
+[Update Docsy](/docs/update/).
 
 <!-- There must not be a blank line at the end of this file otherwise it creates an empty paragraph in the rendered page -->
 

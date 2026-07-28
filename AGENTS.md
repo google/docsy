@@ -30,10 +30,10 @@ project CI/CD, release process, etc.
   Hugo generates; verify against the rendered HTML, not by guessing. Nuances:
   - Icon/badge shortcodes and inline HTML are ID-transparent — no explicit ID
     needed: `## Ready to upgrade? <a id="legacy"></a>` and
-    `### {{% _param FAS square-check primary %}} Sanity checks` generate
+    `### {{%/* _param FAS square-check primary */%}} Sanity checks` generate
     `ready-to-upgrade` and `sanity-checks`.
   - Literal punctuation between shortcodes is not —
-    `## {{% _param BREAKING %}} / {{% _param NEW %}} Favicons` generates
+    `## {{%/* _param BREAKING */%}} / {{%/* _param NEW */%}} Favicons` generates
     `--favicons`, so keep `{#favicons}`.
   - Keep deliberate short or stable IDs that inbound links rely on (e.g.
     `{#check}` on "Check your site", `{#update-order}` surviving retitles).

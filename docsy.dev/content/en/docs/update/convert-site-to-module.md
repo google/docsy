@@ -18,7 +18,7 @@ Run the following from the command line:
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-sed -i '/theme = \["docsy"\]/d' config.toml
+sed -i '/theme = \["docsy/d' config.toml
 mv config.toml hugo.toml
 cat >> hugo.toml <<EOL
 [module]
@@ -34,7 +34,7 @@ hugo server
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-findstr /v /c:"theme = [\"docsy\"]" config.toml > hugo.toml
+findstr /v /c:"theme = [\"docsy" config.toml > hugo.toml
 (echo [module]^
 
 proxy = "direct"^
@@ -77,18 +77,18 @@ This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Update your config file
 
-In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line:
+In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line (`docsy/theme` if your site is on Docsy 0.16 or later, `docsy` otherwise):
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-theme = ["docsy"]
+theme = ["docsy/theme"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-theme: docsy
+theme: docsy/theme
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"theme": "docsy"
+"theme": "docsy/theme"
 {{< /tab >}}
 {{< /tabpane >}}
 
