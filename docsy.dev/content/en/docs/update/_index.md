@@ -68,10 +68,9 @@ Build or serve your site and check for errors and warnings. We recommend
 building both development and production versions of your site, since they can
 differ in their configuration, minification, etc.
 
-Use this checklist to verify that your update succeeded:
+Use this checklist as a guide to verify that your update succeeded:
 
-- [ ] Build succeeds without errors, warnings, or deprecation notices; CSS and
-      other asset files are generated
+- [ ] Build completes without warnings or deprecation notices
 - [ ] Key pages (for example, home, a doc page, a blog post) load with no 404s
       or broken layout
 - [ ] Browser console shows no errors
