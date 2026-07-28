@@ -316,13 +316,13 @@ hvm use {{% param hugoSupportedVersion %}}/extended
 
 For other installation methods, see [Install Hugo][].
 
-### After upgrading {#after-upgrading}
+### What next? {#what-next}
 
 Confirm that you've addressed [every action][] that applies to your site. Then:
 
 - Upgrading as part of [Docsy 0.16.0](0.16.0/)? Continue with its
   [upgrade section](0.16.0/#upgrade).
-- Upgrading only Hugo? Finish with the [generic site checks][check].
+- Otherwise, finish with the [generic site checks][check].
 
 <!-- prettier-ignore-start -->
 [check]: /docs/update/#check
