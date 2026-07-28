@@ -4,8 +4,8 @@ description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-This section documents how to update your site's Docsy package (and, when
-required, its Hugo and Node.js versions) for upgrades to Docsy 0.16.0 or later;
+This section documents how to update your site's Docsy theme (and, when
+required, its Node.js and Hugo versions) for upgrades to Docsy 0.16.0 or later;
 for earlier targets, follow the target release's [upgrade blog post][blog]. For
 what changed in a given release and any release-specific actions, see the
 release's post and the [changelog][].
@@ -24,12 +24,21 @@ Follow the page matching your install mode:
 > 0.16.0: first apply the config changes from the 0.16.0 post's [theme folder
 > actions][tfa], then follow your install mode's page.
 
-## Update Hugo and Node.js {#update-hugo-node}
+## Update Node.js {#update-node}
 
-Each Docsy release declares a minimum Hugo version and is tested against a
-specific Node.js LTS release; a release's upgrade [blog post][blog] lists both.
-For projects using the [hugo-extended NPM package][hugo-extended], update the
-package version, for example:
+Docsy is tested against a specific Node.js LTS release; a release's upgrade
+[blog post][blog] names it. We recommend using [nvm][] to install and select
+the active LTS release:
+
+```sh
+nvm install --lts
+```
+
+## Update Hugo {#update-hugo}
+
+Each Docsy release declares a minimum Hugo version; a release's upgrade [blog
+post][blog] lists it. For projects using the [hugo-extended NPM
+package][hugo-extended], update the package version, for example:
 
 ```sh
 npm install --save-exact --save-dev hugo-extended@latest
@@ -38,12 +47,10 @@ npm install --save-exact --save-dev hugo-extended@latest
 After updating, also refresh any CI/CD cache keys so that builds don't reuse a
 cached Hugo.
 
-For Node.js, we recommend using [nvm][] to install and select the active LTS
-release:
+## Update your theme overrides {#update-overrides}
 
-```sh
-nvm install --lts
-```
+If your site [overrides theme files][lookandfeel], diff each override against
+the new theme version and port upstream changes.
 
 ## Test your update {#test}
 
@@ -64,8 +71,6 @@ Use this checklist to verify that your update succeeded:
       scroll
 - [ ] External links show expected styling (e.g. icon)
 - [ ] [Heading self-links][] work and are styled correctly
-- [ ] [Look-and-feel overrides][lookandfeel]: diff each overridden theme file
-      against the new theme version and port upstream changes (if used)
 - [ ] Dark mode toggle works (if enabled)
 - [ ] Custom shortcodes render correctly (if used)
 - [ ] Search returns expected results (if used)
