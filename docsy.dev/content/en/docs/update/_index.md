@@ -64,9 +64,9 @@ intentionally empty: there's nothing to diff, so they don't need this review.
 
 ## Check your site {#check}
 
-After updating, build or serve your site and check for errors and warnings.
-We recommend building both development and production versions of your site,
-since they can differ in their configuration, minification, etc.
+After updating, build or serve your site and check for errors and warnings. We
+recommend building both development and production versions of your site, since
+they can differ in their configuration, minification, etc.
 
 Use this checklist as a guide to verify that your update succeeded:
 
