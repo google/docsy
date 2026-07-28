@@ -20,7 +20,7 @@ through {{% param hugoSupportedVersion %}} that affect Docsy sites. It is a
 companion to the [Docsy 0.16.0 release post](0.16.0/), which specifies the
 [Hugo versions that 0.16.0 requires and validates](0.16.0/#hugo).
 
-## Upgrade summary {#upgrade-summary}
+## Upgrade summary
 
 - **This guide is for you if** you're:
   - [Upgrading to Docsy 0.16.0](0.16.0/#upgrade)
@@ -217,7 +217,7 @@ imaging:
   resampleFilter: CatmullRom
 ```
 
-### Image URL churn {#image-url-churn}
+### Image URL churn
 
 **Applies if** your site commits generated output, compares public builds, or
 uses a CDN that caches generated image resources aggressively.
@@ -280,7 +280,7 @@ JavaScript tooling config:
   missing (matching AsciiDoc) instead of silently publishing raw content; ensure
   the converter is installed wherever you build.
 
-### Security fixes {#security-fixes}
+### Security fixes
 
 This range includes multiple security-related updates, including Go
 `html/template` fixes and stricter URL/content handling. Hugo [0.163.3][] also
@@ -318,7 +318,7 @@ hvm use {{% param hugoSupportedVersion %}}/extended
 
 For other installation methods, see [Install Hugo][].
 
-### {{% _param FAS square-check primary %}} Sanity checks {#sanity-checks}
+### {{% _param FAS square-check primary %}} Sanity checks
 
 Confirm that you've addressed [every action][] that applies to your site. Then:
 
@@ -341,8 +341,7 @@ Confirm that you've addressed [every action][] that applies to your site. Then:
 [check]: /docs/update/#check
 [every action]: #upgrade-summary
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
-[hugo-supported-version]:
-  <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoSupportedVersion %}}>
+[hugo-supported-version]: <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoSupportedVersion %}}>
 [hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
 [Install Hugo]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo

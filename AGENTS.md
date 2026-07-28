@@ -26,6 +26,17 @@ project CI/CD, release process, etc.
 - In site content, `version` is the published variant's identity, not always a
   git ref; anything needing a resolvable release ref (install commands, etc.)
   uses `tdVersion.latest` (`docsy.dev/config/_default/params.yaml`).
+- Add an explicit heading ID (`{#id}`) only when it differs from the ID that
+  Hugo generates; verify against the rendered HTML, not by guessing. Nuances:
+  - Icon/badge shortcodes and inline HTML are ID-transparent — no explicit ID
+    needed: `## Ready to upgrade? <a id="legacy"></a>` and
+    `### {{% _param FAS square-check primary %}} Sanity checks` generate
+    `ready-to-upgrade` and `sanity-checks`.
+  - Literal punctuation between shortcodes is not —
+    `## {{% _param BREAKING %}} / {{% _param NEW %}} Favicons` generates
+    `--favicons`, so keep `{#favicons}`.
+  - Keep deliberate short or stable IDs that inbound links rely on (e.g.
+    `{#check}` on "Check your site", `{#update-order}` surviving retitles).
 
 ## User guide
 

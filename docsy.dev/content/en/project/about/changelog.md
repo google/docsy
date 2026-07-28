@@ -91,7 +91,7 @@ See [semver][].
 > A new build warning alone is not considered a breaking change, but it may
 > indicate a future breaking change, such as signaling a deprecation.
 
-### Official support {#official-support}
+### Official support
 
 Docsy is maintained with very limited resources and only supports the latest
 releases of Docsy, its dependencies & tools, and operating systems.
