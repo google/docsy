@@ -25,12 +25,6 @@ npm install --save-dev @docsy/theme@latest
 To verify the update, confirm that `@docsy/theme` in your `package.json` records
 the version you expect.
 
-> [!NOTE]
->
-> Registry versions of `@docsy/theme` start at 0.16.0. To install an earlier
-> version, [install from GitHub with npm][github-npm] instead, and restore the
-> pre-0.16 theme path (`theme: docsy`) that those versions require.
-
 If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
 with the desired [revision selector][github-npm].
