@@ -18,7 +18,7 @@ features, but you'll need to specify your own site structure.
 These instructions give you a minimum file structure for your site project only,
 so that you build and extend your actual site step by step. The first step is
 adding the Docsy theme as a [Hugo Module](https://gohugo.io/hugo-modules/) to
-your site. If needed, you can easily [update](/docs/updating/) the module to the
+your site. If needed, you can easily [update](/docs/update/) the module to the
 latest revision from the Docsy GitHub repo.
 
 ## TL;DR: Setup for the impatient expert
@@ -32,7 +32,7 @@ At your command prompt, run the following:
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
@@ -47,7 +47,7 @@ hugo server
 hugo new site my-new-site
 cd  my-new-site
 hugo mod init github.com/me/my-new-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 (echo [module]^
 
 proxy = "direct"^
@@ -107,7 +107,7 @@ which holds the checksums for module verification.
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
@@ -178,9 +178,9 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/updating/updating-hugo-module/); Hugo warns when the
-dependency set drifts. For background, see [Bootstrap and Font Awesome via
-npm][blog-npm-deps] in the 0.16.0 release notes.
+[update Docsy](/docs/update/hugo-module/); Hugo warns when the dependency set
+drifts. For background, see [Bootstrap and Font Awesome via npm][blog-npm-deps]
+in the 0.16.0 release notes.
 
 ### Preview your site
 
@@ -211,7 +211,12 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
-[configuration file]:
-  https://gohugo.io/configuration/introduction/#configuration-file
+<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+     production /blog/2026/0.16.0/ URL once the post publishes; see the
+     release-prep wrapup checklist. -->
+
+<!-- prettier-ignore-start -->
+[blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
+[configuration file]: https://gohugo.io/configuration/introduction/#configuration-file
 [Troubleshooting]: /docs/get-started/troubleshooting/
+<!-- prettier-ignore-end -->

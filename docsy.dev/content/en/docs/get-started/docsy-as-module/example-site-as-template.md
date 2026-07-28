@@ -14,7 +14,7 @@ This approach gives you a skeleton structure for your site, with top-level and
 documentation sections and templates that you can modify as necessary. The
 example site automatically pulls in the Docsy theme as a
 [Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
-[keep up to date](/docs/updating/updating-hugo-module/).
+[keep up to date](/docs/update/hugo-module/).
 
 If you prefer to create a site from scratch, follow [Start a site from
 scratch][start-from-scratch].
@@ -24,7 +24,7 @@ scratch][start-from-scratch].
 From a terminal:
 
 ```bash
-git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
 cd my-new-site
 npm install
 hugo server
@@ -56,7 +56,7 @@ make a local working copy of the example site directly using `git clone`. As
 last parameter, give your chosen local repo name (here: `my-new-site`):
 
 ```bash
-git clone --depth 1 --branch {{% param "version" %}} https://github.com/google/docsy-example.git my-new-site
+git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
 ```
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
@@ -70,7 +70,7 @@ easy:
    [Docsy example site](https://github.com/google/docsy-example).
 
 1. Use the dropdown for switching branches/tags to change to the latest released
-   tag `{{% param "version" %}}`.
+   tag `{{% param tdVersion.latest %}}`.
 
 1. Click the button **Use this template** and select the option
    `Create a new repository` from the dropdown.

@@ -91,7 +91,7 @@ See [semver][].
 > A new build warning alone is not considered a breaking change, but it may
 > indicate a future breaking change, such as signaling a deprecation.
 
-### Official support {#official-support}
+### Official support
 
 Docsy is maintained with very limited resources and only supports the latest
 releases of Docsy, its dependencies & tools, and operating systems.
@@ -993,7 +993,7 @@ For the full list of changes, see the [0.2.0][] release page.
   updates.
 
   For details, see
-  [Migrate to Hugo Modules](/docs/updating/convert-site-to-module/).
+  [Migrate to Hugo Modules](/docs/update/convert-site-to-module/).
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC

@@ -90,6 +90,6 @@ Section pages:
 - [Content and Customization](/docs/content/): How to add content to and customize your Docsy site.
 - [Deployment and previews](/docs/deployment/): Deploying your Docsy site.
 - [Multi-language Support](/docs/language/): Support multiple languages in your site.
-- [Update Docsy](/docs/updating/): Keeping the Docsy theme up to date.
+- [Update Docsy](/docs/update/): Theme updates for every install mode, plus Node.js and Hugo
 - [Best Practices](/docs/best-practices/): Optional guidance and recommendations about organizing, authoring, and managing your technical documentation.
 - [Contribution guidelines](/docs/contributing/): How to contribute to Docsy

@@ -15,7 +15,7 @@ site uses Docsy as a Hugo module.
 To find out about other setup approaches, see our
 [Get started](/docs/get-started/) overview. If you want to migrate an existing
 Docsy site to use Hugo Modules, see our
-[migration guide](/docs/updating/convert-site-to-module/).
+[migration guide](/docs/update/convert-site-to-module/).
 
 ## Setup options with Hugo Modules
 

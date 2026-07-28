@@ -112,6 +112,19 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
 ## Decisions
 
+- **Accepted the pre-tag window for the evergreen updating docs** (2026-07-27,
+  owner call at the [#2692][] disposition): the `/docs/update/` pages and the
+  0.12.0 forward note publish on merge, while `tdVersion.latest` renders
+  `v0.15.0` until the tag-time bump — so the version-pinned commands are wrong
+  for a few hours (mirroring the npm RC window). Affected pages (round-2 POV 3
+  I1): `update/hugo-module.md`, `update/npm-package.md`,
+  `update/convert-site-to-module.md`, and
+  `get-started/docsy-as-module/start-from-scratch.md`; the `git checkout` paths
+  keep working (`v0.15.0` tag exists). Draft-post links use the preview host in
+  the interim (flip step above). The 0.16.0 post's `#theme-folder-actions` keeps
+  its full per-mode command snapshot deliberately: upgrade posts are
+  frozen-in-time and must serve a reader upgrading at exactly 0.16.0 later,
+  whereas the evergreen pages track the latest release.
 - Applied the enumeration-home rule (2026-07-16, now canonical in maintainer
   notes → Content placement): the GitHub release notes + milestone own the
   exhaustive PR/issue record; the blog post carries no PR/issue enumeration
@@ -235,6 +248,13 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
       the release post's `[CL@0.16.0]` link (`/changelog/#next` →
       `/changelog/#v0.16.0`, since the heading anchor changes at release), and
       its `[compare-0.15.0]` link (`v0.15.0...main` → `v0.15.0...v0.16.0`).
+- [ ] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
+      the production `/blog/2026/0.16.0/` URLs once the post publishes: the
+      `[0.16.0]` link def in `blog/2025/0.12.0.md`, the `[tfa]` link def in
+      `docs/update/_index.md`, and the `[blog-npm-deps]` link defs in
+      `docs/update/convert-site-to-module.md` and
+      `docs/get-started/docsy-as-module/start-from-scratch.md` (each site
+      carries a `TODO(tag-time)` comment; from [#2692][]).
 - [ ] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
@@ -246,8 +266,12 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 - [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
       and re-point dist-tag `next` at it, **before** the site deploy flips the
       posts live (the post's install commands must resolve). Verify with
-      `npm run test:smoke`. Also new this release; mechanics:
-      `docsy-npm-publish` skill, tracker [#2683][] (close it here).
+      `npm run test:smoke`, and verify the dist-tags post-publish
+      (`npm view @docsy/theme dist-tags`): `latest` → `0.16.0`, `next` →
+      `0.16.0` — until then `latest` serves `0.16.0-rc.1` (npm requires a
+      `latest` tag and the RC is the only version; round-2 POV 2 R2P2-02), so
+      the update docs' `@latest` command installs the RC. Also new this release;
+      mechanics: `docsy-npm-publish` skill, tracker [#2683][] (close it here).
 - [ ] Milestone hygiene: close or move all milestone-24 issues except [#2615][].
       Trued up at the 2026-07-26 gate — only [#2683][] also remains, closing
       with the npm publish above; see Milestone 24 hygiene.
@@ -321,6 +345,7 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2684]: https://github.com/google/docsy/pull/2684
 [#2688]: https://github.com/google/docsy/pull/2688
 [#2689]: https://github.com/google/docsy/issues/2689
+[#2692]: https://github.com/google/docsy/pull/2692
 [9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
 [link-cache]: https://github.com/chalin/link-cache

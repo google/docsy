@@ -1,7 +1,10 @@
 ---
 title: Migrate to Hugo Modules
-weight: 3
-description: Convert an existing site to use Docsy as a Hugo Module
+aliases: [/docs/updating/convert-site-to-module/]
+weight: 4
+description: >-
+  Move a submodule- or clone-based site to Hugo Modules and simplify future
+  updates.
 cSpell:ignore: findstr batchfile twbs
 ---
 
@@ -14,8 +17,8 @@ Run the following from the command line:
 {{< tab header="Unix shell" lang="Bash" >}}
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
-sed -i '/theme = \["docsy"\]/d' config.toml
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
+sed -i '/theme = \["docsy/d' config.toml
 mv config.toml hugo.toml
 cat >> hugo.toml <<EOL
 [module]
@@ -30,8 +33,8 @@ hugo server
 {{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
-findstr /v /c:"theme = [\"docsy\"]" config.toml > hugo.toml
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
+findstr /v /c:"theme = [\"docsy" config.toml > hugo.toml
 (echo [module]^
 
 proxy = "direct"^
@@ -67,25 +70,25 @@ This creates two new files, `go.mod` for the module definitions and `go.sum` whi
 Next declare the Docsy theme module as a dependency for your site.
 
 ```bash
-hugo mod get github.com/google/docsy/theme@{{% param "version" %}}
+hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
 This command adds the `docsy` theme module to your definition file `go.mod`.
 
 ### Update your config file
 
-In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line:
+In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line (`docsy/theme` if your site is on Docsy 0.16 or later, `docsy` otherwise):
 
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-theme = ["docsy"]
+theme = ["docsy/theme"]
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
-theme: docsy
+theme: docsy/theme
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
-"theme": "docsy"
+"theme": "docsy/theme"
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -178,9 +181,9 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/updating/updating-hugo-module/); Hugo warns when the
+[update Docsy](/docs/update/hugo-module/); Hugo warns when the
 dependency set drifts. For background, see
-[Bootstrap and Font Awesome via npm](/blog/2026/0.16.0/#npm-deps) in the 0.16.0
+[Bootstrap and Font Awesome via npm][blog-npm-deps] in the 0.16.0
 release notes.
 
 ### Check validity of your configuration settings
@@ -190,7 +193,7 @@ To make sure that your configuration settings are correct, run the command `hugo
 ```bash
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/google/docsy/theme@{{% param "version" %}}
+github.com/me/my-existing-site github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
 Make sure that the `docsy/theme` dependency is listed. If not, please double check your config settings.
@@ -240,3 +243,11 @@ git commit -m "Removed docsy git submodule"
 >
 > Be careful when using the `rm -rf` command, make sure that you don't
 > inadvertently delete any productive data files!
+
+<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
+     production /blog/2026/0.16.0/ URL once the post publishes; see the
+     release-prep wrapup checklist. -->
+
+<!-- prettier-ignore-start -->
+[blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
+<!-- prettier-ignore-end -->
