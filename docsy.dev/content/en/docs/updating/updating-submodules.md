@@ -37,7 +37,7 @@ in your project, here's how you update the submodule to the latest release:
    npm run postinstall --prefix themes/docsy
    ```
 
-   Run `npm run postinstall`, not `npm install` — for why, see the [setup
+   Run `npm run postinstall`, not `npm install`; for why, see the [setup
    note][postinstall-note].
 
 1. Add and then commit the change to your project:

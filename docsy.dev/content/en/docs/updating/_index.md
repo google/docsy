@@ -1,19 +1,19 @@
 ---
 title: Update Docsy
-description: Keeping the Docsy theme up to date.
+description: Keeping your Docsy theme up to date
 weight: 8
 ---
 
-Some update steps are the same for every Docsy release: update your Docsy
-package, and possibly your Hugo and Node.js versions. This section documents
-those steps for each install mode, for upgrades to Docsy 0.16.0 or later. For
-what changed in a given release and any release-specific actions, see the
-release's [upgrade blog post][blog] and the [changelog][]. For upgrades to
-earlier versions, follow the target release's post.
+To update your site to a new Docsy release, update your Docsy package and, when
+required, your Hugo and Node.js versions. This section documents those steps
+for each install mode, for upgrades to Docsy 0.16.0 or later; for earlier
+targets, follow the target release's [upgrade blog post][blog]. For what
+changed in a given release and any release-specific actions, see the release's
+post and the [changelog][].
 
 Updating Docsy won't affect any modifications that you made in your own project
 to [override the Docsy look and feel][lookandfeel], as your overrides don't
-modify the theme itself — although you may need to port upstream changes to
+modify the theme itself. You may, however, need to port upstream changes to
 copies of theme files that your site overrides.
 
 ## Update Docsy {#update-docsy}
@@ -32,7 +32,7 @@ Follow the page matching your install mode:
 
 If you are using Docsy as a Git submodule or clone, consider
 [migrating to Hugo modules](convert-site-to-module/) or the [NPM
-package][npm-package] — both are easier to keep up to date.
+package][npm-package]: both are easier to keep up to date.
 
 ## Update Hugo and Node.js {#update-hugo-node}
 
@@ -57,8 +57,8 @@ nvm install --lts
 
 ## Test your update {#test}
 
-Build and serve your site using your usual commands — for example, `hugo` and
-`hugo server`, or your site's `npm run build` and `npm run serve` scripts — to
+Build and serve your site using your usual commands (for example, `hugo` and
+`hugo server`, or your site's `npm run build` and `npm run serve` scripts) to
 check for errors and verify that your site renders as expected. We recommend
 building both development and production versions of your site.
 
@@ -86,12 +86,10 @@ post][blog].
 
 To roll back an update, re-run your install mode's
 [update procedure](#update-docsy), specifying the Docsy version that you were
-previously using — likewise for Hugo, if you updated it. Consult the [upgrade
+previously using; likewise for Hugo, if you updated it. Consult the [upgrade
 blog post][blog] of the release you are rolling back **from** for any
-release-specific steps to reverse, such as site-config changes. In particular,
-rolling back across a release that changed the theme's install paths — such as
-[0.16.0][] — requires restoring the previous paths, as described in that
-release's post.
+release-specific steps to reverse, such as site-config changes (for example,
+[0.16.0's rollback][0.16.0]).
 
 <!-- TODO(tag-time): re-point the two preview-host (main--) links below to
      production /blog/2026/0.16.0/ URLs once the post publishes; see the
