@@ -16,7 +16,7 @@ to [override the Docsy look and feel][lookandfeel], as your overrides don't
 modify the theme itself. You may, however, need to port upstream changes to
 copies of theme files that your site overrides.
 
-## Update Docsy {#update-docsy}
+## Update the theme {#update-docsy}
 
 Follow the page matching your install mode:
 
