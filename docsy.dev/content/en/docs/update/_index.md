@@ -26,7 +26,7 @@ posts][blog].
 Perform the update steps in the order given by this page:
 
 1. [Node.js](#update-node) and [Hugo](#update-hugo), when your target release
-   requires it
+   calls for it
 2. [The theme](#update-theme), by install mode
 3. [Review your theme overrides](#update-overrides)
 4. [Check your site](#check)
@@ -43,9 +43,10 @@ nvm install --lts
 
 ## Update Hugo
 
-**Applies if** your target release raises the minimum Hugo version; its upgrade
-[blog post][blog] says so. For projects using the [hugo-extended NPM
-package][hugo-extended], update the package version, for example:
+**Applies if** your target release raises the minimum or recommended Hugo
+version; its upgrade [blog post][blog] says so. For projects using the
+[hugo-extended NPM package][hugo-extended], update the package version, for
+example:
 
 ```sh
 npm install --save-exact --save-dev hugo-extended@latest
