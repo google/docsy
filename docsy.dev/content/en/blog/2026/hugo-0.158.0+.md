@@ -158,6 +158,8 @@ runs PostCSS, Babel, Tailwind, or similar Node tools during the Hugo build.
   `postcss.config.mjs`), use Hugo 0.163.3, which resolves those variants.
 - If your project uses Tailwind, install Tailwind as an npm package. Hugo no
   longer supports the standalone Tailwind binary in this path.
+- If a Node tool legitimately spawns child processes and Hugo 0.161.1 or later
+  blocks it, review `security.node.permissions.AllowChildProcess`.
 
 ## {{% _param BREAKING %}} Content and resource security (0.161.x-0.163.x) {#security}
 
