@@ -168,7 +168,7 @@ Spend time setting up your technical documentation site once, and then focus on
 what you do best. We work closely with the Hugo team and have individuals
 actively maintaining the Docsy theme. You can easily get and apply Docsy updates
 to your site, as well as open feature requests to improve the template, or even
-add new behaviors. [Learn more...](/docs/updating/)
+add new behaviors. [Learn more...](/docs/update/)
 
 ### Focus on great content
 
@@ -189,7 +189,7 @@ add something! See our [contribution guidelines](/docs/contributing/) for more
 information.
 
 You can find out how to update your site to the latest version of Docsy in
-[Keeping the theme up to date](/docs/updating/).
+[Keeping the theme up to date](/docs/update/).
 
 <!-- There must not be a blank line at the end of this file otherwise it creates an empty paragraph in the rendered page -->
 

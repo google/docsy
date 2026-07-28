@@ -17,7 +17,7 @@ submodules also lets Hugo use the theme files from the Docsy repo, though is
 more complicated to maintain than the Hugo Modules approach. This is the
 approach used in older versions of the Docsy example site, and is still
 supported. If you are using Docsy as a submodule but would like to migrate to
-Hugo Modules, see our [migration guide](/docs/updating/convert-site-to-module/).
+Hugo Modules, see our [migration guide](/docs/update/convert-site-to-module/).
 
 Alternatively if you don’t want Hugo to have to get the theme files from an
 external repo (for example, if you want to customize and maintain your own copy
@@ -280,7 +280,7 @@ site that uses the Docsy NPM package:
     ```
 
 To update Docsy later, see
-[Update your Docsy NPM package](/docs/updating/updating-npm-package/).
+[Update your Docsy NPM package](/docs/update/npm-package/).
 
 ### Development versions of Docsy
 

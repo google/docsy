@@ -18,9 +18,9 @@ and any release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 To update the theme, follow the page matching your install mode:
 
-- [Hugo module](updating-hugo-module/)
-- [NPM package](updating-npm-package/)
-- [Git submodule or clone](updating-submodules/)
+- [Hugo module](hugo-module/)
+- [NPM package](npm-package/)
+- [Git submodule or clone](submodules/)
 
 The remaining update steps apply to all install modes.
 
@@ -47,7 +47,7 @@ npm install --save-exact --save-dev hugo-extended@latest
 After updating, also refresh any CI/CD cache keys so that builds don't reuse a
 cached Hugo.
 
-## Review and update theme-file overrides {#update-file-overrides}
+## Review and update theme-file overrides {#update-overrides}
 
 If your site [overrides theme files][lookandfeel], diff each override against
 the new theme version and port upstream changes.

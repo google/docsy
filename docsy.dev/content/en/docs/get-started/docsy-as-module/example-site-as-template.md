@@ -14,7 +14,7 @@ This approach gives you a skeleton structure for your site, with top-level and
 documentation sections and templates that you can modify as necessary. The
 example site automatically pulls in the Docsy theme as a
 [Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
-[keep up to date](/docs/updating/updating-hugo-module/).
+[keep up to date](/docs/update/hugo-module/).
 
 If you prefer to create a site from scratch, follow [Start a site from
 scratch][start-from-scratch].

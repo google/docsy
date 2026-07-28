@@ -12,7 +12,7 @@ theme.
 > [!TIP]
 >
 > If you intend to update your site, consider
-> [converting your site to Hugo Modules](/docs/updating/convert-site-to-module/)
+> [converting your site to Hugo Modules](/docs/update/convert-site-to-module/)
 > or switching to the
 > [Docsy NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
 > After conversion, it's even simpler to update Docsy!

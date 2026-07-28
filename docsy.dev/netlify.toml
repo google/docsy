@@ -29,4 +29,25 @@ TD_BUILD_CTX = "doc-rooted"
   to = "/docs/content/:splat"
   status = 301
 
+# Redirects for slug swap: /docs/updating/ → /docs/update/ (with child renames)
+[[redirects]]
+  from = "/docs/updating/updating-hugo-module/*"
+  to = "/docs/update/hugo-module/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/docs/updating/updating-npm-package/*"
+  to = "/docs/update/npm-package/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/docs/updating/updating-submodules/*"
+  to = "/docs/update/submodules/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/docs/updating/*"
+  to = "/docs/update/:splat"
+  status = 301
+
 # cSpell:ignore docsy

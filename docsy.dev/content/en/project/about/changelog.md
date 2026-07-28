@@ -993,7 +993,7 @@ For the full list of changes, see the [0.2.0][] release page.
   updates.
 
   For details, see
-  [Migrate to Hugo Modules](/docs/updating/convert-site-to-module/).
+  [Migrate to Hugo Modules](/docs/update/convert-site-to-module/).
 
 [@deining]: https://github.com/deining
 [@lisafc]: https://github.com/LisaFC

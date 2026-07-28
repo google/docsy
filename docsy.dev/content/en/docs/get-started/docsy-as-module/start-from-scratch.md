@@ -18,7 +18,7 @@ features, but you'll need to specify your own site structure.
 These instructions give you a minimum file structure for your site project only,
 so that you build and extend your actual site step by step. The first step is
 adding the Docsy theme as a [Hugo Module](https://gohugo.io/hugo-modules/) to
-your site. If needed, you can easily [update](/docs/updating/) the module to the
+your site. If needed, you can easily [update](/docs/update/) the module to the
 latest revision from the Docsy GitHub repo.
 
 ## TL;DR: Setup for the impatient expert
@@ -178,7 +178,7 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/updating/updating-hugo-module/); Hugo warns when the
+[update Docsy](/docs/update/hugo-module/); Hugo warns when the
 dependency set drifts. For background, see [Bootstrap and Font Awesome via
 npm][blog-npm-deps] in the 0.16.0 release notes.
 
