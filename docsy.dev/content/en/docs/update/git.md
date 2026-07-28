@@ -74,13 +74,18 @@ that you are targeting:
 
    As in the submodule procedure, run `npm run postinstall`, not `npm install`.
 
+1. Persist the update to your project, the same way that your project already
+   tracks the cloned theme: for example, commit the updated theme files to your
+   project repository, or record the new tag where your build restores the clone
+   from.
+
 If you have local changes in the cloned theme, commit or stash them first:
 checking out a tag fails on uncommitted changes, and detaches `HEAD` from any
 local branch. After checking out the new tag, reapply your changes (for example,
 `git stash pop`, or rebase your branch onto the tag), resolving any conflicts.
 
-After updating the theme, continue with the remaining
-[update steps](/docs/update/#update-order).
+After updating the theme, continue with the remaining update steps, starting
+with [Review your theme overrides](/docs/update/#update-overrides).
 
 <!-- prettier-ignore-start -->
 [postinstall-note]: /docs/get-started/other-options/#for-an-existing-site
