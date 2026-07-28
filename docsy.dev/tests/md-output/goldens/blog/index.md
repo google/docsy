@@ -6,7 +6,7 @@ LLMS index: [llms.txt](/llms.txt)
 
 Section pages:
 
-- [Release 0.16.0 report and upgrade guide](/blog/2026/0.16.0/): Release report and upgrade guide for Docsy 0.16.0, covering the new @docsy/theme npm package, the theme folder move, the raised Hugo minimum, and favicon discovery.
+- [Release 0.16.0 report and upgrade guide](/blog/2026/0.16.0/): Release report and upgrade guide for Docsy 0.16.0, covering the new @docsy/theme npm package, the theme folder move, the raised Hugo minimum, and favicon discovery
 - [Hugo 0.158.0-0.164.x upgrade guide](/blog/2026/hugo-0.158.0+/)
 - [Release 0.15.0 report and upgrade guide](/blog/2026/0.15.0/): Release report and upgrade guide for Docsy 0.15.0, covering agent support, doc-rooted sites, version menus, community and footer links, and card shortcode rendering.
 - [Release 0.14.0 report and upgrade guide](/blog/2026/0.14.0/): Release report and upgrade guide for Docsy 0.14.0, covering markdown alert syntax, navbar style improvements, heading aliases and in-page targets, and improved separation of project and internal SCSS files.

@@ -17,7 +17,7 @@
 - [Get started](http://localhost/docs/get-started/index.md)
 - [Content and Customization](http://localhost/docs/content/index.md)
 - [Deployment and previews](http://localhost/docs/deployment/index.md)
-- [Update Docsy](http://localhost/docs/updating/index.md)
+- [Update Docsy](http://localhost/docs/update/index.md)
 - [Best Practices](http://localhost/docs/best-practices/index.md)
 
 ## Site locales

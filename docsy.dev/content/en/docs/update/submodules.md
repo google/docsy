@@ -1,5 +1,6 @@
 ---
 title: Update Docsy without Hugo Modules
+linkTitle: Git submodule or clone
 weight: 3
 description: >
   Update the Docsy theme to the latest version using submodules or `git pull`.

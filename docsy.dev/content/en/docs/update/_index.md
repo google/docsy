@@ -49,10 +49,11 @@ cached Hugo.
 
 ## Review your theme overrides {#update-overrides}
 
-Hugo lets your project override theme files: a project file at the same relative
-path as a theme file silently replaces it. Override copies don't receive theme
-updates, so after updating, diff each one against its new theme counterpart and
-port upstream changes. Look for overrides in your project's:
+Hugo lets your project [override theme files][hugo-override]: a project file
+at the same relative path as a theme file silently replaces it. Override
+copies don't receive theme updates, so after updating, diff each one against
+its new theme counterpart and port upstream changes. Look for overrides in
+your project's:
 
 - `layouts/`, the most common location
 - `assets/`, `i18n/`, and `static/`
@@ -105,6 +106,7 @@ To roll back an update:
 [0.16.0]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#rollback
 [blog]: /tags/upgrade/
 [Heading self-links]: /docs/content/navigation/#heading-self-links
+[hugo-override]: https://gohugo.io/getting-started/directory-structure/#unified-file-system
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]:

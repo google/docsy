@@ -1,5 +1,6 @@
 ---
 title: Update your Docsy Hugo Module
+linkTitle: Hugo module
 weight: 1
 description: Update your Docsy theme to the latest version using Hugo Modules.
 ---
