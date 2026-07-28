@@ -13,10 +13,10 @@ theme.
 
 > [!TIP]
 >
-> To simplify future updates, consider
-> [converting your site to Hugo Modules](/docs/update/convert-site-to-module/)
-> or switching to the
-> [Docsy NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
+> To simplify future updates, consider switching to the
+> [Docsy NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package)
+> or
+> [converting your site to Hugo Modules](/docs/update/convert-site-to-module/).
 
 ## Update your Docsy submodule
 
@@ -81,7 +81,6 @@ local branch. After checking out the new tag, reapply your changes (for example,
 `git stash pop`, or rebase your branch onto the tag), resolving any conflicts.
 
 After updating the theme, continue with the
-[remaining update steps](/docs/update/#update-node): Node.js, Hugo, overrides,
-and site checks.
+[remaining update steps](/docs/update/#update-node).
 
 [postinstall-note]: /docs/get-started/other-options/#for-an-existing-site

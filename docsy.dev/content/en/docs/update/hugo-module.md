@@ -50,8 +50,7 @@ from the theme's. To verify the update, confirm that your site's `go.mod` now
 records `github.com/google/docsy/theme` at the version you expect.
 
 After updating the theme, continue with the
-[remaining update steps](/docs/update/#update-node): Node.js, Hugo, overrides,
-and site checks.
+[remaining update steps](/docs/update/#update-node).
 
 [theme npm dependencies]:
   /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies

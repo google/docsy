@@ -11,13 +11,12 @@ release-specific upgrade actions, see the [upgrade blog posts][blog].
 
 ## Before you begin {#before-you-begin}
 
-Make sure that you can restore your project's current state: for example, work
-from a Git branch, merging only after [checking your site](#check), or back up
-your project files first. Rolling back is then a simple restore.
-
-If the release raises the minimum Hugo or Node.js version (its [blog post][blog]
-says so), update [Node.js](#update-node) and [Hugo](#update-hugo) first, so that
-the theme-update commands run with supported versions.
+- **Make sure that you can restore your project's current state**: for example,
+  work from a Git branch, merging only after [checking your site](#check), or
+  back up your project files first. Rolling back is then a simple restore.
+- **If the release raises the minimum Hugo or Node.js version** (its [blog
+  post][blog] says so), update [Node.js](#update-node) and [Hugo](#update-hugo)
+  first, so that the theme-update commands run with supported versions.
 
 > [!NOTE]
 >
@@ -35,11 +34,6 @@ project. Follow the page matching your install mode:
 - [Hugo module](hugo-module/)
 - [NPM package](npm-package/)
 - [Git submodule or clone](git/)
-
-Not sure which mode your project uses? Hugo-module sites have a `go.mod`
-requiring `github.com/google/docsy/theme`; npm-package sites list `@docsy/theme`
-in `package.json`; Git installs have a `themes/docsy` folder (with a
-`.gitmodules` entry when it's a submodule).
 
 The remaining update steps apply to all install modes.
 
