@@ -2,7 +2,7 @@
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-06-14
-lastmod: 2026-07-27
+lastmod: 2026-07-28
 draft: true
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
@@ -48,13 +48,13 @@ Hugo 0.158.0 renamed several language configuration keys and template methods.
 The old names log deprecation notices first, then move toward warnings and
 eventual errors on Hugo's deprecation timeline.
 
-Docsy's own templates and docs now use the new names — one of the changes behind
-0.16.0's [raised Hugo minimum](0.16.0/#hugo).
+Docsy's own templates and docs now use the new names -- one of the changes
+behind 0.16.0's [raised Hugo minimum](0.16.0/#hugo).
 
 ### Actions {#language-api-actions}
 
 **Applies if** your multilingual site config uses older language keys. Rename
-them when convenient:
+them when convenient, then check your language menu output:
 
 ```yaml
 # OLD
@@ -100,17 +100,15 @@ Markdown link URLs, producing `&amp;amp;` in HTML output.
 
 Hugo 0.160.0 fixed that regression, and Hugo 0.160.1 is the safer 0.160.x patch
 release. Docsy 0.16.0's minimum Hugo version, 0.160.1, already excludes this
-window.
+window. Monolingual sites without custom link render hooks are the most exposed:
+multilingual single-host sites are usually shielded by Hugo's
+`useEmbedded: auto` link render hook, as are sites with custom link render
+hooks.
 
 ### Actions {#amp-escaping-actions}
 
-**Applies if** you briefly tested or deployed Hugo 0.159.2.
-
-- Search generated HTML for `&amp;amp;` in link URLs.
-- Monolingual sites without custom link render hooks are the most exposed:
-  multilingual single-host sites are usually shielded by Hugo's
-  `useEmbedded: auto` link render hook, as are sites with custom link render
-  hooks.
+**Applies if** you briefly tested or deployed Hugo 0.159.2: search generated
+HTML for `&amp;amp;` in link URLs.
 
 ## Template and module cleanup (0.159.x-0.160.x) {#template-module-cleanup}
 
@@ -173,9 +171,6 @@ Hugo tightened several security boundaries in this range:
   including `resources.Get` and, in 0.163.1, `os.ReadDir`, `os.ReadFile`,
   `os.Stat`, and `os.FileExists`.
 
-Docsy's own workspace and smoke-test install shapes were validated across these
-changes.
-
 ### Actions {#security-actions}
 
 {{% _param BREAKING %}} **Applies if** your site uses remote resources,
@@ -200,10 +195,6 @@ hand-authored `.html` content files, symlinked content/assets, or
 Hugo 0.163.0 deprecated global imaging quality settings in favor of per-format
 settings. It also introduced AVIF-related imaging configuration and changed
 internal resized-image cache keys.
-
-Docsy's website configuration was streamlined as part of the upgrade: settings
-that matched Hugo defaults were removed, and `resampleFilter: CatmullRom` was
-kept because it materially affects photo downscaling quality.
 
 ### Actions {#imaging-actions}
 
@@ -230,7 +221,8 @@ uses a CDN that caches generated image resources aggressively.
 Hugo 0.161.x-0.163.x can change resized-image filenames that contain
 `_hu_<HASH>` even when the source image and visual output are unchanged. Treat
 this as expected cache-key churn. It can create noisy diffs and cache misses,
-but it is not usually a content regression.
+but it is not usually a content regression: when diffs appear, verify the
+rendered images, not just the filenames.
 
 ## Faster builds and stricter templates (0.164.0) {#hugo-0-164-0}
 
@@ -311,7 +303,7 @@ After addressing applicable breaking changes and deprecations, upgrade to Hugo
 If you use the [hugo-extended][] npm package:
 
 ```sh
-npm install hugo-extended@{{% param hugoSupportedVersion %}} --save-dev
+npm install --save-exact --save-dev hugo-extended@{{% param hugoSupportedVersion %}}
 ```
 
 If you use [hvm][]:
@@ -326,22 +318,8 @@ For other installation methods, see [Install Hugo][].
 
 ### Sanity checks
 
-- [ ] **Build output**: ensure your site builds without errors, warnings, or
-      deprecation notices.
-- [ ] **Node version**: confirm Node 22 or later; use Node LTS 24 for Docsy
-      0.16.0.
-- [ ] **Multilingual sites**: check language menu output and language config
-      keys.
-- [ ] **Links**: inspect generated HTML for `&amp;amp;` if you tested Hugo
-      0.159.2.
-- [ ] **Images**: expect `_hu_` resized-image filename churn and verify the
-      rendered images, not just filenames.
-- [ ] **Generated output**: on 0.164.0, expect syntax-highlighting class and
-      sitemap alternate-link churn in committed output.
-- [ ] **Security policy**: test remote resources, symlinked inputs, and any
-      `.html` content files.
-
-### Cross-checks
+In addition to the [generic site checks][check], confirm that you have covered
+this guide's actions:
 
 #### Required actions, as applicable {#required-actions}
 
@@ -359,6 +337,7 @@ For other installation methods, see [Install Hugo][].
 </section>
 
 <!-- prettier-ignore-start -->
+[check]: /docs/update/#check
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [hugo-164-perf]: https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21
 [hvm]: https://github.com/jmooring/hvm
