@@ -579,8 +579,8 @@ before any further changes are merged into the `main` branch:
    ...
    ```
 
-2. **Retire temporary measures** that the shipped release makes obsolete, and
-   run checks.
+2. **Retire temporary measures** that the shipped release makes obsolete,
+   verifying checks as you go.
 
    - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
      that the link check passes.
