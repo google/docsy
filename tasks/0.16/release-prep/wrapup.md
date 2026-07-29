@@ -238,24 +238,24 @@ Before tagging, confirm the milestone's closed list matches the
 The canonical procedure is maintainer notes, [Publishing a release][pub-rel];
 this tracks 0.16-specific status and deltas, not the full mechanics.
 
-- [ ] Flip `draft: true` → `false` on both blog posts and set their final dates.
+- [x] Flip `draft: true` → `false` on both blog posts and set their final dates.
 - [x] Validate the theme's minimum Hugo version: done 2026-07-17 via a one-off
       fixture-matrix build on 0.158.0/0.159.0; minimum raised to 0.160.1 — see
       Decisions. Ongoing validation is now the minimum-Hugo lane of
       `test:smoke`, run at release step 8.
-- [ ] Replace placeholders that resolve only after tagging: the
+- [x] Replace placeholders that resolve only after tagging: the
       `releases/tag/v0.16.0` links, the changelog `UNRELEASED` heading/banner,
       the release post's `[CL@0.16.0]` link (`/changelog/#next` →
       `/changelog/#v0.16.0`, since the heading anchor changes at release), and
       its `[compare-0.15.0]` link (`v0.15.0...main` → `v0.15.0...v0.16.0`).
-- [ ] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
+- [x] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
       the production `/blog/2026/0.16.0/` URLs once the post publishes: the
       `[0.16.0]` link def in `blog/2025/0.12.0.md`, the `[tfa]` link def in
       `docs/update/_index.md`, and the `[blog-npm-deps]` link defs in
       `docs/update/convert-site-to-module.md` and
       `docs/get-started/docsy-as-module/start-from-scratch.md` (each site
       carries a `TODO(tag-time)` comment; from [#2692][]).
-- [ ] Bump the version stamp from `0.15.1-dev` to the release version in
+- [x] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
       (required by the theme folder move; **not yet in the maintainer notes
