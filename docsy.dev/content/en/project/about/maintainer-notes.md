@@ -298,7 +298,6 @@ If not adjust accordingly.
     - **Test consumer sites**:
       - Run the [consumer-site test procedure](#consumer-site-test) over
         selected sites listed below.
-      - Remember to push any adjustments to the PR as stated above.
       - Sites to test:
         - [docsy-example][]
         - [docsy-starter][]
@@ -313,8 +312,6 @@ If not adjust accordingly.
     - Build and confirm zero warnings; re-run the site's sanity checks.
     - Re-run the full [test procedure](#consumer-site-test) only if the merge
       involved a non-trivial conflict or rebase.
-    - Consider updating the Docsy version for these examples in the
-      `docsy.dev/examples` page.
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
@@ -619,10 +616,12 @@ To test a Docsy branch or release from a consumer site, for each site:
    - Confirm that all checks pass.
    - Run the release post's sanity checks.
 6. **A/B diff the generated site**:
-   - Build at the current (pre-update) pin and set `public/` aside as a baseline
-   - Optionally make the folder a git repository for the purpose of the diff.
-   - Diff the new pin's build against the baseline; for example, without a git
-     repository run:
+   - If the site's `public/` folder is a git repository — a setup worth
+     adopting; see docsy.dev's `make:public` npm script — build at the current
+     (pre-update) pin and commit the output as the baseline. `git diff` then
+     reports the changes directly.
+   - Otherwise, build at the current pin, set `public/` aside as a baseline
+     directory, rebuild at the new pin, and diff, for example:
 
      ```sh
      diff -rq --exclude='*.map' BASELINE_DIR/ public/
