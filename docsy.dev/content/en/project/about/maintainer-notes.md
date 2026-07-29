@@ -602,11 +602,10 @@ To test a Docsy branch or release from a consumer site, for each site:
    it for the site's post-release Docsy-update PR.
 2. **Point the site at the target Docsy commit**, per install mode:
    - Hugo module: map the theme module to the local checkout -- env-only, no
-     repo edits -- and confirm that `hugo mod graph` reports the replacement:
+     repo edits:
 
      ```sh
      export HUGO_MODULE_REPLACEMENTS="github.com/google/docsy/theme -> DOCSY_CHECKOUT_PATH/theme"
-     hugo mod graph | head -3
      ```
 
    - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH` for sites that npm
@@ -625,6 +624,13 @@ To test a Docsy branch or release from a consumer site, for each site:
    build: check every applies-if guard against the site, including the companion
    Hugo guide's actions when the release raises the Hugo minimum. This doubles
    as a dry run of the post; report any gap or inaccuracy as feedback on it.
+   - For Hugo-module sites, confirm that the replacement is live once the import
+     path targets the theme module:
+
+     ```sh
+     hugo mod graph | grep 'github.com/google/docsy/theme'
+     ```
+
 4. **Build**: confirm zero errors and warnings.
 5. **Run the site's test suite**:
    - Run `npm test` or the site's canonical test script.
