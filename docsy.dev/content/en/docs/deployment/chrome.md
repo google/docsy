@@ -8,9 +8,7 @@ cSpell:ignore: pagelinks
 
 A docs site re-emits the same auto-generated _[chrome][]_ &mdash; the navbar,
 footer, and left-nav &mdash; on _every_ page, even though those regions are
-usually identical site-wide. That repetition slows the build, bloats the output,
-and slows anything that processes every page, such as a link checker; it also
-makes for noisy output diffs.
+usually identical site-wide.
 
 Use the `td.chrome` parameter to select one of two **build modes**:
 
@@ -109,8 +107,7 @@ HUGO_PARAMS_TD_CHROME=shared hugo
 
 See Hugo's [configuration with environment variables][hugo-env-config]. Then run
 your link checker against the generated `public/` output as usual: a `shared`
-build needs no checker-specific configuration, since the donor pages keep every
-chrome link reachable.
+build needs no checker-specific configuration.
 
 <!-- prettier-ignore-start -->
 [app-shell]: https://developer.chrome.com/blog/app-shell

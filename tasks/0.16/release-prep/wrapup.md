@@ -1,9 +1,9 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-07-26
+lastmod: 2026-07-29
 range: v0.15.0..main
-last-main-commit: 9b1d9951
+last-main-commit: 69e597cc
 cSpell:ignore: favicons retokenization thoughtry
 ---
 
@@ -11,7 +11,7 @@ Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
 milestone hygiene, and the tag-time checklist. The objective per-change matrix
 lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
-> Prepared for commits in [v0.15.0...main][] through [9b1d9951][].
+> Prepared for commits in [v0.15.0...main][] through [69e597cc][].
 
 ## Themes (with evidence and client impact)
 
@@ -97,18 +97,20 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
 ## Release content status
 
-- [release report][] (`blog/2026/0.16.0.md`): complete draft (`draft: true`).
-  Covers the four breaking changes, the npm-registry announcement, and the
-  experimental shared chrome build mode, each with Actions, an upgrade section,
-  and sanity checks. 2026-07-26 refresh: npm-registry section added; otel.io
-  guide feedback applied (postinstall caution, favicons command qualified);
-  PostCSS section gained Actions and its rationale.
-- [Hugo upgrade guide][] (`blog/2026/hugo-0.158.0+.md`): complete draft
-  (`draft: true`). Carries per-version Hugo mechanics for 0.158.0–0.164.0 (DRY).
-  2026-07-26: Page-level `.Lang` unaffected note added to the language-API
-  table.
-- Changelog `v0.16.0 - UNRELEASED` section: complete; reconciled with the
-  ledger. 2026-07-26: npm-registry **New** entry added.
+- [release report][] (`blog/2026/0.16.0.md`): complete; undrafted 2026-07-29
+  ([#2694][], publishes with the release deploy). Covers the four breaking
+  changes, the npm-registry announcement, and the experimental shared chrome
+  build mode, each with Actions, an upgrade section, and sanity checks.
+  2026-07-26 refresh: npm-registry section added; otel.io guide feedback applied
+  (postinstall caution, favicons command qualified); PostCSS section gained
+  Actions and its rationale.
+- [Hugo upgrade guide][] (`blog/2026/hugo-0.158.0+.md`): complete; undrafted
+  2026-07-29, dated a day before the release post to pin sidebar order. Carries
+  per-version Hugo mechanics for 0.158.0–0.164.0 (DRY). 2026-07-26: Page-level
+  `.Lang` unaffected note added to the language-API table.
+- Changelog `v0.16.0` section (heading flipped from `UNRELEASED`/`#next`
+  2026-07-29): complete; reconciled with the ledger. 2026-07-26: npm-registry
+  **New** entry added.
 
 ## Decisions
 
@@ -132,9 +134,13 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   [#2357][] in What's next); the changelog cites key issues, keeping PR links
   only for contributor credit ([#2594][], [#2578][]). The ledger remains the
   internal full-coverage record.
-- The highlights card is capped at **three items** (2026-07-16): a packaging
-  entry (**First-class npm support** since the 2026-07-26 rework -- see the
-  routing decision below), favicons, and shared chrome. The minimum-Hugo bump is
+- The highlights card **targets three items** by design (2026-07-16): a
+  packaging entry (**First-class npm support** since the 2026-07-26 rework --
+  see the routing decision below), favicons, and shared chrome. A **+1 overflow
+  is tolerated** for an item added later with justification (guidance amended
+  2026-07-29): here the **Agent-ready upgrade guide** meta-entry, added with the
+  0.15-lineage agent-support arc (initially leading the card; moved last,
+  product items first, in the 2026-07-29 review round). The minimum-Hugo bump is
   deliberately not in the card: it is routine (0.15 did the same), has its own
   section plus the companion Hugo guide, and Ready-to-Upgrade lists every
   breaking change anyway.
@@ -197,8 +203,11 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   restating it, and the policy rewrite itself shipped with [#2688][] (routed
   then). The changelog carries one **New** entry citing [#2683][]. Highlights
   card: the packaging entry now leads with the npm story — **First-class npm
-  support**, title linking `#npm-registry`, with the theme-folder move swept
-  into "and more" (owner call, 2026-07-26) — the three-item cap holds.
+  support**, title linking `#npm-registry`, with "and more" sweeping in the
+  packaging arc (owner call, 2026-07-26; `[more]` re-pointed `#theme-folder` →
+  `#npm-deps` in the 2026-07-29 review round) — three product items, within the
+  cap; the Agent-ready meta-entry's +1 came later (2026-07-29, see the
+  highlights-card decision above).
 - **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
   over opentelemetry.io, [otel#10906][]): clone/submodule Actions warn that a
   plain `npm install` inside `themes/docsy/` pulls the maintainer workspaces
@@ -238,31 +247,36 @@ Before tagging, confirm the milestone's closed list matches the
 The canonical procedure is maintainer notes, [Publishing a release][pub-rel];
 this tracks 0.16-specific status and deltas, not the full mechanics.
 
-- [ ] Flip `draft: true` → `false` on both blog posts and set their final dates.
+- [x] Refresh-loop gate: the ledger and coordinates are current through the tip
+      the release commit builds on (`last-main-commit: 69e597cc`; refreshed
+      2026-07-29 — see the skill's tag-time gate).
+- [x] Flip `draft: true` → `false` on both blog posts and set their final dates.
 - [x] Validate the theme's minimum Hugo version: done 2026-07-17 via a one-off
       fixture-matrix build on 0.158.0/0.159.0; minimum raised to 0.160.1 — see
       Decisions. Ongoing validation is now the minimum-Hugo lane of
       `test:smoke`, run at release step 8.
-- [ ] Replace placeholders that resolve only after tagging: the
+- [x] Replace placeholders that resolve only after tagging: the
       `releases/tag/v0.16.0` links, the changelog `UNRELEASED` heading/banner,
       the release post's `[CL@0.16.0]` link (`/changelog/#next` →
       `/changelog/#v0.16.0`, since the heading anchor changes at release), and
       its `[compare-0.15.0]` link (`v0.15.0...main` → `v0.15.0...v0.16.0`).
-- [ ] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
+- [x] Re-point the interim preview-host (`main--docsydocs.netlify.app`) links at
       the production `/blog/2026/0.16.0/` URLs once the post publishes: the
       `[0.16.0]` link def in `blog/2025/0.12.0.md`, the `[tfa]` link def in
       `docs/update/_index.md`, and the `[blog-npm-deps]` link defs in
       `docs/update/convert-site-to-module.md` and
       `docs/get-started/docsy-as-module/start-from-scratch.md` (each site
-      carries a `TODO(tag-time)` comment; from [#2692][]).
-- [ ] Bump the version stamp from `0.15.1-dev` to the release version in
+      carried a `TODO(tag-time)` comment, removed with the re-point; from
+      [#2692][]).
+- [x] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
-      (required by the theme folder move; **not yet in the maintainer notes
-      procedure** — new this release). Verify the tag exists **before** flipping
-      the posts' `draft: true`: every install-mode Action in the release post
-      depends on it, and 0.16.0 is the first release to exercise the nested-tag
-      scheme.
+      (required by the theme folder move — new this release). Verify the tag
+      exists **before** the deploy that takes the posts live: every install-mode
+      Action in the release post depends on it, and 0.16.0 is the first release
+      to exercise the nested-tag scheme. (The source-level `draft: true` flip
+      rides the release-prep PR earlier — the tag gates publication, not that
+      edit.)
 - [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
       and re-point dist-tag `next` at it, **before** the site deploy flips the
       posts live (the post's install commands must resolve). Verify with
@@ -346,7 +360,8 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2688]: https://github.com/google/docsy/pull/2688
 [#2689]: https://github.com/google/docsy/issues/2689
 [#2692]: https://github.com/google/docsy/pull/2692
-[9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
+[#2694]: https://github.com/google/docsy/pull/2694
+[69e597cc]: https://github.com/google/docsy/commit/69e597cc
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
 [link-cache]: https://github.com/chalin/link-cache
 [official support policy]:

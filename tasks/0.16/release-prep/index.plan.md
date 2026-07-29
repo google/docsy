@@ -1,7 +1,7 @@
 ---
 title: 0.16 release-prep plan
 date: 2026-06-15
-lastmod: 2026-07-26
+lastmod: 2026-07-29
 # Release coordinates — the per-release facts the process keys off.
 prev-version: 0.15.0 # baseline tag: v0.15.0 (2026-05-01)
 version: 0.16.0
@@ -9,7 +9,7 @@ milestone: 24
 tracker-issue: 2615
 compare-range: v0.15.0..main
 version-stamp-from: 0.15.1-dev
-last-main-commit: 9b1d9951
+last-main-commit: 69e597cc
 hugo-post: hugo-0.158.0+ # companion Hugo upgrade post; omit if no Hugo bump
 ---
 
@@ -34,7 +34,8 @@ Published artifacts (edited in place, not drafted here):
 
 - Release report: `docsy.dev/content/en/blog/2026/0.16.0.md`
 - Hugo upgrade post: `docsy.dev/content/en/blog/2026/hugo-0.158.0+.md`
-- Changelog: `docsy.dev/content/en/project/about/changelog.md` (`#next` section)
+- Changelog: `docsy.dev/content/en/project/about/changelog.md` (`#v0.16.0`
+  section)
 
 ## Checklist
 

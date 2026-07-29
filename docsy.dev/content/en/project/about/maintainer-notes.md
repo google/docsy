@@ -2,7 +2,7 @@
 title: Maintainer notes
 description: Notes for Docsy maintainers
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate lycheecache
+cSpell:ignore: hugo creatordate lycheecache opentelemetry prebuild worktree
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -193,6 +193,14 @@ If not adjust accordingly.
 > Before creating a release, do a [release-prep audit](#release-prep-audit) and
 > use it to drive the changelog and release-blog updates in the next two steps.
 
+<!-- markdownlint-disable-next-line no-blanks-blockquote -->
+
+> [!TIP]
+>
+> A release run can span sessions and days. Consider keeping a running copy of
+> the numbered steps below as a checklist in your own notes, ticking steps as
+> they complete and marking who each pending step is waiting on.
+
 1.  **Change directory** to your local Docsy repo.
     - Expecting final adjustments as you prepare for the release? Create a
       branch to work from. For example:
@@ -277,8 +285,10 @@ If not adjust accordingly.
     - Use the web interface to fill in the PR details.
     - Submit the PR.
 
-8.  **Test the PR** branch from selected sites, and push any required
-    adjustments.
+8.  **Test the PR branch**:
+    - **Run-edit-cycle**, after each run sub-step below:
+      - Push any adjustments to the PR.
+      - Restart this step 8 from the top, if justified.
     - Run the [smoke tests](#test-suites), which auto-target the PR branch
       pushed in the previous step and include a build at the
       [minimum Hugo version](#minimum-hugo-version):
@@ -287,20 +297,23 @@ If not adjust accordingly.
       npm run test:smoke
       ```
 
-    - If the test site uses Docsy as a Git submodule:
-
-      ```sh
-      cd themes/docs
-      git fetch
-      git switch -t REPO/BRANCH-NAME # e.g. chalin/chalin-m24-0.14.0-pre-release
-      ```
+    - **Test consumer sites**:
+      - Run the [consumer-site test procedure](#consumer-site-test) over
+        selected sites listed below.
+      - Sites to test, ideally covering each install mode:
+        - Hugo module: [docsy-example][]
+        - npm package: [docsy-starter][]
+        - Git submodule: [opentelemetry.io][] or another large production site
 
 9.  **Get PR approved and merged**.
 
 10. **Pull the PR** to get the last changes.
 
-11. **Test Docsy** from [docsy-example][] and the docsy-starter. (Consider
-    updating the Docsy version for these examples in the examples page.)
+11. **Post-merge check from consumer sites.** In each worktree from step 8,
+    update the site's Docsy pin from the PR branch tip to merged `main`, then:
+    - Build and confirm zero warnings; re-run the site's sanity checks.
+    - Re-run the full [test procedure](#consumer-site-test) only if the merge
+      involved a non-trivial conflict or rebase.
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
@@ -433,7 +446,12 @@ If not adjust accordingly.
 
     </details>
 
-15. Update the [deploy/prod][] branch from `$BASE`.
+15. **Publish the theme package**:
+    - Publish to the npm registry from `theme/` at the tagged release commit.
+    - Verify the published version.
+    - Verify that the `latest` and `next` dist-tags point at it.
+
+16. Update the [deploy/prod][] branch from `$BASE`.
 
     For stable releases from `main`, use:
 
@@ -447,10 +465,10 @@ If not adjust accordingly.
 
     The branch update will trigger a production deploy of the website.
 
-16. Wait for the production deploy to complete and check that [docsy.dev][] has
+17. Wait for the production deploy to complete and check that [docsy.dev][] has
     been updated to the new release.
 
-17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+18. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
     - Visit [tags][] to find the new release tag {{% param tdVersion.latest %}}.
 
     - Select Create a new release from the {{% param tdVersion.latest %}} tag
@@ -473,16 +491,16 @@ If not adjust accordingly.
 
     - Select **Create a discussion for this release**.
 
-18. **Publish the release**: click _Publish release_.
+19. **Publish the release**: click _Publish release_.
 
-19. Test the release with a downstream project and/or the [docsy-example][]
+20. Test the release with a downstream project and/or the [docsy-example][]
     site.
 
-20. If you find issues, determine whether they need to be fixed immediately. If
+21. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
     a dot release.
 
-21. **Update the `release` branch** once the release is final.
+22. **Update the `release` branch** once the release is final.
 
     For a stable release, fast-forward `release` to the final release commit
     from `main`:
@@ -496,7 +514,7 @@ If not adjust accordingly.
     For patch releases, the release-prep PR should already target `release`, so
     there is no separate `main` to `release` fast-forward.
 
-22. Update the [doc-rooted][] branch from [deploy/prod][]:
+23. Update the [doc-rooted][] branch from [deploy/prod][]:
 
     ```sh
     git checkout doc-rooted
@@ -512,7 +530,7 @@ If not adjust accordingly.
     If the fast-forward merge fails, stop and reconcile the branch history. Once
     pushed, wait for the Netlify deploy and check the doc-rooted preview.
 
-23. Update, create, or close GitHub milestones as appropriate.
+24. Update, create, or close GitHub milestones as appropriate.
 
 If all is well, release the Docsy example as detailed next.
 
@@ -561,20 +579,110 @@ before any further changes are merged into the `main` branch:
    ...
    ```
 
-2. In the [Changelog][]:
+2. **Retire temporary measures** that the shipped release makes obsolete,
+   verifying checks as you go.
+
+   - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
+     that the link check passes.
+   - Search for other release-scoped markers and act on those now that the
+     release is shipped, for example:
+
+     ```sh
+     git grep -En 'Remove after|TODO\(0\.' -- ':(exclude)*public*'
+     ```
+
+   - Leave markers naming a later release in place.
+
+3. In the [Changelog][]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
      at the end of the file.
 
    - **Fix the new release URL**, which ends with `latest?FIXME=...`, so that it
      refers to the actual release, now that it exists.
 
-3. **Submit a PR with your changes**, using a title like:
+4. **Submit a PR with your changes**, using a title like:
 
    ```text
    Set version to {{% param version %}}
    ```
 
-4. **Get PR approved and merged**.
+5. **Get PR approved and merged**.
+
+## Consumer-site test procedure {#consumer-site-test}
+
+To test a Docsy branch or release from a consumer site, for each site:
+
+1. **Create a dedicated worktree + branch** off the site's default branch; keep
+   it for the site's post-release Docsy-update PR.
+2. **Point the site at the target Docsy commit**, per install mode:
+   - Hugo module: map the theme module to the local checkout -- env-only, no
+     repo edits:
+
+     ```sh
+     export HUGO_MODULE_REPLACEMENTS="github.com/google/docsy/theme -> DOCSY_CHECKOUT_PATH/theme"
+     ```
+
+   - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH` for sites that npm
+     install from GitHub (`google/docsy`); append `/theme` for sites that use
+     the registry package (`@docsy/theme`).
+   - Git submodule:
+
+     ```sh
+     cd themes/docsy
+     git fetch FORK BRANCH-NAME
+     git checkout FETCH_HEAD
+     cd ../.. && git add themes/docsy # stage so prebuild targets this SHA
+     ```
+
+3. **Apply the release post's upgrade actions** -- all of them, before the first
+   build: check every applies-if guard against the site, including the companion
+   Hugo guide's actions when the release raises the Hugo minimum. This doubles
+   as a dry run of the post; report any gap or inaccuracy as feedback on it.
+   - For Hugo-module sites, confirm that the replacement is live once the import
+     path targets the theme module:
+
+     ```sh
+     hugo mod graph | grep 'github.com/google/docsy/theme'
+     ```
+
+4. **Build**: confirm zero errors and warnings.
+5. **Run the site's test suite**:
+   - Run `npm test` or the site's canonical test script.
+   - Confirm that all checks pass.
+   - Run the release post's sanity checks.
+6. **Spot-check key pages and output files**, in the build output or a served
+   preview:
+   - **Pages** -- confirm each renders with intact chrome, styles, and favicons:
+     - Home page -- also confirm that the `generator` meta element reports the
+       expected Hugo version (Docsy's version isn't emitted)
+     - Docs landing page, and a random docs page
+     - Blog landing page and a random blog post, when the site has a blog
+     - Some other random page
+     - The 404 page
+   - **Other output files** -- confirm each looks sane:
+     - The main CSS and JS files
+     - When the site enables LLMS support: `llms.txt`, and the `.md` output of
+       the pages above
+     - `_redirects`, when present
+     - `sitemap.xml` -- note that some sites normalize it after the build
+7. **A/B diff the generated site**:
+   - If the site's `public/` folder is a git repository (a setup worth adopting;
+     see docsy.dev's `make:public` npm script), build at the current
+     (pre-update) pin and commit the output as the baseline. `git diff` then
+     reports the changes directly. Do not remove `public/` if it's a symlink to
+     a different directory.
+   - Otherwise, build at the current pin, set `public/` aside as a baseline
+     directory, rebuild at the new pin, and diff, for example:
+
+     ```sh
+     diff -rq --exclude='*.map' BASELINE_DIR/ public/
+     ```
+
+   - Confirm at least one difference exists.
+   - Assess each difference:
+     - Map it to an announced change, or flag it as a potential regression.
+     - Investigate issues and report their root causes.
+   - Report the results.
 
 ## Release helper scripts
 
@@ -594,6 +702,7 @@ before any further changes are merged into the `main` branch:
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
+[docsy-starter]: https://github.com/chalin/docsy-starter
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
@@ -604,6 +713,7 @@ before any further changes are merged into the `main` branch:
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
+[opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>

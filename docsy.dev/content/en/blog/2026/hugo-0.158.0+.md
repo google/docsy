@@ -1,9 +1,12 @@
 ---
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
-date: 2026-06-14
-lastmod: 2026-07-28
-draft: true
+date: 2026-07-28
+lastmod: 2026-07-29
+description: >-
+  What changed in Hugo 0.158.0 through 0.164.x for Docsy sites: breaking
+  changes, deprecations, security fixes, and known regressions, with per-version
+  upgrade actions.
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -15,10 +18,8 @@ params:
 cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
 ---
 
-This post summarizes the breaking, security, and notable changes in Hugo 0.158.0
-through {{% param hugoSupportedVersion %}} that affect Docsy sites. It is a
-companion to the [Docsy 0.16.0 release post](0.16.0/), which specifies the
-[Hugo versions that 0.16.0 requires and validates](0.16.0/#hugo).
+This post is a companion to the [Docsy 0.16.0 release post](0.16.0/), which
+specifies the [Hugo versions that 0.16.0 requires and validates](0.16.0/#hugo).
 
 ## Upgrade summary
 
@@ -102,10 +103,7 @@ rendered Markdown link URLs, producing `&amp;amp;` in HTML output.
 
 Hugo [0.160.0][] fixed that regression, and Hugo [0.160.1][] is the safer
 0.160.x patch release. Docsy 0.16.0's minimum Hugo version, 0.160.1, already
-excludes this window. Monolingual sites without custom link render hooks are the
-most exposed: multilingual single-host sites are usually shielded by Hugo's
-`useEmbedded: auto` link render hook, as are sites with custom link render
-hooks.
+excludes this window.
 
 ### Actions {#amp-escaping-actions}
 
@@ -116,7 +114,6 @@ HTML for `&amp;amp;` in link URLs.
 
 Hugo 0.159.x continued several cleanup paths that may show up in older Docsy
 sites, Docsy forks, or large downstream sites with local template overrides.
-Hugo [0.160.1][] then fixed several rendering issues in this range.
 
 ### Actions {#template-module-cleanup-actions}
 
@@ -131,10 +128,10 @@ scripts.
 - If you use `hugo convert`, review generated output before committing it.
 
 **Applies if** your site uses Goldmark passthrough, `RenderShortcodes`, or
-multilingual root sections. Hugo 0.160.1 -- Docsy 0.16.0's minimum -- fixed
-regressions in this range around passthrough elements in headings, shortcode
-rendering context markers, and multilingual root section generation; include
-such pages in your smoke tests.
+multilingual root sections. Hugo [0.160.1][] fixed regressions in this range
+around passthrough elements in headings, shortcode rendering context markers,
+and multilingual root section generation; include such pages in your smoke
+tests.
 
 ## {{% _param BREAKING %}} Node-managed tools (0.161.x) {#node-tools}
 
@@ -208,14 +205,12 @@ changed internal resized-image cache keys.
 - Replace global settings with per-format settings, or remove them if they match
   Hugo defaults.
 - Keep `resampleFilter: CatmullRom` if your site relies on Docsy-style sharp
-  photographic downscaling.
+  photographic downscaling:
 
-For example:
-
-```yaml
-imaging:
-  resampleFilter: CatmullRom
-```
+  ```yaml
+  imaging:
+    resampleFilter: CatmullRom
+  ```
 
 ### Image URL churn
 
@@ -287,7 +282,7 @@ This range includes multiple security-related updates, including Go
 hardens the default code-block render hook: the language token (info string) of
 fenced code blocks is now escaped, which matters most for sites that render
 untrusted Markdown. This is a strong reason to prefer 0.163.3 or later over
-stopping at the minimum 0.160.1.
+stopping at 0.160.1.
 
 ### New features worth knowing about {#new-features}
 

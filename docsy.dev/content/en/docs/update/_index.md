@@ -112,15 +112,11 @@ Use this checklist as a guide to verify that your update succeeded:
 Also perform any release-specific checks listed in the release's
 [upgrade blog post](/tags/upgrade/).
 
-<!-- TODO(tag-time): re-point the preview-host (main--) tfa link below to the
-     production /blog/2026/0.16.0/ URL once the post publishes; see the
-     release-prep wrapup checklist. -->
-
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[tfa]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions
+[tfa]: /blog/2026/0.16.0/#theme-folder-actions
 <!-- prettier-ignore-end -->

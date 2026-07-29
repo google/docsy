@@ -1,6 +1,8 @@
 ---
 title: Other setup options
-description: Create a new Docsy site with Docsy using Git or NPM
+description: >-
+  Install Docsy as a Git submodule, a clone, or the @docsy/theme npm package,
+  for sites not using Hugo modules.
 date: 2021-12-08
 cSpell:ignore: hugo myproject
 weight: 2
@@ -8,28 +10,13 @@ weight: 2
 
 <!-- markdownlint-disable no-blanks-blockquote -->
 
-If you don't want to use
-[Docsy as a Hugo Module](/docs/get-started/docsy-as-module/) (for example if you
-do not want to install Go) but still don't want to copy the theme files into
-your own repo, you can **use Docsy as a
-[Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules)**. Using
-submodules also lets Hugo use the theme files from the Docsy repo, though is
-more complicated to maintain than the Hugo Modules approach. This is the
-approach used in older versions of the Docsy example site, and is still
-supported. If you are using Docsy as a submodule but would like to migrate to
-Hugo Modules, see our [migration guide](/docs/update/convert-site-to-module/).
+If [Docsy as a Hugo Module](/docs/get-started/docsy-as-module/) doesn't suit
+your site -- for example, if you don't want to install Go -- choose from these
+setup options:
 
-Alternatively if you don’t want Hugo to have to get the theme files from an
-external repo (for example, if you want to customize and maintain your own copy
-of the theme directly, or your deployment choice requires you to include a copy
-of the theme in your repository), you can **clone the files directly into your
-site source**.
-
-Finally, you can **install
-[Docsy as an NPM package](#option-3-docsy-as-an-npm-package)**.
-
-This guide provides instructions for all of these options, along with common
-prerequisites.
+- [Option 1: Docsy as a Git submodule](#option-1-docsy-as-a-git-submodule)
+- [Option 2: Clone the Docsy theme](#option-2-clone-the-docsy-theme)
+- [Option 3: Docsy as an NPM package](#option-3-docsy-as-an-npm-package)
 
 ## Prerequisites
 
@@ -120,6 +107,11 @@ See [Install PostCSS][].
 
 ## Option 1: Docsy as a Git submodule
 
+If you are using Docsy as a
+[Git submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) but would
+like to migrate to Hugo Modules, see our
+[migration guide](/docs/update/convert-site-to-module/).
+
 ### For a new site
 
 To create a **new site** and add the Docsy theme as a Git submodule, run the
@@ -160,12 +152,6 @@ your project's root directory:
     ```sh
     echo 'theme: docsy/theme' >> hugo.yaml
     ```
-
-    > [!TIP]
-    >
-    > As of Hugo 0.110.0, the default config base filename was changed to
-    > `hugo.*` from `config.*`. If you are using hugo 0.110+, consider renaming
-    > your `config.*` to `hugo.*`.
 
 3.  Get Docsy dependencies:
 
