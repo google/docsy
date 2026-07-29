@@ -299,8 +299,11 @@ If not adjust accordingly.
 
 10. **Pull the PR** to get the last changes.
 
-11. **Test Docsy** from [docsy-example][] and the docsy-starter. (Consider
-    updating the Docsy version for these examples in the examples page.)
+11. **Test Docsy** from [docsy-example][] and the docsy-starter: exercise the
+    release post's upgrade actions and sanity checks over the site as written
+    (this doubles as a dry run of the post), building against the release branch
+    or commit. (Consider updating the Docsy version for these examples in the
+    examples page.)
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
