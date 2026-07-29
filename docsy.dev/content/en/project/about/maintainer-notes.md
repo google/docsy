@@ -2,7 +2,7 @@
 title: Maintainer notes
 description: Notes for Docsy maintainers
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate lycheecache
+cSpell:ignore: hugo creatordate lycheecache opentelemetry prebuild worktree
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -283,9 +283,10 @@ If not adjust accordingly.
     - Use the web interface to fill in the PR details.
     - Submit the PR.
 
-8.  **Test the PR** branch from selected consumer sites. For each site, create
-    a dedicated worktree + branch (kept for post-tag re-pin PRs); run the full
-    test suite and push any required adjustments to the PR.
+8.  **Test the PR branch**:
+    - **Run-edit-cycle**, after each run sub-step below:
+      - Push any adjustments to the PR.
+      - Restart this step 8 from the top, if justified.
     - Run the [smoke tests](#test-suites), which auto-target the PR branch
       pushed in the previous step and include a build at the
       [minimum Hugo version](#minimum-hugo-version):
@@ -294,31 +295,26 @@ If not adjust accordingly.
       npm run test:smoke
       ```
 
-    - For module-mode sites, point at the PR branch via `HUGO_MODULE_REPLACEMENTS`.
-    - For submodule-mode sites:
-
-      ```sh
-      cd themes/docsy
-      git fetch FORK BRANCH-NAME
-      git checkout FETCH_HEAD
-      cd .. && git add themes/docsy  # stage to survive prebuild reset
-      ```
-
-    - Run the full test suite and an A/B diff of the generated `public/` against
-      the current pin; flag any unexplained diff.
-    - Apply the release post's upgrade actions and sanity checks as written;
-      this doubles as a dry run of the post.
+    - **Test consumer sites**:
+      - Run the [consumer-site test procedure](#consumer-site-test) over
+        selected sites listed below.
+      - Remember to push any adjustments to the PR as stated above.
+      - Sites to test:
+        - [docsy-example][]
+        - [docsy-starter][]
+        - [opentelemetry.io][] or another large production site
 
 9.  **Get PR approved and merged**.
 
 10. **Pull the PR** to get the last changes.
 
-11. **Smoke-check Docsy** from the consumer-site worktrees created in step 8.
-    Update each site's Docsy pin from the PR branch tip to merged `main` and
-    run a smoke build (build + favicons + styles). Run the full suite only if
-    there was a non-trivial merge conflict or rebase.
-    - Consider updating the Docsy version for these examples in the examples
-      page.
+11. **Post-merge check from consumer sites.** In each worktree from step 8,
+    update the site's Docsy pin from the PR branch tip to merged `main`, then:
+    - Build and confirm zero warnings; re-run the site's sanity checks.
+    - Re-run the full [test procedure](#consumer-site-test) only if the merge
+      involved a non-trivial conflict or rebase.
+    - Consider updating the Docsy version for these examples in the
+      `docsy.dev/examples` page.
 
 12. **Ensure** that you're:
     - On the target `$BASE` branch
@@ -594,6 +590,50 @@ before any further changes are merged into the `main` branch:
 
 4. **Get PR approved and merged**.
 
+## Consumer-site test procedure {#consumer-site-test}
+
+To test a Docsy branch or release from a consumer site, for each site:
+
+1. **Create a dedicated worktree + branch** off the site's default branch; keep
+   it for the site's post-release Docsy-update PR.
+2. **Point the site at the target Docsy commit**, per install mode:
+   - Hugo module: set `HUGO_MODULE_REPLACEMENTS` to the Docsy checkout path —
+     env-only, no repo edits.
+   - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH`.
+   - Git submodule:
+
+     ```sh
+     cd themes/docsy
+     git fetch FORK BRANCH-NAME
+     git checkout FETCH_HEAD
+     cd .. && git add themes/docsy # stage so prebuild targets this SHA
+     ```
+
+3. **Apply the release post's upgrade actions** — all of them, before the first
+   build: check every applies-if guard against the site, including the companion
+   Hugo guide's when the release raises the Hugo minimum. This doubles as a dry
+   run of the post; report any gap or inaccuracy as feedback on it.
+4. **Build**: confirm zero errors and warnings.
+5. **Run the site's test suite**:
+   - Run `npm test` or the site's canonical test script.
+   - Confirm that all checks pass.
+   - Run the release post's sanity checks.
+6. **A/B diff the generated site**:
+   - Build at the current (pre-update) pin and set `public/` aside as a baseline
+   - Optionally make the folder a git repository for the purpose of the diff.
+   - Diff the new pin's build against the baseline; for example, without a git
+     repository run:
+
+     ```sh
+     diff -rq --exclude='*.map' BASELINE_DIR/ public/
+     ```
+
+   - Confirm at least one difference exists.
+   - Assess each difference:
+     - Map it to an announced change, or flag it as a potential regression.
+     - Investigate issues and report their root causes.
+   - Report the results.
+
 ## Release helper scripts
 
 - NPM scripts: `set:version` and `set:version:*`; `update:hugo` (see
@@ -612,6 +652,7 @@ before any further changes are merged into the `main` branch:
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
+[docsy-starter]: https://github.com/cncf/docsy-starter
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
@@ -622,6 +663,7 @@ before any further changes are merged into the `main` branch:
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
+[opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
