@@ -188,6 +188,12 @@ These instructions assume the release is:
 
 If not adjust accordingly.
 
+> [!TIP]
+>
+> A release run can span sessions and days. Consider keeping a running copy of
+> the numbered steps below as a checklist in your own notes, ticking steps as
+> they complete and marking who each pending step is waiting on.
+
 > [!IMPORTANT]
 >
 > Before creating a release, do a [release-prep audit](#release-prep-audit) and
