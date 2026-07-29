@@ -1,18 +1,18 @@
 ---
 title: 0.16 coverage ledger
 date: 2026-06-15
-lastmod: 2026-07-26
+lastmod: 2026-07-29
 range: v0.15.0..main
-last-main-commit: 9b1d9951
+last-main-commit: 69e597cc
 cSpell:ignore: favicons gohugoio lycheecache
 ---
 
 The coverage ledger: one row per landed change in [v0.15.0...main][] through
-[9b1d9951][], mapped to where each is covered. This is the objective "is
+[69e597cc][], mapped to where each is covered. This is the objective "is
 everything covered, in the right place?" snapshot and the entry point for each
 refresh — add a row per new commit and route it.
 
-All 44 commits in range are squash-merged PRs (one commit per PR), so the
+All 46 commits in range are squash-merged PRs (one commit per PR), so the
 first-parent spine and the raw range are identical; every subject carries its
 `(#NNNN)` PR number.
 
@@ -74,6 +74,8 @@ first-parent spine and the raw range are identical; every subject carries its
 | `848374ee` [#2686][] | —         | docsy.dev: run link-check bins directly         | tool  | N/A  | N/A  | N/A  | N/A  | npm-squat hygiene: no bare `npx BIN`         |
 | `2b0fba2f` [#2687][] | —         | docsy.dev: link-cache from the npm registry     | tool  | N/A  | N/A  | N/A  | N/A  | devDependency source switch only             |
 | `9b1d9951` [#2688][] | [#2683][] | Registry install first-class; support policy    | docs  | done | done | done | N/A  | Option 3 registry-lead; two-axis policy      |
+| `7b2117a9` [#2690][] | [#2615][] | Refresh 0.16.0 release artifacts thru 9b1d9951  | tool  | N/A  | N/A  | N/A  | N/A  | The release artifacts themselves             |
+| `69e597cc` [#2692][] | [#2615][] | Evergreen home for generic update procedure     | docs  | done | N/A  | done | N/A  | `/docs/update/`; 0.16.0 post repointed in-PR |
 
 ## Notes on bundled changes
 
@@ -228,6 +230,8 @@ first-parent spine and the raw range are identical; every subject carries its
 [#2687]: https://github.com/google/docsy/pull/2687
 [#2688]: https://github.com/google/docsy/pull/2688
 [#2689]: https://github.com/google/docsy/issues/2689
-[9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
+[#2690]: https://github.com/google/docsy/pull/2690
+[#2692]: https://github.com/google/docsy/pull/2692
+[69e597cc]: https://github.com/google/docsy/commit/69e597cc
 [link-cache]: https://github.com/chalin/link-cache
 [v0.15.0...main]: https://github.com/google/docsy/compare/v0.15.0...main

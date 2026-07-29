@@ -1,7 +1,7 @@
 ---
 title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
-date: 2026-07-29
+date: 2026-07-28
 lastmod: 2026-07-29
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),

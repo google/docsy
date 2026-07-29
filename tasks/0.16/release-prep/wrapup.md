@@ -1,9 +1,9 @@
 ---
 title: 0.16 release-prep wrapup
 date: 2026-06-15
-lastmod: 2026-07-26
+lastmod: 2026-07-29
 range: v0.15.0..main
-last-main-commit: 9b1d9951
+last-main-commit: 69e597cc
 cSpell:ignore: favicons retokenization thoughtry
 ---
 
@@ -11,7 +11,7 @@ Synthesized state for 0.16 release prep: themes, breaking changes, decisions,
 milestone hygiene, and the tag-time checklist. The objective per-change matrix
 lives in [coverage.md](coverage.md); this file holds the judgment layer.
 
-> Prepared for commits in [v0.15.0...main][] through [9b1d9951][].
+> Prepared for commits in [v0.15.0...main][] through [69e597cc][].
 
 ## Themes (with evidence and client impact)
 
@@ -346,7 +346,7 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 [#2688]: https://github.com/google/docsy/pull/2688
 [#2689]: https://github.com/google/docsy/issues/2689
 [#2692]: https://github.com/google/docsy/pull/2692
-[9b1d9951]: https://github.com/google/docsy/commit/9b1d9951
+[69e597cc]: https://github.com/google/docsy/commit/69e597cc
 [docsy-example#478]: https://github.com/google/docsy-example/pull/478
 [link-cache]: https://github.com/chalin/link-cache
 [official support policy]:
