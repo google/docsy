@@ -68,7 +68,7 @@ Module guide as a simple and easily maintained option.
 Section pages:
 
 - [Use Docsy as a Hugo Module](/docs/get-started/docsy-as-module/): Learn how to get started with Docsy by using the theme as a Hugo Module.
-- [Other setup options](/docs/get-started/other-options/): Create a new Docsy site with Docsy using Git or NPM
+- [Other setup options](/docs/get-started/other-options/): Install Docsy as a Git submodule, a clone, or the @docsy/theme npm package, for sites not using Hugo modules.
 - [Deploy Docsy inside a Docker container](/docs/get-started/quickstart-docker/): Instructions on how to set up and run a local Docsy site with Docker.
 - [Basic site configuration](/docs/get-started/basic-configuration/): Basic configuration for new Docsy sites.
 - [Troubleshooting and known issues](/docs/get-started/troubleshooting/): Troubleshooting and known issues when installing and using Docsy.

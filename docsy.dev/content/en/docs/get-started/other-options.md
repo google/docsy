@@ -1,6 +1,8 @@
 ---
 title: Other setup options
-description: Create a new Docsy site with Docsy using Git or NPM
+description: >-
+  Install Docsy as a Git submodule, a clone, or the @docsy/theme npm package,
+  for sites not using Hugo modules.
 date: 2021-12-08
 cSpell:ignore: hugo myproject
 weight: 2
