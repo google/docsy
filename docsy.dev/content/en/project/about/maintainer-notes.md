@@ -283,8 +283,9 @@ If not adjust accordingly.
     - Use the web interface to fill in the PR details.
     - Submit the PR.
 
-8.  **Test the PR** branch from selected sites, and push any required
-    adjustments.
+8.  **Test the PR** branch from selected consumer sites. For each site, create
+    a dedicated worktree + branch (kept for post-tag re-pin PRs); run the full
+    test suite and push any required adjustments to the PR.
     - Run the [smoke tests](#test-suites), which auto-target the PR branch
       pushed in the previous step and include a build at the
       [minimum Hugo version](#minimum-hugo-version):
@@ -293,22 +294,29 @@ If not adjust accordingly.
       npm run test:smoke
       ```
 
-    - If the test site uses Docsy as a Git submodule:
+    - For module-mode sites, point at the PR branch via `HUGO_MODULE_REPLACEMENTS`.
+    - For submodule-mode sites:
 
       ```sh
-      cd themes/docs
-      git fetch
-      git switch -t REPO/BRANCH-NAME # e.g. chalin/chalin-m24-0.14.0-pre-release
+      cd themes/docsy
+      git fetch FORK BRANCH-NAME
+      git checkout FETCH_HEAD
+      cd .. && git add themes/docsy  # stage to survive prebuild reset
       ```
+
+    - Run the full test suite and an A/B diff of the generated `public/` against
+      the current pin; flag any unexplained diff.
+    - Apply the release post's upgrade actions and sanity checks as written;
+      this doubles as a dry run of the post.
 
 9.  **Get PR approved and merged**.
 
 10. **Pull the PR** to get the last changes.
 
-11. **Test Docsy** from [docsy-example][] and the docsy-starter, building
-    against the release branch or commit:
-    - Apply the release post's upgrade actions and sanity checks as written;
-      this doubles as a dry run of the post.
+11. **Smoke-check Docsy** from the consumer-site worktrees created in step 8.
+    Update each site's Docsy pin from the PR branch tip to merged `main` and
+    run a smoke build (build + favicons + styles). Run the full suite only if
+    there was a non-trivial merge conflict or rebase.
     - Consider updating the Docsy version for these examples in the examples
       page.
 
