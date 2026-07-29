@@ -609,7 +609,9 @@ To test a Docsy branch or release from a consumer site, for each site:
      hugo mod graph | head -3
      ```
 
-   - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH`.
+   - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH` for sites that npm
+     install from GitHub (`google/docsy`); append `/theme` for sites that use
+     the registry package (`@docsy/theme`).
    - Git submodule:
 
      ```sh

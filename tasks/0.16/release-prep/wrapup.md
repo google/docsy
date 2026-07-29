@@ -269,12 +269,12 @@ this tracks 0.16-specific status and deltas, not the full mechanics.
 - [x] Bump the version stamp from `0.15.1-dev` to the release version in
       `package.json` and `docsy.dev` configs (`tdVersion`/`params`).
 - [ ] Publish the nested Hugo module tag `theme/v0.16.0` at the release commit
-      (required by the theme folder move; **not yet in the maintainer notes
-      procedure** — new this release). Verify the tag exists **before** the
-      deploy that takes the posts live: every install-mode Action in the release
-      post depends on it, and 0.16.0 is the first release to exercise the
-      nested-tag scheme. (The source-level `draft: true` flip rides the
-      release-prep PR earlier — the tag gates publication, not that edit.)
+      (required by the theme folder move — new this release). Verify the tag
+      exists **before** the deploy that takes the posts live: every install-mode
+      Action in the release post depends on it, and 0.16.0 is the first release
+      to exercise the nested-tag scheme. (The source-level `draft: true` flip
+      rides the release-prep PR earlier — the tag gates publication, not that
+      edit.)
 - [ ] Publish `@docsy/theme@0.16.0` to the npm registry from the tagged commit
       and re-point dist-tag `next` at it, **before** the site deploy flips the
       posts live (the post's install commands must resolve). Verify with
