@@ -579,20 +579,34 @@ before any further changes are merged into the `main` branch:
    ...
    ```
 
-2. In the [Changelog][]:
+2. **Retire temporary measures** that the shipped release makes obsolete, and
+   run checks.
+
+   - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
+     that the link check passes.
+   - Search for other release-scoped markers and act on those now that the
+     release is shipped, for example:
+
+     ```sh
+     git grep -En 'Remove after|TODO\(0\.' -- ':(exclude)*public*'
+     ```
+
+   - Leave markers naming a later release in place.
+
+3. In the [Changelog][]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
      at the end of the file.
 
    - **Fix the new release URL**, which ends with `latest?FIXME=...`, so that it
      refers to the actual release, now that it exists.
 
-3. **Submit a PR with your changes**, using a title like:
+4. **Submit a PR with your changes**, using a title like:
 
    ```text
    Set version to {{% param version %}}
    ```
 
-4. **Get PR approved and merged**.
+5. **Get PR approved and merged**.
 
 ## Consumer-site test procedure {#consumer-site-test}
 
