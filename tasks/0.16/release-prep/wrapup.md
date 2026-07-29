@@ -139,7 +139,8 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   see the routing decision below), favicons, and shared chrome. A **+1 overflow
   is tolerated** for an item added later with justification (guidance amended
   2026-07-29): here the **Agent-ready upgrade guide** meta-entry, added with the
-  0.15-lineage agent-support arc and leading the card. The minimum-Hugo bump is
+  0.15-lineage agent-support arc (initially leading the card; moved last,
+  product items first, in the 2026-07-29 review round). The minimum-Hugo bump is
   deliberately not in the card: it is routine (0.15 did the same), has its own
   section plus the companion Hugo guide, and Ready-to-Upgrade lists every
   breaking change anyway.
@@ -202,8 +203,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   restating it, and the policy rewrite itself shipped with [#2688][] (routed
   then). The changelog carries one **New** entry citing [#2683][]. Highlights
   card: the packaging entry now leads with the npm story — **First-class npm
-  support**, title linking `#npm-registry`, with the theme-folder move swept
-  into "and more" (owner call, 2026-07-26) — three product items, within the
+  support**, title linking `#npm-registry`, with "and more" sweeping in the
+  packaging arc (owner call, 2026-07-26; `[more]` re-pointed `#theme-folder` →
+  `#npm-deps` in the 2026-07-29 review round) — three product items, within the
   cap; the Agent-ready meta-entry's +1 came later (2026-07-29, see the
   highlights-card decision above).
 - **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
