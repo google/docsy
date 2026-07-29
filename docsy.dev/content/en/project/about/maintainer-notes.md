@@ -618,18 +618,19 @@ To test a Docsy branch or release from a consumer site, for each site:
    - Confirm that all checks pass.
    - Run the release post's sanity checks.
 6. **Spot-check key pages and output files**, in the build output or a served
-   preview. Confirm that pages render with intact chrome, styles, and favicons,
-   and that the other files look sane:
-   - Home page
-   - Docs landing page, and a random docs page
-   - Blog landing page and a random blog post, when the site has a blog
-   - Some other random page
-   - The 404 page
-   - The main CSS and JS files
-   - When the site enables LLMS support: `llms.txt`, and the `.md` output of the
-     pages above
-   - `_redirects`, when present
-   - `sitemap.xml` -- note that some sites normalize it after the build
+   preview:
+   - **Pages** -- confirm each renders with intact chrome, styles, and favicons:
+     - Home page
+     - Docs landing page, and a random docs page
+     - Blog landing page and a random blog post, when the site has a blog
+     - Some other random page
+     - The 404 page
+   - **Other output files** -- confirm each looks sane:
+     - The main CSS and JS files
+     - When the site enables LLMS support: `llms.txt`, and the `.md` output of
+       the pages above
+     - `_redirects`, when present
+     - `sitemap.xml` -- note that some sites normalize it after the build
 7. **A/B diff the generated site**:
    - If the site's `public/` folder is a git repository (a setup worth adopting;
      see docsy.dev's `make:public` npm script), build at the current
