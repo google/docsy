@@ -149,57 +149,48 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 **New**:
 
-- **Docsy on the npm registry**: the theme is now published as
-  [`@docsy/theme`][@docsy/theme]; npm installs from GitHub (`google/docsy`) are
-  now for [development and testing only](#official-support). See [0.16.0 release
-  report][0.16.0-blog-npm-registry] and [Docsy as an NPM package][option-3-npm]
-  ([#2683][]).
-- **Favicon discovery**: you can now drop a site's conventionally named favicon
-  files into `static/` and the theme discovers and links them -- no favicons
-  partial required. A new `gen-favicons` helper generates raster icons from a
-  source SVG. See [0.16.0 release report][0.16.0-blog-favicons] and [Add your
+- **[Docsy on the npm registry][0.16.0-blog-npm-registry]**: the theme is now
+  published as [`@docsy/theme`][@docsy/theme]; npm installs from GitHub
+  (`google/docsy`) are now for
+  [development and testing only](#official-support). See [Docsy as an NPM
+  package][option-3-npm] ([#2683][]).
+- **[Favicon discovery][0.16.0-blog-favicons]**: the theme now discovers and
+  links conventionally named favicon files from `static/`; a new `gen-favicons`
+  helper generates raster icons from a source SVG. See [Add your
   favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
-- **Default favicons** removed from the theme; sites now supply their own --
-  most simply via **Favicon discovery** (see **New** above). See [0.16.0 release
-  report][0.16.0-blog-favicons] and [Add your favicons][favicons] ([#2595][]).
+- **[Default favicons][0.16.0-blog-favicons]** removed from the theme; sites
+  supply their own (see **Favicon discovery** above) ([#2595][]).
 - Raised the theme's minimum supported Hugo version to
-  **[0.160.1][hugo-0.160.1]** (was 0.146.0; Docsy 0.15 documented Hugo 0.157.0).
-  For the rationale, see [0.16.0 release report][0.16.0-blog-hugo] ([#2668][],
-  [#2677][]).
-- **Theme folder move**: the canonical theme now lives in `theme/`; consuming
-  sites need a one-line install-path update for their install mode. See [0.16.0
-  release report][0.16.0-blog-theme-folder] ([#2617][]).
-- **Bootstrap and Font Awesome via npm**: the theme declares them as npm
-  dependencies instead of importing them as Hugo modules. **Applies to
-  Hugo-module installs**, which run `hugo mod npm pack` and `npm install` to
-  pull them in; other install modes are unaffected. See [0.16.0 release
-  report][0.16.0-blog-npm-deps] ([#2668][]).
+  **[0.160.1][hugo-0.160.1]** (was 0.146.0). For the rationale, see the [0.16.0
+  release report][0.16.0-blog-hugo] ([#2668][]).
+- **[Theme folder move][0.16.0-blog-theme-folder]**: the canonical theme now
+  lives in `theme/`; install paths change for every install mode ([#2617][]).
+- **[Bootstrap and Font Awesome via npm][0.16.0-blog-npm-deps]**: the theme
+  declares them as npm dependencies instead of importing them as Hugo modules;
+  applies to Hugo-module installs only ([#2668][]).
 
 **Other changes**:
 
 - Migrated the theme and docs off deprecated Hugo language APIs ([#2593][]).
   Thanks [@deining][] for the groundwork in [#2594][] and [#2578][]!
 - Synced and corrected the Russian UI strings. Thanks [@shurup][]!
-- Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. The theme's
-  minimum supported Hugo version remains 0.160.1. See [Hugo 0.158+ upgrade
-  guide][] ([#2581][]).
-- **PostCSS is opt-in for non-RTL sites**: Docsy runs `postCSS` only for sites
-  with RTL languages or a project-root `postcss.config.{js,mjs,cjs}`; other
-  sites no longer need a PostCSS toolchain. See [0.16.0 release
-  report][0.16.0-blog-postcss] ([#2668][]).
-- Moved cached-sidebar activation on large sites (above `sidebar_cache_limit`)
-  from per-page inline jQuery to the shared `chrome-nav.js` hydration path;
-  rendered navigation is unchanged.
+- Upgraded the project's Hugo build to [0.164.0][hugo-0.164.0]. See [Hugo 0.158+
+  upgrade guide][] ([#2581][]).
+- **[PostCSS is opt-in for non-RTL sites][0.16.0-blog-postcss]**: sites without
+  RTL languages or their own PostCSS config no longer need a PostCSS toolchain
+  ([#2668][]).
+- Moved cached-sidebar activation on large sites from inline jQuery into the
+  shared `chrome-nav.js`, which now loads on every page; rendered navigation is
+  unchanged. See the [0.16.0 release report][0.16.0-blog-shared-chrome].
 
 [**Experimental**](#experimental):
 
-- Added a **`shared` chrome build mode** (`td.chrome`), an experimental option
-  that emits the repeated chrome (navbar, footer, left-nav) on one donor page
-  per locale and restores it in the browser, so one build serves both readers
-  and link checkers. See [Chrome build modes][chrome] ([#2659][]).
+- Added a **[`shared` chrome build mode][chrome]** (`td.chrome`) that renders
+  the repeated chrome (navbar, footer, left-nav) once per locale, for much
+  cheaper link checking of large sites ([#2659][]).
 
 **For maintainers**:
 
@@ -220,7 +211,6 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [#2617]: https://github.com/google/docsy/issues/2617
 [#2659]: https://github.com/google/docsy/issues/2659
 [#2668]: https://github.com/google/docsy/issues/2668
-[#2677]: https://github.com/google/docsy/pull/2677
 [#2683]: https://github.com/google/docsy/issues/2683
 [0.16.0 release report]: /blog/2026/0.16.0/
 [0.16.0-blog-favicons]: /blog/2026/0.16.0/#favicons
@@ -229,6 +219,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [0.16.0-blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [0.16.0-blog-npm-registry]: /blog/2026/0.16.0/#npm-registry
 [0.16.0-blog-postcss]: /blog/2026/0.16.0/#postcss
+[0.16.0-blog-shared-chrome]: /blog/2026/0.16.0/#shared-chrome
 [0.16.0-blog-theme-folder]: /blog/2026/0.16.0/#theme-folder
 [0.16.0]: https://github.com/google/docsy/releases/tag/v0.16.0
 [chrome]: /docs/deployment/chrome/
