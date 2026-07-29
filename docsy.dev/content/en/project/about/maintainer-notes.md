@@ -300,10 +300,10 @@ If not adjust accordingly.
     - **Test consumer sites**:
       - Run the [consumer-site test procedure](#consumer-site-test) over
         selected sites listed below.
-      - Sites to test:
-        - [docsy-example][]
-        - [docsy-starter][]
-        - [opentelemetry.io][] or another large production site
+      - Sites to test, ideally covering each install mode:
+        - Hugo module: [docsy-example][]
+        - npm package: [docsy-starter][]
+        - Git submodule: [opentelemetry.io][] or another large production site
 
 9.  **Get PR approved and merged**.
 
