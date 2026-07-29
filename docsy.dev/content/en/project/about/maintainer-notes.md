@@ -446,11 +446,11 @@ If not adjust accordingly.
 
     </details>
 
-15. **Publish the theme package** to the npm registry, from `theme/` at the
-    tagged release commit; verify the published version and that the `latest`
-    and `next` dist-tags point at it before continuing -- the release post
-    recommends installing [`@docsy/theme`][], so the package must be live before
-    the deploy that publishes the post.
+15. **Publish the theme package**, before the deploy that publishes the release
+    post -- the post recommends installing [`@docsy/theme`][]:
+    - Publish to the npm registry from `theme/` at the tagged release commit.
+    - Verify the published version.
+    - Verify that the `latest` and `next` dist-tags point at it.
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 
