@@ -610,8 +610,8 @@ To test a Docsy branch or release from a consumer site, for each site:
 
 3. **Apply the release post's upgrade actions** -- all of them, before the first
    build: check every applies-if guard against the site, including the companion
-   Hugo guide's when the release raises the Hugo minimum. This doubles as a dry
-   run of the post; report any gap or inaccuracy as feedback on it.
+   Hugo guide's actions when the release raises the Hugo minimum. This doubles
+   as a dry run of the post; report any gap or inaccuracy as feedback on it.
 4. **Build**: confirm zero errors and warnings.
 5. **Run the site's test suite**:
    - Run `npm test` or the site's canonical test script.
