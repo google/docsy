@@ -203,7 +203,9 @@ lives in [coverage.md](coverage.md); this file holds the judgment layer.
   then). The changelog carries one **New** entry citing [#2683][]. Highlights
   card: the packaging entry now leads with the npm story — **First-class npm
   support**, title linking `#npm-registry`, with the theme-folder move swept
-  into "and more" (owner call, 2026-07-26) — the three-item cap holds.
+  into "and more" (owner call, 2026-07-26) — three product items, within the
+  cap; the Agent-ready meta-entry's +1 came later (2026-07-29, see the
+  highlights-card decision above).
 - **Applied the otel.io guide feedback** (2026-07-26; from exercising the posts
   over opentelemetry.io, [otel#10906][]): clone/submodule Actions warn that a
   plain `npm install` inside `themes/docsy/` pulls the maintainer workspaces
