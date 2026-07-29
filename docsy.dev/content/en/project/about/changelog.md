@@ -141,9 +141,7 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
-## v0.16.0 - UNRELEASED {#next}
-
-> **UNRELEASED: this planned version is still under development**
+## v0.16.0 {#v0.16.0}
 
 For an introduction to this release, see the [0.16.0 release report][]. For
 Hugo-specific notes, see the [Hugo 0.158+ upgrade guide][]. For the full list of
@@ -237,7 +235,7 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 [0.16.0]: https://github.com/google/docsy/releases/tag/v0.16.0
 [chrome]: /docs/deployment/chrome/
 [favicons]: /docs/content/iconsimages/#add-your-favicons
-[git history since 0.15.0]: https://github.com/google/docsy/compare/v0.15.0...main
+[git history since 0.15.0]: https://github.com/google/docsy/compare/v0.15.0...v0.16.0
 [Hugo 0.158+ upgrade guide]: /blog/2026/hugo-0.158.0+/
 [hugo-0.160.1]: https://github.com/gohugoio/hugo/releases/tag/v0.160.1
 [hugo-0.164.0]: https://github.com/gohugoio/hugo/releases/tag/v0.164.0

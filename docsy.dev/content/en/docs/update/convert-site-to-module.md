@@ -244,10 +244,6 @@ git commit -m "Removed docsy git submodule"
 > Be careful when using the `rm -rf` command, make sure that you don't
 > inadvertently delete any productive data files!
 
-<!-- TODO(tag-time): re-point the preview-host (main--) link below to the
-     production /blog/2026/0.16.0/ URL once the post publishes; see the
-     release-prep wrapup checklist. -->
-
 <!-- prettier-ignore-start -->
-[blog-npm-deps]: https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps
+[blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 <!-- prettier-ignore-end -->
