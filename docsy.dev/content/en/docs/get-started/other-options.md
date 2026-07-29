@@ -161,12 +161,6 @@ your project's root directory:
     echo 'theme: docsy/theme' >> hugo.yaml
     ```
 
-    > [!TIP]
-    >
-    > As of Hugo 0.110.0, the default config base filename was changed to
-    > `hugo.*` from `config.*`. If you are using hugo 0.110+, consider renaming
-    > your `config.*` to `hugo.*`.
-
 3.  Get Docsy dependencies:
 
     ```sh
