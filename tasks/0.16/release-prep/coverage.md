@@ -167,7 +167,8 @@ first-parent spine and the raw range are identical; every subject carries its
 [@deining]: https://github.com/deining
 [release report]: ../../../docsy.dev/content/en/blog/2026/0.16.0.md
 [hugo upgrade guide]: ../../../docsy.dev/content/en/blog/2026/hugo-0.158.0+.md
-[0.16.0-changelog]: ../../../docsy.dev/content/en/project/about/changelog/#next
+[0.16.0-changelog]:
+  ../../../docsy.dev/content/en/project/about/changelog/#v0.16.0
 [#726]: https://github.com/google/docsy/issues/726
 [#2357]: https://github.com/google/docsy/issues/2357
 [#2501]: https://github.com/google/docsy/issues/2501

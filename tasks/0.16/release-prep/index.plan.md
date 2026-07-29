@@ -34,7 +34,8 @@ Published artifacts (edited in place, not drafted here):
 
 - Release report: `docsy.dev/content/en/blog/2026/0.16.0.md`
 - Hugo upgrade post: `docsy.dev/content/en/blog/2026/hugo-0.158.0+.md`
-- Changelog: `docsy.dev/content/en/project/about/changelog.md` (`#next` section)
+- Changelog: `docsy.dev/content/en/project/about/changelog.md` (`#v0.16.0`
+  section)
 
 ## Checklist
 
