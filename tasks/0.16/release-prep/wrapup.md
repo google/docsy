@@ -238,6 +238,9 @@ Before tagging, confirm the milestone's closed list matches the
 The canonical procedure is maintainer notes, [Publishing a release][pub-rel];
 this tracks 0.16-specific status and deltas, not the full mechanics.
 
+- [x] Refresh-loop gate: the ledger and coordinates are current through the tip
+      the release commit builds on (`last-main-commit: 69e597cc`; refreshed
+      2026-07-29 — see the skill's tag-time gate).
 - [x] Flip `draft: true` → `false` on both blog posts and set their final dates.
 - [x] Validate the theme's minimum Hugo version: done 2026-07-17 via a one-off
       fixture-matrix build on 0.158.0/0.159.0; minimum raised to 0.160.1 — see
