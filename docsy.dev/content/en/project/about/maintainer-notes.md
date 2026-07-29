@@ -194,6 +194,8 @@ If not adjust accordingly.
 > the numbered steps below as a checklist in your own notes, ticking steps as
 > they complete and marking who each pending step is waiting on.
 
+<!-- markdownlint-disable-next-line no-blanks-blockquote -->
+
 > [!IMPORTANT]
 >
 > Before creating a release, do a [release-prep audit](#release-prep-audit) and
