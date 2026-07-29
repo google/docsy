@@ -3,6 +3,10 @@ title: Hugo 0.158.0-0.164.x upgrade guide
 linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-07-28
 lastmod: 2026-07-29
+description: >-
+  What changed in Hugo 0.158.0 through 0.164.x for Docsy sites — breaking
+  changes, deprecations, security fixes, and known regressions, with per-version
+  upgrade actions.
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -14,10 +18,8 @@ params:
 cSpell:ignore: amp AVIF CatmullRom chromastyles contentbasename downscaling goldmark Netlify Pandoc partialCached passthrough protobuf renderSegments reStructuredText retokenizes useEmbedded userinfo
 ---
 
-This post summarizes the breaking, security, and notable changes in Hugo 0.158.0
-through {{% param hugoSupportedVersion %}} that affect Docsy sites. It is a
-companion to the [Docsy 0.16.0 release post](0.16.0/), which specifies the
-[Hugo versions that 0.16.0 requires and validates](0.16.0/#hugo).
+This post is a companion to the [Docsy 0.16.0 release post](0.16.0/), which
+specifies the [Hugo versions that 0.16.0 requires and validates](0.16.0/#hugo).
 
 ## Upgrade summary
 

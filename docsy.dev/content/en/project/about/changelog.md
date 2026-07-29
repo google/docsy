@@ -150,10 +150,8 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 **New**:
 
 - **Docsy on the npm registry**: the theme is now published as
-  [`@docsy/theme`][@docsy/theme]. Install it directly from npm, with Bootstrap
-  and Font Awesome delivered as ordinary dependencies. npm installs from GitHub
-  (`google/docsy`) are now for
-  [development and testing only](#official-support). See [0.16.0 release
+  [`@docsy/theme`][@docsy/theme]; npm installs from GitHub (`google/docsy`) are
+  now for [development and testing only](#official-support). See [0.16.0 release
   report][0.16.0-blog-npm-registry] and [Docsy as an NPM package][option-3-npm]
   ([#2683][]).
 - **Favicon discovery**: you can now drop a site's conventionally named favicon
