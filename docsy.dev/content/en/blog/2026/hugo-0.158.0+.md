@@ -4,7 +4,7 @@ linkTitle: Hugo 0.158+ upgrade guide
 date: 2026-07-28
 lastmod: 2026-07-29
 description: >-
-  What changed in Hugo 0.158.0 through 0.164.x for Docsy sites — breaking
+  What changed in Hugo 0.158.0 through 0.164.x for Docsy sites: breaking
   changes, deprecations, security fixes, and known regressions, with per-version
   upgrade actions.
 author: >-
