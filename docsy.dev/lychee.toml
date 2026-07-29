@@ -34,12 +34,4 @@ exclude = [
   '^https://docsearch\.algolia\.com/',               # bot-wall (403) on the apply page
   '^https://prismjs\.com/download\.html#',           # download-builder state hash, not an anchor
   '^https://portal\.aws\.amazon\.com/',              # SPA signup flow, fragment is a client route
-
-  # Remove after 0.16.0 ships: the release tag and the version dropdown's
-  # "latest" links to pages new/draft in this cycle (absent on v0.15.0 prod).
-  '^https://github\.com/google/docsy/releases/(tag/)?v0\.16\.0$',
-  '^https://github\.com/google/docsy/compare/v0\.15\.0\.\.\.v0\.16\.0$',
-  '^https://www\.docsy\.dev/docs/deployment/chrome/$',
-  '^https://www\.docsy\.dev/blog/2026/0\.16\.0/$',
-  '^https://www\.docsy\.dev/blog/2026/hugo-0\.158\.0\+/$',
 ]
