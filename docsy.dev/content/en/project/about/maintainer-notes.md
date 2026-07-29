@@ -188,18 +188,18 @@ These instructions assume the release is:
 
 If not adjust accordingly.
 
+> [!IMPORTANT]
+>
+> Before creating a release, do a [release-prep audit](#release-prep-audit) and
+> use it to drive the changelog and release-blog updates in the next two steps.
+
+<!-- markdownlint-disable-next-line no-blanks-blockquote -->
+
 > [!TIP]
 >
 > A release run can span sessions and days. Consider keeping a running copy of
 > the numbered steps below as a checklist in your own notes, ticking steps as
 > they complete and marking who each pending step is waiting on.
-
-<!-- markdownlint-disable-next-line no-blanks-blockquote -->
-
-> [!IMPORTANT]
->
-> Before creating a release, do a [release-prep audit](#release-prep-audit) and
-> use it to drive the changelog and release-blog updates in the next two steps.
 
 1.  **Change directory** to your local Docsy repo.
     - Expecting final adjustments as you prepare for the release? Create a
@@ -654,7 +654,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
-[docsy-starter]: https://github.com/cncf/docsy-starter
+[docsy-starter]: https://github.com/chalin/docsy-starter
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
