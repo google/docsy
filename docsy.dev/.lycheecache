@@ -254,6 +254,7 @@ https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss,200,1782498241
 https://github.com/google/docsy/blob/v0.7.0/layouts/partials/footer.html,200,1782498240
 https://github.com/google/docsy/commits/main,200,1782563369
 https://github.com/google/docsy/compare/v0.15.0...main,200,1782563370
+https://github.com/google/docsy/compare/v0.15.0...v0.16.0,200,1785360538
 https://github.com/google/docsy/compare/v0.8.0...v0.9.0,200,1782498238
 https://github.com/google/docsy/discussions,200,1782563367
 https://github.com/google/docsy/discussions/1308,200,1782498228
@@ -516,9 +517,12 @@ https://github.com/google/docsy/pull/941,200,1782498225
 https://github.com/google/docsy/pulls,200,1782563369
 https://github.com/google/docsy/releases,200,1782563368
 https://github.com/google/docsy/releases/latest,200,1782563369
+https://github.com/google/docsy/releases/latest?FIXME=v0.16.1,200,1785360538
+https://github.com/google/docsy/releases/latest?FIXME=v0.17.0,200,1785360538
 https://github.com/google/docsy/releases/new,200,1782498229
 https://github.com/google/docsy/releases/tag/v0.10.0,200,1782498237
 https://github.com/google/docsy/releases/tag/v0.11.0,200,1782498235
+https://github.com/google/docsy/releases/tag/v0.16.0,200,1785360538
 https://github.com/google/docsy/releases/tag/v0.7.0,200,1782498239
 https://github.com/google/docsy/releases/tag/v0.9.0,200,1782498237
 https://github.com/google/docsy/releases/v0.10.0,200,1782498226
@@ -530,6 +534,7 @@ https://github.com/google/docsy/releases/v0.14.1,200,1782498222
 https://github.com/google/docsy/releases/v0.14.2,200,1782498222
 https://github.com/google/docsy/releases/v0.14.3,200,1782498222
 https://github.com/google/docsy/releases/v0.15.0,200,1782563370
+https://github.com/google/docsy/releases/v0.16.0,200,1785360538
 https://github.com/google/docsy/releases/v0.2.0,200,1782498229
 https://github.com/google/docsy/releases/v0.3.0,200,1782498229
 https://github.com/google/docsy/releases/v0.4.0,200,1782498229
@@ -887,7 +892,9 @@ https://www.docsy.dev/blog/2025/0.12.0/,200,1782498244
 https://www.docsy.dev/blog/2025/0.13.0/,200,1782498244
 https://www.docsy.dev/blog/2026/0.14.0/,200,1782498244
 https://www.docsy.dev/blog/2026/0.15.0/,200,1782498244
+https://www.docsy.dev/blog/2026/0.16.0/,200,1785360538
 https://www.docsy.dev/blog/2026/hugo-0.152.0+/,200,1782498244
+https://www.docsy.dev/blog/2026/hugo-0.158.0+/,200,1785360538
 https://www.docsy.dev/community/,200,1782563367
 https://www.docsy.dev/docs/,200,1782498226
 https://www.docsy.dev/docs/best-practices/,200,1782563367
@@ -910,6 +917,7 @@ https://www.docsy.dev/docs/content/versioning/,200,1782498237
 https://www.docsy.dev/docs/contributing/,200,1782563367
 https://www.docsy.dev/docs/deployment/,200,1782563367
 https://www.docsy.dev/docs/deployment/amazon/,200,1782498243
+https://www.docsy.dev/docs/deployment/chrome/,200,1785360538
 https://www.docsy.dev/docs/deployment/github-pages/,200,1782498243
 https://www.docsy.dev/docs/deployment/local/,200,1782498238
 https://www.docsy.dev/docs/deployment/netlify/,200,1782498239
