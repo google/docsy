@@ -446,7 +446,13 @@ If not adjust accordingly.
 
     </details>
 
-15. Update the [deploy/prod][] branch from `$BASE`.
+15. **Publish the theme package** to the npm registry, from `theme/` at the
+    tagged release commit; verify the published version and that the `latest`
+    and `next` dist-tags point at it before continuing -- the release post
+    recommends installing [`@docsy/theme`][], so the package must be live before
+    the deploy that publishes the post.
+
+16. Update the [deploy/prod][] branch from `$BASE`.
 
     For stable releases from `main`, use:
 
@@ -460,10 +466,10 @@ If not adjust accordingly.
 
     The branch update will trigger a production deploy of the website.
 
-16. Wait for the production deploy to complete and check that [docsy.dev][] has
+17. Wait for the production deploy to complete and check that [docsy.dev][] has
     been updated to the new release.
 
-17. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
+18. **[Draft a new release][]** using GitHub web; fill in the fields as follows:
     - Visit [tags][] to find the new release tag {{% param tdVersion.latest %}}.
 
     - Select Create a new release from the {{% param tdVersion.latest %}} tag
@@ -486,16 +492,16 @@ If not adjust accordingly.
 
     - Select **Create a discussion for this release**.
 
-18. **Publish the release**: click _Publish release_.
+19. **Publish the release**: click _Publish release_.
 
-19. Test the release with a downstream project and/or the [docsy-example][]
+20. Test the release with a downstream project and/or the [docsy-example][]
     site.
 
-20. If you find issues, determine whether they need to be fixed immediately. If
+21. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
     a dot release.
 
-21. **Update the `release` branch** once the release is final.
+22. **Update the `release` branch** once the release is final.
 
     For a stable release, fast-forward `release` to the final release commit
     from `main`:
@@ -509,7 +515,7 @@ If not adjust accordingly.
     For patch releases, the release-prep PR should already target `release`, so
     there is no separate `main` to `release` fast-forward.
 
-22. Update the [doc-rooted][] branch from [deploy/prod][]:
+23. Update the [doc-rooted][] branch from [deploy/prod][]:
 
     ```sh
     git checkout doc-rooted
@@ -525,7 +531,7 @@ If not adjust accordingly.
     If the fast-forward merge fails, stop and reconcile the branch history. Once
     pushed, wait for the Netlify deploy and check the doc-rooted preview.
 
-23. Update, create, or close GitHub milestones as appropriate.
+24. Update, create, or close GitHub milestones as appropriate.
 
 If all is well, release the Docsy example as detailed next.
 
@@ -596,8 +602,14 @@ To test a Docsy branch or release from a consumer site, for each site:
 1. **Create a dedicated worktree + branch** off the site's default branch; keep
    it for the site's post-release Docsy-update PR.
 2. **Point the site at the target Docsy commit**, per install mode:
-   - Hugo module: set `HUGO_MODULE_REPLACEMENTS` to the Docsy checkout path --
-     env-only, no repo edits.
+   - Hugo module: map the theme module to the local checkout -- env-only, no
+     repo edits -- and confirm that `hugo mod graph` reports the replacement:
+
+     ```sh
+     export HUGO_MODULE_REPLACEMENTS="github.com/google/docsy/theme -> DOCSY_CHECKOUT_PATH/theme"
+     hugo mod graph | head -3
+     ```
+
    - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH`.
    - Git submodule:
 
@@ -605,7 +617,7 @@ To test a Docsy branch or release from a consumer site, for each site:
      cd themes/docsy
      git fetch FORK BRANCH-NAME
      git checkout FETCH_HEAD
-     cd .. && git add themes/docsy # stage so prebuild targets this SHA
+     cd ../.. && git add themes/docsy # stage so prebuild targets this SHA
      ```
 
 3. **Apply the release post's upgrade actions** -- all of them, before the first
@@ -666,6 +678,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
+[`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>

@@ -149,15 +149,14 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
 
 **New**:
 
-- **[Docsy on the npm registry][0.16.0-blog-npm-registry]**: the theme is now
-  published as [`@docsy/theme`][@docsy/theme]; npm installs from GitHub
-  (`google/docsy`) are now for
-  [development and testing only](#official-support). See [Docsy as an NPM
-  package][option-3-npm] ([#2683][]).
-- **[Favicon discovery][0.16.0-blog-favicons]**: the theme now discovers and
-  links conventionally named favicon files from `static/`; a new `gen-favicons`
-  helper generates raster icons from a source SVG. See [Add your
-  favicons][favicons] ([#2357][]).
+- **[Docsy on the npm registry][0.16.0-blog-npm-registry]**: published the theme
+  as [`@docsy/theme`][@docsy/theme]; npm installs from GitHub (`google/docsy`)
+  are now for [development and testing only](#official-support). See [Docsy as
+  an NPM package][option-3-npm] ([#2683][]).
+- **[Favicon discovery][0.16.0-blog-favicons]**: added automatic discovery and
+  linking of conventionally named favicon files from `static/`, and a
+  `gen-favicons` helper that generates raster icons from a source SVG. See [Add
+  your favicons][favicons] ([#2357][]).
 
 [**Breaking changes**](#breaking-change):
 
@@ -168,9 +167,9 @@ changes, see the [0.16.0][] release page or the [git history since 0.15.0][].
   release report][0.16.0-blog-hugo] ([#2668][]).
 - **[Theme folder move][0.16.0-blog-theme-folder]**: the canonical theme now
   lives in `theme/`; install paths change for every install mode ([#2617][]).
-- **[Bootstrap and Font Awesome via npm][0.16.0-blog-npm-deps]**: the theme
-  declares them as npm dependencies instead of importing them as Hugo modules;
-  applies to Hugo-module installs only ([#2668][]).
+- **[Bootstrap and Font Awesome via npm][0.16.0-blog-npm-deps]**: declared them
+  as npm dependencies instead of importing them as Hugo modules; applies to
+  Hugo-module installs only ([#2668][]).
 
 **Other changes**:
 
