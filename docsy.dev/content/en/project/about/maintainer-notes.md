@@ -594,7 +594,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 1. **Create a dedicated worktree + branch** off the site's default branch; keep
    it for the site's post-release Docsy-update PR.
 2. **Point the site at the target Docsy commit**, per install mode:
-   - Hugo module: set `HUGO_MODULE_REPLACEMENTS` to the Docsy checkout path —
+   - Hugo module: set `HUGO_MODULE_REPLACEMENTS` to the Docsy checkout path --
      env-only, no repo edits.
    - npm package: `npm install -D file:DOCSY_CHECKOUT_PATH`.
    - Git submodule:
@@ -606,7 +606,7 @@ To test a Docsy branch or release from a consumer site, for each site:
      cd .. && git add themes/docsy # stage so prebuild targets this SHA
      ```
 
-3. **Apply the release post's upgrade actions** — all of them, before the first
+3. **Apply the release post's upgrade actions** -- all of them, before the first
    build: check every applies-if guard against the site, including the companion
    Hugo guide's when the release raises the Hugo minimum. This doubles as a dry
    run of the post; report any gap or inaccuracy as feedback on it.
@@ -616,10 +616,11 @@ To test a Docsy branch or release from a consumer site, for each site:
    - Confirm that all checks pass.
    - Run the release post's sanity checks.
 6. **A/B diff the generated site**:
-   - If the site's `public/` folder is a git repository — a setup worth
-     adopting; see docsy.dev's `make:public` npm script — build at the current
+   - If the site's `public/` folder is a git repository (a setup worth adopting;
+     see docsy.dev's `make:public` npm script), build at the current
      (pre-update) pin and commit the output as the baseline. `git diff` then
-     reports the changes directly.
+     reports the changes directly. Do not remove `public/` if it's a symlink to
+     a different directory.
    - Otherwise, build at the current pin, set `public/` aside as a baseline
      directory, rebuild at the new pin, and diff, for example:
 
