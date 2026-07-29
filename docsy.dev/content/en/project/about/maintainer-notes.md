@@ -446,8 +446,7 @@ If not adjust accordingly.
 
     </details>
 
-15. **Publish the theme package**, before the deploy that publishes the release
-    post -- the post recommends installing [`@docsy/theme`][]:
+15. **Publish the theme package**:
     - Publish to the npm registry from `theme/` at the tagged release commit.
     - Verify the published version.
     - Verify that the `latest` and `next` dist-tags point at it.
@@ -678,7 +677,6 @@ To test a Docsy branch or release from a consumer site, for each site:
 [breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
-[`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
 [docsy-example]: <{{% param github_repo %}}-example>
