@@ -620,7 +620,8 @@ To test a Docsy branch or release from a consumer site, for each site:
 6. **Spot-check key pages and output files**, in the build output or a served
    preview:
    - **Pages** -- confirm each renders with intact chrome, styles, and favicons:
-     - Home page
+     - Home page -- also confirm that the `generator` meta element reports the
+       expected Hugo version (Docsy's version isn't emitted)
      - Docs landing page, and a random docs page
      - Blog landing page and a random blog post, when the site has a blog
      - Some other random page
