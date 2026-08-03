@@ -38,7 +38,6 @@ const PACKAGES = {
       `${TAR}docsy.dev/`,
       `${TAR}scripts/`,
       `${TAR}tests/`,
-      `${TAR}tasks/`,
       // Registry screenshots: only the git-based channels need them.
       `${TAR}theme/images/`,
       // Ephemeral theme-prepack artifact; a failed theme pack can strand it.

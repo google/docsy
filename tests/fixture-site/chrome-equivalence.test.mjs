@@ -1,4 +1,4 @@
-// Cases: CCR-03 (navbar), CCR-04 (footer), CCR-05 (side-nav), CCR-06 (active state), CCR-09 (version selector). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-03 (navbar), CCR-04 (footer), CCR-05 (side-nav), CCR-06 (active state), CCR-09 (version selector). See the CCR case registry in tests/fixture-site/README.md.
 // Full-page equivalence: a shared-mode build, inlined by the real shipped client,
 // vs a full build of the same fixture. Unlike chrome-nav.test.mjs (which checks the
 // functional nav facets: links, active, active-path), this asserts the stronger

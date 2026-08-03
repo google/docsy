@@ -174,10 +174,11 @@ For each PR/commit in `git log v<prev>..main`:
    CSS classes, i18n keys, default-behavior shifts, and changes to the version
    menu, navigation, or other rendered output.
 
-Capture the audit as a working document under `tasks/<release>/release-prep/`
-(see prior releases for examples) so reviewers can sanity-check the
-classifications. Treat the audit — not PR-level scope hints — as the source of
-truth for what the changelog and release blog must cover.
+Capture the audit as a working document and summarize its findings (the
+classifications and where each item is covered) in the release-prep PR
+description, so reviewers can sanity-check them. Treat the audit — not PR-level
+scope hints — as the source of truth for what the changelog and release blog
+must cover.
 
 ## Publishing a release
 

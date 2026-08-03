@@ -1,4 +1,4 @@
-// Cases: CCR-08 (cached inline nav hydration, non-shared mode large-site path). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-08 (cached inline nav hydration, non-shared mode large-site path). See the CCR case registry in tests/fixture-site/README.md.
 // Regression guard for the cached-sidebar path on large sites with shared mode *off*.
 //
 // On a site above ui.sidebar_cache_limit, Docsy renders one shared left-nav

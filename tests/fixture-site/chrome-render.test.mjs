@@ -1,4 +1,4 @@
-// Cases: CCR-01 (td.chrome param), CCR-02 (kept chrome). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-01 (td.chrome param), CCR-02 (kept chrome). See the CCR case registry in tests/fixture-site/README.md.
 // Tests for the params.td.chrome gate (_partials/chrome-render.html), which
 // drops repeated chrome so a link checker reaches each link once. See the
 // chrome build modes guide:

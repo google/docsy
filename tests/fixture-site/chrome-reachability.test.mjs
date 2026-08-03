@@ -1,4 +1,4 @@
-// Cases: CCR-02 (kept reference instances / donor reachability). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-02 (kept reference instances / donor reachability). See the CCR case registry in tests/fixture-site/README.md.
 // No-JS link-checker reachability: a `shared` build must expose the same unique
 // chrome links — internal and external — to a checker (which runs no JavaScript)
 // as a full build does.

@@ -1,4 +1,4 @@
-// Cases: CCR-09 (version selector), CCR-10 (language selector). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-09 (version selector), CCR-10 (language selector). See the CCR case registry in tests/fixture-site/README.md.
 // Client-side restore of the navbar's per-page selectors (version + language).
 //
 // In shared mode the navbar is dropped on inner pages and restored from the home
@@ -189,7 +189,7 @@ languages:
   // unconditionally, so it restores a live link to the missing translation. This
   // pins the current divergence; the planned fix (bake each page's available
   // locales into the navbar placeholder and emit a disabled item for the rest)
-  // will turn this into a parity assertion. See tasks/0.16/ccr/.
+  // will turn this into a parity assertion. See tests/fixture-site/README.md.
   const got = selectorLinks(await inlinePage(ccr, page, url), LANG_MENU);
   assert.ok(
     got.includes('/ja/docs/page-b/'),

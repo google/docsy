@@ -1,6 +1,6 @@
 {
   "name": "docsy",
-  "version": "0.16.1-dev+001-over-main-9e5d51b7",
+  "version": "0.16.1-dev+002-over-main-62f3ca81",
   "repository": "github:google/docsy",
   "homepage": "https://www.docsy.dev",
   "license": "Apache-2.0",
@@ -23,7 +23,7 @@
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
-    "_check:format": "npx prettier --check theme/assets *.md theme/i18n theme/scripts scripts tasks tests",
+    "_check:format": "npx prettier --check theme/assets *.md theme/i18n theme/scripts scripts tests",
     "_check:links": "npm run -C docsy.dev _check:links",
     "_check:markdown": "npx markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",

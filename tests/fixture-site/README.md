@@ -1,19 +1,16 @@
----
-title: CCR (0.16) — case registry
-date: 2026-06-24
-issue: https://github.com/google/docsy/issues/2659
-# prettier-ignore
-cSpell:ignore: ccr doctree footgun greppable pagelinks
----
+# CCR case registry
+
+<!-- markdownlint-disable no-docsy-dev-external-urls -->
+<!-- cSpell:ignore ccr doctree footgun greppable pagelinks -->
 
 **Client-side chrome restoration (CCR)** is the mechanism behind Docsy's
-experimental `shared` chrome [build mode](/docs/deployment/chrome/): the build
-drops the repeated navbar, footer, and left-nav from most pages and the browser
-restores them from a donor. This is the **case registry**: every way a restored
-page can differ from a full build — each a **case** with a stable `CCR-NN` ID —
-and where a test covers it.
+experimental `shared` chrome [build mode][chrome docs]: the build drops the
+repeated navbar, footer, and left-nav from most pages and the browser restores
+them from a donor. This is the **case registry** for the fixture-site tests in
+this directory: every way a restored page can differ from a full build — each a
+**case** with a stable `CCR-NN` ID — and where a test covers it.
 
-- **User docs:** [Chrome build modes](/docs/deployment/chrome/).
+- **User docs:** [Chrome build modes][chrome docs].
 - **Tracking issue:** [#2659][].
 - Tests cite their case ID in a header comment, so the ID ↔ test link is
   greppable both ways (`grep -rn CCR-13 tests/`).
@@ -21,8 +18,8 @@ and where a test covers it.
 IDs are stable and append-only — never reused or renumbered. **Status** is
 _restored_ (matches a full build), _partial_ (common case matches; a documented
 case diverges — see notes), or _deferred_ (known, not yet handled). The
-**Tests** column names fixture-site tests (drop the `.test.mjs` suffix), under
-`tests/fixture-site/`; `—` means no dedicated test yet.
+**Tests** column names fixture-site tests in this directory (drop the
+`.test.mjs` suffix); `—` means no dedicated test yet.
 
 | ID     | Case / wrinkle                                                     | Status   | Tests                                                  |
 | ------ | ------------------------------------------------------------------ | -------- | ------------------------------------------------------ |
@@ -76,3 +73,4 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
   gap.
 
 [#2659]: https://github.com/google/docsy/issues/2659
+[chrome docs]: https://www.docsy.dev/docs/deployment/chrome/

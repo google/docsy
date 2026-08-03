@@ -1,7 +1,7 @@
 // Cases: CCR-15 (print canonical URL), CCR-16 (paginated canonical URL) — both
 // validated here through the shared canonical-path mechanism, simulated via a
 // print-style request URL (no real print or paginator output is built). See the
-// CCR case registry in tasks/0.16/ccr/.
+// CCR case registry in tests/fixture-site/README.md.
 // Equivalence test for the per-page canonical path. shared mode can run on a URL that
 // isn't the page's canonical one — a print view (/_print/docs/…) or a paginator
 // page (…/page/2/) — yet the full build derives the navbar active link, the
