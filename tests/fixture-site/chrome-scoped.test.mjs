@@ -1,4 +1,4 @@
-// Cases: CCR-12 (scoped re-root), CCR-13 (scoped root markers). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-12 (scoped re-root), CCR-13 (scoped root markers). See the CCR case registry in tests/fixture-site/README.md.
 // Equivalence tests for shared mode re-rooting on sidebar_root_for ("scoped") pages.
 //
 // Kept separate from chrome-nav.test.mjs because this exercises one self-contained

@@ -1,4 +1,4 @@
-// Cases: CCR-18 (no-left-sidebar layout). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-18 (no-left-sidebar layout). See the CCR case registry in tests/fixture-site/README.md.
 // Equivalence guard for the no-left-sidebar layout (body_class
 // td-no-left-sidebar), mirroring docsy.dev's tests/layouts/no-left-sidebar. The
 // left sidebar is hidden by CSS, but the full build still renders it in the DOM;

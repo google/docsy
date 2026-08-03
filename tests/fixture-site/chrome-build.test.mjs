@@ -1,4 +1,4 @@
-// Cases: CCR-02 (kept reference instances). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-02 (kept reference instances). See the CCR case registry in tests/fixture-site/README.md.
 // Build-contract tests for `shared` chrome mode (params.td.chrome=shared).
 //
 // shared mode drops the repeated left-nav from inner pages and additionally leaves a

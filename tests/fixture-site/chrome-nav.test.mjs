@@ -1,4 +1,4 @@
-// Cases: CCR-05 (side-nav restore), CCR-06 (active state), CCR-08 (cached nav). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-05 (side-nav restore), CCR-06 (active state), CCR-08 (cached nav). See the CCR case registry in tests/fixture-site/README.md.
 // Equivalence tests for client-side nav hydration (assets/js/chrome-nav.js).
 //
 // In shared mode the build drops the repeated left-nav and either (a) leaves a

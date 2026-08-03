@@ -1,4 +1,4 @@
-// Cases: CCR-11 (navbar cover/theme). See the CCR case registry in tasks/0.16/ccr/.
+// Cases: CCR-11 (navbar cover/theme). See the CCR case registry in tests/fixture-site/README.md.
 // shared-mode cover/theme per-page hint: the navbar's cover (translucent) styling and
 // dark theme are *per-page* traits. When the home donor is a cover page and/or
 // sets a dark navbar theme, those traits must NOT leak onto restored inner

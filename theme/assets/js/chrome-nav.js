@@ -233,7 +233,7 @@
       .catch((reason) => {
         // Leave the placeholder in place if the donor can't be fetched. A richer
         // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
-        // experimental; see tasks/0.16/ccr.
+        // experimental; see tests/fixture-site/README.md.
         console.warn('chrome-nav: could not fetch nav donor', donor, reason);
       });
   }
@@ -351,7 +351,7 @@
       .catch((reason) => {
         // Leave the placeholder in place if the donor can't be fetched. A richer
         // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
-        // experimental; see tasks/0.16/ccr.
+        // experimental; see tests/fixture-site/README.md.
         console.warn('chrome-nav: could not fetch chrome donor', url, reason);
       });
   }
