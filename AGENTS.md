@@ -77,10 +77,11 @@ checkout's directory name.
 ## Release prep
 
 Release prep is driven by the `docsy-release-artifacts` skill, with a living
-workspace kept outside the repo, in the maintainer's planning system. It tracks
-every change since the last release and routes each into the right artifact
-(changelog, release post, Hugo post); the coverage summary goes into the
-release-prep PR description. See the skill for the process.
+workspace kept outside the repo. The canonical process is the maintainer notes'
+[Release-prep audit][] section; the skill operationalizes it.
+
+[Release-prep audit]:
+  docsy.dev/content/en/project/about/maintainer-notes.md#release-prep-audit
 
 ## Pull requests
 

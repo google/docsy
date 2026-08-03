@@ -10,7 +10,6 @@ them from a donor. This is the **case registry** for the fixture-site tests in
 this directory: every way a restored page can differ from a full build — each a
 **case** with a stable `CCR-NN` ID — and where a test covers it.
 
-- **User docs:** [Chrome build modes][chrome docs].
 - **Tracking issue:** [#2659][].
 - Tests cite their case ID in a header comment, so the ID ↔ test link is
   greppable both ways (`grep -rn CCR-13 tests/`).
