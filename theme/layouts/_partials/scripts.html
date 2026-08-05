@@ -83,18 +83,20 @@ window.markmap = {
 {{ partial "hooks/body-end.html" . -}}
 
 {{ define "algolia/scripts" -}}
-<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.8.2"
-  integrity="sha512-lsD+XVzdBI6ZquXc8gqbw0/bgrfIsMJwY/8xvmvbN+U3gZSeG7BXQoCq4zv/yCmntR2GLHtgB+bD4ESPsKIbIA=="
-  crossorigin="anonymous" ></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@4.7.0"
+        crossorigin="anonymous"></script>
 <script type="text/javascript">
 const containers = ['#docsearch-0', '#docsearch-1'];
 for (let c of containers) {
-  docsearch({
-    container: c,
+  let el = document.querySelector(c);
+  if (el != null) {
+    docsearch({
+    container: el,
     appId: {{ .appId | default "R2IYF7ETH7" }},
     apiKey: {{ .apiKey | default "599cec31baffa4868cae4e79f180729b" }},
-    indexName: {{ .indexName | default "docsearch" }},
-  });
+    indices: [{{ .indexName | default "docsearch" }}],
+    });
+  }
 }
 </script>
 {{ end -}}
