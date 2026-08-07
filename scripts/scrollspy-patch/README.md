@@ -48,7 +48,7 @@ The `_prepare:scrollspy-patch` script (called by `_prepare`) automatically:
 3. Updates `theme/assets/js/scrollspy-patch.js` (`update-patch-js.pl`) - syncs
    the patched method body into the runtime patch file
 
-The `ci:prepare` script calls `_prepare` and `is:clean-tree` to ensure no
+The `ci:prepare` script calls `_prepare` and `is:clean` to ensure no
 unexpected changes occurred. If the cached method source, patched result, or
 `scrollspy-patch.js` differs from what's committed, CI will fail, indicating
 review is needed.

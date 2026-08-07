@@ -46,7 +46,7 @@ jobs:
         shell: bash
 
       - name: 'Sanity check: install left the working tree pristine'
-        run: npm run -s is:clean-tree
+        run: npm run -s is:clean
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
