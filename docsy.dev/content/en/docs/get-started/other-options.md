@@ -162,7 +162,8 @@ your project's root directory:
     > [!NOTE]
     >
     > Run `npm run postinstall`, not `npm install`: `postinstall` installs only
-    > the theme's runtime dependencies; a plain `npm install` inside
+    > the theme's runtime dependencies (exactly as pinned by the theme's
+    > lockfile, with lifecycle scripts disabled); a plain `npm install` inside
     > `themes/docsy/` also pulls the repository's maintainer workspaces, an
     > install more than an order of magnitude larger.
 
