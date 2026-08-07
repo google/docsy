@@ -82,7 +82,7 @@ function buildNonRtl({ withConfig = false } = {}) {
       {
         cwd: dir,
         encoding: 'utf8',
-        env: hugoEnv,
+        env: hugoEnv(),
       },
     );
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
