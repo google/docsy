@@ -31,6 +31,7 @@
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
     "_install:lifecycle": "npm rebuild hugo-extended && npm run install:theme-deps",
+    "_netlify:prepare": "npm run _install:lifecycle && git diff --exit-code -- package-lock.json theme/package-lock.json",
     "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules}'",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
     "_prepare": "npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles",

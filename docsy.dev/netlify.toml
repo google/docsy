@@ -5,15 +5,18 @@
 
 [build]
 publish = "docsy.dev/public"
-command = "npm run -C docsy.dev build:preview"
+command = "npm run _netlify:prepare && npm run -C docsy.dev build:preview"
 
 [build.environment]
 GO_VERSION = "1.25.5"
 # Netlify clones into a dir named "repo"; the theme lives in repo's theme/ subdir.
 HUGO_THEME = "repo/theme"
+# Netlify's automatic npm install must not run lifecycle scripts; the reviewed
+# ones are re-run by _netlify:prepare, which also fails the build on lock drift.
+NPM_FLAGS = "--ignore-scripts"
 
 [context.production]
-command = "npm run -C docsy.dev build:production"
+command = "npm run _netlify:prepare && npm run -C docsy.dev build:production"
 
 [context.doc-rooted.environment]
 TD_BUILD_CTX = "doc-rooted"

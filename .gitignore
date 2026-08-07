@@ -1,6 +1,7 @@
 node_modules/
-# Locks are committed; the ! guards against user-global ignore patterns.
-!package-lock.json
+# Committed locks; the anchored ! guards against user-global ignore patterns.
+!/package-lock.json
+!/theme/package-lock.json
 /tmp
 
 /theme/LICENSE
