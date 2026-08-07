@@ -11,8 +11,6 @@ command = "npm run _netlify:prepare && npm run -C docsy.dev build:preview"
 GO_VERSION = "1.25.5"
 # Netlify clones into a dir named "repo"; the theme lives in repo's theme/ subdir.
 HUGO_THEME = "repo/theme"
-# Netlify's automatic npm install must not run lifecycle scripts;
-# _netlify:prepare re-runs the reviewed ones.
 NPM_FLAGS = "--ignore-scripts"
 
 [context.production]
