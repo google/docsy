@@ -109,10 +109,9 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
-  # These consumer-simulation installs are unlocked by design; pin real
-  # consumer-default script semantics (immune to ambient user config), but
-  # bound what can execute: only Docsy's own install scripts may run, and
-  # freshly published registry releases are held back (supply-chain cooldown).
+  # Consumer-simulation installs are unlocked by design; pin consumer-default
+  # script semantics (immune to ambient user config), bounded by a Docsy-only
+  # script allowlist and a registry-release cooldown.
   # The allow entry must live in package.json: project-.npmrc config reaches
   # nested npm runs (Docsy's postinstall) as env-layer config, which npm
   # rejects in project-scoped installs (EALLOWSCRIPTS).
