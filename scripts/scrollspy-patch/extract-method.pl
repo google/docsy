@@ -55,8 +55,10 @@ unless ($method_content) {
     exit 1;
 }
 
-# Write cached method
+# Write cached method (binmode: LF bytes on every platform, so regeneration
+# is byte-identical to the committed file)
 open my $out_fh, '>', $CACHED_METHOD_FILE or die "Cannot write $CACHED_METHOD_FILE: $!";
+binmode $out_fh;
 print $out_fh $method_content;
 close $out_fh;
 
