@@ -78,7 +78,11 @@ function buildNonRtl({ withConfig = false } = {}) {
         '--logLevel',
         'error',
       ],
-      { cwd: dir, encoding: 'utf8' },
+      {
+        cwd: dir,
+        encoding: 'utf8',
+        env: { ...process.env, HUGO_THEME: undefined },
+      },
     );
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
     let css = '';

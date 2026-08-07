@@ -74,6 +74,9 @@ function buildSiteFavicons(
         env: {
           ...process.env,
           PATH: `${join(repoDir, 'node_modules', '.bin')}${delimiter}${process.env.PATH ?? ''}`,
+          // This scratch site pins its own theme config; an inherited
+          // HUGO_THEME (worktree checkouts) would override it.
+          HUGO_THEME: undefined,
         },
       },
     );

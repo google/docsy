@@ -87,6 +87,10 @@ const TARGET = `repo "${REPO}", branch "${BRANCH}"`;
 // npm and npx are .cmd shims on Windows, and .cmd files require a shell.
 const winShell = process.platform === 'win32';
 
+// Every site this suite builds is a scratch site pinning its own theme
+// config; an inherited HUGO_THEME (worktree checkouts) would override it.
+delete process.env.HUGO_THEME;
+
 // Run a command; surface its output only on failure.
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { encoding: 'utf8', ...opts });

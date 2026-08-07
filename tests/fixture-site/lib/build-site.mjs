@@ -64,7 +64,9 @@ export function buildSite(
   const r = spawnSync('npx', ['hugo'], {
     cwd: site,
     encoding: 'utf8',
-    env: { ...process.env, ...env },
+    // The fixture site pins its own theme config; an inherited HUGO_THEME
+    // (worktree checkouts) would override it.
+    env: { ...process.env, HUGO_THEME: undefined, ...env },
   });
   return {
     ...r,
