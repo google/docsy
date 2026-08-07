@@ -94,7 +94,8 @@
     "prettier": "^3.9.3"
   },
   "engines": {
-    "node": ">=24"
+    "node": ">=24",
+    "npm": ">=11.16.0"
   },
   "spelling": "cSpell:ignore -",
   "allowScripts": {
