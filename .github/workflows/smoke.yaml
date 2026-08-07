@@ -45,8 +45,8 @@ jobs:
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
 
-      - name: 'Sanity check: install left the working tree unchanged'
-        run: npm run -s _diff:check
+      - name: 'Sanity check: install left the working tree pristine'
+        run: npm run -s _status:check
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
