@@ -157,7 +157,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
-- ...
+- Committed `package-lock.json` and `theme/package-lock.json`. Theme dependency
+  setup (`npm run postinstall`) is now lock-exact and script-free: it runs
+  `npm ci --ignore-scripts` instead of `npm install`.
 
 [**Experimental**](#experimental):
 

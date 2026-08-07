@@ -37,13 +37,16 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: package.json
+          cache-dependency-path: package-lock.json
 
       - name: Setup workspace
         run: |
-          npm install --omit=optional
+          npm run install:safe
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
+
+      - name: Verify installation left the committed locks unchanged
+        run: git diff --exit-code -- package-lock.json theme/package-lock.json
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'

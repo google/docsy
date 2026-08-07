@@ -13,7 +13,7 @@
     "!theme/LICENSE",
     "!theme/images",
     "!theme/node_modules",
-    "!theme/package-lock.json",
+    "theme/package-lock.json",
     "!theme/scripts/**/*.test.mjs"
   ],
   "workspaces": [
@@ -30,7 +30,8 @@
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
-    "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules,package-lock.json}'",
+    "_install:lifecycle": "npm rebuild hugo-extended && npm run install:theme-deps",
+    "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules}'",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
     "_prepare": "npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
@@ -54,7 +55,8 @@
     "fix:markdown": "npm run check:markdown -- --fix",
     "fix:refcache": "npm run -C docsy.dev fix:refcache",
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
-    "install:theme-deps": "npm install --prefix theme --omit=dev --omit=peer --no-audit --no-fund",
+    "install:safe": "npm ci --omit=optional --ignore-scripts --no-audit --no-fund && npm run _install:lifecycle",
+    "install:theme-deps": "npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "postinstall": "npm run install:theme-deps",
     "postupdate:dep": "npm run -s post-update",

@@ -31,6 +31,7 @@ const PACKAGES = {
       `${TAR}theme/scripts/gen-favicons/README.md`,
       `${TAR}theme/hugo.yaml`,
       `${TAR}theme/go.mod`,
+      `${TAR}theme/package-lock.json`,
       `${TAR}theme/layouts/baseof.html`,
       `${TAR}theme/assets/scss/main.scss`,
     ],
@@ -43,18 +44,14 @@ const PACKAGES = {
       // Ephemeral theme-prepack artifact; a failed theme pack can strand it.
       `${TAR}theme/LICENSE`,
     ],
-    forbiddenSubstrings: [
-      'theme/node_modules',
-      'theme/package-lock.json',
-      '.test.mjs',
-    ],
+    forbiddenSubstrings: ['theme/node_modules', '.test.mjs'],
     // Mirror of package.json "files"; keep the two in sync.
     pkgFiles: [
       'theme',
       '!theme/LICENSE',
       '!theme/images',
       '!theme/node_modules',
-      '!theme/package-lock.json',
+      'theme/package-lock.json',
       '!theme/scripts/**/*.test.mjs',
     ],
     bin: { 'gen-favicons': 'theme/scripts/gen-favicons/cli.mjs' },
