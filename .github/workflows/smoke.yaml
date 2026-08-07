@@ -45,8 +45,8 @@ jobs:
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
 
-      - name: 'Sanity check: install left the committed locks unchanged'
-        run: npm run -s _diff:check:locks
+      - name: 'Sanity check: install left the working tree unchanged'
+        run: npm run -s _diff:check
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'

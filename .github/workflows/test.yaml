@@ -31,8 +31,8 @@ jobs:
 
       - run: npm run install:safe
 
-      - name: 'Sanity check: install left the committed locks unchanged'
-        run: npm run -s _diff:check:locks
+      - name: 'Sanity check: install left the working tree unchanged'
+        run: npm run -s _diff:check
 
       # Put lychee on PATH for the link checker (ci:test runs on Linux only).
       - if: runner.os != 'Windows'
