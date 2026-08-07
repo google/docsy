@@ -157,9 +157,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
-- Hardened `npm run postinstall`: theme dependencies now install exactly as
-  pinned by the committed theme lockfile, with lifecycle scripts disabled
-  ([#2700][]).
+- ...
 
 [**Experimental**](#experimental):
 
@@ -167,8 +165,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **For maintainers**:
 
-- Committed the root and theme npm lockfiles; CI installs are lock-enforced and
-  script-free, and fail when installation changes a lock ([#2700][]).
+- Committed the root and theme npm lockfiles; theme installs
+  (`npm run postinstall`) and CI installs are lock-enforced and script-free, and
+  CI fails when installation changes a lock ([#2700][]).
 
 [#2700]: https://github.com/google/docsy/pull/2700
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
