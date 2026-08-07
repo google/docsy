@@ -82,6 +82,7 @@
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages:not-hugo": "npm run update:packages -- -x hugo-extended",
     "update:packages": "npx npm-check-updates -u",
+    "wt": "HUGO_THEME=$(basename \"$PWD\")/theme npm run",
     "zzz": "echo 'This is just a placeholder that is the last script in this script collection.'"
   },
   "devDependencies": {
