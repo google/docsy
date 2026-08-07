@@ -11,8 +11,9 @@ command = "npm run _netlify:prepare && npm run -C docsy.dev build:preview"
 GO_VERSION = "1.25.5"
 # Netlify clones into a dir named "repo"; the theme lives in repo's theme/ subdir.
 HUGO_THEME = "repo/theme"
-# Neuter Netlify's automatic npm install: resolution only, no tree writes, no
-# bin linking. The build command installs from the lock via install:safe.
+# Constrain Netlify's automatic npm install to resolution only: no tree
+# writes, no bin linking. The build command installs from the lock via
+# install:safe.
 NPM_FLAGS = "--dry-run --ignore-scripts"
 
 [context.production]
