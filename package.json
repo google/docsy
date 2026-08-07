@@ -30,7 +30,7 @@
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_diff:check": "git diff --name-only --exit-code",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
-    "_install:safe:post": "npm rebuild hugo-extended && npm run install:theme-deps",
+    "_install:safe:post": "npm rebuild hugo-extended --ignore-scripts=false && npm run install:theme-deps",
     "_netlify:prepare": "npm run _install:safe:post && npm run -s _diff:check",
     "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules}'",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
@@ -95,5 +95,13 @@
   "engines": {
     "node": ">=24"
   },
-  "spelling": "cSpell:ignore -"
+  "spelling": "cSpell:ignore -",
+  "allowScripts": {
+    "hugo-extended@0.164.0": true,
+    "netlify-cli": false,
+    "esbuild": false,
+    "@parcel/watcher": false,
+    "sharp": false,
+    "unix-dgram": false
+  }
 }
