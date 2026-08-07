@@ -22,6 +22,10 @@ const repoRoot = path.resolve(
 );
 const FIXTURE_SITE_TMP = path.join(repoRoot, 'tmp', 'fixture-site');
 
+// Env for spawning hugo: fixture sites pin their own theme config; an
+// inherited HUGO_THEME (worktree checkouts) would override it.
+export const hugoEnv = { ...process.env, HUGO_THEME: undefined };
+
 const baseConfig = (
   name,
   title,
@@ -64,9 +68,7 @@ export function buildSite(
   const r = spawnSync('npx', ['hugo'], {
     cwd: site,
     encoding: 'utf8',
-    // The fixture site pins its own theme config; an inherited HUGO_THEME
-    // (worktree checkouts) would override it.
-    env: { ...process.env, HUGO_THEME: undefined, ...env },
+    env: { ...hugoEnv, ...env },
   });
   return {
     ...r,
