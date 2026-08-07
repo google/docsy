@@ -163,6 +163,12 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 - ...
 
+**For maintainers**:
+
+- Committed the npm lockfiles; dependency installs are now lock-exact, and
+  unreviewed dependency scripts are disabled ([#2700][]).
+
+[#2700]: https://github.com/google/docsy/pull/2700
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
 [0.17.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.17.0
 

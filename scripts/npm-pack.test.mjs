@@ -31,6 +31,7 @@ const PACKAGES = {
       `${TAR}theme/scripts/gen-favicons/README.md`,
       `${TAR}theme/hugo.yaml`,
       `${TAR}theme/go.mod`,
+      `${TAR}theme/package-lock.json`,
       `${TAR}theme/layouts/baseof.html`,
       `${TAR}theme/assets/scss/main.scss`,
     ],
@@ -43,18 +44,14 @@ const PACKAGES = {
       // Ephemeral theme-prepack artifact; a failed theme pack can strand it.
       `${TAR}theme/LICENSE`,
     ],
-    forbiddenSubstrings: [
-      'theme/node_modules',
-      'theme/package-lock.json',
-      '.test.mjs',
-    ],
+    forbiddenSubstrings: ['theme/node_modules', '.test.mjs'],
     // Mirror of package.json "files"; keep the two in sync.
     pkgFiles: [
       'theme',
       '!theme/LICENSE',
       '!theme/images',
       '!theme/node_modules',
-      '!theme/package-lock.json',
+      'theme/package-lock.json',
       '!theme/scripts/**/*.test.mjs',
     ],
     bin: { 'gen-favicons': 'theme/scripts/gen-favicons/cli.mjs' },
@@ -79,6 +76,9 @@ const PACKAGES = {
     // images/, theme.toml, and go.mod serve only the git-based channels
     // (Hugo themes registry, Hugo modules), so npm clients never need them.
     forbiddenPrefixes: [`${TAR}node_modules/`, `${TAR}images/`],
+    // The lock stays out here (unlike the root package, which ships it):
+    // registry installs of a library never consult its lock; only the root
+    // package's postinstall-driven nested `npm ci` needs one.
     forbiddenSubstrings: [
       'package-lock.json',
       '.test.mjs',

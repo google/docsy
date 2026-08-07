@@ -1,24 +1,18 @@
-# AGENTS.md — Docsy repo guide for AI agents
+# AGENTS.md: Docsy repo guide for AI agents
 
-For detailed information about the Docsy project structure, branching model, and
-release process, etc., see:
-
-- The website content tree `docsy.dev/content/en/project/` ([project][])
-- Note in particular [git-info.md][].
-
-Agents should treat those documentation pages as the authoritative source for
-project CI/CD, release process, etc.
+The website content tree `docsy.dev/content/en/project/` ([project][]) is the
+authoritative source for project structure, branching model, CI/CD, and release
+process; note in particular [git-info.md][].
 
 [project]: docsy.dev/content/en/project/_index.md
 [git-info.md]: docsy.dev/content/en/project/build/git-repo.md
 
 ## Code, test, and documentation conventions
 
-- Assume that the maintainers and readers of the code you write are senior web
-  developers and designers who know the site's tools, including Hugo, Bootstrap,
-  etc.
-- Brevity is good — in code, comments, and commit messages.
-- When you write, think lean and DRY.
+- Assume the maintainers and readers of the code you write are senior web
+  developers and designers who know the site's tools, including Hugo and
+  Bootstrap.
+- Write lean and DRY, in code, comments, and commit messages.
 - Don't use comments to explain the obvious; use self-explanatory names and
   short names when the context is clear.
 - This project has a long history; look for existing helpers (partials,
@@ -28,11 +22,11 @@ project CI/CD, release process, etc.
   uses `tdVersion.latest` (`docsy.dev/config/_default/params.yaml`).
 - Add an explicit heading ID (`{#id}`) only when it differs from the ID that
   Hugo generates; verify against the rendered HTML, not by guessing. Nuances:
-  - Icon/badge shortcodes and inline HTML are ID-transparent — no explicit ID
-    needed: `## Ready to upgrade? <a id="legacy"></a>` and
+  - Icon/badge shortcodes and inline HTML are ID-transparent (no explicit ID
+    needed): `## Ready to upgrade? <a id="legacy"></a>` and
     `### {{%/* _param FAS square-check primary */%}} Sanity checks` generate
     `ready-to-upgrade` and `sanity-checks`.
-  - Literal punctuation between shortcodes is not —
+  - Literal punctuation between shortcodes is not:
     `## {{%/* _param BREAKING */%}} / {{%/* _param NEW */%}} Favicons` generates
     `--favicons`, so keep `{#favicons}`.
   - Keep deliberate short or stable IDs that inbound links rely on (e.g.
@@ -47,13 +41,13 @@ modifications.
 
 ## Separation of concerns
 
-Note this partitioning of concerns in the docs (to keep things lean and DRY):
+To keep the docs lean and DRY:
 
-- Changelog: see guidelines at the top. Very terse listing of changes; will link
-  to posts to for "Details" links.
-- Upgrade blog posts: help clients (humans and agents), know what has changed,
-  what needs upgrading, and when upgrading is needed (for each change)
-- The Docs reflect the current Docsy design. No or little historical notes.
+- Changelog: see guidelines at the top. Very terse listing of changes, with
+  "Details" links to posts.
+- Upgrade blog posts: help clients (humans and agents) know what has changed,
+  what needs upgrading, and when upgrading is needed (for each change).
+- The Docs reflect the current Docsy design, with few or no historical notes.
 - Release message links to the changelog and upgrade blog posts, and lists the
   actual Git history since the last release.
 
@@ -61,18 +55,19 @@ Note this partitioning of concerns in the docs (to keep things lean and DRY):
 
 The repo root orchestrates two npm workspaces:
 
-- `theme/` — the Docsy theme module (the published Hugo module). Consuming sites
+- `theme/`: the Docsy theme module (the published Hugo module). Consuming sites
   import `github.com/google/docsy/theme`; npm/clone installs use
   `theme: docsy/theme`. `theme/package.json` owns Bootstrap and Font Awesome.
-- `docsy.dev/` — the project website (this content tree).
+- `docsy.dev/`: the project website (this content tree).
 
 Releases publish a nested module tag `theme/vX.Y.Z` alongside `vX.Y.Z`.
 
 Site builds resolve the theme through the checkout's parent directory
 (`--themesDir ../..` with `theme: docsy/theme`), so the checkout directory must
-be named `docsy`. From a checkout named differently — a git worktree, for
-example — set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where _`DIR_NAME`_ is the
-checkout's directory name.
+be named `docsy`. From a checkout named differently (a git worktree, for
+example), either run npm scripts through the `wt` helper (`npm run wt -- test`),
+or set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where _`DIR_NAME`_ is the checkout's
+directory name.
 
 ## Release prep
 

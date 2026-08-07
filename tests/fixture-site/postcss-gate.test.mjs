@@ -23,6 +23,7 @@ import {
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { hugoEnv } from './lib/build-site.mjs';
 
 const repoDir = fileURLToPath(new URL('../../', import.meta.url));
 const themesDir = repoDir.replace(/[/\\]$/, '');
@@ -78,7 +79,11 @@ function buildNonRtl({ withConfig = false } = {}) {
         '--logLevel',
         'error',
       ],
-      { cwd: dir, encoding: 'utf8' },
+      {
+        cwd: dir,
+        encoding: 'utf8',
+        env: hugoEnv(),
+      },
     );
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
     let css = '';

@@ -27,6 +27,9 @@ const packageJsonPath = 'package.json';
 // canonical home). Synced when present; absent entries are skipped, so
 // running from another project (e.g. docsy-example) is unaffected.
 const secondaryManifestPaths = ['theme/package.json'];
+// Committed lockfiles whose embedded workspace versions must follow the
+// manifests, otherwise the next install rewrites them (lock drift).
+const lockPaths = ['package-lock.json', 'theme/package-lock.json'];
 
 /**
  * Default config file for version stamps: Docsy site params, else Hugo root config.
@@ -71,6 +74,7 @@ Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUI
 
   - ${packageJsonPath}
   - ${secondaryManifestPaths.join(', ')} (when present; kept in sync with ${packageJsonPath})
+  - ${lockPaths.join(', ')} (when present; workspace version fields only)
   - Each listed config file (or the default path above if no FILEs given)
 
   - In package.json, the version is set to the full version.
@@ -87,6 +91,7 @@ export function main(
     readPackageJson = defaultReadPackageJson,
     writePackageJson = defaultWritePackageJson,
     syncManifests = syncSecondaryManifests,
+    syncLocks = syncLockVersions,
     readHugoYaml: readHugoYamlFn = readHugoYaml,
     writeHugoYaml: writeHugoYamlFn = writeHugoYaml,
   } = {},
@@ -120,6 +125,7 @@ export function main(
   // Sync unconditionally: a secondary manifest can be stale even when the
   // root version is already at the target.
   const syncedManifests = syncManifests(newVersion);
+  const syncedLocks = syncLocks(newVersion);
 
   const nextBuildId = getBuildId(newVersion);
   const releaseVersion = getReleaseVersion(newVersion);
@@ -189,6 +195,9 @@ export function main(
   }
   for (const manifestPath of syncedManifests) {
     logger.log?.(`✓ Updated ${manifestPath} version to ${newVersion}`);
+  }
+  for (const lockPath of syncedLocks) {
+    logger.log?.(`✓ Updated ${lockPath} version to ${newVersion}`);
   }
 
   return newVersion;
@@ -359,6 +368,40 @@ export function syncSecondaryManifests(version, { cwd: baseDir = cwd } = {}) {
     if (manifest.version === version) continue;
     manifest.version = version;
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    updated.push(relPath);
+  }
+  return updated;
+}
+
+/**
+ * Aligns lockfile version fields with the given version: the lock's own
+ * `version` and the `version` of root/workspace entries under `packages`
+ * (keys not under node_modules/). Registry entries are never touched.
+ *
+ * @param {string} version - Version to set
+ * @param {{ cwd?: string }} [options]
+ * @returns {string[]} Relative paths of the locks that were updated
+ */
+export function syncLockVersions(version, { cwd: baseDir = cwd } = {}) {
+  const updated = [];
+  for (const relPath of lockPaths) {
+    const lockPath = path.join(baseDir, relPath);
+    if (!fs.existsSync(lockPath)) continue;
+    const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+    let changed = false;
+    if (lock.version !== undefined && lock.version !== version) {
+      lock.version = version;
+      changed = true;
+    }
+    for (const [pkgPath, entry] of Object.entries(lock.packages ?? {})) {
+      if (pkgPath.includes('node_modules/')) continue;
+      if (entry.version !== undefined && entry.version !== version) {
+        entry.version = version;
+        changed = true;
+      }
+    }
+    if (!changed) continue;
+    fs.writeFileSync(lockPath, JSON.stringify(lock, null, 2) + '\n');
     updated.push(relPath);
   }
   return updated;

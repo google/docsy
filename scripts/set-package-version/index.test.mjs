@@ -13,6 +13,7 @@ import {
   removeBuildId,
   getBuildId,
   syncSecondaryManifests,
+  syncLockVersions,
 } from './index.mjs';
 
 const nullLogger = {
@@ -44,6 +45,7 @@ function runMainWithMemory(args, { pkg, hugoYaml, logger = nullLogger }) {
       syncedVersions.push(version);
       return [];
     },
+    syncLocks: () => [],
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: (data, filePath) => {
       writtenPaths.push(filePath);
@@ -229,6 +231,51 @@ test('syncSecondaryManifests skips absent manifests', () => {
   });
 });
 
+test('syncLockVersions aligns workspace version fields only', () => {
+  withTempDir((dir) => {
+    const lock = {
+      name: 'docsy',
+      version: '0.0.1-stale',
+      lockfileVersion: 3,
+      packages: {
+        '': { name: 'docsy', version: '0.0.1-stale' },
+        'docsy.dev': { name: 'www.docsy.dev' },
+        theme: { name: '@docsy/theme', version: '0.0.1-stale' },
+        'node_modules/bootstrap': { version: '5.3.8' },
+      },
+    };
+    const lockPath = path.join(dir, 'package-lock.json');
+    fs.writeFileSync(lockPath, JSON.stringify(lock, null, 2) + '\n');
+
+    const updated = syncLockVersions('9.9.9', { cwd: dir });
+
+    assert.deepEqual(updated, ['package-lock.json']);
+    const written = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+    assert.equal(written.version, '9.9.9');
+    assert.equal(written.packages[''].version, '9.9.9');
+    assert.equal(written.packages['theme'].version, '9.9.9');
+    assert.equal(
+      written.packages['node_modules/bootstrap'].version,
+      '5.3.8',
+      'registry entry versions are preserved',
+    );
+    assert.equal(
+      written.packages['docsy.dev'].version,
+      undefined,
+      'entries without a version field stay without one',
+    );
+
+    // Idempotent: a second run reports nothing to update.
+    assert.deepEqual(syncLockVersions('9.9.9', { cwd: dir }), []);
+  });
+});
+
+test('syncLockVersions skips absent locks', () => {
+  withTempDir((dir) => {
+    assert.deepEqual(syncLockVersions('9.9.9', { cwd: dir }), []);
+  });
+});
+
 test('release/build helpers split semver strings', () => {
   assert.equal(getReleaseVersion('1.2.3-dev+build-9'), '1.2.3');
   assert.equal(removeBuildId('1.2.3-dev+build-9'), '1.2.3-dev');
@@ -353,6 +400,7 @@ test('set version and build ID from command line', { skip: true }, () => {
       writtenPkg = { ...updatedPkg };
     },
     syncManifests: () => [],
+    syncLocks: () => [],
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: (updatedYaml) => {
       writtenHugoYaml = { ...updatedYaml };
@@ -402,6 +450,7 @@ test('main logs when package/hugo versions already match', () => {
       writeCallCount += 1;
     },
     syncManifests: () => [],
+    syncLocks: () => [],
     readHugoYaml: () => ({ ...hugoYaml }),
     writeHugoYaml: () => {
       writeCallCount += 1;

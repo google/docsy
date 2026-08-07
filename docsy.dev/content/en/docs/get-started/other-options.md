@@ -162,9 +162,9 @@ your project's root directory:
     > [!NOTE]
     >
     > Run `npm run postinstall`, not `npm install`: `postinstall` installs only
-    > the theme's runtime dependencies; a plain `npm install` inside
-    > `themes/docsy/` also pulls the repository's maintainer workspaces, an
-    > install more than an order of magnitude larger.
+    > the theme's runtime dependencies, lock-pinned and script-free; a plain
+    > `npm install` inside `themes/docsy/` also pulls the repository's
+    > maintainer workspaces, an install more than an order of magnitude larger.
 
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to

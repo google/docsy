@@ -109,6 +109,18 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
+  # The .npmrc keys below silently no-op on npm < 11.16 (allowScripts
+  # machinery), which would leave this site installing with scripts enabled
+  # and no allowlist; refuse rather than degrade.
+  npm pkg set 'engines.npm=>=11.16.0' > /dev/null
+  # Consumer-simulation installs are unlocked by design; pin consumer-default
+  # script semantics (immune to ambient user config), bounded by a Docsy-only
+  # script allowlist and a registry-release cooldown.
+  # The allow entry must live in package.json: project-.npmrc config reaches
+  # nested npm runs (Docsy's postinstall) as env-layer config, which npm
+  # rejects in project-scoped installs (EALLOWSCRIPTS).
+  printf 'engine-strict=true\nignore-scripts=false\nstrict-allow-scripts=true\nmin-release-age=7\n' > .npmrc
+  npm pkg set --json "allowScripts[github:$DOCSY_REPO]=true"
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
@@ -172,9 +184,9 @@ function _set_up_site_using_hugo_modules() {
   echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT/theme, disable: false}]}" >> hugo.yaml
 
   # Consolidate the theme's declared npm deps into this project's workspace,
-  # then install them.
+  # then install them script-free: none of these deps needs install scripts.
   eval "$HUGO mod npm pack" $OUTPUT_REDIRECT
-  eval "npm install --no-audit --no-fund" $OUTPUT_REDIRECT
+  eval "npm install --ignore-scripts --no-audit --no-fund" $OUTPUT_REDIRECT
 }
 
 function main() {

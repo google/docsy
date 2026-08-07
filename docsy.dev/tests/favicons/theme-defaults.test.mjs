@@ -74,6 +74,9 @@ function buildSiteFavicons(
         env: {
           ...process.env,
           PATH: `${join(repoDir, 'node_modules', '.bin')}${delimiter}${process.env.PATH ?? ''}`,
+          // An inherited HUGO_THEME (worktree checkouts) overrides the
+          // pinned theme.
+          HUGO_THEME: undefined,
         },
       },
     );

@@ -22,6 +22,11 @@ const repoRoot = path.resolve(
 );
 const FIXTURE_SITE_TMP = path.join(repoRoot, 'tmp', 'fixture-site');
 
+// Fixture sites pin their own theme config; an inherited HUGO_THEME
+// (worktree checkouts) would override it. A function, not a snapshot: late
+// process.env mutations stay visible.
+export const hugoEnv = () => ({ ...process.env, HUGO_THEME: undefined });
+
 const baseConfig = (
   name,
   title,
@@ -64,7 +69,7 @@ export function buildSite(
   const r = spawnSync('npx', ['hugo'], {
     cwd: site,
     encoding: 'utf8',
-    env: { ...process.env, ...env },
+    env: { ...hugoEnv(), ...env },
   });
   return {
     ...r,

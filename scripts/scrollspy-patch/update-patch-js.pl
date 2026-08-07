@@ -74,9 +74,10 @@ sub main {
         }
     }
 
-    # Write updated content
+    # Write updated content (binmode: LF bytes on every platform)
     open my $out_fh, '>', $PATCH_JS_FILE
         or die "Cannot write $PATCH_JS_FILE: $!";
+    binmode $out_fh;
     print $out_fh @output_lines;
     close $out_fh;
 }
