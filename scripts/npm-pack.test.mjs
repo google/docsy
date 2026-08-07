@@ -76,6 +76,9 @@ const PACKAGES = {
     // images/, theme.toml, and go.mod serve only the git-based channels
     // (Hugo themes registry, Hugo modules), so npm clients never need them.
     forbiddenPrefixes: [`${TAR}node_modules/`, `${TAR}images/`],
+    // The lock stays out here (unlike the root package, which ships it):
+    // registry installs of a library never consult its lock; only the root
+    // package's postinstall-driven nested `npm ci` needs one.
     forbiddenSubstrings: [
       'package-lock.json',
       '.test.mjs',
