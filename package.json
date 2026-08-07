@@ -97,11 +97,6 @@
   },
   "spelling": "cSpell:ignore -",
   "allowScripts": {
-    "hugo-extended@0.164.0": true,
-    "netlify-cli": false,
-    "esbuild": false,
-    "@parcel/watcher": false,
-    "sharp": false,
-    "unix-dgram": false
+    "hugo-extended@0.164.0": true
   }
 }
