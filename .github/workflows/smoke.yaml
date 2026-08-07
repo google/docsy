@@ -46,7 +46,7 @@ jobs:
         shell: bash
 
       - name: 'Sanity check: install left the committed locks unchanged'
-        run: git diff --exit-code -- package-lock.json theme/package-lock.json
+        run: npm run -s _diff:check:locks
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
