@@ -13,7 +13,10 @@ GO_VERSION = "1.25.5"
 HUGO_THEME = "repo/theme"
 # Constrain Netlify's automatic npm install to resolution only: no tree
 # writes, no bin linking. The build command installs from the lock via
-# install:safe.
+# install:safe. Netlify offers no way to skip this install, so if NPM_FLAGS
+# ever stops being honored, the install runs for real: strict-allow-scripts
+# (.npmrc) still gates its scripts, and the is:clean bracket in
+# _netlify:prepare flags its tree writes.
 NPM_FLAGS = "--dry-run --ignore-scripts"
 
 [context.production]
