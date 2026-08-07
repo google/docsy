@@ -31,7 +31,7 @@ jobs:
 
       - run: npm run install:safe
 
-      - name: Verify installation left the committed locks unchanged
+      - name: 'Sanity check: install left the committed locks unchanged'
         run: git diff --exit-code -- package-lock.json theme/package-lock.json
 
       # Put lychee on PATH for the link checker (ci:test runs on Linux only).

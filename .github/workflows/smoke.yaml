@@ -45,7 +45,7 @@ jobs:
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
 
-      - name: Verify installation left the committed locks unchanged
+      - name: 'Sanity check: install left the committed locks unchanged'
         run: git diff --exit-code -- package-lock.json theme/package-lock.json
 
       - name: Make site (non-PR)
