@@ -457,18 +457,18 @@ If not adjust accordingly.
       npm view @docsy/theme version dist-tags
       ```
 
-    - Re-point the `next` dist-tag at the new stable -- dist-tags never move on
-      their own, and `next` must stay `>= latest`:
+    - Re-point the `next` dist-tag at the new stable (dist-tags never move on
+      their own, and `next` must stay `>= latest`):
 
       ```sh
       npm dist-tag add @docsy/theme@${REL#v} next
       ```
 
     - **Manual fallback** (CI publish unavailable) and prereleases: publish from
-      `theme/` inside a narrow auth window -- `npm login` right before,
-      `npm logout` right after, whether or not publishing succeeded (if logout
-      fails, revoke the access token from your npm account settings).
-      Prereleases take `--tag next`.
+      `theme/` inside a narrow auth window. Run `npm login` right before and
+      `npm logout` right after, whether or not publishing succeeded; if logout
+      fails, revoke the access token from your npm account settings. Prereleases
+      take `--tag next`.
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 
