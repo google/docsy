@@ -447,14 +447,28 @@ If not adjust accordingly.
 
     </details>
 
-15. **Publish the theme package**:
-    - Until [trusted publishing][] is adopted, authenticate for a narrow publish
-      window only: `npm login` right before publishing, `npm logout` right after
-      (whether or not publishing succeeded). If logout fails, revoke the access
-      token from your npm account settings.
-    - Publish to the npm registry from `theme/` at the tagged release commit.
-    - Verify the published version.
-    - Verify that the `latest` and `next` dist-tags point at it.
+15. **Verify the npm publish**. Pushing the release tag to `upstream` triggers
+    the [publish workflow][], which publishes `@docsy/theme` from the tagged
+    commit through npm [trusted publishing][] (OIDC; no npm token involved).
+    - Check that the workflow run succeeded and that the registry version
+      matches the tag:
+
+      ```sh
+      npm view @docsy/theme version dist-tags
+      ```
+
+    - Re-point the `next` dist-tag at the new stable -- dist-tags never move on
+      their own, and `next` must stay `>= latest`:
+
+      ```sh
+      npm dist-tag add @docsy/theme@${REL#v} next
+      ```
+
+    - **Manual fallback** (CI publish unavailable) and prereleases: publish from
+      `theme/` inside a narrow auth window -- `npm login` right before,
+      `npm logout` right after, whether or not publishing succeeded (if logout
+      fails, revoke the access token from your npm account settings).
+      Prereleases take `--tag next`.
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 
@@ -725,6 +739,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>

@@ -1,0 +1,72 @@
+# Publish @docsy/theme to the npm registry when a release tag is pushed.
+#
+# Auth is npm trusted publishing (OIDC): the job's id-token permission lets
+# npm mint a short-lived, workflow-scoped credential at publish time, so no
+# long-lived npm token exists to leak or rotate, and npm attaches provenance
+# automatically. The registration binding this repo + workflow filename to the
+# package lives in the package's settings on npmjs.com.
+#
+# The job installs nothing: the pack contract and `npm publish` need only
+# Node/npm built-ins, so no dependency code runs with the OIDC grant.
+
+name: publish
+
+on:
+  push:
+    tags: ['v[0-9]*'] # Release tags; theme/v* Go-module tags don't match.
+
+permissions: {}
+
+jobs:
+  publish:
+    if: github.repository == 'google/docsy'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # Mints the OIDC token that trusted publishing exchanges.
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          registry-url: https://registry.npmjs.org
+
+      - name: 'Sanity check: npm meets the trusted-publishing floor'
+        run: |
+          node -e '
+            const { execSync } = require("node:child_process");
+            const floor = "11.5.1"; // first npm CLI with OIDC support
+            const v = execSync("npm --version", { encoding: "utf8" }).trim();
+            const [a, b, c] = v.split(".").map(Number);
+            const ok = a > 11 || (a === 11 && (b > 5 || (b === 5 && c >= 1)));
+            console.log(`npm ${v} (trusted-publishing floor: ${floor})`);
+            process.exit(ok ? 0 : 1);
+          '
+
+      - name: 'Sanity check: tag matches the stamped theme version'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          node -e '
+            const { version } = require("./theme/package.json");
+            const { TAG } = process.env;
+            console.log(`tag ${TAG}, @docsy/theme version ${version}`);
+            process.exit(TAG === `v${version}` ? 0 : 1);
+          '
+
+      - name: 'Sanity check: pack contract'
+        run: node --test scripts/npm-pack.test.mjs
+
+      - name: Publish @docsy/theme
+        working-directory: theme
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [[ "${TAG#v}" == *-* ]]; then
+            npm publish --tag next # Prereleases; stables take latest.
+          else
+            npm publish
+          fi
