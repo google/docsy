@@ -159,7 +159,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 - Pinned the default Mermaid version to 11.16.1; pages previously loaded
   whatever `latest` resolved to on the CDN at page load. Sites can still
-  override the version via `params.mermaid.version` ([#2703][]).
+  override the version via
+  [`params.mermaid.version`](/docs/content/diagrams-and-formulae/#diagrams-with-mermaid)
+  ([#2703][]).
 
 [**Experimental**](#experimental):
 
