@@ -446,6 +446,8 @@ If not adjust accordingly.
     </details>
 
 15. **Publish the theme package**:
+    - Authenticate for a narrow publish window only: `npm login` right before
+      publishing, `npm logout` right after to revoke the session token.
     - Publish to the npm registry from `theme/` at the tagged release commit.
     - Verify the published version.
     - Verify that the `latest` and `next` dist-tags point at it.
