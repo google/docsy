@@ -180,6 +180,54 @@ test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
   );
 });
 
+// Pack-time build-ID stamping (scripts/pack-stamp.mjs): a bare -dev version
+// gains a git-derived build ID inside the tarball only.
+test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () => {
+  const { tarballPath } = packed.get('@docsy/theme');
+  const extract = spawnSync(
+    'tar',
+    ['-xzOf', tarballPath, 'package/package.json'],
+    { encoding: 'utf8' },
+  );
+  assert.equal(
+    extract.status,
+    0,
+    `tar extracts the packed manifest: ${extract.stderr}`,
+  );
+  const packedVersion = JSON.parse(extract.stdout).version;
+  const manifestVersion = JSON.parse(
+    fs.readFileSync(
+      path.join(PACKAGES['@docsy/theme'].dir, 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  if (manifestVersion.endsWith('-dev')) {
+    assert.ok(
+      packedVersion.startsWith(`${manifestVersion}+`),
+      `packed version ${packedVersion} extends ${manifestVersion} with a build ID`,
+    );
+  } else {
+    assert.equal(packedVersion, manifestVersion, 'non-dev version packs as-is');
+  }
+});
+
+test('@docsy/theme: npm pack restores the manifest and removes the stamp backup', () => {
+  const manifestVersion = JSON.parse(
+    fs.readFileSync(
+      path.join(PACKAGES['@docsy/theme'].dir, 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  assert.ok(
+    !manifestVersion.includes('+'),
+    'committed manifest version carries no build metadata after pack',
+  );
+  assert.ok(
+    !fs.existsSync(path.join(repoRoot, 'tmp', 'pack-stamp')),
+    'pack-stamp backup dir is removed after a successful pack',
+  );
+});
+
 for (const [name, pkg] of Object.entries(PACKAGES)) {
   test(`${name}: package.json declares expected files and bin`, () => {
     const manifest = JSON.parse(

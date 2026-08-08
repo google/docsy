@@ -131,7 +131,10 @@ export function main(
   const releaseVersion = getReleaseVersion(newVersion);
   const versionWithoutBuild = removeBuildId(newVersion);
   const hasPreRelease = versionWithoutBuild !== releaseVersion;
-  const leaveLatestUntouched = versionSetExplicitly && hasPreRelease;
+  // --id only adjusts build metadata; deriving `latest` from the dev core
+  // would silently bump it (e.g. v0.16.0 → v0.16.1 while at 0.16.1-dev).
+  const leaveLatestUntouched =
+    (versionSetExplicitly || buildId !== undefined) && hasPreRelease;
 
   const newLatest = releaseVersion.startsWith('v')
     ? releaseVersion

@@ -77,9 +77,3 @@ workspace kept outside the repo. The canonical process is the maintainer notes'
 
 [Release-prep audit]:
   docsy.dev/content/en/project/about/maintainer-notes.md#release-prep-audit
-
-## Pull requests
-
-- Before the final push of a PR branch, run `npm run set:version:git-info` to
-  refresh the package build ID. A pre-push hook also runs this and will abort
-  the push if the ID changed, so doing it yourself avoids a failed push.

@@ -318,9 +318,23 @@ test('main --id sets build metadata and preserves pre-release', () => {
   assert.equal(pkg.version, '1.2.3-dev+custom-build');
   assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
   assert.equal(writtenHugoYaml.latest, 'v1.2.3');
-  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.3-dev');
   assert.equal(writtenHugoYaml.buildId, 'custom-build');
   assert.equal(newVersion, '1.2.3-dev+custom-build');
+});
+
+test('main --id leaves latest untouched when its core differs from the version', () => {
+  const pkg = { version: '1.2.4-dev' };
+  const hugoYaml = { latest: 'v1.2.3', dev: 'v1.2.4-dev', buildId: '' };
+  const { newVersion, writtenHugoYaml } = runMainWithMemory(
+    ['--id', 'gabcd1234'],
+    { pkg, hugoYaml },
+  );
+
+  assert.equal(newVersion, '1.2.4-dev+gabcd1234');
+  assert.equal(writtenHugoYaml.latest, 'v1.2.3');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.buildId, 'gabcd1234');
 });
 
 test('main --id "" generates timestamp build metadata', () => {
@@ -338,7 +352,7 @@ test('main --id "" generates timestamp build metadata', () => {
   assert.match(newVersion, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.match(writtenPkg.version, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.equal(writtenHugoYaml.latest, 'v1.2.3');
-  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.3-dev');
   assert.match(writtenHugoYaml.buildId, /^\d{8}-\d{4}Z$/);
 });
 

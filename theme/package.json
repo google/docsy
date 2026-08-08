@@ -1,6 +1,6 @@
 {
   "name": "@docsy/theme",
-  "version": "0.16.1-dev+004-over-main-616df5f1",
+  "version": "0.16.1-dev",
   "description": "A Hugo theme for technical documentation sites",
   "repository": {
     "type": "git",
@@ -34,8 +34,8 @@
     "static"
   ],
   "scripts": {
-    "prepack": "node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\"",
-    "postpack": "node -e \"require('fs').rmSync('LICENSE', { force: true })\"",
+    "prepack": "node ../scripts/pack-stamp.mjs pre && node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\"",
+    "postpack": "node -e \"require('fs').rmSync('LICENSE', { force: true })\" && node ../scripts/pack-stamp.mjs post",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
     "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
   },
