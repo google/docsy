@@ -449,7 +449,8 @@ If not adjust accordingly.
 
 15. **Verify the npm publish**. Pushing the release tag to `upstream` triggers
     the [publish workflow][], which publishes `@docsy/theme` from the tagged
-    commit through npm [trusted publishing][] (OIDC; no npm token involved).
+    commit through npm [trusted publishing][] (OIDC; no npm token involved) once
+    a maintainer approves the run (the `npm-publish` environment).
     - Check that the workflow run succeeded and that the registry version
       matches the tag:
 
@@ -464,11 +465,14 @@ If not adjust accordingly.
       npm dist-tag add @docsy/theme@${REL#v} next
       ```
 
-    - **Manual fallback** (CI publish unavailable) and prereleases: publish from
-      `theme/` inside a narrow auth window. Run `npm login` right before and
-      `npm logout` right after, whether or not publishing succeeded; if logout
-      fails, revoke the access token from your npm account settings. Prereleases
-      take `--tag next`.
+    - Prerelease tags publish automatically too, under the `next` dist-tag; the
+      routine prerelease (RC) flow stays untagged and manual, though (next
+      bullet).
+    - **Manual fallback** (CI publish unavailable) and untagged prereleases:
+      publish from `theme/` inside a narrow auth window. Run `npm login` right
+      before and `npm logout` right after, whether or not publishing succeeded;
+      if logout fails, revoke the access token from your npm account settings.
+      Prereleases take `--tag next`.
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 

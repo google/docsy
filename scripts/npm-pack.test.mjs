@@ -284,7 +284,7 @@ for (const [name, pkg] of Object.entries(PACKAGES)) {
     const { entries } = packed.get(name);
     const { missing, extra } = packDiff(pkg, entries);
     assert.deepEqual(missing, [], 'all required entries are packed');
-    assert.deepEqual(extra, [], 'only allowed entries are packed');
+    assert.deepEqual(extra, [], 'packed entries clear the forbidden rules');
   });
 
   test(`${name}: npm pack stays within file-count and size limits`, () => {

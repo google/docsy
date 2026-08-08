@@ -21,6 +21,9 @@ jobs:
   publish:
     if: github.repository == 'google/docsy'
     runs-on: ubuntu-latest
+    # Approval boundary: publishes wait on this environment's required
+    # reviewers, and the npmjs trusted-publisher registration binds to it.
+    environment: npm-publish
     permissions:
       contents: read
       id-token: write
@@ -33,6 +36,7 @@ jobs:
         with:
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
+          package-manager-cache: false
 
       - name: 'Sanity check: npm meets the trusted-publishing floor'
         run: |
