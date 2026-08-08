@@ -1,0 +1,95 @@
+#!/usr/bin/env node
+// Guards for the publish workflow (.github/workflows/publish.yaml): fail
+// before `npm publish` on toolchain or tag mistakes that would otherwise
+// surface as cryptic registry errors or an immutable mispublish. Pure checks
+// exported for the colocated tests; only main() touches the environment.
+
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Below this, the npm CLI cannot mint OIDC credentials for trusted
+// publishing. The engines floor is stricter today, but it serves installs and
+// could legitimately move without this publish-specific bound in mind.
+export const OIDC_NPM_FLOOR = '11.5.1';
+
+const STABLE_VERSION_RE = /^\d+\.\d+\.\d+$/;
+
+export function parseVersion(v) {
+  const m = /^(\d+)\.(\d+)\.(\d+)$/.exec(v.trim());
+  if (!m) throw new Error(`unparseable version: '${v}'`);
+  return m.slice(1).map(Number);
+}
+
+export function cmpVersions(a, b) {
+  const [pa, pb] = [parseVersion(a), parseVersion(b)];
+  for (let i = 0; i < 3; i++) {
+    if (pa[i] !== pb[i]) return pa[i] < pb[i] ? -1 : 1;
+  }
+  return 0;
+}
+
+// The engines entries use the plain '>=X.Y.Z' form; anything else means the
+// manifest changed shape and this parser needs updating: fail, don't guess.
+export function floorOfEnginesRange(range) {
+  const m = /^>=\s*(\d+\.\d+\.\d+)$/.exec(range ?? '');
+  if (!m) throw new Error(`unsupported engines range: '${range}'`);
+  return m[1];
+}
+
+// Returns problem descriptions; an empty array means all guards hold.
+export function checkGuards({
+  tag,
+  npmVersion,
+  enginesNpmRange,
+  themeVersion,
+}) {
+  const problems = [];
+
+  const enginesFloor = floorOfEnginesRange(enginesNpmRange);
+  for (const [floor, why] of [
+    [OIDC_NPM_FLOOR, 'the OIDC trusted-publishing floor'],
+    [enginesFloor, 'the engines floor'],
+  ]) {
+    if (cmpVersions(npmVersion, floor) < 0) {
+      problems.push(`npm ${npmVersion} < ${floor} (${why})`);
+    }
+  }
+
+  if (!STABLE_VERSION_RE.test(themeVersion)) {
+    problems.push(
+      `theme version '${themeVersion}' is not a stable X.Y.Z version; ` +
+        'prereleases are published manually, not from CI',
+    );
+  }
+
+  if (tag !== `v${themeVersion}`) {
+    problems.push(`tag '${tag}' != stamped theme version 'v${themeVersion}'`);
+  }
+
+  return problems;
+}
+
+function main() {
+  const repoRoot = path.resolve(
+    path.dirname(fileURLToPath(import.meta.url)),
+    '..',
+  );
+  const pkg = (p) =>
+    JSON.parse(readFileSync(path.join(repoRoot, p, 'package.json'), 'utf8'));
+
+  const input = {
+    tag: process.env.TAG ?? '',
+    npmVersion: execSync('npm --version', { encoding: 'utf8' }).trim(),
+    enginesNpmRange: pkg('.').engines?.npm,
+    themeVersion: pkg('theme').version,
+  };
+  console.log(JSON.stringify(input, null, 2));
+
+  const problems = checkGuards(input);
+  for (const p of problems) console.error(`GUARD FAILED: ${p}`);
+  process.exit(problems.length ? 1 : 0);
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) main();
