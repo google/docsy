@@ -1,7 +1,6 @@
-# Hugo build configuration for Netlify
-# (https://gohugo.io/host-and-deploy/host-on-netlify/#configure-hugo-version-in-netlify)
+# Hugo comes from the pinned hugo-extended npm dep, not a HUGO_VERSION env var.
 
-# base = "docsy.dev" - set via web UI
+# The build "base" is set to docsy.dev via the Netlify web UI.
 
 [build]
 publish = "docsy.dev/public"
@@ -24,7 +23,7 @@ command = "npm run _netlify:prepare && npm run -C docsy.dev build:production"
 [context.doc-rooted.environment]
 TD_BUILD_CTX = "doc-rooted"
 
-# Redirects for slug swap: /docs/adding-content/ → /docs/content/
+# Preserve links from the /docs/adding-content/ → /docs/content/ slug swap.
 [[redirects]]
   from = "/docs/adding-content/content"
   to = "/docs/content/adding-content"
