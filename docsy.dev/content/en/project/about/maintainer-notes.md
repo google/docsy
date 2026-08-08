@@ -446,8 +446,9 @@ If not adjust accordingly.
     </details>
 
 15. **Publish the theme package**:
-    - Authenticate for a narrow publish window only: `npm login` right before
-      publishing, `npm logout` right after to revoke the session token.
+    - Until [trusted publishing][] is adopted, authenticate for a narrow publish
+      window only: `npm login` right before publishing, `npm logout` right after
+      to revoke the session token.
     - Publish to the npm registry from `theme/` at the tagged release commit.
     - Verify the published version.
     - Verify that the `latest` and `next` dist-tags point at it.
@@ -721,6 +722,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [themes showcase]: https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
+[trusted publishing]: https://docs.npmjs.com/trusted-publishers/
 [public]: /project/about/changelog/#public
 [tags]: <{{% param github_repo %}}/tags>
 <!-- prettier-ignore-end -->
