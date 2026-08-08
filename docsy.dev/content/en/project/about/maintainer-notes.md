@@ -121,10 +121,11 @@ Docs render this version live through the `hugo-version` shortcode
 ### Default Mermaid version {#mermaid-version}
 
 The Mermaid version that Docsy loads by default is pinned in the
-`scripts/mermaid.html` partial (sites override it via `params.mermaid.version`).
-Keep the pin current through the regular dependency-update process: bump it to
-the latest Mermaid stable when preparing a release, along with the docs page on
-[diagrams][] that mentions it.
+`theme/layouts/_partials/scripts/mermaid.html` partial (sites override it via
+`params.mermaid.version`). No script or automation updates the pin yet: bump it
+to the latest Mermaid stable during the
+[release-prep audit](#release-prep-audit), along with the [diagrams][] page's
+override examples, which show the pinned version.
 
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 
@@ -183,6 +184,10 @@ For each PR/commit in `git log v<prev>..main`:
 4. Be especially alert to: new/renamed params, partials, shortcodes, layouts,
    CSS classes, i18n keys, default-behavior shifts, and changes to the version
    menu, navigation, or other rendered output.
+
+Also check pinned script dependencies for drift: bump the
+[default Mermaid version](#mermaid-version) to the latest stable as part of the
+prep PR.
 
 Capture the audit as a working document and summarize its findings (the
 classifications and where each item is covered) in the release-prep PR

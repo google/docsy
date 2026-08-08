@@ -157,9 +157,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
-- Pinned the default Mermaid version to 11.16.1 instead of resolving `latest`
-  from the CDN at build time; sites can still override it via
-  `params.mermaid.version` ([#2703][]).
+- Pinned the default Mermaid version to 11.16.1; pages previously loaded
+  whatever `latest` resolved to on the CDN at page load. Sites can still
+  override the version via `params.mermaid.version` ([#2703][]).
 
 [**Experimental**](#experimental):
 

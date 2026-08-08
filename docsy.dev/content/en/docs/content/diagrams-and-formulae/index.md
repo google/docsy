@@ -311,9 +311,9 @@ sequenceDiagram
 Support of Mermaid diagrams is automatically enabled as soon as you use a
 `mermaid` code block on your page.
 
-By default, Docsy loads a pinned, known-good version of Mermaid, updated through
-the theme's regular dependency-update process. To use a different version,
-specify it in your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, Docsy loads a pinned, known-good version of Mermaid that is bumped
+with each theme release. To use a different version, specify it in your
+configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
@@ -321,18 +321,18 @@ specify it in your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "11.6.0"
+version = "11.16.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 11.6.0
+    version: 11.16.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "11.6.0"
+      "version": "11.16.1"
     }
   }
 }
@@ -340,6 +340,10 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
+
+Use an exact version (`X.Y.Z`): floating versions such as `latest` or `11` are
+re-resolved by the CDN on each request, reintroducing the failure mode that the
+pinned default avoids.
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
