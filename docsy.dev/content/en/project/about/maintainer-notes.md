@@ -124,8 +124,9 @@ The Mermaid version that Docsy loads by default is pinned in the
 `theme/layouts/_partials/scripts/mermaid.html` partial (sites override it via
 `params.mermaid.version`). No script or automation updates the pin yet: bump it
 to the latest Mermaid stable during the
-[release-prep audit](#release-prep-audit), along with the [diagrams][] page's
-override examples, which show the pinned version.
+[release-prep audit](#release-prep-audit), along with the [diagrams][] page,
+which states the pinned version. Verify that a Mermaid-bearing page (the
+diagrams page, for example) renders with the new pin.
 
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 
