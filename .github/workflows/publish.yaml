@@ -50,11 +50,9 @@ jobs:
 
       - name: Publish @docsy/theme
         working-directory: theme
-        # The release choices ride the command line: CLI flags outrank
-        # manifest publishConfig (which may carry any npm config key, and
-        # which the guards pin); provenance is automatic under trusted
-        # publishing, but requiring it here fails loudly if it can't be
-        # attested.
+        # Deliberate CLI flags: they outrank manifest publishConfig (pinned by
+        # the guards); provenance is implicit under trusted publishing, but
+        # requiring it fails loudly if it can't be attested.
         run: >-
           npm publish --access public --provenance --tag latest --registry
           https://registry.npmjs.org

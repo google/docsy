@@ -467,10 +467,9 @@ If not adjust accordingly.
       npm dist-tag add @docsy/theme@${REL#v} next
       ```
 
-    - The workflow triggers only on stable `vX.Y.Z` tags; prereleases publish
-      manually (next bullet).
-    - **Manual fallback** (CI publish unavailable) and untagged prereleases:
-      publish from `theme/` inside a narrow auth window. Run `npm login` right
+    - **Manual publishes** (prereleases, or CI fallback): the workflow triggers
+      only on stable `vX.Y.Z` tags, so prereleases always publish manually.
+      Publish from `theme/` inside a narrow auth window: run `npm login` right
       before and `npm logout` right after, whether or not publishing succeeded;
       if logout fails, revoke the access token from your npm account settings.
       Prereleases take `--tag next`.
