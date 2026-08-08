@@ -448,7 +448,8 @@ If not adjust accordingly.
 15. **Publish the theme package**:
     - Until [trusted publishing][] is adopted, authenticate for a narrow publish
       window only: `npm login` right before publishing, `npm logout` right after
-      to revoke the session token.
+      -- whether or not publishing succeeded. If logout fails, revoke the
+      session token from your npm account settings.
     - Publish to the npm registry from `theme/` at the tagged release commit.
     - Verify the published version.
     - Verify that the `latest` and `next` dist-tags point at it.
