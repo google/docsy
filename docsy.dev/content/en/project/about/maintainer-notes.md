@@ -118,6 +118,16 @@ it, run:
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
 
+### Default Mermaid version {#mermaid-version}
+
+The Mermaid version that Docsy loads by default is pinned in the
+`scripts/mermaid.html` partial (sites override it via `params.mermaid.version`).
+Keep the pin current through the regular dependency-update process: bump it to
+the latest Mermaid stable when preparing a release, along with the docs page on
+[diagrams][] that mentions it.
+
+[diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+
 ## Test suites
 
 From the repo root:

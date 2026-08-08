@@ -311,9 +311,9 @@ sequenceDiagram
 Support of Mermaid diagrams is automatically enabled as soon as you use a
 `mermaid` code block on your page.
 
-By default, Docsy pulls in the latest officially released version of Mermaid at
-build time. If that doesn't fit your needs, you can specify the wanted mermaid
-version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+By default, Docsy loads a pinned, known-good version of Mermaid, updated through
+the theme's regular dependency-update process. To use a different version,
+specify it in your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->

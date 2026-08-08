@@ -157,7 +157,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
-- ...
+- Pinned the default Mermaid version to 11.16.1 instead of resolving `latest`
+  from the CDN at build time; sites can still override it via
+  `params.mermaid.version` ([#2703][]).
 
 [**Experimental**](#experimental):
 
@@ -169,6 +171,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   unreviewed dependency scripts are disabled ([#2700][]).
 
 [#2700]: https://github.com/google/docsy/pull/2700
+[#2703]: https://github.com/google/docsy/issues/2703
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
 [0.17.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.17.0
 
