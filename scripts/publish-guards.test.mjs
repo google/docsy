@@ -20,10 +20,21 @@ const repoRoot = path.resolve(
   '..',
 );
 
-test('parseVersion handles stable versions only', () => {
+test('parseVersion handles strict stable versions only', () => {
   assert.deepEqual(parseVersion('11.5.1'), [11, 5, 1]);
   assert.deepEqual(parseVersion(' 24.0.0 '), [24, 0, 0]);
-  for (const bad of ['11.5', '11.5.1-beta.1', 'lts/*', '']) {
+  assert.deepEqual(parseVersion('1.0.0'), [1, 0, 0]);
+  for (const bad of [
+    '11.5',
+    '11.5.1-beta.1',
+    'lts/*',
+    '',
+    '01.2.3', // leading zeros: npm-invalid semver
+    '1.02.3',
+    '1.2.03',
+    '9007199254740993.0.0', // beyond Number.isSafeInteger
+    `1.2.${'3'.repeat(260)}`, // beyond npm's 256-char cap
+  ]) {
     assert.throws(() => parseVersion(bad), /unparseable/, bad);
   }
 });
@@ -49,6 +60,7 @@ const good = {
   npmVersion: '11.16.0',
   enginesNpmRange: '>=11.16.0',
   themeVersion: '0.17.0',
+  themePublishConfig: { access: 'public' },
 };
 
 test('checkGuards passes a consistent stable release', () => {
@@ -71,6 +83,30 @@ test('checkGuards flags a prerelease version', () => {
   });
   assert.equal(problems.length, 1);
   assert.match(problems[0], /not a stable/);
+});
+
+test('checkGuards flags npm-invalid stable-looking versions', () => {
+  const problems = checkGuards({
+    ...good,
+    tag: 'v01.2.3',
+    themeVersion: '01.2.3',
+  });
+  assert.equal(problems.length, 1);
+  assert.match(problems[0], /not a stable/);
+});
+
+test('checkGuards pins publishConfig to the reviewed shape', () => {
+  for (const bad of [
+    { access: 'public', tag: 'next' },
+    { access: 'public', provenance: false },
+    { access: 'restricted' },
+    {},
+    undefined,
+  ]) {
+    const problems = checkGuards({ ...good, themePublishConfig: bad });
+    assert.equal(problems.length, 1, JSON.stringify(bad));
+    assert.match(problems[0], /publishConfig/);
+  }
 });
 
 test('checkGuards flags a tag that does not match the stamped version', () => {

@@ -459,7 +459,9 @@ If not adjust accordingly.
       ```
 
     - Re-point the `next` dist-tag at the new stable (dist-tags never move on
-      their own, and `next` must stay `>= latest`):
+      their own, and `next` must stay `>= latest`). OIDC covers only the publish
+      itself, so run this inside a narrow auth window (login/logout, next
+      bullet), then re-verify the dist-tags:
 
       ```sh
       npm dist-tag add @docsy/theme@${REL#v} next

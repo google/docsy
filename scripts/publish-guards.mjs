@@ -14,12 +14,18 @@ import { fileURLToPath } from 'node:url';
 // could legitimately move without this publish-specific bound in mind.
 export const OIDC_NPM_FLOOR = '11.5.1';
 
-const STABLE_VERSION_RE = /^\d+\.\d+\.\d+$/;
+const STABLE_VERSION_RE = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 
 export function parseVersion(v) {
-  const m = /^(\d+)\.(\d+)\.(\d+)$/.exec(v.trim());
-  if (!m) throw new Error(`unparseable version: '${v}'`);
-  return m.slice(1).map(Number);
+  const s = v.trim();
+  // Strict semver normal form: no leading zeros; npm also caps versions at
+  // 256 characters and rejects components beyond the safe-integer range.
+  const m = s.length <= 256 && STABLE_VERSION_RE.exec(s);
+  const parts = m ? m.slice(1).map(Number) : [];
+  if (!m || !parts.every(Number.isSafeInteger)) {
+    throw new Error(`unparseable version: '${v}'`);
+  }
+  return parts;
 }
 
 export function cmpVersions(a, b) {
@@ -38,12 +44,18 @@ export function floorOfEnginesRange(range) {
   return m[1];
 }
 
+// publishConfig may carry any npm config key (registry, tag, provenance, ...)
+// and outranks env-level config at publish time, so pin it to the one
+// reviewed shape; the publish command's CLI flags are the outranking backstop.
+const PUBLISH_CONFIG_JSON = '{"access":"public"}';
+
 // Returns problem descriptions; an empty array means all guards hold.
 export function checkGuards({
   tag,
   npmVersion,
   enginesNpmRange,
   themeVersion,
+  themePublishConfig,
 }) {
   const problems = [];
 
@@ -68,6 +80,11 @@ export function checkGuards({
     problems.push(`tag '${tag}' != stamped theme version 'v${themeVersion}'`);
   }
 
+  const pcJson = JSON.stringify(themePublishConfig);
+  if (pcJson !== PUBLISH_CONFIG_JSON) {
+    problems.push(`theme publishConfig ${pcJson} != ${PUBLISH_CONFIG_JSON}`);
+  }
+
   return problems;
 }
 
@@ -84,6 +101,7 @@ function main() {
     npmVersion: execSync('npm --version', { encoding: 'utf8' }).trim(),
     enginesNpmRange: pkg('.').engines?.npm,
     themeVersion: pkg('theme').version,
+    themePublishConfig: pkg('theme').publishConfig,
   };
   console.log(JSON.stringify(input, null, 2));
 
