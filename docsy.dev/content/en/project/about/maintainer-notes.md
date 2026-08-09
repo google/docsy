@@ -447,14 +447,63 @@ If not adjust accordingly.
 
     </details>
 
-15. **Publish the theme package**:
-    - Until [trusted publishing][] is adopted, authenticate for a narrow publish
-      window only: `npm login` right before publishing, `npm logout` right after
-      (whether or not publishing succeeded). If logout fails, revoke the access
-      token from your npm account settings.
-    - Publish to the npm registry from `theme/` at the tagged release commit.
-    - Verify the published version.
-    - Verify that the `latest` and `next` dist-tags point at it.
+15. **Verify the npm publish**. Pushing the release tag to `upstream` triggers
+    the [publish workflow][], which publishes `@docsy/theme` from the tagged
+    commit through npm [trusted publishing][] (OIDC; no npm token involved) once
+    a maintainer approves the run (the `npm-publish` environment). The workflow
+    only publishes tags on `main`'s history: a patch release tagged on the
+    `release` branch needs the workflow's ancestry check deliberately widened
+    first.
+    - **Before approving** the waiting `npm-publish` deployment. The guards
+      re-verify content and registry order mechanically (an out-of-order or
+      inconsistent run fails instead of publishing), and the approval prompt
+      only appears after the pack job succeeded, so approval owns **intent**.
+      Note that on tag pushes the workflow definition itself comes from the
+      tagged commit, so for an unexpected tag don't trust the run's green
+      checks; the two checks below are the real barrier:
+      - the run's commit is the release commit you drove (the tip of `$BASE` at
+        tag time; an unrelated merge landing since is fine), and the tag actor
+        is the release driver you expect; anything else: reject and ask;
+      - the run is `publish.yaml` on `google/docsy` (another workflow could
+        reference the same environment).
+    - Check that the workflow run succeeded and that the registry version
+      matches the tag:
+
+      ```sh
+      npm view @docsy/theme version dist-tags
+      ```
+
+    - Re-point the `next` dist-tag at the new stable (dist-tags never move on
+      their own, and `next` must stay `>= latest`). OIDC covers only the publish
+      itself, so run this inside a narrow auth window (login/logout, next
+      bullet), then re-verify the dist-tags:
+
+      ```sh
+      npm dist-tag add @docsy/theme@${REL#v} next
+      ```
+
+    - **Manual publishes** (prereleases only): the workflow triggers only on
+      stable `vX.Y.Z` tags, so prereleases always publish manually. Publish from
+      `theme/` inside a narrow auth window: run `npm login` right before and
+      `npm logout` right after, whether or not publishing succeeded; if logout
+      fails, revoke the access token from your npm account settings:
+
+      ```sh
+      npm publish --ignore-scripts=false --tag next
+      ```
+
+      `--ignore-scripts=false` is required: the theme `prepack` must run (it
+      materializes the LICENSE), even under a script-disabling npm config. Run
+      manual npm commands from within the repo: the root `.npmrc` pins the
+      `@docsy` scope registry against local overrides.
+
+    - **If the CI publish is broken for a stable**, prefer fixing CI over a
+      laptop publish: a manual publish carries no provenance attestation. As a
+      deliberate exception, mirror the workflow's release choices exactly:
+
+      ```sh
+      npm publish --ignore-scripts=false --access public --tag latest
+      ```
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 
@@ -725,6 +774,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>
