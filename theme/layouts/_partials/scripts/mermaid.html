@@ -1,4 +1,5 @@
 {{ $version := .Site.Params.mermaid.version -}}
+{{/* The mermaid-version canary test pins this read: don't reassign $version to a literal or add a default. */ -}}
 {{ if $version -}}
   {{ $version = strings.TrimSpace (printf "%v" $version) -}}
   {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
