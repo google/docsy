@@ -117,6 +117,8 @@ before(() => {
         encoding: 'utf8',
         // Lifecycle scripts (LICENSE copy, pack-stamp) must run even under a
         // user-level ignore-scripts=true, or the pack contract goes untested.
+        // Safe to force: `npm pack` installs nothing, so no third-party script
+        // is reachable through it; only this repo's own lifecycle runs.
         env: { ...process.env, npm_config_ignore_scripts: 'false' },
         // npm is npm.cmd on Windows, and .cmd files require a shell.
         shell: process.platform === 'win32',
