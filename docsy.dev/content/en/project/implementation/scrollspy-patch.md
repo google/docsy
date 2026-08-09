@@ -35,9 +35,9 @@ default). For implementation details, see [#2382][], [#2383][].
 ## Maintenance
 
 CI/CD automatically keeps the patch up-to-date when Bootstrap is updated. The
-`_test:full:pre` script extracts the method from Bootstrap, applies the patch, and
-updates the runtime patch file. If the Bootstrap method code has changed to a
-degree that the patch no longer works, CI will fail, indicating that the patch
+`_test:full:pre` script extracts the method from Bootstrap, applies the patch,
+and updates the runtime patch file. If the Bootstrap method code has changed to
+a degree that the patch no longer works, CI will fail, indicating that the patch
 file needs manual review and updates.
 
 Until the [upstream ScrollSpy fix][] is released in a future Bootstrap version,

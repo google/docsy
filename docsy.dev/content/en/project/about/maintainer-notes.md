@@ -269,9 +269,9 @@ If not adjust accordingly.
       Both forms update the `version` related fields in [package.json][] and
       [docsy.dev/config][] files.
 
-6.  <a id="ci-test-step">Run `npm run test:full`</a>, which runs `_test:full:pre` and
-    more to ensure that, e.g., vendor assets and [go.mod][] dependencies are
-    up-to-date, etc.
+6.  <a id="ci-test-step">Run `npm run test:full`</a>, which runs
+    `_test:full:pre` and more to ensure that, e.g., vendor assets and [go.mod][]
+    dependencies are up-to-date, etc.
 
 7.  **Submit a PR with your changes**.
     - Set the `BASE` variable to the target branch: `main` if this is a stable
