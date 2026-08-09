@@ -42,17 +42,16 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
-          # Full history: the release-branch ancestor check below needs it.
+          # Full history: the main-ancestry check below needs it.
           fetch-depth: 0
 
-      - name: 'Sanity check: tag commit is on a release branch'
+      - name: 'Sanity check: tag commit is on main'
         # The guards check the tag's own content for consistency; this pins
-        # the tagged commit to main/release history (reviewed history only if
-        # those branches are push-protected: owner-checklist gates), so a tag
-        # on an unmerged commit fails before packing.
-        run: >-
-          git merge-base --is-ancestor HEAD origin/main || git merge-base
-          --is-ancestor HEAD origin/release
+        # the tagged commit to main's history (reviewed history as long as
+        # main is push-protected), so a tag on an unmerged commit fails
+        # before packing. Release tags come from main only (owner decision
+        # 2026-08-09); widen deliberately if a release-branch flow returns.
+        run: git merge-base --is-ancestor HEAD origin/main
 
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:

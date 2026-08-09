@@ -450,7 +450,10 @@ If not adjust accordingly.
 15. **Verify the npm publish**. Pushing the release tag to `upstream` triggers
     the [publish workflow][], which publishes `@docsy/theme` from the tagged
     commit through npm [trusted publishing][] (OIDC; no npm token involved) once
-    a maintainer approves the run (the `npm-publish` environment).
+    a maintainer approves the run (the `npm-publish` environment). The workflow
+    only publishes tags on `main`'s history: a patch release tagged on the
+    `release` branch needs the workflow's ancestry check deliberately widened
+    first.
     - **Before approving** the waiting `npm-publish` deployment. The guards
       re-verify content and registry order mechanically (an out-of-order or
       inconsistent run fails instead of publishing), and the approval prompt
