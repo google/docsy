@@ -120,14 +120,21 @@ Docs render this version live through the `hugo-version` shortcode
 
 ### Default Mermaid version {#mermaid-version}
 
-The Mermaid version that Docsy loads by default is pinned in the
-`theme/layouts/_partials/scripts/mermaid.html` partial (sites override it via
-`params.mermaid.version`). No script or automation updates the pin yet: bump it
-to the latest Mermaid stable during the
-[release-prep audit](#release-prep-audit), along with the [diagrams][] page,
-which states the pinned version. Verify that a Mermaid-bearing page (the
-diagrams page, for example) renders with the new pin.
+The Mermaid version that Docsy loads by default is pinned in
+`theme/hugo.yaml` `params.mermaid.version`; the [Mermaid partial][mermaid.html]
+and [diagrams][] page both read it live, so bumping that one line during the
+[release-prep audit](#release-prep-audit) is enough. Verify that a
+Mermaid-bearing page (the diagrams page, for example) renders with the new
+pin.
 
+An emergency security bump (a Mermaid advisory landing between releases) is a
+manual edit to that same line, made directly on a `release` branch and shipped
+through the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not
+the next regular release; it explicitly bypasses Renovate's minimum release-age
+gate (once that's configured), which exists for routine bumps, not advisory
+response.
+
+[mermaid.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 
 ## Test suites

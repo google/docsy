@@ -1,4 +1,10 @@
-{{ $version := .Site.Params.mermaid.version | default "11.16.1" -}}
+{{ $version := .Site.Params.mermaid.version -}}
+{{ if not $version -}}
+  {{ errorf "params.mermaid.version is unset: your site isn't receiving the theme's config; set it explicitly." -}}
+{{ end -}}
+{{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
+  {{ warnidf "mermaid-floating-version" "params.mermaid.version is not an exact X.Y.Z version. Floating versions such as 'latest' or '11' are re-resolved by the CDN on each request, so your site's diagrams can break without any change on your part." -}}
+{{ end -}}
 
 {{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.esm.min.mjs" $version -}}
 {{ with try (resources.GetRemote $cdnurl) -}}

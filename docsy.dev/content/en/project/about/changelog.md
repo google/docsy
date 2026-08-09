@@ -178,6 +178,11 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:post` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
+- Moved the default Mermaid version to `theme/hugo.yaml`
+  `params.mermaid.version` (single home; the partial and docs page now both
+  read it live). An unset version fails the build; a non-exact version (not
+  `X.Y.Z`) emits a suppressible `mermaid-floating-version` warning. Added an
+  exact-version canary test.
 
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703

@@ -309,9 +309,9 @@ sequenceDiagram
 ```
 
 Docsy loads Mermaid from the jsDelivr CDN at page load. By default it loads a
-pinned version, currently 11.16.1, updated with each theme release. To use a
-different version, specify it in your configuration file
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
+pinned version, currently {{% param mermaid.version %}}, updated with each
+theme release. To use a different version, specify it in your configuration
+file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
@@ -319,18 +319,18 @@ different version, specify it in your configuration file
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "11.16.1"
+version = "{{% param mermaid.version %}}"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 11.16.1
+    version: {{% param mermaid.version %}}
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "11.16.1"
+      "version": "{{% param mermaid.version %}}"
     }
   }
 }
@@ -341,7 +341,8 @@ params:
 
 Use an exact version (`X.Y.Z`): floating versions such as `latest` or `11` are
 re-resolved by the CDN on each request, so your site's diagrams can break
-without any change on your part.
+without any change on your part. A floating version emits a build warning
+(suppress with `ignoreLogs: [mermaid-floating-version]` if intentional).
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
