@@ -96,8 +96,9 @@ jobs:
         # the guards) and same-key config-file entries; provenance is implicit
         # under trusted publishing, but requiring it fails loudly if it can't
         # be attested. (A scope-specific `@docsy:registry` mapping would still
-        # outrank --registry, but no config layer here defines one: setup-node
-        # writes a fresh userconfig and the job cwd is outside the checkout.)
+        # outrank --registry, but none applies here: setup-node writes a fresh
+        # userconfig, and this cwd is outside the checkout, so the repo's own
+        # .npmrc pin is out of scope too.)
         run: >-
           npm publish ./*.tgz --access public --provenance --tag latest
           --registry https://registry.npmjs.org

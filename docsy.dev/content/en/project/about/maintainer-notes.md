@@ -472,8 +472,7 @@ If not adjust accordingly.
       bullet), then re-verify the dist-tags:
 
       ```sh
-      npm dist-tag add @docsy/theme@${REL#v} next \
-        --@docsy:registry=https://registry.npmjs.org
+      npm dist-tag add @docsy/theme@${REL#v} next
       ```
 
     - **Manual publishes** (prereleases only): the workflow triggers only on
@@ -483,22 +482,20 @@ If not adjust accordingly.
       fails, revoke the access token from your npm account settings:
 
       ```sh
-      npm publish --ignore-scripts=false --tag next \
-        --@docsy:registry=https://registry.npmjs.org
+      npm publish --ignore-scripts=false --tag next
       ```
 
       `--ignore-scripts=false` is required: the theme `prepack` must run (it
-      materializes the LICENSE), even under a script-disabling npm config. The
-      scope-registry pin guards against a local `@docsy:registry` override,
-      which outranks even `--registry`.
+      materializes the LICENSE), even under a script-disabling npm config. Run
+      manual npm commands from within the repo: the root `.npmrc` pins the
+      `@docsy` scope registry against local overrides.
 
     - **If the CI publish is broken for a stable**, prefer fixing CI over a
       laptop publish: a manual publish carries no provenance attestation. As a
       deliberate exception, mirror the workflow's release choices exactly:
 
       ```sh
-      npm publish --ignore-scripts=false --access public --tag latest \
-        --@docsy:registry=https://registry.npmjs.org
+      npm publish --ignore-scripts=false --access public --tag latest
       ```
 
 16. Update the [deploy/prod][] branch from `$BASE`.
