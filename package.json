@@ -39,7 +39,7 @@
     "_serve": "npm run -C docsy.dev _serve --",
     "_spv:example": "echo TBC - npm run -s __spv docsy.dev/config/example/params.yaml --",
     "_spv": "npm run -s __spv docsy.dev/config/*/params.yaml --",
-    "_test:full:post": "npm run fix-for-test && npm run -s is:clean && npm run test:hugo-versions && npm run test:tooling && npm run test:fixture-site",
+    "_test:full:post": "npm run fix-for-test && npm run -s is:clean && npm run test:hugo-versions && npm run test:mermaid-version && npm run test:tooling && npm run test:fixture-site",
     "_test:full:pre": "npm run _prepare && npm run -s is:clean",
     "build": "npm run -C docsy.dev build --",
     "check:afdocs:dev": "npm run -s _check:afdocs -- http://localhost:1313 | tee docsy.dev/content/en/docs/content/agent-support/afdocs-scorecard.txt",
@@ -70,6 +70,7 @@
     "test:fixture-site": "node --test 'tests/fixture-site/**/*.test.mjs'",
     "test:full": "npm run _test:full:pre && npm run check && npm run test:website && npm run _test:full:post",
     "test:hugo-versions": "node --test tests/hugo-versions.test.mjs",
+    "test:mermaid-version": "node --test tests/mermaid-version.test.mjs",
     "test:lychee": "node --test 'tests/lychee/**/*.test.mjs'",
     "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.test.mjs",
@@ -90,7 +91,8 @@
     "markdownlint-cli2": "^0.21.0",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "markdownlint-rule-no-shortcut-ref-link": "github:chalin/markdownlint-rule-no-shortcut-ref-link#v0.3.1",
-    "prettier": "^3.9.3"
+    "prettier": "^3.9.3",
+    "yaml": "^2.9.0"
   },
   "engines": {
     "node": ">=24",

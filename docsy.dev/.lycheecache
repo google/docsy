@@ -229,6 +229,7 @@ https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/navbar.html,200,1782498232
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/page-description.html,200,1782498241
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html,200,1782498244
+https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html,200,1786275372
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/search-input.html,200,1782498243
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/sidebar-tree.html?plain=1,200,1782498232
 https://github.com/google/docsy/blob/main/theme/layouts/_partials/sidebar.html?plain=1,200,1782498232
@@ -638,6 +639,7 @@ https://gohugo.io/about/features/#multidimensional-content-model,200,1782498229
 https://gohugo.io/commands/hugo_deploy,200,1782563367
 https://gohugo.io/commands/hugo_gen_chromastyles/,200,1782498238
 https://gohugo.io/commands/hugo_server/,200,1782563368
+https://gohugo.io/configuration/all/#ignorelogs,200,1786311799
 https://gohugo.io/configuration/introduction/#configuration-file,200,1782563367
 https://gohugo.io/configuration/introduction/#environment-variables,200,1782563367
 https://gohugo.io/configuration/introduction/,200,1782498235
@@ -837,6 +839,7 @@ https://nodejs.org/en/download/,200,1782563367
 https://opensource.google.com/conduct/,200,1782498227
 https://opentelemetry.io/,200,1782498230
 https://opentelemetry.io/ecosystem/registry/,200,1782498232
+https://osv.dev/list?ecosystem=npm&q=mermaid,200,1786305635
 https://pages.github.com/themes/,200,1782498226
 https://parquet.apache.org/,200,1782498244
 https://plantuml.com/en/,200,1782498236
@@ -850,6 +853,7 @@ https://prismjs.com/index.html#supported-languages,200,1782498238
 https://prismjs.com/index.html,200,1782498238
 https://protobuf.dev/,200,1782498244
 https://realfavicongenerator.net/,200,1782498227
+https://registry.npmjs.org/mermaid,200,1786305635
 https://rtlcss.com/,200,1782498230
 https://sass-lang.com/documentation/at-rules/import,200,1782498233
 https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html,200,1782563368

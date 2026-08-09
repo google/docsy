@@ -120,27 +120,42 @@ Docs render this version live through the `hugo-version` shortcode
 
 ### Default Mermaid version {#mermaid-version}
 
-The Mermaid version that Docsy loads by default is pinned in the
-`theme/layouts/_partials/scripts/mermaid.html` partial (sites override it via
-`params.mermaid.version`). No script or automation updates the pin yet: bump it
-to the latest Mermaid stable during the
-[release-prep audit](#release-prep-audit), along with the [diagrams][] page,
-which states the pinned version. Verify that a Mermaid-bearing page (the
-diagrams page, for example) renders with the new pin.
+The Mermaid version that Docsy loads by default is pinned in `theme/hugo.yaml`
+`params.mermaid.version`; the [Mermaid partial][mermaid.html] and [diagrams][]
+page both read it live, so bumping that one line during the
+[release-prep audit](#release-prep-audit) is enough. Guarded by
+[test:mermaid-version](#test-suites). The partial's unset- and floating-version
+guards run reliably only on the docs, blog, and swagger layouts for now: the
+default base template renders scripts through an unkeyed `partialCached`, which
+can skip them. Before bumping, check the [npm registry][mermaid-npm] and [OSV][]
+for advisories affecting the target version. Verify that a Mermaid-bearing page
+(the diagrams page, for example) renders with the new pin.
 
+An emergency security bump (a Mermaid advisory landing between releases) is a
+manual edit to that same line, made directly on a `release` branch and shipped
+through the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not
+the next regular release; it explicitly bypasses the minimum release-age gate
+that Renovate will enforce for routine bumps, once configured for this repo (not
+yet, as of this writing).
+
+<!-- prettier-ignore-start -->
+[mermaid-npm]: https://registry.npmjs.org/mermaid
+[mermaid.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+<!-- prettier-ignore-end -->
 
 ## Test suites
 
 From the repo root:
 
-| Script               | Role                                                                                                |
-| -------------------- | --------------------------------------------------------------------------------------------------- |
-| `test:fixture-site`  | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover           |
-| `test:hugo-versions` | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints            |
-| `test:smoke`         | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
-| `test:tooling`       | Unit tests for repo scripts                                                                         |
-| `test:website`       | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
+| Script                 | Role                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| `test:fixture-site`    | Fast, offline checks over minimal monolingual fixture sites: paths docsy.dev can't cover            |
+| `test:hugo-versions`   | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints            |
+| `test:mermaid-version` | Fast, offline check that the [default Mermaid version](#mermaid-version) is pinned exact            |
+| `test:smoke`           | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
+| `test:tooling`         | Unit tests for repo scripts                                                                         |
+| `test:website`         | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).
@@ -772,14 +787,15 @@ To test a Docsy branch or release from a consumer site, for each site:
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
+[osv]: https://osv.dev/list?ecosystem=npm&q=mermaid
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[public]: /project/about/changelog/#public
 [publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>
+[tags]: <{{% param github_repo %}}/tags>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [themes showcase]: https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
 [trusted publishing]: https://docs.npmjs.com/trusted-publishers/
-[public]: /project/about/changelog/#public
-[tags]: <{{% param github_repo %}}/tags>
 <!-- prettier-ignore-end -->
