@@ -123,8 +123,7 @@ test('checkGuards flags a tag that does not match the stamped version', () => {
 });
 
 test('checkRegistryAdvance compares numeric cores, prerelease-safe', () => {
-  // First stable over its own RC: equal cores, allowed (a true duplicate
-  // version already fails at the registry).
+  // Equal-core cases (rationale at checkRegistryAdvance).
   assert.deepEqual(checkRegistryAdvance('0.16.0', '0.16.0-rc.1'), []);
   assert.deepEqual(checkRegistryAdvance('0.17.0', '0.16.0'), []);
   assert.deepEqual(checkRegistryAdvance('0.17.0', '0.17.0'), []);
@@ -137,8 +136,7 @@ test('checkRegistryAdvance compares numeric cores, prerelease-safe', () => {
   assert.equal(garbage.length, 1);
   assert.match(garbage[0], /unparseable registry/);
 
-  // A non-stable candidate reports instead of throwing (the stable-version
-  // guard owns that finding; a throw would mask it).
+  // Non-stable candidate: reports instead of throwing.
   const dev = checkRegistryAdvance('0.16.1-dev', '0.16.0');
   assert.equal(dev.length, 1);
   assert.match(dev[0], /not stable/);

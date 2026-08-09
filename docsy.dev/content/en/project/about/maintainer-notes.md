@@ -457,8 +457,8 @@ If not adjust accordingly.
       - the pack job is green and its log shows the expected version;
       - the version is above the registry's current `latest` and no other
         publish run is pending (runs queue one at a time, and a publish-job
-        guard rejects a candidate below the registry's `latest`; approving in
-        version order keeps the queue itself honest).
+        guard rejects a candidate below the registry's `latest`, so an
+        out-of-order approval fails rather than regressing `latest`).
     - Check that the workflow run succeeded and that the registry version
       matches the tag:
 
