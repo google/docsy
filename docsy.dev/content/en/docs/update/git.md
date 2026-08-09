@@ -34,11 +34,11 @@ in your project, here's how you update the submodule to the latest release:
 1. Reinstall the theme's runtime dependencies:
 
    ```sh
-   npm run postinstall --prefix themes/docsy
+   npm run install:theme-deps --prefix themes/docsy
    ```
 
-   Run `npm run postinstall`, not `npm install`; for why, see the [setup
-   note][postinstall-note].
+   Run `npm run install:theme-deps`, not `npm install`; for why, see the [setup
+   note][theme-deps-note].
 
 1. Add and then commit the change to your project:
 
@@ -69,10 +69,11 @@ that you are targeting:
 1. Reinstall the theme's runtime dependencies:
 
    ```sh
-   npm run postinstall --prefix themes/docsy
+   npm run install:theme-deps --prefix themes/docsy
    ```
 
-   As in the submodule procedure, run `npm run postinstall`, not `npm install`.
+   As in the submodule procedure, run `npm run install:theme-deps`, not
+   `npm install`.
 
 1. Persist the update to your project, the same way that your project already
    tracks the cloned theme: for example, commit the updated theme files to your
@@ -88,5 +89,5 @@ After updating the theme, continue with the remaining update steps, starting
 with [Review your theme overrides](/docs/update/#update-overrides).
 
 <!-- prettier-ignore-start -->
-[postinstall-note]: /docs/get-started/other-options/#for-an-existing-site
+[theme-deps-note]: /docs/get-started/other-options/#for-an-existing-site
 <!-- prettier-ignore-end -->

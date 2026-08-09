@@ -352,9 +352,10 @@ test('non-module clone into themes/docsy', () => {
     'git clone theme into themes/docsy',
   );
 
-  progress('clone: npm run theme postinstall for theme deps etc…');
+  progress('clone: npm run theme install:theme-deps for theme deps etc…');
   assert.equal(
-    run('npm', ['run', '--prefix', themesDocsy, 'postinstall'], {}).status,
+    run('npm', ['run', '--prefix', themesDocsy, 'install:theme-deps'], {})
+      .status,
     0,
     'install theme deps etc',
   );

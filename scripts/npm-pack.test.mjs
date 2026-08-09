@@ -78,7 +78,7 @@ const PACKAGES = {
     forbiddenPrefixes: [`${TAR}node_modules/`, `${TAR}images/`],
     // The lock stays out here (unlike the root package, which ships it):
     // registry installs of a library never consult its lock; only the root
-    // package's postinstall-driven nested `npm ci` needs one.
+    // package's install:theme-deps nested `npm ci` needs one.
     forbiddenSubstrings: [
       'package-lock.json',
       '.test.mjs',

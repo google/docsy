@@ -109,22 +109,24 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
-  # The .npmrc keys below silently no-op on npm < 11.16 (allowScripts
-  # machinery), which would leave this site installing with scripts enabled
-  # and no allowlist; refuse rather than degrade.
+  # npm silently ignores config keys it doesn't know (min-release-age on
+  # older npm), which would drop the release cooldown; refuse rather than
+  # degrade.
   npm pkg set 'engines.npm=>=11.16.0' > /dev/null
-  # Consumer-simulation installs are unlocked by design; pin consumer-default
-  # script semantics (immune to ambient user config), bounded by a Docsy-only
-  # script allowlist and a registry-release cooldown.
-  # The allow entry must live in package.json: project-.npmrc config reaches
-  # nested npm runs (Docsy's postinstall) as env-layer config, which npm
-  # rejects in project-scoped installs (EALLOWSCRIPTS).
-  printf 'engine-strict=true\nignore-scripts=false\nstrict-allow-scripts=true\nmin-release-age=7\n' > .npmrc
-  npm pkg set --json "allowScripts[github:$DOCSY_REPO]=true"
+  # Consumer-simulation installs are unlocked by design, but script-free:
+  # Docsy declares no lifecycle hooks and none of these deps needs install
+  # scripts. Pin that (immune to ambient user config), plus a
+  # registry-release cooldown.
+  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\n' > .npmrc
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
     npm install --omit dev --save $DEPS
+  fi
+  if [[ "$DOCSY_SRC" == "NPM" ]]; then
+    # No install hook fetches the theme's runtime deps; run the documented
+    # command explicitly (itself lock-exact and script-free).
+    npm run --prefix "$THEMESDIR/docsy" install:theme-deps
   fi
 }
 

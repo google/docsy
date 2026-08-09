@@ -59,7 +59,6 @@
     "install:theme-deps": "npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund",
     "is:clean": "bash -c 'o=$(git status --porcelain -uall); echo \"$o\"; [ -z \"$o\" ]'",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
-    "postinstall": "npm run install:theme-deps",
     "postupdate:dep": "npm run -s post-update",
     "postupdate:packages": "npm run -s post-update",
     "refcache": "npm run -C docsy.dev refcache --",
