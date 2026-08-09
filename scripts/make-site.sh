@@ -26,7 +26,9 @@ Usage: `basename $0` [options]
 
   -f            Force delete SITE_NAME if it exists before recreating it
   -h            Output this usage info
-  -l PATH       Use local Docsy from PATH. Default: '$THEMESDIR'
+  -l PATH       Use local Docsy from PATH: an installed checkout (theme
+                dependencies present, e.g. via npm run install:safe).
+                Default: '$THEMESDIR'
   -n SITE_NAME  Name of directory to create for the Hugo generated site.
                 Default: '$SITE_NAME'
   -q            Run a bit more quietly.
@@ -115,8 +117,8 @@ function _npm_install() {
   npm pkg set 'engines.npm=>=11.16.0' > /dev/null
   # Consumer-simulation installs are unlocked by design, but script-free:
   # Docsy declares no install hooks and none of these deps needs install
-  # scripts. Pin that (immune to ambient user config), plus a
-  # registry-release cooldown.
+  # scripts. Pin that for the site's own installs (immune to ambient user
+  # config), plus a registry-release cooldown.
   printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\n' > .npmrc
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
@@ -125,7 +127,9 @@ function _npm_install() {
   fi
   if [[ "$DOCSY_SRC" == "NPM" ]]; then
     # No install hook fetches the theme's runtime deps; run the documented
-    # command explicitly (itself lock-exact and script-free).
+    # command explicitly. The .npmrc above doesn't reach this leg (--prefix
+    # re-roots npm's project config at the installed package), so the command
+    # carries its protections inline: lock-exact npm ci with --ignore-scripts.
     npm run --prefix "$THEMESDIR/docsy" install:theme-deps
   fi
 }
