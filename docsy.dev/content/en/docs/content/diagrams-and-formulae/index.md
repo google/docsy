@@ -343,7 +343,7 @@ Use an exact version (`X.Y.Z`): floating versions such as `latest` or `11` are
 re-resolved by the CDN on each request, so your site's diagrams can break
 without any change on your part. A floating version emits a build warning; if
 intentional, suppress it by adding `mermaid-floating-version` to your site's
-`ignoreLogs`.
+[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
