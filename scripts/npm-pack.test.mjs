@@ -115,6 +115,9 @@ before(() => {
       {
         cwd: pkg.dir,
         encoding: 'utf8',
+        // Lifecycle scripts (LICENSE copy, pack-stamp) must run even under a
+        // user-level ignore-scripts=true, or the pack contract goes untested.
+        env: { ...process.env, npm_config_ignore_scripts: 'false' },
         // npm is npm.cmd on Windows, and .cmd files require a shell.
         shell: process.platform === 'win32',
       },
@@ -181,7 +184,7 @@ test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
 });
 
 // Pack-time build-ID stamping (scripts/pack-stamp.mjs): a bare -dev version
-// gains a git-derived build ID inside the tarball only.
+// gains the packed commit's SHA inside the tarball only.
 test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () => {
   const { tarballPath } = packed.get('@docsy/theme');
   const extract = spawnSync(
@@ -202,9 +205,12 @@ test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () =>
     ),
   ).version;
   if (manifestVersion.endsWith('-dev')) {
-    assert.ok(
-      packedVersion.startsWith(`${manifestVersion}+`),
-      `packed version ${packedVersion} extends ${manifestVersion} with a build ID`,
+    assert.match(
+      packedVersion,
+      new RegExp(
+        `^${manifestVersion.replace(/[.+]/g, '\\$&')}\\+g[0-9a-f]{7,8}$`,
+      ),
+      `packed version ${packedVersion} extends ${manifestVersion} with the packed commit's SHA`,
     );
   } else {
     assert.equal(packedVersion, manifestVersion, 'non-dev version packs as-is');
