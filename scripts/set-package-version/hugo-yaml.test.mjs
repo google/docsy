@@ -18,9 +18,8 @@ test('parseParamsVersion extracts version info', () => {
   assert.equal(result.buildId, '018-over-main-adb0e595');
 });
 
-// buildId is matched by its key name alone when it sits under tdVersion --
-// no tdBuildId anchor or comment marker needed (unlike latest/dev, whose
-// names are too common to match unmarked).
+// Unmarked buildId lines under tdVersion (rationale: parseParamsVersion in
+// hugo-yaml.mjs).
 const fixtureUnmarkedBuildId = `tdVersion:
   latest: &tdLatestVers v0.16.0
   dev: &tdDevVers v0.16.1-dev

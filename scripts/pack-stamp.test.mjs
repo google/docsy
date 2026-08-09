@@ -59,8 +59,8 @@ test('pre leaves release and RC versions unstamped', () => {
 });
 
 test('pre discards a stale backup instead of restoring it', () => {
-  // Backup predates the committed manifest (R2-1): the manifest is
-  // authoritative; restoring would downgrade it.
+  // Backup predates the committed manifest: the manifest is authoritative;
+  // restoring would downgrade it.
   withFixture(
     '0.16.1-dev',
     { backupVersion: '0.16.0-dev' },
@@ -83,7 +83,7 @@ test('pre discards a stale backup instead of restoring it', () => {
 });
 
 test('pre strips a stranded stamp before restamping', () => {
-  // Manifest left stamped with no backup (R2-2): self-heal from the manifest
+  // Manifest left stamped with no backup: self-heal from the manifest
   // itself, then stamp fresh. Fixture list mirrors every form the tooling
   // produces (grammar home: strandedStampRegex in pack-stamp.mjs).
   for (const stranded of [

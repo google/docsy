@@ -115,9 +115,8 @@ test('parseArgsAndResolveBuildId defaults to release-strip mode', () => {
 });
 
 test('parseArgsAndResolveBuildId rejects invalid build metadata', () => {
-  // Semver build metadata: dot-separated alphanumeric-and-hyphen identifiers.
-  // Anything else would write an invalid version into package.json, failing
-  // some later npm operation far from the cause.
+  // Whitespace, embedded spaces, '+': not semver build metadata (rationale at
+  // the guard in index.mjs).
   for (const bad of ['   ', 'a b', 'x+y']) {
     const warnCalls = [];
     const logger = {
