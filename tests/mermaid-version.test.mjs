@@ -34,9 +34,42 @@ function mermaidVersion() {
 test('theme/hugo.yaml pins an exact Mermaid version', () => {
   const version = mermaidVersion();
   assert.equal(typeof version, 'string', 'params.mermaid.version is a string');
+  // Prerelease pins (X.Y.Z-rc.N) are deliberately rejected: the theme
+  // default stays on stable releases. Sites can still pin one; they get the
+  // suppressible floating-version warning.
   assert.match(
     version,
     SEMVER,
     'params.mermaid.version is X.Y.Z, not a floating version like `latest`',
+  );
+});
+
+// The pin's other home-in-waiting: a fallback or hardcoded version
+// reintroduced in the partial would ship a version the YAML assertion above
+// never sees.
+test('the Mermaid partial takes its version from the config param alone', () => {
+  const partial = fs.readFileSync(
+    path.join(repoRoot, 'theme/layouts/_partials/scripts/mermaid.html'),
+    'utf8',
+  );
+  assert.match(
+    partial,
+    /\$version :=\s*\.Site\.Params\.mermaid\.version/,
+    'the partial reads params.mermaid.version',
+  );
+  assert.doesNotMatch(
+    partial,
+    /\|\s*default\b/,
+    'the version read has no template-level default fallback',
+  );
+  assert.match(
+    partial,
+    /mermaid@%s\//,
+    'the CDN URL interpolates the configured version',
+  );
+  assert.doesNotMatch(
+    partial,
+    /mermaid@(?!%s)/,
+    'CDN URLs carry no hardcoded version',
   );
 });

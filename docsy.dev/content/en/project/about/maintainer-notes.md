@@ -124,10 +124,12 @@ The Mermaid version that Docsy loads by default is pinned in `theme/hugo.yaml`
 `params.mermaid.version`; the [Mermaid partial][mermaid.html] and [diagrams][]
 page both read it live, so bumping that one line during the
 [release-prep audit](#release-prep-audit) is enough. Guarded by
-[test:mermaid-version](#test-suites). Before bumping, check the [npm
-registry][mermaid-npm] and [OSV][] for advisories affecting the target version.
-Verify that a Mermaid-bearing page (the diagrams page, for example) renders with
-the new pin.
+[test:mermaid-version](#test-suites). The partial's unset- and floating-version
+guards run reliably only on the docs, blog, and swagger layouts for now: the
+default base template renders scripts through an unkeyed `partialCached`, which
+can skip them. Before bumping, check the [npm registry][mermaid-npm] and [OSV][]
+for advisories affecting the target version. Verify that a Mermaid-bearing page
+(the diagrams page, for example) renders with the new pin.
 
 An emergency security bump (a Mermaid advisory landing between releases) is a
 manual edit to that same line, made directly on a `release` branch and shipped
