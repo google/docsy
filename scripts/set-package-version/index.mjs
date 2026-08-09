@@ -59,7 +59,8 @@ Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUI
   Options:
     --help|-h          Show this help message
     --id [BUILD-ID]    Set build ID metadata to BUILD-ID, if provided; otherwise,
-                       set it to a timestamp-based value. Version is unchanged.
+                       set it to a timestamp-based value. BUILD-ID may not start
+                       with '-'. Version is unchanged.
     --silent|-s        Don't log any messages
     --version|-v VERS  Set version in target files according to VERS
 
@@ -242,18 +243,6 @@ export function parseArgsAndResolveBuildId(
   const warn = logger?.warn || console.warn;
 
   let i = 0;
-  // A `-`-leading next-arg means "--id value omitted" only for known flags: a
-  // leading hyphen is valid semver build metadata (fail-loud posture: any
-  // other silent reinterpretation would bypass the validator below).
-  const knownFlags = [
-    '--help',
-    '-h',
-    '--id',
-    '--silent',
-    '-s',
-    '--version',
-    '-v',
-  ];
   for (; i < args.length; i++) {
     const arg = args[i];
     switch (arg) {
@@ -262,8 +251,15 @@ export function parseArgsAndResolveBuildId(
         usage();
         break;
       case '--id':
-        if (i + 1 >= args.length || knownFlags.includes(args[i + 1])) {
+        if (i + 1 >= args.length) {
           buildId = '';
+        } else if (args[i + 1].startsWith('-')) {
+          // Ambiguous between a value and a flag; fail loud rather than pick
+          // a side. For a timestamp ID, pass --id last or --id ''.
+          warn?.(
+            `Invalid build ID value: ${JSON.stringify(args[i + 1])} (may not start with '-')`,
+          );
+          process.exit(1);
         } else {
           i += 1;
           buildId = args[i];

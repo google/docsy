@@ -152,15 +152,6 @@ test('parseArgsAndResolveBuildId accepts valid build metadata forms', () => {
   }
 });
 
-test('parseArgsAndResolveBuildId takes a hyphen-leading --id value as the value', () => {
-  // A leading hyphen is valid semver build metadata; only known flags mean
-  // "value omitted".
-  const result = parseArgsAndResolveBuildId(['--id', '-abc'], {
-    logger: nullLogger,
-  });
-  assert.equal(result.buildId, '-abc');
-});
-
 test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
   const result = parseArgsAndResolveBuildId(['--id', ''], {
     logger: nullLogger,
@@ -175,12 +166,33 @@ test('parseArgsAndResolveBuildId maps bare --id to timestamp build ID', () => {
   assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
 });
 
-test('parseArgsAndResolveBuildId treats --id followed by flag as omitted BUILD-ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id', '--silent'], {
-    logger: nullLogger,
-  });
-  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
-  assert.equal(result.silent, true);
+test('parseArgsAndResolveBuildId rejects a hyphen-leading --id value', () => {
+  // Ambiguous between a value and a flag; fail loud rather than pick a side
+  // (the old silent timestamp fallback masked caller mistakes).
+  for (const next of ['-abc', '--silent']) {
+    const warnCalls = [];
+    const logger = {
+      log() {},
+      warn: (...args) => warnCalls.push(args.join(' ')),
+    };
+    const origExit = process.exit;
+    process.exit = (code) => {
+      throw { exitCode: code };
+    };
+    try {
+      parseArgsAndResolveBuildId(['--id', next], { logger });
+      assert.fail(`expected exit for --id ${next}`);
+    } catch (err) {
+      if (err.exitCode === undefined) throw err;
+      assert.equal(err.exitCode, 1);
+      assert.ok(
+        warnCalls.some((w) => w.includes(next)),
+        'names the offending value',
+      );
+    } finally {
+      process.exit = origExit;
+    }
+  }
 });
 
 test('parseArgsAndResolveBuildId supports short -v and --version precedence', () => {
