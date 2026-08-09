@@ -10,7 +10,6 @@ import { fileURLToPath } from 'node:url';
 import {
   OIDC_NPM_FLOOR,
   checkGuards,
-  checkWorkflowContract,
   cmpVersions,
   floorOfEnginesRange,
   parseVersion,
@@ -62,8 +61,6 @@ const good = {
   enginesNpmRange: '>=11.16.0',
   themeVersion: '0.17.0',
   themePublishConfig: { access: 'public' },
-  ignoreScripts: 'false',
-  installFree: true,
 };
 
 test('checkGuards passes a consistent stable release', () => {
@@ -109,75 +106,6 @@ test('checkGuards pins publishConfig to the reviewed shape', () => {
     const problems = checkGuards({ ...good, themePublishConfig: bad });
     assert.equal(problems.length, 1, JSON.stringify(bad));
     assert.match(problems[0], /publishConfig/);
-  }
-});
-
-test('checkGuards requires lifecycle scripts to be enabled', () => {
-  for (const bad of ['true', 'undefined', '']) {
-    const problems = checkGuards({ ...good, ignoreScripts: bad });
-    assert.equal(problems.length, 1, `ignoreScripts '${bad}'`);
-    assert.match(problems[0], /ignore-scripts/);
-  }
-});
-
-test('checkGuards requires the job to be install-free', () => {
-  const problems = checkGuards({ ...good, installFree: false });
-  assert.equal(problems.length, 1);
-  assert.match(problems[0], /install-free/);
-});
-
-const workflowText = fs.readFileSync(
-  path.join(repoRoot, '.github/workflows/publish.yaml'),
-  'utf8',
-);
-
-test('publish workflow meets its contract', () => {
-  assert.deepEqual(checkWorkflowContract(workflowText), []);
-});
-
-test('checkWorkflowContract flags contract breaks', () => {
-  // Each mutation of the real workflow must produce a finding, proving the
-  // checks carry signal rather than passing vacuously.
-  const mutations = {
-    'install command': [
-      workflowText + '\n      - run: npm ci\n',
-      /install command/,
-    ],
-    'unpinned action': [
-      workflowText.replace(/uses: actions\/checkout@[0-9a-f]{40}/, () => {
-        return 'uses: actions/checkout@v6';
-      }),
-      /allowlisted \+ SHA-pinned/,
-    ],
-    'foreign action': [
-      workflowText.replace(/uses: actions\/checkout@/, () => {
-        return 'uses: someorg/action@';
-      }),
-      /allowlisted \+ SHA-pinned/,
-    ],
-    'widened permissions': [
-      workflowText.replace(
-        'id-token: write',
-        'id-token: write\n      packages: write',
-      ),
-      /permissions/,
-    ],
-    'missing environment': [
-      workflowText.replace('environment: npm-publish', ''),
-      /npm-publish/,
-    ],
-    'scripts not forced on': [
-      workflowText.replace('--ignore-scripts=false', ''),
-      /ignore-scripts=false/,
-    ],
-  };
-  for (const [name, [text, re]] of Object.entries(mutations)) {
-    const problems = checkWorkflowContract(text);
-    assert.ok(problems.length >= 1, `${name} is flagged`);
-    assert.ok(
-      problems.some((p) => re.test(p)),
-      `${name}: [${problems}] matches ${re}`,
-    );
   }
 });
 

@@ -1,23 +1,16 @@
-# Publish @docsy/theme to the npm registry when a release tag is pushed.
+# Publish @docsy/theme to the npm registry when a stable release tag is
+# pushed.
 #
-# Auth is npm trusted publishing (OIDC): the job's id-token permission lets
-# npm mint a short-lived, workflow-scoped credential at publish time, so no
-# long-lived npm token exists to leak or rotate. The registration binding this
-# repo + workflow filename + environment to the package lives in the package's
-# settings on npmjs.com.
+# Auth is npm trusted publishing (OIDC): the publish job's id-token permission
+# lets npm mint a short-lived, workflow-scoped credential at publish time, so
+# no long-lived npm token exists to leak or rotate. The registration binding
+# this repo + workflow filename + environment to the package lives in the
+# package's settings on npmjs.com.
 #
-# The job installs nothing: the pack contract and `npm publish` need only
-# Node/npm built-ins, so no dependency code runs with the OIDC grant.
-#
-# Design note: one job packs and publishes, with the theme's own lifecycle
-# scripts enabled. That is safe only while the job stays install-free
-# (`npm publish` installs nothing, so only first-party prepack/postpack can
-# run); the guards enforce this coupling and the workflow contract around it.
-# The stricter split (a pack job without the OIDC grant handing the tarball
-# to a lifecycle-free `npm publish TARBALL` job) buys little for a
-# single-package publisher, where controlling packed content already equals
-# controlling the publish; revisit it if this workflow ever needs installs,
-# more packages, or non-human triggers.
+# Two jobs split the trust: pack guards and builds the tarball without the
+# OIDC grant; publish holds the grant but executes no repo code (publishing a
+# tarball, unlike a directory, runs no lifecycle scripts). Neither job
+# installs dependencies.
 
 name: publish
 
@@ -30,14 +23,50 @@ on:
 permissions: {}
 
 jobs:
-  publish:
+  pack:
     if: github.repository == 'google/docsy'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          package-manager-cache: false
+
+      - name: 'Sanity check: toolchain and tag guards'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: node scripts/publish-guards.mjs
+
+      - name: 'Sanity check: pack contract'
+        run: node --test scripts/npm-pack.test.mjs
+
+      - name: Pack @docsy/theme
+        working-directory: theme
+        # Scripts stay on for the theme prepack (it materializes LICENSE),
+        # under any npm config; safe here since packing a local directory
+        # installs nothing, so only this repo's own lifecycle can run.
+        run: npm pack --ignore-scripts=false --pack-destination "$RUNNER_TEMP"
+
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: npm-tarball
+          path: ${{ runner.temp }}/*.tgz
+          if-no-files-found: error
+
+  publish:
+    needs: pack
     runs-on: ubuntu-latest
     # Approval boundary: publishes wait on this environment's required
     # reviewers, and the npmjs trusted-publisher registration binds to it.
     environment: npm-publish
     permissions:
-      contents: read
+      contents: read # For the checkout, which only feeds setup-node .nvmrc.
       id-token: write
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -50,21 +79,17 @@ jobs:
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
-      - name: 'Sanity check: toolchain and tag guards'
-        env:
-          TAG: ${{ github.ref_name }}
-        run: node scripts/publish-guards.mjs
-
-      - name: 'Sanity check: pack contract'
-        run: node --test scripts/npm-pack.test.mjs
+      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6
+        with:
+          name: npm-tarball
+          path: ${{ runner.temp }}/npm-tarball
 
       - name: Publish @docsy/theme
-        working-directory: theme
+        working-directory: ${{ runner.temp }}/npm-tarball
         # Deliberate CLI flags: they outrank manifest publishConfig (pinned by
-        # the guards) and any config layer. Scripts stay on for the theme
-        # prepack (it materializes LICENSE); provenance is implicit under
+        # the guards) and any config layer; provenance is implicit under
         # trusted publishing, but requiring it fails loudly if it can't be
         # attested.
         run: >-
-          npm publish --access public --provenance --tag latest
-          --ignore-scripts=false --registry https://registry.npmjs.org
+          npm publish ./*.tgz --access public --provenance --tag latest
+          --registry https://registry.npmjs.org
