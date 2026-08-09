@@ -155,7 +155,7 @@ before(() => {
   assert.match(
     v.stdout ?? '',
     /extended/,
-    'extended Hugo not found — run `npm install` at the repo root first',
+    'extended Hugo not found — run `npm run install:safe` at the repo root first',
   );
 });
 

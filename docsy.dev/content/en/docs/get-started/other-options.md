@@ -284,6 +284,7 @@ development or testing, you can also install:
 
   ```sh
   npm install --save-dev google/docsy
+  (cd node_modules/docsy && npm run install:theme-deps)
   ```
 
   This installs the repository's default branch (`main`). To pin a tagged
@@ -295,7 +296,10 @@ development or testing, you can also install:
 
   For other revision selectors, see [npm install][]. The GitHub package is named
   `docsy` and contains the theme files in a subfolder, so with this install form
-  use `theme: docsy/theme` in your site configuration.
+  use `theme: docsy/theme` in your site configuration. Unlike the registry
+  package, the GitHub package doesn't declare Bootstrap and Font Awesome as its
+  own dependencies: the `install:theme-deps` command installs them, and must be
+  rerun after every install or update of the package.
 
 ## Preview your site
 
