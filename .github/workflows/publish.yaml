@@ -25,8 +25,9 @@ on:
 
 permissions: {}
 
-# One publish at a time, queued in trigger order: concurrent tag pushes could
-# otherwise be approved out of order, leaving `latest` on the older version.
+# One publish at a time: without this, concurrent tag pushes could be
+# approved out of order. An overlapping third push cancels the pending middle
+# run (fail-safe; re-run its workflow if that ever happens).
 concurrency:
   group: npm-publish
   cancel-in-progress: false
