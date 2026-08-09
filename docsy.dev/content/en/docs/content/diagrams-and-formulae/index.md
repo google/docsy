@@ -309,9 +309,9 @@ sequenceDiagram
 ```
 
 Docsy loads Mermaid from the jsDelivr CDN at page load. By default it loads a
-pinned version, currently {{% param mermaid.version %}}, updated with each
-theme release. To use a different version, specify it in your configuration
-file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+pinned version, currently {{% param mermaid.version %}}, updated with each theme
+release. To use a different version, specify it in your configuration file
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->

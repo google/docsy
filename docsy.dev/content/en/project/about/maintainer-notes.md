@@ -124,11 +124,10 @@ The Mermaid version that Docsy loads by default is pinned in `theme/hugo.yaml`
 `params.mermaid.version`; the [Mermaid partial][mermaid.html] and [diagrams][]
 page both read it live, so bumping that one line during the
 [release-prep audit](#release-prep-audit) is enough. Guarded by
-[test:mermaid-version](#test-suites). Before bumping, check the
-[npm registry](https://www.npmjs.com/package/mermaid) and
-[OSV](https://osv.dev/list?ecosystem=npm&q=mermaid) for advisories affecting the
-target version. Verify that a Mermaid-bearing page (the diagrams page, for
-example) renders with the new pin.
+[test:mermaid-version](#test-suites). Before bumping, check the [npm
+registry][mermaid-npm] and [OSV][] for advisories affecting the target version.
+Verify that a Mermaid-bearing page (the diagrams page, for example) renders with
+the new pin.
 
 An emergency security bump (a Mermaid advisory landing between releases) is a
 manual edit to that same line, made directly on a `release` branch and shipped
@@ -137,9 +136,11 @@ the next regular release; it explicitly bypasses Renovate's minimum release-age
 gate (once that's configured), which exists for routine bumps, not advisory
 response.
 
-[mermaid.html]:
-  https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
+<!-- prettier-ignore-start -->
+[mermaid-npm]: https://www.npmjs.com/package/mermaid
+[mermaid.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+<!-- prettier-ignore-end -->
 
 ## Test suites
 
@@ -784,14 +785,15 @@ To test a Docsy branch or release from a consumer site, for each site:
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
+[osv]: https://osv.dev/list?ecosystem=npm&q=mermaid
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[public]: /project/about/changelog/#public
 [publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>
+[tags]: <{{% param github_repo %}}/tags>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [themes showcase]: https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
 [trusted publishing]: https://docs.npmjs.com/trusted-publishers/
-[public]: /project/about/changelog/#public
-[tags]: <{{% param github_repo %}}/tags>
 <!-- prettier-ignore-end -->
