@@ -74,7 +74,7 @@
     "test:lychee": "node --test 'tests/lychee/**/*.test.mjs'",
     "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.test.mjs",
-    "test:tooling": "node --test scripts/npm-pack.test.mjs scripts/pack-stamp.test.mjs scripts/set-package-version/hugo-yaml.test.mjs scripts/set-package-version/index.test.mjs theme/scripts/gen-favicons/gen-favicons.test.mjs",
+    "test:tooling": "node --test 'scripts/**/*.test.mjs' 'theme/scripts/**/*.test.mjs'",
     "test:website": "npm run -C docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
