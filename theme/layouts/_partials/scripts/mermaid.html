@@ -9,7 +9,7 @@
     {{ with .Err -}}
       {{ errorf "Could not retrieve mermaid script from CDN. Reason: %s." . -}}
     {{ else with .Value -}}
-      {{/* Fetched fine; the browser re-fetches from the CDN, this call only validates the pin exists. */ -}}
+      {{/* Pin exists on the CDN -- at least as of the first fetch: Hugo caches this result, so only a cold cache re-validates. The browser re-fetches from the CDN either way. */ -}}
     {{ else -}}
       {{ errorf "Invalid Mermaid version %s, could not retrieve this version from CDN." $version -}}
     {{ end -}}

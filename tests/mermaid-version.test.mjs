@@ -3,13 +3,17 @@
 //
 // This is the only guard against a regression to a floating version like
 // `latest`: Scorecard-class tooling can't see CDN URLs embedded in an HTML
-// partial, so a linter or dependency scanner won't catch this.
+// partial, so a linter or dependency scanner won't catch this. The file is
+// parsed as YAML, not regex-matched: two adversarial review rounds each
+// produced decoy key shapes that fooled regex extraction while Hugo
+// resolved a different value.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parse } from 'yaml';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -20,20 +24,17 @@ const SEMVER = /^\d+\.\d+\.\d+$/;
 
 function mermaidVersion() {
   const text = fs.readFileSync(path.join(repoRoot, 'theme/hugo.yaml'), 'utf8');
-  // Scope the match to the top-level `params:` block so an unrelated
-  // top-level `mermaid:` key can't be picked up instead; strip optional
-  // quotes so a quoted scalar (`version: "11.16.1"`) isn't misread as
-  // non-semver.
-  const paramsBlock = text.match(/^params:\n((?: +.*\n?)*)/m)?.[1] ?? '';
-  const m = paramsBlock.match(
-    /^\s*mermaid:\s*\n\s+version:\s*['"]?([^'"\s]+)['"]?/m,
+  const version = parse(text)?.params?.mermaid?.version;
+  assert.ok(
+    version !== undefined,
+    'params.mermaid.version is declared in theme/hugo.yaml',
   );
-  assert.ok(m, 'params.mermaid.version is declared in theme/hugo.yaml');
-  return m[1];
+  return version;
 }
 
 test('theme/hugo.yaml pins an exact Mermaid version', () => {
   const version = mermaidVersion();
+  assert.equal(typeof version, 'string', 'params.mermaid.version is a string');
   assert.match(
     version,
     SEMVER,
