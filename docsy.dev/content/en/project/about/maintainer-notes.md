@@ -287,11 +287,10 @@ If not adjust accordingly.
       Release {{% param tdVersion.latest %}} preparation
       ```
 
-    - Create a PR (with version-checks disabled) using the following command
-      that will open a PR-creation page in your browser:
+    - Create a PR using the following command that will open a PR-creation page
+      in your browser:
 
       ```sh
-      export SKIP_VERSION_CHECK=1
       gh pr create --web --title "Release $VERSION preparation" \
         --base $BASE \
         --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
@@ -408,13 +407,6 @@ If not adjust accordingly.
 
       </details>
 
-    - If you have git hooks enabled that auto-update the Docsy package version,
-      disable the hook check for now:
-
-      ```sh
-      export SKIP_VERSION_CHECK=1
-      ```
-
     - Push the tags to the remotes (the release tag, then the theme module tag):
 
       ```console
@@ -432,12 +424,6 @@ If not adjust accordingly.
 
       ```sh
       git ls-remote --tags upstream | grep $REL
-      ```
-
-    - Unset the SKIP_VERSION_CHECK variable when you're done:
-
-      ```sh
-      unset SKIP_VERSION_CHECK
       ```
 
     </details>
@@ -586,13 +572,13 @@ have been successfully deployed, and that at least one other project has been
 successfully tested with the new release, then perform the following actions
 before any further changes are merged into the `main` branch:
 
-1. Update the package version to a dev ID for Docsy and Docsy-example:
+1. Update the package version to the next dev version for Docsy and
+   Docsy-example (Docsy's build IDs are stamped at pack time, not committed;
+   Docsy-example still commits a git-info dev version):
 
    ```console
-   $ npm run -s set:version:git-info
-   ✓ Updated package.json version: 0.14.3 → 0.14.3-dev+003-over-main-cf4f514b
-   ✓ Updated docsy.dev/config/_default/params.yaml version: 0.14.3 → 0.14.3-dev
-   ✓ Updated docsy.dev/config/_default/params.yaml tdBuildId: (none) → 003-over-main-cf4f514b
+   $ npm run -s set:version -- --version 0.14.4-dev
+   ✓ Updated docsy.dev/config/_default/params.yaml dev: v0.14.3 → v0.14.4-dev
    ...
    $ npm run -s set:version:example:git-info
    ...
@@ -711,6 +697,11 @@ To test a Docsy branch or release from a consumer site, for each site:
   semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher
   core (release prep ahead of tagging).
+- `scripts/pack-stamp.mjs`: `prepack`/`postpack` helper for `theme/package.json`
+  that stamps dev tarballs with the packed commit's SHA (`+g<sha8>`) and
+  restores the committed manifest; release and RC versions pack unchanged. An
+  interrupted pack can leave the stamp in the working tree; the next pack
+  self-heals it, but don't commit the stamped version.
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script
   help for usage.
 

@@ -115,6 +115,12 @@ before(() => {
       {
         cwd: pkg.dir,
         encoding: 'utf8',
+        // Lifecycle scripts (LICENSE copy, pack-stamp) must run even under a
+        // user-level ignore-scripts=true, or the pack contract goes untested.
+        // Safe to force: packing a *local directory* installs nothing (a
+        // remote spec would fetch and run prepare), so no third-party script
+        // is reachable; only this repo's own lifecycle commands run.
+        env: { ...process.env, npm_config_ignore_scripts: 'false' },
         // npm is npm.cmd on Windows, and .cmd files require a shell.
         shell: process.platform === 'win32',
       },
@@ -137,7 +143,7 @@ before(() => {
     assert.equal(tar.status, 0, `tar -tzf lists ${name}: ${tar.stderr}`);
     const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);
-    packed.set(name, { tarballPath, entries });
+    packed.set(name, { tarballPath, entries, stdout: pack.stdout });
   }
 });
 
@@ -177,6 +183,76 @@ test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
   assert.ok(
     !fs.existsSync(path.join(PACKAGES['@docsy/theme'].dir, 'LICENSE')),
     'materialized LICENSE is removed after a successful pack',
+  );
+});
+
+// Pack-time build-ID stamping (scripts/pack-stamp.mjs): a bare -dev version
+// gains the packed commit's SHA inside the tarball only.
+test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () => {
+  const { tarballPath } = packed.get('@docsy/theme');
+  const extract = spawnSync(
+    'tar',
+    ['-xzOf', tarballPath, 'package/package.json'],
+    { encoding: 'utf8' },
+  );
+  assert.equal(
+    extract.status,
+    0,
+    `tar extracts the packed manifest: ${extract.stderr}`,
+  );
+  const packedVersion = JSON.parse(extract.stdout).version;
+  const manifestVersion = JSON.parse(
+    fs.readFileSync(
+      path.join(PACKAGES['@docsy/theme'].dir, 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  if (manifestVersion.endsWith('-dev')) {
+    // Expect the actual HEAD SHA, not just any hex suffix; a dirty theme/
+    // tree is marked, so compute the expectation from the same inputs.
+    const git = (...args) =>
+      spawnSync('git', ['-C', repoRoot, ...args], { encoding: 'utf8' }).stdout;
+    const sha = git('rev-parse', '--short=8', 'HEAD').trim();
+    const dirty = git('status', '--porcelain', '--', 'theme/').trim()
+      ? '.dirty'
+      : '';
+    assert.equal(
+      packedVersion,
+      `${manifestVersion}+g${sha}${dirty}`,
+      "packed version carries the packed commit's SHA",
+    );
+  } else {
+    assert.equal(packedVersion, manifestVersion, 'non-dev version packs as-is');
+  }
+});
+
+// Lifecycle diagnostics must stay off stdout: it is npm's result channel
+// (`npm pack --json`, `tarball=$(npm pack --silent)`).
+test('npm pack --silent stdout is exactly the tarball filename', () => {
+  for (const [name] of Object.entries(PACKAGES)) {
+    const { tarballPath, stdout } = packed.get(name);
+    assert.equal(
+      stdout.trim(),
+      path.basename(tarballPath),
+      `${name}: pack stdout is the tarball filename only`,
+    );
+  }
+});
+
+test('@docsy/theme: npm pack restores the manifest and removes the stamp backup', () => {
+  const manifestVersion = JSON.parse(
+    fs.readFileSync(
+      path.join(PACKAGES['@docsy/theme'].dir, 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  assert.ok(
+    !manifestVersion.includes('+'),
+    'committed manifest version carries no build metadata after pack',
+  );
+  assert.ok(
+    !fs.existsSync(path.join(repoRoot, 'tmp', 'pack-stamp')),
+    'pack-stamp backup dir is removed after a successful pack',
   );
 });
 
