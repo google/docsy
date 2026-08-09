@@ -7,6 +7,7 @@ params:
   time_format_default: January 2, 2006
   rss_sections: [blog]
   mermaid:
+    # renovate: datasource=npm depName=mermaid
     version: 11.16.1
 
 outputFormats:

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "timezone": "America/Toronto",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "enabledManagers": ["custom.regex"],
+  "minimumReleaseAge": "3 days",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Version pins annotated with a preceding `renovate: datasource=... depName=...` comment",
+      "managerFilePatterns": [
+        "/^theme/hugo\\.yaml$/",
+        "/^theme/layouts/.+\\.html$/"
+      ],
+      "matchStrings": [
+        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\n]*\\n[^\\n]*?(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)"
+      ]
+    }
+  ]
+}
