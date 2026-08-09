@@ -114,6 +114,24 @@ test('parseArgsAndResolveBuildId defaults to release-strip mode', () => {
   assert.equal(result.silent, false);
 });
 
+// Runs fn with process.exit stubbed to throw; returns the exit code, or
+// undefined if fn returns without exiting.
+function exitCodeOf(fn) {
+  const origExit = process.exit;
+  process.exit = (code) => {
+    throw { exitCode: code };
+  };
+  try {
+    fn();
+    return undefined;
+  } catch (err) {
+    if (err.exitCode === undefined) throw err;
+    return err.exitCode;
+  } finally {
+    process.exit = origExit;
+  }
+}
+
 test('parseArgsAndResolveBuildId rejects invalid build metadata', () => {
   // Whitespace, embedded spaces, '+': not semver build metadata (rationale at
   // the guard in index.mjs).
@@ -123,23 +141,14 @@ test('parseArgsAndResolveBuildId rejects invalid build metadata', () => {
       log() {},
       warn: (...args) => warnCalls.push(args.join(' ')),
     };
-    const origExit = process.exit;
-    process.exit = (code) => {
-      throw { exitCode: code };
-    };
-    try {
-      parseArgsAndResolveBuildId(['--id', bad], { logger });
-      assert.fail(`expected exit for --id ${JSON.stringify(bad)}`);
-    } catch (err) {
-      if (err.exitCode === undefined) throw err;
-      assert.equal(err.exitCode, 1);
-      assert.ok(
-        warnCalls.some((w) => w.includes('build ID')),
-        'reports the invalid build ID',
-      );
-    } finally {
-      process.exit = origExit;
-    }
+    const code = exitCodeOf(() =>
+      parseArgsAndResolveBuildId(['--id', bad], { logger }),
+    );
+    assert.equal(code, 1, `exits for --id ${JSON.stringify(bad)}`);
+    assert.ok(
+      warnCalls.some((w) => w.includes('build ID')),
+      'reports the invalid build ID',
+    );
   }
 });
 
@@ -167,31 +176,21 @@ test('parseArgsAndResolveBuildId maps bare --id to timestamp build ID', () => {
 });
 
 test('parseArgsAndResolveBuildId rejects a hyphen-leading --id value', () => {
-  // Ambiguous between a value and a flag; fail loud rather than pick a side
-  // (the old silent timestamp fallback masked caller mistakes).
+  // Rationale at the --id guard in index.mjs.
   for (const next of ['-abc', '--silent']) {
     const warnCalls = [];
     const logger = {
       log() {},
       warn: (...args) => warnCalls.push(args.join(' ')),
     };
-    const origExit = process.exit;
-    process.exit = (code) => {
-      throw { exitCode: code };
-    };
-    try {
-      parseArgsAndResolveBuildId(['--id', next], { logger });
-      assert.fail(`expected exit for --id ${next}`);
-    } catch (err) {
-      if (err.exitCode === undefined) throw err;
-      assert.equal(err.exitCode, 1);
-      assert.ok(
-        warnCalls.some((w) => w.includes(next)),
-        'names the offending value',
-      );
-    } finally {
-      process.exit = origExit;
-    }
+    const code = exitCodeOf(() =>
+      parseArgsAndResolveBuildId(['--id', next], { logger }),
+    );
+    assert.equal(code, 1, `exits for --id ${next}`);
+    assert.ok(
+      warnCalls.some((w) => w.includes(next)),
+      'names the offending value',
+    );
   }
 });
 
@@ -224,27 +223,12 @@ test('parseArgsAndResolveBuildId reports unknown flag for --config', () => {
       warnCalls.push(args);
     },
   };
-  const exitStub = (code) => {
-    throw { exitCode: code };
-  };
-  const origExit = process.exit;
-  process.exit = exitStub;
-  try {
-    parseArgsAndResolveBuildId(['--config', 'custom/params.yaml'], {
-      logger,
-    });
-    assert.fail('expected process.exit(1) to be called');
-  } catch (err) {
-    if (err.exitCode !== undefined) {
-      assert.equal(err.exitCode, 1);
-      assert.equal(warnCalls.length, 1);
-      assert.equal(warnCalls[0][0], 'Unexpected argument: --config');
-    } else {
-      throw err;
-    }
-  } finally {
-    process.exit = origExit;
-  }
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--config', 'custom/params.yaml'], { logger }),
+  );
+  assert.equal(code, 1);
+  assert.equal(warnCalls.length, 1);
+  assert.equal(warnCalls[0][0], 'Unexpected argument: --config');
 });
 
 test('main syncs secondary manifests even when the root version is current', () => {
