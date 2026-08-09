@@ -133,8 +133,8 @@ An emergency security bump (a Mermaid advisory landing between releases) is a
 manual edit to that same line, made directly on a `release` branch and shipped
 through the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not
 the next regular release; it explicitly bypasses the minimum release-age gate
-that Renovate will enforce for routine bumps, once Renovate is configured for
-this repo (not yet done as of this writing).
+that Renovate will enforce for routine bumps, once configured for this repo (not
+yet, as of this writing).
 
 <!-- prettier-ignore-start -->
 [mermaid-npm]: https://registry.npmjs.org/mermaid
@@ -148,7 +148,7 @@ From the repo root:
 
 | Script                 | Role                                                                                                |
 | ---------------------- | --------------------------------------------------------------------------------------------------- |
-| `test:fixture-site`    | Fast, offline checks over minimal monolingual fixture sites — paths docsy.dev can't cover           |
+| `test:fixture-site`    | Fast, offline checks over minimal monolingual fixture sites: paths docsy.dev can't cover            |
 | `test:hugo-versions`   | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints            |
 | `test:mermaid-version` | Fast, offline check that the [default Mermaid version](#mermaid-version) is pinned exact            |
 | `test:smoke`           | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |

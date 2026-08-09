@@ -179,8 +179,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   `_test:full:pre`/`_test:full:post` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
-  `params.mermaid.version`, guarded by `test:mermaid-version`. See [Default
-  Mermaid version][mermaid-version-notes].
+  `params.mermaid.version`, guarded by `test:mermaid-version`. For details, see
+  [Default Mermaid version][mermaid-version-notes].
 
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703

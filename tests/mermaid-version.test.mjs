@@ -2,11 +2,10 @@
 // maintainer notes, "Default Mermaid version"). Fast and offline.
 //
 // This is the only guard against a regression to a floating version like
-// `latest`: Scorecard-class tooling can't see CDN URLs embedded in an HTML
-// partial, so a linter or dependency scanner won't catch this. The file is
-// parsed as YAML, not regex-matched: two adversarial review rounds each
-// produced decoy key shapes that fooled regex extraction while Hugo
-// resolved a different value.
+// `latest`: dependency scanners can't see CDN URLs embedded in an HTML
+// partial. The file is parsed as YAML, not regex-matched: two adversarial
+// review rounds each produced decoy key shapes that fooled regex extraction
+// while Hugo resolved a different value.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
