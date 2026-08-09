@@ -54,12 +54,13 @@ export function getPackagePath() {
 }
 
 const usageText = `
-Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUILD-ID]] [FILE...]
+Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id BUILD-ID] [FILE...]
 
   Options:
     --help|-h          Show this help message
-    --id [BUILD-ID]    Set build ID metadata to BUILD-ID, if provided; otherwise,
-                       set it to a timestamp-based value. Version is unchanged.
+    --id BUILD-ID      Set build ID metadata to BUILD-ID; 'now' means a
+                       timestamp-based ID. BUILD-ID may not start with '-'.
+                       Version is unchanged.
     --silent|-s        Don't log any messages
     --version|-v VERS  Set version in target files according to VERS
 
@@ -131,7 +132,14 @@ export function main(
   const releaseVersion = getReleaseVersion(newVersion);
   const versionWithoutBuild = removeBuildId(newVersion);
   const hasPreRelease = versionWithoutBuild !== releaseVersion;
-  const leaveLatestUntouched = versionSetExplicitly && hasPreRelease;
+  // --id only adjusts build metadata; deriving `latest` from the dev core
+  // would silently bump it (e.g. v0.16.0 → v0.16.1 while at 0.16.1-dev), and
+  // on a release-core version (the post-release window before the dev bump)
+  // recomputing `dev` would announce a version that doesn't exist yet.
+  const buildIdMode = version === undefined && buildId !== undefined;
+  const leaveLatestUntouched =
+    (versionSetExplicitly && hasPreRelease) || buildIdMode;
+  const leaveDevUntouched = buildIdMode && !hasPreRelease;
 
   const newLatest = releaseVersion.startsWith('v')
     ? releaseVersion
@@ -143,43 +151,51 @@ export function main(
     : nextDevVersion(releaseVersion);
   const newBuildId = nextBuildId ?? '';
 
-  let hugoYamlUpdated = false;
   for (const configPath of configPaths) {
     const hugoYaml = readHugoYamlFn(configPath);
     const currentLatest = hugoYaml.latest ?? '';
     const currentDev = hugoYaml.dev ?? '';
     const currentBuildId = hugoYaml.buildId ?? '';
+    const targetDev = leaveDevUntouched ? currentDev : newDev;
 
     const latestDiffers = newLatest !== currentLatest;
     const devOrBuildIdDiffers =
-      newDev !== currentDev || newBuildId !== currentBuildId;
+      targetDev !== currentDev || newBuildId !== currentBuildId;
     const shouldUpdate = leaveLatestUntouched
       ? devOrBuildIdDiffers
       : latestDiffers || devOrBuildIdDiffers;
 
     if (shouldUpdate) {
       const data = leaveLatestUntouched
-        ? { ...hugoYaml, dev: newDev, buildId: newBuildId }
+        ? { ...hugoYaml, dev: targetDev, buildId: newBuildId }
         : {
             ...hugoYaml,
             latest: newLatest,
-            dev: newDev,
+            dev: targetDev,
             buildId: newBuildId,
           };
-      writeHugoYamlFn(data, configPath);
-      hugoYamlUpdated = true;
+      const appliedKeys = writeHugoYamlFn(data, configPath);
       const configPathRelative = path.relative(cwd, configPath);
+      // Log per key by write outcome, not intent: the line-oriented writer
+      // silently skips keys with no line to land in. An undefined appliedKeys
+      // (injected writer) is treated as all-applied.
+      const logKey = (key, current, next) => {
+        if (current === next) return;
+        if (appliedKeys === undefined || appliedKeys.has(key)) {
+          logger.log?.(
+            `✓ Updated ${configPathRelative} ${key}: ${current || '(none)'} → ${next || '(none)'}`,
+          );
+        } else {
+          logger.warn?.(
+            `WARNING: ${configPathRelative} has no '${key}:' line; ${key} not written`,
+          );
+        }
+      };
       if (!leaveLatestUntouched && latestDiffers) {
-        logger.log?.(
-          `✓ Updated ${configPathRelative} latest: ${currentLatest || '(none)'} → ${newLatest}`,
-        );
+        logKey('latest', currentLatest, newLatest);
       }
-      logger.log?.(
-        `✓ Updated ${configPathRelative} dev: ${currentDev || '(none)'} → ${newDev}`,
-      );
-      logger.log?.(
-        `✓ Updated ${configPathRelative} buildId: ${currentBuildId || '(none)'} → ${newBuildId || '(none)'}`,
-      );
+      logKey('dev', currentDev, targetDev);
+      logKey('buildId', currentBuildId, newBuildId);
     } else if (!silent) {
       const configPathRelative = path.relative(cwd, configPath);
       logger.log?.(
@@ -235,12 +251,18 @@ export function parseArgsAndResolveBuildId(
         usage();
         break;
       case '--id':
-        if (i + 1 >= args.length || args[i + 1].startsWith('-')) {
-          buildId = '';
-        } else {
-          i += 1;
-          buildId = args[i];
+        if (++i >= args.length) {
+          usage(1);
         }
+        if (args[i].startsWith('-')) {
+          // Ambiguous between a value and a flag; fail loud rather than pick
+          // a side.
+          warn?.(
+            `Invalid build ID value: ${JSON.stringify(args[i])} (may not start with '-')`,
+          );
+          process.exit(1);
+        }
+        buildId = args[i] === 'now' ? generateTimestamp() : args[i];
         break;
       case '--silent':
       case '-s':
@@ -263,8 +285,17 @@ export function parseArgsAndResolveBuildId(
     }
   }
 
-  if (version === undefined && buildId === '') {
-    buildId = generateTimestamp();
+  // Semver build metadata is dot-separated alphanumeric-and-hyphen
+  // identifiers; anything else would write an invalid version into
+  // package.json, failing some later npm operation far from the cause.
+  if (
+    buildId !== undefined &&
+    !/^[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*$/.test(buildId)
+  ) {
+    warn?.(
+      `Invalid build ID: ${JSON.stringify(buildId)} (use 'now' for a timestamp ID)`,
+    );
+    process.exit(1);
   }
 
   const resolvedConfigPaths =

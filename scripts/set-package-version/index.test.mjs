@@ -114,26 +114,100 @@ test('parseArgsAndResolveBuildId defaults to release-strip mode', () => {
   assert.equal(result.silent, false);
 });
 
-test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id', ''], {
+// Runs fn with process.exit stubbed to throw; returns the exit code, or
+// undefined if fn returns without exiting.
+function exitCodeOf(fn) {
+  const origExit = process.exit;
+  process.exit = (code) => {
+    throw { exitCode: code };
+  };
+  try {
+    fn();
+    return undefined;
+  } catch (err) {
+    if (err.exitCode === undefined) throw err;
+    return err.exitCode;
+  } finally {
+    process.exit = origExit;
+  }
+}
+
+test('parseArgsAndResolveBuildId rejects invalid build metadata', () => {
+  // Whitespace, embedded spaces, '+': not semver build metadata (rationale at
+  // the guard in index.mjs).
+  for (const bad of ['   ', 'a b', 'x+y']) {
+    const warnCalls = [];
+    const logger = {
+      log() {},
+      warn: (...args) => warnCalls.push(args.join(' ')),
+    };
+    const code = exitCodeOf(() =>
+      parseArgsAndResolveBuildId(['--id', bad], { logger }),
+    );
+    assert.equal(code, 1, `exits for --id ${JSON.stringify(bad)}`);
+    assert.ok(
+      warnCalls.some((w) => w.includes('build ID')),
+      'reports the invalid build ID',
+    );
+  }
+});
+
+test('parseArgsAndResolveBuildId accepts valid build metadata forms', () => {
+  for (const good of ['20260808-1234Z', 'g1234abc', 'a.b-c']) {
+    const result = parseArgsAndResolveBuildId(['--id', good], {
+      logger: nullLogger,
+    });
+    assert.equal(result.buildId, good);
+  }
+});
+
+test('parseArgsAndResolveBuildId maps --id now to a timestamp build ID', () => {
+  const result = parseArgsAndResolveBuildId(['--id', 'now'], {
     logger: nullLogger,
   });
   assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
 });
 
-test('parseArgsAndResolveBuildId maps bare --id to timestamp build ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id'], {
-    logger: nullLogger,
-  });
-  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
+test('parseArgsAndResolveBuildId rejects an empty --id value', () => {
+  const warnCalls = [];
+  const logger = {
+    log() {},
+    warn: (...args) => warnCalls.push(args.join(' ')),
+  };
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--id', ''], { logger }),
+  );
+  assert.equal(code, 1);
+  assert.ok(
+    warnCalls.some((w) => w.includes('now')),
+    'points at the now keyword',
+  );
 });
 
-test('parseArgsAndResolveBuildId treats --id followed by flag as omitted BUILD-ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id', '--silent'], {
-    logger: nullLogger,
-  });
-  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
-  assert.equal(result.silent, true);
+test('parseArgsAndResolveBuildId rejects a bare trailing --id', () => {
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--id'], { logger: nullLogger }),
+  );
+  assert.equal(code, 1);
+});
+
+test('parseArgsAndResolveBuildId rejects a hyphen-leading --id value', () => {
+  // Rationale at the --id guard in index.mjs.
+  for (const next of ['-abc', '--silent']) {
+    const warnCalls = [];
+    const logger = {
+      log() {},
+      warn: (...args) => warnCalls.push(args.join(' ')),
+    };
+    const code = exitCodeOf(() =>
+      parseArgsAndResolveBuildId(['--id', next], { logger }),
+    );
+    assert.equal(code, 1, `exits for --id ${next}`);
+    assert.ok(
+      warnCalls.some((w) => w.includes(next)),
+      'names the offending value',
+    );
+  }
 });
 
 test('parseArgsAndResolveBuildId supports short -v and --version precedence', () => {
@@ -165,27 +239,12 @@ test('parseArgsAndResolveBuildId reports unknown flag for --config', () => {
       warnCalls.push(args);
     },
   };
-  const exitStub = (code) => {
-    throw { exitCode: code };
-  };
-  const origExit = process.exit;
-  process.exit = exitStub;
-  try {
-    parseArgsAndResolveBuildId(['--config', 'custom/params.yaml'], {
-      logger,
-    });
-    assert.fail('expected process.exit(1) to be called');
-  } catch (err) {
-    if (err.exitCode !== undefined) {
-      assert.equal(err.exitCode, 1);
-      assert.equal(warnCalls.length, 1);
-      assert.equal(warnCalls[0][0], 'Unexpected argument: --config');
-    } else {
-      throw err;
-    }
-  } finally {
-    process.exit = origExit;
-  }
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--config', 'custom/params.yaml'], { logger }),
+  );
+  assert.equal(code, 1);
+  assert.equal(warnCalls.length, 1);
+  assert.equal(warnCalls[0][0], 'Unexpected argument: --config');
 });
 
 test('main syncs secondary manifests even when the root version is current', () => {
@@ -318,12 +377,71 @@ test('main --id sets build metadata and preserves pre-release', () => {
   assert.equal(pkg.version, '1.2.3-dev+custom-build');
   assert.deepEqual(writtenPkg, { version: '1.2.3-dev+custom-build' });
   assert.equal(writtenHugoYaml.latest, 'v1.2.3');
-  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.3-dev');
   assert.equal(writtenHugoYaml.buildId, 'custom-build');
   assert.equal(newVersion, '1.2.3-dev+custom-build');
 });
 
-test('main --id "" generates timestamp build metadata', () => {
+test('main --id leaves latest untouched when its core differs from the version', () => {
+  const pkg = { version: '1.2.4-dev' };
+  const hugoYaml = { latest: 'v1.2.3', dev: 'v1.2.4-dev', buildId: '' };
+  const { newVersion, writtenHugoYaml } = runMainWithMemory(
+    ['--id', 'gabcd1234'],
+    { pkg, hugoYaml },
+  );
+
+  assert.equal(newVersion, '1.2.4-dev+gabcd1234');
+  assert.equal(writtenHugoYaml.latest, 'v1.2.3');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.buildId, 'gabcd1234');
+});
+
+test('main --id warns when the config has no buildId line', () => {
+  withTempDir((dir) => {
+    const configPath = path.join(dir, 'params.yaml');
+    fs.writeFileSync(
+      configPath,
+      'tdVersion:\n  latest: &tdLatestVers v1.2.3\n  dev: &tdDevVers v1.2.4-dev\n',
+    );
+    const logs = [];
+    const warns = [];
+    const logger = {
+      log: (...args) => logs.push(args.join(' ')),
+      warn: (...args) => warns.push(args.join(' ')),
+    };
+    main(['--id', 'gabc1234', configPath], {
+      logger,
+      readPackageJson: () => ({ version: '1.2.4-dev' }),
+      writePackageJson: () => {},
+      syncManifests: () => [],
+      syncLocks: () => [],
+    });
+    assert.ok(
+      warns.some((w) => w.includes('buildId')),
+      'warns that buildId was not written',
+    );
+    assert.ok(
+      !logs.some((l) => l.includes('buildId')),
+      'success log omits the unwritten buildId',
+    );
+  });
+});
+
+test('main --id on a release-core version leaves latest and dev untouched', () => {
+  const pkg = { version: '1.2.4' };
+  const hugoYaml = { latest: 'v1.2.3', dev: 'v1.2.4-dev', buildId: '' };
+  const { newVersion, writtenHugoYaml } = runMainWithMemory(
+    ['--id', 'g12345678'],
+    { pkg, hugoYaml },
+  );
+
+  assert.equal(newVersion, '1.2.4+g12345678');
+  assert.equal(writtenHugoYaml.latest, 'v1.2.3');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.buildId, 'g12345678');
+});
+
+test('main --id now generates timestamp build metadata', () => {
   const pkg = { version: '1.2.3-dev+some-build' };
   const hugoYaml = {
     latest: 'v1.2.3',
@@ -331,14 +449,14 @@ test('main --id "" generates timestamp build metadata', () => {
     buildId: 'some-build',
   };
   const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
-    ['--id', ''],
+    ['--id', 'now'],
     { pkg, hugoYaml },
   );
 
   assert.match(newVersion, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.match(writtenPkg.version, /^1\.2\.3-dev\+\d{8}-\d{4}Z$/);
   assert.equal(writtenHugoYaml.latest, 'v1.2.3');
-  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.3-dev');
   assert.match(writtenHugoYaml.buildId, /^\d{8}-\d{4}Z$/);
 });
 

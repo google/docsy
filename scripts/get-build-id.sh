@@ -2,7 +2,7 @@
 #
 # Build ID for dev versions: next patch after latest semver tag on main, plus
 # commit offset and SHA. If package.json already declares a higher X.Y.Z core
-# (e.g. 0.15.0-dev during release prep), that core is kept so set:version:git-info
+# (e.g. 0.15.0-dev during release prep), that core is kept so version stamping
 # does not downgrade semver.
 #
 # Example:

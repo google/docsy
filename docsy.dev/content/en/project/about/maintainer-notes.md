@@ -118,6 +118,18 @@ it, run:
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
 
+### Default Mermaid version {#mermaid-version}
+
+The Mermaid version that Docsy loads by default is pinned in the
+`theme/layouts/_partials/scripts/mermaid.html` partial (sites override it via
+`params.mermaid.version`). No script or automation updates the pin yet: bump it
+to the latest Mermaid stable during the
+[release-prep audit](#release-prep-audit), along with the [diagrams][] page,
+which states the pinned version. Verify that a Mermaid-bearing page (the
+diagrams page, for example) renders with the new pin.
+
+[diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+
 ## Test suites
 
 From the repo root:
@@ -173,6 +185,10 @@ For each PR/commit in `git log v<prev>..main`:
 4. Be especially alert to: new/renamed params, partials, shortcodes, layouts,
    CSS classes, i18n keys, default-behavior shifts, and changes to the version
    menu, navigation, or other rendered output.
+
+Also check pinned script dependencies for drift: bump the
+[default Mermaid version](#mermaid-version) to the latest stable as part of the
+prep PR.
 
 Capture the audit as a working document and summarize its findings (the
 classifications and where each item is covered) in the release-prep PR
@@ -271,11 +287,10 @@ If not adjust accordingly.
       Release {{% param tdVersion.latest %}} preparation
       ```
 
-    - Create a PR (with version-checks disabled) using the following command
-      that will open a PR-creation page in your browser:
+    - Create a PR using the following command that will open a PR-creation page
+      in your browser:
 
       ```sh
-      export SKIP_VERSION_CHECK=1
       gh pr create --web --title "Release $VERSION preparation" \
         --base $BASE \
         --body "- Contributes to #<ADD-RELEASE-PREP-ISSUE-HERE>"
@@ -392,13 +407,6 @@ If not adjust accordingly.
 
       </details>
 
-    - If you have git hooks enabled that auto-update the Docsy package version,
-      disable the hook check for now:
-
-      ```sh
-      export SKIP_VERSION_CHECK=1
-      ```
-
     - Push the tags to the remotes (the release tag, then the theme module tag):
 
       ```console
@@ -416,12 +424,6 @@ If not adjust accordingly.
 
       ```sh
       git ls-remote --tags upstream | grep $REL
-      ```
-
-    - Unset the SKIP_VERSION_CHECK variable when you're done:
-
-      ```sh
-      unset SKIP_VERSION_CHECK
       ```
 
     </details>
@@ -445,14 +447,63 @@ If not adjust accordingly.
 
     </details>
 
-15. **Publish the theme package**:
-    - Until [trusted publishing][] is adopted, authenticate for a narrow publish
-      window only: `npm login` right before publishing, `npm logout` right after
-      (whether or not publishing succeeded). If logout fails, revoke the access
-      token from your npm account settings.
-    - Publish to the npm registry from `theme/` at the tagged release commit.
-    - Verify the published version.
-    - Verify that the `latest` and `next` dist-tags point at it.
+15. **Verify the npm publish**. Pushing the release tag to `upstream` triggers
+    the [publish workflow][], which publishes `@docsy/theme` from the tagged
+    commit through npm [trusted publishing][] (OIDC; no npm token involved) once
+    a maintainer approves the run (the `npm-publish` environment). The workflow
+    only publishes tags on `main`'s history: a patch release tagged on the
+    `release` branch needs the workflow's ancestry check deliberately widened
+    first.
+    - **Before approving** the waiting `npm-publish` deployment. The guards
+      re-verify content and registry order mechanically (an out-of-order or
+      inconsistent run fails instead of publishing), and the approval prompt
+      only appears after the pack job succeeded, so approval owns **intent**.
+      Note that on tag pushes the workflow definition itself comes from the
+      tagged commit, so for an unexpected tag don't trust the run's green
+      checks; the two checks below are the real barrier:
+      - the run's commit is the release commit you drove (the tip of `$BASE` at
+        tag time; an unrelated merge landing since is fine), and the tag actor
+        is the release driver you expect; anything else: reject and ask;
+      - the run is `publish.yaml` on `google/docsy` (another workflow could
+        reference the same environment).
+    - Check that the workflow run succeeded and that the registry version
+      matches the tag:
+
+      ```sh
+      npm view @docsy/theme version dist-tags
+      ```
+
+    - Re-point the `next` dist-tag at the new stable (dist-tags never move on
+      their own, and `next` must stay `>= latest`). OIDC covers only the publish
+      itself, so run this inside a narrow auth window (login/logout, next
+      bullet), then re-verify the dist-tags:
+
+      ```sh
+      npm dist-tag add @docsy/theme@${REL#v} next
+      ```
+
+    - **Manual publishes** (prereleases only): the workflow triggers only on
+      stable `vX.Y.Z` tags, so prereleases always publish manually. Publish from
+      `theme/` inside a narrow auth window: run `npm login` right before and
+      `npm logout` right after, whether or not publishing succeeded; if logout
+      fails, revoke the access token from your npm account settings:
+
+      ```sh
+      npm publish --ignore-scripts=false --tag next
+      ```
+
+      `--ignore-scripts=false` is required: the theme `prepack` must run (it
+      materializes the LICENSE), even under a script-disabling npm config. Run
+      manual npm commands from within the repo: the root `.npmrc` pins the
+      `@docsy` scope registry against local overrides.
+
+    - **If the CI publish is broken for a stable**, prefer fixing CI over a
+      laptop publish: a manual publish carries no provenance attestation. As a
+      deliberate exception, mirror the workflow's release choices exactly:
+
+      ```sh
+      npm publish --ignore-scripts=false --access public --tag latest
+      ```
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 
@@ -570,13 +621,13 @@ have been successfully deployed, and that at least one other project has been
 successfully tested with the new release, then perform the following actions
 before any further changes are merged into the `main` branch:
 
-1. Update the package version to a dev ID for Docsy and Docsy-example:
+1. Update the package version to the next dev version for Docsy and
+   Docsy-example (Docsy's build IDs are stamped at pack time, not committed;
+   Docsy-example still commits a git-info dev version):
 
    ```console
-   $ npm run -s set:version:git-info
-   ✓ Updated package.json version: 0.14.3 → 0.14.3-dev+003-over-main-cf4f514b
-   ✓ Updated docsy.dev/config/_default/params.yaml version: 0.14.3 → 0.14.3-dev
-   ✓ Updated docsy.dev/config/_default/params.yaml tdBuildId: (none) → 003-over-main-cf4f514b
+   $ npm run -s set:version -- --version 0.14.4-dev
+   ✓ Updated docsy.dev/config/_default/params.yaml dev: v0.14.3 → v0.14.4-dev
    ...
    $ npm run -s set:version:example:git-info
    ...
@@ -695,6 +746,11 @@ To test a Docsy branch or release from a consumer site, for each site:
   semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher
   core (release prep ahead of tagging).
+- `scripts/pack-stamp.mjs`: `prepack`/`postpack` helper for `theme/package.json`
+  that stamps dev tarballs with the packed commit's SHA (`+g<sha8>`) and
+  restores the committed manifest; release and RC versions pack unchanged. An
+  interrupted pack can leave the stamp in the working tree; the next pack
+  self-heals it, but don't commit the stamped version.
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script
   help for usage.
 
@@ -718,6 +774,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>
 [theme/hugo.yaml]: <{{% param github_repo %}}/blob/main/theme/hugo.yaml>
 [theme/package.json]: <{{% param github_repo %}}/blob/main/theme/package.json>

@@ -18,6 +18,65 @@ test('parseParamsVersion extracts version info', () => {
   assert.equal(result.buildId, '018-over-main-adb0e595');
 });
 
+// Unmarked buildId lines under tdVersion (rationale: parseParamsVersion in
+// hugo-yaml.mjs).
+const fixtureUnmarkedBuildId = `tdVersion:
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+`;
+
+test('parseParamsVersion reads an unmarked buildId line', () => {
+  const result = parseParamsVersion(
+    fixtureUnmarkedBuildId.replace("''", 'g1234abcd'),
+  );
+  assert.equal(result.buildId, 'g1234abcd');
+});
+
+test('updateYamlWithVersions updates an unmarked buildId line', () => {
+  const updated = updateYamlWithVersions(fixtureUnmarkedBuildId, {
+    latest: 'v0.16.0',
+    dev: 'v0.16.1-dev',
+    buildId: 'g1234abcd',
+  });
+  assert.match(updated, /buildId: g1234abcd/);
+});
+
+test('updateYamlWithVersions leaves non-tdVersion buildId keys unchanged', () => {
+  const fixture = `buildId: leave-me
+other:
+  buildId: me-too
+tdVersion:
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+`;
+  const updated = updateYamlWithVersions(fixture, {
+    latest: 'v0.16.0',
+    dev: 'v0.16.1-dev',
+    buildId: 'g1234abcd',
+  });
+  assert.match(updated, /^buildId: leave-me$/m);
+  assert.match(updated, /^ {2}buildId: me-too$/m);
+  assert.match(updated, /^ {2}buildId: g1234abcd$/m);
+});
+
+test('updateYamlWithVersions counts an already-correct params.version scalar as applied', () => {
+  const fixture = `params:
+  version: 0.16.1-dev
+`;
+  const appliedKeys = new Set();
+  updateYamlWithVersions(
+    fixture,
+    { latest: 'v0.16.0', dev: 'v0.16.1-dev', buildId: '' },
+    appliedKeys,
+  );
+  assert.ok(
+    appliedKeys.has('dev'),
+    'unchanged scalar still counts as a dev landing line',
+  );
+});
+
 const expectedVers_basic = `
   latest: &tdLatestVers v0.14.4
   dev: v0.14.5-dev-abc # tdDevVers
