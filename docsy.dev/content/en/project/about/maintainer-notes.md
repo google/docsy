@@ -451,14 +451,14 @@ If not adjust accordingly.
     the [publish workflow][], which publishes `@docsy/theme` from the tagged
     commit through npm [trusted publishing][] (OIDC; no npm token involved) once
     a maintainer approves the run (the `npm-publish` environment).
-    - **Before approving** the waiting `npm-publish` deployment, verify:
-      - the tag points at the intended release commit on `$BASE`;
-      - the run is `publish.yaml` on `google/docsy`, triggered by that tag;
-      - the pack job is green and its log shows the expected version;
-      - the version is above the registry's current `latest` and no other
-        publish run is pending (runs queue one at a time, and a publish-job
-        guard rejects a candidate below the registry's `latest`, so an
-        out-of-order approval fails rather than regressing `latest`).
+    - **Before approving** the waiting `npm-publish` deployment. The guards
+      re-verify content and registry order mechanically (an out-of-order or
+      inconsistent run fails instead of publishing), and the approval prompt
+      only appears after the pack job succeeded, so approval owns **intent**:
+      - the run's commit is the tip of `$BASE`, and the tag actor is the release
+        driver you expect; anything else: reject and ask;
+      - the run is `publish.yaml` on `google/docsy` (another workflow could
+        reference the same environment).
     - Check that the workflow run succeeded and that the registry version
       matches the tag:
 
