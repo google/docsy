@@ -151,8 +151,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
-  `npm run install:theme-deps`. Docsy's packages no longer declare npm install
-  hooks, so installs behave the same with or without `--ignore-scripts`
+  `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
+  run it too, from `node_modules/docsy`. Docsy's packages no longer declare npm
+  install hooks, so installs behave the same with or without `--ignore-scripts`
   ([#2712][]).
 
 **New**:
