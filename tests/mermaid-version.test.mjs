@@ -52,15 +52,19 @@ test('the Mermaid partial takes its version from the config param alone', () => 
     path.join(repoRoot, 'theme/layouts/_partials/scripts/mermaid.html'),
     'utf8',
   );
+  // The read is anchored at the expression's front: nothing can wrap the
+  // param (e.g. a call-form `default`) without breaking this match.
   assert.match(
     partial,
-    /\$version :=.*\.Site\.Params\.mermaid\.version/,
-    'the partial reads params.mermaid.version',
+    /\$version := \.Site\.Params\.mermaid\.version \| string \| strings\.TrimSpace/,
+    'the partial reads params.mermaid.version bare, first in its pipeline',
   );
+  // Both `| default` (pipe form) and `default "x" .Site...` (call form);
+  // the argument shape keeps prose mentions of "default" out of scope.
   assert.doesNotMatch(
     partial,
-    /\|\s*default\b/,
-    'the version read has no template-level default fallback',
+    /\bdefault\s+["'`([\d$.]/,
+    'the version read has no default fallback, pipe or call form',
   );
   assert.match(
     partial,
