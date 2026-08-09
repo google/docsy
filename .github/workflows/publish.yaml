@@ -47,8 +47,9 @@ jobs:
 
       - name: 'Sanity check: tag commit is on a release branch'
         # The guards check the tag's own content for consistency; this pins
-        # the tagged commit to reviewed history (main, or release for patch
-        # releases), so a tag on an unmerged commit fails before packing.
+        # the tagged commit to main/release history (reviewed history only if
+        # those branches are push-protected: owner-checklist gates), so a tag
+        # on an unmerged commit fails before packing.
         run: >-
           git merge-base --is-ancestor HEAD origin/main || git merge-base
           --is-ancestor HEAD origin/release
@@ -85,6 +86,8 @@ jobs:
     # self-guarding if the job wiring ever changes.
     if: github.repository == 'google/docsy'
     runs-on: ubuntu-latest
+    # Bound the privileged (id-token) window; normal runs take ~1 minute.
+    timeout-minutes: 15
     # Approval boundary: publishes wait on this environment's required
     # reviewers, and the npmjs trusted-publisher registration binds to it.
     environment: npm-publish
