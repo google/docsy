@@ -14,43 +14,74 @@ const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
-const manifestPath = path.join(repoRoot, 'theme', 'package.json');
-const backupPath = path.join(repoRoot, 'tmp', 'pack-stamp', 'package.json');
 
-function restoreBackup() {
-  if (!fs.existsSync(backupPath)) return false;
-  fs.copyFileSync(backupPath, manifestPath);
-  fs.rmSync(path.dirname(backupPath), { recursive: true, force: true });
-  return true;
+const defaults = {
+  manifestPath: path.join(repoRoot, 'theme', 'package.json'),
+  backupPath: path.join(repoRoot, 'tmp', 'pack-stamp', 'package.json'),
+  getSha: () =>
+    execFileSync('git', ['-C', repoRoot, 'rev-parse', '--short=8', 'HEAD'], {
+      encoding: 'utf8',
+    }).trim(),
+  logger: console,
+};
+
+const strandedStampRegex = /^(.*-dev)\+g[0-9a-f]{7,8}$/;
+
+export function packStamp(mode, opts = {}) {
+  const { manifestPath, backupPath, getSha, logger } = {
+    ...defaults,
+    ...opts,
+  };
+  const readManifest = () => JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const writeManifest = (manifest) =>
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  const removeBackup = () =>
+    fs.rmSync(path.dirname(backupPath), { recursive: true, force: true });
+
+  if (mode === 'pre') {
+    const manifest = readManifest();
+    // Self-heal after an interrupted pack (postpack skipped). The manifest is
+    // authoritative: strip a stranded stamp from it directly, and discard any
+    // leftover backup rather than restoring it -- a stale backup could
+    // predate the committed version.
+    const stranded = manifest.version.match(strandedStampRegex);
+    if (stranded) {
+      manifest.version = stranded[1];
+      writeManifest(manifest);
+      logger.warn('pack-stamp: stripped stamp left by an interrupted pack');
+    }
+    if (fs.existsSync(backupPath)) {
+      removeBackup();
+      logger.warn('pack-stamp: discarded leftover backup');
+    }
+    if (!manifest.version.endsWith('-dev')) return;
+    let sha;
+    try {
+      sha = getSha();
+    } catch (err) {
+      logger.warn(`pack-stamp: no git HEAD, packing as-is (${err.message})`);
+      return;
+    }
+    fs.mkdirSync(path.dirname(backupPath), { recursive: true });
+    fs.copyFileSync(manifestPath, backupPath);
+    manifest.version = `${manifest.version}+g${sha}`;
+    writeManifest(manifest);
+    logger.log(`pack-stamp: packing as version ${manifest.version}`);
+  } else if (mode === 'post') {
+    if (fs.existsSync(backupPath)) {
+      fs.copyFileSync(backupPath, manifestPath);
+      removeBackup();
+    }
+  } else {
+    throw new Error('Usage: node scripts/pack-stamp.mjs pre|post');
+  }
 }
 
-const mode = process.argv[2];
-if (mode === 'pre') {
-  // A failed pack skips postpack; self-heal the stranded manifest here.
-  if (restoreBackup()) {
-    console.warn('pack-stamp: restored manifest left by an interrupted pack');
-  }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-  if (!manifest.version.endsWith('-dev')) process.exit(0);
-  let sha;
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   try {
-    sha = execFileSync(
-      'git',
-      ['-C', repoRoot, 'rev-parse', '--short=8', 'HEAD'],
-      { encoding: 'utf8' },
-    ).trim();
+    packStamp(process.argv[2]);
   } catch (err) {
-    console.warn(`pack-stamp: no git HEAD, packing as-is (${err.message})`);
-    process.exit(0);
+    console.error(err.message);
+    process.exit(1);
   }
-  fs.mkdirSync(path.dirname(backupPath), { recursive: true });
-  fs.copyFileSync(manifestPath, backupPath);
-  manifest.version = `${manifest.version}+g${sha}`;
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  console.log(`pack-stamp: packing as version ${manifest.version}`);
-} else if (mode === 'post') {
-  restoreBackup();
-} else {
-  console.error('Usage: node scripts/pack-stamp.mjs pre|post');
-  process.exit(1);
 }

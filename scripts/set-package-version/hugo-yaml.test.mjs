@@ -18,9 +18,10 @@ test('parseParamsVersion extracts version info', () => {
   assert.equal(result.buildId, '018-over-main-adb0e595');
 });
 
-// buildId is matched by its key name alone -- no tdBuildId anchor or comment
-// marker needed (unlike latest/dev, whose names are too common).
-const fixtureUnmarkedBuildId = `
+// buildId is matched by its key name alone when it sits under tdVersion --
+// no tdBuildId anchor or comment marker needed (unlike latest/dev, whose
+// names are too common to match unmarked).
+const fixtureUnmarkedBuildId = `tdVersion:
   latest: &tdLatestVers v0.16.0
   dev: &tdDevVers v0.16.1-dev
   buildId: ''
@@ -40,6 +41,41 @@ test('updateYamlWithVersions updates an unmarked buildId line', () => {
     buildId: 'g1234abcd',
   });
   assert.match(updated, /buildId: g1234abcd/);
+});
+
+test('updateYamlWithVersions leaves non-tdVersion buildId keys unchanged', () => {
+  const fixture = `buildId: leave-me
+other:
+  buildId: me-too
+tdVersion:
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+`;
+  const updated = updateYamlWithVersions(fixture, {
+    latest: 'v0.16.0',
+    dev: 'v0.16.1-dev',
+    buildId: 'g1234abcd',
+  });
+  assert.match(updated, /^buildId: leave-me$/m);
+  assert.match(updated, /^ {2}buildId: me-too$/m);
+  assert.match(updated, /^ {2}buildId: g1234abcd$/m);
+});
+
+test('updateYamlWithVersions counts an already-correct params.version scalar as applied', () => {
+  const fixture = `params:
+  version: 0.16.1-dev
+`;
+  const appliedKeys = new Set();
+  updateYamlWithVersions(
+    fixture,
+    { latest: 'v0.16.0', dev: 'v0.16.1-dev', buildId: '' },
+    appliedKeys,
+  );
+  assert.ok(
+    appliedKeys.has('dev'),
+    'unchanged scalar still counts as a dev landing line',
+  );
 });
 
 const expectedVers_basic = `

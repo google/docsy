@@ -28,6 +28,12 @@ function isBuildIdLine(line) {
   return versionKeysLineRegex.exec(line)?.[2] === 'buildId';
 }
 
+// The unmarked-buildId match is path-gated to tdVersion.buildId so unrelated
+// buildId keys elsewhere in a config are left alone.
+function isTdBuildIdPath(yamlPath) {
+  return yamlPath.at(-1) === 'buildId' && yamlPath.at(-2) === 'tdVersion';
+}
+
 /**
  * @typedef {Object} VersionInfo
  * @property {string} [latest]
@@ -43,14 +49,17 @@ function isBuildIdLine(line) {
  */
 export function parseParamsVersion(yamlConfig) {
   const result = {};
+  const yamlPathStack = [];
   for (const line of yamlConfig.split('\n')) {
+    const yamlPath = yamlPathForLine(line, yamlPathStack);
     // Match version IDs either as YAML aliases or in a comment
     // (actually, anywhere in the line):
     //   latest: &tdLatestVers v0.14.3
     //   dev: 0.14.4-dev # tdDevVers
-    // buildId needs no marker: its key name is distinctive on its own
+    // buildId needs no marker: its key name plus the tdVersion path suffices
     // (latest/dev are too common to match unmarked).
-    if (!line.match(versionIdsLineRegex) && !isBuildIdLine(line)) continue;
+    const unmarkedBuildId = isBuildIdLine(line) && isTdBuildIdPath(yamlPath);
+    if (!line.match(versionIdsLineRegex) && !unmarkedBuildId) continue;
 
     const match = line.match(versionKeysLineRegex);
     if (!match) continue;
@@ -89,8 +98,10 @@ export function devAsParamsScalar(dev) {
  * @param {{ latest?: string, dev?: string, buildId?: string }} data
  * @returns {string|null} updated line, original line if td-handled but unchanged, or null if not td-managed
  */
-function applyTdVersionLine(line, data) {
-  if (!line.match(versionIdsLineRegex) && !isBuildIdLine(line)) return null;
+function applyTdVersionLine(line, data, yamlPath) {
+  const unmarkedBuildId =
+    yamlPath !== undefined && isBuildIdLine(line) && isTdBuildIdPath(yamlPath);
+  if (!line.match(versionIdsLineRegex) && !unmarkedBuildId) return null;
   const match = line.match(versionKeysLineRegex);
   if (!match) return line;
   const [, indentation, key, rawValueToken] = match;
@@ -133,7 +144,8 @@ function applyParamsScalarVersionLine(line, yamlPath, dev) {
   if (!/^[vV]?\d+\.\d+\.\d/.test(unquoted)) return null;
 
   const next = `${m[1]}version: ${scalar}${comment}`;
-  return next === line ? null : next;
+  // An already-correct scalar still counts as a landing line for `dev`.
+  return next;
 }
 
 /**
@@ -213,7 +225,7 @@ export function updateYamlWithVersions(
     .split('\n')
     .map((line) => {
       const yamlPath = yamlPathForLine(line, yamlPathStack);
-      const tdLine = applyTdVersionLine(line, data);
+      const tdLine = applyTdVersionLine(line, data, yamlPath);
       if (tdLine !== null) {
         const key = versionKeysLineRegex.exec(line)?.[2];
         if (key && VERSION_KEYS.includes(key)) appliedKeys?.add(key);
