@@ -9,7 +9,7 @@
 #
 # Two jobs split the concerns: pack guards and builds the tarball without the
 # OIDC grant; publish holds the grant and runs no lifecycle scripts
-# (publishing a tarball, unlike a directory, executes none) -- its checkout
+# (publishing a tarball, unlike a directory, executes none); its checkout
 # only feeds setup-node's .nvmrc read. Neither job installs dependencies.
 
 name: publish
