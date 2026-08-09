@@ -18,6 +18,30 @@ test('parseParamsVersion extracts version info', () => {
   assert.equal(result.buildId, '018-over-main-adb0e595');
 });
 
+// buildId is matched by its key name alone -- no tdBuildId anchor or comment
+// marker needed (unlike latest/dev, whose names are too common).
+const fixtureUnmarkedBuildId = `
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+`;
+
+test('parseParamsVersion reads an unmarked buildId line', () => {
+  const result = parseParamsVersion(
+    fixtureUnmarkedBuildId.replace("''", 'g1234abcd'),
+  );
+  assert.equal(result.buildId, 'g1234abcd');
+});
+
+test('updateYamlWithVersions updates an unmarked buildId line', () => {
+  const updated = updateYamlWithVersions(fixtureUnmarkedBuildId, {
+    latest: 'v0.16.0',
+    dev: 'v0.16.1-dev',
+    buildId: 'g1234abcd',
+  });
+  assert.match(updated, /buildId: g1234abcd/);
+});
+
 const expectedVers_basic = `
   latest: &tdLatestVers v0.14.4
   dev: v0.14.5-dev-abc # tdDevVers

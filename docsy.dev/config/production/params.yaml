@@ -3,7 +3,7 @@
 tdVersion:
   latest: &tdLatestVers v0.16.0
   dev: &tdDevVers v0.16.1-dev
-  buildId: &tdBuildId ''
+  buildId: ''
 
 version: *tdLatestVers
 version_menu: *tdLatestVers

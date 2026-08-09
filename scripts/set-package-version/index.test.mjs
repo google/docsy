@@ -337,6 +337,37 @@ test('main --id leaves latest untouched when its core differs from the version',
   assert.equal(writtenHugoYaml.buildId, 'gabcd1234');
 });
 
+test('main --id warns when the config has no buildId line', () => {
+  withTempDir((dir) => {
+    const configPath = path.join(dir, 'params.yaml');
+    fs.writeFileSync(
+      configPath,
+      'tdVersion:\n  latest: &tdLatestVers v1.2.3\n  dev: &tdDevVers v1.2.4-dev\n',
+    );
+    const logs = [];
+    const warns = [];
+    const logger = {
+      log: (...args) => logs.push(args.join(' ')),
+      warn: (...args) => warns.push(args.join(' ')),
+    };
+    main(['--id', 'gabc1234', configPath], {
+      logger,
+      readPackageJson: () => ({ version: '1.2.4-dev' }),
+      writePackageJson: () => {},
+      syncManifests: () => [],
+      syncLocks: () => [],
+    });
+    assert.ok(
+      warns.some((w) => w.includes('buildId')),
+      'warns that buildId was not written',
+    );
+    assert.ok(
+      !logs.some((l) => l.includes('buildId')),
+      'success log omits the unwritten buildId',
+    );
+  });
+});
+
 test('main --id "" generates timestamp build metadata', () => {
   const pkg = { version: '1.2.3-dev+some-build' };
   const hugoYaml = {

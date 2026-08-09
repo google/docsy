@@ -24,6 +24,10 @@ const versionKeysLineRegex = new RegExp(
 const versionIdsLineRegex = new RegExp(`(${VERSION_IDS.join('|')})`);
 const mappingKeyLineRegex = /^(\s*)([A-Za-z_][\w-]*):(?:\s|$)/;
 
+function isBuildIdLine(line) {
+  return versionKeysLineRegex.exec(line)?.[2] === 'buildId';
+}
+
 /**
  * @typedef {Object} VersionInfo
  * @property {string} [latest]
@@ -44,7 +48,9 @@ export function parseParamsVersion(yamlConfig) {
     // (actually, anywhere in the line):
     //   latest: &tdLatestVers v0.14.3
     //   dev: 0.14.4-dev # tdDevVers
-    if (!line.match(versionIdsLineRegex)) continue;
+    // buildId needs no marker: its key name is distinctive on its own
+    // (latest/dev are too common to match unmarked).
+    if (!line.match(versionIdsLineRegex) && !isBuildIdLine(line)) continue;
 
     const match = line.match(versionKeysLineRegex);
     if (!match) continue;
@@ -84,7 +90,7 @@ export function devAsParamsScalar(dev) {
  * @returns {string|null} updated line, original line if td-handled but unchanged, or null if not td-managed
  */
 function applyTdVersionLine(line, data) {
-  if (!line.match(versionIdsLineRegex)) return null;
+  if (!line.match(versionIdsLineRegex) && !isBuildIdLine(line)) return null;
   const match = line.match(versionKeysLineRegex);
   if (!match) return line;
   const [, indentation, key, rawValueToken] = match;
@@ -174,11 +180,14 @@ export function readHugoYaml(filePath) {
  *
  * @param {VersionInfo} versionInfo
  * @param {string} filePath
+ * @returns {Set<string>} version keys that had a line to land in
  */
 export function writeHugoYaml(versionInfo, filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const newContent = updateYamlWithVersions(content, versionInfo);
+  const appliedKeys = new Set();
+  const newContent = updateYamlWithVersions(content, versionInfo, appliedKeys);
   fs.writeFileSync(filePath, newContent);
+  return appliedKeys;
 }
 
 /**
@@ -186,9 +195,14 @@ export function writeHugoYaml(versionInfo, filePath) {
  *
  * @param {string} yamlConfig - YAML file content
  * @param {VersionInfo} data
+ * @param {Set<string>} [appliedKeys] - collects version keys that had a line to land in
  * @returns {string} Updated YAML content
  */
-export function updateYamlWithVersions(yamlConfig, { latest, dev, buildId }) {
+export function updateYamlWithVersions(
+  yamlConfig,
+  { latest, dev, buildId },
+  appliedKeys,
+) {
   const data = {
     latest,
     dev: dev ?? (latest ? nextDevVersion(latest) : undefined),
@@ -200,10 +214,18 @@ export function updateYamlWithVersions(yamlConfig, { latest, dev, buildId }) {
     .map((line) => {
       const yamlPath = yamlPathForLine(line, yamlPathStack);
       const tdLine = applyTdVersionLine(line, data);
-      if (tdLine !== null) return tdLine;
+      if (tdLine !== null) {
+        const key = versionKeysLineRegex.exec(line)?.[2];
+        if (key && VERSION_KEYS.includes(key)) appliedKeys?.add(key);
+        return tdLine;
+      }
 
       const pvLine = applyParamsScalarVersionLine(line, yamlPath, data.dev);
-      if (pvLine !== null) return pvLine;
+      if (pvLine !== null) {
+        // The params.version scalar is where `dev` lands in hugo.yaml-style files.
+        appliedKeys?.add('dev');
+        return pvLine;
+      }
 
       return line;
     })

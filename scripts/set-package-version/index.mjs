@@ -146,7 +146,6 @@ export function main(
     : nextDevVersion(releaseVersion);
   const newBuildId = nextBuildId ?? '';
 
-  let hugoYamlUpdated = false;
   for (const configPath of configPaths) {
     const hugoYaml = readHugoYamlFn(configPath);
     const currentLatest = hugoYaml.latest ?? '';
@@ -169,20 +168,27 @@ export function main(
             dev: newDev,
             buildId: newBuildId,
           };
-      writeHugoYamlFn(data, configPath);
-      hugoYamlUpdated = true;
+      const appliedKeys = writeHugoYamlFn(data, configPath);
       const configPathRelative = path.relative(cwd, configPath);
+      // Log per key by write outcome, not intent: the line-oriented writer
+      // silently skips keys with no line to land in. An undefined appliedKeys
+      // (injected writer) is treated as all-applied.
+      const logKey = (key, current, next) => {
+        if (appliedKeys === undefined || appliedKeys.has(key)) {
+          logger.log?.(
+            `✓ Updated ${configPathRelative} ${key}: ${current || '(none)'} → ${next || '(none)'}`,
+          );
+        } else {
+          logger.warn?.(
+            `WARNING: ${configPathRelative} has no '${key}:' line; ${key} not written`,
+          );
+        }
+      };
       if (!leaveLatestUntouched && latestDiffers) {
-        logger.log?.(
-          `✓ Updated ${configPathRelative} latest: ${currentLatest || '(none)'} → ${newLatest}`,
-        );
+        logKey('latest', currentLatest, newLatest);
       }
-      logger.log?.(
-        `✓ Updated ${configPathRelative} dev: ${currentDev || '(none)'} → ${newDev}`,
-      );
-      logger.log?.(
-        `✓ Updated ${configPathRelative} buildId: ${currentBuildId || '(none)'} → ${newBuildId || '(none)'}`,
-      );
+      logKey('dev', currentDev, newDev);
+      logKey('buildId', currentBuildId, newBuildId);
     } else if (!silent) {
       const configPathRelative = path.relative(cwd, configPath);
       logger.log?.(
