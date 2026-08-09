@@ -136,8 +136,7 @@ your project's root directory:
 
     ```sh
     git submodule add https://github.com/google/docsy.git themes/docsy
-    cd themes/docsy
-    git checkout {{% param tdVersion.latest %}}
+    git -C themes/docsy checkout {{% param tdVersion.latest %}}
     ```
 
     To work from the development version of Docsy (_not recommended_), run the
