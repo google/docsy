@@ -151,7 +151,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
-  `npm run install:theme-deps`. Docsy's packages no longer declare npm lifecycle
+  `npm run install:theme-deps`. Docsy's packages no longer declare npm install
   hooks, so installs behave the same with or without `--ignore-scripts`
   ([#2712][]).
 
@@ -175,9 +175,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Committed the npm lockfiles; dependency installs are now lock-exact, and
   unreviewed dependency scripts are disabled ([#2700][]).
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
-  `_test:full:pre`/`_test:full:post` phases; the freed `ci:*` names retire. With
-  the `postinstall` hooks dropped, a repo clone installs via
-  `npm run install:safe` ([#2712][]).
+  `_test:full:pre`/`_test:full:post` phases; the freed `ci:*` names retire. A
+  repo clone now installs via `npm run install:safe` ([#2712][]).
 
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
