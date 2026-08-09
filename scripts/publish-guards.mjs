@@ -97,6 +97,29 @@ export function checkGuards({
   return problems;
 }
 
+// The registry's `latest` may be a prerelease (e.g. 0.16.0-rc.1), so compare
+// numeric cores only. Equal cores pass: the first stable shares its RC's
+// core, and a true duplicate version already fails at the registry.
+export function checkRegistryAdvance(candidate, registryLatest) {
+  const m = /^(\d+\.\d+\.\d+)(?:[-+]|$)/.exec(registryLatest.trim());
+  if (!m) {
+    return [`unparseable registry latest version: '${registryLatest}'`];
+  }
+  try {
+    if (cmpVersions(candidate, m[1]) < 0) {
+      return [
+        `candidate ${candidate} is below the registry latest ` +
+          `${registryLatest}; publishing would regress the latest dist-tag`,
+      ];
+    }
+  } catch {
+    // A non-stable candidate is the stable-version guard's finding; don't
+    // mask the other guards by throwing here.
+    return [`registry check skipped: candidate '${candidate}' is not stable`];
+  }
+  return [];
+}
+
 function main() {
   const repoRoot = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
@@ -105,6 +128,11 @@ function main() {
   const pkg = (p) =>
     JSON.parse(readFileSync(path.join(repoRoot, p, 'package.json'), 'utf8'));
 
+  // --registry additionally asserts the candidate doesn't regress the
+  // registry's latest (network read; run it in the publish job, post-approval,
+  // where the answer is freshest). The root .npmrc scope pin applies via cwd.
+  const withRegistry = process.argv[2] === '--registry';
+
   const input = {
     tag: process.env.TAG ?? '',
     npmVersion: execSync('npm --version', { encoding: 'utf8' }).trim(),
@@ -112,9 +140,20 @@ function main() {
     themeVersion: pkg('theme').version,
     themePublishConfig: pkg('theme').publishConfig,
   };
+  if (withRegistry) {
+    input.registryLatest = execSync('npm view @docsy/theme version', {
+      encoding: 'utf8',
+      cwd: repoRoot,
+    }).trim();
+  }
   console.log(JSON.stringify(input, null, 2));
 
-  const problems = checkGuards(input);
+  const problems = [
+    ...checkGuards(input),
+    ...(withRegistry
+      ? checkRegistryAdvance(input.themeVersion, input.registryLatest)
+      : []),
+  ];
   for (const p of problems) console.error(`GUARD FAILED: ${p}`);
   process.exit(problems.length ? 1 : 0);
 }

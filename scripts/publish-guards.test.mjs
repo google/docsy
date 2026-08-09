@@ -10,6 +10,7 @@ import { fileURLToPath } from 'node:url';
 import {
   OIDC_NPM_FLOOR,
   checkGuards,
+  checkRegistryAdvance,
   cmpVersions,
   floorOfEnginesRange,
   parseVersion,
@@ -119,6 +120,28 @@ test('checkGuards flags a tag that does not match the stamped version', () => {
   const problems = checkGuards({ ...good, tag: 'v0.17.1' });
   assert.equal(problems.length, 1);
   assert.match(problems[0], /!= stamped theme version/);
+});
+
+test('checkRegistryAdvance compares numeric cores, prerelease-safe', () => {
+  // First stable over its own RC: equal cores, allowed (a true duplicate
+  // version already fails at the registry).
+  assert.deepEqual(checkRegistryAdvance('0.16.0', '0.16.0-rc.1'), []);
+  assert.deepEqual(checkRegistryAdvance('0.17.0', '0.16.0'), []);
+  assert.deepEqual(checkRegistryAdvance('0.17.0', '0.17.0'), []);
+
+  const regress = checkRegistryAdvance('0.17.0', '0.17.1');
+  assert.equal(regress.length, 1);
+  assert.match(regress[0], /regress/);
+
+  const garbage = checkRegistryAdvance('0.17.0', 'not-a-version');
+  assert.equal(garbage.length, 1);
+  assert.match(garbage[0], /unparseable registry/);
+
+  // A non-stable candidate reports instead of throwing (the stable-version
+  // guard owns that finding; a throw would mask it).
+  const dev = checkRegistryAdvance('0.16.1-dev', '0.16.0');
+  assert.equal(dev.length, 1);
+  assert.match(dev[0], /not stable/);
 });
 
 test('repo engines npm floor parses and covers the OIDC floor', () => {

@@ -38,6 +38,16 @@ jobs:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
+          # Full history: the release-branch ancestor check below needs it.
+          fetch-depth: 0
+
+      - name: 'Sanity check: tag commit is on a release branch'
+        # The guards check the tag's own content for consistency; this pins
+        # the tagged commit to reviewed history (main, or release for patch
+        # releases), so a tag on an unmerged commit fails before packing.
+        run: >-
+          git merge-base --is-ancestor HEAD origin/main || git merge-base
+          --is-ancestor HEAD origin/release
 
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
@@ -67,6 +77,9 @@ jobs:
 
   publish:
     needs: pack
+    # Redundant with pack's guard through needs; keeps the token-holding job
+    # self-guarding if the job wiring ever changes.
+    if: github.repository == 'google/docsy'
     runs-on: ubuntu-latest
     # Approval boundary: publishes wait on this environment's required
     # reviewers, and the npmjs trusted-publisher registration binds to it.
@@ -89,6 +102,11 @@ jobs:
         with:
           name: npm-tarball
           path: ${{ runner.temp }}/npm-tarball
+
+      - name: 'Sanity check: guards hold and the version advances the registry'
+        env:
+          TAG: ${{ github.ref_name }}
+        run: node scripts/publish-guards.mjs --registry
 
       - name: Publish @docsy/theme
         working-directory: ${{ runner.temp }}/npm-tarball
