@@ -282,6 +282,14 @@ export function parseArgsAndResolveBuildId(
     buildId = generateTimestamp();
   }
 
+  // Semver build metadata is dot-separated alphanumeric-and-hyphen
+  // identifiers; anything else would write an invalid version into
+  // package.json, failing some later npm operation far from the cause.
+  if (buildId && !/^[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*$/.test(buildId)) {
+    warn?.(`Invalid build ID: ${JSON.stringify(buildId)}`);
+    process.exit(1);
+  }
+
   const resolvedConfigPaths =
     configPaths.length > 0 ? configPaths : [configPath];
   const versionSetExplicitly = version !== undefined;

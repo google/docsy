@@ -114,6 +114,45 @@ test('parseArgsAndResolveBuildId defaults to release-strip mode', () => {
   assert.equal(result.silent, false);
 });
 
+test('parseArgsAndResolveBuildId rejects invalid build metadata', () => {
+  // Semver build metadata: dot-separated alphanumeric-and-hyphen identifiers.
+  // Anything else would write an invalid version into package.json, failing
+  // some later npm operation far from the cause.
+  for (const bad of ['   ', 'a b', 'x+y']) {
+    const warnCalls = [];
+    const logger = {
+      log() {},
+      warn: (...args) => warnCalls.push(args.join(' ')),
+    };
+    const origExit = process.exit;
+    process.exit = (code) => {
+      throw { exitCode: code };
+    };
+    try {
+      parseArgsAndResolveBuildId(['--id', bad], { logger });
+      assert.fail(`expected exit for --id ${JSON.stringify(bad)}`);
+    } catch (err) {
+      if (err.exitCode === undefined) throw err;
+      assert.equal(err.exitCode, 1);
+      assert.ok(
+        warnCalls.some((w) => w.includes('build ID')),
+        'reports the invalid build ID',
+      );
+    } finally {
+      process.exit = origExit;
+    }
+  }
+});
+
+test('parseArgsAndResolveBuildId accepts valid build metadata forms', () => {
+  for (const good of ['20260808-1234Z', 'g1234abc', 'a.b-c']) {
+    const result = parseArgsAndResolveBuildId(['--id', good], {
+      logger: nullLogger,
+    });
+    assert.equal(result.buildId, good);
+  }
+});
+
 test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
   const result = parseArgsAndResolveBuildId(['--id', ''], {
     logger: nullLogger,
