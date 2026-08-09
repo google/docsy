@@ -451,6 +451,10 @@ If not adjust accordingly.
     the [publish workflow][], which publishes `@docsy/theme` from the tagged
     commit through npm [trusted publishing][] (OIDC; no npm token involved) once
     a maintainer approves the run (the `npm-publish` environment).
+    - **Before approving** the waiting `npm-publish` deployment, verify:
+      - the tag points at the intended release commit on `$BASE`;
+      - the run is `publish.yaml` on `google/docsy`, triggered by that tag;
+      - the pack job is green and its log shows the expected version.
     - Check that the workflow run succeeded and that the registry version
       matches the tag:
 
@@ -467,14 +471,27 @@ If not adjust accordingly.
       npm dist-tag add @docsy/theme@${REL#v} next
       ```
 
-    - **Manual publishes** (prereleases, or CI fallback): the workflow triggers
-      only on stable `vX.Y.Z` tags, so prereleases always publish manually.
-      Publish from `theme/` inside a narrow auth window: run `npm login` right
-      before and `npm logout` right after, whether or not publishing succeeded;
-      if logout fails, revoke the access token from your npm account settings.
-      Prereleases take `--tag next`. Always pass `--ignore-scripts=false`: the
-      theme `prepack` must run (it materializes the LICENSE), even under a
-      script-disabling npm config.
+    - **Manual publishes** (prereleases only): the workflow triggers only on
+      stable `vX.Y.Z` tags, so prereleases always publish manually. Publish from
+      `theme/` inside a narrow auth window: run `npm login` right before and
+      `npm logout` right after, whether or not publishing succeeded; if logout
+      fails, revoke the access token from your npm account settings:
+
+      ```sh
+      npm publish --ignore-scripts=false --tag next
+      ```
+
+      `--ignore-scripts=false` is required: the theme `prepack` must run (it
+      materializes the LICENSE), even under a script-disabling npm config.
+
+    - **If the CI publish is broken for a stable**, prefer fixing CI over a
+      laptop publish: a manual publish carries no provenance attestation. As a
+      deliberate exception, mirror the workflow's release choices exactly:
+
+      ```sh
+      npm publish --ignore-scripts=false --access public --tag latest \
+        --registry https://registry.npmjs.org
+      ```
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 

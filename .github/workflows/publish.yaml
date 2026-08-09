@@ -7,10 +7,10 @@
 # this repo + workflow filename + environment to the package lives in the
 # package's settings on npmjs.com.
 #
-# Two jobs split the trust: pack guards and builds the tarball without the
-# OIDC grant; publish holds the grant but executes no repo code (publishing a
-# tarball, unlike a directory, runs no lifecycle scripts). Neither job
-# installs dependencies.
+# Two jobs split the concerns: pack guards and builds the tarball without the
+# OIDC grant; publish holds the grant and runs no lifecycle scripts
+# (publishing a tarball, unlike a directory, executes none) -- its checkout
+# only feeds setup-node's .nvmrc read. Neither job installs dependencies.
 
 name: publish
 
