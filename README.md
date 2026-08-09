@@ -88,7 +88,7 @@ all the prerequisites listed above:
 ```sh
 git clone --depth 1 https://github.com/google/docsy.git
 cd docsy
-npm install
+npm run install:safe
 npm run serve
 ```
 

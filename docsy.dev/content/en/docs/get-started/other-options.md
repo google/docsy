@@ -136,8 +136,7 @@ your project's root directory:
 
     ```sh
     git submodule add https://github.com/google/docsy.git themes/docsy
-    cd themes/docsy
-    git checkout {{% param tdVersion.latest %}}
+    git -C themes/docsy checkout {{% param tdVersion.latest %}}
     ```
 
     To work from the development version of Docsy (_not recommended_), run the
@@ -156,15 +155,16 @@ your project's root directory:
 3.  Get Docsy dependencies:
 
     ```sh
-    (cd themes/docsy && npm run postinstall)
+    (cd themes/docsy && npm run install:theme-deps)
     ```
 
     > [!NOTE]
     >
-    > Run `npm run postinstall`, not `npm install`: `postinstall` installs only
-    > the theme's runtime dependencies, lock-pinned and script-free; a plain
-    > `npm install` inside `themes/docsy/` also pulls the repository's
-    > maintainer workspaces, an install more than an order of magnitude larger.
+    > Run `npm run install:theme-deps`, not `npm install`: `install:theme-deps`
+    > installs only the theme's runtime dependencies, lock-pinned and
+    > script-free; a plain `npm install` inside `themes/docsy/` also pulls the
+    > repository's maintainer workspaces, an install more than an order of
+    > magnitude larger.
 
 4.  (Optional but recommended) To avoid having to repeat the previous step every
     time you update Docsy, consider adding [NPM scripts][] like the following to
@@ -175,7 +175,7 @@ your project's root directory:
       "...": "...",
       "scripts": {
         "get:submodule": "git submodule update --init --depth 1",
-        "_prepare:docsy": "cd themes/docsy && npm run postinstall",
+        "_prepare:docsy": "cd themes/docsy && npm run install:theme-deps",
         "prepare": "npm run get:submodule && npm run _prepare:docsy",
         "...": "..."
       },
@@ -207,12 +207,12 @@ folder, run the following commands from your project's root directory:
 cd themes
 git clone -b {{% param tdVersion.latest %}} https://github.com/google/docsy
 cd docsy
-npm run postinstall
+npm run install:theme-deps
 ```
 
 As with the [submodule option](#option-1-docsy-as-a-git-submodule), set
 `theme: docsy/theme` in your site configuration. The note above about
-`npm run postinstall` versus `npm install` applies here as well.
+`npm run install:theme-deps` versus `npm install` applies here as well.
 
 To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
@@ -283,6 +283,7 @@ development or testing, you can also install:
 
   ```sh
   npm install --save-dev google/docsy
+  (cd node_modules/docsy && npm run install:theme-deps)
   ```
 
   This installs the repository's default branch (`main`). To pin a tagged
@@ -294,7 +295,10 @@ development or testing, you can also install:
 
   For other revision selectors, see [npm install][]. The GitHub package is named
   `docsy` and contains the theme files in a subfolder, so with this install form
-  use `theme: docsy/theme` in your site configuration.
+  use `theme: docsy/theme` in your site configuration. Unlike the registry
+  package, the GitHub package doesn't declare Bootstrap and Font Awesome as its
+  own dependencies: the `install:theme-deps` command installs them, and must be
+  rerun after every install or update of the package.
 
 ## Preview your site
 

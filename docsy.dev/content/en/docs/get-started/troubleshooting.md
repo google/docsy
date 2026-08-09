@@ -28,7 +28,7 @@ rebuild:
 - Hugo module sites built from scratch: see [Install theme npm
   dependencies][theme-npm-deps].
 - Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
-  `npm run postinstall` from `themes/docsy`.
+  `npm run install:theme-deps` from `themes/docsy`.
 
 ## Known issues
 

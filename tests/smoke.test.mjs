@@ -15,7 +15,8 @@
 // the common case when smoke-testing a PR branch pushed to a fork.
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
-// kept OUT of `test:tooling` / CI `ci:post`, which must stay fast and offline.
+// kept OUT of `test:tooling` / CI `_test:full:post`, which must stay fast
+// and offline.
 
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -154,7 +155,7 @@ before(() => {
   assert.match(
     v.stdout ?? '',
     /extended/,
-    'extended Hugo not found — run `npm install` at the repo root first',
+    'extended Hugo not found — run `npm run install:safe` at the repo root first',
   );
 });
 
@@ -352,9 +353,10 @@ test('non-module clone into themes/docsy', () => {
     'git clone theme into themes/docsy',
   );
 
-  progress('clone: npm run theme postinstall for theme deps etc…');
+  progress('clone: npm run install:theme-deps in themes/docsy…');
   assert.equal(
-    run('npm', ['run', '--prefix', themesDocsy, 'postinstall'], {}).status,
+    run('npm', ['run', '--prefix', themesDocsy, 'install:theme-deps'], {})
+      .status,
     0,
     'install theme deps etc',
   );

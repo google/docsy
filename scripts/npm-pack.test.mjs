@@ -1,6 +1,6 @@
 // Sanity checks for the npm tarballs: the root GitHub-NPM package and the
 // @docsy/theme registry package. Fast and offline; picked up by
-// test:tooling / ci:post.
+// test:tooling / _test:full:post.
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -78,7 +78,7 @@ const PACKAGES = {
     forbiddenPrefixes: [`${TAR}node_modules/`, `${TAR}images/`],
     // The lock stays out here (unlike the root package, which ships it):
     // registry installs of a library never consult its lock; only the root
-    // package's postinstall-driven nested `npm ci` needs one.
+    // package's install:theme-deps nested `npm ci` needs one.
     forbiddenSubstrings: [
       'package-lock.json',
       '.test.mjs',

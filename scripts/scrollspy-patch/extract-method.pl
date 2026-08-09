@@ -20,7 +20,7 @@ my $CACHED_METHOD_FILE = "$PROJECT_ROOT/theme/assets/_cache/bootstrap/scrollspy-
 # Check if Bootstrap source exists
 unless (-f $BOOTSTRAP_SOURCE) {
     print STDERR "ERROR: Bootstrap source not found: $BOOTSTRAP_SOURCE\n";
-    print STDERR "  Make sure Bootstrap is installed: npm install\n";
+    print STDERR "  Make sure Bootstrap is installed: npm run install:safe\n";
     exit 1;
 }
 
