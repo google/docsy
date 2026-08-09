@@ -269,7 +269,7 @@ If not adjust accordingly.
       Both forms update the `version` related fields in [package.json][] and
       [docsy.dev/config][] files.
 
-6.  <a id="ci-test-step">Run `npm run ci:test`</a>, which runs `ci:prepare` and
+6.  <a id="ci-test-step">Run `npm run test:full`</a>, which runs `_test:full:pre` and
     more to ensure that, e.g., vendor assets and [go.mod][] dependencies are
     up-to-date, etc.
 

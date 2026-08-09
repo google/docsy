@@ -48,7 +48,7 @@ The `_prepare:scrollspy-patch` script (called by `_prepare`) automatically:
 3. Updates `theme/assets/js/scrollspy-patch.js` (`update-patch-js.pl`) - syncs
    the patched method body into the runtime patch file
 
-The `ci:prepare` script calls `_prepare` and `is:clean` to ensure no unexpected
+The `_test:full:pre` script calls `_prepare` and `is:clean` to ensure no unexpected
 changes occurred. If the cached method source, patched result, or
 `scrollspy-patch.js` differs from what's committed, CI will fail, indicating
 review is needed.
@@ -57,7 +57,7 @@ review is needed.
 
 When Bootstrap is updated:
 
-- Run `npm run ci:prepare` to ensure that the patch file and runtime patch code
+- Run `npm run _test:full:pre` to ensure that the patch file and runtime patch code
   are up to date. If the command fails, review the changes and update the patch
   file manually, as described below.
 
@@ -75,6 +75,6 @@ When the METHOD code has changed:
   diff -u scrollspy-method.js scrollspy-method-patched.js > method.patch
   ```
 
-- Rerun `npm run ci:prepare` to ensure that the updated patch file works, and to
+- Rerun `npm run _test:full:pre` to ensure that the updated patch file works, and to
   update RUNTIME_PATCHER_JS.
 - Commit changes.
