@@ -27,6 +27,7 @@ function withFixture(version, { backupVersion } = {}, run) {
       manifestPath,
       backupPath,
       getSha: () => 'abcd1234',
+      isDirty: () => false,
       logger: nullLogger,
     };
     const readVersion = () =>
@@ -83,10 +84,39 @@ test('pre discards a stale backup instead of restoring it', () => {
 
 test('pre strips a stranded stamp before restamping', () => {
   // Manifest left stamped with no backup (R2-2): self-heal from the manifest
-  // itself, then stamp fresh.
-  withFixture('0.16.1-dev+gdeadbeef', {}, ({ opts, readVersion }) => {
-    packStamp('pre', opts);
-    assert.equal(readVersion(), '0.16.1-dev+gabcd1234');
+  // itself, then stamp fresh. Covers the current form, a longer git
+  // abbreviation, and the retired committed-stamp form (R3-3).
+  for (const stranded of [
+    '0.16.1-dev+gdeadbeef',
+    '0.16.1-dev+gdeadbeef012',
+    '0.16.1-dev+gdeadbeef.dirty',
+    '0.16.1-dev+004-over-main-616df5f1',
+  ]) {
+    withFixture(stranded, {}, ({ opts, readVersion }) => {
+      packStamp('pre', opts);
+      assert.equal(readVersion(), '0.16.1-dev+gabcd1234', `heals ${stranded}`);
+      packStamp('post', opts);
+      assert.equal(readVersion(), '0.16.1-dev');
+    });
+  }
+});
+
+test('pre keeps the backup when the stamp form is unrecognized', () => {
+  withFixture(
+    '0.16.1-dev+unknown-form',
+    { backupVersion: '0.16.1-dev' },
+    ({ opts, readVersion, backupPath }) => {
+      packStamp('pre', opts);
+      assert.equal(readVersion(), '0.16.1-dev+unknown-form', 'packs as-is');
+      assert.ok(fs.existsSync(backupPath), 'backup is preserved');
+    },
+  );
+});
+
+test('pre marks a dirty tree in the stamp', () => {
+  withFixture('0.16.1-dev', {}, ({ opts, readVersion }) => {
+    packStamp('pre', { ...opts, isDirty: () => true });
+    assert.equal(readVersion(), '0.16.1-dev+gabcd1234.dirty');
     packStamp('post', opts);
     assert.equal(readVersion(), '0.16.1-dev');
   });

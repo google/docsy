@@ -573,7 +573,8 @@ successfully tested with the new release, then perform the following actions
 before any further changes are merged into the `main` branch:
 
 1. Update the package version to the next dev version for Docsy and
-   Docsy-example (build IDs are stamped at pack time, not committed):
+   Docsy-example (Docsy's build IDs are stamped at pack time, not committed;
+   Docsy-example still commits a git-info dev version):
 
    ```console
    $ npm run -s set:version -- --version 0.14.4-dev

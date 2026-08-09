@@ -143,7 +143,7 @@ before(() => {
     assert.equal(tar.status, 0, `tar -tzf lists ${name}: ${tar.stderr}`);
     const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);
-    packed.set(name, { tarballPath, entries });
+    packed.set(name, { tarballPath, entries, stdout: pack.stdout });
   }
 });
 
@@ -208,15 +208,34 @@ test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () =>
     ),
   ).version;
   if (manifestVersion.endsWith('-dev')) {
-    assert.match(
+    // Expect the actual HEAD SHA, not just any hex suffix; a dirty theme/
+    // tree is marked, so compute the expectation from the same inputs.
+    const git = (...args) =>
+      spawnSync('git', ['-C', repoRoot, ...args], { encoding: 'utf8' }).stdout;
+    const sha = git('rev-parse', '--short=8', 'HEAD').trim();
+    const dirty = git('status', '--porcelain', '--', 'theme/').trim()
+      ? '.dirty'
+      : '';
+    assert.equal(
       packedVersion,
-      new RegExp(
-        `^${manifestVersion.replace(/[.+]/g, '\\$&')}\\+g[0-9a-f]{7,8}$`,
-      ),
-      `packed version ${packedVersion} extends ${manifestVersion} with the packed commit's SHA`,
+      `${manifestVersion}+g${sha}${dirty}`,
+      "packed version carries the packed commit's SHA",
     );
   } else {
     assert.equal(packedVersion, manifestVersion, 'non-dev version packs as-is');
+  }
+});
+
+// Lifecycle diagnostics must stay off stdout: it is npm's result channel
+// (`npm pack --json`, `tarball=$(npm pack --silent)`).
+test('npm pack --silent stdout is exactly the tarball filename', () => {
+  for (const [name] of Object.entries(PACKAGES)) {
+    const { tarballPath, stdout } = packed.get(name);
+    assert.equal(
+      stdout.trim(),
+      path.basename(tarballPath),
+      `${name}: pack stdout is the tarball filename only`,
+    );
   }
 });
 

@@ -22,13 +22,27 @@ const defaults = {
     execFileSync('git', ['-C', repoRoot, 'rev-parse', '--short=8', 'HEAD'], {
       encoding: 'utf8',
     }).trim(),
-  logger: console,
+  // A dirty theme/ tree means the packed bytes are not HEAD's; the stamp
+  // marks that rather than claiming a clean identity.
+  isDirty: () =>
+    execFileSync(
+      'git',
+      ['-C', repoRoot, 'status', '--porcelain', '--', 'theme/'],
+      { encoding: 'utf8' },
+    ).trim() !== '',
+  // Lifecycle stdout is npm's result channel (--json, --silent): keep
+  // diagnostics on stderr.
+  logger: { log: (...args) => console.error(...args), warn: console.warn },
 };
 
-const strandedStampRegex = /^(.*-dev)\+g[0-9a-f]{7,8}$/;
+// Every stamp form this script has ever produced: the current
+// +g<sha>[.dirty] (--short=8 is a minimum; collisions yield more digits) and
+// the retired committed form +NNN-over-<branch>-<sha>.
+const strandedStampRegex =
+  /^(.*-dev)\+(?:g[0-9a-f]{7,}(?:\.dirty)?|\d{3}-over-[\w-]+)$/;
 
 export function packStamp(mode, opts = {}) {
-  const { manifestPath, backupPath, getSha, logger } = {
+  const { manifestPath, backupPath, getSha, isDirty, logger } = {
     ...defaults,
     ...opts,
   };
@@ -50,6 +64,13 @@ export function packStamp(mode, opts = {}) {
       writeManifest(manifest);
       logger.warn('pack-stamp: stripped stamp left by an interrupted pack');
     }
+    if (manifest.version.includes('+')) {
+      // Unrecognized build metadata: don't guess, and keep any backup.
+      logger.warn(
+        `pack-stamp: unrecognized stamped version ${manifest.version}; packing as-is`,
+      );
+      return;
+    }
     if (fs.existsSync(backupPath)) {
       removeBackup();
       logger.warn('pack-stamp: discarded leftover backup');
@@ -64,7 +85,7 @@ export function packStamp(mode, opts = {}) {
     }
     fs.mkdirSync(path.dirname(backupPath), { recursive: true });
     fs.copyFileSync(manifestPath, backupPath);
-    manifest.version = `${manifest.version}+g${sha}`;
+    manifest.version = `${manifest.version}+g${sha}${isDirty() ? '.dirty' : ''}`;
     writeManifest(manifest);
     logger.log(`pack-stamp: packing as version ${manifest.version}`);
   } else if (mode === 'post') {
