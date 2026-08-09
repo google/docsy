@@ -242,6 +242,18 @@ export function parseArgsAndResolveBuildId(
   const warn = logger?.warn || console.warn;
 
   let i = 0;
+  // A `-`-leading next-arg means "--id value omitted" only for known flags: a
+  // leading hyphen is valid semver build metadata (fail-loud posture: any
+  // other silent reinterpretation would bypass the validator below).
+  const knownFlags = [
+    '--help',
+    '-h',
+    '--id',
+    '--silent',
+    '-s',
+    '--version',
+    '-v',
+  ];
   for (; i < args.length; i++) {
     const arg = args[i];
     switch (arg) {
@@ -250,7 +262,7 @@ export function parseArgsAndResolveBuildId(
         usage();
         break;
       case '--id':
-        if (i + 1 >= args.length || args[i + 1].startsWith('-')) {
+        if (i + 1 >= args.length || knownFlags.includes(args[i + 1])) {
           buildId = '';
         } else {
           i += 1;

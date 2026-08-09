@@ -152,6 +152,15 @@ test('parseArgsAndResolveBuildId accepts valid build metadata forms', () => {
   }
 });
 
+test('parseArgsAndResolveBuildId takes a hyphen-leading --id value as the value', () => {
+  // A leading hyphen is valid semver build metadata; only known flags mean
+  // "value omitted".
+  const result = parseArgsAndResolveBuildId(['--id', '-abc'], {
+    logger: nullLogger,
+  });
+  assert.equal(result.buildId, '-abc');
+});
+
 test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
   const result = parseArgsAndResolveBuildId(['--id', ''], {
     logger: nullLogger,
