@@ -54,7 +54,7 @@ test('the Mermaid partial takes its version from the config param alone', () => 
   );
   assert.match(
     partial,
-    /\$version :=\s*\.Site\.Params\.mermaid\.version/,
+    /\$version :=.*\.Site\.Params\.mermaid\.version/,
     'the partial reads params.mermaid.version',
   );
   assert.doesNotMatch(

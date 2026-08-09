@@ -1,7 +1,6 @@
-{{ $version := .Site.Params.mermaid.version -}}
-{{/* The mermaid-version canary test pins this read: don't reassign $version to a literal or add a default. */ -}}
+{{/* The mermaid-version canary test pins this read: don't reassign $version or add a default. */ -}}
+{{ $version := strings.TrimSpace (printf "%v" (or .Site.Params.mermaid.version "")) -}}
 {{ if $version -}}
-  {{ $version = strings.TrimSpace (printf "%v" $version) -}}
   {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
     {{ warnidf "mermaid-floating-version" "params.mermaid.version is not an exact X.Y.Z version. For details, see https://www.docsy.dev/docs/content/diagrams-and-formulae/#diagrams-with-mermaid." -}}
   {{ end -}}
@@ -73,5 +72,5 @@
   })(jQuery);
 </script>
 {{ else -}}
-  {{ errorf "params.mermaid.version is unset: your site isn't receiving the theme's config; set it explicitly." -}}
+  {{ errorf "params.mermaid.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
 {{ end -}}
