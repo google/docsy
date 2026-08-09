@@ -95,6 +95,8 @@ jobs:
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
+          # This pin exports a dummy NODE_AUTH_TOKEN so the registry-url
+          # config template always resolves; re-verify on setup-node bumps.
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 

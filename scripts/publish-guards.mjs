@@ -113,9 +113,11 @@ export function checkRegistryAdvance(candidate, registryLatest) {
       ];
     }
   } catch {
-    // A non-stable candidate is the stable-version guard's finding; don't
-    // mask the other guards by throwing here.
-    return [`registry check skipped: candidate '${candidate}' is not stable`];
+    // A non-stable candidate is the stable-version guard's finding; report
+    // (fail-closed) without masking it.
+    return [
+      `registry check cannot compare: candidate '${candidate}' is not stable`,
+    ];
   }
   return [];
 }
@@ -141,6 +143,8 @@ function main() {
     themePublishConfig: pkg('theme').publishConfig,
   };
   if (withRegistry) {
+    // `version` resolves to the latest dist-tag's version; keep that true if
+    // this command ever changes.
     input.registryLatest = execSync('npm view @docsy/theme version', {
       encoding: 'utf8',
       cwd: repoRoot,
