@@ -161,18 +161,34 @@ test('parseArgsAndResolveBuildId accepts valid build metadata forms', () => {
   }
 });
 
-test('parseArgsAndResolveBuildId maps --id "" to timestamp build ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id', ''], {
+test('parseArgsAndResolveBuildId maps --id now to a timestamp build ID', () => {
+  const result = parseArgsAndResolveBuildId(['--id', 'now'], {
     logger: nullLogger,
   });
   assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
 });
 
-test('parseArgsAndResolveBuildId maps bare --id to timestamp build ID', () => {
-  const result = parseArgsAndResolveBuildId(['--id'], {
-    logger: nullLogger,
-  });
-  assert.match(result.buildId, /^\d{8}-\d{4}Z$/);
+test('parseArgsAndResolveBuildId rejects an empty --id value', () => {
+  const warnCalls = [];
+  const logger = {
+    log() {},
+    warn: (...args) => warnCalls.push(args.join(' ')),
+  };
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--id', ''], { logger }),
+  );
+  assert.equal(code, 1);
+  assert.ok(
+    warnCalls.some((w) => w.includes('now')),
+    'points at the now keyword',
+  );
+});
+
+test('parseArgsAndResolveBuildId rejects a bare trailing --id', () => {
+  const code = exitCodeOf(() =>
+    parseArgsAndResolveBuildId(['--id'], { logger: nullLogger }),
+  );
+  assert.equal(code, 1);
 });
 
 test('parseArgsAndResolveBuildId rejects a hyphen-leading --id value', () => {
@@ -425,7 +441,7 @@ test('main --id on a release-core version leaves latest and dev untouched', () =
   assert.equal(writtenHugoYaml.buildId, 'g12345678');
 });
 
-test('main --id "" generates timestamp build metadata', () => {
+test('main --id now generates timestamp build metadata', () => {
   const pkg = { version: '1.2.3-dev+some-build' };
   const hugoYaml = {
     latest: 'v1.2.3',
@@ -433,7 +449,7 @@ test('main --id "" generates timestamp build metadata', () => {
     buildId: 'some-build',
   };
   const { newVersion, writtenPkg, writtenHugoYaml } = runMainWithMemory(
-    ['--id', ''],
+    ['--id', 'now'],
     { pkg, hugoYaml },
   );
 

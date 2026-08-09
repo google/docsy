@@ -54,13 +54,13 @@ export function getPackagePath() {
 }
 
 const usageText = `
-Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id [BUILD-ID]] [FILE...]
+Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id BUILD-ID] [FILE...]
 
   Options:
     --help|-h          Show this help message
-    --id [BUILD-ID]    Set build ID metadata to BUILD-ID, if provided; otherwise,
-                       set it to a timestamp-based value. BUILD-ID may not start
-                       with '-'. Version is unchanged.
+    --id BUILD-ID      Set build ID metadata to BUILD-ID; 'now' means a
+                       timestamp-based ID. BUILD-ID may not start with '-'.
+                       Version is unchanged.
     --silent|-s        Don't log any messages
     --version|-v VERS  Set version in target files according to VERS
 
@@ -251,19 +251,18 @@ export function parseArgsAndResolveBuildId(
         usage();
         break;
       case '--id':
-        if (i + 1 >= args.length) {
-          buildId = '';
-        } else if (args[i + 1].startsWith('-')) {
+        if (++i >= args.length) {
+          usage(1);
+        }
+        if (args[i].startsWith('-')) {
           // Ambiguous between a value and a flag; fail loud rather than pick
-          // a side. For a timestamp ID, pass --id last or --id ''.
+          // a side.
           warn?.(
-            `Invalid build ID value: ${JSON.stringify(args[i + 1])} (may not start with '-')`,
+            `Invalid build ID value: ${JSON.stringify(args[i])} (may not start with '-')`,
           );
           process.exit(1);
-        } else {
-          i += 1;
-          buildId = args[i];
         }
+        buildId = args[i] === 'now' ? generateTimestamp() : args[i];
         break;
       case '--silent':
       case '-s':
@@ -286,15 +285,16 @@ export function parseArgsAndResolveBuildId(
     }
   }
 
-  if (version === undefined && buildId === '') {
-    buildId = generateTimestamp();
-  }
-
   // Semver build metadata is dot-separated alphanumeric-and-hyphen
   // identifiers; anything else would write an invalid version into
   // package.json, failing some later npm operation far from the cause.
-  if (buildId && !/^[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*$/.test(buildId)) {
-    warn?.(`Invalid build ID: ${JSON.stringify(buildId)}`);
+  if (
+    buildId !== undefined &&
+    !/^[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*$/.test(buildId)
+  ) {
+    warn?.(
+      `Invalid build ID: ${JSON.stringify(buildId)} (use 'now' for a timestamp ID)`,
+    );
     process.exit(1);
   }
 
