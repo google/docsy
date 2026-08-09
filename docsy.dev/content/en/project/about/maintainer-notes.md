@@ -132,12 +132,12 @@ the new pin.
 An emergency security bump (a Mermaid advisory landing between releases) is a
 manual edit to that same line, made directly on a `release` branch and shipped
 through the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not
-the next regular release; it explicitly bypasses Renovate's minimum release-age
-gate (once that's configured), which exists for routine bumps, not advisory
-response.
+the next regular release; it explicitly bypasses the minimum release-age gate
+that Renovate will enforce for routine bumps, once Renovate is configured for
+this repo (not yet done as of this writing).
 
 <!-- prettier-ignore-start -->
-[mermaid-npm]: https://www.npmjs.com/package/mermaid
+[mermaid-npm]: https://registry.npmjs.org/mermaid
 [mermaid.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
 [diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 <!-- prettier-ignore-end -->

@@ -20,7 +20,14 @@ const SEMVER = /^\d+\.\d+\.\d+$/;
 
 function mermaidVersion() {
   const text = fs.readFileSync(path.join(repoRoot, 'theme/hugo.yaml'), 'utf8');
-  const m = text.match(/^\s*mermaid:\s*\n\s+version:\s*(\S+)/m);
+  // Scope the match to the top-level `params:` block so an unrelated
+  // top-level `mermaid:` key can't be picked up instead; strip optional
+  // quotes so a quoted scalar (`version: "11.16.1"`) isn't misread as
+  // non-semver.
+  const paramsBlock = text.match(/^params:\n((?: +.*\n?)*)/m)?.[1] ?? '';
+  const m = paramsBlock.match(
+    /^\s*mermaid:\s*\n\s+version:\s*['"]?([^'"\s]+)['"]?/m,
+  );
   assert.ok(m, 'params.mermaid.version is declared in theme/hugo.yaml');
   return m[1];
 }
