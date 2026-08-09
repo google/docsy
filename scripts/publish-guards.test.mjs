@@ -61,6 +61,7 @@ const good = {
   enginesNpmRange: '>=11.16.0',
   themeVersion: '0.17.0',
   themePublishConfig: { access: 'public' },
+  ignoreScripts: 'false',
 };
 
 test('checkGuards passes a consistent stable release', () => {
@@ -106,6 +107,14 @@ test('checkGuards pins publishConfig to the reviewed shape', () => {
     const problems = checkGuards({ ...good, themePublishConfig: bad });
     assert.equal(problems.length, 1, JSON.stringify(bad));
     assert.match(problems[0], /publishConfig/);
+  }
+});
+
+test('checkGuards requires lifecycle scripts to be enabled', () => {
+  for (const bad of ['true', 'undefined', '']) {
+    const problems = checkGuards({ ...good, ignoreScripts: bad });
+    assert.equal(problems.length, 1, `ignoreScripts '${bad}'`);
+    assert.match(problems[0], /ignore-scripts/);
   }
 });
 

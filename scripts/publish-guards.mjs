@@ -56,8 +56,20 @@ export function checkGuards({
   enginesNpmRange,
   themeVersion,
   themePublishConfig,
+  ignoreScripts,
 }) {
   const problems = [];
+
+  // The theme prepack must run at publish time (it materializes LICENSE), so
+  // any config layer suppressing lifecycle scripts malforms the artifact.
+  // The publish command also forces --ignore-scripts=false; this names the
+  // misconfiguration instead of leaving a missing-LICENSE contract failure.
+  if (ignoreScripts !== 'false') {
+    problems.push(
+      `effective npm ignore-scripts is '${ignoreScripts}', not 'false'; ` +
+        'publishing needs the theme prepack lifecycle',
+    );
+  }
 
   const enginesFloor = floorOfEnginesRange(enginesNpmRange);
   for (const [floor, why] of [
@@ -102,6 +114,14 @@ function main() {
     enginesNpmRange: pkg('.').engines?.npm,
     themeVersion: pkg('theme').version,
     themePublishConfig: pkg('theme').publishConfig,
+    // npm resolves project config at the workspace root even when publishing
+    // from theme/ (workspace members' .npmrc files are ignored, and npm
+    // config refuses workspace cwds with ENOWORKSPACES), so sample from the
+    // repo root.
+    ignoreScripts: execSync('npm config get ignore-scripts', {
+      encoding: 'utf8',
+      cwd: repoRoot,
+    }).trim(),
   };
   console.log(JSON.stringify(input, null, 2));
 

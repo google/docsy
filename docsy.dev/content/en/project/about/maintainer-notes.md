@@ -472,7 +472,9 @@ If not adjust accordingly.
       Publish from `theme/` inside a narrow auth window: run `npm login` right
       before and `npm logout` right after, whether or not publishing succeeded;
       if logout fails, revoke the access token from your npm account settings.
-      Prereleases take `--tag next`.
+      Prereleases take `--tag next`. Always pass `--ignore-scripts=false`: the
+      theme `prepack` must run (it materializes the LICENSE), even under a
+      script-disabling npm config.
 
 16. Update the [deploy/prod][] branch from `$BASE`.
 

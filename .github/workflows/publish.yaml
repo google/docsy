@@ -51,8 +51,10 @@ jobs:
       - name: Publish @docsy/theme
         working-directory: theme
         # Deliberate CLI flags: they outrank manifest publishConfig (pinned by
-        # the guards); provenance is implicit under trusted publishing, but
-        # requiring it fails loudly if it can't be attested.
+        # the guards) and any config layer. Scripts stay on for the theme
+        # prepack (it materializes LICENSE); provenance is implicit under
+        # trusted publishing, but requiring it fails loudly if it can't be
+        # attested.
         run: >-
-          npm publish --access public --provenance --tag latest --registry
-          https://registry.npmjs.org
+          npm publish --access public --provenance --tag latest
+          --ignore-scripts=false --registry https://registry.npmjs.org
