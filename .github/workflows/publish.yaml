@@ -22,6 +22,12 @@ on:
 
 permissions: {}
 
+# One publish at a time, queued in trigger order: concurrent tag pushes could
+# otherwise be approved out of order, leaving `latest` on the older version.
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
 jobs:
   pack:
     if: github.repository == 'google/docsy'
@@ -87,9 +93,11 @@ jobs:
       - name: Publish @docsy/theme
         working-directory: ${{ runner.temp }}/npm-tarball
         # Deliberate CLI flags: they outrank manifest publishConfig (pinned by
-        # the guards) and any config layer; provenance is implicit under
-        # trusted publishing, but requiring it fails loudly if it can't be
-        # attested.
+        # the guards) and same-key config-file entries; provenance is implicit
+        # under trusted publishing, but requiring it fails loudly if it can't
+        # be attested. (A scope-specific `@docsy:registry` mapping would still
+        # outrank --registry, but no config layer here defines one: setup-node
+        # writes a fresh userconfig and the job cwd is outside the checkout.)
         run: >-
           npm publish ./*.tgz --access public --provenance --tag latest
           --registry https://registry.npmjs.org

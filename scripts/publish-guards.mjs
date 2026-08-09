@@ -69,7 +69,16 @@ export function checkGuards({
     }
   }
 
-  if (!STABLE_VERSION_RE.test(themeVersion)) {
+  // Validate via parseVersion so the safe-integer and length bounds apply,
+  // not just the regex shape.
+  let stableVersion = false;
+  try {
+    parseVersion(themeVersion);
+    stableVersion = true;
+  } catch {
+    // fall through to the problem report
+  }
+  if (!stableVersion) {
     problems.push(
       `theme version '${themeVersion}' is not a stable X.Y.Z version; ` +
         'prereleases are published manually, not from CI',

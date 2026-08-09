@@ -454,7 +454,11 @@ If not adjust accordingly.
     - **Before approving** the waiting `npm-publish` deployment, verify:
       - the tag points at the intended release commit on `$BASE`;
       - the run is `publish.yaml` on `google/docsy`, triggered by that tag;
-      - the pack job is green and its log shows the expected version.
+      - the pack job is green and its log shows the expected version;
+      - the version is above the registry's current `latest` and no other
+        publish run is pending (approvals out of order would leave `latest` on
+        the older version; runs queue one at a time, but the queue can't see the
+        registry).
     - Check that the workflow run succeeded and that the registry version
       matches the tag:
 
@@ -468,7 +472,8 @@ If not adjust accordingly.
       bullet), then re-verify the dist-tags:
 
       ```sh
-      npm dist-tag add @docsy/theme@${REL#v} next
+      npm dist-tag add @docsy/theme@${REL#v} next \
+        --@docsy:registry=https://registry.npmjs.org
       ```
 
     - **Manual publishes** (prereleases only): the workflow triggers only on
@@ -478,11 +483,14 @@ If not adjust accordingly.
       fails, revoke the access token from your npm account settings:
 
       ```sh
-      npm publish --ignore-scripts=false --tag next
+      npm publish --ignore-scripts=false --tag next \
+        --@docsy:registry=https://registry.npmjs.org
       ```
 
       `--ignore-scripts=false` is required: the theme `prepack` must run (it
-      materializes the LICENSE), even under a script-disabling npm config.
+      materializes the LICENSE), even under a script-disabling npm config. The
+      scope-registry pin guards against a local `@docsy:registry` override,
+      which outranks even `--registry`.
 
     - **If the CI publish is broken for a stable**, prefer fixing CI over a
       laptop publish: a manual publish carries no provenance attestation. As a
@@ -490,7 +498,7 @@ If not adjust accordingly.
 
       ```sh
       npm publish --ignore-scripts=false --access public --tag latest \
-        --registry https://registry.npmjs.org
+        --@docsy:registry=https://registry.npmjs.org
       ```
 
 16. Update the [deploy/prod][] branch from `$BASE`.

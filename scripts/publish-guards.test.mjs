@@ -86,13 +86,19 @@ test('checkGuards flags a prerelease version', () => {
 });
 
 test('checkGuards flags npm-invalid stable-looking versions', () => {
-  const problems = checkGuards({
-    ...good,
-    tag: 'v01.2.3',
-    themeVersion: '01.2.3',
-  });
-  assert.equal(problems.length, 1);
-  assert.match(problems[0], /not a stable/);
+  for (const bad of [
+    '01.2.3', // leading zeros
+    '9007199254740993.0.0', // beyond Number.isSafeInteger
+    `1.2.${'3'.repeat(260)}`, // beyond npm's 256-char cap
+  ]) {
+    const problems = checkGuards({
+      ...good,
+      tag: `v${bad}`,
+      themeVersion: bad,
+    });
+    assert.equal(problems.length, 1, bad);
+    assert.match(problems[0], /not a stable/);
+  }
 });
 
 test('checkGuards pins publishConfig to the reviewed shape', () => {
