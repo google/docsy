@@ -261,12 +261,12 @@ variety of different diagram types, including flowcharts, sequence diagrams,
 class diagrams, state diagrams, ER diagrams, user journey diagrams, Gantt charts
 and pie charts.
 
-With Mermaid support enabled in Docsy, you can include the text definition of a
-Mermaid diagram inside a code block, and it will automatically be rendered by
-the browser as soon as the page loads.
+Mermaid support is automatically enabled when you use a `mermaid` code block on
+your page: the browser renders the text definition to a diagram as soon as the
+page loads.
 
 The great advantage of this is anyone who can edit the page can now edit the
-diagram - no more hunting for the original tools and version to make a new edit.
+diagram: no more hunting for the original tools and version to make a new edit.
 
 For example, the following defines a sequence diagram:
 
@@ -308,12 +308,10 @@ sequenceDiagram
     Docsy user->>Docsy user: Being happy
 ```
 
-Support of Mermaid diagrams is automatically enabled as soon as you use a
-`mermaid` code block on your page.
-
-By default, Docsy pulls in the latest officially released version of Mermaid at
-build time. If that doesn't fit your needs, you can specify the wanted mermaid
-version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
+Docsy loads Mermaid from the jsDelivr CDN at page load. By default it loads a
+pinned version, currently 11.16.1, updated with each theme release. To use a
+different version, specify it in your configuration file
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
@@ -321,18 +319,18 @@ version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params.mermaid]
-version = "11.6.0"
+version = "11.16.1"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   mermaid:
-    version: 11.6.0
+    version: 11.16.1
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "mermaid": {
-      "version": "11.6.0"
+      "version": "11.16.1"
     }
   }
 }
@@ -340,6 +338,10 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
+
+Use an exact version (`X.Y.Z`): floating versions such as `latest` or `11` are
+re-resolved by the CDN on each request, so your site's diagrams can break
+without any change on your part.
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.

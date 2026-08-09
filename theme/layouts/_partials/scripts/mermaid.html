@@ -1,4 +1,4 @@
-{{ $version := .Site.Params.mermaid.version | default "latest" -}}
+{{ $version := .Site.Params.mermaid.version | default "11.16.1" -}}
 
 {{ $cdnurl := printf "https://cdn.jsdelivr.net/npm/mermaid@%s/dist/mermaid.esm.min.mjs" $version -}}
 {{ with try (resources.GetRemote $cdnurl) -}}
