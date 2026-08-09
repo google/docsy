@@ -11,6 +11,9 @@
 # OIDC grant; publish holds the grant and runs no lifecycle scripts
 # (publishing a tarball, unlike a directory, executes none); its checkout
 # only feeds setup-node's .nvmrc read. Neither job installs dependencies.
+# On tag pushes this definition itself travels with the tag, so the checks
+# below bind against mistakes; malice is bounded by the tag ruleset and the
+# environment approval, not by anything written here.
 
 name: publish
 

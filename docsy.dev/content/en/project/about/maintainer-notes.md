@@ -454,9 +454,13 @@ If not adjust accordingly.
     - **Before approving** the waiting `npm-publish` deployment. The guards
       re-verify content and registry order mechanically (an out-of-order or
       inconsistent run fails instead of publishing), and the approval prompt
-      only appears after the pack job succeeded, so approval owns **intent**:
-      - the run's commit is the tip of `$BASE`, and the tag actor is the release
-        driver you expect; anything else: reject and ask;
+      only appears after the pack job succeeded, so approval owns **intent**.
+      Note that on tag pushes the workflow definition itself comes from the
+      tagged commit, so for an unexpected tag don't trust the run's green
+      checks; the two checks below are the real barrier:
+      - the run's commit is the release commit you drove (the tip of `$BASE` at
+        tag time; an unrelated merge landing since is fine), and the tag actor
+        is the release driver you expect; anything else: reject and ask;
       - the run is `publish.yaml` on `google/docsy` (another workflow could
         reference the same environment).
     - Check that the workflow run succeeded and that the registry version
