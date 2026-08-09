@@ -31,7 +31,7 @@
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
     "_install:safe:post": "npm rebuild hugo-extended --ignore-scripts=false && npm run install:theme-deps",
     "_netlify:prepare": "npm run -s is:clean && npm run install:safe && npm run -s is:clean && npm run -s _netlify:set-build-id",
-    "_netlify:set-build-id": "npm run -s set:version -- --id \"$(echo \"$COMMIT_REF\" | cut -c1-8)\"",
+    "_netlify:set-build-id": "test -n \"$COMMIT_REF\" && npm run -s set:version -- --id \"$(echo \"$COMMIT_REF\" | cut -c1-8)\"",
     "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules}'",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
     "_prepare": "npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles",

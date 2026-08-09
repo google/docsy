@@ -132,9 +132,13 @@ export function main(
   const versionWithoutBuild = removeBuildId(newVersion);
   const hasPreRelease = versionWithoutBuild !== releaseVersion;
   // --id only adjusts build metadata; deriving `latest` from the dev core
-  // would silently bump it (e.g. v0.16.0 → v0.16.1 while at 0.16.1-dev).
+  // would silently bump it (e.g. v0.16.0 → v0.16.1 while at 0.16.1-dev), and
+  // on a release-core version (the post-release window before the dev bump)
+  // recomputing `dev` would announce a version that doesn't exist yet.
+  const buildIdMode = version === undefined && buildId !== undefined;
   const leaveLatestUntouched =
-    (versionSetExplicitly || buildId !== undefined) && hasPreRelease;
+    (versionSetExplicitly && hasPreRelease) || buildIdMode;
+  const leaveDevUntouched = buildIdMode && !hasPreRelease;
 
   const newLatest = releaseVersion.startsWith('v')
     ? releaseVersion
@@ -151,29 +155,32 @@ export function main(
     const currentLatest = hugoYaml.latest ?? '';
     const currentDev = hugoYaml.dev ?? '';
     const currentBuildId = hugoYaml.buildId ?? '';
+    const targetDev = leaveDevUntouched ? currentDev : newDev;
 
     const latestDiffers = newLatest !== currentLatest;
     const devOrBuildIdDiffers =
-      newDev !== currentDev || newBuildId !== currentBuildId;
+      targetDev !== currentDev || newBuildId !== currentBuildId;
     const shouldUpdate = leaveLatestUntouched
       ? devOrBuildIdDiffers
       : latestDiffers || devOrBuildIdDiffers;
 
     if (shouldUpdate) {
       const data = leaveLatestUntouched
-        ? { ...hugoYaml, dev: newDev, buildId: newBuildId }
+        ? { ...hugoYaml, dev: targetDev, buildId: newBuildId }
         : {
             ...hugoYaml,
             latest: newLatest,
-            dev: newDev,
+            dev: targetDev,
             buildId: newBuildId,
           };
       const appliedKeys = writeHugoYamlFn(data, configPath);
       const configPathRelative = path.relative(cwd, configPath);
       // Log per key by write outcome, not intent: the line-oriented writer
       // silently skips keys with no line to land in. An undefined appliedKeys
-      // (injected writer) is treated as all-applied.
+      // (injected writer) is treated as all-applied. A key whose value is
+      // already the target needs neither a ✓ nor a warning.
       const logKey = (key, current, next) => {
+        if (current === next) return;
         if (appliedKeys === undefined || appliedKeys.has(key)) {
           logger.log?.(
             `✓ Updated ${configPathRelative} ${key}: ${current || '(none)'} → ${next || '(none)'}`,
@@ -187,7 +194,7 @@ export function main(
       if (!leaveLatestUntouched && latestDiffers) {
         logKey('latest', currentLatest, newLatest);
       }
-      logKey('dev', currentDev, newDev);
+      logKey('dev', currentDev, targetDev);
       logKey('buildId', currentBuildId, newBuildId);
     } else if (!silent) {
       const configPathRelative = path.relative(cwd, configPath);

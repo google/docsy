@@ -84,12 +84,15 @@ test('pre discards a stale backup instead of restoring it', () => {
 
 test('pre strips a stranded stamp before restamping', () => {
   // Manifest left stamped with no backup (R2-2): self-heal from the manifest
-  // itself, then stamp fresh. Covers the current form, a longer git
-  // abbreviation, and the retired committed-stamp form (R3-3).
+  // itself, then stamp fresh. Covers every form the repo's tooling produces:
+  // pack stamps (incl. longer git abbreviations and dirty marks), Netlify/--id
+  // stamps (bare hex), timestamp fallbacks, and the retired committed form.
   for (const stranded of [
     '0.16.1-dev+gdeadbeef',
     '0.16.1-dev+gdeadbeef012',
     '0.16.1-dev+gdeadbeef.dirty',
+    '0.16.1-dev+fedcba98',
+    '0.16.1-dev+20260808-1234Z',
     '0.16.1-dev+004-over-main-616df5f1',
   ]) {
     withFixture(stranded, {}, ({ opts, readVersion }) => {

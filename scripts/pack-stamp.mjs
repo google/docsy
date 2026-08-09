@@ -35,11 +35,12 @@ const defaults = {
   logger: { log: (...args) => console.error(...args), warn: console.warn },
 };
 
-// Every stamp form this script has ever produced: the current
-// +g<sha>[.dirty] (--short=8 is a minimum; collisions yield more digits) and
-// the retired committed form +NNN-over-<branch>-<sha>.
+// Every stamp form the repo's tooling can leave in the manifest: pack stamps
+// +g<sha>[.dirty] (--short=8 is a minimum; collisions yield more digits),
+// Netlify/--id stamps +<hex>, timestamp fallbacks +YYYYMMDD-HHMMZ, and the
+// retired committed form +NNN-over-<branch>-<sha>.
 const strandedStampRegex =
-  /^(.*-dev)\+(?:g[0-9a-f]{7,}(?:\.dirty)?|\d{3}-over-[\w-]+)$/;
+  /^(.*-dev)\+(?:g[0-9a-f]{7,}(?:\.dirty)?|[0-9a-f]{7,}|\d{8}-\d{4}Z|\d{3}-over-[\w-]+)$/;
 
 export function packStamp(mode, opts = {}) {
   const { manifestPath, backupPath, getSha, isDirty, logger } = {

@@ -368,6 +368,20 @@ test('main --id warns when the config has no buildId line', () => {
   });
 });
 
+test('main --id on a release-core version leaves latest and dev untouched', () => {
+  const pkg = { version: '1.2.4' };
+  const hugoYaml = { latest: 'v1.2.3', dev: 'v1.2.4-dev', buildId: '' };
+  const { newVersion, writtenHugoYaml } = runMainWithMemory(
+    ['--id', 'g12345678'],
+    { pkg, hugoYaml },
+  );
+
+  assert.equal(newVersion, '1.2.4+g12345678');
+  assert.equal(writtenHugoYaml.latest, 'v1.2.3');
+  assert.equal(writtenHugoYaml.dev, 'v1.2.4-dev');
+  assert.equal(writtenHugoYaml.buildId, 'g12345678');
+});
+
 test('main --id "" generates timestamp build metadata', () => {
   const pkg = { version: '1.2.3-dev+some-build' };
   const hugoYaml = {
