@@ -698,10 +698,10 @@ To test a Docsy branch or release from a consumer site, for each site:
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher
   core (release prep ahead of tagging).
 - `scripts/pack-stamp.mjs`: `prepack`/`postpack` helper for `theme/package.json`
-  that stamps dev tarballs with the git build ID and restores the committed
-  manifest; release versions pack unchanged. An interrupted pack can leave the
-  stamp in the working tree; the next pack self-heals it — don't commit the
-  stamped version.
+  that stamps dev tarballs with the packed commit's SHA (`+g<sha8>`) and
+  restores the committed manifest; release and RC versions pack unchanged. An
+  interrupted pack can leave the stamp in the working tree; the next pack
+  self-heals it, but don't commit the stamped version.
 - `scripts/set-package-version/index.mjs`: Low-level version manager. See script
   help for usage.
 

@@ -177,8 +177,7 @@ export function main(
       const configPathRelative = path.relative(cwd, configPath);
       // Log per key by write outcome, not intent: the line-oriented writer
       // silently skips keys with no line to land in. An undefined appliedKeys
-      // (injected writer) is treated as all-applied. A key whose value is
-      // already the target needs neither a ✓ nor a warning.
+      // (injected writer) is treated as all-applied.
       const logKey = (key, current, next) => {
         if (current === next) return;
         if (appliedKeys === undefined || appliedKeys.has(key)) {
