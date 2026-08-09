@@ -8,6 +8,16 @@
 #
 # The job installs nothing: the pack contract and `npm publish` need only
 # Node/npm built-ins, so no dependency code runs with the OIDC grant.
+#
+# Design note: one job packs and publishes, with the theme's own lifecycle
+# scripts enabled. That is safe only while the job stays install-free
+# (`npm publish` installs nothing, so only first-party prepack/postpack can
+# run); the guards enforce this coupling and the workflow contract around it.
+# The stricter split (a pack job without the OIDC grant handing the tarball
+# to a lifecycle-free `npm publish TARBALL` job) buys little for a
+# single-package publisher, where controlling packed content already equals
+# controlling the publish; revisit it if this workflow ever needs installs,
+# more packages, or non-human triggers.
 
 name: publish
 

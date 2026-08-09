@@ -5,7 +5,7 @@
 // exported for the colocated tests; only main() touches the environment.
 
 import { execSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -49,6 +49,55 @@ export function floorOfEnginesRange(range) {
 // reviewed shape; the publish command's CLI flags are the outranking backstop.
 const PUBLISH_CONFIG_JSON = '{"access":"public"}';
 
+// The publish workflow's own contract. Running lifecycle scripts at publish
+// time is safe only while the job is install-free (first-party code only),
+// minimally permissioned, and pinned to the two reviewed actions; these
+// checks fail the run loudly if an edit breaks that coupling. Checked in
+// test:tooling at edit time and re-checked by main() in the publish job
+// itself, which also covers tags on commits that skipped PR CI.
+export function checkWorkflowContract(text) {
+  const problems = [];
+  const prose = text
+    .split('\n')
+    .filter((line) => !/^\s*#/.test(line))
+    .join('\n');
+
+  const install =
+    /\b(npm\s+(ci|i|install|update|rebuild|exec)|npx|pnpm|yarn|corepack)\b/.exec(
+      prose,
+    );
+  if (install) problems.push(`workflow runs an install command: ${install[0]}`);
+
+  for (const m of prose.matchAll(/uses:\s*([^\s#]+)/g)) {
+    if (!/^actions\/(checkout|setup-node)@[0-9a-f]{40}$/.test(m[1])) {
+      problems.push(`workflow action not allowlisted + SHA-pinned: ${m[1]}`);
+    }
+  }
+
+  const perms = [...prose.matchAll(/^\s*([\w-]+):\s*(read|write)\s*$/gm)]
+    .map((m) => `${m[1]}: ${m[2]}`)
+    .sort();
+  const wanted = ['contents: read', 'id-token: write'];
+  if (JSON.stringify(perms) !== JSON.stringify(wanted)) {
+    problems.push(`workflow permissions [${perms}] != [${wanted}]`);
+  }
+
+  for (const required of [
+    'permissions: {}',
+    'environment: npm-publish',
+    'persist-credentials: false',
+    'package-manager-cache: false',
+    '--ignore-scripts=false',
+    'npm publish',
+  ]) {
+    if (!prose.includes(required)) {
+      problems.push(`workflow is missing '${required}'`);
+    }
+  }
+
+  return problems;
+}
+
 // Returns problem descriptions; an empty array means all guards hold.
 export function checkGuards({
   tag,
@@ -57,8 +106,18 @@ export function checkGuards({
   themeVersion,
   themePublishConfig,
   ignoreScripts,
+  installFree,
 }) {
   const problems = [];
+
+  // Lifecycle-scripts-on is safe only while nothing third-party can run:
+  // the two invariants below and the workflow contract travel together.
+  if (!installFree) {
+    problems.push(
+      'dependencies are installed (node_modules present); ' +
+        'the publish job must stay install-free',
+    );
+  }
 
   // The theme prepack must run at publish time (it materializes LICENSE), so
   // any config layer suppressing lifecycle scripts malforms the artifact.
@@ -122,10 +181,21 @@ function main() {
       encoding: 'utf8',
       cwd: repoRoot,
     }).trim(),
+    installFree: ['node_modules', 'theme/node_modules'].every(
+      (d) => !existsSync(path.join(repoRoot, d)),
+    ),
   };
   console.log(JSON.stringify(input, null, 2));
 
-  const problems = checkGuards(input);
+  const problems = [
+    ...checkGuards(input),
+    ...checkWorkflowContract(
+      readFileSync(
+        path.join(repoRoot, '.github/workflows/publish.yaml'),
+        'utf8',
+      ),
+    ),
+  ];
   for (const p of problems) console.error(`GUARD FAILED: ${p}`);
   process.exit(problems.length ? 1 : 0);
 }
