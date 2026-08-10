@@ -245,7 +245,8 @@ function* walk(dir) {
 
 test('every live annotation in covered files extracts (no orphans)', () => {
   const files = [...walk(path.join(repoRoot, 'theme'))]
-    .map((p) => path.relative(repoRoot, p))
+    // Renovate matches repo-relative, /-separated paths; mirror that on Windows.
+    .map((p) => path.relative(repoRoot, p).split(path.sep).join('/'))
     .filter(matchesSomePattern);
   assert.ok(files.includes('theme/hugo.yaml'), 'live file set is non-empty');
   for (const file of files) {
