@@ -1,23 +1,21 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": ["config:best-practices"],
   "timezone": "America/Toronto",
   "schedule": ["before 6am on monday"],
   "labels": ["dependencies"],
-  "enabledManagers": ["custom.regex"],
+  "enabledManagers": ["custom.jsonata"],
   "minimumReleaseAge": "3 days",
   "customManagers": [
     {
-      "customType": "regex",
-      "description": "Version pins annotated with a preceding `renovate: datasource=... depName=...` comment: a YAML `version:` key or an npm-CDN URL `@version` on the next line (grammar and decoy fixtures: tests/renovate-regex.test.mjs)",
-      "managerFilePatterns": [
-        "/^theme/hugo\\.yaml$/",
-        "/^theme/layouts/.+\\.html$/"
-      ],
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "description": "Script versions pinned in the theme config (params.<pkg>.version)",
+      "managerFilePatterns": ["/^theme/hugo\\.yaml$/"],
       "matchStrings": [
-        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\d\\n]*\\n[ \\t]*version:[ \\t]*['\"]?(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)(?:['\"\\s]|$)",
-        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\d\\n]*\\n[^\\n]*?https?://\\S*?@(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)(?:['\"/\\s]|$)"
-      ]
+        "params.mermaid.{ \"depName\": \"mermaid\", \"currentValue\": version }"
+      ],
+      "datasourceTemplate": "npm"
     }
   ]
 }
