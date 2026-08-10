@@ -15,7 +15,7 @@
         "/^theme/layouts/.+\\.html$/"
       ],
       "matchStrings": [
-        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\n]*\\n[^\\n]*?(?<currentValue>\\d+\\.\\d+(?:\\.\\d+)?)"
+        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\n]*\\n[^\\n]*?(?:version:\\s*['\"]?|@)(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[\\w.]+)?)"
       ]
     }
   ]
