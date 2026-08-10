@@ -66,7 +66,9 @@ export function buildSite(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
   );
-  const r = spawnSync('npx', ['hugo'], {
+  // `--no-install`: when the shim is missing, a bare `npx hugo` would fall
+  // back to the unrelated `hugo` package on the public registry.
+  const r = spawnSync('npx', ['--no-install', 'hugo'], {
     cwd: site,
     encoding: 'utf8',
     env: { ...hugoEnv(), ...env },

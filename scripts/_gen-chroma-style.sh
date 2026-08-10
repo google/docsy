@@ -4,7 +4,10 @@
 
 set -eo pipefail
 
-HUGO="npx hugo"
+# Repo-installed Hugo only: running `hugo` through a bare npx on an
+# unpopulated tree would fall back to the unrelated registry package named
+# `hugo`, and this script redirects its stdout into the generated .scss.
+HUGO="${HUGO:-node_modules/.bin/hugo}"
 CHROMA_STYLE=
 DEST_DIR=theme/assets/scss/td/chroma
 DEST_FILE=

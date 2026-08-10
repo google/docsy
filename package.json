@@ -23,9 +23,9 @@
   "scripts": {
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
-    "_check:format": "npx prettier --check theme/assets *.md theme/i18n theme/scripts scripts tests",
+    "_check:format": "prettier --check theme/assets *.md theme/i18n theme/scripts scripts tests",
     "_check:links": "npm run -C docsy.dev _check:links",
-    "_check:markdown": "npx markdownlint-cli2",
+    "_check:markdown": "markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",
     "_cp:bs-scrollspy": "perl scripts/scrollspy-patch/extract-method.pl",
     "_gen-chroma-styles": "bash -c scripts/gen-chroma-styles.sh",
@@ -82,7 +82,7 @@
     "update:goldens": "npm run -C docsy.dev update:goldens",
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages:not-hugo": "npm run update:packages -- -x hugo-extended",
-    "update:packages": "npx npm-check-updates -u",
+    "update:packages": "npm-check-updates -u",
     "wt": "HUGO_THEME=$(basename \"$PWD\")/theme npm run",
     "zzz": "echo 'This is just a placeholder that is the last script in this script collection.'"
   },

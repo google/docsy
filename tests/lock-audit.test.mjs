@@ -165,9 +165,47 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
   }
 });
 
+// A bare `npx BIN` on an unpopulated tree falls back to the public registry
+// and executes whatever package holds that name (npm-squat); `--no-install`
+// refuses the fallback, and a plain bin name resolves only through PATH.
+test('package scripts and shell scripts run no bare npx', () => {
+  const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
+    dir.endsWith('.json') ? dir : `${dir}/package.json`,
+  );
+  const shellScripts = fs
+    .readdirSync(path.join(repoRoot, 'scripts'))
+    .filter((file) => file.endsWith('.sh'))
+    .map((file) => `scripts/${file}`);
+  assert.ok(shellScripts.length > 0, 'shell scripts were found');
+
+  const bareNpx = /\bnpx\s+(?!--no-install\b)/;
+  for (const manifest of manifests) {
+    for (const [name, command] of Object.entries(readJSON(manifest).scripts)) {
+      assert.doesNotMatch(
+        command,
+        bareNpx,
+        `${manifest} script ${name} resolves bins locally`,
+      );
+    }
+  }
+  for (const script of shellScripts) {
+    // Executable text only: comment lines may name npx in prose.
+    const code = fs
+      .readFileSync(path.join(repoRoot, script), 'utf8')
+      .split('\n')
+      .filter((line) => !/^\s*#/.test(line))
+      .join('\n');
+    assert.doesNotMatch(code, bareNpx, `${script} resolves bins locally`);
+  }
+});
+
 test('manifests: the install path keeps its locked, script-free form', () => {
   const { scripts } = readJSON('package.json');
-  assert.match(scripts['install:safe'], /^npm ci /, 'install:safe is lock-enforced');
+  assert.match(
+    scripts['install:safe'],
+    /^npm ci /,
+    'install:safe is lock-enforced',
+  );
   for (const flag of ['--omit=optional', '--ignore-scripts']) {
     assert.ok(
       scripts['install:safe'].includes(` ${flag}`),

@@ -10,7 +10,10 @@ DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-: "${HUGO:=npx hugo}"
+# Default to the repo-installed Hugo: fails loud when absent, where a bare
+# npx invocation would fall back to the unrelated registry package named
+# `hugo`.
+: "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1

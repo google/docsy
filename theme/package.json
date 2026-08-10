@@ -37,7 +37,7 @@
     "prepack": "node ../scripts/pack-stamp.mjs pre && node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\"",
     "postpack": "node -e \"require('fs').rmSync('LICENSE', { force: true })\" && node ../scripts/pack-stamp.mjs post",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:packages": "npx npm-check-updates -x @fortawesome/fontawesome-free -u "
+    "update:packages": "npm-check-updates -x @fortawesome/fontawesome-free -u "
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.7.2",
