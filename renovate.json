@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "minimumReleaseAge deliberately covers every datasource this config may grow to manage, not only npm (whose cooldown config:best-practices already sets)",
+  "extends": ["config:best-practices"],
+  "timezone": "America/Toronto",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "enabledManagers": ["custom.jsonata"],
+  "minimumReleaseAge": "3 days",
+  "customManagers": [
+    {
+      "customType": "jsonata",
+      "fileFormat": "yaml",
+      "description": "Update the Mermaid version pinned in the theme config",
+      "managerFilePatterns": ["/^theme/hugo\\.yaml$/"],
+      "matchStrings": [
+        "params.mermaid.{ \"depName\": \"mermaid\", \"currentValue\": version }"
+      ],
+      "datasourceTemplate": "npm"
+    }
+  ]
+}
