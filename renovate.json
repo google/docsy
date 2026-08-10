@@ -9,13 +9,14 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Version pins annotated with a preceding `renovate: datasource=... depName=...` comment",
+      "description": "Version pins annotated with a preceding `renovate: datasource=... depName=...` comment: a YAML `version:` key or an npm-CDN URL `@version` on the next line (grammar and decoy fixtures: tests/renovate-regex.test.mjs)",
       "managerFilePatterns": [
         "/^theme/hugo\\.yaml$/",
         "/^theme/layouts/.+\\.html$/"
       ],
       "matchStrings": [
-        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\n]*\\n[^\\n]*?(?:version:\\s*['\"]?|@)(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[\\w.]+)?)"
+        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\d\\n]*\\n[ \\t]*version:[ \\t]*['\"]?(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)(?:['\"\\s]|$)",
+        "renovate:\\s+datasource=(?<datasource>\\S+)\\s+depName=(?<depName>\\S+)(?:\\s+versioning=(?<versioning>\\S+))?[^\\d\\n]*\\n[^\\n]*?https?://\\S*?@(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)(?:['\"/\\s]|$)"
       ]
     }
   ]
