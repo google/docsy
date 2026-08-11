@@ -7,6 +7,13 @@
   "labels": ["dependencies"],
   "enabledManagers": ["custom.jsonata"],
   "minimumReleaseAge": "3 days",
+  "packageRules": [
+    {
+      "description": "hugo-extended is intentionally pinned; updated manually via `npm run update:hugo`",
+      "matchPackageNames": ["hugo-extended"],
+      "enabled": false
+    }
+  ],
   "customManagers": [
     {
       "customType": "jsonata",
