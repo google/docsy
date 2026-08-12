@@ -161,9 +161,8 @@ before(() => {
 
 // An npm install of @docsy/theme wires the package bins into
 // node_modules/.bin; assert the shim exists, then run it with
-// `npx --no-install`: when the shim is missing, a bare `npx NAME` offers to
-// fetch a same-named package from the public registry instead (an unrelated
-// `gen-favicons` package exists there).
+// `npx --no-install` (an unrelated `gen-favicons` package exists on the
+// public registry; rationale: the bare-npx guard in lock-audit.test.mjs).
 function assertGenFaviconsBin(site) {
   assert.ok(
     existsSync(path.join(site, 'node_modules', '.bin', 'gen-favicons')),

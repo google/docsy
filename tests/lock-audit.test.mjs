@@ -272,10 +272,9 @@ test('workflows: installs are locked and credential-isolated', () => {
         }
         if (typeof step.run !== 'string') continue;
         runSteps += 1;
-        // Deny npm's tree-reifying/executing subcommands (aliases included,
-        // flags-before-subcommand tolerated) in raw run steps: the one
-        // sanctioned install is the reviewed install:safe script, counted
-        // below. `npm run` wrappers resolve to reviewed scripts, and
+        // Deny npm's tree-reifying/executing subcommands in raw run steps:
+        // the one sanctioned install is the reviewed install:safe script,
+        // counted below. `npm run` wrappers resolve to reviewed scripts, and
         // `npm pack`/`npm publish`/`npm init` install nothing.
         assert.doesNotMatch(
           step.run,

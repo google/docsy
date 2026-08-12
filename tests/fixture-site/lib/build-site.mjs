@@ -66,8 +66,8 @@ export function buildSite(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
   );
-  // `--no-install`: when the shim is missing, a bare `npx hugo` would fall
-  // back to the unrelated `hugo` package on the public registry.
+  // `--no-install`: refuse the registry fallback when the hugo shim is
+  // missing. Rationale: the bare-npx guard in tests/lock-audit.test.mjs.
   const r = spawnSync('npx', ['--no-install', 'hugo'], {
     cwd: site,
     encoding: 'utf8',
