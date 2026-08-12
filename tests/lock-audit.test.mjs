@@ -67,13 +67,16 @@ const lockEntries = (lock) =>
 // (`$N ci`) can outrun any grep, so these are regression guards against
 // careless reintroduction; deliberate obfuscation is review's job.
 const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
-const npmExec = /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]\S+)?\s+)*(exec|x)\b/;
-const altRunner = /\b(yarn|pnpm|bunx|corepack)\s/;
+// One home for the option prelude: values may be quoted, so a quoted
+// value can't shield the subcommand from the scan.
+const npmOptions = String.raw`(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*`;
+const npmExec = new RegExp(String.raw`\bnpm\s+${npmOptions}(exec|x)\b`);
+const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // The JS-API forms: a spawned `npx` needs the fallback refusal as its
-// literal first argument (a variable args array can't prove it), and a
-// spawned `npm` must not reach the exec engine.
+// literal first argument, and a spawned `npm` a literal array that doesn't
+// reach the exec engine (a variable args array can't prove either).
 const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no-install['"`])/;
-const jsNpmExec = /['"`]npm['"`]\s*,\s*\[\s*['"`](exec|x)['"`]/;
+const jsNpmExec = /['"`]npm['"`],(?!\s*\[\s*['"`](?!exec['"`]|x['"`]))/;
 
 test('locks: every package is registry+integrity, workspace-local, or an allowlisted git pin', () => {
   let registryPackages = 0;
@@ -208,12 +211,17 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
     'scripts',
     'tests',
     'theme/scripts',
-  ].flatMap((dir) =>
-    fs
-      .readdirSync(path.join(repoRoot, dir), { recursive: true })
-      .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
-      .map((file) => `${dir}/${file}`),
-  );
+  ]
+    .flatMap((dir) =>
+      fs
+        .readdirSync(path.join(repoRoot, dir), { recursive: true })
+        .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
+        .map((file) => `${dir}/${file}`),
+    )
+    // Not this file: an audit can't police its own source (an editor could
+    // as easily drop the assertion), and self-scanning only forces the
+    // patterns here into self-dodging shapes that weaken them.
+    .filter((file) => file !== 'tests/lock-audit.test.mjs');
   assert.ok(
     scriptFiles.some((file) => file.endsWith('.sh')) &&
       scriptFiles.some((file) => file.endsWith('.mjs')),
@@ -402,26 +410,37 @@ test('workflows: installs are locked and credential-isolated', () => {
           // steps: the one sanctioned install is the reviewed install:safe
           // script, counted below. `npm run` wrappers resolve to reviewed
           // scripts, and `npm pack`/`npm publish`/`npm init` install
-          // nothing. The option prelude tolerates quoted values so
-          // `--prefix "a b"` can't shield the subcommand.
+          // nothing.
           assert.doesNotMatch(
             text,
-            /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
+            new RegExp(
+              String.raw`\bnpm\s+${npmOptions}(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b`,
+            ),
             `${id} run step installs only via reviewed npm scripts`,
           );
           assert.doesNotMatch(text, /\bnpx\b/, `${id} run step avoids npx`);
           assert.doesNotMatch(
             text,
-            /\b(yarn|pnpm|bun|corepack)\b/,
+            altRunner,
             `${id} run step uses npm as its only package manager`,
           );
           // GITHUB_ENV writes poison later steps' env past the map checks
-          // above. (GITHUB_PATH stays legal: the lychee install uses it.)
+          // above; GITHUB_PATH prepends, so a writer could shadow npm
+          // itself -- pin its one reviewed use (the lychee install).
           assert.doesNotMatch(
             text,
             /GITHUB_ENV/,
             `${id} run step leaves later steps' env untouched`,
           );
+          for (const line of text.split('\n')) {
+            if (!line.includes('GITHUB_PATH')) continue;
+            const lycheeLine = 'echo "$HOME/.local/bin" >> "$GITHUB_PATH"';
+            assert.equal(
+              line.trim(),
+              text === run ? lycheeLine : lycheeLine.replace(/["']/g, ''),
+              `${id} run step writes GITHUB_PATH only via the reviewed lychee line`,
+            );
+          }
         }
         safeInstalls += (run.match(/npm run install:safe\b/g) ?? []).length;
       }
