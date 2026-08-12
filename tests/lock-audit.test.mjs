@@ -58,6 +58,16 @@ const packageIocs = new Set([
 const lockEntries = (lock) =>
   Object.entries(lock.packages).filter(([key]) => key !== '');
 
+// A bare `npx BIN` on an unpopulated tree falls back to the public registry
+// and executes whatever package holds that name (npm-squat); `--no-install`
+// refuses the fallback, and a plain bin name resolves only through PATH.
+// `npm exec`/`npm x` is the same install-on-miss engine under another name.
+const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
+const npmExec = /\bnpm\s+(exec|x)\b/;
+// The JS-API form: a spawned `npx` whose first argument is not the
+// fallback refusal.
+const jsNpxSpawn = /['"`]npx['"`]\s*,\s*\[\s*(?!['"`]--no-install['"`])/;
+
 test('locks: every package is registry+integrity, workspace-local, or an allowlisted git pin', () => {
   let registryPackages = 0;
   for (const [lockPath, lock] of Object.entries(locks)) {
@@ -102,15 +112,19 @@ test('locks: every package version is absent from the campaign IOC list', () => 
   for (const [lockPath, lock] of Object.entries(locks)) {
     for (const [key, pkg] of lockEntries(lock)) {
       if (!key.includes('node_modules/') || !pkg.version) continue;
-      // npm aliases: the installed identity is pkg.name, not the lock key.
-      const name =
-        pkg.name ??
-        key.slice(key.lastIndexOf('node_modules/') + 'node_modules/'.length);
-      checked += 1;
-      assert.ok(
-        !packageIocs.has(`${name}@${pkg.version}`),
-        `${lockPath} ${name}@${pkg.version} is absent from the IOC list`,
+      // Both identities: the lock key names what's installed, pkg.name (npm
+      // aliases) what it really is; a spoofed name field must not clear the
+      // key-derived one.
+      const keyName = key.slice(
+        key.lastIndexOf('node_modules/') + 'node_modules/'.length,
       );
+      for (const name of new Set([keyName, pkg.name ?? keyName])) {
+        checked += 1;
+        assert.ok(
+          !packageIocs.has(`${name}@${pkg.version}`),
+          `${lockPath} ${name}@${pkg.version} is absent from the IOC list`,
+        );
+      }
     }
   }
   assert.ok(checked > 0, 'locked package versions were audited');
@@ -150,11 +164,16 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   for (const [key, why] of [
     ['strict-allow-scripts', 'enforces the allowScripts policy'],
     ['engine-strict', 'hard-fails npm versions that would ignore allowScripts'],
+    ['@docsy:registry', 'pins the @docsy scope to the npm registry'],
   ]) {
+    const expected =
+      key === '@docsy:registry'
+        ? `${key}=https://registry.npmjs.org/`
+        : `${key}=true`;
     assert.deepEqual(
       npmrcLines.filter((line) => new RegExp(`^${key}\\s*=`).test(line)),
-      [`${key}=true`],
-      `.npmrc ${why} via a single ${key}=true`,
+      [expected],
+      `.npmrc ${why} via a single ${expected}`,
     );
   }
 });
@@ -171,10 +190,8 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
   }
 });
 
-// A bare `npx BIN` on an unpopulated tree falls back to the public registry
-// and executes whatever package holds that name (npm-squat); `--no-install`
-// refuses the fallback, and a plain bin name resolves only through PATH.
-test('package scripts and script files run no bare npx', () => {
+// See the bareNpx/npmExec rationale above.
+test('package scripts and script files run no npm-exec or bare npx', () => {
   const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
     dir.endsWith('.json') ? dir : `${dir}/package.json`,
   );
@@ -191,15 +208,15 @@ test('package scripts and script files run no bare npx', () => {
   );
 
   // The lookahead accepts the exact flag only: --no-install-anything is not
-  // a fallback refusal.
-  const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
+  // a fallback refusal. Quote-stripped variants too: `"npx"` runs npx.
   for (const manifest of manifests) {
     for (const [name, command] of Object.entries(readJSON(manifest).scripts)) {
-      assert.doesNotMatch(
-        command.replace(/\\\r?\n/g, ' '),
-        bareNpx,
-        `${manifest} script ${name} resolves bins locally`,
-      );
+      const spliced = command.replace(/\\\r?\n/g, ' ');
+      for (const text of [spliced, spliced.replace(/["']/g, '')]) {
+        const id = `${manifest} script ${name}`;
+        assert.doesNotMatch(text, bareNpx, `${id} resolves bins locally`);
+        assert.doesNotMatch(text, npmExec, `${id} runs no npm-exec`);
+      }
     }
   }
   for (const script of scriptFiles) {
@@ -211,7 +228,17 @@ test('package scripts and script files run no bare npx', () => {
       .split('\n')
       .filter((line) => !/^\s*(#|\/\/)/.test(line))
       .join('\n');
-    assert.doesNotMatch(code, bareNpx, `${script} resolves bins locally`);
+    for (const text of [code, code.replace(/["']/g, '')]) {
+      assert.doesNotMatch(text, bareNpx, `${script} resolves bins locally`);
+      assert.doesNotMatch(text, npmExec, `${script} runs no npm-exec`);
+    }
+    if (script.endsWith('.mjs')) {
+      assert.doesNotMatch(
+        code,
+        jsNpxSpawn,
+        `${script} passes --no-install to spawned npx`,
+      );
+    }
   }
 });
 
@@ -233,7 +260,11 @@ test('manifests: every test:repo argument resolves to test files', () => {
     // globSync also returns directories, which node --test can't run.
     const testFiles = fs
       .globSync(arg, { cwd: repoRoot })
-      .filter((match) => match.endsWith('.test.mjs'));
+      .filter(
+        (match) =>
+          match.endsWith('.test.mjs') &&
+          fs.statSync(path.join(repoRoot, match)).isFile(),
+      );
     assert.ok(
       testFiles.length > 0,
       `test:repo argument ${arg} matches test files`,
@@ -260,6 +291,21 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'npm rebuild hugo-extended --ignore-scripts=false && npm run install:theme-deps',
     'the post-install step re-enables scripts for hugo-extended alone',
   );
+  // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
+  // sibling would run unreviewed code inside the pinned chain.
+  for (const name of [
+    'install:safe',
+    'install:theme-deps',
+    '_install:safe:post',
+  ]) {
+    for (const hook of [`pre${name}`, `post${name}`]) {
+      assert.equal(
+        scripts[hook],
+        undefined,
+        `${hook} stays absent, so ${name} runs exactly as pinned`,
+      );
+    }
+  }
 });
 
 test('workflows: installs are locked and credential-isolated', () => {
@@ -284,7 +330,27 @@ test('workflows: installs are locked and credential-isolated', () => {
         Array.isArray(job.steps),
         `${id} is a steps job this audit scans`,
       );
+      // Mutable images run external code around every step, outside the
+      // action-pin invariant.
+      assert.equal(job.container, undefined, `${id} runs container-free`);
+      assert.equal(job.services, undefined, `${id} runs service-free`);
+      // Env can invert the audited config: NPM_CONFIG_* outranks .npmrc,
+      // and the shell scripts honor a HUGO override.
+      for (const env of [workflow.env, job.env]) {
+        for (const key of Object.keys(env ?? {})) {
+          assert.ok(
+            !/^npm_config_/i.test(key) && key !== 'HUGO',
+            `${id} env ${key} leaves npm config and HUGO untouched`,
+          );
+        }
+      }
       for (const step of job.steps) {
+        for (const key of Object.keys(step.env ?? {})) {
+          assert.ok(
+            !/^npm_config_/i.test(key) && key !== 'HUGO',
+            `${id} step env ${key} leaves npm config and HUGO untouched`,
+          );
+        }
         if (step.uses?.startsWith('actions/checkout@')) {
           checkouts += 1;
           assert.equal(
@@ -303,25 +369,29 @@ test('workflows: installs are locked and credential-isolated', () => {
         }
         if (typeof step.run !== 'string') continue;
         runSteps += 1;
-        // Splice continuations first: `npm\` + newline + `ci` is one command.
+        // Splice continuations first: `npm\` + newline + `ci` is one
+        // command; scan a quote-stripped variant too, since the shell runs
+        // `"npm" ci` as npm.
         const run = step.run.replace(/\\\r?\n/g, ' ');
-        // Deny npm's tree-reifying/executing subcommands in raw run steps:
-        // the one sanctioned install is the reviewed install:safe script,
-        // counted below. `npm run` wrappers resolve to reviewed scripts, and
-        // `npm pack`/`npm publish`/`npm init` install nothing. The option
-        // prelude tolerates quoted values so `--prefix "a b"` can't shield
-        // the subcommand.
-        assert.doesNotMatch(
-          run,
-          /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
-          `${id} run step installs only via reviewed npm scripts`,
-        );
-        assert.doesNotMatch(run, /\bnpx\b/, `${id} run step avoids npx`);
-        assert.doesNotMatch(
-          run,
-          /\b(yarn|pnpm|bun|corepack)\b/,
-          `${id} run step uses npm as its only package manager`,
-        );
+        for (const text of [run, run.replace(/["']/g, '')]) {
+          // Deny npm's tree-reifying/executing subcommands in raw run
+          // steps: the one sanctioned install is the reviewed install:safe
+          // script, counted below. `npm run` wrappers resolve to reviewed
+          // scripts, and `npm pack`/`npm publish`/`npm init` install
+          // nothing. The option prelude tolerates quoted values so
+          // `--prefix "a b"` can't shield the subcommand.
+          assert.doesNotMatch(
+            text,
+            /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
+            `${id} run step installs only via reviewed npm scripts`,
+          );
+          assert.doesNotMatch(text, /\bnpx\b/, `${id} run step avoids npx`);
+          assert.doesNotMatch(
+            text,
+            /\b(yarn|pnpm|bun|corepack)\b/,
+            `${id} run step uses npm as its only package manager`,
+          );
+        }
         safeInstalls += (run.match(/npm run install:safe\b/g) ?? []).length;
       }
     }
