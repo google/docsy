@@ -174,11 +174,11 @@ function assertGenFaviconsBin(site) {
     cwd: site,
     shell: winShell,
   });
-  assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
+  assert.equal(help.status, 0, 'gen-favicons --help exits 0');
   assert.match(
     help.stdout ?? '',
     /Usage: gen-favicons/,
-    'npx gen-favicons --help prints usage',
+    'gen-favicons --help prints usage',
   );
 }
 

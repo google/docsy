@@ -168,17 +168,25 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
 // A bare `npx BIN` on an unpopulated tree falls back to the public registry
 // and executes whatever package holds that name (npm-squat); `--no-install`
 // refuses the fallback, and a plain bin name resolves only through PATH.
-test('package scripts and shell scripts run no bare npx', () => {
+test('package scripts and script files run no bare npx', () => {
   const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
     dir.endsWith('.json') ? dir : `${dir}/package.json`,
   );
-  const shellScripts = fs
-    .readdirSync(path.join(repoRoot, 'scripts'))
-    .filter((file) => file.endsWith('.sh'))
-    .map((file) => `scripts/${file}`);
-  assert.ok(shellScripts.length > 0, 'shell scripts were found');
+  const scriptFiles = ['scripts', 'tests', 'theme/scripts'].flatMap((dir) =>
+    fs
+      .readdirSync(path.join(repoRoot, dir), { recursive: true })
+      .filter((file) => /\.(sh|mjs)$/.test(file))
+      .map((file) => `${dir}/${file}`),
+  );
+  assert.ok(
+    scriptFiles.some((file) => file.endsWith('.sh')) &&
+      scriptFiles.some((file) => file.endsWith('.mjs')),
+    'shell and node scripts were found',
+  );
 
-  const bareNpx = /\bnpx\s+(?!--no-install\b)/;
+  // The lookahead accepts the exact flag only: --no-install-anything is not
+  // a fallback refusal.
+  const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
   for (const manifest of manifests) {
     for (const [name, command] of Object.entries(readJSON(manifest).scripts)) {
       assert.doesNotMatch(
@@ -188,12 +196,12 @@ test('package scripts and shell scripts run no bare npx', () => {
       );
     }
   }
-  for (const script of shellScripts) {
+  for (const script of scriptFiles) {
     // Executable text only: comment lines may name npx in prose.
     const code = fs
       .readFileSync(path.join(repoRoot, script), 'utf8')
       .split('\n')
-      .filter((line) => !/^\s*#/.test(line))
+      .filter((line) => !/^\s*(#|\/\/)/.test(line))
       .join('\n');
     assert.doesNotMatch(code, bareNpx, `${script} resolves bins locally`);
   }
@@ -206,9 +214,11 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     /^npm ci /,
     'install:safe is lock-enforced',
   );
+  // Bare flags only: `.includes()` would also accept --ignore-scripts=false.
   for (const flag of ['--omit=optional', '--ignore-scripts']) {
-    assert.ok(
-      scripts['install:safe'].includes(` ${flag}`),
+    assert.match(
+      scripts['install:safe'],
+      new RegExp(` ${flag}(?= |$)`),
       `install:safe carries ${flag}`,
     );
   }
@@ -217,8 +227,9 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     /^npm ci --prefix theme /,
     'install:theme-deps is lock-enforced against the theme lock',
   );
-  assert.ok(
-    scripts['install:theme-deps'].includes(' --ignore-scripts'),
+  assert.match(
+    scripts['install:theme-deps'],
+    / --ignore-scripts(?= |$)/,
     'install:theme-deps carries --ignore-scripts',
   );
   assert.equal(
@@ -244,7 +255,13 @@ test('workflows: installs are locked and credential-isolated', () => {
     );
     for (const [jobId, job] of Object.entries(workflow.jobs ?? {})) {
       const id = `${file} ${jobId}`;
-      for (const step of job.steps ?? []) {
+      // A stepless job (a reusable-workflow call, say) would escape this
+      // scan; extend the audit deliberately instead.
+      assert.ok(
+        Array.isArray(job.steps),
+        `${id} is a steps job this audit scans`,
+      );
+      for (const step of job.steps) {
         if (step.uses?.startsWith('actions/checkout@')) {
           checkouts += 1;
           assert.equal(
@@ -255,16 +272,22 @@ test('workflows: installs are locked and credential-isolated', () => {
         }
         if (typeof step.run !== 'string') continue;
         runSteps += 1;
-        // npm's installing/executing subcommands (aliases included) stay out
-        // of workflows: dependency installation goes only through the
-        // reviewed install:safe path. `npm pack`/`npm publish`/`npm init`
-        // install nothing.
+        // Deny npm's tree-reifying/executing subcommands (aliases included,
+        // flags-before-subcommand tolerated) in raw run steps: the one
+        // sanctioned install is the reviewed install:safe script, counted
+        // below. `npm run` wrappers resolve to reviewed scripts, and
+        // `npm pack`/`npm publish`/`npm init` install nothing.
         assert.doesNotMatch(
           step.run,
-          /\bnpm\s+(install|add|i|in|ins|inst|insta|instal|isnt|isnta|isntall|ci|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
+          /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]\S+)?\s+)*(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
           `${id} run step installs only via reviewed npm scripts`,
         );
         assert.doesNotMatch(step.run, /\bnpx\b/, `${id} run step avoids npx`);
+        assert.doesNotMatch(
+          step.run,
+          /\b(yarn|pnpm|bun|corepack)\b/,
+          `${id} run step uses npm as its only package manager`,
+        );
         safeInstalls += (step.run.match(/npm run install:safe\b/g) ?? [])
           .length;
       }
