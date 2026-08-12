@@ -1,6 +1,5 @@
 // Sanity checks for the npm tarballs: the root GitHub-NPM package and the
-// @docsy/theme registry package. Fast and offline; picked up by
-// test:tooling / _test:full:post.
+// @docsy/theme registry package. Fast and offline; picked up by test:repo.
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';

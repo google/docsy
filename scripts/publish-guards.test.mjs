@@ -1,5 +1,5 @@
 // Tests for the publish-workflow guards (publish-guards.mjs); picked up by
-// test:tooling.
+// test:repo.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';

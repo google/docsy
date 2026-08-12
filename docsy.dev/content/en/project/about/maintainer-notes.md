@@ -68,7 +68,7 @@ a substitute.
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
-guarded by [test:hugo-versions](#test-suites).
+guarded by the [hugo-versions test](#test-suites).
 
 Only current-state pages — docs and the changelog's
 [official support](/project/about/changelog/#official-support) section — render
@@ -79,7 +79,7 @@ in its front matter, so updating the post (say, for a patch release) means
 editing one field. (Version literals in narrative text are already
 time-insensitive.) Page params take precedence over site params, so the same
 `{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
-Guarded by [test:hugo-versions](#test-suites).
+Guarded by the [hugo-versions test](#test-suites).
 
 ### Minimum Hugo version
 
@@ -123,8 +123,8 @@ Docs render this version live through the `hugo-version` shortcode
 The Mermaid version that Docsy loads by default is pinned in `theme/hugo.yaml`
 `params.mermaid.version`; the [Mermaid partial][mermaid.html] and [diagrams][]
 page both read it live, so bumping that one line during the
-[release-prep audit](#release-prep-audit) is enough. Guarded by
-[test:mermaid-version](#test-suites). The partial's unset- and floating-version
+[release-prep audit](#release-prep-audit) is enough. Guarded by the
+[mermaid-version test](#test-suites). The partial's unset- and floating-version
 guards run reliably only on the docs, blog, and swagger layouts for now: the
 default base template renders scripts through an unkeyed `partialCached`, which
 can skip them. Before bumping, check the [npm registry][mermaid-npm] and [OSV][]
@@ -148,14 +148,14 @@ yet, as of this writing).
 
 From the repo root:
 
-| Script                 | Role                                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------------------------- |
-| `test:fixture-site`    | Fast, offline checks over minimal monolingual fixture sites: paths docsy.dev can't cover            |
-| `test:hugo-versions`   | Fast, offline checks of the [Hugo versions](#hugo-versions) declarations and constraints            |
-| `test:mermaid-version` | Fast, offline check that the [default Mermaid version](#mermaid-version) is pinned exact            |
-| `test:smoke`           | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
-| `test:tooling`         | Unit tests for repo scripts                                                                         |
-| `test:website`         | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
+| Script         | Role                                                                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `test:repo`    | Fast, offline repo checks: [Hugo versions](#hugo-versions) declarations, [Mermaid pin](#mermaid-version), lock audit, script unit tests, and minimal fixture sites |
+| `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo)                                                                |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests                                                                           |
+
+To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
+`node --test tests/lock-audit.test.mjs`.
 
 All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
 validation (they auto-target the current branch's GitHub upstream).

@@ -207,6 +207,26 @@ test('package scripts and script files run no bare npx', () => {
   }
 });
 
+// node --test errors on unresolved paths only when nothing at all matches:
+// a stale name that rides with matching ones is silently skipped. Resolve
+// every argument here so a rename can't empty a test:repo suite unnoticed.
+test('manifests: every test:repo argument resolves to test files', () => {
+  const { scripts } = readJSON('package.json');
+  assert.match(
+    scripts['test:repo'],
+    /^node --test /,
+    'test:repo uses the node test runner',
+  );
+  const args = scripts['test:repo']
+    .replace(/^node --test /, '')
+    .split(' ')
+    .map((arg) => arg.replace(/^'(.*)'$/, '$1'));
+  for (const arg of args) {
+    const matches = fs.globSync(arg, { cwd: repoRoot });
+    assert.ok(matches.length > 0, `test:repo argument ${arg} matches files`);
+  }
+});
+
 test('manifests: the install path keeps its locked, script-free form', () => {
   const { scripts } = readJSON('package.json');
   assert.match(

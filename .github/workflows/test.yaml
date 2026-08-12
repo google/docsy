@@ -58,7 +58,9 @@ jobs:
         run: npm run test:lychee
 
       - if: runner.os == 'Windows'
-        run: npm run _test:full:pre && npm run -C docsy.dev build && npm run _test:full:post
+        run:
+          npm run _test:full:pre && npm run -C docsy.dev build && npm run
+          _test:full:common
 
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
