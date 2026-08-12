@@ -142,8 +142,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   );
 
   // npm takes a key's last assignment, so presence isn't enough: a later
-  // `KEY=false` line would win while the `=true` line still matches. Each
-  // policy key gets exactly one assignment.
+  // `KEY=false` line would win while the `=true` line still matches.
   const npmrcLines = fs
     .readFileSync(path.join(repoRoot, '.npmrc'), 'utf8')
     .split('\n')
