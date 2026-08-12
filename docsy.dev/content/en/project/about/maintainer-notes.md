@@ -148,17 +148,21 @@ yet, as of this writing).
 
 From the repo root:
 
-| Script         | Role                                                                                                                                                               |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `test:repo`    | Fast, offline repo checks: [Hugo versions](#hugo-versions) declarations, [Mermaid pin](#mermaid-version), lock audit, script unit tests, and minimal fixture sites |
-| `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo)                                                                |
-| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests                                                                           |
+| Script         | Role                                                                                                |
+| -------------- | --------------------------------------------------------------------------------------------------- |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][]                                      |
+| `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
 
-To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
-`node --test tests/lock-audit.test.mjs`.
+Notes:
 
-All but `test:smoke` run in CI; smoke tests are run manually for PR-branch
-validation (they auto-target the current branch's GitHub upstream).
+- All but `test:smoke` run in CI.
+- To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
+  `node --test tests/lock-audit.test.mjs`.
+- Run `test:smoke` manually for `main` or PR-branch validation. Its tests
+  auto-target the current branch's GitHub upstream.
+
+### Golden tests
 
 The md-output and favicon tests compare built output against committed golden
 files. When a golden test reports intended drift, run `npm run update:goldens`
