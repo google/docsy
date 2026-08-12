@@ -61,12 +61,19 @@ const lockEntries = (lock) =>
 // A bare `npx BIN` on an unpopulated tree falls back to the public registry
 // and executes whatever package holds that name (npm-squat); `--no-install`
 // refuses the fallback, and a plain bin name resolves only through PATH.
-// `npm exec`/`npm x` is the same install-on-miss engine under another name.
+// `npm exec`/`npm x` is the same install-on-miss engine under another name
+// (options tolerated before the subcommand), as are the alternate package
+// managers' runners. Text-level guards: interpolation and indirection
+// (`$N ci`) can outrun any grep, so these are regression guards against
+// careless reintroduction; deliberate obfuscation is review's job.
 const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
-const npmExec = /\bnpm\s+(exec|x)\b/;
-// The JS-API form: a spawned `npx` whose first argument is not the
-// fallback refusal.
-const jsNpxSpawn = /['"`]npx['"`]\s*,\s*\[\s*(?!['"`]--no-install['"`])/;
+const npmExec = /\bnpm\s+(?:-{1,2}[\w-]+(?:[= ]\S+)?\s+)*(exec|x)\b/;
+const altRunner = /\b(yarn|pnpm|bunx|corepack)\s/;
+// The JS-API forms: a spawned `npx` needs the fallback refusal as its
+// literal first argument (a variable args array can't prove it), and a
+// spawned `npm` must not reach the exec engine.
+const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no-install['"`])/;
+const jsNpmExec = /['"`]npm['"`]\s*,\s*\[\s*['"`](exec|x)['"`]/;
 
 test('locks: every package is registry+integrity, workspace-local, or an allowlisted git pin', () => {
   let registryPackages = 0;
@@ -195,10 +202,16 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
   const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
     dir.endsWith('.json') ? dir : `${dir}/package.json`,
   );
-  const scriptFiles = ['scripts', 'tests', 'theme/scripts'].flatMap((dir) =>
+  const scriptFiles = [
+    'docsy.dev/scripts',
+    'docsy.dev/tests',
+    'scripts',
+    'tests',
+    'theme/scripts',
+  ].flatMap((dir) =>
     fs
       .readdirSync(path.join(repoRoot, dir), { recursive: true })
-      .filter((file) => /\.(sh|mjs)$/.test(file))
+      .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
       .map((file) => `${dir}/${file}`),
   );
   assert.ok(
@@ -216,6 +229,11 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
         const id = `${manifest} script ${name}`;
         assert.doesNotMatch(text, bareNpx, `${id} resolves bins locally`);
         assert.doesNotMatch(text, npmExec, `${id} runs no npm-exec`);
+        assert.doesNotMatch(
+          text,
+          altRunner,
+          `${id} uses npm as its only package runner`,
+        );
       }
     }
   }
@@ -231,13 +249,19 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
     for (const text of [code, code.replace(/["']/g, '')]) {
       assert.doesNotMatch(text, bareNpx, `${script} resolves bins locally`);
       assert.doesNotMatch(text, npmExec, `${script} runs no npm-exec`);
+      assert.doesNotMatch(
+        text,
+        altRunner,
+        `${script} uses npm as its only package runner`,
+      );
     }
-    if (script.endsWith('.mjs')) {
+    if (/\.(mjs|js|cjs|mts)$/.test(script)) {
       assert.doesNotMatch(
         code,
         jsNpxSpawn,
         `${script} passes --no-install to spawned npx`,
       );
+      assert.doesNotMatch(code, jsNpmExec, `${script} spawns no npm-exec`);
     }
   }
 });
@@ -390,6 +414,13 @@ test('workflows: installs are locked and credential-isolated', () => {
             text,
             /\b(yarn|pnpm|bun|corepack)\b/,
             `${id} run step uses npm as its only package manager`,
+          );
+          // GITHUB_ENV writes poison later steps' env past the map checks
+          // above. (GITHUB_PATH stays legal: the lychee install uses it.)
+          assert.doesNotMatch(
+            text,
+            /GITHUB_ENV/,
+            `${id} run step leaves later steps' env untouched`,
           );
         }
         safeInstalls += (run.match(/npm run install:safe\b/g) ?? []).length;
