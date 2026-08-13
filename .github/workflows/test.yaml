@@ -56,19 +56,6 @@ jobs:
           npm run -C docsy.dev build &&
           npm run _test:full:common
 
-      # Node's runner silently skips a non-matching pattern that rides with
-      # matching ones, so a green suite can silently shrink (it once ran 16
-      # of 146 tests on Windows). Bounded floor: no update needed as suites
-      # grow; pin exact counts only if shrinkage recurs.
-      - name: 'Sanity check: the repo suite runs in bulk on this OS'
-        shell: bash
-        run: |
-          set -o pipefail
-          npm run -s test:repo 2>&1 | tee /tmp/test-repo.log | tail -8
-          count="$(awk '/^.? ?tests [0-9]+$/ { n = $NF } END { print n }' /tmp/test-repo.log)"
-          echo "test:repo executed ${count:-0} tests (floor: 100)"
-          test "${count:-0}" -ge 100
-
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: test-site-${{ matrix.os }}

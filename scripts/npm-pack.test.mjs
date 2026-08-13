@@ -138,7 +138,12 @@ before(() => {
     );
     const tarballPath = path.join(dest, tgzFiles[0]);
 
-    const tar = spawnSync('tar', ['-tzf', tarballPath], { encoding: 'utf8' });
+    // Run from dest with a bare filename: GNU tar parses a drive-letter
+    // path (D:\...) as a remote host:path spec and fails on Windows.
+    const tar = spawnSync('tar', ['-tzf', tgzFiles[0]], {
+      cwd: dest,
+      encoding: 'utf8',
+    });
     assert.equal(tar.status, 0, `tar -tzf lists ${name}: ${tar.stderr}`);
     const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);

@@ -203,20 +203,14 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
 
   // One script interpreter on every platform: cmd.exe parses quoting
   // differently from sh, and the divergence fails silently (adversarial
-  // round 10: Windows ran 16 of 146 tests). A workspace-directed run
-  // (npm -C docsy.dev …) reads only that workspace's .npmrc, so each
-  // workspace with CI-run scripts carries its own pin.
-  for (const npmrc of ['.npmrc', 'docsy.dev/.npmrc']) {
-    const lines = fs
-      .readFileSync(path.join(repoRoot, npmrc), 'utf8')
-      .split('\n')
-      .map((line) => line.trim());
-    assert.deepEqual(
-      lines.filter((line) => /^script-shell\s*=/.test(line)),
-      ['script-shell=bash'],
-      `${npmrc} runs npm scripts under Bash on every platform`,
-    );
-  }
+  // round 10: Windows ran 16 of 146 tests). The root pin covers workspace
+  // runs too: npm resolves config at the workspace root and ignores
+  // per-workspace .npmrc files.
+  assert.deepEqual(
+    npmrcLines.filter((line) => /^script-shell\s*=/.test(line)),
+    ['script-shell=bash'],
+    '.npmrc runs npm scripts under Bash on every platform',
+  );
 });
 
 test('manifests: git dependencies are tag-pinned to their reviewed repos', () => {
