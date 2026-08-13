@@ -1,5 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 
 import {
   RETRY_DELAYS_SECONDS,
@@ -7,6 +12,10 @@ import {
   rebuildHugoExtended,
   runNpmRebuild,
 } from './rebuild-hugo-extended.mjs';
+
+const helperPath = fileURLToPath(
+  new URL('rebuild-hugo-extended.mjs', import.meta.url),
+);
 
 const expectedUnsafeHugoEnv = [
   'HUGO_BIN_PATH',
@@ -122,4 +131,52 @@ test('Hugo rebuild rejects installer control variables', async () => {
       `${name} rejection is reported`,
     );
   }
+});
+
+test('Hugo rebuild fails fast without the npm CLI path', async () => {
+  const errors = [];
+  const status = await rebuildHugoExtended({
+    env: {},
+    error: (message) => errors.push(message),
+    log: () => {},
+    wait: () => assert.fail('a missing npm CLI path permits no retry wait'),
+  });
+
+  assert.equal(status, 1, 'missing npm CLI path returns nonzero');
+  assert.deepEqual(
+    errors,
+    ['npm_execpath is unavailable; run _rebuild:hugo through npm'],
+    'missing npm CLI path is reported once',
+  );
+});
+
+// End-to-end: the entry point fires and the default rebuild reaches npm's
+// CLI with the exact argument vector -- proves the wiring the in-memory
+// policy tests bypass (adversarial round 9).
+test('helper entry point runs the default npm rebuild', () => {
+  const tmp = mkdtempSync(path.join(os.tmpdir(), 'docsy-hugo-entry-'));
+  const recorder = path.join(tmp, 'fake-npm-cli.js');
+  const argvFile = path.join(tmp, 'argv.json');
+  writeFileSync(
+    recorder,
+    `require('node:fs').writeFileSync(${JSON.stringify(argvFile)},` +
+      ` JSON.stringify(process.argv.slice(2)));`,
+  );
+
+  const env = { ...process.env, npm_execpath: recorder };
+  for (const name of expectedUnsafeHugoEnv) delete env[name];
+  const result = spawnSync(process.execPath, [helperPath], {
+    encoding: 'utf8',
+    env,
+  });
+  const recorded = JSON.parse(readFileSync(argvFile, 'utf8'));
+  rmSync(tmp, { recursive: true, force: true });
+
+  assert.equal(result.status, 0, 'entry point exits successfully');
+  assert.match(result.stdout, /Hugo install attempt 1\/4/);
+  assert.deepEqual(
+    recorded,
+    ['rebuild', 'hugo-extended', '--ignore-scripts=false'],
+    'entry point drives the exact targeted rebuild through the npm CLI',
+  );
 });

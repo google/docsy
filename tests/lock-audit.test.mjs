@@ -10,6 +10,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 
+import { UNSAFE_HUGO_ENV } from '../scripts/rebuild-hugo-extended.mjs';
+
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
@@ -72,16 +74,9 @@ const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
 const npmOptions = String.raw`(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*`;
 const npmExec = new RegExp(String.raw`\bnpm\s+${npmOptions}(exec|x)\b`);
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
-const unsafeHugoEnv = new Set([
-  'HUGO_BIN_PATH',
-  'HUGO_FORCE_STANDARD',
-  'HUGO_MIRROR_BASE_URL',
-  'HUGO_NO_EXTENDED',
-  'HUGO_OVERRIDE_VERSION',
-  'HUGO_SKIP_CHECKSUM',
-  'HUGO_SKIP_DOWNLOAD',
-  'HUGO_SKIP_VERIFY',
-]);
+// One home for the unsafe-installer-control names: the runtime helper
+// exports the list; its unit test pins the content literally.
+const unsafeHugoEnv = new Set(UNSAFE_HUGO_ENV);
 // The JS-API forms: a spawned `npx` needs the fallback refusal as its
 // literal first argument, and a spawned `npm` a literal array that doesn't
 // reach the exec engine (a variable args array can't prove either).

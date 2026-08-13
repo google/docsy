@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import path from 'node:path';
+import fs from 'node:fs';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -54,6 +54,10 @@ export async function rebuildHugoExtended({
   }
 
   const rebuild = run ?? (() => runNpmRebuild({ env, error }));
+  if (!run && !env.npm_execpath) {
+    // Fail before the retry loop: a missing npm CLI path is deterministic.
+    return rebuild();
+  }
   const attemptCount = RETRY_DELAYS_SECONDS.length;
   for (const [index, delay] of RETRY_DELAYS_SECONDS.entries()) {
     if (delay > 0) {
@@ -69,7 +73,17 @@ export async function rebuildHugoExtended({
   return 1;
 }
 
-const isMain =
-  process.argv[1] &&
-  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+// Realpaths on both sides so a symlinked invocation can't silently no-op
+// (adversarial round 9); importing this module never runs the rebuild.
+const isMain = (() => {
+  if (!process.argv[1]) return false;
+  try {
+    return (
+      fs.realpathSync(process.argv[1]) ===
+      fs.realpathSync(fileURLToPath(import.meta.url))
+    );
+  } catch {
+    return false;
+  }
+})();
 if (isMain) process.exitCode = await rebuildHugoExtended();
