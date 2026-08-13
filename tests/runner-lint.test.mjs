@@ -59,7 +59,7 @@ const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // `npm` needs a literal array that doesn't reach the exec engine (a
 // variable args array can't prove either).
 const jsNpxSpawn =
-  /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`]\s*,\s*(?:['"`]--package=[^'"`\s]+['"`]\s*,\s*)?['"`]--['"`])/;
+  /['"`]npx['"`]\s*,(?!\s*\[\s*['"`]--no['"`]\s*,\s*(?:['"`]--package=[^'"`\s]+['"`]\s*,\s*)?['"`]--['"`])/;
 const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;
 const jsNpmExec = /['"`]npm['"`]\s*,\s*\[[^\]]*['"`](exec|x)['"`]/;
 

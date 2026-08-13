@@ -72,9 +72,16 @@ test('manifests: every test:repo argument resolves to test files', () => {
   const allTestFiles = ['tests', 'scripts', 'theme/scripts']
     .flatMap((dir) =>
       fs
-        .readdirSync(path.join(repoRoot, dir), { recursive: true })
-        .filter((file) => file.endsWith('.test.mjs'))
-        .map((file) => `${dir}/${file.replaceAll(path.sep, '/')}`),
+        .readdirSync(path.join(repoRoot, dir), {
+          recursive: true,
+          withFileTypes: true,
+        })
+        .filter((entry) => entry.isFile() && entry.name.endsWith('.test.mjs'))
+        .map((entry) =>
+          path
+            .relative(repoRoot, path.join(entry.parentPath, entry.name))
+            .replaceAll(path.sep, '/'),
+        ),
     )
     .filter((file) => !deliberatelyUnwired.some((dir) => file.startsWith(dir)))
     .sort();

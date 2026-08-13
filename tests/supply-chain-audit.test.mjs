@@ -73,6 +73,7 @@ const envLeavesInstallConfigUntouched = (key) => {
   return (
     !normalized.startsWith('NPM_CONFIG_') &&
     normalized !== 'HUGO' &&
+    normalized !== 'NODE_OPTIONS' &&
     !unsafeHugoEnv.has(normalized)
   );
 };
@@ -164,35 +165,33 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
     'allowScripts allows exactly the locked hugo-extended version',
   );
 
-  // npm takes a key's last assignment, so presence isn't enough: a later
-  // `KEY=false` line would win while the `=true` line still matches.
-  const npmrcLines = fs
-    .readFileSync(path.join(repoRoot, '.npmrc'), 'utf8')
-    .split('\n')
-    .map((line) => line.trim());
-  for (const [key, why] of [
-    ['strict-allow-scripts', 'enforces the allowScripts policy'],
-    ['engine-strict', 'hard-fails npm versions that would ignore allowScripts'],
-    ['@docsy:registry', 'pins the @docsy scope to the npm registry'],
-  ]) {
-    const expected =
-      key === '@docsy:registry'
-        ? `${key}=https://registry.npmjs.org/`
-        : `${key}=true`;
-    assert.deepEqual(
-      npmrcLines.filter((line) => new RegExp(`^${key}\\s*=`).test(line)),
-      [expected],
-      `.npmrc ${why} via a single ${expected}`,
+  // npm takes a key's last assignment, so spot-checks can be reversed by
+  // a later line, and any unpinned addition (node-options=--require …,
+  // ignore-scripts=false) changes install behavior: pin the full
+  // assignment set. Each setting's rationale lives beside it in .npmrc.
+  assert.deepEqual(
+    fs
+      .readFileSync(path.join(repoRoot, '.npmrc'), 'utf8')
+      .split('\n')
+      .map((line) => line.trim())
+      .filter((line) => line !== '' && !line.startsWith('#')),
+    [
+      'engine-strict=true',
+      'strict-allow-scripts=true',
+      'script-shell=bash',
+      '@docsy:registry=https://registry.npmjs.org/',
+    ],
+    '.npmrc carries exactly the reviewed npm settings',
+  );
+  // npm resolves workspace config at the root, but --prefix/-C runs read
+  // the target directory's .npmrc as project config: their absence keeps
+  // the root file the one audited home.
+  for (const dir of ['docsy.dev', 'theme']) {
+    assert.ok(
+      !fs.existsSync(path.join(repoRoot, dir, '.npmrc')),
+      `${dir} has no workspace .npmrc`,
     );
   }
-
-  // Pin rationale: the .npmrc comment beside the setting (two-shell quoting
-  // divergence); same last-assignment guard as the loop above.
-  assert.deepEqual(
-    npmrcLines.filter((line) => /^script-shell\s*=/.test(line)),
-    ['script-shell=bash'],
-    '.npmrc runs npm scripts under Bash on every platform',
-  );
 });
 
 test('manifests: git dependencies are tag-pinned to their reviewed repos', () => {
@@ -226,18 +225,19 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
     'the post-install step uses the retrying Hugo rebuild helper',
   );
-  // Cross-pin: the wiring guard's coverage check is existence-relative, so
-  // deleting the guard would silence it while its glob stays green. Anchor
-  // its existence and wiring here, in an independently wired file; the
-  // wiring guard anchors this file back.
-  assert.ok(
-    fs.existsSync(path.join(repoRoot, 'tests/test-wiring.test.mjs')),
-    'the suite-wiring guard exists',
-  );
-  assert.ok(
-    scripts['test:repo'].includes(" 'tests/*.test.mjs'"),
-    'test:repo runs the top-level tests, the suite-wiring guard included',
-  );
+  // Cross-root anchoring: this file and the wiring guard ride the tests
+  // glob, so scripts/suite-anchor.test.mjs pins that glob and the
+  // tests-root guards from the scripts glob; anchor it and the wiring
+  // guard back from here.
+  for (const guard of [
+    'scripts/suite-anchor.test.mjs',
+    'tests/test-wiring.test.mjs',
+  ]) {
+    assert.ok(
+      fs.existsSync(path.join(repoRoot, guard)),
+      `structural guard ${guard} exists`,
+    );
+  }
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
   // sibling would run unreviewed code inside the pinned chain.
   for (const name of [
@@ -278,13 +278,29 @@ test('workflows: installs are locked and credential-isolated', () => {
     path.join(repoRoot, 'docsy.dev/netlify.toml'),
     'utf8',
   );
-  for (const name of unsafeHugoEnv) {
-    assert.doesNotMatch(
-      netlifyConfig,
-      new RegExp(`^\\s*${name}\\s*=`, 'im'),
-      `Netlify leaves ${name} unset`,
+  // Netlify [build.environment] feeds the same install and build
+  // processes the workflow env screen guards: screen every env-shaped key
+  // the same way, and pin NPM_FLAGS exactly -- it is what constrains
+  // Netlify's automatic install to resolution only (its comment in
+  // netlify.toml).
+  let netlifyEnvKeys = 0;
+  for (const [, key, value] of netlifyConfig.matchAll(
+    /^\s*([A-Z][A-Z0-9_]*)\s*=\s*(.*)$/gm,
+  )) {
+    netlifyEnvKeys += 1;
+    assert.ok(
+      envLeavesInstallConfigUntouched(key),
+      `Netlify env ${key} leaves npm, Node, and Hugo config untouched`,
     );
+    if (key === 'NPM_FLAGS') {
+      assert.equal(
+        value,
+        '"--dry-run --ignore-scripts"',
+        'NPM_FLAGS constrains the Netlify auto-install to resolution only',
+      );
+    }
   }
+  assert.ok(netlifyEnvKeys > 0, 'Netlify env keys were audited');
   // Netlify command chains are execution entry points the runner lint
   // doesn't scan (TOML): exact-pin them.
   assert.deepEqual(
@@ -330,7 +346,8 @@ test('workflows: installs are locked and credential-isolated', () => {
         `${id} uses the default job shell`,
       );
       // Env can invert the audited config: NPM_CONFIG_* outranks .npmrc,
-      // and the shell scripts honor a HUGO override.
+      // the shell scripts honor a HUGO override, and NODE_OPTIONS injects
+      // code into every Node process.
       for (const env of [workflow.env, job.env]) {
         for (const key of Object.keys(env ?? {})) {
           assert.ok(
@@ -378,10 +395,10 @@ test('workflows: installs are locked and credential-isolated', () => {
         // steps: the one sanctioned install is the reviewed install:safe
         // script, counted below. `npm run` wrappers resolve to reviewed
         // scripts, and `npm pack`/`npm publish`/`npm init` install
-        // nothing.
+        // nothing (`npm audit fix` and `npm link` do).
         assert.doesNotMatch(
           run,
-          /\bnpm\s+(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
+          /\bnpm\s+(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|isntal|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x|audit|link|ln)\b/,
           `${id} run step installs only via reviewed npm scripts`,
         );
         assert.doesNotMatch(run, /\bnpx\b/, `${id} run step avoids npx`);
