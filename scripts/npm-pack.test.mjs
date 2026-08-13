@@ -194,7 +194,7 @@ test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
 // gains the packed commit's SHA inside the tarball only.
 test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () => {
   const { tarballPath } = packed.get('@docsy/theme');
-  // cwd + bare filename: GNU tar parses a drive-letter path as remote.
+  // Bare filename via cwd: drive-letter note in before().
   const extract = spawnSync(
     'tar',
     ['-xzOf', path.basename(tarballPath), 'package/package.json'],

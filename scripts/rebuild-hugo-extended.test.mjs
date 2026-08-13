@@ -17,6 +17,8 @@ const helperPath = fileURLToPath(
   new URL('rebuild-hugo-extended.mjs', import.meta.url),
 );
 
+// Deliberately literal: the content pin for the helper's UNSAFE_HUGO_ENV
+// export, which the lock audit imports -- a name dropped there goes red here.
 const expectedUnsafeHugoEnv = [
   'HUGO_BIN_PATH',
   'HUGO_FORCE_STANDARD',

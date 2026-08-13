@@ -201,11 +201,8 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
     );
   }
 
-  // One script interpreter on every platform: cmd.exe parses quoting
-  // differently from sh, and the divergence fails silently (adversarial
-  // round 10: Windows ran 16 of 146 tests). The root pin covers workspace
-  // runs too: npm resolves config at the workspace root and ignores
-  // per-workspace .npmrc files.
+  // Pin rationale: the .npmrc comment beside the setting (two-shell quoting
+  // divergence); same last-assignment guard as the loop above.
   assert.deepEqual(
     npmrcLines.filter((line) => /^script-shell\s*=/.test(line)),
     ['script-shell=bash'],
