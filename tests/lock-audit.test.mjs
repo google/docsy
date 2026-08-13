@@ -303,9 +303,9 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
 
 // node --test silently succeeds when a glob matches nothing. Resolve every
 // argument here so a rename can't empty a test:repo suite unnoticed.
-// Quoting must be cmd-safe: cmd.exe passes single quotes through literally,
-// so a single-quoted glob matches nothing on Windows and its whole suite
-// rides silently (adversarial round 10). Double quotes strip on both shells.
+// Single quotes are safe again under the pinned bash script shell (see
+// .npmrc), but wildcards must stay quoted: bash without globstar would
+// pre-expand `**` as `*`, silently dropping top-level test files.
 test('manifests: every test:repo argument resolves to test files', () => {
   const { scripts } = readJSON('package.json');
   assert.match(
@@ -315,19 +315,14 @@ test('manifests: every test:repo argument resolves to test files', () => {
   );
   const args = scripts['test:repo'].replace(/^node --test /, '').split(' ');
   for (const arg of args) {
-    assert.doesNotMatch(
-      arg,
-      /'/,
-      `test:repo argument ${arg} uses no cmd-unsafe single quote`,
-    );
     if (arg.includes('*')) {
       assert.match(
         arg,
-        /^".*"$/,
-        `test:repo wildcard argument ${arg} is double-quoted`,
+        /^(['"]).*\1$/,
+        `test:repo wildcard argument ${arg} is quoted for node's own globbing`,
       );
     }
-    const pattern = arg.replace(/^"(.*)"$/, '$1');
+    const pattern = arg.replace(/^(['"])(.*)\1$/, '$2');
     // globSync also returns directories, which node --test can't run.
     const testFiles = fs
       .globSync(pattern, { cwd: repoRoot })
