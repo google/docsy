@@ -2,11 +2,12 @@
 // npx/exec that agents habitually type (a bare `npx BIN` on an unpopulated
 // tree falls back to the public registry and executes whatever package
 // holds that name: npm-squat; live near-miss 2026-08-10). One allowed
-// dynamic-resolution form: `npx --no -- BIN` (--package=... may precede
-// the --); everything else (npm exec/x, alternate package managers'
-// runners) is denied outright rather than flag-parsed for safety.
-// Deliberate evasion (interpolation, option preludes like `npm -s exec`)
-// outruns any grep and is review's job.
+// dynamic-resolution form, exactly: `npx --no -- BIN`. Everything else
+// (npm exec/x, other npx flag spellings -- `--no-fund` and friends are
+// config negations that still install, adversarial round 11 -- and
+// alternate package managers' runners) is denied outright rather than
+// flag-parsed for safety. Deliberate evasion (interpolation, option
+// preludes like `npm -s exec`) outruns any grep and is review's job.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -22,7 +23,10 @@ const repoRoot = path.resolve(
 const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
-const npxNotRefusal = /\bnpx\s+(?!--no\b)/;
+// The lookahead accepts exactly `--no -- ` (whitespace-tolerant): `--no\b`
+// would bless every `--no-*` config flag, which npm parses as negations
+// (fund=false), not refusals.
+const npxNotRefusal = /\bnpx\s+(?!\s*--no\s+--(?:\s|$))/;
 const npmExec = /\bnpm\s+(exec|x)\b/;
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // The JS-API forms: a spawned `npx` needs the literal refusal flag first,

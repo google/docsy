@@ -48,4 +48,20 @@ test('manifests: every test:repo argument resolves to test files', () => {
       `test:repo argument ${arg} matches test files`,
     );
   }
+
+  // Membership, derived from the filesystem: every top-level guard in
+  // tests/ must ride in test:repo, so no single guard file can be dropped
+  // from the suite while the rest stays green (adversarial round 11).
+  // Exclusions are named and deliberate: smoke is slow and network-bound
+  // (its header), run manually.
+  const deliberatelyUnwired = new Set(['tests/smoke.test.mjs']);
+  const topLevelGuards = fs
+    .globSync('tests/*.test.mjs', { cwd: repoRoot })
+    .filter((file) => !deliberatelyUnwired.has(file))
+    .sort();
+  assert.deepEqual(
+    args.filter((arg) => !arg.includes('*')).sort(),
+    topLevelGuards,
+    'test:repo names every top-level tests/*.test.mjs guard',
+  );
 });
