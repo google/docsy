@@ -226,9 +226,14 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
     'the post-install step uses the retrying Hugo rebuild helper',
   );
-  // Cross-pin: the wiring guard polices test:repo coverage, so the glob
-  // that wires it in is asserted here, in an independently wired file;
-  // dropping either requires editing the other (adversarial round 12).
+  // Cross-pin: the wiring guard's coverage check is existence-relative, so
+  // deleting the guard would silence it while its glob stays green
+  // (adversarial round 13). Anchor its existence and wiring here, in an
+  // independently wired file; the wiring guard anchors this file back.
+  assert.ok(
+    fs.existsSync(path.join(repoRoot, 'tests/test-wiring.test.mjs')),
+    'the suite-wiring guard exists',
+  );
   assert.ok(
     scripts['test:repo'].includes(" 'tests/*.test.mjs'"),
     'test:repo runs the top-level tests, the suite-wiring guard included',
