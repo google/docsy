@@ -17,7 +17,7 @@ process; note in particular [git-info.md][].
   in the root `.npmrc`, which covers workspace runs too; audited): write them as
   POSIX, never cmd.exe syntax. Exception: consumer-run scripts published with
   the theme package (e.g. `install:theme-deps`) get no `.npmrc` and must stay
-  shell-neutral -- bare commands, double quotes only.
+  shell-neutral (bare commands, double quotes only).
 - Don't use comments to explain the obvious; use self-explanatory names and
   short names when the context is clear.
 - This project has a long history; look for existing helpers (partials,

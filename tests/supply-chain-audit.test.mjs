@@ -62,7 +62,7 @@ const packageIocs = new Set([
 const lockEntries = (lock) =>
   Object.entries(lock.packages).filter(([key]) => key !== '');
 
-// Same shape as runner-lint's altRunner: a one-line regex, duplicated over
+// Deliberately duplicated from runner-lint.test.mjs: one regex line beats
 // a cross-test-file import.
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // One home for the unsafe-installer-control names: the runtime helper
@@ -366,7 +366,7 @@ test('workflows: installs are locked and credential-isolated', () => {
         );
         // GITHUB_ENV writes poison later steps' env past the map checks
         // above; GITHUB_PATH prepends, so a writer could shadow npm
-        // itself -- pin its one reviewed use (the lychee install).
+        // itself; pin its one reviewed use (the lychee install).
         assert.doesNotMatch(
           run,
           /GITHUB_ENV/,

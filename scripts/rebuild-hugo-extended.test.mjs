@@ -18,7 +18,7 @@ const helperPath = fileURLToPath(
 );
 
 // Deliberately literal: the content pin for the helper's UNSAFE_HUGO_ENV
-// export, which the supply-chain audit imports -- a name dropped there
+// export, which the supply-chain audit imports; a name dropped there
 // goes red here.
 const expectedUnsafeHugoEnv = [
   'HUGO_BIN_PATH',
@@ -153,7 +153,7 @@ test('Hugo rebuild fails fast without the npm CLI path', async () => {
 });
 
 // End-to-end: the entry point fires and the default rebuild reaches npm's
-// CLI with the exact argument vector -- proves the wiring the in-memory
+// CLI with the exact argument vector, proving the wiring the in-memory
 // policy tests bypass (adversarial round 9).
 test('helper entry point runs the default npm rebuild', () => {
   const tmp = mkdtempSync(path.join(os.tmpdir(), 'docsy-hugo-entry-'));

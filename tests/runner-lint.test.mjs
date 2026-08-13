@@ -1,10 +1,10 @@
 // Script-runner LINT, not a security boundary: catches the careless bare
 // npx/exec that agents habitually type (a bare `npx BIN` on an unpopulated
 // tree falls back to the public registry and executes whatever package
-// holds that name -- npm-squat; live near-miss 2026-08-10). One allowed
+// holds that name: npm-squat; live near-miss 2026-08-10). One allowed
 // dynamic-resolution form: `npx --no -- BIN` (--package=... may precede
-// the --); everything else -- npm exec/x, alternate package managers'
-// runners -- is denied outright rather than flag-parsed for safety.
+// the --); everything else (npm exec/x, alternate package managers'
+// runners) is denied outright rather than flag-parsed for safety.
 // Deliberate evasion (interpolation, option preludes like `npm -s exec`)
 // outruns any grep and is review's job.
 

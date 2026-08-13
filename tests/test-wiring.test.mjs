@@ -1,9 +1,9 @@
 // Suite-wiring guard: node --test silently succeeds when a glob matches
-// nothing, so a rename can't be allowed to empty a test:repo suite
-// unnoticed. Resolve every argument against the real filesystem. Single
-// quotes are safe under the pinned bash script shell (see .npmrc), but
-// wildcards must stay quoted: bash without globstar would pre-expand `**`
-// as `*`, silently dropping top-level test files.
+// nothing, so a rename can't silently empty a test:repo suite. Resolve
+// every argument against the real filesystem. Single quotes are safe under
+// the pinned bash script shell (see .npmrc), but wildcards must stay
+// quoted: bash without globstar would pre-expand `**` as `*`, silently
+// dropping top-level test files.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
