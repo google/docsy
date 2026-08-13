@@ -3,10 +3,10 @@
 // tree falls back to the public registry and executes whatever package
 // holds that name: npm-squat; live near-miss 2026-08-10). One allowed
 // dynamic-resolution form, in exactly one order:
-// `npx --no [--package=PKG] -- BIN`. Everything else (npm exec/x, other
-// npx flag spellings -- `--no-fund` and friends are config negations that
-// still install, adversarial round 11 -- and alternate package managers'
-// runners) is denied outright rather than flag-parsed for safety.
+// `npx --no [--package=PKG] -- BIN`. Everything else is denied outright
+// rather than flag-parsed for safety: npm exec/x, alternate package
+// managers' runners, and other npx flag spellings (`--no-fund` and
+// friends are config negations that still install, adversarial round 11).
 // Deliberate evasion (interpolation, option preludes like `npm -s exec`)
 // outruns any grep and is review's job.
 
@@ -24,9 +24,8 @@ const repoRoot = path.resolve(
 const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
-// The sanctioned suffix accepts exactly `--no [--package=PKG] -- `: a
-// `--no\b` test would bless every `--no-*` config flag, which npm parses
-// as negations (fund=false), not refusals (adversarial round 11).
+// A `--no\b` test would bless every `--no-*` config flag, which npm
+// parses as negations (fund=false), not refusals (adversarial round 11).
 // Horizontal whitespace only, so refusal tokens on a later line (a
 // separate shell command) can't clean an earlier npx (round 12).
 const sanctionedNpxSuffix =
@@ -56,9 +55,9 @@ function unsanctionedNpx(text, { jsLiterals = false } = {}) {
 const npmExec = /\bnpm\s+(exec|x)\b/;
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // The JS-API forms: a spawned `npx` needs the literal refusal vector
-// `['--no', ('--package=PKG',)? '--', ...]` -- the first element alone
+// `['--no', ('--package=PKG',)? '--', ...]`; the first element alone
 // isn't enough, since a later `--yes` overrides the refusal (adversarial
-// round 12) -- and a spawned `npm` a literal array that doesn't reach the
+// round 12). A spawned `npm` needs a literal array that doesn't reach the
 // exec engine (a variable args array can't prove either).
 const jsNpxSpawn =
   /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`]\s*,\s*(?:['"`]--package=[^'"`\s]+['"`]\s*,\s*)?['"`]--['"`])/;

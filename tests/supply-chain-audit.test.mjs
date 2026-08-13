@@ -227,7 +227,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'the post-install step uses the retrying Hugo rebuild helper',
   );
   // Cross-pin: the wiring guard polices test:repo membership, so its own
-  // presence there is asserted here, in an independently wired file --
+  // presence there is asserted here, in an independently wired file;
   // dropping either requires editing the other (adversarial round 12).
   assert.ok(
     scripts['test:repo'].includes(' tests/test-wiring.test.mjs'),
