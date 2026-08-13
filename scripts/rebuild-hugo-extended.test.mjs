@@ -144,7 +144,7 @@ test('Hugo rebuild fails fast without the npm CLI path', async () => {
   assert.equal(status, 1, 'missing npm CLI path returns nonzero');
   assert.deepEqual(
     errors,
-    ['npm_execpath is unavailable; run _rebuild:hugo through npm'],
+    ['npm_execpath is unavailable; run install:safe through npm'],
     'missing npm CLI path is reported once',
   );
 });

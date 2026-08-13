@@ -22,7 +22,7 @@ export function runNpmRebuild({
 } = {}) {
   const npmExecPath = env.npm_execpath;
   if (!npmExecPath) {
-    error('npm_execpath is unavailable; run _rebuild:hugo through npm');
+    error('npm_execpath is unavailable; run install:safe through npm');
     return 1;
   }
 

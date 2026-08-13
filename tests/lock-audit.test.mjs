@@ -350,19 +350,13 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'install:theme-deps is the reviewed lock-enforced, script-free command',
   );
   assert.equal(
-    scripts['_rebuild:hugo'],
-    'node scripts/rebuild-hugo-extended.mjs',
-    'the Hugo rebuild uses the portable retry helper',
-  );
-  assert.equal(
     scripts['_install:safe:post'],
-    'npm run _rebuild:hugo && npm run install:theme-deps',
-    'the post-install step uses the retrying Hugo rebuild',
+    'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
+    'the post-install step uses the retrying Hugo rebuild helper',
   );
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
   // sibling would run unreviewed code inside the pinned chain.
   for (const name of [
-    '_rebuild:hugo',
     'install:safe',
     'install:theme-deps',
     '_install:safe:post',
