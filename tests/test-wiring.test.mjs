@@ -57,6 +57,8 @@ test('manifests: every test:repo argument resolves to test files', () => {
   const deliberatelyUnwired = new Set(['tests/smoke.test.mjs']);
   const topLevelGuards = fs
     .globSync('tests/*.test.mjs', { cwd: repoRoot })
+    // globSync returns platform separators; compare in posix form.
+    .map((file) => file.replaceAll(path.sep, '/'))
     .filter((file) => !deliberatelyUnwired.has(file))
     .sort();
   assert.deepEqual(
