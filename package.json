@@ -36,7 +36,7 @@
     "_clean:node_modules": "bash -c 'rm -rf {.,docsy.dev,theme}/{resources,node_modules}'",
     "_prepare:scrollspy-patch": "npm run _cp:bs-scrollspy && bash scripts/scrollspy-patch/apply-patch.sh && perl scripts/scrollspy-patch/update-patch-js.pl",
     "_prepare": "npm run _prepare:scrollspy-patch && npm run _refresh-forward-sass-var && npm run _gen-chroma-styles",
-    "_rebuild:hugo": "bash scripts/rebuild-hugo.sh",
+    "_rebuild:hugo": "bash scripts/rebuild-hugo-extended.sh",
     "_refresh-forward-sass-var": "bash -c scripts/refresh-sass-variables.pl",
     "_serve": "npm run -C docsy.dev _serve --",
     "_spv:example": "echo TBC - npm run -s __spv docsy.dev/config/example/params.yaml --",

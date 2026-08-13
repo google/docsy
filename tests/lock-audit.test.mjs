@@ -325,7 +325,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   assert.equal(
     scripts['_rebuild:hugo'],
-    'bash scripts/rebuild-hugo.sh',
+    'bash scripts/rebuild-hugo-extended.sh',
     'the Hugo rebuild uses the portable retry script',
   );
   assert.equal(
