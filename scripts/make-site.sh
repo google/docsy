@@ -11,7 +11,7 @@ DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
 # Default to the repo-installed Hugo: fails loud when absent. Bare-npx
-# fallback rationale: tests/lock-audit.test.mjs.
+# fallback rationale: tests/runner-lint.test.mjs.
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"

@@ -18,7 +18,8 @@ const helperPath = fileURLToPath(
 );
 
 // Deliberately literal: the content pin for the helper's UNSAFE_HUGO_ENV
-// export, which the lock audit imports -- a name dropped there goes red here.
+// export, which the supply-chain audit imports -- a name dropped there
+// goes red here.
 const expectedUnsafeHugoEnv = [
   'HUGO_BIN_PATH',
   'HUGO_FORCE_STANDARD',

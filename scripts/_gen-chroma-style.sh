@@ -5,7 +5,7 @@
 set -eo pipefail
 
 # Repo-installed Hugo only: this script redirects hugo's stdout into the
-# generated .scss. Bare-npx fallback rationale: tests/lock-audit.test.mjs.
+# generated .scss. Bare-npx fallback rationale: tests/runner-lint.test.mjs.
 HUGO="${HUGO:-node_modules/.bin/hugo}"
 CHROMA_STYLE=
 DEST_DIR=theme/assets/scss/td/chroma

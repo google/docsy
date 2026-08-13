@@ -1,7 +1,9 @@
-// Committed lock audit: proves, from the committed manifests, locks,
-// .npmrc, and workflows alone, that the supply-chain hardening invariants
-// (#2700, #2702, #2712) still hold, so future integrity claims regenerate
-// from this test instead of ad hoc audit runs. Fast and offline.
+// Committed supply-chain audit: proves, from the committed manifests,
+// locks, .npmrc, Netlify config, and workflows alone, that the hardening
+// invariants (#2700, #2702, #2712) still hold, so future integrity claims
+// regenerate from this test instead of ad hoc audit runs. Fast and
+// offline. Companion guards: tests/runner-lint.test.mjs (sanctioned
+// runner forms in scripts) and tests/test-wiring.test.mjs (suite wiring).
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -60,17 +62,8 @@ const packageIocs = new Set([
 const lockEntries = (lock) =>
   Object.entries(lock.packages).filter(([key]) => key !== '');
 
-// Script-runner LINT, not a security boundary: catches the careless bare
-// npx/exec that agents habitually type (a bare `npx BIN` on an unpopulated
-// tree falls back to the public registry and executes whatever package
-// holds that name -- npm-squat; live near-miss 2026-08-10). One allowed
-// dynamic-resolution form: `npx --no -- BIN` (--package=... may precede
-// the --); everything else -- npm exec/x, alternate package managers'
-// runners -- is denied outright rather than flag-parsed for safety.
-// Deliberate evasion (interpolation, option preludes like `npm -s exec`)
-// outruns any grep and is review's job.
-const npxNotRefusal = /\bnpx\s+(?!--no\b)/;
-const npmExec = /\bnpm\s+(exec|x)\b/;
+// Same shape as runner-lint's altRunner: a one-line regex, duplicated over
+// a cross-test-file import.
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // One home for the unsafe-installer-control names: the runtime helper
 // exports the list; its unit test pins the content literally.
@@ -83,12 +76,6 @@ const envLeavesInstallConfigUntouched = (key) => {
     !unsafeHugoEnv.has(normalized)
   );
 };
-// The JS-API forms: a spawned `npx` needs the literal refusal flag first,
-// and a spawned `npm` a literal array that doesn't reach the exec engine
-// (a variable args array can't prove either).
-const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`])/;
-const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;
-const jsNpmExec = /['"`]npm['"`]\s*,\s*\[[^\]]*['"`](exec|x)['"`]/;
 
 test('locks: every package is registry+integrity, workspace-local, or an allowlisted git pin', () => {
   let registryPackages = 0;
@@ -216,124 +203,6 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
       devDependencies[name] ?? '',
       new RegExp(`^github:${repo}#v\\d+\\.\\d+\\.\\d+$`),
       `${name} is tag-pinned to ${repo}`,
-    );
-  }
-});
-
-// See the runner-lint rationale above.
-test('lint: package scripts and script files use only sanctioned runner forms', () => {
-  const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
-    dir.endsWith('.json') ? dir : `${dir}/package.json`,
-  );
-  const scriptFiles = [
-    'docsy.dev/scripts',
-    'docsy.dev/tests',
-    'scripts',
-    'tests',
-    'theme/scripts',
-  ]
-    .flatMap((dir) =>
-      fs
-        .readdirSync(path.join(repoRoot, dir), { recursive: true })
-        .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
-        .map((file) => `${dir}/${file}`),
-    )
-    // Not this file: a lint can't police its own source (an editor could
-    // as easily drop the assertion), and self-scanning only forces the
-    // patterns here into self-dodging shapes that weaken them.
-    .filter((file) => file !== 'tests/lock-audit.test.mjs');
-  assert.ok(
-    scriptFiles.some((file) => file.endsWith('.sh')) &&
-      scriptFiles.some((file) => file.endsWith('.mjs')),
-    'shell and node scripts were found',
-  );
-
-  for (const manifest of manifests) {
-    for (const [name, command] of Object.entries(readJSON(manifest).scripts)) {
-      const spliced = command.replace(/\\\r?\n/g, ' ');
-      const id = `${manifest} script ${name}`;
-      assert.doesNotMatch(
-        spliced,
-        npxNotRefusal,
-        `${id} uses the refusal form npx --no`,
-      );
-      assert.doesNotMatch(spliced, npmExec, `${id} runs no npm-exec`);
-      assert.doesNotMatch(
-        spliced,
-        altRunner,
-        `${id} uses npm as its only package runner`,
-      );
-    }
-  }
-  for (const script of scriptFiles) {
-    // Executable text only: comment lines may name npx in prose. Backslash-
-    // newline splices first: `npx\` + continuation is a live invocation.
-    const code = fs
-      .readFileSync(path.join(repoRoot, script), 'utf8')
-      .replace(/\\\r?\n/g, ' ')
-      .split('\n')
-      .filter((line) => !/^\s*(#|\/\/)/.test(line))
-      .join('\n');
-    assert.doesNotMatch(
-      code,
-      npxNotRefusal,
-      `${script} uses the refusal form npx --no`,
-    );
-    assert.doesNotMatch(code, npmExec, `${script} runs no npm-exec`);
-    assert.doesNotMatch(
-      code,
-      altRunner,
-      `${script} uses npm as its only package runner`,
-    );
-    if (/\.(mjs|js|cjs|mts)$/.test(script)) {
-      assert.doesNotMatch(
-        code,
-        jsNpxSpawn,
-        `${script} passes the --no refusal to spawned npx`,
-      );
-      assert.doesNotMatch(
-        code,
-        jsNpmVariableArgs,
-        `${script} passes npm a literal argument array`,
-      );
-      assert.doesNotMatch(code, jsNpmExec, `${script} spawns no npm-exec`);
-    }
-  }
-});
-
-// node --test silently succeeds when a glob matches nothing. Resolve every
-// argument here so a rename can't empty a test:repo suite unnoticed.
-// Single quotes are safe again under the pinned bash script shell (see
-// .npmrc), but wildcards must stay quoted: bash without globstar would
-// pre-expand `**` as `*`, silently dropping top-level test files.
-test('manifests: every test:repo argument resolves to test files', () => {
-  const { scripts } = readJSON('package.json');
-  assert.match(
-    scripts['test:repo'],
-    /^node --test /,
-    'test:repo uses the node test runner',
-  );
-  const args = scripts['test:repo'].replace(/^node --test /, '').split(' ');
-  for (const arg of args) {
-    if (arg.includes('*')) {
-      assert.match(
-        arg,
-        /^(['"]).*\1$/,
-        `test:repo wildcard argument ${arg} is quoted for node's own globbing`,
-      );
-    }
-    const pattern = arg.replace(/^(['"])(.*)\1$/, '$2');
-    // globSync also returns directories, which node --test can't run.
-    const testFiles = fs
-      .globSync(pattern, { cwd: repoRoot })
-      .filter(
-        (match) =>
-          match.endsWith('.test.mjs') &&
-          fs.statSync(path.join(repoRoot, match)).isFile(),
-      );
-    assert.ok(
-      testFiles.length > 0,
-      `test:repo argument ${arg} matches test files`,
     );
   }
 });

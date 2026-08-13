@@ -158,7 +158,7 @@ Notes:
 
 - All but `test:smoke` run in CI.
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
-  `node --test tests/lock-audit.test.mjs`.
+  `node --test tests/supply-chain-audit.test.mjs`.
 - Run `test:smoke` manually for `main` or PR-branch validation. Its tests
   auto-target the current branch's GitHub upstream.
 

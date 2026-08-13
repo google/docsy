@@ -178,8 +178,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
-- Guarded dependency and workflow hardening with a committed lock audit; removed
-  bare-npx registry fallback paths ([#2714][]).
+- Guarded dependency and workflow hardening with a committed supply-chain audit;
+  removed bare-npx registry fallback paths ([#2714][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
   [Default Mermaid version][mermaid-version-notes].

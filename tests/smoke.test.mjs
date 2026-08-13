@@ -161,7 +161,7 @@ before(() => {
 // An npm install of @docsy/theme wires the package bins into
 // node_modules/.bin; assert the shim exists, then run it with the refusal
 // form `npx --no` (an unrelated `gen-favicons` package exists on the
-// public registry; rationale: the runner lint in lock-audit.test.mjs).
+// public registry; rationale: tests/runner-lint.test.mjs).
 function assertGenFaviconsBin(site) {
   assert.ok(
     existsSync(path.join(site, 'node_modules', '.bin', 'gen-favicons')),
