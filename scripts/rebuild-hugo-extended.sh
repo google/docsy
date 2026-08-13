@@ -17,20 +17,21 @@ for name in "${unsafe_hugo_env[@]}"; do
   fi
 done
 
-attempt=1
-for delay in 0 2 5 10; do
+retry_delays=(0 2 5 10)
+attempt_count=${#retry_delays[@]}
+for index in "${!retry_delays[@]}"; do
+  attempt=$((index + 1))
+  delay=${retry_delays[$index]}
   if [ "$delay" -gt 0 ]; then
     echo "Retrying Hugo install in ${delay}s..."
     sleep "$delay"
   fi
 
-  echo "Hugo install attempt ${attempt}/4"
+  echo "Hugo install attempt ${attempt}/${attempt_count}"
   if npm run __rebuild:hugo && npm run -s _check:hugo; then
     exit 0
   fi
-
-  attempt=$((attempt + 1))
 done
 
-echo "Hugo install failed after 4 attempts" >&2
+echo "Hugo install failed after ${attempt_count} attempts" >&2
 exit 1
