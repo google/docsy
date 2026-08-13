@@ -220,7 +220,11 @@ function buildThemeConsumerSite(name, pkgSpec) {
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
   assert.equal(
-    run('npm', ['install', '--no-audit', '--no-fund', pkgSpec], npmOpts).status,
+    run(
+      'npm',
+      ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
+      npmOpts,
+    ).status,
     0,
     `${pkgSpec} installs`,
   );

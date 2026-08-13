@@ -338,6 +338,19 @@ test('manifests: the install path keeps its locked, script-free form', () => {
       );
     }
   }
+
+  // Safe smoke predicts a permissive Docsy install only while permissive
+  // installs add no consumer-facing lifecycle behavior.
+  for (const manifest of ['package.json', 'theme/package.json']) {
+    const consumerScripts = readJSON(manifest).scripts ?? {};
+    for (const hook of ['preinstall', 'install', 'postinstall', 'prepare']) {
+      assert.equal(
+        consumerScripts[hook],
+        undefined,
+        `${manifest} declares no consumer ${hook} hook`,
+      );
+    }
+  }
 });
 
 test('workflows: installs are locked and credential-isolated', () => {

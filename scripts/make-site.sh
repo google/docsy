@@ -119,13 +119,14 @@ function _npm_install() {
   npm pkg set 'engines.npm=>=11.16.0' > /dev/null
   # Consumer-simulation installs are unlocked by design, but script-free:
   # Docsy declares no install hooks and none of these deps needs install
-  # scripts. Pin that for the site's own installs (immune to ambient user
-  # config), plus a registry-release cooldown.
+  # scripts. Pin that for the site's own installs, plus a registry-release
+  # cooldown; the command also carries --ignore-scripts so higher-precedence
+  # ambient config can't weaken the policy.
   printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\n' > .npmrc
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
-    npm install --omit dev --save $DEPS
+    npm install --ignore-scripts --omit dev --save $DEPS
   fi
   if [[ "$DOCSY_SRC" == "NPM" ]]; then
     # No install hook fetches the theme's runtime deps; run the documented
