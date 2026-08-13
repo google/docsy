@@ -150,7 +150,7 @@ From the repo root:
 
 | Script         | Role                                                                                                |
 | -------------- | --------------------------------------------------------------------------------------------------- |
-| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][]                                      |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                          |
 | `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
 | `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
 
