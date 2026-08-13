@@ -226,6 +226,13 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
     'the post-install step uses the retrying Hugo rebuild helper',
   );
+  // Cross-pin: the wiring guard polices test:repo membership, so its own
+  // presence there is asserted here, in an independently wired file --
+  // dropping either requires editing the other (adversarial round 12).
+  assert.ok(
+    scripts['test:repo'].includes(' tests/test-wiring.test.mjs'),
+    'test:repo runs the suite-wiring guard',
+  );
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
   // sibling would run unreviewed code inside the pinned chain.
   for (const name of [
@@ -273,6 +280,20 @@ test('workflows: installs are locked and credential-isolated', () => {
       `Netlify leaves ${name} unset`,
     );
   }
+  // Netlify command chains are execution entry points the runner lint
+  // doesn't scan (TOML): exact-pin them (adversarial round 12).
+  assert.deepEqual(
+    netlifyConfig
+      .split('\n')
+      .filter((line) => /^\s*command\s*=/.test(line))
+      .map((line) => line.trim())
+      .sort(),
+    [
+      'command = "npm run _netlify:prepare && npm run -C docsy.dev build:preview"',
+      'command = "npm run _netlify:prepare && npm run -C docsy.dev build:production"',
+    ].sort(),
+    'Netlify build commands are the two reviewed chains',
+  );
 
   let runSteps = 0;
   let checkouts = 0;

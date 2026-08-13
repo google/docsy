@@ -23,16 +23,21 @@ const repoRoot = path.resolve(
 const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
-// The lookahead accepts exactly `--no -- ` (whitespace-tolerant): `--no\b`
-// would bless every `--no-*` config flag, which npm parses as negations
-// (fund=false), not refusals.
-const npxNotRefusal = /\bnpx\s+(?!\s*--no\s+--(?:\s|$))/;
+// The lookahead accepts exactly `--no -- `: `--no\b` would bless every
+// `--no-*` config flag, which npm parses as negations (fund=false), not
+// refusals. Horizontal whitespace only, so refusal tokens on a later
+// line (a separate shell command) can't clean an earlier npx
+// (adversarial round 12).
+const npxNotRefusal = /\bnpx[ \t]+(?![ \t]*--no[ \t]+--(?:[ \t]|$))/;
 const npmExec = /\bnpm\s+(exec|x)\b/;
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
-// The JS-API forms: a spawned `npx` needs the literal refusal flag first,
-// and a spawned `npm` a literal array that doesn't reach the exec engine
-// (a variable args array can't prove either).
-const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`])/;
+// The JS-API forms: a spawned `npx` needs the literal refusal vector
+// `['--no', '--', ...]` -- first element alone isn't enough, since a
+// later `--yes` overrides the refusal (adversarial round 12) -- and a
+// spawned `npm` a literal array that doesn't reach the exec engine (a
+// variable args array can't prove either).
+const jsNpxSpawn =
+  /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`]\s*,\s*['"`]--['"`])/;
 const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;
 const jsNpmExec = /['"`]npm['"`]\s*,\s*\[[^\]]*['"`](exec|x)['"`]/;
 
@@ -59,7 +64,7 @@ test('lint: package scripts and script files use only sanctioned runner forms', 
     .flatMap((dir) =>
       fs
         .readdirSync(path.join(repoRoot, dir), { recursive: true })
-        .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
+        .filter((file) => /\.(sh|mjs|js|cjs|ts|mts|cts|pl)$/.test(file))
         .map((file) => `${dir}/${file}`),
     )
     .filter((file) => !denyPatternFiles.has(file));
@@ -106,7 +111,7 @@ test('lint: package scripts and script files use only sanctioned runner forms', 
       altRunner,
       `${script} uses npm as its only package runner`,
     );
-    if (/\.(mjs|js|cjs|mts)$/.test(script)) {
+    if (/\.(mjs|js|cjs|ts|mts|cts)$/.test(script)) {
       assert.doesNotMatch(
         code,
         jsNpxSpawn,
