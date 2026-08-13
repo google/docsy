@@ -77,6 +77,14 @@ const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // One home for the unsafe-installer-control names: the runtime helper
 // exports the list; its unit test pins the content literally.
 const unsafeHugoEnv = new Set(UNSAFE_HUGO_ENV);
+const envLeavesInstallConfigUntouched = (key) => {
+  const normalized = key.toUpperCase();
+  return (
+    !normalized.startsWith('NPM_CONFIG_') &&
+    normalized !== 'HUGO' &&
+    !unsafeHugoEnv.has(normalized)
+  );
+};
 // The JS-API forms: a spawned `npx` needs the fallback refusal as its
 // literal first argument, and a spawned `npm` a literal array that doesn't
 // reach the exec engine (a variable args array can't prove either).
@@ -285,9 +293,8 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
   }
 });
 
-// node --test errors on unresolved paths only when nothing at all matches:
-// a stale name that rides with matching ones is silently skipped. Resolve
-// every argument here so a rename can't empty a test:repo suite unnoticed.
+// node --test silently succeeds when a glob matches nothing. Resolve every
+// argument here so a rename can't empty a test:repo suite unnoticed.
 // Quoting must be cmd-safe: cmd.exe passes single quotes through literally,
 // so a single-quoted glob matches nothing on Windows and its whole suite
 // rides silently (adversarial round 10). Double quotes strip on both shells.
@@ -303,8 +310,15 @@ test('manifests: every test:repo argument resolves to test files', () => {
     assert.doesNotMatch(
       arg,
       /'/,
-      `test:repo argument ${arg} is cmd-safe (double-quoted or bare)`,
+      `test:repo argument ${arg} uses no cmd-unsafe single quote`,
     );
+    if (arg.includes('*')) {
+      assert.match(
+        arg,
+        /^".*"$/,
+        `test:repo wildcard argument ${arg} is double-quoted`,
+      );
+    }
     const pattern = arg.replace(/^"(.*)"$/, '$1');
     // globSync also returns directories, which node --test can't run.
     const testFiles = fs
@@ -389,7 +403,7 @@ test('workflows: installs are locked and credential-isolated', () => {
   for (const name of unsafeHugoEnv) {
     assert.doesNotMatch(
       netlifyConfig,
-      new RegExp(`^\\s*${name}\\s*=`, 'm'),
+      new RegExp(`^\\s*${name}\\s*=`, 'im'),
       `Netlify leaves ${name} unset`,
     );
   }
@@ -428,9 +442,7 @@ test('workflows: installs are locked and credential-isolated', () => {
       for (const env of [workflow.env, job.env]) {
         for (const key of Object.keys(env ?? {})) {
           assert.ok(
-            !/^npm_config_/i.test(key) &&
-              key !== 'HUGO' &&
-              !unsafeHugoEnv.has(key),
+            envLeavesInstallConfigUntouched(key),
             `${id} env ${key} leaves npm and Hugo config untouched`,
           );
         }
@@ -438,9 +450,7 @@ test('workflows: installs are locked and credential-isolated', () => {
       for (const step of job.steps) {
         for (const key of Object.keys(step.env ?? {})) {
           assert.ok(
-            !/^npm_config_/i.test(key) &&
-              key !== 'HUGO' &&
-              !unsafeHugoEnv.has(key),
+            envLeavesInstallConfigUntouched(key),
             `${id} step env ${key} leaves npm and Hugo config untouched`,
           );
         }

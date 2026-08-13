@@ -21,6 +21,13 @@ const repoRoot = path.resolve(
   '../../..',
 );
 const FIXTURE_SITE_TMP = path.join(repoRoot, 'tmp', 'fixture-site');
+const HUGO_CLI = path.join(
+  repoRoot,
+  'node_modules',
+  'hugo-extended',
+  'dist',
+  'cli.mjs',
+);
 
 // Fixture sites pin their own theme config; an inherited HUGO_THEME
 // (worktree checkouts) would override it. A function, not a snapshot: late
@@ -66,9 +73,9 @@ export function buildSite(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
   );
-  // `--no-install`: refuse the registry fallback when the hugo shim is
-  // missing. Rationale: the bare-npx guard in tests/lock-audit.test.mjs.
-  const r = spawnSync('npx', ['--no-install', 'hugo'], {
+  // Run the locked local CLI through Node: no registry fallback or
+  // platform-specific npm shim.
+  const r = spawnSync(process.execPath, [HUGO_CLI], {
     cwd: site,
     encoding: 'utf8',
     env: { ...hugoEnv(), ...env },
