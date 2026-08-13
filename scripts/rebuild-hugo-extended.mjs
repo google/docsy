@@ -45,6 +45,9 @@ export async function rebuildHugoExtended({
   run,
   wait = (delay) => sleep(delay * 1000),
 } = {}) {
+  // Canonical-name lookups suffice on Windows: process.env access is
+  // case-insensitive there (Node semantics), the same folding the
+  // installer sees. Empty string matches the installer's falsy handling.
   for (const name of UNSAFE_HUGO_ENV) {
     if ((env[name] ?? '') !== '') {
       error(`${name} must be unset for the pinned Hugo rebuild`);

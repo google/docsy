@@ -92,6 +92,9 @@ npm run install:safe
 npm run serve
 ```
 
+npm scripts in this repo run under Bash on every platform (`script-shell` pin in
+`.npmrc`): on Windows, make sure Git Bash's `bash` is on your `PATH`.
+
 ## Contributing
 
 For details on our [code of conduct][] and the process for submitting pull
