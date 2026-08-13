@@ -159,16 +159,16 @@ before(() => {
 });
 
 // An npm install of @docsy/theme wires the package bins into
-// node_modules/.bin; assert the shim exists, then run it with
-// `npx --no-install` (an unrelated `gen-favicons` package exists on the
-// public registry; rationale: the bare-npx guard in lock-audit.test.mjs).
+// node_modules/.bin; assert the shim exists, then run it with the refusal
+// form `npx --no` (an unrelated `gen-favicons` package exists on the
+// public registry; rationale: the runner lint in lock-audit.test.mjs).
 function assertGenFaviconsBin(site) {
   assert.ok(
     existsSync(path.join(site, 'node_modules', '.bin', 'gen-favicons')),
     'gen-favicons bin shim is wired into node_modules/.bin',
   );
-  progress('npx --no-install gen-favicons --help…');
-  const help = run('npx', ['--no-install', 'gen-favicons', '--help'], {
+  progress('npx --no -- gen-favicons --help…');
+  const help = run('npx', ['--no', '--', 'gen-favicons', '--help'], {
     cwd: site,
     shell: winShell,
   });

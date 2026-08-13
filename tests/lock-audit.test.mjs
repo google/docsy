@@ -60,19 +60,17 @@ const packageIocs = new Set([
 const lockEntries = (lock) =>
   Object.entries(lock.packages).filter(([key]) => key !== '');
 
-// A bare `npx BIN` on an unpopulated tree falls back to the public registry
-// and executes whatever package holds that name (npm-squat); `--no-install`
-// refuses the fallback, and a plain bin name resolves only through PATH.
-// `npm exec`/`npm x` is the same install-on-miss engine under another name
-// (options tolerated before the subcommand), as are the alternate package
-// managers' runners. Text-level guards: interpolation and indirection
-// (`$N ci`) can outrun any grep, so these are regression guards against
-// careless reintroduction; deliberate obfuscation is review's job.
-const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
-// One home for the option prelude: values may be quoted, so a quoted
-// value can't shield the subcommand from the scan.
-const npmOptions = String.raw`(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*`;
-const npmExec = new RegExp(String.raw`\bnpm\s+${npmOptions}(exec|x)\b`);
+// Script-runner LINT, not a security boundary: catches the careless bare
+// npx/exec that agents habitually type (a bare `npx BIN` on an unpopulated
+// tree falls back to the public registry and executes whatever package
+// holds that name -- npm-squat; live near-miss 2026-08-10). One allowed
+// dynamic-resolution form: `npx --no -- BIN` (--package=... may precede
+// the --); everything else -- npm exec/x, alternate package managers'
+// runners -- is denied outright rather than flag-parsed for safety.
+// Deliberate evasion (interpolation, option preludes like `npm -s exec`)
+// outruns any grep and is review's job.
+const npxNotRefusal = /\bnpx\s+(?!--no\b)/;
+const npmExec = /\bnpm\s+(exec|x)\b/;
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // One home for the unsafe-installer-control names: the runtime helper
 // exports the list; its unit test pins the content literally.
@@ -85,10 +83,10 @@ const envLeavesInstallConfigUntouched = (key) => {
     !unsafeHugoEnv.has(normalized)
   );
 };
-// The JS-API forms: a spawned `npx` needs the fallback refusal as its
-// literal first argument, and a spawned `npm` a literal array that doesn't
-// reach the exec engine (a variable args array can't prove either).
-const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no-install['"`])/;
+// The JS-API forms: a spawned `npx` needs the literal refusal flag first,
+// and a spawned `npm` a literal array that doesn't reach the exec engine
+// (a variable args array can't prove either).
+const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`])/;
 const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;
 const jsNpmExec = /['"`]npm['"`]\s*,\s*\[[^\]]*['"`](exec|x)['"`]/;
 
@@ -222,8 +220,8 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
   }
 });
 
-// See the bareNpx/npmExec rationale above.
-test('package scripts and script files run no npm-exec or bare npx', () => {
+// See the runner-lint rationale above.
+test('lint: package scripts and script files use only sanctioned runner forms', () => {
   const manifests = ['package.json', 'docsy.dev', 'theme'].map((dir) =>
     dir.endsWith('.json') ? dir : `${dir}/package.json`,
   );
@@ -240,7 +238,7 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
         .filter((file) => /\.(sh|mjs|js|cjs|mts|pl)$/.test(file))
         .map((file) => `${dir}/${file}`),
     )
-    // Not this file: an audit can't police its own source (an editor could
+    // Not this file: a lint can't police its own source (an editor could
     // as easily drop the assertion), and self-scanning only forces the
     // patterns here into self-dodging shapes that weaken them.
     .filter((file) => file !== 'tests/lock-audit.test.mjs');
@@ -250,21 +248,21 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
     'shell and node scripts were found',
   );
 
-  // The lookahead accepts the exact flag only: --no-install-anything is not
-  // a fallback refusal. Quote-stripped variants too: `"npx"` runs npx.
   for (const manifest of manifests) {
     for (const [name, command] of Object.entries(readJSON(manifest).scripts)) {
       const spliced = command.replace(/\\\r?\n/g, ' ');
-      for (const text of [spliced, spliced.replace(/["']/g, '')]) {
-        const id = `${manifest} script ${name}`;
-        assert.doesNotMatch(text, bareNpx, `${id} resolves bins locally`);
-        assert.doesNotMatch(text, npmExec, `${id} runs no npm-exec`);
-        assert.doesNotMatch(
-          text,
-          altRunner,
-          `${id} uses npm as its only package runner`,
-        );
-      }
+      const id = `${manifest} script ${name}`;
+      assert.doesNotMatch(
+        spliced,
+        npxNotRefusal,
+        `${id} uses the refusal form npx --no`,
+      );
+      assert.doesNotMatch(spliced, npmExec, `${id} runs no npm-exec`);
+      assert.doesNotMatch(
+        spliced,
+        altRunner,
+        `${id} uses npm as its only package runner`,
+      );
     }
   }
   for (const script of scriptFiles) {
@@ -276,20 +274,22 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
       .split('\n')
       .filter((line) => !/^\s*(#|\/\/)/.test(line))
       .join('\n');
-    for (const text of [code, code.replace(/["']/g, '')]) {
-      assert.doesNotMatch(text, bareNpx, `${script} resolves bins locally`);
-      assert.doesNotMatch(text, npmExec, `${script} runs no npm-exec`);
-      assert.doesNotMatch(
-        text,
-        altRunner,
-        `${script} uses npm as its only package runner`,
-      );
-    }
+    assert.doesNotMatch(
+      code,
+      npxNotRefusal,
+      `${script} uses the refusal form npx --no`,
+    );
+    assert.doesNotMatch(code, npmExec, `${script} runs no npm-exec`);
+    assert.doesNotMatch(
+      code,
+      altRunner,
+      `${script} uses npm as its only package runner`,
+    );
     if (/\.(mjs|js|cjs|mts)$/.test(script)) {
       assert.doesNotMatch(
         code,
         jsNpxSpawn,
-        `${script} passes --no-install to spawned npx`,
+        `${script} passes the --no refusal to spawned npx`,
       );
       assert.doesNotMatch(
         code,
@@ -477,45 +477,39 @@ test('workflows: installs are locked and credential-isolated', () => {
         if (typeof step.run !== 'string') continue;
         runSteps += 1;
         // Splice continuations first: `npm\` + newline + `ci` is one
-        // command; scan a quote-stripped variant too, since the shell runs
-        // `"npm" ci` as npm.
+        // command.
         const run = step.run.replace(/\\\r?\n/g, ' ');
-        for (const text of [run, run.replace(/["']/g, '')]) {
-          // Deny npm's tree-reifying/executing subcommands in raw run
-          // steps: the one sanctioned install is the reviewed install:safe
-          // script, counted below. `npm run` wrappers resolve to reviewed
-          // scripts, and `npm pack`/`npm publish`/`npm init` install
-          // nothing.
-          assert.doesNotMatch(
-            text,
-            new RegExp(
-              String.raw`\bnpm\s+${npmOptions}(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b`,
-            ),
-            `${id} run step installs only via reviewed npm scripts`,
+        // Deny npm's tree-reifying/executing subcommands in raw run
+        // steps: the one sanctioned install is the reviewed install:safe
+        // script, counted below. `npm run` wrappers resolve to reviewed
+        // scripts, and `npm pack`/`npm publish`/`npm init` install
+        // nothing.
+        assert.doesNotMatch(
+          run,
+          /\bnpm\s+(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x)\b/,
+          `${id} run step installs only via reviewed npm scripts`,
+        );
+        assert.doesNotMatch(run, /\bnpx\b/, `${id} run step avoids npx`);
+        assert.doesNotMatch(
+          run,
+          altRunner,
+          `${id} run step uses npm as its only package manager`,
+        );
+        // GITHUB_ENV writes poison later steps' env past the map checks
+        // above; GITHUB_PATH prepends, so a writer could shadow npm
+        // itself -- pin its one reviewed use (the lychee install).
+        assert.doesNotMatch(
+          run,
+          /GITHUB_ENV/,
+          `${id} run step leaves later steps' env untouched`,
+        );
+        for (const line of run.split('\n')) {
+          if (!line.includes('GITHUB_PATH')) continue;
+          assert.equal(
+            line.trim(),
+            'echo "$HOME/.local/bin" >> "$GITHUB_PATH"',
+            `${id} run step writes GITHUB_PATH only via the reviewed lychee line`,
           );
-          assert.doesNotMatch(text, /\bnpx\b/, `${id} run step avoids npx`);
-          assert.doesNotMatch(
-            text,
-            altRunner,
-            `${id} run step uses npm as its only package manager`,
-          );
-          // GITHUB_ENV writes poison later steps' env past the map checks
-          // above; GITHUB_PATH prepends, so a writer could shadow npm
-          // itself -- pin its one reviewed use (the lychee install).
-          assert.doesNotMatch(
-            text,
-            /GITHUB_ENV/,
-            `${id} run step leaves later steps' env untouched`,
-          );
-          for (const line of text.split('\n')) {
-            if (!line.includes('GITHUB_PATH')) continue;
-            const lycheeLine = 'echo "$HOME/.local/bin" >> "$GITHUB_PATH"';
-            assert.equal(
-              line.trim(),
-              text === run ? lycheeLine : lycheeLine.replace(/["']/g, ''),
-              `${id} run step writes GITHUB_PATH only via the reviewed lychee line`,
-            );
-          }
         }
         safeInstalls += (run.match(/npm run install:safe\b/g) ?? []).length;
       }
