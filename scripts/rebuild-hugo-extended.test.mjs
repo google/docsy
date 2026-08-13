@@ -64,7 +64,6 @@ test('npm rebuild uses the current npm CLI and exact arguments', () => {
   const calls = [];
   const status = runNpmRebuild({
     env,
-    execPath: '/node',
     spawn(file, args, options) {
       calls.push({ args, file, options });
       return { status: 0 };
@@ -82,7 +81,7 @@ test('npm rebuild uses the current npm CLI and exact arguments', () => {
           'hugo-extended',
           '--ignore-scripts=false',
         ],
-        file: '/node',
+        file: process.execPath,
         options: { env, stdio: 'inherit' },
       },
     ],

@@ -288,6 +288,9 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
 // node --test errors on unresolved paths only when nothing at all matches:
 // a stale name that rides with matching ones is silently skipped. Resolve
 // every argument here so a rename can't empty a test:repo suite unnoticed.
+// Quoting must be cmd-safe: cmd.exe passes single quotes through literally,
+// so a single-quoted glob matches nothing on Windows and its whole suite
+// rides silently (adversarial round 10). Double quotes strip on both shells.
 test('manifests: every test:repo argument resolves to test files', () => {
   const { scripts } = readJSON('package.json');
   assert.match(
@@ -295,14 +298,17 @@ test('manifests: every test:repo argument resolves to test files', () => {
     /^node --test /,
     'test:repo uses the node test runner',
   );
-  const args = scripts['test:repo']
-    .replace(/^node --test /, '')
-    .split(' ')
-    .map((arg) => arg.replace(/^'(.*)'$/, '$1'));
+  const args = scripts['test:repo'].replace(/^node --test /, '').split(' ');
   for (const arg of args) {
+    assert.doesNotMatch(
+      arg,
+      /'/,
+      `test:repo argument ${arg} is cmd-safe (double-quoted or bare)`,
+    );
+    const pattern = arg.replace(/^"(.*)"$/, '$1');
     // globSync also returns directories, which node --test can't run.
     const testFiles = fs
-      .globSync(arg, { cwd: repoRoot })
+      .globSync(pattern, { cwd: repoRoot })
       .filter(
         (match) =>
           match.endsWith('.test.mjs') &&

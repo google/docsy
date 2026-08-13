@@ -18,7 +18,6 @@ export const UNSAFE_HUGO_ENV = [
 export function runNpmRebuild({
   env = process.env,
   error = console.error,
-  execPath = process.execPath,
   spawn = spawnSync,
 } = {}) {
   const npmExecPath = env.npm_execpath;
@@ -29,7 +28,7 @@ export function runNpmRebuild({
 
   // Use npm's JavaScript CLI directly so Windows needs no command shell.
   const result = spawn(
-    execPath,
+    process.execPath,
     [npmExecPath, 'rebuild', 'hugo-extended', '--ignore-scripts=false'],
     { env, stdio: 'inherit' },
   );
@@ -75,15 +74,9 @@ export async function rebuildHugoExtended({
 
 // Realpaths on both sides so a symlinked invocation can't silently no-op
 // (adversarial round 9); importing this module never runs the rebuild.
-const isMain = (() => {
-  if (!process.argv[1]) return false;
-  try {
-    return (
-      fs.realpathSync(process.argv[1]) ===
-      fs.realpathSync(fileURLToPath(import.meta.url))
-    );
-  } catch {
-    return false;
-  }
-})();
+// No try/catch: an entry-time realpath throw must crash loud, not exit 0.
+const isMain =
+  Boolean(process.argv[1]) &&
+  fs.realpathSync(process.argv[1]) ===
+    fs.realpathSync(fileURLToPath(import.meta.url));
 if (isMain) process.exitCode = await rebuildHugoExtended();
