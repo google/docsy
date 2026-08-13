@@ -325,8 +325,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   assert.equal(
     scripts['_rebuild:hugo'],
-    'bash -c \'attempt=1; for delay in 0 2 5; do if [ "$delay" -gt 0 ]; then echo "Retrying Hugo install in ${delay}s..."; sleep "$delay"; fi; echo "Hugo install attempt ${attempt}/3"; npm run __rebuild:hugo && exit 0; attempt=$((attempt + 1)); done; echo "Hugo install failed after 3 attempts" >&2; exit 1\'',
-    'the Hugo rebuild makes three bounded, backoff-spaced attempts',
+    'bash scripts/rebuild-hugo.sh',
+    'the Hugo rebuild uses the portable retry script',
   );
   assert.equal(
     scripts['_install:safe:post'],
