@@ -72,11 +72,22 @@ const bareNpx = /\bnpx\s+(?!--no-install(?:\s|$))/;
 const npmOptions = String.raw`(?:-{1,2}[\w-]+(?:[= ]("[^"]*"|'[^']*'|\S+))?\s+)*`;
 const npmExec = new RegExp(String.raw`\bnpm\s+${npmOptions}(exec|x)\b`);
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
+const unsafeHugoEnv = new Set([
+  'HUGO_BIN_PATH',
+  'HUGO_FORCE_STANDARD',
+  'HUGO_MIRROR_BASE_URL',
+  'HUGO_NO_EXTENDED',
+  'HUGO_OVERRIDE_VERSION',
+  'HUGO_SKIP_CHECKSUM',
+  'HUGO_SKIP_DOWNLOAD',
+  'HUGO_SKIP_VERIFY',
+]);
 // The JS-API forms: a spawned `npx` needs the fallback refusal as its
 // literal first argument, and a spawned `npm` a literal array that doesn't
 // reach the exec engine (a variable args array can't prove either).
 const jsNpxSpawn = /['"`]npx['"`],(?!\s*\[\s*['"`]--no-install['"`])/;
-const jsNpmExec = /['"`]npm['"`],(?!\s*\[\s*['"`](?!exec['"`]|x['"`]))/;
+const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;
+const jsNpmExec = /['"`]npm['"`]\s*,\s*\[[^\]]*['"`](exec|x)['"`]/;
 
 test('locks: every package is registry+integrity, workspace-local, or an allowlisted git pin', () => {
   let registryPackages = 0;
@@ -269,6 +280,11 @@ test('package scripts and script files run no npm-exec or bare npx', () => {
         jsNpxSpawn,
         `${script} passes --no-install to spawned npx`,
       );
+      assert.doesNotMatch(
+        code,
+        jsNpmVariableArgs,
+        `${script} passes npm a literal argument array`,
+      );
       assert.doesNotMatch(code, jsNpmExec, `${script} spawns no npm-exec`);
     }
   }
@@ -319,6 +335,11 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'install:theme-deps is the reviewed lock-enforced, script-free command',
   );
   assert.equal(
+    scripts['_check:hugo'],
+    'node scripts/check-hugo-extended.mjs',
+    'the Hugo check verifies the pinned extended binary',
+  );
+  assert.equal(
     scripts['__rebuild:hugo'],
     'npm rebuild hugo-extended --ignore-scripts=false',
     'the raw Hugo rebuild re-enables scripts for hugo-extended alone',
@@ -336,6 +357,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
   // sibling would run unreviewed code inside the pinned chain.
   for (const name of [
+    '_check:hugo',
     '__rebuild:hugo',
     '_rebuild:hugo',
     'install:safe',
@@ -371,6 +393,17 @@ test('workflows: installs are locked and credential-isolated', () => {
     .readdirSync(workflowsDir)
     .filter((file) => /\.ya?ml$/.test(file));
   assert.ok(files.length > 0, 'workflow files were found');
+  const netlifyConfig = fs.readFileSync(
+    path.join(repoRoot, 'docsy.dev/netlify.toml'),
+    'utf8',
+  );
+  for (const name of unsafeHugoEnv) {
+    assert.doesNotMatch(
+      netlifyConfig,
+      new RegExp(`^\\s*${name}\\s*=`, 'm'),
+      `Netlify leaves ${name} unset`,
+    );
+  }
 
   let runSteps = 0;
   let checkouts = 0;
@@ -378,6 +411,11 @@ test('workflows: installs are locked and credential-isolated', () => {
   for (const file of files) {
     const workflow = parse(
       fs.readFileSync(path.join(workflowsDir, file), 'utf8'),
+    );
+    assert.equal(
+      workflow.defaults?.run?.shell,
+      undefined,
+      `${file} uses the default workflow shell`,
     );
     for (const [jobId, job] of Object.entries(workflow.jobs ?? {})) {
       const id = `${file} ${jobId}`;
@@ -391,21 +429,37 @@ test('workflows: installs are locked and credential-isolated', () => {
       // action-pin invariant.
       assert.equal(job.container, undefined, `${id} runs container-free`);
       assert.equal(job.services, undefined, `${id} runs service-free`);
+      assert.equal(
+        job.defaults?.run?.shell,
+        undefined,
+        `${id} uses the default job shell`,
+      );
       // Env can invert the audited config: NPM_CONFIG_* outranks .npmrc,
       // and the shell scripts honor a HUGO override.
       for (const env of [workflow.env, job.env]) {
         for (const key of Object.keys(env ?? {})) {
           assert.ok(
-            !/^npm_config_/i.test(key) && key !== 'HUGO',
-            `${id} env ${key} leaves npm config and HUGO untouched`,
+            !/^npm_config_/i.test(key) &&
+              key !== 'HUGO' &&
+              !unsafeHugoEnv.has(key),
+            `${id} env ${key} leaves npm and Hugo config untouched`,
           );
         }
       }
       for (const step of job.steps) {
         for (const key of Object.keys(step.env ?? {})) {
           assert.ok(
-            !/^npm_config_/i.test(key) && key !== 'HUGO',
-            `${id} step env ${key} leaves npm config and HUGO untouched`,
+            !/^npm_config_/i.test(key) &&
+              key !== 'HUGO' &&
+              !unsafeHugoEnv.has(key),
+            `${id} step env ${key} leaves npm and Hugo config untouched`,
+          );
+        }
+        if (step.shell !== undefined) {
+          assert.equal(
+            step.shell,
+            'bash',
+            `${id} uses the reviewed bash shell`,
           );
         }
         if (step.uses?.startsWith('actions/checkout@')) {

@@ -25,6 +25,7 @@
     "__spv": "node scripts/set-package-version/index.mjs",
     "_check:afdocs": "npm run -s -C docsy.dev _check:afdocs",
     "_check:format": "prettier --check theme/assets *.md theme/i18n theme/scripts scripts tests",
+    "_check:hugo": "node scripts/check-hugo-extended.mjs",
     "_check:links": "npm run -C docsy.dev _check:links",
     "_check:markdown": "markdownlint-cli2",
     "_commit:public": "npm run -C docsy.dev _commit:public",
