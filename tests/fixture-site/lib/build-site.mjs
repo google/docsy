@@ -21,7 +21,7 @@ const repoRoot = path.resolve(
   '../../..',
 );
 const FIXTURE_SITE_TMP = path.join(repoRoot, 'tmp', 'fixture-site');
-const HUGO_CLI = path.join(
+export const hugoCli = path.join(
   repoRoot,
   'node_modules',
   'hugo-extended',
@@ -75,7 +75,7 @@ export function buildSite(
   );
   // Run the locked local CLI through Node: no registry fallback or
   // platform-specific npm shim.
-  const r = spawnSync(process.execPath, [HUGO_CLI], {
+  const r = spawnSync(process.execPath, [hugoCli], {
     cwd: site,
     encoding: 'utf8',
     env: { ...hugoEnv(), ...env },
