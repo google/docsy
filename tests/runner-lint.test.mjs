@@ -5,8 +5,7 @@
 // dynamic-resolution form, in exactly one order:
 // `npx --no [--package=PKG] -- BIN`. Everything else is denied outright
 // rather than flag-parsed for safety: npm exec/x, alternate package
-// managers' runners, and other npx flag spellings (`--no-fund` and
-// friends are config negations that still install, adversarial round 11).
+// managers' runners, and other npx flag spellings.
 // Deliberate evasion (interpolation, option preludes like `npm -s exec`)
 // outruns any grep and is review's job.
 
@@ -25,9 +24,9 @@ const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
 // A `--no\b` test would bless every `--no-*` config flag, which npm
-// parses as negations (fund=false), not refusals (adversarial round 11).
-// Horizontal whitespace only, so refusal tokens on a later line (a
-// separate shell command) can't clean an earlier npx (round 12).
+// parses as negations (fund=false), not refusals. Horizontal whitespace
+// only, so refusal tokens on a later line (a separate shell command)
+// can't clean an earlier npx.
 const sanctionedNpxSuffix =
   /^[ \t]+--no[ \t]+(?:--package=\S+[ \t]+)?--(?:[ \t]|$)/;
 const quoteChars = new Set(["'", '"', '`']);
@@ -56,9 +55,9 @@ const npmExec = /\bnpm\s+(exec|x)\b/;
 const altRunner = /\b(yarn|pnpm|bunx?|corepack)\b/;
 // The JS-API forms: a spawned `npx` needs the literal refusal vector
 // `['--no', ('--package=PKG',)? '--', ...]`; the first element alone
-// isn't enough, since a later `--yes` overrides the refusal (adversarial
-// round 12). A spawned `npm` needs a literal array that doesn't reach the
-// exec engine (a variable args array can't prove either).
+// isn't enough, since a later `--yes` overrides the refusal. A spawned
+// `npm` needs a literal array that doesn't reach the exec engine (a
+// variable args array can't prove either).
 const jsNpxSpawn =
   /['"`]npx['"`],(?!\s*\[\s*['"`]--no['"`]\s*,\s*(?:['"`]--package=[^'"`\s]+['"`]\s*,\s*)?['"`]--['"`])/;
 const jsNpmVariableArgs = /['"`]npm['"`](?=\s*,)\s*,(?!\s*\[)/;

@@ -72,9 +72,9 @@ export async function rebuildHugoExtended({
   return 1;
 }
 
-// Realpaths on both sides so a symlinked invocation can't silently no-op
-// (adversarial round 9); importing this module never runs the rebuild.
-// No try/catch: an entry-time realpath throw must crash loud, not exit 0.
+// Realpaths on both sides so a symlinked invocation can't silently no-op;
+// importing this module never runs the rebuild. No try/catch: an
+// entry-time realpath throw must crash loud, not exit 0.
 const isMain =
   Boolean(process.argv[1]) &&
   fs.realpathSync(process.argv[1]) ===

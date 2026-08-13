@@ -154,7 +154,7 @@ test('Hugo rebuild fails fast without the npm CLI path', async () => {
 
 // End-to-end: the entry point fires and the default rebuild reaches npm's
 // CLI with the exact argument vector, proving the wiring the in-memory
-// policy tests bypass (adversarial round 9).
+// policy tests bypass.
 test('helper entry point runs the default npm rebuild', () => {
   const tmp = mkdtempSync(path.join(os.tmpdir(), 'docsy-hugo-entry-'));
   const recorder = path.join(tmp, 'fake-npm-cli.js');

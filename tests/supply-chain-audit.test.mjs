@@ -154,7 +154,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
 
   // The allowScripts entry is version-pinned, so it must track the locked
   // version: a stale pin fails npm ci under strict-allow-scripts, and this
-  // assertion names the fix in the bump PR itself (#2712 round-3 review).
+  // assertion names the fix in the bump PR itself (#2712).
   const hugoVersion =
     locks['package-lock.json'].packages['node_modules/hugo-extended'].version;
   const { allowScripts } = readJSON('package.json');
@@ -227,9 +227,9 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'the post-install step uses the retrying Hugo rebuild helper',
   );
   // Cross-pin: the wiring guard's coverage check is existence-relative, so
-  // deleting the guard would silence it while its glob stays green
-  // (adversarial round 13). Anchor its existence and wiring here, in an
-  // independently wired file; the wiring guard anchors this file back.
+  // deleting the guard would silence it while its glob stays green. Anchor
+  // its existence and wiring here, in an independently wired file; the
+  // wiring guard anchors this file back.
   assert.ok(
     fs.existsSync(path.join(repoRoot, 'tests/test-wiring.test.mjs')),
     'the suite-wiring guard exists',
@@ -286,7 +286,7 @@ test('workflows: installs are locked and credential-isolated', () => {
     );
   }
   // Netlify command chains are execution entry points the runner lint
-  // doesn't scan (TOML): exact-pin them (adversarial round 12).
+  // doesn't scan (TOML): exact-pin them.
   assert.deepEqual(
     netlifyConfig
       .split('\n')

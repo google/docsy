@@ -26,9 +26,9 @@ test('manifests: every test:repo argument resolves to test files', () => {
     'test:repo uses the node test runner',
   );
   const args = scripts['test:repo'].replace(/^node --test /, '').split(' ');
-  // Coverage below is existence-relative: a deleted file drops out of both
-  // sides (adversarial round 13). The structural guards therefore anchor
-  // each other by name: this file is pinned from the supply-chain audit.
+  // Coverage below is existence-relative: a deleted file drops out of
+  // both sides, so the structural guards anchor each other by name; this
+  // file is pinned from the supply-chain audit.
   for (const guard of [
     'tests/runner-lint.test.mjs',
     'tests/supply-chain-audit.test.mjs',
@@ -67,8 +67,7 @@ test('manifests: every test:repo argument resolves to test files', () => {
   // Coverage, derived from the filesystem: every existing .test.mjs under
   // the suite roots must be resolved by some test:repo argument, so no
   // guard can be renamed or moved out of glob reach while the rest stays
-  // green (adversarial rounds 11-13; deletion is diff-visible and left to
-  // the count-floor follow-up). Exclusions are named and deliberate.
+  // green.
   const deliberatelyUnwired = ['tests/lychee/']; // own suite: test:lychee
   const allTestFiles = ['tests', 'scripts', 'theme/scripts']
     .flatMap((dir) =>

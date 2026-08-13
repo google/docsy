@@ -3,9 +3,9 @@
 //
 // This is the only guard against a regression to a floating version like
 // `latest`: dependency scanners can't see CDN URLs embedded in an HTML
-// partial. The file is parsed as YAML, not regex-matched: two adversarial
-// review rounds each produced decoy key shapes that fooled regex extraction
-// while Hugo resolved a different value.
+// partial. The file is parsed as YAML, not regex-matched: decoy key
+// shapes have fooled regex extraction while Hugo resolved a different
+// value.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
