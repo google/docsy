@@ -49,21 +49,31 @@ test('manifests: every test:repo argument resolves to test files', () => {
     );
   }
 
-  // Membership, derived from the filesystem: every top-level guard in
-  // tests/ must ride in test:repo, so no single guard file can be dropped
-  // from the suite while the rest stays green (adversarial round 11).
-  // Exclusions are named and deliberate: smoke is slow and network-bound
-  // (its header), run manually.
-  const deliberatelyUnwired = new Set(['tests/smoke.test.mjs']);
-  const topLevelGuards = fs
-    .globSync('tests/*.test.mjs', { cwd: repoRoot })
-    // globSync returns platform separators; compare in posix form.
-    .map((file) => file.replaceAll(path.sep, '/'))
-    .filter((file) => !deliberatelyUnwired.has(file))
+  // Coverage, derived from the filesystem: every .test.mjs under the suite
+  // roots must be resolved by some test:repo argument, so no guard can be
+  // dropped, renamed, or moved out of glob reach while the rest stays green
+  // (adversarial rounds 11-12). Exclusions are named and deliberate.
+  const deliberatelyUnwired = ['tests/lychee/']; // own suite: test:lychee
+  const resolved = new Set(
+    args
+      .flatMap((arg) =>
+        fs.globSync(arg.replace(/^(['"])(.*)\1$/, '$2'), { cwd: repoRoot }),
+      )
+      // globSync returns platform separators; compare in posix form.
+      .map((file) => file.replaceAll(path.sep, '/')),
+  );
+  const allTestFiles = ['tests', 'scripts', 'theme/scripts']
+    .flatMap((dir) =>
+      fs
+        .readdirSync(path.join(repoRoot, dir), { recursive: true })
+        .filter((file) => file.endsWith('.test.mjs'))
+        .map((file) => `${dir}/${file.replaceAll(path.sep, '/')}`),
+    )
+    .filter((file) => !deliberatelyUnwired.some((dir) => file.startsWith(dir)))
     .sort();
   assert.deepEqual(
-    args.filter((arg) => !arg.includes('*')).sort(),
-    topLevelGuards,
-    'test:repo names every top-level tests/*.test.mjs guard',
+    allTestFiles.filter((file) => resolved.has(file)),
+    allTestFiles,
+    'test:repo arguments resolve every repo .test.mjs file',
   );
 });
