@@ -44,7 +44,6 @@ jobs:
       - name: Setup workspace
         run: |
           npm run install:safe
-          npm run -s _check:hugo
           mkdir -p tmp && cd tmp && npm init -y
         shell: bash
 

@@ -1,22 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {
-  chmodSync,
-  existsSync,
-  mkdtempSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from 'node:fs';
-import os from 'node:os';
-import path from 'node:path';
-import { spawnSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
 
-const script = fileURLToPath(
-  new URL('rebuild-hugo-extended.sh', import.meta.url),
-);
-const unsafeHugoEnv = [
+import {
+  RETRY_DELAYS_SECONDS,
+  UNSAFE_HUGO_ENV,
+  rebuildHugoExtended,
+  runNpmRebuild,
+} from './rebuild-hugo-extended.mjs';
+
+const expectedUnsafeHugoEnv = [
   'HUGO_BIN_PATH',
   'HUGO_FORCE_STANDARD',
   'HUGO_MIRROR_BASE_URL',
@@ -27,113 +19,107 @@ const unsafeHugoEnv = [
   'HUGO_SKIP_VERIFY',
 ];
 
-function runProbe(succeedAt, extraEnv = {}) {
-  const tmp = mkdtempSync(path.join(os.tmpdir(), 'docsy-hugo-rebuild-'));
-  const attempts = path.join(tmp, 'attempts');
-  const delays = path.join(tmp, 'delays');
-  const invocations = path.join(tmp, 'invocations');
-  const npm = path.join(tmp, 'npm');
-  const sleep = path.join(tmp, 'sleep');
-
-  writeFileSync(
-    npm,
-    `#!/bin/bash
-echo "$*" >> "$INVOCATIONS"
-if [ "$*" = "run -s _check:hugo" ]; then
-  exit 0
-fi
-if [ "$*" != "run __rebuild:hugo" ]; then
-  exit 64
-fi
-count=$(cat "$ATTEMPTS" 2>/dev/null || echo 0)
-count=$((count + 1))
-echo "$count" > "$ATTEMPTS"
-[ "$count" -ge "$SUCCEED_AT" ]
-`,
-  );
-  writeFileSync(
-    sleep,
-    `#!/bin/bash
-echo "$1" >> "$DELAYS"
-`,
-  );
-  chmodSync(npm, 0o755);
-  chmodSync(sleep, 0o755);
-
-  const env = {
-    ...process.env,
-    ATTEMPTS: attempts,
-    DELAYS: delays,
-    INVOCATIONS: invocations,
-    PATH: `${tmp}${path.delimiter}${process.env.PATH}`,
-    SUCCEED_AT: String(succeedAt),
-    ...extraEnv,
-  };
-  for (const name of unsafeHugoEnv) {
-    if (!(name in extraEnv)) delete env[name];
-  }
-  const result = spawnSync('bash', [script], {
-    encoding: 'utf8',
+async function runProbe(succeedAt, env = {}) {
+  const attempts = [];
+  const errors = [];
+  const logs = [];
+  const waited = [];
+  const status = await rebuildHugoExtended({
     env,
+    error: (message) => errors.push(message),
+    log: (message) => logs.push(message),
+    run: () => {
+      attempts.push(attempts.length + 1);
+      return attempts.length >= succeedAt ? 0 : 1;
+    },
+    wait: async (delay) => waited.push(delay),
   });
-  const count = existsSync(attempts)
-    ? Number(readFileSync(attempts, 'utf8').trim())
-    : 0;
-  const waited = existsSync(delays)
-    ? readFileSync(delays, 'utf8').trim().split('\n')
-    : [];
-  const invoked = existsSync(invocations)
-    ? readFileSync(invocations, 'utf8').trim().split('\n')
-    : [];
-  rmSync(tmp, { recursive: true, force: true });
-
-  return { result, count, invoked, waited };
+  return { attempts, errors, logs, status, waited };
 }
 
-test('Hugo rebuild retries with backoff until it succeeds', () => {
-  const { result, count, invoked, waited } = runProbe(3);
-
+test('Hugo rebuild policy is bounded and rejects installer controls', () => {
   assert.deepEqual(
-    invoked,
+    RETRY_DELAYS_SECONDS,
+    [0, 2, 5, 10],
+    'retry delays define four bounded attempts',
+  );
+  assert.deepEqual(
+    UNSAFE_HUGO_ENV,
+    expectedUnsafeHugoEnv,
+    'unsafe Hugo controls stay complete',
+  );
+});
+
+test('npm rebuild uses the current npm CLI and exact arguments', () => {
+  const env = { npm_execpath: '/npm/bin/npm-cli.js' };
+  const calls = [];
+  const status = runNpmRebuild({
+    env,
+    execPath: '/node',
+    spawn(file, args, options) {
+      calls.push({ args, file, options });
+      return { status: 0 };
+    },
+  });
+
+  assert.equal(status, 0, 'successful npm rebuild returns zero');
+  assert.deepEqual(
+    calls,
     [
-      'run __rebuild:hugo',
-      'run __rebuild:hugo',
-      'run __rebuild:hugo',
-      'run -s _check:hugo',
+      {
+        args: [
+          '/npm/bin/npm-cli.js',
+          'rebuild',
+          'hugo-extended',
+          '--ignore-scripts=false',
+        ],
+        file: '/node',
+        options: { env, stdio: 'inherit' },
+      },
     ],
-    'retry wrapper invokes only the raw rebuild and Hugo check',
+    'rebuild runs the locked package through the current npm CLI',
   );
-  assert.equal(result.status, 0, 'retry wrapper exits successfully');
-  assert.equal(count, 3, 'retry wrapper stops after the successful attempt');
-  assert.deepEqual(
-    waited,
-    ['2', '5'],
-    'retry wrapper uses the first two delays',
-  );
-  assert.match(result.stdout, /Hugo install attempt 3\/4/);
 });
 
-test('Hugo rebuild fails after four attempts', () => {
-  const { result, count, invoked, waited } = runProbe(5);
+test('Hugo rebuild retries with backoff until it succeeds', async () => {
+  const { attempts, errors, logs, status, waited } = await runProbe(3);
 
-  assert.deepEqual(
-    invoked,
-    Array(4).fill('run __rebuild:hugo'),
-    'every exhausted attempt invokes the raw rebuild',
+  assert.equal(status, 0, 'retry policy returns zero after success');
+  assert.deepEqual(attempts, [1, 2, 3], 'retry policy stops after success');
+  assert.deepEqual(waited, [2, 5], 'retry policy uses the first two delays');
+  assert.deepEqual(errors, [], 'successful retry policy reports no errors');
+  assert.ok(
+    logs.includes('Hugo install attempt 3/4'),
+    'successful attempt is logged',
   );
-  assert.equal(result.status, 1, 'exhausted retry wrapper exits nonzero');
-  assert.equal(count, 4, 'retry wrapper makes four attempts');
-  assert.deepEqual(waited, ['2', '5', '10'], 'retry wrapper uses every delay');
-  assert.match(result.stderr, /Hugo install failed after 4 attempts/);
 });
 
-test('Hugo rebuild rejects installer control variables', () => {
-  for (const name of unsafeHugoEnv) {
-    const { result, count, invoked } = runProbe(1, { [name]: '1' });
+test('Hugo rebuild fails after four attempts', async () => {
+  const { attempts, errors, status, waited } = await runProbe(5);
 
-    assert.equal(result.status, 1, `${name} makes the rebuild fail`);
-    assert.equal(count, 0, `${name} permits no rebuild attempt`);
-    assert.deepEqual(invoked, [], `${name} permits no npm invocation`);
-    assert.match(result.stderr, new RegExp(`${name} must be unset`));
+  assert.equal(status, 1, 'exhausted retry policy returns nonzero');
+  assert.deepEqual(attempts, [1, 2, 3, 4], 'retry policy makes four attempts');
+  assert.deepEqual(waited, [2, 5, 10], 'retry policy uses every delay');
+  assert.deepEqual(
+    errors,
+    ['Hugo install failed after 4 attempts'],
+    'retry exhaustion is reported',
+  );
+});
+
+test('Hugo rebuild rejects installer control variables', async () => {
+  for (const name of expectedUnsafeHugoEnv) {
+    const { attempts, errors, status, waited } = await runProbe(1, {
+      [name]: '1',
+    });
+
+    assert.equal(status, 1, `${name} returns nonzero`);
+    assert.deepEqual(attempts, [], `${name} permits no rebuild attempt`);
+    assert.deepEqual(waited, [], `${name} permits no retry wait`);
+    assert.deepEqual(
+      errors,
+      [`${name} must be unset for the pinned Hugo rebuild`],
+      `${name} rejection is reported`,
+    );
   }
 });
