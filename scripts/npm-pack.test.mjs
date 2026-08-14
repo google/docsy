@@ -1,6 +1,5 @@
 // Sanity checks for the npm tarballs: the root GitHub-NPM package and the
-// @docsy/theme registry package. Fast and offline; picked up by
-// test:tooling / _test:full:post.
+// @docsy/theme registry package. Fast and offline.
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -139,7 +138,12 @@ before(() => {
     );
     const tarballPath = path.join(dest, tgzFiles[0]);
 
-    const tar = spawnSync('tar', ['-tzf', tarballPath], { encoding: 'utf8' });
+    // Run from dest with a bare filename: GNU tar parses a drive-letter
+    // path (D:\...) as a remote host:path spec and fails on Windows.
+    const tar = spawnSync('tar', ['-tzf', tgzFiles[0]], {
+      cwd: dest,
+      encoding: 'utf8',
+    });
     assert.equal(tar.status, 0, `tar -tzf lists ${name}: ${tar.stderr}`);
     const entries = tar.stdout.trim().split(/\r?\n/).filter(Boolean);
     assert.ok(entries.length > 0, `${name} tarball has entries`);
@@ -190,10 +194,11 @@ test('@docsy/theme: npm pack cleans up the materialized LICENSE', () => {
 // gains the packed commit's SHA inside the tarball only.
 test('@docsy/theme: dev pack stamps the tarball manifest with a build ID', () => {
   const { tarballPath } = packed.get('@docsy/theme');
+  // Bare filename via cwd: drive-letter note in before().
   const extract = spawnSync(
     'tar',
-    ['-xzOf', tarballPath, 'package/package.json'],
-    { encoding: 'utf8' },
+    ['-xzOf', path.basename(tarballPath), 'package/package.json'],
+    { cwd: path.dirname(tarballPath), encoding: 'utf8' },
   );
   assert.equal(
     extract.status,

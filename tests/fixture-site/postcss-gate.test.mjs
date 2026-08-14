@@ -23,12 +23,10 @@ import {
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { hugoEnv } from './lib/build-site.mjs';
+import { hugoCli, hugoEnv } from './lib/build-site.mjs';
 
 const repoDir = fileURLToPath(new URL('../../', import.meta.url));
 const themesDir = repoDir.replace(/[/\\]$/, '');
-const hugoBin = join(repoDir, 'node_modules', '.bin', 'hugo');
-const hugo = existsSync(hugoBin) ? hugoBin : 'hugo';
 
 // Build a minimal non-RTL site against the local theme, with a node_modules
 // holding only the packages the theme mounts as SCSS sources — and no `postcss`.
@@ -71,8 +69,9 @@ function buildNonRtl({ withConfig = false } = {}) {
     }
 
     const res = spawnSync(
-      hugo,
+      process.execPath,
       [
+        hugoCli,
         '--themesDir',
         themesDir,
         '--cleanDestinationDir',

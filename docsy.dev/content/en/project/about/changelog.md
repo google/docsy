@@ -176,15 +176,18 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Committed the npm lockfiles; dependency installs are now lock-exact, and
   unreviewed dependency scripts are disabled ([#2700][]).
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
-  `_test:full:pre`/`_test:full:post` phases; the freed `ci:*` names retire. A
+  `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
+- Guarded dependency and workflow hardening with a committed supply-chain audit;
+  removed bare-npx registry fallback paths ([#2714][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
-  `params.mermaid.version`, guarded by `test:mermaid-version`. See [Default
-  Mermaid version][mermaid-version-notes].
+  `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
+  [Default Mermaid version][mermaid-version-notes].
 
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2712]: https://github.com/google/docsy/pull/2712
+[#2714]: https://github.com/google/docsy/pull/2714
 [mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1

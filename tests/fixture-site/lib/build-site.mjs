@@ -21,6 +21,13 @@ const repoRoot = path.resolve(
   '../../..',
 );
 const FIXTURE_SITE_TMP = path.join(repoRoot, 'tmp', 'fixture-site');
+export const hugoCli = path.join(
+  repoRoot,
+  'node_modules',
+  'hugo-extended',
+  'dist',
+  'cli.mjs',
+);
 
 // Fixture sites pin their own theme config; an inherited HUGO_THEME
 // (worktree checkouts) would override it. A function, not a snapshot: late
@@ -66,7 +73,9 @@ export function buildSite(
     path.join(repoRoot, 'node_modules'),
     path.join(site, 'node_modules'),
   );
-  const r = spawnSync('npx', ['hugo'], {
+  // Run the locked local CLI through Node: no registry fallback or
+  // platform-specific npm shim.
+  const r = spawnSync(process.execPath, [hugoCli], {
     cwd: site,
     encoding: 'utf8',
     env: { ...hugoEnv(), ...env },

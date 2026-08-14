@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "_build": "npm run _hugo-dev --",
-    "_check:afdocs": "npx afdocs check --config agent-docs.config.yml --format scorecard",
-    "_check:format": "npx prettier --config ../.prettierrc.json --check .",
+    "_check:afdocs": "afdocs check --config agent-docs.config.yml --format scorecard",
+    "_check:format": "prettier --config ../.prettierrc.json --check .",
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
     "_check:links": "lychee-norm-cache",
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit --allow-empty -m \"Site at $HASH\"",
@@ -48,7 +48,7 @@
     "update:goldens": "npm run _update:goldens",
     "update:hugo": "npm install --save-exact -D hugo-extended@latest",
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
-    "update:packages": "npx npm-check-updates -u"
+    "update:packages": "npm-check-updates -u"
   },
   "dependencies-note": "Dependencies installed from ../theme; see the root install:theme-deps script",
   "devDependencies": {

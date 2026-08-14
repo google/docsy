@@ -108,7 +108,7 @@ command from your site project root.
 For an npm package install of Docsy:
 
 ```sh
-npx --no-install gen-favicons static/favicon.svg static/
+npx --no -- gen-favicons static/favicon.svg static/
 ```
 
 Otherwise, run:

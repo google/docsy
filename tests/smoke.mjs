@@ -15,8 +15,8 @@
 // the common case when smoke-testing a PR branch pushed to a fork.
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
-// kept OUT of `test:tooling` / CI `_test:full:post`, which must stay fast
-// and offline.
+// not named .test.mjs, keeping it out of the `test:repo` globs and CI, which
+// must stay fast and offline.
 
 import { test, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -160,25 +160,24 @@ before(() => {
 });
 
 // An npm install of @docsy/theme wires the package bins into
-// node_modules/.bin; assert the shim exists, then run it with
-// `npx --no-install`: when the shim is missing, a bare `npx NAME` offers to
-// fetch a same-named package from the public registry instead (an unrelated
-// `gen-favicons` package exists there).
+// node_modules/.bin; assert the shim exists, then run it with the refusal
+// form `npx --no` (an unrelated `gen-favicons` package exists on the
+// public registry; rationale: tests/runner-lint.test.mjs).
 function assertGenFaviconsBin(site) {
   assert.ok(
     existsSync(path.join(site, 'node_modules', '.bin', 'gen-favicons')),
     'gen-favicons bin shim is wired into node_modules/.bin',
   );
-  progress('npx --no-install gen-favicons --help…');
-  const help = run('npx', ['--no-install', 'gen-favicons', '--help'], {
+  progress('npx --no -- gen-favicons --help…');
+  const help = run('npx', ['--no', '--', 'gen-favicons', '--help'], {
     cwd: site,
     shell: winShell,
   });
-  assert.equal(help.status, 0, 'npx gen-favicons --help exits 0');
+  assert.equal(help.status, 0, 'gen-favicons --help exits 0');
   assert.match(
     help.stdout ?? '',
     /Usage: gen-favicons/,
-    'npx gen-favicons --help prints usage',
+    'gen-favicons --help prints usage',
   );
 }
 
@@ -222,7 +221,11 @@ function buildThemeConsumerSite(name, pkgSpec) {
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
   assert.equal(
-    run('npm', ['install', '--no-audit', '--no-fund', pkgSpec], npmOpts).status,
+    run(
+      'npm',
+      ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
+      npmOpts,
+    ).status,
     0,
     `${pkgSpec} installs`,
   );
