@@ -10,7 +10,7 @@
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PNG } from 'pngjs';
@@ -34,14 +34,22 @@ const viewports = {
 
 // One entry per golden-tracked region; grows with the migration. Padded
 // element crops localize a failure to a region; the selector-less full-page
-// entry is the coarse safety net for everything the crops don't track.
+// entries are the coarse safety net for everything the crops don't track.
+// The single-crumb variant is display:none (no element box), so the home of
+// its visual proof is the docs/ page shot.
 const regions = [
   {
     name: 'breadcrumb',
     path: 'docs/getting-started/install/',
     selector: 'nav[aria-label="breadcrumb"]',
   },
+  {
+    name: 'breadcrumb-mid',
+    path: 'docs/getting-started/',
+    selector: 'nav[aria-label="breadcrumb"]',
+  },
   { name: 'page', path: 'docs/getting-started/install/' },
+  { name: 'page-single', path: 'docs/' },
 ];
 
 const shots = regions.flatMap((region) =>
@@ -57,10 +65,12 @@ const shots = regions.flatMap((region) =>
 
 let server, browser;
 
-// No golden set for this platform (e.g. Windows): skip rather than fail.
-// Creating a local, uncommitted baseline opts a platform in:
-// npm run update:visual-goldens.
-const optedOut = !update && !existsSync(goldenDir);
+// Linux is the authoritative set (CI enforces it): a missing golden dir
+// there must fail loud, not skip — all-skipped exits 0, so the skip path
+// would let a PR delete the goldens and stay green. Other platforms skip;
+// a local uncommitted baseline opts one in: npm run update:visual-goldens.
+const authoritative = process.platform === 'linux' || !!process.env.CI;
+const optedOut = !update && !authoritative && !existsSync(goldenDir);
 
 before(async () => {
   if (optedOut) return;
@@ -107,3 +117,24 @@ for (const { name, region, viewport, scheme } of shots) {
     },
   );
 }
+
+// Structural guard: the golden set mirrors the shot list exactly, so a
+// deleted golden, an emptied region list, or a stale extra file fails loud
+// (all-skipped or zero-registered runs exit 0 otherwise).
+test(
+  'visual goldens: golden files match the shot list',
+  { skip: optedOut && 'no local goldens' },
+  () => {
+    assert.ok(shots.length > 0, 'shot list is non-empty');
+    if (update) return;
+    const tracked = shots.map(({ name }) => `${name}.png`).sort();
+    const committed = readdirSync(goldenDir)
+      .filter((f) => f.endsWith('.png'))
+      .sort();
+    assert.deepEqual(
+      committed,
+      tracked,
+      `goldens/${process.platform}/ matches the shot list`,
+    );
+  },
+);

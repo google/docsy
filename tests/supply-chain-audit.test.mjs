@@ -160,7 +160,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // locked versions: a stale pin fails npm ci under strict-allow-scripts,
   // and this assertion names the fix in the bump PR itself (#2712).
   // puppeteer's postinstall (browser download) is deliberately denied:
-  // the visual suite installs its browser on demand (_install:chrome).
+  // the visual suite installs its browser on demand (install:chrome).
   const lockedVersion = (name) =>
     locks['package-lock.json'].packages[`node_modules/${name}`].version;
   const { allowScripts } = readJSON('package.json');

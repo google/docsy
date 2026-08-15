@@ -32,6 +32,7 @@ function run(cmd, args) {
 }
 
 const branch = run('git', ['branch', '--show-current']);
+// completed only: an in-progress run's artifact set is racy.
 const runId = run('gh', [
   'run',
   'list',
@@ -39,6 +40,8 @@ const runId = run('gh', [
   'test',
   '--branch',
   branch,
+  '--status',
+  'completed',
   '--limit',
   '1',
   '--json',

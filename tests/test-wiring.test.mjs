@@ -16,6 +16,14 @@ const repoRoot = path.resolve(
   '..',
 );
 
+// Directories deliberately outside test:repo, each owned by its own suite
+// script: tests/lychee/ needs lychee on PATH; tests/visual/ needs an
+// installed browser.
+const ownSuites = {
+  'tests/lychee/': 'test:lychee',
+  'tests/visual/': 'test:visual',
+};
+
 test('manifests: every test:repo argument resolves to test files', () => {
   const { scripts } = JSON.parse(
     fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
@@ -68,10 +76,6 @@ test('manifests: every test:repo argument resolves to test files', () => {
   // the suite roots must be resolved by some test:repo argument, so no
   // guard can be renamed or moved out of glob reach while the rest stays
   // green.
-  const deliberatelyUnwired = [
-    'tests/lychee/', // own suite: test:lychee
-    'tests/visual/', // own suite: test:visual (needs an installed browser)
-  ];
   const allTestFiles = ['tests', 'scripts', 'theme/scripts']
     .flatMap((dir) =>
       fs
@@ -86,11 +90,68 @@ test('manifests: every test:repo argument resolves to test files', () => {
             .replaceAll(path.sep, '/'),
         ),
     )
-    .filter((file) => !deliberatelyUnwired.some((dir) => file.startsWith(dir)))
+    .filter(
+      (file) => !Object.keys(ownSuites).some((dir) => file.startsWith(dir)),
+    )
     .sort();
   assert.deepEqual(
     allTestFiles.filter((file) => resolved.has(file)),
     allTestFiles,
     'test:repo arguments resolve every test file under the suite roots',
   );
+});
+
+// The same silent-empty-glob hole applies to the own-suite scripts: their
+// runner and globs get the test:repo treatment, so a renamed visual test
+// file (or a broken script) can't leave a green suite that runs nothing.
+test('manifests: own-suite scripts resolve their test files', () => {
+  const { scripts } = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
+  );
+  for (const [dir, script] of Object.entries(ownSuites)) {
+    const command = scripts[script];
+    assert.ok(command, `script ${script} exists`);
+    assert.match(command, /^node --test /, `${script} uses the node runner`);
+    const resolved = new Set();
+    for (const arg of command.replace(/^node --test /, '').split(' ')) {
+      if (arg.includes('*')) {
+        assert.match(
+          arg,
+          /^(['"]).*\1$/,
+          `${script} wildcard argument ${arg} is quoted`,
+        );
+      }
+      const pattern = arg.replace(/^(['"])(.*)\1$/, '$2');
+      const testFiles = fs
+        .globSync(pattern, { cwd: repoRoot })
+        .filter(
+          (match) =>
+            match.endsWith('.test.mjs') &&
+            fs.statSync(path.join(repoRoot, match)).isFile(),
+        );
+      assert.ok(
+        testFiles.length > 0,
+        `${script} argument ${arg} matches test files`,
+      );
+      for (const f of testFiles) resolved.add(f.replaceAll(path.sep, '/'));
+    }
+    const dirTests = fs
+      .readdirSync(path.join(repoRoot, dir), {
+        recursive: true,
+        withFileTypes: true,
+      })
+      .filter((entry) => entry.isFile() && entry.name.endsWith('.test.mjs'))
+      .map((entry) =>
+        path
+          .relative(repoRoot, path.join(entry.parentPath, entry.name))
+          .replaceAll(path.sep, '/'),
+      )
+      .sort();
+    assert.ok(dirTests.length > 0, `${dir} contains test files`);
+    assert.deepEqual(
+      dirTests.filter((file) => resolved.has(file)),
+      dirTests,
+      `${script} resolves every test file under ${dir}`,
+    );
+  }
 });

@@ -8,8 +8,9 @@ templates emit; these pin what the reader sees. Two kinds of shot:
 
 - **region crops** — the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
-- a **full-viewport page shot** — the coarse safety net for whatever the tracked
-  regions don't cover.
+- a **full-page shot** (not viewport-clipped: the footer sits below the fold on
+  short fixture pages) — the coarse safety net for whatever the tracked regions
+  don't cover.
 
 ## Running
 
@@ -18,7 +19,8 @@ templates emit; these pin what the reader sees. Two kinds of shot:
 Rendering differs across OSs, so goldens are keyed by platform under
 `goldens/<platform>/`:
 
-- **`linux/` is authoritative** — it's what CI enforces (the `visual` job).
+- **`linux/` is authoritative** — it's what CI enforces (the `visual` job). A
+  missing or incomplete set **fails** on Linux/CI rather than skipping.
 - `darwin/` is committed as a maintainer convenience for local checks.
 - Other platforms (Windows included): the suite **skips** when
   `goldens/<platform>/` doesn't exist. Opt in by generating a local, uncommitted

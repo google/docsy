@@ -39,16 +39,46 @@ export function bootstrapClasses(css) {
   return classes;
 }
 
-// Class tokens a template emits: the literal words of its class attributes,
-// template actions ({{…}}) removed. A lint over literal tokens, not a
-// boundary: fully computed class attributes are review's job.
+// Class tokens a template emits from its class attributes: the literal
+// words of the attribute text, plus words in quoted string literals inside
+// the attribute's {{…}} actions (delimit/cond/printf-built class lists).
+// The scan walks the attribute value action-aware, so quotes inside actions
+// can't truncate it. Strict by design: an action literal that merely
+// collides with a class name (a status-string compare) is a loud false
+// positive, not a silent miss. A lint over these forms, not a boundary:
+// fully computed attributes (class={{ $c }}, printf "class=%q") are
+// review's job.
 export function classTokens(template) {
   const tokens = new Set();
-  for (const m of template.matchAll(/class\s*=\s*("([^"]*)"|'([^']*)')/g)) {
-    const value = (m[2] ?? m[3]).replace(/\{\{.*?\}\}/gs, ' ');
-    for (const token of value.split(/\s+/)) {
+  const add = (text) => {
+    for (const token of text.split(/\s+/)) {
       if (token) tokens.add(token);
     }
+  };
+  const attrRe = /class\s*=\s*(["'])/gi;
+  let m;
+  while ((m = attrRe.exec(template))) {
+    const quote = m[1];
+    let i = attrRe.lastIndex;
+    let literal = '';
+    while (i < template.length && template[i] !== quote) {
+      if (template.startsWith('{{', i)) {
+        const end = template.indexOf('}}', i + 2);
+        if (end === -1) break;
+        for (const lit of template
+          .slice(i + 2, end)
+          .matchAll(/"([^"]*)"|`([^`]*)`/g)) {
+          add(lit[1] ?? lit[2]);
+        }
+        literal += ' ';
+        i = end + 2;
+      } else {
+        literal += template[i];
+        i += 1;
+      }
+    }
+    add(literal);
+    attrRe.lastIndex = i;
   }
   return tokens;
 }
@@ -72,27 +102,54 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
 });
 
 // Self-test: prove the scanner's signal on synthetic templates, so an empty
-// cleared list can't hide a broken scanner (false-green guard).
+// cleared list can't hide a broken scanner (false-green guard). The nested-
+// quote and action-literal cases are real Hugo forms that defeated a naive
+// attribute regex (adversarial review, 2026-08-15).
 test('framework-class check: scanner flags Bootstrap classes', () => {
   const inventory = bootstrapClasses(fs.readFileSync(bootstrapCss, 'utf8'));
   for (const known of ['d-flex', 'breadcrumb', 'active', 'mb-4']) {
     assert.ok(inventory.has(known), `inventory contains .${known}`);
   }
+  const offenders = (template) =>
+    [...classTokens(template)].filter((t) => inventory.has(t)).sort();
 
-  const dirty = classTokens(
-    '<nav class="td-x d-flex{{ if .Active }} active{{ end }}"></nav>',
-  );
   assert.deepEqual(
-    [...dirty].filter((t) => inventory.has(t)),
-    ['d-flex', 'active'],
+    offenders('<nav class="td-x d-flex{{ if .Active }} active{{ end }}">'),
+    ['active', 'd-flex'],
     'dirty template is flagged',
   );
 
-  const clean = classTokens(
-    '<nav class="td-x{{ if .Active }} td-x--active{{ end }}"></nav>',
+  // Quotes inside actions must not truncate the attribute scan.
+  assert.deepEqual(
+    offenders(
+      '<li class="breadcrumb-item{{ if eq .Status "active" }} active{{ end }}">',
+    ),
+    ['active', 'breadcrumb-item'],
+    'nested-quote action is flagged',
+  );
+
+  // Class names emitted from string literals inside actions count too.
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d-flex" "mb-4") " " }}">'),
+    ['d-flex', 'mb-4'],
+    'delimit-built class list is flagged',
   );
   assert.deepEqual(
-    [...clean].filter((t) => inventory.has(t)),
+    offenders(
+      '<div class="{{ cond $single "breadcrumb d-flex" "breadcrumb" }}">',
+    ),
+    ['breadcrumb', 'd-flex'],
+    'cond-built class list is flagged',
+  );
+
+  assert.deepEqual(
+    offenders('<div CLASS="d-flex">'),
+    ['d-flex'],
+    'attribute name is case-insensitive',
+  );
+
+  assert.deepEqual(
+    offenders('<nav class="td-x{{ if .Active }} td-x--active{{ end }}">'),
     [],
     'semantic template passes',
   );

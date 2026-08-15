@@ -32,11 +32,19 @@ const mime = {
 };
 
 export function serveDir(dir) {
+  const root = path.resolve(dir);
   const server = http.createServer((req, res) => {
-    let file = path.join(
-      dir,
-      decodeURIComponent(new URL(req.url, 'http://x').pathname),
+    let file = path.resolve(
+      path.join(
+        root,
+        decodeURIComponent(new URL(req.url, 'http://x').pathname),
+      ),
     );
+    // Decoded dot-segments could escape the root after path.join.
+    if (file !== root && !file.startsWith(root + path.sep)) {
+      res.writeHead(403).end();
+      return;
+    }
     if (existsSync(file) && statSync(file).isDirectory()) {
       file = path.join(file, 'index.html');
     }
@@ -111,11 +119,20 @@ export async function shootRegion(
       }
       const box = await element.boundingBox();
       if (!box) throw new Error(`no bounding box: ${selector} at ${url}`);
+      // Clamp each edge independently against the page bounds: clamping
+      // only the origin would shift the crop instead of shrinking it, and
+      // Puppeteer accepts out-of-bounds clips silently.
+      const bounds = await page.evaluate(() => ({
+        width: document.documentElement.scrollWidth,
+        height: document.documentElement.scrollHeight,
+      }));
+      const x = Math.max(0, box.x - pad);
+      const y = Math.max(0, box.y - pad);
       options.clip = {
-        x: Math.max(0, box.x - pad),
-        y: Math.max(0, box.y - pad),
-        width: Math.min(viewport.width, box.width + 2 * pad),
-        height: box.height + 2 * pad,
+        x,
+        y,
+        width: Math.min(bounds.width, box.x + box.width + pad) - x,
+        height: Math.min(bounds.height, box.y + box.height + pad) - y,
       };
     }
     return PNG.sync.read(await page.screenshot(options));
