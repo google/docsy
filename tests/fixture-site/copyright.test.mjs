@@ -80,6 +80,20 @@ test('from_year equal to the build year collapses to a single year', () => {
   );
 });
 
+test('whitespace-only from_year behaves as unset', () => {
+  assert.equal(
+    copyrightText('ws-from', { from_year: '   ', to_year: 2024 }),
+    '&copy; 2024',
+  );
+});
+
+test('whitespace-only to_year behaves as unset', () => {
+  assert.equal(
+    copyrightText('ws-to', { from_year: 2018, to_year: '   ' }),
+    `&copy; 2018&ndash;${BUILD_YEAR}`,
+  );
+});
+
 test('build year alone renders when both year fields are unset', () => {
   assert.equal(
     copyrightText('no-years', { authors: 'Test Authors' }),

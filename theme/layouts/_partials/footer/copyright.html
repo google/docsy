@@ -4,8 +4,8 @@
   {{ $toYear := "" -}}
   {{ $authors := "" -}}
   {{ if reflect.IsMap . -}}
-    {{ $fromYear = .from_year -}}
-    {{ $toYear = .to_year -}}
+    {{ $fromYear = strings.TrimSpace (.from_year | default "") -}}
+    {{ $toYear = strings.TrimSpace (.to_year | default "") -}}
     {{ $authors = .authors -}}
   {{ else -}}
     {{ $authors = . -}}
