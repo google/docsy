@@ -58,7 +58,7 @@
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "install:safe": "npm ci --omit=optional --ignore-scripts --no-audit --no-fund && npm run _install:safe:post",
     "install:theme-deps": "npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund",
-    "install:chrome": "node node_modules/puppeteer/install.mjs",
+    "install:browser": "node node_modules/puppeteer/install.mjs",
     "is:clean": "bash -c 'o=$(git status --porcelain -uall); echo \"$o\"; [ -z \"$o\" ]'",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "postupdate:dep": "npm run -s post-update",

@@ -14,7 +14,7 @@ templates emit; these pin what the reader sees. Two kinds of shot:
 
 ## Running
 
-`npm run install:chrome` (once), then `npm run test:visual`.
+`npm run install:browser` (once), then `npm run test:visual`.
 
 Rendering differs across OSs, so goldens are keyed by platform under
 `goldens/<platform>/`:

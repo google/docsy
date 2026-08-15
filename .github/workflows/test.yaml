@@ -74,7 +74,7 @@ jobs:
 
       - run: npm run install:safe
 
-      - run: npm run install:chrome
+      - run: npm run install:browser
 
       - run: npm run test:visual
 

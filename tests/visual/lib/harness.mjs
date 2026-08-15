@@ -76,7 +76,7 @@ export async function launchBrowser() {
     });
   } catch (cause) {
     throw new Error(
-      'Browser launch failed; if none is installed, run: npm run install:chrome',
+      'Browser launch failed; if none is installed, run: npm run install:browser',
       { cause },
     );
   }

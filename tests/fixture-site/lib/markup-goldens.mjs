@@ -41,7 +41,9 @@ const extraConfig = `menus:
       weight: 30
 params:
   copyright:
-    authors: Fixture Authors |
+    authors: >-
+      Fixture Authors |
+      [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2020
   links:
     user:
