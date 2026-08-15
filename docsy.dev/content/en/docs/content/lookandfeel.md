@@ -820,11 +820,15 @@ Use the `params.copyright` config option to set the copyright notice shown in
 the site footer. It can be a plain string, used as the copyright-holder text, or
 a map with the following optional fields:
 
-- `authors`: the copyright holders, rendered as Markdown. Default: the site
-  title followed by " Authors".
-- `from_year`: the first year of publication. Default: the value of `to_year`.
-- `to_year`: the last year of publication; can also be a non-year string such as
-  "present". Default: the year that the site was built.
+- `authors`:
+  - Copyright holders, rendered as Markdown.
+  - Default: the site title followed by "Authors".
+- `from_year`:
+  - First year of publication.
+  - Default: the value of `to_year`.
+- `to_year`:
+  - Last year of publication; can also be a non-year string such as "present".
+  - Default: the year that the site was built.
 
 The notice shows a year range only when `from_year` and `to_year` differ;
 otherwise it shows a single year. Set `from_year` to your site's launch year to
