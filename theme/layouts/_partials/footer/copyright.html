@@ -11,7 +11,7 @@
     {{ $authors = . -}}
   {{ end -}}
   {{ $toYear = $toYear | default now.Year -}}
-  {{ if and (findRE `^\d+$` $fromYear) (findRE `^\d+$` (string $toYear)) -}}
+  {{ if and (findRE `^[1-9]\d{0,3}$` $fromYear) (findRE `^[1-9]\d{0,3}$` (string $toYear)) -}}
     {{ if gt (int $fromYear) (int $toYear) -}}
       {{ warnf "Config params.copyright: from_year (%v) is later than to_year (%v)." $fromYear $toYear -}}
     {{ end -}}

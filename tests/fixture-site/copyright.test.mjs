@@ -29,10 +29,9 @@ function build(name, fields) {
   });
 }
 
-// Returns the rendered copyright text, whitespace-normalized, up to the
-// authors span.
-function copyrightText(name, fields) {
-  const r = build(name, fields);
+// Returns the rendered copyright text of a build result,
+// whitespace-normalized, up to the authors span.
+function noticeText(r) {
   assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
   const m = r
     .publicFile('docs/index.html')
@@ -41,6 +40,10 @@ function copyrightText(name, fields) {
     );
   assert.ok(m, 'footer copyright span is rendered');
   return m[1].replace(/\s+/g, ' ').trim();
+}
+
+function copyrightText(name, fields) {
+  return noticeText(build(name, fields));
 }
 
 test('from_year earlier than to_year renders a range', () => {
@@ -106,14 +109,37 @@ test('build year alone renders when both year fields are unset', () => {
   );
 });
 
+test('padded year values are trimmed for rendering', () => {
+  assert.equal(
+    copyrightText('padded', { from_year: ' 2018 ', to_year: 2024 }),
+    '&copy; 2018&ndash;2024',
+  );
+});
+
 test('from_year later than to_year logs a build warning', () => {
   const r = build('reversed', { from_year: 2025, to_year: 2024 });
-  assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
   assert.match(
     r.stdout + r.stderr,
     /WARN.*from_year \(2025\) is later than to_year \(2024\)/,
     'reversed year range logs a warning',
   );
+  assert.equal(
+    noticeText(r),
+    '&copy; 2025&ndash;2024',
+    'reversed range still renders as configured',
+  );
+});
+
+test('years outside the diagnostic domain render without warning', () => {
+  const r = build('huge-years', {
+    from_year: '9223372036854775808',
+    to_year: '9223372036854775807',
+  });
+  assert.equal(
+    noticeText(r),
+    '&copy; 9223372036854775808&ndash;9223372036854775807',
+  );
+  assert.doesNotMatch(r.stdout + r.stderr, /WARN.*copyright/i);
 });
 
 test('valid year configs build without warnings', () => {
@@ -121,19 +147,21 @@ test('valid year configs build without warnings', () => {
     { from_year: 2018, to_year: 2024 },
     { from_year: 2018, to_year: 'present' },
     { from_year: 2018 },
+    { from_year: 2024, to_year: 2024 },
+    { from_year: ' 2024 ', to_year: 2024 },
   ]) {
     const r = build('no-warn', fields);
     assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
     assert.doesNotMatch(
       r.stdout + r.stderr,
-      /WARN.*_year/,
-      `no year warning for ${JSON.stringify(fields)}`,
+      /WARN.*copyright/i,
+      `no copyright warning for ${JSON.stringify(fields)}`,
     );
   }
 });
 
 // Param-level rule: an empty `params.copyright` value behaves as unset, so
-// the site `copyright` fallback applies (rendered as is, no year added).
+// the site `copyright` fallback applies (rendered as raw HTML, no year added).
 for (const [name, value] of [
   ['empty map', '{}'],
   ['empty string', "''"],
@@ -143,13 +171,13 @@ for (const [name, value] of [
       files: {
         'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
       },
-      extraConfig: `copyright: Site fallback\nparams:\n  copyright: ${value}\n`,
+      extraConfig: `copyright: <b>Site</b> fallback\nparams:\n  copyright: ${value}\n`,
     });
     assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
     const m = r
       .publicFile('docs/index.html')
       .match(/<span class="td-footer__copyright">([\s\S]*?)<\/span>/);
     assert.ok(m, 'footer copyright span is rendered');
-    assert.equal(m[1].replace(/\s+/g, ' ').trim(), 'Site fallback');
+    assert.equal(m[1].replace(/\s+/g, ' ').trim(), '<b>Site</b> fallback');
   });
 }
