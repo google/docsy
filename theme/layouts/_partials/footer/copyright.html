@@ -12,10 +12,13 @@
   {{ end -}}
 
   <span class="td-footer__copyright">&copy;
+    {{ $toYear = $toYear | default now.Year -}}
     {{ with $fromYear -}}
-      {{ . }}&ndash;
-    {{- end -}}
-    {{ $toYear | default now.Year }}
+      {{ if ne (string .) (string $toYear) -}}
+        {{ . }}&ndash;
+      {{- end -}}
+    {{ end -}}
+    {{ $toYear }}
     <span class="td-footer__authors">
       {{- $authors
             | default (printf "%s Authors" ($.Site.Title | default "Site"))

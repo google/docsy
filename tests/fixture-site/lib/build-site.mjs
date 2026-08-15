@@ -52,7 +52,7 @@ themesDir: ${repoRoot}
 // result plus the site path and a `publicFile(relPath)` reader over the output.
 export function buildSite(
   name,
-  { files = {}, srcDir, extraConfig = '', env = {}, title } = {},
+  { files = {}, srcDir, extraConfig = '', env = {}, title, args = [] } = {},
 ) {
   const site = path.join(FIXTURE_SITE_TMP, name);
   rmSync(site, { recursive: true, force: true });
@@ -75,7 +75,7 @@ export function buildSite(
   );
   // Run the locked local CLI through Node: no registry fallback or
   // platform-specific npm shim.
-  const r = spawnSync(process.execPath, [hugoCli], {
+  const r = spawnSync(process.execPath, [hugoCli, ...args], {
     cwd: site,
     encoding: 'utf8',
     env: { ...hugoEnv(), ...env },
