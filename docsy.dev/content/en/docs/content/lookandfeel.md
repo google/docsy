@@ -827,8 +827,10 @@ a map with the following optional fields:
   - First year of publication.
   - Default: the value of `to_year`.
 - `to_year`:
-  - Last year of publication; can also be a non-year string such as "present".
+  - Last year of publication.
   - Default: the year that the site was built.
+  - Tip: a non-year string such as "present" also works, and stays accurate even
+    when the site isn't rebuilt every year.
 
 The notice shows a year range only when `from_year` and `to_year` differ;
 otherwise it shows a single year. Set `from_year` to your site's launch year to
