@@ -825,7 +825,7 @@ a map with the following optional fields:
   - Default: the site title followed by "Authors".
 - `from_year`:
   - First year of publication.
-  - Default: the value of `to_year`.
+  - When unset, or equal to `to_year`, the notice shows a single year.
 - `to_year`:
   - Last year of publication.
   - Default: the year that the site was built.
@@ -833,8 +833,9 @@ a map with the following optional fields:
     when the site isn't rebuilt every year.
 
 The notice shows a year range only when `from_year` and `to_year` differ;
-otherwise it shows a single year. Set `from_year` to your site's launch year to
-get a notice that spans the launch year through the build year, and shows the
+otherwise it shows a single year. A `from_year` later than `to_year` renders as
+configured and logs a build warning. Set `from_year` to your site's launch year
+to get a notice that spans the launch year through the build year, and shows the
 launch year alone until the year after launch. For example:
 
 ```yaml
