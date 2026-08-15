@@ -849,8 +849,8 @@ With a build year of 2026, this renders as:
 
 > © 2018–2026 Docsy Authors | [CC BY 4.0][]
 
-If `params.copyright` is unset, the [site `copyright`][] option is used instead,
-rendered as HTML, with no year added.
+If `params.copyright` is unset or empty, the [site `copyright`][] option is used
+instead, rendered as HTML, with no year added.
 
 [CC BY 4.0]: https://creativecommons.org/licenses/by/4.0
 [site `copyright`]: https://gohugo.io/methods/site/copyright/

@@ -8,9 +8,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
 
-// Distinct from the real current year, so a passing build-year assertion
-// proves the default comes from the test-pinned build clock.
-const BUILD_YEAR = 2030;
+// Pinned via --clock; derived to always differ from the real current year, so
+// a dropped or ignored clock flag fails the build-year assertions.
+const BUILD_YEAR = new Date().getFullYear() + 4;
 
 // Builds a fixture site with the given `params.copyright` fields and returns
 // the rendered copyright text, whitespace-normalized, up to the authors span.
@@ -23,7 +23,9 @@ function copyrightText(name, fields) {
     extraConfig:
       'params:\n  copyright:\n' +
       Object.entries(fields)
-        .map(([k, v]) => `    ${k}: ${v}\n`)
+        // JSON.stringify quotes strings, keeping numbers bare, so YAML
+        // preserves each field's JS type (e.g. a quoted numeric to_year).
+        .map(([k, v]) => `    ${k}: ${JSON.stringify(v)}\n`)
         .join(''),
   });
   assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
@@ -53,6 +55,13 @@ test('non-year to_year such as "present" renders a range', () => {
 test('from_year equal to to_year collapses to a single year', () => {
   assert.equal(
     copyrightText('same-year', { from_year: 2024, to_year: 2024 }),
+    '&copy; 2024',
+  );
+});
+
+test('quoted-string to_year equal to numeric from_year collapses', () => {
+  assert.equal(
+    copyrightText('mixed-types', { from_year: 2024, to_year: '2024' }),
     '&copy; 2024',
   );
 });
