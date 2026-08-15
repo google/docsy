@@ -162,9 +162,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
-- Fixed the footer copyright notice to show a single year when the year range
-  starts and ends in the same year; a range now renders only when `from_year`
-  and `to_year` differ. See the [footer copyright docs][] ([#2047][]).
+- Fixed and documented footer copyright year handling. See the [footer copyright
+  docs][] ([#2047][]).
 - Pinned the default Mermaid version to 11.16.1; pages previously loaded
   whatever `latest` resolved to on the CDN at page load. Sites can still
   override the version via [`params.mermaid.version`][mermaid-version]
