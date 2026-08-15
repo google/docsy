@@ -4,6 +4,12 @@ node_modules/
 !/theme/package-lock.json
 /tmp
 
+# Local visual-golden baselines; only linux (authoritative) and darwin are
+# committed:
+/tests/visual/goldens/*
+!/tests/visual/goldens/linux
+!/tests/visual/goldens/darwin
+
 /theme/LICENSE
 
 # ScrollSpy patch related

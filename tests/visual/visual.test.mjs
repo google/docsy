@@ -10,7 +10,7 @@
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PNG } from 'pngjs';
@@ -19,7 +19,7 @@ import {
   compareToGolden,
   launchBrowser,
   serveDir,
-  shootElement,
+  shootRegion,
 } from './lib/harness.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -32,13 +32,16 @@ const viewports = {
   mobile: { width: 375, height: 667 },
 };
 
-// One entry per golden-tracked region crop; grows with the migration.
+// One entry per golden-tracked region; grows with the migration. Padded
+// element crops localize a failure to a region; the selector-less full-page
+// entry is the coarse safety net for everything the crops don't track.
 const regions = [
   {
     name: 'breadcrumb',
     path: 'docs/getting-started/install/',
     selector: 'nav[aria-label="breadcrumb"]',
   },
+  { name: 'page', path: 'docs/getting-started/install/' },
 ];
 
 const shots = regions.flatMap((region) =>
@@ -54,7 +57,13 @@ const shots = regions.flatMap((region) =>
 
 let server, browser;
 
+// No golden set for this platform (e.g. Windows): skip rather than fail.
+// Creating a local, uncommitted baseline opts a platform in:
+// npm run update:visual-goldens.
+const optedOut = !update && !existsSync(goldenDir);
+
 before(async () => {
+  if (optedOut) return;
   const build = buildFixture();
   [server, browser] = await Promise.all([
     serveDir(path.join(build.site, 'public')),
@@ -67,26 +76,34 @@ after(async () => {
 });
 
 for (const { name, region, viewport, scheme } of shots) {
-  test(`visual golden: ${name}`, async () => {
-    const actual = await shootElement(browser, {
-      url: `${server.origin}/${region.path}`,
-      selector: region.selector,
-      viewport,
-      scheme,
-    });
-    if (update) {
-      mkdirSync(goldenDir, { recursive: true });
-      const file = path.join(goldenDir, `${name}.png`);
-      writeFileSync(file, PNG.sync.write(actual));
-      console.log(`wrote ${path.relative(process.cwd(), file)}`);
-      return;
-    }
-    const failure = compareToGolden(
-      name,
-      actual,
-      path.join(goldenDir, `${name}.png`),
-      outDir,
-    );
-    assert.equal(failure, null, `${name} matches its golden`);
-  });
+  test(
+    `visual golden: ${name}`,
+    {
+      skip:
+        optedOut &&
+        `no ${process.platform} goldens; see tests/visual/README.md`,
+    },
+    async () => {
+      const actual = await shootRegion(browser, {
+        url: `${server.origin}/${region.path}`,
+        selector: region.selector,
+        viewport,
+        scheme,
+      });
+      if (update) {
+        mkdirSync(goldenDir, { recursive: true });
+        const file = path.join(goldenDir, `${name}.png`);
+        writeFileSync(file, PNG.sync.write(actual));
+        console.log(`wrote ${path.relative(process.cwd(), file)}`);
+        return;
+      }
+      const failure = compareToGolden(
+        name,
+        actual,
+        path.join(goldenDir, `${name}.png`),
+        outDir,
+      );
+      assert.equal(failure, null, `${name} matches its golden`);
+    },
+  );
 }

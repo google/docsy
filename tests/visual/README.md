@@ -1,22 +1,43 @@
 # Visual-regression suite
 
-Pixel-compares element crops of the fixture site (see
+Pixel-compares screenshots of the fixture site (see
 `../fixture-site/lib/markup-goldens.mjs`) against committed goldens, per region
 × viewport (desktop, mobile) × color scheme (light, dark). Part of the
 semantic-classes migration's check harness: the markup goldens pin what the
-templates emit; these pin what the reader sees.
+templates emit; these pin what the reader sees. Two kinds of shot:
 
-- **Run**: `npm run install:chrome` (once), then `npm run test:visual`.
-- **Goldens** live under `goldens/<platform>/` — text rendering differs across
-  OSs, so each platform compares only against its own set. The **Linux set is
-  authoritative** (it's what CI enforces); other platforms are a local
-  convenience.
-- **Refresh** after a deliberate visual change: `npm run update:visual-goldens`
-  (regenerates the current platform's set; refresh the Linux set from a Linux
-  run, e.g. the CI failure artifact).
-- **Failures** write `*-actual.png` and `*-diff.png` under `tmp/visual/` (CI
-  uploads them as the `visual-diffs` artifact).
-- Comparisons are exact (zero differing pixels, pixelmatch threshold 0.1).
-  Same-platform rendering of the fixture is deterministic: off-origin requests
-  (web fonts included) are blocked and animations disabled at capture time. If
-  CI ever shows antialiasing flake, loosen deliberately and note it here.
+- **region crops** — the element's box plus padding, so neighbor spacing is
+  covered too; a failure names the region;
+- a **full-viewport page shot** — the coarse safety net for whatever the tracked
+  regions don't cover.
+
+## Running
+
+`npm run install:chrome` (once), then `npm run test:visual`.
+
+Rendering differs across OSs, so goldens are keyed by platform under
+`goldens/<platform>/`:
+
+- **`linux/` is authoritative** — it's what CI enforces (the `visual` job).
+- `darwin/` is committed as a maintainer convenience for local checks.
+- Other platforms (Windows included): the suite **skips** when
+  `goldens/<platform>/` doesn't exist. Opt in by generating a local, uncommitted
+  baseline: `npm run update:visual-goldens` (best-effort; gitignored).
+
+## Refreshing goldens after a deliberate visual change
+
+- Current platform: `npm run update:visual-goldens`.
+- **Linux set, from any machine**: push your branch, let the `visual` CI job
+  fail on the change, then `npm run update:visual-goldens:linux` — it downloads
+  the failed run's `visual-diffs` artifact and installs the actual shots as the
+  Linux goldens. Review, commit, push; CI must then go green.
+
+## Failure output
+
+Failures write `*-actual.png` and `*-diff.png` under `tmp/visual/` (CI uploads
+them as the `visual-diffs` artifact).
+
+Comparisons are exact (zero differing pixels, pixelmatch threshold 0.1).
+Same-platform rendering of the fixture is deterministic: off-origin requests
+(web fonts included) are blocked and animations disabled at capture time. If CI
+ever shows antialiasing flake, loosen deliberately and note it here.

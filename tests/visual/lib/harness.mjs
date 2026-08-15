@@ -74,12 +74,15 @@ export async function launchBrowser() {
   }
 }
 
-// Screenshot one element under a viewport and color scheme. Off-origin
-// requests are aborted (no web fonts or third-party fetches: deterministic
-// and offline-safe) and animations are disabled before capture.
-export async function shootElement(
+// Screenshot one region under a viewport and color scheme: an element's
+// bounding box padded by `pad` CSS px (margins and neighbor spacing are
+// outside the border box, so an unpadded element shot can't see them), or
+// the full viewport when no selector is given. Off-origin requests are
+// aborted (no web fonts or third-party fetches: deterministic and
+// offline-safe) and animations are disabled before capture.
+export async function shootRegion(
   browser,
-  { url, selector, viewport, scheme },
+  { url, selector, viewport, scheme, pad = 24 },
 ) {
   const page = await browser.newPage();
   try {
@@ -99,9 +102,22 @@ export async function shootElement(
         '*, *::before, *::after { animation: none !important; transition: none !important; caret-color: transparent !important; }';
       document.head.append(style);
     });
-    const element = await page.$(selector);
-    if (!element) throw new Error(`selector not found: ${selector} at ${url}`);
-    return PNG.sync.read(await element.screenshot({ type: 'png' }));
+    let options = { type: 'png' };
+    if (selector) {
+      const element = await page.$(selector);
+      if (!element) {
+        throw new Error(`selector not found: ${selector} at ${url}`);
+      }
+      const box = await element.boundingBox();
+      if (!box) throw new Error(`no bounding box: ${selector} at ${url}`);
+      options.clip = {
+        x: Math.max(0, box.x - pad),
+        y: Math.max(0, box.y - pad),
+        width: Math.min(viewport.width, box.width + 2 * pad),
+        height: box.height + 2 * pad,
+      };
+    }
+    return PNG.sync.read(await page.screenshot(options));
   } finally {
     await page.close();
   }
