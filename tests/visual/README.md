@@ -39,7 +39,7 @@ Rendering differs across OSs, so goldens are keyed by platform under
 Failures write `*-actual.png` and `*-diff.png` under `tmp/visual/` (CI uploads
 them as the `visual-diffs` artifact).
 
-Comparisons are exact (zero differing pixels, pixelmatch threshold 0.1).
+Comparisons are bit-exact (zero differing pixels at pixelmatch threshold 0).
 Same-platform rendering of the fixture is deterministic: off-origin requests
 (web fonts included) are blocked and animations disabled at capture time. If CI
 ever shows antialiasing flake, loosen deliberately and note it here.

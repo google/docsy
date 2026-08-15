@@ -8,6 +8,7 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  realpathSync,
   statSync,
   writeFileSync,
 } from 'node:fs';
@@ -32,7 +33,7 @@ const mime = {
 };
 
 export function serveDir(dir) {
-  const root = path.resolve(dir);
+  const root = realpathSync(path.resolve(dir));
   const server = http.createServer((req, res) => {
     let file = path.resolve(
       path.join(
@@ -40,7 +41,13 @@ export function serveDir(dir) {
         decodeURIComponent(new URL(req.url, 'http://x').pathname),
       ),
     );
-    // Decoded dot-segments could escape the root after path.join.
+    // Decoded dot-segments or in-root symlinks could escape the root.
+    try {
+      file = realpathSync(file);
+    } catch {
+      res.writeHead(404).end();
+      return;
+    }
     if (file !== root && !file.startsWith(root + path.sep)) {
       res.writeHead(403).end();
       return;
@@ -165,7 +172,11 @@ export function compareToGolden(name, actual, goldenFile, outDir) {
     diff.data,
     actual.width,
     actual.height,
-    { threshold: 0.1 },
+    // Bit-exact: same-platform rendering of the static fixture is
+    // deterministic, and a nonzero threshold would swallow real per-pixel
+    // color shifts (theme-token regressions drift well under pixelmatch's
+    // default sensitivity).
+    { threshold: 0 },
   );
   if (mismatched === 0) return null;
   writeActual();

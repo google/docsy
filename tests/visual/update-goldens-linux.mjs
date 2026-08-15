@@ -32,7 +32,9 @@ function run(cmd, args) {
 }
 
 const branch = run('git', ['branch', '--show-current']);
-// completed only: an in-progress run's artifact set is racy.
+// failure only: a green run has no artifact, an in-progress run's artifact
+// set is racy; a partial artifact (crashed suite) is caught by the
+// goldens-to-shot-list bijection test on the next run.
 const runId = run('gh', [
   'run',
   'list',
@@ -41,7 +43,7 @@ const runId = run('gh', [
   '--branch',
   branch,
   '--status',
-  'completed',
+  'failure',
   '--limit',
   '1',
   '--json',

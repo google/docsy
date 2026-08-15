@@ -27,6 +27,13 @@ const goldenDir = path.join(here, 'goldens', process.platform);
 const outDir = path.resolve(here, '../../tmp/visual');
 const update = !!process.env.UPDATE_VISUAL_GOLDENS;
 
+// Update mode in CI would write goldens instead of comparing and exit 0 —
+// a silent bypass of the authoritative net. Goldens are refreshed locally
+// or via update:visual-goldens:linux.
+if (update && process.env.CI) {
+  throw new Error('update mode is refused in CI');
+}
+
 const viewports = {
   desktop: { width: 1280, height: 800 },
   mobile: { width: 375, height: 667 },

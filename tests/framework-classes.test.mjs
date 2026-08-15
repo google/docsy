@@ -55,7 +55,7 @@ export function classTokens(template) {
       if (token) tokens.add(token);
     }
   };
-  const attrRe = /class\s*=\s*(["'])/gi;
+  const attrRe = /(?:^|[<\s"'])class\s*=\s*(["'])/gi;
   let m;
   while ((m = attrRe.exec(template))) {
     const quote = m[1];
@@ -83,6 +83,15 @@ export function classTokens(template) {
   return tokens;
 }
 
+// A literal class token edge-anchored by a hyphen is a class-name fragment:
+// assembled names (print "d-" "flex", d-{{ $bp }}-none) render as one class
+// but scan as fragments, so fragments in cleared partials are flagged per
+// se — a loud false positive beats a silent miss. Whole-name evasion via
+// replace/printf composition stays review's job, like fully computed
+// attributes.
+export const isClassFragment = (token) =>
+  token.length > 1 && /^-[^-]|[^-]-$/.test(token);
+
 test('framework-class check: cleared partials emit no Bootstrap classes', () => {
   assert.ok(
     fs.existsSync(bootstrapCss),
@@ -94,10 +103,17 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
   for (const partial of CLEARED_PARTIALS) {
     const file = path.join(repoRoot, 'theme/layouts', partial);
     assert.ok(fs.existsSync(file), `cleared partial ${partial} exists`);
-    const offenders = [...classTokens(fs.readFileSync(file, 'utf8'))].filter(
-      (token) => inventory.has(token),
+    const tokens = [...classTokens(fs.readFileSync(file, 'utf8'))];
+    assert.deepEqual(
+      tokens.filter((token) => inventory.has(token)),
+      [],
+      `${partial} uses only Docsy-owned classes`,
     );
-    assert.deepEqual(offenders, [], `${partial} uses only Docsy-owned classes`);
+    assert.deepEqual(
+      tokens.filter(isClassFragment),
+      [],
+      `${partial} class attributes carry only whole class names`,
+    );
   }
 });
 
@@ -112,6 +128,8 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
   }
   const offenders = (template) =>
     [...classTokens(template)].filter((t) => inventory.has(t)).sort();
+  const classFragments = (template) =>
+    [...classTokens(template)].filter(isClassFragment).sort();
 
   assert.deepEqual(
     offenders('<nav class="td-x d-flex{{ if .Active }} active{{ end }}">'),
@@ -140,6 +158,37 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ),
     ['breadcrumb', 'd-flex'],
     'cond-built class list is flagged',
+  );
+
+  // Class-name fragments (concat assembly: print "d-" "flex",
+  // d-{{ $bp }}-none) defeat token matching; edge-hyphenated literals are
+  // flagged per se.
+  assert.deepEqual(
+    classFragments('<div class="{{ print "d-" "flex" }}">'),
+    ['d-'],
+    'concat fragment literal is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "%s%s" "breadcrumb-" "item" }}">'),
+    ['breadcrumb-'],
+    'printf fragment literal is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="d-{{ .Bp }}-none">'),
+    ['-none', 'd-'],
+    'action-split class name is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="td-x{{ if .A }} td-x--on{{ end }}">'),
+    [],
+    'whole-token semantic template has no fragments',
+  );
+
+  // Only real class attributes are scanned.
+  assert.deepEqual(
+    offenders('<div data-class="d-flex" class="td-x">'),
+    [],
+    'data-class attribute is not scanned',
   );
 
   assert.deepEqual(
