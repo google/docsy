@@ -100,3 +100,25 @@ test('build year alone renders when both year fields are unset', () => {
     `&copy; ${BUILD_YEAR}`,
   );
 });
+
+// Param-level rule: an empty `params.copyright` value behaves as unset, so
+// the site `copyright` fallback applies (rendered as is, no year added).
+for (const [name, value] of [
+  ['empty map', '{}'],
+  ['empty string', "''"],
+]) {
+  test(`${name} params.copyright falls back to site copyright`, () => {
+    const r = buildSite(`copyright-fallback-${name.replace(' ', '-')}`, {
+      files: {
+        'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
+      },
+      extraConfig: `copyright: Site fallback\nparams:\n  copyright: ${value}\n`,
+    });
+    assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+    const m = r
+      .publicFile('docs/index.html')
+      .match(/<span class="td-footer__copyright">([\s\S]*?)<\/span>/);
+    assert.ok(m, 'footer copyright span is rendered');
+    assert.equal(m[1].replace(/\s+/g, ' ').trim(), 'Site fallback');
+  });
+}
