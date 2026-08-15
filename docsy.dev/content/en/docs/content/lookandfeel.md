@@ -821,7 +821,7 @@ the site footer. It can be a plain string, used as the copyright-holder text, or
 a map with the following optional fields:
 
 - `authors`:
-  - Copyright holders, as single-paragraph Markdown.
+  - Copyright holders, as a single Markdown paragraph.
   - Default: the site title followed by "Authors".
 - `from_year`:
   - First year of publication.
