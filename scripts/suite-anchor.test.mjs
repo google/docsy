@@ -34,6 +34,7 @@ test('anchor: the tests-root guards stay wired into test:repo', () => {
     'tests/runner-lint.test.mjs',
     'tests/supply-chain-audit.test.mjs',
     'tests/test-wiring.test.mjs',
+    'tests/workflow-lint.test.mjs',
   ]) {
     assert.ok(
       fs.existsSync(path.join(repoRoot, guard)),

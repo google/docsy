@@ -73,8 +73,20 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
       // that simply drops or conditions the comparison step, so the
       // visual job's run sequence is asserted whole (deletion,
       // reordering, continue-on-error, and step conditions all fail).
+      // Job-level fields can skip or error-mask the whole job before any
+      // step runs, and the runner is what makes Linux authoritative.
       if (jobId === 'visual') {
         visualJobs += 1;
+        assert.ok(!('if' in job), `${id} job carries no condition`);
+        assert.ok(
+          !('continue-on-error' in job),
+          `${id} job failures fail the workflow`,
+        );
+        assert.equal(
+          job['runs-on'],
+          'ubuntu-latest',
+          `${id} runs on the authoritative platform`,
+        );
         assert.deepEqual(
           (job.steps ?? [])
             .filter((step) => typeof step.run === 'string')

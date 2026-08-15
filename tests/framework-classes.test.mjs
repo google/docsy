@@ -21,10 +21,32 @@ const repoRoot = path.resolve(
 // Theme partials cleared of framework classes, relative to theme/layouts/.
 const CLEARED_PARTIALS = [];
 
+// Cleared partials whose statically-called children are knowingly not yet
+// cleared (visible migration staging), child paths per parent. An entry
+// here is a debt marker: the parent's rendered output still carries the
+// child's framework classes.
+const PENDING_CHILDREN = {};
+
 const bootstrapCss = path.join(
   repoRoot,
   'theme/node_modules/bootstrap/dist/css/bootstrap.css',
 );
+
+// Static partial calls a template makes, normalized to theme/layouts/
+// paths ("theme-toggler" → _partials/theme-toggler.html). A cleared
+// partial's rendered output includes its children's, so the no-framework
+// guarantee holds only over this closure. Dynamic partial names are
+// invisible here — review's job, like computed class attributes.
+export function partialCalls(template) {
+  const calls = new Set();
+  for (const m of template.matchAll(
+    /\{\{-?\s*(?:partial|partialCached)\s+"([^"]+)"/g,
+  )) {
+    const name = m[1].endsWith('.html') ? m[1] : `${m[1]}.html`;
+    calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+  }
+  return calls;
+}
 
 // Class names Bootstrap's stylesheet defines: every `.name` token in selector
 // text (text outside `{…}` blocks, comments stripped).
@@ -48,12 +70,19 @@ export function bootstrapClasses(css) {
 // their verbs (indexed, flagged, width/precision included) substituted by
 // enumeration over the action's literals — unresolved verbs stay in the
 // token and isClassFragment pattern-matches them — and delimiter-literal
-// joins are tried ("-" and "" when the delimiter is dynamic). Strict by
-// design: a literal that merely collides with a class name is a loud false
-// positive, not a silent miss. A lint over these forms, not a boundary:
-// fully computed attributes (class={{ $c }}) are review's job.
+// joins are tried ("-" and "" when the delimiter is dynamic). On top of
+// per-form handling, the attribute's whole literal pool is composed
+// (ordered pairs and triples, joined by its delimiter literals plus "-"
+// and ""): an over-approximation covering any value flow that rearranges
+// quoted literals — range/with dot output, nested joins, cross-action
+// assembly — without modeling each pipeline. Strict by design: a literal
+// that merely collides with a class name is a loud false positive, not a
+// silent miss. A lint over these forms, not a boundary: fully computed
+// attributes (class={{ $c }}) and flows that transform literal text are
+// review's job.
 const VARIANT_CAP = 1024;
 const FMT_CAP = 4096;
+const POOL_CAP = 12;
 const verbSrc = '%(?:\\[\\d+\\])?[-+ #0]*\\d*(?:\\.\\d+)?[a-zA-Z]';
 const verbRe = new RegExp(verbSrc);
 const verbReG = () => new RegExp(verbSrc, 'g');
@@ -143,6 +172,39 @@ export function classTokens(template) {
     }
     if (buf) flat.push({ text: buf });
     attrRe.lastIndex = i;
+
+    // Attribute-wide literal-pool composition: any pipeline that only
+    // rearranges these literals (range/with dot output, nested joins,
+    // cross-action assembly) can emit nothing outside the composed set.
+    const poolPieces = [];
+    const poolDelims = new Set(['-', '']);
+    for (const seg of flat) {
+      if (seg.action !== undefined) {
+        for (const lit of actionLiterals(seg.action)) {
+          if (verbRe.test(lit)) continue; // format enumeration owns these
+          if (lit.length <= 1 && !/[a-zA-Z0-9]/.test(lit)) {
+            poolDelims.add(lit);
+          } else {
+            poolPieces.push(lit);
+          }
+        }
+      } else {
+        const t = seg.text.trim();
+        if (t.length === 1 && !/[a-zA-Z0-9]/.test(t)) poolDelims.add(t);
+      }
+    }
+    if (poolPieces.length > POOL_CAP) throw capError();
+    const compose = (chosen) => {
+      if (chosen.length >= 2) {
+        for (const d of poolDelims)
+          add(chosen.map((p) => poolPieces[p]).join(d));
+      }
+      if (chosen.length === 3) return;
+      for (let p = 0; p < poolPieces.length; p += 1) {
+        if (!chosen.includes(p)) compose([...chosen, p]);
+      }
+    };
+    compose([]);
 
     // Group if/with/range…else…end into branch nodes.
     const parse = (pos) => {
@@ -248,7 +310,8 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
   for (const partial of CLEARED_PARTIALS) {
     const file = path.join(repoRoot, 'theme/layouts', partial);
     assert.ok(fs.existsSync(file), `cleared partial ${partial} exists`);
-    const tokens = [...classTokens(fs.readFileSync(file, 'utf8'))];
+    const source = fs.readFileSync(file, 'utf8');
+    const tokens = [...classTokens(source)];
     assert.deepEqual(
       tokens.filter((token) => inventory.has(token)),
       [],
@@ -259,6 +322,15 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
       [],
       `${partial} class attributes carry only whole class names`,
     );
+    // Rendered output includes children: each statically-called child is
+    // cleared too, or carried as visible staging debt.
+    const pending = PENDING_CHILDREN[partial] ?? [];
+    for (const child of partialCalls(source)) {
+      assert.ok(
+        CLEARED_PARTIALS.includes(child) || pending.includes(child),
+        `${partial} child ${child} is cleared or listed as pending`,
+      );
+    }
   }
 });
 
@@ -342,7 +414,7 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     offenders(
       '<div class="{{ printf "%s%s%s%s%s" "d" "-" "md" "-" "none" }}">',
     ),
-    ['d-md-none'],
+    ['d-md-none', 'd-none'],
     'multi-piece printf assembly is flagged',
   );
   assert.deepEqual(
@@ -354,6 +426,21 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     offenders('<div class="{{ delimit (slice "d" "flex") $dash }}">'),
     ['d-flex'],
     'variable-delimiter join is flagged',
+  );
+
+  // Child-partial closure: static calls resolve to _partials paths.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ partial "theme-toggler" . }}{{ partialCached "dark-mode-config.html" "k" }}{{ partial "navbar-lang-selector.html" . -}}',
+      ),
+    ].sort(),
+    [
+      '_partials/dark-mode-config.html',
+      '_partials/navbar-lang-selector.html',
+      '_partials/theme-toggler.html',
+    ],
+    'static partial calls are extracted and normalized',
   );
   assert.deepEqual(
     offenders(
@@ -392,6 +479,44 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ),
     ['d-flex'],
     'conditional-format printf is flagged',
+  );
+  // r6: literal value flow — dot-bound range/with output, nested joins,
+  // and cross-action composition. The scanner composes the attribute's
+  // literal pool rather than modeling each pipeline.
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ range (slice "d" "-" "flex") }}{{ . }}{{ end }}">',
+    ),
+    ['d-flex'],
+    'range-emitted literal assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ with (cond .A "d" "td") }}{{ . }}{{ end }}-{{ with (cond .B "flex" "notice") }}{{ . }}{{ end }}">',
+    ),
+    ['d-flex'],
+    'cross-action with-block assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s" (delimit (slice "d" "flex") "-") }}">',
+    ),
+    ['d-flex'],
+    'nested delimit inside printf is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s %s" "td-x" (delimit (slice "d" "flex") "-") }}">',
+    ),
+    ['d-flex'],
+    'joined second printf argument is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ print (cond .A "d" "td") }}-{{ print (cond .B "flex" "notice") }}">',
+    ),
+    ['d-flex'],
+    'cross-action print assembly is flagged',
   );
   // Unbounded assembly fails closed rather than silently under-scanning.
   assert.throws(
