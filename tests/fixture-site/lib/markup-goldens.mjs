@@ -17,16 +17,41 @@ export const goldenDir = path.join(
 
 const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
-  'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+  'content/docs/_index.md':
+    '---\ntitle: Docs\nmenu: { main: { weight: 10 } }\n---\nDocs landing\n',
   'content/docs/getting-started/_index.md':
     '---\ntitle: Getting started\n---\nSection landing\n',
   'content/docs/getting-started/install.md':
     '---\ntitle: Install\n---\nLeaf page\n',
+  'content/docs/reference/_index.md':
+    '---\ntitle: Reference\n---\nSecond section, for sidebar depth\n',
+  'content/docs/reference/config.md':
+    '---\ntitle: Configuration\n---\nReference leaf\n',
+  'content/about/_index.md':
+    '---\ntitle: About\nmenu: { main: { weight: 20 } }\n---\nAbout body\n',
 };
 
-// Dark mode on: the visual suite reuses this fixture for light+dark shots,
-// and the extra navbar toggler is outside every golden-tracked region.
-const extraConfig = `params:
+// Representative chrome config, so golden-tracked shots exercise populated
+// regions rather than a bare skeleton: main-menu entries (page + external),
+// footer links (FA icons) and copyright, and the dark-mode toggler.
+const extraConfig = `menus:
+  main:
+    - name: GitHub
+      url: https://github.com/google/docsy
+      weight: 30
+params:
+  copyright:
+    authors: Fixture Authors |
+    from_year: 2020
+  links:
+    user:
+      - name: Mailing list
+        url: https://example.org/mail
+        icon: fa fa-envelope
+    developer:
+      - name: GitHub
+        url: https://github.com/google/docsy
+        icon: fab fa-github
   ui:
     showLightDarkModeMenu: true
 `;

@@ -77,9 +77,10 @@ export async function launchBrowser() {
 // Screenshot one region under a viewport and color scheme: an element's
 // bounding box padded by `pad` CSS px (margins and neighbor spacing are
 // outside the border box, so an unpadded element shot can't see them), or
-// the full viewport when no selector is given. Off-origin requests are
-// aborted (no web fonts or third-party fetches: deterministic and
-// offline-safe) and animations are disabled before capture.
+// the full page when no selector is given (full, not viewport-clipped:
+// the footer sits below the fold on short fixture pages). Off-origin
+// requests are aborted (no web fonts or third-party fetches: deterministic
+// and offline-safe) and animations are disabled before capture.
 export async function shootRegion(
   browser,
   { url, selector, viewport, scheme, pad = 24 },
@@ -102,7 +103,7 @@ export async function shootRegion(
         '*, *::before, *::after { animation: none !important; transition: none !important; caret-color: transparent !important; }';
       document.head.append(style);
     });
-    let options = { type: 'png' };
+    let options = { type: 'png', fullPage: !selector };
     if (selector) {
       const element = await page.$(selector);
       if (!element) {
