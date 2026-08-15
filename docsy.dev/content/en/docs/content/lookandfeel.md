@@ -814,6 +814,41 @@ params:
   https://github.com/google/docsy/blob/main/theme/layouts/_partials/theme-toggler.html
 [search box]: /docs/content/search/
 
+## Footer copyright
+
+Use the `params.copyright` config option to set the copyright notice shown in
+the site footer. It can be a plain string, used as the copyright-holder text, or
+a map with the following optional fields:
+
+- `authors`: the copyright holders, rendered as Markdown. Default: the site
+  title followed by " Authors".
+- `from_year`: the first year of publication. Default: the value of `to_year`.
+- `to_year`: the last year of publication; can also be a non-year string such as
+  "present". Default: the year that the site was built.
+
+The notice shows a year range only when `from_year` and `to_year` differ;
+otherwise it shows a single year. Set `from_year` to your site's launch year to
+get a notice that spans the launch year through the build year, and shows the
+launch year alone until the year after launch. For example:
+
+```yaml
+params:
+  copyright:
+    authors: >-
+      Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0)
+    from_year: 2018
+```
+
+With a build year of 2026, this renders as:
+
+> © 2018–2026 Docsy Authors | [CC BY 4.0][]
+
+If `params.copyright` is unset, the [site `copyright`][] option is used instead,
+rendered as HTML, with no year added.
+
+[CC BY 4.0]: https://creativecommons.org/licenses/by/4.0
+[site `copyright`]: https://gohugo.io/methods/site/copyright/
+
 ## Alerts
 
 > [!NOTE] Coming soon: how to customize alerts
