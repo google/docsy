@@ -339,6 +339,7 @@ test('workflows: installs are locked and credential-isolated', () => {
   let runSteps = 0;
   let checkouts = 0;
   let safeInstalls = 0;
+  let visualJobs = 0;
   for (const file of files) {
     const workflow = parse(
       fs.readFileSync(path.join(workflowsDir, file), 'utf8'),
@@ -375,6 +376,28 @@ test('workflows: installs are locked and credential-isolated', () => {
             `${id} env ${key} leaves npm and Hugo config untouched`,
           );
         }
+      }
+      // Positive execution pin for the authoritative visual net: the deny
+      // rules above can't see an edit that simply drops or conditions the
+      // comparison step, so the visual job's run sequence is asserted
+      // whole (deletion, reordering, continue-on-error, and step
+      // conditions all fail here).
+      if (jobId === 'visual') {
+        visualJobs += 1;
+        assert.deepEqual(
+          job.steps
+            .filter((step) => typeof step.run === 'string')
+            .map(({ run, ...rest }) => ({
+              run,
+              conditioned: 'if' in rest || 'continue-on-error' in rest,
+            })),
+          [
+            { run: 'npm run install:safe', conditioned: false },
+            { run: 'npm run install:browser', conditioned: false },
+            { run: 'npm run test:visual', conditioned: false },
+          ],
+          `${id} runs exactly the reviewed unconditional sequence`,
+        );
       }
       for (const step of job.steps) {
         for (const key of Object.keys(step.env ?? {})) {
@@ -458,4 +481,5 @@ test('workflows: installs are locked and credential-isolated', () => {
   assert.ok(runSteps > 0, 'workflow run steps were audited');
   assert.ok(checkouts > 0, 'checkout steps were audited');
   assert.ok(safeInstalls > 0, 'CI installs go through install:safe');
+  assert.equal(visualJobs, 1, 'the visual job exists and was pinned');
 });

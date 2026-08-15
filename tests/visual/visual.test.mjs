@@ -90,12 +90,12 @@ const optedOut = !update && !authoritative && !existsSync(goldenDir);
 before(async () => {
   if (optedOut) return;
   // Own fixture name: buildSite starts by wiping its directory, so sharing
-  // markup-golden's would race a concurrent test:repo run.
+  // markup-golden's would race a concurrent test:repo run. Resources are
+  // retained as each settles: with Promise.all, a browser-launch rejection
+  // would strand the already-listening server and hang the run.
   const build = buildFixture('visual-goldens');
-  [server, browser] = await Promise.all([
-    serveDir(path.join(build.site, 'public')),
-    launchBrowser(),
-  ]);
+  server = await serveDir(path.join(build.site, 'public'));
+  browser = await launchBrowser();
 });
 
 after(async () => {
