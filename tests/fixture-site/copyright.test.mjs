@@ -180,6 +180,42 @@ test('authors Markdown renders on non-Markdown pages', () => {
   }
 });
 
+test('string params.copyright is the authors text', () => {
+  const r = buildSite('copyright-string-form', {
+    files: {
+      'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
+    },
+    args: ['--clock', `${BUILD_YEAR}-06-01T00:00:00Z`],
+    extraConfig: 'params:\n  copyright: ACME Legal\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+  const m = r
+    .publicFile('docs/index.html')
+    .match(/<span class="td-footer__copyright">([\s\S]*?)<\/span>\s*<\/span>/);
+  assert.ok(m, 'footer copyright span is rendered');
+  assert.equal(
+    m[1].replace(/\s+/g, ' ').trim(),
+    `&copy; ${BUILD_YEAR} <span class="td-footer__authors">ACME Legal`,
+  );
+});
+
+test('authors defaults to the site title plus "Authors"', () => {
+  const r = buildSite('copyright-default-authors', {
+    title: 'ACME Docs',
+    files: {
+      'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
+    },
+    args: ['--clock', `${BUILD_YEAR}-06-01T00:00:00Z`],
+    extraConfig: 'params:\n  copyright:\n    from_year: 2018\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+  assert.match(
+    r.publicFile('docs/index.html'),
+    /<span class="td-footer__authors">ACME Docs Authors<\/span>/,
+    'default authors text is rendered',
+  );
+});
+
 // Param-level rule: an empty `params.copyright` value behaves as unset, so
 // the site `copyright` fallback applies (rendered as raw HTML, no year added).
 for (const [name, value] of [
