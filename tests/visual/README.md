@@ -2,9 +2,12 @@
 
 Pixel-compares screenshots of the fixture site (see
 `../fixture-site/lib/markup-goldens.mjs`) against committed goldens, per region
-× viewport (desktop, mobile) × color scheme (light, dark). Part of the
-semantic-classes migration's check harness: the markup goldens pin what the
-templates emit; these pin what the reader sees. Two kinds of shot:
+× viewport (desktop, mobile) × color scheme (light, dark). The fixture is
+**built fresh from the checked-out theme on every run** (goldens are generated
+snapshots, not hand-written mocks — see `../fixture-site/README.md`), so goldens
+can't silently drift from real theme output. Part of the semantic-classes
+migration's check harness: the markup goldens pin what the templates emit; these
+pin what the reader sees. Two kinds of shot:
 
 - **region crops** — the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
