@@ -41,22 +41,23 @@ export function serveDir(dir) {
         decodeURIComponent(new URL(req.url, 'http://x').pathname),
       ),
     );
-    // Decoded dot-segments or in-root symlinks could escape the root.
+    // Decoded dot-segments or in-root symlinks could escape the root;
+    // realpath + jail-check the final candidate, again after a directory
+    // resolves to its index file (the index itself may be a symlink).
+    const jailed = (candidate) => {
+      const real = realpathSync(candidate);
+      if (real !== root && !real.startsWith(root + path.sep)) {
+        throw Object.assign(new Error('outside root'), { status: 403 });
+      }
+      return real;
+    };
     try {
-      file = realpathSync(file);
-    } catch {
-      res.writeHead(404).end();
-      return;
-    }
-    if (file !== root && !file.startsWith(root + path.sep)) {
-      res.writeHead(403).end();
-      return;
-    }
-    if (existsSync(file) && statSync(file).isDirectory()) {
-      file = path.join(file, 'index.html');
-    }
-    if (!existsSync(file)) {
-      res.writeHead(404).end();
+      file = jailed(file);
+      if (statSync(file).isDirectory()) {
+        file = jailed(path.join(file, 'index.html'));
+      }
+    } catch (err) {
+      res.writeHead(err.status ?? 404).end();
       return;
     }
     res.writeHead(200, {
@@ -94,8 +95,9 @@ export async function launchBrowser() {
 // outside the border box, so an unpadded element shot can't see them), or
 // the full page when no selector is given (full, not viewport-clipped:
 // the footer sits below the fold on short fixture pages). Off-origin
-// requests are aborted (no web fonts or third-party fetches: deterministic
-// and offline-safe) and animations are disabled before capture.
+// requests are aborted (no remote fonts or third-party fetches; the
+// theme's same-origin webfonts load and are awaited by the screenshot
+// capture) and animations are disabled before capture.
 export async function shootRegion(
   browser,
   { url, selector, viewport, scheme, pad = 24 },

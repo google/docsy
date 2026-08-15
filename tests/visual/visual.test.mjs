@@ -28,9 +28,10 @@ const outDir = path.resolve(here, '../../tmp/visual');
 const update = !!process.env.UPDATE_VISUAL_GOLDENS;
 
 // Update mode in CI would write goldens instead of comparing and exit 0 —
-// a silent bypass of the authoritative net. Goldens are refreshed locally
-// or via update:visual-goldens:linux.
-if (update && process.env.CI) {
+// a silent bypass of the authoritative net. GITHUB_ACTIONS is checked
+// because CI is mutable from a workflow step; GITHUB_-prefixed vars are
+// not. Goldens are refreshed locally or via update:visual-goldens:linux.
+if (update && (process.env.CI || process.env.GITHUB_ACTIONS)) {
   throw new Error('update mode is refused in CI');
 }
 
@@ -71,12 +72,16 @@ const shots = regions.flatMap((region) =>
 );
 
 let server, browser;
+let compared = 0;
 
 // Linux is the authoritative set (CI enforces it): a missing golden dir
 // there must fail loud, not skip — all-skipped exits 0, so the skip path
 // would let a PR delete the goldens and stay green. Other platforms skip;
 // a local uncommitted baseline opts one in: npm run update:visual-goldens.
-const authoritative = process.platform === 'linux' || !!process.env.CI;
+const authoritative =
+  process.platform === 'linux' ||
+  !!process.env.CI ||
+  !!process.env.GITHUB_ACTIONS;
 const optedOut = !update && !authoritative && !existsSync(goldenDir);
 
 before(async () => {
@@ -90,6 +95,12 @@ before(async () => {
 
 after(async () => {
   await Promise.all([browser?.close(), server?.close()]);
+  // Execution guard: filename bijection can't see quarantined (skipped)
+  // shot tests, and an all-skipped run exits 0 — on the authoritative
+  // platform every comparison must actually have run.
+  if (!update && !optedOut && authoritative) {
+    assert.equal(compared, shots.length, 'every shot comparison executed');
+  }
 });
 
 for (const { name, region, viewport, scheme } of shots) {
@@ -120,6 +131,7 @@ for (const { name, region, viewport, scheme } of shots) {
         path.join(goldenDir, `${name}.png`),
         outDir,
       );
+      compared += 1;
       assert.equal(failure, null, `${name} matches its golden`);
     },
   );

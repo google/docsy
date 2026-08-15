@@ -22,7 +22,7 @@ const files = {
   'content/docs/getting-started/_index.md':
     '---\ntitle: Getting started\n---\nSection landing\n',
   'content/docs/getting-started/install.md':
-    '---\ntitle: Install\n---\nLeaf page\n',
+    '---\ntitle: Install\ntags: [setup]\n---\nLeaf page\n',
   'content/docs/reference/_index.md':
     '---\ntitle: Reference\n---\nSecond section, for sidebar depth\n',
   'content/docs/reference/config.md':
@@ -58,11 +58,20 @@ params:
     showLightDarkModeMenu: true
 `;
 
-// name → golden file goldens/NAME.html; page → public file holding the region.
+// name → golden file goldens/NAME.html; page → public file holding the
+// region; re overrides the default breadcrumb extractor. The term region
+// pins term.html's class-coupled post-processing of the breadcrumb partial
+// (replaceRE strips aria attributes and the active class), which silently
+// no-ops if the partial's class names change without the caller following.
 export const regions = [
   { name: 'breadcrumb-single', page: 'docs/index.html' },
   { name: 'breadcrumb-mid', page: 'docs/getting-started/index.html' },
   { name: 'breadcrumb-deep', page: 'docs/getting-started/install/index.html' },
+  {
+    name: 'breadcrumb-term',
+    page: 'tags/setup/index.html',
+    re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/,
+  },
 ];
 
 const breadcrumbRe = /<nav aria-label="breadcrumb"[\s\S]*?<\/nav>/;
@@ -76,8 +85,8 @@ export function buildFixture() {
 }
 
 export function extractRegions(build) {
-  return regions.map(({ name, page }) => {
-    const m = build.publicFile(page).match(breadcrumbRe);
+  return regions.map(({ name, page, re }) => {
+    const m = build.publicFile(page).match(re ?? breadcrumbRe);
     if (!m) throw new Error(`no breadcrumb region in ${page}`);
     return { name, page, html: m[0] + '\n' };
   });

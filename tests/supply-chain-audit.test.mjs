@@ -233,6 +233,11 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
     'the post-install step uses the retrying Hugo rebuild helper',
   );
+  assert.equal(
+    scripts['install:browser'],
+    'node node_modules/puppeteer/install.mjs',
+    'install:browser invokes the locked dependency entry point directly',
+  );
   // Cross-root anchoring: this file and the wiring guard ride the tests
   // glob, so scripts/suite-anchor.test.mjs pins that glob and the
   // tests-root guards from the scripts glob; anchor it and the wiring
@@ -252,6 +257,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'install:safe',
     'install:theme-deps',
     '_install:safe:post',
+    'install:browser',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(

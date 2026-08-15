@@ -65,10 +65,14 @@ export function classTokens(template) {
       if (template.startsWith('{{', i)) {
         const end = template.indexOf('}}', i + 2);
         if (end === -1) break;
-        for (const lit of template
-          .slice(i + 2, end)
-          .matchAll(/"([^"]*)"|`([^`]*)`/g)) {
-          add(lit[1] ?? lit[2]);
+        const lits = [
+          ...template.slice(i + 2, end).matchAll(/"([^"]*)"|`([^`]*)`/g),
+        ].map((lit) => lit[1] ?? lit[2]);
+        for (const lit of lits) add(lit);
+        // A lone "-" literal is a joining delimiter (delimit (slice "d"
+        // "flex") "-"): emit the joined name too.
+        if (lits.includes('-')) {
+          add(lits.filter((lit) => lit !== '-').join('-'));
         }
         literal += ' ';
         i = end + 2;
@@ -83,14 +87,35 @@ export function classTokens(template) {
   return tokens;
 }
 
-// A literal class token edge-anchored by a hyphen is a class-name fragment:
-// assembled names (print "d-" "flex", d-{{ $bp }}-none) render as one class
-// but scan as fragments, so fragments in cleared partials are flagged per
-// se — a loud false positive beats a silent miss. Whole-name evasion via
-// replace/printf composition stays review's job, like fully computed
-// attributes.
-export const isClassFragment = (token) =>
-  token.length > 1 && /^-[^-]|[^-]-$/.test(token);
+// A literal class token is a fragment when it could assemble into an
+// inventory name that token matching would miss: an edge-hyphenated piece
+// (print "d-" "flex", d-{{ $bp }}-none) that some inventory name starts or
+// ends with, or a printf format (d-%s-none) whose placeholder pattern
+// matches an inventory name. Anchoring on the inventory keeps Docsy-own
+// dynamic classes (ul-{{ $n }}, td-{{ .Kind }}) clean. Whole-name evasion
+// via replace/printf composition of complete names stays review's job,
+// like fully computed attributes.
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export function isClassFragment(token, inventory) {
+  if (/%[a-zA-Z]/.test(token)) {
+    if (!token.replace(/%[a-zA-Z]/g, '')) return false;
+    const re = new RegExp(
+      `^${token
+        .split(/%[a-zA-Z]/)
+        .map(escapeRe)
+        .join('.+')}$`,
+    );
+    for (const name of inventory) if (re.test(name)) return true;
+    return false;
+  }
+  if (token.length > 1 && /[^-]-$/.test(token)) {
+    for (const name of inventory) if (name.startsWith(token)) return true;
+  }
+  if (token.length > 1 && /^-[^-]/.test(token)) {
+    for (const name of inventory) if (name.endsWith(token)) return true;
+  }
+  return false;
+}
 
 test('framework-class check: cleared partials emit no Bootstrap classes', () => {
   assert.ok(
@@ -110,7 +135,7 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
       `${partial} uses only Docsy-owned classes`,
     );
     assert.deepEqual(
-      tokens.filter(isClassFragment),
+      tokens.filter((token) => isClassFragment(token, inventory)),
       [],
       `${partial} class attributes carry only whole class names`,
     );
@@ -129,7 +154,9 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
   const offenders = (template) =>
     [...classTokens(template)].filter((t) => inventory.has(t)).sort();
   const classFragments = (template) =>
-    [...classTokens(template)].filter(isClassFragment).sort();
+    [...classTokens(template)]
+      .filter((t) => isClassFragment(t, inventory))
+      .sort();
 
   assert.deepEqual(
     offenders('<nav class="td-x d-flex{{ if .Active }} active{{ end }}">'),
@@ -161,8 +188,9 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
   );
 
   // Class-name fragments (concat assembly: print "d-" "flex",
-  // d-{{ $bp }}-none) defeat token matching; edge-hyphenated literals are
-  // flagged per se.
+  // d-{{ .Bp }}-none) defeat token matching; a fragment counts only when it
+  // can complete to an inventory name, so Docsy-own dynamic classes
+  // (ul-{{ $n }}) stay clean.
   assert.deepEqual(
     classFragments('<div class="{{ print "d-" "flex" }}">'),
     ['d-'],
@@ -177,6 +205,21 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     classFragments('<div class="d-{{ .Bp }}-none">'),
     ['-none', 'd-'],
     'action-split class name is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "d-%s-none" .Bp }}">'),
+    ['d-%s-none'],
+    'printf placeholder form is flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d" "flex") "-" }}">'),
+    ['d-flex'],
+    'delimiter-joined class name is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<ul class="ul-{{ $ulNr }} td-{{ .Kind }}">'),
+    [],
+    'Docsy-own dynamic classes are not fragments',
   );
   assert.deepEqual(
     classFragments('<div class="td-x{{ if .A }} td-x--on{{ end }}">'),
