@@ -149,20 +149,28 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   }
   assert.deepEqual(
     withInstallScript,
-    ['package-lock.json node_modules/hugo-extended'],
-    'hugo-extended is the only locked package with an install script',
+    [
+      'package-lock.json node_modules/hugo-extended',
+      'package-lock.json node_modules/puppeteer',
+    ],
+    'hugo-extended and puppeteer are the only locked packages with install scripts',
   );
 
-  // The allowScripts entry is version-pinned, so it must track the locked
-  // version: a stale pin fails npm ci under strict-allow-scripts, and this
-  // assertion names the fix in the bump PR itself (#2712).
-  const hugoVersion =
-    locks['package-lock.json'].packages['node_modules/hugo-extended'].version;
+  // The allowScripts entries are version-pinned, so they must track the
+  // locked versions: a stale pin fails npm ci under strict-allow-scripts,
+  // and this assertion names the fix in the bump PR itself (#2712).
+  // puppeteer's postinstall (browser download) is deliberately denied:
+  // the visual suite installs its browser on demand (_install:chrome).
+  const lockedVersion = (name) =>
+    locks['package-lock.json'].packages[`node_modules/${name}`].version;
   const { allowScripts } = readJSON('package.json');
   assert.deepEqual(
     allowScripts,
-    { [`hugo-extended@${hugoVersion}`]: true },
-    'allowScripts allows exactly the locked hugo-extended version',
+    {
+      [`hugo-extended@${lockedVersion('hugo-extended')}`]: true,
+      [`puppeteer@${lockedVersion('puppeteer')}`]: false,
+    },
+    'allowScripts covers exactly the locked install-script packages',
   );
 
   // npm takes a key's last assignment, so spot-checks can be reversed by

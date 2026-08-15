@@ -68,7 +68,10 @@ test('manifests: every test:repo argument resolves to test files', () => {
   // the suite roots must be resolved by some test:repo argument, so no
   // guard can be renamed or moved out of glob reach while the rest stays
   // green.
-  const deliberatelyUnwired = ['tests/lychee/']; // own suite: test:lychee
+  const deliberatelyUnwired = [
+    'tests/lychee/', // own suite: test:lychee
+    'tests/visual/', // own suite: test:visual (needs an installed browser)
+  ];
   const allTestFiles = ['tests', 'scripts', 'theme/scripts']
     .flatMap((dir) =>
       fs
