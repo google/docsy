@@ -40,19 +40,54 @@ export function bootstrapClasses(css) {
 }
 
 // Class tokens a template emits from its class attributes: the literal
-// words of the attribute text, plus words in quoted string literals inside
-// the attribute's {{…}} actions (delimit/cond/printf-built class lists).
-// The scan walks the attribute value action-aware, so quotes inside actions
+// words of the attribute text, plus tokens derived from the string
+// literals inside the attribute's {{…}} actions. Per action, literals are
+// also composed the way Hugo would: a printf-style format literal has its
+// verbs (indexed included) substituted with the remaining literals in
+// order — unresolved verbs stay in the token and are pattern-matched by
+// isClassFragment; without a format, piece literals are joined with any
+// single-character delimiter literals present, else with "-" and "" (a
+// variable-held delimiter is invisible, so the class-y joins are tried).
+// The scan walks attribute values action-aware, so quotes inside actions
 // can't truncate it. Strict by design: an action literal that merely
-// collides with a class name (a status-string compare) is a loud false
-// positive, not a silent miss. A lint over these forms, not a boundary:
-// fully computed attributes (class={{ $c }}, printf "class=%q") are
-// review's job.
+// collides with a class name is a loud false positive, not a silent miss.
+// A lint over these forms, not a boundary: fully computed attributes
+// (class={{ $c }}) are review's job.
+const verbRe = /%(?:\[(\d+)\])?[a-zA-Z]/g;
+const verbSplitRe = /%(?:\[\d+\])?[a-zA-Z]/;
 export function classTokens(template) {
   const tokens = new Set();
   const add = (text) => {
     for (const token of text.split(/\s+/)) {
       if (token) tokens.add(token);
+    }
+  };
+  const processAction = (content) => {
+    const lits = [...content.matchAll(/"([^"]*)"|`([^`]*)`/g)].map(
+      (m) => m[1] ?? m[2],
+    );
+    const fmtIdx = lits.findIndex((lit) => verbSplitRe.test(lit));
+    if (fmtIdx !== -1) {
+      const args = lits.filter((_, i) => i !== fmtIdx);
+      let next = 0;
+      add(
+        lits[fmtIdx].replace(verbRe, (verb, idx) => {
+          const arg = idx ? args[Number(idx) - 1] : args[next++];
+          return arg ?? verb;
+        }),
+      );
+      for (const arg of args) add(arg);
+      return;
+    }
+    for (const lit of lits) add(lit);
+    const delims = lits.filter(
+      (lit) => lit.length <= 1 && !/[a-zA-Z0-9]/.test(lit),
+    );
+    const pieces = lits.filter((lit) => !delims.includes(lit));
+    if (pieces.length > 1) {
+      for (const d of new Set(delims.length ? delims : ['-', ''])) {
+        add(pieces.join(d));
+      }
     }
   };
   const attrRe = /(?:^|[<\s"'])class\s*=\s*(["'])/gi;
@@ -65,15 +100,7 @@ export function classTokens(template) {
       if (template.startsWith('{{', i)) {
         const end = template.indexOf('}}', i + 2);
         if (end === -1) break;
-        const lits = [
-          ...template.slice(i + 2, end).matchAll(/"([^"]*)"|`([^`]*)`/g),
-        ].map((lit) => lit[1] ?? lit[2]);
-        for (const lit of lits) add(lit);
-        // A lone "-" literal is a joining delimiter (delimit (slice "d"
-        // "flex") "-"): emit the joined name too.
-        if (lits.includes('-')) {
-          add(lits.filter((lit) => lit !== '-').join('-'));
-        }
+        processAction(template.slice(i + 2, end));
         literal += ' ';
         i = end + 2;
       } else {
@@ -97,13 +124,10 @@ export function classTokens(template) {
 // like fully computed attributes.
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 export function isClassFragment(token, inventory) {
-  if (/%[a-zA-Z]/.test(token)) {
-    if (!token.replace(/%[a-zA-Z]/g, '')) return false;
+  if (verbSplitRe.test(token)) {
+    if (!token.replace(new RegExp(verbSplitRe, 'g'), '')) return false;
     const re = new RegExp(
-      `^${token
-        .split(/%[a-zA-Z]/)
-        .map(escapeRe)
-        .join('.+')}$`,
+      `^${token.split(verbSplitRe).map(escapeRe).join('.+')}$`,
     );
     for (const name of inventory) if (re.test(name)) return true;
     return false;
@@ -210,6 +234,46 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     classFragments('<div class="{{ printf "d-%s-none" .Bp }}">'),
     ['d-%s-none'],
     'printf placeholder form is flagged',
+  );
+  // Literal assembly through printf args and delimiter expressions
+  // (adversarial round 4): the assembled name must surface as an offender.
+  assert.deepEqual(
+    offenders('<div class="{{ printf "%s%s%s" "d" "-" "flex" }}">'),
+    ['d-flex'],
+    'printf-assembled class name is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s%s%s%s%s" "d" "-" "md" "-" "none" }}">',
+    ),
+    ['d-md-none'],
+    'multi-piece printf assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ printf "d-%[1]s-none" "md" }}">'),
+    ['d-md-none'],
+    'indexed printf verb is resolved and flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d" "flex") $dash }}">'),
+    ['d-flex'],
+    'variable-delimiter join is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ delimit (slice "d" "flex") (cond .Compact "-" "_") }}">',
+    ),
+    ['d-flex'],
+    'conditional-delimiter join is flagged',
+  );
+  // Docsy-own assembly must stay clean (no wildcard-on-inventory false
+  // dirty from the bare format token).
+  assert.deepEqual(
+    [...classTokens('<div class="{{ printf "%s-%s" "td" .Kind }}">')].filter(
+      (t) => inventory.has(t) || isClassFragment(t, inventory),
+    ),
+    [],
+    'td-prefixed printf stays clean',
   );
   assert.deepEqual(
     offenders('<div class="{{ delimit (slice "d" "flex") "-" }}">'),

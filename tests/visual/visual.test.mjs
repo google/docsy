@@ -58,6 +58,9 @@ const regions = [
   },
   { name: 'page', path: 'docs/getting-started/install/' },
   { name: 'page-single', path: 'docs/' },
+  // Term page: _taxonomy.scss couples article-teaser styling to breadcrumb
+  // classes; only a term shot can see that mapping regress.
+  { name: 'page-term', path: 'tags/setup/' },
 ];
 
 const shots = regions.flatMap((region) =>
@@ -86,7 +89,9 @@ const optedOut = !update && !authoritative && !existsSync(goldenDir);
 
 before(async () => {
   if (optedOut) return;
-  const build = buildFixture();
+  // Own fixture name: buildSite starts by wiping its directory, so sharing
+  // markup-golden's would race a concurrent test:repo run.
+  const build = buildFixture('visual-goldens');
   [server, browser] = await Promise.all([
     serveDir(path.join(build.site, 'public')),
     launchBrowser(),

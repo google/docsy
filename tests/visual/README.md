@@ -41,5 +41,7 @@ them as the `visual-diffs` artifact).
 
 Comparisons are bit-exact (zero differing pixels at pixelmatch threshold 0).
 Same-platform rendering of the fixture is deterministic: off-origin requests
-(web fonts included) are blocked and animations disabled at capture time. If CI
-ever shows antialiasing flake, loosen deliberately and note it here.
+(remote fonts, third-party assets) are blocked — the theme's same-origin
+webfonts do load, and screenshot capture awaits them — and animations are
+disabled at capture time. If CI ever shows antialiasing flake, loosen
+deliberately and note it here.

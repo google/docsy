@@ -74,6 +74,12 @@ const envLeavesInstallConfigUntouched = (key) => {
     !normalized.startsWith('NPM_CONFIG_') &&
     normalized !== 'HUGO' &&
     normalized !== 'NODE_OPTIONS' &&
+    // The visual suite's update refusal keys on CI/GITHUB_ACTIONS, and
+    // UPDATE_VISUAL_GOLDENS flips it into a no-compare golden writer: a
+    // workflow env entry touching any of them subverts the visual net.
+    normalized !== 'UPDATE_VISUAL_GOLDENS' &&
+    normalized !== 'CI' &&
+    normalized !== 'GITHUB_ACTIONS' &&
     !unsafeHugoEnv.has(normalized)
   );
 };
@@ -416,6 +422,14 @@ test('workflows: installs are locked and credential-isolated', () => {
           `${id} run step installs only via reviewed npm scripts`,
         );
         assert.doesNotMatch(run, /\bnpx\b/, `${id} run step avoids npx`);
+        // The in-suite CI refusal can't resist a step that rewrites its
+        // own environment (CI= GITHUB_ACTIONS= npm run …) or invokes the
+        // update lane directly: deny both shapes in committed workflows.
+        assert.doesNotMatch(
+          run,
+          /UPDATE_VISUAL_GOLDENS|update:visual-goldens|\b(?:CI|GITHUB_ACTIONS)=/,
+          `${id} run step leaves the visual-goldens update lane untouched`,
+        );
         assert.doesNotMatch(
           run,
           altRunner,
