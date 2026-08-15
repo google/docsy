@@ -12,10 +12,9 @@ import { buildSite } from './lib/build-site.mjs';
 // a dropped or ignored clock flag fails the build-year assertions.
 const BUILD_YEAR = new Date().getFullYear() + 4;
 
-// Builds a fixture site with the given `params.copyright` fields and returns
-// the rendered copyright text, whitespace-normalized, up to the authors span.
-function copyrightText(name, fields) {
-  const r = buildSite(`copyright-${name}`, {
+// Builds a fixture site with the given `params.copyright` fields.
+function build(name, fields) {
+  return buildSite(`copyright-${name}`, {
     files: {
       'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
     },
@@ -28,6 +27,12 @@ function copyrightText(name, fields) {
         .map(([k, v]) => `    ${k}: ${JSON.stringify(v)}\n`)
         .join(''),
   });
+}
+
+// Returns the rendered copyright text, whitespace-normalized, up to the
+// authors span.
+function copyrightText(name, fields) {
+  const r = build(name, fields);
   assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
   const m = r
     .publicFile('docs/index.html')
@@ -99,6 +104,32 @@ test('build year alone renders when both year fields are unset', () => {
     copyrightText('no-years', { authors: 'Test Authors' }),
     `&copy; ${BUILD_YEAR}`,
   );
+});
+
+test('from_year later than to_year logs a build warning', () => {
+  const r = build('reversed', { from_year: 2025, to_year: 2024 });
+  assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+  assert.match(
+    r.stdout + r.stderr,
+    /WARN.*from_year \(2025\) is later than to_year \(2024\)/,
+    'reversed year range logs a warning',
+  );
+});
+
+test('valid year configs build without warnings', () => {
+  for (const fields of [
+    { from_year: 2018, to_year: 2024 },
+    { from_year: 2018, to_year: 'present' },
+    { from_year: 2018 },
+  ]) {
+    const r = build('no-warn', fields);
+    assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+    assert.doesNotMatch(
+      r.stdout + r.stderr,
+      /WARN.*_year/,
+      `no year warning for ${JSON.stringify(fields)}`,
+    );
+  }
 });
 
 // Param-level rule: an empty `params.copyright` value behaves as unset, so

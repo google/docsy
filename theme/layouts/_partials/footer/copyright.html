@@ -10,9 +10,14 @@
   {{ else -}}
     {{ $authors = . -}}
   {{ end -}}
+  {{ $toYear = $toYear | default now.Year -}}
+  {{ if and (findRE `^\d+$` $fromYear) (findRE `^\d+$` (string $toYear)) -}}
+    {{ if gt (int $fromYear) (int $toYear) -}}
+      {{ warnf "Config params.copyright: from_year (%v) is later than to_year (%v)." $fromYear $toYear -}}
+    {{ end -}}
+  {{ end -}}
 
   <span class="td-footer__copyright">&copy;
-    {{ $toYear = $toYear | default now.Year -}}
     {{ with $fromYear -}}
       {{ if ne (string .) (string $toYear) -}}
         {{ . }}&ndash;
