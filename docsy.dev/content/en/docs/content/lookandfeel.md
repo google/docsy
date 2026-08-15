@@ -821,7 +821,7 @@ the site footer. It can be a plain string, used as the copyright-holder text, or
 a map with the following optional fields:
 
 - `authors`:
-  - Copyright holders, rendered as Markdown.
+  - Copyright holders, as single-paragraph Markdown.
   - Default: the site title followed by "Authors".
 - `from_year`:
   - First year of publication.
@@ -834,9 +834,10 @@ a map with the following optional fields:
 
 The notice shows a year range only when `from_year` and `to_year` differ;
 otherwise it shows a single year. A `from_year` later than `to_year` renders as
-configured and logs a build warning. Set `from_year` to your site's launch year
-to get a notice that spans the launch year through the build year, and shows the
-launch year alone until the year after launch. For example:
+configured; when both values are years, the build also logs a warning. Set
+`from_year` to your site's launch year to get a notice that spans the launch
+year through the build year, and shows the launch year alone until the year
+after launch. For example:
 
 ```yaml
 params:

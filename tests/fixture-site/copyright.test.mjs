@@ -160,6 +160,26 @@ test('valid year configs build without warnings', () => {
   }
 });
 
+test('authors Markdown renders on non-Markdown pages', () => {
+  const r = buildSite('copyright-org-page', {
+    files: {
+      'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
+      'content/docs/org/index.org': '#+title: Org page\n',
+    },
+    extraConfig:
+      'params:\n  copyright:\n' +
+      '    authors: "[ACME](https://example.com/authors)"\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeded:\n${r.stdout}${r.stderr}`);
+  for (const page of ['docs/index.html', 'docs/org/index.html']) {
+    assert.match(
+      r.publicFile(page),
+      /<span class="td-footer__authors"><a href="https:\/\/example\.com\/authors">ACME<\/a><\/span>/,
+      `authors link is Markdown-rendered on ${page}`,
+    );
+  }
+});
+
 // Param-level rule: an empty `params.copyright` value behaves as unset, so
 // the site `copyright` fallback applies (rendered as raw HTML, no year added).
 for (const [name, value] of [

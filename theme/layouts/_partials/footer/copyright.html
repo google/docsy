@@ -27,7 +27,7 @@
     <span class="td-footer__authors">
       {{- $authors
             | default (printf "%s Authors" ($.Site.Title | default "Site"))
-            | $page.RenderString -}}
+            | $page.RenderString (dict "markup" "markdown") -}}
     </span>
     {{- /* Trim WS */ -}}
   </span>
