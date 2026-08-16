@@ -2,7 +2,7 @@
 // artifact of the current HEAD's completed test-workflow run (the visual
 // job uploads it when it fails) and installs the actual shots as the Linux
 // goldens. One-command refresh for devs without a Linux machine; requires
-// the GitHub CLI (gh) to be authenticated.
+// the GitHub CLI (gh, ≥ 2.40 for --commit) to be authenticated.
 // Run via: npm run update:visual-goldens:linux
 
 import { spawnSync } from 'node:child_process';
