@@ -304,6 +304,14 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'install:theme-deps',
     '_install:safe:post',
     'install:browser',
+    // The visual lane and its cleanliness check: a hook sibling could
+    // rewrite goldens in CI before the pinned comparison runs.
+    'test:visual',
+    'test:repo',
+    'is:clean',
+    'update:visual-goldens',
+    'update:visual-goldens:linux',
+    'update:markup-goldens',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(

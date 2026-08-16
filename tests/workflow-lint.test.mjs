@@ -74,14 +74,6 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
           );
         }
       }
-      // Positive execution pin: the deny rules above can't see an edit
-      // that simply drops or conditions the comparison step, so the
-      // visual job's run sequence is asserted whole (deletion,
-      // reordering, continue-on-error, and step conditions all fail).
-      // Job-level fields can skip or error-mask the whole job before any
-      // step runs, and the runner is what makes Linux authoritative.
-      // The job id is the contract: renaming `visual` fails the count
-      // assertion at the end.
       if (jobId === 'visual') {
         visualJobs += 1;
         assert.ok(!('if' in job), `${id} job carries no condition`);
@@ -111,32 +103,82 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
           'ubuntu-latest',
           `${id} runs on the authoritative platform`,
         );
+        // Positive execution pin: the deny rules above can't see an edit
+        // that simply drops or conditions the comparison step, so the
+        // visual job's step sequence is asserted whole — action steps
+        // included: an inserted action could replace the workspace, and a
+        // checkout `ref`/`repository`/`path` override would test a branch
+        // other than the PR's (SHA pinning stays the supply-chain audit's
+        // job). Job-level fields can skip or error-mask the whole job
+        // before any step runs, and the runner is what makes Linux
+        // authoritative. The job id is the contract: renaming `visual`
+        // fails the count assertion at the end.
         assert.deepEqual(
-          (job.steps ?? [])
-            .filter((step) => typeof step.run === 'string')
-            .map(({ run, ...rest }) => ({
-              run,
-              conditioned: 'if' in rest || 'continue-on-error' in rest,
-              redirected: 'working-directory' in rest || 'shell' in rest,
-            })),
+          (job.steps ?? []).map((step) => ({
+            uses: step.uses ? step.uses.split('@')[0] : null,
+            run: step.run ?? null,
+            conditioned: 'if' in step || 'continue-on-error' in step,
+            redirected: 'working-directory' in step || 'shell' in step,
+            with: Object.keys(step.with ?? {}).sort(),
+          })),
           [
             {
+              uses: 'actions/checkout',
+              run: null,
+              conditioned: false,
+              redirected: false,
+              with: ['persist-credentials'],
+            },
+            {
+              uses: 'actions/setup-node',
+              run: null,
+              conditioned: false,
+              redirected: false,
+              with: ['cache', 'node-version-file'],
+            },
+            {
+              uses: null,
               run: 'npm run install:safe',
               conditioned: false,
               redirected: false,
+              with: [],
             },
             {
+              uses: null,
               run: 'npm run install:browser',
               conditioned: false,
               redirected: false,
+              with: [],
             },
             {
+              uses: null,
               run: 'npm run test:visual',
               conditioned: false,
               redirected: false,
+              with: [],
+            },
+            {
+              uses: null,
+              run: 'npm run -s is:clean',
+              conditioned: false,
+              redirected: false,
+              with: [],
+            },
+            {
+              uses: 'actions/upload-artifact',
+              run: null,
+              conditioned: true,
+              redirected: false,
+              with: ['name', 'path'],
             },
           ],
-          `${id} runs exactly the reviewed unconditional sequence`,
+          `${id} runs exactly the reviewed step sequence`,
+        );
+        // The one allowed condition: diffs upload on failure only.
+        assert.equal(
+          job.steps.at(-1).if,
+          'failure()',
+          `${id} uploads diffs only on failure`,
         );
       }
     }

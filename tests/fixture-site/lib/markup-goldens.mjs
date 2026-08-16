@@ -82,8 +82,11 @@ export const regions = [
 
 const breadcrumbRe = /<nav aria-label="breadcrumb"[\s\S]*?<\/nav>/;
 
-export function buildFixture(name = 'markup-goldens') {
-  const r = buildSite(name, { files, extraConfig });
+export function buildFixture(name = 'markup-goldens', extraFiles = {}) {
+  const r = buildSite(name, {
+    files: { ...files, ...extraFiles },
+    extraConfig,
+  });
   if (r.status !== 0) {
     throw new Error(`fixture hugo build failed:\n${r.stdout}${r.stderr}`);
   }

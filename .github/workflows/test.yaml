@@ -78,6 +78,10 @@ jobs:
 
       - run: npm run test:visual
 
+      # An in-workspace golden rewrite (e.g. by a smuggled lifecycle hook)
+      # must be loud: the tree stays clean after the comparison.
+      - run: npm run -s is:clean
+
       - name: Upload visual diffs
         if: failure()
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6

@@ -33,10 +33,23 @@ const OUTPUT_EXEMPT = {};
 // loud, not silent.
 const classAttrRe = /\bclass\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
 const classAttrAttemptRe = /\bclass\s*=/gi;
+// Browsers decode character references before class matching: an encoded
+// name (d&#45;flex) styles as d-flex, so raw-text comparison must not see
+// it differently. &amp; decodes last (its result is literal text).
+const NAMED_REFS = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
+const decodeRefs = (s) =>
+  s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) =>
+      String.fromCodePoint(parseInt(h, 16)),
+    )
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&(amp|lt|gt|quot|apos);/g, (_, n) => NAMED_REFS[n]);
 export function htmlClasses(html) {
   const out = new Set();
   for (const m of html.matchAll(classAttrRe)) {
-    for (const c of (m[1] ?? m[2] ?? m[3]).split(/\s+/)) if (c) out.add(c);
+    for (const c of decodeRefs(m[1] ?? m[2] ?? m[3]).split(/\s+/)) {
+      if (c) out.add(c);
+    }
   }
   return out;
 }
@@ -50,11 +63,11 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
   assert.deepEqual(
     [
       ...htmlClasses(
-        `<nav class="td-x d-flex"><a CLASS='active'>x</a><i class=mb-4></i></nav>`,
+        `<nav class="td-x d-flex"><a CLASS='active'>x</a><i class=mb-4></i><b class="d&#45;flex d&#x2D;none">y</b></nav>`,
       ),
     ],
-    ['td-x', 'd-flex', 'active', 'mb-4'],
-    'class extraction sees every attribute form',
+    ['td-x', 'd-flex', 'active', 'mb-4', 'd-none'],
+    'class extraction sees every attribute form, character refs decoded',
   );
 
   // Cross-net ratchet: the scanner freeze dispositions scanner-invisible
@@ -115,6 +128,30 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
           offenders,
           [],
           `cleared region ${name} in ${page} renders no Bootstrap classes`,
+        );
+      }
+    }
+  }
+
+  // Binding proof: the ratchet's partial→region label is free text, so a
+  // stale or misbound regex could satisfy it while covering none of the
+  // partial's output. Rebuild with every cleared partial stubbed to a
+  // sentinel (site layouts override theme layouts); each region must then
+  // surface its partial's sentinel, or stop matching entirely.
+  if (CLEARED_REGIONS.length > 0) {
+    const sentinel = (p) => `TD-SENTINEL[${p}]`;
+    const stubs = {};
+    for (const p of new Set(CLEARED_REGIONS.map((r) => r.partial))) {
+      stubs[`layouts/${p}`] = sentinel(p);
+    }
+    const stubbed = buildFixture('output-classes-stub', stubs);
+    for (const { name, partial, re, pages: regionPages } of CLEARED_REGIONS) {
+      for (const page of regionPages) {
+        assert.ok(
+          [...stubbed.publicFile(page).matchAll(re)].every((m) =>
+            m[0].includes(sentinel(partial)),
+          ),
+          `cleared region ${name} in ${page} encloses output of ${partial}`,
         );
       }
     }
