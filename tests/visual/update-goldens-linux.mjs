@@ -31,7 +31,6 @@ function run(cmd, args) {
   return r.stdout.trim();
 }
 
-const branch = run('git', ['branch', '--show-current']);
 const headSha = run('git', ['rev-parse', 'HEAD']);
 
 // PR workflows run in the base repository, not the fork a contributor
@@ -62,15 +61,15 @@ const runs = JSON.parse(
     repo,
     '--workflow',
     'test',
-    '--branch',
-    branch,
+    '--commit',
+    headSha,
     '--limit',
-    '20',
+    '1',
     '--json',
-    'databaseId,headSha,status',
+    'databaseId,status',
   ]),
 );
-const headRun = runs.find((r) => r.headSha === headSha);
+const headRun = runs[0];
 if (!headRun) {
   throw new Error(`no ${repo} test run found for HEAD ${headSha}`);
 }

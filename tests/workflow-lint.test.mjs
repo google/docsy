@@ -74,6 +74,8 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
       // reordering, continue-on-error, and step conditions all fail).
       // Job-level fields can skip or error-mask the whole job before any
       // step runs, and the runner is what makes Linux authoritative.
+      // The job id is the contract: renaming `visual` fails the count
+      // assertion at the end.
       if (jobId === 'visual') {
         visualJobs += 1;
         assert.ok(!('if' in job), `${id} job carries no condition`);

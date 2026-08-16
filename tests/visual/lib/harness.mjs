@@ -57,6 +57,8 @@ export function serveDir(dir) {
         file = jailed(path.join(file, 'index.html'));
       }
     } catch (err) {
+      // Any filesystem error besides the jail's 403 (missing file, EACCES)
+      // is deliberately a plain 404: a test server needs no finer story.
       res.writeHead(err.status ?? 404).end();
       return;
     }
