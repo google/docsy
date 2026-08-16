@@ -29,6 +29,9 @@ const files = {
     '---\ntitle: Configuration\n---\nReference leaf\n',
   'content/about/_index.md':
     '---\ntitle: About\nmenu: { main: { weight: 20 } }\n---\nAbout body\n',
+  'content/blog/_index.md': '---\ntitle: Blog\n---\nBlog landing\n',
+  'content/blog/first-post.md':
+    '---\ntitle: First post\ndate: 2026-08-01\n---\nPost body\n',
 };
 
 // Representative chrome config, so golden-tracked shots exercise populated
@@ -75,6 +78,8 @@ export const regions = [
     page: 'tags/setup/index.html',
     re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/,
   },
+  // Blog baseof wraps the same partial in a different layout context.
+  { name: 'breadcrumb-blog', page: 'blog/first-post/index.html' },
 ];
 
 const breadcrumbRe = /<nav aria-label="breadcrumb"[\s\S]*?<\/nav>/;

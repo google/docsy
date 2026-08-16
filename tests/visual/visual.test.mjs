@@ -57,6 +57,10 @@ const regions = [
   // Term page: _taxonomy.scss couples article-teaser styling to breadcrumb
   // classes; only a term shot can see that mapping regress.
   { name: 'page-term', path: 'tags/setup/' },
+  { name: 'page-blog', path: 'blog/first-post/' },
+  // Print media: _breadcrumb.scss hides breadcrumbs in print; no screen
+  // shot can see that rule regress.
+  { name: 'page-print', path: 'docs/getting-started/install/', media: 'print' },
 ];
 
 const shots = regions.flatMap((region) =>
@@ -120,6 +124,7 @@ for (const { name, rel, region, viewport, scheme } of shots) {
         selector: region.selector,
         viewport,
         scheme,
+        media: region.media,
       });
       const file = path.join(goldenDir, rel);
       if (update) {

@@ -100,7 +100,7 @@ export async function launchBrowser() {
 // same-origin webfonts load and are awaited by the screenshot capture.
 export async function shootRegion(
   browser,
-  { url, selector, viewport, scheme, pad = 24 },
+  { url, selector, viewport, scheme, media, pad = 24 },
 ) {
   const page = await browser.newPage();
   try {
@@ -108,6 +108,7 @@ export async function shootRegion(
     await page.emulateMediaFeatures([
       { name: 'prefers-color-scheme', value: scheme },
     ]);
+    if (media) await page.emulateMediaType(media);
     await page.setRequestInterception(true);
     const origin = new URL(url).origin;
     // Off-origin requests abort: deterministic, offline-safe shots.
