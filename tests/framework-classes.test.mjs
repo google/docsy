@@ -32,11 +32,12 @@ const bootstrapCss = path.join(
   'theme/node_modules/bootstrap/dist/css/bootstrap.css',
 );
 
-// Static partial calls a template makes — anywhere in an action
+// Static partial calls a template makes, normalized to theme/layouts/
+// paths ("theme-toggler" → _partials/theme-toggler.html; explicit
+// non-.html extensions kept). Calls are recognized anywhere in an action
 // (assignment, with/if expressions, namespaced partials.Include forms,
-// parenthesized literal names), interpreted or raw strings — normalized to
-// theme/layouts/ paths ("theme-toggler" → _partials/theme-toggler.html;
-// explicit non-.html extensions kept). Only real actions are scanned:
+// parenthesized literal names), in interpreted or raw strings. Only real
+// actions are scanned:
 // template comments and plain text can name partials without calling
 // them. A cleared partial's rendered output includes its children's, so
 // the no-framework guarantee holds only over this closure. Dynamic
@@ -258,7 +259,6 @@ export function classTokens(template) {
     };
     const [nodes] = parse(0);
 
-    // Enumerate the attribute's rendered variants, capped.
     const variants = (list) => {
       let out = [''];
       for (const node of list) {

@@ -1,7 +1,6 @@
 // Chrome markup goldens: rendered region markup matches the committed
-// goldens byte for byte, so any markup change, deliberate (a class swap
-// under the semantic-classes migration) or accidental, surfaces as a
-// reviewable golden diff. Refresh: npm run update:markup-goldens.
+// goldens byte for byte (provenance and review story: README.md).
+// Refresh: npm run update:markup-goldens.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

@@ -34,7 +34,7 @@ function run(cmd, args) {
 const headSha = run('git', ['rev-parse', 'HEAD']);
 
 // PR workflows run in the base repository, not the fork a contributor
-// clone points at — and gh's repo autodetection needs an interactive
+// clone points at, and gh's repo autodetection needs an interactive
 // `gh repo set-default` in multi-remote clones. Derive the repo from the
 // remotes instead (fork model: upstream is the base; direct clones have
 // origin only).
@@ -58,7 +58,7 @@ const repo = repoMatch[1];
 // The run must belong to the current HEAD and be completed: the branch's
 // latest failed run may predate an in-flight push, and installing its
 // artifact would silently baseline stale shots. A green HEAD run fails
-// below at download (no visual-diffs artifact) — also loud.
+// below at download (no visual-diffs artifact): also loud.
 const runs = JSON.parse(
   run('gh', [
     'run',

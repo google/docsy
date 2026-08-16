@@ -2,7 +2,7 @@
 // they claim to, unsubverted. Sibling of tests/supply-chain-audit.test.mjs,
 // which owns install/provenance invariants over the same files; this file
 // owns check-execution integrity. Both walk the workflow YAML
-// independently (see the audit's stance on duplicated walks).
+// independently: an independent walk beats cross-test-file coupling.
 //
 // Current subject: the authoritative visual net (tests/visual/). The
 // in-suite CI refusal can't resist a workflow step that rewrites its own

@@ -1,9 +1,7 @@
 // Shared spec for the chrome markup goldens: one fixture site, a list of
 // golden-tracked regions, and the region extractor. Consumed by
 // markup-golden.test.mjs (assert) and update-markup-goldens.mjs (refresh).
-// Part of the semantic-classes migration (google/docsy#783): each region is
-// characterized here before its classes change, so class-swap refactors
-// review as golden diffs.
+// Part of the semantic-classes migration (google/docsy#783).
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

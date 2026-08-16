@@ -80,9 +80,9 @@ const shots = regions.flatMap((region) =>
 let server, browser;
 let compared = 0;
 
-// Linux is the authoritative set (CI enforces it): a missing golden dir
-// there must fail loud, not skip. All-skipped exits 0, so the skip path
-// would let a PR delete the goldens and stay green.
+// A missing golden dir must fail loud on the authoritative platforms, not
+// skip: all-skipped exits 0, so the skip path would let a PR delete the
+// goldens and stay green.
 const authoritative =
   process.platform === 'linux' ||
   !!process.env.CI ||

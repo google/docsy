@@ -39,8 +39,8 @@ Rendering differs across OSs, so goldens live under
 
 ## Failure output
 
-Failures write `*-actual.png` and `*-diff.png` under `tmp/visual/` (CI uploads
-them as the `visual-diffs` artifact).
+Failures write `*-actual.png` (and `*-diff.png` when comparable) under
+`tmp/visual/`; CI uploads them as the `visual-diffs` artifact.
 
 Comparisons are bit-exact (pixelmatch threshold 0); same-platform rendering of
 the fixture is engineered deterministic (see `lib/harness.mjs`). If CI ever
