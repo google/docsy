@@ -1,6 +1,5 @@
-// Contract tests for the footer copyright partial (#2047): `to_year` defaults
-// to the build year, and a year range renders only when `from_year` differs
-// from the resolved `to_year` — otherwise the footer shows `to_year` alone.
+// Contract tests for the footer copyright partial's year handling (#2047);
+// the contract's home is the user guide's "Footer copyright" section.
 //
 // TDD trace: the two collapse cases were red against the pre-#2047 partial.
 
@@ -12,7 +11,6 @@ import { buildSite } from './lib/build-site.mjs';
 // a dropped or ignored clock flag fails the build-year assertions.
 const BUILD_YEAR = new Date().getFullYear() + 4;
 
-// Builds a fixture site with the given `params.copyright` fields.
 function build(name, fields) {
   return buildSite(`copyright-${name}`, {
     files: {
@@ -126,7 +124,7 @@ test('from_year later than to_year logs a build warning', () => {
   assert.equal(
     noticeText(r),
     '&copy; 2025&ndash;2024',
-    'reversed range still renders as configured',
+    'reversed range renders as configured',
   );
 });
 
@@ -155,7 +153,7 @@ test('valid year configs build without warnings', () => {
     assert.doesNotMatch(
       r.stdout + r.stderr,
       /WARN.*copyright/i,
-      `no copyright warning for ${JSON.stringify(fields)}`,
+      `warning-free build for ${JSON.stringify(fields)}`,
     );
   }
 });
@@ -216,8 +214,8 @@ test('authors defaults to the site title plus "Authors"', () => {
   );
 });
 
-// Param-level rule: an empty `params.copyright` value behaves as unset, so
-// the site `copyright` fallback applies (rendered as raw HTML, no year added).
+// Param-level rule: an empty `params.copyright` behaves as unset, exercising
+// the site `copyright` fallback.
 for (const [name, value] of [
   ['empty map', '{}'],
   ['empty string', "''"],

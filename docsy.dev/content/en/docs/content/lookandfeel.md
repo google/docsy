@@ -832,10 +832,8 @@ a map with the following optional fields:
   - Tip: a non-year string such as "present" also works, and stays accurate even
     when the site isn't rebuilt every year.
 
-A `from_year` later than `to_year` renders as configured; when both values are
-years, the build also logs a warning. Set `from_year` to your site's launch year
-to get a notice that spans the launch year through the build year, and shows the
-launch year alone until the year after launch. For example:
+Set `from_year` to your site's launch year to get a notice that spans the launch
+year through the build year. For example:
 
 ```yaml
 params:
@@ -848,6 +846,9 @@ params:
 With a build year of 2026, this renders as:
 
 > © 2018–2026 Docsy Authors | [CC BY 4.0][]
+
+A `from_year` later than `to_year` renders as configured; when both values are
+years, the build also logs a warning.
 
 If `params.copyright` is unset or empty, the [site `copyright`][] option is used
 instead, rendered as HTML, with no year added.
