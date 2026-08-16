@@ -48,8 +48,10 @@ themesDir: ${repoRoot}
 // Site files come from `srcDir` (a checked-in fixture directory), `files`
 // (a relative-path → content map), or both. The generated hugo.yaml can be
 // extended via `extraConfig`, and its site `title` overridden (handy when two
-// builds must be identical apart from their output dir). Returns the spawnSync
-// result plus the site path and a `publicFile(relPath)` reader over the output.
+// builds must be identical apart from their output dir); extra Hugo CLI args
+// pass through `args`, process-env overrides through `env`. Returns the
+// spawnSync result plus the site path and a `publicFile(relPath)` reader over
+// the output.
 export function buildSite(
   name,
   { files = {}, srcDir, extraConfig = '', env = {}, title, args = [] } = {},
