@@ -162,6 +162,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **Other changes**:
 
+- Fixed and documented footer copyright year handling. See the [footer copyright
+  docs][] ([#2047][]).
 - Pinned the default Mermaid version to 11.16.1; pages previously loaded
   whatever `latest` resolved to on the CDN at page load. Sites can still
   override the version via [`params.mermaid.version`][mermaid-version]
@@ -184,10 +186,12 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
   [Default Mermaid version][mermaid-version-notes].
 
+[#2047]: https://github.com/google/docsy/issues/2047
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2714]: https://github.com/google/docsy/pull/2714
+[footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
 [mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1

@@ -4,22 +4,31 @@
   {{ $toYear := "" -}}
   {{ $authors := "" -}}
   {{ if reflect.IsMap . -}}
-    {{ $fromYear = .from_year -}}
-    {{ $toYear = .to_year -}}
+    {{ $fromYear = strings.TrimSpace (.from_year | default "") -}}
+    {{ $toYear = strings.TrimSpace (.to_year | default "") -}}
     {{ $authors = .authors -}}
   {{ else -}}
     {{ $authors = . -}}
   {{ end -}}
+  {{ $toYear = $toYear | default now.Year -}}
+  {{/* Diagnose only 1-4-digit years; wider input could break the int casts. */ -}}
+  {{ if and (findRE `^[1-9]\d{0,3}$` $fromYear) (findRE `^[1-9]\d{0,3}$` (string $toYear)) -}}
+    {{ if gt (int $fromYear) (int $toYear) -}}
+      {{ warnf "Config params.copyright: from_year (%v) is later than to_year (%v)." $fromYear $toYear -}}
+    {{ end -}}
+  {{ end -}}
 
   <span class="td-footer__copyright">&copy;
     {{ with $fromYear -}}
-      {{ . }}&ndash;
-    {{- end -}}
-    {{ $toYear | default now.Year }}
+      {{ if ne (string .) (string $toYear) -}}
+        {{ . }}&ndash;
+      {{- end -}}
+    {{ end -}}
+    {{ $toYear }}
     <span class="td-footer__authors">
       {{- $authors
             | default (printf "%s Authors" ($.Site.Title | default "Site"))
-            | $page.RenderString -}}
+            | $page.RenderString (dict "markup" "markdown") -}}
     </span>
     {{- /* Trim WS */ -}}
   </span>
