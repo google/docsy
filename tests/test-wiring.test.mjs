@@ -155,3 +155,31 @@ test('manifests: own-suite scripts resolve their test files', () => {
     );
   }
 });
+
+// npm wraps every script in implicit pre<name>/post<name> hooks: a hook
+// sibling on a check-lane script runs unreviewed code inside the pinned CI
+// chain — e.g. rewriting goldens in its own env before test:visual
+// compares. Install-path hooks are the supply-chain audit's subject; these
+// are check-execution.
+test('manifests: check-lane scripts carry no lifecycle hook siblings', () => {
+  const { scripts } = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
+  );
+  for (const name of [
+    'test:visual',
+    'test:repo',
+    'test:lychee',
+    'is:clean',
+    'update:visual-goldens',
+    'update:visual-goldens:linux',
+    'update:markup-goldens',
+  ]) {
+    for (const hook of [`pre${name}`, `post${name}`]) {
+      assert.equal(
+        scripts[hook],
+        undefined,
+        `${hook} stays absent, so ${name} runs exactly as pinned`,
+      );
+    }
+  }
+});
