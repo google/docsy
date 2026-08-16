@@ -238,6 +238,36 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node node_modules/puppeteer/install.mjs',
     'install:browser invokes the locked dependency entry point directly',
   );
+  // That entry point loads Puppeteer configuration from the project
+  // (executable config files, a package.json "puppeteer" key), which can
+  // redirect the browser download or swap the launched executable: the
+  // audited install is only as locked as this search surface stays empty.
+  for (const config of [
+    '.puppeteerrc.cjs',
+    '.puppeteerrc.js',
+    '.puppeteerrc.mjs',
+    '.puppeteerrc.json',
+    '.puppeteerrc.yaml',
+    '.puppeteerrc',
+    'puppeteer.config.cjs',
+    'puppeteer.config.js',
+    'puppeteer.config.mjs',
+  ]) {
+    assert.ok(
+      !fs.existsSync(path.join(repoRoot, config)),
+      `${config} stays absent, so the browser install runs unconfigured`,
+    );
+  }
+  for (const manifest of ['package.json', 'theme', 'docsy.dev']) {
+    const file = manifest.endsWith('.json')
+      ? manifest
+      : `${manifest}/package.json`;
+    assert.equal(
+      readJSON(file).puppeteer,
+      undefined,
+      `${file} carries no puppeteer configuration key`,
+    );
+  }
   // Cross-root anchoring: this file and the wiring guard ride the tests
   // glob, so scripts/suite-anchor.test.mjs pins that glob and the
   // tests-root guards from the scripts glob; anchor it and the wiring

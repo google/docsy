@@ -22,17 +22,23 @@ const repoRoot = path.resolve(
 );
 const workflowsDir = path.join(repoRoot, '.github', 'workflows');
 
-// Env keys that flip or gate the visual suite's update refusal: a workflow
-// env entry touching any of them subverts the net.
-const visualEnvDeny = new Set([
-  'UPDATE_VISUAL_GOLDENS',
-  'CI',
-  'GITHUB_ACTIONS',
-]);
-// Run-step shapes reaching the update lane: the env-shadow prefix and the
-// direct script call.
+// Env keys that flip or gate the visual suite's update refusal, or steer
+// Puppeteer's browser download/launch (PUPPETEER_* covers executable-path
+// and download-origin overrides): a workflow env entry touching any of
+// them subverts the net.
+const visualEnvDeny = (key) => {
+  const k = key.toUpperCase();
+  return (
+    k === 'UPDATE_VISUAL_GOLDENS' ||
+    k === 'CI' ||
+    k === 'GITHUB_ACTIONS' ||
+    k.startsWith('PUPPETEER_')
+  );
+};
+// Run-step shapes reaching the update lane or the browser configuration:
+// the env-shadow prefix and the direct script call.
 const updateLaneRe =
-  /UPDATE_VISUAL_GOLDENS|update:visual-goldens|\b(?:CI|GITHUB_ACTIONS)=/;
+  /UPDATE_VISUAL_GOLDENS|update:visual-goldens|\b(?:CI|GITHUB_ACTIONS|PUPPETEER_\w+)=/;
 
 test('workflows: the visual net runs unconditionally and unsubverted', () => {
   const files = fs.readdirSync(workflowsDir).filter((f) => /\.ya?ml$/.test(f));
@@ -48,7 +54,7 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
       for (const env of [workflow.env, job.env]) {
         for (const key of Object.keys(env ?? {})) {
           assert.ok(
-            !visualEnvDeny.has(key.toUpperCase()),
+            !visualEnvDeny(key),
             `${id} env ${key} leaves the visual update refusal intact`,
           );
         }
@@ -56,7 +62,7 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
       for (const step of job.steps ?? []) {
         for (const key of Object.keys(step.env ?? {})) {
           assert.ok(
-            !visualEnvDeny.has(key.toUpperCase()),
+            !visualEnvDeny(key),
             `${id} step env ${key} leaves the visual update refusal intact`,
           );
         }

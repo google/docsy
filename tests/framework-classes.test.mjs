@@ -33,19 +33,24 @@ const bootstrapCss = path.join(
 );
 
 // Static partial calls a template makes — anywhere in an action
-// (assignment, with/if expressions included), interpreted or raw string
-// names — normalized to theme/layouts/ paths ("theme-toggler" →
-// _partials/theme-toggler.html). A cleared partial's rendered output
-// includes its children's, so the no-framework guarantee holds only over
-// this closure. Dynamic partial names are invisible here (review's job).
+// (assignment, with/if expressions, namespaced partials.Include forms,
+// parenthesized literal names), interpreted or raw strings — normalized to
+// theme/layouts/ paths ("theme-toggler" → _partials/theme-toggler.html;
+// explicit non-.html extensions kept). Only real actions are scanned:
+// template comments and plain text can name partials without calling
+// them. A cleared partial's rendered output includes its children's, so
+// the no-framework guarantee holds only over this closure. Dynamic
+// partial names are invisible here (review's job).
 export function partialCalls(template) {
   const calls = new Set();
-  for (const m of template.matchAll(
-    /\b(?:partial|partialCached)\s+(?:"([^"]+)"|`([^`]+)`)/g,
-  )) {
-    const raw = m[1] ?? m[2];
-    const name = raw.endsWith('.html') ? raw : `${raw}.html`;
-    calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+  for (const action of template.matchAll(/\{\{(?!\/\*)([\s\S]*?)\}\}/g)) {
+    for (const m of action[1].matchAll(
+      /\b(?:partials\.Include(?:Cached)?|partial(?:Cached)?)\s*\(?\s*(?:"([^"]+)"|`([^`]+)`)/g,
+    )) {
+      const raw = m[1] ?? m[2];
+      const name = /\.[a-z0-9]+$/i.test(raw) ? raw : `${raw}.html`;
+      calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+    }
   }
   return calls;
 }
@@ -94,8 +99,22 @@ export function classTokens(template) {
   const actionLiterals = (content) =>
     [...content.matchAll(/"([^"]*)"|`([^`]*)`/g)].map((m) => m[1] ?? m[2]);
 
-  const processAction = (content) => {
+  // append renders its element after the collection, maps range in key
+  // order: literal order stops matching document order, so the
+  // subsequence composition below would under-scan. Fail closed instead.
+  const orderChangingRe = /\b(append|sort|reverse|shuffle|dict)\b/;
+  const guardedLiterals = (content) => {
     const lits = actionLiterals(content);
+    if (lits.length >= 2 && orderChangingRe.test(content)) {
+      throw new Error(
+        'class attribute uses an order-changing operation on literals; simplify the template or scan it manually',
+      );
+    }
+    return lits;
+  };
+
+  const processAction = (content) => {
+    const lits = guardedLiterals(content);
     for (const lit of lits) add(lit);
     const fmts = lits.filter((lit) => verbRe.test(lit));
     const plain = lits.filter((lit) => !verbRe.test(lit));
@@ -213,7 +232,7 @@ export function classTokens(template) {
         const kw = seg.action.split(/\s+/)[0];
         if (kw === 'end' || kw === 'else') return [nodes, pos];
         if (kw === 'if' || kw === 'with' || kw === 'range') {
-          for (const lit of actionLiterals(seg.action)) add(lit);
+          for (const lit of guardedLiterals(seg.action)) add(lit);
           const branches = [];
           let body, next;
           [body, next] = parse(pos + 1);
@@ -223,7 +242,7 @@ export function classTokens(template) {
             flat[next].action !== undefined &&
             /^else\b/.test(flat[next].action)
           ) {
-            for (const lit of actionLiterals(flat[next].action)) add(lit);
+            for (const lit of guardedLiterals(flat[next].action)) add(lit);
             [body, next] = parse(next + 1);
             branches.push(body);
           }
@@ -444,6 +463,31 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ['_partials/a.html', '_partials/b.html', '_partials/c.html'],
     'expression-embedded partial calls are extracted',
   );
+  // Namespaced and parenthesized static forms; explicit extensions kept;
+  // comments and plain text are not calls.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ partials.Include "a.html" . }}{{ partials.IncludeCached "b.html" . "k" }}{{ partial ("c.html") . }}{{ partial "td/scrollspy-attr.txt" . }}',
+      ),
+    ].sort(),
+    [
+      '_partials/a.html',
+      '_partials/b.html',
+      '_partials/c.html',
+      '_partials/td/scrollspy-attr.txt',
+    ],
+    'namespaced, parenthesized, and non-html static calls are extracted',
+  );
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{/* partial "ghost.html" */}}<code>partial "doc.html"</code>',
+      ),
+    ],
+    [],
+    'comments and plain text are not partial calls',
+  );
   assert.deepEqual(
     offenders(
       '<div class="{{ delimit (slice "d" "flex") (cond .Compact "-" "_") }}">',
@@ -513,6 +557,25 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
       'opacity-0',
     ],
     'five-piece assembly is flagged',
+  );
+  // Order-changing collection operations (append renders its element last,
+  // maps range in key order) break the in-order-subsequence premise: a
+  // literal-bearing action using one fails closed.
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ delimit (append "flex" (slice "d")) "-" }}">',
+      ),
+    /order-changing/,
+    'append in a class action fails closed',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ range $k, $v := (dict "b" "flex" "a" "d") }}{{ $v }}{{ end }}">',
+      ),
+    /order-changing/,
+    'map range in a class action fails closed',
   );
   assert.deepEqual(
     offenders(
