@@ -25,7 +25,7 @@ const goldenDir = path.join(here, 'goldens', process.platform);
 const outDir = path.resolve(here, '../../tmp/visual');
 const update = !!process.env.UPDATE_VISUAL_GOLDENS;
 
-// Update mode in CI would write goldens instead of comparing and exit 0 —
+// Update mode in CI would write goldens instead of comparing and exit 0:
 // a silent bypass of the authoritative net. GITHUB_ACTIONS is checked
 // because CI is mutable from a workflow step; GITHUB_-prefixed vars are
 // not.
@@ -77,7 +77,7 @@ let server, browser;
 let compared = 0;
 
 // Linux is the authoritative set (CI enforces it): a missing golden dir
-// there must fail loud, not skip — all-skipped exits 0, so the skip path
+// there must fail loud, not skip. All-skipped exits 0, so the skip path
 // would let a PR delete the goldens and stay green.
 const authoritative =
   process.platform === 'linux' ||
@@ -99,7 +99,7 @@ before(async () => {
 after(async () => {
   await Promise.all([browser?.close(), server?.close()]);
   // Execution guard: filename bijection can't see quarantined (skipped)
-  // shot tests — on the authoritative platform every comparison must
+  // shot tests; on the authoritative platform every comparison must
   // actually have run.
   if (!update && !optedOut && authoritative) {
     assert.equal(compared, shots.length, 'every shot comparison executed');

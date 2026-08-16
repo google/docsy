@@ -1,6 +1,6 @@
 // Framework-class check for the semantic-classes migration
 // (google/docsy#783): chrome partials listed in CLEARED_PARTIALS emit only
-// Docsy-owned (td-) class names — no Bootstrap classes. The list grows
+// Docsy-owned (td-) class names, never Bootstrap ones. The list grows
 // partial by partial as the migration lands; a partial is added in the same
 // PR that swaps its classes, red first, driven green by the swap.
 //
@@ -63,8 +63,8 @@ export function bootstrapClasses(css) {
 
 // Class tokens a template may emit from its class attributes: an
 // over-approximation of every rendered variant assembled from the
-// attribute's quoted literals — branch alternatives, printf-verb
-// enumeration, delimiter joins, and whole-pool composition (mechanics
+// attribute's quoted literals (branch alternatives, printf-verb
+// enumeration, delimiter joins, and whole-pool composition; mechanics
 // beside each step below). Over-cap attributes throw: fail closed, never
 // under-scan. Strict by design: a literal that merely collides with a
 // class name is a loud false positive, not a silent miss. A lint over

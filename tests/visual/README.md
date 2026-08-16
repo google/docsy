@@ -7,9 +7,9 @@ generated snapshots, not hand-written mocks (see `../fixture-site/README.md`).
 Part of the semantic-classes migration's check harness: the markup goldens pin
 what the templates emit; these pin what the reader sees. Two kinds of shot:
 
-- **region crops** — the element's box plus padding, so neighbor spacing is
+- **region crops**: the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
-- a **full-page shot** — the coarse safety net for whatever the tracked regions
+- a **full-page shot**: the coarse safety net for whatever the tracked regions
   don't cover.
 
 ## Running
@@ -18,23 +18,23 @@ what the templates emit; these pin what the reader sees. Two kinds of shot:
 `visual` job runs this suite apart from the OS build matrix: it needs a browser
 install and only Linux is enforced.
 
-Rendering differs across OSs, so goldens are keyed by platform, one subfolder
-per region, under `goldens/<platform>/<region>/`:
+Rendering differs across OSs, so goldens live under
+`goldens/<platform>/<region>/`:
 
-- **`linux/` is authoritative** — it's what CI enforces (the `visual` job). A
-  missing or incomplete set **fails** on Linux/CI rather than skipping.
+- **`linux/` is authoritative**: it's what CI enforces. A missing or incomplete
+  set **fails** there rather than skipping.
 - `darwin/` is committed as a maintainer convenience for local checks.
 - Other platforms (Windows included): the suite **skips** when
   `goldens/<platform>/` doesn't exist. Opt in by generating a local, uncommitted
-  baseline: `npm run update:visual-goldens` (best-effort; gitignored).
+  baseline: `npm run update:visual-goldens` (best-effort).
 
 ## Refreshing goldens after a deliberate visual change
 
 - Current platform: `npm run update:visual-goldens`.
 - **Linux set, from any machine**: push your branch, let the `visual` CI job
-  fail on the change, then `npm run update:visual-goldens:linux` — it downloads
-  the failed run's `visual-diffs` artifact and installs the actual shots as the
-  Linux goldens. Review, commit, push; CI must then go green.
+  fail on the change, then `npm run update:visual-goldens:linux`, which
+  downloads the failed run's `visual-diffs` artifact and installs the actual
+  shots as the Linux goldens. Review, commit, push; CI must then go green.
 
 ## Failure output
 
