@@ -6,12 +6,19 @@
 //
 // The Bootstrap inventory is derived from the dependency's own compiled CSS,
 // so it tracks the installed Bootstrap version instead of a hand-kept list.
+//
+// Hardening frozen (2026-08-16, owner call): the rendered-output net
+// (fixture-site/output-classes.test.mjs) is ground truth for every branch
+// the fixture exercises, so new lexer-evasion findings are dispositioned as
+// covered there rather than re-modeled here. This scanner's enduring job is
+// what output can't do: enumerate unexercised branches, failing closed.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { bootstrapClasses, bootstrapCss } from './lib/bootstrap-inventory.mjs';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -26,11 +33,6 @@ const CLEARED_PARTIALS = [];
 // here is a debt marker: the parent's rendered output still carries the
 // child's framework classes.
 const PENDING_CHILDREN = {};
-
-const bootstrapCss = path.join(
-  repoRoot,
-  'theme/node_modules/bootstrap/dist/css/bootstrap.css',
-);
 
 // Index of the `}}` that closes the action opened at `open` (which points
 // at `{{`), or -1 when unclosed. A `}}` inside a comment or an
@@ -91,19 +93,6 @@ export function partialCalls(template) {
     open = template.indexOf('{{', close + 2);
   }
   return calls;
-}
-
-// Class names Bootstrap's stylesheet defines: every `.name` token in selector
-// text (text outside `{…}` blocks, comments stripped).
-export function bootstrapClasses(css) {
-  const selectorText = css
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .replace(/\{[^{}]*\}/g, '{}');
-  const classes = new Set();
-  for (const m of selectorText.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)) {
-    classes.add(m[1]);
-  }
-  return classes;
 }
 
 // Class tokens a template may emit from its class attributes: an
