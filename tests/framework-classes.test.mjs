@@ -32,17 +32,19 @@ const bootstrapCss = path.join(
   'theme/node_modules/bootstrap/dist/css/bootstrap.css',
 );
 
-// Static partial calls a template makes, normalized to theme/layouts/
-// paths ("theme-toggler" → _partials/theme-toggler.html). A cleared
-// partial's rendered output includes its children's, so the no-framework
-// guarantee holds only over this closure. Dynamic partial names are
-// invisible here (review's job).
+// Static partial calls a template makes — anywhere in an action
+// (assignment, with/if expressions included), interpreted or raw string
+// names — normalized to theme/layouts/ paths ("theme-toggler" →
+// _partials/theme-toggler.html). A cleared partial's rendered output
+// includes its children's, so the no-framework guarantee holds only over
+// this closure. Dynamic partial names are invisible here (review's job).
 export function partialCalls(template) {
   const calls = new Set();
   for (const m of template.matchAll(
-    /\{\{-?\s*(?:partial|partialCached)\s+"([^"]+)"/g,
+    /\b(?:partial|partialCached)\s+(?:"([^"]+)"|`([^`]+)`)/g,
   )) {
-    const name = m[1].endsWith('.html') ? m[1] : `${m[1]}.html`;
+    const raw = m[1] ?? m[2];
+    const name = raw.endsWith('.html') ? raw : `${raw}.html`;
     calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
   }
   return calls;
@@ -166,6 +168,10 @@ export function classTokens(template) {
     // Attribute-wide literal-pool composition: any pipeline that only
     // rearranges these literals (range/with dot output, nested joins,
     // cross-action assembly) can emit nothing outside the composed set.
+    // The modeled flows all preserve document order, so joining every
+    // in-order subsequence (any length, 2^POOL_CAP worst case) covers
+    // them; literal-reordering evasion is review's job, like the other
+    // documented caps.
     const poolPieces = [];
     const poolDelims = new Set(['-', '']);
     for (const seg of flat) {
@@ -184,17 +190,15 @@ export function classTokens(template) {
       }
     }
     if (poolPieces.length > POOL_CAP) throw capError();
-    const compose = (chosen) => {
+    const compose = (start, chosen) => {
       if (chosen.length >= 2) {
-        for (const d of poolDelims)
-          add(chosen.map((p) => poolPieces[p]).join(d));
+        for (const d of poolDelims) add(chosen.join(d));
       }
-      if (chosen.length === 3) return;
-      for (let p = 0; p < poolPieces.length; p += 1) {
-        if (!chosen.includes(p)) compose([...chosen, p]);
+      for (let p = start; p < poolPieces.length; p += 1) {
+        compose(p + 1, [...chosen, poolPieces[p]]);
       }
     };
-    compose([]);
+    compose(0, []);
 
     // Group if/with/range…else…end into branch nodes.
     const parse = (pos) => {
@@ -429,6 +433,17 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ],
     'static partial calls are extracted and normalized',
   );
+  // Calls embedded in expressions (assignment, with, backtick names) are
+  // static too.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ $x := partial "a.html" . }}{{ with partial "b.html" . }}{{ . }}{{ end }}{{ partial `c.html` . }}',
+      ),
+    ].sort(),
+    ['_partials/a.html', '_partials/b.html', '_partials/c.html'],
+    'expression-embedded partial calls are extracted',
+  );
   assert.deepEqual(
     offenders(
       '<div class="{{ delimit (slice "d" "flex") (cond .Compact "-" "_") }}">',
@@ -475,6 +490,29 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ),
     ['d-flex'],
     'range-emitted literal assembly is flagged',
+  );
+  // Bootstrap has names of four segments and more
+  // (text-decoration-line-through, link-underline-opacity-0-hover): the
+  // pool composition must not cap the piece count below what the pool
+  // holds.
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ range (slice "text" "-" "decoration" "-" "line" "-" "through") }}{{ . }}{{ end }}">',
+    ),
+    ['text-decoration-line-through'],
+    'four-piece assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ delimit (slice "link" "underline" "opacity" "0" "hover") "-" }}">',
+    ),
+    [
+      'link-underline',
+      'link-underline-opacity-0',
+      'link-underline-opacity-0-hover',
+      'opacity-0',
+    ],
+    'five-piece assembly is flagged',
   );
   assert.deepEqual(
     offenders(

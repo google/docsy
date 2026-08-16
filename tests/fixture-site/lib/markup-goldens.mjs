@@ -45,6 +45,9 @@ params:
       Fixture Authors |
       [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2020
+    # Pinned: the default (current year) would roll the rendered footer,
+    # and with it every committed page shot, each January 1.
+    to_year: 2026
   links:
     user:
       - name: Mailing list

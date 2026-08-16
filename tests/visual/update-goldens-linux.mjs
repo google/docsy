@@ -45,7 +45,10 @@ const remoteUrl = (name) => {
   return r.status === 0 ? r.stdout.trim() : undefined;
 };
 const baseUrl = remoteUrl('upstream') ?? remoteUrl('origin');
-const repoMatch = baseUrl?.match(/github\.com[/:]([^/]+\/[^/.]+)/);
+// Repo names may contain dots (docsy.dev): strip only a terminal .git.
+const repoMatch = baseUrl
+  ?.replace(/\.git$/, '')
+  .match(/github\.com[/:]([^/\s]+\/[^/\s]+)$/);
 if (!repoMatch) throw new Error(`no GitHub base repo found in ${baseUrl}`);
 const repo = repoMatch[1];
 

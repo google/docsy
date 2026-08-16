@@ -24,9 +24,10 @@ Rendering differs across OSs, so goldens live under
 - **`linux/` is authoritative**: it's what CI enforces. A missing or incomplete
   set **fails** there rather than skipping.
 - `darwin/` is committed as a maintainer convenience for local checks.
-- Other platforms (Windows included): the suite **skips** when
-  `goldens/<platform>/` doesn't exist. Opt in by generating a local, uncommitted
-  baseline: `npm run update:visual-goldens` (best-effort).
+- Other platforms (Windows included): a local run **skips** when
+  `goldens/<platform>/` doesn't exist (in CI it fails instead). Opt in by
+  generating a local, uncommitted baseline: `npm run update:visual-goldens`
+  (best-effort).
 
 ## Refreshing goldens after a deliberate visual change
 
