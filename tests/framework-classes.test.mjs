@@ -12,6 +12,10 @@
 // the fixture exercises, so new lexer-evasion findings are dispositioned as
 // covered there rather than re-modeled here. This scanner's enduring job is
 // what output can't do: enumerate unexercised branches, failing closed.
+// Known scanner-invisible form for migration reviewers: class strings
+// hoisted into assignments outside a class attribute
+// ({{ $c := "…" }} … class="{{ $c }}"), live today in e.g.
+// _markup/render-blockquote-alert.html.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,14 +23,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { bootstrapClasses, bootstrapCss } from './lib/bootstrap-inventory.mjs';
+import { CLEARED_PARTIALS } from './lib/cleared-partials.mjs';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
-
-// Theme partials cleared of framework classes, relative to theme/layouts/.
-const CLEARED_PARTIALS = [];
 
 // Cleared partials whose statically-called children are knowingly not yet
 // cleared (visible migration staging), child paths per parent. An entry

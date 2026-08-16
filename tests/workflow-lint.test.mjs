@@ -89,6 +89,15 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
           !('continue-on-error' in job),
           `${id} job failures fail the workflow`,
         );
+        // Reachability: a needs edge can skip the job (skipped-by-needs is
+        // neutral, the workflow stays green), and moving it behind narrower
+        // triggers un-runs it on PRs while every step pin still passes.
+        assert.ok(!('needs' in job), `${id} runs without needs gating`);
+        assert.ok(
+          'pull_request' in (workflow.on ?? {}) &&
+            workflow.on.pull_request == null,
+          `${file} keeps an unfiltered pull_request trigger`,
+        );
         // A defaults.run.working-directory (workflow- or job-level, or on
         // a step) would re-point the pinned npm commands at a different
         // package.json whose scripts can no-op the whole net.

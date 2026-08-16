@@ -45,3 +45,8 @@ Failures write `*-actual.png` (and `*-diff.png` when comparable) under
 Comparisons are bit-exact (pixelmatch threshold 0); same-platform rendering of
 the fixture is engineered deterministic (see `lib/harness.mjs`). If CI ever
 shows antialiasing flake, loosen deliberately and note it here.
+
+Shots are static page loads: JS-driven states (an open dropdown, scrollspy's
+active TOC item) are never pinned. A migration touching a class that Bootstrap's
+JS selects on (`.dropdown-menu` and kin) must add an interaction shot
+(`page.click` before the screenshot) alongside the swap.

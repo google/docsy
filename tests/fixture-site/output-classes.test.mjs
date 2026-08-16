@@ -2,29 +2,41 @@
 // are ground truth for what the theme emits, with no template semantics to
 // re-model (the divergence-hardening history of ../framework-classes.test.mjs).
 // Blind spot: branches the fixture doesn't exercise — the scanner's branch
-// enumeration owns those. Together, a Bootstrap class survives only if its
-// template form is unlexable AND the fixture never renders it.
+// enumeration owns those. Together, a Bootstrap class in a cleared partial
+// survives only if its template form is unlexable AND its rendering falls
+// outside the listed regions' page coverage.
 //
-// CLEARED_REGIONS mirrors the scanner's CLEARED_PARTIALS: each migration PR
-// adds its partial's rendered surface here red-first.
+// CLEARED_REGIONS carries the output side of the migration ratchet: every
+// partial in CLEARED_PARTIALS must map to a region here (or a documented
+// OUTPUT_EXEMPT reason), so scanner-invisible forms can't ship unchecked.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { bootstrapClasses, bootstrapCss } from '../lib/bootstrap-inventory.mjs';
+import { CLEARED_PARTIALS } from '../lib/cleared-partials.mjs';
 import { buildFixture } from './lib/markup-goldens.mjs';
 
-// name → label; page → public HTML file; re → the rendered region owned by
-// the cleared partial.
+// name → label; partial → the CLEARED_PARTIALS entry this region covers;
+// re → the rendered region (global regex: every instance on every listed
+// page is checked); pages → every fixture page kind the partial renders on.
 const CLEARED_REGIONS = [];
 
-// The theme emits double-quoted attributes (verified over the built site).
-const classAttrRe = /\bclass\s*=\s*"([^"]*)"/g;
+// partial → why the fixture cannot render it (config-gated, error-path…).
+// An entry here is reviewed debt: the scanner and review are its only nets.
+const OUTPUT_EXEMPT = {};
+
+// Extraction is deliberately wider than the theme's emitted style (verified
+// double-quoted lowercase): quote/case drift in a migration PR must not
+// silently blind the net. data-class="…" over-matches; that direction is
+// loud, not silent.
+const classAttrRe = /\bclass\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
+const classAttrAttemptRe = /\bclass\s*=/gi;
 export function htmlClasses(html) {
   const out = new Set();
   for (const m of html.matchAll(classAttrRe)) {
-    for (const c of m[1].split(/\s+/)) if (c) out.add(c);
+    for (const c of (m[1] ?? m[2] ?? m[3]).split(/\s+/)) if (c) out.add(c);
   }
   return out;
 }
@@ -36,16 +48,33 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
   // Extraction self-test: a broken extractor plus an empty cleared list
   // would otherwise stay green forever.
   assert.deepEqual(
-    [...htmlClasses('<nav class="td-x d-flex"><a class="active">x</a></nav>')],
-    ['td-x', 'd-flex', 'active'],
-    'class extraction sees every attribute',
+    [
+      ...htmlClasses(
+        `<nav class="td-x d-flex"><a CLASS='active'>x</a><i class=mb-4></i></nav>`,
+      ),
+    ],
+    ['td-x', 'd-flex', 'active', 'mb-4'],
+    'class extraction sees every attribute form',
   );
+
+  // Cross-net ratchet: the scanner freeze dispositions scanner-invisible
+  // forms to this net, which only holds if clearing a partial forces
+  // output coverage.
+  const covered = new Set(CLEARED_REGIONS.map((r) => r.partial));
+  for (const p of CLEARED_PARTIALS) {
+    assert.ok(
+      covered.has(p) || OUTPUT_EXEMPT[p],
+      `cleared partial ${p} has an output region or a documented exemption`,
+    );
+  }
 
   const build = buildFixture('output-classes');
 
   // Site-wide census: the fixture is Bootstrap-styled today, so a net that
   // finds nothing is broken, not a finished migration. When the theme is
   // fully cleared, flip this anchor into its positive assertion (zero).
+  // The attempt count pins the extraction invariant: every class= the
+  // theme emits, in any quoting style, must parse.
   let pages = 0;
   const found = new Set();
   const walk = (dir) => {
@@ -54,7 +83,13 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
       if (e.isDirectory()) walk(p);
       else if (e.name.endsWith('.html')) {
         pages += 1;
-        for (const c of htmlClasses(fs.readFileSync(p, 'utf8'))) {
+        const html = fs.readFileSync(p, 'utf8');
+        assert.equal(
+          [...html.matchAll(classAttrRe)].length,
+          [...html.matchAll(classAttrAttemptRe)].length,
+          `every class attribute in ${e.name} parses`,
+        );
+        for (const c of htmlClasses(html)) {
           if (inventory.has(c)) found.add(c);
         }
       }
@@ -64,16 +99,24 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
   assert.ok(pages >= 8, 'the fixture rendered its pages');
   assert.ok(found.size > 0, 'the census sees pre-migration Bootstrap classes');
 
-  for (const { name, page, re } of CLEARED_REGIONS) {
-    const m = build.publicFile(page).match(re);
-    assert.ok(m, `cleared region ${name} is present in ${page}`);
-    const offenders = [...htmlClasses(m[0])]
-      .filter((c) => inventory.has(c))
-      .sort();
-    assert.deepEqual(
-      offenders,
-      [],
-      `cleared region ${name} renders no Bootstrap classes`,
-    );
+  for (const { name, re, pages: regionPages } of CLEARED_REGIONS) {
+    assert.ok(regionPages.length > 0, `cleared region ${name} lists pages`);
+    for (const page of regionPages) {
+      const instances = [...build.publicFile(page).matchAll(re)];
+      assert.ok(
+        instances.length > 0,
+        `cleared region ${name} is present in ${page}`,
+      );
+      for (const m of instances) {
+        const offenders = [...htmlClasses(m[0])]
+          .filter((c) => inventory.has(c))
+          .sort();
+        assert.deepEqual(
+          offenders,
+          [],
+          `cleared region ${name} in ${page} renders no Bootstrap classes`,
+        );
+      }
+    }
   }
 });
