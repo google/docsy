@@ -62,9 +62,14 @@ try {
   if (actuals.length === 0) {
     throw new Error('artifact contains no *-actual.png shots');
   }
-  mkdirSync(goldenDir, { recursive: true });
   for (const f of actuals) {
-    const golden = path.join(goldenDir, f.replace(/-actual\.png$/, '.png'));
+    // Shot name REGION-VIEWPORT-SCHEME maps to golden path
+    // REGION/VIEWPORT-SCHEME.png; the viewport-scheme tail is the fixed
+    // vocabulary, the region prefix may itself contain hyphens.
+    const m = f.match(/^(.+)-(desktop|mobile)-(light|dark)-actual\.png$/);
+    if (!m) throw new Error(`unrecognized artifact shot name: ${f}`);
+    const golden = path.join(goldenDir, m[1], `${m[2]}-${m[3]}.png`);
+    mkdirSync(path.dirname(golden), { recursive: true });
     copyFileSync(path.join(tmp, f), golden);
     console.log(`wrote ${path.relative(process.cwd(), golden)}`);
   }

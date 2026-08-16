@@ -19,8 +19,8 @@ pin what the reader sees. Two kinds of shot:
 
 `npm run install:browser` (once), then `npm run test:visual`.
 
-Rendering differs across OSs, so goldens are keyed by platform under
-`goldens/<platform>/`:
+Rendering differs across OSs, so goldens are keyed by platform, one subfolder
+per region, under `goldens/<platform>/<region>/`:
 
 - **`linux/` is authoritative** — it's what CI enforces (the `visual` job). A
   missing or incomplete set **fails** on Linux/CI rather than skipping.

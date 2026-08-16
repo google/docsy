@@ -67,6 +67,9 @@ const shots = regions.flatMap((region) =>
   Object.entries(viewports).flatMap(([viewportName, viewport]) =>
     ['light', 'dark'].map((scheme) => ({
       name: `${region.name}-${viewportName}-${scheme}`,
+      // Golden path: one subfolder per region, so the set stays browsable
+      // as the migration adds regions.
+      rel: path.join(region.name, `${viewportName}-${scheme}.png`),
       region,
       viewport,
       scheme,
@@ -108,7 +111,7 @@ after(async () => {
   }
 });
 
-for (const { name, region, viewport, scheme } of shots) {
+for (const { name, rel, region, viewport, scheme } of shots) {
   test(
     `visual golden: ${name}`,
     {
@@ -123,19 +126,14 @@ for (const { name, region, viewport, scheme } of shots) {
         viewport,
         scheme,
       });
+      const file = path.join(goldenDir, rel);
       if (update) {
-        mkdirSync(goldenDir, { recursive: true });
-        const file = path.join(goldenDir, `${name}.png`);
+        mkdirSync(path.dirname(file), { recursive: true });
         writeFileSync(file, PNG.sync.write(actual));
         console.log(`wrote ${path.relative(process.cwd(), file)}`);
         return;
       }
-      const failure = compareToGolden(
-        name,
-        actual,
-        path.join(goldenDir, `${name}.png`),
-        outDir,
-      );
+      const failure = compareToGolden(name, actual, file, outDir);
       compared += 1;
       assert.equal(failure, null, `${name} matches its golden`);
     },
@@ -151,8 +149,8 @@ test(
   () => {
     assert.ok(shots.length > 0, 'shot list is non-empty');
     if (update) return;
-    const tracked = shots.map(({ name }) => `${name}.png`).sort();
-    const committed = readdirSync(goldenDir)
+    const tracked = shots.map(({ rel }) => rel).sort();
+    const committed = readdirSync(goldenDir, { recursive: true })
       .filter((f) => f.endsWith('.png'))
       .sort();
     assert.deepEqual(
