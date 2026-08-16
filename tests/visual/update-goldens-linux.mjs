@@ -1,6 +1,6 @@
 // Refresh tests/visual/goldens/linux/ from CI: downloads the visual-diffs
-// artifact of the current branch's latest test-workflow run (the visual job
-// uploads it when it fails) and installs the actual shots as the Linux
+// artifact of the current HEAD's completed test-workflow run (the visual
+// job uploads it when it fails) and installs the actual shots as the Linux
 // goldens. One-command refresh for devs without a Linux machine; requires
 // the GitHub CLI (gh) to be authenticated.
 // Run via: npm run update:visual-goldens:linux
@@ -32,31 +32,67 @@ function run(cmd, args) {
 }
 
 const branch = run('git', ['branch', '--show-current']);
-// failure only: a green run has no artifact, an in-progress run's artifact
-// set is racy; a partial artifact (crashed suite) surfaces on the next
-// compare run (stale shots mismatch).
-const runId = run('gh', [
-  'run',
-  'list',
-  '--workflow',
-  'test',
-  '--branch',
-  branch,
-  '--status',
-  'failure',
-  '--limit',
-  '1',
-  '--json',
-  'databaseId',
-  '--jq',
-  '.[0].databaseId',
-]);
-if (!runId) throw new Error(`no test-workflow run found for branch ${branch}`);
-console.log(`downloading visual-diffs from run ${runId} (branch ${branch})`);
+const headSha = run('git', ['rev-parse', 'HEAD']);
+
+// PR workflows run in the base repository, not the fork a contributor
+// clone points at — and gh's repo autodetection needs an interactive
+// `gh repo set-default` in multi-remote clones. Derive the repo from the
+// remotes instead (fork model: upstream is the base; direct clones have
+// origin only).
+const remoteUrl = (name) => {
+  const r = spawnSync('git', ['remote', 'get-url', name], {
+    encoding: 'utf8',
+  });
+  return r.status === 0 ? r.stdout.trim() : undefined;
+};
+const baseUrl = remoteUrl('upstream') ?? remoteUrl('origin');
+const repoMatch = baseUrl?.match(/github\.com[/:]([^/]+\/[^/.]+)/);
+if (!repoMatch) throw new Error(`no GitHub base repo found in ${baseUrl}`);
+const repo = repoMatch[1];
+
+// The run must belong to the current HEAD and be completed: the branch's
+// latest failed run may predate an in-flight push, and installing its
+// artifact would silently baseline stale shots. A green HEAD run fails
+// below at download (no visual-diffs artifact) — also loud.
+const runs = JSON.parse(
+  run('gh', [
+    'run',
+    'list',
+    '--repo',
+    repo,
+    '--workflow',
+    'test',
+    '--branch',
+    branch,
+    '--limit',
+    '20',
+    '--json',
+    'databaseId,headSha,status',
+  ]),
+);
+const headRun = runs.find((r) => r.headSha === headSha);
+if (!headRun) {
+  throw new Error(`no ${repo} test run found for HEAD ${headSha}`);
+}
+if (headRun.status !== 'completed') {
+  throw new Error(`test run for HEAD is ${headRun.status}; wait for it`);
+}
+const runId = String(headRun.databaseId);
+console.log(`downloading visual-diffs from ${repo} run ${runId}`);
 
 const tmp = mkdtempSync(path.join(os.tmpdir(), 'visual-diffs-'));
 try {
-  run('gh', ['run', 'download', runId, '-n', 'visual-diffs', '-D', tmp]);
+  run('gh', [
+    'run',
+    'download',
+    runId,
+    '--repo',
+    repo,
+    '-n',
+    'visual-diffs',
+    '-D',
+    tmp,
+  ]);
   const actuals = readdirSync(tmp).filter((f) => f.endsWith('-actual.png'));
   if (actuals.length === 0) {
     throw new Error('artifact contains no *-actual.png shots');
