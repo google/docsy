@@ -2,22 +2,21 @@
 
 Pixel-compares screenshots of the fixture site (see
 `../fixture-site/lib/markup-goldens.mjs`) against committed goldens, per region
-× viewport (desktop, mobile) × color scheme (light, dark). The fixture is
-**built fresh from the checked-out theme on every run** (goldens are generated
-snapshots, not hand-written mocks — see `../fixture-site/README.md`), so goldens
-can't silently drift from real theme output. Part of the semantic-classes
-migration's check harness: the markup goldens pin what the templates emit; these
-pin what the reader sees. Two kinds of shot:
+× viewport (desktop, mobile) × color scheme (light, dark). The goldens are
+generated snapshots, not hand-written mocks (see `../fixture-site/README.md`).
+Part of the semantic-classes migration's check harness: the markup goldens pin
+what the templates emit; these pin what the reader sees. Two kinds of shot:
 
 - **region crops** — the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
-- a **full-page shot** (not viewport-clipped: the footer sits below the fold on
-  short fixture pages) — the coarse safety net for whatever the tracked regions
+- a **full-page shot** — the coarse safety net for whatever the tracked regions
   don't cover.
 
 ## Running
 
-`npm run install:browser` (once), then `npm run test:visual`.
+`npm run install:browser` (once), then `npm run test:visual`. In CI, the
+`visual` job runs this suite apart from the OS build matrix: it needs a browser
+install and only Linux is enforced.
 
 Rendering differs across OSs, so goldens are keyed by platform, one subfolder
 per region, under `goldens/<platform>/<region>/`:
@@ -42,9 +41,6 @@ per region, under `goldens/<platform>/<region>/`:
 Failures write `*-actual.png` and `*-diff.png` under `tmp/visual/` (CI uploads
 them as the `visual-diffs` artifact).
 
-Comparisons are bit-exact (zero differing pixels at pixelmatch threshold 0).
-Same-platform rendering of the fixture is deterministic: off-origin requests
-(remote fonts, third-party assets) are blocked — the theme's same-origin
-webfonts do load, and screenshot capture awaits them — and animations are
-disabled at capture time. If CI ever shows antialiasing flake, loosen
-deliberately and note it here.
+Comparisons are bit-exact (pixelmatch threshold 0); same-platform rendering of
+the fixture is engineered deterministic (see `lib/harness.mjs`). If CI ever
+shows antialiasing flake, loosen deliberately and note it here.

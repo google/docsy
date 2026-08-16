@@ -4,9 +4,7 @@
 // markup goldens can't see: a class swap whose styles fail to follow shows
 // up here as a pixel diff while the markup diff stays clean.
 //
-// Goldens are keyed by process.platform: rendering differs across OSs, so
-// each platform compares against its own goldens; CI (linux) is the
-// authoritative set. Refresh: npm run update:visual-goldens.
+// Platform policy and refresh flows: tests/visual/README.md.
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -30,7 +28,7 @@ const update = !!process.env.UPDATE_VISUAL_GOLDENS;
 // Update mode in CI would write goldens instead of comparing and exit 0 —
 // a silent bypass of the authoritative net. GITHUB_ACTIONS is checked
 // because CI is mutable from a workflow step; GITHUB_-prefixed vars are
-// not. Goldens are refreshed locally or via update:visual-goldens:linux.
+// not.
 if (update && (process.env.CI || process.env.GITHUB_ACTIONS)) {
   throw new Error('update mode is refused in CI');
 }
@@ -40,10 +38,8 @@ const viewports = {
   mobile: { width: 375, height: 667 },
 };
 
-// One entry per golden-tracked region; grows with the migration. Padded
-// element crops localize a failure to a region; the selector-less full-page
-// entries are the coarse safety net for everything the crops don't track.
-// The single-crumb variant is display:none (no element box), so the home of
+// One entry per golden-tracked region; grows with the migration. The
+// single-crumb variant is display:none (no element box), so the home of
 // its visual proof is the docs/ page shot.
 const regions = [
   {
@@ -82,8 +78,7 @@ let compared = 0;
 
 // Linux is the authoritative set (CI enforces it): a missing golden dir
 // there must fail loud, not skip — all-skipped exits 0, so the skip path
-// would let a PR delete the goldens and stay green. Other platforms skip;
-// a local uncommitted baseline opts one in: npm run update:visual-goldens.
+// would let a PR delete the goldens and stay green.
 const authoritative =
   process.platform === 'linux' ||
   !!process.env.CI ||
@@ -104,8 +99,8 @@ before(async () => {
 after(async () => {
   await Promise.all([browser?.close(), server?.close()]);
   // Execution guard: filename bijection can't see quarantined (skipped)
-  // shot tests, and an all-skipped run exits 0 — on the authoritative
-  // platform every comparison must actually have run.
+  // shot tests — on the authoritative platform every comparison must
+  // actually have run.
   if (!update && !optedOut && authoritative) {
     assert.equal(compared, shots.length, 'every shot comparison executed');
   }
@@ -141,8 +136,7 @@ for (const { name, rel, region, viewport, scheme } of shots) {
 }
 
 // Structural guard: the golden set mirrors the shot list exactly, so a
-// deleted golden, an emptied region list, or a stale extra file fails loud
-// (all-skipped or zero-registered runs exit 0 otherwise).
+// deleted golden, an emptied region list, or a stale extra file fails loud.
 test(
   'visual goldens: golden files match the shot list',
   { skip: optedOut && 'no local goldens' },

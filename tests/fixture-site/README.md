@@ -3,14 +3,13 @@
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 <!-- cSpell:ignore ccr doctree footgun greppable pagelinks -->
 
-Tests in this directory build a **real Hugo site against the checked-out theme**
+Tests in this directory build a real Hugo site against the checked-out theme
 (`lib/build-site.mjs`) and assert over its rendered output. Only the site
 _inputs_ (content pages, config) are synthetic; every golden under `goldens/` is
-**theme-generated** — written by that build (`npm run update:markup-goldens`)
-and re-compared against a **fresh build on every test run**, so a committed
-golden cannot silently drift from what the theme actually generates: divergence
-is a red test, and the refreshed golden's diff is the review artifact. The same
-fixture feeds the visual suite (`../visual/`).
+theme-generated — written by `npm run update:markup-goldens` and re-compared
+against a fresh build on every test run: divergence is a red test, and the
+refreshed golden's diff is the review artifact. The same fixture feeds the
+visual suite (`../visual/`).
 
 ## CCR case registry
 

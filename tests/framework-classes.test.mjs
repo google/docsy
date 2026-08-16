@@ -36,7 +36,7 @@ const bootstrapCss = path.join(
 // paths ("theme-toggler" → _partials/theme-toggler.html). A cleared
 // partial's rendered output includes its children's, so the no-framework
 // guarantee holds only over this closure. Dynamic partial names are
-// invisible here — review's job, like computed class attributes.
+// invisible here (review's job).
 export function partialCalls(template) {
   const calls = new Set();
   for (const m of template.matchAll(
@@ -61,25 +61,15 @@ export function bootstrapClasses(css) {
   return classes;
 }
 
-// Class tokens a template may emit from its class attributes. Attributes
-// are lexed action-aware (quotes inside {{…}} can't truncate the scan),
-// if/with/range…else…end structures become branch alternatives, and the
-// attribute's rendered variants are enumerated (capped — an over-cap
-// attribute throws, failing closed rather than under-scanning). Inside an
-// action, quoted literals are added as tokens; printf-style formats have
-// their verbs (indexed, flagged, width/precision included) substituted by
-// enumeration over the action's literals — unresolved verbs stay in the
-// token and isClassFragment pattern-matches them — and delimiter-literal
-// joins are tried ("-" and "" when the delimiter is dynamic). On top of
-// per-form handling, the attribute's whole literal pool is composed
-// (ordered pairs and triples, joined by its delimiter literals plus "-"
-// and ""): an over-approximation covering any value flow that rearranges
-// quoted literals — range/with dot output, nested joins, cross-action
-// assembly — without modeling each pipeline. Strict by design: a literal
-// that merely collides with a class name is a loud false positive, not a
-// silent miss. A lint over these forms, not a boundary: fully computed
-// attributes (class={{ $c }}) and flows that transform literal text are
-// review's job.
+// Class tokens a template may emit from its class attributes: an
+// over-approximation of every rendered variant assembled from the
+// attribute's quoted literals — branch alternatives, printf-verb
+// enumeration, delimiter joins, and whole-pool composition (mechanics
+// beside each step below). Over-cap attributes throw: fail closed, never
+// under-scan. Strict by design: a literal that merely collides with a
+// class name is a loud false positive, not a silent miss. A lint over
+// these forms, not a boundary: fully computed attributes (class={{ $c }})
+// and flows that transform literal text are review's job.
 const VARIANT_CAP = 1024;
 const FMT_CAP = 4096;
 const POOL_CAP = 12;
@@ -276,8 +266,7 @@ export function classTokens(template) {
 // ends with, or a printf format (d-%s-none) whose placeholder pattern
 // matches an inventory name. Anchoring on the inventory keeps Docsy-own
 // dynamic classes (ul-{{ $n }}, td-{{ .Kind }}) clean. Whole-name evasion
-// via replace/printf composition of complete names stays review's job,
-// like fully computed attributes.
+// via replace/printf composition of complete names stays review's job.
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 export function isClassFragment(token, inventory) {
   if (verbRe.test(token)) {
@@ -337,7 +326,7 @@ test('framework-class check: cleared partials emit no Bootstrap classes', () => 
 // Self-test: prove the scanner's signal on synthetic templates, so an empty
 // cleared list can't hide a broken scanner (false-green guard). The nested-
 // quote and action-literal cases are real Hugo forms that defeated a naive
-// attribute regex (adversarial review, 2026-08-15).
+// attribute regex.
 test('framework-class check: scanner flags Bootstrap classes', () => {
   const inventory = bootstrapClasses(fs.readFileSync(bootstrapCss, 'utf8'));
   for (const known of ['d-flex', 'breadcrumb', 'active', 'mb-4']) {
@@ -379,10 +368,8 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     'cond-built class list is flagged',
   );
 
-  // Class-name fragments (concat assembly: print "d-" "flex",
-  // d-{{ .Bp }}-none) defeat token matching; a fragment counts only when it
-  // can complete to an inventory name, so Docsy-own dynamic classes
-  // (ul-{{ $n }}) stay clean.
+  // Fragments are flagged only when completable to an inventory name
+  // (contract: isClassFragment).
   assert.deepEqual(
     classFragments('<div class="{{ print "d-" "flex" }}">'),
     ['d-'],
@@ -403,8 +390,8 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ['d-%s-none'],
     'printf placeholder form is flagged',
   );
-  // Literal assembly through printf args and delimiter expressions
-  // (adversarial round 4): the assembled name must surface as an offender.
+  // Literal assembly through printf args and delimiter expressions: the
+  // assembled name must surface as an offender.
   assert.deepEqual(
     offenders('<div class="{{ printf "%s%s%s" "d" "-" "flex" }}">'),
     ['d-flex'],
@@ -449,8 +436,8 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ['d-flex'],
     'conditional-delimiter join is flagged',
   );
-  // r5: assembly through indexed/flagged verbs, surplus args, and
-  // cross-action branch text.
+  // Assembly through indexed/flagged verbs, surplus args, and cross-action
+  // branch text.
   assert.deepEqual(
     offenders('<div class="{{ printf "%[1]s-%s" "d" "flex" }}">'),
     ['d-flex'],
@@ -480,9 +467,8 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ['d-flex'],
     'conditional-format printf is flagged',
   );
-  // r6: literal value flow — dot-bound range/with output, nested joins,
-  // and cross-action composition. The scanner composes the attribute's
-  // literal pool rather than modeling each pipeline.
+  // Literal value flow: dot-bound range/with output, nested joins,
+  // cross-action composition.
   assert.deepEqual(
     offenders(
       '<div class="{{ range (slice "d" "-" "flex") }}{{ . }}{{ end }}">',
@@ -518,7 +504,7 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     ['d-flex'],
     'cross-action print assembly is flagged',
   );
-  // Unbounded assembly fails closed rather than silently under-scanning.
+  // Over-cap attributes throw.
   assert.throws(
     () =>
       classTokens(

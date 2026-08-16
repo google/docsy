@@ -2,8 +2,8 @@
 // locks, .npmrc, Netlify config, and workflows alone, that the hardening
 // invariants (#2700, #2702, #2712) still hold, so future integrity claims
 // regenerate from this test instead of ad hoc audit runs. Fast and
-// offline. Companion guards: tests/runner-lint.test.mjs (sanctioned
-// runner forms in scripts) and tests/test-wiring.test.mjs (suite wiring).
+// offline. Companion guards: the pinned list in
+// scripts/suite-anchor.test.mjs.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';

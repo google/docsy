@@ -94,10 +94,8 @@ export async function launchBrowser() {
 // bounding box padded by `pad` CSS px (margins and neighbor spacing are
 // outside the border box, so an unpadded element shot can't see them), or
 // the full page when no selector is given (full, not viewport-clipped:
-// the footer sits below the fold on short fixture pages). Off-origin
-// requests are aborted (no remote fonts or third-party fetches; the
-// theme's same-origin webfonts load and are awaited by the screenshot
-// capture) and animations are disabled before capture.
+// the footer sits below the fold on short fixture pages). The theme's
+// same-origin webfonts load and are awaited by the screenshot capture.
 export async function shootRegion(
   browser,
   { url, selector, viewport, scheme, pad = 24 },
@@ -110,6 +108,7 @@ export async function shootRegion(
     ]);
     await page.setRequestInterception(true);
     const origin = new URL(url).origin;
+    // Off-origin requests abort: deterministic, offline-safe shots.
     page.on('request', (req) =>
       req.url().startsWith(origin) ? req.continue() : req.abort(),
     );

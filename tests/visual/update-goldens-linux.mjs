@@ -34,8 +34,7 @@ function run(cmd, args) {
 const branch = run('git', ['branch', '--show-current']);
 // failure only: a green run has no artifact, an in-progress run's artifact
 // set is racy; a partial artifact (crashed suite) surfaces on the next
-// compare run (stale shots mismatch), so review the refreshed images
-// before committing.
+// compare run (stale shots mismatch).
 const runId = run('gh', [
   'run',
   'list',

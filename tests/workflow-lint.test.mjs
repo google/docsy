@@ -1,9 +1,8 @@
 // Workflow lint: the committed workflows must actually execute the checks
-// they claim to, and must not carry config that subverts them. Sibling of
-// tests/supply-chain-audit.test.mjs, which owns install/provenance
-// invariants over the same files; this file owns check-execution
-// integrity. Both walk the workflow YAML independently: one duplicated
-// walk beats a cross-test-file import (see the audit's own stance).
+// they claim to, unsubverted. Sibling of tests/supply-chain-audit.test.mjs,
+// which owns install/provenance invariants over the same files; this file
+// owns check-execution integrity. Both walk the workflow YAML
+// independently (see the audit's stance on duplicated walks).
 //
 // Current subject: the authoritative visual net (tests/visual/). The
 // in-suite CI refusal can't resist a workflow step that rewrites its own
