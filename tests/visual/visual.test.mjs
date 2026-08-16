@@ -110,6 +110,37 @@ after(async () => {
   }
 });
 
+// Comparator self-test: pixelmatch's default antialiasing detection
+// excludes AA-classified pixels from the count, so a non-identical pair
+// could report a clean match at threshold 0. Pin that a one-pixel,
+// AA-classified difference is a failure (the bit-exact contract).
+test('visual comparator: an antialiasing-classified pixel diff fails', () => {
+  const golden = new PNG({ width: 5, height: 5 });
+  const actual = new PNG({ width: 5, height: 5 });
+  for (let y = 0; y < 5; y += 1) {
+    for (let x = 0; x < 5; x += 1) {
+      const i = (y * 5 + x) * 4;
+      const v = x < 2 ? 0 : x > 2 ? 255 : 128; // gradient flags center as AA
+      for (const png of [golden, actual]) {
+        png.data.fill(v, i, i + 3);
+        png.data[i + 3] = 255;
+      }
+    }
+  }
+  const center = (2 * 5 + 2) * 4;
+  actual.data.fill(96, center, center + 3);
+  // Own scratch dir: outDir is uploaded as the visual-diffs artifact, and
+  // the Linux updater maps its *-actual.png files onto goldens.
+  const scratch = path.resolve(here, '../../tmp/visual-selftest');
+  mkdirSync(scratch, { recursive: true });
+  const goldenFile = path.join(scratch, 'aa-golden.png');
+  writeFileSync(goldenFile, PNG.sync.write(golden));
+  assert.ok(
+    compareToGolden('aa-self-test', actual, goldenFile, scratch),
+    'a one-pixel antialiasing-classified difference is reported',
+  );
+});
+
 for (const { name, rel, region, viewport, scheme } of shots) {
   test(
     `visual golden: ${name}`,

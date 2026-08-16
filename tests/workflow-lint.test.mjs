@@ -89,6 +89,14 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
           !('continue-on-error' in job),
           `${id} job failures fail the workflow`,
         );
+        // A defaults.run.working-directory (workflow- or job-level, or on
+        // a step) would re-point the pinned npm commands at a different
+        // package.json whose scripts can no-op the whole net.
+        assert.ok(!('defaults' in job), `${id} declares no defaults`);
+        assert.ok(
+          !workflow.defaults?.run?.['working-directory'],
+          `${file} sets no workflow-level working directory`,
+        );
         assert.equal(
           job['runs-on'],
           'ubuntu-latest',
@@ -100,11 +108,24 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
             .map(({ run, ...rest }) => ({
               run,
               conditioned: 'if' in rest || 'continue-on-error' in rest,
+              redirected: 'working-directory' in rest || 'shell' in rest,
             })),
           [
-            { run: 'npm run install:safe', conditioned: false },
-            { run: 'npm run install:browser', conditioned: false },
-            { run: 'npm run test:visual', conditioned: false },
+            {
+              run: 'npm run install:safe',
+              conditioned: false,
+              redirected: false,
+            },
+            {
+              run: 'npm run install:browser',
+              conditioned: false,
+              redirected: false,
+            },
+            {
+              run: 'npm run test:visual',
+              conditioned: false,
+              redirected: false,
+            },
           ],
           `${id} runs exactly the reviewed unconditional sequence`,
         );

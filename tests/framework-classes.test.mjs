@@ -32,6 +32,33 @@ const bootstrapCss = path.join(
   'theme/node_modules/bootstrap/dist/css/bootstrap.css',
 );
 
+// Index of the `}}` that closes the action opened at `open` (which points
+// at `{{`), or -1 when unclosed. A `}}` inside a comment or an
+// interpreted, raw, or rune literal does not close the action: treating it
+// as the end would hide whatever follows it from the scan.
+const actionClose = (template, open) => {
+  let i = open + 2;
+  if (/^\s*-?\s*\/\*/.test(template.slice(i, i + 8))) {
+    const close = template.indexOf('*/', i);
+    return close === -1 ? -1 : template.indexOf('}}', close);
+  }
+  for (; i < template.length; i += 1) {
+    const c = template[i];
+    if (c === '"' || c === "'") {
+      i += 1;
+      while (i < template.length && template[i] !== c) {
+        i += template[i] === '\\' ? 2 : 1;
+      }
+    } else if (c === '`') {
+      i = template.indexOf('`', i + 1);
+      if (i === -1) return -1;
+    } else if (c === '}' && template[i + 1] === '}') {
+      return i;
+    }
+  }
+  return -1;
+};
+
 // Static partial calls a template makes, normalized to theme/layouts/
 // paths ("theme-toggler" → _partials/theme-toggler.html; explicit
 // non-.html extensions kept). Calls are recognized anywhere in an action
@@ -44,14 +71,21 @@ const bootstrapCss = path.join(
 // partial names are invisible here (review's job).
 export function partialCalls(template) {
   const calls = new Set();
-  for (const action of template.matchAll(/\{\{(?!\/\*)([\s\S]*?)\}\}/g)) {
-    for (const m of action[1].matchAll(
-      /\b(?:partials\.Include(?:Cached)?|partial(?:Cached)?)\s*\(?\s*(?:"([^"]+)"|`([^`]+)`)/g,
-    )) {
-      const raw = m[1] ?? m[2];
-      const name = /\.[a-z0-9]+$/i.test(raw) ? raw : `${raw}.html`;
-      calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+  let open = template.indexOf('{{');
+  while (open !== -1) {
+    const close = actionClose(template, open);
+    if (close === -1) break;
+    const content = template.slice(open + 2, close);
+    if (!/^\s*-?\s*\/\*/.test(content)) {
+      for (const m of content.matchAll(
+        /\b(?:partials\.Include(?:Cached)?|partial(?:Cached)?)\s*\(?\s*(?:"([^"]+)"|`([^`]+)`)/g,
+      )) {
+        const raw = m[1] ?? m[2];
+        const name = /\.[a-z0-9]+$/i.test(raw) ? raw : `${raw}.html`;
+        calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+      }
     }
+    open = template.indexOf('{{', close + 2);
   }
   return calls;
 }
@@ -102,8 +136,10 @@ export function classTokens(template) {
 
   // append renders its element after the collection, maps range in key
   // order: literal order stops matching document order, so the
-  // subsequence composition below would under-scan. Fail closed instead.
-  const orderChangingRe = /\b(append|sort|reverse|shuffle|dict)\b/;
+  // subsequence composition below would under-scan. Fail closed instead,
+  // on the bare aliases and the namespaced collections.* forms alike.
+  const orderChangingRe =
+    /\b(?:collections\.)?(append|sort|reverse|shuffle|dict|dictionary)\b/i;
   const guardedLiterals = (content) => {
     const lits = actionLiterals(content);
     if (lits.length >= 2 && orderChangingRe.test(content)) {
@@ -163,7 +199,7 @@ export function classTokens(template) {
     let buf = '';
     while (i < template.length && template[i] !== quote) {
       if (template.startsWith('{{', i)) {
-        const end = template.indexOf('}}', i + 2);
+        const end = actionClose(template, i);
         if (end === -1) break;
         if (buf) {
           flat.push({ text: buf });
@@ -488,6 +524,18 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     [],
     'comments and plain text are not partial calls',
   );
+  // Go-template strings can contain `}}`: it must not end the action early
+  // and hide a call sitting after it.
+  assert.deepEqual(
+    [...partialCalls('{{ (dict "x" "}}") | partial "dirty.html" }}')],
+    ['_partials/dirty.html'],
+    'a }} inside a string literal does not end the action',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ cond .A "}}" "d-flex" }}">'),
+    ['d-flex'],
+    'a }} inside a string literal does not truncate the attribute lex',
+  );
   assert.deepEqual(
     offenders(
       '<div class="{{ delimit (slice "d" "flex") (cond .Compact "-" "_") }}">',
@@ -576,6 +624,14 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
       ),
     /order-changing/,
     'map range in a class action fails closed',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ delimit (collections.Reverse (slice "flex" "d")) "-" }}">',
+      ),
+    /order-changing/,
+    'namespaced Reverse in a class action fails closed',
   );
   assert.deepEqual(
     offenders(

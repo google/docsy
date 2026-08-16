@@ -179,8 +179,10 @@ export function compareToGolden(name, actual, goldenFile, outDir) {
     // Bit-exact: same-platform rendering of the static fixture is
     // deterministic, and a nonzero threshold would swallow real per-pixel
     // color shifts (theme-token regressions drift well under pixelmatch's
-    // default sensitivity).
-    { threshold: 0 },
+    // default sensitivity). includeAA keeps antialiasing-classified pixels
+    // in the count: the default AA detection would pass non-identical
+    // images.
+    { threshold: 0, includeAA: true },
   );
   if (mismatched === 0) return null;
   writeActual();

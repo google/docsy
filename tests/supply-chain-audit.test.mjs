@@ -242,17 +242,33 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   // (executable config files, a package.json "puppeteer" key), which can
   // redirect the browser download or swap the launched executable: the
   // audited install is only as locked as this search surface stays empty.
-  for (const config of [
-    '.puppeteerrc.cjs',
-    '.puppeteerrc.js',
+  // The search-place list is read from the installed loader, so an upgrade
+  // that widens the surface turns this audit red.
+  const loaderSrc = fs.readFileSync(
+    path.join(
+      repoRoot,
+      'node_modules/puppeteer/lib/puppeteer/getConfiguration.js',
+    ),
+    'utf8',
+  );
+  const placesMatch = loaderSrc.match(/searchPlaces:\s*\[([^\]]*)\]/);
+  assert.ok(placesMatch, 'the installed loader declares its search places');
+  const searchPlaces = [...placesMatch[1].matchAll(/'([^']+)'/g)].map(
+    (m) => m[1],
+  );
+  assert.ok(
+    searchPlaces.includes('.config/puppeteerrc') && searchPlaces.length >= 12,
+    'the parsed search-place list is plausibly complete',
+  );
+  for (const config of new Set([
+    ...searchPlaces,
+    // Not searched by this Puppeteer version; pinned anyway (cheap, and
+    // cosmiconfig siblings use them).
     '.puppeteerrc.mjs',
-    '.puppeteerrc.json',
     '.puppeteerrc.yaml',
-    '.puppeteerrc',
-    'puppeteer.config.cjs',
-    'puppeteer.config.js',
     'puppeteer.config.mjs',
-  ]) {
+  ])) {
+    if (config === 'package.json') continue; // its puppeteer key is pinned below
     assert.ok(
       !fs.existsSync(path.join(repoRoot, config)),
       `${config} stays absent, so the browser install runs unconfigured`,
