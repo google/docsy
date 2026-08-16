@@ -59,6 +59,9 @@ const actionClose = (template, open) => {
   return -1;
 };
 
+// Lexed comment-action content (trim markers already stripped).
+const isCommentAction = (action) => /^\/\*[\s\S]*\*\/$/.test(action);
+
 // Static partial calls a template makes, normalized to theme/layouts/
 // paths ("theme-toggler" → _partials/theme-toggler.html; explicit
 // non-.html extensions kept). Calls are recognized anywhere in an action
@@ -115,7 +118,8 @@ export function bootstrapClasses(css) {
 const VARIANT_CAP = 1024;
 const FMT_CAP = 4096;
 const POOL_CAP = 12;
-const verbSrc = '%(?:\\[\\d+\\])?[-+ #0]*\\d*(?:\\.\\d+)?[a-zA-Z]';
+const verbSrc =
+  '%(?:\\[\\d+\\])?[-+ #0]*(?:\\d+|\\*)?(?:\\.(?:\\d+|\\*))?[a-zA-Z]';
 const verbRe = new RegExp(verbSrc);
 const verbReG = () => new RegExp(verbSrc, 'g');
 const capError = () =>
@@ -135,11 +139,12 @@ export function classTokens(template) {
     [...content.matchAll(/"([^"]*)"|`([^`]*)`/g)].map((m) => m[1] ?? m[2]);
 
   // append renders its element after the collection, maps range in key
-  // order: literal order stops matching document order, so the
-  // subsequence composition below would under-scan. Fail closed instead,
-  // on the bare aliases and the namespaced collections.* forms alike.
+  // order, and Scratch/Store sorted maps emit in key order: literal order
+  // stops matching document order, so the subsequence composition below
+  // would under-scan. Fail closed instead, on the bare aliases and the
+  // namespaced collections.* forms alike.
   const orderChangingRe =
-    /\b(?:collections\.)?(append|sort|reverse|shuffle|dict|dictionary)\b/i;
+    /\b(?:collections\.)?(append|sort|reverse|shuffle|dict|dictionary|setinmap|getsortedmapvalues)\b/i;
   const guardedLiterals = (content) => {
     const lits = actionLiterals(content);
     if (lits.length >= 2 && orderChangingRe.test(content)) {
@@ -189,7 +194,9 @@ export function classTokens(template) {
     }
   };
 
-  const attrRe = /(?:^|[<\s"'])class\s*=\s*(["'])/gi;
+  // `}` admits attributes emitted whole from a branch ({{ if .X }}class=…),
+  // where the action's closing braces precede the name.
+  const attrRe = /(?:^|[<\s"'}])class\s*=\s*(["'])/gi;
   let m;
   while ((m = attrRe.exec(template))) {
     const quote = m[1];
@@ -293,7 +300,15 @@ export function classTokens(template) {
       }
       return [nodes, pos];
     };
-    const [nodes] = parse(0);
+    const [nodes, consumed] = parse(0);
+    // A stray else/end at attribute top level means the attribute's
+    // control flow crosses the attribute boundary, and everything after
+    // the stray keyword would be silently dropped. Fail closed instead.
+    if (consumed < flat.length) {
+      throw new Error(
+        'class attribute control flow crosses the attribute boundary; simplify the template or scan it manually',
+      );
+    }
 
     const variants = (list) => {
       let out = [''];
@@ -303,6 +318,11 @@ export function classTokens(template) {
         else if (node.branches) {
           alts = [''];
           for (const b of node.branches) alts = alts.concat(variants(b));
+        } else if (isCommentAction(node.action)) {
+          // Comments render exactly empty: modeling them as a space would
+          // split text they actually fuse (d{{/* … */}}-md-{{/* … */}}none
+          // renders d-md-none).
+          alts = [''];
         } else {
           processAction(node.action);
           alts = [' '];
@@ -343,6 +363,11 @@ export function isClassFragment(token, inventory) {
   }
   if (token.length > 1 && /^-[^-]/.test(token)) {
     for (const name of inventory) if (name.endsWith(token)) return true;
+  }
+  // A middle fragment (hyphenated at both edges, e.g. -md-, -decoration-)
+  // can glue two action-supplied pieces into an inventory name.
+  if (token.length > 2 && /^-.+-$/.test(token)) {
+    for (const name of inventory) if (name.includes(token)) return true;
   }
   return false;
 }
@@ -700,6 +725,41 @@ test('framework-class check: scanner flags Bootstrap classes', () => {
     offenders('<div data-class="d-flex" class="td-x">'),
     [],
     'data-class attribute is not scanned',
+  );
+  assert.deepEqual(
+    offenders('<div {{ if .X }}class="d-flex"{{ end }}>'),
+    ['d-flex'],
+    'a conditionally emitted class attribute is scanned',
+  );
+  assert.throws(
+    () => classTokens('{{ if .A }}<div class="x{{ end }} d-flex">'),
+    /crosses the attribute boundary/,
+    'control flow spanning the attribute boundary fails closed',
+  );
+  assert.deepEqual(
+    offenders('<div class="d{{/* why */}}-md-{{/* why */}}none">'),
+    ['d-md-none'],
+    'comment glue fuses adjacent literal text into the rendered name',
+  );
+  assert.deepEqual(
+    classFragments(
+      '<div class="{{ cond .A "text" "td-x" }}-decoration-{{ cond .B "none" "line-through" }}">',
+    ),
+    ['-decoration-'],
+    'a middle fragment matches inventory names by inclusion',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "d-%.*s" 4 "flexbox" }}">'),
+    ['d-%.*s'],
+    'star-precision printf forms are pattern-checked',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ $s := newScratch }}{{ $s.SetInMap "m" "b" "flex" }}{{ $s.SetInMap "m" "a" "d" }}{{ delimit ($s.GetSortedMapValues "m") "-" }}">',
+      ),
+    /order-changing/,
+    'scratch sorted-map assembly fails closed',
   );
 
   assert.deepEqual(
