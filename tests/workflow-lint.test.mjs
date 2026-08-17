@@ -1,13 +1,14 @@
 // Workflow lint: the committed workflows must actually execute the checks
-// they claim to, unsubverted. Sibling of tests/supply-chain-audit.test.mjs,
-// which owns install/provenance invariants over the same files; this file
-// owns check-execution integrity. Both walk the workflow YAML
-// independently: an independent walk beats cross-test-file coupling.
+// they claim to. Sibling of tests/supply-chain-audit.test.mjs, which owns
+// install/provenance invariants over the same files; this file owns
+// check-execution integrity. Both walk the workflow YAML independently: an
+// independent walk beats cross-test-file coupling.
 //
-// Current subject: the authoritative visual net (tests/visual/). The
-// in-suite CI refusal can't resist a workflow step that rewrites its own
-// environment (CI= GITHUB_ACTIONS= npm run …) or a dropped/if-guarded
-// comparison step, so committed workflows are the right boundary.
+// Current subject: the authoritative visual net (tests/visual/). A lint
+// over careless workflow edits, not a security boundary: it catches the
+// mistakes that would silently weaken the net (an env entry that flips the
+// update refusal, a dropped or condition-gated comparison step, a redirect
+// to the wrong working tree). Deliberate subversion is diff review's job.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -25,7 +26,7 @@ const workflowsDir = path.join(repoRoot, '.github', 'workflows');
 // Env keys that flip or gate the visual suite's update refusal, or steer
 // Puppeteer's browser download/launch (PUPPETEER_* covers executable-path
 // and download-origin overrides): a workflow env entry touching any of
-// them subverts the net.
+// them weakens the net.
 const visualEnvDeny = (key) => {
   const k = key.toUpperCase();
   return (
@@ -40,7 +41,7 @@ const visualEnvDeny = (key) => {
 const updateLaneRe =
   /UPDATE_VISUAL_GOLDENS|update:visual-goldens|\b(?:CI|GITHUB_ACTIONS|PUPPETEER_\w+)=/;
 
-test('workflows: the visual net runs unconditionally and unsubverted', () => {
+test('workflows: the visual net runs unconditionally as reviewed', () => {
   const files = fs.readdirSync(workflowsDir).filter((f) => /\.ya?ml$/.test(f));
   assert.ok(files.length > 0, 'workflow files were found');
 
