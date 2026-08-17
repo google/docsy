@@ -1,37 +1,14 @@
 // Breadcrumb
 
-// Bootstrap's breadcrumb styling mapped onto the td- semantic classes,
-// still consuming the --bs-* customization vars (Docsy-own tokens are the
-// token-inventory increment's job). Vars Bootstrap leaves empty (bg,
-// border-radius, font-size) are consumed but not redefined: unset they
-// compute to the same values, and an ancestor-level override now reaches
-// them.
+// Bootstrap skin: style by @extend. State classes are written out against
+// Bootstrap's public vars (extending a generic state class like .active
+// would splice us into every compound that uses it).
 .td-breadcrumbs__list {
-  --bs-breadcrumb-padding-x: 0;
-  --bs-breadcrumb-padding-y: 0;
-  --bs-breadcrumb-margin-bottom: 1rem;
-  --bs-breadcrumb-divider-color: var(--bs-secondary-color);
-  --bs-breadcrumb-item-padding-x: 0.5rem;
-  --bs-breadcrumb-item-active-color: var(--bs-secondary-color);
-  display: flex;
-  flex-wrap: wrap;
-  padding: var(--bs-breadcrumb-padding-y) var(--bs-breadcrumb-padding-x);
-  margin-bottom: var(--bs-breadcrumb-margin-bottom);
-  font-size: var(--bs-breadcrumb-font-size);
-  list-style: none;
-  background-color: var(--bs-breadcrumb-bg);
-  border-radius: var(--bs-breadcrumb-border-radius);
+  @extend .breadcrumb;
 }
 
-.td-breadcrumbs__item + .td-breadcrumbs__item {
-  padding-left: var(--bs-breadcrumb-item-padding-x);
-
-  &::before {
-    float: left;
-    padding-right: var(--bs-breadcrumb-item-padding-x);
-    color: var(--bs-breadcrumb-divider-color);
-    content: var(--bs-breadcrumb-divider, '/');
-  }
+.td-breadcrumbs__item {
+  @extend .breadcrumb-item;
 }
 
 .td-breadcrumbs__item--active {
