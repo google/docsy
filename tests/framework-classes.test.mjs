@@ -104,8 +104,10 @@ export function partialCalls(template) {
 // beside each step below). Over-cap attributes throw: fail closed, never
 // under-scan. Strict by design: a literal that merely collides with a
 // class name is a loud false positive, not a silent miss. A lint over
-// these forms, not a boundary: fully computed attributes (class={{ $c }})
-// and flows that transform literal text are review's job.
+// these forms, not a boundary: fully computed attributes (class={{ $c }}),
+// unquoted attributes (class=d-flex — the theme emits quoted attributes
+// only, and the output net lexes unquoted forms), and flows that
+// transform literal text are review's job.
 const VARIANT_CAP = 1024;
 const FMT_CAP = 4096;
 const POOL_CAP = 12;

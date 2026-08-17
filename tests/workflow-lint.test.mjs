@@ -172,7 +172,7 @@ test('workflows: the visual net runs unconditionally and unsubverted', () => {
               with: ['name', 'path'],
             },
           ],
-          `${id} runs exactly the reviewed step sequence`,
+          `${id} matches the reviewed step shape (with values stay in-diff review's job)`,
         );
         // The one allowed condition: diffs upload on failure only.
         assert.equal(
