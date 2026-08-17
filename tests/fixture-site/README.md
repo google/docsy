@@ -10,7 +10,7 @@ theme-generated, written by `npm run update:markup-goldens` and re-compared
 against a fresh build on every test run; the refreshed golden's diff is the
 review artifact. The same fixture feeds the visual suite (`../visual/`) and the
 rendered-output framework-class net (`output-classes.test.mjs`; complementarity
-with the template scanner is stated in its header).
+with the literal-token lint is stated in its header).
 
 ## CCR case registry
 
