@@ -1,7 +1,18 @@
-# CCR case registry
+# Fixture-site tests
 
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 <!-- cSpell:ignore ccr doctree footgun greppable pagelinks -->
+
+Tests in this directory build a real Hugo site against the checked-out theme
+(`lib/build-site.mjs`) and assert over its rendered output. Only the site
+_inputs_ (content pages, config) are synthetic; every golden under `goldens/` is
+theme-generated, written by `npm run update:markup-goldens` and re-compared
+against a fresh build on every test run; the refreshed golden's diff is the
+review artifact. The same fixture feeds the visual suite (`../visual/`) and the
+rendered-output framework-class net (`output-classes.test.mjs`; complementarity
+with the template scanner is stated in its header).
+
+## CCR case registry
 
 **Client-side chrome restoration (CCR)** is the mechanism behind Docsy's
 experimental `shared` chrome [build mode][chrome docs]: the build drops the
@@ -42,7 +53,7 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                            | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                | restored | —                                                      |
 
-## Open items
+### Open items
 
 - **CCR-10** (language-link exactness) — _partial._ The prefix-swap is exact
   when translations share slugs and all exist (the common case). When the

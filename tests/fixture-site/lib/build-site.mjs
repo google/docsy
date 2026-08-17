@@ -29,10 +29,15 @@ export const hugoCli = path.join(
   'cli.mjs',
 );
 
-// Fixture sites pin their own theme config; an inherited HUGO_THEME
-// (worktree checkouts) would override it. A function, not a snapshot: late
-// process.env mutations stay visible.
-export const hugoEnv = () => ({ ...process.env, HUGO_THEME: undefined });
+// Fixture sites pin their own config; inherited HUGO_* env (HUGO_THEME
+// from worktree checkouts, HUGO_PARAMS_* from a maintainer shell or a
+// workflow) would silently override what the goldens represent. Tests
+// re-add the overrides they need via buildSite's env option. A function,
+// not a snapshot: late process.env mutations stay visible.
+export const hugoEnv = () =>
+  Object.fromEntries(
+    Object.entries(process.env).filter(([k]) => !/^HUGO/i.test(k)),
+  );
 
 const baseConfig = (
   name,

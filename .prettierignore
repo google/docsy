@@ -13,3 +13,6 @@
 # don't Prettify them:
 /theme/assets/scss/td/_variables_forward.scss
 /theme/assets/scss/td/chroma/**/*
+
+# Golden files mirror generated output byte for byte:
+/tests/fixture-site/goldens/**/*.*

@@ -58,6 +58,7 @@
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "install:safe": "npm ci --omit=optional --ignore-scripts --no-audit --no-fund && npm run _install:safe:post",
     "install:theme-deps": "npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund",
+    "install:browser": "node node_modules/puppeteer/install.mjs",
     "is:clean": "bash -c 'o=$(git status --porcelain -uall); echo \"$o\"; [ -z \"$o\" ]'",
     "post-update": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "postupdate:dep": "npm run -s post-update",
@@ -73,13 +74,17 @@
     "test:repo": "node --test 'tests/*.test.mjs' 'tests/fixture-site/**/*.test.mjs' 'scripts/**/*.test.mjs' 'theme/scripts/**/*.test.mjs'",
     "test:site-equivalence": "node tests/site-equivalence/full-vs-shared.mjs --check",
     "test:smoke": "node tests/smoke.mjs",
+    "test:visual": "node --test 'tests/visual/*.test.mjs'",
     "test:website": "npm run -C docsy.dev test",
     "test": "npm run fix-and-test",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest",
-    "update:goldens": "npm run -C docsy.dev update:goldens",
+    "update:goldens": "npm run -C docsy.dev update:goldens && npm run update:markup-goldens",
+    "update:markup-goldens": "node tests/fixture-site/update-markup-goldens.mjs",
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages:not-hugo": "npm run update:packages -- -x hugo-extended",
     "update:packages": "npm-check-updates -u",
+    "update:visual-goldens": "UPDATE_VISUAL_GOLDENS=1 npm run test:visual",
+    "update:visual-goldens:linux": "node tests/visual/update-goldens-linux.mjs",
     "wt": "HUGO_THEME=$(basename \"$PWD\")/theme npm run",
     "zzz": "echo 'This is just a placeholder that is the last script in this script collection.'"
   },
@@ -89,7 +94,10 @@
     "markdownlint-cli2": "^0.23.2",
     "markdownlint-rule-link-pattern": "github:chalin/markdownlint-rule-link-pattern#v0.2.0",
     "markdownlint-rule-no-shortcut-ref-link": "github:chalin/markdownlint-rule-no-shortcut-ref-link#v0.3.1",
+    "pixelmatch": "7.2.0",
+    "pngjs": "7.0.0",
     "prettier": "^3.9.3",
+    "puppeteer": "25.5.0",
     "yaml": "^2.9.0"
   },
   "engines": {
@@ -98,6 +106,7 @@
   },
   "spelling": "cSpell:ignore -",
   "allowScripts": {
-    "hugo-extended@0.164.0": true
+    "hugo-extended@0.164.0": true,
+    "puppeteer@25.5.0": false
   }
 }

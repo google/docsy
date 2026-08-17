@@ -2,8 +2,8 @@
 // locks, .npmrc, Netlify config, and workflows alone, that the hardening
 // invariants (#2700, #2702, #2712) still hold, so future integrity claims
 // regenerate from this test instead of ad hoc audit runs. Fast and
-// offline. Companion guards: tests/runner-lint.test.mjs (sanctioned
-// runner forms in scripts) and tests/test-wiring.test.mjs (suite wiring).
+// offline. Companion guards: the pinned list in
+// scripts/suite-anchor.test.mjs.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -149,20 +149,28 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   }
   assert.deepEqual(
     withInstallScript,
-    ['package-lock.json node_modules/hugo-extended'],
-    'hugo-extended is the only locked package with an install script',
+    [
+      'package-lock.json node_modules/hugo-extended',
+      'package-lock.json node_modules/puppeteer',
+    ],
+    'hugo-extended and puppeteer are the only locked packages with install scripts',
   );
 
-  // The allowScripts entry is version-pinned, so it must track the locked
-  // version: a stale pin fails npm ci under strict-allow-scripts, and this
-  // assertion names the fix in the bump PR itself (#2712).
-  const hugoVersion =
-    locks['package-lock.json'].packages['node_modules/hugo-extended'].version;
+  // The allowScripts entries are version-pinned, so they must track the
+  // locked versions: a stale pin fails npm ci under strict-allow-scripts,
+  // and this assertion names the fix in the bump PR itself (#2712).
+  // puppeteer's postinstall (browser download) is deliberately denied:
+  // the visual suite installs its browser on demand (install:browser).
+  const lockedVersion = (name) =>
+    locks['package-lock.json'].packages[`node_modules/${name}`].version;
   const { allowScripts } = readJSON('package.json');
   assert.deepEqual(
     allowScripts,
-    { [`hugo-extended@${hugoVersion}`]: true },
-    'allowScripts allows exactly the locked hugo-extended version',
+    {
+      [`hugo-extended@${lockedVersion('hugo-extended')}`]: true,
+      [`puppeteer@${lockedVersion('puppeteer')}`]: false,
+    },
+    'allowScripts covers exactly the locked install-script packages',
   );
 
   // npm takes a key's last assignment, so spot-checks can be reversed by
@@ -225,6 +233,57 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
     'the post-install step uses the retrying Hugo rebuild helper',
   );
+  assert.equal(
+    scripts['install:browser'],
+    'node node_modules/puppeteer/install.mjs',
+    'install:browser invokes the locked dependency entry point directly',
+  );
+  // That entry point loads Puppeteer configuration from the project
+  // (executable config files, a package.json "puppeteer" key), which can
+  // redirect the browser download or swap the launched executable: the
+  // audited install is only as locked as this search surface stays empty.
+  // The search-place list is read from the installed loader, so an upgrade
+  // that widens the surface turns this audit red.
+  const loaderSrc = fs.readFileSync(
+    path.join(
+      repoRoot,
+      'node_modules/puppeteer/lib/puppeteer/getConfiguration.js',
+    ),
+    'utf8',
+  );
+  const placesMatch = loaderSrc.match(/searchPlaces:\s*\[([^\]]*)\]/);
+  assert.ok(placesMatch, 'the installed loader declares its search places');
+  const searchPlaces = [...placesMatch[1].matchAll(/'([^']+)'/g)].map(
+    (m) => m[1],
+  );
+  assert.ok(
+    searchPlaces.includes('.config/puppeteerrc') && searchPlaces.length >= 12,
+    'the parsed search-place list is plausibly complete',
+  );
+  for (const config of new Set([
+    ...searchPlaces,
+    // Not searched by this Puppeteer version; pinned anyway (cheap, and
+    // cosmiconfig siblings use them).
+    '.puppeteerrc.mjs',
+    '.puppeteerrc.yaml',
+    'puppeteer.config.mjs',
+  ])) {
+    if (config === 'package.json') continue; // its puppeteer key is pinned below
+    assert.ok(
+      !fs.existsSync(path.join(repoRoot, config)),
+      `${config} stays absent, so the browser install runs unconfigured`,
+    );
+  }
+  for (const manifest of ['package.json', 'theme', 'docsy.dev']) {
+    const file = manifest.endsWith('.json')
+      ? manifest
+      : `${manifest}/package.json`;
+    assert.equal(
+      readJSON(file).puppeteer,
+      undefined,
+      `${file} carries no puppeteer configuration key`,
+    );
+  }
   // Cross-root anchoring: this file and the wiring guard ride the tests
   // glob, so scripts/suite-anchor.test.mjs pins that glob and the
   // tests-root guards from the scripts glob; anchor it and the wiring
@@ -244,6 +303,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'install:safe',
     'install:theme-deps',
     '_install:safe:post',
+    'install:browser',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(

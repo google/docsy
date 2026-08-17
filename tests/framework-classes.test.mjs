@@ -1,0 +1,769 @@
+// Framework-class check for the semantic-classes migration
+// (google/docsy#783): chrome partials listed in CLEARED_PARTIALS emit only
+// Docsy-owned (td-) class names, never Bootstrap ones. The list grows
+// partial by partial as the migration lands; a partial is added in the same
+// PR that swaps its classes, red first, driven green by the swap.
+//
+// The Bootstrap inventory is derived from the dependency's own compiled CSS,
+// so it tracks the installed Bootstrap version instead of a hand-kept list.
+//
+// Hardening frozen (2026-08-16, owner call): the rendered-output net
+// (fixture-site/output-classes.test.mjs) is ground truth for every branch
+// the fixture exercises, so new lexer-evasion findings are dispositioned as
+// covered there rather than re-modeled here. This scanner's enduring job is
+// what output can't do: enumerate unexercised branches, failing closed.
+// Known scanner-invisible form for migration reviewers: class strings
+// hoisted into assignments outside a class attribute
+// ({{ $c := "…" }} … class="{{ $c }}"), live today in e.g.
+// _markup/render-blockquote-alert.html.
+
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { bootstrapClasses, bootstrapCss } from './lib/bootstrap-inventory.mjs';
+import { CLEARED_PARTIALS } from './lib/cleared-partials.mjs';
+
+const repoRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+);
+
+// Cleared partials whose statically-called children are knowingly not yet
+// cleared (visible migration staging), child paths per parent. An entry
+// here is a debt marker: the parent's rendered output still carries the
+// child's framework classes.
+const PENDING_CHILDREN = {};
+
+// Index of the `}}` that closes the action opened at `open` (which points
+// at `{{`), or -1 when unclosed. A `}}` inside a comment or an
+// interpreted, raw, or rune literal does not close the action: treating it
+// as the end would hide whatever follows it from the scan.
+const actionClose = (template, open) => {
+  let i = open + 2;
+  if (/^\s*-?\s*\/\*/.test(template.slice(i, i + 8))) {
+    const close = template.indexOf('*/', i);
+    return close === -1 ? -1 : template.indexOf('}}', close);
+  }
+  for (; i < template.length; i += 1) {
+    const c = template[i];
+    if (c === '"' || c === "'") {
+      i += 1;
+      while (i < template.length && template[i] !== c) {
+        i += template[i] === '\\' ? 2 : 1;
+      }
+    } else if (c === '`') {
+      i = template.indexOf('`', i + 1);
+      if (i === -1) return -1;
+    } else if (c === '}' && template[i + 1] === '}') {
+      return i;
+    }
+  }
+  return -1;
+};
+
+// Lexed comment-action content (trim markers already stripped).
+const isCommentAction = (action) => /^\/\*[\s\S]*\*\/$/.test(action);
+
+// Static partial calls a template makes, normalized to theme/layouts/
+// paths ("theme-toggler" → _partials/theme-toggler.html; explicit
+// non-.html extensions kept). Calls are recognized anywhere in an action
+// (assignment, with/if expressions, namespaced partials.Include forms,
+// parenthesized literal names), in interpreted or raw strings. Only real
+// actions are scanned:
+// template comments and plain text can name partials without calling
+// them. A cleared partial's rendered output includes its children's, so
+// the no-framework guarantee holds only over this closure. Dynamic
+// partial names are invisible here (review's job).
+export function partialCalls(template) {
+  const calls = new Set();
+  let open = template.indexOf('{{');
+  while (open !== -1) {
+    const close = actionClose(template, open);
+    if (close === -1) break;
+    const content = template.slice(open + 2, close);
+    if (!/^\s*-?\s*\/\*/.test(content)) {
+      for (const m of content.matchAll(
+        /\b(?:partials\.Include(?:Cached)?|partial(?:Cached)?)\s*\(?\s*(?:"([^"]+)"|`([^`]+)`)/g,
+      )) {
+        const raw = m[1] ?? m[2];
+        const name = /\.[a-z0-9]+$/i.test(raw) ? raw : `${raw}.html`;
+        calls.add(`_partials/${name.replace(/^_?partials\//, '')}`);
+      }
+    }
+    open = template.indexOf('{{', close + 2);
+  }
+  return calls;
+}
+
+// Class tokens a template may emit from its class attributes: an
+// over-approximation of every rendered variant assembled from the
+// attribute's quoted literals (branch alternatives, printf-verb
+// enumeration, delimiter joins, and whole-pool composition; mechanics
+// beside each step below). Over-cap attributes throw: fail closed, never
+// under-scan. Strict by design: a literal that merely collides with a
+// class name is a loud false positive, not a silent miss. A lint over
+// these forms, not a boundary: fully computed attributes (class={{ $c }}),
+// unquoted attributes (class=d-flex — the theme emits quoted attributes
+// only, and the output net lexes unquoted forms), and flows that
+// transform literal text are review's job.
+const VARIANT_CAP = 1024;
+const FMT_CAP = 4096;
+const POOL_CAP = 12;
+const verbSrc =
+  '%(?:\\[\\d+\\])?[-+ #0]*(?:\\d+|\\*)?(?:\\.(?:\\d+|\\*))?[a-zA-Z]';
+const verbRe = new RegExp(verbSrc);
+const verbReG = () => new RegExp(verbSrc, 'g');
+const capError = () =>
+  new Error(
+    'class attribute exceeds the variant enumeration cap; simplify the template or scan it manually',
+  );
+
+export function classTokens(template) {
+  const tokens = new Set();
+  const add = (text) => {
+    for (const token of text.split(/\s+/)) {
+      if (token) tokens.add(token);
+    }
+  };
+
+  const actionLiterals = (content) =>
+    [...content.matchAll(/"([^"]*)"|`([^`]*)`/g)].map((m) => m[1] ?? m[2]);
+
+  // append renders its element after the collection, maps range in key
+  // order, and Scratch/Store sorted maps emit in key order: literal order
+  // stops matching document order, so the subsequence composition below
+  // would under-scan. Fail closed instead, on the bare aliases and the
+  // namespaced collections.* forms alike.
+  const orderChangingRe =
+    /\b(?:collections\.)?(append|sort|reverse|shuffle|dict|dictionary|setinmap|getsortedmapvalues)\b/i;
+  const guardedLiterals = (content) => {
+    const lits = actionLiterals(content);
+    if (lits.length >= 2 && orderChangingRe.test(content)) {
+      throw new Error(
+        'class attribute uses an order-changing operation on literals; simplify the template or scan it manually',
+      );
+    }
+    return lits;
+  };
+
+  const processAction = (content) => {
+    const lits = guardedLiterals(content);
+    for (const lit of lits) add(lit);
+    const fmts = lits.filter((lit) => verbRe.test(lit));
+    const plain = lits.filter((lit) => !verbRe.test(lit));
+    if (fmts.length) {
+      for (const fmt of fmts) {
+        const parts = fmt.split(verbReG());
+        const verbs = fmt.match(verbReG()) ?? [];
+        // Verb-by-verb enumeration over the literal args (or the verb
+        // itself, kept as a pattern) sidesteps Go's argument-cursor
+        // semantics: whatever printf would emit from these literals is in
+        // the enumerated set.
+        const choices = [...new Set(plain), null];
+        if (choices.length ** verbs.length > FMT_CAP) throw capError();
+        const build = (vi, acc) => {
+          if (vi === verbs.length) {
+            add(acc + parts[vi]);
+            return;
+          }
+          for (const c of choices) {
+            build(vi + 1, acc + parts[vi] + (c ?? verbs[vi]));
+          }
+        };
+        build(0, '');
+      }
+      return;
+    }
+    const delims = plain.filter(
+      (lit) => lit.length <= 1 && !/[a-zA-Z0-9]/.test(lit),
+    );
+    const pieces = plain.filter((lit) => !delims.includes(lit));
+    if (pieces.length > 1) {
+      for (const d of new Set(delims.length ? delims : ['-', ''])) {
+        add(pieces.join(d));
+      }
+    }
+  };
+
+  // `}` admits attributes emitted whole from a branch ({{ if .X }}class=…),
+  // where the action's closing braces precede the name.
+  const attrRe = /(?:^|[<\s"'}])class\s*=\s*(["'])/gi;
+  let m;
+  while ((m = attrRe.exec(template))) {
+    const quote = m[1];
+    let i = attrRe.lastIndex;
+    // Lex the attribute value into text and action segments.
+    const flat = [];
+    let buf = '';
+    while (i < template.length && template[i] !== quote) {
+      if (template.startsWith('{{', i)) {
+        const end = actionClose(template, i);
+        if (end === -1) break;
+        if (buf) {
+          flat.push({ text: buf });
+          buf = '';
+        }
+        flat.push({
+          action: template
+            .slice(i + 2, end)
+            .replace(/^\s*-\s*/, '')
+            .replace(/\s*-\s*$/, '')
+            .trim(),
+        });
+        i = end + 2;
+      } else {
+        buf += template[i];
+        i += 1;
+      }
+    }
+    if (buf) flat.push({ text: buf });
+    attrRe.lastIndex = i;
+
+    // Attribute-wide literal-pool composition: any pipeline that only
+    // rearranges these literals (range/with dot output, nested joins,
+    // cross-action assembly) can emit nothing outside the composed set.
+    // The modeled flows all preserve document order, so joining every
+    // in-order subsequence (any length, 2^POOL_CAP worst case) covers
+    // them; literal-reordering evasion is review's job, like the other
+    // documented caps.
+    const poolPieces = [];
+    const poolDelims = new Set(['-', '']);
+    for (const seg of flat) {
+      if (seg.action !== undefined) {
+        for (const lit of actionLiterals(seg.action)) {
+          if (verbRe.test(lit)) continue; // format enumeration owns these
+          if (lit.length <= 1 && !/[a-zA-Z0-9]/.test(lit)) {
+            poolDelims.add(lit);
+          } else {
+            poolPieces.push(lit);
+          }
+        }
+      } else {
+        const t = seg.text.trim();
+        if (t.length === 1 && !/[a-zA-Z0-9]/.test(t)) poolDelims.add(t);
+      }
+    }
+    if (poolPieces.length > POOL_CAP) throw capError();
+    const compose = (start, chosen) => {
+      if (chosen.length >= 2) {
+        for (const d of poolDelims) add(chosen.join(d));
+      }
+      for (let p = start; p < poolPieces.length; p += 1) {
+        compose(p + 1, [...chosen, poolPieces[p]]);
+      }
+    };
+    compose(0, []);
+
+    // Group if/with/range…else…end into branch nodes.
+    const parse = (pos) => {
+      const nodes = [];
+      while (pos < flat.length) {
+        const seg = flat[pos];
+        if (seg.text !== undefined) {
+          nodes.push(seg);
+          pos += 1;
+          continue;
+        }
+        const kw = seg.action.split(/\s+/)[0];
+        if (kw === 'end' || kw === 'else') return [nodes, pos];
+        if (kw === 'if' || kw === 'with' || kw === 'range') {
+          for (const lit of guardedLiterals(seg.action)) add(lit);
+          const branches = [];
+          let body, next;
+          [body, next] = parse(pos + 1);
+          branches.push(body);
+          while (
+            next < flat.length &&
+            flat[next].action !== undefined &&
+            /^else\b/.test(flat[next].action)
+          ) {
+            for (const lit of guardedLiterals(flat[next].action)) add(lit);
+            [body, next] = parse(next + 1);
+            branches.push(body);
+          }
+          if (next < flat.length) next += 1; // consume end
+          nodes.push({ branches });
+          pos = next;
+          continue;
+        }
+        nodes.push(seg);
+        pos += 1;
+      }
+      return [nodes, pos];
+    };
+    const [nodes, consumed] = parse(0);
+    // A stray else/end at attribute top level means the attribute's
+    // control flow crosses the attribute boundary, and everything after
+    // the stray keyword would be silently dropped. Fail closed instead.
+    if (consumed < flat.length) {
+      throw new Error(
+        'class attribute control flow crosses the attribute boundary; simplify the template or scan it manually',
+      );
+    }
+
+    const variants = (list) => {
+      let out = [''];
+      for (const node of list) {
+        let alts;
+        if (node.text !== undefined) alts = [node.text];
+        else if (node.branches) {
+          alts = [''];
+          for (const b of node.branches) alts = alts.concat(variants(b));
+        } else if (isCommentAction(node.action)) {
+          // Comments render exactly empty: modeling them as a space would
+          // split text they actually fuse (d{{/* … */}}-md-{{/* … */}}none
+          // renders d-md-none).
+          alts = [''];
+        } else {
+          processAction(node.action);
+          alts = [' '];
+        }
+        if (out.length * alts.length > VARIANT_CAP) throw capError();
+        const next = [];
+        for (const o of out) for (const a of alts) next.push(o + a);
+        out = next;
+      }
+      return out;
+    };
+    for (const v of variants(nodes)) add(v);
+  }
+  return tokens;
+}
+
+// A literal class token is a fragment when it could assemble into an
+// inventory name that token matching would miss: an edge-hyphenated piece
+// (print "d-" "flex", d-{{ $bp }}-none) that some inventory name starts or
+// ends with, or a printf format (d-%s-none) whose placeholder pattern
+// matches an inventory name. Anchoring on the inventory keeps Docsy-own
+// dynamic classes (ul-{{ $n }}, td-{{ .Kind }}) clean. Whole-name evasion
+// via replace/printf composition of complete names stays review's job.
+const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export function isClassFragment(token, inventory) {
+  if (verbRe.test(token)) {
+    // A pattern needs an alphanumeric anchor: bare-verb forms (%s-%s)
+    // would match half the inventory on punctuation alone.
+    if (!/[a-zA-Z0-9]/.test(token.replace(verbReG(), ''))) return false;
+    const re = new RegExp(
+      `^${token.split(verbReG()).map(escapeRe).join('.+')}$`,
+    );
+    for (const name of inventory) if (re.test(name)) return true;
+    return false;
+  }
+  if (token.length > 1 && /[^-]-$/.test(token)) {
+    for (const name of inventory) if (name.startsWith(token)) return true;
+  }
+  if (token.length > 1 && /^-[^-]/.test(token)) {
+    for (const name of inventory) if (name.endsWith(token)) return true;
+  }
+  // A middle fragment (hyphenated at both edges, e.g. -md-, -decoration-)
+  // can glue two action-supplied pieces into an inventory name.
+  if (token.length > 2 && /^-.+-$/.test(token)) {
+    for (const name of inventory) if (name.includes(token)) return true;
+  }
+  return false;
+}
+
+test('framework-class check: cleared partials emit no Bootstrap classes', () => {
+  assert.ok(
+    fs.existsSync(bootstrapCss),
+    'bootstrap.css is installed (npm run install:theme-deps)',
+  );
+  const inventory = bootstrapClasses(fs.readFileSync(bootstrapCss, 'utf8'));
+  assert.ok(inventory.size > 500, 'inventory parsed a full Bootstrap build');
+
+  for (const partial of CLEARED_PARTIALS) {
+    const file = path.join(repoRoot, 'theme/layouts', partial);
+    assert.ok(fs.existsSync(file), `cleared partial ${partial} exists`);
+    const source = fs.readFileSync(file, 'utf8');
+    const tokens = [...classTokens(source)];
+    assert.deepEqual(
+      tokens.filter((token) => inventory.has(token)),
+      [],
+      `${partial} uses only Docsy-owned classes`,
+    );
+    assert.deepEqual(
+      tokens.filter((token) => isClassFragment(token, inventory)),
+      [],
+      `${partial} class attributes carry only whole class names`,
+    );
+    // Rendered output includes children: each statically-called child is
+    // cleared too, or carried as visible staging debt.
+    const pending = PENDING_CHILDREN[partial] ?? [];
+    for (const child of partialCalls(source)) {
+      assert.ok(
+        CLEARED_PARTIALS.includes(child) || pending.includes(child),
+        `${partial} child ${child} is cleared or listed as pending`,
+      );
+    }
+  }
+});
+
+// Self-test: prove the scanner's signal on synthetic templates, so an empty
+// cleared list can't hide a broken scanner (false-green guard). The nested-
+// quote and action-literal cases are real Hugo forms that defeated a naive
+// attribute regex.
+test('framework-class check: scanner flags Bootstrap classes', () => {
+  const inventory = bootstrapClasses(fs.readFileSync(bootstrapCss, 'utf8'));
+  for (const known of ['d-flex', 'breadcrumb', 'active', 'mb-4']) {
+    assert.ok(inventory.has(known), `inventory contains .${known}`);
+  }
+  const offenders = (template) =>
+    [...classTokens(template)].filter((t) => inventory.has(t)).sort();
+  const classFragments = (template) =>
+    [...classTokens(template)]
+      .filter((t) => isClassFragment(t, inventory))
+      .sort();
+
+  assert.deepEqual(
+    offenders('<nav class="td-x d-flex{{ if .Active }} active{{ end }}">'),
+    ['active', 'd-flex'],
+    'dirty template is flagged',
+  );
+
+  // Quotes inside actions must not truncate the attribute scan.
+  assert.deepEqual(
+    offenders(
+      '<li class="breadcrumb-item{{ if eq .Status "active" }} active{{ end }}">',
+    ),
+    ['active', 'breadcrumb-item'],
+    'nested-quote action is flagged',
+  );
+
+  // Class names emitted from string literals inside actions count too.
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d-flex" "mb-4") " " }}">'),
+    ['d-flex', 'mb-4'],
+    'delimit-built class list is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ cond $single "breadcrumb d-flex" "breadcrumb" }}">',
+    ),
+    ['breadcrumb', 'd-flex'],
+    'cond-built class list is flagged',
+  );
+
+  // Fragments are flagged only when completable to an inventory name
+  // (contract: isClassFragment).
+  assert.deepEqual(
+    classFragments('<div class="{{ print "d-" "flex" }}">'),
+    ['d-'],
+    'concat fragment literal is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "%s%s" "breadcrumb-" "item" }}">'),
+    ['%sitem', 'breadcrumb-', 'breadcrumb-%s'],
+    'printf fragment literal is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="d-{{ .Bp }}-none">'),
+    ['-none', 'd-'],
+    'action-split class name is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "d-%s-none" .Bp }}">'),
+    ['d-%s-none'],
+    'printf placeholder form is flagged',
+  );
+  // Literal assembly through printf args and delimiter expressions: the
+  // assembled name must surface as an offender.
+  assert.deepEqual(
+    offenders('<div class="{{ printf "%s%s%s" "d" "-" "flex" }}">'),
+    ['d-flex'],
+    'printf-assembled class name is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s%s%s%s%s" "d" "-" "md" "-" "none" }}">',
+    ),
+    ['d-md-none', 'd-none'],
+    'multi-piece printf assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ printf "d-%[1]s-none" "md" }}">'),
+    ['d-md-none'],
+    'indexed printf verb is resolved and flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d" "flex") $dash }}">'),
+    ['d-flex'],
+    'variable-delimiter join is flagged',
+  );
+
+  // Child-partial closure: static calls resolve to _partials paths.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ partial "theme-toggler" . }}{{ partialCached "dark-mode-config.html" "k" }}{{ partial "navbar-lang-selector.html" . -}}',
+      ),
+    ].sort(),
+    [
+      '_partials/dark-mode-config.html',
+      '_partials/navbar-lang-selector.html',
+      '_partials/theme-toggler.html',
+    ],
+    'static partial calls are extracted and normalized',
+  );
+  // Calls embedded in expressions (assignment, with, backtick names) are
+  // static too.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ $x := partial "a.html" . }}{{ with partial "b.html" . }}{{ . }}{{ end }}{{ partial `c.html` . }}',
+      ),
+    ].sort(),
+    ['_partials/a.html', '_partials/b.html', '_partials/c.html'],
+    'expression-embedded partial calls are extracted',
+  );
+  // Namespaced and parenthesized static forms; explicit extensions kept;
+  // comments and plain text are not calls.
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{ partials.Include "a.html" . }}{{ partials.IncludeCached "b.html" . "k" }}{{ partial ("c.html") . }}{{ partial "td/scrollspy-attr.txt" . }}',
+      ),
+    ].sort(),
+    [
+      '_partials/a.html',
+      '_partials/b.html',
+      '_partials/c.html',
+      '_partials/td/scrollspy-attr.txt',
+    ],
+    'namespaced, parenthesized, and non-html static calls are extracted',
+  );
+  assert.deepEqual(
+    [
+      ...partialCalls(
+        '{{/* partial "ghost.html" */}}<code>partial "doc.html"</code>',
+      ),
+    ],
+    [],
+    'comments and plain text are not partial calls',
+  );
+  // Go-template strings can contain `}}`: it must not end the action early
+  // and hide a call sitting after it.
+  assert.deepEqual(
+    [...partialCalls('{{ (dict "x" "}}") | partial "dirty.html" }}')],
+    ['_partials/dirty.html'],
+    'a }} inside a string literal does not end the action',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ cond .A "}}" "d-flex" }}">'),
+    ['d-flex'],
+    'a }} inside a string literal does not truncate the attribute lex',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ delimit (slice "d" "flex") (cond .Compact "-" "_") }}">',
+    ),
+    ['d-flex'],
+    'conditional-delimiter join is flagged',
+  );
+  // Assembly through indexed/flagged verbs, surplus args, and cross-action
+  // branch text.
+  assert.deepEqual(
+    offenders('<div class="{{ printf "%[1]s-%s" "d" "flex" }}">'),
+    ['d-flex'],
+    'indexed-plus-positional printf is flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ printf "%s-%s" (cond true "d" "td") "flex" }}">'),
+    ['d-flex'],
+    'surplus-arg printf is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ if .A }}d{{ else }}td{{ end }}-{{ if .B }}flex{{ else }}notice{{ end }}">',
+    ),
+    ['d-flex'],
+    'cross-action branch assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ printf "d-%.4s" "flex" }}">'),
+    ['d-flex'],
+    'precision-verb printf is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf (cond true "%s-%s" "%s_%s") "d" "flex" }}">',
+    ),
+    ['d-flex'],
+    'conditional-format printf is flagged',
+  );
+  // Literal value flow: dot-bound range/with output, nested joins,
+  // cross-action composition.
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ range (slice "d" "-" "flex") }}{{ . }}{{ end }}">',
+    ),
+    ['d-flex'],
+    'range-emitted literal assembly is flagged',
+  );
+  // Bootstrap has names of four segments and more
+  // (text-decoration-line-through, link-underline-opacity-0-hover): the
+  // pool composition must not cap the piece count below what the pool
+  // holds.
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ range (slice "text" "-" "decoration" "-" "line" "-" "through") }}{{ . }}{{ end }}">',
+    ),
+    ['text-decoration-line-through'],
+    'four-piece assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ delimit (slice "link" "underline" "opacity" "0" "hover") "-" }}">',
+    ),
+    [
+      'link-underline',
+      'link-underline-opacity-0',
+      'link-underline-opacity-0-hover',
+      'opacity-0',
+    ],
+    'five-piece assembly is flagged',
+  );
+  // Order-changing collection operations (append renders its element last,
+  // maps range in key order) break the in-order-subsequence premise: a
+  // literal-bearing action using one fails closed.
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ delimit (append "flex" (slice "d")) "-" }}">',
+      ),
+    /order-changing/,
+    'append in a class action fails closed',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ range $k, $v := (dict "b" "flex" "a" "d") }}{{ $v }}{{ end }}">',
+      ),
+    /order-changing/,
+    'map range in a class action fails closed',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ delimit (collections.Reverse (slice "flex" "d")) "-" }}">',
+      ),
+    /order-changing/,
+    'namespaced Reverse in a class action fails closed',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ with (cond .A "d" "td") }}{{ . }}{{ end }}-{{ with (cond .B "flex" "notice") }}{{ . }}{{ end }}">',
+    ),
+    ['d-flex'],
+    'cross-action with-block assembly is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s" (delimit (slice "d" "flex") "-") }}">',
+    ),
+    ['d-flex'],
+    'nested delimit inside printf is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ printf "%s %s" "td-x" (delimit (slice "d" "flex") "-") }}">',
+    ),
+    ['d-flex'],
+    'joined second printf argument is flagged',
+  );
+  assert.deepEqual(
+    offenders(
+      '<div class="{{ print (cond .A "d" "td") }}-{{ print (cond .B "flex" "notice") }}">',
+    ),
+    ['d-flex'],
+    'cross-action print assembly is flagged',
+  );
+  // Over-cap attributes throw.
+  assert.throws(
+    () =>
+      classTokens(
+        `<div class="${'{{ if .X }}a{{ else }}b{{ end }}'.repeat(12)}">`,
+      ),
+    /variant/,
+    'combinatorial attributes fail closed',
+  );
+  // Docsy-own assembly must stay clean (no wildcard-on-inventory false
+  // dirty from the bare format token).
+  assert.deepEqual(
+    [...classTokens('<div class="{{ printf "%s-%s" "td" .Kind }}">')].filter(
+      (t) => inventory.has(t) || isClassFragment(t, inventory),
+    ),
+    [],
+    'td-prefixed printf stays clean',
+  );
+  assert.deepEqual(
+    offenders('<div class="{{ delimit (slice "d" "flex") "-" }}">'),
+    ['d-flex'],
+    'delimiter-joined class name is flagged',
+  );
+  assert.deepEqual(
+    classFragments('<ul class="ul-{{ $ulNr }} td-{{ .Kind }}">'),
+    [],
+    'Docsy-own dynamic classes are not fragments',
+  );
+  assert.deepEqual(
+    classFragments('<div class="td-x{{ if .A }} td-x--on{{ end }}">'),
+    [],
+    'whole-token semantic template has no fragments',
+  );
+
+  // Only real class attributes are scanned.
+  assert.deepEqual(
+    offenders('<div data-class="d-flex" class="td-x">'),
+    [],
+    'data-class attribute is not scanned',
+  );
+  assert.deepEqual(
+    offenders('<div {{ if .X }}class="d-flex"{{ end }}>'),
+    ['d-flex'],
+    'a conditionally emitted class attribute is scanned',
+  );
+  assert.throws(
+    () => classTokens('{{ if .A }}<div class="x{{ end }} d-flex">'),
+    /crosses the attribute boundary/,
+    'control flow spanning the attribute boundary fails closed',
+  );
+  assert.deepEqual(
+    offenders('<div class="d{{/* why */}}-md-{{/* why */}}none">'),
+    ['d-md-none'],
+    'comment glue fuses adjacent literal text into the rendered name',
+  );
+  assert.deepEqual(
+    classFragments(
+      '<div class="{{ cond .A "text" "td-x" }}-decoration-{{ cond .B "none" "line-through" }}">',
+    ),
+    ['-decoration-'],
+    'a middle fragment matches inventory names by inclusion',
+  );
+  assert.deepEqual(
+    classFragments('<div class="{{ printf "d-%.*s" 4 "flexbox" }}">'),
+    ['d-%.*s'],
+    'star-precision printf forms are pattern-checked',
+  );
+  assert.throws(
+    () =>
+      classTokens(
+        '<div class="{{ $s := newScratch }}{{ $s.SetInMap "m" "b" "flex" }}{{ $s.SetInMap "m" "a" "d" }}{{ delimit ($s.GetSortedMapValues "m") "-" }}">',
+      ),
+    /order-changing/,
+    'scratch sorted-map assembly fails closed',
+  );
+
+  assert.deepEqual(
+    offenders('<div CLASS="d-flex">'),
+    ['d-flex'],
+    'attribute name is case-insensitive',
+  );
+
+  assert.deepEqual(
+    offenders('<nav class="td-x{{ if .Active }} td-x--active{{ end }}">'),
+    [],
+    'semantic template passes',
+  );
+});
