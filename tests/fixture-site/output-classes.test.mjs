@@ -20,7 +20,23 @@ import { buildFixture } from './lib/markup-goldens.mjs';
 // name → label; partial → the CLEARED_PARTIALS entry this region covers;
 // re → the rendered region (global regex: every instance on every listed
 // page is checked); pages → every fixture page kind the partial renders on.
-const CLEARED_REGIONS = [];
+const CLEARED_REGIONS = [
+  {
+    name: 'breadcrumb',
+    partial: '_partials/breadcrumb.html',
+    re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/g,
+    pages: [
+      'blog/first-post/index.html',
+      'blog/index.html',
+      'docs/getting-started/index.html',
+      'docs/getting-started/install/index.html',
+      'docs/index.html',
+      'docs/reference/config/index.html',
+      'docs/reference/index.html',
+      'tags/setup/index.html',
+    ],
+  },
+];
 
 // partial → why the fixture cannot render it (config-gated, error-path…).
 // An entry here is reviewed debt: the lint and review are its only nets.

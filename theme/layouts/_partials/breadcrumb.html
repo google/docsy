@@ -1,25 +1,35 @@
+{{/* Breadcrumb for the current page. Context: the Page, or a dict
+  { page: Page, summary: true } to drop the nav semantics (aria attributes,
+  active marking) that are inappropriate in page-summary contexts. */ -}}
+{{ $page := . -}}
+{{ $summary := false -}}
+{{ if reflect.IsMap . -}}
+  {{ $page = .page -}}
+  {{ $summary = .summary -}}
+{{ end -}}
 {{ $isSingle := true -}}
-{{ with .Parent -}}
+{{ with $page.Parent -}}
   {{ $isSingle = .IsHome -}}
 {{ end -}}
-<nav aria-label="breadcrumb" class="td-breadcrumbs
+<nav{{ if not $summary }} aria-label="breadcrumb"{{ end }} class="td-breadcrumbs
     {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
-  <ol class="breadcrumb">
-    {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
+  <ol class="td-breadcrumbs__list">
+    {{- template "breadcrumbnav" (dict "p1" $page "p2" $page "summary" $summary) }}
   </ol>
 </nav>
 
 {{- define "breadcrumbnav" -}}
   {{ if .p1.Parent -}}
     {{ if not .p1.Parent.IsHome -}}
-      {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  -}}
+      {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 "summary" .summary)  -}}
     {{ end -}}
   {{ else if not .p1.IsHome -}}
-    {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  -}}
+    {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 "summary" .summary)  -}}
   {{ end -}}
-  {{ $isActive :=  eq .p1 .p2 }}
-  <li class="breadcrumb-item{{ if $isActive }} active{{ end }}"
-      {{- if $isActive }} aria-current="page"{{ end }}>
+  {{ $isActive := eq .p1 .p2 }}
+  {{ $isCurrent := and $isActive (not .summary) -}}
+  <li class="td-breadcrumbs__item{{ if $isCurrent }} td-breadcrumbs__item--active{{ end }}"
+      {{- if $isCurrent }} aria-current="page"{{ end }}>
     {{ if $isActive -}}
       {{ .p1.LinkTitle -}}
     {{ else -}}
