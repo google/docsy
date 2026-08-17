@@ -26,11 +26,11 @@
   {{ else if not .p1.IsHome -}}
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 "summary" .summary)  -}}
   {{ end -}}
-  {{ $isActive := eq .p1 .p2 }}
-  {{ $isCurrent := and $isActive (not .summary) -}}
-  <li class="td-breadcrumbs__item{{ if $isCurrent }} td-breadcrumbs__item--active{{ end }}"
-      {{- if $isCurrent }} aria-current="page"{{ end }}>
-    {{ if $isActive -}}
+  {{ $isCurrentPage := eq .p1 .p2 }}
+  {{ $isActive := and $isCurrentPage (not .summary) -}}
+  <li class="td-breadcrumbs__item{{ if $isActive }} td-breadcrumbs__item--active{{ end }}"
+      {{- if $isActive }} aria-current="page"{{ end }}>
+    {{ if $isCurrentPage -}}
       {{ .p1.LinkTitle -}}
     {{ else -}}
       <a href="{{ .p1.RelPermalink }}">{{ .p1.LinkTitle }}</a>
