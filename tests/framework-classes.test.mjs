@@ -25,14 +25,32 @@ const repoRoot = path.resolve(
 // Literal tokens in class attributes: the attribute value is taken as raw
 // text (Go-template actions included) and split into class-name-shaped
 // words, so a branch literal ({{ if .X }}active{{ end }}) surfaces as
-// `active`. Over-matching is loud, never silent: a non-class literal that
+// `active`. A quote inside an action ({{ eq .Status "active" }}) does not
+// end the attribute, so the walk skips {{…}} spans when looking for the
+// closing quote. Only double-quoted attributes are scanned — the theme
+// emits nothing else, and the output net lexes the other forms.
+// Over-matching is loud, never silent: a non-class literal that
 // collides with a Bootstrap name fails the lint and gets renamed or
 // restructured, it doesn't hide anything.
-const classAttrRe = /\bclass\s*=\s*"([^"]*)"/gi;
 export function classTokens(template) {
   const tokens = new Set();
-  for (const m of template.matchAll(classAttrRe)) {
-    for (const t of m[1].match(/-?[_a-zA-Z][\w-]*/g) ?? []) tokens.add(t);
+  const openRe = /\bclass\s*=\s*"/gi;
+  for (let m; (m = openRe.exec(template));) {
+    const start = m.index + m[0].length;
+    let end = start;
+    while (end < template.length && template[end] !== '"') {
+      if (template.startsWith('{{', end)) {
+        const close = template.indexOf('}}', end);
+        end = close === -1 ? template.length : close + 2;
+      } else {
+        end += 1;
+      }
+    }
+    for (const t of template.slice(start, end).match(/-?[_a-zA-Z][\w-]*/g) ??
+      []) {
+      tokens.add(t);
+    }
+    openRe.lastIndex = end;
   }
   return tokens;
 }
@@ -46,7 +64,8 @@ test('framework-class lint: cleared partials name no Bootstrap classes', () => {
   assert.ok(inventory.size > 500, 'inventory parsed a full Bootstrap build');
 
   // Self-test: a broken tokenizer plus an empty cleared list would
-  // otherwise stay green forever.
+  // otherwise stay green forever. The nested-quote case is a real Hugo
+  // form that truncates a naive attribute regex.
   assert.deepEqual(
     [
       ...classTokens(
@@ -55,6 +74,15 @@ test('framework-class lint: cleared partials name no Bootstrap classes', () => {
     ].filter((t) => inventory.has(t)),
     ['d-flex', 'active'],
     'branch and literal Bootstrap tokens are flagged',
+  );
+  assert.deepEqual(
+    [
+      ...classTokens(
+        '<li class="breadcrumb-item{{ if eq .Status "active" }} active{{ end }}">',
+      ),
+    ].filter((t) => inventory.has(t)),
+    ['breadcrumb-item', 'active'],
+    'a quote inside an action does not truncate the attribute scan',
   );
 
   for (const partial of CLEARED_PARTIALS) {
