@@ -1,8 +1,10 @@
 // Breadcrumb
 
-// Bootstrap skin: style by @extend. State classes are written out against
-// Bootstrap's public vars (extending a generic state class like .active
-// would splice us into every compound that uses it).
+// Bootstrap skin: style by @extend. State rules key on semantic attributes
+// (aria-current) and are written out against Bootstrap's public vars
+// (extending a generic state class like .active would splice us into every
+// compound that uses it); the BS-mirror marker cites the mirrored source
+// rule for upgrade audits.
 .td-breadcrumbs__list {
   @extend .breadcrumb;
 }
@@ -11,7 +13,8 @@
   @extend .breadcrumb-item;
 }
 
-.td-breadcrumbs__item--active {
+// BS mirror: _breadcrumb.scss .breadcrumb-item.active
+.td-breadcrumbs__item[aria-current='page'] {
   color: var(--bs-breadcrumb-item-active-color);
 }
 

@@ -18,7 +18,7 @@
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  -}}
   {{ end -}}
   {{ $isActive :=  eq .p1 .p2 }}
-  <li class="td-breadcrumbs__item{{ if $isActive }} td-breadcrumbs__item--active{{ end }}"
+  <li class="td-breadcrumbs__item"
       {{- if $isActive }} aria-current="page"{{ end }}>
     {{ if $isActive -}}
       {{ .p1.LinkTitle -}}
