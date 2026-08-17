@@ -1,14 +1,13 @@
 // Rendered-output framework-class net: classes in the built fixture's HTML
 // are ground truth for what the theme emits, with no template semantics to
-// re-model (the divergence-hardening history of ../framework-classes.test.mjs).
-// Blind spot: branches the fixture doesn't exercise — the scanner's branch
-// enumeration owns those. Together, a Bootstrap class in a cleared partial
-// survives only if its template form is unlexable AND its rendering falls
-// outside the listed regions' page coverage.
+// re-model (the divergence-hardening history that retired the old template
+// scanner). Blind spot: branches the fixture doesn't exercise — the
+// literal-token lint (../framework-classes.test.mjs) catches their plain
+// literals; assembled forms in unexercised branches are review's job.
 //
 // CLEARED_REGIONS carries the output side of the migration ratchet: every
 // partial in CLEARED_PARTIALS must map to a region here (or a documented
-// OUTPUT_EXEMPT reason), so scanner-invisible forms can't ship unchecked.
+// OUTPUT_EXEMPT reason), so lint-invisible forms can't ship unchecked.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -24,7 +23,7 @@ import { buildFixture } from './lib/markup-goldens.mjs';
 const CLEARED_REGIONS = [];
 
 // partial → why the fixture cannot render it (config-gated, error-path…).
-// An entry here is reviewed debt: the scanner and review are its only nets.
+// An entry here is reviewed debt: the lint and review are its only nets.
 const OUTPUT_EXEMPT = {};
 
 // Extraction is deliberately wider than the theme's emitted style (verified
@@ -70,9 +69,9 @@ test('output-class net: cleared regions render no Bootstrap classes', () => {
     'class extraction sees every attribute form, character refs decoded',
   );
 
-  // Cross-net ratchet: the scanner freeze dispositions scanner-invisible
-  // forms to this net, which only holds if clearing a partial forces
-  // output coverage.
+  // Cross-net ratchet: forms the literal-token lint can't see are
+  // dispositioned to this net, which only holds if clearing a partial
+  // forces output coverage.
   const covered = new Set(CLEARED_REGIONS.map((r) => r.partial));
   for (const p of CLEARED_PARTIALS) {
     assert.ok(

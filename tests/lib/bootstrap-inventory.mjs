@@ -1,5 +1,5 @@
 // Bootstrap class inventory shared by the two framework-class nets: the
-// template scanner (../framework-classes.test.mjs) and the rendered-output
+// literal-token lint (../framework-classes.test.mjs) and the rendered-output
 // net (../fixture-site/output-classes.test.mjs).
 
 import path from 'node:path';
