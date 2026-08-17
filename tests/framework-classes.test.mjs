@@ -32,6 +32,36 @@ const repoRoot = path.resolve(
 // Over-matching is loud, never silent: a non-class literal that
 // collides with a Bootstrap name fails the lint and gets renamed or
 // restructured, it doesn't hide anything.
+
+// Index just past the `}}` closing the action opened at `open`: a `}}`
+// inside a comment or a quoted string does not close the action (the
+// retired scanner's actionClose semantics). An unterminated action or
+// string runs the span to the template's end, which is then tokenized
+// raw: the loud direction.
+const actionEnd = (template, open) => {
+  let i = open + 2;
+  if (/^\s*-?\s*\/\*/.test(template.slice(i, i + 8))) {
+    const comment = template.indexOf('*/', i);
+    const close = comment === -1 ? -1 : template.indexOf('}}', comment);
+    return close === -1 ? template.length : close + 2;
+  }
+  for (; i < template.length; i += 1) {
+    const c = template[i];
+    if (c === '"' || c === "'") {
+      i += 1;
+      while (i < template.length && template[i] !== c) {
+        i += template[i] === '\\' ? 2 : 1;
+      }
+    } else if (c === '`') {
+      i = template.indexOf('`', i + 1);
+      if (i === -1) return template.length;
+    } else if (c === '}' && template[i + 1] === '}') {
+      return i + 2;
+    }
+  }
+  return template.length;
+};
+
 export function classTokens(template) {
   const tokens = new Set();
   const openRe = /\bclass\s*=\s*"/gi;
@@ -39,18 +69,16 @@ export function classTokens(template) {
     const start = m.index + m[0].length;
     let end = start;
     while (end < template.length && template[end] !== '"') {
-      if (template.startsWith('{{', end)) {
-        const close = template.indexOf('}}', end);
-        end = close === -1 ? template.length : close + 2;
-      } else {
-        end += 1;
-      }
+      end = template.startsWith('{{', end) ? actionEnd(template, end) : end + 1;
     }
     for (const t of template.slice(start, end).match(/-?[_a-zA-Z][\w-]*/g) ??
       []) {
       tokens.add(t);
     }
-    openRe.lastIndex = end;
+    // Rescan from just inside the span: a false opener (class=" text in
+    // some other attribute's value) must not consume a real one its span
+    // happens to cover. Overlapping spans over-match, which is loud.
+    openRe.lastIndex = start;
   }
   return tokens;
 }
@@ -83,6 +111,18 @@ test('framework-class lint: cleared partials name no Bootstrap classes', () => {
     ].filter((t) => inventory.has(t)),
     ['breadcrumb-item', 'active'],
     'a quote inside an action does not truncate the attribute scan',
+  );
+  assert.ok(
+    classTokens('<div class="{{ if eq .X "}}" }} d-flex{{ end }} td-x">').has(
+      'd-flex',
+    ),
+    'a }} inside an action string does not end the action skip',
+  );
+  assert.ok(
+    classTokens('<div data-example=\'class="\' class="d-flex td-x">').has(
+      'd-flex',
+    ),
+    'a class= in another attribute value does not consume the real attribute',
   );
 
   for (const partial of CLEARED_PARTIALS) {
