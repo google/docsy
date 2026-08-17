@@ -11,7 +11,10 @@
         <article class="card article-teaser article-type-{{ with .Type }}{{ ( urlize . ) }}{{ end }}">
           <h3><a href="{{ $manualLink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a></h3>
           {{ if not .Site.Params.ui.taxonomy_breadcrumb_disable -}}
-            {{ partial "breadcrumb.html" (dict "page" . "summary" true) -}}
+            {{/* Use breadcrumb partial, but remove attributes that are invalid or inappropriate in this page-summary context. */ -}}
+            {{ partial "breadcrumb.html" .
+              | replaceRE ` aria-\w+=\".*?\"|(td-breadcrumbs__item) td-breadcrumbs__item--active` "$1" | safeHTML
+            -}}
           {{ end -}}
           <p>{{ .Description | markdownify }}</p>
           <header class="article-meta">

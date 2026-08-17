@@ -64,9 +64,9 @@ params:
 
 // name → golden file goldens/NAME.html; page → public file holding the
 // region; re overrides the default breadcrumb extractor. The term region
-// pins the partial's summary mode (term.html renders it without aria
-// attributes and active marking), so its extractor keys on the class, not
-// the aria label.
+// pins term.html's class-coupled post-processing of the breadcrumb partial
+// (replaceRE strips aria attributes and the active class), which silently
+// no-ops if the partial's class names change without the caller following.
 export const regions = [
   { name: 'breadcrumb-single', page: 'docs/index.html' },
   { name: 'breadcrumb-mid', page: 'docs/getting-started/index.html' },
