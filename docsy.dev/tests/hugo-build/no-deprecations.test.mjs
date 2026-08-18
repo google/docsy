@@ -23,7 +23,11 @@ function buildSite() {
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
     const deprecations = output
       .split('\n')
-      .filter((line) => /deprecated/i.test(line));
+      .filter((line) => /deprecated/i.test(line))
+      // Dart Sass language deprecations (Bootstrap's and Docsy's Sass) are
+      // deliberately left visible as fix-me reminders (docsy#2724); this
+      // probe guards Hugo API deprecations only.
+      .filter((line) => !/Dart Sass/.test(line));
     return { res, output, deprecations };
   } finally {
     rmSync(destDir, { recursive: true, force: true });
