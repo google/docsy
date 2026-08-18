@@ -86,14 +86,19 @@ looks up as the `sass` CLI on its `PATH`. For npm-based sites, install the
 npm install --save-dev sass-embedded
 ```
 
-The `sass` CLI is then on `PATH` for every npm-run script.
+The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through
+[npm scripts][]. For example, with the following in your `package.json`:
 
-If you invoke `hugo` directly rather than through an npm script, prepend the
-binary directory to your `PATH` first:
-
-```bash
-PATH="$PWD/node_modules/.bin:$PATH" hugo
+```json
+{
+  "scripts": {
+    "build": "hugo --minify",
+    "serve": "hugo server"
+  }
+}
 ```
+
+build and serve your site with `npm run build` and `npm run serve`.
 
 For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
 For the minimum and officially supported Dart Sass versions, see
@@ -183,6 +188,7 @@ site
 [hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
+[npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
 [sass-embedded]: https://www.npmjs.com/package/sass-embedded

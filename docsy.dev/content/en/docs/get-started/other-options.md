@@ -101,12 +101,8 @@ nvm install --lts
 
 ### Install Dart Sass
 
-See [Install Dart Sass][]. The `sass` CLI must be on `PATH` when you invoke
-`hugo` directly, as in the options below:
-
-```sh
-PATH="$PWD/node_modules/.bin:$PATH" hugo
-```
+See [Install Dart Sass][], including its recommendation to run Hugo through [npm
+scripts][], which have the `sass` CLI on their `PATH` automatically.
 
 ### Install PostCSS (optional) {#install-postcss}
 
@@ -193,12 +189,11 @@ your project's root directory:
     Every time you run `npm install` from your project root, the `prepare`
     script will fetch the latest version of Docsy and its dependencies.
 
-From this point on, build and serve your site using the usual Hugo commands
-(with the `sass` CLI on `PATH`, see the [prerequisites](#install-dart-sass)),
-for example:
+From this point on, build and serve your site with Hugo, run through [npm
+scripts][] (see the [prerequisites](#install-dart-sass)), for example:
 
 ```sh
-PATH="$PWD/node_modules/.bin:$PATH" hugo serve
+npm run serve
 ```
 
 ## Option 2: Clone the Docsy theme
@@ -264,12 +259,12 @@ site that uses the Docsy NPM package:
     themesDir: node_modules
     ```
 
-4.  Build or serve your new site using the usual Hugo commands (with the `sass`
-    CLI on `PATH`, see the [prerequisites](#install-dart-sass)). For example,
-    build your site as follows:
+4.  Build or serve your new site with Hugo, run through [npm scripts][] (see the
+    [prerequisites](#install-dart-sass)). For example, build your site as
+    follows:
 
     ```console
-    $ PATH="$PWD/node_modules/.bin:$PATH" hugo
+    $ npm run build
     Start building sites …
     ...
     ```
