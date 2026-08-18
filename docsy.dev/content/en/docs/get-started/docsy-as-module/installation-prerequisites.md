@@ -78,26 +78,25 @@ npm install hugo-extended@latest --save-dev
 This section applies to all [installation options](/docs/get-started/), not just
 Hugo-module setups.
 
-As of Docsy 0.17, Hugo compiles Docsy's [SCSS][] using the [Dart
-Sass][dart-sass] transpiler, which Hugo looks up as the `sass` CLI on its
-`PATH`. For npm-based sites, install the [`sass-embedded`][sass-embedded]
-package from your project root:
+Hugo compiles Docsy's [SCSS][] using the [Dart Sass][] transpiler, which Hugo
+looks up as the `sass` CLI on its `PATH`. For npm-based sites, install the
+[`sass-embedded`][sass-embedded] package from your project root:
 
 ```bash
 npm install --save-dev sass-embedded
 ```
 
-The `sass` CLI is then on `PATH` for every npm-run script. If you invoke `hugo`
-directly rather than through an npm script, prepend the binary directory to your
-`PATH` first:
+The `sass` CLI is then on `PATH` for every npm-run script.
+
+If you invoke `hugo` directly rather than through an npm script, prepend the
+binary directory to your `PATH` first:
 
 ```bash
 PATH="$PWD/node_modules/.bin:$PATH" hugo
 ```
 
-For non-npm setups (a Homebrew install, CI snippets for various providers), see
-[Hugo's Dart Sass installation guide][hugo-dart-sass]. For the minimum and
-officially supported Dart Sass versions, see
+For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
+For the minimum and officially supported Dart Sass versions, see
 [Official support](/project/about/changelog/#official-support).
 
 ## Install Go language
@@ -166,9 +165,9 @@ npm install --save-dev autoprefixer postcss-cli
 
 > [!NOTE]
 >
-> npm also installs [postcss][postcss] itself, as a peer dependency of the
-> packages listed above. If you use a package manager that doesn't auto-install
-> peer dependencies, such as Yarn, add `postcss` to the install command.
+> npm also installs [postcss][] itself, as a peer dependency of the packages
+> listed above. If you use a package manager that doesn't auto-install peer
+> dependencies, such as Yarn, add `postcss` to the install command.
 
 ## What's next?
 
@@ -180,7 +179,7 @@ site
 
 <!-- prettier-ignore-start -->
 [browserslist-defaults]: https://github.com/browserslist/browserslist
-[dart-sass]: https://sass-lang.com/dart-sass/
+[dart sass]: https://sass-lang.com/dart-sass/
 [hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/

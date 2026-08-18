@@ -338,17 +338,15 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[Install Dart Sass]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
-[Install PostCSS]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
+<!-- prettier-ignore-start -->
 [`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[Install PostCSS]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [npm install]: https://docs.npmjs.com/cli/v11/commands/npm-install#description
-[nvm]:
-  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
+[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [official-support]: /project/about/changelog/#official-support
-[prepare]:
-  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
+[prepare]: https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
+<!-- prettier-ignore-end -->
