@@ -13,10 +13,6 @@ FORCE_DELETE=false
 # Default to the repo-installed Hugo: fails loud when absent. Bare-npx
 # fallback rationale: tests/runner-lint.test.mjs.
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
-# The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; use
-# the repo-installed, version-locked one (consumer sites install their
-# own, per the changelog entry and Hugo's Dart Sass installation guide).
-PATH="$SCRIPT_DIR/../node_modules/.bin:$PATH"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
@@ -139,6 +135,12 @@ function _npm_install() {
     # carries its protections inline: lock-exact npm ci with --ignore-scripts.
     npm run --prefix "$THEMESDIR/docsy" install:theme-deps
   fi
+  # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH. The
+  # site provides it, mirroring the documented consumer setup for every
+  # Docsy source: sass-embedded as a site dev dependency, its bin dir on
+  # PATH. Runs after the --omit=dev install above, which would prune it.
+  npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
+  PATH="$PWD/node_modules/.bin:$PATH"
 }
 
 function set_up_and_cd_into_site() {
