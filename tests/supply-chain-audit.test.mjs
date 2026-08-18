@@ -214,6 +214,32 @@ test('manifests: git dependencies are tag-pinned to their reviewed repos', () =>
   }
 });
 
+// npm applies overrides only while re-resolving and trusts an in-sync
+// lock as-is, so the adm-zip override (GHSA-xcpc-8h2w-3j85, via
+// hugo-extended) is pinned from the committed manifests: the lock must
+// carry the fixed version, and the override must stay justified by
+// hugo-extended's own declared range. When hugo-extended bumps that
+// range past the vulnerable one, this goes red: drop the override (and
+// this test) in that bump PR.
+test('locks and manifests: the adm-zip override is applied and still needed', () => {
+  assert.deepEqual(
+    readJSON('package.json').overrides,
+    { 'adm-zip': '^0.6.0' },
+    'overrides carries exactly the reviewed entries',
+  );
+  const pkgs = locks['package-lock.json'].packages;
+  assert.match(
+    pkgs['node_modules/adm-zip'].version,
+    /^0\.6\./,
+    'the locked adm-zip carries the GHSA-xcpc-8h2w-3j85 fix',
+  );
+  assert.equal(
+    pkgs['node_modules/hugo-extended'].dependencies['adm-zip'],
+    '^0.5.17',
+    'hugo-extended still declares the adm-zip range that justifies the override',
+  );
+});
+
 // Exact pins: prefix/flag matching would accept an appended `&& npm
 // install …` rider on a script the workflow audit trusts by name.
 test('manifests: the install path keeps its locked, script-free form', () => {

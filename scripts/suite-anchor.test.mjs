@@ -31,6 +31,7 @@ test('anchor: the tests-root guards stay wired into test:repo', () => {
     'test:repo runs the top-level tests, the structural guards included',
   );
   for (const guard of [
+    'tests/npm-audit.test.mjs',
     'tests/runner-lint.test.mjs',
     'tests/supply-chain-audit.test.mjs',
     'tests/test-wiring.test.mjs',

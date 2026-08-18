@@ -104,6 +104,9 @@
     "node": ">=24",
     "npm": ">=11.16.0"
   },
+  "overrides": {
+    "adm-zip": "^0.6.0"
+  },
   "spelling": "cSpell:ignore -",
   "allowScripts": {
     "hugo-extended@0.164.0": true,
