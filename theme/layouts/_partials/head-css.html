@@ -1,4 +1,11 @@
 {{ $scssMain := "scss/main.scss" -}}
+
+{{/* Dart Sass sees only the stdin-fed entry file as first-party: Hugo's
+importer loads everything else, Docsy's own tree included, as dependencies. So
+silenceDependencyDeprecations mutes deprecation warnings from Docsy's Sass and
+vendored Bootstrap alike; drop it once both are deprecation-clean.
+silenceDeprecations covers what remains, the entry's lone @import; drop it when
+main.scss migrates to @use. */ -}}
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
