@@ -250,6 +250,9 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
 // install …` rider on a script the workflow audit trusts by name.
 test('manifests: the install path keeps its locked, script-free form', () => {
   const { scripts } = readJSON('package.json');
+  // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
+  // binary as platform-keyed optional packages, npm's script-free
+  // platform-dispatch form; omitting optionals leaves no compiler.
   assert.equal(
     scripts['install:safe'],
     'npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
