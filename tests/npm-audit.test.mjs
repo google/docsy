@@ -63,8 +63,7 @@ function validateAuditGate(report, accepted) {
         );
       }
       // Advisory object: extract GHSA and check acceptance.
-      const ghsa =
-        via.url?.match(/GHSA-[a-z0-9-]+$/)?.[0] ?? via.url;
+      const ghsa = via.url?.match(/GHSA-[a-z0-9-]+$/)?.[0] ?? via.url;
       reported.set(ghsa, via.name ?? name);
       assert.ok(
         accepted.has(ghsa),
