@@ -105,10 +105,15 @@ export async function shootRegion(
   const page = await browser.newPage();
   try {
     await page.setViewport(viewport);
-    await page.emulateMediaFeatures([
-      { name: 'prefers-color-scheme', value: scheme },
-    ]);
-    if (media) await page.emulateMediaType(media);
+    // Media type and scheme must ride one CDP call: Puppeteer's
+    // emulateMediaType and emulateMediaFeatures each send
+    // Emulation.setEmulatedMedia with only its own field, wiping the
+    // other's. The session stays attached: detaching reverts its overrides.
+    const cdp = await page.createCDPSession();
+    await cdp.send('Emulation.setEmulatedMedia', {
+      media: media ?? '',
+      features: [{ name: 'prefers-color-scheme', value: scheme }],
+    });
     await page.setRequestInterception(true);
     const origin = new URL(url).origin;
     // Off-origin requests abort: deterministic, offline-safe shots.
