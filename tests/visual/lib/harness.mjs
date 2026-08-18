@@ -105,11 +105,10 @@ export async function shootRegion(
   const page = await browser.newPage();
   try {
     await page.setViewport(viewport);
-    // Media type and features must ride one CDP call: emulateMediaType and
-    // emulateMediaFeatures each issue Emulation.setEmulatedMedia with only
-    // their own field, so the later call wipes the earlier one (print shots
-    // then follow the machine's system color scheme). The session stays
-    // attached: detaching reverts its emulation overrides.
+    // Media type and scheme must ride one CDP call: Puppeteer's
+    // emulateMediaType and emulateMediaFeatures each send
+    // Emulation.setEmulatedMedia with only its own field, wiping the
+    // other's. The session stays attached: detaching reverts its overrides.
     const cdp = await page.createCDPSession();
     await cdp.send('Emulation.setEmulatedMedia', {
       media: media ?? '',
