@@ -1,18 +1,5 @@
 // Breadcrumb
 
-.td-breadcrumbs__list {
-  @extend .breadcrumb;
-}
-
-.td-breadcrumbs__item {
-  @extend .breadcrumb-item;
-}
-
-// BS mirror: _breadcrumb.scss .breadcrumb-item.active
-.td-breadcrumbs__item[aria-current='page'] {
-  color: var(--bs-breadcrumb-item-active-color);
-}
-
 .td-breadcrumbs {
   @media print {
     display: none;
@@ -22,9 +9,20 @@
     display: none;
   }
 
-  .td-breadcrumbs__list {
+  &__list {
+    @extend .breadcrumb;
+
     background: inherit;
     padding-left: 0;
     padding-top: 0;
+  }
+
+  &__item {
+    @extend .breadcrumb-item;
+
+    // BS mirror: _breadcrumb.scss .breadcrumb-item.active
+    &[aria-current='page'] {
+      color: var(--bs-breadcrumb-item-active-color);
+    }
   }
 }
