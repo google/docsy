@@ -64,9 +64,10 @@ params:
 
 // name → golden file goldens/NAME.html; page → public file holding the
 // region; re overrides the default breadcrumb extractor. The term region
-// pins term.html's class-coupled post-processing of the breadcrumb partial
-// (replaceRE strips aria attributes and the active class), which silently
-// no-ops if the partial's class names change without the caller following.
+// pins term.html's post-processing of the breadcrumb partial (replaceRE
+// strips aria attributes, and with aria-current the current-item styling
+// hook), which silently no-ops if the partial's attribute emission changes
+// without the caller following.
 export const regions = [
   { name: 'breadcrumb-single', page: 'docs/index.html' },
   { name: 'breadcrumb-mid', page: 'docs/getting-started/index.html' },
@@ -74,7 +75,7 @@ export const regions = [
   {
     name: 'breadcrumb-term',
     page: 'tags/setup/index.html',
-    re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/,
+    re: /<nav[^>]*class="td-breadcrumbs(?=[\s"])[\s\S]*?<\/nav>/,
   },
   // Blog baseof wraps the same partial in a different layout context.
   { name: 'breadcrumb-blog', page: 'blog/first-post/index.html' },

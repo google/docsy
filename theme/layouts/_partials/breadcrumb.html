@@ -4,7 +4,7 @@
 {{ end -}}
 <nav aria-label="breadcrumb" class="td-breadcrumbs
     {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
-  <ol class="breadcrumb">
+  <ol class="td-breadcrumbs__list">
     {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
   </ol>
 </nav>
@@ -18,7 +18,7 @@
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  -}}
   {{ end -}}
   {{ $isActive :=  eq .p1 .p2 }}
-  <li class="breadcrumb-item{{ if $isActive }} active{{ end }}"
+  <li class="td-breadcrumbs__item"
       {{- if $isActive }} aria-current="page"{{ end }}>
     {{ if $isActive -}}
       {{ .p1.LinkTitle -}}
