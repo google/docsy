@@ -153,12 +153,12 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   (deprecated in Hugo 0.153.0) to Dart Sass. Site builds now require the `sass`
   CLI on the build's `PATH`; npm-based sites can add the version-pinned
   [`sass-embedded`](https://www.npmjs.com/package/sass-embedded) package, other
-  setups can follow [Hugo's Dart Sass installation
-  guide](https://gohugo.io/functions/css/sass/#dart-sass). Colors computed by
-  Sass at build time can shift imperceptibly (Dart Sass emits full-precision
-  color math). Sites that can't provide Dart Sass can restore LibSass by
-  overriding the `head-css.html` partial, for as long as their Hugo version
-  still bundles it ([#2724][]).
+  setups can follow
+  [Hugo's Dart Sass installation guide](https://gohugo.io/functions/css/sass/#dart-sass).
+  Colors computed by Sass at build time can shift imperceptibly (Dart Sass emits
+  full-precision color math). Sites that can't provide Dart Sass can restore
+  LibSass by overriding the `head-css.html` partial, for as long as their Hugo
+  version still bundles it ([#2724][]).
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
   `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
