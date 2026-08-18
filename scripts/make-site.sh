@@ -13,6 +13,10 @@ FORCE_DELETE=false
 # Default to the repo-installed Hugo: fails loud when absent. Bare-npx
 # fallback rationale: tests/runner-lint.test.mjs.
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
+# The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; use
+# the repo-installed, version-locked one (consumer sites install their
+# own, per the changelog entry and Hugo's Dart Sass installation guide).
+PATH="$SCRIPT_DIR/../node_modules/.bin:$PATH"
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
