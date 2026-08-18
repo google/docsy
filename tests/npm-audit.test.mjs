@@ -1,8 +1,7 @@
 // Online npm-audit gate, complementing the offline structural checks in
-// supply-chain-audit.test.mjs: the committed locks stay free of
-// unreviewed advisories. Accepted advisories are pinned below, and each
-// must still be reported: an exception that npm audit no longer reports
-// is stale and gets removed together with its entry here.
+// supply-chain-audit.test.mjs: committed locks stay free of unreviewed
+// advisories. Accepted advisories stay listed below and must still be
+// reported; once one disappears, its exception is stale.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -18,18 +17,16 @@ const repoRoot = path.resolve(
 // GHSA-q3xp-j858-q9xf flags every version of the registry package
 // markdownlint-rule-link-pattern, where malware was once published under
 // the project's name. This repo installs the package from its author's
-// GitHub tag (the git-pin allowlist in supply-chain-audit.test.mjs), so
-// the flagged registry code is never fetched: the advisory matches on
-// name only. Remove once the advisory is scoped to the malicious
-// registry version.
+// GitHub tag, so the flagged registry code is never fetched; the
+// advisory matches on name only. Remove once the advisory is scoped to
+// the malicious registry version.
 const acceptedAdvisories = new Map([
   ['GHSA-q3xp-j858-q9xf', 'markdownlint-rule-link-pattern'],
 ]);
 
-test('audit: every advisory npm audit reports is reviewed and accepted', () => {
-  const res = spawnSync('npm audit --json', {
+test('audit: reported advisories are reviewed and accepted', () => {
+  const res = spawnSync('npm', ['audit', '--json'], {
     cwd: repoRoot,
-    shell: true,
     encoding: 'utf8',
     maxBuffer: 16 * 1024 * 1024,
   });
