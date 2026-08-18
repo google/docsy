@@ -75,7 +75,7 @@ export const regions = [
   {
     name: 'breadcrumb-term',
     page: 'tags/setup/index.html',
-    re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/,
+    re: /<nav[^>]*class="td-breadcrumbs(?=[\s"])[\s\S]*?<\/nav>/,
   },
   // Blog baseof wraps the same partial in a different layout context.
   { name: 'breadcrumb-blog', page: 'blog/first-post/index.html' },
