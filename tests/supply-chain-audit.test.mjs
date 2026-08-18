@@ -154,7 +154,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       'package-lock.json node_modules/hugo-extended',
       'package-lock.json node_modules/puppeteer',
     ],
-    'the install-script inventory is exactly @parcel/watcher (lock-only), hugo-extended, and puppeteer',
+    'locked install-script packages match the reviewed inventory',
   );
 
   // Allow entries are version-pinned so a bump's new (unreviewed) script
