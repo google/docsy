@@ -13,9 +13,10 @@
     @extend .breadcrumb;
   }
 
-  // Descendant-scoped (& &__list): outranks consumer rules on the extended
-  // .breadcrumb group, which tie a flat &__list in specificity and win by
-  // source order.
+  // Descendant-scoped (& &__list) to preserve the pre-swap cascade: these
+  // defaults sat at .td-breadcrumbs .breadcrumb, above generic consumer
+  // .breadcrumb rules (which @extend now rewrites to also target the td-
+  // class). Consumers override as before, by matching the specificity.
   & &__list {
     background: inherit;
     padding-left: 0;
