@@ -149,6 +149,16 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 [**Breaking changes**](#breaking-change):
 
+- Switched the theme's default Sass transpiler from Hugo's embedded LibSass
+  (deprecated in Hugo 0.153.0) to Dart Sass. Site builds now require the `sass`
+  CLI on the build's `PATH`; npm-based sites can add the version-pinned
+  [`sass-embedded`](https://www.npmjs.com/package/sass-embedded) package, other
+  setups can follow [Hugo's Dart Sass installation
+  guide](https://gohugo.io/functions/css/sass/#dart-sass). Colors computed by
+  Sass at build time can shift imperceptibly (Dart Sass emits full-precision
+  color math). Sites that can't provide Dart Sass can restore LibSass by
+  overriding the `head-css.html` partial, for as long as their Hugo version
+  still bundles it ([#2724][]).
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
   `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
@@ -191,6 +201,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2714]: https://github.com/google/docsy/pull/2714
+[#2724]: https://github.com/google/docsy/pull/2724
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
 [mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
