@@ -153,9 +153,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [**Breaking changes**](#breaking-change):
 
 - Switched the theme's default Sass transpiler from Hugo's embedded LibSass
-  (deprecated) to [Dart Sass](https://sass-lang.com/dart-sass/): sites must
-  provide the `sass` CLI, see [Install Dart Sass][]. Some Sass-computed colors
-  in the built CSS change serialization form, with rendering unchanged
+  (deprecated) to Dart Sass; see [Install Dart Sass][]. Some Sass-computed
+  colors in the built CSS change serialization form, with rendering unchanged
   ([#2724][]).
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
@@ -183,30 +182,31 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 
 **For maintainers**:
 
-- Committed the npm lockfiles; dependency installs are now lock-exact, and
+- Committed npm lockfiles; dependency installs are now lock-exact, and
   unreviewed dependency scripts are disabled ([#2700][]).
+- Guarded dependency and workflow hardening with a committed supply-chain audit;
+  removed bare-npx registry fallback paths ([#2714][]).
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
-- Guarded dependency and workflow hardening with a committed supply-chain audit;
-  removed bare-npx registry fallback paths ([#2714][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
   [Default Mermaid version][mermaid-version-notes].
 
+<!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
-[Install Dart Sass]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
-[footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
-[mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
-[mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
 [0.17.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.17.0
+[footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
+[mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+<!-- prettier-ignore-end -->
 
 ## v0.16.0 {#v0.16.0}
 
