@@ -97,9 +97,9 @@ PATH="$PWD/node_modules/.bin:$PATH" hugo
 ```
 
 For non-npm setups (a Homebrew install, CI snippets for various providers), see
-[Hugo's Dart Sass installation guide][hugo-dart-sass]. Use Dart Sass 1.74.0 or
-later; as with all dependencies, Docsy officially supports the
-[latest release](/project/about/changelog/#official-support).
+[Hugo's Dart Sass installation guide][hugo-dart-sass]. For the minimum and
+officially supported Dart Sass versions, see
+[Official support](/project/about/changelog/#official-support).
 
 ## Install Go language
 

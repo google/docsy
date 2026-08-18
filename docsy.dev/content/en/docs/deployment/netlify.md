@@ -23,10 +23,9 @@ provider account. Once you're logged in:
 1. Click your chosen Git provider, then choose your site repo from your list of
    repos.
 1. In the **Deploy settings** page:
-   1. Specify your **Build command**. Prefix each command below with
-      `PATH="$PWD/node_modules/.bin:$PATH"` so that Hugo finds the `sass` CLI
-      that npm installed. The exact build command depends on how you have chosen
-      to use Docsy:
+   1. Specify your **Build command**. The `PATH` prefix in the commands below
+      lets Hugo find the `sass` CLI that npm installed. The exact build command
+      depends on how you have chosen to use Docsy:
       - If you are using Docsy as a [Git submodule][], specify
         `cd themes/docsy && git submodule update -f --init && cd ../.. && PATH="$PWD/node_modules/.bin:$PATH" hugo`.
         You need to specify this rather than just `hugo` so that Netlify can use

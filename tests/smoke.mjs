@@ -404,8 +404,7 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps etc',
   );
 
-  // The documented consumer action for the dartsass transpiler (Install
-  // Dart Sass, prerequisites doc), from the site root as a consumer would.
+  // Same consumer action as the tarball test above, from the site root.
   progress('clone: npm install sass-embedded…');
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');

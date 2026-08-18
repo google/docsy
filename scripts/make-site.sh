@@ -135,10 +135,10 @@ function _npm_install() {
     # carries its protections inline: lock-exact npm ci with --ignore-scripts.
     npm run --prefix "$THEMESDIR/docsy" install:theme-deps
   fi
-  # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH. The
+  # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; the
   # site provides it, mirroring the documented consumer setup for every
-  # Docsy source: sass-embedded as a site dev dependency, its bin dir on
-  # PATH. Runs after the --omit=dev install above, which would prune it.
+  # Docsy source. Runs after the --omit=dev install above, which would
+  # prune it.
   npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
   PATH="$PWD/node_modules/.bin:$PATH"
 }
