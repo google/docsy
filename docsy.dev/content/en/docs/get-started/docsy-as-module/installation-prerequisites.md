@@ -73,7 +73,7 @@ You can conveniently install any Hugo version using [hugo-extended][] (replace
 npm install hugo-extended@latest --save-dev
 ```
 
-## Install Dart Sass {#install-dart-sass}
+## Install Dart Sass
 
 This section applies to all [installation options](/docs/get-started/), not just
 Hugo-module setups.

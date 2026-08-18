@@ -99,7 +99,7 @@ shown):
 nvm install --lts
 ```
 
-### Install Dart Sass {#install-dart-sass}
+### Install Dart Sass
 
 See [Install Dart Sass][]. The `sass` CLI must be on `PATH` when you invoke
 `hugo` directly, as in the options below:
