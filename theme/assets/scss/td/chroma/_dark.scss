@@ -1,4 +1,5 @@
 /* Chroma style: native */
+@mixin chroma-dark {
 /* Generated using: hugo gen chromastyles --style=native */
 
 /* Background */ .bg { color:#d0d0d0;background-color:#202020; }
@@ -75,3 +76,4 @@
 /* GenericTraceback */ .chroma .gt { color:#d22323 }
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color:#666 }
+}

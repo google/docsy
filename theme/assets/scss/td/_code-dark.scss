@@ -1,10 +1,13 @@
+@import 'chroma/light';
+@import 'chroma/dark';
+
 @if $enable-dark-mode {
   [data-bs-theme='light'] {
-    @import 'chroma/light';
+    @include chroma-light;
   }
 
   [data-bs-theme='dark'] {
-    @import 'chroma/dark';
+    @include chroma-dark;
 
     .chroma {
       background-color: var(--td-pre-bg);

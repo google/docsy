@@ -74,13 +74,21 @@ function process_CLI_args() {
 function main() {
   process_CLI_args "$@"
 
+  # Mixin-wrapped (name derived from FILE) so importing a style is
+  # side-effect free: dart-sass forbids Sass @imports nested under @if or
+  # a selector, so td/_code-dark.scss imports at top level and @includes
+  # the mixin where the styles belong.
+  local mixin_name="chroma-$(basename "$DEST_FILE" .scss | sed 's/^_//')"
+
   # For more options, see https://gohugo.io/commands/hugo_gen_chromastyles/
   local cmd="$HUGO gen chromastyles --style=$CHROMA_STYLE >> $DEST_PATH"
   echo "Generating $DEST_FILE from Chroma style $CHROMA_STYLE using:"
   echo "  $cmd"
 
   echo "/* Chroma style: $CHROMA_STYLE */" > $DEST_PATH
+  echo "@mixin $mixin_name {" >> $DEST_PATH
   eval "$cmd"
+  echo "}" >> $DEST_PATH
 }
 
 main "$@"

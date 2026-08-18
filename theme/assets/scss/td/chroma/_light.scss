@@ -1,4 +1,5 @@
 /* Chroma style: friendly */
+@mixin chroma-light {
 /* Generated using: hugo gen chromastyles --style=friendly */
 
 /* Background */ .bg { background-color:#f0f0f0; }
@@ -78,3 +79,4 @@
 /* GenericTraceback */ .chroma .gt { color:#04d }
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color:#bbb }
+}
