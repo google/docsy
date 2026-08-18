@@ -113,11 +113,8 @@ to your chosen GitHub repo, following any setup instructions in
                 cache-dependency-path: '**/package-lock.json'
 
             - run: npm ci
-            # Runs the site's Hugo build script (see Install Dart Sass in
-            # the prerequisites), which has the sass CLI on its PATH.
-            - run: >-
-                npm run build -- --baseURL
-                https://${REPO_OWNER}.github.io/${REPO_NAME}
+            - run: |
+                npm run build -- --baseURL "https://${REPO_OWNER}.github.io/${REPO_NAME}"
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v4
