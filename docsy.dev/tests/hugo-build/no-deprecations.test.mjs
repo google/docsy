@@ -39,7 +39,11 @@ test('site build logs no Hugo deprecation notices', (t) => {
   // Hugo first reports deprecated API usage.
   const { res, output, deprecations } = buildSite();
   assert.equal(res.status, 0, `site build exits 0; output:\n${output}`);
-  assert.deepEqual(deprecations, [], 'build log is free of deprecation notices');
+  assert.deepEqual(
+    deprecations,
+    [],
+    'build log is free of deprecation notices',
+  );
   t.diagnostic(`Scanned ${output.split('\n').length} build-log lines`);
 });
 
