@@ -15,9 +15,7 @@ You need a
 [recent **extended** version](https://github.com/gohugoio/hugo/releases)
 (version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
 to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version,
-which supports
-[SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
+install from the release page, make sure to get the `extended` Hugo version; you
 may need to scroll down the list of releases to see it.
 
 For the tool versions that Docsy officially supports, see
@@ -74,6 +72,34 @@ You can conveniently install any Hugo version using [hugo-extended][] (replace
 ```bash
 npm install hugo-extended@latest --save-dev
 ```
+
+## Install Dart Sass {#install-dart-sass}
+
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
+As of Docsy 0.17, Hugo compiles Docsy's [SCSS][] using the
+[Dart Sass](https://sass-lang.com/dart-sass/) transpiler, which Hugo looks up as
+the `sass` CLI on its `PATH`. For npm-based sites, install the
+[sass-embedded](https://www.npmjs.com/package/sass-embedded) package from your
+project root:
+
+```bash
+npm install --save-dev sass-embedded
+```
+
+The `sass` CLI is then on `PATH` for every npm-run script. If you invoke `hugo`
+directly rather than through an npm script, prepend the binary directory to your
+`PATH` first:
+
+```bash
+PATH="$PWD/node_modules/.bin:$PATH" hugo
+```
+
+For non-npm setups (a Homebrew install, CI snippets for various providers), see
+[Hugo's Dart Sass installation guide][hugo-dart-sass]. Use Dart Sass 1.74.0 or
+later; as with all dependencies, Docsy officially supports the
+[latest release](/project/about/changelog/#official-support).
 
 ## Install Go language
 
@@ -155,8 +181,10 @@ site
 
 <!-- prettier-ignore-start -->
 [browserslist-defaults]: https://github.com/browserslist/browserslist
+[hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
+[SCSS]: https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html
 <!-- prettier-ignore-end -->
