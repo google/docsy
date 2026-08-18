@@ -13,9 +13,10 @@
     @extend .breadcrumb;
   }
 
-  // Descendant-scoped: outranks consumer rules on the extended .breadcrumb
-  // group, which tie a flat &__list in specificity and win by source order.
-  .td-breadcrumbs__list {
+  // Descendant-scoped (& &__list): outranks consumer rules on the extended
+  // .breadcrumb group, which tie a flat &__list in specificity and win by
+  // source order.
+  & &__list {
     background: inherit;
     padding-left: 0;
     padding-top: 0;
