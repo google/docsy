@@ -78,11 +78,10 @@ npm install hugo-extended@latest --save-dev
 This section applies to all [installation options](/docs/get-started/), not just
 Hugo-module setups.
 
-As of Docsy 0.17, Hugo compiles Docsy's [SCSS][] using the
-[Dart Sass](https://sass-lang.com/dart-sass/) transpiler, which Hugo looks up as
-the `sass` CLI on its `PATH`. For npm-based sites, install the
-[sass-embedded](https://www.npmjs.com/package/sass-embedded) package from your
-project root:
+As of Docsy 0.17, Hugo compiles Docsy's [SCSS][] using the [Dart
+Sass][dart-sass] transpiler, which Hugo looks up as the `sass` CLI on its
+`PATH`. For npm-based sites, install the [`sass-embedded`][sass-embedded]
+package from your project root:
 
 ```bash
 npm install --save-dev sass-embedded
@@ -181,10 +180,12 @@ site
 
 <!-- prettier-ignore-start -->
 [browserslist-defaults]: https://github.com/browserslist/browserslist
+[dart-sass]: https://sass-lang.com/dart-sass/
 [hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
+[sass-embedded]: https://www.npmjs.com/package/sass-embedded
 [SCSS]: https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html
 <!-- prettier-ignore-end -->
