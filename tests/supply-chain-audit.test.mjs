@@ -243,7 +243,7 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   assert.equal(
     pkgs['node_modules/hugo-extended'].dependencies['adm-zip'],
     '^0.5.17',
-    'hugo-extended still declares the adm-zip range that justifies the override',
+    'hugo-extended declares the adm-zip range that justifies the override',
   );
 });
 
