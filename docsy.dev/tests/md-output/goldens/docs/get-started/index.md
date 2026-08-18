@@ -29,8 +29,10 @@ Docsy.
 
 - **Adding the theme as an NPM package**: Docsy is published to the npm registry
   as [`@docsy/theme`](https://www.npmjs.com/package/@docsy/theme). If your
-  project already uses npm, this option adds no extra toolchain — you install
-  and update the theme like any other npm dependency. For instructions, see
+  project already uses npm, this option keeps the toolchain npm-only — you
+  install and update the theme, and the required
+  [Dart Sass compiler](/docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass),
+  like any other npm dependencies. For instructions, see
   [Docsy as an NPM package](/docs/get-started/other-options/#option-3-docsy-as-an-npm-package).
 - **Adding the theme as a Hugo Module**:
   [Hugo Modules](https://gohugo.io/hugo-modules/) are the simplest and latest
