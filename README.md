@@ -22,7 +22,17 @@ The following are basic prerequisites for using Docsy in your site:
 
 - Install a recent release of the Hugo "extended" version. If you install from
   the [Hugo release page](https://github.com/gohugoio/hugo/releases), make sure
-  you download the `extended` version, which supports SCSS.
+  you download the `extended` version.
+
+- Provide the [Dart Sass](https://sass-lang.com/dart-sass/) compiler: Hugo looks
+  it up as the `sass` CLI on its `PATH`. For npm-based sites:
+
+  ```sh
+  npm install --save-dev sass-embedded
+  ```
+
+  For details and other install routes, see
+  [Install Dart Sass](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass).
 
 - Install `PostCSS` so that the site build can create the final CSS assets. You
   can install it locally by running the following commands from the root
