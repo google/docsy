@@ -31,8 +31,9 @@ The following are basic prerequisites for using Docsy in your site:
   npm install --save-dev sass-embedded
   ```
 
-  For details and other install routes, see
-  [Install Dart Sass](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass).
+  For details and other install routes, see the **Install Dart Sass** section of
+  the
+  [installation prerequisites](https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/).
 
 - Install `PostCSS` so that the site build can create the final CSS assets. You
   can install it locally by running the following commands from the root
