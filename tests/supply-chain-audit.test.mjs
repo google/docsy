@@ -147,6 +147,10 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       if (pkg.hasInstallScript) withInstallScript.push(`${lockPath} ${key}`);
     }
   }
+  // A lock inventory, not an execution list: platform gating (os/cpu) is
+  // metadata the package itself controls, so even entries that never
+  // install on supported platforms are inventoried; each entry's reviewed
+  // disposition lives in allowScripts below.
   assert.deepEqual(
     withInstallScript,
     [

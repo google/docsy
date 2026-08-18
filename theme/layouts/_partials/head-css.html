@@ -1,5 +1,4 @@
 {{ $scssMain := "scss/main.scss" -}}
-
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
