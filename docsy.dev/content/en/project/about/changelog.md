@@ -158,7 +158,10 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   Colors computed by Sass at build time can shift imperceptibly (Dart Sass emits
   full-precision color math). Sites that can't provide Dart Sass can restore
   LibSass by overriding the `head-css.html` partial, for as long as their Hugo
-  version still bundles it ([#2724][]).
+  version still bundles it ([#2724][]). Sites providing custom Chroma style
+  files (`assets/scss/td/chroma/_light.scss` or `_dark.scss`) must wrap the
+  styles in a `chroma-light` or `chroma-dark` mixin; see [Light/dark code
+  styles][].
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
   `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
@@ -203,6 +206,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
+[Light/dark code styles]: /docs/content/lookandfeel/#lightdark-code-styles
 [mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1

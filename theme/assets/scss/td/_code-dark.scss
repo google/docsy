@@ -1,6 +1,13 @@
 @import 'chroma/light';
 @import 'chroma/dark';
 
+// Contract guard for site-supplied chroma files: a raw `hugo gen
+// chromastyles` dump here would fail with a bare "Undefined mixin" (its
+// rules also landing unscoped); name the required wrapper instead.
+@if not mixin-exists(chroma-light) or not mixin-exists(chroma-dark) {
+  @error 'As of Docsy 0.17, custom Chroma style files must wrap their styles in `@mixin chroma-light` / `@mixin chroma-dark`. For details, see https://www.docsy.dev/docs/content/lookandfeel/#lightdark-code-styles';
+}
+
 @if $enable-dark-mode {
   [data-bs-theme='light'] {
     @include chroma-light;

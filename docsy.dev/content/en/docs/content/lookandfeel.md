@@ -451,10 +451,22 @@ Docsy's default Chroma styles for [light/dark modes][] are:
 - [native][] for dark mode
 
 If you would like to use other styles, save the [Hugo generated Chroma styles][]
-to the appropriate file:
+to the appropriate file, wrapped in a `chroma-light` or `chroma-dark` mixin:
 
 - [assets/scss/td/chroma/_light.scss][]
 - [assets/scss/td/chroma/_dark.scss][]
+
+For example, to use the `tango` style in light mode, generate the styles with
+`hugo gen chromastyles --style=tango`, and save them as follows:
+
+```scss
+// assets/scss/td/chroma/_light.scss
+@mixin chroma-light {
+  /* Chroma style: tango, generated using: hugo gen chromastyles --style=tango */
+  /* Background */ .bg { ... }
+  ...
+}
+```
 
 Note that we tweak the [native][] style (in dark mode) so that the Generic
 Output color looks less prominent, offering better contrasts with the
