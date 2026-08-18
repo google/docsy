@@ -153,24 +153,13 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [**Breaking changes**](#breaking-change):
 
 - Switched the theme's default Sass transpiler from Hugo's embedded LibSass
-  (deprecated in Hugo 0.153.0, with removal to follow; Hugo will never bundle
-  Dart Sass) to [Dart Sass](https://sass-lang.com/dart-sass/) ([#2724][]).
-  Actions and impact:
-  - Provide the `sass` CLI on your build's `PATH`: add the
-    [`sass-embedded`](https://www.npmjs.com/package/sass-embedded) npm package
-    per [Install Dart Sass][], and for CI, use the updated [deployment docs][]
-    build commands.
-  - Built CSS changes serialization, not rendering: Dart Sass emits some
-    Sass-computed colors as `rgb(…%)` forms where LibSass emitted hex. Rendered
-    colors are unchanged; re-check anything that string-matches `--bs-*`
-    custom-property values.
-  - Sites providing custom Chroma style files
-    (`assets/scss/td/chroma/_light.scss` or `_dark.scss`) must wrap the styles
-    in a `chroma-light` or `chroma-dark` mixin; see [Light/dark code styles][].
-  - Escape hatch: sites that can't provide Dart Sass (for example, on platforms
-    without prebuilt binaries) can restore LibSass by overriding the
-    `head-css.html` partial, for as long as their Hugo version still bundles
-    LibSass.
+  (deprecated) to [Dart Sass](https://sass-lang.com/dart-sass/): sites must
+  provide the `sass` CLI, see [Install Dart Sass][]. Some Sass-computed colors
+  in the built CSS change serialization form, with rendering unchanged
+  ([#2724][]).
+- Custom Chroma style files (`assets/scss/td/chroma/_light.scss` or
+  `_dark.scss`) must wrap their styles in a `chroma-light` or `chroma-dark`
+  mixin; see [Light/dark code styles][] ([#2724][]).
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
   `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
@@ -214,7 +203,6 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
-[deployment docs]: /docs/deployment/
 [Install Dart Sass]:
   /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
