@@ -24,7 +24,7 @@ const CLEARED_REGIONS = [
   {
     name: 'breadcrumb',
     partial: '_partials/breadcrumb.html',
-    re: /<nav[^>]*class="td-breadcrumbs[\s\S]*?<\/nav>/g,
+    re: /<nav[^>]*class="td-breadcrumbs(?=[\s"])[\s\S]*?<\/nav>/g,
     pages: [
       'blog/first-post/index.html',
       'blog/index.html',
