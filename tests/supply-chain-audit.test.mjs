@@ -150,10 +150,11 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   assert.deepEqual(
     withInstallScript,
     [
+      'package-lock.json node_modules/@parcel/watcher',
       'package-lock.json node_modules/hugo-extended',
       'package-lock.json node_modules/puppeteer',
     ],
-    'hugo-extended and puppeteer are the only locked packages with install scripts',
+    'the install-script inventory is exactly @parcel/watcher (lock-only), hugo-extended, and puppeteer',
   );
 
   // The allowScripts entries are version-pinned, so they must track the
@@ -161,12 +162,17 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // and this assertion names the fix in the bump PR itself (#2712).
   // puppeteer's postinstall (browser download) is deliberately denied:
   // the visual suite installs its browser on demand (install:browser).
+  // @parcel/watcher is lock-only: an optional dep of the pure-JS sass
+  // fallback that sass-embedded ships for platforms without a prebuilt
+  // binary -- none we run, so it never installs; denied for defense in
+  // depth should the tree ever change.
   const lockedVersion = (name) =>
     locks['package-lock.json'].packages[`node_modules/${name}`].version;
   const { allowScripts } = readJSON('package.json');
   assert.deepEqual(
     allowScripts,
     {
+      [`@parcel/watcher@${lockedVersion('@parcel/watcher')}`]: false,
       [`hugo-extended@${lockedVersion('hugo-extended')}`]: true,
       [`puppeteer@${lockedVersion('puppeteer')}`]: false,
     },
@@ -246,7 +252,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   const { scripts } = readJSON('package.json');
   assert.equal(
     scripts['install:safe'],
-    'npm ci --omit=optional --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
+    'npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
     'install:safe is the reviewed lock-enforced, script-free command',
   );
   assert.equal(
