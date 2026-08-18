@@ -46,6 +46,23 @@ const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 // build tool, not a dependency under test) is borrowed from the repo install.
 const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
 
+// PATH for consumer-site Hugo builds: the site's own bin dir first, and this
+// checkout's directories removed, so a consumer site missing its own sass
+// compiler fails loud instead of silently borrowing the maintainer repo's
+// (only Hugo is deliberately borrowed, via HUGO_BIN above).
+function consumerEnv(site) {
+  const cleaned = (process.env.PATH ?? '')
+    .split(path.delimiter)
+    .filter((dir) => !dir.startsWith(repoRoot))
+    .join(path.delimiter);
+  return {
+    ...process.env,
+    PATH: [path.join(site, 'node_modules', '.bin'), cleaned].join(
+      path.delimiter,
+    ),
+  };
+}
+
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
 // forwards), falling back to a default. Last occurrence wins, so a flag passed
 // on the command line overrides one baked into the `test:smoke` npm script.
@@ -229,6 +246,25 @@ function buildThemeConsumerSite(name, pkgSpec) {
     0,
     `${pkgSpec} installs`,
   );
+  // The documented consumer action for the dartsass transpiler: the site
+  // provides its own sass compiler (Install Dart Sass, prerequisites doc).
+  progress(`${name}: npm install sass-embedded…`);
+  assert.equal(
+    run(
+      'npm',
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--save-dev',
+        'sass-embedded',
+      ],
+      npmOpts,
+    ).status,
+    0,
+    'sass-embedded installs',
+  );
 
   // The one-line consumer config change (@ must be quoted in YAML).
   appendFileSync(
@@ -236,7 +272,11 @@ function buildThemeConsumerSite(name, pkgSpec) {
     "\ntheme: '@docsy/theme'\nthemesDir: node_modules\n",
   );
   progress(`${name}: hugo build…`);
-  assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+  assert.equal(
+    hugo([], { cwd: site, env: consumerEnv(site) }).status,
+    0,
+    'hugo build',
+  );
   assertBuilt(name);
   assertGenFaviconsBin(site);
   progress(`${name}: ok`);
@@ -364,10 +404,36 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps etc',
   );
 
+  // The documented consumer action for the dartsass transpiler (Install
+  // Dart Sass, prerequisites doc), from the site root as a consumer would.
+  progress('clone: npm install sass-embedded…');
+  const npmOpts = { cwd: site, shell: winShell };
+  assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
+  assert.equal(
+    run(
+      'npm',
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--save-dev',
+        'sass-embedded',
+      ],
+      npmOpts,
+    ).status,
+    0,
+    'sass-embedded installs',
+  );
+
   // The one-line consumer config change.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
   progress('clone: hugo build…');
-  assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+  assert.equal(
+    hugo([], { cwd: site, env: consumerEnv(site) }).status,
+    0,
+    'hugo build',
+  );
   assertBuilt(name);
   progress('clone: ok');
 });
