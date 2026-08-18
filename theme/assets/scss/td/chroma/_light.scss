@@ -1,6 +1,5 @@
 /* Chroma style: friendly */
 /* Generated using: hugo gen chromastyles --style=friendly */
-@mixin chroma-light {
 
 /* Background */ .bg { background-color:#f0f0f0; }
 /* PreWrapper */ .chroma { background-color:#f0f0f0;-webkit-text-size-adjust:none; }
@@ -79,4 +78,3 @@
 /* GenericTraceback */ .chroma .gt { color:#04d }
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color:#bbb }
-}

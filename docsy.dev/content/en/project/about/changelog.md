@@ -157,9 +157,6 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
   provide the `sass` CLI, see [Install Dart Sass][]. Some Sass-computed colors
   in the built CSS change serialization form, with rendering unchanged
   ([#2724][]).
-- Custom Chroma style files (`assets/scss/td/chroma/_light.scss` or
-  `_dark.scss`) must wrap their styles in a `chroma-light` or `chroma-dark`
-  mixin; see [Light/dark code styles][] ([#2724][]).
 - Renamed the theme-dependencies install command that clone and submodule
   installs run from `themes/docsy`: `npm run postinstall` →
   `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
@@ -206,7 +203,6 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [Install Dart Sass]:
   /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
-[Light/dark code styles]: /docs/content/lookandfeel/#lightdark-code-styles
 [mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1

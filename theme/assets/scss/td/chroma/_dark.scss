@@ -1,6 +1,5 @@
 /* Chroma style: native */
 /* Generated using: hugo gen chromastyles --style=native */
-@mixin chroma-dark {
 
 /* Background */ .bg { color:#d0d0d0;background-color:#202020; }
 /* PreWrapper */ .chroma { color:#d0d0d0;background-color:#202020;-webkit-text-size-adjust:none; }
@@ -76,4 +75,3 @@
 /* GenericTraceback */ .chroma .gt { color:#d22323 }
 /* GenericUnderline */ .chroma .gl { text-decoration:underline }
 /* TextWhitespace */ .chroma .w { color:#666 }
-}
