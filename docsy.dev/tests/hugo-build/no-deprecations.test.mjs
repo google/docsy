@@ -38,8 +38,8 @@ test('site build logs no Hugo deprecation notices', (t) => {
   // The `_hugo` script builds with `--logLevel info`, the level at which
   // Hugo first reports deprecated API usage.
   const { res, output, deprecations } = buildSite();
-  assert.equal(res.status, 0, `Build failed:\n${output}`);
-  assert.deepEqual(deprecations, [], 'Hugo build logged deprecation notice(s)');
+  assert.equal(res.status, 0, `site build exits 0; output:\n${output}`);
+  assert.deepEqual(deprecations, [], 'build log is free of deprecation notices');
   t.diagnostic(`Scanned ${output.split('\n').length} build-log lines`);
 });
 
