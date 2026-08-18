@@ -157,9 +157,10 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
     'the install-script inventory is exactly @parcel/watcher (lock-only), hugo-extended, and puppeteer',
   );
 
-  // The allowScripts entries are version-pinned, so they must track the
-  // locked versions: a stale pin fails npm ci under strict-allow-scripts,
-  // and this assertion names the fix in the bump PR itself (#2712).
+  // Allow entries are version-pinned so a bump's new (unreviewed) script
+  // fails npm ci under strict-allow-scripts; the assertion names the fix in
+  // the bump PR itself (#2712). Deny entries are unversioned: the answer is
+  // false for every version, so a pin would only add bump churn.
   // puppeteer's postinstall (browser download) is deliberately denied:
   // the visual suite installs its browser on demand (install:browser).
   // @parcel/watcher is lock-only: an optional dep of the pure-JS sass
@@ -172,9 +173,9 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   assert.deepEqual(
     allowScripts,
     {
-      [`@parcel/watcher@${lockedVersion('@parcel/watcher')}`]: false,
+      '@parcel/watcher': false,
       [`hugo-extended@${lockedVersion('hugo-extended')}`]: true,
-      [`puppeteer@${lockedVersion('puppeteer')}`]: false,
+      puppeteer: false,
     },
     'allowScripts covers exactly the locked install-script packages',
   );

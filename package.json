@@ -110,8 +110,8 @@
   },
   "spelling": "cSpell:ignore -",
   "allowScripts": {
-    "@parcel/watcher@2.6.0": false,
+    "@parcel/watcher": false,
     "hugo-extended@0.164.0": true,
-    "puppeteer@25.5.0": false
+    "puppeteer": false
   }
 }
