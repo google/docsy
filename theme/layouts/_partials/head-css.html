@@ -14,6 +14,7 @@ importer loads everything else, Docsy's own tree included, as dependencies.
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
+          "silenceDeprecations" (slice "import")
           "silenceDependencyDeprecations" true
           "enableSourceMap" (not hugo.IsProduction)) -}}
 
