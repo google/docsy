@@ -52,7 +52,7 @@ function validateAuditGate(report, accepted) {
         // Ensure the chain target exists and carries an advisory object.
         if (typeof via === 'string') {
           assert.ok(
-            allVulns[via],
+            Object.hasOwn(allVulns, via),
             `string via "${via}" on ${name} must resolve to a key in vulnerabilities`,
           );
           continue;
@@ -195,4 +195,66 @@ test('audit gate: parser rejects string via without chain target', () => {
     () => validateAuditGate(reportWithDanglingStringVia, acceptedAdvisories),
     /string via "nonexistent-key".*must resolve to a key/,
   );
+});
+
+test('audit gate: parser catches unreviewed advisory alongside accepted one', () => {
+  const reportWithMixedAdvisories = {
+    auditReportVersion: 2,
+    error: undefined,
+    metadata: { dependencies: { total: 2 } },
+    vulnerabilities: {
+      'package-a': {
+        name: 'package-a',
+        via: [
+          {
+            url: 'https://github.com/advisories/GHSA-q3xp-j858-q9xf',
+            severity: 'critical',
+            name: 'markdownlint-rule-link-pattern',
+            title: 'Malware',
+          },
+        ],
+      },
+      'package-b': {
+        name: 'package-b',
+        via: [
+          {
+            url: 'https://github.com/advisories/GHSA-xxxx-yyyy-zzzz',
+            severity: 'high',
+            name: 'unreviewed-pkg',
+            title: 'New advisory',
+          },
+        ],
+      },
+    },
+  };
+  assert.throws(
+    () => validateAuditGate(reportWithMixedAdvisories, acceptedAdvisories),
+    /GHSA-xxxx-yyyy-zzzz.*reviewed, accepted advisory/,
+  );
+});
+
+test('audit gate: parser accepts valid transitive advisory chain', () => {
+  const reportWithTransitiveChain = {
+    auditReportVersion: 2,
+    error: undefined,
+    metadata: { dependencies: { total: 2 } },
+    vulnerabilities: {
+      'package-a': {
+        name: 'package-a',
+        via: ['package-b'],
+      },
+      'package-b': {
+        name: 'package-b',
+        via: [
+          {
+            url: 'https://github.com/advisories/GHSA-q3xp-j858-q9xf',
+            severity: 'critical',
+            name: 'markdownlint-rule-link-pattern',
+            title: 'Malware',
+          },
+        ],
+      },
+    },
+  };
+  validateAuditGate(reportWithTransitiveChain, acceptedAdvisories);
 });
