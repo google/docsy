@@ -2,7 +2,7 @@
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
-          "silenceDeprecations" (slice "import" "global-builtin")
+          "silenceDeprecations" (slice "import")
           "silenceDependencyDeprecations" true
           "enableSourceMap" (not hugo.IsProduction)) -}}
 
