@@ -13,6 +13,7 @@ const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
+const npmCmd = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 
 // GHSA-q3xp-j858-q9xf flags every version of the registry package
 // markdownlint-rule-link-pattern, where malware was once published under
@@ -25,7 +26,7 @@ const acceptedAdvisories = new Map([
 ]);
 
 test('audit: reported advisories are reviewed and accepted', () => {
-  const res = spawnSync('npm', ['audit', '--json'], {
+  const res = spawnSync(npmCmd, ['audit', '--json'], {
     cwd: repoRoot,
     encoding: 'utf8',
     maxBuffer: 16 * 1024 * 1024,
