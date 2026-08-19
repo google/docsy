@@ -193,7 +193,7 @@ From this point on, build and serve your site with Hugo, run through [npm
 scripts][] (see the [prerequisites](#install-dart-sass)), for example:
 
 ```sh
-npm run serve
+npm run hugo -- server
 ```
 
 ## Option 2: Clone the Docsy theme
@@ -264,7 +264,7 @@ site that uses the Docsy NPM package:
     follows:
 
     ```console
-    $ npm run build
+    $ npm run hugo
     Start building sites …
     ...
     ```

@@ -92,13 +92,13 @@ The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through
 ```json
 {
   "scripts": {
-    "build": "hugo --minify",
-    "serve": "hugo server"
+    "hugo": "hugo"
   }
 }
 ```
 
-build and serve your site with `npm run build` and `npm run serve`.
+run any Hugo command as `npm run hugo -- ARGS`, for example
+`npm run hugo -- server` to serve your site locally.
 
 For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
 For the minimum and officially supported Dart Sass versions, see
