@@ -143,7 +143,9 @@ function _npm_install() {
   # site provides it, mirroring the documented consumer setup for every
   # Docsy source. Runs after the --omit=dev install above, which would
   # prune it.
-  npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
+  # RED-PROOF PROBE (docsy#2724): deliberately skip the site's sass install;
+  # every new-site CI leg must fail at the site build. Reverted next commit.
+  # npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
   # The documented hugo passthrough script, with one harness twist: hugo is
   # the borrowed repo binary ($HUGO, expanded by the script shell at run
   # time), not a bare name -- a name lookup would need the repo's bin dir
