@@ -26,7 +26,9 @@ function buildSite() {
       .filter((line) => /deprecated/i.test(line))
       // Dart Sass language deprecations (Bootstrap's and Docsy's Sass) are
       // deliberately left visible as fix-me reminders (docsy#2724); this
-      // probe guards Hugo API deprecations only.
+      // probe guards Hugo API deprecations only. The exclusion keys on
+      // Hugo's `Dart Sass:` line prefix; a prefix change fails this gate
+      // red rather than widening it silently.
       .filter((line) => !/Dart Sass/.test(line));
     return { res, output, deprecations };
   } finally {
