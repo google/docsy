@@ -26,9 +26,7 @@ You need a
 [recent **extended** version](https://github.com/gohugoio/hugo/releases)
 (version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
 to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version,
-which supports
-[SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
+install from the release page, make sure to get the `extended` Hugo version; you
 may need to scroll down the list of releases to see it.
 
 For the tool versions that Docsy officially supports, see [Official
@@ -100,6 +98,11 @@ shown):
 ```sh
 nvm install --lts
 ```
+
+### Install Dart Sass
+
+See [Install Dart Sass][], including its recommendation to run Hugo through [npm
+scripts][], which have the `sass` CLI on their `PATH` automatically.
 
 ### Install PostCSS (optional) {#install-postcss}
 
@@ -186,11 +189,11 @@ your project's root directory:
     Every time you run `npm install` from your project root, the `prepare`
     script will fetch the latest version of Docsy and its dependencies.
 
-From this point on, build and serve your site using the usual Hugo commands, for
-example:
+From this point on, build and serve your site with Hugo, run through [npm
+scripts][] (see the [prerequisites](#install-dart-sass)), for example:
 
 ```sh
-hugo serve
+npm run hugo -- server
 ```
 
 ## Option 2: Clone the Docsy theme
@@ -236,11 +239,11 @@ site that uses the Docsy NPM package:
     cd myproject
     ```
 
-2.  Install Docsy:
+2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler:
 
     ```sh
     npm init -y
-    npm install --save-dev @docsy/theme
+    npm install --save-dev @docsy/theme sass-embedded
     ```
 
     > [!TIP] Hugo install tip
@@ -256,11 +259,12 @@ site that uses the Docsy NPM package:
     themesDir: node_modules
     ```
 
-4.  Build or serve your new site using the usual Hugo commands. For example,
-    build your site as follows:
+4.  Build or serve your new site with Hugo, run through [npm scripts][] (see the
+    [prerequisites](#install-dart-sass)). For example, build your site as
+    follows:
 
     ```console
-    $ hugo
+    $ npm run hugo
     Start building sites …
     ...
     ```
@@ -329,15 +333,15 @@ from scratch as it provides defaults for many required configuration parameters.
   [Examples and templates](/examples/).
 - [Publish your site](/docs/deployment/).
 
-[Install PostCSS]:
-  /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
+<!-- prettier-ignore-start -->
 [`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[Install PostCSS]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [npm install]: https://docs.npmjs.com/cli/v11/commands/npm-install#description
-[nvm]:
-  https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
+[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [official-support]: /project/about/changelog/#official-support
-[prepare]:
-  https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
+[prepare]: https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
+<!-- prettier-ignore-end -->

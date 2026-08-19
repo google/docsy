@@ -22,7 +22,9 @@ below show you how to create your own workflow file.
 
 Before deploying on GitHub Pages, make sure that you've pushed your site source
 to your chosen GitHub repo, following any setup instructions in
-[Using the theme](/docs/get-started/docsy-as-module).
+[Using the theme](/docs/get-started/docsy-as-module), and that your site's
+`package.json` declares `sass-embedded` and a `hugo` script, per
+[Install Dart Sass](/docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass).
 
 > [!NOTE] Correct baseURL setting
 >
@@ -111,9 +113,8 @@ to your chosen GitHub repo, following any setup instructions in
                 cache-dependency-path: '**/package-lock.json'
 
             - run: npm ci
-            - run: >-
-                hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME}
-                --minify
+            - run: |
+                npm run hugo -- --minify --baseURL "https://${REPO_OWNER}.github.io/${REPO_NAME}"
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v4

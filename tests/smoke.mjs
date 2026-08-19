@@ -1,7 +1,7 @@
 // Smoke tests: builds a Docsy-based site several ways and asserts each produces
 // a real, fully-styled site (not merely a zero exit code).
 //
-// Uses Node's built-in test runner (node:test) — no extra test deps.
+// Uses Node's built-in test runner (node:test): no extra test deps.
 //
 //   Usage: npm run test:smoke -- [options]
 //   Options:
@@ -11,7 +11,7 @@
 //                      Docsy branch to fetch. Fallback: main
 //
 // When no flags are given and the current branch has a GitHub upstream other
-// than main, that upstream (repo and branch) is used as the default target —
+// than main, that upstream (repo and branch) is used as the default target:
 // the common case when smoke-testing a PR branch pushed to a fork.
 //
 // NOTE: slow and network-bound (npm + Hugo fetch from GitHub). Deliberately
@@ -45,6 +45,45 @@ const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 // resolve the repo's own node_modules and mask a packaging gap. Only Hugo (the
 // build tool, not a dependency under test) is borrowed from the repo install.
 const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
+
+// PATH for consumer-site Hugo builds: the site's own bin dir first, and this
+// checkout's directories removed, so a consumer site missing its own sass
+// compiler fails loud instead of silently borrowing the maintainer repo's
+// (only Hugo is deliberately borrowed, via HUGO_BIN above).
+function consumerEnv(site) {
+  const cleaned = (process.env.PATH ?? '')
+    .split(path.delimiter)
+    .filter((dir) => !dir.startsWith(repoRoot))
+    .join(path.delimiter);
+  return {
+    ...process.env,
+    PATH: [path.join(site, 'node_modules', '.bin'), cleaned].join(
+      path.delimiter,
+    ),
+  };
+}
+
+// The documented consumer action for the dartsass transpiler: the site
+// provides its own sass compiler (Install Dart Sass, prerequisites doc).
+function installSiteSass(label, npmOpts) {
+  progress(`${label}: npm install sass-embedded…`);
+  assert.equal(
+    run(
+      'npm',
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--save-dev',
+        'sass-embedded',
+      ],
+      npmOpts,
+    ).status,
+    0,
+    'sass-embedded installs',
+  );
+}
 
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
 // forwards), falling back to a default. Last occurrence wins, so a flag passed
@@ -150,12 +189,12 @@ function assertBuilt(name) {
 
 before(() => {
   if (!existsSync(TMP)) mkdirSync(TMP);
-  progress(`Target — ${TARGET}  (override with --repo / --branch)`);
+  progress(`Target: ${TARGET}  (override with --repo / --branch)`);
   const v = hugo(['version']);
   assert.match(
     v.stdout ?? '',
     /extended/,
-    'extended Hugo not found — run `npm run install:safe` at the repo root first',
+    'extended Hugo is installed (missing? run `npm run install:safe` at the repo root)',
   );
 });
 
@@ -185,7 +224,7 @@ function assertGenFaviconsBin(site) {
 for (const src of ['NPM', 'HUGO_MODULE']) {
   test(`make-site.sh -s ${src}`, () => {
     const name = `smoke-${src.toLowerCase()}`;
-    progress(`${src}: make-site (npm/Hugo fetch + build) — ${TARGET}…`);
+    progress(`${src}: make-site (npm/Hugo fetch + build) from ${TARGET}…`);
     const r = run(
       'bash',
       [MAKE_SITE, '-s', src, '-r', REPO, '-v', BRANCH, '-f', '-n', name],
@@ -201,9 +240,9 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
 // --- consumer installs of @docsy/theme --------------------------------------
 // Install the theme-only package into a scratch site outside the repo and
 // exercise the consumer contract: a styled build plus the wired gen-favicons
-// bin. The tarball test packs theme/ from this checkout — the pre-publish
+// bin. The tarball test packs theme/ from this checkout: the pre-publish
 // check that covers the code under review. The registry test installs a
-// published spec — the post-publish check.
+// published spec: the post-publish check.
 
 function buildThemeConsumerSite(name, pkgSpec) {
   const site = path.join(TMP, name);
@@ -229,6 +268,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
     0,
     `${pkgSpec} installs`,
   );
+  installSiteSass(name, npmOpts);
 
   // The one-line consumer config change (@ must be quoted in YAML).
   appendFileSync(
@@ -236,7 +276,11 @@ function buildThemeConsumerSite(name, pkgSpec) {
     "\ntheme: '@docsy/theme'\nthemesDir: node_modules\n",
   );
   progress(`${name}: hugo build…`);
-  assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+  assert.equal(
+    hugo([], { cwd: site, env: consumerEnv(site) }).status,
+    0,
+    'hugo build',
+  );
   assertBuilt(name);
   assertGenFaviconsBin(site);
   progress(`${name}: ok`);
@@ -261,7 +305,7 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   buildThemeConsumerSite('smoke-tarball', path.join(packDest, tgz));
 });
 
-// DOCSY_THEME_PKG overrides the registry spec — e.g. @docsy/theme@next to vet
+// DOCSY_THEME_PKG overrides the registry spec: e.g. @docsy/theme@next to vet
 // an RC, or @docsy/theme@0.16.0 to pin a version. The default, the bare name,
 // resolves to the `latest` dist-tag: whatever the registry currently serves
 // plain `npm install @docsy/theme` users.
@@ -272,9 +316,9 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
 
 // --- declared minimum Hugo version actually builds --------------------------
 // Pins Hugo to the theme's declared minimum (module.hugoVersion.min) and
-// builds the Hugo-module-mode site — the most version-sensitive path: on
-// sub-minimum Hugos, `hugo mod npm pack` emits empty deps and the build
-// breaks, historically even silently (exit 0, unstyled site) — the failure
+// builds the Hugo-module-mode site, the most version-sensitive path: on
+// sub-minimum Hugo versions, `hugo mod npm pack` emits empty deps and the build
+// breaks, historically even silently (exit 0, unstyled site), the failure
 // class that assertBuilt() exists to catch.
 test('minimum Hugo version builds the HUGO_MODULE site', () => {
   // Extraction regex duplicated from tests/hugo-versions.test.mjs (the
@@ -285,7 +329,7 @@ test('minimum Hugo version builds the HUGO_MODULE site', () => {
   ).match(/^\s*hugoVersion:\s*\n(?:\s+extended:.*\n)?\s+min:\s*(\S+)/m)?.[1];
   assert.ok(min, 'theme/hugo.yaml declares module.hugoVersion.min');
 
-  // Scratch-install hugo-extended@min under TMP (cached across runs).
+  // Cached across runs under TMP.
   const minHugo = path.join(TMP, `hugo-${min}`, 'node_modules', '.bin', 'hugo');
   if (!existsSync(minHugo)) {
     progress(`min-hugo: npm install hugo-extended@${min}…`);
@@ -305,7 +349,9 @@ test('minimum Hugo version builds the HUGO_MODULE site', () => {
   );
 
   const name = 'smoke-min-hugo';
-  progress(`min-hugo: make-site -s HUGO_MODULE with Hugo v${min} — ${TARGET}…`);
+  progress(
+    `min-hugo: make-site -s HUGO_MODULE with Hugo v${min} from ${TARGET}…`,
+  );
   const r = run(
     'bash',
     [
@@ -364,10 +410,17 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps etc',
   );
 
-  // The one-line consumer config change.
+  const npmOpts = { cwd: site, shell: winShell };
+  assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
+  installSiteSass('clone', npmOpts);
+
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');
   progress('clone: hugo build…');
-  assert.equal(hugo([], { cwd: site }).status, 0, 'hugo build');
+  assert.equal(
+    hugo([], { cwd: site, env: consumerEnv(site) }).status,
+    0,
+    'hugo build',
+  );
   assertBuilt(name);
   progress('clone: ok');
 });

@@ -12,7 +12,8 @@ Source projects, with premium tiers if you require greater support.
 
 Before deploying with Netlify, make sure that you've pushed your site source to
 your chosen GitHub (or other provider) repo, following any setup instructions in
-[Using the theme][].
+[Using the theme][], and that your site's `package.json` declares
+`sass-embedded`, per [Install Dart Sass][].
 
 Then follow the instructions in [Host on Netlify][] to set up a Netlify account
 (if you don't have one already) and authorize access to your GitHub or other Git
@@ -31,7 +32,8 @@ provider account. Once you're logged in:
       - If you are using Docsy as a [Hugo module][] or NPM package, you can just
         specify `hugo`. Netlify installs dependencies automatically when your
         site's [base directory][] includes your Node dependency files (such as
-        `package.json` and lock files).
+        `package.json` and lock files), and puts their executables, including
+        the `sass` CLI, on the build command's `PATH`.
    2. Click **Show advanced**.
    3. In the **Advanced build settings** section, click **New variable**.
    4. Specify `NODE_VERSION` as the **Key** for the new variable, and set its
@@ -65,6 +67,7 @@ clicking **Site settings** > **Build and deploy**.
 [go-dl]: https://go.dev/dl/
 [Host on Netlify]: https://gohugo.io/hosting-and-deployment/hosting-on-netlify/
 [Hugo module]: /docs/get-started/docsy-as-module/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [hugo-releases]: https://github.com/gohugoio/hugo/releases
 [Netlify]: https://www.netlify.com/
 [netlify-toml-docs]: https://docs.netlify.com/configure-builds/file-based-configuration/

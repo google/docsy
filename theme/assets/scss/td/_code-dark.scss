@@ -1,10 +1,12 @@
+@use 'sass:meta';
+
 @if $enable-dark-mode {
   [data-bs-theme='light'] {
-    @import 'chroma/light';
+    @include meta.load-css('chroma/light');
   }
 
   [data-bs-theme='dark'] {
-    @import 'chroma/dark';
+    @include meta.load-css('chroma/dark');
 
     .chroma {
       background-color: var(--td-pre-bg);

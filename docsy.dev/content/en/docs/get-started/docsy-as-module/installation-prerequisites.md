@@ -15,9 +15,7 @@ You need a
 [recent **extended** version](https://github.com/gohugoio/hugo/releases)
 (version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
 to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version,
-which supports
-[SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you
+install from the release page, make sure to get the `extended` Hugo version; you
 may need to scroll down the list of releases to see it.
 
 For the tool versions that Docsy officially supports, see
@@ -74,6 +72,37 @@ You can conveniently install any Hugo version using [hugo-extended][] (replace
 ```bash
 npm install hugo-extended@latest --save-dev
 ```
+
+## Install Dart Sass
+
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
+Hugo compiles Docsy's [SCSS][] using the [Dart Sass][] transpiler, which Hugo
+looks up as the `sass` CLI on its `PATH`. For npm-based sites, install the
+[`sass-embedded`][sass-embedded] package from your project root:
+
+```bash
+npm install --save-dev sass-embedded
+```
+
+The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through
+[npm scripts][]. For example, with the following in your `package.json`:
+
+```json
+{
+  "scripts": {
+    "hugo": "hugo"
+  }
+}
+```
+
+run any Hugo command as `npm run hugo -- ARGS`, for example
+`npm run hugo -- server` to serve your site locally.
+
+For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
+For the officially supported Dart Sass version, see
+[Official support](/project/about/changelog/#official-support).
 
 ## Install Go language
 
@@ -141,9 +170,9 @@ npm install --save-dev autoprefixer postcss-cli
 
 > [!NOTE]
 >
-> npm also installs [postcss][postcss] itself, as a peer dependency of the
-> packages listed above. If you use a package manager that doesn't auto-install
-> peer dependencies, such as Yarn, add `postcss` to the install command.
+> npm also installs [postcss][] itself, as a peer dependency of the packages
+> listed above. If you use a package manager that doesn't auto-install peer
+> dependencies, such as Yarn, add `postcss` to the install command.
 
 ## What's next?
 
@@ -155,8 +184,13 @@ site
 
 <!-- prettier-ignore-start -->
 [browserslist-defaults]: https://github.com/browserslist/browserslist
+[dart sass]: https://sass-lang.com/dart-sass/
+[hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
+[npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
+[sass-embedded]: https://www.npmjs.com/package/sass-embedded
+[SCSS]: https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html
 <!-- prettier-ignore-end -->

@@ -147,28 +147,39 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       if (pkg.hasInstallScript) withInstallScript.push(`${lockPath} ${key}`);
     }
   }
+  // A lock inventory, not an execution list: platform gating (os/cpu) is
+  // metadata the package itself controls, so even entries that never
+  // install on supported platforms are inventoried; each entry's reviewed
+  // disposition lives in allowScripts below.
   assert.deepEqual(
     withInstallScript,
     [
+      'package-lock.json node_modules/@parcel/watcher',
       'package-lock.json node_modules/hugo-extended',
       'package-lock.json node_modules/puppeteer',
     ],
-    'hugo-extended and puppeteer are the only locked packages with install scripts',
+    'locked install-script packages match the reviewed inventory',
   );
 
-  // The allowScripts entries are version-pinned, so they must track the
-  // locked versions: a stale pin fails npm ci under strict-allow-scripts,
-  // and this assertion names the fix in the bump PR itself (#2712).
+  // Allow entries are version-pinned so a bump's new (unreviewed) script
+  // fails npm ci under strict-allow-scripts; the assertion names the fix in
+  // the bump PR itself (#2712). Deny entries are unversioned: the answer is
+  // false for every version, so a pin would only add bump churn.
   // puppeteer's postinstall (browser download) is deliberately denied:
   // the visual suite installs its browser on demand (install:browser).
+  // @parcel/watcher is lock-only: an optional dep of the pure-JS sass
+  // fallback that sass-embedded ships for platforms without a prebuilt
+  // binary (none we run), so it never installs; denied for defense in
+  // depth should the tree ever change.
   const lockedVersion = (name) =>
     locks['package-lock.json'].packages[`node_modules/${name}`].version;
   const { allowScripts } = readJSON('package.json');
   assert.deepEqual(
     allowScripts,
     {
+      '@parcel/watcher': false,
       [`hugo-extended@${lockedVersion('hugo-extended')}`]: true,
-      [`puppeteer@${lockedVersion('puppeteer')}`]: false,
+      puppeteer: false,
     },
     'allowScripts covers exactly the locked install-script packages',
   );
@@ -236,7 +247,7 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   assert.equal(
     pkgs['node_modules/hugo-extended'].dependencies['adm-zip'],
     '^0.5.17',
-    'hugo-extended still declares the adm-zip range that justifies the override',
+    'hugo-extended declares the adm-zip range that justifies the override',
   );
 });
 
@@ -244,9 +255,12 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
 // install …` rider on a script the workflow audit trusts by name.
 test('manifests: the install path keeps its locked, script-free form', () => {
   const { scripts } = readJSON('package.json');
+  // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
+  // binary as platform-keyed optional packages, npm's script-free
+  // platform-dispatch form; omitting optionals leaves no compiler.
   assert.equal(
     scripts['install:safe'],
-    'npm ci --omit=optional --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
+    'npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
     'install:safe is the reviewed lock-enforced, script-free command',
   );
   assert.equal(
@@ -494,13 +508,25 @@ test('workflows: installs are locked and credential-isolated', () => {
           `${id} run step uses npm as its only package manager`,
         );
         // GITHUB_ENV writes poison later steps' env past the map checks
-        // above; GITHUB_PATH prepends, so a writer could shadow npm
-        // itself; pin its one reviewed use (the lychee install).
-        assert.doesNotMatch(
-          run,
-          /GITHUB_ENV/,
-          `${id} run step leaves later steps' env untouched`,
-        );
+        // above; pin the one reviewed use (the smoke scaffold path, a
+        // static runner-temp location that later steps read as their
+        // working directory).
+        for (const line of run.split('\n')) {
+          if (!line.includes('GITHUB_ENV')) continue;
+          assert.equal(
+            line.trim(),
+            'echo "SCAFFOLD=$SCAFFOLD" >> "$GITHUB_ENV"',
+            `${id} run step writes GITHUB_ENV only via the reviewed scaffold line`,
+          );
+          // The echo pin alone leaves $SCAFFOLD's value free; pin its
+          // assignment to the reviewed runner-temp literal.
+          assert.ok(
+            run.includes('SCAFFOLD="$RUNNER_TEMP/docsy-smoke"'),
+            `${id} sets SCAFFOLD to the reviewed runner-temp path`,
+          );
+        }
+        // GITHUB_PATH prepends, so a writer could shadow npm itself; pin
+        // its one reviewed use (the lychee install).
         for (const line of run.split('\n')) {
           if (!line.includes('GITHUB_PATH')) continue;
           assert.equal(

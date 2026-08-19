@@ -1,5 +1,5 @@
 #!/bin/bash
-# cSpell:ignore autoprefixer docsy postcss themesdir github oneline
+# cSpell:ignore themesdir oneline
 set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,13 +10,15 @@ DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-# Default to the repo-installed Hugo: fails loud when absent. Bare-npx
-# fallback rationale: tests/runner-lint.test.mjs.
+# No fallback when the repo install is absent; bare-npx rationale:
+# tests/runner-lint.test.mjs. Exported for the scaffolded site's hugo
+# script (see _npm_install).
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
+export HUGO
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
-OUTPUT_REDIRECT="" # Use along with VERBOSE
+OUTPUT_REDIRECT=""
 
 function _usage() {
   cat <<EOS
@@ -98,7 +100,6 @@ function process_CLI_args() {
   fi
 }
 
-# Create site directory, checking if it exists first
 function create_site_directory() {
   if [ -e "$SITE_NAME" ]; then
     if [ "$FORCE_DELETE" = true ]; then
@@ -121,8 +122,10 @@ function _npm_install() {
   # Docsy declares no install hooks and none of these deps needs install
   # scripts. Pin that for the site's own installs, plus a registry-release
   # cooldown; the command also carries --ignore-scripts so higher-precedence
-  # ambient config can't weaken the policy.
-  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\n' > .npmrc
+  # ambient config can't weaken the policy. script-shell keeps the hugo
+  # script's $HUGO expansion working on Windows (Git Bash, per the repo's
+  # own .npmrc doctrine).
+  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\nscript-shell=bash\n' > .npmrc
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
@@ -135,6 +138,16 @@ function _npm_install() {
     # carries its protections inline: lock-exact npm ci with --ignore-scripts.
     npm run --prefix "$THEMESDIR/docsy" install:theme-deps
   fi
+  # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; the
+  # site provides it, mirroring the documented consumer setup for every
+  # Docsy source. Runs after the --omit=dev install above, which would
+  # prune it.
+  npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
+  # The documented hugo passthrough script, with one harness twist: hugo is
+  # the borrowed repo binary ($HUGO, expanded by the script shell at run
+  # time), not a bare name. A name lookup would need the repo's bin dir on
+  # PATH, whose sass could then mask a missing site compiler.
+  npm pkg set 'scripts.hugo="$HUGO"'
 }
 
 function set_up_and_cd_into_site() {
@@ -152,10 +165,8 @@ function set_up_and_cd_into_site() {
 
 function _set_up_site_using_hugo_modules() {
   local user_name=$(whoami)
-  # : ${user_name:=$USER}
-  # : ${user_name:="me"}
 
-  # TOF: Docsy theme lives in the `theme/` subfolder of the Docsy repo.
+  # The Docsy theme lives in the theme/ subfolder of the Docsy repo.
   HUGO_MOD_WITH_VERS="$DOCSY_REPO/theme"
   if [[ -n $DOCSY_VERS ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"
@@ -215,7 +226,7 @@ function main() {
 
   [[ $VERBOSE ]] && set -x
   set_up_and_cd_into_site
-  eval $HUGO $OUTPUT_REDIRECT # Generate site
+  eval npm run hugo $OUTPUT_REDIRECT
   [[ $VERBOSE ]] && set +x
   cd ..
 

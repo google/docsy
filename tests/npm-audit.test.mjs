@@ -27,16 +27,8 @@ const acceptedAdvisories = new Map([
 // Helper: gate the npm audit report schema and accepted advisories.
 function validateAuditGate(report, accepted) {
   // Fail-closed on npm audit format changes (currently v2).
-  assert.equal(
-    report.auditReportVersion,
-    2,
-    `npm audit report version must be 2; got ${report.auditReportVersion}`,
-  );
-  assert.equal(
-    report.error,
-    undefined,
-    `npm audit reached the registry: ${JSON.stringify(report.error)}`,
-  );
+  assert.equal(report.auditReportVersion, 2, 'npm audit report format is v2');
+  assert.equal(report.error, undefined, 'npm audit reached the registry');
   assert.ok(
     report.metadata?.dependencies?.total > 0,
     'the audit covered the installed dependency tree',
@@ -53,13 +45,13 @@ function validateAuditGate(report, accepted) {
         if (typeof via === 'string') {
           assert.ok(
             Object.hasOwn(allVulns, via),
-            `string via "${via}" on ${name} must resolve to a key in vulnerabilities`,
+            `string via "${via}" on ${name} resolves to a reported vulnerability`,
           );
           continue;
         }
         // null or other non-object: fail-closed.
         assert.fail(
-          `unexpected via type on ${name}: ${typeof via} (${JSON.stringify(via)})`,
+          `via entries are advisory objects or chain strings; got ${typeof via} on ${name} (${JSON.stringify(via)})`,
         );
       }
       // Advisory object: extract GHSA and check acceptance.
@@ -77,7 +69,7 @@ function validateAuditGate(report, accepted) {
     assert.equal(
       reported.get(ghsa),
       pkg,
-      `accepted advisory ${ghsa} is still reported for ${pkg}, so its exception stays earned`,
+      `accepted advisory ${ghsa} remains reported for ${pkg}, keeping its exception earned`,
     );
   }
 }
@@ -162,7 +154,7 @@ test('audit gate: parser rejects stale exceptions (missing report)', () => {
   };
   assert.throws(
     () => validateAuditGate(reportWithoutAcceptedGHSA, acceptedAdvisories),
-    /accepted advisory GHSA-q3xp-j858-q9xf is still reported/,
+    /accepted advisory GHSA-q3xp-j858-q9xf remains reported/,
   );
 });
 
@@ -175,7 +167,7 @@ test('audit gate: parser rejects format version changes', () => {
   };
   assert.throws(
     () => validateAuditGate(reportV3, acceptedAdvisories),
-    /report version must be 2/,
+    /report format is v2/,
   );
 });
 
@@ -193,7 +185,7 @@ test('audit gate: parser rejects string via without chain target', () => {
   };
   assert.throws(
     () => validateAuditGate(reportWithDanglingStringVia, acceptedAdvisories),
-    /string via "nonexistent-key".*must resolve to a key/,
+    /string via "nonexistent-key".*resolves to a reported vulnerability/,
   );
 });
 

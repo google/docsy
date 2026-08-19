@@ -16,6 +16,8 @@
     "chalin",
     "claude",
     "CNCF",
+    "cooldown",
+    "dartsass",
     "dedup",
     "deining",
     "docset",
@@ -39,6 +41,7 @@
     "isset",
     "lastmod",
     "llms",
+    "lockfiles",
     "magick",
     "markdownify",
     "mentees",
@@ -62,6 +65,7 @@
     "submatch",
     "tabpane",
     "unmarshal",
+    "unreviewed",
     "unselectable",
     "upvote",
     "viewports",
@@ -69,6 +73,7 @@
     "vsoch",
     "warnf",
     "warnidf",
+    "worktree",
     "wrapup"
   ]
 }

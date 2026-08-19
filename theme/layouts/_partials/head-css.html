@@ -1,6 +1,8 @@
 {{ $scssMain := "scss/main.scss" -}}
 {{ $css := resources.Get $scssMain
-      | toCSS (dict "enableSourceMap" (not hugo.IsProduction)) -}}
+      | toCSS (dict
+          "transpiler" "dartsass"
+          "enableSourceMap" (not hugo.IsProduction)) -}}
 
 {{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
 site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}
