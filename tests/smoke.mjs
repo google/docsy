@@ -63,6 +63,28 @@ function consumerEnv(site) {
   };
 }
 
+// The documented consumer action for the dartsass transpiler: the site
+// provides its own sass compiler (Install Dart Sass, prerequisites doc).
+function installSiteSass(label, npmOpts) {
+  progress(`${label}: npm install sass-embedded…`);
+  assert.equal(
+    run(
+      'npm',
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--save-dev',
+        'sass-embedded',
+      ],
+      npmOpts,
+    ).status,
+    0,
+    'sass-embedded installs',
+  );
+}
+
 // Read a `--name value` or `--name=value` CLI flag (after the `--` that npm
 // forwards), falling back to a default. Last occurrence wins, so a flag passed
 // on the command line overrides one baked into the `test:smoke` npm script.
@@ -246,25 +268,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
     0,
     `${pkgSpec} installs`,
   );
-  // The documented consumer action for the dartsass transpiler: the site
-  // provides its own sass compiler (Install Dart Sass, prerequisites doc).
-  progress(`${name}: npm install sass-embedded…`);
-  assert.equal(
-    run(
-      'npm',
-      [
-        'install',
-        '--ignore-scripts',
-        '--no-audit',
-        '--no-fund',
-        '--save-dev',
-        'sass-embedded',
-      ],
-      npmOpts,
-    ).status,
-    0,
-    'sass-embedded installs',
-  );
+  installSiteSass(name, npmOpts);
 
   // The one-line consumer config change (@ must be quoted in YAML).
   appendFileSync(
@@ -404,26 +408,9 @@ test('non-module clone into themes/docsy', () => {
     'install theme deps etc',
   );
 
-  // Same consumer action as the tarball test above, from the site root.
-  progress('clone: npm install sass-embedded…');
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
-  assert.equal(
-    run(
-      'npm',
-      [
-        'install',
-        '--ignore-scripts',
-        '--no-audit',
-        '--no-fund',
-        '--save-dev',
-        'sass-embedded',
-      ],
-      npmOpts,
-    ).status,
-    0,
-    'sass-embedded installs',
-  );
+  installSiteSass('clone', npmOpts);
 
   // The one-line consumer config change.
   appendFileSync(path.join(site, 'hugo.yaml'), '\ntheme: docsy/theme\n');

@@ -169,7 +169,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // the visual suite installs its browser on demand (install:browser).
   // @parcel/watcher is lock-only: an optional dep of the pure-JS sass
   // fallback that sass-embedded ships for platforms without a prebuilt
-  // binary -- none we run, so it never installs; denied for defense in
+  // binary (none we run), so it never installs; denied for defense in
   // depth should the tree ever change.
   const lockedVersion = (name) =>
     locks['package-lock.json'].packages[`node_modules/${name}`].version;
@@ -510,9 +510,7 @@ test('workflows: installs are locked and credential-isolated', () => {
         // GITHUB_ENV writes poison later steps' env past the map checks
         // above; pin the one reviewed use (the smoke scaffold path, a
         // static runner-temp location that later steps read as their
-        // working directory). GITHUB_PATH prepends, so a writer could
-        // shadow npm itself; pin its one reviewed use (the lychee
-        // install).
+        // working directory).
         for (const line of run.split('\n')) {
           if (!line.includes('GITHUB_ENV')) continue;
           assert.equal(
@@ -527,6 +525,8 @@ test('workflows: installs are locked and credential-isolated', () => {
             `${id} sets SCAFFOLD to the reviewed runner-temp path`,
           );
         }
+        // GITHUB_PATH prepends, so a writer could shadow npm itself; pin
+        // its one reviewed use (the lychee install).
         for (const line of run.split('\n')) {
           if (!line.includes('GITHUB_PATH')) continue;
           assert.equal(

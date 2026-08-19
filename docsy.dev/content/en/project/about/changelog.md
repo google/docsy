@@ -117,9 +117,7 @@ Specifically, the Docsy team **officially supports** the following:
     - Older versions, down to Docsy's declared [minimum Hugo version][], usually
       work.
   - **Node.js**: versions matching `engines.node` in [package.json][]
-  - **Dart Sass**: the version pinned as `sass-embedded` in [package.json][];
-    1.74.0 is the hard minimum (first release with the deprecation-silencing
-    options that Docsy's build uses)
+  - **Dart Sass**: the version pinned as `sass-embedded` in [package.json][]
 
 - Operating systems: macOS (latest minor release) and Linux.
 

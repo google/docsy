@@ -101,7 +101,7 @@ run any Hugo command as `npm run hugo -- ARGS`, for example
 `npm run hugo -- server` to serve your site locally.
 
 For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
-For the minimum and officially supported Dart Sass versions, see
+For the officially supported Dart Sass version, see
 [Official support](/project/about/changelog/#official-support).
 
 ## Install Go language

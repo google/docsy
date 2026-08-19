@@ -146,8 +146,8 @@ function _npm_install() {
   npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
   # The documented hugo passthrough script, with one harness twist: hugo is
   # the borrowed repo binary ($HUGO, expanded by the script shell at run
-  # time), not a bare name -- a name lookup would need the repo's bin dir
-  # on PATH, whose sass could then mask a missing site compiler. npm run
+  # time), not a bare name. A name lookup would need the repo's bin dir on
+  # PATH, whose sass could then mask a missing site compiler. npm run
   # supplies the site's own node_modules/.bin, and only it.
   npm pkg set 'scripts.hugo="$HUGO"'
 }
@@ -230,7 +230,7 @@ function main() {
 
   [[ $VERBOSE ]] && set -x
   set_up_and_cd_into_site
-  eval npm run hugo $OUTPUT_REDIRECT # Generate site
+  eval npm run hugo $OUTPUT_REDIRECT
   [[ $VERBOSE ]] && set +x
   cd ..
 

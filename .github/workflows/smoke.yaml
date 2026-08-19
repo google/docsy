@@ -35,8 +35,8 @@ jobs:
           cache: npm
 
       # The checkout's only runtime role here: provide the repo's pinned
-      # Hugo (node_modules/.bin/hugo), which make-site.sh borrows. Docsy
-      # itself reaches the scaffolded sites from GitHub (per matrix leg).
+      # Hugo (node_modules/.bin/hugo), which make-site.sh borrows. The
+      # scaffolded sites fetch Docsy itself from GitHub (per matrix leg).
       - name: Install the repo toolchain
         run: npm run install:safe
         shell: bash
