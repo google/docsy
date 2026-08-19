@@ -18,9 +18,14 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 - **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
   theme-path config changes, and only those, from the 0.16.0 post's [theme
   folder actions][tfa]; this page's steps cover the rest.
+- **Updating from Docsy [0.16](/blog/2026/0.16.0/) or earlier?** Before updating
+  the theme, provide the [Dart Sass][] compiler in every environment that builds
+  your site; see the 0.17.0 post's
+  [Dart Sass actions](/blog/2026/0.17.0/#dart-sass-actions).
 
-<!-- TODO(0.18-ish): drop the crossing bullet above once 0.15-to-0.16 upgrade
-     traffic fades; release history lives in the blog posts. (2026-07-28) -->
+<!-- TODO(0.18-ish): drop the 0.15 crossing bullet above once 0.15-to-0.16
+     upgrade traffic fades; release history lives in the blog posts.
+     (2026-07-28) -->
 
 ## Order of steps {#update-order}
 
@@ -114,6 +119,7 @@ Also perform any release-specific checks listed in the release's
 
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
+[Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [hugo-extended]: /docs/get-started/other-options/#hugo-extended-npm
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
