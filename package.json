@@ -56,6 +56,7 @@
     "fix:markdown": "npm run check:markdown -- --fix",
     "fix:refcache": "npm run -C docsy.dev fix:refcache",
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
+    "hugo": "hugo",
     "install:safe": "npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post",
     "install:theme-deps": "npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund",
     "install:browser": "node node_modules/puppeteer/install.mjs",
