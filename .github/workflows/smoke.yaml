@@ -48,19 +48,22 @@ jobs:
       # node_modules/.bin dirs, so an in-repo scaffold could silently
       # borrow the repo's sass (the false-clean the consumer legs catch).
       - name: Create the site scaffold directory
-        run: mkdir -p "$RUNNER_TEMP/docsy-smoke" && cd "$RUNNER_TEMP/docsy-smoke" && npm init -y
+        run: |
+          SCAFFOLD="$RUNNER_TEMP/docsy-smoke"
+          echo "SCAFFOLD=$SCAFFOLD" >> "$GITHUB_ENV"
+          mkdir -p "$SCAFFOLD" && cd "$SCAFFOLD" && npm init -y
         shell: bash
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
-        working-directory: ${{ runner.temp }}/docsy-smoke
+        working-directory: ${{ env.SCAFFOLD }}
         run: |
           "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
 
       - name: Make site from PR
         if: github.event_name == 'pull_request'
-        working-directory: ${{ runner.temp }}/docsy-smoke
+        working-directory: ${{ env.SCAFFOLD }}
         run: |
           "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
@@ -69,6 +72,6 @@ jobs:
         with:
           name: tmp-site-${{ matrix.os }}-${{ matrix.docsy-src }}
           path: |
-            ${{ runner.temp }}/docsy-smoke
+            ${{ env.SCAFFOLD }}
             !**/node_modules
             !**/resources

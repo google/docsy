@@ -508,13 +508,25 @@ test('workflows: installs are locked and credential-isolated', () => {
           `${id} run step uses npm as its only package manager`,
         );
         // GITHUB_ENV writes poison later steps' env past the map checks
-        // above; GITHUB_PATH prepends, so a writer could shadow npm
-        // itself; pin its one reviewed use (the lychee install).
-        assert.doesNotMatch(
-          run,
-          /GITHUB_ENV/,
-          `${id} run step leaves later steps' env untouched`,
-        );
+        // above; pin the one reviewed use (the smoke scaffold path, a
+        // static runner-temp location that later steps read as their
+        // working directory). GITHUB_PATH prepends, so a writer could
+        // shadow npm itself; pin its one reviewed use (the lychee
+        // install).
+        for (const line of run.split('\n')) {
+          if (!line.includes('GITHUB_ENV')) continue;
+          assert.equal(
+            line.trim(),
+            'echo "SCAFFOLD=$SCAFFOLD" >> "$GITHUB_ENV"',
+            `${id} run step writes GITHUB_ENV only via the reviewed scaffold line`,
+          );
+          // The echo pin alone leaves $SCAFFOLD's value free; pin its
+          // assignment to the reviewed runner-temp literal.
+          assert.ok(
+            run.includes('SCAFFOLD="$RUNNER_TEMP/docsy-smoke"'),
+            `${id} sets SCAFFOLD to the reviewed runner-temp path`,
+          );
+        }
         for (const line of run.split('\n')) {
           if (!line.includes('GITHUB_PATH')) continue;
           assert.equal(
