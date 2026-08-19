@@ -39,4 +39,5 @@ exclude = [
   # this cycle (absent on v0.16.0 prod).
   '^https://github\.com/google/docsy/releases/(tag/)?v0\.17\.0$',
   '^https://www\.docsy\.dev/blog/2026/0\.17\.0/$',
+  '^https://main--docsydocs\.netlify\.app/blog/2026/0\.17\.0/$',
 ]
