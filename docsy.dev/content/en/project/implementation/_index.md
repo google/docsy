@@ -13,10 +13,11 @@ including patches, internal shims, and customizations.
 
 ## Conventions
 
-- [Semantic classes]({{< relref "semantic-classes" >}}) — Naming, state-styling,
-  and framework-binding conventions for the theme's `td-` CSS classes
+- [Semantic classes](/project/implementation/semantic-classes/) — Naming,
+  state-styling, and framework-binding conventions for the theme's `td-` CSS
+  classes
 
 ## Patches and workarounds
 
-- [ScrollSpy patch for Bootstrap]({{< relref "scrollspy-patch" >}}) — Runtime
-  patch to fix Bootstrap ScrollSpy handling of invalid CSS selector IDs
+- [ScrollSpy patch for Bootstrap](/project/implementation/scrollspy-patch/) —
+  Runtime patch to fix Bootstrap ScrollSpy handling of invalid CSS selector IDs
