@@ -157,8 +157,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   [Install Dart Sass][]. Some Sass-computed colors in the built CSS change
   serialization form, with rendering unchanged ([#2724][]).
 
-<!-- TODO(#2727): once merged, link "semantic classes" below to
-  /project/implementation/semantic-classes/. -->
+<!-- TODO(#2727): once merged, link "semantic classes" below to the user
+  guide's consumer-contract section
+  (/docs/content/lookandfeel/#semantic-classes). -->
 
 - Changed breadcrumbs to emit Docsy semantic classes with state keyed on
   `aria-current="page"` instead of an `active` class. If you customized
