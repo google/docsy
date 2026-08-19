@@ -1,5 +1,5 @@
 #!/bin/bash
-# cSpell:ignore autoprefixer docsy postcss themesdir github oneline
+# cSpell:ignore themesdir oneline
 set -eo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -10,15 +10,15 @@ DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-# Default to the repo-installed Hugo: fails loud when absent. Bare-npx
-# fallback rationale: tests/runner-lint.test.mjs. Exported for the scaffolded
-# site's hugo script (see _npm_install).
+# No fallback when the repo install is absent; bare-npx rationale:
+# tests/runner-lint.test.mjs. Exported for the scaffolded site's hugo
+# script (see _npm_install).
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
 export HUGO
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
-OUTPUT_REDIRECT="" # Use along with VERBOSE
+OUTPUT_REDIRECT=""
 
 function _usage() {
   cat <<EOS
@@ -100,7 +100,6 @@ function process_CLI_args() {
   fi
 }
 
-# Create site directory, checking if it exists first
 function create_site_directory() {
   if [ -e "$SITE_NAME" ]; then
     if [ "$FORCE_DELETE" = true ]; then
@@ -147,8 +146,7 @@ function _npm_install() {
   # The documented hugo passthrough script, with one harness twist: hugo is
   # the borrowed repo binary ($HUGO, expanded by the script shell at run
   # time), not a bare name. A name lookup would need the repo's bin dir on
-  # PATH, whose sass could then mask a missing site compiler. npm run
-  # supplies the site's own node_modules/.bin, and only it.
+  # PATH, whose sass could then mask a missing site compiler.
   npm pkg set 'scripts.hugo="$HUGO"'
 }
 
@@ -167,10 +165,8 @@ function set_up_and_cd_into_site() {
 
 function _set_up_site_using_hugo_modules() {
   local user_name=$(whoami)
-  # : ${user_name:=$USER}
-  # : ${user_name:="me"}
 
-  # TOF: Docsy theme lives in the `theme/` subfolder of the Docsy repo.
+  # The Docsy theme lives in the theme/ subfolder of the Docsy repo.
   HUGO_MOD_WITH_VERS="$DOCSY_REPO/theme"
   if [[ -n $DOCSY_VERS ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"

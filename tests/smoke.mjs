@@ -317,7 +317,7 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
 // --- declared minimum Hugo version actually builds --------------------------
 // Pins Hugo to the theme's declared minimum (module.hugoVersion.min) and
 // builds the Hugo-module-mode site — the most version-sensitive path: on
-// sub-minimum Hugos, `hugo mod npm pack` emits empty deps and the build
+// sub-minimum Hugo versions, `hugo mod npm pack` emits empty deps and the build
 // breaks, historically even silently (exit 0, unstyled site) — the failure
 // class that assertBuilt() exists to catch.
 test('minimum Hugo version builds the HUGO_MODULE site', () => {

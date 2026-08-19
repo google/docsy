@@ -34,9 +34,6 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
-      # The checkout's only runtime role here: provide the repo's pinned
-      # Hugo (node_modules/.bin/hugo), which make-site.sh borrows. The
-      # scaffolded sites fetch Docsy itself from GitHub (per matrix leg).
       - name: Install the repo toolchain
         run: npm run install:safe
         shell: bash
@@ -46,7 +43,7 @@ jobs:
 
       # Outside the repo tree: npm run PATH-walks ancestor
       # node_modules/.bin dirs, so an in-repo scaffold could silently
-      # borrow the repo's sass (the false-clean the consumer legs catch).
+      # borrow the repo's sass.
       - name: Create the site scaffold directory
         run: |
           SCAFFOLD="$RUNNER_TEMP/docsy-smoke"

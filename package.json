@@ -108,7 +108,7 @@
   "overrides": {
     "adm-zip": "^0.6.0"
   },
-  "spelling": "cSpell:ignore -",
+  "spelling": "cSpell:ignore uall -",
   "allowScripts": {
     "@parcel/watcher": false,
     "hugo-extended@0.164.0": true,
