@@ -156,15 +156,8 @@ test('manifests: own-suite scripts resolve their test files', () => {
   }
 });
 
-// npm wraps every `npm run S` in implicit preS/postS hooks: a double
-// hazard. On a check-lane script, a hook sibling runs unreviewed code
-// inside the pinned CI chain — e.g. rewriting goldens in its own env
-// before test:visual compares. And under user-level ignore-scripts
-// (which suppresses run-hooks but not the script itself), a hook step
-// silently drops — precheck:links once skipped the site build, false-
-// greening the link check. Steps are inlined into their parents instead
-// (#2726); this scan keeps hook siblings out of every workspace
-// manifest. (Install-path hooks are the supply-chain audit's subject.)
+// Hook siblings silently drop under ignore-scripts and splice unreviewed
+// steps into check chains; parents inline their steps instead (#2726).
 test('manifests: no script has a lifecycle hook sibling', () => {
   const manifests = [
     'package.json',
