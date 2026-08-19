@@ -11,8 +11,10 @@ DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
 # Default to the repo-installed Hugo: fails loud when absent. Bare-npx
-# fallback rationale: tests/runner-lint.test.mjs.
+# fallback rationale: tests/runner-lint.test.mjs. Exported for the scaffolded
+# site's hugo script (see _npm_install).
 : "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
+export HUGO
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
@@ -121,8 +123,10 @@ function _npm_install() {
   # Docsy declares no install hooks and none of these deps needs install
   # scripts. Pin that for the site's own installs, plus a registry-release
   # cooldown; the command also carries --ignore-scripts so higher-precedence
-  # ambient config can't weaken the policy.
-  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\n' > .npmrc
+  # ambient config can't weaken the policy. script-shell keeps the hugo
+  # script's $HUGO expansion working on Windows (Git Bash, per the repo's
+  # own .npmrc doctrine).
+  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\nscript-shell=bash\n' > .npmrc
   # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
   # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
   if [[ "$DOCSY_SRC" != HUGO* ]]; then
@@ -140,7 +144,12 @@ function _npm_install() {
   # Docsy source. Runs after the --omit=dev install above, which would
   # prune it.
   npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
-  PATH="$PWD/node_modules/.bin:$PATH"
+  # The documented hugo passthrough script, with one harness twist: hugo is
+  # the borrowed repo binary ($HUGO, expanded by the script shell at run
+  # time), not a bare name -- a name lookup would need the repo's bin dir
+  # on PATH, whose sass could then mask a missing site compiler. npm run
+  # supplies the site's own node_modules/.bin, and only it.
+  npm pkg set 'scripts.hugo="$HUGO"'
 }
 
 function set_up_and_cd_into_site() {
@@ -221,7 +230,7 @@ function main() {
 
   [[ $VERBOSE ]] && set -x
   set_up_and_cd_into_site
-  eval $HUGO $OUTPUT_REDIRECT # Generate site
+  eval npm run hugo $OUTPUT_REDIRECT # Generate site
   [[ $VERBOSE ]] && set +x
   cd ..
 
