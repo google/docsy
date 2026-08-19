@@ -339,6 +339,40 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
   https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack
 [Open Sans]: https://fonts.google.com/specimen/Open+Sans
 
+## Semantic classes
+
+As of Docsy 0.17.0, the theme is migrating its chrome markup (navbar, sidebars,
+breadcrumb, content frame, footer) from Bootstrap-specific classes to
+Docsy-owned **semantic classes**, one component at a time. The `td-` classes and
+the state attributes below are part of Docsy's [public customization
+surface][public]; how the theme styles them is [private][] and can change in any
+release.
+
+To style Docsy chrome:
+
+- Target the `td-` classes and the state attributes, not framework classes,
+  which are removed as each component migrates:
+  - `aria-current="page"`: the current item in a navigation set, such as
+    breadcrumbs
+  - `aria-expanded`: the disclosure state of a toggle
+  - `aria-disabled`: disabled interactive elements
+  - `data-td-*`: states that have no ARIA home
+- During the transition, project **SCSS** rules that match old Bootstrap class
+  names keep applying to migrated components, as a side effect of the theme's
+  Bootstrap binding. This keep-alive is temporary: migrate your selectors as
+  each component's selector changes are announced.
+- CSS or JS outside the theme's Sass pipeline (plain CSS files, `querySelector`
+  calls, tests) breaks at each component's migration.
+
+Each release that migrates a component lists its selector changes (old → new) in
+an [upgrade post][]. For the theme-internal conventions (naming, framework
+skins), see [Semantic classes][semantic-classes-impl].
+
+[private]: /project/about/changelog/#private
+[public]: /project/about/changelog/#public
+[semantic-classes-impl]: /project/implementation/semantic-classes/
+[upgrade post]: /tags/upgrade/
+
 ## CSS utilities
 
 For documentation of available CSS utility classes, see the [Bootstrap
