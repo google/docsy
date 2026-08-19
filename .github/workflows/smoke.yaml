@@ -34,33 +34,41 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
 
-      - name: Setup workspace
-        run: |
-          npm run install:safe
-          mkdir -p tmp && cd tmp && npm init -y
+      # The checkout's only runtime role here: provide the repo's pinned
+      # Hugo (node_modules/.bin/hugo), which make-site.sh borrows. Docsy
+      # itself reaches the scaffolded sites from GitHub (per matrix leg).
+      - name: Install the repo toolchain
+        run: npm run install:safe
         shell: bash
 
       - name: 'Sanity check: install left the working tree pristine'
         run: npm run -s is:clean
 
+      # Outside the repo tree: npm run PATH-walks ancestor
+      # node_modules/.bin dirs, so an in-repo scaffold could silently
+      # borrow the repo's sass (the false-clean the consumer legs catch).
+      - name: Create the site scaffold directory
+        run: mkdir -p "$RUNNER_TEMP/docsy-smoke" && cd "$RUNNER_TEMP/docsy-smoke" && npm init -y
+        shell: bash
+
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
-        working-directory: tmp
+        working-directory: ${{ runner.temp }}/docsy-smoke
         run: |
-          ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
+          "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
 
       - name: Make site from PR
         if: github.event_name == 'pull_request'
-        working-directory: tmp
+        working-directory: ${{ runner.temp }}/docsy-smoke
         run: |
-          ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
+          "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
 
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: tmp-site-${{ matrix.os }}-${{ matrix.docsy-src }}
           path: |
-            tmp
+            ${{ runner.temp }}/docsy-smoke
             !**/node_modules
             !**/resources
