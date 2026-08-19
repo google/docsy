@@ -187,6 +187,9 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
+- Inlined npm `pre*`/`post*` run-hooks into their parent scripts, so
+  `check:links` still builds the site under user-level `ignore-scripts`
+  ([#2726][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
   [Default Mermaid version][mermaid-version-notes].
@@ -198,6 +201,7 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
+[#2726]: https://github.com/google/docsy/pull/2726
 [0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
 [0.17.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.17.0
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
