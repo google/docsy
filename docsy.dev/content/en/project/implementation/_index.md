@@ -11,7 +11,12 @@ no_list: true
 This section documents code-level implementation details for the Docsy website,
 including patches, internal shims, and customizations.
 
+## Conventions
+
+- [Semantic classes]({{< relref "semantic-classes" >}}) — Naming, state-styling,
+  and framework-binding conventions for the theme's `td-` CSS classes
+
 ## Patches and workarounds
 
 - [ScrollSpy patch for Bootstrap]({{< relref "scrollspy-patch" >}}) — Runtime
-  patch to fix Bootstrap ScrollSpy handling of invalid CSS selector IDs.
+  patch to fix Bootstrap ScrollSpy handling of invalid CSS selector IDs

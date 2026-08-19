@@ -17,6 +17,9 @@ exclude_path = [
 
 # .htmltest.yml IgnoreURLs.
 exclude = [
+  # Remove after 0.17.0 ships: self-links of pages new in this cycle (absent on
+  # v0.16.0 prod, and on the main preview until merged).
+  '^https://(www\.docsy\.dev|main--docsydocs\.netlify\.app)/project/implementation/semantic-classes/$',
   '^(https://www\.docsy\.dev/)?fr/',                  # French language pages
   '[?&]link-check=no',                                # opt-out query param
   '/index\.xml$',                                     # rel=alternate RSS links
