@@ -351,16 +351,20 @@ release.
 To style Docsy chrome:
 
 - Target the `td-` classes and the state attributes, not framework classes,
-  which are removed as each component migrates:
+  which are removed as each component migrates. The state attributes, emitted
+  per component as it migrates (breadcrumb, as of 0.17.0, emits the first):
   - `aria-current="page"`: the current item in a navigation set, such as
     breadcrumbs
   - `aria-expanded`: the disclosure state of a toggle
   - `aria-disabled`: disabled interactive elements
-  - `data-td-*`: states that have no ARIA home
-- During the transition, project **SCSS** rules that match old Bootstrap class
-  names keep applying to migrated components, as a side effect of the theme's
-  Bootstrap binding. This keep-alive is temporary: migrate your selectors as
-  each component's selector changes are announced.
+  - `data-td-*`: reserved for states that have no ARIA home
+- During the transition, project **SCSS** rules on old **structural** class
+  names (like `.breadcrumb`, `.breadcrumb-item`) keep matching migrated
+  components, as a side effect of the theme's Bootstrap binding; **state**
+  selectors (like `.breadcrumb-item.active`) stop matching as soon as the
+  component's markup drops the state class. The structural keep-alive is
+  temporary: migrate all your selectors as each component's selector changes are
+  announced.
 - CSS or JS outside the theme's Sass pipeline (plain CSS files, `querySelector`
   calls, tests) breaks at each component's migration.
 

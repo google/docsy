@@ -6,11 +6,10 @@ description:
 
 <span class="badge bg-info text-bg-info">As of Docsy 0.17.0</span>
 
-Docsy is migrating its chrome markup (navbar, sidebars, breadcrumb, content
-frame, footer) from Bootstrap-specific classes to theme-owned semantic classes,
-one component at a time. This page holds the theme-internal conventions; for the
-consumer contract (what sites may rely on and what to update per release), see
-[Semantic classes][user-guide] in the user guide.
+This page holds the theme-internal conventions for Docsy's semantic classes. For
+what they are, the migration scope, and the consumer contract (public `td-`
+classes, state attributes, what to update per release), see [Semantic
+classes][user-guide] in the user guide.
 
 ## Naming
 
@@ -20,12 +19,12 @@ modifier suffixes reserved for **variants**, for example
 
 ## State styling
 
-Component states are styled through semantic attributes, never state classes:
-`aria-current`, `aria-expanded`, `aria-disabled`, and the `data-td-*` lane for
-states with no ARIA home. ARIA mandates these attributes regardless of styling,
-so a parallel state class such as `active` would be pure redundancy. Keying
-styling on the attribute keeps visual state and accessibility state inseparable
-by construction.
+Migrated components style state through the semantic attribute the markup
+already exposes for assistive technology (the [public attribute
+set][user-guide]), and never add a parallel state class: keying styling on the
+attribute keeps visual state and accessibility state inseparable by
+construction. Unmigrated components still use Bootstrap state classes such as
+`active`; each drops them as it migrates.
 
 ## Skins
 
