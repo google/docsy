@@ -1,3 +1,4 @@
+@use 'sass:map';
 //
 // Style Markdown content
 //
@@ -119,7 +120,7 @@
 
   // Always visible on touch devices and small screens
   @media (hover: none) and (pointer: coarse),
-    (max-width: map-get($grid-breakpoints, sm)) {
+    (max-width: map.get($grid-breakpoints, sm)) {
     visibility: visible;
   }
 }

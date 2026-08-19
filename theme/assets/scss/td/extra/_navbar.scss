@@ -1,3 +1,4 @@
+@use 'sass:map';
 // Navbar styles: use underline decoration for active and hover nav-link states.
 
 .td-navbar {
@@ -10,7 +11,7 @@
         var(--bs-link-underline-opacity)
       ) !important;
       text-decoration-thickness: 3px;
-      text-underline-offset: map-get($td-link-underline-offsets, 3);
+      text-underline-offset: map.get($td-link-underline-offsets, 3);
     }
 
     &:hover {
@@ -18,7 +19,7 @@
         var(--bs-secondary-rgb),
         var(--bs-link-underline-opacity)
       ) !important;
-      text-underline-offset: map-get($td-link-underline-offsets, 4);
+      text-underline-offset: map.get($td-link-underline-offsets, 4);
     }
   }
 

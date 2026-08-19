@@ -1,7 +1,9 @@
+@use 'sass:color';
+@use 'sass:list';
 // Add some local palette classes so you can do -bg-warning -text-warning etc. Even -bg-1 if you want to paint by numbers.
 @mixin palette-variant($color-name, $color-value) {
   $text-color: color-contrast($color-value);
-  $link-color: mix($blue, $text-color, lightness($color-value));
+  $link-color: color.mix($blue, $text-color, color.channel($color-value, 'lightness', $space: hsl));
 
   $link-hover-color: rgba($link-color, 0.5) !default;
 
@@ -36,8 +38,8 @@
 }
 
 // This allows "painting by numbers", i.e. picking colors by a shortcode Ordinal.
-@for $i from 1 through length($td-box-colors) {
-  $value: nth($td-box-colors, $i);
+@for $i from 1 through list.length($td-box-colors) {
+  $value: list.nth($td-box-colors, $i);
   $name: $i - 1;
   $text-color: color-contrast($value);
 

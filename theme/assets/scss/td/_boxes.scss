@@ -1,13 +1,15 @@
+@use 'sass:color';
+@use 'sass:list';
 // Boxes on the home page and similar: .td-box
 
 // box-variant creates the main style for a colored section
 @mixin box-variant($parent, $color-name, $color-value) {
   $text-color: color-contrast($color-value);
-  $link-color: mix($blue, $text-color, lightness($color-value));
+  $link-color: color.mix($blue, $text-color, color.channel($color-value, 'lightness', $space: hsl));
   $link-hover-color: if(
-    color-contrast($link-color) == $color-contrast-light,
-    shade-color($link-color, $link-shade-percentage),
-    tint-color($link-color, $link-shade-percentage)
+    sass(color-contrast($link-color) == $color-contrast-light):
+      shade-color($link-color, $link-shade-percentage);
+    else: tint-color($link-color, $link-shade-percentage)
   );
 
   #{$parent} {
@@ -98,8 +100,8 @@
 }
 
 // This allows "painting by numbers"
-@for $i from 1 through length($td-box-colors) {
-  $c: nth($td-box-colors, $i);
+@for $i from 1 through list.length($td-box-colors) {
+  $c: list.nth($td-box-colors, $i);
   $name: $i - 1;
 
   @include box-variant('.td-box', $name, $c);
