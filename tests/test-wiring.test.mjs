@@ -156,8 +156,6 @@ test('manifests: own-suite scripts resolve their test files', () => {
   }
 });
 
-// Hook siblings silently drop under ignore-scripts and splice unreviewed
-// steps into check chains; parents inline their steps instead (#2726).
 test('manifests: no script has a lifecycle hook sibling', () => {
   const manifests = [
     'package.json',
