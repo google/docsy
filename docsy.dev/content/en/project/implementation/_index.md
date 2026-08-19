@@ -7,9 +7,6 @@ weight: 100
 no_list: true
 ---
 
-This section documents code-level implementation details for the Docsy theme and
-website, including conventions, patches, and internal shims.
-
 ## Conventions
 
 - [Semantic classes](/project/implementation/semantic-classes/): naming and

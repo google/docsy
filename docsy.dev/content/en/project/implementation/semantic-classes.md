@@ -4,12 +4,9 @@ description:
   Naming and framework-binding conventions for the theme's td- CSS classes
 ---
 
-<span class="badge bg-info text-bg-info">As of Docsy 0.17.0</span>
-
-This page holds the theme-internal conventions for Docsy's semantic classes. For
-what they are, the migration scope, and the consumer contract (public `td-`
-classes, state attributes, what to update per release), see [Semantic
-classes][user-guide] in the user guide.
+For what semantic classes are, the migration scope, and the consumer contract
+(public `td-` classes, state attributes, what to update per release), see
+[Semantic classes][user-guide] in the user guide.
 
 ## Naming
 
@@ -20,12 +17,12 @@ example `td-sidebar-nav--search-disabled`. Legacy `td-` names (like
 
 ## State styling
 
-Migrated components style state through the semantic attribute the markup
-already exposes for assistive technology (the [public attribute
-set][user-guide]), and never add a parallel state class: keying styling on the
-attribute keeps visual state and accessibility state inseparable by
-construction. Unmigrated components still use Bootstrap state classes such as
-`active`; each drops them as it migrates.
+When migrating a component, style each state through a semantic attribute, never
+a state class. Reuse the ARIA state attribute the markup already exposes for
+assistive technology when one applies: keying styling on it keeps visual and
+accessibility state inseparable by construction. For a state with no ARIA home,
+introduce a `data-td-*` attribute and announce it in the component's upgrade
+post.
 
 ## Skins
 

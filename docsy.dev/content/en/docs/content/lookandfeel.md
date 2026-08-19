@@ -341,11 +341,11 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 
 ## Semantic classes
 
-As of Docsy 0.17.0, the theme is migrating its chrome markup (navbar, sidebars,
-breadcrumb, main content layout, footer) from Bootstrap-specific classes to
-Docsy-owned **semantic classes**, one component at a time. Each release that
-migrates a component lists its selector changes (old → new) in an [upgrade
-post][]; the breadcrumb is the first, in 0.17.0.
+The theme is migrating its chrome markup (navbar, sidebars, breadcrumb, main
+content layout, footer) from Bootstrap-specific classes to Docsy-owned
+**semantic classes**, one component at a time. Each release that migrates a
+component lists its selector changes (old → new) in an [upgrade post][]; the
+breadcrumb migrated first, in 0.17.0.
 
 The contract, per component:
 
@@ -353,32 +353,32 @@ The contract, per component:
   below; framework classes are removed at migration. These are part of Docsy's
   [public customization surface][public]; how the theme styles them is
   [private][] and can change in any release.
-- **Not-yet-migrated components** (navbar, sidebar, and the rest): keep
-  targeting the selectors they emit today, Bootstrap state classes like `active`
-  included, until their upgrade post says otherwise.
+- **Not-yet-migrated components**: keep targeting the selectors they emit today,
+  Bootstrap state classes like `active` included, until their upgrade post says
+  otherwise.
 
-State attributes, adopted per component as it migrates. In 0.17.0, the
-breadcrumb keys current-item styling on `aria-current` and the sidebar toggle on
-`aria-expanded`:
+State attributes:
 
-- `aria-current="page"`: the current item in a navigation set (taxonomy-page
-  teasers strip it from their embedded breadcrumbs)
-- `aria-expanded`: the disclosure state of a toggle
-- `aria-disabled`: disabled interactive elements; reserved, not yet emitted
-- `data-td-*`: reserved lane for states with no ARIA home (existing uses like
-  tab persistence are not state hooks)
+- **Current styling hooks**:
+  - `aria-current="page"`: the current item in a navigation set; the migrated
+    breadcrumb keys current-item styling on it (taxonomy-page teasers strip it
+    from their embedded breadcrumbs)
+  - `aria-expanded`: toggle disclosure; styled on the sidebar toggle
+- **Reserved for later migrations**:
+  - `aria-disabled`: disabled interactive elements
+  - `data-td-*`: states with no ARIA home (existing `data-td-*` uses, like tab
+    persistence, are not state hooks)
 
 Transition notes:
 
 - Project **SCSS** rules on old **structural** class names (like `.breadcrumb`,
   `.breadcrumb-item`) keep matching migrated components, as a side effect of the
-  theme's Bootstrap binding; selectors that involve **state** (like
-  `.breadcrumb-item.active` or `:not(.active)`) stop matching or change meaning
-  as soon as the markup drops the state class. The structural keep-alive is
-  temporary: migrate all your selectors as each component's changes are
-  announced.
-- CSS or JS outside the theme's Sass pipeline (plain CSS files, `querySelector`
-  calls, tests) breaks at each component's migration.
+  theme's Bootstrap binding; selectors involving **removed state classes** (like
+  `.breadcrumb-item.active` or `:not(.active)`) stop matching or change meaning.
+  The structural keep-alive is temporary: migrate all your selectors as each
+  component's changes are announced.
+- Plain CSS, JS, or tests that reference removed framework class names break at
+  that component's migration.
 
 For the theme-internal conventions (naming, framework skins), see [Semantic
 classes][semantic-classes-impl].
