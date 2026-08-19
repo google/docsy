@@ -9,10 +9,11 @@ description:
 
 Docsy is migrating its chrome markup — navbar, sidebars, breadcrumb, content
 frame, footer — from Bootstrap-specific classes to theme-owned **semantic
-classes**, one component at a time. The `td-` classes are the durable, public
-vocabulary of Docsy's markup; how they are styled is an implementation detail
-that can change per release. Each release that migrates a component lists its
-selector changes in an [upgrade post][].
+classes**, one component at a time. The `td-` classes are the durable vocabulary
+of Docsy's markup and part of its [public customization surface][public]; how
+they are styled is a [private implementation detail][private] that can change
+per release. Each release that migrates a component lists its selector changes
+in an [upgrade post][].
 
 ## Naming
 
@@ -63,4 +64,6 @@ in markup. The current skin binds to Bootstrap:
   calls, tests — breaks at each component's migration; consult the old → new
   selector table in the release's upgrade post.
 
+[private]: /project/about/changelog/#private
+[public]: /project/about/changelog/#public
 [upgrade post]: /tags/upgrade/
