@@ -339,6 +339,29 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
   https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack
 [Open Sans]: https://fonts.google.com/specimen/Open+Sans
 
+## Semantic classes
+
+Chrome components that have adopted Docsy's **semantic classes** emit
+theme-owned `td-` classes, with component state carried by semantic attributes
+(such as `aria-current="page"`) rather than state classes. These selectors are
+part of Docsy's [public customization surface][public]; how the theme styles
+them is [private][] and can change in any release. Each such component's own
+documentation describes the selectors it emits: see, for example, [breadcrumb
+navigation][breadcrumb-styling].
+
+Selectors of components that haven't adopted semantic classes (a mix of
+Bootstrap classes and pre-existing `td-` names) can change; [upgrade posts][]
+announce selector changes per component.
+
+For the design conventions behind semantic classes (naming, framework skins),
+see [Semantic classes][semantic-classes-design].
+
+[breadcrumb-styling]: /docs/content/navigation/#breadcrumb-styling
+[private]: /project/about/changelog/#private
+[public]: /project/about/changelog/#public
+[semantic-classes-design]: /project/design/semantic-classes/
+[upgrade posts]: /tags/upgrade/
+
 ## CSS utilities
 
 For documentation of available CSS utility classes, see the [Bootstrap

@@ -366,6 +366,7 @@ https://github.com/google/docsy/issues/new?title=Deployment%20and%20previews,200
 https://github.com/google/docsy/issues/new?title=Deployment%20on%20GitHub%20Pages,200,1782498244
 https://github.com/google/docsy/issues/new?title=Deployment%20on%20Netlify,200,1782498244
 https://github.com/google/docsy/issues/new?title=Deployment%20with%20Amazon%20S3%20and%20CloudFront,200,1782498245
+https://github.com/google/docsy/issues/new?title=Design,200,1787249501
 https://github.com/google/docsy/issues/new?title=Diagrams%20and%20Formulae,200,1782498242
 https://github.com/google/docsy/issues/new?title=Docsy%200.10.0%20release%20report,200,1782498546
 https://github.com/google/docsy/issues/new?title=Docsy%200.9.0%20release%20report,200,1782498245
@@ -404,6 +405,7 @@ https://github.com/google/docsy/issues/new?title=Repository%20Links%20and%20othe
 https://github.com/google/docsy/issues/new?title=Repository-root%20markdown%20files,200,1782498547
 https://github.com/google/docsy/issues/new?title=ScrollSpy%20patch,200,1782498547
 https://github.com/google/docsy/issues/new?title=Search,200,1782498242
+https://github.com/google/docsy/issues/new?title=Semantic%20classes,200,1787146561
 https://github.com/google/docsy/issues/new?title=Serving%20your%20site%20locally,200,1782498244
 https://github.com/google/docsy/issues/new?title=Style%20guide,200,1782498547
 https://github.com/google/docsy/issues/new?title=Taxonomy%20Support,200,1782498243
@@ -809,6 +811,8 @@ https://main--docsydocs.netlify.app/project/about/readme/,200,1782498244
 https://main--docsydocs.netlify.app/project/build/,200,1782563367
 https://main--docsydocs.netlify.app/project/build/ci-cd/,200,1782498244
 https://main--docsydocs.netlify.app/project/build/git-repo/,200,1782498244
+https://main--docsydocs.netlify.app/project/design/,206,1787249523
+https://main--docsydocs.netlify.app/project/design/semantic-classes/,206,1787150440
 https://main--docsydocs.netlify.app/project/implementation/,200,1782563367
 https://main--docsydocs.netlify.app/project/implementation/scrollspy-patch/,200,1782498244
 https://main--docsydocs.netlify.app/project/repo/,200,1782563367
@@ -964,6 +968,8 @@ https://www.docsy.dev/project/about/readme/,200,1782498244
 https://www.docsy.dev/project/build/,200,1782563367
 https://www.docsy.dev/project/build/ci-cd/,200,1782498244
 https://www.docsy.dev/project/build/git-repo/,200,1782498245
+https://www.docsy.dev/project/design/,206,1787249523
+https://www.docsy.dev/project/design/semantic-classes/,206,1787150440
 https://www.docsy.dev/project/implementation/,200,1782563367
 https://www.docsy.dev/project/implementation/scrollspy-patch/,200,1782498244
 https://www.docsy.dev/project/repo/,200,1782563367
