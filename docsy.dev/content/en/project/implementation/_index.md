@@ -1,16 +1,11 @@
 ---
 title: Implementation
 description:
-  Code-level structure and conventions, Hugo/Docsy templates, SCSS/JS
-  customizations, patches, and internal shims
+  Code-level structure, Hugo/Docsy templates, SCSS/JS customizations, patches,
+  and internal shims
 weight: 100
 no_list: true
 ---
-
-## Conventions
-
-- [Semantic classes](/project/implementation/semantic-classes/): naming and
-  framework-binding conventions for the theme's `td-` CSS classes
 
 ## Patches and workarounds
 

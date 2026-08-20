@@ -369,7 +369,7 @@ classes][semantic-classes-impl].
 
 [private]: /project/about/changelog/#private
 [public]: /project/about/changelog/#public
-[semantic-classes-impl]: /project/implementation/semantic-classes/
+[semantic-classes-impl]: /project/design/semantic-classes/
 [upgrade post]: /tags/upgrade/
 
 ## CSS utilities
