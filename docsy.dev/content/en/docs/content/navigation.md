@@ -742,7 +742,8 @@ The breadcrumb emits Docsy [semantic classes][]: `td-breadcrumbs` on the
 with `aria-current="page"` marking the current page's item. On single-element
 lists, the `<nav>` also carries `td-breadcrumbs--single` (hidden by default; see
 the override above). Target these classes and the attribute to restyle it. In
-taxonomy results pages, breadcrumbs render without ARIA attributes.
+taxonomy results pages, breadcrumbs render without ARIA attributes: no
+current-item styling applies in that summary context.
 
 [semantic classes]: /docs/content/lookandfeel/#semantic-classes
 

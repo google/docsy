@@ -37,7 +37,7 @@ markup. The current skin binds to Bootstrap:
   (`--bs-*` by default), since Bootstrap defines these components' state styling
   in compound selectors (like `.breadcrumb-item.active`), which `@extend` can't
   reference. Each written-out rule carries a `BS mirror: FILE SELECTOR` comment;
-  `grep -rn 'BS mirror:' theme/assets/scss/td/` inventories the mirrored rule
-  bodies to re-check on a Bootstrap upgrade.
+  from the repo root, `grep -rn 'BS mirror:' theme/assets/scss/td/` inventories
+  the mirrored rule bodies to re-check on a Bootstrap upgrade.
 
 [user-guide]: /docs/content/lookandfeel/#semantic-classes
