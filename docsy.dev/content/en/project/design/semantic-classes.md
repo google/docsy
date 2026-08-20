@@ -4,9 +4,8 @@ description:
   Naming and framework-binding conventions for the theme's td- CSS classes
 ---
 
-For what semantic classes are, the migration scope, and the consumer contract
-(public `td-` classes and state attributes), see [Semantic classes][user-guide]
-in the user guide.
+For what semantic classes are and the consumer contract (public `td-` classes
+and state attributes), see [Semantic classes][user-guide] in the user guide.
 
 ## Naming
 

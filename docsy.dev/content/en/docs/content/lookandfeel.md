@@ -341,36 +341,33 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 
 ## Semantic classes
 
-The theme is migrating its chrome markup (navbar, sidebars, breadcrumb, main
-content layout, footer) from Bootstrap-specific classes to Docsy-owned
-**semantic classes**, one component at a time. Each migration is announced in an
-[upgrade post][] with the selector changes (old → new) and what to update.
+To style Docsy chrome (navbar, sidebars, breadcrumb, main content layout,
+footer), target the selectors each component emits. A component exposes one of
+two selector surfaces:
 
-The contract, per component:
+- **Semantic classes**: Docsy-owned `td-` classes, with state keyed on the
+  attributes below and no framework classes. These are part of Docsy's [public
+  customization surface][public]; how the theme styles them is [private][] and
+  can change in any release. The breadcrumb exposes this surface.
+- **Framework classes**: the other components emit Bootstrap-based selectors,
+  Bootstrap state classes like `active` included; target what they emit.
 
-- **Migrated components**: target the `td-` classes and the state attributes
-  they emit; framework classes are removed at migration. These are part of
-  Docsy's [public customization surface][public]; how the theme styles them is
-  [private][] and can change in any release.
-- **Not-yet-migrated components**: keep targeting the selectors they emit today,
-  Bootstrap state classes like `active` included, until their upgrade post says
-  otherwise.
+Selector changes are announced per component in [upgrade posts][].
 
-State attributes in the contract — stable across migrations, since migrations
-key state styling on them:
+State attributes (stable: components key state styling on them):
 
 - `aria-current="page"`: the current item in a navigation set; the breadcrumb
   keys current-item styling on it (taxonomy-page teasers strip it from their
   embedded breadcrumbs)
 - `aria-expanded`: toggle disclosure; styled on the sidebar toggle
 
-For the theme-internal conventions (naming, framework skins), see [Semantic
-classes][semantic-classes-impl].
+For the design conventions behind the semantic classes (naming, framework
+skins), see [Semantic classes][semantic-classes-impl].
 
 [private]: /project/about/changelog/#private
 [public]: /project/about/changelog/#public
 [semantic-classes-impl]: /project/design/semantic-classes/
-[upgrade post]: /tags/upgrade/
+[upgrade posts]: /tags/upgrade/
 
 ## CSS utilities
 
