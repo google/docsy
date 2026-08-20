@@ -11,9 +11,11 @@ in the user guide.
 ## Naming
 
 Semantic classes introduced by the migration use `td-`-prefixed light BEM
-(`td-block__element`), with modifier suffixes reserved for **variants**, for
-example `td-sidebar-nav--search-disabled`. Legacy `td-` names (like
-`td-navbar-cover`) remain until their components migrate.
+(`td-block__element`), with modifier suffixes reserved for **variants**,
+following the pattern of existing names like `td-sidebar-nav--search-disabled`.
+Other pre-existing `td-` names remain until a migration renames or removes them;
+a migration may also keep pre-existing names unchanged (the breadcrumb kept
+`td-breadcrumbs` and `td-breadcrumbs__single`).
 
 ## State styling
 
@@ -33,9 +35,9 @@ markup. The current skin binds to Bootstrap:
   so styling tracks the installed Bootstrap version instead of drifting as a
   vendored copy.
 - **State rules are written out** against Bootstrap's component CSS variables
-  (`--bs-*` by default), since Bootstrap defines state styling only in compound
-  selectors (like `.breadcrumb-item.active`), which `@extend` can't reference.
-  Each written-out rule carries a `BS mirror: FILE SELECTOR` comment;
+  (`--bs-*` by default), since Bootstrap defines these components' state styling
+  in compound selectors (like `.breadcrumb-item.active`), which `@extend` can't
+  reference. Each written-out rule carries a `BS mirror: FILE SELECTOR` comment;
   `grep -rn 'BS mirror:' theme/assets/scss/td/` inventories the mirrored rule
   bodies to re-check on a Bootstrap upgrade.
 

@@ -356,7 +356,8 @@ The contract, per component:
   Bootstrap state classes like `active` included, until their upgrade post says
   otherwise.
 
-State attributes in the contract:
+State attributes in the contract — stable across migrations, since migrations
+key state styling on them:
 
 - `aria-current="page"`: the current item in a navigation set; the breadcrumb
   keys current-item styling on it (taxonomy-page teasers strip it from their
