@@ -1,7 +1,7 @@
 ---
 title: Semantic classes
 description:
-  Naming and framework-binding conventions for the theme's td- CSS classes
+  Naming and framework-binding conventions for the theme's `td-` CSS classes
 ---
 
 For what semantic classes are and the consumer contract (public `td-` classes

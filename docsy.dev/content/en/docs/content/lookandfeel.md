@@ -341,29 +341,22 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 
 ## Semantic classes
 
-To style Docsy chrome (navbar, sidebars, breadcrumb, main content layout,
-footer), target the selectors each component emits. A component exposes one of
-two selector surfaces:
+Chrome components that have adopted Docsy's **semantic classes** emit
+theme-owned `td-` classes, with component state carried by ARIA attributes (such
+as `aria-current="page"`) rather than state classes. These selectors are part of
+Docsy's [public customization surface][public]; how the theme styles them is
+[private][] and can change in any release. Each such component's own
+documentation describes the selectors it emits: see, for example, [breadcrumb
+navigation][breadcrumb-styling].
 
-- **Semantic classes**: Docsy-owned `td-` classes, with state keyed on the
-  attributes below and no framework classes. These are part of Docsy's [public
-  customization surface][public]; how the theme styles them is [private][] and
-  can change in any release. The breadcrumb exposes this surface.
-- **Framework classes**: the other components emit Bootstrap-based selectors,
-  Bootstrap state classes like `active` included; target what they emit.
+Selectors of components that haven't adopted semantic classes are
+Bootstrap-based and can change; [upgrade posts][] announce selector changes per
+component.
 
-Selector changes are announced per component in [upgrade posts][].
+For the design conventions behind semantic classes (naming, framework skins),
+see [Semantic classes][semantic-classes-impl].
 
-State attributes (stable: components key state styling on them):
-
-- `aria-current="page"`: the current item in a navigation set; the breadcrumb
-  keys current-item styling on it (taxonomy-page teasers strip it from their
-  embedded breadcrumbs)
-- `aria-expanded`: toggle disclosure; styled on the sidebar toggle
-
-For the design conventions behind the semantic classes (naming, framework
-skins), see [Semantic classes][semantic-classes-impl].
-
+[breadcrumb-styling]: /docs/content/navigation/#breadcrumb-styling
 [private]: /project/about/changelog/#private
 [public]: /project/about/changelog/#public
 [semantic-classes-impl]: /project/design/semantic-classes/

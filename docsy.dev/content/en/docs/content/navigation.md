@@ -735,6 +735,16 @@ cascade:
       breadcrumb_disable: true
 ```
 
+### Styling {#breadcrumb-styling}
+
+The breadcrumb emits Docsy [semantic classes][]: `td-breadcrumbs` on the
+`<nav>`, containing a `td-breadcrumbs__list` of `td-breadcrumbs__item` entries,
+with `aria-current="page"` marking the current page's item. Target these classes
+and the attribute to restyle it. In taxonomy results pages, breadcrumbs render
+without ARIA attributes.
+
+[semantic classes]: /docs/content/lookandfeel/#semantic-classes
+
 ## Heading self links
 
 Docsy supports build-time generation of heading self links using Hugo's
