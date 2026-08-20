@@ -46,15 +46,11 @@ modifications.
 
 ## Separation of concerns
 
-To keep the docs lean and DRY:
+For which artifact owns which content (changelog, blog posts, docs, release
+notes), see the maintainer notes' [Content placement][] section.
 
-- Changelog: see guidelines at the top. Very terse listing of changes, with
-  "Details" links to posts.
-- Upgrade blog posts: help clients (humans and agents) know what has changed,
-  what needs upgrading, and when upgrading is needed (for each change).
-- The Docs reflect the current Docsy design, with few or no historical notes.
-- Release message links to the changelog and upgrade blog posts, and lists the
-  actual Git history since the last release.
+[Content placement]:
+  docsy.dev/content/en/project/about/maintainer-notes.md#content-placement
 
 ## Monorepo layout
 

@@ -16,25 +16,26 @@ restating them:
 
 - **[Changelog][]**: a lean record of _what changed_, for developers who want a
   quick overview. No upgrade advice, implementation detail, or background.
-  Entries link to the release report for details and cite a change's key issues
-  — PRs only when there is no key issue, such as for contributor credit.
+  Entries link to the release report for details and cite a change's key issues;
+  PRs only when there is no key issue, such as for contributor credit.
   Maintainer-facing changes get a short **For maintainers** list at the end of
   the release section.
 - **Release and upgrade blog posts**: what's new, what to watch out for, and
-  actionable upgrade guidance — the historical narrative. Link to the site docs
+  actionable upgrade guidance (the historical narrative). Link to the site docs
   for current behavior and reference detail. Don't enumerate PRs and issues;
   link an open tracker only where it adds follow-up context. Upgrades are a
   chore, so keep posts maximally actionable yet lean: the release summary reads
-  like a selective table of contents — a link per section with a clause of
-  guiding glue — and each fact appears in one section, its home.
+  like a selective table of contents (a link per section with a clause of
+  guiding glue) and each fact appears in one section, its home.
   Maintainer-facing changes are summarized in a **For maintainers** section at
   the end of the documented changes.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
-- **[Release notes][] and [milestones][]**: the exhaustive record — generated
+- **[Release notes][] and [milestones][]**: exhaustive records. Generated
   release notes list every PR, PRs link their motivating issues, and the release
-  milestone gathers the issues resolved. Authored artifacts link to these rather
-  than reproducing the enumeration.
+  milestone gathers the issues resolved. The release notes lead with links to
+  the changelog entry and the release post. Authored artifacts link to these
+  rather than reproducing the enumeration.
 - **Test and code comments**: implementation rationale and regression
   background.
 
@@ -45,8 +46,8 @@ the “why” behind the changes, and at a very high level what was changed. Sta
 each item with a verb in the present tense, 3rd person singular.
 
 PR authors are _encouraged_ to flag the **scope of changes** when a PR touches
-Docsy's [public customization surface][public] -- especially for [breaking
-changes][breaking change] -- to help reviewers and release-time audits. For
+Docsy's [public customization surface][public] (especially for [breaking
+changes][breaking change]) to help reviewers and release-time audits. For
 example:
 
 ```markdown
@@ -70,8 +71,8 @@ The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
 guarded by the [hugo-versions test](#test-suites).
 
-Only current-state pages — docs and the changelog's
-[official support](/project/about/changelog/#official-support) section — render
+Only current-state pages (docs and the changelog's
+[official support](/project/about/changelog/#official-support) section) render
 these versions live, via the `hugoMinVersion` site param and the `hugo-version`
 shortcode. Blog posts are historical snapshots and render versions
 time-insensitively: a post that renders one of these version params freezes it
@@ -178,7 +179,7 @@ installs a pinned lychee binary (see `.github/workflows/test.yaml`); a plain
 site build doesn't need it.
 
 - **Refresh** after adding or changing external links: `npm run fix:refcache`
-  re-runs the check, adding any missing entries and renormalizing — then commit
+  re-runs the check, adding any missing entries and renormalizing; then commit
   the updated `.lycheecache`.
 - **Inspect or prune** with `npm run refcache` (`-- -s` for a summary,
   `-- -p 10%` to drop the oldest tenth).
@@ -199,8 +200,8 @@ For each PR/commit in `git log v<prev>..main`:
    **docs-only** (see definitions in [Public customization surface][public] and
    [Breaking change][breaking change]).
 3. For every **breaking** or **user-facing** item, verify it appears in **both**
-   the [changelog][] and the release blog post — with cross-links to the
-   relevant user-guide sections where applicable.
+   the [changelog][] and the release blog post, with cross-links to the relevant
+   user-guide sections where applicable.
 4. Be especially alert to: new/renamed params, partials, shortcodes, layouts,
    CSS classes, i18n keys, default-behavior shifts, and changes to the version
    menu, navigation, or other rendered output.
@@ -369,7 +370,7 @@ If not adjust accordingly.
 
     - Also create the nested **theme module tag**. Since the theme moved under
       `theme/`, it is its own Go module ([github.com/google/docsy/theme][]), and
-      Go resolves it via a subdirectory-prefixed tag — this is what consuming
+      Go resolves it via a subdirectory-prefixed tag. This is what consuming
       sites get when they import `…/docsy/theme`:
 
       ```sh
@@ -687,8 +688,8 @@ To test a Docsy branch or release from a consumer site, for each site:
 1. **Create a dedicated worktree + branch** off the site's default branch; keep
    it for the site's post-release Docsy-update PR.
 2. **Point the site at the target Docsy commit**, per install mode:
-   - Hugo module: map the theme module to the local checkout -- env-only, no
-     repo edits:
+   - Hugo module: map the theme module to the local checkout (env-only, no repo
+     edits):
 
      ```sh
      export HUGO_MODULE_REPLACEMENTS="github.com/google/docsy/theme -> DOCSY_CHECKOUT_PATH/theme"
@@ -706,7 +707,7 @@ To test a Docsy branch or release from a consumer site, for each site:
      cd ../.. && git add themes/docsy # stage so prebuild targets this SHA
      ```
 
-3. **Apply the release post's upgrade actions** -- all of them, before the first
+3. **Apply the release post's upgrade actions**, all of them, before the first
    build: check every applies-if guard against the site, including the companion
    Hugo guide's actions when the release raises the Hugo minimum. This doubles
    as a dry run of the post; report any gap or inaccuracy as feedback on it.
@@ -724,19 +725,19 @@ To test a Docsy branch or release from a consumer site, for each site:
    - Run the release post's sanity checks.
 6. **Spot-check key pages and output files**, in the build output or a served
    preview:
-   - **Pages** -- confirm each renders with intact chrome, styles, and favicons:
-     - Home page -- also confirm that the `generator` meta element reports the
+   - Confirm each **page** renders with intact chrome, styles, and favicons:
+     - Home page: also confirm that the `generator` meta element reports the
        expected Hugo version (Docsy's version isn't emitted)
      - Docs landing page, and a random docs page
      - Blog landing page and a random blog post, when the site has a blog
      - Some other random page
      - The 404 page
-   - **Other output files** -- confirm each looks sane:
+   - Confirm the other **output files** look sane:
      - The main CSS and JS files
      - When the site enables LLMS support: `llms.txt`, and the `.md` output of
        the pages above
      - `_redirects`, when present
-     - `sitemap.xml` -- note that some sites normalize it after the build
+     - `sitemap.xml`: note that some sites normalize it after the build
 7. **A/B diff the generated site**:
    - If the site's `public/` folder is a git repository (a setup worth adopting;
      see docsy.dev's `make:public` npm script), build at the current
