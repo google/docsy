@@ -31,7 +31,7 @@ restating them:
   the end of the documented changes.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
-- **[Release notes][] and [milestones][]**: the exhaustive record — generated
+- **[Release notes][] and [milestones][]**: exhaustive records. Generated
   release notes list every PR, PRs link their motivating issues, and the release
   milestone gathers the issues resolved. The release notes lead with links to
   the changelog entry and the release post. Authored artifacts link to these
