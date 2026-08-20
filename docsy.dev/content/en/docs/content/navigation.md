@@ -673,7 +673,7 @@ To also display single-element breadcrumb lists in index pages, add the
 following [style override][] to your project:
 
 ```scss
-.td-breadcrumbs__single {
+.td-breadcrumbs--single {
   display: inline !important;
 }
 ```
