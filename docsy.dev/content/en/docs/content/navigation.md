@@ -739,9 +739,10 @@ cascade:
 
 The breadcrumb emits Docsy [semantic classes][]: `td-breadcrumbs` on the
 `<nav>`, containing a `td-breadcrumbs__list` of `td-breadcrumbs__item` entries,
-with `aria-current="page"` marking the current page's item. Target these classes
-and the attribute to restyle it. In taxonomy results pages, breadcrumbs render
-without ARIA attributes.
+with `aria-current="page"` marking the current page's item. On single-element
+lists, the `<nav>` also carries `td-breadcrumbs--single` (hidden by default; see
+the override above). Target these classes and the attribute to restyle it. In
+taxonomy results pages, breadcrumbs render without ARIA attributes.
 
 [semantic classes]: /docs/content/lookandfeel/#semantic-classes
 

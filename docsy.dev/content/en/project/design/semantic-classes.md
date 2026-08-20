@@ -1,7 +1,8 @@
 ---
 title: Semantic classes
 description:
-  Naming and framework-binding conventions for the theme's `td-` CSS classes
+  Naming, state-styling, and framework-binding conventions for the theme's `td-`
+  CSS classes
 ---
 
 For what semantic classes are and the consumer contract (public `td-` classes
@@ -9,12 +10,11 @@ and state attributes), see [Semantic classes][user-guide] in the user guide.
 
 ## Naming
 
-Semantic classes introduced by the migration use `td-`-prefixed light BEM
-(`td-block__element`), with modifier suffixes reserved for **variants**,
-following the pattern of existing names like `td-sidebar-nav--search-disabled`.
-Other pre-existing `td-` names remain until a migration renames or removes them;
-a migration may also keep pre-existing names unchanged (the breadcrumb kept
-`td-breadcrumbs`).
+New semantic classes use `td-`-prefixed light BEM (`td-block__element`), with
+modifier suffixes reserved for **variants**, following the pattern of existing
+names like `td-sidebar-nav--search-disabled`. Other pre-existing `td-` names
+remain until a component's migration renames or removes them; a migration may
+also keep pre-existing names unchanged (the breadcrumb kept `td-breadcrumbs`).
 
 ## State styling
 

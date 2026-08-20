@@ -22,7 +22,8 @@ Planned content organization (tentative):
 - [About](about/): High-level information about the project, including its
   purpose, ownership, and overall status.
 - [Design](design/): Architectural design, Information Architecture (IA),
-  layout, UX choices, theme related decisions, and other design-level artifacts.
+  layout, UX choices, theme related decisions and conventions, and other
+  design-level artifacts.
 - [Implementation](implementation/): Code-level structure, Hugo/Docsy templates,
   SCSS/JS customizations, patches, and internal shims.
 - [Build](build/): Tooling, local development setup, CI/CD workflows, deployment
