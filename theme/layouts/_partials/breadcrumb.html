@@ -3,7 +3,7 @@
   {{ $isSingle = .IsHome -}}
 {{ end -}}
 <nav aria-label="breadcrumb" class="td-breadcrumbs
-    {{- if $isSingle }} td-breadcrumbs__single {{- end }}">
+    {{- if $isSingle }} td-breadcrumbs--single {{- end }}">
   <ol class="td-breadcrumbs__list">
     {{- template "breadcrumbnav" (dict "p1" . "p2" .) }}
   </ol>
