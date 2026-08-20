@@ -15,7 +15,7 @@ Semantic classes introduced by the migration use `td-`-prefixed light BEM
 following the pattern of existing names like `td-sidebar-nav--search-disabled`.
 Other pre-existing `td-` names remain until a migration renames or removes them;
 a migration may also keep pre-existing names unchanged (the breadcrumb kept
-`td-breadcrumbs` and `td-breadcrumbs__single`).
+`td-breadcrumbs`).
 
 ## State styling
 
