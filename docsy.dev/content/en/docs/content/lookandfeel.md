@@ -343,42 +343,25 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 
 The theme is migrating its chrome markup (navbar, sidebars, breadcrumb, main
 content layout, footer) from Bootstrap-specific classes to Docsy-owned
-**semantic classes**, one component at a time. Each release that migrates a
-component lists its selector changes (old → new) in an [upgrade post][]; the
-breadcrumb migrated first, in 0.17.0.
+**semantic classes**, one component at a time. Each migration is announced in an
+[upgrade post][] with the selector changes (old → new) and what to update.
 
 The contract, per component:
 
 - **Migrated components**: target the `td-` classes and the state attributes
-  below; framework classes are removed at migration. These are part of Docsy's
-  [public customization surface][public]; how the theme styles them is
+  they emit; framework classes are removed at migration. These are part of
+  Docsy's [public customization surface][public]; how the theme styles them is
   [private][] and can change in any release.
 - **Not-yet-migrated components**: keep targeting the selectors they emit today,
   Bootstrap state classes like `active` included, until their upgrade post says
   otherwise.
 
-State attributes:
+State attributes in the contract:
 
-- **Current styling hooks**:
-  - `aria-current="page"`: the current item in a navigation set; the migrated
-    breadcrumb keys current-item styling on it (taxonomy-page teasers strip it
-    from their embedded breadcrumbs)
-  - `aria-expanded`: toggle disclosure; styled on the sidebar toggle
-- **Reserved for later migrations**:
-  - `aria-disabled`: disabled interactive elements
-  - `data-td-*`: states with no ARIA home (existing `data-td-*` uses, like tab
-    persistence, are not state hooks)
-
-Transition notes:
-
-- Project **SCSS** rules on old **structural** class names (like `.breadcrumb`,
-  `.breadcrumb-item`) keep matching migrated components, as a side effect of the
-  theme's Bootstrap binding; selectors involving **removed state classes** (like
-  `.breadcrumb-item.active` or `:not(.active)`) stop matching or change meaning.
-  The structural keep-alive is temporary: migrate all your selectors as each
-  component's changes are announced.
-- Plain CSS, JS, or tests that reference removed framework class names break at
-  that component's migration.
+- `aria-current="page"`: the current item in a navigation set; the breadcrumb
+  keys current-item styling on it (taxonomy-page teasers strip it from their
+  embedded breadcrumbs)
+- `aria-expanded`: toggle disclosure; styled on the sidebar toggle
 
 For the theme-internal conventions (naming, framework skins), see [Semantic
 classes][semantic-classes-impl].

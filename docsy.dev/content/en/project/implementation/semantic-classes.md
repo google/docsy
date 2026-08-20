@@ -5,8 +5,8 @@ description:
 ---
 
 For what semantic classes are, the migration scope, and the consumer contract
-(public `td-` classes, state attributes, what to update per release), see
-[Semantic classes][user-guide] in the user guide.
+(public `td-` classes and state attributes), see [Semantic classes][user-guide]
+in the user guide.
 
 ## Naming
 
