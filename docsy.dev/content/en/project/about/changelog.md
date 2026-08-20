@@ -157,11 +157,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   [Install Dart Sass][]. Some Sass-computed colors in the built CSS change
   serialization form, with no visible rendering change ([#2724][]).
 
-<!-- TODO(#2727): once merged, link "semantic classes" below to the user
-  guide's consumer-contract section
-  (/docs/content/lookandfeel/#semantic-classes). -->
-
-- Changed breadcrumbs to emit Docsy semantic classes with state keyed on
+- Changed breadcrumbs to emit Docsy [semantic classes][] with state keyed on
   `aria-current="page"` instead of an `active` class. If you customized
   breadcrumbs, see the [selector migration table][] ([#2722][]).
 - Renamed the theme-dependencies install command that clone, submodule, and
@@ -215,6 +211,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
 [selector migration table]: /blog/2026/0.17.0/#selector-migration-table
+[semantic classes]: /docs/content/lookandfeel/#semantic-classes
 <!-- prettier-ignore-end -->
 
 ## v0.16.0 {#v0.16.0}
