@@ -38,6 +38,11 @@ restating them:
 - **Test and code comments**: implementation rationale and regression
   background.
 
+For each artifact's verb tense, see the style guide's [verb tense][] guidance;
+for changelog entry style, the changelog's own [style guide][cl-style-guide].
+The [release-prep audit](#release-prep-audit) enforces this placement at release
+time.
+
 ## PR descriptions
 
 Generally speaking, a PR opening comment should be a Markdown list that explains
@@ -775,6 +780,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 <!-- prettier-ignore-start -->
 [breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
+[cl-style-guide]: /project/about/changelog/#style-guide
 [contributing]: /docs/contributing/
 [deploy/prod]: <{{% param github_repo %}}/tree/deploy/prod>
 [doc-rooted]: <{{% param github_repo %}}/tree/doc-rooted>
@@ -802,4 +808,5 @@ To test a Docsy branch or release from a consumer site, for each site:
 [theme/theme.toml]: <{{% param github_repo %}}/blob/main/theme/theme.toml>
 [themes showcase]: https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration
 [trusted publishing]: https://docs.npmjs.com/trusted-publishers/
+[verb tense]: /project/style-guide/#verb-tense
 <!-- prettier-ignore-end -->
