@@ -31,15 +31,9 @@ const locks = {
 // link entry must point back into one: local code, not a registry fetch.
 const workspaceDirs = new Set(['docsy.dev', 'theme']);
 
-// The only dependencies allowed to bypass the npm registry: two reviewed
-// markdownlint rules, commit-pinned from their author's repos. Everything
-// else must carry a registry URL and an integrity hash.
-const gitDependencyRepos = {
-  'node_modules/markdownlint-rule-link-pattern':
-    'chalin/markdownlint-rule-link-pattern',
-  'node_modules/markdownlint-rule-no-shortcut-ref-link':
-    'chalin/markdownlint-rule-no-shortcut-ref-link',
-};
+// Git deps allowed to bypass the npm registry: lock key -> reviewed
+// owner/repo.
+const gitDependencyRepos = {};
 
 // Known-poisoned package@version pairs from the 2026-08 npm-worm campaign
 // (Datadog Security Labs). A denylist only ever samples: the structural
@@ -213,16 +207,30 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   }
 });
 
-test('manifests: git dependencies are tag-pinned to their reviewed repos', () => {
-  const { devDependencies } = readJSON('package.json');
-  for (const repo of Object.values(gitDependencyRepos)) {
-    const name = repo.split('/')[1];
-    assert.match(
-      devDependencies[name] ?? '',
-      new RegExp(`^github:${repo}#v\\d+\\.\\d+\\.\\d+$`),
-      `${name} is tag-pinned to ${repo}`,
-    );
+// A git-spec denylist would miss npm's other non-registry forms (owner/repo
+// shorthand, URLs, aliases): require the registry semver shape instead, so
+// unknown bypass classes fail closed.
+test('manifests: every dependency spec is a registry semver range', () => {
+  let specs = 0;
+  for (const relPath of [
+    'package.json',
+    'docsy.dev/package.json',
+    'theme/package.json',
+  ]) {
+    const { dependencies = {}, devDependencies = {} } = readJSON(relPath);
+    for (const [name, spec] of [
+      ...Object.entries(dependencies),
+      ...Object.entries(devDependencies),
+    ]) {
+      specs += 1;
+      assert.match(
+        spec,
+        /^[~^]?\d/,
+        `${relPath} ${name} uses a registry semver spec`,
+      );
+    }
   }
+  assert.ok(specs > 0, 'manifest dependency specs were audited');
 });
 
 // npm applies overrides only while re-resolving and trusts an in-sync

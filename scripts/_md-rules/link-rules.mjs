@@ -1,6 +1,6 @@
 // @ts-check
 
-import { createLinkPatternRule } from 'markdownlint-rule-link-pattern';
+import { createLinkPatternRule } from '@pchalin/markdownlint-rule-link-pattern';
 import noShortcutRefLink from 'markdownlint-rule-no-shortcut-ref-link';
 
 export default [

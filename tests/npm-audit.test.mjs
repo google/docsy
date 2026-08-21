@@ -14,17 +14,8 @@ const repoRoot = path.resolve(
   '..',
 );
 
-// GHSA-q3xp-j858-q9xf flags every version of the registry package
-// markdownlint-rule-link-pattern, where malware was once published under
-// the project's name. This repo installs the package from its author's
-// GitHub tag, so the flagged registry code is never fetched; the
-// advisory matches on name only. Remove once the advisory is scoped to
-// the malicious registry version.
-const acceptedAdvisories = new Map([
-  ['GHSA-q3xp-j858-q9xf', 'markdownlint-rule-link-pattern'],
-]);
+const acceptedAdvisories = new Map();
 
-// Helper: gate the npm audit report schema and accepted advisories.
 function validateAuditGate(report, accepted) {
   // Fail-closed on npm audit format changes (currently v2).
   assert.equal(report.auditReportVersion, 2, 'npm audit report format is v2');
@@ -54,7 +45,6 @@ function validateAuditGate(report, accepted) {
           `via entries are advisory objects or chain strings; got ${typeof via} on ${name} (${JSON.stringify(via)})`,
         );
       }
-      // Advisory object: extract GHSA and check acceptance.
       const ghsa = via.url?.match(/GHSA-[a-z0-9-]+$/)?.[0] ?? via.url;
       reported.set(ghsa, via.name ?? name);
       assert.ok(
@@ -64,7 +54,6 @@ function validateAuditGate(report, accepted) {
     }
   }
 
-  // Every accepted advisory must still be reported (exceptions are stale).
   for (const [ghsa, pkg] of accepted) {
     assert.equal(
       reported.get(ghsa),
@@ -97,7 +86,11 @@ test('audit: reported advisories are reviewed and accepted', () => {
   validateAuditGate(report, acceptedAdvisories);
 });
 
-// Fixture: validate the parser against mock report shapes.
+// Fixture: validate the parser against mock report shapes, with a
+// fixture-local accepted map so the checks don't depend on the live
+// exception list.
+const fixtureAccepted = new Map([['GHSA-aaaa-bbbb-cccc', 'accepted-package']]);
+
 test('audit gate: parser rejects unreviewed advisories', () => {
   const validReport = {
     auditReportVersion: 2,
@@ -108,16 +101,16 @@ test('audit gate: parser rejects unreviewed advisories', () => {
         name: 'package-a',
         via: [
           {
-            url: 'https://github.com/advisories/GHSA-q3xp-j858-q9xf',
+            url: 'https://github.com/advisories/GHSA-aaaa-bbbb-cccc',
             severity: 'critical',
-            name: 'markdownlint-rule-link-pattern',
+            name: 'accepted-package',
             title: 'Malware',
           },
         ],
       },
     },
   };
-  validateAuditGate(validReport, acceptedAdvisories);
+  validateAuditGate(validReport, fixtureAccepted);
 });
 
 test('audit gate: parser rejects unaccepted advisories', () => {
@@ -140,7 +133,7 @@ test('audit gate: parser rejects unaccepted advisories', () => {
     },
   };
   assert.throws(
-    () => validateAuditGate(reportWithNewGHSA, acceptedAdvisories),
+    () => validateAuditGate(reportWithNewGHSA, fixtureAccepted),
     /GHSA-xxxx-yyyy-zzzz.*reviewed, accepted advisory/,
   );
 });
@@ -153,8 +146,8 @@ test('audit gate: parser rejects stale exceptions (missing report)', () => {
     vulnerabilities: {},
   };
   assert.throws(
-    () => validateAuditGate(reportWithoutAcceptedGHSA, acceptedAdvisories),
-    /accepted advisory GHSA-q3xp-j858-q9xf remains reported/,
+    () => validateAuditGate(reportWithoutAcceptedGHSA, fixtureAccepted),
+    /accepted advisory GHSA-aaaa-bbbb-cccc remains reported/,
   );
 });
 
@@ -166,7 +159,7 @@ test('audit gate: parser rejects format version changes', () => {
     vulnerabilities: {},
   };
   assert.throws(
-    () => validateAuditGate(reportV3, acceptedAdvisories),
+    () => validateAuditGate(reportV3, fixtureAccepted),
     /report format is v2/,
   );
 });
@@ -184,7 +177,7 @@ test('audit gate: parser rejects string via without chain target', () => {
     },
   };
   assert.throws(
-    () => validateAuditGate(reportWithDanglingStringVia, acceptedAdvisories),
+    () => validateAuditGate(reportWithDanglingStringVia, fixtureAccepted),
     /string via "nonexistent-key".*resolves to a reported vulnerability/,
   );
 });
@@ -199,9 +192,9 @@ test('audit gate: parser catches unreviewed advisory alongside accepted one', ()
         name: 'package-a',
         via: [
           {
-            url: 'https://github.com/advisories/GHSA-q3xp-j858-q9xf',
+            url: 'https://github.com/advisories/GHSA-aaaa-bbbb-cccc',
             severity: 'critical',
-            name: 'markdownlint-rule-link-pattern',
+            name: 'accepted-package',
             title: 'Malware',
           },
         ],
@@ -220,7 +213,7 @@ test('audit gate: parser catches unreviewed advisory alongside accepted one', ()
     },
   };
   assert.throws(
-    () => validateAuditGate(reportWithMixedAdvisories, acceptedAdvisories),
+    () => validateAuditGate(reportWithMixedAdvisories, fixtureAccepted),
     /GHSA-xxxx-yyyy-zzzz.*reviewed, accepted advisory/,
   );
 });
@@ -239,14 +232,14 @@ test('audit gate: parser accepts valid transitive advisory chain', () => {
         name: 'package-b',
         via: [
           {
-            url: 'https://github.com/advisories/GHSA-q3xp-j858-q9xf',
+            url: 'https://github.com/advisories/GHSA-aaaa-bbbb-cccc',
             severity: 'critical',
-            name: 'markdownlint-rule-link-pattern',
+            name: 'accepted-package',
             title: 'Malware',
           },
         ],
       },
     },
   };
-  validateAuditGate(reportWithTransitiveChain, acceptedAdvisories);
+  validateAuditGate(reportWithTransitiveChain, fixtureAccepted);
 });
