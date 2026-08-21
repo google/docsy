@@ -73,6 +73,7 @@ https://docs.npmjs.com/cli/v11/commands/npm-dist-tag,200,1784978353
 https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/,200,1784978429
 https://docs.npmjs.com/cli/v11/commands/npm-install#description,200,1784982268
 https://docs.npmjs.com/cli/v11/using-npm/scripts,200,1787095600
+https://docs.npmjs.com/trusted-publishers,200,1787153684
 https://docs.npmjs.com/trusted-publishers/,200,1786206945
 https://docsy.dev/,200,1782563367
 https://domsignal.com/x-frame-options-test,200,1782498238
@@ -259,6 +260,7 @@ https://github.com/google/docsy/blob/v0.7.0/layouts/partials/footer.html,200,178
 https://github.com/google/docsy/commits/main,200,1782563369
 https://github.com/google/docsy/compare/v0.15.0...main,200,1782563370
 https://github.com/google/docsy/compare/v0.15.0...v0.16.0,200,1785360538
+https://github.com/google/docsy/compare/v0.16.0...main,200,1787153684
 https://github.com/google/docsy/compare/v0.8.0...v0.9.0,200,1782498238
 https://github.com/google/docsy/discussions,200,1782563367
 https://github.com/google/docsy/discussions/1308,200,1782498228
@@ -401,6 +403,7 @@ https://github.com/google/docsy/issues/new?title=Release%200.13.0%20report%20and
 https://github.com/google/docsy/issues/new?title=Release%200.14.0%20report%20and%20upgrade%20guide,200,1782498546
 https://github.com/google/docsy/issues/new?title=Release%200.15.0%20report%20and%20upgrade%20guide,200,1782498546
 https://github.com/google/docsy/issues/new?title=Release%200.16.0%20report%20and%20upgrade%20guide,200,1782498546
+https://github.com/google/docsy/issues/new?title=Release%200.17.0%20report%20and%20upgrade%20guide,200,1787153684
 https://github.com/google/docsy/issues/new?title=Repository%20Links%20and%20other%20page%20information,200,1782498241
 https://github.com/google/docsy/issues/new?title=Repository-root%20markdown%20files,200,1782498547
 https://github.com/google/docsy/issues/new?title=ScrollSpy%20patch,200,1782498547
@@ -423,6 +426,7 @@ https://github.com/google/docsy/issues/new?title=Welcome%20to%20Docsy,200,178249
 https://github.com/google/docsy/issues/new?title=blocks/cover,200,1782498230
 https://github.com/google/docsy/issues?q=is%3Aissue%20state%3Aclosed%20sort%3Areactions-%2B1-desc%20closed%3A2025-01-01..2025-12-31,200,1782498234
 https://github.com/google/docsy/milestone/2,200,1782498241
+https://github.com/google/docsy/milestone/27,200,1787153685
 https://github.com/google/docsy/milestones,200,1782563369
 https://github.com/google/docsy/network/dependents,200,1782498236
 https://github.com/google/docsy/pull/1009,200,1782498229
@@ -522,8 +526,10 @@ https://github.com/google/docsy/pull/2662,200,1782498231
 https://github.com/google/docsy/pull/2664,200,1784236427
 https://github.com/google/docsy/pull/2677,200,1784292830
 https://github.com/google/docsy/pull/2700,200,1786106543
+https://github.com/google/docsy/pull/2708,200,1787153684
 https://github.com/google/docsy/pull/2712,200,1786305687
 https://github.com/google/docsy/pull/2714,200,1786628621
+https://github.com/google/docsy/pull/2722,200,1787153684
 https://github.com/google/docsy/pull/2724,200,1787076569
 https://github.com/google/docsy/pull/2726,200,1787137876
 https://github.com/google/docsy/pull/941,200,1782498225
@@ -620,6 +626,8 @@ https://github.com/prettier/prettier/issues/15528,200,1782563367
 https://github.com/prettier/prettier/issues/15720,200,1782563368
 https://github.com/protocolbuffers/protocolbuffers.github.io,200,1782498549
 https://github.com/sarahmaddox,200,1782498238
+https://github.com/sass/dart-sass/pull/2413,200,1787153685
+https://github.com/sass/dart-sass/releases,200,1787161178
 https://github.com/shurup,200,1785178993
 https://github.com/tektoncd,200,1782498549
 https://github.com/theupdateframework/theupdateframework.io/pull/105,200,1782498236
@@ -691,6 +699,7 @@ https://gohugo.io/getting-started/directory-structure/#static,200,1782498236
 https://gohugo.io/getting-started/directory-structure/#theme-skeleton,200,1785237454
 https://gohugo.io/getting-started/directory-structure/#unified-file-system,200,1782563368
 https://gohugo.io/getting-started/directory-structure/,200,1782498235
+https://gohugo.io/host-and-deploy/host-on-cloudflare/,200,1787153684
 https://gohugo.io/hosting-and-deployment/,200,1782563367
 https://gohugo.io/hosting-and-deployment/hosting-on-aws-amplify/,200,1782563367
 https://gohugo.io/hosting-and-deployment/hosting-on-github/,200,1782563367

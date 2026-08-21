@@ -142,41 +142,35 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
-## v0.16.1 or v0.17.0 - UNRELEASED {#next}
+## v0.17.0 - UNRELEASED {#next}
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
+For an introduction to this release, see the [0.17.0 release report][]. For the
+full list of changes, see the [0.17.0][] release page or the [git history since
+0.16.0][].
 
 [**Breaking changes**](#breaking-change):
 
-- Switched the theme's default Sass transpiler from Hugo's embedded LibSass
-  (deprecated) to Dart Sass; see [Install Dart Sass][]. Some Sass-computed
-  colors in the built CSS change serialization form, with rendering unchanged
-  ([#2724][]).
-- Renamed the theme-dependencies install command that clone and submodule
-  installs run from `themes/docsy`: `npm run postinstall` →
-  `npm run install:theme-deps`. GitHub-npm installs (dev/testing only) must now
-  run it too, from `node_modules/docsy`. Docsy's packages no longer declare npm
-  install hooks, so installs behave the same with or without `--ignore-scripts`
-  ([#2712][]).
+- **[Dart Sass][0.17.0-blog-dart-sass]**: switched the theme's default Sass
+  transpiler from Hugo's embedded LibSass (deprecated) to Dart Sass; see
+  [Install Dart Sass][]. Some Sass-computed colors in the built CSS change
+  serialization form, with no visible rendering change ([#2724][]).
 
-**New**:
-
-- ...
+- Changed breadcrumbs to emit Docsy [semantic classes][] with state keyed on
+  `aria-current="page"` instead of an `active` class. If you customized
+  breadcrumbs, see the [selector migration table][] ([#2722][]).
+- Renamed the theme-dependencies install command that clone, submodule, and
+  GitHub-npm installs run: `npm run postinstall` → `npm run install:theme-deps`;
+  Docsy's packages no longer declare npm install hooks. For per-mode actions,
+  see the [0.17.0 release report][0.17.0-blog-install] ([#2712][]).
 
 **Other changes**:
 
 - Fixed and documented footer copyright year handling. See the [footer copyright
   docs][] ([#2047][]).
-- Pinned the default Mermaid version to 11.16.1; pages previously loaded
-  whatever `latest` resolved to on the CDN at page load. Sites can still
-  override the version via [`params.mermaid.version`][mermaid-version]
-  ([#2703][]).
-
-[**Experimental**](#experimental):
-
-- ...
+- **[Pinned the default Mermaid version][0.17.0-blog-mermaid]** to 11.16.1;
+  pages previously loaded the CDN's `latest` at page load ([#2703][]).
 
 **For maintainers**:
 
@@ -190,6 +184,8 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 - Inlined npm `pre*`/`post*` run-hooks into their parent scripts, so
   `check:links` still builds the site under user-level `ignore-scripts`
   ([#2726][]).
+- Switched stable `@docsy/theme` publishing to CI-based npm trusted publishing
+  (OIDC). See the [0.17.0 release report][0.17.0-blog-maintainers] ([#2708][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
   [Default Mermaid version][mermaid-version-notes].
@@ -198,16 +194,24 @@ For the full list of changes, see the [0.16.1][] or [0.17.0][] release page.
 [#2047]: https://github.com/google/docsy/issues/2047
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
+[#2708]: https://github.com/google/docsy/pull/2708
 [#2712]: https://github.com/google/docsy/pull/2712
+[#2722]: https://github.com/google/docsy/pull/2722
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
 [#2726]: https://github.com/google/docsy/pull/2726
-[0.16.1]: https://github.com/google/docsy/releases/latest?FIXME=v0.16.1
-[0.17.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.17.0
+[0.17.0 release report]: /blog/2026/0.17.0/
+[0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
+[0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
+[0.17.0-blog-maintainers]: /blog/2026/0.17.0/#for-maintainers
+[0.17.0-blog-mermaid]: /blog/2026/0.17.0/#mermaid
+[0.17.0]: https://github.com/google/docsy/releases/tag/v0.17.0
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
+[git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...main
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
-[mermaid-version]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+[selector migration table]: /blog/2026/0.17.0/#selector-migration-table
+[semantic classes]: /docs/content/lookandfeel/#semantic-classes
 <!-- prettier-ignore-end -->
 
 ## v0.16.0 {#v0.16.0}

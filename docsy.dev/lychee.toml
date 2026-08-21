@@ -34,4 +34,10 @@ exclude = [
   '^https://docsearch\.algolia\.com/',               # bot-wall (403) on the apply page
   '^https://prismjs\.com/download\.html#',           # download-builder state hash, not an anchor
   '^https://portal\.aws\.amazon\.com/',              # SPA signup flow, fragment is a client route
+
+  # Remove after 0.17.0 ships: the release tag and links to pages new/draft in
+  # this cycle (absent on v0.16.0 prod).
+  '^https://github\.com/google/docsy/releases/(tag/)?v0\.17\.0$',
+  '^https://www\.docsy\.dev/blog/2026/0\.17\.0/$',
+  '^https://main--docsydocs\.netlify\.app/blog/2026/0\.17\.0/$',
 ]
