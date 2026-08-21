@@ -31,10 +31,8 @@ const locks = {
 // link entry must point back into one: local code, not a registry fetch.
 const workspaceDirs = new Set(['docsy.dev', 'theme']);
 
-// The only dependencies allowed to bypass the npm registry: none since the
-// markdownlint rules moved to registry pins (#2725 follow-up); the allowlist
-// mechanism stays for reviewed exceptions. Every package must carry a
-// registry URL and an integrity hash.
+// Git deps allowed to bypass the npm registry: lock key -> reviewed
+// owner/repo.
 const gitDependencyRepos = {};
 
 // Known-poisoned package@version pairs from the 2026-08 npm-worm campaign

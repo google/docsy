@@ -14,14 +14,8 @@ const repoRoot = path.resolve(
   '..',
 );
 
-// No advisories are currently accepted: GHSA-q3xp-j858-q9xf stopped matching
-// when the link-pattern dep moved to its scoped registry name,
-// @pchalin/markdownlint-rule-link-pattern (the advisory covers the unscoped
-// name, where malware was once published under the project's name). The
-// gate mechanism stays for future reviewed exceptions.
 const acceptedAdvisories = new Map();
 
-// Helper: gate the npm audit report schema and accepted advisories.
 function validateAuditGate(report, accepted) {
   // Fail-closed on npm audit format changes (currently v2).
   assert.equal(report.auditReportVersion, 2, 'npm audit report format is v2');
@@ -51,7 +45,6 @@ function validateAuditGate(report, accepted) {
           `via entries are advisory objects or chain strings; got ${typeof via} on ${name} (${JSON.stringify(via)})`,
         );
       }
-      // Advisory object: extract GHSA and check acceptance.
       const ghsa = via.url?.match(/GHSA-[a-z0-9-]+$/)?.[0] ?? via.url;
       reported.set(ghsa, via.name ?? name);
       assert.ok(
@@ -61,7 +54,6 @@ function validateAuditGate(report, accepted) {
     }
   }
 
-  // Every accepted advisory must still be reported (exceptions are stale).
   for (const [ghsa, pkg] of accepted) {
     assert.equal(
       reported.get(ghsa),
@@ -96,7 +88,7 @@ test('audit: reported advisories are reviewed and accepted', () => {
 
 // Fixture: validate the parser against mock report shapes, with a
 // fixture-local accepted map so the checks don't depend on the live
-// (currently empty) exception list.
+// exception list.
 const fixtureAccepted = new Map([['GHSA-aaaa-bbbb-cccc', 'accepted-package']]);
 
 test('audit gate: parser rejects unreviewed advisories', () => {
