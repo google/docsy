@@ -1,3 +1,4 @@
+@use 'sass:color';
 // =============================================================================
 // Color adjustments for dark mode, mainly to improve color contrast.
 //
@@ -11,7 +12,7 @@
 // The following value makes sense for the Bootstrap base theme. Projects will
 // likely need to adjust this.
 $lighten-amount-for-dark-color-variant: 22% !default;
-$secondary-lighter: lighten($secondary, 30%) !default;
+$secondary-lighter: color.adjust($secondary, $lightness: 30%) !default;
 
 // Make box-shadow color contrast more obvious in dark mode.
 // https://github.com/twbs/bootstrap/issues/39053 reports this issue.

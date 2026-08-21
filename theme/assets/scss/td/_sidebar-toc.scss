@@ -1,3 +1,4 @@
+@use 'sass:map';
 //
 // Right side toc
 //
@@ -79,7 +80,7 @@
 
       // Always visible on touch devices and small screens
       @media (hover: none) and (pointer: coarse),
-        (max-width: map-get($grid-breakpoints, sm)) {
+        (max-width: map.get($grid-breakpoints, sm)) {
         opacity: 1;
         visibility: visible;
       }
