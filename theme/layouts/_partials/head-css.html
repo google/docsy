@@ -1,10 +1,9 @@
 {{ $scssMain := "scss/main.scss" -}}
 {{/* Dart Sass sees only the stdin-fed entry file as first-party: Hugo's
-importer loads everything else -- Docsy's tree, vendored Bootstrap and
-Font Awesome, and site SCSS alike -- as dependencies, so
+importer loads everything else (Docsy's tree, vendored Bootstrap and
+Font Awesome, and site SCSS alike) as dependencies, so
 silenceDependencyDeprecations quiets them all. Docsy-origin regressions stay
-red via tests/sass-deprecations.test.mjs, which compiles the theme directly
-and attributes warnings per file. */ -}}
+red via tests/sass-deprecations.test.mjs. */ -}}
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"

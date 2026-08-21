@@ -1,11 +1,9 @@
 // Guards the docsy#2731 outcome: Docsy's own Sass sources emit no
 // deprecation warnings other than import-class ones (which stay until the
-// @use refactor, docsy#2732; gated on Bootstrap shipping a Sass module
-// system). Hugo builds silence all dependency deprecations (see
-// head-css.html), so a Docsy-origin regression would otherwise be invisible;
-// this probe compiles the theme directly with the pinned dart-sass, verbose
-// so warning dedup can't hide occurrences, and attributes every warning to
-// its source file.
+// @use refactor, docsy#2732). Hugo builds silence all dependency
+// deprecations (see head-css.html), so a Docsy-origin regression would
+// otherwise be invisible; this probe compiles the theme directly with the
+// pinned dart-sass, verbose so warning dedup can't hide occurrences.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -32,8 +30,7 @@ const vendors = {
 
 // Compile a copy of the theme tree laid out as Hugo mounts it (scss/ and
 // vendor/ as siblings), with project stubs that pull in the opt-in surface
-// (extras, dark mode, Google fonts) so warnings from opt-in partials are
-// caught too.
+// so warnings from opt-in partials are caught too.
 function compileTheme() {
   const tmpBase = path.join(repoRoot, 'tmp');
   fs.mkdirSync(tmpBase, { recursive: true });

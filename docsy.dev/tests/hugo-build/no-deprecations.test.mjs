@@ -22,11 +22,9 @@ function buildSite() {
     });
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
     // Catches Hugo API deprecations and any Dart Sass warning that escapes
-    // the theme's silencing (head-css.html silences dependency deprecations;
-    // Docsy-origin regressions are guarded by the repo-root
-    // tests/sass-deprecations.test.mjs). An escape here -- a config
-    // regression, or a vendor @warn, which silencing never covers -- fails
-    // red instead of being filtered.
+    // the theme's silencing (head-css.html): a config regression, or a vendor
+    // @warn, fails red instead of being filtered. Docsy-origin regressions
+    // are guarded by the repo-root tests/sass-deprecations.test.mjs.
     const deprecations = output
       .split('\n')
       .filter((line) => /deprecated/i.test(line));
