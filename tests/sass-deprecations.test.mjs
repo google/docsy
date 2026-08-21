@@ -1,9 +1,8 @@
 // Guards the docsy#2731 outcome: Docsy's own Sass sources emit no
-// deprecation warnings other than import-class ones (which stay until the
-// @use refactor, docsy#2732). Hugo builds silence all dependency
-// deprecations (see head-css.html), so a Docsy-origin regression would
-// otherwise be invisible; this probe compiles the theme directly with the
-// pinned dart-sass, verbose so warning dedup can't hide occurrences.
+// deprecation warnings beyond the tolerated import class. Hugo builds
+// silence these warnings (see maintainer notes, "Sass deprecation
+// warnings"), so the probe compiles the theme directly with the pinned
+// dart-sass, verbose so warning dedup can't hide occurrences.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
