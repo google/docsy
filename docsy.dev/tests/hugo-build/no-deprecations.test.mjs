@@ -15,9 +15,11 @@ function buildSite() {
   mkdirSync(tmpDir, { recursive: true });
   const destDir = mkdtempSync(join(tmpDir, 'no-deprecations-'));
   try {
-    // The trailing --logLevel info pins the effective level (Hugo's last
-    // flag wins): `info` is where Hugo first reports deprecated API usage,
-    // and no upstream script change can silently lower it under this probe.
+    // The trailing --logLevel info makes today's script chain run Hugo at
+    // info (last flag wins); the INFO-records assertion below proves the
+    // executed process really did, so a chain change that swallows the flag
+    // fails red instead of silently muting deprecations. The probe does not
+    // depend on (or enforce) the _hugo script's own level.
     const res = spawnSync(
       'npm run build -- -d ' + destDir + ' --logLevel info',
       {
@@ -43,6 +45,10 @@ function buildSite() {
 test('site build logs no deprecation notices', (t) => {
   const { res, output, deprecations } = buildSite();
   assert.equal(res.status, 0, `site build exits 0; output:\n${output}`);
+  assert.ok(
+    /^INFO /m.test(output),
+    'the executed Hugo ran at info level (INFO records present)',
+  );
   assert.deepEqual(
     deprecations,
     [],
