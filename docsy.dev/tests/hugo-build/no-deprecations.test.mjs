@@ -16,8 +16,8 @@ function buildSite() {
   const destDir = mkdtempSync(join(tmpDir, 'no-deprecations-'));
   try {
     // The trailing --logLevel info makes today's script chain run Hugo at
-    // info (last flag wins); the INFO-records assertion below proves the
-    // executed process really did, so a chain change that swallows the flag
+    // info (last flag wins); the Hugo-INFO-records assertion below proves the
+    // executed Hugo really did, so a chain change that swallows the flag
     // fails red instead of silently muting deprecations. The probe does not
     // depend on (or enforce) the _hugo script's own level.
     const res = spawnSync(
@@ -28,7 +28,7 @@ function buildSite() {
         encoding: 'utf8',
       },
     );
-    const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
+    const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
     // Catches Hugo API deprecations and any deprecation warning that escapes
     // the theme's silencing, e.g. through a config regression (guard split:
     // see maintainer notes, "Sass deprecation warnings"). Non-deprecation
@@ -46,8 +46,8 @@ test('site build logs no deprecation notices', (t) => {
   const { res, output, deprecations } = buildSite();
   assert.equal(res.status, 0, `site build exits 0; output:\n${output}`);
   assert.ok(
-    /^INFO /m.test(output),
-    'the executed Hugo ran at info level (INFO records present)',
+    /^INFO {2}(build|static):/m.test(output),
+    'the executed Hugo ran at info level (Hugo INFO records present)',
   );
   assert.deepEqual(
     deprecations,
