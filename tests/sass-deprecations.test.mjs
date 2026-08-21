@@ -1,10 +1,11 @@
 // Guards the docsy#2731 outcome: Docsy's own Sass sources emit no
 // deprecation warnings other than import-class ones (which stay until the
-// @use refactor; gated on Bootstrap shipping a Sass module system). Hugo
-// builds silence all dependency deprecations (see head-css.html), so a
-// Docsy-origin regression would otherwise be invisible; this probe compiles
-// the theme directly with the pinned dart-sass, verbose so warning dedup
-// can't hide occurrences, and attributes every warning to its source file.
+// @use refactor, docsy#2732; gated on Bootstrap shipping a Sass module
+// system). Hugo builds silence all dependency deprecations (see
+// head-css.html), so a Docsy-origin regression would otherwise be invisible;
+// this probe compiles the theme directly with the pinned dart-sass, verbose
+// so warning dedup can't hide occurrences, and attributes every warning to
+// its source file.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -102,8 +103,8 @@ test('Docsy Sass sources emit no non-import deprecation warnings', (t) => {
 
   // Sanity: the verbose compile surfaces warnings (vendor deprecations exist),
   // and origin attribution works (Docsy's own import-class warnings exist).
-  // When the @use refactor zeroes the import class, the second assertion goes
-  // red: tighten this probe to "no Docsy warnings at all".
+  // When the @use refactor (docsy#2732) zeroes the import class, the second
+  // assertion goes red: tighten this probe to "no Docsy warnings at all".
   assert.ok(warnings.length > 0, 'verbose compile captures warnings');
   assert.ok(
     docsy.some((w) => w.id === 'import'),
