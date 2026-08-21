@@ -105,6 +105,9 @@ const fixtures = {
       "@import 'td/color-adjustments-dark';",
       "@import 'td/code-dark';",
       "@import 'td/gcs-search-dark';",
+      // Exercises the one mixin branch no in-tree call reaches
+      // (link-variant's $underline defaults false everywhere).
+      "@include link-variant('.td-probe-underline', $red, $blue, true);",
       '',
     ].join('\n'),
   },
