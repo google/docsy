@@ -169,12 +169,10 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 
 - Fixed and documented footer copyright year handling. See the [footer copyright
   docs][] ([#2047][]).
-- Replaced deprecated Sass functions with their `sass:` module forms, and
-  silenced Sass dependency-deprecation warnings in site builds -- which covers a
-  site's own project Sass too; see the [release report][0.17.0-blog-dart-sass]
-  ([#2731][]).
 - **[Pinned the default Mermaid version][0.17.0-blog-mermaid]** to 11.16.1;
   pages previously loaded the CDN's `latest` at page load ([#2703][]).
+- Silenced Sass deprecation warnings in site builds, your project's own
+  included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
 **For maintainers**:
 
