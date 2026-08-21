@@ -4,8 +4,8 @@
 // warnings"), so the probe compiles the theme directly with the pinned
 // dart-sass, verbose so warning dedup can't hide occurrences. Loading a
 // file does not evaluate its conditional branches, so the probe compiles
-// every combination of the supported Boolean flags (the explicit fixture
-// matrix below -- the guarantee covers these configurations, not arbitrary
+// every combination of the supported Boolean flags (the fixture matrix
+// below; the guarantee covers these configurations, not arbitrary
 // conditional shapes).
 
 import test from 'node:test';

@@ -172,11 +172,12 @@ commit it.
 
 ### Sass deprecation warnings
 
-Hugo builds silence all dependency deprecation warnings -- Docsy's tree,
-vendored Bootstrap and Font Awesome, and a site's own project Sass alike
-(`theme/layouts/_partials/head-css.html`; under Hugo's importer, only the entry
-stub is first-party) -- so a quiet build log does not mean the sources are
-deprecation-clean. Two probes guard Docsy's theme sources:
+Hugo builds silence all dependency deprecation warnings
+(`theme/layouts/_partials/head-css.html`), and under Hugo's importer everything
+but the entry stub is a dependency: Docsy's tree, vendored Bootstrap and Font
+Awesome, and a site's own project Sass are all silenced. A quiet build log
+therefore does not mean the sources are deprecation-clean. Two probes guard
+Docsy's theme sources:
 
 - `docsy.dev/tests/hugo-build/no-deprecations.test.mjs`: the real site build
   stays free of deprecation notices (Hugo API deprecations, and any deprecation
