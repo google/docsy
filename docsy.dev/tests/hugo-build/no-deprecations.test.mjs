@@ -21,17 +21,15 @@ function buildSite() {
       encoding: 'utf8',
     });
     const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
+    // Catches Hugo API deprecations and any Dart Sass warning that escapes
+    // the theme's silencing (head-css.html silences dependency deprecations;
+    // Docsy-origin regressions are guarded by the repo-root
+    // tests/sass-deprecations.test.mjs). An escape here -- a config
+    // regression, or a vendor @warn, which silencing never covers -- fails
+    // red instead of being filtered.
     const deprecations = output
       .split('\n')
-      .filter((line) => /deprecated/i.test(line))
-      // Dart Sass language deprecations are handled at the theme layer:
-      // head-css.html silences the known vendor-owned classes plus Docsy's
-      // import-class (gated on docsy#2279), and the repo-root
-      // tests/sass-deprecations.test.mjs keeps Docsy-origin regressions red.
-      // This probe guards Hugo API deprecations only. The exclusion keys on
-      // Hugo's `Dart Sass:` line prefix; a prefix change fails this gate
-      // red rather than widening it silently.
-      .filter((line) => !/Dart Sass/.test(line));
+      .filter((line) => /deprecated/i.test(line));
     return { res, output, deprecations };
   } finally {
     rmSync(destDir, { recursive: true, force: true });
