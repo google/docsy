@@ -42,10 +42,6 @@ function compileTheme() {
     fs.cpSync(themeScss, scssDir, { recursive: true });
     fs.mkdirSync(path.join(dir, 'vendor'));
     for (const [name, target] of Object.entries(vendors)) {
-      assert.ok(
-        fs.existsSync(target),
-        `theme dependency ${name} is installed (run npm install)`,
-      );
       // Junction type: works without privileges on Windows CI; ignored on
       // other platforms.
       fs.symlinkSync(target, path.join(dir, 'vendor', name), 'junction');
@@ -98,11 +94,9 @@ test('Docsy Sass sources emit no non-import deprecation warnings', (t) => {
     (w) => w.deprecation && w.url?.startsWith(scssUrl),
   );
 
-  // Sanity: the verbose compile surfaces warnings (vendor deprecations exist),
-  // and origin attribution works (Docsy's own import-class warnings exist).
-  // When the @use refactor (docsy#2732) zeroes the import class, the second
-  // assertion goes red: tighten this probe to "no Docsy warnings at all".
-  assert.ok(warnings.length > 0, 'verbose compile captures warnings');
+  // Sanity: origin attribution provably works (Docsy's own import-class
+  // warnings exist). When the @use refactor (docsy#2732) zeroes the import
+  // class, this goes red: tighten the probe to "no Docsy warnings at all".
   assert.ok(
     docsy.some((w) => w.id === 'import'),
     'warning attribution resolves Docsy-origin (import-class) warnings',
