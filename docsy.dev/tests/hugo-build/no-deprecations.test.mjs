@@ -24,9 +24,11 @@ function buildSite() {
     const deprecations = output
       .split('\n')
       .filter((line) => /deprecated/i.test(line))
-      // Dart Sass language deprecations (Bootstrap's and Docsy's Sass) are
-      // deliberately left visible as fix-me reminders (docsy#2724); this
-      // probe guards Hugo API deprecations only. The exclusion keys on
+      // Dart Sass language deprecations are handled at the theme layer:
+      // head-css.html silences the known vendor-owned classes plus Docsy's
+      // import-class (gated on docsy#2279), and the repo-root
+      // tests/sass-deprecations.test.mjs keeps Docsy-origin regressions red.
+      // This probe guards Hugo API deprecations only. The exclusion keys on
       // Hugo's `Dart Sass:` line prefix; a prefix change fails this gate
       // red rather than widening it silently.
       .filter((line) => !/Dart Sass/.test(line));

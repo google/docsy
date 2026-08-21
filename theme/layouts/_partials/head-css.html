@@ -1,8 +1,14 @@
 {{ $scssMain := "scss/main.scss" -}}
+{{/* silenceDeprecations: the remaining warning classes are vendor-owned
+(Bootstrap, Font Awesome) plus Docsy's own import-class, gated on the @use
+refactor (docsy#2279); Docsy-origin regressions in the silenced classes stay
+red via tests/sass-deprecations.test.mjs. */ -}}
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
-          "enableSourceMap" (not hugo.IsProduction)) -}}
+          "enableSourceMap" (not hugo.IsProduction)
+          "silenceDeprecations" (slice
+              "import" "global-builtin" "color-functions" "if-function")) -}}
 
 {{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
 site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}
