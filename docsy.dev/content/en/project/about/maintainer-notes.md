@@ -170,6 +170,19 @@ files. When a golden test reports intended drift, run `npm run update:goldens`
 to rebuild the site and refresh both suites' goldens, then review the diff and
 commit it.
 
+### Sass deprecation warnings
+
+Hugo builds silence all dependency deprecation warnings, Docsy's own tree
+included (`theme/layouts/_partials/head-css.html`), so a quiet build log does
+not mean the sources are deprecation-clean. Two probes split the guard:
+
+- `docsy.dev/tests/hugo-build/no-deprecations.test.mjs`: the real site build
+  stays free of deprecation notices (Hugo API deprecations, and anything that
+  escapes the silencing).
+- `tests/sass-deprecations.test.mjs`: Docsy's own Sass stays clean, via a direct
+  dart-sass compile that build-level silencing can't blind. Import-class
+  warnings are tolerated until the `@use` refactor ([#2732][]).
+
 ## Link checking and the refcache
 
 `test:website` checks docsy.dev's links with Lychee, caching external-link
@@ -774,6 +787,7 @@ To test a Docsy branch or release from a consumer site, for each site:
   help for usage.
 
 <!-- prettier-ignore-start -->
+[#2732]: <{{% param github_repo %}}/issues/2732>
 [breaking change]: /project/about/changelog/#breaking-change
 [changelog]: /project/about/changelog/
 [contributing]: /docs/contributing/
