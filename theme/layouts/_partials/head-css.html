@@ -1,8 +1,13 @@
 {{ $scssMain := "scss/main.scss" -}}
+{{/* Dart Sass sees only the stdin-fed entry file as first-party, so
+silenceDependencyDeprecations quiets everything else Hugo's importer loads,
+Docsy's own tree included (regression guards: see maintainer notes, "Sass
+deprecation warnings"). */ -}}
 {{ $css := resources.Get $scssMain
       | toCSS (dict
           "transpiler" "dartsass"
-          "enableSourceMap" (not hugo.IsProduction)) -}}
+          "enableSourceMap" (not hugo.IsProduction)
+          "silenceDependencyDeprecations" true) -}}
 
 {{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
 site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}

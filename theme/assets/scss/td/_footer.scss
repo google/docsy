@@ -1,3 +1,4 @@
+@use 'sass:map';
 .td-footer {
   --td-footer-border-color: var(--bs-border-color);
   --td-footer-border: 1px solid var(--td-footer-border-color);
@@ -16,7 +17,7 @@
   }
 
   min-height: var(--td-footer-min-height);
-  padding-top: map-get($spacers, 5);
+  padding-top: map.get($spacers, 5);
   border-top: var(--td-footer-border);
 
   /* &__left { } */
@@ -42,7 +43,7 @@
 
     &-item {
       @extend .list-inline-item;
-      @include font-size(map-get($font-sizes, 4));
+      @include font-size(map.get($font-sizes, 4));
 
       a {
         color: inherit !important;
@@ -52,7 +53,7 @@
 
   &__authors,
   &__all_rights_reserved {
-    padding-left: map-get($spacers, 1);
+    padding-left: map.get($spacers, 1);
   }
 
   &__all_rights_reserved {

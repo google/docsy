@@ -1,3 +1,4 @@
+@use 'sass:selector';
 // Mixins
 
 @mixin link-decoration($base: none, $focus_or_hover: initial) {
@@ -30,7 +31,7 @@
 }
 
 @mixin optional-at-root($sel) {
-  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+  @at-root #{if(sass(not &): $sel; else: selector.append(&, $sel))} {
     @content;
   }
 }

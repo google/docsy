@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,55 +15,44 @@ function buildSite() {
   mkdirSync(tmpDir, { recursive: true });
   const destDir = mkdtempSync(join(tmpDir, 'no-deprecations-'));
   try {
-    const res = spawnSync('npm run build -- -d ' + destDir, {
-      cwd: siteDir,
-      shell: true,
-      encoding: 'utf8',
-    });
-    const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;
+    // The trailing --logLevel info makes today's script chain run Hugo at
+    // info (last flag wins); the Hugo-INFO-records assertion below proves the
+    // executed Hugo really did, so a chain change that swallows the flag
+    // fails red instead of silently muting deprecations. The probe does not
+    // depend on (or enforce) the _hugo script's own level.
+    const res = spawnSync(
+      'npm run build -- -d ' + destDir + ' --logLevel info',
+      {
+        cwd: siteDir,
+        shell: true,
+        encoding: 'utf8',
+      },
+    );
+    const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
+    // Catches Hugo API deprecations and any deprecation warning that escapes
+    // the theme's silencing, e.g. through a config regression (guard split:
+    // see maintainer notes, "Sass deprecation warnings"). Non-deprecation
+    // vendor @warn messages pass: they are log noise, not a regression.
     const deprecations = output
       .split('\n')
-      .filter((line) => /deprecated/i.test(line))
-      // Dart Sass language deprecations (Bootstrap's and Docsy's Sass) are
-      // deliberately left visible as fix-me reminders (docsy#2724); this
-      // probe guards Hugo API deprecations only. The exclusion keys on
-      // Hugo's `Dart Sass:` line prefix; a prefix change fails this gate
-      // red rather than widening it silently.
-      .filter((line) => !/Dart Sass/.test(line));
+      .filter((line) => /deprecated/i.test(line));
     return { res, output, deprecations };
   } finally {
     rmSync(destDir, { recursive: true, force: true });
   }
 }
 
-test('site build logs no Hugo deprecation notices', (t) => {
-  // The `_hugo` script builds with `--logLevel info`, the level at which
-  // Hugo first reports deprecated API usage.
+test('site build logs no deprecation notices', (t) => {
   const { res, output, deprecations } = buildSite();
   assert.equal(res.status, 0, `site build exits 0; output:\n${output}`);
+  assert.ok(
+    /^INFO {2}(build|static):/m.test(output),
+    'the executed Hugo ran at info level (Hugo INFO records present)',
+  );
   assert.deepEqual(
     deprecations,
     [],
     'build log is free of deprecation notices',
   );
   t.diagnostic(`Scanned ${output.split('\n').length} build-log lines`);
-});
-
-// The check above can only catch deprecations if the build runs at a log level
-// where Hugo surfaces them (`info` or more verbose). Rather than re-derive that
-// with a second build that seeds a deprecated API call -- which would have to
-// mutate tracked source -- assert the invariant statically against the `_hugo`
-// script. If someone raises the level (e.g. to `warn`), this fails fast.
-test('the site build runs at a log level that surfaces deprecations', () => {
-  const pkg = JSON.parse(
-    readFileSync(new URL('../../package.json', import.meta.url), 'utf8'),
-  );
-  const hugoScript = pkg.scripts?._hugo ?? '';
-  const match = hugoScript.match(/--logLevel\s+(\w+)/);
-  assert.ok(match, `_hugo script has no --logLevel flag: ${hugoScript}`);
-  assert.ok(
-    ['info', 'debug'].includes(match[1]),
-    `_hugo --logLevel ${match[1]} is too quiet to surface Hugo deprecation ` +
-      'notices; use info (or more verbose)',
-  );
 });

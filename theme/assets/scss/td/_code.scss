@@ -1,7 +1,8 @@
+@use 'sass:color';
 // Code formatting.
 
 @include color-mode(dark, true) {
-  --td-pre-bg: #{adjust-color($gray-900, $lightness: -2.5%)};
+  --td-pre-bg: #{color.adjust($gray-900, $lightness: -2.5%)};
 }
 
 .td-content {
