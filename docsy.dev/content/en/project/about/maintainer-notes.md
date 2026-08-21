@@ -177,8 +177,8 @@ included (`theme/layouts/_partials/head-css.html`), so a quiet build log does
 not mean the sources are deprecation-clean. Two probes split the guard:
 
 - `docsy.dev/tests/hugo-build/no-deprecations.test.mjs`: the real site build
-  stays free of deprecation notices (Hugo API deprecations, and anything that
-  escapes the silencing).
+  stays free of deprecation notices (Hugo API deprecations, and any deprecation
+  warning that escapes the silencing).
 - `tests/sass-deprecations.test.mjs`: Docsy's own Sass stays clean, via a direct
   dart-sass compile that build-level silencing can't blind. Import-class
   warnings are tolerated until the `@use` refactor ([#2732][]).

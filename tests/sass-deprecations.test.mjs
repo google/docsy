@@ -2,7 +2,10 @@
 // deprecation warnings beyond the tolerated import class. Hugo builds
 // silence these warnings (see maintainer notes, "Sass deprecation
 // warnings"), so the probe compiles the theme directly with the pinned
-// dart-sass, verbose so warning dedup can't hide occurrences.
+// dart-sass, verbose so warning dedup can't hide occurrences. Loading a
+// file does not evaluate its conditional branches, so the probe compiles
+// the fixture matrix below and aggregates: a deprecation hidden behind
+// either polarity of a supported Boolean flag stays red.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -28,9 +31,9 @@ const vendors = {
 };
 
 // Compile a copy of the theme tree laid out as Hugo mounts it (scss/ and
-// vendor/ as siblings), with project stubs that pull in the opt-in surface
-// so warnings from opt-in partials are caught too.
-function compileTheme() {
+// vendor/ as siblings). `stubs`, when given, overwrites the project stub
+// files; null keeps the repo's stock (comment-only) stubs.
+function compileTheme(stubs) {
   const tmpBase = path.join(repoRoot, 'tmp');
   fs.mkdirSync(tmpBase, { recursive: true });
   const dir = fs.realpathSync(
@@ -45,21 +48,16 @@ function compileTheme() {
       // other platforms.
       fs.symlinkSync(target, path.join(dir, 'vendor', name), 'junction');
     }
-    fs.writeFileSync(
-      path.join(scssDir, '_variables_project.scss'),
-      '$td-enable-google-fonts: true;\n$enable-dark-mode: true;\n',
-    );
-    fs.writeFileSync(
-      path.join(scssDir, '_styles_project.scss'),
-      [
-        "@import 'td/extra/index';",
-        "@import 'td/extra/bs-defaults';",
-        "@import 'td/color-adjustments-dark';",
-        "@import 'td/code-dark';",
-        "@import 'td/gcs-search-dark';",
-        '',
-      ].join('\n'),
-    );
+    if (stubs) {
+      fs.writeFileSync(
+        path.join(scssDir, '_variables_project.scss'),
+        stubs.variables,
+      );
+      fs.writeFileSync(
+        path.join(scssDir, '_styles_project.scss'),
+        stubs.styles,
+      );
+    }
 
     const warnings = [];
     const result = compile(path.join(scssDir, 'main.scss'), {
@@ -86,36 +84,66 @@ function compileTheme() {
   }
 }
 
+// Fixture matrix: both polarities of each supported Boolean flag
+// ($td-enable-google-fonts defaults false, Bootstrap's $enable-dark-mode
+// defaults true), plus the full opt-in import surface on `maximal` so every
+// partial compiles somewhere.
+const fixtures = {
+  default: null,
+  minimal: { variables: '$enable-dark-mode: false;\n', styles: '' },
+  maximal: {
+    variables: '$td-enable-google-fonts: true;\n$enable-dark-mode: true;\n',
+    styles: [
+      "@import 'td/extra/index';",
+      "@import 'td/extra/bs-defaults';",
+      "@import 'td/color-adjustments-dark';",
+      "@import 'td/code-dark';",
+      "@import 'td/gcs-search-dark';",
+      '',
+    ].join('\n'),
+  },
+};
+
 test('Docsy Sass sources emit no non-import deprecation warnings', (t) => {
-  const { warnings, loadedCount, unreached, scssDir } = compileTheme();
-  const scssUrl = pathToFileURL(scssDir + path.sep).href;
-  const docsy = warnings.filter(
-    (w) => w.deprecation && w.url?.startsWith(scssUrl),
-  );
+  const offending = [];
+  let tdImportSeen = false;
+  for (const [name, stubs] of Object.entries(fixtures)) {
+    const { warnings, loadedCount, unreached, scssDir } = compileTheme(stubs);
+    const scssUrl = pathToFileURL(scssDir + path.sep).href;
+    // Shipped-source scope: td/ only, so the synthetic stubs' own @import
+    // warnings can't satisfy the canary below or pollute attribution.
+    const tdUrl = scssUrl + 'td/';
+    for (const w of warnings) {
+      if (!w.deprecation || !w.url?.startsWith(tdUrl)) continue;
+      if (w.id === 'import') tdImportSeen = true;
+      else offending.push({ fixture: name, id: w.id, url: w.url });
+    }
+    if (name === 'maximal') {
+      // Sanity: this fixture's opt-in stubs compile the whole Docsy tree, so
+      // no partial escapes the guard.
+      assert.deepEqual(
+        unreached,
+        [],
+        'every theme Sass partial is loaded by the maximal fixture',
+      );
+    }
+    t.diagnostic(
+      `${name}: ${warnings.length} warnings, ${loadedCount} loaded files`,
+    );
+  }
 
   // Sanity: origin attribution provably works (Docsy's own import-class
-  // warnings exist). When the @use refactor (docsy#2732) zeroes the import
-  // class, this goes red: tighten the probe to "no Docsy warnings at all".
+  // warnings exist in td/). When the @use refactor (docsy#2732) zeroes the
+  // import class, this goes red: tighten the probe to "no Docsy warnings at
+  // all".
   assert.ok(
-    docsy.some((w) => w.id === 'import'),
+    tdImportSeen,
     'warning attribution resolves Docsy-origin (import-class) warnings',
   );
 
-  const offending = docsy.filter((w) => w.id !== 'import');
   assert.deepEqual(
     offending,
     [],
     'Docsy Sass sources are free of non-import deprecation warnings',
-  );
-
-  // Sanity: the probe's opt-in stubs compile the whole Docsy tree, so no
-  // partial escapes the guard.
-  assert.deepEqual(
-    unreached,
-    [],
-    'every theme Sass partial is loaded by the probe compile',
-  );
-  t.diagnostic(
-    `Scanned ${warnings.length} warnings across ${loadedCount} loaded files`,
   );
 });
