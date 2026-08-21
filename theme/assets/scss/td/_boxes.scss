@@ -5,11 +5,17 @@
 // box-variant creates the main style for a colored section
 @mixin box-variant($parent, $color-name, $color-value) {
   $text-color: color-contrast($color-value);
-  $link-color: color.mix($blue, $text-color, color.channel($color-value, 'lightness', $space: hsl));
+  $link-color: color.mix(
+    $blue,
+    $text-color,
+    color.channel($color-value, 'lightness', $space: hsl)
+  );
   $link-hover-color: if(
-    sass(color-contrast($link-color) == $color-contrast-light):
-      shade-color($link-color, $link-shade-percentage);
-    else: tint-color($link-color, $link-shade-percentage)
+    sass(color-contrast($link-color) == $color-contrast-light): shade-color(
+        $link-color,
+        $link-shade-percentage
+      );
+      else: tint-color($link-color, $link-shade-percentage)
   );
 
   #{$parent} {

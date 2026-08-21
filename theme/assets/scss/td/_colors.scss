@@ -3,7 +3,11 @@
 // Add some local palette classes so you can do -bg-warning -text-warning etc. Even -bg-1 if you want to paint by numbers.
 @mixin palette-variant($color-name, $color-value) {
   $text-color: color-contrast($color-value);
-  $link-color: color.mix($blue, $text-color, color.channel($color-value, 'lightness', $space: hsl));
+  $link-color: color.mix(
+    $blue,
+    $text-color,
+    color.channel($color-value, 'lightness', $space: hsl)
+  );
 
   $link-hover-color: rgba($link-color, 0.5) !default;
 
