@@ -31,15 +31,11 @@ const locks = {
 // link entry must point back into one: local code, not a registry fetch.
 const workspaceDirs = new Set(['docsy.dev', 'theme']);
 
-// The only dependencies allowed to bypass the npm registry: two reviewed
-// markdownlint rules, commit-pinned from their author's repos. Everything
-// else must carry a registry URL and an integrity hash.
-const gitDependencyRepos = {
-  'node_modules/markdownlint-rule-link-pattern':
-    'chalin/markdownlint-rule-link-pattern',
-  'node_modules/markdownlint-rule-no-shortcut-ref-link':
-    'chalin/markdownlint-rule-no-shortcut-ref-link',
-};
+// The only dependencies allowed to bypass the npm registry: none since the
+// markdownlint rules moved to registry pins (#2725 follow-up); the allowlist
+// mechanism stays for reviewed exceptions. Every package must carry a
+// registry URL and an integrity hash.
+const gitDependencyRepos = {};
 
 // Known-poisoned package@version pairs from the 2026-08 npm-worm campaign
 // (Datadog Security Labs). A denylist only ever samples: the structural
@@ -213,15 +209,19 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   }
 });
 
-test('manifests: git dependencies are tag-pinned to their reviewed repos', () => {
-  const { devDependencies } = readJSON('package.json');
-  for (const repo of Object.values(gitDependencyRepos)) {
-    const name = repo.split('/')[1];
-    assert.match(
-      devDependencies[name] ?? '',
-      new RegExp(`^github:${repo}#v\\d+\\.\\d+\\.\\d+$`),
-      `${name} is tag-pinned to ${repo}`,
-    );
+test('manifests: no git-sourced dependencies', () => {
+  for (const relPath of ['package.json', 'theme/package.json']) {
+    const { dependencies = {}, devDependencies = {} } = readJSON(relPath);
+    for (const [name, spec] of [
+      ...Object.entries(dependencies),
+      ...Object.entries(devDependencies),
+    ]) {
+      assert.doesNotMatch(
+        spec,
+        /^(github:|git\+|git:)/,
+        `${relPath} ${name} resolves through the npm registry`,
+      );
+    }
   }
 });
 
