@@ -207,20 +207,30 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   }
 });
 
-test('manifests: no git-sourced dependencies', () => {
-  for (const relPath of ['package.json', 'theme/package.json']) {
+// A git-spec denylist would miss npm's other non-registry forms (owner/repo
+// shorthand, URLs, aliases): require the registry semver shape instead, so
+// unknown bypass classes fail closed.
+test('manifests: every dependency spec is a registry semver range', () => {
+  let specs = 0;
+  for (const relPath of [
+    'package.json',
+    'docsy.dev/package.json',
+    'theme/package.json',
+  ]) {
     const { dependencies = {}, devDependencies = {} } = readJSON(relPath);
     for (const [name, spec] of [
       ...Object.entries(dependencies),
       ...Object.entries(devDependencies),
     ]) {
-      assert.doesNotMatch(
+      specs += 1;
+      assert.match(
         spec,
-        /^(github:|git\+|git:)/,
-        `${relPath} ${name} resolves through the npm registry`,
+        /^[~^]?\d/,
+        `${relPath} ${name} uses a registry semver spec`,
       );
     }
   }
+  assert.ok(specs > 0, 'manifest dependency specs were audited');
 });
 
 // npm applies overrides only while re-resolving and trusts an in-sync
