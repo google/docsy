@@ -10,6 +10,9 @@ ui_pager_prev: 前へ
 ui_pager_next: 次へ
 ui_read_more: 続きを読む
 ui_search: サイトを検索...
+ui_theme_light: ライト
+ui_theme_dark: ダーク
+ui_theme_auto: 自動
 
 # Used in sentences such as "Posted in News"
 ui_in: in
