@@ -171,7 +171,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   docs][] ([#2047][]).
 - **[Pinned the default Mermaid version][0.17.0-blog-mermaid]** to 11.16.1;
   pages previously loaded the CDN's `latest` at page load ([#2703][]).
-- Silenced Sass deprecation warnings in site builds, your project's own
+- Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
 **For maintainers**:
