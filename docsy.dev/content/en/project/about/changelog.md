@@ -169,8 +169,12 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 
 - Fixed and documented footer copyright year handling. See the [footer copyright
   docs][] ([#2047][]).
-- **[Pinned the default Mermaid version][0.17.0-blog-mermaid]** to 11.16.1;
+- **[Pinned the default Mermaid version][0.17.0-blog-script-pins]** to 11.16.1;
   pages previously loaded the CDN's `latest` at page load ([#2703][]).
+- **[Pinned the default KaTeX and markmap-autoloader
+  versions][0.17.0-blog-script-pins]** (`params.katex.version`,
+  `params.markmap.version`); KaTeX build-time assets and the markmap page script
+  previously resolved floating CDN versions ([#2705][], [#2706][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
@@ -189,13 +193,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Switched stable `@docsy/theme` publishing to CI-based npm trusted publishing
   (OIDC). See the [0.17.0 release report][0.17.0-blog-maintainers] ([#2708][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
-  `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
-  [Default script-dependency versions][script-versions-notes].
-- Pinned the default KaTeX ([#2705][]) and markmap-autoloader ([#2706][])
-  versions in `theme/hugo.yaml` (`params.katex.version`,
-  `params.markmap.version`), completing the [script-dependency version
-  pins][script-versions-notes]; KaTeX assets and markmap scripts previously
-  resolved floating CDN versions.
+  `params.mermaid.version`; the KaTeX and markmap-autoloader pins share the
+  home. All are guarded by the repo test suite (`test:repo`). See [Default
+  script-dependency versions][script-versions-notes].
 
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
@@ -214,7 +214,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
 [0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
 [0.17.0-blog-maintainers]: /blog/2026/0.17.0/#for-maintainers
-[0.17.0-blog-mermaid]: /blog/2026/0.17.0/#mermaid
+[0.17.0-blog-script-pins]: /blog/2026/0.17.0/#script-pins
 [0.17.0]: https://github.com/google/docsy/releases/tag/v0.17.0
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
 [git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...main

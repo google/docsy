@@ -337,6 +337,8 @@ https://github.com/google/docsy/issues/2683,200,1785081670
 https://github.com/google/docsy/issues/2689,200,1785081670
 https://github.com/google/docsy/issues/2691,200,1785178993
 https://github.com/google/docsy/issues/2703,200,1786216878
+https://github.com/google/docsy/issues/2705,200,1787588586
+https://github.com/google/docsy/issues/2706,200,1787588586
 https://github.com/google/docsy/issues/2732,200,1787323021
 https://github.com/google/docsy/issues/331,200,1782498237
 https://github.com/google/docsy/issues/349,200,1782498234
@@ -861,6 +863,7 @@ https://opensource.google.com/conduct/,200,1782498227
 https://opentelemetry.io/,200,1782498230
 https://opentelemetry.io/ecosystem/registry/,200,1782498232
 https://osv.dev/list?ecosystem=npm&q=mermaid,200,1786305635
+https://osv.dev/list?ecosystem=npm,200,1787588586
 https://pages.github.com/themes/,200,1782498226
 https://parquet.apache.org/,200,1782498244
 https://plantuml.com/en/,200,1782498236
@@ -874,6 +877,7 @@ https://prismjs.com/index.html#supported-languages,200,1782498238
 https://prismjs.com/index.html,200,1782498238
 https://protobuf.dev/,200,1782498244
 https://realfavicongenerator.net/,200,1782498227
+https://registry.npmjs.org/,200,1787588586
 https://registry.npmjs.org/mermaid,200,1786305635
 https://rtlcss.com/,200,1782498230
 https://sass-lang.com/dart-sass/,200,1787083170
