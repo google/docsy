@@ -191,8 +191,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Switched stable `@docsy/theme` publishing to CI-based npm trusted publishing
   (OIDC). See the [0.17.0 release report][0.17.0-blog-maintainers] ([#2708][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
-  `params.mermaid.version`; the KaTeX and markmap-autoloader pins share the
-  home. All are guarded by the repo test suite (`test:repo`). See [Default
+  `params.mermaid.version`; the KaTeX, markmap-autoloader, and Redoc pins share
+  the home. All are guarded by the repo test suite (`test:repo`). See [Default
   script-dependency versions][script-versions-notes].
 
 <!-- prettier-ignore-start -->
