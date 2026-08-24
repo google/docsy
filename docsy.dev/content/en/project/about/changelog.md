@@ -170,8 +170,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Fixed and documented footer copyright year handling. See the [footer copyright
   docs][] ([#2047][]).
 - **[Pinned the default script-dependency versions][0.17.0-blog-script-pins]**:
-  Mermaid, KaTeX, and markmap-autoloader now load at pinned versions instead of
-  resolving from the CDN's `latest` ([#2703][], [#2705][], [#2706][]).
+  Mermaid, KaTeX, markmap-autoloader, and Redoc now load at pinned versions
+  instead of resolving from the CDN's `latest` ([#2703][], [#2705][], [#2706][],
+  [#2737][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
@@ -200,6 +201,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2705]: https://github.com/google/docsy/issues/2705
 [#2706]: https://github.com/google/docsy/issues/2706
+[#2737]: https://github.com/google/docsy/issues/2737
 [#2708]: https://github.com/google/docsy/pull/2708
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2722]: https://github.com/google/docsy/pull/2722

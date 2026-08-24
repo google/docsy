@@ -12,6 +12,8 @@ params:
     version: 0.18.12
   mermaid:
     version: 11.16.1
+  redoc:
+    version: 2.5.3
 
 outputFormats:
   LLMS:

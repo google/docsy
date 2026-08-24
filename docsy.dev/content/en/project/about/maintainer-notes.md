@@ -123,13 +123,13 @@ Docs render this version live through the `hugo-version` shortcode
 
 The versions of the script dependencies that Docsy loads from CDNs by default
 are pinned in `theme/hugo.yaml`, one `params.`_`PACKAGE`_`.version` entry per
-dependency (`mermaid`, `katex`, `markmap`); the partials and the [diagrams and
-formulae][diagrams] page read them live, so bumping the one yaml line per
-dependency during the [release-prep audit](#release-prep-audit) is enough.
-Guarded by the [script-version-pins test](#test-suites). The partials' unset-
-and non-exact-version guards run reliably only on the docs, blog, and swagger
-layouts for now: the default base template renders scripts through an unkeyed
-`partialCached`, which can skip them. Before bumping, check the [npm
+dependency (`mermaid`, `katex`, `markmap`, `redoc`); the partials and the
+[diagrams and formulae][diagrams] page read them live, so bumping the one yaml
+line per dependency during the [release-prep audit](#release-prep-audit) is
+enough. Guarded by the [script-version-pins test](#test-suites). The partials'
+unset- and non-exact-version guards run reliably only on the docs, blog, and
+swagger layouts for now: the default base template renders scripts through an
+unkeyed `partialCached`, which can skip them. Before bumping, check the [npm
 registry][npm-registry] and [OSV][] for advisories affecting the target version.
 Verify that a page using the dependency (the diagrams and formulae page, for
 example) renders with the new pin. Renovate proposes routine bumps (see

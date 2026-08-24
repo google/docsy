@@ -1,6 +1,7 @@
 // Docsy's default versions of CDN-loaded script dependencies (Mermaid,
-// KaTeX, markmap-autoloader) must stay exact, pinned X.Y.Z values (see
-// maintainer notes, "Default script-dependency versions"). Fast and offline.
+// KaTeX, markmap-autoloader, Redoc) must stay exact, pinned X.Y.Z values
+// (see maintainer notes, "Default script-dependency versions"). Fast and
+// offline.
 //
 // The YAML assertions are the canary proper: a pin regressing to a value
 // like `latest` goes red here and nowhere else (dependency scanners can't
@@ -38,6 +39,11 @@ const PINS = [
     param: 'markmap',
     partial: 'theme/layouts/_partials/scripts/markmap.html',
     cdnPackage: 'markmap-autoloader',
+  },
+  {
+    param: 'redoc',
+    partial: 'theme/layouts/_shortcodes/redoc.html',
+    cdnPackage: 'redoc',
   },
 ];
 

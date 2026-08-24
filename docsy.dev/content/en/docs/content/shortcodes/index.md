@@ -463,8 +463,12 @@ To adjust Swagger UI's look and feel, customize the `.swagger-ui` class in your
 
 The `redoc` shortcode uses the open-source
 [Redoc](https://github.com/Redocly/redoc) tool to render reference API
-documentation from an OpenAPI YAML or JSON file. This can be hosted anywhere you
-like, for example in your site's root
+documentation from an OpenAPI YAML or JSON file. Docsy loads the Redoc script
+from the jsDelivr CDN at page load, at the
+[pinned version](/docs/content/diagrams-and-formulae/#script-dep-versions),
+currently {{% param redoc.version %}}; to use a different one, set
+`params.redoc.version`. The OpenAPI file can be hosted anywhere you like, for
+example in your site's root
 [`/static` folder](/docs/content/adding-content/#adding-static-content), but you
 can use a URL as well, for example:
 
