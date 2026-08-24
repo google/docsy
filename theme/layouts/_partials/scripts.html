@@ -1,6 +1,13 @@
 {{/* cSpell:ignore docsearch markmap plantuml katex hasmermaid */ -}}
 
 {{ if .Site.Params.markmap.enable -}}
+{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: don't reassign $version or add a default. */ -}}
+{{ $version := .Site.Params.markmap.version | string | strings.TrimSpace -}}
+{{ if not $version -}}
+  {{ errorf "params.markmap.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
+{{ else if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
+  {{ warnidf "markmap-floating-version" "params.markmap.version is not an exact X.Y.Z version. For details, see https://www.docsy.dev/docs/content/diagrams-and-formulae/#markmap-version." -}}
+{{ end -}}
 <style>
 .markmap > svg {
   width: 100%;
@@ -18,7 +25,7 @@ window.markmap = {
   },
 };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@{{ $version }}"></script>
 {{ end -}}
 
 {{ if .Site.Params.plantuml.enable -}}
