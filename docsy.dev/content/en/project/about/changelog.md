@@ -171,6 +171,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   docs][] ([#2047][]).
 - **[Pinned the default Mermaid version][0.17.0-blog-mermaid]** to 11.16.1;
   pages previously loaded the CDN's `latest` at page load ([#2703][]).
+- Silenced Sass deprecation warnings in site builds, project style files
+  included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
 **For maintainers**:
 
@@ -200,6 +202,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2724]: https://github.com/google/docsy/pull/2724
 [#2726]: https://github.com/google/docsy/pull/2726
+[#2731]: https://github.com/google/docsy/pull/2731
 [0.17.0 release report]: /blog/2026/0.17.0/
 [0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
 [0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
