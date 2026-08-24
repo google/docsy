@@ -121,17 +121,14 @@ Docs render this version live through the `hugo-version` shortcode
 
 ### Default script-dependency versions {#script-versions}
 
-<a id="mermaid-version"></a>
-
 The versions of the script dependencies that Docsy loads from CDNs by default
-(Mermaid, KaTeX, and markmap-autoloader) are pinned in `theme/hugo.yaml`
-(`params.mermaid.version`, `params.katex.version`, `params.markmap.version`);
-the partials and the [diagrams and formulae][diagrams] page read them live, so
-bumping the one yaml line per dependency during the
-[release-prep audit](#release-prep-audit) is enough. Guarded by the
-[script-version-pins test](#test-suites). The partials' unset- and
-floating-version guards run reliably only on the docs, blog, and swagger layouts
-for now: the default base template renders scripts through an unkeyed
+are pinned in `theme/hugo.yaml`, one `params.`_`PACKAGE`_`.version` entry per
+dependency (`mermaid`, `katex`, `markmap`); the partials and the [diagrams and
+formulae][diagrams] page read them live, so bumping the one yaml line per
+dependency during the [release-prep audit](#release-prep-audit) is enough.
+Guarded by the [script-version-pins test](#test-suites). The partials' unset-
+and non-exact-version guards run reliably only on the docs, blog, and swagger
+layouts for now: the default base template renders scripts through an unkeyed
 `partialCached`, which can skip them. Before bumping, check the [npm
 registry][npm-registry] and [OSV][] for advisories affecting the target version.
 Verify that a page using the dependency (the diagrams and formulae page, for
