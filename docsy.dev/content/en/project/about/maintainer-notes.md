@@ -119,30 +119,31 @@ it, run:
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
 
-### Default Mermaid version {#mermaid-version}
+### Default script-dependency versions {#script-versions}
 
-The Mermaid version that Docsy loads by default is pinned in `theme/hugo.yaml`
-`params.mermaid.version`; the [Mermaid partial][mermaid.html] and [diagrams][]
-page both read it live, so bumping that one line during the
+The versions of the script dependencies that Docsy loads from CDNs by default
+(Mermaid, KaTeX, and markmap-autoloader) are pinned in `theme/hugo.yaml`
+(`params.mermaid.version`, `params.katex.version`, `params.markmap.version`);
+the partials and the [diagrams and formulae][diagrams] page read them live, so
+bumping the one yaml line per dependency during the
 [release-prep audit](#release-prep-audit) is enough. Guarded by the
-[mermaid-version test](#test-suites). The partial's unset- and floating-version
-guards run reliably only on the docs, blog, and swagger layouts for now: the
-default base template renders scripts through an unkeyed `partialCached`, which
-can skip them. Before bumping, check the [npm registry][mermaid-npm] and [OSV][]
-for advisories affecting the target version. Verify that a Mermaid-bearing page
-(the diagrams page, for example) renders with the new pin.
+[script-version-pins test](#test-suites). The partials' unset- and
+floating-version guards run reliably only on the docs, blog, and swagger layouts
+for now: the default base template renders scripts through an unkeyed
+`partialCached`, which can skip them. Before bumping, check the [npm
+registry][npm-registry] and [OSV][] for advisories affecting the target version.
+Verify that a page using the dependency (the diagrams and formulae page, for
+example) renders with the new pin. Renovate proposes routine bumps (see
+`renovate.json`), subject to a minimum release age.
 
-An emergency security bump (a Mermaid advisory landing between releases) is a
-manual edit to that same line, made directly on a `release` branch and shipped
-through the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not
-the next regular release; it explicitly bypasses the minimum release-age gate
-that Renovate will enforce for routine bumps, once configured for this repo (not
-yet, as of this writing).
+An emergency security bump (an advisory landing between releases) is a manual
+edit to the same line, made directly on a `release` branch and shipped through
+the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not the next
+regular release; it explicitly bypasses Renovate's minimum release-age gate.
 
 <!-- prettier-ignore-start -->
-[mermaid-npm]: https://registry.npmjs.org/mermaid
-[mermaid.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html
-[diagrams]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
+[npm-registry]: https://registry.npmjs.org
+[diagrams]: /docs/content/diagrams-and-formulae/
 <!-- prettier-ignore-end -->
 
 ## Test suites
@@ -223,8 +224,8 @@ For each PR/commit in `git log v<prev>..main`:
    menu, navigation, or other rendered output.
 
 Also check pinned script dependencies for drift: bump the
-[default Mermaid version](#mermaid-version) to the latest stable as part of the
-prep PR.
+[default script-dependency versions](#script-versions) to the latest stable as
+part of the prep PR.
 
 Capture the audit as a working document and summarize its findings (the
 classifications and where each item is covered) in the release-prep PR
@@ -809,7 +810,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
-[osv]: https://osv.dev/list?ecosystem=npm&q=mermaid
+[osv]: https://osv.dev/list?ecosystem=npm
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
 [public]: /project/about/changelog/#public
 [publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>

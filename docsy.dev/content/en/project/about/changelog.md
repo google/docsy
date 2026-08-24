@@ -190,12 +190,19 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   (OIDC). See the [0.17.0 release report][0.17.0-blog-maintainers] ([#2708][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
   `params.mermaid.version`, guarded by the repo test suite (`test:repo`). See
-  [Default Mermaid version][mermaid-version-notes].
+  [Default script-dependency versions][script-versions-notes].
+- Pinned the default KaTeX ([#2705][]) and markmap-autoloader ([#2706][])
+  versions in `theme/hugo.yaml` (`params.katex.version`,
+  `params.markmap.version`), completing the [script-dependency version
+  pins][script-versions-notes]; KaTeX assets and markmap scripts previously
+  resolved floating CDN versions.
 
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
+[#2705]: https://github.com/google/docsy/issues/2705
+[#2706]: https://github.com/google/docsy/issues/2706
 [#2708]: https://github.com/google/docsy/pull/2708
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2722]: https://github.com/google/docsy/pull/2722
@@ -212,7 +219,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
 [git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...main
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
-[mermaid-version-notes]: /project/about/maintainer-notes/#mermaid-version
+[script-versions-notes]: /project/about/maintainer-notes/#script-versions
 [selector migration table]: /blog/2026/0.17.0/#selector-migration-table
 [semantic classes]: /docs/content/lookandfeel/#semantic-classes
 <!-- prettier-ignore-end -->

@@ -53,7 +53,11 @@ for (const { param, partial, cdnPackage } of PINS) {
       version !== undefined,
       `params.${param}.version is declared in theme/hugo.yaml`,
     );
-    assert.equal(typeof version, 'string', `params.${param}.version is a string`);
+    assert.equal(
+      typeof version,
+      'string',
+      `params.${param}.version is a string`,
+    );
     // Prerelease pins (X.Y.Z-rc.N) are deliberately rejected: the theme
     // default stays on stable releases. Sites can still pin one; they get the
     // suppressible floating-version warning.

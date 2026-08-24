@@ -18,10 +18,12 @@
     {
       "customType": "jsonata",
       "fileFormat": "yaml",
-      "description": "Update the Mermaid version pinned in the theme config",
+      "description": "Update the script-dependency versions pinned in the theme config",
       "managerFilePatterns": ["/^theme/hugo\\.yaml$/"],
       "matchStrings": [
-        "params.mermaid.{ \"depName\": \"mermaid\", \"currentValue\": version }"
+        "params.mermaid.{ \"depName\": \"mermaid\", \"currentValue\": version }",
+        "params.katex.{ \"depName\": \"katex\", \"currentValue\": version }",
+        "params.markmap.{ \"depName\": \"markmap-autoloader\", \"currentValue\": version }"
       ],
       "datasourceTemplate": "npm"
     }

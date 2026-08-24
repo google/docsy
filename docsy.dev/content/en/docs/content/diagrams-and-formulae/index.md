@@ -165,6 +165,46 @@ of \(\KaTeX\) is automatically enabled when you author a `math` code block on
 your page or when you add a mathematical formula to your page using one of the
 passthrough delimiter pairs defined above.
 
+### KaTeX version {#katex-version}
+
+Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
+and self-hosts them with your site. By default it fetches a pinned version,
+currently {{% param katex.version %}}, updated with each theme release. To use a
+different version, specify it in your configuration file
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
+
+<!-- markdownlint-disable no-shortcut-ref-link -->
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.katex]
+version = "{{% param katex.version %}}"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  katex:
+    version: {{% param katex.version %}}
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "katex": {
+      "version": "{{% param katex.version %}}"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
+Use an exact version (`X.Y.Z`): floating versions such as `latest` are
+re-resolved by the CDN on each uncached build, so your site's output can change
+without any change on your part. A floating version emits a build warning; if
+intentional, suppress it by adding `katex-floating-version` to your site's
+[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+
 > [!NOTE] Passthrough for selected sections
 >
 > For very large sites, you might want to restrict the passthrough to selected
@@ -620,6 +660,22 @@ params:
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
+
+### MarkMap version {#markmap-version}
+
+Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
+load. By default it loads a pinned version, currently
+{{% param markmap.version %}}, updated with each theme release. To use a
+different version, set `params.markmap.version` in your configuration file, in
+the same way as the `enable` flag above.
+
+Use an exact version (`X.Y.Z`): floating versions such as `latest` are
+re-resolved by the CDN on each request, so your site's mindmaps can break
+without any change on your part. A floating version emits a build warning; if
+intentional, suppress it by adding `markmap-floating-version` to your site's
+[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+
+[markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 
 ## Diagrams with Diagrams.net
 
