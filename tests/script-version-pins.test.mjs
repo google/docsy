@@ -22,8 +22,6 @@ const repoRoot = path.resolve(
 
 const SEMVER = /^\d+\.\d+\.\d+$/;
 
-// For each pin: the params key in theme/hugo.yaml, the partial that reads
-// it, and the package name as it appears in the partial's CDN URL.
 const PINS = [
   {
     param: 'mermaid',
