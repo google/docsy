@@ -6,6 +6,10 @@ params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
+  katex:
+    version: 0.18.4
+  markmap:
+    version: 0.18.12
   mermaid:
     version: 11.16.1
 
