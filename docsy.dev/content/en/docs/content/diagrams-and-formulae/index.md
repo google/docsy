@@ -8,6 +8,52 @@ Docsy has built-in support for a number of diagram creation and typesetting
 tools you can use to add rich content to your site, including \(\KaTeX\),
 Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
+## Pinned script-dependency versions {#script-dep-versions}
+
+Docsy renders some rich content with scripts and stylesheets that it loads from
+public CDNs: Mermaid, KaTeX's stylesheet and fonts, and markmap-autoloader. Each
+loads at a version pinned in the theme's configuration and bumped with each
+Docsy release. Pinning keeps builds reproducible and page rendering stable, and
+narrows exposure to bad upstream publishes: a version alias such as `latest`, or
+a partial version such as `11`, is re-resolved by the CDN on each request or
+uncached build, so your site's rendering could change or break without any
+change on your part (for example, when an upstream major ships).
+
+To use a different version of one of these dependencies, set
+`params.`_`PACKAGE`_`.version` in your configuration file, where _`PACKAGE`_ is
+`mermaid`, `katex`, or `markmap`:
+
+<!-- markdownlint-disable no-shortcut-ref-link -->
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.PACKAGE]
+version = "X.Y.Z"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  PACKAGE:
+    version: X.Y.Z
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "PACKAGE": {
+      "version": "X.Y.Z"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
+Use an exact version (`X.Y.Z`): a non-exact version emits a build warning; if
+intentional, suppress it by adding _`PACKAGE`_`-floating-version` (for example,
+`katex-floating-version`) to your site's
+[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+
 ## LaTeX support with KaTeX
 
 [\(\LaTeX\)](https://www.latex-project.org/) is a high-quality typesetting
@@ -168,42 +214,9 @@ passthrough delimiter pairs defined above.
 ### KaTeX version {#katex-version}
 
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
-and self-hosts them with your site. By default it fetches a pinned version,
-currently {{% param katex.version %}}, updated with each theme release. To use a
-different version, specify it in your configuration file
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- markdownlint-disable no-shortcut-ref-link -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.katex]
-version = "{{% param katex.version %}}"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  katex:
-    version: {{% param katex.version %}}
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "katex": {
-      "version": "{{% param katex.version %}}"
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable no-shortcut-ref-link -->
-
-Use an exact version (`X.Y.Z`): floating versions such as `latest` are
-re-resolved by the CDN on each uncached build, so your site's output can change
-without any change on your part. A floating version emits a build warning; if
-intentional, suppress it by adding `katex-floating-version` to your site's
-[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+and self-hosts them with your site. It fetches the
+[pinned version](#script-dep-versions), currently {{% param katex.version %}};
+to use a different one, set `params.katex.version`.
 
 > [!NOTE] Passthrough for selected sections
 >
@@ -348,42 +361,9 @@ sequenceDiagram
     Docsy user->>Docsy user: Being happy
 ```
 
-Docsy loads Mermaid from the jsDelivr CDN at page load. By default it loads a
-pinned version, currently {{% param mermaid.version %}}, updated with each theme
-release. To use a different version, specify it in your configuration file
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- markdownlint-disable no-shortcut-ref-link -->
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.mermaid]
-version = "{{% param mermaid.version %}}"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  mermaid:
-    version: {{% param mermaid.version %}}
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "mermaid": {
-      "version": "{{% param mermaid.version %}}"
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
-<!-- markdownlint-enable no-shortcut-ref-link -->
-
-Use an exact version (`X.Y.Z`): floating versions such as `latest` or `11` are
-re-resolved by the CDN on each request, so your site's diagrams can break
-without any change on your part. A floating version emits a build warning; if
-intentional, suppress it by adding `mermaid-floating-version` to your site's
-[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+Docsy loads Mermaid from the jsDelivr CDN at page load, at the
+[pinned version](#script-dep-versions), currently {{% param mermaid.version %}};
+to use a different one, set `params.mermaid.version`.
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
@@ -664,16 +644,9 @@ params:
 ### MarkMap version {#markmap-version}
 
 Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
-load. By default it loads a pinned version, currently
-{{% param markmap.version %}}, updated with each theme release. To use a
-different version, set `params.markmap.version` in your configuration file, in
-the same way as the `enable` flag above.
-
-Use an exact version (`X.Y.Z`): floating versions such as `latest` are
-re-resolved by the CDN on each request, so your site's mindmaps can break
-without any change on your part. A floating version emits a build warning; if
-intentional, suppress it by adding `markmap-floating-version` to your site's
-[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+load, at the [pinned version](#script-dep-versions), currently
+{{% param markmap.version %}}; to use a different one, set
+`params.markmap.version`.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 
