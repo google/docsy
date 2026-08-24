@@ -172,9 +172,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - **[Pinned the default Mermaid version][0.17.0-blog-script-pins]** to 11.16.1;
   pages previously loaded the CDN's `latest` at page load ([#2703][]).
 - **[Pinned the default KaTeX and markmap-autoloader
-  versions][0.17.0-blog-script-pins]** (`params.katex.version`,
-  `params.markmap.version`); KaTeX build-time assets and the markmap page script
-  previously resolved floating CDN versions ([#2705][], [#2706][]).
+  versions][0.17.0-blog-script-pins]**; KaTeX build-time assets and the markmap
+  page script previously resolved floating CDN versions ([#2705][], [#2706][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
