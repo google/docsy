@@ -80,6 +80,14 @@ for (const { param, partial, cdnPackage } of PINS) {
       ),
       `the partial reads params.${param}.version bare, first in its pipeline`,
     );
+    // A second `:=` or a `=` reassignment could replace the param-sourced
+    // value after the anchored read above (adversarial round 1).
+    const versionAssignments = text.match(/\$version\s*:?=/g) ?? [];
+    assert.equal(
+      versionAssignments.length,
+      1,
+      '$version is assigned exactly once',
+    );
     // Both `| default` (pipe form) and `default "x" .Site...` (call form),
     // scoped to version-bearing lines: scripts.html also hosts unrelated,
     // legitimate `default` calls (docsearch settings). The argument shape
@@ -93,15 +101,28 @@ for (const { param, partial, cdnPackage } of PINS) {
     }
     // The CDN URL interpolates the configured version: `@%s` in printf-built
     // URLs (Mermaid, KaTeX), `@{{ $version }}` in a literal src (markmap).
-    assert.match(
-      text,
-      new RegExp(String.raw`${cdnPackage}@(%s|\{\{ \$version \}\})`),
-      'the CDN URL interpolates the configured version',
-    );
-    assert.doesNotMatch(
-      text,
-      new RegExp(String.raw`${cdnPackage}@(?!%s|\{\{ \$version \}\})`),
-      'CDN URLs carry no hardcoded version',
-    );
+    // Requiring $version on every URL-bearing line closes the false-clean
+    // where a printf keeps `@%s` but fills it with a literal (adversarial
+    // round 1).
+    const urlLines = text
+      .split('\n')
+      .filter((l) => l.includes(`${cdnPackage}@`));
+    assert.ok(urlLines.length > 0, 'the partial builds a CDN URL');
+    for (const line of urlLines) {
+      assert.match(
+        line,
+        new RegExp(String.raw`${cdnPackage}@(%s|\{\{ \$version \}\})`),
+        'the CDN URL interpolates the configured version',
+      );
+      assert.doesNotMatch(
+        line,
+        new RegExp(String.raw`${cdnPackage}@(?!%s|\{\{ \$version \}\})`),
+        'CDN URLs carry no hardcoded version',
+      );
+      assert.ok(
+        line.includes('$version'),
+        'the CDN URL line carries $version itself',
+      );
+    }
   });
 }

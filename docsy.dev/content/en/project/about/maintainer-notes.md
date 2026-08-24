@@ -121,6 +121,8 @@ Docs render this version live through the `hugo-version` shortcode
 
 ### Default script-dependency versions {#script-versions}
 
+<a id="mermaid-version"></a>
+
 The versions of the script dependencies that Docsy loads from CDNs by default
 (Mermaid, KaTeX, and markmap-autoloader) are pinned in `theme/hugo.yaml`
 (`params.mermaid.version`, `params.katex.version`, `params.markmap.version`);
