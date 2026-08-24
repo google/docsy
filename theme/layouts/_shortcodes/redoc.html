@@ -85,9 +85,6 @@
    <div id="redoc-container">
    <redoc spec-url='{{ $url }}' hide-hostname="true" suppress-warnings="true" lazy-rendering  native-scrollbars scroll-y-offset=".js-navbar-scroll" {{ $otheroptions }}></redoc>
    </div>
-    <!--
-    Link to Redoc JavaScript on CDN for rendering standalone element
-    -->
     {{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
     {{ $version := .Site.Params.redoc.version | string | strings.TrimSpace -}}
     {{ if $version -}}
