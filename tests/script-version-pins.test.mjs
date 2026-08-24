@@ -70,15 +70,23 @@ for (const { param, partial, cdnPackage } of PINS) {
   // reintroduced in the partial would ship a version the YAML assertion above
   // never sees.
   test(`the ${cdnPackage} partial takes its version from the config param alone`, () => {
-    const text = fs.readFileSync(path.join(repoRoot, partial), 'utf8');
-    // The read is anchored at the expression's front: nothing can wrap the
-    // param (e.g. a call-form `default`) without breaking this match.
+    // Template comments are stripped first: an inert `{{/* ... */}}` line
+    // must satisfy no assertion (adversarial round 2's decoy-comment
+    // false-clean); with real URLs mutated away, the urlLines non-empty
+    // assertion below goes red.
+    const text = fs
+      .readFileSync(path.join(repoRoot, partial), 'utf8')
+      .replace(/\{\{-?\/\*[\s\S]*?\*\/\s*-?\}\}/g, '');
+    // The read is anchored at both ends: the action closes right after
+    // TrimSpace, so nothing can wrap the param or append a pipeline stage
+    // (a call-form or multiline `default` included) without breaking this
+    // match (adversarial rounds 1-2).
     assert.match(
       text,
       new RegExp(
-        String.raw`\$version := \.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace`,
+        String.raw`\$version := \.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace -\}\}`,
       ),
-      `the partial reads params.${param}.version bare, first in its pipeline`,
+      `the partial reads params.${param}.version bare, as the whole action`,
     );
     // A second `:=` or a `=` reassignment could replace the param-sourced
     // value after the anchored read above (adversarial round 1).
