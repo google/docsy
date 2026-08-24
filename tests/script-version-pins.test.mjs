@@ -71,16 +71,14 @@ for (const { param, partial, cdnPackage } of PINS) {
   // never sees.
   test(`the ${cdnPackage} partial takes its version from the config param alone`, () => {
     // Template comments are stripped first: an inert `{{/* ... */}}` line
-    // must satisfy no assertion (adversarial round 2's decoy-comment
-    // false-clean); with real URLs mutated away, the urlLines non-empty
-    // assertion below goes red.
+    // must satisfy no assertion.
     const text = fs
       .readFileSync(path.join(repoRoot, partial), 'utf8')
       .replace(/\{\{-?\/\*[\s\S]*?\*\/\s*-?\}\}/g, '');
     // The read is anchored at both ends: the action closes right after
     // TrimSpace, so nothing can wrap the param or append a pipeline stage
     // (a call-form or multiline `default` included) without breaking this
-    // match (adversarial rounds 1-2).
+    // match.
     assert.match(
       text,
       new RegExp(
@@ -89,7 +87,7 @@ for (const { param, partial, cdnPackage } of PINS) {
       `the partial reads params.${param}.version bare, as the whole action`,
     );
     // A second `:=` or a `=` reassignment could replace the param-sourced
-    // value after the anchored read above (adversarial round 1).
+    // value after the anchored read above.
     const versionAssignments = text.match(/\$version\s*:?=/g) ?? [];
     assert.equal(
       versionAssignments.length,
@@ -110,8 +108,7 @@ for (const { param, partial, cdnPackage } of PINS) {
     // The CDN URL interpolates the configured version: `@%s` in printf-built
     // URLs (Mermaid, KaTeX), `@{{ $version }}` in a literal src (markmap).
     // Requiring $version on every URL-bearing line closes the false-clean
-    // where a printf keeps `@%s` but fills it with a literal (adversarial
-    // round 1).
+    // where a printf keeps `@%s` but fills it with a literal.
     const urlLines = text
       .split('\n')
       .filter((l) => l.includes(`${cdnPackage}@`));
