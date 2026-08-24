@@ -211,7 +211,7 @@ of \(\KaTeX\) is automatically enabled when you author a `math` code block on
 your page or when you add a mathematical formula to your page using one of the
 passthrough delimiter pairs defined above.
 
-### KaTeX version {#katex-version}
+### KaTeX version
 
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
 and self-hosts them with your site. It fetches the
@@ -641,7 +641,7 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
-### MarkMap version {#markmap-version}
+### MarkMap version
 
 Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
 load, at the [pinned version](#script-dep-versions), currently
