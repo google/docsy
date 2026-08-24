@@ -1,5 +1,5 @@
 {{/* cSpell:ignore markmap */ -}}
-{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: don't reassign $version or add a default. */ -}}
+{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
 {{ $version := .Site.Params.markmap.version | string | strings.TrimSpace -}}
 {{ if $version -}}
 {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}

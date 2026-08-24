@@ -1,12 +1,10 @@
 {{/* cSpell:ignore katex */ -}}
-{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: don't reassign $version or add a default. */ -}}
+{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
 {{ $version := .Site.Params.katex.version | string | strings.TrimSpace -}}
 {{ if $version -}}
   {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
     {{ warnidf "katex-floating-version" "params.katex.version is not an exact X.Y.Z version. For details, see https://www.docsy.dev/docs/content/diagrams-and-formulae/#script-dep-versions." -}}
   {{ end -}}
-
-  {{/* stylesheet */ -}}
 
   {{ $cssFile := cond hugo.IsProduction "katex.min.css" "katex.css" -}}
   {{ $cssUrl := printf "https://unpkg.com/katex@%s/dist/%s" $version $cssFile -}}
@@ -25,10 +23,7 @@
     {{ end -}}
   {{ end -}}
 
-  {{/* font files */ -}}
-
   {{ $fontFiles := slice -}}
-  {{ $data := dict -}}
   {{ $url := ( printf "https://unpkg.com/katex@%s/dist/fonts?meta" $version ) -}}
   {{ with try (resources.GetRemote $url) -}}
     {{ with .Err -}}
