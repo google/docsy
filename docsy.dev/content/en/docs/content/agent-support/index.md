@@ -25,7 +25,9 @@ Docsy enables:
 - **[Markdown output format](#markdown-output)** support. Your project's
   `outputs` configuration controls which page kinds publish Markdown.
 - **Discovery**: page HTML headers include `rel="alternate"` links to the
-  Markdown version of the page.
+  Markdown version of the page. When `llms.txt` is enabled, each page body also
+  opens with a visually-hidden directive pointing agents to the site index and
+  the page's Markdown version.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
 - **[`llms.txt`](#llms-txt)**: site-root file listing.

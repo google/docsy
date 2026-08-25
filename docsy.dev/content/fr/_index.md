@@ -5,7 +5,7 @@ description: >-
 params:
   body_class: td-navbar-links-all-active
   ui: { navbar_theme: dark }
-outputs: [HTML, markdown]
+outputs: [HTML, markdown, LLMS]
 ---
 
 {{% blocks/cover
