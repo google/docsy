@@ -1,54 +1,67 @@
-Running in docsy.dev...
 
 Agent-Friendly Docs Scorecard
 ==============================
 
-http://localhost:1313 · 4/26/2026, 5:43:59 AM
+http://localhost:1313 · 8/25/2026, 9:15:07 AM
 
-  Overall Score: 100 / 100 (A+)
+  Overall Score: 85 / 100 (B)
 
   Category Scores:
-    Content Discoverability              100 / 100 (A+)
-    Markdown Availability                100 / 100 (A+)
-    Page Size and Truncation Risk        100 / 100 (A+)
+    Content Discoverability               85 / 100 (B)
+    Markdown Availability                 57 / 100 (F)
+    Page Size and Truncation Risk         93 / 100 (A)
     Content Structure                    100 / 100 (A+)
     URL Stability and Redirects          100 / 100 (A+)
-    Observability and Content Health     100 / 100 (A+)
+    Observability and Content Health      48 / 100 (F)
     Authentication and Access            100 / 100 (A+)
+
+  Interaction Diagnostics:
+    [!] Your site serves markdown at .md URLs, but agents have no way to discover this
+        Your site serves markdown at .md URLs, but agents have no way to discover this. No agent-facing directive points to your llms.txt, and the server does not support content negotiation. Most agents will default to the HTML path and never benefit from your markdown support.
+
+        Fix: Add a directive near the top of each docs page pointing to your llms.txt, and implement content negotiation for Accept: text/markdown. The directive is the primary discovery mechanism (it reaches all agents); content negotiation provides a fast path for agents that request markdown by default.
 
   Check Results:
 
     Content Discoverability
-      PASS  llms-txt-exists                llms.txt found at 1 location(s)
+      PASS  llms-txt-exists                llms.txt found at http://localhost:1313/llms.txt
       PASS  llms-txt-valid                 llms.txt follows the proposed structure (H1, blockquote, heading-delimited link sections)
-      PASS  llms-txt-size                  llms.txt is 1,131 characters (under 50,000 threshold)
+      PASS  llms-txt-size                  llms.txt is 1,129 characters (under 50,000 threshold)
       PASS  llms-txt-links-resolve         All 13 same-origin links resolve (13 total links)
       PASS  llms-txt-links-markdown        13/13 same-origin links point to markdown content (100%)
-      PASS  llms-txt-directive             llms.txt directive found in all 13 pages, near the top of content
+      WARN  llms-txt-directive-html        llms.txt directive found in HTML of 2 of 50 sampled pages, but buried deep in the page (past 50%)
+            Fix: An llms.txt directive was found in the HTML of some pages but is missing from others, or is buried deep in the page. Ensure the directive appears near the top of every documentation page.
+      PASS  llms-txt-directive-md          llms.txt directive found in markdown of all 45 sampled pages, near the top of content; 5 had no markdown version
 
     Markdown Availability
-      PASS  markdown-url-support           13/13 pages support .md URLs (100%)
-      PASS  content-negotiation            13/13 pages support content negotiation (100%)
+      PASS  markdown-url-support           45/50 sampled pages support .md URLs (90%)
+      FAIL  content-negotiation            Server ignores Accept: text/markdown header (0/50 sampled pages return markdown)
+            Fix: Your server ignores Accept: text/markdown and returns HTML. Some agents (Claude Code, Cursor, OpenCode) request markdown this way. Configure your server to honor content negotiation.
 
     Page Size and Truncation Risk
-      PASS  rendering-strategy             All 13 pages contain server-rendered content
-      PASS  page-size-markdown             All 13 pages under 50K chars (median 2K, max 9K)
-      PASS  page-size-html                 All 13 pages convert under 50K chars (median 2K, 0% boilerplate)
+      PASS  rendering-strategy             All 50 sampled pages contain server-rendered content
+      PASS  page-size-markdown             All 45 pages under 50K chars (median 4K, max 47K)
+      PASS  page-size-html                 All 50 sampled pages under 50K chars (median 54K HTML → 9K markdown (81% boilerplate))
+      FAIL  content-start-position         12 of 50 sampled pages have content starting past 50% (worst 100%)
+            Fix: 12 of 50 pages have content starting past 50% of the converted output. Agents may never see the documentation content. Reduce navigation, breadcrumb, and sidebar markup that precedes the content area.
 
     Content Structure
-      PASS  tabbed-content-serialization   No tabbed content detected across 13 pages
-      PASS  section-header-quality         No tabbed content found; header quality check not applicable
-      PASS  markdown-code-fence-validity   All 1 code fences properly closed across 14 pages
+      PASS  tabbed-content-serialization   8 tab group(s) across 7 of 50 sampled pages; all serialize under 50K chars
+      SKIP  section-header-quality         7 page(s) with tabs found, but no section headers inside tab panels to evaluate
+      PASS  markdown-code-fence-validity   All 157 code fences properly closed across 46 pages
 
     URL Stability and Redirects
-      PASS  http-status-codes              All 13 pages return proper error codes for bad URLs
-      PASS  redirect-behavior              No redirects detected across 13 pages
+      PASS  http-status-codes              All 50 sampled pages return proper error codes for bad URLs
+      PASS  redirect-behavior              No redirects detected across 50 sampled pages
 
     Observability and Content Health
-      PASS  cache-header-hygiene           All 14 endpoints have appropriate cache headers
+      PASS  llms-txt-coverage              llms.txt covers 16% of 62 sitemap doc pages; 1 llms.txt links not in sitemap (may indicate stale links or incomplete sitemap)
+      FAIL  markdown-content-parity        16 of 45 pages have substantive content differences between markdown and HTML (avg 14% missing)
+            Fix: 16 pages have substantive content differences between markdown and HTML (avg 14% missing). If unintentional, agents are getting outdated content; regenerate markdown from source or fix the build pipeline. If intentional (audience segmentation), add data-markdown-ignore to human-only HTML elements, or adjust thresholds with --parity-pass-threshold/--parity-warn-threshold.
+      PASS  cache-header-hygiene           All 51 endpoints have appropriate cache headers
 
     Authentication and Access
-      PASS  auth-gate-detection            All 13 pages are publicly accessible
+      PASS  auth-gate-detection            All 50 sampled pages are publicly accessible
       SKIP  auth-alternative-access        All docs pages are publicly accessible; no alternative access paths needed
 
 Full spec: https://agentdocsspec.com/spec/

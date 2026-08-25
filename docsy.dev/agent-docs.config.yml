@@ -9,7 +9,8 @@ checks:
   - llms-txt-size
   - llms-txt-links-resolve
   - llms-txt-links-markdown
-  - llms-txt-directive
+  - llms-txt-directive-html
+  - llms-txt-directive-md
 
   # --- Markdown Availability ---
   - markdown-url-support
@@ -19,7 +20,7 @@ checks:
   - rendering-strategy
   - page-size-markdown
   - page-size-html
-  # - content-start-position
+  - content-start-position
 
   # --- Content Structure ---
   - tabbed-content-serialization
@@ -31,8 +32,8 @@ checks:
   - redirect-behavior
 
   # --- Observability and Content Health ---
-  # - llms-txt-freshness
-  # - markdown-content-parity
+  - llms-txt-coverage
+  - markdown-content-parity
   - cache-header-hygiene
 
   # --- Authentication and Access ---
@@ -48,3 +49,24 @@ checks:
 #   thresholds:
 #     pass: 50000
 #     fail: 100000
+options:
+  # Deterministic sampling keeps the committed scorecard artifact reproducible
+  # across runs (random sampling shifts scores by a few points per run).
+  samplingStrategy: deterministic
+  # llms-txt-coverage: the site's llms.txt is deliberately curated (it indexes
+  # sections, not every page), so run the check as informational (thresholds 0)
+  # per https://afdocs.dev/checks/observability.html#llms-txt-coverage. The
+  # exclusions keep the reported coverage rate meaningful by removing
+  # non-documentation pages (test fixtures, taxonomy terms) from the
+  # denominator.
+  coveragePassThreshold: 0
+  coverageWarnThreshold: 0
+  coverageExclusions:
+    - /tests/**
+    - /tags/**
+    - /categories/**
+  # markdown-content-parity: strip theme-generated page chrome that is
+  # intentionally HTML-only before comparing formats.
+  parityExclusions:
+    - .td-byline
+    - .td-page-meta__lastmod
