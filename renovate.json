@@ -12,6 +12,11 @@
       "description": "hugo-extended is intentionally pinned; updated manually via `npm run update:hugo`",
       "matchPackageNames": ["hugo-extended"],
       "enabled": false
+    },
+    {
+      "description": "Redoc 3 moves the script to bundle/redoc.js (2.x: bundles/redoc.standalone.js); the redoc shortcode hardcodes the 2.x path, so a 3.x bump is a manual migration",
+      "matchPackageNames": ["redoc"],
+      "allowedVersions": "<3"
     }
   ],
   "customManagers": [
@@ -23,7 +28,8 @@
       "matchStrings": [
         "params.mermaid.{ \"depName\": \"mermaid\", \"currentValue\": version }",
         "params.katex.{ \"depName\": \"katex\", \"currentValue\": version }",
-        "params.markmap.{ \"depName\": \"markmap-autoloader\", \"currentValue\": version }"
+        "params.markmap.{ \"depName\": \"markmap-autoloader\", \"currentValue\": version }",
+        "params.redoc.{ \"depName\": \"redoc\", \"currentValue\": version }"
       ],
       "datasourceTemplate": "npm"
     }

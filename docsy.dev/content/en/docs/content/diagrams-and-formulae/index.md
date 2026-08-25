@@ -11,17 +11,18 @@ Mermaid, Diagrams.net, PlantUML, and MarkMap.
 ## Pinned script-dependency versions {#script-dep-versions}
 
 Docsy renders some rich content with scripts and stylesheets that it loads from
-public CDNs: Mermaid, KaTeX's stylesheet and fonts, and markmap-autoloader. Each
-loads at a version pinned in the theme's configuration and bumped with each
-Docsy release. Pinning keeps builds reproducible and page rendering stable, and
-narrows exposure to bad upstream publishes: a version alias such as `latest`, or
-a partial version such as `11`, is re-resolved by the CDN on each request or
-uncached build, so your site's rendering could change or break without any
-change on your part (for example, when an upstream major ships).
+public CDNs: Mermaid, KaTeX's stylesheet and fonts, markmap-autoloader, and
+Redoc (the [`redoc` shortcode][]). Each loads at a version pinned in the theme's
+configuration and bumped with each Docsy release. Pinning keeps builds
+reproducible and page rendering stable, and narrows exposure to bad upstream
+publishes: a version alias such as `latest`, or a partial version such as `11`,
+is re-resolved by the CDN on each request or uncached build, so your site's
+rendering could change or break without any change on your part (for example,
+when an upstream major ships).
 
 To use a different version of one of these dependencies, set
 `params.`_`PACKAGE`_`.version` in your configuration file, where _`PACKAGE`_ is
-`mermaid`, `katex`, or `markmap`:
+`mermaid`, `katex`, `markmap`, or `redoc`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
@@ -53,6 +54,8 @@ Use an exact version (`X.Y.Z`): a non-exact version emits a build warning; if
 intentional, suppress it by adding _`PACKAGE`_`-floating-version` (for example,
 `katex-floating-version`) to your site's
 [`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+
+[`redoc` shortcode]: /docs/content/shortcodes/#redoc
 
 ## LaTeX support with KaTeX
 
@@ -211,7 +214,7 @@ of \(\KaTeX\) is automatically enabled when you author a `math` code block on
 your page or when you add a mathematical formula to your page using one of the
 passthrough delimiter pairs defined above.
 
-### KaTeX version {#katex-version}
+### KaTeX version
 
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
 and self-hosts them with your site. It fetches the
@@ -641,7 +644,7 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
-### MarkMap version {#markmap-version}
+### MarkMap version
 
 Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
 load, at the [pinned version](#script-dep-versions), currently
