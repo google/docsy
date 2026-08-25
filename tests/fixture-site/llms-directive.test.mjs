@@ -1,8 +1,7 @@
-// The llms-directive partial emits an agent-facing pointer to llms.txt near
-// the top of every page's body, gated on the site actually publishing
-// llms.txt (the LLMS output format on the home page). Two fixture builds pin
-// the gate's both sides; the enabled build also pins position (ahead of the
-// navbar) and the per-page Markdown pointer.
+// Pins the llms-directive partial's contract (rationale and gating:
+// theme/layouts/_partials/llms-directive.html): two fixture builds cover both
+// gate sides; the enabled build also pins position (ahead of the navbar) and
+// the per-page Markdown pointer.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
