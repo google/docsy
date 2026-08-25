@@ -2,9 +2,9 @@
 Agent-Friendly Docs Scorecard
 ==============================
 
-http://localhost:1313 · 8/25/2026, 9:15:07 AM
+http://localhost:1313 · 8/25/2026, 9:46:47 AM
 
-  Overall Score: 85 / 100 (B)
+  Overall Score: 88 / 100 (B)
 
   Category Scores:
     Content Discoverability               85 / 100 (B)
@@ -12,7 +12,7 @@ http://localhost:1313 · 8/25/2026, 9:15:07 AM
     Page Size and Truncation Risk         93 / 100 (A)
     Content Structure                    100 / 100 (A+)
     URL Stability and Redirects          100 / 100 (A+)
-    Observability and Content Health      48 / 100 (F)
+    Observability and Content Health     100 / 100 (A+)
     Authentication and Access            100 / 100 (A+)
 
   Interaction Diagnostics:
@@ -55,9 +55,6 @@ http://localhost:1313 · 8/25/2026, 9:15:07 AM
       PASS  redirect-behavior              No redirects detected across 50 sampled pages
 
     Observability and Content Health
-      PASS  llms-txt-coverage              llms.txt covers 16% of 62 sitemap doc pages; 1 llms.txt links not in sitemap (may indicate stale links or incomplete sitemap)
-      FAIL  markdown-content-parity        16 of 45 pages have substantive content differences between markdown and HTML (avg 14% missing)
-            Fix: 16 pages have substantive content differences between markdown and HTML (avg 14% missing). If unintentional, agents are getting outdated content; regenerate markdown from source or fix the build pipeline. If intentional (audience segmentation), add data-markdown-ignore to human-only HTML elements, or adjust thresholds with --parity-pass-threshold/--parity-warn-threshold.
       PASS  cache-header-hygiene           All 51 endpoints have appropriate cache headers
 
     Authentication and Access
