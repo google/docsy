@@ -47,7 +47,7 @@
   },
   "dependencies-note": "Dependencies installed from ../theme; see the root install:theme-deps script",
   "devDependencies": {
-    "afdocs": "^0.9.2",
+    "afdocs": "^0.19.0",
     "cross-env": "^10.1.0",
     "hugo-extended": "0.164.0",
     "link-cache": "^0.3.0",
