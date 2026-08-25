@@ -190,6 +190,10 @@ module:
       sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
+    # Root package config, for docs that cite its pins (sass-embedded-version)
+    - source: ../package.json
+      target: data/package.json
+      sites: *sites
     # Tests
     # cSpell:ignore quang nguyen vinh therato
     - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
