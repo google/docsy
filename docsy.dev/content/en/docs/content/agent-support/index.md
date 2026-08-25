@@ -163,6 +163,9 @@ For scorecard examples, see:
   <details>
   <summary><code>docsy.dev</code> scorecard</summary>
 
+  The gaps reported in this scorecard are known, and are tracked under
+  [#2614][].
+
   ```text
   {{< readfile "afdocs-scorecard.txt" >}}
   ```
