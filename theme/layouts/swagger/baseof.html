@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui.css" integrity="sha384-WoOxtFhjrhn23jYeguEcSJkYdgSIer0UxZkoMKKEqROW+TDEmHEPwckfxWmZXSIw" crossorigin="anonymous">
   </head>
   <body class="td-{{ .Kind }}">
+    {{ partial "llms-directive.html" . -}}
     <header>
       {{ partial "navbar.html" . }}
     </header>

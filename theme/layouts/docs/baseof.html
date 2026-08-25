@@ -9,6 +9,7 @@
     {{ partial "head.html" . }}
   </head>
   <body class="td-{{ .Kind }}{{ with .Page.Params.body_class }} {{ . }}{{ end }}">
+    {{ partial "llms-directive.html" . -}}
     <header>
       {{ partial "navbar.html" . }}
     </header>
