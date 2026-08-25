@@ -76,7 +76,7 @@ test('site without llms.txt emits no directive', () => {
   for (const page of ['index.html', 'docs/install/index.html']) {
     assert.ok(
       !b.publicFile(page).includes('For AI agents'),
-      `no directive in ${page}`,
+      `${page} omits the directive`,
     );
   }
 });
