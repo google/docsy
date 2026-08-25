@@ -45,7 +45,7 @@ checks:
 
 # options:
 #   maxLinksToTest: 50
-#   samplingStrategy: random # random | deterministic | none
+#   samplingStrategy: random # random | deterministic | curated | none
 #   maxConcurrency: 3
 #   requestDelay: 200
 #   requestTimeout: 30000
