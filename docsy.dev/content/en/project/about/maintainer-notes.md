@@ -39,6 +39,14 @@ restating them:
 - **Test and code comments**: implementation rationale and regression
   background.
 
+**Version values** follow the same ownership rule. An evergreen doc that cites a
+pinned or supported version reads it from the pin's source of truth: a config
+param (for example, `params.mermaid.version`), or a repo manifest surfaced
+through a data mount and shortcode (`sass-embedded-version` reads the root
+`package.json` pin), so the page can't drift from the pin. A dated post freezes
+its release-specific versions as page front-matter params, and delegates install
+and override mechanics to the docs instead of restating commands.
+
 ## PR descriptions
 
 Generally speaking, a PR opening comment should be a Markdown list that explains
