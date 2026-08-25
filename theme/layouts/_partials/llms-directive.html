@@ -4,7 +4,7 @@
   find the directive near the top of the document, ahead of any navigation.
 */ -}}
 {{ with site.Home.OutputFormats.Get "LLMS" -}}
-  <div class="visually-hidden" aria-hidden="true">
+  <div class="visually-hidden" aria-hidden="true" data-pagefind-ignore>
     For AI agents: a documentation index is available at {{ .RelPermalink }}.
     {{- with $.OutputFormats.Get "markdown" }}
     This page has a Markdown version at {{ .RelPermalink }}.

@@ -14,6 +14,8 @@ const files = {
   'content/blog/_index.md': '---\ntitle: Blog\n---\nBlog landing\n',
   'content/blog/first.md':
     '---\ntitle: First\ndate: 2026-08-01\n---\nPost body\n',
+  'content/docs/html-only.md':
+    '---\ntitle: HTML only\noutputs: [HTML]\n---\nNo markdown output\n',
 };
 
 const llmsConfig = `outputs:
@@ -42,7 +44,7 @@ test('llms.txt-enabled site carries the directive on every page kind', () => {
   ]) {
     const html = b.publicFile(page);
     const at = html.indexOf(
-      '<div class="visually-hidden" aria-hidden="true">\n    For AI agents: a documentation index is available at /llms.txt',
+      '<div class="visually-hidden" aria-hidden="true" data-pagefind-ignore>\n    For AI agents: a documentation index is available at /llms.txt',
     );
     assert.ok(at > 0, `hidden directive is present in ${page}`);
     const nav = html.indexOf('td-navbar');
@@ -57,6 +59,15 @@ test('directive names the page Markdown alternate when one exists', () => {
       .publicFile('docs/install/index.html')
       .includes('This page has a Markdown version at /docs/install/index.md'),
     'leaf page directive links its Markdown version',
+  );
+  const htmlOnly = b.publicFile('docs/html-only/index.html');
+  assert.ok(
+    htmlOnly.includes('For AI agents'),
+    'HTML-only page still carries the directive',
+  );
+  assert.ok(
+    !htmlOnly.includes('Markdown version at'),
+    'HTML-only page directive omits the Markdown pointer',
   );
 });
 
