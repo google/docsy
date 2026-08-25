@@ -1,12 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "description": "minimumReleaseAge deliberately covers every datasource this config may grow to manage, not only npm (whose cooldown config:best-practices already sets)",
+  "description": [
+    "minimumReleaseAge deliberately covers every datasource this config may grow to manage; with security:minimumReleaseAgeNpm ignored (below), it is npm's one home too",
+    "security:minimumReleaseAgeNpm is ignored because its 3-day npm rule would override the global minimumReleaseAge; its exemptions for timestamp-less npm update types (pin, replacement, rollback) are deliberately not kept: fail closed, those PRs open with a forever-pending, non-required stability status and wait for a human, as they already do for every other datasource. NOTE: an upstream rename of the preset silently re-admits it"
+  ],
   "extends": ["config:best-practices"],
+  "ignorePresets": ["security:minimumReleaseAgeNpm"],
   "timezone": "America/Toronto",
   "schedule": ["before 6am on monday"],
   "labels": ["dependencies"],
   "enabledManagers": ["custom.jsonata"],
-  "minimumReleaseAge": "3 days",
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
   "packageRules": [
     {
       "description": "hugo-extended is intentionally pinned; updated manually via `npm run update:hugo`",
