@@ -9,7 +9,8 @@ checks:
   - llms-txt-size
   - llms-txt-links-resolve
   - llms-txt-links-markdown
-  - llms-txt-directive
+  - llms-txt-directive-html
+  - llms-txt-directive-md
 
   # --- Markdown Availability ---
   - markdown-url-support
@@ -19,7 +20,7 @@ checks:
   - rendering-strategy
   - page-size-markdown
   - page-size-html
-  # - content-start-position
+  - content-start-position
 
   # --- Content Structure ---
   - tabbed-content-serialization
@@ -31,7 +32,10 @@ checks:
   - redirect-behavior
 
   # --- Observability and Content Health ---
-  # - llms-txt-freshness
+  # Disabled by choice: llms.txt is a deliberately curated section index, so
+  # coverage vs the sitemap isn't the goal; parity flags mostly non-actionable
+  # diffs for this site (code-fence/tab segmentation artifacts).
+  # - llms-txt-coverage
   # - markdown-content-parity
   - cache-header-hygiene
 
@@ -41,10 +45,14 @@ checks:
 
 # options:
 #   maxLinksToTest: 50
-#   samplingStrategy: random # random | deterministic | none
+#   samplingStrategy: random # random | deterministic | curated | none
 #   maxConcurrency: 3
 #   requestDelay: 200
 #   requestTimeout: 30000
 #   thresholds:
 #     pass: 50000
 #     fail: 100000
+options:
+  # Deterministic sampling keeps the sampled page set, and with it the scores,
+  # stable across runs (random sampling shifts scores by a few points per run).
+  samplingStrategy: deterministic

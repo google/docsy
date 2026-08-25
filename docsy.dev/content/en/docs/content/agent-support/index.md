@@ -154,20 +154,17 @@ agent-support goals, including Markdown URLs, llms.txt, and related categories.
 
 ### Scorecard examples
 
-For scorecard examples, see:
+For scorecard examples, see the [OpenTelemetry agent score][] online report and
+the AFDocs scorecard for this site:
 
-- [OpenTelemetry agent score][] online report
+<details>
+<summary><code>docsy.dev</code> scorecard</summary>
 
-- An AFDocs scorecard for this site:
+Known gaps in this scorecard are tracked under [#2614][].
 
-  <details>
-  <summary><code>docsy.dev</code> scorecard</summary>
+{{< readfile file="afdocs-scorecard.txt" code="true" lang="text" >}}
 
-  ```text
-  {{< readfile "afdocs-scorecard.txt" >}}
-  ```
-
-  </details>
+</details>
 
 For details on how these checks are configured, see
 [Agent-support checks](/project/build/ci-cd/#agent-support-checks).
