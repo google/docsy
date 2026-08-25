@@ -1,4 +1,4 @@
-{{ with index site.Data.package.devDependencies "sass-embedded" -}}
+{{ with index hugo.Data.package.devDependencies "sass-embedded" -}}
   {{ . -}}
 {{ else -}}
   {{ errorf "%s: sass-embedded pin not found in the root package.json data mount" .Position -}}
