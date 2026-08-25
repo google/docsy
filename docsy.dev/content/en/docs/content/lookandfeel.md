@@ -341,13 +341,13 @@ $td-google-font-family: 'Roboto:300,300i,400,400i,700,700i';
 
 ## Semantic classes
 
-Chrome components that have adopted Docsy's **semantic classes** emit
-theme-owned `td-` classes, with component state carried by semantic attributes
-(such as `aria-current="page"`) rather than state classes. These selectors are
-part of Docsy's [public customization surface][public]; how the theme styles
-them is [private][] and can change in any release. Each such component's own
-documentation describes the selectors it emits: see, for example, [breadcrumb
-navigation][breadcrumb-styling].
+Chrome components that have adopted Docsy's **semantic classes** render markup
+carrying theme-owned `td-` classes, with component state keyed on semantic
+attributes (such as `aria-current="page"`) rather than state classes. These
+selectors are part of Docsy's [public customization surface][public]; how the
+theme styles them is [private][] and can change in any release. Each such
+component's own documentation describes the selectors it exposes: see, for
+example, [breadcrumb navigation][breadcrumb-styling].
 
 Selectors of components that haven't adopted semantic classes (a mix of
 Bootstrap classes and pre-existing `td-` names) can change; [upgrade posts][]

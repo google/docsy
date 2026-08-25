@@ -759,7 +759,7 @@ To test a Docsy branch or release from a consumer site, for each site:
    preview:
    - Confirm each **page** renders with intact chrome, styles, and favicons:
      - Home page: also confirm that the `generator` meta element reports the
-       expected Hugo version (Docsy's version isn't emitted)
+       expected Hugo version (Docsy's version isn't included)
      - Docs landing page, and a random docs page
      - Blog landing page and a random blog post, when the site has a blog
      - Some other random page
