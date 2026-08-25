@@ -1,8 +1,7 @@
-
 Agent-Friendly Docs Scorecard
 ==============================
 
-http://localhost:1313 · 8/25/2026, 9:46:47 AM
+http://localhost:1313 · 8/25/2026, 2:24:31 PM
 
   Overall Score: 88 / 100 (B)
 
@@ -48,7 +47,7 @@ http://localhost:1313 · 8/25/2026, 9:46:47 AM
     Content Structure
       PASS  tabbed-content-serialization   8 tab group(s) across 7 of 50 sampled pages; all serialize under 50K chars
       SKIP  section-header-quality         7 page(s) with tabs found, but no section headers inside tab panels to evaluate
-      PASS  markdown-code-fence-validity   All 157 code fences properly closed across 46 pages
+      PASS  markdown-code-fence-validity   All 156 code fences properly closed across 46 pages
 
     URL Stability and Redirects
       PASS  http-status-codes              All 50 sampled pages return proper error codes for bad URLs
@@ -62,4 +61,3 @@ http://localhost:1313 · 8/25/2026, 9:46:47 AM
       SKIP  auth-alternative-access        All docs pages are publicly accessible; no alternative access paths needed
 
 Full spec: https://agentdocsspec.com/spec/
-
