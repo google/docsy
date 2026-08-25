@@ -166,9 +166,7 @@ For scorecard examples, see:
   The gaps reported in this scorecard are known, and are tracked under
   [#2614][].
 
-  ```text
-  {{< readfile "afdocs-scorecard.txt" >}}
-  ```
+  {{< readfile file="afdocs-scorecard.txt" code="true" lang="text" >}}
 
   </details>
 

@@ -53,6 +53,6 @@ checks:
 #     pass: 50000
 #     fail: 100000
 options:
-  # Deterministic sampling keeps the committed scorecard artifact reproducible
-  # across runs (random sampling shifts scores by a few points per run).
+  # Deterministic sampling keeps the sampled page set, and with it the scores,
+  # stable across runs (random sampling shifts scores by a few points per run).
   samplingStrategy: deterministic
