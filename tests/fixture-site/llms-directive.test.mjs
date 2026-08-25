@@ -11,6 +11,9 @@ const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
   'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
   'content/docs/install.md': '---\ntitle: Install\n---\nLeaf page\n',
+  'content/blog/_index.md': '---\ntitle: Blog\n---\nBlog landing\n',
+  'content/blog/first.md':
+    '---\ntitle: First\ndate: 2026-08-01\n---\nPost body\n',
 };
 
 const llmsConfig = `outputs:
@@ -35,12 +38,13 @@ test('llms.txt-enabled site carries the directive on every page kind', () => {
     'index.html',
     'docs/index.html',
     'docs/install/index.html',
+    'blog/first/index.html',
   ]) {
     const html = b.publicFile(page);
     const at = html.indexOf(
-      'For AI agents: a documentation index is available at /llms.txt',
+      '<div class="visually-hidden" aria-hidden="true">\n    For AI agents: a documentation index is available at /llms.txt',
     );
-    assert.ok(at > 0, `directive is present in ${page}`);
+    assert.ok(at > 0, `hidden directive is present in ${page}`);
     const nav = html.indexOf('td-navbar');
     assert.ok(at < nav, `directive precedes the navbar in ${page}`);
   }

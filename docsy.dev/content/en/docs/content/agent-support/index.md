@@ -26,8 +26,10 @@ Docsy enables:
   `outputs` configuration controls which page kinds publish Markdown.
 - **Discovery**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page. When `llms.txt` is enabled, each page body also
-  opens with a visually-hidden directive pointing agents to the site index and
-  the page's Markdown version.
+  opens with a visually-hidden directive pointing agents to the site index and,
+  when the page has one, its Markdown version. Sites that override the theme's
+  `baseof` templates need to call the `llms-directive.html` partial themselves
+  to keep the directive.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
 - **[`llms.txt`](#llms-txt)**: site-root file listing.
