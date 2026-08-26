@@ -1,8 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "description": [
-    "minimumReleaseAge is deliberately datasource-wide: it governs the pins below and every datasource this config may grow to manage",
-    "security:minimumReleaseAgeNpm is ignored: its 3-day npm rule would override the global minimumReleaseAge. Its exemptions for timestamp-less npm update types (pin, replacement, rollback) are deliberately not kept: fail closed, those PRs open with a forever-pending, non-required stability status and wait for a human, as such updates already do for every other datasource",
+    "minimumReleaseAge is deliberately datasource-wide: it applies to the pins below and to every datasource this config may grow to manage (security updates keep Renovate's documented bypass of the age check)",
+    "security:minimumReleaseAgeNpm is ignored: its 3-day npm rule would override the global minimumReleaseAge. Its age exemptions for update types without release timestamps (pin, replacement, rollback, among others) are deliberately not restored: such PRs never satisfy the age check and need manual age validation at review, as they already do for every other datasource",
     "NOTE: an upstream rename of security:minimumReleaseAgeNpm would silently re-admit it"
   ],
   "extends": ["config:best-practices"],
