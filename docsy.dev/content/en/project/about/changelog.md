@@ -173,6 +173,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   Mermaid, KaTeX, markmap-autoloader, and Redoc now load at pinned versions
   instead of resolving from the CDN's `latest` ([#2703][], [#2705][], [#2706][],
   [#2737][]).
+- **[Agent directive in page HTML][0.17.0-blog-llms-directive]**: pages of
+  `llms.txt`-publishing sites now open with a hidden pointer to the index; sites
+  overriding `baseof` templates call the new partial themselves ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
@@ -197,6 +200,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
+[#2614]: https://github.com/google/docsy/issues/2614
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
 [#2705]: https://github.com/google/docsy/issues/2705
@@ -212,6 +216,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [0.17.0 release report]: /blog/2026/0.17.0/
 [0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
 [0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
+[0.17.0-blog-llms-directive]: /blog/2026/0.17.0/#llms-directive
 [0.17.0-blog-maintainers]: /blog/2026/0.17.0/#for-maintainers
 [0.17.0-blog-script-pins]: /blog/2026/0.17.0/#script-dep-pins
 [0.17.0]: https://github.com/google/docsy/releases/tag/v0.17.0
