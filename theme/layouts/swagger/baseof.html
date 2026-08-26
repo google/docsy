@@ -8,7 +8,7 @@
   <head>
     {{ partial "head.html" . }}
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
-    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui.css" integrity="sha384-WoOxtFhjrhn23jYeguEcSJkYdgSIer0UxZkoMKKEqROW+TDEmHEPwckfxWmZXSIw" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.32.14/swagger-ui.css" integrity="sha384-fgyWYkUAamzuI8mJFu/xpRP0JWCJRwkwUwsYDoOYVHUJ8NQE5cENn8ib3ppwFFSX" crossorigin="anonymous">
   </head>
   <body class="td-{{ .Kind }}">
     {{ partial "llms-directive.html" . -}}
@@ -30,8 +30,8 @@
             {{ if not (.Param "ui.breadcrumb_disable") -}}
               {{ partial "breadcrumb.html" . -}}
             {{ end -}}
-            <script src="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui-bundle.js" integrity="sha384-sVLSl7HyCV1nd7RZmv/iLgSAiKQD9VfnzE0//SWrbZUtoVy2sPhQuAHF5hNCpDp7" crossorigin="anonymous"></script>
-            <script src="https://unpkg.com/swagger-ui-dist@5.21.0/swagger-ui-standalone-preset.js" integrity="sha384-Zc0myuwGRY+wF+Mppj70Hoq/w2OticNP92nkFTlghzBS/OxDNlYummEqqmcOCyAX" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/swagger-ui-dist@5.32.14/swagger-ui-bundle.js" integrity="sha384-Dt83RhU85ZmX7werw9uTFCzmauXUoSyx3pdzTQMABtsnFmooJy4Vz9/ACh7n5m1A" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/swagger-ui-dist@5.32.14/swagger-ui-standalone-preset.js" integrity="sha384-qHFJhTu2p93skX4AENE6nxauu1KhO4wMiEideQ4Lmr30H6EwV0WlLYcPXkyR1yvu" crossorigin="anonymous"></script>
             {{ block "main" . }}{{ end }}
           </main>
         </div>
