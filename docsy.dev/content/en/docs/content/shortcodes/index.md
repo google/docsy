@@ -442,6 +442,9 @@ description: Reference for the Pet Store API
 <!-- prettier-ignore-end -->
 <!-- markdownlint-restore -->
 
+For a live rendering of this example, see the [Swagger UI test
+page](/tests/layouts/swagger/).
+
 > [!IMPORTANT]
 >
 > This shortcode relies on JavaScript libraries hosted on unpkg. Make sure that
