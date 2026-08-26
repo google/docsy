@@ -175,7 +175,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   [#2737][]).
 - **[Agent directive in page HTML][0.17.0-blog-llms-directive]**
   ([experimental](#experimental)): added a hidden agent-facing pointer to
-  `llms.txt` at the top of each page body of sites that publish the index
+  `llms.txt` at the top of each page body of sites that enable the index
   ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
