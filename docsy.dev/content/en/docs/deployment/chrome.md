@@ -1,21 +1,21 @@
 ---
 title: Chrome build modes
 description: >-
-  Choose how Docsy emits repeated navigation chrome: on every page, or shared
+  Choose how Docsy renders repeated navigation chrome: on every page, or shared
   across pages and restored client-side for smaller, faster-to-check output.
 cSpell:ignore: pagelinks
 ---
 
-A docs site re-emits the same auto-generated _[chrome][]_ &mdash; the navbar,
+A docs site repeats the same auto-generated _[chrome][]_ &mdash; the navbar,
 footer, and left-nav &mdash; on _every_ page, even though those regions are
 usually identical site-wide.
 
 Use the `td.chrome` parameter to select one of two **build modes**:
 
-- **`full`** (default) emits each page's chrome on the page itself, ready for
+- **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** emits each region on just **one** _donor_ page per locale and
+- **`shared`** renders each region on just **one** _donor_ page per locale and
   restores it on the other pages in the browser with a small script. The output
   stays lean, while readers still get the full navigation once the page loads.
 
@@ -70,7 +70,7 @@ link.
 > Two known cases:
 >
 > - A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
->   emits per-page links that the single kept navbar won't cover yet.
+>   renders per-page links that the single kept navbar won't cover yet.
 > - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right
 >   links and active state, but its re-rooted subtree can differ structurally
 >   from a full build (an extra wrapper element, deeper `ul` nesting). The

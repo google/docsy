@@ -157,8 +157,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   [Install Dart Sass][]. Some Sass-computed colors in the built CSS change
   serialization form, with no visible rendering change ([#2724][]).
 
-- Changed breadcrumbs to emit Docsy [semantic classes][] with state keyed on
-  `aria-current="page"` instead of an `active` class. If you customized
+- Changed breadcrumb markup to carry Docsy [semantic classes][] with state keyed
+  on `aria-current="page"` instead of an `active` class. If you customized
   breadcrumbs, see the [selector migration table][] ([#2722][]).
 - Renamed the theme-dependencies install command that clone, submodule, and
   GitHub-npm installs run: `npm run postinstall` → `npm run install:theme-deps`;

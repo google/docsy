@@ -142,7 +142,7 @@ via `layouts/index.llms.txt`. You can override these defaults at several levels:
   `layouts/` in your project to tailor Markdown output for specific [Hugo
   kinds][].
 - **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
-  project-local shortcodes so they emit Markdown-friendly content when
+  project-local shortcodes so they render Markdown-friendly content when
   appropriate. For example, this site's [readfile.markdown.md][] is the
   Markdown-output variant of the theme's `readfile` shortcode.
 - **Per page** — Provide page-specific content or structure for high-value pages

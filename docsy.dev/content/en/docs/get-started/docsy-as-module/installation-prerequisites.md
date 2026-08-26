@@ -80,10 +80,11 @@ Hugo-module setups.
 
 Hugo compiles Docsy's [SCSS][] using the [Dart Sass][] transpiler, which Hugo
 looks up as the `sass` CLI on its `PATH`. For npm-based sites, install the
-[`sass-embedded`][sass-embedded] package from your project root:
+[`sass-embedded`][sass-embedded] package from your project root, at the version
+Docsy is tested with:
 
 ```bash
-npm install --save-dev sass-embedded
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 ```
 
 The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through

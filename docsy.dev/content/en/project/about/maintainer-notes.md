@@ -39,6 +39,14 @@ restating them:
 - **Test and code comments**: implementation rationale and regression
   background.
 
+**Version values** follow the same ownership rule. An evergreen doc that cites a
+pinned or supported version reads it from the pin's source of truth: a config
+param (for example, `params.mermaid.version`), or a repo manifest surfaced
+through a data mount and shortcode (`sass-embedded-version` reads the root
+`package.json` pin), so the page can't drift from the pin. A dated post freezes
+its release-specific versions as page front-matter params, and delegates install
+and override mechanics to the docs instead of restating commands.
+
 ## PR descriptions
 
 Generally speaking, a PR opening comment should be a Markdown list that explains
@@ -354,13 +362,10 @@ If not adjust accordingly.
       npm run test:smoke
       ```
 
-    - **Test consumer sites**:
-      - Run the [consumer-site test procedure](#consumer-site-test) over
-        selected sites listed below.
-      - Sites to test, ideally covering each install mode:
-        - Hugo module: [docsy-example][]
-        - npm package: [docsy-starter][]
-        - Git submodule: [opentelemetry.io][] or another large production site
+    - **Test consumer sites**: run the
+      [consumer-site test procedure](#consumer-site-test) over its validation
+      schedule's pre-release site(s); the schedule assigns the other install
+      modes their own later validation points.
 
 9.  **Get PR approved and merged**.
 
@@ -705,7 +710,26 @@ before any further changes are merged into the `main` branch:
 
 5. **Get PR approved and merged**.
 
+6. **Validate the published release from [docsy-starter][]** (npm package mode),
+   per the [consumer-site test procedure](#consumer-site-test), and follow with
+   the starter's own Docsy-update PR. Post-tag; doesn't block `main`.
+
 ## Consumer-site test procedure {#consumer-site-test}
+
+**Validation schedule** — each install mode has a known consumer that validates
+the release at its natural point in the cycle:
+
+- **Pre-release**, on the release-PR branch
+  ([Publishing a release](#publishing-a-release), step 8): [opentelemetry.io][]
+  or another large production **git submodule** site.
+- **At the [Docsy example release](#docsy-example-release)**: [docsy-example][],
+  the **Hugo module** template.
+- **Post-tag**, against the published release
+  ([post-release followup](#post-docsy-release-followup)): [docsy-starter][],
+  the **npm package** mode.
+
+Track run outcomes in the release-prep audit's working doc; report guide gaps as
+feedback on the release post (step 3 below doubles as its dry run).
 
 To test a Docsy branch or release from a consumer site, for each site:
 
@@ -751,7 +775,7 @@ To test a Docsy branch or release from a consumer site, for each site:
    preview:
    - Confirm each **page** renders with intact chrome, styles, and favicons:
      - Home page: also confirm that the `generator` meta element reports the
-       expected Hugo version (Docsy's version isn't emitted)
+       expected Hugo version (Docsy's version isn't included)
      - Docs landing page, and a random docs page
      - Blog landing page and a random blog post, when the site has a blog
      - Some other random page
