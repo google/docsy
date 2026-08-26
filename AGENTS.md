@@ -54,8 +54,8 @@ notes), see the maintainer notes' [Content placement][] section.
 
 ## Pull requests
 
-When creating a PR whose changes will land in the upcoming release, set the
-PR's milestone to that release (e.g. `0.17.0`); the open release milestones are
+When creating a PR whose changes will land in the upcoming release, set the PR's
+milestone to that release (e.g. `0.17.0`); the open release milestones are
 listed at <https://github.com/google/docsy/milestones>.
 
 ## Monorepo layout
