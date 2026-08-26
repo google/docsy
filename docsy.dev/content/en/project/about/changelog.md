@@ -173,9 +173,10 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   Mermaid, KaTeX, markmap-autoloader, and Redoc now load at pinned versions
   instead of resolving from the CDN's `latest` ([#2703][], [#2705][], [#2706][],
   [#2737][]).
-- **[Agent directive in page HTML][0.17.0-blog-llms-directive]**: pages of
-  `llms.txt`-publishing sites now open with a hidden pointer to the index; sites
-  overriding `baseof` templates call the new partial themselves ([#2614][]).
+- **[Agent directive in page HTML][0.17.0-blog-llms-directive]**
+  ([experimental](#experimental)): added a hidden agent-facing pointer to
+  `llms.txt` at the top of each page body of sites that publish the index
+  ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 
