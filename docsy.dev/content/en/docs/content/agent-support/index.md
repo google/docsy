@@ -24,11 +24,12 @@ Docsy enables:
 
 - **[Markdown output format](#markdown-output)** support. Your project's
   `outputs` configuration controls which page kinds publish Markdown.
-- **Discovery**: page HTML headers include `rel="alternate"` links to the
-  Markdown version of the page.
+- **[Discovery](#discovery)**: alternate links and a hidden in-body directive
+  lead agents to each page's Markdown version and to `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: site-root file listing.
+- **[`llms.txt`](#llms-txt)**: per-language site index of links to Markdown
+  content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -105,9 +106,10 @@ to site content. It is designed to be easy for agents to discover and parse, and
 to complement the richer but more complex Markdown outputs. To learn more, see
 [llmstxt.org][].
 
-Docsy generates `llms.txt` at the site root, and includes links to the home
-page, main menu pages, and Markdown alternates where they exist. To enable it,
-add `LLMS` to the Hugo [outputs][] configuration for the home page. For example:
+Docsy generates an `llms.txt` index at each language's site root, and includes
+links to the home page, main menu pages, and Markdown alternates where they
+exist. To enable it, add `LLMS` to the Hugo [outputs][] configuration for the
+home page. For example:
 
 ```yaml
 outputs:
@@ -119,6 +121,18 @@ outputs:
 For an example of the generated `llms.txt` for this site, see
 [/llms.txt](/llms.txt).
 
+## Discovery
+
+Agents find your Markdown content through:
+
+- **Alternate links**: page HTML headers include `rel="alternate"` links to the
+  Markdown version of the page.
+- **In-body directive**: when `llms.txt` is enabled, each page body opens with a
+  visually-hidden directive pointing agents to the language's `llms.txt` index
+  and, when the page has one, its Markdown version. Sites that override the
+  theme's `baseof` templates need to call the `llms-directive.html` partial
+  themselves.
+
 ## Customize output
 
 Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
@@ -129,7 +143,8 @@ via `layouts/index.llms.txt`. You can override these defaults at several levels:
   kinds][].
 - **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
   project-local shortcodes so they emit Markdown-friendly content when
-  appropriate.
+  appropriate. For example, this site's [readfile.markdown.md][] is the
+  Markdown-output variant of the theme's `readfile` shortcode.
 - **Per page** — Provide page-specific content or structure for high-value pages
   that need a curated agent-facing view.
 
@@ -174,6 +189,8 @@ For details on how these checks are configured, see
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
 [layouts/all.md]: https://github.com/google/docsy/blob/main/theme/layouts/all.md
+[readfile.markdown.md]:
+  https://github.com/google/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [llmstxt.org]: https://llmstxt.org/
 [OpenTelemetry agent score]:
   https://buildwithfern.com/agent-score/company/opentelemetry

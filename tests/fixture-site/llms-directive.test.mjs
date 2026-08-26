@@ -1,0 +1,82 @@
+// Pins the llms-directive partial's contract (rationale and gating:
+// theme/layouts/_partials/llms-directive.html): two fixture builds cover both
+// gate sides; the enabled build also pins position (ahead of the navbar) and
+// the per-page Markdown pointer.
+
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { buildSite } from './lib/build-site.mjs';
+
+const files = {
+  'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+  'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs landing\n',
+  'content/docs/install.md': '---\ntitle: Install\n---\nLeaf page\n',
+  'content/blog/_index.md': '---\ntitle: Blog\n---\nBlog landing\n',
+  'content/blog/first.md':
+    '---\ntitle: First\ndate: 2026-08-01\n---\nPost body\n',
+  'content/docs/html-only.md':
+    '---\ntitle: HTML only\noutputs: [HTML]\n---\nNo markdown output\n',
+};
+
+const llmsConfig = `outputs:
+  home: [HTML, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, markdown]
+`;
+
+function build(name, extraConfig) {
+  const r = buildSite(name, { files, extraConfig });
+  assert.equal(
+    r.status,
+    0,
+    `fixture hugo build succeeds:\n${r.stdout}${r.stderr}`,
+  );
+  return r;
+}
+
+test('llms.txt-enabled site carries the directive on every page kind', () => {
+  const b = build('llms-directive-on', llmsConfig);
+  for (const page of [
+    'index.html',
+    'docs/index.html',
+    'docs/install/index.html',
+    'blog/first/index.html',
+  ]) {
+    const html = b.publicFile(page);
+    const at = html.indexOf(
+      '<div class="visually-hidden" aria-hidden="true" data-pagefind-ignore>\n    For AI agents: a documentation index is available at /llms.txt',
+    );
+    assert.ok(at > 0, `hidden directive is present in ${page}`);
+    const nav = html.indexOf('td-navbar');
+    assert.ok(at < nav, `directive precedes the navbar in ${page}`);
+  }
+});
+
+test('directive names the page Markdown alternate when one exists', () => {
+  const b = build('llms-directive-on', llmsConfig);
+  assert.ok(
+    b
+      .publicFile('docs/install/index.html')
+      .includes('This page has a Markdown version at /docs/install/index.md'),
+    'leaf page directive links its Markdown version',
+  );
+  const htmlOnly = b.publicFile('docs/html-only/index.html');
+  assert.ok(
+    htmlOnly.includes('For AI agents'),
+    'HTML-only page still carries the directive',
+  );
+  assert.ok(
+    !htmlOnly.includes('Markdown version at'),
+    'HTML-only page directive omits the Markdown pointer',
+  );
+});
+
+test('site without llms.txt emits no directive', () => {
+  const b = build('llms-directive-off');
+  for (const page of ['index.html', 'docs/install/index.html']) {
+    assert.ok(
+      !b.publicFile(page).includes('For AI agents'),
+      `${page} omits the directive`,
+    );
+  }
+});
