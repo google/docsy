@@ -1,0 +1,52 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: ['config:best-practices'],
+  // config:best-practices pulls in security:minimumReleaseAgeNpm: its 3-day npm
+  // rule would override the global minimumReleaseAge below. Its age exemptions
+  // for update types without release timestamps (pin, replacement, rollback,
+  // among others) are deliberately not restored: such PRs never satisfy the age
+  // check and need manual age validation at review, as they already do for
+  // every other datasource.
+  //
+  // IMPORTANT: an upstream rename of the preset silently re-admits it.
+  ignorePresets: ['security:minimumReleaseAgeNpm'],
+  timezone: 'America/Toronto',
+  schedule: ['before 6am on monday'],
+  labels: ['dependencies'],
+  enabledManagers: ['custom.jsonata'],
+  // Deliberately datasource-wide: applies to the pins below and to every
+  // datasource this config may grow to manage. Security updates keep Renovate's
+  // documented bypass of the age check.
+  minimumReleaseAge: '7 days',
+  internalChecksFilter: 'strict',
+  packageRules: [
+    {
+      // hugo-extended is intentionally pinned; updated manually via
+      // `npm run update:hugo`.
+      matchPackageNames: ['hugo-extended'],
+      enabled: false,
+    },
+    {
+      // Redoc 3 moves the script to bundle/redoc.js (2.x:
+      // bundles/redoc.standalone.js); the redoc shortcode hardcodes the 2.x
+      // path, so a 3.x bump is a manual migration.
+      matchPackageNames: ['redoc'],
+      allowedVersions: '<3',
+    },
+  ],
+  customManagers: [
+    {
+      // Update the script-dependency versions pinned in the theme config.
+      customType: 'jsonata',
+      fileFormat: 'yaml',
+      managerFilePatterns: ['/^theme/hugo\\.yaml$/'],
+      matchStrings: [
+        'params.mermaid.{ "depName": "mermaid", "currentValue": version }',
+        'params.katex.{ "depName": "katex", "currentValue": version }',
+        'params.markmap.{ "depName": "markmap-autoloader", "currentValue": version }',
+        'params.redoc.{ "depName": "redoc", "currentValue": version }',
+      ],
+      datasourceTemplate: 'npm',
+    },
+  ],
+}
