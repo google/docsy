@@ -52,6 +52,12 @@ notes), see the maintainer notes' [Content placement][] section.
 [Content placement]:
   docsy.dev/content/en/project/about/maintainer-notes.md#content-placement
 
+## Pull requests
+
+When creating a PR whose changes will land in the upcoming release, set the PR's
+milestone to that release (e.g. `0.17.0`); the open release milestones are
+listed at <https://github.com/google/docsy/milestones>.
+
 ## Monorepo layout
 
 The repo root orchestrates two npm workspaces:
