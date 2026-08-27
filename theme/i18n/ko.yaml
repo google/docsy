@@ -1,3 +1,10 @@
+# Alert labels
+caution: 주의
+important: 중요
+note: 참고
+tip: 팁
+warning: 경고
+
 # UI strings. Buttons and similar.
 ui_pager_prev: 이전
 ui_pager_next: 다음
@@ -9,6 +16,9 @@ ui_theme_auto: 자동
 
 # Used in sentences such as "Posted in News"
 ui_in: in
+
+# Used in sentences such as "All Tags"
+ui_all: 모든
 
 # Footer text
 footer_all_rights_reserved: All Rights Reserved
@@ -22,6 +32,7 @@ post_last_mod: 최종 수정
 post_edit_this: 페이지 편집
 post_create_child_page: 하부 페이지 생성
 post_view_markdown: Markdown 보기
+post_view_this: 페이지 소스 보기
 post_create_issue: 문서에 이슈 생성
 post_create_project_issue: 프로젝트에 이슈 생성
 post_posts_in: Posts in
@@ -52,3 +63,13 @@ community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: >-
   Contribution Guidelines
+
+# Feedback
+feedback_title: 피드백
+feedback_question: 이 페이지가 도움이 되었나요?
+feedback_positive: 예
+feedback_negative: 아니요
+
+# Table of contents
+toc_on_this_page: 이 페이지에서
+toc_top_of_page: 페이지 상단으로

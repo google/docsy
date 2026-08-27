@@ -1,3 +1,10 @@
+# Alert labels
+caution: تنبيه
+important: مهم
+note: ملاحظة
+tip: نصيحة
+warning: تحذير
+
 # UI strings. Buttons and similar.
 ui_pager_prev: السَّابق
 ui_pager_next: التَّالي
@@ -63,3 +70,7 @@ feedback_title: تَقيِيم الأدَاء
 feedback_question: هل كَانَت هَذِه الصَّفْحة مُفيدَة
 feedback_positive: نعم
 feedback_negative: لََا
+
+# Table of contents
+toc_on_this_page: في هذه الصفحة
+toc_top_of_page: أعلى الصفحة

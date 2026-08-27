@@ -1,3 +1,10 @@
+# Alert labels
+caution: सावधानी
+important: महत्वपूर्ण
+note: नोट
+tip: सुझाव
+warning: चेतावनी
+
 # UI strings. Buttons and similar.
 ui_pager_prev: पिछला
 ui_pager_next: अगला
@@ -57,3 +64,13 @@ community_how_to: >-
   आप हमारे यहां {{ .Site.Title }} में योगदान करने का तरीका जान सकते हैं
 community_guideline: >-
   योगदान दिशानिर्देश
+
+# Feedback
+feedback_title: प्रतिक्रिया
+feedback_question: क्या यह पृष्ठ सहायक था?
+feedback_positive: हाँ
+feedback_negative: नहीं
+
+# Table of contents
+toc_on_this_page: इस पृष्ठ पर
+toc_top_of_page: पृष्ठ के शीर्ष पर

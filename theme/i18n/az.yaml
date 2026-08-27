@@ -1,3 +1,10 @@
+# Alert labels
+caution: Diqqət
+important: Vacib
+note: Qeyd
+tip: Məsləhət
+warning: Xəbərdarlıq
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Əvvəlki
 ui_pager_next: Növbəti
@@ -23,6 +30,7 @@ post_byline_by: tərəfindən
 post_created: Yaradıldı
 post_last_mod: Son redaktə
 post_edit_this: Bu səhifəni redaktə edin
+post_view_markdown: Markdown-ı görüntülə
 post_view_this: Səhifənin mənbəyini görüntülə
 post_create_child_page: Alt səhifə yaradın
 post_create_issue: Sənəd mövzusu yaradın
@@ -62,3 +70,7 @@ feedback_title: Rəy
 feedback_question: Bu səhifə sizin üçün faydalı oldu?
 feedback_positive: Bəli
 feedback_negative: Xeyr
+
+# Table of contents
+toc_on_this_page: Bu səhifədə
+toc_top_of_page: Səhifənin yuxarısı

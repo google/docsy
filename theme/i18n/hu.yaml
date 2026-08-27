@@ -1,3 +1,10 @@
+# Alert labels
+caution: Vigyázat
+important: Fontos
+note: Megjegyzés
+tip: Tipp
+warning: Figyelmeztetés
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Előző
 ui_pager_next: Következő
@@ -9,6 +16,9 @@ ui_theme_auto: Automatikus
 
 # so I left it as is
 ui_in: in
+
+# Used in sentences such as "All Tags"
+ui_all: összes
 
 # Footer text
 footer_all_rights_reserved: Minden jog fenntartva
@@ -22,6 +32,7 @@ post_last_mod: Utolsó módosítás
 post_edit_this: Oldal szerkesztése
 post_create_child_page: Aloldal létrehozása
 post_view_markdown: Markdown megtekintése
+post_view_this: Az oldal forrásának megtekintése
 post_create_issue: Dokumentáció issue létrehozása
 post_create_project_issue: Projekt issue létrehozása
 # so I left it as is
@@ -53,3 +64,13 @@ community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: >-
   Contribution Guidelines
+
+# Feedback
+feedback_title: Visszajelzés
+feedback_question: Hasznos volt ez az oldal?
+feedback_positive: Igen
+feedback_negative: Nem
+
+# Table of contents
+toc_on_this_page: Ezen az oldalon
+toc_top_of_page: Az oldal tetejére

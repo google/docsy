@@ -17,6 +17,9 @@ ui_theme_auto: Automatique
 # Used in sentences such as "Posted in News"
 ui_in: dans
 
+# Used in sentences such as "All Tags"
+ui_all: tous
+
 # Footer text
 footer_all_rights_reserved: Tous droits réservés
 

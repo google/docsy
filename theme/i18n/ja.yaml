@@ -17,6 +17,9 @@ ui_theme_auto: 自動
 # Used in sentences such as "Posted in News"
 ui_in: in
 
+# Used in sentences such as "All Tags"
+ui_all: すべて
+
 # Footer text
 footer_all_rights_reserved: All Rights Reserved
 
@@ -65,3 +68,7 @@ feedback_title: フィードバック
 feedback_question: このページは役に立ちましたか?
 feedback_positive: 役に立った
 feedback_negative: 役に立たなかった
+
+# Table of contents
+toc_on_this_page: このページの内容
+toc_top_of_page: ページの先頭へ
