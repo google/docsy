@@ -179,6 +179,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
+- Dropped official Docker support: removed the broken `Dockerfile` and
+  `docker-compose.yaml` files and retired the Docker quickstart page
+  ([#2748][]).
 
 **For maintainers**:
 
@@ -214,6 +217,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2724]: https://github.com/google/docsy/pull/2724
 [#2726]: https://github.com/google/docsy/pull/2726
 [#2731]: https://github.com/google/docsy/pull/2731
+[#2748]: https://github.com/google/docsy/pull/2748
 [0.17.0 release report]: /blog/2026/0.17.0/
 [0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
 [0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
