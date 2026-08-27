@@ -30,6 +30,28 @@ rebuild:
 - Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
   `npm run install:theme-deps` from `themes/docsy`.
 
+### Missing Dart Sass compiler
+
+If Hugo can't find the [Dart Sass][] `sass` CLI on its `PATH`, it fails while
+compiling SCSS with an error like:
+
+```text
+Error: error building site: TOCSS-DART: failed to transform "scss/main.scss"
+(text/x-scss): You need to install Dart Sass, see
+https://gohugo.io/functions/css/sass/#dart-sass
+```
+
+To fix this, install Dart Sass and run Hugo so that the `sass` CLI is on its
+`PATH` -- for npm-based sites, install [`sass-embedded`][] and run Hugo through
+npm scripts, as explained in [Install Dart Sass][].
+
+> [!WARNING]
+>
+> A warm Hugo transform cache can mask this problem: if your site was previously
+> built with Dart Sass available, later builds without it can succeed by reusing
+> the cached CSS. To verify your setup, clear the `resources` cache directory
+> and rebuild.
+
 ## Known issues
 
 The following issues are known on [MacOS](#macos) and on
@@ -87,7 +109,10 @@ If you're using WSL, ensure that you're running `hugo` on a Linux mount of the
 filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 
 <!-- prettier-ignore-start -->
+[Dart Sass]: https://sass-lang.com/dart-sass/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[`sass-embedded`]: https://www.npmjs.com/package/sass-embedded
 [setup]: /docs/get-started/
 [submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [theme-npm-deps]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies

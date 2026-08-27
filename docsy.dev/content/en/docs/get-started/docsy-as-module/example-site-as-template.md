@@ -26,12 +26,12 @@ From a terminal:
 ```bash
 git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
 cd my-new-site
-npm install
-hugo server
+npm run install:safe
+npm run serve
 ```
 
-Preview at <http://localhost:1313/>. If the build fails with a missing Bootstrap
-import, see [Troubleshooting][].
+Preview at <http://localhost:1313/>. If the build fails, see
+[Troubleshooting][].
 
 ## Detailed Setup instructions
 
@@ -103,14 +103,14 @@ project, install the project dependencies, and use hugo's `server` command:
 
 ```bash
 cd my-new-site
-npm install
-hugo server
+npm run install:safe
+npm run serve
 ```
 
 Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
 immediately see the effect of changes that you are making to the source files of
 your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
-the build fails with a missing Bootstrap import, see [Troubleshooting][].
+the build fails, see [Troubleshooting][].
 
 ## What's next?
 
@@ -121,5 +121,5 @@ the build fails with a missing Bootstrap import, see [Troubleshooting][].
 
 <!-- prettier-ignore-start -->
 [start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
-[Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
+[Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->

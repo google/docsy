@@ -115,7 +115,7 @@ $ go version
 go version go1.25.6
 ```
 
-Ensure that you are using version 1.12 or higher.
+Ensure that you are using version 1.19 or higher.
 
 If the `go` language is not installed on your system yet or if you need to
 upgrade, go to the [download area](https://go.dev/dl/) of the Go website, choose
