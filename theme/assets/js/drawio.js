@@ -31,7 +31,9 @@
 
     var btn = document.createElement('button');
     btn.classList.add('drawiobtn');
-    btn.insertAdjacentHTML('beforeend', '<i class="fas fa-edit"></i>');
+    btn.setAttribute('aria-label', {{ T "ui_edit_diagram" | jsonify }});
+    btn.setAttribute('title', {{ T "ui_edit_diagram" | jsonify }});
+    btn.insertAdjacentHTML('beforeend', '<i class="fas fa-edit" aria-hidden="true"></i>');
     wrapper.appendChild(btn);
 
     btn.addEventListener('click', function (evt) {
