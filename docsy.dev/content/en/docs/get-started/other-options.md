@@ -306,11 +306,12 @@ development or testing, you can also install:
 
 ## Preview your site
 
-To preview your site locally:
+To preview your site locally, run Hugo through an [npm script][npm scripts] (see
+the [prerequisites](#install-dart-sass)):
 
 ```sh
 cd myproject
-hugo server
+npm run hugo -- server
 ```
 
 By default, your site will be available at <http://localhost:1313>. For common

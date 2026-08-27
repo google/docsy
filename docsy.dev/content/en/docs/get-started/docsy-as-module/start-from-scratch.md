@@ -41,7 +41,9 @@ path = "github.com/google/docsy/theme"
 EOL
 hugo mod npm pack
 npm install
-hugo server
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
+npm run hugo -- server
 {{< /tab >}}
 {{< tab header="Windows command line" lang="Batchfile" >}}
 hugo new site my-new-site
@@ -57,7 +59,9 @@ proxy = "direct"^
 path = "github.com/google/docsy/theme") >> hugo.toml
 hugo mod npm pack
 npm install
-hugo server
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
+npm run hugo -- server
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
@@ -170,11 +174,13 @@ by adding a proxy to use when downloading remote modules.
 ### Install theme npm dependencies
 
 Docsy sources its Bootstrap and Font Awesome assets from npm. Consolidate the
-theme's npm dependencies into your project's `package.json` and install them:
+theme's npm dependencies into your project's `package.json` and install them,
+along with the [Dart Sass][] compiler:
 
 ```bash
 hugo mod npm pack
 npm install
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 ```
 
 Re-run `hugo mod npm pack` whenever you
@@ -184,10 +190,13 @@ in the 0.16.0 release notes.
 
 ### Preview your site
 
-To build and preview your site locally:
+To build and preview your site locally, run Hugo through an [npm
+script][npm scripts] so that the `sass` CLI is on its `PATH` (see [Install Dart
+Sass][]):
 
 ```bash
-hugo server
+npm pkg set scripts.hugo=hugo
+npm run hugo -- server
 ```
 
 By default, your site will be available at
@@ -214,5 +223,8 @@ from scratch as it provides defaults for many required configuration parameters.
 <!-- prettier-ignore-start -->
 [blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [configuration file]: https://gohugo.io/configuration/introduction/#configuration-file
+[Dart Sass]: https://sass-lang.com/dart-sass/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
 [Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->
