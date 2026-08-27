@@ -268,8 +268,21 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   // platform-dispatch form; omitting optionals leaves no compiler.
   assert.equal(
     scripts['install:safe'],
-    'npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
+    'npm run _install:safe:pre && npm run _install:safe:post',
     'install:safe is the reviewed lock-enforced, script-free command',
+  );
+  assert.equal(
+    scripts['_install:safe:pre'],
+    'npm ci --ignore-scripts --no-audit --no-fund',
+    'the pre-install step is the lock-enforced, script-free ci',
+  );
+  // Not CI-run, but it wields the script-approval authority; pin the
+  // reviewed form (explicit --allow-scripts-pin keeps the approval
+  // version-scoped regardless of user npm config).
+  assert.equal(
+    scripts['approve:hugo'],
+    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post',
+    'approve:hugo is the reviewed sync-approve-rebuild chain',
   );
   assert.equal(
     scripts['install:theme-deps'],

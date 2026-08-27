@@ -121,17 +121,16 @@ The Hugo version that Docsy [officially supports][] is pinned as the
 This version is generally kept in sync with the latest Hugo release. Updating it
 is a two-step flow, run from the repo root:
 
-1. `npm run update:hugo` (or, for a specific version,
-   `npm install -DE --ignore-scripts hugo-extended@X.Y.Z`): bumps the pin
-   script-free, then re-runs the supply-chain audit, which flags any
-   root-`overrides` drift the bump caused (npm applies overrides only while
-   re-resolving).
-2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
-   syncs the tree to the lock (script-free), approves the new version's install
-   script, and rebuilds the package so the `hugo` binary lands. The approval
-   gates the install script only (the hugo binary self-installs at first use),
-   so don't run builds between the two steps. Script-enabled installs, CI's
-   `install:safe` included, fail until the new version is approved.
+1. Review the target [hugo-extended][] release (usually the newest), then run
+   `npm run update:hugo -- X.Y.Z`: bumps the pin script-free and re-runs the
+   supply-chain audit, which flags any root-`overrides` drift the bump caused
+   (npm applies overrides only while re-resolving).
+2. Run `npm run approve:hugo`: syncs the tree to the lock (script-free),
+   approves the new version's install script, and rebuilds the package so the
+   `hugo` binary lands. The approval gates the install script only (the hugo
+   binary self-installs at first use), so don't run builds between the two
+   steps. Script-enabled installs, CI's `install:safe` included, fail until the
+   new version is approved.
 
 Automated updates don't bump hugo-extended: the Renovate config excludes its
 version updates. GitHub's Dependabot security updates run config-free and can
