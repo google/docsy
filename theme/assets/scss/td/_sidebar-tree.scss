@@ -1,4 +1,6 @@
 // cSpell:ignore xmark
+@use 'support/fa';
+
 //
 // Left side navigation
 //
@@ -137,7 +139,7 @@
     // Show as icon
     &::before {
       font: var(--fa-font-solid);
-      content: fa-content($fa-var-bars);
+      content: fa.fa-content(fa.$var-bars);
     }
 
     // Ensure hamburger stays the same size in both toggle states
@@ -150,7 +152,7 @@
       // We'd want to use xmark-large here, but it isn't free. Instead, we'll
       // use the regular xmark and increase the font size slightly to match the
       // size of the hamburger icon.
-      content: fa-content($fa-var-xmark);
+      content: fa.fa-content(fa.$var-xmark);
       font-size: 1.25rem;
     }
   }
@@ -207,7 +209,7 @@
   &-root-up-icon {
     &::after {
       font: var(--fa-font-solid);
-      content: fa-content($fa-var-caret-up);
+      content: fa.fa-content(fa.$var-caret-up);
       padding-left: 0.5em;
     }
   }

@@ -1,0 +1,6 @@
+// Namespaced access (as `fa`) to Font Awesome's Sass API for partials that set
+// glyphs directly: FA 7 is module-based, so its functions and variables no
+// longer leak through _main.scss's imports. Names are unprefixed module
+// members: fa.fa-content(fa.$var-NAME).
+@forward '../../../vendor/Font-Awesome/scss/functions';
+@forward '../../../vendor/Font-Awesome/scss/variables';

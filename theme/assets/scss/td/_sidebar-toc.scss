@@ -1,4 +1,6 @@
 @use 'sass:map';
+@use 'support/fa';
+
 //
 // Right side toc
 //
@@ -74,7 +76,7 @@
       visibility: hidden;
 
       &::after {
-        content: fa-content($fa-var-chevron-up);
+        content: fa.fa-content(fa.$var-chevron-up);
         font-family: $td-font-awesome-font-name;
       }
 

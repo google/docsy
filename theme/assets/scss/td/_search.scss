@@ -1,3 +1,5 @@
+@use 'support/fa';
+
 // Search
 
 .td-search {
@@ -21,7 +23,7 @@
 
     &::before {
       @extend .fa;
-      content: fa-content($fa-var-search);
+      content: fa.fa-content(fa.$var-search);
     }
 
     // Styling adjustments for the navbar
@@ -119,7 +121,7 @@
 
     &::after {
       @extend .fas;
-      content: fa-content($fa-var-times);
+      content: fa.fa-content(fa.$var-times);
     }
   }
 }
