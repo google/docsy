@@ -31,12 +31,13 @@ export function declaredDeps({ root = repoRoot } = {}) {
   };
 }
 
-const ALLOWED_FLAGS = ['-D', '-w', 'theme'];
+const ALLOWED_FLAGS = ['-D', '--workspace=theme'];
 
 /**
  * Plan the npm-install invocation that bumps a declared dependency to an
  * exact version. argv is `PKG [NPM_FLAGS...] X.Y.Z`: the npm scripts
- * prepend the package and its target flags, npm appends the version.
+ * prepend the package and its target flags, the caller appends the
+ * version.
  * Returns the argument list, or an error string.
  */
 export function planInstall(argv, { deps = declaredDeps() } = {}) {
@@ -50,7 +51,7 @@ export function planInstall(argv, { deps = declaredDeps() } = {}) {
   ) {
     return USAGE;
   }
-  const declared = flags.includes('-w') ? deps.theme : deps.root;
+  const declared = flags.includes('--workspace=theme') ? deps.theme : deps.root;
   if (!declared.includes(dep)) return `not a declared dependency: ${dep}`;
   return ['install', '-E', '--ignore-scripts', ...flags, `${dep}@${version}`];
 }

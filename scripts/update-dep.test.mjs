@@ -35,7 +35,11 @@ test('version guard accepts exactly stable X.Y.Z', () => {
 });
 
 test('empty and version-less argv are rejected', () => {
-  for (const argv of [[], ['hugo-extended'], ['bootstrap', '-w', 'theme']]) {
+  for (const argv of [
+    [],
+    ['hugo-extended'],
+    ['bootstrap', '--workspace=theme'],
+  ]) {
     assert.match(
       String(planInstall(argv, { deps })),
       /^usage:/,
@@ -54,8 +58,14 @@ test('the script flag vectors plan installs, flags in script order', () => {
   ]);
   for (const dep of deps.theme) {
     assert.deepEqual(
-      planInstall([dep, '-w', 'theme', '5.3.9'], { deps }),
-      ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@5.3.9`],
+      planInstall([dep, '--workspace=theme', '5.3.9'], { deps }),
+      [
+        'install',
+        '-E',
+        '--ignore-scripts',
+        '--workspace=theme',
+        `${dep}@5.3.9`,
+      ],
       `${dep} flags arrive in script order`,
     );
   }
@@ -66,10 +76,13 @@ test('flags outside the allowed vocabulary are rejected', () => {
     // The pre-#2747 update:dep contract: the extra token would ride
     // into npm as a bare (latest-floating) package argument.
     ['hugo-extended', '-D', 'hugo-extended', '0.165.0'],
+    // 'theme' is a real (dormant) npm package: a bare token must never
+    // clear the vocabulary, or it installs unreviewed.
+    ['hugo-extended', '-D', 'theme', '0.165.0'],
     // npm takes a key's last assignment: a caller flag would re-enable
     // install scripts.
     ['hugo-extended', '-D', '--ignore-scripts=false', '0.165.0'],
-    ['bootstrap', '-w', 'theme', '--before=2020-01-01', '5.3.9'],
+    ['bootstrap', '--workspace=theme', '--before=2020-01-01', '5.3.9'],
     ['hugo-extended', '-DE', '0.165.0'],
   ]) {
     assert.match(
@@ -87,7 +100,9 @@ test('membership follows the targeted manifest', () => {
     'a theme dep is not a root dev dependency',
   );
   assert.match(
-    String(planInstall(['hugo-extended', '-w', 'theme', '0.165.0'], { deps })),
+    String(
+      planInstall(['hugo-extended', '--workspace=theme', '0.165.0'], { deps }),
+    ),
     /^not a declared dependency/,
     'a root dev dep is not a theme dependency',
   );
@@ -149,7 +164,7 @@ test('a missing npm_execpath fails closed without spawning', () => {
 });
 
 test('the install status propagates', () => {
-  const status = updateDep(['bootstrap', '-w', 'theme', '5.3.9'], {
+  const status = updateDep(['bootstrap', '--workspace=theme', '5.3.9'], {
     env: { npm_execpath: '/npm-cli.js' },
     spawn: () => ({ status: 7 }),
   });

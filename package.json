@@ -85,7 +85,7 @@
     "update:markup-goldens": "node tests/fixture-site/update-markup-goldens.mjs",
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages": "bash -c 'npm-check-updates -u -x hugo-extended \"$@\" && npm run -s update::post' -",
-    "update:theme-dep": "bash -c 'node scripts/update-dep.mjs \"$1\" -w theme \"$2\" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post' -",
+    "update:theme-dep": "bash -c 'node scripts/update-dep.mjs \"$1\" --workspace=theme \"$2\" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post' -",
     "update:visual-goldens": "UPDATE_VISUAL_GOLDENS=1 npm run test:visual",
     "update:visual-goldens:linux": "node tests/visual/update-goldens-linux.mjs",
     "wt": "HUGO_THEME=$(basename \"$PWD\")/theme npm run",
