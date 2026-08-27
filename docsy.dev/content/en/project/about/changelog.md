@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: Docsy repository changelog
+description: Breaking changes and release highlights, per release
 aliases: [../changelog]
 # prettier-ignore
 cSpell:ignore: deining FOUC gitmodules gtag lookandfeel mhchem navs notoc tabpane onedark shurup

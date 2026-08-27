@@ -406,7 +406,7 @@ test('workflows: installs are locked and credential-isolated', () => {
   );
   // Netlify [build.environment] feeds the same install and build
   // processes the workflow env screen guards: screen every env-shaped key
-  // the same way, and pin NPM_FLAGS exactly -- it is what constrains
+  // the same way, and pin NPM_FLAGS exactly; it is what constrains
   // Netlify's automatic install to resolution only (its comment in
   // netlify.toml).
   let netlifyEnvKeys = 0;

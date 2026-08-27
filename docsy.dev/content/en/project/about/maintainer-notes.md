@@ -1,6 +1,6 @@
 ---
 title: Maintainer notes
-description: Notes for Docsy maintainers
+description: Release, dependency-update, and Hugo-support procedures
 aliases: [contributing, ../contributing]
 cSpell:ignore: hugo creatordate lycheecache opentelemetry prebuild worktree
 ---
