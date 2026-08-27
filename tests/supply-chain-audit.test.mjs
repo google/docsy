@@ -271,69 +271,59 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   );
 });
 
-// Exact pins: prefix/flag matching would accept an appended `&& npm
-// install …` rider on a script the workflow audit trusts by name.
-test('manifests: the install path keeps its locked, script-free form', () => {
-  const { scripts } = readJSON('package.json');
+// Script pins: byte-exact copies of the reviewed script entries --
+// golden-style, deliberately duplicating package.json. A mismatch is the
+// tripwire, not a bug: re-review the changed script, then re-pin it in
+// the same change. Exactness is the point: prefix/flag matching would
+// accept an appended `&& npm install …` rider on a script that CI, the
+// docs, and maintainers trust by name.
+const SCRIPT_PINS = {
   // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
   // binary as platform-keyed optional packages, npm's script-free
   // platform-dispatch form; omitting optionals leaves no compiler.
-  assert.equal(
-    scripts['install:safe'],
-    'npm run _install:safe:pre && npm run _install:safe:post',
-    'install:safe is the reviewed lock-enforced, script-free command',
-  );
-  assert.equal(
-    scripts['_install:safe:pre'],
-    'npm ci --ignore-scripts --no-audit --no-fund',
-    'the pre-install step is the lock-enforced, script-free ci',
-  );
-  // Not CI-run, but they wield the pin-update and script-approval
-  // authority; pin the reviewed forms (explicit --allow-scripts-pin keeps
-  // the approval version-scoped regardless of user npm config; the
-  // update-dep helper guards versions and dep membership, unit-tested in
-  // scripts/update-dep.test.mjs).
-  assert.equal(
-    scripts['approve:hugo'],
-    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
-    'approve:hugo audits the approved tree before the installer runs',
-  );
-  assert.equal(
-    scripts['_test:supply-chain'],
-    'node --test tests/supply-chain-audit.test.mjs',
-    'the audit entry point runs this test file',
-  );
-  assert.equal(
-    scripts['update:hugo'],
-    'node scripts/update-dep.mjs hugo-extended -D',
-    'update:hugo runs the guarded update helper',
-  );
-  assert.equal(
-    scripts['update:theme-dep'],
-    'bash -c \'node scripts/update-dep.mjs "$1" -w theme "$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
-    'update:theme-dep is the guarded install plus the theme follow-ups',
-  );
-  assert.equal(
-    scripts['_sync:theme-lock'],
-    'npm install --prefix theme --package-lock-only --ignore-scripts',
-    'the theme-lock sync is lock-only and script-free',
-  );
-  assert.equal(
-    scripts['install:theme-deps'],
-    'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
-    'install:theme-deps is the reviewed lock-enforced, script-free command',
-  );
-  assert.equal(
-    scripts['_install:safe:post'],
+  'install:safe': 'npm run _install:safe:pre && npm run _install:safe:post',
+  '_install:safe:pre': 'npm ci --ignore-scripts --no-audit --no-fund',
+  '_install:safe:post':
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
-    'the post-install step uses the retrying Hugo rebuild helper',
-  );
-  assert.equal(
-    scripts['install:browser'],
-    'node node_modules/puppeteer/install.mjs',
-    'install:browser invokes the locked dependency entry point directly',
-  );
-  // That entry point loads Puppeteer configuration from the project
+  'install:theme-deps':
+    'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
+  'install:browser': 'node node_modules/puppeteer/install.mjs',
+  // The rest are not CI-run, but wield the pin-update and script-approval
+  // authority. approve:hugo audits before _install:safe:post, so override
+  // drift fails pre-execution; explicit --allow-scripts-pin keeps the
+  // approval version-scoped regardless of user npm config. The update-dep
+  // helper guards versions and dep membership, unit-tested in
+  // scripts/update-dep.test.mjs.
+  'approve:hugo':
+    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
+  '_test:supply-chain': 'node --test tests/supply-chain-audit.test.mjs',
+  'update:hugo': 'node scripts/update-dep.mjs hugo-extended -D',
+  'update:theme-dep':
+    'bash -c \'node scripts/update-dep.mjs "$1" -w theme "$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
+  '_sync:theme-lock':
+    'npm install --prefix theme --package-lock-only --ignore-scripts',
+};
+
+test('scripts: pinned entries keep their reviewed, byte-exact forms', () => {
+  const { scripts } = readJSON('package.json');
+  for (const [name, form] of Object.entries(SCRIPT_PINS)) {
+    assert.equal(scripts[name], form, `${name} keeps its reviewed form`);
+  }
+  // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
+  // sibling would run unreviewed code inside a pinned chain.
+  for (const name of Object.keys(SCRIPT_PINS)) {
+    for (const hook of [`pre${name}`, `post${name}`]) {
+      assert.equal(
+        scripts[hook],
+        undefined,
+        `${hook} stays absent, so ${name} runs exactly as pinned`,
+      );
+    }
+  }
+});
+
+test('manifests: the install surfaces stay unconfigured and hook-free', () => {
+  // install:browser's entry point loads Puppeteer configuration from the project
   // (executable config files, a package.json "puppeteer" key), which can
   // redirect the browser download or swap the launched executable: the
   // audited install is only as locked as this search surface stays empty.
@@ -391,28 +381,6 @@ test('manifests: the install path keeps its locked, script-free form', () => {
       fs.existsSync(path.join(repoRoot, guard)),
       `structural guard ${guard} exists`,
     );
-  }
-  // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
-  // sibling would run unreviewed code inside the pinned chain.
-  for (const name of [
-    'install:safe',
-    'install:theme-deps',
-    '_install:safe:pre',
-    '_install:safe:post',
-    'install:browser',
-    'approve:hugo',
-    '_test:supply-chain',
-    '_sync:theme-lock',
-    'update:hugo',
-    'update:theme-dep',
-  ]) {
-    for (const hook of [`pre${name}`, `post${name}`]) {
-      assert.equal(
-        scripts[hook],
-        undefined,
-        `${hook} stays absent, so ${name} runs exactly as pinned`,
-      );
-    }
   }
 
   // Safe smoke predicts a permissive Docsy install only while permissive
