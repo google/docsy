@@ -123,9 +123,9 @@ is a two-step flow, run from the repo root:
 
 1. `npm run update:hugo` (or, for a specific version,
    `npm install -DE --ignore-scripts -w docsy.dev hugo-extended@X.Y.Z`): bumps
-   the pin script-free, then re-runs the supply-chain audit -- npm applies root
-   `overrides` only while re-resolving, so the audit flags any override drift
-   the bump caused.
+   the pin script-free, then re-runs the supply-chain audit, which flags any
+   root-`overrides` drift the bump caused (npm applies overrides only while
+   re-resolving).
 2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
    syncs the tree to the lock (script-free), approves the new version's install
    script, and rebuilds the package so the `hugo` binary lands. The approval
