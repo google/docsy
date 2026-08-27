@@ -132,10 +132,10 @@ is a two-step flow, run from the repo root:
    steps. Script-enabled installs, CI's `install:safe` included, fail until the
    new version is approved.
 
-Automated updates don't bump hugo-extended: the Renovate config excludes its
-version updates. GitHub's Dependabot security updates run config-free and can
-still bump it; such a PR fails CI until the new version is approved via
-`approve:hugo`.
+Automated version updates don't bump hugo-extended: the
+[Renovate config](#dependency-updates) disables them. Security updates (Renovate
+vulnerability alerts, GitHub's config-free Dependabot) can still bump it; such a
+PR fails CI until the new version is approved via `approve:hugo`.
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -173,6 +173,33 @@ regular release; it explicitly bypasses Renovate's minimum release-age gate.
 [npm-registry]: https://registry.npmjs.org
 [diagrams]: /docs/content/diagrams-and-formulae/
 <!-- prettier-ignore-end -->
+
+## Dependency updates
+
+Automated updates are configured in `renovate.json5`, following the
+docsy-example repo's settings shape. Renovate opens version-update PRs, created
+on Sundays. Settings rationale:
+
+- `ignorePresets`: the preset's 3-day npm cooldown would override this repo's
+  7-day `minimumReleaseAge`. Caution: this exclusion silently stops working if
+  the preset is renamed upstream. The preset's age exemptions for update types
+  without release timestamps (pin, replacement, rollback) are deliberately not
+  restored: such PRs never satisfy the age check and need manual age validation
+  at review.
+- `lockFileMaintenance` off: wholesale lock re-resolves would churn the
+  committed lockfiles; transitive security fixes arrive alert-driven instead.
+- Package rules: `hugo-extended` is [manually updated](#official-hugo-version);
+  `bootstrap` and Font Awesome are updated deliberately via `update:dep`, paired
+  with the ScrollSpy-patch refresh; `redoc` is capped below 3
+  ([manual migration](#script-versions)).
+- The custom manager updates the [script-dependency pins](#script-versions) in
+  `theme/hugo.yaml`. All other detected managers are active, including npm (the
+  three manifests and their lockfiles), GitHub Actions (SHA-digest pins), and
+  Docker (base images).
+
+Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
+GitHub's config-free Dependabot security updates; a rare duplicate PR is
+accepted.
 
 ## Test suites
 

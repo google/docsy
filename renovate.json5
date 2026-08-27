@@ -1,37 +1,25 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: ['config:best-practices'],
-  // config:best-practices pulls in security:minimumReleaseAgeNpm: its 3-day npm
-  // rule would override the global minimumReleaseAge below. Its age exemptions
-  // for update types without release timestamps (pin, replacement, rollback,
-  // among others) are deliberately not restored: such PRs never satisfy the age
-  // check and need manual age validation at review, as they already do for
-  // every other datasource.
-  //
-  // IMPORTANT: an upstream rename of the preset silently re-admits it.
+  // For details about this repo's settings, see
+  // https://www.docsy.dev/project/about/maintainer-notes/#dependency-updates
   ignorePresets: ['security:minimumReleaseAgeNpm'],
-  timezone: 'America/Toronto',
-  schedule: ['before 6am on monday'],
+  lockFileMaintenance: { enabled: false },
+  schedule: ['* * * * 0'], // Sunday
   labels: ['dependencies'],
-  enabledManagers: ['custom.jsonata'],
-  // Deliberately datasource-wide: applies to the pins below and to every
-  // datasource this config may grow to manage. Security updates keep Renovate's
-  // documented bypass of the age check.
   minimumReleaseAge: '7 days',
-  internalChecksFilter: 'strict',
   packageRules: [
     {
-      // hugo-extended version bumps are manual; flow + security-update paths:
-      // https://www.docsy.dev/project/about/maintainer-notes/#official-hugo-version
-      // Dormant while the npm manager is off; kept so enabling the manager
-      // doesn't silently reopen version bumps.
       matchPackageNames: ['hugo-extended'],
-      matchUpdateTypes: ['major', 'minor', 'patch'],
       enabled: false,
     },
     {
-      // Redoc 3 moves the script to bundle/redoc.js (2.x:
-      // bundles/redoc.standalone.js); the redoc shortcode hardcodes the 2.x
+      // Updated deliberately via update:dep (paired ScrollSpy-patch refresh).
+      matchPackageNames: ['bootstrap', '@fortawesome/fontawesome-free'],
+      enabled: false,
+    },
+    {
+      // Redoc 3 is breaking; the redoc shortcode hardcodes the 2.x
       // path, so a 3.x bump is a manual migration.
       matchPackageNames: ['redoc'],
       allowedVersions: '<3',
@@ -52,4 +40,5 @@
       datasourceTemplate: 'npm',
     },
   ],
+  // cSpell:ignore datasource jsonata
 }
