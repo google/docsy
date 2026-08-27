@@ -1,0 +1,29 @@
+{{/* Notes:
+
+- Sidebars are generated for "blog", "docs", and possibly other page types.
+- The "active" toggle here may delay rendering, so we only cache this side
+  bar menu for bigger sites.
+
+*/ -}}
+
+{{ if partial "chrome-render.html" (dict "page" . "region" "sidebar") -}}
+{{ $args := partial "sidebar-args.html" . -}}
+{{ $cacheSidebar := $args.cacheSidebar -}}
+{{ if $cacheSidebar -}}
+  {{/* The cached menu ships hidden with no per-page active state baked in;
+  assets/js/chrome-nav.js applies the active state client-side and reveals it. */ -}}
+  {{ partialCached "sidebar-tree.html" $args $args.sidebarRootID -}}
+{{ else -}}
+  {{ partial "sidebar-tree.html" $args -}}
+{{ end -}}
+{{ else -}}
+  {{/* shared mode dropped the inline nav on this page. Leave a placeholder pointing at
+  the kept docs landing (the "donor"); the client fetches it, extracts the
+  left-nav, and injects it (assets/js/chrome-nav.js). A scoped page
+  (sidebar_root_for) also names its subtree via data-nav-root so the client can
+  re-root the donor tree. */ -}}
+  {{ $args := partial "sidebar-args.html" . -}}
+  <div class="td-sidebar-chrome-placeholder" data-nav-donor="{{ $args.navRoot.RelPermalink }}"
+    {{- if $args.scoped }} data-nav-root="{{ $args.sidebarRoot.RelPermalink }}"{{ end -}}
+  ></div>
+{{- end -}}

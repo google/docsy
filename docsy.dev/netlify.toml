@@ -1,20 +1,29 @@
-# Hugo build configuration for Netlify
-# (https://gohugo.io/host-and-deploy/host-on-netlify/#configure-hugo-version-in-netlify)
+# Hugo comes from the pinned hugo-extended npm dep, not a HUGO_VERSION env var.
 
-# base = "docsy.dev" - set via web UI
+# The build "base" is set to docsy.dev via the Netlify web UI.
 
 [build]
 publish = "docsy.dev/public"
-command = "scripts/_install.sh && npm run build:preview"
+command = "npm run _netlify:prepare && npm run -C docsy.dev build:preview"
 
 [build.environment]
 GO_VERSION = "1.25.5"
-HUGO_THEME = "repo"
+# Netlify clones into a dir named "repo"; the theme lives in repo's theme/ subdir.
+HUGO_THEME = "repo/theme"
+# Constrain Netlify's automatic npm install to resolution only: no tree
+# writes, no bin linking; install:safe does the real install. Netlify offers
+# no way to skip the automatic install, so if NPM_FLAGS ever stops being
+# honored, it runs for real: strict-allow-scripts (.npmrc) still gates its
+# scripts, and the is:clean bracket in _netlify:prepare flags its tree writes.
+NPM_FLAGS = "--dry-run --ignore-scripts"
 
 [context.production]
-command = "scripts/_install.sh && npm run build:production"
+command = "npm run _netlify:prepare && npm run -C docsy.dev build:production"
 
-# Redirects for slug swap: /docs/adding-content/ → /docs/content/
+[context.doc-rooted.environment]
+TD_BUILD_CTX = "doc-rooted"
+
+# Preserve links from the /docs/adding-content/ → /docs/content/ slug swap.
 [[redirects]]
   from = "/docs/adding-content/content"
   to = "/docs/content/adding-content"

@@ -4,7 +4,6 @@ weight: 9
 description: >
   Optional guidance and recommendations about organizing, authoring, and
   managing your technical documentation.
-sidebar_root_for: children
 ---
 
 Use this section to learn about some of the best practices around creating

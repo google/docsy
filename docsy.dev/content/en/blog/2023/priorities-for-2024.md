@@ -6,7 +6,7 @@ author: >
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
 date: 2023-11-28
 # prettier-ignore
-cSpell:ignore: CNCF Chalin opentelemetry namespacing docsy customizability deprioritize
+cSpell:ignore: opentelemetry namespacing customizability deprioritize
 ---
 
 > **TL;DR** 1.4K projects use Docsy! The top user-project focused priorities for
@@ -57,9 +57,9 @@ evolves.
 This is a tall order for 2024 and beyond, but I believe that slow and steady
 wins the day.
 
-We're eager to hear from you, the Docsy community! [Share your thoughts] on our
-focus areas and how we can enhance Docsy. Take a look at our issue triage into
-[quarterly milestones] for a rough idea of what is targeted for upcoming
+We're eager to hear from you, the Docsy community! [Share your thoughts][] on
+our focus areas and how we can enhance Docsy. Take a look at our issue triage
+into [quarterly milestones][] for a rough idea of what is targeted for upcoming
 releases. Vote for or comment on issues that are important to you, and we'll do
 our best to respond and adjust release targets within the boundaries of our set
 priorities. Better yet, volunteer to work on the current quarter's tasks. As we
@@ -78,7 +78,7 @@ and feature consolidation.
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
 [docsy-analytics]: https://github.com/google/docsy/network/dependents
 [ce]: https://github.com/kentcdodds/cross-env/issues/257
-[sc]: https://www.docsy.dev/blog/2022/hello/#introducing-the-psc
-[bs5-migration]: https://www.docsy.dev/blog/2023/bootstrap-5-migration/
+[sc]: ../2022/hello/#introducing-the-psc
+[bs5-migration]: bootstrap-5-migration/
 [share your thoughts]: https://github.com/google/docsy/discussions
 [quarterly milestones]: https://github.com/google/docsy/milestones

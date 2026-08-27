@@ -1,6 +1,5 @@
 ---
 title: Hugo Content Tips
-weight: 9
 description: Tips for authoring content for your Docsy-themed Hugo site.
 ---
 

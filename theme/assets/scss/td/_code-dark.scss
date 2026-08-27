@@ -1,0 +1,20 @@
+@use 'sass:meta';
+
+@if $enable-dark-mode {
+  [data-bs-theme='light'] {
+    @include meta.load-css('chroma/light');
+  }
+
+  [data-bs-theme='dark'] {
+    @include meta.load-css('chroma/dark');
+
+    .chroma {
+      background-color: var(--td-pre-bg);
+
+      // Color tuning for the `native` Chroma style:
+      .go {
+        color: #cccccc95;
+      }
+    }
+  }
+}

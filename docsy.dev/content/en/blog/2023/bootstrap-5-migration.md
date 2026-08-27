@@ -9,7 +9,7 @@ author: >
   [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc))
 date: 2023-06-05
 canonical_url: https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/
-cSpell:ignore: CNCF Chalin opentelemetry techdocs
+cSpell:ignore: opentelemetry techdocs
 ---
 
 [Docsy](https://docsy.dev), and Docsy-based project websites ([including those
@@ -62,6 +62,8 @@ breakpoint. Thankfully, a similar change isn't required of
 `media-breakpoint-up()`. This change will be required of Docsy-based projects.
 If you forget to make this non-obviously breaking layout change, your project's
 responsive layouts will likely start misbehaving in apparently strange ways.
+
+<!-- markdownlint-disable no-shortcut-ref-link -->
 
 For details and an example, see:
 
@@ -130,8 +132,7 @@ import strategy chosen, due to a Sass map initialization limitation,
 Bootstrap-client projects need to perform (emphasis mine):
 
 > ... variable customizations ... **after** `@import "functions"`, but
-> **before** > `@import "variables"` and the rest of [the Bootstrap] import
-> stack.
+> **before** `@import "variables"` and the rest of [the Bootstrap] import stack.
 
 For details, see
 [New \_maps.scss](https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss)
@@ -226,6 +227,8 @@ Docsy-specific changes, consult the
 [changelog](/project/about/changelog/#v0.7.0). In particular, one non-breaking
 but important change to be aware of is:
 [[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
+
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ## Give it a try!
 

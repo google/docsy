@@ -3,8 +3,7 @@ title: Repository Links and other page information
 linkTitle: Repo links and page info
 description:
   Help your users interact with page source and view page-source information.
-cSpell:ignore: docsy lastmod
-weight: 9
+cSpell:ignore: lastmod
 ---
 
 The Docsy
@@ -35,8 +34,7 @@ This page shows you how to configure these links.
 Currently, Docsy supports only GitHub repository links "out of the box". Since
 GitLab can handle the same link scheme, it should work as well. If you are using
 another repository such as Bitbucket and would like generated repository links,
-feel free to
-[add a feature request or update our theme](/docs/contribution-guidelines/).
+feel free to [add a feature request or update our theme](/docs/contributing/).
 
 ## Link configuration
 
@@ -78,6 +76,7 @@ Specify a value here if your content directory is not in your repo's root
 directory. For example, this site is in the `docsy.dev` subdirectory of its
 repo. Setting this value means that your edit links will go to the right page.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -98,6 +97,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### `github_project_repo` (optional)
 
@@ -130,29 +130,31 @@ params:
 
 ### `github_branch` (optional)
 
-Specify a value here if you have would like to reference a different branch for
-the other github settings like **Edit this page** or **Create project issue**.
+Specify a value here if you would like to reference a different branch for the
+other github settings like **Edit this page** or **Create project issue**.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
 [params]
-github_branch = "release"
+github_branch = "production"
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  github_branch: release
+  github_branch: production
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "github_branch": "release"
+    "github_branch": "production"
   }
 }
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### `path_base_for_github_subdir` (optional)
 
@@ -416,7 +418,7 @@ for your project.
 
 > [!WARNING] Version note
 >
-> Class names using the `--KIND` suffix were deprecated as of [v0.9.0].
+> Class names using the `--KIND` suffix were deprecated as of [v0.9.0][].
 >
 > [v0.9.0]: /project/about/changelog/#v0.9.0
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #
-# Updates assets/js/scrollspy-patch.js with the patched method from
-# assets/_cache/bootstrap/scrollspy-method-patched.js
+# Updates theme/assets/js/scrollspy-patch.js with the patched method from
+# theme/assets/_cache/bootstrap/scrollspy-method-patched.js
 #
 # cSpell:ignore scrollspy
 
@@ -13,8 +13,8 @@ use Cwd qw(abs_path);
 my $SCRIPT_DIR = dirname(abs_path(__FILE__));
 my $PROJECT_ROOT = dirname(dirname($SCRIPT_DIR));
 
-my $PATCHED_METHOD_FILE = "$PROJECT_ROOT/assets/_cache/bootstrap/scrollspy-method-patched.js";
-my $PATCH_JS_FILE = "$PROJECT_ROOT/assets/js/scrollspy-patch.js";
+my $PATCHED_METHOD_FILE = "$PROJECT_ROOT/theme/assets/_cache/bootstrap/scrollspy-method-patched.js";
+my $PATCH_JS_FILE = "$PROJECT_ROOT/theme/assets/js/scrollspy-patch.js";
 
 sub main {
     # Check if patched method file exists
@@ -74,9 +74,10 @@ sub main {
         }
     }
 
-    # Write updated content
+    # Write updated content (binmode: LF bytes on every platform)
     open my $out_fh, '>', $PATCH_JS_FILE
         or die "Cannot write $PATCH_JS_FILE: $!";
+    binmode $out_fh;
     print $out_fh @output_lines;
     close $out_fh;
 }

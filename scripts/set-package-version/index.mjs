@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 /**
- * Updates the version in package.json and optionally docsy.dev/hugo.yaml.
- * Can set the entire version or add/remove a build ID suffix.
- * The hugo.yaml file is only updated when --version is used.
+ * Updates the version in package.json (plus secondary manifests such as
+ * theme/package.json, kept in sync) and optional site YAML (Docsy
+ * `docsy.dev/config/_default/params.yaml`, or `./hugo.yaml` when that path is absent).
+ * Can set the entire version, set build metadata, or strip to release version.
  *
  * For usage, see the usage() function below.
  *
@@ -13,11 +14,76 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
+import { nextDevVersion, readHugoYaml, writeHugoYaml } from './hugo-yaml.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const packagePath = path.join(__dirname, '..', '..', 'package.json');
+const cwd = process.cwd();
+
+const defaultParamsYamlPath = 'docsy.dev/config/_default/params.yaml';
+const defaultHugoYamlPath = 'hugo.yaml';
+const packageJsonPath = 'package.json';
+// Secondary manifests kept in sync with the root package.json version (the
+// canonical home). Synced when present; absent entries are skipped, so
+// running from another project (e.g. docsy-example) is unaffected.
+const secondaryManifestPaths = ['theme/package.json'];
+// Committed lockfiles whose embedded workspace versions must follow the
+// manifests, otherwise the next install rewrites them (lock drift).
+const lockPaths = ['package-lock.json', 'theme/package-lock.json'];
+
+/**
+ * Default config file for version stamps: Docsy site params, else Hugo root config.
+ *
+ * @param {string} [cwd=process.cwd()]
+ * @returns {string} Absolute path (may not exist if neither file is present).
+ */
+export function resolveDefaultConfigPath(cwd = process.cwd()) {
+  const paramsPath = path.resolve(cwd, defaultParamsYamlPath);
+  if (fs.existsSync(paramsPath)) {
+    return paramsPath;
+  }
+  const hugoYamlPath = path.resolve(cwd, defaultHugoYamlPath);
+  if (fs.existsSync(hugoYamlPath)) {
+    return hugoYamlPath;
+  }
+  return paramsPath;
+}
+
+export function getPackagePath() {
+  return path.join(cwd, packageJsonPath);
+}
+
+const usageText = `
+Usage: node scripts/set-package-version/index.mjs [-h] [-s] [-v VERS | --id BUILD-ID] [FILE...]
+
+  Options:
+    --help|-h          Show this help message
+    --id BUILD-ID      Set build ID metadata to BUILD-ID; 'now' means a
+                       timestamp-based ID. BUILD-ID may not start with '-'.
+                       Version is unchanged.
+    --silent|-s        Don't log any messages
+    --version|-v VERS  Set version in target files according to VERS
+
+  FILE                 Config file(s) to read/write version info; paths are
+                       relative to the current working directory or absolute.
+                       If none given, default is ${defaultParamsYamlPath} when that
+                       file exists; otherwise ./${defaultHugoYamlPath} at the project
+                       root (both resolved relative to cwd).
+
+  The VERS specifier is a semver string of the form X.Y.Z-pre-rel+BUILD-ID.
+  Updates the version in:
+
+  - ${packageJsonPath}
+  - ${secondaryManifestPaths.join(', ')} (when present; kept in sync with ${packageJsonPath})
+  - ${lockPaths.join(', ')} (when present; workspace version fields only)
+  - Each listed config file (or the default path above if no FILEs given)
+
+  - In package.json, the version is set to the full version.
+  - In each config file: latest, dev, and buildId fields are set.
+
+  The default behavior is to strip the pre-release suffix and build ID, if any, from
+  the target files. Useful for preparing a non-dev release.
+`;
 
 export function main(
   args = process.argv.slice(2),
@@ -25,31 +91,31 @@ export function main(
     logger = console,
     readPackageJson = defaultReadPackageJson,
     writePackageJson = defaultWritePackageJson,
+    syncManifests = syncSecondaryManifests,
+    syncLocks = syncLockVersions,
     readHugoYaml: readHugoYamlFn = readHugoYaml,
     writeHugoYaml: writeHugoYamlFn = writeHugoYaml,
   } = {},
 ) {
+  const { version, buildId, configPaths, silent, versionSetExplicitly } =
+    parseArgsAndResolveBuildId(args, { logger });
+
   const pkg = readPackageJson();
-  const hugoYaml = readHugoYamlFn();
-
-  const { version, buildId, silent } = parseArgsAndResolveBuildId(args, {
-    logger,
-  });
-
   const currentVersion = pkg.version;
   let newVersion;
 
   if (version !== undefined) {
     // --version takes precedence: set the entire version directly
     newVersion = version;
+  } else if (buildId !== undefined) {
+    // --id updates/sets build metadata, preserving any pre-release suffix.
+    newVersion = adjustVersionForBuildId(currentVersion, buildId);
   } else {
-    // Use build ID logic: add/remove build ID from base version
-    const baseVersion = currentVersion.split('+')[0]; // Remove existing build ID if present
-    newVersion = adjustVersionForBuildId(baseVersion, buildId, { logger });
+    // Default: strip pre-release and build metadata for release preparation.
+    newVersion = getReleaseVersion(currentVersion);
   }
 
   let updated = false;
-  let hugoYamlUpdated = false;
 
   if (newVersion !== currentVersion) {
     pkg.version = newVersion;
@@ -57,52 +123,113 @@ export function main(
     updated = true;
   }
 
-  // Only update hugo.yaml when --version is used
-  let currentHugoVersion = '';
-  if (version !== undefined) {
-    const baseVersion = newVersion.split('+')[0]; // Remove build ID if present
-    currentHugoVersion = hugoYaml.params?.version || '';
-    if (baseVersion !== currentHugoVersion) {
-      if (!hugoYaml.params) {
-        hugoYaml.params = {};
+  // Sync unconditionally: a secondary manifest can be stale even when the
+  // root version is already at the target.
+  const syncedManifests = syncManifests(newVersion);
+  const syncedLocks = syncLocks(newVersion);
+
+  const nextBuildId = getBuildId(newVersion);
+  const releaseVersion = getReleaseVersion(newVersion);
+  const versionWithoutBuild = removeBuildId(newVersion);
+  const hasPreRelease = versionWithoutBuild !== releaseVersion;
+  // --id only adjusts build metadata; deriving `latest` from the dev core
+  // would silently bump it (e.g. v0.16.0 → v0.16.1 while at 0.16.1-dev), and
+  // on a release-core version (the post-release window before the dev bump)
+  // recomputing `dev` would announce a version that doesn't exist yet.
+  const buildIdMode = version === undefined && buildId !== undefined;
+  const leaveLatestUntouched =
+    (versionSetExplicitly && hasPreRelease) || buildIdMode;
+  const leaveDevUntouched = buildIdMode && !hasPreRelease;
+
+  const newLatest = releaseVersion.startsWith('v')
+    ? releaseVersion
+    : `v${releaseVersion}`;
+  const newDev = leaveLatestUntouched
+    ? versionWithoutBuild.startsWith('v')
+      ? versionWithoutBuild
+      : `v${versionWithoutBuild}`
+    : nextDevVersion(releaseVersion);
+  const newBuildId = nextBuildId ?? '';
+
+  for (const configPath of configPaths) {
+    const hugoYaml = readHugoYamlFn(configPath);
+    const currentLatest = hugoYaml.latest ?? '';
+    const currentDev = hugoYaml.dev ?? '';
+    const currentBuildId = hugoYaml.buildId ?? '';
+    const targetDev = leaveDevUntouched ? currentDev : newDev;
+
+    const latestDiffers = newLatest !== currentLatest;
+    const devOrBuildIdDiffers =
+      targetDev !== currentDev || newBuildId !== currentBuildId;
+    const shouldUpdate = leaveLatestUntouched
+      ? devOrBuildIdDiffers
+      : latestDiffers || devOrBuildIdDiffers;
+
+    if (shouldUpdate) {
+      const data = leaveLatestUntouched
+        ? { ...hugoYaml, dev: targetDev, buildId: newBuildId }
+        : {
+            ...hugoYaml,
+            latest: newLatest,
+            dev: targetDev,
+            buildId: newBuildId,
+          };
+      const appliedKeys = writeHugoYamlFn(data, configPath);
+      const configPathRelative = path.relative(cwd, configPath);
+      // Log per key by write outcome, not intent: the line-oriented writer
+      // silently skips keys with no line to land in. An undefined appliedKeys
+      // (injected writer) is treated as all-applied.
+      const logKey = (key, current, next) => {
+        if (current === next) return;
+        if (appliedKeys === undefined || appliedKeys.has(key)) {
+          logger.log?.(
+            `✓ Updated ${configPathRelative} ${key}: ${current || '(none)'} → ${next || '(none)'}`,
+          );
+        } else {
+          logger.warn?.(
+            `WARNING: ${configPathRelative} has no '${key}:' line; ${key} not written`,
+          );
+        }
+      };
+      if (!leaveLatestUntouched && latestDiffers) {
+        logKey('latest', currentLatest, newLatest);
       }
-      hugoYaml.params.version = baseVersion;
-      writeHugoYamlFn(hugoYaml);
-      hugoYamlUpdated = true;
+      logKey('dev', currentDev, targetDev);
+      logKey('buildId', currentBuildId, newBuildId);
+    } else if (!silent) {
+      const configPathRelative = path.relative(cwd, configPath);
+      logger.log?.(
+        `Package version in ${configPathRelative} is already set to ${currentVersion}.`,
+      );
     }
   }
 
-  if (updated || hugoYamlUpdated) {
-    logger.log?.(`✓ Updated version: ${currentVersion} → ${newVersion}`);
-    if (hugoYamlUpdated) {
-      const baseVersion = newVersion.split('+')[0];
-      logger.log?.(
-        `✓ Updated hugo.yaml version: ${currentHugoVersion || '(none)'} → ${baseVersion}`,
-      );
-    }
-  } else if (!silent) {
-    logger.log?.(`Package version is already set to ${currentVersion}.`);
+  if (updated) {
+    logger.log?.(
+      `✓ Updated package.json version: ${currentVersion} → ${newVersion}`,
+    );
+  }
+  for (const manifestPath of syncedManifests) {
+    logger.log?.(`✓ Updated ${manifestPath} version to ${newVersion}`);
+  }
+  for (const lockPath of syncedLocks) {
+    logger.log?.(`✓ Updated ${lockPath} version to ${newVersion}`);
   }
 
   return newVersion;
 }
 
-const usageText = `
-Usage: node scripts/set-package-version/index.mjs [options]
-  Options:
-    --silent, -s       Don't log any messages
-    --help, -h         Show this help message
-    --version VERS     Set the entire version to VERS
-    --id BUILD-ID      Set build ID to BUILD-ID (ignored if --version is used)
-
-  Behavior:
-    - If --version VERS is provided: sets the version to VERS in both package.json and hugo.yaml
-    - If --id BUILD-ID is provided: adds BUILD-ID to the base version (package.json only)
-    - If --id "" is provided: removes the build ID (package.json only)
-    - If no --version or --id is provided: auto-generates build ID from timestamp (package.json only)
-`;
-
-export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
+/**
+ * Parses command line arguments and resolves the build ID.
+ *
+ * @param {string[]} args - Command line arguments
+ * @param {{ logger?: Console, cwd?: string }} [options]
+ * @returns {{ version: string, buildId: string, configPaths: string[], silent: boolean, versionSetExplicitly: boolean }}
+ */
+export function parseArgsAndResolveBuildId(
+  args,
+  { logger = console, cwd = process.cwd() } = {},
+) {
   function usage(exitCode = 0) {
     logger?.log?.(usageText);
     process.exit(exitCode);
@@ -110,6 +237,8 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
 
   let version;
   let buildId;
+  let configPath = resolveDefaultConfigPath(cwd);
+  const configPaths = [];
   let silent = false;
   const warn = logger?.warn || console.warn;
 
@@ -121,36 +250,64 @@ export function parseArgsAndResolveBuildId(args, { logger = console } = {}) {
       case '-h':
         usage();
         break;
+      case '--id':
+        if (++i >= args.length) {
+          usage(1);
+        }
+        if (args[i].startsWith('-')) {
+          // Ambiguous between a value and a flag; fail loud rather than pick
+          // a side.
+          warn?.(
+            `Invalid build ID value: ${JSON.stringify(args[i])} (may not start with '-')`,
+          );
+          process.exit(1);
+        }
+        buildId = args[i] === 'now' ? generateTimestamp() : args[i];
+        break;
       case '--silent':
       case '-s':
         silent = true;
         break;
       case '--version':
-        if (++i >= args.length) usage(1);
+      case '-v':
+        if (++i >= args.length) {
+          usage(1);
+        }
         version = args[i];
         break;
-      case '--id':
-        if (++i >= args.length) usage(1);
-        buildId = args[i];
-        break;
       default:
+        if (!arg.startsWith('-')) {
+          configPaths.push(path.resolve(arg));
+          break;
+        }
         warn?.(`Unexpected argument: ${arg}`);
         usage(1);
     }
   }
 
-  // If --version is provided, ignore --id
-  if (version === undefined) {
-    if (buildId === undefined) {
-      buildId = generateTimestamp();
-    } else if (buildId === '' && !silent) {
-      logger?.log?.(
-        'Build-ID argument is empty, so we will remove the build ID from the version.',
-      );
-    }
+  // Semver build metadata is dot-separated alphanumeric-and-hyphen
+  // identifiers; anything else would write an invalid version into
+  // package.json, failing some later npm operation far from the cause.
+  if (
+    buildId !== undefined &&
+    !/^[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*$/.test(buildId)
+  ) {
+    warn?.(
+      `Invalid build ID: ${JSON.stringify(buildId)} (use 'now' for a timestamp ID)`,
+    );
+    process.exit(1);
   }
 
-  return { version, buildId, silent };
+  const resolvedConfigPaths =
+    configPaths.length > 0 ? configPaths : [configPath];
+  const versionSetExplicitly = version !== undefined;
+  return {
+    version,
+    buildId,
+    configPaths: resolvedConfigPaths,
+    silent,
+    versionSetExplicitly,
+  };
 }
 
 export function generateTimestamp() {
@@ -165,52 +322,120 @@ export function generateTimestamp() {
 }
 
 /**
- * Adjusts the base version if needed when adding a build ID.
- * If the version doesn't end with -dev, increments the minor version and adds -dev suffix.
+ * Returns the core X.Y.Z version from a semver-like string.
  *
- * @param {string} baseVersion - The base version (without build ID)
- * @param {string} buildId - The build ID to add
- * @param {object} logger - Logger object with warn method
- * @returns {string} The adjusted version with build ID
+ * @param {string} version - Full or partial version string
+ * @returns {string} Core X.Y.Z version
  */
-export function adjustVersionForBuildId(
-  baseVersion,
-  buildId,
-  { logger = console } = {},
-) {
-  if (!buildId || baseVersion.endsWith('-dev')) {
-    // No adjustment needed: either no build ID or already a dev version
-    return buildId ? `${baseVersion}+${buildId}` : baseVersion;
+export function getReleaseVersion(version) {
+  const match = version.match(/^(\d+\.\d+\.\d+)/);
+  if (match) {
+    return match[1];
   }
 
-  // Need to adjust: version doesn't end with -dev
-  logger?.warn?.(
-    `Warning: Adding build ID to non-dev version. Incrementing patch version and adding -dev suffix.`,
-  );
+  // Fallback for non-standard strings.
+  return version.split('+')[0].split('-')[0];
+}
 
-  // Parse version and increment patch
-  const versionMatch = baseVersion.match(/^(\d+)\.(\d+)\.(\d+)$/);
-  if (versionMatch) {
-    const major = parseInt(versionMatch[1], 10);
-    const minor = parseInt(versionMatch[2], 10);
-    const patch = parseInt(versionMatch[3], 10);
-    const incrementedBase = `${major}.${minor}.${patch + 1}-dev`;
-    return `${incrementedBase}+${buildId}`;
-  }
+/**
+ * Returns the build metadata from a version string.
+ *
+ * @param {string} version - Full version string
+ * @returns {string} Build ID or empty string
+ */
+export function getBuildId(version) {
+  const plusIndex = version.indexOf('+');
+  return plusIndex === -1 ? '' : version.slice(plusIndex + 1);
+}
 
-  // Fallback: just append -dev if version format doesn't match
-  logger?.warn?.(
-    `Warning: Version format not recognized (${baseVersion}). Appending -dev suffix.`,
-  );
-  return `${baseVersion}-dev+${buildId}`;
+/**
+ * Returns the input version without build metadata (+...).
+ *
+ * @param {string} version - Full version string
+ * @returns {string} Version without build metadata
+ */
+export function removeBuildId(version) {
+  return version.split('+')[0];
+}
+
+/**
+ * Adds/removes BUILD-ID on top of version without build metadata.
+ *
+ * @param {string} version - Any version string
+ * @param {string} buildId - The build ID to add
+ * @returns {string} VERSION or VERSION+BUILD-ID
+ */
+export function adjustVersionForBuildId(version, buildId) {
+  const baseVersion = removeBuildId(version);
+  return buildId ? `${baseVersion}+${buildId}` : baseVersion;
+}
+
+// Backward compatible alias retained for callers/tests.
+export function removeDevSuffix(version) {
+  return getReleaseVersion(version);
 }
 
 function defaultReadPackageJson() {
-  return JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+  return JSON.parse(fs.readFileSync(getPackagePath(), 'utf8'));
 }
 
 function defaultWritePackageJson(pkg) {
-  fs.writeFileSync(packagePath, JSON.stringify(pkg, null, 2) + '\n');
+  fs.writeFileSync(getPackagePath(), JSON.stringify(pkg, null, 2) + '\n');
+}
+
+/**
+ * Aligns the secondary manifests with the given version.
+ *
+ * @param {string} version - Version to set
+ * @param {{ cwd?: string }} [options]
+ * @returns {string[]} Relative paths of the manifests that were updated
+ */
+export function syncSecondaryManifests(version, { cwd: baseDir = cwd } = {}) {
+  const updated = [];
+  for (const relPath of secondaryManifestPaths) {
+    const manifestPath = path.join(baseDir, relPath);
+    if (!fs.existsSync(manifestPath)) continue;
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    if (manifest.version === version) continue;
+    manifest.version = version;
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    updated.push(relPath);
+  }
+  return updated;
+}
+
+/**
+ * Aligns lockfile version fields with the given version: the lock's own
+ * `version` and the `version` of root/workspace entries under `packages`
+ * (keys not under node_modules/). Registry entries are never touched.
+ *
+ * @param {string} version - Version to set
+ * @param {{ cwd?: string }} [options]
+ * @returns {string[]} Relative paths of the locks that were updated
+ */
+export function syncLockVersions(version, { cwd: baseDir = cwd } = {}) {
+  const updated = [];
+  for (const relPath of lockPaths) {
+    const lockPath = path.join(baseDir, relPath);
+    if (!fs.existsSync(lockPath)) continue;
+    const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+    let changed = false;
+    if (lock.version !== undefined && lock.version !== version) {
+      lock.version = version;
+      changed = true;
+    }
+    for (const [pkgPath, entry] of Object.entries(lock.packages ?? {})) {
+      if (pkgPath.includes('node_modules/')) continue;
+      if (entry.version !== undefined && entry.version !== version) {
+        entry.version = version;
+        changed = true;
+      }
+    }
+    if (!changed) continue;
+    fs.writeFileSync(lockPath, JSON.stringify(lock, null, 2) + '\n');
+    updated.push(relPath);
+  }
+  return updated;
 }
 
 const modulePath = __filename;

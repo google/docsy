@@ -1,6 +1,16 @@
 node_modules/
-package-lock.json
+# Committed locks; the anchored ! guards against user-global ignore patterns.
+!/package-lock.json
+!/theme/package-lock.json
 /tmp
+
+# Local visual-golden baselines; only linux (authoritative) and darwin are
+# committed:
+/tests/visual/goldens/*
+!/tests/visual/goldens/linux
+!/tests/visual/goldens/darwin
+
+/theme/LICENSE
 
 # ScrollSpy patch related
 # Temporary files created by the patch command when it fails:
@@ -24,3 +34,10 @@ resources/
 # VS Code
 /.vscode/**
 !/.vscode/cspell.json
+/.cursor
+
+# cSpell:ignore worktrees
+/.claude/worktrees
+
+# Local folders and settings
+/.claude/settings.local.json

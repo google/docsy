@@ -1,0 +1,36 @@
+{{/* Link directly to documentation etc., if possible. */ -}}
+{{ $langPage := cond (gt (len .Translations) 0) . .Site.Home -}}
+<div class="td-lang-menu dropdown">
+  <a class="nav-link dropdown-toggle td-lang-menu__title" href="#" role="button"
+    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="td-lang-menu__title-text">{{ $langPage.Language.Label }}</span>
+    <span class="td-lang-menu__title-code">{{ $langPage.Language.Name | upper }}</span>
+  </a>
+  {{/* */ -}}
+
+  {{ $allPages := slice . -}}
+  {{ if .Translations -}}
+    {{ $allPages = $allPages | append .Translations -}}
+  {{ end -}}
+
+  <ul class="dropdown-menu">
+    {{ range hugo.Sites -}}
+      {{ $lang := .Language -}}
+      {{ $translatedPages := where $allPages "Language.Name" $lang.Name -}}
+      {{ $translated := "" -}}
+      {{ if gt (len $translatedPages) 0 -}}
+        {{ $translated = index $translatedPages 0 -}}
+      {{- end -}}
+      {{ $isActive := eq $.Site.Language.Name $lang.Name -}}
+      <li>
+        {{- if $isActive -}}
+          <span class="dropdown-item active">{{ $lang.Label }}</span>
+        {{- else if $translated -}}
+          <a class="dropdown-item" href="{{ $translated.RelPermalink }}">{{ $lang.Label }}</a>
+        {{- else -}}
+          <span class="dropdown-item disabled">{{ $lang.Label }}</span>
+        {{- end -}}
+      </li>
+      {{ end -}}
+    </ul>
+</div>

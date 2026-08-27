@@ -1,0 +1,34 @@
+// Breadcrumb
+
+.td-breadcrumbs {
+  @media print {
+    display: none;
+  }
+
+  &--single {
+    display: none;
+  }
+
+  &__list {
+    @extend .breadcrumb;
+  }
+
+  // Descendant-scoped (& &__list) to preserve the pre-swap cascade: these
+  // defaults sat at .td-breadcrumbs .breadcrumb, above generic consumer
+  // .breadcrumb rules (which @extend now rewrites to also target the td-
+  // class). Consumers override as before, by matching the specificity.
+  & &__list {
+    background: inherit;
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  &__item {
+    @extend .breadcrumb-item;
+
+    // BS mirror: _breadcrumb.scss .breadcrumb-item.active
+    &[aria-current='page'] {
+      color: var(--#{$prefix}breadcrumb-item-active-color);
+    }
+  }
+}

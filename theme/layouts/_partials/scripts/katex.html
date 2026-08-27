@@ -1,0 +1,57 @@
+{{/* cSpell:ignore katex */ -}}
+{{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
+{{ $version := .Site.Params.katex.version | string | strings.TrimSpace -}}
+{{ if $version -}}
+  {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
+    {{ warnidf "katex-floating-version" "params.katex.version is not an exact X.Y.Z version. For details, see https://www.docsy.dev/docs/content/diagrams-and-formulae/#script-dep-versions." -}}
+  {{ end -}}
+
+  {{ $cssFile := cond hugo.IsProduction "katex.min.css" "katex.css" -}}
+  {{ $cssUrl := printf "https://unpkg.com/katex@%s/dist/%s" $version $cssFile -}}
+  {{ with try (resources.GetRemote $cssUrl) -}}
+    {{ with .Err -}}
+      {{ errorf "Could not retrieve KaTeX css file from CDN. Reason: %s." . -}}
+    {{ else with .Value -}}
+      {{ with resources.Copy (printf "css/%s" $cssFile) . -}}
+        {{ $cssHash := . | fingerprint "sha512" -}}
+        <link rel="stylesheet" href="{{- .RelPermalink -}}" {{/**/ -}}
+            integrity="{{- $cssHash.Data.Integrity -}}" {{/**/ -}}
+            crossorigin="anonymous">{{/**/ -}}
+      {{ end -}}
+    {{ else -}}
+      {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid KaTeX version %q." $cssUrl $version -}}
+    {{ end -}}
+  {{ end -}}
+
+  {{ $fontFiles := slice -}}
+  {{ $url := ( printf "https://unpkg.com/katex@%s/dist/fonts?meta" $version ) -}}
+  {{ with try (resources.GetRemote $url) -}}
+    {{ with .Err -}}
+      {{ errorf "%s" . -}}
+    {{ else with ( .Value | unmarshal ) -}}
+        {{ range .files -}}
+          {{ $fontFiles = $fontFiles | append .path -}}
+        {{ end -}}
+    {{ else -}}
+      {{ errorf "Unable to get fonts meta data %q from CDN. Reason: invalid KaTeX version %q." $url $version -}}
+    {{ end -}}
+  {{ end -}}
+
+  {{ range $fontFile := $fontFiles -}}
+    {{ $fontUrl := (printf "https://unpkg.com/katex@%s%s" $version $fontFile) -}}
+    {{ with try (resources.GetRemote $fontUrl) -}}
+      {{ with .Err -}}
+        {{ errorf "Could not retrieve KaTeX font file from CDN. Reason: %s." . -}}
+      {{ else with .Value -}}
+        {{ with resources.Copy (printf "css/fonts/%s" (replace $fontFile "/dist/fonts/" "")) . -}}
+          {{ .Publish -}}
+        {{ end -}}
+      {{ else -}}
+        {{ errorf "Could not retrieve font file %q from CDN. Reason: invalid KaTeX version %q." $fontUrl $version -}}
+        {{ break -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "params.katex.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
+{{ end }}

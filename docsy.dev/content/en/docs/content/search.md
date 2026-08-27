@@ -1,19 +1,18 @@
 ---
 title: Search
-date: 2017-01-05
-weight: 3.5
+# date: 2017-01-05
 description: >
   Let users search your Docsy site with a choice of configurable search options.
-cSpell:ignore: GCSE
+cSpell:ignore: GCSE docsearch websearch fsdu nryfng
 ---
 
 Docsy offers multiple options that let your readers search your site content, so
 you can pick one that suits your needs or [design your own](#custom-search). You
 can choose from:
 
-- [Google Custom Search Engine](#configure-search-with-a-google-custom-search-engine)
-  (GCSE), the default option, which uses Google's index of your public site to
-  generate a search results page.
+- [Google Custom Search Engine](#google-search) (GCSE), the default option,
+  which uses Google's index of your public site to generate a search results
+  page.
 - [Algolia DocSearch](#algolia-docsearch), which uses Algolia's indexing and
   search mechanism. Search results are displayed as a pop-up. Algolia DocSearch
   is free for public documentation sites.
@@ -21,11 +20,11 @@ can choose from:
   index and search your site without the need to connect to external services.
   This option doesn't require your site to be public.
 
-If you enable any of these search options in your project [configuration file],
-a search box displays in the right of your top navigation bar. By default a
-search box also displays at the top of the sidebar in the left navigation pane,
-which you can disable if you prefer, or if you're using a search option that
-only works with the top search box.
+If you enable any of these search options in your project [configuration
+file][], a search box displays in the right of your top navigation bar. By
+default a search box also displays at the top of the sidebar in the left
+navigation pane, which you can disable if you prefer, or if you're using a
+search option that only works with the top search box.
 
 > [!WARNING] You can only enable a single search option at a time
 >
@@ -40,6 +39,7 @@ of the sidebar left navigation pane. If you don't want the sidebar search box,
 set the site parameter `sidebar_search_disable` to `true` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -63,13 +63,14 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
-## Configure search with a Google Custom Search Engine
+## Configure search with a Google Custom Search Engine {#google-search}
 
 By default Docsy uses a [Google Custom Search Engine][GCSE] (GCSE) to search
 your site. To enable this feature, you'll first need to make sure that you have
 built and deployed a
-[production version of your site](/docs/deployment#build-environments-and-indexing),
+[production version of your site](/docs/deployment/#build-environments-and-indexing),
 as otherwise your site won't be crawled and indexed.
 
 ### Setting up site search
@@ -186,6 +187,7 @@ any other fields, as outlined next.
 
 ### Configure Algolia DocSearch
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1.  Ensure that [GCSE search](#disabling-gcse-search) is disabled.
@@ -224,6 +226,7 @@ params:
 {{< /tab >}}
     {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 To learn more about Algolia DocSearch V3, see
 [Getting started](https://docsearch.algolia.com/docs/v3/docsearch).
@@ -254,6 +257,7 @@ non-public sites.
 
 To add Lunr search to your Docsy site:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 
 1. Enable local search in `hugo.toml`/`hugo.yaml`/`hugo.json`.
@@ -282,23 +286,25 @@ params:
    search enabled. See [Disabling GCSE search](#disabling-gcse-search).
 
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Once you've completed these steps, local search is enabled for your site and
 results appear in a drop down when you use the search box.
 
 > [!TIP]
 >
-> If you're [testing this locally](/docs/deployment/#serving-your-site-locally)
-> using Hugo’s local server functionality, you need to build your
-> `offline-search-index.xxx.json` file first by running `hugo`. If you have the
-> Hugo server running while you build `offline-search-index.xxx.json`, you may
-> need to stop the server and restart it in order to see your search results.
+> If you're [testing this locally](/docs/deployment/local) using Hugo’s local
+> server functionality, you need to build your `offline-search-index.xxx.json`
+> file first by running `hugo`. If you have the Hugo server running while you
+> build `offline-search-index.xxx.json`, you may need to stop the server and
+> restart it in order to see your search results.
 
 ### Changing the summary length of the local search results
 
 You can customize the summary length by setting `offlineSearchSummaryLength` in
 `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -322,6 +328,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 ### Changing the maximum result count of the local search
 
@@ -371,7 +378,7 @@ If you want to limit the width, add the following scss into
 ### Excluding pages from local search results
 
 To exclude pages from local search results, add `exclude_search: true` to the
-the frontmatter of each page:
+front matter of each page:
 
 <!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
@@ -408,17 +415,17 @@ If none of the supported search engines address your project's needs, you can
 implement your own custom search. If your searchbox fits within Docsy's standard
 design, then you can implement custom search by overriding the following files:
 
-- [layouts/_partials/search-input.html]
-- [assets/scss/_search.scss]
-- [assets/js/search.js]
+- [layouts/_partials/search-input.html][]
+- [assets/scss/td/_search.scss][]
+- [assets/js/search.js][]
 
 [algolia test]: https://docsearch.algolia.com/docs/legacy/dropdown/#testing
 [assets/js/search.js]:
-  https://github.com/google/docsy/blob/main/assets/js/search.js
-[assets/scss/_search.scss]:
-  https://github.com/google/docsy/blob/main/assets/scss/_search.scss
+  https://github.com/google/docsy/blob/main/theme/assets/js/search.js
+[assets/scss/td/_search.scss]:
+  https://github.com/google/docsy/blob/main/theme/assets/scss/td/_search.scss
 [configuration file]:
-  https://gohugo.io/getting-started/configuration/#configuration-file
+  https://gohugo.io/configuration/introduction/#configuration-file
 [GCSE]: https://cse.google.com/cse/all
 [layouts/_partials/search-input.html]:
-  https://github.com/google/docsy/blob/main/layouts/_partials/search-input.html
+  https://github.com/google/docsy/blob/main/theme/layouts/_partials/search-input.html

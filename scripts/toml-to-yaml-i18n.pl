@@ -66,14 +66,15 @@ sub process_file {
     my $current_key;
     my $pending_comment;
     my $line_num = 0;
-    my $last_was_entry = 0;  # Track if we just output an entry
+    my $last_was_entry = 0;   # Track if we just output an entry
     my $pending_blank = 0;    # Track if we need to output a blank line
+    my $in_ui_group   = 0;    # True while we're in the initial "UI" group
 
     while (my $line = <$input_fh>) {
         $line_num++;
         chomp $line;
 
-        # Handle blank lines - preserve them
+        # Handle blank lines - preserve them (with some special-casing)
         if ($line =~ /^\s*$/) {
             # If we just output an entry, mark that we should add a blank line
             if ($last_was_entry) {
@@ -84,13 +85,26 @@ sub process_file {
 
         # Output pending blank line before processing next entry
         if ($pending_blank && ($line =~ /^\[/ || $line =~ /^#/)) {
-            print $output_fh "\n";
+            # Inside the "UI" group, avoid blank lines between individual ui_* keys.
+            # We still keep the blank line before the next comment section.
+            if (!($in_ui_group && $line =~ /^\[ui_/)) {
+                print $output_fh "\n";
+            }
             $pending_blank = 0;
         }
 
         # Capture comments
         if ($line =~ /^#\s*(.+)$/) {
-            $pending_comment = $1;
+            my $comment = $1;
+            $pending_comment = $comment;
+
+            # Track whether we're in the "UI strings. Buttons and similar." group
+            if ($comment =~ /^UI strings\. Buttons and similar\./) {
+                $in_ui_group = 1;
+            } else {
+                # Any other top-level comment ends the UI group
+                $in_ui_group = 0;
+            }
             $last_was_entry = 0;
             next;
         }
@@ -102,9 +116,10 @@ sub process_file {
             next;
         }
 
-        # Capture value: other = "value"
-        if ($line =~ /^other\s*=\s*"([^"]+)"\s*$/) {
-            my $value = $1;
+        # Capture value: other = "value" [# optional inline comment]
+        if ($line =~ /^other\s*=\s*"([^"]*)"\s*(?:#\s*(.+))?\s*$/) {
+            my $value        = $1;
+            my $inline_comment = $2;
 
             # Output comment if we have one
             if ($pending_comment) {
@@ -114,6 +129,15 @@ sub process_file {
 
             # Output YAML entry
             if ($current_key) {
+                # Output any pending full-line comment
+                if ($pending_comment) {
+                    print $output_fh "# $pending_comment\n";
+                    $pending_comment = undef;
+                }
+                # Output inline comment from TOML value, if present
+                if (defined $inline_comment && $inline_comment ne '') {
+                    print $output_fh "# $inline_comment\n";
+                }
                 # Check if value needs block scalar format (starts with { or contains { or :)
                 if ($value =~ /\{/ || $value =~ /:/) {
                     print $output_fh "$current_key: >-\n";

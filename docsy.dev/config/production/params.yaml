@@ -1,0 +1,18 @@
+# cSpell:ignore pagelinks
+
+tdVersion:
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+
+version: *tdLatestVers
+version_menu: *tdLatestVers
+versions:
+  - name: '**Versions**'
+  - name: Next
+    version: *tdDevVers
+    # kind: next
+    url: https://main--docsydocs.netlify.app
+  - version: *tdLatestVers
+    kind: latest
+    url: https://www.docsy.dev

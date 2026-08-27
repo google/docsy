@@ -1,0 +1,17 @@
+@import 'cover';
+
+.td-below-navbar {
+  &.td-box,
+  &.td-cover-block {
+    @include media-breakpoint-up(md) {
+      margin-top: $td-navbar-min-height;
+      padding-top: $td-block-space-top-base !important;
+    }
+  }
+}
+
+.td-bg-arrow {
+  &-wrapper {
+    position: relative;
+  }
+}

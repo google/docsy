@@ -1,0 +1,64 @@
+// The outer page container i.e. common styles for any page.
+.td-outer {
+  display: flex;
+  flex-direction: column;
+
+  min-height: calc(
+    100vh - #{$td-navbar-min-height} - #{$td-navbar__main-min-height-mobile}
+  );
+
+  @include media-breakpoint-up(md) {
+    min-height: 100vh;
+  }
+}
+
+// The outer page container for the default base template.
+.td-default {
+  main {
+    > section:first-of-type {
+      @include media-breakpoint-up(md) {
+        padding-top: calc(
+          #{$td-navbar-min-height} + #{$td-block-space-top-base}
+        );
+      }
+    }
+
+    section {
+      @extend .td-block-padding;
+    }
+  }
+}
+
+.td-main {
+  flex-grow: 1;
+  @include media-breakpoint-between(md, xl) {
+    // Between md and xl, a docs/blog page has a left (section) sidebar but no right
+    // (TOC) sidebar. Since it's the TOC sidebar that makes the .td-main
+    // vertically fill the .td-main container, we need another way to have
+    // td-main be full height when it's not there.
+    //
+    // Setting display:flex on .td-main does the trick, but we need to confine
+    // it to be between md and xl only: below md .td-main doesn't need to fill
+    // the page, we're in flow mode for mobile; above xl we don't need it
+    // either, the TOC sidebar is there and makes .td-main fill the page.
+    &:has(> .row .td-sidebar-nav) {
+      display: flex;
+      flex-direction: column;
+      > .row {
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+.td-404 main,
+.td-main main {
+  --td-main-padding-top: 1.5rem;
+
+  padding-top: var(--td-main-padding-top);
+  padding-bottom: 2rem;
+
+  @include media-breakpoint-up(md) {
+    padding-top: calc(var(--td-main-padding-top) + #{$td-navbar-min-height});
+  }
+}

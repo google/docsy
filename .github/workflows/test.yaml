@@ -1,15 +1,12 @@
 # Build Docsy & the website and run all repo checks across OSs.
-# cSpell:ignore docsy
 
 name: test
 
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
   pull_request:
-  # schedule:
-  #   - cron: '11 0 * * *' # 11 past midnight every day
   workflow_dispatch:
+permissions: { contents: read }
 
 jobs:
   build:
@@ -19,24 +16,75 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with: { persist-credentials: false }
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: package.json
 
-      - run: npm install --omit=optional
+      - run: npm run install:safe
+
+      - name: 'Sanity check: install left the working tree pristine'
+        run: npm run -s is:clean
+
+      # Put lychee on PATH for the link checker (test:full runs on Linux only).
+      - if: runner.os != 'Windows'
+        name: Install lychee
+        env:
+          LYCHEE_VERSION: v0.24.2
+        run: |
+          tmp="$(mktemp -d)"
+          curl -sfL "https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C "$tmp"
+          install -D "$(find "$tmp" -type f -name lychee | head -n1)" "$HOME/.local/bin/lychee"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - if: runner.os != 'Windows'
-        run: npm run ci:test
+        run: npm run test:full
+
+      # Offline lychee canaries; Linux-only, like test:full (no lychee on Windows).
+      - if: runner.os != 'Windows'
+        name: Lychee sanity tests (offline)
+        env: { LYCHEE_SANITY_NO_NET: 1 }
+        run: npm run test:lychee
 
       - if: runner.os == 'Windows'
-        run: npm run ci:prepare && npm run cd:docsy.dev build && npm run ci:post
+        run: |
+          npm run _test:full:pre &&
+          npm run -C docsy.dev build &&
+          npm run _test:full:common
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: test-site-${{ matrix.os }}
-          path: |
-            docsy.dev/public
+          path: docsy.dev/public
+
+  visual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with: { persist-credentials: false }
+
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm run install:safe
+
+      - run: npm run install:browser
+
+      - run: npm run test:visual
+
+      # An in-workspace golden rewrite (e.g. by a smuggled lifecycle hook)
+      # must be loud: the tree stays clean after the comparison.
+      - run: npm run -s is:clean
+
+      - name: Upload visual diffs
+        if: failure()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: visual-diffs
+          path: tmp/visual/
