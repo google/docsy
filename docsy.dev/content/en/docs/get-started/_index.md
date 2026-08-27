@@ -4,7 +4,7 @@ description: >-
   Learn how to get started with Docsy, including the available options for
   installing and using the Docsy theme.
 date: 2018-07-30
-aliases: [getting-started, /docs/get-started/quickstart-docker/]
+aliases: [getting-started, get-started/quickstart-docker]
 weight: 2
 ---
 
