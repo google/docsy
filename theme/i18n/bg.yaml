@@ -1,3 +1,10 @@
+# Alert labels
+caution: Внимание
+important: Важно
+note: Забележка
+tip: Съвет
+warning: Предупреждение
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Предишен
 ui_pager_next: Следващ
@@ -6,6 +13,9 @@ ui_search: Търси в тази страница…
 
 # Used in sentences such as "Posted in News"
 ui_in: в
+
+# Used in sentences such as "All Tags"
+ui_all: всички
 
 # Footer text
 footer_all_rights_reserved: Всички права запазени!
@@ -19,6 +29,7 @@ post_last_mod: Последна промяна
 post_edit_this: Промени тази страница
 post_create_child_page: Създай дъщерна страница
 post_view_markdown: Преглед на Markdown
+post_view_this: Преглед на изходния код на страницата
 post_create_issue: Създаване на издаване на документ
 post_create_project_issue: Създаване на издаване на проект
 post_posts_in: Публикувано в
@@ -49,3 +60,13 @@ community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: >-
   Contribution Guidelines
+
+# Feedback
+feedback_title: Обратна връзка
+feedback_question: Беше ли полезна тази страница?
+feedback_positive: Да
+feedback_negative: Не
+
+# Table of contents
+toc_on_this_page: На тази страница
+toc_top_of_page: Към началото на страницата
