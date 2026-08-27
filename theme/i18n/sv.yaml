@@ -1,3 +1,10 @@
+# Alert labels
+caution: Försiktighet
+important: Viktigt
+note: Anmärkning
+tip: Tips
+warning: Varning
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Tidigare
 ui_pager_next: Nästa
@@ -54,3 +61,13 @@ community_how_to: >-
   Du kan ta reda på hur du medverkar till {{ .Site.Title }} i våra
 community_guideline: >-
   Riktlinjer för att Medverka
+
+# Feedback
+feedback_title: Feedback
+feedback_question: Var den här sidan till hjälp?
+feedback_positive: Ja
+feedback_negative: Nej
+
+# Table of contents
+toc_on_this_page: På den här sidan
+toc_top_of_page: Överst på sidan

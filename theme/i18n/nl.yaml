@@ -1,3 +1,10 @@
+# Alert labels
+caution: Let op
+important: Belangrijk
+note: Opmerking
+tip: Tip
+warning: Waarschuwing
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Vorige
 ui_pager_next: Volgende
@@ -54,3 +61,13 @@ community_how_to: >-
   onze
 community_guideline: >-
   Richtlijnen voor bijdrage
+
+# Feedback
+feedback_title: Feedback
+feedback_question: Was deze pagina nuttig?
+feedback_positive: Ja
+feedback_negative: Nee
+
+# Table of contents
+toc_on_this_page: Op deze pagina
+toc_top_of_page: Begin van de pagina

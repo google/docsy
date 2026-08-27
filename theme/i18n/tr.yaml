@@ -1,3 +1,10 @@
+# Alert labels
+caution: Dikkat
+important: Önemli
+note: Not
+tip: İpucu
+warning: Uyarı
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Önceki
 ui_pager_next: Sonraki
@@ -61,3 +68,7 @@ feedback_title: Geribildirim
 feedback_question: Bu sayfa yararlı oldu mu?
 feedback_positive: Evet
 feedback_negative: Hayır
+
+# Table of contents
+toc_on_this_page: Bu sayfada
+toc_top_of_page: Sayfanın başı
