@@ -41,7 +41,7 @@
     "update:dep": "npm run -s update:hugo",
     "update:favicon-goldens": "node tests/favicons/update-goldens.mjs",
     "update:goldens": "npm run build && npm run _update:goldens",
-    "update:hugo": "node \"$npm_execpath\" install --save-exact --ignore-scripts -D hugo-extended@latest",
+    "update:hugo": "npm run -s -C .. update:hugo",
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
     "update:packages": "npm-check-updates -u -x hugo-extended"
   },
