@@ -1,3 +1,10 @@
+# Alert labels
+caution: Huomio
+important: Tärkeää
+note: Huomautus
+tip: Vinkki
+warning: Varoitus
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Edellinen
 ui_pager_next: Seuraava
@@ -52,3 +59,13 @@ community_how_to: >-
   Voit oppia kehittämään {{ .Site.Title }}:a meidän
 community_guideline: >-
   osallistumisohjeissamme
+
+# Feedback
+feedback_title: Palaute
+feedback_question: Oliko tästä sivusta apua?
+feedback_positive: Kyllä
+feedback_negative: Ei
+
+# Table of contents
+toc_on_this_page: Tällä sivulla
+toc_top_of_page: Sivun alkuun

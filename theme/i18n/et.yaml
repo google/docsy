@@ -1,3 +1,10 @@
+# Alert labels
+caution: Ettevaatust
+important: Tähtis
+note: Märkus
+tip: Vihje
+warning: Hoiatus
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Eelmine
 ui_pager_next: Järgmine
@@ -7,6 +14,9 @@ ui_search: Otsi lehelt…
 # Used in sentences such as "Posted in News"
 # not perfect. In Estonian this idea is represented by a suffix, not a separate word.
 ui_in: kohas
+
+# Used in sentences such as "All Tags"
+ui_all: kõik
 
 # Footer text
 footer_all_rights_reserved: Kõik õigused kaitstud
@@ -20,6 +30,7 @@ post_created: Loodud
 post_last_mod: Viimati muudetud
 post_edit_this: Täienda lehte
 post_view_markdown: Vaata Markdowni
+post_view_this: Vaata lehe lähtekoodi
 post_create_child_page: Loo alamleht
 # perhaps there is a better translation for "issue"...
 post_create_issue: Tõstata dokumentatsiooni kohta ülesanne
@@ -28,6 +39,13 @@ post_create_project_issue: Tõstata projekti kohta ülesanne
 post_posts_in: Postitused
 post_reading_time: minute read
 post_less_than_a_minute_read: less than a minute
+
+# Print support
+print_printable_section:
+  See on selle jaotise mitmeleheküljeline prinditav vaade.
+print_click_to_print: Printimiseks klõpsa siia
+print_show_regular: Tagasi selle lehe tavavaatesse
+print_entire_section: Prindi kogu jaotis
 
 # Community
 community_join: >-
@@ -47,3 +65,13 @@ community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: >-
   Contribution Guidelines
+
+# Feedback
+feedback_title: Tagasiside
+feedback_question: Kas sellest lehest oli abi?
+feedback_positive: Jah
+feedback_negative: Ei
+
+# Table of contents
+toc_on_this_page: Sellel lehel
+toc_top_of_page: Lehe algusesse

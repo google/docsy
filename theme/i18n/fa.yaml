@@ -1,3 +1,10 @@
+# Alert labels
+caution: احتیاط
+important: مهم
+note: یادداشت
+tip: نکته
+warning: هشدار
+
 # UI strings. Buttons and similar.
 ui_pager_prev: قبلی
 ui_pager_next: بعدی
@@ -6,6 +13,9 @@ ui_search: در این سایت جستجو کنید...
 
 # Used in sentences such as "Posted in News"
 ui_in: در
+
+# Used in sentences such as "All Tags"
+ui_all: همه
 
 # Footer text
 footer_all_rights_reserved: تمام حقوق محفوظ است.
@@ -56,3 +66,7 @@ feedback_title: بازخورد
 feedback_question: این صفحه به شما کمک کرد؟
 feedback_positive: آره
 feedback_negative: نه
+
+# Table of contents
+toc_on_this_page: در این صفحه
+toc_top_of_page: بالای صفحه

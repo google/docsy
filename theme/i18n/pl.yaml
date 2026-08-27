@@ -1,3 +1,10 @@
+# Alert labels
+caution: Przestroga
+important: Ważne
+note: Uwaga
+tip: Porada
+warning: Ostrzeżenie
+
 # UI strings. Buttons and similar.
 ui_pager_prev: Wstecz
 ui_pager_next: Dalej
@@ -6,6 +13,9 @@ ui_search: Szukaj na stronie ...
 
 # Used in sentences such as "Posted in News"
 ui_in: w
+
+# Used in sentences such as "All Tags"
+ui_all: wszystkie
 
 # Footer text
 footer_all_rights_reserved: Wszelkie prawa zastrzeżone
@@ -19,6 +29,7 @@ post_last_mod: Ostatnia modyfikacja
 post_edit_this: Edytuj tę stronę
 post_create_child_page: Utwórz podstronę
 post_view_markdown: Wyświetl Markdown
+post_view_this: Zobacz źródło strony
 post_create_issue: Zgłoś błąd w dokumencie
 post_create_project_issue: Zgłoś błąd na stronie
 post_posts_in: Posty
@@ -49,3 +60,13 @@ community_how_to: >-
   You can find out how to contribute to {{ .Site.Title }} in our
 community_guideline: >-
   Contribution Guidelines
+
+# Feedback
+feedback_title: Opinia
+feedback_question: Czy ta strona była pomocna?
+feedback_positive: Tak
+feedback_negative: Nie
+
+# Table of contents
+toc_on_this_page: Na tej stronie
+toc_top_of_page: Początek strony
