@@ -36,14 +36,11 @@ If Hugo can't find the [Dart Sass][] `sass` CLI on its `PATH`, it fails while
 compiling SCSS with an error like:
 
 ```text
-Error: error building site: TOCSS-DART: failed to transform "scss/main.scss"
-(text/x-scss). You need to install Dart Sass, see
-https://gohugo.io/functions/css/sass/#dart-sass
+TOCSS-DART: failed to transform "scss/main.scss" (text/x-scss). You need to
+install Dart Sass, see https://gohugo.io/functions/css/sass/#dart-sass
 ```
 
-To fix this, install Dart Sass and run Hugo so that the `sass` CLI is on its
-`PATH`: for npm-based sites, install [`sass-embedded`][] and run Hugo through
-npm scripts, as explained in [Install Dart Sass][].
+To fix this, follow [Install Dart Sass][], then rebuild.
 
 > [!WARNING]
 >
@@ -113,7 +110,6 @@ filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
 [`resourceDir`]: https://gohugo.io/configuration/all/#resourcedir
-[`sass-embedded`]: https://www.npmjs.com/package/sass-embedded
 [setup]: /docs/get-started/
 [submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [theme-npm-deps]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies

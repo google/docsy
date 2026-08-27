@@ -113,10 +113,9 @@ npm run install:safe
 npm run serve
 ```
 
-Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
-immediately see the effect of changes that you are making to the source files of
-your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
-the build fails, see [Troubleshooting][].
+Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit.
+Press `Ctrl + c` to stop the server. If the build fails, see
+[Troubleshooting][].
 
 ## What's next?
 
