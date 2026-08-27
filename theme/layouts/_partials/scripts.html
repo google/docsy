@@ -8,13 +8,17 @@
   <script src='{{ "js/deflate.js" | relURL }}'></script>
 {{ end -}}
 
+{{/* Language-scoped target paths: template output and the bundle vary by
+language (i18n, per-language URLs), and Hugo caches resources by target path
+across languages. */ -}}
+{{ $lang := .Site.Language.Lang -}}
 {{ $jsBs := resources.Get "vendor/bootstrap/dist/js/bootstrap.bundle.js" -}}
 {{ $jsBase := resources.Get "js/base.js" -}}
 {{ $jsChromeNav := resources.Get "js/chrome-nav.js" -}}
-{{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home -}}
-{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . -}}
-{{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . -}}
-{{ $jsDrawio := resources.Get "js/drawio.js" | resources.ExecuteAsTemplate "js/drawio.js" . -}}
+{{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate (printf "js/search.%s.js" $lang) .Site.Home -}}
+{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate (printf "js/markmap.%s.js" $lang) . -}}
+{{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate (printf "js/plantuml.%s.js" $lang) . -}}
+{{ $jsDrawio := resources.Get "js/drawio.js" | resources.ExecuteAsTemplate (printf "js/drawio.%s.js" $lang) . -}}
 {{ if .Site.Params.offlineSearch -}}
   {{ $jsSearch = resources.Get "js/offline-search.js" -}}
 {{ end -}}
@@ -39,7 +43,7 @@
   {{ $jsArray = $jsArray | append $jsScrollSpyPatch -}}
 {{ end -}}
 
-{{ $js := $jsArray | resources.Concat "js/main.js" -}}
+{{ $js := $jsArray | resources.Concat (printf "js/main.%s.js" $lang) -}}
 {{ if hugo.IsProduction -}}
   {{ $js = $js | minify | fingerprint -}}
   <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
