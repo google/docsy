@@ -21,13 +21,10 @@
   internalChecksFilter: 'strict',
   packageRules: [
     {
-      // hugo-extended is intentionally pinned; updated manually via the
-      // two-step `npm run update:hugo` + `npm run approve:hugo` flow
-      // (maintainer notes, Officially supported Hugo version). Version
-      // updates only: vulnerability-fix PRs (vulnerabilityAlerts) bypass
-      // enabled:false, and GitHub Dependabot security updates run
-      // config-free. Dormant today (the npm manager isn't in
-      // enabledManagers); the guard is for the day it is.
+      // hugo-extended version bumps are manual; flow + security-update paths:
+      // https://www.docsy.dev/project/about/maintainer-notes/#official-hugo-version
+      // Dormant while the npm manager is off; kept so enabling the manager
+      // doesn't silently reopen version bumps.
       matchPackageNames: ['hugo-extended'],
       matchUpdateTypes: ['major', 'minor', 'patch'],
       enabled: false,

@@ -121,8 +121,9 @@ The Hugo version that Docsy [officially supports][] is pinned as the
 This version is generally kept in sync with the latest Hugo release. Updating it
 is a two-step flow, run from the repo root:
 
-1. `npm run update:hugo` (or `npm -C docsy.dev install -DE hugo-extended@X.Y.Z`
-   for a specific version): bumps the pin script-free.
+1. `npm run update:hugo` (or, for a specific version,
+   `npm -C docsy.dev install -DE --ignore-scripts hugo-extended@X.Y.Z`): bumps
+   the pin script-free.
 2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
    approves the new version's install script and rebuilds the package so the
    `hugo` binary lands. Script-enabled installs and Hugo-invoking scripts fail
