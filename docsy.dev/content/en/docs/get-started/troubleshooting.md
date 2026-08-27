@@ -42,7 +42,7 @@ https://gohugo.io/functions/css/sass/#dart-sass
 ```
 
 To fix this, install Dart Sass and run Hugo so that the `sass` CLI is on its
-`PATH` -- for npm-based sites, install [`sass-embedded`][] and run Hugo through
+`PATH`: for npm-based sites, install [`sass-embedded`][] and run Hugo through
 npm scripts, as explained in [Install Dart Sass][].
 
 > [!WARNING]
