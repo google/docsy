@@ -18,12 +18,6 @@
       matchPackageNames: ['bootstrap', '@fortawesome/fontawesome-free'],
       enabled: false,
     },
-    {
-      // Redoc 3 is breaking; the redoc shortcode hardcodes the 2.x
-      // path, so a 3.x bump is a manual migration.
-      matchPackageNames: ['redoc'],
-      allowedVersions: '<3',
-    },
   ],
   customManagers: [
     {

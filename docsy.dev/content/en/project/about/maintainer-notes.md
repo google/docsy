@@ -162,7 +162,7 @@ check the KaTeX version that the
 the current Hugo, and verify a math-bearing page renders cleanly. A `redoc` bump
 to 3.x is a manual migration: Redoc 3 moves the CDN script from
 `bundles/redoc.standalone.js` to `bundle/redoc.js`, so the shortcode's URL must
-change with it (Renovate is capped at `<3`).
+change with it.
 
 An emergency security bump (an advisory landing between releases) is a manual
 edit to the same line, made directly on a `release` branch and shipped through
@@ -176,9 +176,7 @@ regular release; it explicitly bypasses Renovate's minimum release-age gate.
 
 ## Dependency updates
 
-Automated updates are configured in `renovate.json5`, following the
-docsy-example repo's settings shape. Renovate opens version-update PRs, created
-on Sundays. Settings rationale:
+Automated updates are configured through Renovate. Settings rationale:
 
 - `ignorePresets`: the preset's 3-day npm cooldown would override this repo's
   7-day `minimumReleaseAge`. Caution: this exclusion silently stops working if
@@ -190,8 +188,7 @@ on Sundays. Settings rationale:
   committed lockfiles; transitive security fixes arrive alert-driven instead.
 - Package rules: `hugo-extended` is [manually updated](#official-hugo-version);
   `bootstrap` and Font Awesome are updated deliberately via `update:dep`, paired
-  with the ScrollSpy-patch refresh; `redoc` is capped below 3
-  ([manual migration](#script-versions)).
+  with the ScrollSpy-patch refresh.
 - The custom manager updates the [script-dependency pins](#script-versions) in
   `theme/hugo.yaml`. All other detected managers are active, including npm (the
   three manifests and their lockfiles), GitHub Actions (SHA-digest pins), and
