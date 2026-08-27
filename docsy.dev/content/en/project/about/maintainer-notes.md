@@ -122,9 +122,9 @@ This version is generally kept in sync with the latest Hugo release. Updating it
 is a two-step flow, run from the repo root:
 
 1. Review the target [hugo-extended][] release (usually the newest), then run
-   `npm run update:dep -- hugo-extended X.Y.Z`: bumps the pin script-free (the
-   exact, reviewed **stable** version is required; tags, ranges, and prereleases
-   are rejected).
+   `npm run update:hugo -- X.Y.Z`: bumps the pin script-free (the exact,
+   reviewed **stable** version is required; tags, ranges, and prereleases are
+   rejected).
 2. Run `npm run approve:hugo`: syncs the tree to the lock (script-free),
    approves the new version's install script, re-runs the supply-chain audit --
    which flags any root-`overrides` drift the bump caused (npm applies overrides
@@ -192,8 +192,8 @@ Automated updates are configured through Renovate. Settings rationale:
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
-    `npm run update:dep -- PKG X.Y.Z` (declared dependencies only, exact stable
-    versions; the ScrollSpy-patch reminder fires after each theme-dep bump).
+    `npm run update:theme-dep -- PKG X.Y.Z` (declared dependencies only, exact
+    stable versions; the ScrollSpy-patch reminder fires after each bump).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm,
     GitHub Actions (SHA-digest pins), and Docker (base images).
@@ -848,8 +848,8 @@ To test a Docsy branch or release from a consumer site, for each site:
 
 ## Release helper scripts
 
-- NPM scripts: `set:version` and `set:version:*`; `update:dep` and
-  `approve:hugo` (see [Hugo versions](#hugo-versions))
+- NPM scripts: `set:version` and `set:version:*`; `update:hugo`,
+  `update:theme-dep`, and `approve:hugo` (see [Hugo versions](#hugo-versions))
 - `scripts/get-build-id.sh`: Builds `X.Y.Z-dev+…-over-main-…` from the latest
   semver tag on `main`, commit offset, and tip SHA; if **`package.json`**’s
   X.Y.Z core is already **greater** than that git-derived core, keeps the higher

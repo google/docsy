@@ -13,6 +13,11 @@ const repoRoot = path.resolve(
 // reviewed release.
 export const STABLE_SEMVER = /^(0|[1-9]\d*)(\.(0|[1-9]\d*)){2}$/;
 
+const USAGE = [
+  'usage: npm run update:hugo -- X.Y.Z',
+  '       npm run update:theme-dep -- PKG X.Y.Z',
+].join('\n');
+
 export function declaredDeps({ root = repoRoot } = {}) {
   const manifest = (relPath) =>
     JSON.parse(fs.readFileSync(path.join(root, relPath), 'utf8'));
@@ -23,32 +28,26 @@ export function declaredDeps({ root = repoRoot } = {}) {
 }
 
 /**
- * Plan the npm invocations that bump `argv`'s `[PKG, X.Y.Z]` to the exact
- * version: an install targeting the manifest that declares PKG, then for
- * theme deps the lock sync, tree restore, and ScrollSpy reminder.
- * Returns the argument lists, or an error string.
+ * Plan the npm-install invocation that bumps a declared dependency to an
+ * exact version. argv is `PKG [NPM_FLAGS...] X.Y.Z`: the npm scripts
+ * prepend the package and its target flags, npm appends the version.
+ * Flags pass through verbatim; only the common flags are added here.
+ * Returns the argument list, or an error string.
  */
-export function planUpdate(argv, { deps = declaredDeps() } = {}) {
-  const [dep, version] = argv;
-  if (argv.length !== 2 || !STABLE_SEMVER.test(version ?? '')) {
-    return 'usage: npm run update:dep -- PKG X.Y.Z';
-  }
-  if (deps.root.includes(dep)) {
-    return [['install', '-DE', '--ignore-scripts', `${dep}@${version}`]];
-  }
-  if (!deps.theme.includes(dep)) return `not a declared dependency: ${dep}`;
-  return [
-    ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@${version}`],
-    ['run', '-s', '_sync:theme-lock'],
-    ['run', '-s', 'install:theme-deps'],
-    ['run', '-s', 'update::post'],
-  ];
+export function planInstall(argv, { deps = declaredDeps() } = {}) {
+  const [dep, ...rest] = argv;
+  const version = rest.at(-1);
+  const flags = rest.slice(0, -1);
+  if (!dep || !STABLE_SEMVER.test(version ?? '')) return USAGE;
+  const declared = flags.includes('-w') ? deps.theme : deps.root;
+  if (!declared.includes(dep)) return `not a declared dependency: ${dep}`;
+  return ['install', '-E', '--ignore-scripts', ...flags, `${dep}@${version}`];
 }
 
 export function updateDep(argv, { env = process.env, spawn = spawnSync } = {}) {
-  const plan = planUpdate(argv);
-  if (typeof plan === 'string') {
-    console.error(plan);
+  const args = planInstall(argv);
+  if (typeof args === 'string') {
+    console.error(args);
     return 1;
   }
   // npm's JavaScript CLI directly, like rebuild-hugo-extended.mjs: no
@@ -58,15 +57,12 @@ export function updateDep(argv, { env = process.env, spawn = spawnSync } = {}) {
     console.error('npm_execpath is unavailable; run this script through npm');
     return 1;
   }
-  for (const args of plan) {
-    const result = spawn(process.execPath, [npmExecPath, ...args], {
-      cwd: repoRoot,
-      env,
-      stdio: 'inherit',
-    });
-    if ((result.status ?? 1) !== 0) return result.status ?? 1;
-  }
-  return 0;
+  const result = spawn(process.execPath, [npmExecPath, ...args], {
+    cwd: repoRoot,
+    env,
+    stdio: 'inherit',
+  });
+  return result.status ?? 1;
 }
 
 const isMain =

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {
   STABLE_SEMVER,
   declaredDeps,
-  planUpdate,
+  planInstall,
   updateDep,
 } from './update-dep.mjs';
 
@@ -28,53 +28,54 @@ test('version guard accepts exactly stable X.Y.Z', () => {
     '',
     undefined,
   ]) {
-    const plan = planUpdate(['hugo-extended', bad], { deps });
+    const plan = planInstall(['hugo-extended', '-D', bad], { deps });
     assert.equal(typeof plan, 'string', `${bad} is rejected with usage text`);
     assert.match(plan, /^usage:/, 'the rejection is the usage line');
   }
 });
 
-test('extra or missing arguments are rejected', () => {
-  for (const argv of [
-    [],
-    ['hugo-extended'],
-    ['hugo-extended', '0.164.0', '0.165.0'],
-    ['bootstrap', '5.3.9', '9.9.9'],
-  ]) {
+test('empty and version-less argv are rejected', () => {
+  for (const argv of [[], ['hugo-extended'], ['bootstrap', '-w', 'theme']]) {
     assert.match(
-      String(planUpdate(argv, { deps })),
+      String(planInstall(argv, { deps })),
       /^usage:/,
       `argv [${argv}] is rejected with usage text`,
     );
   }
 });
 
-test('root devDependencies get a single root install', () => {
-  assert.deepEqual(planUpdate(['hugo-extended', '0.165.0'], { deps }), [
-    ['install', '-DE', '--ignore-scripts', 'hugo-extended@0.165.0'],
+test('flags pass through verbatim, after the common flags', () => {
+  assert.deepEqual(planInstall(['hugo-extended', '-D', '0.165.0'], { deps }), [
+    'install',
+    '-E',
+    '--ignore-scripts',
+    '-D',
+    'hugo-extended@0.165.0',
   ]);
-});
-
-test('theme deps install, sync locks, restore the tree, and remind', () => {
   for (const dep of deps.theme) {
     assert.deepEqual(
-      planUpdate([dep, '5.3.9'], { deps }),
-      [
-        ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@5.3.9`],
-        ['run', '-s', '_sync:theme-lock'],
-        ['run', '-s', 'install:theme-deps'],
-        ['run', '-s', 'update::post'],
-      ],
-      `${dep} plan is the full reviewed chain`,
+      planInstall([dep, '-w', 'theme', '5.3.9'], { deps }),
+      ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@5.3.9`],
+      `${dep} flags arrive in script order`,
     );
   }
 });
 
-test('undeclared packages are rejected', () => {
-  for (const name of ['nosuchdep', 'lodash', 'hugo']) {
-    assert.equal(
-      planUpdate([name, '1.2.3'], { deps }),
-      `not a declared dependency: ${name}`,
+test('membership follows the targeted manifest', () => {
+  assert.match(
+    String(planInstall(['bootstrap', '-D', '5.3.9'], { deps })),
+    /^not a declared dependency/,
+    'a theme dep is not a root dev dependency',
+  );
+  assert.match(
+    String(planInstall(['hugo-extended', '-w', 'theme', '0.165.0'], { deps })),
+    /^not a declared dependency/,
+    'a root dev dep is not a theme dependency',
+  );
+  for (const name of ['nosuchdep', 'lodash']) {
+    assert.match(
+      String(planInstall([name, '-D', '1.2.3'], { deps })),
+      /^not a declared dependency/,
       `${name} is rejected`,
     );
   }
@@ -94,7 +95,7 @@ test('the real manifests declare the managed dependencies', () => {
 test('spawns run npm-cli.js under the current node, from the repo root', () => {
   const calls = [];
   const env = { npm_execpath: '/npm/bin/npm-cli.js' };
-  const status = updateDep(['hugo-extended', '0.165.0'], {
+  const status = updateDep(['hugo-extended', '-D', '0.165.0'], {
     env,
     spawn: (file, args, options) => {
       calls.push({ file, args, options });
@@ -102,7 +103,7 @@ test('spawns run npm-cli.js under the current node, from the repo root', () => {
     },
   });
   assert.equal(status, 0, 'the planned spawn succeeds');
-  assert.equal(calls.length, 1, 'one spawn per plan step');
+  assert.equal(calls.length, 1, 'the plan is a single install');
   const { file, args, options } = calls[0];
   assert.equal(file, process.execPath, 'the current node runs the CLI');
   assert.equal(args[0], '/npm/bin/npm-cli.js', 'npm_execpath is the CLI');
@@ -117,7 +118,7 @@ test('spawns run npm-cli.js under the current node, from the repo root', () => {
 
 test('a missing npm_execpath fails closed without spawning', () => {
   const calls = [];
-  const status = updateDep(['hugo-extended', '0.165.0'], {
+  const status = updateDep(['hugo-extended', '-D', '0.165.0'], {
     env: {},
     spawn: (...args) => {
       calls.push(args);
@@ -128,15 +129,10 @@ test('a missing npm_execpath fails closed without spawning', () => {
   assert.equal(calls.length, 0, 'nothing is spawned');
 });
 
-test('a failing step stops the chain', () => {
-  const calls = [];
-  const status = updateDep(['bootstrap', '5.3.9'], {
+test('the install status propagates', () => {
+  const status = updateDep(['bootstrap', '-w', 'theme', '5.3.9'], {
     env: { npm_execpath: '/npm-cli.js' },
-    spawn: (_cmd, args) => {
-      calls.push(args);
-      return { status: calls.length === 2 ? 1 : 0 };
-    },
+    spawn: () => ({ status: 7 }),
   });
-  assert.equal(status, 1, 'the failing step status propagates');
-  assert.equal(calls.length, 2, 'later steps do not run');
+  assert.equal(status, 7, 'the spawn status is the exit status');
 });

@@ -304,9 +304,14 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'the audit entry point runs this test file',
   );
   assert.equal(
-    scripts['update:dep'],
-    'node scripts/update-dep.mjs',
-    'update:dep runs the guarded update helper',
+    scripts['update:hugo'],
+    'node scripts/update-dep.mjs hugo-extended -D',
+    'update:hugo runs the guarded update helper',
+  );
+  assert.equal(
+    scripts['update:theme-dep'],
+    'bash -c \'node scripts/update-dep.mjs "$1" -w theme "$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
+    'update:theme-dep is the guarded install plus the theme follow-ups',
   );
   assert.equal(
     scripts['_sync:theme-lock'],
@@ -398,7 +403,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'approve:hugo',
     '_test:supply-chain',
     '_sync:theme-lock',
-    'update:dep',
+    'update:hugo',
+    'update:theme-dep',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(
