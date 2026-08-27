@@ -116,14 +116,14 @@ with Hugo pinned to the declared minimum, run [test:smoke](#test-suites).
 ### Officially supported Hugo version {#official-hugo-version}
 
 The Hugo version that Docsy [officially supports][] is pinned as the
-`hugo-extended` dev dependency in [docsy.dev/package.json][].
+`hugo-extended` dev dependency in the root [package.json][].
 
 This version is generally kept in sync with the latest Hugo release. Updating it
 is a two-step flow, run from the repo root:
 
 1. `npm run update:hugo` (or, for a specific version,
-   `npm install -DE --ignore-scripts -w docsy.dev hugo-extended@X.Y.Z`): bumps
-   the pin script-free, then re-runs the supply-chain audit, which flags any
+   `npm install -DE --ignore-scripts hugo-extended@X.Y.Z`): bumps the pin
+   script-free, then re-runs the supply-chain audit, which flags any
    root-`overrides` drift the bump caused (npm applies overrides only while
    re-resolving).
 2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
@@ -847,7 +847,6 @@ To test a Docsy branch or release from a consumer site, for each site:
 [docsy.dev]: <{{% _param baseURL %}}>
 [docsy.dev/config]: <{{% param github_repo %}}/blob/main/docsy.dev/config/>
 [docsy.dev/config/_default/hugo.yaml]: <{{% param github_repo %}}/blob/main/docsy.dev/config/_default/hugo.yaml>
-[docsy.dev/package.json]: <{{% param github_repo %}}/blob/main/docsy.dev/package.json>
 [Draft a new release]: <{{% param github_repo %}}/releases/new>
 [Examples page]: /examples/
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>

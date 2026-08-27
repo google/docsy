@@ -38,18 +38,15 @@
     "test:hugo-build": "node --test 'tests/hugo-build/**/*.test.mjs'",
     "test:md-output": "node --test 'tests/md-output/**/*.test.mjs'",
     "test": "npm run seq -- test:base test:extra",
-    "update:dep": "npm run -s update:hugo",
     "update:favicon-goldens": "node tests/favicons/update-goldens.mjs",
     "update:goldens": "npm run build && npm run _update:goldens",
-    "update:hugo": "npm run -s -C .. update:hugo",
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
-    "update:packages": "npm-check-updates -u -x hugo-extended"
+    "update:packages": "npm-check-updates -u"
   },
   "dependencies-note": "Dependencies installed from ../theme; see the root install:theme-deps script",
   "devDependencies": {
     "afdocs": "^0.19.0",
     "cross-env": "^10.1.0",
-    "hugo-extended": "0.164.0",
     "link-cache": "^0.3.0",
     "npm-check-updates": "^19.6.3",
     "rtlcss": "^4.3.0"

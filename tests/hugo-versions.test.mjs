@@ -44,7 +44,7 @@ const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
 const pin = () =>
-  readJSON('docsy.dev/package.json').devDependencies['hugo-extended'];
+  readJSON('package.json').devDependencies['hugo-extended'];
 
 function assertInSync(entries, what) {
   const values = Object.entries(entries).map(([file, get]) => {

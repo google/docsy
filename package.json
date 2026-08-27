@@ -79,7 +79,7 @@
     "update::post": "echo; echo 'IMPORTANT! Run the following in case the ScrollSpy patch needs to be updated:\n  npm run _prepare'; echo",
     "update:dep": "npm install --save-exact @fortawesome/fontawesome-free@latest bootstrap@latest && npm run -s update::post",
     "update:goldens": "npm run -C docsy.dev update:goldens && npm run update:markup-goldens",
-    "update:hugo": "node \"$npm_execpath\" install --save-exact --ignore-scripts -D -w docsy.dev hugo-extended@latest && node --test tests/supply-chain-audit.test.mjs",
+    "update:hugo": "node \"$npm_execpath\" install --save-exact --ignore-scripts -D hugo-extended@latest && node --test tests/supply-chain-audit.test.mjs",
     "update:markup-goldens": "node tests/fixture-site/update-markup-goldens.mjs",
     "update:packages:all": "npm run update:packages --workspaces --include-workspace-root",
     "update:packages": "bash -c 'npm-check-updates -u -x hugo-extended \"$@\" && npm run -s update::post' -",
@@ -91,6 +91,7 @@
   "devDependencies": {
     "@cspell/dict-fr-fr": "^2.3.2",
     "@pchalin/markdownlint-rule-link-pattern": "^0.3.0",
+    "hugo-extended": "0.164.0",
     "jsdom": "^29.1.1",
     "markdownlint-cli2": "^0.23.2",
     "markdownlint-rule-no-shortcut-ref-link": "^0.3.1",
