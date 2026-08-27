@@ -13,28 +13,30 @@ const repoRoot = path.resolve(
 // reviewed release.
 export const STABLE_SEMVER = /^(0|[1-9]\d*)(\.(0|[1-9]\d*)){2}$/;
 
-export function themeDeps({ root = repoRoot } = {}) {
-  const manifest = JSON.parse(
-    fs.readFileSync(path.join(root, 'theme/package.json'), 'utf8'),
-  );
-  return Object.keys(manifest.dependencies ?? {});
+export function declaredDeps({ root = repoRoot } = {}) {
+  const manifest = (relPath) =>
+    JSON.parse(fs.readFileSync(path.join(root, relPath), 'utf8'));
+  return {
+    root: Object.keys(manifest('package.json').devDependencies ?? {}),
+    theme: Object.keys(manifest('theme/package.json').dependencies ?? {}),
+  };
 }
 
 /**
- * Plan the npm invocations for a pin bump: an install, then for theme
- * deps the lock sync, tree restore, and ScrollSpy reminder. Returns the
- * argument lists, or an error string.
+ * Plan the npm invocations that bump `argv`'s `[PKG, X.Y.Z]` to the exact
+ * version: an install targeting the manifest that declares PKG, then for
+ * theme deps the lock sync, tree restore, and ScrollSpy reminder.
+ * Returns the argument lists, or an error string.
  */
-export function planUpdate(dep, version, { deps = themeDeps() } = {}) {
-  const usage =
-    dep === 'hugo'
-      ? 'usage: npm run update:hugo -- X.Y.Z'
-      : 'usage: npm run update:theme-dep -- PKG X.Y.Z';
-  if (!STABLE_SEMVER.test(version ?? '')) return usage;
-  if (dep === 'hugo') {
-    return [['install', '-DE', '--ignore-scripts', `hugo-extended@${version}`]];
+export function planUpdate(argv, { deps = declaredDeps() } = {}) {
+  const [dep, version] = argv;
+  if (argv.length !== 2 || !STABLE_SEMVER.test(version ?? '')) {
+    return 'usage: npm run update:dep -- PKG X.Y.Z';
   }
-  if (!deps.includes(dep)) return `not a theme dependency: ${dep}`;
+  if (deps.root.includes(dep)) {
+    return [['install', '-DE', '--ignore-scripts', `${dep}@${version}`]];
+  }
+  if (!deps.theme.includes(dep)) return `not a declared dependency: ${dep}`;
   return [
     ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@${version}`],
     ['run', '-s', '_sync:theme-lock'],
@@ -44,7 +46,7 @@ export function planUpdate(dep, version, { deps = themeDeps() } = {}) {
 }
 
 export function updateDep(argv, { env = process.env, spawn = spawnSync } = {}) {
-  const plan = planUpdate(argv[0], argv[1]);
+  const plan = planUpdate(argv);
   if (typeof plan === 'string') {
     console.error(plan);
     return 1;

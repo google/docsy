@@ -14,7 +14,7 @@
       enabled: false,
     },
     {
-      // Updated deliberately via update:theme-dep.
+      // Updated deliberately via update:dep.
       matchPackageNames: ['bootstrap', '@fortawesome/fontawesome-free'],
       enabled: false,
     },
