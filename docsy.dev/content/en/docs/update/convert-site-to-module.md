@@ -223,7 +223,7 @@ github.com/me-at-github/my-existing-site github.com/google/docsy/theme@{{% param
 ## Clean up your repository
 
 Since your site now uses Hugo Modules, remove the `docsy` theme copy from your
-site's root directory:
+project's `themes/` directory:
 
 - For a theme **clone**:
 
