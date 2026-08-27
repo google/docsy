@@ -196,8 +196,8 @@ Automated updates are configured through Renovate. Settings rationale:
     workspace-targeted install prunes, and ends with the ScrollSpy-patch
     reminder).
   - The custom manager updates the [script-dependency pins](#script-versions) in
-    `theme/hugo.yaml`. All other detected managers are active, including npm,
-    GitHub Actions (SHA-digest pins), and Docker (base images).
+    `theme/hugo.yaml`. All other detected managers are active, including npm and
+    GitHub Actions (SHA-digest pins).
 
 Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
 GitHub's config-free Dependabot security updates; a rare duplicate PR is
