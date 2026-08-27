@@ -12,7 +12,7 @@ const repoRoot = path.resolve(
   '..',
 );
 
-const SEMVER = /^\d+\.\d+\.\d+$/;
+const SEMVER = /^(0|[1-9]\d*)(\.(0|[1-9]\d*)){2}$/;
 
 /** Extract the first regex capture from a file, asserting a match. */
 function extract(relPath, re, what) {

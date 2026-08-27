@@ -231,6 +231,18 @@ test('manifests: every dependency spec is a registry semver range', () => {
     }
   }
   assert.ok(specs > 0, 'manifest dependency specs were audited');
+
+  // Bootstrap and Font Awesome are the theme's deps (AGENTS.md, Monorepo
+  // layout); a root copy is where a mis-targeted update lands (the
+  // pre-#2747 update:dep did exactly that).
+  const rootDeps = readJSON('package.json');
+  for (const name of ['bootstrap', '@fortawesome/fontawesome-free']) {
+    assert.ok(
+      !(name in (rootDeps.dependencies ?? {})) &&
+        !(name in (rootDeps.devDependencies ?? {})),
+      `${name} stays out of the root manifest (theme owns it)`,
+    );
+  }
 });
 
 // npm applies overrides only while re-resolving and trusts an in-sync
@@ -276,13 +288,50 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'npm ci --ignore-scripts --no-audit --no-fund',
     'the pre-install step is the lock-enforced, script-free ci',
   );
-  // Not CI-run, but it wields the script-approval authority; pin the
-  // reviewed form (explicit --allow-scripts-pin keeps the approval
-  // version-scoped regardless of user npm config).
+  // Not CI-run, but they wield the pin-update and script-approval
+  // authority; pin the reviewed forms (explicit --allow-scripts-pin keeps
+  // the approval version-scoped regardless of user npm config; the X.Y.Z
+  // guards keep tags, ranges, and prereleases out of the pins).
   assert.equal(
     scripts['approve:hugo'],
     'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post && npm run -s _test:supply-chain',
     'approve:hugo is the reviewed sync-approve-rebuild-audit chain',
+  );
+  assert.equal(
+    scripts['_test:supply-chain'],
+    'node --test tests/supply-chain-audit.test.mjs',
+    'the audit entry point runs this test file',
+  );
+  const versionGuard = (name, spec) =>
+    `bash -c '[[ "$1" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run ${name} -- X.Y.Z" >&2; exit 1; }; ${spec}' -`;
+  assert.equal(
+    scripts['update:hugo'],
+    versionGuard(
+      'update:hugo',
+      'npm install -DE --ignore-scripts "hugo-extended@$1"',
+    ),
+    'update:hugo is the guarded, script-free pin bump',
+  );
+  assert.equal(
+    scripts['update:bootstrap'],
+    versionGuard(
+      'update:bootstrap',
+      'npm install -E --ignore-scripts -w theme "bootstrap@$1" && npm run -s _sync:theme-lock && npm run -s update::post',
+    ),
+    'update:bootstrap is the guarded, theme-workspace pin bump',
+  );
+  assert.equal(
+    scripts['update:fontawesome'],
+    versionGuard(
+      'update:fontawesome',
+      'npm install -E --ignore-scripts -w theme "@fortawesome/fontawesome-free@$1" && npm run -s _sync:theme-lock',
+    ),
+    'update:fontawesome is the guarded, theme-workspace pin bump',
+  );
+  assert.equal(
+    scripts['_sync:theme-lock'],
+    'npm install --prefix theme --package-lock-only --ignore-scripts',
+    'the theme-lock sync is lock-only and script-free',
   );
   assert.equal(
     scripts['install:theme-deps'],
@@ -363,8 +412,15 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   for (const name of [
     'install:safe',
     'install:theme-deps',
+    '_install:safe:pre',
     '_install:safe:post',
     'install:browser',
+    'approve:hugo',
+    '_test:supply-chain',
+    '_sync:theme-lock',
+    'update:hugo',
+    'update:bootstrap',
+    'update:fontawesome',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(

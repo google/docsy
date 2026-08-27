@@ -5,7 +5,7 @@
   // https://www.docsy.dev/project/about/maintainer-notes/#dependency-updates
   ignorePresets: ['security:minimumReleaseAgeNpm'],
   lockFileMaintenance: { enabled: false },
-  schedule: ['* * * * 0'], // Sunday
+  schedule: ['* * * * 0'], // Sunday (UTC)
   labels: ['dependencies'],
   minimumReleaseAge: '7 days',
   packageRules: [
@@ -14,7 +14,7 @@
       enabled: false,
     },
     {
-      // Updated deliberately via update:dep (paired ScrollSpy-patch refresh).
+      // Updated deliberately via update:bootstrap / update:fontawesome.
       matchPackageNames: ['bootstrap', '@fortawesome/fontawesome-free'],
       enabled: false,
     },

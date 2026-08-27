@@ -123,7 +123,8 @@ is a two-step flow, run from the repo root:
 
 1. Review the target [hugo-extended][] release (usually the newest), then run
    `npm run update:hugo -- X.Y.Z`: bumps the pin script-free (the exact,
-   reviewed version is required; tags and ranges are rejected).
+   reviewed **stable** version is required; tags, ranges, and prereleases are
+   rejected).
 2. Run `npm run approve:hugo`: syncs the tree to the lock (script-free),
    approves the new version's install script, rebuilds the package so the `hugo`
    binary lands, and re-runs the supply-chain audit, which flags any
@@ -190,8 +191,9 @@ Automated updates are configured through Renovate. Settings rationale:
 - Package rules:
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
-  - Bootstrap and Font Awesome are updated deliberately via `update:dep`, paired
-    with the ScrollSpy-patch refresh.
+  - Bootstrap and Font Awesome are updated deliberately via `update:bootstrap`
+    and `update:fontawesome` (exact stable versions; the bootstrap route pairs
+    the ScrollSpy-patch refresh).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm,
     GitHub Actions (SHA-digest pins), and Docker (base images).
