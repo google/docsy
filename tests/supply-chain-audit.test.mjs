@@ -294,8 +294,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   // guards keep tags, ranges, and prereleases out of the pins).
   assert.equal(
     scripts['approve:hugo'],
-    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post && npm run -s _test:supply-chain',
-    'approve:hugo is the reviewed sync-approve-rebuild-audit chain',
+    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
+    'approve:hugo audits the approved tree before the installer runs',
   );
   assert.equal(
     scripts['_test:supply-chain'],
