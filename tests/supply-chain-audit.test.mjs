@@ -309,8 +309,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   assert.equal(
     scripts['update:theme-dep'],
-    'bash -c \'[[ "$2" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:theme-dep -- PKG X.Y.Z" >&2; exit 1; }; npm install -E --ignore-scripts -w theme "$1@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
-    'update:theme-dep is the guarded, script-free theme-workspace bump',
+    'bash -c \'[[ "$2" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:theme-dep -- PKG X.Y.Z" >&2; exit 1; }; [[ $(npm pkg get "dependencies[$1]" --prefix theme) != "{}" ]] || { echo "not a theme dependency: $1" >&2; exit 1; }; npm install -E --ignore-scripts -w theme "$1@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
+    'update:theme-dep bumps existing theme deps only, script-free',
   );
   assert.equal(
     scripts['_sync:theme-lock'],

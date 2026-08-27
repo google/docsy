@@ -192,8 +192,8 @@ Automated updates are configured through Renovate. Settings rationale:
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
-    `npm run update:theme-dep -- PKG X.Y.Z` (exact stable versions; the
-    ScrollSpy-patch reminder fires after each bump).
+    `npm run update:theme-dep -- PKG X.Y.Z` (existing theme dependencies only,
+    exact stable versions; the ScrollSpy-patch reminder fires after each bump).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm,
     GitHub Actions (SHA-digest pins), and Docker (base images).
