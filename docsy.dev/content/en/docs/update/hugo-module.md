@@ -46,8 +46,8 @@ hugo mod npm pack
 npm install
 ```
 
-Hugo warns at build time when your `package.json` dependency set has drifted
-from the theme's. To verify the resolved version, run:
+Hugo warns at build time when the generated workspace's dependency set has
+drifted from the theme's. To verify the resolved version, run:
 
 ```sh
 hugo mod graph
