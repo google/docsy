@@ -281,8 +281,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   // version-scoped regardless of user npm config).
   assert.equal(
     scripts['approve:hugo'],
-    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post',
-    'approve:hugo is the reviewed sync-approve-rebuild chain',
+    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post && npm run -s _test:supply-chain',
+    'approve:hugo is the reviewed sync-approve-rebuild-audit chain',
   );
   assert.equal(
     scripts['install:theme-deps'],

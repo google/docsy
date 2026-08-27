@@ -122,15 +122,16 @@ This version is generally kept in sync with the latest Hugo release. Updating it
 is a two-step flow, run from the repo root:
 
 1. Review the target [hugo-extended][] release (usually the newest), then run
-   `npm run update:hugo -- X.Y.Z`: bumps the pin script-free and re-runs the
-   supply-chain audit, which flags any root-`overrides` drift the bump caused
-   (npm applies overrides only while re-resolving).
+   `npm run update:hugo -- X.Y.Z`: bumps the pin script-free (the exact,
+   reviewed version is required; tags and ranges are rejected).
 2. Run `npm run approve:hugo`: syncs the tree to the lock (script-free),
-   approves the new version's install script, and rebuilds the package so the
-   `hugo` binary lands. The approval gates the install script only (the hugo
-   binary self-installs at first use), so don't run builds between the two
-   steps. Script-enabled installs, CI's `install:safe` included, fail until the
-   new version is approved.
+   approves the new version's install script, rebuilds the package so the `hugo`
+   binary lands, and re-runs the supply-chain audit, which flags any
+   root-`overrides` drift the bump caused (npm applies overrides only while
+   re-resolving). The approval gates the install script only (the hugo binary
+   self-installs at first use), so don't run builds between the two steps.
+   Script-enabled installs, CI's `install:safe` included, fail until the new
+   version is approved.
 
 Automated version updates don't bump hugo-extended: the
 [Renovate config](#dependency-updates) disables them. Security updates (Renovate
