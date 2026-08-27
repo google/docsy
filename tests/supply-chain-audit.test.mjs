@@ -290,9 +290,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   // Not CI-run, but they wield the pin-update and script-approval
   // authority; pin the reviewed forms (explicit --allow-scripts-pin keeps
-  // the approval version-scoped regardless of user npm config; the
-  // dispatcher's X.Y.Z guard keeps tags, ranges, and prereleases out of
-  // the pins).
+  // the approval version-scoped regardless of user npm config; the X.Y.Z
+  // guards keep tags, ranges, and prereleases out of the pins).
   assert.equal(
     scripts['approve:hugo'],
     'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run _install:safe:post && npm run -s _test:supply-chain',
@@ -304,17 +303,15 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'the audit entry point runs this test file',
   );
   assert.equal(
-    scripts['_update:pin'],
-    'bash -c \'set -e; [[ "$2" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:${1:-DEP} -- X.Y.Z" >&2; exit 1; }; case "$1" in hugo) npm install -DE --ignore-scripts "hugo-extended@$2";; bootstrap) npm install -E --ignore-scripts -w theme "bootstrap@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post;; fontawesome) npm install -E --ignore-scripts -w theme "@fortawesome/fontawesome-free@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps;; *) echo "unknown dep: $1" >&2; exit 1;; esac\' -',
-    '_update:pin is the guarded, script-free pin dispatcher',
+    scripts['update:hugo'],
+    'bash -c \'[[ "$1" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:hugo -- X.Y.Z" >&2; exit 1; }; npm install -DE --ignore-scripts "hugo-extended@$1"\' -',
+    'update:hugo is the guarded, script-free pin bump',
   );
-  for (const dep of ['hugo', 'bootstrap', 'fontawesome']) {
-    assert.equal(
-      scripts[`update:${dep}`],
-      `npm run -s _update:pin -- ${dep}`,
-      `update:${dep} delegates to the pinned dispatcher`,
-    );
-  }
+  assert.equal(
+    scripts['update:theme-dep'],
+    'bash -c \'[[ "$2" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:theme-dep -- PKG X.Y.Z" >&2; exit 1; }; npm install -E --ignore-scripts -w theme "$1@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
+    'update:theme-dep is the guarded, script-free theme-workspace bump',
+  );
   assert.equal(
     scripts['_sync:theme-lock'],
     'npm install --prefix theme --package-lock-only --ignore-scripts',
@@ -405,10 +402,8 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     'approve:hugo',
     '_test:supply-chain',
     '_sync:theme-lock',
-    '_update:pin',
     'update:hugo',
-    'update:bootstrap',
-    'update:fontawesome',
+    'update:theme-dep',
   ]) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(
