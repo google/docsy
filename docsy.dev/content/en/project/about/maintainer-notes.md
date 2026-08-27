@@ -126,11 +126,15 @@ is a two-step flow, run from the repo root:
    the pin script-free.
 2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
    approves the new version's install script and rebuilds the package so the
-   `hugo` binary lands. Script-enabled installs and Hugo-invoking scripts fail
-   until then, so don't run builds between the two steps.
+   `hugo` binary lands. The approval gates the install script only (the hugo
+   binary self-installs at first use), so don't run builds between the two
+   steps. Script-enabled installs, CI's `install:safe` included, fail until the
+   new version is approved.
 
-Automated update PRs skip hugo-extended version bumps for the same reason;
-security updates still open PRs and fail until approved via `approve:hugo`.
+Automated updates don't bump hugo-extended: the Renovate config excludes its
+version updates. GitHub's Dependabot security updates run config-free and can
+still bump it; such a PR fails CI until the new version is approved via
+`approve:hugo`.
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
