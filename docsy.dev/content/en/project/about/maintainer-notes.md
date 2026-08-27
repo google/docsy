@@ -137,7 +137,7 @@ is a two-step flow, run from the repo root:
 Automated version updates don't bump hugo-extended: the
 [Renovate config](#dependency-updates) disables them. Security updates (Renovate
 vulnerability alerts, GitHub's config-free Dependabot) can still bump it; such a
-PR fails CI until the new version is approved via `approve:hugo`.
+PR fails CI until the bump is approved (step 2 above).
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -193,7 +193,9 @@ Automated updates are configured through Renovate. Settings rationale:
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
     `npm run update:theme-dep -- PKG X.Y.Z` (declared dependencies only, exact
-    stable versions; the ScrollSpy-patch reminder fires after each bump).
+    stable versions; the chain restores `theme/node_modules`, which a
+    workspace-targeted install prunes, and ends with the ScrollSpy-patch
+    reminder).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm,
     GitHub Actions (SHA-digest pins), and Docker (base images).
