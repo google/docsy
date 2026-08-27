@@ -18,24 +18,27 @@ Run:
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-sed '/theme = \["docsy/d' config.toml > hugo.toml && rm config.toml
+[ -f config.toml ] && mv config.toml hugo.toml
+sed -i.bak '/theme = \["docsy/d' hugo.toml && rm hugo.toml.bak
 cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy/theme"
 EOL
-hugo mod npm pack
-npm install
 npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 npm pkg set scripts.hugo=hugo
+hugo mod npm pack
+npm install
 npm run hugo -- server
 {{< /tab >}}
 {{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-findstr /v /c:"theme = [\"docsy" config.toml > hugo.toml
+if exist config.toml ren config.toml hugo.toml
+findstr /v /c:"theme = [\"docsy" hugo.toml > hugo.toml.tmp
+move /y hugo.toml.tmp hugo.toml
 (echo [module]^
 
 proxy = "direct"^
@@ -43,10 +46,10 @@ proxy = "direct"^
 [[module.imports]]^
 
 path = "github.com/google/docsy/theme")>>hugo.toml
-hugo mod npm pack
-npm install
 npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 npm pkg set scripts.hugo=hugo
+hugo mod npm pack
+npm install
 npm run hugo -- server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -80,6 +83,8 @@ This command adds the `docsy` theme module to your definition file `go.mod` and
 records the module checksums in `go.sum`.
 
 ### Update your config file
+
+If your site still uses a `config.toml` file, rename it to `hugo.toml` first.
 
 In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line (`docsy/theme` if your site is on Docsy 0.16 or later, `docsy` otherwise):
 
@@ -170,6 +175,15 @@ Depending on your environment you may need to tweak them slightly, for example b
 
 ### Install theme npm dependencies
 
+Follow [Install Dart Sass][install-dart-sass] so that Hugo runs with the `sass`
+CLI on its `PATH`; for npm-based sites, that means installing the tested
+[`sass-embedded`][] version and running Hugo through npm scripts:
+
+```bash
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
+```
+
 Docsy sources its Bootstrap and Font Awesome assets from npm. Generate the
 theme's npm-dependency workspace (see Hugo's
 [Node dependencies](https://gohugo.io/hugo-modules/nodejs-dependencies/)) and
@@ -181,19 +195,10 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/update/hugo-module/); Hugo warns when the
-dependency set drifts. For background, see
+[update Docsy](/docs/update/hugo-module/) or otherwise edit `package.json`;
+Hugo warns when the dependency set drifts. For background, see
 [Bootstrap and Font Awesome via npm][blog-npm-deps] in the 0.16.0
 release notes.
-
-Follow [Install Dart Sass][install-dart-sass] so that Hugo runs with the `sass`
-CLI on its `PATH`; for npm-based sites, that means installing the tested
-[`sass-embedded`][] version and running Hugo through npm scripts:
-
-```bash
-npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
-npm pkg set scripts.hugo=hugo
-```
 
 ### Check validity of your configuration settings
 

@@ -175,12 +175,13 @@ site that uses the Docsy NPM package:
     ```
 
 2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler, at
-    the version Docsy is tested with:
+    the version Docsy is tested with, and define an npm script for running Hugo:
 
     ```sh
     npm init -y
     npm install --save-dev @docsy/theme
     npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+    npm pkg set scripts.hugo=hugo
     ```
 
     > [!TIP] Hugo install tip

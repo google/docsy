@@ -31,10 +31,10 @@ proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy/theme"
 EOL
-hugo mod npm pack
-npm install
 npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 npm pkg set scripts.hugo=hugo
+hugo mod npm pack
+npm install
 npm run hugo -- server
 {{< /tab >}}
 {{< tab header="Windows command line" lang="Batchfile" >}}
@@ -49,10 +49,10 @@ proxy = "direct"^
 [[module.imports]]^
 
 path = "github.com/google/docsy/theme") >> hugo.toml
-hugo mod npm pack
-npm install
 npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 npm pkg set scripts.hugo=hugo
+hugo mod npm pack
+npm install
 npm run hugo -- server
 {{< /tab >}}
 {{< /tabpane >}}
@@ -154,30 +154,30 @@ by adding a proxy to use when downloading remote modules.
 
 ### Install npm dependencies {#install-theme-npm-dependencies}
 
-Docsy sources its Bootstrap and Font Awesome assets from npm. Generate the
-theme's npm-dependency workspace (see Hugo's [Node
-dependencies][hugo-node-deps]) and install it, along with the [Dart Sass][]
-compiler:
+Install the [Dart Sass][] compiler at the version Docsy is tested with, and
+define an npm script for running Hugo (see [Install Dart Sass][]). Docsy sources
+its Bootstrap and Font Awesome assets from npm: generate the theme's
+npm-dependency workspace (see Hugo's [Node dependencies][hugo-node-deps]) and
+install it:
 
 ```bash
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
 hugo mod npm pack
 npm install
-npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/update/hugo-module/); Hugo warns when the dependency set
-drifts. For background, see [Bootstrap and Font Awesome via npm][blog-npm-deps]
-in the 0.16.0 release notes.
+[update Docsy](/docs/update/hugo-module/) or otherwise edit `package.json`; Hugo
+warns when the dependency set drifts. For background, see [Bootstrap and Font
+Awesome via npm][blog-npm-deps] in the 0.16.0 release notes.
 
 ### Preview your site
 
-To build and preview your site locally, run Hugo through an [npm
-script][npm scripts] so that the `sass` CLI is on its `PATH` (see [Install Dart
-Sass][]):
+To build and preview your site locally, run Hugo through the `hugo` npm script
+you defined, which puts the `sass` CLI on Hugo's `PATH`:
 
 ```bash
-npm pkg set scripts.hugo=hugo
 npm run hugo -- server
 ```
 
@@ -202,6 +202,5 @@ build fails with missing-parameter errors, add the required defaults per
 [Dart Sass]: https://sass-lang.com/dart-sass/
 [hugo-node-deps]: https://gohugo.io/hugo-modules/nodejs-dependencies/
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
-[npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
 [Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->
