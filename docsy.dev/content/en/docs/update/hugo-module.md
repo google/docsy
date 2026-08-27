@@ -37,9 +37,8 @@ Hugo automatically pulls in the latest theme version.
 > hugo mod get github.com/google/docsy/theme@9b1d9951
 > ```
 
-After updating the theme, tidy your module files, refresh the [theme npm
-dependencies][] that are consolidated into your site's `package.json`, and
-reinstall them:
+After updating the theme, tidy your module files, refresh the generated [theme
+npm dependencies][] workspace, and reinstall it:
 
 ```bash
 hugo mod tidy

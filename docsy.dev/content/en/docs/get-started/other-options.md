@@ -174,11 +174,13 @@ site that uses the Docsy NPM package:
     cd myproject
     ```
 
-2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler:
+2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler, at
+    the version Docsy is tested with:
 
     ```sh
     npm init -y
-    npm install --save-dev @docsy/theme sass-embedded
+    npm install --save-dev @docsy/theme
+    npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
     ```
 
     > [!TIP] Hugo install tip
@@ -250,15 +252,9 @@ npm run hugo -- server
 ```
 
 By default, your site will be available at <http://localhost:1313>. For common
-issues, see [Troubleshooting](/docs/get-started/troubleshooting/).
-
-You may get Hugo errors for missing parameters and values when you try to build
-your site. This is usually because you’re missing default values for some
-configuration settings that Docsy uses - once you add them your site should
-build correctly. You can find out how to add configuration in
-[Basic site configuration](/docs/get-started/basic-configuration/) - we
-recommend copying the example site configuration even if you’re creating a site
-from scratch as it provides defaults for many required configuration parameters.
+issues, see [Troubleshooting](/docs/get-started/troubleshooting/). If the build
+fails with missing-parameter errors, add the required defaults per
+[Basic site configuration](/docs/get-started/basic-configuration/).
 
 ## What's next?
 

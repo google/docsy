@@ -172,8 +172,10 @@ Depending on your environment you may need to tweak them slightly, for example b
 
 ### Install theme npm dependencies
 
-Docsy sources its Bootstrap and Font Awesome assets from npm. Consolidate the
-theme's npm dependencies into your project's `package.json` and install them:
+Docsy sources its Bootstrap and Font Awesome assets from npm. Generate the
+theme's npm-dependency workspace (see Hugo's
+[Node dependencies](https://gohugo.io/hugo-modules/nodejs-dependencies/)) and
+install it:
 
 ```bash
 hugo mod npm pack

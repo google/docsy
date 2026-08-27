@@ -1,5 +1,5 @@
 ---
-title: 'Create a new site: Start a new site from scratch'
+title: 'Create a new site: start a new site from scratch'
 linkTitle: Start a site from scratch
 date: 2021-12-08T09:21:54+01:00
 weight: 3
@@ -11,14 +11,11 @@ cSpell:ignore: batchfile
 Creating a site from scratch gives you Docsy's look and feel, navigation, and
 other features, but you specify your own site structure. These instructions give
 you a minimum file structure only, so that you build and extend your actual site
-step by step. The first step is adding the Docsy theme as a
-[Hugo Module](https://gohugo.io/hugo-modules/) to your site. If needed, you can
-easily [update](/docs/update/) the module to the latest revision from the Docsy
-GitHub repo.
+step by step.
 
 ## TL;DR: Setup for the impatient expert
 
-At your command prompt, run the following:
+Run:
 
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
@@ -157,9 +154,10 @@ by adding a proxy to use when downloading remote modules.
 
 ### Install npm dependencies {#install-theme-npm-dependencies}
 
-Docsy sources its Bootstrap and Font Awesome assets from npm. Consolidate the
-theme's npm dependencies into your project's `package.json` and install them,
-along with the [Dart Sass][] compiler:
+Docsy sources its Bootstrap and Font Awesome assets from npm. Generate the
+theme's npm-dependency workspace (see Hugo's [Node
+dependencies][hugo-node-deps]) and install it, along with the [Dart Sass][]
+compiler:
 
 ```bash
 hugo mod npm pack
@@ -185,15 +183,9 @@ npm run hugo -- server
 
 By default, your site will be available at
 [http://localhost:1313](http://localhost:1313/). For common issues, such as the
-build failing with a missing Bootstrap import, see [Troubleshooting][].
-
-You may get Hugo errors for missing parameters and values when you try to build
-your site. This is usually because you're missing default values for some
-configuration settings that Docsy uses - once you add them your site should
-build correctly. You can find out how to add configuration in
-[Basic site configuration](/docs/get-started/basic-configuration/) - we
-recommend copying the example site configuration even if you're creating a site
-from scratch as it provides defaults for many required configuration parameters.
+build failing with a missing Bootstrap import, see [Troubleshooting][]. If the
+build fails with missing-parameter errors, add the required defaults per
+[Basic site configuration](/docs/get-started/basic-configuration/).
 
 ## What's next?
 
@@ -208,6 +200,7 @@ from scratch as it provides defaults for many required configuration parameters.
 [blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
 [configuration file]: https://gohugo.io/configuration/introduction/#configuration-file
 [Dart Sass]: https://sass-lang.com/dart-sass/
+[hugo-node-deps]: https://gohugo.io/hugo-modules/nodejs-dependencies/
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
 [Troubleshooting]: /docs/get-started/troubleshooting/

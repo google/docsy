@@ -2,10 +2,9 @@
 title: 'Create a new site: start with a prepopulated site'
 linkTitle: Start with a prepopulated site
 description: >
-  Clone the example site and adapt it: the fastest route to a working Docsy
-  site.
+  Clone the example site and adapt it: a ready-made site structure with a pinned
+  toolchain.
 weight: 2
-cSpell:ignore: gitea
 ---
 
 The [Docsy example site](https://github.com/google/docsy-example) gives you a
@@ -38,12 +37,8 @@ There are two routes to get a local clone of the example site:
 
 #### Option 1: Using the command line (local copy only)
 
-If you want to use a remote repository other than GitHub (such as
-[GitLab](https://gitlab.com), [BitBucket](https://bitbucket.org/),
-[AWS CodeCommit](https://aws.amazon.com/codecommit/),
-[Gitea](https://gitea.io/)) or if you don't want a remote repo at all, simply
-make a local working copy of the example site directly using `git clone`. As
-last parameter, give your chosen local repo name (here: `my-new-site`):
+For a local copy or a non-GitHub remote, clone the released example site, giving
+your chosen local repo name (here: `my-new-site`) as the last parameter:
 
 ```bash
 git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
@@ -51,16 +46,13 @@ git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/g
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
 
-As the Docsy example site repo is a
-[template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/),
-creating your own remote GitHub clone of this Docsy example site repo is quite
-easy:
+The example site is a [template repository][], so you can generate your own
+GitHub repository from it. Note that a template copies the example site's
+default branch (`main`), which can be ahead of the latest release; for a
+release-pinned start, use option 1.
 
 1. Go to the repo of the
    [Docsy example site](https://github.com/google/docsy-example).
-
-1. Use the dropdown for switching branches/tags to change to the latest released
-   tag `{{% param tdVersion.latest %}}`.
 
 1. Click the button **Use this template** and select the option
    `Create a new repository` from the dropdown.
@@ -108,5 +100,6 @@ Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit. Press
 <!-- prettier-ignore-start -->
 [prerequisites]: /docs/get-started/docsy-as-module/installation-prerequisites/
 [start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
+[template repository]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
 [Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->

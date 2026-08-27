@@ -114,14 +114,6 @@ then check your version:
 node -v
 ```
 
-> [!NOTE]
->
-> Projects can pin their own tool floors: the example site, for instance,
-> enforces its minimum Node.js and npm versions at install time.
-
-You install these assets when you create your site, as described in the next
-steps.
-
 ## Install PostCSS (optional) {#install-postcss}
 
 This section applies to all [installation options](/docs/get-started/), not just
