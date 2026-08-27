@@ -44,7 +44,7 @@ test('empty and version-less argv are rejected', () => {
   }
 });
 
-test('flags pass through verbatim, after the common flags', () => {
+test('the script flag vectors plan installs, flags in script order', () => {
   assert.deepEqual(planInstall(['hugo-extended', '-D', '0.165.0'], { deps }), [
     'install',
     '-E',
@@ -57,6 +57,25 @@ test('flags pass through verbatim, after the common flags', () => {
       planInstall([dep, '-w', 'theme', '5.3.9'], { deps }),
       ['install', '-E', '--ignore-scripts', '-w', 'theme', `${dep}@5.3.9`],
       `${dep} flags arrive in script order`,
+    );
+  }
+});
+
+test('flags outside the allowed vocabulary are rejected', () => {
+  for (const argv of [
+    // The pre-#2747 update:dep contract: the extra token would ride
+    // into npm as a bare (latest-floating) package argument.
+    ['hugo-extended', '-D', 'hugo-extended', '0.165.0'],
+    // npm takes a key's last assignment: a caller flag would re-enable
+    // install scripts.
+    ['hugo-extended', '-D', '--ignore-scripts=false', '0.165.0'],
+    ['bootstrap', '-w', 'theme', '--before=2020-01-01', '5.3.9'],
+    ['hugo-extended', '-DE', '0.165.0'],
+  ]) {
+    assert.match(
+      String(planInstall(argv, { deps })),
+      /^usage:/,
+      `argv [${argv}] is rejected with usage text`,
     );
   }
 });
