@@ -1,3 +1,10 @@
+// Shared guard under the update:hugo and update:theme-dep scripts. The
+// scripts own target policy (the package and the flags that route it to
+// its manifest, plus any follow-up steps); this helper owns the
+// cross-target invariants: an exact stable version, membership in the
+// targeted manifest, and a script-free, exact-pin install spawned
+// through npm's own CLI.
+
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';

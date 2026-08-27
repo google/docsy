@@ -231,16 +231,19 @@ test('manifests: every dependency spec is a registry semver range', () => {
     }
   }
   assert.ok(specs > 0, 'manifest dependency specs were audited');
+});
 
-  // Bootstrap and Font Awesome are the theme's deps (AGENTS.md, Monorepo
-  // layout); a root copy is where a mis-targeted update lands (the
-  // pre-#2747 update:dep did exactly that).
+// Bootstrap and Font Awesome are the theme's deps (AGENTS.md, Monorepo
+// layout); a root copy is where a mis-targeted update lands (the
+// pre-#2747 update:dep did exactly that), and it would shadow the
+// theme's reviewed pin.
+test('manifests: theme-owned dependencies stay out of the root manifest', () => {
   const rootDeps = readJSON('package.json');
   for (const name of ['bootstrap', '@fortawesome/fontawesome-free']) {
     assert.ok(
       !(name in (rootDeps.dependencies ?? {})) &&
         !(name in (rootDeps.devDependencies ?? {})),
-      `${name} stays out of the root manifest (theme owns it)`,
+      `${name} is declared only by the theme`,
     );
   }
 });
