@@ -233,6 +233,20 @@ test('manifests: every dependency spec is a registry semver range', () => {
   assert.ok(specs > 0, 'manifest dependency specs were audited');
 });
 
+// Bootstrap and Font Awesome are the theme's deps (AGENTS.md, Monorepo
+// layout); a root copy would shadow the theme's reviewed pin (the
+// pre-#2747 update:dep installed exactly there).
+test('manifests: theme-owned dependencies stay out of the root manifest', () => {
+  const rootDeps = readJSON('package.json');
+  for (const name of ['bootstrap', '@fortawesome/fontawesome-free']) {
+    assert.ok(
+      !(name in (rootDeps.dependencies ?? {})) &&
+        !(name in (rootDeps.devDependencies ?? {})),
+      `${name} is declared only by the theme`,
+    );
+  }
+});
+
 // npm applies overrides only while re-resolving and trusts an in-sync
 // lock as-is, so the adm-zip override (GHSA-xcpc-8h2w-3j85, via
 // hugo-extended) is pinned from the committed manifests: the lock must
@@ -259,34 +273,49 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   );
 });
 
-// Exact pins: prefix/flag matching would accept an appended `&& npm
-// install …` rider on a script the workflow audit trusts by name.
-test('manifests: the install path keeps its locked, script-free form', () => {
-  const { scripts } = readJSON('package.json');
+// Byte-exact reviewed forms of the scripts that hold install or
+// script-approval authority, deliberately duplicating package.json: a
+// property check would accept an appended rider on an opaque shell
+// string. On a mismatch, adjudicate against the maintainer notes
+// (Officially supported Hugo version, Dependency updates).
+const REVIEWED_SCRIPTS = {
   // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
   // binary as platform-keyed optional packages, npm's script-free
   // platform-dispatch form; omitting optionals leaves no compiler.
-  assert.equal(
-    scripts['install:safe'],
-    'npm ci --ignore-scripts --no-audit --no-fund && npm run _install:safe:post',
-    'install:safe is the reviewed lock-enforced, script-free command',
-  );
-  assert.equal(
-    scripts['install:theme-deps'],
-    'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
-    'install:theme-deps is the reviewed lock-enforced, script-free command',
-  );
-  assert.equal(
-    scripts['_install:safe:post'],
+  'install:safe': 'npm run _install:safe:pre && npm run _install:safe:post',
+  '_install:safe:pre': 'npm ci --ignore-scripts --no-audit --no-fund',
+  '_install:safe:post':
     'node scripts/rebuild-hugo-extended.mjs && npm run install:theme-deps',
-    'the post-install step uses the retrying Hugo rebuild helper',
-  );
-  assert.equal(
-    scripts['install:browser'],
-    'node node_modules/puppeteer/install.mjs',
-    'install:browser invokes the locked dependency entry point directly',
-  );
-  // That entry point loads Puppeteer configuration from the project
+  'install:theme-deps':
+    'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
+  'install:browser': 'node node_modules/puppeteer/install.mjs',
+  // Explicit --allow-scripts-pin keeps the approval version-scoped
+  // regardless of user npm config.
+  'approve:hugo':
+    'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
+  '_test:supply-chain': 'node --test tests/supply-chain-audit.test.mjs',
+};
+
+test('scripts: install and approval entries keep their reviewed forms', () => {
+  const { scripts } = readJSON('package.json');
+  for (const [name, form] of Object.entries(REVIEWED_SCRIPTS)) {
+    assert.equal(scripts[name], form, `${name} keeps its reviewed form`);
+  }
+  // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
+  // sibling would run unreviewed code inside a reviewed chain.
+  for (const name of Object.keys(REVIEWED_SCRIPTS)) {
+    for (const hook of [`pre${name}`, `post${name}`]) {
+      assert.equal(
+        scripts[hook],
+        undefined,
+        `${hook} stays absent, so ${name} runs exactly as reviewed`,
+      );
+    }
+  }
+});
+
+test('manifests: the install surfaces stay unconfigured and hook-free', () => {
+  // install:browser's entry point loads Puppeteer configuration from the project
   // (executable config files, a package.json "puppeteer" key), which can
   // redirect the browser download or swap the launched executable: the
   // audited install is only as locked as this search surface stays empty.
@@ -345,22 +374,6 @@ test('manifests: the install path keeps its locked, script-free form', () => {
       `structural guard ${guard} exists`,
     );
   }
-  // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
-  // sibling would run unreviewed code inside the pinned chain.
-  for (const name of [
-    'install:safe',
-    'install:theme-deps',
-    '_install:safe:post',
-    'install:browser',
-  ]) {
-    for (const hook of [`pre${name}`, `post${name}`]) {
-      assert.equal(
-        scripts[hook],
-        undefined,
-        `${hook} stays absent, so ${name} runs exactly as pinned`,
-      );
-    }
-  }
 
   // Safe smoke predicts a permissive Docsy install only while permissive
   // installs add no consumer-facing lifecycle behavior.
@@ -388,7 +401,7 @@ test('workflows: installs are locked and credential-isolated', () => {
   );
   // Netlify [build.environment] feeds the same install and build
   // processes the workflow env screen guards: screen every env-shaped key
-  // the same way, and pin NPM_FLAGS exactly -- it is what constrains
+  // the same way, and pin NPM_FLAGS exactly; it is what constrains
   // Netlify's automatic install to resolution only (its comment in
   // netlify.toml).
   let netlifyEnvKeys = 0;

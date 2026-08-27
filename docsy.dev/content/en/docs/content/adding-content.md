@@ -240,9 +240,8 @@ The minimum front matter you need to provide is a title: everything else is up
 to you! However, if you leave out the page weight, your
 [navigation](/docs/content/navigation) may get a little disorganized. You may
 also want to include `description` since Docsy uses that to generate the meta
-`description` tag used by search engines. See [Search Engine Optimization (SEO)
-meta tags]({{< ref "feedback#search-engine-optimization-meta-tags" >}}) for
-details.
+`description` tag used by search engines. For details, see
+[Search Engine Optimization (SEO) meta tags](/docs/content/feedback/#search-engine-optimization-meta-tags).
 
 ## Page content
 

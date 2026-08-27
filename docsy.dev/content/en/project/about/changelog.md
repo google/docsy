@@ -1,6 +1,6 @@
 ---
 title: Changelog
-description: Docsy repository changelog
+description: Breaking changes and release highlights, per release
 aliases: [../changelog]
 # prettier-ignore
 cSpell:ignore: deining FOUC gitmodules gtag lookandfeel mhchem navs notoc tabpane onedark shurup
@@ -112,7 +112,7 @@ Specifically, the Docsy team **officially supports** the following:
 
 - The tool versions as specified for the Docsy release you are using:
   - **Hugo**:
-    - The version pinned as `hugo-extended` in [docsy.dev/package.json][]
+    - The version pinned as `hugo-extended` in [package.json][]
       ({{% hugo-version %}})
     - Older versions, down to Docsy's declared [minimum Hugo version][], usually
       work.
@@ -125,7 +125,6 @@ Everything else — including Windows — is supported on a best-effort basis.
 
 <!-- prettier-ignore-start -->
 [@docsy/theme]: https://www.npmjs.com/package/@docsy/theme
-[docsy.dev/package.json]: https://github.com/google/docsy/blob/main/docsy.dev/package.json
 [minimum Hugo version]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/google/docsy/blob/main/package.json
 <!-- prettier-ignore-end -->
