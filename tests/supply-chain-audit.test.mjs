@@ -274,14 +274,11 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   );
 });
 
-// Reviewed forms of the scripts that hold install or script-approval
-// authority: a byte-exact baseline, deliberately duplicating
-// package.json. It detects drift that review can miss (tool rewrites,
-// bad merges, careless edits); byte equality because a property check
-// would accept an appended rider on an opaque shell string. On a
-// mismatch, adjudicate against the maintainer notes (Officially
-// supported Hugo version, Dependency updates), then update the
-// baseline.
+// Byte-exact reviewed forms of the scripts that hold install or
+// script-approval authority, deliberately duplicating package.json: a
+// property check would accept an appended rider on an opaque shell
+// string. On a mismatch, adjudicate against the maintainer notes
+// (Officially supported Hugo version, Dependency updates).
 const REVIEWED_SCRIPTS = {
   // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
   // binary as platform-keyed optional packages, npm's script-free
@@ -293,8 +290,7 @@ const REVIEWED_SCRIPTS = {
   'install:theme-deps':
     'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
   'install:browser': 'node node_modules/puppeteer/install.mjs',
-  // Audits before _install:safe:post so drift fails pre-execution;
-  // explicit --allow-scripts-pin keeps the approval version-scoped
+  // Explicit --allow-scripts-pin keeps the approval version-scoped
   // regardless of user npm config.
   'approve:hugo':
     'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',

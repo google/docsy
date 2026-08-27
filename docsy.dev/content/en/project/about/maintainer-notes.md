@@ -123,8 +123,7 @@ is a two-step flow, run from the repo root:
 
 1. Review the target [hugo-extended][] release (usually the newest), then run
    `npm run update:hugo -- X.Y.Z`: bumps the pin script-free (the exact,
-   reviewed **stable** version is required; tags, ranges, and prereleases are
-   rejected).
+   reviewed **stable** version only).
 2. Run `npm run approve:hugo`: syncs the tree to the lock (script-free),
    approves the new version's install script, re-runs the supply-chain audit --
    which flags any root-`overrides` drift the bump caused (npm applies overrides
