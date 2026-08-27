@@ -6,6 +6,14 @@ description: >
   Prerequisites for building a site with Docsy as a Hugo Module.
 ---
 
+> [!NOTE]
+>
+> Starting with the [prepopulated example site](example-site-as-template/)? Its
+> npm dependencies supply pinned Hugo and Dart Sass tools, which
+> `npm run install:safe` installs: you can skip those sections, and only need
+> [Go](#install-go-language), [Git](#install-git-vcs-client), and
+> [Node.js](#install-nodejs).
+
 ## Install Hugo
 
 You need a
@@ -140,6 +148,11 @@ then check your version:
 ```bash
 node -v
 ```
+
+> [!NOTE]
+>
+> Projects can pin their own tool floors: the example site, for instance,
+> enforces its minimum Node.js and npm versions at install time.
 
 You install these assets when you create your site, as described in the next
 steps.
