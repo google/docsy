@@ -1,9 +1,7 @@
-// Shared guard under the update:hugo and update:theme-dep scripts. The
-// scripts own target policy (the package and the flags that route it to
-// its manifest, plus any follow-up steps); this helper owns the
-// cross-target invariants: an exact stable version, membership in the
-// targeted manifest, and a script-free, exact-pin install spawned
-// through npm's own CLI.
+// Shared guard under the update:hugo and update:theme-dep scripts: the
+// scripts own target policy (the package, the flags that route it to
+// its manifest, any follow-up steps); this helper owns the cross-target
+// install invariants.
 
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -15,9 +13,8 @@ const repoRoot = path.resolve(
   '..',
 );
 
-// Stable X.Y.Z only: tags, ranges, prereleases, and leading-zero
-// components are all rejected, so the pinned value is exactly the
-// reviewed release.
+// Stable X.Y.Z only, leading zeros rejected: the pinned value is
+// exactly the reviewed release.
 export const STABLE_SEMVER = /^(0|[1-9]\d*)(\.(0|[1-9]\d*)){2}$/;
 
 const USAGE = [

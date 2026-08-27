@@ -234,9 +234,8 @@ test('manifests: every dependency spec is a registry semver range', () => {
 });
 
 // Bootstrap and Font Awesome are the theme's deps (AGENTS.md, Monorepo
-// layout); a root copy is where a mis-targeted update lands (the
-// pre-#2747 update:dep did exactly that), and it would shadow the
-// theme's reviewed pin.
+// layout); a root copy would shadow the theme's reviewed pin (the
+// pre-#2747 update:dep installed exactly there).
 test('manifests: theme-owned dependencies stay out of the root manifest', () => {
   const rootDeps = readJSON('package.json');
   for (const name of ['bootstrap', '@fortawesome/fontawesome-free']) {
