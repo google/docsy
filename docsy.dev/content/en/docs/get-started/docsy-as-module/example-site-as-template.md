@@ -2,19 +2,15 @@
 title: 'Create a new site: start with a prepopulated site'
 linkTitle: Start with a prepopulated site
 description: >
-  Create a new Hugo site by using a clone of the Docsy example site as your
-  starting point.
+  Clone the Docsy example site for a ready-made site skeleton that pulls in the
+  theme as a Hugo module and is easy to keep up to date.
 weight: 2
 cSpell:ignore: gitea
 ---
 
-The simplest way to create a new Docsy site is to use the source of the
-[Docsy example site](https://github.com/google/docsy-example) as starting point.
-This approach gives you a skeleton structure for your site, with top-level and
-documentation sections and templates that you can modify as necessary. The
-example site automatically pulls in the Docsy theme as a
-[Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
-[keep up to date](/docs/update/hugo-module/).
+The [Docsy example site](https://github.com/google/docsy-example) gives you a
+skeleton structure for your site, with top-level and documentation sections and
+templates that you can modify as necessary.
 
 If you prefer to create a site from scratch, follow [Start a site from
 scratch][start-from-scratch].
@@ -43,10 +39,7 @@ Preview at <http://localhost:1313/>. If the build fails, see
 
 ### Clone the Docsy example site
 
-The [Example Site](https://example.docsy.dev) gives you a good starting point
-for building your docs site and is pre-configured to automatically pull in the
-Docsy theme as a Hugo Module. There are two different routes to get a local
-clone of the example site:
+There are two routes to get a local clone of the example site:
 
 - If you want to create a local copy only, choose option 1.
 - If you have a GitHub account and want to create a GitHub repo for your site go
@@ -85,8 +78,6 @@ easy:
    **Repository name** field. You can also add an optional **Description**.
 
 1. Click **Create repository from template** to create your new repository.
-   Congratulations, you just created your remote GitHub clone which now serves
-   as starting point for your own site!
 
 1. Make a local copy of your newly created GitHub repository by using
    `git clone`, giving your repo's web URL as last parameter.

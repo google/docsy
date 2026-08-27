@@ -3,7 +3,8 @@ title: Troubleshooting and known issues
 linkTitle: Troubleshooting
 weight: 60
 description: >
-  Troubleshooting and known issues when installing and using Docsy.
+  Build failures caused by missing dependencies, and platform-specific known
+  issues
 aliases: [known_issues]
 cSpell:ignore: TOCSS maxfiles maxfilesperproc
 ---

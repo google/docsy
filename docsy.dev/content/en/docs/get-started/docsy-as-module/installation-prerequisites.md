@@ -6,9 +6,6 @@ description: >
   Prerequisites for building a site with Docsy as a Hugo Module.
 ---
 
-This page describes the prerequisites for building a site that uses Docsy as a
-Hugo Module.
-
 ## Install Hugo
 
 You need a
@@ -107,35 +104,30 @@ For the officially supported Dart Sass version, see
 
 ## Install Go language
 
-Hugo's commands for module management require that the Go programming language
-is installed on your system. Check whether `go` is already installed:
+Hugo's module management requires the [Go language](https://go.dev/), version
+1.18 or later, per
+[Hugo's requirements](https://gohugo.io/hugo-modules/use-modules/). Check your
+version:
 
 ```console
 $ go version
 go version go1.25.6
 ```
 
-Ensure that you are using version 1.18 or later, per
-[Hugo's requirements](https://gohugo.io/hugo-modules/use-modules/).
-
-If the `go` language is not installed on your system yet or if you need to
-upgrade, go to the [download area](https://go.dev/dl/) of the Go website, choose
-the installer for your system architecture and execute it. Afterwards, check for
-a successful installation.
+To install or upgrade Go, use the [Go download page](https://go.dev/dl/).
 
 ## Install Git VCS client
 
-Hugo's commands for module management require that the `git` client is installed
-on your system. Check whether `git` is already present in your system:
+Hugo's module management also requires the [Git](https://git-scm.com/) client.
+Check your version:
 
 ```console
 $ git version
 git version 2.52.0
 ```
 
-If no `git` client is installed on your system yet, go to the
-[Git website](https://git-scm.com/), download the installer for your system
-architecture and execute it. Afterwards, check for a successful installation.
+To install or upgrade Git, use the
+[Git download page](https://git-scm.com/downloads).
 
 ## Install Node.js
 

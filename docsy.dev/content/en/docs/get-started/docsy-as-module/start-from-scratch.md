@@ -8,12 +8,11 @@ description: >
 cSpell:ignore: batchfile
 ---
 
-The simplest approach to creating a Docsy site is
-[copying our example site](/docs/get-started/docsy-as-module/example-site-as-template/).
-However, if you're an experienced Hugo user or the site structure of our example
-site doesn't meet your needs, you may prefer to create a new site from scratch.
-With this option, you'll get Docsy look and feel, navigation, and other
-features, but you'll need to specify your own site structure.
+If you're an experienced Hugo user, or the site structure of the
+[example site](/docs/get-started/docsy-as-module/example-site-as-template/)
+doesn't meet your needs, you may prefer to create a new site from scratch. With
+this option, you'll get Docsy look and feel, navigation, and other features, but
+you'll need to specify your own site structure.
 
 These instructions give you a minimum file structure for your site project only,
 so that you build and extend your actual site step by step. The first step is
