@@ -274,13 +274,15 @@ test('locks and manifests: the adm-zip override is applied and still needed', ()
   );
 });
 
-// Script pins: byte-exact copies of the reviewed script entries --
-// golden-style, deliberately duplicating package.json. A mismatch is the
-// tripwire, not a bug: re-review the changed script, then re-pin it in
-// the same change. Exactness is the point: prefix/flag matching would
-// accept an appended `&& npm install …` rider on a script that CI, the
-// docs, and maintainers trust by name.
-const SCRIPT_PINS = {
+// Reviewed forms of the scripts that hold install or script-approval
+// authority: a byte-exact baseline, deliberately duplicating
+// package.json. It detects drift that review can miss (tool rewrites,
+// bad merges, careless edits); byte equality because a property check
+// would accept an appended rider on an opaque shell string. On a
+// mismatch, adjudicate against the maintainer notes (Officially
+// supported Hugo version, Dependency updates), then update the
+// baseline.
+const REVIEWED_SCRIPTS = {
   // No --omit=optional: the Dart Sass compiler (sass-embedded) ships its
   // binary as platform-keyed optional packages, npm's script-free
   // platform-dispatch form; omitting optionals leaves no compiler.
@@ -291,35 +293,27 @@ const SCRIPT_PINS = {
   'install:theme-deps':
     'npm ci --prefix theme --ignore-scripts --omit=dev --omit=peer --no-audit --no-fund',
   'install:browser': 'node node_modules/puppeteer/install.mjs',
-  // The rest are not CI-run, but wield the pin-update and script-approval
-  // authority. approve:hugo audits before _install:safe:post, so override
-  // drift fails pre-execution; explicit --allow-scripts-pin keeps the
-  // approval version-scoped regardless of user npm config. The update-dep
-  // helper guards versions and dep membership, unit-tested in
-  // scripts/update-dep.test.mjs.
+  // Audits before _install:safe:post so drift fails pre-execution;
+  // explicit --allow-scripts-pin keeps the approval version-scoped
+  // regardless of user npm config.
   'approve:hugo':
     'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
   '_test:supply-chain': 'node --test tests/supply-chain-audit.test.mjs',
-  'update:hugo': 'node scripts/update-dep.mjs hugo-extended -D',
-  'update:theme-dep':
-    'bash -c \'node scripts/update-dep.mjs "$1" -w theme "$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
-  '_sync:theme-lock':
-    'npm install --prefix theme --package-lock-only --ignore-scripts',
 };
 
-test('scripts: pinned entries keep their reviewed, byte-exact forms', () => {
+test('scripts: install and approval entries keep their reviewed forms', () => {
   const { scripts } = readJSON('package.json');
-  for (const [name, form] of Object.entries(SCRIPT_PINS)) {
+  for (const [name, form] of Object.entries(REVIEWED_SCRIPTS)) {
     assert.equal(scripts[name], form, `${name} keeps its reviewed form`);
   }
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
-  // sibling would run unreviewed code inside a pinned chain.
-  for (const name of Object.keys(SCRIPT_PINS)) {
+  // sibling would run unreviewed code inside a reviewed chain.
+  for (const name of Object.keys(REVIEWED_SCRIPTS)) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(
         scripts[hook],
         undefined,
-        `${hook} stays absent, so ${name} runs exactly as pinned`,
+        `${hook} stays absent, so ${name} runs exactly as reviewed`,
       );
     }
   }
