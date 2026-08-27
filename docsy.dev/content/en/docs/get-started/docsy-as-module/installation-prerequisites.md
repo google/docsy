@@ -134,7 +134,8 @@ To install or upgrade Git, use the
 Docsy sources its Bootstrap and Font Awesome assets from npm, so you need
 [Node.js](https://nodejs.org/) (which provides `npm`, the Node package manager)
 to install them. Install or upgrade to the active [long-term support (LTS)
-release][node-lts], then check your version:
+release][node-lts] (consider using [nvm][] to install and manage Node versions),
+then check your version:
 
 ```bash
 node -v
@@ -183,6 +184,7 @@ site
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
+[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
 [sass-embedded]: https://www.npmjs.com/package/sass-embedded
