@@ -316,7 +316,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     scripts['update:bootstrap'],
     versionGuard(
       'update:bootstrap',
-      'npm install -E --ignore-scripts -w theme "bootstrap@$1" && npm run -s _sync:theme-lock && npm run -s update::post',
+      'npm install -E --ignore-scripts -w theme "bootstrap@$1" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post',
     ),
     'update:bootstrap is the guarded, theme-workspace pin bump',
   );
@@ -324,7 +324,7 @@ test('manifests: the install path keeps its locked, script-free form', () => {
     scripts['update:fontawesome'],
     versionGuard(
       'update:fontawesome',
-      'npm install -E --ignore-scripts -w theme "@fortawesome/fontawesome-free@$1" && npm run -s _sync:theme-lock',
+      'npm install -E --ignore-scripts -w theme "@fortawesome/fontawesome-free@$1" && npm run -s _sync:theme-lock && npm run -s install:theme-deps',
     ),
     'update:fontawesome is the guarded, theme-workspace pin bump',
   );
