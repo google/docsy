@@ -7,12 +7,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { STABLE_SEMVER } from '../scripts/update-dep.mjs';
+
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '..',
 );
-
-const SEMVER = /^\d+\.\d+\.\d+$/;
 
 /** Extract the first regex capture from a file, asserting a match. */
 function extract(relPath, re, what) {
@@ -43,13 +43,12 @@ const declarations = {
 const readJSON = (relPath) =>
   JSON.parse(fs.readFileSync(path.join(repoRoot, relPath), 'utf8'));
 
-const pin = () =>
-  readJSON('docsy.dev/package.json').devDependencies['hugo-extended'];
+const pin = () => readJSON('package.json').devDependencies['hugo-extended'];
 
 function assertInSync(entries, what) {
   const values = Object.entries(entries).map(([file, get]) => {
     const value = get();
-    assert.match(value, SEMVER, `${file} ${what} is X.Y.Z semver`);
+    assert.match(value, STABLE_SEMVER, `${file} ${what} is X.Y.Z semver`);
     return [file, value];
   });
   const [refFile, reference] = values[0];
@@ -80,7 +79,7 @@ test('docsy.dev module Hugo minimum aliases the params anchor', () => {
 test('Hugo minimum is at most the officially supported version', () => {
   const minimum = declarations['theme/hugo.yaml']();
   const supported = pin();
-  assert.match(supported, SEMVER, 'hugo-extended pin is X.Y.Z semver');
+  assert.match(supported, STABLE_SEMVER, 'hugo-extended pin is X.Y.Z semver');
   const toParts = (v) => v.split('.').map(Number);
   const cmp = toParts(minimum)
     .map((n, i) => n - toParts(supported)[i])
