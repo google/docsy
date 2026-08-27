@@ -1,0 +1,58 @@
+# Agent-Friendly Docs — https://afdocs.dev/reference/config-file.html
+
+url: https://www.docsy.dev # Site to check. CLI flag overrides this
+
+checks:
+  # --- Content Discoverability ---
+  - llms-txt-exists
+  - llms-txt-valid
+  - llms-txt-size
+  - llms-txt-links-resolve
+  - llms-txt-links-markdown
+  - llms-txt-directive-html
+  - llms-txt-directive-md
+
+  # --- Markdown Availability ---
+  - markdown-url-support
+  - content-negotiation
+
+  # --- Page Size and Truncation Risk ---
+  - rendering-strategy
+  - page-size-markdown
+  - page-size-html
+  - content-start-position
+
+  # --- Content Structure ---
+  - tabbed-content-serialization
+  - section-header-quality
+  - markdown-code-fence-validity
+
+  # --- URL Stability and Redirects ---
+  - http-status-codes
+  - redirect-behavior
+
+  # --- Observability and Content Health ---
+  # Disabled by choice: llms.txt is a deliberately curated section index, so
+  # coverage vs the sitemap isn't the goal; parity flags mostly non-actionable
+  # diffs for this site (code-fence/tab segmentation artifacts).
+  # - llms-txt-coverage
+  # - markdown-content-parity
+  - cache-header-hygiene
+
+  # --- Authentication and Access ---
+  - auth-gate-detection
+  - auth-alternative-access
+
+# options:
+#   maxLinksToTest: 50
+#   samplingStrategy: random # random | deterministic | curated | none
+#   maxConcurrency: 3
+#   requestDelay: 200
+#   requestTimeout: 30000
+#   thresholds:
+#     pass: 50000
+#     fail: 100000
+options:
+  # Deterministic sampling keeps the sampled page set, and with it the scores,
+  # stable across runs (random sampling shifts scores by a few points per run).
+  samplingStrategy: deterministic

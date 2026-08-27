@@ -1,13 +1,61 @@
 ---
 title: Diagrams and Formulae
-weight: 11
 description: Add generated diagrams and scientific formulae to your site.
-cSpell:ignore: goldmark linenos mhchem
+cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
 Docsy has built-in support for a number of diagram creation and typesetting
 tools you can use to add rich content to your site, including \(\KaTeX\),
 Mermaid, Diagrams.net, PlantUML, and MarkMap.
+
+## Pinned script-dependency versions {#script-dep-versions}
+
+Docsy renders some rich content with scripts and stylesheets that it loads from
+public CDNs: Mermaid, KaTeX's stylesheet and fonts, markmap-autoloader, and
+Redoc (the [`redoc` shortcode][]). Each loads at a version pinned in the theme's
+configuration and bumped with each Docsy release. Pinning keeps builds
+reproducible and page rendering stable, and narrows exposure to bad upstream
+publishes: a version alias such as `latest`, or a partial version such as `11`,
+is re-resolved by the CDN on each request or uncached build, so your site's
+rendering could change or break without any change on your part (for example,
+when an upstream major ships).
+
+To use a different version of one of these dependencies, set
+`params.`_`PACKAGE`_`.version` in your configuration file, where _`PACKAGE`_ is
+`mermaid`, `katex`, `markmap`, or `redoc`:
+
+<!-- markdownlint-disable no-shortcut-ref-link -->
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.PACKAGE]
+version = "X.Y.Z"
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  PACKAGE:
+    version: X.Y.Z
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "PACKAGE": {
+      "version": "X.Y.Z"
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
+Use an exact version (`X.Y.Z`): a non-exact version emits a build warning; if
+intentional, suppress it by adding _`PACKAGE`_`-floating-version` (for example,
+`katex-floating-version`) to your site's
+[`ignoreLogs`](https://gohugo.io/configuration/all/#ignorelogs).
+
+[`redoc` shortcode]: /docs/content/shortcodes/#redoc
 
 ## LaTeX support with KaTeX
 
@@ -74,65 +122,18 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 \tag*{(1)}  P(E) = {n \choose k} p^k (1-p)^{n-k}
 ```
 
-{{% alert title="Tip" %}} This
-[wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides in-depth
-information about typesetting mathematical formulae using the \(\LaTeX\)
-typesetting system. {{% /alert %}}
+> [!TIP]
+>
+> This [wiki page](https://en.wikibooks.org/wiki/LaTeX/Mathematics) provides
+> in-depth information about typesetting mathematical formulae using the
+> \(\LaTeX\) typesetting system.
 
 ### Activating KaTeX support
 
 As of Docsy version v0.12.0, the theme uses Hugo's embedded instance of the
 KaTeX display engine to render mathematical markup to HTML at build time.\
-To enable \(\LaTeX\) typesetting in Markdown, perform the three following steps
-described below:
-
-#### Create media types for KaTeX fonts
-
-KaTeX brings its own font files for rendering mathematical formulae. In order to
-enable the download of these font files locally during build time, two
-additional
-[media types](https://gohugo.io/configuration/media-types/#create-a-media-type)
-have to be created by adding the lines below to your
-`hugo.toml`/`hugo.yaml`/`hugo.json` configuration file:
-
-{{< tabpane text=true persist=lang >}}
-{{< tab header="Site configuration file:" disabled=true />}}
-{{% tab header="hugo.toml" lang="toml" %}}
-
-```toml
-[mediaTypes]
-  [mediaTypes.'font/woff']
-    suffixes = ['woff']
-  [mediaTypes.'font/woff2']
-    suffixes = ['woff2']
-```
-
-{{% /tab %}} {{% tab header="hugo.yaml" lang="yaml" %}}
-
-```yaml
-mediaTypes:
-  font/woff:
-    suffixes: [woff]
-  font/woff2:
-    suffixes: [woff2]
-```
-
-{{% /tab %}} {{% tab header="hugo.json" lang="json" %}}
-
-```json
-{
-  "mediaTypes": {
-    "font/woff": {
-      "suffixes": ["woff"]
-    },
-    "font/woff2": {
-      "suffixes": ["woff2"]
-    }
-  }
-}
-```
-
-{{% /tab %}} {{< /tabpane >}}
+To enable \(\LaTeX\) typesetting in Markdown, perform the two steps described
+below:
 
 #### Enable `passthrough` extension
 
@@ -197,7 +198,7 @@ markup:
 #### Add `passthrough` render hook
 
 Docsy uses Hugo's `render-passthrough`
-[hook](https://gohugo.io/render-hooks/passthrough/) when generating of math
+[hook](https://gohugo.io/render-hooks/passthrough/) when generating math
 equations at build-time. To enable this hook in your project, add a new local
 hook file `layouts/_markup/render-passthrough.html` in your project site. The
 content of this file has to be one single line only:
@@ -210,25 +211,30 @@ content of this file has to be one single line only:
 
 With the `passthrough` extension enabled and the render hook in place, support
 of \(\KaTeX\) is automatically enabled when you author a `math` code block on
-your page or when you add a mathematical formulae to your page using one of the
+your page or when you add a mathematical formula to your page using one of the
 passthrough delimiter pairs defined above.
 
-{{% alert title="Passthrough for selected sections" %}}
+### KaTeX version
 
-For very large sites, you might want to restrict the passthrough to selected
-sections. Do so by placing the passthrough hook in the section's `_markup`
-folder. For example:
+Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
+and self-hosts them with your site. It fetches the
+[pinned version](#script-dep-versions), currently {{% param katex.version %}};
+to use a different one, set `params.katex.version`.
 
-- `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
-  pages, but not for other sections such as the blog.
-- [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html] -
-  hook is active for this page of the user guide only, which is how we actually
-  have it setup.
+> [!NOTE] Passthrough for selected sections
+>
+> For very large sites, you might want to restrict the passthrough to selected
+> sections. Do so by placing the passthrough hook in the section's `_markup`
+> folder. For example:
+>
+> - `layouts/docs/_markup/render-passthrough.html` - hook is active for all docs
+>   pages, but not for other sections such as the blog.
+> - [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html][] -
+>   hook is active for this page of the user guide only, which is how we
+>   actually have it setup.
 
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
-  https://github.com/google/docsy/blob/main/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
-
-{{% /alert %}}
+  https://github.com/google/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 
 ### Display of Chemical Equations and Physical Units
 
@@ -253,6 +259,7 @@ More complex equations can be displayed on their own line using the block
 delimiters defined:
 
 <!-- cSpell:ignore tetrahydroxozincate mchem -->
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 ````markdown
 \[
@@ -270,28 +277,25 @@ the equation:
 ```
 ````
 
-Both standard syntax and `chem` block renders to the same equation:
+Both standard syntax and `chem` blocks render to the same equation:
 
 <!-- prettier-ignore-start -->
 \[
 \tag*{(2)} \ce{Zn^2+  <=>[+ 2OH-][+ 2H+]  $\underset{\text{amphoteric hydroxide}}{\ce{Zn(OH)2 v}}$  <=>[+ 2OH-][+ 2H+]  $\underset{\text{tetrahydroxozincate}}{\ce{[Zn(OH)4]^2-}}$}
 \]
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
-{{% alert title="Note" %}} The
-[manual](https://mhchem.github.io/MathJax-mhchem/) for mchem's input syntax
-provides in-depth information about typesetting chemical formulae and physical
-units using the `mhchem` tool. {{% /alert %}}
+> [!NOTE]
+>
+> The [manual](https://mhchem.github.io/MathJax-mhchem/) for mchem's input
+> syntax provides in-depth information about typesetting chemical formulae and
+> physical units using the `mhchem` tool.
 
 Use of `mhchem` is not limited to the authoring of chemical equations. By using
 the included `\pu` command, pretty looking physical units can be written with
 ease, too. The following code sample produces two text lines with four numbers
 plus their corresponding physical units:
-
-Use of `mhchem` is not limited to the authoring of chemical equations, using the
-included `\pu` command, pretty looking physical units can be written with ease,
-too. The following code sample produces two text lines with four numbers plus
-their corresponding physical units:
 
 ```mhchem
 * Scientific number notation: \(\pu{1.2e3 kJ}\) or \(\pu{1.2E3 kJ}\) \\
@@ -313,18 +317,18 @@ variety of different diagram types, including flowcharts, sequence diagrams,
 class diagrams, state diagrams, ER diagrams, user journey diagrams, Gantt charts
 and pie charts.
 
-With Mermaid support enabled in Docsy, you can include the text definition of a
-Mermaid diagram inside a code block, and it will automatically be rendered by
-the browser as soon as the page loads.
+Mermaid support is automatically enabled when you use a `mermaid` code block on
+your page: the browser renders the text definition to a diagram as soon as the
+page loads.
 
 The great advantage of this is anyone who can edit the page can now edit the
-diagram - no more hunting for the original tools and version to make a new edit.
+diagram: no more hunting for the original tools and version to make a new edit.
 
 For example, the following defines a sequence diagram:
 
 <!-- cSpell:ignore autonumber -->
 
-````
+````markdown
 ```mermaid
 sequenceDiagram
     autonumber
@@ -360,40 +364,14 @@ sequenceDiagram
     Docsy user->>Docsy user: Being happy
 ```
 
-Support of Mermaid diagrams is automatically enabled as soon as you use a
-`mermaid` code block on your page.
-
-By default, Docsy pulls in the latest officially released version of Mermaid at
-build time. If that doesn't fit your needs, you can specify the wanted mermaid
-version inside your configuration file `hugo.toml`/`hugo.yaml`/`hugo.json`:
-
-<!-- prettier-ignore-start -->
-{{< tabpane >}}
-{{< tab header="Configuration file:" disabled=true />}}
-{{< tab header="hugo.toml" lang="toml" >}}
-[params.mermaid]
-version = "11.6.0"
-{{< /tab >}}
-{{< tab header="hugo.yaml" lang="yaml" >}}
-params:
-  mermaid:
-    version: 11.6.0
-{{< /tab >}}
-{{< tab header="hugo.json" lang="json" >}}
-{
-  "params": {
-    "mermaid": {
-      "version": "11.6.0"
-    }
-  }
-}
-{{< /tab >}}
-{{< /tabpane >}}
-<!-- prettier-ignore-end -->
+Docsy loads Mermaid from the jsDelivr CDN at page load, at the
+[pinned version](#script-dep-versions), currently {{% param mermaid.version %}};
+to use a different one, set `params.mermaid.version`.
 
 If needed, you can define custom settings for your diagrams, such as themes,
 padding in your `hugo.toml`/`hugo.yaml`/`hugo.json`.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -425,13 +403,14 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 See the
-[Mermaid documentation](https://mermaid-js.github.io/mermaid/#/Setup?id=mermaidapi-configuration-defaults)
-for a list of defaults that can be overridden.
+[Mermaid documentation](https://mermaid.js.org/config/configuration.html) for a
+list of defaults that can be overridden.
 
 Settings can also be overridden on a per-diagram basis by making use of a
-[frontmatter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
+[front matter config](https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables)
 block at the start of the diagram definition.
 
 ## UML Diagrams with PlantUML
@@ -449,7 +428,7 @@ Diagrams are defined using a simple and intuitive language.
 
 The following example shows a use case diagram:
 
-````
+````markdown
 ```plantuml
 participant participant as Foo
 actor       actor       as Foo1
@@ -491,6 +470,7 @@ Foo -> Foo7: To queue
 
 To enable/disable PlantUML, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -514,9 +494,13 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Other optional settings are:
 
+<!-- markdownlint-disable no-bare-urls -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -561,6 +545,7 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-restore -->
 
 ## MindMap support with MarkMap
 
@@ -569,7 +554,9 @@ text definitions to MindMap in the browser.
 
 For example, the following defines a simple MindMap:
 
-````
+<!-- markdownlint-disable code-fence-style -->
+<!-- prettier-ignore -->
+~~~~markdown
 ```markmap
 # markmap
 
@@ -596,7 +583,9 @@ For example, the following defines a simple MindMap:
     ```
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ```
-````
+~~~~
+
+<!-- markdownlint-restore -->
 
 Automatically renders to:
 
@@ -629,6 +618,7 @@ Automatically renders to:
 
 To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -652,6 +642,16 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
+### MarkMap version
+
+Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
+load, at the [pinned version](#script-dep-versions), currently
+{{% param markmap.version %}}; to use a different one, set
+`params.markmap.version`.
+
+[markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 
 ## Diagrams with Diagrams.net
 
@@ -669,10 +669,11 @@ Hover over the image below and click edit to instantly start working with it.
 Clicking the `Save` button will cause the edited diagram to be exported using
 the same filename and filetype, and downloaded to your browser.
 
-{{%alert title="Note" %}} If you're creating a new diagram, be sure to
-`File -> Export` in either `svg` or `png` format (`svg` is usually the best
-choice) and ensure the `Include a copy of my diagram` is selected so it can be
-edited again later. {{%/alert%}}
+> [!NOTE]
+>
+> If you're creating a new diagram, be sure to `File -> Export` in either `svg`
+> or `png` format (`svg` is usually the best choice) and ensure the
+> `Include a copy of my diagram` is selected so it can be edited again later.
 
 As the diagram data is transported via the browser, the diagrams.net server does
 not need to access the content on your Docsy server directly at all.
@@ -681,6 +682,7 @@ not need to access the content on your Docsy server directly at all.
 
 To enable detection of diagrams, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -704,12 +706,14 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 You can also
 [deploy and use your own server](https://github.com/jgraph/docker-drawio/blob/master/README.md)
 for editing diagrams, in which case update the configuration to point to that
 server:
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -733,3 +737,4 @@ params:
 {{< /tab >}}
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->

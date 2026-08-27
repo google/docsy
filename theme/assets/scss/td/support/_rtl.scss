@@ -1,0 +1,22 @@
+// Keep code blocks LTR, see: https://github.com/google/docsy/issues/2529
+
+/*rtl:ignore*/
+[dir='rtl'] {
+  .highlight,
+  pre,
+  pre code {
+    direction: ltr;
+    text-align: left;
+    unicode-bidi: plaintext;
+  }
+}
+
+/*rtl:ignore*/
+[dir='rtl'] {
+  .highlight pre button.td-click-to-copy {
+    left: auto;
+    right: 4px;
+  }
+}
+
+// For nav menu adjustments, see: _nav.scss.

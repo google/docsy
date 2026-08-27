@@ -15,12 +15,12 @@ my $SCRIPT_DIR = dirname(abs_path($0));
 my $PROJECT_ROOT = dirname(dirname($SCRIPT_DIR));
 
 my $BOOTSTRAP_SOURCE = "$PROJECT_ROOT/node_modules/bootstrap/js/src/scrollspy.js";
-my $CACHED_METHOD_FILE = "$PROJECT_ROOT/assets/_cache/bootstrap/scrollspy-method.js";
+my $CACHED_METHOD_FILE = "$PROJECT_ROOT/theme/assets/_cache/bootstrap/scrollspy-method.js";
 
 # Check if Bootstrap source exists
 unless (-f $BOOTSTRAP_SOURCE) {
     print STDERR "ERROR: Bootstrap source not found: $BOOTSTRAP_SOURCE\n";
-    print STDERR "  Make sure Bootstrap is installed: npm install\n";
+    print STDERR "  Make sure Bootstrap is installed: npm run install:safe\n";
     exit 1;
 }
 
@@ -55,8 +55,10 @@ unless ($method_content) {
     exit 1;
 }
 
-# Write cached method
+# Write cached method (binmode: LF bytes on every platform, so regeneration
+# is byte-identical to the committed file)
 open my $out_fh, '>', $CACHED_METHOD_FILE or die "Cannot write $CACHED_METHOD_FILE: $!";
+binmode $out_fh;
 print $out_fh $method_content;
 close $out_fh;
 

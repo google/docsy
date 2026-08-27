@@ -1,0 +1,334 @@
+//
+// Main navbar
+//
+
+// Should match Bootstrap's $link-underline-offset, see
+// https://getbootstrap.com/docs/5.3/utilities/link/#sass-utilities-api
+$td-link-underline-offsets: (
+  1: 0.125em,
+  2: 0.25em,
+  3: 0.375em,
+  4: 0.5em,
+) !default;
+
+@mixin td-navbar-dropdown-item-icon($fa-icon) {
+  &::before {
+    content: fa-content($fa-icon);
+    font: var(--fa-font-solid);
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.td-navbar {
+  @extend .navbar;
+  @extend .navbar-expand;
+
+  --bs-bg-opacity: 1;
+  --bs-link-underline-opacity: 0.75;
+  --td-navbar-bg-color: #{$td-navbar-bg-color};
+  --td-navbar-backdrop-filter: none;
+  --td-navbar-border-bottom: 1px solid var(--bs-border-color);
+
+  // To ensure that all child elements (such as form inputs) can inherit the
+  // right (light/dark) body color we set it explicitly here:
+  color: var(--bs-body-color);
+
+  background-color: var(--td-navbar-bg-color);
+  backdrop-filter: var(--td-navbar-backdrop-filter);
+  border-bottom: var(--td-navbar-border-bottom);
+
+  min-height: $td-navbar-min-height + $td-navbar__main-min-height-mobile;
+  margin: 0;
+  z-index: 32;
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &__logo {
+      display: flex;
+      align-items: center;
+    }
+
+    &__name {
+      font-weight: $font-weight-semibold;
+    }
+
+    svg {
+      height: 2rem;
+      // width: auto;
+    }
+  }
+
+  .navbar-nav {
+    white-space: nowrap;
+  }
+
+  .nav-link {
+    font-weight: $font-weight-semibold;
+
+    &:focus,
+    // Bootstrap sets .nav-link:focus-visible, but in a way that isn't
+    // compatible with dark mode. This is a known issue, see
+    // https://github.com/twbs/bootstrap/issues/37549:
+    //
+    // > Docs navbar blue focus visible is almost invisible!
+    //
+    // Fallback to browser default:
+    &:focus-visible {
+      outline: revert;
+      box-shadow: none;
+    }
+  }
+
+  // &__main { }
+
+  // For .td-search__input styling, see _search.scss
+
+  .dropdown {
+    min-width: 50px;
+  }
+
+  @include media-breakpoint-up(md) {
+    position: fixed;
+    top: 0;
+    min-height: $td-navbar-min-height;
+    width: 100%;
+
+    .nav-item {
+      padding-inline-end: $spacer * 0.5;
+    }
+  }
+
+  @import '_navbar-mobile-scroll';
+
+  &.td-navbar-cover {
+    transition:
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease,
+      border-bottom 0.3s ease;
+
+    &.td-navbar-transparent {
+      @include media-breakpoint-up(md) {
+        --bs-bg-opacity: 0.75;
+        --td-navbar-backdrop-filter: blur(8px);
+        --td-navbar-border-bottom: none;
+      }
+    }
+  }
+
+  .td-light-dark-menu {
+    position: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .bi {
+      // Adapted from:
+      // https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.125em;
+      fill: currentcolor;
+    }
+  }
+
+  .td-lang-menu,
+  .td-version-menu {
+    position: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .dropdown-item {
+      position: relative;
+      padding-left: 2.5rem;
+
+      &.active {
+        @include td-navbar-dropdown-item-icon($fa-var-check);
+      }
+
+      &-home {
+        @include td-navbar-dropdown-item-icon($fa-var-house);
+      }
+
+      &-latest {
+        font-weight: $font-weight-semibold;
+        &::after {
+          content: ' (latest)';
+        }
+      }
+
+      &-next {
+        &::after {
+          content: ' (next)';
+        }
+      }
+    }
+  }
+
+  .td-lang-menu {
+    &__title {
+      padding-left: 0;
+      padding-right: 0;
+
+      &::before {
+        font: var(--fa-font-solid);
+        content: fa-content($fa-var-globe);
+        padding-right: 0.5rem;
+      }
+
+      &-code {
+        display: none;
+      }
+
+      @include media-breakpoint-down(lg) {
+        &-text {
+          display: none;
+        }
+
+        &-code {
+          display: inline;
+        }
+
+        &::before {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}
+
+// EXPERIMENTAL better contrast for dark homepage navbar links. Opt-in via
+// body_class, or custom CSS, optionally guarded/wrapped by .td-home and/or
+// @include color-mode(dark):
+.td-navbar-links-all-active {
+  .nav-link {
+    // The homepage is the only page that does not have any navbar items
+    // that are active, because the user isn't viewing a page in any other
+    // section. Make nav-links more contrasted by setting all entries (which
+    // happen to be non-active) to the active color.
+    --bs-nav-link-color: var(--bs-navbar-active-color) !important;
+    --bs-nav-link-hover-color: var(--bs-navbar-active-color) !important;
+  }
+}
+
+// Icons
+#main_navbar {
+  li i {
+    padding-right: 0.5em;
+
+    &::before {
+      display: inline-block;
+      text-align: center;
+      min-width: 1em;
+    }
+  }
+
+  .alert {
+    background-color: inherit;
+    padding: 0;
+    color: $secondary;
+    border: 0;
+    font-weight: inherit;
+
+    &::before {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: $td-font-awesome-font-name;
+      font-weight: 900;
+      content: '\f0d9';
+      padding-left: 0.5em;
+      padding-right: 0.5em;
+    }
+  }
+}
+
+// Foldable sidebar menu
+nav.foldable-nav {
+  &#td-section-nav {
+    position: relative;
+  }
+
+  &#td-section-nav label {
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .td-sidebar-nav__section,
+  .with-child ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ul-1 > li,
+  .dropdown {
+    padding-left: 1.5em;
+  }
+
+  ul.foldable {
+    display: none;
+  }
+
+  input:checked ~ ul.foldable {
+    display: block;
+  }
+
+  input[type='checkbox'] {
+    display: none;
+  }
+
+  .with-child,
+  .without-child {
+    position: relative;
+    padding-left: 1.5em;
+  }
+
+  .ul-1 .with-child > label::before {
+    font: var(--fa-font-solid);
+    line-height: 1.5;
+    content: fa-content($fa-var-caret-right);
+
+    @at-root [dir='rtl'] & {
+      content: fa-content($fa-var-caret-left);
+    }
+
+    position: absolute;
+    left: 0.1em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    transition: all 0.5s;
+  }
+
+  .ul-1 .with-child > input:checked ~ label::before {
+    color: var(--bs-secondary-color);
+    transform: rotate(90deg);
+    transition: transform 0.5s;
+  }
+
+  .with-child ul {
+    margin-top: 0.1em;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  nav.foldable-nav {
+    .ul-1 .with-child > label:hover::before {
+      color: var(--bs-link-color);
+      transition: color 0.3s;
+    }
+
+    .ul-1 .with-child > input:checked ~ label:hover::before {
+      color: var(--bs-link-color);
+      transition: color 0.3s;
+    }
+  }
+}

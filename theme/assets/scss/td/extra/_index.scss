@@ -1,0 +1,29 @@
+// Experimental extra styles that projects can test run. These styles might
+// eventually be merged into the core Docsy theme.
+
+// @import 'bs-defaults'; // Commented out on purpose, see note below.
+@import 'buttons';
+@import 'main-container';
+@import 'navbar';
+
+// NOTE: we do NOT import bs-defaults here, to leave it opt-in for projects that
+// use Bootstrap's default color theme, like the Docsy and Docsy Example sites.
+
+// -----------------------------------------------------------------------------
+// Margin fix for nested lists [EXPERIMENTAL]
+
+body {
+  // --td-nested-lists-last-item-margin: initial;
+
+  &:not(.td-disable-nested-lists-last-item-margin) {
+    .td-content {
+      --td-nested-lists-last-item-margin: 1rem;
+
+      li > ul {
+        > li:last-child {
+          margin-bottom: var(--td-nested-lists-last-item-margin);
+        }
+      }
+    }
+  }
+}

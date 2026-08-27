@@ -1,0 +1,35 @@
+# cSpell:ignore pagelinks
+#
+# Version related parameters
+#
+# `version` identifies the published site variant (badge, welcome line, version
+# menu) and is not always a git ref. Content that needs a resolvable release
+# ref -- install commands, for example -- uses `tdVersion.latest`.
+#
+# archived_version: false # TODO: generalize status
+# version:
+#   status: archived # Then fetch include
+
+tdVersion:
+  latest: &tdLatestVers v0.16.0
+  dev: &tdDevVers v0.16.1-dev
+  buildId: ''
+
+version: *tdDevVers
+version_menu: *tdDevVers
+version_menu_pagelinks: true
+versions:
+  - name: '**Versions**'
+  - version: *tdDevVers
+    # kind: next
+    pagelinks: true
+    url: https://main--docsydocs.netlify.app # TODO: use next.docsy.dev once available
+  - version: *tdLatestVers
+    kind: latest
+    url: https://www.docsy.dev
+  - name: ---
+  - name: '**Variant**'
+  - name: Doc-rooted (experimental)
+    kind: home
+    pagelinks: false # TODO: drop this once /docs/* redirects are implemented
+    url: https://doc-rooted--docsydocs.netlify.app

@@ -1,0 +1,39 @@
+{{ $scssMain := "scss/main.scss" -}}
+{{/* Dart Sass sees only the stdin-fed entry file as first-party, so
+silenceDependencyDeprecations quiets everything else Hugo's importer loads,
+Docsy's own tree included (regression guards: see maintainer notes, "Sass
+deprecation warnings"). */ -}}
+{{ $css := resources.Get $scssMain
+      | toCSS (dict
+          "transpiler" "dartsass"
+          "enableSourceMap" (not hugo.IsProduction)
+          "silenceDependencyDeprecations" true) -}}
+
+{{/* postCSS runs for RTL languages (rtlcss) and, in production, only when the
+site opts in with a project-root postcss.config.*; dev skips it for speed. */ -}}
+
+{{ if eq .Site.Language.Direction "rtl" -}}
+  {{ $css = $css
+      | postCSS (dict "use" "autoprefixer rtlcss" "noMap" true)
+      | resources.Copy (replace $scssMain "." ".rtl.") -}}
+{{ else if and hugo.IsProduction (or
+      (os.FileExists "postcss.config.js")
+      (os.FileExists "postcss.config.mjs")
+      (os.FileExists "postcss.config.cjs")) -}}
+  {{ $css = $css | postCSS -}}
+{{ end -}}
+
+{{ if hugo.IsProduction -}}
+  {{ $css = $css | minify | fingerprint -}}
+  <link rel="preload" href="{{ $css.RelPermalink }}" as="style" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+{{ end -}}
+
+{{ with $css -}}
+  <link href="{{ .RelPermalink }}" rel="stylesheet"
+  {{- with .Data.Integrity }} integrity="{{ . }}" crossorigin="anonymous"{{ end -}}
+  >
+{{ else -}}
+  {{ errorf "Resource not found or error building CSS: %s" $scssMain -}}
+{{ end -}}
+
+{{- /**/ -}}

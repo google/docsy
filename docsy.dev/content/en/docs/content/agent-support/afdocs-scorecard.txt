@@ -1,0 +1,55 @@
+Agent-Friendly Docs Scorecard
+==============================
+
+http://localhost:1313 · 8/25/2026, 4:17:55 PM
+
+  Overall Score: 96 / 100 (A)
+
+  Category Scores:
+    Content Discoverability              100 / 100 (A+)
+    Markdown Availability                 57 / 100 (F)
+    Page Size and Truncation Risk        100 / 100 (A+)
+    Content Structure                    100 / 100 (A+)
+    URL Stability and Redirects          100 / 100 (A+)
+    Observability and Content Health     100 / 100 (A+)
+    Authentication and Access            100 / 100 (A+)
+
+  Check Results:
+
+    Content Discoverability
+      PASS  llms-txt-exists                llms.txt found at http://localhost:1313/llms.txt
+      PASS  llms-txt-valid                 llms.txt follows the proposed structure (H1, blockquote, heading-delimited link sections)
+      PASS  llms-txt-size                  llms.txt is 1,129 characters (under 50,000 threshold)
+      PASS  llms-txt-links-resolve         All 13 same-origin links resolve (13 total links)
+      PASS  llms-txt-links-markdown        13/13 same-origin links point to markdown content (100%)
+      PASS  llms-txt-directive-html        llms.txt directive found in HTML of all 50 sampled pages, near the top of content
+      PASS  llms-txt-directive-md          llms.txt directive found in markdown of all 45 sampled pages, near the top of content; 5 had no markdown version
+
+    Markdown Availability
+      PASS  markdown-url-support           45/50 sampled pages support .md URLs (90%)
+      FAIL  content-negotiation            Server ignores Accept: text/markdown header (0/50 sampled pages return markdown)
+            Fix: Your server ignores Accept: text/markdown and returns HTML. Some agents (Claude Code, Cursor, OpenCode) request markdown this way. Configure your server to honor content negotiation.
+
+    Page Size and Truncation Risk
+      PASS  rendering-strategy             All 50 sampled pages contain server-rendered content
+      PASS  page-size-markdown             All 45 pages under 50K chars (median 4K, max 47K)
+      PASS  page-size-html                 All 50 sampled pages under 50K chars (median 54K HTML → 9K markdown (81% boilerplate))
+      PASS  content-start-position         Content starts within first 10% on all 50 sampled pages (median 0%)
+
+    Content Structure
+      PASS  tabbed-content-serialization   8 tab group(s) across 7 of 50 sampled pages; all serialize under 50K chars
+      SKIP  section-header-quality         7 page(s) with tabs found, but no section headers inside tab panels to evaluate
+      PASS  markdown-code-fence-validity   All 157 code fences properly closed across 46 pages
+
+    URL Stability and Redirects
+      PASS  http-status-codes              All 50 sampled pages return proper error codes for bad URLs
+      PASS  redirect-behavior              No redirects detected across 50 sampled pages
+
+    Observability and Content Health
+      PASS  cache-header-hygiene           All 51 endpoints have appropriate cache headers
+
+    Authentication and Access
+      PASS  auth-gate-detection            All 50 sampled pages are publicly accessible
+      SKIP  auth-alternative-access        All docs pages are publicly accessible; no alternative access paths needed
+
+Full spec: https://agentdocsspec.com/spec/

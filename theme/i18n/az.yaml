@@ -1,0 +1,61 @@
+# UI strings. Buttons and similar.
+ui_pager_prev: Əvvəlki
+ui_pager_next: Növbəti
+ui_read_more: Daha çox oxu
+ui_search: Bu saytda axtarın...
+
+# Used in sentences such as "Posted in News"
+ui_in: daxilində
+
+# Used in sentences such as "All Tags"
+ui_all: bütün
+
+# Footer text
+footer_all_rights_reserved: Bütün Hüquqlar Qorunur
+
+footer_privacy_policy: Məxfilik Siyasəti
+
+# Post (blog, articles etc.)
+post_byline_by: tərəfindən
+post_created: Yaradıldı
+post_last_mod: Son redaktə
+post_edit_this: Bu səhifəni redaktə edin
+post_view_this: Səhifənin mənbəyini görüntülə
+post_create_child_page: Alt səhifə yaradın
+post_create_issue: Sənəd mövzusu yaradın
+post_create_project_issue: Layihə mövzusu yaradın
+post_posts_in: Yazılar daxilində
+post_reading_time: dəqiqə oxuma
+post_less_than_a_minute_read: 1 dəqiqədən az
+
+# Print support
+print_printable_section: Bu bölmə çap üçün uyğundur.
+print_click_to_print: Çap etmək üçün klikləyin
+print_show_regular: Bu səhifənin adi görünüşünə qayıdın
+print_entire_section: Bütün bölməni çap edin
+
+# Community
+community_join: >-
+  {{ .Site.Title }} icmasına qoşulun
+community_introduce: >-
+  {{ .Site.Title }} hər kəsin istifadə edə biləcəyi, inkişaf etdirə biləcəyi və
+  zövq ala biləcəyi açıq mənbəli bir layihədir. Bizə qoşulmağınızı çox istərdik!
+  Budur iştirak etməyin və layihə haqqında məlumat əldə etməyin bir neçə yolu.
+community_learn: Öyrənin və Bağlanın
+community_using: >-
+  {{ .Site.Title }} istifadə edirsiniz və ya istifadə etmək fikrindəsiniz? Daha
+  çox məlumatı buradan əldə edə bilərsiniz:
+community_develop: İnkişaf etdirin və Töhfə verin
+community_contribute: >-
+  Əgər {{ .Site.Title }}-a daha çox töhfə vermək istəyirsinizsə, bizə burada
+  qoşulun:
+community_how_to: >-
+  {{ .Site.Title }}-a necə töhfə verməyi bizim
+community_guideline: >-
+  Töhfə Təlimatlarımız
+
+# Feedback
+feedback_title: Rəy
+feedback_question: Bu səhifə sizin üçün faydalı oldu?
+feedback_positive: Bəli
+feedback_negative: Xeyr

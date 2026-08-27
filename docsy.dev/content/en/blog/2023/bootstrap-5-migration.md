@@ -9,7 +9,7 @@ author: >
   [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc))
 date: 2023-06-05
 canonical_url: https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/
-cSpell:ignore: CNCF Chalin opentelemetry techdocs
+cSpell:ignore: opentelemetry techdocs
 ---
 
 [Docsy](https://docsy.dev), and Docsy-based project websites ([including those
@@ -63,6 +63,8 @@ breakpoint. Thankfully, a similar change isn't required of
 If you forget to make this non-obviously breaking layout change, your project's
 responsive layouts will likely start misbehaving in apparently strange ways.
 
+<!-- markdownlint-disable no-shortcut-ref-link -->
+
 For details and an example, see:
 
 - [Sass](https://getbootstrap.com/docs/5.2/migration/#sass) section of the
@@ -113,10 +115,8 @@ References:
 
 - [[BSv5] Row/col formatting breaks Docsy components #1466](https://github.com/google/docsy/issues/1466),
   in particular
-  - [[BSv5] Footer fixes: reset flex-shrink, and more·](https://github.com/google/docsy/pull/1373)
-    [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1373](https://github.com/google/docsy/pull/1373)
-  - [[BSv5] Footer: drop flex-shrink tweak + other adjustments ·](https://github.com/google/docsy/pull/1523)
-    [Docsy PR](https://github.com/google/docsy/pull/1367)[ #1523](https://github.com/google/docsy/pull/1523)
+  - [[BSv5] Footer fixes: reset flex-shrink, and more · Docsy PR #1373](https://github.com/google/docsy/pull/1373)
+  - [[BSv5] Footer: drop flex-shrink tweak + other adjustments · Docsy PR #1523](https://github.com/google/docsy/pull/1523)
 - [Why are all col classes 'position: relative'? · Bootstrap v4 issue #25254](https://github.com/twbs/bootstrap/issues/25254)
 - [Why flex-shrink 0 for all columns? · Bootstrap discussion #37951](https://github.com/orgs/twbs/discussions/37951)
 
@@ -132,8 +132,7 @@ import strategy chosen, due to a Sass map initialization limitation,
 Bootstrap-client projects need to perform (emphasis mine):
 
 > ... variable customizations ... **after** `@import "functions"`, but
-> **before** > `@import "variables"` and the rest of [the Bootstrap] import
-> stack.
+> **before** `@import "variables"` and the rest of [the Bootstrap] import stack.
 
 For details, see
 [New \_maps.scss](https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss)
@@ -229,6 +228,8 @@ Docsy-specific changes, consult the
 but important change to be aware of is:
 [[BSv5] Docsy variables cleanup ... PR #1462](https://github.com/google/docsy/pull/1462).
 
+<!-- markdownlint-enable no-shortcut-ref-link -->
+
 ## Give it a try!
 
 To get a first and quick impression of the impact of the upgrade on your
@@ -271,11 +272,10 @@ to the migration effort.
     [Docsy up to Bootstrap 5.3](https://github.com/google/docsy/issues/1528).
 
 _A version of this article originally appeared as the [CNCF blog][] post
-[Migrating Docsy to Bootstrap 5 ][original post]._
+[Migrating Docsy to Bootstrap 5][original post]._
 
 [cncf blog]: https://www.cncf.io/blog/
 [cncf-docsy]:
   https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/
 [followup blog post]: /blog/2023/docsy-0.7/
-
-[original post]: {{% param canonical_url %}}
+[original post]: <{{% param canonical_url %}}>

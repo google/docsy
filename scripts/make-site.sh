@@ -1,18 +1,24 @@
 #!/bin/bash
-# cSpell:ignore autoprefixer docsy postcss themesdir github oneline
+# cSpell:ignore themesdir oneline
 set -eo pipefail
 
-DEPS="autoprefixer postcss-cli"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+DEPS=""
 DOCSY_REPO_DEFAULT="google/docsy"
 DOCSY_REPO=$DOCSY_REPO_DEFAULT
 DOCSY_VERS=""
 DOCSY_SRC="NPM"
 FORCE_DELETE=false
-: ${HUGO:=npx hugo}
+# No fallback when the repo install is absent; bare-npx rationale:
+# tests/runner-lint.test.mjs. Exported for the scaffolded site's hugo
+# script (see _npm_install).
+: "${HUGO:=$SCRIPT_DIR/../node_modules/.bin/hugo}"
+export HUGO
 SITE_NAME="test-site"
 THEMESDIR="node_modules"
 VERBOSE=1
-OUTPUT_REDIRECT="" # Use along with VERBOSE
+OUTPUT_REDIRECT=""
 
 function _usage() {
   cat <<EOS
@@ -24,7 +30,9 @@ Usage: `basename $0` [options]
 
   -f            Force delete SITE_NAME if it exists before recreating it
   -h            Output this usage info
-  -l PATH       Use local Docsy from PATH. Default: '$THEMESDIR'
+  -l PATH       Use local Docsy from PATH: an installed checkout (theme
+                dependencies present, e.g. via npm run install:safe).
+                Default: '$THEMESDIR'
   -n SITE_NAME  Name of directory to create for the Hugo generated site.
                 Default: '$SITE_NAME'
   -q            Run a bit more quietly.
@@ -92,7 +100,6 @@ function process_CLI_args() {
   fi
 }
 
-# Create site directory, checking if it exists first
 function create_site_directory() {
   if [ -e "$SITE_NAME" ]; then
     if [ "$FORCE_DELETE" = true ]; then
@@ -107,7 +114,40 @@ function create_site_directory() {
 
 function _npm_install() {
   npm init -y > /dev/null
-  npm install --omit dev --save $DEPS
+  # npm silently ignores config keys it doesn't know (min-release-age on
+  # older npm), which would drop the release cooldown; refuse rather than
+  # degrade. The floor matches the repo's own engines.npm.
+  npm pkg set 'engines.npm=>=11.16.0' > /dev/null
+  # Consumer-simulation installs are unlocked by design, but script-free:
+  # Docsy declares no install hooks and none of these deps needs install
+  # scripts. Pin that for the site's own installs, plus a registry-release
+  # cooldown; the command also carries --ignore-scripts so higher-precedence
+  # ambient config can't weaken the policy. script-shell keeps the hugo
+  # script's $HUGO expansion working on Windows (Git Bash, per the repo's
+  # own .npmrc doctrine).
+  printf 'engine-strict=true\nignore-scripts=true\nmin-release-age=7\nscript-shell=bash\n' > .npmrc
+  # HUGO_MODULE sites get Bootstrap and Font Awesome from the theme via
+  # `hugo mod npm pack` (see below). Non-RTL sites need no PostCSS toolchain.
+  if [[ "$DOCSY_SRC" != HUGO* ]]; then
+    npm install --ignore-scripts --omit dev --save $DEPS
+  fi
+  if [[ "$DOCSY_SRC" == "NPM" ]]; then
+    # No install hook fetches the theme's runtime deps; run the documented
+    # command explicitly. The .npmrc above doesn't reach this leg (--prefix
+    # re-roots npm's project config at the installed package), so the command
+    # carries its protections inline: lock-exact npm ci with --ignore-scripts.
+    npm run --prefix "$THEMESDIR/docsy" install:theme-deps
+  fi
+  # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; the
+  # site provides it, mirroring the documented consumer setup for every
+  # Docsy source. Runs after the --omit=dev install above, which would
+  # prune it.
+  npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
+  # The documented hugo passthrough script, with one harness twist: hugo is
+  # the borrowed repo binary ($HUGO, expanded by the script shell at run
+  # time), not a bare name. A name lookup would need the repo's bin dir on
+  # PATH, whose sass could then mask a missing site compiler.
+  npm pkg set 'scripts.hugo="$HUGO"'
 }
 
 function set_up_and_cd_into_site() {
@@ -118,17 +158,16 @@ function set_up_and_cd_into_site() {
   if [[ "$DOCSY_SRC" == HUGO* ]]; then
     _set_up_site_using_hugo_modules
   else
-    echo "theme: docsy" >> hugo.yaml
+    echo "theme: docsy/theme" >> hugo.yaml
     echo "themesDir: $THEMESDIR" >> hugo.yaml
   fi
 }
 
 function _set_up_site_using_hugo_modules() {
   local user_name=$(whoami)
-  # : ${user_name:=$USER}
-  # : ${user_name:="me"}
 
-  HUGO_MOD_WITH_VERS=$DOCSY_REPO
+  # The Docsy theme lives in the theme/ subfolder of the Docsy repo.
+  HUGO_MOD_WITH_VERS="$DOCSY_REPO/theme"
   if [[ -n $DOCSY_VERS ]]; then
     HUGO_MOD_WITH_VERS+="@$DOCSY_VERS"
   fi
@@ -158,11 +197,16 @@ function _set_up_site_using_hugo_modules() {
       git log --oneline -$DEPTH && \
       if [[ -n $SWITCH_NEEDED ]]; then git switch --detach $DOCSY_VERS; fi \
     )
-    echo "replace github.com/$DOCSY_REPO_DEFAULT => ./tmp/docsy" >> go.mod
-    eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT" $OUTPUT_REDIRECT
+    echo "replace github.com/$DOCSY_REPO_DEFAULT/theme => ./tmp/docsy/theme" >> go.mod
+    eval "$HUGO mod get github.com/$DOCSY_REPO_DEFAULT/theme" $OUTPUT_REDIRECT
   fi
 
-  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT, disable: false}]}" >> hugo.yaml
+  echo "module: {proxy: direct, hugoVersion: {extended: true}, imports: [{path: github.com/$DOCSY_REPO_DEFAULT/theme, disable: false}]}" >> hugo.yaml
+
+  # Consolidate the theme's declared npm deps into this project's workspace,
+  # then install them script-free: none of these deps needs install scripts.
+  eval "$HUGO mod npm pack" $OUTPUT_REDIRECT
+  eval "npm install --ignore-scripts --no-audit --no-fund" $OUTPUT_REDIRECT
 }
 
 function main() {
@@ -177,12 +221,12 @@ function main() {
     echo "[INFO] Getting Docsy as NPM package '$NPM_PKG'"
     DEPS+=" $NPM_PKG"
   elif [[ "$DOCSY_SRC" == "LOCAL" ]]; then
-    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR"
+    echo "[INFO] Getting Docsy through a local directory '$THEMESDIR'"
   fi
 
   [[ $VERBOSE ]] && set -x
   set_up_and_cd_into_site
-  eval $HUGO $OUTPUT_REDIRECT # Generate site
+  eval npm run hugo $OUTPUT_REDIRECT
   [[ $VERBOSE ]] && set +x
   cd ..
 

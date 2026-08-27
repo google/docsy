@@ -1,22 +1,28 @@
 ---
 title: Before you begin
-date: 2021-12-08T11:12:59+01:00
+date: 2021-12-08
 weight: 1
 description: >
   Prerequisites for building a site with Docsy as a Hugo Module.
 ---
 
-This page describes the prerequisites for building a site that uses Docsy as a Hugo Module.
+This page describes the prerequisites for building a site that uses Docsy as a
+Hugo Module.
 
 ## Install Hugo
 
-You need a [recent **extended** version](https://github.com/gohugoio/hugo/releases) (version 0.146.0 or later) of [Hugo](https://gohugo.io/) to do local builds and previews of sites (like this one) that use Docsy. If you install from the release page, make sure to get the `extended` Hugo version, which supports [SCSS](https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html); you may need to scroll down the list of releases to see it.
+You need a
+[recent **extended** version](https://github.com/gohugoio/hugo/releases)
+(version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
+to do local builds and previews of sites (like this one) that use Docsy. If you
+install from the release page, make sure to get the `extended` Hugo version; you
+may need to scroll down the list of releases to see it.
 
-For comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support). For
+comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
 
 ### On Linux
-
-Be careful using `sudo apt-get install hugo`, as it [doesn't get you the `extended` version for all Debian/Ubuntu versions](https://gohugo.io/getting-started/installing/#debian-and-ubuntu), and may not be up-to-date with the most recent Hugo version.
 
 If you've already installed Hugo, check your version:
 
@@ -24,12 +30,16 @@ If you've already installed Hugo, check your version:
 hugo version
 ```
 
-If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll need to install the latest version. You can see a complete list of Linux installation options in [Install Hugo](https://gohugo.io/getting-started/installing/#linux). The following shows you how to install Hugo from the release page:
+If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
+see `Extended`, you'll need to install the latest version. You can see a
+complete list of Linux installation options in
+[Install Hugo](https://gohugo.io/installation/linux/). The following shows you
+how to install Hugo from the release page:
 
 1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
 2.  In the most recent release, scroll down until you find a list of
     **Extended** versions.
-3.  Download the latest extended version (`hugo_extended_0.1XX_Linux-64bit.tar.gz`).
+3.  Download the latest extended version.
 4.  Create a new directory:
 
     ```bash
@@ -52,87 +62,136 @@ If the result is `v0.109.0` or earlier, or if you don't see `Extended`, you'll n
 
 ### On macOS
 
-Install Hugo using [Brew](https://gohugo.io/getting-started/installing/#homebrew-macos).
+Install Hugo using [Brew](https://gohugo.io/installation/macos/#homebrew).
 
 ### As an `npm` module
 
-You can install Hugo as an `npm` module using [`hugo-bin`](https://www.npmjs.com/package/hugo-bin). This adds `hugo-bin` to your `node_modules` folder and adds the dependency to your `package.json` file.  To install the extended version of Hugo:
+You can conveniently install any Hugo version using [hugo-extended][] (replace
+`latest` with the version you want to install):
 
 ```bash
-npm install hugo-extended --save-dev
+npm install hugo-extended@latest --save-dev
 ```
 
-See the [`hugo-bin` documentation](https://www.npmjs.com/package/hugo-bin) for usage details.
+## Install Dart Sass
+
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
+Hugo compiles Docsy's [SCSS][] using the [Dart Sass][] transpiler, which Hugo
+looks up as the `sass` CLI on its `PATH`. For npm-based sites, install the
+[`sass-embedded`][sass-embedded] package from your project root, at the version
+Docsy is tested with:
+
+```bash
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+```
+
+The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through
+[npm scripts][]. For example, with the following in your `package.json`:
+
+```json
+{
+  "scripts": {
+    "hugo": "hugo"
+  }
+}
+```
+
+run any Hugo command as `npm run hugo -- ARGS`, for example
+`npm run hugo -- server` to serve your site locally.
+
+For non-npm setups, see [Hugo's Dart Sass installation guide][hugo-dart-sass].
+For the officially supported Dart Sass version, see
+[Official support](/project/about/changelog/#official-support).
 
 ## Install Go language
 
-Hugo's commands for module management require that the Go programming language is installed on your system. Check whether `go` is already installed:
+Hugo's commands for module management require that the Go programming language
+is installed on your system. Check whether `go` is already installed:
 
 ```console
 $ go version
-go version go1.24.3
+go version go1.25.6
 ```
 
 Ensure that you are using version 1.12 or higher.
 
-If the `go` language is not installed on your system yet or if you need to upgrade, go to the [download area](https://go.dev/dl/) of the Go website, choose the installer for your system architecture and execute it. Afterwards, check for a successful installation.
-
+If the `go` language is not installed on your system yet or if you need to
+upgrade, go to the [download area](https://go.dev/dl/) of the Go website, choose
+the installer for your system architecture and execute it. Afterwards, check for
+a successful installation.
 
 ## Install Git VCS client
 
-Hugo's commands for module management require that the `git` client is installed on your system. Check whether `git` is already present in your system:
+Hugo's commands for module management require that the `git` client is installed
+on your system. Check whether `git` is already present in your system:
 
 ```console
 $ git version
-git version 2.49.0
+git version 2.52.0
 ```
 
-If no `git` client is installed on your system yet, go to the [Git website](https://git-scm.com/), download the installer for your system architecture and execute it. Afterwards, check for a successful installation.
+If no `git` client is installed on your system yet, go to the
+[Git website](https://git-scm.com/), download the installer for your system
+architecture and execute it. Afterwards, check for a successful installation.
 
-## Install PostCSS
+## Install Node.js
 
-To build or update your site's CSS resources, you also need [`PostCSS`](https://postcss.org/) to create the final assets. If you need to install it, you must have a recent version of [NodeJS](https://nodejs.org/en/) installed on your machine so you can use `npm`, the Node package manager. By default `npm` installs tools under the directory where you run [`npm install`](https://docs.npmjs.com/cli/v10/commands/npm-install#description):
+Docsy sources its Bootstrap and Font Awesome assets from npm, so you need
+[Node.js](https://nodejs.org/) (which provides `npm`, the Node package manager)
+to install them. Install or upgrade to the active [long-term support (LTS)
+release][node-lts], then check your version:
 
 ```bash
-npm install -D autoprefixer
-npm install -D postcss-cli
+node -v
 ```
 
-Starting in [version 8 of `postcss-cli`](https://github.com/postcss/postcss-cli/blob/master/CHANGELOG.md), you must also separately install `postcss`:
+You install these assets when you create your site, as described in the next
+steps.
+
+## Install PostCSS (optional) {#install-postcss}
+
+This section applies to all [installation options](/docs/get-started/), not just
+Hugo-module setups.
+
+Docsy builds its CSS without [PostCSS](https://postcss.org/) by default -- the
+shipped CSS targets the [Browserslist `defaults`][browserslist-defaults]
+browsers -- so most sites don't need it. Install PostCSS only if:
+
+- Your site has a **[right-to-left (RTL)][rtl]** language, or
+- You post-process your own CSS with a project-root
+  `postcss.config.{js,mjs,cjs}` file.
+
+If either applies, install PostCSS from your project root:
 
 ```bash
-npm install -D postcss
+npm install --save-dev autoprefixer postcss-cli
 ```
 
-Note that versions of `PostCSS` later than 5.0.1 will not load `autoprefixer` if installed [globally](https://flaviocopes.com/npm-packages-local-global/), you must use a local install.
-
-
-## Install/Upgrade Node.js
-
-To ensure you can properly build your site beyond executing `hugo server`, you must have the [latest long term support (LTS) Version](https://nodejs.org/en/about/releases/) of Node.js. If you do not have the latest LTS version, you may see the one of following errors:
-
-```
-Error: Error building site: POSTCSS: failed to transform "scss/main.css" (text/css): Unexpected identifier
-#OR
-/home/user/repos/my-new-site/themes/docsy/node_modules/hugo-extended/postinstall.js:1
-import install from "./lib/install.js";
-       ^^^^^^^
-
-SyntaxError: Unexpected identifier
-    at Module._compile (internal/modules/cjs/loader.js:723:23)
-    at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)
-    at Module.load (internal/modules/cjs/loader.js:653:32)
-    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
-    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
-    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)
-    at startup (internal/bootstrap/node.js:283:19)
-    at bootstrapNodeJSCore (internal/bootstrap/node.js:623:3)
-
-```
+> [!NOTE]
+>
+> npm also installs [postcss][] itself, as a peer dependency of the packages
+> listed above. If you use a package manager that doesn't auto-install peer
+> dependencies, such as Yarn, add `postcss` to the install command.
 
 ## What's next?
 
-With all prerequisites installed, choose how to start off with your new Hugo site
+With all prerequisites installed, choose how to start off with your new Hugo
+site
 
-* [Start with a prepopulated site (for beginners)](/docs/get-started/docsy-as-module/example-site-as-template/)
-* [Start site from scratch (for experts)](/docs/get-started/docsy-as-module/start-from-scratch/)
+- [Start with a prepopulated site (for beginners)](example-site-as-template/)
+- [Start site from scratch (for experts)](start-from-scratch/)
+
+<!-- prettier-ignore-start -->
+[browserslist-defaults]: https://github.com/browserslist/browserslist
+[dart sass]: https://sass-lang.com/dart-sass/
+[hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
+[hugo-extended]: https://www.npmjs.com/package/hugo-extended
+[node-lts]: https://nodejs.org/en/about/releases/
+[npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
+[postcss]: https://www.npmjs.com/package/postcss
+[rtl]: /docs/language/#right-to-left-languages
+[sass-embedded]: https://www.npmjs.com/package/sass-embedded
+[SCSS]: https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html
+<!-- prettier-ignore-end -->

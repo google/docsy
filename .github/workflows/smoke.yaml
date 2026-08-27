@@ -1,16 +1,13 @@
 # Smoke test across OSs: build a Docsy-based site from scratch,
 # using Docsy as hugo module and fetching Docsy via NPM.
-# cSpell:ignore docsy github
 
 name: smoke
 
 on:
-  push:
-    branches: [main]
+  push: { branches: [main] }
   pull_request:
-  # schedule: # midnight every day
-  #   - cron: '0 0 * * *'
   workflow_dispatch:
+permissions: { contents: read }
 
 jobs:
   new-site:
@@ -29,36 +26,49 @@ jobs:
     # if: github.event_name != 'pull_request' && matrix.os != 'windows-latest'
     if: github.event_name != 'push' || github.repository == 'google/docsy'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with: { persist-credentials: false }
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: package.json
 
-      - name: Setup workspace
+      - name: Install the repo toolchain
+        run: npm run install:safe
+        shell: bash
+
+      - name: 'Sanity check: install left the working tree pristine'
+        run: npm run -s is:clean
+
+      # Outside the repo tree: npm run PATH-walks ancestor
+      # node_modules/.bin dirs, so an in-repo scaffold could silently
+      # borrow the repo's sass.
+      - name: Create the site scaffold directory
         run: |
-          npm install
-          mkdir -p tmp && cd tmp && npm init -y
+          SCAFFOLD="$RUNNER_TEMP/docsy-smoke"
+          echo "SCAFFOLD=$SCAFFOLD" >> "$GITHUB_ENV"
+          mkdir -p "$SCAFFOLD" && cd "$SCAFFOLD" && npm init -y
         shell: bash
 
       - name: Make site (non-PR)
         if: github.event_name != 'pull_request'
-        working-directory: tmp
-        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
+        working-directory: ${{ env.SCAFFOLD }}
+        run: |
+          "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $BASE_REPO -v $SHA
         shell: bash
 
       - name: Make site from PR
         if: github.event_name == 'pull_request'
-        working-directory: tmp
-        run: ../scripts/make-site.sh -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
+        working-directory: ${{ env.SCAFFOLD }}
+        run: |
+          "$GITHUB_WORKSPACE/scripts/make-site.sh" -s ${{ matrix.docsy-src }} -r $PR_REPO -v $BRANCH
         shell: bash
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: tmp-site-${{ matrix.os }}-${{ matrix.docsy-src }}
           path: |
-            tmp
+            ${{ env.SCAFFOLD }}
             !**/node_modules
             !**/resources

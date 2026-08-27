@@ -1,0 +1,20 @@
+<ul class="td-footer__links-list">
+  {{ range . }}
+  {{ $rel := .rel | string -}}
+  {{ $url := .url -}}
+  {{ $isExternal := (urls.Parse $url).IsAbs -}}
+  {{ if $isExternal -}}
+    {{ $rel = cond $rel (add $rel " noopener") "noopener" -}}
+  {{ else -}}
+    {{ with site.GetPage $url }}{{ $url = .RelPermalink }}{{ end -}}
+  {{ end -}}
+  <li class="td-footer__links-item" data-bs-toggle="tooltip" title="{{ .name }}" aria-label="{{ .name }}">
+    <a href="{{ $url }}" aria-label="{{ .name }}"
+      {{- if $isExternal }} target="_blank" {{- end -}}
+      {{ with $rel }} rel="{{ . }}" {{- end -}}
+    >
+      <i class="{{ .icon }}"></i>
+    </a>
+  </li>
+  {{ end }}
+</ul>
