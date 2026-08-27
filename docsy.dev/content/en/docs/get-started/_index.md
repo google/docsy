@@ -4,7 +4,7 @@ description: >-
   Learn how to get started with Docsy, including the available options for
   installing and using the Docsy theme.
 date: 2018-07-30
-aliases: [getting-started]
+aliases: [getting-started, /docs/get-started/quickstart-docker/]
 weight: 2
 ---
 
@@ -16,8 +16,7 @@ our example site, though we also provide instructions for adding the Docsy theme
 manually to new or existing sites.
 
 If you want to build and test your site locally you also need to be able to run
-Hugo itself, either by installing it and any other required dependencies, or by
-using our provided Docker container.
+Hugo itself, by installing it and any other required dependencies.
 
 This page describes Docsy's installation options and helps you choose the
 appropriate setup guide to get started.
