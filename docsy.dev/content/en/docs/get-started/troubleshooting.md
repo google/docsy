@@ -49,8 +49,8 @@ npm scripts, as explained in [Install Dart Sass][].
 >
 > A warm Hugo transform cache can mask this problem: if your site was previously
 > built with Dart Sass available, later builds without it can succeed by reusing
-> the cached CSS. To verify your setup, clear the `resources` cache directory
-> and rebuild.
+> the cached CSS. To verify your setup, clear the site's resources cache
+> directory ([`resourceDir`][], `resources` by default) and rebuild.
 
 ## Known issues
 
@@ -112,6 +112,7 @@ filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 [Dart Sass]: https://sass-lang.com/dart-sass/
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[`resourceDir`]: https://gohugo.io/configuration/all/#resourcedir
 [`sass-embedded`]: https://www.npmjs.com/package/sass-embedded
 [setup]: /docs/get-started/
 [submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule

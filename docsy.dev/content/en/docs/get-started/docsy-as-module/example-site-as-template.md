@@ -33,6 +33,12 @@ npm run serve
 Preview at <http://localhost:1313/>. If the build fails, see
 [Troubleshooting][].
 
+> [!NOTE]
+>
+> On Windows, the site's npm scripts run under Bash, which ships with
+> [Git for Windows](https://gitforwindows.org/): make sure that `bash` is on
+> your `PATH`.
+
 ## Detailed Setup instructions
 
 ### Clone the Docsy example site
