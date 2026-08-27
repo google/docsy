@@ -3,7 +3,7 @@ title: Changelog
 description: Docsy repository changelog
 aliases: [../changelog]
 # prettier-ignore
-cSpell:ignore: deining FOUC gitmodules gtag katex lookandfeel mhchem navs notoc tabpane onedark shurup
+cSpell:ignore: deining FOUC gitmodules gtag lookandfeel mhchem navs notoc tabpane onedark shurup
 ---
 
 We document **breaking changes** and release **highlights** in this page, with
@@ -179,9 +179,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
-- Dropped official Docker support: removed the broken `Dockerfile` and
-  `docker-compose.yaml` files and retired the Docker quickstart page
-  ([#2748][]).
+- Dropped broken `Dockerfile` and `docker-compose.yaml` files and retired Docker
+  quickstart page ([#2748][]).
 
 **For maintainers**:
 
