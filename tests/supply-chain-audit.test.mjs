@@ -290,8 +290,9 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   // Not CI-run, but they wield the pin-update and script-approval
   // authority; pin the reviewed forms (explicit --allow-scripts-pin keeps
-  // the approval version-scoped regardless of user npm config; the X.Y.Z
-  // guards keep tags, ranges, and prereleases out of the pins).
+  // the approval version-scoped regardless of user npm config; the
+  // update-dep helper guards versions and dep membership, unit-tested in
+  // scripts/update-dep.test.mjs).
   assert.equal(
     scripts['approve:hugo'],
     'npm run _install:safe:pre && npm approve-scripts --allow-scripts-pin hugo-extended && npm run -s _test:supply-chain && npm run _install:safe:post',
@@ -304,13 +305,13 @@ test('manifests: the install path keeps its locked, script-free form', () => {
   );
   assert.equal(
     scripts['update:hugo'],
-    'bash -c \'[[ "$1" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:hugo -- X.Y.Z" >&2; exit 1; }; npm install -DE --ignore-scripts "hugo-extended@$1"\' -',
-    'update:hugo is the guarded, script-free pin bump',
+    'node scripts/update-dep.mjs hugo',
+    'update:hugo runs the guarded update helper',
   );
   assert.equal(
     scripts['update:theme-dep'],
-    'bash -c \'[[ "$2" =~ ^(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)){2}$ ]] || { echo "usage: npm run update:theme-dep -- PKG X.Y.Z" >&2; exit 1; }; [[ $(npm pkg get "dependencies[$1]" --prefix theme) != "{}" ]] || { echo "not a theme dependency: $1" >&2; exit 1; }; npm install -E --ignore-scripts -w theme "$1@$2" && npm run -s _sync:theme-lock && npm run -s install:theme-deps && npm run -s update::post\' -',
-    'update:theme-dep bumps existing theme deps only, script-free',
+    'node scripts/update-dep.mjs',
+    'update:theme-dep runs the guarded update helper',
   );
   assert.equal(
     scripts['_sync:theme-lock'],
