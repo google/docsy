@@ -37,7 +37,7 @@ compiling SCSS with an error like:
 
 ```text
 Error: error building site: TOCSS-DART: failed to transform "scss/main.scss"
-(text/x-scss): You need to install Dart Sass, see
+(text/x-scss). You need to install Dart Sass, see
 https://gohugo.io/functions/css/sass/#dart-sass
 ```
 

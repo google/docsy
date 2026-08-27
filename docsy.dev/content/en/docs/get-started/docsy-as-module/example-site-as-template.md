@@ -99,7 +99,7 @@ easy:
 ### Preview your site
 
 To build and preview your site locally, switch to the root of your cloned
-project, install the project dependencies, and use hugo's `server` command:
+project, install the project dependencies, and serve the site:
 
 ```bash
 cd my-new-site
