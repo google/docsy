@@ -41,9 +41,9 @@
     "update:dep": "npm run -s update:hugo",
     "update:favicon-goldens": "node tests/favicons/update-goldens.mjs",
     "update:goldens": "npm run build && npm run _update:goldens",
-    "update:hugo": "npm install --save-exact -D hugo-extended@latest",
+    "update:hugo": "npm install --save-exact --ignore-scripts -D hugo-extended@latest",
     "update:md-goldens": "node tests/md-output/update-goldens.mjs",
-    "update:packages": "npm-check-updates -u"
+    "update:packages": "npm-check-updates -u -x hugo-extended"
   },
   "dependencies-note": "Dependencies installed from ../theme; see the root install:theme-deps script",
   "devDependencies": {

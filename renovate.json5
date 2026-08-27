@@ -21,9 +21,15 @@
   internalChecksFilter: 'strict',
   packageRules: [
     {
-      // hugo-extended is intentionally pinned; updated manually via
-      // `npm run update:hugo`.
+      // hugo-extended is intentionally pinned; updated manually via the
+      // two-step `npm run update:hugo` + `npm run approve:hugo` flow
+      // (maintainer notes, Officially supported Hugo version). Version
+      // updates only: vulnerability-fix PRs (vulnerabilityAlerts) bypass
+      // enabled:false, and GitHub Dependabot security updates run
+      // config-free. Dormant today (the npm manager isn't in
+      // enabledManagers); the guard is for the day it is.
       matchPackageNames: ['hugo-extended'],
+      matchUpdateTypes: ['major', 'minor', 'patch'],
       enabled: false,
     },
     {

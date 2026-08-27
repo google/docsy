@@ -118,11 +118,18 @@ with Hugo pinned to the declared minimum, run [test:smoke](#test-suites).
 The Hugo version that Docsy [officially supports][] is pinned as the
 `hugo-extended` dev dependency in [docsy.dev/package.json][].
 
-This version is generally kept in sync with the latest Hugo release; to update
-it, run:
+This version is generally kept in sync with the latest Hugo release. Updating it
+is a two-step flow, run from the repo root:
 
-- `npm -C docsy.dev run update:hugo` for the latest
-- `npm -C docsy.dev install -DE hugo-extended@X.Y.Z` for a specific version
+1. `npm run update:hugo` (or `npm -C docsy.dev install -DE hugo-extended@X.Y.Z`
+   for a specific version): bumps the pin script-free.
+2. Review the new [hugo-extended][] release, then run `npm run approve:hugo`:
+   approves the new version's install script and rebuilds the package so the
+   `hugo` binary lands. Script-enabled installs and Hugo-invoking scripts fail
+   until then, so don't run builds between the two steps.
+
+Automated update PRs skip hugo-extended version bumps for the same reason;
+security updates still open PRs and fail until approved via `approve:hugo`.
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -838,6 +845,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [Examples page]: /examples/
 [github.com/google/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
+[hugo-extended]: https://github.com/jakejarvis/hugo-extended/releases
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
 [opentelemetry.io]: https://github.com/open-telemetry/opentelemetry.io
