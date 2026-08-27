@@ -16,8 +16,7 @@ our example site, though we also provide instructions for adding the Docsy theme
 manually to new or existing sites.
 
 If you want to build and test your site locally you also need to be able to run
-Hugo itself, either by installing it and any other required dependencies, or by
-using our provided Docker container.
+Hugo itself, by installing it and any other required dependencies.
 
 This page describes Docsy's installation options and helps you choose the
 appropriate setup guide to get started.
@@ -71,6 +70,5 @@ Section pages:
 
 - [Use Docsy as a Hugo Module](/docs/get-started/docsy-as-module/): Learn how to get started with Docsy by using the theme as a Hugo Module.
 - [Other setup options](/docs/get-started/other-options/): Install Docsy as a Git submodule, a clone, or the @docsy/theme npm package, for sites not using Hugo modules.
-- [Deploy Docsy inside a Docker container](/docs/get-started/quickstart-docker/): Instructions on how to set up and run a local Docsy site with Docker.
 - [Basic site configuration](/docs/get-started/basic-configuration/): Basic configuration for new Docsy sites.
 - [Troubleshooting and known issues](/docs/get-started/troubleshooting/): Troubleshooting and known issues when installing and using Docsy.
