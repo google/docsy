@@ -4,21 +4,17 @@ linkTitle: Start a site from scratch
 date: 2021-12-08T09:21:54+01:00
 weight: 3
 description: >
-  Create a new Hugo site from scratch with Docsy as a Hugo Module
+  For experienced Hugo users who need a custom site structure
 cSpell:ignore: batchfile
 ---
 
-If you're an experienced Hugo user, or the site structure of the
-[example site](/docs/get-started/docsy-as-module/example-site-as-template/)
-doesn't meet your needs, you may prefer to create a new site from scratch. With
-this option, you'll get Docsy look and feel, navigation, and other features, but
-you'll need to specify your own site structure.
-
-These instructions give you a minimum file structure for your site project only,
-so that you build and extend your actual site step by step. The first step is
-adding the Docsy theme as a [Hugo Module](https://gohugo.io/hugo-modules/) to
-your site. If needed, you can easily [update](/docs/update/) the module to the
-latest revision from the Docsy GitHub repo.
+Creating a site from scratch gives you Docsy's look and feel, navigation, and
+other features, but you specify your own site structure. These instructions give
+you a minimum file structure only, so that you build and extend your actual site
+step by step. The first step is adding the Docsy theme as a
+[Hugo Module](https://gohugo.io/hugo-modules/) to your site. If needed, you can
+easily [update](/docs/update/) the module to the latest revision from the Docsy
+GitHub repo.
 
 ## TL;DR: Setup for the impatient expert
 
@@ -65,14 +61,9 @@ npm run hugo -- server
 {{< /tabpane >}}
 <!-- prettier-ignore-end -->
 
-You now can preview your new site inside your browser at
-[http://localhost:1313](http://localhost:1313/).
+Preview at <http://localhost:1313/>.
 
 ## Detailed Setup instructions
-
-Specifying the [Docsy theme](https://github.com/google/docsy) as Hugo Module for
-your minimal site gives you all the theme-y goodness, but you'll need to specify
-your own site structure.
 
 ### Create your new skeleton project
 
@@ -88,12 +79,6 @@ This will create a minimal site structure, containing the folders `archetypes`,
 `content`, `data`, `layouts`, `static`, and `themes` and a configuration file
 (default: `hugo.toml`).
 
-> [!TIP]
->
-> In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
-> If you are using hugo 0.110 or above, consider renaming your `config.toml` to
-> `hugo.toml`!
-
 ### Import the Docsy theme module as a dependency of your site
 
 Only sites that are Hugo Modules themselves can import other modules. To turn
@@ -104,8 +89,7 @@ site directory:
 hugo mod init github.com/me/my-new-site
 ```
 
-This creates two new files, `go.mod` for the module definitions and `go.sum`
-which holds the checksums for module verification.
+This creates a `go.mod` file for your site's module definitions.
 
 Next declare the Docsy theme module as a dependency for your site.
 
@@ -113,7 +97,8 @@ Next declare the Docsy theme module as a dependency for your site.
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
-This command adds the `docsy` theme module to your definition file `go.mod`.
+This command adds the `docsy` theme module to your definition file `go.mod` and
+records the module checksums in `go.sum`.
 
 ### Add theme module configuration settings
 
@@ -170,7 +155,7 @@ You can find details of what these configuration settings do in the
 Depending on your environment you may need to tweak them slightly, for example
 by adding a proxy to use when downloading remote modules.
 
-### Install theme npm dependencies
+### Install npm dependencies {#install-theme-npm-dependencies}
 
 Docsy sources its Bootstrap and Font Awesome assets from npm. Consolidate the
 theme's npm dependencies into your project's `package.json` and install them,

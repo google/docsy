@@ -71,4 +71,4 @@ Section pages:
 - [Use Docsy as a Hugo Module](/docs/get-started/docsy-as-module/): Learn how to get started with Docsy by using the theme as a Hugo Module.
 - [Other setup options](/docs/get-started/other-options/): Install Docsy as a Git submodule, a clone, or the @docsy/theme npm package, for sites not using Hugo modules.
 - [Basic site configuration](/docs/get-started/basic-configuration/): Basic configuration for new Docsy sites.
-- [Troubleshooting and known issues](/docs/get-started/troubleshooting/): Build failures caused by missing dependencies, and platform-specific known issues
+- [Troubleshooting and known issues](/docs/get-started/troubleshooting/): Build failures from missing dependencies and platform constraints

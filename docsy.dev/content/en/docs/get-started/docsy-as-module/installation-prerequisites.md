@@ -3,71 +3,36 @@ title: Before you begin
 date: 2021-12-08
 weight: 1
 description: >
-  Prerequisites for building a site with Docsy as a Hugo Module.
+  Hugo, Dart Sass, Go, Git, Node.js, and optional PostCSS requirements for Docsy
+  sites
 ---
 
 > [!NOTE]
 >
-> Starting with the [prepopulated example site](example-site-as-template/)? Its
-> npm dependencies supply pinned Hugo and Dart Sass tools, which
-> `npm run install:safe` installs: you can skip those sections, and only need
-> [Go](#install-go-language), [Git](#install-git-vcs-client), and
-> [Node.js](#install-nodejs).
+> The [example site](example-site-as-template/)'s pinned npm dependencies
+> provide Hugo and Dart Sass, so if that's your starting point, skip those
+> sections: install only [Go](#install-go-language),
+> [Git](#install-git-vcs-client), and [Node.js](#install-nodejs). On Windows,
+> also ensure that Bash is on your `PATH`: the example site's npm scripts run
+> under Bash, which ships with [Git for Windows](https://gitforwindows.org/).
 
 ## Install Hugo
 
-You need a
-[recent **extended** version](https://github.com/gohugoio/hugo/releases)
-(version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
-to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version; you
-may need to scroll down the list of releases to see it.
-
-For the tool versions that Docsy officially supports, see
-[Official support](/project/about/changelog/#official-support). For
-comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
-
-### On Linux
-
-If you've already installed Hugo, check your version:
+You need a recent **extended** version of [Hugo](https://gohugo.io/), version
+{{% param "hugoMinVersion" %}} or later, to build and preview sites that use
+Docsy. Check your version, and ensure that the output mentions `extended`:
 
 ```bash
 hugo version
 ```
 
-If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
-see `Extended`, you'll need to install the latest version. You can see a
-complete list of Linux installation options in
-[Install Hugo](https://gohugo.io/installation/linux/). The following shows you
-how to install Hugo from the release page:
+To install or upgrade, see [Install Hugo](https://gohugo.io/installation/). If
+you install from the [Hugo releases](https://github.com/gohugoio/hugo/releases)
+page, pick an **extended** asset; you may need to scroll down the list of
+releases to see it.
 
-1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
-2.  In the most recent release, scroll down until you find a list of
-    **Extended** versions.
-3.  Download the latest extended version.
-4.  Create a new directory:
-
-    ```bash
-    mkdir hugo
-    ```
-
-5.  Extract the files you downloaded to `hugo`.
-
-6.  Switch to your new directory:
-
-    ```bash
-    cd hugo
-    ```
-
-7.  Install Hugo:
-
-    ```bash
-    sudo install hugo /usr/bin
-    ```
-
-### On macOS
-
-Install Hugo using [Brew](https://gohugo.io/installation/macos/#homebrew).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support).
 
 ### As an `npm` module
 

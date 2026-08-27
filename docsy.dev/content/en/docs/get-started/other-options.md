@@ -119,7 +119,8 @@ your project's root directory:
     ```
 
     Every time you run `npm install` from your project root, the `prepare`
-    script will fetch the latest version of Docsy and its dependencies.
+    script restores the submodule at its recorded revision and installs the
+    theme's dependencies.
 
 From this point on, build and serve your site with Hugo, run through [npm
 scripts][] (see the [prerequisites](#install-dart-sass)), for example:
@@ -153,7 +154,9 @@ To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
 `-b {{% param tdVersion.latest %}}` argument from the clone command above.
 
-Then consider setting up an NPM [prepare][] script, as documented in Option 1.
+Then consider setting up an NPM [prepare][] script that installs the theme's
+dependencies, like the `_prepare:docsy` script in Option 1's example (the
+submodule step doesn't apply to a clone).
 
 For more information, see
 [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the

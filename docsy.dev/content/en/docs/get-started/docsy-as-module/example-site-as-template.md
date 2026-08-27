@@ -2,8 +2,8 @@
 title: 'Create a new site: start with a prepopulated site'
 linkTitle: Start with a prepopulated site
 description: >
-  Clone the Docsy example site for a ready-made site skeleton that pulls in the
-  theme as a Hugo module and is easy to keep up to date.
+  Clone the example site and adapt it: the fastest route to a working Docsy
+  site.
 weight: 2
 cSpell:ignore: gitea
 ---
@@ -17,7 +17,8 @@ scratch][start-from-scratch].
 
 ## TL;DR: Setup for the impatient expert
 
-From a terminal:
+With the [prerequisites][] installed (on Windows, including Bash on your
+`PATH`), run:
 
 ```bash
 git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
@@ -29,21 +30,11 @@ npm run serve
 Preview at <http://localhost:1313/>. If the build fails, see
 [Troubleshooting][].
 
-> [!NOTE]
->
-> On Windows, the site's npm scripts run under Bash, which ships with
-> [Git for Windows](https://gitforwindows.org/): make sure that `bash` is on
-> your `PATH`.
-
 ## Detailed Setup instructions
 
 ### Clone the Docsy example site
 
 There are two routes to get a local clone of the example site:
-
-- If you want to create a local copy only, choose option 1.
-- If you have a GitHub account and want to create a GitHub repo for your site go
-  for option 2.
 
 #### Option 1: Using the command line (local copy only)
 
@@ -115,6 +106,7 @@ Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit. Press
 - [Publish your site](/docs/deployment/).
 
 <!-- prettier-ignore-start -->
+[prerequisites]: /docs/get-started/docsy-as-module/installation-prerequisites/
 [start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
 [Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->

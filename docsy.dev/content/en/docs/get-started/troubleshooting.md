@@ -3,8 +3,7 @@ title: Troubleshooting and known issues
 linkTitle: Troubleshooting
 weight: 60
 description: >
-  Build failures caused by missing dependencies, and platform-specific known
-  issues
+  Build failures from missing dependencies and platform constraints
 aliases: [known_issues]
 cSpell:ignore: TOCSS maxfiles maxfilesperproc
 ---
@@ -24,9 +23,12 @@ File to import not found or unreadable: ../../vendor/bootstrap/scss/functions.
 To fix this, install the theme's npm dependencies for your [setup][], then
 rebuild:
 
-- Example-site-based projects, and sites using Docsy as an [NPM
-  package][npm-pkg]: run `npm install` from your site root.
-- Hugo module sites built from scratch: see [Install theme npm
+- Example-site-based projects: run `npm run install:safe` from your site root;
+  in an older copy without that script, use your repository's own install
+  script.
+- Sites using Docsy as an [NPM package][npm-pkg]: install from your site root,
+  for example with `npm install`.
+- Hugo module sites built from scratch: see [Install npm
   dependencies][theme-npm-deps].
 - Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
   `npm run install:theme-deps` from `themes/docsy`.
@@ -37,8 +39,7 @@ If Hugo can't find the [Dart Sass][] `sass` CLI on its `PATH`, it fails while
 compiling SCSS with an error like:
 
 ```text
-TOCSS-DART: failed to transform "scss/main.scss" (text/x-scss). You need to
-install Dart Sass, see https://gohugo.io/functions/css/sass/#dart-sass
+TOCSS-DART: failed to transform "scss/main.scss" (text/x-scss).
 ```
 
 To fix this, follow [Install Dart Sass][], then rebuild.
