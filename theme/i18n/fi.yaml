@@ -12,7 +12,8 @@ ui_read_more: Lue lisää
 ui_search: Hae sivustolta...
 
 # Used in sentences such as "Posted in News"
-ui_in:
+# Not perfect: Finnish expresses this with a case suffix, not a separate word.
+ui_in: osiossa
 
 # Used in sentences such as "All Tags"
 ui_all: kaikki
