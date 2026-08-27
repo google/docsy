@@ -113,9 +113,8 @@ npm run install:safe
 npm run serve
 ```
 
-Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit.
-Press `Ctrl + c` to stop the server. If the build fails, see
-[Troubleshooting][].
+Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit. Press
+`Ctrl + c` to stop the server. If the build fails, see [Troubleshooting][].
 
 ## What's next?
 
