@@ -75,7 +75,7 @@ section index or page with `weight: 30` would appear after the Documentation
 section in the menu, while one with `weight: 10` would appear before it.
 
 If you want to add a link to an external site to this menu, add it to your site
-configuration:[^add-external-link-via]
+configuration:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
