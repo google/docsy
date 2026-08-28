@@ -13,7 +13,6 @@ ui_search: Search this site…
 ui_theme_light: Light
 ui_theme_dark: Dark
 ui_theme_auto: Auto
-ui_edit_diagram: Edit diagram
 
 # Used in sentences such as "Posted in News"
 ui_in: in
