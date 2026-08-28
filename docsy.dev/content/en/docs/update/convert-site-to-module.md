@@ -10,7 +10,7 @@ cSpell:ignore: findstr batchfile twbs
 
 ## TL;DR: Conversion for the impatient expert
 
-Run the following from the command line:
+Run:
 
 {{< tabpane >}}
 {{< tab header="CLI:" disabled=true />}}
@@ -18,23 +18,27 @@ Run the following from the command line:
 cd /path/to/my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-sed -i '/theme = \["docsy/d' config.toml
-mv config.toml hugo.toml
+[ -f config.toml ] && mv config.toml hugo.toml
+sed -i.bak '/theme = \["docsy/d' hugo.toml && rm hugo.toml.bak
 cat >> hugo.toml <<EOL
 [module]
 proxy = "direct"
 [[module.imports]]
 path = "github.com/google/docsy/theme"
 EOL
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
 hugo mod npm pack
 npm install
-hugo server
+npm run hugo -- server
 {{< /tab >}}
 {{< tab header="Windows command line" lang="Batchfile" >}}
 cd  my-existing-site
 hugo mod init github.com/me-at-github/my-existing-site
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
-findstr /v /c:"theme = [\"docsy" config.toml > hugo.toml
+if exist config.toml ren config.toml hugo.toml
+findstr /v /c:"theme = [\"docsy" hugo.toml > hugo.toml.tmp
+move /y hugo.toml.tmp hugo.toml
 (echo [module]^
 
 proxy = "direct"^
@@ -42,9 +46,11 @@ proxy = "direct"^
 [[module.imports]]^
 
 path = "github.com/google/docsy/theme")>>hugo.toml
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
 hugo mod npm pack
 npm install
-hugo server
+npm run hugo -- server
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -53,19 +59,19 @@ hugo server
 
 ### Import the Docsy theme module as a dependency of your site
 
-At the command prompt, change to the root directory of your existing site.
+Change to the root directory of your existing site:
 
 ```bash
 cd /path/to/my-existing-site
 ```
 
-Only sites that are Hugo Modules themselves can import other Hugo Modules. Turn your existing site into a Hugo Module by running the following command from your site directory, replacing `github.com/me/my-existing-site` with your site repository:
+Only sites that are Hugo Modules themselves can import other Hugo Modules. Turn your existing site into a Hugo Module by running the following command from your site directory, replacing `github.com/me-at-github/my-existing-site` with your site repository:
 
 ```bash
-hugo mod init github.com/me/my-existing-site
+hugo mod init github.com/me-at-github/my-existing-site
 ```
 
-This creates two new files, `go.mod` for the module definitions and `go.sum` which holds the checksums for module verification.
+This creates a `go.mod` file for your site's module definitions.
 
 Next declare the Docsy theme module as a dependency for your site.
 
@@ -73,9 +79,12 @@ Next declare the Docsy theme module as a dependency for your site.
 hugo mod get github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
 
-This command adds the `docsy` theme module to your definition file `go.mod`.
+This command adds the `docsy` theme module to your definition file `go.mod` and
+records the module checksums in `go.sum`.
 
 ### Update your config file
+
+If your site still uses a `config.toml` file, rename it to `hugo.toml` first.
 
 In your `hugo.toml`/`hugo.yaml`/`hugo.json` file, update the theme setting to use Hugo Modules. Find the following line (`docsy/theme` if your site is on Docsy 0.16 or later, `docsy` otherwise):
 
@@ -121,7 +130,7 @@ Alternatively, you can omit this line altogether and replace it with the setting
   # replacements = "github.com/google/docsy/theme -> ../../docsy/theme"
   [module.hugoVersion]
     extended = true
-    min = {{% param "hugoMinVersion" %}}
+    min = "{{% param "hugoMinVersion" %}}"
   [[module.imports]]
     path = "github.com/google/docsy/theme"
     disable = false
@@ -142,7 +151,7 @@ module:
     "proxy": "direct",
     "hugoVersion": {
       "extended": true,
-      "min": {{% param "hugoMinVersion" %}}
+      "min": "{{% param "hugoMinVersion" %}}"
     },
     "imports": [
       {
@@ -158,12 +167,6 @@ module:
 You can find details of what these configuration settings do in the [Hugo modules documentation](https://gohugo.io/configuration/module/#top-level-settings).
 Depending on your environment you may need to tweak them slightly, for example by adding a proxy to use when downloading remote modules.
 
-> [!TIP]
->
-> In Hugo 0.110.0 the default config base filename was changed to `hugo.toml`.
-> If you are using hugo 0.110 or above, we recommend renaming your `config.toml`
-> to `hugo.toml`!
-
 > [!CAUTION]
 >
 > If you have a multi-language installation, make sure that the section
@@ -172,8 +175,19 @@ Depending on your environment you may need to tweak them slightly, for example b
 
 ### Install theme npm dependencies
 
-Docsy sources its Bootstrap and Font Awesome assets from npm. Consolidate the
-theme's npm dependencies into your project's `package.json` and install them:
+Follow [Install Dart Sass][install-dart-sass] so that Hugo runs with the `sass`
+CLI on its `PATH`; for npm-based sites, that means installing the tested
+[`sass-embedded`][] version and running Hugo through npm scripts:
+
+```bash
+npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+npm pkg set scripts.hugo=hugo
+```
+
+Docsy sources its Bootstrap and Font Awesome assets from npm. Generate the
+theme's npm-dependency workspace (see Hugo's
+[Node dependencies](https://gohugo.io/hugo-modules/nodejs-dependencies/)) and
+install it:
 
 ```bash
 hugo mod npm pack
@@ -181,26 +195,24 @@ npm install
 ```
 
 Re-run `hugo mod npm pack` whenever you
-[update Docsy](/docs/update/hugo-module/); Hugo warns when the
-dependency set drifts. For background, see
+[update Docsy](/docs/update/hugo-module/) or otherwise edit `package.json`;
+Hugo warns when the dependency set drifts. For background, see
 [Bootstrap and Font Awesome via npm][blog-npm-deps] in the 0.16.0
 release notes.
 
 ### Check validity of your configuration settings
 
-To make sure that your configuration settings are correct, run the command `hugo mod graph` which prints a module dependency graph:
+Run `hugo mod graph` and verify that it lists `github.com/google/docsy/theme`:
 
 ```bash
 hugo mod graph
 hugo: collected modules in 1092 ms
-github.com/me/my-existing-site github.com/google/docsy/theme@{{% param tdVersion.latest %}}
+github.com/me-at-github/my-existing-site github.com/google/docsy/theme@{{% param tdVersion.latest %}}
 ```
-
-Make sure that the `docsy/theme` dependency is listed. If not, please double check your config settings.
 
 > [!TIP]
 >
-> In order to clean up your module cache, issue the command `hugo mod clean`
+> To clear the module cache:
 >
 > ```bash
 > hugo mod clean
@@ -210,30 +222,22 @@ Make sure that the `docsy/theme` dependency is listed. If not, please double che
 
 ## Clean up your repository
 
-Since your site now uses Hugo Modules, you can remove `docsy` from the `themes` directory, as instructed below.
-First, change to the root directory of your site:
+Since your site now uses Hugo Modules, remove the `docsy` theme copy from your
+project's `themes/` directory:
 
-```bash
-cd /path/to/my-existing-site
-```
+- For a theme **clone**:
 
-### Previous use of Docsy theme as git clone
+  ```bash
+  rm -rf themes/docsy
+  ```
 
-Simply remove the subdirectory `docsy` inside your `themes` directory:
+- For a theme **submodule**:
 
-```bash
-rm -rf themes/docsy
-```
+  ```bash
+  git rm -rf themes/docsy
+  ```
 
-### Previous use of Docsy theme as git submodule
-
-If your Docsy theme was installed as submodule, use git's `rm` subcommand to remove the subdirectory `docsy` inside your `themes` directory:
-
-```bash
-git rm -rf themes/docsy
-```
-
-You are now ready to commit your changes to your repository:
+Then commit the change:
 
 ```bash
 git commit -m "Removed docsy git submodule"
@@ -246,4 +250,6 @@ git commit -m "Removed docsy git submodule"
 
 <!-- prettier-ignore-start -->
 [blog-npm-deps]: /blog/2026/0.16.0/#npm-deps
+[install-dart-sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[`sass-embedded`]: https://www.npmjs.com/package/sass-embedded
 <!-- prettier-ignore-end -->

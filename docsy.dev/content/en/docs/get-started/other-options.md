@@ -20,84 +20,16 @@ setup options:
 
 ## Prerequisites
 
-### Install Hugo
+### Install Hugo <a id="hugo-extended-npm"></a>
 
-You need a
-[recent **extended** version](https://github.com/gohugoio/hugo/releases)
-(version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
-to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version; you
-may need to scroll down the list of releases to see it.
+You need a recent **extended** version of [Hugo](https://gohugo.io/), version
+{{% param "hugoMinVersion" %}} or later. For installation options, including the
+npm-managed [hugo-extended][] package, see [Install Hugo][].
 
-For the tool versions that Docsy officially supports, see [Official
-support][official-support]. For comprehensive Hugo documentation, see
-[gohugo.io](https://gohugo.io/).
+### Install Node.js
 
-#### On Linux
-
-If you've already installed Hugo, check your version:
-
-```sh
-hugo version
-```
-
-If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
-see `Extended`, you'll need to install the latest version. You can see a
-complete list of Linux installation options in
-[Install Hugo](https://gohugo.io/installation/linux/). The following shows you
-how to install Hugo from the release page:
-
-1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
-2.  In the most recent release, scroll down until you find a list of
-    **Extended** versions.
-3.  Download the latest extended version.
-4.  Create a new directory:
-
-    ```sh
-    mkdir hugo
-    ```
-
-5.  Extract the files you downloaded to `hugo`.
-
-6.  Switch to your new directory:
-
-    ```sh
-    cd hugo
-    ```
-
-7.  Install Hugo:
-    ```sh
-    sudo install hugo /usr/bin
-    ```
-
-#### On macOS
-
-Install Hugo using [Brew](https://gohugo.io/installation/macos/#homebrew).
-
-#### Hugo-extended NPM package {#hugo-extended-npm}
-
-You can install Hugo as an NPM module using
-[hugo-extended](https://www.npmjs.com/package/hugo-extended):
-
-```sh
-npm install hugo-extended --save-dev
-```
-
-### Node: Get the latest LTS release
-
-If you have Node installed already, check your version of Node. For example:
-
-```sh
-node -v
-```
-
-Install or upgrade your version of Node to the **active [LTS release][]**. We
-recommend using **[nvm][]** to manage your Node installation (Linux command
-shown):
-
-```sh
-nvm install --lts
-```
+Install or upgrade to the active Node.js [LTS release][], as explained in
+[Install Node.js][].
 
 ### Install Dart Sass
 
@@ -187,7 +119,8 @@ your project's root directory:
     ```
 
     Every time you run `npm install` from your project root, the `prepare`
-    script will fetch the latest version of Docsy and its dependencies.
+    script restores the submodule at its recorded revision and installs the
+    theme's dependencies.
 
 From this point on, build and serve your site with Hugo, run through [npm
 scripts][] (see the [prerequisites](#install-dart-sass)), for example:
@@ -221,7 +154,9 @@ To work from the development version of Docsy (not recommended unless, for
 example, you plan to upstream changes to Docsy), omit the
 `-b {{% param tdVersion.latest %}}` argument from the clone command above.
 
-Then consider setting up an NPM [prepare][] script, as documented in Option 1.
+Then consider setting up an NPM [prepare][] script that installs the theme's
+dependencies, like the `_prepare:docsy` script in Option 1's example (the
+submodule step doesn't apply to a clone).
 
 For more information, see
 [Theme Components](https://gohugo.io/hugo-modules/theme-components/) on the
@@ -239,17 +174,20 @@ site that uses the Docsy NPM package:
     cd myproject
     ```
 
-2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler:
+2.  Install Docsy along with the [Dart Sass](#install-dart-sass) compiler, at
+    the version Docsy is tested with, and define an npm script for running Hugo:
 
     ```sh
     npm init -y
-    npm install --save-dev @docsy/theme sass-embedded
+    npm install --save-dev @docsy/theme
+    npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
+    npm pkg set scripts.hugo=hugo
     ```
 
     > [!TIP] Hugo install tip
     >
     > To also install Hugo as an NPM package, see
-    > [Hugo-extended NPM package](#hugo-extended-npm).
+    > [As an npm module](/docs/get-started/docsy-as-module/installation-prerequisites/#as-an-npm-module).
 
 3.  Add Docsy as your site's theme by including the following in your project's
     `hugo.yaml`:
@@ -306,23 +244,18 @@ development or testing, you can also install:
 
 ## Preview your site
 
-To preview your site locally:
+To preview your site locally, run Hugo through an [npm script][npm scripts] (see
+the [prerequisites](#install-dart-sass)):
 
 ```sh
 cd myproject
-hugo server
+npm run hugo -- server
 ```
 
 By default, your site will be available at <http://localhost:1313>. For common
-issues, see [Troubleshooting](/docs/get-started/troubleshooting/).
-
-You may get Hugo errors for missing parameters and values when you try to build
-your site. This is usually because you’re missing default values for some
-configuration settings that Docsy uses - once you add them your site should
-build correctly. You can find out how to add configuration in
-[Basic site configuration](/docs/get-started/basic-configuration/) - we
-recommend copying the example site configuration even if you’re creating a site
-from scratch as it provides defaults for many required configuration parameters.
+issues, see [Troubleshooting](/docs/get-started/troubleshooting/). If the build
+fails with missing-parameter errors, add the required defaults per
+[Basic site configuration](/docs/get-started/basic-configuration/).
 
 ## What's next?
 
@@ -336,12 +269,14 @@ from scratch as it provides defaults for many required configuration parameters.
 <!-- prettier-ignore-start -->
 [`@docsy/theme`]: https://www.npmjs.com/package/@docsy/theme
 [dist-tag]: https://docs.npmjs.com/cli/v11/commands/npm-dist-tag/
+[hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
+[Install Hugo]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
+[Install Node.js]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs
 [Install PostCSS]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-postcss
 [lts release]: https://nodejs.org/en/about/releases/
 [npm install]: https://docs.npmjs.com/cli/v11/commands/npm-install#description
 [npm scripts]: https://docs.npmjs.com/cli/v10/using-npm/scripts
-[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [official-support]: /project/about/changelog/#official-support
 [prepare]: https://docs.npmjs.com/cli/v10/using-npm/scripts#prepare-and-prepublish
 <!-- prettier-ignore-end -->

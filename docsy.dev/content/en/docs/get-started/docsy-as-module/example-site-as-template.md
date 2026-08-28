@@ -2,58 +2,43 @@
 title: 'Create a new site: start with a prepopulated site'
 linkTitle: Start with a prepopulated site
 description: >
-  Create a new Hugo site by using a clone of the Docsy example site as your
-  starting point.
+  Clone the example site and adapt it: a ready-made site structure with a pinned
+  toolchain.
 weight: 2
-cSpell:ignore: gitea
 ---
 
-The simplest way to create a new Docsy site is to use the source of the
-[Docsy example site](https://github.com/google/docsy-example) as starting point.
-This approach gives you a skeleton structure for your site, with top-level and
-documentation sections and templates that you can modify as necessary. The
-example site automatically pulls in the Docsy theme as a
-[Hugo Module](https://gohugo.io/hugo-modules/), so it's easy to
-[keep up to date](/docs/update/hugo-module/).
+The [Docsy example site](https://github.com/google/docsy-example) gives you a
+skeleton structure for your site, with top-level and documentation sections and
+templates that you can modify as necessary.
 
 If you prefer to create a site from scratch, follow [Start a site from
 scratch][start-from-scratch].
 
 ## TL;DR: Setup for the impatient expert
 
-From a terminal:
+With the [prerequisites][] installed (on Windows, including Bash on your
+`PATH`), run:
 
 ```bash
 git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
 cd my-new-site
-npm install
-hugo server
+npm run install:safe
+npm run serve
 ```
 
-Preview at <http://localhost:1313/>. If the build fails with a missing Bootstrap
-import, see [Troubleshooting][].
+Preview at <http://localhost:1313/>. If the build fails, see
+[Troubleshooting][].
 
 ## Detailed Setup instructions
 
 ### Clone the Docsy example site
 
-The [Example Site](https://example.docsy.dev) gives you a good starting point
-for building your docs site and is pre-configured to automatically pull in the
-Docsy theme as a Hugo Module. There are two different routes to get a local
-clone of the example site:
-
-- If you want to create a local copy only, choose option 1.
-- If you have a GitHub account and want to create a GitHub repo for your site go
-  for option 2.
+There are two routes to get a local clone of the example site:
 
 #### Option 1: Using the command line (local copy only)
 
-If you want to use a remote repository other than GitHub (such as
-[GitLab](https://gitlab.com), [BitBucket](https://bitbucket.org/),
-[AWS CodeCommit](https://aws.amazon.com/codecommit/),
-[Gitea](https://gitea.io/)) or if you don't want a remote repo at all, simply
-make a local working copy of the example site directly using `git clone`. As
-last parameter, give your chosen local repo name (here: `my-new-site`):
+For a local copy or a non-GitHub remote, clone the released example site, giving
+your chosen local repo name (here: `my-new-site`) as the last parameter:
 
 ```bash
 git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/google/docsy-example.git my-new-site
@@ -61,16 +46,13 @@ git clone --depth 1 --branch {{% param tdVersion.latest %}} https://github.com/g
 
 #### Option 2: Using the GitHub UI (local copy + associated GitHub repo)
 
-As the Docsy example site repo is a
-[template repository](https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/),
-creating your own remote GitHub clone of this Docsy example site repo is quite
-easy:
+The example site is a [template repository][], so you can generate your own
+GitHub repository from it. Note that a template copies the example site's
+default branch (`main`), which can be ahead of the latest release; for a
+release-pinned start, use option 1.
 
 1. Go to the repo of the
    [Docsy example site](https://github.com/google/docsy-example).
-
-1. Use the dropdown for switching branches/tags to change to the latest released
-   tag `{{% param tdVersion.latest %}}`.
 
 1. Click the button **Use this template** and select the option
    `Create a new repository` from the dropdown.
@@ -79,8 +61,6 @@ easy:
    **Repository name** field. You can also add an optional **Description**.
 
 1. Click **Create repository from template** to create your new repository.
-   Congratulations, you just created your remote GitHub clone which now serves
-   as starting point for your own site!
 
 1. Make a local copy of your newly created GitHub repository by using
    `git clone`, giving your repo's web URL as last parameter.
@@ -99,18 +79,16 @@ easy:
 ### Preview your site
 
 To build and preview your site locally, switch to the root of your cloned
-project, install the project dependencies, and use hugo's `server` command:
+project, install the project dependencies, and serve the site:
 
 ```bash
 cd my-new-site
-npm install
-hugo server
+npm run install:safe
+npm run serve
 ```
 
-Preview at <http://localhost:1313/>. Thanks to Hugo's live preview, you can
-immediately see the effect of changes that you are making to the source files of
-your local repo. Use `Ctrl + c` to stop the Hugo server whenever you like. If
-the build fails with a missing Bootstrap import, see [Troubleshooting][].
+Preview at <http://localhost:1313/>. Hugo reloads the preview as you edit. Press
+`Ctrl + c` to stop the server. If the build fails, see [Troubleshooting][].
 
 ## What's next?
 
@@ -120,6 +98,8 @@ the build fails with a missing Bootstrap import, see [Troubleshooting][].
 - [Publish your site](/docs/deployment/).
 
 <!-- prettier-ignore-start -->
+[prerequisites]: /docs/get-started/docsy-as-module/installation-prerequisites/
 [start-from-scratch]: /docs/get-started/docsy-as-module/start-from-scratch/
-[Troubleshooting]: /docs/get-started/troubleshooting/#missing-theme-npm-dependencies
+[template repository]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
+[Troubleshooting]: /docs/get-started/troubleshooting/
 <!-- prettier-ignore-end -->

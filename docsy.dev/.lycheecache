@@ -62,6 +62,7 @@ https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cl
 https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template,200,1782563368
 https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages,200,1782563367
 https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request,200,1782498226
+https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template,200,1787866813
 https://docs.gitlab.com/user/markdown/#math-equations,200,1782498236
 https://docs.layer5.io/,200,1782498244
 https://docs.netlify.com/build/configure-builds/overview/#definitions,200,1784219324
@@ -130,7 +131,9 @@ https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults,200,17824982
 https://getbootstrap.com/docs/5.3/getting-started/rtl/,200,1782563368
 https://git-scm.com/,200,1782563368
 https://git-scm.com/book/en/v2/Git-Tools-Submodules,200,1782563368
+https://git-scm.com/downloads,200,1787863994
 https://gitea.io/,200,1782563368
+https://gitforwindows.org/,200,1787862079
 https://github.blog/2019-06-06-generate-new-repositories-with-repository-templates/,200,1782563369
 https://github.com/,200,1782563368
 https://github.com/KaTeX/KaTeX/tree/main/contrib/mhchem,200,1782498242
@@ -367,6 +370,7 @@ https://github.com/google/docsy/issues/new?title=Chrome%20build%20modes,200,1782
 https://github.com/google/docsy/issues/new?title=Content%20and%20Customization,200,1782498230
 https://github.com/google/docsy/issues/new?title=Contribution%20guidelines,200,1782498230
 https://github.com/google/docsy/issues/new?title=Create%20a%20new%20site:%20Start%20a%20new%20site%20from%20scratch,200,1782498546
+https://github.com/google/docsy/issues/new?title=Create%20a%20new%20site:%20start%20a%20new%20site%20from%20scratch,200,1787866813
 https://github.com/google/docsy/issues/new?title=Create%20a%20new%20site:%20start%20with%20a%20prepopulated%20site,200,1782498546
 https://github.com/google/docsy/issues/new?title=Deploy%20Docsy%20inside%20a%20Docker%20container,200,1782498245
 https://github.com/google/docsy/issues/new?title=Deployment%20and%20previews,200,1782498245
@@ -657,6 +661,7 @@ https://github.github.com/gfm/,200,1782498235
 https://gitlab.com/,200,1782563368
 https://gitlab.com/graphviz/graphviz.gitlab.io,200,1782498244
 https://gitprotect.io/blog/how-to-use-github-repository-templates/,200,1782498233
+https://go.dev/,200,1787863993
 https://go.dev/dl/,200,1782563368
 https://gohugo.io/,200,1782563367
 https://gohugo.io/about/features/#multidimensional-content-model,200,1782498229
@@ -664,6 +669,7 @@ https://gohugo.io/commands/hugo_deploy,200,1782563367
 https://gohugo.io/commands/hugo_gen_chromastyles/,200,1782498238
 https://gohugo.io/commands/hugo_server/,200,1782563368
 https://gohugo.io/configuration/all/#ignorelogs,200,1786311799
+https://gohugo.io/configuration/all/#resourcedir,200,1787862079
 https://gohugo.io/configuration/introduction/#configuration-file,200,1782563367
 https://gohugo.io/configuration/introduction/#environment-variables,200,1782563367
 https://gohugo.io/configuration/introduction/,200,1782498235
@@ -717,6 +723,8 @@ https://gohugo.io/hosting-and-deployment/hosting-on-netlify/,200,1782563368
 https://gohugo.io/hugo-modules/,200,1782563367
 https://gohugo.io/hugo-modules/nodejs-dependencies/,200,1782784207
 https://gohugo.io/hugo-modules/theme-components/,200,1782563368
+https://gohugo.io/hugo-modules/use-modules/,200,1787862689
+https://gohugo.io/installation/,200,1787865745
 https://gohugo.io/installation/linux/#debian,200,1782563368
 https://gohugo.io/installation/linux/,200,1782563368
 https://gohugo.io/installation/macos/#homebrew,200,1782563367

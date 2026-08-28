@@ -3,66 +3,36 @@ title: Before you begin
 date: 2021-12-08
 weight: 1
 description: >
-  Prerequisites for building a site with Docsy as a Hugo Module.
+  Hugo, Dart Sass, Go, Git, Node.js, and optional PostCSS requirements for Docsy
+  sites
 ---
 
-This page describes the prerequisites for building a site that uses Docsy as a
-Hugo Module.
+> [!NOTE]
+>
+> The [example site](example-site-as-template/)'s pinned npm dependencies
+> provide Hugo and Dart Sass, so if that's your starting point, skip those
+> sections: install only [Go](#install-go-language),
+> [Git](#install-git-vcs-client), and [Node.js](#install-nodejs). On Windows,
+> also ensure that Bash is on your `PATH`: the example site's npm scripts run
+> under Bash, which ships with [Git for Windows](https://gitforwindows.org/).
 
 ## Install Hugo
 
-You need a
-[recent **extended** version](https://github.com/gohugoio/hugo/releases)
-(version {{% param "hugoMinVersion" %}} or later) of [Hugo](https://gohugo.io/)
-to do local builds and previews of sites (like this one) that use Docsy. If you
-install from the release page, make sure to get the `extended` Hugo version; you
-may need to scroll down the list of releases to see it.
-
-For the tool versions that Docsy officially supports, see
-[Official support](/project/about/changelog/#official-support). For
-comprehensive Hugo documentation, see [gohugo.io](https://gohugo.io).
-
-### On Linux
-
-If you've already installed Hugo, check your version:
+You need a recent **extended** version of [Hugo](https://gohugo.io/), version
+{{% param "hugoMinVersion" %}} or later, to build and preview sites that use
+Docsy. Check your version, and ensure that the output mentions `extended`:
 
 ```bash
 hugo version
 ```
 
-If the result is earlier than {{% param "hugoMinVersion" %}}, or if you don't
-see `Extended`, you'll need to install the latest version. You can see a
-complete list of Linux installation options in
-[Install Hugo](https://gohugo.io/installation/linux/). The following shows you
-how to install Hugo from the release page:
+To install or upgrade, see [Install Hugo](https://gohugo.io/installation/). If
+you install from the [Hugo releases](https://github.com/gohugoio/hugo/releases)
+page, pick an **extended** asset; you may need to scroll down the list of
+releases to see it.
 
-1.  Go to the [Hugo releases](https://github.com/gohugoio/hugo/releases) page.
-2.  In the most recent release, scroll down until you find a list of
-    **Extended** versions.
-3.  Download the latest extended version.
-4.  Create a new directory:
-
-    ```bash
-    mkdir hugo
-    ```
-
-5.  Extract the files you downloaded to `hugo`.
-
-6.  Switch to your new directory:
-
-    ```bash
-    cd hugo
-    ```
-
-7.  Install Hugo:
-
-    ```bash
-    sudo install hugo /usr/bin
-    ```
-
-### On macOS
-
-Install Hugo using [Brew](https://gohugo.io/installation/macos/#homebrew).
+For the tool versions that Docsy officially supports, see
+[Official support](/project/about/changelog/#official-support).
 
 ### As an `npm` module
 
@@ -107,48 +77,42 @@ For the officially supported Dart Sass version, see
 
 ## Install Go language
 
-Hugo's commands for module management require that the Go programming language
-is installed on your system. Check whether `go` is already installed:
+Hugo's module management requires the [Go language](https://go.dev/), version
+1.18 or later, per
+[Hugo's requirements](https://gohugo.io/hugo-modules/use-modules/). Check your
+version:
 
 ```console
 $ go version
 go version go1.25.6
 ```
 
-Ensure that you are using version 1.12 or higher.
-
-If the `go` language is not installed on your system yet or if you need to
-upgrade, go to the [download area](https://go.dev/dl/) of the Go website, choose
-the installer for your system architecture and execute it. Afterwards, check for
-a successful installation.
+To install or upgrade Go, use the [Go download page](https://go.dev/dl/).
 
 ## Install Git VCS client
 
-Hugo's commands for module management require that the `git` client is installed
-on your system. Check whether `git` is already present in your system:
+Hugo's module management also requires the [Git](https://git-scm.com/) client.
+Check your version:
 
 ```console
 $ git version
 git version 2.52.0
 ```
 
-If no `git` client is installed on your system yet, go to the
-[Git website](https://git-scm.com/), download the installer for your system
-architecture and execute it. Afterwards, check for a successful installation.
+To install or upgrade Git, use the
+[Git download page](https://git-scm.com/downloads).
 
 ## Install Node.js
 
 Docsy sources its Bootstrap and Font Awesome assets from npm, so you need
 [Node.js](https://nodejs.org/) (which provides `npm`, the Node package manager)
 to install them. Install or upgrade to the active [long-term support (LTS)
-release][node-lts], then check your version:
+release][node-lts] (consider using [nvm][] to install and manage Node versions),
+then check your version:
 
 ```bash
 node -v
 ```
-
-You install these assets when you create your site, as described in the next
-steps.
 
 ## Install PostCSS (optional) {#install-postcss}
 
@@ -190,6 +154,7 @@ site
 [hugo-extended]: https://www.npmjs.com/package/hugo-extended
 [node-lts]: https://nodejs.org/en/about/releases/
 [npm scripts]: https://docs.npmjs.com/cli/v11/using-npm/scripts
+[nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
 [postcss]: https://www.npmjs.com/package/postcss
 [rtl]: /docs/language/#right-to-left-languages
 [sass-embedded]: https://www.npmjs.com/package/sass-embedded

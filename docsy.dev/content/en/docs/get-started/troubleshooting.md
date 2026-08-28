@@ -3,7 +3,7 @@ title: Troubleshooting and known issues
 linkTitle: Troubleshooting
 weight: 60
 description: >
-  Troubleshooting and known issues when installing and using Docsy.
+  Build failures from missing dependencies and platform constraints
 aliases: [known_issues]
 cSpell:ignore: TOCSS maxfiles maxfilesperproc
 ---
@@ -23,12 +23,33 @@ File to import not found or unreadable: ../../vendor/bootstrap/scss/functions.
 To fix this, install the theme's npm dependencies for your [setup][], then
 rebuild:
 
-- Example-site-based projects, and sites using Docsy as an [NPM
-  package][npm-pkg]: run `npm install` from your site root.
-- Hugo module sites built from scratch: see [Install theme npm
+- Example-site-based projects: run `npm run install:safe` from your site root;
+  in an older copy without that script, use your repository's own install
+  script.
+- Sites using Docsy as an [NPM package][npm-pkg]: install from your site root,
+  for example with `npm install`.
+- Hugo module sites built from scratch: see [Install npm
   dependencies][theme-npm-deps].
 - Sites using Docsy as a [Git submodule][submodule] or a cloned theme: run
   `npm run install:theme-deps` from `themes/docsy`.
+
+### Missing Dart Sass compiler
+
+If Hugo can't find the [Dart Sass][] `sass` CLI on its `PATH`, it fails while
+compiling SCSS with an error like:
+
+```text
+TOCSS-DART: failed to transform "scss/main.scss" (text/x-scss).
+```
+
+To fix this, follow [Install Dart Sass][], then rebuild.
+
+> [!WARNING]
+>
+> A warm Hugo transform cache can mask this problem: if your site was previously
+> built with Dart Sass available, later builds without it can succeed by reusing
+> the cached CSS. To verify your setup, clear the site's resources cache
+> directory ([`resourceDir`][], `resources` by default) and rebuild.
 
 ## Known issues
 
@@ -87,7 +108,10 @@ If you're using WSL, ensure that you're running `hugo` on a Linux mount of the
 filesystem, rather than a Windows one, otherwise you may get unexpected errors.
 
 <!-- prettier-ignore-start -->
+[Dart Sass]: https://sass-lang.com/dart-sass/
+[Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [npm-pkg]: /docs/get-started/other-options/#option-3-docsy-as-an-npm-package
+[`resourceDir`]: https://gohugo.io/configuration/all/#resourcedir
 [setup]: /docs/get-started/
 [submodule]: /docs/get-started/other-options/#option-1-docsy-as-a-git-submodule
 [theme-npm-deps]: /docs/get-started/docsy-as-module/start-from-scratch/#install-theme-npm-dependencies
