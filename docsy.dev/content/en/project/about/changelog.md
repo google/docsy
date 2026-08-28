@@ -154,7 +154,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - **[Dart Sass][0.17.0-blog-dart-sass]**: switched the theme's default Sass
   transpiler from Hugo's embedded LibSass (deprecated) to Dart Sass; see
   [Install Dart Sass][]. Some Sass-computed colors in the built CSS change
-  serialization form, with no visible rendering change ([#2724][]).
+  serialization form, with no visible rendering change ([#2279][]).
 
 - Changed breadcrumb markup to carry Docsy [semantic classes][] with state keyed
   on `aria-current="page"` instead of an `active` class. If you customized
@@ -225,7 +225,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2712]: https://github.com/google/docsy/pull/2712
 [#2722]: https://github.com/google/docsy/pull/2722
 [#2714]: https://github.com/google/docsy/pull/2714
-[#2724]: https://github.com/google/docsy/pull/2724
+[#2279]: https://github.com/google/docsy/issues/2279
 [#2726]: https://github.com/google/docsy/pull/2726
 [#2731]: https://github.com/google/docsy/pull/2731
 [#2747]: https://github.com/google/docsy/pull/2747
