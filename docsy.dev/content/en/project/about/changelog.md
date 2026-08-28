@@ -206,8 +206,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   the home. All are guarded by the repo test suite (`test:repo`). See [Default
   script-dependency versions][script-versions-notes].
 - Moved the `hugo-extended` pin to the root `package.json` and adopted a
-  two-step dependency-update flow (`npm run update:hugo`), opening more Renovate
-  managers ([#2747][]).
+  two-step update flow; see [Officially supported Hugo
+  version][hugo-version-notes] ([#2747][]).
 
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
@@ -241,6 +241,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [0.17.0]: https://github.com/google/docsy/releases/tag/v0.17.0
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
 [git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...main
+[hugo-version-notes]: /project/about/maintainer-notes/#official-hugo-version
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [script-versions-notes]: /project/about/maintainer-notes/#script-versions
 [selector migration table]: /blog/2026/0.17.0/#selector-migration-table
