@@ -1,3 +1,5 @@
+@use 'support/fa';
+
 // Styles for the mobile scrollable navbar
 
 .td-navbar-container {
@@ -56,7 +58,7 @@
     &.scroll-left {
       &::before {
         font: var(--fa-font-solid);
-        content: fa-content($fa-var-chevron-left);
+        content: fa.fa-content(fa.$var-chevron-left);
         color: var(--bs-navbar-active-color);
       }
     }
@@ -64,7 +66,7 @@
     &.scroll-right {
       &::before {
         font: var(--fa-font-solid);
-        content: fa-content($fa-var-chevron-right);
+        content: fa.fa-content(fa.$var-chevron-right);
         color: var(--bs-navbar-active-color);
       }
     }

@@ -1,3 +1,5 @@
+@use 'support/fa';
+
 //
 // Main navbar
 //
@@ -13,7 +15,7 @@ $td-link-underline-offsets: (
 
 @mixin td-navbar-dropdown-item-icon($fa-icon) {
   &::before {
-    content: fa-content($fa-icon);
+    content: fa.fa-content($fa-icon);
     font: var(--fa-font-solid);
     position: absolute;
     left: 0.75rem;
@@ -149,11 +151,11 @@ $td-link-underline-offsets: (
       padding-left: 2.5rem;
 
       &.active {
-        @include td-navbar-dropdown-item-icon($fa-var-check);
+        @include td-navbar-dropdown-item-icon(fa.$var-check);
       }
 
       &-home {
-        @include td-navbar-dropdown-item-icon($fa-var-house);
+        @include td-navbar-dropdown-item-icon(fa.$var-house);
       }
 
       &-latest {
@@ -178,7 +180,7 @@ $td-link-underline-offsets: (
 
       &::before {
         font: var(--fa-font-solid);
-        content: fa-content($fa-var-globe);
+        content: fa.fa-content(fa.$var-globe);
         padding-right: 0.5rem;
       }
 
@@ -295,10 +297,10 @@ nav.foldable-nav {
   .ul-1 .with-child > label::before {
     font: var(--fa-font-solid);
     line-height: 1.5;
-    content: fa-content($fa-var-caret-right);
+    content: fa.fa-content(fa.$var-caret-right);
 
     @at-root [dir='rtl'] & {
-      content: fa-content($fa-var-caret-left);
+      content: fa.fa-content(fa.$var-caret-left);
     }
 
     position: absolute;

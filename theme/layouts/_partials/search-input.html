@@ -6,7 +6,7 @@
 {{ .Scratch.Add "docsy-search" 1 -}}
 
 <div class="td-search">
-  <div class="td-search__icon"></div>
+  <div class="td-search__icon" aria-hidden="true"></div>
   <input type="search" name="q" {{/**/ -}}
     class="td-search__input form-control td-search-input" {{/**/ -}}
     placeholder='{{ T "ui_search" }}' {{/**/ -}}
@@ -38,7 +38,7 @@
 {{ $offlineSearchLink := $offlineSearchIndex.RelPermalink -}}
 
 <div class="td-search td-search--offline">
-  <div class="td-search__icon"></div>
+  <div class="td-search__icon" aria-hidden="true"></div>
   <input
     type="search"
     name="q"

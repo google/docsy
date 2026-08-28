@@ -18,6 +18,7 @@ for (let index = 0; index < codeListings.length; index++) {
   copyButton.classList.add(
     'fas',
     'fa-copy',
+    'fa-width-auto',
     'btn',
     'btn-sm',
     'td-click-to-copy'
