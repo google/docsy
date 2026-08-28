@@ -159,6 +159,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Changed breadcrumb markup to carry Docsy [semantic classes][] with state keyed
   on `aria-current="page"` instead of an `active` class. If you customized
   breadcrumbs, see the [selector migration table][] ([#2722][]).
+- **[Font Awesome 7][0.17.0-blog-fontawesome]**: upgraded from 6.7.2 to 7.3.1;
+  icons render at a uniform width by default, and project Sass reaching into
+  Font Awesome's Sass surface needs migrating ([#2314][]).
 - Renamed the theme-dependencies install command that clone, submodule, and
   GitHub-npm installs run: `npm run postinstall` → `npm run install:theme-deps`;
   Docsy's packages no longer declare npm install hooks. For per-mode actions,
@@ -178,6 +181,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
+- Made the light/dark mode menu labels translatable, filled in missing UI
+  strings across locales, and updated the Turkish and Ukrainian locales
+  ([#2482][], [#2751][], [#2332][pr2332], [#2451][]).
 - Dropped broken `Dockerfile` and `docker-compose.yaml` files and retired Docker
   quickstart page ([#2748][]).
 
@@ -199,9 +205,16 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   `params.mermaid.version`; the KaTeX, markmap-autoloader, and Redoc pins share
   the home. All are guarded by the repo test suite (`test:repo`). See [Default
   script-dependency versions][script-versions-notes].
+- Moved the `hugo-extended` pin to the root `package.json` and adopted a
+  two-step dependency-update flow (`npm run update:hugo`), opening more Renovate
+  managers ([#2747][]).
 
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
+[#2314]: https://github.com/google/docsy/issues/2314
+[pr2332]: https://github.com/google/docsy/pull/2332
+[#2451]: https://github.com/google/docsy/pull/2451
+[#2482]: https://github.com/google/docsy/pull/2482
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
@@ -215,9 +228,12 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2724]: https://github.com/google/docsy/pull/2724
 [#2726]: https://github.com/google/docsy/pull/2726
 [#2731]: https://github.com/google/docsy/pull/2731
+[#2747]: https://github.com/google/docsy/pull/2747
 [#2748]: https://github.com/google/docsy/pull/2748
+[#2751]: https://github.com/google/docsy/pull/2751
 [0.17.0 release report]: /blog/2026/0.17.0/
 [0.17.0-blog-dart-sass]: /blog/2026/0.17.0/#dart-sass
+[0.17.0-blog-fontawesome]: /blog/2026/0.17.0/#fontawesome
 [0.17.0-blog-install]: /blog/2026/0.17.0/#install-command
 [0.17.0-blog-llms-directive]: /blog/2026/0.17.0/#llms-directive
 [0.17.0-blog-maintainers]: /blog/2026/0.17.0/#for-maintainers
