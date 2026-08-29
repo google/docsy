@@ -204,9 +204,12 @@ platform constraint: workflows and nvm read the root file, while Netlify reads
 only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
 toolchain-versions test guards the sync.
 
-Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
-GitHub's config-free Dependabot security updates; a rare duplicate PR is
-accepted.
+Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
+Dependabot security updates; a rare duplicate PR is accepted. These PRs bypass
+Renovate's own cooldown but not npm's: lock regeneration for a fix younger than
+`min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages. For a
+fix that can't wait, bump manually under the per-invocation
+`NPM_CONFIG_MIN_RELEASE_AGE=0` environment override.
 
 ## Test suites
 

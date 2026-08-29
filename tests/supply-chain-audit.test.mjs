@@ -192,8 +192,12 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   );
 
   // Allow entries are version-pinned so a bump's new (unreviewed) script
-  // fails npm ci under strict-allow-scripts; the assertion names the fix in
-  // the bump PR itself (#2712). Deny entries are unversioned: the answer is
+  // fails the scripts-enabled installs (install:safe's rebuild step,
+  // approve:hugo) under strict-allow-scripts; the assertion names the fix
+  // in the bump PR itself (#2712). Ordinary installs skip all scripts
+  // (ignore-scripts, .npmrc) without consulting the allowlist, and a new
+  // script-bearing package fails the inventory assertion above in CI.
+  // Deny entries are unversioned: the answer is
   // false for every version, so a pin would only add bump churn.
   // puppeteer's postinstall (browser download) is deliberately denied:
   // the visual suite installs its browser on demand (install:browser).
