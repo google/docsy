@@ -31,6 +31,10 @@ in your project, here's how you update the submodule to the latest release:
    git -C themes/docsy checkout {{% param tdVersion.latest %}}
    ```
 
+   If your project pins the submodule through its own tooling (a pin file, npm
+   scripts, or CI submodule sync), update the pin there instead: a bare checkout
+   is reset the next time your build syncs submodules.
+
 1. Reinstall the theme's runtime dependencies:
 
    ```sh
