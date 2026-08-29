@@ -198,6 +198,10 @@ Automated updates are configured through Renovate. Settings rationale:
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm and
     GitHub Actions (SHA-digest pins).
+  - The `nvm` manager is off: the `.nvmrc` Node pins are updated deliberately.
+    There are two by platform constraint -- workflows and nvm read the root
+    file, Netlify reads only its base directory's (`docsy.dev/.nvmrc`) -- and
+    they move together (`tests/hugo-versions.test.mjs` guards the sync).
 
 Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
 GitHub's config-free Dependabot security updates; a rare duplicate PR is

@@ -1,5 +1,6 @@
-// Docsy's Hugo version declarations must stay consistent (see maintainer
-// notes, "Hugo versions"). Fast and offline.
+// Docsy's toolchain version declarations (Hugo, Node) must stay consistent
+// (see maintainer notes, "Hugo versions" and "Dependency updates"). Fast
+// and offline.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -60,6 +61,22 @@ function assertInSync(entries, what) {
 
 test('Hugo minimum-version literal declarations are in sync', () => {
   assertInSync(declarations, 'minimum');
+});
+
+// Two homes by platform constraint: workflows and nvm read the root file,
+// while Netlify reads only its base directory's (docsy.dev), with no root
+// fallback. Exact pins, so every consumer resolves the same Node; upward
+// skew between the two would pass engine-strict on both sides and split
+// CI from Netlify silently.
+test('Node toolchain pins (.nvmrc) are exact and in sync', () => {
+  assertInSync(
+    {
+      '.nvmrc': () => extract('.nvmrc', /^(\S+)$/m, 'the Node pin'),
+      'docsy.dev/.nvmrc': () =>
+        extract('docsy.dev/.nvmrc', /^(\S+)$/m, 'the Node pin'),
+    },
+    'Node pin',
+  );
 });
 
 // docsy.dev's own module.hugoVersion.min must relay the params value via the
