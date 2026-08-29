@@ -23,6 +23,13 @@ npm install --save-dev @docsy/theme@latest
 > npm install --save-dev @docsy/theme@{{% param tdVersion.latest %}}
 > ```
 
+> [!NOTE]
+>
+> If your project gates installs with npm's `min-release-age`, installing a
+> release younger than the gate fails with `ETARGET`, and the error doesn't name
+> the cause. Wait out the window, or run the update under a one-off
+> `NPM_CONFIG_MIN_RELEASE_AGE` override, noting the override in your update PR.
+
 To verify the resolved version of [`@docsy/theme`][npm-package-setup], run:
 
 ```sh
