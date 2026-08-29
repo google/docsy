@@ -206,13 +206,13 @@ only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
 toolchain-versions test guards the sync.
 
 Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
-Dependabot security updates; a rare duplicate PR is accepted. These PRs bypass
-Renovate's own cooldown but not npm's: lock regeneration for a fix younger than
-`min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages. For a
-fix that can't wait, run the dependency's manual bump under a per-invocation
-`NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the fix's age requires
-(the override relaxes the cooldown for everything the invocation resolves). For
-example, for a three-day-old hugo-extended release:
+Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
+PRs bypass its own cooldown but not npm's: lock regeneration for a fix younger
+than `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages.
+For a fix that can't wait, run the dependency's manual bump under a
+per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
+fix's age requires (the override relaxes the cooldown for everything the
+invocation resolves). For example, for a three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
