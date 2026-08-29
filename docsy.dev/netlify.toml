@@ -14,7 +14,9 @@ HUGO_THEME = "repo/theme"
 # writes, no bin linking; install:safe does the real install. Netlify offers
 # no way to skip the automatic install, so if NPM_FLAGS ever stops being
 # honored, it runs for real: ignore-scripts (.npmrc) still denies its
-# scripts, and the is:clean bracket in _netlify:prepare flags its tree writes.
+# scripts, the is:clean bracket in _netlify:prepare flags its lock rewrites,
+# and install:safe's npm ci replaces node_modules wholesale, so git-invisible
+# residue there never reaches the build.
 NPM_FLAGS = "--dry-run --ignore-scripts"
 
 [context.production]
