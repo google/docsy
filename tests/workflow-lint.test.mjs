@@ -77,7 +77,7 @@ test('workflows: the visual net runs unconditionally as reviewed', () => {
       }
       if (jobId === 'visual') {
         visualJobs += 1;
-        assert.ok(!('if' in job), `${id} job carries no condition`);
+        assert.ok(!('if' in job), `${id} job runs unconditionally`);
         assert.ok(
           !('continue-on-error' in job),
           `${id} job failures fail the workflow`,
@@ -94,7 +94,7 @@ test('workflows: the visual net runs unconditionally as reviewed', () => {
         // A defaults.run.working-directory (workflow- or job-level, or on
         // a step) would re-point the pinned npm commands at a different
         // package.json whose scripts can no-op the whole net.
-        assert.ok(!('defaults' in job), `${id} declares no defaults`);
+        assert.ok(!('defaults' in job), `${id} uses the workflow defaults`);
         assert.ok(
           !workflow.defaults?.run?.['working-directory'],
           `${file} sets no workflow-level working directory`,

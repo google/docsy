@@ -54,7 +54,7 @@ test('npm scripts declare no lifecycle or hook-shaped names', () => {
       assert.ok(
         !/^(pre|post)/.test(name) &&
           !['install', 'dependencies', 'publish', 'version'].includes(name),
-        `${manifest}: ${name} stays outside npm's lifecycle namespace, so every script runs the same with and without ignore-scripts`,
+        `${manifest}: ${name} is outside npm's lifecycle namespace, so every script runs the same with and without ignore-scripts`,
       );
     }
   }

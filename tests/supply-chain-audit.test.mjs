@@ -211,7 +211,7 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   for (const dir of ['docsy.dev', 'theme']) {
     assert.ok(
       !fs.existsSync(path.join(repoRoot, dir, '.npmrc')),
-      `${dir} has no workspace .npmrc`,
+      `${dir} defers .npmrc to the workspace root`,
     );
   }
   // Close the lockfile set: npm prefers npm-shrinkwrap.json over
@@ -340,7 +340,7 @@ test('scripts: install and approval entries keep their reviewed forms', () => {
       assert.equal(
         scripts[hook],
         undefined,
-        `${hook} stays absent, so ${name} runs exactly as reviewed`,
+        `${hook} is absent, so ${name} runs exactly as reviewed`,
       );
     }
   }
@@ -480,7 +480,7 @@ test('manifest: engines floor stays at or above the reviewed minimums', () => {
   assert.equal(
     rootManifest.devEngines,
     undefined,
-    'devEngines stays absent, so engine-strict enforces engines',
+    'devEngines is absent, so engine-strict enforces engines',
   );
 });
 
@@ -511,7 +511,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
     if (config === 'package.json') continue; // its puppeteer key is pinned below
     assert.ok(
       !fs.existsSync(path.join(repoRoot, config)),
-      `${config} stays absent, so the browser install runs unconfigured`,
+      `${config} is absent, so the browser install runs unconfigured`,
     );
   }
   for (const manifest of ['package.json', 'theme', 'docsy.dev']) {
@@ -521,7 +521,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
     assert.equal(
       readJSON(file).puppeteer,
       undefined,
-      `${file} carries no puppeteer configuration key`,
+      `${file} puppeteer configuration key is absent`,
     );
   }
   // Cross-root anchoring: this file and the wiring guard ride the tests
@@ -548,7 +548,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
       assert.equal(
         consumerScripts[hook],
         undefined,
-        `${manifest} declares no consumer ${hook} hook`,
+        `${manifest} ${hook} is absent, so permissive installs run script-free`,
       );
     }
   }
@@ -559,7 +559,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
   for (const dir of ['.', 'docsy.dev', 'theme']) {
     assert.ok(
       !fs.existsSync(path.join(repoRoot, dir, 'binding.gyp')),
-      `${dir} binding.gyp stays absent, so npm synthesizes no install script`,
+      `${dir} binding.gyp is absent, so npm synthesizes no install script`,
     );
   }
 });
