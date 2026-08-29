@@ -311,7 +311,10 @@ test('scripts: install and approval entries keep their reviewed forms', () => {
     assert.equal(scripts[name], form, `${name} keeps its reviewed form`);
   }
   // npm wraps every script in implicit pre<name>/post<name> hooks: a hook
-  // sibling would run unreviewed code inside a reviewed chain.
+  // sibling would run unreviewed code inside a reviewed chain. Kept
+  // despite tests/npm-scripts.test.mjs's namespace ban: this loop honors
+  // no reviewed-pair exemptions, so an allowlisted pair can never ride an
+  // install-path name.
   for (const name of Object.keys(REVIEWED_SCRIPTS)) {
     for (const hook of [`pre${name}`, `post${name}`]) {
       assert.equal(
@@ -358,12 +361,7 @@ test('workspaces: the reviewed member set, bound identities, no shadow config', 
     );
     // npm runs a member's install-lifecycle scripts as project code, not
     // as dependency scripts, so allowScripts and strict-allow-scripts
-    // never gate them; and with no explicit install script, a member
-    // binding.gyp makes npm synthesize `node-gyp rebuild`.
-    assert.ok(
-      !fs.existsSync(path.join(repoRoot, dir, 'binding.gyp')),
-      `${dir} has no binding.gyp (would synthesize node-gyp rebuild)`,
-    );
+    // never gate them; the binding.gyp screen below covers members too.
   }
 });
 
@@ -373,13 +371,12 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
   // put that directory first on PATH. A bin named after a command the
   // install and build chain trusts (node, npm, git, a shell) would
   // hijack every later script step, so reserve those names outright.
+  // Runner names (npx, yarn, pnpm, corepack) need no reservation: the
+  // runner lint and this file's workflow audit already deny them at every
+  // execution site.
   const reservedBins = new Set([
     'node',
     'npm',
-    'npx',
-    'corepack',
-    'yarn',
-    'pnpm',
     'git',
     'bash',
     'sh',
@@ -533,12 +530,16 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
       );
     }
   }
-  // With no explicit install script, a root binding.gyp makes npm
-  // synthesize `node-gyp rebuild` as the install script.
-  assert.ok(
-    !fs.existsSync(path.join(repoRoot, 'binding.gyp')),
-    'no root binding.gyp (would synthesize node-gyp rebuild)',
-  );
+  // With no explicit install script, a binding.gyp makes npm synthesize
+  // `node-gyp rebuild` as the install script: for the root, and for
+  // workspace members (whose install lifecycle runs as project code,
+  // ungated by allowScripts).
+  for (const dir of ['.', 'docsy.dev', 'theme']) {
+    assert.ok(
+      !fs.existsSync(path.join(repoRoot, dir, 'binding.gyp')),
+      `${dir} has no binding.gyp (would synthesize node-gyp rebuild)`,
+    );
+  }
 });
 
 test('workflows: installs are locked and credential-isolated', () => {
