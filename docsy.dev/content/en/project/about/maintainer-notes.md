@@ -2,7 +2,8 @@
 title: Maintainer notes
 description: Release, dependency-update, and Hugo-support procedures
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate lycheecache opentelemetry prebuild worktree
+# prettier-ignore
+cSpell:ignore: creatordate lycheecache prebuild ETARGET unkeyed
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -209,7 +210,11 @@ Dependabot security updates; a rare duplicate PR is accepted. These PRs bypass
 Renovate's own cooldown but not npm's: lock regeneration for a fix younger than
 `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages. For a
 fix that can't wait, bump manually under a per-invocation
-`NPM_CONFIG_MIN_RELEASE_AGE` environment override.
+`NPM_CONFIG_MIN_RELEASE_AGE` environment override, for example:
+
+```sh
+NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo
+```
 
 ## Test suites
 
