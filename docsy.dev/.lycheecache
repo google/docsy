@@ -56,6 +56,9 @@ https://docs.docker.com/compose/install/,200,1782563368
 https://docs.docker.com/engine/install/,200,1782563368
 https://docs.docker.com/engine/reference/builder/,200,1782563368
 https://docs.docker.com/get-docker/,200,1782498226
+https://docs.fontawesome.com/upgrade/scss,200,1787947232
+https://docs.fontawesome.com/web/dig-deeper/accessibility,200,1787947232
+https://docs.fontawesome.com/web/setup/upgrade/whats-changed,200,1787929766
 https://docs.github.com/en/actions,200,1782563369
 https://docs.github.com/en/actions/deployment/about-deployments/about-continuous-deployment,200,1782563367
 https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository,200,1782563368
@@ -94,6 +97,7 @@ https://favicon.io/,200,1782498227
 https://fission.io/,200,1782498244
 https://flaviocopes.com/npm-packages-local-global/,200,1782563368
 https://fluxcd.io/,200,1782498244
+https://fontawesome.com/,200,1787929766
 https://fontawesome.com/icons/,200,1782498227
 https://fontawesome.com/icons?d=gallery&m=free,200,1782498237
 https://fontawesome.com/icons?d=gallery&p=2,200,1782498235
@@ -129,6 +133,7 @@ https://getbootstrap.com/docs/5.3/customize/color/,200,1782498237
 https://getbootstrap.com/docs/5.3/customize/sass/#maps-and-loops,200,1782498237
 https://getbootstrap.com/docs/5.3/customize/sass/#variable-defaults,200,1782498237
 https://getbootstrap.com/docs/5.3/getting-started/rtl/,200,1782563368
+https://getbootstrap.com/docs/5.3/helpers/visually-hidden/,200,1787941870
 https://git-scm.com/,200,1782563368
 https://git-scm.com/book/en/v2/Git-Tools-Submodules,200,1782563368
 https://git-scm.com/downloads,200,1787863994
@@ -302,6 +307,7 @@ https://github.com/google/docsy/issues/1841,200,1782498235
 https://github.com/google/docsy/issues/1845,200,1782498239
 https://github.com/google/docsy/issues/1852,200,1782498238
 https://github.com/google/docsy/issues/1944,200,1782498238
+https://github.com/google/docsy/issues/1987,200,1787961973
 https://github.com/google/docsy/issues/2,200,1782498235
 https://github.com/google/docsy/issues/2001,200,1782498235
 https://github.com/google/docsy/issues/2035,200,1782498234
@@ -313,9 +319,11 @@ https://github.com/google/docsy/issues/2133,200,1782563371
 https://github.com/google/docsy/issues/2173,200,1782498225
 https://github.com/google/docsy/issues/2243,200,1782498234
 https://github.com/google/docsy/issues/2266,200,1782498235
+https://github.com/google/docsy/issues/2279,200,1787948759
 https://github.com/google/docsy/issues/2285,200,1782498225
 https://github.com/google/docsy/issues/2289,200,1782498234
 https://github.com/google/docsy/issues/2313,200,1782498225
+https://github.com/google/docsy/issues/2314,200,1787929767
 https://github.com/google/docsy/issues/2328,200,1782498234
 https://github.com/google/docsy/issues/2329,200,1782563367
 https://github.com/google/docsy/issues/2331,200,1782498225
@@ -345,6 +353,7 @@ https://github.com/google/docsy/issues/2705,200,1787588586
 https://github.com/google/docsy/issues/2706,200,1787588586
 https://github.com/google/docsy/issues/2732,200,1787323021
 https://github.com/google/docsy/issues/2737,200,1787613566
+https://github.com/google/docsy/issues/2756,200,1787934072
 https://github.com/google/docsy/issues/331,200,1782498237
 https://github.com/google/docsy/issues/349,200,1782498234
 https://github.com/google/docsy/issues/375,200,1782498235
@@ -476,6 +485,7 @@ https://github.com/google/docsy/pull/2259,200,1782498225
 https://github.com/google/docsy/pull/2276,200,1782498225
 https://github.com/google/docsy/pull/2291,200,1782498242
 https://github.com/google/docsy/pull/2303,200,1782498224
+https://github.com/google/docsy/pull/2332,200,1787929767
 https://github.com/google/docsy/pull/2364,200,1782498224
 https://github.com/google/docsy/pull/2366,200,1782498224
 https://github.com/google/docsy/pull/2371,200,1782498225
@@ -492,9 +502,11 @@ https://github.com/google/docsy/pull/2406,200,1782498224
 https://github.com/google/docsy/pull/2443,200,1782498223
 https://github.com/google/docsy/pull/2444,200,1782498223
 https://github.com/google/docsy/pull/2447,200,1782498232
+https://github.com/google/docsy/pull/2451,200,1787929768
 https://github.com/google/docsy/pull/2470,200,1782498223
 https://github.com/google/docsy/pull/2477,200,1782563372
 https://github.com/google/docsy/pull/2480,200,1782498223
+https://github.com/google/docsy/pull/2482,200,1787929767
 https://github.com/google/docsy/pull/2505/changes,200,1782498233
 https://github.com/google/docsy/pull/2524,200,1782498223
 https://github.com/google/docsy/pull/2533,200,1782498223
@@ -543,7 +555,9 @@ https://github.com/google/docsy/pull/2722,200,1787153684
 https://github.com/google/docsy/pull/2724,200,1787076569
 https://github.com/google/docsy/pull/2726,200,1787137876
 https://github.com/google/docsy/pull/2731,200,1787331617
+https://github.com/google/docsy/pull/2747,200,1787929767
 https://github.com/google/docsy/pull/2748,200,1787848215
+https://github.com/google/docsy/pull/2751,200,1787929767
 https://github.com/google/docsy/pull/941,200,1782498225
 https://github.com/google/docsy/pulls,200,1782563369
 https://github.com/google/docsy/releases,200,1782563368
