@@ -1,6 +1,6 @@
 // Regression coverage for #2753: the theme toggler's accessible name is
 // localized and carries the mode, and the visually hidden #bd-theme-text
-// sentinel that dark-mode.js keys on is present — without it the label
+// sentinel that dark-mode.js keys on is present: without it the label
 // silently never updates on scheme switch (the original bug).
 
 import { test } from 'node:test';
