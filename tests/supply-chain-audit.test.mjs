@@ -225,8 +225,10 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       .map((line) => line.trim())
       .filter((line) => line !== '' && !line.startsWith('#')),
     [
-      'engine-strict=true',
+      'min-release-age=7',
       'strict-allow-scripts=true',
+      'engine-strict=true',
+      'ignore-scripts=true',
       'script-shell=bash',
       '@docsy:registry=https://registry.npmjs.org/',
     ],

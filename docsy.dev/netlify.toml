@@ -13,7 +13,7 @@ HUGO_THEME = "repo/theme"
 # Constrain Netlify's automatic npm install to resolution only: no tree
 # writes, no bin linking; install:safe does the real install. Netlify offers
 # no way to skip the automatic install, so if NPM_FLAGS ever stops being
-# honored, it runs for real: strict-allow-scripts (.npmrc) still gates its
+# honored, it runs for real: ignore-scripts (.npmrc) still denies its
 # scripts, and the is:clean bracket in _netlify:prepare flags its tree writes.
 NPM_FLAGS = "--dry-run --ignore-scripts"
 
