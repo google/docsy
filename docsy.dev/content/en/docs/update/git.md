@@ -42,7 +42,7 @@ in your project, here's how you update the submodule to the latest release:
    If a pin file or other project tooling names the Docsy ref separately, update
    that source of truth too.
 
-1. Reinstall the theme's runtime dependencies:
+2. Reinstall the theme's runtime dependencies:
 
    ```sh
    npm run install:theme-deps --prefix themes/docsy
@@ -51,14 +51,14 @@ in your project, here's how you update the submodule to the latest release:
    Run `npm run install:theme-deps`, not `npm install`; for why, see the [setup
    note][theme-deps-note].
 
-1. Commit the change to your project (re-run the `git add` first if your tooling
+3. Commit the change to your project (re-run the `git add` first if your tooling
    touched the submodule since step 1):
 
    ```sh
    git commit -m "Update Docsy theme to {{% param tdVersion.latest %}}"
    ```
 
-1. Push the commit to your project repo.
+4. Push the commit to your project repo.
 
 ## Update your Docsy clone
 
@@ -77,7 +77,7 @@ that you are targeting:
    Ensure that `origin` is set to `https://github.com/google/docsy.git`
    (`git -C themes/docsy remote -v`).
 
-1. Reinstall the theme's runtime dependencies:
+2. Reinstall the theme's runtime dependencies:
 
    ```sh
    npm run install:theme-deps --prefix themes/docsy
@@ -86,7 +86,7 @@ that you are targeting:
    As in the submodule procedure, run `npm run install:theme-deps`, not
    `npm install`.
 
-1. Persist the update to your project, the same way that your project already
+3. Persist the update to your project, the same way that your project already
    tracks the cloned theme: for example, commit the updated theme files to your
    project repository, or record the new tag where your build restores the clone
    from.
