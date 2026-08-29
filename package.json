@@ -40,7 +40,7 @@
     "_serve": "npm run -C docsy.dev _serve --",
     "_spv:example": "echo TBC - npm run -s __spv docsy.dev/config/example/params.yaml --",
     "_spv": "npm run -s __spv docsy.dev/config/*/params.yaml --",
-    "_sync:theme-lock": "npm install --prefix theme --package-lock-only --ignore-scripts --min-release-age=\"${NPM_CONFIG_MIN_RELEASE_AGE:-${npm_config_min_release_age:-7}}\"",
+    "_sync:theme-lock": "npm install --prefix theme --package-lock-only --ignore-scripts",
     "_test:fix-clean": "npm run fix-for-test && npm run -s is:clean",
     "_test:full:common": "npm run _test:fix-clean && npm run test:repo",
     "_test:full:pre": "npm run _prepare && npm run -s is:clean",

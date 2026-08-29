@@ -222,12 +222,14 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // a later line, and any unpinned addition (node-options=--require …,
   // ignore-scripts=false) changes install behavior: pin the full
   // assignment set. Each setting's rationale lives beside it in .npmrc.
-  assert.deepEqual(
+  const npmrcAssignments = (relPath) =>
     fs
-      .readFileSync(path.join(repoRoot, '.npmrc'), 'utf8')
+      .readFileSync(path.join(repoRoot, relPath), 'utf8')
       .split('\n')
       .map((line) => line.trim())
-      .filter((line) => line !== '' && !line.startsWith('#')),
+      .filter((line) => line !== '' && !line.startsWith('#'));
+  assert.deepEqual(
+    npmrcAssignments('.npmrc'),
     [
       'min-release-age=7',
       'strict-allow-scripts=true',
@@ -238,15 +240,22 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
     ],
     '.npmrc carries exactly the reviewed npm settings',
   );
-  // npm resolves workspace config at the root, but --prefix/-C runs read
-  // the target directory's .npmrc as project config: their absence keeps
-  // the root file the one audited home.
-  for (const dir of ['docsy.dev', 'theme']) {
-    assert.ok(
-      !fs.existsSync(path.join(repoRoot, dir, '.npmrc')),
-      `${dir} defers .npmrc to the workspace root`,
-    );
-  }
+  // npm resolves workspace config at the root, but --prefix/-C runs
+  // suppress the workspace walk-up and read only the target directory's
+  // .npmrc: theme (the prefix-install target: install:theme-deps,
+  // _sync:theme-lock) mirrors the root file so those runs keep the same
+  // posture (the .nvmrc-pair pattern, toolchain-versions.test.mjs), while
+  // docsy.dev (no prefix installs) stays absent so the root file remains
+  // its one home.
+  assert.deepEqual(
+    npmrcAssignments('theme/.npmrc'),
+    npmrcAssignments('.npmrc'),
+    'theme/.npmrc mirrors the root assignment set',
+  );
+  assert.ok(
+    !fs.existsSync(path.join(repoRoot, 'docsy.dev/.npmrc')),
+    'docsy.dev defers .npmrc to the workspace root',
+  );
   // Close the lockfile set: npm prefers npm-shrinkwrap.json over
   // package-lock.json at an install root, and a lock added anywhere else
   // (docsy.dev, a new directory) would define an installable tree outside
@@ -397,12 +406,12 @@ test('scripts: install and approval entries keep their reviewed forms', () => {
 });
 
 test('workspaces: the reviewed member set, bound identities, no shadow config', () => {
-  // npm resolves config and the root lock at the workspace root, so a
-  // member carrying its own .npmrc would be dead weight that reads as a
-  // control; and a new member widens the audited install surface, so the
-  // list itself is pinned. theme/package-lock.json is the one sanctioned
-  // member lock: install:theme-deps consumes it as a standalone prefix
-  // install (this file audits it in `locks`).
+  // npm resolves config and the root lock at the workspace root; member
+  // .npmrc files are governed by the mirror-or-absent assertions in the
+  // install-scripts test above. A new member widens the audited install
+  // surface, so the list itself is pinned. theme/package-lock.json is the
+  // one sanctioned member lock: install:theme-deps consumes it as a
+  // standalone prefix install (this file audits it in `locks`).
   const reviewedWorkspaces = {
     'docsy.dev': '@docsy/docsy.dev',
     theme: '@docsy/theme',
