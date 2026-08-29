@@ -208,8 +208,8 @@ Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
 Dependabot security updates; a rare duplicate PR is accepted. These PRs bypass
 Renovate's own cooldown but not npm's: lock regeneration for a fix younger than
 `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages. For a
-fix that can't wait, bump manually under the per-invocation
-`NPM_CONFIG_MIN_RELEASE_AGE=0` environment override.
+fix that can't wait, bump manually under a per-invocation
+`NPM_CONFIG_MIN_RELEASE_AGE` environment override.
 
 ## Test suites
 
