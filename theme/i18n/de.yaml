@@ -13,7 +13,7 @@ ui_search: Diese Seite durchsuchen…
 ui_theme_light: Hell
 ui_theme_dark: Dunkel
 ui_theme_auto: Automatisch
-ui_theme_toggle: Design umschalten
+ui_theme_toggle: Darstellung umschalten
 
 # Used in sentences such as "Posted in News"
 ui_in: in
