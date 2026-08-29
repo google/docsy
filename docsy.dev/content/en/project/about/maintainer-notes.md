@@ -205,6 +205,11 @@ platform constraint: workflows and nvm read the root file, while Netlify reads
 only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
 toolchain-versions test guards the sync.
 
+The npm config follows the same two-homes pattern: `theme/.npmrc` is a
+byte-identical mirror of the root `.npmrc`, because `--prefix`/`-C` npm runs
+(`install:theme-deps`, `_sync:theme-lock`) read only the target directory's
+file. Edit the two together; the supply-chain audit guards the sync.
+
 Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
 Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
 PRs bypass its own cooldown but not npm's: lock regeneration for a fix younger

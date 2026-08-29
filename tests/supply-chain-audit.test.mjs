@@ -222,14 +222,12 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // a later line, and any unpinned addition (node-options=--require …,
   // ignore-scripts=false) changes install behavior: pin the full
   // assignment set. Each setting's rationale lives beside it in .npmrc.
-  const npmrcAssignments = (relPath) =>
+  assert.deepEqual(
     fs
-      .readFileSync(path.join(repoRoot, relPath), 'utf8')
+      .readFileSync(path.join(repoRoot, '.npmrc'), 'utf8')
       .split('\n')
       .map((line) => line.trim())
-      .filter((line) => line !== '' && !line.startsWith('#'));
-  assert.deepEqual(
-    npmrcAssignments('.npmrc'),
+      .filter((line) => line !== '' && !line.startsWith('#')),
     [
       'min-release-age=7',
       'strict-allow-scripts=true',
@@ -243,14 +241,15 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // npm resolves workspace config at the root, but --prefix/-C runs
   // suppress the workspace walk-up and read only the target directory's
   // .npmrc: theme (the prefix-install target: install:theme-deps,
-  // _sync:theme-lock) mirrors the root file so those runs keep the same
-  // posture (the .nvmrc-pair pattern, toolchain-versions.test.mjs), while
-  // docsy.dev (no prefix installs) stays absent so the root file remains
-  // its one home.
-  assert.deepEqual(
-    npmrcAssignments('theme/.npmrc'),
-    npmrcAssignments('.npmrc'),
-    'theme/.npmrc mirrors the root assignment set',
+  // _sync:theme-lock) carries a byte-identical mirror of the root file so
+  // those runs keep the same posture (the .nvmrc-pair pattern,
+  // toolchain-versions.test.mjs), while docsy.dev (no prefix installs)
+  // stays absent so the root file remains its one home. On a mismatch:
+  // cp .npmrc theme/.npmrc.
+  assert.equal(
+    fs.readFileSync(path.join(repoRoot, 'theme/.npmrc'), 'utf8'),
+    fs.readFileSync(path.join(repoRoot, '.npmrc'), 'utf8'),
+    'theme/.npmrc is a byte-identical mirror of the root .npmrc',
   );
   assert.ok(
     !fs.existsSync(path.join(repoRoot, 'docsy.dev/.npmrc')),
