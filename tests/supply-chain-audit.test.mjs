@@ -7,6 +7,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -106,6 +107,26 @@ test('locks: every package is registry+integrity, workspace-local, or an allowli
           pkg.resolved ?? '',
           /^https:\/\/registry\.npmjs\.org\//,
           `${id} resolves to the npm registry`,
+        );
+        // Bind the entry to one registry identity: npm trusts the
+        // URL-baked name, so a hand-edited entry could keep an
+        // allowlisted key (the reserved-bin provider, say) while
+        // fetching a different artifact; and an aliasing name field
+        // must not diverge from the key-derived name.
+        const keyName = key.slice(
+          key.lastIndexOf('node_modules/') + 'node_modules/'.length,
+        );
+        assert.equal(
+          pkg.resolved,
+          `https://registry.npmjs.org/${keyName}/-/${keyName
+            .split('/')
+            .pop()}-${pkg.version}.tgz`,
+          `${id} resolves to the tarball its key and version imply`,
+        );
+        assert.equal(
+          pkg.name ?? keyName,
+          keyName,
+          `${id} name matches its key-derived package name`,
         );
         assert.match(
           pkg.integrity ?? '',
@@ -217,17 +238,30 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   // Close the lockfile set: npm prefers npm-shrinkwrap.json over
   // package-lock.json at an install root, and a lock added anywhere else
   // (docsy.dev, a new directory) would define an installable tree outside
-  // every check above. Scan the working tree instead of enumerating
-  // directories, so unknown locations fail closed. Excluded: node_modules
-  // (uncommitted registry content, integrity-covered), the generated-site
-  // public repos, and gitignored scratch.
-  const excludedDirs = new Set(['node_modules', 'public', 'tmp', '.git']);
-  const lockfiles = fs
-    .globSync('**/{package-lock,npm-shrinkwrap}.json', {
-      cwd: repoRoot,
-      exclude: (dirent) => excludedDirs.has(dirent.name ?? dirent),
-    })
-    .map((file) => file.replaceAll(path.sep, '/'))
+  // every check above. Enumerate from git (tracked plus
+  // untracked-unignored, dot-directories included; fs.globSync skips
+  // dot-directories, a probed false-green), so unknown locations fail
+  // closed; gitignored scratch and the nested public/ site repos are
+  // exactly what the closure should ignore.
+  const lsFiles = spawnSync(
+    'git',
+    [
+      'ls-files',
+      '-z',
+      '--cached',
+      '--others',
+      // Only the repo's own .gitignore files: --exclude-standard would
+      // also honor user-level ignores (~/.gitignore, core.excludesFile),
+      // making the closure environment-dependent (probed: a global
+      // package-lock.json ignore hid a planted stray lock).
+      '--exclude-per-directory=.gitignore',
+    ],
+    { cwd: repoRoot, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 },
+  );
+  assert.equal(lsFiles.status, 0, 'git ls-files enumerates the repo files');
+  const lockfiles = lsFiles.stdout
+    .split('\0')
+    .filter((file) => /(^|\/)(package-lock|npm-shrinkwrap)\.json$/.test(file))
     .sort();
   assert.deepEqual(
     lockfiles,
@@ -441,8 +475,11 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
       }
       for (const name of names) {
         binNames += 1;
+        // Case-fold: npm preserves bin-key case, and macOS/Windows
+        // filesystems resolve `node` to a shim named `Node`.
+        const folded = name.toLowerCase();
         assert.ok(
-          !reservedBins.has(name) || reservedBinAllow.has(`${key} ${name}`),
+          !reservedBins.has(folded) || reservedBinAllow.has(`${key} ${folded}`),
           `${id} bin ${name} leaves trusted command names unshadowed`,
         );
       }
@@ -614,6 +651,7 @@ test('workflows: installs are locked and credential-isolated', () => {
 
   let runSteps = 0;
   let checkouts = 0;
+  let setupNodes = 0;
   let safeInstalls = 0;
   for (const file of files) {
     const workflow = parse(
@@ -672,6 +710,23 @@ test('workflows: installs are locked and credential-isolated', () => {
             step.with?.['persist-credentials'],
             false,
             `${id} checkout sets persist-credentials false`,
+          );
+        }
+        // The engines floor holds in CI only while setup-node reads the
+        // exact .nvmrc pin; a node-version input or another version file
+        // (package.json resolves the floating engines range) silently
+        // swaps the toolchain source.
+        if (step.uses?.startsWith('actions/setup-node@')) {
+          setupNodes += 1;
+          assert.equal(
+            step.with?.['node-version-file'],
+            '.nvmrc',
+            `${id} setup-node reads the .nvmrc pin`,
+          );
+          assert.equal(
+            step.with?.['node-version'],
+            undefined,
+            `${id} setup-node takes its version from .nvmrc alone`,
           );
         }
         // Local actions and unpinned refs run code this audit doesn't walk.
@@ -737,5 +792,6 @@ test('workflows: installs are locked and credential-isolated', () => {
   }
   assert.ok(runSteps > 0, 'workflow run steps were audited');
   assert.ok(checkouts > 0, 'checkout steps were audited');
+  assert.ok(setupNodes > 0, 'setup-node steps were audited');
   assert.ok(safeInstalls > 0, 'CI installs go through install:safe');
 });

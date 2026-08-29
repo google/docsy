@@ -69,11 +69,14 @@ test('Hugo minimum-version literal declarations are in sync', () => {
 // skew between the two would pass engine-strict on both sides and split
 // CI from Netlify silently.
 test('Node toolchain pins (.nvmrc) are exact and in sync', () => {
+  // Whole-file reads: a second version token would make consumers
+  // disagree about the pin while a first-line extract stays green.
+  const nvmrcPin = (relPath) => () =>
+    extract(relPath, /^(\S+)\n?$/, 'the Node pin');
   assertInSync(
     {
-      '.nvmrc': () => extract('.nvmrc', /^(\S+)$/m, 'the Node pin'),
-      'docsy.dev/.nvmrc': () =>
-        extract('docsy.dev/.nvmrc', /^(\S+)$/m, 'the Node pin'),
+      '.nvmrc': nvmrcPin('.nvmrc'),
+      'docsy.dev/.nvmrc': nvmrcPin('docsy.dev/.nvmrc'),
     },
     'Node pin',
   );
