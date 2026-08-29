@@ -181,11 +181,10 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   ([#2614][]).
 - Silenced Sass deprecation warnings in site builds, project style files
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
-- Made the light/dark mode menu labels translatable, filled in missing UI
+- Made the light/dark mode menu labels and assistive text translatable, fixed
+  the toggle button's label to reflect the selected mode, filled in missing UI
   strings across locales, and updated the Turkish and Ukrainian locales
-  ([#1987][], [#2751][], [#2332][pr2332], [#2451][]). Also localized the theme
-  toggler's assistive text, and fixed its label so that it reflects the selected
-  mode ([#2753][]).
+  ([#1987][], [#2753][], [#2751][], [#2332][pr2332], [#2451][]).
 - Dropped broken `Dockerfile` and `docker-compose.yaml` files and retired Docker
   quickstart page ([#2748][]).
 
