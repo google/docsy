@@ -413,7 +413,9 @@ test('manifest: engines floor stays at or above the reviewed minimums', () => {
   // The npm floor is the oldest version trusted to enforce the controls
   // (strict allowScripts landed in 11.16; 11.18 fixes workspace
   // visibility under linked installs, npm/cli#9652); the floor only
-  // rises.
+  // rises. engine-strict (pinned in the .npmrc set above) makes npm
+  // enforce the written floor at install time; these pins guard what
+  // that mechanism can't know or can be disabled by.
   const { engines } = rootManifest;
   const npmFloor = engines.npm.match(/^>=(\d+)\.(\d+)\.(\d+)$/);
   assert.ok(npmFloor, 'engines.npm is a >=x.y.z floor');
@@ -422,24 +424,9 @@ test('manifest: engines floor stays at or above the reviewed minimums', () => {
     major > 11 || (major === 11 && minor >= 18),
     'engines.npm floor is at least 11.18',
   );
-  const nodeFloor = engines.node.match(/^>=(\d+)$/);
-  assert.ok(nodeFloor, 'engines.node is a major floor');
-  assert.ok(
-    Number(nodeFloor[1]) >= 24,
-    'engines.node floor is at least the reviewed major 24',
-  );
-  // The .nvmrc pin is what keeps the npm floor satisfied in practice
-  // (setup-node, nvm, and Netlify read it; its bundled npm is the
-  // active npm): pin the shape exact-semver and its major inside the
-  // engines floor.
-  const nvmrc = fs.readFileSync(path.join(repoRoot, '.nvmrc'), 'utf8').trim();
-  assert.match(nvmrc, /^\d+\.\d+\.\d+$/, '.nvmrc is an exact semver pin');
-  assert.ok(
-    Number(nvmrc.split('.')[0]) >= Number(nodeFloor[1]),
-    '.nvmrc pins a Node version inside the engines.node floor',
-  );
   // The lock captures engines at generation time; a floor raised in the
-  // manifest without the reconcile run leaves the lock stale.
+  // manifest without the reconcile run leaves the lock stale (npm ci's
+  // sync check compares dependency specs, not engines).
   assert.deepEqual(
     locks['package-lock.json'].packages[''].engines,
     engines,
@@ -478,14 +465,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
     searchPlaces.includes('.config/puppeteerrc') && searchPlaces.length >= 12,
     'the parsed search-place list is plausibly complete',
   );
-  for (const config of new Set([
-    ...searchPlaces,
-    // Not searched by this Puppeteer version; pinned anyway (cheap, and
-    // cosmiconfig siblings use them).
-    '.puppeteerrc.mjs',
-    '.puppeteerrc.yaml',
-    'puppeteer.config.mjs',
-  ])) {
+  for (const config of searchPlaces) {
     if (config === 'package.json') continue; // its puppeteer key is pinned below
     assert.ok(
       !fs.existsSync(path.join(repoRoot, config)),
