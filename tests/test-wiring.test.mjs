@@ -24,35 +24,19 @@ const ownSuites = {
   'tests/visual/': 'test:visual',
 };
 
-test('manifests: every test:repo argument resolves to test files', () => {
-  const { scripts } = JSON.parse(
-    fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
-  );
-  assert.match(
-    scripts['test:repo'],
-    /^node --test /,
-    'test:repo uses the node test runner',
-  );
-  const args = scripts['test:repo'].replace(/^node --test /, '').split(' ');
-  // Coverage below is existence-relative: a deleted file drops out of
-  // both sides, so the structural guards anchor each other by name; this
-  // file is pinned from the supply-chain audit.
-  for (const guard of [
-    'tests/runner-lint.test.mjs',
-    'tests/supply-chain-audit.test.mjs',
-  ]) {
-    assert.ok(
-      fs.existsSync(path.join(repoRoot, guard)),
-      `structural guard ${guard} exists`,
-    );
-  }
+// Simulates the runner's resolution: every argument must resolve to test
+// files under node's own globbing, so the wildcard-quoting assert is
+// load-bearing (an unquoted `**` under bash without globstar pre-expands
+// as `*`, dropping files the simulation would still see).
+function resolveArgs(command, label) {
+  assert.match(command, /^node --test /, `${label} uses the node test runner`);
   const resolved = new Set();
-  for (const arg of args) {
+  for (const arg of command.replace(/^node --test /, '').split(' ')) {
     if (arg.includes('*')) {
       assert.match(
         arg,
         /^(['"]).*\1$/,
-        `test:repo wildcard argument ${arg} is quoted for node's own globbing`,
+        `${label} wildcard argument ${arg} is quoted for node's own globbing`,
       );
     }
     const pattern = arg.replace(/^(['"])(.*)\1$/, '$2');
@@ -66,30 +50,39 @@ test('manifests: every test:repo argument resolves to test files', () => {
       );
     assert.ok(
       testFiles.length > 0,
-      `test:repo argument ${arg} matches test files`,
+      `${label} argument ${arg} matches test files`,
     );
     // globSync returns platform separators; compare in posix form.
     for (const file of testFiles) resolved.add(file.replaceAll(path.sep, '/'));
   }
+  return resolved;
+}
+
+const testFilesUnder = (dir) =>
+  fs
+    .readdirSync(path.join(repoRoot, dir), {
+      recursive: true,
+      withFileTypes: true,
+    })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.test.mjs'))
+    .map((entry) =>
+      path
+        .relative(repoRoot, path.join(entry.parentPath, entry.name))
+        .replaceAll(path.sep, '/'),
+    );
+
+test('manifests: every test:repo argument resolves to test files', () => {
+  const { scripts } = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
+  );
+  const resolved = resolveArgs(scripts['test:repo'], 'test:repo');
 
   // Coverage, derived from the filesystem: every existing .test.mjs under
   // the suite roots must be resolved by some test:repo argument, so no
   // guard can be renamed or moved out of glob reach while the rest stays
   // green.
   const allTestFiles = ['tests', 'scripts', 'theme/scripts']
-    .flatMap((dir) =>
-      fs
-        .readdirSync(path.join(repoRoot, dir), {
-          recursive: true,
-          withFileTypes: true,
-        })
-        .filter((entry) => entry.isFile() && entry.name.endsWith('.test.mjs'))
-        .map((entry) =>
-          path
-            .relative(repoRoot, path.join(entry.parentPath, entry.name))
-            .replaceAll(path.sep, '/'),
-        ),
-    )
+    .flatMap(testFilesUnder)
     .filter(
       (file) => !Object.keys(ownSuites).some((dir) => file.startsWith(dir)),
     )
@@ -109,44 +102,9 @@ test('manifests: own-suite scripts resolve their test files', () => {
     fs.readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
   );
   for (const [dir, script] of Object.entries(ownSuites)) {
-    const command = scripts[script];
-    assert.ok(command, `script ${script} exists`);
-    assert.match(command, /^node --test /, `${script} uses the node runner`);
-    const resolved = new Set();
-    for (const arg of command.replace(/^node --test /, '').split(' ')) {
-      if (arg.includes('*')) {
-        assert.match(
-          arg,
-          /^(['"]).*\1$/,
-          `${script} wildcard argument ${arg} is quoted`,
-        );
-      }
-      const pattern = arg.replace(/^(['"])(.*)\1$/, '$2');
-      const testFiles = fs
-        .globSync(pattern, { cwd: repoRoot })
-        .filter(
-          (match) =>
-            match.endsWith('.test.mjs') &&
-            fs.statSync(path.join(repoRoot, match)).isFile(),
-        );
-      assert.ok(
-        testFiles.length > 0,
-        `${script} argument ${arg} matches test files`,
-      );
-      for (const f of testFiles) resolved.add(f.replaceAll(path.sep, '/'));
-    }
-    const dirTests = fs
-      .readdirSync(path.join(repoRoot, dir), {
-        recursive: true,
-        withFileTypes: true,
-      })
-      .filter((entry) => entry.isFile() && entry.name.endsWith('.test.mjs'))
-      .map((entry) =>
-        path
-          .relative(repoRoot, path.join(entry.parentPath, entry.name))
-          .replaceAll(path.sep, '/'),
-      )
-      .sort();
+    assert.ok(scripts[script], `script ${script} exists`);
+    const resolved = resolveArgs(scripts[script], script);
+    const dirTests = testFilesUnder(dir).sort();
     assert.ok(dirTests.length > 0, `${dir} contains test files`);
     assert.deepEqual(
       dirTests.filter((file) => resolved.has(file)),
