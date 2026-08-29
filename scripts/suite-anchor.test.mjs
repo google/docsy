@@ -32,6 +32,7 @@ test('anchor: the tests-root guards stay wired into test:repo', () => {
   );
   for (const guard of [
     'tests/npm-audit.test.mjs',
+    'tests/npm-scripts.test.mjs',
     'tests/runner-lint.test.mjs',
     'tests/supply-chain-audit.test.mjs',
     'tests/test-wiring.test.mjs',

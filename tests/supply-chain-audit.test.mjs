@@ -458,28 +458,6 @@ test('manifest: engines floor stays at or above the reviewed minimums', () => {
   );
 });
 
-test('manifests: no script has an implicit hook pair', () => {
-  // npm wraps every script run in implicit pre<name>/post<name> hooks; a
-  // hook pair is unreviewed code riding a trusted name's execution path,
-  // so none are sanctioned: a gating step belongs inline in the base
-  // script, where it's visible at the call site. (The REVIEWED_SCRIPTS
-  // hook check above pins the same for names outside each manifest.)
-  for (const relPath of [
-    'package.json',
-    'docsy.dev/package.json',
-    'theme/package.json',
-  ]) {
-    const names = new Set(Object.keys(readJSON(relPath).scripts ?? {}));
-    const foundHooks = [];
-    for (const name of names) {
-      for (const hook of [`pre${name}`, `post${name}`]) {
-        if (names.has(hook)) foundHooks.push(hook);
-      }
-    }
-    assert.deepEqual(foundHooks, [], `${relPath} has no implicit hook pairs`);
-  }
-});
-
 test('manifests: the install surfaces stay unconfigured and hook-free', () => {
   // install:browser's entry point loads Puppeteer configuration from the project
   // (executable config files, a package.json "puppeteer" key), which can
@@ -542,32 +520,16 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
   }
 
   // Safe smoke predicts a permissive Docsy install only while permissive
-  // installs add no consumer-facing lifecycle behavior; and npm runs the
-  // root project's own lifecycle entries ungated by strict-allow-scripts
-  // on local `npm install`. Enumerate npm's full install-time lifecycle
-  // surface -- including the standalone entries that no pre/post pairing
-  // reveals (prepublish runs on install; `dependencies` runs after
-  // node_modules changes) -- and sanction none.
-  for (const manifest of [
-    'package.json',
-    'theme/package.json',
-    'docsy.dev/package.json',
-  ]) {
-    const lifecycleScripts = readJSON(manifest).scripts ?? {};
-    for (const hook of [
-      'preinstall',
-      'install',
-      'postinstall',
-      'prepare',
-      'preprepare',
-      'postprepare',
-      'prepublish',
-      'dependencies',
-    ]) {
+  // installs add no consumer-facing lifecycle behavior. (The general
+  // lifecycle-namespace ban over script names lives in
+  // tests/npm-scripts.test.mjs.)
+  for (const manifest of ['package.json', 'theme/package.json']) {
+    const consumerScripts = readJSON(manifest).scripts ?? {};
+    for (const hook of ['preinstall', 'install', 'postinstall', 'prepare']) {
       assert.equal(
-        lifecycleScripts[hook],
+        consumerScripts[hook],
         undefined,
-        `${manifest} declares no install-time ${hook} script`,
+        `${manifest} declares no consumer ${hook} hook`,
       );
     }
   }

@@ -155,26 +155,3 @@ test('manifests: own-suite scripts resolve their test files', () => {
     );
   }
 });
-
-test('manifests: no script has a lifecycle hook sibling', () => {
-  const manifests = [
-    'package.json',
-    'docsy.dev/package.json',
-    'theme/package.json',
-  ];
-  for (const manifest of manifests) {
-    const { scripts } = JSON.parse(
-      fs.readFileSync(path.join(repoRoot, manifest), 'utf8'),
-    );
-    const names = Object.keys(scripts);
-    assert.ok(names.length > 0, `${manifest} declares scripts`);
-    for (const name of names) {
-      for (const hook of [`pre${name}`, `post${name}`]) {
-        assert.ok(
-          !names.includes(hook),
-          `${manifest}: ${hook} stays absent, so ${name} runs exactly as pinned`,
-        );
-      }
-    }
-  }
-});
