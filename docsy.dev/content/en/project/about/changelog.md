@@ -200,6 +200,9 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Inlined npm `pre*`/`post*` run-hooks into their parent scripts, so
   `check:links` still builds the site under user-level `ignore-scripts`
   ([#2726][]).
+- Committed `ignore-scripts=true` and a 7-day release cooldown to `.npmrc`:
+  installs are script-free by default everywhere, and version resolution ignores
+  releases younger than a week ([#2760][]).
 - Switched stable `@docsy/theme` publishing to CI-based npm trusted publishing
   (OIDC). See the [0.17.0 release report][0.17.0-blog-maintainers] ([#2708][]).
 - Moved the default Mermaid version to `theme/hugo.yaml`
@@ -228,6 +231,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2714]: https://github.com/google/docsy/pull/2714
 [#2279]: https://github.com/google/docsy/issues/2279
 [#2726]: https://github.com/google/docsy/pull/2726
+[#2760]: https://github.com/google/docsy/pull/2760
 [#2731]: https://github.com/google/docsy/pull/2731
 [#2747]: https://github.com/google/docsy/pull/2747
 [#2748]: https://github.com/google/docsy/pull/2748
