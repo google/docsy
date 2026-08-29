@@ -1,5 +1,5 @@
 {
-  "name": "www.docsy.dev",
+  "name": "@docsy/docsy.dev",
   "description": "Docsy website and development environment for the Docsy theme",
   "private": true,
   "scripts": {

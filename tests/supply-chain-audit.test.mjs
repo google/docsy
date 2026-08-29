@@ -354,7 +354,7 @@ test('workspaces: the reviewed member set, bound identities, no shadow config', 
   // member lock: install:theme-deps consumes it as a standalone prefix
   // install (this file audits it in `locks`).
   const reviewedWorkspaces = {
-    'docsy.dev': 'www.docsy.dev',
+    'docsy.dev': '@docsy/docsy.dev',
     theme: '@docsy/theme',
   };
   assert.deepEqual(
