@@ -31,10 +31,16 @@ in your project, here's how you update the submodule to the latest release:
    git -C themes/docsy checkout {{% param tdVersion.latest %}}
    ```
 
-   If your project pins the submodule through its own tooling (a pin file or npm
-   scripts), update the pin there too, then re-sync the submodule from it before
-   continuing: such tooling resets a bare checkout to the old pin on its next
-   sync.
+   Stage the update now, before any project tooling re-syncs submodules (the
+   parent repo's staged gitlink is the durable pin; an unstaged checkout is
+   reset to the old pin on the next `git submodule update`):
+
+   ```sh
+   git add themes/docsy
+   ```
+
+   If a pin file or other project tooling names the Docsy ref separately, update
+   that source of truth too.
 
 1. Reinstall the theme's runtime dependencies:
 
@@ -45,10 +51,10 @@ in your project, here's how you update the submodule to the latest release:
    Run `npm run install:theme-deps`, not `npm install`; for why, see the [setup
    note][theme-deps-note].
 
-1. Add and then commit the change to your project:
+1. Commit the change to your project (re-run the `git add` first if your tooling
+   touched the submodule since step 1):
 
    ```sh
-   git add themes/docsy
    git commit -m "Update Docsy theme to {{% param tdVersion.latest %}}"
    ```
 
