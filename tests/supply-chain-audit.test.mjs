@@ -715,7 +715,8 @@ test('workflows: installs are locked and credential-isolated', () => {
         // The engines floor holds in CI only while setup-node reads the
         // exact .nvmrc pin; a node-version input or another version file
         // (package.json resolves the floating engines range) silently
-        // swaps the toolchain source.
+        // swaps the toolchain source. Consumption-side companion of the
+        // pin-sync test in tests/toolchain-versions.test.mjs.
         if (step.uses?.startsWith('actions/setup-node@')) {
           setupNodes += 1;
           assert.equal(
