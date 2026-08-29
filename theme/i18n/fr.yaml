@@ -13,6 +13,7 @@ ui_search: Rechercher
 ui_theme_light: Clair
 ui_theme_dark: Sombre
 ui_theme_auto: Automatique
+ui_theme_toggle: Changer de thème
 
 # Used in sentences such as "Posted in News"
 ui_in: dans

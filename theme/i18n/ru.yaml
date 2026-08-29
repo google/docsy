@@ -13,6 +13,7 @@ ui_search: Поиск по сайту…
 ui_theme_light: Светлая
 ui_theme_dark: Тёмная
 ui_theme_auto: Авто
+ui_theme_toggle: Переключить тему
 
 # Used in sentences such as "Posted in News"
 ui_in: в

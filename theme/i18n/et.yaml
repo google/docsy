@@ -13,6 +13,7 @@ ui_search: Otsi lehelt…
 ui_theme_light: Hele
 ui_theme_dark: Tume
 ui_theme_auto: Automaatne
+ui_theme_toggle: Vaheta teemat
 
 # Used in sentences such as "Posted in News"
 # not perfect. In Estonian this idea is represented by a suffix, not a separate word.

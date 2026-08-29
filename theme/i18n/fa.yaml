@@ -13,6 +13,7 @@ ui_search: در این سایت جستجو کنید...
 ui_theme_light: روشن
 ui_theme_dark: تاریک
 ui_theme_auto: خودکار
+ui_theme_toggle: تغییر پوسته
 
 # Used in sentences such as "Posted in News"
 ui_in: در

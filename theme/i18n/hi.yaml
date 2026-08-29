@@ -13,6 +13,7 @@ ui_search: इस साइट में खोजें…
 ui_theme_light: हल्का
 ui_theme_dark: गहरा
 ui_theme_auto: स्वचालित
+ui_theme_toggle: थीम बदलें
 
 # Used in sentences such as "Posted in News"
 ui_in: में

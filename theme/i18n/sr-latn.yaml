@@ -13,6 +13,7 @@ ui_search: Pretražite sajt…
 ui_theme_light: Svetla
 ui_theme_dark: Tamna
 ui_theme_auto: Automatska
+ui_theme_toggle: Promeni temu
 
 # Used in sentences such as "Posted in News"
 ui_in: u

@@ -13,6 +13,7 @@ ui_search: এই সাইটে খোঁজ করুন…
 ui_theme_light: হালকা
 ui_theme_dark: গাঢ়
 ui_theme_auto: স্বয়ংক্রিয়
+ui_theme_toggle: থিম পরিবর্তন করুন
 
 # "পোস্ট করা নিউজ" এর মতো বাক্যে ব্যবহৃত
 ui_in: মধ্যে

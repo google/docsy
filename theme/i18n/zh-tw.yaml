@@ -13,6 +13,7 @@ ui_search: 站內搜尋…
 ui_theme_light: 淺色
 ui_theme_dark: 深色
 ui_theme_auto: 自動
+ui_theme_toggle: 切換主題
 
 # Used in sentences such as "Posted in News"
 ui_in: 於

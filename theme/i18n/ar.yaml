@@ -13,6 +13,7 @@ ui_search: اِبْحث فِي هذَا اَلموْقِع
 ui_theme_light: فاتح
 ui_theme_dark: داكن
 ui_theme_auto: تلقائي
+ui_theme_toggle: تبديل السمة
 
 # Used in sentences such as "Posted in News"
 ui_in: فِي

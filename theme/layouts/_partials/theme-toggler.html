@@ -21,17 +21,14 @@
 
 {{/* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/theme-toggler.html */ -}}
 
-{{ $isExamples := eq .Layout "examples" -}}
 <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
         id="bd-theme"
         type="button"
         aria-expanded="false"
         data-bs-toggle="dropdown"
-        aria-label="Toggle theme (auto)">
+        aria-label="{{ T "ui_theme_toggle" }} ({{ T "ui_theme_auto" }})">
   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
-  {{- /* Disable menu name for Docsy:
-    <span class="{{ if $isExamples }}visually-hidden{{ else }}d-lg-none ms-2{{ end }}" id="bd-theme-text">Toggle theme</span>
-  */}}
+  <span class="visually-hidden" id="bd-theme-text">{{ T "ui_theme_toggle" }}</span>
 </button>
 <ul class="dropdown-menu" aria-labelledby="bd-theme">
   <li>
