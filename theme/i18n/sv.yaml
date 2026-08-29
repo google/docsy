@@ -13,6 +13,7 @@ ui_search: Sök denna sida…
 ui_theme_light: Ljust
 ui_theme_dark: Mörkt
 ui_theme_auto: Automatiskt
+ui_theme_toggle: Byt tema
 
 # Used in sentences such as "Posted in News"
 ui_in: i

@@ -13,6 +13,7 @@ ui_search: Caută pe acest site…
 ui_theme_light: Luminoasă
 ui_theme_dark: Întunecată
 ui_theme_auto: Automată
+ui_theme_toggle: Comută tema
 
 # Used in sentences such as "Posted in News"
 ui_in: în

@@ -13,6 +13,7 @@ ui_search: 사이트에서 검색…
 ui_theme_light: 라이트
 ui_theme_dark: 다크
 ui_theme_auto: 자동
+ui_theme_toggle: 테마 전환
 
 # Used in sentences such as "Posted in News"
 ui_in: in

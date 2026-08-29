@@ -13,6 +13,7 @@ ui_search: サイトを検索...
 ui_theme_light: ライト
 ui_theme_dark: ダーク
 ui_theme_auto: 自動
+ui_theme_toggle: テーマを切り替える
 
 # Used in sentences such as "Posted in News"
 ui_in: in

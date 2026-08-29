@@ -13,6 +13,7 @@ ui_search: Hae sivustolta...
 ui_theme_light: Vaalea
 ui_theme_dark: Tumma
 ui_theme_auto: Automaattinen
+ui_theme_toggle: Vaihda teemaa
 
 # Used in sentences such as "Posted in News"
 # Not perfect: Finnish expresses this with a case suffix, not a separate word.

@@ -13,6 +13,7 @@ ui_search: Bu sitede arayın…
 ui_theme_light: Açık
 ui_theme_dark: Koyu
 ui_theme_auto: Otomatik
+ui_theme_toggle: Temayı değiştir
 
 # Used in sentences such as "Posted in News"
 ui_in: içinde
