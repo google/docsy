@@ -194,8 +194,8 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   unreviewed dependency scripts are disabled ([#2700][]).
 - Guarded dependency and workflow hardening with a committed supply-chain audit:
   removed bare-npx registry fallback paths, pinned the Node toolchain, closed
-  lock-surface bypasses, and banned npm's lifecycle script names ([#2714][],
-  [#2757][]).
+  lock-surface bypasses, and banned unreviewed npm lifecycle script names (the
+  theme's reviewed pack-time hooks remain) ([#2714][], [#2757][]).
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
