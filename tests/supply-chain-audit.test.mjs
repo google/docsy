@@ -4,6 +4,12 @@
 // regenerate from this test instead of ad hoc audit runs. Fast and
 // offline. Companion guards: the pinned list in
 // scripts/suite-anchor.test.mjs.
+//
+// Boundary: the audit runs inside the npm toolchain it audits (npm-run
+// PATH, script-shell, node itself), so a malicious package already in the
+// lock could subvert this very run. That adversary passed cooldown and a
+// bump review to get there: bump vetting and review are the boundary, and
+// these checks are tamper-evident drift detection, not a sandbox.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -261,7 +267,11 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   assert.equal(lsFiles.status, 0, 'git ls-files enumerates the repo files');
   const lockfiles = lsFiles.stdout
     .split('\0')
-    .filter((file) => /(^|\/)(package-lock|npm-shrinkwrap)\.json$/.test(file))
+    // Case-insensitive: Windows and default-macOS filesystems satisfy
+    // npm's lowercase open with any casing, so an odd-cased committed
+    // lock is live there; the canonical-set comparison below then
+    // rejects any non-lowercase spelling.
+    .filter((file) => /(^|\/)(package-lock|npm-shrinkwrap)\.json$/i.test(file))
     .sort();
   assert.deepEqual(
     lockfiles,
@@ -428,7 +438,10 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
   // perl), npx (the smoke suite runs the sanctioned `npx --no` form
   // under npm-run PATH), hugo, and the external commands the production
   // Netlify chain reaches (cut, in _netlify:set-build-id). Runner names
-  // nothing invokes (yarn, pnpm, corepack) need no reservation.
+  // nothing invokes (yarn, pnpm, corepack) need no reservation, and the
+  // dev/test lanes' external-command closure (tar, patch, cp, ...) is
+  // unbounded and stays review's: reserving it would be baseline without
+  // end.
   const reservedBins = new Set([
     'node',
     'npm',
@@ -704,7 +717,11 @@ test('workflows: installs are locked and credential-isolated', () => {
             `${id} uses the reviewed bash shell`,
           );
         }
-        if (step.uses?.startsWith('actions/checkout@')) {
+        // GitHub resolves action owner/repo case-insensitively, so
+        // classify on the folded form: `Actions/checkout@` is the same
+        // action and must not bypass the input pins below.
+        const uses = step.uses?.toLowerCase();
+        if (uses?.startsWith('actions/checkout@')) {
           checkouts += 1;
           assert.equal(
             step.with?.['persist-credentials'],
@@ -717,7 +734,7 @@ test('workflows: installs are locked and credential-isolated', () => {
         // (package.json resolves the floating engines range) silently
         // swaps the toolchain source. Consumption-side companion of the
         // pin-sync test in tests/toolchain-versions.test.mjs.
-        if (step.uses?.startsWith('actions/setup-node@')) {
+        if (uses?.startsWith('actions/setup-node@')) {
           setupNodes += 1;
           assert.equal(
             step.with?.['node-version-file'],
