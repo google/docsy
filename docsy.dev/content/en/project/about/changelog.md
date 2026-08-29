@@ -192,11 +192,10 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 
 - Committed npm lockfiles; dependency installs are now lock-exact, and
   unreviewed dependency scripts are disabled ([#2700][]).
-- Guarded dependency and workflow hardening with a committed supply-chain audit;
-  removed bare-npx registry fallback paths ([#2714][]). Later extended with the
-  opentelemetry.io audit-hardening wave: exact Node toolchain pins, lock-surface
-  bypass guards, and a manifest-wide ban on npm lifecycle script names
-  ([#2757][]).
+- Guarded dependency and workflow hardening with a committed supply-chain audit:
+  removed bare-npx registry fallback paths, pinned the Node toolchain, closed
+  lock-surface bypasses, and banned npm's lifecycle script names ([#2714][],
+  [#2757][]).
 - Renamed the full test-suite entry point: `ci:test` → `test:full`, with
   `_test:full:pre`/`_test:full:common` phases; the freed `ci:*` names retire. A
   repo clone now installs via `npm run install:safe` ([#2712][]).
