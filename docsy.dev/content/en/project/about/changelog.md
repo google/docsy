@@ -183,7 +183,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
   included; see the [release report][0.17.0-blog-dart-sass] ([#2731][]).
 - Made the light/dark mode menu labels translatable, filled in missing UI
   strings across locales, and updated the Turkish and Ukrainian locales
-  ([#2482][], [#2751][], [#2332][pr2332], [#2451][]).
+  ([#1987][], [#2751][], [#2332][pr2332], [#2451][]).
 - Dropped broken `Dockerfile` and `docker-compose.yaml` files and retired Docker
   quickstart page ([#2748][]).
 
@@ -214,7 +214,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [#2314]: https://github.com/google/docsy/issues/2314
 [pr2332]: https://github.com/google/docsy/pull/2332
 [#2451]: https://github.com/google/docsy/pull/2451
-[#2482]: https://github.com/google/docsy/pull/2482
+[#1987]: https://github.com/google/docsy/issues/1987
 [#2614]: https://github.com/google/docsy/issues/2614
 [#2700]: https://github.com/google/docsy/pull/2700
 [#2703]: https://github.com/google/docsy/issues/2703
