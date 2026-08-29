@@ -32,7 +32,9 @@ const rootManifest = readManifest('package.json');
 const manifests = new Map([['package.json', rootManifest]]);
 for (const pattern of rootManifest.workspaces ?? []) {
   for (const dir of fs.globSync(pattern, { cwd: repoRoot })) {
-    const rel = path.join(dir, 'package.json');
+    // globSync returns platform separators; keys stay posix (Windows
+    // accepts forward slashes in reads).
+    const rel = `${dir.replaceAll(path.sep, '/')}/package.json`;
     manifests.set(rel, readManifest(rel));
   }
 }
