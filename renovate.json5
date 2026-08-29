@@ -18,12 +18,6 @@
       matchPackageNames: ['bootstrap', '@fortawesome/fontawesome-free'],
       enabled: false,
     },
-    {
-      // The .nvmrc Node pins are updated deliberately, both files together
-      // (tests/hugo-versions.test.mjs guards the sync).
-      matchManagers: ['nvm'],
-      enabled: false,
-    },
   ],
   customManagers: [
     {

@@ -375,9 +375,9 @@ test('workspaces: the reviewed member set, bound identities, no shadow config', 
 });
 
 test('locks: no package provides a bin that shadows a trusted command', () => {
-  // npm links every package's bin entries into node_modules/.bin --
-  // --ignore-scripts does not suppress linking -- and npm-run scripts
-  // put that directory first on PATH. A bin named after a command the
+  // npm links every package's bin entries into node_modules/.bin (even
+  // under --ignore-scripts), and npm-run scripts put that directory
+  // first on PATH. A bin named after a command the
   // install and build chain trusts (node, npm, git, a shell) would
   // hijack every later script step, so reserve those names outright.
   // Runner names (npx, yarn, pnpm, corepack) need no reservation: the

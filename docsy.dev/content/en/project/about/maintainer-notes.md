@@ -77,7 +77,7 @@ a substitute.
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
-guarded by the [hugo-versions test](#test-suites).
+guarded by the [toolchain-versions test](#test-suites).
 
 Only current-state pages (docs and the changelog's
 [official support](/project/about/changelog/#official-support) section) render
@@ -88,7 +88,7 @@ in its front matter, so updating the post (say, for a patch release) means
 editing one field. (Version literals in narrative text are already
 time-insensitive.) Page params take precedence over site params, so the same
 `{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
-Guarded by the [hugo-versions test](#test-suites).
+Guarded by the [toolchain-versions test](#test-suites).
 
 ### Minimum Hugo version
 
@@ -198,10 +198,11 @@ Automated updates are configured through Renovate. Settings rationale:
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm and
     GitHub Actions (SHA-digest pins).
-  - The `nvm` manager is off: the `.nvmrc` Node pins are updated deliberately.
-    There are two by platform constraint -- workflows and nvm read the root
-    file, Netlify reads only its base directory's (`docsy.dev/.nvmrc`) -- and
-    they move together (`tests/hugo-versions.test.mjs` guards the sync).
+
+The Node toolchain is pinned by two `.nvmrc` files holding the same version, a
+platform constraint: workflows and nvm read the root file, while Netlify reads
+only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
+toolchain-versions test guards the sync.
 
 Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
 GitHub's config-free Dependabot security updates; a rare duplicate PR is
