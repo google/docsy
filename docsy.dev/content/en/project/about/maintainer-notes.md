@@ -2,7 +2,8 @@
 title: Maintainer notes
 description: Release, dependency-update, and Hugo-support procedures
 aliases: [contributing, ../contributing]
-cSpell:ignore: hugo creatordate lycheecache opentelemetry prebuild worktree
+# prettier-ignore
+cSpell:ignore: creatordate lycheecache prebuild ETARGET unkeyed
 ---
 
 For our main contributing page covering license agreements, code of conduct and
@@ -204,9 +205,23 @@ platform constraint: workflows and nvm read the root file, while Netlify reads
 only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
 toolchain-versions test guards the sync.
 
-Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
-GitHub's config-free Dependabot security updates; a rare duplicate PR is
-accepted.
+The npm config follows the same two-homes pattern: `theme/.npmrc` is a
+byte-identical mirror of the root `.npmrc`, because `--prefix`/`-C` npm runs
+(`install:theme-deps`, `_sync:theme-lock`) read only the target directory's
+file. Edit the two together; the supply-chain audit guards the sync.
+
+Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
+Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
+PRs bypass its own cooldown but not npm's: lock regeneration for a fix younger
+than `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages.
+For a fix that can't wait, run the dependency's manual bump under a
+per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
+fix's age requires (the override relaxes the cooldown for everything the
+invocation resolves). For example, for a three-day-old hugo-extended release:
+
+```sh
+NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
+```
 
 ## Test suites
 

@@ -291,9 +291,19 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   rmSync(packDest, { recursive: true, force: true });
   mkdirSync(packDest, { recursive: true });
   progress('tarball: npm pack theme/…');
+  // Force the theme's own pack lifecycle (LICENSE copy, pack-stamp) so the
+  // packed tarball matches what publish.yaml ships, under any npm config
+  // (the repo .npmrc sets ignore-scripts=true). Safe: packing a local
+  // directory installs nothing, so only this repo's own lifecycle runs.
   const pack = run(
     'npm',
-    ['pack', '--pack-destination', packDest, '--silent'],
+    [
+      'pack',
+      '--ignore-scripts=false',
+      '--pack-destination',
+      packDest,
+      '--silent',
+    ],
     {
       cwd: path.join(repoRoot, 'theme'),
       shell: winShell,

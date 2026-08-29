@@ -192,8 +192,12 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
   );
 
   // Allow entries are version-pinned so a bump's new (unreviewed) script
-  // fails npm ci under strict-allow-scripts; the assertion names the fix in
-  // the bump PR itself (#2712). Deny entries are unversioned: the answer is
+  // fails the scripts-enabled installs (install:safe's rebuild step,
+  // approve:hugo) under strict-allow-scripts; the assertion names the fix
+  // in the bump PR itself (#2712). Ordinary installs skip all scripts
+  // (ignore-scripts, .npmrc) without consulting the allowlist, and a new
+  // script-bearing package fails the inventory assertion above in CI.
+  // Deny entries are unversioned: the answer is
   // false for every version, so a pin would only add bump churn.
   // puppeteer's postinstall (browser download) is deliberately denied:
   // the visual suite installs its browser on demand (install:browser).
@@ -225,22 +229,32 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       .map((line) => line.trim())
       .filter((line) => line !== '' && !line.startsWith('#')),
     [
-      'engine-strict=true',
+      'min-release-age=7',
       'strict-allow-scripts=true',
+      'engine-strict=true',
+      'ignore-scripts=true',
       'script-shell=bash',
       '@docsy:registry=https://registry.npmjs.org/',
     ],
     '.npmrc carries exactly the reviewed npm settings',
   );
-  // npm resolves workspace config at the root, but --prefix/-C runs read
-  // the target directory's .npmrc as project config: their absence keeps
-  // the root file the one audited home.
-  for (const dir of ['docsy.dev', 'theme']) {
-    assert.ok(
-      !fs.existsSync(path.join(repoRoot, dir, '.npmrc')),
-      `${dir} defers .npmrc to the workspace root`,
-    );
-  }
+  // npm resolves workspace config at the root, but --prefix/-C runs
+  // suppress the workspace walk-up and read only the target directory's
+  // .npmrc: theme (the prefix-install target: install:theme-deps,
+  // _sync:theme-lock) carries a byte-identical mirror of the root file so
+  // those runs keep the same posture (the .nvmrc-pair pattern,
+  // toolchain-versions.test.mjs), while docsy.dev (no prefix installs)
+  // stays absent so the root file remains its one home. On a mismatch:
+  // cp .npmrc theme/.npmrc.
+  assert.equal(
+    fs.readFileSync(path.join(repoRoot, 'theme/.npmrc'), 'utf8'),
+    fs.readFileSync(path.join(repoRoot, '.npmrc'), 'utf8'),
+    'theme/.npmrc is a byte-identical mirror of the root .npmrc',
+  );
+  assert.ok(
+    !fs.existsSync(path.join(repoRoot, 'docsy.dev/.npmrc')),
+    'docsy.dev defers .npmrc to the workspace root',
+  );
   // Close the lockfile set: npm prefers npm-shrinkwrap.json over
   // package-lock.json at an install root, and a lock added anywhere else
   // (docsy.dev, a new directory) would define an installable tree outside
@@ -391,12 +405,12 @@ test('scripts: install and approval entries keep their reviewed forms', () => {
 });
 
 test('workspaces: the reviewed member set, bound identities, no shadow config', () => {
-  // npm resolves config and the root lock at the workspace root, so a
-  // member carrying its own .npmrc would be dead weight that reads as a
-  // control; and a new member widens the audited install surface, so the
-  // list itself is pinned. theme/package-lock.json is the one sanctioned
-  // member lock: install:theme-deps consumes it as a standalone prefix
-  // install (this file audits it in `locks`).
+  // npm resolves config and the root lock at the workspace root; member
+  // .npmrc files are governed by the mirror-or-absent assertions in the
+  // install-scripts test above. A new member widens the audited install
+  // surface, so the list itself is pinned. theme/package-lock.json is the
+  // one sanctioned member lock: install:theme-deps consumes it as a
+  // standalone prefix install (this file audits it in `locks`).
   const reviewedWorkspaces = {
     'docsy.dev': '@docsy/docsy.dev',
     theme: '@docsy/theme',
