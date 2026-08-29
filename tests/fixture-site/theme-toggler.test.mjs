@@ -46,8 +46,16 @@ for (const [page, toggleText, label] of cases) {
 
     const button = doc.querySelector('button#bd-theme');
     assert.ok(button, 'toggler button is present');
-    assert.equal(button.getAttribute('aria-label'), label, 'aria-label');
-    assert.equal(button.getAttribute('title'), label, 'title');
+    assert.equal(
+      button.getAttribute('aria-label'),
+      label,
+      'aria-label carries the localized toggle-plus-mode name',
+    );
+    assert.equal(
+      button.getAttribute('title'),
+      label,
+      'title carries the localized toggle-plus-mode name',
+    );
 
     // The sentinel span dark-mode.js derives label updates from.
     const sentinel = button.querySelector('span#bd-theme-text');
@@ -56,7 +64,11 @@ for (const [page, toggleText, label] of cases) {
       sentinel.classList.contains('visually-hidden'),
       'sentinel is visually hidden',
     );
-    assert.equal(sentinel.textContent.trim(), toggleText, 'sentinel text');
+    assert.equal(
+      sentinel.textContent.trim(),
+      toggleText,
+      'sentinel carries the localized toggle text',
+    );
   });
 }
 
