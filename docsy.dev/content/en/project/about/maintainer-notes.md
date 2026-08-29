@@ -77,7 +77,7 @@ a substitute.
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
-guarded by the [hugo-versions test](#test-suites).
+guarded by the [toolchain-versions test](#test-suites).
 
 Only current-state pages (docs and the changelog's
 [official support](/project/about/changelog/#official-support) section) render
@@ -88,7 +88,7 @@ in its front matter, so updating the post (say, for a patch release) means
 editing one field. (Version literals in narrative text are already
 time-insensitive.) Page params take precedence over site params, so the same
 `{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
-Guarded by the [hugo-versions test](#test-suites).
+Guarded by the [toolchain-versions test](#test-suites).
 
 ### Minimum Hugo version
 
@@ -199,6 +199,11 @@ Automated updates are configured through Renovate. Settings rationale:
     `theme/hugo.yaml`. All other detected managers are active, including npm and
     GitHub Actions (SHA-digest pins).
 
+The Node toolchain is pinned by two `.nvmrc` files holding the same version, a
+platform constraint: workflows and nvm read the root file, while Netlify reads
+only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
+toolchain-versions test guards the sync.
+
 Renovate's vulnerability-alert PRs stay on (immediate, cooldown-exempt), beside
 GitHub's config-free Dependabot security updates; a rare duplicate PR is
 accepted.
@@ -220,6 +225,23 @@ Notes:
   `node --test tests/supply-chain-audit.test.mjs`.
 - Run `test:smoke` manually for `main` or PR-branch validation. Its tests
   auto-target the current branch's GitHub upstream.
+
+### Structural guards: one concern per file
+
+`test:repo` includes structural guard files, each owning a single concern. Add a
+new invariant to the file that owns its concern, or start a new file; never give
+an invariant a second home. Each file's header comment carries its scope and
+rationale; this table only routes:
+
+| Guard                               | Owns                                                                                                                               |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `tests/supply-chain-audit.test.mjs` | Install and provenance invariants from committed artifacts: locks, `allowScripts`, `.npmrc`, install scripts, engines, CI installs |
+| `tests/npm-scripts.test.mjs`        | npm script-name posture: lifecycle and hook-shaped script names stay out of every manifest, beyond the pinned reviewed exceptions  |
+| `tests/npm-audit.test.mjs`          | Online advisory gate over the committed locks                                                                                      |
+| `tests/runner-lint.test.mjs`        | Package-runner discipline: bare `npx`/`npm exec` and alternate-runner denial (a lint, not a boundary)                              |
+| `tests/workflow-lint.test.mjs`      | Check-execution integrity of the workflows: they run the checks they claim to                                                      |
+| `tests/test-wiring.test.mjs`        | Suite wiring: every suite glob resolves to test files, so a rename can't empty a suite silently                                    |
+| `scripts/suite-anchor.test.mjs`     | Cross-root anchor: the tests-root guards stay wired into `test:repo`                                                               |
 
 ### Golden tests
 

@@ -94,7 +94,7 @@ for (const { param, template, cdnPackage, urlForm } of PINS) {
     assert.doesNotMatch(
       text,
       /\bdefault\s+["'`([\d$.]/,
-      'the version read has no default fallback, pipe or call form',
+      'the version read is fallback-free, in pipe and call form alike',
     );
     const urlFormPattern = urlForm.replace(/[${}()|[\]\\]/g, '\\$&');
     assert.match(

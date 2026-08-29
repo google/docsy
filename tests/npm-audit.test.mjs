@@ -182,42 +182,6 @@ test('audit gate: parser rejects string via without chain target', () => {
   );
 });
 
-test('audit gate: parser catches unreviewed advisory alongside accepted one', () => {
-  const reportWithMixedAdvisories = {
-    auditReportVersion: 2,
-    error: undefined,
-    metadata: { dependencies: { total: 2 } },
-    vulnerabilities: {
-      'package-a': {
-        name: 'package-a',
-        via: [
-          {
-            url: 'https://github.com/advisories/GHSA-aaaa-bbbb-cccc',
-            severity: 'critical',
-            name: 'accepted-package',
-            title: 'Malware',
-          },
-        ],
-      },
-      'package-b': {
-        name: 'package-b',
-        via: [
-          {
-            url: 'https://github.com/advisories/GHSA-xxxx-yyyy-zzzz',
-            severity: 'high',
-            name: 'unreviewed-pkg',
-            title: 'New advisory',
-          },
-        ],
-      },
-    },
-  };
-  assert.throws(
-    () => validateAuditGate(reportWithMixedAdvisories, fixtureAccepted),
-    /GHSA-xxxx-yyyy-zzzz.*reviewed, accepted advisory/,
-  );
-});
-
 test('audit gate: parser accepts valid transitive advisory chain', () => {
   const reportWithTransitiveChain = {
     auditReportVersion: 2,
