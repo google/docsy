@@ -214,15 +214,26 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       `${dir} has no workspace .npmrc`,
     );
   }
-  // npm prefers npm-shrinkwrap.json over package-lock.json at an install
-  // root: a committed shrinkwrap would swap the installed tree out from
-  // under the audited locks.
-  for (const dir of ['.', 'docsy.dev', 'theme']) {
-    assert.ok(
-      !fs.existsSync(path.join(repoRoot, dir, 'npm-shrinkwrap.json')),
-      `${dir} has no npm-shrinkwrap.json shadowing the audited lock`,
-    );
-  }
+  // Close the lockfile set: npm prefers npm-shrinkwrap.json over
+  // package-lock.json at an install root, and a lock added anywhere else
+  // (docsy.dev, a new directory) would define an installable tree outside
+  // every check above. Scan the working tree instead of enumerating
+  // directories, so unknown locations fail closed. Excluded: node_modules
+  // (uncommitted registry content, integrity-covered), the generated-site
+  // public repos, and gitignored scratch.
+  const excludedDirs = new Set(['node_modules', 'public', 'tmp', '.git']);
+  const lockfiles = fs
+    .globSync('**/{package-lock,npm-shrinkwrap}.json', {
+      cwd: repoRoot,
+      exclude: (dirent) => excludedDirs.has(dirent.name ?? dirent),
+    })
+    .map((file) => file.replaceAll(path.sep, '/'))
+    .sort();
+  assert.deepEqual(
+    lockfiles,
+    Object.keys(locks).sort(),
+    'the audited locks are the only lockfiles in the tree',
+  );
 });
 
 // A git-spec denylist would miss npm's other non-registry forms (owner/repo
@@ -377,19 +388,22 @@ test('workspaces: the reviewed member set, bound identities, no shadow config', 
 test('locks: no package provides a bin that shadows a trusted command', () => {
   // npm links every package's bin entries into node_modules/.bin (even
   // under --ignore-scripts), and npm-run scripts put that directory
-  // first on PATH. A bin named after a command the
-  // install and build chain trusts (node, npm, git, a shell) would
-  // hijack every later script step, so reserve those names outright.
-  // Runner names (npx, yarn, pnpm, corepack) need no reservation: the
-  // runner lint and this file's workflow audit already deny them at every
-  // execution site.
+  // first on PATH. A bin named after a command the reviewed script
+  // chains trust would hijack every later script step, so reserve those
+  // names outright: the interpreters and VCS (node, npm, git, shells,
+  // perl), npx (the smoke suite runs the sanctioned `npx --no` form
+  // under npm-run PATH), hugo, and the external commands the production
+  // Netlify chain reaches (cut, in _netlify:set-build-id). Runner names
+  // nothing invokes (yarn, pnpm, corepack) need no reservation.
   const reservedBins = new Set([
     'node',
     'npm',
+    'npx',
     'git',
     'bash',
     'sh',
     'perl',
+    'cut',
     'hugo',
   ]);
   // The one reviewed (provider, name) pair: docsy's hugo scripts resolve
@@ -408,8 +422,10 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
         names = [(pkg.name ?? keyName).split('/').pop()];
       } else {
         // Fail closed on non-canonical bin shapes: an array's keys are
-        // its indices, and npm links a path-shaped key by its basename,
-        // so either would slip past a literal name compare.
+        // its indices, and npm's normalize-package-bin links an object
+        // key by basename(key.replace(/\\|:/g, '/')), so an array entry
+        // or a path-shaped key (`bin/node`, `safe:node`) would slip past
+        // a literal name compare.
         assert.ok(
           !Array.isArray(pkg.bin),
           `${id} bin is a name-to-path object`,
@@ -418,7 +434,7 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
         for (const name of names) {
           assert.doesNotMatch(
             name,
-            /[/\\]/,
+            /[/\\:]/,
             `${id} bin key ${name} is a bare command name`,
           );
         }
@@ -543,7 +559,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
   for (const dir of ['.', 'docsy.dev', 'theme']) {
     assert.ok(
       !fs.existsSync(path.join(repoRoot, dir, 'binding.gyp')),
-      `${dir} has no binding.gyp (would synthesize node-gyp rebuild)`,
+      `${dir} binding.gyp stays absent, so npm synthesizes no install script`,
     );
   }
 });
