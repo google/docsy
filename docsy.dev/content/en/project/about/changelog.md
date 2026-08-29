@@ -184,7 +184,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 - Made the light/dark mode menu labels and assistive text translatable, fixed
   the toggle button's label to reflect the selected mode, filled in missing UI
   strings across locales, and updated the Turkish and Ukrainian locales
-  ([#1987][], [#2753][], [#2751][], [#2332][pr2332], [#2451][]).
+  ([#1987][], [#2753][], [#2751][], [#2332][], [#2451][]).
 - Dropped broken `Dockerfile` and `docker-compose.yaml` files and retired Docker
   quickstart page ([#2748][]).
 
@@ -213,7 +213,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 <!-- prettier-ignore-start -->
 [#2047]: https://github.com/google/docsy/issues/2047
 [#2314]: https://github.com/google/docsy/issues/2314
-[pr2332]: https://github.com/google/docsy/pull/2332
+[#2332]: https://github.com/google/docsy/pull/2332
 [#2451]: https://github.com/google/docsy/pull/2451
 [#1987]: https://github.com/google/docsy/issues/1987
 [#2614]: https://github.com/google/docsy/issues/2614
@@ -545,7 +545,7 @@ Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports
 - **Improved accessibility**: [color contrast and
   typography][0.13.0-blog-accessibility] ([#2285][]).
 - **Dark mode** fixes and improvements:
-  - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2332][]).
+  - [Flash Of Unstyled Content][0.13.0-blog-fouc] (FOUC) ([#2343][]).
   - Improved TOC entry color contrast in dark mode ([#2376][], [#2379][]).
 - **Mobile navbar**: added scroll indicators for overflow navigation
   ([#2406][]).
@@ -574,8 +574,8 @@ Patch release [0.14.1][]: fixed **ToC** sidebar width in xl viewports
 [#2285]: https://github.com/google/docsy/issues/2285
 [#2303]: https://github.com/google/docsy/pull/2303
 [#2313]: https://github.com/google/docsy/issues/2313
-[#2331]: https://github.com/google/docsy/issues/2331
-[#2332]: https://github.com/google/docsy/issues/2332
+[#2331]: https://github.com/google/docsy/pull/2331
+[#2343]: https://github.com/google/docsy/pull/2343
 [#2364]: https://github.com/google/docsy/pull/2364
 [#2366]: https://github.com/google/docsy/pull/2366
 [#2371]: https://github.com/google/docsy/pull/2371
