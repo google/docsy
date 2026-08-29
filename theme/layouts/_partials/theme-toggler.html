@@ -21,12 +21,14 @@
 
 {{/* Adapted from: https://github.com/twbs/bootstrap/blob/main/site/layouts/partials/theme-toggler.html */ -}}
 
+{{ $toggleLabel := printf "%s (%s)" (T "ui_theme_toggle") (T "ui_theme_auto") -}}
 <button class="btn btn-link nav-link dropdown-toggle d-flex align-items-center"
         id="bd-theme"
         type="button"
         aria-expanded="false"
         data-bs-toggle="dropdown"
-        aria-label="{{ T "ui_theme_toggle" }} ({{ T "ui_theme_auto" }})">
+        title="{{ $toggleLabel }}"
+        aria-label="{{ $toggleLabel }}">
   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg>
   <span class="visually-hidden" id="bd-theme-text">{{ T "ui_theme_toggle" }}</span>
 </button>

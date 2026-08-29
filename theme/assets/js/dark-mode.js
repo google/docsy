@@ -59,6 +59,7 @@
     if (themeSwitcherText) {
       const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.textContent.trim()})`
       themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
+      themeSwitcher.setAttribute('title', themeSwitcherLabel)
     }
 
     if (focus) {
