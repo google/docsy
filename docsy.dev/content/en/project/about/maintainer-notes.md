@@ -231,7 +231,7 @@ rationale; this table only routes:
 | Guard                               | Owns                                                                                                                               |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `tests/supply-chain-audit.test.mjs` | Install and provenance invariants from committed artifacts: locks, `allowScripts`, `.npmrc`, install scripts, engines, CI installs |
-| `tests/npm-scripts.test.mjs`        | npm script-name posture: no lifecycle or hook-shaped script names in any manifest                                                  |
+| `tests/npm-scripts.test.mjs`        | npm script-name posture: lifecycle and hook-shaped script names stay out of every manifest, beyond the pinned reviewed exceptions  |
 | `tests/npm-audit.test.mjs`          | Online advisory gate over the committed locks                                                                                      |
 | `tests/runner-lint.test.mjs`        | Package-runner discipline: bare `npx`/`npm exec` and alternate-runner denial (a lint, not a boundary)                              |
 | `tests/workflow-lint.test.mjs`      | Check-execution integrity of the workflows: they run the checks they claim to                                                      |

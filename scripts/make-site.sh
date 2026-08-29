@@ -117,7 +117,7 @@ function _npm_install() {
   # npm silently ignores config keys it doesn't know (min-release-age on
   # older npm), which would drop the release cooldown; refuse rather than
   # degrade. The floor matches the repo's own engines.npm.
-  npm pkg set 'engines.npm=>=11.16.0' > /dev/null
+  npm pkg set 'engines.npm=>=11.18.0' > /dev/null
   # Consumer-simulation installs are unlocked by design, but script-free:
   # Docsy declares no install hooks and none of these deps needs install
   # scripts. Pin that for the site's own installs, plus a registry-release

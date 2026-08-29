@@ -214,6 +214,15 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
       `${dir} has no workspace .npmrc`,
     );
   }
+  // npm prefers npm-shrinkwrap.json over package-lock.json at an install
+  // root: a committed shrinkwrap would swap the installed tree out from
+  // under the audited locks.
+  for (const dir of ['.', 'docsy.dev', 'theme']) {
+    assert.ok(
+      !fs.existsSync(path.join(repoRoot, dir, 'npm-shrinkwrap.json')),
+      `${dir} has no npm-shrinkwrap.json shadowing the audited lock`,
+    );
+  }
 });
 
 // A git-spec denylist would miss npm's other non-registry forms (owner/repo
@@ -383,25 +392,42 @@ test('locks: no package provides a bin that shadows a trusted command', () => {
     'perl',
     'hugo',
   ]);
-  // The one reviewed provider of a reserved name: docsy's hugo scripts
-  // resolve `hugo` through node_modules/.bin by design.
-  const reservedBinProviders = new Set(['node_modules/hugo-extended']);
+  // The one reviewed (provider, name) pair: docsy's hugo scripts resolve
+  // `hugo` through node_modules/.bin by design.
+  const reservedBinAllow = new Set(['node_modules/hugo-extended hugo']);
   let binNames = 0;
   for (const [lockPath, lock] of Object.entries(locks)) {
     for (const [key, pkg] of lockEntries(lock)) {
       if (pkg.bin === undefined) continue;
+      const id = `${lockPath} ${key}`;
       const keyName = key.slice(
         key.lastIndexOf('node_modules/') + 'node_modules/'.length,
       );
-      const names =
-        typeof pkg.bin === 'string'
-          ? [pkg.name ?? keyName.split('/').pop()]
-          : Object.keys(pkg.bin);
+      let names;
+      if (typeof pkg.bin === 'string') {
+        names = [(pkg.name ?? keyName).split('/').pop()];
+      } else {
+        // Fail closed on non-canonical bin shapes: an array's keys are
+        // its indices, and npm links a path-shaped key by its basename,
+        // so either would slip past a literal name compare.
+        assert.ok(
+          !Array.isArray(pkg.bin),
+          `${id} bin is a name-to-path object`,
+        );
+        names = Object.keys(pkg.bin);
+        for (const name of names) {
+          assert.doesNotMatch(
+            name,
+            /[/\\]/,
+            `${id} bin key ${name} is a bare command name`,
+          );
+        }
+      }
       for (const name of names) {
         binNames += 1;
         assert.ok(
-          !reservedBins.has(name) || reservedBinProviders.has(key),
-          `${lockPath} ${key} bin ${name} leaves trusted command names unshadowed`,
+          !reservedBins.has(name) || reservedBinAllow.has(`${key} ${name}`),
+          `${id} bin ${name} leaves trusted command names unshadowed`,
         );
       }
     }
