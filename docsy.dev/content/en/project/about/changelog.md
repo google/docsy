@@ -141,9 +141,7 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
-## v0.17.0 - UNRELEASED {#next}
-
-> **UNRELEASED: this planned version is still under development**
+## v0.17.0 {#v0.17.0}
 
 For an introduction to this release, see the [0.17.0 release report][]. For the
 full list of changes, see the [0.17.0][] release page or the [git history since
@@ -248,7 +246,7 @@ full list of changes, see the [0.17.0][] release page or the [git history since
 [0.17.0-blog-script-pins]: /blog/2026/0.17.0/#script-dep-pins
 [0.17.0]: https://github.com/google/docsy/releases/tag/v0.17.0
 [footer copyright docs]: /docs/content/lookandfeel/#footer-copyright
-[git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...main
+[git history since 0.16.0]: https://github.com/google/docsy/compare/v0.16.0...v0.17.0
 [hugo-version-notes]: /project/about/maintainer-notes/#official-hugo-version
 [Install Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [script-versions-notes]: /project/about/maintainer-notes/#script-versions
