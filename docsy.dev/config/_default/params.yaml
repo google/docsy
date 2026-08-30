@@ -11,8 +11,8 @@
 #   status: archived # Then fetch include
 
 tdVersion:
-  latest: &tdLatestVers v0.16.0
-  dev: &tdDevVers v0.16.1-dev
+  latest: &tdLatestVers v0.17.0
+  dev: &tdDevVers v0.17.1-dev
   buildId: ''
 
 version: *tdDevVers

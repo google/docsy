@@ -15,24 +15,16 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 - **Backup or safeguard your project's current state**: for example, work from a
   Git branch, merging only after [checking your site](#check), or back up your
   project files first. Rolling back is then a simple restore.
-- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
-  theme-path config changes, and only those, from the 0.16.0 post's [theme
-  folder actions][tfa]; this page's steps cover the rest.
-- **Updating from Docsy [0.16](/blog/2026/0.16.0/) or earlier?** Before updating
-  the theme, provide the [Dart Sass][] compiler in every environment that builds
-  your site; see the 0.17.0 post's
-  [Dart Sass actions](/blog/2026/0.17.0/#dart-sass-actions).
-
-<!-- TODO(0.18-ish): drop the 0.15 crossing bullet above once 0.15-to-0.16
-     upgrade traffic fades; release history lives in the blog posts.
-     (2026-07-28) -->
+- **Updating across more than one release?** Apply each release's
+  [upgrade post](/tags/upgrade/) in turn, oldest first: each post assumes you
+  are coming from the release just before it, unless stated otherwise.
 
 ## Order of steps {#update-order}
 
 Perform the update steps in the order given by this page:
 
-1. [Node.js](#update-node) and [Hugo](#update-hugo), when your target release
-   calls for it
+1. [Node.js](#update-node), [Hugo](#update-hugo), and any other build
+   prerequisite that your target release calls for
 2. [The theme](#update-theme), by install mode
 3. [Review your theme overrides](#update-overrides)
 4. [Check your site](#check)
@@ -119,10 +111,8 @@ Also perform any release-specific checks listed in the release's
 
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
-[Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [hugo-extended]: /docs/get-started/docsy-as-module/installation-prerequisites/#as-an-npm-module
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[tfa]: /blog/2026/0.16.0/#theme-folder-actions
 <!-- prettier-ignore-end -->
