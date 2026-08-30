@@ -97,7 +97,7 @@
     "hugo-extended": "0.164.0",
     "jsdom": "^29.1.1",
     "markdownlint-cli2": "^0.23.2",
-    "markdownlint-rule-no-shortcut-ref-link": "^0.3.1",
+    "markdownlint-rule-no-shortcut-ref-link": "^0.4.0",
     "pixelmatch": "7.2.0",
     "pngjs": "7.0.0",
     "prettier": "^3.9.3",
