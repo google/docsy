@@ -18,10 +18,8 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 - **Updating across more than one release?** Apply each release's
   [upgrade post](/tags/upgrade/) in turn, oldest first: each post assumes you
   are coming from the release just before it.
-- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply,
-  from the 0.16.0 post, the theme-path config changes ([theme folder
-  actions][tfa]) and, if your site keeps its own icon files under
-  `static/favicons/`, the favicon move ([favicon actions][ffa]); this page's
+- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
+  0.16.0 post's [theme folder][tfa] and [favicon][ffa] actions; this page's
   steps cover the rest.
 - **Updating from Docsy [0.16](/blog/2026/0.16.0/) or earlier?** Before updating
   the theme, provide the [Dart Sass][] compiler in every environment that builds
