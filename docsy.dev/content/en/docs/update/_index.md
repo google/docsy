@@ -15,9 +15,14 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 - **Backup or safeguard your project's current state**: for example, work from a
   Git branch, merging only after [checking your site](#check), or back up your
   project files first. Rolling back is then a simple restore.
-- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
-  theme-path config changes, and only those, from the 0.16.0 post's [theme
-  folder actions][tfa]; this page's steps cover the rest.
+- **Updating across more than one release?** Apply each release's
+  [upgrade post](/tags/upgrade/) in turn, oldest first: each post assumes you
+  are coming from the release just before it.
+- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply,
+  from the 0.16.0 post, the theme-path config changes ([theme folder
+  actions][tfa]) and, if your site keeps its own icon files under
+  `static/favicons/`, the favicon move ([favicon actions][ffa]); this page's
+  steps cover the rest.
 - **Updating from Docsy [0.16](/blog/2026/0.16.0/) or earlier?** Before updating
   the theme, provide the [Dart Sass][] compiler in every environment that builds
   your site; see the 0.17.0 post's
@@ -124,5 +129,6 @@ Also perform any release-specific checks listed in the release's
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+[ffa]: /blog/2026/0.16.0/#favicons-actions
 [tfa]: /blog/2026/0.16.0/#theme-folder-actions
 <!-- prettier-ignore-end -->
