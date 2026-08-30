@@ -1,6 +1,6 @@
 {
   "name": "@docsy/theme",
-  "version": "0.17.0",
+  "version": "0.17.1-dev",
   "description": "A Hugo theme for technical documentation sites",
   "repository": {
     "type": "git",

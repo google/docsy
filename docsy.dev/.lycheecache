@@ -271,7 +271,8 @@ https://github.com/google/docsy/commits/main,200,1782563369
 https://github.com/google/docsy/compare/v0.15.0...main,200,1782563370
 https://github.com/google/docsy/compare/v0.15.0...v0.16.0,200,1785360538
 https://github.com/google/docsy/compare/v0.16.0...main,200,1787153684
-https://github.com/google/docsy/compare/v0.16.0...v0.17.0,206,1788114730
+https://github.com/google/docsy/compare/v0.16.0...v0.17.0,200,1788123507
+https://github.com/google/docsy/compare/v0.17.0...main,200,1788123580
 https://github.com/google/docsy/compare/v0.8.0...v0.9.0,200,1782498238
 https://github.com/google/docsy/discussions,200,1782563367
 https://github.com/google/docsy/discussions/1308,200,1782498228
@@ -425,6 +426,7 @@ https://github.com/google/docsy/issues/new?title=Release%200.14.0%20report%20and
 https://github.com/google/docsy/issues/new?title=Release%200.15.0%20report%20and%20upgrade%20guide,200,1782498546
 https://github.com/google/docsy/issues/new?title=Release%200.16.0%20report%20and%20upgrade%20guide,200,1782498546
 https://github.com/google/docsy/issues/new?title=Release%200.17.0%20report%20and%20upgrade%20guide,200,1787153684
+https://github.com/google/docsy/issues/new?title=Release%200.18.0%20report%20and%20upgrade%20guide,200,1788123580
 https://github.com/google/docsy/issues/new?title=Repository%20Links%20and%20other%20page%20information,200,1782498241
 https://github.com/google/docsy/issues/new?title=Repository-root%20markdown%20files,200,1782498547
 https://github.com/google/docsy/issues/new?title=ScrollSpy%20patch,200,1782498547
@@ -571,10 +573,13 @@ https://github.com/google/docsy/releases,200,1782563368
 https://github.com/google/docsy/releases/latest,200,1782563369
 https://github.com/google/docsy/releases/latest?FIXME=v0.16.1,200,1785360538
 https://github.com/google/docsy/releases/latest?FIXME=v0.17.0,200,1785360538
+https://github.com/google/docsy/releases/latest?FIXME=v0.18.0,200,1788123580
 https://github.com/google/docsy/releases/new,200,1782498229
 https://github.com/google/docsy/releases/tag/v0.10.0,200,1782498237
 https://github.com/google/docsy/releases/tag/v0.11.0,200,1782498235
 https://github.com/google/docsy/releases/tag/v0.16.0,200,1785360538
+https://github.com/google/docsy/releases/tag/v0.17.0,200,1788123507
+https://github.com/google/docsy/releases/tag/v0.18.0,206,1788123604
 https://github.com/google/docsy/releases/tag/v0.7.0,200,1782498239
 https://github.com/google/docsy/releases/tag/v0.9.0,200,1782498237
 https://github.com/google/docsy/releases/v0.10.0,200,1782498226
@@ -587,6 +592,7 @@ https://github.com/google/docsy/releases/v0.14.2,200,1782498222
 https://github.com/google/docsy/releases/v0.14.3,200,1782498222
 https://github.com/google/docsy/releases/v0.15.0,200,1782563370
 https://github.com/google/docsy/releases/v0.16.0,200,1785360538
+https://github.com/google/docsy/releases/v0.17.0,200,1788123508
 https://github.com/google/docsy/releases/v0.2.0,200,1782498229
 https://github.com/google/docsy/releases/v0.3.0,200,1782498229
 https://github.com/google/docsy/releases/v0.4.0,200,1782498229
@@ -806,6 +812,8 @@ https://main--docsydocs.netlify.app/blog/2026/0.16.0/#npm-deps,200,1785243426
 https://main--docsydocs.netlify.app/blog/2026/0.16.0/#rollback,200,1785191587
 https://main--docsydocs.netlify.app/blog/2026/0.16.0/#theme-folder-actions,200,1785191587
 https://main--docsydocs.netlify.app/blog/2026/0.16.0/,200,1782498244
+https://main--docsydocs.netlify.app/blog/2026/0.17.0/,200,1788123507
+https://main--docsydocs.netlify.app/blog/2026/0.18.0/,206,1788123604
 https://main--docsydocs.netlify.app/blog/2026/hugo-0.152.0+/,200,1782498244
 https://main--docsydocs.netlify.app/blog/2026/hugo-0.158.0+/,200,1782498244
 https://main--docsydocs.netlify.app/community/,200,1782563367
@@ -843,7 +851,7 @@ https://main--docsydocs.netlify.app/docs/get-started/docsy-as-module/start-from-
 https://main--docsydocs.netlify.app/docs/get-started/known_issues/,200,1782498243
 https://main--docsydocs.netlify.app/docs/get-started/other-options/,200,1782498243
 https://main--docsydocs.netlify.app/docs/get-started/quickstart-docker/,200,1782498245
-https://main--docsydocs.netlify.app/docs/get-started/troubleshooting/,206,1784212116
+https://main--docsydocs.netlify.app/docs/get-started/troubleshooting/,200,1788123507
 https://main--docsydocs.netlify.app/docs/language/,200,1782498243
 https://main--docsydocs.netlify.app/docs/update/,200,1782563367
 https://main--docsydocs.netlify.app/docs/update/convert-site-to-module/,200,1782498243
@@ -859,7 +867,7 @@ https://main--docsydocs.netlify.app/project/about/readme/,200,1782498244
 https://main--docsydocs.netlify.app/project/build/,200,1782563367
 https://main--docsydocs.netlify.app/project/build/ci-cd/,200,1782498244
 https://main--docsydocs.netlify.app/project/build/git-repo/,200,1782498244
-https://main--docsydocs.netlify.app/project/design/,206,1787249523
+https://main--docsydocs.netlify.app/project/design/,200,1788123507
 https://main--docsydocs.netlify.app/project/design/semantic-classes/,200,1787669024
 https://main--docsydocs.netlify.app/project/implementation/,200,1782563367
 https://main--docsydocs.netlify.app/project/implementation/scrollspy-patch/,200,1782498244
@@ -879,6 +887,7 @@ https://main--docsydocs.netlify.app/tests/blocks-cover/height-full/,200,17824982
 https://main--docsydocs.netlify.app/tests/blocks-cover/height-min/,200,1782498222
 https://main--docsydocs.netlify.app/tests/layouts/,200,1782563367
 https://main--docsydocs.netlify.app/tests/layouts/no-left-sidebar/,200,1782563368
+https://main--docsydocs.netlify.app/tests/layouts/swagger/,200,1788123507
 https://markmap.js.org/,200,1782498237
 https://martinfowler.com/bliki/TechnicalDebt.html,200,1782498228
 https://mentorship.lfx.linuxfoundation.org/project/34314eb1-0fc3-4802-ab04-2265418c2e48,200,1782498230
@@ -964,6 +973,8 @@ https://www.docsy.dev/blog/2025/0.13.0/,200,1782498244
 https://www.docsy.dev/blog/2026/0.14.0/,200,1782498244
 https://www.docsy.dev/blog/2026/0.15.0/,200,1782498244
 https://www.docsy.dev/blog/2026/0.16.0/,200,1785360538
+https://www.docsy.dev/blog/2026/0.17.0/,200,1788123507
+https://www.docsy.dev/blog/2026/0.18.0/,206,1788123604
 https://www.docsy.dev/blog/2026/hugo-0.152.0+/,200,1782498244
 https://www.docsy.dev/blog/2026/hugo-0.158.0+/,200,1785360538
 https://www.docsy.dev/community/,200,1782563367
@@ -1002,7 +1013,7 @@ https://www.docsy.dev/docs/get-started/docsy-as-module/start-from-scratch/,200,1
 https://www.docsy.dev/docs/get-started/known_issues/,200,1782498243
 https://www.docsy.dev/docs/get-started/other-options/,200,1782498243
 https://www.docsy.dev/docs/get-started/quickstart-docker/,200,1782498243
-https://www.docsy.dev/docs/get-started/troubleshooting/,206,1784212116
+https://www.docsy.dev/docs/get-started/troubleshooting/,200,1788123507
 https://www.docsy.dev/docs/language/,200,1782498243
 https://www.docsy.dev/docs/update/,200,1782563367
 https://www.docsy.dev/docs/update/convert-site-to-module/,200,1782498243
@@ -1019,8 +1030,8 @@ https://www.docsy.dev/project/about/readme/,200,1782498244
 https://www.docsy.dev/project/build/,200,1782563367
 https://www.docsy.dev/project/build/ci-cd/,200,1782498244
 https://www.docsy.dev/project/build/git-repo/,200,1782498245
-https://www.docsy.dev/project/design/,206,1787249523
-https://www.docsy.dev/project/design/semantic-classes/,206,1787150440
+https://www.docsy.dev/project/design/,200,1788123507
+https://www.docsy.dev/project/design/semantic-classes/,200,1788123507
 https://www.docsy.dev/project/implementation/,200,1782563367
 https://www.docsy.dev/project/implementation/scrollspy-patch/,200,1782498244
 https://www.docsy.dev/project/repo/,200,1782563367
@@ -1039,6 +1050,7 @@ https://www.docsy.dev/tests/blocks-cover/height-full/,200,1782498226
 https://www.docsy.dev/tests/blocks-cover/height-min/,200,1782563368
 https://www.docsy.dev/tests/layouts/,200,1782563367
 https://www.docsy.dev/tests/layouts/no-left-sidebar/,200,1782563368
+https://www.docsy.dev/tests/layouts/swagger/,200,1788123507
 https://www.google.com/search?q=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com&oq=mac+os+launchctl+limit+maxfiles+site%3Aapple.stackexchange.com,200,1782563368
 https://www.grpc.io/,200,1782498245
 https://www.kubeflow.org/,200,1782498245
