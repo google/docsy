@@ -18,17 +18,6 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 - **Updating across more than one release?** Apply each release's
   [upgrade post](/tags/upgrade/) in turn, oldest first: each post assumes you
   are coming from the release just before it.
-- **Updating from Docsy [0.15](/blog/2026/0.15.0/) or earlier?** First apply the
-  0.16.0 post's [theme folder][tfa] and [favicon][ffa] actions; this page's
-  steps cover the rest.
-- **Updating from Docsy [0.16](/blog/2026/0.16.0/) or earlier?** Before updating
-  the theme, provide the [Dart Sass][] compiler in every environment that builds
-  your site; see the 0.17.0 post's
-  [Dart Sass actions](/blog/2026/0.17.0/#dart-sass-actions).
-
-<!-- TODO(0.18-ish): drop the 0.15 crossing bullet above once 0.15-to-0.16
-     upgrade traffic fades; release history lives in the blog posts.
-     (2026-07-28) -->
 
 ## Order of steps {#update-order}
 
@@ -122,11 +111,8 @@ Also perform any release-specific checks listed in the release's
 
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
-[Dart Sass]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-dart-sass
 [hugo-extended]: /docs/get-started/docsy-as-module/installation-prerequisites/#as-an-npm-module
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
-[ffa]: /blog/2026/0.16.0/#favicons-actions
-[tfa]: /blog/2026/0.16.0/#theme-folder-actions
 <!-- prettier-ignore-end -->
