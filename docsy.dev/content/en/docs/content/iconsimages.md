@@ -79,9 +79,8 @@ whichever of these files it finds, in this order:
 If you have any square-size variants listed above, Docsy adds them in ascending
 size order.
 
-Docsy discovers these files only at the top level of `static/`: files in
-subdirectories, such as the `static/favicons/` location that pre-0.16 Docsy
-sites used, aren't linked.
+Docsy discovers these files _only_ at the **top level** of `static/`, not in
+subdirectories.
 
 [^ico-link]:
     The `.ico` link carries no `sizes`: the file is self-describing (browsers
