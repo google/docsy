@@ -40,9 +40,8 @@ npm ls @docsy/theme --depth=0
 
 If your site installs Docsy [from GitHub with npm][github-npm] (a mode reserved
 for Docsy development and testing), update by re-running the install command
-with the desired [revision selector][github-npm]. After the update, rerun the
-theme-dependencies install command:
-`npm run install:theme-deps --prefix node_modules/docsy`.
+with the desired [revision selector][github-npm], then rerun the
+`install:theme-deps` command as shown there.
 
 After updating the theme, continue with the remaining update steps, starting
 with [Review your theme overrides](/docs/update/#update-overrides).
