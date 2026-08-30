@@ -23,8 +23,8 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
 
 Perform the update steps in the order given by this page:
 
-1. [Node.js](#update-node) and [Hugo](#update-hugo), when your target release
-   calls for it
+1. [Node.js](#update-node), [Hugo](#update-hugo), and any other build
+   prerequisite that your target release calls for
 2. [The theme](#update-theme), by install mode
 3. [Review your theme overrides](#update-overrides)
 4. [Check your site](#check)

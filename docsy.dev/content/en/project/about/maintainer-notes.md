@@ -27,9 +27,10 @@ restating them:
   link an open tracker only where it adds follow-up context. Upgrades are a
   chore, so keep posts maximally actionable yet lean: the release summary reads
   like a selective table of contents (a link per section with a clause of
-  guiding glue) and each fact appears in one section, its home.
-  Maintainer-facing changes are summarized in a **For maintainers** section at
-  the end of the documented changes.
+  guiding glue) and each fact appears in one section, its home. Each post
+  targets upgraders coming from the release just before it; a post that assumes
+  otherwise says so. Maintainer-facing changes are summarized in a **For
+  maintainers** section at the end of the documented changes.
 - **Site docs** (`docs/`): Docsy _as it is now_. Minimal historical references
   or links to issues and PRs.
 - **[Release notes][] and [milestones][]**: exhaustive records. Generated
@@ -294,6 +295,10 @@ site build doesn't need it.
   the updated `.lycheecache`.
 - **Inspect or prune** with `npm run refcache` (`-- -s` for a summary,
   `-- -p 10%` to drop the oldest tenth).
+- **Seed** a URL that only goes live later (such as release-tag links during
+  release prep) by adding a row with placeholder status `206`. Redeem the seed
+  once the URL is live: delete the row and re-run the check. The release process
+  tracks redemption as a post-deploy step.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
@@ -785,8 +790,7 @@ before any further changes are merged into the `main` branch:
 4. **Create a draft release report post** for the next release
    (`docsy.dev/content/en/blog/YYYY/X.Y.Z.md`, `draft: true`), modeled on the
    shipped release's post. Like the changelog's new entry, the draft gives
-   next-cycle changes a single home to land on as release prep works through
-   them.
+   next-cycle changes a single home to land on.
 
 5. **Submit a PR with your changes**, using a title like:
 
