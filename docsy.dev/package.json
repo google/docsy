@@ -45,7 +45,7 @@
   },
   "dependencies-note": "Dependencies installed from ../theme; see the root install:theme-deps script",
   "devDependencies": {
-    "afdocs": "^0.19.0",
+    "afdocs": "^0.20.0",
     "cross-env": "^10.1.0",
     "link-cache": "^0.3.0",
     "npm-check-updates": "^19.6.3",
