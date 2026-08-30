@@ -17,7 +17,7 @@ actions, see the [upgrade blog posts](/tags/upgrade/).
   project files first. Rolling back is then a simple restore.
 - **Updating across more than one release?** Apply each release's
   [upgrade post](/tags/upgrade/) in turn, oldest first: each post assumes you
-  are coming from the release just before it.
+  are coming from the release just before it, unless stated otherwise.
 
 ## Order of steps {#update-order}
 
