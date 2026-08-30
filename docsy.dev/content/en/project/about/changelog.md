@@ -141,6 +141,33 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
+## v0.18.0 {#next}
+
+> **UNRELEASED: this planned version is still under development**
+
+For the full list of changes, see the [0.18.0][] release page or the [git
+history since 0.17.0][].
+
+[**Breaking changes**](#breaking-change):
+
+- ...
+
+**New**:
+
+- ...
+
+**Other changes**:
+
+- ...
+
+[**Experimental**](#experimental):
+
+- ...
+
+[0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
+[git history since 0.17.0]:
+  https://github.com/google/docsy/compare/v0.17.0...main
+
 ## v0.17.0 {#v0.17.0}
 
 For an introduction to this release, see the [0.17.0 release report][]. For the
