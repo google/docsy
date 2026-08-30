@@ -101,7 +101,7 @@
     "pixelmatch": "7.2.0",
     "pngjs": "7.0.0",
     "prettier": "^3.9.3",
-    "puppeteer": "25.5.0",
+    "puppeteer": "25.8.0",
     "sass-embedded": "1.102.0",
     "yaml": "^2.9.0"
   },
