@@ -8,27 +8,22 @@ description: >-
   package.
 ---
 
-Update the theme to the latest release by running the following from your
-project root:
+Update the theme to the release you are targeting, named explicitly, by running
+the following from your project root:
 
 ```sh
-npm install --save-dev @docsy/theme@latest
+npm install --save-dev @docsy/theme@{{% param tdVersion.latest %}}
 ```
-
-> [!TIP]
->
-> To pin a specific version, name it explicitly, for example:
->
-> ```sh
-> npm install --save-dev @docsy/theme@{{% param tdVersion.latest %}}
-> ```
 
 > [!NOTE]
 >
-> If your project gates installs with npm's `min-release-age`, installing a
-> release younger than the gate fails with `ETARGET`, and the error doesn't name
-> the cause. Wait out the window, or run the update under a one-off override,
-> noting it in your update PR:
+> Prefer an exact version over the `latest` dist-tag: under npm's
+> `min-release-age`, `@latest` silently resolves to the newest release that is
+> old enough, so you can end up one release behind without any warning. An exact
+> version fails visibly instead (`ETARGET`, though the error doesn't name the
+> age gate as the cause). To install a release younger than your gate, wait out
+> the window, or run the update under a one-off override, noting it in your
+> update PR:
 >
 > ```sh
 > NPM_CONFIG_MIN_RELEASE_AGE=RELEASE_AGE_DAYS npm install --save-dev @docsy/theme@VERSION
