@@ -4,11 +4,9 @@ linkTitle: Git submodule or clone
 aliases: [/docs/updating/updating-submodules/]
 weight: 3
 description: >-
-  Update a Docsy theme vendored under `themes/` as a Git submodule or clone.
+  Choose the procedure matching how your project vendors Docsy under `themes/`:
+  submodule or clone.
 ---
-
-Use the procedure matching how Docsy was installed in your project:
-[submodule](#update-your-docsy-submodule) or [clone](#update-your-docsy-clone).
 
 > [!TIP]
 >
@@ -51,8 +49,7 @@ in your project, here's how you update the submodule to the latest release:
    Run `npm run install:theme-deps`, not `npm install`; for why, see the [setup
    note][theme-deps-note].
 
-3. Commit the change to your project (re-run the `git add` first if your tooling
-   touched the submodule since step 1):
+3. Commit the staged change to your project:
 
    ```sh
    git commit -m "Update Docsy theme to {{% param tdVersion.latest %}}"
