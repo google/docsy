@@ -734,8 +734,9 @@ with the following modifications:
       to the new release.
     - To create a new release draft, visit [Docsy-example release draft][].
 
-3.  **Update the [Examples page][]** Docsy version in the Starter templates
-    table to {{% dev-version final %}}.
+3.  **Verify the [Examples page][]** Starter-templates table shows
+    {{% dev-version final %}}: its Docsy cells render the site's
+    `tdVersion.latest`, which the Docsy release advanced.
 
 [Docsy-example release draft]:
   https://github.com/google/docsy-example/releases/new

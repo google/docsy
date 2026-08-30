@@ -57,6 +57,13 @@ Docsy is tested with:
 npm install --save-exact --save-dev sass-embedded@{{% sass-embedded-version %}}
 ```
 
+> [!NOTE]
+>
+> Installing `sass-embedded` also adds [`@parcel/watcher`][], an install-script
+> package, to your lockfile: it arrives through the optional pure-JS fallback
+> and is never installed or run on platforms with a prebuilt `sass-embedded`
+> binary. Projects that review or gate install scripts can deny it.
+
 The `sass` CLI is then on `PATH` for every npm-run script, so run Hugo through
 [npm scripts][]. For example, with the following in your `package.json`:
 
@@ -148,6 +155,7 @@ site
 - [Start site from scratch (for experts)](start-from-scratch/)
 
 <!-- prettier-ignore-start -->
+[`@parcel/watcher`]: https://www.npmjs.com/package/@parcel/watcher
 [browserslist-defaults]: https://github.com/browserslist/browserslist
 [dart sass]: https://sass-lang.com/dart-sass/
 [hugo-dart-sass]: https://gohugo.io/functions/css/sass/#dart-sass
