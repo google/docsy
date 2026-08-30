@@ -782,15 +782,21 @@ before any further changes are merged into the `main` branch:
    - **Fix the new release URL**, which ends with `latest?FIXME=...`, so that it
      refers to the actual release, now that it exists.
 
-4. **Submit a PR with your changes**, using a title like:
+4. **Create a draft release report post** for the next release
+   (`docsy.dev/content/en/blog/YYYY/X.Y.Z.md`, `draft: true`), modeled on the
+   shipped release's post. Like the changelog's new entry, the draft gives
+   next-cycle changes a single home to land on as release prep works through
+   them.
+
+5. **Submit a PR with your changes**, using a title like:
 
    ```text
    Set version to {{% param version %}}
    ```
 
-5. **Get PR approved and merged**.
+6. **Get PR approved and merged**.
 
-6. **Validate the published release from [docsy-starter][]** (npm package mode),
+7. **Validate the published release from [docsy-starter][]** (npm package mode),
    per the [consumer-site test procedure](#consumer-site-test), and follow with
    the starter's own Docsy-update PR. Post-tag; doesn't block `main`.
 
