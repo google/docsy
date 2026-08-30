@@ -53,7 +53,7 @@ jobs:
         # 2026-08-09); widen deliberately if a release-branch flow returns.
         run: git merge-base --is-ancestor HEAD origin/main
 
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version-file: .nvmrc
           package-manager-cache: false
@@ -98,7 +98,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version-file: .nvmrc
           # This pin exports a dummy NODE_AUTH_TOKEN so the registry-url
