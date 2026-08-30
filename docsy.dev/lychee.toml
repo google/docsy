@@ -38,6 +38,7 @@ exclude = [
   # Remove after 0.17.0 ships: the release tag and links to pages new/draft in
   # this cycle (absent on v0.16.0 prod).
   '^https://github\.com/google/docsy/releases/(tag/)?v0\.17\.0$',
+  '^https://github\.com/google/docsy/compare/v0\.16\.0\.\.\.v0\.17\.0$',
   '^https://www\.docsy\.dev/blog/2026/0\.17\.0/$',
   '^https://main--docsydocs\.netlify\.app/blog/2026/0\.17\.0/$',
   '^https://www\.docsy\.dev/tests/layouts/swagger/$',
