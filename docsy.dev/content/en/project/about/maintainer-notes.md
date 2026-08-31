@@ -190,6 +190,8 @@ Automated updates are configured through Renovate. Settings rationale:
 - `lockFileMaintenance` off: wholesale lock re-resolves would churn the
   committed lockfiles; transitive security fixes arrive alert-driven instead.
 - Package rules:
+  - Patch and minor updates are each grouped into a single PR per wave, to cut
+    review overhead; majors stay individual for one-by-one scrutiny.
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
