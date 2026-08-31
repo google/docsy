@@ -64,9 +64,18 @@ const variants = {
   },
   // gcs_engine_id renders the navbar search input, arming search.js's
   // delegated Enter handler (the offline variant swaps that file out).
+  // Doubles as the plantuml svg-mode site (features covers img mode).
   'gcs-search': {
-    options: { files, extraConfig: 'params:\n  gcs_engine_id: fake\n' },
-    pages: ['docs/'],
+    options: {
+      files,
+      extraConfig: `params:
+  gcs_engine_id: fake
+  plantuml:
+    enable: true
+    svg: true
+`,
+    },
+    pages: ['docs/', 'docs/diagrams/'],
   },
 };
 
@@ -188,6 +197,24 @@ test('js behavior: a plantuml code block becomes a diagram-server image', async 
       null,
       'the plantuml code block was replaced',
     );
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: plantuml svg mode emits an SVG-namespace loader element', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${servers['gcs-search'].origin}/docs/diagrams/`, {
+      waitUntil: 'networkidle0',
+    });
+    // external-svg-loader targets svg[data-src]; the element must be a
+    // real SVG-namespace element like the one the HTML parser produced.
+    const ns = await page.$eval(
+      'svg[data-src*="plantuml.com/plantuml/svg/"]',
+      (el) => el.namespaceURI,
+    );
+    assert.equal(ns, 'http://www.w3.org/2000/svg', 'SVG namespace');
   } finally {
     await page.close();
   }
