@@ -247,6 +247,26 @@ test('js behavior: a mermaid code block renders as an SVG diagram', async () => 
   }
 });
 
+test('js behavior: mermaid renders under a dark theme', async () => {
+  const page = await browser.newPage();
+  try {
+    // The dark-theme sniff reads data-bs-theme when the mermaid module
+    // runs; setting it pre-navigation exercises that branch.
+    await page.evaluateOnNewDocument(() => {
+      document.addEventListener('DOMContentLoaded', () =>
+        document.documentElement.setAttribute('data-bs-theme', 'dark'),
+      );
+    });
+    await page.goto(`${servers.features.origin}/docs/diagrams/`, {
+      waitUntil: 'domcontentloaded',
+    });
+    const svg = await page.waitForSelector('.mermaid svg', { timeout: 15000 });
+    assert.ok(svg, 'mermaid SVG is in the DOM under a dark theme');
+  } finally {
+    await page.close();
+  }
+});
+
 // offline-search probe: committing a query must pop the results popover;
 // closing it must clear the input.
 
@@ -370,7 +390,9 @@ test('js behavior: Enter in the navbar search box navigates to the search page',
       }
       req.continue();
     });
-    await input.type('docsy');
+    // Reserved URL characters pin the query encoding: unencoded, & and #
+    // truncate the q param.
+    await input.type('docsy&nav#2');
     await input.press('Enter');
     // The navigation request fires async; poll briefly for it.
     for (let i = 0; i < 40 && searchNav === undefined; i++) {
@@ -378,8 +400,8 @@ test('js behavior: Enter in the navbar search box navigates to the search page',
     }
     assert.match(
       searchNav ?? '',
-      /\/search\/\?q=docsy$/,
-      'Enter navigates to the search page with the query',
+      /\/search\/\?q=docsy%26nav%232$/,
+      'Enter navigates to the search page with the encoded query',
     );
   } finally {
     await page.close();

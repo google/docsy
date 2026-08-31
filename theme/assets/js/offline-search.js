@@ -32,9 +32,15 @@
       });
 
       // Prevent reloading page by enter key on sidebar search.
+      // stopPropagation preserves the jQuery handler's `return false`
+      // semantics: site-level delegated submit listeners never saw this
+      // event before the conversion.
       const form = input.closest('form');
       if (form) {
-        form.addEventListener('submit', (e) => e.preventDefault());
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
       }
     });
 
