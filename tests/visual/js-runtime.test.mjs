@@ -247,6 +247,36 @@ test('js behavior: a mermaid code block renders as an SVG diagram', async () => 
   }
 });
 
+// offline-search probe: committing a query must pop the results popover;
+// closing it must clear the input.
+
+test('js behavior: an offline-search query pops the results popover and close clears it', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.goto(`${servers.features.origin}/docs/`, {
+      waitUntil: 'networkidle0',
+    });
+    const input = await page.$('.td-search--offline input');
+    assert.ok(input, 'offline-search input is present');
+    await input.type('docs');
+    await input.press('Enter');
+    await page.waitForSelector('.td-offline-search-results', {
+      timeout: 5000,
+    });
+    // The close handler arms on shown.bs.popover, after the fade
+    // transition; let it settle before clicking.
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    await page.click('.td-offline-search-results__close-button');
+    await page.waitForFunction(
+      () => document.querySelector('.td-search--offline input').value === '',
+      { timeout: 5000 },
+    );
+  } finally {
+    await page.close();
+  }
+});
+
 // base.js probes: the cover-transparency feature lives in desktop chrome;
 // the nav-overflow feature is mobile-only (the nav only clips below the
 // lg breakpoint), so its probe uses a narrow viewport.
