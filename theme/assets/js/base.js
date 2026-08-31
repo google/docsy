@@ -88,12 +88,20 @@ limitations under the License.
     const isOverflowing = navbarNav.scrollWidth > navbarNav.clientWidth;
 
     if (isOverflowing) {
-      container?.classList.add('td-navbar-nav-scroll--indicator');
-      navbarContainer?.classList.add('navbar-is-overflowing');
+      if (container) {
+        container.classList.add('td-navbar-nav-scroll--indicator');
+      }
+      if (navbarContainer) {
+        navbarContainer.classList.add('navbar-is-overflowing');
+      }
       updateScrollIndicators();
     } else {
-      container?.classList.remove('td-navbar-nav-scroll--indicator');
-      navbarContainer?.classList.remove('navbar-is-overflowing');
+      if (container) {
+        container.classList.remove('td-navbar-nav-scroll--indicator');
+      }
+      if (navbarContainer) {
+        navbarContainer.classList.remove('navbar-is-overflowing');
+      }
     }
   }
 

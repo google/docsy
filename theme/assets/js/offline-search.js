@@ -186,8 +186,9 @@
       } else {
         results.forEach((r) => {
           const doc = resultDetails.get(r.ref);
+          // First input's base-href, like the jQuery collection read.
           const href =
-            targetInput.dataset.offlineSearchBaseHref +
+            searchInputs[0].dataset.offlineSearchBaseHref +
             r.ref.replace(/^\//, '');
 
           const entry = document.createElement('div');

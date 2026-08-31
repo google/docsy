@@ -160,8 +160,9 @@ history since 0.17.0][].
 
 **Other changes**:
 
-- Fixed navbar scroll-indicator clicks scrolling multiple times after window
-  resizes, and search queries truncating at `&` or `#` ([#1436][]).
+- Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
+  while committing IME-composed text) and navbar scroll-indicator clicks
+  scrolling multiple times after window resizes ([#1436][]).
 
 [**Experimental**](#experimental):
 
