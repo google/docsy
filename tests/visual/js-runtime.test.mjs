@@ -62,8 +62,10 @@ const variants = {
     },
     pages: ['', 'docs/', 'docs/diagrams/'],
   },
-  'default-search': {
-    options: { files },
+  // gcs_engine_id renders the navbar search input, arming search.js's
+  // delegated Enter handler (the offline variant swaps that file out).
+  'gcs-search': {
+    options: { files, extraConfig: 'params:\n  gcs_engine_id: fake\n' },
     pages: ['docs/'],
   },
 };
@@ -151,3 +153,45 @@ for (const { variant, page } of visits) {
     assert.deepEqual(errors, [], `${variant} /${page} loads without JS errors`);
   });
 }
+
+// Behavior probes: one small parity assertion per converted script
+// (google/docsy#1436), each verified green against the pre-conversion
+// code first.
+
+test('js behavior: Enter in the navbar search box navigates to the search page', async () => {
+  const page = await browser.newPage();
+  try {
+    // Desktop viewport: in collapsed (mobile) chrome the navbar search
+    // input is unfocusable, and typing would land on <body>.
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.goto(`${servers['gcs-search'].origin}/docs/`, {
+      waitUntil: 'networkidle0',
+    });
+    const input = await page.$('.td-search input');
+    assert.ok(input, 'navbar search input is present');
+    // The handler navigates via absURL (the fixture's example.org base), so
+    // intercept the navigation instead of following it off-origin.
+    let searchNav;
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.isNavigationRequest()) {
+        searchNav = req.url();
+        return req.abort();
+      }
+      req.continue();
+    });
+    await input.type('docsy');
+    await input.press('Enter');
+    // The navigation request fires async; poll briefly for it.
+    for (let i = 0; i < 40 && searchNav === undefined; i++) {
+      await new Promise((resolve) => setTimeout(resolve, 50));
+    }
+    assert.match(
+      searchNav ?? '',
+      /\/search\/\?q=docsy$/,
+      'Enter navigates to the search page with the query',
+    );
+  } finally {
+    await page.close();
+  }
+});
