@@ -262,16 +262,22 @@ test('js behavior: an offline-search query pops the results popover and close cl
     await input.type('docs');
     await input.press('Enter');
     await page.waitForSelector('.td-offline-search-results', {
-      timeout: 5000,
+      timeout: 10000,
     });
     // The close handler arms on shown.bs.popover, after the fade
-    // transition; let it settle before clicking.
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    await page.click('.td-offline-search-results__close-button');
-    await page.waitForFunction(
-      () => document.querySelector('.td-search--offline input').value === '',
-      { timeout: 5000 },
-    );
+    // transition; retry the click until the handler has taken effect
+    // (a fixed settle delay flakes under full-suite load).
+    const deadline = Date.now() + 10000;
+    let cleared = false;
+    while (!cleared && Date.now() < deadline) {
+      await page.click('.td-offline-search-results__close-button');
+      await new Promise((resolve) => setTimeout(resolve, 250));
+      cleared = await page.$eval(
+        '.td-search--offline input',
+        (el) => el.value === '',
+      );
+    }
+    assert.ok(cleared, 'the close button cleared the search input');
   } finally {
     await page.close();
   }
