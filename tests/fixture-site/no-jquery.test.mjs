@@ -55,8 +55,9 @@ test('authored theme JS contains no jQuery usage', () => {
     },
     {
       name: 'first-party static JS',
+      // basename comparison: globSync returns backslash paths on Windows.
       files: globSync('theme/static/js/*.js', { cwd: repoRoot }).filter(
-        (f) => !/(^|\/)(prism|deflate)\.js$/.test(f),
+        (f) => !['prism.js', 'deflate.js'].includes(path.basename(f)),
       ),
       floor: 1,
       re: jsUsage,
