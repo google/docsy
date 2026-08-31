@@ -58,8 +58,17 @@
         return '?';
     }
 
-    document.querySelectorAll('.language-plantuml').forEach((code) => {
-        const pre = code.parentElement;
+    // Unique parents, like the jQuery original and markmap.js: sibling
+    // plantuml code blocks share one parent, one diagram, one server
+    // request (per-block iteration fired a stray img request for a
+    // never-inserted element).
+    const parents = new Set(
+        Array.from(
+            document.querySelectorAll('.language-plantuml'),
+            (code) => code.parentElement,
+        ),
+    );
+    parents.forEach((pre) => {
         const s = unescape(encodeURIComponent(pre.textContent));
         const url = '{{.svg_image_url | default "//www.plantuml.com/plantuml/svg/"}}' + encode64(deflate(s, 9));
         {{ if .svg }}

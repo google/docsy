@@ -303,11 +303,15 @@ test('js behavior: mermaid renders with the dark theme under data-bs-theme=dark'
   const { page, pageErrors } = await newProbePage();
   try {
     // The dark-theme sniff reads data-bs-theme when the mermaid module
-    // runs; setting it pre-navigation exercises that branch.
+    // runs; the attribute must land before that. DOMContentLoaded is too
+    // late for a cache-hot async module, so set it as soon as the
+    // document element exists.
     await page.evaluateOnNewDocument(() => {
-      document.addEventListener('DOMContentLoaded', () =>
-        document.documentElement.setAttribute('data-bs-theme', 'dark'),
-      );
+      new MutationObserver((_, observer) => {
+        if (!document.documentElement) return;
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+        observer.disconnect();
+      }).observe(document, { childList: true });
     });
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'domcontentloaded',

@@ -116,6 +116,14 @@
         return;
       }
 
+      // An absent max-results attribute (a customized search-input
+      // partial) means unlimited, as the jQuery-era data read had it;
+      // NaN would silently slice to zero results.
+      const maxResults = parseInt(
+        targetInput.dataset.offlineSearchMaxResults,
+        10,
+      );
+
       const results = idx
         .query((q) => {
           const tokens = lunr.tokenizer(searchQuery.toLowerCase());
@@ -134,10 +142,7 @@
             });
           });
         })
-        .slice(
-          0,
-          parseInt(targetInput.dataset.offlineSearchMaxResults, 10),
-        );
+        .slice(0, Number.isNaN(maxResults) ? undefined : maxResults);
 
       //
       // Make result html

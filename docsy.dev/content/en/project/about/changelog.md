@@ -160,7 +160,8 @@ history since 0.17.0][].
 
 **Other changes**:
 
-- ...
+- Fixed navbar scroll-indicator clicks scrolling multiple times after window
+  resizes, and search queries truncating at `&` or `#` ([#1436][]).
 
 [**Experimental**](#experimental):
 

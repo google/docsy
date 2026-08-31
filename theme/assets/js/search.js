@@ -18,7 +18,9 @@ limitations under the License.
   'use strict';
 
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Enter') return;
+    // isComposing: Enter that commits an IME composition must not
+    // navigate (the jQuery-era keypress never fired for it).
+    if (e.isComposing || e.key !== 'Enter') return;
 
     const input = e.target.closest('.td-search input');
     if (!input) return;
