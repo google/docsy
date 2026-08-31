@@ -158,6 +158,54 @@ for (const { variant, page } of visits) {
 // (google/docsy#1436), each verified green against the pre-conversion
 // code first.
 
+// Diagram probes: each asserts the script's DOM transformation landed on
+// the features diagrams page (rendered SVG for the CDN-driven renderers,
+// the generated img element for plantuml).
+
+test('js behavior: a markmap code block renders as an SVG mind map', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${servers.features.origin}/docs/diagrams/`, {
+      waitUntil: 'networkidle0',
+    });
+    const svg = await page.waitForSelector('.markmap svg', { timeout: 15000 });
+    assert.ok(svg, 'markmap SVG is in the DOM');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: a plantuml code block becomes a diagram-server image', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${servers.features.origin}/docs/diagrams/`, {
+      waitUntil: 'networkidle0',
+    });
+    const img = await page.$('img[src*="plantuml.com/plantuml/svg/"]');
+    assert.ok(img, 'plantuml image element is in the DOM');
+    assert.equal(
+      await page.$('.language-plantuml'),
+      null,
+      'the plantuml code block was replaced',
+    );
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: a mermaid code block renders as an SVG diagram', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.goto(`${servers.features.origin}/docs/diagrams/`, {
+      waitUntil: 'networkidle0',
+    });
+    const svg = await page.waitForSelector('.mermaid svg', { timeout: 15000 });
+    assert.ok(svg, 'mermaid SVG is in the DOM');
+  } finally {
+    await page.close();
+  }
+});
+
 test('js behavior: Enter in the navbar search box navigates to the search page', async () => {
   const page = await browser.newPage();
   try {

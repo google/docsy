@@ -1,19 +1,20 @@
 {{ with .Site.Params.markmap }}
 {{ if .enable }}
 
+(function () {
+  'use strict';
 
-(function($) {
-    var needMarkmap = false;
-    $('.language-markmap').parent().replaceWith(function() {
-        needMarkmap = true;
-        return $('<div class="markmap">').text($(this).text());
-    });
+  const codeBlocks = document.querySelectorAll('.language-markmap');
+  codeBlocks.forEach((code) => {
+    const container = document.createElement('div');
+    container.className = 'markmap';
+    container.textContent = code.textContent;
+    code.parentElement.replaceWith(container);
+  });
 
-    const { markmap } = window;
-    if(needMarkmap) {
-        markmap.autoLoader.renderAll();
-    }
-
-})(jQuery);
+  if (codeBlocks.length) {
+    window.markmap.autoLoader.renderAll();
+  }
+})();
 {{ end }}
 {{ end }}
