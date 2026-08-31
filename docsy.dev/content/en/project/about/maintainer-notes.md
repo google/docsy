@@ -291,8 +291,8 @@ Docsy's theme sources:
 `test:website` checks docsy.dev's links with Lychee, caching external-link
 results in the committed `docsy.dev/link-cache.jsonc` (the "link cache", née
 refcache) so checks stay fast and offline-friendly. Each entry records the
-status, its `when` timestamp, and `via` — the resolver that set it; Lychee's own
-`.lycheecache` is derived from it per run and gitignored. Config lives in
+status, its `when` timestamp, and `via` -- the resolver that set it; Lychee's
+own `.lycheecache` is derived from it per run and gitignored. Config lives in
 `docsy.dev/lychee.toml`. CI installs a pinned lychee binary (see
 `.github/workflows/test.yaml`); a plain site build doesn't need it.
 

@@ -2909,7 +2909,7 @@
     "status": 206,
     "when": "2026-08-30T21:00:04Z",
     "via": "manual",
-    "expires": "2026-12-31",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/releases/tag/v0.7.0": {
     "status": 200,
@@ -4081,7 +4081,7 @@
     "status": 206,
     "when": "2026-08-30T21:00:04Z",
     "via": "manual",
-    "expires": "2026-12-31",
+    "expires": "2026-10-15",
   },
   "https://main--docsydocs.netlify.app/blog/2026/hugo-0.152.0+/": {
     "status": 200,
@@ -4888,7 +4888,7 @@
     "status": 206,
     "when": "2026-08-30T21:00:04Z",
     "via": "manual",
-    "expires": "2026-12-31",
+    "expires": "2026-10-15",
   },
   "https://www.docsy.dev/blog/2026/hugo-0.152.0+/": {
     "status": 200,
