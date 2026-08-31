@@ -191,7 +191,9 @@ Automated updates are configured through Renovate. Settings rationale:
   committed lockfiles; transitive security fixes arrive alert-driven instead.
 - Package rules:
   - Patch and minor updates are each grouped into a single PR per wave, to cut
-    review overhead; majors stay individual for one-by-one scrutiny.
+    review overhead; majors stay individual for one-by-one scrutiny, except
+    families that Renovate's presets keep in lockstep (for example, the GitHub
+    artifact actions).
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
