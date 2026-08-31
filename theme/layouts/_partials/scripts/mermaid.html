@@ -18,8 +18,8 @@
 <script type="module" async>
   import mermaid from "{{ $cdnurl }}";
 
-  (function ($) {
-    if ($('.mermaid').length == 0) {
+  (function () {
+    if (!document.querySelector('.mermaid')) {
       mermaid.initialize({ startOnLoad: false });
       return;
     }
@@ -45,7 +45,7 @@
 
     var settings = norm(mermaid.mermaidAPI.defaultConfig, params);
     settings.startOnLoad = true;
-    if ($('html[data-bs-theme="dark"]').length) {
+    if (document.documentElement.dataset.bsTheme === 'dark') {
       settings.theme = 'dark';
     }
     mermaid.initialize(settings);
@@ -69,7 +69,7 @@
     });
     // observer.disconnect();
 
-  })(jQuery);
+  })();
 </script>
 {{ else -}}
   {{ errorf "params.mermaid.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}

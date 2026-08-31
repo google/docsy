@@ -150,7 +150,9 @@ history since 0.17.0][].
 
 [**Breaking changes**](#breaking-change):
 
-- ...
+- **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
+  `window.jQuery` and `$` are no longer available to site scripts; theme scripts
+  now use standard DOM APIs ([#1436][]).
 
 **New**:
 
@@ -158,13 +160,17 @@ history since 0.17.0][].
 
 **Other changes**:
 
-- ...
+- Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
+  while committing IME-composed text) and navbar scroll-indicator clicks
+  scrolling multiple times after window resizes ([#1436][]).
 
 [**Experimental**](#experimental):
 
 - ...
 
+[#1436]: https://github.com/google/docsy/issues/1436
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
+[0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [git history since 0.17.0]:
   https://github.com/google/docsy/compare/v0.17.0...main
 
