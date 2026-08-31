@@ -10,6 +10,14 @@
   minimumReleaseAge: '7 days',
   packageRules: [
     {
+      groupName: 'all patch versions',
+      matchUpdateTypes: ['patch'],
+    },
+    {
+      groupName: 'all minor versions',
+      matchUpdateTypes: ['minor'],
+    },
+    {
       matchPackageNames: ['hugo-extended'],
       enabled: false,
     },
