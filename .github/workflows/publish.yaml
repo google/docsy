@@ -101,8 +101,10 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
           node-version-file: .nvmrc
-          # This pin exports a dummy NODE_AUTH_TOKEN so the registry-url
-          # config template always resolves; re-verify on setup-node bumps.
+          # Writes the fresh userconfig the publish step relies on. Since v7,
+          # setup-node exports no dummy NODE_AUTH_TOKEN (setup-node#1558: a
+          # token can corrupt OIDC trusted publishing); npm tolerates the
+          # unresolved auth template. Re-verify on setup-node bumps.
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
