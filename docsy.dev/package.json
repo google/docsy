@@ -25,10 +25,12 @@
     "clean": "rm -Rf public",
     "ccr": "cross-env HUGO_PARAMS_TD_CHROME=shared npm run",
     "fix:format": "npm run _check:format -- --write",
-    "fix:refcache": "npm run check:links",
+    "fix:link-cache": "npm run check:links",
+    "fix:refcache": "echo 'WARNING: fix:refcache is deprecated. Use fix:link-cache moving forward.' >&2 && npm run fix:link-cache",
     "fix": "npm run fix:format",
+    "link-cache": "link-cache",
     "make:public": "git init -b main public",
-    "refcache": "refcache",
+    "refcache": "echo 'WARNING: refcache is deprecated. Use link-cache moving forward.' >&2 && npm run link-cache --",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _serve -- --minify",
     "test:alt-site": "node --test 'tests/alt-site/**/*.test.mjs'",
@@ -47,7 +49,7 @@
   "devDependencies": {
     "afdocs": "0.20.0",
     "cross-env": "10.1.0",
-    "link-cache": "0.3.0",
+    "link-cache": "0.4.0",
     "npm-check-updates": "23.1.0",
     "rtlcss": "4.3.0"
   },
