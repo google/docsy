@@ -19,8 +19,12 @@ import { buildSite } from '../fixture-site/lib/build-site.mjs';
 import { launchBrowser, serveDir } from './lib/harness.mjs';
 
 const files = {
+  // Tall section below the cover: the transparency probe needs the home
+  // page to scroll well past the navbar.
   'content/_index.md':
-    '---\ntitle: Home\n---\n{{< blocks/cover >}}\nCover\n{{< /blocks/cover >}}\n',
+    '---\ntitle: Home\n---\n{{< blocks/cover >}}\nCover\n{{< /blocks/cover >}}\n{{% blocks/section %}}\n' +
+    'Tall content paragraph.\n\n'.repeat(60) +
+    '{{% /blocks/section %}}\n',
   'content/docs/_index.md':
     '---\ntitle: Docs\nmenu: { main: { weight: 10 } }\n---\nDocs landing\n',
   'content/docs/diagrams.md': `---
@@ -52,7 +56,17 @@ const variants = {
   features: {
     options: {
       files,
-      extraConfig: `params:
+      // The crowded main menu overflows the desktop navbar, arming
+      // base.js's scroll-indicator logic.
+      extraConfig: `menus:
+  main:
+${Array.from(
+  { length: 12 },
+  (_, i) => `    - name: Menu entry number ${i + 1}
+      url: https://example.org/${i + 1}
+      weight: ${i + 1}
+`,
+).join('')}params:
   offlineSearch: true
   markmap:
     enable: true
@@ -228,6 +242,71 @@ test('js behavior: a mermaid code block renders as an SVG diagram', async () => 
     });
     const svg = await page.waitForSelector('.mermaid svg', { timeout: 15000 });
     assert.ok(svg, 'mermaid SVG is in the DOM');
+  } finally {
+    await page.close();
+  }
+});
+
+// base.js probes: the cover-transparency feature lives in desktop chrome;
+// the nav-overflow feature is mobile-only (the nav only clips below the
+// lg breakpoint), so its probe uses a narrow viewport.
+
+test('js behavior: the navbar is transparent over the cover and solid after scrolling past it', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.goto(servers.features.origin, { waitUntil: 'networkidle0' });
+    const isTransparent = () =>
+      page.$eval('.js-navbar-scroll', (el) =>
+        el.classList.contains('td-navbar-transparent'),
+      );
+    assert.equal(await isTransparent(), true, 'navbar is transparent at top');
+    await page.evaluate(() =>
+      window.scrollTo(0, document.documentElement.scrollHeight),
+    );
+    await page.waitForFunction(
+      () =>
+        !document
+          .querySelector('.js-navbar-scroll')
+          .classList.contains('td-navbar-transparent'),
+      { timeout: 5000 },
+    );
+    assert.equal(
+      await isTransparent(),
+      false,
+      'navbar is solid after scrolling past the cover',
+    );
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: an overflowing navbar menu shows scroll indicators and scrolls on click', async () => {
+  const page = await browser.newPage();
+  try {
+    await page.setViewport({ width: 500, height: 800 });
+    await page.goto(`${servers.features.origin}/docs/`, {
+      waitUntil: 'networkidle0',
+    });
+    assert.equal(
+      await page.$eval('#main_navbar', (el) =>
+        el.classList.contains('td-navbar-nav-scroll--indicator'),
+      ),
+      true,
+      'overflow indicator class is set on the navbar',
+    );
+    assert.equal(
+      await page.$eval('.td-navbar-container', (el) =>
+        el.classList.contains('navbar-is-overflowing'),
+      ),
+      true,
+      'overflow class is set on the navbar container',
+    );
+    await page.click('#main_navbar .scroll-right');
+    await page.waitForFunction(
+      () => document.querySelector('.navbar-nav').scrollLeft > 0,
+      { timeout: 5000 },
+    );
   } finally {
     await page.close();
   }

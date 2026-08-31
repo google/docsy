@@ -14,115 +14,115 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-(function($) {
+(function () {
+  'use strict';
 
-    'use strict';
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
 
-    $(function() {
-        $('[data-bs-toggle="tooltip"]').tooltip();
-        $('[data-bs-toggle="popover"]').popover();
+  ready(function () {
+    document
+      .querySelectorAll('[data-bs-toggle="tooltip"]')
+      .forEach((el) => new bootstrap.Tooltip(el));
+    document
+      .querySelectorAll('[data-bs-toggle="popover"]')
+      .forEach((el) => new bootstrap.Popover(el));
+    document
+      .querySelectorAll('.popover-dismiss')
+      .forEach((el) => new bootstrap.Popover(el, { trigger: 'focus' }));
+  });
 
-        $('.popover-dismiss').popover({
-            trigger: 'focus'
-        })
-    });
+  // Document-relative top, like jQuery's offset().top.
+  function offsetTop(el) {
+    return el.getBoundingClientRect().top + window.scrollY;
+  }
 
+  function bottomPos(el) {
+    return offsetTop(el) + el.offsetHeight;
+  }
 
-    function bottomPos(element) {
-        return element.offset().top + element.outerHeight();
+  // Navbar transparency over cover images
+  ready(function () {
+    const promo = document.querySelector('.js-td-cover');
+    if (!promo) return;
+    const navbar = document.querySelector('.js-navbar-scroll');
+    if (!navbar) return;
+
+    const threshold = Math.ceil(navbar.offsetHeight);
+
+    function adjustNavbarTransparency() {
+      const promoOffset = bottomPos(promo);
+      const navbarOffset = offsetTop(navbar);
+      navbar.classList.toggle(
+        'td-navbar-transparent',
+        promoOffset - navbarOffset >= threshold,
+      );
     }
 
-    // Navbar transparency over cover images
-    $(function () {
-      const promo = $('.js-td-cover');
-      if (!promo.length) return;
-      const navbar = $('.js-navbar-scroll');
-      if (!navbar.length) return;
-
-      const threshold = Math.ceil(navbar.outerHeight());
-
-      function adjustNavbarTransparency() {
-        const promoOffset = bottomPos(promo);
-        const navbarOffset = navbar.offset().top;
-        navbar.toggleClass('td-navbar-transparent', (promoOffset - navbarOffset) >= threshold);
-      }
-
-      adjustNavbarTransparency();
-      $(window).on('scroll', adjustNavbarTransparency);
+    adjustNavbarTransparency();
+    window.addEventListener('scroll', adjustNavbarTransparency, {
+      passive: true,
     });
+  });
 
-        // Navbar overflow detection with scroll indicators
-    function checkNavbarOverflow() {
-        const navbarNav = $('.navbar-nav');
-        const container = $('#main_navbar');
-        const navbarContainer = $('.td-navbar-container');
+  // Navbar overflow detection with scroll indicators
+  function checkNavbarOverflow() {
+    const navbarNav = document.querySelector('.navbar-nav');
+    const container = document.querySelector('#main_navbar');
+    const navbarContainer = document.querySelector('.td-navbar-container');
+    if (!navbarNav || !container || !navbarContainer) return;
 
-        if (navbarNav.length) {
-            const navElement = navbarNav[0];
-            const isOverflowing = navElement.scrollWidth > navElement.clientWidth;
+    const isOverflowing = navbarNav.scrollWidth > navbarNav.clientWidth;
 
-            // console.log('Overflow check:', {
-            //     scrollWidth: navElement.scrollWidth,
-            //     clientWidth: navElement.clientWidth,
-            //     isOverflowing: isOverflowing
-            // });
+    if (isOverflowing) {
+      container.classList.add('td-navbar-nav-scroll--indicator');
+      navbarContainer.classList.add('navbar-is-overflowing');
 
-            if (isOverflowing) {
-                container.addClass('td-navbar-nav-scroll--indicator');
-                navbarContainer.addClass('navbar-is-overflowing');
+      container.querySelectorAll('.scroll-left').forEach((el) => {
+        el.addEventListener('click', () => {
+          navbarNav.scrollBy({ left: -100, behavior: 'smooth' });
+        });
+      });
+      container.querySelectorAll('.scroll-right').forEach((el) => {
+        el.addEventListener('click', () => {
+          navbarNav.scrollBy({ left: 100, behavior: 'smooth' });
+        });
+      });
 
-                // Add click handlers
-                container.find('.scroll-left').on('click', function() {
-                    navbarNav.animate({scrollLeft: '-=100'}, 300);
-                });
-
-                container.find('.scroll-right').on('click', function() {
-                    navbarNav.animate({scrollLeft: '+=100'}, 300);
-                });
-
-                // Update indicator visibility based on scroll position
-                updateScrollIndicators();
-            } else {
-                container.removeClass('td-navbar-nav-scroll--indicator');
-                navbarContainer.removeClass('navbar-is-overflowing');
-            }
-        }
+      updateScrollIndicators();
+    } else {
+      container.classList.remove('td-navbar-nav-scroll--indicator');
+      navbarContainer.classList.remove('navbar-is-overflowing');
     }
+  }
 
-    function updateScrollIndicators() {
-        const navbarNav = $('.navbar-nav');
-        const leftIndicator = $('.scroll-left');
-        const rightIndicator = $('.scroll-right');
+  function updateScrollIndicators() {
+    const navbarNav = document.querySelector('.navbar-nav');
+    if (!navbarNav) return;
 
-        if (navbarNav.length) {
-            const navElement = navbarNav[0];
-            const scrollLeft = navElement.scrollLeft;
-            const maxScroll = navElement.scrollWidth - navElement.clientWidth;
+    const scrollLeft = navbarNav.scrollLeft;
+    const maxScroll = navbarNav.scrollWidth - navbarNav.clientWidth;
 
-            // Show/hide left indicator
-            if (scrollLeft <= 0) {
-                leftIndicator.removeClass('visible');
-            } else {
-                leftIndicator.addClass('visible');
-            }
-
-            // Show/hide right indicator
-            if (scrollLeft >= maxScroll) {
-                rightIndicator.removeClass('visible');
-            } else {
-                rightIndicator.addClass('visible');
-            }
-        }
-    }
-
-    // Check overflow on page load and window resize
-    $(function() {
-        checkNavbarOverflow();
-        $(window).on('resize', checkNavbarOverflow);
-
-        // Update indicators on scroll
-        $('.navbar-nav').on('scroll', updateScrollIndicators);
+    document.querySelectorAll('.scroll-left').forEach((el) => {
+      el.classList.toggle('visible', scrollLeft > 0);
     });
+    document.querySelectorAll('.scroll-right').forEach((el) => {
+      el.classList.toggle('visible', scrollLeft < maxScroll);
+    });
+  }
 
+  // Check overflow on page load and window resize
+  ready(function () {
+    checkNavbarOverflow();
+    window.addEventListener('resize', checkNavbarOverflow);
 
-}(jQuery));
+    document.querySelectorAll('.navbar-nav').forEach((el) => {
+      el.addEventListener('scroll', updateScrollIndicators, { passive: true });
+    });
+  });
+})();
