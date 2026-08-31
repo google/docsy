@@ -90,18 +90,6 @@ limitations under the License.
     if (isOverflowing) {
       container?.classList.add('td-navbar-nav-scroll--indicator');
       navbarContainer?.classList.add('navbar-is-overflowing');
-
-      container?.querySelectorAll('.scroll-left').forEach((el) => {
-        el.addEventListener('click', () => {
-          navbarNav.scrollBy({ left: -100, behavior: 'smooth' });
-        });
-      });
-      container?.querySelectorAll('.scroll-right').forEach((el) => {
-        el.addEventListener('click', () => {
-          navbarNav.scrollBy({ left: 100, behavior: 'smooth' });
-        });
-      });
-
       updateScrollIndicators();
     } else {
       container?.classList.remove('td-navbar-nav-scroll--indicator');
@@ -126,6 +114,24 @@ limitations under the License.
 
   // Check overflow on page load and window resize
   ready(function () {
+    // Indicator click handlers attach once, here: the jQuery-era code
+    // re-attached them on every resize-triggered overflow re-check,
+    // stacking handlers so each click scrolled N times.
+    const navbarNav = document.querySelector('.navbar-nav');
+    const container = document.querySelector('#main_navbar');
+    if (navbarNav && container) {
+      container.querySelectorAll('.scroll-left').forEach((el) => {
+        el.addEventListener('click', () => {
+          navbarNav.scrollBy({ left: -100, behavior: 'smooth' });
+        });
+      });
+      container.querySelectorAll('.scroll-right').forEach((el) => {
+        el.addEventListener('click', () => {
+          navbarNav.scrollBy({ left: 100, behavior: 'smooth' });
+        });
+      });
+    }
+
     checkNavbarOverflow();
     window.addEventListener('resize', checkNavbarOverflow);
 
