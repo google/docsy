@@ -1,9 +1,9 @@
 // jQuery-absence gate (google/docsy#1436): the theme ships and loads no
 // jQuery. Locks the removal in two layers: rendered pages reference no
-// jquery script, and authored theme JS (assets and inline layout scripts)
-// contains no jQuery usage tokens. Vendored third-party bundles
-// (theme/static/js/) are exempt: they're upstream-owned and jQuery-free
-// by their own contract.
+// jquery script, and authored theme JS (assets, first-party static JS,
+// and inline layout scripts) contains no jQuery usage tokens. prism.js
+// and deflate.js under theme/static/js/ are exempt: vendored third-party
+// bundles, upstream-owned and jQuery-free by their own contract.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -41,18 +41,46 @@ test('rendered pages reference no jquery script', () => {
 });
 
 test('authored theme JS contains no jQuery usage', () => {
-  const sources = [
-    ...globSync('theme/assets/js/*.js', { cwd: repoRoot }),
-    ...globSync('theme/layouts/**/*.html', { cwd: repoRoot }),
+  // Usage tokens, not mentions: calls, member access, aliasing, and the
+  // classic IIFE argument. Prose references in comments stay legal.
+  const jsUsage = /\$\s*[.(]|jQuery\s*[.([]|\(\s*jQuery\s*\)|=\s*jQuery\b/;
+  // Category-specific scans with independent floors: a silently emptied
+  // glob in one category can't hide behind another's file count.
+  const scans = [
+    {
+      name: 'theme JS assets',
+      files: globSync('theme/assets/js/*.js', { cwd: repoRoot }),
+      floor: 8,
+      re: jsUsage,
+    },
+    {
+      name: 'first-party static JS',
+      files: globSync('theme/static/js/*.js', { cwd: repoRoot }).filter(
+        (f) => !/(^|\/)(prism|deflate)\.js$/.test(f),
+      ),
+      floor: 1,
+      re: jsUsage,
+    },
+    {
+      name: 'theme layouts',
+      files: globSync('theme/layouts/**/*.html', { cwd: repoRoot }),
+      floor: 30,
+      // Hugo templates use $.Site and kin, so the JS token scan can't
+      // apply; match inline-script usage tokens and jquery script URLs.
+      re: /\$\(|jQuery\s*[.(]|\(jQuery\)|code\.jquery\.com|jquery[^"'\s]*\.m?js\b/i,
+    },
   ];
-  assert.ok(sources.length >= 10, 'the scan found the theme sources');
-  for (const rel of sources) {
-    assert.doesNotMatch(
-      readFileSync(path.join(repoRoot, rel), 'utf8'),
-      // Usage tokens, not mentions: calls, member access, and the
-      // classic IIFE argument. Prose references in comments stay legal.
-      /\$\(|jQuery\s*[.(]|\(jQuery\)/,
-      `${rel} is free of jQuery usage`,
+  for (const { name, files, floor, re } of scans) {
+    assert.ok(
+      files.length >= floor,
+      `the ${name} scan found at least ${floor} files`,
     );
+    for (const rel of files) {
+      assert.doesNotMatch(
+        readFileSync(path.join(repoRoot, rel), 'utf8'),
+        re,
+        `${rel} is free of jQuery usage`,
+      );
+    }
   }
 });

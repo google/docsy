@@ -112,11 +112,13 @@ before(async () => {
     }
     servers[variant] = await serveDir(path.join(build.site, 'public'));
     if (!selfTestUrl) {
-      // Self-test page for the collector's red-proof.
+      // Self-test page for the collector's red-proof: an uncaught
+      // exception and a missing same-origin script, both must be caught.
       writeFileSync(
         path.join(build.site, 'public', 'js-runtime-selftest.html'),
         '<!doctype html><title>self-test</title>\n' +
-          '<script>throw new Error("selftest: deliberate exception");</script>\n',
+          '<script>throw new Error("selftest: deliberate exception");</script>\n' +
+          '<script src="/js-runtime-selftest-missing.js"></script>\n',
       );
       selfTestUrl = `${servers[variant].origin}/js-runtime-selftest.html`;
     }
@@ -136,15 +138,27 @@ after(async () => {
 });
 
 // Load a page and collect JS failures: uncaught exceptions (pageerror)
-// and console-level errors, minus resource-load noise (see header).
+// and console-level errors. Resource-load failures are kept only for
+// same-origin scripts and stylesheets (a broken first-party bundle is a
+// defect); off-origin (CDN) and non-code resource noise is filtered, and
+// any JS breakage such noise causes still surfaces as a pageerror.
+// Bounded window: errors scheduled well after the settle delay are out of
+// scope here; interaction probes carry their own collectors.
 async function collectPageErrors(url) {
+  const origin = new URL(url).origin;
   const page = await browser.newPage();
   const errors = [];
   page.on('pageerror', (err) => errors.push(`pageerror: ${err.message}`));
   page.on('console', (msg) => {
     if (msg.type() !== 'error') return;
     const text = msg.text();
-    if (/Failed to load resource/.test(text)) return;
+    if (/Failed to load resource/.test(text)) {
+      const resUrl = msg.location()?.url ?? '';
+      if (resUrl.startsWith(origin) && /\.(js|mjs|css)(\?|$)/.test(resUrl)) {
+        errors.push(`console.error: same-origin resource failed: ${resUrl}`);
+      }
+      return;
+    }
     errors.push(`console.error: ${text}`);
   });
   try {
@@ -165,6 +179,10 @@ test('js-runtime collector: an uncaught page exception is reported', async () =>
     errors.some((e) => e.includes('selftest: deliberate exception')),
     'collector reports the deliberate exception',
   );
+  assert.ok(
+    errors.some((e) => e.includes('js-runtime-selftest-missing.js')),
+    'collector reports the missing same-origin script',
+  );
 });
 
 for (const { variant, page } of visits) {
@@ -181,43 +199,66 @@ for (const { variant, page } of visits) {
 // (google/docsy#1436), each verified green against the pre-conversion
 // code first.
 
+// Interaction probes carry their own pageerror collector: an exception
+// thrown by a handler mid-probe must fail the probe, not vanish once the
+// asserted state change has landed.
+async function newProbePage() {
+  const page = await browser.newPage();
+  const pageErrors = [];
+  page.on('pageerror', (err) => pageErrors.push(err.message));
+  return { page, pageErrors };
+}
+
 // Diagram probes: each asserts the script's DOM transformation landed on
 // the features diagrams page (rendered SVG for the CDN-driven renderers,
 // the generated img element for plantuml).
 
 test('js behavior: a markmap code block renders as an SVG mind map', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'networkidle0',
     });
     const svg = await page.waitForSelector('.markmap svg', { timeout: 15000 });
     assert.ok(svg, 'markmap SVG is in the DOM');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
 test('js behavior: a plantuml code block becomes a diagram-server image', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'networkidle0',
     });
-    const img = await page.$('img[src*="plantuml.com/plantuml/svg/"]');
-    assert.ok(img, 'plantuml image element is in the DOM');
+    // A loaded payload (not just the element) pins the deflate + encode64
+    // pipeline end-to-end: a corrupt encoding 404s at the diagram server.
+    const naturalWidth = await page.$eval(
+      'img[src*="plantuml.com/plantuml/svg/"]',
+      (img) =>
+        img.complete
+          ? img.naturalWidth
+          : new Promise((resolve) => {
+              img.addEventListener('load', () => resolve(img.naturalWidth));
+              img.addEventListener('error', () => resolve(-1));
+            }),
+    );
+    assert.ok(naturalWidth > 0, 'plantuml image payload loaded');
     assert.equal(
       await page.$('.language-plantuml'),
       null,
       'the plantuml code block was replaced',
     );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
 test('js behavior: plantuml svg mode emits an SVG-namespace loader element', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.goto(`${servers['gcs-search'].origin}/docs/diagrams/`, {
       waitUntil: 'networkidle0',
@@ -229,26 +270,37 @@ test('js behavior: plantuml svg mode emits an SVG-namespace loader element', asy
       (el) => el.namespaceURI,
     );
     assert.equal(ns, 'http://www.w3.org/2000/svg', 'SVG namespace');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
+// Mermaid's rendered SVG embeds a theme-derived <style>; the light probe
+// captures it so the dark probe can assert the theme sniff actually
+// changed the rendering, not merely that an SVG appeared.
+let mermaidLightStyle;
+
 test('js behavior: a mermaid code block renders as an SVG diagram', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'networkidle0',
     });
-    const svg = await page.waitForSelector('.mermaid svg', { timeout: 15000 });
-    assert.ok(svg, 'mermaid SVG is in the DOM');
+    await page.waitForSelector('.mermaid svg', { timeout: 15000 });
+    mermaidLightStyle = await page.$eval(
+      '.mermaid svg',
+      (svg) => svg.querySelector('style')?.textContent ?? '',
+    );
+    assert.ok(mermaidLightStyle, 'mermaid SVG carries its theme style');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
-test('js behavior: mermaid renders under a dark theme', async () => {
-  const page = await browser.newPage();
+test('js behavior: mermaid renders with the dark theme under data-bs-theme=dark', async () => {
+  const { page, pageErrors } = await newProbePage();
   try {
     // The dark-theme sniff reads data-bs-theme when the mermaid module
     // runs; setting it pre-navigation exercises that branch.
@@ -260,8 +312,18 @@ test('js behavior: mermaid renders under a dark theme', async () => {
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'domcontentloaded',
     });
-    const svg = await page.waitForSelector('.mermaid svg', { timeout: 15000 });
-    assert.ok(svg, 'mermaid SVG is in the DOM under a dark theme');
+    await page.waitForSelector('.mermaid svg', { timeout: 15000 });
+    const darkStyle = await page.$eval(
+      '.mermaid svg',
+      (svg) => svg.querySelector('style')?.textContent ?? '',
+    );
+    assert.ok(darkStyle, 'mermaid SVG carries its theme style');
+    assert.notEqual(
+      darkStyle,
+      mermaidLightStyle,
+      'dark-theme rendering differs from the light rendering',
+    );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
@@ -271,7 +333,7 @@ test('js behavior: mermaid renders under a dark theme', async () => {
 // closing it must clear the input.
 
 test('js behavior: an offline-search query pops the results popover and close clears it', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto(`${servers.features.origin}/docs/`, {
@@ -290,7 +352,12 @@ test('js behavior: an offline-search query pops the results popover and close cl
     const deadline = Date.now() + 10000;
     let cleared = false;
     while (!cleared && Date.now() < deadline) {
-      await page.click('.td-offline-search-results__close-button');
+      try {
+        await page.click('.td-offline-search-results__close-button');
+      } catch {
+        // Popover mid-transition (node detached or not yet clickable);
+        // the retry loop tries again.
+      }
       await new Promise((resolve) => setTimeout(resolve, 250));
       cleared = await page.$eval(
         '.td-search--offline input',
@@ -298,6 +365,7 @@ test('js behavior: an offline-search query pops the results popover and close cl
       );
     }
     assert.ok(cleared, 'the close button cleared the search input');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
@@ -308,7 +376,7 @@ test('js behavior: an offline-search query pops the results popover and close cl
 // lg breakpoint), so its probe uses a narrow viewport.
 
 test('js behavior: the navbar is transparent over the cover and solid after scrolling past it', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto(servers.features.origin, { waitUntil: 'networkidle0' });
@@ -332,13 +400,14 @@ test('js behavior: the navbar is transparent over the cover and solid after scro
       false,
       'navbar is solid after scrolling past the cover',
     );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
 test('js behavior: an overflowing navbar menu shows scroll indicators and scrolls on click', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     await page.setViewport({ width: 500, height: 800 });
     await page.goto(`${servers.features.origin}/docs/`, {
@@ -363,13 +432,14 @@ test('js behavior: an overflowing navbar menu shows scroll indicators and scroll
       () => document.querySelector('.navbar-nav').scrollLeft > 0,
       { timeout: 5000 },
     );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
 });
 
 test('js behavior: Enter in the navbar search box navigates to the search page', async () => {
-  const page = await browser.newPage();
+  const { page, pageErrors } = await newProbePage();
   try {
     // Desktop viewport: in collapsed (mobile) chrome the navbar search
     // input is unfocusable, and typing would land on <body>.
@@ -403,6 +473,7 @@ test('js behavior: Enter in the navbar search box navigates to the search page',
       /\/search\/\?q=docsy%26nav%232$/,
       'Enter navigates to the search page with the encoded query',
     );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();
   }
