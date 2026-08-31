@@ -4,15 +4,22 @@
 (function () {
   'use strict';
 
-  const codeBlocks = document.querySelectorAll('.language-markmap');
-  codeBlocks.forEach((code) => {
+  // Unique parents, like the jQuery original: sibling markmap code blocks
+  // are replaced together with their shared parent's full text.
+  const parents = new Set(
+    Array.from(
+      document.querySelectorAll('.language-markmap'),
+      (code) => code.parentElement,
+    ),
+  );
+  parents.forEach((parent) => {
     const container = document.createElement('div');
     container.className = 'markmap';
-    container.textContent = code.textContent;
-    code.parentElement.replaceWith(container);
+    container.textContent = parent.textContent;
+    parent.replaceWith(container);
   });
 
-  if (codeBlocks.length) {
+  if (parents.size) {
     window.markmap.autoLoader.renderAll();
   }
 })();

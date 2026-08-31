@@ -26,15 +26,20 @@ limitations under the License.
   }
 
   ready(function () {
+    // getOrCreateInstance mirrors Bootstrap's jQuery interface: an element
+    // matching several selectors keeps its first configuration instead of
+    // gaining a second instance.
     document
       .querySelectorAll('[data-bs-toggle="tooltip"]')
-      .forEach((el) => new bootstrap.Tooltip(el));
+      .forEach((el) => bootstrap.Tooltip.getOrCreateInstance(el));
     document
       .querySelectorAll('[data-bs-toggle="popover"]')
-      .forEach((el) => new bootstrap.Popover(el));
+      .forEach((el) => bootstrap.Popover.getOrCreateInstance(el));
     document
       .querySelectorAll('.popover-dismiss')
-      .forEach((el) => new bootstrap.Popover(el, { trigger: 'focus' }));
+      .forEach((el) =>
+        bootstrap.Popover.getOrCreateInstance(el, { trigger: 'focus' }),
+      );
   });
 
   // Document-relative top, like jQuery's offset().top.
@@ -72,23 +77,26 @@ limitations under the License.
 
   // Navbar overflow detection with scroll indicators
   function checkNavbarOverflow() {
+    // Only the nav itself is required; the indicator targets are optional,
+    // like the jQuery original's no-op on empty selections (partial custom
+    // navbar markup keeps the rest working).
     const navbarNav = document.querySelector('.navbar-nav');
+    if (!navbarNav) return;
     const container = document.querySelector('#main_navbar');
     const navbarContainer = document.querySelector('.td-navbar-container');
-    if (!navbarNav || !container || !navbarContainer) return;
 
     const isOverflowing = navbarNav.scrollWidth > navbarNav.clientWidth;
 
     if (isOverflowing) {
-      container.classList.add('td-navbar-nav-scroll--indicator');
-      navbarContainer.classList.add('navbar-is-overflowing');
+      container?.classList.add('td-navbar-nav-scroll--indicator');
+      navbarContainer?.classList.add('navbar-is-overflowing');
 
-      container.querySelectorAll('.scroll-left').forEach((el) => {
+      container?.querySelectorAll('.scroll-left').forEach((el) => {
         el.addEventListener('click', () => {
           navbarNav.scrollBy({ left: -100, behavior: 'smooth' });
         });
       });
-      container.querySelectorAll('.scroll-right').forEach((el) => {
+      container?.querySelectorAll('.scroll-right').forEach((el) => {
         el.addEventListener('click', () => {
           navbarNav.scrollBy({ left: 100, behavior: 'smooth' });
         });
@@ -96,8 +104,8 @@ limitations under the License.
 
       updateScrollIndicators();
     } else {
-      container.classList.remove('td-navbar-nav-scroll--indicator');
-      navbarContainer.classList.remove('navbar-is-overflowing');
+      container?.classList.remove('td-navbar-nav-scroll--indicator');
+      navbarContainer?.classList.remove('navbar-is-overflowing');
     }
   }
 
