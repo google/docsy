@@ -1,21 +1,26 @@
 # Opens (or updates) the PR that refreshes the oldest entries of the
 # committed link cache (docsy.dev/link-cache.jsonc). Pruning the N oldest
 # lychee-verified entries and re-running the link checker re-verifies them,
-# rotating through the full cache over a few weeks; manual (seeded) entries
-# are exempt from pruning and retire via their expires date.
+# rotating through the lychee-verified entries over a few weeks (assuming
+# refresh PRs merge roughly daily); manual (seeded) entries are exempt from
+# pruning and retire via their expires dates.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh):
-# a scheduled run while the PR is open only brings the branch current with
-# main; it prunes further only when dispatched with prune_more set. If the
-# branch exists without an open PR, it is reset to main and treated as new.
+# a scheduled run while the PR is open brings the branch current with main
+# and re-runs the check (refreshing the PR body), but prunes further only
+# when dispatched with prune_more set. If the branch exists without an open
+# same-repo PR, it is reset to main and treated as new.
 #
-# When pruning ran but the run ends with nothing to commit, the run fails: an
-# empty refresh after pruning means the workflow is broken.
+# When pruning ran but the refresh changed nothing, the run fails: an empty
+# refresh after pruning means the workflow is broken.
 #
-# PRs are created with the workflow's GITHUB_TOKEN, so the repo's regular CI
-# does not auto-run on them (GitHub suppresses workflow-triggered workflows);
-# the link check that matters runs in this workflow, and a maintainer review
-# gates the merge.
+# Token notes: the PR is created with the workflow's GITHUB_TOKEN, so the
+# repo's regular CI does not auto-run on it (GitHub suppresses
+# workflow-triggered workflows); the link check that matters runs here, and a
+# maintainer review gates the merge. The same token (with this job's write
+# permissions) is exposed to lychee for authenticated github.com checks; the
+# lychee binary is release-pinned and checksum-verified, and the alternative
+# (a separate app/bot token) is deliberately out of scope for this repo.
 
 name: link-cache-refresh
 
@@ -50,14 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BRANCH: bot/link-cache-refresh
-      IS_NEW_BRANCH: 'false'
       REFRESH_COUNT: ${{ github.event.inputs.refresh_count || 75 }}
       PRUNE_MORE: ${{ github.event.inputs.prune_more || 'false' }}
+      PUSH_REMOTE:
+        https://x-access-token:${{ github.token }}@github.com/${{
+        github.repository }}.git
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
-          persist-credentials: true # zizmor: ignore[artipacked] Required by this job's later git pushes.
+          persist-credentials: false
 
       - name: Validate inputs
         run: |
@@ -67,24 +74,34 @@ jobs:
           fi
 
       - name: Checkout or create the refresh branch
+        id: branch
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # Only a same-repo PR counts: a fork can open a same-named branch,
+          # and matching it would strand the refresh commits.
+          pr_url() {
+            gh pr list --state open --head "$BRANCH" \
+              --json url,isCrossRepository \
+              --jq '.[] | select(.isCrossRepository == false) | .url'
+          }
           if ! git ls-remote --exit-code --heads origin "$BRANCH"; then
-            echo "IS_NEW_BRANCH=true" >> "$GITHUB_ENV"
+            echo "is_new=true" >> "$GITHUB_OUTPUT"
             git checkout -b "$BRANCH" origin/main
-            git push -u origin "$BRANCH"
+            git push "$PUSH_REMOTE" "$BRANCH"
           else
             git checkout "$BRANCH"
-            PR_URL=$(gh pr list --state open --head "$BRANCH" --json url --jq '.[].url')
+            PR_URL=$(pr_url)
             if [[ -n "$PR_URL" ]]; then
               echo "Branch PR: $PR_URL"
             else
-              echo "Branch has no open PR: resetting it to origin/main" \
-                "and treating it as a new branch."
-              echo "IS_NEW_BRANCH=true" >> "$GITHUB_ENV"
+              echo "Branch has no open same-repo PR: resetting it to" \
+                "origin/main and treating it as a new branch."
+              echo "is_new=true" >> "$GITHUB_OUTPUT"
+              expected=$(git rev-parse "origin/$BRANCH")
               git reset --hard origin/main
-              git push --force-with-lease origin "$BRANCH"
+              git push --force-with-lease="$BRANCH:$expected" \
+                "$PUSH_REMOTE" "$BRANCH"
             fi
           fi
 
@@ -95,13 +112,8 @@ jobs:
 
       - name: Merge from main
         run: |
-          previous=$(git rev-parse HEAD)
           git fetch origin
           git merge origin/main
-          if [[ "$(git rev-parse HEAD)" != "$previous" ]]; then
-            echo "Merged from main; the push below carries it."
-            echo "NEEDS_PUSH=true" >> "$GITHUB_ENV"
-          fi
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
@@ -113,24 +125,31 @@ jobs:
       - name: Install lychee
         env:
           LYCHEE_VERSION: v0.24.2
+          LYCHEE_SHA256: 1f4e0ef7f6554a6ed33dd7ac144fb2e1bbed98598e7af973042fc5cd43951c9a
         run: |
           tmp="$(mktemp -d)"
-          curl -sfL "https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
-            | tar -xz -C "$tmp"
+          curl -sfL -o "$tmp/lychee.tar.gz" \
+            "https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${LYCHEE_SHA256}  $tmp/lychee.tar.gz" | sha256sum -c -
+          tar -xzf "$tmp/lychee.tar.gz" -C "$tmp"
           install -D "$(find "$tmp" -type f -name lychee | head -n1)" "$HOME/.local/bin/lychee"
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          lychee --version
 
       - name: Prune link cache
-        if: ${{ env.PRUNE_MORE == 'true' || env.IS_NEW_BRANCH == 'true' }}
+        id: prune
+        if:
+          ${{ env.PRUNE_MORE == 'true' || steps.branch.outputs.is_new == 'true'
+          }}
         run: |
           echo "Oldest entry before pruning, then pruning $REFRESH_COUNT oldest entries:"
           npm run link-cache -- --list 1 --prune "$REFRESH_COUNT"
-          echo "DID_PRUNE=true" >> "$GITHUB_ENV"
+          echo "did_prune=true" >> "$GITHUB_OUTPUT"
 
       - name: Build the site and refresh the link cache
+        id: check
         env:
-          # Authenticated github.com checks (rate limits)
+          # Authenticated github.com checks (rate limits); see the header's
+          # token notes.
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           # Exit 1 (dead links) doesn't fail the run: the merge-back has
@@ -143,45 +162,52 @@ jobs:
           if [[ "$LINK_CHECK_STATUS" -ge 2 ]]; then
             exit "$LINK_CHECK_STATUS"
           elif [[ "$LINK_CHECK_STATUS" -eq 1 ]]; then
-            echo "DEAD_LINKS_FOUND=true" >> "$GITHUB_ENV"
+            echo "dead_links=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Report the oldest entry after the refresh
-        run: npm run link-cache -- --list 1
+        id: oldest
+        run: |
+          npm run link-cache -- --list 1
+          echo "entry=$(npm run -s link-cache -- --list 1 | grep '^ ' | head -n1)" >> "$GITHUB_OUTPUT"
 
-      - name: Commit and push link-cache updates, if any
+      - name: Commit link-cache updates
+        env:
+          DID_PRUNE: ${{ steps.prune.outputs.did_prune }}
         run: |
           git add docsy.dev/link-cache.jsonc
           if ! git diff-index --quiet --cached HEAD; then
             git commit -m 'Refresh link cache'
-          fi
-          if [[ "${NEEDS_PUSH:-false}" == 'true' ]] || ! git diff --quiet "origin/$BRANCH"; then
-            git push origin "$BRANCH"
+          elif [[ "${DID_PRUNE:-false}" == 'true' ]]; then
+            echo "::error::Pruning ran but the refresh changed nothing: an" \
+              "empty refresh after pruning means the workflow is broken."
+            exit 1
           fi
 
-      - name: Create the PR if needed
+      - name: Push, if the branch has anything new
+        run: |
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse "origin/$BRANCH")" ]]; then
+            git push "$PUSH_REMOTE" "HEAD:$BRANCH"
+          fi
+
+      - name: Create the PR, or refresh its body
         env:
           GH_TOKEN: ${{ github.token }}
-          PR_BODY: |-
-            Refreshes the oldest ${{ env.REFRESH_COUNT }} link-cache entries;
-            see the link-cache-refresh workflow header for the model.
+          DEAD_LINKS: ${{ steps.check.outputs.dead_links }}
+          OLDEST_ENTRY: ${{ steps.oldest.outputs.entry }}
         run: |
-          if [[ "${DEAD_LINKS_FOUND:-false}" == 'true' ]]; then
+          PR_BODY="Refreshes the oldest ${REFRESH_COUNT} lychee-verified link-cache entries; see the link-cache-refresh workflow header for the model."
+          PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh:"$'\n'"\`${OLDEST_ENTRY:-none}\`"
+          if [[ "${DEAD_LINKS:-false}" == 'true' ]]; then
             PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with negative statuses in the cache diff: triage before merging."
           fi
-          prs=$(gh pr list --state open --head "$BRANCH")
-          if [[ -n "$prs" ]]; then
-            echo "PR already exists:"
-            echo "$prs"
+          PR_URL=$(gh pr list --state open --head "$BRANCH" \
+            --json url,isCrossRepository \
+            --jq '.[] | select(.isCrossRepository == false) | .url')
+          if [[ -n "$PR_URL" ]]; then
+            echo "Refreshing the body of $PR_URL"
+            gh pr edit "$PR_URL" --body "$PR_BODY"
             exit 0
           fi
-
-          if gh pr create --title 'Refresh link cache' --body "$PR_BODY"; then
-            gh pr view --json url --jq '.url'
-          elif [[ "${DID_PRUNE:-false}" == 'true' ]]; then
-            echo "::error::Pruning ran but produced no PR: an empty refresh" \
-              "after pruning means the workflow is broken."
-            exit 1
-          else
-            echo "No changes to PR."
-          fi
+          gh pr create --title 'Refresh link cache' --body "$PR_BODY"
+          gh pr view --json url --jq '.url'
