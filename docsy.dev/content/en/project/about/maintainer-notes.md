@@ -294,9 +294,9 @@ refcache) so checks stay fast and offline-friendly. Each entry records the
 status, its `when` timestamp, and `via` -- the resolver that set it; Lychee's
 own `.lycheecache` is derived from it per run and gitignored. Config lives in
 `docsy.dev/lychee.toml`. CI installs a pinned lychee binary (see
-`.github/workflows/test.yaml`); a plain site build doesn't need it. A daily
-workflow re-verifies the oldest entries on a rolling basis; for the rotation
-model, see the `link-cache-refresh` workflow's header comment.
+`.github/workflows/test.yaml` and `link-cache-refresh.yaml`); a plain site build
+doesn't need it. A daily workflow re-verifies the oldest entries; for the
+rotation model, see the `link-cache-refresh` workflow's header comment.
 
 - **Refresh** after adding or changing external links: `npm run fix:link-cache`
   re-runs the check, adding any missing entries and renormalizing; then commit

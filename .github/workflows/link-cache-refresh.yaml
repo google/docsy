@@ -1,35 +1,25 @@
 # Opens (or updates) the PR that refreshes the oldest entries of the
-# committed link cache (docsy.dev/link-cache.jsonc). Pruning the N oldest
-# lychee-verified entries and re-running the link checker re-verifies them
-# (or retires URLs no longer in the site), rotating through the
-# lychee-verified entries over a few weeks (assuming refresh PRs merge
-# roughly daily); manual (seeded) entries are exempt from pruning and retire
-# via their expires dates.
+# committed link cache (docsy.dev/link-cache.jsonc), maintained by the
+# link-cache npm package. Pruning the N oldest lychee-verified entries and
+# re-running the link checker re-verifies them (or retires URLs no longer in
+# the site), rotating through them over a few weeks (assuming refresh PRs
+# merge roughly daily); manual (seeded) entries are exempt from pruning and
+# retire via their expires dates.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
 # current with main and re-runs the check (refreshing the PR body), but
 # prunes further only when dispatched with prune_more set. If the branch
 # exists without an open same-repo PR, it is reset to main and treated as
-# new. A merge conflict confined to the link cache self-heals: main's whole
-# cache wins — which voids the branch's pending refresh, so the run
-# re-prunes to redo it; any wider conflict fails the run for a human.
+# new. Merge conflicts, tolerated exit codes, and push auth are handled
+# per-step; the step comments carry the rationale.
 #
-# When pruning turned out to be a no-op (nothing eligible to prune), the run
-# fails: rotation throughput silently reaching zero means the workflow or
-# the cache is broken. (A prune that removed entries always changes the
-# file; catching "pruned but not re-verified" is the link checker's job —
-# its zero-verdict runs exit 2 above.)
-#
-# Token notes: the checkout is credential-free; pushes authenticate
-# per-command through a step-scoped auth header. The PR is created with the
-# workflow's GITHUB_TOKEN, so the repo's regular CI does not auto-run on it
-# (GitHub suppresses workflow-triggered workflows); the link check that
-# matters runs here, and a maintainer review gates the merge. The same token
-# (with this job's write permissions) is exposed to lychee for authenticated
-# github.com checks; the lychee binary is release-pinned and
-# checksum-verified, and the alternative (a separate app/bot token) is
-# deliberately out of scope for this repo.
+# The PR is created with the workflow's GITHUB_TOKEN, so the repo's regular
+# CI does not auto-run on it (GitHub suppresses workflow-triggered
+# workflows); the link check that matters runs here, and a maintainer review
+# gates the merge. That token (with this job's write permissions) is exposed
+# to lychee for authenticated github.com checks; the alternative (a separate
+# app/bot token) is deliberately out of scope for this repo.
 
 name: link-cache-refresh
 
@@ -162,6 +152,9 @@ jobs:
 
       - run: npm run install:safe
 
+      # Twin of test.yaml's lychee install (keep versions in step), plus a
+      # checksum: this job holds a write-capable token, so the downloaded
+      # binary is verified before it runs.
       - name: Install lychee
         env:
           LYCHEE_VERSION: v0.24.2
@@ -197,7 +190,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           # Guard against script drift: if _check:links is renamed, npm run
-          # exits 1 — indistinguishable from the dead-links exit below. The
+          # exits 1, indistinguishable from the dead-links exit below. The
           # --help probe (exit 0 without lychee or a build) fails the run
           # here instead, outside the tolerated-exit interpretation.
           npm run -s -C docsy.dev _check:links -- --help > /dev/null
@@ -266,7 +259,7 @@ jobs:
           # Cache data flows into Markdown here: strip backticks so a
           # hostile URL can't escape the inline-code span.
           entry=${OLDEST_ENTRY//\`/}
-          PR_BODY="Refreshes the oldest lychee-verified link-cache entries (default $DEFAULT_REFRESH_COUNT per rotation); see the link-cache-refresh workflow header for the model."
+          PR_BODY="Refreshes the oldest lychee-verified link-cache entries (default $DEFAULT_REFRESH_COUNT per rotation); for the model, see the [workflow header](https://github.com/${GITHUB_REPOSITORY}/blob/main/.github/workflows/link-cache-refresh.yaml)."
           PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh (prune-exempt manual seeds keep their dates, so one may sit here):"$'\n'"\`${entry}\`"
           if [[ "${DEAD_LINKS:-false}" == 'true' ]]; then
             PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with negative statuses in the cache diff: triage before merging."
