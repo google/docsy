@@ -41,3 +41,6 @@ resources/
 
 # Local folders and settings
 /.claude/settings.local.json
+
+# Lychee link-check cache: derived from link-cache.jsonc by lychee-norm-cache
+.lycheecache
