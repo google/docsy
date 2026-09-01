@@ -168,7 +168,21 @@ history since 0.17.0][].
 
 - ...
 
+**For maintainers**:
+
+- Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
+  (one per weekly wave), after applying the open update wave (devDep pins and
+  bumps, actions v7) ([#2774][], [#2776][]).
+- Switched the docsy.dev committed link cache to an owned JSONC format
+  ([#2779][]).
+- Extended the root `npm run check` to also run the docsy.dev workspace format
+  check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
+
 [#1436]: https://github.com/google/docsy/issues/1436
+[#2774]: https://github.com/google/docsy/pull/2774
+[#2776]: https://github.com/google/docsy/pull/2776
+[#2779]: https://github.com/google/docsy/pull/2779
+[#2781]: https://github.com/google/docsy/pull/2781
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [git history since 0.17.0]:
@@ -1155,6 +1169,10 @@ For the full list of changes, see the [0.X.Y][] release page.
 - ...
 
 [**Experimental**](#experimental):
+
+- ...
+
+**For maintainers**:
 
 - ...
 
