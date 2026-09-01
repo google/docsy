@@ -10,9 +10,9 @@
 # current with main and re-runs the check (refreshing the PR body), but
 # prunes further only when dispatched with prune_more set. If the branch
 # exists without an open same-repo PR, it is reset to main and treated as
-# new. A merge conflict confined to the link cache self-heals (main's
-# version wins; the run's own check refreshes it); any wider conflict fails
-# the run for a human.
+# new. A merge conflict confined to the link cache self-heals: main's whole
+# cache wins — which voids the branch's pending refresh, so the run
+# re-prunes to redo it; any wider conflict fails the run for a human.
 #
 # When pruning ran but the refresh changed nothing, the run fails: an empty
 # refresh after pruning means the workflow is broken.
@@ -36,7 +36,7 @@ on:
     inputs:
       refresh_count:
         description: Number of (oldest) link-cache entries to refresh.
-        default: 75
+        default: &default_refresh_count 75
         type: number
       prune_more:
         description: Prune more entries from the existing PR branch (if any).
@@ -61,7 +61,9 @@ jobs:
     env:
       BRANCH: bot/link-cache-refresh
       CACHE_FILE: docsy.dev/link-cache.jsonc
-      REFRESH_COUNT: ${{ github.event.inputs.refresh_count || 75 }}
+      # Empty on scheduled runs; consumers fall back to the anchored default.
+      REFRESH_COUNT: ${{ github.event.inputs.refresh_count }}
+      DEFAULT_REFRESH_COUNT: *default_refresh_count
       PRUNE_MORE: ${{ github.event.inputs.prune_more || 'false' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -71,8 +73,9 @@ jobs:
 
       - name: Validate inputs
         run: |
-          if [[ ! "$REFRESH_COUNT" =~ ^[0-9]+$ || "$REFRESH_COUNT" -eq 0 ]]; then
-            echo "Error: refresh_count must be a positive number, got: $REFRESH_COUNT"
+          count="${REFRESH_COUNT:-$DEFAULT_REFRESH_COUNT}"
+          if [[ ! "$count" =~ ^[0-9]+$ || "$count" -eq 0 ]]; then
+            echo "Error: refresh_count must be a positive number, got: $count"
             exit 1
           fi
 
@@ -81,6 +84,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          # pipefail: a gh API failure in pr_url must fail the run, not read
+          # as "no open PR" and trigger the reset below. head never SIGPIPEs
+          # here: the jq-filtered output is at most a few lines.
+          set -o pipefail
           # Authenticated pushes go to the origin remote (so tracking refs
           # update) with a command-scoped auth header; the remote config
           # itself stays credential-free.
@@ -121,18 +128,22 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
       - name: Merge from main
+        id: merge
         run: |
           git fetch origin
           if ! git merge origin/main; then
             # A conflict confined to the link cache self-heals: take main's
-            # version; this run's own check refreshes it either way. Any
-            # wider conflict needs a human.
+            # whole cache file. That voids this branch's pending refresh
+            # (main's entries keep their old timestamps, which lychee trusts
+            # within max_cache_age), so signal the prune step to redo it.
+            # Any wider conflict needs a human.
             conflicts=$(git diff --name-only --diff-filter=U)
             if [[ "$conflicts" == "$CACHE_FILE" ]]; then
-              echo "Cache-only merge conflict: taking main's version."
+              echo "Cache-only merge conflict: taking main's version and re-pruning."
               git checkout --theirs "$CACHE_FILE"
               git add "$CACHE_FILE"
               git commit --no-edit
+              echo "self_healed=true" >> "$GITHUB_OUTPUT"
             else
               echo "::error::Merge from main conflicts beyond the link" \
                 "cache ($conflicts): resolve manually."
@@ -164,10 +175,11 @@ jobs:
         id: prune
         if:
           ${{ env.PRUNE_MORE == 'true' || steps.branch.outputs.is_new == 'true'
-          }}
+          || steps.merge.outputs.self_healed == 'true' }}
         run: |
-          echo "Oldest entry before pruning, then pruning $REFRESH_COUNT oldest entries:"
-          npm run link-cache -- --list 1 --prune "$REFRESH_COUNT"
+          count="${REFRESH_COUNT:-$DEFAULT_REFRESH_COUNT}"
+          echo "Oldest entry before pruning, then pruning $count oldest entries:"
+          npm run link-cache -- --list 1 --prune "$count"
           echo "did_prune=true" >> "$GITHUB_OUTPUT"
 
       - name: Build the site
@@ -239,7 +251,7 @@ jobs:
           # Cache data flows into Markdown here: strip backticks so a
           # hostile URL can't escape the inline-code span.
           entry=${OLDEST_ENTRY//\`/}
-          PR_BODY="Refreshes the oldest ${REFRESH_COUNT} lychee-verified link-cache entries; see the link-cache-refresh workflow header for the model."
+          PR_BODY="Refreshes the oldest lychee-verified link-cache entries (default $DEFAULT_REFRESH_COUNT per rotation); see the link-cache-refresh workflow header for the model."
           PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh:"$'\n'"\`${entry}\`"
           if [[ "${DEAD_LINKS:-false}" == 'true' ]]; then
             PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with negative statuses in the cache diff: triage before merging."
