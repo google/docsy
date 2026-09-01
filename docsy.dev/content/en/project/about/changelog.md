@@ -175,11 +175,14 @@ history since 0.17.0][].
   [#2776][]).
 - Switched the docsy.dev committed link cache to an owned JSONC format
   ([#2779][]).
+- Root `npm run check` now also runs the docsy.dev workspace format check,
+  matching what CI enforces (`fix:format` already delegated) ([#2781][]).
 
 [#1436]: https://github.com/google/docsy/issues/1436
 [#2774]: https://github.com/google/docsy/pull/2774
 [#2776]: https://github.com/google/docsy/pull/2776
 [#2779]: https://github.com/google/docsy/pull/2779
+[#2781]: https://github.com/google/docsy/pull/2781
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [git history since 0.17.0]:
