@@ -1169,6 +1169,10 @@ For the full list of changes, see the [0.X.Y][] release page.
 
 - ...
 
+**For maintainers**:
+
+- ...
+
 [0.X.Y]: https://github.com/google/docsy/releases/latest?FIXME=v0.X.Y
 ```
 
