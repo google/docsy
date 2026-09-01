@@ -1,7 +1,7 @@
 {
   "https://about.gitlab.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://afdocs.dev/": {
@@ -31,7 +31,7 @@
   },
   "https://analytics.google.com/analytics/web/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://app.netlify.com/sites/docsydocs/deploys": {
@@ -61,7 +61,7 @@
   },
   "https://bitbucket.org/product": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/": {
@@ -121,7 +121,7 @@
   },
   "https://cse.google.com/cse/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://cse.google.com/cse/all": {
@@ -279,11 +279,6 @@
     "when": "2026-06-27T12:29:28Z",
     "via": "lychee",
   },
-  "https://docs.docker.com/get-docker/": {
-    "status": 200,
-    "when": "2026-06-26T18:23:46Z",
-    "via": "lychee",
-  },
   "https://docs.fontawesome.com/upgrade/scss": {
     "status": 200,
     "when": "2026-08-28T20:00:32Z",
@@ -326,7 +321,7 @@
   },
   "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template": {
@@ -1271,7 +1266,7 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_td-content-after-header.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/all.md": {
@@ -1501,7 +1496,7 @@
   },
   "https://github.com/google/docsy/issues/1654": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1759": {
@@ -1511,12 +1506,12 @@
   },
   "https://github.com/google/docsy/issues/1787": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1788": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1812": {
@@ -1586,7 +1581,7 @@
   },
   "https://github.com/google/docsy/issues/2115": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2116": {
@@ -1601,7 +1596,7 @@
   },
   "https://github.com/google/docsy/issues/2173": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2243": {
@@ -1621,7 +1616,7 @@
   },
   "https://github.com/google/docsy/issues/2285": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2289": {
@@ -1631,7 +1626,7 @@
   },
   "https://github.com/google/docsy/issues/2313": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2314": {
@@ -1651,12 +1646,12 @@
   },
   "https://github.com/google/docsy/issues/2331": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2332": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2347": {
@@ -1681,12 +1676,12 @@
   },
   "https://github.com/google/docsy/issues/2413": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2431": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2433": {
@@ -1831,7 +1826,7 @@
   },
   "https://github.com/google/docsy/issues/939": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new": {
@@ -2416,37 +2411,37 @@
   },
   "https://github.com/google/docsy/pull/2160": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2192": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2223": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2243": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2257": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2259": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2276": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2291": {
@@ -2456,7 +2451,7 @@
   },
   "https://github.com/google/docsy/pull/2303": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2331": {
@@ -2476,27 +2471,27 @@
   },
   "https://github.com/google/docsy/pull/2364": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2366": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2371": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2376": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2379": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2382": {
@@ -2511,42 +2506,42 @@
   },
   "https://github.com/google/docsy/pull/2384": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2387": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2394": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2395": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2405": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2406": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2443": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2444": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2447": {
@@ -2561,7 +2556,7 @@
   },
   "https://github.com/google/docsy/pull/2470": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2477": {
@@ -2571,7 +2566,7 @@
   },
   "https://github.com/google/docsy/pull/2480": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2482": {
@@ -2586,12 +2581,12 @@
   },
   "https://github.com/google/docsy/pull/2524": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2533": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2538": {
@@ -2616,7 +2611,7 @@
   },
   "https://github.com/google/docsy/pull/2549": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2557": {
@@ -2631,17 +2626,17 @@
   },
   "https://github.com/google/docsy/pull/2565": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2569": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2576": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2578": {
@@ -2651,7 +2646,7 @@
   },
   "https://github.com/google/docsy/pull/2580": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2583": {
@@ -2846,7 +2841,7 @@
   },
   "https://github.com/google/docsy/pull/941": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pulls": {
@@ -2923,42 +2918,42 @@
   },
   "https://github.com/google/docsy/releases/v0.10.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.11.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.12.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.13.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.2": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.3": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.15.0": {
@@ -3023,12 +3018,12 @@
   },
   "https://github.com/google/docsy/releases/v0.9.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.9.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/tags": {
@@ -3663,7 +3658,7 @@
   },
   "https://gohugo.io/documentation/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/": {
@@ -3978,7 +3973,7 @@
   },
   "https://lunrjs.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/": {
@@ -3988,12 +3983,12 @@
   },
   "https://main--docsydocs.netlify.app/404.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:10Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/about/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/blog/": {
@@ -4105,7 +4100,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/best-practices/": {
@@ -4125,7 +4120,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/content/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/adding-content/": {
@@ -4195,7 +4190,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/contributing/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/deployment/": {
@@ -4315,7 +4310,7 @@
   },
   "https://main--docsydocs.netlify.app/project/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/project/about/": {
@@ -4425,22 +4420,22 @@
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/color-gradient/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-auto/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-full/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-min/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/layouts/": {
@@ -4560,7 +4555,7 @@
   },
   "https://pages.github.com/themes/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:08Z",
     "via": "lychee",
   },
   "https://parquet.apache.org/": {
@@ -4705,7 +4700,7 @@
   },
   "https://themes.gohugo.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-01T04:30:09Z",
     "via": "lychee",
   },
   "https://theupdateframework.io/": {
@@ -5127,7 +5122,7 @@
   },
   "https://www.docsy.dev/project/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-01T04:30:07Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/project/about/": {
