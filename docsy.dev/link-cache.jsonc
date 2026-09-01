@@ -3946,6 +3946,11 @@
     "when": "2026-06-26T18:23:50Z",
     "via": "lychee",
   },
+  "https://jquery.com/": {
+    "status": 200,
+    "when": "2026-08-31T21:48:59Z",
+    "via": "lychee",
+  },
   "https://jvmperf.net/": {
     "status": 200,
     "when": "2026-06-26T18:24:04Z",
@@ -5353,6 +5358,11 @@
   "https://xyproto.github.io/splash/docs/tango.html": {
     "status": 200,
     "when": "2026-06-26T18:23:58Z",
+    "via": "lychee",
+  },
+  "https://youmightnotneedjquery.com/": {
+    "status": 200,
+    "when": "2026-08-31T21:48:59Z",
     "via": "lychee",
   },
 }

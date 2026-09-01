@@ -1,25 +1,47 @@
 // Adapted from code by Matt Walters https://www.mattwalters.net/posts/2018-03-28-hugo-and-lunr/
 
-(function ($) {
+(function () {
   'use strict';
 
-  $(document).ready(function () {
-    const $searchInput = $('.td-search input');
+  function ready(fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  ready(function () {
+    const searchInputs = Array.from(
+      document.querySelectorAll('.td-search input'),
+    );
+    if (searchInputs.length === 0) {
+      return;
+    }
 
     //
-    // Register handler
+    // Register handlers
     //
 
-    $searchInput.on('change', (event) => {
-      render($(event.target));
+    searchInputs.forEach((input) => {
+      input.addEventListener('change', () => {
+        render(input);
 
-      // Hide keyboard on mobile browser
-      $searchInput.blur();
-    });
+        // Hide keyboard on mobile browser
+        input.blur();
+      });
 
-    // Prevent reloading page by enter key on sidebar search.
-    $searchInput.closest('form').on('submit', () => {
-      return false;
+      // Prevent reloading page by enter key on sidebar search.
+      // stopPropagation preserves the jQuery handler's `return false`
+      // semantics: site-level delegated submit listeners never saw this
+      // event before the conversion.
+      const form = input.closest('form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+      }
     });
 
     //
@@ -29,41 +51,53 @@
     let idx = null; // Lunr index
     const resultDetails = new Map(); // Will hold the data for the search results (titles and summaries)
 
-    // Set up for an Ajax call to request the JSON data file that is created by Hugo's build process
-    $.ajax($searchInput.data('offline-search-index-json-src')).then((data) => {
-      idx = lunr(function () {
-        this.ref('ref');
+    // Request the JSON data file that is created by Hugo's build process
+    fetch(searchInputs[0].dataset.offlineSearchIndexJsonSrc)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        idx = lunr(function () {
+          this.ref('ref');
 
-        // If you added more searchable fields to the search index, list them here.
-        // Here you can specify searchable fields to the search index - e.g. individual toxonomies for you project
-        // With "boost" you can add weighting for specific (default weighting without boost: 1)
-        this.field('title', { boost: 5 });
-        this.field('categories', { boost: 3 });
-        this.field('tags', { boost: 3 });
-        // this.field('projects', { boost: 3 }); // example for an individual toxonomy called projects
-        this.field('description', { boost: 2 });
-        this.field('body');
+          // If you added more searchable fields to the search index, list them here.
+          // Here you can specify searchable fields to the search index - e.g. individual toxonomies for you project
+          // With "boost" you can add weighting for specific (default weighting without boost: 1)
+          this.field('title', { boost: 5 });
+          this.field('categories', { boost: 3 });
+          this.field('tags', { boost: 3 });
+          // this.field('projects', { boost: 3 }); // example for an individual toxonomy called projects
+          this.field('description', { boost: 2 });
+          this.field('body');
 
-        data.forEach((doc) => {
-          this.add(doc);
+          data.forEach((doc) => {
+            this.add(doc);
 
-          resultDetails.set(doc.ref, {
-            title: doc.title,
-            excerpt: doc.excerpt,
+            resultDetails.set(doc.ref, {
+              title: doc.title,
+              excerpt: doc.excerpt,
+            });
           });
         });
+
+        searchInputs.forEach((input) => {
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      })
+      .catch((error) => {
+        console.error('Could not load the search index:', error);
       });
 
-      $searchInput.trigger('change');
-    });
-
-    const render = ($targetSearchInput) => {
+    const render = (targetInput) => {
       //
       // Dispose existing popover
       //
 
       {
-        let popover = bootstrap.Popover.getInstance($targetSearchInput[0]);
+        const popover = bootstrap.Popover.getInstance(targetInput);
         if (popover !== null) {
           popover.dispose();
         }
@@ -77,10 +111,18 @@
         return;
       }
 
-      const searchQuery = $targetSearchInput.val();
+      const searchQuery = targetInput.value;
       if (searchQuery === '') {
         return;
       }
+
+      // An absent max-results attribute (a customized search-input
+      // partial) means unlimited, as the jQuery-era data read had it;
+      // NaN would silently slice to zero results.
+      const maxResults = parseInt(
+        targetInput.dataset.offlineSearchMaxResults,
+        10,
+      );
 
       const results = idx
         .query((q) => {
@@ -100,79 +142,95 @@
             });
           });
         })
-        .slice(0, $targetSearchInput.data('offline-search-max-results'));
+        .slice(0, Number.isNaN(maxResults) ? undefined : maxResults);
 
       //
       // Make result html
       //
+      // Result values (query, titles, excerpts) are user- or
+      // index-controlled: only ever assign them via textContent.
+      //
 
-      const $html = $('<div>');
+      const html = document.createElement('div');
 
-      $html.append(
-        $('<div>')
-          .css({
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '1em',
-          })
-          .append(
-            $('<span>').text('Search results').css({ fontWeight: 'bold' })
-          )
-          .append(
-            $('<span>').addClass('td-offline-search-results__close-button')
-          )
-      );
+      const header = document.createElement('div');
+      Object.assign(header.style, {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '1em',
+      });
 
-      const $searchResultBody = $('<div>').css({
+      const headerTitle = document.createElement('span');
+      headerTitle.textContent = 'Search results';
+      headerTitle.style.fontWeight = 'bold';
+
+      const closeButton = document.createElement('span');
+      closeButton.classList.add('td-offline-search-results__close-button');
+
+      header.append(headerTitle, closeButton);
+      html.append(header);
+
+      const searchResultBody = document.createElement('div');
+      Object.assign(searchResultBody.style, {
         maxHeight: `calc(100vh - ${
-          $targetSearchInput.offset().top - $(window).scrollTop() + 180
+          targetInput.getBoundingClientRect().top + 180
         }px)`,
         overflowY: 'auto',
       });
-      $html.append($searchResultBody);
+      html.append(searchResultBody);
 
       if (results.length === 0) {
-        $searchResultBody.append(
-          $('<p>').text(`No results found for query "${searchQuery}"`)
-        );
+        const noResults = document.createElement('p');
+        noResults.textContent = `No results found for query "${searchQuery}"`;
+        searchResultBody.append(noResults);
       } else {
         results.forEach((r) => {
           const doc = resultDetails.get(r.ref);
+          // First input's base-href, like the jQuery collection read.
           const href =
-            $searchInput.data('offline-search-base-href') +
+            searchInputs[0].dataset.offlineSearchBaseHref +
             r.ref.replace(/^\//, '');
 
-          const $entry = $('<div>').addClass('mt-4');
+          const entry = document.createElement('div');
+          entry.classList.add('mt-4');
 
-          $entry.append(
-            $('<small>').addClass('d-block text-body-secondary').text(r.ref)
-          );
+          const entryRef = document.createElement('small');
+          entryRef.classList.add('d-block', 'text-body-secondary');
+          entryRef.textContent = r.ref;
 
-          $entry.append(
-            $('<a>')
-              .addClass('d-block')
-              .css({
-                fontSize: '1.2rem',
-              })
-              .attr('href', href)
-              .text(doc.title)
-          );
+          const entryLink = document.createElement('a');
+          entryLink.classList.add('d-block');
+          entryLink.style.fontSize = '1.2rem';
+          entryLink.href = href;
+          entryLink.textContent = doc.title;
 
-          $entry.append($('<p>').text(doc.excerpt));
+          const entryExcerpt = document.createElement('p');
+          entryExcerpt.textContent = doc.excerpt;
 
-          $searchResultBody.append($entry);
+          entry.append(entryRef, entryLink, entryExcerpt);
+          searchResultBody.append(entry);
         });
       }
 
-      $targetSearchInput.one('shown.bs.popover', () => {
-        $('.td-offline-search-results__close-button').on('click', () => {
-          $targetSearchInput.val('');
-          $targetSearchInput.trigger('change');
-        });
-      });
+      targetInput.addEventListener(
+        'shown.bs.popover',
+        () => {
+          document
+            .querySelectorAll('.td-offline-search-results__close-button')
+            .forEach((button) => {
+              button.addEventListener('click', () => {
+                targetInput.value = '';
+                targetInput.dispatchEvent(
+                  new Event('change', { bubbles: true }),
+                );
+              });
+            });
+        },
+        { once: true },
+      );
 
-      const popover = new bootstrap.Popover($targetSearchInput, {
-        content: $html[0],
+      const popover = new bootstrap.Popover(targetInput, {
+        content: html,
         html: true,
         customClass: 'td-offline-search-results',
         placement: 'bottom',
@@ -180,4 +238,4 @@
       popover.show();
     };
   });
-})(jQuery);
+})();

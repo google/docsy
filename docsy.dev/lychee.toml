@@ -29,7 +29,6 @@ exclude = [
   '^https://github\.com/google/docsy/tree/main/docsy\.dev/content/en/',
   '^https://twitter\.com/docsydocs$',
   '^https://badges\.netlify\.com/api',
-  '^https://code\.jquery\.com',
   '^https://www\.npmjs\.com/package/',                # bot-wall (403) on the package pages
   '^https://docsearch\.algolia\.com/',               # bot-wall (403) on the apply page
   '^https://prismjs\.com/download\.html#',           # download-builder state hash, not an anchor
