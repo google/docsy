@@ -30,6 +30,8 @@ jobs:
         run: npm run -s is:clean
 
       # Put lychee on PATH for the link checker (test:full runs on Linux only).
+      # Twin of link-cache-refresh.yaml's checksum-verified install: keep the
+      # pinned versions in step.
       - if: runner.os != 'Windows'
         name: Install lychee
         env:
