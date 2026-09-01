@@ -2,35 +2,33 @@
 # committed link cache (docsy.dev/link-cache.jsonc), maintained by the
 # link-cache npm package. Pruning the N oldest lychee-verified entries and
 # re-running the link checker re-verifies them (or retires URLs no longer in
-# the site), rotating through them over a few weeks (assuming refresh PRs
-# merge roughly daily); manual (seeded) entries are exempt from pruning and
-# retire via their expires dates.
+# the site), rotating through them in about a month of weekly merged
+# refreshes; manual (seeded) entries are exempt from pruning and retire via
+# their expires dates.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
 # current with main and re-runs the check (refreshing the PR body), but
 # prunes further only when dispatched with prune_more set. If the branch
 # exists without an open same-repo PR, it is reset to main and treated as
-# new. Merge conflicts, tolerated exit codes, and push auth are handled
-# per-step; the step comments carry the rationale.
+# new.
 #
-# The PR is created with the workflow's GITHUB_TOKEN, so the repo's regular
-# CI does not auto-run on it (GitHub suppresses workflow-triggered
-# workflows); the link check that matters runs here, and a maintainer review
-# gates the merge. That token (with this job's write permissions) is exposed
-# to lychee for authenticated github.com checks; the alternative (a separate
-# app/bot token) is deliberately out of scope for this repo.
+# The design does not rely on the refresh PR getting its own CI: the link
+# check that matters runs in this workflow, and a maintainer review gates
+# the merge. The workflow's GITHUB_TOKEN (with this job's write permissions)
+# is exposed to lychee for authenticated github.com checks; the alternative
+# (a separate app/bot token) is deliberately out of scope for this repo.
 
 name: link-cache-refresh
 
 on:
   schedule:
-    - cron: '17 4 * * *' # daily at 4:17 UTC
+    - cron: '17 4 * * 1' # weekly, Mondays at 4:17 UTC
   workflow_dispatch:
     inputs:
       refresh_count:
         description: Number of (oldest) link-cache entries to refresh.
-        default: &default_refresh_count 75
+        default: &default_refresh_count 300
         type: number
       prune_more:
         description: Prune more entries from the existing PR branch (if any).
@@ -118,8 +116,8 @@ jobs:
 
       - name: Set git identity
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'chalin (link-cache bot)'
+          git config user.email 'pchalin@gmail.com'
 
       - name: Merge from main
         id: merge
@@ -185,8 +183,8 @@ jobs:
       - name: Refresh the link cache
         id: check
         env:
-          # Authenticated github.com checks (rate limits); see the header's
-          # token notes.
+          # Authenticated github.com checks (rate limits); token trade-off in
+          # the header.
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           # Guard against script drift: if _check:links is renamed, npm run
