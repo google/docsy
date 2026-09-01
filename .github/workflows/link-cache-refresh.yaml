@@ -2,9 +2,9 @@
 # committed link cache (docsy.dev/link-cache.jsonc), maintained by the
 # link-cache npm package. Pruning the N oldest lychee-verified entries and
 # re-running the link checker re-verifies them (or retires URLs no longer in
-# the site), rotating through them over a few weeks (assuming refresh PRs
-# merge roughly daily); manual (seeded) entries are exempt from pruning and
-# retire via their expires dates.
+# the site), rotating through them in about a month of weekly merged
+# refreshes; manual (seeded) entries are exempt from pruning and retire via
+# their expires dates.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -25,12 +25,12 @@ name: link-cache-refresh
 
 on:
   schedule:
-    - cron: '17 4 * * *' # daily at 4:17 UTC
+    - cron: '17 4 * * 1' # weekly, Mondays at 4:17 UTC
   workflow_dispatch:
     inputs:
       refresh_count:
         description: Number of (oldest) link-cache entries to refresh.
-        default: &default_refresh_count 75
+        default: &default_refresh_count 300
         type: number
       prune_more:
         description: Prune more entries from the existing PR branch (if any).
@@ -118,8 +118,13 @@ jobs:
 
       - name: Set git identity
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          # Author under a CLA-covered identity: cla/google keys on the
+          # commit author's email and github-actions[bot] cannot sign a CLA
+          # (proven on the first live run's PR). The name marks the commits
+          # as machine-made; the pushing credential remains the workflow's
+          # GITHUB_TOKEN either way.
+          git config user.name 'chalin (link-cache bot)'
+          git config user.email 'pchalin@gmail.com'
 
       - name: Merge from main
         id: merge
