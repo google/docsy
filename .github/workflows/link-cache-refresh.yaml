@@ -11,15 +11,13 @@
 # current with main and re-runs the check (refreshing the PR body), but
 # prunes further only when dispatched with prune_more set. If the branch
 # exists without an open same-repo PR, it is reset to main and treated as
-# new. Merge conflicts, tolerated exit codes, and push auth are handled
-# per-step; the step comments carry the rationale.
+# new.
 #
-# The PR is created with the workflow's GITHUB_TOKEN, so the repo's regular
-# CI does not auto-run on it (GitHub suppresses workflow-triggered
-# workflows); the link check that matters runs here, and a maintainer review
-# gates the merge. That token (with this job's write permissions) is exposed
-# to lychee for authenticated github.com checks; the alternative (a separate
-# app/bot token) is deliberately out of scope for this repo.
+# The design does not rely on the refresh PR getting its own CI: the link
+# check that matters runs in this workflow, and a maintainer review gates
+# the merge. The workflow's GITHUB_TOKEN (with this job's write permissions)
+# is exposed to lychee for authenticated github.com checks; the alternative
+# (a separate app/bot token) is deliberately out of scope for this repo.
 
 name: link-cache-refresh
 
@@ -118,11 +116,6 @@ jobs:
 
       - name: Set git identity
         run: |
-          # Author under a CLA-covered identity: cla/google keys on the
-          # commit author's email and github-actions[bot] cannot sign a CLA
-          # (proven on the first live run's PR). The name marks the commits
-          # as machine-made; the pushing credential remains the workflow's
-          # GITHUB_TOKEN either way.
           git config user.name 'chalin (link-cache bot)'
           git config user.email 'pchalin@gmail.com'
 
@@ -190,8 +183,8 @@ jobs:
       - name: Refresh the link cache
         id: check
         env:
-          # Authenticated github.com checks (rate limits); see the header's
-          # token notes.
+          # Authenticated github.com checks (rate limits); token trade-off in
+          # the header.
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           # Guard against script drift: if _check:links is renamed, npm run
