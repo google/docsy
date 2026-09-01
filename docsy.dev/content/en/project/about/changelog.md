@@ -170,9 +170,9 @@ history since 0.17.0][].
 
 **For maintainers**:
 
-- Grouped Renovate patch/minor dependency updates into per-area batch PRs,
-  after applying the open update wave (devDep pins and bumps, actions v7)
-  ([#2774][], [#2776][]).
+- Grouped Renovate patch/minor dependency updates into per-area batch PRs, after
+  applying the open update wave (devDep pins and bumps, actions v7) ([#2774][],
+  [#2776][]).
 - Switched the docsy.dev committed link cache to an owned JSONC format
   ([#2779][]).
 
