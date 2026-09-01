@@ -1,0 +1,187 @@
+# Opens (or updates) the PR that refreshes the oldest entries of the
+# committed link cache (docsy.dev/link-cache.jsonc). Pruning the N oldest
+# lychee-verified entries and re-running the link checker re-verifies them,
+# rotating through the full cache over a few weeks; manual (seeded) entries
+# are exempt from pruning and retire via their expires date.
+#
+# There is at most one refresh PR at a time (branch bot/link-cache-refresh):
+# a scheduled run while the PR is open only brings the branch current with
+# main; it prunes further only when dispatched with prune_more set. If the
+# branch exists without an open PR, it is reset to main and treated as new.
+#
+# When pruning ran but the run ends with nothing to commit, the run fails: an
+# empty refresh after pruning means the workflow is broken.
+#
+# PRs are created with the workflow's GITHUB_TOKEN, so the repo's regular CI
+# does not auto-run on them (GitHub suppresses workflow-triggered workflows);
+# the link check that matters runs in this workflow, and a maintainer review
+# gates the merge.
+
+name: link-cache-refresh
+
+on:
+  schedule:
+    - cron: '17 4 * * *' # daily at 4:17 UTC
+  workflow_dispatch:
+    inputs:
+      refresh_count:
+        description: Number of (oldest) link-cache entries to refresh.
+        default: 75
+        type: number
+      prune_more:
+        description: Prune more entries from the existing PR branch (if any).
+        default: false
+        type: boolean
+
+permissions: { contents: read }
+
+# Overlapping runs would race updates to the shared refresh branch.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh link cache
+    if: github.repository == 'google/docsy'
+    permissions:
+      contents: write # push the refresh branch
+      pull-requests: write # open the refresh PR
+    runs-on: ubuntu-latest
+    env:
+      BRANCH: bot/link-cache-refresh
+      IS_NEW_BRANCH: 'false'
+      REFRESH_COUNT: ${{ github.event.inputs.refresh_count || 75 }}
+      PRUNE_MORE: ${{ github.event.inputs.prune_more || 'false' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: true # zizmor: ignore[artipacked] Required by this job's later git pushes.
+
+      - name: Validate inputs
+        run: |
+          if [[ ! "$REFRESH_COUNT" =~ ^[0-9]+$ || "$REFRESH_COUNT" -eq 0 ]]; then
+            echo "Error: refresh_count must be a positive number, got: $REFRESH_COUNT"
+            exit 1
+          fi
+
+      - name: Checkout or create the refresh branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! git ls-remote --exit-code --heads origin "$BRANCH"; then
+            echo "IS_NEW_BRANCH=true" >> "$GITHUB_ENV"
+            git checkout -b "$BRANCH" origin/main
+            git push -u origin "$BRANCH"
+          else
+            git checkout "$BRANCH"
+            PR_URL=$(gh pr list --state open --head "$BRANCH" --json url --jq '.[].url')
+            if [[ -n "$PR_URL" ]]; then
+              echo "Branch PR: $PR_URL"
+            else
+              echo "Branch has no open PR: resetting it to origin/main" \
+                "and treating it as a new branch."
+              echo "IS_NEW_BRANCH=true" >> "$GITHUB_ENV"
+              git reset --hard origin/main
+              git push --force-with-lease origin "$BRANCH"
+            fi
+          fi
+
+      - name: Set git identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Merge from main
+        run: |
+          previous=$(git rev-parse HEAD)
+          git fetch origin
+          git merge origin/main
+          if [[ "$(git rev-parse HEAD)" != "$previous" ]]; then
+            echo "Merged from main; the push below carries it."
+            echo "NEEDS_PUSH=true" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm run install:safe
+
+      - name: Install lychee
+        env:
+          LYCHEE_VERSION: v0.24.2
+        run: |
+          tmp="$(mktemp -d)"
+          curl -sfL "https://github.com/lycheeverse/lychee/releases/download/lychee-${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" \
+            | tar -xz -C "$tmp"
+          install -D "$(find "$tmp" -type f -name lychee | head -n1)" "$HOME/.local/bin/lychee"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          lychee --version
+
+      - name: Prune link cache
+        if: ${{ env.PRUNE_MORE == 'true' || env.IS_NEW_BRANCH == 'true' }}
+        run: |
+          echo "Oldest entry before pruning, then pruning $REFRESH_COUNT oldest entries:"
+          npm run link-cache -- --list 1 --prune "$REFRESH_COUNT"
+          echo "DID_PRUNE=true" >> "$GITHUB_ENV"
+
+      - name: Build the site and refresh the link cache
+        env:
+          # Authenticated github.com checks (rate limits)
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          # Exit 1 (dead links) doesn't fail the run: the merge-back has
+          # already recorded the failures in the owned cache, and the PR is
+          # where a maintainer triages them. Exit 2 (preflight: tool/config
+          # broken, zero links verified) is a workflow defect: fail hard.
+          LINK_CHECK_STATUS=0
+          npm run -C docsy.dev check:links || LINK_CHECK_STATUS=$?
+          echo "Link check exit status: $LINK_CHECK_STATUS"
+          if [[ "$LINK_CHECK_STATUS" -ge 2 ]]; then
+            exit "$LINK_CHECK_STATUS"
+          elif [[ "$LINK_CHECK_STATUS" -eq 1 ]]; then
+            echo "DEAD_LINKS_FOUND=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Report the oldest entry after the refresh
+        run: npm run link-cache -- --list 1
+
+      - name: Commit and push link-cache updates, if any
+        run: |
+          git add docsy.dev/link-cache.jsonc
+          if ! git diff-index --quiet --cached HEAD; then
+            git commit -m 'Refresh link cache'
+          fi
+          if [[ "${NEEDS_PUSH:-false}" == 'true' ]] || ! git diff --quiet "origin/$BRANCH"; then
+            git push origin "$BRANCH"
+          fi
+
+      - name: Create the PR if needed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_BODY: |-
+            Refreshes the oldest ${{ env.REFRESH_COUNT }} link-cache entries;
+            see the link-cache-refresh workflow header for the model.
+        run: |
+          if [[ "${DEAD_LINKS_FOUND:-false}" == 'true' ]]; then
+            PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with negative statuses in the cache diff: triage before merging."
+          fi
+          prs=$(gh pr list --state open --head "$BRANCH")
+          if [[ -n "$prs" ]]; then
+            echo "PR already exists:"
+            echo "$prs"
+            exit 0
+          fi
+
+          if gh pr create --title 'Refresh link cache' --body "$PR_BODY"; then
+            gh pr view --json url --jq '.url'
+          elif [[ "${DID_PRUNE:-false}" == 'true' ]]; then
+            echo "::error::Pruning ran but produced no PR: an empty refresh" \
+              "after pruning means the workflow is broken."
+            exit 1
+          else
+            echo "No changes to PR."
+          fi
