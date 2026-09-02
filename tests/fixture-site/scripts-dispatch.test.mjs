@@ -26,15 +26,20 @@ test('the dispatch fixture builds', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
 });
 
-for (const [flag, page] of [
-  ['katex', 'docs/math/index.html'],
-  ['mermaid', 'docs/diagram/index.html'],
+for (const [flag, page, otherFlag, otherPage] of [
+  ['katex', 'docs/math/index.html', 'mermaid', 'docs/diagram/index.html'],
+  ['mermaid', 'docs/diagram/index.html', 'katex', 'docs/math/index.html'],
 ]) {
   test(`the ${flag} partial is dispatched on flagged pages only`, () => {
     assert.match(
       r.publicFile(page),
       new RegExp(`data-dispatch="${flag}"`),
       `the flagged page carries the ${flag} dispatch`,
+    );
+    assert.doesNotMatch(
+      r.publicFile(otherPage),
+      new RegExp(`data-dispatch="${flag}"`),
+      `the ${otherFlag}-flagged page carries no ${flag} dispatch`,
     );
     assert.doesNotMatch(
       r.publicFile('index.html'),

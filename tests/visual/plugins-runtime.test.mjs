@@ -71,9 +71,7 @@ test('an emitted plugin executes: options and DOM effects land', async () => {
   assert.equal(probe.token, 'runtime-net', 'plugin options reach the runtime');
   assert.equal(probe.dataset, 'ran', 'the plugin mutated the DOM');
   await page.close();
-  // Red-proof doubling as the assertion: the broken plugin's error must be
-  // visible to the collector, so an empty tally from the probe plugin
-  // would be meaningful.
+  // Red-proof doubling as the assertion (rationale: quality page).
   assert.equal(errors.length, 1, 'error tally sees exactly the broken plugin');
   assert.match(
     errors[0],

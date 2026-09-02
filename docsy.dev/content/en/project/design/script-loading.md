@@ -11,8 +11,9 @@ feature to its own sub-partial under [`_partials/scripts/`][scripts-dir].
 
 ## Loading mechanisms
 
-Before 0.18, `scripts.html` had accreted five loading mechanisms inline. The
-decomposition moved each into a per-feature sub-partial without changing the
+Before 0.18, `scripts.html` mixed a few sub-partial dispatches (MarkMap,
+Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition
+moved every mechanism into a per-feature sub-partial without changing the
 default rendered output:
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
@@ -27,9 +28,10 @@ default rendered output:
   re-served as local assets, and Mermaid, whose pinned version is validated at
   build time while the browser imports the module straight from the CDN.
 
-The dispatcher preserves each mechanism's original gating: site params (MarkMap,
-PlantUML, Prism vs click-to-copy), `.Page.Store` flags (Mermaid, KaTeX), and
-search configuration (Algolia).
+The dispatcher preserves each mechanism's original gating, for example site
+params (MarkMap, PlantUML, Prism vs click-to-copy), `.Page.Store` flags
+(Mermaid, KaTeX), and search configuration (Algolia); some sub-partials carry
+further param gates internally (search bundle choice, dark mode, ScrollSpy).
 
 ## The dispatcher as a seam
 
@@ -39,7 +41,8 @@ The decomposition has two design consequences:
   system, so a site can replace one feature's emission by shadowing its
   sub-partial instead of copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where built-in integrations convert onto the loop ([#2789][]).
+  plugged in, and where converting built-in integrations onto the loop is
+  planned ([#2789][]).
 
 ### Override points
 

@@ -18,7 +18,7 @@ params:
     plugins:
       - name: NAME # resolves assets/js/plugins/NAME.js
         enable: true # optional; false skips the entry
-        defer: false # optional; adds `defer` to the script tag
+        defer: true # optional; adds `defer` to the script tag
         pageGate: FLAG # optional; a .Page.Store flag name
         options: {} # optional; reaches the module as @params
       - NAME # bare-name shorthand for { name: NAME }
@@ -40,7 +40,7 @@ value:
 - A non-list `params.docsy.plugins`, falsy scalars included, warns
   (`docsy-plugins-config`) and is ignored.
 - An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
-- A registered name with no asset at `assets/js/plugins/NAME.js` warns
+- An enabled registration with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
 

@@ -161,8 +161,7 @@ async function collectPageErrors(url) {
   return errors;
 }
 
-// Collector self-test: a page that throws must be reported, so a silent
-// collector (wrong event names, races) can't masquerade as all-green.
+// Collector self-test (red-proof: quality page, file header).
 test('js-runtime collector: an uncaught page exception is reported', async () => {
   const errors = await collectPageErrors(selfTestUrl);
   assert.ok(
