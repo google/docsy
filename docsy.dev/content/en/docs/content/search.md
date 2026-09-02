@@ -243,7 +243,7 @@ following template files:
 - `layouts/_partials/algolia/head.html` used by `head.html` to load Algolia
   DocSearch styles. It also issues a deprecation warning for
   `params.algolia_docsearch`.
-- `layouts/_partials/algolia/scripts.html` used by `scripts.html` to load and
+- `layouts/_partials/scripts/algolia.html` used by `scripts.html` to load and
   configure Algolia DocSearch.
 
 Leave either file empty to disable Docsy's implementation.
