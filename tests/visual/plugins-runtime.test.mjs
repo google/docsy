@@ -1,0 +1,87 @@
+// Plugin runtime net: proves an emitted plugin actually *executes* in a
+// browser — a static-markup check can bless output whose runtime is broken
+// (wrong script ordering, a botched build). Minimal by design: one fixture
+// plugin flips a window flag and mutates the DOM; the test asserts both,
+// plus a zero-console-error page. Red-proof: a page with a deliberately
+// broken plugin must be caught by the error collector.
+
+import { test, before, after } from 'node:test';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import { buildSite } from '../fixture-site/lib/build-site.mjs';
+import { launchBrowser, serveDir } from './lib/harness.mjs';
+
+let browser;
+let server;
+
+before(async () => {
+  const build = buildSite('plugins-runtime', {
+    files: {
+      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+      'assets/js/plugins/probe.js':
+        "import * as params from '@params';\n" +
+        'window.__docsyPluginProbe = params.token;\n' +
+        "document.body.dataset.pluginProbe = 'ran';\n",
+      'assets/js/plugins/broken.js': 'this_symbol_does_not_exist();\n',
+    },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: probe
+        options:
+          token: runtime-net
+      - name: broken
+        defer: true
+`,
+  });
+  if (build.status !== 0) {
+    throw new Error(`fixture hugo build failed:\n${build.stderr}`);
+  }
+  server = await serveDir(path.join(build.site, 'public'));
+  browser = await launchBrowser();
+});
+
+after(async () => {
+  await Promise.all([browser?.close(), server?.close()]);
+});
+
+async function loadHome() {
+  const page = await browser.newPage();
+  const errors = [];
+  page.on('pageerror', (err) => errors.push(String(err)));
+  page.on('console', (msg) => {
+    // Failed resource loads (aborted off-origin fetches, a missing favicon)
+    // are environment noise, same policy as js-runtime.test.mjs.
+    if (msg.type() === 'error' && !/Failed to load resource/.test(msg.text()))
+      errors.push(msg.text());
+  });
+  const origin = server.origin;
+  await page.setRequestInterception(true);
+  // Off-origin requests abort: deterministic, offline-safe runs.
+  page.on('request', (req) =>
+    req.url().startsWith(origin) ? req.continue() : req.abort(),
+  );
+  await page.goto(`${origin}/`, { waitUntil: 'networkidle0' });
+  return { page, errors };
+}
+
+test('an emitted plugin executes: options and DOM effects land', async () => {
+  const { page, errors } = await loadHome();
+  const probe = await page.evaluate(() => ({
+    token: window.__docsyPluginProbe,
+    dataset: document.body.dataset.pluginProbe,
+  }));
+  assert.equal(probe.token, 'runtime-net', 'plugin options reach the runtime');
+  assert.equal(probe.dataset, 'ran', 'the plugin mutated the DOM');
+  await page.close();
+  // Red-proof doubling as the assertion: the deliberately broken plugin's
+  // runtime error is visible to the collector, so an empty tally from the
+  // probe plugin would be meaningful. Exactly the broken plugin's error —
+  // and nothing else — is expected.
+  assert.equal(errors.length, 1, 'error tally sees exactly the broken plugin');
+  assert.match(
+    errors[0],
+    /this_symbol_does_not_exist/,
+    'the collector catches a broken plugin (red-proof)',
+  );
+});
