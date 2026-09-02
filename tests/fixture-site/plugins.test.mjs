@@ -260,6 +260,22 @@ test('a scalar params.docsy.plugins builds and warns', () => {
   );
 });
 
+test('a falsy scalar params.docsy.plugins also warns', () => {
+  const r = buildSite('plugins-falsy-registry', {
+    files: content,
+    extraConfig: `params:
+  docsy:
+    plugins: false
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /must be a list/,
+    'the config shape is called out in a build warning',
+  );
+});
+
 test('a bare-name registry entry is plugin shorthand', () => {
   const r = buildSite('plugins-shorthand', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },

@@ -22,12 +22,11 @@
 {{ $registry := slice -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if reflect.IsMap $docsy -}}
-  {{ with $docsy.plugins -}}
-    {{ if reflect.IsSlice . -}}
-      {{ $registry = . -}}
-    {{ else -}}
-      {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." . -}}
-    {{ end -}}
+  {{ $plugins := $docsy.plugins -}}
+  {{ if reflect.IsSlice $plugins -}}
+    {{ $registry = $plugins -}}
+  {{ else if ne $plugins nil -}}
+    {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." $plugins -}}
   {{ end -}}
 {{ end -}}
 {{ range $registry -}}

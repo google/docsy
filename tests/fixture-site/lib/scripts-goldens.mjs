@@ -74,8 +74,8 @@ export function extractScriptRegion(html) {
 // Whitespace-insensitive comparison form: collapse runs, trim. Fingerprint
 // integrity values (sha256, content-addressed like the hashed names) are
 // stripped so region goldens don't break on every bundle change; bundle
-// bytes are pinned byte-exactly by the separate bundle golden. CDN SRI
-// hashes (sha384/sha512) stay compared: the goldens are their pin.
+// bytes are pinned byte-exactly by the byte goldens. CDN SRI hashes
+// (sha384/sha512) stay compared: the goldens are their pin.
 export const normalize = (s) =>
   s
     .replace(/\.min\.[0-9a-f]{64}\.js/g, '.min.js')
@@ -83,10 +83,22 @@ export const normalize = (s) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-// The main bundle's public path, resolved from the page markup (the name is
-// fingerprinted in production builds).
-export function mainBundlePath(html) {
-  const m = html.match(/src="\/(js\/main[^"]*\.js)"/);
-  if (!m) throw new Error('main bundle script tag is present');
+// Canonical storage form for region goldens: the comparison is
+// whitespace-insensitive, so stored trailing whitespace only trips
+// `git diff --check`.
+export const canonicalRegion = (s) =>
+  s.replace(/[^\S\n]+$/gm, '').replace(/\n*$/, '\n');
+
+// Byte-pinned local scripts, resolved from the page markup (names are
+// fingerprinted): every locally built script in the region, so a content
+// change can't hide behind the region comparison's hash-stripping.
+export const byteGoldens = [
+  { name: 'main.js', re: /src="\/(js\/main[^"]*\.js)"/ },
+  { name: 'click-to-copy.js', re: /src="\/(js\/click-to-copy[^"]*\.js)"/ },
+];
+
+export function scriptPath(html, { name, re }) {
+  const m = html.match(re);
+  if (!m) throw new Error(`${name} script tag is present`);
   return m[1];
 }

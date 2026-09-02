@@ -1,12 +1,14 @@
 // Refreshes the scripts.html goldens (see scripts-golden.test.mjs).
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import {
   buildScriptsFixtures,
+  byteGoldens,
+  canonicalRegion,
   extractScriptRegion,
   goldenDir,
-  mainBundlePath,
+  scriptPath,
 } from './lib/scripts-goldens.mjs';
 
 mkdirSync(goldenDir, { recursive: true });
@@ -20,13 +22,18 @@ for (const { name, build, pages } of buildScriptsFixtures()) {
     const file = `${name}--${page.replaceAll('/', '-')}.txt`;
     writeFileSync(
       path.join(goldenDir, file),
-      extractScriptRegion(build.publicFile(page)),
+      canonicalRegion(extractScriptRegion(build.publicFile(page))),
     );
     console.log(`wrote ${file}`);
   }
-  writeFileSync(
-    path.join(goldenDir, `${name}--main.js.txt`),
-    build.publicFile(mainBundlePath(build.publicFile('index.html'))),
-  );
-  console.log(`wrote ${name}--main.js.txt`);
+  const html = build.publicFile('index.html');
+  for (const golden of byteGoldens) {
+    const file = path.join(goldenDir, `${name}--${golden.name}.txt`);
+    if (!golden.re.test(html)) {
+      rmSync(file, { force: true });
+      continue;
+    }
+    writeFileSync(file, build.publicFile(scriptPath(html, golden)));
+    console.log(`wrote ${name}--${golden.name}.txt`);
+  }
 }

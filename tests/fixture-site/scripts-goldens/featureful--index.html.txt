@@ -36,5 +36,3 @@ for (let c of containers) {
 }
 </script>
 <script src='/js/tabpane-persist.js'></script>
-
-  
