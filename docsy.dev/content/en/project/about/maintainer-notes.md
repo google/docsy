@@ -600,8 +600,8 @@ If not adjust accordingly.
     `release` branch needs the workflow's ancestry check deliberately widened
     first.
 
-    Each numbered substep below is a distinct gate; in a release-run tracker,
-    give each its own checkbox rather than one for the step.
+    When copying this procedure into a release-run tracker, give each substep
+    its own checkbox.
 
     1. **Approve** the waiting `npm-publish` deployment. The guards re-verify
        content and registry order mechanically (an out-of-order or inconsistent
@@ -632,13 +632,10 @@ If not adjust accordingly.
        npm dist-tag add @docsy/theme@${REL#v} next
        ```
 
-    4. **Vet the published artifact** by running the [smoke tests](#test-suites)
-       from `main` at the tag: the suite's registry-install test builds a site
-       from the published package. Pin the release explicitly: under npm's
-       `min-release-age`, the suite's default bare `@docsy/theme` install
-       silently resolves to the newest old-enough release, smoke-testing the
-       previous stable (this bit the 0.17.0 run); the exact pin fails visibly
-       instead, so pair it with a one-off age override:
+    4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
+       `$BASE`, pinning the release -- a bare install
+       [resolves past a too-young release](/docs/update/npm-package/) and would
+       silently smoke-test the previous stable:
 
        ```sh
        DOCSY_THEME_PKG=@docsy/theme@${REL#v} NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke
