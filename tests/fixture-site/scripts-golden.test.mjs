@@ -1,8 +1,7 @@
-// Golden-output net for the scripts.html decomposition (js-plugins spike):
-// the rendered script region (everything between the footer and </body>) and
-// the built js/main.js bundle stay byte-identical, modulo whitespace, across
-// the refactor. Two configs: theme defaults, and a feature-rich variant that
-// lights up every offline-safe loading mechanism in scripts.html.
+// Golden-output net for the scripts.html decomposition: the rendered script
+// region and the built js/main.js bundle must match their goldens across
+// the refactor. Fixtures, region extraction, and comparison form:
+// lib/scripts-goldens.mjs.
 // Refresh: npm run update:scripts-goldens
 
 import { test } from 'node:test';
