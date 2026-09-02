@@ -599,33 +599,48 @@ If not adjust accordingly.
     only publishes tags on `main`'s history: a patch release tagged on the
     `release` branch needs the workflow's ancestry check deliberately widened
     first.
-    - **Before approving** the waiting `npm-publish` deployment. The guards
-      re-verify content and registry order mechanically (an out-of-order or
-      inconsistent run fails instead of publishing), and the approval prompt
-      only appears after the pack job succeeded, so approval owns **intent**.
-      Note that on tag pushes the workflow definition itself comes from the
-      tagged commit, so for an unexpected tag don't trust the run's green
-      checks; the two checks below are the real barrier:
-      - the run's commit is the release commit you drove (the tip of `$BASE` at
-        tag time; an unrelated merge landing since is fine), and the tag actor
-        is the release driver you expect; anything else: reject and ask;
-      - the run is `publish.yaml` on `google/docsy` (another workflow could
-        reference the same environment).
-    - Check that the workflow run succeeded and that the registry version
-      matches the tag:
 
-      ```sh
-      npm view @docsy/theme version dist-tags
-      ```
+    Each numbered substep below is a distinct gate; in a release-run tracker,
+    give each its own checkbox rather than one for the step.
 
-    - Re-point the `next` dist-tag at the new stable (dist-tags never move on
-      their own, and `next` must stay `>= latest`). OIDC covers only the publish
-      itself, so run this inside a narrow auth window (login/logout, next
-      bullet), then re-verify the dist-tags:
+    1. **Approve** the waiting `npm-publish` deployment. The guards re-verify
+       content and registry order mechanically (an out-of-order or inconsistent
+       run fails instead of publishing), and the approval prompt only appears
+       after the pack job succeeded, so approval owns **intent**. Note that on
+       tag pushes the workflow definition itself comes from the tagged commit,
+       so for an unexpected tag don't trust the run's green checks; the two
+       checks below are the real barrier:
+       - the run's commit is the release commit you drove (the tip of `$BASE` at
+         tag time; an unrelated merge landing since is fine), and the tag actor
+         is the release driver you expect; anything else: reject and ask;
+       - the run is `publish.yaml` on `google/docsy` (another workflow could
+         reference the same environment).
 
-      ```sh
-      npm dist-tag add @docsy/theme@${REL#v} next
-      ```
+    2. **Check** that the workflow run succeeded and that the registry version
+       matches the tag:
+
+       ```sh
+       npm view @docsy/theme version dist-tags
+       ```
+
+    3. **Re-point the `next` dist-tag** at the new stable (dist-tags never move
+       on their own, and `next` must stay `>= latest`). OIDC covers only the
+       publish itself, so run this inside a narrow auth window (login/logout,
+       manual-publish note below), then re-verify the dist-tags:
+
+       ```sh
+       npm dist-tag add @docsy/theme@${REL#v} next
+       ```
+
+    4. **Vet the published artifact** by running the [smoke tests](#test-suites)
+       from `main` at the tag: with `latest` now on the new release, the suite's
+       registry-install test builds a site from the published package:
+
+       ```sh
+       npm run test:smoke
+       ```
+
+    Exceptions to the CI flow:
 
     - **Manual publishes** (prereleases only): the workflow triggers only on
       stable `vX.Y.Z` tags, so prereleases always publish manually. Publish from
