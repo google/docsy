@@ -72,12 +72,14 @@ export function extractScriptRegion(html) {
 }
 
 // Whitespace-insensitive comparison form: collapse runs, trim. Fingerprinted
-// asset names are content-addressed, so goldens would break twice per change
-// (name + content) — strip the hash segment; content equality still holds
-// through the separate bundle golden.
+// asset names and integrity attributes are content-addressed, so region
+// goldens would break on every bundle change — strip both; bundle content is
+// pinned byte-exactly by the separate bundle golden, and CDN versions by
+// script-version-pins.test.mjs.
 export const normalize = (s) =>
   s
     .replace(/\.min\.[0-9a-f]{64}\.js/g, '.min.js')
+    .replace(/integrity="sha\d{3}-[^"]*"/g, 'integrity=""')
     .replace(/\s+/g, ' ')
     .trim();
 
