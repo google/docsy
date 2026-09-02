@@ -47,8 +47,8 @@ async function loadHome() {
   const errors = [];
   page.on('pageerror', (err) => errors.push(String(err)));
   page.on('console', (msg) => {
-    // Failed resource loads (aborted off-origin fetches, a missing favicon)
-    // are environment noise, same policy as js-runtime.test.mjs.
+    // Failed resource loads are environment noise here: off-origin
+    // requests abort by design (offline-safe runs).
     if (msg.type() === 'error' && !/Failed to load resource/.test(msg.text()))
       errors.push(msg.text());
   });

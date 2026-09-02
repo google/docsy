@@ -336,7 +336,7 @@ test('a nameless registry entry is skipped with a warning', () => {
 
 test('duplicate registrations publish distinct builds, in development too', () => {
   // Same source, different options: the builds must not share one
-  // published path (see the loop's fingerprint note).
+  // published path (the always-fingerprint rule; implementation page).
   const r = buildSite('plugins-duplicates', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     args: ['--environment', 'development'],

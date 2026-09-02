@@ -1,4 +1,4 @@
-// Legacy dispatch net: scripts.html keeps dispatching the .Page.Store-gated
+// Dispatch net: scripts.html keeps dispatching the .Page.Store-gated
 // partials (mermaid, katex), pinned offline through marker overrides.
 // Rationale: https://www.docsy.dev/project/quality/script-loading/
 
@@ -39,7 +39,7 @@ for (const [flag, page, otherFlag, otherPage] of [
     assert.doesNotMatch(
       r.publicFile(otherPage),
       new RegExp(`data-dispatch="${flag}"`),
-      `the ${otherFlag}-flagged page carries no ${flag} dispatch`,
+      `the ${otherFlag}-flagged page is free of ${flag} dispatches`,
     );
     assert.doesNotMatch(
       r.publicFile('index.html'),

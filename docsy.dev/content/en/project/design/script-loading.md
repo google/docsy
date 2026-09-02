@@ -21,25 +21,27 @@ rendered output:
 - **The main bundle**: Bootstrap and the theme's core scripts, concatenated into
   `main.js` (`scripts/main-bundle.html`), minified and fingerprinted in
   production.
-- **Individually processed theme scripts**: `click-to-copy.js`.
+- **Individually processed theme scripts**: `click-to-copy.js` (Prism's
+  mutually exclusive alternative; the two share `scripts/code-copy.html`).
 - **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
   Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
   re-served as local assets, and Mermaid, whose pinned version is validated at
   build time while the browser imports the module straight from the CDN.
 
-The dispatcher preserves each mechanism's original gating, for example site
-params (MarkMap, PlantUML, Prism vs click-to-copy), `.Page.Store` flags
-(Mermaid, KaTeX), and search configuration (Algolia); some sub-partials carry
-further param gates internally (search bundle choice, dark mode, ScrollSpy).
+Gating lives at two levels, preserved from before the decomposition. The
+dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and
+KaTeX (`.Page.Store` flags); it always dispatches the other sub-partials, which
+gate internally (Algolia search configuration, Prism vs click-to-copy, search
+bundle choice, dark mode, ScrollSpy).
 
 ## The dispatcher as a seam
 
 The decomposition has two design consequences:
 
 - **Independent overrides**: each sub-partial resolves through Hugo's union file
-  system, so a site can replace one feature's emission by shadowing its
-  sub-partial instead of copying all of `scripts.html`.
+  system, so a site can replace one sub-partial by shadowing one file instead of
+  copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
   plugged in, and where converting built-in integrations onto the loop is
   planned ([#2789][]).
@@ -68,7 +70,7 @@ Two ordering decisions:
 - **Companions before the script**: a plugin's companion partial and stylesheet
   emit before its script tag, so a synchronous plugin script can rely on
   companion markup and styles being present.
-- **Body-end CSS, an interim placement**: the companion stylesheet's `<link>` is
+- **Body-end CSS (interim placement)**: the companion stylesheet's `<link>` is
   emitted where the loop runs (at the end of `<body>`), not in `<head>`, because
   `pageGate` reads `.Page.Store` flags that are only reliable after content
   render. Moving companion CSS into the head is a possible later refinement, and
