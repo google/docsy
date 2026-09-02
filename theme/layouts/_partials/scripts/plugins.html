@@ -7,11 +7,12 @@
   order. pageGate names a .Page.Store flag; when set, the plugin is
   emitted only on pages carrying the flag.
 
-  Optional companions, by naming convention:
-  - scripts/plugins/NAME.html: a partial rendered right after the plugin's
-    script tag (vendored libraries, component markup).
+  Optional companions, by naming convention, both emitted **before** the
+  script tag so a synchronous plugin script can rely on them:
+  - scripts/plugins/NAME.html: a partial (vendored libraries, component
+    markup); config-provider patterns belong in the companion too.
   - assets/scss/plugins/NAME.scss: a stylesheet compiled through the SCSS
-    pipeline and linked before the plugin's script tag. */ -}}
+    pipeline. */ -}}
 {{ range .Site.Params.docsy.plugins -}}
   {{ $entry := . -}}
   {{ if ne $entry.enable false -}}
@@ -27,6 +28,10 @@
             <link rel="stylesheet" href="{{ $css.RelPermalink }}">
           {{ end -}}
         {{ end -}}
+        {{ $companion := printf "scripts/plugins/%s.html" $entry.name -}}
+        {{ if templates.Exists (printf "_partials/%s" $companion) -}}
+          {{ partial $companion $ -}}
+        {{ end -}}
         {{ $opts := dict "params" ($entry.options | default dict) -}}
         {{ if hugo.IsProduction -}}
           {{ $opts = merge $opts (dict "minify" true) -}}
@@ -37,10 +42,6 @@
           <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
         {{ else -}}
           <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}"></script>
-        {{ end -}}
-        {{ $companion := printf "scripts/plugins/%s.html" $entry.name -}}
-        {{ if templates.Exists (printf "_partials/%s" $companion) -}}
-          {{ partial $companion $ -}}
         {{ end -}}
       {{ else -}}
         {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $entry.name $path -}}

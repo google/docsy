@@ -21,6 +21,20 @@ window.markmap = {
 <script src='/js/deflate.js'></script>
 <script src="/js/main.min.e3554d163f5a470373429b0cbc56ef6f50db4e8284d6067bd88f0be8acb8b36f.js" integrity="sha256-41VNFj9aRwNzQpsMvFbvb1DbToKE1gZ72I8L6Ky4s28=" crossorigin="anonymous"></script>
 <script src='/js/prism.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.9.0/dist/umd/index.js"
+  integrity="sha512-88MvftlHa0v7odRECMfSOg2XjedcNcnF8jTzDgyrgzi5Qpf1Dq5vVxO49vlseushr7kVXCriGKNF4rJobckTpw=="
+  crossorigin="anonymous" ></script>
+<script type="text/javascript">
+const containers = ['#docsearch-0', '#docsearch-1'];
+for (let c of containers) {
+  docsearch({
+    container: c,
+    appId: "test-app-id",
+    apiKey: "599cec31baffa4868cae4e79f180729b",
+    indexName: "test-index",
+  });
+}
+</script>
 <script src='/js/tabpane-persist.js'></script>
 
   

@@ -47,10 +47,10 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
   assert.match(js, /bonjour/, 'plugin options reach the module via @params');
 
   // quiet.js exists in the plugins dir but has no registry entry.
-  assert.doesNotMatch(html, /quiet/, 'unlisted plugin is not emitted');
+  assert.doesNotMatch(html, /quiet/, 'the page is free of the unlisted plugin');
   assert.throws(
     () => r.publicFile('js/plugins/quiet.js'),
-    'unlisted plugin publishes no output',
+    'the unlisted plugin output stays unpublished',
   );
 });
 
@@ -68,11 +68,11 @@ test('a disabled plugin ships zero bytes', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'disabled plugin has no script tag',
+    "the page is free of the disabled plugin's script tag",
   );
   assert.throws(
     () => r.publicFile('js/plugins/hello.js'),
-    'disabled plugin publishes no output',
+    'the disabled plugin output stays unpublished',
   );
 });
 
@@ -122,7 +122,7 @@ test('a pageGate plugin is emitted only where its Store flag is set', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'gated plugin is absent from pages without the flag',
+    'pages without the flag are free of the gated plugin',
   );
 });
 
@@ -148,8 +148,8 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
     'the companion partial renders with the page context',
   );
   assert.ok(
-    html.indexOf('js/plugins/hello') < html.indexOf('data-hello-companion'),
-    'the companion partial follows the plugin script tag',
+    html.indexOf('data-hello-companion') < html.indexOf('js/plugins/hello'),
+    'the companion partial precedes the plugin script tag',
   );
 });
 

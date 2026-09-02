@@ -28,7 +28,7 @@ test('a project adds a plugin with zero layout overrides', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.ok(
     !existsSync(path.join(r.site, 'layouts')),
-    'the fixture site carries no layout overrides',
+    'the fixture site is layout-override-free',
   );
   const html = r.publicFile('index.html');
   const m = html.match(/<script[^>]*src="\/(js\/plugins\/hello[^"]*\.js)"/);

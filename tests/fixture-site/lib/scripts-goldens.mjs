@@ -29,8 +29,10 @@ const configs = [
   {
     // Every offline-safe loading mechanism in scripts.html lit at once:
     // template-wrapped bundle members (markmap, plantuml, drawio), raw
-    // static files (deflate, prism), the markmap partial's CDN tag, and
-    // offline search replacing the default search script.
+    // static files (deflate, prism), the markmap partial's CDN tag,
+    // Algolia's CDN + config tags, and offline search replacing the
+    // default search script. Offline-safe: tags are emitted, never
+    // fetched, at build time.
     name: 'featureful',
     extraConfig: `params:
   offlineSearch: true
@@ -41,6 +43,10 @@ const configs = [
     enable: true
   drawio:
     enable: true
+  search:
+    algolia:
+      appId: test-app-id
+      indexName: test-index
 `,
   },
 ];

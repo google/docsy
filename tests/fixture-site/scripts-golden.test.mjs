@@ -47,9 +47,11 @@ for (const { name, build, pages } of builds) {
       path.join(goldenDir, `${name}--main.js.txt`),
       'utf8',
     );
+    // Exact bytes: the bundle is data, and normalize would also collapse
+    // whitespace inside JS string literals — a real behavior change.
     assert.equal(
-      normalize(bundle),
-      normalize(golden),
+      bundle,
+      golden,
       `bundle matches scripts-goldens/${name}--main.js.txt`,
     );
   });
