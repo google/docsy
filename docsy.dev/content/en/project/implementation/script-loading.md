@@ -4,8 +4,6 @@ description:
   Registry contract, shape guards, and build details of the plugin loop
 ---
 
-<span class="badge bg-info text-bg-info">As of Docsy 0.18.0</span>
-
 Code-level notes for [`_partials/scripts/plugins.html`][plugins.html], the loop
 behind `params.docsy.plugins`. For the architecture and ordering decisions, see
 the [design notes][design].

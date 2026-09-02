@@ -5,8 +5,6 @@ description:
   points
 ---
 
-<span class="badge bg-info text-bg-info">As of Docsy 0.18.0</span>
-
 Docsy emits its JavaScript at the end of `<body>` through
 [`_partials/scripts.html`][scripts.html]: a small dispatcher that routes each
 feature to its own sub-partial under [`_partials/scripts/`][scripts-dir].

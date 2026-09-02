@@ -5,8 +5,6 @@ description:
   their goldens
 ---
 
-<span class="badge bg-info text-bg-info">As of Docsy 0.18.0</span>
-
 Four complementary nets pin the script-loading subsystem ([design][],
 [implementation][]). The first three run in `npm run test:repo`; the runtime net
 runs in `npm run test:visual`.
