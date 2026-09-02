@@ -172,7 +172,11 @@ test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', ()
   const m = html.match(/<link[^>]*href="\/(scss\/plugins\/hello[^"]*\.css)"/);
   assert.ok(m, 'the plugin stylesheet link is emitted');
   const css = r.publicFile(m[1]);
-  assert.match(css, /\.td-hello-inner/, 'the SCSS is compiled (nesting resolved)');
+  assert.match(
+    css,
+    /\.td-hello-inner/,
+    'the SCSS is compiled (nesting resolved)',
+  );
   assert.doesNotMatch(css, /\n.*\n.*\n/, 'the stylesheet is minified');
 });
 
