@@ -12,9 +12,9 @@ feature to its own sub-partial under [`_partials/scripts/`][scripts-dir].
 ## Loading mechanisms
 
 Before 0.18, `scripts.html` mixed a few sub-partial dispatches (MarkMap,
-Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition
-moved every mechanism into a per-feature sub-partial without changing the
-default rendered output:
+Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition moved
+every mechanism into a per-feature sub-partial without changing the default
+rendered output:
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
   (PlantUML), `tabpane-persist.js`, `prism.js`.
