@@ -1,11 +1,16 @@
 {{/* Plugin loop: emits each plugin registered in params.docsy.plugins, a
-  list of { name, enable, defer, pageGate, options }. A plugin's script
-  lives at assets/js/plugins/NAME.js (theme, project, or module-mounted; a
+  list of { name, enable, defer, pageGate, options } entries (a bare NAME
+  string is shorthand for { name: NAME }). A plugin's script lives at
+  assets/js/plugins/NAME.js (theme, project, or module-mounted; a
   same-named project file shadows the theme's) and is built individually
   with js.Build; options reach the module via
   `import * as params from '@params'`. Registry order is the emission
   order. pageGate names a .Page.Store flag; when set, the plugin is
-  emitted only on pages carrying the flag.
+  emitted only on pages carrying the flag (a missing asset warns
+  regardless of the gate). Fingerprinting runs in every environment:
+  distinct builds of one source (per-language sites, duplicate
+  registrations with different options) must publish distinct paths, or
+  the last write wins site-wide.
 
   Optional companions, by naming convention, both emitted **before** the
   script tag so a synchronous plugin script can rely on them:
@@ -13,20 +18,35 @@
     markup); config-provider patterns belong in the companion too.
   - assets/scss/plugins/NAME.scss: a stylesheet compiled through the SCSS
     pipeline. */ -}}
-{{ range .Site.Params.docsy.plugins -}}
+{{ $registry := slice -}}
+{{ $docsy := .Site.Params.docsy -}}
+{{ if reflect.IsMap $docsy -}}
+  {{ with $docsy.plugins -}}
+    {{ if reflect.IsSlice . -}}
+      {{ $registry = . -}}
+    {{ else -}}
+      {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." . -}}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
+{{ range $registry -}}
   {{ $entry := . -}}
-  {{ if ne $entry.enable false -}}
-    {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
-      {{ $path := printf "js/plugins/%s.js" $entry.name -}}
-      {{ with resources.Get $path -}}
+  {{ if not (reflect.IsMap $entry) -}}
+    {{ $entry = dict "name" (printf "%v" $entry) -}}
+  {{ end -}}
+  {{ if not $entry.name -}}
+    {{ warnidf "docsy-plugin-unnamed" "Ignoring a params.docsy.plugins entry that has no name." -}}
+  {{ else if ne $entry.enable false -}}
+    {{ $path := printf "js/plugins/%s.js" $entry.name -}}
+    {{ with resources.Get $path -}}
+      {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
         {{ with resources.Get (printf "scss/plugins/%s.scss" $entry.name) -}}
           {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
           {{ if hugo.IsProduction -}}
-            {{ $css = $css | minify | fingerprint -}}
-            <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-          {{ else -}}
-            <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+            {{ $css = $css | minify -}}
           {{ end -}}
+          {{ $css = $css | fingerprint -}}
+          <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
         {{ end -}}
         {{ $companion := printf "scripts/plugins/%s.html" $entry.name -}}
         {{ if templates.Exists (printf "_partials/%s" $companion) -}}
@@ -36,16 +56,11 @@
         {{ if hugo.IsProduction -}}
           {{ $opts = merge $opts (dict "minify" true) -}}
         {{ end -}}
-        {{ $js := . | js.Build $opts -}}
-        {{ if hugo.IsProduction -}}
-          {{ $js = $js | fingerprint -}}
-          <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
-        {{ else -}}
-          <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}"></script>
-        {{ end -}}
-      {{ else -}}
-        {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $entry.name $path -}}
+        {{ $js := . | js.Build $opts | fingerprint -}}
+        <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
       {{ end -}}
+    {{ else -}}
+      {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $entry.name $path -}}
     {{ end -}}
   {{ end -}}
 {{ end -}}

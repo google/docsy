@@ -171,6 +171,10 @@ test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', ()
   const html = r.publicFile('index.html');
   const m = html.match(/<link[^>]*href="\/(scss\/plugins\/hello[^"]*\.css)"/);
   assert.ok(m, 'the plugin stylesheet link is emitted');
+  assert.ok(
+    html.indexOf('scss/plugins/hello') < html.indexOf('js/plugins/hello'),
+    'the stylesheet link precedes the plugin script tag',
+  );
   const css = r.publicFile(m[1]);
   assert.match(
     css,
@@ -194,5 +198,134 @@ test('a plugin with no matching asset warns but does not fail the build', () => 
     r.stderr,
     /no-such-plugin/,
     'the missing plugin is called out in a build warning',
+  );
+});
+
+test('a gated missing plugin still warns', () => {
+  // The asset check must be independent of page emission: a config typo
+  // should surface even when no page ever sets the gate flag.
+  const r = buildSite('plugins-gated-missing', {
+    files: content,
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: ghost
+        pageGate: neverSet
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /ghost/,
+    'the missing gated plugin is called out in a build warning',
+  );
+});
+
+test('a site with a scalar params.docsy still builds', () => {
+  // The docsy namespace is new; a site already carrying a scalar there
+  // must keep building, with the registry treated as empty.
+  const r = buildSite('plugins-docsy-scalar', {
+    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+    extraConfig: `params:
+  docsy: legacy-value
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins/,
+    'the page is free of plugin output',
+  );
+});
+
+test('a scalar params.docsy.plugins builds and warns', () => {
+  const r = buildSite('plugins-scalar-registry', {
+    files: content,
+    extraConfig: `params:
+  docsy:
+    plugins: oops
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /must be a list/,
+    'the config shape is called out in a build warning',
+  );
+});
+
+test('a bare-name registry entry is plugin shorthand', () => {
+  const r = buildSite('plugins-shorthand', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins: [hello]
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the shorthand-registered plugin is emitted',
+  );
+});
+
+test('a nameless registry entry is skipped with a warning', () => {
+  const r = buildSite('plugins-nameless', {
+    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - options:
+          greeting: bonjour
+      - name: hello
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /has no name/,
+    'the nameless entry is called out in a build warning',
+  );
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'later well-formed entries still emit',
+  );
+});
+
+test('duplicate registrations publish distinct builds, in development too', () => {
+  // Without per-build fingerprinting, both builds land on the same
+  // js/plugins/hello.js path in development and the last write wins.
+  const r = buildSite('plugins-duplicates', {
+    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+    args: ['--environment', 'development'],
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: hello
+        options:
+          greeting: premiere
+      - name: hello
+        options:
+          greeting: seconde
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('index.html');
+  const srcs = [
+    ...html.matchAll(/<script[^>]*src="\/(js\/plugins\/hello[^"]*\.js)"/g),
+  ].map((m) => m[1]);
+  assert.equal(srcs.length, 2, 'each registration emits its own script tag');
+  assert.notEqual(srcs[0], srcs[1], 'the two builds publish distinct paths');
+  assert.match(
+    r.publicFile(srcs[0]),
+    /premiere/,
+    "the first entry's options reach its build",
+  );
+  assert.match(
+    r.publicFile(srcs[1]),
+    /seconde/,
+    "the second entry's options reach its build",
   );
 });
