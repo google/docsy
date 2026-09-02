@@ -15,7 +15,8 @@
   Optional companions, by naming convention, both emitted **before** the
   script tag so a synchronous plugin script can rely on them:
   - scripts/plugins/NAME.html: a partial (vendored libraries, component
-    markup); config-provider patterns belong in the companion too.
+    markup), invoked with (dict "Page" PAGE "Plugin" ENTRY); config-
+    provider patterns belong in the companion too.
   - assets/scss/plugins/NAME.scss: a stylesheet compiled through the SCSS
     pipeline. */ -}}
 {{ $registry := slice -}}
@@ -32,15 +33,18 @@
 {{ range $registry -}}
   {{ $entry := . -}}
   {{ if not (reflect.IsMap $entry) -}}
-    {{ $entry = dict "name" (printf "%v" $entry) -}}
+    {{ $entry = dict "name" $entry -}}
   {{ end -}}
-  {{ if not $entry.name -}}
+  {{/* Names must be strings: YAML auto-types entries like `name: 2048`. */ -}}
+  {{ $name := "" -}}
+  {{ with $entry.name }}{{ $name = printf "%v" . }}{{ end -}}
+  {{ if not $name -}}
     {{ warnidf "docsy-plugin-unnamed" "Ignoring a params.docsy.plugins entry that has no name." -}}
   {{ else if ne $entry.enable false -}}
-    {{ $path := printf "js/plugins/%s.js" $entry.name -}}
+    {{ $path := printf "js/plugins/%s.js" $name -}}
     {{ with resources.Get $path -}}
       {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
-        {{ with resources.Get (printf "scss/plugins/%s.scss" $entry.name) -}}
+        {{ with resources.Get (printf "scss/plugins/%s.scss" $name) -}}
           {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
           {{ if hugo.IsProduction -}}
             {{ $css = $css | minify -}}
@@ -48,9 +52,9 @@
           {{ $css = $css | fingerprint -}}
           <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
         {{- end -}}
-        {{ $companion := printf "scripts/plugins/%s.html" $entry.name -}}
+        {{ $companion := printf "scripts/plugins/%s.html" $name -}}
         {{ if templates.Exists (printf "_partials/%s" $companion) -}}
-          {{ partial $companion $ -}}
+          {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
         {{ end -}}
         {{ $opts := dict "params" ($entry.options | default dict) -}}
         {{ if hugo.IsProduction -}}
@@ -60,7 +64,7 @@
         <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
       {{- end -}}
     {{ else -}}
-      {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $entry.name $path -}}
+      {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
     {{ end -}}
   {{ end -}}
 {{ end -}}

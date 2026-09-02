@@ -10,6 +10,8 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 import { buildSite } from './lib/build-site.mjs';
 
 const content = {
@@ -48,9 +50,12 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
 
   // quiet.js exists in the plugins dir but has no registry entry.
   assert.doesNotMatch(html, /quiet/, 'the page is free of the unlisted plugin');
-  assert.throws(
-    () => r.publicFile('js/plugins/quiet.js'),
-    'the unlisted plugin output stays unpublished',
+  // Published output is fingerprinted, so a fixed-path read proves nothing:
+  // inspect the published plugin dir itself.
+  const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
+  assert.ok(
+    published.every((f) => !f.startsWith('quiet')),
+    'published plugin output is free of the unlisted plugin',
   );
 });
 
@@ -70,9 +75,9 @@ test('a disabled plugin ships zero bytes', () => {
     /js\/plugins\/hello/,
     "the page is free of the disabled plugin's script tag",
   );
-  assert.throws(
-    () => r.publicFile('js/plugins/hello.js'),
-    'the disabled plugin output stays unpublished',
+  assert.ok(
+    !existsSync(path.join(r.site, 'public', 'js', 'plugins')),
+    'the public tree is free of plugin output',
   );
 });
 
@@ -132,12 +137,15 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
       ...content,
       'assets/js/plugins/hello.js': helloJs,
       'layouts/_partials/scripts/plugins/hello.html':
-        '<div data-hello-companion="{{ .Page.Title }}"></div>\n',
+        '<div data-hello-companion="{{ .Page.Title }}"' +
+        ' data-hello-greeting="{{ .Plugin.options.greeting }}"></div>\n',
     },
     extraConfig: `params:
   docsy:
     plugins:
       - name: hello
+        options:
+          greeting: bonjour
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -146,6 +154,11 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
     html,
     /data-hello-companion="Home"/,
     'the companion partial renders with the page context',
+  );
+  assert.match(
+    html,
+    /data-hello-greeting="bonjour"/,
+    "the companion partial sees the plugin entry's options",
   );
   assert.ok(
     html.indexOf('data-hello-companion') < html.indexOf('js/plugins/hello'),
@@ -267,6 +280,25 @@ test('a bare-name registry entry is plugin shorthand', () => {
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
     'the shorthand-registered plugin is emitted',
+  );
+});
+
+test('a numeric plugin name resolves its asset', () => {
+  // YAML auto-types `name: 2048` to an integer; the loop must treat names
+  // as strings throughout.
+  const r = buildSite('plugins-numeric-name', {
+    files: { ...content, 'assets/js/plugins/2048.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: 2048
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/2048/,
+    'the numeric-named plugin is emitted',
   );
 });
 
