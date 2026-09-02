@@ -634,7 +634,10 @@ If not adjust accordingly.
 
     4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
        `$BASE`; the registry-install test derives the just-published version
-       from the checkout and fails unless the registry serves exactly it:
+       from the checkout and fails unless the registry serves exactly it. The
+       suite never overrides local npm hardening (install guards, a
+       `min-release-age` gate): those surface as loud failures naming the
+       deliberate rerun.
 
        ```sh
        npm run test:smoke

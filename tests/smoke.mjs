@@ -134,12 +134,6 @@ const winShell = process.platform === 'win32';
 // checkouts) would override their pinned themes.
 delete process.env.HUGO_THEME;
 
-// The suite's installs are deliberate: pinned specs into throwaway sites.
-// Pre-authorize them under the npm-guard wrapper of the supply-chain setup
-// (rationale link in the root .npmrc); a no-op where the wrapper isn't
-// installed.
-process.env.NPM_GUARD_ALLOW_BARE_INSTALL = '1';
-
 // Run a command; surface its output only on failure.
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { encoding: 'utf8', ...opts });
@@ -205,6 +199,22 @@ before(() => {
     /extended/,
     'extended Hugo is installed (missing? run `npm run install:safe` at the repo root)',
   );
+  // The suite never overrides local npm security settings; it fails loud and
+  // names the rerun instead. An install-blocking PATH guard (e.g. the
+  // npm-guard shim) would fail every consumer test the same way, so probe
+  // once here: a dry-run install resolves nothing and changes nothing.
+  const probe = run(
+    'npm',
+    ['install', '--dry-run', '--no-audit', '--no-fund'],
+    {
+      cwd: TMP,
+      shell: winShell,
+    },
+  );
+  assert.ok(
+    !(probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')),
+    'npm installs are unblocked (a PATH guard blocks the suite; its installs are pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke)',
+  );
 });
 
 // An npm install of @docsy/theme wires the package bins into
@@ -268,26 +278,20 @@ function buildThemeConsumerSite(name, pkgSpec) {
   progress(`${name}: npm install ${pkgSpec}…`);
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
-  assert.equal(
-    run(
-      'npm',
-      [
-        'install',
-        '--ignore-scripts',
-        '--no-audit',
-        '--no-fund',
-        // The spec is exact (tarball path or pinned version), so a release-age
-        // cooldown adds nothing here; without the override, a gated npm config
-        // ETARGETs a fresh release instead of installing it. A flag, not
-        // NPM_CONFIG_* env: npm ignores the env form in direct spawns.
-        '--min-release-age=0',
-        pkgSpec,
-      ],
-      npmOpts,
-    ).status,
-    0,
-    `${pkgSpec} installs`,
+  const install = run(
+    'npm',
+    ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
+    npmOpts,
   );
+  // A fresh release is younger than a local min-release-age gate; the suite
+  // honors the gate (never overrides it) and instead maps the failure to the
+  // deliberate rerun.
+  if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
+    assert.fail(
+      `${pkgSpec} is blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke`,
+    );
+  }
+  assert.equal(install.status, 0, `${pkgSpec} installs`);
   const installed = JSON.parse(
     readFileSync(
       path.join(site, 'node_modules', '@docsy', 'theme', 'package.json'),
