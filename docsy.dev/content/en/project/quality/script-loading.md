@@ -61,8 +61,8 @@ Two browser nets under `tests/visual/`:
   goldens can't see JS runtime breakage (a missing global, a botched
   conversion); this net can ([#1436][]).
   - Two fixture variants cover both search bundles: the main bundle
-    (`scripts/main-bundle.html`) concatenates `offline-search.js` or
-    `search.js` into `main.js`, never both.
+    (`scripts/main-bundle.html`) concatenates `offline-search.js` or `search.js`
+    into `main.js`, never both.
   - Pages load their real CDN script dependencies, so the net needs network
     access. The console tally filters off-origin and non-code resource noise but
     keeps same-origin script and stylesheet load failures (a broken first-party

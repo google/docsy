@@ -31,8 +31,8 @@ Planned content organization (tentative):
   SCSS/JS customizations, patches, and internal shims.
 - [Build](build/): Tooling, local development setup, CI/CD workflows, deployment
   environments, and automation details.
-- [Quality](quality/): Tests, link checking, accessibility standards, and
-  review practices.
+- [Quality](quality/): Tests, link checking, accessibility standards, and review
+  practices.
 - **Roadmap**: Milestones, backlog, priorities, technical debt, and
   design/implementation decisions.
 
