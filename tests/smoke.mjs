@@ -45,6 +45,9 @@ const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 // resolve the repo's own node_modules and mask a packaging gap. Only Hugo (the
 // build tool, not a dependency under test) is borrowed from the repo install.
 const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
+const THEME_VERSION = JSON.parse(
+  readFileSync(path.join(repoRoot, 'theme', 'package.json'), 'utf8'),
+).version;
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -130,6 +133,12 @@ const winShell = process.platform === 'win32';
 // All sites built here are scratch sites; an inherited HUGO_THEME (worktree
 // checkouts) would override their pinned themes.
 delete process.env.HUGO_THEME;
+
+// The suite's installs are deliberate: pinned specs into throwaway sites.
+// Pre-authorize them under the npm-guard wrapper of the supply-chain setup
+// (rationale link in the root .npmrc); a no-op where the wrapper isn't
+// installed.
+process.env.NPM_GUARD_ALLOW_BARE_INSTALL = '1';
 
 // Run a command; surface its output only on failure.
 function run(cmd, args, opts = {}) {
@@ -262,12 +271,30 @@ function buildThemeConsumerSite(name, pkgSpec) {
   assert.equal(
     run(
       'npm',
-      ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        // The spec is exact (tarball path or pinned version), so a release-age
+        // cooldown adds nothing here; without the override, a gated npm config
+        // ETARGETs a fresh release instead of installing it. A flag, not
+        // NPM_CONFIG_* env: npm ignores the env form in direct spawns.
+        '--min-release-age=0',
+        pkgSpec,
+      ],
       npmOpts,
     ).status,
     0,
     `${pkgSpec} installs`,
   );
+  const installed = JSON.parse(
+    readFileSync(
+      path.join(site, 'node_modules', '@docsy', 'theme', 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  progress(`${name}: installed @docsy/theme@${installed}`);
   installSiteSass(name, npmOpts);
 
   // The one-line consumer config change (@ must be quoted in YAML).
@@ -284,6 +311,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
   assertBuilt(name);
   assertGenFaviconsBin(site);
   progress(`${name}: ok`);
+  return installed;
 }
 
 test('tarball install of @docsy/theme packed from this checkout', () => {
@@ -312,16 +340,45 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   assert.equal(pack.status, 0, 'npm pack exits 0');
   const tgz = readdirSync(packDest).find((f) => f.endsWith('.tgz'));
   assert.ok(tgz, 'npm pack produced a tarball');
-  buildThemeConsumerSite('smoke-tarball', path.join(packDest, tgz));
+  const installed = buildThemeConsumerSite(
+    'smoke-tarball',
+    path.join(packDest, tgz),
+  );
+  // Dev versions pack with a build-ID stamp appended (scripts/pack-stamp.mjs);
+  // releases and RCs pack unchanged.
+  assert.ok(
+    installed === THEME_VERSION || installed.startsWith(`${THEME_VERSION}+`),
+    `packed theme version (${installed}) matches the checkout (${THEME_VERSION})`,
+  );
 });
 
-// DOCSY_THEME_PKG overrides the registry spec: e.g. @docsy/theme@next to vet
-// an RC, or @docsy/theme@0.16.0 to pin a version. The default, the bare name,
-// resolves to the `latest` dist-tag: whatever the registry currently serves
-// plain `npm install @docsy/theme` users.
-const REGISTRY_PKG = process.env.DOCSY_THEME_PKG ?? '@docsy/theme';
+// Registry spec: always an exact pin, derived -- a bare @docsy/theme resolves
+// through the local npm config, where a min-release-age gate silently
+// redirects it to the previous old-enough stable (the 0.17.0 release vet
+// installed 0.16.0). At a release tag the checkout's theme version is the
+// just-published stable: vet exactly it. Between releases (dev-stamped theme)
+// vet what consumers get: the registry's actual `latest`, resolved
+// explicitly. DOCSY_THEME_PKG overrides both: e.g. @docsy/theme@next to vet
+// an RC.
+function registrySpec() {
+  if (process.env.DOCSY_THEME_PKG) return process.env.DOCSY_THEME_PKG;
+  if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION))
+    return `@docsy/theme@${THEME_VERSION}`;
+  const view = run('npm', ['view', '@docsy/theme', 'dist-tags.latest'], {
+    cwd: repoRoot,
+    shell: winShell,
+  });
+  if (view.status !== 0 || !view.stdout.trim())
+    throw new Error('npm view failed to resolve @docsy/theme dist-tags.latest');
+  return `@docsy/theme@${view.stdout.trim()}`;
+}
+const REGISTRY_PKG = registrySpec();
 test(`registry install of ${REGISTRY_PKG}`, () => {
-  buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
+  const installed = buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
+  // Exact except under a dist-tag override (e.g. @next).
+  const pinned = REGISTRY_PKG.match(/@(\d+\.\d+\.\d+[^@]*)$/)?.[1];
+  if (pinned)
+    assert.equal(installed, pinned, 'installed theme version matches the pin');
 });
 
 // --- declared minimum Hugo version actually builds --------------------------

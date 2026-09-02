@@ -633,12 +633,11 @@ If not adjust accordingly.
        ```
 
     4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
-       `$BASE`, pinning the release -- a bare install
-       [resolves past a too-young release](/docs/update/npm-package/) and would
-       silently smoke-test the previous stable:
+       `$BASE`; the registry-install test derives the just-published version
+       from the checkout and fails unless the registry serves exactly it:
 
        ```sh
-       DOCSY_THEME_PKG=@docsy/theme@${REL#v} NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke
+       npm run test:smoke
        ```
 
     Exceptions to the CI flow:
