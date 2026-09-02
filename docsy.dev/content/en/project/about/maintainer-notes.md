@@ -633,11 +633,15 @@ If not adjust accordingly.
        ```
 
     4. **Vet the published artifact** by running the [smoke tests](#test-suites)
-       from `main` at the tag: with `latest` now on the new release, the suite's
-       registry-install test builds a site from the published package:
+       from `main` at the tag: the suite's registry-install test builds a site
+       from the published package. Pin the release explicitly: under npm's
+       `min-release-age`, the suite's default bare `@docsy/theme` install
+       silently resolves to the newest old-enough release, smoke-testing the
+       previous stable (this bit the 0.17.0 run); the exact pin fails visibly
+       instead, so pair it with a one-off age override:
 
        ```sh
-       npm run test:smoke
+       DOCSY_THEME_PKG=@docsy/theme@${REL#v} NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke
        ```
 
     Exceptions to the CI flow:
