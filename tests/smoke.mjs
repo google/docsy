@@ -48,6 +48,9 @@ const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
 const THEME_VERSION = JSON.parse(
   readFileSync(path.join(repoRoot, 'theme', 'package.json'), 'utf8'),
 ).version;
+const SASS_VERSION = JSON.parse(
+  readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
+).devDependencies['sass-embedded'];
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -67,9 +70,11 @@ function consumerEnv(site) {
 }
 
 // The documented consumer action for the dartsass transpiler: the site
-// provides its own sass compiler (Install Dart Sass, prerequisites doc).
+// provides its own sass compiler (Install Dart Sass, prerequisites doc) --
+// at the repo's tested pin, so a fresh upstream sass release can't perturb
+// the suite.
 function installSiteSass(label, npmOpts) {
-  progress(`${label}: npm install sass-embedded…`);
+  progress(`${label}: npm install sass-embedded@${SASS_VERSION}…`);
   assert.equal(
     run(
       'npm',
@@ -79,7 +84,7 @@ function installSiteSass(label, npmOpts) {
         '--no-audit',
         '--no-fund',
         '--save-dev',
-        'sass-embedded',
+        `sass-embedded@${SASS_VERSION}`,
       ],
       npmOpts,
     ).status,
