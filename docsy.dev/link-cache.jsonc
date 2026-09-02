@@ -1,7 +1,7 @@
 {
   "https://about.gitlab.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://afdocs.dev/": {
@@ -31,7 +31,7 @@
   },
   "https://analytics.google.com/analytics/web/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://app.netlify.com/sites/docsydocs/deploys": {
@@ -61,7 +61,7 @@
   },
   "https://bitbucket.org/product": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://blog.cavelab.dev/2021/10/hugo-aliases-to-s3-redirects/": {
@@ -71,22 +71,22 @@
   },
   "https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://blog.getbootstrap.com/2023/05/30/bootstrap-5-3-0/#custom-color-modes": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://buildwithfern.com/agent-score/company/opentelemetry": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://capgemini.github.io/development/Using-GitHub-Actions-and-Hugo-Deploy-to-Deploy-to-AWS/": {
@@ -96,12 +96,7 @@
   },
   "https://cla.developers.google.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
-    "via": "lychee",
-  },
-  "https://cloud-native.slack.com/archives/CUJ6W5TLM": {
-    "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://cncf-docsy-starter.netlify.app/": {
@@ -121,7 +116,7 @@
   },
   "https://cse.google.com/cse/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://cse.google.com/cse/all": {
@@ -141,27 +136,27 @@
   },
   "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/rootMargin": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink#values": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/position#values": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel": {
@@ -176,7 +171,7 @@
   },
   "https://developers.google.com/search/docs/fundamentals/seo-starter-guide": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://developers.google.com/style/": {
@@ -191,7 +186,7 @@
   },
   "https://developers.google.com/style/tense": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://diagrams.net/": {
@@ -201,12 +196,12 @@
   },
   "https://discourse.gohugo.io/t/can-hugo-include-shortcode-headings-in-toc/51940": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://discourse.gohugo.io/t/config-is-services-googleanalytics-id-an-alias-for-googleanalytics/39469": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://discourse.gohugo.io/t/hugo-building-slowly-from-release-0-128-0/57314/21": {
@@ -216,7 +211,7 @@
   },
   "https://discourse.gohugo.io/t/hugo-v0-112-0-new-template-functions/44512": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://discourse.gohugo.io/t/markdown-attributes/41783": {
@@ -226,17 +221,17 @@
   },
   "https://discourse.gohugo.io/t/tableofcontents-doesnt-render-headings-correctly-that-contains-shortcode/55399": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://discourse.gohugo.io/t/what-does-setting-hugo-env-to-production-do/24669/2": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://discourse.gohugo.io/t/why-does-glob-negation-require-a-space-after/56651": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://doc-rooted--docsydocs.netlify.app/": {
@@ -277,11 +272,6 @@
   "https://docs.docker.com/engine/reference/builder/": {
     "status": 200,
     "when": "2026-06-27T12:29:28Z",
-    "via": "lychee",
-  },
-  "https://docs.docker.com/get-docker/": {
-    "status": 200,
-    "when": "2026-06-26T18:23:46Z",
     "via": "lychee",
   },
   "https://docs.fontawesome.com/upgrade/scss": {
@@ -326,7 +316,7 @@
   },
   "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template": {
@@ -421,17 +411,17 @@
   },
   "https://en.wikipedia.org/wiki/Breadcrumb_navigation": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://en.wikipedia.org/wiki/Don%27t_repeat_yourself": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://en.wikipedia.org/wiki/Flash_of_unstyled_content": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://en.wikipedia.org/wiki/Wordmark": {
@@ -441,7 +431,7 @@
   },
   "https://endoflife.date/bootstrap": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://etcd.io/": {
@@ -466,12 +456,12 @@
   },
   "https://fabform.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://favicon.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://fission.io/": {
@@ -496,7 +486,7 @@
   },
   "https://fontawesome.com/icons/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://fontawesome.com/icons?d=gallery&m=free": {
@@ -506,7 +496,7 @@
   },
   "https://fontawesome.com/icons?d=gallery&p=2": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://fonts.google.com/specimen/Open+Sans": {
@@ -521,7 +511,7 @@
   },
   "https://getbootstrap.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/": {
@@ -536,17 +526,17 @@
   },
   "https://getbootstrap.com/docs/5.2/customize/sass/": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/layout/breakpoints": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/": {
@@ -556,37 +546,37 @@
   },
   "https://getbootstrap.com/docs/5.2/migration/#forms": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#grid-updates": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#javascript": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#new-_mapsscss": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#rtl": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#sass": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.2/migration/#utilities": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.3/components/alerts/": {
@@ -601,7 +591,7 @@
   },
   "https://getbootstrap.com/docs/5.3/components/scrollspy/#options": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.3/content/reboot/#native-font-stack": {
@@ -621,7 +611,7 @@
   },
   "https://getbootstrap.com/docs/5.3/customize/color-modes/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.3/customize/color-modes/#adding-theme-colors": {
@@ -636,7 +626,7 @@
   },
   "https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://getbootstrap.com/docs/5.3/customize/color/": {
@@ -716,7 +706,7 @@
   },
   "https://github.com/LisaFC": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/Redocly/redoc": {
@@ -761,7 +751,7 @@
   },
   "https://github.com/chalin": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/chalin/docsy-starter": {
@@ -826,7 +816,7 @@
   },
   "https://github.com/gohugoio/hugo/issues/14361": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/issues/8299": {
@@ -836,7 +826,7 @@
   },
   "https://github.com/gohugoio/hugo/pull/14363": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases": {
@@ -861,27 +851,27 @@
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.152.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.153.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.154.4": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.155.3": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.157.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.158.0": {
@@ -926,7 +916,7 @@
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.163.2": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugo/releases/tag/v0.163.3": {
@@ -971,7 +961,7 @@
   },
   "https://github.com/google/docsy-example/issues/285": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy-example/pull/220": {
@@ -986,12 +976,12 @@
   },
   "https://github.com/google/docsy-example/releases/new": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy-example/tree/main/content/en": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy-example/tree/main/content/en/blog": {
@@ -1031,12 +1021,12 @@
   },
   "https://github.com/google/docsy/blob/main/docsy.dev/config/": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/docsy.dev/config/_default/hugo.yaml": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/docsy.dev/content/en/_index.md?plain=1": {
@@ -1064,11 +1054,6 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
-  "https://github.com/google/docsy/blob/main/docsy.dev/scripts/install-hugo.sh": {
-    "status": 200,
-    "when": "2026-06-26T18:23:49Z",
-    "via": "lychee",
-  },
   "https://github.com/google/docsy/blob/main/package.json": {
     "status": 200,
     "when": "2026-06-27T12:29:29Z",
@@ -1081,12 +1066,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/assets/js/base.js?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/assets/js/search.js": {
@@ -1156,12 +1141,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/go.mod": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/hugo.yaml": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/i18n/en.yaml": {
@@ -1171,12 +1156,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_markup/render-blockquote-alert.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/favicons.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/head.html": {
@@ -1191,12 +1176,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/navbar.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/page-description.html": {
@@ -1221,12 +1206,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/sidebar-tree.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/sidebar.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/td/render-heading.html": {
@@ -1246,37 +1231,37 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_shortcodes/blocks/cover.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_shortcodes/blocks/lead.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_shortcodes/blocks/section.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_shortcodes/pageinfo.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_shortcodes/td/site-build-info/netlify.md?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_td-content-after-header.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/all.md": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/baseof.html": {
@@ -1291,12 +1276,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/blog/baseof.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/community/list.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html": {
@@ -1306,12 +1291,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/docs/baseof.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/swagger/baseof.html?plain=1": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/package.json": {
@@ -1321,12 +1306,12 @@
   },
   "https://github.com/google/docsy/blob/main/theme/theme.toml": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/v0.15.0/layouts/_shortcodes/card.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/v0.7.0/assets/scss/main.scss": {
@@ -1381,7 +1366,7 @@
   },
   "https://github.com/google/docsy/discussions/1308": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/discussions/1555": {
@@ -1416,7 +1401,7 @@
   },
   "https://github.com/google/docsy/issues": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1120": {
@@ -1426,17 +1411,17 @@
   },
   "https://github.com/google/docsy/issues/1154": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1185": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1369": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/138": {
@@ -1446,17 +1431,17 @@
   },
   "https://github.com/google/docsy/issues/1385": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1436": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1442": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1460": {
@@ -1471,7 +1456,7 @@
   },
   "https://github.com/google/docsy/issues/1472": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1510": {
@@ -1486,22 +1471,22 @@
   },
   "https://github.com/google/docsy/issues/1560": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1579": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1641": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1654": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1759": {
@@ -1511,12 +1496,12 @@
   },
   "https://github.com/google/docsy/issues/1787": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1788": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1812": {
@@ -1536,7 +1521,7 @@
   },
   "https://github.com/google/docsy/issues/1841": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/1845": {
@@ -1561,17 +1546,17 @@
   },
   "https://github.com/google/docsy/issues/2": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2001": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2035": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2047": {
@@ -1586,7 +1571,7 @@
   },
   "https://github.com/google/docsy/issues/2115": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2116": {
@@ -1601,17 +1586,17 @@
   },
   "https://github.com/google/docsy/issues/2173": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2243": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2266": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2279": {
@@ -1621,17 +1606,17 @@
   },
   "https://github.com/google/docsy/issues/2285": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2289": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2313": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2314": {
@@ -1641,7 +1626,7 @@
   },
   "https://github.com/google/docsy/issues/2328": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2329": {
@@ -1651,17 +1636,17 @@
   },
   "https://github.com/google/docsy/issues/2331": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2332": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2347": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2357": {
@@ -1671,32 +1656,32 @@
   },
   "https://github.com/google/docsy/issues/2390": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2404": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2413": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2431": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2433": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2501": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2561": {
@@ -1711,27 +1696,27 @@
   },
   "https://github.com/google/docsy/issues/2593": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2595": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2614": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2615": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2617": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/2659": {
@@ -1801,17 +1786,17 @@
   },
   "https://github.com/google/docsy/issues/349": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/375": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/470": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/726": {
@@ -1821,7 +1806,7 @@
   },
   "https://github.com/google/docsy/issues/906": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/921": {
@@ -1831,7 +1816,7 @@
   },
   "https://github.com/google/docsy/issues/939": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new": {
@@ -1846,7 +1831,7 @@
   },
   "https://github.com/google/docsy/issues/new?title=AI-agent%20support": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=About%20the%20project": {
@@ -1911,12 +1896,12 @@
   },
   "https://github.com/google/docsy/issues/new?title=Content%20and%20Customization": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=Contribution%20guidelines": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=Create%20a%20new%20site:%20Start%20a%20new%20site%20from%20scratch": {
@@ -2051,7 +2036,7 @@
   },
   "https://github.com/google/docsy/issues/new?title=Logos%20and%20Images": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=Look%20and%20Feel": {
@@ -2086,7 +2071,7 @@
   },
   "https://github.com/google/docsy/issues/new?title=No%20left%20sidebar": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=Organizing%20Your%20Content": {
@@ -2241,17 +2226,17 @@
   },
   "https://github.com/google/docsy/issues/new?title=Welcome%20to%20Docsy": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=blocks/cover": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues?q=is%3Aissue%20state%3Aclosed%20sort%3Areactions-%2B1-desc%20closed%3A2025-01-01..2025-12-31": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/milestone/2": {
@@ -2276,7 +2261,7 @@
   },
   "https://github.com/google/docsy/pull/1009": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1367": {
@@ -2296,7 +2281,7 @@
   },
   "https://github.com/google/docsy/pull/1410": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1462": {
@@ -2321,7 +2306,7 @@
   },
   "https://github.com/google/docsy/pull/1523": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1566": {
@@ -2331,32 +2316,32 @@
   },
   "https://github.com/google/docsy/pull/1651": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1661": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1662": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1726": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1727": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1744": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1815": {
@@ -2371,7 +2356,7 @@
   },
   "https://github.com/google/docsy/pull/1818": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1896": {
@@ -2401,52 +2386,52 @@
   },
   "https://github.com/google/docsy/pull/1933": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/1952": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2082": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2160": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2192": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2223": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2243": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2257": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2259": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2276": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2291": {
@@ -2456,7 +2441,7 @@
   },
   "https://github.com/google/docsy/pull/2303": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2331": {
@@ -2476,27 +2461,27 @@
   },
   "https://github.com/google/docsy/pull/2364": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2366": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2371": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2376": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2379": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2382": {
@@ -2511,47 +2496,47 @@
   },
   "https://github.com/google/docsy/pull/2384": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2387": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2394": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2395": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2405": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2406": {
     "status": 200,
-    "when": "2026-06-26T18:23:44Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2443": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2444": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2447": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2451": {
@@ -2561,7 +2546,7 @@
   },
   "https://github.com/google/docsy/pull/2470": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:05Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2477": {
@@ -2571,7 +2556,7 @@
   },
   "https://github.com/google/docsy/pull/2480": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2482": {
@@ -2581,17 +2566,17 @@
   },
   "https://github.com/google/docsy/pull/2505/changes": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2524": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2533": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2538": {
@@ -2616,7 +2601,7 @@
   },
   "https://github.com/google/docsy/pull/2549": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2557": {
@@ -2631,17 +2616,17 @@
   },
   "https://github.com/google/docsy/pull/2565": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2569": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2576": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2578": {
@@ -2651,12 +2636,12 @@
   },
   "https://github.com/google/docsy/pull/2580": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2583": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2586": {
@@ -2671,7 +2656,7 @@
   },
   "https://github.com/google/docsy/pull/2591": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2594": {
@@ -2691,17 +2676,17 @@
   },
   "https://github.com/google/docsy/pull/2602": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2603": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2604": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2605": {
@@ -2757,16 +2742,6 @@
   "https://github.com/google/docsy/pull/2658": {
     "status": 200,
     "when": "2026-06-27T12:29:31Z",
-    "via": "lychee",
-  },
-  "https://github.com/google/docsy/pull/2660": {
-    "status": 200,
-    "when": "2026-06-26T18:23:51Z",
-    "via": "lychee",
-  },
-  "https://github.com/google/docsy/pull/2662": {
-    "status": 200,
-    "when": "2026-06-26T18:23:51Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2664": {
@@ -2866,7 +2841,7 @@
   },
   "https://github.com/google/docsy/pull/941": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:06Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pulls": {
@@ -2901,7 +2876,7 @@
   },
   "https://github.com/google/docsy/releases/new": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/tag/v0.10.0": {
@@ -2911,7 +2886,7 @@
   },
   "https://github.com/google/docsy/releases/tag/v0.11.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:55Z",
+    "when": "2026-09-02T08:07:17Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/tag/v0.16.0": {
@@ -2943,42 +2918,42 @@
   },
   "https://github.com/google/docsy/releases/v0.10.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.11.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.12.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:45Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.13.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:43Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.2": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.14.3": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.15.0": {
@@ -2998,57 +2973,57 @@
   },
   "https://github.com/google/docsy/releases/v0.2.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.3.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.4.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.5.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.6.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.7.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.7.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.7.2": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.8.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:08Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.9.0": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/releases/v0.9.1": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:07Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/tags": {
@@ -3058,12 +3033,12 @@
   },
   "https://github.com/google/docsy/tree/deploy/prod": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/tree/doc-rooted": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/tree/main/AGENTS.md": {
@@ -3133,7 +3108,7 @@
   },
   "https://github.com/google/docsy/tree/v0.15.0/layouts/_partials": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/googleforgames/agones/tree/main/site": {
@@ -3173,7 +3148,7 @@
   },
   "https://github.com/jakejarvis/hugo-extended/issues/183": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/jakejarvis/hugo-extended/releases": {
@@ -3193,7 +3168,7 @@
   },
   "https://github.com/jmooring/hvm": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/kentcdodds/cross-env/issues/257": {
@@ -3288,7 +3263,7 @@
   },
   "https://github.com/open-telemetry/opentelemetry.io/blob/main/scripts/docsy-alerts-to-md/convert.pl": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://github.com/open-telemetry/opentelemetry.io/issues/2419": {
@@ -3318,12 +3293,12 @@
   },
   "https://github.com/open-telemetry/opentelemetry.io/pull/8850": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/open-telemetry/opentelemetry.io/pull/9070": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:15Z",
     "via": "lychee",
   },
   "https://github.com/orgs/twbs/discussions/37951": {
@@ -3388,7 +3363,7 @@
   },
   "https://github.com/theupdateframework/theupdateframework.io/pull/126": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
   "https://github.com/twbs/bootstrap/blob/v5.2.3/scss/_functions.scss": {
@@ -3433,17 +3408,17 @@
   },
   "https://github.com/twbs/bootstrap/releases/tag/v4.6.2": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://github.com/vsoch": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/vsoch/docsy-jekyll": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://github.com/yuin/goldmark": {
@@ -3468,7 +3443,7 @@
   },
   "https://gitprotect.io/blog/how-to-use-github-repository-templates/": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://go.dev/": {
@@ -3488,7 +3463,7 @@
   },
   "https://gohugo.io/about/features/#multidimensional-content-model": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://gohugo.io/commands/hugo_deploy": {
@@ -3543,7 +3518,7 @@
   },
   "https://gohugo.io/configuration/module/#files": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://gohugo.io/configuration/module/#top-level-settings": {
@@ -3553,12 +3528,12 @@
   },
   "https://gohugo.io/configuration/output-formats/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/configuration/outputs/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://gohugo.io/configuration/params/#multilingual-projects": {
@@ -3568,7 +3543,7 @@
   },
   "https://gohugo.io/configuration/permalinks/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/content-management/formats/": {
@@ -3683,12 +3658,12 @@
   },
   "https://gohugo.io/documentation/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/css/sass/#dart-sass": {
@@ -3708,12 +3683,12 @@
   },
   "https://gohugo.io/functions/resources/fingerprint/": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/transform/markdownify/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/transform/tomath/": {
@@ -3813,12 +3788,12 @@
   },
   "https://gohugo.io/methods/page/outputformats/#canonical": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://gohugo.io/methods/page/renderstring/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/methods/page/tableofcontents/": {
@@ -3828,7 +3803,7 @@
   },
   "https://gohugo.io/methods/site/copyright/": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/methods/site/params/": {
@@ -3848,17 +3823,17 @@
   },
   "https://gohugo.io/quick-reference/glossary/#fragment": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#partial-decorator": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#sites-matrix": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/render-hooks/blockquotes/#alerts": {
@@ -3913,12 +3888,12 @@
   },
   "https://gohugo.io/templates/render-hooks/": {
     "status": 200,
-    "when": "2026-06-26T18:23:51Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/templates/shortcode/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/templates/sitemap-template/": {
@@ -3928,7 +3903,7 @@
   },
   "https://gohugo.io/templates/types/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://gohugo.io/themes/": {
@@ -3948,12 +3923,12 @@
   },
   "https://help.github.com/articles/about-pull-requests/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://imagemagick.org/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://img.shields.io/npm/v/%40docsy%2Ftheme": {
@@ -3963,7 +3938,7 @@
   },
   "https://in-toto.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://jquery.com/": {
@@ -3988,17 +3963,17 @@
   },
   "https://kubernetes.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:02Z",
     "via": "lychee",
   },
   "https://llmstxt.org/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://lunrjs.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/": {
@@ -4008,17 +3983,17 @@
   },
   "https://main--docsydocs.netlify.app/404.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/about/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/blog/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/blog/2022/hello/": {
@@ -4125,7 +4100,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/best-practices/": {
@@ -4145,7 +4120,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/content/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/adding-content/": {
@@ -4155,7 +4130,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/content/agent-support/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
@@ -4170,7 +4145,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/content/iconsimages/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/lookandfeel/": {
@@ -4185,12 +4160,12 @@
   },
   "https://main--docsydocs.netlify.app/docs/content/print/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/repository-links/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/search/": {
@@ -4215,7 +4190,7 @@
   },
   "https://main--docsydocs.netlify.app/docs/contributing/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/deployment/": {
@@ -4335,7 +4310,7 @@
   },
   "https://main--docsydocs.netlify.app/project/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/project/about/": {
@@ -4445,22 +4420,22 @@
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/color-gradient/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-auto/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-full/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/blocks-cover/height-min/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/tests/layouts/": {
@@ -4485,17 +4460,17 @@
   },
   "https://martinfowler.com/bliki/TechnicalDebt.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:48Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://mentorship.lfx.linuxfoundation.org/project/34314eb1-0fc3-4802-ab04-2265418c2e48": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://mentorship.lfx.linuxfoundation.org/project/e35f28f9-f333-47a8-a76a-119567cf10ca": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://mermaid-js.github.io/": {
@@ -4555,17 +4530,17 @@
   },
   "https://opensource.google.com/conduct/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://opentelemetry.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://opentelemetry.io/ecosystem/registry/": {
     "status": 200,
-    "when": "2026-06-26T18:23:52Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://osv.dev/list?ecosystem=npm": {
@@ -4580,7 +4555,7 @@
   },
   "https://pages.github.com/themes/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://parquet.apache.org/": {
@@ -4640,7 +4615,7 @@
   },
   "https://realfavicongenerator.net/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://registry.npmjs.org/": {
@@ -4655,7 +4630,7 @@
   },
   "https://rtlcss.com/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://sass-lang.com/dart-sass/": {
@@ -4665,7 +4640,7 @@
   },
   "https://sass-lang.com/documentation/at-rules/import": {
     "status": 200,
-    "when": "2026-06-26T18:23:53Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html": {
@@ -4725,12 +4700,12 @@
   },
   "https://themes.gohugo.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://theupdateframework.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://unpkg.com/swagger-ui-dist@5.32.14/swagger-ui.css": {
@@ -4745,17 +4720,17 @@
   },
   "https://web.archive.org/web/20251116052945/https://docs.fontawesome.com/v6/web/setup/upgrade/whats-changed": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://web.archive.org/web/20251117042118/https://docs.fontawesome.com/v6/web/setup/upgrade": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:04Z",
     "via": "lychee",
   },
   "https://web.archive.org/web/20260216125700/https://www.docsy.dev/docs/content/adding-content/#alternative-site-structure": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://web.dev/learn/pwa/architecture/": {
@@ -4780,37 +4755,37 @@
   },
   "https://www.cncf.io/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://www.cncf.io/blog/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.cncf.io/blog/2023/01/19/fast-and-effective-tools-for-cncf-and-open-source-project-websites/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://www.cncf.io/blog/2023/06/05/migrating-docsy-to-bootstrap-5/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.cncf.io/blog/2024/07/11/as-we-reach-mid-year-2024-a-look-at-cncf-linux-foundation-and-top-30-open-source-project-velocity/": {
     "status": 200,
-    "when": "2026-06-26T18:23:49Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://www.cncf.io/blog/2024/09/27/congratulations-to-45-cncf-term-1-2024-lfx-program-mentees/": {
     "status": 200,
-    "when": "2026-06-26T18:23:50Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://www.cncf.io/projects/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.ctan.org/pkg/mhchem": {
@@ -4830,17 +4805,17 @@
   },
   "https://www.docsy.dev/404.html": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/about/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/blog/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/blog/2022/hello/": {
@@ -4932,7 +4907,7 @@
   },
   "https://www.docsy.dev/docs/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:09Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/best-practices/": {
@@ -4952,7 +4927,7 @@
   },
   "https://www.docsy.dev/docs/content/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/adding-content/": {
@@ -4962,7 +4937,7 @@
   },
   "https://www.docsy.dev/docs/content/agent-support/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
@@ -4977,7 +4952,7 @@
   },
   "https://www.docsy.dev/docs/content/iconsimages/": {
     "status": 200,
-    "when": "2026-06-26T18:23:47Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/lookandfeel/": {
@@ -4992,12 +4967,12 @@
   },
   "https://www.docsy.dev/docs/content/print/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/repository-links/": {
     "status": 200,
-    "when": "2026-06-26T18:23:54Z",
+    "when": "2026-09-02T08:07:12Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/search/": {
@@ -5147,7 +5122,7 @@
   },
   "https://www.docsy.dev/project/": {
     "status": 200,
-    "when": "2026-06-26T18:23:42Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/project/about/": {
@@ -5262,7 +5237,7 @@
   },
   "https://www.docsy.dev/tests/blocks-cover/color-gradient/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/tests/blocks-cover/height-auto/": {
@@ -5272,7 +5247,7 @@
   },
   "https://www.docsy.dev/tests/blocks-cover/height-full/": {
     "status": 200,
-    "when": "2026-06-26T18:23:46Z",
+    "when": "2026-09-02T08:07:03Z",
     "via": "lychee",
   },
   "https://www.docsy.dev/tests/blocks-cover/height-min/": {
