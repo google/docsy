@@ -47,9 +47,9 @@ shadowing gets its pin when the first theme plugin ships.
 ## Acceptance test
 
 [`plugins-acceptance.test.mjs`][acceptance-test] proves adoption end to end: a
-project site drops `assets/js/plugins/hello.js` plus one registry entry and
-gets its script loaded, with zero layout overrides asserted structurally (the
-fixture contains no `layouts/` directory).
+project site drops `assets/js/plugins/hello.js` plus one registry entry and gets
+its script loaded, with zero layout overrides asserted structurally (the fixture
+contains no `layouts/` directory).
 
 ## Runtime nets
 
@@ -63,10 +63,10 @@ Two browser nets under `tests/visual/`:
   - Two fixture variants cover both search bundles: `scripts.html` ships
     `offline-search.js` or `search.js`, never both.
   - Pages load their real CDN script dependencies, so the net needs network
-    access. The console tally filters off-origin and non-code resource noise
-    but keeps same-origin script and stylesheet load failures (a broken
-    first-party bundle is a defect), and any JS breakage the filtered noise
-    causes still surfaces as a page error.
+    access. The console tally filters off-origin and non-code resource noise but
+    keeps same-origin script and stylesheet load failures (a broken first-party
+    bundle is a defect), and any JS breakage the filtered noise causes still
+    surfaces as a page error.
 - [`plugins-runtime.test.mjs`][plugin-runtime-test] proves an emitted plugin
   actually executes: its options reach the runtime and its DOM effects land. A
   static-markup check can bless output whose runtime is broken (wrong script
@@ -75,16 +75,16 @@ Two browser nets under `tests/visual/`:
 ## Red-proof rationale
 
 A net that passes for the wrong reason (building nothing, matching an empty
-region) is worse than a red one: it hides breakage behind green. Each net
-proves its signal:
+region) is worse than a red one: it hides breakage behind green. Each net proves
+its signal:
 
 - Every net was made to fail against a deliberately broken input before being
   trusted.
 - Zero-output cases are asserted against: a golden's script region must be
   non-empty.
 - The plugin runtime net's red-proof doubles as an assertion: a deliberately
-  broken plugin must be the error tally's only entry, so an empty tally from
-  the healthy plugin is meaningful.
+  broken plugin must be the error tally's only entry, so an empty tally from the
+  healthy plugin is meaningful.
 - The site runtime net carries a collector self-test: a page that deliberately
   throws must be reported, so a silent collector (wrong event names, races)
   can't masquerade as all-green.

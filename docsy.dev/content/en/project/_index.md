@@ -1,7 +1,8 @@
 ---
 title: Project and website documentation
 linkTitle: Project docs
-description: Architecture and maintainer workflows for the Docsy theme and website
+description:
+  Architecture and maintainer workflows for the Docsy theme and website
 aliases: [site]
 cascade:
   type: docs

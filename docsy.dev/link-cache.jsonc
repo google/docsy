@@ -1069,6 +1069,11 @@
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T20:03:23Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs": {
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
@@ -1087,6 +1092,11 @@
   "https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs": {
     "status": 200,
     "when": "2026-09-02T19:09:15Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T20:03:23Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/": {

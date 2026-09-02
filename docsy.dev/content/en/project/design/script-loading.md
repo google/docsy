@@ -39,8 +39,7 @@ The decomposition has two design consequences:
   system, so a site can replace one mechanism by shadowing one file instead of
   copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where built-in integrations convert onto the loop
-  ([#2789][]).
+  plugged in, and where built-in integrations convert onto the loop ([#2789][]).
 
 ### Override points
 
@@ -58,8 +57,8 @@ The decomposition has two design consequences:
 [`scripts/plugins.html`][plugins.html] emits each plugin registered in
 `params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
 pattern, so any plugin can ship only on the pages that use its feature. For the
-registry contract, shape guards, and build details, see the
-[implementation notes][impl].
+registry contract, shape guards, and build details, see the [implementation
+notes][impl].
 
 Two ordering decisions:
 
