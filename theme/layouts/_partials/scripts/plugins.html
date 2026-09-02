@@ -16,7 +16,7 @@
   {{ if not (reflect.IsMap $entry) -}}
     {{ $entry = dict "name" $entry -}}
   {{ end -}}
-  {{/* Names must be strings: YAML auto-types entries like `name: 2048`. */ -}}
+  {{/* Names must be strings (YAML auto-types bare values). */ -}}
   {{ $name := "" -}}
   {{ with $entry.name }}{{ $name = printf "%v" . }}{{ end -}}
   {{ if not $name -}}

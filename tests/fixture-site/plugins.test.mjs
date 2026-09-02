@@ -1,5 +1,7 @@
-// Loop-contract tests for params.docsy.plugins:
+// Loop-contract tests for params.docsy.plugins. Contract:
 // https://www.docsy.dev/project/implementation/script-loading/
+// Net inventory and rationale:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

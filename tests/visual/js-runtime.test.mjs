@@ -131,10 +131,7 @@ after(async () => {
 });
 
 // Load a page and collect JS failures: uncaught exceptions (pageerror)
-// and console-level errors. Resource-load failures are kept only for
-// same-origin scripts and stylesheets (a broken first-party bundle is a
-// defect); off-origin (CDN) and non-code resource noise is filtered, and
-// any JS breakage such noise causes still surfaces as a pageerror.
+// and console-level errors, filtered per the quality page (file header).
 // Bounded window: errors scheduled well after the settle delay are out of
 // scope here; interaction probes carry their own collectors.
 async function collectPageErrors(url) {

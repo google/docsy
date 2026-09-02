@@ -60,8 +60,9 @@ Two browser nets under `tests/visual/`:
   alongside behavior probes (search, diagrams, navbar). Markup and visual
   goldens can't see JS runtime breakage (a missing global, a botched
   conversion); this net can ([#1436][]).
-  - Two fixture variants cover both search bundles: `scripts.html` ships
-    `offline-search.js` or `search.js`, never both.
+  - Two fixture variants cover both search bundles: the main bundle
+    (`scripts/main-bundle.html`) concatenates `offline-search.js` or
+    `search.js` into `main.js`, never both.
   - Pages load their real CDN script dependencies, so the net needs network
     access. The console tally filters off-origin and non-code resource noise but
     keeps same-origin script and stylesheet load failures (a broken first-party
@@ -86,8 +87,9 @@ its signal:
   broken plugin must be the error tally's only entry, so an empty tally from the
   healthy plugin is meaningful.
 - The site runtime net carries a collector self-test: a page that deliberately
-  throws must be reported, so a silent collector (wrong event names, races)
-  can't masquerade as all-green.
+  throws and drops a same-origin script must have both reported, so a silent
+  collector (wrong event names, races, a broken filter) can't masquerade as
+  all-green.
 
 [#1436]: https://github.com/google/docsy/issues/1436
 [acceptance-test]:

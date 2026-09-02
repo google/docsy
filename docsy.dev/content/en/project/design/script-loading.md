@@ -28,22 +28,22 @@ default rendered output:
   build time while the browser imports the module straight from the CDN.
 
 The dispatcher preserves each mechanism's original gating: site params (MarkMap,
-PlantUML), `.Page.Store` flags (Mermaid, KaTeX), and search configuration
-(Algolia).
+PlantUML, Prism vs click-to-copy), `.Page.Store` flags (Mermaid, KaTeX), and
+search configuration (Algolia).
 
 ## The dispatcher as a seam
 
 The decomposition has two design consequences:
 
 - **Independent overrides**: each sub-partial resolves through Hugo's union file
-  system, so a site can replace one mechanism by shadowing one file instead of
-  copying all of `scripts.html`.
+  system, so a site can replace one feature's emission by shadowing its
+  sub-partial instead of copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
   plugged in, and where built-in integrations convert onto the loop ([#2789][]).
 
 ### Override points
 
-- Every sub-partial under `_partials/scripts/`.
+- Every sub-partial the dispatcher routes to under `_partials/scripts/`.
 - `_partials/algolia/head.html` and `_partials/scripts/algolia.html`: real
   partials as of 0.18. They were previously inline `define`s whose documented
   override paths did not work; the internal template names `algolia/head` and
@@ -66,9 +66,10 @@ Two ordering decisions:
   emit before its script tag, so a synchronous plugin script can rely on
   companion markup and styles being present.
 - **Body-end CSS, an interim placement**: the companion stylesheet's `<link>` is
-  emitted where the loop runs (at the end of `<body>`), not in `<head>`. This
-  keeps the plugin unit self-contained in the loop; moving companion CSS into
-  the head is a possible later refinement.
+  emitted where the loop runs (at the end of `<body>`), not in `<head>`, because
+  `pageGate` reads `.Page.Store` flags that are only reliable after content
+  render. Moving companion CSS into the head is a possible later refinement, and
+  has to solve that constraint or gated CSS silently drops ([#2789][]).
 
 ## Related pages
 
