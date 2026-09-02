@@ -21,8 +21,8 @@ rendered output:
 - **The main bundle**: Bootstrap and the theme's core scripts, concatenated into
   `main.js` (`scripts/main-bundle.html`), minified and fingerprinted in
   production.
-- **Individually processed theme scripts**: `click-to-copy.js` (Prism's
-  mutually exclusive alternative; the two share `scripts/code-copy.html`).
+- **Individually processed theme scripts**: `click-to-copy.js` (Prism's mutually
+  exclusive alternative; the two share `scripts/code-copy.html`).
 - **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
   Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
@@ -30,10 +30,10 @@ rendered output:
   build time while the browser imports the module straight from the CDN.
 
 Gating lives at two levels, preserved from before the decomposition. The
-dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and
-KaTeX (`.Page.Store` flags); it always dispatches the other sub-partials, which
-gate internally (Algolia search configuration, Prism vs click-to-copy, search
-bundle choice, dark mode, ScrollSpy).
+dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and KaTeX
+(`.Page.Store` flags); it always dispatches the other sub-partials, which gate
+internally (Algolia search configuration, Prism vs click-to-copy, search bundle
+choice, dark mode, ScrollSpy).
 
 ## The dispatcher as a seam
 
