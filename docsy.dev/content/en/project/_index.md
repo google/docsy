@@ -10,6 +10,9 @@ cascade:
 cSpell:ignore: docsydocs
 ---
 
+This section is for Docsy maintainers and contributors. It documents how the
+theme and this website are organized, built, maintained, and released.
+
 <span class="badge bg-warning text-bg-warning fs-6">
 {{% _param FAS person-digging " pe-2" %}} Section under construction. {{%
 _param FAS person-digging " ps-2" %}}
@@ -28,8 +31,8 @@ Planned content organization (tentative):
   SCSS/JS customizations, patches, and internal shims.
 - [Build](build/): Tooling, local development setup, CI/CD workflows, deployment
   environments, and automation details.
-- **Quality**: Link checking, accessibility standards, tests, review practices,
-  and other quality-related processes.
+- [Quality](quality/): Link checking, accessibility standards, tests, review
+  practices, and other quality-related processes.
 - **Roadmap**: Milestones, backlog, priorities, technical debt, and
   design/implementation decisions.
 

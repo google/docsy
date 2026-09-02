@@ -1064,6 +1064,31 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs": {
+    "status": 200,
+    "when": "2026-09-02T19:09:14Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T19:09:14Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T19:09:15Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-golden.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T19:09:14Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs": {
+    "status": 200,
+    "when": "2026-09-02T19:09:15Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/blob/main/theme/": {
     "status": 200,
     "when": "2026-09-02T08:07:11Z",
@@ -1194,9 +1219,19 @@
     "when": "2026-06-26T18:24:04Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/": {
+    "status": 200,
+    "when": "2026-09-02T19:09:15Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/mermaid.html": {
     "status": 200,
     "when": "2026-08-09T11:36:12Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html": {
+    "status": 200,
+    "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/blob/main/theme/layouts/_partials/search-input.html": {
@@ -1779,6 +1814,11 @@
     "when": "2026-08-28T16:21:12Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/issues/2789": {
+    "status": 200,
+    "when": "2026-09-02T19:09:15Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/issues/331": {
     "status": 200,
     "when": "2026-06-26T18:23:57Z",
@@ -2094,6 +2134,11 @@
     "when": "2026-06-26T18:29:06Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/issues/new?title=Quality": {
+    "status": 200,
+    "when": "2026-09-02T19:09:14Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/issues/new?title=ReadMe": {
     "status": 200,
     "when": "2026-06-26T18:29:07Z",
@@ -2137,6 +2182,11 @@
   "https://github.com/google/docsy/issues/new?title=Repository-root%20markdown%20files": {
     "status": 200,
     "when": "2026-06-26T18:29:07Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/issues/new?title=Script%20loading": {
+    "status": 200,
+    "when": "2026-09-02T19:09:15Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=ScrollSpy%20patch": {
@@ -4353,6 +4403,13 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://main--docsydocs.netlify.app/project/design/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/project/design/semantic-classes/": {
     "status": 200,
     "when": "2026-08-25T14:43:44Z",
@@ -4363,10 +4420,31 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://main--docsydocs.netlify.app/project/implementation/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/project/implementation/scrollspy-patch/": {
     "status": 200,
     "when": "2026-06-26T18:24:04Z",
     "via": "lychee",
+  },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://main--docsydocs.netlify.app/project/quality/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://main--docsydocs.netlify.app/project/quality/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://main--docsydocs.netlify.app/project/repo/": {
     "status": 200,
@@ -5170,6 +5248,13 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://www.docsy.dev/project/design/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://www.docsy.dev/project/design/semantic-classes/": {
     "status": 200,
     "when": "2026-08-30T20:58:27Z",
@@ -5180,10 +5265,31 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://www.docsy.dev/project/implementation/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://www.docsy.dev/project/implementation/scrollspy-patch/": {
     "status": 200,
     "when": "2026-06-26T18:24:04Z",
     "via": "lychee",
+  },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://www.docsy.dev/project/quality/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
+  // New-page seed: goes live when the script-loading project docs deploy.
+  "https://www.docsy.dev/project/quality/script-loading/": {
+    "status": 206,
+    "when": "2026-09-02T19:10:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://www.docsy.dev/project/repo/": {
     "status": 200,
