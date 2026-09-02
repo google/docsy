@@ -1,12 +1,7 @@
-// Plugin registry + loop: params.docsy.plugins entries drive the emission of
-// plugins from assets/js/plugins/. Pins the loop's contract: an enabled
-// plugin is built (js.Build) and emitted; options reach the module as
-// @params; a disabled or unlisted plugin ships zero bytes; defer is honored;
-// a pageGate'd plugin is emitted only on pages whose Store flag is set; a
-// same-named project file shadows the theme's; a companion partial
-// (scripts/plugins/NAME.html) and companion styles (scss/plugins/NAME.scss)
-// are emitted with the plugin. Theme-plugin shadowing is pinned when the
-// first theme plugin ships (no theme plugin exists to shadow yet).
+// Loop-contract tests for params.docsy.plugins; the contract lives in the
+// plugin loop's header (theme/layouts/_partials/scripts/plugins.html).
+// Theme-plugin shadowing is pinned when the first theme plugin ships (none
+// exists to shadow yet).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -50,8 +45,7 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
 
   // quiet.js exists in the plugins dir but has no registry entry.
   assert.doesNotMatch(html, /quiet/, 'the page is free of the unlisted plugin');
-  // Published output is fingerprinted, so a fixed-path read proves nothing:
-  // inspect the published plugin dir itself.
+  // Published output is fingerprinted, so a fixed-path read proves nothing.
   const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
   assert.ok(
     published.every((f) => !f.startsWith('quiet')),
@@ -215,8 +209,7 @@ test('a plugin with no matching asset warns but does not fail the build', () => 
 });
 
 test('a gated missing plugin still warns', () => {
-  // The asset check must be independent of page emission: a config typo
-  // should surface even when no page ever sets the gate flag.
+  // A config typo should surface even when no page ever sets the gate flag.
   const r = buildSite('plugins-gated-missing', {
     files: content,
     extraConfig: `params:
@@ -284,8 +277,7 @@ test('a bare-name registry entry is plugin shorthand', () => {
 });
 
 test('a numeric plugin name resolves its asset', () => {
-  // YAML auto-types `name: 2048` to an integer; the loop must treat names
-  // as strings throughout.
+  // YAML auto-types `name: 2048` to an int.
   const r = buildSite('plugins-numeric-name', {
     files: { ...content, 'assets/js/plugins/2048.js': quietJs },
     extraConfig: `params:
@@ -327,8 +319,8 @@ test('a nameless registry entry is skipped with a warning', () => {
 });
 
 test('duplicate registrations publish distinct builds, in development too', () => {
-  // Without per-build fingerprinting, both builds land on the same
-  // js/plugins/hello.js path in development and the last write wins.
+  // Same source, different options: the builds must not share one
+  // published path (see the loop's fingerprint note).
   const r = buildSite('plugins-duplicates', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     args: ['--environment', 'development'],

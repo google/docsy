@@ -73,7 +73,7 @@ export function extractScriptRegion(html) {
 
 // Whitespace-insensitive comparison form: collapse runs, trim. Fingerprint
 // integrity values (sha256, content-addressed like the hashed names) are
-// stripped so region goldens don't break on every bundle change — bundle
+// stripped so region goldens don't break on every bundle change; bundle
 // bytes are pinned byte-exactly by the separate bundle golden. CDN SRI
 // hashes (sha384/sha512) stay compared: the goldens are their pin.
 export const normalize = (s) =>

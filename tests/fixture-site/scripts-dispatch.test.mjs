@@ -1,6 +1,6 @@
 // Legacy dispatch net: scripts.html keeps dispatching the .Page.Store-gated
 // partials (mermaid, katex). The real partials fetch remote assets at build
-// time, so fixture-site marker overrides stand in for them — what's pinned
+// time, so fixture-site marker overrides stand in for them; what's pinned
 // is exactly the dispatcher's gate → partial wiring, offline.
 
 import { test } from 'node:test';

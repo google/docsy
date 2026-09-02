@@ -1,9 +1,8 @@
 // Plugin runtime net: proves an emitted plugin actually *executes* in a
-// browser — a static-markup check can bless output whose runtime is broken
-// (wrong script ordering, a botched build). Minimal by design: one fixture
-// plugin flips a window flag and mutates the DOM; the test asserts both,
-// plus a zero-console-error page. Red-proof: a page with a deliberately
-// broken plugin must be caught by the error collector.
+// browser: a static-markup check can bless output whose runtime is broken
+// (wrong script ordering, a botched build). Red-proof built in: a
+// deliberately broken plugin must land in the error tally, so an empty
+// tally can't false-green.
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -74,10 +73,9 @@ test('an emitted plugin executes: options and DOM effects land', async () => {
   assert.equal(probe.token, 'runtime-net', 'plugin options reach the runtime');
   assert.equal(probe.dataset, 'ran', 'the plugin mutated the DOM');
   await page.close();
-  // Red-proof doubling as the assertion: the deliberately broken plugin's
-  // runtime error is visible to the collector, so an empty tally from the
-  // probe plugin would be meaningful. Exactly the broken plugin's error —
-  // and nothing else — is expected.
+  // Red-proof doubling as the assertion: the broken plugin's error must be
+  // visible to the collector, so an empty tally from the probe plugin
+  // would be meaningful.
   assert.equal(errors.length, 1, 'error tally sees exactly the broken plugin');
   assert.match(
     errors[0],

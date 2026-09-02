@@ -3,7 +3,7 @@
 // the built js/main.js bundle stay byte-identical, modulo whitespace, across
 // the refactor. Two configs: theme defaults, and a feature-rich variant that
 // lights up every offline-safe loading mechanism in scripts.html.
-// Refresh: node tests/fixture-site/update-scripts-goldens.mjs
+// Refresh: npm run update:scripts-goldens
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -48,7 +48,7 @@ for (const { name, build, pages } of builds) {
       'utf8',
     );
     // Exact bytes: the bundle is data, and normalize would also collapse
-    // whitespace inside JS string literals — a real behavior change.
+    // whitespace inside JS string literals, a real behavior change.
     assert.equal(
       bundle,
       golden,
