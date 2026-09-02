@@ -1,7 +1,5 @@
-// Loop-contract tests for params.docsy.plugins; the contract lives in the
-// plugin loop's header (theme/layouts/_partials/scripts/plugins.html).
-// Theme-plugin shadowing is pinned when the first theme plugin ships (none
-// exists to shadow yet).
+// Loop-contract tests for params.docsy.plugins; the contract:
+// https://www.docsy.dev/project/implementation/script-loading/
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

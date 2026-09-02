@@ -1,15 +1,8 @@
 // Runtime JS console-error net (google/docsy#1436): loads representative
 // fixture-site pages in a real browser and asserts that no uncaught
-// exception or console error fires. The markup and visual goldens can't
-// see JS runtime breakage (a missing global, a botched conversion); this
-// net can, cheaply. Two fixture variants cover both search bundles:
-// scripts.html ships offline-search.js or search.js, never both.
-//
-// Unlike the visual shots, pages here load their real CDN script deps
-// (lunr, markmap, mermaid), so this suite needs network access. Failed
-// resource loads are filtered from the console tally: they're environment
-// noise here, and any JS breakage they cause still surfaces as a
-// pageerror (e.g. a dependent script's missing global).
+// exception or console error fires. Needs network access (real CDN deps).
+// Rationale and particulars:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';

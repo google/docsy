@@ -1,8 +1,6 @@
 // Golden-output net for the scripts.html decomposition: the rendered script
-// region and every locally built script must match their goldens across
-// the refactor. Fixtures, region extraction, and comparison form:
-// lib/scripts-goldens.mjs.
-// Refresh: npm run update:scripts-goldens
+// region and every locally built script must match their goldens. Rationale
+// and refresh: https://www.docsy.dev/project/quality/script-loading/
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

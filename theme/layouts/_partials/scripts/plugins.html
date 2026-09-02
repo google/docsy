@@ -1,24 +1,6 @@
-{{/* Plugin loop: emits each plugin registered in params.docsy.plugins, a
-  list of { name, enable, defer, pageGate, options } entries (a bare NAME
-  is shorthand for { name: NAME }). A plugin's script lives at
-  assets/js/plugins/NAME.js (theme, project, or module-mounted; a
-  same-named project file shadows the theme's) and is built individually
-  with js.Build; options reach the module via
-  `import * as params from '@params'`. Registry order is the emission
-  order. pageGate names a .Page.Store flag; when set, the plugin is
-  emitted only on pages carrying the flag (a missing asset warns
-  regardless of the gate). Fingerprinting runs in every environment:
-  distinct builds of one source (per-language sites, duplicate
-  registrations with different options) must publish distinct paths, or
-  the last write wins site-wide.
-
-  Optional companions, by naming convention, both emitted **before** the
-  script tag so a synchronous plugin script can rely on them:
-  - scripts/plugins/NAME.html: a partial (vendored libraries, component
-    markup), invoked with (dict "Page" PAGE "Plugin" ENTRY); config-
-    provider patterns belong in the companion too.
-  - assets/scss/plugins/NAME.scss: a stylesheet compiled through the SCSS
-    pipeline. */ -}}
+{{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
+  shape guards, and companion conventions:
+  https://www.docsy.dev/project/implementation/script-loading/ */ -}}
 {{ $registry := slice -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if reflect.IsMap $docsy -}}
