@@ -24,7 +24,6 @@ params:
       - NAME # bare-name shorthand for { name: NAME }
 ```
 
-- A bare (non-map) entry is shorthand for `{ name: NAME }`.
 - Names are coerced to strings (`printf "%v"`): YAML auto-types entries like
   `name: 2048`, and the loop must resolve the same asset path either way.
 - Registry order is emission order.
@@ -38,20 +37,15 @@ value:
 
 - A scalar `params.docsy` is left untouched (the read is gated on
   `reflect.IsMap`) and the loop emits nothing.
-- A non-list `params.docsy.plugins`, falsy scalars included, warns and is
-  ignored.
-- An entry with no usable name warns and is skipped.
-- A registered name with no asset at `assets/js/plugins/NAME.js` warns --
-  regardless of `pageGate`, so a typo can't hide behind a gate.
+- A non-list `params.docsy.plugins`, falsy scalars included, warns
+  (`docsy-plugins-config`) and is ignored.
+- An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
+- A registered name with no asset at `assets/js/plugins/NAME.js` warns
+  (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
+  behind a gate.
 
 Warnings are issued with `warnidf`, so each is suppressible through Hugo's
-`ignoreLogs`:
-
-| Warning ID             | Cause                                         |
-| ---------------------- | --------------------------------------------- |
-| `docsy-plugins-config` | `params.docsy.plugins` is not a list          |
-| `docsy-plugin-unnamed` | a registry entry has no name                  |
-| `docsy-plugin-missing` | no asset found at `assets/js/plugins/NAME.js` |
+`ignoreLogs`.
 
 ## Build and emission
 
@@ -61,8 +55,8 @@ Warnings are issued with `warnidf`, so each is suppressible through Hugo's
   as build `params`, so the module reads them with
   `import * as params from '@params'`. Production builds add `minify`.
 - **Fingerprinting runs in every environment**, not just production: distinct
-  builds of one source -- per-language sites, duplicate registrations with
-  different options -- must publish distinct paths, or the last write wins
+  builds of one source (per-language sites, duplicate registrations with
+  different options) must publish distinct paths, or the last write wins
   site-wide.
 - The script tag carries SRI attributes (`integrity`, `crossorigin`), and
   `defer` when the entry sets it.

@@ -1,13 +1,13 @@
 ---
 title: Script loading
 description:
-  The golden, dispatch, loop-contract, and runtime nets, and how to refresh
-  their goldens
+  The golden, dispatch, loop-contract, acceptance, and runtime nets, and how to
+  refresh the goldens
 ---
 
-Four complementary nets pin the script-loading subsystem ([design][],
-[implementation][]). The first three run in `npm run test:repo`; the runtime net
-runs in `npm run test:visual`.
+Complementary test nets pin the script-loading subsystem ([design][],
+[implementation][]). The fixture-site nets run in `npm run test:repo`; the
+browser nets run in `npm run test:visual`.
 
 ## Golden net
 
@@ -44,37 +44,54 @@ shape-guard warnings, name coercion, and fingerprint distinctness (duplicate
 registrations publish distinct builds, in development too). Theme-plugin
 shadowing gets its pin when the first theme plugin ships.
 
-## Runtime net
+## Acceptance test
 
-[`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
-real browser and asserts that no uncaught exception or console error fires,
-alongside behavior probes (search, diagrams, navbar). Markup and visual goldens
-can't see JS runtime breakage -- a missing global, a botched conversion -- but
-this net can, cheaply ([#1436][]).
+[`plugins-acceptance.test.mjs`][acceptance-test] proves adoption end to end: a
+project site drops `assets/js/plugins/hello.js` plus one registry entry and
+gets its script loaded, with zero layout overrides asserted structurally (the
+fixture contains no `layouts/` directory).
 
-Particulars:
+## Runtime nets
 
-- Two fixture variants cover both search bundles: `scripts.html` ships
-  `offline-search.js` or `search.js`, never both.
-- Pages load their real CDN script dependencies, so the net needs network
-  access. Failed resource loads are filtered from the console tally: they're
-  environment noise, and any JS breakage they cause still surfaces as a page
-  error.
+Two browser nets under `tests/visual/`:
+
+- [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
+  real browser and asserts that no uncaught exception or console error fires,
+  alongside behavior probes (search, diagrams, navbar). Markup and visual
+  goldens can't see JS runtime breakage (a missing global, a botched
+  conversion); this net can ([#1436][]).
+  - Two fixture variants cover both search bundles: `scripts.html` ships
+    `offline-search.js` or `search.js`, never both.
+  - Pages load their real CDN script dependencies, so the net needs network
+    access. The console tally filters off-origin and non-code resource noise
+    but keeps same-origin script and stylesheet load failures (a broken
+    first-party bundle is a defect), and any JS breakage the filtered noise
+    causes still surfaces as a page error.
+- [`plugins-runtime.test.mjs`][plugin-runtime-test] proves an emitted plugin
+  actually executes: its options reach the runtime and its DOM effects land. A
+  static-markup check can bless output whose runtime is broken (wrong script
+  ordering, a botched build); this net can't.
 
 ## Red-proof rationale
 
-A net that passes for the wrong reason -- building nothing, matching an empty
-region -- is worse than a red one: it hides breakage behind green. Each net
+A net that passes for the wrong reason (building nothing, matching an empty
+region) is worse than a red one: it hides breakage behind green. Each net
 proves its signal:
 
 - Every net was made to fail against a deliberately broken input before being
   trusted.
 - Zero-output cases are asserted against: a golden's script region must be
   non-empty.
-- The runtime net carries a built-in structural red-proof: an uncaught page
-  exception must surface as the error collector's exact tally.
+- The plugin runtime net's red-proof doubles as an assertion: a deliberately
+  broken plugin must be the error tally's only entry, so an empty tally from
+  the healthy plugin is meaningful.
+- The site runtime net carries a collector self-test: a page that deliberately
+  throws must be reported, so a silent collector (wrong event names, races)
+  can't masquerade as all-green.
 
 [#1436]: https://github.com/google/docsy/issues/1436
+[acceptance-test]:
+  https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs
 [design]: /project/design/script-loading/
 [dispatch-test]:
   https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs
@@ -85,5 +102,7 @@ proves its signal:
 [implementation]: /project/implementation/script-loading/
 [loop-test]:
   https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
+[plugin-runtime-test]:
+  https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
 [runtime-test]:
   https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs

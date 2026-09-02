@@ -1,4 +1,4 @@
-// Loop-contract tests for params.docsy.plugins; the contract:
+// Loop-contract tests for params.docsy.plugins:
 // https://www.docsy.dev/project/implementation/script-loading/
 
 import { test } from 'node:test';

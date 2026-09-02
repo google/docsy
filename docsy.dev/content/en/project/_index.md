@@ -1,7 +1,7 @@
 ---
 title: Project and website documentation
 linkTitle: Project docs
-description: How Docsy theme and website are built, maintained, and deployed.
+description: Architecture and maintainer workflows for the Docsy theme and website
 aliases: [site]
 cascade:
   type: docs
@@ -10,8 +10,7 @@ cascade:
 cSpell:ignore: docsydocs
 ---
 
-This section is for Docsy maintainers and contributors. It documents how the
-theme and this website are organized, built, maintained, and released.
+This section is for Docsy maintainers and contributors.
 
 <span class="badge bg-warning text-bg-warning fs-6">
 {{% _param FAS person-digging " pe-2" %}} Section under construction. {{%

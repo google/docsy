@@ -1,8 +1,6 @@
-// Plugin runtime net: proves an emitted plugin actually *executes* in a
-// browser: a static-markup check can bless output whose runtime is broken
-// (wrong script ordering, a botched build). Red-proof built in: a
-// deliberately broken plugin must land in the error tally, so an empty
-// tally can't false-green.
+// Plugin runtime net: an emitted plugin must actually execute in a browser.
+// Rationale and red-proof:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';

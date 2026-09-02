@@ -23,7 +23,9 @@ default rendered output:
 - **Individually processed theme scripts**: `click-to-copy.js`.
 - **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
   Algolia DocSearch.
-- **Build-time remote fetches**, re-served as local assets: Mermaid and KaTeX.
+- **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
+  re-served as local assets, and Mermaid, whose pinned version is validated at
+  build time while the browser imports the module straight from the CDN.
 
 The dispatcher preserves each mechanism's original gating: site params (MarkMap,
 PlantUML), `.Page.Store` flags (Mermaid, KaTeX), and search configuration
@@ -36,9 +38,9 @@ The decomposition has two design consequences:
 - **Independent overrides**: each sub-partial resolves through Hugo's union file
   system, so a site can replace one mechanism by shadowing one file instead of
   copying all of `scripts.html`.
-- **A landing seam**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and it is the seam for converting built-in integrations onto the
-  loop ([#2789][]).
+- **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
+  plugged in, and where built-in integrations convert onto the loop
+  ([#2789][]).
 
 ### Override points
 
@@ -54,11 +56,10 @@ The decomposition has two design consequences:
 ## The plugin loop {#plugin-loop}
 
 [`scripts/plugins.html`][plugins.html] emits each plugin registered in
-`params.docsy.plugins`: each script asset builds individually and ships
-fingerprinted with SRI, in registry order. `pageGate` generalizes the
-Mermaid/KaTeX page-flag pattern, so any plugin can ship only on the pages that
-use its feature. For the registry contract, shape guards, and build details, see
-the [implementation notes][impl].
+`params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
+pattern, so any plugin can ship only on the pages that use its feature. For the
+registry contract, shape guards, and build details, see the
+[implementation notes][impl].
 
 Two ordering decisions:
 
@@ -66,14 +67,14 @@ Two ordering decisions:
   emit before its script tag, so a synchronous plugin script can rely on
   companion markup and styles being present.
 - **Body-end CSS, an interim placement**: the companion stylesheet's `<link>` is
-  emitted where the loop runs -- at the end of `<body>` -- rather than in
-  `<head>`. This keeps the plugin unit self-contained in the loop; moving
-  companion CSS into the head is a possible later refinement.
+  emitted where the loop runs (at the end of `<body>`), not in `<head>`. This
+  keeps the plugin unit self-contained in the loop; moving companion CSS into
+  the head is a possible later refinement.
 
 ## Related pages
 
 - [Implementation: script loading][impl]
-- [Quality: script loading][quality] -- the test nets that pin this behavior
+- [Quality: script loading][quality]: the test nets that pin this behavior
 
 [#2789]: https://github.com/google/docsy/issues/2789
 [impl]: /project/implementation/script-loading/

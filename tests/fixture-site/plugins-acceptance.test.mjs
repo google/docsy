@@ -1,7 +1,6 @@
-// The plugin architecture's acceptance test: a project site drops
-// assets/js/plugins/hello.js + one params.docsy.plugins entry and gets its
-// script loaded, with zero layout overrides asserted structurally (the
-// fixture contains no layouts/ directory).
+// The plugin architecture's acceptance test: a project site adds one asset
+// and one registry entry, zero layout overrides. Rationale:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
