@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readdirSync } from 'node:fs';
+import { readdirSync } from 'node:fs';
 import path from 'node:path';
 import { buildSite } from './lib/build-site.mjs';
 
@@ -69,9 +69,12 @@ test('a disabled plugin ships zero bytes', () => {
     /js\/plugins\/hello/,
     "the page is free of the disabled plugin's script tag",
   );
+  // Theme-default plugins (click-to-copy) still publish; only the disabled
+  // one must be absent.
+  const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
   assert.ok(
-    !existsSync(path.join(r.site, 'public', 'js', 'plugins')),
-    'the public tree is free of plugin output',
+    published.every((f) => !f.startsWith('hello')),
+    'the public tree is free of the disabled plugin',
   );
 });
 
@@ -239,8 +242,8 @@ test('a site with a scalar params.docsy still builds', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.doesNotMatch(
     r.publicFile('index.html'),
-    /js\/plugins/,
-    'the page is free of plugin output',
+    /js\/plugins\/hello/,
+    'the page is free of registry-declared plugin output',
   );
 });
 
