@@ -1,5 +1,5 @@
 // Markmap as a plugin: burns three red checks from the js-plugins page at
-// once — zero bytes shipped when disabled, no CDN script without SRI (the
+// once: zero bytes shipped when disabled, no CDN script without SRI (the
 // vendored autoloader is served same-origin, fingerprinted), and options via
 // @params instead of a template-wrapped asset. The legacy params.markmap.*
 // keys keep working via registry aliasing, with a deprecation warning. Needs

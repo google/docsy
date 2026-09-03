@@ -167,8 +167,8 @@ history since 0.17.0][].
   (with optional styles and markup) without layout overrides: declare
   `assets/js/plugins/NAME.js` in your site config and Docsy builds,
   fingerprints, and loads it with SRI ([#2788][], [#2789][]).
-- Converted the first theme features to plugins — markmap, tabpane-persist, and
-  click-to-copy: each now ships zero bytes when unused, markmap loads only on
+- Converted the first theme features to plugins (markmap, tabpane-persist, and
+  click-to-copy): each now ships zero bytes when unused, markmap loads only on
   pages with markmap blocks, and the markmap autoloader is fetched at build time
   and served same-origin with SRI (its runtime libraries still load from the
   CDN, at versions the autoloader pins). Deprecated `params.markmap.enable` in

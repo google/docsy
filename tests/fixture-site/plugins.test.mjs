@@ -315,8 +315,7 @@ test('a numeric plugin name resolves its asset', () => {
 
 test('a path-traversing plugin name is rejected with a warning', () => {
   // Names address assets and partials by path; anything outside the
-  // [A-Za-z0-9_-] allowlist is refused before path construction (F1,
-  // 2026-09-02 security assessment).
+  // [A-Za-z0-9_-] allowlist is refused before path construction.
   const r = buildSite('plugins-name-traversal', {
     files: {
       ...content,

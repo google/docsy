@@ -1,5 +1,5 @@
 // tabpane-persist as a page-gated plugin: the tabpane shortcode sets a Store
-// flag; the script — previously a raw static/ file on every page — is emitted
+// flag; the script (previously a raw static/ file on every page) is emitted
 // only on pages using tabs, fingerprinted. Also pins the partialCached trap:
 // a page with no tabs must not inherit the script from a cached scripts.html
 // render of a tabbed page, and vice versa.

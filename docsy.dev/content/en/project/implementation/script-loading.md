@@ -38,16 +38,16 @@ params:
 The loop appends theme-default entries after the site-declared registry. A
 site-declared entry of the same name supersedes its auto-registration but
 **inherits the default fields it leaves unset** (`pageGate`, `defer`); an
-explicit value — `pageGate: ''` included — always wins:
+explicit value, `pageGate: ''` included, always wins:
 
 - `tabpane-persist`, page-gated on `hasTabs` (set by the tabpane shortcode).
 - `click-to-copy`, deferred; auto-registered unless
   `params.prism_syntax_highlighting` or `params.disable_click2copy_chroma` is
-  set — the pre-plugin gates keep their semantics for the default entry. A
+  set (the pre-plugin gates keep their semantics for the default entry). A
   site-declared entry always emits; combining it with prism draws a warning
   (`docsy-c2c-prism`).
 - `markmap`, page-gated on `hasMarkmap` (set by the markmap code-block render
-  hook) — auto-registered when the legacy `params.markmap.enable` is set; the
+  hook); auto-registered when the legacy `params.markmap.enable` is set; the
   alias warns (`docsy-markmap-legacy`) for its deprecation cycle.
 
 An entry with `enable: false` is skipped; the string `"false"` counts as `false`
@@ -102,7 +102,7 @@ tag ([why][design-ordering]):
   a companion partial: options are site-config-controlled strings, and Hugo's
   contextual autoescaping is the defense; a `safe*` cast disables it.
 - Plugin `options` (and any value reaching a module as `@params`) ship
-  **world-readable in the built JS** — never route secrets or tokens through
+  **world-readable in the built JS**: never route secrets or tokens through
   them.
 - Third-party libraries are pinned and vendored: no CDN-`latest`, and no loader
   that pulls unpinned secondary code (SRI on a loader is worthless if the loader
