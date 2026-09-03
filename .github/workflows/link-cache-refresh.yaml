@@ -197,7 +197,7 @@ jobs:
           npm run -s -C docsy.dev _check:links -- --help > /dev/null
           # --check-stale: this refresh lane is where stale and expired
           # entries get re-verified; default (PR/CI) runs only verify URLs
-          # missing from the cache.
+          # without a cached 2xx result.
           # The build already succeeded (previous step, fails hard), so the
           # exit code here is the link checker's own contract. Exit 1 (dead
           # links) doesn't fail the run: the merge-back has already recorded
@@ -272,7 +272,7 @@ jobs:
           PR_BODY="Refreshes the oldest lychee-verified link-cache entries (default $DEFAULT_REFRESH_COUNT per rotation); for the model, see the [workflow header](https://github.com/${GITHUB_REPOSITORY}/blob/main/.github/workflows/link-cache-refresh.yaml)."
           PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh (prune-exempt manual seeds keep their dates, so one may sit here):"$'\n'"\`${entry}\`"
           if [[ "${DEAD_LINKS:-false}" == 'true' ]]; then
-            PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with failure results (\"error\", \"timeout\", or a non-2xx code) in the cache diff: triage before merging."
+            PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with failure results (\"error\", \"timeout\") in the cache diff: triage before merging."
           fi
           PR_URL=$(gh pr list --state open --base main --head "$BRANCH" \
             --json url,isCrossRepository \
