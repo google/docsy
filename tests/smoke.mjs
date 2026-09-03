@@ -58,21 +58,21 @@ assert.match(
   'the repo manifest carries an exact sass-embedded pin',
 );
 
-// One home for the age-gate remedy. The suite scopes the granted override to
-// the theme install (the exact, asserted artifact under test): scratch sites
-// have no lockfile, so a run-wide relaxation would also admit fresh
-// transitive releases under the other pinned top-level installs. The knob is
-// captured here, stripped from the environment the child installs inherit,
-// and re-applied as a flag on the one install it targets.
+// One home for the age-gate remedy: a suite-owned knob, applied as a flag on
+// the theme-package installs only (the exact, asserted artifact under test,
+// plus its fresh dep pins). The generic npm knob is deliberately not used:
+// scratch sites have no lockfile, so a run-wide relaxation would admit fresh
+// transitive releases under the other pinned installs -- those stay under the
+// operator's ambient npm config, untouched in either direction.
 const AGE_GATE_REMEDY =
-  'add NPM_CONFIG_MIN_RELEASE_AGE=N to your command, N no lower than the release age in whole days (0 on release day)';
-let ageGateOverride;
-for (const key of Object.keys(process.env)) {
-  if (/^npm_config_min[-_]release[-_]age$/i.test(key)) {
-    ageGateOverride ??= process.env[key];
-    delete process.env[key];
-  }
-}
+  'add DOCSY_THEME_MIN_RELEASE_AGE=N to your command, N no lower than the release age in whole days (0 on release day); the suite applies it to the theme-package installs only';
+const ageGateOverride = process.env.DOCSY_THEME_MIN_RELEASE_AGE || undefined;
+if (ageGateOverride !== undefined)
+  assert.match(
+    ageGateOverride,
+    /^\d+$/,
+    `DOCSY_THEME_MIN_RELEASE_AGE (${ageGateOverride}) is a whole number of days`,
+  );
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -304,8 +304,10 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
       '--ignore-scripts',
       '--no-audit',
       '--no-fund',
-      // The captured age-gate override applies here only (rationale at
-      // AGE_GATE_REMEDY); harmless for the tarball leg's path spec.
+      // The granted override applies here only (rationale at AGE_GATE_REMEDY);
+      // as a flag it outranks env-borne config. Load-bearing for both legs:
+      // the tarball's path spec is ungated, but its fresh theme dep pins
+      // resolve from the npm registry too.
       ...(ageGateOverride !== undefined
         ? [`--min-release-age=${ageGateOverride}`]
         : []),
@@ -412,17 +414,24 @@ const NPM_REGISTRY_PKG =
 function derivedNpmRegistrySpec() {
   if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)) {
     const gitArgs = ['-C', repoRoot];
-    const tag = run('git', [
-      ...gitArgs,
-      'rev-parse',
-      '-q',
-      '--verify',
-      `refs/tags/v${THEME_VERSION}`,
-    ]);
-    // Exit 1 (silent) is "no such tag"; anything else is a checkout without
-    // usable git identity (shallow/tagless clone, source archive), where a
-    // guessed target could vet the wrong artifact. Recorded, not thrown: a
-    // load-time throw would abort the file's five other tests.
+    // spawnSync, not run(): a nonzero exit is an expected answer for both
+    // probes, not a failure to dump.
+    const tag = spawnSync(
+      'git',
+      [
+        ...gitArgs,
+        'rev-parse',
+        '-q',
+        '--verify',
+        `refs/tags/v${THEME_VERSION}`,
+      ],
+      { encoding: 'utf8' },
+    );
+    // Exit 1 (silent) is "no such tag" (pre-publish, or a clone without the
+    // tag fetched); anything else is a checkout without usable git identity
+    // (source archive, broken git), where a guessed target could vet the
+    // wrong artifact. Recorded, not thrown: a load-time throw would abort the
+    // file's five other tests.
     if (tag.status !== 0 && tag.status !== 1) {
       derivationError =
         'the release state of this checkout is determinable (git identity unavailable; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
@@ -430,13 +439,11 @@ function derivedNpmRegistrySpec() {
     }
     if (
       tag.status === 0 &&
-      run('git', [
-        ...gitArgs,
-        'merge-base',
-        '--is-ancestor',
-        tag.stdout.trim(),
-        'HEAD',
-      ]).status === 0
+      spawnSync(
+        'git',
+        [...gitArgs, 'merge-base', '--is-ancestor', tag.stdout.trim(), 'HEAD'],
+        { encoding: 'utf8' },
+      ).status === 0
     ) {
       return `@docsy/theme@${THEME_VERSION}`;
     }
@@ -458,7 +465,7 @@ test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
   // a shell (winShell), so metacharacters stay out.
   assert.match(
     NPM_REGISTRY_PKG,
-    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[\w.]+)?(\+[\w.]+)?|[A-Za-z][\w-]*))?$/,
+    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[\w.]+)?(\+[\w.]+)?|[A-Za-z][\w.-]*))?$/,
     `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is an exact-version or dist-tag form of the @docsy/theme npm-registry package`,
   );
   const view = run('npm', ['view', NPM_REGISTRY_PKG, 'version'], {

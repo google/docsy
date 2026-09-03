@@ -246,7 +246,7 @@ Notes:
 - All but `test:smoke` run in CI.
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
   `node --test tests/supply-chain-audit.test.mjs`.
-- `test:smoke`:
+- `test:smoke` (slow, network-bound):
   - Run it manually for `main` or PR-branch validation. Its GitHub-sourced
     builds auto-target the current branch's GitHub upstream.
   - Builds a minimal test site from the theme package (packed tarball, npm
@@ -256,9 +256,13 @@ Notes:
     the installed version against the npm registry's own resolution.
     `DOCSY_THEME_PKG` overrides the target (exact version or dist-tag); a
     prerelease checkout requires it.
-  - The suite never overrides local npm hardening: an install guard or a
-    release-age gate on the theme install fails the run loudly, naming the
-    deliberate rerun knob (which the suite applies to the theme install only).
+  - The suite never overrides local npm hardening, and its installs run under
+    your ambient npm config: an install guard's block fails the run with the
+    guard's own remedy, and a release-age gate on the fresh theme package fails
+    it naming `DOCSY_THEME_MIN_RELEASE_AGE=N`, a suite knob applied to the
+    theme-package installs only. Any other pinned scratch dependency younger
+    than a local age gate fails its leg until the pin ages (npm's error names
+    the date cutoff).
 
 ### Structural guards: one concern per file
 
