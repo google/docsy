@@ -2,6 +2,7 @@
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
 {{ $registry := slice -}}
+{{ $emittedCompanions := newScratch -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if reflect.IsMap $docsy -}}
   {{ $plugins := $docsy.plugins -}}
@@ -61,10 +62,14 @@
     {{/* Names address assets and partials by path; refuse anything that could
       traverse outside the plugin namespaces. */ -}}
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to letters, digits, hyphens, and underscores." $name -}}
-  {{ else if and (ne $entry.enable false) (ne (printf "%v" $entry.enable) "false") -}}
+  {{ else if and (ne $entry.enable false) (ne (lower (printf "%v" $entry.enable)) "false") -}}
     {{/* Site entries inherit their theme default's unset fields. */ -}}
     {{ with index $defaults $name -}}
       {{ $entry = merge . $entry -}}
+    {{ end -}}
+    {{ if and (eq $name "markmap") $entry.defer -}}
+      {{ warnidf "docsy-markmap-defer" "Ignoring defer on the markmap plugin: its script must run before the deferred autoloader it configures." -}}
+      {{ $entry = merge $entry (dict "defer" false) -}}
     {{ end -}}
     {{ $path := printf "js/plugins/%s.js" $name -}}
     {{ if and (eq $name "click-to-copy") $.Site.Params.prism_syntax_highlighting -}}
@@ -82,7 +87,10 @@
           {{- "\n" -}}
         {{ end -}}
         {{ $companion := printf "scripts/plugins/%s.html" $name -}}
-        {{ if templates.Exists (printf "_partials/%s" $companion) -}}
+        {{/* Companions emit once per name: on duplicate registrations, a
+          second vendored-library or markup emission would break the page. */ -}}
+        {{ if and (templates.Exists (printf "_partials/%s" $companion)) (not ($emittedCompanions.Get $name)) -}}
+          {{ $emittedCompanions.Set $name true -}}
           {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
         {{ end -}}
         {{ $opts := dict "params" ($entry.options | default dict) -}}

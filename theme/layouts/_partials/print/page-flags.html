@@ -1,12 +1,19 @@
 {{/* Merges descendant pages' Store flags onto the print page, so page-gated
-  scripts (plugin pageGate, Mermaid, KaTeX) reach print output. Must run after
+  scripts (plugin pageGate, Mermaid, KaTeX) reach print output. Traversal
+  mirrors print/render.html: no_print prunes whole subtrees. Must run after
   the main block: descendants' flags are set while their content renders. Why:
   https://www.docsy.dev/project/design/script-loading/ */ -}}
 {{ $print := . -}}
-{{ range where .Site.Pages ".Params.no_print" "!=" true -}}
-  {{ if .IsDescendant $print -}}
-    {{ range $k, $v := .Store.Values -}}
-      {{ if $v }}{{ $print.Store.Set $k $v }}{{ end -}}
-    {{ end -}}
+{{ $section := . -}}
+{{ if reflect.IsMap . -}}
+  {{ $print = .print -}}
+  {{ $section = .section -}}
+{{ end -}}
+{{ range where (union $section.Pages $section.Sections) ".Params.no_print" "!=" true -}}
+  {{ range $k, $v := .Store.Values -}}
+    {{ if $v }}{{ $print.Store.Set $k $v }}{{ end -}}
+  {{ end -}}
+  {{ if .IsSection -}}
+    {{ partial "print/page-flags.html" (dict "print" $print "section" .) -}}
   {{ end -}}
 {{ end -}}

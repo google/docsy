@@ -43,3 +43,28 @@ params:
     'the print page carries the vendored autoloader',
   );
 });
+
+test('a no_print section contributes no page-gate flags', () => {
+  // print/render.html prunes no_print subtrees wholly; the flag merge must
+  // prune the same way, or unprinted content loads its scripts anyway.
+  const r = buildSite('print-no-print-flags', {
+    files: {
+      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+      'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs body\n',
+      'content/docs/plain.md': '---\ntitle: Plain\n---\nNo tabs here\n',
+      'content/docs/hidden/_index.md':
+        '---\ntitle: Hidden\nno_print: true\n---\nHidden section\n',
+      'content/docs/hidden/tabs.md':
+        '---\ntitle: Tabs\n---\n\n{{< tabpane text=true >}}\n' +
+        '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n',
+    },
+    title: 'Docsy print-pruning fixture',
+    extraConfig: 'outputs:\n  section: [HTML, print]\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('_print/docs/index.html'),
+    /tabpane-persist/,
+    'the print page is free of scripts gated by pruned content',
+  );
+});

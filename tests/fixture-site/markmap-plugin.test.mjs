@@ -25,7 +25,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
     assert.doesNotMatch(
       r.publicFile(page),
       /<script[^>]*markmap|markmap[^"]*\.js/i,
-      `${page} references no markmap script`,
+      `${page} is free of markmap scripts`,
     );
   }
   const bundle = r.publicFile(
@@ -133,4 +133,47 @@ test('a path-bearing markmap.version fails the build', () => {
     /markmap\.version/,
     'the bad version is called out in the build error',
   );
+});
+
+test('defer on a markmap entry is ignored, with a warning', () => {
+  // The plugin script must run before the deferred autoloader it configures.
+  const r = buildSite('markmap-defer', {
+    files,
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: markmap
+        defer: true
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /docsy-markmap-defer/,
+    'the defer request draws a warning',
+  );
+  const plugin = r
+    .publicFile('docs/index.html')
+    .match(/<script[^>]*src="\/js\/plugins\/markmap[^"]*"[^>]*>/);
+  assert.ok(plugin, 'markmap plugin script tag is emitted');
+  assert.doesNotMatch(
+    plugin[0],
+    /\bdefer\b/,
+    'the plugin script stays synchronous, ahead of the deferred autoloader',
+  );
+});
+
+test('duplicate markmap entries emit one vendored autoloader', () => {
+  const r = buildSite('markmap-duplicate', {
+    files,
+    extraConfig: `params:
+  docsy:
+    plugins: [markmap, markmap]
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const vendors =
+    r.publicFile('docs/index.html').match(/js\/vendor\/markmap-autoloader/g) ??
+    [];
+  assert.equal(vendors.length, 1, 'the vendored autoloader is emitted once');
 });

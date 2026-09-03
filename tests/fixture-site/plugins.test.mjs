@@ -501,14 +501,14 @@ test('click-to-copy registered alongside prism draws a warning', () => {
 
 test('a quoted "false" enable disables the entry', () => {
   // YAML strings are truthy in Go templates; a site writing enable: "false"
-  // means off, not on.
+  // (any case) means off, not on.
   const r = buildSite('plugins-quoted-false', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
   docsy:
     plugins:
       - name: hello
-        enable: 'false'
+        enable: 'False'
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -553,7 +553,7 @@ test('a disabled click-to-copy entry draws no prism conflict warning', () => {
   assert.doesNotMatch(
     r.stderr,
     /docsy-c2c-prism/,
-    'no conflict warning for an entry that never emits',
+    'conflict warning is omitted for an entry that never emits',
   );
 });
 
