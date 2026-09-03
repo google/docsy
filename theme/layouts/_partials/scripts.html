@@ -2,10 +2,6 @@
 {{/* Body-end script dispatcher. Architecture and override points:
   https://www.docsy.dev/project/design/script-loading/ */ -}}
 
-{{ if .Site.Params.markmap.enable -}}
-  {{ partial "scripts/markmap.html" . -}}
-{{ end -}}
-
 {{ if .Site.Params.plantuml.enable -}}
   {{ partial "scripts/plantuml-deflate.html" . -}}
 {{ end -}}

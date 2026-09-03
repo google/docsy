@@ -28,17 +28,15 @@ const configs = [
   { name: 'defaults', extraConfig: '' },
   {
     // Every offline-safe loading mechanism in scripts.html lit at once:
-    // template-wrapped bundle members (markmap, plantuml, drawio), raw
-    // static files (deflate, prism), the markmap partial's CDN tag,
-    // Algolia's CDN + config tags, and offline search replacing the
-    // default search script. Offline-safe: tags are emitted, never
-    // fetched, at build time.
+    // template-wrapped bundle members (plantuml, drawio), raw static files
+    // (deflate, prism), Algolia's CDN + config tags, and offline search
+    // replacing the default search script. Offline-safe: tags are emitted,
+    // never fetched, at build time. markmap is out since its conversion to a
+    // vendored (GetRemote) plugin; markmap-plugin.test.mjs covers it.
     name: 'featureful',
     extraConfig: `params:
   offlineSearch: true
   prism_syntax_highlighting: true
-  markmap:
-    enable: true
   plantuml:
     enable: true
   drawio:

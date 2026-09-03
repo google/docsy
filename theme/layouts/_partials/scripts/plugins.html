@@ -11,6 +11,17 @@
     {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." $plugins -}}
   {{ end -}}
 {{ end -}}
+{{/* Theme-default entries, aliasing legacy params for one deprecation cycle;
+  a site-declared entry of the same name supersedes its alias. */ -}}
+{{ $names := slice -}}
+{{ range $registry -}}
+  {{ if reflect.IsMap . }}{{ with .name }}{{ $names = $names | append (printf "%v" .) }}{{ end -}}
+  {{ else }}{{ $names = $names | append (printf "%v" .) }}{{ end -}}
+{{ end -}}
+{{ if and .Site.Params.markmap.enable (not (in $names "markmap")) -}}
+  {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: register markmap under params.docsy.plugins instead." -}}
+  {{ $registry = $registry | append (dict "name" "markmap") -}}
+{{ end -}}
 {{ range $registry -}}
   {{ $entry := . -}}
   {{ if not (reflect.IsMap $entry) -}}
