@@ -249,10 +249,11 @@ Notes:
 - Run `test:smoke` manually for `main` or PR-branch validation. Its tests
   auto-target the current branch's GitHub upstream.
 - The `test:smoke` registry-install test vets an exact version (the checkout's,
-  when it sits at a release tag; otherwise `latest`), asserting the installed
-  version against the registry's own resolution. The suite never overrides local
-  npm hardening: an install guard or a release-age gate on the theme install
-  fails the run loudly, naming the deliberate rerun knob.
+  when its release tag is in the checkout's history; otherwise `latest`),
+  asserting the installed version against the registry's own resolution. The
+  suite never overrides local npm hardening: an install guard or a release-age
+  gate on the theme install fails the run loudly, naming the deliberate rerun
+  knob.
 
 ### Structural guards: one concern per file
 
@@ -663,10 +664,10 @@ If not adjust accordingly.
       manual npm commands from within the repo: the root `.npmrc` pins the
       `@docsy` scope registry against local overrides.
 
-      Vet a prerelease publish explicitly -- at a prerelease checkout, a bare
-      smoke run vets `latest` (the previous stable), not the prerelease -- and
-      confirm the run's "expecting" line names the prerelease you just
-      published:
+      Vet a prerelease publish explicitly (at a prerelease checkout, the
+      registry-install test refuses other targets, a bare run's `latest`
+      included), and confirm the run's "expecting" line names the prerelease you
+      just published:
 
       ```sh
       DOCSY_THEME_PKG=@docsy/theme@next npm run test:smoke

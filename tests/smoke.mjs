@@ -54,7 +54,7 @@ const SASS_VERSION = JSON.parse(
 ).devDependencies['sass-embedded'];
 assert.match(
   SASS_VERSION ?? '',
-  /^\d/,
+  /^\d+\.\d+\.\d+[\w.+-]*$/,
   'the repo manifest carries an exact sass-embedded pin',
 );
 
@@ -386,33 +386,67 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   );
 });
 
-// Registry spec: an exact pin when the checkout is at a release (stable
-// manifest version and its git tag exists: notes step 15.4) -- a
-// stable-stamped but untagged checkout is release prep pre-publish (notes
-// step 8), where the version isn't on the registry yet -- else `latest`. The
+// Registry spec: an exact pin when the checkout is at a published release
+// (stable manifest version whose git tag is an ancestor of HEAD: notes step
+// 15.4, tolerating unrelated merges landing after the tag); a stable-stamped
+// but untagged checkout is release prep pre-publish (notes step 8), where the
+// version isn't on the registry yet, so `latest` gets vetted instead. The
 // test resolves the spec's expected version registry-side (npm view, ungated
 // by min-release-age) and asserts the installed version matches, so a local
 // age gate can't silently redirect any spec form to an older stable (the
 // 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG overrides the spec:
 // e.g. @docsy/theme@next to vet an RC. `||`: an empty override means unset.
 const REGISTRY_PKG = process.env.DOCSY_THEME_PKG || derivedRegistrySpec();
+let derivationError;
 function derivedRegistrySpec() {
   if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)) {
-    const tag = run('git', ['-C', repoRoot, 'tag', '-l', `v${THEME_VERSION}`]);
-    if ((tag.stdout ?? '').trim()) return `@docsy/theme@${THEME_VERSION}`;
+    const gitArgs = ['-C', repoRoot];
+    const tag = run('git', [
+      ...gitArgs,
+      'rev-parse',
+      '-q',
+      '--verify',
+      `refs/tags/v${THEME_VERSION}`,
+    ]);
+    // Exit 1 (silent) is "no such tag"; anything else is a checkout without
+    // usable git identity (shallow/tagless clone, source archive), where a
+    // guessed target could vet the wrong artifact. Recorded, not thrown: a
+    // load-time throw would abort the file's five other tests.
+    if (tag.status !== 0 && tag.status !== 1) {
+      derivationError =
+        'the release state of this checkout is determinable (git identity unavailable; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
+      return '@docsy/theme@latest';
+    }
+    if (
+      tag.status === 0 &&
+      run('git', [
+        ...gitArgs,
+        'merge-base',
+        '--is-ancestor',
+        tag.stdout.trim(),
+        'HEAD',
+      ]).status === 0
+    ) {
+      return `@docsy/theme@${THEME_VERSION}`;
+    }
     progress(
-      `registry: ${THEME_VERSION} is stamped but untagged (pre-publish); vetting latest`,
+      `registry: ${THEME_VERSION} is stamped but its tag is ${
+        tag.status === 0 ? 'not in this history' : 'not created yet'
+      } (pre-publish); vetting latest`,
     );
   }
   return '@docsy/theme@latest';
 }
 test(`registry install of ${REGISTRY_PKG}`, () => {
-  // The vet targets the registry package; a path or foreign-package override
-  // would test something else while reporting a registry vet.
+  if (derivationError) assert.fail(derivationError);
+  // The vet targets the registry package, by exact version or dist-tag only:
+  // a path or foreign-package override would test something else while
+  // reporting a registry vet, and on Windows the spec reaches npm through a
+  // shell (winShell), so metacharacters and ranges stay out.
   assert.match(
     REGISTRY_PKG,
-    /^@docsy\/theme(@|$)/,
-    `DOCSY_THEME_PKG (${REGISTRY_PKG}) targets the @docsy/theme registry package`,
+    /^@docsy\/theme(@[\w.+~-]+)?$/,
+    `DOCSY_THEME_PKG (${REGISTRY_PKG}) is an exact-version or dist-tag form of the @docsy/theme registry package`,
   );
   const view = run('npm', ['view', REGISTRY_PKG, 'version'], {
     cwd: repoRoot,
@@ -432,14 +466,15 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
     `${REGISTRY_PKG} resolves to a single version (got: ${expected})`,
   );
   // A prerelease checkout names the artifact just published (manual RC flow);
-  // a stale dist-tag resolving elsewhere would vet the wrong artifact. A
-  // -dev checkout can't anchor this (the RC stamp is uncommitted and restored
-  // post-publish); the notes have the driver eyeball the expecting line.
+  // any other resolution, a bare run's `latest` included, would vet the wrong
+  // artifact. A -dev checkout can't anchor this (the RC stamp is uncommitted
+  // and restored post-publish); the notes have the driver eyeball the
+  // expecting line.
   if (/^\d+\.\d+\.\d+-/.test(THEME_VERSION) && !THEME_VERSION.endsWith('-dev'))
     assert.equal(
       expected,
       THEME_VERSION,
-      `${REGISTRY_PKG} resolves to this prerelease checkout's version (a stale dist-tag vets the wrong artifact)`,
+      `${REGISTRY_PKG} resolves to this prerelease checkout's version (vet the prerelease explicitly by adding DOCSY_THEME_PKG=@docsy/theme@next to your command; a stale dist-tag vets the wrong artifact)`,
     );
   progress(`smoke-registry: expecting @docsy/theme@${expected}`);
   buildThemeConsumerSite('smoke-registry', REGISTRY_PKG, expected);
