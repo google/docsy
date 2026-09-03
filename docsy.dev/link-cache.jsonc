@@ -1064,10 +1064,24 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/click-to-copy-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs": {
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
+  },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
     "status": 200,
@@ -1088,6 +1102,13 @@
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
+  },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs": {
     "status": 200,
@@ -2894,9 +2915,34 @@
     "when": "2026-09-01T01:29:59Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/pull/2780": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/pull/2781": {
     "status": 200,
     "when": "2026-09-01T03:31:13Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/pull/2787": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/pull/2788": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/pull/2790": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/pull/2791": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/941": {
