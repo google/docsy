@@ -959,6 +959,35 @@ this:
 
 ## Customizing templates
 
+### Load scripts as plugins
+
+To load your own script without overriding any template, register it as a
+**plugin**: drop the file at `assets/js/plugins/`_`NAME`_`.js` and declare it in
+your site config, where _`NAME`_ is your plugin's name:
+
+```yaml
+params:
+  docsy:
+    plugins: [NAME]
+```
+
+Docsy builds, fingerprints, and loads the script with [subresource
+integrity][SRI]. An entry can also pass `options` (which reach the module as
+[build parameters][js-params]), set `defer`, or gate loading on a page flag; for
+the full registry contract, see the [implementation notes][plugins-impl].
+
+> [!NOTE]
+>
+> This section covers the essentials only: plugin authoring docs are in
+> progress, as part of [#2789][].
+
+<!-- prettier-ignore-start -->
+[#2789]: https://github.com/google/docsy/issues/2789
+[js-params]: https://gohugo.io/functions/js/build/#params
+[plugins-impl]: /project/implementation/script-loading/
+[SRI]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
+<!-- prettier-ignore-end -->
+
 ### Add code to head or before body end
 
 If you need to add some code (CSS import, cookie consent, or similar) to the
