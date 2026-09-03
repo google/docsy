@@ -310,6 +310,41 @@ test('a numeric plugin name resolves its asset', () => {
   );
 });
 
+test('a path-traversing plugin name is rejected with a warning', () => {
+  // Names address assets and partials by path; anything outside the
+  // [A-Za-z0-9_-] allowlist is refused before path construction (F1,
+  // 2026-09-02 security assessment).
+  const r = buildSite('plugins-name-traversal', {
+    files: {
+      ...content,
+      'assets/js/search.js': "console.log('not-a-plugin');\n",
+      'assets/js/plugins/hello.js': helloJs,
+    },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: ../search
+      - name: hello
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /\.\.\/search/,
+    'the invalid name is called out in a build warning',
+  );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /not-a-plugin|js\/search/,
+    'the page is free of the traversal-addressed script',
+  );
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'later well-formed entries still emit',
+  );
+});
+
 test('a nameless registry entry is skipped with a warning', () => {
   const r = buildSite('plugins-nameless', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },

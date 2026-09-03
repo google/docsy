@@ -21,6 +21,10 @@
   {{ with $entry.name }}{{ $name = printf "%v" . }}{{ end -}}
   {{ if not $name -}}
     {{ warnidf "docsy-plugin-unnamed" "Ignoring a params.docsy.plugins entry that has no name." -}}
+  {{ else if not (findRE `^[A-Za-z0-9_-]+$` $name) -}}
+    {{/* Names address assets and partials by path; refuse anything that could
+      traverse outside the plugin namespaces. */ -}}
+    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to letters, digits, hyphens, and underscores." $name -}}
   {{ else if ne $entry.enable false -}}
     {{ $path := printf "js/plugins/%s.js" $name -}}
     {{ with resources.Get $path -}}
