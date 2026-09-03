@@ -169,6 +169,11 @@
     "when": "2026-06-26T18:23:57Z",
     "via": "lychee",
   },
+  "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity": {
+    "status": 200,
+    "when": "2026-09-03T19:38:47Z",
+    "via": "lychee",
+  },
   "https://developers.google.com/search/docs/fundamentals/seo-starter-guide": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
@@ -1092,6 +1097,13 @@
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
+  },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/print-scripts.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T19:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs": {
     "status": 200,

@@ -153,34 +153,23 @@ history since 0.17.0][].
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
-- **Script override points moved** with the plugin conversions ([#2791][]):
-  `assets/js/markmap.js` and `assets/js/click-to-copy.js` moved to
-  `assets/js/plugins/`, and `static/js/tabpane-persist.js` to
-  `assets/js/plugins/tabpane-persist.js`; the partials `scripts/markmap.html`
-  and `scripts/tabpane-persist.html` are gone, and `scripts/code-copy.html` is
-  replaced by `scripts/prism.html` plus the click-to-copy plugin. Sites
-  overriding any of these files must move their overrides; old copies are
-  silently ignored, and stale `scripts.html` or `scripts/main-bundle.html`
-  overrides fail the build on the removed bundle members. Overrides of the
-  tabpane shortcode or markmap code-block rendering must be refreshed to keep
-  setting the new page-gate flags (`hasTabs`, `hasMarkmap`). With markmap
-  enabled, builds now fetch the autoloader from `cdn.jsdelivr.net` at build time
-  (as Mermaid and KaTeX builds already do); sites restricting `security.http`
-  must allow it.
+- **Script override points moved** with the plugin conversions: overrides of the
+  markmap, click-to-copy, and tabpane-persist scripts and partials, of the
+  tabpane shortcode, or of markmap code-block rendering need refreshing. For the
+  actions and paths, see the [0.18 post's plugin section][0.18.0-blog-plugins]
+  ([#2791][]).
 
 **New**:
 
 - **Plugins**: added `params.docsy.plugins`, a registry for dropping in scripts
-  (with optional styles and markup) without layout overrides: declare
+  (with optional styles and markup) without layout overrides. Declare
   `assets/js/plugins/NAME.js` in your site config and Docsy builds,
   fingerprints, and loads it with SRI ([#2788][], [#2789][]).
-- Converted the first theme features to plugins (markmap, tabpane-persist, and
-  click-to-copy): disabled integrations ship zero bytes, markmap and tab
-  persistence load only on pages that use them, and the markmap autoloader is
-  fetched at build time and served same-origin with SRI (its runtime libraries
-  still load from the CDN, at versions the autoloader pins). Deprecated
-  `params.markmap.enable` in favor of a `params.docsy.plugins` entry; the legacy
-  param still works, with a build warning ([#2791][]).
+- Converted the first theme features to plugins ([markmap, tabpane-persist, and
+  click-to-copy][0.18.0-blog-plugins]): disabled integrations ship zero bytes,
+  markmap and tab persistence load only on pages that use them (the deprecated
+  `params.markmap.enable` keeps site-wide loading), and the markmap autoloader
+  is vendored at build time with SRI ([#2791][]).
 
 **Other changes**:
 
@@ -189,6 +178,8 @@ history since 0.17.0][].
   scrolling multiple times after window resizes ([#1436][]).
 - Reverted the root baseof's caching of the scripts partial: per-page script
   gating made the cached render page-dependent ([#2787][]).
+- Fixed page-gated scripts (Mermaid, KaTeX, and the new plugin gates) missing
+  from section print output ([#2791][]).
 
 [**Experimental**](#experimental):
 
@@ -222,6 +213,7 @@ history since 0.17.0][].
 [#2791]: https://github.com/google/docsy/pull/2791
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
+[0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [git history since 0.17.0]:
   https://github.com/google/docsy/compare/v0.17.0...main
 
