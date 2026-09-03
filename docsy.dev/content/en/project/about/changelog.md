@@ -199,6 +199,10 @@ history since 0.17.0][].
 - Re-homed script/plugin architecture notes from code comments into the new
   project docs Quality section, with a routing rule for future code-adjacent
   docs ([#2790][]).
+- Restructured the publish-verify release step into numbered gates and hardened
+  the smoke suite's npm-registry vet: exact, registry-resolved versions, with
+  local npm hardening never relaxed except by an explicit per-run override
+  ([#2786][]).
 
 [#1436]: https://github.com/google/docsy/issues/1436
 [#2774]: https://github.com/google/docsy/pull/2774
@@ -206,6 +210,7 @@ history since 0.17.0][].
 [#2779]: https://github.com/google/docsy/pull/2779
 [#2780]: https://github.com/google/docsy/pull/2780
 [#2781]: https://github.com/google/docsy/pull/2781
+[#2786]: https://github.com/google/docsy/pull/2786
 [#2787]: https://github.com/google/docsy/pull/2787
 [#2788]: https://github.com/google/docsy/pull/2788
 [#2789]: https://github.com/google/docsy/issues/2789

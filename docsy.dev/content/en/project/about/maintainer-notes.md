@@ -235,19 +235,50 @@ NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 
 From the repo root:
 
-| Script         | Role                                                                                                |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                          |
-| `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
-| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
+| Script         | Role                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                     |
+| `test:smoke`   | Builds minimal test sites from the theme package and from GitHub; see [test:smoke](#testsmoke) |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests       |
 
 Notes:
 
 - All but `test:smoke` run in CI.
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
   `node --test tests/supply-chain-audit.test.mjs`.
-- Run `test:smoke` manually for `main` or PR-branch validation. Its tests
-  auto-target the current branch's GitHub upstream.
+
+### test:smoke
+
+Run `test:smoke` locally for `main` or PR-branch validation. Its GitHub-sourced
+builds auto-target the current branch's GitHub upstream.
+
+- Slow, network-bound
+- Builds a minimal test site from:
+  - Theme package: packed tarball, npm registry
+  - GitHub: NPM, Hugo module, clone
+- Builds with the pinned Hugo; the Hugo-module site also with the declared
+  minimum Hugo version
+
+Security:
+
+- The npm-registry install test vets an exact version: the checkout's, when its
+  release tag is in the checkout's history, otherwise `latest`'s resolution;
+  asserting the installed version against the npm registry's own resolution.
+- `DOCSY_THEME_PKG` overrides the target: exact version or dist-tag; a
+  non-`-dev` prerelease checkout (an RC, for example) requires it.
+- The suite never relaxes local npm hardening on its own. When local hardening
+  blocks a run:
+  - A local install guard's block names its own override; follow it to allow the
+    run.
+  - For a release-age gate on a fresh Docsy theme package: set
+    `DOCSY_THEME_MIN_RELEASE_AGE=N`, N = the release age in whole days (0 on
+    release day; higher still blocks, lower over-relaxes), to relax the cooldown
+    for the theme-package install commands only: the theme and the dependencies
+    those installs resolve; nothing else in the run.
+  - Any other pinned scratch dependency younger than a local age gate fails its
+    leg until the pin ages (npm's error names the date cutoff).
+  - The make-site scratch sites carry their own baked consumer-simulation
+    `.npmrc` (7-day gate), which can differ from your machine's settings.
 
 ### Structural guards: one concern per file
 
@@ -599,33 +630,49 @@ If not adjust accordingly.
     only publishes tags on `main`'s history: a patch release tagged on the
     `release` branch needs the workflow's ancestry check deliberately widened
     first.
-    - **Before approving** the waiting `npm-publish` deployment. The guards
-      re-verify content and registry order mechanically (an out-of-order or
-      inconsistent run fails instead of publishing), and the approval prompt
-      only appears after the pack job succeeded, so approval owns **intent**.
-      Note that on tag pushes the workflow definition itself comes from the
-      tagged commit, so for an unexpected tag don't trust the run's green
-      checks; the two checks below are the real barrier:
-      - the run's commit is the release commit you drove (the tip of `$BASE` at
-        tag time; an unrelated merge landing since is fine), and the tag actor
-        is the release driver you expect; anything else: reject and ask;
-      - the run is `publish.yaml` on `google/docsy` (another workflow could
-        reference the same environment).
-    - Check that the workflow run succeeded and that the registry version
-      matches the tag:
 
-      ```sh
-      npm view @docsy/theme version dist-tags
-      ```
+    When copying this procedure into a release-run tracker, give each substep
+    its own checkbox.
 
-    - Re-point the `next` dist-tag at the new stable (dist-tags never move on
-      their own, and `next` must stay `>= latest`). OIDC covers only the publish
-      itself, so run this inside a narrow auth window (login/logout, next
-      bullet), then re-verify the dist-tags:
+    1. **Approve** the waiting `npm-publish` deployment. The guards re-verify
+       content and npm-registry order mechanically (an out-of-order or
+       inconsistent run fails instead of publishing), and the approval prompt
+       only appears after the pack job succeeded, so approval owns **intent**.
+       Note that on tag pushes the workflow definition itself comes from the
+       tagged commit, so for an unexpected tag don't trust the run's green
+       checks; the two checks below are the real barrier:
+       - the run's commit is the release commit you drove (the tip of `$BASE` at
+         tag time; an unrelated merge landing since is fine), and the tag actor
+         is the release driver you expect; anything else: reject and ask;
+       - the run is `publish.yaml` on `google/docsy` (another workflow could
+         reference the same environment).
 
-      ```sh
-      npm dist-tag add @docsy/theme@${REL#v} next
-      ```
+    2. **Check** that the workflow run succeeded and that the npm-registry
+       version matches the tag:
+
+       ```sh
+       npm view @docsy/theme version dist-tags
+       ```
+
+    3. **Re-point the `next` dist-tag** at the new stable (dist-tags never move
+       on their own, and `next` must stay `>= latest`). OIDC covers only the
+       publish itself, so run this inside a narrow auth window (login/logout,
+       manual-publish note below), then re-verify the dist-tags:
+
+       ```sh
+       npm dist-tag add @docsy/theme@${REL#v} next
+       ```
+
+    4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
+       `$BASE`; the npm-registry install test vets exactly the just-published
+       version. (On a machine with local npm hardening, the first run fails by
+       design; rerun as the failure directs.)
+
+       ```sh
+       npm run test:smoke
+       ```
+
+    Exceptions to the CI flow:
 
     - **Manual publishes** (prereleases only): the workflow triggers only on
       stable `vX.Y.Z` tags, so prereleases always publish manually. Publish from
@@ -641,6 +688,16 @@ If not adjust accordingly.
       materializes the LICENSE), even under a script-disabling npm config. Run
       manual npm commands from within the repo: the root `.npmrc` pins the
       `@docsy` scope registry against local overrides.
+
+      Vet a prerelease publish explicitly, before restoring the dev version
+      stamp (while the prerelease version is still in `theme/package.json`, the
+      npm-registry install test refuses other targets, a bare run's `latest`
+      included), and confirm the run's "expecting" line names the prerelease you
+      just published:
+
+      ```sh
+      DOCSY_THEME_PKG=@docsy/theme@next npm run test:smoke
+      ```
 
     - **If the CI publish is broken for a stable**, prefer fixing CI over a
       laptop publish: a manual publish carries no provenance attestation. As a

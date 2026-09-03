@@ -25,10 +25,12 @@ import {
   appendFileSync,
   existsSync,
   mkdirSync,
+  mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
   statSync,
+  writeFileSync,
   writeSync,
 } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -45,6 +47,35 @@ const MAKE_SITE = path.join(repoRoot, 'scripts', 'make-site.sh');
 // resolve the repo's own node_modules and mask a packaging gap. Only Hugo (the
 // build tool, not a dependency under test) is borrowed from the repo install.
 const HUGO_BIN = path.join(repoRoot, 'node_modules', '.bin', 'hugo');
+const THEME_VERSION = JSON.parse(
+  readFileSync(path.join(repoRoot, 'theme', 'package.json'), 'utf8'),
+).version;
+const SASS_VERSION = JSON.parse(
+  readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
+).devDependencies['sass-embedded'];
+assert.match(
+  SASS_VERSION ?? '',
+  /^\d+\.\d+\.\d+[\w.+-]*$/,
+  'the repo manifest carries an exact sass-embedded pin',
+);
+
+// One home for the age-gate remedy: a suite-owned knob, applied as a flag on
+// the theme-package installs only (the exact, asserted artifact under test,
+// plus its fresh dep pins). The generic npm knob is deliberately not used:
+// scratch sites have no lockfile, so a run-wide relaxation would admit fresh
+// transitive releases under the other pinned installs -- those stay under the
+// operator's ambient npm config, untouched in either direction.
+const AGE_GATE_REMEDY =
+  'add DOCSY_THEME_MIN_RELEASE_AGE=N to your command, N = the release age in whole days (0 on release day): higher still blocks, lower over-relaxes; the suite applies it to the theme-package installs only';
+// Load-time on purpose (unlike derivationError): a mistyped operator value
+// should fail before any network work, and it concerns every theme install.
+const ageGateOverride = process.env.DOCSY_THEME_MIN_RELEASE_AGE || undefined;
+if (ageGateOverride !== undefined)
+  assert.match(
+    ageGateOverride,
+    /^\d{1,4}$/,
+    `DOCSY_THEME_MIN_RELEASE_AGE (${ageGateOverride}) is a whole number of days (at most 4 digits)`,
+  );
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -64,9 +95,11 @@ function consumerEnv(site) {
 }
 
 // The documented consumer action for the dartsass transpiler: the site
-// provides its own sass compiler (Install Dart Sass, prerequisites doc).
+// provides its own sass compiler (Install Dart Sass, prerequisites doc) --
+// at the repo's tested pin, so a fresh upstream sass release can't perturb
+// the suite.
 function installSiteSass(label, npmOpts) {
-  progress(`${label}: npm install sass-embedded…`);
+  progress(`${label}: npm install sass-embedded@${SASS_VERSION}…`);
   assert.equal(
     run(
       'npm',
@@ -76,7 +109,7 @@ function installSiteSass(label, npmOpts) {
         '--no-audit',
         '--no-fund',
         '--save-dev',
-        'sass-embedded',
+        `sass-embedded@${SASS_VERSION}`,
       ],
       npmOpts,
     ).status,
@@ -241,10 +274,10 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
 // Install the theme-only package into a scratch site outside the repo and
 // exercise the consumer contract: a styled build plus the wired gen-favicons
 // bin. The tarball test packs theme/ from this checkout: the pre-publish
-// check that covers the code under review. The registry test installs a
+// check that covers the code under review. The npm-registry test installs a
 // published spec: the post-publish check.
 
-function buildThemeConsumerSite(name, pkgSpec) {
+function buildThemeConsumerSite(name, themePkgSpec, expected) {
   const site = path.join(TMP, name);
   rmSync(site, { recursive: true, force: true });
 
@@ -256,18 +289,65 @@ function buildThemeConsumerSite(name, pkgSpec) {
     'hugo new site',
   );
 
-  progress(`${name}: npm install ${pkgSpec}…`);
+  progress(`${name}: npm install ${themePkgSpec}…`);
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
-  assert.equal(
-    run(
-      'npm',
-      ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
-      npmOpts,
-    ).status,
-    0,
-    `${pkgSpec} installs`,
+  // Pin which npm registry serves the scoped package, mirroring the root .npmrc
+  // (its rationale comment): the expected version was resolved against npmjs,
+  // so the install must not route through a user-configured mirror whose
+  // same-version artifact could differ.
+  writeFileSync(
+    path.join(site, '.npmrc'),
+    '@docsy:registry=https://registry.npmjs.org/\n',
   );
+  const install = run(
+    'npm',
+    [
+      'install',
+      '--ignore-scripts',
+      '--no-audit',
+      '--no-fund',
+      // The granted override applies here only (rationale at AGE_GATE_REMEDY);
+      // as a flag it outranks env-borne config. Load-bearing for both legs:
+      // the tarball's path spec is ungated, but its fresh theme dep pins
+      // resolve from the npm registry too.
+      ...(ageGateOverride !== undefined
+        ? [`--min-release-age=${ageGateOverride}`]
+        : []),
+      themePkgSpec,
+    ],
+    npmOpts,
+  );
+  // A fresh release is younger than a local min-release-age gate (which the
+  // suite honors); map that failure -- identified by npm's date-cutoff
+  // diagnostic, so other ETARGETs (broken pins) keep npm's own message -- to
+  // the deliberate rerun.
+  if (
+    install.status !== 0 &&
+    /ETARGET/.test(install.stderr ?? '') &&
+    /with a date before/.test(install.stderr ?? '')
+  ) {
+    assert.fail(
+      `${themePkgSpec} is installable (blocked by your npm min-release-age setting; the theme package or its dependency pins are the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
+    );
+  }
+  assert.equal(install.status, 0, `${themePkgSpec} installs`);
+  const installed = JSON.parse(
+    readFileSync(
+      path.join(site, 'node_modules', '@docsy', 'theme', 'package.json'),
+      'utf8',
+    ),
+  ).version;
+  progress(`${name}: installed @docsy/theme@${installed}`);
+  // Assert before building: a redirected install would otherwise burn a full
+  // build of the wrong version, whose own failure could mask this diagnostic.
+  if (expected !== undefined) {
+    assert.equal(
+      installed,
+      expected,
+      `installed version matches the npm registry's resolution of ${themePkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; ${AGE_GATE_REMEDY})`,
+    );
+  }
   installSiteSass(name, npmOpts);
 
   // The one-line consumer config change (@ must be quoted in YAML).
@@ -284,6 +364,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
   assertBuilt(name);
   assertGenFaviconsBin(site);
   progress(`${name}: ok`);
+  return installed;
 }
 
 test('tarball install of @docsy/theme packed from this checkout', () => {
@@ -312,16 +393,137 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   assert.equal(pack.status, 0, 'npm pack exits 0');
   const tgz = readdirSync(packDest).find((f) => f.endsWith('.tgz'));
   assert.ok(tgz, 'npm pack produced a tarball');
-  buildThemeConsumerSite('smoke-tarball', path.join(packDest, tgz));
+  const installed = buildThemeConsumerSite(
+    'smoke-tarball',
+    path.join(packDest, tgz),
+  );
+  // Dev versions pack with a build-ID stamp appended (scripts/pack-stamp.mjs);
+  // releases and RCs pack unchanged, so only a -dev checkout may differ.
+  assert.ok(
+    installed === THEME_VERSION ||
+      (THEME_VERSION.endsWith('-dev') &&
+        installed.startsWith(`${THEME_VERSION}+`)),
+    `packed theme version (${installed}) matches the checkout (${THEME_VERSION})`,
+  );
 });
 
-// DOCSY_THEME_PKG overrides the registry spec: e.g. @docsy/theme@next to vet
-// an RC, or @docsy/theme@0.16.0 to pin a version. The default, the bare name,
-// resolves to the `latest` dist-tag: whatever the registry currently serves
-// plain `npm install @docsy/theme` users.
-const REGISTRY_PKG = process.env.DOCSY_THEME_PKG ?? '@docsy/theme';
-test(`registry install of ${REGISTRY_PKG}`, () => {
-  buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
+// Npm-registry spec: an exact pin when the checkout is at a published release
+// (stable manifest version whose git tag is an ancestor of HEAD: notes step
+// 15.4, tolerating unrelated merges landing after the tag); a stable-stamped
+// but untagged checkout is release prep pre-publish (notes step 8), where the
+// version isn't on the npm registry yet, so `latest` gets vetted instead. The
+// test resolves the spec's expected version npm-registry-side (npm view, ungated
+// by min-release-age) and asserts the installed version matches, so a local
+// age gate can't silently redirect any spec form to an older stable (the
+// 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG overrides the spec:
+// e.g. @docsy/theme@next to vet an RC. `||`: an empty override means unset.
+let derivationError;
+const NPM_REGISTRY_PKG =
+  process.env.DOCSY_THEME_PKG || derivedNpmRegistrySpec();
+function derivedNpmRegistrySpec() {
+  if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)) {
+    const gitArgs = ['-C', repoRoot];
+    // spawnSync, not run(): a nonzero exit is an expected answer for both
+    // probes, not a failure to dump.
+    const tag = spawnSync(
+      'git',
+      [
+        ...gitArgs,
+        'rev-parse',
+        '-q',
+        '--verify',
+        `refs/tags/v${THEME_VERSION}`,
+      ],
+      { encoding: 'utf8' },
+    );
+    // Exit 1 (silent) is "no such tag" (pre-publish, or a clone without the
+    // tag fetched); anything else is a checkout without usable git identity
+    // (source archive, broken git), where a guessed target could vet the
+    // wrong artifact. Recorded, not thrown: a load-time throw would abort the
+    // file's five other tests.
+    if (tag.status !== 0 && tag.status !== 1) {
+      derivationError =
+        'the release state of this checkout is determinable (git identity unavailable; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
+      return '@docsy/theme@latest';
+    }
+    if (tag.status === 0) {
+      const ancestor = spawnSync(
+        'git',
+        [...gitArgs, 'merge-base', '--is-ancestor', tag.stdout.trim(), 'HEAD'],
+        { encoding: 'utf8' },
+      );
+      if (ancestor.status === 0) return `@docsy/theme@${THEME_VERSION}`;
+      // Same status routing as the tag probe: only "not an ancestor" (1)
+      // falls back; a fatal error must not silently redirect the vet.
+      if (ancestor.status !== 1) {
+        derivationError =
+          'the release state of this checkout is determinable (git ancestry check failed; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
+        return '@docsy/theme@latest';
+      }
+    }
+    progress(
+      `npm registry: ${THEME_VERSION} is stamped but its tag is ${
+        tag.status === 0
+          ? 'not in this history'
+          : `not in this clone (pre-publish, or tags unfetched; if ${THEME_VERSION} is published, fetch tags or set DOCSY_THEME_PKG)`
+      }; vetting latest`,
+    );
+  }
+  return '@docsy/theme@latest';
+}
+test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
+  if (derivationError) assert.fail(derivationError);
+  // The vet targets the npm-registry package, optionally pinned by exact
+  // version or dist-tag: a path, foreign-package, or range override would
+  // test something other than what it reports, and on Windows the spec
+  // reaches npm through a shell (winShell), so metacharacters stay out.
+  assert.match(
+    NPM_REGISTRY_PKG,
+    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?|[A-Za-z][\w.-]*))?$/,
+    `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is the @docsy/theme npm-registry package, with an optional exact-version or dist-tag pin`,
+  );
+  // The expectation must come from the npm registry itself, so the view runs
+  // against a fresh, empty cache: a miss can't be served stale (under an
+  // offline config it fails loudly), whereas --prefer-online is a no-op here
+  // (view already prefers online) and loses to ambient offline/prefer-offline
+  // config, and a warm cache serves stale-if-error even online. The install
+  // keeps the shared cache: a stale install can't match a fresh expectation.
+  const viewCache = mkdtempSync(path.join(TMP, 'view-cache-'));
+  const view = run(
+    'npm',
+    ['view', `--cache=${viewCache}`, NPM_REGISTRY_PKG, 'version'],
+    {
+      cwd: repoRoot,
+      shell: winShell,
+    },
+  );
+  rmSync(viewCache, { recursive: true, force: true });
+  const expected = (view.stdout ?? '').trim();
+  if (view.status !== 0 || !expected) {
+    assert.fail(
+      `${NPM_REGISTRY_PKG} resolves on the npm registry (view failed: registry unreachable, or for a fresh release, check that the npm publish landed: maintainer notes step 15)`,
+    );
+  }
+  // Range-ish specs make npm view emit labeled multi-line output; fail here,
+  // where the cause is visible, rather than at the version equality.
+  assert.match(
+    expected,
+    /^\d+\.\d+\.\d+\S*$/,
+    `${NPM_REGISTRY_PKG} resolves to a single version (got: ${expected})`,
+  );
+  // A prerelease checkout names the artifact just published (manual RC flow);
+  // any other resolution, a bare run's `latest` included, would vet the wrong
+  // artifact. A -dev checkout can't anchor this (the RC stamp is uncommitted
+  // and restored post-publish); the notes have the driver eyeball the
+  // expecting line.
+  if (/^\d+\.\d+\.\d+-/.test(THEME_VERSION) && !THEME_VERSION.endsWith('-dev'))
+    assert.equal(
+      expected,
+      THEME_VERSION,
+      `${NPM_REGISTRY_PKG} resolves to this prerelease checkout's version (vet the prerelease explicitly by adding DOCSY_THEME_PKG=@docsy/theme@next to your command; a stale dist-tag vets the wrong artifact)`,
+    );
+  progress(`smoke-npm-registry: expecting @docsy/theme@${expected}`);
+  buildThemeConsumerSite('smoke-npm-registry', NPM_REGISTRY_PKG, expected);
 });
 
 // --- declared minimum Hugo version actually builds --------------------------
