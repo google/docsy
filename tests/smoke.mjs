@@ -58,11 +58,21 @@ assert.match(
   'the repo manifest carries an exact sass-embedded pin',
 );
 
-// One home for the age-gate remedy. The override spans the whole run's
-// installs (env config outranks even a project .npmrc gate), which is
-// acceptable because every npm-registry install here is an exact reviewed pin.
+// One home for the age-gate remedy. The suite scopes the granted override to
+// the theme install (the exact, asserted artifact under test): scratch sites
+// have no lockfile, so a run-wide relaxation would also admit fresh
+// transitive releases under the other pinned top-level installs. The knob is
+// captured here, stripped from the environment the child installs inherit,
+// and re-applied as a flag on the one install it targets.
 const AGE_GATE_REMEDY =
   'add NPM_CONFIG_MIN_RELEASE_AGE=N to your command, N no lower than the release age in whole days (0 on release day)';
+let ageGateOverride;
+for (const key of Object.keys(process.env)) {
+  if (/^npm_config_min[-_]release[-_]age$/i.test(key)) {
+    ageGateOverride ??= process.env[key];
+    delete process.env[key];
+  }
+}
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -289,7 +299,18 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
   );
   const install = run(
     'npm',
-    ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
+    [
+      'install',
+      '--ignore-scripts',
+      '--no-audit',
+      '--no-fund',
+      // The captured age-gate override applies here only (rationale at
+      // AGE_GATE_REMEDY); harmless for the tarball leg's path spec.
+      ...(ageGateOverride !== undefined
+        ? [`--min-release-age=${ageGateOverride}`]
+        : []),
+      pkgSpec,
+    ],
     npmOpts,
   );
   // A fresh release is younger than a local min-release-age gate (which the
@@ -385,9 +406,9 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
 // age gate can't silently redirect any spec form to an older stable (the
 // 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG overrides the spec:
 // e.g. @docsy/theme@next to vet an RC. `||`: an empty override means unset.
+let derivationError;
 const NPM_REGISTRY_PKG =
   process.env.DOCSY_THEME_PKG || derivedNpmRegistrySpec();
-let derivationError;
 function derivedNpmRegistrySpec() {
   if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)) {
     const gitArgs = ['-C', repoRoot];
@@ -421,21 +442,23 @@ function derivedNpmRegistrySpec() {
     }
     progress(
       `npm registry: ${THEME_VERSION} is stamped but its tag is ${
-        tag.status === 0 ? 'not in this history' : 'not created yet'
-      } (pre-publish); vetting latest`,
+        tag.status === 0
+          ? 'not in this history'
+          : `not in this clone (pre-publish, or tags unfetched; if ${THEME_VERSION} is published, fetch tags or set DOCSY_THEME_PKG)`
+      }; vetting latest`,
     );
   }
   return '@docsy/theme@latest';
 }
 test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
   if (derivationError) assert.fail(derivationError);
-  // The vet targets the npm-registry package, by exact version or dist-tag only:
-  // a path or foreign-package override would test something else while
-  // reporting an npm-registry vet, and on Windows the spec reaches npm through a
-  // shell (winShell), so metacharacters and ranges stay out.
+  // The vet targets the npm-registry package, by exact version or dist-tag
+  // only: a path, foreign-package, or range override would test something
+  // other than what it reports, and on Windows the spec reaches npm through
+  // a shell (winShell), so metacharacters stay out.
   assert.match(
     NPM_REGISTRY_PKG,
-    /^@docsy\/theme(@[\w.+~-]+)?$/,
+    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[\w.]+)?(\+[\w.]+)?|[A-Za-z][\w-]*))?$/,
     `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is an exact-version or dist-tag form of the @docsy/theme npm-registry package`,
   );
   const view = run('npm', ['view', NPM_REGISTRY_PKG, 'version'], {

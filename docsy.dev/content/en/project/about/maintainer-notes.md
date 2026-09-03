@@ -258,7 +258,7 @@ Notes:
     prerelease checkout requires it.
   - The suite never overrides local npm hardening: an install guard or a
     release-age gate on the theme install fails the run loudly, naming the
-    deliberate rerun knob.
+    deliberate rerun knob (which the suite applies to the theme install only).
 
 ### Structural guards: one concern per file
 
