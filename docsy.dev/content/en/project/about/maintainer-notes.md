@@ -38,7 +38,10 @@ restating them:
   milestone gathers the issues resolved. The release notes lead with links to
   the changelog entry and the release post. Authored artifacts link to these
   rather than reproducing the enumeration.
-- **Test and code comments**: implementation rationale and regression
+- **Project docs** (`project/`): architecture, design decisions, and quality-net
+  rationale, for maintainers and contributors. Architecture material lands here,
+  not in code comments; a comment keeps a purpose line and links its page.
+- **Test and code comments**: local implementation rationale and regression
   background.
 
 **Version values** follow the same ownership rule. An evergreen doc that cites a

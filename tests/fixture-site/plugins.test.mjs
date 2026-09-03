@@ -1,7 +1,7 @@
-// Loop-contract tests for params.docsy.plugins; the contract lives in the
-// plugin loop's header (theme/layouts/_partials/scripts/plugins.html).
-// Theme-plugin shadowing is pinned when the first theme plugin ships (none
-// exists to shadow yet).
+// Loop-contract tests for params.docsy.plugins. Contract:
+// https://www.docsy.dev/project/implementation/script-loading/
+// Net inventory and rationale:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -336,7 +336,7 @@ test('a nameless registry entry is skipped with a warning', () => {
 
 test('duplicate registrations publish distinct builds, in development too', () => {
   // Same source, different options: the builds must not share one
-  // published path (see the loop's fingerprint note).
+  // published path (the always-fingerprint rule; implementation page).
   const r = buildSite('plugins-duplicates', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     args: ['--environment', 'development'],

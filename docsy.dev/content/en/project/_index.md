@@ -1,7 +1,8 @@
 ---
 title: Project and website documentation
 linkTitle: Project docs
-description: How Docsy theme and website are built, maintained, and deployed.
+description:
+  Architecture and maintainer workflows for the Docsy theme and website
 aliases: [site]
 cascade:
   type: docs
@@ -9,6 +10,8 @@ cascade:
     hide_feedback: true
 cSpell:ignore: docsydocs
 ---
+
+This section is for Docsy maintainers and contributors.
 
 <span class="badge bg-warning text-bg-warning fs-6">
 {{% _param FAS person-digging " pe-2" %}} Section under construction. {{%
@@ -28,8 +31,8 @@ Planned content organization (tentative):
   SCSS/JS customizations, patches, and internal shims.
 - [Build](build/): Tooling, local development setup, CI/CD workflows, deployment
   environments, and automation details.
-- **Quality**: Link checking, accessibility standards, tests, review practices,
-  and other quality-related processes.
+- [Quality](quality/): Tests, link checking, accessibility standards, and review
+  practices.
 - **Roadmap**: Milestones, backlog, priorities, technical debt, and
   design/implementation decisions.
 

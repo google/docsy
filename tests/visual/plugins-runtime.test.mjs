@@ -1,8 +1,6 @@
-// Plugin runtime net: proves an emitted plugin actually *executes* in a
-// browser: a static-markup check can bless output whose runtime is broken
-// (wrong script ordering, a botched build). Red-proof built in: a
-// deliberately broken plugin must land in the error tally, so an empty
-// tally can't false-green.
+// Plugin runtime net: an emitted plugin must actually execute in a browser.
+// Rationale and red-proof:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -49,8 +47,8 @@ async function loadHome() {
   const errors = [];
   page.on('pageerror', (err) => errors.push(String(err)));
   page.on('console', (msg) => {
-    // Failed resource loads (aborted off-origin fetches, a missing favicon)
-    // are environment noise, same policy as js-runtime.test.mjs.
+    // Failed resource loads are environment noise here: off-origin
+    // requests abort by design (offline-safe runs).
     if (msg.type() === 'error' && !/Failed to load resource/.test(msg.text()))
       errors.push(msg.text());
   });
@@ -73,9 +71,7 @@ test('an emitted plugin executes: options and DOM effects land', async () => {
   assert.equal(probe.token, 'runtime-net', 'plugin options reach the runtime');
   assert.equal(probe.dataset, 'ran', 'the plugin mutated the DOM');
   await page.close();
-  // Red-proof doubling as the assertion: the broken plugin's error must be
-  // visible to the collector, so an empty tally from the probe plugin
-  // would be meaningful.
+  // Red-proof doubling as the assertion (rationale: quality page).
   assert.equal(errors.length, 1, 'error tally sees exactly the broken plugin');
   assert.match(
     errors[0],

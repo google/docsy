@@ -145,6 +145,6 @@ Section pages:
 - [Community](/community/)
 - [Welcome to Docsy](/docs/)
 - [Examples and templates](/examples/): Get started with a template or explore some Docsy-based sites
-- [Project and website documentation](/project/): How Docsy theme and website are built, maintained, and deployed.
+- [Project and website documentation](/project/): Architecture and maintainer workflows for the Docsy theme and website
 - [Search Results](/search/)
 - [Docsy tests](/tests/): Tests of Docsy features

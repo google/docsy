@@ -1,15 +1,8 @@
 // Runtime JS console-error net (google/docsy#1436): loads representative
 // fixture-site pages in a real browser and asserts that no uncaught
-// exception or console error fires. The markup and visual goldens can't
-// see JS runtime breakage (a missing global, a botched conversion); this
-// net can, cheaply. Two fixture variants cover both search bundles:
-// scripts.html ships offline-search.js or search.js, never both.
-//
-// Unlike the visual shots, pages here load their real CDN script deps
-// (lunr, markmap, mermaid), so this suite needs network access. Failed
-// resource loads are filtered from the console tally: they're environment
-// noise here, and any JS breakage they cause still surfaces as a
-// pageerror (e.g. a dependent script's missing global).
+// exception or in-scope console error fires. Needs network access (real
+// CDN deps). Rationale and particulars:
+// https://www.docsy.dev/project/quality/script-loading/
 
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -138,10 +131,7 @@ after(async () => {
 });
 
 // Load a page and collect JS failures: uncaught exceptions (pageerror)
-// and console-level errors. Resource-load failures are kept only for
-// same-origin scripts and stylesheets (a broken first-party bundle is a
-// defect); off-origin (CDN) and non-code resource noise is filtered, and
-// any JS breakage such noise causes still surfaces as a pageerror.
+// and console-level errors, filtered per the quality page (URL above).
 // Bounded window: errors scheduled well after the settle delay are out of
 // scope here; interaction probes carry their own collectors.
 async function collectPageErrors(url) {
@@ -171,8 +161,7 @@ async function collectPageErrors(url) {
   return errors;
 }
 
-// Collector self-test: a page that throws must be reported, so a silent
-// collector (wrong event names, races) can't masquerade as all-green.
+// Collector self-test (red-proof rationale: the quality page, URL above).
 test('js-runtime collector: an uncaught page exception is reported', async () => {
   const errors = await collectPageErrors(selfTestUrl);
   assert.ok(

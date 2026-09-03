@@ -7,6 +7,11 @@ weight: 100
 no_list: true
 ---
 
+## Subsystems
+
+- [Script loading](/project/implementation/script-loading/): registry contract,
+  shape guards, and build details of the plugin loop
+
 ## Patches and workarounds
 
 - [ScrollSpy patch for Bootstrap](/project/implementation/scrollspy-patch/):
