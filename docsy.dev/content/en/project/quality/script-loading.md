@@ -57,8 +57,8 @@ Two browser nets under `tests/visual/`:
 
 - [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
   real browser and asserts that no uncaught exception or in-scope console error
-  fires, alongside behavior probes (search, diagrams, navbar). Markup and
-  visual goldens can't see JS runtime breakage (a missing global, a botched
+  fires, alongside behavior probes (search, diagrams, navbar). Markup and visual
+  goldens can't see JS runtime breakage (a missing global, a botched
   conversion); this net can ([#1436][]).
   - Two fixture variants cover both search bundles: the main bundle
     (`scripts/main-bundle.html`) concatenates `offline-search.js` or `search.js`

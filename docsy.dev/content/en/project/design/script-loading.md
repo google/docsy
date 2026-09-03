@@ -64,9 +64,8 @@ The decomposition has two design consequences:
 
 [`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
 `params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
-pattern. For the
-registry contract, shape guards, and build details, see the [implementation
-notes][impl].
+pattern. For the registry contract, shape guards, and build details, see the
+[implementation notes][impl].
 
 Two ordering decisions:
 
