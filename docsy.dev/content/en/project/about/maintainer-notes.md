@@ -235,25 +235,28 @@ NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 
 From the repo root:
 
-| Script         | Role                                                                                                                                                 |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                                                                           |
-| `test:smoke`   | Slow, network-bound; builds consumer sites from GitHub (NPM, Hugo module, clone, minimum-Hugo) and from the theme package (packed tarball, registry) |
-| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests                                                             |
+| Script         | Role                                                                                         |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                   |
+| `test:smoke`   | Builds minimal test sites from the theme package and from GitHub; see note below for details |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests     |
 
 Notes:
 
 - All but `test:smoke` run in CI.
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
   `node --test tests/supply-chain-audit.test.mjs`.
-- Run `test:smoke` manually for `main` or PR-branch validation. Its tests
-  auto-target the current branch's GitHub upstream.
-- The `test:smoke` registry-install test vets an exact version (the checkout's,
-  when its release tag is in the checkout's history; otherwise `latest`),
-  asserting the installed version against the registry's own resolution. The
-  suite never overrides local npm hardening: an install guard or a release-age
-  gate on the theme install fails the run loudly, naming the deliberate rerun
-  knob.
+- `test:smoke`:
+  - Run it manually for `main` or PR-branch validation. Its tests auto-target
+    the current branch's GitHub upstream.
+  - Builds a minimal test site from the theme package (packed tarball, registry)
+    and from GitHub (NPM, Hugo module, clone, minimum-Hugo).
+  - The registry-install test vets an exact version (the checkout's, when its
+    release tag is in the checkout's history; otherwise `latest`), asserting the
+    installed version against the registry's own resolution.
+  - The suite never overrides local npm hardening: an install guard or a
+    release-age gate on the theme install fails the run loudly, naming the
+    deliberate rerun knob.
 
 ### Structural guards: one concern per file
 
