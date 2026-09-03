@@ -22,6 +22,9 @@
   {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: register markmap under params.docsy.plugins instead." -}}
   {{ $registry = $registry | append (dict "name" "markmap") -}}
 {{ end -}}
+{{ if not (in $names "tabpane-persist") -}}
+  {{ $registry = $registry | append (dict "name" "tabpane-persist" "pageGate" "hasTabs") -}}
+{{ end -}}
 {{ range $registry -}}
   {{ $entry := . -}}
   {{ if not (reflect.IsMap $entry) -}}

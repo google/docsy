@@ -1,7 +1,7 @@
 // jQuery-absence gate (google/docsy#1436): the theme ships and loads no
 // jQuery. Locks the removal in two layers: rendered pages reference no
-// jquery script, and authored theme JS (assets, first-party static JS,
-// and inline layout scripts) contains no jQuery usage tokens. prism.js
+// jquery script, and authored theme JS (assets — plugins included — and
+// inline layout scripts) contains no jQuery usage tokens. prism.js
 // and deflate.js under theme/static/js/ are exempt: vendored third-party
 // bundles, upstream-owned and jQuery-free by their own contract.
 
@@ -54,11 +54,8 @@ test('authored theme JS contains no jQuery usage', () => {
       re: jsUsage,
     },
     {
-      name: 'first-party static JS',
-      // basename comparison: globSync returns backslash paths on Windows.
-      files: globSync('theme/static/js/*.js', { cwd: repoRoot }).filter(
-        (f) => !['prism.js', 'deflate.js'].includes(path.basename(f)),
-      ),
+      name: 'theme JS plugins',
+      files: globSync('theme/assets/js/plugins/*.js', { cwd: repoRoot }),
       floor: 1,
       re: jsUsage,
     },

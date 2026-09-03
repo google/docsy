@@ -1,5 +1,6 @@
 {{/* Check parameter types */ -}}
 
+{{ .Page.Store.Set "hasTabs" true -}}
 {{ $tpPersistAttrName := "data-td-tp-persist" -}}
 
 {{ with .Get "langEqualsHeader" -}}
