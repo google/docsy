@@ -131,7 +131,7 @@ after(async () => {
 });
 
 // Load a page and collect JS failures: uncaught exceptions (pageerror)
-// and console-level errors, filtered per the quality page (file header).
+// and console-level errors, filtered per the quality page (URL above).
 // Bounded window: errors scheduled well after the settle delay are out of
 // scope here; interaction probes carry their own collectors.
 async function collectPageErrors(url) {
@@ -161,7 +161,7 @@ async function collectPageErrors(url) {
   return errors;
 }
 
-// Collector self-test (red-proof: quality page, file header).
+// Collector self-test (red-proof rationale: the quality page, URL above).
 test('js-runtime collector: an uncaught page exception is reported', async () => {
   const errors = await collectPageErrors(selfTestUrl);
   assert.ok(

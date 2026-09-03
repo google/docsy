@@ -15,14 +15,15 @@ out of scope here.)
 
 Before 0.18, `scripts.html` mixed a few sub-partial dispatches (MarkMap,
 Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition moved
-every mechanism into a per-feature sub-partial without changing the default
-rendered output:
+every mechanism out of the dispatcher into sub-partials without changing the
+default rendered output:
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
   (PlantUML), `tabpane-persist.js`, `prism.js`.
-- **The main bundle**: Bootstrap and the theme's core scripts, concatenated into
-  `main.js` (`scripts/main-bundle.html`), minified and fingerprinted in
-  production.
+- **The main bundle**: Bootstrap and the theme's core scripts, plus param-gated
+  feature scripts (search, PlantUML, MarkMap, draw.io, dark mode, ScrollSpy),
+  concatenated into `main.js` (`scripts/main-bundle.html`), minified and
+  fingerprinted in production.
 - **Individually processed theme scripts**: `click-to-copy.js` (Prism's mutually
   exclusive alternative; the two share `scripts/code-copy.html`).
 - **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
@@ -52,9 +53,9 @@ The decomposition has two design consequences:
 
 - Every sub-partial the dispatcher routes to under `_partials/scripts/`.
 - `_partials/algolia/head.html` and `_partials/scripts/algolia.html`: real
-  partials as of 0.18. They were previously inline `define`s whose documented
-  override paths did not work; the internal template names `algolia/head` and
-  `algolia/scripts` no longer exist.
+  partials as of 0.18, replacing inline `define`s whose documented override
+  paths did not work (the internal template names `algolia/head` and
+  `algolia/scripts` no longer exist).
 - Per plugin: the script asset `assets/js/plugins/NAME.js`, its companion
   partial, and its companion stylesheet ([implementation notes][impl]).
 
