@@ -294,7 +294,7 @@ Docsy's theme sources:
 `test:website` checks docsy.dev's links with Lychee, caching external-link
 results in the committed `docsy.dev/link-cache.jsonc` (the "link cache", née
 refcache) so checks stay fast and offline-friendly. Each entry records the
-status, its `when` timestamp, and `via` -- the resolver that set it; Lychee's
+result, its `when` timestamp, and `via` -- the resolver that set it; Lychee's
 own `.lycheecache` is derived from it per run and gitignored. Config lives in
 `docsy.dev/lychee.toml`. CI installs a pinned lychee binary (see
 `.github/workflows/test.yaml` and `link-cache-refresh.yaml`); a plain site build
@@ -307,11 +307,12 @@ rotation model, see the `link-cache-refresh` workflow's header comment.
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
   `-- -p 10%` to drop the oldest tenth, `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
-  release prep) by adding an entry with placeholder status `206`,
-  `"via": "manual"`, and an `"expires"` date (after which the URL is re-checked
-  live and the seed replaced by the verified result), plus a `//` comment noting
-  the reason. Unexpired seeds are trusted as-is, so no manual redemption step is
-  needed; drop the entry early only to force a re-check.
+  release prep) by adding an entry with placeholder result `206`,
+  `"via": "manual"`, and an `"expires"` date (after which the weekly refresh's
+  `--check-stale` run re-checks the URL live and replaces the seed with the
+  verified result), plus a `//` comment noting the reason. Unexpired seeds are
+  trusted as-is, so no manual redemption step is needed; drop the entry early
+  only to force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
