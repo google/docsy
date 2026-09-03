@@ -26,9 +26,24 @@ params:
 
 - Names are coerced to strings (`printf "%v"`): YAML auto-types entries like
   `name: 2048`, and the loop must resolve the same asset path either way.
+- Names are restricted to `^[A-Za-z0-9_-]+$`: they address assets and partials
+  by path, so anything that could traverse outside the plugin namespaces is
+  refused with a warning (`docsy-plugin-name`).
 - Registry order is emission order.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
   `.Page.Store` flag.
+
+### Theme-default entries and legacy aliases
+
+The loop appends theme-default entries after the site-declared registry, each
+skipped when the site declares an entry of the same name:
+
+- `tabpane-persist`, page-gated on `hasTabs` (set by the tabpane shortcode).
+- `click-to-copy`, unless `params.prism_syntax_highlighting` or
+  `params.disable_click2copy_chroma` is set — the pre-plugin gates keep their
+  semantics.
+- `markmap`, when the legacy `params.markmap.enable` is set; the alias warns
+  (`docsy-markmap-legacy`) for its deprecation cycle.
 
 ## Shape guards
 
@@ -71,6 +86,19 @@ tag ([why][design-ordering]):
   `(dict "Page" PAGE "Plugin" ENTRY)`.
 - `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
   pipeline, minified in production, fingerprinted, and emitted with SRI.
+
+## Security constraints
+
+- **Never pipe `Plugin.options` through `safeHTML`, `safeJS`, or `safeURL`** in
+  a companion partial: options are site-config-controlled strings, and Hugo's
+  contextual autoescaping is the defense; a `safe*` cast disables it.
+- Plugin `options` (and any value reaching a module as `@params`) ship
+  **world-readable in the built JS** — never route secrets or tokens through
+  them.
+- Third-party libraries are pinned and vendored: no CDN-`latest`, and no loader
+  that pulls unpinned secondary code (SRI on a loader is worthless if the loader
+  fetches unpinned dependencies). Remote-capable plugins get a `pageGate` so
+  their code ships only where used.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/

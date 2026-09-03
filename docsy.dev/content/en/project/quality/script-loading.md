@@ -40,9 +40,12 @@ gate-to-partial wiring, offline.
 
 [`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
 emission with `@params`, `enable`/`defer`/`pageGate` handling, both companions,
-shape-guard warnings, name coercion, and fingerprint distinctness (duplicate
-registrations publish distinct builds, in development too). Theme-plugin
-shadowing gets its pin when the first theme plugin ships.
+shape-guard warnings, name coercion and allowlisting, and fingerprint
+distinctness (duplicate registrations publish distinct builds, in development
+too). Theme-plugin shadowing is pinned in
+[`tabpane-persist-plugin.test.mjs`][tabpane-test]; the theme-shipped plugin
+conversions each carry their own net ([`markmap-plugin.test.mjs`][markmap-test],
+[`click-to-copy-plugin.test.mjs`][c2c-test]).
 
 ## Acceptance test
 
@@ -94,12 +97,15 @@ safeguard proves the signal:
 <!-- prettier-ignore-start -->
 [#1436]: https://github.com/google/docsy/issues/1436
 [acceptance-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs
+[c2c-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/click-to-copy-plugin.test.mjs
 [design]: /project/design/script-loading/
 [dispatch-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs
 [golden-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-golden.test.mjs
 [goldens-lib]: https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs
 [implementation]: /project/implementation/script-loading/
 [loop-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
+[markmap-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs
 [plugin-runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
 [runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs
+[tabpane-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs
 <!-- prettier-ignore-end -->
