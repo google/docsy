@@ -249,13 +249,13 @@ Notes:
 - `test:smoke`:
   - Run it manually for `main` or PR-branch validation. Its GitHub-sourced
     builds auto-target the current branch's GitHub upstream.
-  - Builds a minimal test site from the theme package (packed tarball, registry)
-    and from GitHub (NPM, Hugo module, clone, minimum-Hugo).
-  - The registry-install test vets an exact version (the checkout's, when its
-    release tag is in the checkout's history; otherwise `latest`), asserting the
-    installed version against the registry's own resolution. `DOCSY_THEME_PKG`
-    overrides the target (exact version or dist-tag); a prerelease checkout
-    requires it.
+  - Builds a minimal test site from the theme package (packed tarball, npm
+    registry) and from GitHub (NPM, Hugo module, clone, minimum-Hugo).
+  - The npm-registry install test vets an exact version (the checkout's, when
+    its release tag is in the checkout's history; otherwise `latest`), asserting
+    the installed version against the npm registry's own resolution.
+    `DOCSY_THEME_PKG` overrides the target (exact version or dist-tag); a
+    prerelease checkout requires it.
   - The suite never overrides local npm hardening: an install guard or a
     release-age gate on the theme install fails the run loudly, naming the
     deliberate rerun knob.
@@ -615,20 +615,20 @@ If not adjust accordingly.
     its own checkbox.
 
     1. **Approve** the waiting `npm-publish` deployment. The guards re-verify
-       content and registry order mechanically (an out-of-order or inconsistent
-       run fails instead of publishing), and the approval prompt only appears
-       after the pack job succeeded, so approval owns **intent**. Note that on
-       tag pushes the workflow definition itself comes from the tagged commit,
-       so for an unexpected tag don't trust the run's green checks; the two
-       checks below are the real barrier:
+       content and npm-registry order mechanically (an out-of-order or
+       inconsistent run fails instead of publishing), and the approval prompt
+       only appears after the pack job succeeded, so approval owns **intent**.
+       Note that on tag pushes the workflow definition itself comes from the
+       tagged commit, so for an unexpected tag don't trust the run's green
+       checks; the two checks below are the real barrier:
        - the run's commit is the release commit you drove (the tip of `$BASE` at
          tag time; an unrelated merge landing since is fine), and the tag actor
          is the release driver you expect; anything else: reject and ask;
        - the run is `publish.yaml` on `google/docsy` (another workflow could
          reference the same environment).
 
-    2. **Check** that the workflow run succeeded and that the registry version
-       matches the tag:
+    2. **Check** that the workflow run succeeded and that the npm-registry
+       version matches the tag:
 
        ```sh
        npm view @docsy/theme version dist-tags
@@ -644,7 +644,7 @@ If not adjust accordingly.
        ```
 
     4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
-       `$BASE`; the registry-install test vets exactly the just-published
+       `$BASE`; the npm-registry install test vets exactly the just-published
        version. (On a machine with local npm hardening, the first run fails by
        design; rerun as the failure directs.)
 
@@ -670,7 +670,7 @@ If not adjust accordingly.
       `@docsy` scope registry against local overrides.
 
       Vet a prerelease publish explicitly (at a prerelease checkout, the
-      registry-install test refuses other targets, a bare run's `latest`
+      npm-registry install test refuses other targets, a bare run's `latest`
       included), and confirm the run's "expecting" line names the prerelease you
       just published:
 

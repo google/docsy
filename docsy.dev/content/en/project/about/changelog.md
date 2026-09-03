@@ -178,8 +178,8 @@ history since 0.17.0][].
 - Extended the root `npm run check` to also run the docsy.dev workspace format
   check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
 - Restructured the publish-verify release step into numbered gates and hardened
-  the smoke suite's registry vet: exact, registry-resolved versions, with local
-  npm hardening honored (loud failures, never overridden) ([#2786][]).
+  the smoke suite's npm-registry vet: exact, registry-resolved versions, with
+  local npm hardening honored (loud failures, never overridden) ([#2786][]).
 
 [#1436]: https://github.com/google/docsy/issues/1436
 [#2774]: https://github.com/google/docsy/pull/2774
