@@ -4,10 +4,9 @@
 # re-running the link checker re-verifies them (or retires URLs no longer in
 # the site), rotating through them in about a month of weekly merged
 # refreshes; manual (seeded) entries are exempt from pruning and retire via
-# their expires dates. This lane runs the checker with --check-stale
-# (link-cache's refresh mode), so stale and expired entries are also
-# re-verified here; PR/CI runs use the default mode, which trusts cached 2xx
-# results regardless of age (failures and non-2xx re-check every run).
+# their expires dates, enforced here: this lane runs the checker with
+# --check-stale (link-cache's refresh mode), while PR/CI runs use the default
+# mode, which trusts cached 2xx results regardless of age.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -195,8 +194,6 @@ jobs:
           # --help probe (exit 0 without lychee or a build) fails the run
           # here instead, outside the tolerated-exit interpretation.
           npm run -s -C docsy.dev _check:links -- --help > /dev/null
-          # --check-stale: opt staleness enforcement back in for this lane
-          # (mode model: the header comment).
           # The build already succeeded (previous step, fails hard), so the
           # exit code here is the link checker's own contract. Exit 1 (dead
           # links) doesn't fail the run: the merge-back has already recorded
@@ -213,9 +210,9 @@ jobs:
           fi
 
       - name: Guard against a silently aging cache
-        # Threshold per the link-cache README: max_cache_age (375d, set in
-        # docsy.dev/lychee.toml) plus one refresh interval (7d). Exit 3 on
-        # breach fails this step, and the run, loudly.
+        # Threshold per the link-cache README's --check-stale sizing:
+        # max_cache_age (375d, docsy.dev/lychee.toml) plus one weekly refresh
+        # interval (7d).
         run: npm run -s link-cache -- --max-age 382
 
       - name: Report the oldest entry after the refresh

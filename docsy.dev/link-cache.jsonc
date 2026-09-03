@@ -764,6 +764,11 @@
     "when": "2026-06-26T18:23:58Z",
     "via": "lychee",
   },
+  "https://github.com/chalin/link-cache#readme": {
+    "result": 200,
+    "when": "2026-09-03T20:42:17Z",
+    "via": "lychee",
+  },
   "https://github.com/cloudwego/cloudwego.github.io": {
     "result": 200,
     "when": "2026-06-26T18:29:08Z",
