@@ -145,7 +145,7 @@ function _npm_install() {
   # (the pin's one home); an empty read would silently install latest
   # (set -e can't see a failure inside an argument), so guard it.
   sass_version=$(node -p 'require(process.argv[1]).devDependencies["sass-embedded"]' "$SCRIPT_DIR/../package.json")
-  [[ -n "$sass_version" ]] || { echo "ERROR: sass-embedded pin not found in the repo manifest" >&2; exit 1; }
+  [[ "$sass_version" =~ ^[0-9] ]] || { echo "ERROR: sass-embedded pin not found in the repo manifest (got: '$sass_version')" >&2; exit 1; }
   npm install --ignore-scripts --no-audit --no-fund --save-dev "sass-embedded@$sass_version"
   # The documented hugo passthrough script, with one harness twist: hugo is
   # the borrowed repo binary ($HUGO, expanded by the script shell at run

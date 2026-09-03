@@ -29,6 +29,7 @@ import {
   readdirSync,
   rmSync,
   statSync,
+  writeFileSync,
   writeSync,
 } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -51,6 +52,11 @@ const THEME_VERSION = JSON.parse(
 const SASS_VERSION = JSON.parse(
   readFileSync(path.join(repoRoot, 'package.json'), 'utf8'),
 ).devDependencies['sass-embedded'];
+assert.match(
+  SASS_VERSION ?? '',
+  /^\d/,
+  'the repo manifest carries an exact sass-embedded pin',
+);
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
@@ -218,7 +224,7 @@ before(() => {
   );
   if (probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')) {
     assert.fail(
-      'npm installs are runnable (a PATH guard blocked the probe; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke)',
+      'npm installs are runnable (a PATH guard blocked the probe; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately with NPM_GUARD_ALLOW_BARE_INSTALL=1 added to your command)',
     );
   }
 });
@@ -284,6 +290,14 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
   progress(`${name}: npm install ${pkgSpec}…`);
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
+  // Pin which registry serves the scoped package, mirroring the root .npmrc
+  // (its rationale comment): the expected version was resolved against npmjs,
+  // so the install must not route through a user-configured mirror whose
+  // same-version artifact could differ.
+  writeFileSync(
+    path.join(site, '.npmrc'),
+    '@docsy:registry=https://registry.npmjs.org/\n',
+  );
   const install = run(
     'npm',
     ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
@@ -293,7 +307,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
   // suite honors); map the failure to the deliberate rerun.
   if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
     assert.fail(
-      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
+      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately by adding NPM_CONFIG_MIN_RELEASE_AGE=0 to your command)`,
     );
   }
   assert.equal(install.status, 0, `${pkgSpec} installs`);
@@ -310,7 +324,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     assert.equal(
       installed,
       expected,
-      `installed version matches the registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
+      `installed version matches the registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately by adding NPM_CONFIG_MIN_RELEASE_AGE=0 to your command)`,
     );
   }
   installSiteSass(name, npmOpts);
@@ -372,19 +386,34 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   );
 });
 
-// Registry spec: an exact pin when the checkout names one -- at a release tag
-// the theme version is the just-published stable, so vet exactly it -- else
-// `latest`. The test resolves the spec's expected version registry-side
-// (npm view, ungated by min-release-age) and asserts the installed version
-// matches, so a local age gate can't silently redirect any spec form to an
-// older stable (the 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG
-// overrides the spec: e.g. @docsy/theme@next to vet an RC.
-const REGISTRY_PKG =
-  process.env.DOCSY_THEME_PKG ??
-  (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)
-    ? `@docsy/theme@${THEME_VERSION}`
-    : '@docsy/theme@latest');
+// Registry spec: an exact pin when the checkout is at a release (stable
+// manifest version and its git tag exists: notes step 15.4) -- a
+// stable-stamped but untagged checkout is release prep pre-publish (notes
+// step 8), where the version isn't on the registry yet -- else `latest`. The
+// test resolves the spec's expected version registry-side (npm view, ungated
+// by min-release-age) and asserts the installed version matches, so a local
+// age gate can't silently redirect any spec form to an older stable (the
+// 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG overrides the spec:
+// e.g. @docsy/theme@next to vet an RC. `||`: an empty override means unset.
+const REGISTRY_PKG = process.env.DOCSY_THEME_PKG || derivedRegistrySpec();
+function derivedRegistrySpec() {
+  if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)) {
+    const tag = run('git', ['-C', repoRoot, 'tag', '-l', `v${THEME_VERSION}`]);
+    if ((tag.stdout ?? '').trim()) return `@docsy/theme@${THEME_VERSION}`;
+    progress(
+      `registry: ${THEME_VERSION} is stamped but untagged (pre-publish); vetting latest`,
+    );
+  }
+  return '@docsy/theme@latest';
+}
 test(`registry install of ${REGISTRY_PKG}`, () => {
+  // The vet targets the registry package; a path or foreign-package override
+  // would test something else while reporting a registry vet.
+  assert.match(
+    REGISTRY_PKG,
+    /^@docsy\/theme(@|$)/,
+    `DOCSY_THEME_PKG (${REGISTRY_PKG}) targets the @docsy/theme registry package`,
+  );
   const view = run('npm', ['view', REGISTRY_PKG, 'version'], {
     cwd: repoRoot,
     shell: winShell,
@@ -402,6 +431,16 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
     /^\d+\.\d+\.\d+\S*$/,
     `${REGISTRY_PKG} resolves to a single version (got: ${expected})`,
   );
+  // A prerelease checkout names the artifact just published (manual RC flow);
+  // a stale dist-tag resolving elsewhere would vet the wrong artifact. A
+  // -dev checkout can't anchor this (the RC stamp is uncommitted and restored
+  // post-publish); the notes have the driver eyeball the expecting line.
+  if (/^\d+\.\d+\.\d+-/.test(THEME_VERSION) && !THEME_VERSION.endsWith('-dev'))
+    assert.equal(
+      expected,
+      THEME_VERSION,
+      `${REGISTRY_PKG} resolves to this prerelease checkout's version (a stale dist-tag vets the wrong artifact)`,
+    );
   progress(`smoke-registry: expecting @docsy/theme@${expected}`);
   buildThemeConsumerSite('smoke-registry', REGISTRY_PKG, expected);
 });
