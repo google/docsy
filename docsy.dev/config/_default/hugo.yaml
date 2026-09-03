@@ -136,8 +136,9 @@ params:
     svg: false
   print:
     disable_toc: false
-  markmap:
-    enable: true
+  # Dogfoods the plugin registry (the legacy markmap.enable is deprecated).
+  docsy:
+    plugins: [markmap]
   drawio:
     enable: true
 
