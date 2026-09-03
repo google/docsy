@@ -5,9 +5,11 @@ description:
   points
 ---
 
-Docsy emits its JavaScript at the end of `<body>` through
-[`_partials/scripts.html`][scripts.html]: a small dispatcher that routes each
-feature to its own sub-partial under [`_partials/scripts/`][scripts-dir].
+Docsy loads its body-end JavaScript through
+[`_partials/scripts.html`][scripts.html]: a small dispatcher over per-feature
+sub-partials under [`_partials/scripts/`][scripts-dir]. (Head-side JS, such as
+theme initialization and analytics, is emitted by `_partials/head.html` and is
+out of scope here.)
 
 ## Loading mechanisms
 
@@ -31,9 +33,10 @@ rendered output:
 
 Gating lives at two levels, preserved from before the decomposition. The
 dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and KaTeX
-(`.Page.Store` flags); it always dispatches the other sub-partials, which gate
-internally (Algolia search configuration, Prism vs click-to-copy, search bundle
-choice, dark mode, ScrollSpy).
+(`.Page.Store` flags); the other sub-partials are always dispatched, some
+gating internally (Algolia search configuration, Prism vs click-to-copy, search
+bundle choice, dark mode, ScrollSpy) and some unconditional (tab-pane
+persistence).
 
 ## The dispatcher as a seam
 
@@ -53,13 +56,12 @@ The decomposition has two design consequences:
   partials as of 0.18. They were previously inline `define`s whose documented
   override paths did not work; the internal template names `algolia/head` and
   `algolia/scripts` no longer exist.
-- Per plugin: the script asset `assets/js/plugins/NAME.js` (a same-named project
-  file shadows the theme's), its companion partial, and its companion
-  stylesheet.
+- Per plugin: the script asset `assets/js/plugins/NAME.js`, its companion
+  partial, and its companion stylesheet ([implementation notes][impl]).
 
 ## The plugin loop {#plugin-loop}
 
-[`scripts/plugins.html`][plugins.html] emits each plugin registered in
+[`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
 `params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
 pattern, so any plugin can ship only on the pages that use its feature. For the
 registry contract, shape guards, and build details, see the [implementation
@@ -81,12 +83,11 @@ Two ordering decisions:
 - [Implementation: script loading][impl]
 - [Quality: script loading][quality]: the test nets that pin this behavior
 
+<!-- prettier-ignore-start -->
 [#2789]: https://github.com/google/docsy/issues/2789
 [impl]: /project/implementation/script-loading/
-[plugins.html]:
-  https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
+[plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
-[scripts-dir]:
-  https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
-[scripts.html]:
-  https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
+[scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
+[scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
+<!-- prettier-ignore-end -->

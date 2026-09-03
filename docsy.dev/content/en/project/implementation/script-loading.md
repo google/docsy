@@ -72,7 +72,8 @@ tag ([why][design-ordering]):
 - `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
   pipeline, minified in production, fingerprinted, and emitted with SRI.
 
+<!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/
 [design-ordering]: /project/design/script-loading/#plugin-loop
-[plugins.html]:
-  https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
+[plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
+<!-- prettier-ignore-end -->

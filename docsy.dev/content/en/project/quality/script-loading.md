@@ -76,11 +76,8 @@ Two browser nets under `tests/visual/`:
 ## Red-proof rationale
 
 A net that passes for the wrong reason (building nothing, matching an empty
-region) is worse than a red one: it hides breakage behind green. Each net proves
-its signal:
-
-- Every net was made to fail against a deliberately broken input before being
-  trusted.
+region) is worse than a red one: it hides breakage behind green. The nets were
+built red-first, and each carries a persistent safeguard proving its signal:
 - Zero-output cases are asserted against: a golden's script region must be
   non-empty.
 - The plugin runtime net's red-proof doubles as an assertion: a deliberately
@@ -91,20 +88,15 @@ its signal:
   collector (wrong event names, races, a broken filter) can't masquerade as
   all-green.
 
+<!-- prettier-ignore-start -->
 [#1436]: https://github.com/google/docsy/issues/1436
-[acceptance-test]:
-  https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs
+[acceptance-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs
 [design]: /project/design/script-loading/
-[dispatch-test]:
-  https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs
-[golden-test]:
-  https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-golden.test.mjs
-[goldens-lib]:
-  https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs
+[dispatch-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs
+[golden-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-golden.test.mjs
+[goldens-lib]: https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs
 [implementation]: /project/implementation/script-loading/
-[loop-test]:
-  https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
-[plugin-runtime-test]:
-  https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
-[runtime-test]:
-  https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs
+[loop-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
+[plugin-runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
+[runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs
+<!-- prettier-ignore-end -->
