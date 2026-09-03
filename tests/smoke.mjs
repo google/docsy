@@ -58,6 +58,12 @@ assert.match(
   'the repo manifest carries an exact sass-embedded pin',
 );
 
+// One home for the age-gate remedy. The override spans the whole run's
+// installs (env config outranks even a project .npmrc gate), which is
+// acceptable because every registry install here is an exact reviewed pin.
+const AGE_GATE_REMEDY =
+  'add NPM_CONFIG_MIN_RELEASE_AGE=N to your command, N no lower than the release age in whole days (0 on release day)';
+
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
 // checkout's directories removed, so a consumer site missing its own sass
 // compiler fails loud instead of silently borrowing the maintainer repo's
@@ -290,7 +296,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
   // suite honors); map the failure to the deliberate rerun.
   if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
     assert.fail(
-      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately by adding NPM_CONFIG_MIN_RELEASE_AGE=0 to your command)`,
+      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
     );
   }
   assert.equal(install.status, 0, `${pkgSpec} installs`);
@@ -307,7 +313,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     assert.equal(
       installed,
       expected,
-      `installed version matches the registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately by adding NPM_CONFIG_MIN_RELEASE_AGE=0 to your command)`,
+      `installed version matches the registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; ${AGE_GATE_REMEDY})`,
     );
   }
   installSiteSass(name, npmOpts);
