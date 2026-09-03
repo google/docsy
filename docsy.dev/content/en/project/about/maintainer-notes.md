@@ -247,13 +247,15 @@ Notes:
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
   `node --test tests/supply-chain-audit.test.mjs`.
 - `test:smoke`:
-  - Run it manually for `main` or PR-branch validation. Its tests auto-target
-    the current branch's GitHub upstream.
+  - Run it manually for `main` or PR-branch validation. Its GitHub-sourced
+    builds auto-target the current branch's GitHub upstream.
   - Builds a minimal test site from the theme package (packed tarball, registry)
     and from GitHub (NPM, Hugo module, clone, minimum-Hugo).
   - The registry-install test vets an exact version (the checkout's, when its
     release tag is in the checkout's history; otherwise `latest`), asserting the
-    installed version against the registry's own resolution.
+    installed version against the registry's own resolution. `DOCSY_THEME_PKG`
+    overrides the target (exact version or dist-tag); a prerelease checkout
+    requires it.
   - The suite never overrides local npm hardening: an install guard or a
     release-age gate on the theme install fails the run loudly, naming the
     deliberate rerun knob.
