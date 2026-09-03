@@ -153,6 +153,13 @@ history since 0.17.0][].
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
+- **Script override points moved** with the plugin conversions ([#2791][]):
+  `assets/js/markmap.js` and `assets/js/click-to-copy.js` moved to
+  `assets/js/plugins/`, and `static/js/tabpane-persist.js` to
+  `assets/js/plugins/tabpane-persist.js`; the partials `scripts/markmap.html`
+  and `scripts/tabpane-persist.html` are gone, and `scripts/code-copy.html` is
+  now `scripts/prism.html`. Sites overriding any of these files must move their
+  overrides; old copies are silently ignored.
 
 **New**:
 
@@ -161,10 +168,12 @@ history since 0.17.0][].
   `assets/js/plugins/NAME.js` in your site config and Docsy builds,
   fingerprints, and loads it with SRI ([#2788][], [#2789][]).
 - Converted the first theme features to plugins — markmap, tabpane-persist, and
-  click-to-copy: each now ships zero bytes when unused, and the markmap
-  autoloader is served same-origin with SRI instead of from a CDN. Deprecated
-  `params.markmap.enable` in favor of a `params.docsy.plugins` entry; the legacy
-  param still works, with a build warning ([#2791][]).
+  click-to-copy: each now ships zero bytes when unused, markmap loads only on
+  pages with markmap blocks, and the markmap autoloader is fetched at build time
+  and served same-origin with SRI (its runtime libraries still load from the
+  CDN, at versions the autoloader pins). Deprecated `params.markmap.enable` in
+  favor of a `params.docsy.plugins` entry; the legacy param still works, with a
+  build warning ([#2791][]).
 
 **Other changes**:
 

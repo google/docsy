@@ -59,7 +59,8 @@ The registry read must not break sites that already carry a `params.docsy`
 value:
 
 - A scalar `params.docsy` is left untouched (the read is gated on
-  `reflect.IsMap`) and the loop emits nothing.
+  `reflect.IsMap`) and the site registry is treated as empty; theme-default
+  entries still emit.
 - A non-list `params.docsy.plugins`, falsy scalars included, warns
   (`docsy-plugins-config`) and is ignored.
 - An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
@@ -106,7 +107,9 @@ tag ([why][design-ordering]):
 - Third-party libraries are pinned and vendored: no CDN-`latest`, and no loader
   that pulls unpinned secondary code (SRI on a loader is worthless if the loader
   fetches unpinned dependencies). Remote-capable plugins get a `pageGate` so
-  their code ships only where used.
+  their code ships only where used. Residual exposure, named: the vendored
+  markmap autoloader's runtime libraries still load from the CDN, pinned by the
+  autoloader itself but without SRI.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/

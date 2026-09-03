@@ -616,26 +616,27 @@ Automatically renders to:
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ````
 
-To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
+To enable MarkMap, register it under `params.docsy.plugins` in
+`hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-[params.markmap]
-enable = true
+[params.docsy]
+plugins = ['markmap']
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  markmap:
-    enable: true
+  docsy:
+    plugins: [markmap]
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "markmap": {
-      "enable": true
+    "docsy": {
+      "plugins": ["markmap"]
     }
   }
 }
@@ -644,12 +645,24 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
+MarkMap scripts load only on pages containing a `markmap` code block. Don't set
+`defer` on the entry: the plugin script must run before the deferred autoloader
+it configures.
+
+> [!NOTE]
+>
+> Before 0.18, MarkMap was enabled with `params.markmap.enable`. That parameter
+> is deprecated: it still works for this release cycle, with a build warning
+> pointing at the registry form above.
+
 ### MarkMap version
 
-Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
-load, at the [pinned version](#script-dep-versions), currently
-{{% param markmap.version %}}; to use a different one, set
-`params.markmap.version`.
+Docsy fetches the [markmap-autoloader][] package at build time at the
+[pinned version](#script-dep-versions), currently {{% param markmap.version %}},
+and serves it from your site with subresource integrity; to use a different
+version, set `params.markmap.version`. The autoloader's own runtime libraries
+(markmap-lib, markmap-view, d3) still load from the CDN in the browser, at
+versions the autoloader pins.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 

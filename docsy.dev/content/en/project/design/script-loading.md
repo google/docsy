@@ -16,28 +16,32 @@ out of scope here.)
 Before 0.18, `scripts.html` mixed a few sub-partial dispatches (MarkMap,
 Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition moved
 every mechanism out of the dispatcher into sub-partials without changing the
-default rendered output:
+default rendered output; the 0.18 plugin conversions then moved the first
+integrations onto the [plugin loop](#plugin-loop):
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
-  (PlantUML), `tabpane-persist.js`, `prism.js`.
+  (PlantUML), `prism.js`.
 - **The main bundle**: Bootstrap plus the theme's core and feature scripts
-  (search, PlantUML, MarkMap, draw.io; dark mode and ScrollSpy when enabled),
+  (search, PlantUML, draw.io; dark mode and ScrollSpy when enabled),
   concatenated into `main.js` (`scripts/main-bundle.html`), minified and
   fingerprinted in production. A site param picks which search script is
   bundled, `search.js` or `offline-search.js`.
-- **Individually processed theme scripts**: `click-to-copy.js` (Prism's mutually
-  exclusive alternative; the two share `scripts/code-copy.html`).
-- **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
-  Algolia DocSearch.
+- **Theme plugins**: markmap, tab-pane persistence, and click-to-copy ride the
+  plugin loop as theme-default registry entries, their legacy params aliased for
+  a deprecation cycle ([implementation notes][impl]).
+- **Pinned CDN tags with inline configuration**: Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
-  re-served as local assets, and Mermaid, whose pinned version is validated at
-  build time while the browser imports the module straight from the CDN.
+  re-served as local assets; Mermaid, whose pinned version is validated at build
+  time while the browser imports the module straight from the CDN; and the
+  MarkMap autoloader, vendored at build time and served same-origin with SRI
+  (its runtime libraries still load from the CDN, at versions the autoloader
+  pins).
 
-Gating lives at two levels, preserved from before the decomposition. The
-dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and KaTeX
-(`.Page.Store` flags); the other sub-partials are always dispatched, some gating
-internally (Algolia search configuration, Prism vs click-to-copy, search bundle
-choice, dark mode, ScrollSpy) and some unconditional (tab-pane persistence).
+Gating lives at two levels. The dispatcher gates PlantUML (site param) and
+Mermaid and KaTeX (`.Page.Store` flags); the plugin loop's `pageGate` carries
+the same page-flag pattern for markmap (`hasMarkmap`) and tab-pane persistence
+(`hasTabs`), while the remaining sub-partials gate internally (Algolia search
+configuration, Prism, search bundle choice, dark mode, ScrollSpy).
 
 ## The dispatcher as a seam
 
@@ -47,8 +51,8 @@ The decomposition has two design consequences:
   system, so a site can replace one sub-partial by shadowing one file instead of
   copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where converting built-in integrations onto the loop is
-  planned ([#2789][]).
+  plugged in, and where the first built-in integrations (markmap, tab-pane
+  persistence, click-to-copy) converted onto the loop in 0.18 ([#2789][]).
 
 ### Override points
 
