@@ -680,7 +680,7 @@ function, which is used to render the code blocks of the individual tabs.
 
 Tab selection is persisted by default. When unspecified, `persist` defaults to
 `header` when `text=true` or `lang` is set; otherwise `persist` defaults to
-`lang`. To disable tab persistence, set `persist=disable`.
+`lang`. To disable tab persistence, set `persist=disabled`.
 
 [highlight]: https://gohugo.io/functions/highlight/
 

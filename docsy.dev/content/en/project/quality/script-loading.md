@@ -40,12 +40,16 @@ gate-to-partial wiring, offline.
 
 [`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
 emission with `@params`, `enable`/`defer`/`pageGate` handling, both companions,
-shape-guard warnings, name coercion and allowlisting, and fingerprint
-distinctness (duplicate registrations publish distinct builds, in development
-too). Theme-plugin shadowing is pinned in
-[`tabpane-persist-plugin.test.mjs`][tabpane-test]; the theme-shipped plugin
-conversions each carry their own net ([`markmap-plugin.test.mjs`][markmap-test],
-[`click-to-copy-plugin.test.mjs`][c2c-test]).
+shape-guard warnings, name coercion and allowlisting, theme-default inheritance,
+and fingerprint distinctness (duplicate registrations publish distinct builds,
+in development too). Companion nets:
+
+- [`tabpane-persist-plugin.test.mjs`][tabpane-test]: page gating, persistence
+  opt-out, and theme-plugin shadowing.
+- [`markmap-plugin.test.mjs`][markmap-test] and
+  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts.
+- [`print-scripts.test.mjs`][print-test]: page-gated scripts reach section print
+  output (the descendant flag merge).
 
 ## Acceptance test
 
@@ -106,6 +110,7 @@ safeguard proves the signal:
 [loop-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
 [markmap-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs
 [plugin-runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
+[print-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/print-scripts.test.mjs
 [runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs
 [tabpane-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs
 <!-- prettier-ignore-end -->

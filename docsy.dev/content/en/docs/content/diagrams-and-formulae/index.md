@@ -1,6 +1,6 @@
 ---
 title: Diagrams and Formulae
-description: Add generated diagrams and scientific formulae to your site.
+description: Configure the supported diagram renderers and their dependencies.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
@@ -653,7 +653,8 @@ it configures.
 >
 > Before 0.18, MarkMap was enabled with `params.markmap.enable`. That parameter
 > is deprecated: it still works for this release cycle, with a build warning
-> pointing at the registry form above.
+> pointing at the registry form above, and keeps its pre-0.18 behavior of
+> loading MarkMap on every page.
 
 ### MarkMap version
 

@@ -1,8 +1,6 @@
-// Click-to-copy as a plugin: the copy-button script moves from its own
-// partial into the plugin registry as a theme-default entry, proving the
-// registry serves plain imperative scripts. Legacy gates keep working:
-// prism_syntax_highlighting supersedes it, disable_click2copy_chroma
-// disables it.
+// Click-to-copy as a theme-default plugin: emission from the registry, and
+// the legacy gates (prism_syntax_highlighting supersedes it,
+// disable_click2copy_chroma opts out).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

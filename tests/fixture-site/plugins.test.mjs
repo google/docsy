@@ -407,8 +407,6 @@ test('duplicate registrations publish distinct builds, in development too', () =
   );
 });
 
-// --- Theme-default entries: redeclare and legacy-gate semantics ---
-
 const tabs =
   '{{< tabpane text=true >}}\n' +
   '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n';

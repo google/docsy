@@ -1,7 +1,5 @@
-// tabpane-persist as a page-gated plugin: the tabpane shortcode sets a Store
-// flag; the script (previously a raw static/ file on every page) is emitted
-// only on pages using tabs, fingerprinted. Also pins the partialCached trap:
-// a page with no tabs must not inherit the script from a cached scripts.html
+// tabpane-persist as a page-gated plugin. Also pins the partialCached trap: a
+// page with no tabs must not inherit the script from a cached scripts.html
 // render of a tabbed page, and vice versa.
 
 import { test } from 'node:test';
@@ -58,8 +56,7 @@ test('tabpane-persist ships only on pages using tabs, fingerprinted', () => {
 });
 
 test('a project plugin shadows the theme plugin of the same name', () => {
-  // tabpane-persist is a theme-shipped plugin; the fixture site provides its
-  // own file under the same name. Union FS: the project file must win.
+  // Union FS: the project file must win.
   const r = buildSite('tabpane-persist-shadow', {
     files: {
       ...files,

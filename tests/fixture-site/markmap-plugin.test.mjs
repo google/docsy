@@ -1,8 +1,5 @@
-// Markmap as a plugin: burns three red checks from the js-plugins page at
-// once: zero bytes shipped when disabled, no raw CDN autoloader tag (the
-// vendored autoloader is served same-origin, fingerprinted), and options via
-// @params instead of a template-wrapped asset. The legacy params.markmap.*
-// keys keep working via registry aliasing, with a deprecation warning. Needs
+// Markmap as a plugin: zero bytes when disabled, vendored same-origin
+// autoloader (no raw CDN tag), options via @params, legacy aliasing. Needs
 // network (vendor fetch through resources.GetRemote), like the mermaid
 // partial.
 
@@ -121,8 +118,7 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
 });
 
 test('a path-bearing markmap.version fails the build', () => {
-  // The version is interpolated into the vendor-fetch URL; a value like
-  // 0.18.12/package.json would vendor an arbitrary registry file as JS.
+  // A path-bearing version would vendor an arbitrary registry file as JS.
   const r = buildSite('markmap-version-path', {
     files,
     extraConfig: `params:

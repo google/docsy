@@ -1,7 +1,8 @@
 ---
 title: Script loading
 description:
-  Registry contract, shape guards, and build details of the plugin loop
+  Registry contract, theme defaults, shape guards, build details, and security
+  constraints of the plugin loop
 ---
 
 Code-level notes for [`_partials/scripts/plugins.html`][plugins.html], the loop
@@ -41,16 +42,18 @@ site-declared entry of the same name supersedes its auto-registration but
 explicit value, `pageGate: ''` included, always wins:
 
 - `tabpane-persist`, page-gated on `hasTabs` (set by the tabpane shortcode).
-- `click-to-copy`, deferred; auto-registered unless
-  `params.prism_syntax_highlighting` or `params.disable_click2copy_chroma` is
-  set (the pre-plugin gates keep their semantics for the default entry). A
-  site-declared entry always emits; combining it with prism draws a warning
-  (`docsy-c2c-prism`).
-- `markmap`: the registry entry is page-gated on `hasMarkmap` (set by the
-  markmap code-block render hook). The legacy `params.markmap.enable` alias
-  registers it **ungated** — exact pre-0.18 site-wide behavior, since custom
-  render hooks and raw markmap HTML never set the flag — and warns
-  (`docsy-markmap-legacy`) for its deprecation cycle.
+- `click-to-copy`, deferred:
+  - Auto-registered unless `params.prism_syntax_highlighting` or
+    `params.disable_click2copy_chroma` is set (the pre-plugin gates keep their
+    semantics for the default entry).
+  - A site-declared entry always emits; combining it with prism draws a warning
+    (`docsy-c2c-prism`).
+- `markmap`:
+  - The registry entry is page-gated on `hasMarkmap` (set by the markmap
+    code-block render hook).
+  - The legacy `params.markmap.enable` alias registers it **ungated** (exact
+    pre-0.18 site-wide behavior: custom render hooks and raw markmap HTML never
+    set the flag) and warns (`docsy-markmap-legacy`) for its deprecation cycle.
 
 An entry with `enable: false` is skipped; the string `"false"` counts as `false`
 (YAML strings are truthy in Go templates).
@@ -72,8 +75,8 @@ value:
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
 
-Warnings are issued with `warnidf`, so each is suppressible through Hugo's
-`ignoreLogs`.
+Except the duplicate-name `warnf`, warnings are issued with `warnidf`, so each
+is suppressible through Hugo's `ignoreLogs`.
 
 ## Build and emission
 
@@ -110,10 +113,10 @@ tag ([why][design-ordering]):
   them.
 - Third-party libraries are pinned and vendored: no CDN-`latest`, and no loader
   that pulls unpinned secondary code (SRI on a loader is worthless if the loader
-  fetches unpinned dependencies). Remote-capable plugins get a `pageGate` so
-  their code ships only where used. Residual exposure, named: the vendored
-  markmap autoloader's runtime libraries still load from the CDN, pinned by the
-  autoloader itself but without SRI.
+  fetches unpinned dependencies).
+- Remote-capable plugins get a `pageGate` so their code ships only where used.
+- Residual exposure, named: the vendored markmap autoloader's runtime libraries
+  still load from the CDN, pinned by the autoloader itself but without SRI.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/

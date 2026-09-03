@@ -18,7 +18,7 @@ const _tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
 // Helpers
 
 function tdPersistKey(key, value) {
-  // @requires: tdSupportsLocalStorage();
+  // @requires: _tdSupportsLocalStorage();
 
   try {
     if (value) {
@@ -37,7 +37,7 @@ function tdPersistKey(key, value) {
 
 // Retrieve, increment, and store tab-select event count, then returns it.
 function tdGetTabSelectEventCountAndInc() {
-  // @requires: tdSupportsLocalStorage();
+  // @requires: _tdSupportsLocalStorage();
 
   const storedCount = localStorage.getItem(td_persistCounterStorageKeyName);
   let numTabSelectEvents = parseInt(storedCount) || 0;

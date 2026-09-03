@@ -42,8 +42,8 @@ const PINS = [
   },
   {
     param: 'markmap',
-    // The autoloader is vendored (GetRemote) since the plugin conversion; the
-    // pin feeds the vendor fetch rather than a browser-facing CDN tag.
+    // The pin feeds the vendor fetch (the companion partial), not a
+    // browser-facing CDN tag.
     template: 'theme/layouts/_partials/scripts/plugins/markmap.html',
     cdnPackage: 'markmap-autoloader',
     urlForm: '%s',

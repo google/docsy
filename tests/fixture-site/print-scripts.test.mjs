@@ -1,7 +1,5 @@
-// Print output aggregates descendant pages into one page, but page-gated
-// scripts key on Store flags set on each child. The print layouts merge
-// descendant flags onto the print page so gated scripts (plugin pageGate,
-// Mermaid, KaTeX) reach /_print/ output.
+// Page-gated scripts reach section print output through the descendant flag
+// merge (print/page-flags.html).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
