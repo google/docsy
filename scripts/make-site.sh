@@ -141,8 +141,12 @@ function _npm_install() {
   # The theme's dartsass transpiler needs the sass CLI on Hugo's PATH; the
   # site provides it, mirroring the documented consumer setup for every
   # Docsy source. Runs after the --omit=dev install above, which would
-  # prune it.
-  npm install --ignore-scripts --no-audit --no-fund --save-dev sass-embedded
+  # prune it. Pinned to the repo's tested version, read from its manifest
+  # (the pin's one home); an empty read would silently install latest
+  # (set -e can't see a failure inside an argument), so guard it.
+  sass_version=$(node -p 'require(process.argv[1]).devDependencies["sass-embedded"]' "$SCRIPT_DIR/../package.json")
+  [[ "$sass_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+[A-Za-z0-9.+-]*$ ]] || { echo "ERROR: exact sass-embedded pin not found in the repo manifest (got: '$sass_version')" >&2; exit 1; }
+  npm install --ignore-scripts --no-audit --no-fund --save-dev "sass-embedded@$sass_version"
   # The documented hugo passthrough script, with one harness twist: hugo is
   # the borrowed repo binary ($HUGO, expanded by the script shell at run
   # time), not a bare name. A name lookup would need the repo's bin dir on
