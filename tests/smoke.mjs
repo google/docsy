@@ -476,13 +476,20 @@ test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
   // reaches npm through a shell (winShell), so metacharacters stay out.
   assert.match(
     NPM_REGISTRY_PKG,
-    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[\w.]+)?(\+[\w.]+)?|[A-Za-z][\w.-]*))?$/,
+    /^@docsy\/theme(@(\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?|[A-Za-z][\w.-]*))?$/,
     `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is the @docsy/theme npm-registry package, with an optional exact-version or dist-tag pin`,
   );
-  const view = run('npm', ['view', NPM_REGISTRY_PKG, 'version'], {
-    cwd: repoRoot,
-    shell: winShell,
-  });
+  // --prefer-online: the expectation must come from the npm registry itself;
+  // under an offline/prefer-offline npm config, view and install would agree
+  // on a stale cached resolution and the equality below couldn't catch it.
+  const view = run(
+    'npm',
+    ['view', '--prefer-online', NPM_REGISTRY_PKG, 'version'],
+    {
+      cwd: repoRoot,
+      shell: winShell,
+    },
+  );
   const expected = (view.stdout ?? '').trim();
   if (view.status !== 0 || !expected) {
     assert.fail(
