@@ -1,0 +1,13 @@
+{{/* Merges descendant pages' Store flags onto the print page. Print output
+  renders descendants' content into one page, while page-gated scripts (plugin
+  pageGate, Mermaid, KaTeX) key on flags each child set during its own content
+  render: without the merge, gated scripts never reach /_print/ output. Runs
+  after the main block, so every descendant's content (and flags) is in. */ -}}
+{{ $print := . -}}
+{{ range where .Site.Pages ".Params.no_print" "!=" true -}}
+  {{ if .IsDescendant $print -}}
+    {{ range $k, $v := .Store.Values -}}
+      {{ if $v }}{{ $print.Store.Set $k $v }}{{ end -}}
+    {{ end -}}
+  {{ end -}}
+{{ end -}}
