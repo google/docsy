@@ -218,7 +218,7 @@ before(() => {
   );
   if (probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')) {
     assert.fail(
-      'npm installs are blocked by a PATH guard; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke',
+      'npm installs are runnable (a PATH guard blocked the probe; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke)',
     );
   }
 });
@@ -269,7 +269,7 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
 // check that covers the code under review. The registry test installs a
 // published spec: the post-publish check.
 
-function buildThemeConsumerSite(name, pkgSpec) {
+function buildThemeConsumerSite(name, pkgSpec, expected) {
   const site = path.join(TMP, name);
   rmSync(site, { recursive: true, force: true });
 
@@ -293,7 +293,7 @@ function buildThemeConsumerSite(name, pkgSpec) {
   // suite honors); map the failure to the deliberate rerun.
   if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
     assert.fail(
-      `${pkgSpec} is blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke`,
+      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
     );
   }
   assert.equal(install.status, 0, `${pkgSpec} installs`);
@@ -304,6 +304,15 @@ function buildThemeConsumerSite(name, pkgSpec) {
     ),
   ).version;
   progress(`${name}: installed @docsy/theme@${installed}`);
+  // Assert before building: a redirected install would otherwise burn a full
+  // build of the wrong version, whose own failure could mask this diagnostic.
+  if (expected !== undefined) {
+    assert.equal(
+      installed,
+      expected,
+      `installed version matches the registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
+    );
+  }
   installSiteSass(name, npmOpts);
 
   // The one-line consumer config change (@ must be quoted in YAML).
@@ -354,9 +363,11 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
     path.join(packDest, tgz),
   );
   // Dev versions pack with a build-ID stamp appended (scripts/pack-stamp.mjs);
-  // releases and RCs pack unchanged.
+  // releases and RCs pack unchanged, so only a -dev checkout may differ.
   assert.ok(
-    installed === THEME_VERSION || installed.startsWith(`${THEME_VERSION}+`),
+    installed === THEME_VERSION ||
+      (THEME_VERSION.endsWith('-dev') &&
+        installed.startsWith(`${THEME_VERSION}+`)),
     `packed theme version (${installed}) matches the checkout (${THEME_VERSION})`,
   );
 });
@@ -384,13 +395,15 @@ test(`registry install of ${REGISTRY_PKG}`, () => {
       `${REGISTRY_PKG} resolves on the registry (view failed; for a fresh release, check that the npm publish landed: maintainer notes step 15)`,
     );
   }
-  progress(`smoke-registry: expecting @docsy/theme@${expected}`);
-  const installed = buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
-  assert.equal(
-    installed,
+  // Range-ish specs make npm view emit labeled multi-line output; fail here,
+  // where the cause is visible, rather than at the version equality.
+  assert.match(
     expected,
-    `installed version matches the registry's resolution of ${REGISTRY_PKG} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
+    /^\d+\.\d+\.\d+\S*$/,
+    `${REGISTRY_PKG} resolves to a single version (got: ${expected})`,
   );
+  progress(`smoke-registry: expecting @docsy/theme@${expected}`);
+  buildThemeConsumerSite('smoke-registry', REGISTRY_PKG, expected);
 });
 
 // --- declared minimum Hugo version actually builds --------------------------

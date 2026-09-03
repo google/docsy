@@ -179,8 +179,8 @@ history since 0.17.0][].
   check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
 - Restructured the publish-verify release step into numbered gates and hardened
   the smoke suite's registry vet: it installs an exact, registry-resolved
-  version and honors local npm hardening, failing loudly with the deliberate
-  rerun named ([#2786][]).
+  version, and the suite honors local npm hardening, failing loudly and naming
+  the deliberate rerun ([#2786][]).
 
 [#1436]: https://github.com/google/docsy/issues/1436
 [#2774]: https://github.com/google/docsy/pull/2774

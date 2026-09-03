@@ -251,8 +251,8 @@ Notes:
 - The `test:smoke` registry-install test vets an exact version -- the checkout's
   at a release tag, otherwise `latest` -- asserting the installed version
   against the registry's own resolution. The suite never overrides local npm
-  hardening: an install guard or release-age gate fails the run loudly, naming
-  the deliberate rerun knob.
+  hardening: an install guard or a release-age gate on the theme install fails
+  the run loudly, naming the deliberate rerun knob.
 
 ### Structural guards: one concern per file
 
@@ -639,7 +639,8 @@ If not adjust accordingly.
 
     4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
        `$BASE`; the registry-install test vets exactly the just-published
-       version:
+       version. (On a machine with local npm hardening, the first run fails by
+       design; rerun as the failure directs.)
 
        ```sh
        npm run test:smoke
@@ -661,6 +662,13 @@ If not adjust accordingly.
       materializes the LICENSE), even under a script-disabling npm config. Run
       manual npm commands from within the repo: the root `.npmrc` pins the
       `@docsy` scope registry against local overrides.
+
+      Vet a prerelease publish explicitly -- at a prerelease checkout, a bare
+      smoke run vets `latest` (the previous stable), not the prerelease:
+
+      ```sh
+      DOCSY_THEME_PKG=@docsy/theme@next npm run test:smoke
+      ```
 
     - **If the CI publish is broken for a stable**, prefer fixing CI over a
       laptop publish: a manual publish carries no provenance attestation. As a
