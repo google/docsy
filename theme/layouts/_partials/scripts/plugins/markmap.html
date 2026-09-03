@@ -1,12 +1,21 @@
 {{/* cSpell:ignore markmap */ -}}
 {{/* Vendored markmap-autoloader: fetched once through resources.GetRemote,
-  served same-origin with SRI — replaces the raw CDN script tag. Companion
-  partials emit before their plugin script, so the tag is deferred: the
-  plugin script sets window.markmap during parsing, before the deferred
-  autoloader reads it. */ -}}
+  served same-origin with SRI — replaces the raw CDN script tag (the
+  autoloader's own runtime deps still load from the CDN, pinned by it).
+  Companion partials emit before their plugin script, so the tag is deferred:
+  the plugin script sets window.markmap during parsing, before the deferred
+  autoloader reads it. That ordering is why the markmap registry entry must
+  not set defer: a deferred plugin script would run after the autoloader and
+  clobber its exports. */ -}}
 {{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
 {{ $version := .Page.Site.Params.markmap.version | string | strings.TrimSpace -}}
-{{ if $version -}}
+{{ if not $version -}}
+  {{ errorf "params.markmap.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
+{{ else if findRE `[^0-9A-Za-z.+-]` $version -}}
+  {{/* The version lands in the vendor-fetch URL; refuse anything that could
+    address another registry path. */ -}}
+  {{ errorf "params.markmap.version %q contains characters that don't belong in a version; expected an exact X.Y.Z version." $version -}}
+{{ else -}}
   {{ if not (findRE `^\d+\.\d+\.\d+$` $version) -}}
     {{ warnidf "markmap-floating-version" "params.markmap.version is not an exact X.Y.Z version. For details, see https://www.docsy.dev/docs/content/diagrams-and-formulae/#script-dep-versions." -}}
   {{ end -}}
@@ -24,6 +33,4 @@
       {{ errorf "Invalid markmap-autoloader version %s, could not retrieve this version from the CDN." $version -}}
     {{ end -}}
   {{ end -}}
-{{ else -}}
-  {{ errorf "params.markmap.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
 {{ end -}}

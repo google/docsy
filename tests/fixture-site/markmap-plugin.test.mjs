@@ -114,3 +114,22 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
     'the vendored autoloader rides the registry entry too',
   );
 });
+
+test('a path-bearing markmap.version fails the build', () => {
+  // The version is interpolated into the vendor-fetch URL; a value like
+  // 0.18.12/package.json would vendor an arbitrary registry file as JS.
+  const r = buildSite('markmap-version-path', {
+    files,
+    extraConfig: `params:
+  markmap:
+    enable: true
+    version: 0.18.12/package.json
+`,
+  });
+  assert.notEqual(r.status, 0, 'hugo build fails');
+  assert.match(
+    r.stderr,
+    /markmap\.version/,
+    'the bad version is called out in the build error',
+  );
+});
