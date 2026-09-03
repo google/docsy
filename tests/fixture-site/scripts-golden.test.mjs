@@ -26,6 +26,13 @@ for (const { name, build, pages } of builds) {
     test(`scripts golden: ${name} ${page}`, () => {
       const region = extractScriptRegion(build.publicFile(page));
       assert.ok(region.length > 0, 'script region is non-empty');
+      for (const line of region.split('\n')) {
+        const tags = line.match(/<(script|link)\b/g) ?? [];
+        assert.ok(
+          tags.length <= 1,
+          `each script/link element starts on its own line: ${line}`,
+        );
+      }
       const goldenFile = `${name}--${page.replaceAll('/', '-')}.txt`;
       const golden = readFileSync(path.join(goldenDir, goldenFile), 'utf8');
       assert.equal(

@@ -18,6 +18,7 @@
       {{ with resources.Copy "js/vendor/markmap-autoloader.js" . -}}
         {{ $lib := . | fingerprint -}}
         <script defer src="{{ $lib.RelPermalink }}" integrity="{{ $lib.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{- "\n" -}}
       {{ end -}}
     {{ else -}}
       {{ errorf "Invalid markmap-autoloader version %s, could not retrieve this version from the CDN." $version -}}

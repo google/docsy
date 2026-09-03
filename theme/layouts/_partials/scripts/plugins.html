@@ -56,7 +56,8 @@
           {{ end -}}
           {{ $css = $css | fingerprint -}}
           <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-        {{- end -}}
+          {{- "\n" -}}
+        {{ end -}}
         {{ $companion := printf "scripts/plugins/%s.html" $name -}}
         {{ if templates.Exists (printf "_partials/%s" $companion) -}}
           {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
@@ -67,7 +68,8 @@
         {{ end -}}
         {{ $js := . | js.Build $opts | fingerprint -}}
         <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
-      {{- end -}}
+        {{- "\n" -}}
+      {{ end -}}
     {{ else -}}
       {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
     {{ end -}}
