@@ -56,9 +56,9 @@ contains no `layouts/` directory).
 Two browser nets under `tests/visual/`:
 
 - [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
-  real browser and asserts that no uncaught exception or console error fires,
-  alongside behavior probes (search, diagrams, navbar). Markup and visual
-  goldens can't see JS runtime breakage (a missing global, a botched
+  real browser and asserts that no uncaught exception or in-scope console error
+  fires, alongside behavior probes (search, diagrams, navbar). Markup and
+  visual goldens can't see JS runtime breakage (a missing global, a botched
   conversion); this net can ([#1436][]).
   - Two fixture variants cover both search bundles: the main bundle
     (`scripts/main-bundle.html`) concatenates `offline-search.js` or `search.js`
@@ -66,12 +66,13 @@ Two browser nets under `tests/visual/`:
   - Pages load their real CDN script dependencies, so the net needs network
     access. The console tally filters off-origin and non-code resource noise but
     keeps same-origin script and stylesheet load failures (a broken first-party
-    bundle is a defect), and any JS breakage the filtered noise causes still
-    surfaces as a page error.
+    bundle is a defect). Filtered breakage that throws (a dependent script's
+    missing global) still surfaces as a page error; silent feature degradation
+    is what the behavior probes catch.
 - [`plugins-runtime.test.mjs`][plugin-runtime-test] proves an emitted plugin
   actually executes: its options reach the runtime and its DOM effects land. A
-  static-markup check can bless output whose runtime is broken (wrong script
-  ordering, a botched build); this net can't.
+  static-markup check can bless output whose runtime is broken (a botched
+  build); this net can't.
 
 ## Red-proof rationale
 

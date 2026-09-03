@@ -1,7 +1,7 @@
 // Runtime JS console-error net (google/docsy#1436): loads representative
 // fixture-site pages in a real browser and asserts that no uncaught
-// exception or console error fires. Needs network access (real CDN deps).
-// Rationale and particulars:
+// exception or in-scope console error fires. Needs network access (real
+// CDN deps). Rationale and particulars:
 // https://www.docsy.dev/project/quality/script-loading/
 
 import { test, before, after } from 'node:test';

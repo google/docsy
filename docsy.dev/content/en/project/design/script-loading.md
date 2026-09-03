@@ -20,10 +20,11 @@ default rendered output:
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
   (PlantUML), `tabpane-persist.js`, `prism.js`.
-- **The main bundle**: Bootstrap and the theme's core scripts, plus param-gated
-  feature scripts (search, PlantUML, MarkMap, draw.io, dark mode, ScrollSpy),
+- **The main bundle**: Bootstrap plus the theme's core and feature scripts
+  (search, PlantUML, MarkMap, draw.io; dark mode and ScrollSpy when enabled),
   concatenated into `main.js` (`scripts/main-bundle.html`), minified and
-  fingerprinted in production.
+  fingerprinted in production. A site param picks which search script is
+  bundled, `search.js` or `offline-search.js`.
 - **Individually processed theme scripts**: `click-to-copy.js` (Prism's mutually
   exclusive alternative; the two share `scripts/code-copy.html`).
 - **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
@@ -63,7 +64,7 @@ The decomposition has two design consequences:
 
 [`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
 `params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
-pattern, so any plugin can ship only on the pages that use its feature. For the
+pattern. For the
 registry contract, shape guards, and build details, see the [implementation
 notes][impl].
 
