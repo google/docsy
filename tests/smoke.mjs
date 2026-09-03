@@ -210,23 +210,6 @@ before(() => {
     /extended/,
     'extended Hugo is installed (missing? run `npm run install:safe` at the repo root)',
   );
-  // The suite never overrides local npm security settings; it fails loud and
-  // names the rerun instead. An install-blocking PATH guard (e.g. the
-  // npm-guard shim) would fail every consumer test the same way, so probe
-  // once here: a dry-run install resolves nothing and changes nothing.
-  const probe = run(
-    'npm',
-    ['install', '--dry-run', '--no-audit', '--no-fund'],
-    {
-      cwd: TMP,
-      shell: winShell,
-    },
-  );
-  if (probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')) {
-    assert.fail(
-      'npm installs are runnable (a PATH guard blocked the probe; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately with NPM_GUARD_ALLOW_BARE_INSTALL=1 added to your command)',
-    );
-  }
 });
 
 // An npm install of @docsy/theme wires the package bins into
