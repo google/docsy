@@ -35,15 +35,22 @@ params:
 
 ### Theme-default entries and legacy aliases
 
-The loop appends theme-default entries after the site-declared registry, each
-skipped when the site declares an entry of the same name:
+The loop appends theme-default entries after the site-declared registry. A
+site-declared entry of the same name supersedes its auto-registration but
+**inherits the default fields it leaves unset** (`pageGate`, `defer`); an
+explicit value — `pageGate: ''` included — always wins:
 
 - `tabpane-persist`, page-gated on `hasTabs` (set by the tabpane shortcode).
-- `click-to-copy`, unless `params.prism_syntax_highlighting` or
-  `params.disable_click2copy_chroma` is set — the pre-plugin gates keep their
-  semantics.
+- `click-to-copy`, deferred; auto-registered unless
+  `params.prism_syntax_highlighting` or `params.disable_click2copy_chroma` is
+  set — the pre-plugin gates keep their semantics for the default entry. A
+  site-declared entry always emits; combining it with prism draws a warning
+  (`docsy-c2c-prism`).
 - `markmap`, when the legacy `params.markmap.enable` is set; the alias warns
   (`docsy-markmap-legacy`) for its deprecation cycle.
+
+An entry with `enable: false` is skipped; the string `"false"` counts as `false`
+(YAML strings are truthy in Go templates).
 
 ## Shape guards
 

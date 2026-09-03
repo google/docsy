@@ -407,3 +407,117 @@ test('duplicate registrations publish distinct builds, in development too', () =
     "the second entry's options reach its build",
   );
 });
+
+// --- Theme-default entries: redeclare and legacy-gate semantics ---
+
+const tabs =
+  '{{< tabpane text=true >}}\n' +
+  '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n';
+
+test('a redeclared theme default inherits its page gate', () => {
+  // A site redeclaring tabpane-persist (e.g. to reorder it) must not lose
+  // the hasTabs gate it never set.
+  const r = buildSite('plugins-redeclare-gate', {
+    files: {
+      ...content,
+      'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
+    },
+    title: 'Docsy redeclare fixture',
+    extraConfig: `params:
+  docsy:
+    plugins: [tabpane-persist]
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('docs/tabs/index.html'),
+    /js\/plugins\/tabpane-persist/,
+    'the redeclared plugin loads on pages using tabs',
+  );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /tabpane-persist/,
+    'pages without tabs stay free of the redeclared plugin',
+  );
+});
+
+test('a redeclared theme default inherits defer', () => {
+  const r = buildSite('plugins-redeclare-defer', {
+    files: content,
+    title: 'Docsy redeclare-defer fixture',
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: click-to-copy
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/click-to-copy/,
+    'the redeclared plugin keeps the deferred tag',
+  );
+});
+
+test('an explicit field overrides the inherited default', () => {
+  const r = buildSite('plugins-redeclare-override', {
+    files: {
+      ...content,
+      'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
+    },
+    title: 'Docsy redeclare-override fixture',
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: tabpane-persist
+        pageGate: ''
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/tabpane-persist/,
+    'an explicitly cleared page gate ships the plugin site-wide',
+  );
+});
+
+test('click-to-copy registered alongside prism draws a warning', () => {
+  // The legacy prism/copy-button exclusivity is advisory once a site
+  // registers the plugin explicitly: emit both, but say so.
+  const r = buildSite('plugins-c2c-prism-conflict', {
+    files: content,
+    title: 'Docsy prism-conflict fixture',
+    extraConfig: `params:
+  prism_syntax_highlighting: true
+  docsy:
+    plugins:
+      - name: click-to-copy
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /click-to-copy.*prism|prism.*click-to-copy/i,
+    'the conflicting registration is called out in a build warning',
+  );
+});
+
+test('a quoted "false" enable disables the entry', () => {
+  // YAML strings are truthy in Go templates; a site writing enable: "false"
+  // means off, not on.
+  const r = buildSite('plugins-quoted-false', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: hello
+        enable: 'false'
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the page is free of the string-disabled plugin',
+  );
+});

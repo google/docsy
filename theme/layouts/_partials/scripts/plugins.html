@@ -11,8 +11,14 @@
     {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." $plugins -}}
   {{ end -}}
 {{ end -}}
-{{/* Theme-default entries, aliasing legacy params for one deprecation cycle;
-  a site-declared entry of the same name supersedes its alias. */ -}}
+{{/* Theme-default entries, aliasing legacy params for one deprecation cycle.
+  A site-declared entry of the same name supersedes its auto-registration but
+  inherits the default fields it leaves unset. */ -}}
+{{ $defaults := dict
+  "markmap" (dict)
+  "tabpane-persist" (dict "pageGate" "hasTabs")
+  "click-to-copy" (dict "defer" true)
+-}}
 {{ $names := slice -}}
 {{ range $registry -}}
   {{ if reflect.IsMap . }}{{ with .name }}{{ $names = $names | append (printf "%v" .) }}{{ end -}}
@@ -23,13 +29,18 @@
   {{ $registry = $registry | append (dict "name" "markmap") -}}
 {{ end -}}
 {{ if not (in $names "tabpane-persist") -}}
-  {{ $registry = $registry | append (dict "name" "tabpane-persist" "pageGate" "hasTabs") -}}
+  {{ $registry = $registry | append (dict "name" "tabpane-persist") -}}
 {{ end -}}
 {{/* click-to-copy predates the registry as an on-by-default feature; its
   legacy gates keep their semantics: prism supersedes it, and
-  disable_click2copy_chroma opts out. */ -}}
+  disable_click2copy_chroma opts out. The gates control auto-registration
+  only: a site-declared entry always emits (with a conflict warning under
+  prism). */ -}}
 {{ if and (not .Site.Params.prism_syntax_highlighting) (not .Site.Params.disable_click2copy_chroma) (not (in $names "click-to-copy")) -}}
-  {{ $registry = $registry | append (dict "name" "click-to-copy" "defer" true) -}}
+  {{ $registry = $registry | append (dict "name" "click-to-copy") -}}
+{{ end -}}
+{{ if and .Site.Params.prism_syntax_highlighting (in $names "click-to-copy") -}}
+  {{ warnidf "docsy-c2c-prism" "click-to-copy is registered in params.docsy.plugins while params.prism_syntax_highlighting is on; both will load their own copy buttons." -}}
 {{ end -}}
 {{ range $registry -}}
   {{ $entry := . -}}
@@ -45,7 +56,11 @@
     {{/* Names address assets and partials by path; refuse anything that could
       traverse outside the plugin namespaces. */ -}}
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to letters, digits, hyphens, and underscores." $name -}}
-  {{ else if ne $entry.enable false -}}
+  {{ else if and (ne $entry.enable false) (ne (printf "%v" $entry.enable) "false") -}}
+    {{/* Site entries inherit their theme default's unset fields. */ -}}
+    {{ with index $defaults $name -}}
+      {{ $entry = merge . $entry -}}
+    {{ end -}}
     {{ $path := printf "js/plugins/%s.js" $name -}}
     {{ with resources.Get $path -}}
       {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
