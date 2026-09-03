@@ -15,7 +15,7 @@
   A site-declared entry of the same name supersedes its auto-registration but
   inherits the default fields it leaves unset. */ -}}
 {{ $defaults := dict
-  "markmap" (dict)
+  "markmap" (dict "pageGate" "hasMarkmap")
   "tabpane-persist" (dict "pageGate" "hasTabs")
   "click-to-copy" (dict "defer" true)
 -}}

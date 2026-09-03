@@ -52,6 +52,11 @@ test('legacy-enabled markmap loads same-origin with SRI and warns', () => {
     /params\.markmap\.enable is deprecated/,
     'the legacy param draws a deprecation warning',
   );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /markmap[^"]*\.js|js\/vendor/,
+    'pages without markmap content are free of markmap scripts',
+  );
   const html = r.publicFile('docs/index.html');
   assert.doesNotMatch(
     html,

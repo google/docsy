@@ -46,8 +46,9 @@ explicit value — `pageGate: ''` included — always wins:
   set — the pre-plugin gates keep their semantics for the default entry. A
   site-declared entry always emits; combining it with prism draws a warning
   (`docsy-c2c-prism`).
-- `markmap`, when the legacy `params.markmap.enable` is set; the alias warns
-  (`docsy-markmap-legacy`) for its deprecation cycle.
+- `markmap`, page-gated on `hasMarkmap` (set by the markmap code-block render
+  hook) — auto-registered when the legacy `params.markmap.enable` is set; the
+  alias warns (`docsy-markmap-legacy`) for its deprecation cycle.
 
 An entry with `enable: false` is skipped; the string `"false"` counts as `false`
 (YAML strings are truthy in Go templates).
