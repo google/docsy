@@ -33,10 +33,9 @@ rendered output:
 
 Gating lives at two levels, preserved from before the decomposition. The
 dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and KaTeX
-(`.Page.Store` flags); the other sub-partials are always dispatched, some
-gating internally (Algolia search configuration, Prism vs click-to-copy, search
-bundle choice, dark mode, ScrollSpy) and some unconditional (tab-pane
-persistence).
+(`.Page.Store` flags); the other sub-partials are always dispatched, some gating
+internally (Algolia search configuration, Prism vs click-to-copy, search bundle
+choice, dark mode, ScrollSpy) and some unconditional (tab-pane persistence).
 
 ## The dispatcher as a seam
 

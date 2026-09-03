@@ -78,6 +78,7 @@ Two browser nets under `tests/visual/`:
 A net that passes for the wrong reason (building nothing, matching an empty
 region) is worse than a red one: it hides breakage behind green. The nets were
 built red-first, and each carries a persistent safeguard proving its signal:
+
 - Zero-output cases are asserted against: a golden's script region must be
   non-empty.
 - The plugin runtime net's red-proof doubles as an assertion: a deliberately
