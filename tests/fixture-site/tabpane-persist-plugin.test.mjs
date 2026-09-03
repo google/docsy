@@ -86,3 +86,22 @@ test('a project plugin shadows the theme plugin of the same name', () => {
     'the theme implementation is fully replaced',
   );
 });
+
+test('persist="disabled" tabs ship no persistence script', () => {
+  const r = buildSite('tabpane-persist-optout', {
+    files: {
+      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+      'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs body\n',
+      'content/docs/off.md':
+        '---\ntitle: Off\n---\n\n{{< tabpane text=true persist="disabled" >}}\n' +
+        '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n',
+    },
+    title: 'Docsy persistence opt-out fixture',
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('docs/off/index.html'),
+    /tabpane-persist/,
+    'a page opting out of persistence carries no persistence script',
+  );
+});

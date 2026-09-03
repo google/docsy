@@ -1,6 +1,5 @@
 {{/* Check parameter types */ -}}
 
-{{ .Page.Store.Set "hasTabs" true -}}
 {{ $tpPersistAttrName := "data-td-tp-persist" -}}
 
 {{ with .Get "langEqualsHeader" -}}
@@ -47,6 +46,7 @@
 {{ $persistKeyKind := $_persist
     | default (cond (or $textPane (ne "" $langPane)) "header" "lang") -}}
 {{ $persistTabpane := and $deprecatedPersistLang (ne $persistKeyKind "disabled") -}}
+{{ if $persistTabpane }}{{ .Page.Store.Set "hasTabs" true }}{{ end -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
 {{/* Scratchpad gets populated through call to .Inner */ -}}
