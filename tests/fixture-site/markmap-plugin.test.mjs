@@ -41,7 +41,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
   );
 });
 
-test('legacy-enabled markmap loads same-origin with SRI and warns', () => {
+test('legacy-enabled markmap keeps site-wide loading and warns', () => {
   const r = buildSite('markmap-enabled', {
     files,
     extraConfig: 'params:\n  markmap:\n    enable: true\n',
@@ -52,10 +52,10 @@ test('legacy-enabled markmap loads same-origin with SRI and warns', () => {
     /params\.markmap\.enable is deprecated/,
     'the legacy param draws a deprecation warning',
   );
-  assert.doesNotMatch(
+  assert.match(
     r.publicFile('index.html'),
-    /markmap[^"]*\.js|js\/vendor/,
-    'pages without markmap content are free of markmap scripts',
+    /js\/plugins\/markmap/,
+    'the legacy alias keeps pre-0.18 site-wide loading, markmap content or not',
   );
   const html = r.publicFile('docs/index.html');
   assert.doesNotMatch(
@@ -97,6 +97,11 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
     r.stderr,
     /deprecated/,
     'a registry-only setup draws no deprecation warning',
+  );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /markmap[^"]*\.js|js\/vendor/,
+    'the registry entry is page-gated: no markmap scripts without markmap content',
   );
   const html = r.publicFile('docs/index.html');
   const plugin = html.match(

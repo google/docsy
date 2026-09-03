@@ -520,3 +520,59 @@ test('a quoted "false" enable disables the entry', () => {
     'the page is free of the string-disabled plugin',
   );
 });
+
+test('a duplicated registry name draws a warning', () => {
+  const r = buildSite('plugins-duplicate-warn', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: hello
+      - name: hello
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /hello.*more than once/i,
+    'the duplicate name is called out in a build warning',
+  );
+});
+
+test('a disabled click-to-copy entry draws no prism conflict warning', () => {
+  const r = buildSite('plugins-c2c-prism-disabled', {
+    files: content,
+    title: 'Docsy prism-no-conflict fixture',
+    extraConfig: `params:
+  prism_syntax_highlighting: true
+  docsy:
+    plugins:
+      - name: click-to-copy
+        enable: false
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.stderr,
+    /docsy-c2c-prism/,
+    'no conflict warning for an entry that never emits',
+  );
+});
+
+test('a falsy numeric name still resolves its asset', () => {
+  // YAML auto-types `name: 0`; presence, not truthiness, decides.
+  const r = buildSite('plugins-zero-name', {
+    files: { ...content, 'assets/js/plugins/0.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: 0
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/0\./,
+    'the zero-named plugin is emitted',
+  );
+});

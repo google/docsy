@@ -46,9 +46,11 @@ explicit value, `pageGate: ''` included, always wins:
   set (the pre-plugin gates keep their semantics for the default entry). A
   site-declared entry always emits; combining it with prism draws a warning
   (`docsy-c2c-prism`).
-- `markmap`, page-gated on `hasMarkmap` (set by the markmap code-block render
-  hook); auto-registered when the legacy `params.markmap.enable` is set; the
-  alias warns (`docsy-markmap-legacy`) for its deprecation cycle.
+- `markmap`: the registry entry is page-gated on `hasMarkmap` (set by the
+  markmap code-block render hook). The legacy `params.markmap.enable` alias
+  registers it **ungated** — exact pre-0.18 site-wide behavior, since custom
+  render hooks and raw markmap HTML never set the flag — and warns
+  (`docsy-markmap-legacy`) for its deprecation cycle.
 
 An entry with `enable: false` is skipped; the string `"false"` counts as `false`
 (YAML strings are truthy in Go templates).
@@ -64,6 +66,8 @@ value:
 - A non-list `params.docsy.plugins`, falsy scalars included, warns
   (`docsy-plugins-config`) and is ignored.
 - An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
+- A name registered more than once warns (`warnf`): duplicates still emit, each
+  as its own build.
 - An enabled registration with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
