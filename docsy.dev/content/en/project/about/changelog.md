@@ -179,7 +179,7 @@ history since 0.17.0][].
   check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
 - Restructured the publish-verify release step into numbered gates and hardened
   the smoke suite's npm-registry vet: exact, registry-resolved versions, with
-  local npm hardening never relaxed except by an explicit per-run knob
+  local npm hardening never relaxed except by an explicit per-run override
   ([#2786][]).
 
 [#1436]: https://github.com/google/docsy/issues/1436

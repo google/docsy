@@ -274,7 +274,7 @@ for (const src of ['NPM', 'HUGO_MODULE']) {
 // check that covers the code under review. The npm-registry test installs a
 // published spec: the post-publish check.
 
-function buildThemeConsumerSite(name, pkgSpec, expected) {
+function buildThemeConsumerSite(name, themePkgSpec, expected) {
   const site = path.join(TMP, name);
   rmSync(site, { recursive: true, force: true });
 
@@ -286,7 +286,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     'hugo new site',
   );
 
-  progress(`${name}: npm install ${pkgSpec}…`);
+  progress(`${name}: npm install ${themePkgSpec}…`);
   const npmOpts = { cwd: site, shell: winShell };
   assert.equal(run('npm', ['init', '-y'], npmOpts).status, 0, 'npm init');
   // Pin which npm registry serves the scoped package, mirroring the root .npmrc
@@ -311,7 +311,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
       ...(ageGateOverride !== undefined
         ? [`--min-release-age=${ageGateOverride}`]
         : []),
-      pkgSpec,
+      themePkgSpec,
     ],
     npmOpts,
   );
@@ -325,10 +325,10 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     /with a date before/.test(install.stderr ?? '')
   ) {
     assert.fail(
-      `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
+      `${themePkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
     );
   }
-  assert.equal(install.status, 0, `${pkgSpec} installs`);
+  assert.equal(install.status, 0, `${themePkgSpec} installs`);
   const installed = JSON.parse(
     readFileSync(
       path.join(site, 'node_modules', '@docsy', 'theme', 'package.json'),
@@ -342,7 +342,7 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     assert.equal(
       installed,
       expected,
-      `installed version matches the npm registry's resolution of ${pkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; ${AGE_GATE_REMEDY})`,
+      `installed version matches the npm registry's resolution of ${themePkgSpec} (a mismatch usually means a local min-release-age gate redirected the install; ${AGE_GATE_REMEDY})`,
     );
   }
   installSiteSass(name, npmOpts);
