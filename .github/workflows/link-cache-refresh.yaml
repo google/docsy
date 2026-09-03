@@ -4,8 +4,8 @@
 # re-running the link checker re-verifies them (or retires URLs no longer in
 # the site), rotating through them in about a month of weekly merged
 # refreshes; manual (seeded) entries are exempt from pruning and retire via
-# their expires dates. This lane runs the checker with --check-stale (the
-# link-cache 0.5.0 refresh mode), so stale and expired entries are also
+# their expires dates. This lane runs the checker with --check-stale
+# (link-cache's refresh mode), so stale and expired entries are also
 # re-verified here; PR/CI runs use the default mode, which trusts cached 2xx
 # results regardless of age (failures and non-2xx re-check every run).
 #
@@ -195,9 +195,8 @@ jobs:
           # --help probe (exit 0 without lychee or a build) fails the run
           # here instead, outside the tolerated-exit interpretation.
           npm run -s -C docsy.dev _check:links -- --help > /dev/null
-          # --check-stale: this refresh lane is where stale and expired
-          # entries get re-verified; default (PR/CI) runs only verify URLs
-          # without a cached 2xx result.
+          # --check-stale: opt staleness enforcement back in for this lane
+          # (mode model: the header comment).
           # The build already succeeded (previous step, fails hard), so the
           # exit code here is the link checker's own contract. Exit 1 (dead
           # links) doesn't fail the run: the merge-back has already recorded
