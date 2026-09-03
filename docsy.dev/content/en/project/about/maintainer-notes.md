@@ -246,25 +246,36 @@ Notes:
 - All but `test:smoke` run in CI.
 - To run one `test:repo` suite alone, pass its file(s) to `node --test`, e.g.
   `node --test tests/supply-chain-audit.test.mjs`.
-- `test:smoke` (slow, network-bound):
-  - Run it manually for `main` or PR-branch validation. Its GitHub-sourced
-    builds auto-target the current branch's GitHub upstream.
-  - Builds a minimal test site from the theme package (packed tarball, npm
-    registry) and from GitHub (NPM, Hugo module, clone, minimum-Hugo).
-  - The npm-registry install test vets an exact version (the checkout's, when
-    its release tag is in the checkout's history; otherwise `latest`), asserting
-    the installed version against the npm registry's own resolution.
-    `DOCSY_THEME_PKG` overrides the target (exact version or dist-tag); a
-    non-`-dev` prerelease checkout (an RC, for example) requires it.
-  - The suite never relaxes local npm hardening on its own -- the one relaxation
-    is the knob you pass: an install guard's block fails the run with the
-    guard's own remedy, and a release-age gate on the fresh theme package fails
-    it naming `DOCSY_THEME_MIN_RELEASE_AGE=N`, a suite knob applied to the
-    theme-package installs only. Any other pinned scratch dependency younger
-    than a local age gate fails its leg until the pin ages (npm's error names
-    the date cutoff). The make-site scratch sites carry their own baked
-    consumer-simulation `.npmrc` (7-day gate), which can differ from your
-    machine's settings.
+
+### test:smoke
+
+Run `test:smoke` locally for `main` or PR-branch validation. Its GitHub-sourced
+builds auto-target the current branch's GitHub upstream.
+
+- Slow, network-bound
+- Builds a minimal test site from:
+  - Theme package: packed tarball, npm registry
+  - GitHub: NPM, Hugo module, clone
+  - Hugo: pinned default and minimum Hugo-version builds
+
+Security:
+
+- The npm-registry install test vets an exact version: the checkout's, when its
+  release tag is in the checkout's history, otherwise `latest`; asserting the
+  installed version against the npm registry's own resolution.
+- `DOCSY_THEME_PKG` overrides the target: exact version or dist-tag; a
+  non-`-dev` prerelease checkout (an RC, for example) requires it.
+- The suite never relaxes local npm hardening on its own. When local hardening
+  blocks a run:
+  - An npm install-guard shim's block names its own override; follow the shim's
+    instructions to allow the run.
+  - For a release-age gate on a fresh Docsy theme package: set
+    `DOCSY_THEME_MIN_RELEASE_AGE=N` (N no lower than the release age in whole
+    days) to relax the cooldown to N days for the theme-package installs only.
+  - Any other pinned scratch dependency younger than a local age gate fails its
+    leg until the pin ages (npm's error names the date cutoff).
+  - The make-site scratch sites carry their own baked consumer-simulation
+    `.npmrc` (7-day gate), which can differ from your machine's settings.
 
 ### Structural guards: one concern per file
 
