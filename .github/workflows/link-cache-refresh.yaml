@@ -4,7 +4,10 @@
 # re-running the link checker re-verifies them (or retires URLs no longer in
 # the site), rotating through them in about a month of weekly merged
 # refreshes; manual (seeded) entries are exempt from pruning and retire via
-# their expires dates.
+# their expires dates. This lane runs the checker with --check-stale (the
+# link-cache 0.5.0 refresh mode), so stale and expired entries are also
+# re-verified here; PR/CI runs use the default mode, which trusts every
+# cached entry regardless of age.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -192,6 +195,9 @@ jobs:
           # --help probe (exit 0 without lychee or a build) fails the run
           # here instead, outside the tolerated-exit interpretation.
           npm run -s -C docsy.dev _check:links -- --help > /dev/null
+          # --check-stale: this refresh lane is where stale and expired
+          # entries get re-verified; default (PR/CI) runs only verify URLs
+          # missing from the cache.
           # The build already succeeded (previous step, fails hard), so the
           # exit code here is the link checker's own contract. Exit 1 (dead
           # links) doesn't fail the run: the merge-back has already recorded
@@ -199,13 +205,19 @@ jobs:
           # triages them. Exit 2 (preflight: tool/config broken, zero links
           # verified) is a workflow defect: fail hard.
           LINK_CHECK_STATUS=0
-          npm run -C docsy.dev _check:links || LINK_CHECK_STATUS=$?
+          npm run -C docsy.dev _check:links -- --check-stale || LINK_CHECK_STATUS=$?
           echo "Link check exit status: $LINK_CHECK_STATUS"
           if [[ "$LINK_CHECK_STATUS" -ge 2 ]]; then
             exit "$LINK_CHECK_STATUS"
           elif [[ "$LINK_CHECK_STATUS" -eq 1 ]]; then
             echo "dead_links=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Guard against a silently aging cache
+        # Threshold per the link-cache README: max_cache_age (375d, set in
+        # docsy.dev/lychee.toml) plus one refresh interval (7d). Exit 3 on
+        # breach fails this step, and the run, loudly.
+        run: npm run -s link-cache -- --max-age 382
 
       - name: Report the oldest entry after the refresh
         id: oldest
