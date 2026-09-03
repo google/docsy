@@ -92,7 +92,10 @@ export const canonicalRegion = (s) =>
 // change can't hide behind the region comparison's hash-stripping.
 export const byteGoldens = [
   { name: 'main.js', re: /src="\/(js\/main[^"]*\.js)"/ },
-  { name: 'click-to-copy.js', re: /src="\/(js\/click-to-copy[^"]*\.js)"/ },
+  {
+    name: 'click-to-copy.js',
+    re: /src="\/(js\/plugins\/click-to-copy[^"]*\.js)"/,
+  },
 ];
 
 export function scriptPath(html, { name, re }) {

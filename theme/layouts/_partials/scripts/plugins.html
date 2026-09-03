@@ -25,6 +25,12 @@
 {{ if not (in $names "tabpane-persist") -}}
   {{ $registry = $registry | append (dict "name" "tabpane-persist" "pageGate" "hasTabs") -}}
 {{ end -}}
+{{/* click-to-copy predates the registry as an on-by-default feature; its
+  legacy gates keep their semantics: prism supersedes it, and
+  disable_click2copy_chroma opts out. */ -}}
+{{ if and (not .Site.Params.prism_syntax_highlighting) (not .Site.Params.disable_click2copy_chroma) (not (in $names "click-to-copy")) -}}
+  {{ $registry = $registry | append (dict "name" "click-to-copy" "defer" true) -}}
+{{ end -}}
 {{ range $registry -}}
   {{ $entry := . -}}
   {{ if not (reflect.IsMap $entry) -}}
