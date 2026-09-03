@@ -235,11 +235,11 @@ NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 
 From the repo root:
 
-| Script         | Role                                                                                                |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                          |
-| `test:smoke`   | Slow, network-bound; builds a site from GitHub several ways (NPM, Hugo module, clone, minimum-Hugo) |
-| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests            |
+| Script         | Role                                                                                                                                                 |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                                                                           |
+| `test:smoke`   | Slow, network-bound; builds consumer sites from GitHub (NPM, Hugo module, clone, minimum-Hugo) and from the theme package (packed tarball, registry) |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests                                                             |
 
 Notes:
 
@@ -248,6 +248,11 @@ Notes:
   `node --test tests/supply-chain-audit.test.mjs`.
 - Run `test:smoke` manually for `main` or PR-branch validation. Its tests
   auto-target the current branch's GitHub upstream.
+- The `test:smoke` registry-install test vets an exact version -- the checkout's
+  at a release tag, otherwise `latest` -- asserting the installed version
+  against the registry's own resolution. The suite never overrides local npm
+  hardening: an install guard or release-age gate fails the run loudly, naming
+  the deliberate rerun knob.
 
 ### Structural guards: one concern per file
 
@@ -633,11 +638,8 @@ If not adjust accordingly.
        ```
 
     4. **Vet the published artifact**: run the [smoke tests](#test-suites) from
-       `$BASE`; the registry-install test derives the just-published version
-       from the checkout and fails unless the registry serves exactly it. The
-       suite never overrides local npm hardening (install guards, a
-       `min-release-age` gate): those surface as loud failures naming the
-       deliberate rerun.
+       `$BASE`; the registry-install test vets exactly the just-published
+       version:
 
        ```sh
        npm run test:smoke

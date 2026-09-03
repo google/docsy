@@ -216,10 +216,11 @@ before(() => {
       shell: winShell,
     },
   );
-  assert.ok(
-    !(probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')),
-    'npm installs are unblocked (a PATH guard blocks the suite; its installs are pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke)',
-  );
+  if (probe.status !== 0 && /npm-guard/.test(probe.stderr ?? '')) {
+    assert.fail(
+      'npm installs are blocked by a PATH guard; the suite installs pinned specs into throwaway scratch sites, so rerun deliberately: NPM_GUARD_ALLOW_BARE_INSTALL=1 npm run test:smoke',
+    );
+  }
 });
 
 // An npm install of @docsy/theme wires the package bins into
@@ -288,9 +289,8 @@ function buildThemeConsumerSite(name, pkgSpec) {
     ['install', '--ignore-scripts', '--no-audit', '--no-fund', pkgSpec],
     npmOpts,
   );
-  // A fresh release is younger than a local min-release-age gate; the suite
-  // honors the gate (never overrides it) and instead maps the failure to the
-  // deliberate rerun.
+  // A fresh release is younger than a local min-release-age gate (which the
+  // suite honors); map the failure to the deliberate rerun.
   if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
     assert.fail(
       `${pkgSpec} is blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke`,
@@ -361,33 +361,36 @@ test('tarball install of @docsy/theme packed from this checkout', () => {
   );
 });
 
-// Registry spec: always an exact pin, derived -- a bare @docsy/theme resolves
-// through the local npm config, where a min-release-age gate silently
-// redirects it to the previous old-enough stable (the 0.17.0 release vet
-// installed 0.16.0). At a release tag the checkout's theme version is the
-// just-published stable: vet exactly it. Between releases (dev-stamped theme)
-// vet what consumers get: the registry's actual `latest`, resolved
-// explicitly. DOCSY_THEME_PKG overrides both: e.g. @docsy/theme@next to vet
-// an RC.
-function registrySpec() {
-  if (process.env.DOCSY_THEME_PKG) return process.env.DOCSY_THEME_PKG;
-  if (/^\d+\.\d+\.\d+$/.test(THEME_VERSION))
-    return `@docsy/theme@${THEME_VERSION}`;
-  const view = run('npm', ['view', '@docsy/theme', 'dist-tags.latest'], {
+// Registry spec: an exact pin when the checkout names one -- at a release tag
+// the theme version is the just-published stable, so vet exactly it -- else
+// `latest`. The test resolves the spec's expected version registry-side
+// (npm view, ungated by min-release-age) and asserts the installed version
+// matches, so a local age gate can't silently redirect any spec form to an
+// older stable (the 0.17.0 release vet installed 0.16.0). DOCSY_THEME_PKG
+// overrides the spec: e.g. @docsy/theme@next to vet an RC.
+const REGISTRY_PKG =
+  process.env.DOCSY_THEME_PKG ??
+  (/^\d+\.\d+\.\d+$/.test(THEME_VERSION)
+    ? `@docsy/theme@${THEME_VERSION}`
+    : '@docsy/theme@latest');
+test(`registry install of ${REGISTRY_PKG}`, () => {
+  const view = run('npm', ['view', REGISTRY_PKG, 'version'], {
     cwd: repoRoot,
     shell: winShell,
   });
-  if (view.status !== 0 || !view.stdout.trim())
-    throw new Error('npm view failed to resolve @docsy/theme dist-tags.latest');
-  return `@docsy/theme@${view.stdout.trim()}`;
-}
-const REGISTRY_PKG = registrySpec();
-test(`registry install of ${REGISTRY_PKG}`, () => {
+  const expected = (view.stdout ?? '').trim();
+  if (view.status !== 0 || !expected) {
+    assert.fail(
+      `${REGISTRY_PKG} resolves on the registry (view failed; for a fresh release, check that the npm publish landed: maintainer notes step 15)`,
+    );
+  }
+  progress(`smoke-registry: expecting @docsy/theme@${expected}`);
   const installed = buildThemeConsumerSite('smoke-registry', REGISTRY_PKG);
-  // Exact except under a dist-tag override (e.g. @next).
-  const pinned = REGISTRY_PKG.match(/@(\d+\.\d+\.\d+[^@]*)$/)?.[1];
-  if (pinned)
-    assert.equal(installed, pinned, 'installed theme version matches the pin');
+  assert.equal(
+    installed,
+    expected,
+    `installed version matches the registry's resolution of ${REGISTRY_PKG} (a mismatch usually means a local min-release-age gate redirected the install; vet deliberately: NPM_CONFIG_MIN_RELEASE_AGE=0 npm run test:smoke)`,
+  );
 });
 
 // --- declared minimum Hugo version actually builds --------------------------
