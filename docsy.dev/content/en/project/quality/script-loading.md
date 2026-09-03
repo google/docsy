@@ -41,8 +41,8 @@ gate-to-partial wiring, offline.
 [`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
 emission with `@params`, `enable`/`defer`/`pageGate` handling, both companions,
 shape-guard warnings, name coercion and allowlisting, theme-default inheritance,
-and fingerprint distinctness (duplicate registrations publish distinct builds,
-in development too). Companion nets:
+and fingerprint distinctness (distinct builds of one source publish distinct
+paths, in development too). Companion nets:
 
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: page gating, persistence
   opt-out, and theme-plugin shadowing.

@@ -28,7 +28,7 @@
 {{ end -}}
 {{ $seen := dict -}}
 {{ range $names -}}
-  {{ if index $seen . }}{{ warnf "Plugin %q is registered more than once in params.docsy.plugins; each registration emits its own build." . -}}
+  {{ if index $seen . }}{{ warnf "Plugin %q is registered more than once in params.docsy.plugins; plugins load once: pass per-target settings through one entry's options." . -}}
   {{ else }}{{ $seen = merge $seen (dict . true) }}{{ end -}}
 {{ end -}}
 {{ if and .Site.Params.markmap.enable (not (in $names "markmap")) -}}

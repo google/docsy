@@ -66,3 +66,22 @@ test('prism supersedes the copy-button plugin', () => {
     'the page is free of copy-button script tags alongside prism',
   );
 });
+
+test('a site entry with enable: false turns the theme plugin off', () => {
+  const r = buildSite('c2c-registry-off', {
+    files,
+    title: 'Docsy copy-button registry-off fixture',
+    extraConfig: `params:
+  docsy:
+    plugins:
+      - name: click-to-copy
+        enable: false
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /click-to-copy[^"]*\.js/,
+    'the page is free of copy-button script tags',
+  );
+});

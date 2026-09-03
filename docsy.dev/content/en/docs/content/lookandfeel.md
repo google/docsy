@@ -976,6 +976,18 @@ integrity][SRI]. An entry can also pass `options` (which reach the module as
 [build parameters][js-params]), set `defer`, or gate loading on a page flag; for
 the full registry contract, see the [implementation notes][plugins-impl].
 
+Docsy's own plugins (`click-to-copy`, `tabpane-persist`, and `markmap` when
+enabled) are registered for you; to turn one off, declare it with
+`enable: false`:
+
+```yaml
+params:
+  docsy:
+    plugins:
+      - name: click-to-copy
+        enable: false
+```
+
 > [!NOTE]
 >
 > This section covers the essentials only: plugin authoring docs are in

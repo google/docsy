@@ -69,8 +69,8 @@ value:
 - A non-list `params.docsy.plugins`, falsy scalars included, warns
   (`docsy-plugins-config`) and is ignored.
 - An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
-- A name registered more than once warns (`warnf`): duplicates still emit, each
-  as its own build.
+- A name registered more than once warns (`warnf`): plugins load once, and a
+  second registration is a misconfiguration.
 - An enabled registration with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
@@ -86,9 +86,8 @@ is suppressible through Hugo's `ignoreLogs`.
   as build `params`, so the module reads them with
   `import * as params from '@params'`. Production builds add `minify`.
 - **Fingerprinting runs in every environment**, not just production: distinct
-  builds of one source (per-language sites, duplicate registrations with
-  different options) must publish distinct paths, or the last write wins
-  site-wide.
+  builds of one source (per-language sites) must publish distinct paths, or the
+  last write wins site-wide.
 - The script tag carries SRI attributes (`integrity`, `crossorigin`), and
   `defer` when the entry sets it.
 
