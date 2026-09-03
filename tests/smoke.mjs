@@ -70,8 +70,8 @@ const ageGateOverride = process.env.DOCSY_THEME_MIN_RELEASE_AGE || undefined;
 if (ageGateOverride !== undefined)
   assert.match(
     ageGateOverride,
-    /^\d+$/,
-    `DOCSY_THEME_MIN_RELEASE_AGE (${ageGateOverride}) is a whole number of days`,
+    /^\d{1,4}$/,
+    `DOCSY_THEME_MIN_RELEASE_AGE (${ageGateOverride}) is a whole number of days (at most 4 digits)`,
   );
 
 // PATH for consumer-site Hugo builds: the site's own bin dir first, and this
@@ -316,8 +316,14 @@ function buildThemeConsumerSite(name, pkgSpec, expected) {
     npmOpts,
   );
   // A fresh release is younger than a local min-release-age gate (which the
-  // suite honors); map the failure to the deliberate rerun.
-  if (install.status !== 0 && /ETARGET/.test(install.stderr ?? '')) {
+  // suite honors); map that failure -- identified by npm's date-cutoff
+  // diagnostic, so other ETARGETs (broken pins) keep npm's own message -- to
+  // the deliberate rerun.
+  if (
+    install.status !== 0 &&
+    /ETARGET/.test(install.stderr ?? '') &&
+    /with a date before/.test(install.stderr ?? '')
+  ) {
     assert.fail(
       `${pkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
     );
@@ -437,15 +443,20 @@ function derivedNpmRegistrySpec() {
         'the release state of this checkout is determinable (git identity unavailable; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
       return '@docsy/theme@latest';
     }
-    if (
-      tag.status === 0 &&
-      spawnSync(
+    if (tag.status === 0) {
+      const ancestor = spawnSync(
         'git',
         [...gitArgs, 'merge-base', '--is-ancestor', tag.stdout.trim(), 'HEAD'],
         { encoding: 'utf8' },
-      ).status === 0
-    ) {
-      return `@docsy/theme@${THEME_VERSION}`;
+      );
+      if (ancestor.status === 0) return `@docsy/theme@${THEME_VERSION}`;
+      // Same status routing as the tag probe: only "not an ancestor" (1)
+      // falls back; a fatal error must not silently redirect the vet.
+      if (ancestor.status !== 1) {
+        derivationError =
+          'the release state of this checkout is determinable (git ancestry check failed; name the target by adding DOCSY_THEME_PKG=@docsy/theme@VERSION to your command)';
+        return '@docsy/theme@latest';
+      }
     }
     progress(
       `npm registry: ${THEME_VERSION} is stamped but its tag is ${
@@ -459,14 +470,14 @@ function derivedNpmRegistrySpec() {
 }
 test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
   if (derivationError) assert.fail(derivationError);
-  // The vet targets the npm-registry package, by exact version or dist-tag
-  // only: a path, foreign-package, or range override would test something
-  // other than what it reports, and on Windows the spec reaches npm through
-  // a shell (winShell), so metacharacters stay out.
+  // The vet targets the npm-registry package, optionally pinned by exact
+  // version or dist-tag: a path, foreign-package, or range override would
+  // test something other than what it reports, and on Windows the spec
+  // reaches npm through a shell (winShell), so metacharacters stay out.
   assert.match(
     NPM_REGISTRY_PKG,
     /^@docsy\/theme(@(\d+\.\d+\.\d+(-[\w.]+)?(\+[\w.]+)?|[A-Za-z][\w.-]*))?$/,
-    `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is an exact-version or dist-tag form of the @docsy/theme npm-registry package`,
+    `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is the @docsy/theme npm-registry package, with an optional exact-version or dist-tag pin`,
   );
   const view = run('npm', ['view', NPM_REGISTRY_PKG, 'version'], {
     cwd: repoRoot,

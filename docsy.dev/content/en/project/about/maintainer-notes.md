@@ -255,14 +255,16 @@ Notes:
     its release tag is in the checkout's history; otherwise `latest`), asserting
     the installed version against the npm registry's own resolution.
     `DOCSY_THEME_PKG` overrides the target (exact version or dist-tag); a
-    prerelease checkout requires it.
-  - The suite never overrides local npm hardening, and its installs run under
-    your ambient npm config: an install guard's block fails the run with the
+    non-`-dev` prerelease checkout (an RC, for example) requires it.
+  - The suite never relaxes local npm hardening on its own -- the one relaxation
+    is the knob you pass: an install guard's block fails the run with the
     guard's own remedy, and a release-age gate on the fresh theme package fails
     it naming `DOCSY_THEME_MIN_RELEASE_AGE=N`, a suite knob applied to the
     theme-package installs only. Any other pinned scratch dependency younger
     than a local age gate fails its leg until the pin ages (npm's error names
-    the date cutoff).
+    the date cutoff). The make-site scratch sites carry their own baked
+    consumer-simulation `.npmrc` (7-day gate), which can differ from your
+    machine's settings.
 
 ### Structural guards: one concern per file
 
