@@ -235,11 +235,11 @@ NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 
 From the repo root:
 
-| Script         | Role                                                                                         |
-| -------------- | -------------------------------------------------------------------------------------------- |
-| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                   |
-| `test:smoke`   | Builds minimal test sites from the theme package and from GitHub; see note below for details |
-| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests     |
+| Script         | Role                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| `test:repo`    | Fast, offline repo checks. For details, see [`package.json`][package.json]                     |
+| `test:smoke`   | Builds minimal test sites from the theme package and from GitHub; see [test:smoke](#testsmoke) |
+| `test:website` | Full docsy.dev checks: format, links, hugo-build, alt-site, md-output, and favicon tests       |
 
 Notes:
 
@@ -256,24 +256,25 @@ builds auto-target the current branch's GitHub upstream.
 - Builds a minimal test site from:
   - Theme package: packed tarball, npm registry
   - GitHub: NPM, Hugo module, clone
-  - Hugo: pinned default and minimum Hugo-version builds
+- Builds with the pinned Hugo; the Hugo-module site also with the declared
+  minimum Hugo version
 
 Security:
 
 - The npm-registry install test vets an exact version: the checkout's, when its
-  release tag is in the checkout's history, otherwise `latest`; asserting the
-  installed version against the npm registry's own resolution.
+  release tag is in the checkout's history, otherwise `latest`'s resolution;
+  asserting the installed version against the npm registry's own resolution.
 - `DOCSY_THEME_PKG` overrides the target: exact version or dist-tag; a
   non-`-dev` prerelease checkout (an RC, for example) requires it.
 - The suite never relaxes local npm hardening on its own. When local hardening
   blocks a run:
-  - An npm install-guard shim's block names its own override; follow the shim's
-    instructions to allow the run.
+  - A local install guard's block names its own override; follow it to allow the
+    run.
   - For a release-age gate on a fresh Docsy theme package: set
-    `DOCSY_THEME_MIN_RELEASE_AGE=N` (N no lower than the release age in whole
-    days) to relax the cooldown to N days for the theme-package install commands
-    only -- the theme and the dependencies those installs resolve; nothing else
-    in the run.
+    `DOCSY_THEME_MIN_RELEASE_AGE=N`, N = the release age in whole days (0 on
+    release day; higher still blocks, lower over-relaxes), to relax the cooldown
+    for the theme-package install commands only -- the theme and the
+    dependencies those installs resolve; nothing else in the run.
   - Any other pinned scratch dependency younger than a local age gate fails its
     leg until the pin ages (npm's error names the date cutoff).
   - The make-site scratch sites carry their own baked consumer-simulation
@@ -688,7 +689,8 @@ If not adjust accordingly.
       manual npm commands from within the repo: the root `.npmrc` pins the
       `@docsy` scope registry against local overrides.
 
-      Vet a prerelease publish explicitly (at a prerelease checkout, the
+      Vet a prerelease publish explicitly, before restoring the dev version
+      stamp (while the prerelease version is still in `theme/package.json`, the
       npm-registry install test refuses other targets, a bare run's `latest`
       included), and confirm the run's "expecting" line names the prerelease you
       just published:

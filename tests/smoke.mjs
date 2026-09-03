@@ -25,6 +25,7 @@ import {
   appendFileSync,
   existsSync,
   mkdirSync,
+  mkdtempSync,
   readFileSync,
   readdirSync,
   rmSync,
@@ -65,7 +66,9 @@ assert.match(
 // transitive releases under the other pinned installs -- those stay under the
 // operator's ambient npm config, untouched in either direction.
 const AGE_GATE_REMEDY =
-  'add DOCSY_THEME_MIN_RELEASE_AGE=N to your command, N no lower than the release age in whole days (0 on release day); the suite applies it to the theme-package installs only';
+  'add DOCSY_THEME_MIN_RELEASE_AGE=N to your command, N = the release age in whole days (0 on release day): higher still blocks, lower over-relaxes; the suite applies it to the theme-package installs only';
+// Load-time on purpose (unlike derivationError): a mistyped operator value
+// should fail before any network work, and it concerns every theme install.
 const ageGateOverride = process.env.DOCSY_THEME_MIN_RELEASE_AGE || undefined;
 if (ageGateOverride !== undefined)
   assert.match(
@@ -325,7 +328,7 @@ function buildThemeConsumerSite(name, themePkgSpec, expected) {
     /with a date before/.test(install.stderr ?? '')
   ) {
     assert.fail(
-      `${themePkgSpec} is installable (blocked by your npm min-release-age setting; it is the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
+      `${themePkgSpec} is installable (blocked by your npm min-release-age setting; the theme package or its dependency pins are the artifact under test, so vet it deliberately: ${AGE_GATE_REMEDY})`,
     );
   }
   assert.equal(install.status, 0, `${themePkgSpec} installs`);
@@ -479,21 +482,26 @@ test(`npm-registry install of ${NPM_REGISTRY_PKG}`, () => {
     /^@docsy\/theme(@(\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?|[A-Za-z][\w.-]*))?$/,
     `DOCSY_THEME_PKG (${NPM_REGISTRY_PKG}) is the @docsy/theme npm-registry package, with an optional exact-version or dist-tag pin`,
   );
-  // --prefer-online: the expectation must come from the npm registry itself;
-  // under an offline/prefer-offline npm config, view and install would agree
-  // on a stale cached resolution and the equality below couldn't catch it.
+  // The expectation must come from the npm registry itself, so the view runs
+  // against a fresh, empty cache: a miss can't be served stale (under an
+  // offline config it fails loudly), whereas --prefer-online is a no-op here
+  // (view already prefers online) and loses to ambient offline/prefer-offline
+  // config, and a warm cache serves stale-if-error even online. The install
+  // keeps the shared cache: a stale install can't match a fresh expectation.
+  const viewCache = mkdtempSync(path.join(TMP, 'view-cache-'));
   const view = run(
     'npm',
-    ['view', '--prefer-online', NPM_REGISTRY_PKG, 'version'],
+    ['view', `--cache=${viewCache}`, NPM_REGISTRY_PKG, 'version'],
     {
       cwd: repoRoot,
       shell: winShell,
     },
   );
+  rmSync(viewCache, { recursive: true, force: true });
   const expected = (view.stdout ?? '').trim();
   if (view.status !== 0 || !expected) {
     assert.fail(
-      `${NPM_REGISTRY_PKG} resolves on the npm registry (view failed; for a fresh release, check that the npm publish landed: maintainer notes step 15)`,
+      `${NPM_REGISTRY_PKG} resolves on the npm registry (view failed: registry unreachable, or for a fresh release, check that the npm publish landed: maintainer notes step 15)`,
     );
   }
   // Range-ish specs make npm view emit labeled multi-line output; fail here,
