@@ -273,8 +273,8 @@ Security:
   - For a release-age gate on a fresh Docsy theme package: set
     `DOCSY_THEME_MIN_RELEASE_AGE=N`, N = the release age in whole days (0 on
     release day; higher still blocks, lower over-relaxes), to relax the cooldown
-    for the theme-package install commands only -- the theme and the
-    dependencies those installs resolve; nothing else in the run.
+    for the theme-package install commands only: the theme and the dependencies
+    those installs resolve; nothing else in the run.
   - Any other pinned scratch dependency younger than a local age gate fails its
     leg until the pin ages (npm's error names the date cutoff).
   - The make-site scratch sites carry their own baked consumer-simulation
