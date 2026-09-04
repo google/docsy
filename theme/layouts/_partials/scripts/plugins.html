@@ -40,8 +40,10 @@
     The key is the name; set last so an entry field can't redirect the asset. */ -}}
   {{ $gate := $entry.pagegate -}}
   {{ if or (not $gate) (eq (printf "%T" $gate) "bool") }}{{ $gate = "" }}{{ else }}{{ $gate = printf "%v" $gate }}{{ end -}}
-  {{ $options := $entry.options | default dict -}}
-  {{ if not (reflect.IsMap $options) -}}
+  {{ $options := $entry.options -}}
+  {{ if eq $options nil -}}
+    {{ $options = dict -}}
+  {{ else if not (reflect.IsMap $options) -}}
     {{ warnidf "docsy-plugin-entry" "Plugin %q: options must be a map (got %v); using none." $name $options -}}
     {{ $options = dict -}}
   {{ end -}}

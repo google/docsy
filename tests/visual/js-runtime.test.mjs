@@ -106,6 +106,7 @@ const visits = Object.entries(variants).flatMap(([variant, { pages }]) =>
 
 let browser;
 const servers = {}; // variant → { origin, close }
+const builds = {}; // variant → buildSite result
 let selfTestUrl;
 let checked = 0;
 
@@ -117,6 +118,7 @@ before(async () => {
         `fixture hugo build failed:\n${build.stdout}${build.stderr}`,
       );
     }
+    builds[variant] = build;
     servers[variant] = await serveDir(path.join(build.site, 'public'));
     if (!selfTestUrl) {
       // Self-test page for the collector's red-proof: an uncaught
@@ -215,6 +217,31 @@ async function newProbePage() {
 // Diagram probes: each asserts the script's DOM transformation landed on
 // the features diagrams page (rendered SVG for the CDN-driven renderers,
 // the generated img element for plantuml).
+
+// The fixture-site nets stay offline, so the real vendor fetch (a
+// resources.GetRemote of the autoloader) is pinned here, in the network tier.
+test('markmap vendors the autoloader same-origin, with SRI, deferred', () => {
+  const html = builds.features.publicFile('docs/diagrams/index.html');
+  assert.doesNotMatch(
+    html,
+    /<script[^>]*src="https?:\/\/[^"]*markmap/i,
+    'the page is free of cross-origin markmap script tags',
+  );
+  const vendor = html.match(
+    /<script[^>]*src="\/js\/vendor\/markmap-autoloader[^"]*\.js"[^>]*>/,
+  );
+  assert.ok(vendor, 'vendored autoloader is served same-origin');
+  assert.match(
+    vendor[0],
+    /integrity="sha256-/,
+    'vendored autoloader carries SRI',
+  );
+  assert.match(
+    vendor[0],
+    /\bdefer\b/,
+    'the autoloader defers past the plugin script that configures it',
+  );
+});
 
 test('js behavior: a markmap code block renders as an SVG mind map', async () => {
   const { page, pageErrors } = await newProbePage();

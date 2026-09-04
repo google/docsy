@@ -1,6 +1,6 @@
-// Pins MarkMap's registry conversion and legacy compatibility. One case
-// vendors the autoloader for real (network, resources.GetRemote); the loop
-// contract cases stub the companion with a marker to stay offline.
+// Pins MarkMap's registry conversion and legacy compatibility, offline: the
+// companion (a resources.GetRemote of the autoloader) is stubbed with a marker
+// wherever markmap is on; the real vendoring is pinned in the visual suite.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -44,7 +44,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
 
 test('legacy-enabled markmap keeps site-wide loading and warns', () => {
   const r = buildSite('markmap-enabled', {
-    files,
+    files: stubbed,
     extraConfig: 'params:\n  markmap:\n    enable: true\n',
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -59,20 +59,10 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
     'the legacy alias keeps pre-0.18 site-wide loading, markmap content or not',
   );
   const html = r.publicFile('docs/index.html');
-  assert.doesNotMatch(
-    html,
-    /<script[^>]*src="https?:\/\/[^"]*markmap/i,
-    'the page is free of cross-origin markmap script tags',
-  );
-  const vendor = html.match(
-    /<script[^>]*src="\/(js\/vendor\/markmap-autoloader[^"]*\.js)"[^>]*>/,
-  );
-  assert.ok(vendor, 'vendored autoloader is served same-origin');
-  assert.match(vendor[0], /integrity="sha/, 'vendored autoloader carries SRI');
   assert.match(
-    vendor[0],
-    /\bdefer\b/,
-    'the autoloader defers past the plugin script that configures it',
+    html,
+    /data-vendor="markmap-autoloader"/,
+    'the companion rides the legacy alias too',
   );
   const plugin = html.match(
     /<script[^>]*src="\/(js\/plugins\/markmap[^"]*\.js)"/,

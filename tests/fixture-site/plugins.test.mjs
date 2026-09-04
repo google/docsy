@@ -703,25 +703,53 @@ test('a name ending in _docsy-shim is refused as reserved', () => {
 });
 
 test('non-map options warn and the module gets an empty map', () => {
-  const r = buildSite('plugins-options-scalar', {
+  // Falsy shapes included: they must not slip through as "none".
+  const shapes = { scalar: 'not-a-map', empty: "''", zero: '0', list: '[]' };
+  for (const [label, value] of Object.entries(shapes)) {
+    const r = buildSite(`plugins-options-${label}`, {
+      files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+      extraConfig: `params:
+  docsy:
+    plugins:
+      hello: { options: ${value} }
+`,
+    });
+    assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+    assert.match(
+      r.stderr,
+      /Plugin "hello": options must be a map/,
+      `options: ${value} is called out in a build warning`,
+    );
+    const html = r.publicFile('index.html');
+    assert.match(
+      html,
+      /js\/plugins\/hello/,
+      `options: ${value} keeps the plugin`,
+    );
+    const js = r.publicFile(
+      html.match(/src="\/(js\/plugins\/hello[^"]*\.js)"/)[1],
+    );
+    assert.doesNotMatch(js, /not-a-map/, 'the module is free of the scalar');
+  }
+});
+
+test('null options mean none, without a warning', () => {
+  const r = buildSite('plugins-options-null', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     extraConfig: `params:
   docsy:
     plugins:
-      hello: { options: not-a-map }
+      hello:
+        options:
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(r.stderr, /options must be a map/, 'no options warning');
   assert.match(
-    r.stderr,
-    /Plugin "hello": options must be a map/,
-    'the options shape is called out in a build warning',
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the plugin is emitted',
   );
-  const html = r.publicFile('index.html');
-  const js = r.publicFile(
-    html.match(/src="\/(js\/plugins\/hello[^"]*\.js)"/)[1],
-  );
-  assert.doesNotMatch(js, /not-a-map/, 'the module is free of the scalar');
 });
 
 test('a boolean pageGate means no gate', () => {

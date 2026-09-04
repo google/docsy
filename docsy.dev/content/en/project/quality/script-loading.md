@@ -48,9 +48,9 @@ development builds. Companion nets:
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: page gating, persistence
   opt-out, and theme-plugin shadowing.
 - [`markmap-plugin.test.mjs`][markmap-test] and
-  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts. One
-  markmap case vendors the autoloader for real, so `test:repo` needs network
-  there; the other markmap cases stub the companion with a marker.
+  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts. The
+  markmap cases stub the vendoring companion with a marker to stay offline; the
+  real vendor fetch is pinned in the browser net.
 
 ## Acceptance test
 
