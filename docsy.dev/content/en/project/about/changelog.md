@@ -161,8 +161,6 @@ history since 0.17.0][].
 
 **New**:
 
-- **[Plugins][ug-plugins]**: added `params.docsy.plugins`, a registry that loads
-  site scripts without layout overrides ([#2788][], [#2789][]).
 - Converted markmap, tabpane-persist, and click-to-copy to plugins: unused
   integrations ship no JS. Deprecated `params.markmap.enable` and
   `params.disable_click2copy_chroma` in favor of registry entries ([upgrade
@@ -173,8 +171,6 @@ history since 0.17.0][].
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
-- Reverted the root baseof's caching of the scripts partial: per-page script
-  gating made the cached render page-dependent ([#2787][]).
 
 [**Experimental**](#experimental):
 
@@ -189,11 +185,6 @@ history since 0.17.0][].
   ([#2779][]).
 - Extended the root `npm run check` to also run the docsy.dev workspace format
   check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
-- Added a scheduled workflow that refreshes the committed link caches
-  ([#2780][]).
-- Re-homed script/plugin architecture notes from code comments into the new
-  project docs Quality section, with a routing rule for future code-adjacent
-  docs ([#2790][]).
 - Restructured the publish-verify release step into numbered gates and hardened
   the smoke suite's npm-registry vet: exact, registry-resolved versions, with
   local npm hardening never relaxed except by an explicit per-run override
@@ -203,18 +194,12 @@ history since 0.17.0][].
 [#2774]: https://github.com/google/docsy/pull/2774
 [#2776]: https://github.com/google/docsy/pull/2776
 [#2779]: https://github.com/google/docsy/pull/2779
-[#2780]: https://github.com/google/docsy/pull/2780
 [#2781]: https://github.com/google/docsy/pull/2781
 [#2786]: https://github.com/google/docsy/pull/2786
-[#2787]: https://github.com/google/docsy/pull/2787
-[#2788]: https://github.com/google/docsy/pull/2788
-[#2789]: https://github.com/google/docsy/issues/2789
-[#2790]: https://github.com/google/docsy/pull/2790
 [#2791]: https://github.com/google/docsy/pull/2791
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
-[ug-plugins]: /docs/content/lookandfeel/#load-scripts-as-plugins
 [git history since 0.17.0]:
   https://github.com/google/docsy/compare/v0.17.0...main
 
