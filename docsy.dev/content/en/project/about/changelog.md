@@ -153,10 +153,10 @@ history since 0.17.0][].
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
-- **Script override points moved and markmap/tab persistence page-gated** with
+- **Script override points moved and MarkMap/tab persistence page-gated** with
   the plugin conversions: overrides of the markmap, click-to-copy, and
   tabpane-persist scripts and partials or of the tabpane shortcode need
-  refreshing; self-emitted markmap or tab markup and no-network markmap builds
+  refreshing; self-emitted MarkMap or tab markup and no-network MarkMap builds
   need action. For the cases and paths, see the [0.18 post's plugin
   section][0.18.0-blog-plugins] ([#2791][]).
 

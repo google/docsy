@@ -616,6 +616,8 @@ Automatically renders to:
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ````
 
+### Activating MarkMap support
+
 To enable MarkMap, turn on its plugin in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->

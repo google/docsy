@@ -979,7 +979,7 @@ the full registry contract, see the [implementation notes][plugins-impl].
 
 Docsy's own plugins are registered for you: `click-to-copy` and
 `tabpane-persist` are on, and `markmap` is off until you
-[enable it](/docs/content/diagrams-and-formulae/#mindmap-support-with-markmap).
+[enable it](/docs/content/diagrams-and-formulae/#activating-markmap-support).
 Set a plugin to `false` to turn it off:
 
 ```yaml
