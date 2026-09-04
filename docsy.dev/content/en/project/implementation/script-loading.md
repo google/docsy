@@ -52,19 +52,21 @@ theme's:
 
 ### Pre-registry parameters
 
-[`scripts/plugins-compat.html`][compat] maps parameters that predate the
-registry onto it, before the loop reads the merged map. It is the only place
-where old parameters meet the registry, and it retires with their deprecation
-cycles:
+A plugin whose behavior was once controlled by other parameters ships a
+compatibility partial, `_partials/scripts/plugins/NAME.compat.html`, that the
+loop applies to the plugin's merged entry before the enable and gate checks: it
+receives `(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry.
+Each retires with its parameter's deprecation cycle by deleting the file:
 
-- `params.markmap.enable` (deprecated, `docsy-markmap-legacy`): when set,
-  markmap is on and **ungated**, exactly the pre-0.18 site-wide behavior (custom
-  render hooks and raw markmap HTML never set the flag), whatever the registry
-  says; the warning asks for its removal.
-- `params.disable_click2copy_chroma` (deprecated, `docsy-c2c-legacy`): turns
-  `click-to-copy` off; `click-to-copy: false` is the registry form.
-- `params.prism_syntax_highlighting`: turns `click-to-copy` off (Prism ships its
-  own copy button). Not deprecated: Prism support is a live feature; only the
+- `markmap.compat.html`: `params.markmap.enable` (deprecated,
+  `docsy-markmap-legacy`), when set, turns markmap on and **ungated**, exactly
+  the pre-0.18 site-wide behavior (custom render hooks and raw markmap HTML
+  never set the flag), whatever the registry says; the warning asks for its
+  removal.
+- `click-to-copy.compat.html`: `params.disable_click2copy_chroma` (deprecated,
+  `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false` is the
+  registry form. `params.prism_syntax_highlighting` also turns it off (Prism
+  ships its own copy button); Prism support is a live feature, so only the
   coupling is expressed here.
 
 ## Shape guards
@@ -91,8 +93,7 @@ Warnings are issued with `warnidf`, so each is suppressible through Hugo's
   as build `params`, so the module reads them with
   `import * as params from '@params'`. Production builds add `minify`.
 - **Fingerprinting runs in every environment**, not just production: the script
-  tag always carries SRI, and Hugo builds per language, so distinct outputs of
-  one source must never share a published path.
+  tag always carries SRI.
 - The script tag carries SRI attributes (`integrity`, `crossorigin`), and
   `defer` when the entry sets it.
 
@@ -123,7 +124,6 @@ tag ([why][design-ordering]):
   still load from the CDN, pinned by the autoloader itself but without SRI.
 
 <!-- prettier-ignore-start -->
-[compat]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins-compat.html
 [design]: /project/design/script-loading/
 [design-shape]: /project/design/script-loading/#registry-shape
 [design-ordering]: /project/design/script-loading/#plugin-loop
