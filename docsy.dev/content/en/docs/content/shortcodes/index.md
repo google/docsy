@@ -685,7 +685,7 @@ to `header` when `text=true` or `lang` is set; otherwise `persist` defaults to
 turn it off site-wide, turn the plugin off.
 
 [highlight]: https://gohugo.io/functions/highlight/
-[plugins]: /docs/content/lookandfeel/#load-scripts-as-plugins
+[plugins]: /docs/content/plugins/
 
 #### `tab`
 

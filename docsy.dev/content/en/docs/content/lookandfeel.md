@@ -540,9 +540,9 @@ project's configuration file.
 #### Copy to clipboard
 
 Code blocks show a "Copy to clipboard" button in the top right-hand corner. To
-remove it, turn the [`click-to-copy` plugin](#load-scripts-as-plugins) off.
-Before 0.18 the parameter was `params.disable_click2copy_chroma`; it is
-deprecated and still works for this release cycle, with a build warning.
+remove it, turn the [`click-to-copy` plugin](/docs/content/plugins/) off. Before
+0.18 the parameter was `params.disable_click2copy_chroma`; it is deprecated and
+still works for this release cycle, with a build warning.
 
 ### Code highlighting with Prism
 
@@ -959,53 +959,6 @@ this:
 [Markdown attribute]: https://discourse.gohugo.io/t/markdown-attributes/41783
 
 ## Customizing templates
-
-### Load scripts as plugins
-
-To load your own script without overriding any template, register it as a
-**plugin**: drop the file at `assets/js/plugins/`_`NAME`_`.js` and declare it in
-your site config, where _`NAME`_ is your plugin's name in lowercase (Hugo
-lowercases configuration keys, so the file name must be lowercase too):
-
-```yaml
-params:
-  docsy:
-    plugins:
-      NAME: {}
-```
-
-Docsy builds, fingerprints, and loads the script with [subresource
-integrity][SRI]. An entry can also pass `options` (which reach the module as
-[build parameters][js-params]), set `defer`, or gate loading on a page flag; for
-the full registry contract, see the [implementation notes][plugins-impl].
-
-A page flag counts only when the page's own render sets it. If your site's
-templates or shortcodes pull content in through [`.RenderShortcodes`][], a
-render hook inside that content still flags the page that ships, but a shortcode
-flags the _included_ page; content pulled in through `.Content` flags the
-included page either way. That is why Docsy ships [tab persistence][tabpane]
-ungated; gate it yourself (`tabpane-persist: { pageGate: hasTabs }`) only if
-your tabpanes are never included.
-
-Docsy's own plugins are registered for you: `click-to-copy` and
-`tabpane-persist` are on, and `markmap` is off until you
-[enable it](/docs/content/diagrams-and-formulae/#activating-markmap-support).
-Set a plugin to `false` to turn it off:
-
-```yaml
-params:
-  docsy:
-    plugins:
-      click-to-copy: false
-```
-
-<!-- prettier-ignore-start -->
-[`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
-[js-params]: https://gohugo.io/functions/js/build/#params
-[plugins-impl]: /project/implementation/script-loading/
-[tabpane]: /docs/content/shortcodes/#tabpane
-[SRI]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
-<!-- prettier-ignore-end -->
 
 ### Add code to head or before body end
 

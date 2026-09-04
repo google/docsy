@@ -2160,6 +2160,11 @@
     "when": "2026-06-26T18:24:05Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/issues/new?title=Plugins": {
+    "status": 200,
+    "when": "2026-09-04T21:11:11Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/issues/new?title=Print%20Support": {
     "status": 200,
     "when": "2026-06-26T18:24:01Z",
@@ -4264,6 +4269,13 @@
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://main--docsydocs.netlify.app/docs/content/plugins/": {
+    "status": 206,
+    "when": "2026-09-04T21:15:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/docs/content/print/": {
     "status": 200,
     "when": "2026-09-02T08:07:12Z",
@@ -5098,6 +5110,13 @@
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
+  },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://www.docsy.dev/docs/content/plugins/": {
+    "status": 206,
+    "when": "2026-09-04T21:15:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://www.docsy.dev/docs/content/print/": {
     "status": 200,
