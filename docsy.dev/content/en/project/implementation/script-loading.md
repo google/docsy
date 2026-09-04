@@ -37,8 +37,8 @@ params:
   with a warning (`docsy-plugin-name`). The entry's key is its name; a `name`
   field is ignored.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
-  `.Page.Store` flag; `pageGate: ''` clears an inherited gate. `weight` is a
-  number; strings sort as `0`.
+  `.Page.Store` flag; `pageGate: ''` clears an inherited gate. `weight` is an
+  integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
   strings are truthy in Go templates). A scalar entry value of `false` turns the
   entry off; any other scalar has already replaced the theme's entry in Hugo's
@@ -58,8 +58,10 @@ theme's:
 - `markmap`: off, page-gated on `hasMarkmap`. The markmap code-block render hook
   sets the flag and otherwise renders Hugo's default code block
   (`transform.HighlightCodeBlock`), which the plugin script transforms in the
-  browser: a disabled markmap never changes how the fence renders. Its companion
-  partial vendors the autoloader.
+  browser: a disabled markmap never changes how the fence renders. Like the
+  theme's mermaid, math, and chem hooks, it takes precedence over a project-wide
+  `render-codeblock.html` for its fence. Its companion partial vendors the
+  autoloader.
 
 ### Pre-registry parameters
 
@@ -90,8 +92,9 @@ config merge:
 
 - Any non-map `params.docsy.plugins` (`null` from an emptied `plugins:` key, a
   scalar, or the pre-release list shape) warns (`docsy-plugins-config`) that the
-  theme plugins are off; `plugins: {}` keeps them. A non-map `params.docsy`
-  draws the same warning.
+  theme plugins are off; `plugins: {}` keeps them. A non-map `params.docsy` (a
+  site's own pre-0.18 `docsy` param) draws the same warning id, naming the key
+  as reserved.
 - An enabled entry with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.

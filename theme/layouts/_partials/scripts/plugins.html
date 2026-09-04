@@ -6,12 +6,12 @@
   config merge: say so. */ -}}
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
-{{ $plugins := "" -}}
-{{ if reflect.IsMap $docsy }}{{ $plugins = $docsy.plugins }}{{ else }}{{ $plugins = $docsy }}{{ end -}}
-{{ if reflect.IsMap $plugins -}}
-  {{ $registry = $plugins -}}
+{{ if not (reflect.IsMap $docsy) -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins are off. Docsy reserves this key; move your own value to another one." $docsy -}}
+{{ else if not (reflect.IsMap $docsy.plugins) -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $docsy.plugins -}}
 {{ else -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $plugins -}}
+  {{ $registry = $docsy.plugins -}}
 {{ end -}}
 {{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
   keys, and `merge` yields plain maps without Hugo's case-insensitive access),

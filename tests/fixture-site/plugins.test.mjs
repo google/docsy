@@ -371,8 +371,9 @@ test('a gated missing plugin still warns', () => {
 });
 
 test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
-  // A site's scalar replaces the theme's map in Hugo's config merge, so the
-  // theme plugins are gone: the loop must say so.
+  // A site's own `docsy` param replaces the theme's map in Hugo's config
+  // merge, so the theme plugins are gone: the loop must say so and name the
+  // key as reserved.
   const r = buildSite('plugins-docsy-scalar', {
     files: {
       ...content,
@@ -386,8 +387,8 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /theme plugins are off/,
-    'the clobbered registry is called out in a build warning',
+    /params\.docsy must be a map.*theme plugins are off.*reserves this key/,
+    'the clobbered registry is called out as a reserved key',
   );
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),

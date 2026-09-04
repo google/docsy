@@ -164,7 +164,7 @@ history since 0.17.0][].
 
 - **[Plugins][ug-plugins]**: `params.docsy.plugins` loads site scripts without
   layout overrides, and markmap, tabpane-persist, and click-to-copy now ship
-  through it, so unused integrations ship no JS. Deprecated
+  through it, so disabled integrations ship no JS. Deprecated
   `params.markmap.enable` and `params.disable_click2copy_chroma` in favor of
   registry entries ([upgrade notes][0.18.0-blog-plugins], [#2791][]).
 
