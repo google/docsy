@@ -413,6 +413,28 @@ test('a null params.docsy.plugins builds and warns', () => {
   );
 });
 
+test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
+  // The remedy the null-registry warning names.
+  const r = buildSite('plugins-empty-registry', {
+    files: content,
+    extraConfig: `params:
+  docsy:
+    plugins: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.stderr,
+    /theme plugins are off/,
+    'the empty map draws no registry warning',
+  );
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/click-to-copy/,
+    'a theme plugin is still emitted',
+  );
+});
+
 test('a list-shaped params.docsy.plugins builds and warns', () => {
   // The pre-release registry shape.
   const r = buildSite('plugins-list-registry', {

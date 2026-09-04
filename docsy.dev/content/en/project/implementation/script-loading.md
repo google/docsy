@@ -66,14 +66,16 @@ theme's:
 A plugin whose behavior was once controlled by other parameters ships a shim
 partial, `_partials/scripts/plugins/NAME-shim.html`, that the loop applies to
 the plugin's merged entry before the enable and gate checks: it receives
-`(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry. Each retires
-with its parameter's deprecation cycle by deleting the file:
+`(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry (a map;
+anything else fails the build). Shims see map entries only: a scalar entry is
+skipped, with its warning, before they run. Each retires with its parameter's
+deprecation cycle by deleting the file:
 
 - `markmap-shim.html`: `params.markmap.enable` (deprecated,
   `docsy-markmap-legacy`), when set, turns markmap on and **ungated**, exactly
   the pre-0.18 site-wide behavior (custom render hooks and raw markmap HTML
-  never set the flag), whatever the registry says; the warning asks for its
-  removal.
+  never set the flag), whatever the registry entry says; the warning asks for
+  its removal.
 - `click-to-copy-shim.html`: `params.disable_click2copy_chroma` (deprecated,
   `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false` is the
   registry form. `params.prism_syntax_highlighting` also turns it off (Prism
@@ -116,8 +118,7 @@ tag ([why][design-ordering]):
 - `_partials/scripts/plugins/NAME.html`: a partial for vendored libraries,
   component markup, and config-provider patterns; invoked with
   `(dict "Page" PAGE "Plugin" ENTRY)`, where the entry carries the lowercase
-  keys `name`, `enable`, `defer`, `pagegate`, `weight`, `options`. A shim that
-  returns anything but a map fails the build.
+  keys `name`, `enable`, `defer`, `pagegate`, `weight`, `options`.
 - `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
   pipeline, minified in production, fingerprinted, and emitted with SRI.
 
@@ -139,6 +140,6 @@ tag ([why][design-ordering]):
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/
 [design-shape]: /project/design/script-loading/#registry-shape
-[design-ordering]: /project/design/script-loading/#plugin-loop
+[design-ordering]: /project/design/script-loading/#ordering-decisions
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 <!-- prettier-ignore-end -->

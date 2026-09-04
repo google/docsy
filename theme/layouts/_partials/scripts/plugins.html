@@ -26,7 +26,7 @@
   {{ else -}}
     {{/* A scalar replaced the theme's entry at merge time; the intent is
       unrecoverable. */ -}}
-    {{ warnidf "docsy-plugin-entry" "Plugin %q: a scalar value (%v) replaces the theme's entry and loses its defaults; use `%s: {}` or `%s: { enable: true }`. Skipping it." $name $value $name $name -}}
+    {{ warnidf "docsy-plugin-entry" "Plugin %q: a scalar value (%v) replaces the theme's entry and loses its defaults; write `%s: { enable: true }` instead. Skipping it." $name $value $name -}}
     {{ continue -}}
   {{ end -}}
   {{/* The key is the name; set last so an entry field can't redirect the asset. */ -}}

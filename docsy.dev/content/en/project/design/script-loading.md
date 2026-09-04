@@ -115,7 +115,7 @@ Named collections in Hugo's own configuration (`outputFormats`, `mediaTypes`,
 `languages`, `taxonomies`) are maps keyed by name; the registry follows that
 idiom.
 
-### Ordering decisions
+### Ordering decisions {#ordering-decisions}
 
 - **Companions before the script**: a plugin's companion partial and stylesheet
   emit before its script tag, so a synchronous plugin script can rely on

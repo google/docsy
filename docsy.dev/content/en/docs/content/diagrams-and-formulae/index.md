@@ -1,6 +1,9 @@
 ---
 title: Diagrams and Formulae
-description: Enable and pin the diagram and formula renderers Docsy supports.
+description:
+  Write KaTeX formulae and Mermaid, PlantUML, or MarkMap diagrams as Markdown
+  code blocks, make Diagrams.net images editable in place, and enable and pin
+  each renderer.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
