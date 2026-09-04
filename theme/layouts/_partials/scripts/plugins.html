@@ -26,12 +26,26 @@
   {{ else if isset . "name" }}{{ $names = $names | append (printf "%v" (index . "name")) -}}
   {{ end -}}
 {{ end -}}
+{{/* Plugins load once: the first registration of a name wins, later ones
+  are dropped with a warning (the theme plugins are not reentrant). */ -}}
+{{ $deduped := slice -}}
 {{ $seen := dict -}}
-{{ range $names -}}
-  {{ if index $seen . }}{{ warnf "Plugin %q is registered more than once in params.docsy.plugins; plugins load once: pass per-target settings through one entry's options." . -}}
-  {{ else }}{{ $seen = merge $seen (dict . true) }}{{ end -}}
+{{ range $registry -}}
+  {{ $n := "" -}}
+  {{ if not (reflect.IsMap .) }}{{ $n = printf "%v" . -}}
+  {{ else if isset . "name" }}{{ $n = printf "%v" (index . "name") -}}
+  {{ end -}}
+  {{ if and $n (index $seen $n) -}}
+    {{ warnf "Plugin %q is registered more than once in params.docsy.plugins; plugins load once, so later registrations are ignored: pass per-target settings through one entry's options." $n -}}
+  {{ else -}}
+    {{ if $n }}{{ $seen = merge $seen (dict $n true) }}{{ end -}}
+    {{ $deduped = $deduped | append . -}}
+  {{ end -}}
 {{ end -}}
-{{ if and .Site.Params.markmap.enable (not (in $names "markmap")) -}}
+{{ $registry = $deduped -}}
+{{ if and .Site.Params.markmap.enable (in $names "markmap") -}}
+  {{ warnidf "docsy-markmap-legacy-superseded" "params.markmap.enable is superseded by the markmap entry in params.docsy.plugins, which loads markmap only on pages with markmap code blocks; remove the legacy param." -}}
+{{ else if and .Site.Params.markmap.enable (not (in $names "markmap")) -}}
   {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: register markmap under params.docsy.plugins instead." -}}
   {{/* The alias keeps exact pre-0.18 behavior: site-wide, ungated (custom
     render hooks or raw markmap HTML never set the flag). */ -}}
@@ -87,8 +101,7 @@
           {{- "\n" -}}
         {{ end -}}
         {{ $companion := printf "scripts/plugins/%s.html" $name -}}
-        {{/* Companions emit once per name: on duplicate registrations, a
-          second vendored-library or markup emission would break the page. */ -}}
+        {{/* Companions emit once per name per page. */ -}}
         {{ if and (templates.Exists (printf "_partials/%s" $companion)) (not ($emittedCompanions.Get $name)) -}}
           {{ $emittedCompanions.Set $name true -}}
           {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}

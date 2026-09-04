@@ -172,8 +172,29 @@ test('duplicate markmap entries emit one vendored autoloader', () => {
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const vendors =
-    r.publicFile('docs/index.html').match(/js\/vendor\/markmap-autoloader/g) ??
-    [];
+  const html = r.publicFile('docs/index.html');
+  const vendors = html.match(/js\/vendor\/markmap-autoloader/g) ?? [];
   assert.equal(vendors.length, 1, 'the vendored autoloader is emitted once');
+  const plugins = html.match(/js\/plugins\/markmap/g) ?? [];
+  assert.equal(plugins.length, 1, 'the plugin script is emitted once');
+});
+
+test('a leftover legacy param beside a registry entry warns', () => {
+  // The registry entry supersedes the alias and is page-gated; a site that
+  // copied the guide but kept params.markmap.enable must hear about it.
+  const r = buildSite('markmap-legacy-and-registry', {
+    files,
+    extraConfig: `params:
+  markmap:
+    enable: true
+  docsy:
+    plugins: [markmap]
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /params\.markmap\.enable is superseded/,
+    'the superseded legacy param draws a warning',
+  );
 });

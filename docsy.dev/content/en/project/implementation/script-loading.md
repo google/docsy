@@ -54,6 +54,10 @@ explicit value, `pageGate: ''` included, always wins:
   - The legacy `params.markmap.enable` alias registers it **ungated** (exact
     pre-0.18 site-wide behavior: custom render hooks and raw markmap HTML never
     set the flag) and warns (`docsy-markmap-legacy`) for its deprecation cycle.
+    Beside a registry entry, the alias is superseded and warns
+    (`docsy-markmap-legacy-superseded`).
+  - `defer` is ignored, with a warning (`docsy-markmap-defer`): the plugin
+    script must run before the deferred autoloader it configures.
 
 An entry with `enable: false` is skipped; the string `"false"` counts as `false`
 (YAML strings are truthy in Go templates).
@@ -69,8 +73,8 @@ value:
 - A non-list `params.docsy.plugins`, falsy scalars included, warns
   (`docsy-plugins-config`) and is ignored.
 - An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
-- A name registered more than once warns (`warnf`): plugins load once, and a
-  second registration is a misconfiguration.
+- A name registered more than once warns (`warnf`): plugins load once, so the
+  first registration wins and later ones are ignored.
 - An enabled registration with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
@@ -98,7 +102,7 @@ tag ([why][design-ordering]):
 
 - `_partials/scripts/plugins/NAME.html`: a partial for vendored libraries,
   component markup, and config-provider patterns; invoked with
-  `(dict "Page" PAGE "Plugin" ENTRY)`.
+  `(dict "Page" PAGE "Plugin" ENTRY)`, once per name per page.
 - `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
   pipeline, minified in production, fingerprinted, and emitted with SRI.
 

@@ -10,15 +10,15 @@ Mermaid, Diagrams.net, PlantUML, and MarkMap.
 
 ## Pinned script-dependency versions {#script-dep-versions}
 
-Docsy renders some rich content with scripts and stylesheets that it loads from
-public CDNs: Mermaid, KaTeX's stylesheet and fonts, markmap-autoloader, and
-Redoc (the [`redoc` shortcode][]). Each loads at a version pinned in the theme's
-configuration and bumped with each Docsy release. Pinning keeps builds
-reproducible and page rendering stable, and narrows exposure to bad upstream
-publishes: a version alias such as `latest`, or a partial version such as `11`,
-is re-resolved by the CDN on each request or uncached build, so your site's
-rendering could change or break without any change on your part (for example,
-when an upstream major ships).
+Docsy renders some rich content with scripts and stylesheets fetched from public
+CDNs, at build time or in the browser: Mermaid, KaTeX's stylesheet and fonts,
+markmap-autoloader, and Redoc (the [`redoc` shortcode][]). Each loads at a
+version pinned in the theme's configuration and bumped with each Docsy release.
+Pinning keeps builds reproducible and page rendering stable, and narrows
+exposure to bad upstream publishes: a version alias such as `latest`, or a
+partial version such as `11`, is re-resolved by the CDN on each request or
+uncached build, so your site's rendering could change or break without any
+change on your part (for example, when an upstream major ships).
 
 To use a different version of one of these dependencies, set
 `params.`_`PACKAGE`_`.version` in your configuration file, where _`PACKAGE`_ is
@@ -645,9 +645,11 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
-MarkMap scripts load only on pages containing a `markmap` code block. Don't set
-`defer` on the entry: the plugin script must run before the deferred autoloader
-it configures.
+MarkMap scripts load only on pages containing a `markmap` code block. If you
+produce MarkMap markup some other way (raw HTML, your own render hook), set
+`pageGate: ''` on the entry to load the scripts site-wide. Don't set `defer` on
+the entry: the plugin script must run before the deferred autoloader it
+configures.
 
 > [!NOTE]
 >

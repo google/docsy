@@ -15,6 +15,14 @@ test('page-gated plugins reach section print output', () => {
         '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n',
       'content/docs/map.md':
         '---\ntitle: Map\n---\n\n```markmap\n# root\n## leaf\n```\n',
+      'content/docs/diagram.md':
+        '---\ntitle: Diagram\n---\n{{< set-flag hasmermaid >}}\nDiagram body\n',
+      // The real mermaid partial fetches remotely; a marker override pins the
+      // dispatch, as in scripts-dispatch.test.mjs.
+      'layouts/_shortcodes/set-flag.html':
+        '{{ .Page.Store.Set (.Get 0) true }}',
+      'layouts/_partials/scripts/mermaid.html':
+        '<div data-dispatch="mermaid"></div>\n',
       'assets/js/plugins/hello.js': "console.log('hello');\n",
     },
     title: 'Docsy print-gating fixture',
@@ -27,6 +35,11 @@ params:
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   const html = r.publicFile('_print/docs/index.html');
+  assert.match(
+    html,
+    /data-dispatch="mermaid"/,
+    "the print page dispatches its child's Mermaid partial",
+  );
   assert.match(
     html,
     /js\/plugins\/tabpane-persist/,

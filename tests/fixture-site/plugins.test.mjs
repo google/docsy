@@ -372,40 +372,67 @@ test('a nameless registry entry is skipped with a warning', () => {
 });
 
 test('distinct builds of one source publish distinct paths, in development too', () => {
-  // Same source, different options (the cheapest way to force two builds of
-  // one asset, standing in for per-language sites): the builds must not share
-  // one published path (the always-fingerprint rule; implementation page).
-  const r = buildSite('plugins-duplicates', {
-    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+  // Per-language sites build one asset once per language, with per-language
+  // options: the builds must not share one published path (the
+  // always-fingerprint rule; implementation page).
+  const r = buildSite('plugins-per-language', {
+    files: {
+      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+      'content/_index.fr.md': '---\ntitle: Accueil\n---\nCorps\n',
+      'assets/js/plugins/hello.js': helloJs,
+    },
     args: ['--environment', 'development'],
-    extraConfig: `params:
-  docsy:
-    plugins:
-      - name: hello
-        options:
-          greeting: premiere
-      - name: hello
-        options:
-          greeting: seconde
+    extraConfig: `defaultContentLanguage: en
+languages:
+  en:
+    weight: 1
+    params:
+      docsy:
+        plugins:
+          - name: hello
+            options:
+              greeting: hello
+  fr:
+    weight: 2
+    params:
+      docsy:
+        plugins:
+          - name: hello
+            options:
+              greeting: bonjour
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const html = r.publicFile('index.html');
-  const srcs = [
-    ...html.matchAll(/<script[^>]*src="\/(js\/plugins\/hello[^"]*\.js)"/g),
-  ].map((m) => m[1]);
-  assert.equal(srcs.length, 2, 'each registration emits its own script tag');
-  assert.notEqual(srcs[0], srcs[1], 'the two builds publish distinct paths');
+  const src = (page) =>
+    r
+      .publicFile(page)
+      .match(/<script[^>]*src="\/(js\/plugins\/hello[^"]*\.js)"/)[1];
+  const en = src('index.html');
+  const fr = src('fr/index.html');
+  assert.notEqual(en, fr, 'the two language builds publish distinct paths');
   assert.match(
-    r.publicFile(srcs[0]),
-    /premiere/,
-    "the first entry's options reach its build",
+    r.publicFile(en),
+    /hello/,
+    'the English options reach its build',
   );
   assert.match(
-    r.publicFile(srcs[1]),
-    /seconde/,
-    "the second entry's options reach its build",
+    r.publicFile(fr),
+    /bonjour/,
+    'the French options reach its build',
   );
+});
+
+test('a duplicate registration emits one script', () => {
+  const r = buildSite('plugins-duplicate-once', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins: [hello, hello]
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const tags = r.publicFile('index.html').match(/js\/plugins\/hello/g) ?? [];
+  assert.equal(tags.length, 1, 'the plugin script is emitted once');
 });
 
 const tabs =
