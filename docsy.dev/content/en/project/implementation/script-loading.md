@@ -27,14 +27,22 @@ params:
       OTHER: false # scalar shorthand: turns the entry off
 ```
 
-- Names are restricted to `^[A-Za-z0-9_-]+$`: they address assets and partials
-  by path, so anything that could traverse outside the plugin namespaces is
-  refused with a warning (`docsy-plugin-name`).
+- **Keys are lowercase.** Hugo lowercases configuration keys, so plugin names,
+  entry fields, and option keys all arrive in lowercase: name plugin files in
+  lowercase, and in templates and plugin scripts read fields and options as
+  lowercase (`.Plugin.pagegate`, `params.apikey`). Config examples keep Hugo's
+  camelCase convention; it's what arrives that is lowercase.
+- Names are restricted to `^[a-z0-9_-]+$`: they address assets and partials by
+  path, so anything that could traverse outside the plugin namespaces is refused
+  with a warning (`docsy-plugin-name`). The entry's key is its name; a `name`
+  field is ignored.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
-  `.Page.Store` flag; `pageGate: ''` clears an inherited gate.
-- `enable` accepts `false` and the string `"false"` (any case; YAML strings are
-  truthy in Go templates). A scalar entry value of `false` means the same; any
-  other scalar warns (`docsy-plugin-entry`) and counts as `{}`.
+  `.Page.Store` flag; `pageGate: ''` clears an inherited gate. `weight` is a
+  number; strings sort as `0`.
+- `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
+  strings are truthy in Go templates). A scalar entry value of `false` turns the
+  entry off; any other scalar has already replaced the theme's entry in Hugo's
+  merge, so it warns (`docsy-plugin-entry`) and is skipped.
 
 ### Theme plugins
 
@@ -74,13 +82,14 @@ with its parameter's deprecation cycle by deleting the file:
 
 ## Shape guards
 
-The registry read must not break sites that already carry a `params.docsy`
-value:
+The theme's plugins live under `params.docsy.plugins`, so a site value that is
+not a map there, or at `params.docsy`, has already replaced them in Hugo's
+config merge:
 
-- A scalar `params.docsy` is left untouched (the read is gated on
-  `reflect.IsMap`) and the registry is treated as empty.
-- A non-map `params.docsy.plugins` warns (`docsy-plugins-config`) and is
-  ignored. A list is the pre-release shape and draws the same warning.
+- Any non-map `params.docsy.plugins` (`null` from an emptied `plugins:` key, a
+  scalar, or the pre-release list shape) warns (`docsy-plugins-config`) that the
+  theme plugins are off; `plugins: {}` keeps them. A non-map `params.docsy`
+  draws the same warning.
 - An enabled entry with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.
@@ -106,7 +115,9 @@ tag ([why][design-ordering]):
 
 - `_partials/scripts/plugins/NAME.html`: a partial for vendored libraries,
   component markup, and config-provider patterns; invoked with
-  `(dict "Page" PAGE "Plugin" ENTRY)`.
+  `(dict "Page" PAGE "Plugin" ENTRY)`, where the entry carries the lowercase
+  keys `name`, `enable`, `defer`, `pagegate`, `weight`, `options`. A shim that
+  returns anything but a map fails the build.
 - `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
   pipeline, minified in production, fingerprinted, and emitted with SRI.
 

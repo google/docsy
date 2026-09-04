@@ -1,6 +1,6 @@
 ---
 title: Diagrams and Formulae
-description: Configure the supported diagram renderers and their dependencies.
+description: Enable and pin the diagram and formula renderers Docsy supports.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
@@ -648,7 +648,17 @@ params:
 
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook), set
-`pageGate: ''` on the entry to load the scripts site-wide.
+`pageGate: ''` on the entry to load the scripts site-wide. The entry's `options`
+take a `height` for the rendered map (default `300px`):
+
+```yaml
+params:
+  docsy:
+    plugins:
+      markmap:
+        enable: true
+        options: { height: 400px }
+```
 
 > [!NOTE]
 >

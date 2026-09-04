@@ -962,7 +962,8 @@ this:
 
 To load your own script without overriding any template, register it as a
 **plugin**: drop the file at `assets/js/plugins/`_`NAME`_`.js` and declare it in
-your site config, where _`NAME`_ is your plugin's name:
+your site config, where _`NAME`_ is your plugin's name in lowercase (Hugo
+lowercases configuration keys, so the file name must be lowercase too):
 
 ```yaml
 params:
@@ -976,8 +977,10 @@ integrity][SRI]. An entry can also pass `options` (which reach the module as
 [build parameters][js-params]), set `defer`, or gate loading on a page flag; for
 the full registry contract, see the [implementation notes][plugins-impl].
 
-Docsy's own plugins (`click-to-copy`, `tabpane-persist`, and `markmap`, off by
-default) are registered for you; set one to `false` to turn it off:
+Docsy's own plugins are registered for you: `click-to-copy` and
+`tabpane-persist` are on, and `markmap` is off until you
+[enable it](/docs/content/diagrams-and-formulae/#mindmap-support-with-markmap).
+Set a plugin to `false` to turn it off:
 
 ```yaml
 params:

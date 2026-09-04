@@ -2920,11 +2920,6 @@
     "when": "2026-09-01T01:29:59Z",
     "via": "lychee",
   },
-  "https://github.com/google/docsy/pull/2780": {
-    "status": 200,
-    "when": "2026-09-03T09:39:38Z",
-    "via": "lychee",
-  },
   "https://github.com/google/docsy/pull/2781": {
     "status": 200,
     "when": "2026-09-01T03:31:13Z",
@@ -2933,21 +2928,6 @@
   "https://github.com/google/docsy/pull/2786": {
     "status": 200,
     "when": "2026-09-03T01:13:43Z",
-    "via": "lychee",
-  },
-  "https://github.com/google/docsy/pull/2787": {
-    "status": 200,
-    "when": "2026-09-03T09:39:38Z",
-    "via": "lychee",
-  },
-  "https://github.com/google/docsy/pull/2788": {
-    "status": 200,
-    "when": "2026-09-03T09:39:38Z",
-    "via": "lychee",
-  },
-  "https://github.com/google/docsy/pull/2790": {
-    "status": 200,
-    "when": "2026-09-03T09:39:38Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/pull/2791": {

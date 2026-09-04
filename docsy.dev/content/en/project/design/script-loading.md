@@ -103,8 +103,11 @@ Alternatives considered, and why not:
 - **A per-plugin manifest file** next to the script: plugin-owned defaults, but
   a third artifact per plugin, and the theme still needs a configuration home
   for which plugins are on by default. Revisit if module-shipped plugins need
-  self-describing metadata; manifests must never auto-register (the explicit
-  registry is a security property).
+  self-describing metadata. Trust note: every imported Hugo module's `params`
+  merge into the site's, so a module can register, re-gate, or turn off plugins
+  through its own config; the registry is explicit per configuration source, not
+  per site (a module already controls layouts and assets, so this adds no
+  exploitable surface).
 - **Metadata partials** returning a defaults dict: pure Hugo, but metadata as
   template code is less inspectable than configuration.
 
