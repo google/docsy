@@ -82,3 +82,28 @@ test('a no_print section contributes no page-gate flags', () => {
     'the print page is free of scripts gated by pruned content',
   );
 });
+
+test('the flag merge copies page-gate flags only', () => {
+  // .Page.Store is a general scratchpad (the theme keeps a readfile counter
+  // there); only gate flags may cross from descendants to the print page.
+  const r = buildSite('print-flags-only', {
+    files: {
+      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
+      'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs body\n',
+      'content/docs/child.md':
+        '---\ntitle: Child\n---\n{{< set-store owner child >}}\nChild body\n',
+      'layouts/_shortcodes/set-store.html':
+        '{{ .Page.Store.Set (.Get 0) (.Get 1) }}',
+      'layouts/_partials/hooks/body-end.html':
+        '<div data-owner="{{ .Store.Get "owner" | default "unset" }}"></div>\n',
+    },
+    title: 'Docsy print-flags-only fixture',
+    extraConfig: 'outputs:\n  section: [HTML, print]\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('_print/docs/index.html'),
+    /data-owner="unset"/,
+    "the print page's Store is free of a child's non-flag value",
+  );
+});

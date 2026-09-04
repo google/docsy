@@ -662,9 +662,8 @@ produce MarkMap markup some other way (raw HTML, your own render hook), set
 Docsy fetches the [markmap-autoloader][] package at build time at the
 [pinned version](#script-dep-versions), currently {{% param markmap.version %}},
 and serves it from your site with subresource integrity; to use a different
-version, set `params.markmap.version`. The autoloader's own runtime libraries
-(markmap-lib, markmap-view, d3) still load from the CDN in the browser, at
-versions the autoloader pins.
+version, set `params.markmap.version`. The autoloader itself loads MarkMap's
+runtime libraries from a public CDN in the browser, at versions it pins.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 
