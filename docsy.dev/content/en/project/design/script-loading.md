@@ -1,8 +1,8 @@
 ---
 title: Script loading
 description:
-  Loading mechanisms, the dispatcher and plugin loop, ordering decisions, and
-  override points
+  Loading mechanisms, the dispatcher, the plugin loop and its registry shape,
+  ordering decisions, and override points
 ---
 
 Docsy loads its body-end JavaScript through

@@ -117,8 +117,6 @@ test('a scalar false turns an entry off', () => {
 });
 
 test('a quoted "false" enable disables the entry', () => {
-  // YAML strings are truthy in Go templates; a site writing enable: "false"
-  // (any case) means off, not on.
   const r = buildSite('plugins-quoted-false', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
@@ -137,8 +135,6 @@ test('a quoted "false" enable disables the entry', () => {
 });
 
 test('a non-false scalar entry warns and is skipped', () => {
-  // The scalar replaced the theme's entry at merge time, so its defaults are
-  // gone and the intent is unrecoverable.
   const r = buildSite('plugins-scalar-true', {
     files: {
       ...content,
@@ -371,9 +367,7 @@ test('a gated missing plugin still warns', () => {
 });
 
 test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
-  // A site's own `docsy` param replaces the theme's map in Hugo's config
-  // merge, so the theme plugins are gone: the loop must say so and name the
-  // key as reserved.
+  // A site's own pre-0.18 `docsy` param.
   const r = buildSite('plugins-docsy-scalar', {
     files: {
       ...content,

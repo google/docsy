@@ -1,7 +1,5 @@
-// Markmap as a plugin: zero bytes when disabled, vendored same-origin
-// autoloader (no raw CDN tag), options via @params, legacy aliasing. Needs
-// network (vendor fetch through resources.GetRemote), like the mermaid
-// partial.
+// Pins MarkMap's registry conversion and legacy compatibility. Vendoring
+// cases need network (resources.GetRemote).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -119,7 +117,6 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
 });
 
 test('a path-bearing markmap.version fails the build', () => {
-  // A path-bearing version would vendor an arbitrary registry file as JS.
   const r = buildSite('markmap-version-path', {
     files,
     extraConfig: `params:

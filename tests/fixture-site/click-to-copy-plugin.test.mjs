@@ -1,6 +1,4 @@
-// Click-to-copy as a theme-default plugin: emission from the registry, and
-// the legacy gates (prism_syntax_highlighting supersedes it,
-// disable_click2copy_chroma opts out).
+// Pins click-to-copy's registry conversion and its legacy opt-outs.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

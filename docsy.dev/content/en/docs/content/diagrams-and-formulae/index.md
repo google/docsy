@@ -2,8 +2,8 @@
 title: Diagrams and Formulae
 description:
   Write KaTeX formulae and Mermaid, PlantUML, or MarkMap diagrams as Markdown
-  code blocks, make Diagrams.net images editable in place, and enable and pin
-  each renderer.
+  code blocks, make Diagrams.net images editable in place, and configure their
+  renderers.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
