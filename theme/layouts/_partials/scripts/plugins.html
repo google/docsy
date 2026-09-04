@@ -55,7 +55,7 @@
   {{ end -}}
   {{/* A plugin's shim adapts parameters that predate the registry onto its
     entry; each shim retires with its parameter's deprecation cycle. */ -}}
-  {{ $shim := printf "scripts/plugins/%s-shim.html" $name -}}
+  {{ $shim := printf "scripts/plugins/%s_docsy-shim.html" $name -}}
   {{ if templates.Exists (printf "_partials/%s" $shim) -}}
     {{ $entry = partial $shim (dict "Page" $ "Plugin" $entry) -}}
     {{ if not (reflect.IsMap $entry) -}}

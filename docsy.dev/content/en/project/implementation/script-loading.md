@@ -35,7 +35,7 @@ params:
 - Names are restricted to `^[a-z0-9_-]+$`: they address assets and partials by
   path, so anything that could traverse outside the plugin namespaces is refused
   with a warning (`docsy-plugin-name`). The entry's key is its name; names
-  ending in `-shim` are reserved for [shims](#pre-registry-parameters).
+  ending in `_docsy-shim` are reserved for [shims](#pre-registry-parameters).
 - Entry fields outside `enable`, `defer`, `pageGate`, `weight`, and `options`
   warn (`docsy-plugin-entry`) and are ignored, so a misspelled field can't pass
   as a setting.
@@ -69,24 +69,24 @@ theme's:
 ### Pre-registry parameters
 
 A plugin whose behavior was once controlled by other parameters ships a shim
-partial, `_partials/scripts/plugins/NAME-shim.html`, that the loop applies to
-the plugin's merged entry before the enable and gate checks: it receives
+partial, `_partials/scripts/plugins/NAME_docsy-shim.html`, that the loop applies
+to the plugin's merged entry before the enable and gate checks: it receives
 `(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry (a map;
 anything else fails the build). A non-false scalar entry is skipped, with its
 warning, before shims run; a scalar `false` reaches them as `enable: false`, so
 a legacy parameter still wins over it. Each retires with its parameter's
 deprecation cycle by deleting the file:
 
-- `markmap-shim.html`: `params.markmap.enable` (deprecated,
+- `markmap_docsy-shim.html`: `params.markmap.enable` (deprecated,
   `docsy-markmap-legacy`), when set, turns markmap on and **ungated**, exactly
   the pre-0.18 site-wide behavior (custom render hooks and raw markmap HTML
   never set the flag), whatever the registry entry says; the warning asks for
   its removal.
-- `click-to-copy-shim.html`: `params.disable_click2copy_chroma` (deprecated,
-  `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false` is the
-  registry form. `params.prism_syntax_highlighting` also turns it off (Prism
-  ships its own copy button); Prism support is a live feature, so only the
-  coupling is expressed here.
+- `click-to-copy_docsy-shim.html`: `params.disable_click2copy_chroma`
+  (deprecated, `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false`
+  is the registry form. `params.prism_syntax_highlighting` also turns it off
+  (Prism ships its own copy button); Prism support is a live feature, so only
+  the coupling is expressed here.
 
 ## Shape guards
 

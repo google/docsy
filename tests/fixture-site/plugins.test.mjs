@@ -273,12 +273,12 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
   );
 });
 
-test('a shim partial scripts/plugins/NAME-shim.html decorates the entry', () => {
+test('a shim partial scripts/plugins/NAME_docsy-shim.html decorates the entry', () => {
   const r = buildSite('plugins-shim', {
     files: {
       ...content,
       'assets/js/plugins/hello.js': helloJs,
-      'layouts/_partials/scripts/plugins/hello-shim.html':
+      'layouts/_partials/scripts/plugins/hello_docsy-shim.html':
         '{{ $entry := .Plugin }}' +
         '{{ if .Page.Site.Params.legacyHelloOff }}' +
         '{{ $entry = merge $entry (dict "enable" false) }}{{ end }}' +
