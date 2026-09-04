@@ -41,9 +41,11 @@ gate-to-partial wiring, offline.
 [`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
 emission with `@params`, `enable`/`defer`/`pageGate`/`weight` handling, the
 scalar `false` shorthand, companions and shims, shape-guard warnings (the
-pre-release list shape included), name allowlisting, theme-plugin layering
-through Hugo's config merge (inheritance, override, turn-off), and SRI in
-development builds. Companion nets:
+pre-release list shape and a site's own `params.docsy` included), name and field
+allowlisting (the `_docsy-shim` suffix refused, unknown fields and non-map
+`options` warned), boolean gates, theme-plugin layering through Hugo's config
+merge (inheritance, override, turn-off), and SRI in development builds.
+Companion nets:
 
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: the ungated default, opt-in
   gating on `hasTabs`, persistence opt-out, and theme-plugin shadowing.

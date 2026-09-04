@@ -1,57 +1,103 @@
 ---
 title: Plugins
 description:
-  Load your own scripts, and turn Docsy's off, through one registry entry each,
-  without overriding a template.
+  Configure Docsy's JavaScript features and add your own scripts without
+  overriding layout templates.
 ---
 
-A **plugin** is a script that Docsy builds, fingerprints, and loads for you:
-drop the file at `assets/js/plugins/`_`NAME`_`.js` and declare it in your site
-config, where _`NAME`_ is your plugin's name in lowercase (Hugo lowercases
-configuration keys, so the file name must be lowercase too):
+Docsy loads its optional JavaScript features as **plugins**, each a registry
+entry under `params.docsy.plugins` in your site configuration. The same registry
+loads scripts of your own.
 
-```yaml
-params:
-  docsy:
-    plugins:
-      NAME: {}
-```
+## Configure Docsy's plugins
 
-The script loads at the end of every page with [subresource integrity][SRI]. An
-entry can also pass `options` (which reach the module as [build
-parameters][js-params]), set `defer`, or gate loading on a page flag; for the
-full registry contract, see the [implementation notes][plugins-impl].
+| Plugin            | What it does                               | Default                  | Loads on                                                                  | Turn it off                                                   | Docs                           |
+| ----------------- | ------------------------------------------ | ------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
+| `click-to-copy`   | Adds a copy button to code blocks          | On; Prism brings its own | Every page                                                                | `click-to-copy: false`                                        | [Copy to clipboard][]          |
+| `tabpane-persist` | Remembers the selected tab across pages    | On                       | Every page ([why not only tabbed pages](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
+| `markmap`         | Renders `markmap` code blocks as mind maps | Off                      | Pages with a `markmap` code block                                         | `markmap: false`                                              | [Activating MarkMap support][] |
 
-## Docsy's plugins
+To turn a plugin off, set its entry to `false`:
 
-Docsy's own plugins are registered for you: `click-to-copy` (the [copy button][]
-on code blocks) and `tabpane-persist` ([tab selection persistence][tabpane]) are
-on, and `markmap` is off until you [enable it][markmap]. Set a plugin to `false`
-to turn it off:
-
-```yaml
+<!-- markdownlint-disable no-shortcut-ref-link -->
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.docsy.plugins]
+click-to-copy = false
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   docsy:
     plugins:
       click-to-copy: false
-```
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "docsy": {
+      "plugins": { "click-to-copy": false }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
-## Page flags and included content
+## Add a custom script
 
-A page flag counts only when the page's own render sets it. If your site's
-templates or shortcodes pull content in through [`.RenderShortcodes`][], a
-render hook inside that content still flags the page that ships, but a shortcode
-flags the _included_ page; content pulled in through `.Content` flags the
-included page either way. That is why Docsy ships tab persistence ungated; gate
-it yourself (`tabpane-persist: { pageGate: hasTabs }`) only if your tabpanes are
-never included.
+For a script that should load at the end of every page, register it as a plugin;
+for markup in `<head>`, inline snippets, or third-party tags, use the [head and
+body hooks][] instead.
+
+1. Save the script as `assets/js/plugins/`_`NAME`_`.js`, with _`NAME`_ in
+   lowercase.
+2. Register it:
+
+   <!-- markdownlint-disable no-shortcut-ref-link -->
+   <!-- prettier-ignore-start -->
+
+   {{< tabpane >}} {{< tab header="Configuration file:" disabled=true />}}
+   {{< tab header="hugo.toml" lang="toml" >}} [params.docsy.plugins] NAME = {}
+   {{< /tab >}} {{< tab header="hugo.yaml" lang="yaml" >}} params: docsy:
+   plugins: NAME: {} {{< /tab >}} {{< tab header="hugo.json" lang="json" >}} {
+   "params": { "docsy": { "plugins": { "NAME": {} } } } } {{< /tab >}}
+   {{< /tabpane >}}
+   <!-- prettier-ignore-end -->
+   <!-- markdownlint-enable no-shortcut-ref-link -->
+
+Docsy builds, fingerprints, and loads the script with [subresource
+integrity][SRI]. For the entry fields (`options`, `defer`, `pageGate`, `weight`)
+and the full contract, see the [registry contract][].
+
+## Page flags in included content
+
+Some plugins load only on pages that need them: a `pageGate` names a page flag,
+and Docsy's `markmap` render hook sets one whenever a page has a `markmap` code
+block. A flag counts only when it lands on the page that ships.
+
+- A **render hook** runs in the context of the page being rendered, so a
+  `markmap` block in content pulled in through [`.RenderShortcodes`][] flags the
+  page that includes it.
+- A **shortcode** runs in the context of the page whose file contains it, so a
+  `tabpane` in included content flags the _included_ page, and the including
+  page never sees the flag.
+- Content pulled in through `.Content` flags the included page in both cases.
+
+That is why Docsy ships `tabpane-persist` ungated. Gate it yourself
+(`tabpane-persist: { pageGate: hasTabs }`) only if your tabpanes are never
+included; and if you produce MarkMap markup some other way than a `markmap`
+block on the page itself, clear its gate (`markmap: { pageGate: '' }`) so the
+script loads site-wide.
 
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
-[copy button]: /docs/content/lookandfeel/#copy-to-clipboard
-[js-params]: https://gohugo.io/functions/js/build/#params
-[markmap]: /docs/content/diagrams-and-formulae/#activating-markmap-support
-[plugins-impl]: /project/implementation/script-loading/
+[`tabpane`]: /docs/content/shortcodes/#tabpane
+[Activating MarkMap support]: /docs/content/diagrams-and-formulae/#activating-markmap-support
+[Copy to clipboard]: /docs/content/lookandfeel/#copy-to-clipboard
+[head and body hooks]: /docs/content/lookandfeel/#add-code-to-head-or-before-body-end
+[registry contract]: /project/implementation/script-loading/
 [SRI]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
-[tabpane]: /docs/content/shortcodes/#tabpane
 <!-- prettier-ignore-end -->

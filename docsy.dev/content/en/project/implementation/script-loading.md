@@ -67,7 +67,10 @@ theme's:
   browser: a disabled markmap never changes how the fence renders. Like the
   theme's mermaid, math, and chem hooks, it takes precedence over a project-wide
   `render-codeblock.html` for its fence. Its companion partial vendors the
-  autoloader.
+  autoloader: fetched at build time at the pinned `params.markmap.version`
+  (`dist/index.js`, the published entry file; the package root resolves to a
+  dynamically minified variant whose bytes drift), served same-origin with SRI,
+  minified in production.
 
 ### Pre-registry parameters
 
@@ -145,6 +148,9 @@ tag ([why][design-ordering]):
   that pulls unpinned secondary code (SRI on a loader is worthless if the loader
   fetches unpinned dependencies).
 - Remote-capable plugins get a `pageGate` so their code ships only where used.
+- A parameter that reaches a fetch URL is validated first:
+  `params.markmap.version` accepts `[0-9A-Za-z.+-]` only (and warns when not an
+  exact `X.Y.Z`), so a version string can't address another registry path.
 - Residual exposure, named: the vendored markmap autoloader's runtime libraries
   still load from the CDN, pinned by the autoloader itself but without SRI.
 

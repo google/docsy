@@ -41,9 +41,8 @@ Gating lives at two levels. The dispatcher gates PlantUML (site param) and
 Mermaid and KaTeX (`.Page.Store` flags); the plugin loop's `pageGate` carries
 the same page-flag pattern for MarkMap (`hasMarkmap`), while the remaining
 sub-partials gate internally (Algolia search configuration, Prism, search bundle
-choice, dark mode, ScrollSpy). Tab persistence ships ungated: its flag is set by
-a shortcode, and a shortcode inside a page included through `.RenderShortcodes`
-flags the included page, not the one that ships.
+choice, dark mode, ScrollSpy). Tab persistence ships ungated
+([why](#gating-decisions)).
 
 ## The dispatcher as a seam
 
@@ -119,6 +118,28 @@ Named collections in Hugo's own configuration (`outputFormats`, `mediaTypes`,
 `languages`, `taxonomies`) are maps keyed by name; the registry follows that
 idiom.
 
+### Gating decisions
+
+- **A theme default gates only on render-hook flags.** A render hook runs in the
+  context of the page being rendered; a shortcode, in the context of the page
+  whose file contains it. Content pulled in through `.RenderShortcodes` thus
+  carries render-hook flags to the page that ships but leaves shortcode flags on
+  the included page, and content pulled in through `.Content` leaves both there.
+  MarkMap (hook-flagged) is gated by default; tab persistence
+  (shortcode-flagged) ships ungated, its flag kept for sites that gate it
+  themselves. The site-author view: [Plugins][ug-plugins] in the user guide.
+- **The markmap render hook sets the flag and renders Hugo's default code
+  block** (`transform.HighlightCodeBlock`), leaving the browser-side transform
+  to the plugin script, so a disabled plugin leaves the fence exactly as Hugo
+  would render it. Mermaid's hook keeps its library-shaped markup
+  (`<pre class="mermaid">`) because the library reads it; whether Mermaid should
+  move to the default-render shape is a queued question ([#2789][]).
+- **Known limitation: section print.** The `print` output format for sections
+  renders descendants' `.Content` under the section page, whose Store never
+  receives the children's flags, so gated plugins don't ship in a printed
+  section (Mermaid and KaTeX have had the same gap since their flags were
+  introduced). Accepted for 0.18.
+
 ### Ordering decisions
 
 - **Companions before the script**: a plugin's companion partial and stylesheet
@@ -140,6 +161,7 @@ idiom.
 [impl]: /project/implementation/script-loading/
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
+[ug-plugins]: /docs/content/plugins/
 [scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
 <!-- prettier-ignore-end -->

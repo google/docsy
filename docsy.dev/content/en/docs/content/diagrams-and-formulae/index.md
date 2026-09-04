@@ -451,7 +451,7 @@ Foo -> Foo7: To queue
 ```
 ````
 
-Automatically renders to:
+With MarkMap enabled, Docsy renders it as:
 
 ```plantuml
 participant participant as Foo
@@ -552,8 +552,8 @@ params:
 
 ## MindMap support with MarkMap
 
-[MarkMap](https://markmap.js.org/) is a Javascript library for rendering simple
-text definitions to MindMap in the browser.
+[MarkMap](https://markmap.js.org/) renders Markdown as an interactive mind map
+in the browser.
 
 For example, the following defines a simple MindMap:
 
@@ -654,9 +654,19 @@ params:
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook, the `tab`
 or `readfile code="true"` shortcodes with `lang=markmap`, a fence in content
-pulled in with `.Content`), set `pageGate: ''` on the entry to load the scripts
-site-wide. The entry's `options` take a `height` for the rendered map (default
-`300px`):
+pulled in with `.Content`), clear the entry's gate so the scripts load site-wide
+([why][page-flags]):
+
+```yaml
+params:
+  docsy:
+    plugins:
+      markmap:
+        enable: true
+        pageGate: ''
+```
+
+The entry's `options` take a `height` for the rendered map (default `300px`):
 
 ```yaml
 params:
@@ -680,11 +690,14 @@ Docsy fetches the [markmap-autoloader][] package's entry file at build time at
 the [pinned version](#script-dep-versions), currently
 {{% param markmap.version %}}, and serves it from your site with subresource
 integrity; to use a different version, set `params.markmap.version`. Sites that
-restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
-The autoloader itself loads MarkMap's runtime libraries from a public CDN in the
+restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`;
+to build without network access, override the plugin's companion partial,
+`layouts/_partials/scripts/plugins/markmap.html`, to serve a copy you host. The
+autoloader itself loads MarkMap's runtime libraries from a public CDN in the
 browser, at versions it pins.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
+[page-flags]: /docs/content/plugins/#page-flags-in-included-content
 
 ## Diagrams with Diagrams.net
 

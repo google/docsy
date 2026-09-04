@@ -17,7 +17,7 @@ Section pages:
 - [Logos and Images](/docs/content/iconsimages/): Add and customize logos, icons, and images in your project.
 - [Look and Feel](/docs/content/lookandfeel/): Customize colors, fonts, code highlighting, and more for your site.
 - [Navigation and Menus](/docs/content/navigation/): Customize site navigation for your Docsy site.
-- [Plugins](/docs/content/plugins/): Load your own scripts, and turn Docsy's off, through one registry entry each, without overriding a template.
+- [Plugins](/docs/content/plugins/): Configure Docsy's JavaScript features and add your own scripts without overriding layout templates.
 - [Print Support](/docs/content/print/): Making it easier to print entire sections of documentation.
 - [Repository Links and other page information](/docs/content/repository-links/): Help your users interact with page source and view page-source information.
 - [Search](/docs/content/search/): Let users search your Docsy site with a choice of configurable search options.
