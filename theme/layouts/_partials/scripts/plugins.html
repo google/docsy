@@ -7,7 +7,7 @@
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins are off. Docsy reserves this key; move your own value to another one." $docsy -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins are off. Either your site isn't receiving the theme's config, or your own `docsy` param replaced it (Docsy reserves the key)." $docsy -}}
 {{ else if not (reflect.IsMap $docsy.plugins) -}}
   {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $docsy.plugins -}}
 {{ else -}}
@@ -16,21 +16,31 @@
 {{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
   keys, and `merge` yields plain maps without Hugo's case-insensitive access),
   then order by weight, then name. */ -}}
+{{ $fields := slice "enable" "defer" "pagegate" "weight" "options" -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}
   {{ $entry := dict "enable" true "defer" false "pagegate" "" "weight" 0 "options" dict -}}
   {{ if reflect.IsMap $value -}}
-    {{ range $k, $v := $value }}{{ $entry = merge $entry (dict (lower $k) $v) }}{{ end -}}
+    {{ range $k, $v := $value -}}
+      {{ if in $fields (lower $k) -}}
+        {{ $entry = merge $entry (dict (lower $k) $v) -}}
+      {{ else -}}
+        {{ warnidf "docsy-plugin-entry" "Plugin %q: unknown field %q (the fields are enable, defer, pageGate, weight, and options). Ignoring it." $name $k -}}
+      {{ end -}}
+    {{ end -}}
   {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ else -}}
-    {{/* A scalar replaced the theme's entry at merge time; the intent is
+    {{/* A scalar replaced any theme entry at merge time; the intent is
       unrecoverable. */ -}}
-    {{ warnidf "docsy-plugin-entry" "Plugin %q: a scalar value (%v) replaces the theme's entry and loses its defaults; write `%s: { enable: true }` instead. Skipping it." $name $value $name -}}
+    {{ warnidf "docsy-plugin-entry" "Plugin %q: %v is not a plugin entry (a map); write `%s: { enable: true }` to enable it with its defaults. Skipping it." $name $value $name -}}
     {{ continue -}}
   {{ end -}}
-  {{/* The key is the name; set last so an entry field can't redirect the asset. */ -}}
-  {{ $entry = merge $entry (dict "name" $name "pagegate" (printf "%v" $entry.pagegate)) -}}
+  {{/* A gate is a Store flag name; a boolean, nil, or empty value means none.
+    The key is the name; set last so an entry field can't redirect the asset. */ -}}
+  {{ $gate := $entry.pagegate -}}
+  {{ if or (not $gate) (eq (printf "%T" $gate) "bool") }}{{ $gate = "" }}{{ else }}{{ $gate = printf "%v" $gate }}{{ end -}}
+  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate) -}}
   {{ $entries = $entries | append $entry -}}
 {{ end -}}
 {{ $entries = sort $entries "weight" -}}

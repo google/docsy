@@ -5,7 +5,7 @@
   ends. */ -}}
 {{ $entry := .Plugin -}}
 {{ if .Page.Site.Params.markmap.enable -}}
-  {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: enable markmap under params.docsy.plugins instead, and remove the legacy param (while present, it loads markmap on every page)." -}}
+  {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: enable markmap under params.docsy.plugins instead, and remove the legacy param (while present, it loads markmap on every page). See https://www.docsy.dev/docs/content/diagrams-and-formulae/#activating-markmap-support." -}}
   {{ $entry = merge $entry (dict "enable" true "pagegate" "") -}}
 {{ end -}}
 {{ return $entry -}}

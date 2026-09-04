@@ -48,7 +48,9 @@ development builds. Companion nets:
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: page gating, persistence
   opt-out, and theme-plugin shadowing.
 - [`markmap-plugin.test.mjs`][markmap-test] and
-  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts.
+  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts. One
+  markmap case vendors the autoloader for real, so `test:repo` needs network
+  there; the other markmap cases stub the companion with a marker.
 
 ## Acceptance test
 
@@ -63,9 +65,9 @@ Two browser nets under `tests/visual/`:
 
 - [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
   real browser and asserts that no uncaught exception or in-scope console error
-  fires, alongside behavior probes (search, diagrams, navbar). Markup and visual
-  goldens can't see JS runtime breakage (a missing global, a botched
-  conversion); this net can ([#1436][]).
+  fires, alongside behavior probes (search, diagrams, navbar, copy button, tab
+  persistence). Markup and visual goldens can't see JS runtime breakage (a
+  missing global, a botched conversion); this net can ([#1436][]).
   - Two fixture variants cover both search bundles: the main bundle
     (`scripts/main-bundle.html`) concatenates `offline-search.js` or `search.js`
     into `main.js`, never both.

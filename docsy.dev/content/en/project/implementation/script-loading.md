@@ -34,11 +34,14 @@ params:
   camelCase convention; it's what arrives that is lowercase.
 - Names are restricted to `^[a-z0-9_-]+$`: they address assets and partials by
   path, so anything that could traverse outside the plugin namespaces is refused
-  with a warning (`docsy-plugin-name`). The entry's key is its name; a `name`
-  field is ignored.
+  with a warning (`docsy-plugin-name`). The entry's key is its name; names
+  ending in `-shim` are reserved for [shims](#pre-registry-parameters).
+- Entry fields outside `enable`, `defer`, `pageGate`, `weight`, and `options`
+  warn (`docsy-plugin-entry`) and are ignored, so a misspelled field can't pass
+  as a setting.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
-  `.Page.Store` flag; `pageGate: ''` clears an inherited gate. `weight` is an
-  integer.
+  `.Page.Store` flag; `pageGate: ''` (or `false`) clears an inherited gate.
+  `weight` is an integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
   strings are truthy in Go templates). A scalar entry value of `false` turns the
   entry off; any other scalar has already replaced the theme's entry in Hugo's
@@ -69,8 +72,9 @@ A plugin whose behavior was once controlled by other parameters ships a shim
 partial, `_partials/scripts/plugins/NAME-shim.html`, that the loop applies to
 the plugin's merged entry before the enable and gate checks: it receives
 `(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry (a map;
-anything else fails the build). Shims see map entries only: a scalar entry is
-skipped, with its warning, before they run. Each retires with its parameter's
+anything else fails the build). A non-false scalar entry is skipped, with its
+warning, before shims run; a scalar `false` reaches them as `enable: false`, so
+a legacy parameter still wins over it. Each retires with its parameter's
 deprecation cycle by deleting the file:
 
 - `markmap-shim.html`: `params.markmap.enable` (deprecated,

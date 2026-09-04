@@ -25,7 +25,11 @@
       {{ errorf "Could not retrieve the markmap autoloader from the CDN. Reason: %s." . -}}
     {{ else with .Value -}}
       {{ with resources.Copy "js/vendor/markmap-autoloader.js" . -}}
-        {{ $lib := . | fingerprint -}}
+        {{ $lib := . -}}
+        {{ if hugo.IsProduction -}}
+          {{ $lib = $lib | minify -}}
+        {{ end -}}
+        {{ $lib = $lib | fingerprint -}}
         <script defer src="{{ $lib.RelPermalink }}" integrity="{{ $lib.Data.Integrity }}" crossorigin="anonymous"></script>
         {{- "\n" -}}
       {{ end -}}

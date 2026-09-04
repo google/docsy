@@ -150,7 +150,7 @@ test('a non-false scalar entry warns and is skipped', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /replaces the theme's entry/,
+    /Plugin "tabpane-persist": true is not a plugin entry/,
     'the scalar entry is called out in a build warning',
   );
   assert.doesNotMatch(
@@ -381,7 +381,7 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /params\.docsy must be a map.*theme plugins are off.*reserves this key/,
+    /params\.docsy must be a map.*theme plugins are off.*reserves the key/,
     'the clobbered registry is called out as a reserved key',
   );
   assert.doesNotMatch(
@@ -620,12 +620,43 @@ test("an entry's name is its key; a name field is ignored", () => {
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /unknown field "name"/,
+    'the name field is called out as unknown',
+  );
   const html = r.publicFile('index.html');
   assert.match(html, /js\/plugins\/hello/, 'the keyed plugin is emitted');
   assert.doesNotMatch(
     html,
     /js\/plugins\/other/,
     'the page is free of the redirect target',
+  );
+});
+
+test('an unknown entry field warns and the entry still applies', () => {
+  // The likeliest misspelling: `enabled` for `enable`.
+  const r = buildSite('plugins-unknown-field', {
+    files: {
+      ...content,
+      'content/docs/code.md': '---\ntitle: Code\n---\n\n```sh\necho hi\n```\n',
+    },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      click-to-copy: { enabled: false }
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /Plugin "click-to-copy": unknown field "enabled"/,
+    'the unknown field is called out in a build warning',
+  );
+  assert.match(
+    r.publicFile('docs/code/index.html'),
+    /js\/plugins\/click-to-copy/,
+    'the plugin keeps its theme defaults',
   );
 });
 
@@ -646,14 +677,22 @@ test('a quoted "false" defer means no defer', () => {
   );
 });
 
-test('a non-string pageGate is coerced, not a build error', () => {
-  const r = buildSite('plugins-gate-bool', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
+test('a boolean pageGate means no gate', () => {
+  // `false` is the natural way to write "no gate"; `true` names no flag.
+  for (const value of ['false', 'true']) {
+    const r = buildSite(`plugins-gate-${value}`, {
+      files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+      extraConfig: `params:
   docsy:
     plugins:
-      hello: { pageGate: true }
+      hello: { pageGate: ${value} }
 `,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+    });
+    assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+    assert.match(
+      r.publicFile('index.html'),
+      /js\/plugins\/hello/,
+      `pageGate: ${value} loads the plugin on an unflagged page`,
+    );
+  }
 });

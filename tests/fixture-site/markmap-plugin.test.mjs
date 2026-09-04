@@ -1,5 +1,6 @@
-// Pins MarkMap's registry conversion and legacy compatibility. Vendoring
-// cases need network (resources.GetRemote).
+// Pins MarkMap's registry conversion and legacy compatibility. One case
+// vendors the autoloader for real (network, resources.GetRemote); the loop
+// contract cases stub the companion with a marker to stay offline.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,6 +10,11 @@ const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
   'content/docs/_index.md':
     '---\ntitle: Docs\n---\n\n```markmap\n# root\n## leaf\n```\n',
+};
+const stubbed = {
+  ...files,
+  'layouts/_partials/scripts/plugins/markmap.html':
+    '<script data-vendor="markmap-autoloader"></script>\n',
 };
 
 test('disabled markmap contributes zero bytes to shipped JS', () => {
@@ -78,7 +84,7 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
 
 test('a registry-declared markmap entry supersedes the legacy alias', () => {
   const r = buildSite('markmap-registry', {
-    files,
+    files: stubbed,
     extraConfig: `params:
   docsy:
     plugins:
@@ -111,8 +117,8 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
   );
   assert.match(
     html,
-    /js\/vendor\/markmap-autoloader/,
-    'the vendored autoloader rides the registry entry too',
+    /data-vendor="markmap-autoloader"/,
+    'the companion rides the registry entry too',
   );
 });
 
@@ -135,7 +141,7 @@ test('a path-bearing markmap.version fails the build', () => {
 
 test('the legacy param wins over a registry entry, site-wide, with a warning', () => {
   const r = buildSite('markmap-legacy-and-registry', {
-    files,
+    files: stubbed,
     extraConfig: `params:
   markmap:
     enable: true
@@ -159,7 +165,7 @@ test('the legacy param wins over a registry entry, site-wide, with a warning', (
 
 test('a deferred markmap entry keeps the autoloader exports (plugin merges)', () => {
   const r = buildSite('markmap-defer', {
-    files,
+    files: stubbed,
     extraConfig: `params:
   docsy:
     plugins:

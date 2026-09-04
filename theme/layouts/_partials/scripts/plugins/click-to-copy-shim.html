@@ -5,7 +5,7 @@
 {{ $entry := .Plugin -}}
 {{ with .Page.Site.Params -}}
   {{ if .disable_click2copy_chroma -}}
-    {{ warnidf "docsy-c2c-legacy" "params.disable_click2copy_chroma is deprecated: set `click-to-copy: false` under params.docsy.plugins instead." -}}
+    {{ warnidf "docsy-c2c-legacy" "params.disable_click2copy_chroma is deprecated: set `click-to-copy: false` under params.docsy.plugins instead. See https://www.docsy.dev/docs/content/lookandfeel/#load-scripts-as-plugins." -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ end -}}
   {{ if .prism_syntax_highlighting -}}
