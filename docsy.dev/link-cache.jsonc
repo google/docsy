@@ -3892,6 +3892,11 @@
     "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
+  "https://gohugo.io/methods/page/rendershortcodes/": {
+    "status": 200,
+    "when": "2026-09-04T20:51:32Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/methods/page/renderstring/": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",

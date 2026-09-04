@@ -979,6 +979,13 @@ integrity][SRI]. An entry can also pass `options` (which reach the module as
 [build parameters][js-params]), set `defer`, or gate loading on a page flag; for
 the full registry contract, see the [implementation notes][plugins-impl].
 
+A page flag counts only when the page's own render sets it. If your site's
+templates or shortcodes pull content in through [`.RenderShortcodes`][], a
+render hook inside that content still flags the page that ships, but a shortcode
+flags the _included_ page. That is why Docsy ships [tab persistence][tabpane]
+ungated; gate it yourself (`tabpane-persist: { pageGate: hasTabs }`) only if
+your tabpanes are never included.
+
 Docsy's own plugins are registered for you: `click-to-copy` and
 `tabpane-persist` are on, and `markmap` is off until you
 [enable it](/docs/content/diagrams-and-formulae/#activating-markmap-support).
@@ -992,8 +999,10 @@ params:
 ```
 
 <!-- prettier-ignore-start -->
+[`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
 [js-params]: https://gohugo.io/functions/js/build/#params
 [plugins-impl]: /project/implementation/script-loading/
+[tabpane]: /docs/content/shortcodes/#tabpane
 [SRI]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 <!-- prettier-ignore-end -->
 
