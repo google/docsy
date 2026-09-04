@@ -1,5 +1,5 @@
+{{/* Sets the page gate for the markmap plugin and leaves rendering to Hugo:
+  the plugin script transforms the default code block, so a disabled markmap
+  never changes how the fence looks. */ -}}
 {{ .Page.Store.Set "hasMarkmap" true -}}
-
-<pre><code class="language-markmap">
-  {{- .Inner -}}
-</code></pre>
+{{ (transform.HighlightCodeBlock .).Wrapped -}}

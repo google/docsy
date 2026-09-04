@@ -187,3 +187,18 @@ test('a deferred markmap entry still renders (plugin merges, never replaces)', (
     'the plugin never replaces window.markmap wholesale',
   );
 });
+
+test('a markmap fence renders as a default code block when markmap is off', () => {
+  // The render hook sets the gate flag but leaves rendering to Hugo, so a
+  // disabled or unregistered markmap never changes how the fence looks.
+  const r = buildSite('markmap-fence-default', {
+    files,
+    title: 'Docsy markmap fence fixture',
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('docs/index.html'),
+    /<pre tabindex="0"><code class="language-markmap" data-lang="markmap">/,
+    "the fence carries Hugo's default code-block markup",
+  );
+});

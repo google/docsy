@@ -47,8 +47,11 @@ theme's:
 - `click-to-copy`: on, deferred.
 - `tabpane-persist`: on, page-gated on `hasTabs` (set by the tabpane shortcode
   when persistence is active).
-- `markmap`: off, page-gated on `hasMarkmap` (set by the markmap code-block
-  render hook). Its companion partial vendors the autoloader.
+- `markmap`: off, page-gated on `hasMarkmap`. The markmap code-block render hook
+  sets the flag and otherwise renders Hugo's default code block
+  (`transform.HighlightCodeBlock`), which the plugin script transforms in the
+  browser: a disabled markmap never changes how the fence renders. Its companion
+  partial vendors the autoloader.
 
 ### Pre-registry parameters
 
