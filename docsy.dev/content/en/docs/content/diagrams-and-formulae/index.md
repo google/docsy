@@ -653,9 +653,10 @@ params:
 
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook, the `tab`
-or `readfile` shortcodes with `lang=markmap`), set `pageGate: ''` on the entry
-to load the scripts site-wide. The entry's `options` take a `height` for the
-rendered map (default `300px`):
+or `readfile code="true"` shortcodes with `lang=markmap`, a fence in content
+pulled in with `.Content`), set `pageGate: ''` on the entry to load the scripts
+site-wide. The entry's `options` take a `height` for the rendered map (default
+`300px`):
 
 ```yaml
 params:

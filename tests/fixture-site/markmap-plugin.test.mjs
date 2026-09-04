@@ -112,6 +112,22 @@ test('a registry-declared markmap entry is page-gated and carries its options', 
   );
 });
 
+test('a scalar params.markmap builds, with markmap off', () => {
+  // A site's `markmap: false` replaces the theme's map; the shim must not
+  // dereference it.
+  const r = buildSite('markmap-scalar-param', {
+    files,
+    title: 'Docsy scalar-markmap fixture',
+    extraConfig: 'params:\n  markmap: false\n',
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('docs/index.html'),
+    /js\/plugins\/markmap/,
+    'the page is free of markmap scripts',
+  );
+});
+
 test('a path-bearing markmap.version fails the build', () => {
   const r = buildSite('markmap-version-path', {
     files,

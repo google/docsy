@@ -4,7 +4,8 @@
   registry's (map) entry says. Delete this file when the deprecation cycle
   ends. */ -}}
 {{ $entry := .Plugin -}}
-{{ if .Page.Site.Params.markmap.enable -}}
+{{ $legacy := .Page.Site.Params.markmap -}}
+{{ if and (reflect.IsMap $legacy) $legacy.enable -}}
   {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: enable markmap under params.docsy.plugins instead, and remove the legacy param (while present, it loads markmap on every page). See https://www.docsy.dev/docs/content/diagrams-and-formulae/#activating-markmap-support." -}}
   {{ $entry = merge $entry (dict "enable" true "pagegate" "") -}}
 {{ end -}}

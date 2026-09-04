@@ -982,7 +982,8 @@ the full registry contract, see the [implementation notes][plugins-impl].
 A page flag counts only when the page's own render sets it. If your site's
 templates or shortcodes pull content in through [`.RenderShortcodes`][], a
 render hook inside that content still flags the page that ships, but a shortcode
-flags the _included_ page. That is why Docsy ships [tab persistence][tabpane]
+flags the _included_ page; content pulled in through `.Content` flags the
+included page either way. That is why Docsy ships [tab persistence][tabpane]
 ungated; gate it yourself (`tabpane-persist: { pageGate: hasTabs }`) only if
 your tabpanes are never included.
 
