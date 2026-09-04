@@ -35,12 +35,13 @@ params:
 - Names are restricted to `^[a-z0-9_-]+$`: they address assets and partials by
   path, so anything that could traverse outside the plugin namespaces is refused
   with a warning (`docsy-plugin-name`). The entry's key is its name; names
-  ending in `_docsy-shim` are reserved for [shims](#pre-registry-parameters).
+  ending in `_docsy-shim` are refused with the same warning id, the suffix being
+  reserved for [shims](#pre-registry-parameters).
 - Entry fields outside `enable`, `defer`, `pageGate`, `weight`, and `options`
   warn (`docsy-plugin-entry`) and are ignored, so a misspelled field can't pass
-  as a setting.
+  as a setting; non-map `options` warn the same way and count as none.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
-  `.Page.Store` flag; `pageGate: ''` (or `false`) clears an inherited gate.
+  `.Page.Store` flag; `pageGate: ''` (or a boolean) clears an inherited gate.
   `weight` is an integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
   strings are truthy in Go templates). A scalar entry value of `false` turns the
@@ -98,7 +99,8 @@ config merge:
   scalar, or the pre-release list shape) warns (`docsy-plugins-config`) that the
   theme plugins are off; `plugins: {}` keeps them. A non-map `params.docsy` (a
   site's own pre-0.18 `docsy` param) draws the same warning id, naming the key
-  as reserved.
+  as reserved; with no registry to iterate, the shims (and so the legacy
+  parameters they alias) are off too.
 - An enabled entry with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.

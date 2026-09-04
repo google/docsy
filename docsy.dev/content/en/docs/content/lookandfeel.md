@@ -541,6 +541,8 @@ project's configuration file.
 
 Code blocks show a "Copy to clipboard" button in the top right-hand corner. To
 remove it, turn the [`click-to-copy` plugin](#load-scripts-as-plugins) off.
+Before 0.18 the parameter was `params.disable_click2copy_chroma`; it is
+deprecated and still works for this release cycle, with a build warning.
 
 ### Code highlighting with Prism
 

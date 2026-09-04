@@ -7,7 +7,7 @@
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins are off. Either your site isn't receiving the theme's config, or your own `docsy` param replaced it (Docsy reserves the key)." $docsy -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins and their legacy parameters are off. Either your site isn't receiving the theme's config, or your own `docsy` param replaced it (Docsy reserves the key)." $docsy -}}
 {{ else if not (reflect.IsMap $docsy.plugins) -}}
   {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $docsy.plugins -}}
 {{ else -}}
@@ -40,7 +40,12 @@
     The key is the name; set last so an entry field can't redirect the asset. */ -}}
   {{ $gate := $entry.pagegate -}}
   {{ if or (not $gate) (eq (printf "%T" $gate) "bool") }}{{ $gate = "" }}{{ else }}{{ $gate = printf "%v" $gate }}{{ end -}}
-  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate) -}}
+  {{ $options := $entry.options | default dict -}}
+  {{ if not (reflect.IsMap $options) -}}
+    {{ warnidf "docsy-plugin-entry" "Plugin %q: options must be a map (got %v); using none." $name $options -}}
+    {{ $options = dict -}}
+  {{ end -}}
+  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate "options" $options) -}}
   {{ $entries = $entries | append $entry -}}
 {{ end -}}
 {{ $entries = sort $entries "weight" -}}
@@ -51,6 +56,10 @@
     {{/* Names address assets and partials by path; refuse anything that could
       traverse outside the plugin namespaces. */ -}}
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to lowercase letters, digits, hyphens, and underscores." $name -}}
+    {{ continue -}}
+  {{ end -}}
+  {{ if hasSuffix $name "_docsy-shim" -}}
+    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: the _docsy-shim suffix is reserved for shim partials." $name -}}
     {{ continue -}}
   {{ end -}}
   {{/* A plugin's shim adapts parameters that predate the registry onto its
@@ -83,7 +92,7 @@
       {{ if templates.Exists (printf "_partials/%s" $companion) -}}
         {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
       {{ end -}}
-      {{ $opts := dict "params" ($entry.options | default dict) -}}
+      {{ $opts := dict "params" $entry.options -}}
       {{ if hugo.IsProduction -}}
         {{ $opts = merge $opts (dict "minify" true) -}}
       {{ end -}}

@@ -315,8 +315,11 @@ test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', ()
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   const html = r.publicFile('index.html');
-  const m = html.match(/<link[^>]*href="\/(scss\/plugins\/hello[^"]*\.css)"/);
+  const m = html.match(
+    /<link[^>]*href="\/(scss\/plugins\/hello[^"]*\.css)"[^>]*>/,
+  );
   assert.ok(m, 'the plugin stylesheet link is emitted');
+  assert.match(m[0], /integrity="sha256-/, 'the stylesheet link carries SRI');
   assert.ok(
     html.indexOf('scss/plugins/hello') < html.indexOf('js/plugins/hello'),
     'the stylesheet link precedes the plugin script tag',
@@ -381,7 +384,7 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /params\.docsy must be a map.*theme plugins are off.*reserves the key/,
+    /params\.docsy must be a map.*theme plugins and their legacy parameters are off.*reserves the key/,
     'the clobbered registry is called out as a reserved key',
   );
   assert.doesNotMatch(
@@ -675,6 +678,50 @@ test('a quoted "false" defer means no defer', () => {
     /<script[^>]*\bdefer\b[^>]*js\/plugins\/hello/,
     'the plugin tag is free of defer',
   );
+});
+
+test('a name ending in _docsy-shim is refused as reserved', () => {
+  const r = buildSite('plugins-reserved-suffix', {
+    files: { ...content, 'assets/js/plugins/hello_docsy-shim.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello_docsy-shim: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /Ignoring plugin "hello_docsy-shim".*reserved/,
+    'the reserved suffix is called out in a build warning',
+  );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello_docsy-shim/,
+    'the page is free of the reserved-name plugin',
+  );
+});
+
+test('non-map options warn and the module gets an empty map', () => {
+  const r = buildSite('plugins-options-scalar', {
+    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: { options: not-a-map }
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /Plugin "hello": options must be a map/,
+    'the options shape is called out in a build warning',
+  );
+  const html = r.publicFile('index.html');
+  const js = r.publicFile(
+    html.match(/src="\/(js\/plugins\/hello[^"]*\.js)"/)[1],
+  );
+  assert.doesNotMatch(js, /not-a-map/, 'the module is free of the scalar');
 });
 
 test('a boolean pageGate means no gate', () => {

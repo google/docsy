@@ -82,7 +82,7 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
   assert.match(js, /autoLoader/, 'plugin configures the autoloader');
 });
 
-test('a registry-declared markmap entry supersedes the legacy alias', () => {
+test('a registry-declared markmap entry is page-gated and carries its options', () => {
   const r = buildSite('markmap-registry', {
     files: stubbed,
     extraConfig: `params:
