@@ -1098,13 +1098,6 @@
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
   },
-  // New-test seed: goes live when the plugin conversions (#2791) merge.
-  "https://github.com/google/docsy/blob/main/tests/fixture-site/print-scripts.test.mjs": {
-    "status": 206,
-    "when": "2026-09-03T19:40:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
-  },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs": {
     "status": 200,
     "when": "2026-09-02T19:09:15Z",

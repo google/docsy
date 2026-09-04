@@ -123,11 +123,6 @@ idiom.
   render. Moving companion CSS into the head is a possible later refinement, and
   has to solve that constraint or gated CSS silently drops ([#2789][]).
 
-**Print output**: print layouts render descendant pages into one page, so they
-merge descendant page-gate flags onto the print page
-(`_partials/print/page-flags.html`) before the dispatcher runs; page-gated
-scripts reach print output through that merge.
-
 ## Related pages
 
 - [Implementation: script loading][impl]

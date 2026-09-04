@@ -175,8 +175,6 @@ history since 0.17.0][].
   scrolling multiple times after window resizes ([#1436][]).
 - Reverted the root baseof's caching of the scripts partial: per-page script
   gating made the cached render page-dependent ([#2787][]).
-- Fixed page-gated scripts (Mermaid, KaTeX, and the new plugin gates) missing
-  from section print output ([#2791][]).
 
 [**Experimental**](#experimental):
 
