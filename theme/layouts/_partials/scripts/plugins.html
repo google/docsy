@@ -1,39 +1,46 @@
 {{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
+{{/* The theme declares its plugins under this key (theme/hugo.yaml), so a
+  site's non-map value here, nil included, has already replaced them in Hugo's
+  config merge: say so. */ -}}
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
-{{ if reflect.IsMap $docsy -}}
-  {{ $plugins := $docsy.plugins -}}
-  {{ if reflect.IsMap $plugins -}}
-    {{ $registry = $plugins -}}
-  {{ else if ne $plugins nil -}}
-    {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name; ignoring %v." $plugins -}}
-  {{ end -}}
+{{ $plugins := "" -}}
+{{ if reflect.IsMap $docsy }}{{ $plugins = $docsy.plugins }}{{ else }}{{ $plugins = $docsy }}{{ end -}}
+{{ if reflect.IsMap $plugins -}}
+  {{ $registry = $plugins -}}
+{{ else -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $plugins -}}
 {{ end -}}
 {{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
   keys, and `merge` yields plain maps without Hugo's case-insensitive access),
   then order by weight, then name. */ -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}
-  {{ $entry := dict "name" $name "enable" true "defer" false "pagegate" "" "weight" 0 "options" dict -}}
+  {{ $entry := dict "enable" true "defer" false "pagegate" "" "weight" 0 "options" dict -}}
   {{ if reflect.IsMap $value -}}
     {{ range $k, $v := $value }}{{ $entry = merge $entry (dict (lower $k) $v) }}{{ end -}}
   {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ else -}}
-    {{ warnidf "docsy-plugin-entry" "Plugin %q: entries are maps (use `%s: {}` or `%s: { enable: true }`); treating %v as an empty map." $name $name $name $value -}}
+    {{/* A scalar replaced the theme's entry at merge time; the intent is
+      unrecoverable. */ -}}
+    {{ warnidf "docsy-plugin-entry" "Plugin %q: a scalar value (%v) replaces the theme's entry and loses its defaults; use `%s: {}` or `%s: { enable: true }`. Skipping it." $name $value $name $name -}}
+    {{ continue -}}
   {{ end -}}
+  {{/* The key is the name; set last so an entry field can't redirect the asset. */ -}}
+  {{ $entry = merge $entry (dict "name" $name "pagegate" (printf "%v" $entry.pagegate)) -}}
   {{ $entries = $entries | append $entry -}}
 {{ end -}}
 {{ $entries = sort $entries "weight" -}}
 {{ range $entries -}}
   {{ $entry := . -}}
   {{ $name := .name -}}
-  {{ if not (findRE `^[A-Za-z0-9_-]+$` $name) -}}
+  {{ if not (findRE `^[a-z0-9_-]+$` $name) -}}
     {{/* Names address assets and partials by path; refuse anything that could
       traverse outside the plugin namespaces. */ -}}
-    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to letters, digits, hyphens, and underscores." $name -}}
+    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to lowercase letters, digits, hyphens, and underscores." $name -}}
     {{ continue -}}
   {{ end -}}
   {{/* A plugin's shim adapts parameters that predate the registry onto its
@@ -41,11 +48,15 @@
   {{ $shim := printf "scripts/plugins/%s-shim.html" $name -}}
   {{ if templates.Exists (printf "_partials/%s" $shim) -}}
     {{ $entry = partial $shim (dict "Page" $ "Plugin" $entry) -}}
+    {{ if not (reflect.IsMap $entry) -}}
+      {{ errorf "Plugin shim %s must return the plugin entry (a map); got %T." $shim $entry -}}
+    {{ end -}}
   {{ end -}}
   {{ if or (eq $entry.enable false) (eq (lower (printf "%v" $entry.enable)) "false") -}}
     {{ continue -}}
   {{ end -}}
-  {{ $gate := $entry.pagegate -}}
+  {{ $gate := printf "%v" $entry.pagegate -}}
+  {{ $defer := and $entry.defer (ne (lower (printf "%v" $entry.defer)) "false") -}}
   {{ $path := printf "js/plugins/%s.js" $name -}}
   {{ with resources.Get $path -}}
     {{ if or (not $gate) ($.Page.Store.Get $gate) -}}
@@ -67,7 +78,7 @@
         {{ $opts = merge $opts (dict "minify" true) -}}
       {{ end -}}
       {{ $js := . | js.Build $opts | fingerprint -}}
-      <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+      <script {{ if $defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
       {{- "\n" -}}
     {{ end -}}
   {{ else -}}
