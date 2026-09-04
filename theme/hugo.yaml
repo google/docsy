@@ -6,6 +6,13 @@ params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
+  docsy:
+    # Theme plugins; sites layer their own map over this one. Contract:
+    # https://www.docsy.dev/project/implementation/script-loading/
+    plugins:
+      click-to-copy: { defer: true }
+      tabpane-persist: { pageGate: hasTabs }
+      markmap: { enable: false, pageGate: hasMarkmap }
   katex:
     version: 0.18.4
   markmap:

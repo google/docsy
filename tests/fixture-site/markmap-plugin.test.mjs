@@ -84,7 +84,8 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: markmap
+      markmap:
+        enable: true
         options:
           height: 400px
 `,
@@ -135,66 +136,54 @@ test('a path-bearing markmap.version fails the build', () => {
   );
 });
 
-test('defer on a markmap entry is ignored, with a warning', () => {
-  // The plugin script must run before the deferred autoloader it configures.
-  const r = buildSite('markmap-defer', {
-    files,
-    extraConfig: `params:
-  docsy:
-    plugins:
-      - name: markmap
-        defer: true
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /docsy-markmap-defer/,
-    'the defer request draws a warning',
-  );
-  const plugin = r
-    .publicFile('docs/index.html')
-    .match(/<script[^>]*src="\/js\/plugins\/markmap[^"]*"[^>]*>/);
-  assert.ok(plugin, 'markmap plugin script tag is emitted');
-  assert.doesNotMatch(
-    plugin[0],
-    /\bdefer\b/,
-    'the plugin script stays synchronous, ahead of the deferred autoloader',
-  );
-});
-
-test('duplicate markmap entries emit one vendored autoloader', () => {
-  const r = buildSite('markmap-duplicate', {
-    files,
-    extraConfig: `params:
-  docsy:
-    plugins: [markmap, markmap]
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const html = r.publicFile('docs/index.html');
-  const vendors = html.match(/js\/vendor\/markmap-autoloader/g) ?? [];
-  assert.equal(vendors.length, 1, 'the vendored autoloader is emitted once');
-  const plugins = html.match(/js\/plugins\/markmap/g) ?? [];
-  assert.equal(plugins.length, 1, 'the plugin script is emitted once');
-});
-
-test('a leftover legacy param beside a registry entry warns', () => {
-  // The registry entry supersedes the alias and is page-gated; a site that
-  // copied the guide but kept params.markmap.enable must hear about it.
+test('the legacy param wins over a registry entry, site-wide, with a warning', () => {
+  // A site that registered markmap but kept params.markmap.enable gets the
+  // legacy behavior until it removes the param; the warning says so.
   const r = buildSite('markmap-legacy-and-registry', {
     files,
     extraConfig: `params:
   markmap:
     enable: true
   docsy:
-    plugins: [markmap]
+    plugins:
+      markmap: { enable: true }
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /params\.markmap\.enable is superseded/,
-    'the superseded legacy param draws a warning',
+    /remove the legacy param/,
+    'the legacy param draws the deprecation warning',
+  );
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/markmap/,
+    'markmap loads on a page without markmap content while the param is set',
+  );
+});
+
+test('a deferred markmap entry still renders (plugin merges, never replaces)', () => {
+  const r = buildSite('markmap-defer', {
+    files,
+    extraConfig: `params:
+  docsy:
+    plugins:
+      markmap: { enable: true, defer: true }
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('docs/index.html');
+  assert.match(
+    html,
+    /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/markmap/,
+    'defer is honored on the plugin tag',
+  );
+  const js = r.publicFile(
+    html.match(/src="\/(js\/plugins\/markmap[^"]*\.js)"/)[1],
+  );
+  assert.doesNotMatch(
+    js,
+    /window\.markmap\s*=\s*\{/,
+    'the plugin never replaces window.markmap wholesale',
   );
 });

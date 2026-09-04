@@ -1,0 +1,10 @@
+{{/* cSpell:ignore markmap */ -}}
+{{/* Shim for params.markmap.enable (deprecated in 0.18): when set, markmap is
+  on and ungated, exactly its pre-0.18 site-wide behavior, whatever the
+  registry says. Delete this file when the deprecation cycle ends. */ -}}
+{{ $entry := .Plugin -}}
+{{ if .Page.Site.Params.markmap.enable -}}
+  {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: enable markmap under params.docsy.plugins instead, and remove the legacy param (while present, it loads markmap on every page)." -}}
+  {{ $entry = merge $entry (dict "enable" true "pagegate" "") -}}
+{{ end -}}
+{{ return $entry -}}

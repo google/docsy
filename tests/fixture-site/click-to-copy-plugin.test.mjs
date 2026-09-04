@@ -40,6 +40,11 @@ test('disable_click2copy_chroma ships zero copy-button bytes', () => {
     extraConfig: 'params:\n  disable_click2copy_chroma: true\n',
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /disable_click2copy_chroma is deprecated/,
+    'the legacy param draws a deprecation warning',
+  );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /click-to-copy[^"]*\.js/,
@@ -67,15 +72,14 @@ test('prism supersedes the copy-button plugin', () => {
   );
 });
 
-test('a site entry with enable: false turns the theme plugin off', () => {
+test('a scalar false turns the theme plugin off', () => {
   const r = buildSite('c2c-registry-off', {
     files,
     title: 'Docsy copy-button registry-off fixture',
     extraConfig: `params:
   docsy:
     plugins:
-      - name: click-to-copy
-        enable: false
+      click-to-copy: false
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);

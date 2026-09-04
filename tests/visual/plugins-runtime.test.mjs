@@ -24,10 +24,10 @@ before(async () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: probe
+      probe:
         options:
           token: runtime-net
-      - name: broken
+      broken:
         defer: true
 `,
   });

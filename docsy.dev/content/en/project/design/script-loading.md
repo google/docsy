@@ -86,8 +86,8 @@ configuration merge is deep for maps, so a site's map layers over the theme's:
 - **The loop is generic**: it knows no plugin names. Theme defaults are
   configuration, not template code; plugin-specific behavior lives in the
   plugin's own files: its script, its companion partial, and, for parameters
-  that predate the registry, a per-plugin compatibility partial that decorates
-  the plugin's entry and is deleted with the parameter's deprecation cycle.
+  that predate the registry, a per-plugin shim partial that decorates the
+  plugin's entry and is deleted with the parameter's deprecation cycle.
 - **Plugins are site-wide**: the registry is read from site configuration and is
   not a per-language surface; per-language divergence is unsupported. Every
   emitted plugin script is fingerprinted in every environment because its tag

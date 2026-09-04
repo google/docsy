@@ -1,8 +1,7 @@
 import * as params from '@params';
 
-// Configure the markmap autoloader before its (same-origin, vendored,
-// deferred) script runs: manual mode, prism transform excluded, and render
-// once ready.
+// Configure the markmap autoloader: manual mode, prism transform excluded, and
+// render once ready.
 (function () {
   'use strict';
 
@@ -25,16 +24,18 @@ import * as params from '@params';
   style.textContent = `.markmap > svg { width: 100%; height: ${params.height || '300px'}; }`;
   document.head.append(style);
 
-  window.markmap = {
-    autoLoader: {
-      manual: true,
-      onReady() {
-        const { autoLoader, builtInPlugins } = window.markmap;
-        autoLoader.transformPlugins = builtInPlugins.filter(
-          (plugin) => plugin.name !== 'prism',
-        );
-        if (parents.size) autoLoader.renderAll();
-      },
+  // Merge, never replace: if the autoloader ran first (a deferred plugin
+  // script), window.markmap holds its exports and its own auto-render takes
+  // over; replacing the object would discard both.
+  const markmap = (window.markmap = window.markmap || {});
+  markmap.autoLoader = Object.assign(markmap.autoLoader || {}, {
+    manual: true,
+    onReady() {
+      const { autoLoader, builtInPlugins } = window.markmap;
+      autoLoader.transformPlugins = builtInPlugins.filter(
+        (plugin) => plugin.name !== 'prism',
+      );
+      if (parents.size) autoLoader.renderAll();
     },
-  };
+  });
 })();

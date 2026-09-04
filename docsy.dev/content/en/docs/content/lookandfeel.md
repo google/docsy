@@ -969,7 +969,8 @@ your site config, where _`NAME`_ is your plugin's name:
 ```yaml
 params:
   docsy:
-    plugins: [NAME]
+    plugins:
+      NAME: {}
 ```
 
 Docsy builds, fingerprints, and loads the script with [subresource
@@ -977,16 +978,14 @@ integrity][SRI]. An entry can also pass `options` (which reach the module as
 [build parameters][js-params]), set `defer`, or gate loading on a page flag; for
 the full registry contract, see the [implementation notes][plugins-impl].
 
-Docsy's own plugins (`click-to-copy`, `tabpane-persist`, and `markmap` when
-enabled) are registered for you; to turn one off, declare it with
-`enable: false`:
+Docsy's own plugins (`click-to-copy`, `tabpane-persist`, and `markmap`, off by
+default) are registered for you; set one to `false` to turn it off:
 
 ```yaml
 params:
   docsy:
     plugins:
-      - name: click-to-copy
-        enable: false
+      click-to-copy: false
 ```
 
 > [!NOTE]

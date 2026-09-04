@@ -1,121 +1,76 @@
 {{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
-{{ $registry := slice -}}
-{{ $emittedCompanions := newScratch -}}
+{{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if reflect.IsMap $docsy -}}
   {{ $plugins := $docsy.plugins -}}
-  {{ if reflect.IsSlice $plugins -}}
+  {{ if reflect.IsMap $plugins -}}
     {{ $registry = $plugins -}}
   {{ else if ne $plugins nil -}}
-    {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." $plugins -}}
+    {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name; ignoring %v." $plugins -}}
   {{ end -}}
 {{ end -}}
-{{/* Theme-default entries, aliasing legacy params for one deprecation cycle.
-  A site-declared entry of the same name supersedes its auto-registration but
-  inherits the default fields it leaves unset. */ -}}
-{{ $defaults := dict
-  "markmap" (dict "pageGate" "hasMarkmap")
-  "tabpane-persist" (dict "pageGate" "hasTabs")
-  "click-to-copy" (dict "defer" true)
--}}
-{{ $names := slice -}}
-{{ range $registry -}}
-  {{ if not (reflect.IsMap .) }}{{ $names = $names | append (printf "%v" .) -}}
-  {{ else if isset . "name" }}{{ $names = $names | append (printf "%v" (index . "name")) -}}
-  {{ end -}}
-{{ end -}}
-{{/* Plugins load once: the first registration of a name wins, later ones
-  are dropped with a warning (the theme plugins are not reentrant). */ -}}
-{{ $deduped := slice -}}
-{{ $seen := dict -}}
-{{ range $registry -}}
-  {{ $n := "" -}}
-  {{ if not (reflect.IsMap .) }}{{ $n = printf "%v" . -}}
-  {{ else if isset . "name" }}{{ $n = printf "%v" (index . "name") -}}
-  {{ end -}}
-  {{ if and $n (index $seen $n) -}}
-    {{ warnf "Plugin %q is registered more than once in params.docsy.plugins; plugins load once, so later registrations are ignored: pass per-target settings through one entry's options." $n -}}
+{{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
+  keys, and `merge` yields plain maps without Hugo's case-insensitive access),
+  then order by weight, then name. */ -}}
+{{ $entries := slice -}}
+{{ range $name, $value := $registry -}}
+  {{ $entry := dict "name" $name "enable" true "defer" false "pagegate" "" "weight" 0 "options" dict -}}
+  {{ if reflect.IsMap $value -}}
+    {{ range $k, $v := $value }}{{ $entry = merge $entry (dict (lower $k) $v) }}{{ end -}}
+  {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
+    {{ $entry = merge $entry (dict "enable" false) -}}
   {{ else -}}
-    {{ if $n }}{{ $seen = merge $seen (dict $n true) }}{{ end -}}
-    {{ $deduped = $deduped | append . -}}
+    {{ warnidf "docsy-plugin-entry" "Plugin %q: entries are maps (use `%s: {}` or `%s: { enable: true }`); treating %v as an empty map." $name $name $name $value -}}
   {{ end -}}
+  {{ $entries = $entries | append $entry -}}
 {{ end -}}
-{{ $registry = $deduped -}}
-{{ if and .Site.Params.markmap.enable (in $names "markmap") -}}
-  {{ warnidf "docsy-markmap-legacy-superseded" "params.markmap.enable is superseded by the markmap entry in params.docsy.plugins, which loads markmap only on pages with markmap code blocks; remove the legacy param." -}}
-{{ else if and .Site.Params.markmap.enable (not (in $names "markmap")) -}}
-  {{ warnidf "docsy-markmap-legacy" "params.markmap.enable is deprecated: register markmap under params.docsy.plugins instead." -}}
-  {{/* The alias keeps exact pre-0.18 behavior: site-wide, ungated (custom
-    render hooks or raw markmap HTML never set the flag). */ -}}
-  {{ $registry = $registry | append (dict "name" "markmap" "pageGate" "") -}}
-{{ end -}}
-{{ if not (in $names "tabpane-persist") -}}
-  {{ $registry = $registry | append (dict "name" "tabpane-persist") -}}
-{{ end -}}
-{{/* click-to-copy predates the registry as an on-by-default feature; its
-  legacy gates keep their semantics: prism supersedes it, and
-  disable_click2copy_chroma opts out. The gates control auto-registration
-  only: a site-declared entry always emits (with a conflict warning under
-  prism, at emission). */ -}}
-{{ if and (not .Site.Params.prism_syntax_highlighting) (not .Site.Params.disable_click2copy_chroma) (not (in $names "click-to-copy")) -}}
-  {{ $registry = $registry | append (dict "name" "click-to-copy") -}}
-{{ end -}}
-{{ range $registry -}}
+{{ $entries = sort $entries "weight" -}}
+{{ range $entries -}}
   {{ $entry := . -}}
-  {{/* Names must be strings (YAML auto-types bare values); presence, not
-    truthiness, decides (a `name: 0` is a name). */ -}}
-  {{ $name := "" -}}
-  {{ if not (reflect.IsMap $entry) }}{{ $name = printf "%v" $entry }}{{ $entry = dict "name" $name -}}
-  {{ else if isset $entry "name" }}{{ $name = printf "%v" (index $entry "name") -}}
-  {{ end -}}
-  {{ if not $name -}}
-    {{ warnidf "docsy-plugin-unnamed" "Ignoring a params.docsy.plugins entry that has no name." -}}
-  {{ else if not (findRE `^[A-Za-z0-9_-]+$` $name) -}}
+  {{ $name := .name -}}
+  {{ if not (findRE `^[A-Za-z0-9_-]+$` $name) -}}
     {{/* Names address assets and partials by path; refuse anything that could
       traverse outside the plugin namespaces. */ -}}
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to letters, digits, hyphens, and underscores." $name -}}
-  {{ else if and (ne $entry.enable false) (ne (lower (printf "%v" $entry.enable)) "false") -}}
-    {{/* Site entries inherit their theme default's unset fields. */ -}}
-    {{ with index $defaults $name -}}
-      {{ $entry = merge . $entry -}}
-    {{ end -}}
-    {{ if and (eq $name "markmap") $entry.defer -}}
-      {{ warnidf "docsy-markmap-defer" "Ignoring defer on the markmap plugin: its script must run before the deferred autoloader it configures." -}}
-      {{ $entry = merge $entry (dict "defer" false) -}}
-    {{ end -}}
-    {{ $path := printf "js/plugins/%s.js" $name -}}
-    {{ if and (eq $name "click-to-copy") $.Site.Params.prism_syntax_highlighting -}}
-      {{ warnidf "docsy-c2c-prism" "click-to-copy is registered in params.docsy.plugins while params.prism_syntax_highlighting is on; both will load their own copy buttons." -}}
-    {{ end -}}
-    {{ with resources.Get $path -}}
-      {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
-        {{ with resources.Get (printf "scss/plugins/%s.scss" $name) -}}
-          {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
-          {{ if hugo.IsProduction -}}
-            {{ $css = $css | minify -}}
-          {{ end -}}
-          {{ $css = $css | fingerprint -}}
-          <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-          {{- "\n" -}}
-        {{ end -}}
-        {{ $companion := printf "scripts/plugins/%s.html" $name -}}
-        {{/* Companions emit once per name per page. */ -}}
-        {{ if and (templates.Exists (printf "_partials/%s" $companion)) (not ($emittedCompanions.Get $name)) -}}
-          {{ $emittedCompanions.Set $name true -}}
-          {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
-        {{ end -}}
-        {{ $opts := dict "params" ($entry.options | default dict) -}}
+    {{ continue -}}
+  {{ end -}}
+  {{/* A plugin's shim adapts parameters that predate the registry onto its
+    entry; each shim retires with its parameter's deprecation cycle. */ -}}
+  {{ $shim := printf "scripts/plugins/%s-shim.html" $name -}}
+  {{ if templates.Exists (printf "_partials/%s" $shim) -}}
+    {{ $entry = partial $shim (dict "Page" $ "Plugin" $entry) -}}
+  {{ end -}}
+  {{ if or (eq $entry.enable false) (eq (lower (printf "%v" $entry.enable)) "false") -}}
+    {{ continue -}}
+  {{ end -}}
+  {{ $gate := $entry.pagegate -}}
+  {{ $path := printf "js/plugins/%s.js" $name -}}
+  {{ with resources.Get $path -}}
+    {{ if or (not $gate) ($.Page.Store.Get $gate) -}}
+      {{ with resources.Get (printf "scss/plugins/%s.scss" $name) -}}
+        {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
         {{ if hugo.IsProduction -}}
-          {{ $opts = merge $opts (dict "minify" true) -}}
+          {{ $css = $css | minify -}}
         {{ end -}}
-        {{ $js := . | js.Build $opts | fingerprint -}}
-        <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+        {{ $css = $css | fingerprint -}}
+        <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
         {{- "\n" -}}
       {{ end -}}
-    {{ else -}}
-      {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
+      {{ $companion := printf "scripts/plugins/%s.html" $name -}}
+      {{ if templates.Exists (printf "_partials/%s" $companion) -}}
+        {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
+      {{ end -}}
+      {{ $opts := dict "params" ($entry.options | default dict) -}}
+      {{ if hugo.IsProduction -}}
+        {{ $opts = merge $opts (dict "minify" true) -}}
+      {{ end -}}
+      {{ $js := . | js.Build $opts | fingerprint -}}
+      <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- "\n" -}}
     {{ end -}}
+  {{ else -}}
+    {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
   {{ end -}}
 {{ end -}}

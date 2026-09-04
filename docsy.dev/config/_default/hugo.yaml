@@ -138,7 +138,8 @@ params:
     disable_toc: false
   # Dogfoods the plugin registry (the legacy markmap.enable is deprecated).
   docsy:
-    plugins: [markmap]
+    plugins:
+      markmap: { enable: true }
   drawio:
     enable: true
 

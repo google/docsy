@@ -21,6 +21,10 @@ console.log('hello-plugin', params.greeting);
 const quietJs = `console.log('quiet-plugin');
 `;
 
+const tabs =
+  '{{< tabpane text=true >}}\n' +
+  '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n';
+
 test('an enabled plugin is built and emitted, with options as @params', () => {
   const r = buildSite('plugins-loop', {
     files: {
@@ -31,7 +35,7 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         options:
           greeting: bonjour
 `,
@@ -53,13 +57,30 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
   );
 });
 
+test('an empty map registers a plugin with defaults', () => {
+  const r = buildSite('plugins-empty-map', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the plugin is emitted',
+  );
+});
+
 test('a disabled plugin ships zero bytes', () => {
   const r = buildSite('plugins-disabled', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         enable: false
 `,
   });
@@ -69,12 +90,71 @@ test('a disabled plugin ships zero bytes', () => {
     /js\/plugins\/hello/,
     "the page is free of the disabled plugin's script tag",
   );
-  // Theme-default plugins (click-to-copy) still publish; only the disabled
-  // one must be absent.
+  // Theme plugins (click-to-copy) still publish; only the disabled one must be
+  // absent.
   const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
   assert.ok(
     published.every((f) => !f.startsWith('hello')),
     'the public tree is free of the disabled plugin',
+  );
+});
+
+test('a scalar false turns an entry off', () => {
+  const r = buildSite('plugins-scalar-false', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: false
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the page is free of the plugin turned off by a scalar',
+  );
+});
+
+test('a quoted "false" enable disables the entry', () => {
+  // YAML strings are truthy in Go templates; a site writing enable: "false"
+  // (any case) means off, not on.
+  const r = buildSite('plugins-quoted-false', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello:
+        enable: 'False'
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the page is free of the string-disabled plugin',
+  );
+});
+
+test('a non-false scalar entry warns and counts as an empty map', () => {
+  const r = buildSite('plugins-scalar-true', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: true
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.stderr,
+    /entries are maps/,
+    'the scalar entry is called out in a build warning',
+  );
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the plugin is still emitted',
   );
 });
 
@@ -84,7 +164,7 @@ test('defer is honored on the emitted script tag', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         defer: true
 `,
   });
@@ -93,6 +173,34 @@ test('defer is honored on the emitted script tag', () => {
     r.publicFile('index.html'),
     /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/hello/,
     'plugin script tag carries defer',
+  );
+});
+
+test('emission order is weight, then name', () => {
+  const r = buildSite('plugins-order', {
+    files: {
+      ...content,
+      'assets/js/plugins/alpha.js': quietJs,
+      'assets/js/plugins/beta.js': quietJs,
+      'assets/js/plugins/gamma.js': quietJs,
+    },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      gamma: { weight: -1 }
+      beta: {}
+      alpha: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('index.html');
+  const order = [...html.matchAll(/js\/plugins\/(alpha|beta|gamma)/g)].map(
+    (m) => m[1],
+  );
+  assert.deepEqual(
+    order,
+    ['gamma', 'alpha', 'beta'],
+    'lower weight first, then name order',
   );
 });
 
@@ -111,7 +219,7 @@ test('a pageGate plugin is emitted only where its Store flag is set', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         pageGate: hasHello
 `,
   });
@@ -140,7 +248,7 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         options:
           greeting: bonjour
 `,
@@ -163,6 +271,34 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
   );
 });
 
+test('a shim partial scripts/plugins/NAME-shim.html decorates the entry', () => {
+  // The shim maps a pre-registry param onto the entry; here it turns the
+  // plugin off when a legacy param is set.
+  const r = buildSite('plugins-shim', {
+    files: {
+      ...content,
+      'assets/js/plugins/hello.js': helloJs,
+      'layouts/_partials/scripts/plugins/hello-shim.html':
+        '{{ $entry := .Plugin }}' +
+        '{{ if .Page.Site.Params.legacyHelloOff }}' +
+        '{{ $entry = merge $entry (dict "enable" false) }}{{ end }}' +
+        '{{ return $entry }}',
+    },
+    extraConfig: `params:
+  legacyHelloOff: true
+  docsy:
+    plugins:
+      hello: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the shim-disabled plugin is not emitted',
+  );
+});
+
 test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', () => {
   const r = buildSite('plugins-companion-css', {
     files: {
@@ -174,7 +310,7 @@ test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', ()
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello: {}
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -200,7 +336,7 @@ test('a plugin with no matching asset warns but does not fail the build', () => 
     extraConfig: `params:
   docsy:
     plugins:
-      - name: no-such-plugin
+      no-such-plugin: {}
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -218,7 +354,7 @@ test('a gated missing plugin still warns', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: ghost
+      ghost:
         pageGate: neverSet
 `,
   });
@@ -247,19 +383,25 @@ test('a site with a scalar params.docsy still builds', () => {
   );
 });
 
-test('a scalar params.docsy.plugins builds and warns', () => {
-  const r = buildSite('plugins-scalar-registry', {
-    files: content,
+test('a list-shaped params.docsy.plugins builds and warns', () => {
+  // The pre-release registry shape.
+  const r = buildSite('plugins-list-registry', {
+    files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     extraConfig: `params:
   docsy:
-    plugins: oops
+    plugins: [hello]
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /must be a list/,
+    /must be a map/,
     'the config shape is called out in a build warning',
+  );
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    'the list-registered plugin is ignored',
   );
 });
 
@@ -274,35 +416,19 @@ test('a falsy scalar params.docsy.plugins also warns', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /must be a list/,
+    /must be a map/,
     'the config shape is called out in a build warning',
   );
 });
 
-test('a bare-name registry entry is plugin shorthand', () => {
-  const r = buildSite('plugins-shorthand', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins: [hello]
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/hello/,
-    'the shorthand-registered plugin is emitted',
-  );
-});
-
 test('a numeric plugin name resolves its asset', () => {
-  // YAML auto-types `name: 2048` to an int.
+  // YAML keys are strings, but a key like 2048 must still resolve.
   const r = buildSite('plugins-numeric-name', {
     files: { ...content, 'assets/js/plugins/2048.js': quietJs },
     extraConfig: `params:
   docsy:
     plugins:
-      - name: 2048
+      2048: {}
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -325,8 +451,8 @@ test('a path-traversing plugin name is rejected with a warning', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: ../search
-      - name: hello
+      ../search: {}
+      hello: {}
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -343,158 +469,70 @@ test('a path-traversing plugin name is rejected with a warning', () => {
   assert.match(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'later well-formed entries still emit',
+    'well-formed entries still emit',
   );
 });
 
-test('a nameless registry entry is skipped with a warning', () => {
-  const r = buildSite('plugins-nameless', {
+test('plugin output is fingerprinted with SRI in development too', () => {
+  const r = buildSite('plugins-dev-sri', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
+    args: ['--environment', 'development'],
     extraConfig: `params:
   docsy:
     plugins:
-      - options:
-          greeting: bonjour
-      - name: hello
+      hello: {}
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /has no name/,
-    'the nameless entry is called out in a build warning',
-  );
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/hello/,
-    'later well-formed entries still emit',
-  );
+  const tag = r
+    .publicFile('index.html')
+    .match(/<script[^>]*src="\/js\/plugins\/hello\.[0-9a-f]{64}\.js"[^>]*>/);
+  assert.ok(tag, 'the development build publishes a hashed path');
+  assert.match(tag[0], /integrity="sha256-/, 'the tag carries SRI');
 });
 
-test('distinct builds of one source publish distinct paths, in development too', () => {
-  // Per-language sites build one asset once per language, with per-language
-  // options: the builds must not share one published path (the
-  // always-fingerprint rule; implementation page).
-  const r = buildSite('plugins-per-language', {
-    files: {
-      'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
-      'content/_index.fr.md': '---\ntitle: Accueil\n---\nCorps\n',
-      'assets/js/plugins/hello.js': helloJs,
-    },
-    args: ['--environment', 'development'],
-    extraConfig: `defaultContentLanguage: en
-languages:
-  en:
-    weight: 1
-    params:
-      docsy:
-        plugins:
-          - name: hello
-            options:
-              greeting: hello
-  fr:
-    weight: 2
-    params:
-      docsy:
-        plugins:
-          - name: hello
-            options:
-              greeting: bonjour
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const src = (page) =>
-    r
-      .publicFile(page)
-      .match(/<script[^>]*src="\/(js\/plugins\/hello[^"]*\.js)"/)[1];
-  const en = src('index.html');
-  const fr = src('fr/index.html');
-  assert.notEqual(en, fr, 'the two language builds publish distinct paths');
-  assert.match(
-    r.publicFile(en),
-    /hello/,
-    'the English options reach its build',
-  );
-  assert.match(
-    r.publicFile(fr),
-    /bonjour/,
-    'the French options reach its build',
-  );
-});
+// --- Theme plugins: Hugo's config merge layers the site map over the theme's
 
-test('a duplicate registration emits one script', () => {
-  const r = buildSite('plugins-duplicate-once', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins: [hello, hello]
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const tags = r.publicFile('index.html').match(/js\/plugins\/hello/g) ?? [];
-  assert.equal(tags.length, 1, 'the plugin script is emitted once');
-});
-
-const tabs =
-  '{{< tabpane text=true >}}\n' +
-  '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n';
-
-test('a redeclared theme default inherits its page gate', () => {
-  // A site redeclaring tabpane-persist (e.g. to reorder it) must not lose
-  // the hasTabs gate it never set.
-  const r = buildSite('plugins-redeclare-gate', {
+test('a site entry for a theme plugin inherits the unset fields', () => {
+  // Redeclaring tabpane-persist (e.g. to pass options) must not lose the
+  // hasTabs gate the site never set.
+  const r = buildSite('plugins-theme-inherit', {
     files: {
       ...content,
       'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
     },
-    title: 'Docsy redeclare fixture',
+    title: 'Docsy theme-inherit fixture',
     extraConfig: `params:
   docsy:
-    plugins: [tabpane-persist]
+    plugins:
+      tabpane-persist:
+        options: { note: kept }
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.publicFile('docs/tabs/index.html'),
     /js\/plugins\/tabpane-persist/,
-    'the redeclared plugin loads on pages using tabs',
+    'the plugin loads on pages using tabs',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /tabpane-persist/,
-    'pages without tabs stay free of the redeclared plugin',
+    'pages without tabs stay free of the plugin',
   );
 });
 
-test('a redeclared theme default inherits defer', () => {
-  const r = buildSite('plugins-redeclare-defer', {
-    files: content,
-    title: 'Docsy redeclare-defer fixture',
-    extraConfig: `params:
-  docsy:
-    plugins:
-      - name: click-to-copy
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('index.html'),
-    /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/click-to-copy/,
-    'the redeclared plugin keeps the deferred tag',
-  );
-});
-
-test('an explicit field overrides the inherited default', () => {
-  const r = buildSite('plugins-redeclare-override', {
+test('an explicit field overrides the inherited theme default', () => {
+  const r = buildSite('plugins-theme-override', {
     files: {
       ...content,
       'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
     },
-    title: 'Docsy redeclare-override fixture',
+    title: 'Docsy theme-override fixture',
     extraConfig: `params:
   docsy:
     plugins:
-      - name: tabpane-persist
+      tabpane-persist:
         pageGate: ''
 `,
   });
@@ -506,99 +544,23 @@ test('an explicit field overrides the inherited default', () => {
   );
 });
 
-test('click-to-copy registered alongside prism draws a warning', () => {
-  // The legacy prism/copy-button exclusivity is advisory once a site
-  // registers the plugin explicitly: emit both, but say so.
-  const r = buildSite('plugins-c2c-prism-conflict', {
-    files: content,
-    title: 'Docsy prism-conflict fixture',
-    extraConfig: `params:
-  prism_syntax_highlighting: true
-  docsy:
-    plugins:
-      - name: click-to-copy
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /click-to-copy.*prism|prism.*click-to-copy/i,
-    'the conflicting registration is called out in a build warning',
-  );
-});
-
-test('a quoted "false" enable disables the entry', () => {
-  // YAML strings are truthy in Go templates; a site writing enable: "false"
-  // (any case) means off, not on.
-  const r = buildSite('plugins-quoted-false', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+test('a scalar false turns a theme plugin off', () => {
+  const r = buildSite('plugins-theme-off', {
+    files: {
+      ...content,
+      'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
+    },
+    title: 'Docsy theme-off fixture',
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
-        enable: 'False'
+      tabpane-persist: false
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /js\/plugins\/hello/,
-    'the page is free of the string-disabled plugin',
-  );
-});
-
-test('a duplicated registry name draws a warning', () => {
-  const r = buildSite('plugins-duplicate-warn', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins:
-      - name: hello
-      - name: hello
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /hello.*more than once/i,
-    'the duplicate name is called out in a build warning',
-  );
-});
-
-test('a disabled click-to-copy entry draws no prism conflict warning', () => {
-  const r = buildSite('plugins-c2c-prism-disabled', {
-    files: content,
-    title: 'Docsy prism-no-conflict fixture',
-    extraConfig: `params:
-  prism_syntax_highlighting: true
-  docsy:
-    plugins:
-      - name: click-to-copy
-        enable: false
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(
-    r.stderr,
-    /docsy-c2c-prism/,
-    'conflict warning is omitted for an entry that never emits',
-  );
-});
-
-test('a falsy numeric name still resolves its asset', () => {
-  // YAML auto-types `name: 0`; presence, not truthiness, decides.
-  const r = buildSite('plugins-zero-name', {
-    files: { ...content, 'assets/js/plugins/0.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins:
-      - name: 0
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/0\./,
-    'the zero-named plugin is emitted',
+    r.publicFile('docs/tabs/index.html'),
+    /tabpane-persist/,
+    'the page is free of the theme plugin turned off by the site',
   );
 });

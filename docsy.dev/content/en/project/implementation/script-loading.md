@@ -52,18 +52,18 @@ theme's:
 
 ### Pre-registry parameters
 
-A plugin whose behavior was once controlled by other parameters ships a
-compatibility partial, `_partials/scripts/plugins/NAME.compat.html`, that the
-loop applies to the plugin's merged entry before the enable and gate checks: it
-receives `(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry.
-Each retires with its parameter's deprecation cycle by deleting the file:
+A plugin whose behavior was once controlled by other parameters ships a shim
+partial, `_partials/scripts/plugins/NAME-shim.html`, that the loop applies to
+the plugin's merged entry before the enable and gate checks: it receives
+`(dict "Page" PAGE "Plugin" ENTRY)` and returns the adjusted entry. Each retires
+with its parameter's deprecation cycle by deleting the file:
 
-- `markmap.compat.html`: `params.markmap.enable` (deprecated,
+- `markmap-shim.html`: `params.markmap.enable` (deprecated,
   `docsy-markmap-legacy`), when set, turns markmap on and **ungated**, exactly
   the pre-0.18 site-wide behavior (custom render hooks and raw markmap HTML
   never set the flag), whatever the registry says; the warning asks for its
   removal.
-- `click-to-copy.compat.html`: `params.disable_click2copy_chroma` (deprecated,
+- `click-to-copy-shim.html`: `params.disable_click2copy_chroma` (deprecated,
   `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false` is the
   registry form. `params.prism_syntax_highlighting` also turns it off (Prism
   ships its own copy button); Prism support is a live feature, so only the

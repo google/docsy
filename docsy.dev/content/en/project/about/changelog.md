@@ -167,9 +167,10 @@ history since 0.17.0][].
   fingerprints, and loads it with SRI ([#2788][], [#2789][]).
 - Converted the first theme features to plugins ([markmap, tabpane-persist, and
   click-to-copy][0.18.0-blog-plugins]): disabled integrations ship zero bytes,
-  markmap and tab persistence load only on pages that use them (the deprecated
-  `params.markmap.enable` keeps site-wide loading), and the markmap autoloader
-  is vendored at build time with SRI ([#2791][]).
+  markmap and tab persistence load only on pages that use them, and the markmap
+  autoloader is vendored at build time with SRI. Deprecated
+  `params.markmap.enable` (keeps site-wide loading while present) and
+  `params.disable_click2copy_chroma` in favor of registry entries ([#2791][]).
 
 **Other changes**:
 

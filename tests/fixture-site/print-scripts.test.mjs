@@ -30,7 +30,8 @@ test('page-gated plugins reach section print output', () => {
   section: [HTML, print]
 params:
   docsy:
-    plugins: [markmap]
+    plugins:
+      markmap: { enable: true }
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);

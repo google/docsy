@@ -616,27 +616,28 @@ Automatically renders to:
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ````
 
-To enable MarkMap, register it under `params.docsy.plugins` in
-`hugo.toml`/`hugo.yaml`/`hugo.json`:
+To enable MarkMap, turn on its plugin in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-[params.docsy]
-plugins = ['markmap']
+[params.docsy.plugins.markmap]
+enable = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
   docsy:
-    plugins: [markmap]
+    plugins:
+      markmap:
+        enable: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
     "docsy": {
-      "plugins": ["markmap"]
+      "plugins": { "markmap": { "enable": true } }
     }
   }
 }
@@ -647,9 +648,7 @@ params:
 
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook), set
-`pageGate: ''` on the entry to load the scripts site-wide. Don't set `defer` on
-the entry: the plugin script must run before the deferred autoloader it
-configures.
+`pageGate: ''` on the entry to load the scripts site-wide.
 
 > [!NOTE]
 >
