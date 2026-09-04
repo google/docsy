@@ -161,16 +161,12 @@ history since 0.17.0][].
 
 **New**:
 
-- **Plugins**: added `params.docsy.plugins`, a registry for dropping in scripts
-  (with optional styles and markup) without layout overrides. Declare
-  `assets/js/plugins/NAME.js` in your site config and Docsy builds,
-  fingerprints, and loads it with SRI ([#2788][], [#2789][]).
-- Converted the first theme features to plugins ([markmap, tabpane-persist, and
-  click-to-copy][0.18.0-blog-plugins]): disabled integrations ship zero bytes,
-  markmap and tab persistence load only on pages that use them, and the markmap
-  autoloader is vendored at build time with SRI. Deprecated
-  `params.markmap.enable` (keeps site-wide loading while present) and
-  `params.disable_click2copy_chroma` in favor of registry entries ([#2791][]).
+- **[Plugins][ug-plugins]**: added `params.docsy.plugins`, a registry that loads
+  site scripts without layout overrides ([#2788][], [#2789][]).
+- Converted markmap, tabpane-persist, and click-to-copy to plugins: unused
+  integrations ship no JS. Deprecated `params.markmap.enable` and
+  `params.disable_click2copy_chroma` in favor of registry entries ([upgrade
+  notes][0.18.0-blog-plugins], [#2791][]).
 
 **Other changes**:
 
@@ -220,6 +216,7 @@ history since 0.17.0][].
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
+[ug-plugins]: /docs/content/lookandfeel/#load-scripts-as-plugins
 [git history since 0.17.0]:
   https://github.com/google/docsy/compare/v0.17.0...main
 

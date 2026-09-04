@@ -1,8 +1,8 @@
 // Shared spec for the scripts.html goldens: fixture builds, the script-region
 // extractor, and whitespace normalization. Consumed by scripts-golden.test.mjs
 // (assert) and update-scripts-goldens.mjs (refresh). Configs stay offline-safe:
-// features whose partials call resources.GetRemote (mermaid, katex) are not
-// enabled here.
+// features that fetch at build time (mermaid, katex, markmap) are not enabled
+// here; their own nets cover them.
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,11 +27,7 @@ const files = {
 const configs = [
   { name: 'defaults', extraConfig: '' },
   {
-    // Every offline-safe loading mechanism lit at once: bundle members
-    // (plantuml, drawio), raw static files (deflate, prism), Algolia's CDN +
-    // config tags, and offline search replacing the default search script.
-    // markmap needs network (vendored fetch); markmap-plugin.test.mjs covers
-    // it.
+    // Every offline-safe loading mechanism lit at once.
     name: 'featureful',
     extraConfig: `params:
   offlineSearch: true

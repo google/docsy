@@ -272,8 +272,6 @@ test('a companion partial scripts/plugins/NAME.html is emitted with the plugin',
 });
 
 test('a shim partial scripts/plugins/NAME-shim.html decorates the entry', () => {
-  // The shim maps a pre-registry param onto the entry; here it turns the
-  // plugin off when a legacy param is set.
   const r = buildSite('plugins-shim', {
     files: {
       ...content,
@@ -440,8 +438,6 @@ test('a numeric plugin name resolves its asset', () => {
 });
 
 test('a path-traversing plugin name is rejected with a warning', () => {
-  // Names address assets and partials by path; anything outside the
-  // [A-Za-z0-9_-] allowlist is refused before path construction.
   const r = buildSite('plugins-name-traversal', {
     files: {
       ...content,
@@ -491,11 +487,7 @@ test('plugin output is fingerprinted with SRI in development too', () => {
   assert.match(tag[0], /integrity="sha256-/, 'the tag carries SRI');
 });
 
-// --- Theme plugins: Hugo's config merge layers the site map over the theme's
-
 test('a site entry for a theme plugin inherits the unset fields', () => {
-  // Redeclaring tabpane-persist (e.g. to pass options) must not lose the
-  // hasTabs gate the site never set.
   const r = buildSite('plugins-theme-inherit', {
     files: {
       ...content,

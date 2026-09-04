@@ -1,7 +1,5 @@
 import * as params from '@params';
 
-// Configure the markmap autoloader: manual mode, prism transform excluded, and
-// render once ready.
 (function () {
   'use strict';
 

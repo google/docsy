@@ -137,8 +137,6 @@ test('a path-bearing markmap.version fails the build', () => {
 });
 
 test('the legacy param wins over a registry entry, site-wide, with a warning', () => {
-  // A site that registered markmap but kept params.markmap.enable gets the
-  // legacy behavior until it removes the param; the warning says so.
   const r = buildSite('markmap-legacy-and-registry', {
     files,
     extraConfig: `params:
@@ -189,8 +187,6 @@ test('a deferred markmap entry still renders (plugin merges, never replaces)', (
 });
 
 test('a markmap fence renders as a default code block when markmap is off', () => {
-  // The render hook sets the gate flag but leaves rendering to Hugo, so a
-  // disabled or unregistered markmap never changes how the fence looks.
   const r = buildSite('markmap-fence-default', {
     files,
     title: 'Docsy markmap fence fixture',

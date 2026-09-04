@@ -95,10 +95,9 @@ Warnings are issued with `warnidf`, so each is suppressible through Hugo's
 - Each plugin builds individually with `js.Build`; the entry's `options` travel
   as build `params`, so the module reads them with
   `import * as params from '@params'`. Production builds add `minify`.
-- **Fingerprinting runs in every environment**, not just production: the script
-  tag always carries SRI.
-- The script tag carries SRI attributes (`integrity`, `crossorigin`), and
-  `defer` when the entry sets it.
+- The script tag always carries SRI attributes (`integrity`, `crossorigin`), so
+  **fingerprinting runs in every environment**, not just production; `defer` is
+  added when the entry sets it.
 
 ## Companions
 

@@ -539,10 +539,8 @@ project's configuration file.
 
 #### Copy to clipboard
 
-If you are using a Docsy 0.6.0 or later, code blocks show a "Copy to clipboard"
-button in the top right-hand corner. To disable this functionality, set
-`disable_click2copy_chroma` to `true` in your configuration file, or turn the
-[`click-to-copy` plugin](#load-scripts-as-plugins) off.
+Code blocks show a "Copy to clipboard" button in the top right-hand corner. To
+remove it, turn the [`click-to-copy` plugin](#load-scripts-as-plugins) off.
 
 ### Code highlighting with Prism
 
@@ -987,11 +985,6 @@ params:
     plugins:
       click-to-copy: false
 ```
-
-> [!NOTE]
->
-> This section covers the essentials only: plugin authoring docs are in
-> progress.
 
 <!-- prettier-ignore-start -->
 [js-params]: https://gohugo.io/functions/js/build/#params

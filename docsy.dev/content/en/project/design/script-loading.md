@@ -89,9 +89,7 @@ configuration merge is deep for maps, so a site's map layers over the theme's:
   that predate the registry, a per-plugin shim partial that decorates the
   plugin's entry and is deleted with the parameter's deprecation cycle.
 - **Plugins are site-wide**: the registry is read from site configuration and is
-  not a per-language surface; per-language divergence is unsupported. Every
-  emitted plugin script is fingerprinted in every environment because its tag
-  always carries SRI.
+  not a per-language surface; per-language divergence is unsupported.
 - **Order** is `weight` ascending, then name; Hugo's idiom for ordering named
   things.
 
