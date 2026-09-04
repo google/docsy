@@ -34,7 +34,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
   assert.doesNotMatch(
     bundle,
     /markmap/i,
-    'main bundle carries no markmap code, not even a template-emptied stub',
+    'the main bundle is free of markmap code, template-emptied stubs included',
   );
 });
 
@@ -94,7 +94,7 @@ test('a registry-declared markmap entry supersedes the legacy alias', () => {
   assert.doesNotMatch(
     r.stderr,
     /deprecated/,
-    'a registry-only setup draws no deprecation warning',
+    'a registry-only setup builds free of deprecation warnings',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
@@ -160,7 +160,7 @@ test('the legacy param wins over a registry entry, site-wide, with a warning', (
   );
 });
 
-test('a deferred markmap entry still renders (plugin merges, never replaces)', () => {
+test('a deferred markmap entry keeps the autoloader exports (plugin merges)', () => {
   const r = buildSite('markmap-defer', {
     files,
     extraConfig: `params:
@@ -182,7 +182,7 @@ test('a deferred markmap entry still renders (plugin merges, never replaces)', (
   assert.doesNotMatch(
     js,
     /window\.markmap\s*=\s*\{/,
-    'the plugin never replaces window.markmap wholesale',
+    'the plugin merges into window.markmap',
   );
 });
 

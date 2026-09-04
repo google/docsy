@@ -29,11 +29,12 @@ import * as params from '@params';
   markmap.autoLoader = Object.assign(markmap.autoLoader || {}, {
     manual: true,
     onReady() {
-      const { autoLoader, builtInPlugins } = window.markmap;
-      autoLoader.transformPlugins = builtInPlugins.filter(
+      // The autoloader calls this on its own options snapshot (`this`), which
+      // is what its renderer reads; setting the exports object does nothing.
+      this.transformPlugins = window.markmap.builtInPlugins.filter(
         (plugin) => plugin.name !== 'prism',
       );
-      if (parents.size) autoLoader.renderAll();
+      if (parents.size) window.markmap.autoLoader.renderAll();
     },
   });
 })();

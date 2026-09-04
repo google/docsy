@@ -20,6 +20,19 @@ const files = {
     '{{% /blocks/section %}}\n',
   'content/docs/_index.md':
     '---\ntitle: Docs\nmenu: { main: { weight: 10 } }\n---\nDocs landing\n',
+  'content/docs/tabs.md': `---
+title: Tabs
+---
+
+{{< tabpane text=true >}}
+{{< tab header="One" >}}one{{< /tab >}}
+{{< tab header="Two" >}}two{{< /tab >}}
+{{< /tabpane >}}
+
+\`\`\`sh
+echo hi
+\`\`\`
+`,
   'content/docs/diagrams.md': `---
 title: Diagrams
 ---
@@ -61,13 +74,14 @@ ${Array.from(
 `,
 ).join('')}params:
   offlineSearch: true
-  markmap:
-    enable: true
+  docsy:
+    plugins:
+      markmap: { enable: true }
   plantuml:
     enable: true
 `,
     },
-    pages: ['', 'docs/', 'docs/diagrams/'],
+    pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
   },
   // gcs_engine_id renders the navbar search input, arming search.js's
   // delegated Enter handler (the offline variant swaps that file out).
@@ -210,6 +224,39 @@ test('js behavior: a markmap code block renders as an SVG mind map', async () =>
     });
     const svg = await page.waitForSelector('.markmap svg', { timeout: 15000 });
     assert.ok(svg, 'markmap SVG is in the DOM');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: the copy button is added to code blocks', async () => {
+  const { page, pageErrors } = await newProbePage();
+  try {
+    await page.goto(`${servers.features.origin}/docs/tabs/`, {
+      waitUntil: 'networkidle0',
+    });
+    const button = await page.waitForSelector('.highlight .td-click-to-copy', {
+      timeout: 5000,
+    });
+    assert.ok(button, 'a copy button is in the code block');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: a selected tab is re-selected after reload', async () => {
+  const { page, pageErrors } = await newProbePage();
+  try {
+    const url = `${servers.features.origin}/docs/tabs/`;
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    await page.click('[data-td-tp-persist="two"]');
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    const active = await page.$eval('.nav-tabs .nav-link.active', (el) =>
+      el.getAttribute('data-td-tp-persist'),
+    );
+    assert.equal(active, 'two', 'the persisted tab is active after reload');
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();

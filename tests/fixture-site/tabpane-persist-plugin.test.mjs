@@ -50,7 +50,7 @@ test('tabpane-persist ships only on pages using tabs, fingerprinted', () => {
     assert.doesNotMatch(
       r.publicFile(page),
       /tabpane-persist/,
-      `${page} carries no tabpane-persist script`,
+      `${page} is free of the tabpane-persist script`,
     );
   }
 });
@@ -99,6 +99,6 @@ test('persist="disabled" tabs ship no persistence script', () => {
   assert.doesNotMatch(
     r.publicFile('docs/off/index.html'),
     /tabpane-persist/,
-    'a page opting out of persistence carries no persistence script',
+    'a page opting out of persistence is free of the persistence script',
   );
 });
