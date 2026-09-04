@@ -675,13 +675,13 @@ params:
 
 ### MarkMap version
 
-Docsy fetches the [markmap-autoloader][] package at build time at the
-[pinned version](#script-dep-versions), currently {{% param markmap.version %}},
-and serves it from your site with subresource integrity; to use a different
-version, set `params.markmap.version`. Sites that restrict Hugo's remote fetches
-(`security.http`) must allow `cdn.jsdelivr.net`. The autoloader itself loads
-MarkMap's runtime libraries from a public CDN in the browser, at versions it
-pins.
+Docsy fetches the [markmap-autoloader][] package's entry file at build time at
+the [pinned version](#script-dep-versions), currently
+{{% param markmap.version %}}, and serves it from your site with subresource
+integrity; to use a different version, set `params.markmap.version`. Sites that
+restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
+The autoloader itself loads MarkMap's runtime libraries from a public CDN in the
+browser, at versions it pins.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 

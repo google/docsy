@@ -42,7 +42,7 @@ params:
   as a setting; non-map `options` warn the same way and count as none.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
   `.Page.Store` flag; `pageGate: ''` (or a boolean) clears an inherited gate.
-  `weight` is an integer.
+- `weight` is an integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
   strings are truthy in Go templates). A scalar entry value of `false` turns the
   entry off; any other scalar has already replaced the theme's entry in Hugo's
@@ -57,8 +57,10 @@ Hugo's config merge layers a site's map over it, so a site changes one field
 theme's:
 
 - `click-to-copy`: on, deferred.
-- `tabpane-persist`: on, page-gated on `hasTabs` (set by the tabpane shortcode
-  when persistence is active).
+- `tabpane-persist`: on, ungated. The tabpane shortcode sets `hasTabs` when
+  persistence is active, for sites that gate the plugin themselves
+  (`pageGate: hasTabs`); the theme doesn't, because a tabpane included through
+  `.RenderShortcodes` flags the included page, not the page that ships.
 - `markmap`: off, page-gated on `hasMarkmap`. The markmap code-block render hook
   sets the flag and otherwise renders Hugo's default code block
   (`transform.HighlightCodeBlock`), which the plugin script transforms in the

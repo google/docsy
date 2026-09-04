@@ -26,9 +26,9 @@ integrations onto the [plugin loop](#plugin-loop):
   concatenated into `main.js` (`scripts/main-bundle.html`), minified and
   fingerprinted in production. A site param picks which search script is
   bundled, `search.js` or `offline-search.js`.
-- **Theme plugins**: markmap, tab-pane persistence, and click-to-copy ride the
-  plugin loop as theme-default registry entries, their legacy params aliased for
-  a deprecation cycle ([implementation notes][impl]).
+- **Theme plugins**: MarkMap, tab persistence, and click-to-copy ride the plugin
+  loop as theme-default registry entries, their legacy params aliased for a
+  deprecation cycle ([implementation notes][impl]).
 - **Pinned CDN tags with inline configuration**: Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
   re-served as local assets; Mermaid, whose pinned version is validated at build
@@ -39,9 +39,11 @@ integrations onto the [plugin loop](#plugin-loop):
 
 Gating lives at two levels. The dispatcher gates PlantUML (site param) and
 Mermaid and KaTeX (`.Page.Store` flags); the plugin loop's `pageGate` carries
-the same page-flag pattern for markmap (`hasMarkmap`) and tab-pane persistence
-(`hasTabs`), while the remaining sub-partials gate internally (Algolia search
-configuration, Prism, search bundle choice, dark mode, ScrollSpy).
+the same page-flag pattern for MarkMap (`hasMarkmap`), while the remaining
+sub-partials gate internally (Algolia search configuration, Prism, search bundle
+choice, dark mode, ScrollSpy). Tab persistence ships ungated: its flag is set by
+a shortcode, and a shortcode inside a page included through `.RenderShortcodes`
+flags the included page, not the one that ships.
 
 ## The dispatcher as a seam
 
@@ -51,7 +53,7 @@ The decomposition has two design consequences:
   system, so a site can replace one sub-partial by shadowing one file instead of
   copying all of `scripts.html`.
 - **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where the first built-in integrations (markmap, tab-pane
+  plugged in, and where the first built-in integrations (MarkMap, tab
   persistence, click-to-copy) converted onto the loop in 0.18 ([#2789][]).
 
 ### Override points
@@ -75,7 +77,9 @@ pattern. For the registry contract, shape guards, and build details, see the
 
 The registry is a **map keyed by plugin name**, and the theme declares its own
 plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
-configuration merge is deep for maps, so a site's map layers over the theme's:
+configuration merge is deep for maps (under the default `params` merge strategy;
+a site setting `params._merge: shallow` drops the theme's entries), so a site's
+map layers over the theme's:
 
 - **Supersession and inheritance come free**: a site entry for a theme plugin
   merges field by field (`markmap: { enable: true }` keeps the theme's

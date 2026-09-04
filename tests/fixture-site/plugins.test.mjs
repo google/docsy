@@ -540,51 +540,43 @@ test('plugin output is fingerprinted with SRI in development too', () => {
 });
 
 test('a site entry for a theme plugin inherits the unset fields', () => {
+  // The theme declares click-to-copy with `defer: true`.
   const r = buildSite('plugins-theme-inherit', {
-    files: {
-      ...content,
-      'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
-    },
-    title: 'Docsy theme-inherit fixture',
+    files: content,
     extraConfig: `params:
   docsy:
     plugins:
-      tabpane-persist:
+      click-to-copy:
         options: { note: kept }
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
-    r.publicFile('docs/tabs/index.html'),
-    /js\/plugins\/tabpane-persist/,
-    'the plugin loads on pages using tabs',
-  );
-  assert.doesNotMatch(
     r.publicFile('index.html'),
-    /tabpane-persist/,
-    'pages without tabs stay free of the plugin',
+    /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/click-to-copy/,
+    'the inherited defer reaches the tag',
   );
 });
 
 test('an explicit field overrides the inherited theme default', () => {
   const r = buildSite('plugins-theme-override', {
-    files: {
-      ...content,
-      'content/docs/tabs.md': '---\ntitle: Tabs\n---\n\n' + tabs,
-    },
-    title: 'Docsy theme-override fixture',
+    files: content,
     extraConfig: `params:
   docsy:
     plugins:
-      tabpane-persist:
-        pageGate: ''
+      click-to-copy:
+        defer: false
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/tabpane-persist/,
-    'an explicitly cleared page gate ships the plugin site-wide',
+  const tag = r
+    .publicFile('index.html')
+    .match(/<script[^>]*src="\/js\/plugins\/click-to-copy[^>]*>/);
+  assert.ok(tag, 'the plugin tag is emitted');
+  assert.doesNotMatch(
+    tag[0],
+    /\bdefer\b/,
+    'the site value wins over the theme default',
   );
 });
 
@@ -744,7 +736,11 @@ test('null options mean none, without a warning', () => {
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(r.stderr, /options must be a map/, 'no options warning');
+  assert.doesNotMatch(
+    r.stderr,
+    /options must be a map/,
+    'the build is free of an options warning',
+  );
   assert.match(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,

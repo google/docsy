@@ -124,8 +124,8 @@ test('a path-bearing markmap.version fails the build', () => {
   assert.notEqual(r.status, 0, 'hugo build fails');
   assert.match(
     r.stderr,
-    /markmap\.version/,
-    'the bad version is called out in the build error',
+    /markmap\.version .* contains characters that don't belong in a version/,
+    'the guard itself refuses the version, before any fetch',
   );
 });
 

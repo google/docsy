@@ -11,7 +11,7 @@ params:
     # https://www.docsy.dev/project/implementation/script-loading/
     plugins:
       click-to-copy: { defer: true }
-      tabpane-persist: { pageGate: hasTabs }
+      tabpane-persist: {}
       markmap: { enable: false, pageGate: hasMarkmap }
   katex:
     version: 0.18.4

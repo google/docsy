@@ -45,8 +45,8 @@ pre-release list shape included), name allowlisting, theme-plugin layering
 through Hugo's config merge (inheritance, override, turn-off), and SRI in
 development builds. Companion nets:
 
-- [`tabpane-persist-plugin.test.mjs`][tabpane-test]: page gating, persistence
-  opt-out, and theme-plugin shadowing.
+- [`tabpane-persist-plugin.test.mjs`][tabpane-test]: the ungated default, opt-in
+  gating on `hasTabs`, persistence opt-out, and theme-plugin shadowing.
 - [`markmap-plugin.test.mjs`][markmap-test] and
   [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts. The
   markmap cases stub the vendoring companion with a marker to stay offline; the

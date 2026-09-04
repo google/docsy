@@ -1,6 +1,9 @@
-// tabpane-persist as a page-gated plugin. Also pins the partialCached trap: a
-// page with no tabs must not inherit the script from a cached scripts.html
-// render of a tabbed page, and vice versa.
+// tabpane-persist as a theme plugin: on every page by default (a tabpane
+// included through .RenderShortcodes flags the included page, not the
+// includer, so a default gate would miss it), gateable on the `hasTabs` flag
+// the shortcode sets. The gated case also pins the partialCached trap: a page
+// with no tabs must not inherit the script from a cached scripts.html render
+// of a tabbed page, and vice versa.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -21,19 +24,29 @@ const files = {
   'content/docs/mmm-plain.md': '---\ntitle: Plain\n---\nNo tabs here\n',
   'content/docs/zzz-tabs.md': '---\ntitle: Tabs last\n---\n\n' + tabs,
 };
+const allPages = [
+  'index.html',
+  'docs/index.html',
+  'docs/aaa-tabs/index.html',
+  'docs/mmm-plain/index.html',
+  'docs/zzz-tabs/index.html',
+];
+const scriptRe = /<script[^>]*src="\/(js\/plugins\/tabpane-persist[^"]*\.js)"/;
+const gated = `params:
+  docsy:
+    plugins:
+      tabpane-persist: { pageGate: hasTabs }
+`;
 
-test('tabpane-persist ships only on pages using tabs, fingerprinted', () => {
-  const r = buildSite('tabpane-persist-gate', {
+test('tabpane-persist ships on every page by default, fingerprinted', () => {
+  const r = buildSite('tabpane-persist-default', {
     files,
     // Own title: the default embeds the fixture name, which this very test
     // would then match in the rendered pages.
     title: 'Docsy tab-persistence fixture',
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-
-  const scriptRe =
-    /<script[^>]*src="\/(js\/plugins\/tabpane-persist[^"]*\.js)"/;
-  for (const page of ['docs/aaa-tabs/index.html', 'docs/zzz-tabs/index.html']) {
+  for (const page of allPages) {
     const m = r.publicFile(page).match(scriptRe);
     assert.ok(m, `${page} loads the tabpane-persist plugin`);
     assert.match(
@@ -41,6 +54,18 @@ test('tabpane-persist ships only on pages using tabs, fingerprinted', () => {
       /td-tp-persist/,
       'the emitted plugin is the persistence script',
     );
+  }
+});
+
+test('gated on hasTabs, tabpane-persist ships only on pages using tabs', () => {
+  const r = buildSite('tabpane-persist-gate', {
+    files,
+    title: 'Docsy gated tab-persistence fixture',
+    extraConfig: gated,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  for (const page of ['docs/aaa-tabs/index.html', 'docs/zzz-tabs/index.html']) {
+    assert.match(r.publicFile(page), scriptRe, `${page} loads the plugin`);
   }
   for (const page of [
     'index.html',
@@ -84,7 +109,7 @@ test('a project plugin shadows the theme plugin of the same name', () => {
   );
 });
 
-test('persist="disabled" tabs ship no persistence script', () => {
+test('persist="disabled" tabs set no flag: gated, the page ships no script', () => {
   const r = buildSite('tabpane-persist-optout', {
     files: {
       'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -94,10 +119,17 @@ test('persist="disabled" tabs ship no persistence script', () => {
         '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n',
     },
     title: 'Docsy persistence opt-out fixture',
+    extraConfig: gated,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('docs/off/index.html');
   assert.doesNotMatch(
-    r.publicFile('docs/off/index.html'),
+    html,
+    /data-td-tp-persist/,
+    'the opted-out tabs carry no persistence attributes',
+  );
+  assert.doesNotMatch(
+    html,
     /tabpane-persist/,
     'a page opting out of persistence is free of the persistence script',
   );

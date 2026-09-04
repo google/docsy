@@ -36,10 +36,13 @@
     {{ warnidf "docsy-plugin-entry" "Plugin %q: %v is not a plugin entry (a map); write `%s: { enable: true }` to enable it with its defaults. Skipping it." $name $value $name -}}
     {{ continue -}}
   {{ end -}}
-  {{/* A gate is a Store flag name; a boolean, nil, or empty value means none.
-    The key is the name; set last so an entry field can't redirect the asset. */ -}}
+  {{/* A gate is a Store flag name; a boolean, nil, or empty value means none. */ -}}
   {{ $gate := $entry.pagegate -}}
-  {{ if or (not $gate) (eq (printf "%T" $gate) "bool") }}{{ $gate = "" }}{{ else }}{{ $gate = printf "%v" $gate }}{{ end -}}
+  {{ if or (not $gate) (eq (printf "%T" $gate) "bool") -}}
+    {{ $gate = "" -}}
+  {{ else -}}
+    {{ $gate = printf "%v" $gate -}}
+  {{ end -}}
   {{ $options := $entry.options -}}
   {{ if eq $options nil -}}
     {{ $options = dict -}}
