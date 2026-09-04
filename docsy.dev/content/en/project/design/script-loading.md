@@ -71,7 +71,51 @@ The decomposition has two design consequences:
 pattern. For the registry contract, shape guards, and build details, see the
 [implementation notes][impl].
 
-Two ordering decisions:
+### Registry shape: a map, layered by Hugo's config merge {#registry-shape}
+
+The registry is a **map keyed by plugin name**, and the theme declares its own
+plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
+configuration merge is deep for maps, so a site's map layers over the theme's:
+
+- **Supersession and inheritance come free**: a site entry for a theme plugin
+  merges field by field (`markmap: { enable: true }` keeps the theme's
+  `pageGate`), and a scalar `false` replaces the theme's entry outright, which
+  is the turn-off shorthand.
+- **Duplicates are impossible**: map keys are unique. The loop needs no
+  deduplication, no first-wins rule, no supersession bookkeeping.
+- **The loop is generic**: it knows no plugin names. Theme defaults are
+  configuration, not template code; plugin-specific behavior lives in the
+  plugin's own files (its script, its companion partial); parameters that
+  predate the registry are mapped onto it by one compatibility partial,
+  scheduled for removal with their deprecation cycle.
+- **Plugins are site-wide**: the registry is read from site configuration and is
+  not a per-language surface. Hugo builds per language regardless, so every
+  emitted asset is fingerprinted (SRI requires it) and versioned vendor copies
+  carry their version in the path: divergent per-language builds can never
+  collide on a published path.
+- **Order** is `weight` ascending, then name; Hugo's idiom for ordering named
+  things.
+
+Alternatives considered, and why not:
+
+- **A list of entries** (the initial shape, superseded before release): lists
+  are replaced, not merged, by Hugo's config merge, so theme defaults had to
+  live in template code and every override, turn-off, or duplicate needed loop
+  logic, which grew a name-keyed defaults table and plugin-specific branches
+  inside the generic loop.
+- **A per-plugin manifest file** next to the script: plugin-owned defaults, but
+  a third artifact per plugin, and the theme still needs a configuration home
+  for which plugins are on by default. Revisit if module-shipped plugins need
+  self-describing metadata; manifests must never auto-register (the explicit
+  registry is a security property).
+- **Metadata partials** returning a defaults dict: pure Hugo, but metadata as
+  template code is less inspectable than configuration.
+
+Named collections in Hugo's own configuration (`outputFormats`, `mediaTypes`,
+`languages`, `taxonomies`) are maps keyed by name; the registry follows that
+idiom.
+
+### Ordering decisions
 
 - **Companions before the script**: a plugin's companion partial and stylesheet
   emit before its script tag, so a synchronous plugin script can rely on
@@ -83,7 +127,7 @@ Two ordering decisions:
   has to solve that constraint or gated CSS silently drops ([#2789][]).
 
 **Print output**: print layouts render descendant pages into one page, so they
-merge descendant `.Page.Store` flags onto the print page
+merge descendant page-gate flags onto the print page
 (`_partials/print/page-flags.html`) before the dispatcher runs; page-gated
 scripts reach print output through that merge.
 
