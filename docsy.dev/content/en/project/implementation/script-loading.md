@@ -17,7 +17,7 @@ map][design-shape]). Its schema, the one home for the entry fields, their types,
 and their defaults, is the theme's `data/docsy/schema/params/docsy.yaml`, which
 the loop reads for defaults, the field allowlist, and the name rule:
 
-{{< docsy-schema "params/docsy.yaml" >}}
+{{< readfile file="/project/schema/params/docsy.yaml" code="true" lang="yaml" >}}
 
 The theme declares its own plugins in [`theme/hugo.yaml`][theme-defaults]; under
 Hugo's default deep merge for `params`, a site's entries layer over them by name

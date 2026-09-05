@@ -1,9 +1,0 @@
-{{/* Includes a theme schema file (mounted from theme/data/docsy/schema) as a
-  highlighted code block, so the docs carry the declaration, not a copy.
-  Usage: {{< docsy-schema "params/docsy.yaml" >}} */ -}}
-{{ $path := printf "docsy-schema/%s" (.Get 0) -}}
-{{ with resources.Get $path -}}
-  {{ highlight (strings.TrimRight "\n" .Content) "yaml" "" -}}
-{{ else -}}
-  {{ errorf "Shortcode %q: schema file %q not found at %s" .Name $path .Position -}}
-{{ end -}}
