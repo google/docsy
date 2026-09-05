@@ -32,7 +32,7 @@
         {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored. %s." $name $k $seeSchema -}}
       {{ end -}}
     {{ end -}}
-  {{ else if eq $value false -}}
+  {{ else if in (slice false "false" 0) $value -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ else -}}
     {{/* A scalar replaced any theme entry at merge time; the intent is
@@ -79,11 +79,14 @@
       {{ errorf "Plugin shim %s must return the plugin entry (a map); got %T." $shim $entry -}}
     {{ end -}}
   {{ end -}}
-  {{ if eq $entry.enable false -}}
+  {{/* Hugo's boolean idiom: an env override of a theme-declared key arrives as
+    a string (applied before the theme's config merges), so both spellings
+    count. */ -}}
+  {{ if in (slice false "false" 0) $entry.enable -}}
     {{ continue -}}
   {{ end -}}
   {{ $gate := printf "%v" $entry.pagegate -}}
-  {{ $defer := $entry.defer -}}
+  {{ $defer := in (slice true "true" 1) $entry.defer -}}
   {{ $path := printf "js/plugins/%s.js" $name -}}
   {{ with resources.Get $path -}}
     {{ if or (not $gate) ($.Page.Store.Get $gate) -}}

@@ -116,34 +116,37 @@ test('a scalar false turns an entry off', () => {
   );
 });
 
-test('env overrides cannot address registry entries: documented limitation', () => {
-  // HUGO_PARAMS_* splits a path on the delimiter and cannot spell a hyphen, so
-  // a hyphenated plugin name is unreachable (the override lands on a garbage
-  // key, which the missing-asset guard reports); a plain name is reached, but
-  // as a string, which a typed read leaves truthy. Either way: not a channel.
+test('env overrides reach registry entries and read as booleans', () => {
+  // The delimiter is the character after HUGO, so `x` leaves hyphens literal
+  // (HUGO_ cannot spell one). Values arrive as strings for theme-declared
+  // keys, hence Hugo's `in (slice false "false" 0)` idiom in the loop.
   const r = buildSite('plugins-env-override', {
-    files: content,
+    files: {
+      ...content,
+      'content/docs/code.md': '---\ntitle: Code\n---\n\n```sh\necho hi\n```\n',
+    },
     env: {
-      HUGO_PARAMS_DOCSY_PLUGINS_CLICK_TO_COPY_ENABLE: 'false',
-      HUGO_PARAMS_DOCSY_PLUGINS_MARKMAP_ENABLE: 'false',
+      'HUGOxPARAMSxDOCSYxPLUGINSxCLICK-TO-COPYxENABLE': 'false',
+      'HUGOxPARAMSxDOCSYxPLUGINSxTABPANE-PERSISTxDEFER': 'true',
     },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('index.html'),
+  const html = r.publicFile('docs/code/index.html');
+  assert.doesNotMatch(
+    html,
     /js\/plugins\/click-to-copy/,
-    'the hyphenated plugin is untouched',
+    'the env-disabled plugin is off',
   );
   assert.match(
-    r.stderr,
-    /Plugin "click" is registered/,
-    'the garbage key surfaces as a missing asset',
+    html,
+    /<script[^>]*\bdefer\b[^>]*js\/plugins\/tabpane-persist/,
+    'the env-deferred plugin is deferred',
   );
 });
 
-test('booleans are read typed: a quoted "False" is a truthy string', () => {
-  // The config formats have booleans, so `false` is spelled `false`; the loop
-  // coerces no strings, as Hugo's own config reads don't.
+test('a quoted "False" matches neither spelling: the default holds', () => {
+  // Hugo's idiom accepts `false`, "false", and 0 (and the true triple) and
+  // nothing else, so a capitalized string keeps the field's default.
   const r = buildSite('plugins-quoted-false', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
