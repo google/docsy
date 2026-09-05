@@ -46,10 +46,6 @@
 {{ $persistKeyKind := $_persist
     | default (cond (or $textPane (ne "" $langPane)) "header" "lang") -}}
 {{ $persistTabpane := and $deprecatedPersistLang (ne $persistKeyKind "disabled") -}}
-{{ if $persistTabpane -}}
-  {{/* For sites that gate tabpane-persist on this flag (not the theme default). */ -}}
-  {{ .Page.Store.Set "hasTabs" true -}}
-{{ end -}}
 {{ $rightPane := default false ($.Get "right") -}}
 {{ $activeSet := false -}}
 {{/* Scratchpad gets populated through call to .Inner */ -}}

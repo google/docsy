@@ -119,8 +119,8 @@ idiom.
   on the page whose file contains it, so included content loses it (the
   mechanics, for site authors: [Plugins § Page flags in included
   content][ug-flags]). MarkMap (hook-flagged) is gated by default; tab
-  persistence (shortcode-flagged) ships ungated, its flag kept for sites that
-  gate it themselves.
+  persistence (shortcode-produced) ships ungated on every page, as before 0.18:
+  no flag is set for it.
 - **The markmap render hook sets the flag and renders Hugo's default code
   block** (`transform.HighlightCodeBlock`), leaving the browser-side transform
   to the plugin script, so a disabled plugin leaves the fence exactly as Hugo

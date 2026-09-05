@@ -1,8 +1,5 @@
-// tabpane-persist as a theme plugin: on every page by default (why:
-// https://www.docsy.dev/project/design/script-loading/#gating-decisions),
-// gateable on the `hasTabs` flag the shortcode sets. The gated case also pins
-// the regression #2787 fixed: a page with no tabs must not inherit the script
-// from a cached scripts.html render of a tabbed page, and vice versa.
+// tabpane-persist as a theme plugin: on every page, as before 0.18 (why not
+// gated: https://www.docsy.dev/project/design/script-loading/#gating-decisions).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -14,9 +11,6 @@ const tabs =
   '{{< /tabpane >}}\n';
 
 const files = {
-  // The tabbed page sorts after the plain pages in most render orders and
-  // before them in others; both directions of the cache trap are covered by
-  // asserting all pages.
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
   'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs body\n',
   'content/docs/aaa-tabs.md': '---\ntitle: Tabs first\n---\n\n' + tabs,
@@ -31,12 +25,6 @@ const allPages = [
   'docs/zzz-tabs/index.html',
 ];
 const scriptRe = /<script[^>]*src="\/(js\/plugins\/tabpane-persist[^"]*\.js)"/;
-const gated = `params:
-  docsy:
-    plugins:
-      tabpane-persist: { pageGate: hasTabs }
-`;
-
 test('tabpane-persist ships on every page by default, fingerprinted', () => {
   const r = buildSite('tabpane-persist-default', {
     files,
@@ -50,29 +38,6 @@ test('tabpane-persist ships on every page by default, fingerprinted', () => {
       r.publicFile(m[1]),
       /td-tp-persist/,
       'the emitted plugin is the persistence script',
-    );
-  }
-});
-
-test('gated on hasTabs, tabpane-persist ships only on pages using tabs', () => {
-  const r = buildSite('tabpane-persist-gate', {
-    files,
-    title: 'Docsy gated tab-persistence fixture',
-    extraConfig: gated,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  for (const page of ['docs/aaa-tabs/index.html', 'docs/zzz-tabs/index.html']) {
-    assert.match(r.publicFile(page), scriptRe, `${page} loads the plugin`);
-  }
-  for (const page of [
-    'index.html',
-    'docs/index.html',
-    'docs/mmm-plain/index.html',
-  ]) {
-    assert.doesNotMatch(
-      r.publicFile(page),
-      /tabpane-persist/,
-      `${page} is free of the tabpane-persist script`,
     );
   }
 });
@@ -106,28 +71,19 @@ test('a project plugin shadows the theme plugin of the same name', () => {
   );
 });
 
-test('persist="disabled" tabs set no flag: gated, the page ships no script', () => {
+test('persist="disabled" tabs carry no persistence attributes', () => {
   const r = buildSite('tabpane-persist-optout', {
     files: {
       'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
-      'content/docs/_index.md': '---\ntitle: Docs\n---\nDocs body\n',
       'content/docs/off.md':
         '---\ntitle: Off\n---\n\n{{< tabpane text=true persist="disabled" >}}\n' +
         '{{< tab header="One" >}}one{{< /tab >}}\n{{< /tabpane >}}\n',
     },
-    title: 'Docsy persistence opt-out fixture',
-    extraConfig: gated,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const html = r.publicFile('docs/off/index.html');
   assert.doesNotMatch(
-    html,
+    r.publicFile('docs/off/index.html'),
     /data-td-tp-persist/,
     'the opted-out tabs carry no persistence attributes',
-  );
-  assert.doesNotMatch(
-    html,
-    /tabpane-persist/,
-    'a page opting out of persistence is free of the persistence script',
   );
 });

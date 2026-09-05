@@ -59,9 +59,8 @@ Hugo's config merge layers a site's map over it, so a site changes one field
 theme's:
 
 - `click-to-copy`: on, deferred.
-- `tabpane-persist`: on, ungated ([why][design-gating]). The tabpane shortcode
-  sets `hasTabs` when persistence is active, for sites that gate the plugin
-  themselves (`pageGate: hasTabs`).
+- `tabpane-persist`: on, ungated ([why][design-gating]): every page, as before
+  0.18.
 - `markmap`: off, page-gated on `hasMarkmap`.
   - Its code-block render hook sets the flag and renders Hugo's default code
     block ([why][design-gating]); like the theme's mermaid, math, and chem

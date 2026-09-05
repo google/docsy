@@ -10,11 +10,11 @@ Docsy loads some of its optional JavaScript features, and any script you add, as
 
 ## Configure Docsy's plugins
 
-| Plugin            | What it does                               | Default                                 | Loads on                                                                  | Turn it off                                                   | Docs                           |
-| ----------------- | ------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
-| `click-to-copy`   | Adds a copy button to code blocks          | On (off under Prism, which has its own) | Every page                                                                | `click-to-copy: false`                                        | [Copy to clipboard][]          |
-| `tabpane-persist` | Remembers the selected tab across pages    | On                                      | Every page ([why not only tabbed pages](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
-| `markmap`         | Renders `markmap` code blocks as mind maps | Off                                     | Pages with a `markmap` code block                                         | `markmap: false`                                              | [Activating MarkMap support][] |
+| Plugin            | What it does                               | Default                                 | Loads on                                            | Turn it off                                                   | Docs                           |
+| ----------------- | ------------------------------------------ | --------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
+| `click-to-copy`   | Adds a copy button to code blocks          | On (off under Prism, which has its own) | Every page                                          | `click-to-copy: false`                                        | [Copy to clipboard][]          |
+| `tabpane-persist` | Remembers the selected tab across pages    | On                                      | Every page ([why](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
+| `markmap`         | Renders `markmap` code blocks as mind maps | Off                                     | Pages with a `markmap` code block                   | `markmap: false`                                              | [Activating MarkMap support][] |
 
 To turn a plugin off, set its entry to `false`:
 
@@ -96,14 +96,13 @@ block. A flag counts only when it lands on the page that ships.
   `markmap` block in content pulled in through [`.RenderShortcodes`][] flags the
   page that includes it.
 - A **shortcode** runs in the context of the page whose file contains it, so a
-  `tabpane` in included content flags the _included_ page, and the including
-  page never sees the flag.
+  shortcode in included content would flag the _included_ page, and the
+  including page would never see the flag.
 - Content pulled in through `.Content` flags the included page in both cases.
 
-That is why Docsy ships `tabpane-persist` ungated. Gate it yourself
-(`tabpane-persist: { pageGate: hasTabs }`) only if your tabpanes are never
-included. For MarkMap's authoring paths and how to clear its gate, see
-[Activating MarkMap support][].
+That is why Docsy ships `tabpane-persist` ungated, on every page as before 0.18:
+tabpanes come from a shortcode. For MarkMap's authoring paths and how to clear
+its gate, see [Activating MarkMap support][].
 
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
