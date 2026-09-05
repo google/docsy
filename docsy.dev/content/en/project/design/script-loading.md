@@ -1,8 +1,8 @@
 ---
 title: Script loading
-description:
-  Loading mechanisms, the dispatcher, the plugin loop and its registry shape,
-  ordering decisions, and override points
+description: >-
+  Why body-end scripts load through a dispatcher and a config-merged plugin
+  registry: mechanisms, override points, and the gating and ordering decisions
 ---
 
 Docsy loads its body-end JavaScript through
@@ -67,9 +67,8 @@ The decomposition has two design consequences:
 ## The plugin loop {#plugin-loop}
 
 [`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
-`params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
-pattern. For the registry contract, shape guards, and build details, see the
-[implementation notes][impl].
+`params.docsy.plugins`. For the registry contract, shape guards, and build
+details, see the [implementation notes][impl].
 
 ### Registry shape: a map, layered by Hugo's config merge {#registry-shape}
 
@@ -105,11 +104,8 @@ Alternatives considered, and why not:
 - **A per-plugin manifest file** next to the script: plugin-owned defaults, but
   a third artifact per plugin, and the theme still needs a configuration home
   for which plugins are on by default. Revisit if module-shipped plugins need
-  self-describing metadata. Trust note: every imported Hugo module's `params`
-  merge into the site's, so a module can register, re-gate, or turn off plugins
-  through its own config; the registry is explicit per configuration source, not
-  per site (a module already controls layouts and assets, so this adds no
-  exploitable surface).
+  self-describing metadata (module trust: [implementation § Security
+  constraints][impl-security]).
 - **Metadata partials** returning a defaults dict: pure Hugo, but metadata as
   template code is less inspectable than configuration.
 
@@ -119,14 +115,12 @@ idiom.
 
 ### Gating decisions
 
-- **A theme default gates only on render-hook flags.** A render hook runs in the
-  context of the page being rendered; a shortcode, in the context of the page
-  whose file contains it. Content pulled in through `.RenderShortcodes` thus
-  carries render-hook flags to the page that ships but leaves shortcode flags on
-  the included page, and content pulled in through `.Content` leaves both there.
-  MarkMap (hook-flagged) is gated by default; tab persistence
-  (shortcode-flagged) ships ungated, its flag kept for sites that gate it
-  themselves. The site-author view: [Plugins][ug-plugins] in the user guide.
+- **A theme default gates only on render-hook flags.** A shortcode's flag stays
+  on the page whose file contains it, so included content loses it (the
+  mechanics, for site authors: [Plugins § Page flags in included
+  content][ug-flags]). MarkMap (hook-flagged) is gated by default; tab
+  persistence (shortcode-flagged) ships ungated, its flag kept for sites that
+  gate it themselves.
 - **The markmap render hook sets the flag and renders Hugo's default code
   block** (`transform.HighlightCodeBlock`), leaving the browser-side transform
   to the plugin script, so a disabled plugin leaves the fence exactly as Hugo
@@ -158,9 +152,10 @@ idiom.
 <!-- prettier-ignore-start -->
 [#2789]: https://github.com/google/docsy/issues/2789
 [impl]: /project/implementation/script-loading/
+[impl-security]: /project/implementation/script-loading/#security-constraints
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
-[ug-plugins]: /docs/content/plugins/
+[ug-flags]: /docs/content/plugins/#page-flags-in-included-content
 [scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
 <!-- prettier-ignore-end -->

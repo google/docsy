@@ -494,7 +494,7 @@ test('a falsy scalar params.docsy.plugins also warns', () => {
 });
 
 test('a numeric plugin name resolves its asset', () => {
-  // YAML keys are strings, but a key like 2048 must still resolve.
+  // Hugo stringifies map keys, so a `2048:` key must still resolve 2048.js.
   const r = buildSite('plugins-numeric-name', {
     files: { ...content, 'assets/js/plugins/2048.js': quietJs },
     extraConfig: `params:
@@ -771,7 +771,6 @@ test('null options mean none, without a warning', () => {
 });
 
 test('a boolean pageGate means no gate', () => {
-  // `false` is the natural way to write "no gate"; `true` names no flag.
   for (const value of ['false', 'true']) {
     const r = buildSite(`plugins-gate-${value}`, {
       files: { ...content, 'assets/js/plugins/hello.js': quietJs },

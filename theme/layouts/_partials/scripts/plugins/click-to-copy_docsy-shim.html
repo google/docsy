@@ -1,7 +1,6 @@
-{{/* Shim for the parameters that gated the copy button before it was a
-  plugin. disable_click2copy_chroma is deprecated in 0.18 (the registry form is
-  `click-to-copy: false`); prism_syntax_highlighting stays, Prism shipping its
-  own copy button. Delete the deprecated branch when its cycle ends. */ -}}
+{{/* Shim for the pre-registry copy-button parameters (contract:
+  https://www.docsy.dev/project/implementation/script-loading/#pre-registry-parameters).
+  Delete the deprecated branch with its cycle. */ -}}
 {{ $entry := .Plugin -}}
 {{ with .Page.Site.Params -}}
   {{ if .disable_click2copy_chroma -}}

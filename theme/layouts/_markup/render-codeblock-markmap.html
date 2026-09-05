@@ -1,5 +1,4 @@
-{{/* Sets the page gate for the markmap plugin and leaves rendering to Hugo:
-  the plugin script transforms the default code block, so a disabled markmap
-  never changes how the fence looks. */ -}}
+{{/* Sets the markmap plugin's page gate; rendering stays Hugo's default (why:
+  https://www.docsy.dev/project/design/script-loading/#gating-decisions). */ -}}
 {{ .Page.Store.Set "hasMarkmap" true -}}
 {{ (transform.HighlightCodeBlock .).Wrapped -}}

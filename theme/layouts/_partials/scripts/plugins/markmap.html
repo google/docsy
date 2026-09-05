@@ -1,10 +1,7 @@
 {{/* cSpell:ignore markmap */ -}}
-{{/* Vendored markmap-autoloader: fetched once through resources.GetRemote and
-  served same-origin with SRI (the autoloader's own runtime deps still load
-  from the CDN, pinned by it). Deferred so that the default, synchronous plugin
-  script emitted after this companion configures window.markmap first; a
-  deferred plugin entry runs after the autoloader and merges with its exports
-  instead. */ -}}
+{{/* Vendored markmap-autoloader. Deferred: the plugin script (synchronous by
+  default, emitted after this companion) must configure window.markmap
+  first. */ -}}
 {{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
 {{ $version := .Page.Site.Params.markmap.version | string | strings.TrimSpace -}}
 {{ if not $version -}}

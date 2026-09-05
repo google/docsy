@@ -1,8 +1,9 @@
 ---
 title: Script loading
-description:
-  Registry contract, theme defaults, shape guards, build details, and security
-  constraints of the plugin loop
+description: >-
+  The params.docsy.plugins contract: entry fields, theme defaults and their
+  legacy-parameter shims, shape guards, build and emission, companions, and
+  security constraints
 ---
 
 Code-level notes for [`_partials/scripts/plugins.html`][plugins.html], the loop
@@ -27,6 +28,7 @@ params:
       OTHER: false # scalar shorthand: turns the entry off
 ```
 
+- `weight` is an integer.
 - **Keys are lowercase.** Hugo lowercases configuration keys, so plugin names,
   entry fields, and option keys all arrive in lowercase: name plugin files in
   lowercase, and in templates and plugin scripts read fields and options as
@@ -42,7 +44,6 @@ params:
   as a setting; non-map `options` warn the same way and count as none.
 - With `pageGate` set, the plugin is emitted only on pages carrying the named
   `.Page.Store` flag; `pageGate: ''` (or a boolean) clears an inherited gate.
-- `weight` is an integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
   strings are truthy in Go templates). A scalar entry value of `false`, or of
   the string `"false"` (any case), turns the entry off; any other scalar has
@@ -58,20 +59,17 @@ Hugo's config merge layers a site's map over it, so a site changes one field
 theme's:
 
 - `click-to-copy`: on, deferred.
-- `tabpane-persist`: on, ungated. The tabpane shortcode sets `hasTabs` when
-  persistence is active, for sites that gate the plugin themselves
-  (`pageGate: hasTabs`); the theme doesn't, because a tabpane included through
-  `.RenderShortcodes` flags the included page, not the page that ships.
-- `markmap`: off, page-gated on `hasMarkmap`. The markmap code-block render hook
-  sets the flag and otherwise renders Hugo's default code block
-  (`transform.HighlightCodeBlock`), which the plugin script transforms in the
-  browser: a disabled markmap never changes how the fence renders. Like the
-  theme's mermaid, math, and chem hooks, it takes precedence over a project-wide
-  `render-codeblock.html` for its fence. Its companion partial vendors the
-  autoloader: fetched at build time at the pinned `params.markmap.version`
-  (`dist/index.js`, the published entry file; the package root resolves to a
-  dynamically minified variant whose bytes drift), served same-origin with SRI,
-  minified in production.
+- `tabpane-persist`: on, ungated ([why][design-gating]). The tabpane shortcode
+  sets `hasTabs` when persistence is active, for sites that gate the plugin
+  themselves (`pageGate: hasTabs`).
+- `markmap`: off, page-gated on `hasMarkmap`.
+  - Its code-block render hook sets the flag and renders Hugo's default code
+    block ([why][design-gating]); like the theme's mermaid, math, and chem
+    hooks, it takes precedence over a project-wide `render-codeblock.html` for
+    its fence.
+  - Its companion partial vendors the autoloader at the pinned
+    `params.markmap.version`, served same-origin with SRI and minified in
+    production.
 
 ### Pre-registry parameters
 
@@ -92,8 +90,8 @@ deprecation cycle by deleting the file:
 - `click-to-copy_docsy-shim.html`: `params.disable_click2copy_chroma`
   (deprecated, `docsy-c2c-legacy`) turns the plugin off; `click-to-copy: false`
   is the registry form. `params.prism_syntax_highlighting` also turns it off
-  (Prism ships its own copy button); Prism support is a live feature, so only
-  the coupling is expressed here.
+  (Prism ships its own copy button), with no deprecation warning: Prism stays
+  supported.
 
 ## Shape guards
 
@@ -153,12 +151,17 @@ tag ([why][design-ordering]):
 - A parameter that reaches a fetch URL is validated first:
   `params.markmap.version` accepts `[0-9A-Za-z.+-]` only (and warns when not an
   exact `X.Y.Z`), so a version string can't address another registry path.
-- Residual exposure, named: the vendored markmap autoloader's runtime libraries
-  still load from the CDN, pinned by the autoloader itself but without SRI.
+- Residual exposure: the vendored markmap autoloader's runtime libraries still
+  load from the CDN, pinned by the autoloader itself but without SRI.
+- Module trust: every imported Hugo module's `params` merge into the site's, so
+  a module can register, re-gate, or turn off plugins through its own config.
+  The registry is explicit per configuration source, not per site; a module
+  already controls layouts and assets, so this adds no exploitable surface.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/
 [design-shape]: /project/design/script-loading/#registry-shape
 [design-ordering]: /project/design/script-loading/#ordering-decisions
+[design-gating]: /project/design/script-loading/#gating-decisions
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 <!-- prettier-ignore-end -->

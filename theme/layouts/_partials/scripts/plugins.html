@@ -11,8 +11,8 @@
   {{ $registry = $docsy.plugins -}}
 {{ end -}}
 {{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
-  keys, and `merge` yields plain maps without Hugo's case-insensitive access),
-  then order by weight, then name. */ -}}
+  keys, and `merge` yields plain maps without Hugo's case-insensitive access).
+  Order is weight, then name: `sort` is stable over the key-ordered range. */ -}}
 {{ $fields := slice "enable" "defer" "pagegate" "weight" "options" -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}
@@ -33,7 +33,7 @@
     {{ warnidf "docsy-plugin-entry" "Plugin %q: %v is not a plugin entry (a map); write `%s: { enable: true }` to enable it with its defaults. Skipping it." $name $value $name -}}
     {{ continue -}}
   {{ end -}}
-  {{/* A gate is a Store flag name; a boolean, nil, or empty value means none. */ -}}
+  {{/* `false` is the natural way to write "no gate"; `true` names no flag. */ -}}
   {{ $gate := $entry.pagegate -}}
   {{ if or (not $gate) (eq (printf "%T" $gate) "bool") -}}
     {{ $gate = "" -}}
@@ -55,8 +55,7 @@
   {{ $entry := . -}}
   {{ $name := .name -}}
   {{ if not (findRE `^[a-z0-9_-]+$` $name) -}}
-    {{/* Names address assets and partials by path; refuse anything that could
-      traverse outside the plugin namespaces. */ -}}
+    {{/* Names are path components: refuse traversal. */ -}}
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to lowercase letters, digits, hyphens, and underscores." $name -}}
     {{ continue -}}
   {{ end -}}
@@ -64,8 +63,6 @@
     {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: the _docsy-shim suffix is reserved for shim partials." $name -}}
     {{ continue -}}
   {{ end -}}
-  {{/* A plugin's shim adapts parameters that predate the registry onto its
-    entry; each shim retires with its parameter's deprecation cycle. */ -}}
   {{ $shim := printf "scripts/plugins/%s_docsy-shim.html" $name -}}
   {{ if templates.Exists (printf "_partials/%s" $shim) -}}
     {{ $entry = partial $shim (dict "Page" $ "Plugin" $entry) -}}

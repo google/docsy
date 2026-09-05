@@ -20,8 +20,6 @@ const repoRoot = path.resolve(
 
 test('rendered pages reference no jquery script', () => {
   const build = buildSite('no-jquery', {
-    // Own title: the default embeds the fixture name, which this very
-    // test would then match in the rendered pages.
     title: 'Docsy absence-gate fixture',
     files: {
       'content/_index.md': '---\ntitle: Home\n---\nHome body\n',

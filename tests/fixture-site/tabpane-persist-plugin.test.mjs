@@ -1,9 +1,8 @@
-// tabpane-persist as a theme plugin: on every page by default (a tabpane
-// included through .RenderShortcodes flags the included page, not the
-// includer, so a default gate would miss it), gateable on the `hasTabs` flag
-// the shortcode sets. The gated case also pins the partialCached trap: a page
-// with no tabs must not inherit the script from a cached scripts.html render
-// of a tabbed page, and vice versa.
+// tabpane-persist as a theme plugin: on every page by default (why:
+// https://www.docsy.dev/project/design/script-loading/#gating-decisions),
+// gateable on the `hasTabs` flag the shortcode sets. The gated case also pins
+// the regression #2787 fixed: a page with no tabs must not inherit the script
+// from a cached scripts.html render of a tabbed page, and vice versa.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -41,8 +40,6 @@ const gated = `params:
 test('tabpane-persist ships on every page by default, fingerprinted', () => {
   const r = buildSite('tabpane-persist-default', {
     files,
-    // Own title: the default embeds the fixture name, which this very test
-    // would then match in the rendered pages.
     title: 'Docsy tab-persistence fixture',
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);

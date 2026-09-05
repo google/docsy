@@ -1,8 +1,7 @@
 {{/* cSpell:ignore markmap */ -}}
-{{/* Shim for params.markmap.enable (deprecated in 0.18): when set, markmap is
-  on and ungated, exactly its pre-0.18 site-wide behavior, whatever the
-  registry's (map) entry says. Delete this file when the deprecation cycle
-  ends. */ -}}
+{{/* Shim for the deprecated params.markmap.enable (contract:
+  https://www.docsy.dev/project/implementation/script-loading/#pre-registry-parameters).
+  Delete this file with its cycle. */ -}}
 {{ $entry := .Plugin -}}
 {{ $legacy := .Page.Site.Params.markmap -}}
 {{ if and (reflect.IsMap $legacy) $legacy.enable -}}

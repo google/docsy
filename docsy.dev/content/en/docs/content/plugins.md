@@ -1,20 +1,20 @@
 ---
 title: Plugins
 description:
-  Configure Docsy's JavaScript features and add your own scripts without
-  overriding layout templates.
+  Turn Docsy's plugins on or off and add your own scripts, without overriding
+  layout templates.
 ---
 
-Each optional Docsy JavaScript feature is a **plugin**: an entry under
-`params.docsy.plugins` in your site configuration.
+Docsy loads some of its optional JavaScript features, and any script you add, as
+**plugins**: entries under `params.docsy.plugins` in your site configuration.
 
 ## Configure Docsy's plugins
 
-| Plugin            | What it does                               | Default                  | Loads on                                                                  | Turn it off                                                   | Docs                           |
-| ----------------- | ------------------------------------------ | ------------------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
-| `click-to-copy`   | Adds a copy button to code blocks          | On; Prism brings its own | Every page                                                                | `click-to-copy: false`                                        | [Copy to clipboard][]          |
-| `tabpane-persist` | Remembers the selected tab across pages    | On                       | Every page ([why not only tabbed pages](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
-| `markmap`         | Renders `markmap` code blocks as mind maps | Off                      | Pages with a `markmap` code block                                         | `markmap: false`                                              | [Activating MarkMap support][] |
+| Plugin            | What it does                               | Default                                 | Loads on                                                                  | Turn it off                                                   | Docs                           |
+| ----------------- | ------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
+| `click-to-copy`   | Adds a copy button to code blocks          | On (off under Prism, which has its own) | Every page                                                                | `click-to-copy: false`                                        | [Copy to clipboard][]          |
+| `tabpane-persist` | Remembers the selected tab across pages    | On                                      | Every page ([why not only tabbed pages](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
+| `markmap`         | Renders `markmap` code blocks as mind maps | Off                                     | Pages with a `markmap` code block                                         | `markmap: false`                                              | [Activating MarkMap support][] |
 
 To turn a plugin off, set its entry to `false`:
 
@@ -53,19 +53,34 @@ body hooks][] instead.
 
 1. Save the script as `assets/js/plugins/`_`NAME`_`.js`, with _`NAME`_ in
    lowercase.
-2. Register it:
+2. Register it under `params.docsy.plugins`:
 
-   <!-- markdownlint-disable no-shortcut-ref-link -->
-   <!-- prettier-ignore-start -->
-
-   {{< tabpane >}} {{< tab header="Configuration file:" disabled=true />}}
-   {{< tab header="hugo.toml" lang="toml" >}} [params.docsy.plugins] NAME = {}
-   {{< /tab >}} {{< tab header="hugo.yaml" lang="yaml" >}} params: docsy:
-   plugins: NAME: {} {{< /tab >}} {{< tab header="hugo.json" lang="json" >}} {
-   "params": { "docsy": { "plugins": { "NAME": {} } } } } {{< /tab >}}
-   {{< /tabpane >}}
-   <!-- prettier-ignore-end -->
-   <!-- markdownlint-enable no-shortcut-ref-link -->
+<!-- markdownlint-disable no-shortcut-ref-link -->
+<!-- prettier-ignore-start -->
+{{< tabpane >}}
+{{< tab header="Configuration file:" disabled=true />}}
+{{< tab header="hugo.toml" lang="toml" >}}
+[params.docsy.plugins]
+NAME = {}
+{{< /tab >}}
+{{< tab header="hugo.yaml" lang="yaml" >}}
+params:
+  docsy:
+    plugins:
+      NAME: {}
+{{< /tab >}}
+{{< tab header="hugo.json" lang="json" >}}
+{
+  "params": {
+    "docsy": {
+      "plugins": { "NAME": {} }
+    }
+  }
+}
+{{< /tab >}}
+{{< /tabpane >}}
+<!-- prettier-ignore-end -->
+<!-- markdownlint-enable no-shortcut-ref-link -->
 
 Docsy builds, fingerprints, and loads the script with [subresource
 integrity][SRI]. For the entry fields (`options`, `defer`, `pageGate`, `weight`)

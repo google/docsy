@@ -47,7 +47,9 @@ gate-to-partial wiring, offline.
   own `params.docsy` included), name and field allowlisting (the `_docsy-shim`
   suffix refused, unknown fields and non-map `options` warned).
 - **Layering**: theme plugins through Hugo's config merge (inheritance,
-  override, turn-off). Companion nets:
+  override, turn-off).
+
+Three companion nets pin the conversions:
 
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: the ungated default, opt-in
   gating on `hasTabs`, persistence opt-out, and theme-plugin shadowing.

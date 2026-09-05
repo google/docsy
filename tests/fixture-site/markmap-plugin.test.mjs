@@ -20,8 +20,6 @@ const stubbed = {
 test('disabled markmap contributes zero bytes to shipped JS', () => {
   const r = buildSite('markmap-disabled', {
     files,
-    // Own title: the default embeds the fixture name, which this very test
-    // would then match in the rendered pages.
     title: 'Docsy mind-map absence fixture',
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
@@ -113,8 +111,7 @@ test('a registry-declared markmap entry is page-gated and carries its options', 
 });
 
 test('a scalar params.markmap builds, with markmap off', () => {
-  // A site's `markmap: false` replaces the theme's map; the shim must not
-  // dereference it.
+  // A site's `markmap: false` replaces the theme's map.
   const r = buildSite('markmap-scalar-param', {
     files,
     title: 'Docsy scalar-markmap fixture',

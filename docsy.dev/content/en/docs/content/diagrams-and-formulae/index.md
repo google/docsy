@@ -7,8 +7,7 @@ description:
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
-Each renderer below reads a Markdown code block (or, for Diagrams.net, an
-exported image) and needs no layout override.
+None of the renderers below needs a layout override.
 
 ## Pinned script-dependency versions {#script-dep-versions}
 
@@ -450,7 +449,7 @@ Foo -> Foo7: To queue
 ```
 ````
 
-With MarkMap enabled, Docsy renders it as:
+Automatically renders to:
 
 ```plantuml
 participant participant as Foo
@@ -589,7 +588,7 @@ For example, the following defines a simple MindMap:
 
 <!-- markdownlint-restore -->
 
-Automatically renders to:
+With MarkMap enabled, Docsy renders it as:
 
 ````markmap
 # markmap
@@ -653,8 +652,8 @@ params:
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook, the `tab`
 or `readfile code="true"` shortcodes with `lang=markmap`, a fence in content
-pulled in with `.Content`), clear the entry's gate so the scripts load site-wide
-([why][page-flags]):
+pulled in with `.Content`, or a printed section), clear the entry's gate so the
+scripts load site-wide ([why][page-flags]):
 
 ```yaml
 params:
