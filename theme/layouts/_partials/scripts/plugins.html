@@ -19,8 +19,10 @@
   {{ $registry = $docsy.plugins -}}
 {{ end -}}
 {{/* Normalize entries to the schema's lowercase key set (`merge` yields plain
-  maps without Hugo's case-insensitive access). Order is weight, then name:
-  `sort` is stable over the key-ordered range. */ -}}
+  maps without Hugo's case-insensitive access). Boolean checks accept string
+  spellings: env overrides arrive as strings (why:
+  https://www.docsy.dev/docs/content/configuration/#environment-variables).
+  Order is weight, then name: `sort` is stable over the key-ordered range. */ -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}
   {{ $entry := $defaults -}}
@@ -55,7 +57,7 @@
     {{ $options = dict -}}
   {{ end -}}
   {{/* One integer kind for weight: YAML yields uint64 for non-negative literals
-    and int otherwise, and `sort` compares a mixed pair unsigned, so a negative
+    and int64 otherwise, and `sort` compares a mixed pair unsigned, so a negative
     weight would sort last. */ -}}
   {{ $entry = merge $entry (dict "name" $name "pagegate" $gate "options" $options "weight" (int $entry.weight)) -}}
   {{ $entries = $entries | append $entry -}}
@@ -80,8 +82,6 @@
       {{ errorf "Plugin shim %s must return the plugin entry (a map); got %T." $shim $entry -}}
     {{ end -}}
   {{ end -}}
-  {{/* Hugo's boolean idiom: env overrides arrive as strings (why:
-    https://www.docsy.dev/docs/content/configuration/#environment-variables). */ -}}
   {{ if in (slice false "false" 0) $entry.enable -}}
     {{ continue -}}
   {{ end -}}

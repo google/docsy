@@ -118,9 +118,8 @@ test('a scalar false turns an entry off', () => {
 });
 
 test('env overrides reach registry entries and read as booleans', () => {
-  // `x` delimiter: the form underscored key names need (hyphens pass through
-  // any delimiter). Why values are strings: Configuration § Environment
-  // variables.
+  // `x` delimiter, used uniformly; only underscored key names need it. Why
+  // values are strings: Configuration § Environment variables.
   const r = buildSite('plugins-env-override', {
     files: {
       ...content,
@@ -474,7 +473,7 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
 });
 
 test('a list-shaped params.docsy.plugins builds and warns', () => {
-  // The pre-release registry shape.
+  // A list where a map is expected.
   const r = buildSite('plugins-list-registry', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     extraConfig: `params:

@@ -54,10 +54,8 @@ Alice -> Bob: hello
 `,
 };
 
-// One variant per search bundle; the features variant also exercises the
-// diagram scripts (markmap, plantuml, mermaid) and the cover/navbar path
-// in base.js. Pages are static so the test list registers up front; each
-// variant's server origin resolves in before().
+// One variant per search bundle. Pages are static so the test list registers
+// up front; each variant's server origin resolves in before().
 const variants = {
   features: {
     options: {
@@ -200,9 +198,8 @@ for (const { variant, page } of visits) {
   });
 }
 
-// Behavior probes: one small parity assertion per converted script
-// (google/docsy#1436), each verified green against the pre-conversion
-// code first.
+// Behavior probes: one parity assertion per script the theme converted
+// (jQuery removal, google/docsy#1436; plugin conversions, 0.18).
 
 // Interaction probes carry their own pageerror collector: an exception
 // thrown by a handler mid-probe must fail the probe, not vanish once the
@@ -213,10 +210,6 @@ async function newProbePage() {
   page.on('pageerror', (err) => pageErrors.push(err.message));
   return { page, pageErrors };
 }
-
-// Diagram probes: each asserts the script's DOM transformation landed on
-// the features diagrams page (rendered SVG for the CDN-driven renderers,
-// the generated img element for plantuml).
 
 // The fixture-site nets stay offline, so the real vendor fetch (a
 // resources.GetRemote of the autoloader) is pinned here, in the network tier.

@@ -1,6 +1,7 @@
 // Pins MarkMap's registry conversion and legacy compatibility, offline: the
 // companion (a resources.GetRemote of the autoloader) is stubbed with a marker
-// wherever markmap is on; the real vendoring is pinned in the visual suite.
+// wherever a build would reach the fetch; the real vendoring is pinned in the
+// visual suite.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
