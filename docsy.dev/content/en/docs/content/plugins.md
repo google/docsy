@@ -75,8 +75,9 @@ Every registry shape warning carries the id `docsy-config` (to silence one, see
 - A `params.docsy` or `params.docsy.plugins` that is not a map empties the
   registry, Docsy's own plugins included. `plugins: {}` keeps them; a valueless
   `plugins:` is null and drops them.
-- A registered name with no `assets/js/plugins/`_`NAME`_`.js` is a different
-  fault: it warns `docsy-plugin-missing`, whatever its gate.
+- An enabled name with no `assets/js/plugins/`_`NAME`_`.js` is a different
+  fault: it warns `docsy-plugin-missing`, gated or not (a disabled entry is
+  never looked up).
 
 ## Add a custom script
 
@@ -138,6 +139,9 @@ stylesheet tags carry [subresource integrity][SRI] (`integrity` and
 - Never pipe `.Plugin.options` through `safeHTML`, `safeJS`, or `safeURL` in a
   companion partial: options are site-configured strings, and Hugo's contextual
   autoescaping is the defense.
+- In a plugin script, options are values, not markup: set them through DOM and
+  CSSOM properties, never by building HTML or stylesheet text around them (an
+  option interpolated into a `<style>` can close the rule and open its own).
 - Options, like anything reaching a module as `@params`, ship world-readable in
   the built JavaScript: never route secrets through them.
 - Pin third-party dependencies, never `latest`; vendor build-time fetches and

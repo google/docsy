@@ -396,6 +396,19 @@ test('a gated missing plugin still warns', () => {
   );
 });
 
+test('a disabled missing plugin is never looked up, so it is silent', () => {
+  const r = buildSite('plugins-disabled-missing', {
+    files: content,
+    extraConfig: `params:
+  docsy:
+    plugins:
+      ghost: false
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(r.stderr, /ghost/, 'the build log is free of the entry');
+});
+
 test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   // A site's own pre-0.18 `docsy` param.
   const r = buildSite('plugins-docsy-scalar', {

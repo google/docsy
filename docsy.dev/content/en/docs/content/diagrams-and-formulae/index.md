@@ -662,7 +662,8 @@ params:
         pageGate: ''
 ```
 
-The entry's `options` take a `height` for the rendered map (default `300px`):
+The entry's `options` take a `height` for the rendered map, a CSS length
+(default `300px`, which any other value keeps):
 
 ```yaml
 params:

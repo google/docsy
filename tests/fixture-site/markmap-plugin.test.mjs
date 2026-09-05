@@ -4,6 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { JSDOM } from 'jsdom';
 import { buildSite } from './lib/build-site.mjs';
 
 const files = {
@@ -216,4 +217,33 @@ test('a markmap fence renders as a default code block when markmap is off', () =
     /<pre tabindex="0"><code class="language-markmap" data-lang="markmap">/,
     "the fence carries Hugo's default code-block markup",
   );
+});
+
+test('a height option is a value, never rule text', () => {
+  // Breaks out of the rule if interpolated into the stylesheet text.
+  const height = '300px } body { display: none }';
+  const r = buildSite('markmap-height-injection', {
+    files: stubbed,
+    extraConfig: `params:
+  docsy:
+    plugins:
+      markmap:
+        enable: true
+        options:
+          height: "${height}"
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('docs/index.html');
+  const plugin = html.match(
+    /<script[^>]*src="\/(js\/plugins\/markmap[^"]*\.js)"/,
+  );
+  assert.ok(plugin, 'markmap plugin script tag is emitted');
+  const { window } = new JSDOM(html, { runScripts: 'outside-only' });
+  window.eval(r.publicFile(plugin[1]));
+  const sheet = window.document.head.lastElementChild.sheet;
+  assert.equal(sheet.cssRules.length, 1, 'the option adds no rule of its own');
+  const rule = sheet.cssRules[0];
+  assert.equal(rule.selectorText, '.markmap > svg', 'the one rule is the map');
+  assert.equal(rule.style.height, '300px', 'a non-length keeps the default');
 });

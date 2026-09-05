@@ -23,7 +23,8 @@ A plugin whose behavior a parameter controlled before the registry ships a shim
 partial, `_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html` (the suffix the
 schema reserves). The loop applies it to the plugin's merged entry before the
 enable and gate checks, invoked with `(dict "Page" PAGE "Plugin" ENTRY)`. It
-must return the adjusted entry, a map; anything else fails the build.
+must return the entry it received, adjusted with `merge`, so the fields it
+leaves alone keep their normalized values; anything but a map fails the build.
 Parameter-specific behavior lives in the shim, and the shim is deleted when its
 parameter's deprecation cycle ends.
 
@@ -31,8 +32,9 @@ parameter's deprecation cycle ends.
 
 Enforcement is hand-coded in the loop against the schema, and every warning it
 emits carries the id `docsy-config`; what each guard ignores or empties is the
-guide's [Warnings][guide-warnings] list. Asset lookup precedes gating, so a
-registered name with no script warns whatever its gate.
+guide's [Warnings][guide-warnings] list. Asset lookup runs after the enable
+check and before the page gate: an enabled name with no script warns whether or
+not a page sets its flag, and a disabled one is never looked up.
 
 ## Build and emission
 
