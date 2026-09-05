@@ -70,6 +70,21 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
   assert.match(js, /autoLoader/, 'plugin configures the autoloader');
 });
 
+test('the legacy param reads "false" from the environment as false', () => {
+  // Env values are strings; a bare `if` would take "false" as true and load
+  // markmap site-wide on an override meant to keep the default.
+  const r = buildSite('markmap-legacy-env-false', {
+    files,
+    env: { HUGO_PARAMS_MARKMAP_ENABLE: 'false' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.doesNotMatch(
+    r.publicFile('index.html'),
+    /js\/plugins\/markmap/,
+    'the home page is free of markmap',
+  );
+});
+
 test('a registry-declared markmap entry is page-gated and carries its options', () => {
   const r = buildSite('markmap-registry', {
     files: stubbed,

@@ -83,8 +83,9 @@ params:
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
 Docsy builds, fingerprints, and loads the script with [subresource
-integrity][SRI]. For the entry fields (`options`, `defer`, `pageGate`, `weight`)
-and the full contract, see the [registry contract][].
+integrity][SRI]. For the entry fields (`options`, `defer`, `pageGate`,
+`weight`), environment overrides, and the `docsy-config` warnings, see the
+[registry contract][].
 
 ## Page flags in included content
 
@@ -100,9 +101,9 @@ block. A flag counts only when it lands on the page that ships.
   including page would never see the flag.
 - Content pulled in through `.Content` flags the included page in both cases.
 
-That is why Docsy ships `tabpane-persist` ungated, on every page as before 0.18:
-tabpanes come from a shortcode. For MarkMap's authoring paths and how to clear
-its gate, see [Activating MarkMap support][].
+That is why Docsy ships `tabpane-persist` ungated, on every page: tabpanes come
+from a shortcode. For MarkMap's authoring paths and how to clear its gate, see
+[Activating MarkMap support][].
 
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/

@@ -70,6 +70,24 @@ test('prism supersedes the copy-button plugin', () => {
   );
 });
 
+test('legacy params read "false" from the environment as false', () => {
+  // Env values are strings; a bare `if` would take "false" as true and load
+  // Prism (and drop the copy button) on an override meant to keep the default.
+  // `x` as delimiter: with `HUGO_`, the underscores in the key names split.
+  const r = buildSite('c2c-legacy-env-false', {
+    files,
+    title: 'Docsy legacy env fixture',
+    env: {
+      HUGOxPARAMSxPRISM_SYNTAX_HIGHLIGHTING: 'false',
+      HUGOxPARAMSxDISABLE_CLICK2COPY_CHROMA: 'false',
+    },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('index.html');
+  assert.doesNotMatch(html, /js\/prism\.js/, 'the page is free of prism');
+  assert.match(html, /js\/plugins\/click-to-copy/, 'the copy button loads');
+});
+
 test('a scalar false turns the theme plugin off', () => {
   const r = buildSite('c2c-registry-off', {
     files,

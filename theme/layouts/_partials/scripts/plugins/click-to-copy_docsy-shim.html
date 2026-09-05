@@ -3,11 +3,11 @@
   Delete the deprecated branch with its cycle. */ -}}
 {{ $entry := .Plugin -}}
 {{ with .Page.Site.Params -}}
-  {{ if .disable_click2copy_chroma -}}
+  {{ if in (slice true "true" 1) .disable_click2copy_chroma -}}
     {{ warnidf "docsy-c2c-legacy" "params.disable_click2copy_chroma is deprecated: set `click-to-copy: false` under params.docsy.plugins instead. See https://www.docsy.dev/docs/content/plugins/." -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ end -}}
-  {{ if .prism_syntax_highlighting -}}
+  {{ if in (slice true "true" 1) .prism_syntax_highlighting -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ end -}}
 {{ end -}}

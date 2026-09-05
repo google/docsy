@@ -5,9 +5,8 @@ description: Runtime and security contracts of Docsy's plugin loop
 
 [`_partials/scripts/plugins.html`][plugins.html] implements
 `params.docsy.plugins`. For the design rationale, see the [design
-notes][design]; for site configuration and diagnostics, the [plugins
-guide][guide]; for the tests that pin this contract, the [quality
-notes][quality].
+notes][design]; for site configuration, the [plugins guide][guide]; for the
+tests that pin this contract, the [quality notes][quality].
 
 ## Registry contract
 
@@ -26,13 +25,13 @@ Hugo lowercases configuration keys. Plugin names, entry fields, and option keys
 arrive in lowercase: config examples keep Hugo's camelCase, templates and plugin
 scripts read `.Plugin.pagegate` and `params.apikey`.
 
-Booleans are read with Hugo's own idiom, `in (slice false "false" 0)` and its
-complement: `false`, `"false"`, and `0` are false; `true`, `"true"`, and `1` are
-true; any other spelling keeps the default. The string forms exist for
-environment overrides, which reach registry entries but arrive as strings (Hugo
-applies them before the theme's configuration merges, so a theme-declared key
-has no type to convert to). Because `HUGO_` cannot spell a hyphen, an override
-names its delimiter with the character after `HUGO`:
+Booleans are read with Hugo's own idiom: `enable` is off for `false`, `"false"`,
+and `0` and on for any other value; `defer` is on for `true`, `"true"`, and `1`
+and off for any other value. The string forms exist for environment overrides,
+which reach registry entries but arrive as strings (Hugo applies them before the
+theme's configuration merges, so a theme-declared key has no type to convert
+to). Because `HUGO_` splits on every underscore and cannot spell a hyphen, an
+override names its delimiter with the character after `HUGO`:
 `HUGOxPARAMSxDOCSYxPLUGINSxCLICK-TO-COPYxENABLE=false`. Two further coercions
 have a semantic reason: a boolean or empty `pageGate` means no gate (`false` is
 the natural spelling of "none", and the flag `"false"` would silently never

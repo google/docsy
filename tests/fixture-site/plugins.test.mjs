@@ -144,9 +144,9 @@ test('env overrides reach registry entries and read as booleans', () => {
   );
 });
 
-test('a quoted "False" matches neither spelling: the default holds', () => {
-  // Hugo's idiom accepts `false`, "false", and 0 (and the true triple) and
-  // nothing else, so a capitalized string keeps the field's default.
+test('a quoted "False" is not a false spelling: the plugin loads', () => {
+  // `enable` is off for `false`, "false", and 0 only; every other value, a
+  // capitalized string included, is on.
   const r = buildSite('plugins-quoted-false', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
@@ -309,7 +309,7 @@ test('a shim partial scripts/plugins/NAME_docsy-shim.html decorates the entry', 
       'assets/js/plugins/hello.js': helloJs,
       'layouts/_partials/scripts/plugins/hello_docsy-shim.html':
         '{{ $entry := .Plugin }}' +
-        '{{ if .Page.Site.Params.legacyHelloOff }}' +
+        '{{ if in (slice true "true" 1) .Page.Site.Params.legacyHelloOff }}' +
         '{{ $entry = merge $entry (dict "enable" false) }}{{ end }}' +
         '{{ return $entry }}',
     },
@@ -518,7 +518,6 @@ test('a numeric plugin name resolves its asset', () => {
 });
 
 test('every configuration warning the loop emits carries docsy-config', () => {
-  // One id for the class, so a site silences it with one ignoreLogs entry.
   // The fixture trips the field, option-shape, entry-value, and name guards.
   const r = buildSite('plugins-config-id', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
@@ -543,8 +542,6 @@ test('every configuration warning the loop emits carries docsy-config', () => {
 });
 
 test('the loop applies every schema default', () => {
-  // Agreement guard between data/docsy/schema/params/docsy.yaml and the loop:
-  // an empty entry gets exactly the schema's fields and defaults.
   const schema = parseYaml(
     readFileSync(
       path.join(repoRoot, 'theme/data/docsy/schema/params/docsy.yaml'),

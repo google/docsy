@@ -1,8 +1,8 @@
 ---
 title: Diagrams and Formulae
 description:
-  Write KaTeX formulae and Mermaid, PlantUML, or MarkMap diagrams as Markdown
-  code blocks, make Diagrams.net images editable in place, and configure their
+  Write Mermaid, PlantUML, and MarkMap diagrams as code blocks, typeset KaTeX
+  formulae, make Diagrams.net images editable in place, and configure their
   renderers.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
@@ -684,10 +684,9 @@ params:
 
 ### MarkMap version
 
-Docsy fetches the [markmap-autoloader][] package's entry file at build time at
-the [pinned version](#script-dep-versions), currently
-{{% param markmap.version %}}, and serves it from your site with subresource
-integrity.
+At build time, Docsy fetches the [pinned version](#script-dep-versions),
+currently {{% param markmap.version %}}, of the [markmap-autoloader][] package's
+entry file and serves it from your site with subresource integrity.
 
 - To use a different version, set `params.markmap.version`.
 - Sites that restrict Hugo's remote fetches (`security.http`) must allow
