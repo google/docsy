@@ -16,7 +16,7 @@ notes][quality].
 map][design-shape]). The loop reads the theme's schema directly, for defaults,
 the field allowlist, and the name rule:
 
-{{< readfile file="/project/schema/params/docsy.yaml" code="true" lang="yaml" >}}
+{{< readfile file="/data/docsy/schema/params/docsy.yaml" code="true" lang="yaml" >}}
 
 The theme declares its own plugins in [`theme/hugo.yaml`][theme-defaults]. Under
 Hugo's default deep merge for `params`, a site's entries layer over them by name

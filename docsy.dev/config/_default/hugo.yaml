@@ -195,9 +195,6 @@ module:
     - source: ../package.json
       target: data/package.json
       sites: *sites
-    - source: ../theme/data/docsy/schema
-      target: content/project/schema
-      sites: *sites
     # Tests
     # cSpell:ignore quang nguyen vinh therato
     - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
