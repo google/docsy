@@ -2,8 +2,7 @@
 title: Script loading
 description: >-
   Why body-end scripts load through a dispatcher and a config-merged plugin
-  registry, with the mechanisms, override points, and gating and ordering
-  decisions behind it
+  registry
 ---
 
 Docsy loads its body-end JavaScript through
@@ -93,8 +92,8 @@ defaults][ug-config-merge]), so a site's map layers over the theme's:
   plugin's own files: its script, its companion partial, and, for parameters
   that predate the registry, a per-plugin shim partial that decorates the
   plugin's entry.
-- **Plugins are site-wide**: the registry is read from site configuration and is
-  not a per-language surface; per-language divergence is unsupported.
+- **Plugins are site-wide**: the registry is read from site configuration, not
+  per language.
 - **Order**: `weight` ascending, then name, Hugo's idiom for ordering named
   things.
 

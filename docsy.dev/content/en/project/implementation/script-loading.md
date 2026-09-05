@@ -37,8 +37,7 @@ lookup runs after the enable check and before the page gate.
 ## Build and emission
 
 The [file contract][guide-files] is the guide's; the pipeline adds one step
-beyond it: scripts and stylesheets are minified in production, fingerprinted in
-every environment ([why companions first][design-ordering]).
+beyond it, minification in production ([why companions first][design-ordering]).
 
 ## Security constraints
 

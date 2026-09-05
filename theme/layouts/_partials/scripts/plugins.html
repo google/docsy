@@ -20,8 +20,8 @@
 {{ end -}}
 {{/* Normalize entries to the schema's lowercase key set (`merge` yields plain
   maps without Hugo's case-insensitive access). Boolean checks accept string
-  spellings: env overrides arrive as strings (why:
-  https://www.docsy.dev/docs/content/configuration/#environment-variables).
+  spellings because env overrides arrive as strings
+  (https://www.docsy.dev/docs/content/configuration/#environment-variables).
   Order is weight, then name: `sort` is stable over the key-ordered range. */ -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}

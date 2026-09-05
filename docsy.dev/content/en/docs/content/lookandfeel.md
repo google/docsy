@@ -543,7 +543,7 @@ Code blocks show a "Copy to clipboard" button in the top right-hand corner. To
 turn it off, see the
 [`click-to-copy` plugin](/docs/content/plugins/#configure-docsys-plugins).
 (Before 0.18 the parameter was `params.disable_click2copy_chroma`, deprecated
-but still honored for this release cycle.)
+but still honored for this release cycle, with a build warning.)
 
 ### Code highlighting with Prism
 

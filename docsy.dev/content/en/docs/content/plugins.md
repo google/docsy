@@ -64,8 +64,9 @@ Every registry shape warning carries the id `docsy-config` (to silence one, see
 [Configuration § Configuration warnings][config-warnings]):
 
 - An unknown field or a non-map `options` is ignored and the rest of the entry
-  applies; a name the schema's pattern rejects or that ends in its reserved
-  suffix, or a scalar entry other than a false spelling, drops the whole entry.
+  applies.
+- A name the schema's pattern rejects or that ends in its reserved suffix, or a
+  scalar entry other than a false spelling, drops the whole entry.
 - A `params.docsy` or `params.docsy.plugins` that is not a map empties the
   registry, Docsy's own plugins and their deprecated aliases included.
   `plugins: {}` keeps them; a valueless `plugins:` is null and drops them.
@@ -81,8 +82,8 @@ body hooks][] instead.
 
 1. Save the script as `assets/js/plugins/`_`NAME`_`.js`, with _`NAME`_ in
    lowercase.
-2. Register it under `params.docsy.plugins` (fields:
-   [configuration reference](#configuration-reference)):
+2. Register it under `params.docsy.plugins`
+   ([configuration reference](#configuration-reference)):
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->

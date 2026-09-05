@@ -647,6 +647,10 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
+Docsy renders `markmap` fences through its own code-block render hook,
+`layouts/_markup/render-codeblock-markmap.html`; to change how they render,
+shadow that file.
+
 MarkMap scripts load only on pages containing a `markmap` code block. If you
 produce MarkMap markup some other way (raw HTML, your own render hook, the `tab`
 or `readfile code="true"` shortcodes with `lang=markmap`, a fence in content

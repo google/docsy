@@ -30,7 +30,6 @@ function tdPersistKey(key, value) {
   }
 }
 
-// Retrieve, increment, and store tab-select event count, then returns it.
 function tdGetTabSelectEventCountAndInc() {
   // @requires: _tdSupportsLocalStorage();
 
