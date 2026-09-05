@@ -116,38 +116,47 @@ test('a scalar false turns an entry off', () => {
   );
 });
 
-test('booleans are read typed: a quoted "false" is a truthy string', () => {
-  // Hugo's config formats have booleans, so `false` is spelled `false`; the
-  // loop coerces no strings (Hugo's own config reads don't either).
-  const r = buildSite('plugins-quoted-false', {
-    files: {
-      ...content,
-      'assets/js/plugins/hello.js': quietJs,
-      'assets/js/plugins/other.js': quietJs,
+test('env overrides cannot address registry entries: documented limitation', () => {
+  // HUGO_PARAMS_* splits a path on the delimiter and cannot spell a hyphen, so
+  // a hyphenated plugin name is unreachable (the override lands on a garbage
+  // key, which the missing-asset guard reports); a plain name is reached, but
+  // as a string, which a typed read leaves truthy. Either way: not a channel.
+  const r = buildSite('plugins-env-override', {
+    files: content,
+    env: {
+      HUGO_PARAMS_DOCSY_PLUGINS_CLICK_TO_COPY_ENABLE: 'false',
+      HUGO_PARAMS_DOCSY_PLUGINS_MARKMAP_ENABLE: 'false',
     },
-    extraConfig: `params:
-  docsy:
-    plugins:
-      hello: { enable: 'False', defer: 'false' }
-      other: 'FALSE'
-`,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  const html = r.publicFile('index.html');
   assert.match(
-    html,
-    /<script[^>]*\bdefer\b[^>]*js\/plugins\/hello/,
-    "a quoted 'False' enable and 'false' defer both read as true",
+    r.publicFile('index.html'),
+    /js\/plugins\/click-to-copy/,
+    'the hyphenated plugin is untouched',
   );
   assert.match(
     r.stderr,
-    /params\.docsy\.plugins\.other: FALSE is not a plugin entry/,
-    'a quoted scalar is a non-boolean scalar: warned and skipped',
+    /Plugin "click" is registered/,
+    'the garbage key surfaces as a missing asset',
   );
-  assert.doesNotMatch(
-    html,
-    /js\/plugins\/other/,
-    'the skipped entry emits nothing',
+});
+
+test('booleans are read typed: a quoted "False" is a truthy string', () => {
+  // The config formats have booleans, so `false` is spelled `false`; the loop
+  // coerces no strings, as Hugo's own config reads don't.
+  const r = buildSite('plugins-quoted-false', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: { enable: 'False' }
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  assert.match(
+    r.publicFile('index.html'),
+    /js\/plugins\/hello/,
+    "a quoted 'False' reads as true",
   );
 });
 

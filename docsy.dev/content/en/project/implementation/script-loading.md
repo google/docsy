@@ -28,10 +28,14 @@ scripts read `.Plugin.pagegate` and `params.apikey`.
 
 Values are read typed, as Hugo reads its own configuration: the config formats
 have booleans, so `false` is spelled `false`, and a quoted `"false"` is a truthy
-string. The loop coerces two shapes with a semantic reason: a boolean or empty
-`pageGate` means no gate (`false` is the natural spelling of "none"; the flag
-`"false"` would silently never match), and `weight` is cast to one integer kind
-(YAML yields `int` or `uint64` by source, and `sort` compares a mix as strings).
+string. `HUGO_PARAMS_*` environment overrides are not a channel for registry
+entries: the variable name cannot spell a hyphen, so a hyphenated plugin name is
+unreachable (the override lands on a stray key, which the missing-asset guard
+reports), and a plain name arrives as a string; layer a configuration file
+instead. Two coercions have a semantic reason: a boolean or empty `pageGate`
+means no gate (`false` is the natural spelling of "none", and the flag `"false"`
+would silently never match), and `weight` is cast to one integer kind (YAML
+yields `int` or `uint64` by source, and `sort` compares a mix as strings).
 
 ## Pre-registry parameters
 
