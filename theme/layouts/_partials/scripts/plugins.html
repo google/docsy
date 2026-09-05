@@ -1,51 +1,117 @@
-{{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
-  shape guards, and companion conventions:
-  https://www.docsy.dev/project/implementation/script-loading/ */ -}}
-{{ $registry := slice -}}
-{{ $docsy := .Site.Params.docsy -}}
-{{ if reflect.IsMap $docsy -}}
-  {{ $plugins := $docsy.plugins -}}
-  {{ if reflect.IsSlice $plugins -}}
-    {{ $registry = $plugins -}}
-  {{ else if ne $plugins nil -}}
-    {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a list of plugin entries; ignoring %v." $plugins -}}
-  {{ end -}}
+{{/* Emits each plugin registered in params.docsy.plugins. Configuration
+  reference and file contract: https://www.docsy.dev/docs/content/plugins/;
+  shim contract: https://www.docsy.dev/project/implementation/script-loading/ */ -}}
+{{/* Hugo lowercases params keys but not data keys: the schema's field names
+  are lowercased here to match. */ -}}
+{{ $schema := hugo.Data.docsy.schema.params.docsy.keys.plugins -}}
+{{ $seeSchema := "For the schema, see https://www.docsy.dev/docs/content/plugins/#configuration-reference" -}}
+{{ $defaults := dict -}}
+{{ range $field, $spec := $schema.entry -}}
+  {{ $defaults = merge $defaults (dict (lower $field) $spec.default) -}}
 {{ end -}}
-{{ range $registry -}}
-  {{ $entry := . -}}
-  {{ if not (reflect.IsMap $entry) -}}
-    {{ $entry = dict "name" $entry -}}
-  {{ end -}}
-  {{/* Names must be strings (YAML auto-types bare values). */ -}}
-  {{ $name := "" -}}
-  {{ with $entry.name }}{{ $name = printf "%v" . }}{{ end -}}
-  {{ if not $name -}}
-    {{ warnidf "docsy-plugin-unnamed" "Ignoring a params.docsy.plugins entry that has no name." -}}
-  {{ else if ne $entry.enable false -}}
-    {{ $path := printf "js/plugins/%s.js" $name -}}
-    {{ with resources.Get $path -}}
-      {{ if or (not $entry.pageGate) ($.Page.Store.Get $entry.pageGate) -}}
-        {{ with resources.Get (printf "scss/plugins/%s.scss" $name) -}}
-          {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
-          {{ if hugo.IsProduction -}}
-            {{ $css = $css | minify -}}
-          {{ end -}}
-          {{ $css = $css | fingerprint -}}
-          <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
-        {{- end -}}
-        {{ $companion := printf "scripts/plugins/%s.html" $name -}}
-        {{ if templates.Exists (printf "_partials/%s" $companion) -}}
-          {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
-        {{ end -}}
-        {{ $opts := dict "params" ($entry.options | default dict) -}}
-        {{ if hugo.IsProduction -}}
-          {{ $opts = merge $opts (dict "minify" true) -}}
-        {{ end -}}
-        {{ $js := . | js.Build $opts | fingerprint -}}
-        <script {{ if $entry.defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
-      {{- end -}}
-    {{ else -}}
-      {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
+{{ $registry := dict -}}
+{{ $docsy := .Site.Params.docsy -}}
+{{ if not (reflect.IsMap $docsy) -}}
+  {{ warnidf "docsy-config" "params.docsy is reserved for theme settings and must be a map (got %v). %s." $docsy $seeSchema -}}
+{{ else if not (reflect.IsMap $docsy.plugins) -}}
+  {{ warnidf "docsy-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v). %s." $docsy.plugins $seeSchema -}}
+{{ else -}}
+  {{ $registry = $docsy.plugins -}}
+{{ end -}}
+{{/* Normalize entries to the schema's lowercase key set (`merge` yields plain
+  maps without Hugo's case-insensitive access). Boolean checks accept string
+  spellings because env overrides arrive as strings
+  (https://www.docsy.dev/docs/content/configuration/#environment-variables).
+  Order is weight, then name: `sort` is stable over the key-ordered range. */ -}}
+{{ $entries := slice -}}
+{{ range $name, $value := $registry -}}
+  {{ $entry := $defaults -}}
+  {{ if reflect.IsMap $value -}}
+    {{ range $k, $v := $value -}}
+      {{ if isset $defaults (lower $k) -}}
+        {{ $entry = merge $entry (dict (lower $k) $v) -}}
+      {{ else -}}
+        {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored. %s." $name $k $seeSchema -}}
+      {{ end -}}
     {{ end -}}
+  {{ else if in (slice false "false" 0) $value -}}
+    {{ $entry = merge $entry (dict "enable" false) -}}
+  {{ else -}}
+    {{/* A scalar replaced any theme entry at merge time; the intent is
+      unrecoverable. */ -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s: %v is not a plugin entry (a map), skipped. %s." $name $value $seeSchema -}}
+    {{ continue -}}
+  {{ end -}}
+  {{/* `false` is the natural way to write "no gate"; `true` names no flag. */ -}}
+  {{ $gate := $entry.pagegate -}}
+  {{ if or (not $gate) (eq (printf "%T" $gate) "bool") -}}
+    {{ $gate = "" -}}
+  {{ else -}}
+    {{ $gate = printf "%v" $gate -}}
+  {{ end -}}
+  {{ $options := $entry.options -}}
+  {{ if eq $options nil -}}
+    {{ $options = dict -}}
+  {{ else if not (reflect.IsMap $options) -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s.options must be a map (got %v), ignored. %s." $name $options $seeSchema -}}
+    {{ $options = dict -}}
+  {{ end -}}
+  {{/* One integer kind for weight: YAML yields uint64 for non-negative literals
+    and int64 otherwise, and `sort` compares a mixed pair unsigned, so a negative
+    weight would sort last. */ -}}
+  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate "options" $options "weight" (int $entry.weight)) -}}
+  {{ $entries = $entries | append $entry -}}
+{{ end -}}
+{{ $entries = sort $entries "weight" -}}
+{{ range $entries -}}
+  {{ $entry := . -}}
+  {{ $name := .name -}}
+  {{ if not (findRE $schema.key.pattern $name) -}}
+    {{/* Names are path components: refuse traversal. */ -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q does not match %s, ignored. %s." $name $schema.key.pattern $seeSchema -}}
+    {{ continue -}}
+  {{ end -}}
+  {{ if hasSuffix $name $schema.key.reservedSuffix -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q ends in the reserved %s, ignored. %s." $name $schema.key.reservedSuffix $seeSchema -}}
+    {{ continue -}}
+  {{ end -}}
+  {{ $shim := printf "scripts/plugins/%s_docsy-shim.html" $name -}}
+  {{ if templates.Exists (printf "_partials/%s" $shim) -}}
+    {{ $entry = partial $shim (dict "Page" $ "Plugin" $entry) -}}
+    {{ if not (reflect.IsMap $entry) -}}
+      {{ errorf "Plugin shim %s must return the plugin entry (a map); got %T." $shim $entry -}}
+    {{ end -}}
+  {{ end -}}
+  {{ if in (slice false "false" 0) $entry.enable -}}
+    {{ continue -}}
+  {{ end -}}
+  {{ $gate := printf "%v" $entry.pagegate -}}
+  {{ $defer := in (slice true "true" 1) $entry.defer -}}
+  {{ $path := printf "js/plugins/%s.js" $name -}}
+  {{ with resources.Get $path -}}
+    {{ if or (not $gate) ($.Page.Store.Get $gate) -}}
+      {{ with resources.Get (printf "scss/plugins/%s.scss" $name) -}}
+        {{ $css := . | toCSS (dict "transpiler" "dartsass") -}}
+        {{ if hugo.IsProduction -}}
+          {{ $css = $css | minify -}}
+        {{ end -}}
+        {{ $css = $css | fingerprint -}}
+        <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+        {{- "\n" -}}
+      {{ end -}}
+      {{ $companion := printf "scripts/plugins/%s.html" $name -}}
+      {{ if templates.Exists (printf "_partials/%s" $companion) -}}
+        {{ partial $companion (dict "Page" $ "Plugin" $entry) -}}
+      {{ end -}}
+      {{ $opts := dict "params" $entry.options -}}
+      {{ if hugo.IsProduction -}}
+        {{ $opts = merge $opts (dict "minify" true) -}}
+      {{ end -}}
+      {{ $js := . | js.Build $opts | fingerprint -}}
+      <script {{ if $defer }}defer {{ end }}src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- "\n" -}}
+    {{ end -}}
+  {{ else -}}
+    {{ warnidf "docsy-plugin-missing" "Plugin %q is registered in params.docsy.plugins but assets/%s was not found." $name $path -}}
   {{ end -}}
 {{ end -}}

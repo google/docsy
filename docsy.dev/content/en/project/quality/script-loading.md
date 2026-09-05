@@ -39,10 +39,24 @@ gate-to-partial wiring, offline.
 ## Loop-contract tests
 
 [`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
-emission with `@params`, `enable`/`defer`/`pageGate` handling, both companions,
-shape-guard warnings, name coercion, and fingerprint distinctness (duplicate
-registrations publish distinct builds, in development too). Theme-plugin
-shadowing gets its pin when the first theme plugin ships.
+
+- **Emission**: `@params` delivery, `enable`/`defer`/`pageGate`/`weight`
+  handling, boolean gates, the scalar `false` shorthand, env-override booleans,
+  companions and shims, SRI in development builds.
+- **Validation**: shape-guard warnings (the pre-release list shape and a site's
+  own `params.docsy` included), name and field allowlisting (the `_docsy-shim`
+  suffix refused, unknown fields and non-map `options` warned).
+- **Layering**: theme plugins through Hugo's config merge (inheritance,
+  override, turn-off).
+
+Three companion nets pin the conversions:
+
+- [`tabpane-persist-plugin.test.mjs`][tabpane-test]: the ungated default,
+  persistence opt-out, and theme-plugin shadowing.
+- [`markmap-plugin.test.mjs`][markmap-test] and
+  [`click-to-copy-plugin.test.mjs`][c2c-test]: the per-conversion contracts. The
+  markmap cases stub the vendoring companion with a marker to stay offline; the
+  real vendor fetch is pinned in the browser net.
 
 ## Acceptance test
 
@@ -57,9 +71,9 @@ Two browser nets under `tests/visual/`:
 
 - [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
   real browser and asserts that no uncaught exception or in-scope console error
-  fires, alongside behavior probes (search, diagrams, navbar). Markup and visual
-  goldens can't see JS runtime breakage (a missing global, a botched
-  conversion); this net can ([#1436][]).
+  fires, alongside behavior probes (search, diagrams, navbar, copy button, tab
+  persistence). Markup and visual goldens can't see JS runtime breakage (a
+  missing global, a botched conversion); this net can ([#1436][]).
   - Two fixture variants cover both search bundles: the main bundle
     (`scripts/main-bundle.html`) concatenates `offline-search.js` or `search.js`
     into `main.js`, never both.
@@ -94,12 +108,15 @@ safeguard proves the signal:
 <!-- prettier-ignore-start -->
 [#1436]: https://github.com/google/docsy/issues/1436
 [acceptance-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs
+[c2c-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/click-to-copy-plugin.test.mjs
 [design]: /project/design/script-loading/
 [dispatch-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-dispatch.test.mjs
 [golden-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/scripts-golden.test.mjs
 [goldens-lib]: https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs
 [implementation]: /project/implementation/script-loading/
 [loop-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/plugins.test.mjs
+[markmap-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs
 [plugin-runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
 [runtime-test]: https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs
+[tabpane-test]: https://github.com/google/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs
 <!-- prettier-ignore-end -->

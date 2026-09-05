@@ -1,9 +1,6 @@
-// Storage key names and data attribute name:
 const td_persistStorageKeyNameBase = 'td-tp-persist';
 const td_persistCounterStorageKeyName = `${td_persistStorageKeyNameBase}-count`;
 const td_persistDataAttrName = `data-${td_persistStorageKeyNameBase}`;
-
-// Utilities
 
 const _tdPersistCssSelector = (attrValue) =>
   attrValue
@@ -15,10 +12,8 @@ const _tdStoragePersistKey = (tabKey) =>
 
 const _tdSupportsLocalStorage = () => typeof Storage !== 'undefined';
 
-// Helpers
-
 function tdPersistKey(key, value) {
-  // @requires: tdSupportsLocalStorage();
+  // @requires: _tdSupportsLocalStorage();
 
   try {
     if (value) {
@@ -35,9 +30,8 @@ function tdPersistKey(key, value) {
   }
 }
 
-// Retrieve, increment, and store tab-select event count, then returns it.
 function tdGetTabSelectEventCountAndInc() {
-  // @requires: tdSupportsLocalStorage();
+  // @requires: _tdSupportsLocalStorage();
 
   const storedCount = localStorage.getItem(td_persistCounterStorageKeyName);
   let numTabSelectEvents = parseInt(storedCount) || 0;
@@ -45,8 +39,6 @@ function tdGetTabSelectEventCountAndInc() {
   tdPersistKey(td_persistCounterStorageKeyName, numTabSelectEvents.toString());
   return numTabSelectEvents;
 }
-
-// Main functions
 
 function tdActivateTabsWithKey(key) {
   if (!key) return;
@@ -66,29 +58,22 @@ function tdPersistActiveTab(activeTabKey) {
   tdActivateTabsWithKey(activeTabKey);
 }
 
-// Handlers
-
 function tdGetAndActivatePersistedTabs(tabs) {
-  // Get unique persistence keys of tabs in this page
   var keyOfTabsInThisPage = [
     ...new Set(
       Array.from(tabs).map((el) => el.getAttribute(td_persistDataAttrName))
     ),
   ];
 
-  // Create a list of active tabs with their age:
+  // Oldest first, so the latest selection wins where keys share a tabpane.
   let key_ageList = keyOfTabsInThisPage
-    // Map to [tab-key, last-activated-age]
     .map((k) => [
       k,
       parseInt(localStorage.getItem(_tdStoragePersistKey(k))) || 0,
     ])
-    // Exclude tabs that have never been activated
     .filter(([k, v]) => v)
-    // Sort from oldest selected to most recently selected
     .sort((a, b) => a[1] - b[1]);
 
-  // Activate tabs from the oldest to the newest
   key_ageList.forEach(([key]) => {
     tdActivateTabsWithKey(key);
   });
@@ -104,8 +89,6 @@ function tdRegisterTabClickHandler(tabs) {
     });
   });
 }
-
-// Register listeners and activate tabs
 
 window.addEventListener('DOMContentLoaded', () => {
   if (!_tdSupportsLocalStorage()) return;

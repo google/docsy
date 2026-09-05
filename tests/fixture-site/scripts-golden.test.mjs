@@ -26,6 +26,14 @@ for (const { name, build, pages } of builds) {
     test(`scripts golden: ${name} ${page}`, () => {
       const region = extractScriptRegion(build.publicFile(page));
       assert.ok(region.length > 0, 'script region is non-empty');
+      for (const line of region.split('\n')) {
+        const tags = line.match(/<(script|link)\b/g) ?? [];
+        assert.ok(
+          tags.length === 0 ||
+            (tags.length === 1 && /^\s*<(script|link)\b/.test(line)),
+          `each script/link element starts on its own line: ${line}`,
+        );
+      }
       const goldenFile = `${name}--${page.replaceAll('/', '-')}.txt`;
       const golden = readFileSync(path.join(goldenDir, goldenFile), 'utf8');
       assert.equal(
@@ -38,7 +46,7 @@ for (const { name, build, pages } of builds) {
 
   for (const golden of byteGoldens) {
     test(`scripts golden: ${name} ${golden.name} bytes`, () => {
-      const html = build.publicFile('index.html');
+      const html = build.publicFile(golden.page);
       const goldenFile = path.join(goldenDir, `${name}--${golden.name}.txt`);
       if (!golden.re.test(html)) {
         // Not part of this config (e.g. prism replaces click-to-copy);

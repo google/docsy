@@ -539,9 +539,11 @@ project's configuration file.
 
 #### Copy to clipboard
 
-If you are using a Docsy 0.6.0 or later, code blocks show a "Copy to clipboard"
-button in the top right-hand corner. To disable this functionality, set
-`disable_click2copy_chroma` to `true` in your configuration file.
+Code blocks show a "Copy to clipboard" button in the top right-hand corner. To
+turn it off, see the
+[`click-to-copy` plugin](/docs/content/plugins/#configure-docsys-plugins).
+(Before 0.18 the parameter was `params.disable_click2copy_chroma`, deprecated
+but still honored for this release cycle, with a build warning.)
 
 ### Code highlighting with Prism
 
@@ -969,7 +971,8 @@ is automatically included just before the end of the theme partial
 
 Similarly, if you want to add some code right before the `body` end, create your
 own version of [hooks/body-end.html][]. This partial is included automatically
-at the end of the theme partial [scripts.html][].
+at the end of the theme partial [scripts.html][]. For a script file, register a
+[plugin][] instead.
 
 Both [head.html][] and [scripts.html][] are included from [baseof.html][],
 Docsy's [base template][].
@@ -980,6 +983,7 @@ Docsy's [base template][].
 [head.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/head.html
 [hooks/body-end.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/body-end.html
 [hooks/head-end.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html
+[plugin]: /docs/content/plugins/#add-a-custom-script
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
 <!-- prettier-ignore-end -->
 

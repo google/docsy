@@ -144,6 +144,11 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length": {
+    "status": 200,
+    "when": "2026-09-05T15:27:29Z",
+    "via": "lychee",
+  },
   "https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink": {
     "status": 200,
     "when": "2026-09-02T08:07:12Z",
@@ -167,6 +172,11 @@
   "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options": {
     "status": 200,
     "when": "2026-06-26T18:23:57Z",
+    "via": "lychee",
+  },
+  "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity": {
+    "status": 200,
+    "when": "2026-09-03T19:38:47Z",
     "via": "lychee",
   },
   "https://developers.google.com/search/docs/fundamentals/seo-starter-guide": {
@@ -1064,10 +1074,24 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/click-to-copy-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/lib/scripts-goldens.mjs": {
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
+  },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
     "status": 200,
@@ -1088,6 +1112,13 @@
     "status": 200,
     "when": "2026-09-02T19:09:14Z",
     "via": "lychee",
+  },
+  // New-test seed: goes live when the plugin conversions (#2791) merge.
+  "https://github.com/google/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-03T09:40:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://github.com/google/docsy/blob/main/tests/visual/js-runtime.test.mjs": {
     "status": 200,
@@ -1944,6 +1975,11 @@
     "when": "2026-06-26T18:24:04Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/issues/new?title=Configuration": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/issues/new?title=Content%20and%20Customization": {
     "status": 200,
     "when": "2026-09-02T08:07:17Z",
@@ -2132,6 +2168,11 @@
   "https://github.com/google/docsy/issues/new?title=Other%20setup%20options": {
     "status": 200,
     "when": "2026-06-26T18:24:05Z",
+    "via": "lychee",
+  },
+  "https://github.com/google/docsy/issues/new?title=Plugins": {
+    "status": 200,
+    "when": "2026-09-04T21:11:11Z",
     "via": "lychee",
   },
   "https://github.com/google/docsy/issues/new?title=Print%20Support": {
@@ -2904,6 +2945,11 @@
     "when": "2026-09-03T01:13:43Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/pull/2791": {
+    "status": 200,
+    "when": "2026-09-03T09:39:38Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/pull/941": {
     "status": 200,
     "when": "2026-09-02T08:07:06Z",
@@ -3571,6 +3617,11 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  "https://gohugo.io/configuration/introduction/#merge-configuration-settings": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/configuration/markup/#extensions": {
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
@@ -3741,6 +3792,16 @@
     "when": "2026-06-26T18:23:57Z",
     "via": "lychee",
   },
+  "https://gohugo.io/functions/js/build/": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/functions/js/build/#params": {
+    "status": 200,
+    "when": "2026-09-03T19:42:01Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/functions/relref/": {
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
@@ -3854,6 +3915,11 @@
   "https://gohugo.io/methods/page/outputformats/#canonical": {
     "status": 200,
     "when": "2026-09-02T08:07:11Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/methods/page/rendershortcodes/": {
+    "status": 200,
+    "when": "2026-09-04T20:51:32Z",
     "via": "lychee",
   },
   "https://gohugo.io/methods/page/renderstring/": {
@@ -4198,6 +4264,13 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://main--docsydocs.netlify.app/docs/content/configuration/": {
+    "status": 206,
+    "when": "2026-09-05T11:50:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "status": 200,
     "when": "2026-06-26T18:23:56Z",
@@ -4222,6 +4295,12 @@
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
+  },
+  "https://main--docsydocs.netlify.app/docs/content/plugins/": {
+    "status": 206,
+    "when": "2026-09-04T21:15:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://main--docsydocs.netlify.app/docs/content/print/": {
     "status": 200,
@@ -5033,6 +5112,13 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://www.docsy.dev/docs/content/configuration/": {
+    "status": 206,
+    "when": "2026-09-05T11:50:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "status": 200,
     "when": "2026-06-26T18:23:56Z",
@@ -5057,6 +5143,12 @@
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
+  },
+  "https://www.docsy.dev/docs/content/plugins/": {
+    "status": 206,
+    "when": "2026-09-04T21:15:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://www.docsy.dev/docs/content/print/": {
     "status": 200,

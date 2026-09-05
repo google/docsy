@@ -42,9 +42,11 @@ const PINS = [
   },
   {
     param: 'markmap',
-    template: 'theme/layouts/_partials/scripts/markmap.html',
+    // The pin feeds the vendor fetch (the companion partial), not a
+    // browser-facing CDN tag.
+    template: 'theme/layouts/_partials/scripts/plugins/markmap.html',
     cdnPackage: 'markmap-autoloader',
-    urlForm: '{{ $version }}',
+    urlForm: '%s',
   },
   {
     param: 'redoc',
@@ -85,7 +87,9 @@ for (const { param, template, cdnPackage, urlForm } of PINS) {
     assert.match(
       text,
       new RegExp(
-        String.raw`\$version := \.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace`,
+        // Companion partials receive a { Page, Plugin } dict, hence the
+        // optional .Page prefix; a type guard may precede the read (`=`).
+        String.raw`\$version :?= (\.Page)?\.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace`,
       ),
       `the template reads params.${param}.version bare, first in its pipeline`,
     );

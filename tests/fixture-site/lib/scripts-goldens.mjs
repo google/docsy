@@ -1,8 +1,8 @@
 // Shared spec for the scripts.html goldens: fixture builds, the script-region
 // extractor, and whitespace normalization. Consumed by scripts-golden.test.mjs
 // (assert) and update-scripts-goldens.mjs (refresh). Configs stay offline-safe:
-// features whose partials call resources.GetRemote (mermaid, katex) are not
-// enabled here.
+// features that fetch at build time (mermaid, katex, markmap) are not enabled
+// here; their own nets cover them.
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,18 +27,11 @@ const files = {
 const configs = [
   { name: 'defaults', extraConfig: '' },
   {
-    // Every offline-safe loading mechanism in scripts.html lit at once:
-    // template-wrapped bundle members (markmap, plantuml, drawio), raw
-    // static files (deflate, prism), the markmap partial's CDN tag,
-    // Algolia's CDN + config tags, and offline search replacing the
-    // default search script. Offline-safe: tags are emitted, never
-    // fetched, at build time.
+    // Every offline-safe loading mechanism lit at once.
     name: 'featureful',
     extraConfig: `params:
   offlineSearch: true
   prism_syntax_highlighting: true
-  markmap:
-    enable: true
   plantuml:
     enable: true
   drawio:
@@ -71,14 +64,14 @@ export function extractScriptRegion(html) {
   return html.slice(start + '</footer>'.length, end);
 }
 
-// Whitespace-insensitive comparison form: collapse runs, trim. Fingerprint
-// integrity values (sha256, content-addressed like the hashed names) are
-// stripped so region goldens don't break on every bundle change; bundle
-// bytes are pinned byte-exactly by the byte goldens. CDN SRI hashes
-// (sha384/sha512) stay compared: the goldens are their pin.
+// Whitespace-insensitive comparison form: collapse runs, trim. Fingerprints
+// (hashed names and their sha256 integrity values) are stripped so region
+// goldens don't break on every script change; the scripts' bytes are pinned
+// by the byte goldens. CDN SRI hashes (sha384/sha512) stay compared: the
+// goldens are their pin.
 export const normalize = (s) =>
   s
-    .replace(/\.min\.[0-9a-f]{64}\.js/g, '.min.js')
+    .replace(/\.[0-9a-f]{64}\.(js|css)\b/g, '.$1')
     .replace(/integrity="sha256-[^"]*"/g, 'integrity=""')
     .replace(/\s+/g, ' ')
     .trim();
@@ -89,12 +82,22 @@ export const normalize = (s) =>
 export const canonicalRegion = (s) =>
   s.replace(/[^\S\n]+$/gm, '').replace(/\n*$/, '\n');
 
-// Byte-pinned local scripts, resolved from the page markup (names are
-// fingerprinted): every locally built script in the region, so a content
-// change can't hide behind the region comparison's hash-stripping.
+// Byte-pinned local scripts, resolved from the markup of the page that
+// carries them (names are fingerprinted): every locally built script in the
+// region, so a content change can't hide behind the region comparison's
+// hash-stripping.
 export const byteGoldens = [
-  { name: 'main.js', re: /src="\/(js\/main[^"]*\.js)"/ },
-  { name: 'click-to-copy.js', re: /src="\/(js\/click-to-copy[^"]*\.js)"/ },
+  { name: 'main.js', page: 'index.html', re: /src="\/(js\/main[^"]*\.js)"/ },
+  {
+    name: 'click-to-copy.js',
+    page: 'index.html',
+    re: /src="\/(js\/plugins\/click-to-copy[^"]*\.js)"/,
+  },
+  {
+    name: 'tabpane-persist.js',
+    page: 'docs/tabs/index.html',
+    re: /src="\/(js\/plugins\/tabpane-persist[^"]*\.js)"/,
+  },
 ];
 
 export function scriptPath(html, { name, re }) {

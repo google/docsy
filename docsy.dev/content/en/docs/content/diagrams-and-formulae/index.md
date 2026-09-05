@@ -1,24 +1,23 @@
 ---
 title: Diagrams and Formulae
-description: Add generated diagrams and scientific formulae to your site.
+description:
+  Write Mermaid, PlantUML, and MarkMap diagrams as code blocks, typeset KaTeX
+  formulae, make Diagrams.net images editable in place, and configure their
+  renderers.
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
-Docsy has built-in support for a number of diagram creation and typesetting
-tools you can use to add rich content to your site, including \(\KaTeX\),
-Mermaid, Diagrams.net, PlantUML, and MarkMap.
-
 ## Pinned script-dependency versions {#script-dep-versions}
 
-Docsy renders some rich content with scripts and stylesheets that it loads from
-public CDNs: Mermaid, KaTeX's stylesheet and fonts, markmap-autoloader, and
-Redoc (the [`redoc` shortcode][]). Each loads at a version pinned in the theme's
-configuration and bumped with each Docsy release. Pinning keeps builds
-reproducible and page rendering stable, and narrows exposure to bad upstream
-publishes: a version alias such as `latest`, or a partial version such as `11`,
-is re-resolved by the CDN on each request or uncached build, so your site's
-rendering could change or break without any change on your part (for example,
-when an upstream major ships).
+Docsy renders some rich content with scripts and stylesheets fetched from public
+CDNs, at build time or in the browser: Mermaid, KaTeX's stylesheet and fonts,
+markmap-autoloader, and Redoc (the [`redoc` shortcode][]). Each loads at a
+version pinned in the theme's configuration and bumped with each Docsy release.
+Pinning keeps builds reproducible and page rendering stable, and narrows
+exposure to bad upstream publishes: a version alias such as `latest`, or a
+partial version such as `11`, is re-resolved by the CDN on each request or
+uncached build, so your site's rendering could change or break without any
+change on your part (for example, when an upstream major ships).
 
 To use a different version of one of these dependencies, set
 `params.`_`PACKAGE`_`.version` in your configuration file, where _`PACKAGE`_ is
@@ -549,8 +548,8 @@ params:
 
 ## MindMap support with MarkMap
 
-[MarkMap](https://markmap.js.org/) is a Javascript library for rendering simple
-text definitions to MindMap in the browser.
+[MarkMap](https://markmap.js.org/) renders Markdown as an interactive mind map
+in the browser.
 
 For example, the following defines a simple MindMap:
 
@@ -587,7 +586,7 @@ For example, the following defines a simple MindMap:
 
 <!-- markdownlint-restore -->
 
-Automatically renders to:
+With MarkMap enabled, Docsy renders it as:
 
 ````markmap
 # markmap
@@ -616,26 +615,30 @@ Automatically renders to:
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ````
 
-To enable/disable MarkMap, update `hugo.toml`/`hugo.yaml`/`hugo.json`:
+### Activating MarkMap support
+
+To enable MarkMap, turn on its plugin in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
 {{< tabpane >}}
 {{< tab header="Configuration file:" disabled=true />}}
 {{< tab header="hugo.toml" lang="toml" >}}
-[params.markmap]
+[params.docsy.plugins.markmap]
 enable = true
 {{< /tab >}}
 {{< tab header="hugo.yaml" lang="yaml" >}}
 params:
-  markmap:
-    enable: true
+  docsy:
+    plugins:
+      markmap:
+        enable: true
 {{< /tab >}}
 {{< tab header="hugo.json" lang="json" >}}
 {
   "params": {
-    "markmap": {
-      "enable": true
+    "docsy": {
+      "plugins": { "markmap": { "enable": true } }
     }
   }
 }
@@ -644,14 +647,61 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
+Docsy renders `markmap` fences through its own code-block render hook,
+`layouts/_markup/render-codeblock-markmap.html`; to change how they render,
+shadow that file.
+
+MarkMap scripts load only on pages containing a `markmap` code block. If you
+produce MarkMap markup some other way (raw HTML, your own render hook, the `tab`
+or `readfile code="true"` shortcodes with `lang=markmap`, a fence in content
+pulled in with `.Content`, or a printed section), clear the entry's gate so the
+scripts load site-wide ([why][page-flags]):
+
+```yaml
+params:
+  docsy:
+    plugins:
+      markmap:
+        enable: true
+        pageGate: ''
+```
+
+The entry's `options` take a `height` for the rendered map, a [CSS length][].
+The default is `300px`, which also applies when the value isn't a valid length:
+
+```yaml
+params:
+  docsy:
+    plugins:
+      markmap:
+        enable: true
+        options: { height: 400px }
+```
+
+> [!NOTE]
+>
+> Before 0.18, MarkMap was enabled with `params.markmap.enable`. That parameter
+> is deprecated: it still works for this release cycle, with a build warning,
+> and keeps its pre-0.18 behavior of loading MarkMap on every page.
+
 ### MarkMap version
 
-Docsy loads the [markmap-autoloader][] script from the jsDelivr CDN at page
-load, at the [pinned version](#script-dep-versions), currently
-{{% param markmap.version %}}; to use a different one, set
-`params.markmap.version`.
+At build time, Docsy fetches the [pinned version](#script-dep-versions),
+currently {{% param markmap.version %}}, of the [markmap-autoloader][] package's
+entry file and serves it from your site with subresource integrity.
 
+- To use a different version, set `params.markmap.version`.
+- Sites that restrict Hugo's remote fetches (`security.http`) must allow
+  `cdn.jsdelivr.net`.
+- To build without network access, override the plugin's companion partial,
+  `layouts/_partials/scripts/plugins/markmap.html`, to serve a copy you host.
+- The autoloader itself loads MarkMap's runtime libraries from a public CDN in
+  the browser, at versions it pins but without subresource integrity.
+
+[CSS length]:
+  https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
+[page-flags]: /docs/content/plugins/#page-flags-in-included-content
 
 ## Diagrams with Diagrams.net
 

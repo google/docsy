@@ -52,8 +52,6 @@ const copyCode = (codeSample) => {
     const clone = codeSample.cloneNode(true);
     pruneUnselectableElements(codeSample, clone);
     text = clone.textContent;
-    // For each command, strip the space after the prompt and before the
-    // command:
     text = text.replace(/^ /gm, '');
   } else {
     text = codeSample.textContent;

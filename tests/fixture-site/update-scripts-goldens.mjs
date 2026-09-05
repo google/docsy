@@ -26,8 +26,8 @@ for (const { name, build, pages } of buildScriptsFixtures()) {
     );
     console.log(`wrote ${file}`);
   }
-  const html = build.publicFile('index.html');
   for (const golden of byteGoldens) {
+    const html = build.publicFile(golden.page);
     const file = path.join(goldenDir, `${name}--${golden.name}.txt`);
     if (!golden.re.test(html)) {
       rmSync(file, { force: true });

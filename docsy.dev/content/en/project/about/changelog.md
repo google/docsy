@@ -153,10 +153,17 @@ history since 0.17.0][].
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
+- **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
+  points for MarkMap, tab persistence, and click-to-copy; page-gated MarkMap,
+  whose autoloader is now fetched at build time; reserved `params.docsy` for
+  theme settings ([#2789][]).
 
 **New**:
 
-- ...
+- **[Plugins][ug-plugins]**: added `params.docsy.plugins`, a registry that loads
+  site scripts without layout overrides; MarkMap, tab persistence, and
+  click-to-copy ship through it. Deprecated `params.markmap.enable` and
+  `params.disable_click2copy_chroma` in favor of registry entries ([#2789][]).
 
 **Other changes**:
 
@@ -188,8 +195,11 @@ history since 0.17.0][].
 [#2779]: https://github.com/google/docsy/pull/2779
 [#2781]: https://github.com/google/docsy/pull/2781
 [#2786]: https://github.com/google/docsy/pull/2786
+[#2789]: https://github.com/google/docsy/issues/2789
 [0.18.0]: https://github.com/google/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
+[0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
+[ug-plugins]: /docs/content/plugins/
 [git history since 0.17.0]:
   https://github.com/google/docsy/compare/v0.17.0...main
 

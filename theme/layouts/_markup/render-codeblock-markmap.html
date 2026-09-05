@@ -1,0 +1,4 @@
+{{/* Sets the markmap plugin's page gate; rendering stays Hugo's default (why:
+  https://www.docsy.dev/project/design/script-loading/#gating-decisions). */ -}}
+{{ .Page.Store.Set "hasMarkmap" true -}}
+{{ (transform.HighlightCodeBlock .).Wrapped -}}

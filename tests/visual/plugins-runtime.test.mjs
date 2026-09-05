@@ -24,10 +24,10 @@ before(async () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: probe
+      probe:
         options:
           token: runtime-net
-      - name: broken
+      broken:
         defer: true
 `,
   });
@@ -54,7 +54,6 @@ async function loadHome() {
   });
   const origin = server.origin;
   await page.setRequestInterception(true);
-  // Off-origin requests abort: deterministic, offline-safe runs.
   page.on('request', (req) =>
     req.url().startsWith(origin) ? req.continue() : req.abort(),
   );

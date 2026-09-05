@@ -16,7 +16,7 @@ import {
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const repoRoot = path.resolve(
+export const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../..',
 );
@@ -52,11 +52,12 @@ themesDir: ${repoRoot}
 // Build a fixture site named `name` under tmp/fixture-site/ (repo root).
 // Site files come from `srcDir` (a checked-in fixture directory), `files`
 // (a relative-path → content map), or both. The generated hugo.yaml can be
-// extended via `extraConfig`, and its site `title` overridden (handy when two
-// builds must be identical apart from their output dir); extra Hugo CLI args
-// pass through `args`, process-env overrides through `env`. Returns the
-// spawnSync result plus the site path and a `publicFile(relPath)` reader over
-// the output.
+// extended via `extraConfig`, and its site `title` overridden (the default
+// embeds the fixture name, which an absence assertion on the rendered pages
+// would then match; also handy when two builds must be identical apart from
+// their output dir); extra Hugo CLI args pass through `args`, process-env
+// overrides through `env`. Returns the spawnSync result plus the site path and
+// a `publicFile(relPath)` reader over the output.
 export function buildSite(
   name,
   { files = {}, srcDir, extraConfig = '', env = {}, title, args = [] } = {},

@@ -70,7 +70,7 @@ const PACKAGES = {
       `${TAR}layouts/baseof.html`,
       `${TAR}assets/scss/main.scss`,
       `${TAR}i18n/en.yaml`,
-      `${TAR}static/js/tabpane-persist.js`,
+      `${TAR}assets/js/plugins/tabpane-persist.js`,
     ],
     // images/, theme.toml, and go.mod serve only the git-based channels
     // (Hugo themes registry, Hugo modules), so npm clients never need them.

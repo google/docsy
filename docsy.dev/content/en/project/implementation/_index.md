@@ -9,8 +9,9 @@ no_list: true
 
 ## Subsystems
 
-- [Script loading](/project/implementation/script-loading/): registry contract,
-  shape guards, and build details of the plugin loop
+- [Script loading](/project/implementation/script-loading/): the plugin loop's
+  shim contract, shape guards, build pipeline, and the security rules Docsy's
+  own plugins follow
 
 ## Patches and workarounds
 

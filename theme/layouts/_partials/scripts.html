@@ -2,10 +2,6 @@
 {{/* Body-end script dispatcher. Architecture and override points:
   https://www.docsy.dev/project/design/script-loading/ */ -}}
 
-{{ if .Site.Params.markmap.enable -}}
-  {{ partial "scripts/markmap.html" . -}}
-{{ end -}}
-
 {{ if .Site.Params.plantuml.enable -}}
   {{ partial "scripts/plantuml-deflate.html" . -}}
 {{ end -}}
@@ -19,8 +15,7 @@
 {{ end -}}
 
 {{ partial "scripts/main-bundle.html" . -}}
-{{ partial "scripts/code-copy.html" . -}}
+{{ partial "scripts/prism.html" . -}}
 {{ partial "scripts/algolia.html" . -}}
 {{ partial "scripts/plugins.html" . -}}
-{{ partial "scripts/tabpane-persist.html" . -}}
 {{ partial "hooks/body-end.html" . -}}

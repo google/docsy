@@ -1,11 +1,12 @@
-# Docsy config
-#
-# cSpell:ignore docsy fortawesome fontawesome github permalinkable twbs webfonts
-
 params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
+  docsy:
+    plugins:
+      click-to-copy: { defer: true }
+      tabpane-persist: {}
+      markmap: { enable: false, pageGate: hasMarkmap }
   katex:
     version: 0.18.4
   markmap:
@@ -28,7 +29,7 @@ outputFormats:
     # isHTML: true
     mediaType: text/html
     path: _print
-    permalinkable: false
+    permalinkable: false # cSpell:disable-line
 
 # Needed for KaTeX, possibly useful for others. see
 # https://github.com/google/docsy/pull/2465
@@ -49,6 +50,8 @@ module:
       target: assets/vendor/bootstrap
     - source: node_modules/@fortawesome/fontawesome-free
       target: assets/vendor/Font-Awesome
+    - source: data
+      target: data
     - source: i18n
       target: i18n
     - source: layouts

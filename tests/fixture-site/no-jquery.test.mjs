@@ -1,9 +1,9 @@
 // jQuery-absence gate (google/docsy#1436): the theme ships and loads no
 // jQuery. Locks the removal in two layers: rendered pages reference no
-// jquery script, and authored theme JS (assets, first-party static JS,
-// and inline layout scripts) contains no jQuery usage tokens. prism.js
-// and deflate.js under theme/static/js/ are exempt: vendored third-party
-// bundles, upstream-owned and jQuery-free by their own contract.
+// jquery script, and authored theme JS (assets, plugins included, and
+// inline layout scripts) contains no jQuery usage tokens. theme/static/js/
+// (prism.js, deflate.js) is out of scope: vendored third-party bundles,
+// upstream-owned and jQuery-free by their own contract.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,8 +20,6 @@ const repoRoot = path.resolve(
 
 test('rendered pages reference no jquery script', () => {
   const build = buildSite('no-jquery', {
-    // Own title: the default embeds the fixture name, which this very
-    // test would then match in the rendered pages.
     title: 'Docsy absence-gate fixture',
     files: {
       'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -54,12 +52,9 @@ test('authored theme JS contains no jQuery usage', () => {
       re: jsUsage,
     },
     {
-      name: 'first-party static JS',
-      // basename comparison: globSync returns backslash paths on Windows.
-      files: globSync('theme/static/js/*.js', { cwd: repoRoot }).filter(
-        (f) => !['prism.js', 'deflate.js'].includes(path.basename(f)),
-      ),
-      floor: 1,
+      name: 'theme JS plugins',
+      files: globSync('theme/assets/js/plugins/*.js', { cwd: repoRoot }),
+      floor: 3,
       re: jsUsage,
     },
     {

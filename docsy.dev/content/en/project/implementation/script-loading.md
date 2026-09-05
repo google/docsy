@@ -1,79 +1,66 @@
 ---
 title: Script loading
-description:
-  Registry contract, shape guards, and build details of the plugin loop
+description: >-
+  The plugin loop's shim contract, shape guards, build pipeline, and the
+  security rules Docsy's own plugins follow
 ---
 
-Code-level notes for [`_partials/scripts/plugins.html`][plugins.html], the loop
-behind `params.docsy.plugins`. For the architecture and ordering decisions, see
-the [design notes][design].
+[`_partials/scripts/plugins.html`][plugins.html] implements
+`params.docsy.plugins`. For the configuration reference and the plugin file
+contract, see the [plugins guide][guide]; for the design rationale, the [design
+notes][design]; for the tests that pin this contract, the [quality
+notes][quality].
 
-## Registry contract
+## Loop mechanics
 
-`params.docsy.plugins` is a list of plugin entries:
+The template's comments carry the mechanics and their rationale. The loop reads
+the theme's schema through `hugo.Data`; the guide [renders the same
+file][guide-config], so shape and defaults have one home.
 
-```yaml
-params:
-  docsy:
-    plugins:
-      - name: NAME # resolves assets/js/plugins/NAME.js
-        enable: true # optional; false skips the entry
-        defer: true # optional; adds `defer` to the script tag
-        pageGate: FLAG # optional; a .Page.Store flag name
-        options: {} # optional; reaches the module as @params
-      - NAME # bare-name shorthand for { name: NAME }
-```
+## Pre-registry parameters
 
-- Names are coerced to strings (`printf "%v"`): YAML auto-types entries like
-  `name: 2048`, and the loop must resolve the same asset path either way.
-- Registry order is emission order.
-- With `pageGate` set, the plugin is emitted only on pages carrying the named
-  `.Page.Store` flag.
+A plugin whose behavior a parameter controlled before the registry ships a shim
+partial, `_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html` (the suffix the
+schema reserves). The loop applies it to the plugin's merged entry before the
+enable and gate checks, invoked with `(dict "Page" PAGE "Plugin" ENTRY)`. It
+must return the entry it received, adjusted with `merge`, so the fields it
+leaves alone keep their normalized values; anything but a map fails the build.
+Parameter-specific behavior lives in the shim, and the shim is deleted when its
+parameter's deprecation cycle ends.
 
 ## Shape guards
 
-The registry read must not break sites that already carry a `params.docsy`
-value:
-
-- A scalar `params.docsy` is left untouched (the read is gated on
-  `reflect.IsMap`) and the loop emits nothing.
-- A non-list `params.docsy.plugins`, falsy scalars included, warns
-  (`docsy-plugins-config`) and is ignored.
-- An entry with no usable name warns (`docsy-plugin-unnamed`) and is skipped.
-- An enabled registration with no asset at `assets/js/plugins/NAME.js` warns
-  (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
-  behind a gate.
-
-Warnings are issued with `warnidf`, so each is suppressible through Hugo's
-`ignoreLogs`.
+Enforcement is hand-coded in the loop against the schema; what each guard warns
+about, ignores, or empties is the guide's [Warnings][guide-warnings] list. Asset
+lookup runs after the enable check and before the page gate.
 
 ## Build and emission
 
-- The script asset resolves through the union file system: theme, project, or
-  module-mounted, with a same-named project file shadowing the theme's.
-- Each plugin builds individually with `js.Build`; the entry's `options` travel
-  as build `params`, so the module reads them with
-  `import * as params from '@params'`. Production builds add `minify`.
-- **Fingerprinting runs in every environment**, not just production: distinct
-  builds of one source (per-language sites, duplicate registrations with
-  different options) must publish distinct paths, or the last write wins
-  site-wide.
-- The script tag carries SRI attributes (`integrity`, `crossorigin`), and
-  `defer` when the entry sets it.
+The [file contract][guide-files] is the guide's; the pipeline adds one step
+beyond it, minification in production ([why companions first][design-ordering]).
 
-## Companions
+## Security constraints
 
-Optional companions resolve by naming convention and emit **before** the script
-tag ([why][design-ordering]):
+Docsy's own plugins follow the guide's [rules for plugin
+authors][guide-security]. In addition:
 
-- `_partials/scripts/plugins/NAME.html`: a partial for vendored libraries,
-  component markup, and config-provider patterns; invoked with
-  `(dict "Page" PAGE "Plugin" ENTRY)`.
-- `assets/scss/plugins/NAME.scss`: a stylesheet compiled through the SCSS
-  pipeline, minified in production, fingerprinted, and emitted with SRI.
+- Validate a configuration value against an allowlist before it reaches a fetch
+  URL (`params.markmap.version`: version characters only).
+- Residual exposure, disclosed in the guide's [MarkMap version][guide-markmap]
+  section: the autoloader's runtime libraries.
+- Imported Hugo modules are trusted: their `params` merge into the site's, so a
+  module can register, re-gate, or turn off plugins, as it already supplies
+  layouts and assets.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/
-[design-ordering]: /project/design/script-loading/#plugin-loop
+[design-ordering]: /project/design/script-loading/#ordering-decisions
+[guide]: /docs/content/plugins/
+[guide-config]: /docs/content/plugins/#configuration-reference
+[guide-files]: /docs/content/plugins/#plugin-files
+[guide-markmap]: /docs/content/diagrams-and-formulae/#markmap-version
+[guide-security]: /docs/content/plugins/#security
+[guide-warnings]: /docs/content/plugins/#warnings
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
+[quality]: /project/quality/script-loading/
 <!-- prettier-ignore-end -->

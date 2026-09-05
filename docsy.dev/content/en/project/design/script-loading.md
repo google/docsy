@@ -1,8 +1,8 @@
 ---
 title: Script loading
-description:
-  Dispatcher-and-sub-partials architecture, ordering decisions, and override
-  points
+description: >-
+  Why body-end scripts load through a dispatcher and a config-merged plugin
+  registry
 ---
 
 Docsy loads its body-end JavaScript through
@@ -16,28 +16,31 @@ out of scope here.)
 Before 0.18, `scripts.html` mixed a few sub-partial dispatches (MarkMap,
 Mermaid, KaTeX) with the other mechanisms' logic inline. The decomposition moved
 every mechanism out of the dispatcher into sub-partials without changing the
-default rendered output:
+default rendered output; the 0.18 plugin conversions then moved the first
+integrations onto the [plugin loop](#plugin-loop):
 
 - **Static theme scripts**, emitted as plain script tags: `deflate.js`
-  (PlantUML), `tabpane-persist.js`, `prism.js`.
+  (PlantUML), `prism.js`.
 - **The main bundle**: Bootstrap plus the theme's core and feature scripts
-  (search, PlantUML, MarkMap, draw.io; dark mode and ScrollSpy when enabled),
+  (search, PlantUML, draw.io; dark mode and ScrollSpy when enabled),
   concatenated into `main.js` (`scripts/main-bundle.html`), minified and
   fingerprinted in production. A site param picks which search script is
   bundled, `search.js` or `offline-search.js`.
-- **Individually processed theme scripts**: `click-to-copy.js` (Prism's mutually
-  exclusive alternative; the two share `scripts/code-copy.html`).
-- **Pinned CDN tags with inline configuration**: the MarkMap autoloader and
-  Algolia DocSearch.
+- **Theme plugins**: MarkMap, tab persistence, and click-to-copy ride the plugin
+  loop as theme-default registry entries, their legacy params aliased for a
+  deprecation cycle ([implementation notes][impl]).
+- **Pinned CDN tags with inline configuration**: Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
-  re-served as local assets, and Mermaid, whose pinned version is validated at
-  build time while the browser imports the module straight from the CDN.
+  re-served as local assets; Mermaid, whose pinned version is validated at build
+  time while the browser imports the module straight from the CDN; and the
+  MarkMap autoloader, vendored at build time and served same-origin with SRI.
 
-Gating lives at two levels, preserved from before the decomposition. The
-dispatcher itself gates MarkMap and PlantUML (site params) and Mermaid and KaTeX
-(`.Page.Store` flags); the other sub-partials are always dispatched, some gating
-internally (Algolia search configuration, Prism vs click-to-copy, search bundle
-choice, dark mode, ScrollSpy) and some unconditional (tab-pane persistence).
+Gating lives at two levels. The dispatcher gates PlantUML (site param) and
+Mermaid and KaTeX (`.Page.Store` flags); the plugin loop's `pageGate` carries
+the same page-flag pattern for MarkMap (`hasMarkmap`), while the remaining
+sub-partials gate internally (Algolia search configuration, Prism, search bundle
+choice, dark mode, ScrollSpy). Tab persistence ships ungated
+([why](#gating-decisions)).
 
 ## The dispatcher as a seam
 
@@ -46,9 +49,8 @@ The decomposition has two design consequences:
 - **Independent overrides**: each sub-partial resolves through Hugo's union file
   system, so a site can replace one sub-partial by shadowing one file instead of
   copying all of `scripts.html`.
-- **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where converting built-in integrations onto the loop is
-  planned ([#2789][]).
+- **Plugin dispatch**: the dispatcher is where the [plugin loop](#plugin-loop)
+  plugs in ([#2789][]).
 
 ### Override points
 
@@ -58,16 +60,83 @@ The decomposition has two design consequences:
   paths did not work (the internal template names `algolia/head` and
   `algolia/scripts` no longer exist).
 - Per plugin: the script asset `assets/js/plugins/NAME.js`, its companion
-  partial, and its companion stylesheet ([implementation notes][impl]).
+  partial, and its companion stylesheet ([file contract][ug-files]).
 
 ## The plugin loop {#plugin-loop}
 
 [`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
-`params.docsy.plugins`. `pageGate` generalizes the Mermaid/KaTeX page-flag
-pattern. For the registry contract, shape guards, and build details, see the
+`params.docsy.plugins`. For the configuration reference and plugin file
+contract, see the [plugins guide][ug-plugins]; for the loop's mechanics, the
 [implementation notes][impl].
 
-Two ordering decisions:
+### Registry shape: a map, layered by Hugo's config merge {#registry-shape}
+
+The registry is a **map keyed by plugin name**, and the theme declares its own
+plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
+configuration merge is deep for maps ([Configuration § Theme
+defaults][ug-config-merge]), so a site's map layers over the theme's:
+
+- **Supersession and inheritance come free**: a site entry for a theme plugin
+  merges field by field (`markmap: { enable: true }` keeps the theme's
+  `pageGate`), and a scalar `false` replaces the theme's entry outright, which
+  is the turn-off shorthand.
+- **Duplicates are impossible**: map keys are unique. The loop needs no
+  deduplication, no first-wins rule, no supersession bookkeeping.
+- **The schema is data**: `data/docsy/schema/params/docsy.yaml` declares the
+  entry fields, types, and defaults once, for the loop and the docs alike.
+  Enforcement stays hand-coded in the loop: Hugo offers no validation for
+  `params`, and no surveyed theme validates site params (Hinode's data-driven
+  `Args.html` covers shortcode arguments only).
+- **The loop is generic**: it knows no plugin names. Theme defaults are
+  configuration, not template code; plugin-specific behavior lives in the
+  plugin's own files: its script, its companion partial, and, for parameters
+  that predate the registry, a per-plugin shim partial that decorates the
+  plugin's entry.
+- **Plugins are site-wide**: the registry is read from site configuration, not
+  per language.
+- **Order**: `weight` ascending, then name, Hugo's idiom for ordering named
+  things.
+
+Alternatives considered, and why not:
+
+- **A list of entries** (the initial shape, superseded before release): lists
+  are replaced, not merged, by Hugo's config merge, so theme defaults had to
+  live in template code and every override, turn-off, or duplicate needed loop
+  logic, which grew a name-keyed defaults table and plugin-specific branches
+  inside the generic loop.
+- **A per-plugin manifest file** next to the script: plugin-owned defaults, but
+  a third artifact per plugin, and the theme still needs a configuration home
+  for which plugins are on by default. Revisit if module-shipped plugins need
+  self-describing metadata (module trust: [implementation § Security
+  constraints][impl-security]).
+- **Metadata partials** returning a defaults dict: pure Hugo, but metadata as
+  template code is less inspectable than configuration.
+
+Named collections in Hugo's own configuration (`outputFormats`, `mediaTypes`,
+`languages`, `taxonomies`) are maps keyed by name; the registry follows that
+idiom.
+
+### Gating decisions
+
+- **A theme default gates only on render-hook flags.** A shortcode's flag stays
+  on the page whose file contains it, so included content loses it (the
+  mechanics, for site authors: [Plugins § Page flags in included
+  content][ug-flags]). MarkMap (hook-flagged) is gated by default; tab
+  persistence (shortcode-produced) ships ungated on every page, as before 0.18:
+  no flag is set for it.
+- **The markmap render hook sets the flag and renders Hugo's default code
+  block** (`transform.HighlightCodeBlock`), leaving the browser-side transform
+  to the plugin script, so a disabled plugin leaves the fence exactly as Hugo
+  would render it. Mermaid's hook keeps its library-shaped markup
+  (`<pre class="mermaid">`) because the library reads it; whether Mermaid should
+  move to the default-render shape is a queued question ([#2789][]).
+- **Known limitation: section print.** The `print` output format for sections
+  renders descendants' `.Content` under the section page, whose Store never
+  receives the children's flags, so gated plugins don't ship in a printed
+  section (Mermaid and KaTeX have had the same gap since their flags were
+  introduced). Accepted for 0.18.
+
+### Ordering decisions
 
 - **Companions before the script**: a plugin's companion partial and stylesheet
   emit before its script tag, so a synchronous plugin script can rely on
@@ -81,13 +150,18 @@ Two ordering decisions:
 ## Related pages
 
 - [Implementation: script loading][impl]
-- [Quality: script loading][quality]: the test nets that pin this behavior
+- [Quality notes][quality]: the test nets that pin this behavior
 
 <!-- prettier-ignore-start -->
 [#2789]: https://github.com/google/docsy/issues/2789
 [impl]: /project/implementation/script-loading/
+[impl-security]: /project/implementation/script-loading/#security-constraints
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
+[ug-config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
+[ug-flags]: /docs/content/plugins/#page-flags-in-included-content
+[ug-files]: /docs/content/plugins/#plugin-files
+[ug-plugins]: /docs/content/plugins/
 [scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
 <!-- prettier-ignore-end -->

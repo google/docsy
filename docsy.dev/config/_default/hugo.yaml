@@ -136,8 +136,9 @@ params:
     svg: false
   print:
     disable_toc: false
-  markmap:
-    enable: true
+  docsy:
+    plugins:
+      markmap: { enable: true }
   drawio:
     enable: true
 

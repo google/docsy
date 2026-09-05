@@ -20,6 +20,19 @@ const files = {
     '{{% /blocks/section %}}\n',
   'content/docs/_index.md':
     '---\ntitle: Docs\nmenu: { main: { weight: 10 } }\n---\nDocs landing\n',
+  'content/docs/tabs.md': `---
+title: Tabs
+---
+
+{{< tabpane text=true >}}
+{{< tab header="One" >}}one{{< /tab >}}
+{{< tab header="Two" >}}two{{< /tab >}}
+{{< /tabpane >}}
+
+\`\`\`sh
+echo hi
+\`\`\`
+`,
   'content/docs/diagrams.md': `---
 title: Diagrams
 ---
@@ -41,10 +54,8 @@ Alice -> Bob: hello
 `,
 };
 
-// One variant per search bundle; the features variant also exercises the
-// diagram scripts (markmap, plantuml, mermaid) and the cover/navbar path
-// in base.js. Pages are static so the test list registers up front; each
-// variant's server origin resolves in before().
+// One variant per search bundle. Pages are static so the test list registers
+// up front; each variant's server origin resolves in before().
 const variants = {
   features: {
     options: {
@@ -61,13 +72,14 @@ ${Array.from(
 `,
 ).join('')}params:
   offlineSearch: true
-  markmap:
-    enable: true
+  docsy:
+    plugins:
+      markmap: { enable: true }
   plantuml:
     enable: true
 `,
     },
-    pages: ['', 'docs/', 'docs/diagrams/'],
+    pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
   },
   // gcs_engine_id renders the navbar search input, arming search.js's
   // delegated Enter handler (the offline variant swaps that file out).
@@ -92,6 +104,7 @@ const visits = Object.entries(variants).flatMap(([variant, { pages }]) =>
 
 let browser;
 const servers = {}; // variant → { origin, close }
+const builds = {}; // variant → buildSite result
 let selfTestUrl;
 let checked = 0;
 
@@ -103,6 +116,7 @@ before(async () => {
         `fixture hugo build failed:\n${build.stdout}${build.stderr}`,
       );
     }
+    builds[variant] = build;
     servers[variant] = await serveDir(path.join(build.site, 'public'));
     if (!selfTestUrl) {
       // Self-test page for the collector's red-proof: an uncaught
@@ -184,9 +198,8 @@ for (const { variant, page } of visits) {
   });
 }
 
-// Behavior probes: one small parity assertion per converted script
-// (google/docsy#1436), each verified green against the pre-conversion
-// code first.
+// Behavior probes: one parity assertion per script the theme converted
+// (jQuery removal, google/docsy#1436; plugin conversions, 0.18).
 
 // Interaction probes carry their own pageerror collector: an exception
 // thrown by a handler mid-probe must fail the probe, not vanish once the
@@ -198,9 +211,30 @@ async function newProbePage() {
   return { page, pageErrors };
 }
 
-// Diagram probes: each asserts the script's DOM transformation landed on
-// the features diagrams page (rendered SVG for the CDN-driven renderers,
-// the generated img element for plantuml).
+// The fixture-site nets stay offline, so the real vendor fetch (a
+// resources.GetRemote of the autoloader) is pinned here, in the network tier.
+test('markmap vendors the autoloader same-origin, with SRI, deferred', () => {
+  const html = builds.features.publicFile('docs/diagrams/index.html');
+  assert.doesNotMatch(
+    html,
+    /<script[^>]*src="https?:\/\/[^"]*markmap/i,
+    'page is free of cross-origin markmap script tags',
+  );
+  const vendor = html.match(
+    /<script[^>]*src="\/js\/vendor\/markmap-autoloader[^"]*\.js"[^>]*>/,
+  );
+  assert.ok(vendor, 'vendored autoloader is served same-origin');
+  assert.match(
+    vendor[0],
+    /integrity="sha256-/,
+    'vendored autoloader carries SRI',
+  );
+  assert.match(
+    vendor[0],
+    /\bdefer\b/,
+    'autoloader defers past the plugin script that configures it',
+  );
+});
 
 test('js behavior: a markmap code block renders as an SVG mind map', async () => {
   const { page, pageErrors } = await newProbePage();
@@ -210,6 +244,39 @@ test('js behavior: a markmap code block renders as an SVG mind map', async () =>
     });
     const svg = await page.waitForSelector('.markmap svg', { timeout: 15000 });
     assert.ok(svg, 'markmap SVG is in the DOM');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: the copy button is added to code blocks', async () => {
+  const { page, pageErrors } = await newProbePage();
+  try {
+    await page.goto(`${servers.features.origin}/docs/tabs/`, {
+      waitUntil: 'networkidle0',
+    });
+    const button = await page.waitForSelector('.highlight .td-click-to-copy', {
+      timeout: 5000,
+    });
+    assert.ok(button, 'a copy button is in the code block');
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: a selected tab is re-selected after reload', async () => {
+  const { page, pageErrors } = await newProbePage();
+  try {
+    const url = `${servers.features.origin}/docs/tabs/`;
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    await page.click('[data-td-tp-persist="two"]');
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    const active = await page.$eval('.nav-tabs .nav-link.active', (el) =>
+      el.getAttribute('data-td-tp-persist'),
+    );
+    assert.equal(active, 'two', 'persisted tab is active after reload');
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();

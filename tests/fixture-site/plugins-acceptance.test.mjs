@@ -19,7 +19,7 @@ test('a project adds a plugin with zero layout overrides', () => {
     extraConfig: `params:
   docsy:
     plugins:
-      - name: hello
+      hello:
         options:
           who: acceptance
 `,

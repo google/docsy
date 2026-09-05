@@ -680,9 +680,11 @@ function, which is used to render the code blocks of the individual tabs.
 
 Tab selection is persisted by default. When unspecified, `persist` defaults to
 `header` when `text=true` or `lang` is set; otherwise `persist` defaults to
-`lang`. To disable tab persistence, set `persist=disable`.
+`lang`. To disable tab persistence for one tabpane, set `persist=disabled`; for
+site-wide control, see the [`tabpane-persist` plugin][plugins].
 
 [highlight]: https://gohugo.io/functions/highlight/
+[plugins]: /docs/content/plugins/#configure-docsys-plugins
 
 #### `tab`
 
