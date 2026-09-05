@@ -1,23 +1,13 @@
 # Schema of `params.docsy`, the configuration namespace Docsy reserves for
 # theme settings: the one home for each key's shape, entry fields, types, and
-# defaults. The plugin loop reads it for defaults, the field allowlist, and the
-# name rule; the implementation notes include it verbatim.
-#
-# Conformance is checked by the templates that read each key. A value outside
-# this schema warns with id `docsy-config` and is ignored (an intentional one
-# is silenced through Hugo's `ignoreLogs`). Types are declared for the reader;
-# the templates coerce lenient input (the string "false", a boolean pageGate)
-# rather than reject it.
+# defaults.
 type: map
 keys:
   plugins:
-    # Keyed by plugin name. A scalar `false` turns an entry off; an empty map
-    # (`plugins: {}`) keeps the theme's entries, whereas `plugins:` with no
-    # value, being null, drops them.
-    type: map
+    type: map # keyed by plugin name; a scalar false turns an entry off
     key:
-      pattern: ^[a-z0-9_-]+$ # names address assets and partials by path
-      reservedSuffix: _docsy-shim # the loop's shim partials
+      pattern: ^[a-z0-9_-]+$
+      reservedSuffix: _docsy-shim
     entry:
       enable: { type: bool, default: true }
       defer: { type: bool, default: false } # adds `defer` to the script tag

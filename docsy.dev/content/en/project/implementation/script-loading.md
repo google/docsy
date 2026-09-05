@@ -11,20 +11,22 @@ notes][quality].
 
 ## Registry contract
 
-`params.docsy` is the configuration namespace Docsy reserves for theme settings,
-and `params.docsy.plugins` its map of plugin entries keyed by name ([why a
-map][design-shape]). Its schema, the one home for the entry fields, their types,
-and their defaults, is the theme's `data/docsy/schema/params/docsy.yaml`, which
-the loop reads for defaults, the field allowlist, and the name rule:
+`params.docsy` is the configuration namespace Docsy reserves for theme settings;
+`params.docsy.plugins` is its map of plugin entries keyed by name ([why a
+map][design-shape]). The loop reads the theme's schema directly, for defaults,
+the field allowlist, and the name rule:
 
 {{< readfile file="/project/schema/params/docsy.yaml" code="true" lang="yaml" >}}
 
-The theme declares its own plugins in [`theme/hugo.yaml`][theme-defaults]; under
+The theme declares its own plugins in [`theme/hugo.yaml`][theme-defaults]. Under
 Hugo's default deep merge for `params`, a site's entries layer over them by name
-and field, so the loop knows no plugin names. Hugo lowercases configuration
-keys, so plugin names, entry fields, and option keys arrive in lowercase: config
-examples keep Hugo's camelCase, templates and plugin scripts read
-`.Plugin.pagegate`, `params.apikey`. The loop coerces lenient input rather than
+and field, so the loop knows no plugin names.
+
+Hugo lowercases configuration keys. Plugin names, entry fields, and option keys
+arrive in lowercase: config examples keep Hugo's camelCase, templates and plugin
+scripts read `.Plugin.pagegate` and `params.apikey`.
+
+Types are declared for the reader. The loop coerces lenient input rather than
 reject it: the string `"false"` (any case) counts as `false` for `enable`,
 `defer`, and a scalar entry; a boolean or empty `pageGate` means no gate; a nil
 `options` means none.
@@ -32,19 +34,24 @@ reject it: the string `"false"` (any case) counts as `false` for `enable`,
 ## Pre-registry parameters
 
 A plugin whose behavior a parameter controlled before the registry ships a shim
-partial, `_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`. The loop
-applies it to the plugin's merged entry before the enable and gate checks,
-invoked with `(dict "Page" PAGE "Plugin" ENTRY)`; it must return the adjusted
-entry (a map; anything else fails the build). Parameter-specific behavior lives
-in the shim, and the shim is deleted when its parameter's deprecation cycle
-ends.
+partial, `_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html` (the suffix the
+schema reserves). The loop applies it to the plugin's merged entry before the
+enable and gate checks, invoked with `(dict "Page" PAGE "Plugin" ENTRY)`. It
+must return the adjusted entry, a map; anything else fails the build.
+Parameter-specific behavior lives in the shim, and the shim is deleted when its
+parameter's deprecation cycle ends.
 
 ## Shape guards
 
-A `params.docsy` value outside the schema warns (`docsy-config`) and is ignored;
-the build continues with what conforms. A non-map `params.docsy` or
-`params.docsy.plugins` leaves the registry empty, so no plugin, and so no shim,
-runs. Asset lookup precedes gating: an enabled entry with no
+Every configuration warning the loop emits carries the id `docsy-config`, so a
+site silences the class with one `ignoreLogs` entry. The build continues with
+what conforms: an unknown field, a non-map `options`, a name outside the rule,
+or a non-false scalar entry is ignored. A non-map `params.docsy` or
+`params.docsy.plugins` leaves the registry empty (`plugins: {}` keeps the
+theme's entries; a valueless `plugins:` is null and drops them), so no plugin,
+and so no shim, runs.
+
+Asset lookup precedes gating: an enabled entry with no
 `assets/js/plugins/`_`NAME`_`.js` warns (`docsy-plugin-missing`) whatever its
 gate.
 

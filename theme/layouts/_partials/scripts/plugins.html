@@ -1,11 +1,10 @@
 {{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
-{{/* The schema (data/docsy/schema/params/docsy.yaml) is the home for the entry
-  fields, their defaults, and the name rule. Hugo lowercases params keys but
-  not data keys, so the schema's fields are lowercased here to match. */ -}}
+{{/* Hugo lowercases params keys but not data keys: the schema's field names
+  are lowercased here to match. */ -}}
 {{ $schema := hugo.Data.docsy.schema.params.docsy.keys.plugins -}}
-{{ $seeSchema := "for the schema, see https://www.docsy.dev/project/implementation/script-loading/#registry-contract" -}}
+{{ $seeSchema := "For the schema, see https://www.docsy.dev/project/implementation/script-loading/#registry-contract" -}}
 {{ $defaults := dict -}}
 {{ range $field, $spec := $schema.entry -}}
   {{ $defaults = merge $defaults (dict (lower $field) $spec.default) -}}
@@ -13,9 +12,9 @@
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}
-  {{ warnidf "docsy-config" "params.docsy is reserved for theme settings and must be a map (got %v); %s." $docsy $seeSchema -}}
+  {{ warnidf "docsy-config" "params.docsy is reserved for theme settings and must be a map (got %v). %s." $docsy $seeSchema -}}
 {{ else if not (reflect.IsMap $docsy.plugins) -}}
-  {{ warnidf "docsy-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v); %s." $docsy.plugins $seeSchema -}}
+  {{ warnidf "docsy-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v). %s." $docsy.plugins $seeSchema -}}
 {{ else -}}
   {{ $registry = $docsy.plugins -}}
 {{ end -}}
@@ -30,7 +29,7 @@
       {{ if isset $defaults (lower $k) -}}
         {{ $entry = merge $entry (dict (lower $k) $v) -}}
       {{ else -}}
-        {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored; %s." $name $k $seeSchema -}}
+        {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored. %s." $name $k $seeSchema -}}
       {{ end -}}
     {{ end -}}
   {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
@@ -38,7 +37,7 @@
   {{ else -}}
     {{/* A scalar replaced any theme entry at merge time; the intent is
       unrecoverable. */ -}}
-    {{ warnidf "docsy-config" "params.docsy.plugins.%s: %v is not a plugin entry (a map), skipped; %s." $name $value $seeSchema -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s: %v is not a plugin entry (a map), skipped. %s." $name $value $seeSchema -}}
     {{ continue -}}
   {{ end -}}
   {{/* `false` is the natural way to write "no gate"; `true` names no flag. */ -}}
@@ -52,7 +51,7 @@
   {{ if eq $options nil -}}
     {{ $options = dict -}}
   {{ else if not (reflect.IsMap $options) -}}
-    {{ warnidf "docsy-config" "params.docsy.plugins.%s.options must be a map (got %v), ignored; %s." $name $options $seeSchema -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s.options must be a map (got %v), ignored. %s." $name $options $seeSchema -}}
     {{ $options = dict -}}
   {{ end -}}
   {{/* One integer kind for weight: YAML yields int or uint64 by source, and
@@ -66,11 +65,11 @@
   {{ $name := .name -}}
   {{ if not (findRE $schema.key.pattern $name) -}}
     {{/* Names are path components: refuse traversal. */ -}}
-    {{ warnidf "docsy-config" "params.docsy.plugins: name %q does not match %s, ignored; %s." $name $schema.key.pattern $seeSchema -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q does not match %s, ignored. %s." $name $schema.key.pattern $seeSchema -}}
     {{ continue -}}
   {{ end -}}
   {{ if hasSuffix $name $schema.key.reservedSuffix -}}
-    {{ warnidf "docsy-config" "params.docsy.plugins: name %q ends in the reserved %s, ignored; %s." $name $schema.key.reservedSuffix $seeSchema -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q ends in the reserved %s, ignored. %s." $name $schema.key.reservedSuffix $seeSchema -}}
     {{ continue -}}
   {{ end -}}
   {{ $shim := printf "scripts/plugins/%s_docsy-shim.html" $name -}}

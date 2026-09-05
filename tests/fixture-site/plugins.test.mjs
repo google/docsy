@@ -48,7 +48,6 @@ test('an enabled plugin is built and emitted, with options as @params', () => {
   const js = r.publicFile(m[1]);
   assert.match(js, /bonjour/, 'plugin options reach the module via @params');
 
-  // quiet.js exists in the plugins dir but has no registry entry.
   assert.doesNotMatch(html, /quiet/, 'the page is free of the unlisted plugin');
   // Published output is fingerprinted, so a fixed-path read proves nothing.
   const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
@@ -374,7 +373,6 @@ test('a plugin with no matching asset warns but does not fail the build', () => 
 });
 
 test('a gated missing plugin still warns', () => {
-  // A config typo should surface even when no page ever sets the gate flag.
   const r = buildSite('plugins-gated-missing', {
     files: content,
     extraConfig: `params:
@@ -512,9 +510,9 @@ test('a numeric plugin name resolves its asset', () => {
   );
 });
 
-test('every schema violation warns under the one docsy-config id', () => {
-  // One class of fault, one id: a site silences it with a single ignoreLogs
-  // entry. The fixture trips the namespace, field, value, and name rules.
+test('every configuration warning the loop emits carries docsy-config', () => {
+  // One id for the class, so a site silences it with one ignoreLogs entry.
+  // The fixture trips the field, option-shape, entry-value, and name guards.
   const r = buildSite('plugins-config-id', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
@@ -533,14 +531,13 @@ test('every schema violation warns under the one docsy-config id', () => {
   assert.deepEqual(
     [...new Set(ids)],
     ['docsy-config'],
-    'schema violations share the docsy-config id',
+    "the loop's configuration warnings share the docsy-config id",
   );
 });
 
-test('the loop honors every field the schema declares', () => {
+test('the loop applies every schema default', () => {
   // Agreement guard between data/docsy/schema/params/docsy.yaml and the loop:
-  // a field set to a non-default value must reach the companion, and the
-  // schema's defaults must be what an empty entry gets.
+  // an empty entry gets exactly the schema's fields and defaults.
   const schema = parseYaml(
     readFileSync(
       path.join(repoRoot, 'theme/data/docsy/schema/params/docsy.yaml'),
@@ -564,9 +561,8 @@ test('the loop honors every field the schema declares', () => {
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   const html = r.publicFile('index.html');
-  // In a script context Hugo escapes jsonify's output as a JS string literal
-  // (its autoescaping, the very rule the security constraints rely on), so the
-  // body parses to a JSON string that parses to the entry.
+  // Hugo autoescapes jsonify in a script context to a JS string literal, so
+  // parse twice when needed.
   let entry = JSON.parse(html.match(/id="entry">(.*?)<\/script>/s)[1]);
   if (typeof entry === 'string') entry = JSON.parse(entry);
   for (const field of fields) {
