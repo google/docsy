@@ -66,8 +66,9 @@ types, and defaults:
 
 ### Warnings
 
-Every registry warning carries the id `docsy-config` ([Configuration §
-warnings][config-warnings]), and the build continues with what conforms:
+Every configuration warning the registry emits carries the id `docsy-config`
+(silencing: [Configuration § warnings][config-warnings]), and the build
+continues with what conforms:
 
 - An unknown field, a non-map `options`, a name the schema's pattern rejects or
   that ends in its reserved suffix, or a scalar entry other than `false` is
@@ -75,8 +76,8 @@ warnings][config-warnings]), and the build continues with what conforms:
 - A `params.docsy` or `params.docsy.plugins` that is not a map empties the
   registry, Docsy's own plugins included. `plugins: {}` keeps them; a valueless
   `plugins:` is null and drops them.
-- A registered name with no `assets/js/plugins/`_`NAME`_`.js` warns
-  `docsy-plugin-missing`, whatever its gate.
+- A registered name with no `assets/js/plugins/`_`NAME`_`.js` is a different
+  fault: it warns `docsy-plugin-missing`, whatever its gate.
 
 ## Add a custom script
 

@@ -117,9 +117,10 @@ test('a scalar false turns an entry off', () => {
 });
 
 test('env overrides reach registry entries and read as booleans', () => {
-  // The delimiter is the character after HUGO, so `x` leaves hyphens literal
-  // (HUGO_ cannot spell one). Values arrive as strings for theme-declared
-  // keys, hence Hugo's `in (slice false "false" 0)` idiom in the loop.
+  // The delimiter is the character after HUGO and the only one replaced:
+  // hyphens pass through with any delimiter; `x` here shows the non-`_` form
+  // that underscored key names need. Values arrive as strings for
+  // theme-declared keys, hence Hugo's `in (slice false "false" 0)` idiom.
   const r = buildSite('plugins-env-override', {
     files: {
       ...content,
