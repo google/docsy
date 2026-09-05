@@ -1,9 +1,6 @@
 {{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
-{{/* The theme declares its plugins under this key (theme/hugo.yaml), so a
-  site's non-map value here, nil included, has already replaced them in Hugo's
-  config merge: say so. */ -}}
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}

@@ -5,9 +5,8 @@ description:
   overriding layout templates.
 ---
 
-Docsy loads its optional JavaScript features as **plugins**, each a registry
-entry under `params.docsy.plugins` in your site configuration. The same registry
-loads scripts of your own.
+Each optional Docsy JavaScript feature is a **plugin**: an entry under
+`params.docsy.plugins` in your site configuration.
 
 ## Configure Docsy's plugins
 
@@ -88,9 +87,8 @@ block. A flag counts only when it lands on the page that ships.
 
 That is why Docsy ships `tabpane-persist` ungated. Gate it yourself
 (`tabpane-persist: { pageGate: hasTabs }`) only if your tabpanes are never
-included; and if you produce MarkMap markup some other way than a `markmap`
-block on the page itself, clear its gate (`markmap: { pageGate: '' }`) so the
-script loads site-wide.
+included. For MarkMap's authoring paths and how to clear its gate, see
+[Activating MarkMap support][].
 
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/

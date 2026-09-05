@@ -44,9 +44,10 @@ params:
   `.Page.Store` flag; `pageGate: ''` (or a boolean) clears an inherited gate.
 - `weight` is an integer.
 - `enable` and `defer` accept `false` and the string `"false"` (any case; YAML
-  strings are truthy in Go templates). A scalar entry value of `false` turns the
-  entry off; any other scalar has already replaced the theme's entry in Hugo's
-  merge, so it warns (`docsy-plugin-entry`) and is skipped.
+  strings are truthy in Go templates). A scalar entry value of `false`, or of
+  the string `"false"` (any case), turns the entry off; any other scalar has
+  already replaced the theme's entry in Hugo's merge, so it warns
+  (`docsy-plugin-entry`) and is skipped.
 
 ### Theme plugins
 
@@ -144,9 +145,10 @@ tag ([why][design-ordering]):
 - Plugin `options` (and any value reaching a module as `@params`) ship
   **world-readable in the built JS**: never route secrets or tokens through
   them.
-- Third-party libraries are pinned and vendored: no CDN-`latest`, and no loader
-  that pulls unpinned secondary code (SRI on a loader is worthless if the loader
-  fetches unpinned dependencies).
+- Third-party dependencies are pinned, never CDN-`latest`; build-time fetches
+  are vendored and served with SRI; and a loader must not pull unpinned
+  secondary code (SRI on a loader is worthless if the loader fetches unpinned
+  dependencies).
 - Remote-capable plugins get a `pageGate` so their code ships only where used.
 - A parameter that reaches a fetch URL is validated first:
   `params.markmap.version` accepts `[0-9A-Za-z.+-]` only (and warns when not an

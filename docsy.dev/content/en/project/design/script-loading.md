@@ -51,9 +51,8 @@ The decomposition has two design consequences:
 - **Independent overrides**: each sub-partial resolves through Hugo's union file
   system, so a site can replace one sub-partial by shadowing one file instead of
   copying all of `scripts.html`.
-- **A landing point**: the dispatcher is where the [plugin loop](#plugin-loop)
-  plugged in, and where the first built-in integrations (MarkMap, tab
-  persistence, click-to-copy) converted onto the loop in 0.18 ([#2789][]).
+- **Plugin dispatch**: the dispatcher is where the [plugin loop](#plugin-loop)
+  plugs in ([#2789][]).
 
 ### Override points
 

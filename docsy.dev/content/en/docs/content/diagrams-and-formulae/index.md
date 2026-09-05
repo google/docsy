@@ -7,9 +7,8 @@ description:
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
-Docsy has built-in support for a number of diagram creation and typesetting
-tools you can use to add rich content to your site, including \(\KaTeX\),
-Mermaid, Diagrams.net, PlantUML, and MarkMap.
+Each renderer below reads a Markdown code block (or, for Diagrams.net, an
+exported image) and needs no layout override.
 
 ## Pinned script-dependency versions {#script-dep-versions}
 
@@ -689,12 +688,15 @@ params:
 Docsy fetches the [markmap-autoloader][] package's entry file at build time at
 the [pinned version](#script-dep-versions), currently
 {{% param markmap.version %}}, and serves it from your site with subresource
-integrity; to use a different version, set `params.markmap.version`. Sites that
-restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`;
-to build without network access, override the plugin's companion partial,
-`layouts/_partials/scripts/plugins/markmap.html`, to serve a copy you host. The
-autoloader itself loads MarkMap's runtime libraries from a public CDN in the
-browser, at versions it pins.
+integrity.
+
+- To use a different version, set `params.markmap.version`.
+- Sites that restrict Hugo's remote fetches (`security.http`) must allow
+  `cdn.jsdelivr.net`.
+- To build without network access, override the plugin's companion partial,
+  `layouts/_partials/scripts/plugins/markmap.html`, to serve a copy you host.
+- The autoloader itself loads MarkMap's runtime libraries from a public CDN in
+  the browser, at versions it pins.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 [page-flags]: /docs/content/plugins/#page-flags-in-included-content
