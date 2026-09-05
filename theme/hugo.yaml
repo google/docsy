@@ -1,14 +1,8 @@
-# Docsy config
-#
-# cSpell:ignore docsy fortawesome fontawesome github permalinkable twbs webfonts
-
 params:
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
   rss_sections: [blog]
   docsy:
-    # Theme plugins; sites layer their own map over this one. Contract:
-    # https://www.docsy.dev/project/implementation/script-loading/
     plugins:
       click-to-copy: { defer: true }
       tabpane-persist: {}
@@ -35,7 +29,7 @@ outputFormats:
     # isHTML: true
     mediaType: text/html
     path: _print
-    permalinkable: false
+    permalinkable: false # cSpell:disable-line
 
 # Needed for KaTeX, possibly useful for others. see
 # https://github.com/google/docsy/pull/2465
