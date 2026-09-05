@@ -1,8 +1,8 @@
 ---
 title: Script loading
 description: >-
-  The plugin loop's shim contract, warning id, build pipeline, and the security
-  rules Docsy's own plugins follow
+  The plugin loop's shim contract, shape guards, build pipeline, and the
+  security rules Docsy's own plugins follow
 ---
 
 [`_partials/scripts/plugins.html`][plugins.html] implements
@@ -30,11 +30,9 @@ parameter's deprecation cycle ends.
 
 ## Shape guards
 
-Enforcement is hand-coded in the loop against the schema, and every warning it
-emits carries the id `docsy-config`; what each guard ignores or empties is the
-guide's [Warnings][guide-warnings] list. Asset lookup runs after the enable
-check and before the page gate: an enabled name with no script warns whether or
-not a page sets its flag, and a disabled one is never looked up.
+Enforcement is hand-coded in the loop against the schema; what each guard warns
+about, ignores, or empties is the guide's [Warnings][guide-warnings] list. Asset
+lookup runs after the enable check and before the page gate.
 
 ## Build and emission
 

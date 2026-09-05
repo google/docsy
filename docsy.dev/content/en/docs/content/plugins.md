@@ -1,8 +1,8 @@
 ---
 title: Plugins
 description:
-  Turn Docsy's plugins on or off, add your own scripts without overriding layout
-  templates, and look up the registry's configuration reference.
+  Turn Docsy's optional scripts on or off and load your own from site
+  configuration, no layout overrides needed.
 ---
 
 Docsy loads some of its optional JavaScript features, and any script you add, as
@@ -10,11 +10,11 @@ Docsy loads some of its optional JavaScript features, and any script you add, as
 
 ## Configure Docsy's plugins
 
-| Plugin            | What it does                               | Default                                 | Loads on                                            | Turn it off                                                   | Docs                           |
-| ----------------- | ------------------------------------------ | --------------------------------------- | --------------------------------------------------- | ------------------------------------------------------------- | ------------------------------ |
-| `click-to-copy`   | Adds a copy button to code blocks          | On (off under Prism, which has its own) | Every page                                          | `click-to-copy: false`                                        | [Copy to clipboard][]          |
-| `tabpane-persist` | Remembers the selected tab across pages    | On                                      | Every page ([why](#page-flags-in-included-content)) | `tabpane-persist: false`; for one tabpane, `persist=disabled` | [`tabpane`][]                  |
-| `markmap`         | Renders `markmap` code blocks as mind maps | Off                                     | Pages with a `markmap` code block                   | `markmap: false`                                              | [Activating MarkMap support][] |
+| Plugin            | What it does                               | Default                                 | Loads on                                            | Docs                           |
+| ----------------- | ------------------------------------------ | --------------------------------------- | --------------------------------------------------- | ------------------------------ |
+| `click-to-copy`   | Adds a copy button to code blocks          | On (off under Prism, which has its own) | Every page                                          | [Copy to clipboard][]          |
+| `tabpane-persist` | Remembers the selected tab across pages    | On                                      | Every page ([why](#page-flags-in-included-content)) | [`tabpane`][]                  |
+| `markmap`         | Renders `markmap` code blocks as mind maps | Off                                     | Pages with a `markmap` code block                   | [Activating MarkMap support][] |
 
 To turn a plugin off, set its entry to `false`:
 
@@ -47,11 +47,9 @@ params:
 
 ## Configuration reference
 
-`params.docsy.plugins` is a map of plugin entries keyed by name; the name is
-also the script's file name. Docsy's own plugins are declared in the theme's
-[`hugo.yaml`][theme-defaults], and your entries merge over them by name and
-field ([Configuration § Theme defaults][config-merge]). Each entry's fields,
-types, and defaults:
+Docsy's own plugins are declared in the theme's [`hugo.yaml`][theme-defaults];
+your entries merge over them by name and field ([Configuration § Theme
+defaults][config-merge]). Each entry's fields, types, and defaults:
 
 {{< readfile file="/data/docsy/schema/params/docsy.yaml" code="true" lang="yaml" >}}
 
@@ -59,10 +57,6 @@ types, and defaults:
 - `enable` is off for `false`, `"false"`, and `0`, and on for any other value;
   `defer` is on for `true`, `"true"`, and `1`, and off for any other value. The
   string forms exist for [environment overrides][config-env].
-- `pageGate: false` also means no gate
-  ([Page flags in included content](#page-flags-in-included-content)).
-- Keys reach templates and plugin scripts lowercase: `.Plugin.pagegate`,
-  `params.apikey` ([Configuration § Key spelling][config-keys]).
 
 ### Warnings
 
@@ -73,11 +67,11 @@ Every registry shape warning carries the id `docsy-config` (to silence one, see
   applies; a name the schema's pattern rejects or that ends in its reserved
   suffix, or a scalar entry other than a false spelling, drops the whole entry.
 - A `params.docsy` or `params.docsy.plugins` that is not a map empties the
-  registry, Docsy's own plugins included. `plugins: {}` keeps them; a valueless
-  `plugins:` is null and drops them.
-- An enabled name with no `assets/js/plugins/`_`NAME`_`.js` is a different
-  fault: it warns `docsy-plugin-missing`, gated or not (a disabled entry is
-  never looked up).
+  registry, Docsy's own plugins and their deprecated aliases included.
+  `plugins: {}` keeps them; a valueless `plugins:` is null and drops them.
+- An enabled name with no script file ([Plugin files](#plugin-files)) is a
+  different fault: it warns `docsy-plugin-missing`, gated or not (a disabled
+  entry is never looked up).
 
 ## Add a custom script
 
@@ -87,7 +81,8 @@ body hooks][] instead.
 
 1. Save the script as `assets/js/plugins/`_`NAME`_`.js`, with _`NAME`_ in
    lowercase.
-2. Register it under `params.docsy.plugins`:
+2. Register it under `params.docsy.plugins` (fields:
+   [configuration reference](#configuration-reference)):
 
 <!-- markdownlint-disable no-shortcut-ref-link -->
 <!-- prettier-ignore-start -->
@@ -116,9 +111,6 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
-Docsy builds and loads the script; the entry's fields are in the
-[configuration reference](#configuration-reference).
-
 ### Plugin files
 
 A plugin is one to three files. A project file shadows the theme's of the same
@@ -131,8 +123,9 @@ name, which is how you replace one of Docsy's plugins or its companions.
 | `assets/scss/plugins/`_`NAME`_`.scss`               | Optional companion stylesheet, through the Sass pipeline.                                                                  |
 
 Companions emit before the script ([why][design-ordering]). Script and
-stylesheet tags carry [subresource integrity][SRI] (`integrity` and
-`crossorigin="anonymous"`) in every environment.
+stylesheet tags carry [subresource integrity][SRI] in every environment. Entry
+keys reach templates and plugin scripts lowercase: `.Plugin.pagegate`,
+`params.apikey` ([Configuration § Key spelling][config-keys]).
 
 ### Security
 
@@ -145,10 +138,10 @@ stylesheet tags carry [subresource integrity][SRI] (`integrity` and
 - Options, like anything reaching a module as `@params`, ship world-readable in
   the built JavaScript: never route secrets through them.
 - Pin third-party dependencies, never `latest`; vendor build-time fetches and
-  serve them with SRI; and use no loader that pulls unpinned secondary code (SRI
-  on a loader is worthless if the loader fetches unpinned dependencies).
-- A plugin that loads remote code gets a `pageGate`, so its code ships only
-  where used.
+  serve them with SRI; and use no loader that pulls unpinned secondary code,
+  which SRI on the loader can't cover.
+- A plugin that loads remote code gets a `pageGate` (a flag your own render hook
+  sets with `.Page.Store.Set`), so its code ships only where used.
 
 ## Page flags in included content
 

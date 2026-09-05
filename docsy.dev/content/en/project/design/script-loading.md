@@ -74,9 +74,8 @@ contract, see the [plugins guide][ug-plugins]; for the loop's mechanics, the
 
 The registry is a **map keyed by plugin name**, and the theme declares its own
 plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
-configuration merge is deep for maps (under the default `params` merge strategy;
-a site setting `params._merge: shallow` drops the theme's entries), so a site's
-map layers over the theme's:
+configuration merge is deep for maps ([Configuration § Theme
+defaults][ug-config-merge]), so a site's map layers over the theme's:
 
 - **Supersession and inheritance come free**: a site entry for a theme plugin
   merges field by field (`markmap: { enable: true }` keeps the theme's
@@ -160,6 +159,7 @@ idiom.
 [impl-security]: /project/implementation/script-loading/#security-constraints
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
+[ug-config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
 [ug-flags]: /docs/content/plugins/#page-flags-in-included-content
 [ug-files]: /docs/content/plugins/#plugin-files
 [ug-plugins]: /docs/content/plugins/

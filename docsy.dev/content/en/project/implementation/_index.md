@@ -10,8 +10,8 @@ no_list: true
 ## Subsystems
 
 - [Script loading](/project/implementation/script-loading/): the plugin loop's
-  shim contract, warning id, build pipeline, and the security rules Docsy's own
-  plugins follow
+  shim contract, shape guards, build pipeline, and the security rules Docsy's
+  own plugins follow
 
 ## Patches and workarounds
 
