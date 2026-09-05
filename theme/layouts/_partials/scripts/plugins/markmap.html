@@ -3,7 +3,10 @@
   default, emitted after this companion) must configure window.markmap
   first. */ -}}
 {{/* The canary test (tests/script-version-pins.test.mjs) pins this read: keep it bare, no default. */ -}}
-{{ $version := .Page.Site.Params.markmap.version | string | strings.TrimSpace -}}
+{{ $version := "" -}}
+{{ if reflect.IsMap .Page.Site.Params.markmap -}}
+  {{ $version = .Page.Site.Params.markmap.version | string | strings.TrimSpace -}}
+{{ end -}}
 {{ if not $version -}}
   {{ errorf "params.markmap.version is unset or empty: your site isn't receiving the theme's config; set it explicitly." -}}
 {{ else if findRE `[^0-9A-Za-z.+-]` $version -}}

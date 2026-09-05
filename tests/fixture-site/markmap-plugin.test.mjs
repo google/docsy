@@ -248,3 +248,22 @@ test('a height option is a value, never rule text', () => {
   assert.equal(rule.selectorText, '.markmap > svg', 'one rule is the map');
   assert.equal(rule.style.height, '300px', 'a non-length keeps the default');
 });
+
+test('a scalar params.markmap with markmap on fails with the version guidance', () => {
+  // The site's scalar replaced the theme's map, version included.
+  const r = buildSite('markmap-scalar-param-enabled', {
+    files,
+    extraConfig: `params:
+  markmap: false
+  docsy:
+    plugins:
+      markmap: { enable: true }
+`,
+  });
+  assert.notEqual(r.status, 0, 'hugo build fails');
+  assert.match(
+    r.stderr,
+    /params\.markmap\.version is unset or empty/,
+    'the companion names the missing version, not a template type error',
+  );
+});

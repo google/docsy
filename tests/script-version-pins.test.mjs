@@ -88,8 +88,8 @@ for (const { param, template, cdnPackage, urlForm } of PINS) {
       text,
       new RegExp(
         // Companion partials receive a { Page, Plugin } dict, hence the
-        // optional .Page prefix.
-        String.raw`\$version := (\.Page)?\.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace`,
+        // optional .Page prefix; a type guard may precede the read (`=`).
+        String.raw`\$version :?= (\.Page)?\.Site\.Params\.${param}\.version \| string \| strings\.TrimSpace`,
       ),
       `the template reads params.${param}.version bare, first in its pipeline`,
     );
