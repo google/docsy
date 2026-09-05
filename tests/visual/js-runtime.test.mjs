@@ -225,7 +225,7 @@ test('markmap vendors the autoloader same-origin, with SRI, deferred', () => {
   assert.doesNotMatch(
     html,
     /<script[^>]*src="https?:\/\/[^"]*markmap/i,
-    'the page is free of cross-origin markmap script tags',
+    'page is free of cross-origin markmap script tags',
   );
   const vendor = html.match(
     /<script[^>]*src="\/js\/vendor\/markmap-autoloader[^"]*\.js"[^>]*>/,
@@ -239,7 +239,7 @@ test('markmap vendors the autoloader same-origin, with SRI, deferred', () => {
   assert.match(
     vendor[0],
     /\bdefer\b/,
-    'the autoloader defers past the plugin script that configures it',
+    'autoloader defers past the plugin script that configures it',
   );
 });
 
@@ -283,7 +283,7 @@ test('js behavior: a selected tab is re-selected after reload', async () => {
     const active = await page.$eval('.nav-tabs .nav-link.active', (el) =>
       el.getAttribute('data-td-tp-persist'),
     );
-    assert.equal(active, 'two', 'the persisted tab is active after reload');
+    assert.equal(active, 'two', 'persisted tab is active after reload');
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
     await page.close();

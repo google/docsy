@@ -27,7 +27,7 @@ test('click-to-copy ships as a deferred plugin by default', () => {
   assert.doesNotMatch(
     html,
     /src="\/js\/click-to-copy/,
-    'the page is free of the pre-plugin script path',
+    'page is free of the pre-plugin script path',
   );
 });
 
@@ -41,12 +41,12 @@ test('disable_click2copy_chroma ships zero copy-button bytes', () => {
   assert.match(
     r.stderr,
     /disable_click2copy_chroma is deprecated/,
-    'the legacy param draws a deprecation warning',
+    'legacy param draws a deprecation warning',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /click-to-copy[^"]*\.js/,
-    'the page is free of copy-button script tags',
+    'page is free of copy-button script tags',
   );
 });
 
@@ -66,7 +66,7 @@ test('prism supersedes the copy-button plugin', () => {
   assert.doesNotMatch(
     html,
     /click-to-copy[^"]*\.js/,
-    'the page is free of copy-button script tags alongside prism',
+    'page is free of copy-button script tags alongside prism',
   );
 });
 
@@ -82,8 +82,8 @@ test('legacy params read "false" from the environment as false', () => {
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   const html = r.publicFile('index.html');
-  assert.doesNotMatch(html, /js\/prism\.js/, 'the page is free of prism');
-  assert.match(html, /js\/plugins\/click-to-copy/, 'the copy button loads');
+  assert.doesNotMatch(html, /js\/prism\.js/, 'page is free of prism');
+  assert.match(html, /js\/plugins\/click-to-copy/, 'copy button loads');
 });
 
 test('a scalar false turns the theme plugin off', () => {
@@ -100,6 +100,6 @@ test('a scalar false turns the theme plugin off', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /click-to-copy[^"]*\.js/,
-    'the page is free of copy-button script tags',
+    'page is free of copy-button script tags',
   );
 });

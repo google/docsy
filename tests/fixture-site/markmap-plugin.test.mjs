@@ -37,7 +37,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
   assert.doesNotMatch(
     bundle,
     /markmap/i,
-    'the main bundle is free of markmap code, template-emptied stubs included',
+    'main bundle is free of markmap code, template-emptied stubs included',
   );
 });
 
@@ -50,18 +50,18 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
   assert.match(
     r.stderr,
     /params\.markmap\.enable is deprecated/,
-    'the legacy param draws a deprecation warning',
+    'legacy param draws a deprecation warning',
   );
   assert.match(
     r.publicFile('index.html'),
     /js\/plugins\/markmap/,
-    'the legacy alias keeps pre-0.18 site-wide loading, markmap content or not',
+    'legacy alias keeps pre-0.18 site-wide loading, markmap content or not',
   );
   const html = r.publicFile('docs/index.html');
   assert.match(
     html,
     /data-vendor="markmap-autoloader"/,
-    'the companion rides the legacy alias too',
+    'companion rides the legacy alias too',
   );
   const plugin = html.match(
     /<script[^>]*src="\/(js\/plugins\/markmap[^"]*\.js)"/,
@@ -80,7 +80,7 @@ test('the legacy param reads "false" from the environment as false', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/markmap/,
-    'the home page is free of markmap',
+    'home page is free of markmap',
   );
 });
 
@@ -105,7 +105,7 @@ test('a registry-declared markmap entry is page-gated and carries its options', 
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /markmap[^"]*\.js|js\/vendor/,
-    'the registry entry is page-gated: no markmap scripts without markmap content',
+    'registry entry is page-gated: no markmap scripts without markmap content',
   );
   const html = r.publicFile('docs/index.html');
   const plugin = html.match(
@@ -115,12 +115,12 @@ test('a registry-declared markmap entry is page-gated and carries its options', 
   assert.match(
     r.publicFile(plugin[1]),
     /400px/,
-    'the entry options reach the plugin',
+    'entry options reach the plugin',
   );
   assert.match(
     html,
     /data-vendor="markmap-autoloader"/,
-    'the companion rides the registry entry too',
+    'companion rides the registry entry too',
   );
 });
 
@@ -135,7 +135,7 @@ test('a scalar params.markmap builds, with markmap off', () => {
   assert.doesNotMatch(
     r.publicFile('docs/index.html'),
     /js\/plugins\/markmap/,
-    'the page is free of markmap scripts',
+    'page is free of markmap scripts',
   );
 });
 
@@ -152,7 +152,7 @@ test('a path-bearing markmap.version fails the build', () => {
   assert.match(
     r.stderr,
     /markmap\.version .* contains characters that don't belong in a version/,
-    'the guard itself refuses the version, before any fetch',
+    'guard itself refuses the version, before any fetch',
   );
 });
 
@@ -171,7 +171,7 @@ test('the legacy param wins over a registry entry, site-wide, with a warning', (
   assert.match(
     r.stderr,
     /remove the legacy param/,
-    'the legacy param draws the deprecation warning',
+    'legacy param draws the deprecation warning',
   );
   assert.match(
     r.publicFile('index.html'),
@@ -202,7 +202,7 @@ test('a deferred markmap entry keeps the autoloader exports (plugin merges)', ()
   assert.doesNotMatch(
     js,
     /window\.markmap\s*=\s*\{/,
-    'the plugin merges into window.markmap',
+    'plugin merges into window.markmap',
   );
 });
 
@@ -215,7 +215,7 @@ test('a markmap fence renders as a default code block when markmap is off', () =
   assert.match(
     r.publicFile('docs/index.html'),
     /<pre tabindex="0"><code class="language-markmap" data-lang="markmap">/,
-    "the fence carries Hugo's default code-block markup",
+    "fence carries Hugo's default code-block markup",
   );
 });
 
@@ -242,8 +242,8 @@ test('a height option is a value, never rule text', () => {
   const { window } = new JSDOM(html, { runScripts: 'outside-only' });
   window.eval(r.publicFile(plugin[1]));
   const sheet = window.document.head.lastElementChild.sheet;
-  assert.equal(sheet.cssRules.length, 1, 'the option adds no rule of its own');
+  assert.equal(sheet.cssRules.length, 1, 'option adds no rule of its own');
   const rule = sheet.cssRules[0];
-  assert.equal(rule.selectorText, '.markmap > svg', 'the one rule is the map');
+  assert.equal(rule.selectorText, '.markmap > svg', 'one rule is the map');
   assert.equal(rule.style.height, '300px', 'a non-length keeps the default');
 });

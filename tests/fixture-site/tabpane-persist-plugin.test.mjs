@@ -37,7 +37,7 @@ test('tabpane-persist ships on every page by default, fingerprinted', () => {
     assert.match(
       r.publicFile(m[1]),
       /td-tp-persist/,
-      'the emitted plugin is the persistence script',
+      'emitted plugin is the persistence script',
     );
   }
 });
@@ -62,12 +62,12 @@ test('a project plugin shadows the theme plugin of the same name', () => {
   assert.match(
     js,
     /project-shadow-wins/,
-    'the project file shadows the theme plugin',
+    'project file shadows the theme plugin',
   );
   assert.doesNotMatch(
     js,
     /td-tp-persist/,
-    'the theme implementation is fully replaced',
+    'theme implementation is fully replaced',
   );
 });
 
@@ -84,6 +84,6 @@ test('persist="disabled" tabs carry no persistence attributes', () => {
   assert.doesNotMatch(
     r.publicFile('docs/off/index.html'),
     /data-td-tp-persist/,
-    'the opted-out tabs carry no persistence attributes',
+    'opted-out tabs carry no persistence attributes',
   );
 });

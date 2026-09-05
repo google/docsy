@@ -71,7 +71,7 @@ test('an empty map registers a plugin with defaults', () => {
   assert.match(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'the plugin is emitted',
+    'plugin is emitted',
   );
 });
 
@@ -96,7 +96,7 @@ test('a disabled plugin ships zero bytes', () => {
   const published = readdirSync(path.join(r.site, 'public', 'js', 'plugins'));
   assert.ok(
     published.every((f) => !f.startsWith('hello')),
-    'the public tree is free of the disabled plugin',
+    'public tree is free of the disabled plugin',
   );
 });
 
@@ -113,7 +113,7 @@ test('a scalar false turns an entry off', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'the page is free of the plugin turned off by a scalar',
+    'page is free of the plugin turned off by a scalar',
   );
 });
 
@@ -136,12 +136,12 @@ test('env overrides reach registry entries and read as booleans', () => {
   assert.doesNotMatch(
     html,
     /js\/plugins\/click-to-copy/,
-    'the env-disabled plugin is off',
+    'env-disabled plugin is off',
   );
   assert.match(
     html,
     /<script[^>]*\bdefer\b[^>]*js\/plugins\/tabpane-persist/,
-    'the env-deferred plugin is deferred',
+    'env-deferred plugin is deferred',
   );
 });
 
@@ -179,12 +179,12 @@ test('a non-false scalar entry warns and is skipped', () => {
   assert.match(
     r.stderr,
     /params\.docsy\.plugins\.tabpane-persist: true is not a plugin entry/,
-    'the scalar entry is called out in a build warning',
+    'scalar entry is called out in a build warning',
   );
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),
     /tabpane-persist/,
-    'the page is free of the scalar-declared plugin',
+    'page is free of the scalar-declared plugin',
   );
 });
 
@@ -323,7 +323,7 @@ test('a shim partial scripts/plugins/NAME_docsy-shim.html decorates the entry', 
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'the page is free of the shim-disabled plugin',
+    'page is free of the shim-disabled plugin',
   );
 });
 
@@ -347,7 +347,7 @@ test('companion styles scss/plugins/NAME.scss ship through the CSS pipeline', ()
     /<link[^>]*href="\/(scss\/plugins\/hello[^"]*\.css)"[^>]*>/,
   );
   assert.ok(m, 'the plugin stylesheet link is emitted');
-  assert.match(m[0], /integrity="sha256-/, 'the stylesheet link carries SRI');
+  assert.match(m[0], /integrity="sha256-/, 'stylesheet link carries SRI');
   assert.ok(
     html.indexOf('scss/plugins/hello') < html.indexOf('js/plugins/hello'),
     'the stylesheet link precedes the plugin script tag',
@@ -406,7 +406,7 @@ test('a disabled missing plugin is never looked up, so it is silent', () => {
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(r.stderr, /ghost/, 'the build log is free of the entry');
+  assert.doesNotMatch(r.stderr, /ghost/, 'build log is free of the entry');
 });
 
 test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
@@ -425,12 +425,12 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.match(
     r.stderr,
     /params\.docsy is reserved for theme settings and must be a map/,
-    'the clobbered registry is called out as a reserved key',
+    'clobbered registry is called out as a reserved key',
   );
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),
     /js\/plugins/,
-    'the page is free of plugin output',
+    'page is free of plugin output',
   );
 });
 
@@ -447,7 +447,7 @@ test('a null params.docsy.plugins builds and warns', () => {
   assert.match(
     r.stderr,
     /params\.docsy\.plugins must be a map/,
-    'the clobbered registry is called out in a build warning',
+    'clobbered registry is called out in a build warning',
   );
 });
 
@@ -464,7 +464,7 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
   assert.doesNotMatch(
     r.stderr,
     /params\.docsy\.plugins must be a map/,
-    'the empty map draws no registry warning',
+    'empty map draws no registry warning',
   );
   assert.match(
     r.publicFile('index.html'),
@@ -491,7 +491,7 @@ test('a list-shaped params.docsy.plugins builds and warns', () => {
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'the list-registered plugin is ignored',
+    'list-registered plugin is ignored',
   );
 });
 
@@ -549,7 +549,7 @@ test('every configuration warning the loop emits carries docsy-config', () => {
   assert.deepEqual(
     [...new Set(ids)],
     ['docsy-config'],
-    "the loop's configuration warnings share the docsy-config id",
+    "loop's configuration warnings share the docsy-config id",
   );
 });
 
@@ -561,7 +561,7 @@ test('the loop applies every schema default', () => {
     ),
   );
   const fields = Object.keys(schema.keys.plugins.entry);
-  assert.ok(fields.length >= 5, 'the schema declares the entry fields');
+  assert.ok(fields.length >= 5, 'schema declares the entry fields');
   const r = buildSite('plugins-schema-agreement', {
     files: {
       ...content,
@@ -583,7 +583,7 @@ test('the loop applies every schema default', () => {
   if (typeof entry === 'string') entry = JSON.parse(entry);
   for (const field of fields) {
     const key = field.toLowerCase();
-    assert.ok(key in entry, `the loop carries the schema field ${field}`);
+    assert.ok(key in entry, `loop carries the schema field ${field}`);
     assert.deepEqual(
       entry[key],
       schema.keys.plugins.entry[field].default,
@@ -610,12 +610,12 @@ test('a path-traversing plugin name is rejected with a warning', () => {
   assert.match(
     r.stderr,
     /\.\.\/search/,
-    'the invalid name is called out in a build warning',
+    'invalid name is called out in a build warning',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /not-a-plugin|js\/search/,
-    'the page is free of the traversal-addressed script',
+    'page is free of the traversal-addressed script',
   );
   assert.match(
     r.publicFile('index.html'),
@@ -638,8 +638,8 @@ test('plugin output is fingerprinted with SRI in development too', () => {
   const tag = r
     .publicFile('index.html')
     .match(/<script[^>]*src="\/js\/plugins\/hello\.[0-9a-f]{64}\.js"[^>]*>/);
-  assert.ok(tag, 'the development build publishes a hashed path');
-  assert.match(tag[0], /integrity="sha256-/, 'the tag carries SRI');
+  assert.ok(tag, 'development build publishes a hashed path');
+  assert.match(tag[0], /integrity="sha256-/, 'tag carries SRI');
 });
 
 test('a site entry for a theme plugin inherits the unset fields', () => {
@@ -657,7 +657,7 @@ test('a site entry for a theme plugin inherits the unset fields', () => {
   assert.match(
     r.publicFile('index.html'),
     /<script[^>]*\bdefer\b[^>]*src="\/js\/plugins\/click-to-copy/,
-    'the inherited defer reaches the tag',
+    'inherited defer reaches the tag',
   );
 });
 
@@ -675,11 +675,11 @@ test('an explicit field overrides the inherited theme default', () => {
   const tag = r
     .publicFile('index.html')
     .match(/<script[^>]*src="\/js\/plugins\/click-to-copy[^>]*>/);
-  assert.ok(tag, 'the plugin tag is emitted');
+  assert.ok(tag, 'plugin tag is emitted');
   assert.doesNotMatch(
     tag[0],
     /\bdefer\b/,
-    'the site value wins over the theme default',
+    'site value wins over the theme default',
   );
 });
 
@@ -700,7 +700,7 @@ test('a scalar false turns a theme plugin off', () => {
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),
     /tabpane-persist/,
-    'the page is free of the theme plugin turned off by the site',
+    'page is free of the theme plugin turned off by the site',
   );
 });
 
@@ -721,14 +721,14 @@ test("an entry's name is its key; a name field is ignored", () => {
   assert.match(
     r.stderr,
     /unknown field "name"/,
-    'the name field is called out as unknown',
+    'name field is called out as unknown',
   );
   const html = r.publicFile('index.html');
-  assert.match(html, /js\/plugins\/hello/, 'the keyed plugin is emitted');
+  assert.match(html, /js\/plugins\/hello/, 'keyed plugin is emitted');
   assert.doesNotMatch(
     html,
     /js\/plugins\/other/,
-    'the page is free of the redirect target',
+    'page is free of the redirect target',
   );
 });
 
@@ -749,12 +749,12 @@ test('an unknown entry field warns and the entry still applies', () => {
   assert.match(
     r.stderr,
     /params\.docsy\.plugins\.click-to-copy: unknown field "enabled"/,
-    'the unknown field is called out in a build warning',
+    'unknown field is called out in a build warning',
   );
   assert.match(
     r.publicFile('docs/code/index.html'),
     /js\/plugins\/click-to-copy/,
-    'the plugin keeps its theme defaults',
+    'plugin keeps its theme defaults',
   );
 });
 
@@ -771,12 +771,12 @@ test('a name ending in _docsy-shim is refused as reserved', () => {
   assert.match(
     r.stderr,
     /name "hello_docsy-shim" ends in the reserved _docsy-shim/,
-    'the reserved suffix is called out in a build warning',
+    'reserved suffix is called out in a build warning',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\/hello_docsy-shim/,
-    'the page is free of the reserved-name plugin',
+    'page is free of the reserved-name plugin',
   );
 });
 
@@ -807,7 +807,7 @@ test('non-map options warn and the module gets an empty map', () => {
     const js = r.publicFile(
       html.match(/src="\/(js\/plugins\/hello[^"]*\.js)"/)[1],
     );
-    assert.doesNotMatch(js, /not-a-map/, 'the module is free of the scalar');
+    assert.doesNotMatch(js, /not-a-map/, 'module is free of the scalar');
   }
 });
 
@@ -825,12 +825,12 @@ test('null options mean none, without a warning', () => {
   assert.doesNotMatch(
     r.stderr,
     /options must be a map/,
-    'the build is free of an options warning',
+    'build is free of an options warning',
   );
   assert.match(
     r.publicFile('index.html'),
     /js\/plugins\/hello/,
-    'the plugin is emitted',
+    'plugin is emitted',
   );
 });
 
