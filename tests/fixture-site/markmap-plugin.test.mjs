@@ -71,8 +71,6 @@ test('legacy-enabled markmap keeps site-wide loading and warns', () => {
 });
 
 test('the legacy param reads "false" from the environment as false', () => {
-  // Env values are strings; a bare `if` would take "false" as true and load
-  // markmap site-wide on an override meant to keep the default.
   const r = buildSite('markmap-legacy-env-false', {
     files,
     env: { HUGO_PARAMS_MARKMAP_ENABLE: 'false' },

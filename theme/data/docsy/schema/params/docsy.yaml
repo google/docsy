@@ -1,6 +1,4 @@
-# Schema of `params.docsy`, the configuration namespace Docsy reserves for
-# theme settings: the one home for each key's shape, entry fields, types, and
-# defaults.
+# Schema of `params.docsy`, the namespace Docsy reserves for theme settings.
 type: map
 keys:
   plugins:

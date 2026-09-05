@@ -1,5 +1,6 @@
-// Loop-contract tests for params.docsy.plugins. Contract:
-// https://www.docsy.dev/project/implementation/script-loading/
+// Loop-contract tests for params.docsy.plugins. Configuration reference:
+// https://www.docsy.dev/docs/content/plugins/#configuration-reference; shim
+// contract: https://www.docsy.dev/project/implementation/script-loading/
 // Net inventory and rationale:
 // https://www.docsy.dev/project/quality/script-loading/
 
@@ -117,10 +118,9 @@ test('a scalar false turns an entry off', () => {
 });
 
 test('env overrides reach registry entries and read as booleans', () => {
-  // The delimiter is the character after HUGO and the only one replaced:
-  // hyphens pass through with any delimiter; `x` here shows the non-`_` form
-  // that underscored key names need. Values arrive as strings for
-  // theme-declared keys, hence Hugo's `in (slice false "false" 0)` idiom.
+  // `x` delimiter: the form underscored key names need (hyphens pass through
+  // any delimiter). Why values are strings: Configuration § Environment
+  // variables.
   const r = buildSite('plugins-env-override', {
     files: {
       ...content,
@@ -146,8 +146,6 @@ test('env overrides reach registry entries and read as booleans', () => {
 });
 
 test('a quoted "False" is not a false spelling: the plugin loads', () => {
-  // `enable` is off for `false`, "false", and 0 only; every other value, a
-  // capitalized string included, is on.
   const r = buildSite('plugins-quoted-false', {
     files: { ...content, 'assets/js/plugins/hello.js': quietJs },
     extraConfig: `params:
@@ -441,7 +439,7 @@ test('a null params.docsy.plugins builds and warns', () => {
 });
 
 test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
-  // The remedy the null-registry warning names.
+  // The empty map, the guide's remedy for a null registry.
   const r = buildSite('plugins-empty-registry', {
     files: content,
     extraConfig: `params:

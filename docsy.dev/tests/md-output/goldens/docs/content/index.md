@@ -13,7 +13,7 @@ Section pages:
 - [Adding Content](/docs/content/adding-content/): Add different types of content to your Docsy site.
 - [AI-agent support](/docs/content/agent-support/): Opt-in features that help AI agents and automated tools discover and use your site content, including Markdown output, alternate links in HTML, and llms.txt.
 - [Analytics, User Feedback, and SEO](/docs/content/feedback/): Add Google Analytics tracking to your site, collect user feedback and learn about the page description meta tag.
-- [Configuration](/docs/content/configuration/): The rules behind every Docsy setting: how theme defaults merge with yours, case-insensitive keys, boolean values, environment overrides, and build warnings
+- [Configuration](/docs/content/configuration/): The rules behind every Docsy setting, from how theme defaults merge with yours to case-insensitive keys, boolean values, environment overrides, and build warnings
 - [Diagrams and Formulae](/docs/content/diagrams-and-formulae/): Write Mermaid, PlantUML, and MarkMap diagrams as code blocks, typeset KaTeX formulae, make Diagrams.net images editable in place, and configure their renderers.
 - [Logos and Images](/docs/content/iconsimages/): Add and customize logos, icons, and images in your project.
 - [Look and Feel](/docs/content/lookandfeel/): Customize colors, fonts, code highlighting, and more for your site.

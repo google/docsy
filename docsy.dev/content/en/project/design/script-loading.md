@@ -2,7 +2,8 @@
 title: Script loading
 description: >-
   Why body-end scripts load through a dispatcher and a config-merged plugin
-  registry: mechanisms, override points, and the gating and ordering decisions
+  registry, with the mechanisms, override points, and gating and ordering
+  decisions behind it
 ---
 
 Docsy loads its body-end JavaScript through
@@ -33,9 +34,7 @@ integrations onto the [plugin loop](#plugin-loop):
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
   re-served as local assets; Mermaid, whose pinned version is validated at build
   time while the browser imports the module straight from the CDN; and the
-  MarkMap autoloader, vendored at build time and served same-origin with SRI
-  (its runtime libraries still load from the CDN, at versions the autoloader
-  pins).
+  MarkMap autoloader, vendored at build time and served same-origin with SRI.
 
 Gating lives at two levels. The dispatcher gates PlantUML (site param) and
 Mermaid and KaTeX (`.Page.Store` flags); the plugin loop's `pageGate` carries
@@ -62,7 +61,7 @@ The decomposition has two design consequences:
   paths did not work (the internal template names `algolia/head` and
   `algolia/scripts` no longer exist).
 - Per plugin: the script asset `assets/js/plugins/NAME.js`, its companion
-  partial, and its companion stylesheet ([implementation notes][impl]).
+  partial, and its companion stylesheet ([file contract][ug-files]).
 
 ## The plugin loop {#plugin-loop}
 
@@ -88,15 +87,16 @@ map layers over the theme's:
 - **The schema is data**: `data/docsy/schema/params/docsy.yaml` declares the
   entry fields, types, and defaults once, for the loop and the docs alike.
   Enforcement stays hand-coded in the loop: Hugo offers no validation for
-  `params`, and the surveyed themes hand-code theirs too.
+  `params`, and no surveyed theme validates site params (Hinode's data-driven
+  `Args.html` covers shortcode arguments only).
 - **The loop is generic**: it knows no plugin names. Theme defaults are
   configuration, not template code; plugin-specific behavior lives in the
   plugin's own files: its script, its companion partial, and, for parameters
   that predate the registry, a per-plugin shim partial that decorates the
-  plugin's entry and is deleted with the parameter's deprecation cycle.
+  plugin's entry.
 - **Plugins are site-wide**: the registry is read from site configuration and is
   not a per-language surface; per-language divergence is unsupported.
-- **Order** is `weight` ascending, then name; Hugo's idiom for ordering named
+- **Order**: `weight` ascending, then name, Hugo's idiom for ordering named
   things.
 
 Alternatives considered, and why not:
@@ -152,7 +152,7 @@ idiom.
 ## Related pages
 
 - [Implementation: script loading][impl]
-- [Quality: script loading][quality]: the test nets that pin this behavior
+- [Quality notes][quality]: the test nets that pin this behavior
 
 <!-- prettier-ignore-start -->
 [#2789]: https://github.com/google/docsy/issues/2789
@@ -161,6 +161,7 @@ idiom.
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
 [ug-flags]: /docs/content/plugins/#page-flags-in-included-content
+[ug-files]: /docs/content/plugins/#plugin-files
 [ug-plugins]: /docs/content/plugins/
 [scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html

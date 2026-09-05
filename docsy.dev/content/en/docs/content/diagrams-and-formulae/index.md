@@ -7,8 +7,6 @@ description:
 cSpell:ignore: gatsby goldmark linenos markmap mhchem plantuml
 ---
 
-None of the renderers below needs a layout override.
-
 ## Pinned script-dependency versions {#script-dep-versions}
 
 Docsy renders some rich content with scripts and stylesheets fetched from public
@@ -678,9 +676,8 @@ params:
 > [!NOTE]
 >
 > Before 0.18, MarkMap was enabled with `params.markmap.enable`. That parameter
-> is deprecated: it still works for this release cycle, with a build warning
-> pointing at the registry form above, and keeps its pre-0.18 behavior of
-> loading MarkMap on every page.
+> is deprecated: it still works for this release cycle, with a build warning,
+> and keeps its pre-0.18 behavior of loading MarkMap on every page.
 
 ### MarkMap version
 

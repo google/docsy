@@ -1,5 +1,5 @@
-// tabpane-persist as a theme plugin: on every page, as before 0.18 (why not
-// gated: https://www.docsy.dev/project/design/script-loading/#gating-decisions).
+// tabpane-persist as a theme plugin, on every page as before 0.18; why it isn't
+// gated: https://www.docsy.dev/project/design/script-loading/#gating-decisions
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

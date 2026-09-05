@@ -55,24 +55,23 @@ types, and defaults:
 
 {{< readfile file="/data/docsy/schema/params/docsy.yaml" code="true" lang="yaml" >}}
 
-- `false` in place of an entry turns the plugin off; `{}` keeps every default.
+- `{}` in place of an entry keeps every default.
 - `enable` is off for `false`, `"false"`, and `0`, and on for any other value;
   `defer` is on for `true`, `"true"`, and `1`, and off for any other value. The
   string forms exist for [environment overrides][config-env].
-- `pageGate` names a page flag; `false` or empty means no gate
+- `pageGate: false` also means no gate
   ([Page flags in included content](#page-flags-in-included-content)).
 - Keys reach templates and plugin scripts lowercase: `.Plugin.pagegate`,
   `params.apikey` ([Configuration § Key spelling][config-keys]).
 
 ### Warnings
 
-Every configuration warning the registry emits carries the id `docsy-config`
-(silencing: [Configuration § warnings][config-warnings]), and the build
-continues with what conforms:
+Every registry shape warning carries the id `docsy-config` (to silence one, see
+[Configuration § Configuration warnings][config-warnings]):
 
-- An unknown field, a non-map `options`, a name the schema's pattern rejects or
-  that ends in its reserved suffix, or a scalar entry other than `false` is
-  ignored.
+- An unknown field or a non-map `options` is ignored and the rest of the entry
+  applies; a name the schema's pattern rejects or that ends in its reserved
+  suffix, or a scalar entry other than a false spelling, drops the whole entry.
 - A `params.docsy` or `params.docsy.plugins` that is not a map empties the
   registry, Docsy's own plugins included. `plugins: {}` keeps them; a valueless
   `plugins:` is null and drops them.
@@ -116,14 +115,13 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
-Docsy builds, fingerprints, and loads the script with [subresource
-integrity][SRI]; the entry's fields are in the
+Docsy builds and loads the script; the entry's fields are in the
 [configuration reference](#configuration-reference).
 
 ### Plugin files
 
 A plugin is one to three files. A project file shadows the theme's of the same
-name, which is how you replace one of Docsy's companions.
+name, which is how you replace one of Docsy's plugins or its companions.
 
 | File                                                | Contract                                                                                                                   |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -132,8 +130,8 @@ name, which is how you replace one of Docsy's companions.
 | `assets/scss/plugins/`_`NAME`_`.scss`               | Optional companion stylesheet, through the Sass pipeline.                                                                  |
 
 Companions emit before the script ([why][design-ordering]). Script and
-stylesheet tags carry `integrity` and `crossorigin="anonymous"` in every
-environment.
+stylesheet tags carry [subresource integrity][SRI] (`integrity` and
+`crossorigin="anonymous"`) in every environment.
 
 ### Security
 

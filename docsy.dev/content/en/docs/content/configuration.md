@@ -1,8 +1,8 @@
 ---
 title: Configuration
 description: >-
-  The rules behind every Docsy setting: how theme defaults merge with yours,
-  case-insensitive keys, boolean values, environment overrides, and build
+  The rules behind every Docsy setting, from how theme defaults merge with yours
+  to case-insensitive keys, boolean values, environment overrides, and build
   warnings
 ---
 
@@ -13,12 +13,14 @@ parameters stay where they are.
 
 ## Theme defaults and your overrides
 
-Docsy declares its defaults in its own [`hugo.yaml`][theme-defaults]. Under
-Hugo's default deep-merge strategy for `params`, maps merge recursively, so you
-set only the leaves you change; a list or a scalar replaces the theme's value
-rather than combining with it. Any Hugo module you import contributes its
-`params` the same way, and your project's values win. For the strategies, see
-Hugo's [configuration merge][hugo-merge].
+The defaults Docsy sets in configuration live in its own
+[`hugo.yaml`][theme-defaults]. Under Hugo's default deep-merge strategy for
+`params`, maps merge recursively, so you set only the leaves you change; a list
+or a scalar replaces the theme's value rather than combining with it. Any Hugo
+module you import contributes its `params` the same way, and your project's
+values win. For the strategies, see Hugo's [configuration merge][hugo-merge];
+setting `params._merge: shallow` discards the theme's entries under any key you
+also define.
 
 ## Key spelling
 
@@ -43,7 +45,7 @@ runs `HUGO_PARAMS_TD_CHROME=shared hugo`.
 
 - **The character after `HUGO` is the delimiter**, and the only character split
   on. So `HUGO_` cannot name a key that itself contains an underscore; pick
-  another delimiter for those: `HUGOxPARAMSxPRISM_SYNTAX_HIGHLIGHTING=false`.
+  another delimiter for those: `HUGOxPARAMSxPRISM_SYNTAX_HIGHLIGHTING=true`.
   Hyphens pass through with any delimiter
   (`HUGO_PARAMS_DOCSY_PLUGINS_CLICK-TO-COPY_ENABLE=false`), but a name with a
   hyphen isn't a POSIX shell identifier: pass it with `env NAME=value hugo` or a

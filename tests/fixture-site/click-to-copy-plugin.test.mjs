@@ -71,9 +71,7 @@ test('prism supersedes the copy-button plugin', () => {
 });
 
 test('legacy params read "false" from the environment as false', () => {
-  // Env values are strings; a bare `if` would take "false" as true and load
-  // Prism (and drop the copy button) on an override meant to keep the default.
-  // `x` as delimiter: with `HUGO_`, the underscores in the key names split.
+  // `x` delimiter: with `HUGO_`, the underscores in the key names split.
   const r = buildSite('c2c-legacy-env-false', {
     files,
     title: 'Docsy legacy env fixture',

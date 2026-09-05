@@ -1,6 +1,8 @@
 ---
 title: Script loading
-description: Runtime and security contracts of Docsy's plugin loop
+description: >-
+  The plugin loop's shim contract, warning id, build pipeline, and the security
+  rules Docsy's own plugins follow
 ---
 
 [`_partials/scripts/plugins.html`][plugins.html] implements
@@ -11,22 +13,9 @@ notes][quality].
 
 ## Loop mechanics
 
-The loop reads the theme's schema, `theme/data/docsy/schema/params/docsy.yaml`,
-directly (`hugo.Data`), for the entry defaults, the field allowlist, and the
-name rule; the guide [includes the same file][guide-config], so shape and
-defaults have one home. Hugo lowercases `params` keys but not data keys, so the
-loop lowercases the schema's field names before matching.
-
-A normalization pass builds one entry per registered name: defaults, then the
-entry's known fields; a scalar `false` becomes `enable: false`. Two coercions
-have a semantic reason: a boolean or empty `pageGate` means no gate (`false` is
-the natural spelling of "none", and the flag `"false"` would silently never
-match), and `weight` is cast to one integer kind (YAML yields `int` or `uint64`
-by source, and `sort` compares a mix as strings). Booleans are tested with
-Hugo's own idiom, `in (slice false "false" 0)` and its complement, because an
-environment override of a theme-declared key arrives as a string: Hugo applies
-the environment before the theme's configuration merges, so there is no type to
-convert to. Entries are then sorted by weight, then name.
+The template's comments carry the mechanics and their rationale. The loop reads
+the theme's schema through `hugo.Data`; the guide [renders the same
+file][guide-config], so shape and defaults have one home.
 
 ## Pre-registry parameters
 
@@ -47,11 +36,9 @@ registered name with no script warns whatever its gate.
 
 ## Build and emission
 
-Each plugin's script is built on its own with `js.Build`, `options` passed as
-`params`, minified in production and fingerprinted in **every** environment; its
-companion partial runs first and its companion stylesheet goes through the Sass
-pipeline ([file contract][guide-files]; [why companions
-first][design-ordering]).
+The [file contract][guide-files] is the guide's; the pipeline adds one step
+beyond it: scripts and stylesheets are minified in production, fingerprinted in
+every environment ([why companions first][design-ordering]).
 
 ## Security constraints
 
@@ -60,9 +47,8 @@ authors][guide-security]. In addition:
 
 - Validate a configuration value against an allowlist before it reaches a fetch
   URL (`params.markmap.version`: version characters only).
-- Residual exposure: the vendored MarkMap autoloader's runtime libraries still
-  load from the CDN, pinned by the autoloader itself but without SRI (disclosed
-  in the guide's [MarkMap version][guide-markmap] section).
+- Residual exposure, disclosed in the guide's [MarkMap version][guide-markmap]
+  section: the autoloader's runtime libraries.
 - Imported Hugo modules are trusted: their `params` merge into the site's, so a
   module can register, re-gate, or turn off plugins, as it already supplies
   layouts and assets.
