@@ -662,8 +662,8 @@ params:
         pageGate: ''
 ```
 
-The entry's `options` take a `height` for the rendered map, a CSS length. The
-default is `300px`, which also applies when the value isn't a valid length:
+The entry's `options` take a `height` for the rendered map, a [CSS length][].
+The default is `300px`, which also applies when the value isn't a valid length:
 
 ```yaml
 params:
@@ -694,6 +694,8 @@ entry file and serves it from your site with subresource integrity.
 - The autoloader itself loads MarkMap's runtime libraries from a public CDN in
   the browser, at versions it pins but without subresource integrity.
 
+[CSS length]:
+  https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 [page-flags]: /docs/content/plugins/#page-flags-in-included-content
 
