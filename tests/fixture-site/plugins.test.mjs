@@ -5,9 +5,10 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { buildSite } from './lib/build-site.mjs';
+import { parse as parseYaml } from 'yaml';
+import { buildSite, repoRoot } from './lib/build-site.mjs';
 
 const content = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -172,7 +173,7 @@ test('a non-false scalar entry warns and is skipped', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /Plugin "tabpane-persist": true is not a plugin entry/,
+    /params\.docsy\.plugins\.tabpane-persist: true is not a plugin entry/,
     'the scalar entry is called out in a build warning',
   );
   assert.doesNotMatch(
@@ -511,6 +512,74 @@ test('a numeric plugin name resolves its asset', () => {
   );
 });
 
+test('every schema violation warns under the one docsy-config id', () => {
+  // One class of fault, one id: a site silences it with a single ignoreLogs
+  // entry. The fixture trips the namespace, field, value, and name rules.
+  const r = buildSite('plugins-config-id', {
+    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: { enabled: true, options: 1 }
+      bad.name: {}
+      other: on
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const ids = [...r.stderr.matchAll(/ignoreLogs = \['([a-z-]+)'\]/g)].map(
+    (m) => m[1],
+  );
+  assert.ok(ids.length >= 4, `each violation names its id:\n${r.stderr}`);
+  assert.deepEqual(
+    [...new Set(ids)],
+    ['docsy-config'],
+    'schema violations share the docsy-config id',
+  );
+});
+
+test('the loop honors every field the schema declares', () => {
+  // Agreement guard between data/docsy/schema/params/docsy.yaml and the loop:
+  // a field set to a non-default value must reach the companion, and the
+  // schema's defaults must be what an empty entry gets.
+  const schema = parseYaml(
+    readFileSync(
+      path.join(repoRoot, 'theme/data/docsy/schema/params/docsy.yaml'),
+      'utf8',
+    ),
+  );
+  const fields = Object.keys(schema.keys.plugins.entry);
+  assert.ok(fields.length >= 5, 'the schema declares the entry fields');
+  const r = buildSite('plugins-schema-agreement', {
+    files: {
+      ...content,
+      'assets/js/plugins/hello.js': quietJs,
+      'layouts/_partials/scripts/plugins/hello.html':
+        '<script type="application/json" id="entry">{{ jsonify .Plugin }}</script>\n',
+    },
+    extraConfig: `params:
+  docsy:
+    plugins:
+      hello: {}
+`,
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('index.html');
+  // In a script context Hugo escapes jsonify's output as a JS string literal
+  // (its autoescaping, the very rule the security constraints rely on), so the
+  // body parses to a JSON string that parses to the entry.
+  let entry = JSON.parse(html.match(/id="entry">(.*?)<\/script>/s)[1]);
+  if (typeof entry === 'string') entry = JSON.parse(entry);
+  for (const field of fields) {
+    const key = field.toLowerCase();
+    assert.ok(key in entry, `the loop carries the schema field ${field}`);
+    assert.deepEqual(
+      entry[key],
+      schema.keys.plugins.entry[field].default,
+      `${field} defaults per the schema`,
+    );
+  }
+});
+
 test('a path-traversing plugin name is rejected with a warning', () => {
   const r = buildSite('plugins-name-traversal', {
     files: {
@@ -667,7 +736,7 @@ test('an unknown entry field warns and the entry still applies', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /Plugin "click-to-copy": unknown field "enabled"/,
+    /params\.docsy\.plugins\.click-to-copy: unknown field "enabled"/,
     'the unknown field is called out in a build warning',
   );
   assert.match(
@@ -706,7 +775,7 @@ test('a name ending in _docsy-shim is refused as reserved', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /Ignoring plugin "hello_docsy-shim".*reserved/,
+    /name "hello_docsy-shim" ends in the reserved _docsy-shim/,
     'the reserved suffix is called out in a build warning',
   );
   assert.doesNotMatch(
@@ -731,7 +800,7 @@ test('non-map options warn and the module gets an empty map', () => {
     assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
     assert.match(
       r.stderr,
-      /Plugin "hello": options must be a map/,
+      /params\.docsy\.plugins\.hello\.options must be a map/,
       `options: ${value} is called out in a build warning`,
     );
     const html = r.publicFile('index.html');

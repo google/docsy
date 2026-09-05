@@ -84,6 +84,11 @@ map layers over the theme's:
   is the turn-off shorthand.
 - **Duplicates are impossible**: map keys are unique. The loop needs no
   deduplication, no first-wins rule, no supersession bookkeeping.
+- **The schema is data**: `data/docsy/schema/params/docsy.yaml` declares the
+  entry fields, types, and defaults once; the loop reads it and enforces it (one
+  warning id, `docsy-config`, for every violation), the implementation notes
+  include it verbatim. No generic validator: Hugo offers none for `params`, and
+  the surveyed themes hand-code theirs too.
 - **The loop is generic**: it knows no plugin names. Theme defaults are
   configuration, not template code; plugin-specific behavior lives in the
   plugin's own files: its script, its companion partial, and, for parameters

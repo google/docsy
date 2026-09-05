@@ -50,6 +50,8 @@ module:
       target: assets/vendor/bootstrap
     - source: node_modules/@fortawesome/fontawesome-free
       target: assets/vendor/Font-Awesome
+    - source: data
+      target: data
     - source: i18n
       target: i18n
     - source: layouts

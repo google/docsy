@@ -1,28 +1,36 @@
 {{/* Emits each plugin registered in params.docsy.plugins. Registry contract,
   shape guards, and companion conventions:
   https://www.docsy.dev/project/implementation/script-loading/ */ -}}
+{{/* The schema (data/docsy/schema/params/docsy.yaml) is the home for the entry
+  fields, their defaults, and the name rule. Hugo lowercases params keys but
+  not data keys, so the schema's fields are lowercased here to match. */ -}}
+{{ $schema := hugo.Data.docsy.schema.params.docsy.keys.plugins -}}
+{{ $seeSchema := "for the schema, see https://www.docsy.dev/project/implementation/script-loading/#registry-contract" -}}
+{{ $defaults := dict -}}
+{{ range $field, $spec := $schema.entry -}}
+  {{ $defaults = merge $defaults (dict (lower $field) $spec.default) -}}
+{{ end -}}
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy is reserved for theme settings and must be a map (got %v); for details, see https://www.docsy.dev/project/implementation/script-loading/#shape-guards." $docsy -}}
+  {{ warnidf "docsy-config" "params.docsy is reserved for theme settings and must be a map (got %v); %s." $docsy $seeSchema -}}
 {{ else if not (reflect.IsMap $docsy.plugins) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v); for details, see https://www.docsy.dev/project/implementation/script-loading/#shape-guards." $docsy.plugins -}}
+  {{ warnidf "docsy-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v); %s." $docsy.plugins $seeSchema -}}
 {{ else -}}
   {{ $registry = $docsy.plugins -}}
 {{ end -}}
-{{/* Normalize entries to a fixed lowercase key set (Hugo lowercases params
-  keys, and `merge` yields plain maps without Hugo's case-insensitive access).
-  Order is weight, then name: `sort` is stable over the key-ordered range. */ -}}
-{{ $fields := slice "enable" "defer" "pagegate" "weight" "options" -}}
+{{/* Normalize entries to the schema's lowercase key set (`merge` yields plain
+  maps without Hugo's case-insensitive access). Order is weight, then name:
+  `sort` is stable over the key-ordered range. */ -}}
 {{ $entries := slice -}}
 {{ range $name, $value := $registry -}}
-  {{ $entry := dict "enable" true "defer" false "pagegate" "" "weight" 0 "options" dict -}}
+  {{ $entry := $defaults -}}
   {{ if reflect.IsMap $value -}}
     {{ range $k, $v := $value -}}
-      {{ if in $fields (lower $k) -}}
+      {{ if isset $defaults (lower $k) -}}
         {{ $entry = merge $entry (dict (lower $k) $v) -}}
       {{ else -}}
-        {{ warnidf "docsy-plugin-entry" "Plugin %q: unknown field %q (the fields are enable, defer, pageGate, weight, and options). Ignoring it." $name $k -}}
+        {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored; %s." $name $k $seeSchema -}}
       {{ end -}}
     {{ end -}}
   {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
@@ -30,7 +38,7 @@
   {{ else -}}
     {{/* A scalar replaced any theme entry at merge time; the intent is
       unrecoverable. */ -}}
-    {{ warnidf "docsy-plugin-entry" "Plugin %q: %v is not a plugin entry (a map); write `%s: { enable: true }` to enable it with its defaults. Skipping it." $name $value $name -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s: %v is not a plugin entry (a map), skipped; %s." $name $value $seeSchema -}}
     {{ continue -}}
   {{ end -}}
   {{/* `false` is the natural way to write "no gate"; `true` names no flag. */ -}}
@@ -44,23 +52,25 @@
   {{ if eq $options nil -}}
     {{ $options = dict -}}
   {{ else if not (reflect.IsMap $options) -}}
-    {{ warnidf "docsy-plugin-entry" "Plugin %q: options must be a map (got %v); using none." $name $options -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins.%s.options must be a map (got %v), ignored; %s." $name $options $seeSchema -}}
     {{ $options = dict -}}
   {{ end -}}
-  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate "options" $options) -}}
+  {{/* One integer kind for weight: YAML yields int or uint64 by source, and
+    `sort` compares mixed kinds as strings. */ -}}
+  {{ $entry = merge $entry (dict "name" $name "pagegate" $gate "options" $options "weight" (int $entry.weight)) -}}
   {{ $entries = $entries | append $entry -}}
 {{ end -}}
 {{ $entries = sort $entries "weight" -}}
 {{ range $entries -}}
   {{ $entry := . -}}
   {{ $name := .name -}}
-  {{ if not (findRE `^[a-z0-9_-]+$` $name) -}}
+  {{ if not (findRE $schema.key.pattern $name) -}}
     {{/* Names are path components: refuse traversal. */ -}}
-    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: names are restricted to lowercase letters, digits, hyphens, and underscores." $name -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q does not match %s, ignored; %s." $name $schema.key.pattern $seeSchema -}}
     {{ continue -}}
   {{ end -}}
-  {{ if hasSuffix $name "_docsy-shim" -}}
-    {{ warnidf "docsy-plugin-name" "Ignoring plugin %q: the _docsy-shim suffix is reserved for shim partials." $name -}}
+  {{ if hasSuffix $name $schema.key.reservedSuffix -}}
+    {{ warnidf "docsy-config" "params.docsy.plugins: name %q ends in the reserved %s, ignored; %s." $name $schema.key.reservedSuffix $seeSchema -}}
     {{ continue -}}
   {{ end -}}
   {{ $shim := printf "scripts/plugins/%s_docsy-shim.html" $name -}}

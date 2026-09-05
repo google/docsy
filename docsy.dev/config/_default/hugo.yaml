@@ -195,6 +195,10 @@ module:
     - source: ../package.json
       target: data/package.json
       sites: *sites
+    # The theme's params.docsy schema, included verbatim by the implementation notes
+    - source: ../theme/data/docsy/schema
+      target: assets/docsy-schema
+      sites: *sites
     # Tests
     # cSpell:ignore quang nguyen vinh therato
     - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
