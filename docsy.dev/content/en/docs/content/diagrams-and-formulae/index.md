@@ -694,7 +694,7 @@ entry file and serves it from your site with subresource integrity.
 - To build without network access, override the plugin's companion partial,
   `layouts/_partials/scripts/plugins/markmap.html`, to serve a copy you host.
 - The autoloader itself loads MarkMap's runtime libraries from a public CDN in
-  the browser, at versions it pins.
+  the browser, at versions it pins but without subresource integrity.
 
 [markmap-autoloader]: https://www.npmjs.com/package/markmap-autoloader
 [page-flags]: /docs/content/plugins/#page-flags-in-included-content

@@ -1970,6 +1970,11 @@
     "when": "2026-06-26T18:24:04Z",
     "via": "lychee",
   },
+  "https://github.com/google/docsy/issues/new?title=Configuration": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
+    "via": "lychee",
+  },
   "https://github.com/google/docsy/issues/new?title=Content%20and%20Customization": {
     "status": 200,
     "when": "2026-09-02T08:07:17Z",
@@ -3607,6 +3612,11 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
+  "https://gohugo.io/configuration/introduction/#merge-configuration-settings": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/configuration/markup/#extensions": {
     "status": 200,
     "when": "2026-06-26T18:23:55Z",
@@ -3775,6 +3785,11 @@
   "https://gohugo.io/functions/highlight/": {
     "status": 200,
     "when": "2026-06-26T18:23:57Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/functions/js/build/": {
+    "status": 200,
+    "when": "2026-09-05T11:43:21Z",
     "via": "lychee",
   },
   "https://gohugo.io/functions/js/build/#params": {
@@ -4244,6 +4259,13 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://main--docsydocs.netlify.app/docs/content/configuration/": {
+    "status": 206,
+    "when": "2026-09-05T11:50:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "status": 200,
     "when": "2026-06-26T18:23:56Z",
@@ -4269,7 +4291,6 @@
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the plugin conversions (#2791) deploy.
   "https://main--docsydocs.netlify.app/docs/content/plugins/": {
     "status": 206,
     "when": "2026-09-04T21:15:00Z",
@@ -5086,6 +5107,13 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
+  // New-page seed: goes live when the plugin conversions (#2791) deploy.
+  "https://www.docsy.dev/docs/content/configuration/": {
+    "status": 206,
+    "when": "2026-09-05T11:50:00Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "status": 200,
     "when": "2026-06-26T18:23:56Z",
@@ -5111,7 +5139,6 @@
     "when": "2026-06-26T18:23:55Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the plugin conversions (#2791) deploy.
   "https://www.docsy.dev/docs/content/plugins/": {
     "status": 206,
     "when": "2026-09-04T21:15:00Z",

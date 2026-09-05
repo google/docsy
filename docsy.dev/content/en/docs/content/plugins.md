@@ -1,8 +1,8 @@
 ---
 title: Plugins
 description:
-  Turn Docsy's plugins on or off and add your own scripts, without overriding
-  layout templates.
+  Turn Docsy's plugins on or off, add your own scripts without overriding layout
+  templates, and look up the registry's configuration reference.
 ---
 
 Docsy loads some of its optional JavaScript features, and any script you add, as
@@ -45,6 +45,39 @@ params:
 <!-- prettier-ignore-end -->
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
+## Configuration reference
+
+`params.docsy.plugins` is a map of plugin entries keyed by name; the name is
+also the script's file name. Docsy's own plugins are declared in the theme's
+[`hugo.yaml`][theme-defaults], and your entries merge over them by name and
+field ([Configuration § Theme defaults][config-merge]). Each entry's fields,
+types, and defaults:
+
+{{< readfile file="/data/docsy/schema/params/docsy.yaml" code="true" lang="yaml" >}}
+
+- `false` in place of an entry turns the plugin off; `{}` keeps every default.
+- `enable` is off for `false`, `"false"`, and `0`, and on for any other value;
+  `defer` is on for `true`, `"true"`, and `1`, and off for any other value. The
+  string forms exist for [environment overrides][config-env].
+- `pageGate` names a page flag; `false` or empty means no gate
+  ([Page flags in included content](#page-flags-in-included-content)).
+- Keys reach templates and plugin scripts lowercase: `.Plugin.pagegate`,
+  `params.apikey` ([Configuration § Key spelling][config-keys]).
+
+### Warnings
+
+Every registry warning carries the id `docsy-config` ([Configuration §
+warnings][config-warnings]), and the build continues with what conforms:
+
+- An unknown field, a non-map `options`, a name the schema's pattern rejects or
+  that ends in its reserved suffix, or a scalar entry other than `false` is
+  ignored.
+- A `params.docsy` or `params.docsy.plugins` that is not a map empties the
+  registry, Docsy's own plugins included. `plugins: {}` keeps them; a valueless
+  `plugins:` is null and drops them.
+- A registered name with no `assets/js/plugins/`_`NAME`_`.js` warns
+  `docsy-plugin-missing`, whatever its gate.
+
 ## Add a custom script
 
 For a script that should load at the end of every page, register it as a plugin;
@@ -83,9 +116,36 @@ params:
 <!-- markdownlint-enable no-shortcut-ref-link -->
 
 Docsy builds, fingerprints, and loads the script with [subresource
-integrity][SRI]. For the entry fields (`options`, `defer`, `pageGate`,
-`weight`), environment overrides, and the `docsy-config` warnings, see the
-[registry contract][].
+integrity][SRI]; the entry's fields are in the
+[configuration reference](#configuration-reference).
+
+### Plugin files
+
+A plugin is one to three files. A project file shadows the theme's of the same
+name, which is how you replace one of Docsy's companions.
+
+| File                                                | Contract                                                                                                                   |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `assets/js/plugins/`_`NAME`_`.js`                   | Required. Built on its own with [`js.Build`][]; `options` reach it as [`@params`][].                                       |
+| `layouts/_partials/scripts/plugins/`_`NAME`_`.html` | Optional companion partial for vendored libraries, markup, or configuration; receives `(dict "Page" PAGE "Plugin" ENTRY)`. |
+| `assets/scss/plugins/`_`NAME`_`.scss`               | Optional companion stylesheet, through the Sass pipeline.                                                                  |
+
+Companions emit before the script ([why][design-ordering]). Script and
+stylesheet tags carry `integrity` and `crossorigin="anonymous"` in every
+environment.
+
+### Security
+
+- Never pipe `.Plugin.options` through `safeHTML`, `safeJS`, or `safeURL` in a
+  companion partial: options are site-configured strings, and Hugo's contextual
+  autoescaping is the defense.
+- Options, like anything reaching a module as `@params`, ship world-readable in
+  the built JavaScript: never route secrets through them.
+- Pin third-party dependencies, never `latest`; vendor build-time fetches and
+  serve them with SRI; and use no loader that pulls unpinned secondary code (SRI
+  on a loader is worthless if the loader fetches unpinned dependencies).
+- A plugin that loads remote code gets a `pageGate`, so its code ships only
+  where used.
 
 ## Page flags in included content
 
@@ -111,6 +171,13 @@ from a shortcode. For MarkMap's authoring paths and how to clear its gate, see
 [Activating MarkMap support]: /docs/content/diagrams-and-formulae/#activating-markmap-support
 [Copy to clipboard]: /docs/content/lookandfeel/#copy-to-clipboard
 [head and body hooks]: /docs/content/lookandfeel/#add-code-to-head-or-before-body-end
-[registry contract]: /project/implementation/script-loading/
+[`@params`]: https://gohugo.io/functions/js/build/#params
+[`js.Build`]: https://gohugo.io/functions/js/build/
+[config-env]: /docs/content/configuration/#environment-variables
+[config-keys]: /docs/content/configuration/#key-spelling
+[config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
+[config-warnings]: /docs/content/configuration/#configuration-warnings
+[design-ordering]: /project/design/script-loading/#ordering-decisions
+[theme-defaults]: https://github.com/google/docsy/blob/main/theme/hugo.yaml
 [SRI]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
 <!-- prettier-ignore-end -->

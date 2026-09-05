@@ -67,8 +67,9 @@ The decomposition has two design consequences:
 ## The plugin loop {#plugin-loop}
 
 [`scripts/plugins.html`][plugins.html] emits each eligible plugin registered in
-`params.docsy.plugins`. For the registry contract, shape guards, and build
-details, see the [implementation notes][impl].
+`params.docsy.plugins`. For the configuration reference and plugin file
+contract, see the [plugins guide][ug-plugins]; for the loop's mechanics, the
+[implementation notes][impl].
 
 ### Registry shape: a map, layered by Hugo's config merge {#registry-shape}
 
@@ -160,6 +161,7 @@ idiom.
 [plugins.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html
 [quality]: /project/quality/script-loading/
 [ug-flags]: /docs/content/plugins/#page-flags-in-included-content
+[ug-plugins]: /docs/content/plugins/
 [scripts-dir]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts/
 [scripts.html]: https://github.com/google/docsy/blob/main/theme/layouts/_partials/scripts.html
 <!-- prettier-ignore-end -->

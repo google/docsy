@@ -4,7 +4,7 @@
 {{/* Hugo lowercases params keys but not data keys: the schema's field names
   are lowercased here to match. */ -}}
 {{ $schema := hugo.Data.docsy.schema.params.docsy.keys.plugins -}}
-{{ $seeSchema := "For the schema, see https://www.docsy.dev/project/implementation/script-loading/#registry-contract" -}}
+{{ $seeSchema := "For the schema, see https://www.docsy.dev/docs/content/plugins/#configuration-reference" -}}
 {{ $defaults := dict -}}
 {{ range $field, $spec := $schema.entry -}}
   {{ $defaults = merge $defaults (dict (lower $field) $spec.default) -}}

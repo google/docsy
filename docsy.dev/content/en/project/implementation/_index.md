@@ -9,8 +9,8 @@ no_list: true
 
 ## Subsystems
 
-- [Script loading](/project/implementation/script-loading/): registry contract,
-  shape guards, and build details of the plugin loop
+- [Script loading](/project/implementation/script-loading/): the plugin loop's
+  mechanics, shim ABI, build pipeline, and security constraints
 
 ## Patches and workarounds
 
