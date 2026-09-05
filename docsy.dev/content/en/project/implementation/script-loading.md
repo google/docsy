@@ -96,14 +96,19 @@ deprecation cycle by deleting the file:
 
 The theme's plugins live under `params.docsy.plugins`, so a site value that is
 not a map there, or at `params.docsy`, has already replaced them in Hugo's
-config merge:
+config merge. The registry is then empty: **no theme plugin loads** (the build
+succeeds; the site ships without the copy button, tab persistence, or MarkMap),
+and because shims run per registry entry, the deprecated `params.markmap.enable`
+and `params.disable_click2copy_chroma` have no effect either. Both cases warn
+with id `docsy-plugins-config`:
 
-- Any non-map `params.docsy.plugins` (`null` from an emptied `plugins:` key, a
-  scalar, or the pre-release list shape) warns (`docsy-plugins-config`) that the
-  theme plugins are off; `plugins: {}` keeps them. A non-map `params.docsy` (a
-  site's own pre-0.18 `docsy` param) draws the same warning id, naming the key
-  as reserved; with no registry to iterate, the shims (and so the legacy
-  parameters they alias) are off too.
+- **`params.docsy` is not a map**: the site set a `docsy` parameter of its own,
+  which Docsy reserves for theme settings. Rename it. (If the site set no such
+  key, it isn't receiving the theme's configuration; the version canaries report
+  that case with their own error.)
+- **`params.docsy.plugins` is not a map**: `null` from an emptied `plugins:`
+  key, a scalar, or the pre-release list shape. Write `plugins: {}` to keep the
+  theme's plugins, or a map of entries to layer over them.
 - An enabled entry with no asset at `assets/js/plugins/NAME.js` warns
   (`docsy-plugin-missing`), regardless of `pageGate`, so a typo can't hide
   behind a gate.

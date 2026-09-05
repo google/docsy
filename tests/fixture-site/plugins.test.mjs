@@ -406,7 +406,7 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /params\.docsy must be a map.*theme plugins and their legacy parameters are off.*reserves the key/,
+    /params\.docsy is reserved for theme settings and must be a map/,
     'the clobbered registry is called out as a reserved key',
   );
   assert.doesNotMatch(
@@ -428,7 +428,7 @@ test('a null params.docsy.plugins builds and warns', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /theme plugins are off/,
+    /params\.docsy\.plugins must be a map/,
     'the clobbered registry is called out in a build warning',
   );
 });
@@ -445,7 +445,7 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.doesNotMatch(
     r.stderr,
-    /theme plugins are off/,
+    /params\.docsy\.plugins must be a map/,
     'the empty map draws no registry warning',
   );
   assert.match(
@@ -467,7 +467,7 @@ test('a list-shaped params.docsy.plugins builds and warns', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /theme plugins are off/,
+    /params\.docsy\.plugins must be a map/,
     'the config shape is called out in a build warning',
   );
   assert.doesNotMatch(
@@ -488,7 +488,7 @@ test('a falsy scalar params.docsy.plugins also warns', () => {
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
   assert.match(
     r.stderr,
-    /theme plugins are off/,
+    /params\.docsy\.plugins must be a map/,
     'the config shape is called out in a build warning',
   );
 });

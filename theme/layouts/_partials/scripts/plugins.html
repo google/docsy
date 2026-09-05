@@ -4,9 +4,9 @@
 {{ $registry := dict -}}
 {{ $docsy := .Site.Params.docsy -}}
 {{ if not (reflect.IsMap $docsy) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy must be a map of theme settings (got %v): the theme plugins and their legacy parameters are off. Either your site isn't receiving the theme's config, or your own `docsy` param replaced it (Docsy reserves the key)." $docsy -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy is reserved for theme settings and must be a map (got %v); for details, see https://www.docsy.dev/project/implementation/script-loading/#shape-guards." $docsy -}}
 {{ else if not (reflect.IsMap $docsy.plugins) -}}
-  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v): the theme plugins are off; write `plugins: {}` to keep them." $docsy.plugins -}}
+  {{ warnidf "docsy-plugins-config" "params.docsy.plugins must be a map of plugin entries keyed by name (got %v); for details, see https://www.docsy.dev/project/implementation/script-loading/#shape-guards." $docsy.plugins -}}
 {{ else -}}
   {{ $registry = $docsy.plugins -}}
 {{ end -}}
