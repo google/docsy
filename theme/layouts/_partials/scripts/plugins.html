@@ -32,7 +32,7 @@
         {{ warnidf "docsy-config" "params.docsy.plugins.%s: unknown field %q, ignored. %s." $name $k $seeSchema -}}
       {{ end -}}
     {{ end -}}
-  {{ else if or (eq $value false) (eq (lower (printf "%v" $value)) "false") -}}
+  {{ else if eq $value false -}}
     {{ $entry = merge $entry (dict "enable" false) -}}
   {{ else -}}
     {{/* A scalar replaced any theme entry at merge time; the intent is
@@ -79,11 +79,11 @@
       {{ errorf "Plugin shim %s must return the plugin entry (a map); got %T." $shim $entry -}}
     {{ end -}}
   {{ end -}}
-  {{ if or (eq $entry.enable false) (eq (lower (printf "%v" $entry.enable)) "false") -}}
+  {{ if eq $entry.enable false -}}
     {{ continue -}}
   {{ end -}}
   {{ $gate := printf "%v" $entry.pagegate -}}
-  {{ $defer := and $entry.defer (ne (lower (printf "%v" $entry.defer)) "false") -}}
+  {{ $defer := $entry.defer -}}
   {{ $path := printf "js/plugins/%s.js" $name -}}
   {{ with resources.Get $path -}}
     {{ if or (not $gate) ($.Page.Store.Get $gate) -}}

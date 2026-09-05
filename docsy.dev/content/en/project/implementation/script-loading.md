@@ -26,10 +26,12 @@ Hugo lowercases configuration keys. Plugin names, entry fields, and option keys
 arrive in lowercase: config examples keep Hugo's camelCase, templates and plugin
 scripts read `.Plugin.pagegate` and `params.apikey`.
 
-Types are declared for the reader. The loop coerces lenient input rather than
-reject it: the string `"false"` (any case) counts as `false` for `enable`,
-`defer`, and a scalar entry; a boolean or empty `pageGate` means no gate; a nil
-`options` means none.
+Values are read typed, as Hugo reads its own configuration: the config formats
+have booleans, so `false` is spelled `false`, and a quoted `"false"` is a truthy
+string. The loop coerces two shapes with a semantic reason: a boolean or empty
+`pageGate` means no gate (`false` is the natural spelling of "none"; the flag
+`"false"` would silently never match), and `weight` is cast to one integer kind
+(YAML yields `int` or `uint64` by source, and `sort` compares a mix as strings).
 
 ## Pre-registry parameters
 

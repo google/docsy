@@ -116,43 +116,38 @@ test('a scalar false turns an entry off', () => {
   );
 });
 
-test('a quoted "false" scalar entry turns it off', () => {
-  const r = buildSite('plugins-scalar-quoted-false', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins:
-      hello: 'FALSE'
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(
-    r.stderr,
-    /not a plugin entry/,
-    'the build is free of a scalar warning',
-  );
-  assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /js\/plugins\/hello/,
-    'the page is free of the string-disabled plugin',
-  );
-});
-
-test('a quoted "false" enable disables the entry', () => {
+test('booleans are read typed: a quoted "false" is a truthy string', () => {
+  // Hugo's config formats have booleans, so `false` is spelled `false`; the
+  // loop coerces no strings (Hugo's own config reads don't either).
   const r = buildSite('plugins-quoted-false', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
+    files: {
+      ...content,
+      'assets/js/plugins/hello.js': quietJs,
+      'assets/js/plugins/other.js': quietJs,
+    },
     extraConfig: `params:
   docsy:
     plugins:
-      hello:
-        enable: 'False'
+      hello: { enable: 'False', defer: 'false' }
+      other: 'FALSE'
 `,
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
+  const html = r.publicFile('index.html');
+  assert.match(
+    html,
+    /<script[^>]*\bdefer\b[^>]*js\/plugins\/hello/,
+    "a quoted 'False' enable and 'false' defer both read as true",
+  );
+  assert.match(
+    r.stderr,
+    /params\.docsy\.plugins\.other: FALSE is not a plugin entry/,
+    'a quoted scalar is a non-boolean scalar: warned and skipped',
+  );
   assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /js\/plugins\/hello/,
-    'the page is free of the string-disabled plugin',
+    html,
+    /js\/plugins\/other/,
+    'the skipped entry emits nothing',
   );
 });
 
@@ -739,23 +734,6 @@ test('an unknown entry field warns and the entry still applies', () => {
     r.publicFile('docs/code/index.html'),
     /js\/plugins\/click-to-copy/,
     'the plugin keeps its theme defaults',
-  );
-});
-
-test('a quoted "false" defer means no defer', () => {
-  const r = buildSite('plugins-defer-string', {
-    files: { ...content, 'assets/js/plugins/hello.js': quietJs },
-    extraConfig: `params:
-  docsy:
-    plugins:
-      hello: { defer: 'False' }
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /<script[^>]*\bdefer\b[^>]*js\/plugins\/hello/,
-    'the plugin tag is free of defer',
   );
 });
 
