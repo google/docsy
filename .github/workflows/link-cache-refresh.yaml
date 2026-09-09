@@ -3,10 +3,8 @@
 # link-cache npm package. Pruning the N oldest lychee-verified entries and
 # re-running the link checker re-verifies them (or retires URLs no longer in
 # the site), rotating through them in about a month of weekly merged
-# refreshes; manual (seeded) entries are exempt from pruning and retire via
-# their expires dates, enforced here: this lane runs the checker with
-# --check-stale (link-cache's refresh mode), while PR/CI runs use the default
-# mode, which trusts cached 2xx results regardless of age.
+# refreshes; manual (seeded) entries are exempt from pruning while their
+# expires date holds, then pruned and re-verified live like any other.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -202,19 +200,13 @@ jobs:
           # triages them. Exit 2 (preflight: tool/config broken, zero links
           # verified) is a workflow defect: fail hard.
           LINK_CHECK_STATUS=0
-          npm run -C docsy.dev _check:links -- --check-stale || LINK_CHECK_STATUS=$?
+          npm run -C docsy.dev _check:links || LINK_CHECK_STATUS=$?
           echo "Link check exit status: $LINK_CHECK_STATUS"
           if [[ "$LINK_CHECK_STATUS" -ge 2 ]]; then
             exit "$LINK_CHECK_STATUS"
           elif [[ "$LINK_CHECK_STATUS" -eq 1 ]]; then
             echo "dead_links=true" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Guard against a silently aging cache
-        # Threshold per the link-cache README's --check-stale sizing:
-        # max_cache_age (375d, docsy.dev/lychee.toml) plus one weekly refresh
-        # interval (7d).
-        run: npm run -s link-cache -- --max-age 382
 
       - name: Report the oldest entry after the refresh
         id: oldest
