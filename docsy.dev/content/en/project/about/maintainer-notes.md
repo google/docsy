@@ -220,8 +220,8 @@ Automated updates are configured through Renovate. Settings rationale:
     review overhead; majors stay individual for one-by-one scrutiny, except
     families that Renovate's presets keep in lockstep (for example, the GitHub
     artifact actions).
-  - GitHub Actions updates stay outside those groups; they have their own rule
-    ([below](#github-actions-updates)).
+  - GitHub Actions updates stay outside those groups, details
+    [below](#github-actions-updates).
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
