@@ -150,10 +150,10 @@ is a two-step flow, run from the repo root:
    `install:safe` included, fail until the new version is approved.
 
 Automated version updates don't bump hugo-extended: the
-[Renovate config](#dependency-updates) disables them, and Renovate's
-vulnerability alerts do not override that rule. GitHub's config-free Dependabot
-security updates can still bump it; such a PR fails CI until the bump is
-approved (step 2 above).
+[Renovate config](#dependency-updates) disables them, and with this config
+Renovate's vulnerability alerts do not override that rule. GitHub's config-free
+Dependabot security updates can still bump it; such a PR fails CI until the bump
+is approved (step 2 above).
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -207,14 +207,15 @@ Automated updates are configured through Renovate. Settings rationale:
   7-day `minimumReleaseAge`. Caution: this exclusion silently stops working if
   the preset is renamed upstream. The preset's age exemptions for `pin` and
   `replacement` updates are not restored: Renovate raises both without waiting
-  for release age either way, but without the exemptions their PRs carry a
-  pending age status that never passes. A pin brings no new code; a replacement
-  proposes a different package, so review it as a new dependency, not a bump.
+  for release age regardless; without the exemptions, their PRs show a pending
+  `renovate/stability-days` status that never passes. A pin brings no new code;
+  a replacement proposes a different package, so review it as a new dependency,
+  not a bump.
 - `lockFileMaintenance` off: wholesale lock re-resolves would churn the
   committed lockfiles; transitive security fixes arrive alert-driven instead.
-- `schedule` and `timezone`: Renovate creates its branches on Sundays, UTC. The
-  zone is set explicitly because, unset, Renovate evaluates the cron in the zone
-  of the host running it.
+- `schedule` and `timezone`: Renovate creates its branches on Sundays, UTC.
+  Without `timezone`, Renovate evaluates the schedule in the zone of the host
+  running it.
 - Package rules:
   - Patch and minor updates are each grouped into a single PR per wave, to cut
     review overhead; majors stay individual for one-by-one scrutiny, except
@@ -231,37 +232,7 @@ Automated updates are configured through Renovate. Settings rationale:
     reminder).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm and
-    GitHub Actions (SHA-digest pins).
-
-### GitHub Actions updates
-
-Every `uses:` line pins a SHA with a full-version comment
-(`actions/checkout@SHA # v7.0.1`). One package rule shapes how those pins move:
-
-- **One PR per bump**, on a branch named for the proposed SHA. A tag re-pointed
-  after the PR opens arrives as a new PR, not as a silent update of the one
-  already reviewed.
-- **Versions come from GitHub Releases**, whose publication date GitHub sets.
-  The default tag lookup uses git dates, which whoever pushes the tag chooses.
-- **The rule matches actions and reusable workflows only** (`matchDepTypes`).
-  Runner labels such as `ubuntu-22.04` are `github-actions` dependencies too,
-  but not repositories, so a Releases lookup would fail on them.
-
-What that asks of the repo:
-
-- **An action added here must publish Releases.** One that only tags gets no
-  version updates and no dashboard row.
-- **Every pin comment names a full version** (`# v7.0.1`, not `# v7`), so that
-  updates within the major arrive as version bumps naming their Release, not as
-  opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
-  moved without a new Release. The supply-chain audit guards the shape.
-
-Before merging an action bump, check that its Release is at least seven days
-old, that the tag still points at the proposed SHA, and that the commit is
-reachable from the action's default branch or one of its release branches. A
-digest-only bump passes the age check on its Release's original date, so for it
-the last two checks are the whole review: a tag moved without a new Release is
-not something to merge.
+    GitHub Actions.
 
 The Node toolchain is pinned by two `.nvmrc` files holding the same version, a
 platform constraint: workflows and nvm read the root file, while Netlify reads
@@ -275,16 +246,48 @@ file. Edit the two together; the supply-chain audit guards the sync.
 
 Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
 Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
-PRs bypass its own cooldown but not npm's: lock regeneration for a fix younger
-than `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages.
-For a fix that can't wait, run the dependency's manual bump under a
-per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
+PRs bypass its own schedule and cooldown but not npm's: lock regeneration for a
+fix younger than `min-release-age` (`.npmrc`) fails with `ETARGET` until the
+release ages. For a fix that can't wait, run the dependency's manual bump under
+a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
 fix's age requires (the override relaxes the cooldown for everything the
 invocation resolves). For example, for a three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 ```
+
+### GitHub Actions updates
+
+Every `uses:` line pins a SHA with a version comment
+(`actions/checkout@SHA # v7.0.1`). How the config moves those pins:
+
+- **One PR per bump**, on a branch named for the proposed SHA, so a tag
+  re-pointed after the PR opens arrives as a new PR, not as a silent update of
+  the one already reviewed. Exception: the artifact actions' majors, which a
+  Renovate preset groups on one branch; there, run the checks below on the SHA
+  you merge, not the one you first reviewed.
+- **Versions from GitHub Releases**, whose publication date GitHub sets. The
+  default tag lookup uses git dates, which whoever pushes the tag chooses.
+- **Actions and reusable workflows only** (`matchDepTypes`). Runner labels such
+  as `ubuntu-24.04` are `github-actions` dependencies too, but not repositories,
+  so a Releases lookup would fail on them.
+
+What that asks of the repo:
+
+- **An action added here must publish Releases.** One that only tags silently
+  gets no version updates.
+- **Every pin comment names a full version** (`# v7.0.1`, not `# v7`), so that
+  updates within the major arrive as version bumps naming their Release, not as
+  opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
+  moved without a new Release. The supply-chain audit guards the shape.
+
+Before merging an action bump, check that its Release is at least seven days
+old, that the tag still points at the proposed SHA, and that the commit is
+reachable from the action's default branch or one of its release branches. A
+digest-only bump passes the age check on its Release's original date but shows
+the same never-passing age status as a pin, so for it the last two checks are
+the whole review: a tag moved without a new Release is not something to merge.
 
 ## Test suites
 
