@@ -207,6 +207,8 @@ history since 0.17.0][].
 - Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
+- Pinned Renovate's schedule to UTC and corrected the maintainer notes on
+  release-age exemptions, alert PRs and action bumps ([#2827][]).
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
@@ -219,6 +221,7 @@ history since 0.17.0][].
 [#2811]: https://github.com/docsy/docsy/pull/2811
 [#2823]: https://github.com/docsy/docsy/pull/2823
 [#2825]: https://github.com/docsy/docsy/issues/2825
+[#2827]: https://github.com/docsy/docsy/pull/2827
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
