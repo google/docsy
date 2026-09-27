@@ -281,10 +281,14 @@ What that asks of the repo:
   opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
   moved without a new Release. The supply-chain audit guards the shape.
 
-Before merging an action bump, check that its Release is at least seven days
-old, that the tag still points at the proposed SHA, and that the commit is
-reachable from the action's default branch or one of its release branches. A
-digest-only bump passes the age check on its Release's original date but shows
+Before merging an action bump, check that:
+
+- its Release is at least seven days old;
+- the tag still points at the proposed SHA;
+- the commit is reachable from the action's default branch or one of its release
+  branches.
+
+A digest-only bump passes the age check on its Release's original date but shows
 the same never-passing age status as a pin, so for it the last two checks are
 the whole review: a tag moved without a new Release is not something to merge.
 
