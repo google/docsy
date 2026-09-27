@@ -2742,6 +2742,11 @@
     "when": "2026-09-21T10:59:46Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2827": {
+    "status": 200,
+    "when": "2026-09-27T15:06:18Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/941": {
     "status": 200,
     "when": "2026-09-18T01:19:13Z",
