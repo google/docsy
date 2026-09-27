@@ -259,7 +259,7 @@ NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 ### GitHub Actions updates
 
 Every `uses:` line pins a SHA with a version comment
-(`actions/checkout@SHA # v7.0.1`). How the config moves those pins:
+(`actions/checkout@SHA # vX.Y.Z`). How the config moves those pins:
 
 - **One PR per bump**, on a branch named for the proposed SHA, so a tag
   re-pointed after the PR opens arrives as a new PR, not as a silent update of
@@ -276,7 +276,7 @@ What that asks of the repo:
 
 - **An action added here must publish Releases.** One that only tags silently
   gets no version updates.
-- **Every pin comment names a full version** (`# v7.0.1`, not `# v7`), so that
+- **Every pin comment names a full version** (`# vX.Y.Z`, not `# vX`), so that
   updates within the major arrive as version bumps naming their Release, not as
   opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
   moved without a new Release. The supply-chain audit guards the shape.
