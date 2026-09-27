@@ -149,11 +149,10 @@ is a two-step flow, run from the repo root:
    run builds between the two steps. Script-enabled installs, CI's
    `install:safe` included, fail until the new version is approved.
 
-Automated version updates don't bump hugo-extended: the
-[Renovate config](#dependency-updates) disables them, and with this config
-Renovate's vulnerability alerts do not override that rule. GitHub's config-free
-Dependabot security updates can still bump it; such a PR fails CI until the bump
-is approved (step 2 above).
+Renovate doesn't bump hugo-extended: its [config](#dependency-updates) disables
+the updates, alert PRs included. GitHub's config-free Dependabot security
+updates can still bump it; such a PR fails CI until the bump is approved (step 2
+above).
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -206,11 +205,11 @@ Automated updates are configured through Renovate. Settings rationale:
 - `ignorePresets`: the preset's 3-day npm cooldown would override this repo's
   7-day `minimumReleaseAge`. Caution: this exclusion silently stops working if
   the preset is renamed upstream. The preset's age exemptions for `pin` and
-  `replacement` updates are not restored: Renovate raises both without waiting
-  for release age regardless; without the exemptions, their PRs show a pending
-  `renovate/stability-days` status that never passes. A pin brings no new code;
-  a replacement proposes a different package, so review it as a new dependency,
-  not a bump.
+  `replacement` updates are not restored: with or without them, Renovate raises
+  both without waiting for release age; without them, their PRs also show a
+  pending `renovate/stability-days` status that never passes. A pin brings no
+  new code; a replacement proposes a different package, so review it as a new
+  dependency, not a bump.
 - `lockFileMaintenance` off: wholesale lock re-resolves would churn the
   committed lockfiles; transitive security fixes arrive alert-driven instead.
 - `schedule` and `timezone`: Renovate creates its branches on Sundays, UTC.
@@ -219,8 +218,8 @@ Automated updates are configured through Renovate. Settings rationale:
 - Package rules:
   - Patch and minor updates are each grouped into a single PR per wave, to cut
     review overhead; majors stay individual for one-by-one scrutiny, except
-    families that Renovate's presets keep in lockstep (for example, the GitHub
-    artifact actions).
+    families that Renovate's presets keep in lockstep (the
+    [artifact actions](#github-actions-updates), for one).
   - [GitHub Actions updates](#github-actions-updates) stay outside those groups.
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
@@ -244,13 +243,16 @@ byte-identical mirror of the root `.npmrc`, because `--prefix`/`-C` npm runs
 file. Edit the two together; the supply-chain audit guards the sync.
 
 Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
-Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
-PRs bypass its own schedule and cooldown but not npm's: lock regeneration for a
-fix younger than `min-release-age` (`.npmrc`) fails with `ETARGET` until the
-release ages. For a fix that can't wait, run the dependency's manual bump under
-a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
-fix's age requires (the override relaxes the cooldown for everything the
-invocation resolves). For example, for a three-day-old hugo-extended release:
+Dependabot security updates; a rare duplicate PR is accepted. Alert PRs don't
+re-enable a package a rule disables (hugo-extended, Bootstrap, Font Awesome)
+unless `vulnerabilityAlerts.enabled` is set; this config leaves it unset.
+Renovate's alert PRs bypass its own schedule and cooldown but not npm's: lock
+regeneration for a fix younger than `min-release-age` (`.npmrc`) fails with
+`ETARGET` until the release ages. For a fix that can't wait, run the
+dependency's manual bump under a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE`
+override, set no lower than the fix's age requires (the override relaxes the
+cooldown for everything the invocation resolves). For example, for a
+three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
@@ -267,7 +269,8 @@ Every `uses:` line pins a SHA with a version comment
   Renovate preset groups on one branch; there, run the checks below on the SHA
   you merge, not the one you first reviewed.
 - **Versions from GitHub Releases**, whose publication date GitHub sets. The
-  default tag lookup uses git dates, which whoever pushes the tag chooses.
+  default tag lookup also admits tags with no Release, dated by whoever pushed
+  them.
 - **Actions and reusable workflows only** (`matchDepTypes`). Runner labels such
   as `ubuntu-24.04` are `github-actions` dependencies too, but not repositories,
   so a Releases lookup would fail on them.
@@ -281,16 +284,17 @@ What that asks of the repo:
   opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
   moved without a new Release. The supply-chain audit guards the shape.
 
-Before merging an action bump, check that:
+Before merging an action bump, check the following:
 
-- its Release is at least seven days old;
-- the tag still points at the proposed SHA;
-- the commit is reachable from the action's default branch or one of its release
+- The Release is at least seven days old.
+- The tag still points at the proposed SHA.
+- The commit is reachable from the action's default branch or one of its release
   branches.
 
-A digest-only bump passes the age check on its Release's original date but shows
-the same never-passing age status as a pin, so for it the last two checks are
-the whole review: a tag moved without a new Release is not something to merge.
+A digest-only bump arrives without an age wait (its Release already aged) but
+with the pending `renovate/stability-days` status that never passes. The last
+two checks tell you what moved; a tag moved without a new Release is not
+something to merge.
 
 ## Test suites
 
