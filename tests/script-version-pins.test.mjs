@@ -35,8 +35,10 @@ const pluginEntry = (name) => ({
 
 const PINS = [
   {
-    pin: siteParam('mermaid'),
-    template: 'theme/layouts/_partials/scripts/mermaid.html',
+    pin: pluginEntry('mermaid'),
+    // The pin feeds the companion partial's CDN existence check and the URL
+    // the plugin entry imports in the browser.
+    template: 'theme/layouts/_partials/scripts/plugins/mermaid.html',
     cdnPackage: 'mermaid',
     // How the template interpolates $version into its CDN URL: a printf
     // format (%s) or a literal src ({{ $version }}). Row-specific so a
@@ -111,6 +113,22 @@ for (const { pin, template, cdnPackage, urlForm } of PINS) {
       text,
       new RegExp(String.raw`${cdnPackage}@(?!${urlFormPattern})`),
       'CDN URLs carry no hardcoded version',
+    );
+  });
+}
+
+// Renovate's custom manager (renovate.jsonc) reads each pin by its YAML path;
+// a pin that moves without its manager row stops being bumped, silently.
+const renovate = fs.readFileSync(path.join(repoRoot, 'renovate.jsonc'), 'utf8');
+for (const { pin, cdnPackage } of PINS) {
+  test(`renovate.jsonc tracks the ${cdnPackage} pin at its YAML path`, () => {
+    const yamlPath = pin.key.replace(/\.version$/, '');
+    assert.match(
+      renovate,
+      new RegExp(
+        `${yamlPath.replaceAll('.', '\\.')}\\.\\{ ['"]depName['"]: ['"]${cdnPackage}['"]`,
+      ),
+      `renovate.jsonc has a matchString for ${yamlPath}`,
     );
   });
 }

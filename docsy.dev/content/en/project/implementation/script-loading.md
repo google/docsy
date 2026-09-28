@@ -37,9 +37,19 @@ the build.
 A shim is also where a plugin gates itself: on a page that doesn't need the
 plugin, it returns the entry with `enable` false ([Gating
 decisions][design-gating]). A shim is likewise where a plugin pins an author
-field: click-to-copy's shim sets `_defer` true ([guide][guide-loading]). When
-support for a deprecated parameter ends, remove its mapping and warning from the
-shim and keep the rest.
+field: the click-to-copy and Mermaid shims set `_defer` true
+([guide][guide-loading]). Two more jobs a shim takes on:
+
+- **Refusing the plugin's retired `params.NAME` namespace**, any key, any page,
+  with a build error naming the entry field to set (Mermaid, MarkMap;
+  [why][design-registry]).
+- **Decoding `options`** into whatever the companion consumes. Mermaid's shim
+  decodes the JSON string with `transform.Unmarshal` and fails the build on
+  anything but a JSON object, so the companion sees a map or nothing.
+
+A deprecated parameter that is aliased instead (click-to-copy's) keeps its
+mapping and warning for a cycle; when the cycle ends, remove both from the shim
+and keep the rest.
 
 ## Shape guards
 
@@ -65,11 +75,16 @@ authors][guide-security]. In addition:
 - Imported Hugo modules are trusted: their `params` merge into the site's, so a
   module can register or turn off plugins, and its layouts can shim them, as it
   already supplies layouts and assets.
+- Exception to the vendoring rule: Mermaid is not vendored. Its companion checks
+  the pin exists on the CDN at build time, and the browser imports the library
+  from the CDN at runtime, as before 0.18; SRI covers Docsy's entry, not the
+  imported library. Vendoring is deferred.
 
 <!-- prettier-ignore-start -->
 [design]: /project/design/script-loading/
 [design-ordering]: /project/design/script-loading/#ordering-decisions
 [design-gating]: /project/design/script-loading/#gating-decisions
+[design-registry]: /project/design/script-loading/#registry-shape
 [guide-shims]: /docs/content/plugins/#adjust-a-plugin-per-page
 [guide]: /docs/content/plugins/
 [guide-config]: /docs/content/plugins/#configuration-reference

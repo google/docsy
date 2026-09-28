@@ -31,10 +31,10 @@ npm run update:scripts-goldens
 ## Dispatch net
 
 [`scripts-dispatch.test.mjs`][dispatch-test] pins the dispatcher's page-flag
-wiring: the `.Page.Store`-gated partials (Mermaid, KaTeX) are dispatched on
-flagged pages only. The real partials fetch remote assets at build time, so
-fixture marker overrides stand in for them; what's pinned is exactly the
-gate-to-partial wiring, offline.
+wiring: the `.Page.Store`-gated KaTeX partial is dispatched on flagged pages
+only (Mermaid's flag is read by its plugin shim, below). The real partial
+fetches remote assets at build time, so a fixture marker override stands in for
+it; what's pinned is exactly the gate-to-partial wiring, offline.
 
 ## Loop-contract tests
 
@@ -50,7 +50,7 @@ gate-to-partial wiring, offline.
 - **Layering**: theme plugins through Hugo's config merge (inheritance,
   turn-off) and a site field over a schema default.
 
-Three companion nets pin the conversions:
+Four companion nets pin the conversions:
 
 - [`tabpane-persist-plugin.test.mjs`][tabpane-test]: the ungated default,
   persistence opt-out, and theme-plugin shadowing.
@@ -60,6 +60,12 @@ Three companion nets pin the conversions:
   markmap cases stub the vendoring companion with a marker to stay offline; the
   real vendor fetch is covered by the
   [build-time vendoring net](#build-time-vendoring).
+- [`mermaid-plugin.test.mjs`][mermaid-test]: the Mermaid conversion's build-time
+  contract, the `options` string ([guide][ug-mermaid-settings]) and the retired
+  `params.mermaid` namespace included. Offline: the companion (CDN existence
+  check plus config block) is stubbed with a marker except where a case runs it
+  under a remote deny list; the real companion and the runtime are the
+  [Mermaid runtime net](#runtime-nets)'s.
 
 ## Acceptance test
 
@@ -78,7 +84,7 @@ behavior.
 
 ## Runtime nets
 
-Three browser nets under `tests/visual/`:
+Four browser nets under `tests/visual/`:
 
 - [`js-runtime.test.mjs`][runtime-test] loads representative fixture pages in a
   real browser and asserts that no uncaught exception or in-scope console error
@@ -102,6 +108,12 @@ Three browser nets under `tests/visual/`:
   `_defer: false`, real clicks copy the text of a block emitted before the
   plugin tag and of one the body-end hook emits after it, asserted on the
   clipboard, which headless Chrome keeps process-local. Offline.
+- [`mermaid-runtime.test.mjs`][mermaid-runtime-test] proves the Mermaid plugin's
+  runtime contract with the real companion and CDN import, on an adversarial
+  fixture (per-language options and a body-end fence on every page; on `en`, a
+  heading whose id is the plugin's name), including an experimental Mermaid 12
+  pin light and dark. The supported pin's dark rendering is `js-runtime`'s case.
+  Network.
 
 ## Red-proof rationale
 
@@ -112,6 +124,11 @@ safeguard proves the signal:
 
 - Zero-output cases are asserted against: a golden's script region must be
   non-empty.
+- The Mermaid nets count diagrams, not SVGs: Mermaid renders its errors as SVGs
+  too, so a healthy page asserts zero error SVGs.
+- Light/dark style comparisons strip the SVG's per-render id first: Mermaid
+  scopes its styles under it, so unstripped styles always differ and the
+  comparison could never fail.
 - The plugin runtime net's red-proof doubles as an assertion: a deliberately
   broken plugin must be the error tally's only entry, so an empty tally from the
   healthy plugin is meaningful.
@@ -138,6 +155,9 @@ safeguard proves the signal:
 [implementation]: /project/implementation/script-loading/
 [loop-test]: https://github.com/docsy/docsy/blob/main/tests/fixture-site/plugins.test.mjs
 [markmap-test]: https://github.com/docsy/docsy/blob/main/tests/fixture-site/markmap-plugin.test.mjs
+[mermaid-runtime-test]: https://github.com/docsy/docsy/blob/main/tests/visual/mermaid-runtime.test.mjs
+[mermaid-test]: https://github.com/docsy/docsy/blob/main/tests/fixture-site/mermaid-plugin.test.mjs
+[ug-mermaid-settings]: /docs/content/diagrams-and-formulae/#mermaid-settings
 [plugin-runtime-test]: https://github.com/docsy/docsy/blob/main/tests/visual/plugins-runtime.test.mjs
 [runtime-test]: https://github.com/docsy/docsy/blob/main/tests/visual/js-runtime.test.mjs
 [tabpane-test]: https://github.com/docsy/docsy/blob/main/tests/fixture-site/tabpane-persist-plugin.test.mjs

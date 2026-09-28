@@ -9,7 +9,12 @@ import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { buildSite } from '../fixture-site/lib/build-site.mjs';
-import { launchBrowser, serveDir } from './lib/harness.mjs';
+import {
+  darkFromStart,
+  launchBrowser,
+  mermaidSvgStyle,
+  serveDir,
+} from './lib/harness.mjs';
 
 const files = {
   // Tall section below the cover: the transparency probe needs the home
@@ -332,9 +337,8 @@ test('js behavior: plantuml svg mode emits an SVG-namespace loader element', asy
   }
 });
 
-// Mermaid's rendered SVG embeds a theme-derived <style>; the light probe
-// captures it so the dark probe can assert the theme sniff actually
-// changed the rendering, not merely that an SVG appeared.
+// The light probe captures the SVG's theme <style> so the dark probe can
+// assert the theme sniff changed the rendering.
 let mermaidLightStyle;
 
 test('js behavior: a mermaid code block renders as an SVG diagram', async () => {
@@ -344,10 +348,7 @@ test('js behavior: a mermaid code block renders as an SVG diagram', async () => 
       waitUntil: 'networkidle0',
     });
     await page.waitForSelector('.mermaid svg', { timeout: 15000 });
-    mermaidLightStyle = await page.$eval(
-      '.mermaid svg',
-      (svg) => svg.querySelector('style')?.textContent ?? '',
-    );
+    mermaidLightStyle = await mermaidSvgStyle(page);
     assert.ok(mermaidLightStyle, 'mermaid SVG carries its theme style');
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
@@ -358,26 +359,14 @@ test('js behavior: a mermaid code block renders as an SVG diagram', async () => 
 test('js behavior: mermaid renders with the dark theme under data-bs-theme=dark', async () => {
   const { page, pageErrors } = await newProbePage();
   try {
-    // The dark-theme sniff reads data-bs-theme when the mermaid module
-    // runs; the attribute must land before that. DOMContentLoaded is too
-    // late for a cache-hot async module, so set it as soon as the
-    // document element exists.
-    await page.evaluateOnNewDocument(() => {
-      new MutationObserver((_, observer) => {
-        if (!document.documentElement) return;
-        document.documentElement.setAttribute('data-bs-theme', 'dark');
-        observer.disconnect();
-      }).observe(document, { childList: true });
-    });
+    await darkFromStart(page);
     await page.goto(`${servers.features.origin}/docs/diagrams/`, {
       waitUntil: 'domcontentloaded',
     });
     await page.waitForSelector('.mermaid svg', { timeout: 15000 });
-    const darkStyle = await page.$eval(
-      '.mermaid svg',
-      (svg) => svg.querySelector('style')?.textContent ?? '',
-    );
+    const darkStyle = await mermaidSvgStyle(page);
     assert.ok(darkStyle, 'mermaid SVG carries its theme style');
+    assert.ok(mermaidLightStyle, 'light probe captured its style first');
     assert.notEqual(
       darkStyle,
       mermaidLightStyle,

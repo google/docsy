@@ -908,6 +908,13 @@
     "when": "2026-09-17T23:13:25Z",
     "via": "lychee",
   },
+  // New-file seed: goes live when the Mermaid plugin conversion merges.
+  "https://github.com/docsy/docsy/blob/main/tests/fixture-site/mermaid-plugin.test.mjs": {
+    "status": 206,
+    "when": "2026-09-19T15:20:00Z",
+    "via": "manual",
+    "expires": "2026-10-31",
+  },
   "https://github.com/docsy/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
     "status": 200,
     "when": "2026-09-17T23:13:25Z",
@@ -942,6 +949,13 @@
     "status": 200,
     "when": "2026-09-17T23:13:26Z",
     "via": "lychee",
+  },
+  // New-file seed: goes live when the Mermaid plugin conversion merges.
+  "https://github.com/docsy/docsy/blob/main/tests/visual/mermaid-runtime.test.mjs": {
+    "status": 206,
+    "when": "2026-09-19T15:20:00Z",
+    "via": "manual",
+    "expires": "2026-10-31",
   },
   "https://github.com/docsy/docsy/blob/main/tests/visual/plugins-runtime.test.mjs": {
     "status": 200,
@@ -1656,6 +1670,11 @@
   "https://github.com/docsy/docsy/issues/2789": {
     "status": 200,
     "when": "2026-09-18T01:19:08Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/issues/2825": {
+    "status": 200,
+    "when": "2026-09-21T10:12:35Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/issues/331": {
@@ -2658,6 +2677,16 @@
     "when": "2026-09-18T23:01:24Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2823": {
+    "status": 200,
+    "when": "2026-09-21T10:59:46Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2827": {
+    "status": 200,
+    "when": "2026-09-27T15:06:18Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/941": {
     "status": 200,
     "when": "2026-09-18T01:19:13Z",
@@ -2975,6 +3004,11 @@
     "when": "2026-09-02T08:07:16Z",
     "via": "lychee",
   },
+  "https://github.com/gohugoio/hugo/issues/7483": {
+    "status": 200,
+    "when": "2026-09-20T15:26:55Z",
+    "via": "lychee",
+  },
   "https://github.com/gohugoio/hugo/issues/8299": {
     "status": 200,
     "when": "2026-09-21T04:35:25Z",
@@ -3213,6 +3247,11 @@
   "https://github.com/marketplace/actions/hugo-setup": {
     "status": 200,
     "when": "2026-09-21T04:35:25Z",
+    "via": "lychee",
+  },
+  "https://github.com/mermaid-js/mermaid/releases/tag/mermaid%4012.0.0": {
+    "status": 200,
+    "when": "2026-09-20T11:50:08Z",
     "via": "lychee",
   },
   "https://github.com/navidrome/website": {
@@ -4471,6 +4510,11 @@
   "https://mermaid.js.org/config/configuration.html": {
     "status": 200,
     "when": "2026-09-19T16:04:39Z",
+    "via": "lychee",
+  },
+  "https://mermaid.js.org/config/configuration.html#frontmatter-config": {
+    "status": 200,
+    "when": "2026-09-20T15:26:29Z",
     "via": "lychee",
   },
   "https://mermaid.js.org/config/theming.html#customizing-themes-with-themevariables": {

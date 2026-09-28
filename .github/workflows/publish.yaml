@@ -10,7 +10,8 @@
 # Two jobs split the concerns: pack guards and builds the tarball without the
 # OIDC grant; publish holds the grant and runs no lifecycle scripts
 # (publishing a tarball, unlike a directory, executes none); its checkout
-# only feeds setup-node's .nvmrc read. Neither job installs dependencies.
+# feeds setup-node's .nvmrc read and the guards script. Neither job installs
+# dependencies.
 # On tag pushes this definition itself travels with the tag, so the checks
 # below bind against mistakes; malice is bounded by the tag ruleset and the
 # environment approval, not by anything written here.
@@ -39,7 +40,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           # Full history: the main-ancestry check below needs it.
@@ -53,7 +54,7 @@ jobs:
         # 2026-08-09); widen deliberately if a release-branch flow returns.
         run: git merge-base --is-ancestor HEAD origin/main
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
           package-manager-cache: false
@@ -73,7 +74,7 @@ jobs:
         # installs nothing, so only this repo's own lifecycle can run.
         run: npm pack --ignore-scripts=false --pack-destination "$RUNNER_TEMP"
 
-      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: npm-tarball
           path: ${{ runner.temp }}/*.tgz
@@ -91,14 +92,14 @@ jobs:
     # reviewers, and the npmjs trusted-publisher registration binds to it.
     environment: npm-publish
     permissions:
-      contents: read # For the checkout, which only feeds setup-node .nvmrc.
+      contents: read # For the checkout: .nvmrc and the guards script.
       id-token: write # npm trusted publishing (OIDC)
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
           # Writes the fresh userconfig the publish step relies on. Since v7,
@@ -108,7 +109,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
 
-      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: npm-tarball
           path: ${{ runner.temp }}/npm-tarball

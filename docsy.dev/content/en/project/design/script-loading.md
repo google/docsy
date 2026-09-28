@@ -26,19 +26,18 @@ integrations onto the [plugin loop](#plugin-loop):
   concatenated into `main.js` (`scripts/main-bundle.html`), minified and
   fingerprinted in production. A site param picks which search script is
   bundled, `search.js` or `offline-search.js`.
-- **Theme plugins**: MarkMap, tab persistence, and click-to-copy ride the plugin
-  loop as theme-default registry entries, their legacy params aliased for a
-  deprecation cycle ([implementation notes][impl]).
+- **Theme plugins**: Mermaid, MarkMap, tab persistence, and click-to-copy ride
+  the plugin loop as theme-default registry entries
+  ([registry shape](#registry-shape), [implementation notes][impl]).
 - **Pinned CDN tags with inline configuration**: Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
-  re-served as local assets; Mermaid, whose pinned version is validated at build
-  time while the browser imports the module straight from the CDN; and the
-  MarkMap autoloader, vendored at build time and served same-origin with SRI.
+  re-served as local assets, and the MarkMap autoloader, vendored at build time
+  and served same-origin with SRI.
 
-Gating lives at two levels. The dispatcher gates PlantUML (site param) and
-Mermaid and KaTeX (`.Page.Store` flags); MarkMap's plugin shim carries the same
-page-flag pattern (`hasMarkmap`), while the remaining sub-partials gate
-internally (Algolia search configuration, Prism, search bundle choice, dark
+Gating lives at two levels. The dispatcher gates PlantUML (site param) and KaTeX
+(`.Page.Store` flag); the Mermaid and MarkMap plugin shims carry the same
+page-flag pattern (`hasmermaid`, `hasMarkmap`), while the remaining sub-partials
+gate internally (Algolia search configuration, Prism, search bundle choice, dark
 mode, ScrollSpy). Tab persistence ships ungated ([why](#gating-decisions)).
 
 ## The dispatcher as a seam
@@ -80,12 +79,30 @@ defaults][ug-config-merge]), so a site's map layers over the theme's:
   `version`).
 - **Duplicates are impossible**: map keys are unique. The loop needs no
   deduplication, no first-wins rule, no supersession bookkeeping.
-- **A plugin dependency's version pin is an entry field**, not a top-level
-  `params.NAME.*` key:
-  - Plugin settings share one key and one environment-override prefix.
-  - The pin never reaches the built JavaScript, which has no use for it.
-  - The loop validates the pin once, for every companion that builds a fetch URL
-    from it.
+- **A plugin's whole configuration lives on its entry**, the dependency's
+  version pin on `version` and the plugin's own settings on `options`, not under
+  a top-level `params.NAME.*` key:
+  - One home per plugin, one environment-override prefix; a migrated package's
+    old `params.NAME` namespace fails the build, naming the entry: a setting is
+    a value the site moves once, while an alias needs a precedence rule between
+    two homes that the guide would then have to explain.
+  - The pin never reaches the built JavaScript, which has no use for it; the
+    loop validates it once, for every companion that builds a fetch URL from it.
+  - `options` is a **string, opaque to the loop and owned by the plugin**: its
+    format and validation are the plugin's, and the loop passes the value
+    through unchanged. Hugo lowercases the keys of every configuration map, so a
+    string is the one shape that reaches a case-sensitive library intact;
+    Docsy's plugins take a JSON object in it (Mermaid's shim decodes it). The
+    type is documented in the schema and enforced by each plugin; a loop guard,
+    or a loop decode keyed on a schema `format`, earns its place when a second
+    Docsy plugin takes options. Alternatives considered, each costing more than
+    the string's authoring quirk ([Hugo params key case][hugo-case]):
+    - re-casing a map against the library's defaults object: incomplete, a fifth
+      of Mermaid 12's schema has no default to recover the case from;
+    - a snake_case authoring convention: authors translate from the library's
+      docs, and acronym keys break the rule;
+    - a data-file home: a second home, not language-scoped;
+    - Hugo's case preservation inside lists: undocumented.
 - **Author fields are `_`-prefixed** (`_defer`, the schema's one so far;
   [guide][ug-loading]): the prefix marks a schema field as the plugin's rather
   than a site setting, as Hugo's `_merge` is a meta key, not a setting. The loop
@@ -126,12 +143,12 @@ idiom.
 - **A theme default gates only on render-hook flags.** A shortcode's flag stays
   on the page whose file contains it, so included content loses it (the
   mechanics, for site authors: [Plugins § Page flags in included
-  content][ug-flags]). MarkMap (hook-flagged) is gated by default; tab
-  persistence (shortcode-produced) ships ungated on every page, as before 0.18:
-  no flag is set for it.
+  content][ug-flags]). Mermaid and MarkMap (hook-flagged) are gated by default;
+  tab persistence (shortcode-produced) ships ungated on every page, as before
+  0.18: no flag is set for it.
 - **Gating is the plugin's, not a registry field.** The plugin's hook sets a
-  flag and its shim reads it, the pairing the dispatcher uses for `hasmermaid`
-  and `hasMath`; a site widens a gate by setting the flag from
+  flag and its shim reads it (`hasmermaid`, `hasMarkmap`), the pairing the
+  dispatcher uses for `hasMath`; a site widens a gate by setting the flag from
   `hooks/head-end.html` ([MarkMap guide][ug-markmap-render]). A gate field in
   configuration would be a flag name kept in sync with the hook by convention,
   and no site needs one; across static-site generators, per-page loading is the
@@ -167,6 +184,15 @@ idiom.
   gating shims read `.Page.Store` flags that are only reliable after content
   render. Moving companion CSS into the head is a possible later refinement, and
   has to solve that constraint or gated CSS silently drops ([#2789][]).
+- **Mermaid starts explicitly, no earlier than `load`**: the plugin's entry is
+  deferred, so the companion's config block and the render hook's markup are
+  parsed before it runs; it imports the pinned library and calls `run()` itself
+  (Mermaid's documented integration; its load-bound auto-start could fire before
+  a dynamic import settles), waiting for `load` so fonts loaded through CSS are
+  in and label geometry matches the pre-plugin rendering. Mermaid has no
+  reinitialization, so a change of rendered theme reloads the page; the observer
+  is installed before any await so a toggle during a pending import or render is
+  not missed.
 
 ## Related pages
 
@@ -175,6 +201,7 @@ idiom.
 
 <!-- prettier-ignore-start -->
 [#2789]: https://github.com/docsy/docsy/issues/2789
+[hugo-case]: https://github.com/gohugoio/hugo/issues/7483
 [impl]: /project/implementation/script-loading/
 [impl-shims]: /project/implementation/script-loading/#shims
 [impl-security]: /project/implementation/script-loading/#security-constraints

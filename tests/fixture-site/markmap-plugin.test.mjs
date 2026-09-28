@@ -1,7 +1,7 @@
-// Pins MarkMap's registry conversion and legacy compatibility, offline: the
-// companion (a resources.GetRemote of the autoloader) is stubbed with a marker
-// wherever a build would reach the fetch; the real vendoring is pinned in the
-// visual suite.
+// Pins MarkMap's registry conversion offline: the companion (a
+// resources.GetRemote of the autoloader) is stubbed with a marker wherever a
+// build would reach the fetch; the real vendoring is pinned in the visual
+// suite.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -42,47 +42,28 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
   );
 });
 
-test('legacy-enabled markmap keeps site-wide loading and warns', () => {
-  const r = buildSite('markmap-enabled', {
-    files: stubbed,
-    extraConfig: 'params:\n  markmap:\n    enable: true\n',
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /params\.markmap\.enable is deprecated/,
-    'legacy param draws a deprecation warning',
-  );
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/markmap/,
-    'legacy alias keeps pre-0.18 site-wide loading, markmap content or not',
-  );
-  const html = r.publicFile('docs/index.html');
-  assert.match(
-    html,
-    /data-vendor="markmap-autoloader"/,
-    'companion rides the legacy alias too',
-  );
-  const plugin = html.match(
-    /<script[^>]*src="\/(js\/plugins\/markmap[^"]*\.js)"/,
-  );
-  assert.ok(plugin, 'markmap plugin script tag is emitted');
-  const js = r.publicFile(plugin[1]);
-  assert.match(js, /autoLoader/, 'plugin configures the autoloader');
-});
-
-test('the legacy param reads "false" from the environment as false', () => {
-  const r = buildSite('markmap-legacy-env-false', {
-    files,
-    env: { HUGO_PARAMS_MARKMAP_ENABLE: 'false' },
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /js\/plugins\/markmap/,
-    'home page is free of markmap',
-  );
+test('any params.markmap fails the build, naming the registry entry', () => {
+  for (const [name, config] of [
+    [
+      'markmap-legacy-enable',
+      { extraConfig: 'params:\n  markmap:\n    enable: true\n' },
+    ],
+    ['markmap-legacy-scalar', { extraConfig: 'params:\n  markmap: false\n' }],
+    // A stale pin, markmap off: refusal precedes the gate.
+    [
+      'markmap-legacy-version-off',
+      { extraConfig: "params:\n  markmap:\n    version: ''\n" },
+    ],
+    ['markmap-legacy-env', { env: { HUGO_PARAMS_MARKMAP_ENABLE: 'false' } }],
+  ]) {
+    const r = buildSite(name, { files, ...config });
+    assert.notEqual(r.status, 0, `${name}: hugo build fails`);
+    assert.match(
+      r.stderr,
+      /params\.markmap was removed[\s\S]*params\.docsy\.plugins/,
+      `${name}: error names the removed namespace and the entry to set instead`,
+    );
+  }
 });
 
 test('a registry-declared markmap entry is page-gated', () => {
@@ -210,68 +191,11 @@ test('a present invalid version is rejected even when the entry is disabled', ()
   );
 });
 
-test('the legacy params.markmap.version warns and is honored', () => {
-  const r = buildSite('markmap-legacy-version', {
-    files: stubbed,
-    extraConfig: `params:
-  markmap:
-    version: 0.18.11
-  docsy:
-    plugins:
-      markmap: { enable: true, version: 0.18.13 }
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /params\.markmap\.version is deprecated[\s\S]*docsy-markmap-legacy/,
-    'legacy pin draws the deprecation warning under the legacy id',
-  );
-  assert.doesNotMatch(
-    r.stderr,
-    /params\.markmap\.enable is deprecated/,
-    'the enable deprecation stays silent for a version-only legacy map',
-  );
-  assert.doesNotMatch(
-    r.publicFile('index.html'),
-    /js\/plugins\/markmap/,
-    'a legacy version alone leaves the page gate in place',
-  );
-  assert.match(
-    r.publicFile('docs/index.html'),
-    /data-version="0.18.11"/,
-    'the legacy pin wins over the entry, site-set or default, while present',
-  );
-});
-
-test('a scalar params.markmap builds, with markmap off', () => {
-  // A scalar where the shim expects a map.
-  const r = buildSite('markmap-scalar-param', {
-    files,
-    title: 'Docsy scalar-markmap fixture',
-    extraConfig: 'params:\n  markmap: false\n',
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.doesNotMatch(
-    r.publicFile('docs/index.html'),
-    /js\/plugins\/markmap/,
-    'page is free of markmap scripts',
-  );
-});
-
-test('invalid version syntax fails before the companion, legacy or entry spelling', () => {
+test('invalid version syntax fails before the companion', () => {
   for (const [name, extraConfig] of [
-    [
-      'markmap-version-path-legacy',
-      'params:\n  markmap:\n    enable: true\n    version: 0.18.12/package.json\n',
-    ],
     [
       'markmap-version-path-entry',
       'params:\n  docsy:\n    plugins:\n      markmap: { enable: true, version: 0.18.12/package.json }\n',
-    ],
-    [
-      'markmap-version-whitespace-legacy',
-      'params:\n  markmap:\n    enable: true\n    version: " 0.18.12 "\n',
     ],
     [
       'markmap-version-whitespace-entry',
@@ -300,46 +224,18 @@ test('invalid version syntax fails before the companion, legacy or entry spellin
   }
 });
 
-test('a present but empty legacy params.markmap.version fails when markmap is off', () => {
-  const r = buildSite('markmap-legacy-version-empty', {
+test('a map-valued version fails the guard, not the cast', () => {
+  const r = buildSite('markmap-version-map-entry', {
     files,
-    extraConfig: `params:
-  markmap:
-    version: ''
-`,
+    extraConfig:
+      'params:\n  docsy:\n    plugins:\n      markmap: { enable: true, version: { nested: value } }\n',
   });
   assert.notEqual(r.status, 0, 'hugo build fails');
   assert.match(
     r.stderr,
-    /params\.markmap\.version is deprecated/,
-    'an empty legacy value draws the deprecation warning',
+    /markmap\.version: string matching/,
+    'guard names the offending value',
   );
-  assert.match(
-    r.stderr,
-    /markmap\.version: .* got '""'/,
-    'the schema rejects the explicit empty pin',
-  );
-});
-
-test('a map-valued version fails the guard, not the cast, legacy or entry spelling', () => {
-  for (const [name, extraConfig] of [
-    [
-      'markmap-version-map-legacy',
-      'params:\n  markmap:\n    version: { nested: value }\n  docsy:\n    plugins:\n      markmap: { enable: true }\n',
-    ],
-    [
-      'markmap-version-map-entry',
-      'params:\n  docsy:\n    plugins:\n      markmap: { enable: true, version: { nested: value } }\n',
-    ],
-  ]) {
-    const r = buildSite(name, { files, extraConfig });
-    assert.notEqual(r.status, 0, `${name}: hugo build fails`);
-    assert.match(
-      r.stderr,
-      /markmap\.version: string matching/,
-      `${name}: the guard names the offending value`,
-    );
-  }
 });
 
 test('the entry version reads "0.18.13" from the environment', () => {
@@ -354,30 +250,6 @@ test('the entry version reads "0.18.13" from the environment', () => {
     r.publicFile('docs/index.html'),
     /data-version="0.18.13"/,
     'the environment pin reaches the companion',
-  );
-});
-
-test('the legacy param wins over a registry entry, site-wide, with a warning', () => {
-  const r = buildSite('markmap-legacy-and-registry', {
-    files: stubbed,
-    extraConfig: `params:
-  markmap:
-    enable: true
-  docsy:
-    plugins:
-      markmap: { enable: true }
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.stderr,
-    /remove the legacy param/,
-    'legacy param draws the deprecation warning',
-  );
-  assert.match(
-    r.publicFile('index.html'),
-    /js\/plugins\/markmap/,
-    'markmap loads on a page without markmap content while the param is set',
   );
 });
 
@@ -442,24 +314,6 @@ test('the map style is one fixed rule', () => {
   const rule = sheet.cssRules[0];
   assert.equal(rule.selectorText, '.markmap > svg', 'one rule is the map');
   assert.equal(rule.style.height, '300px', 'map height is fixed');
-});
-
-test('a scalar params.markmap leaves the entry pin intact', () => {
-  const r = buildSite('markmap-scalar-param-enabled', {
-    files: stubbed,
-    extraConfig: `params:
-  markmap: false
-  docsy:
-    plugins:
-      markmap: { enable: true }
-`,
-  });
-  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stderr}`);
-  assert.match(
-    r.publicFile('docs/index.html'),
-    /data-version="\d+\.\d+\.\d+"/,
-    "the companion gets the theme's pin",
-  );
 });
 
 test('the head-end flag the guide publishes loads markmap on a page without a fence', () => {

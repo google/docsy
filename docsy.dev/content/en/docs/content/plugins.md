@@ -1,6 +1,8 @@
 ---
 title: Plugins
-description: Turn Docsy's optional scripts on or off from site configuration.
+description:
+  Turn Docsy's optional scripts on or off, and configure them, from site
+  configuration.
 ---
 
 Docsy loads some of its optional JavaScript features as **plugins**: entries
@@ -13,6 +15,7 @@ under `params.docsy.plugins` in your site configuration.
 | `click-to-copy`   | Adds a copy button to code blocks (On, but off under Prism, which has its own / Every page)        | [Copy to clipboard][]          |
 | `tabpane-persist` | Remembers the selected tab across pages (On / Every page ([why](#page-flags-in-included-content))) | [`tabpane`][]                  |
 | `markmap`         | Renders `markmap` code blocks as mind maps (Off / Pages with a `markmap` code block)               | [Activating MarkMap support][] |
+| `mermaid`         | Renders `mermaid` code blocks as diagrams (On / Pages with a `mermaid` code block)                 | [Diagrams with Mermaid][]      |
 
 To turn a plugin off, set its `enable` field to `false`:
 
@@ -55,11 +58,16 @@ types, defaults, and syntactic patterns:
 
 - Fields are optional unless marked `required: true`.
 - `{}` for a theme plugin keeps every inherited field, including `enable`.
+- Language-specific `params` apply, so an entry can differ per language.
 - `enable` is off for `false`, `"false"`, and `0`, and on for any other value.
   The string forms exist for [environment overrides][config-env].
 - `version` selects the version of a plugin's dependency, not of the plugin
-  script or of Docsy. To override a theme plugin's pin, see [MarkMap
-  version][markmap-version].
+  script or of Docsy. To override a theme plugin's pin, see [Mermaid
+  version][mermaid-version] or [MarkMap version][markmap-version].
+- `options` holds a plugin's own settings, as a string whose format and
+  validation are the plugin's; Docsy passes the value to the plugin unchanged.
+  For the shape a theme plugin takes, see its guide ([Mermaid
+  settings][mermaid-settings]).
 - `_defer` is the plugin author's field (the `_` prefix marks such fields),
   declared with the plugin
   ([Loading strategy (experimental)](#loading-strategy)); leave it alone on a
@@ -163,10 +171,10 @@ register the plugin, or set it in its [shim](#adjust-a-plugin-per-page).
 ### Adjust a plugin per page
 
 A **shim** adjusts a plugin's registry entry for each page before the plugin
-loads. Add one for your own plugin, or for one of Docsy's. Two of Docsy's
-plugins ship a shim, `markmap` and `click-to-copy`: your file replaces it, gate,
-Prism guard, deferred loading, and deprecated-parameter handling included, so
-start from a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
+loads. Add one for your own plugin, or for one of Docsy's. Three of Docsy's
+plugins ship a shim, `mermaid`, `markmap`, and `click-to-copy`: your file
+replaces that plugin's shim and everything it does ([shim contract][impl-shim]),
+so start from a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
 
 Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, with the
 plugin's registry name as _`NAME`_ ([shim contract][impl-shim]):
@@ -195,6 +203,18 @@ dependency version to configure.
 
 The entry's `version` is not passed to the plugin script. For a working example,
 see the `markmap` companion in [`scripts/plugins/`][theme-shims].
+
+### Plugin settings
+
+A plugin reads its settings from its entry's `options`
+([configuration reference](#configuration-reference)); the shim receives the
+value as the site wrote it and may decode it before the companion runs. Choose
+the string's format and document it with the plugin. It is a string because Hugo
+lowercases map keys ([why][design-registry]); Docsy's plugins take a **JSON
+object**, decoded at build time with `transform.Unmarshal`, or in the browser
+with `JSON.parse` after the companion emits it. For the pattern, see the
+`mermaid` shim and companion in [`scripts/plugins/`][theme-shims] ([shim
+contract][impl-shim]).
 
 ### Security
 
@@ -238,8 +258,12 @@ MarkMap doesn't render][].
 [config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
 [config-warnings]: /docs/content/configuration/#configuration-warnings
 [design-ordering]: /project/design/script-loading/#ordering-decisions
+[design-registry]: /project/design/script-loading/#registry-shape
 [experimental]: /project/about/changelog/#experimental
 [markmap-version]: /docs/content/diagrams-and-formulae/#markmap-version
+[mermaid-settings]: /docs/content/diagrams-and-formulae/#mermaid-settings
+[mermaid-version]: /docs/content/diagrams-and-formulae/#mermaid-version
+[Diagrams with Mermaid]: /docs/content/diagrams-and-formulae/#diagrams-with-mermaid
 [impl-shim]: /project/implementation/script-loading/#shims
 [theme-shims]: https://github.com/docsy/docsy/tree/main/theme/layouts/_partials/scripts/plugins
 [theme-defaults]: https://github.com/docsy/docsy/blob/main/theme/hugo.yaml

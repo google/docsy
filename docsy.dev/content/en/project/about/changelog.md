@@ -94,7 +94,8 @@ See [semver][].
 ### Official support
 
 Docsy is maintained with very limited resources and only supports the latest
-releases of Docsy, its dependencies & tools, and operating systems.
+release of Docsy, the pinned versions of its dependencies and tools, and the
+latest operating systems.
 
 Specifically, the Docsy team **officially supports** the following:
 
@@ -118,6 +119,8 @@ Specifically, the Docsy team **officially supports** the following:
       work.
   - **Node.js**: versions matching `engines.node` in [package.json][]
   - **Dart Sass**: the version pinned as `sass-embedded` in [package.json][]
+  - **Script dependencies** (Mermaid, KaTeX, MarkMap, Redoc): the versions
+    pinned in the theme's configuration ([pinned versions][])
 
 - Operating systems: macOS (latest minor release) and Linux.
 
@@ -127,6 +130,7 @@ Everything else — including Windows — is supported on a best-effort basis.
 [@docsy/theme]: https://www.npmjs.com/package/@docsy/theme
 [minimum Hugo version]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-hugo
 [package.json]: https://github.com/docsy/docsy/blob/main/package.json
+[pinned versions]: /docs/content/diagrams-and-formulae/#script-dep-versions
 <!-- prettier-ignore-end -->
 
 ### Bug fixes
@@ -158,17 +162,19 @@ history since 0.17.0][].
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
-  points for MarkMap, tab persistence, and click-to-copy; page-gated MarkMap,
-  whose autoloader is now fetched at build time; reserved `params.docsy` for
-  theme settings ([#2789][]).
+  points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
+  MarkMap, whose autoloader is now fetched at build time; reserved
+  `params.docsy` for theme settings ([#2789][]). Removed the `params.mermaid`
+  and `params.markmap` namespaces; replaced Mermaid's inline module script with
+  a deferred same-origin entry; dropped rendering under Mermaid pins below 10.
 
 **New**:
 
 - **[Plugins][ug-plugins]**: added `params.docsy.plugins`, a registry of Docsy's
-  optional scripts, configured from site configuration; MarkMap, tab
-  persistence, and click-to-copy ship through it. Deprecated
-  `params.markmap.enable`, `params.markmap.version`, and
-  `params.disable_click2copy_chroma` in favor of registry entries ([#2789][]).
+  optional scripts, configured from site configuration; Mermaid, MarkMap, tab
+  persistence, and click-to-copy ship through it; added the plugin-owned
+  `options` entry field. Deprecated `params.disable_click2copy_chroma` in favor
+  of its registry entry ([#2789][]).
 
 **Other changes**:
 
@@ -180,6 +186,7 @@ history since 0.17.0][].
 
 - Added **[plugin authoring][ug-plugin-authoring]**: write your own plugins
   ([#2789][]).
+- Declared Mermaid 12 pins experimental ([#2825][]).
 
 **For maintainers**:
 
@@ -197,6 +204,10 @@ history since 0.17.0][].
 - Added zizmor workflow security analysis (pedantic persona, results in the
   Security tab) through the OpenTelemetry shared workflow, and hardened the
   refresh, smoke and publish workflows on its first pass ([#2811][]).
+- Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
+  the script-version-pins test now ties every pin to its Renovate row, and two
+  Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
+- Pinned Renovate's schedule timezone to UTC ([#2827][]).
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
@@ -207,6 +218,9 @@ history since 0.17.0][].
 [#2786]: https://github.com/docsy/docsy/pull/2786
 [#2789]: https://github.com/docsy/docsy/issues/2789
 [#2811]: https://github.com/docsy/docsy/pull/2811
+[#2823]: https://github.com/docsy/docsy/pull/2823
+[#2825]: https://github.com/docsy/docsy/issues/2825
+[#2827]: https://github.com/docsy/docsy/pull/2827
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move

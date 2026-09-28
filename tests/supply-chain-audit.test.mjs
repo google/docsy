@@ -1,5 +1,6 @@
 // Committed supply-chain audit: proves, from the committed manifests,
-// locks, .npmrc, Netlify config, and workflows alone, that the hardening
+// locks, .npmrc, Netlify config, and workflows (plus one installed file,
+// Puppeteer's config loader), that the hardening
 // invariants (#2700, #2702, #2712) still hold, so future integrity claims
 // regenerate from this test instead of ad hoc audit runs. Fast and
 // offline. Companion guards: the pinned list in
@@ -17,7 +18,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parse } from 'yaml';
+import { parse, parseDocument } from 'yaml';
 
 import { UNSAFE_HUGO_ENV } from '../scripts/rebuild-hugo-extended.mjs';
 
@@ -238,14 +239,9 @@ test('locks and manifests: install scripts stay inventoried and version-pinned',
     ],
     '.npmrc carries exactly the reviewed npm settings',
   );
-  // npm resolves workspace config at the root, but --prefix/-C runs
-  // suppress the workspace walk-up and read only the target directory's
-  // .npmrc: theme (the prefix-install target for install:theme-deps and
-  // _sync:theme-lock) carries a byte-identical mirror of the root file so
-  // those runs keep the same posture (the .nvmrc-pair pattern,
-  // toolchain-versions.test.mjs), while docsy.dev (no prefix installs)
-  // stays absent so the root file remains its one home. On a mismatch:
-  // cp .npmrc theme/.npmrc.
+  // theme/.npmrc mirrors the root file for the --prefix/-C installs that
+  // read only their target directory (maintainer notes § Dependency
+  // updates); on a mismatch: cp .npmrc theme/.npmrc.
   assert.equal(
     fs.readFileSync(path.join(repoRoot, 'theme/.npmrc'), 'utf8'),
     fs.readFileSync(path.join(repoRoot, '.npmrc'), 'utf8'),
@@ -662,7 +658,7 @@ test('manifests: the install surfaces stay unconfigured and hook-free', () => {
   }
 });
 
-test('workflows: installs are locked and credential-isolated', () => {
+test('workflows: installs are locked and credential-isolated, action pins full-versioned', () => {
   const workflowsDir = path.join(repoRoot, '.github/workflows');
   const files = fs
     .readdirSync(workflowsDir)
@@ -715,10 +711,24 @@ test('workflows: installs are locked and credential-isolated', () => {
   let setupNodes = 0;
   let safeInstalls = 0;
   let reusableCalls = 0;
+  let pinnedUses = 0;
   for (const file of files) {
-    const workflow = parse(
-      fs.readFileSync(path.join(workflowsDir, file), 'utf8'),
-    );
+    const source = fs.readFileSync(path.join(workflowsDir, file), 'utf8');
+    // Renovate finds a pin comment by the literal ' #'; a tab before it turns
+    // the pin into an unversioned reference it silently drops.
+    assert.doesNotMatch(source, /\t/, `${file} uses no tab characters`);
+    const workflow = parse(source);
+    // Pin comments (maintainer notes § Dependency updates) survive only in
+    // the document tree; parse() drops them.
+    const doc = parseDocument(source);
+    const assertFullVersionComment = (id, keyPath) => {
+      pinnedUses += 1;
+      assert.match(
+        doc.getIn(keyPath, true)?.comment ?? '',
+        /^ v?\d+\.\d+\.\d+$/,
+        `${id} uses names its full release version in the comment`,
+      );
+    };
     assert.equal(
       workflow.defaults?.run?.shell,
       undefined,
@@ -726,7 +736,7 @@ test('workflows: installs are locked and credential-isolated', () => {
     );
     // Env can invert the audited config: NPM_CONFIG_* outranks .npmrc,
     // the shell scripts honor a HUGO override, and NODE_OPTIONS injects
-    // code into every Node process.
+    // code into every Node process (same check at the job and step levels).
     for (const key of Object.keys(workflow.env ?? {})) {
       assert.ok(
         envLeavesInstallConfigUntouched(key),
@@ -745,6 +755,7 @@ test('workflows: installs are locked and credential-isolated', () => {
           /^[\w-]+\/[\w.-]+\/\.github\/workflows\/[\w.-]+\.ya?ml@[0-9a-f]{40}$/,
           `${id} calls a SHA-pinned reusable workflow`,
         );
+        assertFullVersionComment(id, ['jobs', jobId, 'uses']);
         assert.equal(job.secrets, undefined, `${id} passes no secrets`);
         assert.equal(job.steps, undefined, `${id} is a pure call job`);
         continue;
@@ -762,16 +773,13 @@ test('workflows: installs are locked and credential-isolated', () => {
         undefined,
         `${id} uses the default job shell`,
       );
-      // Env can invert the audited config: NPM_CONFIG_* outranks .npmrc,
-      // the shell scripts honor a HUGO override, and NODE_OPTIONS injects
-      // code into every Node process.
       for (const key of Object.keys(job.env ?? {})) {
         assert.ok(
           envLeavesInstallConfigUntouched(key),
           `${id} env ${key} leaves npm and Hugo config untouched`,
         );
       }
-      for (const step of job.steps) {
+      for (const [stepIndex, step] of job.steps.entries()) {
         for (const key of Object.keys(step.env ?? {})) {
           assert.ok(
             envLeavesInstallConfigUntouched(key),
@@ -822,6 +830,13 @@ test('workflows: installs are locked and credential-isolated', () => {
             /^[\w-]+\/[\w.-]+(\/[\w./-]+)?@[0-9a-f]{40}$/,
             `${id} uses a SHA-pinned marketplace action`,
           );
+          assertFullVersionComment(id, [
+            'jobs',
+            jobId,
+            'steps',
+            stepIndex,
+            'uses',
+          ]);
         }
         if (typeof step.run !== 'string') continue;
         runSteps += 1;
@@ -831,13 +846,24 @@ test('workflows: installs are locked and credential-isolated', () => {
         // Deny npm's tree-reifying/executing subcommands in raw run
         // steps: the one sanctioned install is the reviewed install:safe
         // script, counted below. `npm run` wrappers resolve to reviewed
-        // scripts, and `npm pack`/`npm publish`/`npm init` install
-        // nothing (`npm audit fix` and `npm link` do).
+        // scripts, and `npm pack`/`npm publish` install nothing; `npm audit
+        // fix` and `npm link` do.
         assert.doesNotMatch(
           run,
           /\bnpm\s+(install(-test|-ci-test|-clean)?|isntall(-clean)?|clean-install(-test)?|add|i|in|ins|inst|insta|instal|isnt|isnta|isntal|it|cit|sit|ic|ci|dedupe|ddp|update|up|upgrade|udpate|rebuild|rb|exec|x|audit|link|ln)\b/,
           `${id} run step installs only via reviewed npm scripts`,
         );
+        // `npm init NAME` (and `create`) is `npm exec create-NAME`: registry
+        // code, fetched and run at once. Only the bare scaffold form stays.
+        for (const [, args] of run.matchAll(
+          /\bnpm\s+(?:init|create|innit)\b([^\n;&|]*)/g,
+        )) {
+          assert.match(
+            args.trim(),
+            /^(-y|--yes)?(\s+#.*)?$/,
+            `${id} run step uses npm init without an initializer`,
+          );
+        }
         assert.doesNotMatch(run, /\bnpx\b/, `${id} run step avoids npx`);
         assert.doesNotMatch(
           run,
@@ -877,6 +903,7 @@ test('workflows: installs are locked and credential-isolated', () => {
     }
   }
   assert.ok(runSteps > 0, 'workflow run steps were audited');
+  assert.ok(pinnedUses > 0, 'action pins were audited');
   assert.ok(checkouts > 0, 'checkout steps were audited');
   assert.ok(setupNodes > 0, 'setup-node steps were audited');
   assert.ok(safeInstalls > 0, 'CI installs go through install:safe');

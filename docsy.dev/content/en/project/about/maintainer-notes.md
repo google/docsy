@@ -46,8 +46,8 @@ restating them:
 
 **Version values** follow the same ownership rule. An evergreen doc that cites a
 pinned or supported version reads it from the pin's source of truth: a config
-param (for example, `params.mermaid.version`), or a repo manifest surfaced
-through a data mount and shortcode (`sass-embedded-version` reads the root
+param (for example, `params.katex.version`), or a repo manifest surfaced through
+a data mount and shortcode (`sass-embedded-version` reads the root
 `package.json` pin), so the page can't drift from the pin. A dated post freezes
 its release-specific versions as page front-matter params, and delegates install
 and override mechanics to the docs instead of restating commands.
@@ -149,10 +149,10 @@ is a two-step flow, run from the repo root:
    run builds between the two steps. Script-enabled installs, CI's
    `install:safe` included, fail until the new version is approved.
 
-Automated version updates don't bump hugo-extended: the
-[Renovate config](#dependency-updates) disables them. Security updates (Renovate
-vulnerability alerts, GitHub's config-free Dependabot) can still bump it; such a
-PR fails CI until the bump is approved (step 2 above).
+Renovate doesn't bump hugo-extended: its [config](#dependency-updates) disables
+the updates, alert PRs included. GitHub's config-free Dependabot security
+updates can still bump it; such a PR fails CI until the bump is approved (step 2
+above).
 
 Docs render this version live through the `hugo-version` shortcode
 (`hugo.Version`): docsy.dev builds always run the pinned Hugo.
@@ -162,16 +162,16 @@ Docs render this version live through the `hugo-version` shortcode
 The versions of the script dependencies that Docsy loads from CDNs by default
 are pinned in `theme/hugo.yaml`, in one of two shapes:
 
-- `params.`_`PACKAGE`_`.version` for `mermaid`, `katex`, and `redoc`
-- the plugin entry's `version` for `markmap`
-  (`params.docsy.plugins.markmap.version`)
+- `params.`_`PACKAGE`_`.version` for `katex` and `redoc`
+- the plugin entry's `version` for `mermaid` and `markmap`
+  (`params.docsy.plugins.`_`PLUGIN`_`.version`)
 
 The templates and the [user guide][diagrams] read them live, so bumping the one
 yaml value per dependency during the [release-prep audit](#release-prep-audit)
-is enough; the [script-version-pins test](#test-suites) checks exact pins and
-their template reads. Renovate proposes routine bumps (see
-[Dependency updates](#dependency-updates)), subject to a minimum release age.
-For each bump:
+is enough; the [script-version-pins test](#test-suites) checks exact pins, their
+template reads, and their Renovate manager rows. Renovate proposes routine bumps
+(see [Dependency updates](#dependency-updates)), subject to a minimum release
+age. For each bump:
 
 - Check the [npm registry][npm-registry] and [OSV][] for advisories affecting
   the target version.
@@ -204,17 +204,23 @@ Automated updates are configured through Renovate. Settings rationale:
 
 - `ignorePresets`: the preset's 3-day npm cooldown would override this repo's
   7-day `minimumReleaseAge`. Caution: this exclusion silently stops working if
-  the preset is renamed upstream. The preset's age exemptions for update types
-  without release timestamps (pin, replacement, rollback) are deliberately not
-  restored: such PRs never satisfy the age check and need manual age validation
-  at review.
+  the preset is renamed upstream. The preset's age exemptions for `pin` and
+  `replacement` updates are not restored: with or without them, Renovate raises
+  both without waiting for release age; without them, their PRs also show a
+  pending `renovate/stability-days` status that never passes. A pin brings no
+  new code; a replacement proposes a different package, so review it as a new
+  dependency, not a bump.
 - `lockFileMaintenance` off: wholesale lock re-resolves would churn the
   committed lockfiles; transitive security fixes arrive alert-driven instead.
+- `schedule` and `timezone`: Renovate creates its branches on Sundays, UTC.
+  Without `timezone`, Renovate evaluates the schedule in the zone of the host
+  running it.
 - Package rules:
   - Patch and minor updates are each grouped into a single PR per wave, to cut
     review overhead; majors stay individual for one-by-one scrutiny, except
-    families that Renovate's presets keep in lockstep (for example, the GitHub
-    artifact actions).
+    families that Renovate's presets keep in lockstep (the
+    [artifact actions](#github-actions-updates), for one).
+  - [GitHub Actions updates](#github-actions-updates) stay outside those groups.
   - `hugo-extended` updates are [carefully chosen](#official-hugo-version) at
     Docsy release time.
   - Bootstrap and Font Awesome are updated deliberately via
@@ -224,7 +230,7 @@ Automated updates are configured through Renovate. Settings rationale:
     reminder).
   - The custom manager updates the [script-dependency pins](#script-versions) in
     `theme/hugo.yaml`. All other detected managers are active, including npm and
-    GitHub Actions (SHA-digest pins).
+    GitHub Actions.
 
 The Node toolchain is pinned by two `.nvmrc` files holding the same version, a
 platform constraint: workflows and nvm read the root file, while Netlify reads
@@ -237,17 +243,58 @@ byte-identical mirror of the root `.npmrc`, because `--prefix`/`-C` npm runs
 file. Edit the two together; the supply-chain audit guards the sync.
 
 Renovate's vulnerability-alert PRs stay on, beside GitHub's config-free
-Dependabot security updates; a rare duplicate PR is accepted. Renovate's alert
-PRs bypass its own cooldown but not npm's: lock regeneration for a fix younger
-than `min-release-age` (`.npmrc`) fails with `ETARGET` until the release ages.
-For a fix that can't wait, run the dependency's manual bump under a
-per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the
-fix's age requires (the override relaxes the cooldown for everything the
-invocation resolves). For example, for a three-day-old hugo-extended release:
+Dependabot security updates; a rare duplicate PR is accepted. Alert PRs don't
+re-enable a package a rule disables (hugo-extended, Bootstrap, Font Awesome)
+unless `vulnerabilityAlerts.enabled` is set; this config leaves it unset.
+Renovate's alert PRs bypass its own schedule and cooldown but not npm's: lock
+regeneration for a fix younger than `min-release-age` (`.npmrc`) fails with
+`ETARGET` until the release ages. For a fix that can't wait, run the
+dependency's manual bump under a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE`
+override, set no lower than the fix's age requires (the override relaxes the
+cooldown for everything the invocation resolves). For example, for a
+three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
 ```
+
+### GitHub Actions updates
+
+Every `uses:` line pins a SHA with a version comment
+(`actions/checkout@SHA # vX.Y.Z`). How the config moves those pins:
+
+- **One PR per bump**, on a branch named for the proposed SHA, so a tag
+  re-pointed after the PR opens arrives as a new PR, not as a silent update of
+  the one already reviewed. Exception: the artifact actions' majors, which a
+  Renovate preset groups on one branch; there, run the checks below on the SHA
+  you merge, not the one you first reviewed.
+- **Versions from GitHub Releases**, whose publication date GitHub sets. The
+  default tag lookup also admits tags with no Release, dated by whoever pushed
+  them.
+- **Actions and reusable workflows only** (`matchDepTypes`). Runner labels such
+  as `ubuntu-24.04` are `github-actions` dependencies too, but not repositories,
+  so a Releases lookup would fail on them.
+
+What that asks of the repo:
+
+- **An action added here must publish Releases.** One that only tags silently
+  gets no version updates.
+- **Every pin comment names a full version** (`# vX.Y.Z`, not `# vX`), so that
+  updates within the major arrive as version bumps naming their Release, not as
+  opaque digest bumps, and a digest-only PR keeps one meaning: the pinned tag
+  moved without a new Release. The supply-chain audit guards the shape.
+
+Before merging an action bump, check the following:
+
+- The Release is at least seven days old.
+- The tag still points at the proposed SHA.
+- The commit is reachable from the action's default branch or one of its release
+  branches.
+
+A digest-only bump arrives without an age wait (its Release already aged) but
+with the pending `renovate/stability-days` status that never passes. The last
+two checks tell you what moved; a tag moved without a new Release is not
+something to merge.
 
 ## Test suites
 
@@ -305,15 +352,15 @@ new invariant to the file that owns its concern, or start a new file; never give
 an invariant a second home. Each file's header comment carries its scope and
 rationale; this table only routes:
 
-| Guard                               | Owns                                                                                                                               |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `tests/supply-chain-audit.test.mjs` | Install and provenance invariants from committed artifacts: locks, `allowScripts`, `.npmrc`, install scripts, engines, CI installs |
-| `tests/npm-scripts.test.mjs`        | npm script-name posture: lifecycle and hook-shaped script names stay out of every manifest, beyond the pinned reviewed exceptions  |
-| `tests/npm-audit.test.mjs`          | Online advisory gate over the committed locks                                                                                      |
-| `tests/runner-lint.test.mjs`        | Package-runner discipline: bare `npx`/`npm exec` and alternate-runner denial (a lint, not a boundary)                              |
-| `tests/workflow-lint.test.mjs`      | Check-execution integrity of the workflows: they run the checks they claim to                                                      |
-| `tests/test-wiring.test.mjs`        | Suite wiring: every suite glob resolves to test files, so a rename can't empty a suite silently                                    |
-| `scripts/suite-anchor.test.mjs`     | Cross-root anchor: the tests-root guards stay wired into `test:repo`                                                               |
+| Guard                               | Owns                                                                                                                              |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `tests/supply-chain-audit.test.mjs` | Install and provenance invariants: locks, `allowScripts`, `.npmrc`, install scripts, engines, CI installs, action pins            |
+| `tests/npm-scripts.test.mjs`        | npm script-name posture: lifecycle and hook-shaped script names stay out of every manifest, beyond the pinned reviewed exceptions |
+| `tests/npm-audit.test.mjs`          | Online advisory gate over the committed locks                                                                                     |
+| `tests/runner-lint.test.mjs`        | Package-runner discipline: bare `npx`/`npm exec` and alternate-runner denial (a lint, not a boundary)                             |
+| `tests/workflow-lint.test.mjs`      | Check-execution integrity of the workflows: they run the checks they claim to                                                     |
+| `tests/test-wiring.test.mjs`        | Suite wiring: every suite glob resolves to test files, so a rename can't empty a suite silently                                   |
+| `scripts/suite-anchor.test.mjs`     | Cross-root anchor: the tests-root guards stay wired into `test:repo`                                                              |
 
 ### Golden tests
 
@@ -823,7 +870,6 @@ If not adjust accordingly.
     # Optionally take a look at the preview
     npm run doc-rooted -- serve
     curl http://localhost:1313/index.md
-    # Push the changes
     git push-all-remotes doc-rooted
     ```
 
