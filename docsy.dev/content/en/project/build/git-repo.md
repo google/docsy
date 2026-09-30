@@ -25,7 +25,7 @@ repository][].
 This repository's branch model is as follows:
 
 - `main`: development branch for the next theme release and next site content.
-- `release`: release and maintenance branch for the current theme version.
+- `release`: release and maintenance branch for the latest theme release.
 - `deploy/prod` and `doc-rooted`: publishing branches used by Netlify. These
   branches determine what is published (see the table below); they are not
   feature development branches.
@@ -49,11 +49,12 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-- Tags mark **official theme releases**.
+- Release tags (`v*` and `theme/v*`) mark **official theme releases**.
 - Release tags never move: the `release-tag-integrity`
-  [ruleset][release-tag-integrity ruleset] blocks updates and deletion of `v*`
-  and `theme/v*` tags, with no bypass; a second ruleset restricts their creation
-  to the releaser.
+  [ruleset][release-tag-integrity ruleset] blocks their update and deletion,
+  with no bypass.
+- Only the designated releaser creates them, per the `release-tags`
+  [ruleset][release-tags ruleset].
 
 ### Workflow
 
@@ -63,13 +64,12 @@ PR deploy previews build like the Next variant.
 
 2. When ready to release:
    - [Release from `main`](#release-from-main) (the usual case).
-   - [Patch on `release`](#patch-on-release) (when `main` carries unreleased
-     work).
+   - [Patch on `release`](#patch-on-release) (when `main` carries work that
+     isn't ready to release).
 
 3. Publish site updates:
-   - Fast-forward `deploy/prod` from `main` when possible.
-   - Otherwise (usually because `release` was patched), update it from
-     `release`.
+   - After a release from `main`: fast-forward `deploy/prod` from `main`.
+   - After a patch on `release`: update `deploy/prod` from `release`.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
@@ -77,10 +77,12 @@ This keeps theme releases and site deploys coordinated, but not tightly coupled.
 
 #### Release from `main`
 
-1. If `release` carries a patch that `main` doesn't (from a
+1. If `release` has commits that `main` doesn't (after a
    [patch on `release`](#patch-on-release)), first [restore the fast-forward
    path][].
-2. Fast-forward `release` from `main` (`git merge --ff-only`).
+2. At release time, fast-forward `release` to the release commit
+   (`git merge --ff-only main`). Between releases, `release` stays at the latest
+   release: it is the base for patches.
 
 #### Patch on `release`
 
@@ -91,21 +93,20 @@ Fix on `main` first whenever the fix applies there. Then:
 2. Bring release-facing site updates (for example changelog and release blog
    updates) back onto `main` from `release`.
 
-A patch that doesn't apply to `main` lands on `release` alone, by PR.
+A patch that doesn't apply to `main` lands only on `release`, by PR.
 
 ### Branch sync and invariants
 
-`main`: governed by its [ruleset][main ruleset]; for its rules and the merge
-gates, see [Merge requirements][].
+`main`: for its rules and the merge gates, see [Merge requirements][].
 
 `release`:
 
 - Follows `main`: divergence lasts only from a patch on `release` to the next
   release from `main`.
-- Every official release tag is reachable from it.
+- Every official release tag is reachable from it once its release is final.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
-- Receives content by fast-forward from `main` or by PR.
+- Receives content by fast-forward from `main` at release time, or by PR.
 - Checks (including EasyCLA and workflow security analysis) run on PRs into
   `release` and report there; acting on them is the merging maintainer's call.
 
@@ -120,9 +121,9 @@ gates, see [Merge requirements][].
 - Keeps theme releases predictable while `main` moves quickly.
 - Keeps `release` a follower of `main`, so a patch never opens a second line of
   development.
-- `release` is protected against rewriting, not gated: any check required on it
-  would also refuse the fast-forward from `main`, and content arriving that way
-  was already gated on `main`.
+- Protects `release` against rewriting without gating it: requiring `main`'s
+  PR-scoped gates (review, EasyCLA, code scanning) there would refuse the
+  fast-forward from `main`, whose content already passed them.
 - Lets the website ship docs UX improvements without forcing a theme release.
 - Preserves clear release tags for theme consumers.
 - Keeps branch responsibilities explicit for a small maintainer team.
@@ -131,11 +132,11 @@ gates, see [Merge requirements][].
 [Docsy example site repository]: <{{% param github_repo %}}-example>
 [dr-site]: https://doc-rooted--docsydocs.netlify.app
 [main Docsy repository]: <{{% param github_repo %}}>
-[main ruleset]: <{{% param github_repo %}}/rules/23697379>
 [Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
 [prod-site]: https://www.docsy.dev
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
 [release-tag-integrity ruleset]: <{{% param github_repo %}}/rules/24262989>
+[release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
 [restore the fast-forward path]:
   /project/about/maintainer-notes/#restoring-the-fast-forward-path

@@ -88,7 +88,7 @@ The repository's [main ruleset][] enforces that:
 The one sanctioned bypass is
 [restoring the fast-forward path](#restoring-the-fast-forward-path).
 
-A PR can merge when:
+A PR into `main` can merge when:
 
 - One member of [`docsy/maintainers`][] has approved it.
 - Its zizmor results pass the [code-scanning gate](#workflow-security-analysis).
@@ -98,18 +98,19 @@ A PR can merge when:
 ### Restoring the fast-forward path
 
 After a [patch on `release`][], `release` has commits that `main` doesn't, so
-the next release can't fast-forward `release` from `main`. To reopen the path, a
-maintainer records the ancestry on `main` with a merge commit that takes no
-content. Do this only after the patch's release-facing site updates are back on
-`main`; once `release` is an ancestor of `main`, a PR bringing them over
-compares empty.
+the next release can't fast-forward `release` from `main`. To reopen the path,
+record the ancestry on `main` with a merge commit that takes no content. Do this
+only after the patch's release-facing site updates are back on `main`: once
+`release` is an ancestor of `main`, a PR bringing them over compares empty.
 
-1. On a branch off `main`, run `git merge -s ours release`; open a PR and get it
-   approved with green checks like any other.
+1. On a branch off `main`, after `git fetch upstream`, run
+   `git merge -s ours upstream/release` (and likewise for `upstream/deploy/prod`
+   if it was updated from `release`); open a PR and get it approved with green
+   checks like any other.
 2. In the merge box, choose **Create a merge commit** first (the default,
    squash, would flatten the ancestry away), then **Bypass rules and merge**.
-   The bypass overrides only the merge method: the merge-commit method is
-   refused by the linear-history and allowed-merge-methods rules.
+   With approval and checks in, the bypass overrides only the merge method,
+   which the linear-history and allowed-merge-methods rules refuse.
 
 The bypass is logged in the ruleset's insights.
 
@@ -213,9 +214,9 @@ Two dependencies need more than the version line:
   URL change is part of that review.
 
 An emergency security bump (an advisory landing between releases) is a manual
-edit to the same line, made directly on a `release` branch and shipped through
-the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not the next
-regular release; it explicitly bypasses Renovate's minimum release-age gate.
+edit to the same line, shipped as a [patch on `release`][] (`vX.Y.Z` +
+`theme/vX.Y.Z` tags), not with the next regular release; it explicitly bypasses
+Renovate's minimum release-age gate.
 
 <!-- prettier-ignore-start -->
 [npm-registry]: https://registry.npmjs.org
