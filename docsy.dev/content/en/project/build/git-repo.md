@@ -67,18 +67,15 @@ PR deploy previews build like the Next variant.
    - [Patch on `release`](#patch-on-release) (when `main` carries work that
      isn't ready to release).
 
-3. Publish site updates:
-   - After a release from `main`: fast-forward `deploy/prod` from `main`.
-   - After a patch on `release`: update `deploy/prod` from `release`.
+3. Publish site updates: fast-forward `deploy/prod` from `release`.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
 #### Release from `main`
 
-1. If `release` or `deploy/prod` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release), which also moves `deploy/prod`, or
-   after a site-only change cherry-picked onto `deploy/prod`), first [restore
-   the fast-forward path][].
+1. If `release` has commits that `main` doesn't (after a
+   [patch on `release`](#patch-on-release)), first [restore the fast-forward
+   path][].
 2. At release time, fast-forward `release` to the release commit:
 
    ```sh
@@ -88,7 +85,8 @@ PR deploy previews build like the Next variant.
    ```
 
    Between releases, `release` stays at the latest release: it is the base for
-   patches.
+   patches. A docs-only fix to the released content may follow, fast-forwarded
+   from `main` before the version params move on.
 
 #### Patch on `release`
 
@@ -121,10 +119,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 
 `deploy/prod`:
 
-- Reflects the current release's docs: follows `release` at release time (after
-  a release from `main`, the same commit as `main`).
-- Can include site-only improvements from `main` that are compatible with the
-  current release.
+- Follows `release`: a pointer at the published release commit, never with
+  commits of its own.
 
 ## Why this model?
 
@@ -134,7 +130,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 - Protects `release` against rewriting without gating it: requiring `main`'s
   [PR-scoped gates][Merge requirements] there would refuse the fast-forward from
   `main`, whose content already passed them.
-- Lets the website ship docs UX improvements without forcing a theme release.
+- Keeps `deploy/prod` a pointer, so publishing is a deliberate last step,
+  separate from cutting the release.
 
 [Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>
