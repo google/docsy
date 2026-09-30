@@ -99,7 +99,7 @@
     "@pchalin/markdownlint-rule-link-pattern": "0.3.0",
     "hugo-extended": "0.164.0",
     "jsdom": "30.0.1",
-    "markdownlint-cli2": "0.23.2",
+    "markdownlint-cli2": "0.23.3",
     "markdownlint-rule-no-shortcut-ref-link": "0.4.0",
     "pixelmatch": "7.2.0",
     "pngjs": "7.0.0",
@@ -113,8 +113,7 @@
     "npm": ">=11.18.0"
   },
   "overrides": {
-    "adm-zip": "^0.6.1",
-    "smol-toml": "^1.7.1"
+    "adm-zip": "^0.6.1"
   },
   "spelling": "cSpell:ignore uall -",
   "allowScripts": {
