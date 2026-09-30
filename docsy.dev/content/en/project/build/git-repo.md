@@ -49,10 +49,9 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-- Tags mark **official theme releases**; every release tag is reachable from
-  `release`.
-- Tags never move: the `release-tags` [ruleset][release-tags ruleset] blocks
-  updates to `v*` tags.
+- Tags mark **official theme releases**.
+- Release tags never move: the `release-tags` [ruleset][release-tags ruleset]
+  blocks updates to `v*` tags and restricts their creation.
 
 ### Workflow
 
@@ -77,41 +76,36 @@ This keeps theme releases and site deploys coordinated, but not tightly coupled.
 #### Release from `main`
 
 1. If `release` carries a patch that `main` doesn't (from a
-   [patch on `release`](#patch-on-release)), an admin must first [restore the
-   fast-forward path][]; otherwise the next step is rejected as
-   non-fast-forward. Don't force it: the `release` ruleset blocks that anyway.
-2. Fast-forward `release` from `main`.
+   [patch on `release`](#patch-on-release)), first [restore the fast-forward
+   path][].
+2. Fast-forward `release` from `main` (`git merge --ff-only`).
 
 #### Patch on `release`
 
 Fix on `main` first whenever the fix applies there. Then:
 
 1. Open a PR against `release` that cherry-picks the relevant commits from
-   `main`, together with the release-preparation changes; merge it.
+   `main`, together with the release-preparation changes, and merge it.
 2. Bring release-facing site updates (for example changelog and release blog
-   updates) back onto `main` from `release`, by PR.
-3. Update `deploy/prod` from `release`.
+   updates) back onto `main` from `release`.
 
 A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
 ### Branch sync and invariants
 
-`main`, enforced by its [ruleset][main ruleset]:
-
-- Changes land only through pull requests, with linear history. For the merge
-  gates, see [Merge requirements][].
+`main`: governed by its [ruleset][main ruleset]; for its rules and the merge
+gates, see [Merge requirements][].
 
 `release`:
 
 - Follows `main`: divergence lasts only from a patch on `release` to the next
   release from `main`.
-- Every release tag is reachable from it.
+- Every official release tag is reachable from it.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
-- Receives content by fast-forward from `main` or by PR. Patches may be code
-  that isn't on `main`.
-- Checks (EasyCLA, workflow security analysis) run on PRs into `release` and
-  report there; acting on them is the merging maintainer's call.
+- Receives content by fast-forward from `main` or by PR.
+- Checks (including EasyCLA and workflow security analysis) run on PRs into
+  `release` and report there; acting on them is the merging maintainer's call.
 
 `deploy/prod`:
 
@@ -122,7 +116,8 @@ A patch that doesn't apply to `main` lands on `release` alone, by PR.
 ## Why this model?
 
 - Keeps theme releases predictable while `main` moves quickly.
-- `release` follows `main`: divergence is temporary, never the steady state.
+- Keeps `release` a follower of `main`, so a patch never opens a second line of
+  development.
 - `release` is protected against rewriting, not gated: any check required on it
   would also refuse the fast-forward from `main`, and content arriving that way
   was already gated on `main`.

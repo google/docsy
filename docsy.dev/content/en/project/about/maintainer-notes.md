@@ -98,16 +98,20 @@ A PR can merge when:
 ### Restoring the fast-forward path
 
 After a [patch on `release`][], `release` has commits that `main` doesn't, so
-the next release can't fast-forward `release` from `main`. To restore that, an
-admin records the ancestry on `main` with a merge commit that takes no content:
+the next release can't fast-forward `release` from `main`. To reopen the path, a
+maintainer records the ancestry on `main` with a merge commit that takes no
+content. Do this only after the patch's release-facing site updates are back on
+`main`; once `release` is an ancestor of `main`, a PR bringing them over
+compares empty.
 
-1. On a branch off `main`, run `git merge -s ours release`; open a PR.
+1. On a branch off `main`, run `git merge -s ours release`; open a PR and get it
+   approved with green checks like any other.
 2. In the merge box, choose **Create a merge commit** first (the default,
-   squash, would flatten the ancestry away), then **Bypass rules and merge**: a
-   plain merge is refused by the linear-history rule.
+   squash, would flatten the ancestry away), then **Bypass rules and merge**.
+   The bypass overrides only the merge method: the merge-commit method is
+   refused by the linear-history and allowed-merge-methods rules.
 
-The bypass is logged in the ruleset's insights. This is the one sanctioned use
-of a merge commit on `main`.
+The bypass is logged in the ruleset's insights.
 
 ## Hugo versions
 
