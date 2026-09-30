@@ -61,10 +61,9 @@ PR deploy previews build like the Next variant.
 1. Theme and site work is done on `main`.
 
 2. When ready to release:
-
-   - **Usual case**: release from `main`, see
-     [General release workflow](#general-release-workflow).
-   - **Patch release**: see [Patch release workflow](#patch-release-workflow).
+   - [Release from `main`](#release-from-main) (the usual case).
+   - [Patch on `release`](#patch-on-release) (when `main` carries unreleased
+     work).
 
 3. Publish site updates:
    - Fast-forward `deploy/prod` from `main` when possible.
@@ -75,19 +74,18 @@ PR deploy previews build like the Next variant.
 
 This keeps theme releases and site deploys coordinated, but not tightly coupled.
 
-#### General release workflow
+#### Release from `main`
 
 1. If `release` carries a patch that `main` doesn't (from a
-   [patch release](#patch-release-workflow)), a maintainer with admin rights
-   must first bring `release`'s history onto `main`; otherwise the next step is
+   [patch on `release`](#patch-on-release)), a maintainer with admin rights must
+   first bring `release`'s history onto `main`; otherwise the next step is
    rejected as non-fast-forward. Don't force it: the `release` ruleset blocks
    that anyway.
 2. Fast-forward `release` from `main`.
 
-#### Patch release workflow
+#### Patch on `release`
 
-When a fix must ship but `main` has unreleased changes, patch on `release`. Fix
-on `main` first whenever the fix applies there. Then:
+Fix on `main` first whenever the fix applies there. Then:
 
 1. Open a PR against `release` that cherry-picks the relevant commits from
    `main`, together with the release-preparation changes; merge it.
