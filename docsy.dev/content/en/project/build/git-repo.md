@@ -50,7 +50,7 @@ PR deploy previews build like the Next variant.
 ### Tags
 
 - Release tags (`v*` and `theme/v*`) mark **official theme releases**.
-- Release tags never move: the `release-tag-integrity`
+- They never move: the `release-tag-integrity`
   [ruleset][release-tag-integrity ruleset] blocks their update and deletion,
   with no bypass.
 - Only the designated releaser creates them, per the `release-tags`
@@ -76,11 +76,13 @@ PR deploy previews build like the Next variant.
 #### Release from `main`
 
 1. If `release` or `deploy/prod` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release), or a site-only change cherry-picked
-   onto `deploy/prod`), first [restore the fast-forward path][].
+   [patch on `release`](#patch-on-release), which also moves `deploy/prod`, or
+   after a site-only change cherry-picked onto `deploy/prod`), first [restore
+   the fast-forward path][].
 2. At release time, fast-forward `release` to the release commit
-   (`git checkout release && git merge --ff-only main`). Between releases,
-   `release` stays at the latest release: it is the base for patches.
+   (`git checkout release && git merge --ff-only main && git push upstream release`).
+   Between releases, `release` stays at the latest release: it is the base for
+   patches.
 
 #### Patch on `release`
 
@@ -113,7 +115,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 
 `deploy/prod`:
 
-- Reflects the current release's docs: follows `release` at release time.
+- Reflects the current release's docs: follows `release` at release time (after
+  a release from `main`, the same commit as `main`).
 - Can include site-only improvements from `main` that are compatible with the
   current release.
 

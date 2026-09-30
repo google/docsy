@@ -83,7 +83,7 @@ a substitute.
 The repository's [main ruleset][] enforces that:
 
 - Changes reach `main` only through pull requests, squash-merged; rebase merges
-  are disabled repo-wide (a PR keeps its own history).
+  are disabled repo-wide.
 - `main` is never force-pushed or deleted.
 
 The one sanctioned bypass is
@@ -99,15 +99,15 @@ A PR into `main` can merge when:
 
 ### Restoring the fast-forward path
 
-After a [patch on `release`][], `release` has commits that `main` doesn't; after
-a site-only change cherry-picked onto `deploy/prod`, so does `deploy/prod`.
-Either way the next release can't fast-forward that branch from `main`. To
-reopen the path, record the ancestry on `main` with a merge commit that takes no
-content. Do this only after the patch's release-facing site updates are back on
-`main`: once `release` is an ancestor of `main`, a PR bringing them over
-compares empty.
+After a [patch on `release`][], `release` has commits that `main` doesn't, and
+so does `deploy/prod` once updated for that patch; a site-only change
+cherry-picked onto `deploy/prod` diverges it the same way. Either way the next
+release can't fast-forward that branch from `main`. To reopen the path, record
+the ancestry on `main` with a merge commit that takes no content. Do this only
+after the patch's release-facing site updates are back on `main`: once `release`
+is an ancestor of `main`, a PR bringing them over compares empty.
 
-1. On a branch off `main`, after `git fetch upstream`, run
+1. After `git fetch upstream`, on a branch off `upstream/main`, run
    `git merge -s ours upstream/release` for a diverged `release`, and
    `git merge -s ours upstream/deploy/prod` for a diverged `deploy/prod`; open a
    PR and get it approved with green checks like any other. A commit EasyCLA
@@ -116,7 +116,7 @@ compares empty.
    squash, would flatten the ancestry away), then tick **Merge without waiting
    for requirements to be met**. Before clicking **Bypass rules and merge**,
    reopen the dropdown and confirm the merge-commit method is still the one
-   checked. Once approval and checks pass, the bypass serves only to preserve
+   checked. With approval and checks passed, the bypass serves only to preserve
    the merge commit, which the linear-history rule otherwise rejects.
 
 The bypass is logged in the ruleset's insights. The `main` ruleset's allowed
