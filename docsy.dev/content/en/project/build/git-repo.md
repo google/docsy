@@ -65,10 +65,9 @@ PR deploy previews build like the Next variant.
    - Patch release: see [Patch release workflow](#patch-release-workflow).
 
 3. Publish site updates:
-   - Update `deploy/prod` from `release`: a fast-forward, unless `deploy/prod`
-     carries site-only changes that `release` lacks.
-   - Between releases, bring site-only improvements compatible with the current
-     release onto `deploy/prod` from `main`.
+   - Fast-forward `deploy/prod` from `main` when possible.
+   - Otherwise (usually because `release` was patched), update it from
+     `release`.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
