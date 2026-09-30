@@ -102,9 +102,9 @@ the next release can't fast-forward `release` from `main`. To restore that, an
 admin records the ancestry on `main` with a merge commit that takes no content:
 
 1. On a branch off `main`, run `git merge -s ours release`; open a PR.
-2. Merge it with **Bypass rules and merge**, choosing **Create a merge commit**:
-   the default, squash, would flatten the ancestry away, and a plain merge is
-   refused by the linear-history rule.
+2. In the merge box, choose **Create a merge commit** first (the default,
+   squash, would flatten the ancestry away), then **Bypass rules and merge**: a
+   plain merge is refused by the linear-history rule.
 
 The bypass is logged in the ruleset's insights. This is the one sanctioned use
 of a merge commit on `main`.
