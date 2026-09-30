@@ -50,8 +50,10 @@ PR deploy previews build like the Next variant.
 ### Tags
 
 - Tags mark **official theme releases**.
-- Release tags never move: the `release-tags` [ruleset][release-tags ruleset]
-  blocks updates to `v*` tags and restricts their creation.
+- Release tags never move: the `release-tag-integrity`
+  [ruleset][release-tag-integrity ruleset] blocks updates and deletion of `v*`
+  and `theme/v*` tags, with no bypass; a second ruleset restricts their creation
+  to the releaser.
 
 ### Workflow
 
@@ -134,6 +136,6 @@ gates, see [Merge requirements][].
 [next-site]: https://main--docsydocs.netlify.app
 [prod-site]: https://www.docsy.dev
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
-[release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
+[release-tag-integrity ruleset]: <{{% param github_repo %}}/rules/24262989>
 [restore the fast-forward path]:
   /project/about/maintainer-notes/#restoring-the-fast-forward-path
