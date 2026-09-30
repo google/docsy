@@ -2924,11 +2924,6 @@
     "when": "2026-09-18T01:33:09Z",
     "via": "lychee",
   },
-  "https://github.com/docsy/docsy/rules/": {
-    "status": 200,
-    "when": "2026-09-30T09:49:33Z",
-    "via": "lychee",
-  },
   "https://github.com/docsy/docsy/rules/20660119": {
     "status": 200,
     "when": "2026-09-30T09:49:33Z",
