@@ -79,8 +79,14 @@ PR deploy previews build like the Next variant.
    [patch on `release`](#patch-on-release), which also moves `deploy/prod`, or
    after a site-only change cherry-picked onto `deploy/prod`), first [restore
    the fast-forward path][].
-2. At release time, fast-forward `release` to the release commit
-   (`git checkout release && git merge --ff-only main && git push upstream release`).
+2. At release time, fast-forward `release` to the release commit:
+
+   ```sh
+   git checkout release
+   git merge --ff-only main
+   git push upstream release
+   ```
+
    Between releases, `release` stays at the latest release: it is the base for
    patches.
 
