@@ -56,20 +56,15 @@ PR deploy previews build like the Next variant.
 
 ### Workflow
 
-#### General workflow
+#### Overview
 
 1. Theme and site work is done on `main`.
 
 2. When ready to release:
-   - Release from `main` (the usual case, minor or patch): fast-forward
-     `release` from `main`.
-   - Patch on `release` (when `main` carries unreleased work): see
-     [Patch release workflow](#patch-release-workflow).
 
-   > [!IMPORTANT] The fast-forward is rejected as non-fast-forward when
-   > `release` carries a patch that `main` doesn't. Don't force it (the
-   > `release` ruleset blocks that anyway): a maintainer with admin rights first
-   > restores the fast-forward path.
+   - **Usual case**: release from `main`, see
+     [General release workflow](#general-release-workflow).
+   - **Patch release**: see [Patch release workflow](#patch-release-workflow).
 
 3. Publish site updates:
    - Fast-forward `deploy/prod` from `main` when possible.
@@ -79,6 +74,15 @@ PR deploy previews build like the Next variant.
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
 This keeps theme releases and site deploys coordinated, but not tightly coupled.
+
+#### General release workflow
+
+1. If `release` carries a patch that `main` doesn't (from a
+   [patch release](#patch-release-workflow)), a maintainer with admin rights
+   must first bring `release`'s history onto `main`; otherwise the next step is
+   rejected as non-fast-forward. Don't force it: the `release` ruleset blocks
+   that anyway.
+2. Fast-forward `release` from `main`.
 
 #### Patch release workflow
 
