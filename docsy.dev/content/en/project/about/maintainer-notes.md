@@ -112,10 +112,11 @@ compares empty.
    PR and get it approved with green checks like any other. A commit EasyCLA
    rejected on `release` fails the check here too.
 2. In the merge box, choose **Create a merge commit** first (the default,
-   squash, would flatten the ancestry away), then **Bypass rules and merge**.
-   Once approval and checks pass, the bypass serves only to preserve the merge
-   commit, which the linear-history and allowed-merge-methods rules otherwise
-   reject.
+   squash, would flatten the ancestry away), then tick **Merge without waiting
+   for requirements to be met**. Before clicking **Bypass rules and merge**,
+   reopen the dropdown and confirm the merge-commit method is still the one
+   checked. Once approval and checks pass, the bypass serves only to preserve
+   the merge commit, which the linear-history rule otherwise rejects.
 
 The bypass is logged in the ruleset's insights.
 
