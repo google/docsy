@@ -25,8 +25,7 @@ repository][].
 This repository's branch model is as follows:
 
 - `main`: development branch for the next theme release and next site content.
-- `release`: release and maintenance branch for the current theme version;
-  follows `main`, re-aligned with it at each release cut from `main`.
+- `release`: release and maintenance branch for the current theme version.
 - `deploy/prod` and `doc-rooted`: publishing branches used by Netlify. These
   branches determine what is published (see the table below); they are not
   feature development branches.
@@ -67,6 +66,11 @@ PR deploy previews build like the Next variant.
    - Patch on `release` (when `main` carries unreleased work): see
      [Patch release workflow](#patch-release-workflow).
 
+   > [!IMPORTANT] The fast-forward is rejected as non-fast-forward when
+   > `release` carries a patch that `main` doesn't. Don't force it (the
+   > `release` ruleset blocks that anyway): a maintainer with admin rights first
+   > restores the fast-forward path.
+
 3. Publish site updates:
    - Fast-forward `deploy/prod` from `main` when possible.
    - Otherwise (usually because `release` was patched), update it from
@@ -84,10 +88,8 @@ on `main` first whenever the fix applies there. Then:
 1. Open a PR against `release` that cherry-picks the relevant commits from
    `main`, together with the release-preparation changes; merge it.
 2. Bring release-facing site updates (for example changelog and release blog
-   updates) back onto `main` from `release`.
+   updates) back onto `main` from `release`, by PR.
 3. Update `deploy/prod` from `release`.
-4. Before the next release from `main`, re-align `release` with `main` so that
-   the fast-forward is possible again (a maintainer with admin rights).
 
 A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
@@ -100,7 +102,8 @@ A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
 `release`:
 
-- Follows `main`: re-aligned with it at each release cut from `main`.
+- Follows `main`: divergence lasts only from a patch on `release` to the next
+  release from `main`.
 - Every release tag is reachable from it.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
@@ -111,15 +114,14 @@ A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
 `deploy/prod`:
 
-- Reflects the current release's docs: follows `release`.
+- Reflects the current release's docs: follows `release` at release time.
 - Can include site-only improvements from `main` that are compatible with the
   current release.
 
 ## Why this model?
 
 - Keeps theme releases predictable while `main` moves quickly.
-- `release` follows `main`: divergence lasts only from a patch on `release` to
-  the next release from `main`, so every release's history ends up on `main`.
+- `release` follows `main`: divergence is temporary, never the steady state.
 - `release` is protected against rewriting, not gated: any check required on it
   would also refuse the fast-forward from `main`, and content arriving that way
   was already gated on `main`.
