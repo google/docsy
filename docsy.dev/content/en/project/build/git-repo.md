@@ -49,9 +49,10 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-Tags mark **official theme releases**; every release tag is reachable from
-`release`. Tags never move: the `release-tags` [ruleset][release-tags ruleset]
-blocks updates and deletion.
+- Tags mark **official theme releases**; every release tag is reachable from
+  `release`.
+- Tags never move: the `release-tags` [ruleset][release-tags ruleset] blocks
+  updates and deletion.
 
 ### Workflow
 
@@ -64,10 +65,10 @@ blocks updates and deletion.
    - Patch release: see [Patch release workflow](#patch-release-workflow).
 
 3. Publish site updates:
-   - Fast-forward `deploy/prod` from `main` when possible.
-   - Otherwise (usually because `release` was patched), bring release-facing
-     site updates (for example changelog and release blog updates) onto `main`
-     from `release`, then update `deploy/prod` selectively.
+   - Update `deploy/prod` from `release`: a fast-forward, unless `deploy/prod`
+     carries site-only changes that `release` lacks.
+   - Between releases, bring site-only improvements compatible with the current
+     release onto `deploy/prod` from `main`.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
@@ -81,8 +82,7 @@ Fix on `main` first whenever the fix applies there. Then:
    `main`, together with the release-preparation changes; merge it.
 2. Bring release-facing site updates (for example changelog and release blog
    updates) back onto `main` from `release`.
-3. Update `deploy/prod` from `main` by fast-forward merging if possible, if not
-   then selectively bring in release relevant changes.
+3. Update `deploy/prod` from `release`.
 
 A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
@@ -111,9 +111,9 @@ Both branches:
 
 `deploy/prod`:
 
-- Reflects the current release docs baseline
-- Can include site-only improvements that are compatible with the current
-  release
+- Reflects the current release's docs: follows `release`.
+- Can include site-only improvements from `main` that are compatible with the
+  current release.
 
 ## Why this model?
 
