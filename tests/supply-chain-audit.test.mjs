@@ -344,13 +344,6 @@ const REVIEWED_OVERRIDES = {
     parent: 'hugo-extended',
     parentRange: '^0.5.17',
   },
-  // GHSA-7w5x-hrqm-74c2
-  'smol-toml': {
-    spec: '^1.7.1',
-    fixed: /^1\.(7\.[1-9]\d*|(?:[89]|[1-9]\d+)\.\d+)$/,
-    parent: 'markdownlint-cli2',
-    parentRange: '1.7.0',
-  },
 };
 
 test('locks and manifests: security overrides are applied and still needed', () => {
