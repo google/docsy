@@ -49,8 +49,9 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-- Tags are used for **official theme releases**.
-- Tags are created from `release`.
+Tags mark **official theme releases**; every release tag is reachable from
+`release`. Tags never move: the `release-tags` [ruleset][release-tags ruleset]
+blocks updates and deletion.
 
 ### Workflow
 
@@ -59,16 +60,14 @@ PR deploy previews build like the Next variant.
 1. Theme and site work is done on `main`.
 
 2. When ready to release:
-   - Stable release: fast-forward merge from `main` to `release`.
-   - Patch release: create and merge a release PR from `main` to `release`,
-     e.g., by cherry-picking relevant commits.
+   - Stable release: fast-forward `release` from `main`.
+   - Patch release: see [Patch release workflow](#patch-release-workflow).
 
 3. Publish site updates:
    - Fast-forward `deploy/prod` from `main` when possible.
-   - Otherwise (usually because of `release` was patched),
-
-   - Bring release-facing site updates (for example changelog and release blog
-     updates) onto `main` from `release`.
+   - Otherwise (usually because `release` was patched), bring release-facing
+     site updates (for example changelog and release blog updates) onto `main`
+     from `release`, then update `deploy/prod` selectively.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
@@ -76,27 +75,39 @@ This keeps theme releases and site deploys coordinated, but not tightly coupled.
 
 #### Patch release workflow
 
-For patches to the theme or website, generally prefer making the changes to
-`main` first, though you can apply them to `release` then merge back to `main`.
-Assuming the former, the patch-release workflow is as follows:
+Fix on `main` first whenever the fix applies there. Then:
 
-1. Cherry-pick relevant commits from `main` to `release`.
-2. Create a and merge a release PR from `main` to `release`.
-3. Bring release-facing site updates (for example changelog and release blog
+1. Open a PR against `release` that cherry-picks the relevant commits from
+   `main`, together with the release-preparation changes; merge it.
+2. Bring release-facing site updates (for example changelog and release blog
    updates) back onto `main` from `release`.
-4. Update `deploy/prod` from `main` by fast-forward merging if possible, if not
+3. Update `deploy/prod` from `main` by fast-forward merging if possible, if not
    then selectively bring in release relevant changes.
+
+A patch that doesn't apply to `main` lands on `release` alone, by PR.
 
 ### Branch sync and invariants
 
+Repository [rulesets][] enforce the following:
+
+`main`:
+
+- Changes land only through pull requests, with linear history: squash or rebase
+  merges, no merge commits.
+
 `release`:
 
-- The theme release and maintenance branch.
-- Theme tags come from this branch.
-- Flow is usually from `main` to `release` via fast-forward merge, when
-  possible, cherry-picking otherwise (on patch releases)
-- Periodically, after a patch release, record branch ancestry without taking
-  content by periodically running `git merge -s ours release` on `main`.
+- The theme release and maintenance branch, from which every release tag is
+  reachable.
+- Never rewritten: no force pushes, no deletion.
+- Receives content by fast-forward from `main` or by PR. Patches may be code
+  that isn't on `main`.
+
+Both branches:
+
+- PRs need the `EasyCLA` check (the Docsy organization's rule).
+- PRs must pass the workflow-security scan at the rulesets' thresholds (see
+  [Merge requirements][]).
 
 `deploy/prod`:
 
@@ -115,5 +126,8 @@ Assuming the former, the patch-release workflow is as follows:
 [Docsy example site repository]: <{{% param github_repo %}}-example>
 [dr-site]: https://doc-rooted--docsydocs.netlify.app
 [main Docsy repository]: <{{% param github_repo %}}>
+[Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
 [prod-site]: https://www.docsy.dev
+[release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
+[rulesets]: <{{% param github_repo %}}/rules/>
