@@ -73,16 +73,14 @@ PR deploy previews build like the Next variant.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
-This keeps theme releases and site deploys coordinated, but not tightly coupled.
-
 #### Release from `main`
 
 1. If `release` or `deploy/prod` has commits that `main` doesn't (after a
    [patch on `release`](#patch-on-release), or a site-only change cherry-picked
    onto `deploy/prod`), first [restore the fast-forward path][].
 2. At release time, fast-forward `release` to the release commit
-   (`git merge --ff-only main`). Between releases, `release` stays at the latest
-   release: it is the base for patches.
+   (`git checkout release && git merge --ff-only main`). Between releases,
+   `release` stays at the latest release: it is the base for patches.
 
 #### Patch on `release`
 
@@ -110,6 +108,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
   [patches on `release`](#patch-on-release).
 - Checks (including EasyCLA and workflow security analysis) run on PRs into
   `release` and report there; acting on them is the merging maintainer's call.
+  An EasyCLA miss on `release` resurfaces at the next
+  [restore][restore the fast-forward path], where EasyCLA is required.
 
 `deploy/prod`:
 
@@ -126,8 +126,6 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
   [PR-scoped gates][Merge requirements] there would refuse the fast-forward from
   `main`, whose content already passed them.
 - Lets the website ship docs UX improvements without forcing a theme release.
-- Preserves clear release tags for theme consumers.
-- Keeps branch responsibilities explicit for a small maintainer team.
 
 [Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>

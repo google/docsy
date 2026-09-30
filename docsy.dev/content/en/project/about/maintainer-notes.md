@@ -90,25 +90,27 @@ The one sanctioned bypass is
 
 A PR into `main` can merge when:
 
-- One member of [`docsy/maintainers`][] has approved it (two, for an
-  unattributed Copilot PR).
+- One member of [`docsy/maintainers`][] has approved it. An unattributed Copilot
+  PR needs two approvals.
 - Its zizmor results pass the [code-scanning gate](#workflow-security-analysis).
 - Its [EasyCLA check][] passes, as required by an [organization
   ruleset][EasyCLA ruleset].
 
 ### Restoring the fast-forward path
 
-After a [patch on `release`][], or a site-only change cherry-picked onto
-`deploy/prod`, that branch has commits that `main` doesn't, so the next release
-can't fast-forward it from `main`. To reopen the path, record the ancestry on
-`main` with a merge commit that takes no content. Do this only after the patch's
-release-facing site updates are back on `main`: once `release` is an ancestor of
-`main`, a PR bringing them over compares empty.
+After a [patch on `release`][], `release` has commits that `main` doesn't; after
+a site-only change cherry-picked onto `deploy/prod`, so does `deploy/prod`.
+Either way the next release can't fast-forward that branch from `main`. To
+reopen the path, record the ancestry on `main` with a merge commit that takes no
+content. Do this only after the patch's release-facing site updates are back on
+`main`: once `release` is an ancestor of `main`, a PR bringing them over
+compares empty.
 
 1. On a branch off `main`, after `git fetch upstream`, run
-   `git merge -s ours upstream/release` and, if `deploy/prod` diverged too,
-   `git merge -s ours upstream/deploy/prod`; open a PR and get it approved with
-   green checks like any other.
+   `git merge -s ours upstream/release` for a diverged `release`, and
+   `git merge -s ours upstream/deploy/prod` for a diverged `deploy/prod`; open a
+   PR and get it approved with green checks like any other. A commit EasyCLA
+   rejected on `release` fails the check here too.
 2. In the merge box, choose **Create a merge commit** first (the default,
    squash, would flatten the ancestry away), then **Bypass rules and merge**.
    Once approval and checks pass, the bypass serves only to preserve the merge
@@ -218,7 +220,7 @@ Two dependencies need more than the version line:
 
 An emergency security bump (an advisory landing between releases) is a manual
 edit to the same line, shipped as a [patch on `release`][], not with the next
-regular release; it explicitly bypasses Renovate's minimum release-age gate.
+regular release. Renovate's minimum release-age gate does not apply.
 
 <!-- prettier-ignore-start -->
 [npm-registry]: https://registry.npmjs.org
