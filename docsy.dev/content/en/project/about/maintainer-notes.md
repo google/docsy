@@ -89,6 +89,20 @@ when:
 - Its [EasyCLA check][] passes, as required by an [organization
   ruleset][EasyCLA ruleset].
 
+### Restoring the fast-forward path
+
+After a [patch on `release`][], `release` has commits that `main` doesn't, so
+the next release can't fast-forward `release` from `main`. To restore that, an
+admin records the ancestry on `main` with a merge commit that takes no content:
+
+1. On a branch off `main`, run `git merge -s ours release`; open a PR.
+2. Merge it with **Bypass rules and merge**, choosing **Create a merge commit**:
+   the default, squash, would flatten the ancestry away, and a plain merge is
+   refused by the linear-history rule.
+
+The bypass is logged in the ruleset's insights. This is the one sanctioned use
+of a merge commit on `main`.
+
 ## Hugo versions
 
 The repo tracks two distinct Hugo versions, as documented below. Their
@@ -1098,6 +1112,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [osv]: https://osv.dev/list?ecosystem=npm
 [otel-zizmor]: https://github.com/open-telemetry/shared-workflows/blob/main/zizmor/README.md
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[patch on `release`]: /project/build/git-repo/#patch-on-release
 [public]: /project/about/changelog/#public
 [publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>

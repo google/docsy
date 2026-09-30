@@ -77,10 +77,9 @@ This keeps theme releases and site deploys coordinated, but not tightly coupled.
 #### Release from `main`
 
 1. If `release` carries a patch that `main` doesn't (from a
-   [patch on `release`](#patch-on-release)), a maintainer with admin rights must
-   first bring `release`'s history onto `main`; otherwise the next step is
-   rejected as non-fast-forward. Don't force it: the `release` ruleset blocks
-   that anyway.
+   [patch on `release`](#patch-on-release)), an admin must first [restore the
+   fast-forward path][]; otherwise the next step is rejected as
+   non-fast-forward. Don't force it: the `release` ruleset blocks that anyway.
 2. Fast-forward `release` from `main`.
 
 #### Patch on `release`
@@ -141,3 +140,5 @@ A patch that doesn't apply to `main` lands on `release` alone, by PR.
 [prod-site]: https://www.docsy.dev
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
 [release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
+[restore the fast-forward path]:
+  /project/about/maintainer-notes/#restoring-the-fast-forward-path
