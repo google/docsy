@@ -82,7 +82,8 @@ a substitute.
 
 The repository's [main ruleset][] enforces that:
 
-- Changes reach `main` only through pull requests, squash-merged.
+- Changes reach `main` only through pull requests, squash-merged; rebase merges
+  are disabled repo-wide (a PR keeps its own history).
 - `main` is never force-pushed or deleted.
 
 The one sanctioned bypass is
@@ -118,7 +119,10 @@ compares empty.
    checked. Once approval and checks pass, the bypass serves only to preserve
    the merge commit, which the linear-history rule otherwise rejects.
 
-The bypass is logged in the ruleset's insights.
+The bypass is logged in the ruleset's insights. The `main` ruleset's allowed
+merge methods must keep `merge` alongside `squash`: GitHub hides methods the
+rule excludes from the merge box even under a bypass, which would make this step
+impossible.
 
 ## Hugo versions
 
