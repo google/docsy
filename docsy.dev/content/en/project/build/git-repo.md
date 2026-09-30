@@ -77,9 +77,9 @@ This keeps theme releases and site deploys coordinated, but not tightly coupled.
 
 #### Release from `main`
 
-1. If `release` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release)), first [restore the fast-forward
-   path][].
+1. If `release` or `deploy/prod` has commits that `main` doesn't (after a
+   [patch on `release`](#patch-on-release), or a site-only change cherry-picked
+   onto `deploy/prod`), first [restore the fast-forward path][].
 2. At release time, fast-forward `release` to the release commit
    (`git merge --ff-only main`). Between releases, `release` stays at the latest
    release: it is the base for patches.
@@ -106,7 +106,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 - Every official release tag is reachable from it once its release is final.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
-- Receives content by fast-forward from `main` at release time, or by PR.
+- Receives content through [releases from `main`](#release-from-main) or
+  [patches on `release`](#patch-on-release).
 - Checks (including EasyCLA and workflow security analysis) run on PRs into
   `release` and report there; acting on them is the merging maintainer's call.
 
@@ -122,8 +123,8 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 - Keeps `release` a follower of `main`, so a patch never opens a second line of
   development.
 - Protects `release` against rewriting without gating it: requiring `main`'s
-  PR-scoped gates (review, EasyCLA, code scanning) there would refuse the
-  fast-forward from `main`, whose content already passed them.
+  [PR-scoped gates][Merge requirements] there would refuse the fast-forward from
+  `main`, whose content already passed them.
 - Lets the website ship docs UX improvements without forcing a theme release.
 - Preserves clear release tags for theme consumers.
 - Keeps branch responsibilities explicit for a small maintainer team.
