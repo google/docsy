@@ -80,10 +80,10 @@ a substitute.
 
 ## Merge requirements
 
-The repository's [main ruleset][] requires pull requests with linear history
-(squash or rebase merges; the one exception is
-[below](#restoring-the-fast-forward-path)) and blocks force-pushes and deletion.
-A PR can merge when:
+The repository's [main ruleset][] enforces, with
+[one exception](#restoring-the-fast-forward-path), that changes reach `main`
+only through pull requests, squash-merged, and that `main` is never force-pushed
+or deleted. A PR can merge when:
 
 - One member of [`docsy/maintainers`][] has approved it.
 - Its zizmor results pass the [code-scanning gate](#workflow-security-analysis).
