@@ -35,6 +35,7 @@ concurrency:
 
 jobs:
   pack:
+    name: Pack
     if: github.repository == 'docsy/docsy'
     runs-on: ubuntu-latest
     permissions:
@@ -81,6 +82,7 @@ jobs:
           if-no-files-found: error
 
   publish:
+    name: Publish to npm
     needs: pack
     # Redundant with pack's guard through needs; keeps the token-holding job
     # self-guarding if the job wiring ever changes.
