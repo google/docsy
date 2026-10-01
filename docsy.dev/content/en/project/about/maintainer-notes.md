@@ -1,6 +1,6 @@
 ---
 title: Maintainer notes
-description: Release, dependency-update, and Hugo-support procedures
+description: Release, merge, dependency-update, and Hugo-support procedures
 aliases: [contributing, ../contributing]
 # prettier-ignore
 cSpell:ignore: creatordate lycheecache prebuild ETARGET
@@ -80,14 +80,50 @@ a substitute.
 
 ## Merge requirements
 
-The repository's [main ruleset][] requires pull requests with linear history
-(squash or rebase merges) and blocks force-pushes and deletion. A PR can merge
-when:
+The repository's [main ruleset][] enforces that:
 
-- One member of [`docsy/maintainers`][] has approved it.
+- Changes reach `main` only through pull requests, squash-merged.
+- `main` is never force-pushed or deleted.
+
+Rebase merges are disabled repo-wide. The one sanctioned bypass, open to the
+repository's Maintain role and logged in the ruleset's insights, is
+[restoring the fast-forward path](#restoring-the-fast-forward-path).
+
+A PR into `main` can merge when:
+
+- One member of [`docsy/maintainers`][] has approved it. A PR that Copilot opens
+  under its own identity rather than on behalf of a person needs two approvals.
 - Its zizmor results pass the [code-scanning gate](#workflow-security-analysis).
 - Its [EasyCLA check][] passes, as required by an [organization
   ruleset][EasyCLA ruleset].
+
+### Restoring the fast-forward path
+
+After a [patch on `release`][], `release` has commits that `main` doesn't, so
+the next release can't fast-forward it from `main`. To reopen the path, record
+the ancestry on `main` with a merge commit that takes no content.
+
+1. Record `release`'s ancestry on a branch off `upstream/main`:
+
+   ```sh
+   git fetch upstream
+   git switch --no-track -c restore-ff upstream/main
+   git merge -s ours upstream/release
+   ```
+
+   Open a PR and get it approved with green checks like any other.
+
+2. In the merge box, choose **Create a merge commit** first (squash would
+   flatten the ancestry away), then tick **Merge without waiting for
+   requirements to be met**. Before clicking **Bypass rules and merge**, reopen
+   the dropdown and confirm the merge-commit method is still the one checked.
+   With approval and checks passed, the bypass serves only to preserve the merge
+   commit, which the linear-history rule otherwise rejects.
+
+The `main` ruleset's allowed merge methods must keep `merge` alongside `squash`,
+and the repository setting that allows merge commits stays on: GitHub hides
+methods the rule excludes from the merge box even under a bypass, which would
+leave step 2 without a merge-commit option.
 
 ## Hugo versions
 
@@ -189,9 +225,9 @@ Two dependencies need more than the version line:
   URL change is part of that review.
 
 An emergency security bump (an advisory landing between releases) is a manual
-edit to the same line, made directly on a `release` branch and shipped through
-the existing patch-release flow (`vX.Y.Z` + `theme/vX.Y.Z` tags), not the next
-regular release; it explicitly bypasses Renovate's minimum release-age gate.
+edit to the same line, shipped as a [patch on `release`][], not with the next
+release from `main`. It skips Renovate's minimum release-age gate: vet the fix
+version by hand.
 
 <!-- prettier-ignore-start -->
 [npm-registry]: https://registry.npmjs.org
@@ -1098,6 +1134,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [osv]: https://osv.dev/list?ecosystem=npm
 [otel-zizmor]: https://github.com/open-telemetry/shared-workflows/blob/main/zizmor/README.md
 [package.json]: <{{% param github_repo %}}/blob/main/package.json>
+[patch on `release`]: /project/build/git-repo/#patch-on-release
 [public]: /project/about/changelog/#public
 [publish workflow]: <{{% param github_repo %}}/actions/workflows/publish.yaml>
 [Release notes]: <{{% param github_repo %}}/releases>

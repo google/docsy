@@ -1,7 +1,6 @@
 ---
 title: Git repo info and branch model
 linkTitle: Git repos and branches
-cSpell:ignore: hotfixes
 ---
 
 ## Monorepo
@@ -13,10 +12,6 @@ Docsy:
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
-These two projects are kept in sync at release points, but they may diverge
-between releases, usually to allow the website to ship doc content and UX
-improvements without forcing a theme release.
-
 The main Docsy example site is [Goldydocs][], located in the [Docsy example site
 repository][].
 
@@ -25,7 +20,7 @@ repository][].
 This repository's branch model is as follows:
 
 - `main`: development branch for the next theme release and next site content.
-- `release`: release and maintenance branch for the current stable theme version
+- `release`: release and maintenance branch for the latest theme release.
 - `deploy/prod` and `doc-rooted`: publishing branches used by Netlify. These
   branches determine what is published (see the table below); they are not
   feature development branches.
@@ -49,71 +44,100 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-- Tags are used for **official theme releases**.
-- Tags are created from `release`.
+- Release tags (`vX.Y.Z` and `theme/vX.Y.Z`) mark **official theme releases**.
+- They never move: the `release-tag-integrity`
+  [ruleset][release-tag-integrity ruleset] blocks their update and deletion,
+  with no bypass.
+- Only the designated releaser creates them, per the `release-tags`
+  [ruleset][release-tags ruleset].
 
 ### Workflow
 
-#### General workflow
+#### Overview
 
 1. Theme and site work is done on `main`.
 
 2. When ready to release:
-   - Stable release: fast-forward merge from `main` to `release`.
-   - Patch release: create and merge a release PR from `main` to `release`,
-     e.g., by cherry-picking relevant commits.
+   - [Release from `main`](#release-from-main) (the usual case).
+   - [Patch on `release`](#patch-on-release) (when `main` carries work that
+     isn't ready to release).
 
-3. Publish site updates:
-   - Fast-forward `deploy/prod` from `main` when possible.
-   - Otherwise (usually because of `release` was patched),
-
-   - Bring release-facing site updates (for example changelog and release blog
-     updates) onto `main` from `release`.
+3. Publish site updates: fast-forward `deploy/prod` from `release`.
 
 4. Netlify deploys from `deploy/prod` and `doc-rooted`.
 
-This keeps theme releases and site deploys coordinated, but not tightly coupled.
+#### Release from `main`
 
-#### Patch release workflow
+1. After `git fetch upstream`, if `release` has commits that `main` doesn't
+   (`git log upstream/main..upstream/release` lists them, after a
+   [patch on `release`](#patch-on-release)), [restore the fast-forward path][]
+   before the [release-preparation PR][publishing a release] merges.
+2. Once the release tag, _`RELEASE_TAG`_ (for example,
+   `{{% dev-version final %}}`), is pushed, fast-forward `release` to it:
 
-For patches to the theme or website, generally prefer making the changes to
-`main` first, though you can apply them to `release` then merge back to `main`.
-Assuming the former, the patch-release workflow is as follows:
+   ```sh
+   git fetch upstream --tags
+   git switch -C release upstream/release
+   git merge --ff-only RELEASE_TAG
+   git push upstream release
+   ```
 
-1. Cherry-pick relevant commits from `main` to `release`.
-2. Create a and merge a release PR from `main` to `release`.
-3. Bring release-facing site updates (for example changelog and release blog
-   updates) back onto `main` from `release`.
-4. Update `deploy/prod` from `main` by fast-forward merging if possible, if not
-   then selectively bring in release relevant changes.
+#### Patch on `release`
+
+Fix on `main` first whenever the fix applies there; a fix that doesn't apply
+there lands only on `release`. Then:
+
+1. Open a PR against `release` with the fix (cherry-picked from `main` when it
+   landed there) and the [release-preparation changes][publishing a release],
+   and merge it.
+2. Port the release-facing site updates (changelog, release blog post,
+   `tdVersion.latest`) onto a branch off `main` and merge them by PR. A PR from
+   `release` itself would carry the patch's version stamps.
 
 ### Branch sync and invariants
 
+`main`: for its rules and the merge gates, see [Merge requirements][].
+
 `release`:
 
-- The theme release and maintenance branch.
-- Theme tags come from this branch.
-- Flow is usually from `main` to `release` via fast-forward merge, when
-  possible, cherry-picking otherwise (on patch releases)
-- Periodically, after a patch release, record branch ancestry without taking
-  content by periodically running `git merge -s ours release` on `main`.
+- Follows `main`: divergence lasts only from a patch on `release` to the next
+  release from `main`.
+- Every official release tag is reachable from it.
+- Stays at the latest release between releases: it is the base for patches.
+- Never rewritten: no force pushes, no deletion (enforced by its
+  [ruleset][release ruleset]).
+- Receives content only through [releases from `main`](#release-from-main) or
+  [patches on `release`](#patch-on-release).
+- Checks (including EasyCLA and workflow security analysis) run on PRs into
+  `release`; acting on them is the merging maintainer's call. Merge with EasyCLA
+  green, though: a miss on `release` can't be undone and blocks the next
+  [restore][restore the fast-forward path] until the author signs.
 
-`deploy/prod`:
-
-- Reflects the current release docs baseline
-- Can include site-only improvements that are compatible with the current
-  release
+`deploy/prod`: follows `release` as a pointer, never with commits of its own;
+the published docs change only when `release` moves.
 
 ## Why this model?
 
-- Keeps stable theme releases predictable while `main` moves quickly.
-- Lets the website ship docs UX improvements without forcing a theme release.
-- Preserves clear release tags for theme consumers.
-- Keeps branch responsibilities explicit for a small maintainer team.
+- Keeps theme releases predictable while `main` moves quickly.
+- Keeps `release` a follower of `main`, so a patch never opens a second line of
+  development.
+- Protects `release` against rewriting without gating it: requiring `main`'s
+  [PR-scoped gates][Merge requirements] there would refuse the fast-forward from
+  `main`, whose content already passed them.
+- Keeps `deploy/prod` a pointer, so publishing is a deliberate last step,
+  separate from cutting the release.
 
-[Goldydocs]: <{{% param example_site_url %}}>
+<!-- prettier-ignore-start -->
 [Docsy example site repository]: <{{% param github_repo %}}-example>
 [dr-site]: https://doc-rooted--docsydocs.netlify.app
+[Goldydocs]: <{{% param example_site_url %}}>
 [main Docsy repository]: <{{% param github_repo %}}>
+[Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
 [prod-site]: https://www.docsy.dev
+[publishing a release]: /project/about/maintainer-notes/#publishing-a-release
+[release ruleset]: <{{% param github_repo %}}/rules/24234982>
+[release-tag-integrity ruleset]: <{{% param github_repo %}}/rules/24262989>
+[release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
+[restore the fast-forward path]: /project/about/maintainer-notes/#restoring-the-fast-forward-path
+<!-- prettier-ignore-end -->
