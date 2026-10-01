@@ -12,9 +12,6 @@ Docsy:
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
-These two projects are kept in sync at release points, but they may diverge
-between releases.
-
 The main Docsy example site is [Goldydocs][], located in the [Docsy example site
 repository][].
 
@@ -72,32 +69,30 @@ PR deploy previews build like the Next variant.
 #### Release from `main`
 
 1. If `release` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release)), [restore the fast-forward path][]
-   before the release-preparation PR merges.
-2. Once the release is final, fast-forward `release` to its tag, _`RELEASE_TAG`_
-   (for example, `v0.18.0`):
+   [patch on `release`](#patch-on-release);
+   `git log upstream/main..upstream/release` lists them), [restore the
+   fast-forward path][] before the [release-preparation
+   PR][publishing a release] merges.
+2. Once the release tag, _`RELEASE_TAG`_ (for example,
+   `v{{% dev-version final %}}`), is pushed, fast-forward `release` to it:
 
    ```sh
    git fetch upstream --tags
-   git checkout release
+   git switch -C release upstream/release
    git merge --ff-only RELEASE_TAG
    git push upstream release
    ```
 
-   Between releases, `release` stays at the latest release: it is the base for
-   patches.
-
 #### Patch on `release`
 
-Fix on `main` first whenever the fix applies there. Then:
+Fix on `main` first whenever the fix applies there; a fix that doesn't lands
+only on `release`. Then:
 
-1. Open a PR against `release` that cherry-picks the relevant commits from
-   `main`, together with the [release-preparation
-   changes][publishing a release], and merge it.
-2. Bring release-facing site updates (for example changelog and release blog
-   updates) back onto `main` from `release`.
-
-A patch that doesn't apply to `main` lands only on `release`, by PR.
+1. Open a PR against `release` with the fix (cherry-picked from `main` when it
+   landed there) and the [release-preparation changes][publishing a release],
+   and merge it.
+2. Cherry-pick release-facing site updates (for example changelog and release
+   blog updates) from `release` onto `main`.
 
 ### Branch sync and invariants
 
@@ -107,20 +102,19 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 
 - Follows `main`: divergence lasts only from a patch on `release` to the next
   release from `main`.
-- Every official release tag is reachable from it once its release is final.
+- Every official release tag is reachable from it.
+- Stays at the latest release between releases: it is the base for patches.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
 - Receives content only through [releases from `main`](#release-from-main) or
   [patches on `release`](#patch-on-release).
 - Checks (including EasyCLA and workflow security analysis) run on PRs into
-  `release`; acting on them is the merging maintainer's call. An EasyCLA miss on
-  `release` resurfaces at the next [restore][restore the fast-forward path],
-  which EasyCLA then blocks until the author signs.
+  `release`; acting on them is the merging maintainer's call. Merge with EasyCLA
+  green, though: a miss on `release` can't be undone and blocks the next
+  [restore][restore the fast-forward path] until the author signs.
 
-`deploy/prod`:
-
-- Follows `release` as a pointer, never with commits of its own: the published
-  docs change only when `release` moves.
+`deploy/prod`: follows `release` as a pointer, never with commits of its own;
+the published docs change only when `release` moves.
 
 ## Why this model?
 
@@ -134,9 +128,9 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
   separate from cutting the release.
 
 <!-- prettier-ignore-start -->
-[Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>
 [dr-site]: https://doc-rooted--docsydocs.netlify.app
+[Goldydocs]: <{{% param example_site_url %}}>
 [main Docsy repository]: <{{% param github_repo %}}>
 [Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
