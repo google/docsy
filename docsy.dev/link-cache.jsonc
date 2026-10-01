@@ -874,6 +874,11 @@
     "when": "2026-09-18T01:33:10Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/.github/workflows/zizmor.yaml": {
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/CONTRIBUTING.md": {
     "status": 200,
     "when": "2026-09-17T23:13:26Z",
@@ -882,6 +887,11 @@
   "https://github.com/docsy/docsy/blob/main/LICENSE": {
     "status": 200,
     "when": "2026-09-17T23:13:26Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf": {
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/docsy.dev/agent-docs.config.yml": {
@@ -954,6 +964,11 @@
     "when": "2026-09-17T23:13:25Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/tests/fixture-site/mermaid-plugin.test.mjs": {
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
     "status": 200,
     "when": "2026-09-17T23:13:25Z",
@@ -987,6 +1002,11 @@
   "https://github.com/docsy/docsy/blob/main/tests/visual/js-runtime.test.mjs": {
     "status": 200,
     "when": "2026-09-17T23:13:26Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/blob/main/tests/visual/mermaid-runtime.test.mjs": {
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/tests/visual/plugins-runtime.test.mjs": {
