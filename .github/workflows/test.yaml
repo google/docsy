@@ -8,8 +8,6 @@ on:
   workflow_dispatch:
 permissions: { contents: read }
 
-# A new push to a PR cancels its superseded run. Other runs (main pushes,
-# dispatches) each get a group of their own, so none is cancelled or queued.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true
@@ -36,7 +34,6 @@ jobs:
       - name: 'Sanity check: install left the working tree pristine'
         run: npm run -s is:clean
 
-      # Put lychee on PATH for the link checker (test:full runs on Linux only).
       # Twin of link-cache-refresh.yaml's checksum-verified install: keep the
       # pinned versions in step.
       - if: runner.os != 'Windows'
@@ -53,7 +50,6 @@ jobs:
       - if: runner.os != 'Windows'
         run: npm run test:full
 
-      # Offline lychee canaries; Linux-only, like test:full (no lychee on Windows).
       - if: runner.os != 'Windows'
         name: Lychee sanity tests (offline)
         env: { LYCHEE_SANITY_NO_NET: 1 }
