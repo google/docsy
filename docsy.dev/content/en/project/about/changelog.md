@@ -204,7 +204,7 @@ history since 0.17.0][].
 - Added zizmor workflow security analysis (pedantic persona, results in the
   Security tab) through the OpenTelemetry shared workflow, and brought the
   workflows to zero findings: hardened the refresh, smoke and publish workflows,
-  named every job, and superseded PR runs now cancel ([#2811][], [#2838][]).
+  named the jobs, and set superseded PR runs to cancel ([#2811][], [#2838][]).
 - Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).

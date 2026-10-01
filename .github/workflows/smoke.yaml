@@ -9,6 +9,8 @@ on:
   workflow_dispatch:
 permissions: { contents: read }
 
+# run_id, not github.ref: main pushes and dispatches never share a group, so
+# none is cancelled.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true

@@ -10,6 +10,9 @@ on:
     # Go-module tags don't match.
     tags: ['v[0-9]+.[0-9]+.[0-9]+']
 
+# Per-job grants split the privilege: pack, which runs the theme's lifecycle
+# scripts, never gets the OIDC grant; publish gets it and publishes the packed
+# tarball, which runs no lifecycle scripts. Neither job installs dependencies.
 permissions: {}
 
 # One publish at a time: without this, concurrent tag pushes could be
@@ -78,7 +81,8 @@ jobs:
     timeout-minutes: 15
     # Approval boundary: publishes wait on this environment's required
     # reviewers. The npmjs trusted-publisher registration binds to it, this
-    # repo and this workflow's filename: renaming any of them breaks publishing.
+    # repo and this workflow's filename: renaming any of them breaks publishing
+    # until the package's npmjs trusted-publisher settings are updated.
     environment: npm-publish
     permissions:
       contents: read # For the checkout: .nvmrc and the guards script.
@@ -110,8 +114,6 @@ jobs:
 
       - name: Publish @docsy/theme
         working-directory: ${{ runner.temp }}/npm-tarball
-        # Publishing pack's tarball, unlike a directory, runs no lifecycle
-        # scripts under the OIDC grant.
         # Deliberate CLI flags: they outrank manifest publishConfig (pinned by
         # the guards) and same-key config-file entries; provenance is implicit
         # under trusted publishing, but requiring it fails loudly if it can't
