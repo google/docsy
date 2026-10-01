@@ -84,14 +84,15 @@ PR deploy previews build like the Next variant.
 
 #### Patch on `release`
 
-Fix on `main` first whenever the fix applies there; a fix that doesn't lands
-only on `release`. Then:
+Fix on `main` first whenever the fix applies there; a fix that doesn't apply
+there lands only on `release`. Then:
 
 1. Open a PR against `release` with the fix (cherry-picked from `main` when it
    landed there) and the [release-preparation changes][publishing a release],
    and merge it.
-2. Port release-facing site updates (changelog, release blog post, the
-   latest-version param) from `release` onto `main` by PR.
+2. Port the release-facing site updates (changelog, release blog post,
+   `tdVersion.latest`) onto a branch off `main` and merge them by PR. A PR from
+   `release` itself would carry the patch's version stamps.
 
 ### Branch sync and invariants
 

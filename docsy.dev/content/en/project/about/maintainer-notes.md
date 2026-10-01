@@ -101,9 +101,7 @@ A PR into `main` can merge when:
 
 After a [patch on `release`][], `release` has commits that `main` doesn't, so
 the next release can't fast-forward it from `main`. To reopen the path, record
-the ancestry on `main` with a merge commit that takes no content. Do this only
-after the patch's release-facing site updates are back on `main`: once `release`
-is an ancestor of `main`, a PR from `release` compares empty.
+the ancestry on `main` with a merge commit that takes no content.
 
 1. Record `release`'s ancestry on a branch off `upstream/main`:
 
