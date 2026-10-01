@@ -68,13 +68,12 @@ PR deploy previews build like the Next variant.
 
 #### Release from `main`
 
-1. If `release` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release);
-   `git log upstream/main..upstream/release` lists them), [restore the
-   fast-forward path][] before the [release-preparation
-   PR][publishing a release] merges.
+1. After `git fetch upstream`, if `release` has commits that `main` doesn't
+   (`git log upstream/main..upstream/release` lists them, after a
+   [patch on `release`](#patch-on-release)), [restore the fast-forward path][]
+   before the [release-preparation PR][publishing a release] merges.
 2. Once the release tag, _`RELEASE_TAG`_ (for example,
-   `v{{% dev-version final %}}`), is pushed, fast-forward `release` to it:
+   `{{% dev-version final %}}`), is pushed, fast-forward `release` to it:
 
    ```sh
    git fetch upstream --tags
@@ -91,8 +90,8 @@ only on `release`. Then:
 1. Open a PR against `release` with the fix (cherry-picked from `main` when it
    landed there) and the [release-preparation changes][publishing a release],
    and merge it.
-2. Cherry-pick release-facing site updates (for example changelog and release
-   blog updates) from `release` onto `main`.
+2. Port release-facing site updates (changelog, release blog post, the
+   latest-version param) from `release` onto `main` by PR.
 
 ### Branch sync and invariants
 

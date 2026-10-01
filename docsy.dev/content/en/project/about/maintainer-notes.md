@@ -1,6 +1,6 @@
 ---
 title: Maintainer notes
-description: Release, dependency-update, and Hugo-support procedures
+description: Release, merge, dependency-update, and Hugo-support procedures
 aliases: [contributing, ../contributing]
 # prettier-ignore
 cSpell:ignore: creatordate lycheecache prebuild ETARGET
