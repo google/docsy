@@ -1,7 +1,6 @@
 ---
 title: Git repo info and branch model
 linkTitle: Git repos and branches
-cSpell:ignore: hotfixes
 ---
 
 ## Monorepo
@@ -14,8 +13,7 @@ Docsy:
   course, with extra styling.
 
 These two projects are kept in sync at release points, but they may diverge
-between releases, usually to allow the website to ship doc content and UX
-improvements without forcing a theme release.
+between releases.
 
 The main Docsy example site is [Goldydocs][], located in the [Docsy example site
 repository][].
@@ -49,7 +47,7 @@ PR deploy previews build like the Next variant.
 
 ### Tags
 
-- Release tags (`v*` and `theme/v*`) mark **official theme releases**.
+- Release tags (`vX.Y.Z` and `theme/vX.Y.Z`) mark **official theme releases**.
 - They never move: the `release-tag-integrity`
   [ruleset][release-tag-integrity ruleset] blocks their update and deletion,
   with no bypass.
@@ -74,26 +72,28 @@ PR deploy previews build like the Next variant.
 #### Release from `main`
 
 1. If `release` has commits that `main` doesn't (after a
-   [patch on `release`](#patch-on-release)), first [restore the fast-forward
-   path][].
-2. At release time, fast-forward `release` to the release commit:
+   [patch on `release`](#patch-on-release)), [restore the fast-forward path][]
+   before the release-preparation PR merges.
+2. Once the release is final, fast-forward `release` to its tag, _`RELEASE_TAG`_
+   (for example, `v0.18.0`):
 
    ```sh
+   git fetch upstream --tags
    git checkout release
-   git merge --ff-only main
+   git merge --ff-only RELEASE_TAG
    git push upstream release
    ```
 
    Between releases, `release` stays at the latest release: it is the base for
-   patches. A docs-only fix to the released content may follow, fast-forwarded
-   from `main` before the version params move on.
+   patches.
 
 #### Patch on `release`
 
 Fix on `main` first whenever the fix applies there. Then:
 
 1. Open a PR against `release` that cherry-picks the relevant commits from
-   `main`, together with the release-preparation changes, and merge it.
+   `main`, together with the [release-preparation
+   changes][publishing a release], and merge it.
 2. Bring release-facing site updates (for example changelog and release blog
    updates) back onto `main` from `release`.
 
@@ -110,17 +110,17 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 - Every official release tag is reachable from it once its release is final.
 - Never rewritten: no force pushes, no deletion (enforced by its
   [ruleset][release ruleset]).
-- Receives content through [releases from `main`](#release-from-main) or
+- Receives content only through [releases from `main`](#release-from-main) or
   [patches on `release`](#patch-on-release).
 - Checks (including EasyCLA and workflow security analysis) run on PRs into
-  `release` and report there; acting on them is the merging maintainer's call.
-  An EasyCLA miss on `release` resurfaces at the next
-  [restore][restore the fast-forward path], where EasyCLA is required.
+  `release`; acting on them is the merging maintainer's call. An EasyCLA miss on
+  `release` resurfaces at the next [restore][restore the fast-forward path],
+  which EasyCLA then blocks until the author signs.
 
 `deploy/prod`:
 
-- Follows `release`: a pointer at the published release commit, never with
-  commits of its own.
+- Follows `release` as a pointer, never with commits of its own: the published
+  docs change only when `release` moves.
 
 ## Why this model?
 
@@ -133,6 +133,7 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 - Keeps `deploy/prod` a pointer, so publishing is a deliberate last step,
   separate from cutting the release.
 
+<!-- prettier-ignore-start -->
 [Goldydocs]: <{{% param example_site_url %}}>
 [Docsy example site repository]: <{{% param github_repo %}}-example>
 [dr-site]: https://doc-rooted--docsydocs.netlify.app
@@ -140,8 +141,9 @@ A patch that doesn't apply to `main` lands only on `release`, by PR.
 [Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
 [prod-site]: https://www.docsy.dev
+[publishing a release]: /project/about/maintainer-notes/#publishing-a-release
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
 [release-tag-integrity ruleset]: <{{% param github_repo %}}/rules/24262989>
 [release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
-[restore the fast-forward path]:
-  /project/about/maintainer-notes/#restoring-the-fast-forward-path
+[restore the fast-forward path]: /project/about/maintainer-notes/#restoring-the-fast-forward-path
+<!-- prettier-ignore-end -->

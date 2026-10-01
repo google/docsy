@@ -82,11 +82,10 @@ a substitute.
 
 The repository's [main ruleset][] enforces that:
 
-- Changes reach `main` only through pull requests, squash-merged; rebase merges
-  are disabled repo-wide.
+- Changes reach `main` only through pull requests, squash-merged.
 - `main` is never force-pushed or deleted.
 
-The one sanctioned bypass is
+Rebase merges are disabled repo-wide. The one sanctioned bypass is
 [restoring the fast-forward path](#restoring-the-fast-forward-path).
 
 A PR into `main` can merge when:
@@ -99,18 +98,22 @@ A PR into `main` can merge when:
 
 ### Restoring the fast-forward path
 
-After a [patch on `release`][], `release` has commits that `main` doesn't, and
-so does `deploy/prod` once updated for that patch, so the next release can't
-fast-forward either branch from `main`. To reopen the path, record the ancestry
-on `main` with a merge commit that takes no content. Do this only after the
-patch's release-facing site updates are back on `main`: once `release` is an
-ancestor of `main`, a PR bringing them over compares empty.
+After a [patch on `release`][], `release` has commits that `main` doesn't, so
+the next release can't fast-forward it from `main`. To reopen the path, record
+the ancestry on `main` with a merge commit that takes no content. Do this only
+after the patch's release-facing site updates are back on `main`: once `release`
+is an ancestor of `main`, a PR bringing them over compares empty.
 
-1. After `git fetch upstream`, on a branch off `upstream/main`, run
-   `git merge -s ours upstream/release` for a diverged `release`, and
-   `git merge -s ours upstream/deploy/prod` for a diverged `deploy/prod`; open a
-   PR and get it approved with green checks like any other. A commit EasyCLA
-   rejected on `release` fails the check here too.
+1. Record `release`'s ancestry on a branch off `upstream/main`:
+
+   ```sh
+   git fetch upstream
+   git switch -c restore-ff upstream/main
+   git merge -s ours upstream/release
+   ```
+
+   Open a PR and get it approved with green checks like any other.
+
 2. In the merge box, choose **Create a merge commit** first (the default,
    squash, would flatten the ancestry away), then tick **Merge without waiting
    for requirements to be met**. Before clicking **Bypass rules and merge**,
@@ -119,9 +122,10 @@ ancestor of `main`, a PR bringing them over compares empty.
    the merge commit, which the linear-history rule otherwise rejects.
 
 The bypass is logged in the ruleset's insights. The `main` ruleset's allowed
-merge methods must keep `merge` alongside `squash`: GitHub hides methods the
-rule excludes from the merge box even under a bypass, which would make this step
-impossible.
+merge methods must keep `merge` alongside `squash`, and the repository setting
+that allows merge commits stays on: GitHub hides methods the rule excludes from
+the merge box even under a bypass, which would leave step 2 without a
+merge-commit option.
 
 ## Hugo versions
 
@@ -224,7 +228,7 @@ Two dependencies need more than the version line:
 
 An emergency security bump (an advisory landing between releases) is a manual
 edit to the same line, shipped as a [patch on `release`][], not with the next
-regular release. Renovate's minimum release-age gate does not apply.
+release from `main`. Renovate's minimum release-age gate does not apply.
 
 <!-- prettier-ignore-start -->
 [npm-registry]: https://registry.npmjs.org
