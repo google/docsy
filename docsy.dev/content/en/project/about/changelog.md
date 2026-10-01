@@ -203,7 +203,9 @@ history since 0.17.0][].
   ([#2786][]).
 - Added zizmor workflow security analysis (pedantic persona, results in the
   Security tab) through the OpenTelemetry shared workflow, and hardened the
-  refresh, smoke and publish workflows on its first pass ([#2811][]).
+  refresh, smoke and publish workflows on its first pass ([#2811][]); then
+  cleared its hygiene alerts: named jobs, and superseded PR runs now cancel
+  ([#2838][]).
 - Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
@@ -221,6 +223,7 @@ history since 0.17.0][].
 [#2823]: https://github.com/docsy/docsy/pull/2823
 [#2825]: https://github.com/docsy/docsy/issues/2825
 [#2827]: https://github.com/docsy/docsy/pull/2827
+[#2838]: https://github.com/docsy/docsy/pull/2838
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
