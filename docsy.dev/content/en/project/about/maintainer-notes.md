@@ -430,8 +430,8 @@ already-pinned actions. Results upload to the repository's Security tab as
 code-scanning alerts.
 
 - The job passes whatever it finds; findings are alerts to triage. Blocking
-  comes from the `main` ruleset's code-scanning rule: a security alert of high
-  or higher severity, or an error-level alert, on the PR's changed lines.
+  comes from the `main` ruleset's code-scanning rule: any zizmor alert on the
+  PR's changed lines, whatever its severity.
 - The workflow calls the [OpenTelemetry shared workflow][otel-zizmor] at a
   pinned commit; that workflow pins the zizmor action, which pins the zizmor
   image by digest, so the scanner moves only when the pin here does. Review the
