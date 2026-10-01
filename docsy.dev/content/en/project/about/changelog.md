@@ -202,10 +202,10 @@ history since 0.17.0][].
   local npm hardening never relaxed except by an explicit per-run override
   ([#2786][]).
 - Added zizmor workflow security analysis (pedantic persona, results in the
-  Security tab) through the OpenTelemetry shared workflow, and hardened the
-  refresh, smoke and publish workflows on its first pass ([#2811][]); then
-  cleared its hygiene alerts: named jobs, and superseded PR runs now cancel
-  ([#2838][]).
+  Security tab) through the OpenTelemetry shared workflow, and brought the
+  workflows to zero findings: hardened the refresh, smoke and publish
+  workflows, named every job, and superseded PR runs now cancel ([#2811][],
+  [#2838][]).
 - Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
