@@ -32,8 +32,8 @@ outputs:
   page: [HTML, markdown]
   section: [HTML, RSS, markdown]
 languages:
-  en: { weight: 1 }
-  fr: { weight: 2 }
+  en: { weight: 1, label: English }
+  fr: { weight: 2, label: Français }
 `;
 
 function build(name, files, extraConfig) {
@@ -73,6 +73,16 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
     fr.includes('- [Home page](https://example.org/fr/index.md)'),
     'fr index links the fr root Markdown alternate as the home page',
   );
+  for (const [index, content] of [
+    ['en', en],
+    ['fr', fr],
+  ]) {
+    assert.ok(
+      content.includes('- [English](https://example.org/index.md)') &&
+        content.includes('- [Français](https://example.org/fr/index.md)'),
+      `${index} index lists both locales by their root Markdown alternate`,
+    );
+  }
 });
 
 test('doc-rooted pages carry the directive, pointing at their language index', () => {
@@ -128,7 +138,7 @@ test('doc-rooted site without llms.txt publishes no index, directive, or link', 
     docRootedFiles('[HTML, RSS, markdown]'),
     docRootedConfig('[HTML, markdown]'),
   );
-  assert.throws(() => b.publicFile('llms.txt'), 'no llms.txt is published');
+  assert.throws(() => b.publicFile('llms.txt'), 'llms.txt stays unpublished');
   const html = b.publicFile('install/index.html');
   assert.ok(html.includes('td-navbar'), 'page renders');
   assert.ok(!html.includes('For AI agents'), 'page omits the directive');

@@ -179,8 +179,10 @@ history since 0.17.0][].
 **Other changes**:
 
 - Fixed `llms.txt` for [doc-rooted sites][ug-doc-rooted]: the index, the agent
-  directive, and the Markdown alternates' index link now follow the page that
-  publishes each language's site root ([#2834][]).
+  directive, and the Markdown alternates' `LLMS index` link now follow the page
+  that publishes each language's site root. On every site, that link now targets
+  the current language's index and is omitted when the site publishes none
+  ([#2834][]).
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
@@ -231,8 +233,8 @@ history since 0.17.0][].
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
-[ug-plugins]: /docs/content/plugins/
 [ug-doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
+[ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [git history since 0.17.0]:
   https://github.com/docsy/docsy/compare/v0.17.0...main
