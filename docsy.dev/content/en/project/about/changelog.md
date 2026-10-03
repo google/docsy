@@ -182,9 +182,8 @@ history since 0.17.0][].
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
-  so page-gated scripts can't be emitted for the wrong page; sites overriding
-  that template should mirror the change. See the [0.18.0 release
-  report][0.18.0-blog-overrides] ([#2787][]).
+  so page-gated scripts can't be emitted for the wrong page. See the [0.18.0
+  release report][0.18.0-blog-overrides] ([#2787][]).
 
 [**Experimental**](#experimental):
 
@@ -201,7 +200,7 @@ history since 0.17.0][].
   [#2776][], [#2821][]).
 - Switched the docsy.dev committed link cache to an owned JSONC format, and
   added a weekly workflow that re-verifies its oldest entries ([#2779][],
-  [#2780][]).
+  [#2780][], [#2783][]).
 - Re-homed the script-loading design, implementation and quality notes from
   theme comments into the [project docs][project-script-loading], with a
   maintainer-notes rule for routing such content ([#2790][]).
@@ -229,6 +228,7 @@ history since 0.17.0][].
 [#2779]: https://github.com/docsy/docsy/pull/2779
 [#2780]: https://github.com/docsy/docsy/pull/2780
 [#2781]: https://github.com/docsy/docsy/pull/2781
+[#2783]: https://github.com/docsy/docsy/pull/2783
 [#2786]: https://github.com/docsy/docsy/pull/2786
 [#2787]: https://github.com/docsy/docsy/pull/2787
 [#2789]: https://github.com/docsy/docsy/issues/2789
