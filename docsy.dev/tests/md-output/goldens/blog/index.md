@@ -6,7 +6,7 @@ LLMS index: [llms.txt](/llms.txt)
 
 Section pages:
 
-- [Release 0.18.0 report and upgrade guide](/blog/2026/0.18.0/): Docsy moves to its own GitHub organization and drops jQuery. New plugins let you configure Docsy's optional scripts from site settings, with Mermaid, MarkMap, tab persistence and click-to-copy already on the registry.
+- [Release 0.18.0 report and upgrade guide](/blog/2026/0.18.0/): Docsy moves to its own GitHub organization and drops jQuery. A new plugin registry carries Mermaid, MarkMap, tab persistence and click-to-copy, with early Mermaid 12 support.
 - [Release 0.17.0 report and upgrade guide](/blog/2026/0.17.0/): Docsy modernizes and strengthens its foundations: Dart Sass, Font Awesome 7, and pinned script defaults. Breadcrumbs get semantic classes, bundled locales reach full UI-string coverage, and llms.txt sites gain agent discovery.
 - [Release 0.16.0 report and upgrade guide](/blog/2026/0.16.0/): Docsy is now on npm as @docsy/theme. This release also moves the theme into theme/, raises the Hugo minimum, and drops its default favicons in favor of discovery, each with upgrade actions.
 - [Hugo 0.158.0-0.164.x upgrade guide](/blog/2026/hugo-0.158.0+/): What changed in Hugo 0.158.0 through 0.164.x for Docsy sites: breaking changes, deprecations, security fixes, and known regressions, with per-version upgrade actions.
