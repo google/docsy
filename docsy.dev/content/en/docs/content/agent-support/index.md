@@ -139,7 +139,10 @@ Agents find your Markdown content through:
 ## Customize output
 
 Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
-via `layouts/all.llms.txt`. You can override these defaults at several levels:
+via `layouts/all.llms.txt`; a site's own `layouts/index.llms.txt` still takes
+precedence for the home page, while a [doc-rooted site][], whose docs landing
+page publishes the index, overrides `all.llms.txt` instead. You can override
+these defaults at several levels:
 
 - **Per kind** — Add templates such as `home.md` or `_default/single.md` under
   `layouts/` in your project to tailor Markdown output for specific [Hugo
