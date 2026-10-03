@@ -174,10 +174,10 @@ multilingual sites):
 build: { render: link }
 ```
 
-If your site publishes an [`llms.txt`][] index, the docs section landing page
-publishes it in place of the home page. Add `LLMS` to the landing page's front
-matter `outputs`, keeping the formats your site configuration lists for sections
-(again, one per language). For example:
+To publish an [`llms.txt`][] index, add `LLMS` to the docs landing page's front
+matter `outputs` (the link-only home page publishes none), keeping the formats
+your site configuration lists for sections (again, one per language). For
+example:
 
 ```yaml
 outputs: [HTML, RSS, print, markdown, LLMS]

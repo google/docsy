@@ -139,14 +139,12 @@ Agents find your Markdown content through:
 ## Customize output
 
 Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
-via `layouts/all.llms.txt`; a site's own `layouts/index.llms.txt` still takes
-precedence for the home page, while a [doc-rooted site][], whose docs landing
-page publishes the index, overrides `all.llms.txt` instead. You can override
-these defaults at several levels:
+via [layouts/all.llms.txt][]. You can override these defaults at several levels:
 
 - **Per kind** — Add templates such as `home.md` or `_default/single.md` under
   `layouts/` in your project to tailor Markdown output for specific [Hugo
-  kinds][].
+  kinds][]. For `llms.txt`, the kind is the home page's, or the docs section's
+  on a [doc-rooted site][].
 - **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
   project-local shortcodes so they render Markdown-friendly content when
   appropriate. For example, this site's [readfile.markdown.md][] is the
@@ -196,6 +194,8 @@ For details on how these checks are configured, see
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
 [layouts/all.md]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
+[layouts/all.llms.txt]:
+  https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
 [readfile.markdown.md]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [llmstxt.org]: https://llmstxt.org/
