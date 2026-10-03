@@ -182,8 +182,9 @@ history since 0.17.0][].
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
-  so page-gated scripts can't be emitted for the wrong page. See the [0.18.0
-  release report][0.18.0-blog-overrides] ([#2787][]).
+  so page-gated scripts can't be emitted for the wrong page; for the one-line
+  override update, see the [0.18.0 release report][0.18.0-blog-overrides]
+  ([#2787][]).
 
 [**Experimental**](#experimental):
 
@@ -194,14 +195,13 @@ history since 0.17.0][].
 **For maintainers**:
 
 - Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
-  (one per weekly wave), after applying the open update wave (devDep pins and
-  bumps, actions v7); moved the Renovate config to JSONC, with GitHub Actions
-  bumps looked up as releases and pinned by SHA, each in its own PR ([#2774][],
-  [#2776][], [#2821][]).
+  (one per weekly wave); moved the Renovate config to JSONC, with GitHub Actions
+  bumps looked up as releases and pinned by SHA ([#2774][], [#2776][],
+  [#2821][]).
 - Switched the docsy.dev committed link cache to an owned JSONC format, and
   added a weekly workflow that re-verifies its oldest entries ([#2779][],
   [#2780][], [#2783][]).
-- Re-homed the script-loading design, implementation and quality notes from
+- Re-homed the script-loading design, implementation, and quality notes from
   theme comments into the [project docs][project-script-loading], with a
   maintainer-notes rule for routing such content ([#2790][]).
 - Extended the root `npm run check` to also run the docsy.dev workspace format
