@@ -174,9 +174,19 @@ multilingual sites):
 build: { render: link }
 ```
 
+If your site publishes an [`llms.txt`][] index, the docs section landing page
+publishes it in place of the home page: add `LLMS` to the landing page's front
+matter `outputs`, alongside the formats your site configuration lists for
+sections (again, one per language):
+
+```yaml
+outputs: [HTML, RSS, print, markdown, LLMS]
+```
+
 For an example of a doc-rooted variant of this site, see the [Doc-rooted
 example][] variant.
 
+[`llms.txt`]: /docs/content/agent-support/#llms-txt
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 
 ### Check for path conflicts
