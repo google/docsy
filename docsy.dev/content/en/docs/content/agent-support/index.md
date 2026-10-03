@@ -139,7 +139,7 @@ Agents find your Markdown content through:
 ## Customize output
 
 Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
-via [layouts/all.llms.txt][]. You can override these defaults at several levels:
+via `layouts/all.llms.txt`. You can override these defaults at several levels:
 
 - **Per kind** — Add templates such as `home.md` or `_default/single.md` under
   `layouts/` in your project to tailor Markdown output for specific [Hugo
@@ -194,8 +194,6 @@ For details on how these checks are configured, see
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
 [layouts/all.md]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
-[layouts/all.llms.txt]:
-  https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
 [readfile.markdown.md]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [llmstxt.org]: https://llmstxt.org/
