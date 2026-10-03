@@ -54,8 +54,14 @@ function build(name, files, extraConfig) {
   return r;
 }
 
+// The enabled fixture is read-only across its tests: build it once.
+let docRootedBuild;
 const docRooted = () =>
-  build('llms-doc-rooted', docRootedFiles(), docRootedConfig());
+  (docRootedBuild ??= build(
+    'llms-doc-rooted',
+    docRootedFiles(),
+    docRootedConfig(),
+  ));
 
 test('doc-rooted site publishes llms.txt at each language root', () => {
   const b = docRooted();
