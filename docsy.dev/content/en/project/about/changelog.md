@@ -243,7 +243,7 @@ history since 0.17.0][].
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
-[0.18.0-blog-overrides]: /blog/2026/0.18.0/#overrides
+[0.18.0-blog-overrides]: /blog/2026/0.18.0/#plugins-registry
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/

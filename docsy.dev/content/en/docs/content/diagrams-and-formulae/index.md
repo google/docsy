@@ -432,7 +432,7 @@ The browser loads Mermaid from the jsDelivr CDN at the
 Docsy checks that the pinned version exists on the CDN; sites that restrict
 Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
 
-#### Mermaid 12 {#mermaid-12}
+#### Mermaid 12
 
 Support for Mermaid 12 is [experimental][]: Docsy officially supports Mermaid
 11, and you can pin a 12.x `version` to try 12 early. Diagrams render with
