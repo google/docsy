@@ -428,9 +428,9 @@ site-wide settings.
 The browser loads Mermaid from the jsDelivr CDN at the
 [pinned version](#script-dep-versions), currently
 {{% param docsy.plugins.mermaid.version %}}. To use a different one, set
-`version` on the same entry: `mermaid: { version: "X.Y.Z" }`. At build time,
-Docsy checks that the pinned version exists on the CDN; sites that restrict
-Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
+`version` on the `mermaid` plugin entry: `mermaid: { version: "X.Y.Z" }`. At
+build time, Docsy checks that the pinned version exists on the CDN; sites that
+restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
 
 #### Mermaid 12
 
