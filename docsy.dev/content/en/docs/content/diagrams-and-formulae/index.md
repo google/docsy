@@ -692,6 +692,9 @@ By default, MarkMap scripts load only on pages that contain a `markmap` code
 block. If a mind map renders as a plain code block instead, see
 [When a MarkMap doesn't render](#when-a-markmap-doesnt-render).
 
+The MarkMap autoloader loads as a deferred script. Site scripts that call it
+directly (`window.markmap.autoLoader`) must wait for `DOMContentLoaded`.
+
 ### MarkMap version
 
 Normally, omit a `version` override in your MarkMap entry to inherit Docsy's pin
