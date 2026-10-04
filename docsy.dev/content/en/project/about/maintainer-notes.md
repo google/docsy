@@ -450,14 +450,14 @@ code-scanning alerts.
 ## Link checking and the link cache
 
 `test:website` checks docsy.dev's links with Lychee, caching external-link
-results in the committed `docsy.dev/link-cache.jsonc` (the "link cache", née
-refcache) so checks stay fast and offline-friendly. Each entry records the
-result, its `when` timestamp, and `via` (the resolver that set it); Lychee's own
-`.lycheecache` is derived from it per run and gitignored. Config lives in
-`docsy.dev/lychee.toml`. CI installs a pinned lychee binary (see
-`.github/workflows/test.yaml` and `link-cache-refresh.yaml`); a plain site build
-doesn't need it. A weekly workflow re-verifies the oldest entries; for the
-rotation model, see the `link-cache-refresh` workflow's header comment.
+results in the committed `docsy.dev/link-cache.jsonc` (the "link cache") so
+checks stay fast and offline-friendly. Each entry records the result, its `when`
+timestamp, and `via` (the resolver that set it); Lychee's own `.lycheecache` is
+derived from it per run and gitignored. Config lives in `docsy.dev/lychee.toml`.
+CI installs a pinned lychee binary (see `.github/workflows/test.yaml` and
+`link-cache-refresh.yaml`); a plain site build doesn't need it. A weekly
+workflow re-verifies the oldest entries; for the rotation model, see the
+`link-cache-refresh` workflow's header comment.
 
 - **Refresh** after adding or changing external links: `npm run fix:link-cache`
   re-runs the check, adding any missing entries and renormalizing; then commit
@@ -1002,7 +1002,7 @@ before any further changes are merged into the `main` branch:
 
 ## Consumer-site test procedure {#consumer-site-test}
 
-**Validation schedule** — each install mode has a known consumer that validates
+**Validation schedule**: each install mode has a known consumer that validates
 the release at its natural point in the cycle:
 
 - **Pre-release**, on the release-PR branch
