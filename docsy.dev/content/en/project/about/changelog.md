@@ -163,7 +163,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
   MarkMap, whose autoloader is now fetched at build time; reserved
   `params.docsy` for theme settings ([#2789][]). Removed the `params.mermaid`
-  and `params.markmap` namespaces, so leftover keys fail the build; replaced
+  and `params.markmap` namespaces, so leftover keys fail the build; version pins
+  must be plain version strings (a range or operator fails the build); replaced
   Mermaid's inline module script, and MarkMap's inline script and style, with
   deferred same-origin entries; dropped rendering under Mermaid pins below 10.
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
