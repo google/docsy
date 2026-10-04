@@ -159,9 +159,6 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   GitHub organization. The Hugo module path is now
   `github.com/docsy/docsy/theme`; the old path resolves 0.17.0 and earlier only
   ([#1992][]).
-- **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
-  `window.jQuery` and `$` are no longer available to site scripts; theme scripts
-  now use standard DOM APIs ([#1436][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
   MarkMap, whose autoloader is now fetched at build time; reserved
@@ -169,6 +166,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   and `params.markmap` namespaces, so leftover keys fail the build; replaced
   Mermaid's inline module script, and MarkMap's inline script and style, with
   deferred same-origin entries; dropped rendering under Mermaid pins below 10.
+- **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
+  `window.jQuery` and `$` are no longer available to site scripts; theme scripts
+  now use standard DOM APIs ([#1436][]).
 
 **New**:
 
