@@ -436,12 +436,12 @@ restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-Docsy officially supports Mermaid 11; to try 12 early ([experimental][]), pin a
-12.x `version`. Diagrams render with [Mermaid 12's defaults][mermaid-12-release]
-(the ELK layout, and the `redux-color` theme and `neo` look on ten diagram
-types); on dark pages, Docsy still sets Mermaid's legacy `dark` theme, so a
-site's light and dark renderings don't match. Mermaid 12 requires Safari 17.4 or
-later. Report what you find on [#2825][].
+Docsy officially supports Mermaid 11; to try 12 early ([experimental][]), set
+`version` to a 12.x release. Diagrams render with [Mermaid 12's
+defaults][mermaid-12-release] (the ELK layout, and the `redux-color` theme and
+`neo` look on ten diagram types); on dark pages, Docsy still sets Mermaid's
+legacy `dark` theme, so a site's light and dark renderings don't match. Mermaid
+12 requires Safari 17.4 or later. Report what you find on [#2825][].
 
 [#2825]: https://github.com/docsy/docsy/issues/2825
 [experimental]: /project/about/changelog/#experimental
@@ -692,8 +692,8 @@ By default, MarkMap scripts load only on pages that contain a `markmap` code
 block. If a mind map renders as a plain code block instead, see
 [When a MarkMap doesn't render](#when-a-markmap-doesnt-render).
 
-The MarkMap autoloader loads as a deferred script. Site scripts that call it
-directly (`window.markmap.autoLoader`) must wait for `DOMContentLoaded`.
+The MarkMap autoloader loads as a deferred script: site scripts that use
+`window.markmap.autoLoader` must wait for `DOMContentLoaded`.
 
 ### MarkMap version
 

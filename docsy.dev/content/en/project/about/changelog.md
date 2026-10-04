@@ -149,8 +149,9 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.18.0][] release page or the [git
-history since 0.17.0][].
+For an introduction to this release, see the [0.18.0 release report][]. For the
+full list of changes, see the [0.18.0][] release page or the [git history since
+0.17.0][].
 
 [**Breaking changes**](#breaking-change):
 
@@ -165,8 +166,9 @@ history since 0.17.0][].
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
   MarkMap, whose autoloader is now fetched at build time; reserved
   `params.docsy` for theme settings ([#2789][]). Removed the `params.mermaid`
-  and `params.markmap` namespaces; replaced Mermaid's inline module script with
-  a deferred same-origin entry; dropped rendering under Mermaid pins below 10.
+  and `params.markmap` namespaces, so leftover keys fail the build; replaced
+  Mermaid's inline module script, and MarkMap's inline script and style, with
+  deferred same-origin entries; dropped rendering under Mermaid pins below 10.
 
 **New**:
 
@@ -196,8 +198,7 @@ history since 0.17.0][].
 
 - Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
   (one per weekly wave); moved the Renovate config to JSONC, with GitHub Actions
-  bumps looked up as releases and pinned by SHA ([#2774][], [#2776][],
-  [#2821][]).
+  bumps looked up as releases and pinned by SHA ([#2776][], [#2821][]).
 - Switched the docsy.dev committed link cache to an owned JSONC format, and
   added a weekly workflow that re-verifies its oldest entries ([#2779][],
   [#2780][], [#2783][]).
@@ -223,7 +224,6 @@ history since 0.17.0][].
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
-[#2774]: https://github.com/docsy/docsy/pull/2774
 [#2776]: https://github.com/docsy/docsy/pull/2776
 [#2779]: https://github.com/docsy/docsy/pull/2779
 [#2780]: https://github.com/docsy/docsy/pull/2780
@@ -241,6 +241,7 @@ history since 0.17.0][].
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2838]: https://github.com/docsy/docsy/pull/2838
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
+[0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
 [0.18.0-blog-overrides]: /blog/2026/0.18.0/#plugins-registry
