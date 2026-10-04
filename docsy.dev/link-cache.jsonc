@@ -809,9 +809,9 @@
     "when": "2026-09-19T16:04:41Z",
     "via": "lychee",
   },
-  "https://github.com/chalin/link-cache#readme": {
+  "https://github.com/chalin/link-cache/blob/v0.6.0/docs/operating-model.md#one-rule": {
     "result": 200,
-    "when": "2026-09-03T20:42:17Z",
+    "when": "2026-10-04T00:07:19Z",
     "via": "lychee",
   },
   "https://github.com/cloudwego/cloudwego.github.io": {

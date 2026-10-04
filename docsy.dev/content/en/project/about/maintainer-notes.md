@@ -466,10 +466,10 @@ rotation model, see the `link-cache-refresh` workflow's header comment.
   `-- -p 10%` to drop the oldest tenth, `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
   release prep) by adding an entry with placeholder result `206`,
-  `"via": "manual"`, an `"expires"` date (exclusive: `2026-10-01` holds the seed
-  through September 30), and a `//` comment noting the reason. Expired seeds are
-  pruned by the weekly refresh and re-verified live ([link-cache README][]);
-  drop an entry early only to force a re-check.
+  `"via": "manual"`, an `"expires"` date (exclusive, UTC: `2026-10-01` holds the
+  seed through September 30), and a `//` comment noting the reason. Expired
+  seeds are dropped by the next prune and re-verified live ([link-cache's one
+  rule][]); drop an entry early only to force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
@@ -1127,7 +1127,7 @@ To test a Docsy branch or release from a consumer site, for each site:
 [github.com/docsy/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [hugo-extended]: https://github.com/jakejarvis/hugo-extended/releases
-[link-cache README]: https://github.com/chalin/link-cache#readme
+[link-cache's one rule]: https://github.com/chalin/link-cache/blob/v0.6.0/docs/operating-model.md#one-rule
 [main ruleset]: <{{% param github_repo %}}/rules/23697379>
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support
