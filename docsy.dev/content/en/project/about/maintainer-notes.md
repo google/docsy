@@ -1002,8 +1002,8 @@ before any further changes are merged into the `main` branch:
 
 ## Consumer-site test procedure {#consumer-site-test}
 
-**Validation schedule**: each install mode has a known consumer that validates
-the release at its natural point in the cycle:
+Each install mode has a known consumer that validates the release at its natural
+point in the cycle:
 
 - **Pre-release**, on the release-PR branch
   ([Publishing a release](#publishing-a-release), step 8): [opentelemetry.io][]
