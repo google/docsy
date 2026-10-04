@@ -129,6 +129,11 @@
     "when": "2026-09-19T16:04:39Z",
     "via": "lychee",
   },
+  "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting": {
+    "status": 200,
+    "when": "2026-10-04T16:52:09Z",
+    "via": "lychee",
+  },
   "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
@@ -779,6 +784,11 @@
     "when": "2026-06-30T20:05:26Z",
     "via": "lychee",
   },
+  "https://github.com/camsong/You-Dont-Need-jQuery": {
+    "status": 200,
+    "when": "2026-10-04T16:52:10Z",
+    "via": "lychee",
+  },
   "https://github.com/cchesser/java-perf-workshop": {
     "status": 200,
     "when": "2026-09-19T16:04:39Z",
@@ -817,6 +827,11 @@
   "https://github.com/deining": {
     "status": 200,
     "when": "2026-06-27T12:29:30Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy": {
+    "status": 200,
+    "when": "2026-10-04T16:52:10Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy": {
@@ -4827,6 +4842,11 @@
   "https://registry.npmjs.org/mermaid": {
     "status": 200,
     "when": "2026-08-09T20:00:35Z",
+    "via": "lychee",
+  },
+  "https://releases.jquery.com/": {
+    "status": 200,
+    "when": "2026-10-04T16:52:09Z",
     "via": "lychee",
   },
   "https://rtlcss.com/": {
