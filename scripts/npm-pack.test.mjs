@@ -71,8 +71,6 @@ const PACKAGES = {
       `${TAR}assets/scss/main.scss`,
       `${TAR}i18n/en.yaml`,
       `${TAR}assets/js/plugins/tabpane-persist.js`,
-      // The plugin loop reads this schema; a registry install can't build
-      // without it.
       `${TAR}data/docsy/schema/params/docsy.yaml`,
     ],
     // images/, theme.toml, and go.mod serve only the git-based channels
