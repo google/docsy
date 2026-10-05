@@ -453,9 +453,9 @@ code-scanning alerts.
 results in the committed `docsy.dev/link-cache.jsonc` so checks stay fast and
 offline-friendly. Each entry records the `result`, its `when` timestamp, `via`
 (the resolver that set it), and, optionally, `expires` ([field
-reference][link-cache fields]); Lychee's own `.lycheecache` is derived from it
-per run and gitignored. Config lives in `docsy.dev/lychee.toml`. CI installs a
-pinned lychee binary (see `.github/workflows/test.yaml` and
+reference][link-cache fields]). Lychee's own `.lycheecache` is derived from that
+file per run and gitignored. Config lives in `docsy.dev/lychee.toml`. CI
+installs a pinned lychee binary (see `.github/workflows/test.yaml` and
 `link-cache-refresh.yaml`); a plain site build doesn't need it. A weekly
 workflow re-verifies the oldest entries; for the rotation model, see the
 `link-cache-refresh` workflow's header comment.
@@ -464,15 +464,16 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   re-runs the check, adding any missing entries and renormalizing; then commit
   the updated `link-cache.jsonc`.
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
-  `-- -p 10%` to drop lapsed `expires` entries and the oldest tenth of entries
-  without `expires`, `-- -m REGEX` to scope by URL).
+  `-- -p 10%` to drop the oldest tenth of entries without `expires`,
+  `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
   release prep) by adding an entry with placeholder `"result": 206`,
-  `"via": "manual"`, an `"expires"` date (an exclusive UTC date: `2026-10-01`
-  holds the seed through September 30), and a `//` comment noting the reason.
-  Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
-  re-verified live by the following check ([link-cache's one rule][]); drop an
-  entry early only to force a re-check.
+  `"via": "manual"`, an exclusive UTC `"expires"` date (`2026-10-01` holds the
+  seed through September 30), and a `//` comment noting the reason; then run
+  `npm run fix:link-cache`, which dates the seed, and commit. Lapsed seeds are
+  dropped by the next prune (`-- -p 0` drops only those) and re-verified live by
+  the following check ([link-cache's one rule][]); drop an entry early only to
+  force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
