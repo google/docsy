@@ -250,6 +250,22 @@ test('site without llms.txt omits the Markdown llms.txt link', () => {
   );
 });
 
+test('the _root-llms-txt-path shortcode fails the build on a site without llms.txt', () => {
+  const r = buildSite('llms-shortcode-no-llms', {
+    files: {
+      'content/_index.md': frontMatter({ title: 'Home' }) + 'Home body\n',
+      'content/docs/install.md': leaf('Install'),
+    },
+    extraConfig: 'outputs:\n  home: [HTML, markdown]\n',
+  });
+  assert.notEqual(r.status, 0, 'build fails');
+  assert.match(
+    r.stderr,
+    /install\.md.*shortcode "_root-llms-txt-path": this site publishes no llms\.txt/,
+    'error names the page and the shortcode',
+  );
+});
+
 test("a site's layouts/index.llms.txt override still renders the home's llms.txt", () => {
   const b = build(
     'llms-home-override',
