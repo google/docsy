@@ -2,8 +2,8 @@
 title: AI-agent support
 linkTitle: Agent support
 description: >-
-  Let AI agents discover and use your content: opt in to Markdown versions of
-  your pages and a site llms.txt.
+  Help AI agents discover and use your content with Markdown versions of your
+  pages and a site llms.txt.
 cSpell:ignore: llmstxt
 ---
 
@@ -78,7 +78,7 @@ Each enabled page gets a Markdown version at `index.md` beside its HTML with:
 - Page title and description
 - A link to the language's `llms.txt`, when the site [publishes one](#llms-txt)
 - Page content, with shortcodes expanded
-- For sections, the list of child pages
+- The list of child pages, if any
 
 A shortcode without a Markdown variant emits its HTML there; for how to add one,
 see [Shortcodes][shortcode-md-variants].
@@ -221,6 +221,6 @@ For details on how these checks are configured, see
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
 [section-tmp-type]: https://gohugo.io/templates/types/#section
-[shortcode-md-variants]: /docs/content/shortcodes/
+[shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
 [sof]: https://gohugo.io/templates/shortcode/#lookup-order
 <!-- prettier-ignore-end -->
