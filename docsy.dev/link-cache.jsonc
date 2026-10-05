@@ -4102,6 +4102,11 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://gohugo.io/templates/shortcode/#lookup-order": {
+    "status": 200,
+    "when": "2026-10-05T19:26:46Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/templates/sitemap-template/": {
     "status": 200,
     "when": "2026-09-19T16:04:39Z",
