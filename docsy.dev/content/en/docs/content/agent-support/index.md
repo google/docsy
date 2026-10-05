@@ -118,8 +118,9 @@ outputs:
   section: [HTML, RSS, print, markdown]
 ```
 
-On a [doc-rooted site][], the docs landing page publishes the index instead of
-the home page; for the front matter it needs, see that section.
+On a [doc-rooted site][], the docs landing page is the root page, so it
+publishes the index: configure `LLMS` in its `outputs` rather than the home
+page's. For details, see [Agent support][doc-rooted-agent-support].
 
 For an example of the generated `llms.txt` for this site, see
 [/llms.txt](/llms.txt).
@@ -191,6 +192,7 @@ For details on how these checks are configured, see
 [afdocs]: https://afdocs.dev/
 [built-in output formats]: https://gohugo.io/configuration/output-formats/
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
+[doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
 [Hugo kinds]: https://gohugo.io/templates/types/
 [layouts/all.md]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
