@@ -15,40 +15,30 @@ Template design:
 
 {{ with .Description | strings.TrimSpace }}
 
-> {{ replace . "\n" "\n> " -}}
+> {{ replace . "\n" "\n> " }}
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{ with (partialCached "root-page.html" site site.Language.Lang).OutputFormats.Get "LLMS" }}
-{{ if $needSeparator }}
+{{ with (partialCached "root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" }}
+{{ if $needSeparator -}}
 ---
-
-{{ else }}
-{{ end -}}
-
+{{ end }}
 Site [llms.txt]( {{- .RelPermalink -}} )
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{ with .RenderShortcodes | strings.TrimSpace -}}
-{{ if $needSeparator }}
+{{ with .RenderShortcodes | strings.TrimSpace }}
+{{ if $needSeparator -}}
 ---
-
-{{ else }}
-{{ end -}}
-
+{{ end }}
 {{ . }}
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{ with .Pages -}}
-
-{{ if $needSeparator }}
+{{ with .Pages }}
+{{ if $needSeparator -}}
 ---
-
-{{ else }}
-{{ end -}}
-
+{{ end }}
 Section pages:
 
 {{ range . -}}

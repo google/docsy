@@ -19,8 +19,8 @@ const leaf = (title, { llmsLink = true } = {}) =>
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
-// en: only the link-only home carries a description, so llms.txt falls back
-// to it; fr: the landing page's own description wins.
+// Description precedence: en has one only on the link-only home, so llms.txt
+// falls back to it; fr has one on both, and the landing page's wins.
 const docRootedFiles = (
   docsOutputs = '[HTML, RSS, markdown, LLMS]',
   leafOptions = {},
@@ -29,7 +29,10 @@ const docRootedFiles = (
     title: 'Home',
     description: 'Fixture docs, doc-rooted',
   }),
-  'content/_index.fr.md': linkOnlyHome({ title: 'Accueil' }),
+  'content/_index.fr.md': linkOnlyHome({
+    title: 'Accueil',
+    description: 'Accueil du site',
+  }),
   'content/docs/_index.md':
     frontMatter({ title: 'Docs', outputs: docsOutputs }) + 'Docs landing\n',
   'content/docs/_index.fr.md':
@@ -126,6 +129,11 @@ test('doc-rooted llms.txt description comes from the root page, else the home', 
     b.publicFile('fr/llms.txt').includes('\n> Documentation en français\n'),
     'fr llms.txt quotes the landing page description',
   );
+  assert.doesNotMatch(
+    b.publicFile('fr/llms.txt'),
+    /Accueil du site/,
+    'fr llms.txt leaves the home description aside',
+  );
 });
 
 test('doc-rooted pages carry the directive, pointing at their language llms.txt', () => {
@@ -199,9 +207,15 @@ test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, direc
   const html = b.publicFile('install/index.html');
   assert.ok(html.includes('td-navbar'), 'page renders');
   assert.ok(!html.includes('For AI agents'), 'page omits the directive');
-  assert.ok(
-    !b.publicFile('index.md').includes('Site [llms.txt]'),
+  const md = b.publicFile('index.md');
+  assert.doesNotMatch(
+    md,
+    /llms\.txt/,
     'root Markdown version omits the llms.txt link',
+  );
+  assert.ok(
+    md.startsWith('# Docs\n\nDocs landing\n\n---\n\nSection pages:'),
+    'root Markdown version keeps its section separators without the link',
   );
 });
 
@@ -212,18 +226,31 @@ test('site without llms.txt omits the Markdown llms.txt link', () => {
       'content/_index.md': frontMatter({ title: 'Home' }) + 'Home body\n',
       'content/docs/install.md':
         frontMatter({ title: 'Install' }) + 'Leaf page\n',
+      'content/docs/described.md':
+        frontMatter({ title: 'Described', description: 'A summary' }) +
+        'Body\n',
     },
     'outputs:\n  home: [HTML, markdown]\n  page: [HTML, markdown]\n',
   );
   const md = b.publicFile('docs/install/index.md');
-  assert.ok(md.startsWith('# Install'), 'Markdown version renders');
-  assert.ok(
-    !md.includes('Site [llms.txt]'),
+  assert.doesNotMatch(
+    md,
+    /llms\.txt/,
     'Markdown version omits the llms.txt link',
+  );
+  assert.ok(
+    md.startsWith('# Install\n\nLeaf page'),
+    'title and content stay separated without the link',
+  );
+  assert.ok(
+    b
+      .publicFile('docs/described/index.md')
+      .startsWith('# Described\n\n> A summary\n\n---\n\nBody'),
+    'description and content stay separated without the link',
   );
 });
 
-test("a site's layouts/index.llms.txt override still renders the home index", () => {
+test("a site's layouts/index.llms.txt override still renders the home's llms.txt", () => {
   const b = build(
     'llms-home-override',
     {

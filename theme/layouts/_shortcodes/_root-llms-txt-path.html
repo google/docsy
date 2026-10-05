@@ -1,6 +1,6 @@
 {{/* Resolves to the root-relative path of the current language's llms.txt */ -}}
 
-{{ with (partialCached "root-page.html" site site.Language.Lang).OutputFormats.Get "LLMS" -}}
+{{ with (partialCached "root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" -}}
   {{ .RelPermalink -}}
 {{ else -}}
   {{ errorf "%s: shortcode %q: this site publishes no llms.txt (no LLMS output on its root page)" .Position .Name -}}
