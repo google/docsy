@@ -1,6 +1,6 @@
 # Welcome to Docsy
 
-LLMS index: [llms.txt](/llms.txt)
+Site [llms.txt](/llms.txt)
 
 ---
 

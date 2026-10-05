@@ -68,7 +68,7 @@ test('doc-rooted variant publishes llms.txt at each language root only', (t) => 
   ]) {
     assert.ok(
       readFileSync(join(destDir, page), 'utf8').includes(
-        `For AI agents: a documentation index is available at ${index}`,
+        `For AI agents: the site's llms.txt is at ${index}`,
       ),
       `${page} directive points at ${index}`,
     );

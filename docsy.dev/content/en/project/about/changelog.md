@@ -182,10 +182,11 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 **Other changes**:
 
 - Fixed `llms.txt` support for [doc-rooted sites][ug-doc-rooted]: the docs
-  landing page publishes the index once `LLMS` is added to its `outputs`, and
-  the agent directive and Markdown index links follow it. On every site, the
-  Markdown alternates' `LLMS index` link now targets the current language's
-  index and is omitted when the site publishes none ([#2834][]).
+  landing page publishes it once `LLMS` is added to its `outputs`, and the agent
+  directive and Markdown links follow it. On every site, the Markdown
+  alternates' `llms.txt` link now targets the current language's file and is
+  omitted when the site publishes none; the directive's sentence now names
+  `llms.txt` ([#2834][]).
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).

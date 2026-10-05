@@ -28,8 +28,7 @@ Docsy enables:
   lead agents to each page's Markdown version and to `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: per-language site index of links to Markdown
-  content.
+- **[`llms.txt`](#llms-txt)**: per-language list of links to Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -147,10 +146,9 @@ Agents find your Markdown content through:
 - **Alternate links**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page.
 - **In-body directive**: when `llms.txt` is enabled, each page body opens with a
-  visually-hidden directive pointing agents to the language's `llms.txt` index
-  and, when the page has one, its Markdown version. Sites that override the
-  theme's `baseof` templates need to call the `llms-directive.html` partial
-  themselves.
+  visually-hidden directive pointing agents to the language's `llms.txt` and,
+  when the page has one, its Markdown version. Sites that override the theme's
+  `baseof` templates need to call the `llms-directive.html` partial themselves.
 
 ## Customize output
 

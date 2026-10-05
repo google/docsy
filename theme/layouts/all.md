@@ -30,7 +30,7 @@ Template design:
 {{ else }}
 {{ end -}}
 
-LLMS index: [llms.txt]( {{- .RelPermalink -}} )
+Site [llms.txt]( {{- .RelPermalink -}} )
 {{ $needSeparator = true -}}
 {{ end -}}
 

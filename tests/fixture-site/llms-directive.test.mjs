@@ -44,7 +44,7 @@ test('llms.txt-enabled site carries the directive on every page kind', () => {
   ]) {
     const html = b.publicFile(page);
     const at = html.indexOf(
-      '<div class="visually-hidden" aria-hidden="true" data-pagefind-ignore>\n    For AI agents: a documentation index is available at /llms.txt',
+      `<div class="visually-hidden" aria-hidden="true" data-pagefind-ignore>\n    For AI agents: the site's llms.txt is at /llms.txt`,
     );
     assert.ok(at > 0, `hidden directive is present in ${page}`);
     const nav = html.indexOf('td-navbar');

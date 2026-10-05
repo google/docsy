@@ -185,10 +185,10 @@ build: { render: link }
 
 ### Agent support
 
-To publish an [`llms.txt`][] index for [agent support][], add `LLMS` to the docs
-landing page `outputs` (for each language in a multilingual site). A page's
-`outputs` replace those configured for its kind, so list the section formats
-too, for example `[HTML, RSS, print, markdown, LLMS]`.
+To publish [`llms.txt`][] for [agent support][], add `LLMS` to the docs landing
+page `outputs` (for each language in a multilingual site). A page's `outputs`
+replace those configured for its kind, so list the section formats too, for
+example `[HTML, RSS, print, markdown, LLMS]`.
 
 For an example of a doc-rooted variant of this site, see the [Doc-rooted
 example][] variant.

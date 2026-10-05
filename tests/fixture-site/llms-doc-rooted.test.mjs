@@ -1,11 +1,11 @@
 // Doc-rooted sites (docs section published at the site root, home link-only;
 // recipe: docsy.dev/content/en/docs/content/adding-content.md § Doc-rooted
-// sites) have no rendered home, so the LLMS index must come from the page that
+// sites) have no rendered home, so llms.txt must come from the page that
 // publishes the root. Pins the llms.txt publication and content, the
-// directive, the Markdown alternate's index link, and the root URL the theme
+// directive, the Markdown alternate's llms.txt link, and the root URL the theme
 // links as home; plus the two consequences the layout move has for every site:
-// the Markdown link is omitted when no index is published, and a site's own
-// home-specific index layout keeps precedence. See docsy/docsy#2834.
+// the Markdown link is omitted when no llms.txt is published, and a site's own
+// home-specific llms.txt layout keeps precedence. See docsy/docsy#2834.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -18,7 +18,7 @@ const frontMatter = (fields) =>
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
-// en: only the link-only home carries a description, so the index falls back
+// en: only the link-only home carries a description, so llms.txt falls back
 // to it; fr: the landing page's own description wins.
 const docRootedFiles = (docsOutputs = '[HTML, RSS, markdown, LLMS]') => ({
   'content/_index.md': linkOnlyHome({
@@ -88,16 +88,16 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
   );
   assert.ok(
     en.includes('- [Home page](https://example.org/index.md)'),
-    'en index links the root Markdown alternate as the home page',
+    'en llms.txt links the root Markdown alternate as the home page',
   );
   assert.ok(
     en.includes('- [Guide](https://example.org/guide/index.md)'),
-    'en index lists the docs subsection at its root-level Markdown alternate',
+    'en llms.txt lists the docs subsection at its root-level Markdown alternate',
   );
   const fr = b.publicFile('fr/llms.txt');
   assert.ok(
     fr.includes('- [Home page](https://example.org/fr/index.md)'),
-    'fr index links the fr root Markdown alternate as the home page',
+    'fr llms.txt links the fr root Markdown alternate as the home page',
   );
   for (const [lang, content] of [
     ['en', en],
@@ -106,26 +106,26 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
     assert.ok(
       content.includes('- [English](https://example.org/index.md)') &&
         content.includes('- [Français](https://example.org/fr/index.md)'),
-      `${lang} index lists both locales by their root Markdown alternate`,
+      `${lang} llms.txt lists both locales by their root Markdown alternate`,
     );
   }
 });
 
-test('doc-rooted index description comes from the root page, else the home', () => {
+test('doc-rooted llms.txt description comes from the root page, else the home', () => {
   const b = docRooted();
   assert.ok(
     b.publicFile('llms.txt').includes('\n> Fixture docs, doc-rooted\n'),
-    'en index quotes the link-only home description',
+    'en llms.txt quotes the link-only home description',
   );
   assert.ok(
     b.publicFile('fr/llms.txt').includes('\n> Documentation en français\n'),
-    'fr index quotes the landing page description',
+    'fr llms.txt quotes the landing page description',
   );
 });
 
-test('doc-rooted pages carry the directive, pointing at their language index', () => {
+test('doc-rooted pages carry the directive, pointing at their language llms.txt', () => {
   const b = docRooted();
-  for (const [page, index] of [
+  for (const [page, llms] of [
     ['index.html', '/llms.txt'],
     ['install/index.html', '/llms.txt'],
     ['fr/index.html', '/fr/llms.txt'],
@@ -133,29 +133,25 @@ test('doc-rooted pages carry the directive, pointing at their language index', (
     assert.ok(
       b
         .publicFile(page)
-        .includes(
-          `For AI agents: a documentation index is available at ${index}`,
-        ),
-      `${page} directive points at ${index}`,
+        .includes(`For AI agents: the site's llms.txt is at ${llms}`),
+      `${page} directive points at ${llms}`,
     );
   }
 });
 
-test('doc-rooted Markdown alternates link their language index', () => {
+test('doc-rooted Markdown alternates link their language llms.txt', () => {
   const b = docRooted();
   assert.ok(
-    b.publicFile('index.md').includes('LLMS index: [llms.txt](/llms.txt)'),
+    b.publicFile('index.md').includes('Site [llms.txt](/llms.txt)'),
     'root Markdown alternate links /llms.txt',
   );
   assert.ok(
-    b
-      .publicFile('fr/index.md')
-      .includes('LLMS index: [llms.txt](/fr/llms.txt)'),
+    b.publicFile('fr/index.md').includes('Site [llms.txt](/fr/llms.txt)'),
     'fr root Markdown alternate links /fr/llms.txt',
   );
 });
 
-// The home page's permalink stays the language root: publishing the index
+// The home page's permalink stays the language root: publishing llms.txt
 // from the home page as its only output would make it /llms.txt instead.
 test('doc-rooted theme home links point at the language root', () => {
   const b = docRooted();
@@ -172,25 +168,25 @@ test('doc-rooted theme home links point at the language root', () => {
 
 // The reporter's shape: LLMS configured for the home, which publishes nothing,
 // and not for the landing page.
-test('doc-rooted site whose landing page lacks LLMS publishes no index, directive, or link', () => {
+test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, directive, or link', () => {
   const b = build(
     'llms-doc-rooted-off',
     docRootedFiles('[HTML, RSS, markdown]'),
     docRootedConfig,
   );
-  for (const index of ['llms.txt', 'fr/llms.txt']) {
-    assert.throws(() => b.publicFile(index), `${index} stays unpublished`);
+  for (const llms of ['llms.txt', 'fr/llms.txt']) {
+    assert.throws(() => b.publicFile(llms), `${llms} stays unpublished`);
   }
   const html = b.publicFile('install/index.html');
   assert.ok(html.includes('td-navbar'), 'page renders');
   assert.ok(!html.includes('For AI agents'), 'page omits the directive');
   assert.ok(
-    !b.publicFile('index.md').includes('LLMS index'),
-    'root Markdown alternate omits the index link',
+    !b.publicFile('index.md').includes('Site [llms.txt]'),
+    'root Markdown alternate omits the llms.txt link',
   );
 });
 
-test('site without llms.txt omits the Markdown index link', () => {
+test('site without llms.txt omits the Markdown llms.txt link', () => {
   const b = build(
     'llms-md-link-off',
     {
@@ -203,8 +199,8 @@ test('site without llms.txt omits the Markdown index link', () => {
   const md = b.publicFile('docs/install/index.md');
   assert.ok(md.startsWith('# Install'), 'Markdown alternate renders');
   assert.ok(
-    !md.includes('LLMS index'),
-    'Markdown alternate omits the index link',
+    !md.includes('Site [llms.txt]'),
+    'Markdown alternate omits the llms.txt link',
   );
 });
 
@@ -223,6 +219,6 @@ test("a site's layouts/index.llms.txt override still renders the home index", ()
   );
   assert.ok(
     b.publicFile('llms.txt').startsWith('SITE OVERRIDE for'),
-    'home index renders from the site override',
+    'home llms.txt renders from the site override',
   );
 });
