@@ -1144,6 +1144,11 @@
     "when": "2026-09-17T23:13:30Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html": {
+    "status": 200,
+    "when": "2026-10-05T18:22:23Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/navbar.html": {
     "status": 200,
     "when": "2026-09-18T01:33:10Z",

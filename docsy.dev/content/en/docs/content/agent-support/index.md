@@ -149,7 +149,8 @@ Agents find your Markdown content through:
 - **In-body directive**: when `llms.txt` is enabled, each page body opens with a
   visually-hidden directive pointing agents to the language's `llms.txt` and,
   when the page has one, its Markdown version. Sites that override the theme's
-  `baseof` templates need to call the `llms-directive.html` partial themselves.
+  `baseof` templates need to call the [`llms-directive.html`][] partial
+  themselves.
 
 ## Customize output
 
@@ -215,6 +216,7 @@ For details on how these checks are configured, see
 [home-tmp-type]: https://gohugo.io/templates/types/#home
 [`layouts/all.md`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
 [`layouts/all.llms.txt`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
+[`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
