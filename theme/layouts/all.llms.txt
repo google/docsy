@@ -1,4 +1,4 @@
-{{ $rootPage := partialCached "root-page.html" site site.Home.Permalink -}}
+{{ $rootPage := partialCached "root-page.html" .Site .Site.Home.Permalink -}}
 {{ $rootPageURL := $rootPage.Permalink -}}
 {{ with $rootPage.OutputFormats.Get "markdown" -}}
   {{ $rootPageURL = .Permalink -}}
@@ -6,7 +6,7 @@
 
 # {{ .Site.Title -}}
 
-{{ with (or .Description site.Home.Description) | strings.TrimSpace }}
+{{ with (or .Description .Site.Home.Description) | strings.TrimSpace }}
 
 > {{ replace . "\n" "\n> " -}}
 

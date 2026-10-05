@@ -1,4 +1,4 @@
-# Details, see docs/content/adding-content.md § Doc-rooted sites
+# For details, see content/en/docs/content/adding-content.md § Doc-rooted sites
 permalinks:
   page:
     docs: /:sections[1:]/:slug/

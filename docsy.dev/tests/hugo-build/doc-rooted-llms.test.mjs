@@ -8,13 +8,13 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
   existsSync,
+  globSync,
   mkdirSync,
   mkdtempSync,
   readFileSync,
   rmSync,
 } from 'node:fs';
-import { join, relative } from 'node:path';
-import { globSync } from 'node:fs';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
@@ -29,7 +29,11 @@ function buildDocRooted() {
     cwd: siteDir,
     shell: true,
     encoding: 'utf8',
-    env: { ...process.env, TD_BUILD_CTX: 'doc-rooted' },
+    env: {
+      ...process.env,
+      TD_BUILD_CTX: 'doc-rooted',
+      BASE_URL: 'http://localhost',
+    },
   });
   return { res, destDir, output: `${res.stdout ?? ''}\n${res.stderr ?? ''}` };
 }
@@ -81,5 +85,4 @@ test('doc-rooted variant publishes llms.txt at each language root only', (t) => 
   ]) {
     assert.ok(existsSync(join(destDir, file)), `root publishes ${file}`);
   }
-  t.diagnostic(`Inspected ${relative(siteDir, destDir)}`);
 });

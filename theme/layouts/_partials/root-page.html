@@ -1,7 +1,7 @@
 {{/* Argument: a Site (of any language).
   Returns the page publishing the site's root URL: its home page, or the docs
-  section page when it is published there (doc-rooted sites, see the user
-  guide). */ -}}
+  section page when it is published there (doc-rooted sites, see
+  https://www.docsy.dev/docs/content/adding-content/#doc-rooted-sites). */ -}}
 {{ $rootPage := .Home -}}
 {{ with .GetPage "docs" -}}
   {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}

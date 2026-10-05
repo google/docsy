@@ -1,4 +1,5 @@
-{{/* Resolves to the root-relative path of the current language's llms.txt */ -}}
+{{/* Docsy-private shortcode: resolves to the root-relative path of the current
+  language's llms.txt. */ -}}
 
 {{ with (partialCached "root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" -}}
   {{ .RelPermalink -}}
