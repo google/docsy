@@ -142,15 +142,15 @@ Agents find your Markdown content through:
 Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
 via `layouts/all.llms.txt`. You can override these defaults at several levels:
 
-- **Per kind** — Add templates such as `home.md` or `_default/single.md` under
-  `layouts/` in your project to tailor Markdown output for specific [Hugo
-  kinds][]. For `llms.txt`, the kind is `home`, or `section` on a [doc-rooted
-  site][].
-- **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
+- **Per kind**:
+  - Add templates such as `home.md` or `_default/single.md` under `layouts/` in
+    your project to tailor Markdown output for specific [Hugo kinds][].
+  - For `llms.txt`, the kind is `home`, or `section` on a [doc-rooted site][].
+- **Per shortcode**: Add [output-format-specific shortcode templates][sof] to
   project-local shortcodes so they render Markdown-friendly content when
   appropriate. For example, this site's [readfile.markdown.md][] is the
   Markdown-output variant of the theme's `readfile` shortcode.
-- **Per page** — Provide page-specific content or structure for high-value pages
+- **Per page**: Provide page-specific content or structure for high-value pages
   that need a curated agent-facing view.
 
 ## Server-side support
