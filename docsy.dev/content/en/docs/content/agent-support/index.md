@@ -77,11 +77,12 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 Each enabled page gets a Markdown version at `index.md` beside its HTML with:
 
 - Page title and description
+- A link to the language's `llms.txt`, when the site [publishes one](#llms-txt)
 - Page content, with shortcodes expanded
 - For sections, the list of child pages
 
-A shortcode without a Markdown variant emits its HTML there; for how to add one,
-see [Shortcodes][shortcode-md-variants].
+A shortcode without a Markdown variant emits its HTML there; see
+[Customize output](#customize-output).
 
 ### Opt pages out {#opt-pages-out}
 
@@ -112,8 +113,7 @@ outputs: [HTML]
 
 An `llms.txt` file is a short Markdown overview of a site for agents: a title, a
 summary, and lists of links to Markdown versions of its pages. Agents read or
-search it, then follow the links they need; the detail stays behind them. For
-the format, see [llmstxt.org][].
+search it, then follow the links they need. For the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files. To enable it for
 home pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For
@@ -128,11 +128,13 @@ outputs:
 
 > [!IMPORTANT]
 >
-> For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
+> For a [doc-rooted site][], see the [doc-rooted `llms.txt`
+> setup][doc-rooted-agent-support] instead.
 
-The file links to the Markdown version of (where one exists):
+The file links to the following, each at its Markdown version where one exists:
 
 - The root page
+- The site's `AGENTS.md` page, if any
 - Main menu pages
 - Top-level docs sections
 - Site languages
@@ -160,15 +162,14 @@ Docsy's templates for the two outputs are:
 - [`layouts/all.llms.txt`][] ([`llms.txt`](#llms-txt))
 
 Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
-overrides them. For `llms.txt`, override `all.llms.txt`, or a template named for
-the root page's kind:
+overrides them. For `llms.txt`, override `all.llms.txt`, or add a template named
+for the root page's kind:
 
 - [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
-Shortcodes render into Markdown through [output-format-specific templates][sof];
-see [Shortcodes][shortcode-md-variants].
+Shortcodes render into Markdown through [output-format-specific templates][sof].
 
 ## Server-side support
 
@@ -213,14 +214,13 @@ For details on how these checks are configured, see
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
 [home-tmp-type]: https://gohugo.io/templates/types/#home
-[`layouts/all.md`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
 [`layouts/all.llms.txt`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
+[`layouts/all.md`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
 [`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
 [section-tmp-type]: https://gohugo.io/templates/types/#section
-[shortcode-md-variants]: /docs/content/shortcodes/
-[sof]: https://gohugo.io/templates/shortcode/
+[sof]: https://gohugo.io/templates/shortcode/#lookup-order
 <!-- prettier-ignore-end -->

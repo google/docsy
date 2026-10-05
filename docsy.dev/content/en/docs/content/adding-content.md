@@ -148,10 +148,10 @@ structure, where:
 As a consequence:
 
 - The `docs` section landing page becomes the site's **root page**: the page
-  published at the [site root][], `/` or `/LANG/` on a [multilingual site][].
+  published at the [site root][] (`/`, or `/LANG/` on a [multilingual site][],
+  for language `LANG`).
 - The **home page**, Hugo's `home`-kind page, still exists but no longer
-  publishes anything; see
-  [Creating a doc-rooted site](#creating-a-doc-rooted-site).
+  publishes anything.
 
 A doc-rooted site has the following benefits:
 
@@ -183,15 +183,14 @@ multilingual sites):
 build: { render: link }
 ```
 
+For a doc-rooted variant of this site, see the [Doc-rooted example][].
+
 ### Agent support
 
 To publish [`llms.txt`][] for [agent support][], add `LLMS` to the docs landing
 page `outputs` (for each language in a multilingual site). A page's `outputs`
 replace those configured for its kind, so list the section formats too, for
 example `[HTML, RSS, print, markdown, LLMS]`.
-
-For an example of a doc-rooted variant of this site, see the [Doc-rooted
-example][] variant.
 
 ### Check for path conflicts
 
@@ -981,7 +980,6 @@ sitemap:
 To learn more about configuring sitemaps, see [Sitemap Templates][].
 
 <!-- prettier-ignore-start -->
-[`llms.txt`]: /docs/content/agent-support/#llms-txt
 [agent support]: /docs/content/agent-support/
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
@@ -994,6 +992,7 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [formats]: https://gohugo.io/content-management/formats/
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
+[`llms.txt`]: /docs/content/agent-support/#llms-txt
 [Look and Feel]: /docs/content/lookandfeel/
 [multilingual site]: /docs/language/
 [permalinks]: https://gohugo.io/configuration/permalinks/
