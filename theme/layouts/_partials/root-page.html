@@ -1,6 +1,7 @@
-{{/* The page publishing a language site's root URL: its home page or, on a
-  doc-rooted site whose home is link-only, the top-level section rendered in its
-  place. Argument: a Site. */ -}}
+{{/* Argument: a Site (of any language).
+  Returns the page publishing the site's root URL: its home page, or the
+  top-level section published at that URL (doc-rooted sites, see the user
+  guide). */ -}}
 {{ $rootPage := .Home -}}
 {{ range .Sections -}}
   {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
