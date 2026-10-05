@@ -8,6 +8,6 @@ permalinks:
 cascade:
   - build: { render: link }
     target: { path: / }
-  # Keep in step with _default's section outputs (tests/hugo-build/doc-rooted-outputs).
+  # Keep in step with _default's section outputs.
   - outputs: [HTML, RSS, print, markdown, LLMS]
     target: { path: /docs }
