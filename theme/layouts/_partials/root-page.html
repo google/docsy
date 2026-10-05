@@ -1,8 +1,8 @@
 {{/* The page publishing a site's root URL: its home page or, on a doc-rooted
   site whose home is link-only, the top-level section rendered in its place.
   Argument: a Site. */ -}}
-{{ $root := .Home -}}
+{{ $rootPage := .Home -}}
 {{ range .Sections -}}
-  {{ if eq .RelPermalink $root.RelPermalink }}{{ $root = . }}{{ end -}}
+  {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
 {{ end -}}
-{{ return $root -}}
+{{ return $rootPage -}}

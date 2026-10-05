@@ -1,6 +1,6 @@
-{{ $root := partialCached "root-page.html" site site.Language.Lang -}}
-{{ $homeMarkdownURL := $root.Permalink -}}
-{{ with $root.OutputFormats.Get "markdown" -}}
+{{ $rootPage := partialCached "root-page.html" site site.Language.Lang -}}
+{{ $homeMarkdownURL := $rootPage.Permalink -}}
+{{ with $rootPage.OutputFormats.Get "markdown" -}}
   {{ $homeMarkdownURL = .Permalink -}}
 {{ end -}}
 
@@ -72,11 +72,11 @@
 
   {{- "\n\n" -}}
   {{ range . -}}
-    {{ $localeRoot := partialCached "root-page.html" . .Language.Lang -}}
-    {{ $url := $localeRoot.Permalink -}}
-    {{ with $localeRoot.OutputFormats.Get "markdown" -}}
+    {{ $localeRootPage := partialCached "root-page.html" . .Language.Lang -}}
+    {{ $url := $localeRootPage.Permalink -}}
+    {{ with $localeRootPage.OutputFormats.Get "markdown" -}}
       {{ $url = .Permalink -}}
     {{ end -}}
-    - [{{ $localeRoot.Language.Label }}]({{ $url }}) {{- "\n" -}}
+    - [{{ $localeRootPage.Language.Label }}]({{ $url }}) {{- "\n" -}}
   {{ end -}}
 {{ end -}}
