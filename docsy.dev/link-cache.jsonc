@@ -119,6 +119,11 @@
     "when": "2026-09-19T16:04:39Z",
     "via": "lychee",
   },
+  "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting": {
+    "status": 200,
+    "when": "2026-10-04T16:52:09Z",
+    "via": "lychee",
+  },
   "https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver": {
     "status": 200,
     "when": "2026-09-21T04:35:25Z",
@@ -719,6 +724,11 @@
     "when": "2026-09-21T04:35:25Z",
     "via": "lychee",
   },
+  "https://github.com/camsong/You-Dont-Need-jQuery": {
+    "status": 200,
+    "when": "2026-10-04T16:52:10Z",
+    "via": "lychee",
+  },
   "https://github.com/cchesser/java-perf-workshop": {
     "status": 200,
     "when": "2026-09-19T16:04:39Z",
@@ -757,6 +767,11 @@
   "https://github.com/deining": {
     "status": 200,
     "when": "2026-09-21T04:35:24Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy": {
+    "status": 200,
+    "when": "2026-10-04T16:52:10Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy": {
@@ -814,12 +829,10 @@
     "when": "2026-09-18T01:33:10Z",
     "via": "lychee",
   },
-  // New-file seed: goes live when the zizmor workflow merges.
   "https://github.com/docsy/docsy/blob/main/.github/workflows/zizmor.yaml": {
-    "status": 206,
-    "when": "2026-09-18T15:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-31",
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/CONTRIBUTING.md": {
     "status": 200,
@@ -831,12 +844,10 @@
     "when": "2026-09-17T23:13:26Z",
     "via": "lychee",
   },
-  // New-file seed: goes live when the technical charter (#2806) merges.
   "https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf": {
-    "status": 206,
-    "when": "2026-09-17T22:05:00Z",
-    "via": "manual",
-    "expires": "2026-10-31",
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/docsy.dev/agent-docs.config.yml": {
     "status": 200,
@@ -908,12 +919,10 @@
     "when": "2026-09-17T23:13:25Z",
     "via": "lychee",
   },
-  // New-file seed: goes live when the Mermaid plugin conversion merges.
   "https://github.com/docsy/docsy/blob/main/tests/fixture-site/mermaid-plugin.test.mjs": {
-    "status": 206,
-    "when": "2026-09-19T15:20:00Z",
-    "via": "manual",
-    "expires": "2026-10-31",
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/tests/fixture-site/plugins-acceptance.test.mjs": {
     "status": 200,
@@ -950,12 +959,10 @@
     "when": "2026-09-17T23:13:26Z",
     "via": "lychee",
   },
-  // New-file seed: goes live when the Mermaid plugin conversion merges.
   "https://github.com/docsy/docsy/blob/main/tests/visual/mermaid-runtime.test.mjs": {
-    "status": 206,
-    "when": "2026-09-19T15:20:00Z",
-    "via": "manual",
-    "expires": "2026-10-31",
+    "status": 200,
+    "when": "2026-10-01T14:43:14Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/tests/visual/plugins-runtime.test.mjs": {
     "status": 200,
@@ -1667,6 +1674,11 @@
     "when": "2026-09-18T01:19:17Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/issues/2775": {
+    "status": 200,
+    "when": "2026-10-03T14:56:31Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/issues/2789": {
     "status": 200,
     "when": "2026-09-18T01:19:08Z",
@@ -2140,6 +2152,11 @@
   "https://github.com/docsy/docsy/milestone/27": {
     "status": 200,
     "when": "2026-09-18T01:33:10Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/milestone/28": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/milestones": {
@@ -2662,9 +2679,19 @@
     "when": "2026-09-18T01:19:08Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2780": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/2781": {
     "status": 200,
     "when": "2026-09-18T01:19:08Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2783": {
+    "status": 200,
+    "when": "2026-10-03T16:24:59Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2786": {
@@ -2672,9 +2699,24 @@
     "when": "2026-09-18T01:19:08Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2787": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2790": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/2811": {
     "status": 200,
     "when": "2026-09-18T23:01:24Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2821": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2823": {
@@ -2685,6 +2727,16 @@
   "https://github.com/docsy/docsy/pull/2827": {
     "status": 200,
     "when": "2026-09-27T15:06:18Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2833": {
+    "status": 200,
+    "when": "2026-10-03T14:56:32Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2838": {
+    "status": 200,
+    "when": "2026-10-01T19:22:52Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/941": {
@@ -2864,6 +2916,11 @@
     "when": "2026-09-18T01:33:09Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/rules/20660119": {
+    "status": 200,
+    "when": "2026-09-30T09:49:33Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/rules/23611048": {
     "status": 200,
     "when": "2026-09-20T00:12:12Z",
@@ -2872,6 +2929,16 @@
   "https://github.com/docsy/docsy/rules/23697379": {
     "status": 200,
     "when": "2026-09-20T00:12:12Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/rules/24234982": {
+    "status": 200,
+    "when": "2026-09-30T12:13:31Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/rules/24262989": {
+    "status": 200,
+    "when": "2026-09-30T17:44:38Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/tags": {
@@ -4645,6 +4712,11 @@
   "https://registry.npmjs.org/": {
     "status": 200,
     "when": "2026-09-21T04:35:24Z",
+    "via": "lychee",
+  },
+  "https://releases.jquery.com/": {
+    "status": 200,
+    "when": "2026-10-04T16:52:09Z",
     "via": "lychee",
   },
   "https://rtlcss.com/": {

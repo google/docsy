@@ -149,8 +149,9 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 > **UNRELEASED: this planned version is still under development**
 
-For the full list of changes, see the [0.18.0][] release page or the [git
-history since 0.17.0][].
+For an introduction to this release, see the [0.18.0 release report][]. For the
+full list of changes, see the [0.18.0][] release page or the [git history since
+0.17.0][].
 
 [**Breaking changes**](#breaking-change):
 
@@ -158,15 +159,17 @@ history since 0.17.0][].
   GitHub organization. The Hugo module path is now
   `github.com/docsy/docsy/theme`; the old path resolves 0.17.0 and earlier only
   ([#1992][]).
-- **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
-  `window.jQuery` and `$` are no longer available to site scripts; theme scripts
-  now use standard DOM APIs ([#1436][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
   MarkMap, whose autoloader is now fetched at build time; reserved
   `params.docsy` for theme settings ([#2789][]). Removed the `params.mermaid`
-  and `params.markmap` namespaces; replaced Mermaid's inline module script with
-  a deferred same-origin entry; dropped rendering under Mermaid pins below 10.
+  and `params.markmap` namespaces, so leftover keys fail the build; version pins
+  must be plain version strings (a range or operator fails the build); replaced
+  Mermaid's inline module script, and MarkMap's inline script and style, with
+  deferred same-origin entries; dropped rendering under Mermaid pins below 10.
+- **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
+  `window.jQuery` and `$` are no longer available to site scripts; theme scripts
+  now use standard DOM APIs ([#1436][]).
 
 **New**:
 
@@ -181,6 +184,10 @@ history since 0.17.0][].
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
+- Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
+  so page-gated scripts can't be emitted for the wrong page; for the one-line
+  override update, see the [0.18.0 release report][0.18.0-blog-overrides]
+  ([#2787][]).
 
 [**Experimental**](#experimental):
 
@@ -191,10 +198,14 @@ history since 0.17.0][].
 **For maintainers**:
 
 - Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
-  (one per weekly wave), after applying the open update wave (devDep pins and
-  bumps, actions v7) ([#2774][], [#2776][]).
-- Switched the docsy.dev committed link cache to an owned JSONC format
-  ([#2779][]).
+  (one per weekly wave); moved the Renovate config to JSONC, with GitHub Actions
+  bumps looked up as releases and pinned by SHA ([#2776][], [#2821][]).
+- Switched the docsy.dev committed link cache to an owned JSONC format, and
+  added a weekly workflow that re-verifies its oldest entries ([#2779][],
+  [#2780][], [#2783][]).
+- Re-homed the script-loading design, implementation, and quality notes from
+  theme comments into the [project docs][project-script-loading], with a
+  maintainer-notes rule for routing such content ([#2790][]).
 - Extended the root `npm run check` to also run the docsy.dev workspace format
   check, matching what CI enforces (`fix:format` already delegated) ([#2781][]).
 - Restructured the publish-verify release step into numbered gates and hardened
@@ -202,29 +213,42 @@ history since 0.17.0][].
   local npm hardening never relaxed except by an explicit per-run override
   ([#2786][]).
 - Added zizmor workflow security analysis (pedantic persona, results in the
-  Security tab) through the OpenTelemetry shared workflow, and hardened the
-  refresh, smoke and publish workflows on its first pass ([#2811][]).
+  Security tab) through the OpenTelemetry shared workflow, and brought the
+  workflows to zero findings: hardened the refresh, smoke and publish workflows,
+  named the jobs, and set superseded PR runs to cancel ([#2811][], [#2838][]).
 - Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
 - Pinned Renovate's schedule timezone to UTC ([#2827][]).
+- Documented the [branch model][project-branch-model]'s invariants, the tag
+  rulesets, and the release procedures the `main` ruleset allows ([#2833][]).
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
-[#2774]: https://github.com/docsy/docsy/pull/2774
 [#2776]: https://github.com/docsy/docsy/pull/2776
 [#2779]: https://github.com/docsy/docsy/pull/2779
+[#2780]: https://github.com/docsy/docsy/pull/2780
 [#2781]: https://github.com/docsy/docsy/pull/2781
+[#2783]: https://github.com/docsy/docsy/pull/2783
 [#2786]: https://github.com/docsy/docsy/pull/2786
+[#2787]: https://github.com/docsy/docsy/pull/2787
 [#2789]: https://github.com/docsy/docsy/issues/2789
+[#2790]: https://github.com/docsy/docsy/pull/2790
 [#2811]: https://github.com/docsy/docsy/pull/2811
+[#2821]: https://github.com/docsy/docsy/pull/2821
 [#2823]: https://github.com/docsy/docsy/pull/2823
 [#2825]: https://github.com/docsy/docsy/issues/2825
 [#2827]: https://github.com/docsy/docsy/pull/2827
+[#2833]: https://github.com/docsy/docsy/pull/2833
+[#2838]: https://github.com/docsy/docsy/pull/2838
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
+[0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
+[0.18.0-blog-overrides]: /blog/2026/0.18.0/#plugins-registry
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
+[project-branch-model]: /project/build/git-repo/#branch-model
+[project-script-loading]: /project/design/script-loading/
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [git history since 0.17.0]:

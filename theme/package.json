@@ -25,6 +25,7 @@
   },
   "files": [
     "assets",
+    "data",
     "hugo.yaml",
     "i18n",
     "layouts",
