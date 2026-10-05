@@ -989,13 +989,13 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
-[multilingual site]: /docs/language/
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
 [Look and Feel]: /docs/content/lookandfeel/
+[multilingual site]: /docs/language/
 [permalinks]: https://gohugo.io/configuration/permalinks/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
