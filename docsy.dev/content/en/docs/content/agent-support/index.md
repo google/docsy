@@ -74,10 +74,14 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-Each enabled page gets a Markdown alternate at `index.md` beside its HTML: the
-page title and description, the page content with shortcodes expanded, and a
-list of child pages for sections. A shortcode without a Markdown variant emits
-its HTML there; for how to add one, see [Shortcodes][shortcode-md-variants].
+Each enabled page gets a Markdown alternate at `index.md` beside its HTML with:
+
+- Page title and description
+- Page content, with shortcodes expanded
+- For sections, the list of child pages
+
+A shortcode without a Markdown variant emits its HTML there; for how to add one,
+see [Shortcodes][shortcode-md-variants].
 
 ### Opt pages out {#opt-pages-out}
 
