@@ -6,7 +6,6 @@
 
 # {{ .Site.Title -}}
 
-{{/* A doc-rooted root page may carry no description; the home's still applies. */ -}}
 {{ with (or .Description site.Home.Description) | strings.TrimSpace }}
 
 > {{ replace . "\n" "\n> " -}}
