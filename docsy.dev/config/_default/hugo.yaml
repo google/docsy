@@ -12,7 +12,6 @@ ignoreLogs:
 outputs:
   home: [HTML, markdown, LLMS]
   page: [HTML, markdown]
-  # Keep in step with the doc-rooted cascade.
   section: [HTML, RSS, print, markdown]
 
 imaging:
