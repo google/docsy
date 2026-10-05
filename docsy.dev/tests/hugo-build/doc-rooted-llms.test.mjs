@@ -1,9 +1,7 @@
-// The doc-rooted variant (config/doc-rooted) makes home link-only and gives the
-// docs landing page, which then publishes each language's root, the LLMS
-// output through a cascade. Pins what that cascade must produce: one llms.txt
-// per language root, the directive on the root pages, and no index anywhere
-// else, since a page's `outputs` replace its kind's list and the cascade
-// restates `_default`'s section formats (docsy/docsy#2834).
+// The doc-rooted variant's cascade (config/doc-rooted) gives the docs landing
+// page the LLMS output. A page's `outputs` replace its kind's list, so the
+// cascade restates `_default`'s section formats and must track them; this
+// pins what it must produce (docsy/docsy#2834).
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -45,32 +43,32 @@ test('doc-rooted variant publishes llms.txt at each language root only', (t) => 
     `doc-rooted build is warning-free; output:\n${output}`,
   );
 
-  const indexes = globSync('**/llms.txt', { cwd: destDir }).sort();
-  assert.deepEqual(indexes, ['fr/llms.txt', 'llms.txt']);
-  for (const [index, home] of [
+  const llmsFiles = globSync('**/llms.txt', { cwd: destDir }).sort();
+  assert.deepEqual(llmsFiles, ['fr/llms.txt', 'llms.txt']);
+  for (const [llms, home] of [
     ['llms.txt', 'index.md'],
     ['fr/llms.txt', 'fr/index.md'],
   ]) {
-    const content = readFileSync(join(destDir, index), 'utf8');
+    const content = readFileSync(join(destDir, llms), 'utf8');
     assert.ok(
       content.startsWith('# Docsy\n'),
-      `${index} opens with the site title`,
+      `${llms} opens with the site title`,
     );
     assert.ok(
       content.includes(`- [Home page](http://localhost/${home})`),
-      `${index} links the root Markdown alternate as the home page`,
+      `${llms} links the root Markdown version as the home page`,
     );
   }
 
-  for (const [page, index] of [
+  for (const [page, llms] of [
     ['index.html', '/llms.txt'],
     ['fr/index.html', '/fr/llms.txt'],
   ]) {
     assert.ok(
       readFileSync(join(destDir, page), 'utf8').includes(
-        `For AI agents: the site's llms.txt is at ${index}`,
+        `For AI agents: the site's llms.txt is at ${llms}`,
       ),
-      `${page} directive points at ${index}`,
+      `${page} directive points at ${llms}`,
     );
   }
 

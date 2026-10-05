@@ -1,11 +1,7 @@
 // Doc-rooted sites (docs section published at the site root, home link-only;
 // recipe: docsy.dev/content/en/docs/content/adding-content.md § Doc-rooted
 // sites) have no rendered home, so llms.txt must come from the page that
-// publishes the root. Pins the llms.txt publication and content, the
-// directive, the Markdown alternate's llms.txt link, and the root URL the theme
-// links as home; plus the two consequences the layout move has for every site:
-// the Markdown link is omitted when no llms.txt is published, and a site's own
-// home-specific llms.txt layout keeps precedence. See docsy/docsy#2834.
+// publishes the root (docsy/docsy#2834).
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -97,16 +93,16 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
   );
   assert.ok(
     en.includes('- [Home page](https://example.org/index.md)'),
-    'en llms.txt links the root Markdown alternate as the home page',
+    'en llms.txt links the root Markdown version as the home page',
   );
   assert.ok(
     en.includes('- [Guide](https://example.org/guide/index.md)'),
-    'en llms.txt lists the docs subsection at its root-level Markdown alternate',
+    'en llms.txt lists the docs subsection at its root-level Markdown version',
   );
   const fr = b.publicFile('fr/llms.txt');
   assert.ok(
     fr.includes('- [Home page](https://example.org/fr/index.md)'),
-    'fr llms.txt links the fr root Markdown alternate as the home page',
+    'fr llms.txt links the fr root Markdown version as the home page',
   );
   for (const [lang, content] of [
     ['en', en],
@@ -115,7 +111,7 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
     assert.ok(
       content.includes('- [English](https://example.org/index.md)') &&
         content.includes('- [Français](https://example.org/fr/index.md)'),
-      `${lang} llms.txt lists both locales by their root Markdown alternate`,
+      `${lang} llms.txt lists both locales by their root Markdown version`,
     );
   }
 });
@@ -164,20 +160,18 @@ test('the _root-llms-txt-path shortcode resolves per language on a doc-rooted si
   );
 });
 
-test('doc-rooted Markdown alternates link their language llms.txt', () => {
+test('doc-rooted Markdown versions link their language llms.txt', () => {
   const b = docRooted();
   assert.ok(
     b.publicFile('index.md').includes('Site [llms.txt](/llms.txt)'),
-    'root Markdown alternate links /llms.txt',
+    'root Markdown version links /llms.txt',
   );
   assert.ok(
     b.publicFile('fr/index.md').includes('Site [llms.txt](/fr/llms.txt)'),
-    'fr root Markdown alternate links /fr/llms.txt',
+    'fr root Markdown version links /fr/llms.txt',
   );
 });
 
-// The home page's permalink stays the language root: publishing llms.txt
-// from the home page as its only output would make it /llms.txt instead.
 test('doc-rooted theme home links point at the language root', () => {
   const b = docRooted();
   for (const [page, root] of [
@@ -207,7 +201,7 @@ test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, direc
   assert.ok(!html.includes('For AI agents'), 'page omits the directive');
   assert.ok(
     !b.publicFile('index.md').includes('Site [llms.txt]'),
-    'root Markdown alternate omits the llms.txt link',
+    'root Markdown version omits the llms.txt link',
   );
 });
 
@@ -222,15 +216,13 @@ test('site without llms.txt omits the Markdown llms.txt link', () => {
     'outputs:\n  home: [HTML, markdown]\n  page: [HTML, markdown]\n',
   );
   const md = b.publicFile('docs/install/index.md');
-  assert.ok(md.startsWith('# Install'), 'Markdown alternate renders');
+  assert.ok(md.startsWith('# Install'), 'Markdown version renders');
   assert.ok(
     !md.includes('Site [llms.txt]'),
-    'Markdown alternate omits the llms.txt link',
+    'Markdown version omits the llms.txt link',
   );
 });
 
-// The theme's layout moved from index.llms.txt to all.llms.txt; a site's own
-// home-specific override keeps precedence for the home page.
 test("a site's layouts/index.llms.txt override still renders the home index", () => {
   const b = build(
     'llms-home-override',
