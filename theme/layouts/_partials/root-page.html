@@ -1,9 +1,9 @@
 {{/* Argument: a Site (of any language).
-  Returns the page publishing the site's root URL: its home page, or the
-  top-level section published at that URL (doc-rooted sites, see the user
+  Returns the page publishing the site's root URL: its home page, or the docs
+  section page when it is published there (doc-rooted sites, see the user
   guide). */ -}}
 {{ $rootPage := .Home -}}
-{{ range .Sections -}}
+{{ with .GetPage "docs" -}}
   {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
 {{ end -}}
 {{ return $rootPage -}}
