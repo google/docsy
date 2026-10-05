@@ -169,7 +169,9 @@ for the root page's kind:
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
-Shortcodes render into Markdown through [output-format-specific templates][sof].
+Shortcodes render into Markdown through [output-format-specific templates][sof];
+for example, this site's [`readfile.markdown.md`][] is the Markdown variant of
+the theme's `readfile` shortcode.
 
 ## Server-side support
 
@@ -221,6 +223,7 @@ For details on how these checks are configured, see
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
+[`readfile.markdown.md`]: https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [section-tmp-type]: https://gohugo.io/templates/types/#section
 [sof]: https://gohugo.io/templates/shortcode/#lookup-order
 <!-- prettier-ignore-end -->

@@ -190,7 +190,8 @@ For a doc-rooted variant of this site, see the [Doc-rooted example][].
 To publish [`llms.txt`][] for [agent support][], add `LLMS` to the docs landing
 page `outputs` (for each language in a multilingual site). A page's `outputs`
 replace those configured for its kind, so list the section formats too, for
-example `[HTML, RSS, print, markdown, LLMS]`.
+example `[HTML, RSS, print, markdown, LLMS]`. The file's summary is the landing
+page's `description`, or the home page's when the landing page has none.
 
 ### Check for path conflicts
 
