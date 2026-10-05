@@ -163,10 +163,9 @@ Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
 overrides them. For `llms.txt`, override `all.llms.txt`, or a template named for
 the root page's kind:
 
-- [`home`][home-tmp-type] for regular sites; e.g.,
-  `layouts/{home,index}.llms.txt`
-- [`section`][section-tmp-type] for doc-rooted sites; e.g.,
-  `layouts/section.llms.txt`
+- [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
+  `index.llms.txt`)
+- [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
 Shortcodes render into Markdown through [output-format-specific templates][sof];
 see [Shortcodes][shortcode-md-variants].
