@@ -145,14 +145,21 @@ structure, where:
 - Page files remain in the `docs` section directory, for example `content/docs/`
   or `content/en/docs/`.
 
-As a consequence, the `docs` section landing page becomes the site's **root
-page**: the page published at the [site root][], `/` or `/LANG/` for a language.
-The **home page**, Hugo's `home`-kind page, still exists but no longer publishes
-anything (see below). A doc-rooted site has the following benefits:
+As a consequence:
+
+- The `docs` section landing page becomes the site's **root page**: the page
+  published at the [site root][], `/` or `/LANG/` for a language.
+- The **home page**, Hugo's `home`-kind page, still exists but no longer
+  publishes anything; see
+  [Creating a doc-rooted site](#creating-a-doc-rooted-site).
+
+A doc-rooted site has the following benefits:
 
 - Produces simpler, documentation-focused URLs (no `/docs/` prefix).
 - Avoids the need to create a custom home page using [blocks][] shortcodes or
   HTML.
+
+### Creating a doc-rooted site
 
 To create a doc-rooted site, redefine the `docs` section [permalinks][] in your
 [site configuration][] as follows (YAML format shown):
