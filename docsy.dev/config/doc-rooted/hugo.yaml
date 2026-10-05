@@ -6,7 +6,7 @@ permalinks:
     docs: /:sections[1:]
 
 cascade:
-  - build: { render: link }
-    target: { path: / }
-  - outputs: [HTML, RSS, print, markdown, LLMS]
-    target: { path: /docs }
+  - target: { path: / }
+    build: { render: link }
+  - target: { path: /docs }
+    outputs: [HTML, RSS, print, markdown, LLMS]
