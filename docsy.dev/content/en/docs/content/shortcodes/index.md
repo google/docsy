@@ -1089,11 +1089,11 @@ substring matches are matches as well. That means, if you set
 
 On pages with [Markdown output][] enabled, Hugo renders a shortcode with the
 template matching the `markdown` output format when there is one, and with its
-HTML template otherwise, so the HTML lands in the page's Markdown version. To
-add a Markdown variant of a shortcode, create `layouts/_shortcodes/NAME.md`
-beside the HTML template, where `NAME` is the shortcode's name; for the full
-resolution rules, see Hugo's shortcode [lookup order][]. For an example, see
-docsy.dev's [`readfile.markdown.md`][].
+HTML template otherwise, so the HTML lands in the page's Markdown version.
+
+To add a Markdown variant of a `NAME.html` shortcode, create `NAME.md` under
+`layouts/_shortcodes/`. For the full resolution rules, see Hugo's shortcode
+[lookup order][]. For an example, see docsy.dev's [`readfile.markdown.md`][].
 
 <!-- prettier-ignore-start -->
 [lookup order]: https://gohugo.io/templates/shortcode/#lookup-order
