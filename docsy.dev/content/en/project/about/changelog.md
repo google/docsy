@@ -182,7 +182,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 **Other changes**:
 
 - **[`llms.txt` on doc-rooted sites][ug-doc-rooted]**: the docs landing page can
-  now publish it, and any section can render it. On every site, Markdown
+  now publish it, as can any page of kind `section`. On every site, Markdown
   versions link the current language's `llms.txt`, if published, and the agent
   directive names it ([#2834][]).
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing

@@ -6,7 +6,7 @@
 
 # {{ .Site.Title -}}
 
-{{ with (or .Description .Site.Home.Description) | strings.TrimSpace }}
+{{ with (or $rootPage.Description .Site.Home.Description) | strings.TrimSpace }}
 
 > {{ replace . "\n" "\n> " -}}
 

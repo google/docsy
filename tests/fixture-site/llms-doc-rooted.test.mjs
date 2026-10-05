@@ -266,6 +266,29 @@ test('the _root-llms-txt-path shortcode fails the build on a site without llms.t
   );
 });
 
+test('a section-kind llms.txt is the site overview, with the root page summary', () => {
+  const b = build(
+    'llms-section-kind',
+    {
+      'content/_index.md':
+        frontMatter({ title: 'Home', description: 'Site summary' }) +
+        'Home body\n',
+      'content/docs/_index.md':
+        frontMatter({ title: 'Docs', description: 'Docs summary' }) +
+        'Docs landing\n',
+      'content/docs/install.md': leaf('Install'),
+    },
+    'outputs:\n  home: [HTML, markdown, LLMS]\n  section: [HTML, markdown, LLMS]\n',
+  );
+  const root = b.publicFile('llms.txt');
+  const section = b.publicFile('docs/llms.txt');
+  assert.ok(
+    root.includes('\n> Site summary\n'),
+    'root llms.txt quotes the home',
+  );
+  assert.equal(section, root, 'section llms.txt matches the root one');
+});
+
 test("a site's layouts/index.llms.txt override still renders the home's llms.txt", () => {
   const b = build(
     'llms-home-override',
