@@ -1229,7 +1229,6 @@
     "when": "2026-09-17T23:13:31Z",
     "via": "lychee",
   },
-  // Seed for a file this PR adds: goes live when docsy#2841 merges.
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt": {
     "status": 206,
     "when": "2026-10-05T17:02:09Z",
