@@ -137,8 +137,7 @@ The file links to the Markdown version of (where one exists):
 - Top-level docs sections
 - Site languages
 
-For an example of the generated `llms.txt` for this site, see
-[/llms.txt](/llms.txt).
+For this site's `llms.txt`, see [/llms.txt](/llms.txt).
 
 ## Discovery
 
@@ -159,8 +158,8 @@ Docsy's templates for the two outputs are:
 - [`layouts/all.llms.txt`][] ([`llms.txt`](#llms-txt))
 
 Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
-overrides them. For `llms.txt`, override `all.llms.txt`, or the root page's
-kind:
+overrides them. For `llms.txt`, override `all.llms.txt`, or a template named for
+the root page's kind:
 
 - [`home`][home-tmp-type] for regular sites; e.g.,
   `layouts/{home,index}.llms.txt`
