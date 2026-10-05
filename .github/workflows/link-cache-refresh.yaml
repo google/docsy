@@ -4,7 +4,7 @@
 # date and re-running the link checker re-verifies them (or retires URLs no
 # longer in the site), rotating through them in about a month of weekly
 # merged refreshes. Entries whose expires date still holds are exempt from
-# that prune; lapsed ones are dropped first.
+# that prune; lapsed ones are dropped as well.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -27,7 +27,9 @@ on:
   workflow_dispatch:
     inputs:
       refresh_count:
-        description: Number of (oldest) link-cache entries to refresh.
+        description:
+          Oldest link-cache entries without an expires date to refresh (lapsed
+          ones are dropped as well).
         default: &default_refresh_count 300
         type: number
       prune_more:
@@ -174,7 +176,7 @@ jobs:
           || steps.merge.outputs.self_healed == 'true' }}
         run: |
           count="${REFRESH_COUNT:-$DEFAULT_REFRESH_COUNT}"
-          echo "Oldest entry before pruning, then pruning $count oldest entries:"
+          echo "Oldest entry before pruning, then pruning $count oldest entries without an expires date (lapsed ones as well):"
           npm run link-cache -- --list 1 --prune "$count"
           echo "did_prune=true" >> "$GITHUB_OUTPUT"
 

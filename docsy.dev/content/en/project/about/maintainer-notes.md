@@ -452,7 +452,7 @@ code-scanning alerts.
 `test:website` checks docsy.dev's links with Lychee, caching external-link
 results in the committed `docsy.dev/link-cache.jsonc` so checks stay fast and
 offline-friendly. Each entry records the `result`, its `when` timestamp, `via`
-(the resolver that set it) and, optionally, `expires` ([field
+(the resolver that set it), and, optionally, `expires` ([field
 reference][link-cache fields]); Lychee's own `.lycheecache` is derived from it
 per run and gitignored. Config lives in `docsy.dev/lychee.toml`. CI installs a
 pinned lychee binary (see `.github/workflows/test.yaml` and
@@ -464,8 +464,8 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   re-runs the check, adding any missing entries and renormalizing; then commit
   the updated `link-cache.jsonc`.
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
-  `-- -p 10%` to drop lapsed seeds and the oldest tenth of entries without
-  `expires`, `-- -m REGEX` to scope by URL).
+  `-- -p 10%` to drop lapsed `expires` entries and the oldest tenth of entries
+  without `expires`, `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
   release prep) by adding an entry with placeholder `"result": 206`,
   `"via": "manual"`, an `"expires"` date (an exclusive UTC date: `2026-10-01`
