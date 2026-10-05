@@ -28,7 +28,8 @@ Docsy enables:
   lead agents to each page's Markdown version and to `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: per-language list of links to Markdown content.
+- **[`llms.txt`](#llms-txt)**: per-language overview of the site, linking its
+  Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -73,7 +74,7 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-Each enabled page gets a Markdown alternate at `index.md` beside its HTML with:
+Each enabled page gets a Markdown version at `index.md` beside its HTML with:
 
 - Page title and description
 - Page content, with shortcodes expanded
@@ -109,10 +110,10 @@ outputs: [HTML]
 
 ## Enable `llms.txt` {#llms-txt}
 
-The `llms.txt` format is a simple text format for listing machine-readable links
-to site content. It is designed to be easy for agents to discover and parse, and
-to complement the richer but more complex Markdown outputs. To learn more, see
-[llmstxt.org][].
+An `llms.txt` file is a short Markdown overview of a site for agents: a title, a
+summary, and lists of links to Markdown versions of its pages. Agents read or
+search it, then follow the links they need; the detail stays behind them. For
+the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files. To enable it for
 home pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For
@@ -129,7 +130,7 @@ outputs:
 >
 > For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
 
-The LLMS manifest lists, each linked to its Markdown alternate where one exists:
+The file lists, each linked to its Markdown version where one exists:
 
 - The root page
 - Main menu pages
