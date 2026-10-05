@@ -1,17 +1,7 @@
-{{/*
-
-Embeds the root-relative path of the current language's llms.txt, which the
-root page publishes (the home page, or the docs section page on a doc-rooted
-site). Errors when the site publishes none. For use in content links, where
-the path depends on the language:
-
-  [{{% _root-llms-txt-path %}}]({{% _root-llms-txt-path %}})
-
-NOTE: This is currently a Docsy-private shortcode.
-*/ -}}
+{{/* Resolves to the root-relative path of the current language's llms.txt */ -}}
 
 {{ with (partialCached "root-page.html" site site.Language.Lang).OutputFormats.Get "LLMS" -}}
   {{ .RelPermalink -}}
 {{ else -}}
-  {{ errorf "%s: shortcode '_root-llms-txt-path': this site publishes no llms.txt (no LLMS output on its root page)" .Position -}}
+  {{ errorf "%s: shortcode %q: this site publishes no llms.txt (no LLMS output on its root page)" .Position .Name -}}
 {{ end -}}
