@@ -71,6 +71,7 @@ const PACKAGES = {
       `${TAR}assets/scss/main.scss`,
       `${TAR}i18n/en.yaml`,
       `${TAR}assets/js/plugins/tabpane-persist.js`,
+      `${TAR}data/docsy/schema/params/docsy.yaml`,
     ],
     // images/, theme.toml, and go.mod serve only the git-based channels
     // (Hugo themes registry, Hugo modules), so npm clients never need them.
@@ -87,6 +88,7 @@ const PACKAGES = {
     // Mirror of theme/package.json "files"; keep the two in sync.
     pkgFiles: [
       'assets',
+      'data',
       'hugo.yaml',
       'i18n',
       'layouts',

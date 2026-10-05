@@ -95,8 +95,9 @@ Every registry shape warning carries the id `docsy-config` (to silence one, see
 `version` validation applies to entries not already dropped by the shape guards,
 including disabled entries. An exact `X.Y.Z` passes without a version warning;
 another value matching the schema's pattern, such as `latest`, warns under
-_`NAME`_`-floating-version`, where _`NAME`_ is the entry's name. An empty or
-malformed value fails the build and skips the entry before its companion runs.
+_`NAME`_`-floating-version`, where _`NAME`_ is the entry's name. A value outside
+the pattern, such as a range or operator (`^11`, `>=11`, `*`) or an empty or
+malformed string, fails the build and skips the entry before its companion runs.
 
 For why Docsy pins versions, see [Pinned script-dependency versions][ug-pins].
 

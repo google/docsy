@@ -15,7 +15,13 @@ const repoRoot = path.resolve(
 );
 
 // Entries: [GHSA ID, advisory package name].
-const acceptedAdvisories = new Map();
+const acceptedAdvisories = new Map([
+  // No fixed version. Reached only through markdownlint-cli2's globbing
+  // (dev-only lint), whose brace patterns come from repo-tracked config and
+  // script arguments: a PR able to plant a hostile pattern already runs its
+  // own code. Worst case, the lint run crashes, failing the check.
+  ['GHSA-vfj7-8cjw-p6xm', 'braces'],
+]);
 
 function validateAuditGate(report, accepted) {
   // Fail-closed on npm audit format changes.
