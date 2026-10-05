@@ -148,7 +148,7 @@ structure, where:
 As a consequence:
 
 - The `docs` section landing page becomes the site's **root page**: the page
-  published at the [site root][], `/` or `/LANG/` for a language.
+  published at the [site root][], `/` or `/LANG/` on a [multilingual site][].
 - The **home page**, Hugo's `home`-kind page, still exists but no longer
   publishes anything; see
   [Creating a doc-rooted site](#creating-a-doc-rooted-site).
@@ -989,6 +989,7 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
+[multilingual site]: /docs/language/
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
