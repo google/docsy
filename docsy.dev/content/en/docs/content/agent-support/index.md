@@ -137,7 +137,8 @@ The file links to the Markdown version of (where one exists):
 - Top-level docs sections
 - Site languages
 
-For this site's `llms.txt`, see [/llms.txt](/llms.txt).
+For this site's `llms.txt`, see
+[llms.txt]({{% _site Home.RelPermalink %}}llms.txt).
 
 ## Discovery
 

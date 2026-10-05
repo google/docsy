@@ -1,0 +1,25 @@
+{{/*
+
+@param {string} [0] The site field to embed, one of: BaseURL, Home.RelPermalink,
+                    Lang, Title.
+
+Embeds a field of the current language's site, for content that needs a
+language-dependent value, such as the site root in a link destination:
+
+  [llms.txt]({{% _site Home.RelPermalink %}}llms.txt)
+
+NOTE: This is currently a Docsy-private shortcode.
+*/ -}}
+
+{{ $field := .Get 0 -}}
+{{ with $field -}}
+  {{ if eq . "BaseURL" }}{{ site.BaseURL -}}
+  {{ else if eq . "Home.RelPermalink" }}{{ site.Home.RelPermalink -}}
+  {{ else if eq . "Lang" }}{{ site.Language.Lang -}}
+  {{ else if eq . "Title" }}{{ site.Title -}}
+  {{ else -}}
+    {{ errorf "%s: shortcode '_site': unsupported field %q" $.Position . -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "%s: shortcode '_site': field name is missing" .Position -}}
+{{ end -}}
