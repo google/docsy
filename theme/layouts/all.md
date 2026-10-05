@@ -13,15 +13,11 @@ Template design:
 
 {{ $needSeparator := false -}}
 
-{{/* Description ------------------------------------------------------- */ -}}
-
 {{ with .Description | strings.TrimSpace }}
 
 > {{ replace . "\n" "\n> " -}}
 {{ $needSeparator = true -}}
 {{ end -}}
-
-{{/* Site index -------------------------------------------------------- */ -}}
 
 {{ with (partialCached "root-page.html" site site.Language.Lang).OutputFormats.Get "LLMS" }}
 {{ if $needSeparator }}
@@ -34,8 +30,6 @@ Site [llms.txt]( {{- .RelPermalink -}} )
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{/* Page content ------------------------------------------------------ */ -}}
-
 {{ with .RenderShortcodes | strings.TrimSpace -}}
 {{ if $needSeparator }}
 ---
@@ -46,8 +40,6 @@ Site [llms.txt]( {{- .RelPermalink -}} )
 {{ . }}
 {{ $needSeparator = true -}}
 {{ end -}}
-
-{{/* Section index, if any --------------------------------------------- */ -}}
 
 {{ with .Pages -}}
 
