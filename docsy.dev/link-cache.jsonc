@@ -4071,6 +4071,11 @@
     "when": "2026-09-19T16:04:40Z",
     "via": "lychee",
   },
+  "https://gohugo.io/templates/lookup-order/": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/templates/new-templatesystem-overview/": {
     "status": 200,
     "when": "2026-06-27T12:29:28Z",
@@ -4094,6 +4099,16 @@
   "https://gohugo.io/templates/types/": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/templates/types/#home": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/templates/types/#section": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
     "via": "lychee",
   },
   "https://gohugo.io/themes/": {

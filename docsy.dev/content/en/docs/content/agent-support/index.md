@@ -74,6 +74,11 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
+Each enabled page gets a Markdown alternate at `index.md` beside its HTML: the
+page title and description, the page content with shortcodes expanded, and a
+list of child pages for sections. A shortcode without a Markdown variant emits
+its HTML there; for how to add one, see [Shortcodes][shortcode-md-variants].
+
 ### Opt pages out {#opt-pages-out}
 
 > [!TIP]
@@ -106,10 +111,10 @@ to site content. It is designed to be easy for agents to discover and parse, and
 to complement the richer but more complex Markdown outputs. To learn more, see
 [llmstxt.org][].
 
-Docsy generates an `llms.txt` index at each language's site root, and includes
-links to the home page, main menu pages, and Markdown alternates where they
-exist. To enable it, add `LLMS` to the Hugo [outputs][] configuration for the
-home page. For example:
+Docsy publishes an `llms.txt` index at each language's site root, listing the
+root page, main menu pages, top-level docs sections, and site languages, each
+linked to its Markdown alternate where one exists. To enable it, add `LLMS` to
+the Hugo [outputs][] configuration for the home page. For example:
 
 ```yaml
 outputs:
@@ -139,19 +144,16 @@ Agents find your Markdown content through:
 
 ## Customize output
 
-Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
-via `layouts/all.llms.txt`. You can override these defaults at several levels:
+Docsy renders the Markdown alternate with `layouts/all.md` and `llms.txt` with
+`layouts/all.llms.txt`. Both follow Hugo's [template lookup rules][lookup], so
+your project's `layouts/` overrides them. For `llms.txt`, override the root
+page's kind:
 
-- **Per kind**:
-  - Add templates such as `home.md` or `_default/single.md` under `layouts/` in
-    your project to tailor Markdown output for specific [Hugo kinds][].
-  - For `llms.txt`, the kind is `home`, or `section` on a [doc-rooted site][].
-- **Per shortcode**: Add [output-format-specific shortcode templates][sof] to
-  project-local shortcodes so they render Markdown-friendly content when
-  appropriate. For example, this site's [readfile.markdown.md][] is the
-  Markdown-output variant of the theme's `readfile` shortcode.
-- **Per page**: Provide page-specific content or structure for high-value pages
-  that need a curated agent-facing view.
+- Regular site: [`home.llms.txt`][home-template]
+- [Doc-rooted site][]: [`section.llms.txt`][section-template]
+
+Shortcodes render into Markdown through [output-format-specific templates][sof];
+see [Shortcodes][shortcode-md-variants].
 
 ## Server-side support
 
@@ -194,12 +196,12 @@ For details on how these checks are configured, see
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
-[Hugo kinds]: https://gohugo.io/templates/types/
-[layouts/all.md]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
-[readfile.markdown.md]:
-  https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
+[home-template]: https://gohugo.io/templates/types/#home
 [llmstxt.org]: https://llmstxt.org/
+[lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]:
   https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
+[section-template]: https://gohugo.io/templates/types/#section
+[shortcode-md-variants]: /docs/content/shortcodes/
 [sof]: https://gohugo.io/templates/shortcode/
