@@ -25,7 +25,7 @@ const tmpDir = join(siteDir, 'tmp');
 function buildDocRooted() {
   mkdirSync(tmpDir, { recursive: true });
   const destDir = mkdtempSync(join(tmpDir, 'doc-rooted-llms-'));
-  const res = spawnSync('npm run build -- -d ' + destDir, {
+  const res = spawnSync(`npm run build -- -d "${destDir}"`, {
     cwd: siteDir,
     shell: true,
     encoding: 'utf8',
@@ -76,7 +76,6 @@ test('doc-rooted variant publishes llms.txt at each language root only', (t) => 
     );
   }
 
-  // The landing page keeps the section formats the cascade restates.
   for (const file of [
     'index.html',
     'index.xml',
