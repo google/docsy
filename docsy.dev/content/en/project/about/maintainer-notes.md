@@ -271,7 +271,12 @@ Automated updates are configured through Renovate. Settings rationale:
 The Node toolchain is pinned by two `.nvmrc` files holding the same version, a
 platform constraint: workflows and nvm read the root file, while Netlify reads
 only its base directory's (`docsy.dev/.nvmrc`), with no root fallback. The
-toolchain-versions test guards the sync.
+toolchain-versions test guards the sync. Renovate's `nvm` manager proposes pin
+bumps, grouped with the wave's patch or minor npm updates; to bump by hand, edit
+both files and run `npm run test:repo`. The pin is a maintainer-side input: the
+[officially supported](/project/about/changelog/#official-support) Node range is
+`engines.node`, and upgrade posts name the LTS line, so a bump within the line
+is not a release-note item.
 
 The npm config follows the same two-homes pattern: `theme/.npmrc` is a
 byte-identical mirror of the root `.npmrc`, because `--prefix`/`-C` npm runs
