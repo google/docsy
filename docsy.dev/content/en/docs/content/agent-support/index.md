@@ -115,9 +115,9 @@ to site content. It is designed to be easy for agents to discover and parse, and
 to complement the richer but more complex Markdown outputs. To learn more, see
 [llmstxt.org][].
 
-Docsy defines an `LLMS` output format for an `llms.txt` index at each language's
-site root. To enable it, add `LLMS` to the Hugo [outputs][] configuration for
-the home page. For example:
+Docsy defines an `LLMS` output format for `llms.txt` files. To enable it for
+home pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For
+example:
 
 ```yaml
 outputs:
@@ -126,11 +126,11 @@ outputs:
   section: [HTML, RSS, print, markdown]
 ```
 
-> [!TIP]
+> [!IMPORTANT]
 >
 > For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
 
-The index lists, each linked to its Markdown alternate where one exists:
+The LLMS manifest lists, each linked to its Markdown alternate where one exists:
 
 - The root page
 - Main menu pages
