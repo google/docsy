@@ -138,7 +138,7 @@ The file links to the Markdown version of (where one exists):
 - Site languages
 
 For this site's `llms.txt`, see
-[llms.txt]({{% _site Home.RelPermalink %}}llms.txt).
+[{{% _root-llms-txt-path %}}](<{{% _root-llms-txt-path %}}>).
 
 ## Discovery
 

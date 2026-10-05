@@ -15,12 +15,20 @@ const frontMatter = (fields) =>
   `---\n${Object.entries(fields)
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n')}\n---\n`;
+const leaf = (title, { llmsLink = true } = {}) =>
+  frontMatter({ title }) +
+  (llmsLink
+    ? 'Leaf page; see [{{% _root-llms-txt-path %}}](<{{% _root-llms-txt-path %}}>).\n'
+    : 'Leaf page\n');
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
 // en: only the link-only home carries a description, so llms.txt falls back
 // to it; fr: the landing page's own description wins.
-const docRootedFiles = (docsOutputs = '[HTML, RSS, markdown, LLMS]') => ({
+const docRootedFiles = (
+  docsOutputs = '[HTML, RSS, markdown, LLMS]',
+  leafOptions = {},
+) => ({
   'content/_index.md': linkOnlyHome({
     title: 'Home',
     description: 'Fixture docs, doc-rooted',
@@ -35,7 +43,8 @@ const docRootedFiles = (docsOutputs = '[HTML, RSS, markdown, LLMS]') => ({
       outputs: docsOutputs,
     }) + 'Accueil docs\n',
   'content/docs/guide/_index.md': frontMatter({ title: 'Guide' }) + 'Guide\n',
-  'content/docs/install.md': frontMatter({ title: 'Install' }) + 'Leaf page\n',
+  'content/docs/install.md': leaf('Install', leafOptions),
+  'content/docs/install.fr.md': leaf('Installation', leafOptions),
 });
 
 const docRootedConfig = `permalinks:
@@ -139,6 +148,22 @@ test('doc-rooted pages carry the directive, pointing at their language llms.txt'
   }
 });
 
+test('the _root-llms-txt-path shortcode resolves per language on a doc-rooted site', () => {
+  const b = docRooted();
+  assert.ok(
+    b
+      .publicFile('install/index.html')
+      .includes('<a href="/llms.txt">/llms.txt</a>'),
+    'en page links /llms.txt by path',
+  );
+  assert.ok(
+    b
+      .publicFile('fr/installation/index.html')
+      .includes('<a href="/fr/llms.txt">/fr/llms.txt</a>'),
+    'fr page links /fr/llms.txt by path',
+  );
+});
+
 test('doc-rooted Markdown alternates link their language llms.txt', () => {
   const b = docRooted();
   assert.ok(
@@ -171,7 +196,7 @@ test('doc-rooted theme home links point at the language root', () => {
 test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, directive, or link', () => {
   const b = build(
     'llms-doc-rooted-off',
-    docRootedFiles('[HTML, RSS, markdown]'),
+    docRootedFiles('[HTML, RSS, markdown]', { llmsLink: false }),
     docRootedConfig,
   );
   for (const llms of ['llms.txt', 'fr/llms.txt']) {
