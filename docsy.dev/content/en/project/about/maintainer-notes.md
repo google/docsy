@@ -450,11 +450,12 @@ code-scanning alerts.
 ## Link checking and the link cache
 
 `test:website` checks docsy.dev's links with Lychee, caching external-link
-results in the committed `docsy.dev/link-cache.jsonc` (the "link cache") so
-checks stay fast and offline-friendly. Each entry records the result, its `when`
-timestamp, and `via` (the resolver that set it); Lychee's own `.lycheecache` is
-derived from it per run and gitignored. Config lives in `docsy.dev/lychee.toml`.
-CI installs a pinned lychee binary (see `.github/workflows/test.yaml` and
+results in the committed `docsy.dev/link-cache.jsonc` so checks stay fast and
+offline-friendly. Each entry records the `result`, its `when` timestamp, `via`
+(the resolver that set it) and, optionally, `expires` ([field
+reference][link-cache fields]); Lychee's own `.lycheecache` is derived from it
+per run and gitignored. Config lives in `docsy.dev/lychee.toml`. CI installs a
+pinned lychee binary (see `.github/workflows/test.yaml` and
 `link-cache-refresh.yaml`); a plain site build doesn't need it. A weekly
 workflow re-verifies the oldest entries; for the rotation model, see the
 `link-cache-refresh` workflow's header comment.
@@ -463,13 +464,15 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   re-runs the check, adding any missing entries and renormalizing; then commit
   the updated `link-cache.jsonc`.
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
-  `-- -p 10%` to drop the oldest tenth, `-- -m REGEX` to scope by URL).
+  `-- -p 10%` to drop the oldest tenth after any lapsed seeds, `-- -m REGEX` to
+  scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
-  release prep) by adding an entry with placeholder result `206`,
-  `"via": "manual"`, an `"expires"` date (exclusive, UTC: `2026-10-01` holds the
-  seed through September 30), and a `//` comment noting the reason. Expired
-  seeds are dropped by the next prune and re-verified live ([link-cache's one
-  rule][]); drop an entry early only to force a re-check.
+  release prep) by adding an entry with placeholder `"result": 206`,
+  `"via": "manual"`, an `"expires"` date (an exclusive UTC date: `2026-10-01`
+  holds the seed through September 30), and a `//` comment noting the reason.
+  Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
+  re-verified live by the following check ([link-cache's one rule][]); drop an
+  entry early only to force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
@@ -1127,7 +1130,8 @@ To test a Docsy branch or release from a consumer site, for each site:
 [github.com/docsy/docsy/theme]: <{{% param github_repo %}}/blob/main/theme/>
 [go.mod]: <{{% param github_repo %}}/blob/main/theme/go.mod>
 [hugo-extended]: https://github.com/jakejarvis/hugo-extended/releases
-[link-cache's one rule]: https://github.com/chalin/link-cache/blob/v0.6.0/docs/operating-model.md#one-rule
+[link-cache fields]: https://github.com/chalin/link-cache/blob/main/docs/cache-format.md#fields
+[link-cache's one rule]: https://github.com/chalin/link-cache/blob/main/docs/operating-model.md#one-rule
 [main ruleset]: <{{% param github_repo %}}/rules/23697379>
 [milestones]: <{{% param github_repo %}}/milestones>
 [officially supports]: /project/about/changelog/#official-support

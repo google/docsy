@@ -809,9 +809,14 @@
     "when": "2026-09-19T16:04:41Z",
     "via": "lychee",
   },
-  "https://github.com/chalin/link-cache/blob/v0.6.0/docs/operating-model.md#one-rule": {
+  "https://github.com/chalin/link-cache/blob/main/docs/cache-format.md#fields": {
     "result": 200,
-    "when": "2026-10-04T00:07:19Z",
+    "when": "2026-10-05T14:02:18Z",
+    "via": "lychee",
+  },
+  "https://github.com/chalin/link-cache/blob/main/docs/operating-model.md#one-rule": {
+    "result": 200,
+    "when": "2026-10-05T14:02:18Z",
     "via": "lychee",
   },
   "https://github.com/cloudwego/cloudwego.github.io": {
