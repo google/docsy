@@ -130,7 +130,7 @@ outputs:
 >
 > For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
 
-The file lists, each linked to its Markdown version where one exists:
+The file links to the Markdown version of (where one exists):
 
 - The root page
 - Main menu pages
