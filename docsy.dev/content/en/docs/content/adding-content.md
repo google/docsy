@@ -174,20 +174,16 @@ multilingual sites):
 build: { render: link }
 ```
 
-To publish an [`llms.txt`][] index, add `LLMS` to the docs landing page's front
-matter `outputs` (the link-only home page publishes none), keeping the formats
-your site configuration lists for sections (again, one per language). For
-example:
+### Agent support
 
-```yaml
-outputs: [HTML, RSS, print, markdown, LLMS]
-```
+To publish a [`llms.txt`][] index for [agent support][], add `LLMS` to the docs
+landing page `outputs` configuration (for each language in a multilingual site).
 
 For an example of a doc-rooted variant of this site, see the [Doc-rooted
 example][] variant.
 
-[`llms.txt`]: /docs/content/agent-support/#llms-txt
-[Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
+For agent support documentation, see
+[Agent Support](/docs/content/agent-support/).
 
 ### Check for path conflicts
 
@@ -976,11 +972,15 @@ sitemap:
 
 To learn more about configuring sitemaps, see [Sitemap Templates][].
 
+<!-- prettier-ignore-start -->
+[`llms.txt`]: /docs/content/agent-support/#llms-txt
+[agent support]: /docs/content/agent-support/
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
 [blocks]: /docs/content/shortcodes/#blocks
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
+[Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
@@ -992,3 +992,4 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
 [site configuration]: https://gohugo.io/configuration/introduction/
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
+<!-- prettier-ignore-end -->

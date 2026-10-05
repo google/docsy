@@ -1,6 +1,4 @@
-# The guide's doc-rooted recipe (docs/content/adding-content.md § Doc-rooted
-# sites), applied from config: this variant builds from the regular site's
-# content tree, so its front-matter steps can't live in front matter.
+# Details, see docs/content/adding-content.md § Doc-rooted sites
 permalinks:
   page:
     docs: /:sections[1:]/:slug/
@@ -10,7 +8,5 @@ permalinks:
 cascade:
   - build: { render: link }
     target: { path: / }
-  # Page outputs replace the kind's: keep this list in step with _default's
-  # section outputs.
   - outputs: [HTML, RSS, print, markdown, LLMS]
     target: { path: /docs }
