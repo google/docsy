@@ -115,10 +115,9 @@ to site content. It is designed to be easy for agents to discover and parse, and
 to complement the richer but more complex Markdown outputs. To learn more, see
 [llmstxt.org][].
 
-Docsy publishes an `llms.txt` index at each language's site root, listing the
-root page, main menu pages, top-level docs sections, and site languages, each
-linked to its Markdown alternate where one exists. To enable it, add `LLMS` to
-the Hugo [outputs][] configuration for the home page. For example:
+Docsy defines an `LLMS` output format for an `llms.txt` index at each language's
+site root. To enable it, add `LLMS` to the Hugo [outputs][] configuration for
+the home page. For example:
 
 ```yaml
 outputs:
@@ -130,6 +129,13 @@ outputs:
 > [!TIP]
 >
 > For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
+
+The index lists, each linked to its Markdown alternate where one exists:
+
+- The root page
+- Main menu pages
+- Top-level docs sections
+- Site languages
 
 For an example of the generated `llms.txt` for this site, see
 [/llms.txt](/llms.txt).
@@ -148,7 +154,7 @@ Agents find your Markdown content through:
 
 ## Customize output
 
-Docsy renders the Markdown alternate with `layouts/all.md` and `llms.txt` with
+Docsy's templates for the two outputs are `layouts/all.md` and
 `layouts/all.llms.txt`. Both follow Hugo's [template lookup rules][lookup], so
 your project's `layouts/` overrides them. For `llms.txt`, override the root
 page's kind:
