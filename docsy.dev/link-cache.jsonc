@@ -4016,6 +4016,11 @@
     "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
+  "https://gohugo.io/quick-reference/glossary/#site-root": {
+    "status": 200,
+    "when": "2026-10-05T14:34:45Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/quick-reference/glossary/#sites-matrix": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",

@@ -145,8 +145,10 @@ structure, where:
 - Page files remain in the `docs` section directory, for example `content/docs/`
   or `content/en/docs/`.
 
-As a consequence, the `docs` section landing page becomes the site home page. A
-doc-rooted site has the following benefits:
+As a consequence, the `docs` section landing page becomes the site's **root
+page**: the page published at the [site root][], `/` or `/LANG/` for a language.
+The **home page**, Hugo's `home`-kind page, still exists but no longer publishes
+anything (see below). A doc-rooted site has the following benefits:
 
 - Produces simpler, documentation-focused URLs (no `/docs/` prefix).
 - Avoids the need to create a custom home page using [blocks][] shortcodes or
@@ -163,11 +165,11 @@ permalinks:
     docs: /:sections[1:]
 ```
 
-Because the docs section landing page now serves as the home page, you need to
+Because the docs section landing page now serves as the root page, you need to
 add extra configuration to avoid "Duplicate target paths" warnings and avoid
-render conflicts with the site-root index file.
+render conflicts with the home page.
 
-Add the following front matter to each site root index file (one per language in
+Add the following front matter to each home page file (one per language in
 multilingual sites):
 
 ```yaml
@@ -990,5 +992,6 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
 [site configuration]: https://gohugo.io/configuration/introduction/
+[site root]: https://gohugo.io/quick-reference/glossary/#site-root
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
 <!-- prettier-ignore-end -->
