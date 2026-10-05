@@ -12,6 +12,7 @@ ignoreLogs:
 outputs:
   home: [HTML, markdown, LLMS]
   page: [HTML, markdown]
+  # Keep in step with the doc-rooted cascade (tests/hugo-build/doc-rooted-outputs).
   section: [HTML, RSS, print, markdown]
 
 imaging:
