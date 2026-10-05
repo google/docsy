@@ -118,9 +118,9 @@ outputs:
   section: [HTML, RSS, print, markdown]
 ```
 
-On a [doc-rooted site][], the docs landing page is the root page, so it
-publishes the index: configure `LLMS` in its `outputs` rather than the home
-page's. For details, see [Agent support][doc-rooted-agent-support].
+> [!TIP]
+>
+> For a [doc-rooted site][], see [Agent support][doc-rooted-agent-support].
 
 For an example of the generated `llms.txt` for this site, see
 [/llms.txt](/llms.txt).
