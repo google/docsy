@@ -155,8 +155,8 @@ Agents find your Markdown content through:
 
 Docsy's templates for the two outputs are:
 
-- `layouts/all.md`
-- `layouts/all.llms.txt`
+- [`layouts/all.md`][] ([Markdown output](#markdown-output))
+- [`layouts/all.llms.txt`][] ([`llms.txt`](#llms-txt))
 
 Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
 overrides them. For `llms.txt`, override the root page's kind:
@@ -212,6 +212,8 @@ For details on how these checks are configured, see
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
 [home-tmp-type]: https://gohugo.io/templates/types/#home
+[`layouts/all.md`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
+[`layouts/all.llms.txt`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
