@@ -1,7 +1,7 @@
 {{ $rootPage := partialCached "root-page.html" site site.Language.Lang -}}
-{{ $homeMarkdownURL := $rootPage.Permalink -}}
+{{ $rootPageURL := $rootPage.Permalink -}}
 {{ with $rootPage.OutputFormats.Get "markdown" -}}
-  {{ $homeMarkdownURL = .Permalink -}}
+  {{ $rootPageURL = .Permalink -}}
 {{ end -}}
 
 # {{ .Site.Title -}}
@@ -17,7 +17,7 @@
 
 ## Site index
 
-- [Home page]( {{- $homeMarkdownURL -}} )
+- [Home page]( {{- $rootPageURL -}} )
 {{ with .Site.GetPage "AGENTS.md" -}}
   {{ with .Permalink -}}
     {{ $url := . -}}
