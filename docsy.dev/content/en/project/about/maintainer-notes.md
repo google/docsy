@@ -464,8 +464,8 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   re-runs the check, adding any missing entries and renormalizing; then commit
   the updated `link-cache.jsonc`.
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
-  `-- -p 10%` to drop the oldest tenth after any lapsed seeds, `-- -m REGEX` to
-  scope by URL).
+  `-- -p 10%` to drop lapsed seeds and the oldest tenth of entries without
+  `expires`, `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later (such as release-tag links during
   release prep) by adding an entry with placeholder `"result": 206`,
   `"via": "manual"`, an `"expires"` date (an exclusive UTC date: `2026-10-01`
