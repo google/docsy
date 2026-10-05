@@ -2,9 +2,8 @@
 title: AI-agent support
 linkTitle: Agent support
 description: >-
-  Opt-in features that help AI agents and automated tools discover and use your
-  site content, including Markdown output, alternate links in HTML, and
-  llms.txt.
+  Let AI agents discover and use your content: opt in to Markdown versions of
+  your pages and a site llms.txt.
 cSpell:ignore: llmstxt
 ---
 
@@ -81,8 +80,8 @@ Each enabled page gets a Markdown version at `index.md` beside its HTML with:
 - Page content, with shortcodes expanded
 - For sections, the list of child pages
 
-A shortcode without a Markdown variant emits its HTML there; see
-[Customize output](#customize-output).
+A shortcode without a Markdown variant emits its HTML there; for how to add one,
+see [Shortcodes][shortcode-md-variants].
 
 ### Opt pages out {#opt-pages-out}
 
@@ -169,9 +168,7 @@ for the root page's kind:
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
-Shortcodes render into Markdown through [output-format-specific templates][sof];
-for example, this site's [`readfile.markdown.md`][] is the Markdown variant of
-the theme's `readfile` shortcode.
+Shortcodes render into Markdown through [output-format-specific templates][sof].
 
 ## Server-side support
 
@@ -223,7 +220,7 @@ For details on how these checks are configured, see
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
-[`readfile.markdown.md`]: https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [section-tmp-type]: https://gohugo.io/templates/types/#section
+[shortcode-md-variants]: /docs/content/shortcodes/
 [sof]: https://gohugo.io/templates/shortcode/#lookup-order
 <!-- prettier-ignore-end -->
