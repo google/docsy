@@ -229,8 +229,14 @@ test('site without llms.txt omits the Markdown llms.txt link', () => {
       'content/docs/described.md':
         frontMatter({ title: 'Described', description: 'A summary' }) +
         'Body\n',
+      'content/docs/bare.md': frontMatter({ title: 'Bare' }),
     },
     'outputs:\n  home: [HTML, markdown]\n  page: [HTML, markdown]\n',
+  );
+  assert.equal(
+    b.publicFile('docs/bare/index.md'),
+    '# Bare\n',
+    'title-only Markdown version ends with one newline',
   );
   const md = b.publicFile('docs/install/index.md');
   assert.doesNotMatch(

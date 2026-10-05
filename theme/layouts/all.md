@@ -9,18 +9,16 @@ Template design:
 
 */ -}}
 
-# {{ .Title | strings.TrimSpace -}}
-
+# {{ .Title | strings.TrimSpace }}
 {{ $needSeparator := false -}}
 
 {{ with .Description | strings.TrimSpace }}
-
 > {{ replace . "\n" "\n> " }}
 {{ $needSeparator = true -}}
 {{ end -}}
 
 {{ with (partialCached "root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" }}
-{{ if $needSeparator -}}
+{{- if $needSeparator }}
 ---
 {{ end }}
 Site [llms.txt]( {{- .RelPermalink -}} )
@@ -28,7 +26,7 @@ Site [llms.txt]( {{- .RelPermalink -}} )
 {{ end -}}
 
 {{ with .RenderShortcodes | strings.TrimSpace }}
-{{ if $needSeparator -}}
+{{- if $needSeparator }}
 ---
 {{ end }}
 {{ . }}
@@ -36,7 +34,7 @@ Site [llms.txt]( {{- .RelPermalink -}} )
 {{ end -}}
 
 {{ with .Pages }}
-{{ if $needSeparator -}}
+{{- if $needSeparator }}
 ---
 {{ end }}
 Section pages:
