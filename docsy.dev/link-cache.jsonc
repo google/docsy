@@ -130,7 +130,7 @@
     "via": "lychee",
   },
   "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/DOM_scripting": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-04T16:52:09Z",
     "via": "lychee",
   },
@@ -785,7 +785,7 @@
     "via": "lychee",
   },
   "https://github.com/camsong/You-Dont-Need-jQuery": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-04T16:52:10Z",
     "via": "lychee",
   },
@@ -835,7 +835,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-04T16:52:10Z",
     "via": "lychee",
   },
@@ -1752,7 +1752,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/issues/2775": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:31Z",
     "via": "lychee",
   },
@@ -2237,7 +2237,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/milestone/28": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
@@ -2762,7 +2762,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2780": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
@@ -2772,7 +2772,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2783": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T16:24:59Z",
     "via": "lychee",
   },
@@ -2782,12 +2782,12 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2787": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2790": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
@@ -2797,7 +2797,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2821": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
@@ -2812,7 +2812,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/2833": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
@@ -4907,7 +4907,7 @@
     "via": "lychee",
   },
   "https://releases.jquery.com/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-04T16:52:09Z",
     "via": "lychee",
   },
