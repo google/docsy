@@ -28,8 +28,8 @@ on:
     inputs:
       refresh_count:
         description:
-          Oldest link-cache entries without an expires date to refresh (plus
-          any whose expires date has lapsed).
+          Oldest link-cache entries without an expires date to refresh (plus any
+          whose expires date has lapsed).
         default: &default_refresh_count 300
         type: number
       prune_more:
