@@ -153,13 +153,18 @@ Agents find your Markdown content through:
 
 ## Customize output
 
-Docsy's templates for the two outputs are `layouts/all.md` and
-`layouts/all.llms.txt`. Both follow Hugo's [template lookup rules][lookup], so
-your project's `layouts/` overrides them. For `llms.txt`, override the root
-page's kind:
+Docsy's templates for the two outputs are:
 
-- Regular site: [`home.llms.txt`][home-template]
-- [Doc-rooted site][]: [`section.llms.txt`][section-template]
+- `layouts/all.md`
+- `layouts/all.llms.txt`
+
+Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
+overrides them. For `llms.txt`, override the root page's kind:
+
+- [`home`][home-tmp-type] for regular sites; e.g.,
+  `layouts/{home,index}.llms.txt`
+- [`section`][section-tmp-type] for doc-rooted sites; e.g.,
+  `layouts/section.llms.txt`
 
 Shortcodes render into Markdown through [output-format-specific templates][sof];
 see [Shortcodes][shortcode-md-variants].
@@ -200,17 +205,18 @@ Known gaps in this scorecard are tracked under [#2614][].
 For details on how these checks are configured, see
 [Agent-support checks](/project/build/ci-cd/#agent-support-checks).
 
+<!-- prettier-ignore-start -->
 [afdocs]: https://afdocs.dev/
 [built-in output formats]: https://gohugo.io/configuration/output-formats/
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
-[home-template]: https://gohugo.io/templates/types/#home
+[home-tmp-type]: https://gohugo.io/templates/types/#home
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
-[OpenTelemetry agent score]:
-  https://buildwithfern.com/agent-score/company/opentelemetry
+[OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
-[section-template]: https://gohugo.io/templates/types/#section
+[section-tmp-type]: https://gohugo.io/templates/types/#section
 [shortcode-md-variants]: /docs/content/shortcodes/
 [sof]: https://gohugo.io/templates/shortcode/
+<!-- prettier-ignore-end -->
