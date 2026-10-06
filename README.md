@@ -5,7 +5,7 @@
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 
 Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
-providing simple navigation, site structure, and more. Docsy is a [Linux
+providing simple navigation, site structure, and more. It is a [Linux
 Foundation][] project, established as Docsy a Series of LF Projects, LLC, and
 governed by the project's [Technical Charter][].
 
@@ -101,8 +101,8 @@ npm scripts in this repo run under Bash on every platform (`script-shell` pin in
 
 ## Contributing
 
-Docsy follows the LF Projects [code of conduct][]. For the process for
-submitting pull requests, see [CONTRIBUTING.md][].
+Docsy follows the LF Projects [code of conduct][]. For how to contribute, see
+the [contributing guide][].
 
 Thank you to all past, present, and future [contributors][]!
 
@@ -112,7 +112,7 @@ This project is licensed under the Apache License 2.0, see
 [LICENSE](https://github.com/docsy/docsy/blob/main/LICENSE) for details.
 
 [code of conduct]: https://lfprojects.org/policies/code-of-conduct/
-[CONTRIBUTING.md]: https://github.com/docsy/docsy/blob/main/CONTRIBUTING.md
+[contributing guide]: https://www.docsy.dev/docs/contributing/
 [contributors]: https://github.com/docsy/docsy/graphs/contributors
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
 [Linux Foundation]: https://www.linuxfoundation.org/
