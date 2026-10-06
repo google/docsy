@@ -155,10 +155,10 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 
 [**Breaking changes**](#breaking-change):
 
-- **[New home][0.18.0-blog-org-move]**: moved the repositories to the `docsy`
-  GitHub organization. The Hugo module path is now
-  `github.com/docsy/docsy/theme`; the old path resolves 0.17.0 and earlier only
-  ([#1992][]).
+- **[New home][0.18.0-blog-org-move]**: Docsy is now a Linux Foundation project,
+  and its repositories moved to the `docsy` GitHub organization. The Hugo module
+  path is now `github.com/docsy/docsy/theme`; the old path resolves 0.17.0 and
+  earlier only ([#1992][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
   MarkMap, whose autoloader is now fetched at build time; reserved
@@ -210,9 +210,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
   (one per weekly wave); moved the Renovate config to JSONC, with GitHub Actions
   bumps looked up as releases and pinned by SHA ([#2776][], [#2821][]).
-- Switched the docsy.dev committed link cache to an owned JSONC format, and
-  added a weekly workflow that re-verifies its oldest entries ([#2779][],
-  [#2780][], [#2783][]).
+- Switched the docsy.dev committed link cache to the link-cache package's JSONC
+  format and expiry-based rotation rule, and added a weekly workflow that
+  re-verifies its oldest entries ([#2779][], [#2780][], [#2783][], [#2792][]).
 - Re-homed the script-loading design, implementation, and quality notes from
   theme comments into the [project docs][project-script-loading], with a
   maintainer-notes rule for routing such content ([#2790][]).
@@ -246,6 +246,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2787]: https://github.com/docsy/docsy/pull/2787
 [#2789]: https://github.com/docsy/docsy/issues/2789
 [#2790]: https://github.com/docsy/docsy/pull/2790
+[#2792]: https://github.com/docsy/docsy/pull/2792
 [#2811]: https://github.com/docsy/docsy/pull/2811
 [#2821]: https://github.com/docsy/docsy/pull/2821
 [#2823]: https://github.com/docsy/docsy/pull/2823
