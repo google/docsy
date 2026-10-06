@@ -4,11 +4,9 @@
 
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 
-Docsy is a [Hugo](https://gohugo.io) theme for technical documentation sets,
-providing simple navigation, site structure, and more.
-
-This is not an officially supported Google product. This project is actively
-being maintained.
+Docsy, a [Linux Foundation][] project, is a [Hugo](https://gohugo.io) theme for
+technical documentation sites, providing simple navigation, site structure, and
+more.
 
 > [!IMPORTANT] 🚧 IMPORTANT 🚧
 >
@@ -102,11 +100,9 @@ npm scripts in this repo run under Bash on every platform (`script-shell` pin in
 
 ## Contributing
 
-For details on our [code of conduct][] and the process for submitting pull
-requests, see [CONTRIBUTING.md][].
-
-Please see the [Technical Charter][] for additional information on governance
-and contribution guidelines.
+Docsy is governed by its [Technical Charter][] as Docsy a Series of LF Projects,
+LLC, and follows the LF Projects [code of conduct][]. For how to contribute, see
+the [contributing guide][].
 
 Thank you to all past, present, and future [contributors][]!
 
@@ -115,11 +111,11 @@ Thank you to all past, present, and future [contributors][]!
 This project is licensed under the Apache License 2.0, see
 [LICENSE](https://github.com/docsy/docsy/blob/main/LICENSE) for details.
 
-[code of conduct]:
-  https://github.com/google/.github/blob/master/CODE_OF_CONDUCT.md
-[CONTRIBUTING.md]: https://github.com/docsy/docsy/blob/main/CONTRIBUTING.md
+[code of conduct]: https://lfprojects.org/policies/code-of-conduct/
+[contributing guide]: https://www.docsy.dev/docs/contributing/
 [contributors]: https://github.com/docsy/docsy/graphs/contributors
 [deploys]: https://app.netlify.com/sites/docsydocs/deploys
+[Linux Foundation]: https://www.linuxfoundation.org/
 [main-preview]: https://main--docsydocs.netlify.app/
 [netlify]: https://netlify.com
 [npm-badge]: https://img.shields.io/npm/v/%40docsy%2Ftheme
