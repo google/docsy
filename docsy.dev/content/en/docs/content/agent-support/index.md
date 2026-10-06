@@ -23,8 +23,7 @@ Docsy enables:
 
 - **[Markdown output format](#markdown-output)** support. Your project's
   `outputs` configuration controls which page kinds publish Markdown.
-- **[Discovery](#discovery)**: alternate links and a hidden in-body directive
-  lead agents to each page's Markdown version and to `llms.txt`.
+- **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
 - **[`llms.txt`](#llms-txt)**: per-language overview of the site, linking its
@@ -116,8 +115,9 @@ links to Markdown versions of its pages. Agents read or search it, then follow
 the links they need. For the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
-its root page's URL. To enable it for home pages, add `LLMS` to the Hugo `home`
-[outputs][] configuration. For example:
+its root page's URL. Docsy supports `LLMS` on the root page only; on other pages
+it renders a site overview, not a page-scoped file. To enable it for home pages,
+add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -146,13 +146,17 @@ For this site's `llms.txt`, see
 
 Agents find your Markdown content through:
 
-- **Alternate links**: page HTML headers include `rel="alternate"` links to the
+- **Alternate links**: page heads include `rel="alternate"` links to the
   Markdown version of the page.
-- **In-body directive**: when `llms.txt` is enabled, each page body opens with a
-  visually-hidden directive pointing agents to the language's `llms.txt` and,
-  when the page has one, its Markdown version. Sites that override the theme's
-  `baseof` templates need to call the [`llms-directive.html`][] partial
-  themselves.
+- **`describedby` link**: when the root page publishes `llms.txt`, page heads
+  include a `rel="describedby"` link to the language's `llms.txt`, as [llms.txt
+  spec][llmstxt.org] v2 recommends. Sites that override the theme's `head.html`
+  partial need to add the link themselves.
+- **In-body directive**: when the root page publishes `llms.txt`, each page body
+  opens with a visually-hidden directive pointing agents to the language's
+  `llms.txt` and, when the page has one, its Markdown version. Sites that
+  override the theme's `baseof` templates need to call the
+  [`llms-directive.html`][] partial themselves.
 
 ## Customize output
 
