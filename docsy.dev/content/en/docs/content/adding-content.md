@@ -148,8 +148,8 @@ structure, where:
 As a consequence:
 
 - The `docs` section landing page becomes the site's **root page**: the page
-  published at the [site root][] (`/`, or `/LANG/` on a [multilingual site][],
-  for language `LANG`).
+  published at the [site root][] (`/`, or `/`_`LANG`_`/` on a [multilingual
+  site][], for language _`LANG`_).
 - The **home page**, Hugo's `home`-kind page, still exists but no longer
   publishes anything.
 
