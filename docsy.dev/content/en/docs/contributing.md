@@ -44,8 +44,7 @@ local copy of this site, as described [below](#previewing-your-changes-locally).
 
 ### Community guidelines
 
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google.com/conduct/).
+This project follows the [LF Projects Code of Conduct][].
 
 ### Creating issues
 
@@ -163,5 +162,6 @@ hand corner of the page.
 <!-- prettier-ignore-start -->
 [cncf-cla]: https://github.com/cncf/cla
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
+[LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 <!-- prettier-ignore-end -->

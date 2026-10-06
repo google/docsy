@@ -4146,6 +4146,21 @@
     "when": "2026-09-02T08:07:02Z",
     "via": "lychee",
   },
+  "https://lfprojects.org/policies/": {
+    "status": 200,
+    "when": "2026-10-06T01:08:54Z",
+    "via": "lychee",
+  },
+  "https://lfprojects.org/policies/code-of-conduct/": {
+    "status": 200,
+    "when": "2026-10-06T01:08:54Z",
+    "via": "lychee",
+  },
+  "https://lfprojects.org/policies/privacy-policy/": {
+    "status": 200,
+    "when": "2026-10-06T01:08:54Z",
+    "via": "lychee",
+  },
   "https://llmstxt.org/": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
@@ -5540,6 +5555,11 @@
   "https://www.latex-project.org/": {
     "status": 200,
     "when": "2026-09-19T16:04:40Z",
+    "via": "lychee",
+  },
+  "https://www.linuxfoundation.org/": {
+    "status": 200,
+    "when": "2026-10-06T01:08:54Z",
     "via": "lychee",
   },
   "https://www.navidrome.org/": {
