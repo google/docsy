@@ -52,7 +52,7 @@ params:
   copyright:
     # The Series clause is the LF Projects website guideline's required notice
     authors: >-
-      Docsy Authors, Docsy a Series of LF Projects, LLC |
+      Docsy Authors | Docsy a Series of LF Projects, LLC |
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0)
     from_year: 2018
     to_year: present
@@ -62,20 +62,13 @@ params:
   example_site_url: &exampleSiteURL https://example.docsy.dev
   time_format_blog: Monday, January 02, 2006
   time_format_default: January 2, 2006
-  rss_sections: [blog] # TODO: drop since this is the default
   gcs_engine_id: 011217106833237091527:la2vtv2emlw # cSpell:disable-line
   offlineSearch: false
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
   prism_syntax_highlighting: false
-  search:
-    # algolia:
   ui:
-    # showLightDarkModeMenu param values:
-    showLightDarkModeMenu:
-      true # default
-      # false # disable
-      # 'enable-only (experimental)'
+    showLightDarkModeMenu: true
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
     sidebar_search_disable: false
@@ -171,7 +164,6 @@ taxonomies:
 security:
   funcs: # cspell:disable-line
     getenv: # cspell:disable-line
-      # Netlify build env var
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
 module:
@@ -187,7 +179,6 @@ module:
     - source: content/en
       target: content
       sites: &sites { matrix: { languages: [en, fr] } }
-    # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
       sites: *sites
@@ -203,7 +194,6 @@ module:
     - source: ../package.json
       target: data/package.json
       sites: *sites
-    # Tests
     # cSpell:ignore quang nguyen vinh therato
     - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
       target: content/tests/blocks-cover/height-auto/background.jpg
