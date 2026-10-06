@@ -95,8 +95,6 @@ const variants = {
   toggler: {
     options: {
       files,
-      // Short: the default fixture title alone overflows a phone navbar.
-      title: 'Toggler',
       extraConfig: `${crowdedMenu}params:
   ui:
     showLightDarkModeMenu: true

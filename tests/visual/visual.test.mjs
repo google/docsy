@@ -157,6 +157,15 @@ for (const { name, rel, region, viewport, scheme } of shots) {
         scheme,
         media: region.media,
       });
+      // A full-page shot spans the document's scroll width, so a wider shot
+      // is horizontal overflow, which phones zoom out to fit.
+      if (!region.selector) {
+        assert.equal(
+          actual.width,
+          viewport.width,
+          `${name} is as wide as the viewport`,
+        );
+      }
       const file = path.join(goldenDir, rel);
       if (update) {
         mkdirSync(path.dirname(file), { recursive: true });

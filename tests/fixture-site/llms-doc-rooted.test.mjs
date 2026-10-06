@@ -93,7 +93,7 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
   const b = docRooted();
   const en = b.publicFile('llms.txt');
   assert.ok(
-    en.startsWith('# Docsy fixture site'),
+    en.startsWith('# Docsy fixture\n'),
     'en llms.txt opens with the site title',
   );
   assert.ok(
