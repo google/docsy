@@ -115,9 +115,9 @@ summary (the [root page][]'s description, or the home page's), and lists of
 links to Markdown versions of its pages. Agents read or search it, then follow
 the links they need. For the format, see [llmstxt.org][].
 
-Docsy defines an `LLMS` output format for `llms.txt` files. To enable it for
-home pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For
-example:
+Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
+its root page's URL. To enable it for home pages, add `LLMS` to the Hugo `home`
+[outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -134,7 +134,7 @@ outputs:
 The file links to the following, each at its Markdown version where available:
 
 - The root page
-- The site's `AGENTS.md` page, if any
+- The site's `AGENTS.md` page, if any, at its `index.md`
 - Main menu entries
 - Top-level docs sections
 - Site locales

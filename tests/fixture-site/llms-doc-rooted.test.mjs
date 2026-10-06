@@ -195,8 +195,7 @@ test('doc-rooted theme home links point at the language root', () => {
   }
 });
 
-// LLMS configured for the home, which publishes nothing, and not for the
-// landing page.
+// LLMS configured for the home, which publishes nothing.
 test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, directive, or link', () => {
   const b = build(
     'llms-doc-rooted-off',
