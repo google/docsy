@@ -2111,6 +2111,11 @@
     "when": "2026-09-17T23:15:34Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/issues/new?title=Hugo%200.165.0-0.166.x%20upgrade%20guide": {
+    "result": 200,
+    "when": "2026-10-06T21:22:46Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/issues/new?title=Hugo%20Content%20Tips": {
     "result": 200,
     "when": "2026-09-17T23:13:32Z",
@@ -4480,6 +4485,13 @@
     "when": "2026-09-19T16:04:42Z",
     "via": "lychee",
   },
+  // 0.18.0 release-prep seed: goes live with the Hugo 0.165+ upgrade guide.
+  "https://main--docsydocs.netlify.app/blog/2026/hugo-0.165.0+/": {
+    "result": 206,
+    "when": "2026-10-06T21:23:25Z",
+    "via": "manual",
+    "expires": "2026-10-15",
+  },
   "https://main--docsydocs.netlify.app/community/": {
     "result": 200,
     "when": "2026-06-27T12:29:27Z",
@@ -5327,6 +5339,13 @@
     "result": 200,
     "when": "2026-07-29T21:28:58Z",
     "via": "lychee",
+  },
+  // 0.18.0 release-prep seed: goes live with the Hugo 0.165+ upgrade guide.
+  "https://www.docsy.dev/blog/2026/hugo-0.165.0+/": {
+    "result": 206,
+    "when": "2026-10-06T21:23:25Z",
+    "via": "manual",
+    "expires": "2026-10-15",
   },
   "https://www.docsy.dev/community/": {
     "result": 200,
