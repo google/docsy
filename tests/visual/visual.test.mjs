@@ -157,17 +157,21 @@ for (const { name, rel, region, viewport, scheme } of shots) {
         scheme,
         media: region.media,
       });
+      const file = path.join(goldenDir, rel);
       // A full-page shot spans the document's scroll width, so a wider shot
-      // is horizontal overflow, which phones zoom out to fit.
-      if (!region.selector) {
+      // is horizontal overflow, which phones zoom out to fit. Checked before
+      // a golden write (never record overflow) but after a comparison (its
+      // actual shot is the failure's diagnostic).
+      const assertFitsViewport = () => {
+        if (region.selector) return;
         assert.equal(
           actual.width,
           viewport.width,
           `${name} is as wide as the viewport`,
         );
-      }
-      const file = path.join(goldenDir, rel);
+      };
       if (update) {
+        assertFitsViewport();
         mkdirSync(path.dirname(file), { recursive: true });
         writeFileSync(file, PNG.sync.write(actual));
         console.log(`wrote ${path.relative(process.cwd(), file)}`);
@@ -175,6 +179,7 @@ for (const { name, rel, region, viewport, scheme } of shots) {
       }
       const failure = compareToGolden(name, actual, file, outDir);
       compared += 1;
+      assertFitsViewport();
       assert.equal(failure, null, `${name} matches its golden`);
     },
   );

@@ -89,9 +89,9 @@ const variants = {
     },
     pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
   },
-  // The theme toggler in the crowded navbar. Its own site: dark-mode.js
-  // re-applies the stored or auto theme, overriding the dark probes'
-  // forced data-bs-theme.
+  // The theme toggler in the crowded navbar. Its own site: the theme's
+  // dark-mode scripts (head.html's init and dark-mode.js) re-apply the stored
+  // or auto theme, overriding the dark probes' forced data-bs-theme.
   toggler: {
     options: {
       files,
@@ -500,7 +500,7 @@ test('js behavior: an overflowing navbar menu shows scroll indicators and scroll
   }
 });
 
-test('js behavior: an overflowing mobile navbar keeps the page within the device width', async () => {
+test('js behavior: an overflowing mobile navbar keeps the page within the device width, toggler menu open or closed', async () => {
   const { page, pageErrors } = await newProbePage();
   const deviceWidth = 375;
   try {

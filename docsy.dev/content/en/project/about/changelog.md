@@ -188,8 +188,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
-- Fixed phone pages rendering zoomed out when the light/dark mode menu is shown:
-  the toggle's assistive label widened the page, a 0.17.0 regression
+- Fixed phone pages rendering zoomed out when the light/dark mode menu is shown
   ([#2850][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
@@ -229,6 +228,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Pinned Renovate's schedule timezone to UTC ([#2827][]).
 - Documented the [branch model][project-branch-model]'s invariants, the tag
   rulesets, and the release procedures the `main` ruleset allows ([#2833][]).
+- Added a horizontal-overflow guard to the full-page visual goldens and a
+  mobile-navbar page-width probe to the JS runtime tests ([#2850][]).
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
