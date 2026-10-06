@@ -59,15 +59,9 @@ Alice -> Bob: hello
 `,
 };
 
-// One variant per search bundle. Pages are static so the test list registers
-// up front; each variant's server origin resolves in before().
-const variants = {
-  features: {
-    options: {
-      files,
-      // The crowded main menu overflows the mobile navbar, arming
-      // base.js's scroll-indicator logic.
-      extraConfig: `menus:
+// The crowded main menu overflows the mobile navbar, arming base.js's
+// scroll-indicator logic.
+const crowdedMenu = `menus:
   main:
 ${Array.from(
   { length: 12 },
@@ -75,7 +69,16 @@ ${Array.from(
       url: https://example.org/${i + 1}
       weight: ${i + 1}
 `,
-).join('')}params:
+).join('')}`;
+
+// One variant per search bundle, plus the toggler site. Pages are static so
+// the test list registers up front; each variant's server origin resolves in
+// before().
+const variants = {
+  features: {
+    options: {
+      files,
+      extraConfig: `${crowdedMenu}params:
   offlineSearch: true
   docsy:
     plugins:
@@ -85,6 +88,21 @@ ${Array.from(
 `,
     },
     pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
+  },
+  // The theme toggler in the crowded navbar. Its own site: dark-mode.js
+  // re-applies the stored or auto theme, overriding the dark probes'
+  // forced data-bs-theme.
+  toggler: {
+    options: {
+      files,
+      // Short: the default fixture title alone overflows a phone navbar.
+      title: 'Toggler',
+      extraConfig: `${crowdedMenu}params:
+  ui:
+    showLightDarkModeMenu: true
+`,
+    },
+    pages: ['docs/'],
   },
   // gcs_engine_id renders the navbar search input, arming search.js's
   // delegated Enter handler (the offline variant swaps that file out).
@@ -477,6 +495,36 @@ test('js behavior: an overflowing navbar menu shows scroll indicators and scroll
     await page.waitForFunction(
       () => document.querySelector('.navbar-nav').scrollLeft > 0,
       { timeout: 5000 },
+    );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: an overflowing mobile navbar keeps the page within the device width', async () => {
+  const { page, pageErrors } = await newProbePage();
+  const deviceWidth = 375;
+  try {
+    // isMobile honors the viewport meta tag, so, as on a phone, content
+    // wider than the device widens the layout viewport (innerWidth) too:
+    // compare against the device width, not innerWidth.
+    await page.setViewport({ width: deviceWidth, height: 667, isMobile: true });
+    await page.goto(`${servers.toggler.origin}/docs/`, {
+      waitUntil: 'networkidle0',
+    });
+    assert.equal(
+      await page.$eval('.td-navbar-container', (el) =>
+        el.classList.contains('navbar-is-overflowing'),
+      ),
+      true,
+      'navbar menu overflows',
+    );
+    assert.ok(await page.$('#bd-theme-text'), 'toggler label is rendered');
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollWidth),
+      deviceWidth,
+      'page is as wide as the device',
     );
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {

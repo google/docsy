@@ -129,6 +129,12 @@ $td-link-underline-offsets: (
     align-items: center;
     justify-content: center;
 
+    // Contains the toggle's visually-hidden label, which would otherwise
+    // escape the mobile navbar's scroller and widen the page.
+    .dropdown-toggle {
+      position: relative;
+    }
+
     .bi {
       // Adapted from:
       // https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
