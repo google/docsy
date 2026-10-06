@@ -195,9 +195,9 @@ agent-support goals, including Markdown URLs, llms.txt, and related categories.
 ### Scorecard examples
 
 For scorecard examples, see the [OpenTelemetry agent-readiness report][] on
-CLOMonitor (AFDocs run by the CNCF, one check per category; its observability
-result reflects a curated `llms.txt` rather than sitemap-wide coverage, the same
-trade-off this site's checks make) and the AFDocs scorecard for this site:
+CLOMonitor (CLOMonitor runs AFDocs, one check per category; its
+`llms-txt-coverage` result reflects the curated-overview trade-off this site's
+checks also make) and the AFDocs scorecard for this site:
 
 <details>
 <summary><code>docsy.dev</code> scorecard</summary>
