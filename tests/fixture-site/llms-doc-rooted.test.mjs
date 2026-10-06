@@ -325,7 +325,7 @@ test('section-only LLMS publishes section llms.txt but no directive or described
     'outputs:\n  home: [HTML, markdown]\n  section: [HTML, markdown, LLMS]\n',
   );
   assert.ok(
-    b.publicFile('docs/llms.txt').startsWith('# Docsy fixture site'),
+    b.publicFile('docs/llms.txt').startsWith('# llms-section-only fixture\n'),
     'section llms.txt is published',
   );
   for (const page of [
