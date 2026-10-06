@@ -75,6 +75,7 @@ diff each override against its new theme counterpart and port upstream changes
 as needed. Look for overrides in your project's:
 
 - `assets/`
+- `data/`
 - `i18n/`
 - `layouts/`, the most common location
 - `static/`

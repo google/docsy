@@ -1154,6 +1154,11 @@
     "when": "2026-10-06T19:08:32Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/data/docsy/schema/params/docsy.yaml?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:54:33Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/go.mod": {
     "result": 200,
     "when": "2026-09-17T23:13:27Z",
