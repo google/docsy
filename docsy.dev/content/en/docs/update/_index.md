@@ -83,6 +83,10 @@ Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
 friends) also work this way, but the theme's copies are placeholders that are
 intentionally empty: there's nothing to diff, so they don't need this review.
 
+If you override a `baseof.html` template, keep its `scripts.html` include as
+`partial`, not `partialCached`: Docsy's page-gated scripts (diagrams, math, the
+`body-end` hook) depend on the partial rendering per page.
+
 ## Check your site {#check}
 
 After updating, build or serve your site and check for errors and warnings. We
