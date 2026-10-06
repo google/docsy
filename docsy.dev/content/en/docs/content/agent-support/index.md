@@ -194,8 +194,10 @@ agent-support goals, including Markdown URLs, llms.txt, and related categories.
 
 ### Scorecard examples
 
-For scorecard examples, see the [OpenTelemetry agent score][] online report and
-the AFDocs scorecard for this site:
+For scorecard examples, see the [OpenTelemetry agent-readiness report][] on
+CLOMonitor (AFDocs run by the CNCF, one check per category; its observability
+result reflects a curated `llms.txt` rather than sitemap-wide coverage, the same
+trade-off this site's checks make) and the AFDocs scorecard for this site:
 
 <details>
 <summary><code>docsy.dev</code> scorecard</summary>
@@ -221,7 +223,7 @@ For details on how these checks are configured, see
 [`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
-[OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
+[OpenTelemetry agent-readiness report]: https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness
 [outputs]: https://gohugo.io/configuration/outputs/
 [root page]: /docs/content/adding-content/#doc-rooted-sites
 [section-tmp-type]: https://gohugo.io/templates/types/#section

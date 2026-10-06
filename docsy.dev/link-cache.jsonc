@@ -94,6 +94,11 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness": {
+    "result": 200,
+    "when": "2026-10-06T18:13:57Z",
+    "via": "lychee",
+  },
   "https://cncf-docsy-starter.netlify.app/": {
     "result": 200,
     "when": "2026-09-19T16:04:38Z",
