@@ -199,7 +199,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   ([#2789][]).
 - Added the **[`llms.txt` spec v2 discovery link][ug-discovery]**: page heads of
   sites publishing `llms.txt` now carry a `rel="describedby"` link to the
-  language's file ([#2614][]).
+  language's file ([#2851][]).
 - Declared Mermaid 12 pins experimental ([#2825][]).
 
 **For maintainers**:
@@ -249,6 +249,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2834]: https://github.com/docsy/docsy/issues/2834
 [#2838]: https://github.com/docsy/docsy/pull/2838
+[#2851]: https://github.com/docsy/docsy/pull/2851
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
