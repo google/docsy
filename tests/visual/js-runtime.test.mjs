@@ -521,10 +521,27 @@ test('js behavior: an overflowing mobile navbar keeps the page within the device
       'navbar menu overflows',
     );
     assert.ok(await page.$('#bd-theme-text'), 'toggler label is rendered');
+    const pageWidth = () =>
+      page.evaluate(() => document.documentElement.scrollWidth);
     assert.equal(
-      await page.evaluate(() => document.documentElement.scrollWidth),
+      await pageWidth(),
       deviceWidth,
       'page is as wide as the device',
+    );
+    await page.click('#bd-theme');
+    const menu = await page.waitForSelector(
+      '.td-light-dark-menu .dropdown-menu.show',
+      { visible: true, timeout: 5000 },
+    );
+    const box = await menu.boundingBox();
+    assert.ok(
+      box.x >= 0 && box.x + box.width <= deviceWidth,
+      'open toggler menu lies within the device width',
+    );
+    assert.equal(
+      await pageWidth(),
+      deviceWidth,
+      'page is as wide as the device with the menu open',
     );
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {
