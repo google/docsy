@@ -254,7 +254,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/
-[ug-doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
+[ug-doc-rooted]: /docs/content/adding-content/#agent-support
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [git history since 0.17.0]:

@@ -111,8 +111,9 @@ outputs: [HTML]
 ## Enable `llms.txt` {#llms-txt}
 
 An `llms.txt` file is a short Markdown overview of a site for agents: a title, a
-summary, and lists of links to Markdown versions of its pages. Agents read or
-search it, then follow the links they need. For the format, see [llmstxt.org][].
+summary (the root page's description, or the home page's), and lists of links to
+Markdown versions of its pages. Agents read or search it, then follow the links
+they need. For the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files. To enable it for
 home pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For
@@ -132,11 +133,11 @@ outputs:
 
 The file links to the following, each at its Markdown version where one exists:
 
-- The root page
+- The [root page][]
 - The site's `AGENTS.md` page, if any
-- Main menu pages
+- Main menu entries
 - Top-level docs sections
-- Site languages
+- Site locales
 
 For this site's `llms.txt`, see
 [`{{% _root-llms-txt-path %}}`](<{{% _root-llms-txt-path %}}>).
@@ -220,6 +221,7 @@ For details on how these checks are configured, see
 [lookup]: https://gohugo.io/templates/lookup-order/
 [OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
+[root page]: /docs/content/adding-content/#doc-rooted-sites
 [section-tmp-type]: https://gohugo.io/templates/types/#section
 [shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
 [sof]: https://gohugo.io/templates/shortcode/#lookup-order
