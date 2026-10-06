@@ -191,6 +191,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see the [0.18.0 release report][0.18.0-blog-overrides]
   ([#2787][]).
+- Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
+  minimum Hugo version is unchanged.
 
 [**Experimental**](#experimental):
 
@@ -254,6 +256,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
 [0.18.0-blog-overrides]: /blog/2026/0.18.0/#plugins-registry
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
+[hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/
 [ug-discovery]: /docs/content/agent-support/#discovery
