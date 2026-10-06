@@ -4,9 +4,9 @@ linkTitle: Hugo 0.165+ upgrade guide
 date: 2026-10-05
 draft: true
 description: >-
-  What changed in Hugo 0.165.0 and 0.166.0 for Docsy sites: the security
-  hardening, the glob and symlink rules, the KaTeX stylesheet floor, and the URL
-  and template changes, with per-change upgrade actions.
+  What changed in Hugo 0.165.0 and 0.166.0 for Docsy sites: security hardening
+  and symlink rules, rewritten globs, a KaTeX stylesheet floor, URL and template
+  changes, and Tailwind's allow-list, each with its upgrade actions
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -33,20 +33,18 @@ specifies the [Hugo versions that 0.18.0 requires and validates](0.18.0/#hugo).
   - {{% _param BREAKING %}} [KaTeX stylesheet floor](#katex)
   - {{% _param BREAKING %}} [URL and template changes](#urls-templates)
   - {{% _param BREAKING %}} [Tailwind allow-list (0.165.0)](#tailwind)
+- Where a step sets a [`security`][hugo-security] list, write the whole list:
+  Hugo replaces a configured list rather than merging it with the default.
 - {{% _param FAS rocket primary %}} Jump to
   [Upgrade to Hugo {{% param hugoSupportedVersion %}}](#upgrade) once you're
   ready.
-
-Where a step below sets a [`security`][hugo-security] list, write the whole
-list: Hugo replaces a configured list rather than merging it with the default.
 
 ## {{% _param BREAKING %}} Security hardening (0.166.0) {#security}
 
 Hugo 0.166.0 is mostly a hardening release: it confines Node tools and mounts to
 the project, checks the addresses that remote fetches resolve to, and denies Org
-mode content by default. None of it needed a change in Docsy's templates, but
-each item can stop a site's build or silently drop its files. For the details,
-see Hugo's [0.166.0][hugo-0.166.0] release notes.
+mode content by default. Each item can stop a site's build or silently drop its
+files. For the details, see Hugo's [0.166.0][hugo-0.166.0] release notes.
 
 ### Actions {#security-actions}
 
@@ -54,18 +52,23 @@ see Hugo's [0.166.0][hugo-0.166.0] release notes.
 outside it, under `node_modules` for example. Hugo 0.166.0 fails PostCSS and
 other Node tools before running them when a symlink escapes the allowed roots.
 
-- Add the link's target to `security.node.permissions.allowRead`.
+- Set the whole list with the link's target added:
+  `security.node.permissions.allowRead: ['.', 'TARGET']`, where _`TARGET`_ is
+  the path the link resolves to.
 
-{{% _param BREAKING %}} **Applies if** a mount root is a symlink, or a relative
-mount `source` passes through one, wherever it points: a module mount's
-`source`, a theme or project directory such as `assets/`, or the `node_modules`
-packages that Docsy's own Bootstrap and Font Awesome mounts read, which pnpm and
-`npm link` install as symlinks. Hugo 0.166.0 drops such mounts without a
-warning: Bootstrap's import then fails with no pointer to the cause, while Font
-Awesome's assets vanish from an otherwise green build.
+{{% _param BREAKING %}} **Applies if** a symlink sits on a mount's path,
+wherever it points: a mount root such as `assets/` or a module mount's `source`
+(dropped since 0.166.0), a directory inside one such as `assets/vendor/x`
+(dropped since 0.165.0), or a relative `source` that passes through a link. A
+symlinked theme directory (`themes/docsy -> ../docsy`) still works. Docsy's own
+mounts read three `node_modules` packages, which pnpm and `npm link` install as
+symlinks: the Bootstrap and Font Awesome Sass imports then fail with no pointer
+to the cause, and the Font Awesome webfonts vanish from an otherwise green
+build.
 
 - Replace the link with the real directory (pnpm: `node-linker=hoisted`), or
-  mount the link's target by an absolute `source`.
+  mount the link's target by an absolute `source`, for every mount the link
+  affects.
 
 {{% _param BREAKING %}} **Applies if** your build runs behind an `HTTP_PROXY` or
 `HTTPS_PROXY`. Docsy itself fetches Mermaid, MarkMap, and KaTeX assets at build
@@ -140,14 +143,15 @@ filename-based URLs, taxonomy pages, and term pages are unaffected.
 
 {{% _param BREAKING %}} **Applies if** your own templates use `return` outside a
 partial. Hugo 0.166.0 honors it there: a bare `{{ return }}`, ignored before,
-now ends the template's output, and `return` with a value fails the build.
+now ends the template's output.
 
 - Remove it, or move the logic into a partial.
 
 ## {{% _param BREAKING %}} Tailwind allow-list (0.165.0) {#tailwind}
 
-Hugo 0.165.0 is a feature release ([notes][hugo-0.165.0]); its one change for
-Docsy sites is that `tailwindcss` left the default `security.exec.allow` list.
+Hugo 0.165.0 is a feature release ([notes][hugo-0.165.0]); besides the symlink
+rule above, its change for Docsy sites is that `tailwindcss` left the default
+`security.exec.allow` list.
 
 ### Actions {#tailwind-actions}
 

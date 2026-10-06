@@ -172,8 +172,7 @@ for the root page's kind:
 - [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
-  for every section, or `layouts/docs/section.llms.txt` for the docs section
-  alone
+  for every section, or `layouts/docs/section.llms.txt` for docs sections
 
 ## Server-side support
 

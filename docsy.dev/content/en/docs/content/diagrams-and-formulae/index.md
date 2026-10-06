@@ -224,7 +224,8 @@ and self-hosts them with your site. It fetches the
 [pinned version](#script-dep-versions), currently {{% param katex.version %}};
 to use a different one, set `params.katex.version`. Keep it at or above the
 KaTeX version that your Hugo release bundles for [`transform.ToMath`][tomath],
-whose markup an older stylesheet misrenders.
+whose markup an older stylesheet misrenders (Hugo 0.166.0 bundles 0.18.4; see
+the [Hugo 0.165+ upgrade guide][]).
 
 > [!NOTE] Passthrough for selected sections
 >
@@ -241,6 +242,7 @@ whose markup an older stylesheet misrenders.
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 [tomath]: https://gohugo.io/functions/transform/tomath/
+[Hugo 0.165+ upgrade guide]: /blog/2026/hugo-0.165.0+/#katex
 
 ### Display of Chemical Equations and Physical Units
 

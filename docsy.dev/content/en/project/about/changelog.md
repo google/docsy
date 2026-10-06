@@ -151,7 +151,7 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 For an introduction to this release, see the [0.18.0 release report][]. For the
 full list of changes, see the [0.18.0][] release page or the [git history since
-0.17.0][].
+0.17.0][]. For Hugo-specific notes, see the [Hugo 0.165+ upgrade guide][].
 
 [**Breaking changes**](#breaking-change):
 
@@ -192,8 +192,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see [Update Docsy][ug-update-overrides] ([#2787][]).
-- Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
-  minimum Hugo version is unchanged ([#2852][]).
+- Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0] ([Hugo 0.165+
+  upgrade guide][]); the theme's minimum Hugo version is unchanged ([#2852][]).
 
 [**Experimental**](#experimental):
 
@@ -262,6 +262,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0
+[Hugo 0.165+ upgrade guide]: /blog/2026/hugo-0.165.0+/
 [link-cache]: https://github.com/chalin/link-cache
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/
