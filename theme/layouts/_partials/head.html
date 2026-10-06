@@ -41,7 +41,7 @@
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
 {{/* llms.txt spec v2 discovery link. LLMS is `notAlternative` (llms.txt
-  describes the site, it isn't a version of this page), so it isn't in the
+  describes the site; it isn't a version of this page), so it isn't in the
   alternates loop above. */ -}}
 {{ with (partialCached "td/root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" -}}
 <link rel="describedby" href="{{ .Permalink | safeURL }}">

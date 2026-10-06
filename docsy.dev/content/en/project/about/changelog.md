@@ -198,8 +198,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Added **[plugin authoring][ug-plugin-authoring]**: write your own plugins
   ([#2789][]).
 - Added the **[`llms.txt` spec v2 discovery link][ug-discovery]**: page heads of
-  sites publishing `llms.txt` now carry a `rel="describedby"` link to the
-  language's file ([#2851][]).
+  sites whose root page publishes `llms.txt` now carry a `rel="describedby"`
+  link to the language's file ([#2851][]).
 - Declared Mermaid 12 pins experimental ([#2825][]).
 
 **For maintainers**:

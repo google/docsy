@@ -23,9 +23,7 @@ Docsy enables:
 
 - **[Markdown output format](#markdown-output)** support. Your project's
   `outputs` configuration controls which page kinds publish Markdown.
-- **[Discovery](#discovery)**: alternate and `describedby` links, and a hidden
-  in-body directive, lead agents to each page's Markdown version and to
-  `llms.txt`.
+- **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
 - **[`llms.txt`](#llms-txt)**: per-language overview of the site, linking its
@@ -117,8 +115,9 @@ links to Markdown versions of its pages. Agents read or search it, then follow
 the links they need. For the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
-its root page's URL. To enable it for home pages, add `LLMS` to the Hugo `home`
-[outputs][] configuration. For example:
+its root page's URL. Docsy supports `LLMS` on the root page only; enabling it on
+other page kinds renders the same site overview there. To enable it for home
+pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -131,9 +130,6 @@ outputs:
 >
 > For a [doc-rooted site][], see the [doc-rooted `llms.txt`
 > setup][doc-rooted-agent-support] instead.
-
-Docsy supports `LLMS` on the root page only; enabling it on other page kinds
-renders the same site overview there.
 
 The file links to the following, each at its Markdown version where available:
 
@@ -152,9 +148,9 @@ Agents find your Markdown content through:
 
 - **Alternate links**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page.
-- **`describedby` link**: when `llms.txt` is enabled, page HTML headers include
-  a `rel="describedby"` link to the language's `llms.txt`, the discovery
-  mechanism of the [llms.txt spec][llmstxt.org] (v2).
+- **`describedby` link**: when the root page publishes `llms.txt`, page HTML
+  headers include a `rel="describedby"` link (the [llms.txt spec][llmstxt.org]
+  v2 discovery mechanism) to the language's `llms.txt`.
 - **In-body directive**: when `llms.txt` is enabled, each page body opens with a
   visually-hidden directive pointing agents to the language's `llms.txt` and,
   when the page has one, its Markdown version. Sites that override the theme's

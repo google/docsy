@@ -1,8 +1,8 @@
 // Pins the llms-directive partial's contract (rationale and gating:
 // theme/layouts/_partials/llms-directive.html): two fixture builds cover both
 // gate sides; the enabled build also pins position (ahead of the navbar) and
-// the per-page Markdown pointer. The head's rel="describedby" link (llms.txt
-// spec v2 discovery) shares the gate and is pinned alongside.
+// the per-page Markdown pointer. The head's rel="describedby" link shares that
+// gate and is pinned alongside.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
