@@ -2,8 +2,9 @@
 // recipe: docsy.dev/content/en/docs/content/adding-content.md § Doc-rooted
 // sites) have no rendered home, so llms.txt must come from the page that
 // publishes the root (docsy/docsy#2834). Also pins the all-sites consequences:
-// the Markdown versions' per-language llms.txt link, section-kind rendering,
-// and a site's own index.llms.txt override.
+// the Markdown versions' per-language llms.txt link, the head's describedby
+// link and its root-page gate, section-kind rendering, and a site's own
+// index.llms.txt override.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,6 +21,8 @@ const leaf = (title, { llmsLink = true } = {}) =>
     : 'Leaf page\n');
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
+const describedbyLinks = (html) =>
+  html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
 
 // en describes only the link-only home; fr describes both home and landing
 // page.
@@ -138,18 +141,25 @@ test('doc-rooted llms.txt description comes from the root page, else the home', 
   );
 });
 
-test('doc-rooted pages carry the directive, pointing at their language llms.txt', () => {
+test('doc-rooted pages carry the directive and describedby link, pointing at their language llms.txt', () => {
   const b = docRooted();
   for (const [page, llms] of [
     ['index.html', '/llms.txt'],
     ['install/index.html', '/llms.txt'],
+    ['404.html', '/llms.txt'],
     ['fr/index.html', '/fr/llms.txt'],
+    ['fr/installation/index.html', '/fr/llms.txt'],
+    ['fr/404.html', '/fr/llms.txt'],
   ]) {
+    const html = b.publicFile(page);
     assert.ok(
-      b
-        .publicFile(page)
-        .includes(`For AI agents: the site's llms.txt is at ${llms}`),
+      html.includes(`For AI agents: the site's llms.txt is at ${llms}`),
       `${page} directive points at ${llms}`,
+    );
+    assert.deepEqual(
+      describedbyLinks(html),
+      [`<link rel="describedby" href="https://example.org${llms}">`],
+      `${page} head links ${llms} as describedby, once`,
     );
   }
 });
@@ -208,6 +218,10 @@ test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, direc
   const html = b.publicFile('install/index.html');
   assert.ok(html.includes('td-navbar'), 'page renders');
   assert.ok(!html.includes('For AI agents'), 'page omits the directive');
+  assert.ok(
+    !html.includes('rel="describedby"'),
+    'page omits the describedby link',
+  );
   const md = b.publicFile('index.md');
   assert.doesNotMatch(
     md,
@@ -273,18 +287,19 @@ test('the _root-llms-txt-path shortcode fails the build on a site without llms.t
   );
 });
 
+const sectionKindFiles = (leafOptions = {}) => ({
+  'content/_index.md':
+    frontMatter({ title: 'Home', description: 'Site summary' }) + 'Home body\n',
+  'content/docs/_index.md':
+    frontMatter({ title: 'Docs', description: 'Docs summary' }) +
+    'Docs landing\n',
+  'content/docs/install.md': leaf('Install', leafOptions),
+});
+
 test('a section-kind llms.txt is the site overview, with the root page summary', () => {
   const b = build(
     'llms-section-kind',
-    {
-      'content/_index.md':
-        frontMatter({ title: 'Home', description: 'Site summary' }) +
-        'Home body\n',
-      'content/docs/_index.md':
-        frontMatter({ title: 'Docs', description: 'Docs summary' }) +
-        'Docs landing\n',
-      'content/docs/install.md': leaf('Install'),
-    },
+    sectionKindFiles(),
     'outputs:\n  home: [HTML, markdown, LLMS]\n  section: [HTML, markdown, LLMS]\n',
   );
   const root = b.publicFile('llms.txt');
@@ -294,6 +309,37 @@ test('a section-kind llms.txt is the site overview, with the root page summary',
     'root llms.txt quotes the home',
   );
   assert.equal(section, root, 'section llms.txt matches the root one');
+  for (const page of ['docs/index.html', 'docs/install/index.html']) {
+    assert.deepEqual(
+      describedbyLinks(b.publicFile(page)),
+      ['<link rel="describedby" href="https://example.org/llms.txt">'],
+      `${page} head links only the root llms.txt as describedby`,
+    );
+  }
+});
+
+test('section-only LLMS publishes section llms.txt but no directive or describedby link', () => {
+  const b = build(
+    'llms-section-only',
+    sectionKindFiles({ llmsLink: false }),
+    'outputs:\n  home: [HTML, markdown]\n  section: [HTML, markdown, LLMS]\n',
+  );
+  assert.ok(
+    b.publicFile('docs/llms.txt').startsWith('# Docsy fixture site'),
+    'section llms.txt is published',
+  );
+  for (const page of [
+    'index.html',
+    'docs/index.html',
+    'docs/install/index.html',
+  ]) {
+    const html = b.publicFile(page);
+    assert.ok(
+      !html.includes('rel="describedby"'),
+      `${page} omits the describedby link`,
+    );
+    assert.ok(!html.includes('For AI agents'), `${page} omits the directive`);
+  }
 });
 
 test("a site's layouts/index.llms.txt override still renders the home's llms.txt", () => {

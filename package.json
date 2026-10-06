@@ -97,16 +97,16 @@
   "devDependencies": {
     "@cspell/dict-fr-fr": "2.3.2",
     "@pchalin/markdownlint-rule-link-pattern": "0.3.0",
-    "hugo-extended": "0.164.0",
+    "hugo-extended": "0.166.0",
     "jsdom": "30.0.1",
     "markdownlint-cli2": "0.23.3",
     "markdownlint-rule-no-shortcut-ref-link": "0.4.0",
     "pixelmatch": "7.2.0",
     "pngjs": "7.0.0",
-    "prettier": "3.9.6",
+    "prettier": "3.9.9",
     "puppeteer": "25.9.0",
     "sass-embedded": "1.103.1",
-    "yaml": "2.9.0"
+    "yaml": "2.9.1"
   },
   "engines": {
     "node": ">=24",
@@ -121,6 +121,6 @@
   "allowScripts": {
     "@parcel/watcher": false,
     "puppeteer": false,
-    "hugo-extended@0.164.0": true
+    "hugo-extended@0.166.0": true
   }
 }

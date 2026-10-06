@@ -2831,6 +2831,11 @@
     "when": "2026-10-06T15:00:30Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2852": {
+    "result": 200,
+    "when": "2026-10-06T15:26:50Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/941": {
     "result": 200,
     "when": "2026-09-18T01:19:13Z",
@@ -3281,6 +3286,11 @@
   "https://github.com/gohugoio/hugo/releases/tag/v0.164.0": {
     "result": 200,
     "when": "2026-07-16T22:51:17Z",
+    "via": "lychee",
+  },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.166.0": {
+    "result": 200,
+    "when": "2026-10-06T14:50:54Z",
     "via": "lychee",
   },
   "https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration": {

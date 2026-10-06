@@ -1,7 +1,5 @@
 // Contract tests for the footer copyright partial's year handling (#2047);
 // the contract's home is the user guide's "Footer copyright" section.
-//
-// TDD trace: the two collapse cases were red against the pre-#2047 partial.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -165,6 +163,7 @@ test('authors Markdown renders on non-Markdown pages', () => {
       'content/docs/org/index.org': '#+title: Org page\n',
     },
     extraConfig:
+      'security:\n  allowContent: ["^text/markdown$", "^text/org$"]\n' +
       'params:\n  copyright:\n' +
       '    authors: "[ACME](https://example.com/authors)"\n',
   });
