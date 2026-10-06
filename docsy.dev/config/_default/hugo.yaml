@@ -50,9 +50,10 @@ params:
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
+    # The Series clause is the LF Projects website guideline's required notice
     authors: >-
-      Docsy Authors, Docsy a Series of LF Projects, LLC | [CC BY
-      4.0](https://creativecommons.org/licenses/by/4.0)
+      Docsy Authors, Docsy a Series of LF Projects, LLC |
+      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0)
     from_year: 2018
     to_year: present
   github_repo: https://github.com/docsy/docsy
@@ -126,15 +127,15 @@ params:
         url: https://github.com/docsy/docsy
         icon: fa-brands fa-github
         desc: Development takes place here!
-      - name: Privacy Policy
+      - name: Privacy policy
         url: https://lfprojects.org/policies/privacy-policy/
         icon: fa-solid fa-user-shield
         desc: How this site handles personal data
       - name: Project policies
         url: https://lfprojects.org/policies/
-        icon: fa-solid fa-trademark
+        icon: fa-solid fa-scale-balanced
         desc:
-          Website terms of use, trademark policy and other LF Projects policies
+          Website terms of use, trademark policy, and other LF Projects policies
 
   plantuml:
     enable: true

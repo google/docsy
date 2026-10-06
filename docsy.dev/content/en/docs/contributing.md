@@ -42,7 +42,7 @@ directory) and [preview](/docs/deployment/) from there. Alternatively, clone the
 [Docsy theme repo](https://github.com/docsy/docsy) and test your changes in a
 local copy of this site, as described [below](#previewing-your-changes-locally).
 
-### Community guidelines
+### Code of conduct
 
 This project follows the [LF Projects Code of Conduct][].
 
