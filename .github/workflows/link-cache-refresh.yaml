@@ -1,10 +1,10 @@
 # Opens (or updates) the PR that refreshes the oldest entries of the
 # committed link cache (docsy.dev/link-cache.jsonc), maintained by the
-# link-cache npm package. Pruning the N oldest lychee-verified entries and
-# re-running the link checker re-verifies them (or retires URLs no longer in
-# the site), rotating through them in about a month of weekly merged
-# refreshes; manual (seeded) entries are exempt from pruning and retire via
-# their expires dates.
+# link-cache npm package. Pruning the N oldest entries without an expires
+# date and re-running the link checker re-verifies them (or retires URLs no
+# longer in the site), rotating through them in about a month of weekly
+# merged refreshes. Each prune also drops entries whose expires date has
+# lapsed.
 #
 # There is at most one refresh PR at a time (branch bot/link-cache-refresh,
 # PR against main): a scheduled run while the PR is open brings the branch
@@ -27,7 +27,9 @@ on:
   workflow_dispatch:
     inputs:
       refresh_count:
-        description: Number of (oldest) link-cache entries to refresh.
+        description:
+          Oldest link-cache entries without an expires date to refresh (plus any
+          whose expires date has lapsed).
         default: &default_refresh_count 300
         type: number
       prune_more:
@@ -174,7 +176,7 @@ jobs:
           || steps.merge.outputs.self_healed == 'true' }}
         run: |
           count="${REFRESH_COUNT:-$DEFAULT_REFRESH_COUNT}"
-          echo "Oldest entry before pruning, then pruning $count oldest entries:"
+          echo "Oldest entry before pruning, then the prune:"
           npm run link-cache -- --list 1 --prune "$count"
           echo "did_prune=true" >> "$GITHUB_OUTPUT"
 
@@ -258,10 +260,10 @@ jobs:
           # Cache data flows into Markdown here: strip backticks so a
           # hostile URL can't escape the inline-code span.
           entry=${OLDEST_ENTRY//\`/}
-          PR_BODY="Refreshes the oldest lychee-verified link-cache entries (default $DEFAULT_REFRESH_COUNT per rotation); for the model, see the [workflow header](https://github.com/${GITHUB_REPOSITORY}/blob/main/.github/workflows/link-cache-refresh.yaml)."
-          PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh (prune-exempt manual seeds keep their dates, so one may sit here):"$'\n'"\`${entry}\`"
+          PR_BODY="Refreshes the oldest link-cache entries without an \`expires\` date (default $DEFAULT_REFRESH_COUNT per refresh); for the model, see the [workflow header](https://github.com/${GITHUB_REPOSITORY}/blob/main/.github/workflows/link-cache-refresh.yaml)."
+          PR_BODY="$PR_BODY"$'\n\n'"Oldest entry after this refresh (an \`expires\` entry can be the oldest listed):"$'\n'"\`${entry}\`"
           if [[ "${DEAD_LINKS:-false}" == 'true' ]]; then
-            PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with negative statuses in the cache diff: triage before merging."
+            PR_BODY="$PR_BODY"$'\n\n'"The refresh found failing links, recorded with failure results (\"error\", \"timeout\") in the cache diff: triage before merging."
           fi
           PR_URL=$(gh pr list --state open --base main --head "$BRANCH" \
             --json url,isCrossRepository \
