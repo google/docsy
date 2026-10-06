@@ -128,8 +128,8 @@ params:
         desc: Development takes place here!
       - name: Privacy Policy
         url: https://lfprojects.org/policies/privacy-policy/
-        icon: fa-solid fa-book
-        desc: LF Projects privacy policy
+        icon: fa-solid fa-user-shield
+        desc: How this site handles personal data
       - name: Project policies
         url: https://lfprojects.org/policies/
         icon: fa-solid fa-trademark
