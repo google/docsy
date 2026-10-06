@@ -1155,7 +1155,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T18:22:23Z",
     "via": "lychee",
   },
@@ -1246,7 +1246,7 @@
   },
   // #2841 seed: the theme template lands with the PR.
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt": {
-    "status": 206,
+    "result": 206,
     "when": "2026-10-05T17:02:09Z",
     "via": "manual",
     "expires": "2026-11-15",
@@ -1772,7 +1772,7 @@
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/issues/2834": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-03T15:29:48Z",
     "via": "lychee",
   },
@@ -4039,7 +4039,7 @@
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#site-root": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T14:34:45Z",
     "via": "lychee",
   },
@@ -4094,7 +4094,7 @@
     "via": "lychee",
   },
   "https://gohugo.io/templates/lookup-order/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T15:30:59Z",
     "via": "lychee",
   },
@@ -4114,7 +4114,7 @@
     "via": "lychee",
   },
   "https://gohugo.io/templates/shortcode/#lookup-order": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T19:26:46Z",
     "via": "lychee",
   },
@@ -4129,12 +4129,12 @@
     "via": "lychee",
   },
   "https://gohugo.io/templates/types/#home": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T15:30:59Z",
     "via": "lychee",
   },
   "https://gohugo.io/templates/types/#section": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-05T15:30:59Z",
     "via": "lychee",
   },
@@ -4199,17 +4199,17 @@
     "via": "lychee",
   },
   "https://lfprojects.org/policies/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-06T01:08:54Z",
     "via": "lychee",
   },
   "https://lfprojects.org/policies/code-of-conduct/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-06T01:08:54Z",
     "via": "lychee",
   },
   "https://lfprojects.org/policies/privacy-policy/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-06T10:13:24Z",
     "via": "lychee",
   },
@@ -5610,7 +5610,7 @@
     "via": "lychee",
   },
   "https://www.linuxfoundation.org/": {
-    "status": 200,
+    "result": 200,
     "when": "2026-10-06T01:08:54Z",
     "via": "lychee",
   },
