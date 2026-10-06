@@ -284,11 +284,12 @@ re-enable a package a rule disables (hugo-extended, Bootstrap, Font Awesome)
 unless `vulnerabilityAlerts.enabled` is set; this config leaves it unset.
 Renovate's alert PRs bypass its own schedule and cooldown but not npm's: lock
 regeneration for a fix younger than `min-release-age` (`.npmrc`) fails with
-`ETARGET` until the release ages. For a fix that can't wait, run the
-dependency's manual bump under a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE`
-override, set no lower than the fix's age requires (the override relaxes the
-cooldown for everything the invocation resolves). For example, for a
-three-day-old hugo-extended release:
+`ETARGET` until the release ages. For a fix that can't wait, first vet the
+release against its upstream source (the maintainers' checklist is kept outside
+the repo), then run the dependency's manual bump under a per-invocation
+`NPM_CONFIG_MIN_RELEASE_AGE` override, set no lower than the fix's age requires
+(the override relaxes the cooldown for everything the invocation resolves). For
+example, for a three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
