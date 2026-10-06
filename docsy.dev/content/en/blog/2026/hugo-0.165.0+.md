@@ -14,7 +14,6 @@ body_class: release-highlights
 tags: [hugo, upgrade]
 params:
   hugoSupportedVersion: 0.166.0
-  katexVersion: 0.18.9
 ---
 
 This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
@@ -61,10 +60,10 @@ wherever it points: a mount root such as `assets/` or a module mount's `source`
 (dropped since 0.166.0), a directory inside one such as `assets/vendor/x`
 (dropped since 0.165.0), or a relative `source` that passes through a link. A
 symlinked theme directory (`themes/docsy -> ../docsy`) still works. Docsy's own
-mounts read three `node_modules` packages, which pnpm and `npm link` install as
-symlinks: the Bootstrap and Font Awesome Sass imports then fail with no pointer
-to the cause, and the Font Awesome webfonts vanish from an otherwise green
-build.
+mounts read two `node_modules` packages through three mounts, which pnpm and
+`npm link` install as symlinks: the Bootstrap and Font Awesome Sass imports then
+fail with no pointer to the cause, and the Font Awesome webfonts vanish from an
+otherwise green build.
 
 - Replace the link with the real directory (pnpm: `node-linker=hoisted`), or
   mount the link's target by an absolute `source`, for every mount the link
@@ -112,8 +111,8 @@ unaffected.
 
 Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
 `math` fences, emits markup that needs a KaTeX 0.18.4 or later stylesheet; an
-older one misrenders some expressions. Docsy 0.18.0's default is KaTeX
-{{% param katexVersion %}} ([KaTeX version][katex-docs]).
+older one misrenders some expressions. Docsy 0.18.0's supported pin satisfies it
+([dependency versions](0.18.0/#script-dep-pins)).
 
 ### Actions {#katex-actions}
 
@@ -121,8 +120,9 @@ older one misrenders some expressions. Docsy 0.18.0's default is KaTeX
 stylesheet below 0.18.4, through `params.katex.version` or an overridden
 `scripts/katex.html`.
 
-- Remove your pin to take Docsy's default, or raise it to 0.18.4 or later;
-  update an overridden partial's stylesheet the same way.
+- Remove your pin to take Docsy's supported default; a pin at 0.18.4 or later
+  renders, on a best-effort basis ([KaTeX version][katex-docs]). Update an
+  overridden partial's stylesheet the same way.
 
 ## {{% _param BREAKING %}} URL and template changes (0.166.0) {#urls-templates}
 

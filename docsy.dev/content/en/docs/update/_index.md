@@ -43,10 +43,10 @@ Replace _`NODE_VERSION`_ with the version that the upgrade post names.
 
 ## Update Hugo
 
-**Applies if** your target release raises the minimum or recommended Hugo
-version; its upgrade [blog post](/tags/upgrade/) says so. For projects using the
-[hugo-extended NPM package][hugo-extended], update the package version, for
-example:
+**Applies if** your site builds with a Hugo other than your target release's
+supported version, the one its upgrade [blog post](/tags/upgrade/) names
+([official support policy][]). For projects using the [hugo-extended NPM
+package][hugo-extended], update the package version, for example:
 
 ```sh
 npm install --save-exact --save-dev hugo-extended@HUGO_VERSION
@@ -117,6 +117,7 @@ Also perform any release-specific checks listed in the release's
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/docsy-as-module/installation-prerequisites/#as-an-npm-module
+[official support policy]: /project/about/changelog/#official-support
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating

@@ -172,7 +172,8 @@ for the root page's kind:
 - [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
-  for every section, or `layouts/docs/section.llms.txt` for docs sections
+  for every section, or `layouts/TYPE/section.llms.txt` for sections of one
+  [type][] (`docs`, unless the page sets `type`)
 
 ## Server-side support
 
@@ -224,6 +225,7 @@ For details on how these checks are configured, see
 [`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
+[type]: https://gohugo.io/content-management/front-matter/#type
 [OpenTelemetry agent-readiness report]: https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness
 [outputs]: https://gohugo.io/configuration/outputs/
 [root page]: /docs/content/adding-content/#doc-rooted-sites

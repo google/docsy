@@ -222,10 +222,10 @@ passthrough delimiter pairs defined above.
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
 and self-hosts them with your site. It fetches the
 [pinned version](#script-dep-versions), currently {{% param katex.version %}};
-to use a different one, set `params.katex.version`. Keep it at or above the
-KaTeX version that your Hugo release bundles for [`transform.ToMath`][tomath],
-whose markup an older stylesheet misrenders (Hugo 0.166.0 bundles 0.18.4; see
-the [Hugo 0.165+ upgrade guide][]).
+to use a different one, set `params.katex.version`, at or above the KaTeX
+version that your Hugo release bundles for [`transform.ToMath`][tomath], whose
+markup an older stylesheet misrenders (per-release floors: the [Hugo upgrade
+guides][]).
 
 > [!NOTE] Passthrough for selected sections
 >
@@ -242,7 +242,7 @@ the [Hugo 0.165+ upgrade guide][]).
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
 [tomath]: https://gohugo.io/functions/transform/tomath/
-[Hugo 0.165+ upgrade guide]: /blog/2026/hugo-0.165.0+/#katex
+[Hugo upgrade guides]: /tags/hugo/
 
 ### Display of Chemical Equations and Physical Units
 
@@ -441,12 +441,13 @@ restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-Docsy officially supports Mermaid 11; to try 12 early ([experimental][]), set
-`version` to a 12.x release. Diagrams render with [Mermaid 12's
-defaults][mermaid-12-release] (the ELK layout, and the `redux-color` theme and
-`neo` look on ten diagram types); on dark pages, Docsy still sets Mermaid's
-legacy `dark` theme, so a site's light and dark renderings don't match. Mermaid
-12 requires Safari 17.4 or later. Report what you find on [#2825][].
+Docsy supports its [pinned](#script-dep-versions) Mermaid 11 release; to try 12
+early ([experimental][]), set `version` to a 12.x release. Diagrams render with
+[Mermaid 12's defaults][mermaid-12-release] (the ELK layout, and the
+`redux-color` theme and `neo` look on ten diagram types); on dark pages, Docsy
+still sets Mermaid's legacy `dark` theme, so a site's light and dark renderings
+don't match. Mermaid 12 requires Safari 17.4 or later. Report what you find on
+[#2825][].
 
 [#2825]: https://github.com/docsy/docsy/issues/2825
 [experimental]: /project/about/changelog/#experimental

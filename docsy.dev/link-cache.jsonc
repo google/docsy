@@ -3903,6 +3903,11 @@
     "when": "2026-09-19T16:04:39Z",
     "via": "lychee",
   },
+  "https://gohugo.io/content-management/front-matter/#type": {
+    "result": 200,
+    "when": "2026-10-06T23:56:32Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/content-management/image-processing/#image-operations": {
     "result": 200,
     "when": "2026-09-19T16:04:40Z",
