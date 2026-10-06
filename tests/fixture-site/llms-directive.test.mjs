@@ -1,4 +1,4 @@
-// Pins the llms-directive partial's contract (rationale and gating:
+// Pins the llms-directive partial's contract (rationale and gating in
 // theme/layouts/_partials/llms-directive.html): two fixture builds cover both
 // gate sides; the enabled build also pins position (ahead of the navbar) and
 // the per-page Markdown pointer. The head's rel="describedby" link shares that
@@ -24,6 +24,9 @@ const llmsConfig = `outputs:
   page: [HTML, markdown]
   section: [HTML, RSS, markdown]
 `;
+
+const describedbyLinks = (html) =>
+  html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
 
 function build(name, extraConfig) {
   const r = buildSite(name, { files, extraConfig });
@@ -62,9 +65,13 @@ test('llms.txt-enabled site links its llms.txt as rel="describedby" in every pag
     'docs/install/index.html',
     'docs/html-only/index.html',
     'blog/first/index.html',
+    '404.html',
   ]) {
-    const head = b.publicFile(page).split('</head>')[0];
-    assert.ok(head.includes(link), `${page} head links llms.txt`);
+    assert.deepEqual(
+      describedbyLinks(b.publicFile(page)),
+      [link],
+      `${page} head links llms.txt, once`,
+    );
   }
 });
 
