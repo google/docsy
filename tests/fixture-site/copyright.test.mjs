@@ -164,8 +164,6 @@ test('authors Markdown renders on non-Markdown pages', () => {
       'content/docs/_index.md': '---\ntitle: Copyright check\n---\n',
       'content/docs/org/index.org': '#+title: Org page\n',
     },
-    // Org is the only built-in non-Markdown format needing no external
-    // tool; Hugo 0.166.0+ denies it by default. The list is a whitelist.
     extraConfig:
       'security:\n  allowContent: ["^text/markdown$", "^text/org$"]\n' +
       'params:\n  copyright:\n' +
