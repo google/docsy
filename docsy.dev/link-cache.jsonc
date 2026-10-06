@@ -1064,6 +1064,11 @@
     "when": "2026-10-06T19:08:32Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/assets/js/plugins/mermaid.js?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:49Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/assets/js/search.js": {
     "result": 200,
     "when": "2026-09-17T23:13:29Z",
@@ -1219,6 +1224,11 @@
     "when": "2026-09-17T23:13:25Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts/main-bundle.html?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:49Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts/plantuml-deflate.html?plain=1": {
     "result": 200,
     "when": "2026-10-06T19:08:32Z",
@@ -1227,6 +1237,11 @@
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html": {
     "result": 200,
     "when": "2026-09-17T23:13:25Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts/plugins.html?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:49Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts/prism.html?plain=1": {
@@ -1259,6 +1274,11 @@
     "when": "2026-09-17T23:13:29Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:49Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/scrollspy-attr.txt": {
     "result": 200,
     "when": "2026-09-17T23:13:29Z",
@@ -1272,6 +1292,11 @@
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/theme-toggler.html": {
     "result": 200,
     "when": "2026-09-17T23:13:31Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_shortcodes/_root-llms-txt-path.html?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:48Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_shortcodes/blocks/cover.html?plain=1": {
@@ -1310,6 +1335,11 @@
     "when": "2026-10-05T17:02:09Z",
     "via": "manual",
     "expires": "2026-11-15",
+  },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt?plain=1": {
+    "result": 200,
+    "when": "2026-10-06T20:34:49Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.md": {
     "result": 200,

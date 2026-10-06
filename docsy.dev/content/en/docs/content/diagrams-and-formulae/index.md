@@ -222,7 +222,9 @@ passthrough delimiter pairs defined above.
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
 and self-hosts them with your site. It fetches the
 [pinned version](#script-dep-versions), currently {{% param katex.version %}};
-to use a different one, set `params.katex.version`.
+to use a different one, set `params.katex.version`. Keep it at or above the
+KaTeX version that your Hugo release bundles for [`transform.ToMath`][tomath],
+whose markup an older stylesheet misrenders.
 
 > [!NOTE] Passthrough for selected sections
 >
@@ -238,6 +240,7 @@ to use a different one, set `params.katex.version`.
 
 [layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/docs/content/diagrams-and-formulae/_markup/render-passthrough.html
+[tomath]: https://gohugo.io/functions/transform/tomath/
 
 ### Display of Chemical Equations and Physical Units
 

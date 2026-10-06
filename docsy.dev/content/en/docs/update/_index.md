@@ -84,8 +84,8 @@ friends) also work this way, but the theme's copies are placeholders that are
 intentionally empty: there's nothing to diff, so they don't need this review.
 
 If you override a `baseof.html` template, keep its `scripts.html` include as
-`partial`, not `partialCached`: Docsy's page-gated scripts (diagrams, math, the
-`body-end` hook) depend on the partial rendering per page.
+`partial`, not `partialCached`: Docsy's per-page scripts (page-gated diagrams
+and math, the `body-end` hook) depend on the partial rendering per page.
 
 ## Check your site {#check}
 
