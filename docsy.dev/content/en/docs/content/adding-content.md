@@ -145,12 +145,21 @@ structure, where:
 - Page files remain in the `docs` section directory, for example `content/docs/`
   or `content/en/docs/`.
 
-As a consequence, the `docs` section landing page becomes the site home page. A
-doc-rooted site has the following benefits:
+As a consequence:
+
+- The `docs` section landing page becomes the site's **root page**: the page
+  published at the [site root][] (`/`, or `/`_`LANG`_`/` on a [multilingual
+  site][], for language _`LANG`_).
+- The **home page**, Hugo's `home`-kind page, still exists but no longer
+  publishes anything.
+
+A doc-rooted site has the following benefits:
 
 - Produces simpler, documentation-focused URLs (no `/docs/` prefix).
 - Avoids the need to create a custom home page using [blocks][] shortcodes or
   HTML.
+
+### Creating a doc-rooted site
 
 To create a doc-rooted site, redefine the `docs` section [permalinks][] in your
 [site configuration][] as follows (YAML format shown):
@@ -163,21 +172,25 @@ permalinks:
     docs: /:sections[1:]
 ```
 
-Because the docs section landing page now serves as the home page, you need to
+Because the docs section landing page now serves as the root page, you need to
 add extra configuration to avoid "Duplicate target paths" warnings and avoid
-render conflicts with the site-root index file.
+render conflicts with the home page.
 
-Add the following front matter to each site root index file (one per language in
+Add the following front matter to each home page file (one per language in
 multilingual sites):
 
 ```yaml
 build: { render: link }
 ```
 
-For an example of a doc-rooted variant of this site, see the [Doc-rooted
-example][] variant.
+For a doc-rooted variant of this site, see the [Doc-rooted example][].
 
-[Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
+### Agent support
+
+To publish [`llms.txt`][], add `LLMS` to the docs landing page's `outputs` (for
+each language in a multilingual site). A page's `outputs` [replace those
+configured for its kind][outputs-replace], so list the section formats too, for
+example `[HTML, RSS, print, markdown, LLMS]`.
 
 ### Check for path conflicts
 
@@ -966,19 +979,26 @@ sitemap:
 
 To learn more about configuring sitemaps, see [Sitemap Templates][].
 
+<!-- prettier-ignore-start -->
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
 [blocks]: /docs/content/shortcodes/#blocks
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
+[Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
+[`llms.txt`]: /docs/content/agent-support/#llms-txt
 [Look and Feel]: /docs/content/lookandfeel/
+[multilingual site]: /docs/language/
+[outputs-replace]: /docs/content/agent-support/#opt-pages-out
 [permalinks]: https://gohugo.io/configuration/permalinks/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
 [site configuration]: https://gohugo.io/configuration/introduction/
+[site root]: https://gohugo.io/quick-reference/glossary/#site-root
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
+<!-- prettier-ignore-end -->

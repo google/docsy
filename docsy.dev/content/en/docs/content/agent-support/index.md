@@ -2,9 +2,8 @@
 title: AI-agent support
 linkTitle: Agent support
 description: >-
-  Opt-in features that help AI agents and automated tools discover and use your
-  site content, including Markdown output, alternate links in HTML, and
-  llms.txt.
+  Help AI agents discover and use your content with Markdown versions of your
+  pages and a site llms.txt.
 cSpell:ignore: llmstxt
 ---
 
@@ -28,8 +27,8 @@ Docsy enables:
   lead agents to each page's Markdown version and to `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: per-language site index of links to Markdown
-  content.
+- **[`llms.txt`](#llms-txt)**: per-language overview of the site, linking its
+  Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -74,6 +73,16 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
+Each enabled page gets a Markdown version at `index.md` beside its HTML with:
+
+- Page title and description
+- A link to the language's `llms.txt`, when the site [publishes one](#llms-txt)
+- Page content, with shortcodes expanded
+- The list of child pages, if any
+
+A shortcode without a Markdown variant emits its HTML there; for how to add one,
+see [Shortcodes][shortcode-md-variants].
+
 ### Opt pages out {#opt-pages-out}
 
 > [!TIP]
@@ -101,15 +110,14 @@ outputs: [HTML]
 
 ## Enable `llms.txt` {#llms-txt}
 
-The `llms.txt` format is a simple text format for listing machine-readable links
-to site content. It is designed to be easy for agents to discover and parse, and
-to complement the richer but more complex Markdown outputs. To learn more, see
-[llmstxt.org][].
+An `llms.txt` file is a short Markdown overview of a site for agents: a title, a
+summary (the [root page][]'s description, or the home page's), and lists of
+links to Markdown versions of its pages. Agents read or search it, then follow
+the links they need. For the format, see [llmstxt.org][].
 
-Docsy generates an `llms.txt` index at each language's site root, and includes
-links to the home page, main menu pages, and Markdown alternates where they
-exist. To enable it, add `LLMS` to the Hugo [outputs][] configuration for the
-home page. For example:
+Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
+its root page's URL. To enable it for home pages, add `LLMS` to the Hugo `home`
+[outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -118,8 +126,21 @@ outputs:
   section: [HTML, RSS, print, markdown]
 ```
 
-For an example of the generated `llms.txt` for this site, see
-[/llms.txt](/llms.txt).
+> [!IMPORTANT]
+>
+> For a [doc-rooted site][], see the [doc-rooted `llms.txt`
+> setup][doc-rooted-agent-support] instead.
+
+The file links to the following, each at its Markdown version where available:
+
+- The root page
+- The site's `AGENTS.md` page, if any, at its `index.md`
+- Main menu entries
+- Top-level docs sections
+- Site locales
+
+For this site's `llms.txt`, see
+[`{{% _root-llms-txt-path %}}`](<{{% _root-llms-txt-path %}}>).
 
 ## Discovery
 
@@ -128,25 +149,25 @@ Agents find your Markdown content through:
 - **Alternate links**: page HTML headers include `rel="alternate"` links to the
   Markdown version of the page.
 - **In-body directive**: when `llms.txt` is enabled, each page body opens with a
-  visually-hidden directive pointing agents to the language's `llms.txt` index
-  and, when the page has one, its Markdown version. Sites that override the
-  theme's `baseof` templates need to call the `llms-directive.html` partial
+  visually-hidden directive pointing agents to the language's `llms.txt` and,
+  when the page has one, its Markdown version. Sites that override the theme's
+  `baseof` templates need to call the [`llms-directive.html`][] partial
   themselves.
 
 ## Customize output
 
-Docsy renders Markdown output via [layouts/all.md][] and generates `llms.txt`
-via `layouts/index.llms.txt`. You can override these defaults at several levels:
+Docsy's templates for the two outputs are:
 
-- **Per kind** — Add templates such as `home.md` or `_default/single.md` under
-  `layouts/` in your project to tailor Markdown output for specific [Hugo
-  kinds][].
-- **Per shortcode** — Add [output-format-specific shortcode templates][sof] to
-  project-local shortcodes so they render Markdown-friendly content when
-  appropriate. For example, this site's [readfile.markdown.md][] is the
-  Markdown-output variant of the theme's `readfile` shortcode.
-- **Per page** — Provide page-specific content or structure for high-value pages
-  that need a curated agent-facing view.
+- [`layouts/all.md`][] ([Markdown output](#markdown-output))
+- [`layouts/all.llms.txt`][] ([`llms.txt`](#llms-txt))
+
+Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
+overrides them. For `llms.txt`, override `all.llms.txt`, or add a template named
+for the root page's kind:
+
+- [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
+  `index.llms.txt`)
+- [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
 ## Server-side support
 
@@ -184,15 +205,21 @@ Known gaps in this scorecard are tracked under [#2614][].
 For details on how these checks are configured, see
 [Agent-support checks](/project/build/ci-cd/#agent-support-checks).
 
+<!-- prettier-ignore-start -->
 [afdocs]: https://afdocs.dev/
 [built-in output formats]: https://gohugo.io/configuration/output-formats/
+[doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
+[doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
-[Hugo kinds]: https://gohugo.io/templates/types/
-[layouts/all.md]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
-[readfile.markdown.md]:
-  https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
+[home-tmp-type]: https://gohugo.io/templates/types/#home
+[`layouts/all.llms.txt`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt
+[`layouts/all.md`]: https://github.com/docsy/docsy/blob/main/theme/layouts/all.md
+[`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
-[OpenTelemetry agent score]:
-  https://buildwithfern.com/agent-score/company/opentelemetry
+[lookup]: https://gohugo.io/templates/lookup-order/
+[OpenTelemetry agent score]: https://buildwithfern.com/agent-score/company/opentelemetry
 [outputs]: https://gohugo.io/configuration/outputs/
-[sof]: https://gohugo.io/templates/shortcode/
+[root page]: /docs/content/adding-content/#doc-rooted-sites
+[section-tmp-type]: https://gohugo.io/templates/types/#section
+[shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
+<!-- prettier-ignore-end -->

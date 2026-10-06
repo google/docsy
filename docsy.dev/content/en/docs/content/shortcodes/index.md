@@ -1085,4 +1085,20 @@ If you are using this shortcode, note that when evaluating the conditions,
 substring matches are matches as well. That means, if you set
 `include-if="foobar"`, and `buildcondition = "foo"`, you have a match!
 
+## Markdown output variants
+
+On pages with [Markdown output][] enabled, Hugo renders a shortcode with the
+template matching the `markdown` output format when there is one, and with its
+HTML template otherwise, so the HTML lands in the page's Markdown version.
+
+To add a Markdown variant of a _`NAME`_`.html` shortcode, create _`NAME`_`.md`
+under `layouts/_shortcodes/`. For the full resolution rules, see Hugo's
+shortcode [lookup order][]. For an example, see docsy.dev's
+[`readfile.markdown.md`][].
+
+<!-- prettier-ignore-start -->
+[lookup order]: https://gohugo.io/templates/shortcode/#lookup-order
+[Markdown output]: /docs/content/agent-support/#markdown-output
+[`readfile.markdown.md`]: https://github.com/docsy/docsy/blob/main/docsy.dev/layouts/_shortcodes/readfile.markdown.md
 [shortcode delimiter]: https://gohugo.io/content-management/shortcodes/#notation
+<!-- prettier-ignore-end -->

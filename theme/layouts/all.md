@@ -9,56 +9,34 @@ Template design:
 
 */ -}}
 
-# {{ .Title | strings.TrimSpace -}}
-
-{{ $includeLlmsIndex := true -}}
+# {{ .Title | strings.TrimSpace }}
 {{ $needSeparator := false -}}
 
-{{/* Description ------------------------------------------------------- */ -}}
-
 {{ with .Description | strings.TrimSpace }}
-
-> {{ replace . "\n" "\n> " -}}
+> {{ replace . "\n" "\n> " }}
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{/* Site index -------------------------------------------------------- */ -}}
-
-{{ if $includeLlmsIndex }}
-{{ if $needSeparator }}
+{{ with (partialCached "td/root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" }}
+{{- if $needSeparator }}
 ---
-
-{{ else }}
-{{ end -}}
-
-{{ $llmsTxt := "llms.txt" -}}
-LLMS index: [ {{- $llmsTxt -}} ]( {{- $llmsTxt | relURL -}} )
+{{ end }}
+Site [llms.txt]( {{- .RelPermalink -}} )
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{/* Page content ------------------------------------------------------ */ -}}
-
-{{ with .RenderShortcodes | strings.TrimSpace -}}
-{{ if $needSeparator }}
+{{ with .RenderShortcodes | strings.TrimSpace }}
+{{- if $needSeparator }}
 ---
-
-{{ else }}
-{{ end -}}
-
+{{ end }}
 {{ . }}
 {{ $needSeparator = true -}}
 {{ end -}}
 
-{{/* Section index, if any --------------------------------------------- */ -}}
-
-{{ with .Pages -}}
-
-{{ if $needSeparator }}
+{{ with .Pages }}
+{{- if $needSeparator }}
 ---
-
-{{ else }}
-{{ end -}}
-
+{{ end }}
 Section pages:
 
 {{ range . -}}

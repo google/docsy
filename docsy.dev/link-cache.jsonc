@@ -1144,6 +1144,11 @@
     "when": "2026-09-17T23:13:30Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html": {
+    "status": 200,
+    "when": "2026-10-05T18:22:23Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/navbar.html": {
     "status": 200,
     "when": "2026-09-18T01:33:10Z",
@@ -1228,6 +1233,13 @@
     "status": 200,
     "when": "2026-09-17T23:13:31Z",
     "via": "lychee",
+  },
+  // #2841 seed: the theme template lands with the PR.
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt": {
+    "status": 206,
+    "when": "2026-10-05T17:02:09Z",
+    "via": "manual",
+    "expires": "2026-11-15",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.md": {
     "status": 200,
@@ -1747,6 +1759,11 @@
   "https://github.com/docsy/docsy/issues/2825": {
     "status": 200,
     "when": "2026-09-21T10:12:35Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/issues/2834": {
+    "status": 200,
+    "when": "2026-10-03T15:29:48Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/issues/331": {
@@ -4011,6 +4028,11 @@
     "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
+  "https://gohugo.io/quick-reference/glossary/#site-root": {
+    "status": 200,
+    "when": "2026-10-05T14:34:45Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/quick-reference/glossary/#sites-matrix": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
@@ -4061,6 +4083,11 @@
     "when": "2026-09-19T16:04:40Z",
     "via": "lychee",
   },
+  "https://gohugo.io/templates/lookup-order/": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/templates/new-templatesystem-overview/": {
     "status": 200,
     "when": "2026-06-27T12:29:28Z",
@@ -4076,6 +4103,11 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://gohugo.io/templates/shortcode/#lookup-order": {
+    "status": 200,
+    "when": "2026-10-05T19:26:46Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/templates/sitemap-template/": {
     "status": 200,
     "when": "2026-09-19T16:04:39Z",
@@ -4084,6 +4116,16 @@
   "https://gohugo.io/templates/types/": {
     "status": 200,
     "when": "2026-09-02T08:07:10Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/templates/types/#home": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/templates/types/#section": {
+    "status": 200,
+    "when": "2026-10-05T15:30:59Z",
     "via": "lychee",
   },
   "https://gohugo.io/themes/": {

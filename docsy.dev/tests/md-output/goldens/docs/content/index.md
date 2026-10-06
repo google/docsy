@@ -4,14 +4,14 @@
 
 ---
 
-LLMS index: [llms.txt](/llms.txt)
+Site [llms.txt](/llms.txt)
 
 ---
 
 Section pages:
 
 - [Adding Content](/docs/content/adding-content/): Add different types of content to your Docsy site.
-- [AI-agent support](/docs/content/agent-support/): Opt-in features that help AI agents and automated tools discover and use your site content, including Markdown output, alternate links in HTML, and llms.txt.
+- [AI-agent support](/docs/content/agent-support/): Help AI agents discover and use your content with Markdown versions of your pages and a site llms.txt.
 - [Analytics, User Feedback, and SEO](/docs/content/feedback/): Add Google Analytics tracking to your site, collect user feedback and learn about the page description meta tag.
 - [Configuration](/docs/content/configuration/): The rules behind every Docsy setting, from how theme defaults merge with yours to case-insensitive keys, boolean values, environment overrides, and build warnings
 - [Diagrams and Formulae](/docs/content/diagrams-and-formulae/): Write Mermaid, PlantUML, and MarkMap diagrams as code blocks, typeset KaTeX formulae, make Diagrams.net images editable in place, and configure their renderers.
