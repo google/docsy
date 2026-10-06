@@ -50,7 +50,8 @@ params:
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
-    # CNCF's copyright-notice form for Series projects (the LF website guideline requires a Series notice)
+    # Series notice required by CNCF website guideline 7 (with the Project
+    # policies link below), in the wording of CNCF's copyright-notices.md
     authors: >-
       Contributors to Docsy a Series of LF Projects, LLC |
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
@@ -61,8 +62,6 @@ params:
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
   example_site_url: &exampleSiteURL https://example.docsy.dev
-  time_format_blog: Monday, January 02, 2006
-  time_format_default: January 2, 2006
   gcs_engine_id: 011217106833237091527:la2vtv2emlw # cSpell:disable-line
   offlineSearch: false
   offlineSearchSummaryLength: 70
