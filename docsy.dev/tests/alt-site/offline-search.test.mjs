@@ -18,7 +18,7 @@ test('offline-search index covers all site languages', (t) => {
 
   const res = spawnSync(
     `npm run _hugo -- -e test-offline-search -DFE ` +
-      `--baseURL http://localhost -d ${outDir}`,
+      `--baseURL http://localhost -d "${outDir}"`,
     { cwd: siteDir, shell: true, encoding: 'utf8' },
   );
   const output = `${res.stdout ?? ''}${res.stderr ?? ''}`;

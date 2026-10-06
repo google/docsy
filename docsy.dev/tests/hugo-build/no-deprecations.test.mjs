@@ -20,14 +20,11 @@ function buildSite() {
     // executed Hugo really did, so a chain change that swallows the flag
     // fails red instead of silently muting deprecations. The probe does not
     // depend on (or enforce) the _hugo script's own level.
-    const res = spawnSync(
-      'npm run build -- -d ' + destDir + ' --logLevel info',
-      {
-        cwd: siteDir,
-        shell: true,
-        encoding: 'utf8',
-      },
-    );
+    const res = spawnSync(`npm run build -- -d "${destDir}" --logLevel info`, {
+      cwd: siteDir,
+      shell: true,
+      encoding: 'utf8',
+    });
     const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
     // Catches Hugo API deprecations and any deprecation warning that escapes
     // the theme's silencing, e.g. through a config regression (guard split:
