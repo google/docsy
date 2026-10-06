@@ -113,7 +113,9 @@
     "npm": ">=11.18.0"
   },
   "overrides": {
-    "adm-zip": "^0.6.1"
+    "adm-zip": "^0.6.1",
+    "katex": "^0.18.2",
+    "smol-toml": "^1.9.0"
   },
   "spelling": "cSpell:ignore uall -",
   "allowScripts": {
