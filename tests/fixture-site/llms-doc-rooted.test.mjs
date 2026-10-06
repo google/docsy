@@ -154,9 +154,7 @@ test('doc-rooted pages carry the directive and describedby link, pointing at the
     assert.ok(
       html
         .split('</head>')[0]
-        .includes(
-          `<link rel="describedby" href="https://example.org${llms}">`,
-        ),
+        .includes(`<link rel="describedby" href="https://example.org${llms}">`),
       `${page} head links ${llms} as describedby`,
     );
   }
