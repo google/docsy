@@ -129,7 +129,11 @@ leave step 2 without a merge-commit option.
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
-guarded by the [toolchain-versions test](#test-suites).
+guarded by the [toolchain-versions test](#test-suites). Their support status is
+the changelog's [official support](/project/about/changelog/#official-support)
+section's: the pinned version is supported, the minimum merely builds, so
+release artifacts tell upgraders to move to the pin and never frame that move as
+optional.
 
 Only current-state pages (docs and the changelog's
 [official support](/project/about/changelog/#official-support) section) render
