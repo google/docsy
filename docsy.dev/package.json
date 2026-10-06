@@ -23,7 +23,7 @@
     "clean": "rm -Rf public",
     "ccr": "cross-env HUGO_PARAMS_TD_CHROME=shared npm run",
     "fix:format": "npm run _check:format -- --write",
-    "fix:link-cache": "npm run check:links",
+    "fix:link-cache": "npm run check:links --",
     "fix:refcache": "echo 'WARNING: fix:refcache is deprecated. Use fix:link-cache moving forward.' >&2 && npm run fix:link-cache",
     "fix": "npm run fix:format",
     "link-cache": "link-cache",
