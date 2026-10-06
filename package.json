@@ -59,7 +59,7 @@
     "fix:format": "npm run -s _check:format -- --write && echo && npm run -s -C docsy.dev fix:format",
     "fix:markdown": "npm run check:markdown -- --fix",
     "fix:link-cache": "npm run -C docsy.dev fix:link-cache --",
-    "fix:refcache": "npm run -C docsy.dev fix:refcache",
+    "fix:refcache": "npm run -C docsy.dev fix:refcache --",
     "fix": "npm run fix:format && npm run fix:markdown && npm run -C docsy.dev fix",
     "hugo": "hugo",
     "install:safe": "npm run _install:safe:pre && npm run _install:safe:post",
