@@ -188,6 +188,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
+- Fixed phone pages rendering zoomed out when the light/dark mode menu is shown:
+  the toggle's assistive label widened the page, a 0.17.0 regression
+  ([#2850][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see the [0.18.0 release report][0.18.0-blog-overrides]
@@ -246,6 +249,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2834]: https://github.com/docsy/docsy/issues/2834
 [#2838]: https://github.com/docsy/docsy/pull/2838
+[#2850]: https://github.com/docsy/docsy/pull/2850
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
