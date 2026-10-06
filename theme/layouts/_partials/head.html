@@ -40,9 +40,9 @@
 {{ range .AlternativeOutputFormats -}}
 <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
 {{ end -}}
-{{/* llms.txt spec v2 discovery link. LLMS is `notAlternative` (llms.txt
-  describes the site; it isn't a version of this page), so it isn't in the
-  alternates loop above. */ -}}
+{{/* llms.txt spec v2 discovery link. The alternates loop above can't supply
+  it: it lists this page's own formats, and LLMS is `notAlternative` (llms.txt
+  describes the site; it isn't a version of this page). */ -}}
 {{ with (partialCached "td/root-page.html" site site.Home.Permalink).OutputFormats.Get "LLMS" -}}
 <link rel="describedby" href="{{ .Permalink | safeURL }}">
 {{ end -}}

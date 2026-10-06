@@ -115,9 +115,9 @@ links to Markdown versions of its pages. Agents read or search it, then follow
 the links they need. For the format, see [llmstxt.org][].
 
 Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
-its root page's URL. Docsy supports `LLMS` on the root page only; enabling it on
-other page kinds renders the same site overview there. To enable it for home
-pages, add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
+its root page's URL. Docsy supports `LLMS` on the root page only; on other pages
+it renders a site overview, not a page-scoped file. To enable it for home pages,
+add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -146,16 +146,17 @@ For this site's `llms.txt`, see
 
 Agents find your Markdown content through:
 
-- **Alternate links**: page HTML headers include `rel="alternate"` links to the
+- **Alternate links**: page heads include `rel="alternate"` links to the
   Markdown version of the page.
-- **`describedby` link**: when the root page publishes `llms.txt`, page HTML
-  headers include a `rel="describedby"` link (the [llms.txt spec][llmstxt.org]
-  v2 discovery mechanism) to the language's `llms.txt`.
-- **In-body directive**: when `llms.txt` is enabled, each page body opens with a
-  visually-hidden directive pointing agents to the language's `llms.txt` and,
-  when the page has one, its Markdown version. Sites that override the theme's
-  `baseof` templates need to call the [`llms-directive.html`][] partial
-  themselves.
+- **`describedby` link**: when the root page publishes `llms.txt`, page heads
+  include a `rel="describedby"` link to the language's `llms.txt`, as [llms.txt
+  spec][llmstxt.org] v2 recommends. Sites that override the theme's `head.html`
+  partial need to add the link themselves.
+- **In-body directive**: when the root page publishes `llms.txt`, each page body
+  opens with a visually-hidden directive pointing agents to the language's
+  `llms.txt` and, when the page has one, its Markdown version. Sites that
+  override the theme's `baseof` templates need to call the
+  [`llms-directive.html`][] partial themselves.
 
 ## Customize output
 

@@ -182,9 +182,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 **Other changes**:
 
 - **[`llms.txt` on doc-rooted sites][ug-doc-rooted]**: the docs landing page can
-  now publish it, as can any page of kind `section`. On every site, Markdown
-  versions link the current language's `llms.txt`, if published, and the agent
-  directive names it ([#2834][]).
+  now publish it. On every site, Markdown versions link the current language's
+  `llms.txt`, if published, and the agent directive names it ([#2834][]).
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
@@ -198,8 +197,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Added **[plugin authoring][ug-plugin-authoring]**: write your own plugins
   ([#2789][]).
 - Added the **[`llms.txt` spec v2 discovery link][ug-discovery]**: page heads of
-  sites whose root page publishes `llms.txt` now carry a `rel="describedby"`
-  link to the language's file ([#2851][]).
+  sites whose root page publishes `llms.txt` now link it as `rel="describedby"`
+  ([#2614][]).
 - Declared Mermaid 12 pins experimental ([#2825][]).
 
 **For maintainers**:
@@ -249,7 +248,6 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2834]: https://github.com/docsy/docsy/issues/2834
 [#2838]: https://github.com/docsy/docsy/pull/2838
-[#2851]: https://github.com/docsy/docsy/pull/2851
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
