@@ -10,7 +10,10 @@ what the templates emit; these pin what the reader sees. Two kinds of shot:
 - **region crops**: the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
 - a **full-page shot**: the coarse safety net for whatever the tracked regions
-  don't cover.
+  don't cover. It must also be exactly as wide as its viewport: a wider page is
+  horizontal overflow, which phones zoom out to fit. Update mode refuses such a
+  shot, and refreshing goldens can't fix that failure; fix the overflow (a long
+  fixture site title alone can overflow a phone navbar).
 
 ## Running
 

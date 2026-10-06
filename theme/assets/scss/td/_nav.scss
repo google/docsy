@@ -129,9 +129,9 @@ $td-link-underline-offsets: (
     align-items: center;
     justify-content: center;
 
-    // Contains the toggle's visually-hidden label, which would otherwise
-    // escape the mobile navbar's scroller and widen the page. The button, not
-    // this container (kept `position: unset`), so the dropdown still escapes.
+    // The button is the containing block for its visually-hidden label, which
+    // would otherwise escape the mobile navbar's scroller and widen the page.
+    // This container stays `position: unset` so the dropdown still escapes.
     .dropdown-toggle {
       position: relative;
     }

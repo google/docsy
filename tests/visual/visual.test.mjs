@@ -160,10 +160,10 @@ for (const { name, rel, region, viewport, scheme } of shots) {
       });
       const file = path.join(goldenDir, rel);
       // A full-page shot spans the document's scroll width, so a wider shot
-      // is horizontal overflow, which phones zoom out to fit. Checked before
-      // a golden write (never record overflow) but after a comparison (its
-      // actual shot is the failure's diagnostic); a rejected shot is always
-      // written, since a matching golden or update mode writes none.
+      // is horizontal overflow, which phones zoom out to fit. Update mode
+      // refuses it before writing; compare mode checks it after the
+      // comparison, which counts the shot and keeps its diff. A rejected
+      // shot's actual is always written as the diagnostic.
       const assertFitsViewport = () => {
         if (region.selector) return;
         if (actual.width !== viewport.width) writeActual(name, actual, outDir);

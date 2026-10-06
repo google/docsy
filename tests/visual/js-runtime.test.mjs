@@ -89,12 +89,14 @@ const variants = {
     },
     pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
   },
-  // The theme toggler in the crowded navbar. Its own site: the theme's
-  // dark-mode scripts (head.html's init and dark-mode.js) re-apply the stored
-  // or auto theme, overriding the dark probes' forced data-bs-theme.
+  // Its own site: the theme's dark-mode scripts (head.html's init and
+  // dark-mode.js) re-apply the stored or auto theme, overriding the dark
+  // probes' forced data-bs-theme. The short title keeps the toggler label the
+  // only thing that can widen the page.
   toggler: {
     options: {
       files,
+      title: 'Toggler',
       extraConfig: `${crowdedMenu}params:
   ui:
     showLightDarkModeMenu: true
@@ -220,7 +222,8 @@ for (const { variant, page } of visits) {
 }
 
 // Behavior probes: one parity assertion per script the theme converted
-// (jQuery removal, docsy#1436; plugin conversions, 0.18).
+// (jQuery removal, docsy#1436; plugin conversions, 0.18), plus layout probes
+// that only a real browser can measure.
 
 // Interaction probes carry their own pageerror collector: an exception
 // thrown by a handler mid-probe must fail the probe, not vanish once the
