@@ -14,14 +14,14 @@ import {
   readFileSync,
   rmSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
 const tmpDir = join(siteDir, 'tmp');
 
-// Builds the doc-rooted variant to a throwaway destination under the gitignored
-// tmp/, so the published public/ that test:base produces stays intact.
+// Throwaway destination under the gitignored tmp/, so the published public/
+// that test:base produces stays intact.
 function buildDocRooted() {
   mkdirSync(tmpDir, { recursive: true });
   const destDir = mkdtempSync(join(tmpDir, 'doc-rooted-llms-'));
@@ -47,7 +47,9 @@ test('doc-rooted variant publishes llms.txt at each language root only', (t) => 
     `doc-rooted build is warning-free; output:\n${output}`,
   );
 
-  const llmsFiles = globSync('**/llms.txt', { cwd: destDir }).sort();
+  const llmsFiles = globSync('**/llms.txt', { cwd: destDir })
+    .map((f) => f.split(sep).join('/'))
+    .sort();
   assert.deepEqual(llmsFiles, ['fr/llms.txt', 'llms.txt']);
   for (const [llms, home] of [
     ['llms.txt', 'index.md'],

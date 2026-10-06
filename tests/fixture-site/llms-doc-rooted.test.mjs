@@ -1,7 +1,9 @@
 // Doc-rooted sites (docs section published at the site root, home link-only;
 // recipe: docsy.dev/content/en/docs/content/adding-content.md § Doc-rooted
 // sites) have no rendered home, so llms.txt must come from the page that
-// publishes the root (docsy/docsy#2834).
+// publishes the root (docsy/docsy#2834). Also pins the all-sites consequences:
+// the Markdown versions' per-language llms.txt link, section-kind rendering,
+// and a site's own index.llms.txt override.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,8 +21,8 @@ const leaf = (title, { llmsLink = true } = {}) =>
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
-// Description precedence: en has one only on the link-only home, so llms.txt
-// falls back to it; fr has one on both, and the landing page's wins.
+// en describes only the link-only home; fr describes both home and landing
+// page.
 const docRootedFiles = (
   docsOutputs = '[HTML, RSS, markdown, LLMS]',
   leafOptions = {},
