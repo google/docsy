@@ -28,7 +28,7 @@ outputFormats:
     path: _print
     permalinkable: false # cSpell:disable-line
 
-# Needed for KaTeX, possibly useful for others. see
+# Needed for KaTeX's self-hosted fonts; see
 # https://github.com/docsy/docsy/pull/2465
 mediaTypes:
   font/woff:
