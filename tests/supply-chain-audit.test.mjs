@@ -335,7 +335,8 @@ test('manifests: theme-owned dependencies stay out of the root manifest', () => 
 // lock all pass it; and npm never says an override became unnecessary. When
 // a parent changes its declared range, its row goes red: reassess, and drop
 // the override (and the row) if the parent now resolves past the vulnerable
-// versions.
+// versions. A fixed release inside an unchanged range leaves the row green;
+// release prep reassesses (maintainer notes, Release-prep audit).
 const REVIEWED_OVERRIDES = {
   // GHSA-xcpc-8h2w-3j85, GHSA-vwc7-r8mq-g2x9
   'adm-zip': {
