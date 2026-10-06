@@ -169,8 +169,6 @@ for the root page's kind:
   `index.llms.txt`)
 - [`section`][section-tmp-type] for doc-rooted sites: `layouts/section.llms.txt`
 
-Shortcodes render into Markdown through [output-format-specific templates][sof].
-
 ## Server-side support
 
 While outside the scope of Docsy's support, sites can facilitate agent discovery
@@ -224,5 +222,4 @@ For details on how these checks are configured, see
 [root page]: /docs/content/adding-content/#doc-rooted-sites
 [section-tmp-type]: https://gohugo.io/templates/types/#section
 [shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
-[sof]: https://gohugo.io/templates/shortcode/#lookup-order
 <!-- prettier-ignore-end -->
