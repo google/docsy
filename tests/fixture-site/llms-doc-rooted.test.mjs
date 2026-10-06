@@ -138,18 +138,26 @@ test('doc-rooted llms.txt description comes from the root page, else the home', 
   );
 });
 
-test('doc-rooted pages carry the directive, pointing at their language llms.txt', () => {
+test('doc-rooted pages carry the directive and describedby link, pointing at their language llms.txt', () => {
   const b = docRooted();
   for (const [page, llms] of [
     ['index.html', '/llms.txt'],
     ['install/index.html', '/llms.txt'],
     ['fr/index.html', '/fr/llms.txt'],
+    ['fr/installation/index.html', '/fr/llms.txt'],
   ]) {
+    const html = b.publicFile(page);
     assert.ok(
-      b
-        .publicFile(page)
-        .includes(`For AI agents: the site's llms.txt is at ${llms}`),
+      html.includes(`For AI agents: the site's llms.txt is at ${llms}`),
       `${page} directive points at ${llms}`,
+    );
+    assert.ok(
+      html
+        .split('</head>')[0]
+        .includes(
+          `<link rel="describedby" href="https://example.org${llms}">`,
+        ),
+      `${page} head links ${llms} as describedby`,
     );
   }
 });
