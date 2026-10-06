@@ -91,7 +91,7 @@ const variants = {
   },
   // Its own site: the theme's dark-mode scripts (head.html's init and
   // dark-mode.js) re-apply the stored or auto theme, overriding the dark
-  // probes' forced data-bs-theme. The short title keeps the toggler label the
+  // probe's forced data-bs-theme. The short title keeps the toggler label the
   // only thing that can widen the page.
   toggler: {
     options: {
@@ -521,7 +521,7 @@ test('js behavior: an overflowing mobile navbar keeps the page within the device
       true,
       'navbar menu overflows',
     );
-    assert.ok(await page.$('#bd-theme-text'), 'toggler label is rendered');
+    assert.ok(await page.$('#bd-theme-text'), 'toggler label is present');
     const pageWidth = () =>
       page.evaluate(() => document.documentElement.scrollWidth);
     assert.equal(
@@ -540,7 +540,7 @@ test('js behavior: an overflowing mobile navbar keeps the page within the device
       'open toggler menu lies within the device width',
     );
     // A box in view can still be clipped by the navbar scroller (as when the
-    // menu container is positioned): hit-test an option instead.
+    // menu container is positioned): hit-test an option too.
     assert.ok(
       await menu.evaluate((el) => {
         const r = el.querySelector('.dropdown-item').getBoundingClientRect();

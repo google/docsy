@@ -188,8 +188,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
-- Fixed phone pages rendering zoomed out on sites whose navbar scrolls and shows
-  the light/dark mode menu ([#2850][]).
+- Fixed phone pages rendering zoomed out when the light/dark mode menu is
+  enabled and the navbar menu scrolls sideways ([#2850][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see the [0.18.0 release report][0.18.0-blog-overrides]

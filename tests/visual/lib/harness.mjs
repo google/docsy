@@ -157,7 +157,7 @@ export async function shootRegion(
   }
 }
 
-// Write a shot's actual PNG under outDir, the failure diagnostic CI uploads.
+// Write a shot's actual PNG under outDir; returns its path.
 export function writeActual(name, actual, outDir) {
   mkdirSync(outDir, { recursive: true });
   const file = path.join(outDir, `${name}-actual.png`);
