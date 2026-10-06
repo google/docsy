@@ -197,6 +197,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 
 - Added **[plugin authoring][ug-plugin-authoring]**: write your own plugins
   ([#2789][]).
+- Added the **[`llms.txt` spec v2 discovery link][ug-discovery]**: page heads of
+  sites publishing `llms.txt` now carry a `rel="describedby"` link to the
+  language's file ([#2614][]).
 - Declared Mermaid 12 pins experimental ([#2825][]).
 
 **For maintainers**:
@@ -254,6 +257,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/
+[ug-discovery]: /docs/content/agent-support/#discovery
 [ug-doc-rooted]: /docs/content/adding-content/#agent-support
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
