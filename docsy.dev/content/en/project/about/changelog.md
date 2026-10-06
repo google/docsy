@@ -192,7 +192,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   override update, see the [0.18.0 release report][0.18.0-blog-overrides]
   ([#2787][]).
 - Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
-  minimum Hugo version is unchanged.
+  minimum Hugo version is unchanged ([#2852][]).
 
 [**Experimental**](#experimental):
 
@@ -250,6 +250,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2834]: https://github.com/docsy/docsy/issues/2834
 [#2838]: https://github.com/docsy/docsy/pull/2838
+[#2852]: https://github.com/docsy/docsy/pull/2852
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
