@@ -50,12 +50,13 @@ params:
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
-    # CNCF's copyright-notice form for Series projects; LF's website guideline requires it
+    # CNCF's copyright-notice form for Series projects (the LF website guideline requires a Series notice)
     authors: >-
       Contributors to Docsy a Series of LF Projects, LLC |
-      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0)
+      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
     to_year: present
+  privacy_policy: https://lfprojects.org/policies/privacy-policy/
   github_repo: https://github.com/docsy/docsy
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
