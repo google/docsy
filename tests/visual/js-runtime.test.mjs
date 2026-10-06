@@ -59,15 +59,9 @@ Alice -> Bob: hello
 `,
 };
 
-// One variant per search bundle. Pages are static so the test list registers
-// up front; each variant's server origin resolves in before().
-const variants = {
-  features: {
-    options: {
-      files,
-      // The crowded main menu overflows the mobile navbar, arming
-      // base.js's scroll-indicator logic.
-      extraConfig: `menus:
+// The crowded main menu overflows the mobile navbar, arming base.js's
+// scroll-indicator logic.
+const crowdedMenu = `menus:
   main:
 ${Array.from(
   { length: 12 },
@@ -75,7 +69,16 @@ ${Array.from(
       url: https://example.org/${i + 1}
       weight: ${i + 1}
 `,
-).join('')}params:
+).join('')}`;
+
+// One variant per search bundle, plus the toggler site. Pages are static so
+// the test list registers up front; each variant's server origin resolves in
+// before().
+const variants = {
+  features: {
+    options: {
+      files,
+      extraConfig: `${crowdedMenu}params:
   offlineSearch: true
   docsy:
     plugins:
@@ -85,6 +88,21 @@ ${Array.from(
 `,
     },
     pages: ['', 'docs/', 'docs/diagrams/', 'docs/tabs/'],
+  },
+  // Its own site: the theme's dark-mode scripts (head.html's init and
+  // dark-mode.js) re-apply the stored or auto theme, overriding the dark
+  // probe's forced data-bs-theme. The short title keeps the toggler label the
+  // only thing that can widen the page.
+  toggler: {
+    options: {
+      files,
+      title: 'Toggler',
+      extraConfig: `${crowdedMenu}params:
+  ui:
+    showLightDarkModeMenu: true
+`,
+    },
+    pages: ['docs/'],
   },
   // gcs_engine_id renders the navbar search input, arming search.js's
   // delegated Enter handler (the offline variant swaps that file out).
@@ -204,7 +222,8 @@ for (const { variant, page } of visits) {
 }
 
 // Behavior probes: one parity assertion per script the theme converted
-// (jQuery removal, docsy#1436; plugin conversions, 0.18).
+// (jQuery removal, docsy#1436; plugin conversions, 0.18), plus layout probes
+// that only a real browser can measure.
 
 // Interaction probes carry their own pageerror collector: an exception
 // thrown by a handler mid-probe must fail the probe, not vanish once the
@@ -477,6 +496,64 @@ test('js behavior: an overflowing navbar menu shows scroll indicators and scroll
     await page.waitForFunction(
       () => document.querySelector('.navbar-nav').scrollLeft > 0,
       { timeout: 5000 },
+    );
+    assert.deepEqual(pageErrors, [], 'probe ran without page errors');
+  } finally {
+    await page.close();
+  }
+});
+
+test('js behavior: an overflowing mobile navbar keeps the page within the device width, toggler menu open or closed', async () => {
+  const { page, pageErrors } = await newProbePage();
+  const deviceWidth = 375;
+  try {
+    // isMobile honors the viewport meta tag, so, as on a phone, content
+    // wider than the device widens the layout viewport (innerWidth) too:
+    // compare against the device width, not innerWidth.
+    await page.setViewport({ width: deviceWidth, height: 667, isMobile: true });
+    await page.goto(`${servers.toggler.origin}/docs/`, {
+      waitUntil: 'networkidle0',
+    });
+    assert.equal(
+      await page.$eval('.td-navbar-container', (el) =>
+        el.classList.contains('navbar-is-overflowing'),
+      ),
+      true,
+      'navbar menu overflows',
+    );
+    assert.ok(await page.$('#bd-theme-text'), 'toggler label is present');
+    const pageWidth = () =>
+      page.evaluate(() => document.documentElement.scrollWidth);
+    assert.equal(
+      await pageWidth(),
+      deviceWidth,
+      'page is as wide as the device',
+    );
+    await page.click('#bd-theme');
+    const menu = await page.waitForSelector(
+      '.td-light-dark-menu .dropdown-menu.show',
+      { visible: true, timeout: 5000 },
+    );
+    const box = await menu.boundingBox();
+    assert.ok(
+      box.x >= 0 && box.x + box.width <= deviceWidth,
+      'open toggler menu lies within the device width',
+    );
+    // A box in view can still be clipped by the navbar scroller (as when the
+    // menu container is positioned): hit-test an option too.
+    assert.ok(
+      await menu.evaluate((el) => {
+        const r = el.querySelector('.dropdown-item').getBoundingClientRect();
+        return el.contains(
+          document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2),
+        );
+      }),
+      'open toggler menu is unclipped',
+    );
+    assert.equal(
+      await pageWidth(),
+      deviceWidth,
+      'page is as wide as the device with the menu open',
     );
     assert.deepEqual(pageErrors, [], 'probe ran without page errors');
   } finally {

@@ -18,6 +18,7 @@ import {
   launchBrowser,
   serveDir,
   shootRegion,
+  writeActual,
 } from './lib/harness.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -158,7 +159,19 @@ for (const { name, rel, region, viewport, scheme } of shots) {
         media: region.media,
       });
       const file = path.join(goldenDir, rel);
+      // Width rule: README.md. Compare mode checks it after the comparison,
+      // so a rejected shot still counts as compared.
+      const assertFitsViewport = () => {
+        if (region.selector) return;
+        if (actual.width !== viewport.width) writeActual(name, actual, outDir);
+        assert.equal(
+          actual.width,
+          viewport.width,
+          `${name} is as wide as the viewport`,
+        );
+      };
       if (update) {
+        assertFitsViewport();
         mkdirSync(path.dirname(file), { recursive: true });
         writeFileSync(file, PNG.sync.write(actual));
         console.log(`wrote ${path.relative(process.cwd(), file)}`);
@@ -166,6 +179,7 @@ for (const { name, rel, region, viewport, scheme } of shots) {
       }
       const failure = compareToGolden(name, actual, file, outDir);
       compared += 1;
+      assertFitsViewport();
       assert.equal(failure, null, `${name} matches its golden`);
     },
   );

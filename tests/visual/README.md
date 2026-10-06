@@ -10,7 +10,9 @@ what the templates emit; these pin what the reader sees. Two kinds of shot:
 - **region crops**: the element's box plus padding, so neighbor spacing is
   covered too; a failure names the region;
 - a **full-page shot**: the coarse safety net for whatever the tracked regions
-  don't cover.
+  don't cover. It must also be exactly as wide as its viewport: a wider page is
+  horizontal overflow, which phones zoom out to fit (a long fixture-site title
+  alone can overflow a phone navbar).
 
 ## Running
 
@@ -36,6 +38,9 @@ Rendering differs across OSs, so goldens live under
   fail on the change, then `npm run update:visual-goldens:linux`, which
   downloads the failed run's `visual-diffs` artifact and installs the actual
   shots as the Linux goldens. Review, commit, push; CI must then go green.
+- A full-page shot wider than its viewport can't be refreshed away:
+  `update:visual-goldens` refuses it, and a Linux golden installed from it still
+  fails CI. Fix the overflow instead.
 
 ## Failure output
 

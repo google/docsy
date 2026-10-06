@@ -96,7 +96,7 @@ test('doc-rooted site publishes llms.txt at each language root', () => {
   const b = docRooted();
   const en = b.publicFile('llms.txt');
   assert.ok(
-    en.startsWith('# Docsy fixture site'),
+    en.startsWith('# llms-doc-rooted fixture\n'),
     'en llms.txt opens with the site title',
   );
   assert.ok(
@@ -325,7 +325,7 @@ test('section-only LLMS publishes section llms.txt but no directive or described
     'outputs:\n  home: [HTML, markdown]\n  section: [HTML, markdown, LLMS]\n',
   );
   assert.ok(
-    b.publicFile('docs/llms.txt').startsWith('# Docsy fixture site'),
+    b.publicFile('docs/llms.txt').startsWith('# llms-section-only fixture\n'),
     'section llms.txt is published',
   );
   for (const page of [

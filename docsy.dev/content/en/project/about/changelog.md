@@ -187,6 +187,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
+- Fixed phone pages rendering zoomed out when the light/dark mode menu is
+  enabled and the navbar menu scrolls sideways ([#2850][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see the [0.18.0 release report][0.18.0-blog-overrides]
@@ -230,6 +232,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Pinned Renovate's schedule timezone to UTC ([#2827][]).
 - Documented the [branch model][project-branch-model]'s invariants, the tag
   rulesets, and the release procedures the `main` ruleset allows ([#2833][]).
+- Added a horizontal-overflow guard to the full-page visual goldens and a
+  mobile-navbar page-width probe to the JS runtime tests ([#2850][]).
 
 [#1436]: https://github.com/docsy/docsy/issues/1436
 [#1992]: https://github.com/docsy/docsy/issues/1992
@@ -250,6 +254,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2833]: https://github.com/docsy/docsy/pull/2833
 [#2834]: https://github.com/docsy/docsy/issues/2834
 [#2838]: https://github.com/docsy/docsy/pull/2838
+[#2850]: https://github.com/docsy/docsy/pull/2850
 [#2852]: https://github.com/docsy/docsy/pull/2852
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/

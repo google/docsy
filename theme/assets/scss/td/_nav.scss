@@ -129,6 +129,13 @@ $td-link-underline-offsets: (
     align-items: center;
     justify-content: center;
 
+    // The button is the containing block for its visually-hidden label, which
+    // would otherwise escape the mobile navbar's scroller and widen the page.
+    // This container stays `position: unset` so the dropdown still escapes.
+    .dropdown-toggle {
+      position: relative;
+    }
+
     .bi {
       // Adapted from:
       // https://github.com/twbs/bootstrap/blob/main/site/layouts/_default/examples.html
