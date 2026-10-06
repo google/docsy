@@ -50,8 +50,6 @@ params:
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
-    # Series notice required by CNCF website guideline 7 (with the Project
-    # policies link below), in the wording of CNCF's copyright-notices.md
     authors: >-
       Contributors to Docsy a Series of LF Projects, LLC |
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
@@ -186,6 +184,7 @@ module:
       sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
+      sites: *sites
     # Root package config, for docs that cite its pins (sass-embedded-version)
     - source: ../package.json
       target: data/package.json
