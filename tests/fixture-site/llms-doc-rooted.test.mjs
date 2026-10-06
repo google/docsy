@@ -195,8 +195,8 @@ test('doc-rooted theme home links point at the language root', () => {
   }
 });
 
-// The reporter's shape: LLMS configured for the home, which publishes nothing,
-// and not for the landing page.
+// LLMS configured for the home, which publishes nothing, and not for the
+// landing page.
 test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, directive, or link', () => {
   const b = build(
     'llms-doc-rooted-off',
