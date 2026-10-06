@@ -51,30 +51,22 @@ params:
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
     authors: >-
-      Docsy Authors | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
+      Contributors to Docsy a Series of LF Projects, LLC |
+      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
     to_year: present
-  privacy_policy: https://policies.google.com/privacy
+  privacy_policy: https://lfprojects.org/policies/privacy-policy/
   github_repo: https://github.com/docsy/docsy
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
   example_site_url: &exampleSiteURL https://example.docsy.dev
-  time_format_blog: Monday, January 02, 2006
-  time_format_default: January 2, 2006
-  rss_sections: [blog] # TODO: drop since this is the default
   gcs_engine_id: 011217106833237091527:la2vtv2emlw # cSpell:disable-line
   offlineSearch: false
   offlineSearchSummaryLength: 70
   offlineSearchMaxResults: 10
   prism_syntax_highlighting: false
-  search:
-    # algolia:
   ui:
-    # showLightDarkModeMenu param values:
-    showLightDarkModeMenu:
-      true # default
-      # false # disable
-      # 'enable-only (experimental)'
+    showLightDarkModeMenu: true
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
     sidebar_search_disable: false
@@ -126,6 +118,11 @@ params:
         url: https://github.com/docsy/docsy
         icon: fa-brands fa-github
         desc: Development takes place here!
+      - name: Project policies
+        url: https://lfprojects.org/policies/
+        icon: fa-solid fa-scale-balanced
+        desc:
+          Website terms of use, trademark policy, and other LF Projects policies
 
   plantuml:
     enable: true
@@ -161,7 +158,6 @@ taxonomies:
 security:
   funcs: # cspell:disable-line
     getenv: # cspell:disable-line
-      # Netlify build env var
       - ^(BRANCH|BUILD_ID|COMMIT_REF|CONTEXT|DEPLOY_ID|NETLIFY|PULL_REQUEST|REVIEW_ID)$
 
 module:
@@ -177,7 +173,6 @@ module:
     - source: content/en
       target: content
       sites: &sites { matrix: { languages: [en, fr] } }
-    # Mount the repo root *.md files for both languages
     - source: ../AGENTS.md
       target: content/project/repo/AGENTS.md
       sites: *sites
@@ -189,11 +184,11 @@ module:
       sites: *sites
     - source: ../CONTRIBUTING.md
       target: content/project/repo/CONTRIBUTING.md
+      sites: *sites
     # Root package config, for docs that cite its pins (sass-embedded-version)
     - source: ../package.json
       target: data/package.json
       sites: *sites
-    # Tests
     # cSpell:ignore quang nguyen vinh therato
     - source: &bg-img content/en/background-pexels-quang-nguyen-vinh-222549-2131841.jpg
       target: content/tests/blocks-cover/height-auto/background.jpg
