@@ -97,7 +97,7 @@
   "devDependencies": {
     "@cspell/dict-fr-fr": "2.3.2",
     "@pchalin/markdownlint-rule-link-pattern": "0.3.0",
-    "hugo-extended": "0.164.0",
+    "hugo-extended": "0.166.0",
     "jsdom": "30.0.1",
     "markdownlint-cli2": "0.23.3",
     "markdownlint-rule-no-shortcut-ref-link": "0.4.0",
@@ -121,6 +121,6 @@
   "allowScripts": {
     "@parcel/watcher": false,
     "puppeteer": false,
-    "hugo-extended@0.164.0": true
+    "hugo-extended@0.166.0": true
   }
 }
