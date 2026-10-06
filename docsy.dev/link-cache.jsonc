@@ -3278,6 +3278,11 @@
     "when": "2026-07-16T22:51:17Z",
     "via": "lychee",
   },
+  "https://github.com/gohugoio/hugo/releases/tag/v0.166.0": {
+    "result": 200,
+    "when": "2026-10-06T14:50:54Z",
+    "via": "lychee",
+  },
   "https://github.com/gohugoio/hugoThemesSiteBuilder#theme-configuration": {
     "result": 200,
     "when": "2026-07-26T09:20:57Z",
