@@ -155,8 +155,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 
 [**Breaking changes**](#breaking-change):
 
-- **[New home][0.18.0-blog-org-move]**: Docsy is now a Linux Foundation project,
-  and its repositories moved to the `docsy` GitHub organization. The Hugo module
+- **[New home][0.18.0-blog-org-move]**: became a Linux Foundation project and
+  moved the repositories to the `docsy` GitHub organization. The Hugo module
   path is now `github.com/docsy/docsy/theme`; the old path resolves 0.17.0 and
   earlier only ([#1992][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
@@ -191,8 +191,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   enabled and the navbar menu scrolls sideways ([#2850][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
-  override update, see the [0.18.0 release report][0.18.0-blog-overrides]
-  ([#2787][]).
+  override update, see [Update Docsy][ug-update-overrides] ([#2787][]).
 - Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
   minimum Hugo version is unchanged ([#2852][]).
 
@@ -210,9 +209,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Grouped Renovate patch/minor dependency updates into per-update-type batch PRs
   (one per weekly wave); moved the Renovate config to JSONC, with GitHub Actions
   bumps looked up as releases and pinned by SHA ([#2776][], [#2821][]).
-- Switched the docsy.dev committed link cache to the link-cache package's JSONC
-  format and expiry-based rotation rule, and added a weekly workflow that
-  re-verifies its oldest entries ([#2779][], [#2780][], [#2783][], [#2792][]).
+- Switched the docsy.dev committed link cache to the [link-cache][] package's
+  JSONC format and prune rule, and added a weekly workflow that re-verifies its
+  oldest entries ([#2779][], [#2780][], [#2783][], [#2792][]).
 - Re-homed the script-loading design, implementation, and quality notes from
   theme comments into the [project docs][project-script-loading], with a
   maintainer-notes rule for routing such content ([#2790][]).
@@ -261,15 +260,16 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
-[0.18.0-blog-overrides]: /blog/2026/0.18.0/#plugins-registry
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0
+[link-cache]: https://github.com/chalin/link-cache
 [project-branch-model]: /project/build/git-repo/#branch-model
 [project-script-loading]: /project/design/script-loading/
 [ug-discovery]: /docs/content/agent-support/#discovery
 [ug-doc-rooted]: /docs/content/adding-content/#agent-support
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
+[ug-update-overrides]: /docs/update/#update-overrides
 [git history since 0.17.0]:
   https://github.com/docsy/docsy/compare/v0.17.0...main
 

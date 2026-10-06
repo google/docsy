@@ -15,8 +15,8 @@ cd /path/to/my-existing-site
 ```
 
 **Applies if** your site config still imports `github.com/google/docsy/theme`
-(Docsy 0.17.0 and earlier): migrate the import path first, following the [0.18.0
-release report][]; the commands below assume the current path.
+(Docsy 0.17.0 and earlier): follow the [0.18.0 release report][]'s migration
+steps before the commands below, which assume the current path.
 
 Then invoke Hugo's module `get` subcommand with the update flag:
 
