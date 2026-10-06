@@ -23,7 +23,7 @@ specifies the [Hugo versions that 0.18.0 requires and validates](0.18.0/#hugo).
 ## Upgrade summary
 
 - **This guide is for you if** you're:
-  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade) and taking the newer Hugo
+  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade)
   - Upgrading only Hugo, past 0.164.x
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
