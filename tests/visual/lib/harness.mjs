@@ -157,22 +157,24 @@ export async function shootRegion(
   }
 }
 
+// Write a shot's actual PNG under outDir, the failure diagnostic CI uploads.
+export function writeActual(name, actual, outDir) {
+  mkdirSync(outDir, { recursive: true });
+  const file = path.join(outDir, `${name}-actual.png`);
+  writeFileSync(file, PNG.sync.write(actual));
+  return file;
+}
+
 // Compare a shot against its golden. Returns null on match; on mismatch,
 // writes actual (and diff, when comparable) PNGs under outDir and returns
 // a failure description.
 export function compareToGolden(name, actual, goldenFile, outDir) {
-  const writeActual = () => {
-    mkdirSync(outDir, { recursive: true });
-    const file = path.join(outDir, `${name}-actual.png`);
-    writeFileSync(file, PNG.sync.write(actual));
-    return file;
-  };
   if (!existsSync(goldenFile)) {
-    return `golden ${goldenFile} is missing (actual written to ${writeActual()}); to create it, run: npm run update:visual-goldens`;
+    return `golden ${goldenFile} is missing (actual written to ${writeActual(name, actual, outDir)}); to create it, run: npm run update:visual-goldens`;
   }
   const expected = PNG.sync.read(readFileSync(goldenFile));
   if (expected.width !== actual.width || expected.height !== actual.height) {
-    return `size ${actual.width}x${actual.height} differs from golden ${expected.width}x${expected.height} (actual written to ${writeActual()})`;
+    return `size ${actual.width}x${actual.height} differs from golden ${expected.width}x${expected.height} (actual written to ${writeActual(name, actual, outDir)})`;
   }
   const diff = new PNG({ width: actual.width, height: actual.height });
   const mismatched = pixelmatch(
@@ -190,7 +192,7 @@ export function compareToGolden(name, actual, goldenFile, outDir) {
     { threshold: 0, includeAA: true },
   );
   if (mismatched === 0) return null;
-  writeActual();
+  writeActual(name, actual, outDir);
   const diffFile = path.join(outDir, `${name}-diff.png`);
   writeFileSync(diffFile, PNG.sync.write(diff));
   return `${mismatched} pixels differ from golden (diff written to ${diffFile})`;

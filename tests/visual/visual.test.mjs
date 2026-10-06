@@ -18,6 +18,7 @@ import {
   launchBrowser,
   serveDir,
   shootRegion,
+  writeActual,
 } from './lib/harness.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -161,9 +162,11 @@ for (const { name, rel, region, viewport, scheme } of shots) {
       // A full-page shot spans the document's scroll width, so a wider shot
       // is horizontal overflow, which phones zoom out to fit. Checked before
       // a golden write (never record overflow) but after a comparison (its
-      // actual shot is the failure's diagnostic).
+      // actual shot is the failure's diagnostic); a rejected shot is always
+      // written, since a matching golden or update mode writes none.
       const assertFitsViewport = () => {
         if (region.selector) return;
+        if (actual.width !== viewport.width) writeActual(name, actual, outDir);
         assert.equal(
           actual.width,
           viewport.width,

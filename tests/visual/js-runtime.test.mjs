@@ -536,6 +536,17 @@ test('js behavior: an overflowing mobile navbar keeps the page within the device
       box.x >= 0 && box.x + box.width <= deviceWidth,
       'open toggler menu lies within the device width',
     );
+    // A box in view can still be clipped by the navbar scroller (as when the
+    // menu container is positioned): hit-test an option instead.
+    assert.ok(
+      await menu.evaluate((el) => {
+        const r = el.querySelector('.dropdown-item').getBoundingClientRect();
+        return el.contains(
+          document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2),
+        );
+      }),
+      'open toggler menu is unclipped',
+    );
     assert.equal(
       await pageWidth(),
       deviceWidth,
