@@ -284,24 +284,14 @@ re-enable a package a rule disables (hugo-extended, Bootstrap, Font Awesome)
 unless `vulnerabilityAlerts.enabled` is set; this config leaves it unset.
 Renovate's alert PRs bypass its own schedule and cooldown but not npm's: lock
 regeneration for a fix younger than `min-release-age` (`.npmrc`) fails with
-`ETARGET` until the release ages. For a fix that can't wait, first vet the
-release: at minimum, check that the published tarball matches the release's
-tagged upstream source (the full checklist is kept outside the repo). Then
-update under a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE` override, set no
-lower than the fix's age requires; the override relaxes the cooldown for
-everything the invocation resolves. For example, for a three-day-old
-hugo-extended release:
+`ETARGET` until the release ages. For a fix that can't wait, run the
+dependency's manual bump under a per-invocation `NPM_CONFIG_MIN_RELEASE_AGE`
+override, set no lower than the fix's age requires (the override relaxes the
+cooldown for everything the invocation resolves). For example, for a
+three-day-old hugo-extended release:
 
 ```sh
 NPM_CONFIG_MIN_RELEASE_AGE=3 npm run update:hugo -- X.Y.Z
-```
-
-For a transitive dependency _`PKG`_, refresh just its lock entry under the same
-override (_`N`_ days), then reinstall under the default cooldown:
-
-```sh
-NPM_CONFIG_MIN_RELEASE_AGE=N npm update PKG --package-lock-only --ignore-scripts
-npm run install:safe
 ```
 
 ### GitHub Actions updates
@@ -506,11 +496,6 @@ For each PR/commit in `git log v<prev>..main`:
 Also check pinned script dependencies for drift: bump the
 [default script-dependency versions](#script-versions) to the latest stable as
 part of the prep PR.
-
-Also reassess each root `overrides` entry: if its parent's declared range now
-admits a fixed release, drop the override and its `REVIEWED_OVERRIDES` row in
-`tests/supply-chain-audit.test.mjs`. The row goes red only when that range
-changes.
 
 Capture the audit as a working document and summarize its findings (the
 classifications and where each item is covered) in the release-prep PR
