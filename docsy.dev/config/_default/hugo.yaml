@@ -56,7 +56,6 @@ params:
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0)
     from_year: 2018
     to_year: present
-  privacy_policy: https://lfprojects.org/policies/privacy-policy/
   github_repo: https://github.com/docsy/docsy
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
