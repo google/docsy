@@ -50,9 +50,9 @@ params:
   productionURL: &productionURL https://www.docsy.dev
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
-    # The Series clause is the LF Projects website guideline's required notice
+    # CNCF's copyright-notice form for Series projects; LF's website guideline requires it
     authors: >-
-      Docsy Authors | Docsy a Series of LF Projects, LLC |
+      Contributors to Docsy a Series of LF Projects, LLC |
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0)
     from_year: 2018
     to_year: present
