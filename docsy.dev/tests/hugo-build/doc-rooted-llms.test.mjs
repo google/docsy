@@ -20,8 +20,8 @@ import { fileURLToPath } from 'node:url';
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
 const tmpDir = join(siteDir, 'tmp');
 
-// Throwaway destination under the gitignored tmp/, so the published public/
-// that test:base produces stays intact.
+// Builds to a throwaway destination, so the published public/ that test:base
+// produces stays intact.
 function buildDocRooted() {
   mkdirSync(tmpDir, { recursive: true });
   const destDir = mkdtempSync(join(tmpDir, 'doc-rooted-llms-'));

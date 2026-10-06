@@ -131,7 +131,7 @@ outputs:
 > For a [doc-rooted site][], see the [doc-rooted `llms.txt`
 > setup][doc-rooted-agent-support] instead.
 
-The file links to the following, each at its Markdown version:
+The file links to the following, each at its Markdown version where available:
 
 - The root page
 - The site's `AGENTS.md` page, if any
