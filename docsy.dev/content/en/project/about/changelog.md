@@ -158,9 +158,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - **[New home][0.18.0-blog-org-move]**: became a Linux Foundation project and
   moved the repositories to the `docsy` GitHub organization. The Hugo module
   path is now `github.com/docsy/docsy/theme` ([#1992][]).
-- **[Plugins][0.18.0-blog-plugins]**: moved Mermaid, MarkMap, tab persistence,
-  and click-to-copy onto the plugin mechanism, removing the `params.mermaid` and
-  `params.markmap` namespaces and relocating the scripts' override points;
+- **[Plugins][0.18.0-blog-plugins]**: converted Mermaid, MarkMap, tab
+  persistence, and click-to-copy to plugins, changing their configuration;
   reserved `params.docsy` for theme settings ([#2789][]).
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts ([#1436][]).
