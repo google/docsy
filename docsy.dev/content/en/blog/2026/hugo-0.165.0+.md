@@ -4,9 +4,9 @@ linkTitle: Hugo 0.165+ upgrade guide
 date: 2026-10-06
 draft: true
 description: >-
-  What changed in Hugo 0.165.0 and 0.166.0 for Docsy sites: security hardening
-  and symlink rules, rewritten globs, a KaTeX stylesheet floor, URL and template
-  changes, and Tailwind's allow-list, each with its upgrade actions
+  Hugo 0.166.0's security hardening, and a few smaller changes, can break a
+  Docsy site's build or silently change its output. Find the ones that apply to
+  your site, each with its fix.
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -65,15 +65,19 @@ other Node tools before running them when a symlink escapes the allowed roots.
 wherever it points: a mount root such as `assets/` or a module mount's `source`
 (dropped since 0.166.0), a directory inside one such as `assets/vendor/x`
 (dropped since 0.165.0), or a relative `source` that passes through a link. A
-symlinked theme directory (`themes/docsy -> ../docsy`) still works. Docsy's own
-mounts read two `node_modules` packages through three mounts, which pnpm and
-`npm link` install as symlinks: the Bootstrap and Font Awesome Sass imports then
-fail with no pointer to the cause, and the Font Awesome webfonts vanish from an
-otherwise green build.
+symlinked theme directory (`themes/docsy -> ../docsy`) still mounts, but counts
+as a symlink that resolves outside the project for the Node gate above when
+PostCSS runs (Docsy runs it in production with a `postcss.config.*`, and for RTL
+languages). Docsy's own mounts read two `node_modules` packages through three
+mounts, which pnpm and `npm link` install as symlinks: the Bootstrap and Font
+Awesome Sass imports then fail with no pointer to the cause, and the Font
+Awesome webfonts vanish from an otherwise green build.
 
 - Replace the link with the real directory (pnpm: `node-linker=hoisted`), or
   mount the link's target by an absolute `source`, for every mount the link
-  affects.
+  affects, and re-declare your project's own `assets` and `static` mounts: a
+  project mount for a component [replaces Hugo's default mount][default-mounts]
+  for it, silently.
 
 {{% _param BREAKING %}} **Applies if** your build runs behind an `HTTP_PROXY` or
 `HTTPS_PROXY`. Docsy itself fetches Mermaid, MarkMap, and KaTeX assets at build
@@ -87,7 +91,7 @@ private or internal host. Hugo 0.166.0 rejects loopback, private, link-local,
 and CGNAT addresses under the default `security.http.urls` allowlist.
 
 - Set `security.http.urls` to a list naming your hosts and the CDNs Docsy
-  fetches from (`cdn.jsdelivr.net`, `unpkg.com`); the address check stands down
+  fetches from (`cdn.jsdelivr.net`, `unpkg.com`): the address check stands down
   for a customized list.
 
 {{% _param BREAKING %}} **Applies if** your content includes Org mode files
@@ -114,7 +118,8 @@ engine's bugs match differently; literal paths are unaffected.
 {{% _param BREAKING %}} **Applies if** your site uses glob patterns:
 
 - In config: module mounts' `includeFiles`, `excludeFiles`, and `files`;
-  `cascade` targets; `segments`; `deployment` matchers; `noVendor`.
+  `cascade` targets; `segments`; `deployment` targets' `include` and `exclude`;
+  `noVendor`.
 - In templates: `.Resources.Match`, `resources.Match`, and kin.
 
 Then:
@@ -225,6 +230,7 @@ Confirm that you've addressed [every action][] that applies to your site. Then:
 [check]: /docs/update/#check
 [every action]: #upgrade-summary
 [hugo-0.165.0]: https://github.com/gohugoio/hugo/releases/tag/v0.165.0
+[default-mounts]: https://gohugo.io/configuration/module/#default-mounts
 [hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0
 [hugo-security]: https://gohugo.io/configuration/security/
 [hugo-supported-version]: <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoSupportedVersion %}}>
