@@ -41,10 +41,11 @@ names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
 
 ## {{% _param BREAKING %}} Security hardening (0.166.0) {#security}
 
-Hugo 0.166.0 is mostly a hardening release: it confines Node tools and mounts to
-the project, checks the addresses that remote fetches resolve to, and denies Org
-mode content by default. Each item can stop a site's build or silently drop its
-files. For the details, see Hugo's [0.166.0][hugo-0.166.0] release notes.
+Hugo 0.166.0 is mostly a hardening release: it drops symlinked mounts, confines
+Node tools to allowed roots, checks the addresses that remote fetches resolve
+to, and denies Org mode content by default. Each item can stop a site's build or
+silently drop its files. For the details, see Hugo's [0.166.0][hugo-0.166.0]
+release notes.
 
 ### Actions {#security-actions}
 
@@ -131,9 +132,9 @@ older one misrenders some expressions. Docsy 0.18.0's supported pin satisfies it
 stylesheet below 0.18.4, through `params.katex.version` or an overridden
 `scripts/katex.html`.
 
-- Remove your pin to take Docsy's supported default; a pin at 0.18.4 or later
-  renders, on a best-effort basis ([KaTeX version][katex-docs]). Update an
-  overridden partial's stylesheet the same way.
+- Remove your pin to take Docsy's supported default, or update an overridden
+  partial's stylesheet to the [release's pin](0.18.0/#script-dep-pins); for a
+  custom pin, see [KaTeX version][katex-docs].
 
 ## Imaging config deprecations now warn (0.166.0) {#imaging}
 
