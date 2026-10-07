@@ -26,7 +26,7 @@ behaviors Docsy enables:
 - **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: a section overview, linking its Markdown content.
+- **[`llms.txt`](#llms-txt)**: an overview linking its Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -124,9 +124,9 @@ to the Markdown version of the target when available, otherwise to the HTML
 version:
 
 - A _site index_ consisting of the following coalesced list:
-  - [root page][site root]
+  - [site root][]
   - `AGENTS.md` page, if any is published (experimental)
-  - Main menu list
+  - Main menu entries
 - A _documentation index_ consisting of the site's top-level docs sections
 - The [project][]'s other [sites][], by language
 
