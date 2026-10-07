@@ -49,7 +49,7 @@ includes:
 A shortcode without a Markdown variant emits its HTML there; for how to add one,
 see [Shortcodes][shortcode-md-variants].
 
-### Enabling {#enabling-markdown-output}
+### Enable Markdown output {#enabling-markdown-output}
 
 To enable Markdown output, add `markdown` to the Hugo [outputs][] configuration
 for the page kinds you want to support. For example:
@@ -88,7 +88,7 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-### Opting out {#opt-pages-out}
+### Opt pages out {#opt-pages-out}
 
 > [!TIP]
 >
@@ -132,7 +132,7 @@ target's Markdown version when available, otherwise its HTML version:
 This organization is intended for rooted `llms.txt` files, not arbitrary
 sections.
 
-### Enabling {#enabling-llms-txt-output}
+### Enable `llms.txt` output {#enabling-llms-txt-output}
 
 To enable `llms.txt` generation for every [site root][] (a practice Docsy
 recommends), add `LLMS` to the Hugo `home` [outputs][] configuration. For

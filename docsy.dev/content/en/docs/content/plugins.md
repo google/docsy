@@ -10,12 +10,12 @@ under `params.docsy.plugins` in your site configuration.
 
 ## Configure Docsy's plugins
 
-| Plugin            | What it does (Default / Loads on)                                                                  | Learn more                     |
-| ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `click-to-copy`   | Adds a copy button to code blocks (On, but off under Prism, which has its own / Every page)        | [Copy to clipboard][]          |
-| `tabpane-persist` | Remembers the selected tab across pages (On / Every page ([why](#page-flags-in-included-content))) | [`tabpane`][]                  |
-| `markmap`         | Renders `markmap` code blocks as mind maps (Off / Pages with a `markmap` code block)               | [Activating MarkMap support][] |
-| `mermaid`         | Renders `mermaid` code blocks as diagrams (On / Pages with a `mermaid` code block)                 | [Diagrams with Mermaid][]      |
+| Plugin            | What it does (Default / Loads on)                                                                  | Learn more                   |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `click-to-copy`   | Adds a copy button to code blocks (On, but off under Prism, which has its own / Every page)        | [Copy to clipboard][]        |
+| `tabpane-persist` | Remembers the selected tab across pages (On / Every page ([why](#page-flags-in-included-content))) | [`tabpane`][]                |
+| `markmap`         | Renders `markmap` code blocks as mind maps (Off / Pages with a `markmap` code block)               | [Activate MarkMap support][] |
+| `mermaid`         | Renders `mermaid` code blocks as diagrams (On / Pages with a `mermaid` code block)                 | [Diagrams with Mermaid][]    |
 
 To turn a plugin off, set its `enable` field to `false`:
 
@@ -249,7 +249,7 @@ MarkMap doesn't render][].
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
 [`tabpane`]: /docs/content/shortcodes/#tabpane
-[Activating MarkMap support]: /docs/content/diagrams-and-formulae/#activating-markmap-support
+[Activate MarkMap support]: /docs/content/diagrams-and-formulae/#activate-markmap-support
 [When a MarkMap doesn't render]: /docs/content/diagrams-and-formulae/#when-a-markmap-doesnt-render
 [Copy to clipboard]: /docs/content/lookandfeel/#copy-to-clipboard
 [head and body hooks]: /docs/content/lookandfeel/#add-code-to-head-or-before-body-end

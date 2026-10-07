@@ -139,5 +139,5 @@ the published docs change only when `release` moves.
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
 [release-tag-integrity ruleset]: <{{% param github_repo %}}/rules/24262989>
 [release-tags ruleset]: <{{% param github_repo %}}/rules/20660119>
-[restore the fast-forward path]: /project/about/maintainer-notes/#restoring-the-fast-forward-path
+[restore the fast-forward path]: /project/about/maintainer-notes/#restore-the-fast-forward-path
 <!-- prettier-ignore-end -->
