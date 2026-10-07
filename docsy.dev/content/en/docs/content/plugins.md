@@ -75,18 +75,18 @@ types, defaults, and syntactic patterns:
 
 ### Warnings
 
-Every registry shape warning carries the id `docsy-config` (to silence one, see
-[Configuration § Configuration warnings][config-warnings]):
+Every shape warning for `params.docsy.plugins` carries the id `docsy-config` (to
+silence one, see [Configuration § Configuration warnings][config-warnings]):
 
 - An unknown field is ignored and the rest of the entry applies.
 - An unknown key directly under `params.docsy` is ignored and the rest of the
   map applies.
 - A name the schema's pattern rejects or that ends in its reserved suffix, a
   scalar entry, or an entry missing a required field drops the whole entry.
-- A `params.docsy` or `params.docsy.plugins` that is not a map empties the
-  registry, Docsy's own plugins and their deprecated aliases included.
-  `plugins: {}` keeps them; a valueless `plugins:` is null and drops them.
-- An empty registry after configuration merging warns; a registry with all
+- A `params.docsy` or `params.docsy.plugins` that is not a map drops every
+  plugin, Docsy's own and their deprecated aliases included. `plugins: {}` keeps
+  them; a valueless `plugins:` is null and drops them.
+- An empty `plugins` map after configuration merging warns; a map with all
   entries disabled is valid.
 - An enabled name with no script file
   ([Plugin files (experimental)](#plugin-files)) is a different fault: it warns
@@ -171,14 +171,15 @@ register the plugin, or set it in its [shim](#adjust-a-plugin-per-page).
 
 ### Adjust a plugin per page
 
-A **shim** adjusts a plugin's registry entry for each page before the plugin
-loads. Add one for your own plugin, or for one of Docsy's. Three of Docsy's
-plugins ship a shim, `mermaid`, `markmap`, and `click-to-copy`: your file
-replaces that plugin's shim and everything it does ([shim contract][impl-shim]),
-so start from a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
+A **shim** adjusts a plugin's entry for each page before the plugin loads. Add
+one for your own plugin, or for one of Docsy's. Three of Docsy's plugins ship a
+shim, `mermaid`, `markmap`, and `click-to-copy`: your file replaces that
+plugin's shim and everything it does ([shim contract][impl-shim]), so start from
+a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
 
 Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, with the
-plugin's registry name as _`NAME`_ ([shim contract][impl-shim]):
+plugin's name (its key under `params.docsy.plugins`) as _`NAME`_ ([shim
+contract][impl-shim]):
 
 ```go-html-template
 {{ $entry := .Plugin -}}
@@ -195,12 +196,12 @@ relying on a flag, read
 
 ### Dependency versions
 
-For a custom plugin with a configurable dependency, set `version` on its
-registry entry ([configuration reference](#configuration-reference)) and read
-`.Plugin.version` in the companion partial. Use that value to select the
-dependency's code, for example in a build-time fetch URL. Declaring `version`
-does not fetch code automatically. Omit the field if the plugin has no
-dependency version to configure.
+For a custom plugin with a configurable dependency, set `version` on its entry
+([configuration reference](#configuration-reference)) and read `.Plugin.version`
+in the companion partial. Use that value to select the dependency's code, for
+example in a build-time fetch URL. Declaring `version` does not fetch code
+automatically. Omit the field if the plugin has no dependency version to
+configure.
 
 The entry's `version` is not passed to the plugin script. For a working example,
 see the `markmap` companion in [`scripts/plugins/`][theme-shims].
