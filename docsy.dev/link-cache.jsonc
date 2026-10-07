@@ -2904,6 +2904,11 @@
     "when": "2026-10-03T14:56:32Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/pull/2788": {
+    "result": 200,
+    "when": "2026-10-07T22:45:28Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/pull/2790": {
     "result": 200,
     "when": "2026-10-03T14:56:32Z",
@@ -5004,6 +5009,11 @@
   "https://opentelemetry.io/ecosystem/registry/": {
     "result": 200,
     "when": "2026-09-02T08:07:12Z",
+    "via": "lychee",
+  },
+  "https://osselceu2026.sched.com/event/2Rasq/keynote-technical-documentation-for-everyone-and-their-ai-agents-too-erin-mckean-staff-developer-relations-engineer-google-open-source-programs-office-google": {
+    "result": 200,
+    "when": "2026-10-07T22:53:38Z",
     "via": "lychee",
   },
   "https://osv.dev/list?ecosystem=npm": {
