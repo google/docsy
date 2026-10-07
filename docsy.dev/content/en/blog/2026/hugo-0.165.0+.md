@@ -228,9 +228,9 @@ Confirm that you've addressed [every action][] that applies to your site. Then:
 
 <!-- prettier-ignore-start -->
 [check]: /docs/update/#check
+[default-mounts]: https://gohugo.io/configuration/module/#default-mounts
 [every action]: #upgrade-summary
 [hugo-0.165.0]: https://github.com/gohugoio/hugo/releases/tag/v0.165.0
-[default-mounts]: https://gohugo.io/configuration/module/#default-mounts
 [hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0
 [hugo-security]: https://gohugo.io/configuration/security/
 [hugo-supported-version]: <https://github.com/gohugoio/hugo/releases/tag/v{{% param hugoSupportedVersion %}}>

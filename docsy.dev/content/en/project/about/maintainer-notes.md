@@ -131,21 +131,17 @@ leave step 2 without a merge-commit option.
 
 The repo tracks two distinct Hugo versions, as documented below. Their
 declarations, synchronization requirements, and relative-version constraints are
-guarded by the [toolchain-versions test](#test-suites). Their support status is
-the changelog's [official support](/project/about/changelog/#official-support)
-section's; release artifacts tell upgraders to move to the pin and never frame
-that move as optional.
+guarded by the [toolchain-versions test](#test-suites). Release artifacts tell
+upgraders to move to the
+[officially supported](/project/about/changelog/#official-support) pin and never
+frame that move as optional.
 
-Only current-state pages (docs and the changelog's
-[official support](/project/about/changelog/#official-support) section) render
+Current-state pages (docs and the changelog's official-support section) render
 these versions live, via the `hugoMinVersion` site param and the `hugo-version`
-shortcode. Blog posts are historical snapshots and render versions
-time-insensitively: a post that renders one of these version params freezes it
-in its front matter, so updating the post (say, for a patch release) means
-editing one field. (Version literals in narrative text are already
-time-insensitive.) Page params take precedence over site params, so the same
-`{{%/* param hugoMinVersion */%}}` call is frozen in a post and live in docs.
-Guarded by the [toolchain-versions test](#test-suites).
+shortcode; blog posts freeze them as page params
+([Content placement](#content-placement)). Page params take precedence over site
+params, so the same `{{%/* param hugoMinVersion */%}}` call is frozen in a post
+and live in docs.
 
 ### Minimum Hugo version
 

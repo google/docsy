@@ -26,7 +26,8 @@ behaviors Docsy enables:
 - **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: an overview linking its Markdown content.
+- **[`llms.txt`](#llms-txt)**: a per-[site][] overview linking the site's
+  Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
@@ -36,9 +37,9 @@ The remainder of this page explains how to enable each feature, and discusses
 Hugo comes with several [built-in output formats][output formats], including
 `markdown`.
 
-Docsy provides the `markdown` template ([`layouts/all.md`][]) that Hugo uses to
-output a Markdown version of a page, at `index.md` beside its `index.html`. The
-Markdown version includes:
+Docsy provides the `markdown` template that Hugo uses to output a Markdown
+version of a page, at `index.md` beside its `index.html`. The Markdown version
+includes:
 
 - Page title and description
 - A link to the [site][]'s [`llms.txt`](#llms-txt), when the site publishes one
@@ -119,15 +120,14 @@ URL path. Agents use it to discover the content rooted at that path. For
 details, see the [llms.txt proposal][llmstxt.org].
 
 Docsy defines an `LLMS` [output format][] and a template that renders
-`llms.txt`, one per [site][]. The file links to the following; each link refers
-to the Markdown version of the target when available, otherwise to the HTML
-version:
+`llms.txt`, one per [site][]. The file links to the following, each at the
+target's Markdown version when available, otherwise its HTML version:
 
-- A _site index_ consisting of the following coalesced list:
+- A _site index_ consisting of the following list:
   - [site root][]
   - Main menu entries
 - A _documentation index_ consisting of the site's top-level docs sections
-- The [project][]'s other [sites][], by language
+- The [project][]'s [sites][site], by language, this one included
 
 This organization is intended for rooted `llms.txt` files, not arbitrary
 sections.
@@ -235,7 +235,6 @@ For details on how these checks are configured, see
 [`llms-directive.html`]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/llms-directive.html
 [llmstxt.org]: https://llmstxt.org/
 [lookup]: https://gohugo.io/templates/lookup-order/
-[type]: https://gohugo.io/content-management/front-matter/#type
 [OpenTelemetry agent-readiness report]: https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness
 [output format]: https://gohugo.io/quick-reference/glossary/#output-format
 [output formats]: https://gohugo.io/configuration/output-formats/
@@ -245,5 +244,5 @@ For details on how these checks are configured, see
 [shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
 [site]: https://gohugo.io/quick-reference/glossary/#site
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root
-[sites]: https://gohugo.io/quick-reference/glossary/#site
+[type]: https://gohugo.io/content-management/front-matter/#type
 <!-- prettier-ignore-end -->

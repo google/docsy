@@ -117,8 +117,8 @@ Also perform any release-specific checks listed in the release's
 <!-- prettier-ignore-start -->
 [Heading self-links]: /docs/content/navigation/#heading-self-links
 [hugo-extended]: /docs/get-started/docsy-as-module/installation-prerequisites/#as-an-npm-module
-[official support policy]: /project/about/changelog/#official-support
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+[official support policy]: /project/about/changelog/#official-support
 <!-- prettier-ignore-end -->
