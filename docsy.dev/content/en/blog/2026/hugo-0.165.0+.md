@@ -20,8 +20,8 @@ params:
   katexMinVersion: 0.18.4
 ---
 
-This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
-names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
+This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), whose
+[upgrade section](0.18.0/#upgrade) names the Hugo version that 0.18.0 supports.
 
 ## Upgrade summary
 
