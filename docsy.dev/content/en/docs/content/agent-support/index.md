@@ -117,7 +117,9 @@ the links they need. For the format, see [llmstxt.org][].
 Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
 its root page's URL. Docsy supports `LLMS` on the root page only; on other pages
 it renders a site overview, not a page-scoped file. To enable it for home pages,
-add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
+add `LLMS` to the Hugo `home` [outputs][] configuration, which applies to every
+language; keep it that way, since a language whose root publishes no `llms.txt`
+gets no [discovery](#discovery) links. For example:
 
 ```yaml
 outputs:
