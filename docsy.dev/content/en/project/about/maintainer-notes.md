@@ -49,8 +49,10 @@ pinned or supported version reads it from the pin's source of truth: a config
 param (for example, `params.katex.version`), or a repo manifest surfaced through
 a data mount and shortcode (`sass-embedded-version` reads the root
 `package.json` pin), so the page can't drift from the pin. A dated post freezes
-its release-specific versions as page front-matter params, and delegates install
-and override mechanics to the docs instead of restating commands.
+its release-specific versions as page front-matter params (a draft's frozen
+values must match the live pins: [toolchain-versions test](#test-suites)), and
+delegates install and override mechanics to the docs instead of restating
+commands.
 
 ## PR descriptions
 

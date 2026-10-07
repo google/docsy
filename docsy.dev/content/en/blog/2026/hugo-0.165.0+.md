@@ -13,7 +13,9 @@ author: >-
 body_class: release-highlights
 tags: [hugo, upgrade]
 params:
+  # Frozen at publication (repo pins at release time).
   hugoSupportedVersion: 0.166.0
+  katexVersion: 0.18.9
 ---
 
 This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
@@ -123,7 +125,8 @@ Then:
 
 Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
 `math` fences, emits markup that needs a KaTeX 0.18.4 or later stylesheet; an
-older one misrenders some expressions. Docsy 0.18.0's supported pin satisfies it
+older one misrenders some expressions. Docsy 0.18.0's pin, KaTeX
+{{% param katexVersion %}}, satisfies it
 ([dependency versions](0.18.0/#script-dep-pins)).
 
 ### Actions {#katex-actions}
@@ -132,9 +135,9 @@ older one misrenders some expressions. Docsy 0.18.0's supported pin satisfies it
 stylesheet below 0.18.4, through `params.katex.version` or an overridden
 `scripts/katex.html`.
 
-- Remove your pin to take Docsy's supported default, or update an overridden
-  partial's stylesheet to the [release's pin](0.18.0/#script-dep-pins); for a
-  custom pin, see [KaTeX version][katex-docs].
+- Remove your pin to take Docsy's default, KaTeX {{% param katexVersion %}}, or
+  update an overridden partial's stylesheet to it; for a custom pin, see [KaTeX
+  version][katex-docs].
 
 ## Imaging config deprecations now warn (0.166.0) {#imaging}
 
