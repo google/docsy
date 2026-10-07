@@ -183,6 +183,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   scrolling multiple times after window resizes ([#1436][]).
 - Fixed phone pages rendering zoomed out when the light/dark mode menu is
   enabled and the navbar menu scrolls sideways ([#2850][]).
+- Fixed: previously ignored overrides to [`algolia/head.html` and
+  `scripts/algolia.html`][ug-algolia] now take effect ([#2788][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see [Update Docsy][ug-update-overrides] ([#2787][]).
@@ -239,6 +241,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2783]: https://github.com/docsy/docsy/pull/2783
 [#2786]: https://github.com/docsy/docsy/pull/2786
 [#2787]: https://github.com/docsy/docsy/pull/2787
+[#2788]: https://github.com/docsy/docsy/pull/2788
 [#2789]: https://github.com/docsy/docsy/issues/2789
 [#2790]: https://github.com/docsy/docsy/pull/2790
 [#2792]: https://github.com/docsy/docsy/pull/2792
@@ -265,6 +268,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [project-script-loading]: /project/design/script-loading/
 [ug-discovery]: /docs/content/agent-support/#discovery
 [ug-doc-rooted]: /docs/content/adding-content/#agent-support
+[ug-algolia]: /docs/content/search/#customizing-algolia-templates
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [ug-update-overrides]: /docs/update/#update-overrides
