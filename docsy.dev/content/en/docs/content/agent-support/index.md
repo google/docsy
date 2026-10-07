@@ -125,7 +125,6 @@ version:
 
 - A _site index_ consisting of the following coalesced list:
   - [site root][]
-  - `AGENTS.md` page, if any is published (experimental)
   - Main menu entries
 - A _documentation index_ consisting of the site's top-level docs sections
 - The [project][]'s other [sites][], by language
