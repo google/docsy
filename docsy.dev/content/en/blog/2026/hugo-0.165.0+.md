@@ -134,7 +134,7 @@ Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
 `math` fences, emits markup that needs a KaTeX {{% param katexMinVersion %}} or
 later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's pin,
 KaTeX {{% param katexVersion %}}, satisfies it
-([dependency versions](0.18.0/#script-dep-pins)).
+([supported versions](0.18.0/#upgrade)).
 
 ### Actions {#katex-actions}
 
