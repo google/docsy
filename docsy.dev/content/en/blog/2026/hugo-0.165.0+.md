@@ -95,22 +95,28 @@ through.
 ## {{% _param BREAKING %}} Glob patterns rewritten (0.166.0) {#globs}
 
 Hugo 0.166.0 replaced its glob-matching engine. Patterns that relied on the old
-engine's bugs match differently. `**/` now stands for one or more directories
-where the old engine also let it match none, so `**/x` no longer matches a
-top-level `x` (list `x` as a second pattern; the `{**/,}x` alternation matches
-nothing before 0.166.0) and `a/**/b` no longer matches `a/b`; `\` is an escape
-character; malformed patterns fail the build. Literal paths are unaffected.
+engine's bugs match differently; literal paths are unaffected.
+
+- `**/` matches one or more directories; the old engine also let it match none:
+  - `**/x` no longer matches a top-level `x`. Add `x` as a second pattern; the
+    `{**/,}x` alternation matches nothing before 0.166.0.
+  - `a/**/b` no longer matches `a/b`.
+- `\` is an escape character.
+- Malformed patterns fail the build.
 
 ### Actions {#globs-actions}
 
-{{% _param BREAKING %}} **Applies if** your site uses glob patterns: in config
-(module mounts' `includeFiles`, `excludeFiles`, and `files`, `cascade` targets,
-`segments`, `deployment` matchers, `noVendor`) or in templates
-(`.Resources.Match`, `resources.Match`, and kin).
+{{% _param BREAKING %}} **Applies if** your site uses glob patterns:
 
-- Re-test each pattern against the files it should select. For a `!` exclusion,
-  check the built output for files that should be absent: a pattern that stops
-  matching publishes them with no warning.
+- In config: module mounts' `includeFiles`, `excludeFiles`, and `files`;
+  `cascade` targets; `segments`; `deployment` matchers; `noVendor`.
+- In templates: `.Resources.Match`, `resources.Match`, and kin.
+
+Then:
+
+- Re-test each pattern against the files it should select.
+- For a `!` exclusion, also check the built output for files that should be
+  absent: a pattern that stops matching publishes them with no warning.
 
 ## {{% _param BREAKING %}} KaTeX stylesheet floor (0.166.0) {#katex}
 
