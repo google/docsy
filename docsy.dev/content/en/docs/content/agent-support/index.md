@@ -32,11 +32,27 @@ Docsy enables:
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
 
-## Enable Markdown output {#markdown-output}
+## Markdown output
 
-Hugo comes with several [built-in output formats][], including `markdown`. To
-enable Markdown output, add `markdown` to the Hugo [outputs][] configuration for
-the page kinds you want to support. For example:
+Hugo comes with several [built-in output formats][], including `markdown`.
+
+Docsy defines a `markdown` template
+([`theme/layouts/all.md][]) that Hugo uses to output a Markdown version of a given page at `index.md`beside its`index.html`.
+The Markdown version includes:
+
+- Page title and description
+- A link to the language's [`llms.txt`](#llms-txt), when the [site][lang-site]
+  publishes one
+- Page content, with shortcodes expanded
+- The list of child pages, if any
+
+A shortcode without a Markdown variant emits its HTML there; for how to add one,
+see [Shortcodes][shortcode-md-variants].
+
+### Enabling {#enabling-markdown-output}
+
+To enable Markdown output, add `markdown` to the Hugo [outputs][] configuration
+for the page kinds you want to support. For example:
 
 {{< tabpane text=true persist=lang >}}
 {{< tab header="Configuration file:" disabled=true />}}
@@ -72,17 +88,7 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-Each enabled page gets a Markdown version at `index.md` beside its HTML with:
-
-- Page title and description
-- A link to the language's `llms.txt`, when the site [publishes one](#llms-txt)
-- Page content, with shortcodes expanded
-- The list of child pages, if any
-
-A shortcode without a Markdown variant emits its HTML there; for how to add one,
-see [Shortcodes][shortcode-md-variants].
-
-### Opt pages out {#opt-pages-out}
+### Opting out
 
 > [!TIP]
 >
@@ -107,19 +113,27 @@ outputs: [HTML]
 ...
 ```
 
-## Enable `llms.txt` {#llms-txt}
+## `llms.txt` files {#llms-txt}
 
-An `llms.txt` file is a short Markdown overview of a site for agents: a title, a
-summary (the [root page][]'s description, or the home page's), and lists of
-links to Markdown versions of its pages. Agents read or search it, then follow
-the links they need. For the format, see [llmstxt.org][].
+An `llms.txt` file is a short overview (in Markdown) of the content under its
+URL path. Agents use it to discover the content rooted at that path. For
+details, see the [llms.txt proposal][llmstxt.org].
 
-Docsy defines an `LLMS` output format for `llms.txt` files, one per language at
-its root page's URL. Docsy supports `LLMS` on the root page only; on other pages
-it renders a site overview, not a page-scoped file. To enable it for home pages,
-add `LLMS` to the Hugo `home` [outputs][] configuration, which applies to every
-language — one `llms.txt` per language is the practice Docsy recommends. For
-example:
+Docsy defines an `LLMS` [output format][] and a template that renders
+`llms.txt`. The file links to the following, each at its Markdown version where
+available:
+
+- The root page of the [site][lang-site]
+- The site's `AGENTS.md` page, if any, at its `index.md`
+- Main menu entries
+- Top-level docs sections
+- Site locales
+
+### Enabling {#enabling-llms-txt-output}
+
+To enable `llms.txt` generation, one per [language][lang-site] home (a Docsy
+recommended practice), add `LLMS` to the Hugo `home` [outputs][] configuration.
+For example:
 
 ```yaml
 outputs:
@@ -132,14 +146,6 @@ outputs:
 >
 > For a [doc-rooted site][], see the [doc-rooted `llms.txt`
 > setup][doc-rooted-agent-support] instead.
-
-The file links to the following, each at its Markdown version where available:
-
-- The root page
-- The site's `AGENTS.md` page, if any, at its `index.md`
-- Main menu entries
-- Top-level docs sections
-- Site locales
 
 For this site's `llms.txt`, see
 [`{{% _root-llms-txt-path %}}`](<{{% _root-llms-txt-path %}}>).
