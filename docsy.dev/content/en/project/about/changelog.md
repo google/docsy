@@ -230,6 +230,8 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
 - Pinned Renovate's schedule timezone to UTC ([#2827][]).
+- Made `check:links` and `fix:link-cache` forward their arguments, so
+  `npm run fix:link-cache -- --offline` reaches the link checker ([#2857][]).
 - Documented the [branch model][project-branch-model]'s invariants, the tag
   rulesets, and the release procedures the `main` ruleset allows ([#2833][]).
 - Added a horizontal-overflow guard to the full-page visual goldens and a
@@ -256,6 +258,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2838]: https://github.com/docsy/docsy/pull/2838
 [#2850]: https://github.com/docsy/docsy/pull/2850
 [#2852]: https://github.com/docsy/docsy/pull/2852
+[#2857]: https://github.com/docsy/docsy/pull/2857
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
