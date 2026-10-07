@@ -1,5 +1,5 @@
 // The plugin architecture's acceptance test: a project site adds one asset
-// and one registry entry, zero layout overrides. Rationale:
+// and one plugin entry, zero layout overrides. Rationale:
 // https://www.docsy.dev/project/quality/script-loading/
 
 import { test } from 'node:test';

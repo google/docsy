@@ -260,7 +260,7 @@ MarkMap doesn't render][].
 [config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
 [config-warnings]: /docs/content/configuration/#configuration-warnings
 [design-ordering]: /project/design/script-loading/#ordering-decisions
-[design-registry]: /project/design/script-loading/#registry-shape
+[design-registry]: /project/design/script-loading/#plugins-map
 [experimental]: /project/about/changelog/#experimental
 [markmap-version]: /docs/content/diagrams-and-formulae/#markmap-version
 [mermaid-settings]: /docs/content/diagrams-and-formulae/#mermaid-settings

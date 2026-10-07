@@ -1,4 +1,4 @@
-// Pins Mermaid's registry conversion offline: the companion (a
+// Pins Mermaid's plugin conversion offline: the companion (a
 // resources.GetRemote existence check plus the config block) is stubbed with a
 // marker wherever a build would reach the fetch; the real companion, its
 // config transport, and the runtime are pinned in the visual suite
@@ -258,7 +258,7 @@ test('the shim pins deferred loading against a site entry', () => {
   );
 });
 
-test('a registry entry turns Mermaid off, markup intact', () => {
+test('a plugin entry turns Mermaid off, markup intact', () => {
   const r = buildSite('mermaid-disabled', {
     files: companionTrap,
     extraConfig: `params:
@@ -302,8 +302,8 @@ test('a stale params.mermaid fails a diagram-free site too', () => {
   );
 });
 
-test('a floating registry version warns under the documented id', () => {
-  const r = buildSite('mermaid-registry-floating', {
+test('a floating plugin version warns under the documented id', () => {
+  const r = buildSite('mermaid-plugin-floating', {
     files: stubbed,
     extraConfig: `params:
   docsy:

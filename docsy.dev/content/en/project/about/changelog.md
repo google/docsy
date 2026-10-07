@@ -173,11 +173,11 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 
 **New**:
 
-- **[Plugins][ug-plugins]**: added `params.docsy.plugins`, a registry of Docsy's
-  optional scripts, configured from site configuration; Mermaid, MarkMap, tab
-  persistence, and click-to-copy ship through it; added the plugin-owned
-  `options` entry field. Deprecated `params.disable_click2copy_chroma` in favor
-  of its registry entry ([#2789][]).
+- **[Plugins][ug-plugins]**: added `params.docsy.plugins`, where Docsy's
+  optional scripts are configured; Mermaid, MarkMap, tab persistence, and
+  click-to-copy ship through it; added the plugin-owned `options` entry field.
+  Deprecated `params.disable_click2copy_chroma` in favor of its `plugins` entry
+  ([#2789][]).
 
 **Other changes**:
 
@@ -225,7 +225,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   Security tab) through the OpenTelemetry shared workflow, and brought the
   workflows to zero findings: hardened the refresh, smoke and publish workflows,
   named the jobs, and set superseded PR runs to cancel ([#2811][], [#2838][]).
-- Moved the Mermaid pin, with its Renovate manager row, to the registry entry;
+- Moved the Mermaid pin, with its Renovate manager row, to its `plugins` entry;
   the script-version-pins test now ties every pin to its Renovate row, and two
   Mermaid nets pin the plugin contract offline and at runtime ([#2823][]).
 - Pinned Renovate's schedule timezone to UTC ([#2827][]).
