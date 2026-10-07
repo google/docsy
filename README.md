@@ -8,7 +8,8 @@ Docsy, a [Linux Foundation][] project, is a [Hugo](https://gohugo.io) theme for
 technical documentation sites, providing simple navigation, site structure, and
 more.
 
-> [!IMPORTANT] 🚧 IMPORTANT 🚧
+> [!IMPORTANT]
+> 🚧 IMPORTANT 🚧
 >
 > The `main` branch is under development and not officially supported; use
 > official Docsy [releases][]. For full support details, see [Official support
