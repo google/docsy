@@ -15,16 +15,6 @@
 ## Site index
 
 - [Home page]( {{- $rootPageURL -}} )
-{{ with .Site.GetPage "AGENTS.md" -}}
-  {{ with .Permalink -}}
-    {{ $url := . -}}
-    {{ if hasSuffix $url "/" -}}
-      {{ $url = add $url "index.md" -}}
-    {{ end -}}
-    - [AGENTS.md]( {{- $url -}} ) {{- "\n" -}}
-  {{- end -}}
-{{ end -}}
-
 {{ range .Site.Menus.main -}}
   {{ $url := "" -}}
   {{ $description := "" -}}
