@@ -26,22 +26,22 @@ behaviors Docsy enables:
 - **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: an overview of each [site][], linking its
-  Markdown content.
+- **[`llms.txt`](#llms-txt)**: a section overview, linking its Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
 [validation and metrics](#validation-and-metrics) supported with examples.
 
 ## Markdown output
 
-Hugo comes with several [built-in output formats][], including `markdown`.
+Hugo comes with several [built-in output formats][output formats], including
+`markdown`.
 
 Docsy provides the `markdown` template ([`layouts/all.md`][]) that Hugo uses to
 output a Markdown version of a page, at `index.md` beside its `index.html`. The
 Markdown version includes:
 
 - Page title and description
-- A link to the [site][]'s [`llms.txt`](#llms-txt), when it publishes one
+- A link to the [site][]'s [`llms.txt`](#llms-txt), when the site publishes one
 - Page content, with shortcodes expanded
 - The list of child pages, if any
 
@@ -118,20 +118,26 @@ An `llms.txt` file is a short overview (in Markdown) of the content under its
 URL path. Agents use it to discover the content rooted at that path. For
 details, see the [llms.txt proposal][llmstxt.org].
 
-Docsy defines an `LLMS` [output format][built-in output formats] and a template
-that renders `llms.txt`, one per [site][]. The file links to the following, each
-at its Markdown version where available:
+Docsy defines an `LLMS` [output format][] and a template that renders
+`llms.txt`, one per [site][]. The file links to the following; each link refers
+to the Markdown version of the target when available, otherwise to the HTML
+version:
 
-- The site's root page
-- The site's `AGENTS.md` page, if any, at its `index.md`
-- Main menu entries
-- Top-level docs sections
-- The project's other sites, by language
+- A _site index_ consisting of the following coalesced list:
+  - [root page][site root]
+  - `AGENTS.md` page, if any is published (experimental)
+  - Main menu list
+- A _documentation index_ consisting of the site's top-level docs sections
+- The [project][]'s other [sites][], by language
+
+This organization is intended for rooted `llms.txt` files, not arbitrary
+sections.
 
 ### Enabling {#enabling-llms-txt-output}
 
-To enable `llms.txt` generation for every site, the practice Docsy recommends,
-add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
+To enable `llms.txt` generation for every [site root][] (a practice Docsy
+recommends), add `LLMS` to the Hugo `home` [outputs][] configuration. For
+example:
 
 ```yaml
 outputs:
@@ -221,7 +227,7 @@ For details on how these checks are configured, see
 
 <!-- prettier-ignore-start -->
 [afdocs]: https://afdocs.dev/
-[built-in output formats]: https://gohugo.io/configuration/output-formats/
+[output formats]: https://gohugo.io/configuration/output-formats/
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
