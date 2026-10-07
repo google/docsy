@@ -222,10 +222,10 @@ passthrough delimiter pairs defined above.
 Docsy fetches the KaTeX stylesheet and fonts from the unpkg CDN at build time
 and self-hosts them with your site. It fetches the
 [pinned version](#script-dep-versions), currently {{% param katex.version %}};
-to use a different one, set `params.katex.version`, at or above the KaTeX
-version that your Hugo release bundles for [`transform.ToMath`][tomath], whose
-markup an older stylesheet misrenders (per-release floors: the [Hugo upgrade
-guides][]).
+to use a different one, on a best-effort basis, set `params.katex.version` at or
+above the KaTeX version that your Hugo release bundles for
+[`transform.ToMath`][tomath], whose markup an older stylesheet misrenders
+(per-release floors: the [Hugo upgrade guides][]).
 
 > [!NOTE] Passthrough for selected sections
 >
@@ -433,9 +433,11 @@ site-wide settings.
 The browser loads Mermaid from the jsDelivr CDN at the
 [pinned version](#script-dep-versions), currently
 {{% param docsy.plugins.mermaid.version %}}. To use a different one, set
-`version` on the `mermaid` plugin entry: `mermaid: { version: "X.Y.Z" }`. At
-build time, Docsy checks that the pinned version exists on the CDN; sites that
-restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
+`version` on the `mermaid` plugin entry: `mermaid: { version: "X.Y.Z" }`, on a
+best-effort basis and at 10.0.0 or later (Docsy starts Mermaid through its
+`run()` API). At build time, Docsy checks that the pinned version exists on the
+CDN; sites that restrict Hugo's remote fetches (`security.http`) must allow
+`cdn.jsdelivr.net`.
 
 #### Mermaid 12
 

@@ -17,7 +17,7 @@ params:
 ---
 
 This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
-specifies the [Hugo versions that 0.18.0 requires and validates](0.18.0/#hugo).
+names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
 
 ## Upgrade summary
 
@@ -95,8 +95,8 @@ through.
 
 Hugo 0.166.0 replaced its glob-matching engine. Patterns that relied on the old
 engine's bugs match differently: `**/x` no longer matches a top-level `x`
-(`{**/,}x` does), and malformed patterns fail the build. Literal paths are
-unaffected.
+(`{**/,}x` does), `a/**/b` no longer matches `a/b`, `\` is an escape character,
+and malformed patterns fail the build. Literal paths are unaffected.
 
 ### Actions {#globs-actions}
 
@@ -127,8 +127,8 @@ stylesheet below 0.18.4, through `params.katex.version` or an overridden
 ## {{% _param BREAKING %}} URL and template changes (0.166.0) {#urls-templates}
 
 Two smaller 0.166.0 changes can move a page or truncate one: a title's `/` no
-longer splits a title-derived URL into two segments, and the `return` keyword
-now works in every template, where it used to be ignored outside partials.
+longer splits a title-derived URL into two segments, and a bare `return` now
+works in every template, where it used to be ignored outside partials.
 
 ### Actions {#urls-templates-actions}
 
@@ -143,7 +143,8 @@ filename-based URLs, taxonomy pages, and term pages are unaffected.
 
 {{% _param BREAKING %}} **Applies if** your own templates use `return` outside a
 partial. Hugo 0.166.0 honors it there: a bare `{{ return }}`, ignored before,
-now ends the template's output.
+now ends the template's output; `return` with a value fails the build, as it did
+before.
 
 - Remove it, or move the logic into a partial.
 
