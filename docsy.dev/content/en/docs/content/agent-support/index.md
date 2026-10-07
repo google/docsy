@@ -3,7 +3,7 @@ title: AI-agent support
 linkTitle: Agent support
 description: >-
   Help AI agents discover and use your content with Markdown versions of your
-  pages and a site llms.txt.
+  pages and an llms.txt per site.
 cSpell:ignore: llmstxt
 ---
 
@@ -18,15 +18,15 @@ cSpell:ignore: llmstxt
 
 ## Features
 
-When your site opts in, these are the user-facing and machine-readable behaviors
-Docsy enables:
+When your project opts in, these are the user-facing and machine-readable
+behaviors Docsy enables:
 
 - **[Markdown output format](#markdown-output)** support. Your project's
   `outputs` configuration controls which page kinds publish Markdown.
 - **[Discovery](#discovery)**: how agents find Markdown versions and `llms.txt`.
 - **View Markdown**: page meta area includes a **View Markdown** link to the
   Markdown version of the page.
-- **[`llms.txt`](#llms-txt)**: per-language overview of the site, linking its
+- **[`llms.txt`](#llms-txt)**: an overview of each [site][], linking its
   Markdown content.
 
 The remainder of this page explains how to enable each feature, and discusses
@@ -36,13 +36,12 @@ The remainder of this page explains how to enable each feature, and discusses
 
 Hugo comes with several [built-in output formats][], including `markdown`.
 
-Docsy defines a `markdown` template
-([`theme/layouts/all.md][]) that Hugo uses to output a Markdown version of a given page at `index.md`beside its`index.html`.
-The Markdown version includes:
+Docsy provides the `markdown` template ([`layouts/all.md`][]) that Hugo uses to
+output a Markdown version of a page, at `index.md` beside its `index.html`. The
+Markdown version includes:
 
 - Page title and description
-- A link to the language's [`llms.txt`](#llms-txt), when the [site][lang-site]
-  publishes one
+- A link to the [site][]'s [`llms.txt`](#llms-txt), when it publishes one
 - Page content, with shortcodes expanded
 - The list of child pages, if any
 
@@ -88,14 +87,14 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-### Opting out
+### Opting out {#opt-pages-out}
 
 > [!TIP]
 >
 > By default, Hugo’s `outputs` map (whether in multi-file site config or page
 > front matter) is a **full replacement** for each page kind, not a merge [^1].
-> When you add `markdown`, keep every format your site already relies on -- for
-> example `RSS` and `print` on sections as is shown in the examples above.
+> When you add `markdown`, keep every format your project already relies on --
+> for example `RSS` and `print` on sections as is shown in the examples above.
 
 [^1]:
     This is contrary to the documented Hugo behavior for front-matter
@@ -119,21 +118,20 @@ An `llms.txt` file is a short overview (in Markdown) of the content under its
 URL path. Agents use it to discover the content rooted at that path. For
 details, see the [llms.txt proposal][llmstxt.org].
 
-Docsy defines an `LLMS` [output format][] and a template that renders
-`llms.txt`. The file links to the following, each at its Markdown version where
-available:
+Docsy defines an `LLMS` [output format][built-in output formats] and a template
+that renders `llms.txt`, one per [site][]. The file links to the following, each
+at its Markdown version where available:
 
-- The root page of the [site][lang-site]
+- The site's root page
 - The site's `AGENTS.md` page, if any, at its `index.md`
 - Main menu entries
 - Top-level docs sections
-- Site locales
+- The project's other sites, by language
 
 ### Enabling {#enabling-llms-txt-output}
 
-To enable `llms.txt` generation, one per [language][lang-site] home (a Docsy
-recommended practice), add `LLMS` to the Hugo `home` [outputs][] configuration.
-For example:
+To enable `llms.txt` generation for every site, the practice Docsy recommends,
+add `LLMS` to the Hugo `home` [outputs][] configuration. For example:
 
 ```yaml
 outputs:
@@ -156,15 +154,15 @@ Agents find your Markdown content through:
 
 - **Alternate links**: page heads include `rel="alternate"` links to the
   Markdown version of the page.
-- **`describedby` link**: when the root page publishes `llms.txt`, page heads
-  include a `rel="describedby"` link to the language's `llms.txt`, as [llms.txt
-  spec][llmstxt.org] v2 recommends. Sites that override the theme's `head.html`
-  partial need to add the link themselves.
-- **In-body directive**: when the root page publishes `llms.txt`, each page body
-  opens with a visually-hidden directive pointing agents to the language's
-  `llms.txt` and, when the page has one, its Markdown version. Sites that
-  override the theme's `baseof` templates need to call the
-  [`llms-directive.html`][] partial themselves.
+- **`describedby` link**: when the site publishes `llms.txt`, page heads include
+  a `rel="describedby"` link to it, as the [llms.txt proposal][llmstxt.org] (v2)
+  recommends. Projects that override the theme's `head.html` partial need to add
+  the link themselves.
+- **In-body directive**: when the site publishes `llms.txt`, each page body
+  opens with a visually-hidden directive pointing agents to it and, when the
+  page has one, its Markdown version. Projects that override the theme's
+  `baseof` templates need to call the [`llms-directive.html`][] partial
+  themselves.
 
 ## Customize output
 
@@ -175,7 +173,7 @@ Docsy's templates for the two outputs are:
 
 Both follow Hugo's [template lookup rules][lookup], so your project's `layouts/`
 overrides them. For `llms.txt`, override `all.llms.txt`, or add a template named
-for the root page's kind:
+for the site root page's kind:
 
 - [`home`][home-tmp-type] for regular sites: `layouts/home.llms.txt` (or
   `index.llms.txt`)
@@ -236,7 +234,7 @@ For details on how these checks are configured, see
 [type]: https://gohugo.io/content-management/front-matter/#type
 [OpenTelemetry agent-readiness report]: https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness
 [outputs]: https://gohugo.io/configuration/outputs/
-[root page]: /docs/content/adding-content/#doc-rooted-sites
 [section-tmp-type]: https://gohugo.io/templates/types/#section
 [shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
+[site]: https://gohugo.io/quick-reference/glossary/#site
 <!-- prettier-ignore-end -->
