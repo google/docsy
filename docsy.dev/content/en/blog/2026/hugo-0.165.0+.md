@@ -16,6 +16,8 @@ params:
   # Frozen at publication (repo pins at release time).
   hugoSupportedVersion: 0.166.0
   katexVersion: 0.18.9
+  # Stylesheet version that Hugo 0.166.0's bundled KaTeX needs.
+  katexMinVersion: 0.18.4
 ---
 
 This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
@@ -124,16 +126,16 @@ Then:
 ## {{% _param BREAKING %}} KaTeX stylesheet floor (0.166.0) {#katex}
 
 Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
-`math` fences, emits markup that needs a KaTeX 0.18.4 or later stylesheet; an
-older one misrenders some expressions. Docsy 0.18.0's pin, KaTeX
-{{% param katexVersion %}}, satisfies it
+`math` fences, emits markup that needs a KaTeX {{% param katexMinVersion %}} or
+later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's pin,
+KaTeX {{% param katexVersion %}}, satisfies it
 ([dependency versions](0.18.0/#script-dep-pins)).
 
 ### Actions {#katex-actions}
 
 {{% _param BREAKING %}} **Applies if** your site renders math and serves a KaTeX
-stylesheet below 0.18.4, through `params.katex.version` or an overridden
-`scripts/katex.html`.
+stylesheet below {{% param katexMinVersion %}}, through `params.katex.version`
+or an overridden `scripts/katex.html`.
 
 - Remove your pin to take Docsy's default, KaTeX {{% param katexVersion %}}, or
   update an overridden partial's stylesheet to it; for a custom pin, see [KaTeX
