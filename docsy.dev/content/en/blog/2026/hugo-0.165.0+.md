@@ -4,9 +4,9 @@ linkTitle: Hugo 0.165+ upgrade guide
 date: 2026-10-06
 draft: true
 description: >-
-  Hugo 0.166.0's security hardening, and a few smaller changes, can break a
-  Docsy site's build or silently change its output. Find the ones that apply to
-  your site, each with its fix.
+  Security hardening, a rewritten glob matcher, and a few smaller changes can
+  break a Docsy site's build or silently change its output. Find the ones that
+  apply to your site, each with its fix.
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
