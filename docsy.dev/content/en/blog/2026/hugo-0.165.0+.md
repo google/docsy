@@ -31,8 +31,8 @@ names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
   - {{% _param BREAKING %}} [Glob patterns rewritten](#globs)
   - {{% _param BREAKING %}} [KaTeX stylesheet floor](#katex)
   - {{% _param BREAKING %}} [URL and template changes](#urls-templates)
-- Review **deprecations**: [Imaging config](#imaging)
   - {{% _param BREAKING %}} [Tailwind allow-list (0.165.0)](#tailwind)
+- Review **deprecations**: [Imaging config](#imaging)
 - Where a step sets a [`security`][hugo-security] list, write the whole list:
   Hugo replaces a configured list rather than merging it with the default.
 - {{% _param FAS rocket primary %}} Jump to
@@ -52,9 +52,9 @@ files. For the details, see Hugo's [0.166.0][hugo-0.166.0] release notes.
 outside it, under `node_modules` for example. Hugo 0.166.0 fails PostCSS and
 other Node tools before running them when a symlink escapes the allowed roots.
 
-- Set the whole list with the link's target added:
-  `security.node.permissions.allowRead: ['.', 'TARGET']`, where _`TARGET`_ is
-  the path the link resolves to.
+- Set `security.node.permissions.allowRead` to the whole list with the link's
+  target added, `['.', 'TARGET']`, where _`TARGET`_ is the path the link
+  resolves to.
 
 {{% _param BREAKING %}} **Applies if** a symlink sits on a mount's path,
 wherever it points: a mount root such as `assets/` or a module mount's `source`
@@ -75,7 +75,7 @@ otherwise green build.
 time, so a proxied build is affected even if your templates fetch nothing: Hugo
 0.166.0 ignores the proxy variables unless told to honor them.
 
-- Set `security.http.proxyFromEnvironment: true`.
+- Set `security.http.proxyFromEnvironment` to `true`.
 
 {{% _param BREAKING %}} **Applies if** your build fetches resources from a
 private or internal host. Hugo 0.166.0 rejects loopback, private, link-local,
@@ -89,15 +89,16 @@ and CGNAT addresses under the default `security.http.urls` allowlist.
 (`.org`). Hugo 0.166.0 denies `text/org` by default, as it passes raw HTML
 through.
 
-- Opt back in by setting the whole list without the `text/org` denial:
-  `security.allowContent: ['! ^text/html$']`.
+- Opt back in by setting `security.allowContent` to the whole list without the
+  `text/org` denial: `['! ^text/html$']`.
 
 ## {{% _param BREAKING %}} Glob patterns rewritten (0.166.0) {#globs}
 
 Hugo 0.166.0 replaced its glob-matching engine. Patterns that relied on the old
-engine's bugs match differently: `**/x` no longer matches a top-level `x`
-(`{**/,}x` does), `a/**/b` no longer matches `a/b`, `\` is an escape character,
-and malformed patterns fail the build. Literal paths are unaffected.
+engine's bugs match differently: `**/x` no longer matches a top-level `x` (list
+`x` as a second pattern; the `{**/,}x` alternation matches nothing before
+0.166.0), `a/**/b` no longer matches `a/b`, `\` is an escape character, and
+malformed patterns fail the build. Literal paths are unaffected.
 
 ### Actions {#globs-actions}
 
@@ -137,8 +138,8 @@ check.
 {{% _param CLEANUP %}} **Applies if** your site config still sets
 `imaging.quality` or `imaging.compression`.
 
-- Move each to its per-format key (`imaging.jpeg.quality`,
-  `imaging.webp.quality`, …), or drop it if it matches Hugo's default.
+- Apply the Hugo 0.158+ guide's
+  [Imaging actions](hugo-0.158.0+/#imaging-actions).
 
 ## {{% _param BREAKING %}} URL and template changes (0.166.0) {#urls-templates}
 
