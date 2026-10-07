@@ -5,8 +5,10 @@ description:
   configuration.
 ---
 
-Docsy loads some of its optional JavaScript features as **plugins**: entries
-under `params.docsy.plugins` in your site configuration.
+Docsy ships some of its optional JavaScript features as **plugins**: scripts you
+turn on or off, pin, and configure from your site configuration, each on its own
+entry under `params.docsy.plugins`. You can also add plugins of your own
+([experimental](#add-a-custom-script)).
 
 ## Configure Docsy's plugins
 
