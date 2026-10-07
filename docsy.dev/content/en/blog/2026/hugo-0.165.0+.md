@@ -132,9 +132,8 @@ Then:
 
 Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
 `math` fences, emits markup that needs a KaTeX {{% param katexMinVersion %}} or
-later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's pin,
-KaTeX {{% param katexVersion %}}, satisfies it
-([supported versions](0.18.0/#upgrade)).
+later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's
+[pin](0.18.0/#upgrade), KaTeX {{% param katexVersion %}}, satisfies it.
 
 ### Actions {#katex-actions}
 
@@ -148,10 +147,9 @@ or an overridden `scripts/katex.html`.
 
 ## Imaging config deprecations now warn (0.166.0) {#imaging}
 
-Hugo 0.163.0 deprecated the global `imaging.quality` and `imaging.compression`
-keys for per-format ones ([Hugo 0.158+ guide](hugo-0.158.0+/#imaging)); 0.166.0
-raises the notice to a build `WARN`, which fails the update guide's no-warnings
-check.
+Hugo 0.163.0 [deprecated](hugo-0.158.0+/#imaging) the global `imaging.quality`
+and `imaging.compression` keys for per-format ones; 0.166.0 raises the notice to
+a build `WARN`, which fails the update guide's no-warnings check.
 
 ### Actions {#imaging-actions}
 
@@ -187,8 +185,8 @@ before.
 
 ## {{% _param BREAKING %}} Tailwind allow-list (0.165.0) {#tailwind}
 
-Hugo 0.165.0 is a feature release ([notes][hugo-0.165.0]); besides the symlink
-rule above, its change for Docsy sites is that `tailwindcss` left the default
+Hugo 0.165.0 is a [feature release][hugo-0.165.0]; besides the symlink rule
+above, its change for Docsy sites is that `tailwindcss` left the default
 `security.exec.allow` list.
 
 ### Actions {#tailwind-actions}
@@ -214,9 +212,8 @@ rule above, its change for Docsy sites is that `tailwindcss` left the default
 
 ## {{% _param FAS rocket primary %}} Upgrade to Hugo {{% param hugoSupportedVersion %}} {#upgrade}
 
-After addressing the actions that apply to your site, upgrade to Hugo
-[{{% param hugoSupportedVersion %}}][hugo-supported-version] ([Update
-Hugo][update-hugo]).
+After addressing the actions that apply to your site, [upgrade to
+Hugo][update-hugo] [{{% param hugoSupportedVersion %}}][hugo-supported-version].
 
 ### {{% _param FAS square-check primary %}} Sanity checks
 
