@@ -5,7 +5,6 @@
 ## Site index
 
 - [Home page](http://localhost/index.md)
-- [AGENTS.md](http://localhost/project/repo/agents/index.md)
 - [About](http://localhost/about/index.md): Docsy is a pre-configured Hugo theme that provides the core features and behaviors needed to create a technical documentation site
 - [Docs](http://localhost/docs/index.md)
 - [Examples](http://localhost/examples/index.md): Get started with a template or explore some Docsy-based sites

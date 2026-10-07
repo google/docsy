@@ -38,7 +38,7 @@ in your project, here's how you update the submodule to the latest release:
    ```
 
    If a pin file or other project tooling names the Docsy ref separately, update
-   that source of truth too.
+   that source of truth too, or let that tooling do the checkout.
 
 2. Reinstall the theme's runtime dependencies:
 

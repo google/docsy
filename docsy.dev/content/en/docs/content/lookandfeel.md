@@ -976,7 +976,9 @@ at the end of the theme partial [scripts.html][]. For a script file, you can
 instead register a [plugin][] (experimental).
 
 Both [head.html][] and [scripts.html][] are included from [baseof.html][],
-Docsy's [base template][].
+Docsy's [base template][]. If you override `baseof.html`, keep the
+`scripts.html` include as `partial`, not `partialCached`
+([why][update-overrides]).
 
 <!-- prettier-ignore-start -->
 [base template]: https://gohugo.io/templates/base/
@@ -986,6 +988,7 @@ Docsy's [base template][].
 [hooks/head-end.html]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/hooks/head-end.html
 [plugin]: /docs/content/plugins/#add-a-custom-script
 [scripts.html]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/scripts.html
+[update-overrides]: /docs/update/#update-overrides
 <!-- prettier-ignore-end -->
 
 ### Adding a banner before page content {#before-page-content}

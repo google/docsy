@@ -43,10 +43,10 @@ Replace _`NODE_VERSION`_ with the version that the upgrade post names.
 
 ## Update Hugo
 
-**Applies if** your target release raises the minimum or recommended Hugo
-version; its upgrade [blog post](/tags/upgrade/) says so. For projects using the
-[hugo-extended NPM package][hugo-extended], update the package version, for
-example:
+**Applies if** your site builds with a Hugo other than your target release's
+supported version, the one its upgrade [blog post](/tags/upgrade/) names
+([official support policy][]). For projects using the [hugo-extended NPM
+package][hugo-extended], update the package version, for example:
 
 ```sh
 npm install --save-exact --save-dev hugo-extended@HUGO_VERSION
@@ -75,6 +75,7 @@ diff each override against its new theme counterpart and port upstream changes
 as needed. Look for overrides in your project's:
 
 - `assets/`
+- `data/`
 - `i18n/`
 - `layouts/`, the most common location
 - `static/`
@@ -82,6 +83,10 @@ as needed. Look for overrides in your project's:
 Docsy's [project style files][lookandfeel] (`_variables_project.scss` and
 friends) also work this way, but the theme's copies are placeholders that are
 intentionally empty: there's nothing to diff, so they don't need this review.
+
+If you override a `baseof.html` template, keep its `scripts.html` include as
+`partial`, not `partialCached`: Docsy's per-page scripts (page-gated diagrams
+and math, the `body-end` hook) depend on the partial rendering per page.
 
 ## Check your site {#check}
 
@@ -115,4 +120,5 @@ Also perform any release-specific checks listed in the release's
 [hugo-override]: https://gohugo.io/getting-started/directory-structure/#theme-skeleton
 [lookandfeel]: /docs/content/lookandfeel/#project-style-files
 [nvm]: https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating
+[official support policy]: /project/about/changelog/#official-support
 <!-- prettier-ignore-end -->

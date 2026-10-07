@@ -1,12 +1,14 @@
-// Docsy's toolchain version declarations (Hugo, Node) must stay consistent
-// (see maintainer notes, "Hugo versions" and "Dependency updates"). Fast
-// and offline.
+// Docsy's version declarations must stay consistent, among themselves and with
+// the versions that draft blog posts freeze (maintainer notes, "Hugo versions",
+// "Dependency updates", and "Content placement"). Fast and offline.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { parse } from 'yaml';
 
 import { STABLE_SEMVER } from '../scripts/update-dep.mjs';
 
@@ -124,16 +126,31 @@ const pageParamOf = (frontMatter, param) => {
   );
 };
 
-// The version params that posts freeze, mapped to their live values.
+// Script-dependency pins (maintainer notes, "Default script-dependency
+// versions").
+const themeParams = () =>
+  parse(fs.readFileSync(path.join(repoRoot, 'theme/hugo.yaml'), 'utf8')).params;
+const scriptPin = (get) => () => {
+  const value = get(themeParams());
+  assert.ok(value, 'script pin is declared in theme/hugo.yaml');
+  return String(value);
+};
+
+// Version params that posts freeze from a live declaration, mapped to it.
 const liveVersions = {
   hugoMinVersion: declarations['theme/hugo.yaml'],
   hugoSupportedVersion: pin,
+  sassEmbeddedVersion: () =>
+    readJSON('package.json').devDependencies['sass-embedded'],
+  katexVersion: scriptPin((p) => p.katex?.version),
+  redocVersion: scriptPin((p) => p.redoc?.version),
+  mermaidVersion: scriptPin((p) => p.docsy?.plugins?.mermaid?.version),
+  markmapVersion: scriptPin((p) => p.docsy?.plugins?.markmap?.version),
 };
 
-// Blog posts are historical snapshots: a post that renders one of the declared
-// version params must freeze it in its front matter, never render it live (see
-// maintainer notes, "Hugo versions").
-test('blog posts freeze the Hugo versions that they render', () => {
+// A post that renders a declared version param must freeze it in its front
+// matter (maintainer notes, "Hugo versions" and "Content placement").
+test('blog posts freeze the versions that they render', () => {
   const posts = blogPosts();
   assert.ok(posts.length > 0, 'blog posts are found');
 
@@ -163,7 +180,7 @@ test('blog posts freeze the Hugo versions that they render', () => {
 // Frozen versions snapshot publish-time values, so until a post is published
 // they must track the live declarations. Also keeps companion posts in
 // agreement. Dormant for published posts, whose values age by design.
-test('draft posts freeze the currently declared Hugo versions', () => {
+test('draft posts freeze the currently declared versions', () => {
   for (const post of blogPosts()) {
     const frontMatter = frontMatterOf(
       fs.readFileSync(path.join(blogDir, post), 'utf8'),
@@ -177,21 +194,28 @@ test('draft posts freeze the currently declared Hugo versions', () => {
   }
 });
 
-// A draft guide whose title advertises an upper version bound must keep it on
-// the frozen target: advancing hugoSupportedVersion forces the guide's title
-// and coverage to be reviewed.
+// A draft guide whose title advertises an upper version bound (`0.166.x`, or
+// an exact `0.166.0`) must keep it on the frozen target: advancing
+// hugoSupportedVersion forces the guide's title and coverage to be reviewed.
 test('draft post titles cover the frozen supported Hugo version', () => {
   for (const post of blogPosts()) {
     const frontMatter = frontMatterOf(
       fs.readFileSync(path.join(blogDir, post), 'utf8'),
     );
     if (!/^draft: true$/m.test(frontMatter)) continue;
-    const bound = frontMatter.match(/^title:.*\b(\d+\.\d+)\.x\b/m)?.[1];
+    const title = frontMatter.match(/^title:(.*)$/m)?.[1] ?? '';
+    // The last version in a Hugo guide's title is its upper bound.
+    const bound = title.match(
+      /^\s*Hugo\b.*\b(\d+\.\d+\.(?:x|\d+))\b(?!.*\b\d+\.\d+\.(?:x|\d+)\b)/,
+    )?.[1];
     if (!bound) continue;
     const target = pageParamOf(frontMatter, 'hugoSupportedVersion');
+    const covers = bound.endsWith('.x')
+      ? target?.startsWith(bound.slice(0, -1))
+      : target === bound;
     assert.ok(
-      target?.startsWith(`${bound}.`),
-      `${post} title bound ${bound}.x covers hugoSupportedVersion ${target}`,
+      covers,
+      `${post} title bound ${bound} covers hugoSupportedVersion ${target}`,
     );
   }
 });

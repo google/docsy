@@ -436,15 +436,17 @@ restrict Hugo's remote fetches (`security.http`) must allow `cdn.jsdelivr.net`.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-Docsy officially supports Mermaid 11; to try 12 early ([experimental][]), set
-`version` to a 12.x release. Diagrams render with [Mermaid 12's
-defaults][mermaid-12-release] (the ELK layout, and the `redux-color` theme and
-`neo` look on ten diagram types); on dark pages, Docsy still sets Mermaid's
-legacy `dark` theme, so a site's light and dark renderings don't match. Mermaid
-12 requires Safari 17.4 or later. Report what you find on [#2825][].
+Docsy [supports][official-support] its [pinned](#script-dep-versions) Mermaid
+release; to try 12 early ([experimental][]), set `version` to a 12.x release.
+Diagrams render with [Mermaid 12's defaults][mermaid-12-release] (the ELK
+layout, and the `redux-color` theme and `neo` look on ten diagram types); on
+dark pages, Docsy still sets Mermaid's legacy `dark` theme, so a site's light
+and dark renderings don't match. Mermaid 12 requires Safari 17.4 or later.
+Report what you find on [#2825][].
 
 [#2825]: https://github.com/docsy/docsy/issues/2825
 [experimental]: /project/about/changelog/#experimental
+[official-support]: /project/about/changelog/#official-support
 [mermaid-12-release]:
   https://github.com/mermaid-js/mermaid/releases/tag/mermaid%4012.0.0
 [Plugins]: /docs/content/plugins/
