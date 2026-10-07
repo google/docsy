@@ -1,6 +1,6 @@
 ---
 title: Hugo 0.165.0-0.166.0 upgrade guide
-linkTitle: Hugo 0.165+ upgrade guide
+linkTitle: Hugo 0.165+
 date: 2026-10-06
 draft: true
 description: >-
