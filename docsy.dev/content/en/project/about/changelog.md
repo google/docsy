@@ -161,12 +161,14 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   earlier only ([#1992][]).
 - **[Plugin conversions][0.18.0-blog-plugins]**: moved the script override
   points for Mermaid, MarkMap, tab persistence, and click-to-copy; page-gated
-  MarkMap, whose autoloader is now fetched at build time; reserved
-  `params.docsy` for theme settings ([#2789][]). Removed the `params.mermaid`
-  and `params.markmap` namespaces, so leftover keys fail the build; version pins
-  must be plain version strings (a range or operator fails the build); replaced
-  Mermaid's inline module script, and MarkMap's inline script and style, with
-  deferred same-origin entries; dropped rendering under Mermaid pins below 10.
+  MarkMap, whose autoloader is now fetched at build time; an empty
+  `static/js/tabpane-persist.js` no longer disables tab persistence (set the
+  plugin's `enable` instead); reserved `params.docsy` for theme settings
+  ([#2789][]). Removed the `params.mermaid` and `params.markmap` namespaces, so
+  leftover keys fail the build; version pins must be plain version strings (a
+  range or operator fails the build); replaced Mermaid's inline module script,
+  and MarkMap's inline script and style, with deferred same-origin entries;
+  dropped rendering under Mermaid pins below 10.
 - **[Dropped jQuery][0.18.0-blog-jquery]**: the theme no longer loads jQuery, so
   `window.jQuery` and `$` are no longer available to site scripts; theme scripts
   now use standard DOM APIs ([#1436][]).
@@ -189,6 +191,10 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   scrolling multiple times after window resizes ([#1436][]).
 - Fixed phone pages rendering zoomed out when the light/dark mode menu is
   enabled and the navbar menu scrolls sideways ([#2850][]).
+- Fixed the Algolia override paths documented in the user guide, which the theme
+  never read: `layouts/_partials/algolia/head.html` now works, and the scripts
+  override moved to `layouts/_partials/scripts/algolia.html` ([Customizing
+  Algolia templates][ug-algolia]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   so page-gated scripts can't be emitted for the wrong page; for the one-line
   override update, see [Update Docsy][ug-update-overrides] ([#2787][]).
@@ -271,6 +277,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [project-script-loading]: /project/design/script-loading/
 [ug-discovery]: /docs/content/agent-support/#discovery
 [ug-doc-rooted]: /docs/content/adding-content/#agent-support
+[ug-algolia]: /docs/content/search/#customizing-algolia-templates
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [ug-update-overrides]: /docs/update/#update-overrides
