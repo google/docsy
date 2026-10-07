@@ -21,6 +21,14 @@ the [milestones][].
 
 ## Style guide
 
+- Keep each entry to at most two formatted Markdown prose lines normally, never
+  more than four, excluding separate link definitions. State what changed and
+  its consequence; link to details. Read the whole entry before adding a clause.
+- Classify by what the reader experiences, not by the implementation. Restoring
+  documented behavior from a previous release is a fix; if it also breaks a
+  supported customization, call out that migration impact. Fixes to features
+  introduced in the same release belong in the description of the feature as
+  shipped, not separate fix entries.
 - Use past tense when when describing releases.
 - Generally, start each change entry with a verb (in the past tense). For
   example: Added, Changed, Deprecated, Fixed.
