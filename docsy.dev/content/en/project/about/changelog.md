@@ -181,7 +181,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
-- Fixed phone pages rendering zoomed out when the light/dark mode menu is
+- Fixed mobile pages rendering zoomed out when the light/dark mode menu is
   enabled and the navbar menu scrolls sideways ([#2850][]).
 - Fixed: previously ignored overrides to [`algolia/head.html` and
   `scripts/algolia.html`][ug-algolia] now take effect ([#2788][]).
