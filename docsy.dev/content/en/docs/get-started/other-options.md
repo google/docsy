@@ -235,11 +235,12 @@ development or testing, you can also install:
   npm install --save-dev docsy/docsy#semver:{{% param tdVersion.latest %}}
   ```
 
-  For other revision selectors, see [npm install][]. The GitHub package is named
-  `docsy` and contains the theme files in a subfolder, so with this install form
-  use `theme: docsy/theme` in your site configuration. Unlike the registry
-  package, the GitHub package doesn't declare Bootstrap and Font Awesome as its
-  own dependencies: the `install:theme-deps` command installs them, and must be
+  For a pre-release, pin a commit (`docsy/docsy#COMMIT_HASH`); for other
+  revision selectors, see [npm install][]. The GitHub package is named `docsy`
+  and contains the theme files in a subfolder, so with this install form use
+  `theme: docsy/theme` in your site configuration. Unlike the registry package,
+  the GitHub package doesn't declare Bootstrap and Font Awesome as its own
+  dependencies: the `install:theme-deps` command installs them, and must be
   rerun after every install or update of the package, so for `npm ci`
   environments wire it into your site's setup script. GitHub installs also
   resolve outside the npm registry, so registry release gates such as

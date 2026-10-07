@@ -31,6 +31,7 @@ names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
   - {{% _param BREAKING %}} [Glob patterns rewritten](#globs)
   - {{% _param BREAKING %}} [KaTeX stylesheet floor](#katex)
   - {{% _param BREAKING %}} [URL and template changes](#urls-templates)
+- Review **deprecations**: [Imaging config](#imaging)
   - {{% _param BREAKING %}} [Tailwind allow-list (0.165.0)](#tailwind)
 - Where a step sets a [`security`][hugo-security] list, write the whole list:
   Hugo replaces a configured list rather than merging it with the default.
@@ -101,7 +102,7 @@ and malformed patterns fail the build. Literal paths are unaffected.
 ### Actions {#globs-actions}
 
 {{% _param BREAKING %}} **Applies if** your site uses glob patterns: in config
-(module mounts' `includeFiles` and `excludeFiles`, `cascade` targets,
+(module mounts' `includeFiles`, `excludeFiles`, and `files`, `cascade` targets,
 `segments`, `deployment` matchers, `noVendor`) or in templates
 (`.Resources.Match`, `resources.Match`, and kin).
 
@@ -123,6 +124,21 @@ stylesheet below 0.18.4, through `params.katex.version` or an overridden
 - Remove your pin to take Docsy's supported default; a pin at 0.18.4 or later
   renders, on a best-effort basis ([KaTeX version][katex-docs]). Update an
   overridden partial's stylesheet the same way.
+
+## Imaging config deprecations now warn (0.166.0) {#imaging}
+
+Hugo 0.163.0 deprecated the global `imaging.quality` and `imaging.compression`
+keys for per-format ones ([Hugo 0.158+ guide](hugo-0.158.0+/#imaging)); 0.166.0
+raises the notice to a build `WARN`, which fails the update guide's no-warnings
+check.
+
+### Actions {#imaging-actions}
+
+{{% _param CLEANUP %}} **Applies if** your site config still sets
+`imaging.quality` or `imaging.compression`.
+
+- Move each to its per-format key (`imaging.jpeg.quality`,
+  `imaging.webp.quality`, …), or drop it if it matches Hugo's default.
 
 ## {{% _param BREAKING %}} URL and template changes (0.166.0) {#urls-templates}
 
