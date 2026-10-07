@@ -7,7 +7,7 @@ Site [llms.txt](/llms.txt)
 Section pages:
 
 - [Release 0.18.0 report and upgrade guide](/blog/2026/0.18.0/): Docsy is now a Linux Foundation project, with its own GitHub organization and a new Hugo module path. A plugin registry carries Mermaid and more; jQuery is gone; doc-rooted sites can publish llms.txt.
-- [Hugo 0.165.0-0.166.0 upgrade guide](/blog/2026/hugo-0.165.0+/): What changed in Hugo 0.165.0 and 0.166.0 for Docsy sites: security hardening and symlink rules, rewritten globs, a KaTeX stylesheet floor, URL and template changes, and Tailwind's allow-list, each with its upgrade actions
+- [Hugo 0.165.0-0.166.0 upgrade guide](/blog/2026/hugo-0.165.0+/): Hugo 0.166.0's security hardening, and a few smaller changes, can break a Docsy site's build or silently change its output. Find the ones that apply to your site, each with its fix.
 - [Release 0.17.0 report and upgrade guide](/blog/2026/0.17.0/): Docsy modernizes and strengthens its foundations: Dart Sass, Font Awesome 7, and pinned script defaults. Breadcrumbs get semantic classes, bundled locales reach full UI-string coverage, and llms.txt sites gain agent discovery.
 - [Release 0.16.0 report and upgrade guide](/blog/2026/0.16.0/): Docsy is now on npm as @docsy/theme. This release also moves the theme into theme/, raises the Hugo minimum, and drops its default favicons in favor of discovery, each with upgrade actions.
 - [Hugo 0.158.0-0.164.x upgrade guide](/blog/2026/hugo-0.158.0+/): What changed in Hugo 0.158.0 through 0.164.x for Docsy sites: breaking changes, deprecations, security fixes, and known regressions, with per-version upgrade actions.

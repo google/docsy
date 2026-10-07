@@ -1339,12 +1339,10 @@
     "when": "2026-09-17T23:13:31Z",
     "via": "lychee",
   },
-  // #2841 seed: the theme template lands with the PR.
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt": {
-    "result": 206,
-    "when": "2026-10-05T17:02:09Z",
-    "via": "manual",
-    "expires": "2026-11-15",
+    "result": 200,
+    "when": "2026-10-07T15:11:02Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/all.llms.txt?plain=1": {
     "result": 200,
@@ -3846,6 +3844,11 @@
   "https://gohugo.io/configuration/markup/#parserautoheadingid": {
     "result": 200,
     "when": "2026-09-19T16:04:39Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/configuration/module/#default-mounts": {
+    "result": 200,
+    "when": "2026-10-07T15:11:02Z",
     "via": "lychee",
   },
   "https://gohugo.io/configuration/module/#files": {

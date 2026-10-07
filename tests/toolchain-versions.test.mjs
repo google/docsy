@@ -1,12 +1,14 @@
-// Docsy's toolchain version declarations (Hugo, Node) must stay consistent
-// (see maintainer notes, "Hugo versions" and "Dependency updates"). Fast
-// and offline.
+// Docsy's version declarations must stay consistent, among themselves and with
+// the versions that draft blog posts freeze (maintainer notes, "Hugo versions",
+// "Dependency updates", and "Content placement"). Fast and offline.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { parse } from 'yaml';
 
 import { STABLE_SEMVER } from '../scripts/update-dep.mjs';
 
@@ -125,36 +127,29 @@ const pageParamOf = (frontMatter, param) => {
 };
 
 // Script-dependency pins (maintainer notes, "Default script-dependency
-// versions"), read from theme/hugo.yaml.
-const scriptPin = (what, re) => () => extract('theme/hugo.yaml', re, what);
+// versions").
+const themeParams = () =>
+  parse(fs.readFileSync(path.join(repoRoot, 'theme/hugo.yaml'), 'utf8')).params;
+const scriptPin = (get) => () => {
+  const value = get(themeParams());
+  assert.ok(value, 'script pin is declared in theme/hugo.yaml');
+  return String(value);
+};
 
-// The version params that posts freeze, mapped to their live values.
+// Version params that posts freeze from a live declaration, mapped to it.
 const liveVersions = {
   hugoMinVersion: declarations['theme/hugo.yaml'],
   hugoSupportedVersion: pin,
   sassEmbeddedVersion: () =>
     readJSON('package.json').devDependencies['sass-embedded'],
-  katexVersion: scriptPin(
-    'params.katex.version',
-    /^\s*katex:\s*\n\s+version:\s*(\S+)/m,
-  ),
-  redocVersion: scriptPin(
-    'params.redoc.version',
-    /^\s*redoc:\s*\n\s+version:\s*(\S+)/m,
-  ),
-  mermaidVersion: scriptPin(
-    'params.docsy.plugins.mermaid.version',
-    /^\s*mermaid:\s*\{[^}]*\bversion:\s*([^\s,}]+)/m,
-  ),
-  markmapVersion: scriptPin(
-    'params.docsy.plugins.markmap.version',
-    /^\s*markmap:\s*\{[^}]*\bversion:\s*([^\s,}]+)/m,
-  ),
+  katexVersion: scriptPin((p) => p.katex?.version),
+  redocVersion: scriptPin((p) => p.redoc?.version),
+  mermaidVersion: scriptPin((p) => p.docsy?.plugins?.mermaid?.version),
+  markmapVersion: scriptPin((p) => p.docsy?.plugins?.markmap?.version),
 };
 
-// Blog posts are historical snapshots: a post that renders one of the declared
-// version params must freeze it in its front matter, never render it live (see
-// maintainer notes, "Hugo versions" and "Content placement").
+// A post that renders a declared version param must freeze it in its front
+// matter (maintainer notes, "Hugo versions" and "Content placement").
 test('blog posts freeze the versions that they render', () => {
   const posts = blogPosts();
   assert.ok(posts.length > 0, 'blog posts are found');
