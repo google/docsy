@@ -4183,9 +4183,19 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://gohugo.io/quick-reference/glossary/#output-format": {
+    "result": 200,
+    "when": "2026-10-07T14:03:31Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/quick-reference/glossary/#partial-decorator": {
     "result": 200,
     "when": "2026-09-02T08:07:11Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/quick-reference/glossary/#project": {
+    "result": 200,
+    "when": "2026-10-07T14:03:31Z",
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#site": {

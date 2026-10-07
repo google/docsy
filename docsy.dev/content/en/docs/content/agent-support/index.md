@@ -227,7 +227,6 @@ For details on how these checks are configured, see
 
 <!-- prettier-ignore-start -->
 [afdocs]: https://afdocs.dev/
-[output formats]: https://gohugo.io/configuration/output-formats/
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [doc-rooted-agent-support]: /docs/content/adding-content/#agent-support
 [experimental]: /project/about/changelog/#experimental
@@ -239,8 +238,13 @@ For details on how these checks are configured, see
 [lookup]: https://gohugo.io/templates/lookup-order/
 [type]: https://gohugo.io/content-management/front-matter/#type
 [OpenTelemetry agent-readiness report]: https://clomonitor.io/projects/cncf/open-telemetry#community_agent_readiness
+[output format]: https://gohugo.io/quick-reference/glossary/#output-format
+[output formats]: https://gohugo.io/configuration/output-formats/
 [outputs]: https://gohugo.io/configuration/outputs/
+[project]: https://gohugo.io/quick-reference/glossary/#project
 [section-tmp-type]: https://gohugo.io/templates/types/#section
 [shortcode-md-variants]: /docs/content/shortcodes/#markdown-output-variants
 [site]: https://gohugo.io/quick-reference/glossary/#site
+[site root]: https://gohugo.io/quick-reference/glossary/#site-root
+[sites]: https://gohugo.io/quick-reference/glossary/#site
 <!-- prettier-ignore-end -->
