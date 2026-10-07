@@ -1,7 +1,7 @@
 ---
 title: Hugo 0.165.0-0.166.0 upgrade guide
 linkTitle: Hugo 0.165+ upgrade guide
-date: 2026-10-05
+date: 2026-10-06
 draft: true
 description: >-
   What changed in Hugo 0.165.0 and 0.166.0 for Docsy sites: security hardening
