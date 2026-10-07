@@ -212,7 +212,7 @@ A plugin reads its settings from its entry's `options`
 ([configuration reference](#configuration-reference)); the shim receives the
 value as the site wrote it and may decode it before the companion runs. Choose
 the string's format and document it with the plugin. It is a string because Hugo
-lowercases map keys ([why][design-registry]); Docsy's plugins take a **JSON
+lowercases map keys ([why][design-plugins-map]); Docsy's plugins take a **JSON
 object**, decoded at build time with `transform.Unmarshal`, or in the browser
 with `JSON.parse` after the companion emits it. For the pattern, see the
 `mermaid` shim and companion in [`scripts/plugins/`][theme-shims] ([shim
@@ -260,7 +260,7 @@ MarkMap doesn't render][].
 [config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
 [config-warnings]: /docs/content/configuration/#configuration-warnings
 [design-ordering]: /project/design/script-loading/#ordering-decisions
-[design-registry]: /project/design/script-loading/#plugins-map
+[design-plugins-map]: /project/design/script-loading/#plugins-map
 [experimental]: /project/about/changelog/#experimental
 [markmap-version]: /docs/content/diagrams-and-formulae/#markmap-version
 [mermaid-settings]: /docs/content/diagrams-and-formulae/#mermaid-settings

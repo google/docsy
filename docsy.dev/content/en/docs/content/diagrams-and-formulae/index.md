@@ -371,7 +371,7 @@ sequenceDiagram
 
 ### Mermaid settings
 
-To configure Mermaid site-wide, set `options` on the plugin's registry entry,
+To configure Mermaid site-wide, set `options` on the `mermaid` plugin entry,
 `params.docsy.plugins.mermaid`, to a **JSON string** holding the object you
 would pass to
 [`mermaid.initialize()`](https://mermaid.js.org/config/configuration.html), with
