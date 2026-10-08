@@ -3039,6 +3039,7 @@
     "when": "2026-10-08T10:42:02Z",
     "via": "lychee",
   },
+  // Live at the v0.19.0 release.
   "https://github.com/docsy/docsy/releases/tag/v0.19.0": {
     "result": 206,
     "when": "2026-10-08T10:07:11Z",
@@ -4530,6 +4531,7 @@
     "when": "2026-10-08T10:42:02Z",
     "via": "lychee",
   },
+  // Live when the 0.19.0 post is published.
   "https://main--docsydocs.netlify.app/blog/2026/0.19.0/": {
     "result": 206,
     "when": "2026-10-08T10:07:11Z",
@@ -5381,6 +5383,7 @@
     "when": "2026-10-08T10:42:02Z",
     "via": "lychee",
   },
+  // Live when the 0.19.0 post is published.
   "https://www.docsy.dev/blog/2026/0.19.0/": {
     "result": 206,
     "when": "2026-10-08T10:07:11Z",

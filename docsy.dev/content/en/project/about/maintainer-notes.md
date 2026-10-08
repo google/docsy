@@ -468,11 +468,12 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   `-- -p 10%` to drop the oldest tenth of entries without `expires`,
   `-- -m REGEX` to scope by URL).
 - **Seed** a URL that only goes live later by adding an entry with placeholder
-  `"result": 206` and `"via": "manual"`, and no comment (the fields say what it
-  is). For its `"expires"`, use `"+0d"` when the URL goes live within a week,
-  such as a page the PR itself adds; otherwise use an exclusive UTC date past
-  the URL's go-live (for a release-gated URL, the expected release date plus a
-  buffer; `2026-12-01` holds a seed through November 30). Then run
+  `"result": 206` and `"via": "manual"`. For its `"expires"`, use `"+0d"` when
+  the URL goes live within a week, such as a page the PR itself adds; otherwise
+  use an exclusive UTC date past the URL's go-live (for a release-gated URL, the
+  expected release date plus a buffer; `2026-12-01` holds a seed through
+  November 30), with a one-line `//` comment naming the event that makes it
+  live, such as `// Live at the v0.19.0 release.` Then run
   `npm run fix:link-cache`, which dates the seed (resolving `+0d`), and commit.
   Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
   re-verified live by the following check ([link-cache's one rule][]); drop an
@@ -974,7 +975,8 @@ before any further changes are merged into the `main` branch:
 
    - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
      that the link check passes.
-   - Re-verify the link-cache seeds that the release gated (see
+   - Re-verify the link-cache seeds that the release gated (their comments name
+     the release; see
      [Link checking and the link cache](#link-checking-and-the-link-cache)), now
      that their URLs are live: set their `"expires"` to `"+0d"`, drop them with
      `npm run link-cache -- -p 0`, then run `npm run fix:link-cache`, which
