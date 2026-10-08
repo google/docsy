@@ -993,15 +993,21 @@ before any further changes are merged into the `main` branch:
    shipped release's post. Like the changelog's new entry, the draft gives
    next-cycle changes a single home to land on.
 
-5. **Submit a PR with your changes**, using a title like:
+5. **Open the next release's tracker issue**, titled `Release X.Y.Z preparation`
+   and set to its milestone, modeled on the shipped release's tracker: links to
+   the milestone, this procedure, and the two drafts above, with no copied
+   checklist. On the shipped release's tracker, point "Next release" at it. The
+   release-preparation PR contributes to it.
+
+6. **Submit a PR with your changes**, using a title like:
 
    ```text
    Set version to {{% param version %}}
    ```
 
-6. **Get PR approved and merged**.
+7. **Get PR approved and merged**.
 
-7. **Validate the published release from [docsy-starter][]** (npm package mode),
+8. **Validate the published release from [docsy-starter][]** (npm package mode),
    per the [consumer-site test procedure](#consumer-site-test), and follow with
    the starter's own Docsy-update PR. Post-tag; doesn't block `main`.
 
