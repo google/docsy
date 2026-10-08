@@ -30,7 +30,7 @@ the [milestones][].
   the release post for migration steps. Fixes to features introduced in the same
   release belong in the description of the feature as shipped, not separate fix
   entries.
-- Use past tense when when describing releases.
+- Use past tense when describing releases.
 - Generally, start each change entry with a verb (in the past tense). For
   example: Added, Changed, Deprecated, Fixed.
 - It's ok to follow that with "you can now...". For example:
