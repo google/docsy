@@ -145,9 +145,7 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
-## v0.18.0 {#next}
-
-> **UNRELEASED: this planned version is still under development**
+## v0.18.0 {#v0.18.0}
 
 For an introduction to this release, see the [0.18.0 release report][]. For the
 full list of changes, see the [0.18.0][] release page or the [git history since
@@ -269,7 +267,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [ug-plugins]: /docs/content/plugins/
 [ug-plugin-authoring]: /docs/content/plugins/#add-a-custom-script
 [git history since 0.17.0]:
-  https://github.com/docsy/docsy/compare/v0.17.0...main
+  https://github.com/docsy/docsy/compare/v0.17.0...v0.18.0
 
 ## v0.17.0 {#v0.17.0}
 
