@@ -974,6 +974,12 @@ before any further changes are merged into the `main` branch:
 
    - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
      that the link check passes.
+   - Re-verify the link-cache seeds that the release gated (see
+     [Link checking and the link cache](#link-checking-and-the-link-cache)), now
+     that their URLs are live: set their `"expires"` to `"+0d"`, drop them with
+     `npm run link-cache -- -p 0`, then run `npm run fix:link-cache`, which
+     checks them live and records them as ordinary entries. A seed that still
+     fails points at a release step not yet done, such as the deploy.
    - Search for other release-scoped markers and act on those now that the
      release is shipped, for example:
 
