@@ -159,8 +159,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   moved the repositories to the `docsy` GitHub organization. The Hugo module
   path became `github.com/docsy/docsy/theme` ([#1992][]).
 - **[Plugins][0.18.0-blog-plugins]**: converted Mermaid, MarkMap, tab
-  persistence, and click-to-copy to plugins, changing their configuration;
-  reserved `params.docsy` for theme settings ([#2789][]).
+  persistence, and click-to-copy to plugins, moving their settings and override
+  points; MarkMap loads only on pages with a map, its autoloader fetched at
+  build time; reserved `params.docsy` for theme settings ([#2789][]).
 - **[Dropped jQuery][0.18.0-blog-jquery]**: site scripts lost `window.jQuery`
   and `$` ([#1436][]).
 - **[`llms.txt` template][0.18.0-blog-llms-txt]**: renamed the theme's
@@ -169,32 +170,32 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 
 **New**:
 
-- Added **[plugins][ug-plugins]**, `params.docsy.plugins`, to configure Docsy's
-  optional scripts from site configuration. Deprecated
+- Added **[plugins][ug-plugins]**, `params.docsy.plugins`, to configure four of
+  Docsy's optional scripts from site configuration. Deprecated
   `params.disable_click2copy_chroma` in favor of its `plugins` entry
   ([#2789][]).
 
 **Other changes**:
 
-- **[`llms.txt` on doc-rooted sites][ug-doc-rooted]**: the docs landing page can
-  now publish it; Markdown versions and the agent directive gained a
-  per-language link to it ([#2834][]).
 - Fixed search-box issues (queries truncating at `&` or `#`; navigation firing
   while committing IME-composed text) and navbar scroll-indicator clicks
   scrolling multiple times after window resizes ([#1436][]).
 - Fixed mobile pages rendering zoomed out when the light/dark mode menu is
   enabled and the navbar menu scrolls sideways ([#2850][]).
-- Fixed the documented Algolia overrides, [`algolia/head.html` and
-  `scripts/algolia.html`][ug-algolia], which the theme had ignored ([#2788][]).
+- Fixed the Algolia overrides, which the theme had ignored:
+  [`algolia/head.html` and `scripts/algolia.html`][ug-algolia]; the latter was
+  documented as `algolia/scripts.html` ([#2788][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   which could emit page-gated scripts for the wrong page ([#2787][]).
-- Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0] ([Hugo 0.165+
-  upgrade guide][]); the theme's minimum Hugo version stayed 0.160.1
-  ([#2852][]).
+- Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
+  minimum Hugo version stayed 0.160.1 ([#2852][]).
 
 [**Experimental**](#experimental):
 
 - Added **[plugin authoring][ug-plugin-authoring]** ([#2789][]).
+- Added **[`llms.txt` on doc-rooted sites][ug-doc-rooted]**, published from the
+  docs landing page; Markdown versions link the current language's file, only
+  when it exists ([#2834][]).
 - Added the **[`llms.txt` v2 discovery link][ug-discovery]**,
   `rel="describedby"`, to page heads of sites publishing `llms.txt` ([#2614][]).
 - Declared Mermaid 12 pins experimental ([#2825][]).

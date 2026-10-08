@@ -6,8 +6,8 @@ description:
 ---
 
 Docsy ships some of its optional JavaScript features as **plugins**, each on its
-own entry under `params.docsy.plugins`. You can also add plugins of your own
-([experimental](#add-a-custom-script)).
+own entry under `params.docsy.plugins`. You can also
+[add plugins of your own](#add-a-custom-script) (experimental).
 
 ## Configure Docsy's plugins
 
@@ -76,8 +76,8 @@ types, defaults, and syntactic patterns:
 
 ### Warnings
 
-Every shape warning for `params.docsy.plugins` carries the id `docsy-config` (to
-silence one, see [Configuration § Configuration warnings][config-warnings]):
+Every `params.docsy` shape warning carries the id `docsy-config` (to silence
+one, see [Configuration § Configuration warnings][config-warnings]):
 
 - An unknown field is ignored and the rest of the entry applies.
 - An unknown key directly under `params.docsy` is ignored and the rest of the
@@ -178,9 +178,8 @@ shim, `mermaid`, `markmap`, and `click-to-copy`: your file replaces that
 plugin's shim and everything it does ([shim contract][impl-shim]), so start from
 a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
 
-Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, with the
-plugin's name (its key under `params.docsy.plugins`) as _`NAME`_ ([shim
-contract][impl-shim]):
+Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, where
+_`NAME`_ is the plugin's key under `params.docsy.plugins`:
 
 ```go-html-template
 {{ $entry := .Plugin -}}

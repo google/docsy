@@ -26,13 +26,13 @@ This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), whose
 ## Upgrade summary
 
 - **This guide is for you if** you're:
-  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade)
+  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade) from Hugo 0.164.x or older
   - Upgrading only Hugo, past 0.164.x
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
   - {{% _param BREAKING %}} [Security hardening](#security): Node tools,
     symlinked mounts, remote fetches, Org content
-  - {{% _param BREAKING %}} [Glob patterns rewritten](#globs)
+  - {{% _param BREAKING %}} [Glob matching rewritten](#globs)
   - {{% _param BREAKING %}} [KaTeX stylesheet floor](#katex)
   - {{% _param BREAKING %}} [URL and template changes](#urls-templates)
   - {{% _param BREAKING %}} [Tailwind allow-list (0.165.0)](#tailwind)
@@ -101,7 +101,7 @@ through.
 - Opt back in by setting `security.allowContent` to the whole list without the
   `text/org` denial: `['! ^text/html$']`.
 
-## {{% _param BREAKING %}} Glob patterns rewritten (0.166.0) {#globs}
+## {{% _param BREAKING %}} Glob matching rewritten (0.166.0) {#globs}
 
 Hugo 0.166.0 replaced its glob-matching engine. Patterns that relied on the old
 engine's bugs match differently; literal paths are unaffected.
@@ -212,8 +212,9 @@ above, its change for Docsy sites is that `tailwindcss` left the default
 
 ## {{% _param FAS rocket primary %}} Upgrade to Hugo {{% param hugoSupportedVersion %}} {#upgrade}
 
-After addressing the actions that apply to your site, [upgrade to
-Hugo][update-hugo] [{{% param hugoSupportedVersion %}}][hugo-supported-version].
+After addressing the actions that apply to your site, [upgrade
+Hugo][update-hugo] to
+[{{% param hugoSupportedVersion %}}][hugo-supported-version].
 
 ### {{% _param FAS square-check primary %}} Sanity checks
 

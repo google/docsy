@@ -492,7 +492,7 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.match(
     r.stderr,
     /params\.docsy is reserved for theme settings and must be a map/,
-    'clobbered plugins map is called out as a reserved key',
+    'scalar params.docsy is called out as a reserved key',
   );
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),
@@ -572,7 +572,7 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
   assert.doesNotMatch(
     r.stderr,
     /params\.docsy\.plugins must be a map/,
-    'empty map draws no configuration warning',
+    'empty map draws no must-be-a-map warning',
   );
   assert.match(
     r.publicFile('index.html'),
