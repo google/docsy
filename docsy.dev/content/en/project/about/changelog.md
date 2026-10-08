@@ -182,9 +182,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   scrolling multiple times after window resizes ([#1436][]).
 - Fixed mobile pages rendering zoomed out when the light/dark mode menu is
   enabled and the navbar menu scrolls sideways ([#2850][]).
-- Fixed the Algolia overrides, which the theme had ignored:
-  [`algolia/head.html` and `scripts/algolia.html`][ug-algolia]; the latter was
-  documented as `algolia/scripts.html` ([#2788][]).
+- Fixed the Algolia overrides, which the theme had ignored: [`algolia/head.html`
+  and `scripts/algolia.html`][ug-algolia]; the latter was documented as
+  `algolia/scripts.html` ([#2788][]).
 - Dropped the caching of the `scripts.html` partial in the root `baseof.html`,
   which could emit page-gated scripts for the wrong page ([#2787][]).
 - Upgraded the project's Hugo build to [0.166.0][hugo-0.166.0]; the theme's
