@@ -471,9 +471,8 @@ workflow re-verifies the oldest entries; for the rotation model, see the
   `"result": 206` and `"via": "manual"`. For its `"expires"`, use `"+0d"` when
   the URL goes live within a week, such as a page the PR itself adds; otherwise
   use an exclusive UTC date past the URL's go-live (for a release-gated URL, the
-  expected release date plus a buffer; `2026-12-01` holds a seed through
-  November 30), with a one-line `//` comment naming the event that makes it
-  live, such as `// Live at the v0.19.0 release.` Then run
+  expected release date plus a buffer), with a one-line `//` comment naming the
+  event that makes it live, such as `// Live at the v0.19.0 release.` Then run
   `npm run fix:link-cache`, which dates the seed (resolving `+0d`), and commit.
   Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
   re-verified live by the following check ([link-cache's one rule][]); drop an
@@ -1018,9 +1017,11 @@ before any further changes are merged into the `main` branch:
 
 5. **Open the next release's tracker issue**, titled `Release X.Y.Z preparation`
    and set to its milestone, modeled on the shipped release's tracker: links to
-   the milestone, this procedure, and the two drafts above, with no copied
-   checklist. In the shipped release's tracker, edit the opening comment's "Next
-   release" line to point at it. The release-preparation PR contributes to it.
+   the milestone, the [release-prep audit](#release-prep-audit) and
+   [Publishing a release](#publishing-a-release) sections, and the two drafts
+   above, with no copied checklist. In the shipped release's tracker, edit the
+   opening comment's "Next release" line to point at it. The release-preparation
+   PR contributes to it.
 
 6. **Submit a PR with your changes**, using a title like:
 
