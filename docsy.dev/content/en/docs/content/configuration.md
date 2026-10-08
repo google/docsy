@@ -31,8 +31,8 @@ Keys are case-insensitive: Hugo lowercases them, so `taxonomyCloud` and
 
 Write booleans unquoted: `enable: false`, not `enable: "false"`. A quoted value
 is a string, and a non-empty string is true to a Hugo template whatever it says;
-only parameters that spell out their accepted strings, such as the plugin
-entries' ([Plugins § Configuration reference][plugins-config]), read `"false"`
+only parameters that spell out their accepted strings, such as a plugin entry's
+`enable` ([Plugins § Configuration reference][plugins-config]), read `"false"`
 as false.
 
 ## Environment variables
@@ -66,7 +66,7 @@ to Hugo's [`ignoreLogs`][hugo-ignorelogs], replacing _`WARNING_ID`_:
 ignoreLogs: [WARNING_ID]
 ```
 
-For the plugin entries' warnings and their ids, see [Plugins §
+For `params.docsy` warnings and their ids, see [Plugins §
 Warnings][plugins-warnings].
 
 <!-- prettier-ignore-start -->

@@ -163,8 +163,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   reserved `params.docsy` for theme settings ([#2789][]).
 - **[Dropped jQuery][0.18.0-blog-jquery]**: site scripts lost `window.jQuery`
   and `$` ([#1436][]).
-
-**New**:
+- **[`llms.txt` template][0.18.0-blog-llms-txt]**: renamed the theme's
+  `index.llms.txt` to `all.llms.txt`, so a project's generic `all.*` or `list.*`
+  LLMS template now renders the root file too ([#2834][]). **New**:
 
 - Added **[plugins][ug-plugins]**, `params.docsy.plugins`, to configure Docsy's
   optional scripts from site configuration. Deprecated
@@ -251,6 +252,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
+[0.18.0-blog-llms-txt]: /blog/2026/0.18.0/#llms-txt-actions
 [0.18.0-blog-org-move]: /blog/2026/0.18.0/#org-move
 [0.18.0-blog-plugins]: /blog/2026/0.18.0/#plugins
 [hugo-0.166.0]: https://github.com/gohugoio/hugo/releases/tag/v0.166.0

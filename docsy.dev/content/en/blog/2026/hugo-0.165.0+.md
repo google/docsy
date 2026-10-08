@@ -149,7 +149,7 @@ or an overridden `scripts/katex.html`.
 
 Hugo 0.163.0 [deprecated](hugo-0.158.0+/#imaging) the global `imaging.quality`
 and `imaging.compression` keys for per-format ones; 0.166.0 raises the notice to
-a build `WARN`, which fails the update guide's no-warnings check.
+a build `WARN`, which fails the update guide's [no-warnings check][check].
 
 ### Actions {#imaging-actions}
 

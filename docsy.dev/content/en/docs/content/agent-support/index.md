@@ -161,7 +161,8 @@ Agents find your Markdown content through:
   Markdown version of the page.
 - **`describedby` link**: when the site publishes `llms.txt`, page heads include
   a `rel="describedby"` link to it, as the [llms.txt proposal][llmstxt.org] (v2)
-  recommends. Projects that override the theme's `head.html` partial need to add
+  recommends; its `href` is the root page's `llms.txt` permalink, the same on
+  every page. Projects that override the theme's `head.html` partial need to add
   the link themselves.
 - **In-body directive**: when the site publishes `llms.txt`, each page body
   opens with a visually-hidden directive pointing agents to it and, when the
