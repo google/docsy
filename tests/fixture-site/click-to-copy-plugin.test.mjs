@@ -1,4 +1,4 @@
-// Pins click-to-copy's registry conversion, its fixed deferred loading, and
+// Pins click-to-copy's plugin conversion, its fixed deferred loading, and
 // its legacy opt-outs.
 
 import { test } from 'node:test';
@@ -143,9 +143,9 @@ test('legacy params read "false" from the environment as false', () => {
 });
 
 test('enable false turns the theme plugin off', () => {
-  const r = buildSite('c2c-registry-off', {
+  const r = buildSite('c2c-plugin-off', {
     files,
-    title: 'Docsy copy-button registry-off fixture',
+    title: 'Docsy copy-button plugin-off fixture',
     extraConfig: `params:
   docsy:
     plugins:

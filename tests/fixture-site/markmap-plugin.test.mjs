@@ -1,4 +1,4 @@
-// Pins MarkMap's registry conversion offline: the companion (a
+// Pins MarkMap's plugin conversion offline: the companion (a
 // resources.GetRemote of the autoloader) is stubbed with a marker wherever a
 // build would reach the fetch; the real vendoring is pinned in the visual
 // suite.
@@ -42,7 +42,7 @@ test('disabled markmap contributes zero bytes to shipped JS', () => {
   );
 });
 
-test('any params.markmap fails the build, naming the registry entry', () => {
+test('any params.markmap fails the build, naming the plugin entry', () => {
   for (const [name, config] of [
     [
       'markmap-legacy-enable',
@@ -66,8 +66,8 @@ test('any params.markmap fails the build, naming the registry entry', () => {
   }
 });
 
-test('a registry-declared markmap entry is page-gated', () => {
-  const r = buildSite('markmap-registry', {
+test('a markmap plugin entry is page-gated', () => {
+  const r = buildSite('markmap-plugin', {
     files: stubbed,
     extraConfig: `params:
   docsy:
@@ -80,12 +80,12 @@ test('a registry-declared markmap entry is page-gated', () => {
   assert.doesNotMatch(
     r.stderr,
     /deprecated/,
-    'a registry-only setup builds free of deprecation warnings',
+    'a plugin-only setup builds free of deprecation warnings',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /markmap[^"]*\.js|js\/vendor/,
-    'registry entry is page-gated: no markmap scripts without markmap content',
+    'plugin entry is page-gated: no markmap scripts without markmap content',
   );
   const html = r.publicFile('docs/index.html');
   assert.match(
@@ -96,12 +96,12 @@ test('a registry-declared markmap entry is page-gated', () => {
   assert.match(
     html,
     /data-vendor="markmap-autoloader" data-version="\d+\.\d+\.\d+"/,
-    "companion rides the registry entry too, with the theme's pin",
+    "companion rides the plugin entry too, with the theme's pin",
   );
 });
 
-test('an exact version on the registry entry reaches the companion unchanged', () => {
-  const r = buildSite('markmap-registry-version', {
+test('an exact version on the plugin entry reaches the companion unchanged', () => {
+  const r = buildSite('markmap-plugin-version', {
     files: stubbed,
     extraConfig: `params:
   docsy:
@@ -130,8 +130,8 @@ test('an exact version on the registry entry reaches the companion unchanged', (
   );
 });
 
-test('a floating version on the registry entry warns under the pin id', () => {
-  const r = buildSite('markmap-registry-floating', {
+test('a floating version on the plugin entry warns under the pin id', () => {
+  const r = buildSite('markmap-plugin-floating', {
     files: stubbed,
     extraConfig: `params:
   docsy:
@@ -153,7 +153,7 @@ test('a floating version on the registry entry warns under the pin id', () => {
 });
 
 test('a numeric version is coerced to string before validation', () => {
-  const r = buildSite('markmap-registry-numeric-version', {
+  const r = buildSite('markmap-plugin-numeric-version', {
     files: stubbed,
     extraConfig: `params:
   docsy:

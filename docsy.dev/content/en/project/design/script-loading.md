@@ -1,8 +1,7 @@
 ---
 title: Script loading
 description: >-
-  Why body-end scripts load through a dispatcher and a config-merged plugin
-  registry
+  Why body-end scripts load through a dispatcher and a config-merged plugins map
 ---
 
 Docsy loads its body-end JavaScript through
@@ -27,8 +26,8 @@ integrations onto the [plugin loop](#plugin-loop):
   fingerprinted in production. A site param picks which search script is
   bundled, `search.js` or `offline-search.js`.
 - **Theme plugins**: Mermaid, MarkMap, tab persistence, and click-to-copy ride
-  the plugin loop as theme-default registry entries
-  ([registry shape](#registry-shape), [implementation notes][impl]).
+  the plugin loop as theme-default plugin entries ([plugins map](#plugins-map),
+  [implementation notes][impl]).
 - **Pinned CDN tags with inline configuration**: Algolia DocSearch.
 - **Build-time remote fetches**: KaTeX, whose CSS and fonts are copied and
   re-served as local assets, and the MarkMap autoloader, vendored at build time
@@ -67,10 +66,10 @@ The decomposition has two design consequences:
 contract, see the [plugins guide][ug-plugins]; for the loop's mechanics, the
 [implementation notes][impl].
 
-### Registry shape: a map, layered by Hugo's config merge {#registry-shape}
+### `params.docsy.plugins`: a map, layered by Hugo's config merge {#plugins-map}
 
-The registry is a **map keyed by plugin name**, and the theme declares its own
-plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
+`params.docsy.plugins` is a **map keyed by plugin name**, and the theme declares
+its own plugins in `theme/hugo.yaml` under the same key. Hugo's theme-to-site
 configuration merge is deep for maps ([Configuration § Theme
 defaults][ug-config-merge]), so a site's map layers over the theme's:
 
@@ -118,7 +117,7 @@ defaults][ug-config-merge]), so a site's map layers over the theme's:
   plugin's own files: its script, its companions, and its shim, which adjusts
   the entry per page ([shims][ug-shims]).
 - **Plugins use site configuration**: language-specific site parameters apply;
-  page front matter does not define registry entries.
+  page front matter does not define plugin entries.
 
 Alternatives considered, and why not:
 
@@ -135,7 +134,7 @@ Alternatives considered, and why not:
   template code is less inspectable than configuration.
 
 Named collections in Hugo's own configuration (`outputFormats`, `mediaTypes`,
-`languages`, `taxonomies`) are maps keyed by name; the registry follows that
+`languages`, `taxonomies`) are maps keyed by name; the plugins map follows that
 idiom.
 
 ### Gating decisions
@@ -146,9 +145,9 @@ idiom.
   content][ug-flags]). Mermaid and MarkMap (hook-flagged) are gated by default;
   tab persistence (shortcode-produced) ships ungated on every page, as before
   0.18: no flag is set for it.
-- **Gating is the plugin's, not a registry field.** The plugin's hook sets a
-  flag and its shim reads it (`hasmermaid`, `hasMarkmap`), the pairing the
-  dispatcher uses for `hasMath`; a site widens a gate by setting the flag from
+- **Gating is the plugin's, not an entry field.** The plugin's hook sets a flag
+  and its shim reads it (`hasmermaid`, `hasMarkmap`), the pairing the dispatcher
+  uses for `hasMath`; a site widens a gate by setting the flag from
   `hooks/head-end.html` ([MarkMap guide][ug-markmap-render]). A gate field in
   configuration would be a flag name kept in sync with the hook by convention,
   and no site needs one; across static-site generators, per-page loading is the

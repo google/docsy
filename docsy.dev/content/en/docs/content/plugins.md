@@ -5,17 +5,18 @@ description:
   configuration.
 ---
 
-Docsy loads some of its optional JavaScript features as **plugins**: entries
-under `params.docsy.plugins` in your site configuration.
+Docsy ships some of its optional JavaScript features as **plugins**, each on its
+own entry under `params.docsy.plugins`. You can also
+[add plugins of your own](#add-a-custom-script) (experimental).
 
 ## Configure Docsy's plugins
 
-| Plugin            | What it does (Default / Loads on)                                                                  | Learn more                     |
-| ----------------- | -------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `click-to-copy`   | Adds a copy button to code blocks (On, but off under Prism, which has its own / Every page)        | [Copy to clipboard][]          |
-| `tabpane-persist` | Remembers the selected tab across pages (On / Every page ([why](#page-flags-in-included-content))) | [`tabpane`][]                  |
-| `markmap`         | Renders `markmap` code blocks as mind maps (Off / Pages with a `markmap` code block)               | [Activating MarkMap support][] |
-| `mermaid`         | Renders `mermaid` code blocks as diagrams (On / Pages with a `mermaid` code block)                 | [Diagrams with Mermaid][]      |
+| Plugin            | What it does (Default / Loads on)                                                                  | Learn more                   |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `click-to-copy`   | Adds a copy button to code blocks (On, but off under Prism, which has its own / Every page)        | [Copy to clipboard][]        |
+| `tabpane-persist` | Remembers the selected tab across pages (On / Every page ([why](#page-flags-in-included-content))) | [`tabpane`][]                |
+| `markmap`         | Renders `markmap` code blocks as mind maps (Off / Pages with a `markmap` code block)               | [Activate MarkMap support][] |
+| `mermaid`         | Renders `mermaid` code blocks as diagrams (On / Pages with a `mermaid` code block)                 | [Diagrams with Mermaid][]    |
 
 To turn a plugin off, set its `enable` field to `false`:
 
@@ -75,18 +76,18 @@ types, defaults, and syntactic patterns:
 
 ### Warnings
 
-Every registry shape warning carries the id `docsy-config` (to silence one, see
-[Configuration § Configuration warnings][config-warnings]):
+Every `params.docsy` shape warning carries the id `docsy-config` (to silence
+one, see [Configuration § Configuration warnings][config-warnings]):
 
 - An unknown field is ignored and the rest of the entry applies.
 - An unknown key directly under `params.docsy` is ignored and the rest of the
   map applies.
 - A name the schema's pattern rejects or that ends in its reserved suffix, a
   scalar entry, or an entry missing a required field drops the whole entry.
-- A `params.docsy` or `params.docsy.plugins` that is not a map empties the
-  registry, Docsy's own plugins and their deprecated aliases included.
-  `plugins: {}` keeps them; a valueless `plugins:` is null and drops them.
-- An empty registry after configuration merging warns; a registry with all
+- A `params.docsy` or `params.docsy.plugins` that is not a map drops every
+  plugin, Docsy's own and their deprecated aliases included. `plugins: {}` keeps
+  them; a valueless `plugins:` is null and drops them.
+- An empty `plugins` map after configuration merging warns; a map with all
   entries disabled is valid.
 - An enabled name with no script file
   ([Plugin files (experimental)](#plugin-files)) is a different fault: it warns
@@ -171,14 +172,14 @@ register the plugin, or set it in its [shim](#adjust-a-plugin-per-page).
 
 ### Adjust a plugin per page
 
-A **shim** adjusts a plugin's registry entry for each page before the plugin
-loads. Add one for your own plugin, or for one of Docsy's. Three of Docsy's
-plugins ship a shim, `mermaid`, `markmap`, and `click-to-copy`: your file
-replaces that plugin's shim and everything it does ([shim contract][impl-shim]),
-so start from a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
+A **shim** adjusts a plugin's entry for each page before the plugin loads. Add
+one for your own plugin, or for one of Docsy's. Three of Docsy's plugins ship a
+shim, `mermaid`, `markmap`, and `click-to-copy`: your file replaces that
+plugin's shim and everything it does ([shim contract][impl-shim]), so start from
+a copy of the theme's file, in [`scripts/plugins/`][theme-shims].
 
-Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, with the
-plugin's registry name as _`NAME`_ ([shim contract][impl-shim]):
+Create `layouts/_partials/scripts/plugins/`_`NAME`_`_docsy-shim.html`, where
+_`NAME`_ is the plugin's key under `params.docsy.plugins`:
 
 ```go-html-template
 {{ $entry := .Plugin -}}
@@ -195,12 +196,12 @@ relying on a flag, read
 
 ### Dependency versions
 
-For a custom plugin with a configurable dependency, set `version` on its
-registry entry ([configuration reference](#configuration-reference)) and read
-`.Plugin.version` in the companion partial. Use that value to select the
-dependency's code, for example in a build-time fetch URL. Declaring `version`
-does not fetch code automatically. Omit the field if the plugin has no
-dependency version to configure.
+For a custom plugin with a configurable dependency, set `version` on its entry
+([configuration reference](#configuration-reference)) and read `.Plugin.version`
+in the companion partial. Use that value to select the dependency's code, for
+example in a build-time fetch URL. Declaring `version` does not fetch code
+automatically. Omit the field if the plugin has no dependency version to
+configure.
 
 The entry's `version` is not passed to the plugin script. For a working example,
 see the `markmap` companion in [`scripts/plugins/`][theme-shims].
@@ -211,7 +212,7 @@ A plugin reads its settings from its entry's `options`
 ([configuration reference](#configuration-reference)); the shim receives the
 value as the site wrote it and may decode it before the companion runs. Choose
 the string's format and document it with the plugin. It is a string because Hugo
-lowercases map keys ([why][design-registry]); Docsy's plugins take a **JSON
+lowercases map keys ([why][design-plugins-map]); Docsy's plugins take a **JSON
 object**, decoded at build time with `transform.Unmarshal`, or in the browser
 with `JSON.parse` after the companion emits it. For the pattern, see the
 `mermaid` shim and companion in [`scripts/plugins/`][theme-shims] ([shim
@@ -248,7 +249,7 @@ MarkMap doesn't render][].
 <!-- prettier-ignore-start -->
 [`.RenderShortcodes`]: https://gohugo.io/methods/page/rendershortcodes/
 [`tabpane`]: /docs/content/shortcodes/#tabpane
-[Activating MarkMap support]: /docs/content/diagrams-and-formulae/#activating-markmap-support
+[Activate MarkMap support]: /docs/content/diagrams-and-formulae/#activate-markmap-support
 [When a MarkMap doesn't render]: /docs/content/diagrams-and-formulae/#when-a-markmap-doesnt-render
 [Copy to clipboard]: /docs/content/lookandfeel/#copy-to-clipboard
 [head and body hooks]: /docs/content/lookandfeel/#add-code-to-head-or-before-body-end
@@ -259,7 +260,7 @@ MarkMap doesn't render][].
 [config-merge]: /docs/content/configuration/#theme-defaults-and-your-overrides
 [config-warnings]: /docs/content/configuration/#configuration-warnings
 [design-ordering]: /project/design/script-loading/#ordering-decisions
-[design-registry]: /project/design/script-loading/#registry-shape
+[design-plugins-map]: /project/design/script-loading/#plugins-map
 [experimental]: /project/about/changelog/#experimental
 [markmap-version]: /docs/content/diagrams-and-formulae/#markmap-version
 [mermaid-settings]: /docs/content/diagrams-and-formulae/#mermaid-settings

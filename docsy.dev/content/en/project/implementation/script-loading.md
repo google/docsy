@@ -22,8 +22,8 @@ file][guide-config], so the entry contract has one home.
 For when to add or replace a shim, see the guide's [Adjust a plugin per
 page][guide-shims]; this section is the contract.
 
-The loop resolves a shim by registry name with the schema's reserved
-`_docsy-shim` suffix and, when the partial exists, invokes it with
+The loop resolves a shim by plugin name with the schema's reserved `_docsy-shim`
+suffix and, when the partial exists, invokes it with
 `(dict "Page" PAGE "Plugin" ENTRY)`: the page being rendered, and the merged,
 normalized entry. The call comes after normalization and name validation, so a
 shim cannot reorder emission. It comes before the required-field and `version`
@@ -42,7 +42,7 @@ field: the click-to-copy and Mermaid shims set `_defer` true
 
 - **Refusing the plugin's retired `params.NAME` namespace**, any key, any page,
   with a build error naming the entry field to set (Mermaid, MarkMap;
-  [why][design-registry]).
+  [why][design-plugins-map]).
 - **Decoding `options`** into whatever the companion consumes. Mermaid's shim
   decodes the JSON string with `transform.Unmarshal` and fails the build on
   anything but a JSON object, so the companion sees a map or nothing.
@@ -84,7 +84,7 @@ authors][guide-security]. In addition:
 [design]: /project/design/script-loading/
 [design-ordering]: /project/design/script-loading/#ordering-decisions
 [design-gating]: /project/design/script-loading/#gating-decisions
-[design-registry]: /project/design/script-loading/#registry-shape
+[design-plugins-map]: /project/design/script-loading/#plugins-map
 [guide-shims]: /docs/content/plugins/#adjust-a-plugin-per-page
 [guide]: /docs/content/plugins/
 [guide-config]: /docs/content/plugins/#configuration-reference

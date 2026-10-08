@@ -49,7 +49,7 @@ includes:
 A shortcode without a Markdown variant emits its HTML there; for how to add one,
 see [Shortcodes][shortcode-md-variants].
 
-### Enabling {#enabling-markdown-output}
+### Enable {#enable-markdown-output}
 
 To enable Markdown output, add `markdown` to the Hugo [outputs][] configuration
 for the page kinds you want to support. For example:
@@ -88,7 +88,7 @@ section = [ "HTML", "RSS", "print", "markdown" ]
 
 {{% /tab %}} {{< /tabpane >}}
 
-### Opting out {#opt-pages-out}
+### Opt out
 
 > [!TIP]
 >
@@ -132,7 +132,7 @@ target's Markdown version when available, otherwise its HTML version:
 This organization is intended for rooted `llms.txt` files, not arbitrary
 sections.
 
-### Enabling {#enabling-llms-txt-output}
+### Enable {#enable-llms-txt-output}
 
 To enable `llms.txt` generation for every [site root][] (a practice Docsy
 recommends), add `LLMS` to the Hugo `home` [outputs][] configuration. For
@@ -161,7 +161,8 @@ Agents find your Markdown content through:
   Markdown version of the page.
 - **`describedby` link**: when the site publishes `llms.txt`, page heads include
   a `rel="describedby"` link to it, as the [llms.txt proposal][llmstxt.org] (v2)
-  recommends. Projects that override the theme's `head.html` partial need to add
+  recommends; its `href` is the root page's `llms.txt` permalink, the same on
+  every page. Projects that override the theme's `head.html` partial need to add
   the link themselves.
 - **In-body directive**: when the site publishes `llms.txt`, each page body
   opens with a visually-hidden directive pointing agents to it and, when the

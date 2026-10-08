@@ -8,8 +8,8 @@ description: >-
 
 Docsy's settings live under `params` in your site's Hugo configuration, each
 documented with its feature. `params.docsy` is the namespace Docsy reserves for
-its own settings; its [plugin registry][plugins] lives there, and older
-parameters stay where they are.
+its own settings; its [plugins][] live there, and older parameters stay where
+they are.
 
 ## Theme defaults and your overrides
 
@@ -31,8 +31,8 @@ Keys are case-insensitive: Hugo lowercases them, so `taxonomyCloud` and
 
 Write booleans unquoted: `enable: false`, not `enable: "false"`. A quoted value
 is a string, and a non-empty string is true to a Hugo template whatever it says;
-only parameters that spell out their accepted strings, such as the plugin
-registry's ([Plugins § Configuration reference][plugins-config]), read `"false"`
+only parameters that spell out their accepted strings, such as a plugin entry's
+`enable` ([Plugins § Configuration reference][plugins-config]), read `"false"`
 as false.
 
 ## Environment variables
@@ -66,7 +66,7 @@ to Hugo's [`ignoreLogs`][hugo-ignorelogs], replacing _`WARNING_ID`_:
 ignoreLogs: [WARNING_ID]
 ```
 
-For the plugin registry's warnings and their ids, see [Plugins §
+For `params.docsy` warnings and their ids, see [Plugins §
 Warnings][plugins-warnings].
 
 <!-- prettier-ignore-start -->

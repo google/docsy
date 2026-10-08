@@ -74,7 +74,7 @@ with [\(\KaTeX\)](https://katex.org/) there exists a fast and easy-to-use
 JavaScript library for \(\TeX\) math rendering on the web, which is embedded
 into Hugo as of Hugo version v0.132.0.
 
-With \(\KaTeX\) support [enabled](#activating-katex-support) in Docsy, you can
+With \(\KaTeX\) support [enabled](#activate-katex-support) in Docsy, you can
 include complex mathematical formulae into your web page, either inline or
 centred on its own line. Since Docsy theme exploits server side rendering of
 formulae, the same output is produced, regardless of your browser or your
@@ -131,7 +131,7 @@ The probability of getting \(k\) heads when flipping \(n\) coins is:
 > in-depth information about typesetting mathematical formulae using the
 > \(\LaTeX\) typesetting system.
 
-### Activating KaTeX support
+### Activate KaTeX support
 
 As of Docsy version v0.12.0, the theme uses Hugo's embedded instance of the
 KaTeX display engine to render mathematical markup to HTML at build time.\
@@ -371,7 +371,7 @@ sequenceDiagram
 
 ### Mermaid settings
 
-To configure Mermaid site-wide, set `options` on the plugin's registry entry,
+To configure Mermaid site-wide, set `options` on the `mermaid` plugin entry,
 `params.docsy.plugins.mermaid`, to a **JSON string** holding the object you
 would pass to
 [`mermaid.initialize()`](https://mermaid.js.org/config/configuration.html), with
@@ -654,7 +654,7 @@ With MarkMap enabled, Docsy renders it as:
 - KaTeX - $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$
 ````
 
-### Activating MarkMap support
+### Activate MarkMap support
 
 To enable MarkMap, turn on its plugin in `hugo.toml`/`hugo.yaml`/`hugo.json`:
 
@@ -718,7 +718,7 @@ subresource integrity.
 
 ### When a MarkMap doesn't render
 
-With the plugin [enabled](#activating-markmap-support), a mind map that stays a
+With the plugin [enabled](#activate-markmap-support), a mind map that stays a
 plain code block is on a page that didn't load the MarkMap scripts. Docsy's
 render hook flags a page for MarkMap when it renders a `markmap` code block;
 these paths miss the hook, or flag a different page ([why][page-flags]):

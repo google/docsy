@@ -153,7 +153,7 @@ test('a scalar true warns and is skipped', () => {
   );
 });
 
-test('env overrides reach registry entries and read as booleans', () => {
+test('env overrides reach plugin entries and read as booleans', () => {
   // `x` delimiter, used uniformly; only underscored key names need it. Why
   // values are strings: Configuration § Environment variables.
   const r = buildSite('plugins-env-override', {
@@ -492,7 +492,7 @@ test('a scalar params.docsy builds, warns, and turns theme plugins off', () => {
   assert.match(
     r.stderr,
     /params\.docsy is reserved for theme settings and must be a map/,
-    'clobbered registry is called out as a reserved key',
+    'scalar params.docsy is called out as a reserved key',
   );
   assert.doesNotMatch(
     r.publicFile('docs/tabs/index.html'),
@@ -544,7 +544,7 @@ test('an unknown params.docsy sibling key warns and leaves plugins active', () =
 
 test('a null params.docsy.plugins builds and warns', () => {
   // The likeliest edit: the only entry commented out, leaving `plugins:`.
-  const r = buildSite('plugins-null-registry', {
+  const r = buildSite('plugins-null-map', {
     files: content,
     extraConfig: `params:
   docsy:
@@ -555,13 +555,13 @@ test('a null params.docsy.plugins builds and warns', () => {
   assert.match(
     r.stderr,
     /params\.docsy\.plugins must be a map/,
-    'clobbered registry is called out in a build warning',
+    'clobbered plugins map is called out in a build warning',
   );
 });
 
 test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
-  // The empty map, the guide's remedy for a null registry.
-  const r = buildSite('plugins-empty-registry', {
+  // The empty map, the guide's remedy for a null `plugins`.
+  const r = buildSite('plugins-empty-map', {
     files: content,
     extraConfig: `params:
   docsy:
@@ -572,7 +572,7 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
   assert.doesNotMatch(
     r.stderr,
     /params\.docsy\.plugins must be a map/,
-    'empty map draws no registry warning',
+    'empty map draws no must-be-a-map warning',
   );
   assert.match(
     r.publicFile('index.html'),
@@ -581,8 +581,8 @@ test('an empty-map params.docsy.plugins keeps the theme plugins', () => {
   );
 });
 
-test('an empty effective registry warns when theme inheritance is disabled', () => {
-  const r = buildSite('plugins-empty-effective-registry', {
+test('an empty effective plugins map warns when theme inheritance is disabled', () => {
+  const r = buildSite('plugins-empty-effective-map', {
     files: content,
     extraConfig: `params:
   docsy:
@@ -594,16 +594,16 @@ test('an empty effective registry warns when theme inheritance is disabled', () 
   assert.match(
     r.stderr,
     /params\.docsy\.plugins must be nonempty after configuration merging/,
-    'the empty registry draws a configuration warning',
+    'the empty plugins map draws a configuration warning',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
     /js\/plugins\//,
-    'the empty registry emits zero plugin scripts',
+    'the empty plugins map emits zero plugin scripts',
   );
 });
 
-test('a nonempty registry can disable every theme plugin', () => {
+test('a nonempty plugins map can disable every theme plugin', () => {
   const r = buildSite('plugins-all-disabled', {
     files: content,
     extraConfig: `params:
@@ -619,7 +619,7 @@ test('a nonempty registry can disable every theme plugin', () => {
   assert.doesNotMatch(
     r.stderr,
     /params\.docsy\.plugins must be nonempty/,
-    'disabled entries satisfy the registry shape',
+    'disabled entries satisfy the plugins map shape',
   );
   assert.doesNotMatch(
     r.publicFile('index.html'),
@@ -629,7 +629,7 @@ test('a nonempty registry can disable every theme plugin', () => {
 });
 
 test('a list-shaped params.docsy.plugins builds and warns', () => {
-  const r = buildSite('plugins-list-registry', {
+  const r = buildSite('plugins-list-map', {
     files: { ...content, 'assets/js/plugins/hello.js': helloJs },
     extraConfig: `params:
   docsy:
@@ -650,7 +650,7 @@ test('a list-shaped params.docsy.plugins builds and warns', () => {
 });
 
 test('a falsy scalar params.docsy.plugins also warns', () => {
-  const r = buildSite('plugins-falsy-registry', {
+  const r = buildSite('plugins-falsy-map', {
     files: content,
     extraConfig: `params:
   docsy:

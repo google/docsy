@@ -1,12 +1,12 @@
 ---
 title: Hugo 0.165.0-0.166.0 upgrade guide
-linkTitle: Hugo 0.165+ upgrade guide
+linkTitle: Hugo 0.165+
 date: 2026-10-06
 draft: true
 description: >-
-  Hugo 0.166.0's security hardening, and a few smaller changes, can break a
-  Docsy site's build or silently change its output. Find the ones that apply to
-  your site, each with its fix.
+  Security hardening, a rewritten glob matcher, and a few smaller changes can
+  break a Docsy site's build or silently change its output. Find the ones that
+  apply to your site, each with its fix.
 author: >-
   [Patrice Chalin](https://github.com/chalin) ([CNCF](https://www.cncf.io/)),
   for the [Docsy Steering Committee](/blog/2022/hello/#introducing-the-psc)
@@ -20,19 +20,19 @@ params:
   katexMinVersion: 0.18.4
 ---
 
-This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), which
-names the [Hugo version that 0.18.0 supports](0.18.0/#hugo).
+This post is a companion to the [Docsy 0.18.0 release post](0.18.0/), whose
+[upgrade section](0.18.0/#upgrade) names the Hugo version that 0.18.0 supports.
 
 ## Upgrade summary
 
 - **This guide is for you if** you're:
-  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade)
+  - [Upgrading to Docsy 0.18.0](0.18.0/#upgrade) from Hugo 0.164.x or older
   - Upgrading only Hugo, past 0.164.x
 - Review {{% _param BADGE BREAKING warning %}} changes:
   <a id="breaking-changes"></a>
   - {{% _param BREAKING %}} [Security hardening](#security): Node tools,
     symlinked mounts, remote fetches, Org content
-  - {{% _param BREAKING %}} [Glob patterns rewritten](#globs)
+  - {{% _param BREAKING %}} [Glob matching rewritten](#globs)
   - {{% _param BREAKING %}} [KaTeX stylesheet floor](#katex)
   - {{% _param BREAKING %}} [URL and template changes](#urls-templates)
   - {{% _param BREAKING %}} [Tailwind allow-list (0.165.0)](#tailwind)
@@ -101,7 +101,7 @@ through.
 - Opt back in by setting `security.allowContent` to the whole list without the
   `text/org` denial: `['! ^text/html$']`.
 
-## {{% _param BREAKING %}} Glob patterns rewritten (0.166.0) {#globs}
+## {{% _param BREAKING %}} Glob matching rewritten (0.166.0) {#globs}
 
 Hugo 0.166.0 replaced its glob-matching engine. Patterns that relied on the old
 engine's bugs match differently; literal paths are unaffected.
@@ -132,9 +132,8 @@ Then:
 
 Hugo 0.166.0's bundled KaTeX, the one behind `transform.ToMath` and Docsy's
 `math` fences, emits markup that needs a KaTeX {{% param katexMinVersion %}} or
-later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's pin,
-KaTeX {{% param katexVersion %}}, satisfies it
-([dependency versions](0.18.0/#script-dep-pins)).
+later stylesheet; an older one misrenders some expressions. Docsy 0.18.0's
+[pin](0.18.0/#upgrade), KaTeX {{% param katexVersion %}}, satisfies it.
 
 ### Actions {#katex-actions}
 
@@ -148,10 +147,9 @@ or an overridden `scripts/katex.html`.
 
 ## Imaging config deprecations now warn (0.166.0) {#imaging}
 
-Hugo 0.163.0 deprecated the global `imaging.quality` and `imaging.compression`
-keys for per-format ones ([Hugo 0.158+ guide](hugo-0.158.0+/#imaging)); 0.166.0
-raises the notice to a build `WARN`, which fails the update guide's no-warnings
-check.
+Hugo 0.163.0 [deprecated](hugo-0.158.0+/#imaging) the global `imaging.quality`
+and `imaging.compression` keys for per-format ones; 0.166.0 raises the notice to
+a build `WARN`, which fails the update guide's [no-warnings check][check].
 
 ### Actions {#imaging-actions}
 
@@ -187,8 +185,8 @@ before.
 
 ## {{% _param BREAKING %}} Tailwind allow-list (0.165.0) {#tailwind}
 
-Hugo 0.165.0 is a feature release ([notes][hugo-0.165.0]); besides the symlink
-rule above, its change for Docsy sites is that `tailwindcss` left the default
+Hugo 0.165.0 is a [feature release][hugo-0.165.0]; besides the symlink rule
+above, its change for Docsy sites is that `tailwindcss` left the default
 `security.exec.allow` list.
 
 ### Actions {#tailwind-actions}
@@ -214,9 +212,9 @@ rule above, its change for Docsy sites is that `tailwindcss` left the default
 
 ## {{% _param FAS rocket primary %}} Upgrade to Hugo {{% param hugoSupportedVersion %}} {#upgrade}
 
-After addressing the actions that apply to your site, upgrade to Hugo
-[{{% param hugoSupportedVersion %}}][hugo-supported-version] ([Update
-Hugo][update-hugo]).
+After addressing the actions that apply to your site, [upgrade
+Hugo][update-hugo] to
+[{{% param hugoSupportedVersion %}}][hugo-supported-version].
 
 ### {{% _param FAS square-check primary %}} Sanity checks
 

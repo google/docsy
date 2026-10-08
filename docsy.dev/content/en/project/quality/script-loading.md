@@ -38,12 +38,12 @@ it; what's pinned is exactly the gate-to-partial wiring, offline.
 
 ## Loop-contract tests
 
-[`plugins.test.mjs`][loop-test] pins the plugin loop's registry contract:
+[`plugins.test.mjs`][loop-test] pins the plugin loop's configuration contract:
 
 - **Emission**: `enable`/`_defer` handling, deterministic order, env-override
   booleans, companions and shims (a shim-gated plugin, and a head-end flag
   widening its gate), SRI in development builds.
-- **Validation**: shape-guard warnings (a list-shaped registry, an unknown
+- **Validation**: shape-guard warnings (a list-shaped `plugins`, an unknown
   `params.docsy` sibling key, and a scalar `params.docsy`), name and field
   allowlisting (the `_docsy-shim` suffix refused, unknown fields warned), the
   `version` guard's [warning and error policy][guide-warnings].
@@ -70,7 +70,7 @@ Four companion nets pin the conversions:
 ## Acceptance test
 
 [`plugins-acceptance.test.mjs`][acceptance-test] proves adoption end to end: a
-project site drops `assets/js/plugins/hello.js` plus one registry entry and gets
+project site drops `assets/js/plugins/hello.js` plus one plugin entry and gets
 its script loaded, with zero layout overrides asserted structurally (the fixture
 contains no `layouts/` directory).
 

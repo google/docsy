@@ -159,7 +159,7 @@ A doc-rooted site has the following benefits:
 - Avoids the need to create a custom home page using [blocks][] shortcodes or
   HTML.
 
-### Creating a doc-rooted site
+### Create a doc-rooted site
 
 To create a doc-rooted site, redefine the `docs` section [permalinks][] in your
 [site configuration][] as follows (YAML format shown):
@@ -994,7 +994,7 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [`llms.txt`]: /docs/content/agent-support/#llms-txt
 [Look and Feel]: /docs/content/lookandfeel/
 [multilingual site]: /docs/language/
-[outputs-replace]: /docs/content/agent-support/#opt-pages-out
+[outputs-replace]: /docs/content/agent-support/#opt-out
 [permalinks]: https://gohugo.io/configuration/permalinks/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/

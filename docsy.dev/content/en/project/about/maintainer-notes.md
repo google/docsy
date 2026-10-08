@@ -89,7 +89,7 @@ The repository's [main ruleset][] enforces that:
 
 Rebase merges are disabled repo-wide. The one sanctioned bypass, open to the
 repository's Maintain role and logged in the ruleset's insights, is
-[restoring the fast-forward path](#restoring-the-fast-forward-path).
+[restoring the fast-forward path](#restore-the-fast-forward-path).
 
 A PR into `main` can merge when:
 
@@ -99,7 +99,7 @@ A PR into `main` can merge when:
 - Its [EasyCLA check][] passes, as required by an [organization
   ruleset][EasyCLA ruleset].
 
-### Restoring the fast-forward path
+### Restore the fast-forward path
 
 After a [patch on `release`][], `release` has commits that `main` doesn't, so
 the next release can't fast-forward it from `main`. To reopen the path, record
