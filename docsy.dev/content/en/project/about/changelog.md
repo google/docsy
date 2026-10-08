@@ -145,6 +145,37 @@ functionality, depending on scope. Prefer narrow, focused PRs where possible.
 
 </details>
 
+## v0.19.0 {#next}
+
+> **UNRELEASED: this planned version is still under development**
+
+For the full list of changes, see the [0.19.0][] release page or the [git
+history since 0.18.0][].
+
+[**Breaking changes**](#breaking-change):
+
+- ...
+
+**New**:
+
+- ...
+
+**Other changes**:
+
+- ...
+
+[**Experimental**](#experimental):
+
+- ...
+
+**For maintainers**:
+
+- ...
+
+[0.19.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.19.0
+[git history since 0.18.0]:
+  https://github.com/docsy/docsy/compare/v0.18.0...main
+
 ## v0.18.0 {#v0.18.0}
 
 For an introduction to this release, see the [0.18.0 release report][]. For the
@@ -250,7 +281,7 @@ full list of changes, see the [0.18.0][] release page or the [git history since
 [#2850]: https://github.com/docsy/docsy/pull/2850
 [#2852]: https://github.com/docsy/docsy/pull/2852
 [#2857]: https://github.com/docsy/docsy/pull/2857
-[0.18.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.18.0
+[0.18.0]: https://github.com/docsy/docsy/releases/tag/v0.18.0
 [0.18.0 release report]: /blog/2026/0.18.0/
 [0.18.0-blog-jquery]: /blog/2026/0.18.0/#jquery
 [0.18.0-blog-llms-txt]: /blog/2026/0.18.0/#llms-txt-actions
