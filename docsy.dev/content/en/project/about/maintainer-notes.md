@@ -996,8 +996,8 @@ before any further changes are merged into the `main` branch:
 5. **Open the next release's tracker issue**, titled `Release X.Y.Z preparation`
    and set to its milestone, modeled on the shipped release's tracker: links to
    the milestone, this procedure, and the two drafts above, with no copied
-   checklist. On the shipped release's tracker, point "Next release" at it. The
-   release-preparation PR contributes to it.
+   checklist. In the shipped release's tracker, edit the opening comment's "Next
+   release" line to point at it. The release-preparation PR contributes to it.
 
 6. **Submit a PR with your changes**, using a title like:
 
