@@ -945,6 +945,10 @@ with the following modifications:
     npm run set:version:example -- --version $VERSION
     ```
 
+    Then re-pack from the example (`npm run update:docsy:pack`): its version
+    stamp feeds the Hugo module's npm metadata, so a stamp after the last pack
+    makes the next build warn that npm dependencies are out of sync.
+
 2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
     create a release and publish it with one difference:
     - Once the deploy/prod branch has been updated, wait for the production
