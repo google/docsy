@@ -789,6 +789,14 @@ If not adjust accordingly.
        npm view @docsy/theme version dist-tags
        ```
 
+       If the publish step fails with `E404`, the run got no publish token: npm
+       reports a failed OIDC token exchange as a 404. Check the package's
+       trusted-publisher configuration on npmjs: it must name `docsy/docsy`,
+       `publish.yaml` and the `npm-publish` environment, allow `npm publish`,
+       and not read **Expired** (npm expires a configuration that hasn't yet
+       published 48 hours after creation). Fix or recreate it, then re-run the
+       failed job.
+
     3. **Re-point the `next` dist-tag** at the new stable (dist-tags never move
        on their own, and `next` must stay `>= latest`). OIDC covers only the
        publish itself, so run this inside a narrow auth window (login/logout,
@@ -885,7 +893,8 @@ If not adjust accordingly.
 19. **Publish the release**: click _Publish release_.
 
 20. Test the release with a downstream project and/or the [docsy-example][]
-    site.
+    site, per the [consumer-site test procedure](#consumer-site-test), which
+    says where to track outcomes.
 
 21. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
@@ -1018,8 +1027,9 @@ before any further changes are merged into the `main` branch:
 7. **Get PR approved and merged**.
 
 8. **Validate the published release from [docsy-starter][]** (npm package mode),
-   per the [consumer-site test procedure](#consumer-site-test), and follow with
-   the starter's own Docsy-update PR. Post-tag; doesn't block `main`.
+   per the [consumer-site test procedure](#consumer-site-test). The procedure's
+   worktree branch becomes the starter's Docsy-update PR, so validation and
+   update land as one PR. Post-tag; doesn't block `main`.
 
 ## Consumer-site test procedure {#consumer-site-test}
 
