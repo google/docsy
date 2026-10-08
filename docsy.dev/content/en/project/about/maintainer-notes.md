@@ -467,14 +467,16 @@ workflow re-verifies the oldest entries; for the rotation model, see the
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
   `-- -p 10%` to drop the oldest tenth of entries without `expires`,
   `-- -m REGEX` to scope by URL).
-- **Seed** a URL that only goes live later (such as release-tag links during
-  release prep) by adding an entry with placeholder `"result": 206`,
-  `"via": "manual"`, an exclusive UTC `"expires"` date (`2026-10-01` holds the
-  seed through September 30), and a `//` comment noting the reason; then run
-  `npm run fix:link-cache`, which dates the seed, and commit. Lapsed seeds are
-  dropped by the next prune (`-- -p 0` drops only those) and re-verified live by
-  the following check ([link-cache's one rule][]); drop an entry early only to
-  force a re-check.
+- **Seed** a URL that only goes live later by adding an entry with placeholder
+  `"result": 206` and `"via": "manual"`, and no comment (the fields say what it
+  is). For its `"expires"`, use `"+0d"` when the URL goes live within a week,
+  such as a page the PR itself adds; otherwise use an exclusive UTC date past
+  the URL's go-live (for a release-gated URL, the expected release date plus a
+  buffer; `2026-12-01` holds a seed through November 30). Then run
+  `npm run fix:link-cache`, which dates the seed (resolving `+0d`), and commit.
+  Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
+  re-verified live by the following check ([link-cache's one rule][]); drop an
+  entry early only to force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
