@@ -1442,6 +1442,7 @@
   // 0.18.0 release-prep seed: goes live with the release tag.
   "https://github.com/docsy/docsy/compare/v0.17.0...v0.18.0": {
     "result": 206,
+    "when": "2026-10-08T02:15:01Z",
     "via": "manual",
     "expires": "2026-10-15",
   },
