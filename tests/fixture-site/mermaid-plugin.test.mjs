@@ -1,8 +1,8 @@
 // Pins Mermaid's plugin conversion offline: the companion (a
 // resources.GetRemote existence check plus the config block) is stubbed with a
-// marker wherever a build would reach the fetch; the real companion, its
-// config transport, and the runtime are pinned in the visual suite
-// (mermaid-runtime.test.mjs, js-runtime.test.mjs).
+// marker, or run under a remote deny list, wherever a build would reach the
+// fetch; the real companion, its config transport, and the runtime are pinned
+// in the visual suite (mermaid-runtime.test.mjs, js-runtime.test.mjs).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

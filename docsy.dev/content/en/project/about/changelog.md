@@ -165,7 +165,9 @@ full list of changes, see the [0.18.0][] release page or the [git history since
   and `$` ([#1436][]).
 - **[`llms.txt` template][0.18.0-blog-llms-txt]**: renamed the theme's
   `index.llms.txt` to `all.llms.txt`, so a project's generic `all.*` or `list.*`
-  LLMS template now renders the root file too ([#2834][]). **New**:
+  LLMS template now renders the root file too ([#2834][]).
+
+**New**:
 
 - Added **[plugins][ug-plugins]**, `params.docsy.plugins`, to configure Docsy's
   optional scripts from site configuration. Deprecated
