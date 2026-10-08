@@ -467,14 +467,16 @@ workflow re-verifies the oldest entries; for the rotation model, see the
 - **Inspect or prune** with `npm run link-cache` (`-- -s` for a summary,
   `-- -p 10%` to drop the oldest tenth of entries without `expires`,
   `-- -m REGEX` to scope by URL).
-- **Seed** a URL that only goes live later (such as release-tag links during
-  release prep) by adding an entry with placeholder `"result": 206`,
-  `"via": "manual"`, an exclusive UTC `"expires"` date (`2026-10-01` holds the
-  seed through September 30), and a `//` comment noting the reason; then run
-  `npm run fix:link-cache`, which dates the seed, and commit. Lapsed seeds are
-  dropped by the next prune (`-- -p 0` drops only those) and re-verified live by
-  the following check ([link-cache's one rule][]); drop an entry early only to
-  force a re-check.
+- **Seed** a URL that only goes live later by adding an entry with placeholder
+  `"result": 206` and `"via": "manual"`. For its `"expires"`, use `"+0d"` when
+  the URL goes live within a week, such as a page the PR itself adds; otherwise
+  use an exclusive UTC date past the URL's go-live (for a release-gated URL, the
+  expected release date plus a buffer), with a one-line `//` comment naming the
+  event that makes it live, such as `// Live at the v0.19.0 release.` Then run
+  `npm run fix:link-cache`, which dates the seed (resolving `+0d`), and commit.
+  Lapsed seeds are dropped by the next prune (`-- -p 0` drops only those) and
+  re-verified live by the following check ([link-cache's one rule][]); drop an
+  entry early only to force a re-check.
 
 Both scripts work from the repo root or `docsy.dev/`.
 
@@ -786,6 +788,14 @@ If not adjust accordingly.
        npm view @docsy/theme version dist-tags
        ```
 
+       If the publish step fails with `E404`, the run got no publish token: npm
+       reports a failed OIDC token exchange as a 404. Check the package's
+       trusted-publisher configuration on npmjs: it must name `docsy/docsy`,
+       `publish.yaml` and the `npm-publish` environment, allow `npm publish`,
+       and not read **Expired** (npm expires a configuration that hasn't yet
+       published 48 hours after creation). Fix or recreate it, then re-run the
+       failed job.
+
     3. **Re-point the `next` dist-tag** at the new stable (dist-tags never move
        on their own, and `next` must stay `>= latest`). OIDC covers only the
        publish itself, so run this inside a narrow auth window (login/logout,
@@ -882,7 +892,8 @@ If not adjust accordingly.
 19. **Publish the release**: click _Publish release_.
 
 20. Test the release with a downstream project and/or the [docsy-example][]
-    site.
+    site, per the [consumer-site test procedure](#consumer-site-test), which
+    says where to track outcomes.
 
 21. If you find issues, determine whether they need to be fixed immediately. If
     so, get fixes submitted, reviewed and approved. Go back to step 1 to publish
@@ -933,6 +944,10 @@ with the following modifications:
     npm run set:version:example -- --version $VERSION
     ```
 
+    Then re-pack from the example (`npm run update:docsy:pack`): its version
+    stamp feeds the Hugo module's npm metadata, so a stamp after the last pack
+    makes the next build warn that npm dependencies are out of sync.
+
 2.  Perform [step 6](#ci-test-step) onwards as above to test, create a PR,
     create a release and publish it with one difference:
     - Once the deploy/prod branch has been updated, wait for the production
@@ -972,6 +987,13 @@ before any further changes are merged into the `main` branch:
 
    - Remove any temporary ignore rules from `docsy.dev/lychee.toml` and confirm
      that the link check passes.
+   - Re-verify the link-cache seeds that the release gated (their comments name
+     the release; see
+     [Link checking and the link cache](#link-checking-and-the-link-cache)), now
+     that their URLs are live: set their `"expires"` to `"+0d"`, drop them with
+     `npm run link-cache -- -p 0`, then run `npm run fix:link-cache`, which
+     checks them live and records them as ordinary entries. A seed that still
+     fails points at a release step not yet done, such as the deploy.
    - Search for other release-scoped markers and act on those now that the
      release is shipped, for example:
 
@@ -993,17 +1015,26 @@ before any further changes are merged into the `main` branch:
    shipped release's post. Like the changelog's new entry, the draft gives
    next-cycle changes a single home to land on.
 
-5. **Submit a PR with your changes**, using a title like:
+5. **Open the next release's tracker issue**, titled `Release X.Y.Z preparation`
+   and set to its milestone, modeled on the shipped release's tracker: links to
+   the milestone, the [release-prep audit](#release-prep-audit) and
+   [Publishing a release](#publishing-a-release) sections, and the two drafts
+   above, with no copied checklist. In the shipped release's tracker, edit the
+   opening comment's "Next release" line to point at it. The release-preparation
+   PR contributes to it.
+
+6. **Submit a PR with your changes**, using a title like:
 
    ```text
    Set version to {{% param version %}}
    ```
 
-6. **Get PR approved and merged**.
+7. **Get PR approved and merged**.
 
-7. **Validate the published release from [docsy-starter][]** (npm package mode),
-   per the [consumer-site test procedure](#consumer-site-test), and follow with
-   the starter's own Docsy-update PR. Post-tag; doesn't block `main`.
+8. **Validate the published release from [docsy-starter][]** (npm package mode),
+   per the [consumer-site test procedure](#consumer-site-test). The procedure's
+   worktree branch becomes the starter's Docsy-update PR, so validation and
+   update land as one PR. Post-tag; doesn't block `main`.
 
 ## Consumer-site test procedure {#consumer-site-test}
 

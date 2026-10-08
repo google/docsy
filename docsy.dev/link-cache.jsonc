@@ -1439,12 +1439,15 @@
     "when": "2026-09-17T23:13:27Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the release tag.
   "https://github.com/docsy/docsy/compare/v0.17.0...v0.18.0": {
-    "result": 206,
-    "when": "2026-10-08T02:15:01Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/compare/v0.18.0...main": {
+    "result": 200,
+    "when": "2026-10-08T10:07:12Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/compare/v0.8.0...v0.9.0": {
     "result": 200,
@@ -2996,6 +2999,11 @@
     "when": "2026-09-17T23:13:26Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/releases/latest?FIXME=v0.19.0": {
+    "result": 200,
+    "when": "2026-10-08T10:07:12Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/releases/new": {
     "result": 200,
     "when": "2026-09-17T23:13:27Z",
@@ -3021,12 +3029,10 @@
     "when": "2026-09-18T01:33:08Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the release tag.
   "https://github.com/docsy/docsy/releases/tag/v0.18.0": {
-    "result": 206,
-    "when": "2026-08-30T21:00:04Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://github.com/docsy/docsy/releases/tag/v0.7.0": {
     "result": 200,
@@ -4508,12 +4514,10 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the release blog post.
   "https://main--docsydocs.netlify.app/blog/2026/0.18.0/": {
-    "result": 206,
-    "when": "2026-08-30T21:00:04Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/blog/2026/hugo-0.152.0+/": {
     "result": 200,
@@ -4525,12 +4529,10 @@
     "when": "2026-09-19T16:04:42Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the Hugo 0.165+ upgrade guide.
   "https://main--docsydocs.netlify.app/blog/2026/hugo-0.165.0+/": {
-    "result": 206,
-    "when": "2026-10-06T21:23:25Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/community/": {
     "result": 200,
@@ -4572,12 +4574,10 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the plugin conversions (#2791) deploy.
   "https://main--docsydocs.netlify.app/docs/content/configuration/": {
-    "result": 206,
-    "when": "2026-09-05T11:50:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/diagrams-and-formulae/": {
     "result": 200,
@@ -4605,10 +4605,9 @@
     "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/plugins/": {
-    "result": 206,
-    "when": "2026-09-04T21:15:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:01Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/docs/content/print/": {
     "result": 200,
@@ -4795,12 +4794,10 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://main--docsydocs.netlify.app/project/design/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/project/design/semantic-classes/": {
     "result": 200,
@@ -4812,31 +4809,25 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://main--docsydocs.netlify.app/project/implementation/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/project/implementation/scrollspy-patch/": {
     "result": 200,
     "when": "2026-09-19T16:04:40Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://main--docsydocs.netlify.app/project/quality/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://main--docsydocs.netlify.app/project/quality/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:03Z",
+    "via": "lychee",
   },
   "https://main--docsydocs.netlify.app/project/repo/": {
     "result": 200,
@@ -5368,12 +5359,10 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the release blog post.
   "https://www.docsy.dev/blog/2026/0.18.0/": {
-    "result": 206,
-    "when": "2026-08-30T21:00:04Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/blog/2026/hugo-0.152.0+/": {
     "result": 200,
@@ -5385,12 +5374,10 @@
     "when": "2026-07-29T21:28:58Z",
     "via": "lychee",
   },
-  // 0.18.0 release-prep seed: goes live with the Hugo 0.165+ upgrade guide.
   "https://www.docsy.dev/blog/2026/hugo-0.165.0+/": {
-    "result": 206,
-    "when": "2026-10-06T21:23:25Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/community/": {
     "result": 200,
@@ -5432,12 +5419,10 @@
     "when": "2026-09-02T08:07:13Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the plugin conversions (#2791) deploy.
   "https://www.docsy.dev/docs/content/configuration/": {
-    "result": 206,
-    "when": "2026-09-05T11:50:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/diagrams-and-formulae/": {
     "result": 200,
@@ -5465,10 +5450,9 @@
     "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/plugins/": {
-    "result": 206,
-    "when": "2026-09-04T21:15:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/docs/content/print/": {
     "result": 200,
@@ -5665,12 +5649,10 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://www.docsy.dev/project/design/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/project/design/semantic-classes/": {
     "result": 200,
@@ -5682,31 +5664,25 @@
     "when": "2026-06-27T12:29:27Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://www.docsy.dev/project/implementation/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/project/implementation/scrollspy-patch/": {
     "result": 200,
     "when": "2026-09-19T16:04:40Z",
     "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://www.docsy.dev/project/quality/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
-  // New-page seed: goes live when the script-loading project docs deploy.
   "https://www.docsy.dev/project/quality/script-loading/": {
-    "result": 206,
-    "when": "2026-09-02T19:10:00Z",
-    "via": "manual",
-    "expires": "2026-10-15",
+    "result": 200,
+    "when": "2026-10-08T10:42:02Z",
+    "via": "lychee",
   },
   "https://www.docsy.dev/project/repo/": {
     "result": 200,
