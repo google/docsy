@@ -2,7 +2,6 @@
 title: Hugo 0.165.0-0.166.0 upgrade guide
 linkTitle: Hugo 0.165+
 date: 2026-10-06
-draft: true
 description: >-
   Security hardening, a rewritten glob matcher, and a few smaller changes can
   break a Docsy site's build or silently change its output. Find the ones that
