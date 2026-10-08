@@ -54,7 +54,9 @@ release notes.
 
 {{% _param BREAKING %}} **Applies if** your project has a symlink that resolves
 outside it, under `node_modules` for example. Hugo 0.166.0 fails PostCSS and
-other Node tools before running them when a symlink escapes the allowed roots.
+other Node tools before running them when a symlink escapes the allowed roots. A
+symlinked theme directory (`themes/docsy -> ../docsy`) counts when PostCSS runs
+(Docsy runs it in production with a `postcss.config.*`, and for RTL languages).
 
 - Set `security.node.permissions.allowRead` to the whole list with the link's
   target added, `['.', 'TARGET']`, where _`TARGET`_ is the path the link
@@ -63,16 +65,14 @@ other Node tools before running them when a symlink escapes the allowed roots.
 {{% _param BREAKING %}} **Applies if** a symlink sits on a mount's path,
 wherever it points: a mount root such as `assets/` or a module mount's `source`
 (dropped since 0.166.0), a directory inside one such as `assets/vendor/x`
-(dropped since 0.165.0), or a relative `source` that passes through a link. A
-symlinked theme directory (`themes/docsy -> ../docsy`) still mounts, but counts
-as a symlink that resolves outside the project for the Node gate above when
-PostCSS runs (Docsy runs it in production with a `postcss.config.*`, and for RTL
-languages). Docsy's own mounts read two `node_modules` packages through three
-mounts, which pnpm and `npm link` install as symlinks: the Bootstrap and Font
-Awesome Sass imports then fail with no pointer to the cause, and the Font
-Awesome webfonts vanish from an otherwise green build.
+(dropped since 0.165.0), or a relative `source` that passes through a link (a
+symlinked theme directory still mounts). Docsy's own mounts read two
+`node_modules` packages through three mounts, which pnpm and `npm link` install
+as symlinks: the Bootstrap and Font Awesome Sass imports then fail with no
+pointer to the cause, and the Font Awesome webfonts vanish from an otherwise
+green build.
 
-- Replace the link with the real directory (pnpm: `node-linker=hoisted`), or
+- Replace the link with the real directory (for pnpm, `node-linker=hoisted`), or
   mount the link's target by an absolute `source`, for every mount the link
   affects, and re-declare your project's own `assets` and `static` mounts: a
   project mount for a component [replaces Hugo's default mount][default-mounts]
