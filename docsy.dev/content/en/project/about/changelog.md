@@ -27,10 +27,10 @@ the [milestones][].
   details. Read the whole entry before adding a clause.
 - Classify by what the reader experiences, not by the implementation. Restoring
   documented behavior from a previous release is a [bug fix](#bug-fixes). If it
-  also breaks a supported customization, list the change under **Breaking
-  changes** and link the release post for migration steps. Fixes to features
-  introduced in the same release belong in the description of the feature as
-  shipped, not separate fix entries.
+  also breaks the [public customization surface](#public), list the change under
+  [**Breaking changes**](#breaking-change) and link the release post for
+  migration steps. Fixes to features introduced in the same release belong in
+  the description of the feature as shipped, not separate fix entries.
 - Use past tense when describing releases.
 - Generally, start each change entry with a verb (in the past tense). For
   example: Added, Changed, Deprecated, Fixed.
