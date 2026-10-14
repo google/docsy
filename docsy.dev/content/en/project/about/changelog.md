@@ -23,8 +23,9 @@ the [milestones][].
 
 - Keep each entry to at most two Markdown source prose lines normally, never
   more than four, as wrapped by the repo's formatter. Exclude separate link
-  definitions from the count. State what changed and its consequence; link to
-  details. Read the whole entry before adding a clause.
+  definitions from the count.
+- State what changed and its consequence; link to details. Read the whole entry
+  before adding a clause.
 - Classify by what the reader experiences, not by the implementation. Restoring
   documented behavior from a previous release is a [bug fix](#bug-fixes). If it
   also breaks the [public customization surface](#public), list the change under
