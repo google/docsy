@@ -52,8 +52,9 @@ params:
   copyright:
     authors: >-
       Docsy a Series of LF Projects, LLC<br> For website terms of use, trademark
-      policy and other project policies see
-      [lfprojects.org](https://lfprojects.org/).
+      and other project policies, see [lfprojects.org](https://lfprojects.org/).
+    from_year: 2018
+    to_year: present
   github_repo: https://github.com/docsy/docsy
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
