@@ -51,13 +51,9 @@ params:
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
     authors: >-
-      Contributors to Docsy a Series of LF Projects, LLC<br> For website terms
-      of use, trademark policy and other project policies please see
-      [lfprojects.org/policies/](https://lfprojects.org/policies/).<br>
-      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
-    from_year: 2018
-    to_year: present
-  privacy_policy: https://lfprojects.org/policies/privacy-policy/
+      Docsy a Series of LF Projects, LLC<br> For website terms of use, trademark
+      policy and other project policies see
+      [lfprojects.org](https://lfprojects.org/).
   github_repo: https://github.com/docsy/docsy
   github_project_repo: https://github.com/docsy/docsy
   github_subdir: docsy.dev
@@ -120,11 +116,6 @@ params:
         url: https://github.com/docsy/docsy
         icon: fa-brands fa-github
         desc: Development takes place here!
-      - name: Project policies
-        url: https://lfprojects.org/policies/
-        icon: fa-solid fa-scale-balanced
-        desc:
-          Website terms of use, trademark policy, and other LF Projects policies
 
   plantuml:
     enable: true
