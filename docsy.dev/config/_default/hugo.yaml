@@ -51,7 +51,9 @@ params:
   mainBranchPreviewURL: https://main--docsydocs.netlify.app/
   copyright:
     authors: >-
-      Contributors to Docsy a Series of LF Projects, LLC |
+      Contributors to Docsy a Series of LF Projects, LLC<br>
+      For website terms of use, trademark policy and other project policies
+      please see [lfprojects.org/policies/](https://lfprojects.org/policies/).<br>
       [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
     from_year: 2018
     to_year: present
