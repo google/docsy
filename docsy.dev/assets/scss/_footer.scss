@@ -1,0 +1,15 @@
+.td-footer {
+  // Three columns are too narrow for the notice below `lg`: stack it under the
+  // link columns instead, as on mobile.
+  @include media-breakpoint-between(sm, lg) {
+    &__left,
+    &__right {
+      width: 50%;
+    }
+
+    &__center {
+      width: 100%;
+      order: 4 !important; // after the link columns' `order-sm-*` utilities
+    }
+  }
+}
