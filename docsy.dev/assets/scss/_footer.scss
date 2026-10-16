@@ -1,0 +1,14 @@
+.td-footer {
+  // Three columns are too narrow for the notice below `lg`.
+  @include media-breakpoint-down(lg) {
+    &__left,
+    &__right {
+      width: 50%;
+    }
+
+    &__center {
+      width: 100%;
+      order: 4 !important;
+    }
+  }
+}
