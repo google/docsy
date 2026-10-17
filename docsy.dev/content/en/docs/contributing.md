@@ -18,7 +18,7 @@ weight: 9
 
 > [!NB] Maintainers, see [Maintainer notes](/project/about/maintainer-notes/).
 
-## Ground rules
+## Before you start
 
 - **Contributor License Agreement**: Docsy contributions require the [CNCF
   Contributor License Agreement][cncf-cla], enforced on every PR through
@@ -26,17 +26,19 @@ weight: 9
 - **Code of conduct**: this project follows the [LF Projects Code of Conduct][].
 - **Code reviews**: all submissions, including those from project members, are
   reviewed as [pull requests][pr].
-- **Issues**: to request a feature or report a problem, [open an issue][issues].
-  For a page of this guide, the **Create Issue** button at the top right opens
-  one with the page prefilled.
 
 ## Making a change
 
-The Docsy repo is a [monorepo][]: the theme in `theme/`, this guide in
-`docsy.dev/`. Fork it and open a pull request; every pull request gets a Netlify
-deploy preview (the `deploy/netlify` check's **Details** link). Open a draft PR
-when you're not ready for review. For a page of this guide, **Edit this page**
-(top right) opens its source in your fork, ready for a pull request.
+To request a feature or report a problem, [open an issue][issues]; for a page of
+this guide, the **Create Issue** button at the top right opens one with the page
+prefilled.
+
+To change the theme or the guide: the Docsy repo is a [monorepo][], the theme in
+`theme/`, this guide in `docsy.dev/`. Fork it and open a pull request; every
+pull request gets a Netlify deploy preview (the `deploy/netlify` check's
+**Details** link). Open a draft PR when you're not ready for review. For a page
+of this guide, **Edit this page** (top right) opens its source in your fork,
+ready for a pull request.
 
 ## Previewing your changes locally
 
