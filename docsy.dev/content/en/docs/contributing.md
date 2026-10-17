@@ -44,16 +44,8 @@ ready for a pull request.
 
 Docsy is a theme, so it can't be served on its own. Test your changes through a
 site that uses them: the [example site][dex] against your local Docsy ([Develop
-against a local Docsy][dex-local]), or this guide, built from the same repo.
-
-To serve the guide, from a clone of your fork in a directory named `docsy`, with
-[Node.js][] and Git installed (npm provides Hugo and Dart Sass; on Windows, Git
-Bash's `bash` on your `PATH`), install and serve:
-
-```sh
-npm run install:safe
-npm run serve
-```
+against a local Docsy][dex-local]), or this guide, which the Docsy repo builds
+with its own theme ([Local build][]).
 
 ## Formatting and checks
 
@@ -80,8 +72,8 @@ For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [issues]: https://github.com/docsy/docsy/issues
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[Local build]: /project/build/git-repo/#local-build
 [monorepo]: /project/build/git-repo/#monorepo
-[Node.js]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 [style guide]: /project/style-guide/
 [test suites]: /project/about/maintainer-notes/#test-suites

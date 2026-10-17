@@ -9,12 +9,12 @@ description: >
 
 > [!NOTE]
 >
-> The [example site](example-site-as-template/)'s pinned npm dependencies
-> provide Hugo and Dart Sass, so if that's your starting point, skip those
-> sections: install only [Go](#install-go-language),
+> The [example site](example-site-as-template/)'s pinned npm dependencies, like
+> the Docsy repo's own, provide Hugo and Dart Sass, so if that's your starting
+> point, skip those sections: install only [Go](#install-go-language),
 > [Git](#install-git-vcs-client), and [Node.js](#install-nodejs). On Windows,
-> also ensure that Bash is on your `PATH`: the example site's npm scripts run
-> under Bash, which ships with [Git for Windows](https://gitforwindows.org/).
+> also ensure that Bash is on your `PATH`: the npm scripts run under Bash, which
+> ships with [Git for Windows](https://gitforwindows.org/).
 
 ## Install Hugo
 
