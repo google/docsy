@@ -4383,19 +4383,14 @@
     "when": "2026-09-02T08:07:02Z",
     "via": "lychee",
   },
-  "https://lfprojects.org/policies/": {
+  "https://lfprojects.org/": {
     "result": 200,
-    "when": "2026-10-06T01:08:54Z",
+    "when": "2026-10-14T17:53:12Z",
     "via": "lychee",
   },
   "https://lfprojects.org/policies/code-of-conduct/": {
     "result": 200,
     "when": "2026-10-06T01:08:54Z",
-    "via": "lychee",
-  },
-  "https://lfprojects.org/policies/privacy-policy/": {
-    "result": 200,
-    "when": "2026-10-06T10:13:24Z",
     "via": "lychee",
   },
   "https://llmstxt.org/": {
