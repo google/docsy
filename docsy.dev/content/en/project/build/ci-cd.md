@@ -31,20 +31,32 @@ Read more: [AFDocs config file format][afdocs-config].
 [docsy.dev/agent-docs.config.yml]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/agent-docs.config.yml
 
-## Prettier formatting
+## Formatting and lint checks
 
-We use [Prettier](https://prettier.io) to format Docsy and the website files
-using the following command:
-
-```sh
-npm run check:format
-```
-
-To fix formatting, run:
+[Prettier](https://prettier.io) formats Docsy and the website files, and
+Markdownlint lints the Markdown. To check, and to apply the fixes they can:
 
 ```sh
-npm run fix:format
+npm run check
+npm run fix
 ```
+
+CI runs `npm run test:full`: these checks, then the website and repo [test
+suites][].
+
+### Hugo shortcodes
+
+Prettier doesn't understand Hugo shortcodes, so wrap them:
+
+```go-html-template
+<!-- prettier-ignore-start -->
+{{</* tabpane */>}}
+...
+{{</* /tabpane */>}}
+<!-- prettier-ignore-end -->
+```
+
+For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
 
 ### Workaround for `i18n` files
 
@@ -73,3 +85,4 @@ and we'll be able to remove this hack.
 [docsy.dev/package.json]:
   https://github.com/docsy/docsy/blob/main/docsy.dev/package.json
 [Scorecard examples]: /docs/content/agent-support/#scorecard-examples
+[test suites]: /project/about/maintainer-notes/#test-suites

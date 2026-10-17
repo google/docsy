@@ -44,25 +44,11 @@ its own: test through the [example site][dex] against your local Docsy ([Develop
 against a local Docsy][dex-local]), or build this guide, which the repo builds
 with its own theme ([Local build][]).
 
-## Formatting and checks
-
-Before pushing, run `npm run check` (Prettier and Markdownlint); `npm run fix`
-applies the fixes it can. CI runs the full [test suites][]. Writing and
-formatting conventions: the [style guide][].
-
-Prettier doesn't understand Hugo shortcodes, so wrap them:
-
-```go-html-template
-<!-- prettier-ignore-start -->
-{{</* tabpane */>}}
-...
-{{</* /tabpane */>}}
-<!-- prettier-ignore-end -->
-```
-
-For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
+Before pushing, run the [checks][]; writing conventions are in the [style
+guide][].
 
 <!-- prettier-ignore-start -->
+[checks]: /project/build/ci-cd/#formatting-and-lint-checks
 [cncf-cla]: https://github.com/cncf/cla
 [dex]: https://github.com/docsy/docsy-example
 [dex-local]: https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy
@@ -73,5 +59,4 @@ For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
 [monorepo]: /project/build/git-repo/#monorepo
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 [style guide]: /project/style-guide/
-[test suites]: /project/about/maintainer-notes/#test-suites
 <!-- prettier-ignore-end -->
