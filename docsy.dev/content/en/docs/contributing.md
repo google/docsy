@@ -95,33 +95,11 @@ Docsy has a shortcut for you:
 
 ### Previewing your changes locally
 
-If you want to run your own local Hugo server to preview your changes as you
-work:
-
-1. Follow the instructions in [Getting started](get-started) to install Hugo and
-   any other tools you need.
-1. Fork the [Docsy](https://github.com/docsy/docsy) repo into your own project,
-   then create a local copy using `git clone`:
-
-   ```sh
-   git clone https://github.com/docsy/docsy.git
-   ```
-
-1. Change to the `docsy.dev` directory and run the following Hugo command to
-   build the site and start the Hugo server. Note that you need the `themesDir`
-   flag because the site files are inside the theme repo.
-
-   ```sh
-   cd docsy.dev
-   hugo server --themesDir ../..
-   ```
-
-   By default your site will be available at <http://localhost:1313/>. Now that
-   you're serving your site locally, Hugo will watch for changes to the content
-   and automatically refresh your site.
-
-1. Continue with the usual GitHub workflow to edit files, commit them, push the
-   changes up to your fork, and create a pull request.
+To preview with your own local Hugo server, fork the
+[Docsy repo](https://github.com/docsy/docsy), then clone and serve your fork
+following the README's [Build the user guide locally][] section. The site is
+served at <http://localhost:1313/> and refreshes as you edit. Commit, push to
+your fork, and open a pull request as usual.
 
 ### User guide formatting
 
@@ -160,6 +138,7 @@ about a specific page by clicking the **Create Issue** button in the top right
 hand corner of the page.
 
 <!-- prettier-ignore-start -->
+[Build the user guide locally]: /project/about/readme/#build-the-user-guide-locally
 [cncf-cla]: https://github.com/cncf/cla
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
