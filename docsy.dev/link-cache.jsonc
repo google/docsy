@@ -5555,11 +5555,6 @@
     "when": "2026-09-19T16:04:39Z",
     "via": "lychee",
   },
-  "https://www.docsy.dev/docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs": {
-    "result": 200,
-    "when": "2026-10-17T11:36:56Z",
-    "via": "lychee",
-  },
   "https://www.docsy.dev/docs/get-started/docsy-as-module/start-from-scratch/": {
     "result": 200,
     "when": "2026-09-19T16:04:41Z",

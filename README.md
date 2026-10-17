@@ -10,7 +10,7 @@ documentation sites. This [monorepo][] holds the theme and its user guide.
 Use an official [release][releases] ([support policy][official-support]); `main`
 is the development branch.
 
-- **Users**: [Get started][], [example project][], [sites built with
+- **Users**: [Get started][], [example site][], [sites built with
   Docsy][examples]
 - **Contributors**: [contributing guide][], [build the user guide
   locally][build-locally]
@@ -28,7 +28,7 @@ Thank you to all [contributors][]!
 [code of conduct]: https://lfprojects.org/policies/code-of-conduct/
 [contributing guide]: https://www.docsy.dev/docs/contributing/
 [contributors]: https://github.com/docsy/docsy/graphs/contributors
-[example project]: https://github.com/docsy/docsy-example
+[example site]: https://github.com/docsy/docsy-example
 [examples]: https://www.docsy.dev/examples/
 [Get started]: https://www.docsy.dev/docs/get-started/
 [Hugo]: https://gohugo.io
@@ -41,5 +41,3 @@ Thank you to all [contributors][]!
 [releases]: https://github.com/docsy/docsy/releases
 [Technical Charter]: https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf
 <!-- prettier-ignore-end -->
-
-<!-- cSpell:ignore docsy -->

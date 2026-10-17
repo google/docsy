@@ -8,7 +8,7 @@ linkTitle: Git repos and branches
 The [main Docsy repository][] is effectively a **monorepo** containing the
 Docsy:
 
-- **Theme** in the `theme/` directory
+- **Theme** in the `theme` directory
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
