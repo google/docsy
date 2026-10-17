@@ -108,10 +108,11 @@ Thank you to all past, present, and future [contributors][]!
 
 ## Licenses
 
-- Code: [Apache License 2.0](https://github.com/docsy/docsy/blob/main/LICENSE)
-- Documentation:
-  [Creative Commons Attribution 4.0](https://github.com/docsy/docsy/blob/main/LICENSE-DOCS)
+- Documentation: [CC-BY-4.0][]
+- Code: [Apache-2.0][]
 
+[Apache-2.0]: https://github.com/docsy/docsy/blob/main/LICENSE
+[CC-BY-4.0]: https://github.com/docsy/docsy/blob/main/LICENSE-DOCS
 [code of conduct]: https://lfprojects.org/policies/code-of-conduct/
 [contributing guide]: https://www.docsy.dev/docs/contributing/
 [contributors]: https://github.com/docsy/docsy/graphs/contributors
