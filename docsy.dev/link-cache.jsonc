@@ -924,6 +924,12 @@
     "when": "2026-09-17T23:13:26Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/LICENSE-DOCS": {
+    "result": 206,
+    "when": "2026-10-17T01:13:49Z",
+    "via": "manual",
+    "expires": "2026-10-17",
+  },
   "https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf": {
     "result": 200,
     "when": "2026-10-01T14:43:14Z",
