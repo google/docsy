@@ -5,12 +5,10 @@
 <!-- markdownlint-disable no-docsy-dev-external-urls -->
 
 Docsy, a [Linux Foundation][] project, is a [Hugo][] theme for technical
-documentation sites. This repo holds the [theme and its user guide][monorepo].
+documentation sites. This [monorepo][] holds the theme and its user guide.
 
-> [!IMPORTANT]
->
-> The `main` branch is under development and not officially supported; use
-> official Docsy [releases][] ([official support limits][official-support]).
+Use an official [release][releases] ([support policy][official-support]); `main`
+is the development branch.
 
 - **Users**: [Get started][], [example project][], [sites built with
   Docsy][examples]
@@ -20,7 +18,7 @@ documentation sites. This repo holds the [theme and its user guide][monorepo].
 - **Governance**: [Technical Charter][], [code of conduct][]
 - **Licenses**: code [Apache-2.0][], documentation [CC-BY-4.0][]
 
-Thank you to all past, present, and future [contributors][]!
+Thank you to all [contributors][]!
 
 [Apache-2.0]: https://github.com/docsy/docsy/blob/main/LICENSE
 [branch model]: https://www.docsy.dev/project/build/git-repo/#branch-model

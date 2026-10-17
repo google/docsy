@@ -95,21 +95,13 @@ Docsy has a shortcut for you:
 
 ### Previewing your changes locally
 
-To preview with your own local Hugo server, fork the
-[Docsy repo](https://github.com/docsy/docsy), clone your fork, and serve the
-user guide, which uses the theme from the same checkout. Install
-[Node.js](get-started/docsy-as-module/installation-prerequisites/#install-nodejs)
-and Git (npm provides Hugo and Dart Sass), then, from your clone:
+From a clone of your fork, with [Node.js][] and Git installed (npm provides Hugo
+and Dart Sass), install and serve:
 
 ```sh
 npm run install:safe
 npm run serve
 ```
-
-The site is served at <http://localhost:1313/> and refreshes as you edit. npm
-scripts run under Bash on every platform (`script-shell` pin in `.npmrc`): on
-Windows, make sure Git Bash's `bash` is on your `PATH`. Commit, push to your
-fork, and open a pull request as usual.
 
 ### User guide formatting
 
@@ -151,5 +143,6 @@ hand corner of the page.
 [cncf-cla]: https://github.com/cncf/cla
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[Node.js]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 <!-- prettier-ignore-end -->
