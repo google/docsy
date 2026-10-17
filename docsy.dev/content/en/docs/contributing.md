@@ -18,7 +18,7 @@ weight: 9
 
 > [!NB] Maintainers, see [Maintainer notes](/project/about/maintainer-notes/).
 
-## Contributing to Docsy
+## Ground rules
 
 - **Contributor License Agreement**: Docsy contributions require the [CNCF
   Contributor License Agreement][cncf-cla], enforced on every PR through
@@ -29,34 +29,31 @@ weight: 9
 - **Issues**: to request a feature or report a problem, [open an issue][issues].
   For a page of this guide, the **Create Issue** button at the top right opens
   one with the page prefilled.
-- **Previewing theme changes**: Docsy is a theme, so it can't be served on its
-  own. Test your changes through a site that uses them: the [example site][dex]
-  against your local Docsy ([Develop against a local Docsy][dex-local]), or this
-  guide, built from the same repo ([below](#previewing-your-changes-locally)).
 
-## Contributing to these docs
+## Making a change
 
-This guide's source is the [`docsy.dev/` directory][monorepo] of the Docsy repo.
-Every pull request gets a Netlify deploy preview (the `deploy/netlify` check's
-**Details** link); open a draft PR when you're not ready for review.
+The Docsy repo is a [monorepo][]: the theme in `theme/`, this guide in
+`docsy.dev/`. Fork it and open a pull request; every pull request gets a Netlify
+deploy preview (the `deploy/netlify` check's **Details** link). Open a draft PR
+when you're not ready for review. For a page of this guide, **Edit this page**
+(top right) opens its source in your fork, ready for a pull request.
 
-### Updating a single page
+## Previewing your changes locally
 
-**Edit this page** (top right) opens the page's source in your fork on GitHub,
-ready for a pull request.
+Docsy is a theme, so it can't be served on its own. Test your changes through a
+site that uses them: the [example site][dex] against your local Docsy ([Develop
+against a local Docsy][dex-local]), or this guide, built from the same repo.
 
-### Previewing your changes locally
-
-From a clone of your fork in a directory named `docsy`, with [Node.js][] and Git
-installed (npm provides Hugo and Dart Sass; on Windows, Git Bash's `bash` on
-your `PATH`), install and serve:
+To serve the guide, from a clone of your fork in a directory named `docsy`, with
+[Node.js][] and Git installed (npm provides Hugo and Dart Sass; on Windows, Git
+Bash's `bash` on your `PATH`), install and serve:
 
 ```sh
 npm run install:safe
 npm run serve
 ```
 
-### Formatting and checks
+## Formatting and checks
 
 Before pushing, run `npm run check` (Prettier and Markdownlint); `npm run fix`
 applies the fixes it can. CI runs the full [test suites][]. Writing and
