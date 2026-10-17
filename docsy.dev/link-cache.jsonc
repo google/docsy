@@ -864,6 +864,11 @@
     "when": "2026-09-17T23:13:25Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy": {
+    "result": 200,
+    "when": "2026-10-17T14:56:02Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy-example/blob/main/hugo.yaml": {
     "result": 200,
     "when": "2026-09-17T23:13:26Z",

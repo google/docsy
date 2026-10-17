@@ -1,12 +1,11 @@
 ---
 title: Contribution guidelines
-description: How to contribute to Docsy
+description: >-
+  Issues, pull requests, previews, and formatting checks, for the Docsy theme
+  and this guide
 aliases: [contribution-guidelines]
 weight: 9
 ---
-
-Docsy is an open source project and we love getting patches and contributions to
-make Docsy and its docs even better.
 
 > [!CAUTION] A note for **students** and **prospective mentees**
 >
@@ -17,7 +16,7 @@ make Docsy and its docs even better.
 > - We may reject PRs with content (e.g., AI-generated) that does not meet our
 >   quality standards.
 
-> [!NB] Maintainers, see [Maintainer notes](/project/about/contributing/).
+> [!NB] Maintainers, see [Maintainer notes](/project/about/maintainer-notes/).
 
 ## Contributing to Docsy
 
@@ -26,97 +25,57 @@ make Docsy and its docs even better.
 Docsy contributions require the [CNCF Contributor License Agreement][cncf-cla],
 enforced on every PR through [EasyCLA][].
 
-### Code reviews
-
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
-
-### Previewing your changes
-
-As Docsy is a theme rather than a site, you can't serve the theme directly to
-check your changes work. Instead use your updated local theme in a local copy of
-the Docsy example site (copy or make your changes in the `themes/docsy`
-directory) and [preview](/docs/deployment/) from there. Alternatively, clone the
-[Docsy theme repo](https://github.com/docsy/docsy) and test your changes in a
-local copy of this site, as described [below](#previewing-your-changes-locally).
-
 ### Code of conduct
 
 This project follows the [LF Projects Code of Conduct][].
 
+### Code reviews
+
+All submissions, including those from project members, are reviewed as [pull
+requests][pr].
+
 ### Creating issues
 
-Alternatively, if there's something you'd like to see in Docsy (or if you've
-found something that isn't working the way you'd expect), but you're not sure
-how to fix it yourself, please create an
-[issue](https://github.com/docsy/docsy/issues).
+To request a feature or report a problem, [open an issue][issues]. For a page of
+this guide, the **Create Issue** button at the top right opens one with the page
+prefilled.
+
+### Previewing your changes
+
+Docsy is a theme, so it can't be served on its own. Test your changes through a
+site that uses them: the [example site][dex] against your local Docsy ([Develop
+against a local Docsy][dex-local]), or this guide, built from the same repo
+([below](#previewing-your-changes-locally)).
 
 ## Contributing to these docs
 
-This user guide is, like our example site, a Docsy site that uses the Hugo
-static site generator. We welcome updates to the docs!
-
-We use [Netlify](https://www.netlify.com/) to manage the deployment of the site
-and provide previews of doc updates. The instructions here assume you're
-familiar with basic GitHub workflows.
-
-### Quick start with Netlify
-
-1. Fork the [Docsy repo](https://github.com/docsy/docsy) on GitHub: this site's
-   files live in the `docsy.dev` subdirectory.
-1. Make your changes and send a [pull request][pr] (PR).
-1. If you're not yet ready for a review, add "WIP" to the PR name to indicate
-   it's a work in progress. (**Don't** add the Hugo property "draft = true" to
-   the page front matter, because that prevents the auto-deployment of the
-   content preview described in the next point.)
-1. Wait for the automated PR workflow to do some checks. When it's ready, you
-   should see a comment like this: **deploy/netlify — Deploy preview ready!**
-1. Click **Details** to the right of "Deploy preview ready" to see a preview of
-   your updates.
-1. Continue updating your doc and pushing your changes until you're happy with
-   the content.
-1. When you're ready for a review, add a comment to the PR, and remove any "WIP"
-   markers.
+This guide's source is the [`docsy.dev/` directory][monorepo] of the Docsy repo.
+Every pull request gets a Netlify deploy preview (the `deploy/netlify` check's
+**Details** link); open a draft PR when you're not ready for review.
 
 ### Updating a single page
 
-If you've just spotted something you'd like to change while using the docs,
-Docsy has a shortcut for you:
-
-1. Click **Edit this page** in the top right hand corner of the page.
-1. If you don't already have an up to date fork of the project repo, you are
-   prompted to get one - click **Fork this repository and propose changes** or
-   **Update your Fork** to get an up to date version of the project to edit. The
-   appropriate page in your fork is displayed in edit mode.
-1. Follow the rest of the [Quick start with Netlify](#quick-start-with-netlify)
-   process above to make and preview your changes.
+**Edit this page** (top right) opens the page's source in your fork on GitHub,
+ready for a pull request.
 
 ### Previewing your changes locally
 
 From a clone of your fork in a directory named `docsy`, with [Node.js][] and Git
-installed (npm provides Hugo and Dart Sass), install and serve:
+installed (npm provides Hugo and Dart Sass; on Windows, Git Bash's `bash` on
+your `PATH`), install and serve:
 
 ```sh
 npm run install:safe
 npm run serve
 ```
 
-### User guide formatting
+### Formatting and checks
 
-We use [Prettier](https://prettier.io) to format the markdown source of the User
-Guide. To check the formatting of your documentation changes, use the following
-command:
+Before pushing, run `npm run check` (Prettier and Markdownlint); `npm run fix`
+applies the fixes it can. CI runs the full [test suites][]. Writing and
+formatting conventions: the [style guide][].
 
-```bash
-npm run check:format
-```
-
-To automatically fix formatting issues, run `npm run fix:format`.
-
-Prettier doesn't currently understand Hugo template language directives, so you
-might need to bracket such directives using the following ignore directives:
+Prettier doesn't understand Hugo shortcodes, so wrap them:
 
 ```go-html-template
 <!-- prettier-ignore-start -->
@@ -126,23 +85,18 @@ might need to bracket such directives using the following ignore directives:
 <!-- prettier-ignore-end -->
 ```
 
-You can use these ignore directives to surround any markdown that you'd like
-Prettier to ignore. If the region is a contiguous block of text, then you can
-omit the end directive and replace the start directive with
-`prettier-ignore-start`.
-
-### Creating an issue
-
-If there's something you'd like to see in the docs, but you're not sure how to
-fix it yourself, please create an issue in
-[this repository](https://github.com/docsy/docsy). You can also create an issue
-about a specific page by clicking the **Create Issue** button in the top right
-hand corner of the page.
+For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
 
 <!-- prettier-ignore-start -->
 [cncf-cla]: https://github.com/cncf/cla
+[dex]: https://github.com/docsy/docsy-example
+[dex-local]: https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
+[issues]: https://github.com/docsy/docsy/issues
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[monorepo]: /project/build/git-repo/#monorepo
 [Node.js]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+[style guide]: /project/style-guide/
+[test suites]: /project/about/maintainer-notes/#test-suites
 <!-- prettier-ignore-end -->
