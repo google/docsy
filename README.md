@@ -108,8 +108,8 @@ Thank you to all past, present, and future [contributors][]!
 
 ## Licenses
 
-- Documentation: [CC-BY-4.0][]
 - Code: [Apache-2.0][]
+- Documentation: [CC-BY-4.0][]
 
 [Apache-2.0]: https://github.com/docsy/docsy/blob/main/LICENSE
 [CC-BY-4.0]: https://github.com/docsy/docsy/blob/main/LICENSE-DOCS
