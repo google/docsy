@@ -20,32 +20,19 @@ weight: 9
 
 ## Contributing to Docsy
 
-### Contributor License Agreement
-
-Docsy contributions require the [CNCF Contributor License Agreement][cncf-cla],
-enforced on every PR through [EasyCLA][].
-
-### Code of conduct
-
-This project follows the [LF Projects Code of Conduct][].
-
-### Code reviews
-
-All submissions, including those from project members, are reviewed as [pull
-requests][pr].
-
-### Creating issues
-
-To request a feature or report a problem, [open an issue][issues]. For a page of
-this guide, the **Create Issue** button at the top right opens one with the page
-prefilled.
-
-### Previewing your changes
-
-Docsy is a theme, so it can't be served on its own. Test your changes through a
-site that uses them: the [example site][dex] against your local Docsy ([Develop
-against a local Docsy][dex-local]), or this guide, built from the same repo
-([below](#previewing-your-changes-locally)).
+- **Contributor License Agreement**: Docsy contributions require the [CNCF
+  Contributor License Agreement][cncf-cla], enforced on every PR through
+  [EasyCLA][].
+- **Code of conduct**: this project follows the [LF Projects Code of Conduct][].
+- **Code reviews**: all submissions, including those from project members, are
+  reviewed as [pull requests][pr].
+- **Issues**: to request a feature or report a problem, [open an issue][issues].
+  For a page of this guide, the **Create Issue** button at the top right opens
+  one with the page prefilled.
+- **Previewing theme changes**: Docsy is a theme, so it can't be served on its
+  own. Test your changes through a site that uses them: the [example site][dex]
+  against your local Docsy ([Develop against a local Docsy][dex-local]), or this
+  guide, built from the same repo ([below](#previewing-your-changes-locally)).
 
 ## Contributing to these docs
 
