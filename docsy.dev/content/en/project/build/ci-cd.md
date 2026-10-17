@@ -13,8 +13,8 @@ locally:
 To generate a fresh scorecard, run each of these commands in separate terminals:
 
 ```sh
-npm run serve             # From one terminal
-npm run check:afdocs:dev  # From another terminal
+npm run serve
+npm run check:afdocs:dev
 ```
 
 The latter command saves the generated scorecard to
@@ -56,7 +56,9 @@ Prettier doesn't understand Hugo shortcodes, so wrap them:
 <!-- prettier-ignore-end -->
 ```
 
-For a single block, `<!-- prettier-ignore -->` on the line before it suffices.
+A one-paragraph shortcode needs only `<!-- prettier-ignore -->` on the line
+before it; the directive protects a single Markdown node, so a body that spans
+blank lines needs the pair.
 
 ### Workaround for `i18n` files
 
@@ -80,9 +82,10 @@ community_guideline: >-
 This ensures that the blank line is preserved. Hopefully Prettier will be fixed
 and we'll be able to remove this hack.
 
+<!-- prettier-ignore-start -->
 [#15528]: https://github.com/prettier/prettier/issues/15528
 [#15720]: https://github.com/prettier/prettier/issues/15720
-[docsy.dev/package.json]:
-  https://github.com/docsy/docsy/blob/main/docsy.dev/package.json
+[docsy.dev/package.json]: https://github.com/docsy/docsy/blob/main/docsy.dev/package.json
 [Scorecard examples]: /docs/content/agent-support/#scorecard-examples
 [test suites]: /project/about/maintainer-notes/#test-suites
+<!-- prettier-ignore-end -->

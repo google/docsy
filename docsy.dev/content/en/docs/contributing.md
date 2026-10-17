@@ -1,8 +1,8 @@
 ---
 title: Contribution guidelines
 description: >-
-  Issues, pull requests, previews, and formatting checks, for the Docsy theme
-  and this guide
+  Contributor agreements, pull requests, and previews for theme and
+  documentation changes
 aliases: [contribution-guidelines]
 weight: 9
 ---
@@ -30,8 +30,8 @@ weight: 9
 ## Making a change
 
 To request a feature or report a problem, [open an issue][issues]; for a page of
-this guide, the **Create Issue** button at the top right opens one with the page
-prefilled.
+this guide, **Create documentation issue** at the top right opens one titled
+after the page.
 
 To change the theme or the guide: the Docsy repo is a [monorepo][], the theme in
 `theme/`, this guide in `docsy.dev/`. Fork it and open a pull request, as a
@@ -39,10 +39,10 @@ draft when you're not ready for review. For a page of this guide, **Edit this
 page** (top right) opens its source in your fork, ready for a pull request.
 
 To preview a change: every pull request gets a Netlify deploy preview (the
-`deploy/netlify` check's **Details** link). Locally, a theme can't be served on
-its own: test through the [example site][dex] against your local Docsy ([Develop
-against a local Docsy][dex-local]), or build this guide, which the repo builds
-with its own theme ([Local build][]).
+Netlify deploy-preview check's **Details** link). Locally, a theme can't be
+served on its own: test through the [example site][dex] against your local Docsy
+([Develop against a local Docsy][dex-local]), or build this guide, which the
+repo builds with its own theme ([Local build][]).
 
 Before pushing, run the [checks][]; writing conventions are in the [style
 guide][].
