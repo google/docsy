@@ -1894,6 +1894,11 @@
     "when": "2026-10-03T15:29:48Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/issues/2866": {
+    "result": 200,
+    "when": "2026-10-17T20:04:45Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/issues/331": {
     "result": 200,
     "when": "2026-09-18T01:19:19Z",
@@ -4526,7 +4531,7 @@
     "when": "2026-10-08T10:42:02Z",
     "via": "lychee",
   },
-  // Live when this PR merges: the main branch deploy renders drafts.
+  // Live once on main: the main-branch deploy renders drafts.
   "https://main--docsydocs.netlify.app/blog/2026/0.19.0/": {
     "result": 206,
     "when": "2026-10-08T10:07:11Z",
