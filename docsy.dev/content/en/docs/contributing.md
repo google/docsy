@@ -95,8 +95,8 @@ Docsy has a shortcut for you:
 
 ### Previewing your changes locally
 
-From a clone of your fork, with [Node.js][] and Git installed (npm provides Hugo
-and Dart Sass), install and serve:
+From a clone of your fork in a directory named `docsy`, with [Node.js][] and Git
+installed (npm provides Hugo and Dart Sass), install and serve:
 
 ```sh
 npm run install:safe

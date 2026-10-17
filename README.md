@@ -20,10 +20,10 @@ is the development branch.
 
 Thank you to all [contributors][]!
 
+<!-- prettier-ignore-start -->
 [Apache-2.0]: https://github.com/docsy/docsy/blob/main/LICENSE
 [branch model]: https://www.docsy.dev/project/build/git-repo/#branch-model
-[build-locally]:
-  https://www.docsy.dev/docs/contributing/#previewing-your-changes-locally
+[build-locally]: https://www.docsy.dev/docs/contributing/#previewing-your-changes-locally
 [CC-BY-4.0]: https://github.com/docsy/docsy/blob/main/LICENSE-DOCS
 [code of conduct]: https://lfprojects.org/policies/code-of-conduct/
 [contributing guide]: https://www.docsy.dev/docs/contributing/
@@ -37,10 +37,9 @@ Thank you to all [contributors][]!
 [monorepo]: https://www.docsy.dev/project/build/git-repo/#monorepo
 [npm-badge]: https://img.shields.io/npm/v/%40docsy%2Ftheme
 [npm-package]: https://www.npmjs.com/package/@docsy/theme
-[official-support]:
-  https://www.docsy.dev/project/about/changelog/#official-support
+[official-support]: https://www.docsy.dev/project/about/changelog/#official-support
 [releases]: https://github.com/docsy/docsy/releases
-[Technical Charter]:
-  https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf
+[Technical Charter]: https://github.com/docsy/docsy/blob/main/docsy-technical-charter.pdf
+<!-- prettier-ignore-end -->
 
 <!-- cSpell:ignore docsy -->
