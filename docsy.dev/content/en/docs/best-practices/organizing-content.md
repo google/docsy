@@ -36,8 +36,9 @@ you like this simpler structure better.
 > If you want to copy this guide, be aware that its
 > [source files](https://github.com/docsy/docsy/tree/main/docsy.dev) are
 > _inside_ the Docsy theme repo, and so it doesn't have its own `themes/`
-> directory: instead, we run `hugo server --themesDir ../..` to use Docsy from
-> its parent directory. You may want to either copy the site and
+> directory: it uses Docsy from its parent directory
+> ([Local build](/project/build/git-repo/#local-build)). You may want to either
+> copy the site and
 > [add a `themes/` directory with Docsy](/docs/get-started/other-options/#option-2-clone-the-docsy-theme),
 > or just copy the `docs/` folder into your existing site's content root.
 

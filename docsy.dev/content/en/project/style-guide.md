@@ -7,7 +7,8 @@ description: Writing and formatting conventions for Docsy project documentation.
 
 This project follows
 [Google's developer documentation style guide](https://developers.google.com/style/),
-and uses Prettier and Markdownlint to enforce basic formatting rules.
+and uses Prettier and Markdownlint to enforce basic formatting rules
+([Formatting and lint checks](/project/build/ci-cd/#formatting-and-lint-checks)).
 
 ## Front matter
 

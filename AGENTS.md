@@ -2,10 +2,10 @@
 
 The website content tree `docsy.dev/content/en/project/` ([project][]) is the
 authoritative source for project structure, branching model, CI/CD, and release
-process; note in particular [git-info.md][].
+process; note in particular [git-repo.md][].
 
 [project]: docsy.dev/content/en/project/_index.md
-[git-info.md]: docsy.dev/content/en/project/build/git-repo.md
+[git-repo.md]: docsy.dev/content/en/project/build/git-repo.md
 
 ## Code, test, and documentation conventions
 
@@ -69,8 +69,8 @@ The repo root orchestrates two npm workspaces:
 
 Releases publish a nested module tag `theme/vX.Y.Z` alongside `vX.Y.Z`.
 
-The checkout directory must be named `docsy`, or site scripts run through the
-`wt` helper; see [Local build][].
+The checkout directory must be named `docsy`; from a worktree or other checkout,
+run site scripts as `npm run wt -- test`. For details, see [Local build][].
 
 [Local build]: docsy.dev/content/en/project/build/git-repo.md#local-build
 

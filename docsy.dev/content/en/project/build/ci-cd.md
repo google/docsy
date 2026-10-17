@@ -36,12 +36,12 @@ npm run check
 npm run fix
 ```
 
-CI runs `npm run test:full`: these checks, then the website and repo [test
-suites][].
+CI runs these checks and the [test suites][].
 
 ### Hugo shortcodes
 
-Prettier reformats the body of a paired Hugo shortcode, so wrap it:
+Prettier formats a paired shortcode's body as Markdown. When the body isn't
+Markdown, such as a `tabpane`'s code, wrap the shortcode:
 
 ```go-html-template
 <!-- prettier-ignore-start -->

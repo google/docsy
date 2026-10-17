@@ -23,39 +23,36 @@ weight: 9
 ## Before you start
 
 - **Contributor License Agreement**: Docsy contributions require the [CNCF
-  Contributor License Agreement][cncf-cla], enforced on every PR through
-  [EasyCLA][].
+  CLA][cncf-cla], enforced on every PR through [EasyCLA][].
 - **Code of conduct**: this project follows the [LF Projects Code of Conduct][].
 - **Code reviews**: all submissions, including those from project members, are
   reviewed as [pull requests][pr].
 
-## Making a change
+## Make a change
 
-To request a feature or report a problem, [open an issue][issues]; for a page of
+To request a feature or report a problem, [open an issue][issues]. For a page of
 this guide, **Create documentation issue** at the top right opens one titled
 after the page.
 
 The Docsy repo is a [monorepo][], with the theme in `theme/` and this guide in
 `docsy.dev/`. Fork it and open a pull request, as a draft when you're not ready
-for review. For a page of this guide, **Edit this page** at the top right opens
-its source in your fork, ready for a pull request.
+for review. For a page of this guide, **Edit this page** opens its source in
+your fork, ready for a pull request.
 
-Every pull request gets a Netlify deploy preview (the check's **Details** link).
-Locally, a theme can't be served on its own: test through the [example
-site][dex] [against your local Docsy][dex-local], or [build this guide
-locally][Local build], which uses the repo's own theme.
+Every pull request gets a Netlify deploy preview (the **Details** link of its
+deploy-preview check). A theme can't be served on its own: locally, [build this
+guide][Local build], which uses the repo's own theme, or test a theme change
+through the example site [against your local Docsy][local-docsy].
 
-Before pushing, run the [checks][]; writing conventions are in the [style
-guide][].
+Follow the [style guide][], and run the [checks][] before pushing.
 
 <!-- prettier-ignore-start -->
 [checks]: /project/build/ci-cd/#formatting-and-lint-checks
 [cncf-cla]: https://github.com/cncf/cla
-[dex]: https://github.com/docsy/docsy-example
-[dex-local]: https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [issues]: https://github.com/docsy/docsy/issues
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[local-docsy]: https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy
 [Local build]: /project/build/git-repo/#local-build
 [monorepo]: /project/build/git-repo/#monorepo
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
