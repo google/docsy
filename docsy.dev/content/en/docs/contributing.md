@@ -41,7 +41,7 @@ your fork, ready for a pull request.
 
 Every pull request gets a Netlify deploy preview (the **Details** link of its
 deploy-preview check). A theme can't be served on its own: locally, [build this
-guide][Local build], which uses the repo's own theme, or test a theme change
+guide][local-build], which uses the repo's own theme, or test a theme change
 through the example site [against your local Docsy][local-docsy].
 
 Follow the [style guide][], and run the [checks][] before pushing.
@@ -52,9 +52,9 @@ Follow the [style guide][], and run the [checks][] before pushing.
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [issues]: https://github.com/docsy/docsy/issues
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[local-build]: /project/build/git-repo/#local-build
 [local-docsy]: https://github.com/docsy/docsy-example/blob/main/CONTRIBUTING.md#develop-against-a-local-docsy
-[Local build]: /project/build/git-repo/#local-build
 [monorepo]: /project/build/git-repo/#monorepo
-[PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+[pr]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 [style guide]: /project/style-guide/
 <!-- prettier-ignore-end -->

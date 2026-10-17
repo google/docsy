@@ -1,14 +1,12 @@
 ---
 title: Style guide
 description: Writing and formatting conventions for Docsy project documentation.
-# Maintainer note: this is partly an experiment to see to what degree
-# agents can help support enforcing this style guide.
 ---
 
 This project follows
 [Google's developer documentation style guide](https://developers.google.com/style/),
-and uses Prettier and Markdownlint to enforce basic formatting rules
-([Formatting and lint checks](/project/build/ci-cd/#formatting-and-lint-checks)).
+and uses Prettier and Markdownlint to [enforce basic formatting
+rules][formatting-and-lint-checks].
 
 ## Front matter
 
@@ -51,6 +49,7 @@ and uses Prettier and Markdownlint to enforce basic formatting rules
 [agent-support]: /docs/content/agent-support/
 [changelog]: /project/about/changelog/
 [cl-style-guide]: /project/about/changelog/#style-guide
+[formatting-and-lint-checks]: /project/build/ci-cd/#formatting-and-lint-checks
 [present tense]: https://developers.google.com/style/tense
 [release]: <{{% _param baseURL %}}/tags/release/>
 [upgrade]: <{{% _param baseURL %}}/tags/upgrade/>
