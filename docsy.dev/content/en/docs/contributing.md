@@ -95,33 +95,13 @@ Docsy has a shortcut for you:
 
 ### Previewing your changes locally
 
-If you want to run your own local Hugo server to preview your changes as you
-work:
+From a clone of your fork in a directory named `docsy`, with [Node.js][] and Git
+installed (npm provides Hugo and Dart Sass), install and serve:
 
-1. Follow the instructions in [Getting started](get-started) to install Hugo and
-   any other tools you need.
-1. Fork the [Docsy](https://github.com/docsy/docsy) repo into your own project,
-   then create a local copy using `git clone`:
-
-   ```sh
-   git clone https://github.com/docsy/docsy.git
-   ```
-
-1. Change to the `docsy.dev` directory and run the following Hugo command to
-   build the site and start the Hugo server. Note that you need the `themesDir`
-   flag because the site files are inside the theme repo.
-
-   ```sh
-   cd docsy.dev
-   hugo server --themesDir ../..
-   ```
-
-   By default your site will be available at <http://localhost:1313/>. Now that
-   you're serving your site locally, Hugo will watch for changes to the content
-   and automatically refresh your site.
-
-1. Continue with the usual GitHub workflow to edit files, commit them, push the
-   changes up to your fork, and create a pull request.
+```sh
+npm run install:safe
+npm run serve
+```
 
 ### User guide formatting
 
@@ -163,5 +143,6 @@ hand corner of the page.
 [cncf-cla]: https://github.com/cncf/cla
 [EasyCLA]: https://docs.linuxfoundation.org/lfx/easycla/v2-current/contributors
 [LF Projects Code of Conduct]: https://lfprojects.org/policies/code-of-conduct/
+[Node.js]: /docs/get-started/docsy-as-module/installation-prerequisites/#install-nodejs
 [PR]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 <!-- prettier-ignore-end -->
