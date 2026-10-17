@@ -34,17 +34,14 @@ this guide, the **Create Issue** button at the top right opens one with the page
 prefilled.
 
 To change the theme or the guide: the Docsy repo is a [monorepo][], the theme in
-`theme/`, this guide in `docsy.dev/`. Fork it and open a pull request; every
-pull request gets a Netlify deploy preview (the `deploy/netlify` check's
-**Details** link). Open a draft PR when you're not ready for review. For a page
-of this guide, **Edit this page** (top right) opens its source in your fork,
-ready for a pull request.
+`theme/`, this guide in `docsy.dev/`. Fork it and open a pull request, as a
+draft when you're not ready for review. For a page of this guide, **Edit this
+page** (top right) opens its source in your fork, ready for a pull request.
 
-## Previewing your changes locally
-
-Docsy is a theme, so it can't be served on its own. Test your changes through a
-site that uses them: the [example site][dex] against your local Docsy ([Develop
-against a local Docsy][dex-local]), or this guide, which the Docsy repo builds
+To preview a change: every pull request gets a Netlify deploy preview (the
+`deploy/netlify` check's **Details** link). Locally, a theme can't be served on
+its own: test through the [example site][dex] against your local Docsy ([Develop
+against a local Docsy][dex-local]), or build this guide, which the repo builds
 with its own theme ([Local build][]).
 
 ## Formatting and checks
