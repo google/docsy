@@ -12,6 +12,9 @@ Docsy:
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
+The main Docsy example site is [Goldydocs][], located in the [Docsy example site
+repository][].
+
 ### Local build
 
 Site builds resolve the theme through the checkout's parent directory
@@ -21,16 +24,13 @@ example), either run npm scripts through the `wt` helper (`npm run wt -- test`),
 or set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where _`DIR_NAME`_ is the checkout's
 directory name.
 
-With [Node.js and Git installed][prereqs] (npm provides Hugo and Dart Sass),
-install and serve the website from the checkout root:
+With the [prerequisites][prereqs] installed, install and serve the website from
+the checkout root:
 
 ```sh
 npm run install:safe
 npm run serve
 ```
-
-The main Docsy example site is [Goldydocs][], located in the [Docsy example site
-repository][].
 
 ## Branch model
 

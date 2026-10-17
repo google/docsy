@@ -591,7 +591,7 @@ If not adjust accordingly.
       release, and `release` for patch releases.
 
       ```sh
-      BASE=main # or release for patch releases
+      BASE=main
       ```
 
     - Commit any changes accumulated from the previous steps using this title:

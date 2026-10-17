@@ -16,6 +16,8 @@ weight: 9
 > - We may reject PRs with content (e.g., AI-generated) that does not meet our
 >   quality standards.
 
+<!-- markdownlint-disable-next-line no-blanks-blockquote -->
+
 > [!NB] Maintainers, see [Maintainer notes](/project/about/maintainer-notes/).
 
 ## Before you start
@@ -33,16 +35,15 @@ To request a feature or report a problem, [open an issue][issues]; for a page of
 this guide, **Create documentation issue** at the top right opens one titled
 after the page.
 
-To change the theme or the guide: the Docsy repo is a [monorepo][], the theme in
-`theme/`, this guide in `docsy.dev/`. Fork it and open a pull request, as a
-draft when you're not ready for review. For a page of this guide, **Edit this
-page** (top right) opens its source in your fork, ready for a pull request.
+The Docsy repo is a [monorepo][], with the theme in `theme/` and this guide in
+`docsy.dev/`. Fork it and open a pull request, as a draft when you're not ready
+for review. For a page of this guide, **Edit this page** at the top right opens
+its source in your fork, ready for a pull request.
 
-To preview a change: every pull request gets a Netlify deploy preview (the
-Netlify deploy-preview check's **Details** link). Locally, a theme can't be
-served on its own: test through the [example site][dex] against your local Docsy
-([Develop against a local Docsy][dex-local]), or build this guide, which the
-repo builds with its own theme ([Local build][]).
+Every pull request gets a Netlify deploy preview (the check's **Details** link).
+Locally, a theme can't be served on its own: test through the [example
+site][dex] [against your local Docsy][dex-local], or [build this guide
+locally][Local build], which uses the repo's own theme.
 
 Before pushing, run the [checks][]; writing conventions are in the [style
 guide][].

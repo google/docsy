@@ -26,15 +26,10 @@ pipeline. It needs to be run manually.
 
 Read more: [AFDocs config file format][afdocs-config].
 
-[AFDocs]: https://afdocs.dev/
-[afdocs-config]: https://afdocs.dev/reference/config-file
-[docsy.dev/agent-docs.config.yml]:
-  https://github.com/docsy/docsy/blob/main/docsy.dev/agent-docs.config.yml
-
 ## Formatting and lint checks
 
-[Prettier](https://prettier.io) formats Docsy and the website files, and
-Markdownlint lints the Markdown. To check, and to apply the fixes they can:
+[Prettier][] formats Docsy and the website files, and Markdownlint lints the
+Markdown. To run the checks, or to apply automatic fixes:
 
 ```sh
 npm run check
@@ -46,7 +41,7 @@ suites][].
 
 ### Hugo shortcodes
 
-Prettier doesn't understand Hugo shortcodes, so wrap them:
+Prettier reformats the body of a paired Hugo shortcode, so wrap it:
 
 ```go-html-template
 <!-- prettier-ignore-start -->
@@ -55,10 +50,6 @@ Prettier doesn't understand Hugo shortcodes, so wrap them:
 {{</* /tabpane */>}}
 <!-- prettier-ignore-end -->
 ```
-
-A one-paragraph shortcode needs only `<!-- prettier-ignore -->` on the line
-before it; the directive protects a single Markdown node, so a body that spans
-blank lines needs the pair.
 
 ### Workaround for `i18n` files
 
@@ -85,7 +76,11 @@ and we'll be able to remove this hack.
 <!-- prettier-ignore-start -->
 [#15528]: https://github.com/prettier/prettier/issues/15528
 [#15720]: https://github.com/prettier/prettier/issues/15720
+[AFDocs]: https://afdocs.dev/
+[afdocs-config]: https://afdocs.dev/reference/config-file
+[docsy.dev/agent-docs.config.yml]: https://github.com/docsy/docsy/blob/main/docsy.dev/agent-docs.config.yml
 [docsy.dev/package.json]: https://github.com/docsy/docsy/blob/main/docsy.dev/package.json
+[Prettier]: https://prettier.io
 [Scorecard examples]: /docs/content/agent-support/#scorecard-examples
 [test suites]: /project/about/maintainer-notes/#test-suites
 <!-- prettier-ignore-end -->
