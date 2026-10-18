@@ -231,3 +231,31 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
     assert.ok(full.includes(href), `docs-landing left-nav covers ${href}`);
   }
 });
+
+// The donor is the home's HTML render, and the placeholders name that render
+// whatever format they are emitted from: a site that makes `print`
+// permalinkable would otherwise see its print pages name `/_print/` as donor.
+test('shared mode placeholders name the home HTML render even when another home format is permalinkable', () => {
+  const r = buildSite('ccr-print-permalinkable', {
+    files,
+    extraConfig: [
+      'outputFormats:',
+      '  print:',
+      '    { baseName: index, mediaType: text/html, path: _print, permalinkable: true }',
+      'outputs:',
+      '  home: [HTML, RSS, print]',
+      '  section: [HTML, RSS, print]',
+      '',
+    ].join('\n'),
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+  const donor =
+    /class="td-chrome-placeholder" data-chrome-donor="\/" data-chrome-region="navbar"/;
+  for (const rel of ['_print/index.html', '_print/docs/index.html']) {
+    const h = r.publicFile(rel);
+    assert.ok(!has.navbar(h), `navbar absent on the print render ${rel}`);
+    assert.ok(donor.test(h), `${rel} placeholder names the home HTML render`);
+  }
+  assert.ok(has.navbar(r.publicFile('index.html')), 'navbar kept on the home');
+});
