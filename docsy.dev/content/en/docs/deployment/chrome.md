@@ -39,9 +39,9 @@ consumes the output:
 
 ## What `shared` mode keeps reachable
 
-In `shared` mode, each region stays on exactly one page per locale &mdash; its
-_donor page_, which the browser restores the others from &mdash; so every chrome
-link stays reachable without JavaScript:
+In `shared` mode, each region stays on exactly one page per locale (its _donor
+page_, from which the browser restores the others), so every chrome link stays
+reachable without JavaScript:
 
 - **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
   or the docs landing on a doc-rooted site). Their links are config-defined and
@@ -68,10 +68,14 @@ link.
 > pages' chrome. Keep `full` for production, and run full-site link checks as
 > well, even if less often.
 >
-> Two known cases:
+> Three known cases:
 >
 > - A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
 >   renders per-page links that the single kept navbar won't cover yet.
+> - On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
+>   active on pages no other menu entry covers (its URL, `/`, prefixes every
+>   path); a full build marks none. Tracked with the other shared-chrome
+>   follow-ups in [#2689][].
 > - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right
 >   links and active state, but its re-rooted subtree can differ structurally
 >   from a full build (an extra wrapper element, deeper `ul` nesting). The
@@ -111,8 +115,10 @@ your link checker against the generated `public/` output as usual: a `shared`
 build needs no checker-specific configuration.
 
 <!-- prettier-ignore-start -->
+[#2689]: https://github.com/docsy/docsy/issues/2689
 [app-shell]: https://developer.chrome.com/blog/app-shell
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
+[doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [mpa]: https://web.dev/learn/pwa/architecture/

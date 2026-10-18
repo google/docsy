@@ -26,7 +26,8 @@
   {{ else -}}
     {{/* The root page's HTML render only: the HTML format is the current one when
       it is among the page's formats but not its alternatives (not
-      outputformat.html, which misreports pages that have an LLMS output). */ -}}
+      _partials/outputformat.html, which misreports pages that have an LLMS
+      output). */ -}}
     {{ $html := and ($p.OutputFormats.Get "html") (not ($p.AlternativeOutputFormats.Get "html")) -}}
     {{ $render = and $html ($p.Eq (partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink)) -}}
   {{ end -}}

@@ -1850,6 +1850,11 @@
     "when": "2026-09-18T01:19:10Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/issues/2689": {
+    "result": 200,
+    "when": "2026-10-18T22:21:07Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/issues/2691": {
     "result": 200,
     "when": "2026-09-18T01:19:17Z",
@@ -3008,6 +3013,11 @@
   "https://github.com/docsy/docsy/pull/2857": {
     "result": 200,
     "when": "2026-10-06T22:46:59Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/pull/2888": {
+    "result": 200,
+    "when": "2026-10-18T22:21:08Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/pull/941": {
@@ -4844,11 +4854,12 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
+  // Live once on main (#2888).
   "https://main--docsydocs.netlify.app/project/design/root-page/": {
     "result": 206,
     "when": "2026-10-18T01:00:58Z",
     "via": "manual",
-    "expires": "2026-10-18",
+    "expires": "2026-10-25",
   },
   "https://main--docsydocs.netlify.app/project/design/script-loading/": {
     "result": 200,

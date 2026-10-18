@@ -173,21 +173,23 @@ history since 0.18.0][].
 
 **Other changes**:
 
-- Fixed builds failing since 0.18.0 on sites with pages named `docs` but no
-  top-level `docs` section, and `llms.txt` indexing such a page as the docs
-  section ([#2875][], [design][project-root-page]).
+- Fixed builds failing on sites with pages named `docs` but no top-level `docs`
+  section (every site since 0.18.0, `llms.txt` sites since 0.15.0), and
+  `llms.txt` indexing such a page as the docs section ([#2875][], [#2888][],
+  [design][project-root-page]).
 
 [**Experimental**](#experimental):
 
 - **Shared chrome on doc-rooted sites**: the navbar and footer now render on
   each language's root page, their [donor page][ug-donor-page]; before, neither
-  rendered anywhere.
+  rendered anywhere ([#2888][]).
 
 **For maintainers**:
 
 - ...
 
 [#2875]: https://github.com/docsy/docsy/issues/2875
+[#2888]: https://github.com/docsy/docsy/pull/2888
 [0.19.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.19.0
 [git history since 0.18.0]:
   https://github.com/docsy/docsy/compare/v0.18.0...main

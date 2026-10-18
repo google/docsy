@@ -3,7 +3,7 @@
 //
 // A shared build drops the repeated left-nav from inner pages and leaves a
 // placeholder behind (see _partials/sidebar.html). Here we fetch the section's
-// "donor" page — the kept docs landing, named by data-nav-donor — extract its
+// donor page — the kept docs landing, named by data-nav-donor — extract its
 // left-nav, inject it in place of the placeholder, and apply the active-page
 // state client-side. The extracted nav is cached in sessionStorage so later
 // pages in the same section reuse it without re-fetching.
@@ -267,8 +267,9 @@
   // Re-derive the navbar's active link for the current page. The donor page's
   // navbar carries its own active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
-  // prefix), after a full build's IsMenuCurrent/IsDescendant logic. Not exact on
-  // a doc-rooted site, where the docs entry's `/` prefixes every path (CCR-20).
+  // prefix), as a full build's IsMenuCurrent/IsDescendant logic does. Not exact
+  // on a doc-rooted site, where the docs entry's `/` prefixes every path that no
+  // other entry covers (CCR-20).
   function setNavbarActive(navbar) {
     const here = currentPath();
     let best = null;
@@ -315,9 +316,9 @@
   // Language links point at the current page's counterpart in each locale; the
   // donor page renders its own, i.e. each locale's root. Swap the current locale's
   // root prefix (`donorPath`) for the target locale's to reproduce the full
-  // build's link. Exact when translations share slugs and all exist; a
-  // doc-rooted site's slugs fall back to titles, so they usually differ
-  // (CCR-10); otherwise a best-effort functional restore.
+  // build's link. Exact when translations share slugs and all exist, otherwise
+  // a best-effort functional restore; the doc-rooted recipe's `:slug` falls back
+  // to titles, so its translations usually differ (CCR-10).
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;

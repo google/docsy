@@ -43,16 +43,16 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
     files: twoNestedDocs,
     extraConfig: llmsOutputs,
   });
-  for (const page of [
+  for (const rel of [
     'index.html',
     'guides/docs/index.html',
     'reference/docs/index.html',
     '404.html',
   ]) {
     assert.deepEqual(
-      describedbyLinks(b.publicFile(page)),
+      describedbyLinks(b.publicFile(rel)),
       ['<link rel="describedby" href="https://example.org/llms.txt">'],
-      `${page} head links the home's llms.txt as describedby, once`,
+      `${rel} head links the home's llms.txt as describedby, once`,
     );
   }
   const llms = b.publicFile('llms.txt');
@@ -63,7 +63,7 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
   );
 });
 
-test('a single nested page named docs is left out of the docs section lookup', () => {
+test('a single nested section named docs is left out of the docs section lookup', () => {
   const b = buildCleanSite('root-page-one-docs', {
     files: oneNestedDocs,
     extraConfig: llmsOutputs,

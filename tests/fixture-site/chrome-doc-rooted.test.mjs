@@ -1,6 +1,8 @@
 // Cases: CCR-20 (doc-rooted donor page). See the CCR case registry in tests/fixture-site/README.md.
 // The navbar and footer donor page on a doc-rooted site (lib/fixtures.mjs),
-// whose home renders nothing (docsy/docsy#2875 companion fix).
+// whose home renders nothing. The landing's outputs carry LLMS, as the recipe
+// has them (a donor gate that trusted outputformat.html fails here), and print
+// (the other-render placeholder probe).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

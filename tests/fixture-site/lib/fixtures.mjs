@@ -8,7 +8,7 @@ export const frontMatter = (fields) =>
     .join('\n')}\n---\n`;
 
 // A home page that keeps its URL but renders nothing.
-export const linkOnlyHome = (fields) =>
+const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
 // The doc-rooted recipe: the docs section published at each language root,
@@ -42,7 +42,6 @@ export const describedbyLinks = (html) =>
 export const chrome = {
   navbar: (h) => /class="td-navbar/.test(h),
   footer: (h) => /class="td-footer/.test(h),
-  sidebar: (h) => /id="td-section-nav"/.test(h),
   placeholder: (h, region, donor) =>
     new RegExp(
       `class="td-chrome-placeholder" data-chrome-donor="${donor}" data-chrome-region="${region}"`,
