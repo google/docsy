@@ -4,7 +4,7 @@
 // Doc-rooted sites) the navbar and footer donor page is the one publishing
 // each language's root, not Hugo's home, which renders nothing. Pins that the
 // donor page renders exactly once per language and that the placeholders name
-// its URL (docsy/docsy#2875 companion fix; parent record: the thoughtry task).
+// its URL (docsy/docsy#2875 companion fix).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

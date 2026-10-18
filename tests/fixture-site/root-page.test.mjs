@@ -1,9 +1,8 @@
-// Pins how the theme finds a language's root page (_partials/td/root-page.html)
-// and the docs section (all.llms.txt's documentation index): by absolute
-// content path, never by page name. A relative `GetPage "docs"` falls back to
-// Hugo's by-filename lookup when there is no `/docs` section, which fails the
-// build on two pages named docs and silently picks the one page otherwise
-// (docsy/docsy#2875). Design record: docsy.dev/content/en/project/design/root-page.md
+// Pins the root-page lookup (_partials/td/root-page.html) and all.llms.txt's
+// docs-section lookup on sites with no `/docs` section but pages named docs
+// elsewhere (docsy/docsy#2875), plus the auto-created translated landing and
+// baseURL-subpath cases. Covered cases:
+// docsy.dev/content/en/project/design/root-page.md
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -117,10 +116,10 @@ languages:
   fr: { weight: 2, label: Français }
 `;
 
-function buildDocRooted(name, args = []) {
+function buildDocRooted(name, args = [], extraConfig = '') {
   const b = buildSite(name, {
     files: docRootedFiles,
-    extraConfig: docRootedConfig,
+    extraConfig: docRootedConfig + extraConfig,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
     args: ['--printPathWarnings', ...args],
   });
@@ -137,7 +136,20 @@ function buildDocRooted(name, args = []) {
 }
 
 test('an auto-created docs landing is the root page of its language', () => {
-  const b = buildDocRooted('root-page-auto-landing');
+  const b = buildDocRooted(
+    'root-page-auto-landing',
+    [],
+    'defaultContentLanguageInSubdir: true\n',
+  );
+  assert.ok(
+    /class="td-navbar/.test(b.publicFile('en/index.html')),
+    'default language under its subdirectory keeps its own root page as donor',
+  );
+  assert.deepEqual(
+    describedbyLinks(b.publicFile('en/install/index.html')),
+    ['<link rel="describedby" href="https://example.org/en/llms.txt">'],
+    'default-language page head links its subdirectory llms.txt as describedby, once',
+  );
   assert.ok(
     b
       .publicFile('fr/llms.txt')

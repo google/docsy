@@ -43,10 +43,10 @@ In `shared` mode, each region stays on exactly one page per locale &mdash; its
 _donor page_, which the browser restores the others from &mdash; so every chrome
 link stays reachable without JavaScript:
 
-- **Navbar and footer**: kept on each locale's **[root page][]**: the home page,
-  or the docs landing on a [doc-rooted site][doc-rooted]. Their links are
-  config-defined and identical across the locale, except for the navbar's
-  optional language selector and version menu &mdash; see the caution.
+- **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
+  or the docs landing on a doc-rooted site). Their links are config-defined and
+  identical across the locale, except for the navbar's optional language
+  selector and version menu &mdash; see the caution.
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
   carries the full docs tree. On a doc-rooted site, that landing page _is_ the
   root page. `shared` mode currently targets the **docs** section; other
@@ -118,7 +118,7 @@ build needs no checker-specific configuration.
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [mpa]: https://web.dev/learn/pwa/architecture/
-[root page]: /project/design/root-page/
+[root page]: /docs/content/adding-content/#doc-rooted-sites
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu
 <!-- prettier-ignore-end -->
