@@ -36,6 +36,8 @@ const config = `permalinks:
 languages:
   en: { weight: 1, label: English }
   fr: { weight: 2, label: Français }
+outputs:
+  section: [HTML, RSS, print, markdown]
 `;
 
 const has = {
@@ -74,9 +76,13 @@ test('shared mode keeps the navbar and footer on each language root of a doc-roo
     );
   }
 
+  // The donor is the root page's HTML render; its print render is a page like
+  // any other.
   for (const [inner, donor] of [
     ['install/index.html', '/'],
     ['fr/installation/index.html', '/fr/'],
+    ['_print/index.html', '/'],
+    ['fr/_print/index.html', '/fr/'],
   ]) {
     const h = r.publicFile(inner);
     assert.ok(!has.navbar(h), `navbar dropped on ${inner}`);
