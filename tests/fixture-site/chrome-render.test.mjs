@@ -156,10 +156,12 @@ test('shared mode keeps the sidebar on every locale docs landing page', () => {
   }
 });
 
-// Doc-rooted site (home is the docs landing): the single kept left-nav is the
-// home's, and it carries the full tree, so deeper pages can drop all chrome.
-test('shared mode on a doc-rooted site keeps chrome on the home landing only', () => {
-  const r = buildSite('ccr-doc-rooted', {
+// Home-as-docs site (the home page itself typed `docs`, the pre-0.15 docs-only
+// shape; the doc-rooted recipe is lib/fixtures.mjs): the single kept left-nav
+// is the home's, and it carries the full tree, so deeper pages can drop all
+// chrome.
+test('shared mode on a home-as-docs site keeps chrome on the home landing only', () => {
+  const r = buildSite('ccr-home-as-docs', {
     files: {
       'content/_index.md': '---\ntitle: Home\ntype: docs\n---\nDocs landing\n',
       'content/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
