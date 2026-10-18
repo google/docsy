@@ -1,9 +1,14 @@
 {{/* Argument: a Site (of any language).
   Returns the page publishing the site's root URL: its home page, or the docs
   section page when it is published there (doc-rooted sites, see
-  https://www.docsy.dev/docs/content/adding-content/#doc-rooted-sites). */ -}}
+  https://www.docsy.dev/docs/content/adding-content/#doc-rooted-sites).
+
+  The section is looked up by absolute content path: a bare "docs" would fall
+  back to Hugo's by-filename lookup when there is no `/docs` section, failing on
+  two pages named docs and taking a single one for the section (#2875). The
+  cases this covers: https://www.docsy.dev/project/design/root-page/ */ -}}
 {{ $rootPage := .Home -}}
-{{ with .GetPage "docs" -}}
+{{ with .GetPage "/docs" -}}
   {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
 {{ end -}}
 {{ return $rootPage -}}

@@ -48,7 +48,7 @@ const has = {
 };
 
 test('shared mode keeps the navbar and footer on each language root of a doc-rooted site', () => {
-  const r = buildSite('ccr-doc-rooted', {
+  const r = buildSite('ccr-doc-rooted-donor', {
     files,
     extraConfig: config,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
@@ -76,7 +76,7 @@ test('shared mode keeps the navbar and footer on each language root of a doc-roo
 
   for (const [inner, donor] of [
     ['install/index.html', '/'],
-    ['fr/install/index.html', '/fr/'],
+    ['fr/installation/index.html', '/fr/'],
   ]) {
     const h = r.publicFile(inner);
     assert.ok(!has.navbar(h), `navbar dropped on ${inner}`);
