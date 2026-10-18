@@ -15,9 +15,10 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on just **one** _donor page_ per locale and
-  restores it on the other pages in the browser with a small script. The output
-  stays lean, while readers still get the full navigation once the page loads.
+- **`shared`** renders each region on just **one** <a id="donor-page"></a>_donor
+  page_ per locale and restores it on the other pages in the browser with a
+  small script. The output stays lean, while readers still get the full
+  navigation once the page loads.
 
 > [!NOTE] Web dev note
 >

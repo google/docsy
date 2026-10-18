@@ -81,7 +81,7 @@ same root URL. Both are path conflicts for Hugo to report
 [chrome build mode]: /docs/deployment/chrome/
 [Discovery]: /docs/content/agent-support/#discovery
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
-[donor page]: /docs/deployment/chrome/#what-shared-mode-keeps-reachable
+[donor page]: /docs/deployment/chrome/#donor-page
 [home page]: https://gohugo.io/methods/site/home/
 [partial]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root

@@ -18,7 +18,7 @@
 </footer>
 {{- else -}}
   {{- /* shared mode dropped the footer here. Leave a placeholder naming the root
-  page's URL (the "donor page", which keeps the footer; see chrome-render.html); the
+  page's URL (the donor page, which keeps the footer; see chrome-render.html); the
   client fetches it and swaps the footer in (assets/js/chrome-nav.js). The footer
   is page-invariant, so no per-page fix-up is needed. */ -}}
   <div class="td-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="footer"></div>
