@@ -4232,6 +4232,11 @@
     "when": "2026-09-02T08:07:10Z",
     "via": "lychee",
   },
+  "https://gohugo.io/methods/site/home/": {
+    "result": 200,
+    "when": "2026-10-18T14:31:16Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/methods/site/params/": {
     "result": 200,
     "when": "2026-09-19T16:04:39Z",
