@@ -1,10 +1,10 @@
-// Cases: CCR-20 (doc-rooted donor). See the CCR case registry in tests/fixture-site/README.md.
+// Cases: CCR-20 (doc-rooted donor page). See the CCR case registry in tests/fixture-site/README.md.
 // On a doc-rooted site (docs section published at the site root, home
 // link-only; recipe: docsy.dev/content/en/docs/content/adding-content.md §
-// Doc-rooted sites) the navbar and footer donor is the page publishing each
-// language's root, not Hugo's home, which renders nothing. Pins that the
-// donor renders exactly once per language and that the placeholders name its
-// URL (docsy/docsy#2875 companion fix; parent record: the thoughtry task).
+// Doc-rooted sites) the navbar and footer donor page is the one publishing
+// each language's root, not Hugo's home, which renders nothing. Pins that the
+// donor page renders exactly once per language and that the placeholders name
+// its URL (docsy/docsy#2875 companion fix; parent record: the thoughtry task).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -83,11 +83,11 @@ test('shared mode keeps the navbar and footer on each language root of a doc-roo
     assert.ok(!has.footer(h), `footer dropped on ${inner}`);
     assert.ok(
       has.placeholder(h, 'navbar', donor),
-      `${inner} navbar placeholder names the root ${donor} as donor`,
+      `${inner} navbar placeholder names the root ${donor} as donor page`,
     );
     assert.ok(
       has.placeholder(h, 'footer', donor),
-      `${inner} footer placeholder names the root ${donor} as donor`,
+      `${inner} footer placeholder names the root ${donor} as donor page`,
     );
   }
 });

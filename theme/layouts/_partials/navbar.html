@@ -76,11 +76,11 @@
 </nav>
 {{- else -}}
   {{- /* shared mode dropped the navbar here. Leave a placeholder naming the root
-  page's URL (the "donor", which keeps the navbar: the home page, or the docs
+  page's URL (the "donor page", which keeps the navbar: the home page, or the docs
   landing on a doc-rooted site; see chrome-render.html); the client fetches it,
   swaps the navbar in, and re-derives the active link for this page
   (assets/js/chrome-nav.js). The cover/theme hints carry this page's navbar
-  traits, which the donor may not share, so the client can re-apply them after
+  traits, which the donor page may not share, so the client can re-apply them after
   the swap. The canonical-path hint is this page's logical (HTML-output) URL,
   which differs from the request URL on print (/_print/…) and paginator
   (…/page/N/) pages; the client keys its active-state restore to it rather than

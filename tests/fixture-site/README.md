@@ -52,7 +52,7 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 | CCR-17 | Out-of-tree active-path (`toc_hide`)                               | restored | `chrome-out-of-tree`                                   |
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                            | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                | restored | —                                                      |
-| CCR-20 | Navbar/footer donor on a doc-rooted site (root page, not `IsHome`) | restored | `chrome-doc-rooted`                                    |
+| CCR-20 | Navbar/footer donor page on a doc-rooted site (root, not `IsHome`) | restored | `chrome-doc-rooted`                                    |
 
 ### Open items
 

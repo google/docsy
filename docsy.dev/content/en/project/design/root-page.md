@@ -6,11 +6,15 @@ description: >-
 ---
 
 A site's **root page** is the page published at its [site root][]: `/`, or
-`/`_`LANG`_`/` for each language of a multilingual site. For most sites that is
-Hugo's home page. On a [doc-rooted site][], the docs section landing page is
-published there instead, and the home page, though it still exists, renders
-nothing (`build: { render: link }`). The two can differ, so the theme resolves
-the root page once per language rather than assuming the home.
+`/`_`LANG`_`/` for each language of a multilingual site. Which page that is
+depends on the site's layout:
+
+- **Ordinary sites**: Hugo's [home page][].
+- **[Doc-rooted sites][doc-rooted site]**: the docs section's landing page. The
+  home page still exists but renders nothing (`build: { render: link }`).
+
+Because the two can differ, the theme resolves the root page once per language
+rather than assuming the home page.
 
 ## Who depends on it
 
@@ -24,9 +28,9 @@ the root page once per language rather than assuming the home.
   root page. The documentation index comes from the top-level `docs` section,
   which is a separate lookup.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
-  footer are kept on one donor page per language, the root page, and restored
-  from it elsewhere. The docs landing of a doc-rooted site is that donor; its
-  home never renders.
+  footer are kept on one [donor page][] per language, the root page, and
+  restored from it elsewhere. The docs landing of a doc-rooted site is that
+  donor page; its home never renders.
 
 ## How it is resolved
 
@@ -54,19 +58,19 @@ partial, serves every consumer above.
 
 Each row names the fixture test that pins it (`tests/fixture-site/`).
 
-| Case                                                           | Root page and consequences                                                                                                              | Pinned by                              |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
-| Ordinary site (home renders, docs under `/docs/`)              | The home. `llms.txt` at `/llms.txt` when `LLMS` is among the home outputs; the home is the chrome donor.                                | `llms-directive`, `chrome-render`      |
-| Doc-rooted site                                                | The docs landing, published at the home's URL. `llms.txt` comes from its outputs; it is the chrome donor; the home publishes nothing.   | `llms-doc-rooted`, `chrome-doc-rooted` |
-| No `/docs` section, pages named `docs` elsewhere (one or many) | The home; the build succeeds, and `llms.txt` has no documentation index.                                                                | `root-page`                            |
-| Multilingual site                                              | One root page per language (`/`, `/fr/`), each with its own `llms.txt` and donor; `defaultContentLanguageInSubdir` only moves the URLs. | `llms-doc-rooted`, `chrome-doc-rooted` |
-| Docs landing without a translated `_index` file                | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.  | `root-page`                            |
-| `baseURL` with a subpath                                       | Both compared URLs carry the subpath; nothing changes.                                                                                  | `root-page`                            |
-| Several output formats (HTML, Markdown, print, RSS, LLMS)      | The comparison uses each page's `RelPermalink`, its first output format's (HTML on Docsy sites); the other formats don't take part.     | `llms-doc-rooted`                      |
-| Doc-rooted home with `LLMS` configured                         | The home renders nothing, so there is no `llms.txt` and no discovery link unless the docs landing publishes `LLMS`.                     | `llms-doc-rooted`                      |
-| Site publishing no `llms.txt`                                  | No `describedby` link, directive, or Markdown link; the shortcode fails the build.                                                      | `llms-directive`, `llms-doc-rooted`    |
-| `LLMS` on a non-root section                                   | Its `llms.txt` renders the same site overview as the root's.                                                                            | `llms-doc-rooted`                      |
-| Overridden `head.html` or `baseof`                             | The site adds the discovery links itself ([Discovery][]).                                                                               | n/a                                    |
+| Case                                                           | Root page and consequences                                                                                                                   | Pinned by                              |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| Ordinary site (home renders, docs under `/docs/`)              | The home. `llms.txt` at `/llms.txt` when `LLMS` is among the home outputs; the home is the chrome donor page.                                | `llms-directive`, `chrome-render`      |
+| Doc-rooted site                                                | The docs landing, published at the home's URL. `llms.txt` comes from its outputs; it is the chrome donor page; the home publishes nothing.   | `llms-doc-rooted`, `chrome-doc-rooted` |
+| No `/docs` section, pages named `docs` elsewhere (one or many) | The home; the build succeeds, and `llms.txt` has no documentation index.                                                                     | `root-page`                            |
+| Multilingual site                                              | One root page per language (`/`, `/fr/`), each with its own `llms.txt` and donor page; `defaultContentLanguageInSubdir` only moves the URLs. | `llms-doc-rooted`, `chrome-doc-rooted` |
+| Docs landing without a translated `_index` file                | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.       | `root-page`                            |
+| `baseURL` with a subpath                                       | Both compared URLs carry the subpath; nothing changes.                                                                                       | `root-page`                            |
+| Several output formats (HTML, Markdown, print, RSS, LLMS)      | The comparison uses each page's `RelPermalink`, its first output format's (HTML on Docsy sites); the other formats don't take part.          | `llms-doc-rooted`                      |
+| Doc-rooted home with `LLMS` configured                         | The home renders nothing, so there is no `llms.txt` and no discovery link unless the docs landing publishes `LLMS`.                          | `llms-doc-rooted`                      |
+| Site publishing no `llms.txt`                                  | No `describedby` link, directive, or Markdown link; the shortcode fails the build.                                                           | `llms-directive`, `llms-doc-rooted`    |
+| `LLMS` on a non-root section                                   | Its `llms.txt` renders the same site overview as the root's.                                                                                 | `llms-doc-rooted`                      |
+| Overridden `head.html` or `baseof`                             | The site adds the discovery links itself ([Discovery][]).                                                                                    | n/a                                    |
 
 Not covered: a non-docs section given `url: /`, and two pages published at the
 same root URL. Both are path conflicts for Hugo to report
@@ -77,6 +81,8 @@ same root URL. Both are path conflicts for Hugo to report
 [chrome build mode]: /docs/deployment/chrome/
 [Discovery]: /docs/content/agent-support/#discovery
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
+[donor page]: /docs/deployment/chrome/#what-shared-mode-keeps-reachable
+[home page]: https://gohugo.io/methods/site/home/
 [partial]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root
 <!-- prettier-ignore-end -->

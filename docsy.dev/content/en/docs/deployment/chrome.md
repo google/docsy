@@ -15,7 +15,7 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on just **one** _donor_ page per locale and
+- **`shared`** renders each region on just **one** _donor page_ per locale and
   restores it on the other pages in the browser with a small script. The output
   stays lean, while readers still get the full navigation once the page loads.
 
@@ -23,7 +23,7 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 >
 > `shared` mode is in the spirit of the [app-shell pattern][app-shell] but
 > applied to page chrome, where a single region instance is fetched from its
-> donor and restored on the client, over an otherwise static [multi-page
+> donor page and restored on the client, over an otherwise static [multi-page
 > site][mpa].
 
 The `shared` mode helps wherever a JavaScript-capable client or a link checker
@@ -39,11 +39,11 @@ consumes the output:
 ## What `shared` mode keeps reachable
 
 In `shared` mode, each region stays on exactly one page per locale &mdash; its
-_donor_, which the browser restores the others from &mdash; so every chrome link
-stays reachable without JavaScript:
+_donor page_, which the browser restores the others from &mdash; so every chrome
+link stays reachable without JavaScript:
 
-- **Navbar and footer**: kept on each locale's **root page**: the home page, or
-  the docs landing on a [doc-rooted site][doc-rooted]. Their links are
+- **Navbar and footer**: kept on each locale's **[root page][]**: the home page,
+  or the docs landing on a [doc-rooted site][doc-rooted]. Their links are
   config-defined and identical across the locale, except for the navbar's
   optional language selector and version menu &mdash; see the caution.
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
@@ -117,6 +117,7 @@ build needs no checker-specific configuration.
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [mpa]: https://web.dev/learn/pwa/architecture/
+[root page]: /project/design/root-page/
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu
 <!-- prettier-ignore-end -->
