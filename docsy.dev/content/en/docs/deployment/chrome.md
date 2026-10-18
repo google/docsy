@@ -42,14 +42,15 @@ In `shared` mode, each region stays on exactly one page per locale &mdash; its
 _donor_, which the browser restores the others from &mdash; so every chrome link
 stays reachable without JavaScript:
 
-- **Navbar and footer**: kept on each locale's home page. Their links are
+- **Navbar and footer**: kept on each locale's **root page**: the home page, or
+  the docs landing on a [doc-rooted site][doc-rooted]. Their links are
   config-defined and identical across the locale, except for the navbar's
   optional language selector and version menu &mdash; see the caution.
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
-  carries the full docs tree. On a [doc-rooted site][doc-rooted], that landing
-  page _is_ the home page. `shared` mode currently targets the **docs** section;
-  other sections (such as blog) aren't a validated target yet, so keep `full`
-  for them.
+  carries the full docs tree. On a doc-rooted site, that landing page _is_ the
+  root page. `shared` mode currently targets the **docs** section; other
+  sections (such as blog) aren't a validated target yet, so keep `full` for
+  them.
 
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination

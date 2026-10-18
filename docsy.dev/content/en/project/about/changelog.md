@@ -177,13 +177,19 @@ history since 0.18.0][].
 
 [**Experimental**](#experimental):
 
-- ...
+- **Doc-rooted sites**: fixed the build failure on sites with no top-level
+  `docs` section but pages named `docs` elsewhere, and `llms.txt` mistaking such
+  a page for the docs section; in `shared` chrome mode, the navbar and footer
+  now render on a doc-rooted site's root page, their donor ([#2875][],
+  [design][0.19.0-design-root-page]).
 
 **For maintainers**:
 
 - ...
 
+[#2875]: https://github.com/docsy/docsy/issues/2875
 [0.19.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.19.0
+[0.19.0-design-root-page]: /project/design/root-page/
 [git history since 0.18.0]:
   https://github.com/docsy/docsy/compare/v0.18.0...main
 
