@@ -8,7 +8,7 @@
   the shared build aims to stay functionally equivalent to a full one (known
   gaps: tests/fixture-site/README.md § Open items). The regions kept are:
 
-    navbar, footer  config-defined chrome  -> each locale's root page
+    navbar, footer  config-defined chrome  -> each locale's root page (HTML render)
     sidebar         computed left-nav      -> each locale's docs landing page
 
   The root page is the page publishing the locale's root URL (td/root-page.html):
@@ -26,7 +26,11 @@
     {{ $root := cond (and (ne $p.Params.toc_root true) (eq $p.Site.Home.Type "docs")) $p.Site.Home $p.FirstSection -}}
     {{ $render = and $root (eq $p.RelPermalink $root.RelPermalink) -}}
   {{ else -}}
-    {{ $render = $p.Eq (partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink) -}}
+    {{/* The root page's HTML render only: the HTML format is the current one when
+      it is among the page's formats but not its alternatives, so the page's print
+      render gets a placeholder like any other page. */ -}}
+    {{ $html := and ($p.OutputFormats.Get "html") (not ($p.AlternativeOutputFormats.Get "html")) -}}
+    {{ $render = and $html ($p.Eq (partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink)) -}}
   {{ end -}}
 {{ end -}}
 {{ return $render -}}
