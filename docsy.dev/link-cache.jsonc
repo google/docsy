@@ -1295,6 +1295,11 @@
     "when": "2026-09-17T23:13:29Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html": {
+    "result": 200,
+    "when": "2026-10-18T01:00:59Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html?plain=1": {
     "result": 200,
     "when": "2026-10-06T20:34:49Z",
@@ -1910,6 +1915,11 @@
     "when": "2026-10-17T20:04:45Z",
     "via": "lychee",
   },
+  "https://github.com/docsy/docsy/issues/2875": {
+    "result": 200,
+    "when": "2026-10-18T01:00:59Z",
+    "via": "lychee",
+  },
   "https://github.com/docsy/docsy/issues/331": {
     "result": 200,
     "when": "2026-09-18T01:19:19Z",
@@ -2273,6 +2283,11 @@
   "https://github.com/docsy/docsy/issues/new?title=Repository-root%20markdown%20files": {
     "result": 200,
     "when": "2026-09-17T23:15:33Z",
+    "via": "lychee",
+  },
+  "https://github.com/docsy/docsy/issues/new?title=Root%20page": {
+    "result": 200,
+    "when": "2026-10-18T01:00:59Z",
     "via": "lychee",
   },
   "https://github.com/docsy/docsy/issues/new?title=Script%20loading": {
@@ -4824,6 +4839,13 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
+  // Live once on main: the page this PR adds.
+  "https://main--docsydocs.netlify.app/project/design/root-page/": {
+    "result": 206,
+    "when": "2026-10-18T01:00:58Z",
+    "via": "manual",
+    "expires": "2026-10-18",
+  },
   "https://main--docsydocs.netlify.app/project/design/script-loading/": {
     "result": 200,
     "when": "2026-10-08T10:42:02Z",
@@ -5707,6 +5729,13 @@
     "result": 200,
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
+  },
+  // Live at the v0.19.0 release.
+  "https://www.docsy.dev/project/design/root-page/": {
+    "result": 206,
+    "when": "2026-10-18T01:00:58Z",
+    "via": "manual",
+    "expires": "2026-12-01",
   },
   "https://www.docsy.dev/project/design/script-loading/": {
     "result": 200,
