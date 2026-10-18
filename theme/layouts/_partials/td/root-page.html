@@ -1,11 +1,10 @@
 {{/* Argument: a Site (of any language).
   Returns the page publishing the site's root URL: its home page, or the docs
-  section page when it is published there (doc-rooted sites, see
-  https://www.docsy.dev/docs/content/adding-content/#doc-rooted-sites).
-  The absolute path is deliberate: a bare "docs" falls back to a site-wide lookup
-  by file name (#2875). Rule, consumers and covered cases:
-  https://www.docsy.dev/project/design/root-page/ */ -}}
+  section page when it is published there (doc-rooted sites). Rule, consumers
+  and covered cases: https://www.docsy.dev/project/design/root-page/ */ -}}
 {{ $rootPage := .Home -}}
+{{/* Absolute path on purpose: a bare "docs" falls back to a site-wide lookup by
+  file name (docsy/docsy#2875). */ -}}
 {{ with .GetPage "/docs" -}}
   {{ if eq .RelPermalink $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
 {{ end -}}

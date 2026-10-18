@@ -157,7 +157,8 @@ test('shared mode keeps the sidebar on every locale docs landing page', () => {
 });
 
 // Home-as-docs site: the home page itself typed `docs`, the pre-0.15 docs-only
-// shape (the current doc-rooted recipe is lib/fixtures.mjs).
+// shape, still served by chrome-render.html's `Home.Type "docs"` sidebar branch
+// (the current recipe: the user guide's Doc-rooted sites section).
 test('shared mode on a home-as-docs site keeps chrome on the home landing only', () => {
   const r = buildSite('ccr-home-as-docs', {
     files: {

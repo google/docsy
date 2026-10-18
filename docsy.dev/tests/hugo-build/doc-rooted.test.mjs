@@ -1,12 +1,10 @@
-// The doc-rooted variant (config/doc-rooted), built once in `shared` chrome
-// mode, pinned on two fronts:
-// - llms.txt: the variant's cascade gives the docs landing the LLMS output. A
-//   page's `outputs` replace its kind's list, so the cascade restates
-//   `_default`'s section formats and must track them (docsy/docsy#2834).
-// - chrome: the navbar and footer donor page is each language's root page, the
-//   docs landing, since the link-only home renders nothing. Before 0.19 this
-//   build exited 0 with no navbar or footer anywhere (docsy/docsy#2875's
-//   companion defect). Theme-level fixture: tests/fixture-site/chrome-doc-rooted.
+// The doc-rooted variant (config/doc-rooted), built in both chrome modes and
+// pinned on two fronts:
+// - llms.txt (full mode): the variant's cascade gives the docs landing the LLMS
+//   output and must track `_default`'s section formats (docsy/docsy#2834).
+// - chrome (shared mode): the navbar and footer donor page is each language's
+//   root page, the docs landing, since the link-only home renders nothing.
+//   Theme-level fixture: tests/fixture-site/chrome-doc-rooted.
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -26,37 +24,45 @@ import { chrome } from '../../../tests/fixture-site/lib/fixtures.mjs';
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
 const tmpDir = join(siteDir, 'tmp');
 
-// One build for the file, to a throwaway destination so the published public/
-// that test:base produces stays intact; cleaned up whatever the build did.
-let destDir;
-const file = (rel) => readFileSync(join(destDir, rel), 'utf8');
+// One build per chrome mode, each to a throwaway destination so the published
+// public/ that test:base produces stays intact; cleaned up whatever the builds
+// did.
+const dest = {};
+const file = (mode, rel) => readFileSync(join(dest[mode], rel), 'utf8');
 before(() => {
   mkdirSync(tmpDir, { recursive: true });
-  destDir = mkdtempSync(join(tmpDir, 'doc-rooted-'));
-  const res = spawnSync(`npm run build -- -d "${destDir}"`, {
-    cwd: siteDir,
-    shell: true,
-    encoding: 'utf8',
-    env: {
-      ...process.env,
-      TD_BUILD_CTX: 'doc-rooted',
-      HUGO_PARAMS_TD_CHROME: 'shared',
-      BASE_URL: 'http://localhost',
-    },
-  });
-  const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
-  assert.equal(res.status, 0, `doc-rooted build exits 0; output:\n${output}`);
-  assert.ok(
-    !/WARN/.test(output),
-    `doc-rooted build is warning-free; output:\n${output}`,
-  );
+  for (const mode of ['full', 'shared']) {
+    dest[mode] = mkdtempSync(join(tmpDir, `doc-rooted-${mode}-`));
+    const res = spawnSync(`npm run build -- -d "${dest[mode]}"`, {
+      cwd: siteDir,
+      shell: true,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        TD_BUILD_CTX: 'doc-rooted',
+        HUGO_PARAMS_TD_CHROME: mode,
+        BASE_URL: 'http://localhost',
+      },
+    });
+    const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
+    assert.equal(
+      res.status,
+      0,
+      `doc-rooted ${mode} build exits 0; output:\n${output}`,
+    );
+    assert.ok(
+      !/WARN/.test(output),
+      `doc-rooted ${mode} build is warning-free; output:\n${output}`,
+    );
+  }
 });
 after(() => {
-  if (destDir) rmSync(destDir, { recursive: true, force: true });
+  for (const d of Object.values(dest))
+    rmSync(d, { recursive: true, force: true });
 });
 
 test('doc-rooted variant publishes llms.txt at each language root only', () => {
-  const llmsFiles = globSync('**/llms.txt', { cwd: destDir })
+  const llmsFiles = globSync('**/llms.txt', { cwd: dest.full })
     .map((f) => f.split(sep).join('/'))
     .sort();
   assert.deepEqual(llmsFiles, ['fr/llms.txt', 'llms.txt']);
@@ -64,7 +70,7 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     ['llms.txt', 'index.md'],
     ['fr/llms.txt', 'fr/index.md'],
   ]) {
-    const content = file(llms);
+    const content = file('full', llms);
     assert.ok(
       content.startsWith('# Docsy\n'),
       `${llms} opens with the site title`,
@@ -80,7 +86,9 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     ['fr/index.html', '/fr/llms.txt'],
   ]) {
     assert.ok(
-      file(page).includes(`For AI agents: the site's llms.txt is at ${llms}`),
+      file('full', page).includes(
+        `For AI agents: the site's llms.txt is at ${llms}`,
+      ),
       `${page} directive points at ${llms}`,
     );
   }
@@ -91,7 +99,7 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     'index.md',
     '_print/index.html',
   ]) {
-    assert.ok(existsSync(join(destDir, f)), `root publishes ${f}`);
+    assert.ok(existsSync(join(dest.full, f)), `root publishes ${f}`);
   }
 });
 
@@ -100,7 +108,7 @@ test('doc-rooted shared build keeps the navbar and footer on each language root'
     ['index.html', '/'],
     ['fr/index.html', '/fr/'],
   ]) {
-    const h = file(root);
+    const h = file('shared', root);
     assert.ok(chrome.navbar(h), `navbar kept on the root page ${root}`);
     assert.ok(chrome.footer(h), `footer kept on the root page ${root}`);
     assert.ok(
@@ -114,7 +122,7 @@ test('doc-rooted shared build keeps the navbar and footer on each language root'
     'content/adding-content/index.html',
     '_print/index.html',
   ]) {
-    const h = file(inner);
+    const h = file('shared', inner);
     assert.ok(!chrome.navbar(h) && !chrome.footer(h), `${inner} drops both`);
     assert.ok(
       chrome.placeholder(h, 'navbar', '/') &&

@@ -11,37 +11,37 @@ import {
   describedbyLinks,
   docRootedConfig,
   docRootedHomes,
+  frontMatter,
+  llmsOutputs,
 } from './lib/fixtures.mjs';
 
-const llmsConfig = `outputs:
-  home: [HTML, markdown, LLMS]
-  page: [HTML, markdown]
-  section: [HTML, RSS, markdown]
-`;
+const page = (title, body = title, extra = {}) =>
+  frontMatter({ title, ...extra }) + `${body}\n`;
 
 const home = {
-  'content/_index.md':
-    '---\ntitle: Home\ndescription: Site summary\n---\nHome body\n',
-  'content/guides/_index.md': '---\ntitle: Guides\n---\nGuides landing\n',
+  'content/_index.md': page('Home', 'Home body', {
+    description: 'Site summary',
+  }),
+  'content/guides/_index.md': page('Guides', 'Guides landing'),
 };
 // A nested section named docs, with a subsection of its own (what llms.txt's
 // documentation index would list if it mistook it for the docs section).
 const nestedDocsSection = {
-  'content/guides/docs/_index.md': '---\ntitle: Guides docs\n---\nNested\n',
-  'content/guides/docs/sub/_index.md': '---\ntitle: Sub\n---\nSub\n',
+  'content/guides/docs/_index.md': page('Guides docs', 'Nested'),
+  'content/guides/docs/sub/_index.md': page('Sub'),
 };
 const oneNestedDocs = { ...home, ...nestedDocsSection };
 // Plus a nested leaf named docs: two candidates, no `/docs` section.
 const twoNestedDocs = {
   ...oneNestedDocs,
-  'content/reference/_index.md': '---\ntitle: Reference\n---\nReference\n',
-  'content/reference/docs.md': '---\ntitle: Reference docs\n---\nLeaf\n',
+  'content/reference/_index.md': page('Reference'),
+  'content/reference/docs.md': page('Reference docs', 'Leaf'),
 };
 
 test('a site with no /docs section and two pages named docs builds, rooted at the home', () => {
   const b = buildCleanSite('root-page-two-docs', {
     files: twoNestedDocs,
-    extraConfig: llmsConfig,
+    extraConfig: llmsOutputs,
   });
   for (const page of [
     'index.html',
@@ -66,7 +66,7 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
 test('a single nested page named docs is left out of the docs section lookup', () => {
   const b = buildCleanSite('root-page-one-docs', {
     files: oneNestedDocs,
-    extraConfig: llmsConfig,
+    extraConfig: llmsOutputs,
   });
   const llms = b.publicFile('llms.txt');
   assert.ok(
@@ -83,10 +83,11 @@ test('a single nested page named docs is left out of the docs section lookup', (
 // auto-created section (no _index.fr.md): its outputs come from the cascade.
 const docRootedFiles = {
   ...docRootedHomes(),
-  'content/docs/_index.md':
-    '---\ntitle: Docs\ndescription: Docs summary\n---\nDocs landing\n',
-  'content/docs/install.md': '---\ntitle: Install\n---\nLeaf\n',
-  'content/docs/install.fr.md': '---\ntitle: Installation\n---\nFeuille\n',
+  'content/docs/_index.md': page('Docs', 'Docs landing', {
+    description: 'Docs summary',
+  }),
+  'content/docs/install.md': page('Install', 'Leaf'),
+  'content/docs/install.fr.md': page('Installation', 'Feuille'),
 };
 const landingOutputs = `cascade:
   - target: { path: /docs }
@@ -96,12 +97,12 @@ const landingOutputs = `cascade:
 const buildDocRooted = (name, args = [], extraConfig = '') =>
   buildCleanSite(name, {
     files: docRootedFiles,
-    extraConfig: docRootedConfig + llmsConfig + landingOutputs + extraConfig,
+    extraConfig: docRootedConfig + llmsOutputs + landingOutputs + extraConfig,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
     args,
   });
 
-test('an auto-created docs landing is the root page of its language', () => {
+test("an auto-created docs landing is the root page of its language; the default language's subdirectory only moves the URLs", () => {
   const b = buildDocRooted(
     'root-page-auto-landing',
     [],

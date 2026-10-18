@@ -11,10 +11,8 @@
     navbar, footer  config-defined chrome  -> each locale's root page (HTML render)
     sidebar         computed left-nav      -> each locale's docs landing page
 
-  The root page is the page publishing the locale's root URL (td/root-page.html):
-  the home page, or the docs landing on a doc-rooted site, whose home never
-  renders. In `full` mode (the default), every region renders. See the chrome
-  build modes guide for what this is and how to enable it:
+  In `full` mode (the default), every region renders. See the chrome build modes
+  guide for what this is and how to enable it:
   docsy.dev/content/en/docs/deployment/chrome.md
 
   ctx: dict "page" PAGE "region" REGION
@@ -27,7 +25,8 @@
     {{ $render = and $root (eq $p.RelPermalink $root.RelPermalink) -}}
   {{ else -}}
     {{/* The root page's HTML render only: the HTML format is the current one when
-      it is among the page's formats but not its alternatives. */ -}}
+      it is among the page's formats but not its alternatives (not
+      outputformat.html, which misreports pages that have an LLMS output). */ -}}
     {{ $html := and ($p.OutputFormats.Get "html") (not ($p.AlternativeOutputFormats.Get "html")) -}}
     {{ $render = and $html ($p.Eq (partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink)) -}}
   {{ end -}}

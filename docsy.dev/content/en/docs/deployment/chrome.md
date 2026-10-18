@@ -46,12 +46,11 @@ link stays reachable without JavaScript:
 - **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
   or the docs landing on a doc-rooted site). Their links are config-defined and
   identical across the locale, except for the navbar's optional language
-  selector and version menu &mdash; see the caution.
+  selector and version menu (see the caution).
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
-  carries the full docs tree. On a doc-rooted site, that landing page _is_ the
-  root page. `shared` mode currently targets the **docs** section; other
-  sections (such as blog) aren't a validated target yet, so keep `full` for
-  them.
+  carries the full docs tree. On a doc-rooted site the two donor pages coincide.
+  `shared` mode currently targets the **docs** section; other sections (such as
+  blog) aren't a validated target yet, so keep `full` for them.
 
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination
@@ -114,7 +113,6 @@ build needs no checker-specific configuration.
 <!-- prettier-ignore-start -->
 [app-shell]: https://developer.chrome.com/blog/app-shell
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
-[doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [mpa]: https://web.dev/learn/pwa/architecture/

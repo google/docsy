@@ -27,6 +27,13 @@ export const docRootedHomes = (en = {}, fr = {}) => ({
   'content/_index.fr.md': linkOnlyHome({ title: 'Accueil', ...fr }),
 });
 
+// The user guide's llms.txt setup: LLMS on the home, Markdown everywhere.
+export const llmsOutputs = `outputs:
+  home: [HTML, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, markdown]
+`;
+
 // The head's llms.txt discovery links, in document order.
 export const describedbyLinks = (html) =>
   html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];

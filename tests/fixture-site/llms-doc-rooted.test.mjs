@@ -1,6 +1,6 @@
 // llms.txt on doc-rooted sites (lib/fixtures.mjs): the home renders nothing, so
-// the file comes from the page publishing the root (docsy/docsy#2834), with the
-// all-sites consequences of that template change.
+// the file comes from the page publishing the root (docsy/docsy#2834); plus the
+// per-language discovery links and section-kind rendering that came with it.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -10,6 +10,7 @@ import {
   docRootedConfig,
   docRootedHomes,
   frontMatter,
+  llmsOutputs,
 } from './lib/fixtures.mjs';
 
 const leaf = (title, { llmsLink = true } = {}) =>
@@ -40,11 +41,6 @@ const docRootedFiles = (
   'content/docs/install.fr.md': leaf('Installation', leafOptions),
 });
 
-const llmsOutputs = `outputs:
-  home: [HTML, markdown, LLMS]
-  page: [HTML, markdown]
-  section: [HTML, RSS, markdown]
-`;
 const docRootedLlmsConfig = docRootedConfig + llmsOutputs;
 
 const build = (name, files, extraConfig) =>

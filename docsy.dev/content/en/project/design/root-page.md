@@ -1,28 +1,25 @@
 ---
 title: Root page
 description: >-
-  The selection rule, rationale, and supported cases shared by agent discovery
-  and shared chrome
+  How the theme picks each language's root page (home or docs landing) for
+  llms.txt and shared chrome
 ---
 
-A site's **[root page][]** is the page published at its [site root][]: for most
-sites `/`, or `/`_`LANG`_`/` for a language of a multilingual site (a `baseURL`
-subpath and the default language's placement move these). Which page that is
-depends on the site's layout:
+A site's **[root page][]** is the page published at its [site root][], `/` or
+`/`_`LANG`_`/`. Which page that is depends on the site's layout:
 
 - **Ordinary sites**: Hugo's [home page][].
-- **[Doc-rooted sites][doc-rooted site]**: the docs section's landing page. The
-  home page still exists but renders nothing (`build: { render: link }`).
+- **[Doc-rooted sites][doc-rooted site]**: the docs section's landing page; the
+  home page still exists but publishes nothing.
 
-Because the two can differ, the theme selects the root page once per language
-rather than assuming the home page. The definition and setup stay in the user
-guide; this page is the maintainers' record.
+Because the two can differ, the theme selects the root page per language rather
+than assuming the home page. The definition and setup stay in the user guide.
 
 ## Selection rule
 
 [`_partials/td/root-page.html`][partial] takes a `Site` and returns a page: the
 page at content path `/docs` when its `RelPermalink` equals the home's,
-otherwise the home. Consumers share one language-scoped cached result
+otherwise the home. Consumers share one cached result per language
 (`partialCached`, keyed by the home's permalink).
 
 ## Consumers
@@ -32,10 +29,10 @@ otherwise the home. Consumers share one language-scoped cached result
   Docsy-private `_root-llms-txt-path` shortcode all need the URL of the
   language's `llms.txt`, and whether the root page publishes one. That is the
   root page's `LLMS` output ([Discovery][]).
-- **The `llms.txt` template** (`all.llms.txt`): uses each language's root page
-  for its home-page and locale links; prefers the root page's description,
-  falling back to the home page's; its documentation index is a separate `/docs`
-  lookup.
+- **The `llms.txt` template** (`all.llms.txt`):
+  - the home-page and locale links are each language's root page;
+  - the description is the root page's, falling back to the home page's;
+  - the documentation index is a separate `/docs` lookup.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
   footer are kept on one [donor page][] per language, the root page, and
   restored from it elsewhere.
@@ -60,9 +57,9 @@ lists its subsections. Two alternatives that avoided the name were set aside:
 
 ## Covered cases
 
-The table records supported behavior. The **Evidence** column names the fixture
-test (`tests/fixture-site/`) exercising the row, or says so when a variant is
-backed by source reading only. Chrome consequences assume `shared` mode.
+The table records supported behavior; the **Evidence** column names the fixture
+test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
+`shared` mode.
 
 | Case                                                           | Root page and consequences                                                                                                                                                                                                  | Evidence                                       |
 | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
@@ -76,15 +73,16 @@ backed by source reading only. Chrome consequences assume `shared` mode.
 | Doc-rooted home with `LLMS` configured                         | The home publishes no file; root-level `llms.txt` and discovery require `LLMS` on the docs landing.                                                                                                                         | `llms-doc-rooted`                              |
 | Root page without `LLMS`                                       | No `describedby` link, directive, or Markdown link, even when another section publishes an `llms.txt`; the shortcode fails the build when invoked.                                                                          | `llms-directive`, `llms-doc-rooted`            |
 | `LLMS` on a non-root section                                   | Its `llms.txt` is the site overview, not a section index; discovery still depends on the root page's `LLMS` output.                                                                                                         | `llms-doc-rooted`                              |
-| Overridden `head.html` or `baseof`                             | Custom templates must keep the discovery wiring ([Discovery][]).                                                                                                                                                            | n/a                                            |
 
 ## Limits
 
-- A section other than `docs` remapped to the site root is outside this
-  convention: the lookup keeps the home, and Hugo need not warn (a link-only
-  home leaves no duplicate output).
-- Two pages publishing the same root URL is a configuration problem of its own;
-  `hugo --printPathWarnings` diagnoses it. The lookup resolves neither case.
+The lookup resolves none of these:
+
+- A section other than `docs` remapped to the site root: the lookup keeps the
+  home, and Hugo need not warn (a link-only home leaves no duplicate output).
+- Two pages publishing the same root URL: a [path conflict][] of the site's own.
+- Overridden `head.html` or `baseof` templates: the site keeps the discovery
+  wiring itself ([Discovery][]).
 
 <!-- prettier-ignore-start -->
 [#2875]: https://github.com/docsy/docsy/issues/2875
@@ -93,6 +91,7 @@ backed by source reading only. Chrome consequences assume `shared` mode.
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [donor page]: /docs/deployment/chrome/#donor-page
 [home page]: https://gohugo.io/methods/site/home/
+[path conflict]: /docs/content/adding-content/#check-for-path-conflicts
 [partial]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html
 [root page]: /docs/content/adding-content/#doc-rooted-sites
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root

@@ -26,7 +26,8 @@ test('shared mode keeps the navbar and footer on each language root of a doc-roo
   const r = buildCleanSite('ccr-doc-rooted-donor', {
     files,
     extraConfig:
-      docRootedConfig + 'outputs:\n  section: [HTML, RSS, print, markdown]\n',
+      docRootedConfig +
+      'outputs:\n  section: [HTML, RSS, print, markdown, LLMS]\n',
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
 

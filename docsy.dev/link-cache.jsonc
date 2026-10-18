@@ -4844,7 +4844,6 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // Live once on main: the page this PR adds.
   "https://main--docsydocs.netlify.app/project/design/root-page/": {
     "result": 206,
     "when": "2026-10-18T01:00:58Z",

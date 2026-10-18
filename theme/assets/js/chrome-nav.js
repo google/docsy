@@ -1,4 +1,5 @@
-// Client-side hydration of the docs left-nav.
+// Client-side restore of the chrome a shared build drops: the docs left-nav,
+// and the navbar and footer (see "Page-invariant chrome" below).
 //
 // A shared build drops the repeated left-nav from inner pages and leaves a
 // placeholder behind (see _partials/sidebar.html). Here we fetch the section's
@@ -9,9 +10,9 @@
 //
 // The same active-state pass also hydrates the cached inline nav that the donor
 // (and bigger sites) render once and share across pages: that menu ships hidden,
-// with no per-page active state baked in. Either way the resulting DOM matches a
-// full, non-shared render, so a shared build stays functionally equivalent to a full
-// one.
+// with no per-page active state baked in. Either way the resulting DOM aims to
+// match a full, non-shared render; the known gaps are the CCR case registry's
+// open items (tests/fixture-site/README.md).
 
 (function () {
   'use strict';
@@ -242,8 +243,8 @@
   // The shared build keeps the navbar and footer only on each locale's root
   // page (the home, or the docs landing on a doc-rooted site). An inner page
   // leaves a placeholder per dropped region (see _partials/navbar.html and
-  // _partials/footer.html) naming that donor page. Here we fetch the donor page
-  // once, extract each region, and swap it in, so the page matches a full render.
+  // _partials/footer.html) naming it as the donor page. Here we fetch it once,
+  // extract each region, and swap it in.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
   // Re-apply this page's navbar cover/theme traits after the swap. The cover
@@ -266,7 +267,8 @@
   // Re-derive the navbar's active link for the current page. The donor page's
   // navbar carries its own active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
-  // prefix), matching a full build's IsMenuCurrent/IsDescendant logic.
+  // prefix), after a full build's IsMenuCurrent/IsDescendant logic. Not exact on
+  // a doc-rooted site, where the docs entry's `/` prefixes every path (CCR-20).
   function setNavbarActive(navbar) {
     const here = currentPath();
     let best = null;
@@ -291,8 +293,7 @@
 
   // The navbar's version/language selectors carry per-page links that the donor
   // page renders for itself, so re-derive each for the current page. `donorPath`
-  // is the donor page's path, the current locale's root, passed down from
-  // restoreChrome.
+  // is the donor page's path, the current locale's root.
 
   // Version links are exact: each is a version's base URL plus the page path
   // (when `version_menu_pagelinks` is on), so the donor's link is
@@ -314,8 +315,9 @@
   // Language links point at the current page's counterpart in each locale; the
   // donor page renders its own, i.e. each locale's root. Swap the current locale's
   // root prefix (`donorPath`) for the target locale's to reproduce the full
-  // build's link. Exact when translations share slugs and all exist (the common
-  // case); otherwise a best-effort functional restore.
+  // build's link. Exact when translations share slugs and all exist; a
+  // doc-rooted site's slugs fall back to titles, so they usually differ
+  // (CCR-10); otherwise a best-effort functional restore.
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;

@@ -35,7 +35,7 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 | ------ | ------------------------------------------------------------------ | -------- | ------------------------------------------------------ |
 | CCR-01 | `td.chrome` build-mode gate (`full` default, `shared` opt-in)      | restored | `chrome-render`                                        |
 | CCR-02 | Kept reference instances (one navbar/footer/side-nav; donor)       | restored | `chrome-render`, `chrome-build`, `chrome-reachability` |
-| CCR-03 | Navbar restore from the home donor                                 | restored | `chrome-equivalence`                                   |
+| CCR-03 | Navbar restore from the root-page donor                            | restored | `chrome-equivalence`                                   |
 | CCR-04 | Footer restore (verbatim, page-invariant)                          | restored | `chrome-equivalence`                                   |
 | CCR-05 | Left side-nav restore from the section donor (+ cache)             | restored | `chrome-nav`, `chrome-equivalence`                     |
 | CCR-06 | Active state: active link + active-path + foldable reveal          | restored | `chrome-nav`                                           |
@@ -52,18 +52,24 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 | CCR-17 | Out-of-tree active-path (`toc_hide`)                               | restored | `chrome-out-of-tree`                                   |
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                            | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                | restored | —                                                      |
-| CCR-20 | Navbar/footer donor page on a doc-rooted site (root, not `IsHome`) | restored | `chrome-doc-rooted`                                    |
+| CCR-20 | Navbar/footer donor page on a doc-rooted site (root, not `IsHome`) | partial  | `chrome-doc-rooted`                                    |
 
 ### Open items
 
 - **CCR-10** (language-link exactness) — _partial._ The prefix-swap is exact
-  when translations share slugs and all exist (the common case). When the
-  current page has **no translation** in a locale, a full build renders that
-  item disabled while shared mode restores a live link to the non-existent page.
-  The divergence is pinned by a known-limitation test in `chrome-selectors`.
-  **Planned next:** bake each page's available locales into the navbar
-  placeholder and emit a disabled item for the rest, matching a full build (a
-  differing-slug variant would also need this per-page hint).
+  when translations share slugs and all exist (the common case on ordinary
+  sites; a doc-rooted site's page slugs fall back to titles, so translations
+  usually differ and the restored link 404s). When the current page has **no
+  translation** in a locale, a full build renders that item disabled while
+  shared mode restores a live link to the non-existent page. The divergence is
+  pinned by a known-limitation test in `chrome-selectors`. **Planned next:**
+  bake each page's available locales into the navbar placeholder and emit a
+  disabled item for the rest, matching a full build (a differing-slug variant
+  would also need this per-page hint).
+- **CCR-20** (doc-rooted donor page) — _partial._ The donor renders and the
+  restore works, but on a doc-rooted site the docs menu entry's URL is `/`, so
+  the longest-prefix active-link pass marks it active on every non-docs page (a
+  full build's `IsDescendant` doesn't). Fix belongs with #2689.
 - **CCR-07** (non-foldable reveal) and **CCR-14** (scoped-root structural
   residual) lack dedicated unit coverage. CCR-14 is browser-invisible — it shows
   only in a serialized-HTML diff, not the rendered nav — and gates reinstating

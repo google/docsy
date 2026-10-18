@@ -18,7 +18,7 @@
 </footer>
 {{- else -}}
   {{- /* Placeholder for the footer the donor page keeps (chrome-render.html;
-  client: assets/js/chrome-nav.js). The footer is page-invariant, so it carries
-  no per-page hints. */ -}}
+  client: assets/js/chrome-nav.js); the home's URL equals the root page's by
+  construction. The footer is page-invariant, so it carries no per-page hints. */ -}}
   <div class="td-chrome-placeholder" data-chrome-donor="{{ .Site.Home.RelPermalink }}" data-chrome-region="footer"></div>
 {{- end -}}
