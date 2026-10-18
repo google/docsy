@@ -6,7 +6,12 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSite } from './lib/build-site.mjs';
+import { buildCleanSite } from './lib/build-site.mjs';
+import {
+  describedbyLinks,
+  docRootedConfig,
+  docRootedHomes,
+} from './lib/fixtures.mjs';
 
 const llmsConfig = `outputs:
   home: [HTML, markdown, LLMS]
@@ -33,19 +38,11 @@ const twoNestedDocs = {
   'content/reference/docs.md': '---\ntitle: Reference docs\n---\nLeaf\n',
 };
 
-const describedbyLinks = (html) =>
-  html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
-
 test('a site with no /docs section and two pages named docs builds, rooted at the home', () => {
-  const b = buildSite('root-page-two-docs', {
+  const b = buildCleanSite('root-page-two-docs', {
     files: twoNestedDocs,
     extraConfig: llmsConfig,
   });
-  assert.equal(
-    b.status,
-    0,
-    `fixture hugo build succeeds:\n${b.stdout}${b.stderr}`,
-  );
   for (const page of [
     'index.html',
     'guides/docs/index.html',
@@ -67,15 +64,10 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
 });
 
 test('a single nested page named docs is not taken for the docs section', () => {
-  const b = buildSite('root-page-one-docs', {
+  const b = buildCleanSite('root-page-one-docs', {
     files: oneNestedDocs,
     extraConfig: llmsConfig,
   });
-  assert.equal(
-    b.status,
-    0,
-    `fixture hugo build succeeds:\n${b.stdout}${b.stderr}`,
-  );
   const llms = b.publicFile('llms.txt');
   assert.ok(
     !llms.includes('## Documentation index'),
@@ -89,51 +81,25 @@ test('a single nested page named docs is not taken for the docs section', () => 
 
 // Doc-rooted, bilingual, with the French docs landing left to Hugo's
 // auto-created section (no _index.fr.md): its outputs come from the cascade.
-const linkOnlyHome = (title) =>
-  `---\ntitle: ${title}\nbuild: { render: link }\n---\n`;
 const docRootedFiles = {
-  'content/_index.md': linkOnlyHome('Home'),
-  'content/_index.fr.md': linkOnlyHome('Accueil'),
+  ...docRootedHomes(),
   'content/docs/_index.md':
     '---\ntitle: Docs\ndescription: Docs summary\n---\nDocs landing\n',
   'content/docs/install.md': '---\ntitle: Install\n---\nLeaf\n',
   'content/docs/install.fr.md': '---\ntitle: Installation\n---\nFeuille\n',
 };
-const docRootedConfig = `permalinks:
-  page:
-    docs: /:sections[1:]/:slug/
-  section:
-    docs: /:sections[1:]
-cascade:
+const landingOutputs = `cascade:
   - target: { path: /docs }
     outputs: [HTML, RSS, markdown, LLMS]
-outputs:
-  home: [HTML, markdown, LLMS]
-  page: [HTML, markdown]
-  section: [HTML, RSS, markdown]
-languages:
-  en: { weight: 1, label: English }
-  fr: { weight: 2, label: Français }
 `;
 
-function buildDocRooted(name, args = [], extraConfig = '') {
-  const b = buildSite(name, {
+const buildDocRooted = (name, args = [], extraConfig = '') =>
+  buildCleanSite(name, {
     files: docRootedFiles,
-    extraConfig: docRootedConfig + extraConfig,
+    extraConfig: docRootedConfig + llmsConfig + landingOutputs + extraConfig,
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
-    args: ['--printPathWarnings', ...args],
+    args,
   });
-  assert.equal(
-    b.status,
-    0,
-    `fixture hugo build succeeds:\n${b.stdout}${b.stderr}`,
-  );
-  assert.ok(
-    !/WARN/.test(b.stdout + b.stderr),
-    `build is warning-free:\n${b.stdout}${b.stderr}`,
-  );
-  return b;
-}
 
 test('an auto-created docs landing is the root page of its language', () => {
   const b = buildDocRooted(

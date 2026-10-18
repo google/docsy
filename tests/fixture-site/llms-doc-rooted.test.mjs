@@ -8,36 +8,29 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildSite } from './lib/build-site.mjs';
+import { buildCleanSite, buildSite } from './lib/build-site.mjs';
+import {
+  describedbyLinks,
+  docRootedConfig,
+  docRootedHomes,
+  frontMatter,
+} from './lib/fixtures.mjs';
 
-const frontMatter = (fields) =>
-  `---\n${Object.entries(fields)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n')}\n---\n`;
 const leaf = (title, { llmsLink = true } = {}) =>
   frontMatter({ title }) +
   (llmsLink
     ? 'Leaf page; see [{{% _root-llms-txt-path %}}](<{{% _root-llms-txt-path %}}>).\n'
     : 'Leaf page\n');
-const linkOnlyHome = (fields) =>
-  frontMatter({ ...fields, build: '{ render: link }' });
-const describedbyLinks = (html) =>
-  html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
-
 // en describes only the link-only home; fr describes both home and landing
 // page.
 const docRootedFiles = (
   docsOutputs = '[HTML, RSS, markdown, LLMS]',
   leafOptions = {},
 ) => ({
-  'content/_index.md': linkOnlyHome({
-    title: 'Home',
-    description: 'Fixture docs, doc-rooted',
-  }),
-  'content/_index.fr.md': linkOnlyHome({
-    title: 'Accueil',
-    description: 'Accueil du site',
-  }),
+  ...docRootedHomes(
+    { description: 'Fixture docs, doc-rooted' },
+    { description: 'Accueil du site' },
+  ),
   'content/docs/_index.md':
     frontMatter({ title: 'Docs', outputs: docsOutputs }) + 'Docs landing\n',
   'content/docs/_index.fr.md':
@@ -51,37 +44,15 @@ const docRootedFiles = (
   'content/docs/install.fr.md': leaf('Installation', leafOptions),
 });
 
-const docRootedConfig = `permalinks:
-  page:
-    docs: /:sections[1:]/:slug/
-  section:
-    docs: /:sections[1:]
-outputs:
+const llmsOutputs = `outputs:
   home: [HTML, markdown, LLMS]
   page: [HTML, markdown]
   section: [HTML, RSS, markdown]
-languages:
-  en: { weight: 1, label: English }
-  fr: { weight: 2, label: Français }
 `;
+const docRootedLlmsConfig = docRootedConfig + llmsOutputs;
 
-function build(name, files, extraConfig) {
-  const r = buildSite(name, {
-    files,
-    extraConfig,
-    args: ['--printPathWarnings'],
-  });
-  assert.equal(
-    r.status,
-    0,
-    `fixture hugo build succeeds:\n${r.stdout}${r.stderr}`,
-  );
-  assert.ok(
-    !/WARN/.test(r.stdout + r.stderr),
-    `build is warning-free:\n${r.stdout}${r.stderr}`,
-  );
-  return r;
-}
+const build = (name, files, extraConfig) =>
+  buildCleanSite(name, { files, extraConfig });
 
 // The enabled fixture is read-only across its tests: build it once.
 let docRootedBuild;
@@ -89,7 +60,7 @@ const docRooted = () =>
   (docRootedBuild ??= build(
     'llms-doc-rooted',
     docRootedFiles(),
-    docRootedConfig,
+    docRootedLlmsConfig,
   ));
 
 test('doc-rooted site publishes llms.txt at each language root', () => {
@@ -210,7 +181,7 @@ test('doc-rooted site whose landing page lacks LLMS publishes no llms.txt, direc
   const b = build(
     'llms-doc-rooted-off',
     docRootedFiles('[HTML, RSS, markdown]', { llmsLink: false }),
-    docRootedConfig,
+    docRootedLlmsConfig,
   );
   for (const llms of ['llms.txt', 'fr/llms.txt']) {
     assert.throws(() => b.publicFile(llms), `${llms} stays unpublished`);
