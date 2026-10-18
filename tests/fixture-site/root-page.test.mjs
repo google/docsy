@@ -1,13 +1,13 @@
-// Pins the root-page lookup (_partials/td/root-page.html) and all.llms.txt's
-// docs-section lookup on sites with no `/docs` section but pages named docs
-// elsewhere (docsy/docsy#2875), plus the auto-created translated landing and
-// baseURL-subpath cases. Covered cases:
+// The root-page lookup (_partials/td/root-page.html, all.llms.txt) on the
+// shapes that defeat a by-name lookup (docsy/docsy#2875) and on the recipe's
+// multilingual and subpath variants. Case inventory:
 // docsy.dev/content/en/project/design/root-page.md
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildCleanSite } from './lib/build-site.mjs';
 import {
+  chrome,
   describedbyLinks,
   docRootedConfig,
   docRootedHomes,
@@ -59,11 +59,11 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
   assert.ok(llms.includes('\n> Site summary\n'), 'llms.txt quotes the home');
   assert.ok(
     !llms.includes('## Documentation index'),
-    'llms.txt has no documentation index without a /docs section',
+    'llms.txt omits the documentation index without a /docs section',
   );
 });
 
-test('a single nested page named docs is not taken for the docs section', () => {
+test('a single nested page named docs is left out of the docs section lookup', () => {
   const b = buildCleanSite('root-page-one-docs', {
     files: oneNestedDocs,
     extraConfig: llmsConfig,
@@ -71,11 +71,11 @@ test('a single nested page named docs is not taken for the docs section', () => 
   const llms = b.publicFile('llms.txt');
   assert.ok(
     !llms.includes('## Documentation index'),
-    'llms.txt has no documentation index without a /docs section',
+    'llms.txt omits the documentation index without a /docs section',
   );
   assert.ok(
     !llms.includes('guides/docs/sub'),
-    'llms.txt does not index the nested docs section as the docs section',
+    'llms.txt leaves the nested docs section unindexed',
   );
 });
 
@@ -108,7 +108,7 @@ test('an auto-created docs landing is the root page of its language', () => {
     'defaultContentLanguageInSubdir: true\n',
   );
   assert.ok(
-    /class="td-navbar/.test(b.publicFile('en/index.html')),
+    chrome.navbar(b.publicFile('en/index.html')),
     'default language under its subdirectory keeps its own root page as donor',
   );
   assert.deepEqual(
@@ -128,7 +128,7 @@ test('an auto-created docs landing is the root page of its language', () => {
     'fr page head links the fr llms.txt as describedby, once',
   );
   assert.ok(
-    /class="td-navbar/.test(b.publicFile('fr/index.html')),
+    chrome.navbar(b.publicFile('fr/index.html')),
     'fr auto-created landing is the chrome donor',
   );
 });
@@ -150,13 +150,11 @@ test('a baseURL subpath moves every root-page URL together', () => {
     'llms.txt links the root Markdown version under the subpath',
   );
   assert.ok(
-    /data-chrome-donor="\/sub\/" data-chrome-region="navbar"/.test(
-      b.publicFile('install/index.html'),
-    ),
+    chrome.placeholder(b.publicFile('install/index.html'), 'navbar', '/sub/'),
     'inner page names the subpath root as chrome donor',
   );
   assert.ok(
-    /class="td-navbar/.test(b.publicFile('index.html')),
+    chrome.navbar(b.publicFile('index.html')),
     'root page under the subpath is the chrome donor',
   );
 });

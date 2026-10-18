@@ -239,15 +239,16 @@
   }
 
   // --- Page-invariant chrome (navbar, footer) -----------------------------
-  // The shared build keeps the navbar and footer only on home pages. An inner
-  // page leaves a placeholder per dropped region (see _partials/navbar.html
-  // and _partials/footer.html) naming the home "donor". Here we fetch the donor
+  // The shared build keeps the navbar and footer only on each locale's root
+  // page (the home, or the docs landing on a doc-rooted site). An inner page
+  // leaves a placeholder per dropped region (see _partials/navbar.html and
+  // _partials/footer.html) naming that donor page. Here we fetch the donor page
   // once, extract each region, and swap it in, so the page matches a full render.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
   // Re-apply this page's navbar cover/theme traits after the swap. The cover
   // (translucent) styling and dark theme are per-page, but the restored navbar
-  // is the home donor's, which may carry different traits. The placeholder's
+  // is the donor page's, which may carry different traits. The placeholder's
   // server-baked hints (data-navbar-cover, data-navbar-theme) carry this page's,
   // so the result matches a full build (see _partials/navbar.html).
   function applyNavbarCoverTheme(navbar, placeholder) {
@@ -262,8 +263,8 @@
     }
   }
 
-  // Re-derive the navbar's active link for the current page. The home donor's
-  // navbar carries the home page's active state, so clear it and mark the
+  // Re-derive the navbar's active link for the current page. The donor page's
+  // navbar carries its own active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
   // prefix), matching a full build's IsMenuCurrent/IsDescendant logic.
   function setNavbarActive(navbar) {
@@ -288,10 +289,10 @@
     if (best) best.classList.add('active');
   }
 
-  // The navbar's version/language selectors carry per-page links that the home
-  // donor renders for the home page, so re-derive each for the current page.
-  // `donorPath` is the donor's path — the current locale's home — passed down
-  // from restoreChrome.
+  // The navbar's version/language selectors carry per-page links that the donor
+  // page renders for itself, so re-derive each for the current page. `donorPath`
+  // is the donor page's path, the current locale's root, passed down from
+  // restoreChrome.
 
   // Version links are exact: each is a version's base URL plus the page path
   // (when `version_menu_pagelinks` is on), so the donor's link is
@@ -311,8 +312,8 @@
   }
 
   // Language links point at the current page's counterpart in each locale; the
-  // donor renders the home's, i.e. each locale's home. Swap the current locale's
-  // home prefix (`donorPath`) for the target locale's to reproduce the full
+  // donor page renders its own, i.e. each locale's root. Swap the current locale's
+  // root prefix (`donorPath`) for the target locale's to reproduce the full
   // build's link. Exact when translations share slugs and all exist (the common
   // case); otherwise a best-effort functional restore.
   function restoreLangLinks(navbar, donorPath) {
@@ -333,7 +334,7 @@
   }
 
   // Fetch a donor page (cached across the session) and hand its parsed Document
-  // to `callback`. Used to restore page-invariant chrome from the home page.
+  // to `callback`. Used to restore page-invariant chrome from the root page.
   function withDonorDoc(url, callback) {
     const cached = readCache('doc:' + url);
     if (cached) {

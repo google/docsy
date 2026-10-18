@@ -27,8 +27,7 @@
     {{ $render = and $root (eq $p.RelPermalink $root.RelPermalink) -}}
   {{ else -}}
     {{/* The root page's HTML render only: the HTML format is the current one when
-      it is among the page's formats but not its alternatives, so the page's print
-      render gets a placeholder like any other page. */ -}}
+      it is among the page's formats but not its alternatives. */ -}}
     {{ $html := and ($p.OutputFormats.Get "html") (not ($p.AlternativeOutputFormats.Get "html")) -}}
     {{ $render = and $html ($p.Eq (partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink)) -}}
   {{ end -}}

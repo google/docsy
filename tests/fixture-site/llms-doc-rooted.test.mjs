@@ -1,10 +1,6 @@
-// Doc-rooted sites (docs section published at the site root, home link-only;
-// recipe: docsy.dev/content/en/docs/content/adding-content.md § Doc-rooted
-// sites) have no rendered home, so llms.txt must come from the page that
-// publishes the root (docsy/docsy#2834). Also pins the all-sites consequences:
-// the Markdown versions' per-language llms.txt link, the head's describedby
-// link and its root-page gate, section-kind rendering, and a site's own
-// index.llms.txt override.
+// llms.txt on doc-rooted sites (lib/fixtures.mjs): the home renders nothing, so
+// the file comes from the page publishing the root (docsy/docsy#2834), with the
+// all-sites consequences of that template change.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';

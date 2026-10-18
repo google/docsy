@@ -8,7 +8,7 @@
 //   build exited 0 with no navbar or footer anywhere (docsy/docsy#2875's
 //   companion defect). Theme-level fixture: tests/fixture-site/chrome-doc-rooted.
 
-import test, { after } from 'node:test';
+import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import {
@@ -21,17 +21,18 @@ import {
 } from 'node:fs';
 import { join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { chrome } from '../../../tests/fixture-site/lib/fixtures.mjs';
 
 const siteDir = fileURLToPath(new URL('../../', import.meta.url));
 const tmpDir = join(siteDir, 'tmp');
 
-// Builds to a throwaway destination, so the published public/ that test:base
-// produces stays intact. One build serves every test in this file.
-let built;
-function docRooted() {
-  if (built) return built;
+// One build for the file, to a throwaway destination so the published public/
+// that test:base produces stays intact; cleaned up whatever the build did.
+let destDir;
+const file = (rel) => readFileSync(join(destDir, rel), 'utf8');
+before(() => {
   mkdirSync(tmpDir, { recursive: true });
-  const destDir = mkdtempSync(join(tmpDir, 'doc-rooted-'));
+  destDir = mkdtempSync(join(tmpDir, 'doc-rooted-'));
   const res = spawnSync(`npm run build -- -d "${destDir}"`, {
     cwd: siteDir,
     shell: true,
@@ -49,28 +50,13 @@ function docRooted() {
     !/WARN/.test(output),
     `doc-rooted build is warning-free; output:\n${output}`,
   );
-  built = {
-    destDir,
-    file: (rel) => readFileSync(join(destDir, rel), 'utf8'),
-  };
-  return built;
-}
+});
 after(() => {
-  if (built) rmSync(built.destDir, { recursive: true, force: true });
+  if (destDir) rmSync(destDir, { recursive: true, force: true });
 });
 
-const chrome = {
-  navbar: (h) => /class="td-navbar/.test(h),
-  footer: (h) => /class="td-footer/.test(h),
-  placeholder: (h, region, donor) =>
-    new RegExp(
-      `class="td-chrome-placeholder" data-chrome-donor="${donor}" data-chrome-region="${region}"`,
-    ).test(h),
-};
-
 test('doc-rooted variant publishes llms.txt at each language root only', () => {
-  const b = docRooted();
-  const llmsFiles = globSync('**/llms.txt', { cwd: b.destDir })
+  const llmsFiles = globSync('**/llms.txt', { cwd: destDir })
     .map((f) => f.split(sep).join('/'))
     .sort();
   assert.deepEqual(llmsFiles, ['fr/llms.txt', 'llms.txt']);
@@ -78,7 +64,7 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     ['llms.txt', 'index.md'],
     ['fr/llms.txt', 'fr/index.md'],
   ]) {
-    const content = b.file(llms);
+    const content = file(llms);
     assert.ok(
       content.startsWith('# Docsy\n'),
       `${llms} opens with the site title`,
@@ -94,34 +80,33 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     ['fr/index.html', '/fr/llms.txt'],
   ]) {
     assert.ok(
-      b.file(page).includes(`For AI agents: the site's llms.txt is at ${llms}`),
+      file(page).includes(`For AI agents: the site's llms.txt is at ${llms}`),
       `${page} directive points at ${llms}`,
     );
   }
 
-  for (const file of [
+  for (const f of [
     'index.html',
     'index.xml',
     'index.md',
     '_print/index.html',
   ]) {
-    assert.ok(existsSync(join(b.destDir, file)), `root publishes ${file}`);
+    assert.ok(existsSync(join(destDir, f)), `root publishes ${f}`);
   }
 });
 
 test('doc-rooted shared build keeps the navbar and footer on each language root', () => {
-  const b = docRooted();
   for (const [root, donor] of [
     ['index.html', '/'],
     ['fr/index.html', '/fr/'],
   ]) {
-    const h = b.file(root);
+    const h = file(root);
     assert.ok(chrome.navbar(h), `navbar kept on the root page ${root}`);
     assert.ok(chrome.footer(h), `footer kept on the root page ${root}`);
     assert.ok(
       !chrome.placeholder(h, 'navbar', donor) &&
         !chrome.placeholder(h, 'footer', donor),
-      `root page ${root} carries no chrome placeholder`,
+      `root page ${root} renders its chrome directly`,
     );
   }
 
@@ -129,7 +114,7 @@ test('doc-rooted shared build keeps the navbar and footer on each language root'
     'content/adding-content/index.html',
     '_print/index.html',
   ]) {
-    const h = b.file(inner);
+    const h = file(inner);
     assert.ok(!chrome.navbar(h) && !chrome.footer(h), `${inner} drops both`);
     assert.ok(
       chrome.placeholder(h, 'navbar', '/') &&

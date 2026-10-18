@@ -1,9 +1,6 @@
 // Cases: CCR-20 (doc-rooted donor page). See the CCR case registry in tests/fixture-site/README.md.
-// On a doc-rooted site (lib/fixtures.mjs: docs section published at the site
-// root, home link-only) the navbar and footer donor page is the one publishing
-// each language's root, not Hugo's home, which renders nothing. Pins that the
-// donor page renders exactly once per language, on its HTML render, and that
-// the placeholders name its URL (docsy/docsy#2875 companion fix).
+// The navbar and footer donor page on a doc-rooted site (lib/fixtures.mjs),
+// whose home renders nothing (docsy/docsy#2875 companion fix).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -43,12 +40,10 @@ test('shared mode keeps the navbar and footer on each language root of a doc-roo
     assert.ok(
       !chrome.placeholder(h, 'navbar', donor) &&
         !chrome.placeholder(h, 'footer', donor),
-      `root page ${root} carries no chrome placeholder`,
+      `root page ${root} renders its chrome directly`,
     );
   }
 
-  // The donor is the root page's HTML render; its print render is a page like
-  // any other.
   for (const [inner, donor] of [
     ['install/index.html', '/'],
     ['fr/installation/index.html', '/fr/'],

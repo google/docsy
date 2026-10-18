@@ -15,9 +15,8 @@ depends on the site's layout:
   home page still exists but renders nothing (`build: { render: link }`).
 
 Because the two can differ, the theme selects the root page once per language
-rather than assuming the home page. This page records that selection rule, who
-relies on it, and the cases it covers; the user-facing definition and setup stay
-in the user guide.
+rather than assuming the home page. The definition and setup stay in the user
+guide; this page is the maintainers' record.
 
 ## Selection rule
 
@@ -58,9 +57,6 @@ lists its subsections. Two alternatives that avoided the name were set aside:
 - Scanning `site.Sections` for a section at the home's URL depends on Hugo's
   listing rules: a landing with `build.list: never` publishes but is not listed.
 - A configuration switch would duplicate what `permalinks` already states.
-
-This is not general root-page detection: a page at any other path is never
-selected.
 
 ## Covered cases
 
