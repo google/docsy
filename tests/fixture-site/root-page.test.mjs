@@ -205,6 +205,15 @@ test('moving rel=canonical to the print format leaves the root page and its dono
     chrome.placeholder(b.publicFile('install/index.html'), 'navbar', '/'),
     'inner page names the root HTML render as donor',
   );
+  assert.ok(
+    chrome.placeholder(b.publicFile('install/index.html'), 'footer', '/'),
+    'inner page footer placeholder names the root HTML render as donor',
+  );
+  assert.match(
+    b.publicFile('_print/index.html'),
+    /data-canonical-path="\/"/,
+    'root print render bakes the root HTML URL as its canonical path',
+  );
   assert.deepEqual(
     describedbyLinks(b.publicFile('install/index.html')),
     ['<link rel="describedby" href="https://example.org/llms.txt">'],
@@ -212,9 +221,10 @@ test('moving rel=canonical to the print format leaves the root page and its dono
   );
 });
 
-// A link-only home keeps only its first output format, so its own URL follows
-// that format; the selection compares against the configured site root instead.
-test("a doc-rooted home listing LLMS before HTML doesn't move the root page", () => {
+// Documented limit (design page § Limits): a link-only home keeps only its first
+// output format, so a home listing LLMS first has no HTML URL to compare with;
+// the home stays the root page and no render is the donor.
+test('a doc-rooted home listing LLMS before HTML has no root page selection (documented limit)', () => {
   const b = buildCleanSite('root-page-home-llms-first', {
     files: docRootedFiles,
     extraConfig:
@@ -229,12 +239,29 @@ test("a doc-rooted home listing LLMS before HTML doesn't move the root page", ()
   assert.ok(
     b
       .publicFile('llms.txt')
-      .includes('- [Home page](https://example.org/index.md)'),
-    'llms.txt links the docs section page Markdown version as the home page',
+      .includes('- [Home page](https://example.org/llms.txt)'),
+    'llms.txt links the home page by its only URL, the LLMS one',
   );
   assert.ok(
+    !chrome.navbar(b.publicFile('index.html')),
+    'docs section page HTML render carries a placeholder, not the navbar',
+  );
+});
+
+test('uglyURLs leaves the root page selection and its donor unchanged', () => {
+  const b = buildDocRooted('root-page-ugly-urls', [], 'uglyURLs: true\n');
+  assert.ok(
     chrome.navbar(b.publicFile('index.html')),
-    'docs section page is the chrome donor',
+    'root page HTML render is the chrome donor',
+  );
+  assert.ok(
+    chrome.placeholder(b.publicFile('install.html'), 'navbar', '/index.html'),
+    'inner page names the root HTML document as donor',
+  );
+  assert.deepEqual(
+    describedbyLinks(b.publicFile('install.html')),
+    ['<link rel="describedby" href="https://example.org/llms.txt">'],
+    'page head links the root llms.txt as describedby, once',
   );
 });
 

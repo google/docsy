@@ -76,7 +76,7 @@
 </nav>
 {{- else -}}
   <div class="td-chrome-placeholder" {{/**/ -}}
-    data-chrome-donor="{{ relLangURL "" }}" {{/**/ -}}
+    data-chrome-donor="{{ (.Site.Home.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
     data-chrome-region="navbar" {{/**/ -}}
     data-canonical-path="{{ (.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
     data-navbar-cover="{{ $cover }}" {{/**/ -}}

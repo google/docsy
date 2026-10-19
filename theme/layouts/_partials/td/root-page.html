@@ -8,13 +8,13 @@ Returns the site's [root page][]. For details, see [Root page][].
 */ -}}
 
 {{ $rootPage := .Home -}}
-{{/* The root URL of the site passed as context: absLangURL would give the
-  rendering site's (all.llms.txt evaluates every language's site). */ -}}
-{{ $rootURL := printf "%s%s/" (strings.TrimSuffix "/" .BaseURL) .LanguagePrefix -}}
-{{ with .GetPage "/docs" -}}
-  {{ $docs := . -}}
-  {{ with .OutputFormats.Get "html" -}}
-    {{ if eq .Permalink $rootURL }}{{ $rootPage = $docs }}{{ end -}}
+{{ with .Home.OutputFormats.Get "html" -}}
+  {{ $homeURL := .RelPermalink -}}
+  {{ with $.GetPage "/docs" -}}
+    {{ $docs := . -}}
+    {{ with .OutputFormats.Get "html" -}}
+      {{ if eq .RelPermalink $homeURL }}{{ $rootPage = $docs }}{{ end -}}
+    {{ end -}}
   {{ end -}}
 {{ end -}}
 {{ return $rootPage -}}

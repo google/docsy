@@ -10,9 +10,9 @@ The theme finds a site's [root page][] by this rule:
 ## Selection rule
 
 [`_partials/td/root-page.html`][partial] takes a `Site` and returns a page: the
-page at content path `/docs` when the URL of its `html` output format is the
-site root (the base URL plus the language prefix), otherwise the home. Consumers
-share the result through `partialCached`, keyed by the language.
+page at content path `/docs` when the URL of its `html` output format equals the
+home page's, otherwise the home. Consumers share the result through
+`partialCached`, which caches per site; the `llms.txt` locale loop keys by site.
 
 ## Consumers
 
@@ -29,8 +29,8 @@ share the result through `partialCached`, keyed by the language.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
   footer are kept on one [donor page][] per language, the root page, and
   restored from it elsewhere. The chrome applies the definition without the
-  lookup: a page is the donor when its `html` URL is the site root, and the
-  placeholders name the site root.
+  lookup: a page is the donor when its `html` URL equals the home page's, and
+  the placeholders name the home page's `html` URL.
 
 ## Why this rule
 
@@ -41,9 +41,12 @@ named `docs` (`page reference "docs" is ambiguous`) and silently returns the one
 such page otherwise ([#2875][]). The URL comparison is what keeps an ordinary
 `/docs/` section from being taken for the root. It compares the docs page's
 `html` URL, not the URL of the format being rendered: consumers cache the result
-per language, and a permalinkable format can render before HTML. The site root
-comes from configuration rather than from the home's URL, which follows the
-home's first output format once the home is link-only.
+per site, and a permalinkable format can render before HTML. The home page's
+`html` URL is the reference because Hugo computes it under every URL setting
+(`baseURL` paths, language prefixes, multihost, `uglyURLs`, and the site
+matrix's version dimension), none of which a configuration-derived root
+reproduces; a link-only home keeps that URL as long as `HTML` is its first
+output format.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index
@@ -69,7 +72,7 @@ test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
 | `docs` section page without a translated `_index` file         | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.                                                                              | `root-page`                                                                                        |
 | `baseURL` with a subpath                                       | Both compared URLs include the subpath, so the selection is unchanged.                                                                                                                                              | `root-page`                                                                                        |
 | Several output formats (HTML, Markdown, print, RSS, LLMS)      | Selection is unchanged whatever format renders first or carries `rel=canonical` (the rule compares `html` URLs). The donor is the root page's HTML render; its print render gets a placeholder like any other page. | `root-page`, `llms-doc-rooted`, `chrome-doc-rooted` (print), `chrome-render` (permalinkable print) |
-| Doc-rooted home whose `outputs` don't start with `HTML`        | Selection is unchanged: the site root comes from configuration, not from the home's URL, which a link-only home takes from its first output format (`/llms.txt` for `[LLMS, HTML]`).                                | `root-page`                                                                                        |
+| `uglyURLs`                                                     | Both compared URLs end in `index.html`, so the selection is unchanged; the donor is named as `/index.html`.                                                                                                         | `root-page`                                                                                        |
 | Doc-rooted home with `LLMS` configured                         | The home publishes no file; root-level `llms.txt` and discovery require `LLMS` on the `docs` section page.                                                                                                          | `llms-doc-rooted`                                                                                  |
 | Root page without `LLMS`                                       | No `describedby` link, directive, or Markdown link, even when another section publishes an `llms.txt`; the shortcode fails the build when invoked.                                                                  | `llms-directive`, `llms-doc-rooted`                                                                |
 | `LLMS` on a non-root section                                   | Its `llms.txt` is the site overview, not a section index; discovery still depends on the root page's `LLMS` output.                                                                                                 | `llms-doc-rooted`                                                                                  |
@@ -84,6 +87,12 @@ The design leaves these unresolved:
 - A doc-rooted language without a `/docs` section: it has no root page, so
   `llms.txt` lists the language at an unpublished URL, and the site root that
   shared chrome names as donor serves nothing.
+- A doc-rooted home whose output formats (site `outputs.home`, or its own front
+  matter) don't start with `HTML`: a link-only page keeps only its first
+  configured format, so the home has no `html` URL to compare with; the home
+  stays the root page and no render is the donor. The same holds for
+  `build.render: never` and an empty `outputs.home`. Hugo's [`outputs`
+  convention][outputs] is `HTML` first.
 - A root page whose `outputs` leave out `HTML`: no render of it is the donor.
 - `HTML` marked `notAlternative`: the donor page's other renders then carry the
   chrome too (the current-render test is "`HTML` is not among the
@@ -99,6 +108,7 @@ The design leaves these unresolved:
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [donor page]: /docs/deployment/chrome/#donor-pages
 [path conflict]: /docs/content/adding-content/#check-for-path-conflicts
+[outputs]: https://gohugo.io/configuration/outputs/
 [partial]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html
 [root page]: /docs/content/adding-content/#how-it-works
 <!-- prettier-ignore-end -->

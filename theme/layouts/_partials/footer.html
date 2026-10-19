@@ -16,7 +16,7 @@
 </footer>
 {{- else -}}
   <div class="td-chrome-placeholder" {{/**/ -}}
-    data-chrome-donor="{{ relLangURL "" }}" {{/**/ -}}
+    data-chrome-donor="{{ (.Site.Home.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
     data-chrome-region="footer">{{/**/ -}}
   </div>
 {{- end -}}
