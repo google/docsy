@@ -169,7 +169,72 @@ test('a permalinkable format rendered before HTML leaves the root page selection
   );
   assert.ok(
     chrome.placeholder(b.publicFile('_print/index.html'), 'navbar', '/'),
-    'root print render names the root canonical render as donor',
+    'root print render names the root HTML render as donor',
+  );
+});
+
+// `rel` is per-format SEO metadata a site may move; the root page and the donor
+// are the HTML render whatever carries rel=canonical.
+test('moving rel=canonical to the print format leaves the root page and its donor unchanged', () => {
+  const b = buildCleanSite('root-page-rel-moved', {
+    files: docRootedFiles,
+    extraConfig:
+      docRootedConfig +
+      llmsOutputs +
+      [
+        'outputFormats:',
+        '  html: { rel: alternate }',
+        '  print:',
+        '    { baseName: index, mediaType: text/html, path: _print, permalinkable: true, weight: 5, rel: canonical }',
+        'cascade:',
+        '  - target: { path: /docs }',
+        '    outputs: [HTML, RSS, markdown, LLMS, print]',
+        '',
+      ].join('\n'),
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.ok(
+    chrome.navbar(b.publicFile('index.html')),
+    'root page HTML render is the chrome donor',
+  );
+  assert.ok(
+    chrome.placeholder(b.publicFile('_print/index.html'), 'navbar', '/'),
+    'root print render names the root HTML render as donor',
+  );
+  assert.ok(
+    chrome.placeholder(b.publicFile('install/index.html'), 'navbar', '/'),
+    'inner page names the root HTML render as donor',
+  );
+  assert.deepEqual(
+    describedbyLinks(b.publicFile('install/index.html')),
+    ['<link rel="describedby" href="https://example.org/llms.txt">'],
+    'page head links the root llms.txt as describedby, once',
+  );
+});
+
+// A link-only home keeps only its first output format, so its own URL follows
+// that format; the selection compares against the configured site root instead.
+test("a doc-rooted home listing LLMS before HTML doesn't move the root page", () => {
+  const b = buildCleanSite('root-page-home-llms-first', {
+    files: docRootedFiles,
+    extraConfig:
+      docRootedConfig +
+      llmsOutputs.replace(
+        'home: [HTML, markdown, LLMS]',
+        'home: [LLMS, HTML]',
+      ) +
+      landingOutputs,
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.ok(
+    b
+      .publicFile('llms.txt')
+      .includes('- [Home page](https://example.org/index.md)'),
+    'llms.txt links the docs section page Markdown version as the home page',
+  );
+  assert.ok(
+    chrome.navbar(b.publicFile('index.html')),
+    'docs section page is the chrome donor',
   );
 });
 

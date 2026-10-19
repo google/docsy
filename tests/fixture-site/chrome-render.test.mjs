@@ -254,9 +254,9 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// With `print` permalinkable, placeholders still name the canonical render,
+// With `print` permalinkable, placeholders still name the HTML render,
 // the only render that keeps the chrome.
-test('shared mode placeholders name the root page canonical render even when another format is permalinkable', () => {
+test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,
     extraConfig: [
@@ -277,7 +277,7 @@ test('shared mode placeholders name the root page canonical render even when ano
       assert.ok(!has[region](h), `${region} absent on the print render ${rel}`);
       assert.ok(
         has.placeholder(h, region, '/'),
-        `${rel} ${region} placeholder names the root page canonical render`,
+        `${rel} ${region} placeholder names the root page HTML render`,
       );
     }
   }

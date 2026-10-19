@@ -53,7 +53,7 @@ means no dedicated test yet.
 | CCR-17 | Out-of-tree active-path (`toc_hide`)                                        | restored | `chrome-out-of-tree`                                   |
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                                     | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                         | restored | —                                                      |
-| CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, canonical render) | partial  | `chrome-doc-rooted`, `root-page`                       |
+| CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, HTML render)      | partial  | `chrome-doc-rooted`, `root-page`                       |
 | CCR-21 | Per-page opt-out: `td.chrome: full` in front matter keeps the page's chrome | restored | `chrome-render`                                        |
 
 ### Open items
