@@ -1,15 +1,17 @@
-{{/* Argument: a Site (of any language).
-  Returns the page publishing the site's root URL: its home page, or the docs
-  section page when it is published there (doc-rooted sites). Rule, consumers
-  and covered cases: https://www.docsy.dev/project/design/root-page/ */ -}}
+{{/*
+Returns the site's root page, the page published at the site root.
+
+@context {site}
+@returns {page}
+
+For details, see https://www.docsy.dev/project/design/root-page/.
+*/ -}}
+
 {{ $rootPage := .Home -}}
-{{/* Absolute path on purpose: a bare "docs" falls back to a site-wide lookup by
-  file name (docsy/docsy#2875). The docs page's HTML URL, not the URL of the
-  format being rendered: a permalinkable format rendered first would otherwise
-  fill the per-language cache with the home. */ -}}
 {{ with .GetPage "/docs" -}}
-  {{ $url := .RelPermalink -}}
-  {{ with .OutputFormats.Get "html" }}{{ $url = .RelPermalink }}{{ end -}}
-  {{ if eq $url $rootPage.RelPermalink }}{{ $rootPage = . }}{{ end -}}
+  {{ $docs := . -}}
+  {{ with .OutputFormats.Get "html" -}}
+    {{ if eq .RelPermalink $.Home.RelPermalink }}{{ $rootPage = $docs }}{{ end -}}
+  {{ end -}}
 {{ end -}}
 {{ return $rootPage -}}

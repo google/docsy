@@ -40,7 +40,9 @@ bare `"docs"` would be wrong: when there is no `/docs` section, a `Site` lookup
 falls back to a site-wide lookup by file name, which fails the build on two
 pages named `docs` (`page reference "docs" is ambiguous`) and silently returns
 the one such page otherwise ([#2875][]). The URL comparison is what keeps an
-ordinary `/docs/` section from being taken for the root.
+ordinary `/docs/` section from being taken for the root. It compares the docs
+page's HTML URL, not the URL of the format being rendered: consumers cache the
+result per site, and a permalinkable format can render before HTML.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index
