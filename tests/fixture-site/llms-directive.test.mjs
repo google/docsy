@@ -7,6 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
+import { describedbyLinks } from './lib/fixtures.mjs';
 
 const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -24,9 +25,6 @@ const llmsConfig = `outputs:
   page: [HTML, markdown]
   section: [HTML, RSS, markdown]
 `;
-
-const describedbyLinks = (html) =>
-  html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
 
 function build(name, extraConfig) {
   const r = buildSite(name, { files, extraConfig });

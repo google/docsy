@@ -82,9 +82,10 @@ column names fixture-site tests in this directory (drop the `.test.mjs` suffix);
   would fail on a stray placeholder seam.
 - **CCR-15 / CCR-16** (print / paginated canonical URL) are validated through
   the shared canonical-path mechanism in `chrome-canonical`, simulated via a
-  print-style request URL; `chrome-doc-rooted` and `chrome-render` build real
-  `_print/*` output but assert only its placeholders, and no `/page/N/` output
-  is built yet. A real print/paginator canonical-path fixture is a follow-up.
+  print-style request URL; the print fixtures (`chrome-doc-rooted`,
+  `chrome-render`, `root-page`) build real `_print/*` output but assert only its
+  placeholders, and no `/page/N/` output is built yet. A real print/paginator
+  canonical-path fixture is a follow-up.
 - **Donor-fetch failures** in `chrome-nav.js` currently `console.warn` and leave
   the placeholder in place. A richer recovery (retry, visible fallback) is
   deferred while the mode stays experimental; revisit if it is promoted.

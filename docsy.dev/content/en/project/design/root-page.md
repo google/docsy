@@ -5,20 +5,17 @@ description: >-
   `llms.txt` and shared chrome
 ---
 
-A site's **[root page][]** is the page published at its [site root][], `/` or
-`/`_`LANG`_`/`. Which page that is depends on the site's layout:
+A language's **[root page][]** is the page published at its [site root][]:
 
 - **Ordinary sites**: Hugo's [home page][].
-- **[Doc-rooted sites][doc-rooted site]** (definition and setup in the user
-  guide): the docs section's landing page; the home page still exists but
-  publishes nothing.
+- **[Doc-rooted sites][doc-rooted site]**: the docs landing.
 
 ## Selection rule
 
 [`_partials/td/root-page.html`][partial] takes a `Site` and returns a page: the
 page at content path `/docs` when the URL of its HTML render equals the home's
-URL, otherwise the home. Consumers share one cached result per language
-(`partialCached`, keyed by the home's permalink).
+URL, otherwise the home. Consumers share the result through `partialCached`,
+keyed by the home's permalink.
 
 ## Consumers
 
@@ -28,7 +25,8 @@ URL, otherwise the home. Consumers share one cached result per language
   `llms.txt` URL, which exists when the root page has an `LLMS` output
   ([Discovery][]).
 - **The `llms.txt` template** (`all.llms.txt`):
-  - The home-page and locale links are each language's root page.
+  - The home-page link and the `Site locales` list are each language's root
+    page.
   - The description is the root page's, falling back to the home page's.
   - The documentation index is a separate `/docs` lookup.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
@@ -58,18 +56,18 @@ The table records supported behavior; the **Evidence** column names the fixture
 test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
 `shared` mode.
 
-| Case                                                           | Root page and consequences                                                                                                                                                                                                                                                   | Evidence                                                                                           |
-| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| Ordinary site (home renders, docs under `/docs/`)              | The home. `llms.txt` at `/llms.txt` when `LLMS` is among the home outputs; the home is the donor page.                                                                                                                                                                       | `llms-directive`, `chrome-render`                                                                  |
-| Doc-rooted site                                                | The docs landing, published at the home's URL. Publishes `llms.txt` when its outputs include `LLMS`; it is the donor page.                                                                                                                                                   | `llms-doc-rooted`, `chrome-doc-rooted`                                                             |
-| No `/docs` section, pages named `docs` elsewhere (one or many) | The home; the build succeeds, and `llms.txt` has no documentation index.                                                                                                                                                                                                     | `root-page`                                                                                        |
-| Multilingual site                                              | One root page per language (`/`, `/fr/`), each able to publish its own `llms.txt` and each its own donor page; `defaultContentLanguageInSubdir` only moves the URLs.                                                                                                         | `root-page`, `chrome-doc-rooted`                                                                   |
-| Docs landing without a translated `_index` file                | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.                                                                                                                                       | `root-page`                                                                                        |
-| `baseURL` with a subpath                                       | Both compared URLs include the subpath, so the selection is unchanged.                                                                                                                                                                                                       | `root-page`                                                                                        |
-| Several output formats (HTML, Markdown, print, RSS, LLMS)      | The comparison uses the docs page's HTML URL and the home's URL, whatever format is being rendered, so a permalinkable format rendered before HTML selects the same page. The donor is the root page's HTML render; its print render gets a placeholder like any other page. | `root-page`, `llms-doc-rooted`, `chrome-doc-rooted` (print), `chrome-render` (permalinkable print) |
-| Doc-rooted home with `LLMS` configured                         | The home publishes no file; root-level `llms.txt` and discovery require `LLMS` on the docs landing.                                                                                                                                                                          | `llms-doc-rooted`                                                                                  |
-| Root page without `LLMS`                                       | No `describedby` link, directive, or Markdown link, even when another section publishes an `llms.txt`; the shortcode fails the build when invoked.                                                                                                                           | `llms-directive`, `llms-doc-rooted`                                                                |
-| `LLMS` on a non-root section                                   | Its `llms.txt` is the site overview, not a section index; discovery still depends on the root page's `LLMS` output.                                                                                                                                                          | `llms-doc-rooted`                                                                                  |
+| Case                                                           | Root page and consequences                                                                                                                                                             | Evidence                                                                                           |
+| -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Ordinary site (home renders, docs under `/docs/`)              | The home. `llms.txt` at `/llms.txt` when `LLMS` is among the home outputs; the home is the donor page.                                                                                 | `llms-directive`, `chrome-render`                                                                  |
+| Doc-rooted site                                                | The docs landing, published at the home's URL. Publishes `llms.txt` when its outputs include `LLMS`; it is the donor page.                                                             | `llms-doc-rooted`, `chrome-doc-rooted`                                                             |
+| No `/docs` section, pages named `docs` elsewhere (one or many) | The home; the build succeeds, and `llms.txt` has no documentation index.                                                                                                               | `root-page`                                                                                        |
+| Multilingual project                                           | One root page per language (`/`, `/fr/`), each able to publish its own `llms.txt` and each its own donor page; `defaultContentLanguageInSubdir` only moves the URLs.                   | `root-page`, `chrome-doc-rooted`                                                                   |
+| Docs landing without a translated `_index` file                | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.                                                 | `root-page`                                                                                        |
+| `baseURL` with a subpath                                       | Both compared URLs include the subpath, so the selection is unchanged.                                                                                                                 | `root-page`                                                                                        |
+| Several output formats (HTML, Markdown, print, RSS, LLMS)      | Selection is unchanged whatever format renders first (the rule compares HTML URLs). The donor is the root page's HTML render; its print render gets a placeholder like any other page. | `root-page`, `llms-doc-rooted`, `chrome-doc-rooted` (print), `chrome-render` (permalinkable print) |
+| Doc-rooted home with `LLMS` configured                         | The home publishes no file; root-level `llms.txt` and discovery require `LLMS` on the docs landing.                                                                                    | `llms-doc-rooted`                                                                                  |
+| Root page without `LLMS`                                       | No `describedby` link, directive, or Markdown link, even when another section publishes an `llms.txt`; the shortcode fails the build when invoked.                                     | `llms-directive`, `llms-doc-rooted`                                                                |
+| `LLMS` on a non-root section                                   | Its `llms.txt` is the site overview, not a section index; discovery still depends on the root page's `LLMS` output.                                                                    | `llms-doc-rooted`                                                                                  |
 
 ## Limits
 
@@ -81,10 +79,12 @@ The lookup resolves none of these:
 - A doc-rooted home whose output formats (site `outputs.home`, or its own front
   matter) don't start with `HTML`: a link-only page keeps only its first
   configured format, so the home's URL becomes that format's (`/llms.txt` for
-  `[LLMS, HTML]`; no URL at all for an empty `outputs.home`) and the comparison
-  fails. Hugo's [`outputs` convention][outputs] is `HTML` first.
+  `[LLMS, HTML]`; no URL at all for an empty `outputs.home`, or for a home with
+  `build.render: never`, which also collapses the cache key across languages)
+  and the comparison fails. Hugo's [`outputs` convention][outputs] is `HTML`
+  first.
 - A doc-rooted language without a `/docs` section: it has no root page, so
-  `llms.txt` lists the locale at an unpublished URL and shared chrome names it
+  `llms.txt` lists the language at an unpublished URL and shared chrome names it
   as donor.
 - `HTML` marked `notAlternative`: the donor page's other renders then carry the
   chrome too (the HTML-render test is "among the formats, not among the

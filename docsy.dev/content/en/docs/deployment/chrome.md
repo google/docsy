@@ -15,10 +15,9 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on just **one** page per locale (its [donor
-  page][donor pages]) and restores it on the other pages in the browser with a
-  small script. The output stays lean, while readers still get the full
-  navigation once the page loads.
+- **`shared`** renders each region on its [donor page][donor pages] only and
+  restores it on the other pages in the browser with a small script. The output
+  stays lean, while readers still get the full navigation once the page loads.
 
 > [!NOTE] Web dev note
 >
@@ -39,7 +38,7 @@ consumes the output:
 
 ## Donor pages
 
-A region's **donor page** is the one page per locale on which `shared` mode
+A region's **donor page** is the one page per language on which `shared` mode
 renders it; the other pages carry a placeholder that the browser fills from the
 donor page. Clients without JavaScript (some search crawlers included) see only
 the donor pages' chrome.
@@ -49,18 +48,21 @@ the donor pages' chrome.
 The donor pages are chosen so that every chrome link stays reachable without
 JavaScript:
 
-- **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
-  or the docs landing on a doc-rooted site). Their links are config-defined and
-  identical across the locale, except for the navbar's optional language
-  selector and version menu (see the [known differences][]).
-- **Left-nav** (computed per page): kept on each locale's docs landing page; it
-  carries the full docs tree. On a doc-rooted site the two donor pages coincide.
-  `shared` mode currently targets the **docs** section; other sections (such as
-  blog) aren't a validated target yet, so keep `full` for them.
+- **Navbar and footer**: kept on each language's **[root page][]** (the home
+  page, or the docs landing on a doc-rooted site). Their links are
+  config-defined and identical across the language, except the navbar's optional
+  selectors: a [version menu][version-menu] with `version_menu_pagelinks`
+  renders per-page links that the browser restores but a link checker reaches
+  only on the root page, and the language selector's restore has [known
+  differences][].
+- **Left-nav** (computed per page): kept on each language's docs landing page;
+  it carries the full docs tree. On a doc-rooted site the two donor pages
+  coincide. `shared` mode currently targets the **docs** section; other sections
+  (such as blog) aren't a validated target yet, so keep `full` for them.
 
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination
-locale's left-nav already covers, so the single kept navbar loses no reachable
+language's left-nav already covers, so the single kept navbar loses no reachable
 link.
 
 ## Known differences from a full build
@@ -71,17 +73,14 @@ link.
 > repeats that may not hold for every site. Keep `full` for production, and run
 > full-site link checks as well, even if less often.
 
-The restore aims to match a full build, and today `shared` is best suited to
-**development, deploy previews, link-checking, and output-diffing builds**. Four
-differences remain:
+The restore aims to match a full build; the known differences:
 
-- A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
-  renders per-page links that the single kept navbar won't cover yet.
-- The navbar's language selector is restored by swapping the locale prefix of
-  the current page's path, so a page with no translation in a locale gets a live
-  link where a full build disables the item, and a [doc-rooted
-  site][doc-rooted]'s title-based slugs usually differ across locales
-  ([#2689][]).
+- The navbar's language selector is restored by swapping the language prefix of
+  the current page's path ([#2689][]), so:
+  - A page with no translation in a language gets a live link where a full build
+    disables the item.
+  - On a [doc-rooted site][doc-rooted], title-based slugs usually differ across
+    languages, so the restored link misses.
 - On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
   active on non-docs pages that no other menu entry covers, such as taxonomy and
   404 pages (its URL, the language root, prefixes every path); a full build
@@ -89,7 +88,7 @@ differences remain:
 - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right links
   and active state, but its re-rooted subtree can differ structurally from a
   full build (an extra wrapper element, deeper `ul` nesting). The difference
-  isn't visible in the rendered nav &mdash; only in a serialized-HTML diff.
+  isn't visible in the rendered nav, only in a serialized-HTML diff.
 
 ## Setting the build mode
 

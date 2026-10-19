@@ -78,7 +78,8 @@
   {{- /* Placeholder for the navbar the donor page keeps (chrome-render.html;
   client: assets/js/chrome-nav.js), named by its HTML render's URL so that a
   permalinkable format's pages name it too. The other hints are this page's
-  navbar traits and logical URL, which the client re-applies after the swap. */ -}}
+  navbar traits, re-applied after the swap, and its logical URL, which keys the
+  client's active-state restore. */ -}}
   {{- $root := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
   {{- $donor := $root.RelPermalink -}}
   {{- with $root.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}

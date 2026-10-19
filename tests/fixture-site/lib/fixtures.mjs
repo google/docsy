@@ -7,7 +7,6 @@ export const frontMatter = (fields) =>
     .map(([k, v]) => `${k}: ${v}`)
     .join('\n')}\n---\n`;
 
-// A home page that keeps its URL but renders nothing.
 const linkOnlyHome = (fields) =>
   frontMatter({ ...fields, build: '{ render: link }' });
 
@@ -27,7 +26,7 @@ export const docRootedHomes = (en = {}, fr = {}) => ({
   'content/_index.fr.md': linkOnlyHome({ title: 'Accueil', ...fr }),
 });
 
-// The user guide's llms.txt setup: LLMS on the home, Markdown everywhere.
+// The user guide's llms.txt outputs (Agent support § Enable), without print.
 export const llmsOutputs = `outputs:
   home: [HTML, markdown, LLMS]
   page: [HTML, markdown]
