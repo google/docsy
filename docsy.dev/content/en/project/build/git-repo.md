@@ -8,12 +8,29 @@ linkTitle: Git repos and branches
 The [main Docsy repository][] is effectively a **monorepo** containing the
 Docsy:
 
-- **Theme** at the repo root
+- **Theme** in the `theme` directory
 - **Website** in the `docsy.dev` directory. The website uses the Docsy theme, of
   course, with extra styling.
 
 The main Docsy example site is [Goldydocs][], located in the [Docsy example site
 repository][].
+
+### Local build
+
+Site builds resolve the theme through the checkout's parent directory
+(`--themesDir ../..` with `theme: docsy/theme`), so the checkout directory must
+be named `docsy`. From a checkout named differently (a git worktree, for
+example), either run npm scripts through the `wt` helper
+(`npm run wt -- serve`), or set `HUGO_THEME=`_`DIR_NAME`_`/theme`, where
+_`DIR_NAME`_ is the checkout's directory name.
+
+With the [prerequisites][prereqs] installed, install and serve the website from
+the checkout root:
+
+```sh
+npm run install:safe
+npm run serve
+```
 
 ## Branch model
 
@@ -134,6 +151,7 @@ the published docs change only when `release` moves.
 [main Docsy repository]: <{{% param github_repo %}}>
 [Merge requirements]: /project/about/maintainer-notes/#merge-requirements
 [next-site]: https://main--docsydocs.netlify.app
+[prereqs]: /docs/get-started/docsy-as-module/installation-prerequisites/
 [prod-site]: https://www.docsy.dev
 [publishing a release]: /project/about/maintainer-notes/#publishing-a-release
 [release ruleset]: <{{% param github_repo %}}/rules/24234982>
