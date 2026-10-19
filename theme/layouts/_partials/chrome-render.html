@@ -1,7 +1,8 @@
 {{/*
 Reports whether a chrome region renders on a page in the current chrome build
-mode, the site param td.chrome: in shared mode, each region renders on its
-donor page only. Guide: https://www.docsy.dev/docs/deployment/chrome/
+mode, the td.chrome param (site-wide, or per page in front matter): in shared
+mode, each region renders on its donor page only, and a page set to full keeps
+its own. Guide: https://www.docsy.dev/docs/deployment/chrome/
 
 @param {page} page The page being rendered.
 @param {string} region The region: navbar, footer, or sidebar.

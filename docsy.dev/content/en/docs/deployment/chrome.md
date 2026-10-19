@@ -125,6 +125,13 @@ See Hugo's [configuration with environment variables][hugo-env-config]. Then run
 your link checker against the generated `public/` output as usual: a `shared`
 build needs no checker-specific configuration.
 
+To keep one page's chrome in a `shared` build, for example a page that must be
+complete without JavaScript, set the parameter in its front matter:
+
+```yaml
+td: { chrome: full }
+```
+
 <!-- prettier-ignore-start -->
 [#2689]: https://github.com/docsy/docsy/issues/2689
 [app-shell]: https://developer.chrome.com/blog/app-shell

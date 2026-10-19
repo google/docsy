@@ -1,4 +1,4 @@
-// Cases: CCR-01 (td.chrome param), CCR-02 (kept chrome). See the CCR case registry in tests/fixture-site/README.md.
+// Cases: CCR-01 (td.chrome param), CCR-02 (kept chrome), CCR-21 (per-page full). See the CCR case registry in tests/fixture-site/README.md.
 // Tests for the params.td.chrome gate (_partials/chrome-render.html), which
 // drops repeated chrome so a link checker reaches each link once. See the
 // chrome build modes guide:
@@ -111,6 +111,31 @@ test('shared mode can be set via site config', () => {
   assert.ok(has.sidebar(landing), 'left-nav kept on the docs landing');
   assert.ok(!has.navbar(landing), 'navbar absent on the docs landing');
   assert.ok(!has.footer(landing), 'footer absent on the docs landing');
+});
+
+// A page that must be complete without JavaScript opts out of the shared build.
+test('a page with td.chrome full in front matter keeps its own chrome in a shared build', () => {
+  const r = buildSite('ccr-page-full', {
+    files: {
+      ...files,
+      'content/docs/static.md':
+        '---\ntitle: Static\ntd: { chrome: full }\n---\nComplete without JS\n',
+    },
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
+  const page = r.publicFile('docs/static/index.html');
+  assert.ok(has.navbar(page), 'navbar rendered on the opted-out page');
+  assert.ok(has.footer(page), 'footer rendered on the opted-out page');
+  assert.ok(has.sidebar(page), 'left-nav rendered on the opted-out page');
+  assert.ok(
+    !/td-chrome-placeholder|td-sidebar-chrome-placeholder/.test(page),
+    'no placeholder on the opted-out page',
+  );
+  assert.ok(
+    !has.navbar(r.publicFile('docs/page-a/index.html')),
+    'other pages stay shared',
+  );
 });
 
 // Each language's left-nav links differ, so every language's docs section page is kept.
