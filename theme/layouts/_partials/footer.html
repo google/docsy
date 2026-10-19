@@ -17,10 +17,8 @@
   </div>
 </footer>
 {{- else -}}
-  {{- /* Placeholder for the footer the donor page keeps, named as in
-  navbar.html; the footer is page-invariant, so no per-page hints. */ -}}
-  {{- $root := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
-  {{- $donor := $root.RelPermalink -}}
-  {{- with $root.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
-  <div class="td-chrome-placeholder" data-chrome-donor="{{ $donor }}" data-chrome-region="footer"></div>
+  {{- /* The footer is page-invariant, so its placeholder carries no per-page
+  hints, unlike navbar.html's. */ -}}
+  {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
+  <div class="td-chrome-placeholder" data-chrome-donor="{{ ($rootPage.OutputFormats.Get "html").RelPermalink }}" data-chrome-region="footer"></div>
 {{- end -}}
