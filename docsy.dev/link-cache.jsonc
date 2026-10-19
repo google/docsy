@@ -450,8 +450,8 @@
     "via": "lychee",
   },
   "https://fabform.io/": {
-    "result": "error",
-    "when": "2026-10-12T04:45:51Z",
+    "result": 200,
+    "when": "2026-10-19T04:35:24Z",
     "via": "lychee",
   },
   "https://favicon.io/": {
@@ -5006,7 +5006,7 @@
   },
   "https://stackoverflow.com/questions/tagged/docsy": {
     "result": "error",
-    "when": "2026-10-12T04:45:51Z",
+    "when": "2026-10-19T04:35:23Z",
     "via": "lychee",
   },
   "https://support.atlassian.com/bitbucket-cloud/docs/yaml-anchors/": {
