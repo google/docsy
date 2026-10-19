@@ -37,8 +37,8 @@ export const describedbyLinks = (html) =>
   html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
 
 export const chrome = {
-  navbar: (h) => /class="td-navbar/.test(h),
-  footer: (h) => /class="td-footer/.test(h),
+  navbar: (h) => /class="td-navbar[\s"]/.test(h),
+  footer: (h) => /class="td-footer[\s"]/.test(h),
   placeholder: (h, region, donor) =>
     new RegExp(
       `class="td-chrome-placeholder" data-chrome-donor="${donor}" data-chrome-region="${region}"`,

@@ -63,10 +63,12 @@ column names fixture-site tests in this directory (drop the `.test.mjs` suffix);
   differ and the restored link 404s). When the current page has **no
   translation** in a locale, a full build renders that item disabled while
   shared mode restores a live link to the non-existent page. The divergence is
-  pinned by a known-limitation test in `chrome-selectors`. **Planned next:**
-  bake each page's available locales into the navbar placeholder and emit a
-  disabled item for the rest, matching a full build (a differing-slug variant
-  would also need this per-page hint).
+  pinned by a known-limitation test in `chrome-selectors`. A translation hidden
+  from the left-nav (`toc_hide`) is reachable without JavaScript only in a full
+  build, through the selector. **Planned next:** bake each page's available
+  locales into the navbar placeholder and emit a disabled item for the rest,
+  matching a full build (a differing-slug variant would also need this per-page
+  hint).
 - **CCR-20** (doc-rooted donor page): _partial._ The donor renders and the
   restore works, but on a doc-rooted site the docs menu entry's URL is `/`, so
   the longest-prefix active-link pass marks it active on the non-docs pages no

@@ -15,9 +15,9 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on its [donor page][donor pages] only and
-  restores it on the other pages in the browser with a small script. The output
-  stays lean, while readers still get the full navigation once the page loads.
+- **`shared`** renders each region on its [donor page][] only and restores it on
+  the other pages in the browser with a small script. The output stays lean,
+  while readers still get the full navigation once the page loads.
 
 > [!NOTE] Web dev note
 >
@@ -63,7 +63,8 @@ JavaScript:
 The navbar's language selector points to each page's own translation rather than
 a fixed target, but those translations are docs pages that the destination
 language's left-nav already covers, so the single kept navbar loses no reachable
-link.
+link, except a translation hidden from the left-nav (`toc_hide`): a full build
+reaches it through the selector, a shared build through nothing.
 
 ## Known differences from a full build
 
@@ -127,7 +128,7 @@ build needs no checker-specific configuration.
 [app-shell]: https://developer.chrome.com/blog/app-shell
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
-[donor pages]: #donor-pages
+[donor page]: #donor-pages
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [known differences]: #known-differences-from-a-full-build

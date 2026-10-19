@@ -88,7 +88,6 @@
 
     const currentItem = anchorLink.closest('li');
 
-    // Mark the anchor item and all of its ancestors as the active path.
     for (
       let li = currentItem;
       li;
@@ -114,7 +113,6 @@
     // build (which only checks the active path). Exact-match pages only: an
     // ancestor anchor isn't the current item, so it gets no extra expansion.
     if (activeLink && currentItem && !foldable) {
-      // Expand the current item's siblings and its direct children.
       for (const sibling of currentItem.parentElement.children) {
         if (sibling !== currentItem && sibling.tagName === 'LI') {
           sibling.classList.add('show');
@@ -186,7 +184,6 @@
       if (rootSpan) rootSpan.classList.add('td-sidebar-root-up-icon');
     }
 
-    // Promote the subtree to be the nav's sole top-level section.
     const topUl = nav.querySelector('ul');
     if (topUl) {
       rootLi.remove();
@@ -240,7 +237,7 @@
   }
 
   // --- Page-invariant chrome (navbar, footer) -----------------------------
-  // The shared build keeps the navbar and footer only on each locale's root
+  // The shared build keeps the navbar and footer only on each language's root
   // page (the home, or the docs landing on a doc-rooted site). An inner page
   // leaves a placeholder per dropped region (see _partials/navbar.html and
   // _partials/footer.html) naming it as the donor page.
@@ -293,7 +290,7 @@
 
   // The navbar's version/language selectors carry per-page links that the donor
   // page renders for itself, so re-derive each for the current page. `donorPath`
-  // is the donor page's path, the current locale's root.
+  // is the donor page's path, the current language's root.
 
   // Version links are exact: each is a version's base URL plus the page path
   // (when `version_menu_pagelinks` is on), so the donor's link is
@@ -312,12 +309,12 @@
     }
   }
 
-  // Language links point at the current page's counterpart in each locale; the
-  // donor page renders its own, i.e. each locale's root. Swap the current locale's
-  // root prefix (`donorPath`) for the target locale's to reproduce the full
-  // build's link. Exact when translations share slugs and all exist, otherwise
-  // a best-effort functional restore; the doc-rooted recipe's `:slug` falls back
-  // to titles, so its translations usually differ (CCR-10).
+  // Language links point at the current page's counterpart in each language;
+  // the donor page renders its own, i.e. each language's root. Swap the current
+  // language's root prefix (`donorPath`) for the target language's to reproduce
+  // the full build's link. Exact when translations share slugs and all exist,
+  // otherwise a best-effort functional restore; the doc-rooted recipe's `:slug`
+  // falls back to titles, so its translations usually differ (CCR-10).
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;
@@ -395,7 +392,6 @@
       injectFromDonor(placeholder);
       return;
     }
-    // No placeholder: hydrate a shared/cached inline nav if one is present.
     const menu = document.getElementById(MENU_ID);
     if (menu && menu.classList.contains('d-none')) {
       hydrate(menu);
