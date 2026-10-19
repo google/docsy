@@ -133,25 +133,26 @@ You can find out much more about how Hugo page layouts work in
 [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you
 about how to add content and use each of Docsy's templates.
 
-## Doc-rooted sites <a id="alternative-site-structure"></a>
+## Doc-rooted project <a id="alternative-site-structure"></a><a id="doc-rooted-site"></a>
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-A **doc-rooted** site is a Docsy convention that publishes the `docs` section at
-the [site root][].
+A **doc-rooted** Hugo [project][] is a Docsy _convention_ where content from a
+site's top-level `docs` section gets published at the [site root][].
 
 ### How it works
 
-Hugo gives a page a [logical path][] (its place in the content tree, which
-`GetPage` and `.Site.Home` resolve) and a [permalink][] (where it is published).
-The convention leaves the `docs` section at logical path `/docs` and moves its
-permalinks to the site root: `/getting-started/` rather than
-`/docs/getting-started/`. Two terms follow:
+Hugo gives each site page:
 
-- **Home page**: Hugo's `home`-kind page, `content/_index.md`: the root of the
-  content tree, with the site root as its URL.
-- **Root page**: the page published at the site root. Normally the home page; on
-  a doc-rooted site, the `docs` [section page][].
+- A [logical path][], its place in the site's [content tree][]; this is what
+  `GetPage` and `.Site.Home` resolve to for the page
+- A [permalink](#create-a-doc-rooted-site) where the page is published
+
+Hugo names the root of a site's [logical tree][] the **home page**. It's the
+only page of kind `home` in the tree.
+
+By **root page** we mean the page published at the site root, which is normally
+the home page; on a doc-rooted site, it is the `docs` [section page][].
 
 [`llms.txt`][] is published from the root page, and [`shared` chrome][] keeps
 the navbar and footer on it. In your own templates, `.Site.Home` still returns
