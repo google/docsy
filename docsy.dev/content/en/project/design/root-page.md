@@ -96,7 +96,7 @@ The lookup resolves none of these:
 [chrome build mode]: /docs/deployment/chrome/
 [Discovery]: /docs/content/agent-support/#discovery
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
-[donor page]: /docs/deployment/chrome/#donor-page
+[donor page]: /docs/deployment/chrome/#donor-pages
 [home page]: https://gohugo.io/methods/site/home/
 [outputs]: https://gohugo.io/configuration/outputs/
 [path conflict]: /docs/content/adding-content/#check-for-path-conflicts

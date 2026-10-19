@@ -194,7 +194,7 @@ history since 0.18.0][].
 [git history since 0.18.0]:
   https://github.com/docsy/docsy/compare/v0.18.0...main
 [project-root-page]: /project/design/root-page/
-[ug-donor-page]: /docs/deployment/chrome/#donor-page
+[ug-donor-page]: /docs/deployment/chrome/#donor-pages
 
 ## v0.18.0 {#v0.18.0}
 

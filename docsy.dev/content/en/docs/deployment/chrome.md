@@ -15,9 +15,10 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on just **one** page per locale and restores
-  it on the other pages in the browser with a small script. The output stays
-  lean, while readers still get the full navigation once the page loads.
+- **`shared`** renders each region on just **one** page per locale (its [donor
+  page][donor pages]) and restores it on the other pages in the browser with a
+  small script. The output stays lean, while readers still get the full
+  navigation once the page loads.
 
 > [!NOTE] Web dev note
 >
@@ -36,11 +37,17 @@ consumes the output:
   on every page, so a diff surfaces the content that actually changed.
 - **Smaller output** for local development and deploy previews.
 
+## Donor pages
+
+A region's **donor page** is the one page per locale on which `shared` mode
+renders it; the other pages carry a placeholder that the browser fills from the
+donor page. Clients without JavaScript (some search crawlers included) see only
+the donor pages' chrome.
+
 ## What `shared` mode keeps reachable
 
-In `shared` mode, each region stays on exactly one page per locale (its
-<a id="donor-page"></a>**donor page**, from which the browser restores the
-others), so every chrome link stays reachable without JavaScript:
+The donor pages are chosen so that every chrome link stays reachable without
+JavaScript:
 
 - **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
   or the docs landing on a doc-rooted site). Their links are config-defined and
@@ -61,9 +68,8 @@ link.
 > [!CAUTION]
 >
 > `shared` mode is [experimental][]: it rests on assumptions about how chrome
-> repeats that may not hold for every site, and clients without JavaScript (some
-> search crawlers included) see only the donor pages' chrome. Keep `full` for
-> production, and run full-site link checks as well, even if less often.
+> repeats that may not hold for every site. Keep `full` for production, and run
+> full-site link checks as well, even if less often.
 
 The restore aims to match a full build, and today `shared` is best suited to
 **development, deploy previews, link-checking, and output-diffing builds**. Four
@@ -122,6 +128,7 @@ build needs no checker-specific configuration.
 [app-shell]: https://developer.chrome.com/blog/app-shell
 [chrome]: https://www.nngroup.com/articles/browser-and-gui-chrome/
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
+[donor pages]: #donor-pages
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [known differences]: #known-differences-from-a-full-build
