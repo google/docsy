@@ -75,11 +75,10 @@
 </div>
 </nav>
 {{- else -}}
-  {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
   <div class="td-chrome-placeholder" {{/**/ -}}
-    data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" {{/**/ -}}
+    data-chrome-donor="{{ relLangURL "" }}" {{/**/ -}}
     data-chrome-region="navbar" {{/**/ -}}
-    data-canonical-path="{{ .OutputFormats.Canonical.RelPermalink }}" {{/**/ -}}
+    data-canonical-path="{{ (.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
     data-navbar-cover="{{ $cover }}" {{/**/ -}}
     data-navbar-theme="{{ cond $dark "dark" "" }}">{{/**/ -}}
   </div>

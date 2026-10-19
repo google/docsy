@@ -15,9 +15,8 @@
   </div>
 </footer>
 {{- else -}}
-  {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
   <div class="td-chrome-placeholder" {{/**/ -}}
-    data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" {{/**/ -}}
+    data-chrome-donor="{{ relLangURL "" }}" {{/**/ -}}
     data-chrome-region="footer">{{/**/ -}}
   </div>
 {{- end -}}

@@ -1,4 +1,4 @@
-{{ $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
+{{ $rootPage := partialCached "td/root-page.html" .Site .Site.Language.Lang -}}
 {{ $rootPageURL := $rootPage.Permalink -}}
 {{ with $rootPage.OutputFormats.Get "markdown" -}}
   {{ $rootPageURL = .Permalink -}}
@@ -55,7 +55,7 @@
 
   {{- "\n\n" -}}
   {{ range . -}}
-    {{ $localeRootPage := partialCached "td/root-page.html" . .Home.Permalink -}}
+    {{ $localeRootPage := partialCached "td/root-page.html" . .Language.Lang -}}
     {{ $url := $localeRootPage.Permalink -}}
     {{ with $localeRootPage.OutputFormats.Get "markdown" -}}
       {{ $url = .Permalink -}}

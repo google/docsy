@@ -16,14 +16,14 @@ its own. Guide: https://www.docsy.dev/docs/deployment/chrome/
     {{ $navRoot := cond (and (ne $p.Params.toc_root true) (eq $p.Site.Home.Type "docs")) $p.Site.Home $p.FirstSection -}}
     {{ $render = and $navRoot (eq $p.RelPermalink $navRoot.RelPermalink) -}}
   {{ else -}}
-    {{/* The canonical render only, since the page's other renders carry a
-      placeholder; tested by elimination over the alternatives, not with
-      _partials/outputformat.html, which misreports pages that have an LLMS
-      output. */ -}}
-    {{ $canonical := $p.OutputFormats.Canonical -}}
-    {{ $isCanonicalRender := and $canonical (not ($p.AlternativeOutputFormats.Get $canonical.Name)) -}}
-    {{ $rootPage := partialCached "td/root-page.html" $p.Site $p.Site.Home.Permalink -}}
-    {{ $render = and $isCanonicalRender ($p.Eq $rootPage) -}}
+    {{/* The donor is the HTML document at the site root, so the region renders
+      on the HTML render of the page published there; the page's other renders
+      carry a placeholder. The current render is tested by elimination over the
+      alternatives, not with _partials/outputformat.html, which misreports pages
+      that have an LLMS output. */ -}}
+    {{ $html := $p.OutputFormats.Get "html" -}}
+    {{ $isHtmlRender := and $html (not ($p.AlternativeOutputFormats.Get "html")) -}}
+    {{ $render = and $isHtmlRender (eq $html.RelPermalink (relLangURL "")) -}}
   {{ end -}}
 {{ end -}}
 {{ return $render -}}
