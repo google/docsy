@@ -173,13 +173,15 @@ history since 0.18.0][].
 
 **Other changes**:
 
-- Fixed builds failing on sites with pages named `docs` but no top-level `docs`
-  section (every site since 0.18.0, `llms.txt` sites since 0.15.0), and
-  `llms.txt` indexing such a page as the docs section ([#2875][],
-  [design][project-root-page]).
+- Fixed 0.18.0 builds failing with `page reference "docs" is ambiguous` on sites
+  that have two or more pages named `docs` but no top-level `docs` section
+  ([#2875][], [design][project-root-page]).
 
 [**Experimental**](#experimental):
 
+- **`llms.txt`**: fixed the documentation index lookup, which since 0.15.0
+  failed the build or indexed a nested page named `docs` when a site had no
+  top-level `docs` section ([#2875][]).
 - Fixed `shared` chrome dropping the navbar and footer from every page of a
   doc-rooted site; they now render on each language's root page, the [donor
   page][ug-donor-page] ([#2888][]).
