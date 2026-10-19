@@ -5,7 +5,8 @@ description: >-
   `llms.txt` and shared chrome
 ---
 
-A site's **[root page][]** is the page published at its [site root][]:
+A site's **[root page][]** is the page whose HTML render is published at its
+[site root][], the [home page][]'s URL:
 
 - **Ordinary sites**: Hugo's [home page][].
 - **[Doc-rooted sites][doc-rooted site]**: the docs landing.
