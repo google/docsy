@@ -19,18 +19,18 @@ stated in its header).
 experimental `shared` chrome [build mode][chrome docs]: the build drops the
 repeated navbar, footer, and left-nav from most pages and the browser restores
 them from a donor. This is the **case registry** for the fixture-site tests in
-this directory: every way a restored page can differ from a full build — each a
-**case** with a stable `CCR-NN` ID — and where a test covers it.
+this directory: every way a restored page can differ from a full build (each a
+**case** with a stable `CCR-NN` ID) and where a test covers it.
 
 - **Tracking issue:** [#2659][].
 - Tests cite their case ID in a header comment, so the ID ↔ test link is
   greppable both ways (`grep -rn CCR-13 tests/`).
 
-IDs are stable and append-only — never reused or renumbered. **Status** is
+IDs are stable and append-only, never reused or renumbered. **Status** is
 _restored_ (matches a full build), _partial_ (common case matches; a documented
-case diverges — see notes), or _deferred_ (known, not yet handled). The
-**Tests** column names fixture-site tests in this directory (drop the
-`.test.mjs` suffix); `—` means no dedicated test yet.
+case diverges; see notes), or _deferred_ (known, not yet handled). The **Tests**
+column names fixture-site tests in this directory (drop the `.test.mjs` suffix);
+`—` means no dedicated test yet.
 
 | ID     | Case / wrinkle                                                         | Status   | Tests                                                  |
 | ------ | ---------------------------------------------------------------------- | -------- | ------------------------------------------------------ |
@@ -57,24 +57,24 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 
 ### Open items
 
-- **CCR-10** (language-link exactness) — _partial._ The prefix-swap is exact
-  when translations share slugs and all exist (the common case on ordinary
-  sites; a doc-rooted site's page slugs fall back to titles, so translations
-  usually differ and the restored link 404s). When the current page has **no
+- **CCR-10** (language-link exactness): _partial._ The prefix-swap is exact when
+  translations share slugs and all exist (the common case on ordinary sites; a
+  doc-rooted site's page slugs fall back to titles, so translations usually
+  differ and the restored link 404s). When the current page has **no
   translation** in a locale, a full build renders that item disabled while
   shared mode restores a live link to the non-existent page. The divergence is
   pinned by a known-limitation test in `chrome-selectors`. **Planned next:**
   bake each page's available locales into the navbar placeholder and emit a
   disabled item for the rest, matching a full build (a differing-slug variant
   would also need this per-page hint).
-- **CCR-20** (doc-rooted donor page) — _partial._ The donor renders and the
+- **CCR-20** (doc-rooted donor page): _partial._ The donor renders and the
   restore works, but on a doc-rooted site the docs menu entry's URL is `/`, so
   the longest-prefix active-link pass marks it active on the non-docs pages no
   other menu entry covers (pages without a menu entry, taxonomies, 404), where a
   full build's `IsDescendant` marks nothing. Fix belongs with [#2689][].
 - **CCR-07** (non-foldable reveal) and **CCR-14** (scoped-root structural
-  residual) lack dedicated unit coverage. CCR-14 is browser-invisible — it shows
-  only in a serialized-HTML diff, not the rendered nav — and gates reinstating
+  residual) lack dedicated unit coverage. CCR-14 is browser-invisible (it shows
+  only in a serialized-HTML diff, not the rendered nav) and gates reinstating
   the docsy.dev `sidebar_root_for` example; a JSON doctree that re-renders the
   subtree would close it.
 - **CCR-19** (sidebar placeholder whitespace trim) has no dedicated test but is
@@ -88,7 +88,7 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 - **Donor-fetch failures** in `chrome-nav.js` currently `console.warn` and leave
   the placeholder in place. A richer recovery (retry, visible fallback) is
   deferred while the mode stays experimental; revisit if it is promoted.
-- **No end-to-end coverage** yet — a single real-browser smoke test (served
+- **No end-to-end coverage** yet: a single real-browser smoke test (served
   shared-mode site, assert restored regions) would guard the jsdom-vs-browser
   gap.
 

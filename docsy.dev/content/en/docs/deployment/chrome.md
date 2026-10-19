@@ -45,7 +45,7 @@ others), so every chrome link stays reachable without JavaScript:
 - **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
   or the docs landing on a doc-rooted site). Their links are config-defined and
   identical across the locale, except for the navbar's optional language
-  selector and version menu (see the caution).
+  selector and version menu (see the [known differences][]).
 - **Left-nav** (computed per page): kept on each locale's docs landing page; it
   carries the full docs tree. On a doc-rooted site the two donor pages coincide.
   `shared` mode currently targets the **docs** section; other sections (such as
@@ -56,30 +56,34 @@ a fixed target, but those translations are docs pages that the destination
 locale's left-nav already covers, so the single kept navbar loses no reachable
 link.
 
+## Known differences from a full build
+
 > [!CAUTION]
 >
-> `shared` mode is an [experimental][] optimization that rests on assumptions
-> about how chrome repeats, which may not hold for every site. The browser
-> restore of the navbar's language and version selectors is still a work in
-> progress, so today `shared` is best suited to **development, deploy previews,
-> link-checking, and output-diffing builds** rather than production deploys:
-> clients without JavaScript (and some search crawlers) see only the donor
-> pages' chrome. Keep `full` for production, and run full-site link checks as
-> well, even if less often.
->
-> Three known cases:
->
-> - A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
->   renders per-page links that the single kept navbar won't cover yet.
-> - On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
->   active on non-docs pages that no other menu entry covers, such as taxonomy
->   and 404 pages (its URL, the language root, prefixes every path); a full
->   build marks none of those ([#2689][]).
-> - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right
->   links and active state, but its re-rooted subtree can differ structurally
->   from a full build (an extra wrapper element, deeper `ul` nesting). The
->   difference isn't visible in the rendered nav &mdash; only in a
->   serialized-HTML diff.
+> `shared` mode is [experimental][]: it rests on assumptions about how chrome
+> repeats that may not hold for every site, and clients without JavaScript (some
+> search crawlers included) see only the donor pages' chrome. Keep `full` for
+> production, and run full-site link checks as well, even if less often.
+
+The restore aims to match a full build, and today `shared` is best suited to
+**development, deploy previews, link-checking, and output-diffing builds**. Four
+differences remain:
+
+- A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
+  renders per-page links that the single kept navbar won't cover yet.
+- The navbar's language selector is restored by swapping the locale prefix of
+  the current page's path, so a page with no translation in a locale gets a live
+  link where a full build disables the item, and a [doc-rooted
+  site][doc-rooted]'s title-based slugs usually differ across locales
+  ([#2689][]).
+- On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
+  active on non-docs pages that no other menu entry covers, such as taxonomy and
+  404 pages (its URL, the language root, prefixes every path); a full build
+  marks none of those ([#2689][]).
+- A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right links
+  and active state, but its re-rooted subtree can differ structurally from a
+  full build (an extra wrapper element, deeper `ul` nesting). The difference
+  isn't visible in the rendered nav &mdash; only in a serialized-HTML diff.
 
 ## Setting the build mode
 
@@ -120,6 +124,7 @@ build needs no checker-specific configuration.
 [doc-rooted]: /docs/content/adding-content/#doc-rooted-sites
 [experimental]: /project/about/changelog/#experimental
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
+[known differences]: #known-differences-from-a-full-build
 [mpa]: https://web.dev/learn/pwa/architecture/
 [root page]: /docs/content/adding-content/#doc-rooted-sites
 [sidebar-root]: /docs/content/navigation/#sidebar-root

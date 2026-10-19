@@ -3,7 +3,7 @@
 //
 // A shared build drops the repeated left-nav from inner pages and leaves a
 // placeholder behind (see _partials/sidebar.html). Here we fetch the section's
-// donor page — the kept docs landing, named by data-nav-donor — extract its
+// donor page (the kept docs landing, named by data-nav-donor), extract its
 // left-nav, inject it in place of the placeholder, and apply the active-page
 // state client-side. The extracted nav is cached in sessionStorage so later
 // pages in the same section reuse it without re-fetching.
@@ -50,8 +50,8 @@
     const here = currentPath();
 
     // Prefer an exact nav entry for this page; otherwise fall back to the
-    // nearest ancestor entry (longest matching prefix). An out-of-tree page —
-    // one absent from its own nav, e.g. via toc_hide — has no exact entry, but a
+    // nearest ancestor entry (longest matching prefix). An out-of-tree page (one
+    // absent from its own nav, e.g. via toc_hide) has no exact entry, but a
     // full build still marks its ancestor sections as the active path (sidebar
     // tree: active-path when the page IsDescendant of a section), so anchor on
     // the ancestor to reproduce that trail.
@@ -98,7 +98,7 @@
     }
 
     // Reveal the active path. A foldable nav (the Docsy default for docs sites)
-    // opens purely via checked checkboxes — exactly what a full build bakes — so
+    // opens purely via checked checkboxes (exactly what a full build bakes), so
     // we set the same attribute and add nothing else, keeping the result
     // structurally identical to a full render. A non-foldable nav has no
     // checkboxes and instead uses the Bootstrap `show` class to open branches.
@@ -111,7 +111,7 @@
 
     // In a non-foldable nav, also open the current item's siblings and direct
     // children; a foldable nav leaves these to the checkboxes, matching a full
-    // build (which only checks the active path). Exact-match pages only — an
+    // build (which only checks the active path). Exact-match pages only: an
     // ancestor anchor isn't the current item, so it gets no extra expansion.
     if (activeLink && currentItem && !foldable) {
       // Expand the current item's siblings and its direct children.
