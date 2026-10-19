@@ -7,6 +7,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
+import { chrome } from './lib/fixtures.mjs';
 
 const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -14,11 +15,7 @@ const files = {
   'content/docs/page-a/_index.md': '---\ntitle: Page A\n---\nDeep page\n',
 };
 
-const has = {
-  navbar: (h) => /class="td-navbar/.test(h),
-  sidebar: (h) => /id="td-section-nav"/.test(h),
-  footer: (h) => /class="td-footer/.test(h),
-};
+const has = { ...chrome, sidebar: (h) => /id="td-section-nav"/.test(h) };
 
 // Internal hrefs in the left-nav, for subtree-coverage checks.
 const navLinks = (h) => {
@@ -232,10 +229,10 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// The donor is the home's HTML render, and the placeholders name that render
-// whatever format they are emitted from: a site that makes `print`
-// permalinkable would otherwise see its print pages name `/_print/` as donor.
-test('shared mode placeholders name the home HTML render even when another home format is permalinkable', () => {
+// The placeholders name the root page's HTML render, not the URL of the format
+// being rendered: with `print` permalinkable, print pages would otherwise name
+// `/_print/` as donor.
+test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,
     extraConfig: [
@@ -250,12 +247,17 @@ test('shared mode placeholders name the home HTML render even when another home 
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
-  const donor =
-    /class="td-chrome-placeholder" data-chrome-donor="\/" data-chrome-region="navbar"/;
   for (const rel of ['_print/index.html', '_print/docs/index.html']) {
     const h = r.publicFile(rel);
-    assert.ok(!has.navbar(h), `navbar absent on the print render ${rel}`);
-    assert.ok(donor.test(h), `${rel} placeholder names the home HTML render`);
+    for (const region of ['navbar', 'footer']) {
+      assert.ok(!has[region](h), `${region} absent on the print render ${rel}`);
+      assert.ok(
+        has.placeholder(h, region, '/'),
+        `${rel} ${region} placeholder names the root page HTML render`,
+      );
+    }
   }
-  assert.ok(has.navbar(r.publicFile('index.html')), 'navbar kept on the home');
+  const home = r.publicFile('index.html');
+  assert.ok(has.navbar(home), 'navbar kept on the home');
+  assert.ok(has.footer(home), 'footer kept on the home');
 });

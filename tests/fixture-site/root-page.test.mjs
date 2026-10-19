@@ -134,6 +134,40 @@ test("an auto-created docs landing is the root page of its language; the default
   );
 });
 
+// A permalinkable format with a weight below HTML's 10 renders first, so its
+// pass is the one that fills the per-language cache.
+test('a permalinkable format rendered before HTML leaves the root page selection unchanged', () => {
+  const b = buildCleanSite('root-page-print-first', {
+    files: docRootedFiles,
+    extraConfig:
+      docRootedConfig +
+      llmsOutputs +
+      [
+        'outputFormats:',
+        '  print:',
+        '    { baseName: index, mediaType: text/html, path: _print, permalinkable: true, weight: 5 }',
+        'cascade:',
+        '  - target: { path: /docs }',
+        '    outputs: [HTML, RSS, markdown, LLMS, print]',
+        '',
+      ].join('\n'),
+    env: { HUGO_PARAMS_TD_CHROME: 'shared' },
+  });
+  assert.deepEqual(
+    describedbyLinks(b.publicFile('index.html')),
+    ['<link rel="describedby" href="https://example.org/llms.txt">'],
+    'root page head links its llms.txt as describedby, once',
+  );
+  assert.ok(
+    chrome.navbar(b.publicFile('index.html')),
+    'root page is the chrome donor',
+  );
+  assert.ok(
+    chrome.placeholder(b.publicFile('_print/index.html'), 'navbar', '/'),
+    'root print render names the root HTML render as donor',
+  );
+});
+
 test('a baseURL subpath moves every root-page URL together', () => {
   const b = buildDocRooted('root-page-subpath', [
     '--baseURL',
