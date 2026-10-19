@@ -18,5 +18,5 @@
   {{- /* The footer is page-invariant, so its placeholder carries no per-page
   hints, unlike navbar.html's. */ -}}
   {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
-  <div class="td-chrome-placeholder" data-chrome-donor="{{ ($rootPage.OutputFormats.Get "html").RelPermalink }}" data-chrome-region="footer"></div>
+  <div class="td-chrome-placeholder" data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" data-chrome-region="footer"></div>
 {{- end -}}

@@ -169,7 +169,7 @@ test('a permalinkable format rendered before HTML leaves the root page selection
   );
   assert.ok(
     chrome.placeholder(b.publicFile('_print/index.html'), 'navbar', '/'),
-    'root print render names the root HTML render as donor',
+    'root print render names the root canonical render as donor',
   );
 });
 

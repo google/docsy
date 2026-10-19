@@ -75,15 +75,9 @@
 </div>
 </nav>
 {{- else -}}
-  {{- /* Placeholder for the navbar the donor page keeps (chrome-render.html;
-  client: assets/js/chrome-nav.js), named by its HTML render's URL so that a
-  permalinkable format's pages name it too. The other hints are this page's
-  navbar traits, re-applied after the swap, and its logical URL, which keys the
-  client's active-state restore. */ -}}
-  {{- $root := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
-  {{- $donor := $root.RelPermalink -}}
-  {{- with $root.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
-  {{- $canonical := .RelPermalink -}}
-  {{- with .OutputFormats.Get "html" }}{{ $canonical = .RelPermalink }}{{ end -}}
-  <div class="td-chrome-placeholder" data-chrome-donor="{{ $donor }}" data-chrome-region="navbar" data-canonical-path="{{ $canonical }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
+  {{- /* The placeholder carries this page's navbar traits, re-applied after the
+  swap, and its canonical URL, which keys the client's active-state restore
+  (assets/js/chrome-nav.js). */ -}}
+  {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
+  <div class="td-chrome-placeholder" data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" data-chrome-region="navbar" data-canonical-path="{{ .OutputFormats.Canonical.RelPermalink }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
 {{- end -}}

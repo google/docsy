@@ -32,28 +32,28 @@ case diverges), or _deferred_ (known, not yet handled). The **Tests** column
 names fixture-site tests in this directory (drop the `.test.mjs` suffix); `—`
 means no dedicated test yet.
 
-| ID     | Case / wrinkle                                                         | Status   | Tests                                                  |
-| ------ | ---------------------------------------------------------------------- | -------- | ------------------------------------------------------ |
-| CCR-01 | `td.chrome` build-mode gate (`full` default, `shared` opt-in)          | restored | `chrome-render`                                        |
-| CCR-02 | Kept reference instances (one navbar/footer/side-nav; donor)           | restored | `chrome-render`, `chrome-build`, `chrome-reachability` |
-| CCR-03 | Navbar restore from the root-page donor                                | partial  | `chrome-equivalence`                                   |
-| CCR-04 | Footer restore (verbatim, page-invariant)                              | restored | `chrome-equivalence`                                   |
-| CCR-05 | Left side-nav restore from the section donor (+ cache)                 | restored | `chrome-nav`, `chrome-equivalence`                     |
-| CCR-06 | Active state: active link + active-path + foldable reveal              | restored | `chrome-nav`                                           |
-| CCR-07 | Non-foldable reveal (`.show` on siblings/children)                     | partial  | —                                                      |
-| CCR-08 | Cached/shared inline nav hydration (large sites, full mode too)        | restored | `chrome-nav`, `chrome-cached-sidebar`                  |
-| CCR-09 | Navbar version selector per-page links (`version_menu_pagelinks`)      | restored | `chrome-selectors`, `chrome-equivalence`               |
-| CCR-10 | Navbar language selector per-page links (prefix-swap, best-effort)     | partial  | `chrome-selectors`                                     |
-| CCR-11 | Navbar cover/theme per-page traits                                     | restored | `chrome-cover-theme`                                   |
-| CCR-12 | Scoped sidebar re-root, functional (`sidebar_root_for`)                | restored | `chrome-scoped`                                        |
-| CCR-13 | Scoped root markers (`data-sidebar-root-id`, up-icon)                  | restored | `chrome-scoped`                                        |
-| CCR-14 | Scoped root structural residual (wrapper, `ul`-level renumber)         | deferred | —                                                      |
-| CCR-15 | Print `_print/*` canonical URL                                         | restored | `chrome-canonical`                                     |
-| CCR-16 | Paginated `/page/N/` canonical URL                                     | restored | `chrome-canonical`                                     |
-| CCR-17 | Out-of-tree active-path (`toc_hide`)                                   | restored | `chrome-out-of-tree`                                   |
-| CCR-18 | `no-left-sidebar` layout (`body_class`)                                | restored | `chrome-no-left-sidebar`                               |
-| CCR-19 | Sidebar placeholder whitespace trim                                    | restored | —                                                      |
-| CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, HTML render) | partial  | `chrome-doc-rooted`, `root-page`                       |
+| ID     | Case / wrinkle                                                              | Status   | Tests                                                  |
+| ------ | --------------------------------------------------------------------------- | -------- | ------------------------------------------------------ |
+| CCR-01 | `td.chrome` build-mode gate (`full` default, `shared` opt-in)               | restored | `chrome-render`                                        |
+| CCR-02 | Kept reference instances (one navbar/footer/side-nav; donor)                | restored | `chrome-render`, `chrome-build`, `chrome-reachability` |
+| CCR-03 | Navbar restore from the root-page donor                                     | partial  | `chrome-equivalence`                                   |
+| CCR-04 | Footer restore (verbatim, page-invariant)                                   | restored | `chrome-equivalence`                                   |
+| CCR-05 | Left side-nav restore from the section donor (+ cache)                      | restored | `chrome-nav`, `chrome-equivalence`                     |
+| CCR-06 | Active state: active link + active-path + foldable reveal                   | restored | `chrome-nav`                                           |
+| CCR-07 | Non-foldable reveal (`.show` on siblings/children)                          | partial  | —                                                      |
+| CCR-08 | Cached/shared inline nav hydration (large sites, full mode too)             | restored | `chrome-nav`, `chrome-cached-sidebar`                  |
+| CCR-09 | Navbar version selector per-page links (`version_menu_pagelinks`)           | restored | `chrome-selectors`, `chrome-equivalence`               |
+| CCR-10 | Navbar language selector per-page links (prefix-swap, best-effort)          | partial  | `chrome-selectors`                                     |
+| CCR-11 | Navbar cover/theme per-page traits                                          | restored | `chrome-cover-theme`                                   |
+| CCR-12 | Scoped sidebar re-root, functional (`sidebar_root_for`)                     | restored | `chrome-scoped`                                        |
+| CCR-13 | Scoped root markers (`data-sidebar-root-id`, up-icon)                       | restored | `chrome-scoped`                                        |
+| CCR-14 | Scoped root structural residual (wrapper, `ul`-level renumber)              | deferred | —                                                      |
+| CCR-15 | Print `_print/*` canonical URL                                              | restored | `chrome-canonical`                                     |
+| CCR-16 | Paginated `/page/N/` canonical URL                                          | restored | `chrome-canonical`                                     |
+| CCR-17 | Out-of-tree active-path (`toc_hide`)                                        | restored | `chrome-out-of-tree`                                   |
+| CCR-18 | `no-left-sidebar` layout (`body_class`)                                     | restored | `chrome-no-left-sidebar`                               |
+| CCR-19 | Sidebar placeholder whitespace trim                                         | restored | —                                                      |
+| CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, canonical render) | partial  | `chrome-doc-rooted`, `root-page`                       |
 
 ### Open items
 

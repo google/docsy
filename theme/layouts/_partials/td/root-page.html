@@ -10,7 +10,7 @@ Returns the site's [root page][]. For details, see [Root page][].
 {{ $rootPage := .Home -}}
 {{ with .GetPage "/docs" -}}
   {{ $docs := . -}}
-  {{ with .OutputFormats.Get "html" -}}
+  {{ with .OutputFormats.Canonical -}}
     {{ if eq .RelPermalink $.Home.RelPermalink }}{{ $rootPage = $docs }}{{ end -}}
   {{ end -}}
 {{ end -}}
