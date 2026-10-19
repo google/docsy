@@ -133,31 +133,33 @@ You can find out much more about how Hugo page layouts work in
 [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you
 about how to add content and use each of Docsy's templates.
 
-## Doc-rooted project <a id="alternative-site-structure"></a><a id="doc-rooted-site"></a>
+## Doc-rooted project <a id="alternative-site-structure"></a><a id="doc-rooted-sites"></a>
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-A **doc-rooted** Hugo [project][] is a Docsy _convention_ where content from a
-site's top-level `docs` section gets published at the [site root][].
+A **doc-rooted** Hugo [project][] is a Docsy _convention_ that publishes each
+site's top-level `docs` section at the [site root][].
 
 ### How it works
 
-Hugo gives each site page:
+Hugo gives each page:
 
-- A [logical path][], its place in the site's [content tree][]; this is what
-  `GetPage` and `.Site.Home` resolve to for the page
-- A [permalink](#create-a-doc-rooted-site) where the page is published
+- A [logical path][], its place in the site's [logical tree][], which `GetPage`
+  and `.Site.Home` resolve.
+- A [permalink][], where the page is published.
 
-Hugo names the root of a site's [logical tree][] the **home page**. It's the
-only page of kind `home` in the tree.
+The convention leaves the `docs` section at logical path `/docs` and moves its
+permalinks to the site root.
 
-By **root page** we mean the page published at the site root, which is normally
-the home page; on a doc-rooted site, it is the `docs` [section page][].
+Two key terms:
 
-[`llms.txt`][] is published from the root page, and [`shared` chrome][] keeps
-the navbar and footer on it. In your own templates, `.Site.Home` still returns
-the home page; for how the theme finds the root page, see the [root page
-design][].
+- **Home page**: Hugo's name for the root of a site's [logical tree][]. It's the
+  only page of kind `home` in the tree.
+- **Root page**: the page published at the site root, which is normally the home
+  page; on a doc-rooted site, it is the `docs` [section page][].
+
+The two differ only there, and `.Site.Home` still returns the home page, so the
+theme selects the root page itself ([root page design][]).
 
 ### Create a doc-rooted site
 
@@ -982,15 +984,16 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [Goldmark]: https://github.com/yuin/goldmark
 [`llms.txt`]: /docs/content/agent-support/#llms-txt
 [logical path]: https://gohugo.io/quick-reference/glossary/#logical-path
+[logical tree]: https://gohugo.io/quick-reference/glossary/#logical-tree
 [Look and Feel]: /docs/content/lookandfeel/
 [outputs-replace]: /docs/content/agent-support/#opt-out
 [permalink]: https://gohugo.io/quick-reference/glossary/#permalink
 [permalinks]: https://gohugo.io/configuration/permalinks/
+[project]: https://gohugo.io/quick-reference/glossary/#project
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
 [root page design]: /project/design/root-page/
 [section page]: https://gohugo.io/quick-reference/glossary/#section-page
-[`shared` chrome]: /docs/deployment/chrome/
 [site configuration]: https://gohugo.io/configuration/introduction/
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
