@@ -303,6 +303,25 @@ test('section-only LLMS publishes section llms.txt but no directive or described
     );
     assert.ok(!html.includes('For AI agents'), `${page} omits the directive`);
   }
+  assert.doesNotMatch(
+    b.publicFile('index.md'),
+    /llms\.txt/,
+    'root Markdown version omits the llms.txt link',
+  );
+});
+
+test('section-only LLMS: the _root-llms-txt-path shortcode still fails the build', () => {
+  const r = buildSite('llms-section-only-shortcode', {
+    files: sectionKindFiles(),
+    extraConfig:
+      'outputs:\n  home: [HTML, markdown]\n  section: [HTML, markdown, LLMS]\n',
+  });
+  assert.notEqual(r.status, 0, 'build fails');
+  assert.match(
+    r.stderr,
+    /install\.md.*shortcode "_root-llms-txt-path": this site publishes no llms\.txt/,
+    'error names the page and the shortcode',
+  );
 });
 
 test("a site's layouts/index.llms.txt override still renders the home's llms.txt", () => {

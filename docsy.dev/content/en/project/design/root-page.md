@@ -25,7 +25,7 @@ URL, otherwise the home. Consumers share one cached result per language
 - **`llms.txt` discovery**: the `rel="describedby"` link in every page head, the
   in-body agent directive, the Markdown versions' `llms.txt` link, and the
   Docsy-private `_root-llms-txt-path` shortcode all need the language's
-  `llms.txt` URL, when the root page publishes one: its `LLMS` output
+  `llms.txt` URL, which exists when the root page has an `LLMS` output
   ([Discovery][]).
 - **The `llms.txt` template** (`all.llms.txt`):
   - The home-page and locale links are each language's root page.

@@ -15,10 +15,9 @@ Use the `td.chrome` parameter to select one of two **build modes**:
 - **`full`** (default) renders each page's chrome on the page itself, ready for
   any client. Any `td.chrome` value other than `shared` is treated as `full`, so
   a typo fails safe.
-- **`shared`** renders each region on just **one** <a id="donor-page"></a>_donor
-  page_ per locale and restores it on the other pages in the browser with a
-  small script. The output stays lean, while readers still get the full
-  navigation once the page loads.
+- **`shared`** renders each region on just **one** page per locale and restores
+  it on the other pages in the browser with a small script. The output stays
+  lean, while readers still get the full navigation once the page loads.
 
 > [!NOTE] Web dev note
 >
@@ -39,9 +38,9 @@ consumes the output:
 
 ## What `shared` mode keeps reachable
 
-In `shared` mode, each region stays on exactly one page per locale (its _donor
-page_, from which the browser restores the others), so every chrome link stays
-reachable without JavaScript:
+In `shared` mode, each region stays on exactly one page per locale (its
+<a id="donor-page"></a>**donor page**, from which the browser restores the
+others), so every chrome link stays reachable without JavaScript:
 
 - **Navbar and footer**: kept on each locale's **[root page][]** (the home page,
   or the docs landing on a doc-rooted site). Their links are config-defined and

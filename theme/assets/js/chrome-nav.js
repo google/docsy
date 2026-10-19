@@ -266,9 +266,9 @@
   // Re-derive the navbar's active link for the current page. The donor page's
   // navbar carries its own active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
-  // prefix), as a full build's IsMenuCurrent/IsDescendant logic does. Not exact
-  // on a doc-rooted site, where the docs entry's `/` prefixes every path that no
-  // other entry covers (CCR-20).
+  // prefix), an approximation of a full build's per-entry menu-membership
+  // tests. Not exact on a doc-rooted site, where the docs entry's `/` prefixes
+  // every path that no other entry covers (CCR-20).
   function setNavbarActive(navbar) {
     const here = currentPath();
     let best = null;

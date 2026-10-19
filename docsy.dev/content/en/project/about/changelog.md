@@ -175,7 +175,7 @@ history since 0.18.0][].
 
 - Fixed builds failing on sites with pages named `docs` but no top-level `docs`
   section (every site since 0.18.0, `llms.txt` sites since 0.15.0), and
-  `llms.txt` indexing such a page as the docs section ([#2875][], [#2888][],
+  `llms.txt` indexing such a page as the docs section ([#2875][],
   [design][project-root-page]).
 
 [**Experimental**](#experimental):
