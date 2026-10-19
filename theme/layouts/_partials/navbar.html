@@ -75,9 +75,6 @@
 </div>
 </nav>
 {{- else -}}
-  {{- /* The placeholder carries this page's navbar traits, re-applied after the
-  swap, and its canonical URL, which keys the client's active-state restore
-  (assets/js/chrome-nav.js). */ -}}
   {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
   <div class="td-chrome-placeholder" data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" data-chrome-region="navbar" data-canonical-path="{{ .OutputFormats.Canonical.RelPermalink }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
 {{- end -}}
