@@ -7,7 +7,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSite } from './lib/build-site.mjs';
-import { describedbyLinks } from './lib/fixtures.mjs';
+import { describedbyLinks, llmsOutputs } from './lib/fixtures.mjs';
 
 const files = {
   'content/_index.md': '---\ntitle: Home\n---\nHome body\n',
@@ -20,12 +20,6 @@ const files = {
     '---\ntitle: HTML only\noutputs: [HTML]\n---\nNo markdown output\n',
 };
 
-const llmsConfig = `outputs:
-  home: [HTML, markdown, LLMS]
-  page: [HTML, markdown]
-  section: [HTML, RSS, markdown]
-`;
-
 function build(name, extraConfig) {
   const r = buildSite(name, { files, extraConfig });
   assert.equal(
@@ -37,7 +31,7 @@ function build(name, extraConfig) {
 }
 
 test('llms.txt-enabled site carries the directive on every page kind', () => {
-  const b = build('llms-directive-on', llmsConfig);
+  const b = build('llms-directive-on', llmsOutputs);
   for (const page of [
     'index.html',
     'docs/index.html',
@@ -55,7 +49,7 @@ test('llms.txt-enabled site carries the directive on every page kind', () => {
 });
 
 test('llms.txt-enabled site links its llms.txt as rel="describedby" in every page head', () => {
-  const b = build('llms-directive-on', llmsConfig);
+  const b = build('llms-directive-on', llmsOutputs);
   const link = '<link rel="describedby" href="https://example.org/llms.txt">';
   for (const page of [
     'index.html',
@@ -74,7 +68,7 @@ test('llms.txt-enabled site links its llms.txt as rel="describedby" in every pag
 });
 
 test('directive names the page Markdown alternate when one exists', () => {
-  const b = build('llms-directive-on', llmsConfig);
+  const b = build('llms-directive-on', llmsOutputs);
   assert.ok(
     b
       .publicFile('docs/install/index.html')

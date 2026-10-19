@@ -1,6 +1,6 @@
 // The doc-rooted variant (config/doc-rooted), built in both chrome modes: full
 // for llms.txt (docsy/docsy#2834), shared for the chrome donor page
-// (theme-level fixture: tests/fixture-site/chrome-doc-rooted).
+// (theme-level fixture in tests/fixture-site/chrome-doc-rooted).
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -88,6 +88,7 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     );
   }
 
+  // The section formats the landing cascade restates; it must track _default's.
   for (const f of [
     'index.html',
     'index.xml',

@@ -113,8 +113,8 @@ test('shared mode can be set via site config', () => {
   assert.ok(!has.footer(landing), 'footer absent on the docs landing');
 });
 
-// Each locale's left-nav links differ, so every locale's docs landing is kept.
-test('shared mode keeps the sidebar on every locale docs landing page', () => {
+// Each language's left-nav links differ, so every language's docs section page is kept.
+test('shared mode keeps the sidebar on every language docs section page', () => {
   const mlFiles = {
     ...files,
     'content/_index.ja.md': '---\ntitle: ホーム\n---\nHome body\n',
@@ -229,7 +229,8 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// Regression: with `print` permalinkable, print pages named `/_print/` as donor.
+// With `print` permalinkable, placeholders still name the HTML render, the only
+// render that keeps the chrome.
 test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,

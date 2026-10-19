@@ -1,3 +1,4 @@
+// Cases: CCR-20 (doc-rooted donor page, the subdirectory, subpath and print-first variants). See the CCR case registry in tests/fixture-site/README.md.
 // The root-page lookup (_partials/td/root-page.html, all.llms.txt) on the
 // shapes that defeat a by-name lookup (docsy/docsy#2875) and on the recipe's
 // multilingual and subpath variants. Case inventory:
@@ -49,10 +50,15 @@ test('a site with no /docs section and two pages named docs builds, rooted at th
     'reference/docs/index.html',
     '404.html',
   ]) {
+    const html = b.publicFile(rel);
     assert.deepEqual(
-      describedbyLinks(b.publicFile(rel)),
+      describedbyLinks(html),
       ['<link rel="describedby" href="https://example.org/llms.txt">'],
       `${rel} head links the home's llms.txt as describedby, once`,
+    );
+    assert.ok(
+      html.includes("For AI agents: the site's llms.txt is at /llms.txt"),
+      `${rel} directive points at the home's llms.txt`,
     );
   }
   const llms = b.publicFile('llms.txt');

@@ -177,7 +177,8 @@
     // Match a full scoped build's root markers when sidebar-root scoping is on
     // (the donor nav carries data-sidebar-root-id iff sidebar_root_enabled):
     // advertise the subtree as the nav's root, and flag the root link's label as
-    // the "up" icon (see sidebar-tree.html: data-sidebar-root-id, up-icon span).
+    // the "up" icon (see sidebar-tree.html for data-sidebar-root-id and the
+    // up-icon span).
     if (nav.hasAttribute('data-sidebar-root-id')) {
       nav.setAttribute('data-sidebar-root-id', rootPath);
       const rootSpan = rootLink.querySelector('span');
@@ -229,9 +230,8 @@
         injectMarkup(placeholder, markup);
       })
       .catch((reason) => {
-        // Leave the placeholder in place if the donor can't be fetched. A richer
-        // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
-        // experimental; see tests/fixture-site/README.md.
+        // Leave the placeholder in place (recovery: tests/fixture-site/README.md
+        // § Open items).
         console.warn('chrome-nav: could not fetch nav donor', donor, reason);
       });
   }
@@ -264,7 +264,8 @@
   // navbar carries its own active state, so clear it and mark the
   // nav-link whose target is the closest ancestor of the current path (longest
   // prefix), an approximation of a full build's per-entry menu-membership
-  // tests. Not exact on a doc-rooted site, where the docs entry's `/` prefixes
+  // tests: a parent entry loses its active state under a child entry (CCR-03),
+  // and on a doc-rooted site the docs entry's URL, the language root, prefixes
   // every path that no other entry covers (CCR-20).
   function setNavbarActive(navbar) {
     const here = currentPath();
@@ -349,9 +350,8 @@
         callback(new DOMParser().parseFromString(html, 'text/html'));
       })
       .catch((reason) => {
-        // Leave the placeholder in place if the donor can't be fetched. A richer
-        // recovery (retry, visible fallback) is a TODO if shared mode graduates beyond
-        // experimental; see tests/fixture-site/README.md.
+        // Leave the placeholder in place (recovery: tests/fixture-site/README.md
+        // § Open items).
         console.warn('chrome-nav: could not fetch chrome donor', url, reason);
       });
   }

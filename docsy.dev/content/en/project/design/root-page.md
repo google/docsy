@@ -22,8 +22,8 @@ keyed by the home's permalink.
   `llms.txt` URL, which exists when the root page has an `LLMS` output
   ([Discovery][]).
 - **The `llms.txt` template** (`all.llms.txt`):
-  - The home-page link and the `Site locales` list are each language's root
-    page.
+  - The home-page link targets the language's root page; the `Site locales` list
+    links each language's root page.
   - The description is the root page's, falling back to the home page's.
   - The documentation index is a separate `/docs` lookup.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
@@ -34,12 +34,12 @@ keyed by the home's permalink.
 
 The section is looked up by **absolute content path**, `site.GetPage "/docs"`. A
 bare `"docs"` would be wrong: when there is no `/docs` section, a `Site` lookup
-falls back to a site-wide lookup by file name, which fails the build on two
-pages named `docs` (`page reference "docs" is ambiguous`) and silently returns
-the one such page otherwise ([#2875][]). The URL comparison is what keeps an
-ordinary `/docs/` section from being taken for the root. It compares the docs
-page's HTML URL, not the URL of the format being rendered: consumers cache the
-result per site, and a permalinkable format can render before HTML.
+falls back to a site-wide lookup by name, which fails the build on two pages
+named `docs` (`page reference "docs" is ambiguous`) and silently returns the one
+such page otherwise ([#2875][]). The URL comparison is what keeps an ordinary
+`/docs/` section from being taken for the root. It compares the docs page's HTML
+URL, not the URL of the format being rendered: consumers cache the result per
+site, and a permalinkable format can render before HTML.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index
@@ -71,7 +71,7 @@ test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
 
 ## Limits
 
-The lookup resolves none of these:
+The design leaves these unresolved:
 
 - A section other than `docs` remapped to the site root: the lookup keeps the
   home, and Hugo need not warn (a link-only home leaves no duplicate output).
@@ -79,10 +79,11 @@ The lookup resolves none of these:
 - A doc-rooted home whose output formats (site `outputs.home`, or its own front
   matter) don't start with `HTML`: a link-only page keeps only its first
   configured format, so the home's URL becomes that format's (`/llms.txt` for
-  `[LLMS, HTML]`; no URL at all for an empty `outputs.home`, or for a home with
-  `build.render: never`, which also collapses the cache key across languages)
-  and the comparison fails. Hugo's [`outputs` convention][outputs] is `HTML`
-  first.
+  `[LLMS, HTML]`) and the comparison fails. Hugo's [`outputs`
+  convention][outputs] is `HTML` first.
+- A doc-rooted home with no URL (an empty `outputs.home`, or
+  `build.render: never`): the comparison fails, and `build.render: never` also
+  collapses the cache key across languages.
 - A doc-rooted language without a `/docs` section: it has no root page, so
   `llms.txt` lists the language at an unpublished URL and shared chrome names it
   as donor.

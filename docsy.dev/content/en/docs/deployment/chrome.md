@@ -6,9 +6,9 @@ description: >-
 cSpell:ignore: pagelinks
 ---
 
-A docs site repeats the same auto-generated _[chrome][]_ &mdash; the navbar,
-footer, and left-nav &mdash; on _every_ page, even though those regions are
-usually identical site-wide.
+A docs site repeats the same auto-generated _[chrome][]_ (the navbar, footer,
+and left-nav) on _every_ page, even though those regions are usually identical
+site-wide.
 
 Use the `td.chrome` parameter to select one of two **build modes**:
 
@@ -38,33 +38,31 @@ consumes the output:
 
 ## Donor pages
 
-A region's **donor page** is the one page per language on which `shared` mode
-renders it; the other pages carry a placeholder that the browser fills from the
-donor page. Clients without JavaScript (some search crawlers included) see only
-the donor pages' chrome.
+A region's **donor page** is the page on which `shared` mode renders it, one per
+language for the navbar and footer and one per docs section for the left-nav;
+the other pages carry a placeholder that the browser fills from the donor page.
+Clients without JavaScript (some search crawlers included) see only the donor
+pages' chrome.
 
 ## What `shared` mode keeps reachable
 
-The donor pages are chosen so that every chrome link stays reachable without
-JavaScript:
+The donor pages are chosen to keep chrome links reachable without JavaScript:
 
 - **Navbar and footer**: kept on each language's **[root page][]** (the home
   page, or the `docs` section page on a doc-rooted site). Their links are
   config-defined and identical across the language, except the navbar's optional
-  selectors: a [version menu][version-menu] with `version_menu_pagelinks`
-  renders per-page links that the browser restores but a link checker reaches
-  only on the root page, and the language selector's restore has [known
-  differences][].
+  selectors:
+  - A [version menu][version-menu] with `version_menu_pagelinks` renders
+    per-page links, which the browser restores but a link checker reaches only
+    on the root page.
+  - The language selector links each page's own translation, which the
+    destination language's left-nav already covers; only a full build reaches a
+    translation hidden from the left-nav (`toc_hide`). For the restored
+    selector, see the [known differences][].
 - **Left-nav** (computed per page): kept on each language's docs section page;
   it carries the full docs tree. On a doc-rooted site the two donor pages
   coincide. `shared` mode currently targets the **docs** section; other sections
   (such as blog) aren't a validated target yet, so keep `full` for them.
-
-The navbar's language selector points to each page's own translation rather than
-a fixed target, but those translations are docs pages that the destination
-language's left-nav already covers, so the single kept navbar loses no reachable
-link, except a translation hidden from the left-nav (`toc_hide`): a full build
-reaches it through the selector, a shared build through nothing.
 
 ## Known differences from a full build
 
@@ -74,7 +72,7 @@ reaches it through the selector, a shared build through nothing.
 > repeats that may not hold for every site. Keep `full` for production, and run
 > full-site link checks as well, even if less often.
 
-The restore aims to match a full build; the known differences:
+The restore aims to match a full build, with these exceptions:
 
 - The navbar's language selector is restored by swapping the language prefix of
   the current page's path ([#2689][]), so:
@@ -82,10 +80,14 @@ The restore aims to match a full build; the known differences:
     disables the item.
   - On a [doc-rooted site][doc-rooted], title-based slugs usually differ across
     languages, so the restored link misses.
-- On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
-  active on non-docs pages that no other menu entry covers, such as taxonomy and
-  404 pages (its URL, the language root, prefixes every path); a full build
-  marks none of those ([#2689][]).
+- The restored navbar marks one entry active, the longest match for the current
+  path, where a full build marks every entry whose page contains it ([#2689][]):
+  - With nested menu entries, a parent entry loses its active state on pages
+    under a child entry; on a [doc-rooted site][doc-rooted], the docs entry
+    under any docs subsection with its own entry.
+  - On a doc-rooted site, the docs entry is active on non-docs pages that no
+    other entry covers, such as taxonomy and 404 pages (its URL, the language
+    root, prefixes every path), where a full build marks none.
 - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right links
   and active state, but its re-rooted subtree can differ structurally from a
   full build (an extra wrapper element, deeper `ul` nesting). The difference

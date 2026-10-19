@@ -1,6 +1,6 @@
 // llms.txt on doc-rooted sites (lib/fixtures.mjs): the home renders nothing, so
-// the file comes from the page publishing the root (docsy/docsy#2834); plus the
-// per-language discovery links and section-kind rendering that came with it.
+// the file comes from the page publishing the root (docsy/docsy#2834). Also
+// covers per-language discovery links and section-kind rendering.
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -18,7 +18,7 @@ const leaf = (title, { llmsLink = true } = {}) =>
   (llmsLink
     ? 'Leaf page; see [{{% _root-llms-txt-path %}}](<{{% _root-llms-txt-path %}}>).\n'
     : 'Leaf page\n');
-// en describes only the link-only home; fr describes both home and landing
+// en describes only the link-only home; fr describes both home and section
 // page.
 const docRootedFiles = (
   docsOutputs = '[HTML, RSS, markdown, LLMS]',
