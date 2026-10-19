@@ -4257,6 +4257,11 @@
     "when": "2026-09-19T16:04:39Z",
     "via": "lychee",
   },
+  "https://gohugo.io/quick-reference/glossary/#canonical-output-format": {
+    "result": 200,
+    "when": "2026-10-19T18:46:02Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/quick-reference/glossary/#content-type": {
     "result": 200,
     "when": "2026-06-27T12:29:28Z",
@@ -4265,6 +4270,16 @@
   "https://gohugo.io/quick-reference/glossary/#fragment": {
     "result": 200,
     "when": "2026-09-02T08:07:10Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/quick-reference/glossary/#logical-path": {
+    "result": 200,
+    "when": "2026-10-19T18:46:02Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/quick-reference/glossary/#logical-tree": {
+    "result": 200,
+    "when": "2026-10-19T18:46:02Z",
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#output-format": {
@@ -4277,9 +4292,19 @@
     "when": "2026-09-02T08:07:11Z",
     "via": "lychee",
   },
+  "https://gohugo.io/quick-reference/glossary/#permalink": {
+    "result": 200,
+    "when": "2026-10-19T18:46:02Z",
+    "via": "lychee",
+  },
   "https://gohugo.io/quick-reference/glossary/#project": {
     "result": 200,
     "when": "2026-10-07T14:03:31Z",
+    "via": "lychee",
+  },
+  "https://gohugo.io/quick-reference/glossary/#section-page": {
+    "result": 200,
+    "when": "2026-10-19T18:46:02Z",
     "via": "lychee",
   },
   "https://gohugo.io/quick-reference/glossary/#site": {
@@ -4854,12 +4879,11 @@
     "when": "2026-08-30T20:58:27Z",
     "via": "lychee",
   },
-  // Live once on main (#2888).
   "https://main--docsydocs.netlify.app/project/design/root-page/": {
     "result": 206,
     "when": "2026-10-18T01:00:58Z",
     "via": "manual",
-    "expires": "2026-10-25",
+    "expires": "2026-10-19",
   },
   "https://main--docsydocs.netlify.app/project/design/script-loading/": {
     "result": 200,
