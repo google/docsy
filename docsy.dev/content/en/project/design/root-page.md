@@ -5,7 +5,7 @@ description: >-
   `llms.txt` and shared chrome
 ---
 
-A language's **[root page][]** is the page published at its [site root][]:
+A site's **[root page][]** is the page published at its [site root][]:
 
 - **Ordinary sites**: Hugo's [home page][].
 - **[Doc-rooted sites][doc-rooted site]**: the docs landing.
