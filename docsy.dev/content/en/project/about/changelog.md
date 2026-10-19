@@ -180,9 +180,9 @@ history since 0.18.0][].
 
 [**Experimental**](#experimental):
 
-- **Shared chrome on doc-rooted sites**: the navbar and footer now render on
-  each language's root page, their [donor page][ug-donor-page]; before, neither
-  rendered anywhere ([#2888][]).
+- Fixed `shared` chrome dropping the navbar and footer from every page of a
+  doc-rooted site; they now render on each language's root page, the [donor
+  page][ug-donor-page] ([#2888][]).
 
 **For maintainers**:
 

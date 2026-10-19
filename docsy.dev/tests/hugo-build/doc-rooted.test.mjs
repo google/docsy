@@ -1,10 +1,6 @@
-// The doc-rooted variant (config/doc-rooted), built in both chrome modes and
-// pinned on two fronts:
-// - llms.txt (full mode): the variant's cascade gives the docs landing the LLMS
-//   output and must track `_default`'s section formats (docsy/docsy#2834).
-// - chrome (shared mode): the navbar and footer donor page is each language's
-//   root page, the docs landing, since the link-only home renders nothing.
-//   Theme-level fixture: tests/fixture-site/chrome-doc-rooted.
+// The doc-rooted variant (config/doc-rooted), built in both chrome modes: full
+// for llms.txt (docsy/docsy#2834), shared for the chrome donor page
+// (theme-level fixture: tests/fixture-site/chrome-doc-rooted).
 
 import test, { after, before } from 'node:test';
 import assert from 'node:assert/strict';
@@ -25,8 +21,7 @@ const siteDir = fileURLToPath(new URL('../../', import.meta.url));
 const tmpDir = join(siteDir, 'tmp');
 
 // One build per chrome mode, each to a throwaway destination so the published
-// public/ that test:base produces stays intact; cleaned up whatever the builds
-// did.
+// public/ that test:base produces stays intact.
 const dest = {};
 const file = (mode, rel) => readFileSync(join(dest[mode], rel), 'utf8');
 before(() => {

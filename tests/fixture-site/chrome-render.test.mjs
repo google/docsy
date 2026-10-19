@@ -229,9 +229,7 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// The placeholders name the root page's HTML render, not the URL of the format
-// being rendered: with `print` permalinkable, print pages would otherwise name
-// `/_print/` as donor.
+// Regression: with `print` permalinkable, print pages named `/_print/` as donor.
 test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,

@@ -1,7 +1,7 @@
 ---
 title: Root page
 description: >-
-  How the theme picks each language's root page (home or docs landing) for
+  How the theme selects between each language's home page and docs landing for
   `llms.txt` and shared chrome
 ---
 
@@ -12,9 +12,6 @@ A site's **[root page][]** is the page published at its [site root][], `/` or
 - **[Doc-rooted sites][doc-rooted site]** (definition and setup in the user
   guide): the docs section's landing page; the home page still exists but
   publishes nothing.
-
-Because the two can differ, the theme selects the root page per language rather
-than assuming the home page.
 
 ## Selection rule
 
@@ -27,13 +24,13 @@ URL, otherwise the home. Consumers share one cached result per language
 
 - **`llms.txt` discovery**: the `rel="describedby"` link in every page head, the
   in-body agent directive, the Markdown versions' `llms.txt` link, and the
-  Docsy-private `_root-llms-txt-path` shortcode all need the URL of the
-  language's `llms.txt`, and whether the root page publishes one. That is the
-  root page's `LLMS` output ([Discovery][]).
+  Docsy-private `_root-llms-txt-path` shortcode all need the language's
+  `llms.txt` URL, when the root page publishes one: its `LLMS` output
+  ([Discovery][]).
 - **The `llms.txt` template** (`all.llms.txt`):
-  - the home-page and locale links are each language's root page.
-  - the description is the root page's, falling back to the home page's.
-  - the documentation index is a separate `/docs` lookup.
+  - The home-page and locale links are each language's root page.
+  - The description is the root page's, falling back to the home page's.
+  - The documentation index is a separate `/docs` lookup.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
   footer are kept on one [donor page][] per language, the root page, and
   restored from it elsewhere.
@@ -44,9 +41,8 @@ The section is looked up by **absolute content path**, `site.GetPage "/docs"`. A
 bare `"docs"` would be wrong: when there is no `/docs` section, a `Site` lookup
 falls back to a site-wide lookup by file name, which fails the build on two
 pages named `docs` (`page reference "docs" is ambiguous`) and silently returns
-the one such page otherwise ([#2875][]). The `RelPermalink` equality is what
-keeps a page that merely occupies the `/docs` path from being taken for the
-root.
+the one such page otherwise ([#2875][]). The URL comparison is what keeps an
+ordinary `/docs/` section from being taken for the root.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index

@@ -34,11 +34,9 @@ export const llmsOutputs = `outputs:
   section: [HTML, RSS, markdown]
 `;
 
-// The head's llms.txt discovery links, in document order.
 export const describedbyLinks = (html) =>
   html.split('</head>')[0].match(/<link rel="describedby" [^>]*>/g) ?? [];
 
-// Shared-chrome regions and the placeholder that stands in for a dropped one.
 export const chrome = {
   navbar: (h) => /class="td-navbar/.test(h),
   footer: (h) => /class="td-footer/.test(h),
