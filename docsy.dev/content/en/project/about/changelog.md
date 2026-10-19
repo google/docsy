@@ -186,7 +186,9 @@ history since 0.18.0][].
 
 **For maintainers**:
 
-- ...
+- docsy.dev builds report duplicate target paths on every build kind;
+  `npm run build` (local and test builds) fails on any warning, while preview
+  and production builds keep warnings as warnings ([#2888][]).
 
 [#2875]: https://github.com/docsy/docsy/issues/2875
 [#2888]: https://github.com/docsy/docsy/pull/2888
