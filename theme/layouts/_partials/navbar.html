@@ -76,5 +76,11 @@
 </nav>
 {{- else -}}
   {{- $rootPage := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
-  <div class="td-chrome-placeholder" data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" data-chrome-region="navbar" data-canonical-path="{{ .OutputFormats.Canonical.RelPermalink }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
+  <div class="td-chrome-placeholder" {{/**/ -}}
+    data-chrome-donor="{{ $rootPage.OutputFormats.Canonical.RelPermalink }}" {{/**/ -}}
+    data-chrome-region="navbar" {{/**/ -}}
+    data-canonical-path="{{ .OutputFormats.Canonical.RelPermalink }}" {{/**/ -}}
+    data-navbar-cover="{{ $cover }}" {{/**/ -}}
+    data-navbar-theme="{{ cond $dark "dark" "" }}">{{/**/ -}}
+  </div>
 {{- end -}}
