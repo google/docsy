@@ -17,10 +17,10 @@
   </div>
 </footer>
 {{- else -}}
-  {{- /* Placeholder for the footer the donor page keeps (chrome-render.html;
-  client: assets/js/chrome-nav.js); the donor is the home's HTML render, as in
-  navbar.html. The footer is page-invariant, so it carries no per-page hints. */ -}}
-  {{- $donor := .Site.Home.RelPermalink -}}
-  {{- with .Site.Home.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
+  {{- /* Placeholder for the footer the donor page keeps, named as in
+  navbar.html; the footer is page-invariant, so no per-page hints. */ -}}
+  {{- $root := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
+  {{- $donor := $root.RelPermalink -}}
+  {{- with $root.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
   <div class="td-chrome-placeholder" data-chrome-donor="{{ $donor }}" data-chrome-region="footer"></div>
 {{- end -}}

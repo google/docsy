@@ -76,15 +76,12 @@
 </nav>
 {{- else -}}
   {{- /* Placeholder for the navbar the donor page keeps (chrome-render.html;
-  client: assets/js/chrome-nav.js). The donor is the home's HTML render, whose
-  URL equals the root page's by construction; naming that render keeps the
-  placeholder right when another home format is permalinkable. The cover/theme
-  hints carry this page's navbar traits, which the donor page may not share. The
-  canonical-path hint is this page's logical (HTML-output) URL, which differs
-  from the request URL on print (/_print/…) and paginator (…/page/N/) pages; the
-  client keys its active-state restore to it rather than window.location. */ -}}
-  {{- $donor := .Site.Home.RelPermalink -}}
-  {{- with .Site.Home.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
+  client: assets/js/chrome-nav.js), named by its HTML render's URL so that a
+  permalinkable format's pages name it too. The other hints are this page's
+  navbar traits and logical URL, which the client re-applies after the swap. */ -}}
+  {{- $root := partialCached "td/root-page.html" .Site .Site.Home.Permalink -}}
+  {{- $donor := $root.RelPermalink -}}
+  {{- with $root.OutputFormats.Get "html" }}{{ $donor = .RelPermalink }}{{ end -}}
   {{- $canonical := .RelPermalink -}}
   {{- with .OutputFormats.Get "html" }}{{ $canonical = .RelPermalink }}{{ end -}}
   <div class="td-chrome-placeholder" data-chrome-donor="{{ $donor }}" data-chrome-region="navbar" data-canonical-path="{{ $canonical }}" data-navbar-cover="{{ $cover }}" data-navbar-theme="{{ cond $dark "dark" "" }}"></div>
