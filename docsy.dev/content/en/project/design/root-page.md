@@ -78,9 +78,10 @@ The lookup resolves none of these:
 - A section other than `docs` remapped to the site root: the lookup keeps the
   home, and Hugo need not warn (a link-only home leaves no duplicate output).
 - Two pages publishing the same root URL: a [path conflict][] of the site's own.
-- A doc-rooted home whose `outputs` don't start with `HTML`: a link-only page
-  keeps only its first configured format, so the home's URL becomes that
-  format's (`/llms.txt` for `[LLMS, HTML]`, none for `[]`) and the comparison
+- A doc-rooted home whose output formats (site `outputs.home`, or its own front
+  matter) don't start with `HTML`: a link-only page keeps only its first
+  configured format, so the home's URL becomes that format's (`/llms.txt` for
+  `[LLMS, HTML]`; no URL at all for an empty `outputs.home`) and the comparison
   fails. Hugo's [`outputs` convention][outputs] is `HTML` first.
 - A doc-rooted language without a `/docs` section: it has no root page, so
   `llms.txt` lists the locale at an unpublished URL and shared chrome names it

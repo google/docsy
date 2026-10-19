@@ -73,8 +73,9 @@ link.
 > - A navbar [version menu][version-menu] with `version_menu_pagelinks` enabled
 >   renders per-page links that the single kept navbar won't cover yet.
 > - On a [doc-rooted site][doc-rooted], the restored navbar marks the docs entry
->   active on pages no other menu entry covers (its URL, `/`, prefixes every
->   path); a full build marks none ([#2689][]).
+>   active on non-docs pages that no other menu entry covers, such as taxonomy
+>   and 404 pages (its URL, the language root, prefixes every path); a full
+>   build marks none of those ([#2689][]).
 > - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right
 >   links and active state, but its re-rooted subtree can differ structurally
 >   from a full build (an extra wrapper element, deeper `ul` nesting). The

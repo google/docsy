@@ -243,8 +243,7 @@
   // The shared build keeps the navbar and footer only on each locale's root
   // page (the home, or the docs landing on a doc-rooted site). An inner page
   // leaves a placeholder per dropped region (see _partials/navbar.html and
-  // _partials/footer.html) naming it as the donor page. Here we fetch it once,
-  // extract each region, and swap it in.
+  // _partials/footer.html) naming it as the donor page.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
   // Re-apply this page's navbar cover/theme traits after the swap. The cover

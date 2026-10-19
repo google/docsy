@@ -70,8 +70,8 @@ case diverges — see notes), or _deferred_ (known, not yet handled). The
 - **CCR-20** (doc-rooted donor page) — _partial._ The donor renders and the
   restore works, but on a doc-rooted site the docs menu entry's URL is `/`, so
   the longest-prefix active-link pass marks it active on the non-docs pages no
-  other menu entry covers (`/about/`, taxonomies, 404), where a full build's
-  `IsDescendant` marks nothing. Fix belongs with [#2689][].
+  other menu entry covers (pages without a menu entry, taxonomies, 404), where a
+  full build's `IsDescendant` marks nothing. Fix belongs with [#2689][].
 - **CCR-07** (non-foldable reveal) and **CCR-14** (scoped-root structural
   residual) lack dedicated unit coverage. CCR-14 is browser-invisible — it shows
   only in a serialized-HTML diff, not the rendered nav — and gates reinstating

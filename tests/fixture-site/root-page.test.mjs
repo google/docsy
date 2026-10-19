@@ -134,8 +134,7 @@ test("an auto-created docs landing is the root page of its language; the default
   );
 });
 
-// A permalinkable format with a weight below HTML's 10 renders first, so its
-// pass is the one that fills the per-language cache.
+// Permalinkable print weighted below HTML renders first; see td/root-page.html.
 test('a permalinkable format rendered before HTML leaves the root page selection unchanged', () => {
   const b = buildCleanSite('root-page-print-first', {
     files: docRootedFiles,
