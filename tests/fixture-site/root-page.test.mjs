@@ -79,7 +79,7 @@ test('a single nested section named docs is left out of the docs section lookup'
   );
 });
 
-// Doc-rooted, bilingual, with the French docs landing left to Hugo's
+// Doc-rooted, bilingual, with the French docs section page left to Hugo's
 // auto-created section (no _index.fr.md): its outputs come from the cascade.
 const docRootedFiles = {
   ...docRootedHomes(),
@@ -102,7 +102,7 @@ const buildDocRooted = (name, args = [], extraConfig = '') =>
     args,
   });
 
-test("an auto-created docs landing is the root page of its language; the default language's subdirectory only moves the URLs", () => {
+test("an auto-created docs section page is the root page of its language; the default language's subdirectory only moves the URLs", () => {
   const b = buildDocRooted(
     'root-page-auto-landing',
     [],
@@ -121,7 +121,7 @@ test("an auto-created docs landing is the root page of its language; the default
     b
       .publicFile('fr/llms.txt')
       .startsWith('# root-page-auto-landing fixture\n'),
-    'fr publishes llms.txt from the cascade outputs of its auto-created landing',
+    'fr publishes llms.txt from the cascade outputs of its auto-created section page',
   );
   assert.deepEqual(
     describedbyLinks(b.publicFile('fr/installation/index.html')),
@@ -130,7 +130,7 @@ test("an auto-created docs landing is the root page of its language; the default
   );
   assert.ok(
     chrome.navbar(b.publicFile('fr/index.html')),
-    'fr auto-created landing is the chrome donor',
+    'fr auto-created section page is the chrome donor',
   );
 });
 

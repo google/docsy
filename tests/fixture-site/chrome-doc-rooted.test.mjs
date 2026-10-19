@@ -1,6 +1,6 @@
 // Cases: CCR-20 (doc-rooted donor page). See the CCR case registry in tests/fixture-site/README.md.
 // The navbar and footer donor page on a doc-rooted site (lib/fixtures.mjs). The
-// landing's outputs carry LLMS and print (see _partials/chrome-render.html).
+// section page's outputs carry LLMS and print (see _partials/chrome-render.html).
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

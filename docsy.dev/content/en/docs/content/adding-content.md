@@ -137,33 +137,30 @@ about how to add content and use each of Docsy's templates.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-Docsy supports documentation-first websites through a **doc-rooted** site
-structure, where:
+A **doc-rooted** site is a Docsy convention that publishes the `docs` section at
+the [site root][].
 
-- Documentation pages are published at the site root (`/`) rather than under the
-  `/docs/` path prefix.
-- Page files remain in the `docs` section directory, for example `content/docs/`
-  or `content/en/docs/`.
+### How it works
 
-As a consequence:
+Hugo gives a page a [logical path][] (its place in the content tree, which
+`GetPage` and `.Site.Home` resolve) and a [permalink][] (where it is published).
+The convention leaves the `docs` section at logical path `/docs` and moves its
+permalinks to the site root: `/getting-started/` rather than
+`/docs/getting-started/`. Two terms follow:
 
-- The `docs` section landing page becomes the site's **root page**: the page
-  whose HTML render is published at the [site root][], the URL of Hugo's home
-  page (for example `/`, or `/`_`LANG`_`/` for language _`LANG`_ of a
-  [multilingual site][]).
-- The **home page**, Hugo's `home`-kind page, still exists but no longer
-  publishes anything.
+- **Home page**: Hugo's `home`-kind page, `content/_index.md`: the root of the
+  content tree, with the site root as its URL.
+- **Root page**: the page published at the site root. Normally the home page; on
+  a doc-rooted site, the `docs` [section page][].
 
-A doc-rooted site has the following benefits:
-
-- Produces simpler, documentation-focused URLs (no `/docs/` prefix).
-- Avoids the need to create a custom home page using [blocks][] shortcodes or
-  HTML.
+[`llms.txt`][] is published from the root page, and [`shared` chrome][] keeps
+the navbar and footer on it. In your own templates, `.Site.Home` still returns
+the home page; for how the theme finds the root page, see the [root page
+design][].
 
 ### Create a doc-rooted site
 
-To create a doc-rooted site, redefine the `docs` section [permalinks][] in your
-[site configuration][] as follows (YAML format shown):
+Redefine the `docs` section [permalinks][] in your [site configuration][]:
 
 ```yaml
 permalinks:
@@ -173,41 +170,31 @@ permalinks:
     docs: /:sections[1:]
 ```
 
-Because the docs section landing page now serves as the root page, you need to
-add extra configuration to avoid "Duplicate target paths" warnings and avoid
-render conflicts with the home page.
-
-Add the following front matter to each home page file (one per language in
-multilingual sites):
+Then stop the home page from rendering, since the `docs` section page now
+publishes at its URL: add this front matter to each home page file (one per
+language):
 
 ```yaml
 build: { render: link }
 ```
 
-For a doc-rooted variant of this site, see the [Doc-rooted example][].
+Nothing moves on disk: the page files stay in the `docs` section directory. For
+a doc-rooted variant of this site, see the [Doc-rooted example][]. A site set up
+before 0.15.0 with a `cascade` of `type: docs` must migrate to this
+configuration; for the steps, see the [0.15.0 release
+post][docs-only-migration].
 
-### Agent support
+### Add agent support <a id="agent-support"></a>
 
-To publish [`llms.txt`][], add `LLMS` to the docs landing page's `outputs` (for
-each language in a multilingual site). A page's `outputs` [replace those
-configured for its kind][outputs-replace], so list the section formats too, for
-example `[HTML, RSS, print, markdown, LLMS]`.
+To publish [`llms.txt`][], add `LLMS` to the `docs` section page's `outputs`
+(one section page per language). A page's `outputs` [replace those configured
+for its kind][outputs-replace], so list the section formats too, for example
+`[HTML, RSS, print, markdown, LLMS]`.
 
 ### Check for path conflicts
 
-If your doc-rooted site has non-docs pages (such as blog or community pages),
-check for possible root-level path conflicts between docs and non-docs pages. To
-have Hugo report duplicate path warnings when building your site, use the
-`--printPathWarnings` flag.
-
-### Legacy _docs-only_ setup
-
-Earlier versions of this page described a docs-only configuration that used a
-front matter `cascade` to set page `type` values.
-
-That approach is no longer supported and can produce incorrect behavior. If you
-are migrating from that setup, remove the old `cascade` entries and use the
-configuration described earlier in this section.
+Pages outside `docs` can collide with docs pages. Build with
+`--printPathWarnings` to have Hugo report duplicate output paths.
 
 ## Page front matter
 
@@ -983,22 +970,26 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 <!-- prettier-ignore-start -->
 [alerts]: https://gohugo.io/render-hooks/blockquotes/#alerts
 [attributes]: https://gohugo.io/content-management/markdown-attributes/
-[blocks]: /docs/content/shortcodes/#blocks
 [commonmark]: https://spec.commonmark.org/
 [content type]: https://gohugo.io/quick-reference/glossary/#content-type
 [Doc-rooted example]: https://doc-rooted--docsydocs.netlify.app
+[docs-only-migration]: /blog/2026/0.15.0/#doc-rooted-sites-actions
 [Emojis]: https://gohugo.io/quick-reference/emojis/
 [extensions]: https://gohugo.io/configuration/markup/#extensions
 [formats]: https://gohugo.io/content-management/formats/
 [GFM]: https://github.github.com/gfm/
 [Goldmark]: https://github.com/yuin/goldmark
 [`llms.txt`]: /docs/content/agent-support/#llms-txt
+[logical path]: https://gohugo.io/quick-reference/glossary/#logical-path
 [Look and Feel]: /docs/content/lookandfeel/
-[multilingual site]: /docs/language/
 [outputs-replace]: /docs/content/agent-support/#opt-out
+[permalink]: https://gohugo.io/quick-reference/glossary/#permalink
 [permalinks]: https://gohugo.io/configuration/permalinks/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
 [shortcodes]: https://gohugo.io/content-management/shortcodes/
+[root page design]: /project/design/root-page/
+[section page]: https://gohugo.io/quick-reference/glossary/#section-page
+[`shared` chrome]: /docs/deployment/chrome/
 [site configuration]: https://gohugo.io/configuration/introduction/
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/

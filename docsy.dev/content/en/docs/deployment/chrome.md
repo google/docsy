@@ -49,13 +49,13 @@ The donor pages are chosen so that every chrome link stays reachable without
 JavaScript:
 
 - **Navbar and footer**: kept on each language's **[root page][]** (the home
-  page, or the docs landing on a doc-rooted site). Their links are
+  page, or the `docs` section page on a doc-rooted site). Their links are
   config-defined and identical across the language, except the navbar's optional
   selectors: a [version menu][version-menu] with `version_menu_pagelinks`
   renders per-page links that the browser restores but a link checker reaches
   only on the root page, and the language selector's restore has [known
   differences][].
-- **Left-nav** (computed per page): kept on each language's docs landing page;
+- **Left-nav** (computed per page): kept on each language's docs section page;
   it carries the full docs tree. On a doc-rooted site the two donor pages
   coincide. `shared` mode currently targets the **docs** section; other sections
   (such as blog) aren't a validated target yet, so keep `full` for them.
@@ -133,7 +133,7 @@ build needs no checker-specific configuration.
 [hugo-env-config]: https://gohugo.io/configuration/introduction/#environment-variables
 [known differences]: #known-differences-from-a-full-build
 [mpa]: https://web.dev/learn/pwa/architecture/
-[root page]: /docs/content/adding-content/#doc-rooted-sites
+[root page]: /docs/content/adding-content/#how-it-works
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu
 <!-- prettier-ignore-end -->
