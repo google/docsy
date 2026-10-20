@@ -139,7 +139,8 @@ test("an auto-created docs section page is the root page of its language; the de
   );
 });
 
-// Permalinkable print weighted below HTML renders first (design page § Why).
+// Permalinkable print with a lower weight than HTML renders first (design page
+// § Why).
 test('a permalinkable format rendered before HTML leaves the root page selection unchanged', () => {
   const b = buildCleanSite('root-page-print-first', {
     files: docRootedFiles,
@@ -238,8 +239,8 @@ test('a doc-rooted home listing LLMS before HTML keeps the home as root page (do
     'llms.txt links the home page by its only URL, the LLMS one',
   );
   assert.ok(
-    !chrome.navbar(b.publicFile('index.html')),
-    'docs section page HTML render carries a placeholder, not the navbar',
+    chrome.placeholder(b.publicFile('index.html'), 'navbar', ''),
+    'docs section page HTML render carries a placeholder with an empty donor',
   );
 });
 

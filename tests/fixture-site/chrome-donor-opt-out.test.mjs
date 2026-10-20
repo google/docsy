@@ -1,10 +1,6 @@
 // Cases: CCR-21 (per-page opt-out), its documented limit when the opted-out page
 // is a left-nav donor. See the CCR case registry in tests/fixture-site/README.md
 // and the chrome guide: docsy.dev/content/en/docs/deployment/chrome.md
-//
-// Known-limitation pin: a `docs` section page set to `td.chrome: full` keeps its
-// own left-nav, active state included, and other pages restore theirs from that
-// page, so the restored nav marks the donor active beside the current page.
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

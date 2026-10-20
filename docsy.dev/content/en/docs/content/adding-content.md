@@ -137,15 +137,15 @@ about how to add content and use each of Docsy's templates.
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
-A **doc-rooted** Hugo [project][] is a Docsy _convention_ that publishes each
-site's top-level `docs` section at the [site root][]: documentation URLs lose
-their `/docs/` prefix, and the project needs no hand-built home page.
+A **doc-rooted** Hugo [project][] follows a Docsy _convention_ that publishes
+each site's top-level `docs` section at the [site root][]: documentation URLs
+lose their `/docs/` prefix, and the project needs no hand-built home page.
 
 ### How it works
 
 Hugo gives each page:
 
-- A [logical path][], its place in the site's [logical tree][], the terms in
+- A [logical path][] (its place in the site's [logical tree][]), the terms in
   which `GetPage` and `.Site.Home` work.
 - A [permalink][], where the page is published.
 
@@ -159,12 +159,12 @@ Two key terms:
 - **Root page**: the page published at the site root, which is normally the home
   page; on a doc-rooted site, it is the `docs` [section page][].
 
-The two differ on a doc-rooted site, and `.Site.Home` still returns the home
-page, so the theme selects the root page itself ([root page design][]).
+`.Site.Home` still returns the home page, so the theme selects the root page
+itself ([root page design][]).
 
 ### Create a doc-rooted project
 
-Redefine the `docs` section [permalinks][] in your [site configuration][]:
+Redefine the `docs` section [permalinks][] in your [project configuration][]:
 
 ```yaml
 permalinks:
@@ -183,8 +183,8 @@ build: { render: link }
 ```
 
 Nothing moves on disk: the page files stay in the `docs` section directory. For
-a doc-rooted variant of this site, see the [Doc-rooted example][]. A site set up
-before 0.15.0 with a `cascade` of `type: docs` must migrate to this
+a doc-rooted variant of this site, see the [Doc-rooted example][]. A project set
+up before 0.15.0 with a `cascade` of `type: docs` must migrate to this
 configuration; for the steps, see the [0.15.0 release
 post][docs-only-migration].
 
@@ -991,11 +991,11 @@ To learn more about configuring sitemaps, see [Sitemap Templates][].
 [permalink]: https://gohugo.io/quick-reference/glossary/#permalink
 [permalinks]: https://gohugo.io/configuration/permalinks/
 [project]: https://gohugo.io/quick-reference/glossary/#project
+[project configuration]: https://gohugo.io/configuration/introduction/
 [render hooks]: https://gohugo.io/render-hooks/introduction/
-[shortcodes]: https://gohugo.io/content-management/shortcodes/
 [root page design]: /project/design/root-page/
 [section page]: https://gohugo.io/quick-reference/glossary/#section-page
-[site configuration]: https://gohugo.io/configuration/introduction/
+[shortcodes]: https://gohugo.io/content-management/shortcodes/
 [site root]: https://gohugo.io/quick-reference/glossary/#site-root
 [Sitemap Templates]: https://gohugo.io/templates/sitemap-template/
 <!-- prettier-ignore-end -->

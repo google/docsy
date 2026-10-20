@@ -9,4 +9,5 @@ cascade:
   - target: { path: / }
     build: { render: link }
   - target: { path: /docs }
+    # The section formats (_default outputs.section) plus LLMS; keep in step.
     outputs: [HTML, RSS, print, markdown, LLMS]

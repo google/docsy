@@ -120,7 +120,7 @@ test('shared mode can be set via site config', () => {
   assert.ok(!has.footer(landing), 'footer absent on the docs landing');
 });
 
-// A page that must be complete without JavaScript opts out of the shared build.
+// A page opts out of the shared build and keeps its own chrome.
 test('a page with td.chrome full in front matter keeps its own chrome in a shared build', () => {
   const r = buildSite('ccr-page-full', {
     files: {

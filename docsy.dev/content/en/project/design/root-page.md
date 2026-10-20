@@ -8,10 +8,10 @@ description: >-
 ## Selection rule
 
 [`_partials/td/root-page.html`][partial] returns a site's [root page][]: it
-takes a `Site` and returns the page at content path `/docs` when the URL of its
+takes a `Site` and returns the page at logical path `/docs` when the URL of its
 `html` output format equals the home page's, otherwise the home. Consumers share
 the result through `partialCached`, which caches per site; the `llms.txt` locale
-loop keys by site.
+loop, which evaluates other sites, keys by site.
 
 ## Consumers
 
@@ -28,30 +28,30 @@ loop keys by site.
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
   footer are kept on one [donor page][] per language, the root page, and
   restored from it elsewhere. The chrome applies the definition without the
-  lookup: a page is the donor when its `html` URL equals the home page's. Its
-  placeholders carry two URLs: `data-chrome-donor`, the home page's `html` URL,
-  where the client fetches the chrome, and `data-canonical-path`, the page's own
-  `html` URL, which the client matches against the restored nav's links for the
-  active state instead of the request URL (a print or paginated address). The
-  left-nav has a donor rule of its own, the page's first section (or a home page
-  of type `docs`, the pre-0.15 shape, unless the page sets `toc_root: true`),
-  outside this page.
+  lookup: a page is the donor when its `html` URL equals the home page's. The
+  placeholders carry `data-chrome-donor`, the home page's `html` URL, where the
+  client fetches the chrome; the navbar's also carries `data-canonical-path`,
+  the page's own `html` URL, which the client matches against the restored nav's
+  links for the active state instead of the request URL (a print or paginated
+  address). The left-nav has a donor rule of its own ([donor
+  pages][donor page]).
 
 ## Why this rule
 
-- **Absolute content path**, `site.GetPage "/docs"`: a bare `"docs"` would be
+- **Absolute logical path**, `site.GetPage "/docs"`: a bare `"docs"` would be
   wrong. When there is no `/docs` section, a `Site` lookup falls back to a
   site-wide lookup by name, which fails the build on two pages named `docs`
   (`page reference "docs" is ambiguous`) and silently returns the one such page
   otherwise ([#2875][]).
 - **The URL comparison** keeps an ordinary `/docs/` section from being taken for
   the root.
-- **The `html` output URL**, not the URL of the format being rendered: consumers
-  cache the result per site, and a permalinkable format can render before HTML.
+- **The `html` output URL**, not the URL of the format being rendered: the
+  cached result serves every render pass, and a permalinkable format can render
+  before HTML.
 - **The home page's `html` URL as the reference**: Hugo computes it under every
-  URL setting (`baseURL` paths, language prefixes, multihost, `uglyURLs`, the
-  site matrix's version dimension), none of which a configuration-derived root
-  reproduces.
+  URL setting (`baseURL` paths, language prefixes, multihost, site-wide
+  `uglyURLs`, the site matrix's version dimension), which no
+  configuration-derived root reproduces in full.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index
@@ -77,7 +77,7 @@ test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
 | `docs` section page without a translated `_index` file         | Hugo's auto-created section is still the root when published there; its outputs come from configuration or `cascade`, not from a file.                                                                              | `root-page`                                                                                        |
 | `baseURL` with a subpath                                       | Both compared URLs include the subpath, so the selection is unchanged.                                                                                                                                              | `root-page`                                                                                        |
 | Several output formats (HTML, Markdown, print, RSS, LLMS)      | Selection is unchanged whatever format renders first or carries `rel=canonical` (the rule compares `html` URLs). The donor is the root page's HTML render; its print render gets a placeholder like any other page. | `root-page`, `llms-doc-rooted`, `chrome-doc-rooted` (print), `chrome-render` (permalinkable print) |
-| `uglyURLs`                                                     | Both compared URLs end in `index.html`, so the selection is unchanged; the donor is named as `/index.html`.                                                                                                         | `root-page`                                                                                        |
+| Site-wide `uglyURLs`                                           | Both compared URLs end in `index.html`, so the selection is unchanged; the donor is named as `/index.html`.                                                                                                         | `root-page`                                                                                        |
 | Doc-rooted home with `LLMS` configured                         | The home publishes no file; root-level `llms.txt` and discovery require `LLMS` on the `docs` section page.                                                                                                          | `llms-doc-rooted`                                                                                  |
 | Root page without `LLMS`                                       | No `describedby` link, directive, or Markdown link, even when another section publishes an `llms.txt`; the shortcode fails the build when invoked.                                                                  | `llms-directive`, `llms-doc-rooted`                                                                |
 | `LLMS` on a non-root section                                   | Its `llms.txt` is the site overview, not a section index; discovery still depends on the root page's `LLMS` output.                                                                                                 | `llms-doc-rooted`                                                                                  |
@@ -100,10 +100,14 @@ The design leaves these unresolved:
   stays the root page, no render is the donor, and the placeholders name an
   empty donor (the client fetches the page itself once). The same holds for
   `build.render: never` and an empty `outputs.home`, where `llms.txt`'s home and
-  locale links are empty too. Hugo's [`outputs` convention][outputs] is `HTML`
-  first.
+  locale links are empty too (the `docs` section page still publishes its
+  `llms.txt`). Hugo's [`outputs` convention][outputs] is `HTML` first.
 - A `docs` section page whose `outputs` leave out `HTML`: it is neither selected
   nor a donor.
+- `uglyURLs` set for the `docs` section only (`uglyURLs: { docs: true }`): the
+  section page publishes at `/index.html` while the home page, in no section,
+  keeps `/`, so the URLs differ and the home stays the root page: no discovery,
+  no donor. Site-wide `uglyURLs` is unaffected.
 - `HTML` marked `notAlternative`: the donor page's other renders then carry the
   chrome too (the current-render test is "`HTML` is not among the
   alternatives"); the placeholders still name the site root, so the restore
@@ -117,8 +121,8 @@ The design leaves these unresolved:
 [Discovery]: /docs/content/agent-support/#discovery
 [doc-rooted site]: /docs/content/adding-content/#doc-rooted-sites
 [donor page]: /docs/deployment/chrome/#donor-pages
-[path conflict]: /docs/content/adding-content/#check-for-path-conflicts
 [outputs]: https://gohugo.io/configuration/outputs/
+[path conflict]: /docs/content/adding-content/#check-for-path-conflicts
 [partial]: https://github.com/docsy/docsy/blob/main/theme/layouts/_partials/td/root-page.html
 [root page]: /docs/content/adding-content/#how-it-works
 <!-- prettier-ignore-end -->

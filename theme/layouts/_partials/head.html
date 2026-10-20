@@ -9,8 +9,7 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#000000">
 
-{{/* Canvas colors before the stylesheet loads, to avoid a flash and
-  transitions */ -}}
+{{/* Canvas colors before the stylesheet loads */ -}}
 <style>
   html { background: Canvas; color: CanvasText; }
   @media (prefers-color-scheme: dark) {
@@ -82,7 +81,7 @@
 
 {{ partial "hooks/head-end.html" . -}}
 
-{{/* To comply with GDPR, cookie consent scripts places in head-end must execute before Google Analytics is enabled */ -}}
+{{/* To comply with GDPR, cookie consent scripts placed in head-end must execute before Google Analytics is enabled */ -}}
 {{ if hugo.IsProduction -}}
   {{ partial "google_analytics.html" . -}}
 {{ end -}}

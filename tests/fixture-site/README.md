@@ -84,12 +84,13 @@ means no dedicated test yet.
   entry, taxonomies, 404), where a full build's `IsDescendant` marks nothing,
   and it loses its active state under any docs subsection with its own entry
   (CCR-03). Same fix, with [#2689][].
-- **CCR-21** (per-page opt-out): _partial._ Opting out a left-nav donor (a
-  `docs` section page) leaves its own active state in the nav other pages
-  restore from it, so their restored nav marks the donor active too
-  (`chrome-donor-opt-out` pins it); and above `sidebar_cache_limit` the
-  opted-out page's left-nav is still the cached, script-revealed one. Fix: clear
-  the donor's active state before applying the current page's ([#2689][]).
+- **CCR-21** (per-page opt-out): _partial._ Below `sidebar_cache_limit`, opting
+  out a left-nav donor (a `docs` section page) leaves its own active state in
+  the nav other pages restore from it, so their restored nav marks the donor
+  active too (`chrome-donor-opt-out` pins it); above the limit the opted-out
+  page's left-nav is the cached, script-revealed one, with no active state to
+  leak. Fix: clear the donor's active state before applying the current page's
+  ([#2689][]).
 - **CCR-07** (non-foldable reveal): _partial._ A full build also shows the
   siblings of every ancestor on the active path (`sidebar-tree.html`,
   `IsDescendant $s.Parent`); the client opens only the current item's siblings
@@ -98,13 +99,13 @@ means no dedicated test yet.
   ([#2689][]). No dedicated unit coverage.
 - **CCR-09 / CCR-10** (selector links) under `uglyURLs`: _partial._ The donor
   path normalizes to `/index.html/`, so the client's suffix and prefix swaps
-  leave the donor's `index.html` in the restored version and language links
-  (reproduced in the #2888 review, round 16). Fix with [#2689][].
+  leave the donor's `index.html` in the restored version and language links. Fix
+  with [#2689][].
 - **CCR-14** (scoped-root structural residual) lacks dedicated unit coverage.
   The extra wrapper and `ul` renumbering can show in the rendered nav as one
-  indentation level less under a non-foldable, non-compact nav (measured in
-  Chrome, #2888 round 16); it gates reinstating the docsy.dev `sidebar_root_for`
-  example; a JSON doctree that re-renders the subtree would close it.
+  indentation level less under a non-foldable, non-compact nav; it gates
+  reinstating the docsy.dev `sidebar_root_for` example; a JSON doctree that
+  re-renders the subtree would close it.
 - **CCR-19** (sidebar placeholder whitespace trim) has no dedicated test but is
   exercised indirectly: every `chrome-equivalence` / `chrome-nav` assertion
   would fail on a stray placeholder seam.

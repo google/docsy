@@ -2,7 +2,7 @@
 // and the navbar and footer (see "Page-invariant chrome" below). Each dropped
 // region leaves a placeholder naming its donor page (_partials/sidebar.html,
 // navbar.html, footer.html); the donor's region is fetched, injected in place,
-// and given this page's active state. The left-nav is cached in sessionStorage
+// and adapted to this page. The left-nav is cached in sessionStorage
 // so later pages in the same section reuse it without re-fetching.
 //
 // The same active-state pass also hydrates the cached inline nav that the donor
@@ -106,7 +106,7 @@
     }
 
     // In a non-foldable nav, also open the current item's siblings and direct
-    // children (not every ancestor's siblings, as a full build does: CCR-07); a
+    // children (not every ancestor's siblings, as a full build does; CCR-07); a
     // foldable nav leaves these to the checkboxes, matching a full build (which
     // only checks the active path). Exact-match pages only: an ancestor anchor
     // isn't the current item, so it gets no extra expansion.
@@ -306,7 +306,7 @@
   // the donor page renders its own, i.e. each language's root. Swap the current
   // language's root prefix (`donorPath`) for the target language's to reproduce
   // the full build's link; a best-effort restore when slugs differ across
-  // languages (CCR-10).
+  // languages (CCR-10) or the donor path is a file (uglyURLs; CCR-09/10).
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;

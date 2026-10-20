@@ -26,7 +26,8 @@ export const docRootedHomes = (en = {}, fr = {}) => ({
   'content/_index.fr.md': linkOnlyHome({ title: 'Accueil', ...fr }),
 });
 
-// The user guide's llms.txt outputs (Agent support § Enable), without print.
+// The user guide's llms.txt outputs (Agent support § llms.txt › Enable),
+// without print.
 export const llmsOutputs = `outputs:
   home: [HTML, markdown, LLMS]
   page: [HTML, markdown]

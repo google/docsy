@@ -28,8 +28,9 @@ function buildSite() {
     const output = `${res.stdout ?? ''}\n${res.stderr ?? ''}`;
     // Catches Hugo API deprecations and any deprecation warning that escapes
     // the theme's silencing, e.g. through a config regression (guard split:
-    // see maintainer notes, "Sass deprecation warnings"). Non-deprecation
-    // vendor @warn messages pass: they are log noise, not a regression.
+    // see maintainer notes, "Sass deprecation warnings"). Since `npm run build`
+    // runs with --panicOnWarning, any Hugo WARN, a vendor @warn included, fails
+    // the build before this filter sees it.
     const deprecations = output
       .split('\n')
       .filter((line) => /deprecated/i.test(line));

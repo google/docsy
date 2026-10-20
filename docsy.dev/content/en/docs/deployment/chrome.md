@@ -43,8 +43,8 @@ other pages carry a placeholder that the browser fills from the donor page.
 Clients without JavaScript (some search crawlers included) see only the donor
 pages' chrome. The donors:
 
-- **Navbar and footer**: each language's **[root page][]**, the home page, or
-  the `docs` section page on a doc-rooted site.
+- **Navbar and footer**: each language's **[root page][]** (the home page, or
+  the `docs` section page on a doc-rooted site).
 - **Left-nav**: the page's first section, that is, the docs section page; on a
   site whose home page has `type: docs` (the pre-0.15 shape), the home page,
   unless the page sets `toc_root: true`.
@@ -54,7 +54,7 @@ pages' chrome. The donors:
 The donor pages are chosen to keep chrome links reachable without JavaScript:
 
 - **Navbar and footer**: their links are config-defined and identical across the
-  language, except the navbar's optional selectors:
+  language. The exceptions are the navbar's optional selectors:
   - A [version menu][version-menu] with `version_menu_pagelinks` renders
     per-page links, which the browser restores but a link checker reaches only
     on the root page.
@@ -93,8 +93,8 @@ The restore aims to match a full build, with these exceptions:
     root, prefixes every path), where a full build marks none.
 - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right links
   and active state, but its re-rooted subtree differs structurally from a full
-  build (an extra wrapper element, deeper `ul` nesting), which can show as one
-  indentation level less under a non-foldable, non-compact nav.
+  build (an extra wrapper element, renumbered `ul` levels), which can show as
+  one indentation level less under a non-foldable, non-compact nav.
 - With `uglyURLs`, the restored version-selector and language-selector links
   keep the donor page's `index.html` instead of the current page's path
   ([#2689][]).
@@ -147,9 +147,10 @@ Two limits of the per-page setting:
 - It doesn't make the page complete without JavaScript on a large site: above
   [`sidebar_cache_limit`][sidebar-cache], the left-nav is the cached site-wide
   one, shipped hidden and revealed by script, on `full` pages too.
-- Setting it on a left-nav donor page (a `docs` section page) leaves that page's
-  own active state in the nav that other pages restore from it: the restored nav
-  then marks both the donor and the current page active.
+- Below `sidebar_cache_limit`, setting it on a left-nav donor page (a `docs`
+  section page) leaves that page's own active state in the nav that other pages
+  restore from it: the restored nav then marks both the donor and the current
+  page active.
 
 <!-- prettier-ignore-start -->
 [#2689]: https://github.com/docsy/docsy/issues/2689

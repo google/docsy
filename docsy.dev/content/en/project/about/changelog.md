@@ -173,10 +173,9 @@ history since 0.18.0][].
 
 **Other changes**:
 
-- Fixed builds failing with `page reference "docs" is ambiguous` on sites that
-  have two or more pages named `docs` but no top-level `docs` section: every
-  site since 0.18.0, sites with `llms.txt` enabled since 0.15.0 ([#2875][],
-  [design][project-root-page]).
+- Fixed builds failing with `page reference "docs" is ambiguous` on sites with
+  pages named `docs` but no top-level `docs` section (since 0.18.0; since 0.15.0
+  with `llms.txt` enabled) ([#2875][], [design][project-root-page]).
 
 [**Experimental**](#experimental):
 
@@ -186,26 +185,24 @@ history since 0.18.0][].
   - Fixed the navbar and footer missing from every page of a doc-rooted site;
     they render on each language's root page, the [donor page][ug-donor-page]
     ([#2888][]).
-  - The donor keeps the navbar and footer on its HTML render only; its other
-    renders, the home page's print render included, carry placeholders like
-    every other page.
-  - Documented the per-page setting, `td: { chrome: full }` in front matter,
-    which keeps a page's own chrome, and its limits ([per-page
-    setting][ug-chrome-per-page]).
+  - Changed the donor to keep the navbar and footer on its HTML render only; its
+    other renders, the home page's print render included, got placeholders.
+  - Documented the per-page `td: { chrome: full }` setting and its limits
+    ([per-page setting][ug-chrome-per-page]).
 
 **For maintainers**:
 
-- docsy.dev builds report duplicate target paths on every build kind;
-  `npm run build` (local and test builds) fails on any warning, while preview
-  and production builds keep warnings as warnings ([#2888][]).
+- Made docsy.dev builds report duplicate target paths on every build kind, and
+  `npm run build` (local, test and scheduled builds) fail on any warning;
+  preview and production builds keep warnings as warnings ([#2888][]).
 
 [#2875]: https://github.com/docsy/docsy/issues/2875
 [#2888]: https://github.com/docsy/docsy/pull/2888
-[ug-chrome-per-page]: /docs/deployment/chrome/#setting-the-build-mode
 [0.19.0]: https://github.com/docsy/docsy/releases/latest?FIXME=v0.19.0
 [git history since 0.18.0]:
   https://github.com/docsy/docsy/compare/v0.18.0...main
 [project-root-page]: /project/design/root-page/
+[ug-chrome-per-page]: /docs/deployment/chrome/#setting-the-build-mode
 [ug-donor-page]: /docs/deployment/chrome/#donor-pages
 
 ## v0.18.0 {#v0.18.0}

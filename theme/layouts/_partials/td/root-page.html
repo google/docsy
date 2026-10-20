@@ -1,6 +1,11 @@
 {{/*
-Returns the site's root page: the page published at the home page's URL. Rule
-and cases: [Root page][].
+Returns the site's root page: the home page, or the `docs` section page when it
+publishes at the home page's URL. Rule and cases: [Root page][].
+
+Design note: `partialCached` keeps one cache per site, so a call with no variant
+key is cached for the rendering site, which is what callers want; a caller
+evaluating another site (`all.llms.txt`'s locale loop) keys by that site's
+`.String`.
 
 @context {site}
 @returns {page}
