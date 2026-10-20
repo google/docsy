@@ -1,4 +1,4 @@
-// Cases: CCR-20 (doc-rooted donor page, with the subdirectory, subpath, print-first, moved rel=canonical, LLMS-first home and uglyURLs variants). See the CCR case registry in tests/fixture-site/README.md.
+// Cases: CCR-20 (doc-rooted donor page and its variants). See the CCR case registry in tests/fixture-site/README.md.
 // The root-page lookup (_partials/td/root-page.html, all.llms.txt) on the
 // shapes that defeat a by-name lookup (docsy/docsy#2875) and on the recipe's
 // variants. Case inventory: docsy.dev/content/en/project/design/root-page.md
@@ -172,8 +172,6 @@ test('a permalinkable format rendered before HTML leaves the root page selection
   );
 });
 
-// `rel` is per-format SEO metadata a site may move; the root page and the donor
-// are the HTML render whatever carries rel=canonical.
 test('moving rel=canonical to the print format leaves the root page and its donor unchanged', () => {
   const b = buildCleanSite('root-page-rel-moved', {
     files: docRootedFiles,

@@ -189,8 +189,9 @@ history since 0.18.0][].
   - The donor keeps the navbar and footer on its HTML render only; its other
     renders, the home page's print render included, carry placeholders like
     every other page.
-  - A page can keep its own chrome with `td: { chrome: full }` in its front
-    matter ([per-page setting][ug-chrome-per-page]).
+  - Documented the per-page setting, `td: { chrome: full }` in front matter,
+    which keeps a page's own chrome, and its limits ([per-page
+    setting][ug-chrome-per-page]).
 
 **For maintainers**:
 

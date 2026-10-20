@@ -284,7 +284,8 @@
   // The navbar's version/language selectors carry per-page links that the donor
   // page renders for itself, so re-derive each for the current page; `donorPath`
   // is the donor page's path, the current language's root. Version links are
-  // exact: each is a version's base URL plus the page path
+  // exact when the donor path is a directory (not under uglyURLs, CCR-09):
+  // each is a version's base URL plus the page path
   // (when `version_menu_pagelinks` is on), so the donor's link is
   // `base + donorPath`. Strip that path and append this page's to reproduce the
   // full build's `base + thisPagePath`. Links without the page path (pagelinks

@@ -137,7 +137,7 @@ test('a page with td.chrome full in front matter keeps its own chrome in a share
   assert.ok(has.sidebar(page), 'left-nav rendered on the opted-out page');
   assert.ok(
     !/td-chrome-placeholder|td-sidebar-chrome-placeholder/.test(page),
-    'no placeholder on the opted-out page',
+    'opted-out page renders without placeholders',
   );
   assert.ok(
     !has.navbar(r.publicFile('docs/page-a/index.html')),

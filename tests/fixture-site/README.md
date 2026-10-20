@@ -42,7 +42,7 @@ means no dedicated test yet.
 | CCR-06 | Active state: active link + active-path + foldable reveal                   | restored | `chrome-nav`                                           |
 | CCR-07 | Non-foldable reveal (`.show` on siblings/children)                          | partial  | —                                                      |
 | CCR-08 | Cached/shared inline nav hydration (large sites, full mode too)             | restored | `chrome-nav`, `chrome-cached-sidebar`                  |
-| CCR-09 | Navbar version selector per-page links (`version_menu_pagelinks`)           | restored | `chrome-selectors`, `chrome-equivalence`               |
+| CCR-09 | Navbar version selector per-page links (`version_menu_pagelinks`)           | partial  | `chrome-selectors`, `chrome-equivalence`               |
 | CCR-10 | Navbar language selector per-page links (prefix-swap, best-effort)          | partial  | `chrome-selectors`                                     |
 | CCR-11 | Navbar cover/theme per-page traits                                          | restored | `chrome-cover-theme`                                   |
 | CCR-12 | Scoped sidebar re-root, functional (`sidebar_root_for`)                     | restored | `chrome-scoped`                                        |
@@ -96,10 +96,15 @@ means no dedicated test yet.
   and children, so under `sidebar_menu_compact: true` the restore hides items a
   full build shows. Fix: open the children of every ancestor on the active path
   ([#2689][]). No dedicated unit coverage.
+- **CCR-09 / CCR-10** (selector links) under `uglyURLs`: _partial._ The donor
+  path normalizes to `/index.html/`, so the client's suffix and prefix swaps
+  leave the donor's `index.html` in the restored version and language links
+  (reproduced in the #2888 review, round 16). Fix with [#2689][].
 - **CCR-14** (scoped-root structural residual) lacks dedicated unit coverage.
-  CCR-14 is browser-invisible (it shows only in a serialized-HTML diff, not the
-  rendered nav) and gates reinstating the docsy.dev `sidebar_root_for` example;
-  a JSON doctree that re-renders the subtree would close it.
+  The extra wrapper and `ul` renumbering can show in the rendered nav as one
+  indentation level less under a non-foldable, non-compact nav (measured in
+  Chrome, #2888 round 16); it gates reinstating the docsy.dev `sidebar_root_for`
+  example; a JSON doctree that re-renders the subtree would close it.
 - **CCR-19** (sidebar placeholder whitespace trim) has no dedicated test but is
   exercised indirectly: every `chrome-equivalence` / `chrome-nav` assertion
   would fail on a stray placeholder seam.

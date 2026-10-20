@@ -92,9 +92,12 @@ The restore aims to match a full build, with these exceptions:
     other entry covers, such as taxonomy and 404 pages (its URL, the language
     root, prefixes every path), where a full build marks none.
 - A [scoped sidebar][sidebar-root] (`sidebar_root_for`) restores the right links
-  and active state, but its re-rooted subtree can differ structurally from a
-  full build (an extra wrapper element, deeper `ul` nesting). The difference
-  isn't visible in the rendered nav, only in a serialized-HTML diff.
+  and active state, but its re-rooted subtree differs structurally from a full
+  build (an extra wrapper element, deeper `ul` nesting), which can show as one
+  indentation level less under a non-foldable, non-compact nav.
+- With `uglyURLs`, the restored version-selector and language-selector links
+  keep the donor page's `index.html` instead of the current page's path
+  ([#2689][]).
 - With `sidebar_menu_compact: true` and `sidebar_menu_foldable: false`, the
   restored left-nav opens the current page's siblings and children only, where a
   full build also shows the siblings of every ancestor on the active path

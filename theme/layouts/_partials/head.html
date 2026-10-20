@@ -9,11 +9,10 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#000000">
 
-{{/* Styles to set canvas colors and avoid transitions */ -}}
+{{/* Canvas colors before the stylesheet loads, to avoid a flash and
+  transitions */ -}}
 <style>
-  {{/* Set system colors as default */ -}}
   html { background: Canvas; color: CanvasText; }
-  {{/* Define reasonable dark defaults */ -}}
   @media (prefers-color-scheme: dark) {
     html { background: #0b0d12; color: #e6e6e6; }
   }
