@@ -45,12 +45,12 @@ means no dedicated test yet.
 | CCR-09 | Navbar version selector per-page links (`version_menu_pagelinks`)           | partial  | `chrome-selectors`, `chrome-equivalence`               |
 | CCR-10 | Navbar language selector per-page links (prefix-swap, best-effort)          | partial  | `chrome-selectors`                                     |
 | CCR-11 | Navbar cover/theme per-page traits                                          | restored | `chrome-cover-theme`                                   |
-| CCR-12 | Scoped sidebar re-root, functional (`sidebar_root_for`)                     | restored | `chrome-scoped`                                        |
+| CCR-12 | Scoped sidebar re-root, functional (`sidebar_root_for`)                     | partial  | `chrome-scoped`                                        |
 | CCR-13 | Scoped root markers (`data-sidebar-root-id`, up-icon)                       | restored | `chrome-scoped`                                        |
 | CCR-14 | Scoped root structural residual (wrapper, `ul`-level renumber)              | deferred | —                                                      |
 | CCR-15 | Print `_print/*` canonical URL                                              | restored | `chrome-canonical`                                     |
 | CCR-16 | Paginated `/page/N/` canonical URL                                          | restored | `chrome-canonical`                                     |
-| CCR-17 | Out-of-tree active-path (`toc_hide`)                                        | restored | `chrome-out-of-tree`                                   |
+| CCR-17 | Out-of-tree active-path (`toc_hide`)                                        | partial  | `chrome-out-of-tree`                                   |
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                                     | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                         | restored | —                                                      |
 | CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, HTML render)      | partial  | `chrome-doc-rooted`, `root-page`                       |
@@ -64,19 +64,19 @@ means no dedicated test yet.
   differ and the restored link 404s). When the current page has **no
   translation** in a locale, a full build renders that item disabled while
   shared mode restores a live link to the non-existent page. The divergence is
-  pinned by a known-limitation test in `chrome-selectors`. A translation hidden
-  from the left-nav (`toc_hide`) is reachable without JavaScript only in a full
-  build, through the selector. **Planned next:** bake each page's available
-  locales into the navbar placeholder and emit a disabled item for the rest,
-  matching a full build (a differing-slug variant would also need this per-page
-  hint).
+  pinned by a known-limitation test in `chrome-selectors`. **Planned next:**
+  bake each page's available locales into the navbar placeholder and emit a
+  disabled item for the rest, matching a full build (a differing-slug variant
+  would also need this per-page hint).
 - **CCR-03** (navbar active state): _partial._ The restore marks one entry, the
   longest match for the current path, where a full build marks every entry whose
   page contains it (`IsMenuCurrent`, `HasMenuCurrent`, `IsDescendant`). With
   nested menu entries a parent loses its active state on pages under a child
-  entry, on ordinary and doc-rooted sites alike. Fix: bake the full build's
-  menu-current state into the navbar placeholder as a per-page hint and key the
-  restore on it ([#2689][]).
+  entry, on ordinary and doc-rooted sites alike; and the prefix test compares
+  paths without an origin check, so an external entry at an origin root
+  (`https://example.com/`) is active on every page no other entry covers. Fix:
+  bake the full build's menu-current state into the navbar placeholder as a
+  per-page hint and key the restore on it ([#2689][]).
 - **CCR-20** (doc-rooted donor page): _partial._ The donor renders and the
   restore works, but the docs menu entry's URL is the language root, so the
   longest-prefix active-link pass gets both directions wrong: the docs entry is
@@ -97,10 +97,12 @@ means no dedicated test yet.
   and children, so under `sidebar_menu_compact: true` the restore hides items a
   full build shows. Fix: open the children of every ancestor on the active path
   ([#2689][]). No dedicated unit coverage.
-- **CCR-09 / CCR-10** (selector links) under `uglyURLs`: _partial._ The donor
-  path normalizes to `/index.html/`, so the client's suffix and prefix swaps
-  leave the donor's `index.html` in the restored version and language links. Fix
-  with [#2689][].
+- **`uglyURLs`** (CCR-03, CCR-09, CCR-10, CCR-12, CCR-17, CCR-20): _partial._
+  Section URLs end in `index.html`, which `normalizePath` turns into
+  `/…/index.html/`, so no child path has a section's path as prefix: the
+  restored version and language links keep the donor's `index.html`, no section
+  menu entry is active on child pages, the out-of-tree active path is empty, and
+  the scoped sidebar's "up" link resolves to the directory. Fix with [#2689][].
 - **CCR-14** (scoped-root structural residual) lacks dedicated unit coverage.
   The extra wrapper and `ul` renumbering can show in the rendered nav as one
   indentation level less under a non-foldable, non-compact nav; it gates

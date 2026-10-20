@@ -186,9 +186,9 @@ history since 0.18.0][].
     they render on each language's root page, the [donor page][ug-donor-page]
     ([#2888][]).
   - Changed the donor to keep the navbar and footer on its HTML render only; its
-    other renders, the home page's print render included, got placeholders.
-  - Documented the per-page `td: { chrome: full }` setting and its limits
-    ([per-page setting][ug-chrome-per-page]).
+    other renders, the home page's print render included, carry placeholders.
+  - Documented the [per-page `td: { chrome: full }` setting][ug-chrome-per-page]
+    and its limits.
 
 **For maintainers**:
 

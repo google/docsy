@@ -10,8 +10,7 @@ description: >-
 [`_partials/td/root-page.html`][partial] returns a site's [root page][]: it
 takes a `Site` and returns the page at logical path `/docs` when the URL of its
 `html` output format equals the home page's, otherwise the home. Consumers share
-the result through `partialCached`, which caches per site; the `llms.txt` locale
-loop, which evaluates other sites, keys by site.
+the result through `partialCached`, which caches per site.
 
 ## Consumers
 
@@ -31,10 +30,8 @@ loop, which evaluates other sites, keys by site.
   lookup: a page is the donor when its `html` URL equals the home page's. The
   placeholders carry `data-chrome-donor`, the home page's `html` URL, where the
   client fetches the chrome; the navbar's also carries `data-canonical-path`,
-  the page's own `html` URL, which the client matches against the restored nav's
-  links for the active state instead of the request URL (a print or paginated
-  address). The left-nav has a donor rule of its own ([donor
-  pages][donor page]).
+  the page's own `html` URL, which keys the client's active-state restore. The
+  left-nav has a donor rule of its own ([donor pages][donor page]).
 
 ## Why this rule
 
@@ -98,16 +95,18 @@ The design leaves these unresolved:
   matter) don't start with `HTML`: a link-only page keeps only its first
   configured format, so the home has no `html` URL to compare with; the home
   stays the root page, no render is the donor, and the placeholders name an
-  empty donor (the client fetches the page itself once). The same holds for
-  `build.render: never` and an empty `outputs.home`, where `llms.txt`'s home and
-  locale links are empty too (the `docs` section page still publishes its
-  `llms.txt`). Hugo's [`outputs` convention][outputs] is `HTML` first.
+  empty donor (the client fetches the page itself once); `llms.txt` discovery
+  follows the home's kept formats, present only when `LLMS` is among them. The
+  same holds for `build.render: never` and an empty `outputs.home`, where
+  `llms.txt`'s home and locale links are empty too (the `docs` section page
+  still publishes its `llms.txt`). Hugo's [`outputs` convention][outputs] is
+  `HTML` first.
 - A `docs` section page whose `outputs` leave out `HTML`: it is neither selected
   nor a donor.
 - `uglyURLs` set for the `docs` section only (`uglyURLs: { docs: true }`): the
   section page publishes at `/index.html` while the home page, in no section,
-  keeps `/`, so the URLs differ and the home stays the root page: no discovery,
-  no donor. Site-wide `uglyURLs` is unaffected.
+  keeps `/`, so the URLs differ and the home stays the root page, with no
+  discovery and no donor.
 - `HTML` marked `notAlternative`: the donor page's other renders then carry the
   chrome too (the current-render test is "`HTML` is not among the
   alternatives"); the placeholders still name the site root, so the restore

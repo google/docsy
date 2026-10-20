@@ -219,7 +219,6 @@ test('moving rel=canonical to the print format leaves the root page and its dono
   );
 });
 
-// Documented limit (design page § Limits): a link-only home listing LLMS first.
 test('a doc-rooted home listing LLMS before HTML keeps the home as root page (documented limit)', () => {
   const b = buildCleanSite('root-page-home-llms-first', {
     files: docRootedFiles,

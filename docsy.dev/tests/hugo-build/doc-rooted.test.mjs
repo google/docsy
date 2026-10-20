@@ -88,7 +88,6 @@ test('doc-rooted variant publishes llms.txt at each language root only', () => {
     );
   }
 
-  // The section formats the landing cascade restates; it must track _default's.
   for (const f of [
     'index.html',
     'index.xml',

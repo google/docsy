@@ -46,7 +46,6 @@ const docRootedLlmsConfig = docRootedConfig + llmsOutputs;
 const build = (name, files, extraConfig) =>
   buildCleanSite(name, { files, extraConfig });
 
-// The enabled fixture is read-only across its tests: build it once.
 let docRootedBuild;
 const docRooted = () =>
   (docRootedBuild ??= build(

@@ -188,7 +188,7 @@ up before 0.15.0 with a `cascade` of `type: docs` must migrate to this
 configuration; for the steps, see the [0.15.0 release
 post][docs-only-migration].
 
-### Add agent support <a id="agent-support"></a>
+### Add agent support {#agent-support}
 
 To publish [`llms.txt`][], add `LLMS` to the `docs` section page's `outputs`
 (one section page per language). A page's `outputs` [replace those configured

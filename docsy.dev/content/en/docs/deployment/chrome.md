@@ -63,9 +63,8 @@ The donor pages are chosen to keep chrome links reachable without JavaScript:
     translation hidden from the left-nav (`toc_hide`). For the restored
     selector, see the [known differences][].
 - **Left-nav** (computed per page): the docs section page carries the full docs
-  tree. On a doc-rooted site the two donor pages coincide. `shared` mode
-  currently targets the **docs** section; other sections (such as blog) aren't a
-  validated target yet, so keep `full` for them.
+  tree. `shared` mode currently targets the **docs** section; other sections
+  (such as blog) aren't a validated target yet, so keep `full` for them.
 
 ## Known differences from a full build
 
@@ -95,9 +94,11 @@ The restore aims to match a full build, with these exceptions:
   and active state, but its re-rooted subtree differs structurally from a full
   build (an extra wrapper element, renumbered `ul` levels), which can show as
   one indentation level less under a non-foldable, non-compact nav.
-- With `uglyURLs`, the restored version-selector and language-selector links
-  keep the donor page's `index.html` instead of the current page's path
-  ([#2689][]).
+- With `uglyURLs`, section URLs end in `index.html`, which the restore doesn't
+  treat as a directory: the version and language selector links keep the donor
+  page's `index.html`, no section menu entry is marked active on pages under it,
+  the out-of-tree active path is empty, and a scoped sidebar's "up" link points
+  at the directory ([#2689][]).
 - With `sidebar_menu_compact: true` and `sidebar_menu_foldable: false`, the
   restored left-nav opens the current page's siblings and children only, where a
   full build also shows the siblings of every ancestor on the active path

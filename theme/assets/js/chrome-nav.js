@@ -1,5 +1,5 @@
 // Client-side restore of the chrome a shared build drops: the docs left-nav,
-// and the navbar and footer (see "Page-invariant chrome" below). Each dropped
+// and the navbar and footer (see "Navbar and footer" below). Each dropped
 // region leaves a placeholder naming its donor page (_partials/sidebar.html,
 // navbar.html, footer.html); the donor's region is fetched, injected in place,
 // and adapted to this page. The left-nav is cached in sessionStorage
@@ -127,7 +127,7 @@
 
   function hydrate(menu) {
     applyActiveState(menu);
-    menu.classList.remove('d-none'); // reveal once the active state is in place
+    menu.classList.remove('d-none');
   }
 
   function readCache(key) {
@@ -234,7 +234,7 @@
       });
   }
 
-  // --- Page-invariant chrome (navbar, footer) -----------------------------
+  // --- Navbar and footer ---------------------------------------------------
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
   // Re-apply this page's navbar cover/theme traits after the swap. The cover
@@ -325,7 +325,7 @@
   }
 
   // Fetch a donor page (cached across the session) and hand its parsed Document
-  // to `callback`. Used to restore page-invariant chrome from the root page.
+  // to `callback`. Used to restore the navbar and footer from the root page.
   function withDonorDoc(url, callback) {
     const cached = readCache('doc:' + url);
     if (cached) {

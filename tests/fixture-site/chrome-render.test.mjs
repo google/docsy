@@ -120,7 +120,6 @@ test('shared mode can be set via site config', () => {
   assert.ok(!has.footer(landing), 'footer absent on the docs landing');
 });
 
-// A page opts out of the shared build and keeps its own chrome.
 test('a page with td.chrome full in front matter keeps its own chrome in a shared build', () => {
   const r = buildSite('ccr-page-full', {
     files: {
@@ -191,7 +190,8 @@ test('shared mode keeps the sidebar on every language docs section page', () => 
 test('shared mode on a home-as-docs site keeps chrome on the home landing only', () => {
   const r = buildSite('ccr-home-as-docs', {
     files: {
-      'content/_index.md': '---\ntitle: Home\ntype: docs\n---\nDocs landing\n',
+      'content/_index.md':
+        '---\ntitle: Home\ntype: docs\ncascade: { type: docs }\n---\nDocs landing\n',
       'content/guide/_index.md': '---\ntitle: Guide\n---\nGuide\n',
       'content/guide/page-a.md': '---\ntitle: Page A\n---\nDeep page\n',
     },
@@ -208,10 +208,19 @@ test('shared mode on a home-as-docs site keeps chrome on the home landing only',
     'home left-nav carries the full tree (links to the deep page)',
   );
 
-  const deep = r.publicFile('guide/page-a/index.html');
-  assert.ok(!has.navbar(deep), 'navbar absent on the deep page');
-  assert.ok(!has.footer(deep), 'footer absent on the deep page');
-  assert.ok(!has.sidebar(deep), 'left-nav absent on the deep page');
+  // The home is the left-nav donor for every section (the Home.Type branch), so
+  // a section page carries a placeholder too.
+  for (const rel of ['guide/index.html', 'guide/page-a/index.html']) {
+    const h = r.publicFile(rel);
+    assert.ok(!has.navbar(h), `navbar absent on ${rel}`);
+    assert.ok(!has.footer(h), `footer absent on ${rel}`);
+    assert.ok(!has.sidebar(h), `left-nav absent on ${rel}`);
+    assert.match(
+      h,
+      /class="td-sidebar-chrome-placeholder" data-nav-donor="\/"/,
+      `${rel} names the home landing as its left-nav donor`,
+    );
+  }
 });
 
 // Section-root scopes the left-nav to a subtree; shared mode keeps only the docs
@@ -261,7 +270,6 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// With `print` permalinkable, placeholders still name the HTML render.
 test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,
