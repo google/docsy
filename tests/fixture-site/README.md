@@ -54,7 +54,7 @@ means no dedicated test yet.
 | CCR-18 | `no-left-sidebar` layout (`body_class`)                                     | restored | `chrome-no-left-sidebar`                               |
 | CCR-19 | Sidebar placeholder whitespace trim                                         | restored | —                                                      |
 | CCR-20 | Navbar/footer donor page on a doc-rooted site (root page, HTML render)      | partial  | `chrome-doc-rooted`, `root-page`                       |
-| CCR-21 | Per-page opt-out: `td.chrome: full` in front matter keeps the page's chrome | restored | `chrome-render`                                        |
+| CCR-21 | Per-page opt-out: `td.chrome: full` in front matter keeps the page's chrome | partial  | `chrome-render`, `chrome-donor-opt-out`                |
 
 ### Open items
 
@@ -83,13 +83,19 @@ means no dedicated test yet.
   active on the non-docs pages no other menu entry covers (pages without a menu
   entry, taxonomies, 404), where a full build's `IsDescendant` marks nothing,
   and it loses its active state under any docs subsection with its own entry
-  (the CCR-03 case). Same fix, with [#2689][].
+  (CCR-03). Same fix, with [#2689][].
+- **CCR-21** (per-page opt-out): _partial._ Opting out a left-nav donor (a
+  `docs` section page) leaves its own active state in the nav other pages
+  restore from it, so their restored nav marks the donor active too
+  (`chrome-donor-opt-out` pins it); and above `sidebar_cache_limit` the
+  opted-out page's left-nav is still the cached, script-revealed one. Fix: clear
+  the donor's active state before applying the current page's ([#2689][]).
 - **CCR-07** (non-foldable reveal): _partial._ A full build also shows the
   siblings of every ancestor on the active path (`sidebar-tree.html`,
   `IsDescendant $s.Parent`); the client opens only the current item's siblings
   and children, so under `sidebar_menu_compact: true` the restore hides items a
-  full build shows (reproduced in the #2888 review). Fix: open the children of
-  every ancestor on the active path ([#2689][]). No dedicated unit coverage.
+  full build shows. Fix: open the children of every ancestor on the active path
+  ([#2689][]). No dedicated unit coverage.
 - **CCR-14** (scoped-root structural residual) lacks dedicated unit coverage.
   CCR-14 is browser-invisible (it shows only in a serialized-HTML diff, not the
   rendered nav) and gates reinstating the docsy.dev `sidebar_root_for` example;

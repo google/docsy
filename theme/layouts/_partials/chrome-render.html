@@ -1,8 +1,9 @@
 {{/*
-Reports whether a chrome region renders on a page in the current chrome build
-mode, the td.chrome param (site-wide, or per page in front matter): in shared
-mode, each region renders on its donor page only, and a page set to full keeps
-its own. Guide: https://www.docsy.dev/docs/deployment/chrome/
+Reports whether a chrome region renders on a page under the td.chrome build
+mode (site-wide, or per page in front matter): in shared mode, each region
+renders on its donor page only, and a page set to full keeps its own.
+Guide: https://www.docsy.dev/docs/deployment/chrome/
+Donor rule: https://www.docsy.dev/project/design/root-page/
 
 @param {page} page The page being rendered.
 @param {string} region The region: navbar, footer, or sidebar.
@@ -16,11 +17,9 @@ its own. Guide: https://www.docsy.dev/docs/deployment/chrome/
     {{ $navRoot := cond (and (ne $p.Params.toc_root true) (eq $p.Site.Home.Type "docs")) $p.Site.Home $p.FirstSection -}}
     {{ $render = and $navRoot (eq $p.RelPermalink $navRoot.RelPermalink) -}}
   {{ else -}}
-    {{/* The donor is the HTML document at the home page's URL, so the region
-      renders on the HTML render of the page published there; the page's other
-      renders carry a placeholder. The current render is tested by elimination
-      over the alternatives, not with _partials/outputformat.html, which
-      misreports pages that have an LLMS output. */ -}}
+    {{/* The current render is tested by elimination over the alternatives, not
+      with _partials/outputformat.html, which misreports pages that have an LLMS
+      output. */ -}}
     {{ $html := $p.OutputFormats.Get "html" -}}
     {{ $home := $p.Site.Home.OutputFormats.Get "html" -}}
     {{ $isHtmlRender := and $html (not ($p.AlternativeOutputFormats.Get "html")) -}}

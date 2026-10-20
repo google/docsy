@@ -1,18 +1,17 @@
 ---
 title: Root page
 description: >-
-  How the theme selects between each language's home page and `docs` section
-  page for `llms.txt` and shared chrome
+  How `llms.txt` and shared chrome find the page published at each language
+  root: the home page, or a doc-rooted site's `docs` section page
 ---
-
-The theme finds a site's [root page][] by this rule:
 
 ## Selection rule
 
-[`_partials/td/root-page.html`][partial] takes a `Site` and returns a page: the
-page at content path `/docs` when the URL of its `html` output format equals the
-home page's, otherwise the home. Consumers share the result through
-`partialCached`, which caches per site; the `llms.txt` locale loop keys by site.
+[`_partials/td/root-page.html`][partial] returns a site's [root page][]: it
+takes a `Site` and returns the page at content path `/docs` when the URL of its
+`html` output format equals the home page's, otherwise the home. Consumers share
+the result through `partialCached`, which caches per site; the `llms.txt` locale
+loop keys by site.
 
 ## Consumers
 
@@ -29,24 +28,30 @@ home page's, otherwise the home. Consumers share the result through
 - **Shared chrome**: in the `shared` [chrome build mode][], the navbar and
   footer are kept on one [donor page][] per language, the root page, and
   restored from it elsewhere. The chrome applies the definition without the
-  lookup: a page is the donor when its `html` URL equals the home page's, and
-  the placeholders name the home page's `html` URL.
+  lookup: a page is the donor when its `html` URL equals the home page's. Its
+  placeholders carry two URLs: `data-chrome-donor`, the home page's `html` URL,
+  where the client fetches the chrome, and `data-canonical-path`, the page's own
+  `html` URL, which the client matches against the restored nav's links for the
+  active state instead of the request URL (a print or paginated address). The
+  left-nav has a donor rule of its own, the page's first section (or a home page
+  of type `docs`, the pre-0.15 shape, unless the page sets `toc_root: true`),
+  outside this page.
 
 ## Why this rule
 
-The section is looked up by **absolute content path**, `site.GetPage "/docs"`. A
-bare `"docs"` would be wrong: when there is no `/docs` section, a `Site` lookup
-falls back to a site-wide lookup by name, which fails the build on two pages
-named `docs` (`page reference "docs" is ambiguous`) and silently returns the one
-such page otherwise ([#2875][]). The URL comparison is what keeps an ordinary
-`/docs/` section from being taken for the root. It compares the docs page's
-`html` URL, not the URL of the format being rendered: consumers cache the result
-per site, and a permalinkable format can render before HTML. The home page's
-`html` URL is the reference because Hugo computes it under every URL setting
-(`baseURL` paths, language prefixes, multihost, `uglyURLs`, and the site
-matrix's version dimension), none of which a configuration-derived root
-reproduces; a link-only home keeps that URL as long as `HTML` is its first
-output format.
+- **Absolute content path**, `site.GetPage "/docs"`: a bare `"docs"` would be
+  wrong. When there is no `/docs` section, a `Site` lookup falls back to a
+  site-wide lookup by name, which fails the build on two pages named `docs`
+  (`page reference "docs" is ambiguous`) and silently returns the one such page
+  otherwise ([#2875][]).
+- **The URL comparison** keeps an ordinary `/docs/` section from being taken for
+  the root.
+- **The `html` output URL**, not the URL of the format being rendered: consumers
+  cache the result per site, and a permalinkable format can render before HTML.
+- **The home page's `html` URL as the reference**: Hugo computes it under every
+  URL setting (`baseURL` paths, language prefixes, multihost, `uglyURLs`, the
+  site matrix's version dimension), none of which a configuration-derived root
+  reproduces.
 
 The `docs` name is the [doc-rooted recipe][doc-rooted site]'s own: the recipe
 redefines that section's permalinks, and the `llms.txt` documentation index
@@ -82,7 +87,9 @@ test (`tests/fixture-site/`) exercising the row. Chrome consequences assume
 The design leaves these unresolved:
 
 - A section other than `docs` remapped to the site root: the lookup keeps the
-  home, and Hugo need not warn (a link-only home leaves no duplicate output).
+  home, so `llms.txt` discovery follows the home, while the chrome's self-test
+  makes that section the donor; Hugo need not warn (a link-only home leaves no
+  duplicate output).
 - Two pages publishing the same root URL: a [path conflict][] of the site's own.
 - A doc-rooted language without a `/docs` section: it has no root page, so
   `llms.txt` lists the language at an unpublished URL, and the site root that
@@ -90,10 +97,13 @@ The design leaves these unresolved:
 - A doc-rooted home whose output formats (site `outputs.home`, or its own front
   matter) don't start with `HTML`: a link-only page keeps only its first
   configured format, so the home has no `html` URL to compare with; the home
-  stays the root page and no render is the donor. The same holds for
-  `build.render: never` and an empty `outputs.home`. Hugo's [`outputs`
-  convention][outputs] is `HTML` first.
-- A root page whose `outputs` leave out `HTML`: no render of it is the donor.
+  stays the root page, no render is the donor, and the placeholders name an
+  empty donor (the client fetches the page itself once). The same holds for
+  `build.render: never` and an empty `outputs.home`, where `llms.txt`'s home and
+  locale links are empty too. Hugo's [`outputs` convention][outputs] is `HTML`
+  first.
+- A `docs` section page whose `outputs` leave out `HTML`: it is neither selected
+  nor a donor.
 - `HTML` marked `notAlternative`: the donor page's other renders then carry the
   chrome too (the current-render test is "`HTML` is not among the
   alternatives"); the placeholders still name the site root, so the restore

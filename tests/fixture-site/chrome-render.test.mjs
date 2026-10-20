@@ -65,6 +65,13 @@ test('shared mode keeps one reference instance of each region', () => {
   assert.ok(!has.sidebar(deep), 'left-nav absent on the deep docs page');
   assert.ok(!has.navbar(deep), 'navbar absent on the deep docs page');
   assert.ok(!has.footer(deep), 'footer absent on the deep docs page');
+
+  // The 404 page has no html output format; its placeholder still bakes a path.
+  assert.match(
+    r.publicFile('404.html'),
+    /data-canonical-path="\/404\.html"/,
+    '404 page placeholder bakes its own URL as canonical path',
+  );
 });
 
 // Setting the build mode explicitly to `full` (the default) keeps chrome on
@@ -254,8 +261,7 @@ test('shared mode keeps a docs-landing tree that covers section-rooted subsets',
   }
 });
 
-// With `print` permalinkable, placeholders still name the HTML render,
-// the only render that keeps the chrome.
+// With `print` permalinkable, placeholders still name the HTML render.
 test('shared mode placeholders name the root page HTML render even when another format is permalinkable', () => {
   const r = buildSite('ccr-print-permalinkable', {
     files,
@@ -271,7 +277,10 @@ test('shared mode placeholders name the root page HTML render even when another 
     env: { HUGO_PARAMS_TD_CHROME: 'shared' },
   });
   assert.equal(r.status, 0, `hugo build succeeds:\n${r.stdout}${r.stderr}`);
-  for (const rel of ['_print/index.html', '_print/docs/index.html']) {
+  for (const [rel, canonical] of [
+    ['_print/index.html', '/'],
+    ['_print/docs/index.html', '/docs/'],
+  ]) {
     const h = r.publicFile(rel);
     for (const region of ['navbar', 'footer']) {
       assert.ok(!has[region](h), `${region} absent on the print render ${rel}`);
@@ -280,6 +289,11 @@ test('shared mode placeholders name the root page HTML render even when another 
         `${rel} ${region} placeholder names the root page HTML render`,
       );
     }
+    assert.match(
+      h,
+      new RegExp(`data-canonical-path="${canonical}"`),
+      `${rel} bakes the page's HTML URL as its canonical path`,
+    );
   }
   const home = r.publicFile('index.html');
   assert.ok(has.navbar(home), 'navbar kept on the home');

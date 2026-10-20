@@ -78,7 +78,7 @@
   <div class="td-chrome-placeholder" {{/**/ -}}
     data-chrome-donor="{{ (.Site.Home.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
     data-chrome-region="navbar" {{/**/ -}}
-    data-canonical-path="{{ (.OutputFormats.Get "html").RelPermalink }}" {{/**/ -}}
+    data-canonical-path="{{ or (.OutputFormats.Get "html").RelPermalink .RelPermalink }}" {{/**/ -}}
     data-navbar-cover="{{ $cover }}" {{/**/ -}}
     data-navbar-theme="{{ cond $dark "dark" "" }}">{{/**/ -}}
   </div>

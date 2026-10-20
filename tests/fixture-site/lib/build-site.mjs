@@ -97,8 +97,8 @@ export function buildSite(
 }
 
 // buildSite plus the assertions the behavior fixtures share: the build exits 0
-// and prints no warning (with --printPathWarnings on, so a path conflict, the
-// doc-rooted recipe's failure mode, fails the test).
+// and prints no warning; with --printPathWarnings on, a path conflict (the
+// doc-rooted recipe's failure mode) fails the test.
 export function buildCleanSite(name, { args = [], ...options } = {}) {
   const r = buildSite(name, {
     ...options,

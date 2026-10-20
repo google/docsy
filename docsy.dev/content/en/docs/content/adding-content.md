@@ -133,19 +133,20 @@ You can find out much more about how Hugo page layouts work in
 [Hugo Templates](https://gohugo.io/templates/). The rest of this page tells you
 about how to add content and use each of Docsy's templates.
 
-## Doc-rooted project <a id="alternative-site-structure"></a><a id="doc-rooted-sites"></a>
+## Doc-rooted project <a id="alternative-site-structure"></a> {#doc-rooted-sites}
 
 {{%_param BADGE EXPERIMENTAL info %}}
 
 A **doc-rooted** Hugo [project][] is a Docsy _convention_ that publishes each
-site's top-level `docs` section at the [site root][].
+site's top-level `docs` section at the [site root][]: documentation URLs lose
+their `/docs/` prefix, and the project needs no hand-built home page.
 
 ### How it works
 
 Hugo gives each page:
 
-- A [logical path][], its place in the site's [logical tree][], which `GetPage`
-  and `.Site.Home` resolve.
+- A [logical path][], its place in the site's [logical tree][], the terms in
+  which `GetPage` and `.Site.Home` work.
 - A [permalink][], where the page is published.
 
 The convention leaves the `docs` section at logical path `/docs` and moves its
@@ -158,10 +159,10 @@ Two key terms:
 - **Root page**: the page published at the site root, which is normally the home
   page; on a doc-rooted site, it is the `docs` [section page][].
 
-The two differ only there, and `.Site.Home` still returns the home page, so the
-theme selects the root page itself ([root page design][]).
+The two differ on a doc-rooted site, and `.Site.Home` still returns the home
+page, so the theme selects the root page itself ([root page design][]).
 
-### Create a doc-rooted site
+### Create a doc-rooted project
 
 Redefine the `docs` section [permalinks][] in your [site configuration][]:
 
@@ -174,7 +175,7 @@ permalinks:
 ```
 
 Then stop the home page from rendering, since the `docs` section page now
-publishes at its URL: add this front matter to each home page file (one per
+publishes at its URL. Add this front matter to each home page file (one per
 language):
 
 ```yaml

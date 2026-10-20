@@ -1,8 +1,7 @@
-// Cases: CCR-20 (doc-rooted donor page, the subdirectory, subpath and print-first variants). See the CCR case registry in tests/fixture-site/README.md.
+// Cases: CCR-20 (doc-rooted donor page, with the subdirectory, subpath, print-first, moved rel=canonical, LLMS-first home and uglyURLs variants). See the CCR case registry in tests/fixture-site/README.md.
 // The root-page lookup (_partials/td/root-page.html, all.llms.txt) on the
 // shapes that defeat a by-name lookup (docsy/docsy#2875) and on the recipe's
-// multilingual and subpath variants. Case inventory:
-// docsy.dev/content/en/project/design/root-page.md
+// variants. Case inventory: docsy.dev/content/en/project/design/root-page.md
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -140,7 +139,7 @@ test("an auto-created docs section page is the root page of its language; the de
   );
 });
 
-// Permalinkable print weighted below HTML renders first; see td/root-page.html.
+// Permalinkable print weighted below HTML renders first (design page § Why).
 test('a permalinkable format rendered before HTML leaves the root page selection unchanged', () => {
   const b = buildCleanSite('root-page-print-first', {
     files: docRootedFiles,
@@ -221,10 +220,8 @@ test('moving rel=canonical to the print format leaves the root page and its dono
   );
 });
 
-// Documented limit (design page § Limits): a link-only home keeps only its first
-// output format, so a home listing LLMS first has no HTML URL to compare with;
-// the home stays the root page and no render is the donor.
-test('a doc-rooted home listing LLMS before HTML has no root page selection (documented limit)', () => {
+// Documented limit (design page § Limits): a link-only home listing LLMS first.
+test('a doc-rooted home listing LLMS before HTML keeps the home as root page (documented limit)', () => {
   const b = buildCleanSite('root-page-home-llms-first', {
     files: docRootedFiles,
     extraConfig:

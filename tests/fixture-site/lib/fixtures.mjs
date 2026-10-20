@@ -1,5 +1,5 @@
 // Fixture content and output probes shared across suites. One home for the
-// doc-rooted recipe as tested (user guide: Adding content § Doc-rooted sites),
+// doc-rooted recipe as tested (user guide: Adding content § Doc-rooted project),
 // so the llms, root-page and chrome fixtures exercise the same site shape.
 
 export const frontMatter = (fields) =>
@@ -40,7 +40,7 @@ export const chrome = {
   navbar: (h) => /class="td-navbar[\s"]/.test(h),
   footer: (h) => /class="td-footer[\s"]/.test(h),
   placeholder: (h, region, donor) =>
-    new RegExp(
+    h.includes(
       `class="td-chrome-placeholder" data-chrome-donor="${donor}" data-chrome-region="${region}"`,
-    ).test(h),
+    ),
 };

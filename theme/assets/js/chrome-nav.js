@@ -1,12 +1,9 @@
 // Client-side restore of the chrome a shared build drops: the docs left-nav,
-// and the navbar and footer (see "Page-invariant chrome" below).
-//
-// A shared build drops the repeated left-nav from inner pages and leaves a
-// placeholder behind (see _partials/sidebar.html). Here we fetch the section's
-// donor page (the kept docs landing, named by data-nav-donor), extract its
-// left-nav, inject it in place of the placeholder, and apply the active-page
-// state client-side. The extracted nav is cached in sessionStorage so later
-// pages in the same section reuse it without re-fetching.
+// and the navbar and footer (see "Page-invariant chrome" below). Each dropped
+// region leaves a placeholder naming its donor page (_partials/sidebar.html,
+// navbar.html, footer.html); the donor's region is fetched, injected in place,
+// and given this page's active state. The left-nav is cached in sessionStorage
+// so later pages in the same section reuse it without re-fetching.
 //
 // The same active-state pass also hydrates the cached inline nav that the donor
 // (and bigger sites) render once and share across pages: that menu ships hidden,
@@ -23,10 +20,10 @@
 
   const normalizePath = (path) => (path.endsWith('/') ? path : path + '/');
 
-  // The page's logical path, used to key all active-state restores. It defaults
-  // to window.location, but on print (/_print/…) and paginator (…/page/N/) pages
-  // the request URL isn't the page's canonical one; the server bakes the logical
-  // URL as data-canonical-path on the navbar placeholder (see navbar.html), read
+  // The page's HTML URL, the one its nav links use, keys all active-state
+  // restores. It defaults to window.location, but on print (/_print/…) and
+  // paginator (…/page/N/) pages the request URL isn't that URL; the server bakes
+  // it as data-canonical-path on the navbar placeholder (see navbar.html), read
   // once in init() before the placeholders are swapped out.
   let canonicalPath = null;
 
@@ -109,9 +106,10 @@
     }
 
     // In a non-foldable nav, also open the current item's siblings and direct
-    // children; a foldable nav leaves these to the checkboxes, matching a full
-    // build (which only checks the active path). Exact-match pages only: an
-    // ancestor anchor isn't the current item, so it gets no extra expansion.
+    // children (not every ancestor's siblings, as a full build does: CCR-07); a
+    // foldable nav leaves these to the checkboxes, matching a full build (which
+    // only checks the active path). Exact-match pages only: an ancestor anchor
+    // isn't the current item, so it gets no extra expansion.
     if (activeLink && currentItem && !foldable) {
       for (const sibling of currentItem.parentElement.children) {
         if (sibling !== currentItem && sibling.tagName === 'LI') {
@@ -237,10 +235,6 @@
   }
 
   // --- Page-invariant chrome (navbar, footer) -----------------------------
-  // The shared build keeps the navbar and footer only on each language's root
-  // page (the home, or the docs landing on a doc-rooted site). An inner page
-  // leaves a placeholder per dropped region (see _partials/navbar.html and
-  // _partials/footer.html) naming it as the donor page.
   const CHROME_REGIONS = { navbar: '.td-navbar', footer: '.td-footer' };
 
   // Re-apply this page's navbar cover/theme traits after the swap. The cover
@@ -261,12 +255,10 @@
   }
 
   // Re-derive the navbar's active link for the current page. The donor page's
-  // navbar carries its own active state, so clear it and mark the
-  // nav-link whose target is the closest ancestor of the current path (longest
-  // prefix), an approximation of a full build's per-entry menu-membership
-  // tests: a parent entry loses its active state under a child entry (CCR-03),
-  // and on a doc-rooted site the docs entry's URL, the language root, prefixes
-  // every path that no other entry covers (CCR-20).
+  // navbar carries its own active state, so clear it and mark the nav-link
+  // whose target is the closest ancestor of the current path (longest prefix),
+  // an approximation of a full build's per-entry menu-membership tests
+  // (CCR-03, CCR-20).
   function setNavbarActive(navbar) {
     const here = currentPath();
     let best = null;
@@ -290,10 +282,9 @@
   }
 
   // The navbar's version/language selectors carry per-page links that the donor
-  // page renders for itself, so re-derive each for the current page. `donorPath`
-  // is the donor page's path, the current language's root.
-
-  // Version links are exact: each is a version's base URL plus the page path
+  // page renders for itself, so re-derive each for the current page; `donorPath`
+  // is the donor page's path, the current language's root. Version links are
+  // exact: each is a version's base URL plus the page path
   // (when `version_menu_pagelinks` is on), so the donor's link is
   // `base + donorPath`. Strip that path and append this page's to reproduce the
   // full build's `base + thisPagePath`. Links without the page path (pagelinks
@@ -313,9 +304,8 @@
   // Language links point at the current page's counterpart in each language;
   // the donor page renders its own, i.e. each language's root. Swap the current
   // language's root prefix (`donorPath`) for the target language's to reproduce
-  // the full build's link. Exact when translations share slugs and all exist,
-  // otherwise a best-effort functional restore; the doc-rooted recipe's `:slug`
-  // falls back to titles, so its translations usually differ (CCR-10).
+  // the full build's link; a best-effort restore when slugs differ across
+  // languages (CCR-10).
   function restoreLangLinks(navbar, donorPath) {
     const here = currentPath();
     if (!here.startsWith(donorPath)) return;

@@ -38,20 +38,23 @@ consumes the output:
 
 ## Donor pages
 
-A region's **donor page** is the page on which `shared` mode renders it, one per
-language for the navbar and footer and one per docs section for the left-nav;
-the other pages carry a placeholder that the browser fills from the donor page.
+A region's **donor page** is the page on which `shared` mode renders it; the
+other pages carry a placeholder that the browser fills from the donor page.
 Clients without JavaScript (some search crawlers included) see only the donor
-pages' chrome.
+pages' chrome. The donors:
+
+- **Navbar and footer**: each language's **[root page][]**, the home page, or
+  the `docs` section page on a doc-rooted site.
+- **Left-nav**: the page's first section, that is, the docs section page; on a
+  site whose home page has `type: docs` (the pre-0.15 shape), the home page,
+  unless the page sets `toc_root: true`.
 
 ## What `shared` mode keeps reachable
 
 The donor pages are chosen to keep chrome links reachable without JavaScript:
 
-- **Navbar and footer**: kept on each language's **[root page][]** (the home
-  page, or the `docs` section page on a doc-rooted site). Their links are
-  config-defined and identical across the language, except the navbar's optional
-  selectors:
+- **Navbar and footer**: their links are config-defined and identical across the
+  language, except the navbar's optional selectors:
   - A [version menu][version-menu] with `version_menu_pagelinks` renders
     per-page links, which the browser restores but a link checker reaches only
     on the root page.
@@ -59,10 +62,10 @@ The donor pages are chosen to keep chrome links reachable without JavaScript:
     destination language's left-nav already covers; only a full build reaches a
     translation hidden from the left-nav (`toc_hide`). For the restored
     selector, see the [known differences][].
-- **Left-nav** (computed per page): kept on each language's docs section page;
-  it carries the full docs tree. On a doc-rooted site the two donor pages
-  coincide. `shared` mode currently targets the **docs** section; other sections
-  (such as blog) aren't a validated target yet, so keep `full` for them.
+- **Left-nav** (computed per page): the docs section page carries the full docs
+  tree. On a doc-rooted site the two donor pages coincide. `shared` mode
+  currently targets the **docs** section; other sections (such as blog) aren't a
+  validated target yet, so keep `full` for them.
 
 ## Known differences from a full build
 
@@ -92,6 +95,10 @@ The restore aims to match a full build, with these exceptions:
   and active state, but its re-rooted subtree can differ structurally from a
   full build (an extra wrapper element, deeper `ul` nesting). The difference
   isn't visible in the rendered nav, only in a serialized-HTML diff.
+- With `sidebar_menu_compact: true` and `sidebar_menu_foldable: false`, the
+  restored left-nav opens the current page's siblings and children only, where a
+  full build also shows the siblings of every ancestor on the active path
+  ([#2689][]).
 
 ## Setting the build mode
 
@@ -125,12 +132,21 @@ See Hugo's [configuration with environment variables][hugo-env-config]. Then run
 your link checker against the generated `public/` output as usual: a `shared`
 build needs no checker-specific configuration.
 
-To keep one page's chrome in a `shared` build, for example a page that must be
-complete without JavaScript, set the parameter in its front matter:
+To keep one page's chrome in a `shared` build, set the parameter in its front
+matter:
 
 ```yaml
 td: { chrome: full }
 ```
+
+Two limits of the per-page setting:
+
+- It doesn't make the page complete without JavaScript on a large site: above
+  [`sidebar_cache_limit`][sidebar-cache], the left-nav is the cached site-wide
+  one, shipped hidden and revealed by script, on `full` pages too.
+- Setting it on a left-nav donor page (a `docs` section page) leaves that page's
+  own active state in the nav that other pages restore from it: the restored nav
+  then marks both the donor and the current page active.
 
 <!-- prettier-ignore-start -->
 [#2689]: https://github.com/docsy/docsy/issues/2689
@@ -143,6 +159,7 @@ td: { chrome: full }
 [known differences]: #known-differences-from-a-full-build
 [mpa]: https://web.dev/learn/pwa/architecture/
 [root page]: /docs/content/adding-content/#how-it-works
+[sidebar-cache]: /docs/content/navigation/#side-nav-options
 [sidebar-root]: /docs/content/navigation/#sidebar-root
 [version-menu]: /docs/content/versioning/#adding-a-version-drop-down-menu
 <!-- prettier-ignore-end -->
