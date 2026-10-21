@@ -99,7 +99,7 @@
     "@pchalin/markdownlint-rule-link-pattern": "0.3.0",
     "hugo-extended": "0.166.0",
     "jsdom": "30.1.1",
-    "markdownlint-cli2": "0.23.3",
+    "markdownlint-cli2": "0.24.0",
     "markdownlint-rule-no-shortcut-ref-link": "0.4.0",
     "pixelmatch": "7.2.0",
     "pngjs": "7.0.0",
