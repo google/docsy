@@ -506,7 +506,11 @@ part of the prep PR.
 
 Capture the audit as a working document and summarize its findings (the
 classifications and where each item is covered) in the release-prep PR
-description, so reviewers can sanity-check them.
+description, so reviewers can sanity-check them. Start the document at the
+[post-release followup](#post-docsy-release-followup) (step 4): each change then
+records its facts as it lands (what changed, whom it applies to and the action,
+where it is covered), and the release-time audit verifies and composes from them
+rather than reconstructing the cycle.
 
 ## Publishing a release
 
@@ -548,10 +552,22 @@ If not adjust accordingly.
     - The section should provide a brief summary of breaking changes using the
       section template at the end of the file.
     - Ensure to remove the UNRELEASED note, if still present.
+    - Replace the heading's `{#next}` anchor with
+      `{#{{% dev-version final %}}}`, the entry's permanent anchor, which the
+      release post's References link.
     - You'll create a new section for the next release in a later step.
 
 3.  **Update the release report blog post** for {{% dev-version final %}}, if
     any.
+    - Like the changelog entry, this step is driven by the
+      [release-prep audit](#release-prep-audit): compose the draft's sections
+      from the facts its working document records. The draft is a composition
+      target ([Post Docsy-release followup](#post-docsy-release-followup), step
+      4).
+    - Retarget the References that the draft flags with a `TODO` comment: the
+      changelog link from `#next` to `#{{% dev-version final %}}`, and the
+      compare link from `...main` to `...{{% dev-version final %}}`. Then drop
+      the comment.
     - Remove draft status.
     - Set `date` (or `lastmod` if already published) to today's date.
 
@@ -1005,15 +1021,24 @@ before any further changes are merged into the `main` branch:
 
 3. In the [Changelog][]:
    - **Create a new entry** for the next release by copying the ENTRY TEMPLATE
-     at the end of the file.
+     at the end of the file, anchored `{#next}`: the draft post's References
+     link it there until release.
 
    - **Fix the new release URL**, which ends with `latest?FIXME=...`, so that it
      refers to the actual release, now that it exists.
 
 4. **Create a draft release report post** for the next release
    (`docsy.dev/content/en/blog/YYYY/X.Y.Z.md`, `draft: true`), modeled on the
-   shipped release's post. Like the changelog's new entry, the draft gives
-   next-cycle changes a single home to land on.
+   shipped release's post: its recurring sections as empty slots, and its
+   References in the shipped shape with pre-release targets (the changelog's
+   `#next` entry, the compare range's `...main`), flagged by a `TODO` comment
+   naming the release-time retarget
+   ([Publishing a release](#publishing-a-release), step 3). The draft is a
+   **composition target**: release prep fills it from the facts that the
+   [release-prep audit](#release-prep-audit)'s working document records as
+   changes land. Don't write a change's prose into the draft mid-cycle: a later
+   PR that refines or rescinds the change leaves prose that can't be traced back
+   to what shipped. Record the change as a fact instead.
 
 5. **Open the next release's tracker issue**, titled `Release X.Y.Z preparation`
    and set to its milestone, modeled on the shipped release's tracker: links to
